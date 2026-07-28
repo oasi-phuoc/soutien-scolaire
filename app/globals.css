@@ -414,6 +414,52 @@ input[type=number] {
   font-size: 1em !important;
 }
 
+/* Cadres de consignes / énoncés : pas de bordure à l'aperçu ni à l'impression. */
+.print-layout-context .print-ex-content .ex-prompt-frame {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Autres cartes décoratives (énoncés / blocs d'exercice) : sans bordure à l'impression. */
+.print-layout-context .print-ex-content .rounded-xl,
+.print-layout-context .print-ex-content .rounded-lg,
+.print-layout-context .print-ex-content .rounded-md,
+.print-layout-context .print-ex-content [class*="rounded-[var(--radius"] {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Masquer les indices « Calcul » / détails écran sur la feuille d'impression. */
+.print-layout-context .print-ex-content .print-hide-on-sheet {
+  display: none !important;
+}
+
+/* Quadrillage 5 mm × 5 mm — visible uniquement dans le contexte d'impression. */
+.print-work-grid {
+  display: none;
+}
+
+.print-layout-context .print-work-grid {
+  display: block;
+  width: 100%;
+  height: calc(var(--print-grid-rows, 5) * 5mm);
+  margin-top: 3mm;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-image:
+    linear-gradient(to right, #c4c4c4 0.35pt, transparent 0.35pt),
+    linear-gradient(to bottom, #c4c4c4 0.35pt, transparent 0.35pt);
+  background-size: 5mm 5mm;
+  background-position: 0 0;
+  border: 0.35pt solid #c4c4c4;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
 /* ── Responsive page shell (mobile étroit · desktop largeur max) ─────────── */
 
 .app-shell {

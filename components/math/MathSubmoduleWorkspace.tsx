@@ -45,6 +45,7 @@ import {
   usePrintColumns,
   usePrintQuestionCount,
 } from "@/components/print/PrintExerciseLayoutContext";
+import { PrintWorkGrid } from "@/components/print/PrintWorkGrid";
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
@@ -161,7 +162,16 @@ const STEP_DEFAULT_TOTALS: Record<string, number> = {
   frac_to_dec: 5, dec_to_frac: 5,
   dec_col_arith: 4, dec_col_arith_full: 2, dec_expr_comp: 5,
   dec_mul2_col: 2,
-  g1_prop_check: 5, g1_shape_qa: 5,
+  dec_read_decompose: 5, dec_read_recompose: 5, dec_read_place_value: 5,
+  dec_read_digit_at: 5, dec_read_dictation: 5, dec_read_compare: 5,
+  dec_read_order: 1, dec_read_filter_gt: 15, dec_read_filter_lt: 15,
+  dec_read_filter_between: 15, dec_read_encadrement: 5, dec_read_encadrement_unite: 5,
+  dec_read_nl_read: 2, dec_read_nl_place: 3,
+  pct_of_num_ex: 5, part_to_pct_ex: 5,
+  pct_to_frac_ex: 5, pct_to_dec_ex: 5, frac_to_pct_ex: 5, dec_to_pct_ex: 5,
+  pct_diff_ex: 5, pct_change_ex: 5, pct_multiplier_ex: 5, pct_table_ex: 5, pct_word_ex: 2,
+  g1_prop_check: 5, g1_shape_qa: 5, g1_name_to_svg: 5, g1_definition_match: 5,
+  g1_anagram: 5, g1_shape_write: 5, g2_perimeter: 1, g3_area: 1,
   pool_group: 2,
 };
 
@@ -1734,10 +1744,11 @@ function PoolGroupExercise({
           return (
             <div key={item.id} className="space-y-3">
               {/* Question frame — same as WordProblemsExercise */}
-              <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+              <div className="ex-prompt-frame">
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{item.promptFr}</p>
               </div>
-              {/* Answer row */}
+              <PrintWorkGrid rows={5} />
+              {/* Réponse : visible à l'impression ; le quadrillage sert au développement */}
               <div className="flex items-center gap-3 pl-2">
                 <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
                 {isWrong ? (
@@ -1762,9 +1773,9 @@ function PoolGroupExercise({
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">✓</span>
                 )}
               </div>
-              {/* Developed calculation shown after validation (from hintFr) */}
+              {/* Developed calculation shown after validation (from hintFr) — masqué sur la feuille */}
               {validated && item.hintFr && (
-                <p className="mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
+                <p className="print-hide-on-sheet mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
                   Calcul : <span className="font-mono text-[var(--color-text-primary)]">{item.hintFr}</span>
                 </p>
               )}

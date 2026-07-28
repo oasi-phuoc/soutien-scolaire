@@ -2,6 +2,11 @@
 
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 const CLS_WRONG = "border-amber-400 bg-amber-50 text-amber-700";
 
@@ -35,8 +40,9 @@ function normRel(s: string): number {
 
 type RelCompQ = { a: number; b: number; answer: "<" | "=" | ">" };
 
-function genQuestions(level: 1 | 2): RelCompQ[] {
-  const signs: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
+function genQuestions(level: 1 | 2, count: number): RelCompQ[] {
+  const signsBase: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
+  const signs: Array<"<" | "=" | ">"> = Array.from({ length: count }, (_, i) => signsBase[i % signsBase.length]!);
   for (let i = signs.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [signs[i], signs[j]] = [signs[j]!, signs[i]!];
@@ -56,8 +62,10 @@ export function A7CompareExercise({
 }: {
   exNum: number; level: 1 | 2; validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<RelCompQ[]>(() => genQuestions(level));
-  const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(Array(5).fill(null));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState<RelCompQ[]>(() => genQuestions(level, questionCount));
+  const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(questionCount).fill(null));
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(0);
   const revealCorrection = useEvalReveal();
@@ -79,7 +87,7 @@ export function A7CompareExercise({
     <div className="space-y-4">
       <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-3">
             <div className="flex items-center shrink-0">
@@ -227,7 +235,9 @@ export function A7RelEncadrementExercise({
 }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState(() => genRelEnc(5));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState(() => genRelEnc(questionCount));
   const [answers, setAnswers] = useState<Array<{ lo: string; hi: string }>>(() => questions.map(() => ({ lo: "", hi: "" })));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => questions.map(() => false));
@@ -253,7 +263,7 @@ export function A7RelEncadrementExercise({
     <div className="space-y-4">
       <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à la dizaine près.</p>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => {
           const a = answers[i]!;
           const wrong = validated && revealCorrection && !results[i];
@@ -296,6 +306,7 @@ export function A7RelOrderingExercise({
 }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
+  const columns = usePrintColumns();
   const [groups] = useState(() => {
     const posI = shuffle(Array.from({ length: 20 }, (_, i) => i + 1)).slice(0, 2);
     const negI = shuffle(Array.from({ length: 20 }, (_, i) => -(i + 1))).slice(0, 2);
@@ -343,7 +354,7 @@ export function A7RelOrderingExercise({
     <div className="space-y-4">
       <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre croissant (du plus petit au plus grand).</p>
-      <div className="space-y-6">
+      <div className={printQuestionsListClass(columns, "space-y-6")}>
         {groups.map((g, gi) => {
           const s = selected[gi] ?? [];
           const available = g.nums.filter(n => !s.some(x => Math.abs(x - n) < 0.001));
@@ -421,7 +432,9 @@ export function A7RelSeqCompleteExercise({
 }: {
   exNum: number; isDecimal: boolean; validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<RelSeqQ[]>(() => isDecimal ? genRelSeqDec(5) : genRelSeqInt(5));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState<RelSeqQ[]>(() => isDecimal ? genRelSeqDec(questionCount) : genRelSeqInt(questionCount));
   const [answers, setAnswers] = useState<string[][]>(() => questions.map(q => q.blankIdxs.map(() => "")));
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(0);
@@ -447,7 +460,7 @@ export function A7RelSeqCompleteExercise({
     <div className="space-y-4">
       <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
-      <div className="space-y-5">
+      <div className={printQuestionsListClass(columns, "space-y-5")}>
         {questions.map((q, qi) => {
           let bc = 0;
           return (

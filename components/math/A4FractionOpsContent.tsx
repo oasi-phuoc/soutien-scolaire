@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
-import { usePrintQuestionCount } from "@/components/print/PrintExerciseLayoutContext";
+import { usePrintQuestionCount, usePrintColumns, printQuestionsListClass } from "@/components/print/PrintExerciseLayoutContext";
 
 export type FracOpMode = "add-sub" | "mul" | "div";
 
@@ -214,6 +214,7 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
   else { structType = (exType - 4) as 1|2|3|4; lo = 10; hi = 99; }
 
   const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
   const [questions] = useState<OpQ[]>(() =>
     Array.from({ length: questionCount }, () => genQ(structType, opMode, lo, hi))
   );
@@ -239,9 +240,6 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
   const is3Part = exType === 9;
-  const cols = is3Part
-    ? '1.5rem 2.5rem 1.5rem 2.5rem 1.5rem 2.5rem 1.5rem 3.5rem'
-    : '1.5rem 2.5rem 1.5rem 2.5rem 1.5rem 3.5rem';
   const part = (p: Part) => p.kind === "frac"
     ? <VFrac n={p.n} d={p.d} />
     : <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{p.v}</span>;
@@ -252,9 +250,9 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {displayExNum ?? exType}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Effectuez les calculs suivants.</p>
       </div>
-      <div className="grid items-center gap-x-3 gap-y-5" style={{ gridTemplateColumns: cols }}>
+      <div className={printQuestionsListClass(columns, "space-y-5")}>
         {(questions as OpQ[]).map((q: OpQ, i: number) => (
-          <React.Fragment key={i}>
+          <div key={i} className="flex items-center gap-3 flex-wrap">
             <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             <div className="flex justify-center">{part(q.parts[0]!)}</div>
             <span className="text-base font-semibold text-center text-[var(--color-text-primary)]">{q.ops[0]}</span>
@@ -271,7 +269,7 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
               correctNum={String(q.ansNum)}
               correctDen={String(q.ansDen)}
             />
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>

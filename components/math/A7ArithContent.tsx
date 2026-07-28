@@ -2,6 +2,11 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 
 function rnd(min: number, max: number) {
@@ -238,6 +243,7 @@ function RelArithExercise({
 
   const inputBase = "w-20 h-9 rounded-none border-0 border-b-2 px-1 text-center font-mono text-sm outline-none transition-colors";
 
+  const columns = usePrintColumns();
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -255,10 +261,7 @@ function RelArithExercise({
         )}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div
-          className="grid items-center justify-items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto auto auto", justifyContent: "start" }}
-        >
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const ok = validated && revealCorrection ? results[i] : null;
@@ -283,7 +286,7 @@ function RelArithExercise({
               );
 
             return (
-              <React.Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 {q.missingPos === "a"
                   ? inputEl
@@ -296,7 +299,7 @@ function RelArithExercise({
                 {q.missingPos === "result"
                   ? inputEl
                   : <span className="font-mono text-sm text-[var(--color-text-primary)]">{dispRelQ(q, q.result)}</span>}
-              </React.Fragment>
+              </div>
             );
           })}
         </div>
@@ -312,11 +315,12 @@ export function A7RelArithExercise({
   questionMode?: "balanced" | "ex5" | "decimal";
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
   const [questions] = useState<RelQ[]>(() => {
-    if (questionMode === "decimal") return Array.from({ length: count }, () => genDecimalQ(missingOperand));
-    if (questionMode === "balanced") return genBalancedAddSubQuestions(range, count, missingOperand);
+    if (questionMode === "decimal") return Array.from({ length: questionCount }, () => genDecimalQ(missingOperand));
+    if (questionMode === "balanced") return genBalancedAddSubQuestions(range, questionCount, missingOperand);
     if (questionMode === "ex5") return genEx5Questions(range);
-    return Array.from({ length: count }, () => genAddSubQ(range, missingOperand));
+    return Array.from({ length: questionCount }, () => genAddSubQ(range, missingOperand));
   });
   return (
     <RelArithExercise exNum={exNum} questions={questions} timer={timer}
@@ -331,9 +335,10 @@ export function A7RelMulDivExercise({
   questionMode?: "standard" | "mixed_dec";
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
   const [questions] = useState<RelQ[]>(() => {
-    if (questionMode === "mixed_dec") return Array.from({ length: count }, () => genMixedDecimalMulDivQ(missingOperand));
-    return Array.from({ length: count }, () => genMulDivQ(range, missingOperand));
+    if (questionMode === "mixed_dec") return Array.from({ length: questionCount }, () => genMixedDecimalMulDivQ(missingOperand));
+    return Array.from({ length: questionCount }, () => genMulDivQ(range, missingOperand));
   });
   return (
     <RelArithExercise exNum={exNum} questions={questions} timer={timer}

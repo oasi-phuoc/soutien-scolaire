@@ -40,6 +40,17 @@ export function usePrintColumns(): PrintExerciseColumns {
   return cols === 2 || cols === 3 ? cols : 1;
 }
 
+/** Convenience: count + columns + list class for print-aware exercise UIs. */
+export function usePrintQuestionLayout(fallbackCount: number) {
+  const questionCount = usePrintQuestionCount(fallbackCount);
+  const columns = usePrintColumns();
+  return {
+    questionCount,
+    columns,
+    listClass: printQuestionsListClass(columns),
+  };
+}
+
 /** Classes pour la liste de questions (1 colonne = stack, 2–3 = grille). */
 export function printQuestionsListClass(columns: PrintExerciseColumns, stacked = "space-y-4"): string {
   if (columns === 2) return "grid grid-cols-2 items-start gap-x-6 gap-y-4";

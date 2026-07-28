@@ -2,6 +2,11 @@
 
 import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 const CLS_WRONG = "border-amber-400 bg-amber-50 text-amber-700";
 
@@ -42,6 +47,7 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
       prevCmd.current = validateCommand; doValidate();
     }
   }, [validateCommand, doValidate]);
+  const columns = usePrintColumns();
   return (
     <div className="space-y-4">
       <div>
@@ -49,8 +55,7 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center justify-items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -66,12 +71,12 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
               />
             );
             return (
-              <React.Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.base}{toSup(q.exp)}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
-              </React.Fragment>
+              </div>
             );
           })}
         </div>
@@ -84,11 +89,12 @@ export function A8PowerExercise({ exNum, count, promptFr, validateCommand, onVal
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
   const [questions] = useState<PowerQ[]>(() => {
     const seen = new Set<string>();
     const qs: PowerQ[] = [];
     let attempts = 0;
-    while (qs.length < count && attempts < 200) {
+    while (qs.length < questionCount && attempts < 200) {
       attempts++;
       const q = genPowerQ();
       const key = `${q.base}^${q.exp}`;
@@ -127,6 +133,7 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
       prevCmd.current = validateCommand; doValidate();
     }
   }, [validateCommand, doValidate]);
+  const columns = usePrintColumns();
   return (
     <div className="space-y-4">
       <div>
@@ -134,8 +141,7 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -153,14 +159,14 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
               />
             );
             return (
-              <React.Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="inline-flex items-center font-mono text-sm text-[var(--color-text-primary)]">
                   {q.base}{expInput}
                 </span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.result}</span>
-              </React.Fragment>
+              </div>
             );
           })}
         </div>
@@ -173,11 +179,12 @@ export function A8MissingExpExercise({ exNum, count, promptFr, validateCommand, 
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
   const [questions] = useState<MissingExpQ[]>(() => {
     const seen = new Set<string>();
     const qs: MissingExpQ[] = [];
     let attempts = 0;
-    while (qs.length < count && attempts < 200) {
+    while (qs.length < questionCount && attempts < 200) {
       attempts++;
       const q = genMissingExpQ();
       const key = `${q.base}^${q.exp}`;
@@ -230,6 +237,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
       prevCmd.current = validateCommand; doValidate();
     }
   }, [validateCommand, doValidate]);
+  const columns = usePrintColumns();
   return (
     <div className="space-y-4">
       <div>
@@ -237,8 +245,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -254,7 +261,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
               />
             );
             return (
-              <React.Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="inline-flex items-start font-mono text-sm text-[var(--color-text-primary)]">
                   {baseInput}
@@ -263,7 +270,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
                 </span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.result}</span>
-              </React.Fragment>
+              </div>
             );
           })}
         </div>
@@ -276,7 +283,8 @@ export function A8MissingBaseExercise({ exNum, count, promptFr, validateCommand,
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<MissingBaseQ[]>(() => genMissingBaseQuestions(count));
+  const questionCount = usePrintQuestionCount(count);
+  const [questions] = useState<MissingBaseQ[]>(() => genMissingBaseQuestions(questionCount));
   return <PureMissingBaseExercise exNum={exNum} questions={questions} promptFr={promptFr}
     validateCommand={validateCommand} onValidated={onValidated} />;
 }
@@ -301,8 +309,10 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<PowerCmpQ[]>(() => genPowerCmpQuestions(count));
-  const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(count).fill(null));
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
+  const [questions] = useState<PowerCmpQ[]>(() => genPowerCmpQuestions(questionCount));
+  const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(questionCount).fill(null));
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
   const revealCorrection = useEvalReveal();
@@ -325,7 +335,7 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+      <div className={`rounded-xl border border-[var(--color-border-default)] p-4 ${printQuestionsListClass(columns, "space-y-3")}`}>
         {questions.map((q, i) => {
           const sel = answers[i];
           return (
@@ -392,7 +402,9 @@ export function A8PowerOrderExercise({ exNum, count, promptFr, validateCommand, 
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [groups] = useState(() => Array.from({ length: count }, () => genPowerOrderGroup()));
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
+  const [groups] = useState(() => Array.from({ length: questionCount }, () => genPowerOrderGroup()));
   const [selected, setSelected] = useState<number[][]>(() => groups.map(() => []));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => groups.map(() => false));
@@ -433,7 +445,7 @@ export function A8PowerOrderExercise({ exNum, count, promptFr, validateCommand, 
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
-      <div className="space-y-6">
+      <div className={printQuestionsListClass(columns, "space-y-6")}>
         {groups.map((g, gi) => {
           const sel = selected[gi] ?? [];
           const available = g.powers.filter(p => !sel.includes(p.value));
@@ -524,6 +536,7 @@ function PureCalcExercise<Q extends { result: number }>({
     }
   }, [validateCommand, doValidate]);
 
+  const columns = usePrintColumns();
   return (
     <div className="space-y-4">
       <div>
@@ -531,8 +544,7 @@ function PureCalcExercise<Q extends { result: number }>({
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -548,12 +560,12 @@ function PureCalcExercise<Q extends { result: number }>({
               />
             );
             return (
-              <Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm">{renderExpr(q)}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -574,7 +586,8 @@ export function A8MultExercise({ exNum, count, promptFr, validateCommand, onVali
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<MultQ[]>(() => Array.from({ length: count }, genMultQ));
+  const questionCount = usePrintQuestionCount(count);
+  const [questions] = useState<MultQ[]>(() => Array.from({ length: questionCount }, genMultQ));
   return (
     <PureCalcExercise
       exNum={exNum} questions={questions} promptFr={promptFr}
@@ -596,7 +609,8 @@ export function A8DivExercise({ exNum, count, promptFr, validateCommand, onValid
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<DivQ[]>(() => Array.from({ length: count }, genDivQ));
+  const questionCount = usePrintQuestionCount(count);
+  const [questions] = useState<DivQ[]>(() => Array.from({ length: questionCount }, genDivQ));
   return (
     <PureCalcExercise
       exNum={exNum} questions={questions} promptFr={promptFr}
@@ -618,7 +632,8 @@ export function A8PowPowExercise({ exNum, count, promptFr, validateCommand, onVa
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<PowPowQ[]>(() => Array.from({ length: count }, genPowPowQ));
+  const questionCount = usePrintQuestionCount(count);
+  const [questions] = useState<PowPowQ[]>(() => Array.from({ length: questionCount }, genPowPowQ));
   return (
     <PureCalcExercise
       exNum={exNum} questions={questions} promptFr={promptFr}
@@ -654,7 +669,8 @@ export function A8MixedExercise({ exNum, count, promptFr, validateCommand, onVal
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<MixedQ[]>(() => Array.from({ length: count }, genMixedQ));
+  const questionCount = usePrintQuestionCount(count);
+  const [questions] = useState<MixedQ[]>(() => Array.from({ length: questionCount }, genMixedQ));
   return (
     <PureCalcExercise
       exNum={exNum} questions={questions} promptFr={promptFr}
@@ -703,8 +719,10 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<EqQ[]>(() => genEqQuestions(count));
-  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
+  const [questions] = useState<EqQ[]>(() => genEqQuestions(questionCount));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
@@ -727,8 +745,7 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -766,12 +783,12 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
             );
             const rhsExp = q.type === "pow" ? q.resultExp : q.result;
             return (
-              <Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 {lhsNode}
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 <span className="font-mono text-sm"><PowSpan b={q.base} e={rhsExp} /></span>
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -797,8 +814,10 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<Pow10Q[]>(() => genPow10Qs(count));
-  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
+  const [questions] = useState<Pow10Q[]>(() => genPow10Qs(questionCount));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
@@ -823,8 +842,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -840,7 +858,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
               />
             );
             return (
-              <Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm">
                   <span className="text-[var(--color-text-primary)]">10</span>
@@ -848,7 +866,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
                 </span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -889,8 +907,10 @@ export function A8ToPow10Exercise({ exNum, count, promptFr, validateCommand, onV
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<ToPow10Q[]>(() => genToPow10Qs(count));
-  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
+  const [questions] = useState<ToPow10Q[]>(() => genToPow10Qs(questionCount));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
@@ -912,10 +932,9 @@ export function A8ToPow10Exercise({ exNum, count, promptFr, validateCommand, onV
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => (
-            <Fragment key={i}>
+            <div key={i} className="flex items-center gap-2">
               <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.value}</span>
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
@@ -925,7 +944,7 @@ export function A8ToPow10Exercise({ exNum, count, promptFr, validateCommand, onV
                   wrong={validated && revealCorrection && !results[i]}
                   onChange={v => setAnswers(prev => { const n = [...prev]; n[i] = v; return n; })} />
               </span>
-            </Fragment>
+            </div>
           ))}
         </div>
       </div>
@@ -936,8 +955,10 @@ export function A8Pow10ExpExercise({ exNum, count, promptFr, validateCommand, on
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<ToPow10Q[]>(() => genToPow10Qs(count));
-  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
+  const [questions] = useState<ToPow10Q[]>(() => genToPow10Qs(questionCount));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
@@ -959,10 +980,9 @@ export function A8Pow10ExpExercise({ exNum, count, promptFr, validateCommand, on
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => (
-            <Fragment key={i}>
+            <div key={i} className="flex items-center gap-2">
               <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="font-mono text-sm">
                 <span className="text-[var(--color-text-primary)]">10</span>
@@ -972,7 +992,7 @@ export function A8Pow10ExpExercise({ exNum, count, promptFr, validateCommand, on
               </span>
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.value}</span>
-            </Fragment>
+            </div>
           ))}
         </div>
       </div>
@@ -1000,10 +1020,12 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
   const [questions] = useState<SciCalcQ[]>(() =>
-    [...SCI_CALC_POOL].sort(() => Math.random() - 0.5).slice(0, count)
+    [...SCI_CALC_POOL].sort(() => Math.random() - 0.5).slice(0, questionCount)
   );
-  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
@@ -1029,8 +1051,7 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -1046,12 +1067,12 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
               />
             );
             return (
-              <Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.display}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -1078,11 +1099,13 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
   const [questions] = useState<SciWriteQ[]>(() =>
-    [...SCI_WRITE_POOL].sort(() => Math.random() - 0.5).slice(0, count)
+    [...SCI_WRITE_POOL].sort(() => Math.random() - 0.5).slice(0, questionCount)
   );
-  const [coeffAns, setCoeffAns] = useState<string[]>(() => Array(count).fill(""));
-  const [expAns, setExpAns] = useState<string[]>(() => Array(count).fill(""));
+  const [coeffAns, setCoeffAns] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [expAns, setExpAns] = useState<string[]>(() => Array(questionCount).fill(""));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
@@ -1108,8 +1131,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const cv = coeffAns[i] ?? ""; const ev = expAns[i] ?? "";
             const wrong = validated && revealCorrection && !results[i];
@@ -1138,7 +1160,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
               />
             );
             return (
-              <Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.display}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
@@ -1147,7 +1169,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
                   <span className="text-[var(--color-text-primary)] mx-1">× 10</span>
                   {expEl}
                 </span>
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -1184,14 +1206,16 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
   const [questions] = useState<SqrtTFQ[]>(() => {
     const trues  = SQRT_TF_POOL.filter(q => q.answer).sort(() => Math.random() - 0.5);
     const falses = SQRT_TF_POOL.filter(q => !q.answer).sort(() => Math.random() - 0.5);
-    const half = Math.floor(count / 2);
-    const mixed = [...trues.slice(0, count - half), ...falses.slice(0, half)];
+    const half = Math.floor(questionCount / 2);
+    const mixed = [...trues.slice(0, questionCount - half), ...falses.slice(0, half)];
     return mixed.sort(() => Math.random() - 0.5);
   });
-  const [answers, setAnswers] = useState<(boolean | null)[]>(() => Array(count).fill(null));
+  const [answers, setAnswers] = useState<(boolean | null)[]>(() => Array(questionCount).fill(null));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
   const prevCmd = useRef(-1);
@@ -1215,13 +1239,12 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-3 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const sel = answers[i];
             const isWrong = validated && revealCorrection && !results[i];
             return (
-              <Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
                 <span className="inline-flex gap-1">
@@ -1248,7 +1271,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
                     );
                   })}
                 </span>
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -1269,8 +1292,9 @@ export function A8SqrtExercise({ exNum, count, promptFr, validateCommand, onVali
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
   const [questions] = useState<SqrtQ[]>(() =>
-    [...SQRT_POOL].sort(() => Math.random() - 0.5).slice(0, count).map(q => ({ n: q.n, result: q.sqrt }))
+    [...SQRT_POOL].sort(() => Math.random() - 0.5).slice(0, questionCount).map(q => ({ n: q.n, result: q.sqrt }))
   );
   return (
     <PureCalcExercise
@@ -1287,10 +1311,12 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
   const [questions] = useState<SqrtMissingQ[]>(() =>
-    [...SQRT_POOL].sort(() => Math.random() - 0.5).slice(0, count).map(q => ({ sqrt: q.sqrt, result: q.n }))
+    [...SQRT_POOL].sort(() => Math.random() - 0.5).slice(0, questionCount).map(q => ({ sqrt: q.sqrt, result: q.n }))
   );
-  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
@@ -1313,8 +1339,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -1330,7 +1355,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
               />
             );
             return (
-              <Fragment key={i}>
+              <div key={i} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm inline-flex items-center gap-0.5">
                   <span className="text-[var(--color-text-primary)]">√</span>
@@ -1338,7 +1363,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
                 </span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{q.sqrt}</span>
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -1376,6 +1401,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
     }
   }, [validateCommand, doValidate]);
 
+  const columns = usePrintColumns();
   return (
     <div className="space-y-4">
       <div>
@@ -1383,8 +1409,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -1402,12 +1427,12 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
               />
             );
             return (
-              <Fragment key={q.id}>
+              <div key={q.id} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
                 <span className="text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -1445,8 +1470,9 @@ export function A8OpParenExercise(props: {
   exNum: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(5);
   const [questions] = useState<OpCalcQ[]>(() =>
-    [...OP_EX2_POOL].sort(() => Math.random() - 0.5).slice(0, 5)
+    [...OP_EX2_POOL].sort(() => Math.random() - 0.5).slice(0, questionCount)
   );
   return <A8OpCalcGrid {...props} questions={questions} />;
 }
@@ -1483,6 +1509,7 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
   const revealCorrection = useEvalReveal();
+  const columns = usePrintColumns();
 
   const doValidate = useCallback(() => {
     const res = OP_EX4.map((q, i) => (answers[i] ?? "").trim() === String(q.answer));
@@ -1503,8 +1530,7 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto auto auto", justifyContent: "start" }}>
+        <div className={printQuestionsListClass(columns, "space-y-3")}>
           {OP_EX4.map((q, i) => {
             const val = answers[i] ?? "";
             const wrongField = validated && revealCorrection && !results[i];
@@ -1522,14 +1548,14 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
               />
             );
             return (
-              <Fragment key={q.id}>
+              <div key={q.id} className="flex items-center gap-2">
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.before}</span>
                 {inputEl}
                 <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.after}</span>
                 <span className="text-sm text-[var(--color-text-secondary)]">=</span>
                 <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{q.result}</span>
-              </Fragment>
+              </div>
             );
           })}
         </div>
@@ -1569,8 +1595,9 @@ export function A8OpComplexExercise(props: {
   exNum: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(5);
   const [questions] = useState<OpCalcQ[]>(() =>
-    [...OP_EX6_POOL].sort(() => Math.random() - 0.5).slice(0, 5)
+    [...OP_EX6_POOL].sort(() => Math.random() - 0.5).slice(0, questionCount)
   );
   return <A8OpCalcGrid {...props} questions={questions} />;
 }
