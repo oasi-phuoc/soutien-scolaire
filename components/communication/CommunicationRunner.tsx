@@ -15,7 +15,9 @@ import {
   type CommunicationExercise,
   type CommunicationLesson,
   type CommunicationTheoryBlock,
+  isCommunicationExerciseComplete,
   pickProgressiveExercises,
+  scoreCommunicationExercise,
 } from "@/lib/curriculum/content/communication/express-types";
 import { EXPRESS_ORAL_BY_ID } from "@/lib/curriculum/content/communication/express-index";
 import {
@@ -366,6 +368,19 @@ function renderInlineBold(text: string) {
   });
 }
 
+function SimpleAudioPlayer({ src, label }: { src: string; label?: string }) {
+  return (
+    <div className="mb-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+      {label ? (
+        <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+          {label}
+        </p>
+      ) : null}
+      <audio controls preload="metadata" src={src} className="w-full" />
+    </div>
+  );
+}
+
 function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
   switch (block.type) {
     case "heading":
@@ -377,6 +392,29 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
           >
             {block.text}
           </h2>
+        </div>
+      );
+
+    case "prerequisites":
+      return (
+        <div className="mb-5 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-3">
+          <p className="mb-2 text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
+            Prérequis
+          </p>
+          <ul className="space-y-1.5">
+            {block.items.map((item) => (
+              <li key={item.code} className="text-sm text-[var(--color-text-primary)]">
+                {item.href ? (
+                  <Link href={item.href} className="font-semibold underline-offset-2 hover:underline" style={{ color: ACCENT }}>
+                    {item.code}
+                  </Link>
+                ) : (
+                  <span className="font-semibold" style={{ color: ACCENT }}>{item.code}</span>
+                )}
+                <span className="text-[var(--color-text-secondary)]"> — {item.title}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       );
 
@@ -523,6 +561,9 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
     case "dialogue":
       return (
         <div className="mb-4 space-y-2">
+          {block.audioSrc ? (
+            <SimpleAudioPlayer src={block.audioSrc} label={block.audioLabel ?? "Audio"} />
+          ) : null}
           {block.lines.map((line, i) => {
             const isA = line.role === "A";
             return (
@@ -660,6 +701,104 @@ function MCQExercise({
           }`}
         >
           {isCorrect ? "✓ Bonne réponse !" : `✗ La bonne réponse est : ${answer}`}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ListeningExercise({
+  exercise,
+  exNum,
+  total,
+  selected,
+  setSelected,
+  validated,
+}: {
+  exercise: CommunicationExercise;
+  exNum: number;
+  total: number;
+  selected: string | null;
+  setSelected: (v: string | null) => void;
+  validated: boolean;
+}) {
+  const items = exercise.items ?? [];
+  let answersMap: Record<string, string> = {};
+  try {
+    answersMap = selected ? (JSON.parse(selected) as Record<string, string>) : {};
+  } catch {
+    answersMap = {};
+  }
+
+  function setItemAnswer(itemId: string, value: string) {
+    if (validated) return;
+    const next = { ...answersMap, [itemId]: value };
+    setSelected(JSON.stringify(next));
+  }
+
+  const score = scoreCommunicationExercise(exercise, selected);
+
+  return (
+    <div className="flex flex-1 flex-col">
+      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        Exercice {exNum} / {total}
+      </p>
+      <p className="mb-3 text-xs text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      {exercise.audioSrc ? (
+        <SimpleAudioPlayer src={exercise.audioSrc} label={exercise.audioLabel ?? "Audio"} />
+      ) : null}
+      <div className="space-y-5">
+        {items.map((item) => {
+          const chosen = answersMap[item.id] ?? null;
+          return (
+            <div key={item.id}>
+              <p className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">{item.prompt}</p>
+              <div className="space-y-2">
+                {item.choices.map((c) => {
+                  let cls =
+                    "w-full rounded-[var(--radius-md)] border-2 px-4 py-2.5 text-left text-sm font-medium transition-colors";
+                  if (!validated) {
+                    cls +=
+                      chosen === c
+                        ? " text-white border-transparent"
+                        : " border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:border-[var(--color-border-emphasis)]";
+                  } else if (c === item.answer) {
+                    cls +=
+                      " border-[var(--color-correct)] bg-[var(--color-correct-bg)] text-[var(--color-correct-text)]";
+                  } else if (c === chosen) {
+                    cls += " border-amber-500 bg-amber-50 text-amber-600";
+                  } else {
+                    cls +=
+                      " border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
+                  }
+                  return (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => setItemAnswer(item.id, c)}
+                      className={cls}
+                      style={!validated && chosen === c ? { background: ACCENT, borderColor: ACCENT } : undefined}
+                    >
+                      {c}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {validated && (
+        <div
+          className={`mt-4 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium ${
+            score === 1
+              ? "bg-[var(--color-correct-bg)] text-[var(--color-correct-text)]"
+              : "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-200"
+          }`}
+        >
+          {score === 1
+            ? "✓ Parfait !"
+            : `Résultat : ${Math.round(score * items.length)} / ${items.length}`}
         </div>
       )}
     </div>
@@ -829,6 +968,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     if (!selected || validated[exIndex]) return;
+    if (phase === "exercises") {
+      const ex = activeExercises[exIndex];
+      if (ex && !isCommunicationExerciseComplete(ex, selected)) return;
+    }
     setValidated((prev) => prev.map((v, i) => i === exIndex ? true : v));
   }
 
@@ -857,7 +1000,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         setExIndex(exIndex + 1);
       } else {
         // Last exercise: compute score from all answers and go to score
-        const newResults = activeExercises.map((ex, i) => answers[i] === ex.answer);
+        const newResults = activeExercises.map(
+          (ex, i) => scoreCommunicationExercise(ex, answers[i]) >= 0.999,
+        );
         setResults(newResults);
         setPhase("score");
       }
@@ -989,23 +1134,40 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               ))}
             </div>
           )}
-          <MCQExercise
-            key={exIndex}
-            question={activeExercises[exIndex]!.question}
-            instruction={activeExercises[exIndex]!.instruction}
-            choices={activeExercises[exIndex]!.choices}
-            answer={activeExercises[exIndex]!.answer}
-            exNum={exIndex + 1}
-            total={totalEx}
-            selected={selected}
-            setSelected={(v) => {
-              setAnswers((prev) => prev.map((a, i) => i === exIndex ? v : a));
-              if (v !== answers[exIndex]) {
-                setValidated((prev) => prev.map((vv, i) => i === exIndex ? false : vv));
-              }
-            }}
-            validated={currentExValidated}
-          />
+          {activeExercises[exIndex]!.type === "listening" ? (
+            <ListeningExercise
+              key={exIndex}
+              exercise={activeExercises[exIndex]!}
+              exNum={exIndex + 1}
+              total={totalEx}
+              selected={selected}
+              setSelected={(v) => {
+                setAnswers((prev) => prev.map((a, i) => i === exIndex ? v : a));
+                if (v !== answers[exIndex]) {
+                  setValidated((prev) => prev.map((vv, i) => i === exIndex ? false : vv));
+                }
+              }}
+              validated={currentExValidated}
+            />
+          ) : (
+            <MCQExercise
+              key={exIndex}
+              question={activeExercises[exIndex]!.question ?? ""}
+              instruction={activeExercises[exIndex]!.instruction}
+              choices={activeExercises[exIndex]!.choices ?? []}
+              answer={activeExercises[exIndex]!.answer ?? ""}
+              exNum={exIndex + 1}
+              total={totalEx}
+              selected={selected}
+              setSelected={(v) => {
+                setAnswers((prev) => prev.map((a, i) => i === exIndex ? v : a));
+                if (v !== answers[exIndex]) {
+                  setValidated((prev) => prev.map((vv, i) => i === exIndex ? false : vv));
+                }
+              }}
+              validated={currentExValidated}
+            />
+          )}
         </>
       )}
 
@@ -1079,7 +1241,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 <button
                   type="button"
                   onClick={() => void handleValidate()}
-                  disabled={(phase === "writing" ? false : phase === "form" ? false : !selected) || (phase === "exercises" ? currentExValidated : phase === "form" ? formValidated : exerciseValidated) || grammarChecking}
+                  disabled={(phase === "writing" ? false : phase === "form" ? false : !(selected && (!activeExercises[exIndex] || isCommunicationExerciseComplete(activeExercises[exIndex]!, selected)))) || (phase === "exercises" ? currentExValidated : phase === "form" ? formValidated : exerciseValidated) || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                   style={{ background: ACCENT }}
                   aria-label="Valider"

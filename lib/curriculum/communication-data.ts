@@ -8,6 +8,8 @@ export type CommunicationSubmodule = {
   title: string;
   available: boolean;
   lessonId?: string;
+  /** Slugs français (vocab / conj) requis avant d'ouvrir la leçon. */
+  prerequisiteFrenchSlugs?: string[];
 };
 
 export type CommunicationModule = {
@@ -26,7 +28,18 @@ export const COMM_MODULES: CommunicationModule[] = [
     description: "Interactions simples du quotidien",
     submodules: [
       { id: "E1-0", code: "E1.0", title: "Conversation IA", available: true },
-      { id: "E1-1", code: "E1.1", title: "Se présenter", available: true },
+      {
+        id: "E1-1",
+        code: "E1.1",
+        title: "Se présenter",
+        available: true,
+        prerequisiteFrenchSlugs: [
+          "a1-conj-l00",
+          "a1-conj-l01",
+          "v1-nationalites",
+          "v1-professions",
+        ],
+      },
       { id: "E1-2", code: "E1.2", title: "Parler de sa famille", available: true },
       { id: "E1-3", code: "E1.3", title: "Décrire son logement", available: true },
       { id: "E1-4", code: "E1.4", title: "Les activités quotidiennes", available: true },

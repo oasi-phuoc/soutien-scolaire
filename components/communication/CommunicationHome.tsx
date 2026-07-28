@@ -5,9 +5,17 @@ import { useEffect, useState } from "react";
 import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { resolveCommModules } from "@/lib/content-editor/catalog";
+import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
+
+const PREREQ_LABELS: Record<string, string> = {
+  "a1-conj-l00": "C1.1 Pronoms",
+  "a1-conj-l01": "C1.2 Être / avoir",
+  "v1-nationalites": "V1.1 Nationalités",
+  "v1-professions": "V1.2 Professions",
+};
 
 function moduleStateLabel(state: "completed" | "in_progress" | "development" | "locked") {
   if (state === "completed") return "TERMINÉ";
@@ -59,6 +67,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
   const { overrides } = useContentEditor();
   const commModules = resolveCommModules(COMM_MODULES, overrides);
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
+  const [frenchDone, setFrenchDone] = useState<Set<string>>(new Set());
   const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
 
   useEffect(() => {
@@ -66,10 +75,16 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
       const raw = localStorage.getItem(COMM_PROGRESS_KEY);
       if (raw) setCompleted(normalizeCommunicationProgress(JSON.parse(raw)));
     } catch { /* ignore */ }
+    setFrenchDone(getCompletedFrenchLessons());
   }, []);
 
   function toggleExpanded(moduleId: string) {
     setExpanded((prev) => ({ ...prev, [moduleId]: !prev[moduleId] }));
+  }
+
+  function prerequisitesMet(slugs?: string[]): boolean {
+    if (!slugs?.length) return true;
+    return slugs.every((slug) => frenchDone.has(slug));
   }
 
   return (
@@ -123,8 +138,12 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                 <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
                   {m.submodules.map((sub) => {
                     const isDone = !!completed[sub.id];
-                    const isAvailable = isAdmin || sub.available;
+                    const prereqOk = isAdmin || prerequisitesMet(sub.prerequisiteFrenchSlugs);
+                    const isAvailable = (isAdmin || sub.available) && prereqOk;
                     const isLocked = !isAvailable && !isDone;
+                    const missingPrereqs = (sub.prerequisiteFrenchSlugs ?? [])
+                      .filter((slug) => !frenchDone.has(slug))
+                      .map((slug) => PREREQ_LABELS[slug] ?? slug);
                     return (
                       <li key={sub.id}
                         className={`flex min-h-[52px] items-center gap-3 px-4 py-2.5 ${
@@ -150,6 +169,11 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                         <div className="flex-1 min-w-0">
                           <span className="text-xs font-semibold text-[var(--color-text-secondary)]">{sub.code}</span>
                           <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">{sub.title}</span>
+                          {isLocked && missingPrereqs.length > 0 ? (
+                            <p className="mt-0.5 text-[10px] text-[var(--color-text-secondary)]">
+                              Requis : {missingPrereqs.join(" · ")}
+                            </p>
+                          ) : null}
                         </div>
                         {isAvailable && !isDone ? (
                           <button type="button"

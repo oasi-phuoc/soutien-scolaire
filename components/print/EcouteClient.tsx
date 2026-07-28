@@ -3,7 +3,10 @@
 import { useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-const ALLOWED_PREFIX = "/assets/expression/co/";
+const ALLOWED_PREFIXES = [
+  "/assets/expression/co/",
+  "/assets/expression/communication/",
+];
 
 function sanitizeAudioSrc(raw: string | null): string | null {
   if (!raw) return null;
@@ -13,7 +16,7 @@ function sanitizeAudioSrc(raw: string | null): string | null {
   } catch {
     decoded = raw;
   }
-  if (!decoded.startsWith(ALLOWED_PREFIX)) return null;
+  if (!ALLOWED_PREFIXES.some((prefix) => decoded.startsWith(prefix))) return null;
   if (decoded.includes("..") || decoded.includes("//", 1)) return null;
   if (!/\.mp3$/i.test(decoded)) return null;
   return decoded;

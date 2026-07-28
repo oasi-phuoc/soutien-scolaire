@@ -13,17 +13,38 @@ export type CommunicationTheoryBlock =
   | { type: "table"; headers: string[]; rows: string[][]; accentHeader?: boolean }
   | { type: "note"; text: string }
   | { type: "highlight"; title: string; items?: string[] }
-  | { type: "dialogue"; lines: Array<{ role: string; text: string; translation?: string }> }
-  | { type: "vocab"; items: Array<{ fr: string; example: string }> };
+  | {
+      type: "dialogue";
+      lines: Array<{ role: string; text: string; translation?: string }>;
+      /** Chemin public absolu, ex. `/assets/expression/communication/A1/009.mp3` */
+      audioSrc?: string;
+      audioLabel?: string;
+    }
+  | { type: "vocab"; items: Array<{ fr: string; example: string }> }
+  | {
+      type: "prerequisites";
+      items: Array<{ code: string; title: string; href?: string }>;
+    };
 
-/** Exercice auto-corrigé (QCM). */
+/** Sous-question d'un exercice d'écoute (QCM / Vrai-Faux). */
+export type ListeningItem = {
+  id: string;
+  prompt: string;
+  choices: string[];
+  answer: string;
+};
+
+/** Exercice auto-corrigé (QCM texte ou écoute). */
 export type CommunicationExercise = {
   id: string;
   instruction: string;
-  type: "mcq";
-  question: string;
-  choices: string[];
-  answer: string;
+  type: "mcq" | "listening";
+  question?: string;
+  choices?: string[];
+  answer?: string;
+  audioSrc?: string;
+  audioLabel?: string;
+  items?: ListeningItem[];
 };
 
 /**
@@ -44,10 +65,15 @@ export type CommunicationLesson = {
   /** Nombre d'exercices présentés (défaut 8). */
   exerciseCount?: number;
   /**
-   * @deprecated Conservé pour PE (production écrite). Les leçons E1–E3 n'utilisent plus d'exercices fixes.
+   * Exercices fixes (écoute, etc.). Utilisé si `exercisePool` est absent / vide.
    */
   exercises?: CommunicationExercise[];
   writingLevel?: "base" | "moyen" | "avance";
+  /**
+   * Leçons français (slugs) à valider avant d'ouvrir cette leçon d'expression.
+   * Ex. `a1-conj-l00` (C1.1), `v1-nationalites` (V1.1).
+   */
+  prerequisiteFrenchSlugs?: string[];
 };
 
 function mulberry32(seed: number) {
@@ -89,7 +115,6 @@ export function pickProgressiveExercises(
   const tiers = [...byTier.keys()].sort((a, b) => a - b);
   if (tiers.length === 0) return [];
 
-  // Plan de progression : slots croissants sur les tiers
   const plan: number[] = [];
   for (let i = 0; i < count; i++) {
     const t = tiers[Math.min(Math.floor((i / count) * tiers.length), tiers.length - 1)]!;
@@ -106,7 +131,6 @@ export function pickProgressiveExercises(
     );
     let chosen = candidates[0];
     if (!chosen) {
-      // Repli : n'importe quel item non utilisé, en privilégiant un tier proche
       const fallback = shuffle(
         pool.filter((x) => !used.has(x.id)),
         rand,
@@ -118,7 +142,11 @@ export function pickProgressiveExercises(
     const { tier: _t, ...ex } = chosen;
     picked.push({
       ...ex,
-      choices: shuffle(ex.choices, rand),
+      choices: ex.choices ? shuffle(ex.choices, rand) : undefined,
+      items: ex.items?.map((item) => ({
+        ...item,
+        choices: shuffle(item.choices, rand),
+      })),
     });
   }
 
@@ -142,4 +170,56 @@ export function mcq(
     choices: [answer, ...distractors],
     answer,
   };
+}
+
+export function listeningExercise(
+  id: string,
+  audioSrc: string,
+  audioLabel: string,
+  instruction: string,
+  items: ListeningItem[],
+): CommunicationExercise {
+  return {
+    id,
+    type: "listening",
+    instruction,
+    audioSrc,
+    audioLabel,
+    items,
+  };
+}
+
+/** Score 0–1 pour un exercice (écoute multi-items ou QCM simple). */
+export function scoreCommunicationExercise(
+  ex: CommunicationExercise,
+  selected: string | null,
+): number {
+  if (ex.type === "listening" && ex.items?.length) {
+    let parsed: Record<string, string> = {};
+    try {
+      parsed = selected ? (JSON.parse(selected) as Record<string, string>) : {};
+    } catch {
+      parsed = {};
+    }
+    const ok = ex.items.filter((item) => (parsed[item.id] ?? "") === item.answer).length;
+    return ok / ex.items.length;
+  }
+  if (!ex.answer) return 0;
+  return selected === ex.answer ? 1 : 0;
+}
+
+export function isCommunicationExerciseComplete(
+  ex: CommunicationExercise,
+  selected: string | null,
+): boolean {
+  if (ex.type === "listening" && ex.items?.length) {
+    let parsed: Record<string, string> = {};
+    try {
+      parsed = selected ? (JSON.parse(selected) as Record<string, string>) : {};
+    } catch {
+      return false;
+    }
+    return ex.items.every((item) => Boolean(parsed[item.id]));
+  }
+  return Boolean(selected);
 }

@@ -59,6 +59,7 @@ import {
   pickProgressiveExercises,
   type CommunicationTheoryBlock,
 } from "@/lib/curriculum/content/communication/express-types";
+import { PrintAudioQrRow } from "@/components/print/PrintAudioQrRow";
 
 export type PrintBundle = {
   lessonTitle: string;
@@ -411,6 +412,11 @@ function expressTheoryLines(block: CommunicationTheoryBlock): string[] {
     case "plain":
     case "note":
       return [block.text];
+    case "prerequisites":
+      return [
+        "Prérequis",
+        ...block.items.map((item) => `${item.code} — ${item.title}`),
+      ];
     case "highlight":
       return [block.title, ...(block.items ?? [])];
     case "numbered":
@@ -427,7 +433,10 @@ function expressTheoryLines(block: CommunicationTheoryBlock): string[] {
         ...block.rows.map((row) => row.join(" · ")),
       ];
     case "dialogue":
-      return block.lines.map((line) => `${line.role} : ${line.text}`);
+      return [
+        ...(block.audioLabel ? [block.audioLabel] : []),
+        ...block.lines.map((line) => `${line.role} : ${line.text}`),
+      ];
     case "vocab":
       return block.items.map((item) => `${item.fr} — ${item.example}`);
     default:
@@ -439,13 +448,33 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
   const lesson = EXPRESS_ORAL_BY_ID[lessonId];
   if (!lesson) return null;
   const pool = lesson.exercisePool ?? [];
-  const picked = pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, 1);
+  const picked =
+    pool.length > 0
+      ? pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, 1)
+      : (lesson.exercises ?? []);
+
+  const dialogueAudio = lesson.theory.find(
+    (b): b is Extract<CommunicationTheoryBlock, { type: "dialogue" }> =>
+      b.type === "dialogue" && Boolean(b.audioSrc),
+  );
+
   return {
     lessonTitle: lesson.title,
     course: "Français",
     accentColor: "var(--color-accent-comm)",
     theoryPreview: (
       <div className="space-y-2 text-sm leading-relaxed text-black">
+        {dialogueAudio?.audioSrc ? (
+          <PrintAudioQrRow
+            items={[
+              {
+                id: "dialogue",
+                audio: dialogueAudio.audioSrc,
+                label: dialogueAudio.audioLabel ?? "Audio",
+              },
+            ]}
+          />
+        ) : null}
         {lesson.theory.flatMap((block, bi) =>
           expressTheoryLines(block).map((line, li) => (
             <p key={`${bi}-${li}`} className={block.type === "heading" ? "font-bold" : undefined}>
@@ -455,42 +484,91 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
         )}
       </div>
     ),
-    exercises: picked.map((ex, i) => ({
-      id: ex.id || String(i),
-      label: `Exercice ${i + 1}`,
-      preview: (
-        <div className="space-y-2 text-sm text-black">
-          <p className="font-semibold">{ex.instruction}</p>
-          <p>{ex.question}</p>
-          <ul className="space-y-1">
-            {ex.choices.map((choice, ci) => (
-              <li key={choice} className="flex gap-2">
-                <span className="w-5 shrink-0 font-bold">{String.fromCharCode(97 + ci)}.</span>
-                <span>{choice}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-3 h-7 border-b border-black/40" />
-        </div>
-      ),
-      correctionPreview: (
-        <div className="space-y-2 text-sm text-black">
-          <p className="font-semibold">{ex.instruction}</p>
-          <p>{ex.question}</p>
-          <ul className="space-y-1">
-            {ex.choices.map((choice, ci) => (
-              <li key={choice} className="flex gap-2">
-                <span className="w-5 shrink-0 font-bold">{String.fromCharCode(97 + ci)}.</span>
-                <span className={choice === ex.answer ? "font-bold text-amber-700" : undefined}>
-                  {choice}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-2 font-bold text-amber-700">{ex.answer}</p>
-        </div>
-      ),
-    })),
+    exercises: picked.map((ex, i) => {
+      const qrItems =
+        ex.type === "listening" && ex.audioSrc
+          ? [{ id: ex.id, audio: ex.audioSrc, label: ex.audioLabel ?? `Audio ${i + 1}` }]
+          : [];
+      return {
+        id: ex.id || String(i),
+        label: `Exercice ${i + 1}`,
+        preview: (
+          <div className="space-y-2 text-sm text-black">
+            {qrItems.length > 0 ? <PrintAudioQrRow items={qrItems} /> : null}
+            <p className="font-semibold">{ex.instruction}</p>
+            {ex.type === "listening" && ex.items ? (
+              <div className="space-y-3">
+                {ex.items.map((item) => (
+                  <div key={item.id}>
+                    <p className="font-medium">{item.prompt}</p>
+                    <ul className="mt-1 space-y-1">
+                      {item.choices.map((choice, ci) => (
+                        <li key={choice} className="flex gap-2">
+                          <span className="w-5 shrink-0 font-bold">
+                            {String.fromCharCode(97 + ci)}.
+                          </span>
+                          <span>{choice}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-2 h-6 border-b border-black/40" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <>
+                <p>{ex.question}</p>
+                <ul className="space-y-1">
+                  {(ex.choices ?? []).map((choice, ci) => (
+                    <li key={choice} className="flex gap-2">
+                      <span className="w-5 shrink-0 font-bold">{String.fromCharCode(97 + ci)}.</span>
+                      <span>{choice}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-3 h-7 border-b border-black/40" />
+              </>
+            )}
+          </div>
+        ),
+        correctionLeadPreview:
+          qrItems.length > 0 ? (
+            <div className="space-y-2 text-sm text-black">
+              <PrintAudioQrRow items={qrItems} caption="Audio (corrigé)" />
+            </div>
+          ) : undefined,
+        correctionPreview: (
+          <div className="space-y-2 text-sm text-black">
+            <p className="font-semibold">{ex.instruction}</p>
+            {ex.type === "listening" && ex.items ? (
+              <div className="space-y-2">
+                {ex.items.map((item) => (
+                  <p key={item.id}>
+                    <span className="font-medium">{item.prompt}</span>{" "}
+                    <span className="font-bold text-amber-700">{item.answer}</span>
+                  </p>
+                ))}
+              </div>
+            ) : (
+              <>
+                <p>{ex.question}</p>
+                <ul className="space-y-1">
+                  {(ex.choices ?? []).map((choice, ci) => (
+                    <li key={choice} className="flex gap-2">
+                      <span className="w-5 shrink-0 font-bold">{String.fromCharCode(97 + ci)}.</span>
+                      <span className={choice === ex.answer ? "font-bold text-amber-700" : undefined}>
+                        {choice}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-2 font-bold text-amber-700">{ex.answer}</p>
+              </>
+            )}
+          </div>
+        ),
+      };
+    }),
   };
 }
 
