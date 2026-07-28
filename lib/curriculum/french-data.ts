@@ -193,14 +193,14 @@ const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
   "a2-gr-l42": "G6.4",
 
   // C1 — Verbes essentiels (pronoms, être/avoir, R1.5 + R2)
-  "a1-conj-l00": "C1.01",
-  "a1-conj-l01": "C1.02",
-  "a1-conj-l07": "C1.1",
-  "a1-conj-l08": "C1.2",
-  "a1-conj-l09": "C1.3",
-  "a1-conj-l15": "C1.4",
-  "a2-conj-irreguliers": "C1.5",
-  "a2-conj-l02": "C1.6",
+  "a1-conj-l00": "C1.1",
+  "a1-conj-l01": "C1.2",
+  "a1-conj-l07": "C1.3",
+  "a1-conj-l08": "C1.4",
+  "a1-conj-l09": "C1.5",
+  "a1-conj-l15": "C1.6",
+  "a2-conj-irreguliers": "C1.7",
+  "a2-conj-l02": "C1.8",
 
   // C2 — Le passé (ex-R6)
   "a1-conj-l28": "C2.1",
