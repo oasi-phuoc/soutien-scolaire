@@ -8,7 +8,6 @@ import {
   type ProfessorClassOption,
 } from "@/app/actions/suivi";
 import { AppSelect } from "@/components/ui/AppSelect";
-import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 type DraftRow = {
   primaryClassId: string | null;
@@ -97,7 +96,7 @@ function ClassMultiPicker({
   }
 
   return (
-    <div ref={rootRef} className="relative w-full min-w-0" style={widthStyle}>
+    <div ref={rootRef} className="relative" style={widthStyle}>
       <button
         type="button"
         disabled={disabled}
@@ -170,18 +169,26 @@ export function ProfessorAttributionsClient() {
     [classes],
   );
 
-  /** Largeur du sélecteur titulariat, basée sur le plus long libellé de classe. */
+  /** Largeur commune des deux sélecteurs (titulariat / autres), basée sur le plus long libellé. */
   const selectWidthCh = useMemo(() => {
     const labels = classes.map((c) => c.label);
-    const maxLen = Math.max(
+    let maxLen = Math.max(
       "— Aucune —".length,
+      "Aucune".length,
       ...labels.map((l) => l.length),
       8,
     );
+    const byLen = [...labels].sort((a, b) => b.length - a.length);
+    if (byLen.length >= 2) {
+      maxLen = Math.max(maxLen, `${byLen[0]}, ${byLen[1]}`.length);
+    }
+    if (classes.length >= 3) {
+      maxLen = Math.max(maxLen, `${classes.length} classes`.length);
+    }
     return maxLen + 3;
   }, [classes]);
 
-  const titularatBoxStyle = useMemo(
+  const selectBoxStyle = useMemo(
     () => ({ width: `${selectWidthCh}ch`, maxWidth: "100%" }) as const,
     [selectWidthCh],
   );
@@ -298,24 +305,23 @@ export function ProfessorAttributionsClient() {
         Une classe ne peut avoir qu&apos;un seul professeur titulaire.
       </p>
 
-      <ScrollableTable
-        className="rounded-xl border border-[var(--color-border-default)]"
-        tableClassName="w-full table-auto text-sm"
-        head={
-          <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-            <th className="w-0 whitespace-nowrap px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
-              Professeur
-            </th>
-            <th className="w-0 whitespace-nowrap px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
-              Titulariat
-            </th>
-            <th className="min-w-0 px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
-              Autres classes
-            </th>
-          </tr>
-        }
-        body={
-professors.length === 0 ? (
+      <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
+        <table className="w-auto min-w-0 text-sm">
+          <thead>
+            <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
+              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+                Professeur
+              </th>
+              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+                Titulariat
+              </th>
+              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+                Autres classes
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
+            {professors.length === 0 ? (
               <tr>
                 <td colSpan={3} className="px-3 py-8 text-center text-sm text-zinc-400">
                   Aucun compte professeur.
@@ -330,11 +336,11 @@ professors.length === 0 ? (
                     key={prof.id}
                     className={`hover:bg-zinc-50 dark:hover:bg-zinc-900 ${changed ? "bg-[var(--color-theme-light)]/40 dark:bg-[var(--color-theme)]/5" : ""}`}
                   >
-                    <td className="w-0 whitespace-nowrap px-3 py-3 align-middle">
+                    <td className="px-3 py-3 align-top">
                       <p className="font-semibold text-zinc-800 dark:text-zinc-100">{professorName(prof)}</p>
                       <p className="mt-0.5 text-xs text-zinc-400">{prof.email}</p>
                     </td>
-                    <td className="w-0 whitespace-nowrap px-3 py-3 align-middle">
+                    <td className="px-3 py-3 align-top whitespace-nowrap">
                       <AppSelect
                         value={draft.primaryClassId ?? ""}
                         onChange={(v) => updatePrimary(prof.id, v || null)}
@@ -342,25 +348,27 @@ professors.length === 0 ? (
                         placeholder="— Aucune —"
                         emptyOption={{ value: "", label: "— Aucune —" }}
                         disabled={isPending}
-                        style={titularatBoxStyle}
+                        style={selectBoxStyle}
                         aria-label={`Titulariat de ${professorName(prof)}`}
                       />
                     </td>
-                    <td className="min-w-0 px-3 py-3 align-middle">
+                    <td className="px-3 py-3 align-top whitespace-nowrap">
                       <ClassMultiPicker
                         options={classes}
                         value={draft.secondaryClassIds}
                         excludeClassId={draft.primaryClassId}
                         disabled={isPending}
+                        widthStyle={selectBoxStyle}
                         onChange={(next) => updateSecondary(prof.id, next)}
                       />
                     </td>
                   </tr>
                 );
               })
-            )
-        }
-      />
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {saveMsg && (
         <p className={`text-sm ${saveMsg.includes("Erreur") ? "text-red-600" : "text-emerald-700"}`} role="status">
