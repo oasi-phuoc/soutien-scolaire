@@ -91,9 +91,10 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
     <ul className="space-y-4">
       {commModules.map((m) => {
         const isExpanded = !!expanded[m.id];
-        const allUnavailable = !isAdmin && m.submodules.every((s) => !s.available);
-        const completedCount = m.submodules.filter((s) => completed[s.id]).length;
-        const allDone = completedCount === m.submodules.length && m.submodules.length > 0;
+        const visibleSubs = m.submodules.filter((s) => s.available);
+        const allUnavailable = visibleSubs.length === 0;
+        const completedCount = visibleSubs.filter((s) => completed[s.id]).length;
+        const allDone = completedCount === visibleSubs.length && visibleSubs.length > 0;
         const moduleState = allUnavailable ? "development" : allDone ? "completed" : "in_progress";
 
         return (
@@ -131,12 +132,12 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                   )}
                 </button>
 
-                {!allUnavailable && <ModuleProgressBar total={m.submodules.length} completed={completedCount} />}
+                {!allUnavailable && <ModuleProgressBar total={visibleSubs.length} completed={completedCount} />}
               </div>
 
               {isExpanded && (
                 <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-                  {m.submodules.map((sub) => {
+                  {visibleSubs.map((sub) => {
                     const isDone = !!completed[sub.id];
                     const prereqOk = isAdmin || prerequisitesMet(sub.prerequisiteFrenchSlugs);
                     const isAvailable = (isAdmin || sub.available) && prereqOk;

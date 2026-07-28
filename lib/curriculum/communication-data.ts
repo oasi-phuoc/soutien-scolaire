@@ -27,7 +27,7 @@ export const COMM_MODULES: CommunicationModule[] = [
     title: "Expression orale — Découverte",
     description: "Interactions simples du quotidien",
     submodules: [
-      { id: "E1-0", code: "E1.0", title: "Conversation IA", available: true },
+      { id: "E1-0", code: "E1.0", title: "Conversation IA", available: false },
       {
         id: "E1-1",
         code: "E1.1",
