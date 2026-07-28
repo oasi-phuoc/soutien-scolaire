@@ -20,10 +20,11 @@ export default async function HomePage({ searchParams }: Props) {
         </p>
       ) : null}
 
-      <HomeTeacherSection />
-      {canPrint ? <HomeImpressionCard /> : null}
       {!teacher ? <TasksCard /> : null}
       <ExpressionMailboxCard />
+      {canPrint ? <HomeImpressionCard /> : null}
+
+      <HomeTeacherSection />
     </main>
   );
 }
