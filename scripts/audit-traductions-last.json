@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-07-08T11:51:01.122Z",
+  "generatedAt": "2026-07-28T08:09:51.091Z",
   "math": {
     "algebra": {
       "domain": "A",
-      "tradCount": 64,
+      "tradCount": 67,
       "issues": [
         {
           "file": "trad-a1-1.ts",
@@ -15,15 +15,7 @@
         },
         {
           "file": "trad-a10-1.ts",
-          "type": "no_theory_trad"
-        },
-        {
-          "file": "trad-a10-1.ts",
           "type": "no_consignes"
-        },
-        {
-          "file": "trad-a10-2.ts",
-          "type": "no_theory_trad"
         },
         {
           "file": "trad-a10-2.ts",
@@ -114,6 +106,10 @@
           "type": "no_consignes"
         },
         {
+          "file": "trad-a5-7.ts",
+          "type": "no_consignes"
+        },
+        {
           "file": "trad-a6-1.ts",
           "type": "no_consignes"
         },
@@ -179,90 +175,42 @@
         },
         {
           "file": "trad-a9-1.ts",
-          "type": "no_consignes"
+          "type": "blocks_no_en"
         },
         {
           "file": "trad-a9-2.ts",
-          "type": "no_consignes"
+          "type": "blocks_no_en"
         },
         {
           "file": "trad-a9-3.ts",
-          "type": "no_consignes"
+          "type": "blocks_no_en"
         },
         {
           "file": "trad-a9-4.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-a9-5.ts",
-          "type": "no_consignes"
+          "type": "blocks_no_en"
         },
         {
           "file": "trad-a9-6.ts",
+          "type": "blocks_no_en"
+        },
+        {
+          "file": "trad-a9-common.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a9-common.ts",
+          "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-a9-common.ts",
           "type": "no_consignes"
         }
       ]
     },
     "geometry": {
       "domain": "G",
-      "tradCount": 67,
+      "tradCount": 37,
       "issues": [
-        {
-          "file": "trad-g10-1.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g10-2.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g10-3.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g10-4.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g10-5.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g10-6.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g10-7.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g10-8.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g11-1.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g11-2.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g11-3.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g11-4.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g11-5.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-g11-6.ts",
-          "type": "no_consignes"
-        },
         {
           "file": "trad-g2-1.ts",
           "type": "no_consignes"
@@ -290,70 +238,17 @@
         {
           "file": "trad-g6-7.ts",
           "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-g7-5.ts",
+          "type": "no_consignes"
         }
       ]
     },
     "statistics": {
       "domain": "S",
-      "tradCount": 14,
-      "issues": [
-        {
-          "file": "trad-s1-1.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s1-2.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s1-3.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s1-4.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s1-5.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s1-6.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s1-7.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s2-1.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s2-2.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s2-3.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s2-4.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s2-5.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s2-6.ts",
-          "type": "no_consignes"
-        },
-        {
-          "file": "trad-s2-7.ts",
-          "type": "no_consignes"
-        }
-      ]
+      "tradCount": 0,
+      "issues": []
     },
     "g6_reperer": {
       "note": "G6-1/G6-2 trad files should match math-g6-reperer-*.ts blocks (6 and 12)",
@@ -372,8 +267,8 @@
       "issues": []
     },
     "vocab": {
-      "themeCount": 42,
-      "withPivot": 42,
+      "themeCount": 43,
+      "withPivot": 43,
       "withoutPivot": 0,
       "issues": []
     }

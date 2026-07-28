@@ -223,6 +223,11 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{heading}</h2>
+      {showPivot && !isGraphVowel && (
+        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+          {lectureUi(lang, "readSyllables")}
+        </p>
+      )}
       <p className="text-sm text-[var(--color-text-secondary)]">
         {consigne}
       </p>

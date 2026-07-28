@@ -245,6 +245,11 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
     return (
       <section className="space-y-3 pb-8">
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre le son</h2>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "hearTheSound")}
+          </p>
+        )}
         <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez les images où vous entendez{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
@@ -360,6 +365,11 @@ const AudioPicker = forwardRef<SoundPickerHandle, {
     return (
       <section className="space-y-3 pb-8">
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre le son</h2>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "hearTheSound")}
+          </p>
+        )}
         <p className="text-sm text-[var(--color-text-secondary)]">
           Écoutez et touchez ceux où vous entendez{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>

@@ -92,6 +92,11 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
     return (
       <section className="space-y-5">
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer le mot</h2>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "pronounceWord")}
+          </p>
+        )}
         <p className="text-sm text-[var(--color-text-secondary)]">
           Prononcez le mot à voix haute
         </p>

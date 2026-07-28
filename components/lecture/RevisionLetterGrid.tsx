@@ -148,6 +148,11 @@ export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
     return (
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Reconnaître les lettres</h2>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "recognizeLetters")}
+          </p>
+        )}
         <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez toutes les{" "}
           <strong className="text-[var(--color-accent-lecture)]">{a}</strong>

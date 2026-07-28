@@ -180,4 +180,18 @@ export const TRAD_A6_4: SubmoduleTrad = {
       "د سلنو ترټولو لوی تخفيف د ترټولو ټيټ بيې ضمانت نه کوي. د سمې پرتلې لپاره تل وروستۍ بيه محاسبه کړئ."
     ) },
   ],
+  consignes: {
+    wordProblems: {
+      fr: "Résolvez les problèmes. Écrivez uniquement la réponse numérique.",
+      en: "Solve the problems. Write only the numerical answer.",
+      ar: "حلّ المسائل. اكتب الإجابة الرقمية فقط.",
+      fa: "مسئله‌ها را حل کنید. فقط پاسخ عددی را بنویسید.",
+      ti: "ነቶም ጸገማት ፍታሕ። ቁጽራዊ መልሲ ጥራይ ጻሕፍ።",
+      uk: "Розв'яжи задачі. Запиши лише числову відповідь.",
+      pt: "Resolve os problemas. Escreve apenas a resposta numérica.",
+      so: "Xalli su'aalaha. Qor kaliya jawaabta tiro ahaan.",
+      tr: "Problemleri çöz. Yalnızca sayısal cevabı yaz.",
+      ps: "مسئلې حل کړه. یوازې عددي ځواب ولیکه.",
+    },
+  },
 };

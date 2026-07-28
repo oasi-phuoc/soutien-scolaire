@@ -9,6 +9,10 @@ export const TRAD_G1_2: SubmoduleTrad = {
     fa: "خواص",
     ti: "ንብረታት",
     uk: "Властивості",
+    pt: "Propriedades",
+    so: "Astaamaha",
+    tr: "Özellikler",
+    ps: "ځانګړتیاوې",
   },
   blocks: [
     // 0 — shape_explorer (non-standard interactive block)
@@ -47,14 +51,12 @@ export const TRAD_G1_2: SubmoduleTrad = {
     ],
   },
   consignes: {
-    "g1-4-e1": { fr: "Un angle de 75° est-il aigu ou obtus ?", en: "Is a 75° angle acute or obtuse?" },
-    "g1-4-e2": { fr: "Deux angles complémentaires : l'un est 35°. Quel est l'autre (en °) ?", en: "Two complementary angles: one is 35°. What is the other (in °)?" },
-    "g1-4-e4": { fr: "Un angle droit mesure combien de degrés ?", en: "How many degrees does a right angle measure?" },
-    "g1-3-e1": { fr: "Quel quadrilatère a 4 côtés égaux ET 4 angles droits ?", en: "Which quadrilateral has 4 equal sides AND 4 right angles?" },
-    "g1-3-e3": { fr: "Quel quadrilatère a exactement une paire de côtés parallèles ?", en: "Which quadrilateral has exactly one pair of parallel sides?" },
-    "g1-3-e5": { fr: "Tous les carrés sont-ils des rectangles ? (oui/non)", en: "Are all squares rectangles? (yes/no)" },
-    "g1-2-e1": { fr: "Combien d'axes de symétrie a un carré ?", en: "How many axes of symmetry does a square have?" },
-    "g1-2-e3": { fr: "Combien d'axes de symétrie a un triangle équilatéral ?", en: "How many axes of symmetry does an equilateral triangle have?" },
-    "g1-2-e5": { fr: "Combien d'axes de symétrie a un cercle ? (beaucoup/infini/zéro)", en: "How many axes of symmetry does a circle have? (many/infinite/zero)" },
+    "g1-2-e1": { fr: "Combien d'axes de symétrie a un carré ?", en: "How many axes of symmetry does a square have?", ar: "كم محور تماثل للمربع؟", fa: "مربع چند محور تقارن دارد؟", ti: "ካሬ ክንደይ ናይ ምስምሳል ሕርሚታት ኣለዎ?", uk: "Скільки осей симетрії у квадрата?", pt: "Quantos eixos de simetria tem um quadrado?", so: "Imisa dhidibka sumad ayaa leh gees-afar?", tr: "Karenin kaç simetri ekseni vardır?", ps: "مربع څو د تقارن محورونه لري؟" },
+    "g1-2-e2": { fr: "Quelle est la somme des angles intérieurs d'un triangle (en °) ?", en: "What is the sum of the interior angles of a triangle (in °)?", ar: "ما مجموع الزوايا الداخلية للمثلث (بالدرجات)؟", fa: "مجموع زوایای داخلی مثلث چند درجه است؟", ti: "ናይ ስሉስ ውሽጣዊ ኩርናዓት ድምር (ብ°) ምንታይ?", uk: "Яка сума внутрішніх кутів трикутника (у °)?", pt: "Qual é a soma dos ângulos interiores de um triângulo (em °)?", so: "Waa maxay wadarta xagalasha gudaha ee saddex xagal (°)?", tr: "Bir üçgenin iç açıları toplamı kaç derecedir (°)?", ps: "د مثلث د داخلي زاویو مجموع (په ° کې) څومره ده؟" },
+    "g1-2-e3": { fr: "Combien d'axes de symétrie a un triangle équilatéral ?", en: "How many axes of symmetry does an equilateral triangle have?", ar: "كم محور تماثل للمثلث المتساوي الأضلاع؟", fa: "مثلث متساوی‌الاضلاع چند محور تقارن دارد؟", ti: "ማዕረ ጎቦ ስሉስ ክንደይ ናይ ምስምሳል ሕርሚታት ኣለዎ?", uk: "Скільки осей симетрії у рівностороннього трикутника?", pt: "Quantos eixos de simetria tem um triângulo equilátero?", so: "Imisa dhidibka sumad ayaa leh saddex xagal siman?", tr: "Eşkenar üçgenin kaç simetri ekseni vardır?", ps: "متساوي الاضلاع مثلث څو د تقارن محورونه لري؟" },
+    "g1-2-e4": { fr: "Un losange a combien d'axes de symétrie ?", en: "How many axes of symmetry does a rhombus have?", ar: "كم محور تماثل للمعين؟", fa: "لوزی چند محور تقارن دارد؟", ti: "ሎዛንጅ ክንደይ ናይ ምስምሳል ሕርሚታት ኣለዎ?", uk: "Скільки осей симетрії у ромба?", pt: "Quantos eixos de simetria tem um losango?", so: "Imisa dhidibka sumad ayaa leh albaab?", tr: "Eşkenar dörtgenin kaç simetri ekseni vardır?", ps: "لوزی څو د تقارن محورونه لري؟" },
+    "g1-2-e5": { fr: "Combien d'axes de symétrie a un cercle ? Répondre : infini", en: "How many axes of symmetry does a circle have? Answer: infinite", ar: "كم محور تماثل للدائرة؟ أجب: لا نهائي", fa: "دایره چند محور تقارن دارد؟ پاسخ: بی‌نهایت", ti: "ዓውዲ ክንደይ ናይ ምስምሳል ሕርሚታት ኣለዎ? መልሲ፦ ዘይውዳእ", uk: "Скільки осей симетрії у кола? Відповідь: нескінченно", pt: "Quantos eixos de simetria tem um círculo? Resposta: infinito", so: "Imisa dhidibka sumad ayaa leh goobo? Jawaab: aan dhammaanayn", tr: "Bir çemberin kaç simetri ekseni vardır? Cevap: sonsuz", ps: "دایره څو د تقارن محورونه لري؟ ځواب: لامحدود" },
+    "g1-2-e6": { fr: "Quelle est la somme des angles d'un pentagone (en °) ?", en: "What is the sum of the angles of a pentagon (in °)?", ar: "ما مجموع زوايا المخمس (بالدرجات)؟", fa: "مجموع زوایای پنج‌ضلعی چند درجه است؟", ti: "ናይ ሓሙሽተ ጎቦ ኩርናዓት ድምር (ብ°) ምንታይ?", uk: "Яка сума кутів п'ятикутника (у °)?", pt: "Qual é a soma dos ângulos de um pentágono (em °)?", so: "Waa maxay wadarta xagalasha shan-gees (°)?", tr: "Bir beşgenin açıları toplamı kaç derecedir (°)?", ps: "د پنځه څنډې د زاویو مجموع (په ° کې) څومره ده؟" },
+    "g1-2-e7": { fr: "Un rectangle a combien d'axes de symétrie ?", en: "How many axes of symmetry does a rectangle have?", ar: "كم محور تماثل للمستطيل؟", fa: "مستطیل چند محور تقارن دارد؟", ti: "ረክታንጎ ክንደይ ናይ ምስምሳል ሕርሚታት ኣለዎ?", uk: "Скільки осей симетрії у прямокутника?", pt: "Quantos eixos de simetria tem um retângulo?", so: "Imisa dhidibka sumad ayaa leh leydi?", tr: "Dikdörtgenin kaç simetri ekseni vardır?", ps: "مستطیل څو د تقارن محورونه لري؟" },
   },
 };

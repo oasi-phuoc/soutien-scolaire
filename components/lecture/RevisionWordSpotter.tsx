@@ -123,6 +123,11 @@ export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
     return (
       <section className="space-y-3">
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "spotInWords")}
+          </p>
+        )}
         <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez les lettres{" "}
           <strong className="text-[var(--color-accent-lecture)]">{a}</strong>

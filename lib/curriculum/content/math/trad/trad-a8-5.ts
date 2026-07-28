@@ -110,4 +110,11 @@ export const TRAD_A8_5: SubmoduleTrad = {
       ["قوسونه ( ): 3 × 4 = 12  →  {[2 + 12] − 5} × 2", "چوکاتونه [ ]: 2 + 12 = 14  →  {14 − 5} × 2", "اکولادونه { }: 14 − 5 = 9  →  9 × 2", "ضرب: 9 × 2 = **18**"]
     ) },
   ],
+  consignes: {
+    "Calculez la puissance de 10.": { fr: "Calculez la puissance de 10.", en: "Calculate the power of 10.", ar: "احسب قوة العدد 10.", fa: "توان ۱۰ را حساب کنید.", ti: "ናይ 10 ሓይሊ ኣስብ።", uk: "Обчисліть степінь числа 10.", pt: "Calcule a potência de 10.", so: "Xisaabi awoodda 10.", tr: "10'un üssünü hesaplayın.", ps: "د ۱۰ توان محاسبه کړئ." },
+    "Écrivez le nombre comme puissance de 10.": { fr: "Écrivez le nombre comme puissance de 10.", en: "Write the number as a power of 10.", ar: "اكتب العدد كقوة للعدد 10.", fa: "عدد را به صورت توان ۱۰ بنویسید.", ti: "ነቲ ቁጽሪ ከም ሓይሊ ናይ 10 ጽሓፍ።", uk: "Запишіть число як степінь 10.", pt: "Escreva o número como potência de 10.", so: "Qor lambarka sida awoodda 10.", tr: "Sayıyı 10'un üssü olarak yazın.", ps: "شمیره د ۱۰ د توان په توګه ولیکئ." },
+    "Complétez l'exposant.": { fr: "Complétez l'exposant.", en: "Complete the exponent.", ar: "أكمل الأس.", fa: "نما را کامل کنید.", ti: "ኤክስፖናንት ምላእ።", uk: "Доповніть показник.", pt: "Complete o expoente.", so: "Ku buuxi jibbaarka.", tr: "Üssü tamamlayın.", ps: "توان بشپړ کړئ." },
+    "Calculez.": { fr: "Calculez.", en: "Calculate.", ar: "احسب.", fa: "حساب کنید.", ti: "ኣስብ።", uk: "Обчисліть.", pt: "Calcule.", so: "Xisaabi.", tr: "Hesaplayın.", ps: "محاسبه کړئ." },
+    "Écrivez en notation scientifique.": { fr: "Écrivez en notation scientifique.", en: "Write in scientific notation.", ar: "اكتب بالترميز العلمي.", fa: "به نماد علمی بنویسید.", ti: "ብሳይንሳዊ ኖቴሽን ጽሓፍ።", uk: "Запишіть у науковому записі.", pt: "Escreva em notação científica.", so: "Ku qor qaabka sayniska.", tr: "Bilimsel gösterimle yazın.", ps: "په علمي نښه کې ولیکئ." },
+  },
 };
