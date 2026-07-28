@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
-  getImpressionCatalog,
-  IMPRESSION_SUBJECTS,
-  type ImpressionDocument,
-  type ImpressionSubject,
-} from "@/lib/print/document-catalog";
+  listPrintableLessons,
+  type PrintCatalogEntry,
+  type PrintDomain,
+} from "@/lib/print/catalog";
+import { buildPrintBundle } from "@/components/print/buildPrintBundle";
 import {
   PaginatedPreview,
   PrintDocumentFooter,
@@ -17,10 +17,29 @@ import {
 import { AppSelect } from "@/components/ui/AppSelect";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-import { buildDocumentPrintPayload } from "@/components/impressions/buildDocumentPrintPayload";
+import type { PlacementLevel } from "@/lib/placement/types";
 
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
 const CLASS_NUMBERS = Array.from({ length: 20 }, (_, index) => String(index + 1).padStart(2, "0"));
+
+const DOMAINS: { id: PrintDomain; label: string }[] = [
+  { id: "math", label: "Mathématiques" },
+  { id: "francais", label: "Français" },
+  { id: "placement", label: "Placement" },
+];
+
+function preferredGroups(domain: PrintDomain, groups: string[]): string[] {
+  const preferred =
+    domain === "francais"
+      ? ["Vocabulaire", "Conjugaison", "Grammaire", "Communication"]
+      : domain === "placement"
+        ? ["Mathématiques", "Français"]
+        : domain === "math"
+          ? ["Algèbre", "Géométrie"]
+          : groups;
+  const ordered = preferred.filter((g) => groups.includes(g));
+  return ordered.length > 0 ? ordered : groups;
+}
 
 function formatPrintDate(date = new Date()): string {
   return new Intl.DateTimeFormat("fr-CH", {
@@ -28,6 +47,10 @@ function formatPrintDate(date = new Date()): string {
     month: "2-digit",
     year: "numeric",
   }).format(date);
+}
+
+function freshSeed() {
+  return Date.now() ^ Math.floor(Math.random() * 1_000_000_000);
 }
 
 function CheckBox({
@@ -100,39 +123,35 @@ function Counter({
   );
 }
 
-function Pill({
-  active,
-  label,
-  onClick,
+function SectionCard({
+  title,
   accent,
+  children,
 }: {
-  active: boolean;
-  label: string;
-  onClick: () => void;
+  title: string;
   accent: string;
+  children: ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-      style={
-        active
-          ? { background: accent, color: "white" }
-          : { background: "var(--color-bg-secondary)", color: "var(--color-text-secondary)" }
-      }
-      aria-pressed={active}
-    >
-      {label}
-    </button>
+    <section className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      <h2 className="mb-3 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
+        {title}
+      </h2>
+      {children}
+    </section>
   );
 }
 
+function FieldLabel({ children }: { children: ReactNode }) {
+  return <p className="mb-1.5 text-[11px] font-semibold text-[var(--color-text-secondary)]">{children}</p>;
+}
+
 export function ImpressionsClient() {
-  const catalog = useMemo(() => getImpressionCatalog(), []);
-  const [subject, setSubject] = useState<ImpressionSubject>("maths");
-  const [group, setGroup] = useState<string>("");
-  const [docId, setDocId] = useState<string>("");
+  const catalog = useMemo(() => listPrintableLessons(), []);
+  const [domain, setDomain] = useState<PrintDomain>("math");
+  const [group, setGroup] = useState("");
+  const [moduleId, setModuleId] = useState("");
+  const [docId, setDocId] = useState("");
   const [evalMode, setEvalMode] = useState(false);
   const [theory, setTheory] = useState(false);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
@@ -140,65 +159,117 @@ export function ImpressionsClient() {
   const [title, setTitle] = useState("");
   const [selection, setSelection] = useState<ExercisePrintSelection[]>([]);
   const [printedBy, setPrintedBy] = useState("");
+  const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
+  const [printSeed, setPrintSeed] = useState(() => freshSeed());
+  const [bundleError, setBundleError] = useState<string | null>(null);
   const previewPagesRef = useRef<HTMLDivElement>(null);
 
-  const subjectDocs = useMemo(
-    () => catalog.filter((d) => d.subject === subject),
-    [catalog, subject],
+  const domainEntries = useMemo(
+    () => catalog.filter((e) => e.domain === domain),
+    [catalog, domain],
   );
 
   const groups = useMemo(() => {
-    const map = new Map<string, string>();
-    for (const d of subjectDocs) map.set(d.group, d.groupLabel);
-    return [...map.entries()].map(([id, label]) => ({ id, label }));
-  }, [subjectDocs]);
+    const set = new Set(domainEntries.map((e) => e.group));
+    return preferredGroups(domain, Array.from(set));
+  }, [domain, domainEntries]);
 
-  const groupDocs = useMemo(() => {
-    const g = group || groups[0]?.id;
-    return subjectDocs.filter((d) => d.group === g);
-  }, [subjectDocs, group, groups]);
+  const activeGroup = group && groups.includes(group) ? group : groups[0] ?? "";
 
-  const selectedDoc: ImpressionDocument | undefined = useMemo(() => {
-    return groupDocs.find((d) => d.id === docId) ?? groupDocs[0];
-  }, [groupDocs, docId]);
-
-  const payload = useMemo(
-    () => (selectedDoc ? buildDocumentPrintPayload(selectedDoc) : null),
-    [selectedDoc],
+  const groupEntries = useMemo(
+    () => domainEntries.filter((e) => e.group === activeGroup),
+    [domainEntries, activeGroup],
   );
 
-  // Reset group/doc when subject changes
-  useEffect(() => {
-    const nextGroups = new Map<string, string>();
-    for (const d of catalog.filter((x) => x.subject === subject)) {
-      nextGroups.set(d.group, d.groupLabel);
+  const modules = useMemo(() => {
+    const map = new Map<string, { id: string; label: string; lessons: PrintCatalogEntry[] }>();
+    for (const entry of groupEntries) {
+      const existing = map.get(entry.moduleId);
+      if (existing) existing.lessons.push(entry);
+      else {
+        map.set(entry.moduleId, {
+          id: entry.moduleId,
+          label: `${entry.moduleCode} — ${entry.moduleTitle}`,
+          lessons: [entry],
+        });
+      }
     }
-    const firstGroup = [...nextGroups.keys()][0] ?? "";
-    setGroup(firstGroup);
-    const firstDoc = catalog.find((d) => d.subject === subject && d.group === firstGroup);
-    setDocId(firstDoc?.id ?? "");
-  }, [subject, catalog]);
+    return Array.from(map.values()).sort((a, b) =>
+      a.label.localeCompare(b.label, "fr", { numeric: true }),
+    );
+  }, [groupEntries]);
 
-  // Keep doc in sync when group changes
-  useEffect(() => {
-    if (!group) return;
-    const docs = catalog.filter((d) => d.subject === subject && d.group === group);
-    if (!docs.some((d) => d.id === docId)) {
-      setDocId(docs[0]?.id ?? "");
+  const flatPlacement = domain === "placement";
+  const activeModule = flatPlacement
+    ? null
+    : modules.find((m) => m.id === moduleId) ?? modules[0] ?? null;
+
+  const documentOptions = useMemo(() => {
+    if (flatPlacement) return groupEntries;
+    return activeModule?.lessons ?? [];
+  }, [flatPlacement, groupEntries, activeModule]);
+
+  const selectedEntry =
+    documentOptions.find((d) => d.id === docId) ?? documentOptions[0] ?? null;
+
+  const bundle = useMemo(() => {
+    if (!selectedEntry) return null;
+    try {
+      return buildPrintBundle(selectedEntry.id, { frenchLevel, seed: printSeed });
+    } catch (err) {
+      console.error("[impressions] buildPrintBundle failed", selectedEntry.id, err);
+      return null;
     }
-  }, [group, subject, catalog, docId]);
+  }, [selectedEntry, frenchLevel, printSeed]);
 
-  // Reset selection when document payload changes
   useEffect(() => {
-    if (!payload) {
-      setSelection([]);
-      setTitle("");
+    if (!selectedEntry) {
+      setBundleError(null);
       return;
     }
-    setTitle(payload.title.replace(/^v\d+(\.\d+)*\s+/i, ""));
-    setTheory(Boolean(payload.theoryPreview));
+    if (!bundle) setBundleError("Impossible de charger ce document.");
+    else setBundleError(null);
+  }, [selectedEntry, bundle]);
+
+  // Sync cascading selects without fighting user input
+  useEffect(() => {
+    if (!groups.includes(group)) {
+      setGroup(groups[0] ?? "");
+    }
+  }, [groups, group]);
+
+  useEffect(() => {
+    if (flatPlacement) {
+      if (!groupEntries.some((e) => e.id === docId)) {
+        setDocId(groupEntries[0]?.id ?? "");
+      }
+      return;
+    }
+    if (!modules.some((m) => m.id === moduleId)) {
+      setModuleId(modules[0]?.id ?? "");
+      return;
+    }
+    const lessons = modules.find((m) => m.id === moduleId)?.lessons ?? [];
+    if (!lessons.some((e) => e.id === docId)) {
+      setDocId(lessons[0]?.id ?? "");
+    }
+  }, [flatPlacement, groupEntries, modules, moduleId, docId]);
+
+  useEffect(() => {
+    if (!bundle) {
+      setSelection([]);
+      setTitle("");
+      setTheory(false);
+      return;
+    }
+    const nextEval = Boolean(bundle.defaultEvalMode);
+    setEvalMode(nextEval);
+    setTitle(
+      nextEval ? "Évaluation" : bundle.lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""),
+    );
+    setTheory(Boolean(bundle.theoryPreview || bundle.announcementPreview));
     setSelection(
-      payload.exercises.map((ex) => ({
+      bundle.exercises.map((ex) => ({
         id: ex.id,
         included: true,
         occurrences: 1,
@@ -207,11 +278,12 @@ export function ImpressionsClient() {
         points: ex.defaultPoints ?? 1,
       })),
     );
-  }, [payload]);
+  }, [bundle]);
 
   useEffect(() => {
-    setTitle(evalMode ? "Évaluation" : (payload?.title ?? "").replace(/^v\d+(\.\d+)*\s+/i, ""));
-  }, [evalMode, payload?.title]);
+    if (!bundle) return;
+    setTitle(evalMode ? "Évaluation" : bundle.lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
+  }, [evalMode, bundle]);
 
   useEffect(() => {
     let cancelled = false;
@@ -241,25 +313,63 @@ export function ImpressionsClient() {
     };
   }, []);
 
-  const accent = selectedDoc?.accentColor ?? "var(--color-theme)";
-  const course = selectedDoc?.course ?? payload?.course ?? "Mathématiques";
+  function changeDomain(next: PrintDomain) {
+    setDomain(next);
+    setGroup("");
+    setModuleId("");
+    setDocId("");
+    setFrenchLevel("base");
+    setPrintSeed(freshSeed());
+  }
+
+  function changeGroup(next: string) {
+    setGroup(next);
+    setModuleId("");
+    setDocId("");
+    setPrintSeed(freshSeed());
+  }
+
+  function changeModule(next: string) {
+    setModuleId(next);
+    setDocId("");
+    setPrintSeed(freshSeed());
+  }
+
+  function changeDocument(next: string) {
+    setDocId(next);
+    setFrenchLevel("base");
+    setPrintSeed(freshSeed());
+  }
+
+  const accent = bundle?.accentColor ?? "var(--color-theme)";
+  const course = bundle?.course ?? "Mathématiques";
   const printDate = formatPrintDate();
   const header: PrintHeaderConfig = { classLevel, classNumber, course, title };
 
+  const hasAnnouncement = Boolean(bundle?.announcementPreview);
+  const theoryNode: ReactNode | null =
+    theory && (bundle?.announcementPreview || bundle?.theoryPreview)
+      ? (
+          <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]">
+            {bundle?.announcementPreview ?? bundle?.theoryPreview}
+          </div>
+        )
+      : null;
+
   const hasPrintableContent =
-    theory || selection.some((item) => item.included && item.occurrences > 0);
+    Boolean(theoryNode) || selection.some((item) => item.included && item.occurrences > 0);
   const totalPoints = selection
     .filter((s) => s.included && s.occurrences > 0)
     .reduce((sum, s) => sum + s.points * s.occurrences, 0);
 
   const previewExercises = selection.flatMap((item) => {
     if (!item.included || item.occurrences < 1) return [];
-    const exercise = payload?.exercises.find((candidate) => candidate.id === item.id);
+    const exercise = bundle?.exercises.find((candidate) => candidate.id === item.id);
     return Array.from({ length: item.occurrences }, (_, occurrence) => ({
       key: `${item.id}-${occurrence}`,
       exercise,
       selection: item,
-      occurrence,
+      forceNewPage: hasAnnouncement && occurrence === 0 && item.id === selection.find((s) => s.included)?.id,
     }));
   });
 
@@ -285,14 +395,6 @@ export function ImpressionsClient() {
     openPrintPopup(html, { title: title || "Feuille d'exercice", width: 1000, height: 800 });
   };
 
-  const theoryNode: ReactNode | null = theory ? (
-    <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em] [&_.text-2xl]:!text-[1.3em] [&_.text-xl]:!text-[1.15em] [&_.text-lg]:!text-[1.05em] [&_.text-base]:!text-[1em] [&_.text-sm]:!text-[0.85em] [&_.text-xs]:!text-[0.7em]">
-      {payload?.theoryPreview ?? (
-        <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
-      )}
-    </div>
-  ) : null;
-
   return (
     <div className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]">
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border-default)] px-4 py-3">
@@ -307,7 +409,7 @@ export function ImpressionsClient() {
         <button
           type="button"
           onClick={handlePrint}
-          disabled={!hasPrintableContent || !payload}
+          disabled={!hasPrintableContent || !bundle}
           className="shrink-0 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition-opacity disabled:opacity-40"
           style={{ background: accent }}
         >
@@ -316,208 +418,224 @@ export function ImpressionsClient() {
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        {/* Filtres — panneau gauche */}
-        <aside className="max-h-[42%] shrink-0 overflow-y-auto border-b border-[var(--color-border-default)] p-4 lg:max-h-none lg:w-[22rem] lg:border-b-0 lg:border-r">
-          <section className="mb-5">
-            <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
-              Matière
-            </h2>
-            <div className="flex flex-wrap gap-1.5">
-              {IMPRESSION_SUBJECTS.map((s) => (
-                <Pill
-                  key={s.id}
-                  label={s.label}
-                  active={subject === s.id}
-                  onClick={() => setSubject(s.id)}
-                  accent={accent}
+        <aside className="max-h-[42%] shrink-0 space-y-4 overflow-y-auto border-b border-[var(--color-border-default)] p-4 lg:max-h-none lg:w-[22rem] lg:border-b-0 lg:border-r">
+          <SectionCard title="Document" accent={accent}>
+            <div className="space-y-3">
+              <div>
+                <FieldLabel>Matière</FieldLabel>
+                <AppSelect
+                  value={domain}
+                  onChange={(v) => changeDomain(v as PrintDomain)}
+                  options={DOMAINS.map((d) => ({ value: d.id, label: d.label }))}
+                  className="w-full"
                 />
-              ))}
-            </div>
-          </section>
-
-          <section className="mb-5">
-            <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
-              Module
-            </h2>
-            <div className="flex flex-wrap gap-1.5">
-              {groups.map((g) => (
-                <Pill
-                  key={g.id}
-                  label={g.label}
-                  active={(group || groups[0]?.id) === g.id}
-                  onClick={() => setGroup(g.id)}
-                  accent={accent}
-                />
-              ))}
-            </div>
-          </section>
-
-          <section className="mb-5">
-            <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
-              Document
-            </h2>
-            <AppSelect
-              value={selectedDoc?.id ?? ""}
-              onChange={setDocId}
-              options={groupDocs.map((d) => ({
-                value: d.id,
-                label: `${d.code} — ${d.title}`,
-              }))}
-              className="w-full"
-            />
-          </section>
-
-          <section className="mb-5">
-            <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
-              Mode
-            </h2>
-            <div className="grid grid-cols-2 rounded-xl bg-[var(--color-bg-secondary)] p-1">
-              {[
-                { label: "Exercice", value: false },
-                { label: "Évaluation", value: true },
-              ].map((option) => (
-                <button
-                  key={option.label}
-                  type="button"
-                  onClick={() => setEvalMode(option.value)}
-                  className="min-h-10 rounded-lg px-3 text-sm font-semibold transition-colors"
-                  style={
-                    evalMode === option.value
-                      ? { background: accent, color: "white" }
-                      : { color: "var(--color-text-secondary)" }
-                  }
-                  aria-pressed={evalMode === option.value}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </section>
-
-          {payload?.theoryPreview ? (
-            <section className="mb-5">
-              <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
-                Théorie
-              </h2>
-              <div className="flex items-center gap-3 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5">
-                <CheckBox checked={theory} onChange={setTheory} accent={accent} />
-                <span className="text-sm text-[var(--color-text-primary)]">Inclure la théorie</span>
               </div>
-            </section>
-          ) : null}
+              <div>
+                <FieldLabel>Catégorie</FieldLabel>
+                <AppSelect
+                  value={activeGroup}
+                  onChange={changeGroup}
+                  options={groups.map((g) => ({ value: g, label: g }))}
+                  className="w-full"
+                />
+              </div>
+              {!flatPlacement && (
+                <div>
+                  <FieldLabel>Module</FieldLabel>
+                  <AppSelect
+                    value={activeModule?.id ?? ""}
+                    onChange={changeModule}
+                    options={modules.map((m) => ({ value: m.id, label: m.label }))}
+                    className="w-full"
+                  />
+                </div>
+              )}
+              <div>
+                <FieldLabel>Leçon</FieldLabel>
+                <AppSelect
+                  value={selectedEntry?.id ?? ""}
+                  onChange={changeDocument}
+                  options={documentOptions.map((d) => ({
+                    value: d.id,
+                    label: `${d.code} — ${d.title}`,
+                  }))}
+                  className="w-full"
+                />
+              </div>
+            </div>
+          </SectionCard>
 
-          <section className="mb-5">
-            <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
-              Exercices
-            </h2>
-            <div className="space-y-2">
-              {(payload?.exercises ?? []).map((ex) => {
-                const sel = selection.find((s) => s.id === ex.id);
-                if (!sel) return null;
-                return (
-                  <div
-                    key={ex.id}
-                    className="rounded-xl border border-[var(--color-border-default)] px-3 py-2.5"
-                  >
-                    <div className="flex items-center gap-3">
-                      <CheckBox
-                        checked={sel.included}
-                        onChange={(included) =>
-                          setSelection((prev) =>
-                            prev.map((s) =>
-                              s.id === ex.id
-                                ? {
-                                    ...s,
-                                    included,
-                                    occurrences: included ? Math.max(1, s.occurrences) : 0,
-                                  }
-                                : s,
-                            ),
-                          )
-                        }
-                        accent={accent}
-                      />
-                      <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
-                        {ex.label}
-                      </span>
-                    </div>
-                    {sel.included && (
-                      <div className="mt-2 flex items-center justify-between gap-2 pl-9">
-                        <span className="text-[11px] text-[var(--color-text-secondary)]">Occurrences</span>
-                        <Counter
-                          value={sel.occurrences}
-                          accent={accent}
-                          min={1}
-                          onChange={(occurrences) =>
-                            setSelection((prev) =>
-                              prev.map((s) =>
-                                s.id === ex.id ? { ...s, occurrences, included: occurrences > 0 } : s,
-                              ),
-                            )
-                          }
-                        />
-                        {evalMode && (
-                          <>
-                            <span className="text-[11px] text-[var(--color-text-secondary)]">Pts</span>
+          <SectionCard title="Paramètres" accent={accent}>
+            <div className="space-y-4">
+              <div>
+                <FieldLabel>Mode</FieldLabel>
+                <div className="grid grid-cols-2 rounded-xl bg-[var(--color-bg-secondary)] p-1">
+                  {[
+                    { label: "Exercice", value: false },
+                    { label: "Évaluation", value: true },
+                  ].map((option) => (
+                    <button
+                      key={option.label}
+                      type="button"
+                      onClick={() => setEvalMode(option.value)}
+                      className="min-h-10 rounded-lg px-3 text-sm font-semibold transition-colors"
+                      style={
+                        evalMode === option.value
+                          ? { background: accent, color: "white" }
+                          : { color: "var(--color-text-secondary)" }
+                      }
+                      aria-pressed={evalMode === option.value}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {bundle?.frenchLevelSelectable && (
+                <div>
+                  <FieldLabel>Niveau</FieldLabel>
+                  <AppSelect
+                    value={frenchLevel}
+                    onChange={(v) => {
+                      setFrenchLevel(v as PlacementLevel);
+                      setPrintSeed(freshSeed());
+                    }}
+                    options={[
+                      { value: "base", label: "A1" },
+                      { value: "moyen", label: "A2" },
+                      { value: "avance", label: "B1" },
+                    ]}
+                    className="w-full"
+                  />
+                </div>
+              )}
+
+              {(bundle?.theoryPreview || bundle?.announcementPreview) && (
+                <div className="flex items-center gap-3 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5">
+                  <CheckBox checked={theory} onChange={setTheory} accent={accent} />
+                  <span className="text-sm text-[var(--color-text-primary)]">
+                    {hasAnnouncement ? "Inclure l'annonce / théorie" : "Inclure la théorie"}
+                  </span>
+                </div>
+              )}
+
+              <div>
+                <FieldLabel>Exercices</FieldLabel>
+                <div className="space-y-2">
+                  {(bundle?.exercises ?? []).map((ex) => {
+                    const sel = selection.find((s) => s.id === ex.id);
+                    if (!sel) return null;
+                    return (
+                      <div
+                        key={ex.id}
+                        className="rounded-xl border border-[var(--color-border-default)] px-3 py-2.5"
+                      >
+                        <div className="flex items-center gap-3">
+                          <CheckBox
+                            checked={sel.included}
+                            onChange={(included) =>
+                              setSelection((prev) =>
+                                prev.map((s) =>
+                                  s.id === ex.id
+                                    ? {
+                                        ...s,
+                                        included,
+                                        occurrences: included ? Math.max(1, s.occurrences) : 0,
+                                      }
+                                    : s,
+                                ),
+                              )
+                            }
+                            accent={accent}
+                          />
+                          <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
+                            {ex.label}
+                          </span>
+                        </div>
+                        {sel.included && (
+                          <div className="mt-2 flex items-center justify-between gap-2 pl-9">
+                            <span className="text-[11px] text-[var(--color-text-secondary)]">Occurrences</span>
                             <Counter
-                              value={sel.points}
+                              value={sel.occurrences}
                               accent={accent}
                               min={1}
-                              max={20}
-                              onChange={(points) =>
+                              onChange={(occurrences) =>
                                 setSelection((prev) =>
-                                  prev.map((s) => (s.id === ex.id ? { ...s, points } : s)),
+                                  prev.map((s) =>
+                                    s.id === ex.id
+                                      ? { ...s, occurrences, included: occurrences > 0 }
+                                      : s,
+                                  ),
                                 )
                               }
                             />
-                          </>
+                            {evalMode && (
+                              <>
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">Pts</span>
+                                <Counter
+                                  value={sel.points}
+                                  accent={accent}
+                                  min={1}
+                                  max={20}
+                                  onChange={(points) =>
+                                    setSelection((prev) =>
+                                      prev.map((s) => (s.id === ex.id ? { ...s, points } : s)),
+                                    )
+                                  }
+                                />
+                              </>
+                            )}
+                          </div>
                         )}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-              {(payload?.exercises.length ?? 0) === 0 && (
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  Aucun exercice pour ce document.
-                </p>
-              )}
-            </div>
-          </section>
-
-          <section className="mb-2">
-            <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide" style={{ color: accent }}>
-              En-tête
-            </h2>
-            <div className="space-y-3 rounded-xl border border-[var(--color-border-default)] p-3">
-              <div className="grid grid-cols-2 gap-2">
-                <AppSelect
-                  value={classLevel}
-                  onChange={(v) => setClassLevel(v as PrintHeaderConfig["classLevel"])}
-                  options={CLASS_LEVELS.map((level) => ({ value: level, label: level }))}
-                  className="w-full"
-                />
-                <AppSelect
-                  value={classNumber}
-                  onChange={setClassNumber}
-                  options={CLASS_NUMBERS.map((number) => ({ value: number, label: number }))}
-                  className="w-full"
-                />
+                    );
+                  })}
+                  {(bundle?.exercises.length ?? 0) === 0 && (
+                    <p className="text-sm text-[var(--color-text-secondary)]">
+                      {bundleError ?? "Aucun exercice pour ce document."}
+                    </p>
+                  )}
+                </div>
               </div>
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Titre…"
-                className="min-h-10 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
-              />
+
+              <div>
+                <FieldLabel>En-tête</FieldLabel>
+                <div className="space-y-3 rounded-xl border border-[var(--color-border-default)] p-3">
+                  <div className="grid grid-cols-2 gap-2">
+                    <AppSelect
+                      value={classLevel}
+                      onChange={(v) => setClassLevel(v as PrintHeaderConfig["classLevel"])}
+                      options={CLASS_LEVELS.map((level) => ({ value: level, label: level }))}
+                      className="w-full"
+                    />
+                    <AppSelect
+                      value={classNumber}
+                      onChange={setClassNumber}
+                      options={CLASS_NUMBERS.map((number) => ({ value: number, label: number }))}
+                      className="w-full"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Titre…"
+                    className="min-h-10 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
+                  />
+                </div>
+              </div>
             </div>
-          </section>
+          </SectionCard>
         </aside>
 
-        {/* Aperçu A4 */}
         <section className="min-h-0 flex-1 overflow-y-auto bg-[color-mix(in_oklch,var(--color-bg-secondary)_70%,white)] px-3 py-4 sm:px-6">
-          {!payload ? (
+          {bundleError && (
+            <p className="mx-auto mb-4 max-w-md rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm text-amber-700">
+              {bundleError}
+            </p>
+          )}
+          {!bundle ? (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
               Sélectionnez un document à imprimer.
             </p>
@@ -536,6 +654,7 @@ export function ImpressionsClient() {
               theoryNode={theoryNode}
               exerciseNodes={previewExercises.map((item, index) => ({
                 key: item.key,
+                forceNewPage: item.forceNewPage && index === 0,
                 node: (
                   <div className="print-exercise">
                     <div
@@ -557,11 +676,10 @@ export function ImpressionsClient() {
               }))}
             />
           )}
-          {/* Footer export kept for type completeness in print clone path */}
           <span className="hidden">
             <PrintDocumentFooter date={printDate} printedBy={printedBy} preview page={1} totalPages={1} />
           </span>
-          {!hasPrintableContent && payload && (
+          {!hasPrintableContent && bundle && (
             <p className="mx-auto mt-4 max-w-md rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm text-amber-700">
               Sélectionnez la théorie ou au moins un exercice avant d&apos;imprimer.
             </p>
