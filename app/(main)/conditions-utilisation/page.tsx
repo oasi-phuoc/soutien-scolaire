@@ -91,8 +91,10 @@ export default function ConditionsUtilisationPage() {
 
       </div>
 
-      <p className="pt-6 text-center text-xs text-[var(--color-text-secondary)]">
-        LearnUp — Synecom et Botza
+      <p className="pt-6 text-center text-xs leading-snug text-[var(--color-text-secondary)]">
+        LearnUp - Thanh Phuoc VAN
+        <br />
+        Centre de formation « Le Botza »
       </p>
     </main>
   );
