@@ -95,13 +95,27 @@ export function ContentEditorProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // Plus d'édition inline : forcer le flag local à false.
     writeEditModeEnabled(false);
-    void refresh();
+    // Différer le fetch overrides pour ne pas bloquer le premier paint.
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    const run = () => {
+      void refresh();
+    };
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(run, { timeout: 1500 });
+    } else {
+      timeoutId = setTimeout(run, 200);
+    }
     const onStorage = () => {
       setOverrides((prev) => ({ ...prev, ...readLocalOverrides() }));
     };
     window.addEventListener("soutien-content-overrides", onStorage);
     window.addEventListener("storage", onStorage);
     return () => {
+      if (idleId !== undefined && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) clearTimeout(timeoutId);
       window.removeEventListener("soutien-content-overrides", onStorage);
       window.removeEventListener("storage", onStorage);
     };

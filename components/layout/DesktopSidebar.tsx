@@ -11,9 +11,8 @@ import {
 import { getSuiviContextAction } from "@/app/actions/suivi";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
-import { getMathModule } from "@/lib/curriculum/math-data";
-import { getModuleIdForSubmodule } from "@/lib/curriculum/lessons-registry";
 import { getFrenchThemeBySlug } from "@/lib/curriculum/french-data";
+import { getMathBranchForPathSegment } from "@/lib/curriculum/math-data";
 import { LearnUpLogo } from "@/components/brand/LearnUpLogo";
 
 type NavLink = {
@@ -104,11 +103,31 @@ export function DesktopSidebar({
     ? decodeURIComponent(pathname.split("/")[3] ?? "")
     : "";
 
-  // Badges uniquement — la visibilité admin/impression est déjà fournie par le serveur.
+  // Badges : au mount + quand la page redevient visible (pas à chaque route).
   useEffect(() => {
-    getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
-    getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
-  }, [pathname]);
+    let cancelled = false;
+    const refreshBadges = () => {
+      getPendingTaskCountAction()
+        .then((n) => {
+          if (!cancelled) setPendingTasks(n);
+        })
+        .catch(() => {});
+      getExpressionUnreadCountAction()
+        .then((n) => {
+          if (!cancelled) setUnreadMessages(n);
+        })
+        .catch(() => {});
+    };
+    refreshBadges();
+    const onVis = () => {
+      if (document.visibilityState === "visible") refreshBadges();
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      cancelled = true;
+      document.removeEventListener("visibilitychange", onVis);
+    };
+  }, []);
 
   // Soft refresh des droits (changement de rôle rare) — une fois au mount, pas à chaque route.
   useEffect(() => {
@@ -188,9 +207,8 @@ export function DesktopSidebar({
     mathTabParam === "geometry" ? "geometry" : "algebra";
   if (mathsOpen && pathname !== "/mathematiques" && !mathTabParam) {
     const upper = pathname.split("/")[2]?.toUpperCase() ?? "";
-    const moduleId = getModuleIdForSubmodule(upper) ?? upper.split("-")[0] ?? upper;
-    const mod = getMathModule(moduleId);
-    if (mod?.branch === "geometry") mathsTab = "geometry";
+    const branch = getMathBranchForPathSegment(upper);
+    if (branch === "geometry") mathsTab = "geometry";
   }
 
   const lectureSubs: SubLink[] = [

@@ -1,12 +1,22 @@
-import { CommunicationHome } from "@/components/communication/CommunicationHome";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import dynamic from "next/dynamic";
+import { getNavAccess } from "@/lib/auth/nav-access";
+
+const CommunicationHome = dynamic(
+  () =>
+    import("@/components/communication/CommunicationHome").then(
+      (m) => m.CommunicationHome,
+    ),
+  {
+    loading: () => (
+      <p className="px-4 py-16 text-center text-sm text-[var(--color-text-secondary)]">
+        Chargement de la communication…
+      </p>
+    ),
+  },
+);
 
 export default async function CommunicationPage() {
-  const supabase = await createSupabaseServerClient();
-  let isAdmin = false;
-  if (supabase) {
-    const { data: myRole } = await supabase.rpc("get_my_role");
-    isAdmin = myRole === "admin" || myRole === "prof";
-  }
+  const access = await getNavAccess();
+  const isAdmin = access.role === "admin" || access.role === "prof";
   return <CommunicationHome isAdmin={isAdmin} />;
 }

@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { MathSubmoduleWorkspace } from "@/components/math/MathSubmoduleWorkspace";
+import { MathSubmoduleWorkspaceLazy } from "@/components/math/MathSubmoduleWorkspaceLazy";
 import { MathModuleComingSoon } from "@/components/math/MathModuleComingSoon";
 import {
   MATH_MODULES,
@@ -13,7 +13,7 @@ import {
   getLessonBySubmoduleId,
   getModuleIdForSubmodule,
 } from "@/lib/curriculum/lessons-registry";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getNavAccess } from "@/lib/auth/nav-access";
 import { getContentOverridesMapAction } from "@/app/actions/content-editor";
 import { mathLessonKey } from "@/lib/content-editor/keys";
 import { resolveMathModules } from "@/lib/content-editor/catalog";
@@ -25,12 +25,8 @@ export default async function MathModulePage({ params, searchParams }: Props) {
   const { moduleId } = await params;
   const { eval: evalParam } = await searchParams;
 
-  const supabase = await createSupabaseServerClient();
-  let isAdmin = false;
-  if (supabase) {
-    const { data: myRole } = await supabase.rpc("get_my_role");
-    isAdmin = myRole === "admin" || myRole === "prof";
-  }
+  const access = await getNavAccess();
+  const isAdmin = access.role === "admin" || access.role === "prof";
   const upper = moduleId.toUpperCase();
   const { map } = await getContentOverridesMapAction();
   const catalogModules = resolveMathModules(MATH_MODULES, map);
@@ -111,7 +107,7 @@ export default async function MathModulePage({ params, searchParams }: Props) {
           </h1>
         </div>
       </header>
-      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId} startAtEval={evalParam === "1"} />
+      <MathSubmoduleWorkspaceLazy submoduleId={upper} moduleId={parentModuleId} startAtEval={evalParam === "1"} />
     </main>
   );
 }

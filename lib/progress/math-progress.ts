@@ -4,6 +4,7 @@ import {
   MATH_MODULES,
   prerequisitesMet as _prerequisitesMet,
   getMathModule,
+  getMathSubmoduleRef,
 } from "@/lib/curriculum/math-data";
 import type {
   MathModuleProgress,
@@ -17,8 +18,6 @@ import {
   percentToSwissGrade,
 } from "@/lib/scoring";
 import { appendAttempt } from "@/lib/progress/attempt-history";
-import { lessonKey } from "@/lib/curriculum/lesson-routes";
-import { getLessonBySubmoduleId, getModuleIdForSubmodule } from "@/lib/curriculum/lessons-registry";
 
 export const MATH_PROGRESS_KEY = "soutien-learning-progress-v1";
 
@@ -368,14 +367,13 @@ export function completeSubmodule(
   }
 
   if (score !== undefined && scoreMax !== undefined && grade !== undefined && !preventDowngrade) {
-    const lesson = getLessonBySubmoduleId(submoduleId);
-    const modId = getModuleIdForSubmodule(submoduleId);
-    if (lesson && modId) {
+    const ref = getMathSubmoduleRef(submoduleId);
+    if (ref) {
       next = appendAttempt(next, {
         subject: "maths",
-        moduleId: modId,
-        lessonId: lesson.submoduleCode,
-        lessonKey: lessonKey("maths", modId, lesson.submoduleCode),
+        moduleId: ref.moduleId,
+        lessonId: ref.code,
+        lessonKey: `maths:${ref.moduleId}:${ref.code}`,
         score,
         maxScore: scoreMax,
         grade,

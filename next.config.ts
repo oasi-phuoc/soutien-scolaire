@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Réduit la taille des chunks partagés (imports lucide non utilisés).
+    optimizePackageImports: ["lucide-react"],
+  },
   async headers() {
     return [
       {
@@ -17,6 +21,16 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=300",
+          },
+        ],
+      },
+      // Assets Next / médias curriculum : cache navigateur plus long
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

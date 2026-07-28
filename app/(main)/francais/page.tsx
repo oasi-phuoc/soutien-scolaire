@@ -1,14 +1,21 @@
 import { Suspense } from "react";
-import { FrancaisClient } from "@/components/FrancaisClient";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import dynamic from "next/dynamic";
+import { getNavAccess } from "@/lib/auth/nav-access";
+
+const FrancaisClient = dynamic(
+  () => import("@/components/FrancaisClient").then((m) => m.FrancaisClient),
+  {
+    loading: () => (
+      <p className="px-4 py-16 text-center text-sm text-[var(--color-text-secondary)]">
+        Chargement du français…
+      </p>
+    ),
+  },
+);
 
 export default async function FrancaisPage() {
-  const supabase = await createSupabaseServerClient();
-  let isAdmin = false;
-  if (supabase) {
-    const { data: myRole } = await supabase.rpc("get_my_role");
-    isAdmin = myRole === "admin" || myRole === "prof";
-  }
+  const access = await getNavAccess();
+  const isAdmin = access.role === "admin" || access.role === "prof";
   return (
     <Suspense>
       <FrancaisClient isAdmin={isAdmin} />

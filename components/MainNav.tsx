@@ -89,9 +89,29 @@ export function MainNav({
   const { actions, trigger } = useLessonActions(lessonMode);
 
   useEffect(() => {
-    getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
-    getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
-  }, [pathname]);
+    let cancelled = false;
+    const refreshBadges = () => {
+      getPendingTaskCountAction()
+        .then((n) => {
+          if (!cancelled) setPendingTasks(n);
+        })
+        .catch(() => {});
+      getExpressionUnreadCountAction()
+        .then((n) => {
+          if (!cancelled) setUnreadMessages(n);
+        })
+        .catch(() => {});
+    };
+    refreshBadges();
+    const onVis = () => {
+      if (document.visibilityState === "visible") refreshBadges();
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      cancelled = true;
+      document.removeEventListener("visibilitychange", onVis);
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;

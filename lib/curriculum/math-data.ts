@@ -290,6 +290,34 @@ export function getMathModule(id: string): MathModule | undefined {
   return MATH_MODULES.find((m) => m.id === id);
 }
 
+/** Résout un sous-module (ex. A1-1) sans charger le catalogue de leçons lourd. */
+export function getMathSubmoduleRef(
+  submoduleId: string,
+): { moduleId: string; code: string } | null {
+  for (const mod of MATH_MODULES) {
+    const sub = mod.submodules.find((s) => s.id === submoduleId);
+    if (sub) return { moduleId: mod.id, code: sub.code };
+  }
+  // Fallback : A1-1 → module A1, code A1.1
+  const m = /^([A-Z]+\d+)/i.exec(submoduleId);
+  if (!m) return null;
+  const moduleId = m[1]!.toUpperCase();
+  if (!getMathModule(moduleId)) return null;
+  return { moduleId, code: submoduleId.replace(/-/g, ".") };
+}
+
+/** Branche pour un module ou sous-module (onglet sidebar maths). */
+export function getMathBranchForPathSegment(
+  segment: string,
+): MathModule["branch"] | null {
+  const upper = segment.toUpperCase();
+  const direct = getMathModule(upper);
+  if (direct) return direct.branch;
+  const ref = getMathSubmoduleRef(upper);
+  if (!ref) return null;
+  return getMathModule(ref.moduleId)?.branch ?? null;
+}
+
 /** Module visible dans la liste mais pas encore ouvert aux élèves (G7, etc.). */
 export function isMathModuleAccessibleToStudent(mod: MathModule | undefined): boolean {
   return !!mod && !mod.comingSoon;

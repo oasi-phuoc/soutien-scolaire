@@ -1,22 +1,23 @@
 import { Suspense } from "react";
-import { MathematiquesClient } from "@/components/math/MathematiquesClient";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import dynamic from "next/dynamic";
+import { getNavAccess } from "@/lib/auth/nav-access";
+
+const MathematiquesClient = dynamic(
+  () =>
+    import("@/components/math/MathematiquesClient").then((m) => m.MathematiquesClient),
+  {
+    loading: () => (
+      <p className="px-4 py-16 text-center text-sm text-[var(--color-text-secondary)]">
+        Chargement des mathématiques…
+      </p>
+    ),
+  },
+);
 
 export default async function MathematiquesPage() {
-  const supabase = await createSupabaseServerClient();
-  let isLoggedIn = false;
-  let isAdmin = false;
-
-  if (supabase) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (user) {
-      isLoggedIn = true;
-      const { data: myRole } = await supabase.rpc("get_my_role");
-      isAdmin = myRole === "admin" || myRole === "prof";
-    }
-  }
+  const access = await getNavAccess();
+  const isLoggedIn = access.authenticated;
+  const isAdmin = access.role === "admin" || access.role === "prof";
 
   return (
     <Suspense fallback={null}>
