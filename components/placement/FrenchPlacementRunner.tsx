@@ -75,7 +75,10 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
   const initialDraft =
     !isPlacement && (rawDraft?.singleSkill || paramSkill) ? null : rawDraft;
   const [sessionId, setSessionId] = useState(() => initialDraft?.sessionId ?? createFrenchSessionId());
-  const [seed, setSeed] = useState(() => initialDraft?.seed ?? Date.now());
+  // Mode individuel : démarrage immédiat sur la compétence (pas d'écran d'intro).
+  const [seed, setSeed] = useState(() =>
+    !isPlacement && paramSkill ? Date.now() : (initialDraft?.seed ?? Date.now()),
+  );
   const [level] = useState<PlacementLevel>(() => {
     if (isPlacement) return initialDraft?.level ?? "base";
     return initialDraft?.level ?? paramLevel;
@@ -85,7 +88,8 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     return paramSkill ?? initialDraft?.singleSkill;
   });
   const [step, setStep] = useState<FrenchStep>(() => {
-    if (paramSkill || !initialDraft?.step || initialDraft.step === "recap") return "intro";
+    if (paramSkill) return paramSkill;
+    if (!initialDraft?.step || initialDraft.step === "recap") return "intro";
     return initialDraft.step;
   });
   const [ceScore, setCeScore] = useState(initialDraft?.ce ?? 0);
@@ -294,9 +298,10 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
 
   const introSubtitle = isPlacement
     ? <PlacementFrenchHelpContent mode="placement" />
-    : <PlacementFrenchHelpContent mode="training" level={level} individualSkill={Boolean(singleSkill)} />;
+    : <PlacementFrenchHelpContent mode="training" level={level} />;
 
-  if (step === "intro") {
+  // Intro réservée au test de placement et à l'entraînement niveau complet.
+  if (step === "intro" && !singleSkill) {
     return (
       <main className="app-shell space-y-6 py-8 pb-32 lg:pb-28">
         <PlacementPageHeader
