@@ -56,7 +56,12 @@ const TABS: { id: FrenchTab; label: string; short: string }[] = [
   { id: "communication", label: "Communication", short: "Comm." },
 ];
 
-const VALID_TABS: FrenchTab[] = ["vocabulaire", "conjugaison", "grammaire", "communication"];
+const TAB_TITLES: Record<Exclude<FrenchTab, "general">, string> = {
+  vocabulaire: "Vocabulaire",
+  conjugaison: "Conjugaison",
+  grammaire: "Grammaire",
+  communication: "Communication",
+};
 
 const GRAMMAR_AVAILABLE = new Set(["G1"]);
 const CONJ_AVAILABLE = new Set(["C1"]);
@@ -410,12 +415,10 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
     groups: SectionDef[],
     available: Set<string>,
   ) {
+    // Regroupe par code G*/C* (pas par champ tab) : certaines leçons de temps
+    // sont en module C tout en restant routées via grammaire.
     const allTabThemes = groups.flatMap((grp) =>
-      frenchThemes.filter(
-        (th) =>
-          (th.tab === "grammaire" || th.tab === "conjugaison") &&
-          moduleGroupId(th.code) === grp.id,
-      ),
+      frenchThemes.filter((th) => moduleGroupId(th.code) === grp.id),
     );
 
     let prevCount = 0;
@@ -425,6 +428,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
         {groups.map((grp) => {
           const themes = allTabThemes.filter((th) => moduleGroupId(th.code) === grp.id);
           if (themes.length === 0) return null;
+
 
           const isComingSoon = !available.has(grp.id) && !isAdmin;
 
@@ -483,7 +487,9 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
         </div>
         <div className="relative z-10">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">Français</p>
-          <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Compréhension et expression</h1>
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
+            {TAB_TITLES[tab === "general" ? "vocabulaire" : tab]}
+          </h1>
         </div>
       </header>
 

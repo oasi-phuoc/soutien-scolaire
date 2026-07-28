@@ -156,14 +156,12 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
  * - C1–C4 = Conjugaison (R1.5+R2, R6 passé, R7 futur, R8 autres temps)
  */
 const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
-  // G1 — Fondamentaux (ex-R1 sans R1.5)
-  "a1-conj-l00": "G1.1",
-  "a1-conj-l01": "G1.2",
-  "a1-gr-l04": "G1.3",
-  "a1-gr-l03": "G1.4",
-  "a1-gr-phrases": "G1.5",
-  "a1-gr-l02": "G1.6",
-  "a1-gr-cest-il-est": "G1.7",
+  // G1 — Fondamentaux (sans conjugaison)
+  "a1-gr-l04": "G1.1",
+  "a1-gr-l03": "G1.2",
+  "a1-gr-phrases": "G1.3",
+  "a1-gr-l02": "G1.4",
+  "a1-gr-cest-il-est": "G1.5",
 
   // G2 — Interrogation (ex-R3)
   "a1-gr-interro": "G2.1",
@@ -194,7 +192,9 @@ const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
   "a2-gr-superlatif": "G6.3",
   "a2-gr-l42": "G6.4",
 
-  // C1 — Verbes essentiels (ex-R1.5 + R2)
+  // C1 — Verbes essentiels (pronoms, être/avoir, R1.5 + R2)
+  "a1-conj-l00": "C1.01",
+  "a1-conj-l01": "C1.02",
   "a1-conj-l07": "C1.1",
   "a1-conj-l08": "C1.2",
   "a1-conj-l09": "C1.3",

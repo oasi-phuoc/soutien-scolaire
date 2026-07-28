@@ -80,18 +80,27 @@ export function resolveFrenchThemes(
     | FrenchCatalogPayload
     | undefined;
   if (!raw?.themes?.length) return base;
+
+  // Toujours reprendre code + tab du catalogue de base pour les slugs connus :
+  // un override obsolète (codes R* / tout en « grammaire ») cassait l’affichage
+  // des onglets Conjugaison (C*) et Grammaire (G*).
+  const baseBySlug = new Map(base.map((t) => [t.slug, t]));
+
   const fromOverride = raw.themes
     .filter((t) => !t.hidden)
-    .map((t) => ({
-      id: t.id,
-      slug: t.slug,
-      code: t.code,
-      title: t.title,
-      section: t.section as FrenchTheme["section"],
-      summary: t.summary,
-      markers: (t.markers ?? []) as FrenchTheme["markers"],
-      tab: t.tab as FrenchTheme["tab"],
-    }));
+    .map((t) => {
+      const live = baseBySlug.get(t.slug);
+      return {
+        id: t.id,
+        slug: t.slug,
+        code: live?.code ?? t.code,
+        title: t.title || live?.title || t.slug,
+        section: (t.section || live?.section) as FrenchTheme["section"],
+        summary: t.summary || live?.summary || "",
+        markers: (t.markers ?? live?.markers ?? []) as FrenchTheme["markers"],
+        tab: (live?.tab ?? t.tab) as FrenchTheme["tab"],
+      };
+    });
   // Conserver les thèmes du catalogue de base absents de l'override
   // (ex. V10.6 animaux ajouté après une édition du catalogue).
   const overrideSlugs = new Set(fromOverride.map((t) => t.slug));
