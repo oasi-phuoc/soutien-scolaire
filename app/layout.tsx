@@ -21,11 +21,17 @@ export const metadata: Metadata = {
     template: "%s · LearnUp",
   },
   description: "LearnUp — Apprendre · Comprendre · Progresser",
+  applicationName: "LearnUp",
+  appleWebApp: {
+    title: "LearnUp",
+    capable: true,
+    statusBarStyle: "default",
+  },
 };
 
 export const viewport: Viewport = {
   colorScheme: "light",
-  themeColor: "#ffffff",
+  themeColor: "#6fafa0",
 };
 
 export default function RootLayout({

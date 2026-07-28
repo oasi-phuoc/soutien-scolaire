@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import type { PivotCode } from "@/lib/pivot-langs";
+import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 
 const STORAGE_KEY = "soutien:pivot";
 
@@ -295,13 +296,16 @@ export default function AvantProposPage() {
               <path d="M15 18l-6-6 6-6" stroke="var(--color-theme)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <div>
-            <h1 className="text-xl font-bold text-[var(--color-text-primary)]">À propos</h1>
-            <p className="text-xs leading-snug text-[var(--color-text-secondary)]">
-              LearnUp - Thanh Phuoc VAN
-              <br />
-              Centre de formation « Le Botza »
-            </p>
+          <div className="flex min-w-0 items-start gap-2.5">
+            <LearnUpMark size={36} className="mt-0.5" />
+            <div className="min-w-0">
+              <h1 className="text-xl font-bold text-[var(--color-text-primary)]">À propos</h1>
+              <p className="text-xs leading-snug text-[var(--color-text-secondary)]">
+                LearnUp - Thanh Phuoc VAN
+                <br />
+                Centre de formation « Le Botza »
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -382,11 +386,9 @@ export default function AvantProposPage() {
         <h2 className="text-sm font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">{c.creditsTitle}</h2>
         <div className="rounded-xl border border-[var(--color-border-default)] bg-white divide-y divide-[var(--color-border-default)]">
           <div className={`flex items-center gap-4 p-4 ${isRtl ? "flex-row-reverse" : ""}`}>
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white" style={{ background: "var(--color-theme)" }}>
-              VP
-            </div>
+            <LearnUpMark size={40} />
             <div>
-              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Van Thanh Phuoc</p>
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Thanh Phuoc VAN</p>
               <p className="text-xs text-[var(--color-text-secondary)]">{c.creditsPhuoc}</p>
             </div>
           </div>

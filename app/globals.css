@@ -390,6 +390,11 @@ input[type=number] {
     z-index: 9999;
   }
 
+  .print-document-footer .print-footer-mark {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   .print-page-current::after {
     content: "Page " counter(page);
   }
