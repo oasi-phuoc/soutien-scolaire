@@ -14,6 +14,9 @@ import { LEVEL_LABELS, type LevelKey } from "@/lib/scoring";
 
 const STORAGE_KEY = "soutien:pivot";
 
+/** UI masquée : le niveau reste fixé à « base ». Remettre à true pour réafficher le sélecteur. */
+const SHOW_VALIDATION_LEVEL = false;
+
 function Card({ children }: { children: React.ReactNode }) {
   return (
     <div className="rounded-2xl border border-[var(--color-border-default)] bg-white p-5 shadow-sm">
@@ -68,6 +71,15 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
   const [syncError, setSyncError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!SHOW_VALIDATION_LEVEL) {
+      // Niveau masqué : forcer / conserver le défaut « base ».
+      setLevelState("base");
+      const prog = loadProgress();
+      if (prog.level && prog.level !== "base") {
+        saveProgress(setLevel(prog, "base"));
+      }
+      return;
+    }
     const prog = loadProgress();
     setLevelState(prog.level ?? "base");
   }, []);
@@ -293,31 +305,33 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         {pivotMsg && <p className="mt-2 text-sm text-amber-800" role="status">{pivotMsg}</p>}
       </Card>
 
-      {/* Niveau de validation */}
-      <Card>
-        <SectionTitle>Niveau de validation</SectionTitle>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-          Note minimale requise pour valider un sous-module ou module.
-        </p>
-        <div className="mt-4 flex overflow-hidden rounded-full border border-zinc-200">
-          {(["base", "moyen", "avance"] as LevelKey[]).map((lvl, i) => {
-            const checked = level === lvl;
-            const isLast = i === 2;
-            return (
-              <button
-                key={lvl}
-                type="button"
-                onClick={() => { setLevelState(lvl); saveProgress(setLevel(loadProgress(), lvl)); }}
-                className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors${isLast ? "" : " border-r border-zinc-200"} ${
-                  checked ? "bg-[var(--color-theme)] text-white" : "bg-white text-zinc-500 hover:text-zinc-700"
-                }`}
-              >
-                {LEVEL_LABELS[lvl]}
-              </button>
-            );
-          })}
-        </div>
-      </Card>
+      {/* Niveau de validation — code conservé, UI masquée (SHOW_VALIDATION_LEVEL). */}
+      {SHOW_VALIDATION_LEVEL && (
+        <Card>
+          <SectionTitle>Niveau de validation</SectionTitle>
+          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+            Note minimale requise pour valider un sous-module ou module.
+          </p>
+          <div className="mt-4 flex overflow-hidden rounded-full border border-zinc-200">
+            {(["base", "moyen", "avance"] as LevelKey[]).map((lvl, i) => {
+              const checked = level === lvl;
+              const isLast = i === 2;
+              return (
+                <button
+                  key={lvl}
+                  type="button"
+                  onClick={() => { setLevelState(lvl); saveProgress(setLevel(loadProgress(), lvl)); }}
+                  className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors${isLast ? "" : " border-r border-zinc-200"} ${
+                    checked ? "bg-[var(--color-theme)] text-white" : "bg-white text-zinc-500 hover:text-zinc-700"
+                  }`}
+                >
+                  {LEVEL_LABELS[lvl]}
+                </button>
+              );
+            })}
+          </div>
+        </Card>
+      )}
 
       {/* À propos & Conditions */}
       <Card>
