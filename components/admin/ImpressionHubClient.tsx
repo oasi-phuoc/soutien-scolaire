@@ -62,7 +62,7 @@ function BranchToggle<T extends string>({
 function preferredGroups(domain: PrintDomain, groups: string[]): string[] {
   const preferred =
     domain === "francais"
-      ? ["Vocabulaire", "Grammaire", "Expression"]
+      ? ["Vocabulaire", "Conjugaison", "Grammaire", "Communication"]
       : domain === "placement"
         ? ["Mathématiques", "Français"]
         : domain === "math"

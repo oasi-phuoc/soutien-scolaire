@@ -38,27 +38,24 @@ const VOCAB_MODULE_DEFS = [
 ];
 
 const GRAMMAR_MODULE_DEFS = [
-  { id: "R1", code: "R1", title: "Les fondamentaux" },
-  { id: "R2", code: "R2", title: "Les verbes essentiels" },
-  { id: "R3", code: "R3", title: "L'interrogation" },
-  { id: "R4", code: "R4", title: "Les adjectifs" },
-  { id: "R5", code: "R5", title: "Les pronoms" },
-  { id: "R6", code: "R6", title: "Le passé" },
-  { id: "R7", code: "R7", title: "Le futur" },
-  { id: "R8", code: "R8", title: "Les autres temps" },
-  { id: "R9", code: "R9", title: "La comparaison" },
+  { id: "G1", code: "G1", title: "Les fondamentaux" },
+  { id: "G2", code: "G2", title: "L'interrogation" },
+  { id: "G3", code: "G3", title: "Les adjectifs" },
+  { id: "G4", code: "G4", title: "Les pronoms" },
+  { id: "G5", code: "G5", title: "Les marqueurs" },
+  { id: "G6", code: "G6", title: "La comparaison" },
 ];
 
-function grammarGroupId(code: string): string {
-  if (code.startsWith("R1.")) return "R1";
-  if (code.startsWith("R2.")) return "R2";
-  if (code.startsWith("R3.")) return "R3";
-  if (code.startsWith("R4.")) return "R4";
-  if (code.startsWith("R5.")) return "R5";
-  if (code.startsWith("R6.")) return "R6";
-  if (code.startsWith("R7.")) return "R7";
-  if (code.startsWith("R8.")) return "R8";
-  return "R9";
+const CONJ_MODULE_DEFS = [
+  { id: "C1", code: "C1", title: "Les verbes essentiels" },
+  { id: "C2", code: "C2", title: "Le passé" },
+  { id: "C3", code: "C3", title: "Le futur" },
+  { id: "C4", code: "C4", title: "Les autres temps" },
+];
+
+function moduleGroupId(code: string): string {
+  const m = /^(G\d+|C\d+)\./.exec(code);
+  return m?.[1] ?? "";
 }
 
 function formatGrade(grade: number | undefined | null): string | null {
@@ -115,7 +112,7 @@ export function getRecentMathLessons(progress: StoredProgressV1 | null, limit = 
 
 export function getFrenchModuleGroups(
   progress: StoredProgressV1 | null,
-  tab: "vocabulaire" | "grammaire" | "communication",
+  tab: "vocabulaire" | "conjugaison" | "grammaire" | "communication",
 ): ModuleProgressGroup[] {
   const completed = new Set(Object.keys(progress?.frenchLessons ?? {}));
   const comm = progress?.commProgress ?? {};
@@ -155,8 +152,9 @@ export function getFrenchModuleGroups(
     }).filter((g) => g.lessons.length > 0);
   }
 
-  return GRAMMAR_MODULE_DEFS.map((def) => {
-    const lessons = FRENCH_GRAM.filter((t) => grammarGroupId(t.code) === def.id).map((t) => ({
+  const defs = tab === "conjugaison" ? CONJ_MODULE_DEFS : GRAMMAR_MODULE_DEFS;
+  return defs.map((def) => {
+    const lessons = FRENCH_GRAM.filter((t) => moduleGroupId(t.code) === def.id).map((t) => ({
       id: t.slug,
       code: t.code,
       title: t.title,

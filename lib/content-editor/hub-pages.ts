@@ -3,7 +3,7 @@ import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES, STORIES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import { getVocabTheme } from "@/lib/curriculum/vocabulary-data";
-import { getGrammarLesson } from "@/lib/curriculum/grammar-data";
+import { getGrammarLesson, getConjLesson } from "@/lib/curriculum/grammar-data";
 import {
   catalogFrenchKey,
   catalogLectureKey,
@@ -27,7 +27,9 @@ export type HubSubmenu =
   | "algebra"
   | "geometry"
   | "vocabulaire"
+  | "conjugaison"
   | "grammaire"
+  | "communication"
   | "expression"
   | "apprendre"
   | "histoires"
@@ -65,8 +67,9 @@ export const HUB_DOMAINS: {
     label: "Français",
     submenus: [
       { id: "vocabulaire", label: "Vocabulaire" },
+      { id: "conjugaison", label: "Conjugaison" },
       { id: "grammaire", label: "Grammaire" },
-      { id: "expression", label: "Expression" },
+      { id: "communication", label: "Communication" },
     ],
   },
   {
@@ -154,11 +157,11 @@ export function listHubPages(
           sentences: [],
         },
     }));
-  } else if (domain === "francais" && submenu === "grammaire") {
+  } else if (domain === "francais" && submenu === "conjugaison") {
     const themes = resolveFrenchThemes(FRENCH_THEMES, {
       ...overrides,
       [catalogFrenchKey()]: overrides[catalogFrenchKey()],
-    }).filter((t) => t.tab === "grammaire" || t.tab === "conjugaison");
+    }).filter((t) => t.code.startsWith("C"));
     pages = themes.map((t) => ({
       id: t.slug,
       code: t.code,
@@ -172,7 +175,7 @@ export function listHubPages(
           ? `/francais/conjugaison/${t.slug}`
           : `/francais/grammaire/${t.slug}`,
       loadBase: () =>
-        getGrammarLesson(t.slug) ?? {
+        (t.tab === "conjugaison" ? getConjLesson(t.slug) : getGrammarLesson(t.slug)) ?? {
           slug: t.slug,
           code: t.code,
           level: "A1" as const,
@@ -181,7 +184,34 @@ export function listHubPages(
           exercises: [],
         },
     }));
-  } else if (domain === "francais" && submenu === "expression") {
+  } else if (domain === "francais" && submenu === "grammaire") {
+    const themes = resolveFrenchThemes(FRENCH_THEMES, {
+      ...overrides,
+      [catalogFrenchKey()]: overrides[catalogFrenchKey()],
+    }).filter((t) => t.code.startsWith("G"));
+    pages = themes.map((t) => ({
+      id: t.slug,
+      code: t.code,
+      title: t.title,
+      contentKey:
+        t.tab === "conjugaison"
+          ? conjugationLessonKey(t.slug)
+          : grammarLessonKey(t.slug),
+      href:
+        t.tab === "conjugaison"
+          ? `/francais/conjugaison/${t.slug}`
+          : `/francais/grammaire/${t.slug}`,
+      loadBase: () =>
+        (t.tab === "conjugaison" ? getConjLesson(t.slug) : getGrammarLesson(t.slug)) ?? {
+          slug: t.slug,
+          code: t.code,
+          level: "A1" as const,
+          title: t.title,
+          theory: [{ type: "heading" as const, text: t.title }],
+          exercises: [],
+        },
+    }));
+  } else if (domain === "francais" && (submenu === "communication" || submenu === "expression")) {
     pages = COMM_MODULES.flatMap((m) =>
       m.submodules
         .filter((s) => s.available !== false)

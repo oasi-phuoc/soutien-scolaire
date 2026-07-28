@@ -47,7 +47,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-conj-l28", "R5.1",  "Passé récent et présent continu",               "Venir de + infinitif (ce qui vient de se passer) ; être en train de + infinitif.",       "conjugaison"),
   lesson("A1", "a1-conj-l29", "R5.2",  "Passé composé avec avoir",                      "Participes passés réguliers (-é/-i) et irréguliers (fait, dit, pris…).",                 "conjugaison"),
   lesson("A1", "a1-conj-l30", "R5.3",  "Passé composé avec être",                       "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.",           "conjugaison"),
-  lesson("A1", "a1ConjL31",   "R5.4",  "Négation au passé composé",                     "Ne…pas, jamais, plus, rien : encadrer l'auxiliaire et placer les mots négatifs.",         "conjugaison"),
+  lesson("A1", "negation-passe-compose",   "R5.4",  "Négation au passé composé",                     "Ne…pas, jamais, plus, rien : encadrer l'auxiliaire et placer les mots négatifs.",         "conjugaison"),
   lesson("A1", "a1-gr-verbes-double-auxiliaire",    "R5.5", "Les verbes à double auxiliaire",             "Sortir, rentrer, entrer, passer, monter, descendre et retourner : être sans COD, avoir avec COD.", "grammaire"),
   lesson("A1", "a1-gr-pronominaux-passe-compose",   "R5.6", "Les verbes pronominaux au passé composé",   "Auxiliaire être, accord avec le sujet réel et négation.",                              "grammaire"),
   lesson("A2", "a2-conj-l07", "R5.8",  "Les verbes réguliers à l'imparfait",            "Base de nous au présent et terminaisons -ais, -ais, -ait, -ions, -iez, -aient.",          "conjugaison"),
@@ -150,46 +150,83 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
 
 ];
 
+/**
+ * Codes pédagogiques :
+ * - G1–G6 = Grammaire (fondamentaux sans -er, interrogation, adjectifs, pronoms, marqueurs, comparaison)
+ * - C1–C4 = Conjugaison (R1.5+R2, R6 passé, R7 futur, R8 autres temps)
+ */
 const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
-  "a1-gr-interro": "R3.1",
-  "a2-gr-l07": "R3.2",
-  "a2-gr-l09": "R3.3",
-  "a1-gr-l10": "R3.4",
-  "a1-gr-l23": "R4.1",
-  "a1-gr-l18": "R4.2",
-  "a1-gr-l19": "R4.3",
-  "a1-gr-l14": "R4.4",
-  "a1-gr-l11": "R4.5",
-  "a2-gr-l19": "R5.1",
-  "a2-gr-l35": "R5.2",
-  "a2-gr-l36": "R5.3",
-  "a1-conj-l28": "R6.1",
-  "a1-conj-l29": "R6.2",
-  "a1-conj-l30": "R6.3",
-  "a1ConjL31": "R6.4",
-  "a1-gr-verbes-double-auxiliaire": "R6.5",
-  "a1-gr-pronominaux-passe-compose": "R6.6",
-  "a2-conj-l07": "R6.7",
-  "a2-gr-imparfait-irreguliers": "R6.8",
-  "a2-gr-passe-compose-ou-imparfait": "R6.9",
-  "a1-conj-l20": "R7.1",
-  "a1-gr-l22": "R7.2",
-  "a2-conj-l08": "R7.3",
-  "a2-gr-futur-irreguliers": "R7.4",
-  "a2-gr-futur-simple-ou-proche": "R7.5",
-  "a2-gr-hypothese-futur": "R7.6",
-  "a2-conj-l04": "R8.1",
-  "a2-gr-conditionnel": "R8.2",
-  "a2-conj-l05": "R8.3",
-  "a2-gr-gerondif": "R8.4",
-  "a2-gr-subjonctif": "R8.5",
-  "gr-marqueurs-temps-complet": "R9.1",
-  "a2-gr-l52": "R9.2",
-  "a1-gr-expressions-temps": "R9.3",
-  "a2-gr-l39": "R10.1",
-  "a2-gr-bon-bien-meilleur-mieux": "R10.2",
-  "a2-gr-superlatif": "R10.3",
-  "a2-gr-l42": "R10.4",
+  // G1 — Fondamentaux (ex-R1 sans R1.5)
+  "a1-conj-l00": "G1.1",
+  "a1-conj-l01": "G1.2",
+  "a1-gr-l04": "G1.3",
+  "a1-gr-l03": "G1.4",
+  "a1-gr-phrases": "G1.5",
+  "a1-gr-l02": "G1.6",
+  "a1-gr-cest-il-est": "G1.7",
+
+  // G2 — Interrogation (ex-R3)
+  "a1-gr-interro": "G2.1",
+  "a2-gr-l07": "G2.2",
+  "a2-gr-l09": "G2.3",
+  "a1-gr-l10": "G2.4",
+
+  // G3 — Adjectifs (ex-R4)
+  "a1-gr-l23": "G3.1",
+  "a1-gr-l18": "G3.2",
+  "a1-gr-l19": "G3.3",
+  "a1-gr-l14": "G3.4",
+  "a1-gr-l11": "G3.5",
+
+  // G4 — Pronoms (ex-R5)
+  "a2-gr-l19": "G4.1",
+  "a2-gr-l35": "G4.2",
+  "a2-gr-l36": "G4.3",
+
+  // G5 — Marqueurs (ex-R9)
+  "gr-marqueurs-temps-complet": "G5.1",
+  "a2-gr-l52": "G5.2",
+  "a1-gr-expressions-temps": "G5.3",
+
+  // G6 — Comparaison (ex-R10)
+  "a2-gr-l39": "G6.1",
+  "a2-gr-bon-bien-meilleur-mieux": "G6.2",
+  "a2-gr-superlatif": "G6.3",
+  "a2-gr-l42": "G6.4",
+
+  // C1 — Verbes essentiels (ex-R1.5 + R2)
+  "a1-conj-l07": "C1.1",
+  "a1-conj-l08": "C1.2",
+  "a1-conj-l09": "C1.3",
+  "a1-conj-l15": "C1.4",
+  "a2-conj-irreguliers": "C1.5",
+  "a2-conj-l02": "C1.6",
+
+  // C2 — Le passé (ex-R6)
+  "a1-conj-l28": "C2.1",
+  "a1-conj-l29": "C2.2",
+  "a1-conj-l30": "C2.3",
+  "negation-passe-compose": "C2.4",
+  "a1-gr-verbes-double-auxiliaire": "C2.5",
+  "a1-gr-pronominaux-passe-compose": "C2.6",
+  "a2-conj-l07": "C2.7",
+  "a2-gr-imparfait-irreguliers": "C2.8",
+  "a2-gr-passe-compose-ou-imparfait": "C2.9",
+
+  // C3 — Le futur (ex-R7)
+  "a1-conj-l20": "C3.1",
+  "a1-gr-l22": "C3.2",
+  "a2-conj-l08": "C3.3",
+  "a2-gr-futur-irreguliers": "C3.4",
+  "a2-gr-futur-simple-ou-proche": "C3.5",
+  "a2-gr-hypothese-futur": "C3.6",
+
+  // C4 — Les autres temps (ex-R8)
+  "a2-conj-l04": "C4.1",
+  "a2-gr-conditionnel": "C4.2",
+  "a2-conj-l05": "C4.3",
+  "a2-gr-gerondif": "C4.4",
+  "a2-gr-subjonctif": "C4.5",
 };
 
 export const FRENCH_THEMES: FrenchTheme[] = BASE_FRENCH_THEMES

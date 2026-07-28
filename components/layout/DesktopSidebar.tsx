@@ -12,6 +12,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import { getModuleIdForSubmodule } from "@/lib/curriculum/lessons-registry";
+import { getFrenchThemeBySlug } from "@/lib/curriculum/french-data";
 
 type NavLink = {
   href: string;
@@ -121,23 +122,25 @@ export function DesktopSidebar() {
   }, [pedagogicNav.showSection, inSuiviClass, pathname]);
 
   const badge = pendingTasks + unreadMessages;
-  const lectureOpen = pathname.startsWith("/lecture");
-  const frenchOpen =
-    pathname.startsWith("/francais") || pathname.startsWith("/communication");
   const mathsOpen = pathname.startsWith("/mathematiques");
   const suiviOpen = pathname.startsWith("/suivi");
   const adminOpen = pathname.startsWith("/admin");
 
-  const frenchTab =
-    searchParams.get("tab") ??
-    (pathname.startsWith("/francais/vocabulaire")
-      ? "vocabulaire"
-      : pathname.startsWith("/francais/grammaire") ||
-          pathname.startsWith("/francais/conjugaison")
-        ? "grammaire"
-        : pathname.startsWith("/communication")
-          ? "communication"
-          : "vocabulaire");
+  const frenchTab = (() => {
+    const q = searchParams.get("tab");
+    if (q === "vocabulaire" || q === "conjugaison" || q === "grammaire" || q === "communication") {
+      return q;
+    }
+    if (pathname.startsWith("/francais/vocabulaire")) return "vocabulaire";
+    if (pathname.startsWith("/communication")) return "communication";
+    if (pathname.startsWith("/francais/grammaire") || pathname.startsWith("/francais/conjugaison")) {
+      const slug = pathname.split("/")[3] ?? "";
+      const theme = getFrenchThemeBySlug(slug);
+      if (theme?.code.startsWith("C")) return "conjugaison";
+      return "grammaire";
+    }
+    return "vocabulaire";
+  })();
 
   const lectureTab =
     searchParams.get("tab") === "histoires" ||
@@ -175,13 +178,18 @@ export function DesktopSidebar() {
       active: !pathname.startsWith("/communication") && frenchTab === "vocabulaire",
     },
     {
+      href: "/francais?tab=conjugaison",
+      label: "Conjugaison",
+      active: !pathname.startsWith("/communication") && frenchTab === "conjugaison",
+    },
+    {
       href: "/francais?tab=grammaire",
       label: "Grammaire",
       active: !pathname.startsWith("/communication") && frenchTab === "grammaire",
     },
     {
       href: "/francais?tab=communication",
-      label: "Expression",
+      label: "Communication",
       active:
         frenchTab === "communication" || pathname.startsWith("/communication"),
     },
@@ -285,9 +293,9 @@ export function DesktopSidebar() {
                   )}
                 </span>
               </button>
-              {link.href === "/lecture" && lectureOpen && renderSubs(lectureSubs)}
-              {link.href === "/francais" && frenchOpen && renderSubs(frenchSubs)}
-              {link.href === "/mathematiques" && mathsOpen && renderSubs(mathsSubs)}
+              {link.href === "/lecture" && renderSubs(lectureSubs)}
+              {link.href === "/francais" && renderSubs(frenchSubs)}
+              {link.href === "/mathematiques" && renderSubs(mathsSubs)}
             </div>
           );
         })}
