@@ -21,6 +21,7 @@ export const TRAD_A10_1: SubmoduleTrad = {
   ),
   blocks: [
     // 0 — heading "Qu'est-ce qu'une équation ?"
+        // 0 — heading "Qu'est-ce qu'une équation ?"
     {
       text: S(
         "Qu'est-ce qu'une équation ?",
@@ -50,22 +51,7 @@ export const TRAD_A10_1: SubmoduleTrad = {
         "یوه **معادله** هغه برابري ده چې ناپېژاندلې ارزښت لري، ډېر وخت د **x** توري سره څرګندېږي. د معادلې حل کول د هغه x ارزښت موندل دي چې برابري رښتینې کوي.",
       ),
     },
-    // 2 — example
-    {
-      text: S(
-        "2x + 3 = 11\nLa solution est x = 4, car 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nThe solution is x = 4, because 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nالحل هو x = 4، لأن 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nجواب x = 4 است، چون 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nፍታሕ x = 4 እዩ፣ ምኽንያቱ 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nРозв'язок: x = 4, бо 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nA solução é x = 4, porque 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nXalku waa x = 4, maxaa yeelay 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nÇözüm x = 4'tür, çünkü 2 × 4 + 3 = 11.",
-        "2x + 3 = 11\nحل x = 4 دی، ځکه 2 × 4 + 3 = 11.",
-      ),
-    },
-    // 3 — highlight
+    // 2 — highlight
     {
       text: S(
         "Le principe de la balance",
@@ -80,9 +66,20 @@ export const TRAD_A10_1: SubmoduleTrad = {
         "د ترازو اصل",
       ),
     },
-    // 4 — section (balance)
+    // 3 — section balance
     {
-      label: S("", "", "", "", "", "", "", "", "", ""),
+      label: S(
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ),
       items: A(
         [
           "Les deux membres d'une équation doivent toujours rester égaux.",
@@ -136,7 +133,79 @@ export const TRAD_A10_1: SubmoduleTrad = {
         ],
       ),
     },
-    // 5 — heading "Méthode générale"
+    // 4 — plain 2x+3=11
+    {
+      text: S(
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+        "2x + 3 = 11",
+      ),
+    },
+    // 5 — section solution
+    {
+      label: S(
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ),
+      items: A(
+        [
+          "La solution est x = 4",
+          "Car 2 × 4 + 3 = 11.",
+        ],
+        [
+          "The solution is x = 4",
+          "Because 2 × 4 + 3 = 11.",
+        ],
+        [
+          "الحل هو x = 4",
+          "لأن 2 × 4 + 3 = 11.",
+        ],
+        [
+          "جواب x = 4 است",
+          "چون 2 × 4 + 3 = 11.",
+        ],
+        [
+          "ፍታሕ x = 4 እዩ",
+          "ምኽንያቱ 2 × 4 + 3 = 11.",
+        ],
+        [
+          "Розв'язок: x = 4",
+          "Бо 2 × 4 + 3 = 11.",
+        ],
+        [
+          "A solução é x = 4",
+          "Porque 2 × 4 + 3 = 11.",
+        ],
+        [
+          "Xalku waa x = 4",
+          "Maxaa yeelay 2 × 4 + 3 = 11.",
+        ],
+        [
+          "Çözüm x = 4'tür",
+          "Çünkü 2 × 4 + 3 = 11.",
+        ],
+        [
+          "حل x = 4 دی",
+          "ځکه 2 × 4 + 3 = 11.",
+        ],
+      ),
+    },
+    // 6 — heading Méthode générale
     {
       text: S(
         "Méthode générale",
@@ -151,93 +220,175 @@ export const TRAD_A10_1: SubmoduleTrad = {
         "عمومي لاره",
       ),
     },
-    // 6 — rule
+    // 7 — plain step 1
+    {
+      text: S(
+        "**1.** Développer les parenthèses s'il y en a.",
+        "**1.** Expand the brackets if there are any.",
+        "**1.** توسيع الأقواس إن وُجدت.",
+        "**1.** پرانتزها را در صورت وجود باز کنید.",
+        "**1.** ኣብ ተወሳኺ ካልእ ኣብ ተወሳኺ ኣሎ እንተኾነ ኣስፋሕ።",
+        "**1.** Розкрити дужки, якщо вони є.",
+        "**1.** Desenvolver os parênteses, se houver.",
+        "**1.** Furfur xidhiidhada haddii ay jiraan.",
+        "**1.** Parantez varsa aç.",
+        "**1.** که پرانتزونه شته وي، پراخې کړئ.",
+      ),
+    },
+    // 8 — plain step 2
+    {
+      text: S(
+        "**2.** Réduire les termes semblables.",
+        "**2.** Combine like terms.",
+        "**2.** تبسيط الحدود المتشابهة.",
+        "**2.** جمله‌های مشابه را ساده کنید.",
+        "**2.** ተመሳሳሊ ኣካላት ጽምር።",
+        "**2.** Звести подібні доданки.",
+        "**2.** Reduzir termos semelhantes.",
+        "**2.** Isku dar erayada isku midka ah.",
+        "**2.** Benzer terimleri sadeleştir.",
+        "**2.** ورته جملې ساده کړئ.",
+      ),
+    },
+    // 9 — plain step 3
+    {
+      text: S(
+        "**3.** Regrouper les termes en x d'un côté et les nombres de l'autre.",
+        "**3.** Group the x terms on one side and the numbers on the other.",
+        "**3.** جمع حدود x في طرف والأعداد في الطرف الآخر.",
+        "**3.** جمله‌های x را در یک طرف و اعداد را در طرف دیگر جمع کنید.",
+        "**3.** ኣካላት x ኣብ ሓደ ኣካል፣ ቁጽርታት ኣብ ካልእ ኣካል ጽምር።",
+        "**3.** Зібрати доданки з x з одного боку, а числа — з іншого.",
+        "**3.** Agrupar os termos em x de um lado e os números do outro.",
+        "**3.** Ku ururi x hal dhinac, tirooyinka dhinaca kale.",
+        "**3.** x terimlerini bir tarafta, sayıları diğer tarafta topla.",
+        "**3.** د x جملې په یوه خواو کې، عددونه په بله خواو کې راټول کړئ.",
+      ),
+    },
+    // 10 — plain step 4
+    {
+      text: S(
+        "**4.** Diviser par le coefficient de x pour isoler x.",
+        "**4.** Divide by the coefficient of x to isolate x.",
+        "**4.** القسمة على معامل x لعزل x.",
+        "**4.** بر ضریب x تقسیم کنید تا x تنها بماند.",
+        "**4.** ን x ንምጽራይ ብኣብነት x ክፈል።",
+        "**4.** Поділити на коефіцієнт x, щоб ізолювати x.",
+        "**4.** Dividir pelo coeficiente de x para isolar x.",
+        "**4.** U qaybi isku-dhufashada x si aad x u go'diso.",
+        "**4.** x'i yalnız bırakmak için x'in katsayısına böl.",
+        "**4.** د x منفصلولو لپاره په x ضریب ووېشئ.",
+      ),
+    },
+    // 11 — plain step 5
+    {
+      text: S(
+        "**5.** Vérifier la solution dans l'équation de départ.",
+        "**5.** Check the solution in the original equation.",
+        "**5.** التحقق من الحل في المعادلة الأصلية.",
+        "**5.** جواب را در معادله اولیه بررسی کنید.",
+        "**5.** ፍታሕ ኣብ መጀመርታ ምዕርርያት ኣረጋግጽ።",
+        "**5.** Перевірити розв'язок у початковому рівнянні.",
+        "**5.** Verificar a solução na equação inicial.",
+        "**5.** Hubi xalka isle'egta bilowga ah.",
+        "**5.** Çözümü başlangıç denkleminde kontrol et.",
+        "**5.** حل په اصلي معادله کې وګورئ.",
+      ),
+    },
+    // 12 — highlight Attention
+    {
+      text: S(
+        "Attention",
+        "Warning",
+        "انتبه",
+        "توجه",
+        "ተጠንቀቕ",
+        "Увага",
+        "Atenção",
+        "Digtoonow",
+        "Dikkat",
+        "پاملرنه",
+      ),
+    },
+    // 13 — plain signe
+    {
+      text: S(
+        "Un signe **−** placé devant une parenthèse change tous les signes à l'intérieur.",
+        "A **−** sign in front of parentheses changes all the signs inside.",
+        "علامة **−** أمام القوسين تغيّر جميع الإشارات داخله.",
+        "علامت **−** جلوی پرانتز همه علامت‌های داخل را عوض می‌کند.",
+        "ምልክት **−** ኣብ ቅድሚ ቅንፍ ኩሉ ኣብ ውሽጢ ዘሎ ምልክታት ይቕይር።",
+        "Знак **−** перед дужками змінює всі знаки всередині.",
+        "Um sinal **−** à frente de um parêntese muda todos os sinais no interior.",
+        "Calaamad **−** ka hor xidhiidhka waxay beddelaysaa dhammaan calaamadaha gudaha.",
+        "Parantez önündeki **−** işareti içindeki tüm işaretleri değiştirir.",
+        "د پرانتز مخې ته **−** نښه دننه ټولې نښې بدلوي.",
+      ),
+    },
+    // 14 — section exemple parenthèse
     {
       label: S(
-        "Résoudre dans le bon ordre",
-        "Solve in the right order",
-        "الحل بالترتيب الصحيح",
-        "حل به ترتیب درست",
-        "ብትክክለኛ ቅደም ተከተል ምፍታሕ",
-        "Розв'язувати у правильному порядку",
-        "Resolver na ordem correta",
-        "Xalli si taxane sax ah",
-        "Doğru sırayla çöz",
-        "په سمه ترتیب حل",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
       ),
       items: A(
         [
-          "**1.** Développer les parenthèses s'il y en a.",
-          "**2.** Réduire les termes semblables.",
-          "**3.** Regrouper les termes en x d'un côté et les nombres de l'autre.",
-          "**4.** Diviser par le coefficient de x pour isoler x.",
-          "**5.** Vérifier la solution dans l'équation de départ.",
+          "Par exemple, **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** Expand the brackets if there are any.",
-          "**2.** Combine like terms.",
-          "**3.** Group the x terms on one side and the numbers on the other.",
-          "**4.** Divide by the coefficient of x to isolate x.",
-          "**5.** Check the solution in the original equation.",
+          "For example, **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** توسيع الأقواس إن وُجدت.",
-          "**2.** تبسيط الحدود المتشابهة.",
-          "**3.** جمع حدود x في طرف والأعداد في الطرف الآخر.",
-          "**4.** القسمة على معامل x لعزل x.",
-          "**5.** التحقق من الحل في المعادلة الأصلية.",
+          "مثلاً، **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** پرانتزها را در صورت وجود باز کنید.",
-          "**2.** جمله‌های مشابه را ساده کنید.",
-          "**3.** جمله‌های x را در یک طرف و اعداد را در طرف دیگر جمع کنید.",
-          "**4.** بر ضریب x تقسیم کنید تا x تنها بماند.",
-          "**5.** جواب را در معادله اولیه بررسی کنید.",
+          "مثلاً، **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** ኣብ ተወሳኺ ካልእ ኣብ ተወሳኺ ኣሎ እንተኾነ ኣስፋሕ።",
-          "**2.** ተመሳሳሊ ኣካላት ጽምር።",
-          "**3.** ኣካላት x ኣብ ሓደ ኣካል፣ ቁጽርታት ኣብ ካልእ ኣካል ጽምር።",
-          "**4.** ን x ንምጽራይ ብኣብነት x ክፈል።",
-          "**5.** ፍታሕ ኣብ መጀመርታ ምዕርርያት ኣረጋግጽ።",
+          "ንኣብነት፣ **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** Розкрити дужки, якщо вони є.",
-          "**2.** Звести подібні доданки.",
-          "**3.** Зібрати доданки з x з одного боку, а числа — з іншого.",
-          "**4.** Поділити на коефіцієнт x, щоб ізолювати x.",
-          "**5.** Перевірити розв'язок у початковому рівнянні.",
+          "Наприклад, **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** Desenvolver os parênteses, se houver.",
-          "**2.** Reduzir termos semelhantes.",
-          "**3.** Agrupar os termos em x de um lado e os números do outro.",
-          "**4.** Dividir pelo coeficiente de x para isolar x.",
-          "**5.** Verificar a solução na equação inicial.",
+          "Por exemplo, **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** Furfur xidhiidhada haddii ay jiraan.",
-          "**2.** Isku dar erayada isku midka ah.",
-          "**3.** Ku ururi x hal dhinac, tirooyinka dhinaca kale.",
-          "**4.** U qaybi isku-dhufashada x si aad x u go'diso.",
-          "**5.** Hubi xalka isle'egta bilowga ah.",
+          "Tusaale ahaan, **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** Parantez varsa aç.",
-          "**2.** Benzer terimleri sadeleştir.",
-          "**3.** x terimlerini bir tarafta, sayıları diğer tarafta topla.",
-          "**4.** x'i yalnız bırakmak için x'in katsayısına böl.",
-          "**5.** Çözümü başlangıç denkleminde kontrol et.",
+          "Örneğin, **−**(x **−** 5) = **−**x **+** 5.",
         ],
         [
-          "**1.** که پرانتزونه شته وي، پراخې کړئ.",
-          "**2.** ورته جملې ساده کړئ.",
-          "**3.** د x جملې په یوه خواو کې، عددونه په بله خواو کې راټول کړئ.",
-          "**4.** د x منفصلولو لپاره په x ضریب ووېشئ.",
-          "**5.** حل په اصلي معادله کې وګورئ.",
+          "د بېلګې په توګه، **−**(x **−** 5) = **−**x **+** 5.",
         ],
       ),
     },
+    // 15 — heading "Comment résoudre"
+    {
+      text: S(
+        "Comment résoudre",
+        "How to solve",
+        "كيف نحل",
+        "چگونه حل کنیم",
+        "ከመይ ንፈትሕ",
+        "Як розв'язувати",
+        "Como resolver",
+        "Sida lo xalliyo",
+        "Nasıl çözülür",
+        "څنګه حل کړو",
+      ),
+    },
+    // 16 — theory_tabs
+    {},
     // 7 — heading "1. Équation simple : x + b = c"
     {
       text: S(

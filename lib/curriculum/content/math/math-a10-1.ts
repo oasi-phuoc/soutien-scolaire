@@ -64,6 +64,7 @@ export const MATH_A10_1_LESSON: MathSubmoduleLesson = {
           "Par exemple, **−**(x **−** 5) = **−**x **+** 5.",
         ],
       },
+      { type: "heading", fr: "Comment résoudre", black: true },
       {
         type: "theory_tabs",
         tabs: [
