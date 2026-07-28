@@ -771,6 +771,8 @@ input[type=number] {
   .admin-users-table col.admin-users-table__francais,
   .admin-users-table col.admin-users-table__lecture {
     width: 0;
+    min-width: 0;
+    max-width: 0;
   }
   .admin-users-table col.admin-users-table__name { width: 28%; }
   .admin-users-table col.admin-users-table__acces { width: 14%; }
@@ -783,6 +785,8 @@ input[type=number] {
   .admin-users-table col.admin-users-table__classe,
   .admin-users-table col.admin-users-table__maths {
     width: 0;
+    min-width: 0;
+    max-width: 0;
   }
   .admin-users-table col.admin-users-table__name { width: auto; }
   .admin-users-table col.admin-users-table__acces { width: 3.25rem; }
