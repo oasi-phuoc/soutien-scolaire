@@ -1,6 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type G3ShapeKind = "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus" | "composite";
@@ -470,24 +475,38 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
 }
 
 export function G3AreaExercise({ exNum, shapeKind, mode, decimals = false, validateCommand, onValidated }: Props) {
-  const figure = useMemo(() => makeFigure(shapeKind, mode, decimals), [shapeKind, mode, decimals]);
-  const [answers, setAnswers] = useState<AnswerState>({
-    primary: "",
-    converted: "",
-    checked: false,
-    primaryOk: false,
-    convertedOk: false,
-  });
+  const questionCount = usePrintQuestionCount(1);
+  const columns = usePrintColumns();
+  const figures = useMemo(
+    () => Array.from({ length: questionCount }, () => makeFigure(shapeKind, mode, decimals)),
+    [questionCount, shapeKind, mode, decimals]
+  );
+  const [answers, setAnswers] = useState<AnswerState[]>(() =>
+    Array.from({ length: questionCount }, () => ({
+      primary: "",
+      converted: "",
+      checked: false,
+      primaryOk: false,
+      convertedOk: false,
+    }))
+  );
   const prevCmd = useRef(-1);
   const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
-    const primaryOk = isClose(answers.primary, figure.primaryAnswer);
-    const convertedOk = isClose(answers.converted, figure.convertedAnswer);
-    const correct = (primaryOk ? 1 : 0) + (convertedOk ? 1 : 0);
-    setAnswers((prev) => ({ ...prev, checked: true, primaryOk, convertedOk }));
-    onValidated(correct === 2, correct, 2);
-  }, [answers.primary, answers.converted, figure, onValidated]);
+    let correct = 0;
+    const total = figures.length * 2;
+    const next = answers.map((ans, i) => {
+      const figure = figures[i]!;
+      const primaryOk = isClose(ans.primary, figure.primaryAnswer);
+      const convertedOk = isClose(ans.converted, figure.convertedAnswer);
+      if (primaryOk) correct++;
+      if (convertedOk) correct++;
+      return { ...ans, checked: true, primaryOk, convertedOk };
+    });
+    setAnswers(next);
+    onValidated(correct === total, correct, total);
+  }, [answers, figures, onValidated]);
 
   useEffect(() => {
     if (validateCommand > 0 && validateCommand !== prevCmd.current) {
@@ -498,12 +517,9 @@ export function G3AreaExercise({ exNum, shapeKind, mode, decimals = false, valid
 
   const title = mode === "area" ? "Calculez l'aire." : "Trouvez la mesure demandée.";
 
-  function setValue(key: "primary" | "converted", value: string) {
-    setAnswers((prev) => ({ ...prev, [key]: value, checked: false }));
+  function setValue(idx: number, key: "primary" | "converted", value: string) {
+    setAnswers((prev) => prev.map((a, i) => i === idx ? { ...a, [key]: value, checked: false } : a));
   }
-
-  const primaryUnit = mode === "area" ? areaUnit(figure.unit) : figure.unit;
-  const convertedUnit = mode === "area" ? areaUnit(figure.convertUnit) : figure.convertUnit;
 
   return (
     <div className="space-y-4">
@@ -512,31 +528,44 @@ export function G3AreaExercise({ exNum, shapeKind, mode, decimals = false, valid
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{title}</p>
       </div>
 
-      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
-        <div dangerouslySetInnerHTML={{ __html: figure.svg }} />
-      </div>
-
-      <div className="space-y-3">
-        <AnswerLine
-          label={figure.targetLabel}
-          value={answers.primary}
-          unit={primaryUnit}
-          checked={answers.checked}
-          ok={answers.primaryOk}
-          correct={figure.primaryAnswer}
-          onChange={(value) => setValue("primary", value)}
-          revealCorrection={revealCorrection}
-        />
-        <AnswerLine
-          label=""
-          value={answers.converted}
-          unit={convertedUnit}
-          checked={answers.checked}
-          ok={answers.convertedOk}
-          correct={figure.convertedAnswer}
-          onChange={(value) => setValue("converted", value)}
-          revealCorrection={revealCorrection}
-        />
+      <div className={printQuestionsListClass(columns, "space-y-6")}>
+        {figures.map((figure, fi) => {
+          const ans = answers[fi]!;
+          const primaryUnit = mode === "area" ? areaUnit(figure.unit) : figure.unit;
+          const convertedUnit = mode === "area" ? areaUnit(figure.convertUnit) : figure.convertUnit;
+          return (
+            <div key={fi} className="space-y-3">
+              {figures.length > 1 && (
+                <span className="text-sm font-bold text-[var(--color-accent-alg)]">{fi + 1}.</span>
+              )}
+              <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+                <div dangerouslySetInnerHTML={{ __html: figure.svg }} />
+              </div>
+              <div className="space-y-3">
+                <AnswerLine
+                  label={figure.targetLabel}
+                  value={ans.primary}
+                  unit={primaryUnit}
+                  checked={ans.checked}
+                  ok={ans.primaryOk}
+                  correct={figure.primaryAnswer}
+                  onChange={(value) => setValue(fi, "primary", value)}
+                  revealCorrection={revealCorrection}
+                />
+                <AnswerLine
+                  label=""
+                  value={ans.converted}
+                  unit={convertedUnit}
+                  checked={ans.checked}
+                  ok={ans.convertedOk}
+                  correct={figure.convertedAnswer}
+                  onChange={(value) => setValue(fi, "converted", value)}
+                  revealCorrection={revealCorrection}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

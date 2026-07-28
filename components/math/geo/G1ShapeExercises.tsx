@@ -1,5 +1,10 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
@@ -100,8 +105,10 @@ type ExProps = {
 type MCQState = { shape: ShapeData; options: string[]; selected: string; checked: boolean; correct: boolean };
 
 export function G1ShapeMCQExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [items] = useState<MCQState[]>(() =>
-    pickN(SHAPES, 5).map(shape => {
+    pickN(SHAPES, questionCount).map(shape => {
       const distractors = pickN(SHAPES.filter(s => s.id !== shape.id), 3).map(s => s.name);
       return { shape, options: shuffle([shape.name, ...distractors]), selected: "", checked: false, correct: false };
     })
@@ -133,7 +140,7 @@ export function G1ShapeMCQExercise({ exNum, validateCommand, onValidated }: ExPr
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Quel est le nom de cette forme ?</p>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {states.map((item, i) => (
           <div key={item.shape.id} className="flex items-center gap-3">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -182,9 +189,12 @@ const LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h"];
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
 export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const questionCount = usePrintQuestionCount(4);
+  const columns = usePrintColumns();
   const [{ allShapes, cards }] = useState(() => {
-    const allShapes = pickN(SHAPES, 6);
-    const cards = shuffle([...allShapes]).slice(0, 4);
+    const nameCount = Math.min(SHAPES.length, Math.max(6, questionCount + 2));
+    const allShapes = pickN(SHAPES, nameCount);
+    const cards = shuffle([...allShapes]).slice(0, Math.min(questionCount, allShapes.length));
     return { allShapes, cards };
   });
 
@@ -242,7 +252,7 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
         ))}
       </div>
       {/* SVG cards */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className={printQuestionsListClass(columns, "grid grid-cols-2 gap-3")}>
         {cards.map((shape, cardIdx) => {
           const s = states[shape.id]!;
           const correctIdx = allShapes.findIndex(x => x.id === shape.id);
@@ -282,9 +292,11 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
 type DefinitionMatchState = { answer: string; checked: boolean; correct: boolean };
 
 export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [{ allShapes, definitions }] = useState(() => {
-    const allShapes = pickN(SHAPES, 8);
-    const definitions = shuffle([...allShapes]).slice(0, 5);
+    const allShapes = pickN(SHAPES, Math.min(SHAPES.length, Math.max(8, questionCount)));
+    const definitions = shuffle([...allShapes]).slice(0, Math.min(questionCount, allShapes.length));
     return { allShapes, definitions };
   });
 
@@ -340,7 +352,7 @@ export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated 
           </div>
         ))}
       </div>
-      <div className="space-y-2">
+      <div className={printQuestionsListClass(columns, "space-y-2")}>
         {definitions.map((shape, i) => {
           const state = states[shape.id]!;
           const correctIdx = allShapes.findIndex(s => s.id === shape.id);
@@ -389,7 +401,9 @@ function makePattern(name: string): string[] {
 type MLState = { blanks: Record<number, string>; blankOk: Record<number, boolean>; checked: boolean; correct: boolean };
 
 export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }: ExProps) {
-  const [shapes] = useState<ShapeData[]>(() => pickN(SHAPES, 7));
+  const questionCount = usePrintQuestionCount(7);
+  const columns = usePrintColumns();
+  const [shapes] = useState<ShapeData[]>(() => pickN(SHAPES, Math.min(questionCount, SHAPES.length)));
   const [patterns] = useState<Record<string, string[]>>(() =>
     Object.fromEntries(shapes.map(s => [s.id, makePattern(s.name)]))
   );
@@ -438,7 +452,7 @@ export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Complétez le nom de la forme.</p>
       </div>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {shapes.map((s, i) => {
           const state = states[s.id]!;
           const pattern = patterns[s.id]!;
@@ -493,8 +507,10 @@ function makeTiles(name: string): LetterTile[] {
 }
 
 export function G1AnagramExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [items, setItems] = useState<AnaItem[]>(() =>
-    pickN(SHAPES, 5).map(shape => ({
+    pickN(SHAPES, Math.min(questionCount, SHAPES.length)).map(shape => ({
       shape,
       remaining: makeTiles(shape.name),
       answer: [],
@@ -541,7 +557,7 @@ export function G1AnagramExercise({ exNum, validateCommand, onValidated }: ExPro
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Cliquez sur les lettres pour former le mot.</p>
       </div>
-      <div className="space-y-5">
+      <div className={printQuestionsListClass(columns, "space-y-5")}>
         {items.map((item, idx) => {
           const builtWord = item.answer.map(t => t.char).join("");
           return (
@@ -593,7 +609,9 @@ export function G1AnagramExercise({ exNum, validateCommand, onValidated }: ExPro
 type WriteState = { answer: string; checked: boolean; correct: boolean };
 
 export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: ExProps) {
-  const [shapes] = useState<ShapeData[]>(() => pickN(SHAPES, 5));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [shapes] = useState<ShapeData[]>(() => pickN(SHAPES, Math.min(questionCount, SHAPES.length)));
   const [states, setStates] = useState<Record<string, WriteState>>(() =>
     Object.fromEntries(shapes.map(s => [s.id, { answer: "", checked: false, correct: false }]))
   );
@@ -625,7 +643,7 @@ export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: Ex
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Regardez et écrivez le mot correspondant.</p>
       </div>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {shapes.map((s, i) => {
           const state = states[s.id]!;
           return (
@@ -741,7 +759,7 @@ const SHAPE_TRUE_PROPS: Record<string, string[]> = {
   ],
 };
 
-function buildPropItems(shapeId: string): Array<{ text: string; correct: boolean }> {
+function buildPropItems(shapeId: string, count: number): Array<{ text: string; correct: boolean }> {
   const trueProps = SHAPE_TRUE_PROPS[shapeId];
   if (!trueProps) return [];
 
@@ -752,22 +770,24 @@ function buildPropItems(shapeId: string): Array<{ text: string; correct: boolean
     .filter(p => !trueProps.includes(p));
   const uniqueFalseProps = [...new Set(allOtherProps)];
 
-  const maxTrue = Math.min(3, trueProps.length);
+  const maxTrue = Math.min(3, trueProps.length, count);
   const trueCount = Math.floor(Math.random() * maxTrue) + 1;
-  const falseCount = 5 - trueCount;
+  const falseCount = Math.max(0, count - trueCount);
 
   const trueItems = shuffle([...trueProps]).slice(0, trueCount).map(t => ({ text: t, correct: true as const }));
   const falseItems = shuffle(uniqueFalseProps).slice(0, falseCount).map(t => ({ text: t, correct: false as const }));
 
-  return shuffle([...trueItems, ...falseItems]).slice(0, 5);
+  return shuffle([...trueItems, ...falseItems]).slice(0, count);
 }
 
 export function G1PropCheckExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [{ shape, items }] = useState(() => {
     const shape = SHAPES[Math.floor(Math.random() * SHAPES.length)]!;
-    return { shape, items: buildPropItems(shape.id) };
+    return { shape, items: buildPropItems(shape.id, questionCount) };
   });
-  const [checked, setChecked] = useState<boolean[]>(() => Array(5).fill(false));
+  const [checked, setChecked] = useState<boolean[]>(() => Array(items.length).fill(false));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
   const prevCmd = useRef(-1);
@@ -799,7 +819,7 @@ export function G1PropCheckExercise({ exNum, validateCommand, onValidated }: ExP
           dangerouslySetInnerHTML={{ __html: shape.svg }} />
         <p className="text-sm font-bold text-[var(--color-text-primary)]">{shape.name.charAt(0).toUpperCase() + shape.name.slice(1)}</p>
       </div>
-      <div className="space-y-2">
+      <div className={printQuestionsListClass(columns, "space-y-2")}>
         {items.map((item, i) => {
           const isChecked = checked[i] ?? false;
           const res = validated && revealCorrection ? results[i] : null;
@@ -861,8 +881,10 @@ const MATH_TEXT_INPUT_G1 =
   "focus:border-[var(--color-accent-alg)] disabled:opacity-70";
 
 export function G1ShapeQAExercise({ exNum, validateCommand, onValidated }: ExProps) {
-  const [questions] = useState(() => pickN(G1_QA_POOL, 5));
-  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState(() => pickN(G1_QA_POOL, questionCount));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
   const prevCmd = useRef(-1);
@@ -893,7 +915,7 @@ export function G1ShapeQAExercise({ exNum, validateCommand, onValidated }: ExPro
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Répondez aux questions sur les formes.</p>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {questions.map((q, i) => {
           const ans = answers[i] ?? "";
           const ok = validated && revealCorrection ? results[i] : null;

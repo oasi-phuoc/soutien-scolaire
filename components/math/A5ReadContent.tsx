@@ -1,6 +1,11 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { speak } from "@/lib/utils/speech";
 
@@ -76,9 +81,9 @@ function PlayBtn({ text }: { text: string }) {
 
 // ── Ex 1 — Décomposer ─────────────────────────────────────────────────────────
 type DecompItem = { numStr: string; parts: string[] };
-function genDecompose(): DecompItem[] {
+function genDecompose(n: number): DecompItem[] {
   const items: DecompItem[] = [];
-  while (items.length < 5) {
+  while (items.length < n) {
     const tens = rnd(1, 9) * 10;
     const units = rnd(1, 9);
     const tenths = rnd(1, 9);
@@ -98,7 +103,9 @@ function genDecompose(): DecompItem[] {
 export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [items] = useState<DecompItem[]>(genDecompose);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [items] = useState<DecompItem[]>(() => genDecompose(questionCount));
   const [vals, setVals] = useState<string[][]>(() => items.map(() => ["", "", "", ""]));
   const [wrongs, setWrongs] = useState<boolean[][]>(() => items.map(() => [false, false, false, false]));
   const [validated, setValidated] = useState(false);
@@ -122,9 +129,9 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {items.map((item, i) => (
-          <div key={i} className="flex items-center gap-1.5">
+          <div key={i} className="flex items-center gap-1.5 flex-wrap">
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
             <span className="text-sm font-mono shrink-0 text-[var(--color-text-primary)]">{item.numStr} =</span>
             {item.parts.map((p, j) => (
@@ -156,7 +163,9 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
 export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [items] = useState<DecompItem[]>(genDecompose);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [items] = useState<DecompItem[]>(() => genDecompose(questionCount));
   const [vals, setVals] = useState<string[]>(() => items.map(() => ""));
   const [wrongs, setWrongs] = useState<boolean[]>(() => items.map(() => false));
   const [validated, setValidated] = useState(false);
@@ -177,7 +186,7 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {items.map((item, i) => (
           <div key={i} className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
@@ -202,9 +211,9 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
 // ── Ex 3 — Valeur d'un chiffre ────────────────────────────────────────────────
 type PlaceItem = { numStr: string; digitChar: string; digitIdx: number; correctPos: number };
 const POS_LABELS = ["dizaines", "unités", "dixièmes", "centièmes"];
-function genPlaceValue(): PlaceItem[] {
+function genPlaceValue(n: number): PlaceItem[] {
   const items: PlaceItem[] = [];
-  const positions = shuffle([0, 1, 2, 3, 0, 1, 2, 3]).slice(0, 5);
+  const positions = shuffle(Array.from({ length: Math.max(n, 4) }, (_, i) => i % 4)).slice(0, n);
   for (const pos of positions) {
     const tens = rnd(1, 9) * 10;
     const units = rnd(1, 9);
@@ -220,7 +229,9 @@ function genPlaceValue(): PlaceItem[] {
 export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [items] = useState<PlaceItem[]>(genPlaceValue);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [items] = useState<PlaceItem[]>(() => genPlaceValue(questionCount));
   const [selected, setSelected] = useState<(number | null)[]>(() => items.map(() => null));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
@@ -239,7 +250,7 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-5">
+      <div className={printQuestionsListClass(columns, "space-y-5")}>
         {items.map((item, i) => {
           const sel = selected[i];
           const correct = item.correctPos;
@@ -290,7 +301,7 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
 
 // ── Ex 4 — Chiffre à un rang ──────────────────────────────────────────────────
 type DigitAtItem = { numStr: string; asks: { label: string; answer: string }[] };
-function genDigitAt(): DigitAtItem[] {
+function genDigitAt(n: number): DigitAtItem[] {
   const RANKS = [
     { label: "dixièmes", idx: 0 },
     { label: "centièmes", idx: 1 },
@@ -298,7 +309,7 @@ function genDigitAt(): DigitAtItem[] {
     { label: "unités", idx: -1 },
   ];
   const items: DigitAtItem[] = [];
-  while (items.length < 5) {
+  while (items.length < n) {
     const units = rnd(1, 9);
     const d0 = rnd(1, 9), d1 = rnd(1, 9), d2 = rnd(1, 9);
     const numStr = `${units},${d0}${d1}${d2}`;
@@ -315,7 +326,9 @@ function genDigitAt(): DigitAtItem[] {
 export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [items] = useState<DigitAtItem[]>(genDigitAt);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [items] = useState<DigitAtItem[]>(() => genDigitAt(questionCount));
   const [vals, setVals] = useState<string[][]>(() => items.map(() => ["", ""]));
   const [wrongs, setWrongs] = useState<boolean[][]>(() => items.map(() => [false, false]));
   const [validated, setValidated] = useState(false);
@@ -339,7 +352,7 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-5">
+      <div className={printQuestionsListClass(columns, "space-y-5")}>
         {items.map((item, i) => (
           <div key={i} className="space-y-2">
             <div className="flex items-center gap-2">
@@ -369,9 +382,9 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
 }
 
 // ── Ex 5 — Dictée ─────────────────────────────────────────────────────────────
-function genDictation(): string[] {
+function genDictation(n: number): string[] {
   const nums: string[] = [];
-  while (nums.length < 5) {
+  while (nums.length < n) {
     const intPart = rnd(1, 49);
     const kind = Math.random() < 0.5 ? 1 : 2;
     const decPart = kind === 1 ? String(rnd(1, 9)) : String(rnd(11, 99)).replace(/^.0/, s => s[0] + "0").padStart(2,"0");
@@ -385,7 +398,9 @@ function genDictation(): string[] {
 export function DecReadDictationExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [nums] = useState<string[]>(genDictation);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [nums] = useState<string[]>(() => genDictation(questionCount));
   const [vals, setVals] = useState<string[]>(() => nums.map(() => ""));
   const [wrongs, setWrongs] = useState<boolean[]>(() => nums.map(() => false));
   const [validated, setValidated] = useState(false);
@@ -406,7 +421,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {nums.map((n, i) => (
           <div key={i} className="flex items-center gap-3">
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
@@ -430,7 +445,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
 
 // ── Ex 6 — Comparer ───────────────────────────────────────────────────────────
 type ComparePair = { a: string; b: string; op: "<" | "=" | ">" };
-function genCompare(): ComparePair[] {
+function genCompare(n: number): ComparePair[] {
   const pairs: ComparePair[] = [];
   // Force at least one equal pair
   const forcedEqual: ComparePair = (() => {
@@ -440,7 +455,7 @@ function genCompare(): ComparePair[] {
     return { a: aStr, b: bStr, op: "=" };
   })();
   pairs.push(forcedEqual);
-  while (pairs.length < 5) {
+  while (pairs.length < n) {
     const aInt = rnd(1, 9), bInt = rnd(1, 9);
     const aDec = rnd(0, 9), bDec = rnd(0, 9);
     const aFull = rnd(0, 9), bFull = rnd(0, 9);
@@ -452,13 +467,15 @@ function genCompare(): ComparePair[] {
     const op = aVal < bVal ? "<" : ">";
     pairs.push({ a: aStr, b: bStr, op });
   }
-  return shuffle(pairs).slice(0, 5);
+  return shuffle(pairs).slice(0, n);
 }
 
 export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [pairs] = useState<ComparePair[]>(genCompare);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [pairs] = useState<ComparePair[]>(() => genCompare(questionCount));
   const [selected, setSelected] = useState<(string | null)[]>(() => pairs.map(() => null));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
@@ -477,12 +494,12 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {pairs.map((pair, i) => {
           const sel = selected[i];
           const correct = pair.op;
           return (
-            <div key={i} className="flex items-center gap-3">
+            <div key={i} className="flex items-center gap-3 flex-wrap">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
               <span className="font-mono text-sm text-[var(--color-text-primary)] min-w-[3.5rem] text-right">{pair.a}</span>
               {(["<", "=", ">"] as const).map(sym => {
@@ -509,7 +526,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
 }
 
 // ── Ex 8 — Ordre croissant ────────────────────────────────────────────────────
-function genOrder(): string[] {
+function genOrderChips(): string[] {
   const nums: string[] = [];
   while (nums.length < 4) {
     const intPart = rnd(1, 9);
@@ -521,87 +538,119 @@ function genOrder(): string[] {
   return shuffle(nums);
 }
 
+type OrderGroup = {
+  chips: string[];
+  slots: (string | null)[];
+  slotWrong: boolean[];
+};
+
 export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [chips] = useState<string[]>(genOrder);
-  const [slots, setSlots] = useState<(string | null)[]>([null, null, null, null]);
+  const questionCount = usePrintQuestionCount(1);
+  const columns = usePrintColumns();
+  const [groups, setGroups] = useState<OrderGroup[]>(() =>
+    Array.from({ length: questionCount }, () => ({
+      chips: genOrderChips(),
+      slots: [null, null, null, null],
+      slotWrong: [false, false, false, false],
+    }))
+  );
   const [validated, setValidated] = useState(false);
-  const [slotWrong, setSlotWrong] = useState<boolean[]>([false, false, false, false]);
   const revealCorrection = useEvalReveal();
 
-  const placed = new Set(slots.filter(Boolean));
-  const remaining = chips.filter(c => !placed.has(c));
-
-  function placeChip(chip: string) {
+  function placeChip(gi: number, chip: string) {
     if (validated) return;
-    const nextEmpty = slots.findIndex(s => s === null);
-    if (nextEmpty === -1) return;
-    setSlots(prev => prev.map((s, i) => i === nextEmpty ? chip : s));
+    setGroups(prev => prev.map((g, i) => {
+      if (i !== gi) return g;
+      const nextEmpty = g.slots.findIndex(s => s === null);
+      if (nextEmpty === -1) return g;
+      return { ...g, slots: g.slots.map((s, si) => si === nextEmpty ? chip : s) };
+    }));
   }
-  function removeSlot(idx: number) {
+  function removeSlot(gi: number, idx: number) {
     if (validated) return;
-    setSlots(prev => prev.map((s, i) => i === idx ? null : s));
+    setGroups(prev => prev.map((g, i) =>
+      i === gi ? { ...g, slots: g.slots.map((s, si) => si === idx ? null : s) } : g
+    ));
   }
 
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    const sorted = [...chips].sort((a, b) => parseFloat(a.replace(",", ".")) - parseFloat(b.replace(",", ".")));
-    const w = slots.map((s, i) => s !== sorted[i]);
-    setSlotWrong(w);
-    onValidated(w.every(x => !x), w.filter(x => !x).length, w.length);
-  }, [validated, chips, slots, onValidated]);
+    let correctSlots = 0;
+    let totalSlots = 0;
+    const next = groups.map(g => {
+      const sorted = [...g.chips].sort((a, b) => parseFloat(a.replace(",", ".")) - parseFloat(b.replace(",", ".")));
+      const slotWrong = g.slots.map((s, i) => s !== sorted[i]);
+      totalSlots += slotWrong.length;
+      correctSlots += slotWrong.filter(w => !w).length;
+      return { ...g, slotWrong };
+    });
+    setGroups(next);
+    onValidated(correctSlots === totalSlots, correctSlots, totalSlots);
+  }, [validated, groups, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
-
-  const sorted = [...chips].sort((a, b) => parseFloat(a.replace(",", ".")) - parseFloat(b.replace(",", ".")));
 
   return (
     <div className="space-y-5">
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre croissant.</p>
       </div>
-      {/* Slots */}
-      <div className="flex gap-2 flex-wrap">
-        {slots.map((s, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-xs text-[var(--color-text-secondary)]">{i + 1}{i === 0 ? "er" : "ème"}</span>
-            <button
-              type="button"
-              onClick={() => removeSlot(i)}
-              className={`h-10 w-20 rounded-xl border text-sm font-mono font-bold transition-colors flex flex-col items-center justify-center ${
-                s === null
-                  ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
-                  : validated && revealCorrection && slotWrong[i]
-                    ? "border-[var(--color-accent-alg)]"
-                    : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]"
-              }`}
-            >
-              {validated && revealCorrection && slotWrong[i]
-                ? <>
-                    <span className="text-xs text-[var(--color-text-primary)] leading-none">{s}</span>
-                    <span className="text-xs font-bold text-amber-600 leading-none">{sorted[i]}</span>
-                  </>
-                : <span>{s ?? "—"}</span>
-              }
-            </button>
-          </div>
-        ))}
-      </div>
-      {/* Chips */}
-      <div className="flex gap-2 flex-wrap">
-        {remaining.map(chip => (
-          <button
-            key={chip}
-            type="button"
-            onClick={() => placeChip(chip)}
-            disabled={validated}
-            className="h-10 w-20 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-mono font-bold text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-accent-alg)] disabled:opacity-50"
-          >
-            {chip}
-          </button>
-        ))}
+      <div className={printQuestionsListClass(columns, "space-y-6")}>
+        {groups.map((g, gi) => {
+          const placed = new Set(g.slots.filter(Boolean));
+          const remaining = g.chips.filter(c => !placed.has(c));
+          const sorted = [...g.chips].sort((a, b) => parseFloat(a.replace(",", ".")) - parseFloat(b.replace(",", ".")));
+          return (
+            <div key={gi} className="space-y-3">
+              {groups.length > 1 && (
+                <span className="text-sm font-bold text-[var(--color-accent-alg)]">{gi + 1}.</span>
+              )}
+              <div className="flex gap-2 flex-wrap">
+                {g.slots.map((s, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1">
+                    <span className="text-xs text-[var(--color-text-secondary)]">{i + 1}{i === 0 ? "er" : "ème"}</span>
+                    <button
+                      type="button"
+                      onClick={() => removeSlot(gi, i)}
+                      className={`h-10 w-20 rounded-xl border text-sm font-mono font-bold transition-colors flex flex-col items-center justify-center ${
+                        s === null
+                          ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                          : validated && revealCorrection && g.slotWrong[i]
+                            ? "border-[var(--color-accent-alg)]"
+                            : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]"
+                      }`}
+                    >
+                      {validated && revealCorrection && g.slotWrong[i]
+                        ? <>
+                            <span className="text-xs text-[var(--color-text-primary)] leading-none">{s}</span>
+                            <span className="text-xs font-bold text-amber-600 leading-none">{sorted[i]}</span>
+                          </>
+                        : <span>{s ?? "—"}</span>
+                      }
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2 flex-wrap">
+                {remaining.map(chip => (
+                  <button
+                    key={chip}
+                    type="button"
+                    onClick={() => placeChip(gi, chip)}
+                    disabled={validated}
+                    className="h-10 w-20 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-mono font-bold text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-accent-alg)] disabled:opacity-50"
+                  >
+                    {chip}
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -609,12 +658,12 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
 
 // ── Ex 9 — Nombres > x ────────────────────────────────────────────────────────
 type FilterConfig = { threshold: string; thresholdVal: number; nums: string[]; mode: "gt" | "lt" | "between"; lo?: number; hi?: number };
-function genFilter(mode: "gt" | "lt" | "between"): FilterConfig {
+function genFilter(mode: "gt" | "lt" | "between", n: number): FilterConfig {
   if (mode === "between") {
     const lo = rnd(2, 7);
     const hi = lo + rnd(2, 3);
     const nums: string[] = [];
-    while (nums.length < 15) {
+    while (nums.length < n) {
       const intPart = rnd(lo - 1, hi + 1);
       const s = Math.random() < 0.5
         ? `${intPart},${rnd(0, 9)}`
@@ -627,7 +676,7 @@ function genFilter(mode: "gt" | "lt" | "between"): FilterConfig {
   const t = rnd(20, 70) / 10;
   const tStr = t.toFixed(1).replace(".", ",");
   const nums: string[] = [tStr];
-  while (nums.length < 15) {
+  while (nums.length < n) {
     const intPart = Math.floor(t) + rnd(-1, 1);
     if (intPart < 0) continue;
     const s = Math.random() < 0.5
@@ -641,7 +690,9 @@ function genFilter(mode: "gt" | "lt" | "between"): FilterConfig {
 function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
   exNum: number; mode: "gt" | "lt" | "between"; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [cfg] = useState<FilterConfig>(() => genFilter(mode));
+  // Chip cloud — columns not applied (single interactive selection UI)
+  const questionCount = usePrintQuestionCount(15);
+  const [cfg] = useState<FilterConfig>(() => genFilter(mode, questionCount));
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [validated, setValidated] = useState(false);
   const [chipState, setChipState] = useState<Record<string, "correct" | "missed" | "wrong" | "idle">>({});
@@ -737,11 +788,14 @@ export function DecReadFilterBetweenExercise({ exNum, validateCommand, onValidat
 
 // ── Ex 11 — Encadrement ───────────────────────────────────────────────────────
 type EncadrItem = { numStr: string; lo: string; hi: string; dir: "lt" | "gt" };
-function genEncadrement(): EncadrItem[] {
-  const numGt = rnd(2, 3);
-  const dirs = shuffle([...Array(5 - numGt).fill("lt") as "lt"[], ...Array(numGt).fill("gt") as "gt"[]]);
+function genEncadrement(n: number): EncadrItem[] {
+  const numGt = Math.min(n, Math.max(1, rnd(Math.ceil(n / 3), Math.ceil(n * 2 / 3))));
+  const dirs = shuffle([
+    ...Array(n - numGt).fill("lt") as "lt"[],
+    ...Array(numGt).fill("gt") as "gt"[],
+  ]);
   const items: EncadrItem[] = [];
-  while (items.length < 5) {
+  while (items.length < n) {
     const caseType = rnd(0, 2);
     const intPart = rnd(1, 19);
     let numStr: string, lo: string, hi: string;
@@ -764,7 +818,9 @@ function genEncadrement(): EncadrItem[] {
 export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [items] = useState(genEncadrement);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [items] = useState(() => genEncadrement(questionCount));
   const [vals, setVals] = useState<string[]>(() => items.map(() => ""));
   const [wrongs, setWrongs] = useState<boolean[]>(() => items.map(() => false));
   const [validated, setValidated] = useState(false);
@@ -787,16 +843,16 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Trouvez le nombre décimal encadré.</p>
       </div>
-      <div className="grid grid-cols-[1.5rem_3.5rem_1.25rem_5rem_1.25rem_3.5rem] items-center gap-x-2 gap-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {items.map((item, i) => {
           const isGt = item.dir === "gt";
           const firstVal = isGt ? item.hi : item.lo;
           const secondVal = isGt ? item.lo : item.hi;
           const sym = isGt ? ">" : "<";
           return (
-            <React.Fragment key={i}>
-              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="font-mono text-sm text-right text-[var(--color-text-primary)]">{firstVal}</span>
+            <div key={i} className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
+              <span className="font-mono text-sm text-right text-[var(--color-text-primary)] min-w-[3.5rem]">{firstVal}</span>
               <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
               {revealCorrection && wrongs[i]
                 ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
@@ -805,7 +861,7 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
                     className={`${IC(false)} w-20`} />}
               <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
               <span className="font-mono text-sm text-[var(--color-text-primary)]">{secondVal}</span>
-            </React.Fragment>
+            </div>
           );
         })}
       </div>
@@ -814,9 +870,9 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
 }
 
 // ── Ex 12 — Encadrement à l'unité près ───────────────────────────────────────
-function genEncadrementUnite(): { numStr: string; lo: number; hi: number }[] {
+function genEncadrementUnite(n: number): { numStr: string; lo: number; hi: number }[] {
   const items: { numStr: string; lo: number; hi: number }[] = [];
-  while (items.length < 5) {
+  while (items.length < n) {
     const intPart = rnd(1, 19);
     const tenths = rnd(1, 9);
     const hundredths = rnd(0, 9);
@@ -829,7 +885,9 @@ function genEncadrementUnite(): { numStr: string; lo: number; hi: number }[] {
 export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  const [items] = useState(genEncadrementUnite);
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [items] = useState(() => genEncadrementUnite(questionCount));
   const [vals, setVals] = useState<[string, string][]>(() => items.map(() => ["", ""]));
   const [wrongs, setWrongs] = useState<[boolean, boolean][]>(() => items.map(() => [false, false]));
   const [validated, setValidated] = useState(false);
@@ -854,10 +912,10 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à l&apos;unité près.</p>
       </div>
-      <div className="grid grid-cols-[1.5rem_5rem_1.25rem_minmax(3rem,max-content)_1.25rem_5rem] items-center gap-x-2 gap-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {items.map((item, i) => (
-          <React.Fragment key={i}>
-            <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div key={i} className="flex items-center gap-2 flex-wrap">
+            <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
             {revealCorrection && wrongs[i]?.[0]
               ? <Err wrong={vals[i]?.[0] ?? ""} correct={String(item.lo)} className="w-16" />
               : <input type="text" inputMode="numeric" value={vals[i]?.[0] ?? ""} disabled={validated}
@@ -871,7 +929,7 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
               : <input type="text" inputMode="numeric" value={vals[i]?.[1] ?? ""} disabled={validated}
                   onChange={e => setVals(p => p.map((v, vi) => vi === i ? [v[0]!, e.target.value.replace(/[^0-9]/g, "")] as [string, string] : v))}
                   className={`${IC(false)} w-16`} />}
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>
@@ -880,28 +938,30 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
 
 // ── Ex 12 — Lire une droite numérique ─────────────────────────────────────────
 type NLLine = { min: number; max: number; step: number; numDivs: number; arrows: number[] };
-function genNLRead(): NLLine[] {
-  const divChoices1 = [10, 15];
-  const divChoices2 = [20, 25, 30, 35, 40, 45, 50];
-  return [divChoices1, divChoices2].map(opts => {
-    const numDivs = opts[rnd(0, opts.length - 1)]!;
-    const step = 0.1;
-    const min = rnd(0, 9);
-    const max = +(min + numDivs * step).toFixed(1);
-    const candidates: number[] = [];
-    for (let k = 1; k < numDivs; k++) {
-      if (k % 5 === 0) continue;
-      candidates.push(+(min + k * step).toFixed(1));
-    }
-    const arrows = shuffle(candidates).slice(0, 1).sort((a, b) => a - b);
-    return { min, max, step, numDivs, arrows };
-  });
+function genNLReadLine(divChoices: number[]): NLLine {
+  const numDivs = divChoices[rnd(0, divChoices.length - 1)]!;
+  const step = 0.1;
+  const min = rnd(0, 9);
+  const max = +(min + numDivs * step).toFixed(1);
+  const candidates: number[] = [];
+  for (let k = 1; k < numDivs; k++) {
+    if (k % 5 === 0) continue;
+    candidates.push(+(min + k * step).toFixed(1));
+  }
+  const arrows = shuffle(candidates).slice(0, 1).sort((a, b) => a - b);
+  return { min, max, step, numDivs, arrows };
+}
+function genNLRead(n: number): NLLine[] {
+  const pools = [[10, 15], [20, 25, 30, 35, 40, 45, 50]];
+  return Array.from({ length: n }, (_, i) => genNLReadLine(pools[i % pools.length]!));
 }
 
 export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [lines] = useState<NLLine[]>(genNLRead);
+  const questionCount = usePrintQuestionCount(2);
+  const columns = usePrintColumns();
+  const [lines] = useState<NLLine[]>(() => genNLRead(questionCount));
   const [vals, setVals] = useState<string[][]>(() => lines.map(l => l.arrows.map(() => "")));
   const [wrongs, setWrongs] = useState<boolean[][]>(() => lines.map(l => l.arrows.map(() => false)));
   const [validated, setValidated] = useState(false);
@@ -930,7 +990,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-6">
+      <div className={printQuestionsListClass(columns, "space-y-6")}>
         {lines.map((line, li) => {
           const pos = (v: number) => ML + ((v - line.min) / (line.numDivs * line.step)) * lineW;
           return (
@@ -997,7 +1057,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
 
 // ── Ex 13 — Placer sur la droite ──────────────────────────────────────────────
 type NLPlaceConfig = { min: number; max: number; step: number; numDivs: number; positions: number[] };
-function genNLPlace(): NLPlaceConfig {
+function genNLPlace(positionCount: number): NLPlaceConfig {
   const options = [
     { numDivs: 10, step: 0.1 },
     { numDivs: 15, step: 0.1 },
@@ -1013,14 +1073,16 @@ function genNLPlace(): NLPlaceConfig {
     if (k % 5 === 0) continue;
     candidates.push(+(min + k * step).toFixed(2));
   }
-  const positions = shuffle(candidates).slice(0, 5).sort((a, b) => a - b);
+  const positions = shuffle(candidates).slice(0, Math.min(positionCount, candidates.length)).sort((a, b) => a - b);
   return { min, max, step, numDivs, positions };
 }
 
 export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [cfg] = useState<NLPlaceConfig>(genNLPlace);
+  // Single number-line canvas — columns not applicable; questionCount controls marker count
+  const questionCount = usePrintQuestionCount(5);
+  const [cfg] = useState<NLPlaceConfig>(() => genNLPlace(questionCount));
   const chips = useState(() => shuffle([...cfg.positions]))[0];
   const [assignments, setAssignments] = useState<(number | null)[]>(() => cfg.positions.map(() => null));
   const [activeChip, setActiveChip] = useState<number | null>(null);
