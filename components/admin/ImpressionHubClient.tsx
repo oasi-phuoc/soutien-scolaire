@@ -158,8 +158,21 @@ function FieldLabel({ children }: { children: ReactNode }) {
 }
 
 function clonePreview(node: ReactNode, key: string): ReactNode {
+  if (node == null || typeof node === "boolean") return node;
+  if (typeof node === "string" || typeof node === "number") return node;
+  if (Array.isArray(node)) {
+    return node.map((child, index) => clonePreview(child, `${key}.${index}`));
+  }
   if (!isValidElement(node)) return node;
-  return cloneElement(node as ReactElement, { key });
+  const element = node as ReactElement<{ children?: ReactNode }>;
+  if (element.props?.children !== undefined) {
+    return cloneElement(
+      element,
+      { key },
+      clonePreview(element.props.children, `${key}.c`),
+    );
+  }
+  return cloneElement(element, { key });
 }
 
 /**
@@ -674,7 +687,9 @@ export function ImpressionHubClient() {
           )}
           {!bundle ? (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
-              Sélectionnez un document à imprimer.
+              {printSeed == null
+                ? "Préparation de l’aperçu…"
+                : bundleError ?? "Sélectionnez un document à imprimer."}
             </p>
           ) : (
             <PaginatedPreview
