@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   getExpressionTeachersAction,
   submitExpressionAction,
   type TeacherOption,
 } from "@/app/actions/expression";
 import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
+import { ExpressListeningExercise } from "@/components/communication/ExpressListeningExercise";
+import { SingleAudioPlayer } from "@/components/communication/SingleAudioPlayer";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import {
@@ -37,7 +39,6 @@ import { OralProductionRunner } from "@/components/communication/OralProductionR
 import { ComprehensionEcritRunner } from "@/components/communication/ComprehensionEcritRunner";
 import { ComprehensionOraleRunner } from "@/components/communication/ComprehensionOraleRunner";
 import { ProductionEcriteRunner } from "@/components/communication/ProductionEcriteRunner";
-import { ExpressListeningExercise } from "@/components/communication/ExpressListeningExercise";
 import {
   randomFormTemplates,
   type FormField,
@@ -406,45 +407,6 @@ function renderInlineBold(text: string) {
   });
 }
 
-function SimpleAudioPlayer({ src, label }: { src: string; label?: string }) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setError(null);
-    const el = audioRef.current;
-    if (!el) return;
-    el.pause();
-    el.load();
-  }, [src]);
-
-  return (
-    <div className="mb-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-      {label ? (
-        <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-          {label}
-        </p>
-      ) : null}
-      <audio
-        ref={audioRef}
-        key={src}
-        controls
-        preload="auto"
-        controlsList="nodownload"
-        src={src}
-        className="w-full"
-        onError={() => setError("Impossible de lire cet audio. Vérifiez votre connexion ou réessayez.")}
-        onLoadedData={() => setError(null)}
-      >
-        <source src={src} type="audio/mpeg" />
-      </audio>
-      {error ? (
-        <p className="mt-1.5 text-xs text-amber-600 dark:text-amber-400">{error}</p>
-      ) : null}
-    </div>
-  );
-}
-
 function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
   switch (block.type) {
     case "heading":
@@ -626,7 +588,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
       return (
         <div className="mb-4 space-y-2">
           {block.audioSrc ? (
-            <SimpleAudioPlayer src={block.audioSrc} label={block.audioLabel ?? "Audio"} />
+            <SingleAudioPlayer src={block.audioSrc} label={block.audioLabel ?? "Audio"} />
           ) : null}
           {block.lines.map((line, i) => {
             const isA = line.role === "A";

@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { COTranscriptView } from "@/components/communication/COTranscriptView";
+import { SingleAudioPlayer } from "@/components/communication/SingleAudioPlayer";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 import {
   buildExpressListeningTasks,
@@ -28,40 +29,6 @@ function LightbulbIcon({ active }: { active: boolean }) {
         fillOpacity={active ? 0.2 : 0}
       />
     </svg>
-  );
-}
-
-function SimpleAudioPlayer({ src, label }: { src: string; label?: string }) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setError(null);
-    audioRef.current?.load();
-  }, [src]);
-
-  return (
-    <div className="mb-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-      {label ? (
-        <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-          {label}
-        </p>
-      ) : null}
-      <audio
-        ref={audioRef}
-        key={src}
-        controls
-        preload="auto"
-        controlsList="nodownload"
-        src={src}
-        className="w-full"
-        onError={() => setError("Impossible de lire cet audio. Vérifiez votre connexion ou réessayez.")}
-        onLoadedData={() => setError(null)}
-      >
-        <source src={src} type="audio/mpeg" />
-      </audio>
-      {error ? <p className="mt-1.5 text-xs text-amber-600 dark:text-amber-400">{error}</p> : null}
-    </div>
   );
 }
 
@@ -291,7 +258,7 @@ export function ExpressListeningExercise({
 
       {exercise.audioSrc ? (
         <div className="mt-3">
-          <SimpleAudioPlayer src={exercise.audioSrc} label={exercise.audioLabel ?? "Audio"} />
+          <SingleAudioPlayer src={exercise.audioSrc} label={exercise.audioLabel ?? "Audio"} />
         </div>
       ) : null}
 
@@ -380,7 +347,7 @@ function LegacyListeningItems({
       <ExerciseConsigne>{exercise.instruction}</ExerciseConsigne>
       {exercise.audioSrc ? (
         <div className="mt-3">
-          <SimpleAudioPlayer src={exercise.audioSrc} label={exercise.audioLabel ?? "Audio"} />
+          <SingleAudioPlayer src={exercise.audioSrc} label={exercise.audioLabel ?? "Audio"} />
         </div>
       ) : null}
       <div className="mt-4 space-y-5">
