@@ -304,7 +304,7 @@ export default function AvantProposPage() {
 
       {/* Introduction */}
       <section className="mb-6">
-        <div className="rounded-2xl p-5" style={{ background: "var(--color-theme-light)" }}>
+        <div className="rounded-2xl border border-[var(--color-border-default)] bg-white p-5">
           <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{c.intro}</p>
         </div>
       </section>
