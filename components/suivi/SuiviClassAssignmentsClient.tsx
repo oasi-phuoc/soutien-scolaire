@@ -7,7 +7,6 @@ import {
   type TeacherClassRow,
 } from "@/app/actions/suivi";
 import { CLASS_LEVELS, groupClassesByLevel } from "@/lib/suivi/class-levels";
-import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 function isRealClassId(classId: string) {
   return !classId.startsWith("label:");
@@ -116,12 +115,10 @@ export function SuiviClassAssignmentsClient() {
         const levelClasses = grouped[level];
         if (levelClasses.length === 0) return null;
         return (
-          <ScrollableTable
-            key={level}
-            className="rounded-xl border border-[var(--color-border-default)]"
-            maxHeightClassName="max-h-[min(28rem,calc(100dvh-16rem))]"
-            head={
-              <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
+          <div key={level} className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
                   <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
                     {level}
                   </th>
@@ -134,10 +131,10 @@ export function SuiviClassAssignmentsClient() {
                   <th className="w-20 px-2 py-2 text-center text-[10px] font-semibold uppercase tracking-wide text-white sm:w-24 sm:px-3 sm:py-2.5">
                     Secondaire
                   </th>
-              </tr>
-            }
-            body={
-levelClasses.map((cls) => {
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
+                {levelClasses.map((cls) => {
                   const canAssign = isRealClassId(cls.class_id);
                   const isPrimary = draftPrimaryId === cls.class_id;
                   const isSecondary = draftSecondaryIds.has(cls.class_id);
@@ -170,9 +167,10 @@ levelClasses.map((cls) => {
                       </td>
                     </tr>
                   );
-                })
-            }
-          />
+                })}
+              </tbody>
+            </table>
+          </div>
         );
       })}
 
