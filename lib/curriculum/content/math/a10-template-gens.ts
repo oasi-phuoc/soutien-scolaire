@@ -4,6 +4,7 @@ import {
   type A10ExerciseLevel,
   pickByLevel,
   alignOps,
+  formatSideOp,
   a102EasyGens,
   a102FracEasyGens,
   a103EasyGens,
@@ -563,7 +564,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-rightCoef}x`, `+ ${a * b}`, `: (${coef})`, ""]) };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `${formatSideOp(-(rightCoef))}x`, `+ ${a * b}`, `: (${coef})`, ""]) };
   }),
 
   // T21: A·(-B) + C·(-Dx) = E·(-F) - G·(-x)
@@ -699,7 +700,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `-${a + c} = ${rightCoef - leftCoef}x`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-leftCoef}x`, `: (${rightCoef - leftCoef})`, ""]) };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `${formatSideOp(-(leftCoef))}x`, `: (${rightCoef - leftCoef})`, ""]) };
   }),
 
   // T27: infinite — ax·bx - x + c = ax(x-d)+ex + c (x² cancels)
@@ -738,7 +739,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${-constL}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-constL}`, `: (${coef})`, ""]) };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", formatSideOp(-(constL)), `: (${coef})`, ""]) };
   }),
 
   // T29: (ax-b)·c - d(x+e) = f·(-g)
@@ -837,7 +838,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-rightCoef}x`, `: (${coef})`, ""]) };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `${formatSideOp(-(rightCoef))}x`, `: (${coef})`, ""]) };
   }),
 ];
 
@@ -936,7 +937,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-constL}`, `: ${coef}`, ""], development) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [formatSideOp(-(constL)), `: ${coef}`, ""], development) };
   }),
 
   // T4: n1/d1·x - x/d2 = integer
@@ -973,7 +974,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${constL} = ${-coef}x`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `: ${-coef}`, ""], development) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`${formatSideOp(-(coef))}x`, `: ${-coef}`, ""], development) };
   }),
 
   // T6: kx + n/d1 = A - (B-cx)/d2
@@ -1176,7 +1177,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${constL} + ${coef}x = ${constR}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `- ${constL}`, `: ${coef}`, ""], development) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`${formatSideOp(-(coef))}x`, `- ${constL}`, `: ${coef}`, ""], development) };
   }),
 
   // T16: (x-a)/d1 = (b-cx)/d2
@@ -1578,7 +1579,7 @@ const _legacyA103Gens: Array<() => SystemEquationQuestion> = [
       `${d + e * a}x = ${eqF - (-e * c)}`, `x = ${x0}`, A103_PHASE_OTHER,
       `y = ${-c} + ${a}x`, `y = ${-c} + ${a} · (${x0}) = ${y0}`,
     ];
-    return subSys([a, -1, c], [d, e, eqF], 1, "y", x0, 1, y0, 1, dev, ["", `- ${a}x`, "· (-1)", "", "", "effectuer", "réduire", `- ${-e * c}`, `: ${d + e * a}`, "", "", ""]);
+    return subSys([a, -1, c], [d, e, eqF], 1, "y", x0, 1, y0, 1, dev, ["", `- ${a}x`, "· (-1)", "", "", "effectuer", "réduire", formatSideOp(e * c), `: ${d + e * a}`, "", "", ""]);
   }),
 
   // T4: x - (-2y) = c
