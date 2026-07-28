@@ -428,7 +428,7 @@ input[type=number] {
   box-shadow: none !important;
 }
 
-/* Masquer la zone « Réponse » écran quand un quadrillage d'écriture est prévu. */
+/* Masquer les indices « Calcul » / détails écran sur la feuille d'impression. */
 .print-layout-context .print-ex-content .print-hide-on-sheet {
   display: none !important;
 }
