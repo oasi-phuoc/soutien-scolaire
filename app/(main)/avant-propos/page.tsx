@@ -386,7 +386,9 @@ export default function AvantProposPage() {
         <h2 className="text-sm font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">{c.creditsTitle}</h2>
         <div className="rounded-xl border border-[var(--color-border-default)] bg-white divide-y divide-[var(--color-border-default)]">
           <div className={`flex items-center gap-4 p-4 ${isRtl ? "flex-row-reverse" : ""}`}>
-            <LearnUpMark size={40} />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white" style={{ background: "var(--color-theme)" }}>
+              PV
+            </div>
             <div>
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">Thanh Phuoc VAN</p>
               <p className="text-xs text-[var(--color-text-secondary)]">{c.creditsPhuoc}</p>
