@@ -255,21 +255,37 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
 
       <ScrollableTable
         className="rounded-2xl border border-zinc-200 dark:border-zinc-800"
+        tableClassName="tasks-apercu-table w-full table-fixed text-sm"
         bodyClassName=""
+        colgroup={
+          <colgroup>
+            <col className="tasks-apercu-table__loupe" />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col className="w-10" />
+          </colgroup>
+        }
         head={
           <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-            <th className="px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
+            <th
+              className="tasks-apercu-table__loupe bg-[var(--color-theme)] p-0"
+              aria-label="Détail"
+            />
+            <th className="min-w-0 px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
             <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
             <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
             <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
             <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
-            <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Actions" />
+            <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Supprimer" />
           </tr>
         }
         body={
             filtered.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-4 py-10 text-center text-sm text-zinc-400">
+                <td colSpan={7} className="px-4 py-10 text-center text-sm text-zinc-400">
                   {tasks.length === 0 ? "Aucune tâche assignée pour l'instant." : "Aucun résultat pour cette recherche."}
                 </td>
               </tr>
@@ -285,8 +301,31 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                 const settled = isTaskSettled(task);
                 return (
                   <Fragment key={task.task_id}>
-                    <tr className={`align-top transition-colors ${isOpen ? "bg-zinc-50 dark:bg-zinc-900/60" : "bg-white dark:bg-zinc-950"} border-b border-zinc-100 dark:border-zinc-800`}>
-                      <td className="max-w-[10rem] px-2 py-2.5 sm:max-w-[200px] sm:px-4 sm:py-3">
+                    <tr className={`group align-top transition-colors ${isOpen ? "bg-zinc-50 dark:bg-zinc-900/60" : "bg-white dark:bg-zinc-950"} border-b border-zinc-100 dark:border-zinc-800`}>
+                      <td
+                        className={`tasks-apercu-table__loupe sticky left-0 z-10 p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] ${
+                          isOpen
+                            ? "bg-zinc-50 dark:bg-zinc-900/60"
+                            : "bg-white group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
+                        }`}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setOpenTaskId(isOpen ? null : task.task_id)}
+                          className={`inline-flex h-full w-full items-center justify-center py-2.5 transition-colors sm:py-3 ${
+                            isOpen
+                              ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]"
+                              : "text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
+                          }`}
+                          aria-label={isOpen ? "Fermer le détail" : "Voir et modifier la tâche"}
+                          title={isOpen ? "Fermer" : "Voir / modifier"}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+                          </svg>
+                        </button>
+                      </td>
+                      <td className="min-w-0 px-2 py-2.5 sm:px-4 sm:py-3">
                         <span className="block truncate font-medium text-zinc-800 dark:text-zinc-200" title={task.title}>{task.title}</span>
                         {task.description && (
                           <span className="hidden truncate text-xs text-zinc-400 sm:block" title={task.description}>{task.description}</span>
@@ -326,40 +365,23 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                         </div>
                       </td>
                       <td className="px-2 py-3 sm:px-3">
-                        <div className="flex items-center justify-end gap-1">
-                          {settled && (
-                            <button
-                              type="button"
-                              onClick={() => handleDeleteTask(task)}
-                              disabled={isDeleting}
-                              className="flex h-7 w-7 items-center justify-center rounded-lg text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-950/30"
-                              aria-label={`Supprimer le devoir ${task.title}`}
-                              title="Supprimer (devoir terminé)"
-                            >
-                              <IconTrash />
-                            </button>
-                          )}
+                        {settled ? (
                           <button
                             type="button"
-                            onClick={() => setOpenTaskId(isOpen ? null : task.task_id)}
-                            className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
-                              isOpen
-                                ? "bg-[var(--color-theme-light)] text-[var(--color-theme)] dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]"
-                                : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-                            }`}
-                            aria-label={isOpen ? "Fermer le détail" : "Voir et modifier la tâche"}
-                            title={isOpen ? "Fermer" : "Voir / modifier"}
+                            onClick={() => handleDeleteTask(task)}
+                            disabled={isDeleting}
+                            className="flex h-7 w-7 items-center justify-center rounded-lg text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-950/30"
+                            aria-label={`Supprimer le devoir ${task.title}`}
+                            title="Supprimer (devoir terminé)"
                           >
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-                            </svg>
+                            <IconTrash />
                           </button>
-                        </div>
+                        ) : null}
                       </td>
                     </tr>
                     {isOpen && (
                       <tr className="bg-zinc-50/60 dark:bg-zinc-900/30">
-                        <td colSpan={6} className="px-4 py-4">
+                        <td colSpan={7} className="px-4 py-4">
                           <TaskDetailPanel
                             task={task}
                             onClose={() => setOpenTaskId(null)}

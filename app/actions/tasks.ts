@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { INBOX_MAX_MESSAGES } from "@/lib/messagerie/inbox";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
+import { TEACHER_TASKS_MAX } from "@/lib/tasks/limits";
 
 export type TaskRow = {
   task_id: string;
@@ -137,11 +138,33 @@ export async function createTaskAction(
     ),
   );
 
+  await pruneOldestTeacherTasks(supabase, user.id, TEACHER_TASKS_MAX);
+
   revalidatePath("/admin/taches");
   revalidatePath("/suivi/devoirs");
   revalidatePath("/suivi/devoirs/apercu");
   revalidatePath("/messagerie");
   return { ok: true, taskId: task.id as string };
+}
+
+/** Keep at most `max` tasks for this teacher — delete oldest beyond the limit (FIFO). */
+async function pruneOldestTeacherTasks(
+  supabase: NonNullable<Awaited<ReturnType<typeof createSupabaseActionClient>>>,
+  teacherId: string,
+  max: number,
+): Promise<void> {
+  const { data: rows } = await supabase
+    .from("tasks")
+    .select("id")
+    .eq("created_by", teacherId)
+    .order("created_at", { ascending: false });
+
+  if (!rows || rows.length <= max) return;
+
+  const overflowIds = rows.slice(max).map((r) => r.id as string);
+  if (overflowIds.length === 0) return;
+
+  await supabase.from("tasks").delete().in("id", overflowIds);
 }
 
 export async function updateTaskAction(
@@ -216,7 +239,12 @@ export async function getTeacherTasksAction(): Promise<{ ok: boolean; tasks: Tas
   const { data, error } = await supabase.rpc("get_teacher_tasks");
   if (error) return { ok: false, tasks: [], error: error.message };
 
-  return { ok: true, tasks: (data ?? []) as TaskRow[] };
+  const tasks = ((data ?? []) as TaskRow[])
+    .slice()
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .slice(0, TEACHER_TASKS_MAX);
+
+  return { ok: true, tasks };
 }
 
 export async function getMyAssignmentsAction(): Promise<{ ok: boolean; assignments: AssignmentRow[]; error?: string }> {
