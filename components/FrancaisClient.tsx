@@ -399,10 +399,6 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   }, [tabParam]);
 
   useEffect(() => {
-    if (tabParam && VALID_TABS.includes(tabParam)) setTab(tabParam);
-  }, [tabParam]);
-
-  useEffect(() => {
     refreshProgress();
     setHydrated(true);
 

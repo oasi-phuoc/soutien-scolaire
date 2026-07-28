@@ -57,19 +57,6 @@ export default async function AdminPage() {
             </p>
           </div>
         </div>
-        <Link
-          href="/admin/attribution-professeurs"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--color-theme)]/30 bg-white text-[var(--color-theme)] shadow-sm transition-colors hover:bg-[var(--color-theme-light)] dark:bg-zinc-900 dark:hover:bg-[var(--color-theme)]/10"
-          aria-label="Attribution des professeurs"
-          title="Attribution des professeurs"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-        </Link>
       </div>
 
       <AdminTable
