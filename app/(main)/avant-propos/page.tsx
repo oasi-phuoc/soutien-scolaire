@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import type { PivotCode } from "@/lib/pivot-langs";
+import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 
 const STORAGE_KEY = "soutien:pivot";
 
@@ -42,7 +43,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "Conception et réalisation de l'application",
     creditsMelina: "Participation — Lecture & Alphabétisation",
     creditsImages: "Toutes les images sont générées par intelligence artificielle.",
-    creditsAudios: "Les audios sont issus du livre ABC DELF.",
+    creditsAudios: "Les audios sont issus des livres ABC DELF et 100% FLE Communication essentielle.",
   },
   en: {
     dir: "ltr",
@@ -63,7 +64,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "Design and development of the app",
     creditsMelina: "Contribution — Reading & Literacy",
     creditsImages: "All images are AI-generated.",
-    creditsAudios: "Audio tracks are taken from the ABC DELF book.",
+    creditsAudios: "Audio tracks are taken from the books ABC DELF and 100% FLE Communication essentielle.",
   },
   ar: {
     dir: "rtl",
@@ -84,7 +85,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "تصميم وتطوير التطبيق",
     creditsMelina: "مشاركة — القراءة والكتابة الأولية",
     creditsImages: "جميع الصور مُولَّدة بالذكاء الاصطناعي.",
-    creditsAudios: "المقاطع الصوتية مأخوذة من كتاب ABC DELF.",
+    creditsAudios: "المقاطع الصوتية مأخوذة من كتابَي ABC DELF و 100% FLE Communication essentielle.",
   },
   fa: {
     dir: "rtl",
@@ -105,7 +106,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "طراحی و توسعه برنامه",
     creditsMelina: "مشارکت — خواندن و سوادآموزی",
     creditsImages: "همهٔ تصاویر با هوش مصنوعی تولید شده‌اند.",
-    creditsAudios: "فایل‌های صوتی از کتاب ABC DELF گرفته شده‌اند.",
+    creditsAudios: "فایل‌های صوتی از کتاب‌های ABC DELF و 100% FLE Communication essentielle گرفته شده‌اند.",
   },
   pt: {
     dir: "ltr",
@@ -126,7 +127,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "Conceção e desenvolvimento da aplicação",
     creditsMelina: "Participação — Leitura e Alfabetização",
     creditsImages: "Todas as imagens são geradas por inteligência artificial.",
-    creditsAudios: "Os áudios são retirados do livro ABC DELF.",
+    creditsAudios: "Os áudios são retirados dos livros ABC DELF e 100% FLE Communication essentielle.",
   },
   so: {
     dir: "ltr",
@@ -147,7 +148,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "Naqshadeynta iyo horumarinta app-ka",
     creditsMelina: "Kaalmo — Akhriska iyo Xarfaha",
     creditsImages: "Dhammaan sawirrada waxaa soo saaray sirdoon macmal.",
-    creditsAudios: "Codadka waxaa laga soo qaatay buugga ABC DELF.",
+    creditsAudios: "Codadka waxaa laga soo qaatay buugaagta ABC DELF iyo 100% FLE Communication essentielle.",
   },
   ti: {
     dir: "ltr",
@@ -168,7 +169,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "ዲዛይንን ምዕባይን ናይ ኣፕ",
     creditsMelina: "ምስታፍ — ምንባብን ምፅሓፍን",
     creditsImages: "ኩሎም ምስልታት ብሓላፊ ምሕዳስ ኣእምሮ ተፈጢሮም።",
-    creditsAudios: "ድምጽታት ካብ መጽሓፍ ABC DELF ተወሲዶም።",
+    creditsAudios: "ድምጽታት ካብ መጻሕፍቲ ABC DELFን 100% FLE Communication essentielleን ተወሲዶም።",
   },
   tr: {
     dir: "ltr",
@@ -189,7 +190,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "Uygulamanın tasarımı ve geliştirilmesi",
     creditsMelina: "Katkı — Okuma ve Okuryazarlık",
     creditsImages: "Tüm görseller yapay zekâ ile üretilmiştir.",
-    creditsAudios: "Sesler ABC DELF kitabından alınmıştır.",
+    creditsAudios: "Sesler ABC DELF ve 100% FLE Communication essentielle kitaplarından alınmıştır.",
   },
   ps: {
     dir: "rtl",
@@ -210,7 +211,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "د اپ ډیزاین او پراختیا",
     creditsMelina: "ګډون — لوستل او ابتدایي زده کړه",
     creditsImages: "ټول انځورونه د مصنوعي ذهانت له خوا جوړ شوي دي.",
-    creditsAudios: "غږونه د ABC DELF کتاب څخه اخیستل شوي دي.",
+    creditsAudios: "غږونه د ABC DELF او 100% FLE Communication essentielle کتابونو څخه اخیستل شوي دي.",
   },
   uk: {
     dir: "ltr",
@@ -231,7 +232,7 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsPhuoc: "Розробка та реалізація додатку",
     creditsMelina: "Участь — Читання та грамотність",
     creditsImages: "Усі зображення згенеровані штучним інтелектом.",
-    creditsAudios: "Аудіозаписи взято з книги ABC DELF.",
+    creditsAudios: "Аудіозаписи взято з книг ABC DELF та 100% FLE Communication essentielle.",
   },
 };
 
@@ -295,13 +296,16 @@ export default function AvantProposPage() {
               <path d="M15 18l-6-6 6-6" stroke="var(--color-theme)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <div>
-            <h1 className="text-xl font-bold text-[var(--color-text-primary)]">À propos</h1>
-            <p className="text-xs leading-snug text-[var(--color-text-secondary)]">
-              LearnUp - Thanh Phuoc VAN
-              <br />
-              Centre de formation « Le Botza »
-            </p>
+          <div className="flex min-w-0 items-start gap-2.5">
+            <LearnUpMark size={36} className="mt-0.5" />
+            <div className="min-w-0">
+              <h1 className="text-xl font-bold text-[var(--color-text-primary)]">À propos</h1>
+              <p className="text-xs leading-snug text-[var(--color-text-secondary)]">
+                LearnUp - Thanh Phuoc VAN
+                <br />
+                Centre de formation « Le Botza »
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -382,11 +386,9 @@ export default function AvantProposPage() {
         <h2 className="text-sm font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">{c.creditsTitle}</h2>
         <div className="rounded-xl border border-[var(--color-border-default)] bg-white divide-y divide-[var(--color-border-default)]">
           <div className={`flex items-center gap-4 p-4 ${isRtl ? "flex-row-reverse" : ""}`}>
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white" style={{ background: "var(--color-theme)" }}>
-              VP
-            </div>
+            <LearnUpMark size={40} />
             <div>
-              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Van Thanh Phuoc</p>
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Thanh Phuoc VAN</p>
               <p className="text-xs text-[var(--color-text-secondary)]">{c.creditsPhuoc}</p>
             </div>
           </div>

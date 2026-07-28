@@ -9,6 +9,7 @@ import {
   PrintExerciseLayoutProvider,
   type PrintExerciseColumns,
 } from "@/components/print/PrintExerciseLayoutContext";
+import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-4 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
@@ -268,20 +269,15 @@ export function PrintDocumentFooter({
   return (
     <div className={`${preview ? "mt-auto flex" : "print-document-footer fixed bottom-0 left-0 right-0 hidden print:flex"} items-end justify-between border-t border-black bg-white pt-1 text-[0.7em] leading-tight text-black`}>
       <div className="flex items-center gap-1.5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/logo-pied-page.webp"
-          alt=""
-          style={{ height: "2.714em", objectFit: "contain" }}
-          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-        />
+        <LearnUpMark size={22} className="print-footer-mark" />
         <div>
-          <p>LearnUP - Van Thanh Phuoc</p>
+          <p>LearnUp - Thanh Phuoc VAN</p>
+          <p>Centre de formation « Le Botza »</p>
           <p>Imprimé le {date}{printedBy ? ` par ${printedBy}` : ""}</p>
         </div>
       </div>
       <div className="text-right">
-        <p>Zone Industrielle 4, 1963 Vétroz — Tél. 027 606 18 60</p>
+        <p>Zone Industrielle 4, 1963 Vétroz</p>
         <p>{preview ? `Page ${page} sur ${totalPages}` : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
       </div>
     </div>
