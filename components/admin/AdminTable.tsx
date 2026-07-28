@@ -139,6 +139,17 @@ function IconArchive() {
   );
 }
 
+/** Icône clipboard / test — module TCF·TCM (placement). */
+function IconPlacement() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <path d="M9 12h6M9 16h4" />
+    </svg>
+  );
+}
+
 function IconCancel() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -302,7 +313,7 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
   );
 }
 
-function PlacementModuleToggle({
+function PlacementModuleButton({
   enabled,
   disabled,
   onChange,
@@ -311,30 +322,24 @@ function PlacementModuleToggle({
   disabled?: boolean;
   onChange: (enabled: boolean) => void;
 }) {
+  const label = enabled ? "Module TCF / TCM actif — cliquer pour désactiver" : "Module TCF / TCM inactif — cliquer pour activer";
   return (
-    <label className="flex shrink-0 cursor-pointer items-center gap-3 select-none">
-      <button
-        type="button"
-        role="switch"
-        aria-checked={enabled}
-        aria-label="Module TCF / TCM"
-        disabled={disabled}
-        onClick={() => onChange(!enabled)}
-        className={`flex h-7 w-11 shrink-0 items-center rounded-full p-0.5 transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
-          enabled ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
-        }`}
-      >
-        <span
-          className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
-            enabled ? "translate-x-4" : "translate-x-0"
-          }`}
-        />
-      </button>
-      <span className="whitespace-nowrap text-sm text-zinc-600 dark:text-zinc-300">
-        Module TCF / TCM{" "}
-        <span className="font-semibold text-zinc-800 dark:text-zinc-100">{enabled ? "actif" : "inactif"}</span>
-      </span>
-    </label>
+    <button
+      type="button"
+      role="switch"
+      aria-checked={enabled}
+      aria-label={label}
+      title={label}
+      disabled={disabled}
+      onClick={() => onChange(!enabled)}
+      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+        enabled
+          ? "border-[var(--color-theme)]/35 bg-[var(--color-theme-light)] text-[var(--color-theme)] hover:bg-[color-mix(in_oklch,var(--color-theme-light)_70%,white)] dark:border-[var(--color-theme)]/50 dark:bg-[var(--color-theme)]/15 dark:text-[var(--color-theme-muted)] dark:hover:bg-[var(--color-theme)]/25"
+          : "border-zinc-200 bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-500 dark:hover:bg-zinc-800"
+      }`}
+    >
+      <IconPlacement />
+    </button>
   );
 }
 
@@ -429,13 +434,14 @@ export function AdminTable({
           )}
         </div>
         {currentUserRole === "admin" && (
-          <div className="mb-2 flex items-center justify-between gap-2">
-            <PlacementModuleToggle
+          <div className="mb-2 flex items-center justify-end gap-2">
+            <PlacementModuleButton
               enabled={placementEnabled}
               disabled={placementPending}
               onChange={togglePlacementModule}
             />
             <button
+              type="button"
               onClick={() => setResetConfirming(true)}
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
               aria-label="Archiver les élèves"
@@ -462,8 +468,21 @@ export function AdminTable({
             }} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-[var(--color-theme)] text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
             {sortOpen && (
               <>
-                {([["math", "Math"], ["francais", "Fr"], ["lecture", "Lec"], ["access", "Acc"], ["placement", "Test"]] as const).map(([val, label]) => (
-                  <button key={val} onClick={() => { setSortBy(sortBy === val ? "name" : val); setSortOpen(true); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
+                {([
+                  ["math", "Math", "Maths"],
+                  ["francais", "Fr", "Français"],
+                  ["lecture", "Lec", "Lecture"],
+                  ["access", "Acc", "Accès"],
+                  ["placement", "Test", "Test"],
+                ] as const).map(([val, shortLabel, fullLabel]) => (
+                  <button
+                    key={val}
+                    onClick={() => { setSortBy(sortBy === val ? "name" : val); setSortOpen(true); }}
+                    className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+                  >
+                    <span className="lg:hidden">{shortLabel}</span>
+                    <span className="hidden lg:inline">{fullLabel}</span>
+                  </button>
                 ))}
               </>
             )}
