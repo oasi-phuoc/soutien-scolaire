@@ -145,6 +145,7 @@ import {
   applyConjProfile,
   bumpPoolSizes,
   buildNegationExercises,
+  annotateConjInstructions,
 } from "./content/francais/conj-exercise-builders";
 import {
   getProfileForLesson,
@@ -239,7 +240,7 @@ function addGeneratedExercises<T extends GrammarLesson | ConjLesson>(lesson: T):
   return exercises.length > 0 ? { ...lesson, exercises } : lesson;
 }
 
-/** R6/R7/R8 temps de verbe : pack R2 (8 ex.) + négation (6 ex.), 15 modèles/pool. */
+/** R6/R7/R8 temps de verbe : pack R2 (8 ex.) + négation (6 ex.). */
 function augmentTenseLessonExercises<T extends GrammarLesson | ConjLesson>(lesson: T): T {
   const profile = getProfileForLesson(lesson.slug);
   if (profile) {
@@ -248,21 +249,21 @@ function augmentTenseLessonExercises<T extends GrammarLesson | ConjLesson>(lesso
   return lesson;
 }
 
-/** R2 : poolSize 15 + bloc négation. Autres conj : poolSize 15 si pools suffisants. */
+/** R2 : tailles de pool + bloc négation. Autres conj : tailles de pool. */
 function augmentConjLessonExercises(lesson: ConjLesson): ConjLesson {
   if (TENSE_LESSON_SLUGS.has(lesson.slug)) {
     return augmentTenseLessonExercises(lesson);
   }
   if (lesson.slug === NEGATION_PASSE_COMPOSE_SLUG) {
-    return { ...lesson, exercises: bumpPoolSizes(lesson.exercises) };
+    return { ...lesson, exercises: bumpPoolSizes(annotateConjInstructions(lesson.exercises, "passé composé")) };
   }
   if (R2_CONJ_SLUGS.has(lesson.slug)) {
     const negProfile = getR2NegationProfile(lesson.slug);
-    const base = bumpPoolSizes(lesson.exercises);
+    const base = bumpPoolSizes(annotateConjInstructions(lesson.exercises, "présent"));
     const neg = negProfile ? buildNegationExercises({ ...negProfile, negation: true }) : [];
     return { ...lesson, exercises: [...base, ...neg] };
   }
-  return { ...lesson, exercises: bumpPoolSizes(lesson.exercises) };
+  return { ...lesson, exercises: bumpPoolSizes(annotateConjInstructions(lesson.exercises, "présent")) };
 }
 
 /** Grammaire R6/R7/R8 (temps de verbe) : même traitement que conjugaison. */

@@ -965,11 +965,25 @@ function FillExercise({
     ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
     : undefined;
 
+  const twoCols = /^Exercice\s*[12]\b/i.test(exercise.title);
+
+  const renderTextWithVerbHint = (s: string) =>
+    s.split(/(\([^)]+\))/g).map((chunk, ci) =>
+      chunk.startsWith("(") && chunk.endsWith(")") ? (
+        <strong key={ci} className="font-bold text-[var(--color-accent-fr)]">
+          {chunk}
+        </strong>
+      ) : (
+        <React.Fragment key={ci}>{chunk}</React.Fragment>
+      ),
+    );
+
   return (
     <div className="space-y-5">
       <div>
         <p className="text-sm text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>{translatedInstruction ?? exercise.instruction}</p>
       </div>
+      <div className={twoCols ? "grid gap-x-8 gap-y-4 lg:grid-cols-2" : "space-y-5"}>
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
         const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
@@ -1013,7 +1027,7 @@ function FillExercise({
         const renderParts = (s: string) =>
           s.split("___").map((part, pi, arr) => (
             <React.Fragment key={pi}>
-              {part}
+              {renderTextWithVerbHint(part)}
               {pi < arr.length - 1 && inputEl}
             </React.Fragment>
           ));
@@ -1025,8 +1039,8 @@ function FillExercise({
               {renderParts(sentLine1)}
               {parenHint && (
                 <>
-                  <br />
-                  <span className="ml-4 text-xs text-[var(--color-text-secondary)]">{parenHint}</span>
+                  {" "}
+                  <strong className="font-bold text-[var(--color-accent-fr)]">{parenHint}</strong>
                 </>
               )}
               {sentLine2 !== null && (
@@ -1039,6 +1053,7 @@ function FillExercise({
           </div>
         );
       })}
+      </div>
     </div>
   );
 }
@@ -2852,8 +2867,8 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
         </div>
       </header>
 
-      {/* Training progress bar — hidden during eval */}
-      {!isInEvalPhase && (
+      {/* Training progress bar — hidden on eval announce / eval (comme en math) */}
+      {!isInEvalPhase && !isEvalAnnounce && (
         <div className="mb-6 flex gap-1" data-no-print>
           {Array.from({ length: trainingTotalSteps }).map((_, i) => (
             <div
