@@ -402,9 +402,7 @@ export function EleveDetailPage({
                   <button key={r} onClick={() => user.role !== r && handleChangeRole(r)}
                     className={`flex-1 py-2.5 text-sm font-semibold transition-colors ${
                       user.role === r
-                        ? r === "admin" ? "bg-blue-600 text-white"
-                          : r === "prof" ? "bg-emerald-600 text-white"
-                          : "bg-zinc-700 text-white dark:bg-zinc-600"
+                        ? "bg-[var(--color-theme)] text-white"
                         : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                     }`}>
                     {ROLE_LABELS[r]}
