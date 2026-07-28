@@ -1748,8 +1748,8 @@ function PoolGroupExercise({
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{item.promptFr}</p>
               </div>
               <PrintWorkGrid rows={5} />
-              {/* Answer row — masquée à l'impression (quadrillage à la place) */}
-              <div className="print-hide-on-sheet flex items-center gap-3 pl-2">
+              {/* Réponse : visible à l'impression ; le quadrillage sert au développement */}
+              <div className="flex items-center gap-3 pl-2">
                 <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
                 {isWrong ? (
                   <div className="w-28 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
@@ -1773,7 +1773,7 @@ function PoolGroupExercise({
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">✓</span>
                 )}
               </div>
-              {/* Developed calculation shown after validation (from hintFr) */}
+              {/* Developed calculation shown after validation (from hintFr) — masqué sur la feuille */}
               {validated && item.hintFr && (
                 <p className="print-hide-on-sheet mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
                   Calcul : <span className="font-mono text-[var(--color-text-primary)]">{item.hintFr}</span>

@@ -2980,7 +2980,7 @@ function WordProblemsExercise({
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{q.textFr}</p>
               </div>
               {showWorkGrid ? <PrintWorkGrid rows={5} /> : null}
-              <div className={`flex items-center gap-3 pl-2${showWorkGrid ? " print-hide-on-sheet" : ""}`}>
+              <div className="flex items-center gap-3 pl-2">
                 <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
                 {wrong ? (
                   <div className={`w-28 ${WRONG_FIELD_STACK}`}>
@@ -3002,7 +3002,7 @@ function WordProblemsExercise({
                 )}
               </div>
               {validated && revealCorrection && q.calculation && (
-                <p className={`mt-1 pl-2 text-xs text-[var(--color-text-secondary)]${showWorkGrid ? " print-hide-on-sheet" : ""}`}>
+                <p className="print-hide-on-sheet mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
                   Calcul : <span className="font-mono text-[var(--color-text-primary)]">{q.calculation}</span>
                 </p>
               )}
@@ -6926,6 +6926,10 @@ function GenericExercisePrintPreview({
           <p className="text-sm leading-relaxed text-black">{prompt}</p>
         </div>
         <PrintWorkGrid rows={5} />
+        <div className="flex items-center gap-3 pl-2">
+          <span className="shrink-0 text-sm text-black">Réponse :</span>
+          <div className="h-8 w-28 border-b-2 border-black/40" />
+        </div>
       </div>
     );
   }
