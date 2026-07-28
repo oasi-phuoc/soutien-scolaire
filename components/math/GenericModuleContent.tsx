@@ -72,6 +72,12 @@ import { G7CentralSymmetryExercise } from "@/components/math/geo/G7CentralSymmet
 import { G7TranslationExercise } from "@/components/math/geo/G7TranslationExercise";
 import { listReproduceTasks } from "@/lib/curriculum/content/math/g7-reproduce-data";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const ALG_FIELD_H = "min-h-9";
@@ -6886,10 +6892,45 @@ function buildRevisionFlatSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
 }
 
 function GenericExercisePrintPreview({ prompt }: { prompt: string }) {
+  const questionCount = usePrintQuestionCount(1);
+  const columns = usePrintColumns();
   return (
     <div className="space-y-3">
       <p className="text-sm leading-relaxed text-black">{prompt}</p>
-      <div className="h-8 w-full border-b-2 border-black/40" />
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {Array.from({ length: questionCount }, (_, i) => (
+          <div key={i} className="flex items-center gap-2">
+            {questionCount > 1 && (
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
+                {i + 1}.
+              </span>
+            )}
+            <div className="h-8 flex-1 border-b-2 border-black/40" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function GenericBlanksPrintPreview({ exerciseNum }: { exerciseNum: number }) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  return (
+    <div className="space-y-3">
+      <p className="text-sm font-medium text-black">
+        Complète les questions de l&apos;exercice {exerciseNum}.
+      </p>
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {Array.from({ length: questionCount }, (_, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
+              {i + 1}.
+            </span>
+            <div className="h-8 flex-1 border-b-2 border-black/40" />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -6909,11 +6950,11 @@ function genericStepPrompt(step: FlatStep): string | null {
 /** Aperçus d'impression pour leçons GenericModuleContent (prompts + cases à remplir). */
 export function buildGenericMathPrintExercises(
   lesson: MathSubmoduleLesson,
-): { id: string; label: string; preview: React.ReactNode }[] {
+): PrintExercise[] {
   const steps = buildSteps([lesson], true);
   const evalStart = steps.findIndex((s) => s.kind === "eval_start");
   const training = steps.slice(0, evalStart >= 0 ? evalStart : steps.length);
-  const out: { id: string; label: string; preview: React.ReactNode }[] = [];
+  const out: PrintExercise[] = [];
 
   for (const step of training) {
     if (
@@ -6929,6 +6970,8 @@ export function buildGenericMathPrintExercises(
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: 1,
         preview: <GenericExercisePrintPreview prompt={prompt} />,
       });
       continue;
@@ -6937,21 +6980,9 @@ export function buildGenericMathPrintExercises(
     out.push({
       id: `${step.kind}-${n}`,
       label: `Exercice ${n}`,
-      preview: (
-        <div className="space-y-3">
-          <p className="text-sm font-medium text-black">
-            Complète les questions de l&apos;exercice {n}.
-          </p>
-          {Array.from({ length: 5 }, (_, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
-                {i + 1}.
-              </span>
-              <div className="h-8 flex-1 border-b-2 border-black/40" />
-            </div>
-          ))}
-        </div>
-      ),
+      supportsPrintLayout: true,
+      defaultQuestionCount: 5,
+      preview: <GenericBlanksPrintPreview exerciseNum={n} />,
     });
   }
 
@@ -6962,6 +6993,8 @@ export function buildGenericMathPrintExercises(
       out.push({
         id: String(i + 1),
         label: `Exercice ${i + 1}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: 1,
         preview: <GenericExercisePrintPreview prompt={item.promptFr} />,
       });
     });
