@@ -76,6 +76,12 @@ import {
   PrintWorkGrid,
   PRINT_WORK_GRID_SUBMODULES,
 } from "@/components/print/PrintWorkGrid";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const ALG_FIELD_H = "min-h-9";
@@ -1953,10 +1959,15 @@ function genExprComp(op: ArithOp, range: [number, number], exNum: number, count 
     if (op === "+") return [rnd(min, max), rnd(min, max)];
     const a = rnd(min, max); const b = rnd(min, a); return [a, b];
   };
-  const targets: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
-  for (let i = targets.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [targets[i], targets[j]] = [targets[j]!, targets[i]!];
+  const baseTargets: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
+  const targets: Array<"<" | "=" | ">"> = [];
+  while (targets.length < count) {
+    const batch = [...baseTargets];
+    for (let i = batch.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [batch[i], batch[j]] = [batch[j]!, batch[i]!];
+    }
+    targets.push(...batch);
   }
   const questions: ExprCompQ[] = targets.slice(0, count).map(answer => {
     let la: number, lb: number, ra: number, rb: number;
@@ -1989,7 +2000,10 @@ function ExprCompExercise({
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
   revealCorrection?: boolean;
 }) {
-  const maxVal = Math.max(...config.questions.flatMap(q => [Math.abs(q.la), Math.abs(q.lb), Math.abs(q.ra), Math.abs(q.rb)]));
+  const questionCount = usePrintQuestionCount(config.questions.length);
+  const columns = usePrintColumns();
+  const questions = config.questions.slice(0, questionCount);
+  const maxVal = Math.max(0, ...questions.flatMap(q => [Math.abs(q.la), Math.abs(q.lb), Math.abs(q.ra), Math.abs(q.rb)]));
   const numW = maxVal >= 1000 ? "4ch" : maxVal >= 100 ? "3ch" : "2ch";
   const num = (n: number) => (
     <span className="shrink-0 text-right text-[var(--color-text-primary)]" style={{ width: numW }}>{n}</span>
@@ -1997,35 +2011,33 @@ function ExprCompExercise({
   return (
     <div className="space-y-4">
       <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-        <div className="space-y-3">
-          {config.questions.map((q, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <div className="flex items-center shrink-0">
-                <span className="w-6 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="shrink-0 inline-flex items-center gap-1 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
-              </div>
-              <div className="flex shrink-0 gap-1">
-                {(["<", "=", ">"] as const).map(sym => {
-                  const sel = answers[i] === sym;
-                  const isCorrect = sym === q.answer;
-                  let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
-                  if (!(validated && revealCorrection)) {
-                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
-                  } else if (sel) {
-                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-                  } else if (!sel && isCorrect) {
-                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
-                  } else {
-                    cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
-                  }
-                  return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
-                })}
-              </div>
-              <span className="shrink-0 inline-flex items-center gap-1 font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-3">
+            <div className="flex items-center shrink-0">
+              <span className="w-6 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="shrink-0 inline-flex items-center gap-1 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
             </div>
-          ))}
-        </div>
+            <div className="flex shrink-0 gap-1">
+              {(["<", "=", ">"] as const).map(sym => {
+                const sel = answers[i] === sym;
+                const isCorrect = sym === q.answer;
+                let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
+                if (!(validated && revealCorrection)) {
+                  cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                } else if (sel) {
+                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                } else if (!sel && isCorrect) {
+                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
+                } else {
+                  cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                }
+                return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
+              })}
+            </div>
+            <span className="shrink-0 inline-flex items-center gap-1 font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -2092,11 +2104,11 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
 }
 
 // ── Arithmetic group generators ──────────────────────────────────────────────
-function genArithGroup(op: ArithOp, range: [number, number], exNum: number, missingOperand = false, timer?: number): ArithGroupConfig {
+function genArithGroup(op: ArithOp, range: [number, number], exNum: number, missingOperand = false, timer?: number, count?: number): ArithGroupConfig {
   const [lo, hi] = range;
   const qs: ArithQuestion[] = [];
-  const count = timer ? 8 : 5;
-  for (let i = 0; i < count; i++) {
+  const n = count ?? (timer ? 8 : 5);
+  for (let i = 0; i < n; i++) {
     let a: number, b: number, result: number;
     if (op === "+") {
       a = rnd(lo, hi); b = rnd(lo, hi); result = a + b;
@@ -2946,21 +2958,25 @@ function WordProblemsExercise({
   /** Quadrillage d'écriture sous chaque énoncé (aperçu / impression). */
   showWorkGrid?: boolean;
 }) {
+  const questionCount = usePrintQuestionCount(config.questions.length);
+  const columns = usePrintColumns();
+  const questions = config.questions.slice(0, questionCount);
   const inputCls = `w-28 ${ALG_FIELD_H} px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
+  void noFrame; // toujours sans cadre (écran + impression)
   return (
     <div className="space-y-5">
       <div>
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne ?? "Résolvez les problèmes. Écrivez uniquement la réponse numérique."}</p>
       </div>
-      <div className="space-y-6">
-        {config.questions.map((q, i) => {
+      <div className={printQuestionsListClass(columns, "space-y-6")}>
+        {questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated && revealCorrection ? (results[i] ?? false) : null;
           const wrong = ok === false;
           return (
             <div key={i} className="space-y-3">
-              <div className={`ex-prompt-frame ${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4"}`}>
+              <div className="ex-prompt-frame">
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{q.textFr}</p>
               </div>
               {showWorkGrid ? <PrintWorkGrid rows={5} /> : null}
@@ -3009,6 +3025,9 @@ function UnitConversionExercise({
   onChange: (i: number, val: string) => void;
   revealCorrection?: boolean;
 }) {
+  const questionCount = usePrintQuestionCount(config.questions.length);
+  const columns = usePrintColumns();
+  const questions = config.questions.slice(0, questionCount);
   const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
     <div className="space-y-5">
@@ -3018,8 +3037,8 @@ function UnitConversionExercise({
           Convertissez les valeurs vers l&apos;unité de mesure demandée.
         </p>
       </div>
-      <div className="space-y-4">
-        {config.questions.map((q, i) => {
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
+        {questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated && revealCorrection ? (results[i] ?? false) : null;
           const wrong = ok === false;
@@ -3104,6 +3123,10 @@ function ArithmeticGroupExercise({
     return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   };
 
+  const questionCount = usePrintQuestionCount(config.questions.length);
+  const columns = usePrintColumns();
+  const questions = config.questions.slice(0, questionCount);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -3123,8 +3146,8 @@ function ArithmeticGroupExercise({
       {consigne && (
         <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       )}
-      <div className="space-y-3">
-        {config.questions.map((q, i) => {
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated && revealCorrection ? results[i] ?? false : null;
           const wrongField = ok === false;
@@ -3883,76 +3906,71 @@ function RoundingExercise({
   revealCorrection?: boolean;
   noFrame?: boolean;
 }) {
+  const questionCount = usePrintQuestionCount(config.questions.length);
+  const columns = usePrintColumns();
+  const questions = config.questions.slice(0, questionCount);
   const inputBase = `w-[4.5rem] h-8 shrink-0 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   const isNew = config.consigne !== "";
   const isDecKind = config.kind.startsWith("dec_");
   const isDecMixed = config.kind === "dec_mixed";
   const isInline = config.kind === "diz_near" || config.kind === "cent_near_new" || isDecKind;
-
-  const gridCols = isDecMixed
-    ? "1.25rem max-content 1.2rem max-content max-content 4.5rem"
-    : isInline
-      ? "1.25rem max-content max-content 4.5rem"
-      : isNew && !isInline ? "1.25rem max-content max-content" : undefined;
+  void noFrame;
 
   return (
     <div className="space-y-4">
       <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
-      <div className={noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4"}>
-        <div
-          className={isInline || isDecMixed ? "grid items-center gap-x-2 gap-y-3" : isNew && !isInline ? "grid gap-y-3" : "space-y-3"}
-          style={gridCols ? { gridTemplateColumns: gridCols } : undefined}
-        >
-          {config.questions.map((q, i) => {
-            const v = answers[i] ?? "";
-            const ok = validated && revealCorrection ? results[i] ?? false : null;
-            const wrongField = ok === false;
-            const numLabel = <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>;
-            const prompt = <span className={`${isNew && !isInline ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
-            const field = wrongField
-              ? <div className={`${inputBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center overflow-hidden`}>
-                  <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
-                  <span className="text-[9px] font-bold leading-none text-amber-600">{q.answer}</span>
-                </div>
-              : <input
-                  type="text"
-                  inputMode={isDecKind ? "decimal" : "numeric"}
-                  value={v}
-                  disabled={validated}
-                  onChange={e => onChange(i, isDecKind ? e.target.value.replace(/[^0-9,.]/g, "") : e.target.value.replace(/[^0-9]/g, ""))}
-                  className={inputBase}
-                />;
-            if (isDecMixed) {
-              const parts = q.prompt.split(" → ");
-              const numPart = parts[0] ?? q.prompt;
-              const labelPart = parts[1] ?? "";
-              return (
-                <Fragment key={i}>
-                  <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>
-                  <span className="font-mono text-sm text-[var(--color-text-primary)] self-center">{numPart}</span>
-                  <span className="text-sm font-bold text-[var(--color-accent-alg)] self-center">→</span>
-                  <span className="text-sm text-[var(--color-text-secondary)] self-center">{labelPart}</span>
-                  <span className="text-sm text-[var(--color-text-secondary)] self-center">≈</span>
-                  {field}
-                </Fragment>
-              );
-            }
-            if (isInline) {
-              return (
-                <Fragment key={i}>
-                  <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>
-                  <span className="font-mono text-sm text-[var(--color-text-primary)] self-center">{q.prompt}</span>
-                  <span className="text-sm text-[var(--color-text-secondary)] self-center">≈</span>
-                  {field}
-                </Fragment>
-              );
-            }
-            return isNew
-              ? <Fragment key={i}>{numLabel}{prompt}{field}</Fragment>
-              : <div key={i} className="flex items-center gap-2 flex-wrap min-h-[2.25rem]">{numLabel}{prompt}{field}</div>;
-          })}
-        </div>
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {questions.map((q, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated && revealCorrection ? results[i] ?? false : null;
+          const wrongField = ok === false;
+          const field = wrongField
+            ? <div className={`${inputBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center overflow-hidden`}>
+                <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                <span className="text-[9px] font-bold leading-none text-amber-600">{q.answer}</span>
+              </div>
+            : <input
+                type="text"
+                inputMode={isDecKind ? "decimal" : "numeric"}
+                value={v}
+                disabled={validated}
+                onChange={e => onChange(i, isDecKind ? e.target.value.replace(/[^0-9,.]/g, "") : e.target.value.replace(/[^0-9]/g, ""))}
+                className={inputBase}
+              />;
+          if (isDecMixed) {
+            const parts = q.prompt.split(" → ");
+            const numPart = parts[0] ?? q.prompt;
+            const labelPart = parts[1] ?? "";
+            return (
+              <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{numPart}</span>
+                <span className="text-sm font-bold text-[var(--color-accent-alg)]">→</span>
+                <span className="text-sm text-[var(--color-text-secondary)]">{labelPart}</span>
+                <span className="text-sm text-[var(--color-text-secondary)]">≈</span>
+                {field}
+              </div>
+            );
+          }
+          if (isInline) {
+            return (
+              <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.prompt}</span>
+                <span className="text-sm text-[var(--color-text-secondary)]">≈</span>
+                {field}
+              </div>
+            );
+          }
+          return (
+            <div key={i} className="flex items-center gap-2 flex-wrap min-h-[2.25rem]">
+              <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className={`${isNew ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)]`}>{q.prompt}</span>
+              {field}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -6899,14 +6917,79 @@ function GenericExercisePrintPreview({
   prompt: string;
   showWorkGrid?: boolean;
 }) {
+  const questionCount = usePrintQuestionCount(1);
+  const columns = usePrintColumns();
+  if (showWorkGrid) {
+    return (
+      <div className="space-y-3">
+        <div className="ex-prompt-frame">
+          <p className="text-sm leading-relaxed text-black">{prompt}</p>
+        </div>
+        <PrintWorkGrid rows={5} />
+      </div>
+    );
+  }
   return (
     <div className="space-y-3">
       <div className="ex-prompt-frame">
         <p className="text-sm leading-relaxed text-black">{prompt}</p>
       </div>
-      {showWorkGrid ? <PrintWorkGrid rows={5} /> : <div className="h-8 w-full border-b-2 border-black/40" />}
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {Array.from({ length: questionCount }, (_, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
+              {i + 1}.
+            </span>
+            <div className="h-8 flex-1 border-b-2 border-black/40" />
+          </div>
+        ))}
+      </div>
     </div>
   );
+}
+
+function GenericBlanksPrintPreview({
+  exerciseNum,
+  defaultCount = 5,
+}: {
+  exerciseNum: number;
+  defaultCount?: number;
+}) {
+  const questionCount = usePrintQuestionCount(defaultCount);
+  const columns = usePrintColumns();
+  return (
+    <div className="space-y-3">
+      <p className="text-sm font-medium text-black">
+        Complète les questions de l&apos;exercice {exerciseNum}.
+      </p>
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {Array.from({ length: questionCount }, (_, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
+              {i + 1}.
+            </span>
+            <div className="h-8 flex-1 border-b-2 border-black/40" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const PRINT_POOL_SIZE = 15;
+
+function expandWordProblemsConfig(config: WordProblemsConfig, poolSize = PRINT_POOL_SIZE): WordProblemsConfig {
+  const qs = [...config.questions];
+  let guard = 0;
+  while (qs.length < poolSize && guard < 40) {
+    qs.push(...genWP(config.level, config.exNum).questions);
+    guard++;
+  }
+  return { ...config, questions: qs.slice(0, poolSize) };
+}
+
+function configQuestionCount(config: { questions?: unknown[] } | undefined, fallback = 5): number {
+  return config?.questions?.length || fallback;
 }
 
 function genericStepPrompt(step: FlatStep): string | null {
@@ -6924,12 +7007,13 @@ function genericStepPrompt(step: FlatStep): string | null {
 /** Aperçus d'impression pour leçons GenericModuleContent (prompts + cases à remplir). */
 export function buildGenericMathPrintExercises(
   lesson: MathSubmoduleLesson,
-): { id: string; label: string; preview: React.ReactNode }[] {
+): PrintExercise[] {
   const steps = buildSteps([lesson], true);
   const evalStart = steps.findIndex((s) => s.kind === "eval_start");
   const training = steps.slice(0, evalStart >= 0 ? evalStart : steps.length);
-  const out: { id: string; label: string; preview: React.ReactNode }[] = [];
+  const out: PrintExercise[] = [];
   const showWorkGrid = PRINT_WORK_GRID_SUBMODULES.has(lesson.submoduleId);
+  const noop = () => {};
 
   for (const step of training) {
     if (
@@ -6941,18 +7025,108 @@ export function buildGenericMathPrintExercises(
     }
     const n = out.length + 1;
     if (step.kind === "word_problems") {
+      const expanded = expandWordProblemsConfig(step.config, PRINT_POOL_SIZE);
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: configQuestionCount(step.config, 2),
         preview: (
           <WordProblemsExercise
-            config={step.config}
-            answers={Array(step.config.questions.length).fill("")}
+            config={expanded}
+            answers={Array(expanded.questions.length).fill("")}
             validated={false}
             results={[]}
-            onChange={() => {}}
+            onChange={noop}
             noFrame
             showWorkGrid={showWorkGrid}
+          />
+        ),
+      });
+      continue;
+    }
+    if (step.kind === "arithmetic_group") {
+      const cfg = genArithGroup(
+        step.config.op,
+        step.config.range,
+        step.config.exNum,
+        step.config.missingOperand,
+        step.config.timer,
+        PRINT_POOL_SIZE,
+      );
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: configQuestionCount(step.config, 5),
+        preview: (
+          <ArithmeticGroupExercise
+            config={cfg}
+            answers={Array(cfg.questions.length).fill("")}
+            validated={false}
+            results={[]}
+            onChange={noop}
+            hideTimerDisplay
+          />
+        ),
+      });
+      continue;
+    }
+    if (step.kind === "rounding_group") {
+      const cfg = genRounding(step.config.kind as RoundingKind, step.config.exNum, PRINT_POOL_SIZE);
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: configQuestionCount(step.config, 5),
+        preview: (
+          <RoundingExercise
+            config={cfg}
+            answers={Array(cfg.questions.length).fill("")}
+            validated={false}
+            results={[]}
+            onChange={noop}
+            noFrame
+          />
+        ),
+      });
+      continue;
+    }
+    if (step.kind === "expr_comparison") {
+      const vals = step.config.questions.flatMap((q) => [q.la, q.lb, q.ra, q.rb]);
+      const maxV = vals.length ? Math.max(...vals.map(Math.abs)) : 99;
+      const range: [number, number] = maxV >= 100 ? [100, 999] : [1, 99];
+      const cfg = genExprComp(step.config.op, range, step.config.exNum, PRINT_POOL_SIZE);
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: configQuestionCount(step.config, 5),
+        preview: (
+          <ExprCompExercise
+            config={cfg}
+            answers={Array(cfg.questions.length).fill(null)}
+            validated={false}
+            onAnswer={noop}
+          />
+        ),
+      });
+      continue;
+    }
+    if (step.kind === "unit_conversion") {
+      const cfg = genUnitConversion(step.config.domain, step.config.decimals, step.config.exNum, PRINT_POOL_SIZE);
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: configQuestionCount(step.config, 5),
+        preview: (
+          <UnitConversionExercise
+            config={cfg}
+            answers={Array(cfg.questions.length).fill("")}
+            validated={false}
+            results={[]}
+            onChange={noop}
           />
         ),
       });
@@ -6963,29 +7137,22 @@ export function buildGenericMathPrintExercises(
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: showWorkGrid ? 1 : 5,
         preview: <GenericExercisePrintPreview prompt={prompt} showWorkGrid={showWorkGrid} />,
       });
       continue;
     }
-    // Étapes interactives sans prompt texte : feuille avec plusieurs cases
+    const cfgQs =
+      "config" in step && step.config && typeof step.config === "object" && "questions" in step.config
+        ? (step.config as { questions: unknown[] }).questions.length
+        : 5;
     out.push({
       id: `${step.kind}-${n}`,
       label: `Exercice ${n}`,
-      preview: (
-        <div className="space-y-3">
-          <p className="text-sm font-medium text-black">
-            Complète les questions de l&apos;exercice {n}.
-          </p>
-          {Array.from({ length: 5 }, (_, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
-                {i + 1}.
-              </span>
-              <div className="h-8 flex-1 border-b-2 border-black/40" />
-            </div>
-          ))}
-        </div>
-      ),
+      supportsPrintLayout: true,
+      defaultQuestionCount: cfgQs || 5,
+      preview: <GenericBlanksPrintPreview exerciseNum={n} defaultCount={cfgQs || 5} />,
     });
   }
 
@@ -6996,6 +7163,8 @@ export function buildGenericMathPrintExercises(
       out.push({
         id: String(i + 1),
         label: `Exercice ${i + 1}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: showWorkGrid ? 1 : 5,
         preview: <GenericExercisePrintPreview prompt={item.promptFr} showWorkGrid={showWorkGrid} />,
       });
     });

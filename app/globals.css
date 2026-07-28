@@ -419,7 +419,10 @@ input[type=number] {
 }
 
 /* Autres cartes décoratives (énoncés / blocs d'exercice) : sans bordure à l'impression. */
-.print-layout-context .print-ex-content .rounded-xl {
+.print-layout-context .print-ex-content .rounded-xl,
+.print-layout-context .print-ex-content .rounded-lg,
+.print-layout-context .print-ex-content .rounded-md,
+.print-layout-context .print-ex-content [class*="rounded-[var(--radius"] {
   border: none !important;
   background-color: transparent !important;
   box-shadow: none !important;

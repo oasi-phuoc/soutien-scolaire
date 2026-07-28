@@ -30,10 +30,13 @@ import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import { PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
 import {
-  beginPlacementPrintSeed,
-  endPlacementPrintSeed,
-} from "@/components/math/placement/placement-print-rng";
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+  type PrintExerciseColumns,
+} from "@/components/print/PrintExerciseLayoutContext";
 import {
   EvalExerciseResultButton,
   EvalExerciseResultDetail,
@@ -468,7 +471,12 @@ function shuffle<T>(arr: T[]): T[] {
 
 
 // ─── Aperçu d'impression des exercices A1 (versions vierges à remplir) ───────
-function a1PrintPreview(step: Step, correction = false): React.ReactNode | undefined {
+function a1PrintPreview(
+  step: Step,
+  correction = false,
+  questionCount = 5,
+  columns: PrintExerciseColumns = 1,
+): React.ReactNode | undefined {
   const line = (w = 150) => (
     <span className="inline-block border-b border-black/50 align-bottom" style={{ width: w, height: 15 }} />
   );
@@ -495,12 +503,13 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
     ) : (
       line(w)
     );
+  const listClass = printQuestionsListClass(columns, "space-y-2");
   const numberedBlanks = (
     count: number,
     lead?: (i: number) => React.ReactNode,
     answers?: Array<string | number>,
   ) => (
-    <ol className="space-y-2">
+    <ol className={listClass}>
       {Array.from({ length: count }, (_, i) => (
         <li key={i} className="flex items-center gap-3">
           <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -563,7 +572,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
   switch (step) {
     case "ex2":
       return (() => {
-        const nums = generateNumbers();
+        const nums = generateNumbers(questionCount);
         return numberedBlanks(
           nums.length,
           (i) => (
@@ -574,7 +583,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex3":
       return (() => {
-        const nums = generateTensNumbers();
+        const nums = generateTensNumbers(questionCount);
         return numberedBlanks(
           nums.length,
           (i) => (
@@ -586,7 +595,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
     case "ex4":
     case "ex5":
     case "ex6":
-      return numberedBlanks(5, () => <span className="shrink-0 text-base" aria-hidden>🔊</span>);
+      return numberedBlanks(questionCount, () => <span className="shrink-0 text-base" aria-hidden>🔊</span>);
     case "ex7":
       return (() => {
         const grid = generateEx7Grid();
@@ -621,9 +630,9 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex8":
       return (() => {
-        const series = generateEx8();
+        const series = generateEx8(questionCount);
         return (
-          <div className="space-y-2">
+          <div className={printQuestionsListClass(columns, "space-y-2")}>
             {series.map((s, si) => (
               <div key={si} className="flex items-center gap-1">
                 <span className="w-4 shrink-0 text-[10px] font-bold text-[var(--color-accent-alg)]">{si + 1}.</span>
@@ -652,11 +661,11 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex9":
       return (() => {
-        const qs = generateEx9();
+        const qs = generateEx9(questionCount);
         return (
-          <div className="space-y-3">
+          <div className={printQuestionsListClass(columns, "space-y-3")}>
             {qs.map((q, i) => (
-              <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+              <div key={i} className="ex-prompt-frame p-2">
                 <div className="flex min-h-20 flex-col items-center justify-center gap-1">
                   {q.tens > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: q.tens }, (_, ti) => <SvgDizaineH key={ti} s={7} />)}</div>}
                   {q.units > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: q.units }, (_, ui) => <SvgUnite key={ui} s={10} />)}</div>}
@@ -686,11 +695,11 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex10":
       return (() => {
-        const qs = generateEx10();
+        const qs = generateEx10(questionCount);
         return (
-          <div className="space-y-3">
+          <div className={printQuestionsListClass(columns, "space-y-3")}>
             {qs.map((q, qi) => (
-              <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+              <div key={qi} className="ex-prompt-frame p-2">
                 <ScaledCanvas width={420} height={q.canvasH}>
                   {q.positions.map((p, pi) => (
                     <div key={pi} style={{ position: "absolute", left: p.x, top: p.y }}>
@@ -706,11 +715,11 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex11":
       return (() => {
-        const qs = generateEx11();
+        const qs = generateEx11(questionCount);
         return (
-          <div className="space-y-3">
+          <div className={printQuestionsListClass(columns, "space-y-3")}>
             {qs.map((q, qi) => (
-              <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+              <div key={qi} className="ex-prompt-frame p-2">
                 <ScaledCanvas width={420} height={q.canvasH}>
                   {q.positions.map((p, pi) => (
                     <div key={pi} style={{ position: "absolute", left: p.x, top: p.y }}>
@@ -731,7 +740,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       return (() => {
         const q = (step === "ex12" ? generateEx12() : generateEx13())[0]!;
         return (
-          <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+          <div className="ex-prompt-frame p-2">
             <div className="flex justify-center py-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={q.src} alt="assemblage de cubes" className="max-h-56 w-auto object-contain" />
@@ -744,16 +753,16 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex14":
       return (() => {
-        const nums = Array.from({ length: 2 }, () => Math.floor(Math.random() * 9899) + 101);
+        const nums = Array.from({ length: questionCount }, () => Math.floor(Math.random() * 9899) + 101);
         return (
-          <div className="space-y-3">
+          <div className={printQuestionsListClass(columns, "space-y-3")}>
             {nums.map((n, i) => {
               const m = Math.floor(n / 1000);
               const h = Math.floor((n % 1000) / 100);
               const d = Math.floor((n % 100) / 10);
               const u = n % 10;
               return (
-              <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+              <div key={i} className="ex-prompt-frame p-3">
                 <div className="mb-2 text-center text-xl font-bold tabular-nums">{n.toLocaleString("fr-CH")}</div>
                 <div className="flex items-end justify-center gap-1 text-xs">
                   = {box(40, 26, m)} <span className="text-[10px]">millier</span> + {box(40, 26, h)} <span className="text-[10px]">centaine</span> + {box(40, 26, d)} <span className="text-[10px]">dizaine</span> + {box(40, 26, u)} <span className="text-[10px]">unité</span>
@@ -766,11 +775,11 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex15":
       return (() => {
-        const qs = generateEx14();
+        const qs = generateEx14(questionCount);
         return (
-          <div className="space-y-4">
+          <div className={printQuestionsListClass(columns, "space-y-4")}>
             {qs.map((q, qi) => (
-              <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+              <div key={qi} className="ex-prompt-frame p-2">
                 <div className="mb-2 text-center text-xl font-bold tabular-nums">{q.refDisplay}</div>
                 <div className="flex flex-col gap-1.5">
                   {q.tags.map((t, ti) => (
@@ -798,10 +807,10 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
       })();
     case "ex16":
       return (() => {
-        const qs = generateEx15();
+        const qs = generateEx15(questionCount);
         const CORNER_POS = [{ r: 0, c: 0 }, { r: 0, c: 2 }, { r: 2, c: 0 }, { r: 2, c: 2 }];
         return (
-          <div className="space-y-4">
+          <div className={printQuestionsListClass(columns, "space-y-4")}>
             {qs.map((q, qi) => {
               const corners = [q.tl, q.tr, q.bl, q.br];
               const cells: React.ReactNode[] = [];
@@ -832,7 +841,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
                   );
                 }
               }
-              return <div key={qi} className="grid grid-cols-3 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">{cells}</div>;
+              return <div key={qi} className="grid grid-cols-3 items-center gap-2 ex-prompt-frame p-3">{cells}</div>;
             })}
           </div>
         );
@@ -989,6 +998,31 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
   }
 }
 
+function A1PrintPreviewLive({
+  step,
+  correction,
+  hint,
+  seed,
+}: {
+  step: Step;
+  correction: boolean;
+  hint?: string;
+  seed: number;
+}) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  return (
+    <div className="space-y-2">
+      {hint ? <p className="text-xs italic text-zinc-600">{hint}</p> : null}
+      <PlacementPrintSeedRoot seed={seed + questionCount * 97 + columns * 13}>
+        {a1PrintPreview(step, correction, questionCount, columns) ?? (
+          <div className="h-7 border-b border-black/40" />
+        )}
+      </PlacementPrintSeedRoot>
+    </div>
+  );
+}
+
 export function buildA1PrintExercises(submoduleId: string): PrintExercise[] {
   const steps: Step[] =
     submoduleId === "A1-1"
@@ -999,38 +1033,28 @@ export function buildA1PrintExercises(submoduleId: string): PrintExercise[] {
   return steps.map((step, index) => {
     const hint = typeof getA1StepHint === "function" ? getA1StepHint(step) : undefined;
     const seed = 3_000_000 + index;
-    beginPlacementPrintSeed(seed);
-    const body = a1PrintPreview(step, false);
-    endPlacementPrintSeed();
-    beginPlacementPrintSeed(seed);
-    const correctionBody = a1PrintPreview(step, true);
-    endPlacementPrintSeed();
     return {
       id: step,
       label: `Exercice ${index + 1}`,
+      supportsPrintLayout: true,
+      defaultQuestionCount: 5,
       preview: (
-        <div className="space-y-2">
-          {hint ? <p className="text-xs italic text-zinc-600">{hint}</p> : null}
-          {body ?? <div className="h-7 border-b border-black/40" />}
-        </div>
+        <A1PrintPreviewLive step={step} correction={false} hint={hint} seed={seed} />
       ),
       correctionPreview: (
-        <div className="space-y-2">
-          {hint ? <p className="text-xs italic text-zinc-600">{hint}</p> : null}
-          {correctionBody ?? <div className="h-7 border-b border-black/40" />}
-        </div>
+        <A1PrintPreviewLive step={step} correction={true} hint={hint} seed={seed} />
       ),
     };
   });
 }
 
 
-function generateNumbers(): number[] {
-  return shuffle(Array.from({ length: 10 }, (_, i) => i + 1)).slice(0, 5);
+function generateNumbers(count = 5): number[] {
+  return shuffle(Array.from({ length: 10 }, (_, i) => i + 1)).slice(0, Math.min(count, 10));
 }
 
-function generateTensNumbers(): number[] {
-  return shuffle([10, 20, 30, 40, 50, 60, 70, 80, 90, 100]).slice(0, 5);
+function generateTensNumbers(count = 5): number[] {
+  return shuffle([10, 20, 30, 40, 50, 60, 70, 80, 90, 100]).slice(0, Math.min(count, 10));
 }
 
 function generateDizaineNumbers(): number[] {
@@ -1083,19 +1107,19 @@ interface NumberSeries {
   blanks: number[];
 }
 
-function generateEx8(): NumberSeries[] {
+function generateEx8(count = 5): NumberSeries[] {
   const series: NumberSeries[] = [];
   const used = new Set<number>();
-  for (let s = 0; s < 5; s++) {
-    const count = 8;
+  for (let s = 0; s < count; s++) {
+    const seriesCount = 8;
     let start = Math.floor(Math.random() * 82) + 10;
     for (let tries = 0; tries < 30; tries++) {
-      if (!Array.from({ length: count }, (_, j) => start + j).some(n => used.has(n))) break;
+      if (!Array.from({ length: seriesCount }, (_, j) => start + j).some(n => used.has(n))) break;
       start = Math.floor(Math.random() * 82) + 10;
     }
     const blanks = shuffle([0, 1, 2, 3, 4, 5, 6, 7]).slice(0, 3);
-    for (let j = 0; j < count; j++) used.add(start + j);
-    series.push({ start, count, blanks });
+    for (let j = 0; j < seriesCount; j++) used.add(start + j);
+    series.push({ start, count: seriesCount, blanks });
   }
   return series;
 }
@@ -1466,11 +1490,11 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
 
 type Ex9Question = { tens: number; units: number; choices: [number, number, number] };
 
-function generateEx9(): Ex9Question[] {
+function generateEx9(count = 3): Ex9Question[] {
   const used = new Set<string>();
   const questions: Ex9Question[] = [];
   let guard = 0;
-  while (questions.length < 3 && guard++ < 500) {
+  while (questions.length < count && guard++ < 500) {
     // tens : 0–9 barres, units : tel que total éléments ∈ [2,30] et valeur ≤ 99
     const tens = Math.floor(Math.random() * 10);
     const maxUnits = Math.min(30 - tens, 99 - tens * 10);
@@ -1600,8 +1624,8 @@ const EX14_POOL: Ex14PoolItem[] = [
   },
 ];
 
-function generateEx14(): Ex14Question[] {
-  return shuffle(EX14_POOL).slice(0, 2).map(q => {
+function generateEx14(count = 2): Ex14Question[] {
+  return shuffle(EX14_POOL).slice(0, Math.min(count, EX14_POOL.length)).map(q => {
     const numCorrect = Math.random() < 0.5 ? 1 : 2;
     const correct = shuffle(q.correctOptions).slice(0, numCorrect)
       .map(label => ({ label, correct: true as const }));
@@ -1707,12 +1731,12 @@ function computeSignedOffsets(arrows: Ex16ArrowDef[]): [number, number, number, 
   return o;
 }
 
-function generateEx15(): Ex15Question[] {
+function generateEx15(count = 2): Ex15Question[] {
   const results: Ex15Question[] = [];
   const usedCfgs = new Set<number>();
-  for (let s = 0; s < 2; s++) {
+  for (let s = 0; s < count; s++) {
     let cfgIdx: number;
-    do { cfgIdx = Math.floor(Math.random() * EX16_CONFIGS.length); } while (usedCfgs.has(cfgIdx));
+    do { cfgIdx = Math.floor(Math.random() * EX16_CONFIGS.length); } while (usedCfgs.has(cfgIdx) && usedCfgs.size < EX16_CONFIGS.length);
     usedCfgs.add(cfgIdx);
     const cfg = EX16_CONFIGS[cfgIdx]!;
     // Flip arrows randomly first
@@ -1838,7 +1862,7 @@ type BlockPos = { kind: "m" | "h" | "d" | "u"; x: number; y: number };
 
 type Ex10Question = { h: number; d: number; u: number; positions: BlockPos[]; canvasH: number };
 
-function generateEx10(): Ex10Question[] {
+function generateEx10(count = 2): Ex10Question[] {
   const W = 420;
   const SIZES: Record<"m" | "h" | "d" | "u", [number, number]> = { m: [50, 50], h: [51, 51], d: [9, 81], u: [15, 15] };
 
@@ -1874,7 +1898,7 @@ function generateEx10(): Ex10Question[] {
     return { kind, x: bestX, y: bestY };
   }
 
-  return Array.from({ length: 2 }, () => {
+  return Array.from({ length: count }, () => {
     // 20–50 éléments — plaque ≤ 10, barre ≤ 15, unité ≤ 20, valeur ≤ 999
     let h = 0, d = 5, u = 15;
     for (let guard = 0; guard < 500; guard++) {
@@ -1902,7 +1926,7 @@ function generateEx10(): Ex10Question[] {
 
 type Ex11Question = { m: number; c: number; d: number; u: number; positions: BlockPos[]; canvasH: number };
 
-function generateEx11(): Ex11Question[] {
+function generateEx11(count = 1): Ex11Question[] {
   const W = 420;
   const SIZES: Record<"m" | "h" | "d" | "u", [number, number]> = { m: [50, 50], h: [51, 51], d: [10, 91], u: [17, 17] };
 
@@ -1936,7 +1960,7 @@ function generateEx11(): Ex11Question[] {
     return { kind, x: bestX, y: bestY };
   }
 
-  return Array.from({ length: 1 }, () => {
+  return Array.from({ length: count }, () => {
     // 10–50 éléments — millier ≤ 9, plaque ≤ 10, barre ≤ 15, unité ≤ 20
     let m = 1, c = 3, d = 3, u = 3;
     for (let guard = 0; guard < 500; guard++) {
