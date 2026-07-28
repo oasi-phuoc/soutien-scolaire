@@ -104,4 +104,8 @@ export const TRAD_A8_4: SubmoduleTrad = {
       ["که د ريښې لاندې عدد بشپړ مربع وي، پايله بشپړ عدد دی.", "د منفي اعدادو مربع ريښې د حقيقي اعدادو کې موجودې نه دي."]
     ) },
   ],
+  consignes: {
+    "Calculez les résultats.": { fr: "Calculez les résultats.", en: "Calculate the results.", ar: "احسب النتائج.", fa: "نتایج را حساب کنید.", ti: "ውጽኢታት ኣስብ።", uk: "Обчисліть результати.", pt: "Calcule os resultados.", so: "Xisaabi natiijooyinka.", tr: "Sonuçları hesaplayın.", ps: "پایلې محاسبه کړئ." },
+    "Complétez avec les valeurs manquantes.": { fr: "Complétez avec les valeurs manquantes.", en: "Fill in the missing values.", ar: "أكمل بالقيم الناقصة.", fa: "مقادیر گمشده را کامل کنید.", ti: "ብዝጎደሉ ክብርታት ምላእ።", uk: "Доповніть пропущені значення.", pt: "Complete com os valores em falta.", so: "Ku buuxi qiimayaasha maqan.", tr: "Eksik değerleri tamamlayın.", ps: "ورک ارزښتونه بشپړ کړئ." },
+  },
 };

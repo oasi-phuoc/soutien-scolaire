@@ -338,4 +338,11 @@ export const TRAD_A8_1: SubmoduleTrad = {
       ),
     },
   ],
+  consignes: {
+    "Calculez la puissance des nombres.": { fr: "Calculez la puissance des nombres.", en: "Calculate the powers of the numbers.", ar: "احسب قوى الأعداد.", fa: "توان اعداد را حساب کنید.", ti: "ናይ ቁጽርታት ሓይሊ ኣስብ።", uk: "Обчисліть степені чисел.", pt: "Calcule as potências dos números.", so: "Xisaabi awoodaha tirooyinka.", tr: "Sayıların üslerini hesaplayın.", ps: "د شمېرو توانونه محاسبه کړئ." },
+    "Complétez avec la puissance.": { fr: "Complétez avec la puissance.", en: "Complete with the power.", ar: "أكمل بالأس.", fa: "با توان کامل کنید.", ti: "ብሓይሊ ምላእ።", uk: "Доповніть степенем.", pt: "Complete com a potência.", so: "Ku buuxi awoodda.", tr: "Üs ile tamamlayın.", ps: "د توان سره بشپړ کړئ." },
+    "Retrouvez la base.": { fr: "Retrouvez la base.", en: "Find the base.", ar: "أوجد الأساس.", fa: "پایه را بیابید.", ti: "መሰረት ርከብ።", uk: "Знайдіть основу.", pt: "Encontre a base.", so: "Hel saldhigga.", tr: "Tabanı bulun.", ps: "بنسټ ومومئ." },
+    "Comparez les puissances.": { fr: "Comparez les puissances.", en: "Compare the powers.", ar: "قارن القوى.", fa: "توان‌ها را مقایسه کنید.", ti: "ሓይልታት ኣነጻጽር።", uk: "Порівняйте степені.", pt: "Compare as potências.", so: "Isbarbardhig awoodaha.", tr: "Üsleri karşılaştırın.", ps: "توانونه پرتله کړئ." },
+    "Classez les puissances par ordre croissant.": { fr: "Classez les puissances par ordre croissant.", en: "Order the powers from smallest to largest.", ar: "رتّب القوى تصاعدياً.", fa: "توان‌ها را به ترتیب صعودی مرتب کنید.", ti: "ሓይልታት ብዝዓበየ ስርዓት ኣሰላስል።", uk: "Упорядкуйте степені за зростанням.", pt: "Ordene as potências por ordem crescente.", so: "Awoodaha u kala saar sida ugu yar ilaa ugu weyn.", tr: "Üsleri artan sıraya koyun.", ps: "توانونه په زیاتیدونکي ترتیب کې واچوئ." },
+  },
 };

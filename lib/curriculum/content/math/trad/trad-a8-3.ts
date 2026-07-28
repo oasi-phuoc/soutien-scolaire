@@ -184,4 +184,9 @@ export const TRAD_A8_3: SubmoduleTrad = {
     // 9 — section (items: pure math examples — 4 700 000 = 4,7 × 10⁶, etc.)
     {},
   ],
+  consignes: {
+    "Sélectionner si c'est vrai ou faux.": { fr: "Sélectionner si c'est vrai ou faux.", en: "Select whether it is true or false.", ar: "اختر صحيح أو خطأ.", fa: "درست یا نادرست را انتخاب کنید.", ti: "ሓቂ ወይ ሓሶት ምረጽ።", uk: "Оберіть правда чи хибно.", pt: "Selecione se é verdadeiro ou falso.", so: "Dooro haddii ay run tahay ama been.", tr: "Doğru veya yanlış seçin.", ps: "سم یا ناسم وټاکئ." },
+    "Calculez les racines carrées.": { fr: "Calculez les racines carrées.", en: "Calculate the square roots.", ar: "احسب الجذور التربيعية.", fa: "ریشه‌های مربع را حساب کنید.", ti: "ስኩዌር ስር ኣስብ።", uk: "Обчисліть квадратні корені.", pt: "Calcule as raízes quadradas.", so: "Xisaabi xididada laba-jibbaaran.", tr: "Karekökleri hesaplayın.", ps: "مربع ریښې محاسبه کړئ." },
+    "Trouvez le nombre manquant.": { fr: "Trouvez le nombre manquant.", en: "Find the missing number.", ar: "أوجد العدد الناقص.", fa: "عدد گمشده را بیابید.", ti: "ዝጎደለ ቁጽሪ ርከብ።", uk: "Знайдіть пропущене число.", pt: "Encontre o número em falta.", so: "Hel lambarka maqan.", tr: "Eksik sayıyı bulun.", ps: "ورک شمیره ومومئ." },
+  },
 };

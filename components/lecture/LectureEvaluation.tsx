@@ -1,6 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
+import { lectureUi } from "@/lib/i18n/lecture-ui";
 import type { ComplexSoundLessonData, ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomWordsWithGrapheme } from "@/lib/curriculum/word-pool";
 import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
@@ -163,6 +166,8 @@ function IconRight() {
 function GridExercise({
   upper, lower, onValidated, shouldValidate,
 }: { upper: string; lower: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  const lang = usePivotLang();
+  const { showPivot } = useTranslation();
   const [grid] = useState(() => makeMixedGrid(upper, lower));
   const [states, setStates] = useState<CellState[]>(() => Array(25).fill("idle"));
   const [validated, setValidated] = useState(false);
@@ -201,6 +206,11 @@ function GridExercise({
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Reconnaître la lettre</h2>
+      {showPivot && (
+        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+          {lectureUi(lang, "recognizeLetter")}
+        </p>
+      )}
       <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez toutes les{" "}
         <strong className="text-[var(--color-accent-lecture)]">{upper}</strong> et{" "}
@@ -231,6 +241,8 @@ function GridExercise({
 function WordsExercise({
   letter, letterLower, onValidated, shouldValidate,
 }: { letter: string; letterLower: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  const lang = usePivotLang();
+  const { showPivot } = useTranslation();
   const maxLength = useLectureWordMaxLength(9);
   const [words] = useState(() => {
     const raw = randomWordsWithLetter(letterLower, 20, maxLength);
@@ -285,6 +297,11 @@ function WordsExercise({
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
+      {showPivot && (
+        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+          {lectureUi(lang, "spotInWords")}
+        </p>
+      )}
       <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez la lettre{" "}
         <strong className="text-[var(--color-accent-lecture)]">{letter}</strong> ou{" "}
@@ -504,6 +521,8 @@ function ComplexGridExercise({
 function ComplexWordsExercise({
   label, onValidated, shouldValidate,
 }: { label: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  const lang = usePivotLang();
+  const { showPivot } = useTranslation();
   const targets = useMemo(() => complexTargets(label), [label]);
   const maxLength = useLectureWordMaxLength();
   const [words] = useState(() => {
@@ -558,6 +577,11 @@ function ComplexWordsExercise({
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
+      {showPivot && (
+        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+          {lectureUi(lang, "spotInWords")}
+        </p>
+      )}
       <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez le graphème{" "}
         <strong className="text-[var(--color-accent-lecture)]">{label}</strong> dans chaque mot

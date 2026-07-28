@@ -3,6 +3,9 @@
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
+import { lectureUi } from "@/lib/i18n/lecture-ui";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { getLectureModule, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
@@ -245,6 +248,8 @@ const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
 
 const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUppercase: boolean }>(
   function ComplexWordSpotter({ target, isUppercase }, ref) {
+  const lang = usePivotLang();
+  const { showPivot } = useTranslation();
   const targets = complexTargets(target);
   const maxLength = useLectureWordMaxLength();
   const wordCount = useWordSpotterItemCount(8, DESKTOP_WORD_SPOTTER_COUNT);
@@ -292,8 +297,13 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
 
   return (
     <section className="space-y-3">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">
+        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "spotInWords")}
+          </p>
+        )}
+        <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez le graphème{" "}
         <strong className="text-[var(--color-accent-lecture)]">{target}</strong>{" "}
         dans chaque mot.

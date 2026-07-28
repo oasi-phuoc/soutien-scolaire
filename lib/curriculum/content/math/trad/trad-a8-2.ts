@@ -208,4 +208,11 @@ export const TRAD_A8_2: SubmoduleTrad = {
     // 21 — section (items: pure math development of (2³)²)
     {},
   ],
+  consignes: {
+    "Effectuez les multiplications de puissances de même base.": { fr: "Effectuez les multiplications de puissances de même base.", en: "Multiply powers with the same base.", ar: "أنجز ضرب قوى لها نفس الأساس.", fa: "توان‌های هم‌پایه را ضرب کنید.", ti: "ናይ ተመሳሳሊ መሰረት ሓይልታት ምብዛሕ ግበር።", uk: "Помножте степені з однаковою основою.", pt: "Efetue as multiplicações de potências de mesma base.", so: "Samee isku-dhufashada awoodaha isla saldhig.", tr: "Aynı tabanlı üslerin çarpımını yapın.", ps: "د ورته بنسټ توانونو ضرب وکړئ." },
+    "Effectuez les divisions de puissances de même base.": { fr: "Effectuez les divisions de puissances de même base.", en: "Divide powers with the same base.", ar: "أنجز قسمة قوى لها نفس الأساس.", fa: "توان‌های هم‌پایه را تقسیم کنید.", ti: "ናይ ተመሳሳሊ መሰረት ሓይልታት ምክፍፋል ግበር።", uk: "Поділіть степені з однаковою основою.", pt: "Efetue as divisões de potências de mesma base.", so: "Samee qaybinta awoodaha isla saldhig.", tr: "Aynı tabanlı üslerin bölümünü yapın.", ps: "د ورته بنسټ توانونو ویش وکړئ." },
+    "Effectuez les puissances de puissances.": { fr: "Effectuez les puissances de puissances.", en: "Compute powers of powers.", ar: "أنجز قوى القوى.", fa: "توانِ توان را حساب کنید.", ti: "ሓይሊ ናይ ሓይሊ ግበር።", uk: "Обчисліть степені степенів.", pt: "Efetue as potências de potências.", so: "Samee awoodaha awoodaha.", tr: "Üslerin üslerini hesaplayın.", ps: "د توانونو توانونه محاسبه کړئ." },
+    "Effectuez les calculs.": { fr: "Effectuez les calculs.", en: "Perform the calculations.", ar: "أنجز الحسابات.", fa: "محاسبات را انجام دهید.", ti: "ሕሳባት ግበር።", uk: "Виконайте обчислення.", pt: "Efetue os cálculos.", so: "Samee xisaabaha.", tr: "Hesaplamaları yapın.", ps: "محاسبې ترسره کړئ." },
+    "Complétez les égalités.": { fr: "Complétez les égalités.", en: "Complete the equalities.", ar: "أكمل المتساويات.", fa: "تساوی‌ها را کامل کنید.", ti: "ማዕረታት ምላእ።", uk: "Доповніть рівності.", pt: "Complete as igualdades.", so: "Ku buuxi sinnimada.", tr: "Eşitlikleri tamamlayın.", ps: "مساوات بشپړ کړئ." },
+  },
 };

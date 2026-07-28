@@ -163,6 +163,11 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
     return (
       <section className="space-y-3 pb-8">
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre les sons</h2>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "hearTheSounds")}
+          </p>
+        )}
         <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez le ou les sons que vous entendez
         </p>
