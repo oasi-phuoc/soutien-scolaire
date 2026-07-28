@@ -157,14 +157,12 @@ import {
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
 const REORGANIZED_CODES: Record<string, string> = {
-  // G1 — Fondamentaux
-  "a1-conj-l00": "G1.1",
-  "a1-conj-l01": "G1.2",
-  "a1-gr-l04": "G1.3",
-  "a1-gr-l03": "G1.4",
-  "a1-gr-phrases": "G1.5",
-  "a1-gr-l02": "G1.6",
-  "a1-gr-cest-il-est": "G1.7",
+  // G1 — Fondamentaux (sans conjugaison)
+  "a1-gr-l04": "G1.1",
+  "a1-gr-l03": "G1.2",
+  "a1-gr-phrases": "G1.3",
+  "a1-gr-l02": "G1.4",
+  "a1-gr-cest-il-est": "G1.5",
   // G2 — Interrogation
   "a1-gr-interro": "G2.1",
   "a2-gr-l07": "G2.2",
@@ -191,12 +189,14 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a2-gr-l42": "G6.4",
   "a2-gr-adverbes-types": "G6.5",
   // C1 — Verbes essentiels
-  "a1-conj-l07": "C1.1",
-  "a1-conj-l08": "C1.2",
-  "a1-conj-l09": "C1.3",
-  "a1-conj-l15": "C1.4",
-  "a2-conj-irreguliers": "C1.5",
-  "a2-conj-l02": "C1.6",
+  "a1-conj-l00": "C1.1",
+  "a1-conj-l01": "C1.2",
+  "a1-conj-l07": "C1.3",
+  "a1-conj-l08": "C1.4",
+  "a1-conj-l09": "C1.5",
+  "a1-conj-l15": "C1.6",
+  "a2-conj-irreguliers": "C1.7",
+  "a2-conj-l02": "C1.8",
   // C2 — Passé
   "a1-conj-l28": "C2.1",
   "a1-conj-l29": "C2.2",
