@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionCount } from "@/components/print/PrintExerciseLayoutContext";
 
 export type FracOpMode = "add-sub" | "mul" | "div";
 
@@ -212,12 +213,13 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
   else if (exType <= 4) { structType = exType as 1|2|3|4; lo = 1; hi = 12; }
   else { structType = (exType - 4) as 1|2|3|4; lo = 10; hi = 99; }
 
+  const questionCount = usePrintQuestionCount(count);
   const [questions] = useState<OpQ[]>(() =>
-    Array.from({ length: count }, () => genQ(structType, opMode, lo, hi))
+    Array.from({ length: questionCount }, () => genQ(structType, opMode, lo, hi))
   );
-  const [nums, setNums] = useState<string[]>(() => Array(count).fill(""));
-  const [dens, setDens] = useState<string[]>(() => Array(count).fill(""));
-  const [statuses, setStatuses] = useState<("idle"|"correct"|"wrong")[]>(() => Array(count).fill("idle"));
+  const [nums, setNums] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [dens, setDens] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [statuses, setStatuses] = useState<("idle"|"correct"|"wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
