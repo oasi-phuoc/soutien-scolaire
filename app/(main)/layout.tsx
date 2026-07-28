@@ -8,12 +8,16 @@ import { EvalNavGuardProvider } from "@/components/EvalNavGuard";
 import { ContentEditorProvider } from "@/components/content-editor/ContentEditorProvider";
 import { DesktopSidebar } from "@/components/layout/DesktopSidebar";
 import { ExerciseToolbar } from "@/components/layout/ExerciseToolbar";
+import { getNavAccess, pedagogicFromNavAccess } from "@/lib/auth/nav-access";
 
-export default function MainLayout({
+export default async function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const access = await getNavAccess();
+  const initialPedagogicNav = pedagogicFromNavAccess(access);
+
   return (
     <TranslationProvider>
       <EvalNavGuardProvider>
@@ -23,13 +27,19 @@ export default function MainLayout({
             <ProgressSyncProvider />
             <PlacementPendingSync />
             <Suspense fallback={null}>
-              <DesktopSidebar />
+              <DesktopSidebar
+                initialPedagogicNav={initialPedagogicNav}
+                initialPlacementVisible={access.placementVisible}
+              />
             </Suspense>
             <div className="desktop-shell relative z-10 flex min-h-screen flex-col">
               <ExerciseToolbar />
               <div className="relative flex min-h-0 flex-1 flex-col">{children}</div>
             </div>
-            <MainNav />
+            <MainNav
+              initialCanPrint={access.canPrint}
+              initialPlacementVisible={access.placementVisible}
+            />
           </div>
         </ContentEditorProvider>
       </EvalNavGuardProvider>

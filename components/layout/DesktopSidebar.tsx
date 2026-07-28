@@ -63,8 +63,22 @@ function TranslateOnIcon() {
 
 /**
  * Menu latéral bureau (inspiré epcas) — masqué sur mobile.
+ * `initialPedagogicNav` / `initialPlacementVisible` viennent du layout serveur
+ * pour afficher Admin / Impression / Suivi dès le premier paint.
  */
-export function DesktopSidebar() {
+export function DesktopSidebar({
+  initialPedagogicNav,
+  initialPlacementVisible = true,
+}: {
+  initialPedagogicNav?: {
+    showSection: boolean;
+    isAdmin: boolean;
+    hasSuiviAccess: boolean;
+    canEditContent: boolean;
+    canPrint: boolean;
+  };
+  initialPlacementVisible?: boolean;
+} = {}) {
   const pathname = usePathname() ?? "";
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -72,14 +86,17 @@ export function DesktopSidebar() {
   const { showPivot, togglePivot } = useTranslation();
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
-  const [pedagogicNav, setPedagogicNav] = useState({
-    showSection: false,
-    isAdmin: false,
-    hasSuiviAccess: false,
-    canEditContent: false,
-    canPrint: false,
-  });
-  const [placementVisible, setPlacementVisible] = useState(true);
+  const [pedagogicNav, setPedagogicNav] = useState(
+    () =>
+      initialPedagogicNav ?? {
+        showSection: false,
+        isAdmin: false,
+        hasSuiviAccess: false,
+        canEditContent: false,
+        canPrint: false,
+      },
+  );
+  const [placementVisible, setPlacementVisible] = useState(initialPlacementVisible);
   const [suiviClasses, setSuiviClasses] = useState<{ label: string }[]>([]);
 
   const inSuiviClass = pathname.startsWith("/suivi/classes/");
@@ -87,17 +104,23 @@ export function DesktopSidebar() {
     ? decodeURIComponent(pathname.split("/")[3] ?? "")
     : "";
 
+  // Badges uniquement — la visibilité admin/impression est déjà fournie par le serveur.
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
     getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
+  }, [pathname]);
+
+  // Soft refresh des droits (changement de rôle rare) — une fois au mount, pas à chaque route.
+  useEffect(() => {
+    let cancelled = false;
     getPlacementNavVisibilityAction()
       .then((res) => {
-        if (res.ok) setPlacementVisible(res.visible);
+        if (!cancelled && res.ok) setPlacementVisible(res.visible);
       })
       .catch(() => {});
     getPedagogicNavVisibilityAction()
       .then((res) => {
-        if (!res.ok) return;
+        if (cancelled || !res.ok) return;
         setPedagogicNav({
           showSection: res.showSection,
           isAdmin: res.isAdmin,
@@ -107,7 +130,10 @@ export function DesktopSidebar() {
         });
       })
       .catch(() => {});
-  }, [pathname]);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (!pedagogicNav.showSection || !inSuiviClass) {

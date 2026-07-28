@@ -69,7 +69,13 @@ function sectionColor(_pathname: string) {
   return "var(--color-theme)";
 }
 
-export function MainNav() {
+export function MainNav({
+  initialCanPrint = false,
+  initialPlacementVisible = true,
+}: {
+  initialCanPrint?: boolean;
+  initialPlacementVisible?: boolean;
+} = {}) {
   const router = useRouter();
   const pathname = usePathname() ?? "";
   const { showPivot, togglePivot } = useTranslation();
@@ -77,21 +83,32 @@ export function MainNav() {
   const [open, setOpen] = useState(false);
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
-  const [placementVisible, setPlacementVisible] = useState(true);
-  const [impressionVisible, setImpressionVisible] = useState(false);
+  const [placementVisible, setPlacementVisible] = useState(initialPlacementVisible);
+  const [impressionVisible, setImpressionVisible] = useState(initialCanPrint);
   const lessonMode = isLessonMode(pathname);
   const { actions, trigger } = useLessonActions(lessonMode);
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
     getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
-    getPlacementNavVisibilityAction().then((res) => {
-      if (res.ok) setPlacementVisible(res.visible);
-    }).catch(() => {});
-    getPedagogicNavVisibilityAction().then((res) => {
-      if (res.ok) setImpressionVisible(res.canPrint);
-    }).catch(() => {});
   }, [pathname]);
+
+  useEffect(() => {
+    let cancelled = false;
+    getPlacementNavVisibilityAction()
+      .then((res) => {
+        if (!cancelled && res.ok) setPlacementVisible(res.visible);
+      })
+      .catch(() => {});
+    getPedagogicNavVisibilityAction()
+      .then((res) => {
+        if (!cancelled && res.ok) setImpressionVisible(res.canPrint);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     setOpen(false);

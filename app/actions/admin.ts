@@ -322,15 +322,9 @@ export async function setPlacementModuleEnabledAction(enabled: boolean): Promise
 }
 
 export async function getPlacementNavVisibilityAction(): Promise<{ ok: boolean; visible: boolean }> {
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: true, visible: true };
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { ok: true, visible: true };
-  const { data: role } = await supabase.rpc("get_my_role");
-  if (role === "admin" || role === "prof") return { ok: true, visible: true };
-  const { data: enabled, error } = await supabase.rpc("get_placement_module_enabled");
-  if (error) return { ok: true, visible: true };
-  return { ok: true, visible: enabled !== false };
+  const { getNavAccess } = await import("@/lib/auth/nav-access");
+  const access = await getNavAccess();
+  return { ok: true, visible: access.placementVisible };
 }
 
 /** Visibilité de la section « Suivi pédagogique » dans la barre latérale.
@@ -347,65 +341,7 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
   /** Accès hub Impression : admin ou flag can_print. */
   canPrint: boolean;
 }> {
-  const supabase = await createSupabaseActionClient();
-  const openLocally =
-    process.env.CONTENT_EDIT_OPEN === "1" ||
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  // Sans Supabase : édition locale uniquement (pas de faux rôle admin).
-  if (!supabase) {
-    return {
-      ok: true,
-      showSection: true,
-      isAdmin: false,
-      hasSuiviAccess: false,
-      canEditContent: true,
-      canPrint: false,
-    };
-  }
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    return {
-      ok: true,
-      showSection: openLocally,
-      isAdmin: false,
-      hasSuiviAccess: false,
-      canEditContent: openLocally,
-      canPrint: false,
-    };
-  }
-
-  const { data: role } = await supabase.rpc("get_my_role");
-  const isAdmin = role === "admin";
-
-  let hasSuiviAccess = isAdmin;
-  if (!isAdmin && role === "prof") {
-    const { data: access } = await supabase.rpc("has_suivi_access");
-    hasSuiviAccess = Boolean(access);
-  }
-
-  let canPrint = isAdmin;
-  if (!canPrint) {
-    const { data: printAccess, error } = await supabase.rpc("can_access_print");
-    if (!error) {
-      canPrint = Boolean(printAccess);
-    } else {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("can_print")
-        .eq("id", user.id)
-        .maybeSingle();
-      canPrint = Boolean(profile?.can_print);
-    }
-  }
-
-  // Admin / Édition : strictement réservés au rôle admin (jamais via openLocally si connecté).
-  const canEditContent = isAdmin;
-  const showSection = isAdmin || hasSuiviAccess;
-
-  return { ok: true, showSection, isAdmin, hasSuiviAccess, canEditContent, canPrint };
+  const { pedagogicFromNavAccess, getNavAccess } = await import("@/lib/auth/nav-access");
+  const access = await getNavAccess();
+  return { ok: true, ...pedagogicFromNavAccess(access) };
 }

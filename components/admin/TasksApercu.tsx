@@ -6,6 +6,8 @@ import type { TaskRow, TaskStudentStatus } from "@/app/actions/tasks";
 import { deleteTaskAction, getTaskStudentsAction, updateTaskAction } from "@/app/actions/tasks";
 import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
 
+const TASKS_TABLE_PAGE_SIZE = 30;
+
 function formatDate(iso: string | null) {
   if (!iso) return null;
   const d = new Date(iso + "T00:00:00");
@@ -215,6 +217,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
   const [search, setSearch] = useState("");
   const [openTaskId, setOpenTaskId] = useState<string | null>(null);
   const [isDeleting, startDelete] = useTransition();
+  const [visibleCount, setVisibleCount] = useState(TASKS_TABLE_PAGE_SIZE);
 
   const q = search.toLowerCase();
   const filtered = q
@@ -225,6 +228,14 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
           (t.lesson_ref ?? "").toLowerCase().includes(q)
       )
     : tasks;
+
+  useEffect(() => {
+    setVisibleCount(TASKS_TABLE_PAGE_SIZE);
+  }, [search]);
+
+  const cappedVisible = Math.min(visibleCount, filtered.length);
+  const visibleTasks = filtered.slice(0, cappedVisible);
+  const hasMore = cappedVisible < filtered.length;
 
   function handleDeleteTask(task: TaskRow) {
     if (!isTaskSettled(task)) return;
@@ -304,7 +315,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                 </td>
               </tr>
             ) : (
-              filtered.map((task) => {
+              visibleTasks.map((task) => {
                 const pct = task.total_students > 0 ? Math.round((task.done_count / task.total_students) * 100) : 0;
                 const overdue =
                   task.due_date &&
@@ -418,7 +429,21 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
         </table>
       </div>
 
-      <p className="text-xs text-zinc-400">{filtered.length} tâche{filtered.length !== 1 ? "s" : ""} affichée{filtered.length !== 1 ? "s" : ""}</p>
+      {hasMore && (
+        <div className="flex justify-center">
+          <button
+            type="button"
+            onClick={() => setVisibleCount((n) => n + TASKS_TABLE_PAGE_SIZE)}
+            className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-700 shadow-sm transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            Afficher plus ({filtered.length - cappedVisible} restant{filtered.length - cappedVisible > 1 ? "s" : ""})
+          </button>
+        </div>
+      )}
+
+      <p className="text-xs text-zinc-400">
+        {cappedVisible} / {filtered.length} tâche{filtered.length !== 1 ? "s" : ""} affichée{filtered.length !== 1 ? "s" : ""}
+      </p>
     </div>
   );
 }

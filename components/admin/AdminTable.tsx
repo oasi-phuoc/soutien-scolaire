@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
@@ -14,6 +14,9 @@ import {
   currentSchoolYearStart,
   previousSchoolYearLabel,
 } from "@/lib/school-year";
+
+/** Première page du tableau comptes — le reste via « Afficher plus ». */
+const ADMIN_TABLE_PAGE_SIZE = 40;
 
 export type UserRow = {
   id: string;
@@ -368,6 +371,7 @@ export function AdminTable({
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture" | "access" | "placement">("name");
   const [sortOpen, setSortOpen] = useState(false);
   const [resetConfirming, setResetConfirming] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(ADMIN_TABLE_PAGE_SIZE);
 
   const totalAccounts = accountCount ?? initialRows.length;
 
@@ -397,6 +401,14 @@ export function AdminTable({
     const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
     return na.localeCompare(nb, "fr");
   });
+
+  const cappedVisible = Math.min(visibleCount, sorted.length);
+  const visibleRows = sorted.slice(0, cappedVisible);
+  const hasMoreRows = cappedVisible < sorted.length;
+
+  useEffect(() => {
+    setVisibleCount(ADMIN_TABLE_PAGE_SIZE);
+  }, [search, filterClasse, sortBy]);
 
   function togglePlacementModule(next: boolean) {
     setPlacementMsg(null);
@@ -593,7 +605,7 @@ export function AdminTable({
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {sorted.length === 0 ? (
               <tr><td colSpan={10} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
-            ) : sorted.map(row => {
+            ) : visibleRows.map(row => {
               const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
               const math = mathPct(row.progress_data);
               const french = frenchPct(row.progress_data);
@@ -685,6 +697,17 @@ export function AdminTable({
           </tbody>
         </table>
       </div>
+      {hasMoreRows && (
+        <div className="flex justify-center pt-3">
+          <button
+            type="button"
+            onClick={() => setVisibleCount((n) => n + ADMIN_TABLE_PAGE_SIZE)}
+            className="rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-700 shadow-sm transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          >
+            Afficher plus ({sorted.length - cappedVisible} restant{sorted.length - cappedVisible > 1 ? "s" : ""})
+          </button>
+        </div>
+      )}
       {resetConfirming && (
         <ResetElevesConfirm
           eleveCount={rows.filter(r => r.role === "eleve").length}
