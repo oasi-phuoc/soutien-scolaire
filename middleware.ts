@@ -79,9 +79,28 @@ export async function middleware(request: NextRequest) {
   if (user && (path.startsWith(ADMIN_PREFIX) || path.startsWith(IMPRESSIONS_PREFIX) || path.startsWith(SUIVI_PREFIX) || TEACHER_PATHS.some((p) => path.startsWith(p)))) {
     const { data: role } = await supabase.rpc("get_my_role");
 
-    if (path.startsWith(ADMIN_PREFIX) || path.startsWith(IMPRESSIONS_PREFIX)) {
+    if (path.startsWith(ADMIN_PREFIX) && !path.startsWith(`${ADMIN_PREFIX}/impression`)) {
       if (role !== "admin") {
         return NextResponse.redirect(new URL(role === "prof" ? "/suivi" : "/", request.url));
+      }
+    }
+
+    // /impressions (+ ancienne /admin/impression) : admin ou droit d'impression
+    if (path.startsWith(IMPRESSIONS_PREFIX) || path.startsWith(`${ADMIN_PREFIX}/impression`)) {
+      if (role !== "admin") {
+        const { data: printAccess, error } = await supabase.rpc("can_access_print");
+        let canPrint = !error && Boolean(printAccess);
+        if (error) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("can_print")
+            .eq("id", user.id)
+            .maybeSingle();
+          canPrint = Boolean(profile?.can_print);
+        }
+        if (!canPrint) {
+          return NextResponse.redirect(new URL(role === "prof" ? "/suivi" : "/", request.url));
+        }
       }
     }
 

@@ -281,6 +281,7 @@ export async function setUserPrintAccessAction(
   revalidatePath("/admin");
   revalidatePath(`/admin/eleves/${userId}`);
   revalidatePath("/");
+  revalidatePath("/impressions");
   revalidatePath("/admin/impression");
   return { ok: true };
 }
