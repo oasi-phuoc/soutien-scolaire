@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { TaskRow, TaskStudentStatus } from "@/app/actions/tasks";
 import { deleteTaskAction, getTaskStudentsAction, updateTaskAction } from "@/app/actions/tasks";
+import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
 import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 function formatDate(iso: string | null) {
@@ -312,17 +313,11 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                         <button
                           type="button"
                           onClick={() => setOpenTaskId(isOpen ? null : task.task_id)}
-                          className={`inline-flex h-full w-full items-center justify-center py-2.5 transition-colors sm:py-3 ${
-                            isOpen
-                              ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]"
-                              : "text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
-                          }`}
+                          className="inline-flex rounded-lg p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                           aria-label={isOpen ? "Fermer le détail" : "Voir et modifier la tâche"}
                           title={isOpen ? "Fermer" : "Voir / modifier"}
                         >
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-                          </svg>
+                          <SuiviIconLoupe active={isOpen} />
                         </button>
                       </td>
                       <td className="min-w-0 px-2 py-2.5 sm:px-4 sm:py-3">
