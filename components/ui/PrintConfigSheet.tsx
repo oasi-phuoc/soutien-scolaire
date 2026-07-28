@@ -4,6 +4,10 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperti
 import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import {
+  PrintExerciseLayoutProvider,
+  type PrintExerciseColumns,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-4 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
@@ -61,12 +65,24 @@ export interface PrintExercise {
    * tant qu’il tient entièrement (placement maths). Défaut : saut forcé.
    */
   forceNewPage?: boolean;
+  /**
+   * Impression maths : nombre de questions par défaut (pool size).
+   * Affiche les options « Nombre de questions » / « Nombre de colonnes ».
+   */
+  defaultQuestionCount?: number;
+  /** Active les options de mise en page (questions / colonnes) pour cet exercice. */
+  supportsPrintLayout?: boolean;
 }
 
 export interface ExercisePrintSelection {
   id: string;
   included: boolean;
+  /** Combien de fois l'exercice est répété (blocs Exercice N distincts). */
   occurrences: number;
+  /** Nombre de questions dans un bloc (pool size). */
+  questionCount: number;
+  /** Colonnes pour répartir les questions (1–3). */
+  columns: PrintExerciseColumns;
   points: number;
 }
 
@@ -121,6 +137,24 @@ const COURSES = [
 
 function formatPrintDate(date = new Date()): string {
   return new Intl.DateTimeFormat("fr-CH", { day: "2-digit", month: "2-digit", year: "numeric" }).format(date);
+}
+
+function PrintExerciseBody({
+  selection,
+  children,
+}: {
+  selection: ExercisePrintSelection;
+  children: ReactNode;
+}) {
+  return (
+    <PrintExerciseLayoutProvider
+      value={{ questionCount: selection.questionCount, columns: selection.columns }}
+    >
+      <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+        {children}
+      </div>
+    </PrintExerciseLayoutProvider>
+  );
 }
 
 export function PrintDocumentHeader({
@@ -558,6 +592,8 @@ export function PrintConfigSheet({
       id: ex.id,
       included: true,
       occurrences: 1,
+      questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
+      columns: 1 as PrintExerciseColumns,
       points: Math.max(1, ex.defaultPoints ?? 1),
     }))
   );
@@ -611,6 +647,12 @@ export function PrintConfigSheet({
       included: occurrences > 0,
       occurrences,
     } : s));
+
+  const setQuestionCount = (id: string, questionCount: number) =>
+    setSelection((prev) => prev.map((s) => s.id === id ? { ...s, questionCount } : s));
+
+  const setColumns = (id: string, columns: PrintExerciseColumns) =>
+    setSelection((prev) => prev.map((s) => s.id === id ? { ...s, columns } : s));
 
   const setExercisePoints = (id: string, points: number) =>
     setSelection((prev) => prev.map((item) => item.id === id ? { ...item, points } : item));
@@ -953,7 +995,7 @@ export function PrintConfigSheet({
                       <div className="mt-3 space-y-2 pl-[52px]">
                         <div className="flex items-center justify-between gap-3">
                           <span className="text-xs text-[var(--color-text-secondary)]">
-                            {sel.occurrences === 0 ? "Exercice retiré" : "Questions"}
+                            {sel.occurrences === 0 ? "Exercice retiré" : "Occurrences"}
                           </span>
                           <Counter
                             value={sel.occurrences}
@@ -963,6 +1005,34 @@ export function PrintConfigSheet({
                             accent={accentColor}
                           />
                         </div>
+                        {ex.supportsPrintLayout && sel.occurrences > 0 && (
+                          <>
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-xs text-[var(--color-text-secondary)]">
+                                Nombre de questions
+                              </span>
+                              <Counter
+                                value={sel.questionCount}
+                                onChange={(v) => setQuestionCount(ex.id, v)}
+                                min={1}
+                                max={30}
+                                accent={accentColor}
+                              />
+                            </div>
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-xs text-[var(--color-text-secondary)]">
+                                Nombre de colonnes
+                              </span>
+                              <Counter
+                                value={sel.columns}
+                                onChange={(v) => setColumns(ex.id, (v === 2 || v === 3 ? v : 1) as PrintExerciseColumns)}
+                                min={1}
+                                max={3}
+                                accent={accentColor}
+                              />
+                            </div>
+                          </>
+                        )}
                         {evalMode && sel.occurrences > 0 && (
                           <div className="flex items-center justify-between gap-3">
                             <span className="text-xs text-[var(--color-text-secondary)]">Points</span>
@@ -1157,11 +1227,14 @@ export function PrintConfigSheet({
                                 </span>
                               )}
                             </div>
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <PrintExerciseBody
+                              key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`}
+                              selection={item.selection}
+                            >
                               {exercise.correctionPreview ?? exercise.preview ?? (
                                 <div className="h-7 border-b border-black/40" />
                               )}
-                            </div>
+                            </PrintExerciseBody>
                           </div>
                         ),
                       });
@@ -1238,9 +1311,12 @@ export function PrintConfigSheet({
                                 </span>
                               )}
                             </div>
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <PrintExerciseBody
+                              key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`}
+                              selection={item.selection}
+                            >
                               {body ?? <div className="h-7 border-b border-black/40" />}
-                            </div>
+                            </PrintExerciseBody>
                           </div>
                         ),
                       });
@@ -1285,9 +1361,12 @@ export function PrintConfigSheet({
                             </span>
                             {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                           </div>
-                          <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                          <PrintExerciseBody
+                            key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`}
+                            selection={item.selection}
+                          >
                             {body ?? <div className="h-7 border-b border-black/40" />}
-                          </div>
+                          </PrintExerciseBody>
                         </div>
                       ),
                     });

@@ -7,6 +7,11 @@ import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 // ── Step types ─────────────────────────────────────────────────────────────────
 type TheoryStep              = { kind: "theory"; lesson: MathSubmoduleLesson };
@@ -1264,9 +1269,11 @@ export function FractionEquivExercise({ validateCommand, onValidated }: {
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<EquivQ[]>(() => Array.from({ length: 5 }, genEquivQ));
-  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
-  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState<EquivQ[]>(() => Array.from({ length: questionCount }, genEquivQ));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1289,7 +1296,7 @@ export function FractionEquivExercise({ validateCommand, onValidated }: {
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Trouvez la valeur manquante.</p>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns)}>
         {questions.map((q, i) => (
           <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -1316,10 +1323,12 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<SimplifyQ[]>(() => Array.from({ length: 5 }, genSimplifyQ));
-  const [nums, setNums] = useState<string[]>(() => Array(5).fill(""));
-  const [dens, setDens] = useState<string[]>(() => Array(5).fill(""));
-  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState<SimplifyQ[]>(() => Array.from({ length: questionCount }, genSimplifyQ));
+  const [nums, setNums] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [dens, setDens] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1343,7 +1352,7 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Simplifiez les fractions.</p>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns)}>
         {questions.map((q, i) => (
           <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -1451,9 +1460,11 @@ export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValida
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<FracOpCompareQ[]>(() => Array.from({ length: 5 }, () => genFracOpCompareQ(opMode)));
-  const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
-  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState<FracOpCompareQ[]>(() => Array.from({ length: questionCount }, () => genFracOpCompareQ(opMode)));
+  const [selected, setSelected] = useState<(string | null)[]>(() => Array(questionCount).fill(null));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1481,7 +1492,7 @@ export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValida
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{title}</p>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns)}>
         {questions.map((q, i) => {
           const st = revealCorrection ? statuses[i]! : "idle";
           const sel = selected[i];
@@ -1541,9 +1552,11 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const gen = mode === "same-den" ? genCompareSameDen : mode === "same-num" ? genCompareSameNum : genCompareDiffBoth;
-  const [pairs] = useState<ComparePair[]>(() => Array.from({ length: 5 }, gen));
-  const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
-  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [pairs] = useState<ComparePair[]>(() => Array.from({ length: questionCount }, gen));
+  const [selected, setSelected] = useState<(string | null)[]>(() => Array(questionCount).fill(null));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1566,7 +1579,7 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les fractions. Choisissez &lt;, = ou &gt;.</p>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns)}>
         {pairs.map((p, i) => {
           const st = revealCorrection ? statuses[i]! : "idle";
           const sel = selected[i];
@@ -1634,9 +1647,11 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const gen = variant === "extended" ? genFracToDecExtQ : genFracToDecQ;
-  const [questions] = useState<FracToDecQ[]>(() => Array.from({ length: 5 }, gen));
-  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
-  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState<FracToDecQ[]>(() => Array.from({ length: questionCount }, gen));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1659,7 +1674,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme décimale.</p>
       </div>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns)}>
         {questions.map((q, i) => {
           const isWrong = revealCorrection && statuses[i] === "wrong";
           const iCls = `w-24 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
@@ -1709,9 +1724,10 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const gen = variant === "extended" ? genDecToFracExtQ : genDecToFracQ;
-  const [questions] = useState<DecToFracQ[]>(() => Array.from({ length: 5 }, gen));
-  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
-  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const questionCount = usePrintQuestionCount(5);
+  const [questions] = useState<DecToFracQ[]>(() => Array.from({ length: questionCount }, gen));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 

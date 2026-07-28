@@ -40,6 +40,11 @@ import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
@@ -1694,8 +1699,10 @@ function PoolGroupExercise({
   validateCommand: number;
   onValidated: (ok: boolean, correct: number, total: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(count);
+  const columns = usePrintColumns();
   // Items picked fresh on every mount (new random questions on refresh)
-  const [items] = React.useState<MathExerciseItem[]>(() => shufflePick(pool, Math.min(count, pool.length)));
+  const [items] = React.useState<MathExerciseItem[]>(() => shufflePick(pool, Math.min(questionCount, pool.length)));
   const [answers, setAnswers] = React.useState<string[]>(() => Array(items.length).fill(""));
   const [validated, setValidated] = React.useState(false);
   const [results, setResults] = React.useState<boolean[]>([]);
@@ -1719,7 +1726,7 @@ function PoolGroupExercise({
         <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Résolvez les problèmes. Écrivez uniquement la réponse.</p>
       </div>
-      <div className="space-y-6">
+      <div className={printQuestionsListClass(columns, "space-y-6")}>
         {items.map((item, i) => {
           const v = answers[i] ?? "";
           const ok = validated ? results[i] : null;
@@ -1939,9 +1946,12 @@ export function buildWorkspacePrintExercises(
   const noop = () => {};
   return training.map((step, index) => {
     const seed = 2_000_000 + index;
+    const defaultQuestionCount = stepExpectedTotal(step, undefined);
     return {
       id: `${step.kind}-${index}`,
       label: `Exercice ${index + 1}`,
+      supportsPrintLayout: true,
+      defaultQuestionCount,
       preview: (
         <div className="print-ex-content [&_button]:pointer-events-none">
           <PlacementPrintSeedRoot seed={seed}>
