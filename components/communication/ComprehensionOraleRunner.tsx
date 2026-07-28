@@ -66,7 +66,7 @@ const INVERSE = "var(--color-accent-comm-inverse, #f5a623)";
 const TOTAL_SECONDS = 25 * 60;
 
 const BASE_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
-  { id: "message", title: "Comprendre un message", points: 4, context: "Écoutez un message vocal." },
+  { id: "message", title: "Comprendre un message", points: 4, context: "" },
   { id: "annonce", title: "Comprendre une annonce", points: 4, context: "Écoutez une annonce courte." },
   { id: "instruction", title: "Comprendre des instructions", points: 4, context: "Écoutez des consignes ou des informations pratiques." },
   { id: "conversation", title: "Comprendre des conversations", points: 8, context: "Écoutez 4 dialogues et associez chaque image au bon numéro (2 pts par dialogue)." },
@@ -74,7 +74,7 @@ const BASE_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
 ];
 
 const MEDIUM_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions"> & { category: COAudioCategory }> = [
-  { id: "message", category: "message", title: "Comprendre un message", points: 6, context: "Écoutez un message vocal." },
+  { id: "message", category: "message", title: "Comprendre un message", points: 6, context: "" },
   { id: "annonce", category: "annonce", title: "Comprendre une annonce", points: 6, context: "Écoutez une série d'annonces courtes." },
   { id: "radio", category: "radio", title: "Comprendre des émissions de radio", points: 6, context: "Écoutez une ou plusieurs annonces radio." },
   { id: "conversation", category: "conversation", title: "Comprendre des conversations", points: 7, context: "Écoutez plusieurs échanges courts." },

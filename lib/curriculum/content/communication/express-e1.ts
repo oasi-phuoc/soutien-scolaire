@@ -1,4 +1,5 @@
-import { listeningExercise, mcq, type CommunicationLesson } from "./express-types";
+import { listeningPoolExercise, mcq, type CommunicationLesson } from "./express-types";
+import { E1_1_EVAL_AUDIOS, E1_1_LISTENING_AUDIOS } from "./express-e1-1-listening";
 
 const A1 = (n: string) => `/assets/expression/communication/A1/${n}.mp3`;
 
@@ -146,247 +147,30 @@ export const EXPRESS_E1_1: CommunicationLesson = {
       ],
     },
   ],
-  exerciseCount: 6,
-  exercises: [
-    listeningExercise(
-      "e1-1-005",
-      A1("005"),
-      "Audio 005",
-      "Écoutez et cochez la bonne réponse. (Document A)",
-      [
-        {
-          id: "a",
-          prompt: "a. Les deux personnes…",
-          choices: [
-            "se téléphonent.",
-            "se présentent et échangent leurs cartes de visite.",
-            "se présentent et se disent au revoir.",
-          ],
-          answer: "se présentent et échangent leurs cartes de visite.",
-        },
-        {
-          id: "b",
-          prompt: "b. Paolo demande à Nicole…",
-          choices: ["son nom.", "son prénom.", "son numéro de téléphone."],
-          answer: "son prénom.",
-        },
-        {
-          id: "c",
-          prompt: "c. Nicole est…",
-          choices: ["italienne.", "allemande.", "française."],
-          answer: "allemande.",
-        },
-      ],
-    ),
-    listeningExercise(
-      "e1-1-011",
-      A1("011"),
-      "Audio 011",
-      "Écoutez et complétez les informations.",
-      [
-        {
-          id: "a",
-          prompt: "a. Nom de famille",
-          choices: ["Kervelek", "Cantoni", "Schultz"],
-          answer: "Kervelek",
-        },
-        {
-          id: "b",
-          prompt: "b. Prénom",
-          choices: ["Naël", "Paolo", "Nicole"],
-          answer: "Naël",
-        },
-        {
-          id: "c",
-          prompt: "c. Nationalité",
-          choices: ["français", "italien", "allemand"],
-          answer: "français",
-        },
-        {
-          id: "d",
-          prompt: "d. Âge",
-          choices: ["25 ans", "34 ans", "35 ans"],
-          answer: "34 ans",
-        },
-        {
-          id: "e",
-          prompt: "e. Profession",
-          choices: ["journaliste", "professeur", "technicien"],
-          answer: "professeur",
-        },
-      ],
-    ),
-    listeningExercise(
-      "e1-1-012",
-      A1("012"),
-      "Audio 012",
-      "Écoutez et cochez Vrai ou Faux.",
-      [
-        {
-          id: "a",
-          prompt: "a. Vous écoutez un message sur le répondeur.",
-          choices: ["Vrai", "Faux"],
-          answer: "Vrai",
-        },
-        {
-          id: "b",
-          prompt: "b. Le numéro est le 01 39 10 22 50.",
-          choices: ["Vrai", "Faux"],
-          answer: "Vrai",
-        },
-        {
-          id: "c",
-          prompt: "c. Vous êtes chez Luc et Tania.",
-          choices: ["Vrai", "Faux"],
-          answer: "Faux",
-        },
-        {
-          id: "d",
-          prompt: "d. Vous laissez votre nom et votre prénom.",
-          choices: ["Vrai", "Faux"],
-          answer: "Vrai",
-        },
-        {
-          id: "e",
-          prompt: "e. Vous donnez votre adresse.",
-          choices: ["Vrai", "Faux"],
-          answer: "Faux",
-        },
-        {
-          id: "f",
-          prompt: "f. Le dernier mot est « au revoir ».",
-          choices: ["Vrai", "Faux"],
-          answer: "Faux",
-        },
-      ],
-    ),
-    listeningExercise(
-      "e1-1-013",
-      A1("013"),
-      "Audio 013",
-      "Écoutez et cochez la bonne réponse.",
-      [
-        {
-          id: "a",
-          prompt: "a. La femme dit :",
-          choices: ["« C'est pour un passeport ? »", "« C'est pour une carte de visite ? »"],
-          answer: "« C'est pour un passeport ? »",
-        },
-        {
-          id: "b",
-          prompt: "b. La femme demande",
-          choices: ["le prénom", "le nom de famille"],
-          answer: "le nom de famille",
-        },
-        {
-          id: "c",
-          prompt: "c. L'homme s'appelle",
-          choices: ["Zola", "Sola"],
-          answer: "Zola",
-        },
-        {
-          id: "d",
-          prompt: "d. Le prénom de l'homme est",
-          choices: ["Jacques", "Jean"],
-          answer: "Jacques",
-        },
-        {
-          id: "e",
-          prompt: "e. La femme dit :",
-          choices: ["« Tu es le mari de Camille. »", "« Tu es l'ami de Camille. »"],
-          answer: "« Tu es l'ami de Camille. »",
-        },
-        {
-          id: "f",
-          prompt: "f. Elle demande :",
-          choices: ["« Bonjour, ça va ? »", "« Salut, ça va ? »"],
-          answer: "« Salut, ça va ? »",
-        },
-      ],
-    ),
-    listeningExercise(
-      "e1-1-014",
-      A1("014"),
-      "Audio 014",
-      "Écoutez et cochez la bonne réponse.",
-      [
-        {
-          id: "a",
-          prompt: "a. Le nom de famille d'Annie est…",
-          choices: ["Schultz.", "Gatineau."],
-          answer: "Schultz.",
-        },
-        {
-          id: "b",
-          prompt: "b. Annie a…",
-          choices: ["37 ans.", "42 ans."],
-          answer: "37 ans.",
-        },
-        {
-          id: "c",
-          prompt: "c. Elle est…",
-          choices: ["pharmacienne.", "vendeuse."],
-          answer: "vendeuse.",
-        },
-        {
-          id: "d",
-          prompt: "d. Le nom de famille de Nadine est…",
-          choices: ["Patineau.", "Gatineau."],
-          answer: "Gatineau.",
-        },
-        {
-          id: "e",
-          prompt: "e. Nadine est…",
-          choices: ["pharmacienne.", "serveuse."],
-          answer: "pharmacienne.",
-        },
-        {
-          id: "f",
-          prompt: "f. Elle est…",
-          choices: ["belge.", "suisse."],
-          answer: "belge.",
-        },
-      ],
-    ),
-    listeningExercise(
-      "e1-1-015",
-      A1("015"),
-      "Audio 015",
-      "Écoutez et cochez la bonne réponse.",
-      [
-        {
-          id: "a",
-          prompt: "a. La femme s'appelle…",
-          choices: ["Sophie.", "Nina.", "Camille."],
-          answer: "Nina.",
-        },
-        {
-          id: "b",
-          prompt: "b. L'homme s'appelle…",
-          choices: ["Paolo.", "Felipe.", "Jacques."],
-          answer: "Felipe.",
-        },
-        {
-          id: "c",
-          prompt: "c. Sophie est…",
-          choices: ["sa mère.", "de la sœur.", "sa professeure."],
-          answer: "de la sœur.",
-        },
-        {
-          id: "d",
-          prompt: "d. Felipe est…",
-          choices: ["français.", "brésilien.", "belge."],
-          answer: "brésilien.",
-        },
-        {
-          id: "e",
-          prompt: "e. Nina est…",
-          choices: ["étudiante.", "vendeuse.", "ingénieure."],
-          answer: "ingénieure.",
-        },
-      ],
-    ),
-  ],
+  exerciseCount: 4,
+  exercises: E1_1_LISTENING_AUDIOS.map((a) =>
+    listeningPoolExercise({
+      id: a.id,
+      audioSrc: a.audioSrc,
+      audioLabel: a.audioLabel,
+      instruction: a.instruction,
+      transcript: a.transcript,
+      questionPool: a.pool,
+      questionCount: a.questionCount,
+    }),
+  ),
+  evalExercises: E1_1_EVAL_AUDIOS.map((a) =>
+    listeningPoolExercise({
+      id: a.id,
+      audioSrc: a.audioSrc,
+      audioLabel: a.audioLabel,
+      instruction: a.instruction,
+      transcript: a.transcript,
+      questionPool: a.pool,
+      questionCount: a.questionCount,
+    }),
+  ),
+
 };
 
 /* ═══════════════════════════════════════════════════════════════════════════

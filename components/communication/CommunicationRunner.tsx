@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import {
   getExpressionTeachersAction,
   submitExpressionAction,
@@ -10,12 +10,16 @@ import {
 } from "@/app/actions/expression";
 import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import {
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   type CommunicationExercise,
   type CommunicationLesson,
   type CommunicationTheoryBlock,
-  isCommunicationExerciseComplete,
   pickProgressiveExercises,
   scoreCommunicationExercise,
 } from "@/lib/curriculum/content/communication/express-types";
@@ -33,11 +37,13 @@ import { OralProductionRunner } from "@/components/communication/OralProductionR
 import { ComprehensionEcritRunner } from "@/components/communication/ComprehensionEcritRunner";
 import { ComprehensionOraleRunner } from "@/components/communication/ComprehensionOraleRunner";
 import { ProductionEcriteRunner } from "@/components/communication/ProductionEcriteRunner";
+import { ExpressListeningExercise } from "@/components/communication/ExpressListeningExercise";
 import {
   randomFormTemplates,
   type FormField,
   type FormTemplate,
 } from "@/lib/curriculum/content/communication/form-prompts";
+import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 
 const ACCENT = "var(--color-accent-comm)";
 const LESSONS: Record<string, CommunicationLesson> = {
@@ -50,7 +56,39 @@ const LESSONS: Record<string, CommunicationLesson> = {
   "A1-1": EXPRESS_ORAL_BY_ID["E1-1"]!,
 };
 
-type Phase = "intro" | "theory" | "form" | "writing" | "exercises" | "score";
+type Phase = "intro" | "theory" | "form" | "writing" | "exercises" | "eval_announce" | "eval" | "score";
+
+function splitOralExercises(
+  lesson: CommunicationLesson,
+  seed: number,
+): {
+  training: CommunicationExercise[];
+  evalEx: CommunicationExercise[];
+} {
+  if (lesson.writingLevel) return { training: [], evalEx: [] };
+
+  // Contenu explicite : entraînement + évaluation séparés
+  if (lesson.evalExercises && lesson.evalExercises.length > 0 && (lesson.exercises?.length ?? 0) > 0) {
+    return { training: lesson.exercises!, evalEx: lesson.evalExercises };
+  }
+
+  const pool = lesson.exercisePool ?? [];
+  const all =
+    pool.length > 0
+      ? pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, seed)
+      : (lesson.exercises ?? []);
+
+  if (lesson.evalExercises && lesson.evalExercises.length > 0) {
+    return { training: all, evalEx: lesson.evalExercises };
+  }
+
+  if (all.length <= 2) return { training: all, evalEx: [] };
+  const evalCount = Math.min(2, Math.max(1, Math.floor(all.length / 3)));
+  return {
+    training: all.slice(0, all.length - evalCount),
+    evalEx: all.slice(all.length - evalCount),
+  };
+}
 
 type GrammarMatch = {
   message: string;
@@ -369,6 +407,17 @@ function renderInlineBold(text: string) {
 }
 
 function SimpleAudioPlayer({ src, label }: { src: string; label?: string }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setError(null);
+    const el = audioRef.current;
+    if (!el) return;
+    el.pause();
+    el.load();
+  }, [src]);
+
   return (
     <div className="mb-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
       {label ? (
@@ -376,7 +425,22 @@ function SimpleAudioPlayer({ src, label }: { src: string; label?: string }) {
           {label}
         </p>
       ) : null}
-      <audio controls preload="metadata" src={src} className="w-full" />
+      <audio
+        ref={audioRef}
+        key={src}
+        controls
+        preload="auto"
+        controlsList="nodownload"
+        src={src}
+        className="w-full"
+        onError={() => setError("Impossible de lire cet audio. Vérifiez votre connexion ou réessayez.")}
+        onLoadedData={() => setError(null)}
+      >
+        <source src={src} type="audio/mpeg" />
+      </audio>
+      {error ? (
+        <p className="mt-1.5 text-xs text-amber-600 dark:text-amber-400">{error}</p>
+      ) : null}
     </div>
   );
 }
@@ -707,104 +771,6 @@ function MCQExercise({
   );
 }
 
-function ListeningExercise({
-  exercise,
-  exNum,
-  total,
-  selected,
-  setSelected,
-  validated,
-}: {
-  exercise: CommunicationExercise;
-  exNum: number;
-  total: number;
-  selected: string | null;
-  setSelected: (v: string | null) => void;
-  validated: boolean;
-}) {
-  const items = exercise.items ?? [];
-  let answersMap: Record<string, string> = {};
-  try {
-    answersMap = selected ? (JSON.parse(selected) as Record<string, string>) : {};
-  } catch {
-    answersMap = {};
-  }
-
-  function setItemAnswer(itemId: string, value: string) {
-    if (validated) return;
-    const next = { ...answersMap, [itemId]: value };
-    setSelected(JSON.stringify(next));
-  }
-
-  const score = scoreCommunicationExercise(exercise, selected);
-
-  return (
-    <div className="flex flex-1 flex-col">
-      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-        Exercice {exNum} / {total}
-      </p>
-      <p className="mb-3 text-xs text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      {exercise.audioSrc ? (
-        <SimpleAudioPlayer src={exercise.audioSrc} label={exercise.audioLabel ?? "Audio"} />
-      ) : null}
-      <div className="space-y-5">
-        {items.map((item) => {
-          const chosen = answersMap[item.id] ?? null;
-          return (
-            <div key={item.id}>
-              <p className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">{item.prompt}</p>
-              <div className="space-y-2">
-                {item.choices.map((c) => {
-                  let cls =
-                    "w-full rounded-[var(--radius-md)] border-2 px-4 py-2.5 text-left text-sm font-medium transition-colors";
-                  if (!validated) {
-                    cls +=
-                      chosen === c
-                        ? " text-white border-transparent"
-                        : " border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:border-[var(--color-border-emphasis)]";
-                  } else if (c === item.answer) {
-                    cls +=
-                      " border-[var(--color-correct)] bg-[var(--color-correct-bg)] text-[var(--color-correct-text)]";
-                  } else if (c === chosen) {
-                    cls += " border-amber-500 bg-amber-50 text-amber-600";
-                  } else {
-                    cls +=
-                      " border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
-                  }
-                  return (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setItemAnswer(item.id, c)}
-                      className={cls}
-                      style={!validated && chosen === c ? { background: ACCENT, borderColor: ACCENT } : undefined}
-                    >
-                      {c}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {validated && (
-        <div
-          className={`mt-4 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium ${
-            score === 1
-              ? "bg-[var(--color-correct-bg)] text-[var(--color-correct-text)]"
-              : "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-200"
-          }`}
-        >
-          {score === 1
-            ? "✓ Parfait !"
-            : `Résultat : ${Math.round(score * items.length)} / ${items.length}`}
-        </div>
-      )}
-    </div>
-  );
-}
-
 // ——— Main component ———
 
 export function CommunicationRunner({ lessonId }: { lessonId: string }) {
@@ -819,29 +785,28 @@ export function CommunicationRunner({ lessonId }: { lessonId: string }) {
 function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const lesson = LESSONS[lessonId];
+  const [lessonSeed] = useState(() => String(Date.now() % 100000));
 
-  const [activeExercises] = useState<CommunicationExercise[]>(() => {
-    if (!lesson) return [];
-    if (lesson.writingLevel) return [];
-    const pool = lesson.exercisePool ?? [];
-    if (pool.length > 0) {
-      const seed = Date.now() % 100000;
-      return pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, seed);
-    }
-    return lesson.exercises ?? [];
+  const [{ trainingExercises, evalExercises }] = useState(() => {
+    if (!lesson || lesson.writingLevel) return { trainingExercises: [] as CommunicationExercise[], evalExercises: [] as CommunicationExercise[] };
+    const split = splitOralExercises(lesson, Number(lessonSeed) || 1);
+    return { trainingExercises: split.training, evalExercises: split.evalEx };
   });
 
-  const [phase, setPhase] = useState<Phase>(() => lesson?.writingLevel ? "intro" : "theory");
+  const [phase, setPhase] = useState<Phase>(() => (lesson?.writingLevel ? "intro" : "theory"));
   const [exIndex, setExIndex] = useState(0);
+  const [evalIndex, setEvalIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
-  const [answers, setAnswers] = useState<(string | null)[]>(() =>
-    Array(activeExercises.length).fill(null)
-  );
-  const [validated, setValidated] = useState<boolean[]>(() =>
-    Array(activeExercises.length).fill(false)
-  );
+  const [answers, setAnswers] = useState<(string | null)[]>(() => Array(trainingExercises.length).fill(null));
+  const [evalAnswers, setEvalAnswers] = useState<(string | null)[]>(() => Array(evalExercises.length).fill(null));
+  const [validated, setValidated] = useState<boolean[]>(() => Array(trainingExercises.length).fill(false));
+  const [evalValidated, setEvalValidated] = useState<boolean[]>(() => Array(evalExercises.length).fill(false));
   const [exerciseValidated, setExerciseValidated] = useState(false);
-  const selected = answers[exIndex] ?? null;
+
+  const activeAnswers = phase === "eval" ? evalAnswers : answers;
+  const activeValidated = phase === "eval" ? evalValidated : validated;
+  const activeIndex = phase === "eval" ? evalIndex : exIndex;
+  const selected = activeAnswers[activeIndex] ?? null;
 
   const [writingPrompt, setWritingPrompt] = useState<WritingPrompt | null>(() =>
     lesson?.writingLevel ? randomWritingPrompt(lesson.writingLevel) : null,
@@ -865,28 +830,41 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
         <p className="text-sm text-[var(--color-text-secondary)]">Leçon introuvable.</p>
-        <button
-          type="button"
-          onClick={() => router.push("/communication")}
-          className="text-sm font-medium underline"
-          style={{ color: ACCENT }}
-        >
+        <button type="button" onClick={() => router.push("/communication")} className="text-sm font-medium underline" style={{ color: ACCENT }}>
           Retour
         </button>
       </div>
     );
   }
 
-  const totalEx = activeExercises.length;
+  const hasEval = evalExercises.length > 0;
+  const isOral = !lesson.writingLevel;
+  const trainingTotalSteps = isOral
+    ? 1 + trainingExercises.length + (hasEval ? 1 : 0)
+    : 0;
+  const oralStepIdx =
+    phase === "theory"
+      ? 0
+      : phase === "exercises"
+        ? 1 + exIndex
+        : phase === "eval_announce"
+          ? trainingTotalSteps - 1
+          : 0;
+
   const activeWritingPhases = lesson.writingLevel
-    ? (["form", "writing"] as const).filter((item) => item === "form" ? !formValidated : !exerciseValidated)
+    ? (["form", "writing"] as const).filter((item) => (item === "form" ? !formValidated : !exerciseValidated))
     : [];
   const currentWritingStep = Math.max(0, activeWritingPhases.indexOf(phase as "form" | "writing"));
-  const totalSteps = lesson.writingLevel ? Math.max(1, activeWritingPhases.length) : 3;
-  const stepIdx =
-    lesson.writingLevel
-      ? currentWritingStep
-      : phase === "intro" ? 0 : phase === "theory" ? 0 : phase === "form" ? 0 : phase === "writing" ? 1 : phase === "exercises" ? 1 : 2;
+
+  const inEvalPhase = phase === "eval";
+  const showTrainingBar =
+    isOral &&
+    (phase === "theory" || phase === "exercises" || phase === "eval_announce");
+  const showWritingBar =
+    Boolean(lesson.writingLevel) &&
+    phase !== "intro" &&
+    phase !== "score" &&
+    activeWritingPhases.length > 0;
 
   function handleFinish() {
     try {
@@ -908,14 +886,24 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setGrammarFeedback([]);
       setExerciseValidated(false);
     } else if (phase === "exercises") {
-      if (exIndex > 0) {
-        setExIndex(exIndex - 1);
+      if (exIndex > 0) setExIndex(exIndex - 1);
+      else setPhase("theory");
+    } else if (phase === "eval_announce") {
+      if (trainingExercises.length > 0) {
+        setPhase("exercises");
+        setExIndex(trainingExercises.length - 1);
+      } else setPhase("theory");
+    } else if (phase === "eval") {
+      if (evalIndex > 0) setEvalIndex(evalIndex - 1);
+      else setPhase("eval_announce");
+    } else if (phase === "score") {
+      if (hasEval) {
+        setPhase("eval");
+        setEvalIndex(evalExercises.length - 1);
       } else {
-        setPhase("theory");
+        setPhase("exercises");
+        setExIndex(Math.max(0, trainingExercises.length - 1));
       }
-    } else {
-      setPhase("exercises");
-      setExIndex(totalEx - 1);
     }
   }
 
@@ -933,8 +921,13 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setWritingPrompt(randomWritingPrompt(lesson.writingLevel));
       return;
     }
-    setAnswers((prev) => prev.map((a, i) => i === exIndex ? null : a));
-    setValidated((prev) => prev.map((v, i) => i === exIndex ? false : v));
+    if (phase === "eval") {
+      setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? null : a)));
+      setEvalValidated((prev) => prev.map((v, i) => (i === evalIndex ? false : v)));
+      return;
+    }
+    setAnswers((prev) => prev.map((a, i) => (i === exIndex ? null : a)));
+    setValidated((prev) => prev.map((v, i) => (i === exIndex ? false : v)));
   }
 
   async function handleValidate() {
@@ -957,8 +950,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text: writingText }),
         });
-        const data = await response.json() as { matches?: GrammarMatch[] };
-        setGrammarFeedback((data.matches ?? []).filter((match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? "")));
+        const data = (await response.json()) as { matches?: GrammarMatch[] };
+        setGrammarFeedback(
+          (data.matches ?? []).filter((match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? "")),
+        );
       } catch {
         setGrammarFeedback([]);
       } finally {
@@ -967,12 +962,20 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       }
       return;
     }
-    if (!selected || validated[exIndex]) return;
     if (phase === "exercises") {
-      const ex = activeExercises[exIndex];
-      if (ex && !isCommunicationExerciseComplete(ex, selected)) return;
+      if (validated[exIndex]) return;
+      const ex = trainingExercises[exIndex];
+      // Écoute : validation libre (comme CO). QCM texte : exige une réponse.
+      if (ex?.type === "mcq" && !selected) return;
+      setValidated((prev) => prev.map((v, i) => (i === exIndex ? true : v)));
+      return;
     }
-    setValidated((prev) => prev.map((v, i) => i === exIndex ? true : v));
+    if (phase === "eval") {
+      if (evalValidated[evalIndex]) return;
+      const ex = evalExercises[evalIndex];
+      if (ex?.type === "mcq" && !selected) return;
+      setEvalValidated((prev) => prev.map((v, i) => (i === evalIndex ? true : v)));
+    }
   }
 
   function goNext() {
@@ -985,43 +988,134 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         setPhase("form");
         return;
       }
-      if (totalEx === 0) {
-        handleFinish();
+      if (trainingExercises.length === 0) {
+        if (hasEval) setPhase("eval_announce");
+        else handleFinish();
         return;
       }
       setPhase("exercises");
-    } else if (phase === "form") {
+      setExIndex(0);
+      return;
+    }
+    if (phase === "form") {
       setPhase("writing");
-    } else if (phase === "writing") {
+      return;
+    }
+    if (phase === "writing") {
       if (!exerciseValidated) return;
       handleFinish();
-    } else if (phase === "exercises") {
-      if (exIndex + 1 < totalEx) {
-        setExIndex(exIndex + 1);
-      } else {
-        // Last exercise: compute score from all answers and go to score
-        const newResults = activeExercises.map(
-          (ex, i) => scoreCommunicationExercise(ex, answers[i]) >= 0.999,
-        );
-        setResults(newResults);
-        setPhase("score");
-      }
-    } else {
-      handleFinish();
+      return;
     }
+    if (phase === "exercises") {
+      if (exIndex + 1 < trainingExercises.length) {
+        setExIndex(exIndex + 1);
+        return;
+      }
+      if (hasEval) {
+        setPhase("eval_announce");
+        return;
+      }
+      const newResults = trainingExercises.map(
+        (ex, i) => scoreCommunicationExercise(ex, answers[i]) >= 0.999,
+      );
+      setResults(newResults);
+      setPhase("score");
+      return;
+    }
+    if (phase === "eval_announce") {
+      setPhase("eval");
+      setEvalIndex(0);
+      return;
+    }
+    if (phase === "eval") {
+      if (evalIndex + 1 < evalExercises.length) {
+        setEvalIndex(evalIndex + 1);
+        return;
+      }
+      const newResults = evalExercises.map(
+        (ex, i) => scoreCommunicationExercise(ex, evalAnswers[i]) >= 0.999,
+      );
+      setResults(newResults);
+      setPhase("score");
+      return;
+    }
+    handleFinish();
   }
 
-  const isLastStep = phase === "score" || phase === "writing" || (phase === "theory" && totalEx === 0 && !lesson.writingLevel);
-  const showExerciseControls = phase === "exercises" || phase === "writing" || phase === "form";
-  // Free navigation in exercises: no validation gate for Suivant
-  const nextDisabled = (phase === "writing" && !exerciseValidated) || (phase === "form" && !formValidated);
-  const currentExValidated = validated[exIndex] ?? false;
+  const isLastStep =
+    phase === "score" ||
+    phase === "writing" ||
+    (phase === "theory" && trainingExercises.length === 0 && !hasEval && !lesson.writingLevel);
+  const showExerciseControls =
+    phase === "exercises" || phase === "eval" || phase === "writing" || phase === "form";
+  const nextDisabled =
+    (phase === "writing" && !exerciseValidated) ||
+    (phase === "form" && !formValidated) ||
+    phase === "eval_announce";
+  const currentExValidated = activeValidated[activeIndex] ?? false;
 
-  const score = results.filter(Boolean).length;
+  const scoredExercises = hasEval ? evalExercises : trainingExercises;
+  const scoreCorrect = results.filter(Boolean).length;
+  const scoreTotal = results.length || scoredExercises.length;
+  const grade = linearSwissGrade(scoreCorrect, Math.max(1, scoreTotal));
+  const passed = grade >= PASSING_GRADE;
+
+  function renderOralExercise(ex: CommunicationExercise, index: number, total: number) {
+    if (ex.type === "listening") {
+      return (
+        <ExpressListeningExercise
+          key={`${ex.id}-${phase}`}
+          exercise={ex}
+          exNum={index + 1}
+          seed={lessonSeed}
+          selected={selected}
+          setSelected={(v) => {
+            if (phase === "eval") {
+              setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? v : a)));
+              if (v !== evalAnswers[evalIndex]) {
+                setEvalValidated((prev) => prev.map((vv, i) => (i === evalIndex ? false : vv)));
+              }
+            } else {
+              setAnswers((prev) => prev.map((a, i) => (i === exIndex ? v : a)));
+              if (v !== answers[exIndex]) {
+                setValidated((prev) => prev.map((vv, i) => (i === exIndex ? false : vv)));
+              }
+            }
+          }}
+          validated={currentExValidated}
+        />
+      );
+    }
+    return (
+      <MCQExercise
+        key={index}
+        question={ex.question ?? ""}
+        instruction={ex.instruction}
+        choices={ex.choices ?? []}
+        answer={ex.answer ?? ""}
+        exNum={index + 1}
+        total={total}
+        selected={selected}
+        setSelected={(v) => {
+          if (phase === "eval") {
+            setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? v : a)));
+            if (v !== evalAnswers[evalIndex]) {
+              setEvalValidated((prev) => prev.map((vv, i) => (i === evalIndex ? false : vv)));
+            }
+          } else {
+            setAnswers((prev) => prev.map((a, i) => (i === exIndex ? v : a)));
+            if (v !== answers[exIndex]) {
+              setValidated((prev) => prev.map((vv, i) => (i === exIndex ? false : vv)));
+            }
+          }
+        }}
+        validated={currentExValidated}
+      />
+    );
+  }
 
   return (
     <div className="app-shell flex min-h-screen flex-col pt-4 pb-32 lg:pb-28">
-      {/* Header */}
       <header className="mb-4 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
           {lesson.writingLevel ? "Français · Expression écrite" : "Français · Communication"}
@@ -1043,20 +1137,71 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         </div>
       </header>
 
-      {/* Segmented progress bar */}
-      {phase !== "intro" && phase !== "score" && (!lesson.writingLevel || activeWritingPhases.length > 0) && (
+      {showTrainingBar && (
+        <div className="mb-6" data-no-print>
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: ACCENT }}>
+              Entraînement
+            </p>
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              {oralStepIdx + 1} / {trainingTotalSteps}
+            </p>
+          </div>
+          <div className="flex gap-1">
+            {Array.from({ length: trainingTotalSteps }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i < oralStepIdx
+                    ? ""
+                    : i === oralStepIdx
+                      ? "opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+                style={i <= oralStepIdx ? { background: ACCENT } : undefined}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {inEvalPhase && (
+        <div className="mb-6" data-no-print>
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              {evalIndex + 1} / {evalExercises.length}
+            </p>
+          </div>
+          <div className="flex gap-1">
+            {evalExercises.map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i === evalIndex
+                    ? "bg-[var(--color-correction)]"
+                    : evalValidated[i]
+                      ? "bg-[var(--color-correction)]/40"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {showWritingBar && (
         <div className="mb-6 flex gap-0.5">
-          {(lesson.writingLevel ? activeWritingPhases : Array.from({ length: totalSteps })).map((_, i) => (
+          {activeWritingPhases.map((_, i) => (
             <button
               key={i}
               type="button"
               onClick={() => {
-                if (!lesson.writingLevel) return;
                 const target = activeWritingPhases[i];
                 if (target) setPhase(target);
               }}
-              className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
-              style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${i > currentWritingStep ? "bg-[var(--color-border-default)]" : ""}`}
+              style={i <= currentWritingStep ? { background: ACCENT, opacity: i < currentWritingStep ? 1 : 0.6 } : undefined}
               aria-label={`Aller à l'étape ${i + 1}`}
             />
           ))}
@@ -1067,7 +1212,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         <WritingIntroPage lesson={lesson} onStart={() => setPhase("form")} />
       )}
 
-      {/* Theory phase */}
       {phase === "theory" && (
         <div className="flex flex-1 flex-col">
           <div className="flex-1">
@@ -1108,114 +1252,82 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         />
       )}
 
-      {/* Exercises phase */}
-      {phase === "exercises" && activeExercises[exIndex] && (
-        <>
-          {/* Exercise dot navigator */}
-          {totalEx > 1 && (
-            <div className="mb-4 flex items-center justify-center gap-2">
-              {activeExercises.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setExIndex(i)}
-                  aria-label={`Exercice ${i + 1}`}
-                  className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-colors"
-                  style={
-                    i === exIndex
-                      ? { background: ACCENT, color: "white" }
-                      : answers[i] !== null
-                        ? { background: `color-mix(in srgb, ${ACCENT} 22%, transparent)`, color: ACCENT, border: `1.5px solid ${ACCENT}` }
-                        : { background: "var(--color-bg-secondary)", color: "var(--color-text-secondary)", border: "1.5px solid var(--color-border-default)" }
-                  }
-                >
-                  {i + 1}
-                </button>
-              ))}
-            </div>
-          )}
-          {activeExercises[exIndex]!.type === "listening" ? (
-            <ListeningExercise
-              key={exIndex}
-              exercise={activeExercises[exIndex]!}
-              exNum={exIndex + 1}
-              total={totalEx}
-              selected={selected}
-              setSelected={(v) => {
-                setAnswers((prev) => prev.map((a, i) => i === exIndex ? v : a));
-                if (v !== answers[exIndex]) {
-                  setValidated((prev) => prev.map((vv, i) => i === exIndex ? false : vv));
-                }
-              }}
-              validated={currentExValidated}
-            />
-          ) : (
-            <MCQExercise
-              key={exIndex}
-              question={activeExercises[exIndex]!.question ?? ""}
-              instruction={activeExercises[exIndex]!.instruction}
-              choices={activeExercises[exIndex]!.choices ?? []}
-              answer={activeExercises[exIndex]!.answer ?? ""}
-              exNum={exIndex + 1}
-              total={totalEx}
-              selected={selected}
-              setSelected={(v) => {
-                setAnswers((prev) => prev.map((a, i) => i === exIndex ? v : a));
-                if (v !== answers[exIndex]) {
-                  setValidated((prev) => prev.map((vv, i) => i === exIndex ? false : vv));
-                }
-              }}
-              validated={currentExValidated}
-            />
-          )}
-        </>
+      {phase === "exercises" && trainingExercises[exIndex] && (
+        renderOralExercise(trainingExercises[exIndex]!, exIndex, trainingExercises.length)
       )}
 
-      {/* Score phase */}
+      {phase === "eval_announce" && (
+        <EvalAnnounceScreen
+          accent={ACCENT}
+          lessonTitle={`${lesson.code} — ${lesson.title}`}
+          exerciseCount={evalExercises.length}
+          minutes={10}
+          onStart={() => {
+            setPhase("eval");
+            setEvalIndex(0);
+          }}
+        />
+      )}
+
+      {phase === "eval" && evalExercises[evalIndex] && (
+        renderOralExercise(evalExercises[evalIndex]!, evalIndex, evalExercises.length)
+      )}
+
       {phase === "score" && (
-        <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
-          <div
-            className="flex h-24 w-24 items-center justify-center rounded-full text-white text-3xl font-bold"
-            style={{ background: ACCENT }}
-          >
-            {score}/{totalEx}
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
-              {score === totalEx
-                ? "Parfait !"
-                : score >= totalEx * 0.75
-                  ? "Très bien !"
-                  : score >= totalEx * 0.5
-                    ? "Bien joué !"
-                    : "Continuez à pratiquer !"}
-            </h2>
-            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              Vous avez {score} bonne{score > 1 ? "s" : ""} réponse{score > 1 ? "s" : ""} sur {totalEx}.
-            </p>
-          </div>
+        <div className="flex flex-1 flex-col gap-6">
+          <EvalResultsSummary
+            accent={ACCENT}
+            points={scoreCorrect}
+            maxPoints={Math.max(1, scoreTotal)}
+            grade={grade}
+            passed={passed}
+          />
+          <EvalResultsHint />
+          <ul className="space-y-2">
+            {scoredExercises.map((ex, i) => {
+              const ok = results[i] ?? false;
+              return (
+                <li
+                  key={ex.id}
+                  className="flex items-center justify-between rounded-xl border border-[var(--color-border-default)] px-3 py-2 text-sm"
+                >
+                  <span className="font-medium text-[var(--color-text-primary)]">
+                    {ex.audioLabel ?? `Exercice ${i + 1}`}
+                  </span>
+                  <span className={ok ? "font-bold text-amber-700" : "font-bold text-red-600"}>
+                    {ok ? "Réussi" : "À revoir"}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
           <button
             type="button"
             onClick={() => {
-              setPhase("exercises");
-              setExIndex(0);
+              if (hasEval) {
+                setPhase("eval");
+                setEvalIndex(0);
+                setEvalAnswers(Array(evalExercises.length).fill(null));
+                setEvalValidated(Array(evalExercises.length).fill(false));
+              } else {
+                setPhase("exercises");
+                setExIndex(0);
+                setAnswers(Array(trainingExercises.length).fill(null));
+                setValidated(Array(trainingExercises.length).fill(false));
+              }
               setResults([]);
-              setAnswers(Array(totalEx).fill(null));
-              setValidated(Array(totalEx).fill(false));
             }}
             className="w-full rounded-[var(--radius-md)] border-2 py-3 text-sm font-bold transition-colors hover:bg-[var(--color-bg-secondary)]"
             style={{ borderColor: ACCENT, color: ACCENT }}
           >
-            Recommencer les exercices
+            Recommencer {hasEval ? "l'évaluation" : "les exercices"}
           </button>
         </div>
       )}
 
-      {/* Fixed bottom nav — same pattern as math modules */}
-      <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      <div className={`hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)] ${phase === "eval_announce" ? "invisible" : ""}`}>
         <div className="border-t border-[var(--color-border-default)]">
           <div className="app-shell-bar flex items-center justify-between py-3">
-            {/* Back button */}
             <button
               type="button"
               onClick={goBack}
@@ -1224,24 +1336,30 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               ← Retour
             </button>
 
-            {/* Reset + Validate (exercises only) */}
             {showExerciseControls ? (
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={handleReset}
-                  disabled={(phase === "exercises" ? currentExValidated : phase === "form" ? formValidated : exerciseValidated) || grammarChecking}
+                  disabled={currentExValidated || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
                   aria-label="Réinitialiser"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
+                    <path d="M1 4v6h6" />
+                    <path d="M3.51 15a9 9 0 1 0 .49-4" />
                   </svg>
                 </button>
                 <button
                   type="button"
                   onClick={() => void handleValidate()}
-                  disabled={(phase === "writing" ? false : phase === "form" ? false : !(selected && (!activeExercises[exIndex] || isCommunicationExerciseComplete(activeExercises[exIndex]!, selected)))) || (phase === "exercises" ? currentExValidated : phase === "form" ? formValidated : exerciseValidated) || grammarChecking}
+                  disabled={
+                    (phase === "exercises" || phase === "eval"
+                      ? currentExValidated
+                      : phase === "form"
+                        ? formValidated
+                        : exerciseValidated) || grammarChecking
+                  }
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                   style={{ background: ACCENT }}
                   aria-label="Valider"
@@ -1255,7 +1373,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               <span />
             )}
 
-            {/* Next / Finish button */}
             <button
               type="button"
               onClick={goNext}
@@ -1267,8 +1384,8 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
             </button>
           </div>
         </div>
-        <div style={{ height: 72 }} />
       </div>
     </div>
   );
 }
+

@@ -1,3 +1,9 @@
+import type { ExpressMultiQuestion } from "./express-listening-helpers";
+import {
+  buildExpressListeningTasks,
+  scoreExpressListeningTasks,
+} from "./express-listening-helpers";
+
 /**
  * Types partagés — Expression orale (modules E1 / E2 / E3).
  * Mise en forme alignée sur les autres leçons (heading / highlight / section / bullets / note / table).
@@ -45,6 +51,14 @@ export type CommunicationExercise = {
   audioSrc?: string;
   audioLabel?: string;
   items?: ListeningItem[];
+  /** Transcription (ampoule d'aide), style CO. */
+  transcript?: string;
+  /**
+   * Pool de questions style CO (texte / image / saisie / vf).
+   * Si présent, les questions sont tirées et formatées à l'exécution.
+   */
+  questionPool?: ExpressMultiQuestion[];
+  questionCount?: number;
 };
 
 /**
@@ -66,8 +80,14 @@ export type CommunicationLesson = {
   exerciseCount?: number;
   /**
    * Exercices fixes (écoute, etc.). Utilisé si `exercisePool` est absent / vide.
+   * Partie entraînement (une case de barre de progression par exercice).
    */
   exercises?: CommunicationExercise[];
+  /**
+   * Exercices d'évaluation (après la page d'annonce).
+   * Si absents, les derniers exercices du pool / de `exercises` sont réaffectés.
+   */
+  evalExercises?: CommunicationExercise[];
   writingLevel?: "base" | "moyen" | "avance";
   /**
    * Leçons français (slugs) à valider avant d'ouvrir cette leçon d'expression.
@@ -189,11 +209,57 @@ export function listeningExercise(
   };
 }
 
+export function listeningPoolExercise(spec: {
+  id: string;
+  audioSrc: string;
+  audioLabel: string;
+  instruction: string;
+  transcript: string;
+  questionPool: ExpressMultiQuestion[];
+  questionCount?: number;
+}): CommunicationExercise {
+  return {
+    id: spec.id,
+    type: "listening",
+    instruction: spec.instruction,
+    audioSrc: spec.audioSrc,
+    audioLabel: spec.audioLabel,
+    transcript: spec.transcript,
+    questionPool: spec.questionPool,
+    questionCount: spec.questionCount ?? 4,
+  };
+}
+
+type ListeningAnswerPayload = {
+  seed?: string;
+  answers?: Record<string, number | string | null>;
+};
+
+function parseListeningPayload(selected: string | null): ListeningAnswerPayload {
+  if (!selected) return {};
+  try {
+    return JSON.parse(selected) as ListeningAnswerPayload;
+  } catch {
+    return {};
+  }
+}
+
 /** Score 0–1 pour un exercice (écoute multi-items ou QCM simple). */
 export function scoreCommunicationExercise(
   ex: CommunicationExercise,
   selected: string | null,
 ): number {
+  if (ex.type === "listening" && ex.questionPool?.length) {
+    const payload = parseListeningPayload(selected);
+    const seed = payload.seed ?? "0";
+    const tasks = buildExpressListeningTasks(
+      ex.questionPool,
+      ex.questionCount ?? 4,
+      `${ex.id}-${seed}`,
+    );
+    const { correct, total } = scoreExpressListeningTasks(tasks, payload.answers ?? {});
+    return total > 0 ? correct / total : 0;
+  }
   if (ex.type === "listening" && ex.items?.length) {
     let parsed: Record<string, string> = {};
     try {
@@ -212,14 +278,7 @@ export function isCommunicationExerciseComplete(
   ex: CommunicationExercise,
   selected: string | null,
 ): boolean {
-  if (ex.type === "listening" && ex.items?.length) {
-    let parsed: Record<string, string> = {};
-    try {
-      parsed = selected ? (JSON.parse(selected) as Record<string, string>) : {};
-    } catch {
-      return false;
-    }
-    return ex.items.every((item) => Boolean(parsed[item.id]));
-  }
+  // Style CO / grammaire : on peut valider sans avoir tout répondu.
+  if (ex.type === "listening") return true;
   return Boolean(selected);
 }

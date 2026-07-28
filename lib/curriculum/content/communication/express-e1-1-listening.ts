@@ -1,0 +1,733 @@
+import { buildExpressPool, type ExpressMultiQuestion, type ExpressRawQ } from "./express-listening-helpers";
+
+const A1 = (n: string) => `/assets/expression/communication/A1/${n}.mp3`;
+
+export type ExpressListeningAudio = {
+  id: string;
+  audioSrc: string;
+  audioLabel: string;
+  transcript: string;
+  instruction: string;
+  pool: ExpressMultiQuestion[];
+  /** Nombre de questions tirées par exercice (entraînement). */
+  questionCount: number;
+};
+
+function q(item: ExpressRawQ): ExpressRawQ {
+  return item;
+}
+
+/* ── Audio 005 — Paolo / Nicole (présentation) ─────────────────────────── */
+
+const POOL_005 = buildExpressPool("e1-1-005", [
+  q({
+    id: "005-q1",
+    textQ: "Comment s'appelle la femme ?",
+    text: ["Nicole", "Paolo", "Camille"],
+    textC: 0,
+    img: ["Femme", "Homme", "Enfant"],
+    imgC: 0,
+    fillQ: "La femme s'appelle _________.",
+    fill: "Nicole",
+    vfQ: "La femme s'appelle Nicole.",
+    vfC: 0,
+  }),
+  q({
+    id: "005-q2",
+    textQ: "Comment s'appelle l'homme ?",
+    text: ["Paolo", "Nicole", "Jacques"],
+    textC: 0,
+    img: ["Homme", "Femme", "Enfant"],
+    imgC: 0,
+    fillQ: "L'homme s'appelle _________.",
+    fill: "Paolo",
+    vfQ: "L'homme s'appelle Jacques.",
+    vfC: 1,
+  }),
+  q({
+    id: "005-q3",
+    textQ: "De quelle nationalité est Nicole ?",
+    text: ["Allemande", "Française", "Italienne"],
+    textC: 0,
+    img: ["Allemand", "Français", "Italien"],
+    imgC: 0,
+    fillQ: "Nicole est _________.",
+    fill: "allemande",
+    fillA: ["Allemande"],
+    vfQ: "Nicole est française.",
+    vfC: 1,
+  }),
+  q({
+    id: "005-q4",
+    textQ: "De quelle nationalité est Paolo ?",
+    text: ["Italien", "Allemand", "Français"],
+    textC: 0,
+    img: ["Italien", "Allemand", "Français"],
+    imgC: 0,
+    fillQ: "Paolo est _________.",
+    fill: "italien",
+    fillA: ["Italien"],
+    vfQ: "Paolo est italien.",
+    vfC: 0,
+  }),
+  q({
+    id: "005-q5",
+    textQ: "Quel âge a Paolo ?",
+    text: ["25 ans", "35 ans", "30 ans"],
+    textC: 0,
+    img: ["Téléphone", "Carte", "Maison"],
+    imgC: 0,
+    fillQ: "Paolo a _________ ans.",
+    fill: "25",
+    fillA: ["vingt-cinq", "25 ans"],
+    vfQ: "Paolo a 35 ans.",
+    vfC: 1,
+  }),
+  q({
+    id: "005-q6",
+    textQ: "Quel âge a Nicole ?",
+    text: ["35 ans", "25 ans", "40 ans"],
+    textC: 0,
+    img: ["Carte", "Téléphone", "Journaliste"],
+    imgC: 0,
+    fillQ: "Nicole a _________ ans.",
+    fill: "35",
+    fillA: ["trente-cinq", "35 ans"],
+    vfQ: "Nicole a 25 ans.",
+    vfC: 1,
+  }),
+  q({
+    id: "005-q7",
+    textQ: "Quelle est la profession de Nicole ?",
+    text: ["Journaliste", "Professeur", "Vendeuse"],
+    textC: 0,
+    img: ["Journaliste", "Professeur", "Vendeuse"],
+    imgC: 0,
+    fillQ: "Nicole est _________.",
+    fill: "journaliste",
+    fillA: ["Journaliste"],
+    vfQ: "Nicole est journaliste.",
+    vfC: 0,
+  }),
+  q({
+    id: "005-q8",
+    textQ: "Que font-ils pendant la conversation ?",
+    text: [
+      "Ils échangent leurs cartes de visite.",
+      "Ils se disent au revoir.",
+      "Ils se téléphonent.",
+    ],
+    textC: 0,
+    img: ["Carte", "Téléphone", "Maison"],
+    imgC: 0,
+    fillQ: "Ils échangent leurs cartes de _________.",
+    fill: "visite",
+    fillA: ["cartes de visite"],
+    vfQ: "Ils échangent leurs cartes de visite.",
+    vfC: 0,
+  }),
+  q({
+    id: "005-q9",
+    textQ: "Quel numéro de portable donne Paolo ?",
+    text: ["06 18 14 33 11", "06 18 14 33 10", "01 39 10 22 50"],
+    textC: 0,
+    img: ["Téléphone", "Carte", "Passeport"],
+    imgC: 0,
+    fillQ: "Le portable de Paolo commence par _________.",
+    fill: "06",
+    vfQ: "Le numéro de Paolo commence par 01.",
+    vfC: 1,
+  }),
+  q({
+    id: "005-q10",
+    textQ: "Nicole demande-t-elle de répéter le numéro ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["Téléphone", "Carte", "Maison"],
+    imgC: 0,
+    fillQ: "Nicole dit : « tu peux _________, s'il te plaît ? »",
+    fill: "répéter",
+    fillA: ["repeter"],
+    vfQ: "Nicole demande de répéter le numéro.",
+    vfC: 0,
+  }),
+]);
+
+const TRANSCRIPT_005 = `Paolo — Bonjour ! Moi, c'est Paolo. Et vous ? Vous vous appelez comment ?
+Nicole — Je m'appelle Nicole. Tu peux dire « tu ».
+Paolo — Enchanté Nicole ! Tu as un prénom français. Tu es française, non ?
+Nicole — Non, je suis allemande. Et toi ?
+Paolo — Je suis italien.
+Nicole — Et tu as quel âge ?
+Paolo — J'ai 25 ans.
+Nicole — Moi, j'ai 35 ans.
+Paolo — Quelle est ta profession ?
+Nicole — Je suis journaliste. Voici ma carte de visite.
+Paolo — Voici ma carte aussi.
+Nicole — Merci ! C'est ton numéro de portable sur la carte ?
+Paolo — Non, mon portable, c'est le 06 18 14 33 11.
+Nicole — Euh… tu peux répéter, s'il te plaît ?`;
+
+/* ── Audio 011 — Naël Kervelek ─────────────────────────────────────────── */
+
+const POOL_011 = buildExpressPool("e1-1-011", [
+  q({
+    id: "011-q1",
+    textQ: "Quel est le nom de famille ?",
+    text: ["Kervelek", "Cantoni", "Schultz"],
+    textC: 0,
+    img: ["Carte", "Passeport", "Téléphone"],
+    imgC: 0,
+    fillQ: "Le nom de famille est _________.",
+    fill: "Kervelek",
+    vfQ: "Le nom de famille est Schultz.",
+    vfC: 1,
+  }),
+  q({
+    id: "011-q2",
+    textQ: "Quel est le prénom ?",
+    text: ["Naël", "Paolo", "Nicole"],
+    textC: 0,
+    img: ["Homme", "Femme", "Enfant"],
+    imgC: 0,
+    fillQ: "Le prénom est _________.",
+    fill: "Naël",
+    fillA: ["Nael"],
+    vfQ: "Le prénom est Naël.",
+    vfC: 0,
+  }),
+  q({
+    id: "011-q3",
+    textQ: "Quelle est sa nationalité ?",
+    text: ["Français", "Italien", "Allemand"],
+    textC: 0,
+    img: ["Français", "Italien", "Allemand"],
+    imgC: 0,
+    fillQ: "Il est _________.",
+    fill: "français",
+    fillA: ["Français"],
+    vfQ: "Il est italien.",
+    vfC: 1,
+  }),
+  q({
+    id: "011-q4",
+    textQ: "Quel âge a-t-il ?",
+    text: ["34 ans", "25 ans", "35 ans"],
+    textC: 0,
+    img: ["Carte", "Maison", "Téléphone"],
+    imgC: 0,
+    fillQ: "Il a _________ ans.",
+    fill: "34",
+    fillA: ["trente-quatre", "34 ans"],
+    vfQ: "Il a 34 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "011-q5",
+    textQ: "Quelle est sa profession ?",
+    text: ["Professeur", "Journaliste", "Technicien"],
+    textC: 0,
+    img: ["Professeur", "Journaliste", "Vendeuse"],
+    imgC: 0,
+    fillQ: "Il est _________.",
+    fill: "professeur",
+    fillA: ["Professeur"],
+    vfQ: "Il est journaliste.",
+    vfC: 1,
+  }),
+  q({
+    id: "011-q6",
+    textQ: "Naël est-il allemand ?",
+    text: ["Non", "Oui", "On ne sait pas"],
+    textC: 0,
+    img: ["Allemand", "Français", "Italien"],
+    imgC: 1,
+    fillQ: "Naël est _________, pas allemand.",
+    fill: "français",
+    vfQ: "Naël est allemand.",
+    vfC: 1,
+  }),
+  q({
+    id: "011-q7",
+    textQ: "Travaille-t-il comme professeur ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["Professeur", "Journaliste", "Pharmacien"],
+    imgC: 0,
+    fillQ: "Sa profession : _________.",
+    fill: "professeur",
+    vfQ: "Naël est professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "011-q8",
+    textQ: "Le prénom est-il Paolo ?",
+    text: ["Non", "Oui", "On ne sait pas"],
+    textC: 0,
+    img: ["Homme", "Femme", "Enfant"],
+    imgC: 0,
+    fillQ: "Le prénom n'est pas Paolo, c'est _________.",
+    fill: "Naël",
+    fillA: ["Nael"],
+    vfQ: "Le prénom est Paolo.",
+    vfC: 1,
+  }),
+]);
+
+const TRANSCRIPT_011 = `On présente Naël Kervelek.
+Il est français.
+Il a 34 ans.
+Il est professeur.`;
+
+/* ── Audio 012 — Répondeur ─────────────────────────────────────────────── */
+
+const POOL_012 = buildExpressPool("e1-1-012", [
+  q({
+    id: "012-q1",
+    textQ: "Qu'écoutez-vous ?",
+    text: ["Un message sur le répondeur", "Une annonce à la radio", "Une conversation au café"],
+    textC: 0,
+    img: ["Téléphone", "Radio", "Restaurant"],
+    imgC: 0,
+    fillQ: "C'est un message sur le _________.",
+    fill: "répondeur",
+    fillA: ["repondeur"],
+    vfQ: "Vous écoutez un message sur le répondeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "012-q2",
+    textQ: "Quel est le numéro indiqué ?",
+    text: ["01 39 10 22 50", "06 18 14 33 11", "01 39 10 22 15"],
+    textC: 0,
+    img: ["Téléphone", "Carte", "Maison"],
+    imgC: 0,
+    fillQ: "Le numéro est 01 39 10 22 _________.",
+    fill: "50",
+    vfQ: "Le numéro est le 01 39 10 22 50.",
+    vfC: 0,
+  }),
+  q({
+    id: "012-q3",
+    textQ: "Chez qui êtes-vous ?",
+    text: ["Chez Lucie et Thomas", "Chez Luc et Tania", "Chez Paolo et Nicole"],
+    textC: 0,
+    img: ["Maison", "École", "Restaurant"],
+    imgC: 0,
+    fillQ: "Vous êtes chez Lucie et _________.",
+    fill: "Thomas",
+    vfQ: "Vous êtes chez Luc et Tania.",
+    vfC: 1,
+  }),
+  q({
+    id: "012-q4",
+    textQ: "Que laissez-vous sur le message ?",
+    text: ["Votre nom et votre prénom", "Votre adresse", "Votre âge"],
+    textC: 0,
+    img: ["Carte", "Maison", "Passeport"],
+    imgC: 0,
+    fillQ: "Vous laissez votre nom et votre _________.",
+    fill: "prénom",
+    fillA: ["prenom"],
+    vfQ: "Vous laissez votre adresse.",
+    vfC: 1,
+  }),
+  q({
+    id: "012-q5",
+    textQ: "Donnez-vous votre adresse ?",
+    text: ["Non", "Oui", "On ne sait pas"],
+    textC: 0,
+    img: ["Maison", "Téléphone", "Carte"],
+    imgC: 0,
+    fillQ: "Vous ne donnez pas votre _________.",
+    fill: "adresse",
+    vfQ: "Vous donnez votre adresse.",
+    vfC: 1,
+  }),
+  q({
+    id: "012-q6",
+    textQ: "Le dernier mot est-il « au revoir » ?",
+    text: ["Non", "Oui", "On ne sait pas"],
+    textC: 0,
+    img: ["Téléphone", "Maison", "Carte"],
+    imgC: 0,
+    fillQ: "Le dernier mot n'est pas « au _________ ».",
+    fill: "revoir",
+    vfQ: "Le dernier mot est « au revoir ».",
+    vfC: 1,
+  }),
+  q({
+    id: "012-q7",
+    textQ: "S'agit-il d'un message téléphonique ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["Téléphone", "Radio", "Journaliste"],
+    imgC: 0,
+    fillQ: "C'est un message _________.",
+    fill: "téléphonique",
+    fillA: ["telephonique", "au téléphone", "au telephone"],
+    vfQ: "C'est un message téléphonique.",
+    vfC: 0,
+  }),
+]);
+
+const TRANSCRIPT_012 = `Vous êtes bien chez Lucie et Thomas.
+Nous ne pouvons pas prendre votre appel.
+Merci de laisser votre nom et votre prénom après le bip.
+Le numéro est le 01 39 10 22 50.
+À bientôt !`;
+
+/* ── Audio 013 — Passeport / Jacques Zola ──────────────────────────────── */
+
+const POOL_013 = buildExpressPool("e1-1-013", [
+  q({
+    id: "013-q1",
+    textQ: "La femme dit :",
+    text: ["« C'est pour un passeport ? »", "« C'est pour une carte de visite ? »", "« C'est pour un billet ? »"],
+    textC: 0,
+    img: ["Passeport", "Carte", "Téléphone"],
+    imgC: 0,
+    fillQ: "C'est pour un _________.",
+    fill: "passeport",
+    vfQ: "La femme parle d'une carte de visite.",
+    vfC: 1,
+  }),
+  q({
+    id: "013-q2",
+    textQ: "Que demande la femme ?",
+    text: ["Le nom de famille", "Le prénom", "L'adresse"],
+    textC: 0,
+    img: ["Passeport", "Carte", "Maison"],
+    imgC: 0,
+    fillQ: "Elle demande le nom de _________.",
+    fill: "famille",
+    vfQ: "Elle demande le prénom en premier.",
+    vfC: 1,
+  }),
+  q({
+    id: "013-q3",
+    textQ: "Comment s'appelle l'homme (nom de famille) ?",
+    text: ["Zola", "Sola", "Schultz"],
+    textC: 0,
+    img: ["Homme", "Femme", "Enfant"],
+    imgC: 0,
+    fillQ: "Il s'appelle _________ (nom de famille).",
+    fill: "Zola",
+    vfQ: "Le nom de famille est Sola.",
+    vfC: 1,
+  }),
+  q({
+    id: "013-q4",
+    textQ: "Quel est le prénom de l'homme ?",
+    text: ["Jacques", "Jean", "Paolo"],
+    textC: 0,
+    img: ["Homme", "Femme", "Enfant"],
+    imgC: 0,
+    fillQ: "Son prénom est _________.",
+    fill: "Jacques",
+    vfQ: "Son prénom est Jacques.",
+    vfC: 0,
+  }),
+  q({
+    id: "013-q5",
+    textQ: "Quelle est sa relation avec Camille ?",
+    text: ["Il est l'ami de Camille", "Il est le mari de Camille", "Il est le frère de Camille"],
+    textC: 0,
+    img: ["Ami", "Maison", "Carte"],
+    imgC: 0,
+    fillQ: "Il est l'_________ de Camille.",
+    fill: "ami",
+    vfQ: "Il est le mari de Camille.",
+    vfC: 1,
+  }),
+  q({
+    id: "013-q6",
+    textQ: "Comment salue-t-elle ?",
+    text: ["« Salut, ça va ? »", "« Bonjour, ça va ? »", "« Bonsoir ! »"],
+    textC: 0,
+    img: ["Ami", "Professeur", "Journaliste"],
+    imgC: 0,
+    fillQ: "Elle dit : « _________, ça va ? »",
+    fill: "Salut",
+    fillA: ["salut"],
+    vfQ: "Elle dit « Bonjour, ça va ? »",
+    vfC: 1,
+  }),
+  q({
+    id: "013-q7",
+    textQ: "Le document demandé est-il un passeport ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["Passeport", "Carte", "Téléphone"],
+    imgC: 0,
+    fillQ: "Le document : un _________.",
+    fill: "passeport",
+    vfQ: "C'est pour un passeport.",
+    vfC: 0,
+  }),
+]);
+
+const TRANSCRIPT_013 = `Femme — C'est pour un passeport ?
+Homme — Oui.
+Femme — Le nom de famille ?
+Homme — Zola.
+Femme — Et le prénom ?
+Homme — Jacques.
+Femme — Tu es l'ami de Camille.
+Homme — Oui.
+Femme — Salut, ça va ?`;
+
+/* ── Audio 014 — Annie / Nadine ────────────────────────────────────────── */
+
+const POOL_014 = buildExpressPool("e1-1-014", [
+  q({
+    id: "014-q1",
+    textQ: "Quel est le nom de famille d'Annie ?",
+    text: ["Schultz", "Gatineau", "Zola"],
+    textC: 0,
+    img: ["Femme", "Homme", "Carte"],
+    imgC: 0,
+    fillQ: "Annie s'appelle Annie _________.",
+    fill: "Schultz",
+    vfQ: "Annie s'appelle Gatineau.",
+    vfC: 1,
+  }),
+  q({
+    id: "014-q2",
+    textQ: "Quel âge a Annie ?",
+    text: ["37 ans", "42 ans", "35 ans"],
+    textC: 0,
+    img: ["Carte", "Maison", "Téléphone"],
+    imgC: 0,
+    fillQ: "Annie a _________ ans.",
+    fill: "37",
+    fillA: ["trente-sept", "37 ans"],
+    vfQ: "Annie a 42 ans.",
+    vfC: 1,
+  }),
+  q({
+    id: "014-q3",
+    textQ: "Quelle est la profession d'Annie ?",
+    text: ["Vendeuse", "Pharmacienne", "Journaliste"],
+    textC: 0,
+    img: ["Vendeuse", "Pharmacien", "Journaliste"],
+    imgC: 0,
+    fillQ: "Annie est _________.",
+    fill: "vendeuse",
+    fillA: ["Vendeuse"],
+    vfQ: "Annie est pharmacienne.",
+    vfC: 1,
+  }),
+  q({
+    id: "014-q4",
+    textQ: "Quel est le nom de famille de Nadine ?",
+    text: ["Gatineau", "Patineau", "Schultz"],
+    textC: 0,
+    img: ["Femme", "Carte", "Maison"],
+    imgC: 0,
+    fillQ: "Nadine s'appelle Nadine _________.",
+    fill: "Gatineau",
+    vfQ: "Nadine s'appelle Schultz.",
+    vfC: 1,
+  }),
+  q({
+    id: "014-q5",
+    textQ: "Quelle est la profession de Nadine ?",
+    text: ["Pharmacienne", "Serveuse", "Vendeuse"],
+    textC: 0,
+    img: ["Pharmacien", "Vendeuse", "Journaliste"],
+    imgC: 0,
+    fillQ: "Nadine est _________.",
+    fill: "pharmacienne",
+    fillA: ["Pharmacienne", "pharmacien"],
+    vfQ: "Nadine est pharmacienne.",
+    vfC: 0,
+  }),
+  q({
+    id: "014-q6",
+    textQ: "De quelle nationalité est Nadine ?",
+    text: ["Belge", "Suisse", "Française"],
+    textC: 0,
+    img: ["Belge", "Suisse", "Français"],
+    imgC: 0,
+    fillQ: "Nadine est _________.",
+    fill: "belge",
+    fillA: ["Belge"],
+    vfQ: "Nadine est suisse.",
+    vfC: 1,
+  }),
+  q({
+    id: "014-q7",
+    textQ: "Annie est-elle vendeuse ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["Vendeuse", "Pharmacien", "Professeur"],
+    imgC: 0,
+    fillQ: "La profession d'Annie : _________.",
+    fill: "vendeuse",
+    vfQ: "Annie est vendeuse.",
+    vfC: 0,
+  }),
+]);
+
+const TRANSCRIPT_014 = `Annie Schultz a 37 ans. Elle est vendeuse.
+Nadine Gatineau est pharmacienne. Elle est belge.`;
+
+/* ── Audio 015 — Nina / Felipe ─────────────────────────────────────────── */
+
+const POOL_015 = buildExpressPool("e1-1-015", [
+  q({
+    id: "015-q1",
+    textQ: "Comment s'appelle la femme ?",
+    text: ["Nina", "Sophie", "Camille"],
+    textC: 0,
+    img: ["Femme", "Homme", "Enfant"],
+    imgC: 0,
+    fillQ: "La femme s'appelle _________.",
+    fill: "Nina",
+    vfQ: "La femme s'appelle Sophie.",
+    vfC: 1,
+  }),
+  q({
+    id: "015-q2",
+    textQ: "Comment s'appelle l'homme ?",
+    text: ["Felipe", "Paolo", "Jacques"],
+    textC: 0,
+    img: ["Homme", "Femme", "Enfant"],
+    imgC: 0,
+    fillQ: "L'homme s'appelle _________.",
+    fill: "Felipe",
+    vfQ: "L'homme s'appelle Felipe.",
+    vfC: 0,
+  }),
+  q({
+    id: "015-q3",
+    textQ: "Qui est Sophie pour Nina ?",
+    text: ["Sa sœur", "Sa mère", "Sa professeure"],
+    textC: 0,
+    img: ["Femme", "Professeur", "Maison"],
+    imgC: 0,
+    fillQ: "Sophie est sa _________.",
+    fill: "sœur",
+    fillA: ["soeur", "sœur"],
+    vfQ: "Sophie est sa mère.",
+    vfC: 1,
+  }),
+  q({
+    id: "015-q4",
+    textQ: "De quelle nationalité est Felipe ?",
+    text: ["Brésilien", "Français", "Belge"],
+    textC: 0,
+    img: ["Brésilien", "Français", "Belge"],
+    imgC: 0,
+    fillQ: "Felipe est _________.",
+    fill: "brésilien",
+    fillA: ["bresilien", "Brésilien"],
+    vfQ: "Felipe est français.",
+    vfC: 1,
+  }),
+  q({
+    id: "015-q5",
+    textQ: "Quelle est la profession de Nina ?",
+    text: ["Ingénieure", "Étudiante", "Vendeuse"],
+    textC: 0,
+    img: ["Ingénieur", "Étudiante", "Vendeuse"],
+    imgC: 0,
+    fillQ: "Nina est _________.",
+    fill: "ingénieure",
+    fillA: ["ingenieure", "Ingénieure", "ingénieur"],
+    vfQ: "Nina est étudiante.",
+    vfC: 1,
+  }),
+  q({
+    id: "015-q6",
+    textQ: "Felipe est-il belge ?",
+    text: ["Non", "Oui", "On ne sait pas"],
+    textC: 0,
+    img: ["Belge", "Brésilien", "Français"],
+    imgC: 1,
+    fillQ: "Felipe n'est pas belge, il est _________.",
+    fill: "brésilien",
+    fillA: ["bresilien"],
+    vfQ: "Felipe est belge.",
+    vfC: 1,
+  }),
+  q({
+    id: "015-q7",
+    textQ: "Nina est-elle ingénieure ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["Ingénieur", "Vendeuse", "Journaliste"],
+    imgC: 0,
+    fillQ: "La profession de Nina : _________.",
+    fill: "ingénieure",
+    fillA: ["ingenieure", "ingénieur"],
+    vfQ: "Nina est ingénieure.",
+    vfC: 0,
+  }),
+]);
+
+const TRANSCRIPT_015 = `Nina et Felipe se présentent.
+Sophie est la sœur de Nina.
+Felipe est brésilien.
+Nina est ingénieure.`;
+
+export const E1_1_LISTENING_AUDIOS: ExpressListeningAudio[] = [
+  {
+    id: "e1-1-005",
+    audioSrc: A1("005"),
+    audioLabel: "Audio 005",
+    transcript: TRANSCRIPT_005,
+    instruction: "Écoutez l'enregistrement et répondez aux questions.",
+    pool: POOL_005,
+    questionCount: 4,
+  },
+  {
+    id: "e1-1-011",
+    audioSrc: A1("011"),
+    audioLabel: "Audio 011",
+    transcript: TRANSCRIPT_011,
+    instruction: "Écoutez l'enregistrement et répondez aux questions.",
+    pool: POOL_011,
+    questionCount: 4,
+  },
+  {
+    id: "e1-1-012",
+    audioSrc: A1("012"),
+    audioLabel: "Audio 012",
+    transcript: TRANSCRIPT_012,
+    instruction: "Écoutez l'enregistrement et répondez aux questions.",
+    pool: POOL_012,
+    questionCount: 4,
+  },
+  {
+    id: "e1-1-013",
+    audioSrc: A1("013"),
+    audioLabel: "Audio 013",
+    transcript: TRANSCRIPT_013,
+    instruction: "Écoutez l'enregistrement et répondez aux questions.",
+    pool: POOL_013,
+    questionCount: 4,
+  },
+];
+
+export const E1_1_EVAL_AUDIOS: ExpressListeningAudio[] = [
+  {
+    id: "e1-1-014",
+    audioSrc: A1("014"),
+    audioLabel: "Audio 014",
+    transcript: TRANSCRIPT_014,
+    instruction: "Écoutez l'enregistrement et répondez aux questions.",
+    pool: POOL_014,
+    questionCount: 4,
+  },
+  {
+    id: "e1-1-015",
+    audioSrc: A1("015"),
+    audioLabel: "Audio 015",
+    transcript: TRANSCRIPT_015,
+    instruction: "Écoutez l'enregistrement et répondez aux questions.",
+    pool: POOL_015,
+    questionCount: 4,
+  },
+];
