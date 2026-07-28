@@ -707,3 +707,49 @@ input[type=number] {
 .admin-table-scroll::-webkit-scrollbar-corner {
   background: var(--color-theme);
 }
+
+/* Suivi pédagogique — liste des classes */
+.suivi-classes-table {
+  table-layout: auto;
+}
+
+.suivi-classes-table col.suivi-classes-table__loupe,
+.suivi-classes-table th.suivi-classes-table__loupe,
+.suivi-classes-table td.suivi-classes-table__loupe {
+  box-sizing: border-box;
+  width: 28px;
+  min-width: 28px;
+  max-width: 28px;
+  padding: 0 0 0 6px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Classe & Élèves : largeur auto selon le texte */
+.suivi-classes-table col.suivi-classes-table__classe,
+.suivi-classes-table col.suivi-classes-table__eleves {
+  width: 1%;
+}
+
+.suivi-classes-table th.suivi-classes-table__classe,
+.suivi-classes-table td.suivi-classes-table__classe,
+.suivi-classes-table th.suivi-classes-table__eleves,
+.suivi-classes-table td.suivi-classes-table__eleves {
+  width: 1%;
+  white-space: nowrap;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Titulaire : prend l’espace restant, texte à gauche en flex */
+.suivi-classes-table col.suivi-classes-table__titulaire {
+  width: auto;
+}
+
+.suivi-classes-table th.suivi-classes-table__titulaire,
+.suivi-classes-table td.suivi-classes-table__titulaire {
+  width: auto;
+  text-align: left;
+  vertical-align: middle;
+}

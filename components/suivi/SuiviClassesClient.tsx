@@ -160,12 +160,27 @@ export function SuiviClassesClient() {
 
       <ScrollableTable
         className="rounded-xl border border-[var(--color-border-default)]"
+        tableClassName="suivi-classes-table w-full table-auto text-sm"
+        colgroup={
+          <colgroup>
+            <col className="suivi-classes-table__loupe" />
+            <col className="suivi-classes-table__classe" />
+            <col className="suivi-classes-table__titulaire" />
+            <col className="suivi-classes-table__eleves" />
+          </colgroup>
+        }
         head={
           <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-            <th className="w-8 px-1 py-2 sm:px-2 sm:py-2.5" aria-label="Détail" />
-            <th className="px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">Classe</th>
-            <th className="px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">Titulaire</th>
-            <th className="px-2 py-2 text-center text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">Élèves</th>
+            <th className="suivi-classes-table__loupe bg-[var(--color-theme)]" aria-label="Détail" />
+            <th className="suivi-classes-table__classe whitespace-nowrap px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">
+              Classe
+            </th>
+            <th className="suivi-classes-table__titulaire px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">
+              Titulaire
+            </th>
+            <th className="suivi-classes-table__eleves whitespace-nowrap px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">
+              Élèves
+            </th>
           </tr>
         }
         body={
@@ -178,7 +193,7 @@ export function SuiviClassesClient() {
           ) : (
             displayClasses.map((cls) => (
               <tr key={cls.class_id} className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
-                <td className="px-2 py-2.5">
+                <td className="suivi-classes-table__loupe">
                   <button
                     type="button"
                     onClick={() => openClass(cls.label)}
@@ -189,11 +204,20 @@ export function SuiviClassesClient() {
                     <SuiviIconLoupe />
                   </button>
                 </td>
-                <td className="px-2 py-2 font-semibold text-zinc-800 sm:px-3 sm:py-2.5 dark:text-zinc-100">{cls.label}</td>
-                <td className="max-w-[7rem] truncate px-2 py-2 text-xs text-zinc-600 sm:max-w-none sm:px-3 sm:py-2.5 sm:text-sm dark:text-zinc-300" title={cls.titulaire ?? undefined}>
-                  {cls.titulaire ?? "—"}
+                <td className="suivi-classes-table__classe whitespace-nowrap px-2 py-2 text-left font-semibold text-zinc-800 sm:px-3 sm:py-2.5 dark:text-zinc-100">
+                  {cls.label}
                 </td>
-                <td className="px-2 py-2 text-center tabular-nums text-zinc-600 sm:px-3 sm:py-2.5 dark:text-zinc-300">{cls.student_count}</td>
+                <td
+                  className="suivi-classes-table__titulaire px-2 py-2 text-left text-xs text-zinc-600 sm:px-3 sm:py-2.5 sm:text-sm dark:text-zinc-300"
+                  title={cls.titulaire ?? undefined}
+                >
+                  <span className="flex min-w-0 items-center justify-start">
+                    <span className="truncate">{cls.titulaire ?? "—"}</span>
+                  </span>
+                </td>
+                <td className="suivi-classes-table__eleves whitespace-nowrap px-2 py-2 text-left tabular-nums text-zinc-600 sm:px-3 sm:py-2.5 dark:text-zinc-300">
+                  {cls.student_count}
+                </td>
               </tr>
             ))
           )
