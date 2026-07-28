@@ -777,6 +777,10 @@ export function PrintConfigSheet({
     }
   };
 
+  const handlePrev = () => {
+    if (step > 0) setStep((current) => current - 1);
+  };
+
   const stepLabels = ["Contenu", "En-tête", "Aperçu"];
 
   return (
@@ -834,7 +838,7 @@ export function PrintConfigSheet({
 
       {/* Scrollable content */}
       <div className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto">
-        <main className="app-shell min-w-0 pb-16 pt-6">
+        <main className="app-shell min-w-0 pb-28 pt-6">
 
           {step === 0 && (
             <>
@@ -1405,9 +1409,45 @@ export function PrintConfigSheet({
         </main>
       </div>
 
+      {/* Barre d’étapes — comme les exercices : Précédent | vide | Suivant */}
+      <div className="shrink-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+        <div className="app-shell-bar flex items-center justify-between py-3">
+          <button
+            type="button"
+            onClick={handlePrev}
+            disabled={step === 0}
+            data-nav-action="back"
+            aria-label="Précédent"
+            className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
+          >
+            ← Précédent
+          </button>
+
+          <span aria-hidden />
+
+          <button
+            type="button"
+            onClick={() => {
+              if (step < 2) setStep((current) => current + 1);
+            }}
+            disabled={step >= 2}
+            data-nav-action="next"
+            data-nav-label="Suivant"
+            aria-label="Suivant"
+            className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
+            style={{ background: accentColor }}
+          >
+            Suivant →
+          </button>
+        </div>
+        <div className="h-[env(safe-area-inset-bottom,0px)]" />
+      </div>
+
       {/* Legacy action bridge consumed by MainNav. */}
       <div className="hidden fixed bottom-0 left-0 right-0">
-        <button type="button" onClick={onClose} aria-label="Retour">Retour</button>
+        <button type="button" onClick={handlePrev} disabled={step === 0} aria-label="Précédent" data-nav-action="back">
+          Précédent
+        </button>
         {step === 2 && (
           <button
             type="button"
