@@ -520,11 +520,9 @@ function negativeCompoundForm(v: VerbConj, mode: TenseMode, idx: number): string
 }
 
 function negativeFuturProche(idx: number): string {
-  const aller = ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"][idx];
-  const p = STANDARD_PRONOUNS[idx];
-  const elide = idx === 0 || idx === 2 || idx === 3;
-  const ne = elide ? "n'" : "ne ";
-  return `${p.display} ${ne}${aller} pas`;
+  const aller = ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"][idx]!;
+  const p = STANDARD_PRONOUNS[idx]!;
+  return `${p.display} ne ${aller} pas`;
 }
 
 /** 6 exercices négation (style R1.7). */
