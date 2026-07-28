@@ -1,6 +1,12 @@
 "use client";
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+  type PrintExerciseColumns,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 type ValidatedProps = {
   validateCommand: number;
@@ -148,11 +154,15 @@ const simpleCls = (status: "idle" | "correct" | "wrong") =>
 // ── A6.1 Exercise 1 : % → fraction ──────────────────────────────────────────
 
 export function PctToFracExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [questions] = useState(() => {
-    const poolItems = shuffle(PCT_TO_FRAC_POOL).slice(0, 3);
+    const nPool = Math.min(Math.round(questionCount * 3 / 5), PCT_TO_FRAC_POOL.length);
+    const nRandom = Math.max(0, questionCount - nPool);
+    const poolItems = shuffle(PCT_TO_FRAC_POOL).slice(0, nPool);
     const used = new Set(poolItems.map(q => q.pct));
     const randoms: PctFracItem[] = [];
-    while (randoms.length < 2) {
+    while (randoms.length < nRandom) {
       const pct = Math.floor(Math.random() * 200) + 1;
       const pctStr = String(pct);
       if (used.has(pctStr)) continue;
@@ -188,13 +198,13 @@ export function PctToFracExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez le pourcentage en fraction.</p>
-      <div className="space-y-4">
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
           const dispStatus = revealCorrection ? s.status : "idle";
           return (
-            <div key={i} className="flex items-center gap-3">
+            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <span className="text-sm font-semibold text-[var(--color-text-primary)] min-w-[3.5rem]">{q.pct}%</span>
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
@@ -219,11 +229,15 @@ export function PctToFracExercise({ validateCommand, onValidated, exNum }: Valid
 // ── A6.1 Exercise 2 : % → décimal ───────────────────────────────────────────
 
 export function PctToDecExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [questions] = useState(() => {
-    const poolItems = shuffle(PCT_TO_DEC_POOL).slice(0, 3);
+    const nPool = Math.min(Math.round(questionCount * 3 / 5), PCT_TO_DEC_POOL.length);
+    const nRandom = Math.max(0, questionCount - nPool);
+    const poolItems = shuffle(PCT_TO_DEC_POOL).slice(0, nPool);
     const used = new Set(poolItems.map(q => q.pct.replace("%", "")));
     const randoms: PctDecItem[] = [];
-    while (randoms.length < 2) {
+    while (randoms.length < nRandom) {
       const n = Math.floor(Math.random() * 200) + 1;
       const nStr = String(n);
       if (used.has(nStr)) continue;
@@ -262,13 +276,13 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez le pourcentage en décimal.</p>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
           const dispStatus = revealCorrection ? s.status : "idle";
           return (
-            <div key={i} className="flex items-center gap-3">
+            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <span className="text-sm font-semibold text-[var(--color-text-primary)] min-w-[3.5rem]">{q.pct}</span>
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
@@ -293,11 +307,15 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
 // ── A6.1 Exercise 3 : fraction → % ──────────────────────────────────────────
 
 export function FracToPctExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [questions] = useState(() => {
-    const poolItems = shuffle(FRAC_TO_PCT_POOL).slice(0, 3);
+    const nPool = Math.min(Math.round(questionCount * 3 / 5), FRAC_TO_PCT_POOL.length);
+    const nRandom = Math.max(0, questionCount - nPool);
+    const poolItems = shuffle(FRAC_TO_PCT_POOL).slice(0, nPool);
     const used = new Set(poolItems.map(q => q.pct));
     const randoms: FracPctItem[] = [];
-    while (randoms.length < 2) {
+    while (randoms.length < nRandom) {
       const num = Math.floor(Math.random() * 250) + 1;
       if (used.has(num)) continue;
       used.add(num);
@@ -334,13 +352,13 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez la fraction en pourcentage.</p>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
           const dispStatus = revealCorrection ? s.status : "idle";
           return (
-            <div key={i} className="flex items-center gap-3">
+            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <VFrac n={q.num} d={q.den} />
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
@@ -365,11 +383,15 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
 // ── A6.1 Exercise 4 : décimal → % ───────────────────────────────────────────
 
 export function DecToPctExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [questions] = useState(() => {
-    const poolItems = shuffle(DEC_TO_PCT_POOL).slice(0, 3);
+    const nPool = Math.min(Math.round(questionCount * 3 / 5), DEC_TO_PCT_POOL.length);
+    const nRandom = Math.max(0, questionCount - nPool);
+    const poolItems = shuffle(DEC_TO_PCT_POOL).slice(0, nPool);
     const used = new Set(poolItems.map(q => q.pct));
     const randoms: DecPctItem[] = [];
-    while (randoms.length < 2) {
+    while (randoms.length < nRandom) {
       const n = Math.floor(Math.random() * 100) + 1; // 1–100 → dec 0.01–1
       if (used.has(n)) continue;
       used.add(n);
@@ -406,13 +428,13 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez le décimal en pourcentage.</p>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
           const dispStatus = revealCorrection ? s.status : "idle";
           return (
-            <div key={i} className="flex items-center gap-3">
+            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <span className="text-sm font-semibold text-[var(--color-text-primary)] min-w-[3.5rem]">{q.dec}</span>
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
@@ -437,7 +459,9 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
 // ── A6.2 Exercise 1 : p% de N = ? ───────────────────────────────────────────
 
 export function PctOfNumExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => shuffle(PCT_OF_NUM_POOL).slice(0, 5));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState(() => shuffle(PCT_OF_NUM_POOL).slice(0, questionCount));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
   const revealCorrection = useEvalReveal();
@@ -461,13 +485,13 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez la valeur correspondant au pourcentage indiqué.</p>
-      <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
           const dispStatus = revealCorrection ? s.status : "idle";
           return (
-            <Fragment key={i}>
+            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="text-sm text-[var(--color-text-primary)]">{q.pct}% de {q.num}</span>
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
@@ -481,7 +505,7 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                   className={simpleCls(dispStatus)} />
               )}
-            </Fragment>
+            </div>
           );
         })}
       </div>
@@ -514,12 +538,15 @@ const PERC_TABLE_POOL: PercTableItem[] = [
 ];
 
 export function PctTableExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [questions] = useState(() => {
     const varItems   = shuffle(PERC_TABLE_POOL.filter(q => q.missing === "variation"));
     const initItems  = shuffle(PERC_TABLE_POOL.filter(q => q.missing === "init"));
     const finalItems = shuffle(PERC_TABLE_POOL.filter(q => q.missing === "final"));
     const rest = shuffle([...varItems.slice(1), ...initItems.slice(1), ...finalItems.slice(1)]);
-    return shuffle([varItems[0]!, initItems[0]!, finalItems[0]!, ...rest.slice(0, 2)]);
+    const mixed = [varItems[0]!, initItems[0]!, finalItems[0]!, ...rest];
+    return shuffle(mixed.slice(0, Math.min(questionCount, mixed.length)));
   });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
@@ -553,11 +580,13 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Complétez les valeurs manquantes.</p>
-      <div className="grid grid-cols-[auto_auto_auto_auto] items-center justify-items-center gap-x-[10px] gap-y-3 w-fit">
-        <span />
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] pb-1">Valeur initiale</span>
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] pb-1">Valeur finale</span>
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] pb-1">Variation</span>
+      <div className="mb-2 flex flex-wrap items-center gap-x-[10px] gap-y-1 text-xs font-bold text-[var(--color-accent-alg)]">
+        <span className="w-4" />
+        <span className="min-w-[5.5rem] text-center">Valeur initiale</span>
+        <span className="min-w-[5.5rem] text-center">Valeur finale</span>
+        <span className="min-w-[5.5rem] text-center">Variation</span>
+      </div>
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
@@ -583,15 +612,15 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
               );
             }
             const display = col === "init" ? String(q.init) : col === "final" ? String(q.final) : fmtVar(q.variationNum);
-            return <span className="text-sm text-[var(--color-text-primary)]">{display}</span>;
+            return <span className="text-sm text-[var(--color-text-primary)] min-w-[5.5rem] text-center">{display}</span>;
           };
           return (
-            <Fragment key={i}>
-              <span className="text-sm font-bold text-[var(--color-accent-alg)] justify-self-start">{i + 1}.</span>
+            <div key={i} className="flex flex-wrap items-center gap-x-[10px] gap-y-2">
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               {cell("init")}
               {cell("final")}
               {cell("variation")}
-            </Fragment>
+            </div>
           );
         })}
       </div>
@@ -615,29 +644,37 @@ const PCT_CHANGE_POOL: PctChangeItem[] = [
   { base: 300, op: "-", pct: 30, ans: 210, diff: 90  }, { base: 160, op: "-", pct: 25, ans: 120, diff: 40  },
 ];
 
-function pickMixed(pool: PctChangeItem[]): PctChangeItem[] {
+function pickMixed(pool: PctChangeItem[], count: number): PctChangeItem[] {
   const plus  = shuffle(pool.filter(q => q.op === "+"));
   const minus = shuffle(pool.filter(q => q.op === "-"));
-  const nPlus = Math.random() < 0.5 ? 3 : 2;
-  return shuffle([...plus.slice(0, nPlus), ...minus.slice(0, 5 - nPlus)]);
+  const nPlus = Math.min(plus.length, Math.max(0, Math.round(count * (Math.random() < 0.5 ? 0.6 : 0.4))));
+  const nMinus = Math.min(minus.length, count - nPlus);
+  const selected = [...plus.slice(0, nPlus), ...minus.slice(0, nMinus)];
+  if (selected.length < count) {
+    const used = new Set(selected);
+    const extra = shuffle(pool.filter(q => !used.has(q)));
+    selected.push(...extra.slice(0, count - selected.length));
+  }
+  return shuffle(selected);
 }
 
-function A63Grid({ questions, states, setStates, ansKey, revealCorrection }: {
+function A63Grid({ questions, states, setStates, ansKey, revealCorrection, columns }: {
   questions: PctChangeItem[];
   states: { ans: string; status: "idle" | "correct" | "wrong" }[];
   setStates: React.Dispatch<React.SetStateAction<{ ans: string; status: "idle" | "correct" | "wrong" }[]>>;
   ansKey: "ans" | "diff";
   revealCorrection: boolean;
+  columns: PrintExerciseColumns;
 }) {
   return (
-    <div className="grid grid-cols-[auto_auto_auto_auto_auto_auto] items-center gap-x-2 gap-y-4 w-fit">
+    <div className={printQuestionsListClass(columns, "space-y-4")}>
       {questions.map((q, i) => {
         const s = states[i]!;
         const correct = q[ansKey];
         const locked = s.status !== "idle";
         const dispStatus = revealCorrection ? s.status : "idle";
         return (
-          <Fragment key={i}>
+          <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
             <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             <span className="text-sm text-[var(--color-text-primary)]">{q.base}</span>
             <span className="text-sm text-[var(--color-text-primary)]">{q.op}</span>
@@ -653,7 +690,7 @@ function A63Grid({ questions, states, setStates, ansKey, revealCorrection }: {
                 onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                 className={simpleCls(dispStatus)} />
             )}
-          </Fragment>
+          </div>
         );
       })}
     </div>
@@ -663,7 +700,9 @@ function A63Grid({ questions, states, setStates, ansKey, revealCorrection }: {
 // ── A6.3 Exercise 1 : de combien la valeur change ? ──────────────────────────
 
 export function PctDiffExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL, questionCount));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
   const revealCorrection = useEvalReveal();
@@ -687,7 +726,7 @@ export function PctDiffExercise({ validateCommand, onValidated, exNum }: Validat
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">De combien la valeur augmente ou diminue ?</p>
-      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="diff" revealCorrection={revealCorrection} />
+      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="diff" revealCorrection={revealCorrection} columns={columns} />
     </div>
   );
 }
@@ -695,7 +734,9 @@ export function PctDiffExercise({ validateCommand, onValidated, exNum }: Validat
 // ── A6.3 Exercise 2 : valeur finale ──────────────────────────────────────────
 
 export function PctChangeExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL, questionCount));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
   const revealCorrection = useEvalReveal();
@@ -719,7 +760,7 @@ export function PctChangeExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez les valeurs finales.</p>
-      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="ans" revealCorrection={revealCorrection} />
+      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="ans" revealCorrection={revealCorrection} columns={columns} />
     </div>
   );
 }
@@ -738,13 +779,21 @@ type PctMultItem = PctMultBase & { correct: string; options: string[] };
 type MultState = { choice: string | null; status: "idle" | "correct" | "wrong" };
 
 export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const fmt = (n: number) => n.toFixed(2).replace(".", ",").replace(/0+$/, "").replace(/,$/, "");
   const [questions] = useState((): PctMultItem[] => {
     const plus  = shuffle(PCT_MULT_POOL.filter(q => q.dir === "+"));
     const minus = shuffle(PCT_MULT_POOL.filter(q => q.dir === "-"));
-    const nPlus = Math.random() < 0.5 ? 3 : 2;
-    const selected = shuffle([...plus.slice(0, nPlus), ...minus.slice(0, 5 - nPlus)]);
-    return selected.map(({ dir, pct }) => {
+    const nPlus = Math.min(plus.length, Math.max(0, Math.round(questionCount * (Math.random() < 0.5 ? 0.6 : 0.4))));
+    const nMinus = Math.min(minus.length, questionCount - nPlus);
+    const selected = [...plus.slice(0, nPlus), ...minus.slice(0, nMinus)];
+    if (selected.length < questionCount) {
+      const used = new Set(selected);
+      const extra = shuffle(PCT_MULT_POOL.filter(q => !used.has(q)));
+      selected.push(...extra.slice(0, questionCount - selected.length));
+    }
+    return shuffle(selected).map(({ dir, pct }) => {
       const cPlus  = 1 + pct / 100;
       const cMinus = 1 - pct / 100;
       const correct = dir === "+" ? `× ${fmt(cPlus)}` : `× ${fmt(cMinus)}`;
@@ -775,13 +824,13 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Quelle opération faut-il effectuer ?</p>
-      <div className="grid grid-cols-[auto_1fr] items-start gap-x-3 gap-y-4">
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
           const dispStatus = revealCorrection ? s.status : "idle";
           return (
-            <Fragment key={i}>
+            <div key={i} className="flex flex-wrap items-start gap-x-3 gap-y-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] pt-0.5">{i + 1}.</span>
               <div className="flex flex-col gap-2">
                 <span className="text-sm text-[var(--color-text-primary)]">
@@ -815,7 +864,7 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
                   })}
                 </div>
               </div>
-            </Fragment>
+            </div>
           );
         })}
       </div>
@@ -932,9 +981,14 @@ const WORD_TEMPLATES: Array<{ pType: 1|2|3|4; gen: () => WordProbResult }> = [
 
 export function PctWordExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
+  const questionCount = usePrintQuestionCount(2);
+  const columns = usePrintColumns();
   const [questions] = useState(() => {
-    const types = shuffle([1, 2, 3, 4] as const).slice(0, 2) as [1|2|3|4, 1|2|3|4];
-    return types.map(t => shuffle(WORD_TEMPLATES.filter(tmpl => tmpl.pType === t))[0]!.gen());
+    const types = shuffle([1, 2, 3, 4] as const);
+    return Array.from({ length: questionCount }, (_, i) => {
+      const t = types[i % types.length]!;
+      return shuffle(WORD_TEMPLATES.filter(tmpl => tmpl.pType === t))[0]!.gen();
+    });
   });
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
   const revealCorrection = useEvalReveal();
@@ -958,7 +1012,7 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Résolvez les problèmes.</p>
-      <div className="space-y-5">
+      <div className={printQuestionsListClass(columns, "space-y-5")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
@@ -992,7 +1046,9 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
 // ── A6.2 Exercise 2 : X sur Y = ?% ──────────────────────────────────────────
 
 export function PartToPctExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => shuffle(PART_TO_PCT_POOL).slice(0, 5));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState(() => shuffle(PART_TO_PCT_POOL).slice(0, questionCount));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
   const revealCorrection = useEvalReveal();
@@ -1016,13 +1072,13 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Déterminez quelle part en pourcentage représente la valeur indiquée.</p>
-      <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q, i) => {
           const s = states[i]!;
           const locked = s.status !== "idle";
           const dispStatus = revealCorrection ? s.status : "idle";
           return (
-            <Fragment key={i}>
+            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="text-sm text-[var(--color-text-primary)]">{q.part} sur {q.total}</span>
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
@@ -1036,7 +1092,7 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                   placeholder="%" className={simpleCls(dispStatus)} />
               )}
-            </Fragment>
+            </div>
           );
         })}
       </div>
