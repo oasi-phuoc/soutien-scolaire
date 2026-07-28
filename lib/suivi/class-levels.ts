@@ -1,18 +1,24 @@
-export type ClassLevelCode = "CSC" | "CFR";
+import { ELEVE_CLASSE_TYPES, type EleveClasseType } from "@/lib/eleve-classe-types";
 
-export const CLASS_LEVELS: ClassLevelCode[] = ["CSC", "CFR"];
+export type ClassLevelCode = EleveClasseType;
+
+export const CLASS_LEVELS: ClassLevelCode[] = [...ELEVE_CLASSE_TYPES];
 
 export function classLevelFromLabel(label: string): ClassLevelCode | null {
   const upper = label.trim().toUpperCase();
-  if (upper.startsWith("CSC")) return "CSC";
-  if (upper.startsWith("CFR")) return "CFR";
+  for (const level of CLASS_LEVELS) {
+    if (upper.startsWith(level)) return level;
+  }
   return null;
 }
 
 export function groupClassesByLevel<T extends { label: string }>(
   classes: T[],
 ): Record<ClassLevelCode, T[]> {
-  const out: Record<ClassLevelCode, T[]> = { CSC: [], CFR: [] };
+  const out = Object.fromEntries(CLASS_LEVELS.map((l) => [l, [] as T[]])) as Record<
+    ClassLevelCode,
+    T[]
+  >;
   for (const c of classes) {
     const level = classLevelFromLabel(c.label);
     if (level) out[level].push(c);

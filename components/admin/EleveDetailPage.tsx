@@ -13,6 +13,7 @@ import {
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { ELEVE_CLASSE_TYPES } from "@/lib/eleve-classe-types";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import type { UserRow } from "./AdminTable";
 
@@ -153,7 +154,7 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
               <AppSelect
                 value={form.classeType}
                 onChange={(v) => setForm((f) => ({ ...f, classeType: v }))}
-                options={["CSC", "CFR", "EPL", "CPR"]}
+                options={ELEVE_CLASSE_TYPES}
                 placeholder="Filière"
                 emptyOption={{ value: "", label: "Filière" }}
                 className="w-full"

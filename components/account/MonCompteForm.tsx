@@ -8,6 +8,7 @@ import {
   type MyProfile,
 } from "@/app/actions/account";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { ELEVE_CLASSE_TYPE_OPTIONS } from "@/lib/eleve-classe-types";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
@@ -185,7 +186,7 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
                   value={form.classeType}
                   onChange={(v) => setForm((f) => ({ ...f, classeType: v, classeNum: v === "ancien" ? f.classeNum : f.classeNum }))}
                   options={[
-                    ...["CSC", "CFR", "EPL", "CPR"].map((c) => ({ value: c, label: c })),
+                    ...ELEVE_CLASSE_TYPE_OPTIONS,
                     { value: "ancien", label: "Ancien élève" },
                   ]}
                   placeholder="Filière"

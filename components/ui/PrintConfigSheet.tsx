@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { ELEVE_CLASSE_TYPES, type EleveClasseType } from "@/lib/eleve-classe-types";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const PRINT_EX_TITLE_CLASS =
@@ -71,7 +72,7 @@ export interface ExercisePrintSelection {
 }
 
 export interface PrintHeaderConfig {
-  classLevel: "CSC" | "CFR" | "EPL" | "CPR";
+  classLevel: EleveClasseType;
   classNumber: string;
   course: string;
   title?: string;
@@ -105,7 +106,7 @@ interface PrintConfigSheetProps {
   onFrenchLevelChange?: (level: "base" | "moyen" | "avance") => void;
 }
 
-const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
+const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = [...ELEVE_CLASSE_TYPES];
 const CLASS_NUMBERS = Array.from({ length: 20 }, (_, index) => String(index + 1).padStart(2, "0"));
 const COURSES = [
   "ACM",

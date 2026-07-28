@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { signUpAction } from "@/app/actions/auth";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { buildLoginId } from "@/lib/auth/identifier";
+import { ELEVE_CLASSE_TYPE_OPTIONS } from "@/lib/eleve-classe-types";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const LANGUES = [
@@ -213,7 +214,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
               value={classeType}
               onChange={(v) => { setClasseType(v); if (v === "ancien") setClasseNum(""); }}
               options={[
-                ...["CSC", "CFR", "EPL", "CPR"].map((c) => ({ value: c, label: c })),
+                ...ELEVE_CLASSE_TYPE_OPTIONS,
                 { value: "ancien", label: "Ancien élève" },
               ]}
               placeholder="Filière"
