@@ -72,6 +72,10 @@ import { G7CentralSymmetryExercise } from "@/components/math/geo/G7CentralSymmet
 import { G7TranslationExercise } from "@/components/math/geo/G7TranslationExercise";
 import { listReproduceTasks } from "@/lib/curriculum/content/math/g7-reproduce-data";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
+import {
+  PrintWorkGrid,
+  PRINT_WORK_GRID_SUBMODULES,
+} from "@/components/print/PrintWorkGrid";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const ALG_FIELD_H = "min-h-9";
@@ -2929,7 +2933,7 @@ function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
 
 // ── WordProblemsExercise (A2.4) ───────────────────────────────────────────────
 function WordProblemsExercise({
-  config, answers, validated, results, onChange, consigne, revealCorrection = true, noFrame = false,
+  config, answers, validated, results, onChange, consigne, revealCorrection = true, noFrame = false, showWorkGrid = false,
 }: {
   config: WordProblemsConfig;
   answers: string[];
@@ -2939,6 +2943,8 @@ function WordProblemsExercise({
   consigne?: string;
   revealCorrection?: boolean;
   noFrame?: boolean;
+  /** Quadrillage d'écriture sous chaque énoncé (aperçu / impression). */
+  showWorkGrid?: boolean;
 }) {
   const inputCls = `w-28 ${ALG_FIELD_H} px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
@@ -2954,10 +2960,11 @@ function WordProblemsExercise({
           const wrong = ok === false;
           return (
             <div key={i} className="space-y-3">
-              <div className={noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4"}>
+              <div className={`ex-prompt-frame ${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4"}`}>
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{q.textFr}</p>
               </div>
-              <div className="flex items-center gap-3 pl-2">
+              {showWorkGrid ? <PrintWorkGrid rows={5} /> : null}
+              <div className={`flex items-center gap-3 pl-2${showWorkGrid ? " print-hide-on-sheet" : ""}`}>
                 <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
                 {wrong ? (
                   <div className={`w-28 ${WRONG_FIELD_STACK}`}>
@@ -2979,7 +2986,7 @@ function WordProblemsExercise({
                 )}
               </div>
               {validated && revealCorrection && q.calculation && (
-                <p className="mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
+                <p className={`mt-1 pl-2 text-xs text-[var(--color-text-secondary)]${showWorkGrid ? " print-hide-on-sheet" : ""}`}>
                   Calcul : <span className="font-mono text-[var(--color-text-primary)]">{q.calculation}</span>
                 </p>
               )}
@@ -6885,11 +6892,19 @@ function buildRevisionFlatSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
   return result;
 }
 
-function GenericExercisePrintPreview({ prompt }: { prompt: string }) {
+function GenericExercisePrintPreview({
+  prompt,
+  showWorkGrid = false,
+}: {
+  prompt: string;
+  showWorkGrid?: boolean;
+}) {
   return (
     <div className="space-y-3">
-      <p className="text-sm leading-relaxed text-black">{prompt}</p>
-      <div className="h-8 w-full border-b-2 border-black/40" />
+      <div className="ex-prompt-frame">
+        <p className="text-sm leading-relaxed text-black">{prompt}</p>
+      </div>
+      {showWorkGrid ? <PrintWorkGrid rows={5} /> : <div className="h-8 w-full border-b-2 border-black/40" />}
     </div>
   );
 }
@@ -6914,6 +6929,7 @@ export function buildGenericMathPrintExercises(
   const evalStart = steps.findIndex((s) => s.kind === "eval_start");
   const training = steps.slice(0, evalStart >= 0 ? evalStart : steps.length);
   const out: { id: string; label: string; preview: React.ReactNode }[] = [];
+  const showWorkGrid = PRINT_WORK_GRID_SUBMODULES.has(lesson.submoduleId);
 
   for (const step of training) {
     if (
@@ -6923,13 +6939,31 @@ export function buildGenericMathPrintExercises(
     ) {
       continue;
     }
-    const prompt = genericStepPrompt(step);
     const n = out.length + 1;
+    if (step.kind === "word_problems") {
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        preview: (
+          <WordProblemsExercise
+            config={step.config}
+            answers={Array(step.config.questions.length).fill("")}
+            validated={false}
+            results={[]}
+            onChange={() => {}}
+            noFrame
+            showWorkGrid={showWorkGrid}
+          />
+        ),
+      });
+      continue;
+    }
+    const prompt = genericStepPrompt(step);
     if (prompt) {
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
-        preview: <GenericExercisePrintPreview prompt={prompt} />,
+        preview: <GenericExercisePrintPreview prompt={prompt} showWorkGrid={showWorkGrid} />,
       });
       continue;
     }
@@ -6962,7 +6996,7 @@ export function buildGenericMathPrintExercises(
       out.push({
         id: String(i + 1),
         label: `Exercice ${i + 1}`,
-        preview: <GenericExercisePrintPreview prompt={item.promptFr} />,
+        preview: <GenericExercisePrintPreview prompt={item.promptFr} showWorkGrid={showWorkGrid} />,
       });
     });
   }
@@ -9209,6 +9243,7 @@ export function GenericModuleContent({
             onChange={noop}
             revealCorrection={true}
             noFrame={true}
+            showWorkGrid={PRINT_WORK_GRID_SUBMODULES.has(step.lesson.submoduleId)}
           />
         );
       case "number_select": {
@@ -11350,6 +11385,7 @@ export function GenericModuleContent({
           onChange={(i, val) => setWpAnswers(prev => prev.map((a, j) => j === i ? val : a))}
           consigne={showPivotTranslation ? currentStepTrad?.consignes?.wordProblems?.[pivot] : undefined}
           revealCorrection={revealCorrection}
+          showWorkGrid={PRINT_WORK_GRID_SUBMODULES.has(currentStep.lesson.submoduleId)}
         />
       )}
 

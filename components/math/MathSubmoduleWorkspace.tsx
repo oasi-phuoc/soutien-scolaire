@@ -45,6 +45,7 @@ import {
   usePrintColumns,
   usePrintQuestionCount,
 } from "@/components/print/PrintExerciseLayoutContext";
+import { PrintWorkGrid } from "@/components/print/PrintWorkGrid";
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
@@ -1734,11 +1735,12 @@ function PoolGroupExercise({
           return (
             <div key={item.id} className="space-y-3">
               {/* Question frame — same as WordProblemsExercise */}
-              <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+              <div className="ex-prompt-frame rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{item.promptFr}</p>
               </div>
-              {/* Answer row */}
-              <div className="flex items-center gap-3 pl-2">
+              <PrintWorkGrid rows={5} />
+              {/* Answer row — masquée à l'impression (quadrillage à la place) */}
+              <div className="print-hide-on-sheet flex items-center gap-3 pl-2">
                 <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
                 {isWrong ? (
                   <div className="w-28 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
@@ -1764,7 +1766,7 @@ function PoolGroupExercise({
               </div>
               {/* Developed calculation shown after validation (from hintFr) */}
               {validated && item.hintFr && (
-                <p className="mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
+                <p className="print-hide-on-sheet mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
                   Calcul : <span className="font-mono text-[var(--color-text-primary)]">{item.hintFr}</span>
                 </p>
               )}
