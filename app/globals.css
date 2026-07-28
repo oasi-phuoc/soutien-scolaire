@@ -517,10 +517,19 @@ input[type=number] {
   height: 8px;
 }
 
-.app-table-scroll::-webkit-scrollbar-button {
-  display: none;
-  width: 0;
-  height: 0;
+.app-table-scroll::-webkit-scrollbar-button,
+.app-table-scroll::-webkit-scrollbar-button:single-button,
+.app-table-scroll::-webkit-scrollbar-button:start:decrement,
+.app-table-scroll::-webkit-scrollbar-button:end:increment,
+.app-table-scroll::-webkit-scrollbar-button:vertical:start:increment,
+.app-table-scroll::-webkit-scrollbar-button:vertical:end:decrement,
+.app-table-scroll::-webkit-scrollbar-button:horizontal:start:increment,
+.app-table-scroll::-webkit-scrollbar-button:horizontal:end:decrement {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
 
 .app-table-scroll::-webkit-scrollbar-track {
@@ -534,8 +543,27 @@ input[type=number] {
   background-clip: padding-box;
 }
 
+/* Coin haut-droite (gouttière) = couleur thème, pas blanc */
 .app-table-scroll::-webkit-scrollbar-corner {
+  background: var(--color-theme);
+}
+
+.app-table-scroll--header {
+  scrollbar-width: none;
+}
+
+.app-table-scroll--header::-webkit-scrollbar {
+  width: 8px;
+  background: var(--color-theme);
+}
+
+.app-table-scroll--header::-webkit-scrollbar-thumb {
   background: transparent;
+}
+
+.app-table-scroll--header::-webkit-scrollbar-track,
+.app-table-scroll--header::-webkit-scrollbar-corner {
+  background: var(--color-theme);
 }
 
 .app-shell-bar {
@@ -636,11 +664,14 @@ input[type=number] {
 .tasks-apercu-table th.tasks-apercu-table__loupe,
 .tasks-apercu-table td.tasks-apercu-table__loupe {
   box-sizing: border-box;
-  width: 22px;
-  min-width: 22px;
-  max-width: 22px;
-  padding: 0;
+  width: 28px;
+  min-width: 28px;
+  max-width: 28px;
+  /* Padding gauche pour centrer la loupe comme sur le détail de classe */
+  padding: 0 0 0 6px;
   overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .admin-table-scroll {
@@ -662,18 +693,17 @@ input[type=number] {
 }
 
 /* Masque les flèches haut/bas (Chromium / Edge / Safari) */
-.admin-table-scroll::-webkit-scrollbar-button {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
+.admin-table-scroll::-webkit-scrollbar-button,
 .admin-table-scroll::-webkit-scrollbar-button:single-button,
 .admin-table-scroll::-webkit-scrollbar-button:start:decrement,
 .admin-table-scroll::-webkit-scrollbar-button:end:increment,
 .admin-table-scroll::-webkit-scrollbar-button:vertical:start:increment,
 .admin-table-scroll::-webkit-scrollbar-button:vertical:end:decrement {
-  display: none;
-  width: 0;
-  height: 0;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.admin-table-scroll::-webkit-scrollbar-corner {
+  background: var(--color-theme);
 }

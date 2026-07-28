@@ -351,11 +351,14 @@ export function AdminTable({
   currentUserId: _currentUserId,
   currentUserRole,
   initialPlacementEnabled = true,
+  accountCount,
 }: {
   initialRows: UserRow[];
   currentUserId: string;
   currentUserRole: "admin" | "prof";
   initialPlacementEnabled?: boolean;
+  /** Nombre affiché sous le titre (défaut = initialRows.length). */
+  accountCount?: number;
 }) {
   const [rows, setRows] = useState<UserRow[]>(initialRows);
   const [placementEnabled, setPlacementEnabled] = useState(initialPlacementEnabled);
@@ -366,6 +369,8 @@ export function AdminTable({
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture" | "access" | "placement">("name");
   const [sortOpen, setSortOpen] = useState(false);
   const [resetConfirming, setResetConfirming] = useState(false);
+
+  const totalAccounts = accountCount ?? initialRows.length;
 
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
   const searchLc = search.trim().toLowerCase();
@@ -407,8 +412,75 @@ export function AdminTable({
     });
   }
 
+  const adminActionButtons = currentUserRole === "admin" ? (
+    <>
+      <PlacementModuleButton
+        enabled={placementEnabled}
+        disabled={placementPending}
+        onChange={togglePlacementModule}
+      />
+      <Link
+        href="/admin/attribution-professeurs"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-theme)]/30 bg-white text-[var(--color-theme)] shadow-sm transition-colors hover:bg-[var(--color-theme-light)] dark:bg-zinc-900 dark:hover:bg-[var(--color-theme)]/10"
+        aria-label="Attribution des professeurs"
+        title="Attribution des professeurs"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      </Link>
+      <button
+        type="button"
+        onClick={() => setResetConfirming(true)}
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
+        aria-label="Archiver les élèves"
+        title="Archiver les élèves"
+      >
+        <IconArchive />
+      </button>
+    </>
+  ) : null;
+
   return (
     <>
+      {/* Titre + actions desktop (alignées à droite) */}
+      <div className="mb-6 flex items-start justify-between gap-4">
+        <div className="flex min-w-0 items-center gap-2">
+          <Link
+            href="/compte"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80 lg:hidden"
+            aria-label="Retour aux réglages"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </Link>
+          <div className="min-w-0">
+            <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+              Gestion des comptes
+            </h1>
+            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+              {totalAccounts} compte{totalAccounts !== 1 ? "s" : ""} enregistré{totalAccounts !== 1 ? "s" : ""}
+            </p>
+          </div>
+        </div>
+        <div className="hidden shrink-0 items-center gap-2 lg:flex">
+          {adminActionButtons}
+          <Link
+            href="/compte"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80"
+            aria-label="Retour aux réglages"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+
       {/* Filters */}
       <div className="mb-4">
         <div className="mb-2 flex flex-wrap items-center gap-2">
@@ -433,40 +505,13 @@ export function AdminTable({
               aria-label="Filtrer par classe"
             />
           )}
-        </div>
-        {currentUserRole === "admin" && (
-          <div className="mb-2 flex items-center justify-end gap-2">
-            <PlacementModuleButton
-              enabled={placementEnabled}
-              disabled={placementPending}
-              onChange={togglePlacementModule}
-            />
-            <div className="flex shrink-0 items-center gap-2">
-              <Link
-                href="/admin/attribution-professeurs"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-theme)]/30 bg-white text-[var(--color-theme)] shadow-sm transition-colors hover:bg-[var(--color-theme-light)] dark:bg-zinc-900 dark:hover:bg-[var(--color-theme)]/10"
-                aria-label="Attribution des professeurs"
-                title="Attribution des professeurs"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </Link>
-              <button
-                type="button"
-                onClick={() => setResetConfirming(true)}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
-                aria-label="Archiver les élèves"
-                title="Archiver les élèves"
-              >
-                <IconArchive />
-              </button>
+          {/* Actions admin — mobile uniquement (desktop = dans le titre) */}
+          {adminActionButtons && (
+            <div className="flex shrink-0 items-center gap-2 lg:hidden">
+              {adminActionButtons}
             </div>
-          </div>
-        )}
+          )}
+        </div>
         {placementMsg && (
           <p className="mb-2 text-sm text-red-600" role="status">
             {placementMsg}
@@ -531,7 +576,7 @@ export function AdminTable({
         head={
           <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
             <th
-              className="admin-users-table__loupe bg-[var(--color-theme)] p-0"
+              className="admin-users-table__loupe bg-[var(--color-theme)]"
               aria-label="Détail"
             />
             <th className="min-w-0 bg-[var(--color-theme)] px-1.5 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:w-[22%] sm:px-3 sm:py-3">Prénom, Nom</th>
@@ -564,7 +609,7 @@ export function AdminTable({
               return (
                 <tr key={row.id} className="group bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <td
-                    className="admin-users-table__loupe sticky left-0 z-10 bg-white p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
+                    className="admin-users-table__loupe sticky left-0 z-10 bg-white shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
                   >
                     <Link href={`/admin/eleves/${row.id}`} className="inline-flex h-full w-full items-center justify-center py-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" aria-label="Voir détails">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>

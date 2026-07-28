@@ -16,6 +16,8 @@ type ScrollableTableProps = {
 /**
  * Tableau à en-tête fixe : la barre de défilement commence sous l’en-tête
  * et n’a pas de flèches (classe `.app-table-scroll`).
+ * L’en-tête réserve la gouttière scrollbar (alignement colonnes) sans afficher
+ * de flèches ; le coin haut-droite reprend la couleur thème.
  */
 export function ScrollableTable({
   head,
@@ -30,7 +32,7 @@ export function ScrollableTable({
     <div
       className={`flex flex-col overflow-hidden ${maxHeightClassName} ${className}`.trim()}
     >
-      <div className="app-table-scroll shrink-0 overflow-y-auto [scrollbar-gutter:stable]">
+      <div className="app-table-scroll app-table-scroll--header shrink-0 overflow-y-hidden overflow-x-hidden bg-[var(--color-theme)] [scrollbar-gutter:stable]">
         <table className={tableClassName}>
           {colgroup}
           <thead>{head}</thead>

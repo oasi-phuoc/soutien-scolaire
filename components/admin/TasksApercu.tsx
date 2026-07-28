@@ -271,7 +271,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
         head={
           <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
             <th
-              className="tasks-apercu-table__loupe bg-[var(--color-theme)] p-0"
+              className="tasks-apercu-table__loupe bg-[var(--color-theme)]"
               aria-label="Détail"
             />
             <th className="min-w-0 px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
@@ -303,7 +303,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                   <Fragment key={task.task_id}>
                     <tr className={`group align-top transition-colors ${isOpen ? "bg-zinc-50 dark:bg-zinc-900/60" : "bg-white dark:bg-zinc-950"} border-b border-zinc-100 dark:border-zinc-800`}>
                       <td
-                        className={`tasks-apercu-table__loupe sticky left-0 z-10 p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] ${
+                        className={`tasks-apercu-table__loupe sticky left-0 z-10 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] ${
                           isOpen
                             ? "bg-zinc-50 dark:bg-zinc-900/60"
                             : "bg-white group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
