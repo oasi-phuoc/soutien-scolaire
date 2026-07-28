@@ -71,11 +71,14 @@ export function PlacementFrenchHelpContent({
   mode = "placement",
   level = "base",
   includeTrainingNote = false,
+  individualSkill = false,
 }: {
   mode?: "placement" | "training";
   level?: PlacementLevel;
   /** Affiche la mention entraînement par niveau (panneau d&apos;aide hub). */
   includeTrainingNote?: boolean;
+  /** Entraînement d&apos;une seule compétence : pas de reprise. */
+  individualSkill?: boolean;
 }) {
   const levelLabel = LEVEL_SHORT[level];
 
@@ -90,8 +93,18 @@ export function PlacementFrenchHelpContent({
       ) : (
         <>
           <p>
-            L&apos;entraînement propose des exercices de niveau {levelLabel}. Il peut être interrompu
-            après chaque étape et repris plus tard. Les résultats ne comptent pas pour le total de placement.
+            {individualSkill ? (
+              <>
+                L&apos;entraînement individuel porte sur une seule compétence au niveau {levelLabel}.
+                Si vous quittez pendant l&apos;évaluation, cette partie ne peut pas être reprise.
+                Les résultats ne comptent pas pour le total de placement.
+              </>
+            ) : (
+              <>
+                L&apos;entraînement propose des exercices de niveau {levelLabel}. Il peut être interrompu
+                après chaque étape et repris plus tard. Les résultats ne comptent pas pour le total de placement.
+              </>
+            )}
           </p>
           <FrenchTrainingElementsBlock
             level={level}

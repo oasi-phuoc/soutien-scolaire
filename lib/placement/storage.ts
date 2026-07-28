@@ -123,10 +123,18 @@ export function loadFrenchDraft(): PlacementFrenchDraft | null {
 
 export function loadFrenchTrainingDraft(): PlacementFrenchDraft | null {
   const draft = readJson<PlacementFrenchDraft | null>(PLACEMENT_FRENCH_TRAINING_DRAFT_KEY, null);
-  if (draft) return draft;
-  const legacy = readJson<PlacementFrenchDraft | null>(PLACEMENT_FRENCH_DRAFT_KEY, null);
-  if (legacy?.kind === "training") return legacy;
-  return null;
+  const resolved = draft ?? (() => {
+    const legacy = readJson<PlacementFrenchDraft | null>(PLACEMENT_FRENCH_DRAFT_KEY, null);
+    return legacy?.kind === "training" ? legacy : null;
+  })();
+  // Mode individuel (une compétence) : pas de reprise — brouillon ignoré / effacé.
+  if (resolved?.singleSkill) {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(PLACEMENT_FRENCH_TRAINING_DRAFT_KEY);
+    }
+    return null;
+  }
+  return resolved;
 }
 
 export function saveFrenchDraft(draft: PlacementFrenchDraft | null) {
@@ -139,6 +147,11 @@ export function saveFrenchDraft(draft: PlacementFrenchDraft | null) {
 
 export function saveFrenchTrainingDraft(draft: PlacementFrenchDraft | null) {
   if (!draft) {
+    if (typeof window !== "undefined") localStorage.removeItem(PLACEMENT_FRENCH_TRAINING_DRAFT_KEY);
+    return;
+  }
+  // Ne jamais persister un entraînement individuel pour reprise.
+  if (draft.singleSkill) {
     if (typeof window !== "undefined") localStorage.removeItem(PLACEMENT_FRENCH_TRAINING_DRAFT_KEY);
     return;
   }

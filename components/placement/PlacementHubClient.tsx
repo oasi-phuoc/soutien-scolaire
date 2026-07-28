@@ -265,10 +265,6 @@ export function PlacementHubClient() {
       setPendingFrench(profile.pendingFrench);
       setPlacementDraft(localPlacementDraft);
       setTrainingDraft(localTrainingDraft);
-      if (localTrainingDraft?.singleSkill) {
-        setIndividualMode(true);
-        setSelectedSkill(localTrainingDraft.singleSkill);
-      }
       setMathHistory(loadMathHistory());
       setFrenchSessions(loadFrenchSessions());
       setReady(true);
@@ -403,10 +399,6 @@ export function PlacementHubClient() {
             S&apos;entraîner
           </button>
         </div>
-
-        <p className="text-xs text-[var(--color-text-secondary)]">
-          Niveau {mathLevel}
-        </p>
       </div>
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">
