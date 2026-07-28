@@ -10,6 +10,7 @@ import {
   wordHasPhoneme,
   type WordItem,
 } from "../lib/curriculum/word-pool";
+import { hasLectureWordImage } from "../lib/utils/audio";
 
 const LESSON_PHONEMES: Array<{ id: string; phoneme: string }> = [];
 
@@ -70,6 +71,40 @@ for (const item of allWordItems()) {
   }
 }
 
+/** Exemples L7 : le mot-phare de chaque son complexe doit porter le phonème enseigné. */
+for (const lesson of COMPLEX_SOUND_LESSONS) {
+  const label = lesson.exampleWord?.toLowerCase();
+  if (!label || !lesson.phoneme) continue;
+  const item = allWordItems().find((w) => w.label.toLowerCase() === label);
+  if (!item) {
+    issues.push({
+      kind: "l7_example_missing",
+      label,
+      detail: `exemple L7 ${lesson.letterLower} introuvable dans le pool`,
+    });
+    continue;
+  }
+  if (!wordHasPhoneme(item, lesson.phoneme)) {
+    issues.push({
+      kind: "l7_example_wrong",
+      label: item.label,
+      detail: `doit contenir ${lesson.phoneme}, a [${item.phonemes.join(", ")}]`,
+    });
+  }
+}
+
+/** Mots avec image : au moins un phonème. */
+const imageWords = allWordItems().filter((w) => hasLectureWordImage(w.label));
+for (const item of imageWords) {
+  if (!item.phonemes?.length) {
+    issues.push({
+      kind: "image_without_phonemes",
+      label: item.label,
+      detail: "image lecture sans phonèmes",
+    });
+  }
+}
+
 const byKind = new Map<string, Issue[]>();
 for (const issue of issues) {
   const list = byKind.get(issue.kind) ?? [];
@@ -77,18 +112,25 @@ for (const issue of issues) {
   byKind.set(issue.kind, list);
 }
 
-const critical = issues.filter((i) => i.kind === "wordHasPhoneme_mismatch");
-const informational = issues.filter((i) => i.kind !== "wordHasPhoneme_mismatch");
+const criticalKinds = new Set([
+  "wordHasPhoneme_mismatch",
+  "l7_example_wrong",
+  "l7_example_missing",
+  "image_without_phonemes",
+]);
+const critical = issues.filter((i) => criticalKinds.has(i.kind));
+const informational = issues.filter((i) => !criticalKinds.has(i.kind));
 
 console.log("=== Audit phonèmes Lecture ===\n");
 console.log(`Mots WORD_ITEMS: ${WORD_ITEMS.length}`);
 console.log(`Mots allWordItems: ${allWordItems().length}`);
+console.log(`Mots avec image lecture: ${imageWords.length}`);
 console.log(`Phonèmes de leçon testés: ${LESSON_PHONEMES.length}`);
 console.log(`Écarts manuel/parseur (informatif): ${informational.length}`);
-console.log(`Bugs exercice (wordHasPhoneme): ${critical.length}\n`);
+console.log(`Bugs critiques: ${critical.length}\n`);
 
 for (const [kind, list] of byKind) {
-  const tag = kind === "wordHasPhoneme_mismatch" ? "CRITIQUE" : "info";
+  const tag = criticalKinds.has(kind) ? "CRITIQUE" : "info";
   console.log(`--- [${tag}] ${kind} (${list.length}) ---`);
   for (const row of list.slice(0, 30)) {
     console.log(`  ${row.label}: ${row.detail}`);
