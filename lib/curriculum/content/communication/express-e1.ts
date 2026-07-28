@@ -1,4 +1,6 @@
-import { mcq, type CommunicationLesson } from "./express-types";
+import { listeningExercise, mcq, type CommunicationLesson } from "./express-types";
+
+const A1 = (n: string) => `/assets/expression/communication/A1/${n}.mp3`;
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * E1-1 — Se présenter
@@ -8,66 +10,93 @@ export const EXPRESS_E1_1: CommunicationLesson = {
   id: "E1-1",
   code: "E1.1",
   title: "Se présenter",
+  prerequisiteFrenchSlugs: [
+    "a1-conj-l00", // C1.1 — Les pronoms personnels sujets
+    "a1-conj-l01", // C1.2 — Les verbes être et avoir
+    "v1-nationalites", // V1.1
+    "v1-professions", // V1.2
+  ],
   theory: [
     { type: "heading", text: "Se présenter", black: true },
+    {
+      type: "prerequisites",
+      items: [
+        { code: "C1.1", title: "Les pronoms personnels sujets", href: "/francais/conjugaison/a1-conj-l00" },
+        { code: "C1.2", title: "Les verbes être et avoir", href: "/francais/conjugaison/a1-conj-l01" },
+        { code: "V1.1", title: "Les nationalités", href: "/francais/vocabulaire/v1-nationalites" },
+        { code: "V1.2", title: "Les professions", href: "/francais/vocabulaire/v1-professions" },
+      ],
+    },
     {
       type: "plain",
       text: "Pour se présenter, on donne son **identité**, son **âge**, sa **nationalité**, son **adresse** et parfois sa **profession**. Les phrases sont courtes et claires.",
     },
-    { type: "highlight", title: "Identité : s'appeler" },
+    { type: "highlight", title: "Identité" },
+    {
+      type: "plain",
+      text: "Pour dire son nom et son prénom, on utilise le verbe **s'appeler**.",
+    },
     {
       type: "section",
       items: [
-        "Je m'appelle Marie.",
-        "Je suis Pierre Dupont.",
+        "**Je m'appelle** Marie.",
+        "**Je suis** Pierre Dupont.",
         "Mon prénom est Léa. Mon nom de famille est Martin.",
       ],
     },
-    { type: "highlight", title: "Âge : avoir (+ ans)" },
+    { type: "highlight", title: "Âge" },
+    {
+      type: "plain",
+      text: "Pour dire son âge, on utilise le verbe **avoir** avec **ans**.",
+    },
     {
       type: "section",
       items: [
-        "J'ai 12 ans.",
-        "Il a 30 ans.",
-        "Elle a 8 ans.",
+        "**J'ai** 12 ans.",
+        "**Il a** 30 ans.",
+        "**Elle a** 8 ans.",
       ],
     },
-    {
-      type: "note",
-      text: "Attention ! On dit **J'ai 30 ans** (verbe avoir), jamais « Je suis 30 ans ».",
-    },
-    { type: "highlight", title: "Nationalité : être" },
-    {
-      type: "section",
-      items: [
-        "Je suis français / française.",
-        "Il est suisse.",
-        "Elle est italienne.",
-        "Nous sommes espagnols.",
-      ],
-    },
+    { type: "highlight", title: "Nationalité" },
     {
       type: "plain",
       text: "La nationalité s'accorde : un homme **français**, une femme **française**. On utilise le verbe **être**.",
     },
-    { type: "highlight", title: "Adresse et lieu" },
     {
       type: "section",
       items: [
-        "J'habite à Genève.",
-        "J'habite en Suisse.",
-        "Mon adresse est 12 rue du Lac.",
-        "Je viens de Paris.",
+        "**Je suis** français / française.",
+        "**Il est** suisse.",
+        "**Elle est** italienne.",
+        "**Nous sommes** espagnols.",
+        "**Je viens de** Paris. / **Je viens d'**Italie.",
       ],
     },
-    { type: "highlight", title: "Profession : être / travailler" },
+    { type: "highlight", title: "Adresse et lieu" },
+    {
+      type: "plain",
+      text: "Pour dire où l'on habite, on utilise le verbe **habiter**.",
+    },
     {
       type: "section",
       items: [
-        "Je suis élève / étudiant(e).",
-        "Je suis professeur.",
-        "Je travaille dans un magasin.",
-        "Je suis au chômage. / Je suis à la retraite.",
+        "**J'habite** à Genève.",
+        "**J'habite** en Suisse.",
+        "Mon adresse est 12 rue du Lac.",
+      ],
+    },
+    { type: "highlight", title: "Profession" },
+    {
+      type: "plain",
+      text: "Pour parler de son métier, on utilise le verbe **être** ou **travailler**.",
+    },
+    {
+      type: "section",
+      items: [
+        "**Je suis** élève / étudiant(e).",
+        "**Je suis** professeur.",
+        "**Je travaille** dans un magasin.",
+        "**Je suis** au chômage. / **Je suis** à la retraite.",
       ],
     },
     {
@@ -85,15 +114,23 @@ export const EXPRESS_E1_1: CommunicationLesson = {
     { type: "heading", text: "Exemple de dialogue", black: true },
     {
       type: "dialogue",
+      audioSrc: A1("009"),
+      audioLabel: "Audio 009",
       lines: [
-        { role: "A", text: "Bonjour ! Je m'appelle Lucas. Et toi ?" },
-        { role: "B", text: "Bonjour Lucas. Je m'appelle Amina." },
-        { role: "A", text: "Tu as quel âge ?" },
-        { role: "B", text: "J'ai 13 ans. Et toi ?" },
-        { role: "A", text: "J'ai 14 ans. Tu es de quelle nationalité ?" },
-        { role: "B", text: "Je suis française. J'habite à Lyon." },
-        { role: "A", text: "Moi, je suis suisse. J'habite à Fribourg. Je suis élève." },
-        { role: "B", text: "Moi aussi, je suis élève. Enchantée !" },
+        { role: "A", text: "Bonjour ! Moi, c'est Paolo. Et vous ? Vous vous appelez comment ?" },
+        { role: "B", text: "Je m'appelle Nicole. Tu peux dire « tu »." },
+        { role: "A", text: "Enchanté Nicole ! Tu as un prénom français. Tu es française, non ?" },
+        { role: "B", text: "Non, je suis allemande. Et toi ?" },
+        { role: "A", text: "Je suis italien." },
+        { role: "B", text: "Et tu as quel âge ?" },
+        { role: "A", text: "J'ai 25 ans." },
+        { role: "B", text: "Moi, j'ai 35 ans." },
+        { role: "A", text: "Quelle est ta profession ?" },
+        { role: "B", text: "Je suis journaliste. Voici ma carte de visite." },
+        { role: "A", text: "Voici ma carte aussi." },
+        { role: "B", text: "Merci ! C'est ton numéro de portable sur la carte ?" },
+        { role: "A", text: "Non, mon portable, c'est le 06 18 14 33 11." },
+        { role: "B", text: "Euh… tu peux répéter, s'il te plaît ?" },
       ],
     },
     {
@@ -102,109 +139,253 @@ export const EXPRESS_E1_1: CommunicationLesson = {
         { fr: "je m'appelle…", example: "Je m'appelle Nora." },
         { fr: "j'ai … ans", example: "J'ai 25 ans." },
         { fr: "je suis + nationalité", example: "Je suis portugais." },
-        { fr: "j'habite à / en…", example: "J'habite à Berne. / J'habite en France." },
         { fr: "je viens de…", example: "Je viens de Tunisie." },
+        { fr: "j'habite à / en…", example: "J'habite à Berne. / J'habite en France." },
         { fr: "je suis + métier", example: "Je suis médecin." },
         { fr: "enchanté(e)", example: "Enchanté de faire votre connaissance." },
       ],
     },
-    {
-      type: "note",
-      text: "Astuce : pour l'âge → **avoir**. Pour la nationalité et le métier → **être**. Pour le lieu → **habiter**.",
-    },
   ],
-  exerciseCount: 8,
-  exercisePool: [
-    mcq("e1-1-t1-a", 1, "Comment dit-on son nom ?", "Je m'appelle Marie.", [
-      "Je suis appelle Marie.",
-      "J'ai appelle Marie.",
-      "Je m'appel Marie.",
-    ]),
-    mcq("e1-1-t1-b", 1, "Quelle phrase indique correctement l'âge ?", "J'ai 30 ans.", [
-      "Je suis 30 ans.",
-      "J'ai 30 année.",
-      "Je suis âgé 30.",
-    ]),
-    mcq("e1-1-t1-c", 1, "Quel verbe utilise-t-on pour l'âge ?", "avoir", [
-      "être",
-      "faire",
-      "aller",
-    ]),
-    mcq("e1-1-t1-d", 1, "« Je ___ français. » (nationalité)", "suis", [
-      "ai",
-      "fais",
-      "habite",
-    ]),
-    mcq("e1-1-t2-a", 2, "Quelle phrase est correcte pour la nationalité ?", "Elle est italienne.", [
-      "Elle a italienne.",
-      "Elle est Italie.",
-      "Elle fait italienne.",
-    ]),
-    mcq("e1-1-t2-b", 2, "Complétez : « J'___ à Genève. »", "habite", [
-      "suis",
-      "ai",
-      "appelle",
-    ]),
-    mcq("e1-1-t2-c", 2, "On te demande : « Tu as quel âge ? » Quelle réponse est correcte ?", "J'ai 12 ans.", [
-      "Je suis 12 ans.",
-      "J'ai 12.",
-      "Je fais 12 ans.",
-    ]),
-    mcq("e1-1-t2-d", 2, "Quelle question demande le prénom ?", "Comment tu t'appelles ?", [
-      "Tu as quel âge ?",
-      "Tu habites où ?",
-      "Tu es de quelle nationalité ?",
-    ]),
-    mcq("e1-1-t3-a", 3, "Repérez l'erreur : « Je suis 15 ans et je suis suisse. » Quelle correction est bonne ?", "J'ai 15 ans et je suis suisse.", [
-      "Je suis 15 ans et j'ai suisse.",
-      "J'ai 15 ans et j'ai suisse.",
-      "Je fais 15 ans et je suis suisse.",
-    ]),
-    mcq("e1-1-t3-b", 3, "Complétez le dialogue. A : « Tu es de quelle nationalité ? » B : « ___ »", "Je suis marocaine.", [
-      "J'ai marocaine.",
-      "Je suis Maroc.",
-      "J'habite marocaine.",
-    ]),
-    mcq("e1-1-t3-c", 3, "Quelle réponse convient à « Tu fais quoi dans la vie ? »", "Je suis élève.", [
-      "J'ai élève.",
-      "Je m'appelle élève.",
-      "J'habite élève.",
-    ]),
-    mcq("e1-1-t3-d", 3, "« Nous ___ espagnols. »", "sommes", [
-      "avons",
-      "faisons",
-      "habitons",
-    ]),
-    mcq("e1-1-t4-a", 4, "Quelle présentation est complète et correcte ?", "Je m'appelle Omar. J'ai 16 ans. Je suis tunisien. J'habite à Neuchâtel.", [
-      "Je m'appelle Omar. Je suis 16 ans. J'ai tunisien. Je suis à Neuchâtel.",
-      "Je suis Omar. J'ai 16. Je suis Tunisie. J'habite Neuchâtel en.",
-      "Je m'appelle Omar. J'ai 16 ans. J'ai tunisien. Je suis habite Neuchâtel.",
-    ]),
-    mcq("e1-1-t4-b", 4, "Choisissez la forme féminine correcte : « Je suis ___ . » (France)", "française", [
-      "français",
-      "France",
-      "françaises",
-    ]),
-    mcq("e1-1-t4-c", 4, "A : « Tu habites où ? » Quelle réponse est la plus naturelle ?", "J'habite à Lausanne, en Suisse.", [
-      "Je suis à Lausanne ans.",
-      "J'ai Lausanne.",
-      "Je m'appelle Lausanne.",
-    ]),
-    mcq("e1-1-t5-a", 5, "Repérez toutes les erreurs : « Bonjour, je suis appelle Léa. Je suis 11 ans. J'ai française. » Quelle version est correcte ?", "Bonjour, je m'appelle Léa. J'ai 11 ans. Je suis française.", [
-      "Bonjour, je suis appelle Léa. J'ai 11 ans. Je suis française.",
-      "Bonjour, je m'appelle Léa. Je suis 11 ans. Je suis française.",
-      "Bonjour, je m'appelle Léa. J'ai 11 ans. J'ai française.",
-    ]),
-    mcq("e1-1-t5-b", 5, "On te demande de te présenter. Quelle formulation est la meilleure ?", "Je m'appelle Karim. J'ai 20 ans. Je suis algérien. J'habite à Genève et je suis étudiant.", [
-      "Je suis Karim. Je suis 20 ans. J'ai algérien. Je suis Genève et j'ai étudiant.",
-      "Je m'appelle Karim. J'ai 20. Je suis Algérie. J'habite étudiant à Genève.",
-      "Je m'appelle Karim. Je fais 20 ans. Je suis algérien. J'ai habite Genève.",
-    ]),
-    mcq("e1-1-t5-c", 5, "Dans ce dialogue, quelle réplique de B est correcte ? A : « Enchanté ! Tu viens d'où ? » B : « ___ »", "Je viens du Portugal. J'habite maintenant à Zurich.", [
-      "J'ai Portugal. Je suis maintenant Zurich.",
-      "Je suis viens Portugal. J'habite Zurich ans.",
-      "Je viens Portugal. J'ai habite à Zurich.",
-    ]),
+  exerciseCount: 6,
+  exercises: [
+    listeningExercise(
+      "e1-1-005",
+      A1("005"),
+      "Audio 005",
+      "Écoutez et cochez la bonne réponse. (Document A)",
+      [
+        {
+          id: "a",
+          prompt: "a. Les deux personnes…",
+          choices: [
+            "se téléphonent.",
+            "se présentent et échangent leurs cartes de visite.",
+            "se présentent et se disent au revoir.",
+          ],
+          answer: "se présentent et échangent leurs cartes de visite.",
+        },
+        {
+          id: "b",
+          prompt: "b. Paolo demande à Nicole…",
+          choices: ["son nom.", "son prénom.", "son numéro de téléphone."],
+          answer: "son prénom.",
+        },
+        {
+          id: "c",
+          prompt: "c. Nicole est…",
+          choices: ["italienne.", "allemande.", "française."],
+          answer: "allemande.",
+        },
+      ],
+    ),
+    listeningExercise(
+      "e1-1-011",
+      A1("011"),
+      "Audio 011",
+      "Écoutez et complétez les informations.",
+      [
+        {
+          id: "a",
+          prompt: "a. Nom de famille",
+          choices: ["Kervelek", "Cantoni", "Schultz"],
+          answer: "Kervelek",
+        },
+        {
+          id: "b",
+          prompt: "b. Prénom",
+          choices: ["Naël", "Paolo", "Nicole"],
+          answer: "Naël",
+        },
+        {
+          id: "c",
+          prompt: "c. Nationalité",
+          choices: ["français", "italien", "allemand"],
+          answer: "français",
+        },
+        {
+          id: "d",
+          prompt: "d. Âge",
+          choices: ["25 ans", "34 ans", "35 ans"],
+          answer: "34 ans",
+        },
+        {
+          id: "e",
+          prompt: "e. Profession",
+          choices: ["journaliste", "professeur", "technicien"],
+          answer: "professeur",
+        },
+      ],
+    ),
+    listeningExercise(
+      "e1-1-012",
+      A1("012"),
+      "Audio 012",
+      "Écoutez et cochez Vrai ou Faux.",
+      [
+        {
+          id: "a",
+          prompt: "a. Vous écoutez un message sur le répondeur.",
+          choices: ["Vrai", "Faux"],
+          answer: "Vrai",
+        },
+        {
+          id: "b",
+          prompt: "b. Le numéro est le 01 39 10 22 50.",
+          choices: ["Vrai", "Faux"],
+          answer: "Vrai",
+        },
+        {
+          id: "c",
+          prompt: "c. Vous êtes chez Luc et Tania.",
+          choices: ["Vrai", "Faux"],
+          answer: "Faux",
+        },
+        {
+          id: "d",
+          prompt: "d. Vous laissez votre nom et votre prénom.",
+          choices: ["Vrai", "Faux"],
+          answer: "Vrai",
+        },
+        {
+          id: "e",
+          prompt: "e. Vous donnez votre adresse.",
+          choices: ["Vrai", "Faux"],
+          answer: "Faux",
+        },
+        {
+          id: "f",
+          prompt: "f. Le dernier mot est « au revoir ».",
+          choices: ["Vrai", "Faux"],
+          answer: "Faux",
+        },
+      ],
+    ),
+    listeningExercise(
+      "e1-1-013",
+      A1("013"),
+      "Audio 013",
+      "Écoutez et cochez la bonne réponse.",
+      [
+        {
+          id: "a",
+          prompt: "a. La femme dit :",
+          choices: ["« C'est pour un passeport ? »", "« C'est pour une carte de visite ? »"],
+          answer: "« C'est pour un passeport ? »",
+        },
+        {
+          id: "b",
+          prompt: "b. La femme demande",
+          choices: ["le prénom", "le nom de famille"],
+          answer: "le nom de famille",
+        },
+        {
+          id: "c",
+          prompt: "c. L'homme s'appelle",
+          choices: ["Zola", "Sola"],
+          answer: "Zola",
+        },
+        {
+          id: "d",
+          prompt: "d. Le prénom de l'homme est",
+          choices: ["Jacques", "Jean"],
+          answer: "Jacques",
+        },
+        {
+          id: "e",
+          prompt: "e. La femme dit :",
+          choices: ["« Tu es le mari de Camille. »", "« Tu es l'ami de Camille. »"],
+          answer: "« Tu es l'ami de Camille. »",
+        },
+        {
+          id: "f",
+          prompt: "f. Elle demande :",
+          choices: ["« Bonjour, ça va ? »", "« Salut, ça va ? »"],
+          answer: "« Salut, ça va ? »",
+        },
+      ],
+    ),
+    listeningExercise(
+      "e1-1-014",
+      A1("014"),
+      "Audio 014",
+      "Écoutez et cochez la bonne réponse.",
+      [
+        {
+          id: "a",
+          prompt: "a. Le nom de famille d'Annie est…",
+          choices: ["Schultz.", "Gatineau."],
+          answer: "Schultz.",
+        },
+        {
+          id: "b",
+          prompt: "b. Annie a…",
+          choices: ["37 ans.", "42 ans."],
+          answer: "37 ans.",
+        },
+        {
+          id: "c",
+          prompt: "c. Elle est…",
+          choices: ["pharmacienne.", "vendeuse."],
+          answer: "vendeuse.",
+        },
+        {
+          id: "d",
+          prompt: "d. Le nom de famille de Nadine est…",
+          choices: ["Patineau.", "Gatineau."],
+          answer: "Gatineau.",
+        },
+        {
+          id: "e",
+          prompt: "e. Nadine est…",
+          choices: ["pharmacienne.", "serveuse."],
+          answer: "pharmacienne.",
+        },
+        {
+          id: "f",
+          prompt: "f. Elle est…",
+          choices: ["belge.", "suisse."],
+          answer: "belge.",
+        },
+      ],
+    ),
+    listeningExercise(
+      "e1-1-015",
+      A1("015"),
+      "Audio 015",
+      "Écoutez et cochez la bonne réponse.",
+      [
+        {
+          id: "a",
+          prompt: "a. La femme s'appelle…",
+          choices: ["Sophie.", "Nina.", "Camille."],
+          answer: "Nina.",
+        },
+        {
+          id: "b",
+          prompt: "b. L'homme s'appelle…",
+          choices: ["Paolo.", "Felipe.", "Jacques."],
+          answer: "Felipe.",
+        },
+        {
+          id: "c",
+          prompt: "c. Sophie est…",
+          choices: ["sa mère.", "de la sœur.", "sa professeure."],
+          answer: "de la sœur.",
+        },
+        {
+          id: "d",
+          prompt: "d. Felipe est…",
+          choices: ["français.", "brésilien.", "belge."],
+          answer: "brésilien.",
+        },
+        {
+          id: "e",
+          prompt: "e. Nina est…",
+          choices: ["étudiante.", "vendeuse.", "ingénieure."],
+          answer: "ingénieure.",
+        },
+      ],
+    ),
   ],
 };
 
