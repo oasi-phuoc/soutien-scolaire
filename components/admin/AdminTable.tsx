@@ -485,7 +485,7 @@ export function AdminTable({
 
       {/* Table — en-tête fixe, scrollbar uniquement sur les lignes de données */}
       <div className="flex max-h-[calc(100dvh-14rem)] flex-col overflow-hidden rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
-        <div className="shrink-0 overflow-hidden">
+        <div className="shrink-0 overflow-y-auto [scrollbar-gutter:stable]">
           <table className="w-full table-fixed text-sm">
             <colgroup>
               <col style={{ width: 28 }} />
@@ -511,7 +511,7 @@ export function AdminTable({
             </thead>
           </table>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden">
+        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]">
           <table className="w-full table-fixed text-sm">
             <colgroup>
               <col style={{ width: 28 }} />
