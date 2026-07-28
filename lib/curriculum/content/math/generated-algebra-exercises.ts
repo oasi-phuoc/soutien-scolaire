@@ -3,7 +3,7 @@ import type { MathExerciseItem } from "./math-a1-types";
 export const GENERATED_ALGEBRA_LESSONS = new Set([
   "A6-4", "A6-5", "A7-5",
   "A9-1", "A9-2", "A9-3", "A9-4", "A9-5", "A9-6",
-  "A10-1", "A10-2", "A10-3", "A10-4", "A10-5",
+  "A10-1", "A10-2", "A10-3", "A10-4",
 ]);
 
 const ri = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -121,11 +121,6 @@ function generateOne(lessonId: string, id: string): MathExerciseItem {
       const first = a * x + y;
       const second = a * x - y;
       return item(id, `Système : ${a}x + y = ${first} et ${a}x − y = ${second}. Quelle est la valeur de x ?`, x);
-    }
-    case "A10-5": {
-      const first = ri(1, 20);
-      const second = ri(1, 20);
-      return item(id, `La somme de deux nombres est ${first + second} et leur différence est ${Math.abs(first - second)}. Quel est le plus grand nombre ?`, Math.max(first, second));
     }
     default:
       return item(id, `Calculez ${a} × ${Math.abs(x)}.`, a * Math.abs(x));

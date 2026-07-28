@@ -155,7 +155,6 @@ export const MATH_MODULES: MathModule[] = [
       sm("A10.2", "Équations avec fractions"),
       sm("A10.3", "Méthode de substitution"),
       sm("A10.4", "Méthode d'addition / soustraction"),
-      sm("A10.5", "Problèmes"),
     ],
   },
   {
