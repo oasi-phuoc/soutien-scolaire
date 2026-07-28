@@ -70,21 +70,27 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
   const isPlacement = batteryKind === "placement";
   const isProgressive = isPlacement;
 
-  const initialDraft = typeof window !== "undefined" ? loadDraftForKind(batteryKind) : null;
+  // Reprise uniquement pour le test de placement et l'entraînement niveau complet (pas individuel).
+  const rawDraft = typeof window !== "undefined" ? loadDraftForKind(batteryKind) : null;
+  const initialDraft =
+    !isPlacement && (rawDraft?.singleSkill || paramSkill) ? null : rawDraft;
   const [sessionId, setSessionId] = useState(() => initialDraft?.sessionId ?? createFrenchSessionId());
-  const [seed, setSeed] = useState(() => initialDraft?.seed ?? Date.now());
+  // Mode individuel : démarrage immédiat sur la compétence (pas d'écran d'intro).
+  const [seed, setSeed] = useState(() =>
+    !isPlacement && paramSkill ? Date.now() : (initialDraft?.seed ?? Date.now()),
+  );
   const [level] = useState<PlacementLevel>(() => {
     if (isPlacement) return initialDraft?.level ?? "base";
     return initialDraft?.level ?? paramLevel;
   });
   const [singleSkill] = useState<PlacementSkill | undefined>(() => {
     if (isPlacement) return undefined;
-    return initialDraft?.singleSkill ?? paramSkill;
+    return paramSkill ?? initialDraft?.singleSkill;
   });
   const [step, setStep] = useState<FrenchStep>(() => {
-    const d = typeof window !== "undefined" ? loadDraftForKind(batteryKind) : null;
-    if (d?.step && d.step !== "recap") return d.step;
-    return "intro";
+    if (paramSkill) return paramSkill;
+    if (!initialDraft?.step || initialDraft.step === "recap") return "intro";
+    return initialDraft.step;
   });
   const [ceScore, setCeScore] = useState(initialDraft?.ce ?? 0);
   const [coScore, setCoScore] = useState(initialDraft?.co ?? 0);
@@ -103,7 +109,8 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     peSubmissionId?: string;
     poSubmissionId?: string;
   }>) => {
-    const draftStep = next.step ?? (step === "intro" ? (singleSkill ?? "ce") : step);
+    if (singleSkill) return;
+    const draftStep = next.step ?? (step === "intro" ? "ce" : step);
     saveDraftForKind(batteryKind, {
       sessionId,
       kind: batteryKind,
@@ -126,7 +133,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     const activeSeed = isPlacement ? seed : Date.now();
     const firstStep = singleSkill ?? "ce";
     if (!isPlacement) setSeed(activeSeed);
-    persistDraft({ step: firstStep, seed: activeSeed });
+    if (!singleSkill) persistDraft({ step: firstStep, seed: activeSeed });
     setStep(firstStep);
   }, [isPlacement, persistDraft, seed, singleSkill]);
 
@@ -142,20 +149,23 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     setPoSent(false);
     setPeSubmissionId(undefined);
     setPoSubmissionId(undefined);
-    saveFrenchTrainingDraft({
-      sessionId: nextSessionId,
-      kind: "training",
-      progressive: false,
-      level,
-      seed: activeSeed,
-      step: firstStep,
-      singleSkill,
-      ce: 0,
-      co: 0,
-      peSent: false,
-      poSent: false,
-      updatedAt: new Date().toISOString(),
-    });
+    if (singleSkill) {
+      saveFrenchTrainingDraft(null);
+    } else {
+      saveFrenchTrainingDraft({
+        sessionId: nextSessionId,
+        kind: "training",
+        progressive: false,
+        level,
+        seed: activeSeed,
+        step: firstStep,
+        ce: 0,
+        co: 0,
+        peSent: false,
+        poSent: false,
+        updatedAt: new Date().toISOString(),
+      });
+    }
     setStep(firstStep);
   }, [level, singleSkill]);
 
@@ -290,7 +300,8 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     ? <PlacementFrenchHelpContent mode="placement" />
     : <PlacementFrenchHelpContent mode="training" level={level} />;
 
-  if (step === "intro") {
+  // Intro réservée au test de placement et à l'entraînement niveau complet.
+  if (step === "intro" && !singleSkill) {
     return (
       <main className="app-shell space-y-6 py-8 pb-32 lg:pb-28">
         <PlacementPageHeader
