@@ -302,7 +302,7 @@ const A4_SHEET_STYLE: CSSProperties = {
   background: "#fff",
 };
 
-function PaginatedPreview({
+export function PaginatedPreview({
   header,
   theoryNode,
   exerciseNodes,

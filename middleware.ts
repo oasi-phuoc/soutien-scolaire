@@ -12,6 +12,7 @@ const PUBLIC_PATHS = new Set([
 ]);
 
 const ADMIN_PREFIX = "/admin";
+const IMPRESSIONS_PREFIX = "/impressions";
 const SUIVI_PREFIX = "/suivi";
 const TEACHER_PATHS = ["/messagerie"];
 
@@ -75,10 +76,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/connexion", request.url));
   }
 
-  if (user && (path.startsWith(ADMIN_PREFIX) || path.startsWith(SUIVI_PREFIX) || TEACHER_PATHS.some((p) => path.startsWith(p)))) {
+  if (user && (path.startsWith(ADMIN_PREFIX) || path.startsWith(IMPRESSIONS_PREFIX) || path.startsWith(SUIVI_PREFIX) || TEACHER_PATHS.some((p) => path.startsWith(p)))) {
     const { data: role } = await supabase.rpc("get_my_role");
 
-    if (path.startsWith(ADMIN_PREFIX)) {
+    if (path.startsWith(ADMIN_PREFIX) || path.startsWith(IMPRESSIONS_PREFIX)) {
       if (role !== "admin") {
         return NextResponse.redirect(new URL(role === "prof" ? "/suivi" : "/", request.url));
       }

@@ -1,224 +1,273 @@
-# Plan — Section centralisée « Impression » (admin)
+# Plan — Section centralisée « Documents d’exercice »
 
 ## Objectif
 
-Centraliser l’impression / export PDF des feuilles d’exercice dans **une section dédiée**, accessible uniquement aux **admins**, via un **nouveau bouton + icône** dans la navigation principale. Retirer les boutons d’impression dispersés dans chaque page de leçon.
-
-Références UI/PDF : `ecole-manager` (TCF plannings, Notes, Bulletins, Professeurs).
+Retirer les boutons d’impression dispersés dans les leçons, et centraliser l’impression des documents d’exercice dans une **nouvelle section admin**, accessible depuis la **barre de navigation principale** (icône dédiée), avec un flux UI/PDF calqué sur **ecole-manager** (Plannings TCF, Emploi du temps / professeurs, Bulletin de notes).
 
 ---
 
-## État actuel (soutien-scolaire)
+## Constat actuel (soutien-scolaire)
 
-### Flux existant
+### Impression aujourd’hui
 
-| Élément | Rôle |
-|---------|------|
-| `components/ui/PrintConfigSheet.tsx` | Wizard 3 étapes : Contenu → En-tête → Aperçu A4 paginé + impression popup |
-| `lib/utils/print.ts` | `capturePageCss`, `openPrintPopup`, `triggerPrint` |
-| `PrintDocumentHeader` / `PrintDocumentFooter` | En-tête SCAI / Valais + pied de page LearnUP |
+- Pas de bibliothèque PDF (`@react-pdf`, `jspdf`, etc.) : l’impression passe par le navigateur (`openPrintPopup` → dialogue Imprimer / Enregistrer en PDF).
+- Cœur UI : `components/ui/PrintConfigSheet.tsx` (assistant Contenu → En-tête → Aperçu A4) + `lib/utils/print.ts`.
+- En-tête/pied SCAI déjà partagés (`PrintDocumentHeader`, `PrintDocumentFooter`, logos Valais).
 
-### Boutons à retirer (dispersés, souvent `isAdmin` + étape théorie)
+### Boutons à retirer (entrée par leçon)
 
-| Fichier | Déclencheur |
-|---------|-------------|
-| `MathSubmoduleWorkspace.tsx` | Bouton flottant théorie |
-| `GenericModuleContent.tsx` | Idem |
-| `A1ModuleContent.tsx` | Idem |
-| `VocabRunner.tsx` | Idem |
-| `GrammaireRunner.tsx` | Idem |
-| `PlacementTestClient.tsx` | Bouton « Imprimer le test » |
-| `RevisionTestClient.tsx` / `LectureEvaluation.tsx` | Variantes `window.print` / PDF |
+| Fichier | Garde actuelle |
+|---------|----------------|
+| `A1ModuleContent.tsx` | `admin \|\| prof` + étape théorie |
+| `MathSubmoduleWorkspace.tsx` | `admin \|\| prof` + théorie |
+| `GenericModuleContent.tsx` | **aucune** |
+| `VocabRunner.tsx` / `GrammaireRunner.tsx` | **aucune** |
+| `PlacementTestClient.tsx` | intro, pas de rôle |
+| `RevisionTestClient.tsx` | `triggerPrint()` direct |
+| `LectureEvaluation.tsx` | `triggerPrint()` direct |
 
-Chaque runner monte localement `PrintConfigSheet` avec `theoryPreview` + `exercises[].preview` (ReactNode issus des composants d’exercice).
+→ Gating incohérent ; les élèves voient encore l’impression sur une partie des modules.
 
-### Accès admin déjà en place
+### Navigation
 
-- Middleware : `/admin/*` → `role === "admin"` (`middleware.ts`)
-- Nav pédagogie : `getPedagogicNavVisibilityAction()` → `isAdmin` (`DesktopSidebar`)
-- Pattern local sans Supabase : bypass auth (OK pour tests ; la section devra rester cohérente)
+- Mobile : `MainNav.tsx` (barre du bas, `print:hidden`).
+- Desktop : `DesktopSidebar.tsx` (liens Admin si `role === "admin"`).
+- Middleware : `/admin/*` déjà réservé au rôle `admin` strict.
 
----
+### Référence ecole-manager
 
-## Référence ecole-manager — patterns à reprendre
-
-| Pattern | Où | Application ici |
-|---------|-----|-----------------|
-| **Liste → filtres pills → détail → aperçu** | Notes, Bulletins, TCF plannings | Hub Impression : domaine → sous-menu → leçon → wizard |
-| **Split liste / document** | Notes bulletin (sidebar 210px + aperçu) | Optionnel en étape « Aperçu » si multi-leçons plus tard |
-| **Preview WYSIWYG + print popup HTML** | TCF / Bulletins (`injectForcedPrintCss` + `openPrintPopup`) | Déjà le modèle de `PrintConfigSheet` (clone DOM aperçu) |
-| **En-tête officiel SCAI / Valais** | TCF, Notes, Bulletins | Déjà dans `PrintDocumentHeader` |
-| **Sous-nav URL `?tab=` + adminOnly** | `Layout.js` TCF/Notes | Onglets domaine via searchParams |
-| **Bandeau sticky actions** | `stickyPageChrome` (TCF) | Header section + CTA Imprimer |
-| **Icône dédiée sidebar** | `DashboardIcons.js` | Nouvelle icône imprimante dans MainNav + DesktopSidebar |
-
-Ne pas copier la palette indigo `#6366f1` d’ecole-manager : rester sur le design system soutien (`--color-theme`, accents par matière).
-
----
-
-## Proposition produit
-
-### Emplacement & accès
-
-- **Route** : `/admin/impression` (protégée middleware admin)
-- **Navigation** :
-  - `DesktopSidebar` : entrée « Impression » sous le bloc Admin (ou au même niveau Suivi / Admin), visible si `pedagogicNav.isAdmin`
-  - `MainNav` (mobile / menu secondaire) : même entrée + **nouvelle icône** (imprimante), visible admin uniquement
-  - Option : lien rapide depuis `/compte` (carte Gestion) et `/admin`
-- **Rôles** : **admin uniquement** (pas les profs) — aligné avec la demande. Les boutons actuels utilisent parfois `isAdmin \|\| prof` via props pages ; à clarifier au moment de l’implémentation si les profs doivent garder un accès lecture seule (recommandation : non, sauf demande contraire).
-
-### UX de la section (inspirée Notes / TCF)
+Pattern commun des sections Plannings / Notes :
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Impression                          [icône imprimante] │
-│  Feuilles d’exercice & évaluations                      │
-├─────────────────────────────────────────────────────────┤
-│  [Math] [Français] [Lecture] [Placement]   ← pills     │
-│     └ Algèbre | Géométrie | …              ← sous-tabs │
-├──────────────┬──────────────────────────────────────────┤
-│ Liste leçons │  Sélection → ouvre le wizard             │
-│ (code+titre) │  PrintConfigSheet (réutilisé)            │
-│ recherche    │  Contenu → En-tête → Aperçu A4 → PDF     │
-└──────────────┴──────────────────────────────────────────┘
+Filtres (pills) → sélection (liste / CustomSelect)
+  → aperçu document live (carte blanche A4)
+  → Imprimer / Tout imprimer
+  → build HTML (données ou clone DOM) → openPrintPopup
 ```
 
-Flux utilisateur :
+Bulletin de notes : **split pane** liste sticky à gauche + aperçu à droite — modèle le plus adapté à un catalogue d’exercices.
 
-1. Choisir **domaine** (Math / Français / Lecture / Placement…)
-2. Choisir **sous-domaine** (ex. Algèbre, Vocabulaire)
-3. Choisir une **leçon / sous-module** dans la liste (réutiliser le catalogue de `lib/content-editor/hub-pages.ts` : `HUB_DOMAINS`, `HubPage`)
-4. Lancer le **wizard d’impression** existant (`PrintConfigSheet`) avec théorie + exercices de cette leçon
-5. Configurer mode Exercice / Évaluation, sélection, points, en-tête classe, aperçu paginé, imprimer
+---
 
-### Icône
+## Décisions proposées
 
-Nouvelle icône SVG « imprimante » (déjà ébauchée comme `IconPrint` dans `MainNav.tsx`) — à exposer aussi en sidebar / entrée de section, style cohérent avec Home / Lecture / Placement.
+| Sujet | Décision | Motif |
+|-------|----------|--------|
+| Route | `/admin/impression` | Middleware admin déjà en place ; pas de nouvelle règle |
+| Visibilité nav | Icône dans `MainNav` **et** entrée dans `DesktopSidebar`, **uniquement si `role === "admin"`** | Demande explicite « admins only » (pas `prof`) |
+| Accès sans Supabase | Visible en local (comme édition de contenu) **ou** masqué ? | **Proposé : visible en local** (`!supabase`) pour tester sans `.env`, cohérent avec `canEditContent` |
+| Rôle `prof` | **Pas d’accès** à la section | Strict admin ; à confirmer si les profs doivent imprimer plus tard |
+| Techno PDF | Conserver popup navigateur | Aligné ecole-manager + code existant ; pas de nouvelle dépendance |
+| `PrintConfigSheet` | Extraire le moteur (sélection, en-tête, aperçu, print) en composants réutilisables ; **ne plus l’ouvrir depuis les leçons** | Évite de dupliquer 900 lignes |
+| Mode leçon MainNav | Plus de label « Imprimer » via `data-nav-action-priority="print"` | Les actions leçon reviennent à Valider / Suivant |
+
+---
+
+## UX cible (inspirée bulletin / plannings)
+
+### 1. Entrée navigation
+
+- **Nouvelle icône** « Documents » / imprimante (SVG dédié, style des icônes existantes `MainNav`).
+- Label court : **Docs** ou **Impression**.
+- Visible seulement si admin (fetch via `getPedagogicNavVisibilityAction` ou action dédiée).
+- Emplacement proposé :
+  - Mobile hub : item dans le menu radial / liste `menuItems` (pas forcément une des 4 pastilles primaires pour ne pas surcharger).
+  - Desktop sidebar : sous **Admin** → « Documents d’exercice », **et** raccourci icône dans la barre principale si on ajoute un 6ᵉ item conditionnel.
+
+> Point ouvert : pastille primaire vs entrée menu Admin seulement. Recommandation : **entrée Admin sidebar + pastille conditionnelle dans MainNav** (comme Placement) pour un accès rapide.
+
+### 2. Page `/admin/impression`
+
+Layout type ecole-manager Notes/bulletin :
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Sticky header : titre + [Imprimer] [Tout imprimer]          │
+├──────────────┬──────────────────────────────────────────────┤
+│ Filtres      │                                              │
+│ Domaine pills│         Aperçu A4 (live)                     │
+│ Maths|FR|…   │         (même chrome PrintDocument*)         │
+│              │                                              │
+│ Module       │                                              │
+│ Sous-module  │                                              │
+│              │                                              │
+│ Liste exos   │                                              │
+│ ☑ Théorie    │                                              │
+│ ☑ Exo 1 ×2   │                                              │
+│ □ Exo 2      │                                              │
+│              │                                              │
+│ En-tête      │                                              │
+│ CSC 01 / …   │                                              │
+└──────────────┴──────────────────────────────────────────────┘
+```
+
+**Étapes de sélection (gauche) :**
+
+1. **Domaine** : Mathématiques | Français | Lecture | Placement (et plus tard Communication si besoin).
+2. **Module / leçon** : `AppSelect` ou liste (données `MATH_MODULES`, runners FR, `LECTURE_MODULES`, placement).
+3. **Contenu** : cases théorie + exercices (occurrences, points) — reprise de la logique `PrintConfigSheet` étape Contenu.
+4. **En-tête document** : niveau classe, n°, cours, mode évaluation — reprise étape En-tête.
+5. **Aperçu** à droite (toujours visible une fois une leçon choisie), pagination A4 existante.
+
+**Actions :**
+
+- **Imprimer** : document de la sélection courante.
+- **Tout imprimer** (optionnel v1 ou v1.1) : tous les sous-modules du module filtré, `page-break-after` entre documents (comme TCF / EDT).
+
+### 3. États vides
+
+- Aucune leçon sélectionnée → message « Choisissez un module pour prévisualiser ».
+- Sélection sans contenu imprimable → message déjà présent dans `PrintConfigSheet`.
 
 ---
 
 ## Architecture technique
 
-### Décision clé : comment obtenir les aperçus hors des runners ?
-
-Aujourd’hui les `preview` sont des ReactNode montés **dans** le runner de leçon. Le hub ne doit pas dépendre de l’ouverture d’une page élève.
-
-**Approche recommandée (phase 1)** — *Print adapters par domaine* :
+### Nouveaux fichiers (proposition)
 
 ```
-lib/print/
-  catalog.ts          # réexporte / adapte HUB_DOMAINS + pages imprimables
-  adapters/
-    math.ts           # id leçon → { title, theoryPreview, exercises[] }
-    francais.ts       # vocab + grammaire
-    lecture.ts        # si applicable
-    placement.ts
-components/impression/
-  ImpressionHubClient.tsx   # UI liste + filtres
-  ImpressionLessonMount.tsx # charge l’adapter et ouvre PrintConfigSheet
+app/(main)/admin/impression/page.tsx          # garde serveur admin + shell
+components/admin/impression/
+  ImpressionWorkspace.tsx                     # layout split + état filtres
+  ImpressionCatalog.tsx                       # pills + selects + liste exos
+  ImpressionPreviewPane.tsx                   # aperçu A4 réutilisant PrintPreview*
+  impression-catalog.ts                       # index des leçons imprimables
+components/ui/print/                          # extraction depuis PrintConfigSheet
+  PrintDocumentHeader.tsx
+  PrintDocumentFooter.tsx
+  PrintPreviewPager.tsx
+  print-types.ts
+  usePrintDocument.ts                         # handlePrint → capturePageCss + openPrintPopup
 ```
 
-Chaque adapter :
+### Catalogue imprimable
 
-- charge les données curriculum (registry / themes / lessons)
-- rend les **mêmes** composants preview que les runners (`TheoryView`, `ExerciseView`, `renderEvalStep`, etc.) en mode lecture seule (`validateCommand={0}`, no-op callbacks)
-- retourne `PrintExercise[]` + `theoryPreview` + `lessonTitle` + `accentColor`
+Registre côté client dérivé du curriculum existant, ex. :
 
-**Approche rejetée pour la V1** : deep-link vers la leçon + auto-open du sheet — garde le bouton dans le parcours élève et complexifie le routing.
+```ts
+type PrintableLesson = {
+  id: string;           // "math:A1-1" | "fr:vocab-a1-…" | "lecture:…" | "placement"
+  domain: "math" | "francais" | "lecture" | "placement";
+  moduleId: string;
+  title: string;
+  /** Factory d’aperçu : théorie + exercices (ReactNode), comme aujourd’hui dans chaque runner */
+  buildPreview: (config: PrintConfig) => { theory?: ReactNode; exercises: PrintExercise[] };
+};
+```
 
-### Fichiers à créer
+**Défi principal :** aujourd’hui l’aperçu est généré *dans* chaque runner (`a1PrintPreview`, handlers dans `GenericModuleContent`, etc.). Il faut **extraire** ces builders dans des modules purs (ou un registre) pour les appeler hors contexte de leçon.
 
-| Chemin | Rôle |
-|--------|------|
-| `app/(main)/admin/impression/page.tsx` | Server page : gate admin + render hub |
-| `components/impression/ImpressionHubClient.tsx` | UI catalogue + sélection |
-| `components/impression/ImpressionPrintSession.tsx` | Monte adapter + `PrintConfigSheet` |
-| `lib/print/catalog.ts` | Catalogue des leçons imprimables |
-| `lib/print/adapters/*.ts` | Factories preview par domaine |
+Approche progressive :
 
-### Fichiers à modifier
-
-| Chemin | Changement |
-|--------|------------|
-| `components/layout/DesktopSidebar.tsx` | Lien « Impression » admin + sous-nav |
-| `components/MainNav.tsx` | Entrée menu admin + icône (visibilité via action admin) |
-| `app/actions/admin.ts` | Étendre `getPedagogicNavVisibilityAction` ou ajouter `getImpressionNavVisibilityAction` |
-| `components/CompteDashboard.tsx` | Lien Gestion → Impression (optionnel) |
-| Runners listés plus haut | **Supprimer** bouton + état `showPrintConfig` + import sheet |
-| `lib/hooks/useLessonActions.ts` | Retirer « imprimer » du mapping next/validate legacy si plus pertinent |
+1. **v1** — Maths (A1 + Generic + workspace custom) + Français (Vocab/Grammaire) en migrant les `*PrintPreview` / listes d’exercices vers `lib/print/catalog/`.
+2. **v1.1** — Placement + Lecture évaluation + tests de révision.
+3. **v2** — « Tout imprimer » par module / classe.
 
 ### Sécurité
 
-- Page sous `/admin/impression` → middleware existant
-- Double check `get_my_role === "admin"` dans la page serveur (comme `/admin/page.tsx`)
-- Mode local sans Supabase : décider explicitement — soit section visible (comme édition contenu `openLocally`), soit masquée. **Recommandation** : visible en local pour tests (même règle que content-editor).
+- Page serveur : `get_my_role() === "admin"` sinon redirect (comme `admin/page.tsx`).
+- Middleware : déjà couvert par `/admin`.
+- Nav : masquer l’icône si non-admin (pas seulement cacher la route).
+- Aucune API serveur critique (contenu curriculum déjà public côté client).
+
+### Nettoyage leçons
+
+Pour chaque point d’entrée listé plus haut :
+
+1. Supprimer le bouton imprimante UI.
+2. Supprimer le montage de `PrintConfigSheet` et les bridges `data-nav-action-priority="print"`.
+3. Conserver / déplacer uniquement la logique de **génération d’aperçu** vers le catalogue.
+4. Simplifier `useLessonActions` : retirer le mapping spécial « imprimer » si plus utilisé.
 
 ---
 
-## Périmètre V1 vs suites
+## Navigation — détail d’implémentation
 
-### V1 (MVP)
+### `MainNav.tsx`
 
-1. Nav admin (sidebar + menu mobile) + route `/admin/impression`
-2. Catalogue Math (algèbre + géométrie) + Français (vocabulaire + grammaire) via adapters
-3. Réutilisation intégrale de `PrintConfigSheet` (pas de refactor PDF)
-4. Suppression des boutons d’impression dans les runners couverts
-5. Placement math : entrée catalogue si adapter simple
+- Ajouter `docsItem: { href: "/admin/impression", label: "Docs", icon: DocsIcon }`.
+- Charger `isAdmin` (réutiliser `getPedagogicNavVisibilityAction`).
+- Inclure l’item dans `menuItems` (et éventuellement pastille) seulement si admin / mode local.
 
-### V2 (ensuite)
+### `DesktopSidebar.tsx`
 
-- Lecture (évaluations / révisions) et Communication si besoin pédagogique
-- Impression multi-leçons / lot (comme « Tout imprimer » TCF)
-- Banque de contrôles (`/admin/banque-controle`) branchée sur le même hub
-- Prefs d’en-tête mémorisées (classe / cours) en `localStorage`
+- Sous Admin, ajouter `{ href: "/admin/impression", label: "Documents d’exercice" }`.
 
-### Hors scope
+### Icône
 
-- Génération PDF serveur (Puppeteer, etc.) — rester sur popup navigateur
-- Accès profs
-- Changement du design des en-têtes SCAI / Valais
+- Nouvelle icône outline cohérente avec `IconPrint` / autres (feuille + coin plié, ou imprimante simple) — pas d’emoji.
 
 ---
 
-## Plan d’implémentation (ordre)
+## Alignement CSS / print
 
-1. **Scaffold** route + hub UI (pills domaines, liste vide) + nav admin + icône
-2. **Adapter Math** (A1 + Generic + submodule) — cas le plus critique
-3. Brancher `PrintConfigSheet` depuis le hub ; valider aperçu + PDF
-4. **Adapters Français** (vocab + grammaire)
-5. **Retirer** boutons / états print des runners couverts
-6. Adapter Placement si trivial ; sinon V2
-7. Lint (`npm run lint` sur `app/` / `components/` / `lib/`) + smoke manuel PDF
+- Réutiliser `globals.css` (`@media print`, `.print-document-header`, etc.).
+- Conserver `openPrintPopup` + injection CSS page (comme `PrintConfigSheet.handlePrint`).
+- Optionnel : porter `injectForcedPrintCss` d’ecole-manager dans `lib/utils/print.ts` pour forcer `@page A4` de façon uniforme.
 
 ---
 
-## Risques & mitigations
+## Plan d’implémentation (phases)
 
-| Risque | Mitigation |
-|--------|------------|
-| Aperçus math dépendent de logique lourde dans `GenericModuleContent` | Extraire `buildMathPrintPayload(submoduleId)` progressivement ; commencer par leçons A1 / grammaire (plus simples) |
-| Bundle client trop gros si tous les adapters importent tout | Dynamic `import()` de l’adapter au clic leçon |
-| Divergence preview hub vs page leçon | Partager les mêmes composants de rendu ; pas de HTML string parallèle en V1 |
-| Boutons oubliés dans une page | Grep final `Imprimer en PDF` / `PrintConfigSheet` / `setShowPrintConfig` |
+### Phase 0 — Préparation
+
+- Extraire types + header/footer/preview hors de `PrintConfigSheet`.
+- Documenter le contrat `PrintableLesson`.
+
+### Phase 1 — Section + nav (sans tout le catalogue)
+
+- Route `/admin/impression` + garde admin.
+- Icône nav + entrée sidebar.
+- Shell UI split pane (filtres stub + aperçu vide).
+
+### Phase 2 — Catalogue Maths + wiring print
+
+- Migrer previews A1 / Generic / Workspace.
+- Brancher Imprimer sur le même pipeline que `PrintConfigSheet`.
+- Retirer boutons print des composants math.
+
+### Phase 3 — Français (+ Placement / Lecture)
+
+- Migrer Vocab/Grammaire, puis placement/révision/lecture.
+- Retirer les derniers `triggerPrint` / sheets.
+
+### Phase 4 — Polish
+
+- Tout imprimer (module entier).
+- Deep-link `?domain=&module=&lesson=`.
+- Tests manuels : admin voit l’entrée ; élève/prof non ; aperçu = PDF.
 
 ---
 
 ## Critères d’acceptation
 
-- [ ] Aucun bouton d’impression visible dans le parcours élève / leçon
-- [ ] Entrée « Impression » visible **uniquement** pour admin (sidebar + menu principal)
-- [ ] Depuis `/admin/impression`, un admin peut sélectionner une leçon Math ou Français, configurer le document, voir l’aperçu A4, et exporter PDF
-- [ ] En-tête / pied de page identiques à l’existant (`PrintDocumentHeader` / Footer)
-- [ ] Non-admin : redirect hors de `/admin/impression`
-- [ ] Pas de régression visuelle sur les runners (suppression propre du float print)
+1. Aucun bouton d’impression visible dans une leçon (élève, prof, admin).
+2. Admin voit l’icône Docs / Impression dans la nav et peut ouvrir `/admin/impression`.
+3. Élève et prof : pas d’entrée nav, accès direct URL → redirect.
+4. Sélection domaine → module → exercices → aperçu A4 SCAI → dialogue d’impression.
+5. Qualité visuelle du PDF équivalente (ou supérieure) à l’ancien `PrintConfigSheet`.
+6. Pas de nouvelle dépendance PDF sauf décision contraire explicite.
 
 ---
 
-## Décisions à confirmer avant code
+## Points à trancher avant le code
 
-1. **Professeurs** : aucun accès (défaut plan) ou accès lecture/impression ?
-2. **Domaines V1** : Math + Français suffisent-ils, ou Placement / Lecture dès le MVP ?
-3. **Emplacement nav** : sous-bloc Admin sidebar uniquement, ou aussi pastille dans le menu circulaire MainNav (comme Placement) ?
-4. **Mode local sans Supabase** : section visible pour tests ?
+1. **Profs** : accès lecture seule / impression, ou strict admin ?
+2. **Pastille MainNav** vs entrée menu Admin uniquement ?
+3. **Communication** dans le catalogue v1 ou plus tard ?
+4. **Tout imprimer** dès la v1 ou v1.1 ?
+5. Mode local sans Supabase : section visible ?
 
-Une fois ces 4 points validés, l’implémentation peut démarrer dans l’ordre ci-dessus.
+---
+
+## Références code
+
+| Projet | Fichier | Rôle |
+|--------|---------|------|
+| soutien-scolaire | `components/ui/PrintConfigSheet.tsx` | Wizard actuel à centraliser |
+| soutien-scolaire | `lib/utils/print.ts` | `openPrintPopup` / `capturePageCss` |
+| soutien-scolaire | `components/MainNav.tsx` | Nav + IconPrint leçon |
+| ecole-manager | `frontend/src/utils/print.js` | Helper print forcé `@page` |
+| ecole-manager | `frontend/src/pages/Notes.js` | Split liste + aperçu + Imprimer |
+| ecole-manager | `frontend/src/pages/TCF.js` | Pills site/type + aperçu plannings |
+| ecole-manager | `frontend/src/pages/EmploiDuTemps.js` | Plannings prof + Tout imprimer |
