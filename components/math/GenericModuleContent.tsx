@@ -124,6 +124,18 @@ function isSolutionSetLine(line: string): boolean {
   return /^S\s*=/.test(line.trim());
 }
 
+/** Normalize awkward signs: "- -52" → "+ 52", "+ -52" → "- 52". Keeps "· (-1)". */
+function normalizeAlgebraSigns(text: string): string {
+  const num = String.raw`\d+(?:[.,]\d+)?(?:x(?:²|\^2)?)?`;
+  return text
+    .replace(/−/g, "-")
+    .replace(new RegExp(String.raw`(^|[^(\d.])-\s*-\s*(${num})`, "g"), "$1+ $2")
+    .replace(new RegExp(String.raw`\+\s*-\s*(${num})`, "g"), "- $1")
+    .replace(/\+\s*\+/g, "+ ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 function EquationCorrectionLines({
   lines,
   operations = [],
@@ -132,7 +144,10 @@ function EquationCorrectionLines({
   operations?: string[];
 }) {
   const rows = lines
-    .map((line, i) => ({ line, op: operations[i]?.trim() ?? "" }))
+    .map((line, i) => ({
+      line: normalizeAlgebraSigns(line),
+      op: normalizeAlgebraSigns(operations[i]?.trim() ?? ""),
+    }))
     .filter(({ line }) => !isSolutionSetLine(line));
 
   const parsed = rows.map(({ line, op }) => {
@@ -156,17 +171,19 @@ function EquationCorrectionLines({
   const opWidthCh = Math.max(maxOpLen + 0.5, 3);
 
   return (
-    <table className="mx-auto w-full max-w-full border-collapse font-mono text-sm text-amber-600">
+    <table className="mx-auto w-full max-w-full border-collapse font-mono text-sm">
       <tbody>
         {parsed.map(({ hasEquation, lhs, rhs, full, op }, i) => (
           <tr key={`${full}-${i}`}>
             <td
-              className="align-top pr-4 text-right text-xs leading-5 text-amber-600/90 whitespace-nowrap"
+              className="align-top pr-2 text-right text-xs leading-5 text-amber-600 whitespace-nowrap"
               style={{ width: `${opWidthCh}ch` }}
             >
               {op ? renderText(op) : "\u00A0"}
             </td>
-            <td className="align-top text-left leading-5">
+            <td
+              className="align-top border-l-2 border-amber-500/70 pl-3 text-left leading-5 text-[var(--color-text-primary)]"
+            >
               {hasEquation ? (
                 <span className="inline-flex items-baseline whitespace-nowrap">
                   <span
@@ -179,7 +196,7 @@ function EquationCorrectionLines({
                   <span>{renderText(rhs)}</span>
                 </span>
               ) : (
-                <span className="font-bold">{renderText(full)}</span>
+                <span className="font-bold text-amber-600">{renderText(full)}</span>
               )}
             </td>
           </tr>
@@ -190,10 +207,7 @@ function EquationCorrectionLines({
 }
 
 function formatAlgebraDisplay(text: string) {
-  return text
-    .replace(/−\s*-\s*(\d+(?:[.]\d+)?)/g, "-(-$1)")
-    .replace(/-\s*-\s*(\d+(?:[.]\d+)?)/g, "-(-$1)")
-    .replace(/\+\s*-\s*(\d+(?:[.]\d+)?)/g, "+ (-$1)");
+  return normalizeAlgebraSigns(text);
 }
 
 function cleanAlgebraNumberInput(value: string) {

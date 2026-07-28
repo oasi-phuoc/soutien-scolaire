@@ -114,6 +114,13 @@ export function alignOps(dev: string[], ops: string[] = []): string[] {
   return [...ops, ...Array.from({ length: dev.length - ops.length }, () => "")];
 }
 
+/** Signed side-op label: 52 → "+ 52", -52 → "- 52". */
+export function formatSideOp(n: number): string {
+  if (!Number.isFinite(n) || n === 0) return "";
+  return n > 0 ? `+ ${n}` : `- ${Math.abs(n)}`;
+}
+
+
 function buildEasy102(shape: Easy102Shape): () => EquationQuestion {
   return () => retry(() => {
     const x0 = pickIntSolution();
@@ -478,7 +485,7 @@ function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
       return {
         equations: [fmtLin(cfg.a1, -1, c1), fmtLin(cfg.d2, cfg.e2, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: alignOps(dev, ["", `- ${cfg.a1}x`, "· (-1)", "", "", "effectuer", "réduire", `- ${-cfg.e2 * c1}`, `: ${cfg.d2 + cfg.e2 * cfg.a1}`, "", "", ""]),
+        operations: alignOps(dev, ["", `- ${cfg.a1}x`, "· (-1)", "", "", "effectuer", "réduire", formatSideOp(cfg.e2 * c1), `: ${cfg.d2 + cfg.e2 * cfg.a1}`, "", "", ""]),
       };
     }
     if (cfg.isoVar === "x" && cfg.isoEq === 1 && cfg.a1 === 1) {
