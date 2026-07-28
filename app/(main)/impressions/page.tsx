@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { ImpressionHubClient } from "@/components/admin/ImpressionHubClient";
+import { ImpressionHubBoundary } from "@/components/admin/ImpressionHubBoundary";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 
 export default async function ImpressionsPage() {
@@ -35,7 +35,7 @@ export default async function ImpressionsPage() {
 
   return (
     <main className={`${APP_SHELL_FULL} flex-1 py-4 pb-28 lg:py-6`}>
-      <ImpressionHubClient />
+      <ImpressionHubBoundary />
     </main>
   );
 }

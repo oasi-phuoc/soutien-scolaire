@@ -180,9 +180,14 @@ export function ImpressionHubClient() {
   const [selection, setSelection] = useState<ExercisePrintSelection[]>([]);
   const [printedBy, setPrintedBy] = useState("");
   const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
-  const [printSeed, setPrintSeed] = useState(() => freshSeed());
+  /** Seed uniquement après mount — évite mismatch SSR/hydratation (random). */
+  const [printSeed, setPrintSeed] = useState<number | null>(null);
   const [bundleError, setBundleError] = useState<string | null>(null);
   const previewPagesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setPrintSeed((prev) => (prev == null ? freshSeed() : prev));
+  }, []);
 
   const domainEntries = useMemo(
     () => catalog.filter((e) => e.domain === domain),
@@ -233,7 +238,7 @@ export function ImpressionHubClient() {
     documentOptions.find((d) => d.id === docId) ?? documentOptions[0] ?? null;
 
   const bundle = useMemo(() => {
-    if (!selectedEntry) return null;
+    if (!selectedEntry || printSeed == null) return null;
     try {
       return buildPrintBundle(selectedEntry.id, { frenchLevel, seed: printSeed });
     } catch (err) {

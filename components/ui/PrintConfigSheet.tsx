@@ -168,10 +168,23 @@ export function PrintExerciseBody({
   );
 }
 
-/** Clone un nœud React pour pouvoir le monter à la fois en sonde de mesure et en aperçu. */
+/** Clone profond : mesure + aperçu ne partagent aucun élément React. */
 function clonePreviewNode(node: ReactNode, key: string): ReactNode {
+  if (node == null || typeof node === "boolean") return node;
+  if (typeof node === "string" || typeof node === "number") return node;
+  if (Array.isArray(node)) {
+    return node.map((child, index) => clonePreviewNode(child, `${key}.${index}`));
+  }
   if (!isValidElement(node)) return node;
-  return cloneElement(node as ReactElement, { key });
+  const element = node as ReactElement<{ children?: ReactNode }>;
+  if (element.props?.children !== undefined) {
+    return cloneElement(
+      element,
+      { key },
+      clonePreviewNode(element.props.children, `${key}.c`),
+    );
+  }
+  return cloneElement(element, { key });
 }
 
 export function PrintDocumentHeader({
@@ -439,7 +452,7 @@ export function PaginatedPreview({
           className="print-layout-context pointer-events-none invisible absolute -left-[9999px] top-0"
           style={{ width: metrics.contentW, fontSize: A4_SHEET_STYLE.fontSize, lineHeight: A4_SHEET_STYLE.lineHeight }}
         >
-          <div ref={headerMeasureRef}>{header}</div>
+          <div ref={headerMeasureRef}>{clonePreviewNode(header, "measure-header")}</div>
           {blocks.map((b, i) => (
             <div key={`measure-${b.key}`} ref={(el) => { blockRefs.current[i] = el; }}>
               {clonePreviewNode(b.node, `measure-node-${b.key}`)}
