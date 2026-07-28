@@ -56,6 +56,8 @@ const TABS: { id: FrenchTab; label: string; short: string }[] = [
   { id: "communication", label: "Communication", short: "Comm." },
 ];
 
+const VALID_TABS: FrenchTab[] = ["vocabulaire", "conjugaison", "grammaire", "communication"];
+
 const TAB_TITLES: Record<Exclude<FrenchTab, "general">, string> = {
   vocabulaire: "Vocabulaire",
   conjugaison: "Conjugaison",
