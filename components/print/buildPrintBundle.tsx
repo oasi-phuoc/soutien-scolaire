@@ -303,8 +303,6 @@ function mathExercisePrintItem(
     id: String(ex.id),
     label: `${ex.id}. ${ex.label}`,
     defaultPoints: ex.maxPoints,
-    /** Grouper sur la même page si l’exercice tient entièrement. */
-    forceNewPage: false,
     preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} />,
     correctionPreview: (
       <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} correction />

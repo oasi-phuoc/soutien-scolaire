@@ -740,11 +740,16 @@ export function ImpressionHubClient() {
               theoryNode={theoryNode}
               exerciseNodes={previewBlocks.map((item) => ({
                 key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-corr${item.correction ? 1 : 0}`,
+                /**
+                 * Packing style placement maths : enchaîner les exercices s’ils
+                 * tiennent entièrement sur la page, sinon page suivante.
+                 * Saut forcé uniquement pour (1) le 1er exo après l’annonce,
+                 * (2) le début du corrigé, (3) un exercice qui l’exige.
+                 */
                 forceNewPage: item.correction
                   ? item.displayIndex === 0
-                  : theory && hasAnnouncement
-                    ? item.displayIndex === 0
-                    : item.displayIndex > 0,
+                  : (theory && hasAnnouncement && item.displayIndex === 0)
+                    || item.exercise?.forceNewPage === true,
                 render: () => (
                   <div className="print-exercise">
                     <div

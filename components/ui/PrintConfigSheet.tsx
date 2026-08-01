@@ -70,8 +70,9 @@ export interface PrintExercise {
   /** Points par défaut en mode évaluation (barème du test). */
   defaultPoints?: number;
   /**
-   * Si `false`, l’exercice peut partager une page avec le précédent
-   * tant qu’il tient entièrement (placement maths). Défaut : saut forcé.
+   * Si `true`, force un saut de page avant cet exercice.
+   * Défaut (`undefined` / `false`) : packing style placement maths —
+   * enchaîne sur la page courante si l’exercice tient entièrement, sinon page suivante.
    */
   forceNewPage?: boolean;
   /**
@@ -1219,13 +1220,15 @@ export function PrintConfigSheet({
                 exerciseNodes={previewBlocks.flatMap((block) => {
                   const sectionNodes: { key: string; node: ReactNode; forceNewPage?: boolean }[] = [];
                   const isCorrectionSection = Boolean(block.title);
-                  /** Placement maths : packer sauf 1er exo après l’annonce (page 1 réservée). */
+                  /** Packing par défaut ; saut seulement si opt-in ou 1er exo après l’annonce. */
                   const exerciseBreak = (exercise: PrintExercise | undefined, index: number) => {
-                    if (exercise?.forceNewPage === false) {
-                      if (index === 0 && theory && Boolean(announcementPreview) && !isCorrectionSection) return true;
-                      return false;
+                    if (exercise?.forceNewPage === true) return true;
+                    if (index === 0 && theory && Boolean(announcementPreview) && !isCorrectionSection) {
+                      return true;
                     }
-                    return true;
+                    // Début du corrigé : nouvelle page
+                    if (index === 0 && isCorrectionSection) return true;
+                    return false;
                   };
                   // Pas de page « CORRIGÉ » isolée : le titre est déjà sur chaque exercice (… — Corrigé).
                   block.items.forEach((item, index) => {
