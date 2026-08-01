@@ -46,6 +46,8 @@ const STATIC_AUDIO_DIRS = [
   "assets/words/son_f/vocab",
   "assets/letters/son",
   "assets/expression/co",
+  /** Expression orale E1–E14 (même arborescence que les refs `A1()` / `A2()`). */
+  "assets/expression/communication",
   "audio/nombres",
 ];
 

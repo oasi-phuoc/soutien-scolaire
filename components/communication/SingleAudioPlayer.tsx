@@ -7,7 +7,8 @@ const ACCENT = "var(--color-accent-comm)";
 
 /**
  * Lecteur mono-piste aligné sur CO (`AudioSequencePlayer` + `MediaPlayerBar`).
- * Évite le `<audio controls>` natif, souvent peu fiable sur mobile / gros MP3.
+ * - `preload="metadata"` (comme CO) — pas de prefetch auto des gros MP3
+ * - src assigné au play (network-first via SW pour `/assets/expression/…`)
  */
 export function SingleAudioPlayer({
   src,
@@ -20,6 +21,7 @@ export function SingleAudioPlayer({
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isSeekingRef = useRef(false);
+  const srcRef = useRef(src);
 
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
@@ -28,6 +30,8 @@ export function SingleAudioPlayer({
   const [audioDuration, setAudioDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [error, setError] = useState(false);
+
+  srcRef.current = src;
 
   const stop = useCallback(() => {
     const player = audioRef.current;
@@ -39,6 +43,7 @@ export function SingleAudioPlayer({
     setPaused(false);
     setProgress(0);
     setAudioCurrentTime(0);
+    setAudioDuration(0);
   }, []);
 
   const ensurePlayer = useCallback(() => {
@@ -46,7 +51,7 @@ export function SingleAudioPlayer({
     if (player) return player;
 
     player = new Audio();
-    player.preload = "auto";
+    player.preload = "metadata";
     audioRef.current = player;
 
     player.addEventListener("loadedmetadata", () => {
@@ -81,15 +86,10 @@ export function SingleAudioPlayer({
   useEffect(() => {
     stop();
     setError(false);
-    setAudioDuration(0);
-    const player = ensurePlayer();
-    player.src = src;
-    player.setAttribute("data-src", src);
-    player.load();
     return () => {
-      player.pause();
+      audioRef.current?.pause();
     };
-  }, [src, stop, ensurePlayer]);
+  }, [src, stop]);
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.playbackRate = playbackRate;
@@ -98,9 +98,13 @@ export function SingleAudioPlayer({
   function play() {
     setError(false);
     const player = ensurePlayer();
-    if (!player.getAttribute("data-src") || player.getAttribute("data-src") !== src) {
-      player.src = src;
-      player.setAttribute("data-src", src);
+    const nextSrc = srcRef.current;
+    if (player.getAttribute("data-src") !== nextSrc) {
+      player.src = nextSrc;
+      player.setAttribute("data-src", nextSrc);
+      player.currentTime = 0;
+      setProgress(0);
+      setAudioCurrentTime(0);
     }
     player.playbackRate = playbackRate;
     void player
@@ -129,14 +133,29 @@ export function SingleAudioPlayer({
       pause();
       return;
     }
+    if (paused) {
+      const player = audioRef.current;
+      if (player) {
+        setError(false);
+        player.playbackRate = playbackRate;
+        void player
+          .play()
+          .then(() => {
+            setPlaying(true);
+            setPaused(false);
+          })
+          .catch(() => {
+            setPlaying(false);
+            setError(true);
+          });
+        return;
+      }
+    }
     play();
   }
 
   function restart() {
-    const player = ensurePlayer();
-    player.currentTime = 0;
-    setProgress(0);
-    setAudioCurrentTime(0);
+    stop();
     play();
   }
 

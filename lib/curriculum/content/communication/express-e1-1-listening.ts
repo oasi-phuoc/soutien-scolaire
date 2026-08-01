@@ -1,6 +1,5 @@
 import { buildExpressPool, type ExpressMultiQuestion, type ExpressRawQ } from "./express-listening-helpers";
-
-const A1 = (n: string) => `/assets/expression/communication/A1/${n}.mp3`;
+import { A1 } from "./express-lesson-factory";
 
 export type ExpressListeningAudio = {
   id: string;
