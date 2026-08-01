@@ -115,7 +115,7 @@ export function SuiviClassAssignmentsClient() {
         const levelClasses = grouped[level];
         if (levelClasses.length === 0) return null;
         return (
-          <div key={level} className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
+          <div key={level} className="app-table-scroll overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">

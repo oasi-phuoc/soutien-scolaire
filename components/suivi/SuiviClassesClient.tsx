@@ -157,7 +157,7 @@ export function SuiviClassesClient() {
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
+      <div className="app-table-scroll overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">

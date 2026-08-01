@@ -297,7 +297,7 @@ export function ProfessorAttributionsClient() {
         Une classe ne peut avoir qu&apos;un seul professeur titulaire.
       </p>
 
-      <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
+      <div className="app-table-scroll overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
         <table className="w-full table-auto text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
