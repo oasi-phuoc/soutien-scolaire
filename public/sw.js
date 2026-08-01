@@ -1,4 +1,4 @@
-const CACHE_VERSION = "learnup-offline-v10";
+const CACHE_VERSION = "learnup-offline-v11";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const OFFLINE_META_URL = "/__learnup-offline-meta";
@@ -82,8 +82,12 @@ async function responseBytes(response) {
 
 async function store(cacheName, request, response) {
   if (!canStore(response)) return;
-  const cache = await caches.open(cacheName);
-  await cache.put(request, response.clone());
+  try {
+    const cache = await caches.open(cacheName);
+    await cache.put(request, response.clone());
+  } catch {
+    // Quota / Cache API : ne doit jamais faire échouer la réponse réseau.
+  }
 }
 
 function sameOriginPath(value) {
@@ -327,7 +331,11 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/auth/") || url.pathname.startsWith("/admin")) return;
 
   const isNavigation = request.mode === "navigate" || request.destination === "document";
-  const isCoAudio = url.pathname.startsWith("/assets/expression/co/") && /\.(?:mp3|wav|ogg|m4a|aac)$/i.test(url.pathname);
+  /** CO placement + Expression orale : network-first, sans mise en cache runtime (fichiers lourds). */
+  const isExpressionAudio =
+    (url.pathname.startsWith("/assets/expression/co/")
+      || url.pathname.startsWith("/assets/expression/communication/"))
+    && /\.(?:mp3|wav|ogg|m4a|aac)$/i.test(url.pathname);
   const isStaticAsset = url.pathname.startsWith("/_next/static/")
     || ["style", "script", "image", "font", "audio", "video"].includes(request.destination);
 
@@ -345,7 +353,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (isCoAudio) {
+  if (isExpressionAudio) {
     event.respondWith((async () => {
       try {
         return await fetch(request);

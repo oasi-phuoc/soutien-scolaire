@@ -1,7 +1,6 @@
 import { listeningPoolExercise, type CommunicationLesson } from "./express-types";
 import { E1_1_EVAL_AUDIOS, E1_1_LISTENING_AUDIOS } from "./express-e1-1-listening";
-
-const A1 = (n: string) => `/assets/expression/communication/A1/${n}.mp3`;
+import { A1 } from "./express-lesson-factory";
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * E1-1 — Se présenter
