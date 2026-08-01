@@ -17,16 +17,19 @@ function studentLabel(count: number) {
 export function SuiviLevelBlocks({
   classes,
   classHref = (label) => `/suivi/classes/${encodeURIComponent(label)}`,
+  levels = CLASS_LEVELS,
 }: {
   classes: SuiviLevelClassItem[];
   classHref?: (label: string) => string;
+  /** Niveaux affichés (défaut : tous). */
+  levels?: ClassLevelCode[];
 }) {
   const grouped = groupClassesByLevel(classes);
   const [openLevel, setOpenLevel] = useState<ClassLevelCode | null>(null);
 
   return (
     <div className="divide-y divide-[var(--color-border-default)]">
-      {CLASS_LEVELS.map((level) => {
+      {levels.map((level) => {
         const levelClasses = grouped[level];
         const isOpen = openLevel === level;
         return (
