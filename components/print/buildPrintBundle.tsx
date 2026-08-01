@@ -448,10 +448,11 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
   const lesson = EXPRESS_ORAL_BY_ID[lessonId];
   if (!lesson) return null;
   const pool = lesson.exercisePool ?? [];
-  const picked =
+  const training =
     pool.length > 0
       ? pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, 1)
       : (lesson.exercises ?? []);
+  const picked = [...training, ...(lesson.evalExercises ?? [])];
 
   const dialogueAudio = lesson.theory.find(
     (b): b is Extract<CommunicationTheoryBlock, { type: "dialogue" }> =>
@@ -489,6 +490,44 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
         ex.type === "listening" && ex.audioSrc
           ? [{ id: ex.id, audio: ex.audioSrc, label: ex.audioLabel ?? `Audio ${i + 1}` }]
           : [];
+      const poolPreview =
+        ex.type === "listening" && ex.questionPool?.length
+          ? ex.questionPool.slice(0, ex.questionCount ?? 4).map((q, qi) => {
+              const fmt = q.format ?? (["image", "text", "fill", "vf"] as const)[qi % 4];
+              if (fmt === "fill") {
+                return (
+                  <div key={q.id} className="space-y-1">
+                    <p className="font-medium">{q.fillQ || q.textQ}</p>
+                    <div className="h-6 border-b border-black/40" />
+                  </div>
+                );
+              }
+              if (fmt === "vf") {
+                return (
+                  <div key={q.id} className="space-y-1">
+                    <p className="font-medium">{q.vfQ ?? q.textQ}</p>
+                    <p>a. Vrai &nbsp; b. Faux</p>
+                  </div>
+                );
+              }
+              const choices = fmt === "image" ? q.imageChoices.map((c) => c.label) : q.textChoices;
+              return (
+                <div key={q.id} className="space-y-1">
+                  <p className="font-medium">{fmt === "image" ? q.imageQ : q.textQ}</p>
+                  <ul className="space-y-1">
+                    {choices.map((choice, ci) => (
+                      <li key={`${q.id}-${ci}`} className="flex gap-2">
+                        <span className="w-5 shrink-0 font-bold">
+                          {String.fromCharCode(97 + ci)}.
+                        </span>
+                        <span>{typeof choice === "string" ? choice : choice}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })
+          : null;
       return {
         id: ex.id || String(i),
         label: `Exercice ${i + 1}`,
@@ -496,7 +535,9 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
           <div className="space-y-2 text-sm text-black">
             {qrItems.length > 0 ? <PrintAudioQrRow items={qrItems} /> : null}
             <p className="font-semibold">{ex.instruction}</p>
-            {ex.type === "listening" && ex.items ? (
+            {poolPreview ? (
+              <div className="space-y-3">{poolPreview}</div>
+            ) : ex.type === "listening" && ex.items ? (
               <div className="space-y-3">
                 {ex.items.map((item) => (
                   <div key={item.id}>
@@ -532,15 +573,56 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
           </div>
         ),
         correctionLeadPreview:
-          qrItems.length > 0 ? (
+          qrItems.length > 0 || ex.transcript ? (
             <div className="space-y-2 text-sm text-black">
-              <PrintAudioQrRow items={qrItems} caption="Audio (corrigé)" />
+              {qrItems.length > 0 ? (
+                <PrintAudioQrRow items={qrItems} caption="Audio (corrigé)" />
+              ) : null}
+              {ex.transcript ? (
+                <div className="whitespace-pre-line rounded border border-black/15 p-2 text-xs leading-relaxed">
+                  {ex.transcript}
+                </div>
+              ) : null}
             </div>
           ) : undefined,
         correctionPreview: (
           <div className="space-y-2 text-sm text-black">
             <p className="font-semibold">{ex.instruction}</p>
-            {ex.type === "listening" && ex.items ? (
+            {ex.type === "listening" && ex.questionPool?.length ? (
+              <div className="space-y-2">
+                {ex.questionPool.slice(0, ex.questionCount ?? 4).map((q) => {
+                  const fmt = q.format ?? "text";
+                  if (fmt === "fill") {
+                    return (
+                      <p key={q.id}>
+                        <span className="font-medium">{q.fillQ || q.textQ}</span>{" "}
+                        <span className="font-bold text-amber-700">{q.fillAnswer}</span>
+                      </p>
+                    );
+                  }
+                  if (fmt === "vf") {
+                    return (
+                      <p key={q.id}>
+                        <span className="font-medium">{q.vfQ ?? q.textQ}</span>{" "}
+                        <span className="font-bold text-amber-700">
+                          {(q.vfCorrect ?? 0) === 0 ? "Vrai" : "Faux"}
+                        </span>
+                      </p>
+                    );
+                  }
+                  const ans =
+                    fmt === "image"
+                      ? q.imageChoices[q.imageCorrect]?.label
+                      : q.textChoices[q.textCorrect];
+                  return (
+                    <p key={q.id}>
+                      <span className="font-medium">{fmt === "image" ? q.imageQ : q.textQ}</span>{" "}
+                      <span className="font-bold text-amber-700">{ans}</span>
+                    </p>
+                  );
+                })}
+              </div>
+            ) : ex.type === "listening" && ex.items ? (
               <div className="space-y-2">
                 {ex.items.map((item) => (
                   <p key={item.id}>

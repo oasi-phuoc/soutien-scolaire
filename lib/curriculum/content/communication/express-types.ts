@@ -9,16 +9,19 @@ import {
  * Mise en forme alignée sur les autres leçons (heading / highlight / section / bullets / note / table).
  */
 
+/** Traductions pivot (même modèle que grammaire). */
+export type ExpressTrans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
+
 export type CommunicationTheoryBlock =
-  | { type: "heading"; text: string; black?: boolean }
-  | { type: "subheading"; text: string }
-  | { type: "plain"; text: string }
-  | { type: "numbered"; items: string[] }
-  | { type: "section"; text?: string; items?: string[]; label?: string }
-  | { type: "bullets"; items: string[]; label?: string }
-  | { type: "table"; headers: string[]; rows: string[][]; accentHeader?: boolean }
-  | { type: "note"; text: string }
-  | { type: "highlight"; title: string; items?: string[] }
+  | { type: "heading"; text: string; black?: boolean; trans?: ExpressTrans }
+  | { type: "subheading"; text: string; trans?: ExpressTrans }
+  | { type: "plain"; text: string; trans?: ExpressTrans }
+  | { type: "numbered"; items: string[]; transItems?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>> }
+  | { type: "section"; text?: string; items?: string[]; label?: string; trans?: ExpressTrans; transItems?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>; transLabel?: ExpressTrans }
+  | { type: "bullets"; items: string[]; label?: string; transItems?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>; transLabel?: ExpressTrans }
+  | { type: "table"; headers: string[]; rows: string[][]; accentHeader?: boolean; transHeaders?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>> }
+  | { type: "note"; text: string; trans?: ExpressTrans }
+  | { type: "highlight"; title: string; items?: string[]; trans?: ExpressTrans; transItems?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>> }
   | {
       type: "dialogue";
       lines: Array<{ role: string; text: string; translation?: string }>;
@@ -94,6 +97,10 @@ export type CommunicationLesson = {
    * Ex. `a1-conj-l00` (C1.1), `v1-nationalites` (V1.1).
    */
   prerequisiteFrenchSlugs?: string[];
+  /**
+   * Leçons d'expression orale (ids `E1-1`, …) à valider avant de débloquer celle-ci.
+   */
+  prerequisiteCommIds?: string[];
 };
 
 function mulberry32(seed: number) {

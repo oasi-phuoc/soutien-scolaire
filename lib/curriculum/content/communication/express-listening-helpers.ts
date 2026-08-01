@@ -14,6 +14,8 @@ export type ExpressRawQ = RawQ & {
   vfQ?: string;
   /** 0 = Vrai, 1 = Faux */
   vfC?: 0 | 1;
+  /** Format fixe (évite de rejouer le même fait sous un autre type). */
+  format?: ExpressListeningFormat;
 };
 
 export type ExpressListeningTask = COChoiceTask | COFillTask;
@@ -21,6 +23,11 @@ export type ExpressListeningTask = COChoiceTask | COFillTask;
 export type ExpressMultiQuestion = COMultiQuestion & {
   vfQ?: string;
   vfCorrect?: 0 | 1;
+  /**
+   * Format fixe — si défini, la question n'est jamais tirée sous un autre type.
+   * Obligatoire pour les nouvelles leçons (une question = un format unique).
+   */
+  format?: ExpressListeningFormat;
 };
 
 function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
@@ -37,6 +44,7 @@ export function buildExpressPool(groupSlug: string, items: ExpressRawQ[]): Expre
       ...q,
       vfQ: raw.vfQ,
       vfCorrect: raw.vfC,
+      format: raw.format,
     };
   });
 }
@@ -104,7 +112,11 @@ export function buildExpressListeningTasks(
   return selected.map((q, index) => {
     const imageable = supportsImageFormat(q.imageChoices);
     const hasVf = q.vfCorrect === 0 || q.vfCorrect === 1 || Boolean(q.vfQ);
-    const format = pickExpressListeningFormat(index, seed, q.id, imageable, hasVf);
+    let format: ExpressListeningFormat =
+      q.format ?? pickExpressListeningFormat(index, seed, q.id, imageable, hasVf);
+    // Si format fixe impossible (image non résolue), repli texte — jamais un autre type « inventé ».
+    if (format === "image" && !imageable) format = "text";
+    if (format === "vf" && !hasVf) format = "text";
     return multiToExpressTask(q, format, `${seed}-${q.id}-${index}`);
   });
 }
