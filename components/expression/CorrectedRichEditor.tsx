@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   hasCorrectedContent,
   looksLikeHtml,
@@ -8,23 +8,9 @@ import {
   sanitizeCorrectedHtml,
 } from "@/lib/curriculum/content/communication/sanitize-corrected-html";
 
-const TEXT_COLORS = [
-  { label: "Noir", value: "#171717" },
-  { label: "Rouge", value: "#dc2626" },
-  { label: "Orange", value: "#d97706" },
-  { label: "Vert", value: "#059669" },
-  { label: "Bleu", value: "#2563eb" },
-  { label: "Violet", value: "#7c3aed" },
-] as const;
-
-const HIGHLIGHT_COLORS = [
-  { label: "Aucun", value: "transparent" },
-  { label: "Jaune", value: "#fde68a" },
-  { label: "Rose", value: "#fecdd3" },
-  { label: "Vert", value: "#bbf7d0" },
-  { label: "Bleu", value: "#bfdbfe" },
-  { label: "Orange", value: "#fed7aa" },
-] as const;
+/** Couleurs fixes de la correction : texte rouge, surlignage ambre. */
+const TEXT_COLOR = "#dc2626";
+const HIGHLIGHT_COLOR = "#fde68a";
 
 function runCommand(command: string, value?: string) {
   try {
@@ -99,128 +85,20 @@ function IconHighlight({ color }: { color: string }) {
   );
 }
 
-function ColorSwatchButton({
-  color,
-  label,
-  selected,
-  onPick,
-  checkerboard,
-}: {
-  color: string;
-  label: string;
-  selected: boolean;
-  onPick: () => void;
-  checkerboard?: boolean;
-}) {
+function IconEraser() {
   return (
-    <button
-      type="button"
-      title={label}
-      aria-label={label}
-      aria-pressed={selected}
-      onMouseDown={(e) => {
-        e.preventDefault();
-        onPick();
-      }}
-      className={`h-7 w-7 rounded-md border-2 shadow-sm transition-transform hover:scale-105 ${
-        selected ? "border-zinc-800 ring-1 ring-zinc-800/30" : "border-white"
-      }`}
-      style={{
-        background: checkerboard || color === "transparent" ? "#fff" : color,
-        backgroundImage:
-          checkerboard || color === "transparent"
-            ? "linear-gradient(45deg,#d4d4d8 25%,transparent 25%,transparent 75%,#d4d4d8 75%),linear-gradient(45deg,#d4d4d8 25%,transparent 25%,transparent 75%,#d4d4d8 75%)"
-            : undefined,
-        backgroundSize: checkerboard || color === "transparent" ? "8px 8px" : undefined,
-        backgroundPosition: checkerboard || color === "transparent" ? "0 0, 4px 4px" : undefined,
-      }}
-    />
-  );
-}
-
-type PanelKind = "text" | "highlight" | null;
-
-function ColorPickerButton({
-  kind,
-  open,
-  onToggle,
-  onClose,
-  currentColor,
-  colors,
-  onPick,
-  title,
-  icon,
-}: {
-  kind: "text" | "highlight";
-  open: boolean;
-  onToggle: () => void;
-  onClose: () => void;
-  currentColor: string;
-  colors: readonly { label: string; value: string }[];
-  onPick: (color: string) => void;
-  title: string;
-  icon: React.ReactNode;
-}) {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const borderColor = currentColor === "transparent" ? "#a1a1aa" : currentColor;
-
-  useEffect(() => {
-    if (!open) return;
-    function onPointerDown(event: MouseEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) onClose();
-    }
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-    }
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open, onClose]);
-
-  return (
-    <div ref={rootRef} className="relative">
-      <button
-        type="button"
-        title={title}
-        aria-label={title}
-        aria-expanded={open}
-        aria-haspopup="dialog"
-        onMouseDown={(e) => {
-          e.preventDefault();
-          onToggle();
-        }}
-        className="inline-flex h-8 min-w-8 items-center justify-center rounded-md border-2 bg-white px-1.5 text-[var(--color-text-primary)] transition-colors hover:bg-amber-50"
-        style={{ borderColor }}
-      >
-        {icon}
-      </button>
-      {open && (
-        <div
-          role="dialog"
-          aria-label={title}
-          className="absolute left-0 top-full z-30 mt-1 min-w-[9.5rem] rounded-lg border border-zinc-200 bg-white p-2 shadow-lg"
-        >
-          <div className="grid grid-cols-3 gap-1.5">
-            {colors.map((c) => (
-              <ColorSwatchButton
-                key={`${kind}-${c.value}`}
-                color={c.value}
-                label={c.label}
-                selected={c.value === currentColor}
-                checkerboard={c.value === "transparent"}
-                onPick={() => {
-                  onPick(c.value);
-                  onClose();
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden className="block">
+      <path
+        d="M8.5 19 3.7 14.2a2 2 0 0 1 0-2.8l7.8-7.8a2 2 0 0 1 2.8 0l5.5 5.5a2 2 0 0 1 0 2.8L13 19"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M7 9.9 14.1 17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M5 21h16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
   );
 }
 
@@ -271,9 +149,6 @@ export function CorrectedRichEditor({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const seeded = useRef(false);
-  const [textColor, setTextColor] = useState("#dc2626");
-  const [highlightColor, setHighlightColor] = useState("#fde68a");
-  const [openPanel, setOpenPanel] = useState<PanelKind>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -294,24 +169,26 @@ export function CorrectedRichEditor({
     emit();
   }
 
-  function applyTextColor(color: string) {
-    setTextColor(color);
+  function applyTextColor() {
     ref.current?.focus();
-    runCommand("foreColor", color);
+    runCommand("foreColor", TEXT_COLOR);
     emit();
   }
 
-  function applyHighlight(color: string) {
-    setHighlightColor(color);
+  function applyHighlight() {
     ref.current?.focus();
-    if (color === "transparent") {
-      // Retire le fond sans tout effacer si possible
-      runCommand("hiliteColor", "transparent");
-      runCommand("backColor", "transparent");
-    } else {
-      runCommand("hiliteColor", color);
-      runCommand("backColor", color);
-    }
+    runCommand("hiliteColor", HIGHLIGHT_COLOR);
+    runCommand("backColor", HIGHLIGHT_COLOR);
+    emit();
+  }
+
+  /** Gomme : retire toute la mise en forme de la sélection (gras, italique,
+      souligné, barré, couleur du texte et surlignage). */
+  function clearFormatting() {
+    ref.current?.focus();
+    runCommand("removeFormat");
+    runCommand("hiliteColor", "transparent");
+    runCommand("backColor", "transparent");
     emit();
   }
 
@@ -333,28 +210,15 @@ export function CorrectedRichEditor({
           <span className="line-through">abc</span>
         </ToolBtn>
         <span className="mx-1 h-5 w-px bg-amber-200" aria-hidden />
-        <ColorPickerButton
-          kind="text"
-          title="Couleur du texte"
-          open={openPanel === "text"}
-          onToggle={() => setOpenPanel((p) => (p === "text" ? null : "text"))}
-          onClose={() => setOpenPanel(null)}
-          currentColor={textColor}
-          colors={TEXT_COLORS}
-          onPick={applyTextColor}
-          icon={<IconTextColor color={textColor} />}
-        />
-        <ColorPickerButton
-          kind="highlight"
-          title="Couleur de surlignage"
-          open={openPanel === "highlight"}
-          onToggle={() => setOpenPanel((p) => (p === "highlight" ? null : "highlight"))}
-          onClose={() => setOpenPanel(null)}
-          currentColor={highlightColor}
-          colors={HIGHLIGHT_COLORS}
-          onPick={applyHighlight}
-          icon={<IconHighlight color={highlightColor} />}
-        />
+        <ToolBtn title="Texte en rouge" onClick={applyTextColor}>
+          <IconTextColor color={TEXT_COLOR} />
+        </ToolBtn>
+        <ToolBtn title="Surligner en ambre" onClick={applyHighlight}>
+          <IconHighlight color={HIGHLIGHT_COLOR} />
+        </ToolBtn>
+        <ToolBtn title="Effacer la mise en forme" onClick={clearFormatting}>
+          <IconEraser />
+        </ToolBtn>
       </div>
       <div className="relative">
         {empty && placeholder && (
