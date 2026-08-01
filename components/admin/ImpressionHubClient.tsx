@@ -304,6 +304,7 @@ export function ImpressionHubClient() {
         occurrences: 1,
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
         columns: 1 as PrintExerciseColumns,
+        spacing: 3,
         points: Math.max(1, ex.defaultPoints ?? 1),
       })),
     );
@@ -685,6 +686,18 @@ export function ImpressionHubClient() {
                                 </div>
                               </>
                             )}
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-xs text-[var(--color-text-secondary)]">
+                                Espacement
+                              </span>
+                              <Counter
+                                value={sel.spacing}
+                                accent={accent}
+                                min={1}
+                                max={5}
+                                onChange={(spacing) => patchSelection(ex.id, { spacing })}
+                              />
+                            </div>
                             {evalMode && (
                               <div className="flex items-center justify-between gap-3">
                                 <span className="text-xs text-[var(--color-text-secondary)]">Points</span>
@@ -743,7 +756,7 @@ export function ImpressionHubClient() {
               }
               theoryNode={theoryNode}
               exerciseNodes={previewBlocks.map((item) => ({
-                key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-corr${item.correction ? 1 : 0}`,
+                key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-corr${item.correction ? 1 : 0}`,
                 /**
                  * Packing style placement maths : enchaîner les exercices s’ils
                  * tiennent entièrement sur la page, sinon page suivante.
@@ -770,7 +783,7 @@ export function ImpressionHubClient() {
                       )}
                     </div>
                     <PrintExerciseBody
-                      key={`${item.key}-body-q${item.selection.questionCount}-c${item.selection.columns}-o${item.occurrence}-corr${item.correction ? 1 : 0}`}
+                      key={`${item.key}-body-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-o${item.occurrence}-corr${item.correction ? 1 : 0}`}
                       selection={item.selection}
                       answerKey={item.correction}
                     >

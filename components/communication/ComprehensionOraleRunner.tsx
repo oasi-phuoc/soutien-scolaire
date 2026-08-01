@@ -727,15 +727,14 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
 function ImagePlaceholder({ label, path, compact }: { label: string; path?: string; compact?: boolean }) {
   const src = ceCoImageSource(path, label);
   const [failed, setFailed] = useState(false);
-  const heightCls = compact ? "h-20" : "h-24";
   if (src && !failed) {
     return (
-      <div className={`relative w-full overflow-hidden rounded-lg bg-white ${heightCls}`} title={label}>
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white" title={label}>
         <Image
           src={src}
           alt={label}
           fill
-          className="object-contain p-1"
+          className="object-cover"
           sizes="(max-width: 640px) 40vw, 160px"
           onError={() => setFailed(true)}
         />
@@ -744,7 +743,7 @@ function ImagePlaceholder({ label, path, compact }: { label: string; path?: stri
   }
   return (
     <div
-      className={`flex w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-center font-semibold text-slate-500 ${heightCls} ${compact ? "text-xs" : "text-sm"}`}
+      className={`flex aspect-[4/3] w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-center font-semibold text-slate-500 ${compact ? "text-xs" : "text-sm"}`}
       data-image-path={path}
       title={path}
     >
@@ -764,7 +763,7 @@ function ObjectCardImage({ src, alt, compact }: { src?: string; alt: string; com
           src={resolved}
           alt={alt}
           fill
-          className="object-contain p-1"
+          className="object-cover"
           sizes={compact ? "(max-width: 640px) 20vw, 100px" : "(max-width: 640px) 30vw, 160px"}
           onError={() => setFailed(true)}
         />
@@ -902,7 +901,7 @@ function ChoiceQuestionView({
             disabled={correction}
             onClick={() => onChange(origIndex)}
             aria-label={task.image ? `${String.fromCharCode(97 + displayIndex)}. ${choice.label}` : undefined}
-            className={`rounded-xl border px-2 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
+            className={`rounded-xl border text-left text-sm transition ${task.image ? "flex flex-col items-stretch overflow-hidden p-0" : "w-full px-2 py-2"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
           >
             {task.image ? (
               <ImagePlaceholder label={choice.label} path={choice.image} compact />

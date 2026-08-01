@@ -11,6 +11,7 @@ import {
   PaginatedPreview,
   PrintDocumentFooter,
   PrintDocumentHeader,
+  printSpacingProps,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -276,6 +277,7 @@ export function ImpressionsClient() {
         occurrences: 1,
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 8),
         columns: 1,
+        spacing: 3,
         points: ex.defaultPoints ?? 1,
       })),
     );
@@ -618,24 +620,40 @@ export function ImpressionsClient() {
                             </span>
                           </div>
                           {sel.included && (
-                            <div className="mt-2 flex items-center justify-between gap-2 pl-9">
-                              <span className="text-[11px] text-[var(--color-text-secondary)]">Occurrences</span>
-                              <Counter
-                                value={sel.occurrences}
-                                accent={accent}
-                                min={1}
-                                onChange={(occurrences) =>
-                                  setSelection((prev) =>
-                                    prev.map((s) =>
-                                      s.id === ex.id
-                                        ? { ...s, occurrences, included: occurrences > 0 }
-                                        : s,
-                                    ),
-                                  )
-                                }
-                              />
+                            <div className="mt-2 space-y-2 pl-9">
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">Occurrences</span>
+                                <Counter
+                                  value={sel.occurrences}
+                                  accent={accent}
+                                  min={1}
+                                  onChange={(occurrences) =>
+                                    setSelection((prev) =>
+                                      prev.map((s) =>
+                                        s.id === ex.id
+                                          ? { ...s, occurrences, included: occurrences > 0 }
+                                          : s,
+                                      ),
+                                    )
+                                  }
+                                />
+                              </div>
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">Espacement</span>
+                                <Counter
+                                  value={sel.spacing}
+                                  accent={accent}
+                                  min={1}
+                                  max={5}
+                                  onChange={(spacing) =>
+                                    setSelection((prev) =>
+                                      prev.map((s) => (s.id === ex.id ? { ...s, spacing } : s)),
+                                    )
+                                  }
+                                />
+                              </div>
                               {evalMode && (
-                                <>
+                                <div className="flex items-center justify-between gap-2">
                                   <span className="text-[11px] text-[var(--color-text-secondary)]">Pts</span>
                                   <Counter
                                     value={sel.points}
@@ -648,7 +666,7 @@ export function ImpressionsClient() {
                                       )
                                     }
                                   />
-                                </>
+                                </div>
                               )}
                             </div>
                           )}
@@ -692,36 +710,42 @@ export function ImpressionsClient() {
                 />
               }
               theoryNode={theoryNode}
-              exerciseNodes={previewBlocks.map((item) => ({
-                key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-corr${item.correction ? 1 : 0}`,
-                /** Packing style placement maths (voir ImpressionHubClient). */
-                forceNewPage: item.correction
-                  ? item.displayIndex === 0
-                  : Boolean(item.forceNewPage && item.displayIndex === 0)
-                    || item.exercise?.forceNewPage === true,
-                render: () => (
-                  <div className="print-exercise">
-                    <div
-                      className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"
-                      style={{ color: accent }}
-                    >
-                      <span className="flex-1">
-                        Exercice {item.displayIndex + 1}{item.correction ? " — Corrigé" : ""}
-                      </span>
-                      {evalMode && (
-                        <span style={{ color: "black" }}>
-                          {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+              exerciseNodes={previewBlocks.map((item) => {
+                const spacingProps = printSpacingProps(item.selection.spacing);
+                return {
+                  key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-corr${item.correction ? 1 : 0}`,
+                  /** Packing style placement maths (voir ImpressionHubClient). */
+                  forceNewPage: item.correction
+                    ? item.displayIndex === 0
+                    : Boolean(item.forceNewPage && item.displayIndex === 0)
+                      || item.exercise?.forceNewPage === true,
+                  render: () => (
+                    <div className="print-exercise">
+                      <div
+                        className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"
+                        style={{ color: accent }}
+                      >
+                        <span className="flex-1">
+                          Exercice {item.displayIndex + 1}{item.correction ? " — Corrigé" : ""}
                         </span>
-                      )}
+                        {evalMode && (
+                          <span style={{ color: "black" }}>
+                            {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                          </span>
+                        )}
+                      </div>
+                      <div
+                        className={`print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none${item.correction ? " print-answer-key" : ""}${spacingProps.className}`}
+                        style={spacingProps.style}
+                      >
+                        {(item.correction
+                          ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
+                          : item.exercise?.preview) ?? <div className="h-7 border-b border-black/40" />}
+                      </div>
                     </div>
-                    <div className={`print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none${item.correction ? " print-answer-key" : ""}`}>
-                      {(item.correction
-                        ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
-                        : item.exercise?.preview) ?? <div className="h-7 border-b border-black/40" />}
-                    </div>
-                  </div>
-                ),
-              }))}
+                  ),
+                };
+              })}
             />
           )}
           <span className="hidden">

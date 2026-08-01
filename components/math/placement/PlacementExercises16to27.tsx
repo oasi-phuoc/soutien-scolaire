@@ -667,7 +667,10 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
       <PlacementInstruction text="Posez et effectuez les calculs en colonnes." />
       <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {data.map((q, i) => (
-          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+          <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
+              {q.aStr} {q.op === "+" ? "+" : "−"} {q.bStr}
+            </div>
             <DecColGridFull
               aStr={q.aStr} bStr={q.bStr} op={q.op}
               aAnswers={aAnswers[i]!}
@@ -898,7 +901,10 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
       <PlacementInstruction text="Posez et effectuez les multiplications en colonnes." />
       <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {data.map((q, i) => (
-          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+          <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
+              {q.aStr} × {q.bStr}
+            </div>
             <DecMulGridFull
               aStr={q.aStr} bStr={q.bStr} aInt={q.aInt} bInt={q.bInt}
               cells={cells[i]!}

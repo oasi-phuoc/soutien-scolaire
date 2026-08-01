@@ -14,9 +14,12 @@ import { SingleAudioPlayer } from "@/components/communication/SingleAudioPlayer"
 import { AppSelect } from "@/components/ui/AppSelect";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import {
+  EvalExerciseResultList,
+  EvalExerciseResultRow,
   EvalResultsHint,
   EvalResultsSummary,
 } from "@/components/ui/EvalResultsUI";
+import { EvalRevealContext, useEvalReveal } from "@/lib/eval-reveal-context";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   type CommunicationExercise,
@@ -48,8 +51,38 @@ import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import type { ExpressTrans } from "@/lib/curriculum/content/communication/express-types";
+import {
+  buildExpressListeningTasks,
+  scoreExpressListeningTasks,
+} from "@/lib/curriculum/content/communication/express-listening-helpers";
 
 const ACCENT = "var(--color-accent-comm)";
+
+/** Score détaillé d'un exercice (page de résultats) : bonnes réponses / total. */
+function exerciseResultStats(
+  ex: CommunicationExercise,
+  stored: string | null,
+  fallbackSeed: string,
+): { correct: number; total: number } {
+  if (ex.type === "listening" && ex.questionPool?.length) {
+    let payload: { seed?: string; answers?: Record<string, number | string | null> } = {};
+    try {
+      payload = stored ? (JSON.parse(stored) as typeof payload) : {};
+    } catch {
+      payload = {};
+    }
+    const seed = payload.seed ?? fallbackSeed;
+    const tasks = buildExpressListeningTasks(
+      ex.questionPool,
+      ex.questionCount ?? 5,
+      `${ex.id}-${seed}`,
+    );
+    const { correct, total } = scoreExpressListeningTasks(tasks, payload.answers ?? {});
+    return { correct, total: Math.max(1, total) };
+  }
+  const ratio = scoreCommunicationExercise(ex, stored);
+  return { correct: ratio >= 0.999 ? 1 : 0, total: 1 };
+}
 
 function pickExpressTrans(trans: ExpressTrans | undefined, pivot: string, show: boolean): string | undefined {
   if (!show || !trans || pivot === "fr") return undefined;
@@ -685,6 +718,9 @@ function MCQExercise({
   setSelected: (v: string | null) => void;
   validated: boolean;
 }) {
+  /** En évaluation, la correction n'est révélée que sur la page de résultats. */
+  const reveal = useEvalReveal();
+  const showCorrection = validated && reveal;
   const isCorrect = selected === answer;
 
   return (
@@ -699,7 +735,7 @@ function MCQExercise({
         {choices.map((c) => {
           let cls =
             "w-full rounded-[var(--radius-md)] border-2 px-4 py-3 text-left text-sm font-medium transition-colors";
-          if (!validated) {
+          if (!showCorrection) {
             if (selected === c) {
               cls += " text-white border-transparent";
             } else {
@@ -728,7 +764,7 @@ function MCQExercise({
               }}
               className={cls}
               style={
-                !validated && selected === c
+                !showCorrection && selected === c
                   ? { background: ACCENT, borderColor: ACCENT }
                   : undefined
               }
@@ -739,7 +775,7 @@ function MCQExercise({
         })}
       </div>
 
-      {validated && (
+      {showCorrection && (
         <div
           className={`mt-4 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium ${
             isCorrect
@@ -769,6 +805,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const lesson = LESSONS[lessonId];
   const [lessonSeed] = useState(() => String(Date.now() % 100000));
+  /** Seeds par exercice (entraînement) — le bouton refresh re-randomise le tirage. */
+  const [exerciseSeeds, setExerciseSeeds] = useState<Record<string, string>>({});
+  /** Exercice sélectionné sur la page de résultats (correction dépliée). */
+  const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
 
   const [{ trainingExercises, evalExercises }] = useState(() => {
     if (!lesson || lesson.writingLevel) return { trainingExercises: [] as CommunicationExercise[], evalExercises: [] as CommunicationExercise[] };
@@ -918,6 +958,14 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setEvalValidated((prev) => prev.map((v, i) => (i === evalIndex ? false : v)));
       return;
     }
+    // Entraînement : re-randomise le tirage de l'exercice courant.
+    const ex = trainingExercises[exIndex];
+    if (ex) {
+      setExerciseSeeds((prev) => ({
+        ...prev,
+        [ex.id]: String((Date.now() + exIndex * 7919) % 100000),
+      }));
+    }
     setAnswers((prev) => prev.map((a, i) => (i === exIndex ? null : a)));
     setValidated((prev) => prev.map((v, i) => (i === exIndex ? false : v)));
   }
@@ -1056,10 +1104,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     if (ex.type === "listening") {
       return (
         <ExpressListeningExercise
-          key={`${ex.id}-${phase}`}
+          key={`${ex.id}-${phase}-${exerciseSeeds[ex.id] ?? ""}`}
           exercise={ex}
           exNum={index + 1}
-          seed={lessonSeed}
+          seed={exerciseSeeds[ex.id] ?? lessonSeed}
           selected={selected}
           setSelected={(v) => {
             if (phase === "eval") {
@@ -1262,7 +1310,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       )}
 
       {phase === "eval" && evalExercises[evalIndex] && (
-        renderOralExercise(evalExercises[evalIndex]!, evalIndex, evalExercises.length)
+        <EvalRevealContext.Provider value={false}>
+          {renderOralExercise(evalExercises[evalIndex]!, evalIndex, evalExercises.length)}
+        </EvalRevealContext.Provider>
       )}
 
       {phase === "score" && (
@@ -1275,24 +1325,51 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
             passed={passed}
           />
           <EvalResultsHint />
-          <ul className="space-y-2">
+          {/* Comme grammaire / vocabulaire / conjugaison : les exercices se
+              déroulent sur la page de résultats avec les bonnes réponses. */}
+          <EvalExerciseResultList>
             {scoredExercises.map((ex, i) => {
-              const ok = results[i] ?? false;
+              const stored = (hasEval ? evalAnswers[i] : answers[i]) ?? null;
+              const stats = exerciseResultStats(ex, stored, lessonSeed);
+              const isSelectedResult = selectedResultIdx === i;
               return (
-                <li
+                <EvalExerciseResultRow
                   key={ex.id}
-                  className="flex items-center justify-between rounded-xl border border-[var(--color-border-default)] px-3 py-2 text-sm"
+                  index={i}
+                  correct={stats.correct}
+                  total={stats.total}
+                  accent={ACCENT}
+                  isSelected={isSelectedResult}
+                  onToggle={() => setSelectedResultIdx(isSelectedResult ? null : i)}
                 >
-                  <span className="font-medium text-[var(--color-text-primary)]">
-                    {ex.audioLabel ?? `Exercice ${i + 1}`}
-                  </span>
-                  <span className={ok ? "font-bold text-amber-700" : "font-bold text-red-600"}>
-                    {ok ? "Réussi" : "À revoir"}
-                  </span>
-                </li>
+                  <EvalRevealContext.Provider value={true}>
+                    {ex.type === "listening" ? (
+                      <ExpressListeningExercise
+                        exercise={ex}
+                        exNum={i + 1}
+                        seed={lessonSeed}
+                        selected={stored}
+                        setSelected={() => {}}
+                        validated
+                      />
+                    ) : (
+                      <MCQExercise
+                        question={ex.question ?? ""}
+                        instruction={ex.instruction}
+                        choices={ex.choices ?? []}
+                        answer={ex.answer ?? ""}
+                        exNum={i + 1}
+                        total={scoredExercises.length}
+                        selected={stored}
+                        setSelected={() => {}}
+                        validated
+                      />
+                    )}
+                  </EvalRevealContext.Provider>
+                </EvalExerciseResultRow>
               );
             })}
-          </ul>
+          </EvalExerciseResultList>
           <button
             type="button"
             onClick={() => {
@@ -1330,18 +1407,21 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
 
             {showExerciseControls ? (
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  disabled={currentExValidated || grammarChecking}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
-                  aria-label="Réinitialiser"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M1 4v6h6" />
-                    <path d="M3.51 15a9 9 0 1 0 .49-4" />
-                  </svg>
-                </button>
+                {phase !== "eval" && (
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    disabled={grammarChecking}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
+                    aria-label="Nouvelles questions"
+                    title="Nouvelles questions"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M1 4v6h6" />
+                      <path d="M3.51 15a9 9 0 1 0 .49-4" />
+                    </svg>
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => void handleValidate()}

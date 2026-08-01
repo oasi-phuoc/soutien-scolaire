@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { COTranscriptView } from "@/components/communication/COTranscriptView";
 import { SingleAudioPlayer } from "@/components/communication/SingleAudioPlayer";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 import {
   buildExpressListeningTasks,
@@ -37,12 +38,12 @@ function ImageChoice({ label, path }: { label: string; path?: string }) {
   const [failed, setFailed] = useState(false);
   if (src && !failed) {
     return (
-      <div className="relative h-20 w-full overflow-hidden rounded-lg bg-white" title={label}>
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-white" title={label}>
         <Image
           src={src}
           alt={label}
           fill
-          className="object-contain p-1"
+          className="object-cover"
           sizes="(max-width: 640px) 40vw, 160px"
           onError={() => setFailed(true)}
         />
@@ -50,7 +51,7 @@ function ImageChoice({ label, path }: { label: string; path?: string }) {
     );
   }
   return (
-    <div className="flex h-20 w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-center text-xs font-semibold text-slate-500">
+    <div className="flex aspect-[4/3] w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-center text-xs font-semibold text-slate-500">
       {label}
     </div>
   );
@@ -61,11 +62,14 @@ function ChoiceView({
   value,
   onChange,
   correction,
+  locked = false,
 }: {
   task: Extract<ExpressListeningTask, { kind: "choice" }>;
   value: number | string | null;
   onChange: (value: number) => void;
   correction: boolean;
+  /** Réponses verrouillées (validé) sans forcément révéler la correction. */
+  locked?: boolean;
 }) {
   const orderKey = `${task.prompt}|${task.choices.map((c) => c.label).join("|")}|${task.correct}`;
   const [order, setOrder] = useState<number[] | null>(null);
@@ -87,10 +91,10 @@ function ChoiceView({
           <button
             key={`${choice.label}-${origIndex}`}
             type="button"
-            disabled={correction}
+            disabled={correction || locked}
             onClick={() => onChange(origIndex)}
-            className={`rounded-xl border px-2 py-2 text-left text-sm transition ${
-              task.image ? "flex flex-col items-center p-1.5" : "w-full"
+            className={`rounded-xl border text-left text-sm transition ${
+              task.image ? "flex flex-col items-stretch overflow-hidden p-0" : "w-full px-2 py-2"
             } ${
               correct
                 ? "border-amber-400 bg-amber-50 text-amber-700"
@@ -121,11 +125,14 @@ function FillView({
   value,
   onChange,
   correction,
+  locked = false,
 }: {
   task: Extract<ExpressListeningTask, { kind: "fill" }>;
   value: number | string | null;
   onChange: (value: string) => void;
   correction: boolean;
+  /** Réponses verrouillées (validé) sans forcément révéler la correction. */
+  locked?: boolean;
 }) {
   const inputValue = typeof value === "string" ? value : "";
   const stem = task.stem ?? "_________";
@@ -151,7 +158,8 @@ function FillView({
             type="text"
             value={inputValue}
             onChange={(e) => onChange(e.target.value)}
-            className="min-w-[6rem] border-0 border-b-2 border-[var(--color-accent-comm)]/60 bg-transparent px-1 pb-0.5 text-sm outline-none focus:border-[var(--color-accent-comm)]"
+            disabled={locked}
+            className="min-w-[6rem] border-0 border-b-2 border-[var(--color-accent-comm)]/60 bg-transparent px-1 pb-0.5 text-sm outline-none focus:border-[var(--color-accent-comm)] disabled:opacity-70"
             autoComplete="off"
             spellCheck={false}
           />
@@ -181,16 +189,8 @@ export function ExpressListeningExercise({
   validated: boolean;
 }) {
   const [showTranscript, setShowTranscript] = useState(false);
-  const tasks = useMemo(() => {
-    if (exercise.questionPool?.length) {
-      return buildExpressListeningTasks(
-        exercise.questionPool,
-        exercise.questionCount ?? 5,
-        `${exercise.id}-${seed}`,
-      );
-    }
-    return [] as ExpressListeningTask[];
-  }, [exercise, seed]);
+  /** En évaluation, la correction n'est révélée que sur la page de résultats. */
+  const reveal = useEvalReveal();
 
   const payload = useMemo(() => {
     if (!selected) return { seed, answers: {} as Record<string, number | string | null> };
@@ -207,6 +207,20 @@ export function ExpressListeningExercise({
       return { seed, answers: {} as Record<string, number | string | null> };
     }
   }, [selected, seed]);
+
+  // Tirage sur la seed des réponses enregistrées (stable au remontage —
+  // page de résultats) sinon sur la seed active (re-randomisation).
+  const drawSeed = payload.seed;
+  const tasks = useMemo(() => {
+    if (exercise.questionPool?.length) {
+      return buildExpressListeningTasks(
+        exercise.questionPool,
+        exercise.questionCount ?? 5,
+        `${exercise.id}-${drawSeed}`,
+      );
+    }
+    return [] as ExpressListeningTask[];
+  }, [exercise, drawSeed]);
 
   function setAnswer(index: number, value: number | string) {
     if (validated) return;
@@ -230,7 +244,8 @@ export function ExpressListeningExercise({
     );
   }
 
-  const score = validated ? scoreExpressListeningTasks(tasks, payload.answers) : null;
+  const showCorrection = validated && reveal;
+  const score = showCorrection ? scoreExpressListeningTasks(tasks, payload.answers) : null;
 
   return (
     <div className="flex flex-1 flex-col">
@@ -283,21 +298,23 @@ export function ExpressListeningExercise({
                 task={task}
                 value={payload.answers[String(i)] ?? null}
                 onChange={(v) => setAnswer(i, v)}
-                correction={validated}
+                correction={showCorrection}
+                locked={validated}
               />
             ) : (
               <FillView
                 task={task}
                 value={payload.answers[String(i)] ?? null}
                 onChange={(v) => setAnswer(i, v)}
-                correction={validated}
+                correction={showCorrection}
+                locked={validated}
               />
             )}
           </div>
         ))}
       </div>
 
-      {validated && score ? (
+      {showCorrection && score ? (
         <div
           className={`mt-4 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium ${
             score.correct === score.total
@@ -328,6 +345,8 @@ function LegacyListeningItems({
   setSelected: (v: string | null) => void;
   validated: boolean;
 }) {
+  const reveal = useEvalReveal();
+  const showCorrection = validated && reveal;
   const items = exercise.items ?? [];
   let answersMap: Record<string, string> = {};
   try {
@@ -359,8 +378,8 @@ function LegacyListeningItems({
               <div className="space-y-2">
                 {item.choices.map((c) => {
                   const selectedChoice = chosen === c;
-                  const correct = validated && c === item.answer;
-                  const wrong = validated && selectedChoice && !correct;
+                  const correct = showCorrection && c === item.answer;
+                  const wrong = showCorrection && selectedChoice && !correct;
                   return (
                     <button
                       key={c}

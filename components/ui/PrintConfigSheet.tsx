@@ -93,7 +93,32 @@ export interface ExercisePrintSelection {
   questionCount: number;
   /** Colonnes pour répartir les questions (1–3). */
   columns: PrintExerciseColumns;
+  /** Espacement vertical entre les questions (1 = serré … 5 = aéré, 3 = défaut). */
+  spacing: number;
   points: number;
+}
+
+/** Échelle d'espacement appliquée aux listes de questions imprimées. */
+export const PRINT_SPACING_DEFAULT = 3;
+const PRINT_SPACING_SCALE: Record<number, number> = {
+  1: 0.35,
+  2: 0.65,
+  3: 1,
+  4: 1.5,
+  5: 2.1,
+};
+
+/** Props de wrapper (classe + variable CSS) pour un espacement personnalisé. */
+export function printSpacingProps(spacing: number | undefined): {
+  className: string;
+  style?: CSSProperties;
+} {
+  const s = spacing ?? PRINT_SPACING_DEFAULT;
+  if (s === PRINT_SPACING_DEFAULT) return { className: "" };
+  return {
+    className: " print-q-spacing",
+    style: { "--print-q-scale": PRINT_SPACING_SCALE[s] ?? 1 } as CSSProperties,
+  };
 }
 
 export interface PrintHeaderConfig {
@@ -158,11 +183,12 @@ export function PrintExerciseBody({
   answerKey?: boolean;
   children: ReactNode;
 }) {
+  const spacing = printSpacingProps(selection.spacing);
   return (
     <PrintExerciseLayoutProvider
       value={{ questionCount: selection.questionCount, columns: selection.columns }}
     >
-      <div className={printExContentClass(answerKey)}>
+      <div className={`${printExContentClass(answerKey)}${spacing.className}`} style={spacing.style}>
         {children}
       </div>
     </PrintExerciseLayoutProvider>
@@ -648,6 +674,7 @@ export function PrintConfigSheet({
       occurrences: 1,
       questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
       columns: 1 as PrintExerciseColumns,
+      spacing: 3,
       points: Math.max(1, ex.defaultPoints ?? 1),
     }))
   );
@@ -707,6 +734,9 @@ export function PrintConfigSheet({
 
   const setColumns = (id: string, columns: PrintExerciseColumns) =>
     setSelection((prev) => prev.map((s) => s.id === id ? { ...s, columns } : s));
+
+  const setSpacing = (id: string, spacing: number) =>
+    setSelection((prev) => prev.map((s) => s.id === id ? { ...s, spacing } : s));
 
   const setExercisePoints = (id: string, points: number) =>
     setSelection((prev) => prev.map((item) => item.id === id ? { ...item, points } : item));
@@ -1094,6 +1124,18 @@ export function PrintConfigSheet({
                             </div>
                           </>
                         )}
+                        {sel.occurrences > 0 && (
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="text-xs text-[var(--color-text-secondary)]">Espacement</span>
+                            <Counter
+                              value={sel.spacing}
+                              onChange={(spacing) => setSpacing(ex.id, spacing)}
+                              min={1}
+                              max={5}
+                              accent={accentColor}
+                            />
+                          </div>
+                        )}
                         {evalMode && sel.occurrences > 0 && (
                           <div className="flex items-center justify-between gap-3">
                             <span className="text-xs text-[var(--color-text-secondary)]">Points</span>
@@ -1276,7 +1318,7 @@ export function PrintConfigSheet({
                               )}
                             </div>
                             <PrintExerciseBody
-                              key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`}
+                              key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}`}
                               selection={item.selection}
                               answerKey
                             >
@@ -1361,7 +1403,7 @@ export function PrintConfigSheet({
                               )}
                             </div>
                             <PrintExerciseBody
-                              key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`}
+                              key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}`}
                               selection={item.selection}
                               answerKey={Boolean(item.correction)}
                             >
@@ -1412,7 +1454,7 @@ export function PrintConfigSheet({
                             {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                           </div>
                           <PrintExerciseBody
-                            key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`}
+                            key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}`}
                             selection={item.selection}
                             answerKey={Boolean(item.correction)}
                           >

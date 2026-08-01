@@ -735,6 +735,23 @@ input[type=number] {
   font-weight: 700 !important;
 }
 
+/*
+ * Espacement personnalisé entre les questions imprimées (paramètre
+ * « Espacement » 1–5). Ne s'applique que si ≠ défaut (classe présente).
+ * Cible les listes de questions (space-y / gap-y) proches de la racine.
+ */
+.print-q-spacing > [class*="space-y-"] > :not([hidden]) ~ :not([hidden]),
+.print-q-spacing > * > [class*="space-y-"] > :not([hidden]) ~ :not([hidden]),
+.print-q-spacing > * > * > [class*="space-y-"] > :not([hidden]) ~ :not([hidden]) {
+  margin-top: calc(1rem * var(--print-q-scale, 1)) !important;
+}
+
+.print-q-spacing > [class*="gap-y-"],
+.print-q-spacing > * > [class*="gap-y-"],
+.print-q-spacing > * > * > [class*="gap-y-"] {
+  row-gap: calc(1rem * var(--print-q-scale, 1)) !important;
+}
+
 .print-layout-context .print-ex-content > h2:first-child,
 .print-layout-context .print-ex-content > div > h2:first-child,
 .print-layout-context .print-ex-content > .space-y-4 > h2:first-child,
