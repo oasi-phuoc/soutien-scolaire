@@ -1,11 +1,4 @@
-import {
-  A2,
-  dialogueBlock,
-  lessonFromListening,
-  phraseBankToDialogue,
-  prereqItems,
-  t,
-} from "./express-lesson-factory";
+import { lessonFromListening } from "./express-lesson-factory";
 import { E14_1_TRAINING, E14_1_EVAL } from "./express-e14-listening";
 import type { CommunicationLesson } from "./express-types";
 
