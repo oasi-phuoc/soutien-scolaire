@@ -1,0 +1,387 @@
+import {
+  readingPoolExercise,
+  type CommunicationExercise,
+  type ExpressPoDialogue,
+  type ExpressPePrompt,
+} from "./express-types";
+import { buildExpressPool, type ExpressRawQ } from "./express-listening-helpers";
+
+function q(item: ExpressRawQ): ExpressRawQ {
+  return item;
+}
+
+/* ── Compréhension écrite — E3.3 Aller au travail ─────────────────────────── */
+
+const CE_TEXT = `Offre d'emploi — Magasin de vêtements
+
+Notre magasin de vêtements cherche un vendeur ou une vendeuse.
+Vous êtes dynamique, patient et sérieux ? Vous aimez travailler en équipe et rencontrer des personnes ? Ce travail est pour vous !
+Horaires : du mardi au samedi, de 9 h 30 à 18 heures.
+Le magasin se trouve au centre commercial, à côté de la pharmacie.
+Pour un entretien, envoyez un message à la directrice et parlez de vos qualités. Début du contrat : le 1er mars.`;
+
+const CE_POOL = buildExpressPool("e3-3-ce", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel employé le magasin cherche-t-il ?",
+    text: ["Un vendeur ou une vendeuse", "Un informaticien", "Un cuisinier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Notre magasin de vêtements cherche un _________ ou une vendeuse.",
+    fill: "vendeur",
+    vfQ: "Le magasin cherche un vendeur ou une vendeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelles qualités faut-il pour ce travail ?",
+    text: [
+      "Être dynamique, patient et sérieux",
+      "Être bavard et stressé",
+      "Être timide et discret",
+    ],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous êtes dynamique, patient et _________ ?",
+    fill: "sérieux",
+    fillA: ["serieux"],
+    vfQ: "Il faut aimer travailler en équipe.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les jours de travail ?",
+    text: ["Du mardi au samedi", "Du lundi au vendredi", "Tous les jours"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Horaires : du mardi au _________, de 9 h 30 à 18 heures.",
+    fill: "samedi",
+    vfQ: "On travaille le dimanche dans ce magasin.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où se trouve le magasin ?",
+    text: ["Au centre commercial", "À la banque", "Au supermarché"],
+    textC: 0,
+    img: ["Centre commercial", "banque", "supermarché"],
+    imgC: 0,
+    fillQ: "Le magasin se trouve au centre _________.",
+    fill: "commercial",
+    vfQ: "Le magasin est à côté de la pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quand commence le contrat ?",
+    text: ["Le 1er mars", "Le 1er avril", "Le 15 mars"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Début du contrat : le 1er _________.",
+    fill: "mars",
+    vfQ: "Le contrat commence le 1er avril.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment peut-on demander un entretien ?",
+    text: [
+      "En envoyant un message à la directrice",
+      "En téléphonant au vendeur",
+      "En venant le dimanche matin",
+    ],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour un entretien, envoyez un _________ à la directrice.",
+    fill: "message",
+    vfQ: "Le salaire du vendeur est indiqué dans le texte.",
+    vfC: 2,
+  }),
+]);
+
+export const E3_3_CE: CommunicationExercise = readingPoolExercise({
+  id: "e3-3-ce",
+  readingText: CE_TEXT,
+  questionPool: CE_POOL,
+});
+
+/* ── Production orale — dialogues à jouer (thème travail) ─────────────────── */
+
+const COLLEGUE = { title: "Le collègue", vous: "le collègue / la collègue" };
+const EMPLOYE = { title: "L'employé", vous: "l'employé / l'employée" };
+
+export const E3_3_PO: ExpressPoDialogue[] = [
+  {
+    id: "e3-3-po-1",
+    title: "L'entretien d'embauche",
+    context: "Vous passez un entretien pour un emploi de vendeur dans une entreprise.",
+    roleA: { title: "La directrice", vous: "le directeur / la directrice" },
+    roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+    lines: [
+      { role: "A", text: "Bonjour, vous venez pour l'emploi de vendeur ?" },
+      { role: "B", text: "Oui madame. Merci de me recevoir." },
+      { role: "A", text: "Parlez-moi de vous." },
+      { role: "B", text: "J'ai 30 ans. Je suis patient, calme et sérieux." },
+      { role: "A", text: "Pourquoi vous voulez être vendeur ?" },
+      { role: "B", text: "Parce que je suis dynamique et j'aime rencontrer des personnes." },
+      { role: "A", text: "Très bien ! Vous pouvez commencer lundi ?" },
+      { role: "B", text: "Avec plaisir, je suis disponible !" },
+    ],
+  },
+  {
+    id: "e3-3-po-2",
+    title: "Premier jour au bureau",
+    context: "C'est votre premier jour dans l'entreprise. Un collègue vous accueille.",
+    roleA: COLLEGUE,
+    roleB: { title: "La nouvelle employée", vous: "le nouvel employé / la nouvelle employée" },
+    lines: [
+      { role: "A", text: "Bonjour, tu es la nouvelle collègue ?" },
+      { role: "B", text: "Oui, c'est mon premier jour. Je suis un peu stressée !" },
+      { role: "A", text: "Ne t'inquiète pas, l'équipe est sympa. Voici ton bureau." },
+      { role: "B", text: "Merci ! Et où est la machine à café ?" },
+      { role: "A", text: "Dans le couloir, après la salle de réunion." },
+      { role: "B", text: "Super. On déjeune où, à midi ?" },
+      { role: "A", text: "À la cafétéria, au rez-de-chaussée. On y va ensemble ?" },
+      { role: "B", text: "Avec plaisir, merci !" },
+    ],
+  },
+  {
+    id: "e3-3-po-3",
+    title: "Un problème d'ordinateur",
+    context: "Votre présentation n'est pas prête à cause d'un problème d'ordinateur. Vous cherchez de l'aide.",
+    roleA: { title: "L'employée stressée", vous: "l'employé stressé / l'employée stressée" },
+    roleB: COLLEGUE,
+    lines: [
+      { role: "A", text: "Je suis stressée ! Ma présentation n'est pas prête, j'ai un problème d'ordinateur." },
+      { role: "B", text: "Demande à notre informaticien." },
+      { role: "A", text: "Il est disponible ?" },
+      { role: "B", text: "Non, il est en réunion pour la visioconférence de demain." },
+      { role: "A", text: "Et ton assistante, elle peut m'aider ?" },
+      { role: "B", text: "Elle n'est pas au bureau, aujourd'hui elle télétravaille." },
+      { role: "A", text: "Alors qu'est-ce que je fais ?" },
+      { role: "B", text: "Demande à ma voisine de bureau. Elle est bavarde, mais c'est une collègue sérieuse !" },
+    ],
+  },
+  {
+    id: "e3-3-po-4",
+    title: "À l'accueil de l'entreprise",
+    context: "Vous avez rendez-vous avec le directeur d'une entreprise et vous arrivez à l'accueil.",
+    roleA: { title: "La réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "Bonjour, je peux vous aider ?" },
+      { role: "B", text: "Bonjour, j'ai rendez-vous avec le directeur à 10 heures." },
+      { role: "A", text: "Le directeur est encore en réunion. Vous pouvez attendre ici ?" },
+      { role: "B", text: "Oui, bien sûr. La réunion finit bientôt ?" },
+      { role: "A", text: "Dans dix minutes. Vous voulez un café ?" },
+      { role: "B", text: "Oui, merci ! Et où sont les toilettes, s'il vous plaît ?" },
+      { role: "A", text: "Au fond du couloir, à droite." },
+      { role: "B", text: "Merci beaucoup." },
+    ],
+  },
+  {
+    id: "e3-3-po-5",
+    title: "Demander le télétravail",
+    context: "Vous voulez télétravailler un jour par semaine et vous en parlez à votre chef.",
+    roleA: { title: "Le chef", vous: "le chef / la cheffe" },
+    roleB: EMPLOYE,
+    lines: [
+      { role: "A", text: "Bonjour, vous voulez me parler ?" },
+      { role: "B", text: "Oui. Est-ce que je peux télétravailler le vendredi ?" },
+      { role: "A", text: "Pourquoi le vendredi ?" },
+      { role: "B", text: "J'habite loin et le train est souvent en retard le vendredi." },
+      { role: "A", text: "Vous avez un ordinateur à la maison ?" },
+      { role: "B", text: "Oui, et je suis disponible par téléphone toute la journée." },
+      { role: "A", text: "D'accord, on essaie pendant un mois." },
+      { role: "B", text: "Merci beaucoup !" },
+    ],
+  },
+  {
+    id: "e3-3-po-6",
+    title: "Décrire un nouveau collègue",
+    context: "Un nouveau collègue et une nouvelle assistante travaillent dans votre équipe. Vous en parlez.",
+    roleA: COLLEGUE,
+    roleB: { title: "Vous", vous: "vous-même" },
+    lines: [
+      { role: "A", text: "Tu connais le nouveau collègue ?" },
+      { role: "B", text: "Oui, il travaille à côté de mon bureau." },
+      { role: "A", text: "Il est comment ?" },
+      { role: "B", text: "Il est sérieux et très calme. Il aime travailler en équipe." },
+      { role: "A", text: "Et la nouvelle assistante ?" },
+      { role: "B", text: "Elle est dynamique, mais un peu bavarde !" },
+      { role: "A", text: "On les invite à déjeuner à la cafèt' ?" },
+      { role: "B", text: "Bonne idée, à midi !" },
+    ],
+  },
+  {
+    id: "e3-3-po-7",
+    title: "La pause café",
+    context: "C'est la pause, mais vous devez préparer un dossier important pour une réunion.",
+    roleA: COLLEGUE,
+    roleB: EMPLOYE,
+    lines: [
+      { role: "A", text: "Tu viens ? C'est la pause café !" },
+      { role: "B", text: "Désolé, pas aujourd'hui. Je dois préparer un dossier important." },
+      { role: "A", text: "C'est pour la réunion de 11 heures ?" },
+      { role: "B", text: "Oui, avec le directeur. Je suis un peu stressé." },
+      { role: "A", text: "Je t'apporte un café au bureau, alors ?" },
+      { role: "B", text: "Oh oui, merci, tu es sympa !" },
+      { role: "A", text: "Et à midi, on déjeune ensemble ?" },
+      { role: "B", text: "D'accord, à midi à la cafétéria !" },
+    ],
+  },
+  {
+    id: "e3-3-po-8",
+    title: "L'agenda du directeur",
+    context: "Vous êtes l'assistante du directeur et vous présentez sa journée de demain.",
+    roleA: { title: "L'assistante", vous: "l'assistant / l'assistante" },
+    roleB: { title: "Le directeur", vous: "le directeur / la directrice" },
+    lines: [
+      { role: "A", text: "Bonjour monsieur, voici votre journée de demain." },
+      { role: "B", text: "Je vous écoute." },
+      { role: "A", text: "À 9 heures, vous avez une visioconférence avec les employés." },
+      { role: "B", text: "D'accord. Et après ?" },
+      { role: "A", text: "À 11 heures, rendez-vous avec les informaticiens." },
+      { role: "B", text: "Très bien. Et à midi ?" },
+      { role: "A", text: "Vous déjeunez avec la directrice d'une autre entreprise." },
+      { role: "B", text: "Parfait, merci pour votre aide !" },
+    ],
+  },
+  {
+    id: "e3-3-po-9",
+    title: "Réparer la machine à café",
+    context: "Un réparateur vient réparer la machine à café de votre entreprise et cherche son chemin.",
+    roleA: { title: "Le réparateur", vous: "le réparateur / la réparatrice" },
+    roleB: EMPLOYE,
+    lines: [
+      { role: "A", text: "Bonjour madame, je viens réparer la machine à café. Elle est où ?" },
+      { role: "B", text: "Dans le couloir, après la grande salle de réunion." },
+      { role: "A", text: "À côté de l'accueil, alors ?" },
+      { role: "B", text: "Non, l'accueil est au rez-de-chaussée. La machine est au premier étage." },
+      { role: "A", text: "D'accord, je prends l'escalier. C'est loin ?" },
+      { role: "B", text: "Non, c'est la deuxième porte à gauche." },
+      { role: "A", text: "Merci. La machine ne marche plus depuis quand ?" },
+      { role: "B", text: "Depuis ce matin. Toute l'équipe attend son café !" },
+    ],
+  },
+  {
+    id: "e3-3-po-10",
+    title: "Parler de son travail",
+    context: "Vous retrouvez un ami et vous parlez de votre travail.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "Vous", vous: "vous-même" },
+    lines: [
+      { role: "A", text: "Tu travailles où maintenant ?" },
+      { role: "B", text: "Dans une entreprise, au centre-ville." },
+      { role: "A", text: "Qu'est-ce que tu fais ?" },
+      { role: "B", text: "Je suis vendeur. J'aime beaucoup mon travail." },
+      { role: "A", text: "Tes collègues sont sympas ?" },
+      { role: "B", text: "Oui, l'équipe est dynamique. Et toi, ton travail ?" },
+      { role: "A", text: "Moi, je télétravaille trois jours par semaine." },
+      { role: "B", text: "Quelle chance ! Moi, je vais au bureau tous les jours." },
+    ],
+  },
+];
+
+/* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
+
+const PE_MIN = 50;
+const PE_MAX = 120;
+
+export const E3_3_PE: ExpressPePrompt[] = [
+  {
+    id: "e3-3-pe-1",
+    title: "Message de motivation",
+    situation: "Vous voulez l'emploi de vendeur du magasin de vêtements.",
+    instruction: "Écrivez un message à la directrice : présentez-vous, décrivez vos qualités et dites quand vous êtes disponible.",
+    points: ["Votre présentation", "Deux qualités", "Votre disponibilité"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-2",
+    title: "Ma journée de travail",
+    situation: "Un correspondant veut connaître votre journée de travail.",
+    instruction: "Décrivez votre journée : l'arrivée au travail, vos activités et la pause de midi.",
+    points: ["L'heure d'arrivée", "Vos activités", "La pause de midi"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-3",
+    title: "Décrire un collègue",
+    situation: "Un ami vous demande comment sont vos collègues de travail.",
+    instruction: "Décrivez un collègue : son travail, son caractère (sérieux, dynamique, bavard…) et pourquoi vous l'aimez bien.",
+    points: ["Son travail", "Son caractère", "Pourquoi vous l'aimez bien"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-4",
+    title: "Demander le télétravail",
+    situation: "Vous habitez loin du bureau et vous voulez télétravailler un jour par semaine.",
+    instruction: "Écrivez un e-mail à votre chef : expliquez votre situation, demandez le télétravail et donnez le jour souhaité.",
+    points: ["La formule de politesse", "L'explication de la situation", "Le jour souhaité"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-5",
+    title: "Mon premier jour",
+    situation: "Vous venez de commencer un nouveau travail.",
+    instruction: "Racontez votre premier jour à un ami : l'accueil, les collègues et votre impression.",
+    points: ["L'accueil", "Les collègues", "Votre impression"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-6",
+    title: "Petite annonce",
+    situation: "Votre entreprise cherche un nouvel employé et vous écrivez l'annonce.",
+    instruction: "Écrivez la petite annonce : le poste, les qualités demandées et les horaires de travail.",
+    points: ["Le poste", "Les qualités demandées", "Les horaires"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-7",
+    title: "Message à un collègue",
+    situation: "Un nouveau collègue ne trouve pas la salle de réunion pour la réunion de 11 heures.",
+    instruction: "Écrivez-lui un message : expliquez où se trouve la salle, l'heure de la réunion et ce qu'il faut apporter.",
+    points: ["Le chemin vers la salle", "L'heure de la réunion", "Ce qu'il faut apporter"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-8",
+    title: "Mes qualités",
+    situation: "Vous préparez un entretien d'embauche et la question « Parlez-moi de vous » arrive toujours.",
+    instruction: "Écrivez votre réponse : décrivez votre caractère, ce que vous aimez au travail et donnez un exemple.",
+    points: ["Votre caractère", "Ce que vous aimez au travail", "Un exemple"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-9",
+    title: "En retard au travail",
+    situation: "Votre train a un problème et vous arrivez en retard au bureau.",
+    instruction: "Écrivez un message à votre chef : excusez-vous, expliquez le problème et dites quand vous arrivez.",
+    points: ["L'excuse", "Le problème", "L'heure d'arrivée"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e3-3-pe-10",
+    title: "Bureau ou télétravail ?",
+    situation: "Un ami vous demande si le télétravail est une bonne idée.",
+    instruction: "Comparez le travail au bureau et le télétravail : un avantage de chaque solution et votre préférence.",
+    points: ["Un avantage du bureau", "Un avantage du télétravail", "Votre préférence"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+];

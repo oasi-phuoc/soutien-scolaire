@@ -7,6 +7,13 @@ import {
   t,
 } from "./express-lesson-factory";
 import { E9_1_TRAINING, E9_1_EVAL, E9_2_TRAINING, E9_2_EVAL, E9_3_TRAINING, E9_3_EVAL, E9_4_TRAINING, E9_4_EVAL, E9_5_TRAINING, E9_5_EVAL } from "./express-e9-listening";
+import {
+  E9_1_CE, E9_1_PO, E9_1_PE,
+  E9_2_CE, E9_2_PO, E9_2_PE,
+  E9_3_CE, E9_3_PO, E9_3_PE,
+  E9_4_CE, E9_4_PO, E9_4_PE,
+  E9_5_CE, E9_5_PO, E9_5_PE,
+} from "./express-e9-cpe";
 import type { CommunicationLesson } from "./express-types";
 
 export const EXPRESS_E9_1: CommunicationLesson = lessonFromListening({
@@ -97,6 +104,9 @@ export const EXPRESS_E9_1: CommunicationLesson = lessonFromListening({
   ],
   training: E9_1_TRAINING,
   evalAudios: E9_1_EVAL,
+  ceExercise: E9_1_CE,
+  poDialogues: E9_1_PO,
+  pePrompts: E9_1_PE,
 });
 
 export const EXPRESS_E9_2: CommunicationLesson = lessonFromListening({
@@ -183,6 +193,9 @@ export const EXPRESS_E9_2: CommunicationLesson = lessonFromListening({
   ],
   training: E9_2_TRAINING,
   evalAudios: E9_2_EVAL,
+  ceExercise: E9_2_CE,
+  poDialogues: E9_2_PO,
+  pePrompts: E9_2_PE,
 });
 
 export const EXPRESS_E9_3: CommunicationLesson = lessonFromListening({
@@ -273,6 +286,9 @@ export const EXPRESS_E9_3: CommunicationLesson = lessonFromListening({
   ],
   training: E9_3_TRAINING,
   evalAudios: E9_3_EVAL,
+  ceExercise: E9_3_CE,
+  poDialogues: E9_3_PO,
+  pePrompts: E9_3_PE,
 });
 
 export const EXPRESS_E9_4: CommunicationLesson = lessonFromListening({
@@ -360,6 +376,9 @@ export const EXPRESS_E9_4: CommunicationLesson = lessonFromListening({
   ],
   training: E9_4_TRAINING,
   evalAudios: E9_4_EVAL,
+  ceExercise: E9_4_CE,
+  poDialogues: E9_4_PO,
+  pePrompts: E9_4_PE,
 });
 
 export const EXPRESS_E9_5: CommunicationLesson = lessonFromListening({
@@ -445,6 +464,9 @@ export const EXPRESS_E9_5: CommunicationLesson = lessonFromListening({
   ],
   training: E9_5_TRAINING,
   evalAudios: E9_5_EVAL,
+  ceExercise: E9_5_CE,
+  poDialogues: E9_5_PO,
+  pePrompts: E9_5_PE,
 });
 
 export const EXPRESS_E9_LESSONS: CommunicationLesson[] = [

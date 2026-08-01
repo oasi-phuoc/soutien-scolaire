@@ -7,6 +7,13 @@ import {
   t,
 } from "./express-lesson-factory";
 import { E12_1_TRAINING, E12_1_EVAL, E12_2_TRAINING, E12_2_EVAL, E12_3_TRAINING, E12_3_EVAL, E12_4_TRAINING, E12_4_EVAL, E12_5_TRAINING, E12_5_EVAL } from "./express-e12-listening";
+import {
+  E12_1_CE, E12_1_PO, E12_1_PE,
+  E12_2_CE, E12_2_PO, E12_2_PE,
+  E12_3_CE, E12_3_PO, E12_3_PE,
+  E12_4_CE, E12_4_PO, E12_4_PE,
+  E12_5_CE, E12_5_PO, E12_5_PE,
+} from "./express-e12-cpe";
 import type { CommunicationLesson } from "./express-types";
 
 export const EXPRESS_E12_1: CommunicationLesson = lessonFromListening({
@@ -87,6 +94,9 @@ export const EXPRESS_E12_1: CommunicationLesson = lessonFromListening({
   ],
   training: E12_1_TRAINING,
   evalAudios: E12_1_EVAL,
+  ceExercise: E12_1_CE,
+  poDialogues: E12_1_PO,
+  pePrompts: E12_1_PE,
 });
 
 export const EXPRESS_E12_2: CommunicationLesson = lessonFromListening({
@@ -168,6 +178,9 @@ export const EXPRESS_E12_2: CommunicationLesson = lessonFromListening({
   ],
   training: E12_2_TRAINING,
   evalAudios: E12_2_EVAL,
+  ceExercise: E12_2_CE,
+  poDialogues: E12_2_PO,
+  pePrompts: E12_2_PE,
 });
 
 export const EXPRESS_E12_3: CommunicationLesson = lessonFromListening({
@@ -249,6 +262,9 @@ export const EXPRESS_E12_3: CommunicationLesson = lessonFromListening({
   ],
   training: E12_3_TRAINING,
   evalAudios: E12_3_EVAL,
+  ceExercise: E12_3_CE,
+  poDialogues: E12_3_PO,
+  pePrompts: E12_3_PE,
 });
 
 export const EXPRESS_E12_4: CommunicationLesson = lessonFromListening({
@@ -329,6 +345,9 @@ export const EXPRESS_E12_4: CommunicationLesson = lessonFromListening({
   ],
   training: E12_4_TRAINING,
   evalAudios: E12_4_EVAL,
+  ceExercise: E12_4_CE,
+  poDialogues: E12_4_PO,
+  pePrompts: E12_4_PE,
 });
 
 export const EXPRESS_E12_5: CommunicationLesson = lessonFromListening({
@@ -412,6 +431,9 @@ export const EXPRESS_E12_5: CommunicationLesson = lessonFromListening({
   ],
   training: E12_5_TRAINING,
   evalAudios: E12_5_EVAL,
+  ceExercise: E12_5_CE,
+  poDialogues: E12_5_PO,
+  pePrompts: E12_5_PE,
 });
 
 export const EXPRESS_E12_LESSONS: CommunicationLesson[] = [

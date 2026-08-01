@@ -1,0 +1,386 @@
+import {
+  readingPoolExercise,
+  type CommunicationExercise,
+  type ExpressPoDialogue,
+  type ExpressPePrompt,
+} from "./express-types";
+import { buildExpressPool, type ExpressRawQ } from "./express-listening-helpers";
+
+function q(item: ExpressRawQ): ExpressRawQ {
+  return item;
+}
+
+/* ── Compréhension écrite — E4.1 Acheter des vêtements ────────────────────── */
+
+const CE_TEXT = `Boutique Élégance — Soldes d'hiver
+
+Cette semaine, tous les manteaux et toutes les vestes sont à moitié prix.
+Les pulls en laine coûtent maintenant 30 francs et les écharpes 10 francs.
+Vous cherchez une robe pour une fête ? Notre nouvelle collection arrive samedi, avec beaucoup de couleurs : bleu, rouge, vert et noir.
+Les cabines d'essayage sont au premier étage. Vous pouvez essayer trois vêtements au maximum.
+La boutique est ouverte du mardi au samedi, de 9 h à 18 h.
+Attention : les baskets ne sont pas en solde. Bon shopping !`;
+
+const CE_POOL = buildExpressPool("e4-1-ce", [
+  q({
+    id: "ce-q1",
+    textQ: "Qu'est-ce qui est à moitié prix cette semaine ?",
+    text: [
+      "Les manteaux et les vestes",
+      "Les robes et les jupes",
+      "Les pulls et les écharpes",
+    ],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les manteaux et les vestes sont à moitié _________.",
+    fill: "prix",
+    vfQ: "Cette semaine, les manteaux sont à moitié prix.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûtent les pulls en laine maintenant ?",
+    text: ["30 francs", "10 francs", "45 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les pulls en laine coûtent maintenant _________ francs.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Les écharpes coûtent 20 francs.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand arrive la nouvelle collection ?",
+    text: ["Samedi", "Mardi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Notre nouvelle collection arrive _________.",
+    fill: "samedi",
+    vfQ: "La nouvelle collection arrive avec beaucoup de couleurs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où sont les cabines d'essayage ?",
+    text: ["Au premier étage", "Au sous-sol", "À côté de la caisse"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez essayer _________ vêtements au maximum.",
+    fill: "trois",
+    fillA: ["3"],
+    vfQ: "On peut essayer cinq vêtements au maximum.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quels jours la boutique est-elle ouverte ?",
+    text: ["Du mardi au samedi", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La boutique est ouverte de 9 h à _________ h.",
+    fill: "18",
+    fillA: ["18 h", "dix-huit"],
+    vfQ: "La boutique ferme à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qui n'est pas en solde ?",
+    text: ["Les baskets", "Les écharpes", "Les pulls en laine"],
+    textC: 0,
+    img: ["baskets", "écharpe", "pull"],
+    imgC: 0,
+    fillQ: "Attention : les _________ ne sont pas en solde.",
+    fill: "baskets",
+    vfQ: "Le prix des robes est indiqué dans le texte.",
+    vfC: 2,
+  }),
+]);
+
+export const E4_1_CE: CommunicationExercise = readingPoolExercise({
+  id: "e4-1-ce",
+  readingText: CE_TEXT,
+  questionPool: CE_POOL,
+});
+
+/* ── Production orale — dialogues à jouer (thème vêtements) ───────────────── */
+
+const VENDEUR = { title: "Le vendeur", vous: "le vendeur / la vendeuse" };
+const CLIENT = { title: "Le client", vous: "le client / la cliente" };
+
+export const E4_1_PO: ExpressPoDialogue[] = [
+  {
+    id: "e4-1-po-1",
+    title: "Essayer une robe",
+    context: "Vous êtes dans un magasin de vêtements et vous voulez essayer une robe.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour, je peux vous aider ?" },
+      { role: "B", text: "Bonjour, je voudrais essayer la robe rouge, s'il vous plaît." },
+      { role: "A", text: "Bien sûr. Vous faites quelle taille ?" },
+      { role: "B", text: "Je fais du 38." },
+      { role: "A", text: "Voici du 38. La cabine est au fond du magasin." },
+      { role: "B", text: "Merci… Qu'est-ce que vous en pensez ?" },
+      { role: "A", text: "Elle vous va très bien ! Ça vous plaît ?" },
+      { role: "B", text: "Oui, ça me plaît beaucoup. Je la prends !" },
+    ],
+  },
+  {
+    id: "e4-1-po-2",
+    title: "Acheter des chaussures",
+    context: "Vous cherchez des chaussures noires pour le travail.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour, vous désirez ?" },
+      { role: "B", text: "Je voudrais des chaussures noires pour le travail." },
+      { role: "A", text: "Quelle est votre pointure ?" },
+      { role: "B", text: "Je fais du 41." },
+      { role: "A", text: "Voici deux modèles en 41. Vous voulez essayer ?" },
+      { role: "B", text: "Oui… Le premier modèle est très confortable." },
+      { role: "A", text: "Il coûte soixante francs. Ça vous va ?" },
+      { role: "B", text: "Oui, je les prends. Merci !" },
+    ],
+  },
+  {
+    id: "e4-1-po-3",
+    title: "Un pull en laine",
+    context: "C'est l'hiver et vous cherchez un pull chaud.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour ! Qu'est-ce qu'il vous faut ?" },
+      { role: "B", text: "Je cherche un pull chaud pour l'hiver." },
+      { role: "A", text: "Nous avons ce pull en laine, très chaud." },
+      { role: "B", text: "Il est joli ! Vous l'avez en bleu ?" },
+      { role: "A", text: "Oui, en bleu, en gris et en noir. Quelle taille ?" },
+      { role: "B", text: "Du M, s'il vous plaît." },
+      { role: "A", text: "Voilà un pull bleu en M. Vous voulez l'essayer ?" },
+      { role: "B", text: "Oui, merci. Où est la cabine ?" },
+    ],
+  },
+  {
+    id: "e4-1-po-4",
+    title: "Un cadeau pour une amie",
+    context: "Vous cherchez un cadeau pour l'anniversaire d'une amie.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour, je peux vous aider ?" },
+      { role: "B", text: "Oui, je cherche un cadeau pour une amie." },
+      { role: "A", text: "Une écharpe, peut-être ? C'est un joli cadeau." },
+      { role: "B", text: "Bonne idée ! Vous avez des écharpes en coton ?" },
+      { role: "A", text: "Oui, voici nos écharpes. La verte est très jolie." },
+      { role: "B", text: "J'aime bien la verte. Elle coûte combien ?" },
+      { role: "A", text: "Vingt-cinq francs. Je fais un paquet cadeau ?" },
+      { role: "B", text: "Oui, s'il vous plaît. Merci beaucoup !" },
+    ],
+  },
+  {
+    id: "e4-1-po-5",
+    title: "Échanger un pantalon",
+    context: "Vous avez acheté un pantalon trop petit et vous revenez au magasin.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour, je peux vous aider ?" },
+      { role: "B", text: "Bonjour, ce pantalon est trop petit. Je voudrais l'échanger." },
+      { role: "A", text: "Pas de problème. Vous avez le ticket ?" },
+      { role: "B", text: "Oui, le voilà." },
+      { role: "A", text: "Merci. Vous voulez la taille au-dessus ?" },
+      { role: "B", text: "Oui, du 40, s'il vous plaît." },
+      { role: "A", text: "Voici du 40. Vous pouvez l'essayer en cabine." },
+      { role: "B", text: "Parfait, merci pour votre aide !" },
+    ],
+  },
+  {
+    id: "e4-1-po-6",
+    title: "Les soldes",
+    context: "C'est les soldes et vous demandez le prix d'une veste.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour ! Aujourd'hui, tout est en solde." },
+      { role: "B", text: "Super ! Cette veste coûte combien ?" },
+      { role: "A", text: "Elle est à moitié prix : quarante francs." },
+      { role: "B", text: "C'est une bonne affaire ! Elle est en cuir ?" },
+      { role: "A", text: "Non, elle est en coton. Vous voulez l'essayer ?" },
+      { role: "B", text: "Oui, s'il vous plaît. Je fais du M." },
+      { role: "A", text: "Voici la veste en M. Ça vous va très bien !" },
+      { role: "B", text: "Merci, je la prends !" },
+    ],
+  },
+  {
+    id: "e4-1-po-7",
+    title: "Des vêtements pour un enfant",
+    context: "Vous cherchez un manteau pour votre fils de six ans.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour, vous cherchez quelque chose ?" },
+      { role: "B", text: "Oui, un manteau pour mon fils. Il a six ans." },
+      { role: "A", text: "Le rayon enfants est ici. Vous aimeriez quelle couleur ?" },
+      { role: "B", text: "Bleu ou vert, s'il vous plaît." },
+      { role: "A", text: "Voici un manteau bleu, très chaud pour l'hiver." },
+      { role: "B", text: "Il est parfait. Il coûte combien ?" },
+      { role: "A", text: "Trente-cinq francs. Il vous faut autre chose ?" },
+      { role: "B", text: "Non, c'est tout. Merci beaucoup !" },
+    ],
+  },
+  {
+    id: "e4-1-po-8",
+    title: "À la caisse",
+    context: "Vous avez choisi vos vêtements et vous allez payer à la caisse.",
+    roleA: { title: "Le caissier", vous: "le caissier / la caissière" },
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour ! Vous avez trouvé tout ce qu'il vous faut ?" },
+      { role: "B", text: "Oui, merci. Une robe et une écharpe." },
+      { role: "A", text: "Ça fait cinquante-cinq francs. Vous payez comment ?" },
+      { role: "B", text: "Par carte, s'il vous plaît." },
+      { role: "A", text: "Sans contact, c'est possible. Voilà, c'est bon." },
+      { role: "B", text: "Je peux avoir le ticket, s'il vous plaît ?" },
+      { role: "A", text: "Bien sûr, le voici. Merci de votre visite !" },
+      { role: "B", text: "Merci, au revoir !" },
+    ],
+  },
+  {
+    id: "e4-1-po-9",
+    title: "Devant la vitrine",
+    context: "Vous regardez une vitrine avec un ami et vous parlez des vêtements.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'autre ami", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Regarde cette vitrine ! Le pull rouge est super." },
+      { role: "B", text: "Oui, mais je préfère la veste noire." },
+      { role: "A", text: "Elle est jolie. On entre dans la boutique ?" },
+      { role: "B", text: "D'accord ! J'aimerais essayer la veste." },
+      { role: "A", text: "Et moi, je voudrais voir les chaussures." },
+      { role: "B", text: "Tu fais quelle pointure ?" },
+      { role: "A", text: "Je fais du 39. Et toi, quelle taille pour la veste ?" },
+      { role: "B", text: "Du L. Allez, on y va !" },
+    ],
+  },
+  {
+    id: "e4-1-po-10",
+    title: "Une veste pour un entretien",
+    context: "Vous avez un entretien de travail demain et il vous faut une veste élégante.",
+    roleA: VENDEUR,
+    roleB: CLIENT,
+    lines: [
+      { role: "A", text: "Bonjour, je peux vous aider ?" },
+      { role: "B", text: "Oui, j'ai un entretien demain. Il me faudrait une veste élégante." },
+      { role: "A", text: "Très bien. Quelle est votre taille ?" },
+      { role: "B", text: "Je fais du 50." },
+      { role: "A", text: "Voici une veste grise, très élégante. Essayez-la." },
+      { role: "B", text: "Elle me va bien. Vous avez aussi des cravates ?" },
+      { role: "A", text: "Oui, juste ici. La bleue va bien avec le gris." },
+      { role: "B", text: "Parfait, je prends la veste et la cravate. Merci !" },
+    ],
+  },
+];
+
+/* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
+
+const PE_MIN = 50;
+const PE_MAX = 120;
+
+export const E4_1_PE: ExpressPePrompt[] = [
+  {
+    id: "e4-1-pe-1",
+    title: "Raconter un achat",
+    situation: "Vous avez acheté une nouvelle robe (ou une veste) pour une fête.",
+    instruction: "Écrivez un message à un ami : racontez où vous êtes allé(e), ce que vous avez acheté et combien ça a coûté.",
+    points: ["Le magasin", "Le vêtement acheté (couleur, taille)", "Le prix"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-2",
+    title: "E-mail à la boutique",
+    situation: "Vous avez commandé un pantalon sur Internet, mais la taille est trop petite.",
+    instruction: "Écrivez un e-mail à la boutique : expliquez le problème et demandez un échange dans la bonne taille.",
+    points: ["Le vêtement commandé", "Le problème de taille", "La demande d'échange"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-3",
+    title: "Ma tenue préférée",
+    situation: "Un ami vous demande comment vous vous habillez le week-end.",
+    instruction: "Décrivez votre tenue préférée : les vêtements, les couleurs et les matières (coton, laine, cuir).",
+    points: ["Les vêtements", "Les couleurs", "Les matières"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-4",
+    title: "Conseils pour l'hiver",
+    situation: "Un ami arrive en Suisse en janvier et ne connaît pas l'hiver froid.",
+    instruction: "Écrivez un message à votre ami : expliquez quels vêtements il faut apporter pour l'hiver et pourquoi.",
+    points: ["Trois vêtements chauds", "Pourquoi ils sont importants", "Un conseil pour les magasins"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-5",
+    title: "Une journée de soldes",
+    situation: "Samedi, vous êtes allé(e) aux soldes avec une amie.",
+    instruction: "Racontez votre journée : les magasins visités, ce que vous avez essayé et ce que vous avez acheté.",
+    points: ["Les magasins visités", "Les vêtements essayés", "Les achats et les prix"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-6",
+    title: "La boutique de mon quartier",
+    situation: "Un nouveau voisin cherche un magasin de vêtements près de chez vous.",
+    instruction: "Décrivez la boutique de votre quartier : les horaires, les vêtements qu'on y trouve et les prix.",
+    points: ["Les horaires", "Les vêtements", "Les prix"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-7",
+    title: "Message au vendeur",
+    situation: "Vous avez vu une veste en vitrine, mais le magasin était fermé.",
+    instruction: "Écrivez un message au magasin : décrivez la veste et demandez si elle existe dans votre taille et votre couleur préférée.",
+    points: ["La description de la veste", "Votre taille", "La question sur la couleur"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-8",
+    title: "Magasin ou Internet ?",
+    situation: "Une amie vous demande où acheter ses vêtements.",
+    instruction: "Comparez les achats en magasin et sur Internet : un avantage de chaque solution et votre préférence.",
+    points: ["Un avantage du magasin", "Un avantage d'Internet", "Votre préférence"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-9",
+    title: "Expliquer les tailles",
+    situation: "Un ami étranger ne comprend pas les tailles et les pointures en France.",
+    instruction: "Écrivez un petit texte pour votre ami : expliquez la différence entre taille et pointure et donnez un exemple avec vos tailles.",
+    points: ["La taille des vêtements", "La pointure des chaussures", "Un exemple personnel"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e4-1-pe-10",
+    title: "Invitation au shopping",
+    situation: "Vous voulez aller faire les magasins samedi avec une amie.",
+    instruction: "Écrivez un message à votre amie : proposez le rendez-vous, dites ce que vous cherchez et pourquoi vous avez besoin d'elle.",
+    points: ["Le jour et l'heure", "Ce que vous cherchez", "Pourquoi son aide est utile"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+];
