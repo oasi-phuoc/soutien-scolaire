@@ -1410,10 +1410,11 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 {phase !== "eval" && (
                   <button
                     type="button"
+                    data-nav-action="refresh"
                     onClick={handleReset}
                     disabled={grammarChecking}
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
-                    aria-label="Nouvelles questions"
+                    aria-label="Nouvelles questions (réinitialiser)"
                     title="Nouvelles questions"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
