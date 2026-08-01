@@ -9,7 +9,6 @@ import {
   type ExpressMultiQuestion,
   type ExpressRawQ,
 } from "./express-listening-helpers";
-import type { ExpressListeningFormat } from "./express-listening-formats";
 
 export type ExpressListeningAudio = {
   id: string;
@@ -38,33 +37,35 @@ export function formatDialogueTranscript(raw: string): string {
 
 export type FixedQ = {
   id: string;
-  format: ExpressListeningFormat;
   textQ: string;
   text: [string, string, string];
   textC?: 0 | 1 | 2;
+  /** Labels illustrables (résolus via scène/lecture). Omis = jamais en QCM image. */
   img?: [string, string, string];
   imgC?: 0 | 1 | 2;
+  /** Phrase à trou (doit contenir `_________`). */
   fillQ?: string;
   fill?: string;
   fillA?: string[];
+  /** Affirmation vrai/faux (pas une question). */
   vfQ?: string;
-  vfC?: 0 | 1;
+  /** 0 = Vrai, 1 = Faux, 2 = On ne sait pas */
+  vfC?: 0 | 1 | 2;
 };
 
 export function fixedQ(item: FixedQ): ExpressRawQ {
   return {
     id: item.id,
-    format: item.format,
     textQ: item.textQ,
     text: item.text,
     textC: item.textC ?? 0,
-    img: item.img ?? ["Maison", "Téléphone", "Carte"],
+    img: item.img ?? ["", "", ""],
     imgC: item.imgC ?? 0,
-    fillQ: item.fillQ ?? `${item.textQ} _________`,
-    fill: item.fill ?? item.text[item.textC ?? 0],
+    fillQ: item.fillQ ?? "",
+    fill: item.fill ?? "",
     fillA: item.fillA,
-    vfQ: item.vfQ ?? item.textQ,
-    vfC: item.vfC ?? 0,
+    vfQ: item.vfQ,
+    vfC: item.vfC,
   };
 }
 
@@ -85,7 +86,7 @@ export function buildListeningAudio(spec: {
     transcript: formatDialogueTranscript(spec.transcript),
     instruction: spec.instruction ?? "Écoutez l'enregistrement et répondez aux questions.",
     pool: buildExpressPool(spec.id, spec.questions.map(fixedQ)),
-    questionCount: spec.questionCount ?? 4,
+    questionCount: spec.questionCount ?? 5,
   };
 }
 

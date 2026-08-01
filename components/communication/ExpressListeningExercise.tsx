@@ -185,7 +185,7 @@ export function ExpressListeningExercise({
     if (exercise.questionPool?.length) {
       return buildExpressListeningTasks(
         exercise.questionPool,
-        exercise.questionCount ?? 4,
+        exercise.questionCount ?? 5,
         `${exercise.id}-${seed}`,
       );
     }

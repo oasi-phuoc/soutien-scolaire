@@ -1,33 +1,23 @@
-import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage, resolveWordImage } from "../../word-image-resolver";
 import { seededShuffle } from "@/lib/placement/progressive-pick";
 import { hasBlockedImageChoices } from "./ce-co-question-filters";
 import { shuffleQcmChoicesSeeded } from "./shuffle-qcm-choices";
-import {
-  pickExpressListeningFormat,
-  type ExpressListeningFormat,
-} from "./express-listening-formats";
+import type { ExpressListeningFormat } from "./express-listening-formats";
 import type { COChoiceTask, COFillTask, COImageChoice, COMultiQuestion, RawQ } from "./co-questions-helpers";
 import { buildPool } from "./co-questions-helpers";
 
 export type ExpressRawQ = RawQ & {
-  /** Énoncé vrai/faux (si absente, dérivée du textQ). */
+  /** Énoncé vrai/faux — affirmation sur l'audio (pas une question). */
   vfQ?: string;
-  /** 0 = Vrai, 1 = Faux */
-  vfC?: 0 | 1;
-  /** Format fixe (évite de rejouer le même fait sous un autre type). */
-  format?: ExpressListeningFormat;
+  /** 0 = Vrai, 1 = Faux, 2 = On ne sait pas */
+  vfC?: 0 | 1 | 2;
 };
 
 export type ExpressListeningTask = COChoiceTask | COFillTask;
 
 export type ExpressMultiQuestion = COMultiQuestion & {
   vfQ?: string;
-  vfCorrect?: 0 | 1;
-  /**
-   * Format fixe — si défini, la question n'est jamais tirée sous un autre type.
-   * Obligatoire pour les nouvelles leçons (une question = un format unique).
-   */
-  format?: ExpressListeningFormat;
+  vfCorrect?: 0 | 1 | 2;
 };
 
 function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
@@ -36,15 +26,37 @@ function supportsImageFormat(choices: { label: string; image: string }[]): boole
   return choices.every((c) => !!ceCoImageSource(c.image, c.label));
 }
 
+/**
+ * Image d'un choix QCM Express : scène CE/CO en priorité, sinon image mot
+ * (lecture / vocabulaire). Chaîne vide = choix non illustrable.
+ */
+export function expressChoiceImage(label: string): string {
+  if (!label.trim()) return "";
+  if (isCeCoImageableLabel(label)) {
+    const scene = resolveCeCoWordImage(label);
+    if (scene) return scene;
+  }
+  const word = resolveWordImage(label);
+  if (
+    word &&
+    (word.startsWith("/assets/words/lecture/") || word.startsWith("/assets/words/vocab/"))
+  ) {
+    return word;
+  }
+  return "";
+}
+
 export function buildExpressPool(groupSlug: string, items: ExpressRawQ[]): ExpressMultiQuestion[] {
   const base = buildPool("express", groupSlug, items);
   return base.map((q, i) => {
     const raw = items[i]!;
     return {
       ...q,
+      imageChoices: q.imageChoices.map((c) =>
+        c.image ? c : { label: c.label, image: expressChoiceImage(c.label) },
+      ) as ExpressMultiQuestion["imageChoices"],
       vfQ: raw.vfQ,
       vfCorrect: raw.vfC,
-      format: raw.format,
     };
   });
 }
@@ -65,15 +77,12 @@ function multiToExpressTask(
     };
   }
   if (format === "vf") {
-    const statement = q.vfQ ?? q.textQ;
-    const correct = q.vfCorrect ?? 0;
-    const choices = [{ label: "Vrai" }, { label: "Faux" }];
-    const shuffled = shuffleQcmChoicesSeeded(choices, correct, `${seed}-vf`);
+    // Ordre fixe Vrai / Faux / On ne sait pas (style CO placement).
     return {
       kind: "choice",
-      prompt: statement,
-      choices: shuffled.choices,
-      correct: shuffled.correct,
+      prompt: q.vfQ ?? q.textQ,
+      choices: [{ label: "Vrai" }, { label: "Faux" }, { label: "On ne sait pas" }],
+      correct: q.vfCorrect ?? 0,
     };
   }
   if (format === "image") {
@@ -100,25 +109,56 @@ function multiToExpressTask(
   };
 }
 
-/** Tire `count` questions du pool, mélange l'ordre et assigne un format (image/texte/saisie/vf). */
+function hasVfData(q: ExpressMultiQuestion): boolean {
+  return Boolean(q.vfQ) && typeof q.vfCorrect === "number";
+}
+
+function hasFillData(q: ExpressMultiQuestion): boolean {
+  return Boolean(q.fillQ && q.fillAnswer && q.fillQ.includes("___"));
+}
+
+/**
+ * Tire des questions UNIQUES du pool (jamais le même fait sous deux formats)
+ * et compose l'exercice comme la CO placement :
+ * 1 QCM image (si une question illustrable existe) + 1 vrai/faux +
+ * 1 texte à saisir + 2 QCM texte.
+ */
 export function buildExpressListeningTasks(
   pool: ExpressMultiQuestion[],
   count: number,
   seed: string,
 ): ExpressListeningTask[] {
   if (!pool.length || count <= 0) return [];
-  const selected = seededShuffle(pool, seed).slice(0, Math.min(count, pool.length));
+  const shuffled = seededShuffle(pool, seed);
+  const used = new Set<string>();
+  const picks: { q: ExpressMultiQuestion; format: ExpressListeningFormat }[] = [];
 
-  return selected.map((q, index) => {
-    const imageable = supportsImageFormat(q.imageChoices);
-    const hasVf = q.vfCorrect === 0 || q.vfCorrect === 1 || Boolean(q.vfQ);
-    let format: ExpressListeningFormat =
-      q.format ?? pickExpressListeningFormat(index, seed, q.id, imageable, hasVf);
-    // Si format fixe impossible (image non résolue), repli texte — jamais un autre type « inventé ».
-    if (format === "image" && !imageable) format = "text";
-    if (format === "vf" && !hasVf) format = "text";
-    return multiToExpressTask(q, format, `${seed}-${q.id}-${index}`);
-  });
+  const takeFirst = (
+    pred: (q: ExpressMultiQuestion) => boolean,
+    format: ExpressListeningFormat,
+  ) => {
+    const q = shuffled.find((c) => !used.has(c.id) && pred(c));
+    if (q) {
+      used.add(q.id);
+      picks.push({ q, format });
+    }
+  };
+
+  takeFirst((q) => supportsImageFormat(q.imageChoices), "image");
+  takeFirst(hasVfData, "vf");
+  takeFirst(hasFillData, "fill");
+
+  // 2 QCM texte (ou plus si `count` le permet et que le pool est assez grand).
+  const target = Math.min(count, pool.length, Math.max(picks.length + 2, 4));
+  for (const q of shuffled) {
+    if (picks.length >= target) break;
+    if (used.has(q.id)) continue;
+    used.add(q.id);
+    picks.push({ q, format: "text" });
+  }
+
+  const ordered = seededShuffle(picks, `${seed}-order`);
+  return ordered.map((p, i) => multiToExpressTask(p.q, p.format, `${seed}-${p.q.id}-${i}`));
 }
 
 export function scoreExpressListeningTasks(
