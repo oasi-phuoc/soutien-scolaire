@@ -45,8 +45,16 @@ import {
   type FormTemplate,
 } from "@/lib/curriculum/content/communication/form-prompts";
 import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
+import { useTranslation } from "@/components/TranslationProvider";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import type { ExpressTrans } from "@/lib/curriculum/content/communication/express-types";
 
 const ACCENT = "var(--color-accent-comm)";
+
+function pickExpressTrans(trans: ExpressTrans | undefined, pivot: string, show: boolean): string | undefined {
+  if (!show || !trans || pivot === "fr") return undefined;
+  return trans[pivot as keyof ExpressTrans];
+}
 const LESSONS: Record<string, CommunicationLesson> = {
   "PE-1": EXPRESSION_E1_1,
   "PE-2": EXPRESSION_E1_2,
@@ -408,18 +416,25 @@ function renderInlineBold(text: string) {
 }
 
 function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
+  const { showPivot } = useTranslation();
+  const pivot = usePivotLang();
+  const useTrans = showPivot && pivot !== "fr";
+
   switch (block.type) {
-    case "heading":
+    case "heading": {
+      const text = pickExpressTrans(block.trans, pivot, useTrans) ?? block.text;
       return (
         <div className="mb-6">
           <h2
             className={`text-xl font-bold ${block.black ? "text-[var(--color-text-primary)]" : ""}`}
             style={block.black ? undefined : { color: ACCENT }}
+            lang={useTrans && block.trans ? pivot : "fr"}
           >
-            {block.text}
+            {text}
           </h2>
         </div>
       );
+    }
 
     case "prerequisites":
       return (
@@ -444,12 +459,17 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
         </div>
       );
 
-    case "plain":
+    case "plain": {
+      const text = pickExpressTrans(block.trans, pivot, useTrans) ?? block.text;
       return (
-        <p className="mb-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
-          {renderInlineBold(block.text)}
+        <p
+          className="mb-4 text-sm leading-relaxed text-[var(--color-text-primary)]"
+          lang={useTrans && block.trans ? pivot : "fr"}
+        >
+          {renderInlineBold(text)}
         </p>
       );
+    }
 
     case "numbered":
       return (
@@ -558,11 +578,12 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
       );
 
     case "highlight": {
-      const items = block.items ?? [];
+      const title = pickExpressTrans(block.trans, pivot, useTrans) ?? block.title;
+      const items = (useTrans && block.transItems?.[pivot as keyof typeof block.transItems]) || block.items || [];
       if (items.length === 0) {
         return (
-          <h3 className="mb-2 mt-4 text-sm font-bold" style={{ color: ACCENT }}>
-            {block.title}
+          <h3 className="mb-2 mt-4 text-sm font-bold" style={{ color: ACCENT }} lang={useTrans && block.trans ? pivot : "fr"}>
+            {title}
           </h3>
         );
       }
@@ -571,7 +592,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
           className="mb-4 rounded-[var(--radius-md)] border-l-2 px-4 py-3"
           style={{ borderColor: ACCENT, background: `color-mix(in srgb, ${ACCENT} 9%, transparent)` }}
         >
-          <h3 className="mb-2 text-sm font-bold" style={{ color: ACCENT }}>{block.title}</h3>
+          <h3 className="mb-2 text-sm font-bold" style={{ color: ACCENT }}>{title}</h3>
           <ul className="space-y-1.5">
             {items.map((item, i) => (
               <li key={i} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
@@ -755,7 +776,16 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     return { trainingExercises: split.training, evalExercises: split.evalEx };
   });
 
-  const [phase, setPhase] = useState<Phase>(() => (lesson?.writingLevel ? "intro" : "theory"));
+  const [phase, setPhase] = useState<Phase>(() => {
+    if (lesson?.writingLevel) return "intro";
+    // Bilan : pas de théorie → annonce d'évaluation (ou exercices s'il n'y a que de l'entraînement)
+    if (lesson && lesson.theory.length === 0) {
+      const split = splitOralExercises(lesson, Number(String(Date.now() % 100000)) || 1);
+      if (split.evalEx.length > 0) return "eval_announce";
+      if (split.training.length > 0) return "exercises";
+    }
+    return "theory";
+  });
   const [exIndex, setExIndex] = useState(0);
   const [evalIndex, setEvalIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);

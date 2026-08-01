@@ -156,13 +156,14 @@ export function MainNav({
 
   return (
     <>
+      {open ? (
         <button
           type="button"
           aria-label="Fermer le menu principal"
           className="fixed inset-0 z-40 cursor-default bg-transparent"
           onClick={() => setOpen(false)}
         />
-      )}
+      ) : null}
       <nav
         className={
           lessonMode

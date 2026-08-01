@@ -22,6 +22,7 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const POOL_005 = buildExpressPool("e1-1-005", [
   q({
     id: "005-q1",
+    format: "text",
     textQ: "Comment s'appelle la femme ?",
     text: ["Nicole", "Paolo", "Camille"],
     textC: 0,
@@ -34,6 +35,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q2",
+    format: "image",
     textQ: "Comment s'appelle l'homme ?",
     text: ["Paolo", "Nicole", "Jacques"],
     textC: 0,
@@ -46,6 +48,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q3",
+    format: "fill",
     textQ: "De quelle nationalité est Nicole ?",
     text: ["Allemande", "Française", "Italienne"],
     textC: 0,
@@ -59,6 +62,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q4",
+    format: "vf",
     textQ: "De quelle nationalité est Paolo ?",
     text: ["Italien", "Allemand", "Français"],
     textC: 0,
@@ -72,6 +76,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q5",
+    format: "text",
     textQ: "Quel âge a Paolo ?",
     text: ["25 ans", "35 ans", "30 ans"],
     textC: 0,
@@ -85,6 +90,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q6",
+    format: "image",
     textQ: "Quel âge a Nicole ?",
     text: ["35 ans", "25 ans", "40 ans"],
     textC: 0,
@@ -98,6 +104,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q7",
+    format: "fill",
     textQ: "Quelle est la profession de Nicole ?",
     text: ["Journaliste", "Professeur", "Vendeuse"],
     textC: 0,
@@ -111,6 +118,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q8",
+    format: "vf",
     textQ: "Que font-ils pendant la conversation ?",
     text: [
       "Ils échangent leurs cartes de visite.",
@@ -128,6 +136,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q9",
+    format: "text",
     textQ: "Quel numéro de portable donne Paolo ?",
     text: ["06 18 14 33 11", "06 18 14 33 10", "01 39 10 22 50"],
     textC: 0,
@@ -140,6 +149,7 @@ const POOL_005 = buildExpressPool("e1-1-005", [
   }),
   q({
     id: "005-q10",
+    format: "image",
     textQ: "Nicole demande-t-elle de répéter le numéro ?",
     text: ["Oui", "Non", "On ne sait pas"],
     textC: 0,
@@ -173,6 +183,7 @@ Nicole — Euh… tu peux répéter, s'il te plaît ?`;
 const POOL_011 = buildExpressPool("e1-1-011", [
   q({
     id: "011-q1",
+    format: "fill",
     textQ: "Quel est le nom de famille ?",
     text: ["Kervelek", "Cantoni", "Schultz"],
     textC: 0,
@@ -185,6 +196,7 @@ const POOL_011 = buildExpressPool("e1-1-011", [
   }),
   q({
     id: "011-q2",
+    format: "vf",
     textQ: "Quel est le prénom ?",
     text: ["Naël", "Paolo", "Nicole"],
     textC: 0,
@@ -198,6 +210,7 @@ const POOL_011 = buildExpressPool("e1-1-011", [
   }),
   q({
     id: "011-q3",
+    format: "text",
     textQ: "Quelle est sa nationalité ?",
     text: ["Français", "Italien", "Allemand"],
     textC: 0,
@@ -211,6 +224,7 @@ const POOL_011 = buildExpressPool("e1-1-011", [
   }),
   q({
     id: "011-q4",
+    format: "image",
     textQ: "Quel âge a-t-il ?",
     text: ["34 ans", "25 ans", "35 ans"],
     textC: 0,
@@ -224,6 +238,7 @@ const POOL_011 = buildExpressPool("e1-1-011", [
   }),
   q({
     id: "011-q5",
+    format: "fill",
     textQ: "Quelle est sa profession ?",
     text: ["Professeur", "Journaliste", "Technicien"],
     textC: 0,
@@ -237,6 +252,7 @@ const POOL_011 = buildExpressPool("e1-1-011", [
   }),
   q({
     id: "011-q6",
+    format: "vf",
     textQ: "Naël est-il allemand ?",
     text: ["Non", "Oui", "On ne sait pas"],
     textC: 0,
@@ -249,6 +265,7 @@ const POOL_011 = buildExpressPool("e1-1-011", [
   }),
   q({
     id: "011-q7",
+    format: "text",
     textQ: "Travaille-t-il comme professeur ?",
     text: ["Oui", "Non", "On ne sait pas"],
     textC: 0,
@@ -261,6 +278,7 @@ const POOL_011 = buildExpressPool("e1-1-011", [
   }),
   q({
     id: "011-q8",
+    format: "image",
     textQ: "Le prénom est-il Paolo ?",
     text: ["Non", "Oui", "On ne sait pas"],
     textC: 0,
@@ -284,6 +302,7 @@ Il est professeur.`;
 const POOL_012 = buildExpressPool("e1-1-012", [
   q({
     id: "012-q1",
+    format: "fill",
     textQ: "Qu'écoutez-vous ?",
     text: ["Un message sur le répondeur", "Une annonce à la radio", "Une conversation au café"],
     textC: 0,
@@ -297,6 +316,7 @@ const POOL_012 = buildExpressPool("e1-1-012", [
   }),
   q({
     id: "012-q2",
+    format: "vf",
     textQ: "Quel est le numéro indiqué ?",
     text: ["01 39 10 22 50", "06 18 14 33 11", "01 39 10 22 15"],
     textC: 0,
@@ -309,6 +329,7 @@ const POOL_012 = buildExpressPool("e1-1-012", [
   }),
   q({
     id: "012-q3",
+    format: "text",
     textQ: "Chez qui êtes-vous ?",
     text: ["Chez Lucie et Thomas", "Chez Luc et Tania", "Chez Paolo et Nicole"],
     textC: 0,
@@ -321,6 +342,7 @@ const POOL_012 = buildExpressPool("e1-1-012", [
   }),
   q({
     id: "012-q4",
+    format: "image",
     textQ: "Que laissez-vous sur le message ?",
     text: ["Votre nom et votre prénom", "Votre adresse", "Votre âge"],
     textC: 0,
@@ -334,6 +356,7 @@ const POOL_012 = buildExpressPool("e1-1-012", [
   }),
   q({
     id: "012-q5",
+    format: "fill",
     textQ: "Donnez-vous votre adresse ?",
     text: ["Non", "Oui", "On ne sait pas"],
     textC: 0,
@@ -346,6 +369,7 @@ const POOL_012 = buildExpressPool("e1-1-012", [
   }),
   q({
     id: "012-q6",
+    format: "vf",
     textQ: "Le dernier mot est-il « au revoir » ?",
     text: ["Non", "Oui", "On ne sait pas"],
     textC: 0,
@@ -358,6 +382,7 @@ const POOL_012 = buildExpressPool("e1-1-012", [
   }),
   q({
     id: "012-q7",
+    format: "text",
     textQ: "S'agit-il d'un message téléphonique ?",
     text: ["Oui", "Non", "On ne sait pas"],
     textC: 0,
@@ -382,6 +407,7 @@ Le numéro est le 01 39 10 22 50.
 const POOL_013 = buildExpressPool("e1-1-013", [
   q({
     id: "013-q1",
+    format: "image",
     textQ: "La femme dit :",
     text: ["« C'est pour un passeport ? »", "« C'est pour une carte de visite ? »", "« C'est pour un billet ? »"],
     textC: 0,
@@ -394,6 +420,7 @@ const POOL_013 = buildExpressPool("e1-1-013", [
   }),
   q({
     id: "013-q2",
+    format: "fill",
     textQ: "Que demande la femme ?",
     text: ["Le nom de famille", "Le prénom", "L'adresse"],
     textC: 0,
@@ -406,6 +433,7 @@ const POOL_013 = buildExpressPool("e1-1-013", [
   }),
   q({
     id: "013-q3",
+    format: "vf",
     textQ: "Comment s'appelle l'homme (nom de famille) ?",
     text: ["Zola", "Sola", "Schultz"],
     textC: 0,
@@ -418,6 +446,7 @@ const POOL_013 = buildExpressPool("e1-1-013", [
   }),
   q({
     id: "013-q4",
+    format: "text",
     textQ: "Quel est le prénom de l'homme ?",
     text: ["Jacques", "Jean", "Paolo"],
     textC: 0,
@@ -430,6 +459,7 @@ const POOL_013 = buildExpressPool("e1-1-013", [
   }),
   q({
     id: "013-q5",
+    format: "image",
     textQ: "Quelle est sa relation avec Camille ?",
     text: ["Il est l'ami de Camille", "Il est le mari de Camille", "Il est le frère de Camille"],
     textC: 0,
@@ -442,6 +472,7 @@ const POOL_013 = buildExpressPool("e1-1-013", [
   }),
   q({
     id: "013-q6",
+    format: "fill",
     textQ: "Comment salue-t-elle ?",
     text: ["« Salut, ça va ? »", "« Bonjour, ça va ? »", "« Bonsoir ! »"],
     textC: 0,
@@ -455,6 +486,7 @@ const POOL_013 = buildExpressPool("e1-1-013", [
   }),
   q({
     id: "013-q7",
+    format: "vf",
     textQ: "Le document demandé est-il un passeport ?",
     text: ["Oui", "Non", "On ne sait pas"],
     textC: 0,
@@ -482,6 +514,7 @@ Femme — Salut, ça va ?`;
 const POOL_014 = buildExpressPool("e1-1-014", [
   q({
     id: "014-q1",
+    format: "text",
     textQ: "Quel est le nom de famille d'Annie ?",
     text: ["Schultz", "Gatineau", "Zola"],
     textC: 0,
@@ -494,6 +527,7 @@ const POOL_014 = buildExpressPool("e1-1-014", [
   }),
   q({
     id: "014-q2",
+    format: "image",
     textQ: "Quel âge a Annie ?",
     text: ["37 ans", "42 ans", "35 ans"],
     textC: 0,
@@ -507,6 +541,7 @@ const POOL_014 = buildExpressPool("e1-1-014", [
   }),
   q({
     id: "014-q3",
+    format: "fill",
     textQ: "Quelle est la profession d'Annie ?",
     text: ["Vendeuse", "Pharmacienne", "Journaliste"],
     textC: 0,
@@ -520,6 +555,7 @@ const POOL_014 = buildExpressPool("e1-1-014", [
   }),
   q({
     id: "014-q4",
+    format: "vf",
     textQ: "Quel est le nom de famille de Nadine ?",
     text: ["Gatineau", "Patineau", "Schultz"],
     textC: 0,
@@ -532,6 +568,7 @@ const POOL_014 = buildExpressPool("e1-1-014", [
   }),
   q({
     id: "014-q5",
+    format: "text",
     textQ: "Quelle est la profession de Nadine ?",
     text: ["Pharmacienne", "Serveuse", "Vendeuse"],
     textC: 0,
@@ -545,6 +582,7 @@ const POOL_014 = buildExpressPool("e1-1-014", [
   }),
   q({
     id: "014-q6",
+    format: "image",
     textQ: "De quelle nationalité est Nadine ?",
     text: ["Belge", "Suisse", "Française"],
     textC: 0,
@@ -558,6 +596,7 @@ const POOL_014 = buildExpressPool("e1-1-014", [
   }),
   q({
     id: "014-q7",
+    format: "fill",
     textQ: "Annie est-elle vendeuse ?",
     text: ["Oui", "Non", "On ne sait pas"],
     textC: 0,
@@ -578,6 +617,7 @@ Nadine Gatineau est pharmacienne. Elle est belge.`;
 const POOL_015 = buildExpressPool("e1-1-015", [
   q({
     id: "015-q1",
+    format: "vf",
     textQ: "Comment s'appelle la femme ?",
     text: ["Nina", "Sophie", "Camille"],
     textC: 0,
@@ -590,6 +630,7 @@ const POOL_015 = buildExpressPool("e1-1-015", [
   }),
   q({
     id: "015-q2",
+    format: "text",
     textQ: "Comment s'appelle l'homme ?",
     text: ["Felipe", "Paolo", "Jacques"],
     textC: 0,
@@ -602,6 +643,7 @@ const POOL_015 = buildExpressPool("e1-1-015", [
   }),
   q({
     id: "015-q3",
+    format: "image",
     textQ: "Qui est Sophie pour Nina ?",
     text: ["Sa sœur", "Sa mère", "Sa professeure"],
     textC: 0,
@@ -615,6 +657,7 @@ const POOL_015 = buildExpressPool("e1-1-015", [
   }),
   q({
     id: "015-q4",
+    format: "fill",
     textQ: "De quelle nationalité est Felipe ?",
     text: ["Brésilien", "Français", "Belge"],
     textC: 0,
@@ -628,6 +671,7 @@ const POOL_015 = buildExpressPool("e1-1-015", [
   }),
   q({
     id: "015-q5",
+    format: "vf",
     textQ: "Quelle est la profession de Nina ?",
     text: ["Ingénieure", "Étudiante", "Vendeuse"],
     textC: 0,
@@ -641,6 +685,7 @@ const POOL_015 = buildExpressPool("e1-1-015", [
   }),
   q({
     id: "015-q6",
+    format: "text",
     textQ: "Felipe est-il belge ?",
     text: ["Non", "Oui", "On ne sait pas"],
     textC: 0,
@@ -654,6 +699,7 @@ const POOL_015 = buildExpressPool("e1-1-015", [
   }),
   q({
     id: "015-q7",
+    format: "image",
     textQ: "Nina est-elle ingénieure ?",
     text: ["Oui", "Non", "On ne sait pas"],
     textC: 0,
