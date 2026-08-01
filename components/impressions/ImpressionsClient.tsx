@@ -692,9 +692,11 @@ export function ImpressionsClient() {
               theoryNode={theoryNode}
               exerciseNodes={previewBlocks.map((item) => ({
                 key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-corr${item.correction ? 1 : 0}`,
+                /** Packing style placement maths (voir ImpressionHubClient). */
                 forceNewPage: item.correction
                   ? item.displayIndex === 0
-                  : Boolean(item.forceNewPage && item.displayIndex === 0),
+                  : Boolean(item.forceNewPage && item.displayIndex === 0)
+                    || item.exercise?.forceNewPage === true,
                 render: () => (
                   <div className="print-exercise">
                     <div
