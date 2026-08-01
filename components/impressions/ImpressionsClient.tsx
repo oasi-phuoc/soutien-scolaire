@@ -442,8 +442,8 @@ export function ImpressionsClient() {
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        <aside className="max-h-[42%] shrink-0 overflow-y-auto border-b border-[var(--color-border-default)] p-4 lg:max-h-none lg:w-[44rem] lg:border-b-0 lg:border-r">
-          <div className="grid gap-4 lg:grid-cols-2">
+        <aside className="impression-scroll max-h-[42%] shrink-0 overflow-y-auto border-b border-[var(--color-border-default)] p-4 lg:max-h-none lg:w-[44rem] lg:overflow-hidden lg:border-b-0 lg:border-r">
+          <div className="grid gap-4 lg:h-full lg:min-h-0 lg:grid-cols-2 lg:items-start">
             <SectionCard title="Document" accent={accent}>
               <div className="space-y-3">
                 <div>
@@ -516,6 +516,7 @@ export function ImpressionsClient() {
               </div>
             </SectionCard>
 
+            <div className="impression-scroll lg:h-full lg:min-h-0 lg:overflow-y-auto lg:pr-1">
             <SectionCard title="Paramètres" accent={accent}>
               <div className="space-y-4">
                 <div>
@@ -663,10 +664,11 @@ export function ImpressionsClient() {
                 </div>
               </div>
             </SectionCard>
+            </div>
           </div>
         </aside>
 
-        <section className="min-h-0 flex-1 overflow-y-auto bg-[color-mix(in_oklch,var(--color-bg-secondary)_70%,white)] px-3 py-4 sm:px-6">
+        <section className="impression-scroll min-h-0 flex-1 overflow-y-auto bg-[color-mix(in_oklch,var(--color-bg-secondary)_70%,white)] px-3 py-4 sm:px-6">
           {bundleError && (
             <p className="mx-auto mb-4 max-w-md rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm text-amber-700">
               {bundleError}

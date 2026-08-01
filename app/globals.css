@@ -617,6 +617,41 @@ input[type=number] {
   background: var(--color-theme);
 }
 
+/* Impression — barre de défilement verte (couleur thème), sans flèches.
+   `scrollbar-color` couvre Firefox + Chrome 121+ ; ::-webkit-* couvre
+   Chrome/Edge/Safari plus anciens. */
+.impression-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-theme) transparent;
+}
+
+.impression-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.impression-scroll::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  -webkit-appearance: none !important;
+}
+
+.impression-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.impression-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--color-theme);
+  background-clip: padding-box;
+}
+
+.impression-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 .app-shell-bar {
   box-sizing: border-box;
   margin-inline: auto;
