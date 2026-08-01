@@ -277,7 +277,7 @@ export function PrintDocumentFooter({
         </div>
       </div>
       <div className="text-right">
-        <p>Zone Industrielle 4, 1963 Vétroz</p>
+        <p>Centre de formation « Le Botza »</p>
         <p>{preview ? `Page ${page} sur ${totalPages}` : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
       </div>
     </div>

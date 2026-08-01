@@ -295,7 +295,7 @@ export function ImpressionHubClient() {
     const nextEval = Boolean(bundle.defaultEvalMode);
     setEvalMode(nextEval);
     setTitle(nextEval ? "Évaluation" : bundle.lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
-    setTheory(Boolean(bundle.theoryPreview || bundle.announcementPreview));
+    setTheory(false);
     setSelection(
       bundle.exercises.map((ex) => ({
         id: ex.id,
