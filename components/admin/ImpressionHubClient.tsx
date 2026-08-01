@@ -513,7 +513,7 @@ export function ImpressionHubClient() {
               </div>
               <div>
                 <FieldLabel>En-tête</FieldLabel>
-                <div className="space-y-3 rounded-xl border border-[var(--color-border-default)] p-3">
+                <div className="space-y-3">
                   <div className="grid grid-cols-2 gap-2">
                     <AppSelect
                       value={classLevel}

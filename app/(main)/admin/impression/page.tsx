@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { ImpressionHubBoundary } from "@/components/admin/ImpressionHubBoundary";
-import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
+import { APP_SHELL_BLEED } from "@/lib/layout/page-shell";
 
 /**
  * Même hub que `/impressions` (mise en page split reprise de l’ancien
@@ -38,7 +38,7 @@ export default async function AdminImpressionPage() {
   }
 
   return (
-    <main className={`${APP_SHELL_FULL} flex-1 py-4 pb-28 lg:py-6`}>
+    <main className={`${APP_SHELL_BLEED} flex-1 py-4 pb-28 lg:py-6`}>
       <ImpressionHubBoundary />
     </main>
   );

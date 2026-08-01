@@ -255,6 +255,12 @@ function FracInline({ frac }: { frac: string }) {
 }
 
 // ── Shape renderer ─────────────────────────────────────────────────────────────
+/** Couleurs des SVG fractions — vert thème (modules A4 + placement ex. 21/22). */
+const FRACTION_FILL = "var(--color-theme, #6fafa0)";
+const FRACTION_FILL_LIGHT = "color-mix(in oklch, var(--color-theme, #6fafa0) 12%, white)";
+const FRACTION_STROKE = "var(--color-theme-muted, #4f8f80)";
+const FRACTION_STROKE_LIGHT = "color-mix(in oklch, var(--color-theme, #6fafa0) 45%, white)";
+
 export type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle" | "semicircle" | "quartercircle" | "hexagon";
 
 export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSet }: {
@@ -270,9 +276,9 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
   const s = scale;
 
   function cellFill(i: number): string {
-    if (colored.has(i)) return "#3b82f6";
+    if (colored.has(i)) return FRACTION_FILL;
     if (missSet?.has(i)) return "#fbbf24";
-    return "#eff6ff";
+    return FRACTION_FILL_LIGHT;
   }
 
   function xMark(cx: number, cy: number, r: number, i: number) {
@@ -294,14 +300,14 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
           const r = Math.floor(i / cols), c = i % cols;
           return (
             <rect key={i} x={c * cellW} y={r * cellH} width={cellW} height={cellH}
-              fill={colored.has(i) ? "#3b82f6" : "#eff6ff"}
-              stroke="#93c5fd" strokeWidth={0.5}
+              fill={colored.has(i) ? FRACTION_FILL : FRACTION_FILL_LIGHT}
+              stroke={FRACTION_STROKE_LIGHT} strokeWidth={0.5}
               style={toggle ? { cursor: "pointer" } : {}}
               onClick={toggle ? () => toggle(i) : undefined}
             />
           );
         })}
-        <rect x={0} y={0} width={W} height={H} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        <rect x={0} y={0} width={W} height={H} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
       </svg>
     );
   }
@@ -315,12 +321,12 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
           {[0, 1].map(k => (
             <rect key={k} x={k * 50} y={0} width={50} height={S}
               fill={cellFill(k)}
-              stroke="#2563eb" strokeWidth={1}
+              stroke={FRACTION_STROKE} strokeWidth={1}
               style={toggle ? { cursor: "pointer" } : {}}
               onClick={toggle ? () => toggle(k) : undefined}
             />
           ))}
-          <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+          <rect x={0} y={0} width={S} height={S} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
           {[0, 1].map(k => xMark(k * 50 + 25, S / 2, 12, k))}
         </svg>
       );
@@ -334,13 +340,13 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
             return (
               <rect key={k} x={c * cellSize} y={r * cellSize} width={cellSize} height={cellSize}
                 fill={cellFill(k)}
-                stroke="#2563eb" strokeWidth={1}
+                stroke={FRACTION_STROKE} strokeWidth={1}
                 style={toggle ? { cursor: "pointer" } : {}}
                 onClick={toggle ? () => toggle(k) : undefined}
               />
             );
           })}
-          <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+          <rect x={0} y={0} width={S} height={S} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
           {Array.from({ length: d }, (_, k) => {
             const r = Math.floor(k / sqrtD), c = k % sqrtD;
             return xMark((c + 0.5) * cellSize, (r + 0.5) * cellSize, cellSize * 0.28, k);
@@ -354,12 +360,12 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
         {Array.from({ length: d }, (_, k) => (
           <rect key={k} x={0} y={k * stripH} width={S} height={stripH}
             fill={cellFill(k)}
-            stroke="#2563eb" strokeWidth={1}
+            stroke={FRACTION_STROKE} strokeWidth={1}
             style={toggle ? { cursor: "pointer" } : {}}
             onClick={toggle ? () => toggle(k) : undefined}
           />
         ))}
-        <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        <rect x={0} y={0} width={S} height={S} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
         {Array.from({ length: d }, (_, k) => xMark(S / 2, (k + 0.5) * stripH, Math.min(stripH * 0.28, 10), k))}
       </svg>
     );
@@ -401,7 +407,7 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
           <polygon key={k}
             points={poly.map(([x, y]) => `${x},${y}`).join(' ')}
             fill={cellFill(k)}
-            stroke="#2563eb" strokeWidth={1}
+            stroke={FRACTION_STROKE} strokeWidth={1}
             style={toggle ? { cursor: "pointer" } : {}}
             onClick={toggle ? () => toggle(k) : undefined}
           />
@@ -429,13 +435,13 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
           return (
             <path key={k} d={pathD}
               fill={cellFill(k)}
-              stroke="#2563eb" strokeWidth={1}
+              stroke={FRACTION_STROKE} strokeWidth={1}
               style={toggle ? { cursor: "pointer" } : {}}
               onClick={toggle ? () => toggle(k) : undefined}
             />
           );
         })}
-        <circle cx={cx} cy={cy} r={r} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
         {Array.from({ length: d }, (_, k) => {
           const midAngle = -Math.PI / 2 + (k + 0.5) * sliceAngle;
           return xMark(cx + r * 0.5 * Math.cos(midAngle), cy + r * 0.5 * Math.sin(midAngle), r * 0.2, k);
@@ -459,14 +465,14 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
           return (
             <path key={k} d={pathD}
               fill={cellFill(k)}
-              stroke="#2563eb" strokeWidth={1}
+              stroke={FRACTION_STROKE} strokeWidth={1}
               style={toggle ? { cursor: "pointer" } : {}}
               onClick={toggle ? () => toggle(k) : undefined}
             />
           );
         })}
         {/* outline: semicircle arc + flat base */}
-        <path d={`M ${scx - sr} ${scy} A ${sr} ${sr} 0 0 1 ${scx + sr} ${scy} Z`} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        <path d={`M ${scx - sr} ${scy} A ${sr} ${sr} 0 0 1 ${scx + sr} ${scy} Z`} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
         {Array.from({ length: d }, (_, k) => {
           const midA = (k + 0.5) * sliceAngle;
           return xMark(scx + sr * 0.55 * Math.cos(midA), scy - sr * 0.55 * Math.sin(midA), 6, k);
@@ -489,13 +495,13 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
           return (
             <path key={k} d={pathD}
               fill={cellFill(k)}
-              stroke="#2563eb" strokeWidth={1}
+              stroke={FRACTION_STROKE} strokeWidth={1}
               style={toggle ? { cursor: "pointer" } : {}}
               onClick={toggle ? () => toggle(k) : undefined}
             />
           );
         })}
-        <path d={`M ${qcx} ${qcy} L ${qcx + qr} ${qcy} A ${qr} ${qr} 0 0 0 ${qcx} ${qcy - qr} Z`} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        <path d={`M ${qcx} ${qcy} L ${qcx + qr} ${qcy} A ${qr} ${qr} 0 0 0 ${qcx} ${qcy - qr} Z`} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
         {Array.from({ length: d }, (_, k) => {
           const midA = (k + 0.5) * sliceAngle;
           return xMark(qcx + qr * 0.55 * Math.cos(midA), qcy - qr * 0.55 * Math.sin(midA), 6, k);
@@ -576,12 +582,12 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
           <polygon key={k}
             points={polyPoints(poly)}
             fill={cellFill(k)}
-            stroke="#2563eb" strokeWidth={1}
+            stroke={FRACTION_STROKE} strokeWidth={1}
             style={toggle ? { cursor: "pointer" } : {}}
             onClick={toggle ? () => toggle(k) : undefined}
           />
         ))}
-        <polygon points={V.map(([x,y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        <polygon points={V.map(([x,y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
         {polygons.map((poly, k) => xMark(polyCx(poly), polyCy(poly), 5, k))}
       </svg>
     );
@@ -597,13 +603,13 @@ export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, 
         return (
           <rect key={i} x={x} y={0} width={w} height={H}
             fill={cellFill(i)}
-            stroke="#2563eb" strokeWidth={1}
+            stroke={FRACTION_STROKE} strokeWidth={1}
             style={toggle ? { cursor: "pointer" } : {}}
             onClick={toggle ? () => toggle(i) : undefined}
           />
         );
       })}
-      <rect x={0} y={0} width={W} height={H} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+      <rect x={0} y={0} width={W} height={H} fill="none" stroke={FRACTION_STROKE} strokeWidth={1.5} />
       {Array.from({ length: d }, (_, i) => {
         const x = Math.round(i * cellW);
         const w = Math.round((i + 1) * cellW) - x;

@@ -526,6 +526,11 @@ input[type=number] {
   .desktop-shell .app-shell--full {
     max-width: min(72rem, calc(100vw - var(--sidebar-w) - 2rem));
   }
+
+  /* Impression : occupe tout l'espace de la sidebar au bord de la fenêtre */
+  .desktop-shell .app-shell--bleed {
+    max-width: none;
+  }
 }
 
 /* Scrollbar inside AppSelect dropdown lists */
@@ -710,7 +715,7 @@ input[type=number] {
 
 /*
  * Corrigé d'impression : pas de tentative élève (vide / « — ») ni trait amber.
- * On ne garde que la bonne réponse, lisible en noir.
+ * On ne garde que la bonne réponse, en ambre (math / français / placement).
  */
 .print-layout-context .print-answer-key [class*="border-amber"] > :first-child:not(:only-child),
 .print-layout-context .print-answer-key [class*="border-orange"] > :first-child:not(:only-child) {
@@ -726,7 +731,7 @@ input[type=number] {
 
 .print-layout-context .print-answer-key [class*="text-amber-"],
 .print-layout-context .print-answer-key [class*="text-orange-"] {
-  color: #000 !important;
+  color: #d97706 !important;
   font-weight: 700 !important;
 }
 
