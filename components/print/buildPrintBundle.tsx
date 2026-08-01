@@ -66,7 +66,7 @@ export type PrintBundle = {
   course: string;
   accentColor: string;
   theoryPreview?: ReactNode;
-  /** Page d'annonce placement (toujours page 1, puis saut avant le 1er exo). */
+  /** Page d'annonce placement (incluse seulement si l'option théorie/annonce est cochée). */
   announcementPreview?: ReactNode;
   exercises: PrintExercise[];
   /** Mode évaluation + barème du test (placement = 100 pts). */

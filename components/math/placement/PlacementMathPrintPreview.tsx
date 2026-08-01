@@ -46,6 +46,7 @@ export function PlacementMathPrintPreview({
         validated={correction}
         validateTrigger={0}
         onValidated={() => {}}
+        forPrint
       />
     </PlacementPrintSeedRoot>
   );

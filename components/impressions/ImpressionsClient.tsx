@@ -154,6 +154,7 @@ export function ImpressionsClient() {
   const [docId, setDocId] = useState("");
   const [evalMode, setEvalMode] = useState(false);
   const [theory, setTheory] = useState(false);
+  const [includeCorrections, setIncludeCorrections] = useState(true);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [title, setTitle] = useState("");
@@ -378,9 +379,23 @@ export function ImpressionsClient() {
       key: `${item.id}-${occurrence}`,
       exercise,
       selection: item,
-      forceNewPage: hasAnnouncement && occurrence === 0 && item.id === selection.find((s) => s.included)?.id,
+      occurrence,
+      correction: false as boolean,
+      forceNewPage: theory && hasAnnouncement && occurrence === 0 && item.id === selection.find((s) => s.included)?.id,
     }));
   });
+  const previewBlocks = [
+    ...previewExercises.map((item, index) => ({ ...item, displayIndex: index, correction: false as boolean })),
+    ...(includeCorrections
+      ? previewExercises.map((item, index) => ({
+          ...item,
+          key: `${item.key}-corrige`,
+          displayIndex: index,
+          correction: true as boolean,
+          forceNewPage: index === 0,
+        }))
+      : []),
+  ];
 
   const handlePrint = () => {
     const node = previewPagesRef.current;
@@ -556,6 +571,18 @@ export function ImpressionsClient() {
                   </div>
                 )}
 
+                <div className="flex items-center gap-3 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5">
+                  <CheckBox checked={includeCorrections} onChange={setIncludeCorrections} accent={accent} />
+                  <div className="min-w-0">
+                    <p className="text-sm text-[var(--color-text-primary)]">Inclure le corrigé</p>
+                    <p className="text-[11px] text-[var(--color-text-secondary)]">
+                      {includeCorrections
+                        ? "Feuille élève puis même série avec les réponses"
+                        : "Uniquement la feuille sans réponses"}
+                    </p>
+                  </div>
+                </div>
+
                 <div>
                   <FieldLabel>Exercices</FieldLabel>
                   <div className="space-y-2">
@@ -651,7 +678,7 @@ export function ImpressionsClient() {
             </p>
           ) : (
             <PaginatedPreview
-              key={`${selectedEntry?.id ?? "none"}-${printSeed}`}
+              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}`}
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}
@@ -663,24 +690,30 @@ export function ImpressionsClient() {
                 />
               }
               theoryNode={theoryNode}
-              exerciseNodes={previewExercises.map((item, index) => ({
-                key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`,
-                forceNewPage: Boolean(item.forceNewPage && index === 0),
+              exerciseNodes={previewBlocks.map((item) => ({
+                key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-corr${item.correction ? 1 : 0}`,
+                forceNewPage: item.correction
+                  ? item.displayIndex === 0
+                  : Boolean(item.forceNewPage && item.displayIndex === 0),
                 render: () => (
                   <div className="print-exercise">
                     <div
                       className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"
                       style={{ color: accent }}
                     >
-                      <span className="flex-1">Exercice {index + 1}</span>
+                      <span className="flex-1">
+                        Exercice {item.displayIndex + 1}{item.correction ? " — Corrigé" : ""}
+                      </span>
                       {evalMode && (
                         <span style={{ color: "black" }}>
                           {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
                         </span>
                       )}
                     </div>
-                    <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
-                      {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
+                    <div className={`print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none${item.correction ? " print-answer-key" : ""}`}>
+                      {(item.correction
+                        ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
+                        : item.exercise?.preview) ?? <div className="h-7 border-b border-black/40" />}
                     </div>
                   </div>
                 ),
