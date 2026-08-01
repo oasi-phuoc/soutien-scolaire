@@ -277,6 +277,17 @@ export function ExpressListeningExercise({
         </div>
       ) : null}
 
+      {exercise.readingText ? (
+        <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-4 py-3">
+          <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+            Texte à lire
+          </p>
+          <p className="whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">
+            {exercise.readingText}
+          </p>
+        </div>
+      ) : null}
+
       {showTranscript && exercise.transcript ? (
         <div className="mb-4 mt-2">
           <COTranscriptView

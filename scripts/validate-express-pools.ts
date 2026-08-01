@@ -43,7 +43,35 @@ function isImageable(q: ExpressMultiQuestion): boolean {
 
 for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
   if (onlyLesson && lessonId !== onlyLesson) continue;
-  const exs = [...(lesson.exercises ?? []), ...(lesson.evalExercises ?? [])];
+  const exs = [
+    ...(lesson.exercises ?? []),
+    ...(lesson.evalExercises ?? []),
+    ...(lesson.ceExercise ? [lesson.ceExercise] : []),
+  ];
+
+  // CE / PO / PE — présence et cohérence
+  if (lesson.ceExercise && !lesson.ceExercise.readingText?.trim()) {
+    err(lessonId, "ceExercise sans readingText");
+  }
+  for (const dlg of lesson.poDialogues ?? []) {
+    if (dlg.lines.length < 6) warn(`${lessonId}/${dlg.id}`, `dialogue PO court (${dlg.lines.length} répliques)`);
+    if (!dlg.lines.some((l) => l.role === "A") || !dlg.lines.some((l) => l.role === "B")) {
+      err(`${lessonId}/${dlg.id}`, "dialogue PO sans alternance de rôles");
+    }
+  }
+  if (lesson.poDialogues && lesson.poDialogues.length < 10) {
+    warn(lessonId, `pool PO : ${lesson.poDialogues.length} situations (< 10)`);
+  }
+  for (const p of lesson.pePrompts ?? []) {
+    if (p.minWords !== 50 && p.minWords !== 80) {
+      err(`${lessonId}/${p.id}`, `minWords PE = ${p.minWords} (attendu 50 A1 / 80 A2)`);
+    }
+    if (p.maxWords <= p.minWords) err(`${lessonId}/${p.id}`, "maxWords PE ≤ minWords");
+  }
+  if (lesson.pePrompts && lesson.pePrompts.length < 10) {
+    warn(lessonId, `pool PE : ${lesson.pePrompts.length} consignes (< 10)`);
+  }
+
   for (const ex of exs) {
     if (ex.type !== "listening" || !ex.questionPool) continue;
     const ctx = `${lessonId}/${ex.id}`;

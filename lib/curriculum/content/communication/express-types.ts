@@ -43,7 +43,7 @@ export type ListeningItem = {
   answer: string;
 };
 
-/** Exercice auto-corrigé (QCM texte ou écoute). */
+/** Exercice auto-corrigé (QCM texte, écoute ou lecture). */
 export type CommunicationExercise = {
   id: string;
   instruction: string;
@@ -53,6 +53,11 @@ export type CommunicationExercise = {
   answer?: string;
   audioSrc?: string;
   audioLabel?: string;
+  /**
+   * Compréhension écrite : texte à lire affiché à la place du lecteur audio.
+   * Les questions (questionPool) fonctionnent comme pour l'écoute.
+   */
+  readingText?: string;
   items?: ListeningItem[];
   /** Transcription (ampoule d'aide), style CO. */
   transcript?: string;
@@ -70,6 +75,29 @@ export type CommunicationExercise = {
  */
 export type ExpressPoolItem = CommunicationExercise & {
   tier: 1 | 2 | 3 | 4 | 5;
+};
+
+/** Situation de dialogue PO (style test de placement) — l'élève joue un rôle. */
+export type ExpressPoDialogue = {
+  id: string;
+  /** Titre court de la situation (ex. « À la pharmacie »). */
+  title: string;
+  /** Contexte lu à l'élève (une ou deux phrases). */
+  context: string;
+  roleA: { title: string; vous: string };
+  roleB: { title: string; vous: string };
+  lines: Array<{ role: "A" | "B"; text: string }>;
+};
+
+/** Consigne de production écrite liée au thème de la leçon. */
+export type ExpressPePrompt = {
+  id: string;
+  title: string;
+  situation: string;
+  instruction: string;
+  points: string[];
+  minWords: number;
+  maxWords: number;
 };
 
 export type CommunicationLesson = {
@@ -101,6 +129,12 @@ export type CommunicationLesson = {
    * Leçons d'expression orale (ids `E1-1`, …) à valider avant de débloquer celle-ci.
    */
   prerequisiteCommIds?: string[];
+  /** Compréhension écrite : exercice texte + questions (fin d'entraînement). */
+  ceExercise?: CommunicationExercise;
+  /** Production orale : pool de dialogues à jouer (≥ 10 situations si possible). */
+  poDialogues?: ExpressPoDialogue[];
+  /** Production écrite : pool de consignes (≥ 10) — A1 min 50 mots, A2 min 80. */
+  pePrompts?: ExpressPePrompt[];
 };
 
 function mulberry32(seed: number) {
@@ -232,6 +266,24 @@ export function listeningPoolExercise(spec: {
     audioSrc: spec.audioSrc,
     audioLabel: spec.audioLabel,
     transcript: spec.transcript,
+    questionPool: spec.questionPool,
+    questionCount: spec.questionCount ?? 5,
+  };
+}
+
+/** Compréhension écrite : texte à lire + pool de questions (mêmes formats que l'écoute). */
+export function readingPoolExercise(spec: {
+  id: string;
+  readingText: string;
+  questionPool: ExpressMultiQuestion[];
+  instruction?: string;
+  questionCount?: number;
+}): CommunicationExercise {
+  return {
+    id: spec.id,
+    type: "listening",
+    instruction: spec.instruction ?? "Lisez le texte et répondez aux questions.",
+    readingText: spec.readingText,
     questionPool: spec.questionPool,
     questionCount: spec.questionCount ?? 5,
   };

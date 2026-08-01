@@ -10,6 +10,7 @@ import {
 } from "@/app/actions/expression";
 import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
 import { ExpressListeningExercise } from "@/components/communication/ExpressListeningExercise";
+import { ExpressPoDialogueExercise } from "@/components/communication/ExpressPoDialogueExercise";
 import { SingleAudioPlayer } from "@/components/communication/SingleAudioPlayer";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
@@ -98,7 +99,17 @@ const LESSONS: Record<string, CommunicationLesson> = {
   "A1-1": EXPRESS_ORAL_BY_ID["E1-1"]!,
 };
 
-type Phase = "intro" | "theory" | "form" | "writing" | "exercises" | "eval_announce" | "eval" | "score";
+type Phase =
+  | "intro"
+  | "theory"
+  | "form"
+  | "writing"
+  | "exercises"
+  | "po"
+  | "pe"
+  | "eval_announce"
+  | "eval"
+  | "score";
 
 function splitOralExercises(
   lesson: CommunicationLesson,
@@ -813,7 +824,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [{ trainingExercises, evalExercises }] = useState(() => {
     if (!lesson || lesson.writingLevel) return { trainingExercises: [] as CommunicationExercise[], evalExercises: [] as CommunicationExercise[] };
     const split = splitOralExercises(lesson, Number(lessonSeed) || 1);
-    return { trainingExercises: split.training, evalExercises: split.evalEx };
+    // Compréhension écrite : ajoutée en fin d'entraînement (mêmes mécaniques).
+    const training = lesson.ceExercise ? [...split.training, lesson.ceExercise] : split.training;
+    return { trainingExercises: training, evalExercises: split.evalEx };
   });
 
   const [phase, setPhase] = useState<Phase>(() => {
@@ -843,6 +856,18 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [writingPrompt, setWritingPrompt] = useState<WritingPrompt | null>(() =>
     lesson?.writingLevel ? randomWritingPrompt(lesson.writingLevel) : null,
   );
+  // ——— Production orale (dialogue) + production écrite par leçon ———
+  const poPool = lesson?.writingLevel ? [] : (lesson?.poDialogues ?? []);
+  const pePool = lesson?.writingLevel ? [] : (lesson?.pePrompts ?? []);
+  const hasPo = poPool.length > 0;
+  const hasPe = pePool.length > 0;
+  const [poSeed, setPoSeed] = useState(() => Math.floor(Math.random() * 1e6));
+  const [poTranscripts, setPoTranscripts] = useState<string[]>([]);
+  const [poDone, setPoDone] = useState(false);
+  const poDialogue = hasPo ? poPool[poSeed % poPool.length] ?? null : null;
+  const poStudentRole: "A" | "B" = poSeed % 2 === 0 ? "B" : "A";
+  const [peSeed, setPeSeed] = useState(() => Math.floor(Math.random() * 1e6));
+  const pePrompt: WritingPrompt | null = hasPe ? pePool[peSeed % pePool.length] ?? null : null;
   const [writingText, setWritingText] = useState("");
   const [grammarFeedback, setGrammarFeedback] = useState<GrammarMatch[]>([]);
   const [grammarChecking, setGrammarChecking] = useState(false);
@@ -854,9 +879,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [formValidated, setFormValidated] = useState(false);
 
   useEffect(() => {
-    if (!lesson?.writingLevel) return;
+    if (!lesson?.writingLevel && !hasPe) return;
     void getExpressionTeachersAction().then(setTeachers);
-  }, [lesson?.writingLevel]);
+  }, [lesson?.writingLevel, hasPe]);
 
   if (!lesson) {
     return (
@@ -872,16 +897,20 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const hasEval = evalExercises.length > 0;
   const isOral = !lesson.writingLevel;
   const trainingTotalSteps = isOral
-    ? 1 + trainingExercises.length + (hasEval ? 1 : 0)
+    ? 1 + trainingExercises.length + (hasPo ? 1 : 0) + (hasPe ? 1 : 0) + (hasEval ? 1 : 0)
     : 0;
   const oralStepIdx =
     phase === "theory"
       ? 0
       : phase === "exercises"
         ? 1 + exIndex
-        : phase === "eval_announce"
-          ? trainingTotalSteps - 1
-          : 0;
+        : phase === "po"
+          ? 1 + trainingExercises.length
+          : phase === "pe"
+            ? 1 + trainingExercises.length + (hasPo ? 1 : 0)
+            : phase === "eval_announce"
+              ? trainingTotalSteps - 1
+              : 0;
 
   const activeWritingPhases = lesson.writingLevel
     ? (["form", "writing"] as const).filter((item) => (item === "form" ? !formValidated : !exerciseValidated))
@@ -891,7 +920,11 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const inEvalPhase = phase === "eval";
   const showTrainingBar =
     isOral &&
-    (phase === "theory" || phase === "exercises" || phase === "eval_announce");
+    (phase === "theory" ||
+      phase === "exercises" ||
+      phase === "po" ||
+      phase === "pe" ||
+      phase === "eval_announce");
   const showWritingBar =
     Boolean(lesson.writingLevel) &&
     phase !== "intro" &&
@@ -920,8 +953,21 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     } else if (phase === "exercises") {
       if (exIndex > 0) setExIndex(exIndex - 1);
       else setPhase("theory");
-    } else if (phase === "eval_announce") {
+    } else if (phase === "po") {
       if (trainingExercises.length > 0) {
+        setPhase("exercises");
+        setExIndex(trainingExercises.length - 1);
+      } else setPhase("theory");
+    } else if (phase === "pe") {
+      if (hasPo) setPhase("po");
+      else if (trainingExercises.length > 0) {
+        setPhase("exercises");
+        setExIndex(trainingExercises.length - 1);
+      } else setPhase("theory");
+    } else if (phase === "eval_announce") {
+      if (hasPe) setPhase("pe");
+      else if (hasPo) setPhase("po");
+      else if (trainingExercises.length > 0) {
         setPhase("exercises");
         setExIndex(trainingExercises.length - 1);
       } else setPhase("theory");
@@ -953,6 +999,21 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setWritingPrompt(randomWritingPrompt(lesson.writingLevel));
       return;
     }
+    if (phase === "po") {
+      // Nouvelle situation de dialogue.
+      setPoSeed((prev) => prev + 1 + (Date.now() % 7));
+      setPoTranscripts([]);
+      setPoDone(false);
+      return;
+    }
+    if (phase === "pe") {
+      // Nouvelle consigne d'écriture.
+      setPeSeed((prev) => prev + 1 + (Date.now() % 7));
+      setWritingText("");
+      setGrammarFeedback([]);
+      setExerciseValidated(false);
+      return;
+    }
     if (phase === "eval") {
       setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? null : a)));
       setEvalValidated((prev) => prev.map((v, i) => (i === evalIndex ? false : v)));
@@ -970,6 +1031,31 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     setValidated((prev) => prev.map((v, i) => (i === exIndex ? false : v)));
   }
 
+  async function runGrammarCheck() {
+    if (!writingText.trim()) {
+      setGrammarFeedback([]);
+      setExerciseValidated(true);
+      return;
+    }
+    setGrammarChecking(true);
+    try {
+      const response = await fetch("/api/check-grammar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: writingText }),
+      });
+      const data = (await response.json()) as { matches?: GrammarMatch[] };
+      setGrammarFeedback(
+        (data.matches ?? []).filter((match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? "")),
+      );
+    } catch {
+      setGrammarFeedback([]);
+    } finally {
+      setGrammarChecking(false);
+      setExerciseValidated(true);
+    }
+  }
+
   async function handleValidate() {
     if (phase === "form") {
       setFormValidated(true);
@@ -978,28 +1064,18 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     }
     if (phase === "writing") {
       if (!writingPrompt || exerciseValidated || grammarChecking) return;
-      if (!writingText.trim()) {
-        setGrammarFeedback([]);
-        setExerciseValidated(true);
-        return;
-      }
-      setGrammarChecking(true);
-      try {
-        const response = await fetch("/api/check-grammar", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: writingText }),
-        });
-        const data = (await response.json()) as { matches?: GrammarMatch[] };
-        setGrammarFeedback(
-          (data.matches ?? []).filter((match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? "")),
-        );
-      } catch {
-        setGrammarFeedback([]);
-      } finally {
-        setGrammarChecking(false);
-        setExerciseValidated(true);
-      }
+      await runGrammarCheck();
+      return;
+    }
+    if (phase === "po") {
+      setPoDone(true);
+      return;
+    }
+    if (phase === "pe") {
+      if (!pePrompt || exerciseValidated || grammarChecking) return;
+      // Minimum de mots requis (A1 : 50, A2 : 80).
+      if (wordCount(writingText) < pePrompt.minWords) return;
+      await runGrammarCheck();
       return;
     }
     if (phase === "exercises") {
@@ -1051,6 +1127,14 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         setExIndex(exIndex + 1);
         return;
       }
+      if (hasPo) {
+        setPhase("po");
+        return;
+      }
+      if (hasPe) {
+        setPhase("pe");
+        return;
+      }
       if (hasEval) {
         setPhase("eval_announce");
         return;
@@ -1060,6 +1144,28 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       );
       setResults(newResults);
       setPhase("score");
+      return;
+    }
+    if (phase === "po") {
+      if (!poDone) return;
+      if (hasPe) {
+        setPhase("pe");
+        return;
+      }
+      if (hasEval) {
+        setPhase("eval_announce");
+        return;
+      }
+      handleFinish();
+      return;
+    }
+    if (phase === "pe") {
+      if (!exerciseValidated) return;
+      if (hasEval) {
+        setPhase("eval_announce");
+        return;
+      }
+      handleFinish();
       return;
     }
     if (phase === "eval_announce") {
@@ -1085,12 +1191,24 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const isLastStep =
     phase === "score" ||
     phase === "writing" ||
-    (phase === "theory" && trainingExercises.length === 0 && !hasEval && !lesson.writingLevel);
+    (phase === "theory" &&
+      trainingExercises.length === 0 &&
+      !hasEval &&
+      !hasPo &&
+      !hasPe &&
+      !lesson.writingLevel);
   const showExerciseControls =
-    phase === "exercises" || phase === "eval" || phase === "writing" || phase === "form";
+    phase === "exercises" ||
+    phase === "eval" ||
+    phase === "writing" ||
+    phase === "form" ||
+    phase === "po" ||
+    phase === "pe";
   const nextDisabled =
     (phase === "writing" && !exerciseValidated) ||
     (phase === "form" && !formValidated) ||
+    (phase === "po" && !poDone) ||
+    (phase === "pe" && !exerciseValidated) ||
     phase === "eval_announce";
   const currentExValidated = activeValidated[activeIndex] ?? false;
 
@@ -1296,6 +1414,40 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         renderOralExercise(trainingExercises[exIndex]!, exIndex, trainingExercises.length)
       )}
 
+      {phase === "po" && poDialogue && (
+        <ExpressPoDialogueExercise
+          key={`po-${poDialogue.id}-${poSeed}`}
+          dialogue={poDialogue}
+          studentRole={poStudentRole}
+          exNum={trainingExercises.length + 1}
+          validated={poDone}
+          transcripts={poTranscripts}
+          onTranscriptsChange={setPoTranscripts}
+        />
+      )}
+
+      {phase === "pe" && pePrompt && (
+        <div className="flex flex-1 flex-col">
+          <h2 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">
+            Exercice {trainingExercises.length + (hasPo ? 1 : 0) + 1} — Production écrite
+          </h2>
+          <WritingExercise
+            lessonCode={lesson.code}
+            prompt={pePrompt}
+            text={writingText}
+            onTextChange={(value) => {
+              setWritingText(value);
+              setExerciseValidated(false);
+              setGrammarFeedback([]);
+            }}
+            feedback={grammarFeedback}
+            checked={exerciseValidated}
+            checking={grammarChecking}
+            teachers={teachers}
+          />
+        </div>
+      )}
+
       {phase === "eval_announce" && (
         <EvalAnnounceScreen
           accent={ACCENT}
@@ -1431,7 +1583,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                       ? currentExValidated
                       : phase === "form"
                         ? formValidated
-                        : exerciseValidated) || grammarChecking
+                        : phase === "po"
+                          ? poDone
+                          : phase === "pe"
+                            ? exerciseValidated ||
+                              wordCount(writingText) < (pePrompt?.minWords ?? 0)
+                            : exerciseValidated) || grammarChecking
                   }
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                   style={{ background: ACCENT }}

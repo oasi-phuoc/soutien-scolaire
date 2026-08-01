@@ -99,6 +99,9 @@ export function lessonFromListening(spec: {
   theory: CommunicationTheoryBlock[];
   training: ExpressListeningAudio[];
   evalAudios: ExpressListeningAudio[];
+  ceExercise?: CommunicationLesson["ceExercise"];
+  poDialogues?: CommunicationLesson["poDialogues"];
+  pePrompts?: CommunicationLesson["pePrompts"];
 }): CommunicationLesson {
   return {
     id: spec.id,
@@ -130,6 +133,9 @@ export function lessonFromListening(spec: {
         questionCount: a.questionCount,
       }),
     ),
+    ceExercise: spec.ceExercise,
+    poDialogues: spec.poDialogues,
+    pePrompts: spec.pePrompts,
   };
 }
 
