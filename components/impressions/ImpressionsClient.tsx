@@ -267,7 +267,7 @@ export function ImpressionsClient() {
     setTitle(
       nextEval ? "Évaluation" : bundle.lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""),
     );
-    setTheory(Boolean(bundle.theoryPreview || bundle.announcementPreview));
+    setTheory(false);
     setSelection(
       bundle.exercises.map((ex) => ({
         id: ex.id,
@@ -427,215 +427,216 @@ export function ImpressionsClient() {
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        <aside className="max-h-[42%] shrink-0 space-y-4 overflow-y-auto border-b border-[var(--color-border-default)] p-4 lg:max-h-none lg:w-[22rem] lg:border-b-0 lg:border-r">
-          <SectionCard title="Document" accent={accent}>
-            <div className="space-y-3">
-              <div>
-                <FieldLabel>Matière</FieldLabel>
-                <AppSelect
-                  value={domain}
-                  onChange={(v) => changeDomain(v as PrintDomain)}
-                  options={DOMAINS.map((d) => ({ value: d.id, label: d.label }))}
-                  className="w-full"
-                />
-              </div>
-              <div>
-                <FieldLabel>Catégorie</FieldLabel>
-                <AppSelect
-                  value={activeGroup}
-                  onChange={changeGroup}
-                  options={groups.map((g) => ({ value: g, label: g }))}
-                  className="w-full"
-                />
-              </div>
-              {!flatPlacement && (
+        <aside className="max-h-[42%] shrink-0 overflow-y-auto border-b border-[var(--color-border-default)] p-4 lg:max-h-none lg:w-[44rem] lg:border-b-0 lg:border-r">
+          <div className="grid gap-4 lg:grid-cols-2">
+            <SectionCard title="Document" accent={accent}>
+              <div className="space-y-3">
                 <div>
-                  <FieldLabel>Module</FieldLabel>
+                  <FieldLabel>Matière</FieldLabel>
                   <AppSelect
-                    value={activeModule?.id ?? ""}
-                    onChange={changeModule}
-                    options={modules.map((m) => ({ value: m.id, label: m.label }))}
+                    value={domain}
+                    onChange={(v) => changeDomain(v as PrintDomain)}
+                    options={DOMAINS.map((d) => ({ value: d.id, label: d.label }))}
                     className="w-full"
                   />
                 </div>
-              )}
-              <div>
-                <FieldLabel>Leçon</FieldLabel>
-                <AppSelect
-                  value={selectedEntry?.id ?? ""}
-                  onChange={changeDocument}
-                  options={documentOptions.map((d) => ({
-                    value: d.id,
-                    label: `${d.code} — ${d.title}`,
-                  }))}
-                  className="w-full"
-                />
-              </div>
-            </div>
-          </SectionCard>
-
-          <SectionCard title="Paramètres" accent={accent}>
-            <div className="space-y-4">
-              <div>
-                <FieldLabel>Mode</FieldLabel>
-                <div className="grid grid-cols-2 rounded-xl bg-[var(--color-bg-secondary)] p-1">
-                  {[
-                    { label: "Exercice", value: false },
-                    { label: "Évaluation", value: true },
-                  ].map((option) => (
-                    <button
-                      key={option.label}
-                      type="button"
-                      onClick={() => setEvalMode(option.value)}
-                      className="min-h-10 rounded-lg px-3 text-sm font-semibold transition-colors"
-                      style={
-                        evalMode === option.value
-                          ? { background: accent, color: "white" }
-                          : { color: "var(--color-text-secondary)" }
-                      }
-                      aria-pressed={evalMode === option.value}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {bundle?.frenchLevelSelectable && (
                 <div>
-                  <FieldLabel>Niveau</FieldLabel>
+                  <FieldLabel>Catégorie</FieldLabel>
                   <AppSelect
-                    value={frenchLevel}
-                    onChange={(v) => {
-                      setFrenchLevel(v as PlacementLevel);
-                      setPrintSeed(freshSeed());
-                    }}
-                    options={[
-                      { value: "base", label: "A1" },
-                      { value: "moyen", label: "A2" },
-                      { value: "avance", label: "B1" },
-                    ]}
+                    value={activeGroup}
+                    onChange={changeGroup}
+                    options={groups.map((g) => ({ value: g, label: g }))}
                     className="w-full"
                   />
                 </div>
-              )}
-
-              {(bundle?.theoryPreview || bundle?.announcementPreview) && (
-                <div className="flex items-center gap-3 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5">
-                  <CheckBox checked={theory} onChange={setTheory} accent={accent} />
-                  <span className="text-sm text-[var(--color-text-primary)]">
-                    {hasAnnouncement ? "Inclure l'annonce / théorie" : "Inclure la théorie"}
-                  </span>
+                {!flatPlacement && (
+                  <div>
+                    <FieldLabel>Module</FieldLabel>
+                    <AppSelect
+                      value={activeModule?.id ?? ""}
+                      onChange={changeModule}
+                      options={modules.map((m) => ({ value: m.id, label: m.label }))}
+                      className="w-full"
+                    />
+                  </div>
+                )}
+                <div>
+                  <FieldLabel>Leçon</FieldLabel>
+                  <AppSelect
+                    value={selectedEntry?.id ?? ""}
+                    onChange={changeDocument}
+                    options={documentOptions.map((d) => ({
+                      value: d.id,
+                      label: `${d.code} — ${d.title}`,
+                    }))}
+                    className="w-full"
+                  />
                 </div>
-              )}
+                <div>
+                  <FieldLabel>En-tête</FieldLabel>
+                  <div className="space-y-3 rounded-xl border border-[var(--color-border-default)] p-3">
+                    <div className="grid grid-cols-2 gap-2">
+                      <AppSelect
+                        value={classLevel}
+                        onChange={(v) => setClassLevel(v as PrintHeaderConfig["classLevel"])}
+                        options={CLASS_LEVELS.map((level) => ({ value: level, label: level }))}
+                        className="w-full"
+                      />
+                      <AppSelect
+                        value={classNumber}
+                        onChange={setClassNumber}
+                        options={CLASS_NUMBERS.map((number) => ({ value: number, label: number }))}
+                        className="w-full"
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      placeholder="Titre…"
+                      className="min-h-10 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+            </SectionCard>
 
-              <div>
-                <FieldLabel>Exercices</FieldLabel>
-                <div className="space-y-2">
-                  {(bundle?.exercises ?? []).map((ex) => {
-                    const sel = selection.find((s) => s.id === ex.id);
-                    if (!sel) return null;
-                    return (
-                      <div
-                        key={ex.id}
-                        className="rounded-xl border border-[var(--color-border-default)] px-3 py-2.5"
+            <SectionCard title="Paramètres" accent={accent}>
+              <div className="space-y-4">
+                <div>
+                  <FieldLabel>Mode</FieldLabel>
+                  <div className="grid grid-cols-2 rounded-xl bg-[var(--color-bg-secondary)] p-1">
+                    {[
+                      { label: "Exercice", value: false },
+                      { label: "Évaluation", value: true },
+                    ].map((option) => (
+                      <button
+                        key={option.label}
+                        type="button"
+                        onClick={() => setEvalMode(option.value)}
+                        className="min-h-10 rounded-lg px-3 text-sm font-semibold transition-colors"
+                        style={
+                          evalMode === option.value
+                            ? { background: accent, color: "white" }
+                            : { color: "var(--color-text-secondary)" }
+                        }
+                        aria-pressed={evalMode === option.value}
                       >
-                        <div className="flex items-center gap-3">
-                          <CheckBox
-                            checked={sel.included}
-                            onChange={(included) =>
-                              setSelection((prev) =>
-                                prev.map((s) =>
-                                  s.id === ex.id
-                                    ? {
-                                        ...s,
-                                        included,
-                                        occurrences: included ? Math.max(1, s.occurrences) : 0,
-                                      }
-                                    : s,
-                                ),
-                              )
-                            }
-                            accent={accent}
-                          />
-                          <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
-                            {ex.label}
-                          </span>
-                        </div>
-                        {sel.included && (
-                          <div className="mt-2 flex items-center justify-between gap-2 pl-9">
-                            <span className="text-[11px] text-[var(--color-text-secondary)]">Occurrences</span>
-                            <Counter
-                              value={sel.occurrences}
-                              accent={accent}
-                              min={1}
-                              onChange={(occurrences) =>
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {bundle?.frenchLevelSelectable && (
+                  <div>
+                    <FieldLabel>Niveau</FieldLabel>
+                    <AppSelect
+                      value={frenchLevel}
+                      onChange={(v) => {
+                        setFrenchLevel(v as PlacementLevel);
+                        setPrintSeed(freshSeed());
+                      }}
+                      options={[
+                        { value: "base", label: "A1" },
+                        { value: "moyen", label: "A2" },
+                        { value: "avance", label: "B1" },
+                      ]}
+                      className="w-full"
+                    />
+                  </div>
+                )}
+
+                {(bundle?.theoryPreview || bundle?.announcementPreview) && (
+                  <div className="flex items-center gap-3 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5">
+                    <CheckBox checked={theory} onChange={setTheory} accent={accent} />
+                    <span className="text-sm text-[var(--color-text-primary)]">
+                      {hasAnnouncement ? "Inclure l'annonce / théorie" : "Inclure la théorie"}
+                    </span>
+                  </div>
+                )}
+
+                <div>
+                  <FieldLabel>Exercices</FieldLabel>
+                  <div className="space-y-2">
+                    {(bundle?.exercises ?? []).map((ex) => {
+                      const sel = selection.find((s) => s.id === ex.id);
+                      if (!sel) return null;
+                      return (
+                        <div
+                          key={ex.id}
+                          className="rounded-xl border border-[var(--color-border-default)] px-3 py-2.5"
+                        >
+                          <div className="flex items-center gap-3">
+                            <CheckBox
+                              checked={sel.included}
+                              onChange={(included) =>
                                 setSelection((prev) =>
                                   prev.map((s) =>
                                     s.id === ex.id
-                                      ? { ...s, occurrences, included: occurrences > 0 }
+                                      ? {
+                                          ...s,
+                                          included,
+                                          occurrences: included ? Math.max(1, s.occurrences) : 0,
+                                        }
                                       : s,
                                   ),
                                 )
                               }
+                              accent={accent}
                             />
-                            {evalMode && (
-                              <>
-                                <span className="text-[11px] text-[var(--color-text-secondary)]">Pts</span>
-                                <Counter
-                                  value={sel.points}
-                                  accent={accent}
-                                  min={1}
-                                  max={20}
-                                  onChange={(points) =>
-                                    setSelection((prev) =>
-                                      prev.map((s) => (s.id === ex.id ? { ...s, points } : s)),
-                                    )
-                                  }
-                                />
-                              </>
-                            )}
+                            <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
+                              {ex.label}
+                            </span>
                           </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                  {(bundle?.exercises.length ?? 0) === 0 && (
-                    <p className="text-sm text-[var(--color-text-secondary)]">
-                      {bundleError ?? "Aucun exercice pour ce document."}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <FieldLabel>En-tête</FieldLabel>
-                <div className="space-y-3 rounded-xl border border-[var(--color-border-default)] p-3">
-                  <div className="grid grid-cols-2 gap-2">
-                    <AppSelect
-                      value={classLevel}
-                      onChange={(v) => setClassLevel(v as PrintHeaderConfig["classLevel"])}
-                      options={CLASS_LEVELS.map((level) => ({ value: level, label: level }))}
-                      className="w-full"
-                    />
-                    <AppSelect
-                      value={classNumber}
-                      onChange={setClassNumber}
-                      options={CLASS_NUMBERS.map((number) => ({ value: number, label: number }))}
-                      className="w-full"
-                    />
+                          {sel.included && (
+                            <div className="mt-2 flex items-center justify-between gap-2 pl-9">
+                              <span className="text-[11px] text-[var(--color-text-secondary)]">Occurrences</span>
+                              <Counter
+                                value={sel.occurrences}
+                                accent={accent}
+                                min={1}
+                                onChange={(occurrences) =>
+                                  setSelection((prev) =>
+                                    prev.map((s) =>
+                                      s.id === ex.id
+                                        ? { ...s, occurrences, included: occurrences > 0 }
+                                        : s,
+                                    ),
+                                  )
+                                }
+                              />
+                              {evalMode && (
+                                <>
+                                  <span className="text-[11px] text-[var(--color-text-secondary)]">Pts</span>
+                                  <Counter
+                                    value={sel.points}
+                                    accent={accent}
+                                    min={1}
+                                    max={20}
+                                    onChange={(points) =>
+                                      setSelection((prev) =>
+                                        prev.map((s) => (s.id === ex.id ? { ...s, points } : s)),
+                                      )
+                                    }
+                                  />
+                                </>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                    {(bundle?.exercises.length ?? 0) === 0 && (
+                      <p className="text-sm text-[var(--color-text-secondary)]">
+                        {bundleError ?? "Aucun exercice pour ce document."}
+                      </p>
+                    )}
                   </div>
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Titre…"
-                    className="min-h-10 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
-                  />
                 </div>
               </div>
-            </div>
-          </SectionCard>
+            </SectionCard>
+          </div>
         </aside>
 
         <section className="min-h-0 flex-1 overflow-y-auto bg-[color-mix(in_oklch,var(--color-bg-secondary)_70%,white)] px-3 py-4 sm:px-6">

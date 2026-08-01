@@ -143,6 +143,10 @@ export function MainNav({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  if (pathname.startsWith("/impressions") || pathname.startsWith("/admin/impression")) {
+    return null;
+  }
+
   const navColor = sectionColor(pathname);
   // En mode exercice (mobile), Placement et Impression tropent la rangée — restés sur les hubs.
   const menuItems = [
@@ -152,7 +156,6 @@ export function MainNav({
 
   return (
     <>
-      {open && (
         <button
           type="button"
           aria-label="Fermer le menu principal"
