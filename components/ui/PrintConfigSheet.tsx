@@ -116,7 +116,7 @@ interface PrintConfigSheetProps {
   onPrint: (config: PrintConfig) => void;
   exercises?: PrintExercise[];
   theoryPreview?: ReactNode;
-  /** Page d'annonce (placement) : toujours imprimée en page 1. */
+  /** Page d'annonce (placement) : incluse seulement si « Inclure l'annonce » est coché. */
   announcementPreview?: ReactNode;
   accentColor?: string;
   lessonTitle?: string;
@@ -778,7 +778,6 @@ export function PrintConfigSheet({
   };
 
   const hasPrintableContent =
-    Boolean(announcementPreview) ||
     theory ||
     selection.some((item) => item.included && item.occurrences > 0);
   const totalPoints = selection
@@ -944,11 +943,11 @@ export function PrintConfigSheet({
             </section>
           )}
 
-          {/* ── Théorie ── */}
-          {!announcementPreview && (
+          {/* ── Théorie / annonce ── */}
+          {(theoryPreview || announcementPreview) && (
           <section className="mb-5">
             <h2 className="mb-3 text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
-              Théorie
+              {announcementPreview ? "Annonce" : "Théorie"}
             </h2>
             <div className="rounded-xl border border-[var(--color-border-default)]">
               <div className="flex min-h-14 cursor-pointer items-center gap-4 px-4">
@@ -958,9 +957,13 @@ export function PrintConfigSheet({
                   className="flex-1 text-left"
                   onClick={() => setTheory((v) => !v)}
                 >
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Inclure la théorie</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                    {announcementPreview ? "Inclure l'annonce" : "Inclure la théorie"}
+                  </p>
                   <p className="text-xs text-[var(--color-text-secondary)]">
-                    {theory ? "La leçon sera incluse dans le PDF" : "Seulement les exercices"}
+                    {theory
+                      ? (announcementPreview ? "L'annonce sera incluse dans le PDF" : "La leçon sera incluse dans le PDF")
+                      : "Seulement les exercices"}
                   </p>
                 </button>
               </div>
@@ -1201,7 +1204,7 @@ export function PrintConfigSheet({
                 printedBy={printedBy}
                 header={<PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />}
                 theoryNode={
-                  announcementPreview ? (
+                  theory && announcementPreview ? (
                     <div className="print-exercise [&_button]:hidden">
                       {announcementPreview}
                     </div>
@@ -1219,7 +1222,7 @@ export function PrintConfigSheet({
                   /** Placement maths : packer sauf 1er exo après l’annonce (page 1 réservée). */
                   const exerciseBreak = (exercise: PrintExercise | undefined, index: number) => {
                     if (exercise?.forceNewPage === false) {
-                      if (index === 0 && Boolean(announcementPreview) && !isCorrectionSection) return true;
+                      if (index === 0 && theory && Boolean(announcementPreview) && !isCorrectionSection) return true;
                       return false;
                     }
                     return true;

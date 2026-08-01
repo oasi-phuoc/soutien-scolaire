@@ -45,9 +45,9 @@ function randOneDecimal(minTenths: number, maxTenths: number): number {
 
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
-function CorrectionInput({ value, onChange, correct, validated, width = "w-16", compact = false, variant = "line", maxLength }: {
+function CorrectionInput({ value, onChange, correct, validated, width = "w-16", compact = false, variant = "line", maxLength, padX = "px-1" }: {
   value: string; onChange: (v: string) => void; correct: string;
-  validated: boolean; width?: string; placeholder?: string; compact?: boolean; variant?: "line" | "box"; maxLength?: number;
+  validated: boolean; width?: string; placeholder?: string; compact?: boolean; variant?: "line" | "box"; maxLength?: number; padX?: string;
 }) {
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   const heightCls = compact ? "min-h-8" : "min-h-9";
@@ -61,7 +61,7 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16", 
     : "rounded-none border-0 border-b-2 border-amber-500";
   if (wrong) {
     return (
-      <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${wrongBoxCls} px-1 py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
+      <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${wrongBoxCls} ${padX} py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
         {value.trim() && <span className="text-[10px] leading-none text-[var(--color-text-primary)]">{value}</span>}
         <span className="font-bold text-amber-600">{correct}</span>
       </div>
@@ -69,13 +69,13 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16", 
   }
   if (validated) {
     return (
-      <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${baseBoxCls} px-1 py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
+      <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${baseBoxCls} ${padX} py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
         <span>{value || correct}</span>
       </div>
     );
   }
   return (
-    <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${baseBoxCls} px-1 py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
+    <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${baseBoxCls} ${padX} py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
       <input
         type="text"
         inputMode="decimal"
@@ -139,7 +139,7 @@ export function Exercise16({ exerciseKey, validated, onValidated, validateTrigge
         <text x={rx + rW / 2} y={ry - 8} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{w} cm</text>
         <text x={rx + rW + 10} y={ry + rH / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{h} cm</text>
       </svg>
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-4">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>
@@ -191,7 +191,7 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
 }) {
   let blankIdx = 0;
   return (
-    <div className="flex flex-nowrap items-center gap-1 overflow-x-auto pb-1">
+    <div className="flex flex-nowrap items-center gap-3 overflow-x-auto pb-1">
       {vals.map((v, i) => {
         const isVisible = i === visPos[0] || i === visPos[1];
         const display = isInt ? fmtInt(v) : fmtDec(v, 2);
@@ -206,7 +206,7 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
         const ans = answers[bi] ?? "";
         return (
           <CorrectionInput key={i} value={ans} onChange={v2 => onChange(bi, v2)} correct={correct}
-            validated={validated} width="w-[3.7rem]" compact maxLength={isInt ? 5 : 5} />
+            validated={validated} width="w-[3.7rem]" compact padX="px-3" maxLength={isInt ? 5 : 5} />
         );
       })}
     </div>
@@ -259,19 +259,58 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 18 — Sort numbers (click mechanism) ─────────────────────────────
 
-function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false, chipW = "w-28", numberLabel, correctOrder }: {
+function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false, chipW = "w-28", numberLabel, correctOrder, forPrint = false }: {
   numbers: number[]; selected: number[];
   onToggle: (n: number) => void; validated: boolean;
   fmt: (n: number) => string; desc?: boolean; chipW?: string; numberLabel?: string;
-  correctOrder?: number[];
+  correctOrder?: number[]; forPrint?: boolean;
 }) {
   const available = numbers.filter(n => !selected.includes(n));
   const isWrong = validated && correctOrder && !(
     selected.length === correctOrder.length &&
     correctOrder.every((v, i) => selected[i] === v)
   );
+  const sep = desc ? ">" : "<";
+  const blankCount = correctOrder?.length ?? numbers.length;
 
   const chipBase = `${chipW} flex h-10 items-center justify-center rounded-lg border px-1.5 text-base font-mono font-bold transition-colors `;
+
+  if (forPrint) {
+    const blankValues: Array<number | null> = validated && correctOrder
+      ? correctOrder
+      : Array.from({ length: blankCount }, () => null);
+    return (
+      <div className="space-y-3">
+        <div className="flex flex-wrap gap-2">
+          {numbers.map((n, ni) => (
+            <button
+              key={ni}
+              type="button"
+              disabled
+              className={`${chipBase} pointer-events-none cursor-default border-[var(--color-border-default)] text-[var(--color-text-primary)]`}
+            >
+              {fmt(n)}
+            </button>
+          ))}
+        </div>
+        <div className="flex min-h-[48px] flex-wrap items-center gap-2">
+          {numberLabel && (
+            <span className="mr-1 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{numberLabel}</span>
+          )}
+          {blankValues.map((n, bi) => (
+            <React.Fragment key={bi}>
+              <span className="inline-flex min-w-[4rem] items-end justify-center border-b-2 border-black px-1 pb-0.5 font-mono text-sm font-bold text-[var(--color-text-primary)]">
+                {n !== null ? fmt(n) : "\u00a0"}
+              </span>
+              {bi < blankValues.length - 1 && (
+                <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-3">
@@ -304,7 +343,7 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
               >
                 {fmt(n)}
               </button>
-              {si < selected.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{desc ? ">" : "<"}</span>}
+              {si < selected.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>}
             </React.Fragment>
           ))
           : null}
@@ -323,7 +362,7 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
                 <div className={`${chipW} flex h-10 items-center justify-center rounded-lg border px-1.5 text-base font-mono font-bold ${chipTone}`}>
                   {fmt(n)}
                 </div>
-                {ci < correctOrder.length - 1 && <span className="text-sm font-bold text-amber-400">{desc ? ">" : "<"}</span>}
+                {ci < correctOrder.length - 1 && <span className="text-sm font-bold text-amber-400">{sep}</span>}
               </React.Fragment>
               );
             })}
@@ -334,7 +373,7 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
   );
 }
 
-export function Exercise18({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise18({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
   const data = useMemo(() => {
     // Series 1: 3 six-digit numbers + 1 five-digit number.
     //   n1 & n2 share first 2 digits.
@@ -402,13 +441,13 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
         <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
         <OrderingChips numbers={data.ints} selected={sel1} onToggle={toggle(setSel1)}
           validated={validated} fmt={(n) => String(n)} chipW="w-[4.9rem]" numberLabel="1."
-          correctOrder={data.sortedInts} />
+          correctOrder={data.sortedInts} forPrint={forPrint} />
       </div>
       <div className="space-y-3">
         <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
         <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
           validated={validated} fmt={fmtDec2} desc chipW="w-[4.9rem]" numberLabel="2."
-          correctOrder={data.sortedDecsDesc} />
+          correctOrder={data.sortedDecsDesc} forPrint={forPrint} />
       </div>
     </div>
   );
@@ -626,7 +665,7 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les calculs en colonnes." />
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {data.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <DecColGridFull
@@ -857,7 +896,7 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les multiplications en colonnes." />
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {data.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <DecMulGridFull
@@ -1196,7 +1235,7 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les divisions en colonnes." />
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
@@ -1356,7 +1395,7 @@ export function Exercise22({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les parties pour colorier la fraction demandée.</p>
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-stretch gap-3">
         {items.map((item, i) => {
           const correctSet = item.multi
             ? preColorFlat(item.n, item.d)
@@ -1368,12 +1407,12 @@ export function Exercise22({ exerciseKey, validated, onValidated, validateTrigge
           const missSet = validated ? new Set([...correctSet].filter(x => !studentSet.has(x))) : undefined;
           const extraSet = validated ? new Set([...studentSet].filter(x => !correctSet.has(x))) : undefined;
           return (
-            <div key={i} className="rounded-xl border border-[var(--color-border-default)] p-3">
-              <div className="flex items-center gap-3">
+            <div key={i} className="flex h-full flex-col rounded-xl border border-[var(--color-border-default)] p-3">
+              <div className="flex h-full flex-1 items-center gap-3">
                 <div className="shrink-0">
                   <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
                 </div>
-                <div className="flex flex-1 justify-center overflow-hidden">
+                <div className="flex flex-1 items-center justify-center overflow-hidden">
                   {item.multi ? (
                     <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
                       colored={displayColored}
@@ -1421,13 +1460,13 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Observez les formes coloriées et écrivez la fraction représentée." />
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-stretch gap-3">
         {items.map((item, i) => {
           const preColored = item.multi ? preColorFlat(item.n, item.d) : new Set(Array.from({ length: item.n }, (_, k) => k));
           return (
-            <div key={i} className="rounded-xl border border-[var(--color-border-default)] p-3">
-              <div className="flex items-center gap-3">
-                <div className="shrink-0 flex flex-col items-center gap-1">
+            <div key={i} className="flex h-full flex-col rounded-xl border border-[var(--color-border-default)] p-3">
+              <div className="flex h-full flex-1 items-center gap-3">
+                <div className="flex shrink-0 flex-col items-center gap-1">
                   <CorrectionInput
                     value={nums[i] ?? ""}
                     onChange={v => setNums(p => { const n = [...p]; n[i] = v; return n; })}
@@ -1446,7 +1485,7 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
                     variant="box"
                   />
                 </div>
-                <div className="flex flex-1 justify-center overflow-hidden">
+                <div className="flex flex-1 items-center justify-center overflow-hidden">
                   {item.multi ? (
                     <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
                       colored={preColored}
@@ -1514,21 +1553,19 @@ export function Exercise23({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
         {questions.map((q, i) => {
           const displayVal = q.decPlaces > 0 ? fmtDec(q.value, 1) : String(q.value);
           const correct = q.result % 1 === 0 ? String(q.result) : fmtDec(q.result, q.result.toString().split(".")[1]?.length ?? 1);
           return (
-            <React.Fragment key={i}>
-              <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="font-mono text-[var(--color-text-primary)]">{displayVal} {q.from}</span>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[var(--color-text-secondary)]">=</span>
-                <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
-                  correct={correct} validated={validated} width="w-20" />
-                <span className="font-mono text-[var(--color-text-secondary)]">{q.to}</span>
-              </div>
-            </React.Fragment>
+              <span className="text-[var(--color-text-secondary)]">=</span>
+              <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
+                correct={correct} validated={validated} width="w-20" />
+              <span className="font-mono text-[var(--color-text-secondary)]">{q.to}</span>
+            </div>
           );
         })}
       </div>
@@ -1589,20 +1626,17 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <PlacementInstruction text="Effectuez les calculs." />
-      <div
-        className="grid items-center gap-x-2 gap-y-2 text-sm"
-        style={{ gridTemplateColumns: "1.5rem max-content 1.25rem max-content 1rem max-content" }}
-      >
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
         {questions.map((q, i) => (
-          <React.Fragment key={i}>
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="text-right font-mono text-[var(--color-text-primary)]">{q.left}</span>
-            <span className="text-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
-            <span className="text-right font-mono text-[var(--color-text-primary)]">{q.right}</span>
-            <span className="text-center text-[var(--color-text-secondary)]">=</span>
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="font-mono text-[var(--color-text-primary)]">{q.left}</span>
+            <span className="font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="font-mono text-[var(--color-text-primary)]">{q.right}</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
               correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>
@@ -1662,7 +1696,7 @@ export function Exercise25({ exerciseKey, validated, onValidated, validateTrigge
         {/* Height label */}
         <text x={bkX + tickLen + 4} y={(TRy + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {h} cm</text>
       </svg>
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-4">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>
@@ -1719,7 +1753,7 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
         <line x1={bkX - tickLen} y1={BRy} x2={bkX + tickLen} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <text x={bkX + tickLen + 4} y={(Ty + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {data.h} cm</text>
       </svg>
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-4">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>
@@ -1784,7 +1818,7 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
         <line x1={Tright[0]!} y1={bkY - tickLen} x2={Tright[0]!} y2={bkY + tickLen} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <text x={cx} y={bkY + tickLen + 12} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">d₁ = {data.d1} cm</text>
       </svg>
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-4">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>

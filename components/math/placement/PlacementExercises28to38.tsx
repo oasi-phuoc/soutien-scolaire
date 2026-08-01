@@ -203,26 +203,31 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid items-center gap-x-2 gap-y-2 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1rem max-content"}}>
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <span>{data.q1.base}<sup>3</sup></span>
-        <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} width="w-20" />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span>√{data.q2.sq}</span>
-        <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.sqRoot)} validated={validated} width="w-20" />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-        <span className="font-mono">{fmtDec(data.q3.mult, 2)} × 10<sup>{pow10Exp(data.q3.pwr10)}</sup></span>
-        <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a3} onChange={setA3} correct={fmtAns(data.q3.ans)} validated={validated} width="w-20" />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-        <span className="font-mono">{data.q4.divVal} ÷ 10<sup>{pow10Exp(data.q4.pwr10)}</sup></span>
-        <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a4} onChange={setA4} correct={fmtAns(data.q4.ans)} validated={validated} width="w-20" />
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
+          <span>{data.q1.base}<sup>3</sup></span>
+          <span className="text-[var(--color-text-secondary)]">=</span>
+          <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} width="w-20" />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+          <span>√{data.q2.sq}</span>
+          <span className="text-[var(--color-text-secondary)]">=</span>
+          <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.sqRoot)} validated={validated} width="w-20" />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
+          <span className="font-mono">{fmtDec(data.q3.mult, 2)} × 10<sup>{pow10Exp(data.q3.pwr10)}</sup></span>
+          <span className="text-[var(--color-text-secondary)]">=</span>
+          <CorrectionInput value={a3} onChange={setA3} correct={fmtAns(data.q3.ans)} validated={validated} width="w-20" />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
+          <span className="font-mono">{data.q4.divVal} ÷ 10<sup>{pow10Exp(data.q4.pwr10)}</sup></span>
+          <span className="text-[var(--color-text-secondary)]">=</span>
+          <CorrectionInput value={a4} onChange={setA4} correct={fmtAns(data.q4.ans)} validated={validated} width="w-20" />
+        </div>
       </div>
     </div>
   );
@@ -280,12 +285,12 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1rem minmax(0, 1fr)"}}>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
         {data.map((q, i) => (
-          <React.Fragment key={i}>
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             <span className="font-mono">{q.expr}</span>
-            <span className="text-center text-[var(--color-text-secondary)]">=</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={[a1, a2, a3, a4][i] ?? ""}
               onChange={[setA1, setA2, setA3, setA4][i]!}
@@ -293,7 +298,7 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
               validated={validated}
               width="w-20"
             />
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>
@@ -345,14 +350,14 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid items-center gap-x-2 gap-y-2 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1.25rem max-content 1rem max-content"}}>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
         {data.map((q, i) => (
-          <React.Fragment key={i}>
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="justify-self-end font-mono">{q.left}</span>
-            <span className="text-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
-            <span className="justify-self-end font-mono">{q.right}</span>
-            <span className="text-center text-[var(--color-text-secondary)]">=</span>
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="font-mono">{q.left}</span>
+            <span className="font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="font-mono">{q.right}</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
               onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
@@ -360,7 +365,7 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
               validated={validated}
               width="w-20"
             />
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>
@@ -511,42 +516,43 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez et simplifiez les fractions.</p>
 
       {/* q1, q2: simplification */}
-      <div className="grid items-center gap-x-2 gap-y-2" style={{gridTemplateColumns:"1.5rem max-content"}}>
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <span className="text-sm">
-          <Frac n={data.q1.fullN} d={data.q1.fullD} /> ={" "}
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+        <div className="flex items-center gap-2 text-sm">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
+          <Frac n={data.q1.fullN} d={data.q1.fullD} />
+          <span>=</span>
           <Frac
             n={data.q1.ask === "num" ? smallBox(0, String(data.q1.n)) : data.q1.n}
             d={data.q1.ask === "den" ? smallBox(0, String(data.q1.d)) : data.q1.d}
           />
-        </span>
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="text-sm">
-          <Frac n={data.q2.fullN} d={data.q2.fullD} /> ={" "}
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+          <Frac n={data.q2.fullN} d={data.q2.fullD} />
+          <span>=</span>
           <Frac
             n={smallBox(1, String(data.q2.n))}
             d={smallBox(2, String(data.q2.d))}
           />
-        </span>
+        </div>
       </div>
 
-      {/* q3-q8: opérations — opérateur dans sa propre colonne pour centrage vertical */}
-      <div className="grid items-center gap-x-3 gap-y-3" style={{gridTemplateColumns:"1.5rem max-content 1.5rem max-content 1rem max-content"}}>
+      {/* q3-q8: opérations */}
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3">
         {opRows.map(({ num, fa, op, fb, fi, ans }) => (
-          <React.Fragment key={num}>
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{num}.</span>
+          <div key={num} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{num}.</span>
             <div className="flex justify-center">{fa}</div>
-            <span className="text-center text-base font-semibold text-[var(--color-text-primary)]">{op}</span>
+            <span className="text-base font-semibold text-[var(--color-text-primary)]">{op}</span>
             <div className="flex justify-center">{fb}</div>
-            <span className="text-center text-base font-semibold text-[var(--color-text-secondary)]">=</span>
+            <span className="text-base font-semibold text-[var(--color-text-secondary)]">=</span>
             <FracInput
               numVal={fracNums[fi] ?? ""} denVal={fracDens[fi] ?? ""}
               numCorrect={splitAns(ans)[0]} denCorrect={splitAns(ans)[1]}
               onNumChange={setFN(fi)} onDenChange={setFD(fi)}
               validated={validated}
             />
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>
@@ -591,21 +597,26 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem max-content"}}>
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <div className="grid items-center gap-x-2" style={{ gridTemplateColumns: "max-content 1rem max-content" }}>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
           <span>{data.pct1}% de {data.base1}</span>
-          <span className="text-center text-[var(--color-text-secondary)]">=</span>
+          <span className="text-[var(--color-text-secondary)]">=</span>
           <CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} width="w-20" />
         </div>
-
-        <span className="pt-5 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <div className="grid items-center gap-x-2 gap-y-1 pt-5" style={{ gridTemplateColumns: "max-content 1rem max-content max-content" }}>
-          <div className="col-span-4">{data.knownQty} kg de {data.fruitName} → {fmtDec(data.knownPrice, data.knownPrice % 1 === 0 ? 0 : 1)} CHF</div>
-          <div>{data.targetQty} kg de {data.fruitName}</div>
-          <span className="text-center text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-24" />
-          <span className="text-[var(--color-text-secondary)]">CHF</span>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-start gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+            <div className="min-w-0 space-y-1">
+              <div>{data.knownQty} kg de {data.fruitName} → {fmtDec(data.knownPrice, data.knownPrice % 1 === 0 ? 0 : 1)} CHF</div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span>{data.targetQty} kg de {data.fruitName}</span>
+                <span className="text-[var(--color-text-secondary)]">=</span>
+                <CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-24" />
+                <span className="text-[var(--color-text-secondary)]">CHF</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -777,16 +788,16 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
           </React.Fragment>
         ))}
       </p>
-      <div className="grid items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1rem max-content"}}>
+      <div className="grid w-full items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem minmax(0, max-content) 1rem minmax(0, 1fr)"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <span className="font-mono">{data.q1.expr}</span>
+        <span className="min-w-0 font-mono">{data.q1.expr}</span>
         <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} width="w-20" />
+        <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} width="w-full" />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="font-mono">{data.q2.expr}</span>
+        <span className="min-w-0 font-mono">{data.q2.expr}</span>
         <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.ans)} validated={validated} width="w-20" />
+        <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.ans)} validated={validated} width="w-full" />
       </div>
     </div>
   );
@@ -841,32 +852,46 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
+  const workLine = (key: string) => (
+    <div key={key} className="flex w-full items-center gap-2">
+      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-black" />
+      <span className="text-[var(--color-text-secondary)]">=</span>
+      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-black" />
+    </div>
+  );
+
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Trouver la valeur de x.</p>
-      <div className="space-y-5 text-sm">
-        <div className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: "1.5rem minmax(0, max-content) 2.5rem max-content" }}>
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <span className="font-mono">{data.q1.left}</span>
-          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
-          <span className="font-mono">{data.q1.right}</span>
-
-          <span />
-          <span className="justify-self-end font-mono text-[var(--color-text-primary)]">x</span>
-          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.x)} validated={validated} width="w-20" />
+      <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+        <div className="flex flex-col items-stretch gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
+            <span className="font-mono">{data.q1.left}</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <span className="font-mono">{data.q1.right}</span>
+          </div>
+          {[0, 1, 2].map(i => workLine(`q1-w${i}`))}
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[var(--color-text-primary)]">x</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.x)} validated={validated} width="w-20" />
+          </div>
         </div>
 
-        <div className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: "1.5rem minmax(0, max-content) 2.5rem max-content" }}>
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-          <span className="font-mono">{data.q2.left}</span>
-          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
-          <span className="font-mono">{data.q2.right}</span>
-
-          <span />
-          <span className="justify-self-end font-mono text-[var(--color-text-primary)]">x</span>
-          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.x)} validated={validated} width="w-20" />
+        <div className="flex flex-col items-stretch gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+            <span className="font-mono">{data.q2.left}</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <span className="font-mono">{data.q2.right}</span>
+          </div>
+          {[0, 1, 2].map(i => workLine(`q2-w${i}`))}
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[var(--color-text-primary)]">x</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.x)} validated={validated} width="w-20" />
+          </div>
         </div>
       </div>
     </div>
@@ -941,12 +966,12 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className="grid items-center gap-x-2 gap-y-2 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1rem max-content max-content"}}>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
         {questions.map((q, i) => (
-          <React.Fragment key={i}>
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             <span>{fmtV(q.value)} {q.from}</span>
-            <span className="text-center text-[var(--color-text-secondary)]">=</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
               onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
@@ -955,7 +980,7 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
               width="w-24"
             />
             <span className="text-[var(--color-text-secondary)]">{q.to}</span>
-          </React.Fragment>
+          </div>
         ))}
       </div>
     </div>
@@ -1016,14 +1041,14 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
         <line x1={bkX - tickLen} y1={BRy} x2={bkX + tickLen} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <text x={bkX + tickLen + 4} y={(TRy + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {data.h} cm</text>
       </svg>
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-4">
         <div className="flex items-center gap-2">
-          <span className="w-28 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
+          <span className="w-28 shrink-0 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
           <CorrectionInput value={ansP} onChange={setAnsP} correct={fmtMeasure(data.perimeter)} validated={validated} />
           <span className="text-sm text-[var(--color-text-secondary)]">cm</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-28 text-sm text-[var(--color-text-secondary)]">Aire =</span>
+          <span className="w-28 shrink-0 text-sm text-[var(--color-text-secondary)]">Aire =</span>
           <CorrectionInput value={ansA} onChange={setAnsA}
             correct={Number.isInteger(data.area) ? String(data.area) : fmtDec(data.area, 1)}
             validated={validated} />
@@ -1081,16 +1106,16 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
           d = {data.d} cm
         </text>
       </svg>
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-4">
         <div className="flex items-center gap-2">
-          <span className="w-36 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
+          <span className="w-36 shrink-0 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
           <CorrectionInput value={ansC} onChange={setAnsC}
             correct={fmtDec(data.perimeter, 2)}
             validated={validated} width="w-20" />
           <span className="text-sm text-[var(--color-text-secondary)]">cm</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-36 text-sm text-[var(--color-text-secondary)]">Aire =</span>
+          <span className="w-36 shrink-0 text-sm text-[var(--color-text-secondary)]">Aire =</span>
           <CorrectionInput value={ansA} onChange={setAnsA}
             correct={fmtDec(data.area, 3)}
             validated={validated} width="w-24" />

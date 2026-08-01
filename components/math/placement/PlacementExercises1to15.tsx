@@ -15,6 +15,8 @@ export interface PlacementExerciseProps {
   validated: boolean;
   onValidated: (points: number, maxPoints: number) => void;
   validateTrigger: number;
+  /** When true, component is rendered in the print / PDF preview. */
+  forPrint?: boolean;
 }
 
 // ── Utility helpers ──────────────────────────────────────────────────────────
@@ -244,7 +246,7 @@ export function Exercise1({ exerciseKey, validated, onValidated, validateTrigger
         { count: data.count1, shape: data.shape1, seed: data.seed1, ans: ans1, setAns: setAns1 },
         { count: data.count2, shape: data.shape2, seed: data.seed2, ans: ans2, setAns: setAns2 },
       ].map((item, idx) => (
-        <div key={idx} className="flex items-center gap-3">
+        <div key={idx} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
           <div className="flex w-24 shrink-0 items-center gap-2">
             <span className="w-5 text-sm font-semibold text-[var(--color-accent-alg)]">{idx + 1}.</span>
             <CorrectionInput
@@ -339,18 +341,20 @@ export function Exercise2({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Choisissez le bon signe de comparaison.</p>
-      {questions.map((q, i) => (
-        <CompareQuestion
-          key={i}
-          qNum={i + 1}
-          a={q.a}
-          b={q.b}
-          correct={q.correct}
-          validated={validated}
-          selected={answers[i] ?? null}
-          onSelect={(op) => setAnswers(prev => { const next = [...prev]; next[i] = op; return next; })}
-        />
-      ))}
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+        {questions.map((q, i) => (
+          <CompareQuestion
+            key={i}
+            qNum={i + 1}
+            a={q.a}
+            b={q.b}
+            correct={q.correct}
+            validated={validated}
+            selected={answers[i] ?? null}
+            onSelect={(op) => setAnswers(prev => { const next = [...prev]; next[i] = op; return next; })}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -445,22 +449,24 @@ export function Exercise3({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
-      <SeqQuestion
-        qNum={1}
-        values={data.seq1}
-        blanks={data.blanks1}
-        validated={validated}
-        answers={ans1}
-        onChange={(idx, v) => setAns1(prev => { const next: [string, string] = [prev[0], prev[1]]; next[idx] = v; return next; })}
-      />
-      <SeqQuestion
-        qNum={2}
-        values={data.seq2}
-        blanks={data.blanks2}
-        validated={validated}
-        answers={ans2}
-        onChange={(idx, v) => setAns2(prev => { const next: [string, string] = [prev[0], prev[1]]; next[idx] = v; return next; })}
-      />
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+        <SeqQuestion
+          qNum={1}
+          values={data.seq1}
+          blanks={data.blanks1}
+          validated={validated}
+          answers={ans1}
+          onChange={(idx, v) => setAns1(prev => { const next: [string, string] = [prev[0], prev[1]]; next[idx] = v; return next; })}
+        />
+        <SeqQuestion
+          qNum={2}
+          values={data.seq2}
+          blanks={data.blanks2}
+          validated={validated}
+          answers={ans2}
+          onChange={(idx, v) => setAns2(prev => { const next: [string, string] = [prev[0], prev[1]]; next[idx] = v; return next; })}
+        />
+      </div>
     </div>
   );
 }
@@ -509,23 +515,23 @@ export function Exercise4({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
-      <div className="grid items-center gap-x-2 gap-y-3 text-base" style={{ gridTemplateColumns: "max-content max-content max-content max-content max-content max-content" }}>
-      {questions.map((q, i) => (
-        <React.Fragment key={i}>
-          <span className="w-4 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-          <span className="justify-self-end font-mono text-[var(--color-text-primary)]">{q.a}</span>
-          <span className="justify-self-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
-          <span className="justify-self-start font-mono text-[var(--color-text-primary)]">{q.b}</span>
-          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput
-            value={answers[i] ?? ""}
-            onChange={(v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; })}
-            correct={String(q.result)}
-            validated={validated}
-            width="w-16"
-          />
-        </React.Fragment>
-      ))}
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3 text-base">
+        {questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-4 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="font-mono text-[var(--color-text-primary)]">{q.a}</span>
+            <span className="font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="font-mono text-[var(--color-text-primary)]">{q.b}</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <CorrectionInput
+              value={answers[i] ?? ""}
+              onChange={(v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; })}
+              correct={String(q.result)}
+              validated={validated}
+              width="w-16"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -601,7 +607,7 @@ export function Exercise5({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le nombre manquant.</p>
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -783,7 +789,7 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs en colonnes.</p>
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <PlacementColCard
@@ -812,12 +818,10 @@ function PlaceValueCard({ n, cols, answers, onChange, validated }: {
 }) {
   return (
     <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-      <div className="mb-3 flex justify-center">
-        <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">
+      <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
+        <span className="mt-[7px] shrink-0 text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">
           {n.toLocaleString("fr-CH")}
         </span>
-      </div>
-      <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
         <span className="mt-[7px] shrink-0">=</span>
         {cols.map((col, ci) => (
           <React.Fragment key={ci}>
@@ -869,17 +873,19 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre en dizaines et unités.</p>
-      {questions.map((q, i) => (
-        <PlaceValueCard key={i} n={q.n}
-          cols={[
-            { label: "dizaine", accept: v => v === String(q.d) || v === String(q.d * 10), correct: String(q.d) },
-            { label: "unité",   accept: v => v === String(q.u), correct: String(q.u) },
-          ]}
-          answers={answers[i] ?? []}
-          onChange={(col, val) => setAnswers(prev => { const n = prev.map(r => [...r]); n[i]![col] = val; return n; })}
-          validated={validated}
-        />
-      ))}
+      <div className="grid grid-cols-2 gap-4">
+        {questions.map((q, i) => (
+          <PlaceValueCard key={i} n={q.n}
+            cols={[
+              { label: "dizaine", accept: v => v === String(q.d) || v === String(q.d * 10), correct: String(q.d) },
+              { label: "unité",   accept: v => v === String(q.u), correct: String(q.u) },
+            ]}
+            answers={answers[i] ?? []}
+            onChange={(col, val) => setAnswers(prev => { const n = prev.map(r => [...r]); n[i]![col] = val; return n; })}
+            validated={validated}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -947,18 +953,20 @@ export function Exercise9({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Choisissez le bon signe de comparaison.</p>
-      {questions.map((q, i) => (
-        <CompareQuestion
-          key={i}
-          qNum={i + 1}
-          a={q.a}
-          b={q.b}
-          correct={q.a < q.b ? "<" : q.a > q.b ? ">" : "="}
-          validated={validated}
-          selected={answers[i] ?? null}
-          onSelect={(op) => setAnswers(prev => { const next = [...prev]; next[i] = op; return next; })}
-        />
-      ))}
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+        {questions.map((q, i) => (
+          <CompareQuestion
+            key={i}
+            qNum={i + 1}
+            a={q.a}
+            b={q.b}
+            correct={q.a < q.b ? "<" : q.a > q.b ? ">" : "="}
+            validated={validated}
+            selected={answers[i] ?? null}
+            onSelect={(op) => setAnswers(prev => { const next = [...prev]; next[i] = op; return next; })}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -1048,8 +1056,10 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
-      {renderSeq(data.seq1.values, data.seq1.blanks, ans1, setAns1, 1)}
-      {renderSeq(data.seq2.values, data.seq2.blanks, ans2, setAns2, 2)}
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+        {renderSeq(data.seq1.values, data.seq1.blanks, ans1, setAns1, 1)}
+        {renderSeq(data.seq2.values, data.seq2.blanks, ans2, setAns2, 2)}
+      </div>
     </div>
   );
 }
@@ -1146,12 +1156,14 @@ export function Exercise11({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
-      {questions.map((q, i) => (
-        <div key={i} className="flex items-center gap-1">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-          {renderQ(q, i)}
-        </div>
-      ))}
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+        {questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-1">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {renderQ(q, i)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -1194,27 +1206,29 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre.</p>
-      <PlaceValueCard n={data.n3}
-        cols={[
-          { label: "centaine", accept: v => v === String(h3) || v === String(h3 * 100), correct: String(h3) },
-          { label: "dizaine",  accept: v => v === String(t3) || v === String(t3 * 10), correct: String(t3) },
-          { label: "unité",    accept: v => v === String(u3), correct: String(u3) },
-        ]}
-        answers={ans3}
-        onChange={(col, val) => setAns3(prev => { const n = [...prev]; n[col] = val; return n; })}
-        validated={validated}
-      />
-      <PlaceValueCard n={data.n4}
-        cols={[
-          { label: "millier",  accept: v => v === String(k4) || v === String(k4 * 1000), correct: String(k4) },
-          { label: "centaine", accept: v => v === String(h4) || v === String(h4 * 100), correct: String(h4) },
-          { label: "dizaine",  accept: v => v === String(t4) || v === String(t4 * 10), correct: String(t4) },
-          { label: "unité",    accept: v => v === String(u4), correct: String(u4) },
-        ]}
-        answers={ans4}
-        onChange={(col, val) => setAns4(prev => { const n = [...prev]; n[col] = val; return n; })}
-        validated={validated}
-      />
+      <div className="grid grid-cols-2 gap-4">
+        <PlaceValueCard n={data.n3}
+          cols={[
+            { label: "centaine", accept: v => v === String(h3) || v === String(h3 * 100), correct: String(h3) },
+            { label: "dizaine",  accept: v => v === String(t3) || v === String(t3 * 10), correct: String(t3) },
+            { label: "unité",    accept: v => v === String(u3), correct: String(u3) },
+          ]}
+          answers={ans3}
+          onChange={(col, val) => setAns3(prev => { const n = [...prev]; n[col] = val; return n; })}
+          validated={validated}
+        />
+        <PlaceValueCard n={data.n4}
+          cols={[
+            { label: "millier",  accept: v => v === String(k4) || v === String(k4 * 1000), correct: String(k4) },
+            { label: "centaine", accept: v => v === String(h4) || v === String(h4 * 100), correct: String(h4) },
+            { label: "dizaine",  accept: v => v === String(t4) || v === String(t4 * 10), correct: String(t4) },
+            { label: "unité",    accept: v => v === String(u4), correct: String(u4) },
+          ]}
+          answers={ans4}
+          onChange={(col, val) => setAns4(prev => { const n = [...prev]; n[col] = val; return n; })}
+          validated={validated}
+        />
+      </div>
     </div>
   );
 }
@@ -1270,7 +1284,7 @@ export function Exercise13({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs en colonnes.</p>
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <PlacementColCard
@@ -1436,8 +1450,11 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les multiplications en colonnes.</p>
-      <div className="space-y-3">
-        <div className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+        <div className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+          <p className="text-center font-mono text-sm font-bold text-[var(--color-text-primary)]">
+            {data.a1} × {data.b1}
+          </p>
           <PlacementColCard
             a={data.a1} b={data.b1} op="×" result={data.r1}
             answers={q1Ans} carries={q1Carries}
@@ -1446,7 +1463,10 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
             validated={validated} noCard
           />
         </div>
-        <div className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+        <div className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+          <p className="text-center font-mono text-sm font-bold text-[var(--color-text-primary)]">
+            {data.a2} × {data.b2}
+          </p>
           <PlacementMulCard2
             a={data.a2} b={data.b2} result={data.r2}
             answers={q2Ans} carries={q2Carries}
@@ -1710,12 +1730,15 @@ export function Exercise15({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions en colonnes.</p>
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
         {([
           { q: data.q1, quot: q1Quot, rem: q1Rem, work: q1Work, setQuot: setQ1Quot, setRem: setQ1Rem, setWork: setQ1Work },
           { q: data.q2, quot: q2Quot, rem: q2Rem, work: q2Work, setQuot: setQ2Quot, setRem: setQ2Rem, setWork: setQ2Work },
         ] as const).map(({ q, quot, rem, work, setQuot, setRem, setWork }, i) => (
-          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+          <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <p className="text-center font-mono text-sm font-bold text-[var(--color-text-primary)]">
+              {q.dividend} ÷ {q.divisor}
+            </p>
             <PlacementDivCard
               {...q}
               quotientInputs={quot} remainderInput={rem} workFlat={work}
