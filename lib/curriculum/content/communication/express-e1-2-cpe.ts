@@ -14,1703 +14,1961 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT_1 = `E-mail à une correspondante
 
-Chère Julia,
-Merci pour ta lettre ! Aujourd'hui, je te présente ma famille. Nous sommes cinq à la maison. C'est mon père, ma mère, mes deux frères et moi.
-Mon père est mécanicien. Il a 45 ans. Ma mère a 42 ans. Elle est vendeuse. Mon grand frère est étudiant. Il a 20 ans. Mon petit frère a 8 ans.
-J'ai aussi une grande sœur, Léa. Elle est mariée et elle a un bébé. Elle n'habite pas avec nous.
-Sur la photo, tu vois toute la famille. Nous sommes chez mes grands-parents.
-Et toi, tu as des frères et sœurs ?`;
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes cinq à la maison.
+Mon père a 45 ans. Il est mécanicien.
+Ma mère a 42 ans. Elle est vendeuse.
+Mon frère/mon enfant a 20 ans.
+J'ai aussi Léa. Mariée.
+Grands-parents — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Julia`;
 
 const CE_POOL_1 = buildExpressPool("e1-2-1", [
-q({
+  q({
     id: "ce-q1",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["Cinq", "Quatre", "Six"],
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Cinq", "Trois", "Quatre"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
     fillQ: "Nous sommes _________ à la maison.",
     fill: "cinq",
-    fillA: ["5"],
     vfQ: "Ils sont cinq à la maison.",
     vfC: 0,
   }),
   q({
     id: "ce-q2",
     textQ: "Quelle est la profession du père ?",
-    text: ["Mécanicien", "Facteur", "Cuisinier"],
+    text: ["Mécanicien", "Pilote", "Avocat"],
     textC: 0,
-    img: ["mécanicien", "facteur", "cuisinier"],
+    img: ["mécanicien", "pilote", "avocat"],
     imgC: 0,
     fillQ: "Mon père est _________.",
     fill: "mécanicien",
-    fillA: ["mecanicien"],
-    vfQ: "Le père est cuisinier.",
-    vfC: 1,
+    vfQ: "Le père est mécanicien.",
+    vfC: 0,
   }),
   q({
     id: "ce-q3",
     textQ: "Quel âge a la mère ?",
-    text: ["42 ans", "45 ans", "52 ans"],
+    text: ["42 ans", "52 ans", "32 ans"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
     fillQ: "Ma mère a _________ ans.",
     fill: "42",
-    fillA: ["quarante-deux"],
     vfQ: "La mère a 42 ans.",
     vfC: 0,
   }),
   q({
     id: "ce-q4",
-    textQ: "Que fait le grand frère ?",
-    text: ["Il est étudiant", "Il est mécanicien", "Il travaille dans un magasin"],
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Vendeuse", "Pilote", "Mécanicien"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["vendeur", "pilote", "mécanicien"],
     imgC: 0,
-    fillQ: "Mon grand frère est _________.",
-    fill: "étudiant",
-    fillA: ["etudiant"],
-    vfQ: "Le grand frère a 18 ans.",
-    vfC: 1,
+    fillQ: "Ma mère est _________.",
+    fill: "vendeuse",
+    vfQ: "La mère est vendeuse.",
+    vfC: 0,
   }),
   q({
     id: "ce-q5",
-    textQ: "Est-ce que la grande sœur habite avec la famille ?",
-    text: [
-      "Non, elle n'habite pas avec eux",
-      "Oui, elle habite à la maison",
-      "Oui, elle habite avec les grands-parents",
-    ],
+    textQ: "Qui est Léa ?",
+    text: ["Léa", "Un voisin", "Un prof"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Elle est mariée et elle a un _________.",
-    fill: "bébé",
-    fillA: ["bebe"],
-    vfQ: "La grande sœur est mariée.",
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "Léa",
+    vfQ: "Léa fait partie de la famille.",
     vfC: 0,
   }),
   q({
     id: "ce-q6",
-    textQ: "Où est prise la photo de famille ?",
-    text: ["Chez les grands-parents", "À la maison", "En vacances"],
+    textQ: "Quel événement est mentionné ?",
+    text: ["Grands-parents", "Un examen", "Un voyage seul"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Nous sommes chez mes _________.",
+    fillQ: "_________ — c'est un moment important.",
     fill: "grands-parents",
-    fillA: ["grands parents"],
-    vfQ: "La photo est prise en vacances.",
-    vfC: 1,
+    vfQ: "L'événement est grands-parents.",
+    vfC: 0,
   }),
   q({
     id: "ce-q7",
-    textQ: "Quel âge a le petit frère ?",
-    text: ["8 ans", "10 ans", "12 ans"],
+    textQ: "Quel âge a le père ?",
+    text: ["45 ans", "55 ans", "35 ans"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Mon petit frère a _________ ans.",
-    fill: "8",
-    fillA: ["huit"],
-    vfQ: "Le message dit la profession de la grande sœur.",
-    vfC: 2,
+    fillQ: "Mon père a _________ ans.",
+    fill: "45",
+    vfQ: "Le père a 45 ans.",
+    vfC: 0,
   }),
 ]);
+const CE_TEXT_2 = `SMS familial
 
-const CE_TEXT_2 = `Message à un ami
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes quatre à la maison.
+Mon père a 50 ans. Il est chauffeur.
+Ma mère a 47 ans. Elle est infirmière.
 
-Salut !
-Je m'appelle Karim. Je te parle de ma famille. Nous sommes 4 à la maison.
-Père chauffeur 48 ans, mère vendeuse 44 ans, sœur 15 ans.
-Ma famille est très sympa. On mange ensemble le soir.
+J'ai aussi grand-mère. Avec nous.
+Dimanche — c'est un moment important pour nous.
 Et toi, tu as une grande famille ?
-Karim`;
+Maman`;
 
 const CE_POOL_2 = buildExpressPool("e1-2-2", [
   q({
     id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Karim", "Paul", "Marie"],
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Quatre", "Trois", "Cinq"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Karim",
-    vfQ: "La personne s'appelle Karim.",
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "quatre",
+    vfQ: "Ils sont quatre à la maison.",
     vfC: 0,
   }),
   q({
     id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["4", "deux", "dix"],
+    textQ: "Quelle est la profession du père ?",
+    text: ["Chauffeur", "Pilote", "Avocat"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["chauffeur", "pilote", "avocat"],
     imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "4",
-    vfQ: "Ils sont 4 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Le père est chauffeur ?",
-    text: ["Chauffeur", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
+    fillQ: "Mon père est _________.",
     fill: "chauffeur",
     vfQ: "Le père est chauffeur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_3 = `Message à un ami
-
-Salut !
-Je m'appelle Léa. Je te parle de ma famille. Nous sommes 3 à la maison.
-Parents agriculteurs, frère jumeau 12 ans.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Léa`;
-
-const CE_POOL_3 = buildExpressPool("e1-2-3", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Léa", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Léa",
-    vfQ: "La personne s'appelle Léa.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["3", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "3",
-    vfQ: "Ils sont 3 à la maison.",
-    vfC: 0,
-  }),
-  q({
     id: "ce-q3",
-    textQ: "Ils sont trois à la maison ?",
-    text: ["Ils sont trois à la maison", "facteur", "pilote"],
+    textQ: "Quel âge a la mère ?",
+    text: ["47 ans", "57 ans", "37 ans"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "trois",
-    vfQ: "Ils sont trois à la maison.",
+    fillQ: "Ma mère a _________ ans.",
+    fill: "47",
+    vfQ: "La mère a 47 ans.",
     vfC: 0,
   }),
   q({
     id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Infirmière", "Pilote", "Mécanicien"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["infirmier", "pilote", "mécanicien"],
     imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_4 = `Message à un ami
-
-Salut !
-Je m'appelle Diego. Je te parle de ma famille. Nous sommes 5 à la maison.
-Père médecin, mère professeur, deux sœurs.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Diego`;
-
-const CE_POOL_4 = buildExpressPool("e1-2-4", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Diego", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Diego",
-    vfQ: "La personne s'appelle Diego.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["5", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "5",
-    vfQ: "Ils sont 5 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Le père est médecin ?",
-    text: ["Médecin", "facteur", "pilote"],
-    textC: 0,
-    img: ["médecin", "boulanger", "facteur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "médecin",
-    vfQ: "Le père est médecin.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_5 = `Message à un ami
-
-Salut !
-Je m'appelle Hana. Je te parle de ma famille. Nous sommes 6 à la maison.
-Grands-parents, parents, elle et son frère.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Hana`;
-
-const CE_POOL_5 = buildExpressPool("e1-2-5", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Hana", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Hana",
-    vfQ: "La personne s'appelle Hana.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["6", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "6",
-    vfQ: "Ils sont 6 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Ils sont six à la maison ?",
-    text: ["Ils sont six à la maison", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "six",
-    vfQ: "Ils sont six à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_6 = `Message à un ami
-
-Salut !
-Je m'appelle Noah. Je te parle de ma famille. Nous sommes 4 à la maison.
-Mère infirmière célibataire, lui et sa sœur.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Noah`;
-
-const CE_POOL_6 = buildExpressPool("e1-2-6", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Noah", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Noah",
-    vfQ: "La personne s'appelle Noah.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["4", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "4",
-    vfQ: "Ils sont 4 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "La mère est infirmière ?",
-    text: ["Infirmière", "facteur", "pilote"],
-    textC: 0,
-    img: ["infirmière", "vendeuse", "coiffeuse"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
+    fillQ: "Ma mère est _________.",
     fill: "infirmière",
     vfQ: "La mère est infirmière.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
     id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
+    textQ: "Qui est grand-mère ?",
+    text: ["Grand-mère", "Un voisin", "Un prof"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "grand-mère",
+    vfQ: "Grand-mère fait partie de la famille.",
+    vfC: 0,
   }),
   q({
     id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textQ: "Quel événement est mentionné ?",
+    text: ["Dimanche", "Un examen", "Un voyage seul"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
+    fillQ: "_________ — c'est un moment important.",
+    fill: "dimanche",
+    vfQ: "L'événement est dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["50 ans", "60 ans", "40 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "50",
+    vfQ: "Le père a 50 ans.",
     vfC: 0,
   }),
 ]);
+const CE_TEXT_3 = `Carte postale familiale
 
-const CE_TEXT_7 = `Message à un ami
-
-Salut !
-Je m'appelle Sofia. Je te parle de ma famille. Nous sommes 5 à la maison.
-Père cuisinier, mère secrétaire, frère et sœur.
-Ma famille est très sympa. On mange ensemble le soir.
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes six à la maison.
+Mon père a 48 ans. Il est boulanger.
+Ma mère a 44 ans. Elle est coiffeuse.
+Mon frère/mon enfant a 16 ans.
+J'ai aussi oncle. En espagne.
+Été — c'est un moment important pour nous.
 Et toi, tu as une grande famille ?
-Sofia`;
+Carlos`;
 
-const CE_POOL_7 = buildExpressPool("e1-2-7", [
+const CE_POOL_3 = buildExpressPool("e1-2-3", [
   q({
     id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Sofia", "Paul", "Marie"],
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Six", "Trois", "Quatre"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Sofia",
-    vfQ: "La personne s'appelle Sofia.",
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "six",
+    vfQ: "Ils sont six à la maison.",
     vfC: 0,
   }),
   q({
     id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["5", "deux", "dix"],
+    textQ: "Quelle est la profession du père ?",
+    text: ["Boulanger", "Pilote", "Avocat"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["boulanger", "pilote", "avocat"],
     imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "5",
-    vfQ: "Ils sont 5 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Le père est cuisinier ?",
-    text: ["Cuisinier", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "plombier", "peintre"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "cuisinier",
-    vfQ: "Le père est cuisinier.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_8 = `Message à un ami
-
-Salut !
-Je m'appelle Adam. Je te parle de ma famille. Nous sommes 3 à la maison.
-Ses parents et lui seulement.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Adam`;
-
-const CE_POOL_8 = buildExpressPool("e1-2-8", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Adam", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Adam",
-    vfQ: "La personne s'appelle Adam.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["3", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "3",
-    vfQ: "Ils sont 3 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Ils sont trois ?",
-    text: ["Ils sont trois", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "trois",
-    vfQ: "Ils sont trois.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_9 = `Message à un ami
-
-Salut !
-Je m'appelle Mila. Je te parle de ma famille. Nous sommes 4 à la maison.
-Père retraité, mère fleuriste, grand-mère.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Mila`;
-
-const CE_POOL_9 = buildExpressPool("e1-2-9", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Mila", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Mila",
-    vfQ: "La personne s'appelle Mila.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["4", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "4",
-    vfQ: "Ils sont 4 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "La mère est fleuriste ?",
-    text: ["Fleuriste", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "fleuriste",
-    vfQ: "La mère est fleuriste.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_10 = `Message à un ami
-
-Salut !
-Je m'appelle Youssef. Je te parle de ma famille. Nous sommes 5 à la maison.
-Deux frères, deux sœurs, parents.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Youssef`;
-
-const CE_POOL_10 = buildExpressPool("e1-2-10", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Youssef", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Youssef",
-    vfQ: "La personne s'appelle Youssef.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["5", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "5",
-    vfQ: "Ils sont 5 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Il a deux frères ?",
-    text: ["Il a deux frères", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "deux",
-    vfQ: "Il a deux frères.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_11 = `Message à un ami
-
-Salut !
-Je m'appelle Chloé. Je te parle de ma famille. Nous sommes 4 à la maison.
-Père policier, mère coiffeuse, petit frère 6 ans.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Chloé`;
-
-const CE_POOL_11 = buildExpressPool("e1-2-11", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Chloé", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Chloé",
-    vfQ: "La personne s'appelle Chloé.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["4", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "4",
-    vfQ: "Ils sont 4 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Le père est policier ?",
-    text: ["Policier", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "policier",
-    vfQ: "Le père est policier.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_12 = `Message à un ami
-
-Salut !
-Je m'appelle Emre. Je te parle de ma famille. Nous sommes 3 à la maison.
-Parents et sœur aînée mariée.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Emre`;
-
-const CE_POOL_12 = buildExpressPool("e1-2-12", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Emre", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Emre",
-    vfQ: "La personne s'appelle Emre.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["3", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "3",
-    vfQ: "Ils sont 3 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Sa sœur est mariée ?",
-    text: ["Mariée", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "mariée",
-    vfQ: "Sa sœur est mariée.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_13 = `Message à un ami
-
-Salut !
-Je m'appelle Anna. Je te parle de ma famille. Nous sommes 5 à la maison.
-Père ingénieur, mère dentiste, jumeaux.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Anna`;
-
-const CE_POOL_13 = buildExpressPool("e1-2-13", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Anna", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Anna",
-    vfQ: "La personne s'appelle Anna.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["5", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "5",
-    vfQ: "Ils sont 5 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "La mère est dentiste ?",
-    text: ["Dentiste", "facteur", "pilote"],
-    textC: 0,
-    img: ["dentiste", "serveuse", "vendeuse"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "dentiste",
-    vfQ: "La mère est dentiste.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_14 = `Message à un ami
-
-Salut !
-Je m'appelle Bilal. Je te parle de ma famille. Nous sommes 4 à la maison.
-Famille nombreuse : 4 enfants.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Bilal`;
-
-const CE_POOL_14 = buildExpressPool("e1-2-14", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Bilal", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Bilal",
-    vfQ: "La personne s'appelle Bilal.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["4", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "4",
-    vfQ: "Ils sont 4 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Il y a quatre enfants ?",
-    text: ["Il y a quatre enfants", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "quatre",
-    vfQ: "Il y a quatre enfants.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_15 = `Message à un ami
-
-Salut !
-Je m'appelle Emma. Je te parle de ma famille. Nous sommes 3 à la maison.
-Mère et père professeurs, elle seule enfant.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Emma`;
-
-const CE_POOL_15 = buildExpressPool("e1-2-15", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Emma", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Emma",
-    vfQ: "La personne s'appelle Emma.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["3", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "3",
-    vfQ: "Ils sont 3 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Elle est fille unique ?",
-    text: ["Unique", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "unique",
-    vfQ: "Elle est fille unique.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_16 = `Message à un ami
-
-Salut !
-Je m'appelle Ravi. Je te parle de ma famille. Nous sommes 5 à la maison.
-Oncle, tante, cousins à la maison le week-end.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Ravi`;
-
-const CE_POOL_16 = buildExpressPool("e1-2-16", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Ravi", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Ravi",
-    vfQ: "La personne s'appelle Ravi.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["5", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "5",
-    vfQ: "Ils sont 5 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Des cousins viennent le week-end ?",
-    text: ["Des cousins viennent le week-end", "facteur", "pilote"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "week-end",
-    vfQ: "Des cousins viennent le week-end.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
-    vfC: 0,
-  }),
-]);
-
-const CE_TEXT_17 = `Message à un ami
-
-Salut !
-Je m'appelle Lucie. Je te parle de ma famille. Nous sommes 4 à la maison.
-Père boulanger, mère à la maison, deux frères.
-Ma famille est très sympa. On mange ensemble le soir.
-Et toi, tu as une grande famille ?
-Lucie`;
-
-const CE_POOL_17 = buildExpressPool("e1-2-17", [
-  q({
-    id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Lucie", "Paul", "Marie"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Lucie",
-    vfQ: "La personne s'appelle Lucie.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["4", "deux", "dix"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "4",
-    vfQ: "Ils sont 4 à la maison.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Le père est boulanger ?",
-    text: ["Boulanger", "facteur", "pilote"],
-    textC: 0,
-    img: ["boulanger", "journaliste", "pilote"],
-    imgC: 0,
-    fillQ: "Ma famille : _________.",
+    fillQ: "Mon père est _________.",
     fill: "boulanger",
     vfQ: "Le père est boulanger.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["44 ans", "54 ans", "34 ans"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
+    fillQ: "Ma mère a _________ ans.",
+    fill: "44",
+    vfQ: "La mère a 44 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Coiffeuse", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["coiffeuse", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "coiffeuse",
+    vfQ: "La mère est coiffeuse.",
     vfC: 0,
   }),
   q({
     id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
+    textQ: "Qui est oncle ?",
+    text: ["Oncle", "Un voisin", "Un prof"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "oncle",
+    vfQ: "Oncle fait partie de la famille.",
+    vfC: 0,
   }),
   q({
     id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textQ: "Quel événement est mentionné ?",
+    text: ["Été", "Un examen", "Un voyage seul"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
+    fillQ: "_________ — c'est un moment important.",
+    fill: "été",
+    vfQ: "L'événement est été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["48 ans", "58 ans", "38 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "48",
+    vfQ: "Le père a 48 ans.",
     vfC: 0,
   }),
 ]);
+const CE_TEXT_4 = `Message WhatsApp
 
-const CE_TEXT_18 = `Message à un ami
-
-Salut !
-Je m'appelle Samir. Je te parle de ma famille. Nous sommes 6 à la maison.
-Parents, trois frères, grand-père.
-Ma famille est très sympa. On mange ensemble le soir.
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes sept à la maison.
+Mon père a 55 ans. Il est électricien.
+Ma mère a 50 ans. Elle est secrétaire.
+Mon frère/mon enfant a 19 ans.
+J'ai aussi cousins. En vacances.
+Samedi — c'est un moment important pour nous.
 Et toi, tu as une grande famille ?
-Samir`;
+Fatima`;
+
+const CE_POOL_4 = buildExpressPool("e1-2-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Sept", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "sept",
+    vfQ: "Ils sont sept à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Électricien", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["électricien", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "électricien",
+    vfQ: "Le père est électricien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["50 ans", "60 ans", "40 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "50",
+    vfQ: "La mère a 50 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Secrétaire", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["secrétaire", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "secrétaire",
+    vfQ: "La mère est secrétaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est cousins ?",
+    text: ["Cousins", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "cousins",
+    vfQ: "Cousins fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Samedi", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "samedi",
+    vfQ: "L'événement est samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["55 ans", "65 ans", "45 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "55",
+    vfQ: "Le père a 55 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_5 = `Note sur le frigo
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes trois à la maison.
+Mon père a 40 ans. Il est plombier.
+Ma mère a 38 ans. Elle est pharmacienne.
+
+J'ai aussi tante. À genève.
+Ce soir — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Papa`;
+
+const CE_POOL_5 = buildExpressPool("e1-2-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Trois", "Quatre", "Cinq"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "trois",
+    vfQ: "Ils sont trois à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Plombier", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["plombier", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "plombier",
+    vfQ: "Le père est plombier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["38 ans", "48 ans", "28 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "38",
+    vfQ: "La mère a 38 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Pharmacienne", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["pharmacien", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "pharmacienne",
+    vfQ: "La mère est pharmacienne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est tante ?",
+    text: ["Tante", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "tante",
+    vfQ: "Tante fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Ce soir", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "ce",
+    vfQ: "L'événement est ce soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["40 ans", "50 ans", "30 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "40",
+    vfQ: "Le père a 40 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_6 = `Journal intime (extrait)
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes cinq à la maison.
+Mon père a 43 ans. Il est professeur.
+Ma mère a 41 ans. Elle est vendeuse.
+Mon frère/mon enfant a 22 ans.
+J'ai aussi bébé. Né en mars.
+Heureux — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Lina`;
+
+const CE_POOL_6 = buildExpressPool("e1-2-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Cinq", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "cinq",
+    vfQ: "Ils sont cinq à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Professeur", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["professeur", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "professeur",
+    vfQ: "Le père est professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["41 ans", "51 ans", "31 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "41",
+    vfQ: "La mère a 41 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Vendeuse", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["vendeur", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "vendeuse",
+    vfQ: "La mère est vendeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est bébé ?",
+    text: ["Bébé", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "bébé",
+    vfQ: "Bébé fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Heureux", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "heureux",
+    vfQ: "L'événement est heureux.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["43 ans", "53 ans", "33 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "43",
+    vfQ: "Le père a 43 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_7 = `Forum « Ma famille »
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes quatre à la maison.
+Mon père a 46 ans. Il est cuisinier.
+Ma mère a 43 ans. Elle est serveuse.
+Mon frère/mon enfant a 13 ans.
+J'ai aussi nièce. En italie.
+Noël — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Roberto`;
+
+const CE_POOL_7 = buildExpressPool("e1-2-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Quatre", "Trois", "Cinq"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "quatre",
+    vfQ: "Ils sont quatre à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Cuisinier", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["cuisinier", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "cuisinier",
+    vfQ: "Le père est cuisinier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["43 ans", "53 ans", "33 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "43",
+    vfQ: "La mère a 43 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Serveuse", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["serveur", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "serveuse",
+    vfQ: "La mère est serveuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est nièce ?",
+    text: ["Nièce", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "nièce",
+    vfQ: "Nièce fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Noël", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "Noël",
+    vfQ: "L'événement est Noël.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["46 ans", "56 ans", "36 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "46",
+    vfQ: "Le père a 46 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_8 = `Fiche scolaire — famille
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes six à la maison.
+Mon père a 52 ans. Il est médecin.
+Ma mère a 49 ans. Elle est infirmière.
+Mon frère/mon enfant a 8 ans.
+J'ai aussi jumeaux. De 3 ans.
+École — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Amadou`;
+
+const CE_POOL_8 = buildExpressPool("e1-2-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Six", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "six",
+    vfQ: "Ils sont six à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Médecin", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["médecin", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "médecin",
+    vfQ: "Le père est médecin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["49 ans", "59 ans", "39 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "49",
+    vfQ: "La mère a 49 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Infirmière", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["infirmier", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "infirmière",
+    vfQ: "La mère est infirmière.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est jumeaux ?",
+    text: ["Jumeaux", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "jumeaux",
+    vfQ: "Jumeaux fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["École", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "école",
+    vfQ: "L'événement est école.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["52 ans", "62 ans", "42 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "52",
+    vfQ: "Le père a 52 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_9 = `Lettre à un ami
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes cinq à la maison.
+Mon père a 44 ans. Il est journaliste.
+Ma mère a 42 ans. Elle est architecte.
+Mon frère/mon enfant a 17 ans.
+J'ai aussi grand-père. 80 ans.
+Photo — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Elena`;
+
+const CE_POOL_9 = buildExpressPool("e1-2-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Cinq", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "cinq",
+    vfQ: "Ils sont cinq à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Journaliste", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["journaliste", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "journaliste",
+    vfQ: "Le père est journaliste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["42 ans", "52 ans", "32 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "42",
+    vfQ: "La mère a 42 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Architecte", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["architecte", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "architecte",
+    vfQ: "La mère est architecte.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est grand-père ?",
+    text: ["Grand-père", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "grand-père",
+    vfQ: "Grand-père fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Photo", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "photo",
+    vfQ: "L'événement est photo.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["44 ans", "54 ans", "34 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "44",
+    vfQ: "Le père a 44 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_10 = `Annonce famille recomposée
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes quatre à la maison.
+Mon père a 39 ans. Il est chauffeur.
+Ma mère a 37 ans. Elle est coiffeuse.
+Mon frère/mon enfant a 9 ans.
+J'ai aussi beau-fils. 12 ans.
+Week-end — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Stéphane`;
+
+const CE_POOL_10 = buildExpressPool("e1-2-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Quatre", "Trois", "Cinq"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "quatre",
+    vfQ: "Ils sont quatre à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Chauffeur", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["chauffeur", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "chauffeur",
+    vfQ: "Le père est chauffeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["37 ans", "47 ans", "27 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "37",
+    vfQ: "La mère a 37 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Coiffeuse", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["coiffeuse", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "coiffeuse",
+    vfQ: "La mère est coiffeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est beau-fils ?",
+    text: ["Beau-fils", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "beau-fils",
+    vfQ: "Beau-fils fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Week-end", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "week-end",
+    vfQ: "L'événement est week-end.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["39 ans", "49 ans", "29 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "39",
+    vfQ: "Le père a 39 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_11 = `Message groupe famille
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes huit à la maison.
+Mon père a 56 ans. Il est boucher.
+Ma mère a 53 ans. Elle est vendeuse.
+Mon frère/mon enfant a 21 ans.
+J'ai aussi arrière-grand-mère. 90 ans.
+Fête — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Aïcha`;
+
+const CE_POOL_11 = buildExpressPool("e1-2-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Huit", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "huit",
+    vfQ: "Ils sont huit à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Boucher", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["boucher", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "boucher",
+    vfQ: "Le père est boucher.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["53 ans", "63 ans", "43 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "53",
+    vfQ: "La mère a 53 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Vendeuse", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["vendeur", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "vendeuse",
+    vfQ: "La mère est vendeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est arrière-grand-mère ?",
+    text: ["Arrière-grand-mère", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "arrière-grand-mère",
+    vfQ: "Arrière-grand-mère fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Fête", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "fête",
+    vfQ: "L'événement est fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["56 ans", "66 ans", "46 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "56",
+    vfQ: "Le père a 56 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_12 = `Carte de vœux
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes trois à la maison.
+Mon père a 70 ans. Il est retraité.
+Ma mère a 68 ans. Elle est retraitée.
+
+J'ai aussi petite-fille. 5 ans.
+Anniversaire — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Henri`;
+
+const CE_POOL_12 = buildExpressPool("e1-2-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Trois", "Quatre", "Cinq"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "trois",
+    vfQ: "Ils sont trois à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Retraité", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "retraité",
+    vfQ: "Le père est retraité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["68 ans", "78 ans", "58 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "68",
+    vfQ: "La mère a 68 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Retraitée", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "retraitée",
+    vfQ: "La mère est retraitée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est petite-fille ?",
+    text: ["Petite-fille", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "petite-fille",
+    vfQ: "Petite-fille fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Anniversaire", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "anniversaire",
+    vfQ: "L'événement est anniversaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["70 ans", "80 ans", "60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "70",
+    vfQ: "Le père a 70 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_13 = `Profil réseau social
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes cinq à la maison.
+Mon père a 41 ans. Il est vétérinaire.
+Ma mère a 39 ans. Elle est professeure.
+Mon frère/mon enfant a 1 ans.
+J'ai aussi chien. Max.
+Animaux — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Mia`;
+
+const CE_POOL_13 = buildExpressPool("e1-2-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Cinq", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "cinq",
+    vfQ: "Ils sont cinq à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Vétérinaire", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["vétérinaire", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "vétérinaire",
+    vfQ: "Le père est vétérinaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["39 ans", "49 ans", "29 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "39",
+    vfQ: "La mère a 39 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Professeure", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["professeur", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "professeure",
+    vfQ: "La mère est professeure.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est chien ?",
+    text: ["Chien", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "chien",
+    vfQ: "Chien fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Animaux", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "animaux",
+    vfQ: "L'événement est animaux.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["41 ans", "51 ans", "31 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "41",
+    vfQ: "Le père a 41 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_14 = `Description photo
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes quatre à la maison.
+Mon père a 47 ans. Il est peintre.
+Ma mère a 45 ans. Elle est libraire.
+Mon frère/mon enfant a 15 ans.
+J'ai aussi cousin. En allemagne.
+Mariage — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Jonas`;
+
+const CE_POOL_14 = buildExpressPool("e1-2-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Quatre", "Trois", "Cinq"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "quatre",
+    vfQ: "Ils sont quatre à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Peintre", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["peintre", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "peintre",
+    vfQ: "Le père est peintre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["45 ans", "55 ans", "35 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "45",
+    vfQ: "La mère a 45 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Libraire", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["libraire", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "libraire",
+    vfQ: "La mère est libraire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est cousin ?",
+    text: ["Cousin", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "cousin",
+    vfQ: "Cousin fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Mariage", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "mariage",
+    vfQ: "L'événement est mariage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["47 ans", "57 ans", "37 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "47",
+    vfQ: "Le père a 47 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_15 = `Message au prof
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes six à la maison.
+Mon père a 51 ans. Il est facteur.
+Ma mère a 48 ans. Elle est coiffeuse.
+Mon frère/mon enfant a 7 ans.
+J'ai aussi frère. Jumeau.
+Projet — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Sofia`;
+
+const CE_POOL_15 = buildExpressPool("e1-2-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Six", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "six",
+    vfQ: "Ils sont six à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Facteur", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["facteur", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "facteur",
+    vfQ: "Le père est facteur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["48 ans", "58 ans", "38 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "48",
+    vfQ: "La mère a 48 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Coiffeuse", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["coiffeuse", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "coiffeuse",
+    vfQ: "La mère est coiffeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est frère ?",
+    text: ["Frère", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "frère",
+    vfQ: "Frère fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Projet", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "projet",
+    vfQ: "L'événement est projet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["51 ans", "61 ans", "41 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "51",
+    vfQ: "Le père a 51 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_16 = `Petite annonce — baby-sitter
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes cinq à la maison.
+Mon père a 42 ans. Il est infirmier.
+Ma mère a 40 ans. Elle est secrétaire.
+Mon frère/mon enfant a 6 ans.
+J'ai aussi jumeaux. 2 ans.
+Mercredi — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Nadia`;
+
+const CE_POOL_16 = buildExpressPool("e1-2-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Cinq", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "cinq",
+    vfQ: "Ils sont cinq à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Infirmier", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["infirmier", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "infirmier",
+    vfQ: "Le père est infirmier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["40 ans", "50 ans", "30 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "40",
+    vfQ: "La mère a 40 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Secrétaire", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["secrétaire", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "secrétaire",
+    vfQ: "La mère est secrétaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est jumeaux ?",
+    text: ["Jumeaux", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "jumeaux",
+    vfQ: "Jumeaux fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Mercredi", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "mercredi",
+    vfQ: "L'événement est mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["42 ans", "52 ans", "32 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "42",
+    vfQ: "Le père a 42 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_17 = `Invitation famille élargie
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes dix à la maison.
+Mon père a 60 ans. Il est agriculteur.
+Ma mère a 58 ans. Elle est fermière.
+Mon frère/mon enfant a 25 ans.
+J'ai aussi oncle. En grèce.
+Pâques — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Georges`;
+
+const CE_POOL_17 = buildExpressPool("e1-2-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Dix", "Trois", "Quatre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "dix",
+    vfQ: "Ils sont dix à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la profession du père ?",
+    text: ["Agriculteur", "Pilote", "Avocat"],
+    textC: 0,
+    img: ["agriculteur", "pilote", "avocat"],
+    imgC: 0,
+    fillQ: "Mon père est _________.",
+    fill: "agriculteur",
+    vfQ: "Le père est agriculteur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel âge a la mère ?",
+    text: ["58 ans", "68 ans", "48 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma mère a _________ ans.",
+    fill: "58",
+    vfQ: "La mère a 58 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Fermière", "Pilote", "Mécanicien"],
+    textC: 0,
+    img: ["fermier", "pilote", "mécanicien"],
+    imgC: 0,
+    fillQ: "Ma mère est _________.",
+    fill: "fermière",
+    vfQ: "La mère est fermière.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui est oncle ?",
+    text: ["Oncle", "Un voisin", "Un prof"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "oncle",
+    vfQ: "Oncle fait partie de la famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel événement est mentionné ?",
+    text: ["Pâques", "Un examen", "Un voyage seul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________ — c'est un moment important.",
+    fill: "Pâques",
+    vfQ: "L'événement est Pâques.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["60 ans", "70 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "60",
+    vfQ: "Le père a 60 ans.",
+    vfC: 0,
+  }),
+]);
+const CE_TEXT_18 = `Réponse sondage
+
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes quatre à la maison.
+Mon père a 49 ans. Il est pharmacien.
+Ma mère a 46 ans. Elle est dentiste.
+Mon frère/mon enfant a 14 ans.
+J'ai aussi sœur. À lausanne.
+Enquête — c'est un moment important pour nous.
+Et toi, tu as une grande famille ?
+Yasmin`;
 
 const CE_POOL_18 = buildExpressPool("e1-2-18", [
   q({
     id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Samir", "Paul", "Marie"],
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Quatre", "Trois", "Cinq"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Samir",
-    vfQ: "La personne s'appelle Samir.",
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "quatre",
+    vfQ: "Ils sont quatre à la maison.",
     vfC: 0,
   }),
   q({
     id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["6", "deux", "dix"],
+    textQ: "Quelle est la profession du père ?",
+    text: ["Pharmacien", "Pilote", "Avocat"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["pharmacien", "pilote", "avocat"],
     imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "6",
-    vfQ: "Ils sont 6 à la maison.",
+    fillQ: "Mon père est _________.",
+    fill: "pharmacien",
+    vfQ: "Le père est pharmacien.",
     vfC: 0,
   }),
   q({
     id: "ce-q3",
-    textQ: "Le grand-père habite avec eux ?",
-    text: ["Le grand-père habite avec eux", "facteur", "pilote"],
+    textQ: "Quel âge a la mère ?",
+    text: ["46 ans", "56 ans", "36 ans"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "grand-père",
-    vfQ: "Le grand-père habite avec eux.",
+    fillQ: "Ma mère a _________ ans.",
+    fill: "46",
+    vfQ: "La mère a 46 ans.",
     vfC: 0,
   }),
   q({
     id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Dentiste", "Pilote", "Mécanicien"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["dentiste", "pilote", "mécanicien"],
     imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
+    fillQ: "Ma mère est _________.",
+    fill: "dentiste",
+    vfQ: "La mère est dentiste.",
     vfC: 0,
   }),
   q({
     id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
+    textQ: "Qui est sœur ?",
+    text: ["Sœur", "Un voisin", "Un prof"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "sœur",
+    vfQ: "Sœur fait partie de la famille.",
+    vfC: 0,
   }),
   q({
     id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textQ: "Quel événement est mentionné ?",
+    text: ["Enquête", "Un examen", "Un voyage seul"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
+    fillQ: "_________ — c'est un moment important.",
+    fill: "enquête",
+    vfQ: "L'événement est enquête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["49 ans", "59 ans", "39 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "49",
+    vfQ: "Le père a 49 ans.",
     vfC: 0,
   }),
 ]);
+const CE_TEXT_19 = `Blog personnel
 
-const CE_TEXT_19 = `Message à un ami
-
-Salut !
-Je m'appelle Julie. Je te parle de ma famille. Nous sommes 4 à la maison.
-Mère divorcée, julie et son frère.
-Ma famille est très sympa. On mange ensemble le soir.
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes cinq à la maison.
+Mon père a 45 ans. Il est menuisier.
+Ma mère a 43 ans. Elle est vendeuse.
+Mon frère/mon enfant a 18 ans.
+J'ai aussi grand-mère. En maison de retraite.
+Visite — c'est un moment important pour nous.
 Et toi, tu as une grande famille ?
-Julie`;
+Théo`;
 
 const CE_POOL_19 = buildExpressPool("e1-2-19", [
   q({
     id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Julie", "Paul", "Marie"],
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Cinq", "Trois", "Quatre"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Julie",
-    vfQ: "La personne s'appelle Julie.",
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "cinq",
+    vfQ: "Ils sont cinq à la maison.",
     vfC: 0,
   }),
   q({
     id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["4", "deux", "dix"],
+    textQ: "Quelle est la profession du père ?",
+    text: ["Menuisier", "Pilote", "Avocat"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["menuisier", "pilote", "avocat"],
     imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "4",
-    vfQ: "Ils sont 4 à la maison.",
+    fillQ: "Mon père est _________.",
+    fill: "menuisier",
+    vfQ: "Le père est menuisier.",
     vfC: 0,
   }),
   q({
     id: "ce-q3",
-    textQ: "La mère est divorcée ?",
-    text: ["Divorcée", "facteur", "pilote"],
+    textQ: "Quel âge a la mère ?",
+    text: ["43 ans", "53 ans", "33 ans"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "divorcée",
-    vfQ: "La mère est divorcée.",
+    fillQ: "Ma mère a _________ ans.",
+    fill: "43",
+    vfQ: "La mère a 43 ans.",
     vfC: 0,
   }),
   q({
     id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Vendeuse", "Pilote", "Mécanicien"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["vendeur", "pilote", "mécanicien"],
     imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
+    fillQ: "Ma mère est _________.",
+    fill: "vendeuse",
+    vfQ: "La mère est vendeuse.",
     vfC: 0,
   }),
   q({
     id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
+    textQ: "Qui est grand-mère ?",
+    text: ["Grand-mère", "Un voisin", "Un prof"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "grand-mère",
+    vfQ: "Grand-mère fait partie de la famille.",
+    vfC: 0,
   }),
   q({
     id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textQ: "Quel événement est mentionné ?",
+    text: ["Visite", "Un examen", "Un voyage seul"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
+    fillQ: "_________ — c'est un moment important.",
+    fill: "visite",
+    vfQ: "L'événement est visite.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["45 ans", "55 ans", "35 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "45",
+    vfQ: "Le père a 45 ans.",
     vfC: 0,
   }),
 ]);
+const CE_TEXT_20 = `Message vocal transcrit
 
-const CE_TEXT_20 = `Message à un ami
-
-Salut !
-Je m'appelle Mateo. Je te parle de ma famille. Nous sommes 5 à la maison.
-Père musicien, mère traductrice, sœur bébé.
-Ma famille est très sympa. On mange ensemble le soir.
+Chère amie, chers amis,
+Je te présente ma famille. Nous sommes sept à la maison.
+Mon père a 53 ans. Il est serveur.
+Ma mère a 50 ans. Elle est cuisinière.
+Mon frère/mon enfant a 16 ans.
+J'ai aussi neveu. 6 mois.
+Baptême — c'est un moment important pour nous.
 Et toi, tu as une grande famille ?
-Mateo`;
+Rosa`;
 
 const CE_POOL_20 = buildExpressPool("e1-2-20", [
   q({
     id: "ce-q1",
-    textQ: "Comment s'appelle la personne ?",
-    text: ["Mateo", "Paul", "Marie"],
+    textQ: "Combien de personnes à la maison ?",
+    text: ["Sept", "Trois", "Quatre"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je m'appelle _________.",
-    fill: "Mateo",
-    vfQ: "La personne s'appelle Mateo.",
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "sept",
+    vfQ: "Ils sont sept à la maison.",
     vfC: 0,
   }),
   q({
     id: "ce-q2",
-    textQ: "Combien de personnes habitent à la maison ?",
-    text: ["5", "deux", "dix"],
+    textQ: "Quelle est la profession du père ?",
+    text: ["Serveur", "Pilote", "Avocat"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["serveur", "pilote", "avocat"],
     imgC: 0,
-    fillQ: "Nous sommes _________ à la maison.",
-    fill: "5",
-    vfQ: "Ils sont 5 à la maison.",
+    fillQ: "Mon père est _________.",
+    fill: "serveur",
+    vfQ: "Le père est serveur.",
     vfC: 0,
   }),
   q({
     id: "ce-q3",
-    textQ: "Le père est musicien ?",
-    text: ["Musicien", "facteur", "pilote"],
+    textQ: "Quel âge a la mère ?",
+    text: ["50 ans", "60 ans", "40 ans"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille : _________.",
-    fill: "musicien",
-    vfQ: "Le père est musicien.",
+    fillQ: "Ma mère a _________ ans.",
+    fill: "50",
+    vfQ: "La mère a 50 ans.",
     vfC: 0,
   }),
   q({
     id: "ce-q4",
-    textQ: "Quand la famille mange-t-elle ensemble ?",
-    text: ["Le soir", "Le matin", "À midi"],
+    textQ: "Quelle est la profession de la mère ?",
+    text: ["Cuisinière", "Pilote", "Mécanicien"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["cuisinier", "pilote", "mécanicien"],
     imgC: 0,
-    fillQ: "On mange ensemble le _________.",
-    fill: "soir",
-    vfQ: "La famille mange ensemble le soir.",
+    fillQ: "Ma mère est _________.",
+    fill: "cuisinière",
+    vfQ: "La mère est cuisinière.",
     vfC: 0,
   }),
   q({
     id: "ce-q5",
-    textQ: "De quoi parle le message ?",
-    text: ["De la famille", "Du travail", "Des vacances"],
+    textQ: "Qui est neveu ?",
+    text: ["Neveu", "Un voisin", "Un prof"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je te parle de ma _________.",
-    fill: "famille",
-    vfQ: "Le message parle de vacances.",
-    vfC: 1,
+    fillQ: "J'ai aussi un(e) _________.",
+    fill: "neveu",
+    vfQ: "Neveu fait partie de la famille.",
+    vfC: 0,
   }),
   q({
     id: "ce-q6",
-    textQ: "La famille est-elle sympa ?",
-    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textQ: "Quel événement est mentionné ?",
+    text: ["Baptême", "Un examen", "Un voyage seul"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Ma famille est très _________.",
-    fill: "sympa",
-    vfQ: "La famille est sympa.",
+    fillQ: "_________ — c'est un moment important.",
+    fill: "baptême",
+    vfQ: "L'événement est baptême.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Quel âge a le père ?",
+    text: ["53 ans", "63 ans", "43 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Mon père a _________ ans.",
+    fill: "53",
+    vfQ: "Le père a 53 ans.",
     vfC: 0,
   }),
 ]);
