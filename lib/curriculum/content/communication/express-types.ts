@@ -135,17 +135,39 @@ export type CommunicationLesson = {
    * Leçons d'expression orale (ids `E1-1`, …) à valider avant de débloquer celle-ci.
    */
   prerequisiteCommIds?: string[];
-  /** Compréhension écrite : exercice texte + questions (fin d'entraînement). */
+  /**
+   * Compréhension écrite : un seul texte (legacy).
+   * Préférer `ceExercises` (pool de textes différents).
+   */
   ceExercise?: CommunicationExercise;
-  /** Compréhension écrite : e-mail à lire + questions (après le CE texte). */
+  /** Pool de textes CE message (idéalement 20) — un tiré au hasard en entraînement / éval. */
+  ceExercises?: CommunicationExercise[];
+  /**
+   * Compréhension écrite e-mail : un seul (legacy).
+   * Préférer `ceEmailExercises`.
+   */
   ceEmailExercise?: CommunicationExercise;
-  /** Production orale : pool de dialogues à jouer (≥ 10 situations si possible). */
+  /** Pool de textes CE e-mail (idéalement 20). */
+  ceEmailExercises?: CommunicationExercise[];
+  /** Production orale : pool de dialogues à jouer (idéalement 20, 5 répliques élève). */
   poDialogues?: ExpressPoDialogue[];
-  /** Production écrite : pool de consignes (≥ 10) — A1 min 50 mots, A2 min 80. */
+  /** Production écrite : pool de consignes (idéalement 20) — A1 min 50 mots, A2 min 80. */
   pePrompts?: ExpressPePrompt[];
-  /** Production écrite : pool d'e-mails auxquels répondre (avec sourceMessage). */
+  /** Production écrite : pool d'e-mails auxquels répondre (idéalement 20). */
   peEmailPrompts?: ExpressPePrompt[];
 };
+
+/** Pool CE message d'une leçon (tableaux ou exercice unique legacy). */
+export function lessonCePool(lesson: CommunicationLesson): CommunicationExercise[] {
+  if (lesson.ceExercises && lesson.ceExercises.length > 0) return lesson.ceExercises;
+  return lesson.ceExercise ? [lesson.ceExercise] : [];
+}
+
+/** Pool CE e-mail d'une leçon. */
+export function lessonCeEmailPool(lesson: CommunicationLesson): CommunicationExercise[] {
+  if (lesson.ceEmailExercises && lesson.ceEmailExercises.length > 0) return lesson.ceEmailExercises;
+  return lesson.ceEmailExercise ? [lesson.ceEmailExercise] : [];
+}
 
 function mulberry32(seed: number) {
   let t = seed >>> 0;

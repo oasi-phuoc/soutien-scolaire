@@ -103,7 +103,9 @@ export function lessonFromListening(spec: {
   training: ExpressListeningAudio[];
   evalAudios: ExpressListeningAudio[];
   ceExercise?: CommunicationLesson["ceExercise"];
+  ceExercises?: CommunicationLesson["ceExercises"];
   ceEmailExercise?: CommunicationLesson["ceEmailExercise"];
+  ceEmailExercises?: CommunicationLesson["ceEmailExercises"];
   poDialogues?: CommunicationLesson["poDialogues"];
   pePrompts?: CommunicationLesson["pePrompts"];
   peEmailPrompts?: CommunicationLesson["peEmailPrompts"];
@@ -139,7 +141,9 @@ export function lessonFromListening(spec: {
       }),
     ),
     ceExercise: spec.ceExercise,
+    ceExercises: spec.ceExercises,
     ceEmailExercise: spec.ceEmailExercise,
+    ceEmailExercises: spec.ceEmailExercises,
     poDialogues: spec.poDialogues,
     pePrompts: spec.pePrompts,
     peEmailPrompts: spec.peEmailPrompts,

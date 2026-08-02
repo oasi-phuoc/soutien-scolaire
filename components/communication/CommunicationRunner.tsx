@@ -26,9 +26,16 @@ import {
   type CommunicationExercise,
   type CommunicationLesson,
   type CommunicationTheoryBlock,
+  type ExpressPoDialogue,
+  lessonCeEmailPool,
+  lessonCePool,
   pickProgressiveExercises,
   scoreCommunicationExercise,
 } from "@/lib/curriculum/content/communication/express-types";
+import {
+  CommunicationResultsSummary,
+  gradeFromEvalScore,
+} from "@/components/communication/CommunicationEvalLayout";
 import { EXPRESS_ORAL_BY_ID } from "@/lib/curriculum/content/communication/express-index";
 import {
   EXPRESSION_E1_1,
@@ -109,8 +116,32 @@ type Phase =
   | "pe"
   | "peEmail"
   | "eval_announce"
-  | "eval"
+  | "eval_co"
+  | "eval_ce"
+  | "eval_po"
+  | "eval_pe"
   | "score";
+
+type EvalPart = "co" | "ce" | "po" | "pe";
+
+function pickSeeded<T>(arr: T[], seed: number): T | null {
+  if (arr.length === 0) return null;
+  return arr[Math.abs(seed) % arr.length]!;
+}
+
+function pickSeededOther<T extends { id: string }>(
+  arr: T[],
+  avoidId: string | undefined,
+  seed: number,
+): T | null {
+  if (arr.length === 0) return null;
+  const others = avoidId ? arr.filter((x) => x.id !== avoidId) : arr;
+  return pickSeeded(others.length > 0 ? others : arr, seed);
+}
+
+function evalPartToPhase(part: EvalPart): Phase {
+  return (`eval_${part}` as Phase);
+}
 
 function splitOralExercises(
   lesson: CommunicationLesson,
@@ -823,48 +854,102 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   /** Exercice sélectionné sur la page de résultats (correction dépliée). */
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
 
-  const [{ trainingExercises, evalExercises }] = useState(() => {
-    if (!lesson || lesson.writingLevel) return { trainingExercises: [] as CommunicationExercise[], evalExercises: [] as CommunicationExercise[] };
-    const split = splitOralExercises(lesson, Number(lessonSeed) || 1);
-    // Compréhension écrite : texte puis e-mail, en fin d'entraînement.
+  const seedNum = Number(lessonSeed) || 1;
+  const cePool = !lesson || lesson.writingLevel ? [] : lessonCePool(lesson);
+  const ceEmailPoolAll = !lesson || lesson.writingLevel ? [] : lessonCeEmailPool(lesson);
+  const poPoolAll = !lesson || lesson.writingLevel ? [] : (lesson.poDialogues ?? []);
+  const pePoolAll = !lesson || lesson.writingLevel ? [] : (lesson.pePrompts ?? []);
+
+  const [{ trainingExercises, evalPack, evalSteps }] = useState(() => {
+    if (!lesson || lesson.writingLevel) {
+      return {
+        trainingExercises: [] as CommunicationExercise[],
+        evalPack: {
+          co: null as CommunicationExercise | null,
+          ce: null as CommunicationExercise | null,
+          po: null as ExpressPoDialogue | null,
+          pe: null as WritingPrompt | null,
+          poRole: "B" as "A" | "B",
+        },
+        evalSteps: [] as EvalPart[],
+      };
+    }
+    const split = splitOralExercises(lesson, seedNum);
+    const trainingCe = pickSeeded(cePool, seedNum + 11);
+    const trainingCeEmail = pickSeeded(ceEmailPoolAll, seedNum + 12);
     const training = [
       ...split.training,
-      ...(lesson.ceExercise ? [lesson.ceExercise] : []),
-      ...(lesson.ceEmailExercise ? [lesson.ceEmailExercise] : []),
+      ...(trainingCe ? [trainingCe] : []),
+      ...(trainingCeEmail ? [trainingCeEmail] : []),
     ];
-    return { trainingExercises: training, evalExercises: split.evalEx };
+    const co = pickSeeded(
+      split.evalEx.length > 0 ? split.evalEx : split.training,
+      seedNum + 21,
+    );
+    const ce = pickSeededOther(cePool, trainingCe?.id, seedNum + 22);
+    const po = pickSeeded(poPoolAll, seedNum + 23);
+    const pe = pickSeeded(pePoolAll, seedNum + 24);
+    const pack = {
+      co,
+      ce,
+      po,
+      pe,
+      poRole: ((seedNum + 23) % 2 === 0 ? "B" : "A") as "A" | "B",
+    };
+    const steps: EvalPart[] = [];
+    if (pack.co) steps.push("co");
+    if (pack.ce) steps.push("ce");
+    if (pack.po) steps.push("po");
+    if (pack.pe) steps.push("pe");
+    return { trainingExercises: training, evalPack: pack, evalSteps: steps };
   });
 
   const [phase, setPhase] = useState<Phase>(() => {
     if (lesson?.writingLevel) return "intro";
     // Bilan : pas de théorie → annonce d'évaluation (ou exercices s'il n'y a que de l'entraînement)
     if (lesson && lesson.theory.length === 0) {
-      const split = splitOralExercises(lesson, Number(String(Date.now() % 100000)) || 1);
-      if (split.evalEx.length > 0) return "eval_announce";
-      if (split.training.length > 0) return "exercises";
+      if (evalSteps.length > 0) return "eval_announce";
+      if (trainingExercises.length > 0) return "exercises";
     }
     return "theory";
   });
   const [exIndex, setExIndex] = useState(0);
-  const [evalIndex, setEvalIndex] = useState(0);
+  const [evalStepIdx, setEvalStepIdx] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
   const [answers, setAnswers] = useState<(string | null)[]>(() => Array(trainingExercises.length).fill(null));
-  const [evalAnswers, setEvalAnswers] = useState<(string | null)[]>(() => Array(evalExercises.length).fill(null));
   const [validated, setValidated] = useState<boolean[]>(() => Array(trainingExercises.length).fill(false));
-  const [evalValidated, setEvalValidated] = useState<boolean[]>(() => Array(evalExercises.length).fill(false));
   const [exerciseValidated, setExerciseValidated] = useState(false);
+  const [evalCoAnswer, setEvalCoAnswer] = useState<string | null>(null);
+  const [evalCeAnswer, setEvalCeAnswer] = useState<string | null>(null);
+  const [evalCoValidated, setEvalCoValidated] = useState(false);
+  const [evalCeValidated, setEvalCeValidated] = useState(false);
+  const [evalPoTranscripts, setEvalPoTranscripts] = useState<string[]>([]);
+  const [evalPoDone, setEvalPoDone] = useState(false);
+  const [evalPeText, setEvalPeText] = useState("");
+  const [evalPeFeedback, setEvalPeFeedback] = useState<GrammarMatch[]>([]);
+  const [evalPeChecked, setEvalPeChecked] = useState(false);
 
-  const activeAnswers = phase === "eval" ? evalAnswers : answers;
-  const activeValidated = phase === "eval" ? evalValidated : validated;
-  const activeIndex = phase === "eval" ? evalIndex : exIndex;
-  const selected = activeAnswers[activeIndex] ?? null;
+  const inEvalPhase =
+    phase === "eval_co" || phase === "eval_ce" || phase === "eval_po" || phase === "eval_pe";
+  const currentEvalPart: EvalPart | null = inEvalPhase
+    ? (phase.replace("eval_", "") as EvalPart)
+    : null;
+  const activeAnswers = answers;
+  const activeValidated = validated;
+  const activeIndex = exIndex;
+  const selected =
+    phase === "eval_co"
+      ? evalCoAnswer
+      : phase === "eval_ce"
+        ? evalCeAnswer
+        : (activeAnswers[activeIndex] ?? null);
 
   const [writingPrompt, setWritingPrompt] = useState<WritingPrompt | null>(() =>
     lesson?.writingLevel ? randomWritingPrompt(lesson.writingLevel) : null,
   );
   // ——— Production orale (dialogue) + production écrite par leçon ———
-  const poPool = lesson?.writingLevel ? [] : (lesson?.poDialogues ?? []);
-  const pePool = lesson?.writingLevel ? [] : (lesson?.pePrompts ?? []);
+  const poPool = poPoolAll;
+  const pePool = pePoolAll;
   const hasPo = poPool.length > 0;
   const hasPe = pePool.length > 0;
   const [poSeed, setPoSeed] = useState(() => Math.floor(Math.random() * 1e6));
@@ -875,7 +960,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [peSeed, setPeSeed] = useState(() => Math.floor(Math.random() * 1e6));
   const pePrompt: WritingPrompt | null = hasPe ? pePool[peSeed % pePool.length] ?? null : null;
   // ——— Production écrite « répondre à un e-mail » ———
-  const peEmailPool = lesson?.writingLevel ? [] : (lesson?.peEmailPrompts ?? []);
+  const peEmailPool = !lesson || lesson.writingLevel ? [] : (lesson.peEmailPrompts ?? []);
   const hasPeEmail = peEmailPool.length > 0;
   const [peEmailSeed, setPeEmailSeed] = useState(() => Math.floor(Math.random() * 1e6));
   const peEmailPrompt: WritingPrompt | null = hasPeEmail
@@ -895,9 +980,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [formValidated, setFormValidated] = useState(false);
 
   useEffect(() => {
-    if (!lesson?.writingLevel && !hasPe) return;
+    if (!lesson?.writingLevel && !hasPe && !evalPack.pe) return;
     void getExpressionTeachersAction().then(setTeachers);
-  }, [lesson?.writingLevel, hasPe]);
+  }, [lesson?.writingLevel, hasPe, evalPack.pe]);
 
   if (!lesson) {
     return (
@@ -910,7 +995,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     );
   }
 
-  const hasEval = evalExercises.length > 0;
+  const hasEval = evalSteps.length > 0;
   const isOral = !lesson.writingLevel;
   const trainingTotalSteps = isOral
     ? 1 +
@@ -940,7 +1025,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     : [];
   const currentWritingStep = Math.max(0, activeWritingPhases.indexOf(phase as "form" | "writing"));
 
-  const inEvalPhase = phase === "eval";
   const showTrainingBar =
     isOral &&
     (phase === "theory" ||
@@ -1003,13 +1087,17 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         setPhase("exercises");
         setExIndex(trainingExercises.length - 1);
       } else setPhase("theory");
-    } else if (phase === "eval") {
-      if (evalIndex > 0) setEvalIndex(evalIndex - 1);
-      else setPhase("eval_announce");
+    } else if (inEvalPhase) {
+      if (evalStepIdx > 0) {
+        const prev = evalSteps[evalStepIdx - 1]!;
+        setEvalStepIdx(evalStepIdx - 1);
+        setPhase(evalPartToPhase(prev));
+      } else setPhase("eval_announce");
     } else if (phase === "score") {
-      if (hasEval) {
-        setPhase("eval");
-        setEvalIndex(evalExercises.length - 1);
+      if (hasEval && evalSteps.length > 0) {
+        const last = evalSteps[evalSteps.length - 1]!;
+        setEvalStepIdx(evalSteps.length - 1);
+        setPhase(evalPartToPhase(last));
       } else {
         setPhase("exercises");
         setExIndex(Math.max(0, trainingExercises.length - 1));
@@ -1054,9 +1142,31 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setPeEmailChecked(false);
       return;
     }
-    if (phase === "eval") {
-      setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? null : a)));
-      setEvalValidated((prev) => prev.map((v, i) => (i === evalIndex ? false : v)));
+    if (phase === "eval_co") {
+      setEvalCoAnswer(null);
+      setEvalCoValidated(false);
+      if (evalPack.co) {
+        setExerciseSeeds((prev) => ({ ...prev, [evalPack.co!.id]: String(Date.now() % 100000) }));
+      }
+      return;
+    }
+    if (phase === "eval_ce") {
+      setEvalCeAnswer(null);
+      setEvalCeValidated(false);
+      if (evalPack.ce) {
+        setExerciseSeeds((prev) => ({ ...prev, [evalPack.ce!.id]: String(Date.now() % 100000) }));
+      }
+      return;
+    }
+    if (phase === "eval_po") {
+      setEvalPoTranscripts([]);
+      setEvalPoDone(false);
+      return;
+    }
+    if (phase === "eval_pe") {
+      setEvalPeText("");
+      setEvalPeFeedback([]);
+      setEvalPeChecked(false);
       return;
     }
     // Entraînement : re-randomise le tirage de l'exercice courant.
@@ -1142,11 +1252,29 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setValidated((prev) => prev.map((v, i) => (i === exIndex ? true : v)));
       return;
     }
-    if (phase === "eval") {
-      if (evalValidated[evalIndex]) return;
-      const ex = evalExercises[evalIndex];
-      if (ex?.type === "mcq" && !selected) return;
-      setEvalValidated((prev) => prev.map((v, i) => (i === evalIndex ? true : v)));
+    if (phase === "eval_co") {
+      if (evalCoValidated) return;
+      setEvalCoValidated(true);
+      return;
+    }
+    if (phase === "eval_ce") {
+      if (evalCeValidated) return;
+      setEvalCeValidated(true);
+      return;
+    }
+    if (phase === "eval_po") {
+      setEvalPoDone(true);
+      return;
+    }
+    if (phase === "eval_pe") {
+      if (evalPeChecked || grammarChecking) return;
+      setGrammarChecking(true);
+      try {
+        setEvalPeFeedback(await fetchGrammarMatches(evalPeText));
+      } finally {
+        setGrammarChecking(false);
+        setEvalPeChecked(true);
+      }
     }
   }
 
@@ -1239,19 +1367,21 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     if (phase === "eval_announce") {
-      setPhase("eval");
-      setEvalIndex(0);
-      return;
-    }
-    if (phase === "eval") {
-      if (evalIndex + 1 < evalExercises.length) {
-        setEvalIndex(evalIndex + 1);
+      if (evalSteps.length === 0) {
+        setPhase("score");
         return;
       }
-      const newResults = evalExercises.map(
-        (ex, i) => scoreCommunicationExercise(ex, evalAnswers[i]) >= 0.999,
-      );
-      setResults(newResults);
+      setEvalStepIdx(0);
+      setPhase(evalPartToPhase(evalSteps[0]!));
+      return;
+    }
+    if (inEvalPhase) {
+      if (evalStepIdx + 1 < evalSteps.length) {
+        const nextPart = evalSteps[evalStepIdx + 1]!;
+        setEvalStepIdx(evalStepIdx + 1);
+        setPhase(evalPartToPhase(nextPart));
+        return;
+      }
       setPhase("score");
       return;
     }
@@ -1269,24 +1399,56 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       !lesson.writingLevel);
   const showExerciseControls =
     phase === "exercises" ||
-    phase === "eval" ||
+    inEvalPhase ||
     phase === "writing" ||
     phase === "form" ||
     phase === "po" ||
     phase === "pe" ||
     phase === "peEmail";
   // Entraînement PO / PE / PE e-mail : Suivant libre (pas besoin de valider).
+  // Éval PO/PE : Suivant libre aussi (Valider optionnel).
   const nextDisabled =
     (phase === "writing" && !exerciseValidated) ||
     (phase === "form" && !formValidated) ||
     phase === "eval_announce";
-  const currentExValidated = activeValidated[activeIndex] ?? false;
+  const currentExValidated =
+    phase === "eval_co"
+      ? evalCoValidated
+      : phase === "eval_ce"
+        ? evalCeValidated
+        : phase === "eval_po"
+          ? evalPoDone
+          : phase === "eval_pe"
+            ? evalPeChecked
+            : (activeValidated[activeIndex] ?? false);
 
-  const scoredExercises = hasEval ? evalExercises : trainingExercises;
-  const scoreCorrect = results.filter(Boolean).length;
-  const scoreTotal = results.length || scoredExercises.length;
-  const grade = linearSwissGrade(scoreCorrect, Math.max(1, scoreTotal));
-  const passed = grade >= PASSING_GRADE;
+  // Barème évaluation : CO 5 + CE 5 + PO 5 + PE 10 = 25
+  const coPoints = evalPack.co
+    ? Math.round(scoreCommunicationExercise(evalPack.co, evalCoAnswer) * 5 * 10) / 10
+    : 0;
+  const cePoints = evalPack.ce
+    ? Math.round(scoreCommunicationExercise(evalPack.ce, evalCeAnswer) * 5 * 10) / 10
+    : 0;
+  const poStudentTurns = evalPack.po
+    ? evalPack.po.lines.filter((l) => l.role === evalPack.poRole).length
+    : 0;
+  const poFilled = evalPoTranscripts.filter((t) => t.trim().length > 0).length;
+  const poPoints = poStudentTurns > 0
+    ? Math.round((Math.min(poFilled, 5) / 5) * 5 * 10) / 10
+    : 0;
+  const pePending = Boolean(evalPack.pe);
+  const pePoints = 0; // noté par le professeur (/10)
+  const evalTotalPoints = coPoints + cePoints + poPoints + pePoints;
+  const evalMaxPoints = 25;
+  const grade = hasEval
+    ? gradeFromEvalScore(evalTotalPoints)
+    : linearSwissGrade(
+        results.filter(Boolean).length,
+        Math.max(1, results.length || trainingExercises.length),
+      );
+  const passed = !pePending && grade >= PASSING_GRADE;
+  const scoreCorrect = hasEval ? evalTotalPoints : results.filter(Boolean).length;
+  const scoreTotal = hasEval ? evalMaxPoints : (results.length || trainingExercises.length);
 
   function renderOralExercise(ex: CommunicationExercise, index: number, total: number) {
     if (ex.type === "listening") {
@@ -1298,11 +1460,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
           seed={exerciseSeeds[ex.id] ?? lessonSeed}
           selected={selected}
           setSelected={(v) => {
-            if (phase === "eval") {
-              setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? v : a)));
-              if (v !== evalAnswers[evalIndex]) {
-                setEvalValidated((prev) => prev.map((vv, i) => (i === evalIndex ? false : vv)));
-              }
+            if (phase === "eval_co") {
+              setEvalCoAnswer(v);
+              if (v !== evalCoAnswer) setEvalCoValidated(false);
+            } else if (phase === "eval_ce") {
+              setEvalCeAnswer(v);
+              if (v !== evalCeAnswer) setEvalCeValidated(false);
             } else {
               setAnswers((prev) => prev.map((a, i) => (i === exIndex ? v : a)));
               if (v !== answers[exIndex]) {
@@ -1325,11 +1488,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         total={total}
         selected={selected}
         setSelected={(v) => {
-          if (phase === "eval") {
-            setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? v : a)));
-            if (v !== evalAnswers[evalIndex]) {
-              setEvalValidated((prev) => prev.map((vv, i) => (i === evalIndex ? false : vv)));
-            }
+          if (phase === "eval_co") {
+            setEvalCoAnswer(v);
+            if (v !== evalCoAnswer) setEvalCoValidated(false);
+          } else if (phase === "eval_ce") {
+            setEvalCeAnswer(v);
+            if (v !== evalCeAnswer) setEvalCeValidated(false);
           } else {
             setAnswers((prev) => prev.map((a, i) => (i === exIndex ? v : a)));
             if (v !== answers[exIndex]) {
@@ -1398,20 +1562,21 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
             <p className="text-xs text-[var(--color-text-secondary)]">
-              {evalIndex + 1} / {evalExercises.length}
+              {evalStepIdx + 1} / {evalSteps.length}
             </p>
           </div>
           <div className="flex gap-1">
-            {evalExercises.map((_, i) => (
+            {evalSteps.map((part, i) => (
               <div
-                key={i}
+                key={part}
                 className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  i === evalIndex
+                  i === evalStepIdx
                     ? "bg-[var(--color-correction)]"
-                    : evalValidated[i]
-                      ? "bg-[var(--color-correction)]/40"
+                    : i < evalStepIdx
+                      ? "bg-[var(--color-correction)]/70"
                       : "bg-[var(--color-border-default)]"
                 }`}
+                title={part.toUpperCase()}
               />
             ))}
           </div>
@@ -1548,84 +1713,231 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         <EvalAnnounceScreen
           accent={ACCENT}
           lessonTitle={`${lesson.code} — ${lesson.title}`}
-          exerciseCount={evalExercises.length}
-          minutes={10}
+          exerciseCount={evalSteps.length}
+          minutes={15}
           onStart={() => {
-            setPhase("eval");
-            setEvalIndex(0);
+            if (evalSteps.length === 0) {
+              setPhase("score");
+              return;
+            }
+            setEvalStepIdx(0);
+            setPhase(evalPartToPhase(evalSteps[0]!));
           }}
         />
       )}
 
-      {phase === "eval" && evalExercises[evalIndex] && (
+      {phase === "eval_co" && evalPack.co && (
         <EvalRevealContext.Provider value={false}>
-          {renderOralExercise(evalExercises[evalIndex]!, evalIndex, evalExercises.length)}
+          {renderOralExercise(evalPack.co, 0, evalSteps.length)}
         </EvalRevealContext.Provider>
+      )}
+
+      {phase === "eval_ce" && evalPack.ce && (
+        <EvalRevealContext.Provider value={false}>
+          {renderOralExercise(evalPack.ce, evalSteps.indexOf("ce"), evalSteps.length)}
+        </EvalRevealContext.Provider>
+      )}
+
+      {phase === "eval_po" && evalPack.po && (
+        <EvalRevealContext.Provider value={false}>
+          <ExpressPoDialogueExercise
+            key={`eval-po-${evalPack.po.id}`}
+            dialogue={evalPack.po}
+            studentRole={evalPack.poRole}
+            exNum={evalSteps.indexOf("po") + 1}
+            validated={evalPoDone}
+            transcripts={evalPoTranscripts}
+            onTranscriptsChange={setEvalPoTranscripts}
+          />
+        </EvalRevealContext.Provider>
+      )}
+
+      {phase === "eval_pe" && evalPack.pe && (
+        <div className="flex flex-1 flex-col">
+          <h2 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">
+            Exercice {evalSteps.indexOf("pe") + 1} — Production écrite
+          </h2>
+          <WritingExercise
+            lessonCode={lesson.code}
+            prompt={evalPack.pe}
+            text={evalPeText}
+            onTextChange={(value) => {
+              setEvalPeText(value);
+              setEvalPeChecked(false);
+              setEvalPeFeedback([]);
+            }}
+            feedback={evalPeFeedback}
+            checked={evalPeChecked}
+            checking={grammarChecking}
+            teachers={teachers}
+          />
+        </div>
       )}
 
       {phase === "score" && (
         <div className="flex flex-1 flex-col gap-6">
-          <EvalResultsSummary
-            accent={ACCENT}
-            points={scoreCorrect}
-            maxPoints={Math.max(1, scoreTotal)}
-            grade={grade}
-            passed={passed}
-          />
+          {hasEval ? (
+            <CommunicationResultsSummary
+              totalPoints={scoreCorrect}
+              maxPoints={scoreTotal}
+              pendingTeacher={pePending}
+            />
+          ) : (
+            <EvalResultsSummary
+              accent={ACCENT}
+              points={scoreCorrect}
+              maxPoints={Math.max(1, scoreTotal)}
+              grade={grade}
+              passed={passed}
+            />
+          )}
           <EvalResultsHint />
-          {/* Comme grammaire / vocabulaire / conjugaison : les exercices se
-              déroulent sur la page de résultats avec les bonnes réponses. */}
-          <EvalExerciseResultList>
-            {scoredExercises.map((ex, i) => {
-              const stored = (hasEval ? evalAnswers[i] : answers[i]) ?? null;
-              const stats = exerciseResultStats(ex, stored, lessonSeed);
-              const isSelectedResult = selectedResultIdx === i;
-              return (
+          {hasEval ? (
+            <EvalExerciseResultList>
+              {evalPack.co && (
                 <EvalExerciseResultRow
-                  key={ex.id}
-                  index={i}
-                  correct={stats.correct}
-                  total={stats.total}
+                  index={0}
+                  correct={coPoints}
+                  total={5}
                   accent={ACCENT}
-                  isSelected={isSelectedResult}
-                  onToggle={() => setSelectedResultIdx(isSelectedResult ? null : i)}
+                  isSelected={selectedResultIdx === 0}
+                  onToggle={() => setSelectedResultIdx(selectedResultIdx === 0 ? null : 0)}
                 >
                   <EvalRevealContext.Provider value={true}>
-                    {ex.type === "listening" ? (
-                      <ExpressListeningExercise
-                        exercise={ex}
-                        exNum={i + 1}
-                        seed={lessonSeed}
-                        selected={stored}
-                        setSelected={() => {}}
-                        validated
-                      />
-                    ) : (
-                      <MCQExercise
-                        question={ex.question ?? ""}
-                        instruction={ex.instruction}
-                        choices={ex.choices ?? []}
-                        answer={ex.answer ?? ""}
-                        exNum={i + 1}
-                        total={scoredExercises.length}
-                        selected={stored}
-                        setSelected={() => {}}
-                        validated
-                      />
-                    )}
+                    <ExpressListeningExercise
+                      exercise={evalPack.co}
+                      exNum={1}
+                      seed={lessonSeed}
+                      selected={evalCoAnswer}
+                      setSelected={() => {}}
+                      validated
+                    />
                   </EvalRevealContext.Provider>
                 </EvalExerciseResultRow>
-              );
-            })}
-          </EvalExerciseResultList>
+              )}
+              {evalPack.ce && (
+                <EvalExerciseResultRow
+                  index={1}
+                  correct={cePoints}
+                  total={5}
+                  accent={ACCENT}
+                  isSelected={selectedResultIdx === 1}
+                  onToggle={() => setSelectedResultIdx(selectedResultIdx === 1 ? null : 1)}
+                >
+                  <EvalRevealContext.Provider value={true}>
+                    <ExpressListeningExercise
+                      exercise={evalPack.ce}
+                      exNum={2}
+                      seed={lessonSeed}
+                      selected={evalCeAnswer}
+                      setSelected={() => {}}
+                      validated
+                    />
+                  </EvalRevealContext.Provider>
+                </EvalExerciseResultRow>
+              )}
+              {evalPack.po && (
+                <EvalExerciseResultRow
+                  index={2}
+                  correct={poPoints}
+                  total={5}
+                  accent={ACCENT}
+                  isSelected={selectedResultIdx === 2}
+                  onToggle={() => setSelectedResultIdx(selectedResultIdx === 2 ? null : 2)}
+                >
+                  <ExpressPoDialogueExercise
+                    dialogue={evalPack.po}
+                    studentRole={evalPack.poRole}
+                    exNum={3}
+                    validated
+                    transcripts={evalPoTranscripts}
+                    onTranscriptsChange={() => {}}
+                  />
+                </EvalExerciseResultRow>
+              )}
+              {evalPack.pe && (
+                <EvalExerciseResultRow
+                  index={3}
+                  correct={0}
+                  total={10}
+                  accent={ACCENT}
+                  isSelected={selectedResultIdx === 3}
+                  onToggle={() => setSelectedResultIdx(selectedResultIdx === 3 ? null : 3)}
+                >
+                  <div className="space-y-2 p-2 text-sm text-[var(--color-text-secondary)]">
+                    <p className="font-semibold text-[var(--color-text-primary)]">{evalPack.pe.title}</p>
+                    <p>Production écrite : en attente de la correction du professeur (/10).</p>
+                    {evalPeText.trim() ? (
+                      <p className="whitespace-pre-wrap rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] p-3 text-[var(--color-text-primary)]">
+                        {evalPeText}
+                      </p>
+                    ) : (
+                      <p>Aucune production saisie.</p>
+                    )}
+                  </div>
+                </EvalExerciseResultRow>
+              )}
+            </EvalExerciseResultList>
+          ) : (
+            <EvalExerciseResultList>
+              {trainingExercises.map((ex, i) => {
+                const stored = answers[i] ?? null;
+                const stats = exerciseResultStats(ex, stored, lessonSeed);
+                const isSelectedResult = selectedResultIdx === i;
+                return (
+                  <EvalExerciseResultRow
+                    key={ex.id}
+                    index={i}
+                    correct={stats.correct}
+                    total={stats.total}
+                    accent={ACCENT}
+                    isSelected={isSelectedResult}
+                    onToggle={() => setSelectedResultIdx(isSelectedResult ? null : i)}
+                  >
+                    <EvalRevealContext.Provider value={true}>
+                      {ex.type === "listening" ? (
+                        <ExpressListeningExercise
+                          exercise={ex}
+                          exNum={i + 1}
+                          seed={lessonSeed}
+                          selected={stored}
+                          setSelected={() => {}}
+                          validated
+                        />
+                      ) : (
+                        <MCQExercise
+                          question={ex.question ?? ""}
+                          instruction={ex.instruction}
+                          choices={ex.choices ?? []}
+                          answer={ex.answer ?? ""}
+                          exNum={i + 1}
+                          total={trainingExercises.length}
+                          selected={stored}
+                          setSelected={() => {}}
+                          validated
+                        />
+                      )}
+                    </EvalRevealContext.Provider>
+                  </EvalExerciseResultRow>
+                );
+              })}
+            </EvalExerciseResultList>
+          )}
           <button
             type="button"
             onClick={() => {
-              if (hasEval) {
-                setPhase("eval");
-                setEvalIndex(0);
-                setEvalAnswers(Array(evalExercises.length).fill(null));
-                setEvalValidated(Array(evalExercises.length).fill(false));
+              if (hasEval && evalSteps.length > 0) {
+                setEvalCoAnswer(null);
+                setEvalCeAnswer(null);
+                setEvalCoValidated(false);
+                setEvalCeValidated(false);
+                setEvalPoTranscripts([]);
+                setEvalPoDone(false);
+                setEvalPeText("");
+                setEvalPeFeedback([]);
+                setEvalPeChecked(false);
+                setEvalStepIdx(0);
+                setPhase(evalPartToPhase(evalSteps[0]!));
               } else {
                 setPhase("exercises");
                 setExIndex(0);
@@ -1655,7 +1967,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
 
             {showExerciseControls ? (
               <div className="flex items-center gap-2">
-                {phase !== "eval" && (
+                {!inEvalPhase && (
                   <button
                     type="button"
                     data-nav-action="refresh"
@@ -1675,7 +1987,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                   type="button"
                   onClick={() => void handleValidate()}
                   disabled={
-                    (phase === "exercises" || phase === "eval"
+                    (phase === "exercises" || inEvalPhase
                       ? currentExValidated
                       : phase === "form"
                         ? formValidated
