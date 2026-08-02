@@ -1450,104 +1450,87 @@ const E11_1_CE_EMAIL_14_POOL = buildExpressPool("e11-1-ce-email-14", [
   }),
 ]);
 
-const E11_1_CE_EMAIL_15_TEXT = `De : Agenda citoyen
-
-Objet : Choix entre deux dates
+const E11_1_CE_EMAIL_15_TEXT = `De : Marché des Saveurs
+Objet : Atelier confitures annulé
 
 Bonjour,
-
-Après vos réponses, nous gardons finalement la date du lundi 26 août.
-L'horaire choisi est 16 h 30 à le centre scolaire.
-Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste le même : un goûter parents-enfants, avec une serviette à prévoir.
-
-Merci pour vos réponses,
-
-Agenda citoyen`;
+L'atelier confitures de dimanche est annulé : la cuisinière est malade.
+Nous proposons une nouvelle date : samedi 28 septembre à 10 h.
+Si cette date ne vous convient pas, répondez pour un remboursement complet (25 CHF).
+Merci de votre compréhension.
+L'équipe du Marché des Saveurs`;
 
 const E11_1_CE_EMAIL_15_POOL = buildExpressPool("e11-1-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'objet de l'e-mail ?",
-    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
+    textQ: "Pourquoi l'atelier est-il annulé ?",
+    text: ["La cuisinière est malade", "Il pleut", "Trop cher"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________.",
-    fill: "Choix",
-    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
+    fillQ: "la cuisinière est _________.",
+    fill: "malade",
+    vfQ: "Cuisinière malade.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Qui envoie l'e-mail ?",
-    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
+    textQ: "Nouvelle date ?",
+    text: ["Samedi 28 septembre", "Dimanche", "Lundi 1er"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________.",
-    fill: "Agenda",
-    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
+    fillQ: "samedi _________ septembre",
+    fill: "28",
+    vfQ: "28 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand cela a-t-il lieu ?",
-    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
+    textQ: "À quelle heure ?",
+    text: ["À 10 h", "À 20 h", "À minuit"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La date est _________ 26 août.",
-    fill: "lundi",
-    vfQ: "L'activité a lieu lundi 26 août.",
+    fillQ: "à _________ h.",
+    fill: "10",
+    vfQ: "À 10 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "À quelle heure faut-il arriver ?",
-    text: ["16 h 30", "7 h", "21 h 30"],
+    textQ: "Montant remboursable ?",
+    text: ["25 CHF", "250 CHF", "Gratuit dès le départ"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut arriver à _________.",
-    fill: "16",
-    vfQ: "L'heure indiquée est 16 h 30.",
+    fillQ: "remboursement complet (_________ CHF)",
+    fill: "25",
+    vfQ: "25 CHF.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle activité est proposée ?",
-    text: ["un goûter parents-enfants", "un cours de mécanique", "une réunion sans thème"],
+    textQ: "Qui envoie ?",
+    text: ["Marché des Saveurs", "La mairie seule", "Un hôpital"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "L'activité proposée est : _________.",
-    fill: "goûter",
-    vfQ: "Le texte parle de l'activité suivante : un goûter parents-enfants.",
+    fillQ: "équipe du Marché des _________.",
+    fill: "Saveurs",
+    vfQ: "Marché des Saveurs.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Que faut-il apporter ou préparer ?",
-    text: ["une serviette", "une lampe de poche", "un ordinateur cassé"],
+    textQ: "Que faire si la date ne convient pas ?",
+    text: ["Demander un remboursement", "Venir quand même dimanche", "Rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut apporter ou préparer _________.",
-    fill: "serviette",
-    vfQ: "Il faut prévoir une serviette.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q7",
-    textQ: "Quelle information pratique est donnée ?",
-    text: ["14 CHF", "17 personnes", "aucun horaire"],
-    textC: 0,
-    img: ["", "", ""],
-    imgC: 0,
-    fillQ: "Le prix indiqué est _________.",
-    fill: "14",
-    vfQ: "Le prix indiqué est 14 CHF.",
+    fillQ: "répondez pour un _________.",
+    fill: "remboursement",
+    vfQ: "Demander remboursement.",
     vfC: 0,
   }),
 ]);
@@ -3892,104 +3875,87 @@ const E11_2_CE_EMAIL_14_POOL = buildExpressPool("e11-2-ce-email-14", [
   }),
 ]);
 
-const E11_2_CE_EMAIL_15_TEXT = `De : Agenda citoyen
+const E11_2_CE_EMAIL_15_TEXT = `De : Club Escalade Jura
+Objet : Sortie falaise — liste complète
 
-Objet : Choix entre deux dates
-
-Bonjour,
-
-Après vos réponses, nous gardons finalement la date du lundi 26 août.
-L'horaire choisi est 16 h 30 à le centre scolaire.
-Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste le même : un cours de couture simple, avec un morceau de tissu à prévoir.
-
-Merci pour vos réponses,
-
-Agenda citoyen`;
+Bonjour à toutes et à tous,
+La liste pour la sortie falaise du 3 octobre est complète (16 places).
+Prochaine session initiation : dimanche 12 octobre, parking de St-Ursanne à 8 h 45.
+Matériel fourni sauf chaussures d'approche.
+Adhésion club obligatoire (40 CHF/an).
+Sportivement, Karim`;
 
 const E11_2_CE_EMAIL_15_POOL = buildExpressPool("e11-2-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'objet de l'e-mail ?",
-    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
+    textQ: "Pourquoi pas de place le 3 octobre ?",
+    text: ["Liste complète (16 places)", "Mauvais temps annoncé", "Club fermé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________.",
-    fill: "Choix",
-    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
+    fillQ: "_________ places",
+    fill: "16",
+    vfQ: "16 places.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Qui envoie l'e-mail ?",
-    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
+    textQ: "Prochaine date ?",
+    text: ["Dimanche 12 octobre", "3 octobre", "Janvier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________.",
-    fill: "Agenda",
-    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
+    fillQ: "dimanche _________ octobre",
+    fill: "12",
+    vfQ: "12 octobre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand cela a-t-il lieu ?",
-    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
+    textQ: "Lieu de rendez-vous ?",
+    text: ["Parking de St-Ursanne", "Gare de Genève", "Piscine"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La date est _________ 26 août.",
-    fill: "lundi",
-    vfQ: "L'activité a lieu lundi 26 août.",
+    fillQ: "parking de _________.",
+    fill: "St-Ursanne",
+    vfQ: "St-Ursanne.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "À quelle heure faut-il arriver ?",
-    text: ["16 h 30", "7 h", "21 h 30"],
+    textQ: "Heure de RDV ?",
+    text: ["8 h 45", "16 h", "Midi"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut arriver à _________.",
-    fill: "16",
-    vfQ: "L'heure indiquée est 16 h 30.",
+    fillQ: "à _________ h 45",
+    fill: "8",
+    vfQ: "À 8 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle activité est proposée ?",
-    text: ["un cours de couture simple", "une vente de meubles", "une réunion sans thème"],
+    textQ: "Prix adhésion ?",
+    text: ["40 CHF par an", "Gratuit", "400 CHF"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "L'activité proposée est : _________.",
-    fill: "cours",
-    vfQ: "Le texte parle de l'activité suivante : un cours de couture simple.",
+    fillQ: "_________ CHF/an",
+    fill: "40",
+    vfQ: "40 CHF.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Que faut-il apporter ou préparer ?",
-    text: ["un morceau de tissu", "un livre de grammaire", "un ordinateur cassé"],
+    textQ: "Qui signe ?",
+    text: ["Karim", "Léa", "Nadia"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut apporter ou préparer _________.",
-    fill: "morceau",
-    vfQ: "Il faut prévoir un morceau de tissu.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q7",
-    textQ: "Quelle information pratique est donnée ?",
-    text: ["14 CHF", "17 personnes", "aucun horaire"],
-    textC: 0,
-    img: ["", "", ""],
-    imgC: 0,
-    fillQ: "Le prix indiqué est _________.",
-    fill: "14",
-    vfQ: "Le prix indiqué est 14 CHF.",
+    fillQ: "Sportivement, _________.",
+    fill: "Karim",
+    vfQ: "Karim.",
     vfC: 0,
   }),
 ]);
@@ -6334,104 +6300,90 @@ const E11_3_CE_EMAIL_14_POOL = buildExpressPool("e11-3-ce-email-14", [
   }),
 ]);
 
-const E11_3_CE_EMAIL_15_TEXT = `De : Agenda citoyen
+const E11_3_CE_EMAIL_15_TEXT = `De : Médiathèque Rivage
+Objet : Votre liste de coups de cœur
 
-Objet : Choix entre deux dates
-
-Bonjour,
-
-Après vos réponses, nous gardons finalement la date du lundi 26 août.
-L'horaire choisi est 16 h 30 à le centre scolaire.
-Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste le même : une présentation de photos aimées, avec une photo imprimée à prévoir.
-
-Merci pour vos réponses,
-
-Agenda citoyen`;
+Bonjour Alex,
+Voici trois suggestions selon vos goûts :
+1) Roman : « Vent du sud » (facile A2)
+2) BD : « Les Voyages de Mina »
+3) Podcast : « Goûts et couleurs » (20 min)
+Tous disponibles jusqu'au 30 juin. Prolongation possible une fois en ligne.
+Bonne lecture !
+Sophie, bibliothécaire`;
 
 const E11_3_CE_EMAIL_15_POOL = buildExpressPool("e11-3-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'objet de l'e-mail ?",
-    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
+    textQ: "Combien de suggestions ?",
+    text: ["Trois", "Dix", "Une"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________.",
-    fill: "Choix",
-    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
+    fillQ: "_________ suggestions",
+    fill: "trois",
+    fillA: ["3"],
+    vfQ: "3 suggestions.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Qui envoie l'e-mail ?",
-    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
+    textQ: "Quel roman ?",
+    text: ["Vent du sud", "Les Voyages de Mina", "Aucun"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________.",
-    fill: "Agenda",
-    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
+    fillQ: "Roman : « Vent du _________ »",
+    fill: "sud",
+    vfQ: "Vent du sud.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand cela a-t-il lieu ?",
-    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
+    textQ: "Jusqu'à quand disponibles ?",
+    text: ["30 juin", "Demain", "Janvier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La date est _________ 26 août.",
-    fill: "lundi",
-    vfQ: "L'activité a lieu lundi 26 août.",
+    fillQ: "jusqu'au _________ juin",
+    fill: "30",
+    vfQ: "30 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "À quelle heure faut-il arriver ?",
-    text: ["16 h 30", "7 h", "21 h 30"],
+    textQ: "Qui écrit ?",
+    text: ["Sophie", "Alex", "Karim"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut arriver à _________.",
-    fill: "16",
-    vfQ: "L'heure indiquée est 16 h 30.",
+    fillQ: "_________, bibliothécaire",
+    fill: "Sophie",
+    vfQ: "Sophie.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle activité est proposée ?",
-    text: ["une présentation de photos aimées", "un entraînement silencieux", "une réunion sans thème"],
+    textQ: "Durée du podcast ?",
+    text: ["20 min", "2 h", "5 min"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "L'activité proposée est : _________.",
-    fill: "présentation",
-    vfQ: "Le texte parle de l'activité suivante : une présentation de photos aimées.",
+    fillQ: "_________ min",
+    fill: "20",
+    vfQ: "20 min.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Que faut-il apporter ou préparer ?",
-    text: ["une photo imprimée", "un billet d'avion", "un ordinateur cassé"],
+    textQ: "Peut-on prolonger ?",
+    text: ["Oui, une fois en ligne", "Non jamais", "Seulement par téléphone"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut apporter ou préparer _________.",
-    fill: "photo",
-    vfQ: "Il faut prévoir une photo imprimée.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q7",
-    textQ: "Quelle information pratique est donnée ?",
-    text: ["14 CHF", "17 personnes", "aucun horaire"],
-    textC: 0,
-    img: ["", "", ""],
-    imgC: 0,
-    fillQ: "Le prix indiqué est _________.",
-    fill: "14",
-    vfQ: "Le prix indiqué est 14 CHF.",
+    fillQ: "Prolongation possible _________ fois",
+    fill: "une",
+    vfQ: "Une fois.",
     vfC: 0,
   }),
 ]);
@@ -8776,104 +8728,87 @@ const E11_4_CE_EMAIL_14_POOL = buildExpressPool("e11-4-ce-email-14", [
   }),
 ]);
 
-const E11_4_CE_EMAIL_15_TEXT = `De : Agenda citoyen
+const E11_4_CE_EMAIL_15_TEXT = `De : Agence Voyages Clair
+Objet : Modification de vol — vacances Nice
 
-Objet : Choix entre deux dates
-
-Bonjour,
-
-Après vos réponses, nous gardons finalement la date du lundi 26 août.
-L'horaire choisi est 16 h 30 à le centre scolaire.
-Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste le même : un atelier itinéraire de deux jours, avec un plan imprimé à prévoir.
-
-Merci pour vos réponses,
-
-Agenda citoyen`;
+Bonjour Mme Rossi,
+Votre vol Genève–Nice du 8 août part finalement à 15 h 05 (au lieu de 11 h 20).
+Arrivez à l'aéroport 2 heures avant. Porte prévue : B12.
+Hôtel « Les Palmiers » inchangé (check-in 16 h).
+Désolé pour ce changement. Un voucher boisson vous attend au comptoir.
+Cordialement, Agence Clair`;
 
 const E11_4_CE_EMAIL_15_POOL = buildExpressPool("e11-4-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'objet de l'e-mail ?",
-    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
+    textQ: "Nouvelle heure de vol ?",
+    text: ["15 h 05", "11 h 20", "16 h"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________.",
-    fill: "Choix",
-    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
+    fillQ: "part finalement à _________ h 05",
+    fill: "15",
+    vfQ: "À 15 h 05.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Qui envoie l'e-mail ?",
-    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
+    textQ: "Destination ?",
+    text: ["Nice", "Rome", "Paris"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________.",
-    fill: "Agenda",
-    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
+    fillQ: "Genève–_________",
+    fill: "Nice",
+    vfQ: "Nice.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand cela a-t-il lieu ?",
-    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
+    textQ: "Porte prévue ?",
+    text: ["B12", "A1", "C99"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La date est _________ 26 août.",
-    fill: "lundi",
-    vfQ: "L'activité a lieu lundi 26 août.",
+    fillQ: "Porte prévue : _________.",
+    fill: "B12",
+    vfQ: "B12.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "À quelle heure faut-il arriver ?",
-    text: ["16 h 30", "7 h", "21 h 30"],
+    textQ: "Nom de l'hôtel ?",
+    text: ["Les Palmiers", "Termini", "FitLake"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut arriver à _________.",
-    fill: "16",
-    vfQ: "L'heure indiquée est 16 h 30.",
+    fillQ: "Hôtel « Les _________ »",
+    fill: "Palmiers",
+    vfQ: "Les Palmiers.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle activité est proposée ?",
-    text: ["un atelier itinéraire de deux jours", "une permanence administrative", "une réunion sans thème"],
+    textQ: "Check-in hôtel ?",
+    text: ["16 h", "11 h 20", "6 h"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "L'activité proposée est : _________.",
-    fill: "atelier",
-    vfQ: "Le texte parle de l'activité suivante : un atelier itinéraire de deux jours.",
+    fillQ: "check-in _________ h",
+    fill: "16",
+    vfQ: "À 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Que faut-il apporter ou préparer ?",
-    text: ["un plan imprimé", "un uniforme de travail", "un ordinateur cassé"],
+    textQ: "Date du vol ?",
+    text: ["8 août", "30 juin", "3 octobre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il faut apporter ou préparer _________.",
-    fill: "plan",
-    vfQ: "Il faut prévoir un plan imprimé.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q7",
-    textQ: "Quelle information pratique est donnée ?",
-    text: ["14 CHF", "17 personnes", "aucun horaire"],
-    textC: 0,
-    img: ["", "", ""],
-    imgC: 0,
-    fillQ: "Le prix indiqué est _________.",
-    fill: "14",
-    vfQ: "Le prix indiqué est 14 CHF.",
+    fillQ: "du _________ août",
+    fill: "8",
+    vfQ: "8 août.",
     vfC: 0,
   }),
 ]);
