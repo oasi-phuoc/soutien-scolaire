@@ -52,14 +52,33 @@ def prof_img(choices: list[str]) -> list[str]:
     return imgs if all(imgs) else EMPTY_IMG
 
 
-def Q(text_q, ans, w1, w2, fill_q, fill, vf, vfc, fill_a=None, prof=False):
+def Q(text_q, ans, w1, w2, fill_q, fill, vf, vfc, fill_a=None, prof=False, transport=False):
     text = [ans, w1, w2]
+    img = EMPTY_IMG
+    if prof:
+        img = prof_img(text)
+    elif transport:
+        img = transport_img(text)
     return {
         "textQ": text_q, "text": text, "textC": 0,
-        "img": prof_img(text) if prof else EMPTY_IMG, "imgC": 0,
+        "img": img, "imgC": 0,
         "fillQ": fill_q, "fill": fill, "fillA": fill_a,
         "vfQ": vf, "vfC": vfc,
     }
+
+
+TRANSPORT_LABEL_IMG = {
+    "bus": "bus", "train": "train", "métro": "métro", "metro": "métro",
+    "tram": "tramway", "tramway": "tramway", "vélo": "vélo", "velo": "vélo",
+    "avion": "avion", "taxi": "taxi", "bateau": "bateau", "gare": "gare",
+    "aéroport": "aéroport", "aeroport": "aéroport", "hôtel": "hôtel", "hotel": "hôtel",
+    "métro": "métro",
+}
+
+
+def transport_img(choices: list[str]) -> list[str]:
+    imgs = [TRANSPORT_LABEL_IMG.get(norm_prof(c), "") for c in choices]
+    return imgs if all(imgs) else EMPTY_IMG
 
 
 def write_data_py(level: int, lessons: dict) -> None:
