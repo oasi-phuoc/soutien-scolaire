@@ -14,6 +14,8 @@ export type SceneImageFamily = {
   id: string;
   key: string;
   tags: string[];
+  /** Description complète de la scène (texte, pas mots-clés). */
+  description?: string;
   variants: SceneImageVariant[];
 };
 
