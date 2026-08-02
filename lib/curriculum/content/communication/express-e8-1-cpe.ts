@@ -10,9 +10,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E8.1 Bilan A1 (e-mail d'une amie) ─────────────── */
 
-const CE_TEXT = `Bonjour Léa,
+/* ── Compréhension écrite — E8.1 Bilan A1 ── */
+
+const E8_1_CE_TEXT_1 = `Bonjour Léa,
 
 Comment vas-tu ? Moi, tout va bien ! J'habite dans un appartement grand et lumineux. Il a une belle terrasse. Le quartier est calme et les voisins sont sympas.
 Je travaille comme serveuse dans un restaurant italien. Je commence à 10 heures et je finis tard. Le lundi, le restaurant est fermé : je me repose !
@@ -22,8 +23,8 @@ Viens me voir bientôt ! Samedi, il y a un festival de musique au bord du lac.
 À bientôt,
 Emma`;
 
-const CE_POOL = buildExpressPool("e8-1-ce", [
-  q({
+const E8_1_CE_POOL_1 = buildExpressPool("e8-1-ce-1", [
+q({
     id: "ce-q1",
     textQ: "Comment est l'appartement d'Emma ?",
     text: ["Grand et lumineux", "Petit et sombre", "Vieux et bruyant"],
@@ -124,18 +125,2017 @@ const CE_POOL = buildExpressPool("e8-1-ce", [
   }),
 ]);
 
-export const E8_1_CE: CommunicationExercise = readingPoolExercise({
-  id: "e8-1-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const E8_1_CE_TEXT_2 = `Bonjour !
 
-/* ── Production orale — dialogues à jouer (bilan des thèmes A1) ────────────── */
+Je m'appelle Emma. J'ai 21 ans et j'habite à Lausanne.
+Je travaille comme vendeur dans un magasin.
+Je commence à 9 h et je finis à 18 h.
+Le mardi, je ne travaille pas.
+J'ai un sœur qui s'appelle Luna.
+En été, je pars en vacances au Italie.
+J'aime le cinéma et la musique.
+
+À bientôt,
+Emma`;
+
+const E8_1_CE_POOL_2 = buildExpressPool("e8-1-ce-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Emma", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Emma",
+    vfQ: "La personne s'appelle Emma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Emma habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Vendeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "vendeur",
+    vfQ: "Emma est vendeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mardi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mardi, je ne travaille pas.",
+    fill: "mardi",
+    vfQ: "Elle ne travaille pas le mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Italie", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Italie",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cinéma", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cinéma",
+    vfQ: "Elle aime le cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_3 = `Bonjour !
+
+Je m'appelle Lucas. J'ai 22 ans et j'habite à Lausanne.
+Je travaille comme infirmier dans un hôpital.
+Je commence à 10 h et je finis à 19 h.
+Le mercredi, je ne travaille pas.
+J'ai un chat qui s'appelle Oscar.
+En été, je pars en vacances au Espagne.
+J'aime le lecture et la musique.
+
+À bientôt,
+Lucas`;
+
+const E8_1_CE_POOL_3 = buildExpressPool("e8-1-ce-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Lucas", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Lucas",
+    vfQ: "La personne s'appelle Lucas.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Lucas habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Infirmier", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "infirmier",
+    vfQ: "Lucas est infirmier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mercredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mercredi, je ne travaille pas.",
+    fill: "mercredi",
+    vfQ: "Elle ne travaille pas le mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Espagne", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Espagne",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["lecture", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "lecture",
+    vfQ: "Elle aime le lecture.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_4 = `Bonjour !
+
+Je m'appelle Sofia. J'ai 23 ans et j'habite à Lausanne.
+Je travaille comme professeur dans un école.
+Je commence à 8 h et je finis à 17 h.
+Le jeudi, je ne travaille pas.
+J'ai un chien qui s'appelle Mia.
+En été, je pars en vacances au France.
+J'aime le cuisine et la musique.
+
+À bientôt,
+Sofia`;
+
+const E8_1_CE_POOL_4 = buildExpressPool("e8-1-ce-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Sofia", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Sofia",
+    vfQ: "La personne s'appelle Sofia.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Sofia habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Professeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "professeur",
+    vfQ: "Sofia est professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Jeudi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jeudi, je ne travaille pas.",
+    fill: "jeudi",
+    vfQ: "Elle ne travaille pas le jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["France", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "France",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cuisine", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cuisine",
+    vfQ: "Elle aime le cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_5 = `Bonjour !
+
+Je m'appelle Marco. J'ai 24 ans et j'habite à Lausanne.
+Je travaille comme cuisinier dans un café.
+Je commence à 9 h et je finis à 18 h.
+Le vendredi, je ne travaille pas.
+J'ai un frère qui s'appelle Max.
+En été, je pars en vacances au Portugal.
+J'aime le football et la musique.
+
+À bientôt,
+Marco`;
+
+const E8_1_CE_POOL_5 = buildExpressPool("e8-1-ce-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Marco", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Marco",
+    vfQ: "La personne s'appelle Marco.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Marco habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Cuisinier", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "cuisinier",
+    vfQ: "Marco est cuisinier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Vendredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le vendredi, je ne travaille pas.",
+    fill: "vendredi",
+    vfQ: "Elle ne travaille pas le vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Portugal", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Portugal",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["football", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "football",
+    vfQ: "Elle aime le football.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_6 = `Bonjour !
+
+Je m'appelle Leila. J'ai 25 ans et j'habite à Lausanne.
+Je travaille comme coiffeur dans un salon.
+Je commence à 10 h et je finis à 19 h.
+Le lundi, je ne travaille pas.
+J'ai un sœur qui s'appelle Luna.
+En été, je pars en vacances au Italie.
+J'aime le cinéma et la musique.
+
+À bientôt,
+Leila`;
+
+const E8_1_CE_POOL_6 = buildExpressPool("e8-1-ce-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Leila", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Leila",
+    vfQ: "La personne s'appelle Leila.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Leila habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Coiffeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "coiffeur",
+    vfQ: "Leila est coiffeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Lundi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le lundi, je ne travaille pas.",
+    fill: "lundi",
+    vfQ: "Elle ne travaille pas le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Italie", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Italie",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cinéma", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cinéma",
+    vfQ: "Elle aime le cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_7 = `Bonjour !
+
+Je m'appelle Thomas. J'ai 26 ans et j'habite à Lausanne.
+Je travaille comme mécanicien dans un garage.
+Je commence à 8 h et je finis à 17 h.
+Le mardi, je ne travaille pas.
+J'ai un chat qui s'appelle Oscar.
+En été, je pars en vacances au Espagne.
+J'aime le lecture et la musique.
+
+À bientôt,
+Thomas`;
+
+const E8_1_CE_POOL_7 = buildExpressPool("e8-1-ce-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Thomas", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Thomas",
+    vfQ: "La personne s'appelle Thomas.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Thomas habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Mécanicien", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "mécanicien",
+    vfQ: "Thomas est mécanicien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mardi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mardi, je ne travaille pas.",
+    fill: "mardi",
+    vfQ: "Elle ne travaille pas le mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Espagne", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Espagne",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["lecture", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "lecture",
+    vfQ: "Elle aime le lecture.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_8 = `Bonjour !
+
+Je m'appelle Ana. J'ai 27 ans et j'habite à Lausanne.
+Je travaille comme secrétaire dans un bureau.
+Je commence à 9 h et je finis à 18 h.
+Le mercredi, je ne travaille pas.
+J'ai un chien qui s'appelle Mia.
+En été, je pars en vacances au France.
+J'aime le cuisine et la musique.
+
+À bientôt,
+Ana`;
+
+const E8_1_CE_POOL_8 = buildExpressPool("e8-1-ce-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Ana", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Ana",
+    vfQ: "La personne s'appelle Ana.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Ana habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Secrétaire", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "secrétaire",
+    vfQ: "Ana est secrétaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mercredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mercredi, je ne travaille pas.",
+    fill: "mercredi",
+    vfQ: "Elle ne travaille pas le mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["France", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "France",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cuisine", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cuisine",
+    vfQ: "Elle aime le cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_9 = `Bonjour !
+
+Je m'appelle Karim. J'ai 28 ans et j'habite à Lausanne.
+Je travaille comme serveur dans un restaurant.
+Je commence à 10 h et je finis à 19 h.
+Le jeudi, je ne travaille pas.
+J'ai un frère qui s'appelle Max.
+En été, je pars en vacances au Portugal.
+J'aime le football et la musique.
+
+À bientôt,
+Karim`;
+
+const E8_1_CE_POOL_9 = buildExpressPool("e8-1-ce-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Karim", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Karim",
+    vfQ: "La personne s'appelle Karim.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Karim habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Serveur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "serveur",
+    vfQ: "Karim est serveur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Jeudi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jeudi, je ne travaille pas.",
+    fill: "jeudi",
+    vfQ: "Elle ne travaille pas le jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Portugal", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Portugal",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["football", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "football",
+    vfQ: "Elle aime le football.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_10 = `Bonjour !
+
+Je m'appelle Julie. J'ai 29 ans et j'habite à Lausanne.
+Je travaille comme vendeur dans un magasin.
+Je commence à 8 h et je finis à 17 h.
+Le vendredi, je ne travaille pas.
+J'ai un sœur qui s'appelle Luna.
+En été, je pars en vacances au Italie.
+J'aime le cinéma et la musique.
+
+À bientôt,
+Julie`;
+
+const E8_1_CE_POOL_10 = buildExpressPool("e8-1-ce-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Julie", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Julie",
+    vfQ: "La personne s'appelle Julie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Julie habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Vendeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "vendeur",
+    vfQ: "Julie est vendeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Vendredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le vendredi, je ne travaille pas.",
+    fill: "vendredi",
+    vfQ: "Elle ne travaille pas le vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Italie", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Italie",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cinéma", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cinéma",
+    vfQ: "Elle aime le cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_11 = `Bonjour !
+
+Je m'appelle Pedro. J'ai 30 ans et j'habite à Lausanne.
+Je travaille comme infirmier dans un hôpital.
+Je commence à 9 h et je finis à 18 h.
+Le lundi, je ne travaille pas.
+J'ai un chat qui s'appelle Oscar.
+En été, je pars en vacances au Espagne.
+J'aime le lecture et la musique.
+
+À bientôt,
+Pedro`;
+
+const E8_1_CE_POOL_11 = buildExpressPool("e8-1-ce-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Pedro", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Pedro",
+    vfQ: "La personne s'appelle Pedro.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Pedro habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Infirmier", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "infirmier",
+    vfQ: "Pedro est infirmier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Lundi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le lundi, je ne travaille pas.",
+    fill: "lundi",
+    vfQ: "Elle ne travaille pas le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Espagne", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Espagne",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["lecture", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "lecture",
+    vfQ: "Elle aime le lecture.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_12 = `Bonjour !
+
+Je m'appelle Nina. J'ai 31 ans et j'habite à Lausanne.
+Je travaille comme professeur dans un école.
+Je commence à 10 h et je finis à 19 h.
+Le mardi, je ne travaille pas.
+J'ai un chien qui s'appelle Mia.
+En été, je pars en vacances au France.
+J'aime le cuisine et la musique.
+
+À bientôt,
+Nina`;
+
+const E8_1_CE_POOL_12 = buildExpressPool("e8-1-ce-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Nina", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Nina",
+    vfQ: "La personne s'appelle Nina.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Nina habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Professeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "professeur",
+    vfQ: "Nina est professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mardi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mardi, je ne travaille pas.",
+    fill: "mardi",
+    vfQ: "Elle ne travaille pas le mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["France", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "France",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cuisine", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cuisine",
+    vfQ: "Elle aime le cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_13 = `Bonjour !
+
+Je m'appelle Ahmed. J'ai 32 ans et j'habite à Lausanne.
+Je travaille comme cuisinier dans un café.
+Je commence à 8 h et je finis à 17 h.
+Le mercredi, je ne travaille pas.
+J'ai un frère qui s'appelle Max.
+En été, je pars en vacances au Portugal.
+J'aime le football et la musique.
+
+À bientôt,
+Ahmed`;
+
+const E8_1_CE_POOL_13 = buildExpressPool("e8-1-ce-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Ahmed", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Ahmed",
+    vfQ: "La personne s'appelle Ahmed.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Ahmed habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Cuisinier", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "cuisinier",
+    vfQ: "Ahmed est cuisinier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mercredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mercredi, je ne travaille pas.",
+    fill: "mercredi",
+    vfQ: "Elle ne travaille pas le mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Portugal", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Portugal",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["football", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "football",
+    vfQ: "Elle aime le football.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_14 = `Bonjour !
+
+Je m'appelle Clara. J'ai 33 ans et j'habite à Lausanne.
+Je travaille comme coiffeur dans un salon.
+Je commence à 9 h et je finis à 18 h.
+Le jeudi, je ne travaille pas.
+J'ai un sœur qui s'appelle Luna.
+En été, je pars en vacances au Italie.
+J'aime le cinéma et la musique.
+
+À bientôt,
+Clara`;
+
+const E8_1_CE_POOL_14 = buildExpressPool("e8-1-ce-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Clara", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Clara",
+    vfQ: "La personne s'appelle Clara.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Clara habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Coiffeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "coiffeur",
+    vfQ: "Clara est coiffeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Jeudi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jeudi, je ne travaille pas.",
+    fill: "jeudi",
+    vfQ: "Elle ne travaille pas le jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Italie", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Italie",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cinéma", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cinéma",
+    vfQ: "Elle aime le cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_15 = `Bonjour !
+
+Je m'appelle Youssef. J'ai 34 ans et j'habite à Lausanne.
+Je travaille comme mécanicien dans un garage.
+Je commence à 10 h et je finis à 19 h.
+Le vendredi, je ne travaille pas.
+J'ai un chat qui s'appelle Oscar.
+En été, je pars en vacances au Espagne.
+J'aime le lecture et la musique.
+
+À bientôt,
+Youssef`;
+
+const E8_1_CE_POOL_15 = buildExpressPool("e8-1-ce-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Youssef", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Youssef",
+    vfQ: "La personne s'appelle Youssef.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Youssef habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Mécanicien", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "mécanicien",
+    vfQ: "Youssef est mécanicien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Vendredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le vendredi, je ne travaille pas.",
+    fill: "vendredi",
+    vfQ: "Elle ne travaille pas le vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Espagne", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Espagne",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["lecture", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "lecture",
+    vfQ: "Elle aime le lecture.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_16 = `Bonjour !
+
+Je m'appelle Elena. J'ai 35 ans et j'habite à Lausanne.
+Je travaille comme secrétaire dans un bureau.
+Je commence à 8 h et je finis à 17 h.
+Le lundi, je ne travaille pas.
+J'ai un chien qui s'appelle Mia.
+En été, je pars en vacances au France.
+J'aime le cuisine et la musique.
+
+À bientôt,
+Elena`;
+
+const E8_1_CE_POOL_16 = buildExpressPool("e8-1-ce-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Elena", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Elena",
+    vfQ: "La personne s'appelle Elena.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Elena habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Secrétaire", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "secrétaire",
+    vfQ: "Elena est secrétaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Lundi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le lundi, je ne travaille pas.",
+    fill: "lundi",
+    vfQ: "Elle ne travaille pas le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["France", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "France",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cuisine", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cuisine",
+    vfQ: "Elle aime le cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_17 = `Bonjour !
+
+Je m'appelle David. J'ai 36 ans et j'habite à Lausanne.
+Je travaille comme serveur dans un restaurant.
+Je commence à 9 h et je finis à 18 h.
+Le mardi, je ne travaille pas.
+J'ai un frère qui s'appelle Max.
+En été, je pars en vacances au Portugal.
+J'aime le football et la musique.
+
+À bientôt,
+David`;
+
+const E8_1_CE_POOL_17 = buildExpressPool("e8-1-ce-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["David", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "David",
+    vfQ: "La personne s'appelle David.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "David habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Serveur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "serveur",
+    vfQ: "David est serveur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mardi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mardi, je ne travaille pas.",
+    fill: "mardi",
+    vfQ: "Elle ne travaille pas le mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Portugal", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Portugal",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["football", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "football",
+    vfQ: "Elle aime le football.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_18 = `Bonjour !
+
+Je m'appelle Fatima. J'ai 37 ans et j'habite à Lausanne.
+Je travaille comme vendeur dans un magasin.
+Je commence à 10 h et je finis à 19 h.
+Le mercredi, je ne travaille pas.
+J'ai un sœur qui s'appelle Luna.
+En été, je pars en vacances au Italie.
+J'aime le cinéma et la musique.
+
+À bientôt,
+Fatima`;
+
+const E8_1_CE_POOL_18 = buildExpressPool("e8-1-ce-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Fatima", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Fatima",
+    vfQ: "La personne s'appelle Fatima.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Fatima habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Vendeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "vendeur",
+    vfQ: "Fatima est vendeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Mercredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mercredi, je ne travaille pas.",
+    fill: "mercredi",
+    vfQ: "Elle ne travaille pas le mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Italie", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Italie",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cinéma", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cinéma",
+    vfQ: "Elle aime le cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_19 = `Bonjour !
+
+Je m'appelle Paul. J'ai 38 ans et j'habite à Lausanne.
+Je travaille comme infirmier dans un hôpital.
+Je commence à 8 h et je finis à 17 h.
+Le jeudi, je ne travaille pas.
+J'ai un chat qui s'appelle Oscar.
+En été, je pars en vacances au Espagne.
+J'aime le lecture et la musique.
+
+À bientôt,
+Paul`;
+
+const E8_1_CE_POOL_19 = buildExpressPool("e8-1-ce-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Paul", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Paul",
+    vfQ: "La personne s'appelle Paul.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Paul habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Infirmier", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "infirmier",
+    vfQ: "Paul est infirmier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Jeudi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jeudi, je ne travaille pas.",
+    fill: "jeudi",
+    vfQ: "Elle ne travaille pas le jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["Espagne", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "Espagne",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["lecture", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "lecture",
+    vfQ: "Elle aime le lecture.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+const E8_1_CE_TEXT_20 = `Bonjour !
+
+Je m'appelle Laura. J'ai 39 ans et j'habite à Lausanne.
+Je travaille comme professeur dans un école.
+Je commence à 9 h et je finis à 18 h.
+Le vendredi, je ne travaille pas.
+J'ai un chien qui s'appelle Mia.
+En été, je pars en vacances au France.
+J'aime le cuisine et la musique.
+
+À bientôt,
+Laura`;
+
+const E8_1_CE_POOL_20 = buildExpressPool("e8-1-ce-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Laura", "Marie", "Jean"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Laura",
+    vfQ: "La personne s'appelle Laura.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Où habite-t-elle ?",
+    text: ["À Lausanne", "À Paris", "À Genève"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Laura habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel est son métier ?",
+    text: ["Professeur", "Pilote", "Agriculteur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je travaille comme _________.",
+    fill: "professeur",
+    vfQ: "Laura est professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel jour ne travaille-t-elle pas ?",
+    text: ["Vendredi", "Samedi", "Dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le vendredi, je ne travaille pas.",
+    fill: "vendredi",
+    vfQ: "Elle ne travaille pas le vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où part-elle en vacances ?",
+    text: ["France", "Japon", "Canada"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je pars en vacances au _________.",
+    fill: "France",
+    vfQ: "Elle part en vacances en été.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Qu'est-ce qu'elle aime ?",
+    text: ["cuisine", "Dormir", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'aime le _________.",
+    fill: "cuisine",
+    vfQ: "Elle aime le cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le salaire est-il indiqué ?",
+    text: ["Non", "Oui", "En annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "salaire",
+    vfQ: "Le salaire est indiqué.",
+    vfC: 1,
+  }),
+]);
+
+export const E8_1_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e8-1-ce-1",
+    readingText: E8_1_CE_TEXT_1,
+    questionPool: E8_1_CE_POOL_1,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-2",
+    readingText: E8_1_CE_TEXT_2,
+    questionPool: E8_1_CE_POOL_2,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-3",
+    readingText: E8_1_CE_TEXT_3,
+    questionPool: E8_1_CE_POOL_3,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-4",
+    readingText: E8_1_CE_TEXT_4,
+    questionPool: E8_1_CE_POOL_4,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-5",
+    readingText: E8_1_CE_TEXT_5,
+    questionPool: E8_1_CE_POOL_5,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-6",
+    readingText: E8_1_CE_TEXT_6,
+    questionPool: E8_1_CE_POOL_6,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-7",
+    readingText: E8_1_CE_TEXT_7,
+    questionPool: E8_1_CE_POOL_7,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-8",
+    readingText: E8_1_CE_TEXT_8,
+    questionPool: E8_1_CE_POOL_8,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-9",
+    readingText: E8_1_CE_TEXT_9,
+    questionPool: E8_1_CE_POOL_9,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-10",
+    readingText: E8_1_CE_TEXT_10,
+    questionPool: E8_1_CE_POOL_10,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-11",
+    readingText: E8_1_CE_TEXT_11,
+    questionPool: E8_1_CE_POOL_11,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-12",
+    readingText: E8_1_CE_TEXT_12,
+    questionPool: E8_1_CE_POOL_12,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-13",
+    readingText: E8_1_CE_TEXT_13,
+    questionPool: E8_1_CE_POOL_13,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-14",
+    readingText: E8_1_CE_TEXT_14,
+    questionPool: E8_1_CE_POOL_14,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-15",
+    readingText: E8_1_CE_TEXT_15,
+    questionPool: E8_1_CE_POOL_15,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-16",
+    readingText: E8_1_CE_TEXT_16,
+    questionPool: E8_1_CE_POOL_16,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-17",
+    readingText: E8_1_CE_TEXT_17,
+    questionPool: E8_1_CE_POOL_17,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-18",
+    readingText: E8_1_CE_TEXT_18,
+    questionPool: E8_1_CE_POOL_18,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-19",
+    readingText: E8_1_CE_TEXT_19,
+    questionPool: E8_1_CE_POOL_19,
+  }),
+  readingPoolExercise({
+    id: "e8-1-ce-20",
+    readingText: E8_1_CE_TEXT_20,
+    questionPool: E8_1_CE_POOL_20,
+  }),
+];
+
+/* ── Production orale — dialogues à jouer ──────────────────────────────────── */
+
 
 const AMI = { title: "L'ami", vous: "l'ami / l'amie" };
 
+
 export const E8_1_PO: ExpressPoDialogue[] = [
-  {
+{
     id: "e8-1-po-1",
     title: "Se présenter à un nouveau collègue",
     context: "C'est votre premier jour de travail. Vous rencontrez un collègue.",
@@ -325,7 +2325,198 @@ export const E8_1_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Avec plaisir. Bon séjour !" },
 ],
   },
+  {
+    id: "e8-1-po-11",
+    title: "Se présenter",
+    context: "Vous rencontrez quelqu'un.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Bonjour, je suis nouveau ici." },
+      { role: "B", text: "Bienvenue ! Tu viens d'où ?" },
+      { role: "A", text: "De Portugal." },
+      { role: "B", text: "Moi, je suis de Lausanne." },
+      { role: "A", text: "Enchanté !" },
+      { role: "B", text: "Moi aussi !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-12",
+    title: "Au café",
+    context: "Vous commandez.",
+    roleA: { title: "Le serveur", vous: "le serveur" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Bonjour, vous désirez ?" },
+      { role: "B", text: "Un café et un croissant." },
+      { role: "A", text: "Voici." },
+      { role: "B", text: "Merci, combien ?" },
+      { role: "A", text: "Cinq francs." },
+      { role: "B", text: "Voici." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-13",
+    title: "Chez le médecin",
+    context: "Vous êtes malade.",
+    roleA: { title: "Le médecin", vous: "le médecin / la médecin" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Vous avez mal où ?" },
+      { role: "B", text: "À la tête." },
+      { role: "A", text: "Depuis quand ?" },
+      { role: "B", text: "Depuis hier." },
+      { role: "A", text: "Du repos." },
+      { role: "B", text: "Merci docteur." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-14",
+    title: "À la pharmacie",
+    context: "Vous achetez un médicament.",
+    roleA: { title: "Le pharmacien", vous: "le pharmacien / la pharmacienne" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Bonjour !" },
+      { role: "B", text: "Bonjour, de l'aspirine." },
+      { role: "A", text: "Voici." },
+      { role: "B", text: "Merci." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-15",
+    title: "Demander son chemin",
+    context: "Vous êtes perdu.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "Le passant", vous: "le passant / la passante" },
+    lines: [
+      { role: "A", text: "La gare, s'il vous plaît ?" },
+      { role: "B", text: "Tout droit, puis à gauche." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "De rien." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-16",
+    title: "À l'hôtel",
+    context: "Vous arrivez.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Bonjour, une chambre ?" },
+      { role: "B", text: "Pour combien de nuits ?" },
+      { role: "A", text: "Deux." },
+      { role: "B", text: "Voici la clé." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-17",
+    title: "Au marché",
+    context: "Vous achetez des légumes.",
+    roleA: { title: "Le vendeur", vous: "le vendeur" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Des tomates ?" },
+      { role: "B", text: "Un kilo, s'il vous plaît." },
+      { role: "A", text: "Trois francs." },
+      { role: "B", text: "Merci." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-18",
+    title: "Au restaurant",
+    context: "Vous dînez.",
+    roleA: { title: "Le serveur", vous: "le serveur" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Vous avez choisi ?" },
+      { role: "B", text: "La salade et le poisson." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "L'eau, s'il vous plaît." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-19",
+    title: "Téléphone",
+    context: "Vous appelez un ami.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Allô ?" },
+      { role: "B", text: "Salut, tu es libre samedi ?" },
+      { role: "A", text: "Oui !" },
+      { role: "B", text: "On va au cinéma ?" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e8-1-po-20",
+    title: "Au travail",
+    context: "Vous parlez avec un collègue.",
+    roleA: { title: "Le collègue", vous: "le collègue" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Tu commences à quelle heure ?" },
+      { role: "B", text: "À 8 h." },
+      { role: "A", text: "Moi à 9 h." },
+      { role: "B", text: "On déjeune ensemble ?" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
 ];
+
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
 
@@ -333,7 +2524,7 @@ const PE_MIN = 50;
 const PE_MAX = 120;
 
 export const E8_1_PE: ExpressPePrompt[] = [
-  {
+{
     id: "e8-1-pe-1",
     title: "Se présenter à un correspondant",
     situation: "Vous avez un nouveau correspondant français. Vous lui écrivez pour la première fois.",
@@ -422,5 +2613,95 @@ export const E8_1_PE: ExpressPePrompt[] = [
     points: ["Les magasins", "Les transports", "Ce que vous aimez"],
     minWords: PE_MIN,
     maxWords: PE_MAX,
+  },
+  {
+    id: "e8-1-pe-11",
+    title: "Se présenter",
+    situation: "Écrivez votre présentation.",
+    instruction: "Présentez-vous : nom, âge, ville, travail.",
+    points: ["Identité", "Ville", "Travail"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-12",
+    title: "Ma journée",
+    situation: "Décrivez votre journée type.",
+    instruction: "Du matin au soir.",
+    points: ["Matin", "Après-midi", "Soir"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-13",
+    title: "Ma famille",
+    situation: "Parlez de votre famille.",
+    instruction: "Décrivez les membres de votre famille.",
+    points: ["Membre 1", "Membre 2", "Activités"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-14",
+    title: "Mon logement",
+    situation: "Décrivez votre logement.",
+    instruction: "Type, pièces, quartier.",
+    points: ["Type", "Pièces", "Quartier"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-15",
+    title: "Mes vacances",
+    situation: "Racontez vos dernières vacances.",
+    instruction: "Où, quand, avec qui.",
+    points: ["Destination", "Activités", "Impressions"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-16",
+    title: "Mon repas préféré",
+    situation: "Parlez de nourriture.",
+    instruction: "Décrivez votre plat préféré.",
+    points: ["Le plat", "Ingrédients", "Pourquoi"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-17",
+    title: "Invitation",
+    situation: "Invitez un ami.",
+    instruction: "Proposez une activité.",
+    points: ["L'activité", "Date", "Lieu"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-18",
+    title: "Message maladie",
+    situation: "Vous êtes malade.",
+    instruction: "Écrivez à votre professeur.",
+    points: ["Maladie", "Absence", "Retour"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-19",
+    title: "Mon quartier",
+    situation: "Décrivez votre quartier.",
+    instruction: "Commerces, transports, parcs.",
+    points: ["Commerces", "Transports", "Ce que vous aimez"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e8-1-pe-20",
+    title: "Bilan A1",
+    situation: "Faites le bilan.",
+    instruction: "Décrivez ce que vous savez faire en français.",
+    points: ["Comprendre", "Parler", "Écrire"],
+    minWords: 50,
+    maxWords: 120,
   },
 ];

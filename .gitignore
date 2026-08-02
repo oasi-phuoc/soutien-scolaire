@@ -65,3 +65,4 @@ supabase/migrations/20260605000000_profiles_progress_and_placement.sql
 /public/downloads/
 
 .tmp-imgs/
+scripts/expand_pools/__pycache__/
