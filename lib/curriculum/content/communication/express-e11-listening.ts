@@ -163,7 +163,7 @@ export const E11_1_TRAINING = [
       },
       {
         textQ: "Est-ce que la personne dessine depuis longtemps ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "La personne a commencé le dessin cette année.",
         vfC: 1,
@@ -218,7 +218,7 @@ export const E11_1_TRAINING = [
       },
       {
         textQ: "Est-ce qu'Alex accepte la proposition ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "Alex accepte la promenade à vélo.",
         vfC: 0,
@@ -473,7 +473,7 @@ export const E11_2_TRAINING = [
       },
       {
         textQ: "Est-ce que la personne dessine depuis longtemps ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "La personne fait du dessin depuis longtemps.",
         vfC: 0,
@@ -541,7 +541,7 @@ export const E11_2_TRAINING = [
       },
       {
         textQ: "La proposition est-elle acceptée ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "L'ami refuse la promenade à vélo.",
         vfC: 1,
@@ -636,7 +636,7 @@ export const E11_2_EVAL = [
       },
       {
         textQ: "La conversation avec cette personne a-t-elle déjà eu lieu ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "La personne a déjà parlé avec cette personne.",
         vfC: 0,
@@ -755,7 +755,7 @@ export const E11_3_TRAINING = [
       },
       {
         textQ: "Est-ce qu'il s'agit de la nouvelle saison ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "Il s'agit de la nouvelle saison de la série.",
         vfC: 0,
@@ -915,7 +915,7 @@ export const E11_3_EVAL = [
       },
       {
         textQ: "La proposition est-elle acceptée ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "La deuxième personne accepte la promenade.",
         vfC: 0,
@@ -967,7 +967,7 @@ export const E11_3_EVAL = [
       },
       {
         textQ: "Est-ce que Marine a déjà parlé au professeur ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "Marine a déjà parlé avec le professeur.",
         vfC: 0,
@@ -1124,7 +1124,7 @@ export const E11_4_TRAINING = [
       },
       {
         textQ: "Est-ce que la réservation est déjà faite ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "Rien n'est encore réservé.",
         vfC: 1,

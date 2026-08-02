@@ -204,10 +204,29 @@ export function buildExpressListeningTasks(
   takeFirst(hasFillData, "fill");
 
   // 2 QCM texte (ou plus si `count` le permet et que le pool est assez grand).
+  // Évite les choix déjà au format Oui/Non/On ne sait pas (réservés au VF).
+  const isVfStyleText = (q: ExpressMultiQuestion) => {
+    const labels = q.textChoices.map((c) => c.trim().toLowerCase());
+    return (
+      labels.length === 3 &&
+      labels[0] === "oui" &&
+      labels[1] === "non" &&
+      labels[2] === "on ne sait pas"
+    );
+  };
   const target = Math.min(count, pool.length, Math.max(picks.length + 2, 4));
   for (const q of shuffled) {
     if (picks.length >= target) break;
     if (used.has(q.id)) continue;
+    if (isVfStyleText(q)) continue;
+    used.add(q.id);
+    picks.push({ q, format: "text" });
+  }
+  // Compléter avec d'autres QCM texte (jamais un 2ᵉ VF).
+  for (const q of shuffled) {
+    if (picks.length >= target) break;
+    if (used.has(q.id)) continue;
+    if (isVfStyleText(q)) continue;
     used.add(q.id);
     picks.push({ q, format: "text" });
   }

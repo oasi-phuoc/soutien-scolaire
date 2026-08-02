@@ -114,7 +114,7 @@ const POOL_116 = buildExpressPool("e4-2-116", [
   q({
     id: "116-q8",
     textQ: "Est-ce que les clients laissent un pourboire ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,

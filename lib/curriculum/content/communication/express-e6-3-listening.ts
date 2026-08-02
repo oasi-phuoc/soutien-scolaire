@@ -220,7 +220,7 @@ const POOL_189 = buildExpressPool("e6-3-189", [
   q({
     id: "189-q4",
     textQ: "Est-ce que le voyageur a un visa ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,

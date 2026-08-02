@@ -542,7 +542,7 @@ export const E12_2_TRAINING = [
       },
       {
         textQ: "Le club a-t-il des cours de yoga ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "Le club ne propose pas de cours de yoga.",
         vfC: 1,
@@ -648,7 +648,7 @@ export const E12_2_EVAL = [
       },
       {
         textQ: "La deuxième personne se sentait-elle fatiguée ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         fillQ: "Tu te sentais _________ ?",
         fill: "fatigué",
@@ -1144,7 +1144,7 @@ export const E12_4_TRAINING = [
       },
       {
         textQ: "Est-ce que Paris est plus cher que Lyon ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         fillQ: "Paris est plus _________ que Lyon ?",
         fill: "cher",

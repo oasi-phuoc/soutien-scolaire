@@ -1053,7 +1053,7 @@ export const E13_4_TRAINING = [
       },
       {
         textQ: "Est-ce que le candidat est diplômé ?",
-        text: ["Oui", "Non", "On ne sait pas"],
+        text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
         textC: 0,
         vfQ: "Le candidat n'a aucun diplôme.",
         vfC: 1,

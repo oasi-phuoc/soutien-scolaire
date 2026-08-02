@@ -600,7 +600,7 @@ export const E10_2_TRAINING = [
     },
     {
       textQ: "Est-ce qu'ils sortent ensemble maintenant ?",
-      text: ["Oui", "Non", "On ne sait pas"],
+      text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
       textC: 0,
       fillQ: "Et maintenant vous sortez _________ ?",
       fill: "ensemble",
@@ -704,7 +704,7 @@ export const E10_2_EVAL = [
     },
     {
       textQ: "Est-ce que Valérie va à la soirée ?",
-      text: ["Oui", "Non", "On ne sait pas"],
+      text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
       textC: 0,
       fillQ: "Je peux y aller avec _________ !",
       fill: "elle",
@@ -1175,7 +1175,7 @@ export const E10_4_TRAINING = [
     },
     {
       textQ: "Est-ce que l'autre parent a vu le mot ?",
-      text: ["Oui", "Non", "On ne sait pas"],
+      text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
       textC: 0,
       fillQ: "Oui, j'ai _________.",
       fill: "vu",

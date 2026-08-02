@@ -164,7 +164,7 @@ const POOL_089 = buildExpressPool("e3-2-089", [
   q({
     id: "089-q5",
     textQ: "Est-ce que la famille se promène le week-end ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    text: ["Oui, c'est vrai", "Non, c'est faux", "Ce n'est pas dit"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,

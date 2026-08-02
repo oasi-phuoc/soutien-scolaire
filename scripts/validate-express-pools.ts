@@ -12,6 +12,10 @@ import {
   buildExpressListeningTasks,
   type ExpressMultiQuestion,
 } from "../lib/curriculum/content/communication/express-listening-helpers";
+import {
+  lessonCeEmailPool,
+  lessonCePool,
+} from "../lib/curriculum/content/communication/express-types";
 import { ceCoImageSource } from "../lib/curriculum/word-image-resolver";
 
 const onlyLesson = process.argv.includes("--lesson")
@@ -48,24 +52,38 @@ function imageFolder(path: string): string {
 
 for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
   if (onlyLesson && lessonId !== onlyLesson) continue;
+  const cePool = lessonCePool(lesson);
+  const ceEmailPool = lessonCeEmailPool(lesson);
   const exs = [
     ...(lesson.exercises ?? []),
     ...(lesson.evalExercises ?? []),
-    ...(lesson.ceExercise ? [lesson.ceExercise] : []),
+    ...cePool,
+    ...ceEmailPool,
   ];
 
   // CE / PO / PE — présence et cohérence
-  if (lesson.ceExercise && !lesson.ceExercise.readingText?.trim()) {
-    err(lessonId, "ceExercise sans readingText");
+  if (cePool.length === 0) warn(lessonId, "aucun texte CE message");
+  else if (cePool.length < 20) warn(lessonId, `pool CE message : ${cePool.length} (< 20)`);
+  for (const ce of cePool) {
+    if (!ce.readingText?.trim()) err(`${lessonId}/${ce.id}`, "CE sans readingText");
+  }
+  if (ceEmailPool.length === 0) warn(lessonId, "aucun texte CE e-mail");
+  else if (ceEmailPool.length < 20) warn(lessonId, `pool CE e-mail : ${ceEmailPool.length} (< 20)`);
+  for (const ce of ceEmailPool) {
+    if (!ce.readingText?.trim()) err(`${lessonId}/${ce.id}`, "CE e-mail sans readingText");
   }
   for (const dlg of lesson.poDialogues ?? []) {
-    if (dlg.lines.length < 6) warn(`${lessonId}/${dlg.id}`, `dialogue PO court (${dlg.lines.length} répliques)`);
-    if (!dlg.lines.some((l) => l.role === "A") || !dlg.lines.some((l) => l.role === "B")) {
-      err(`${lessonId}/${dlg.id}`, "dialogue PO sans alternance de rôles");
+    const studentA = dlg.lines.filter((l) => l.role === "A").length;
+    const studentB = dlg.lines.filter((l) => l.role === "B").length;
+    if (dlg.lines.length !== 10) {
+      err(`${lessonId}/${dlg.id}`, `dialogue PO : ${dlg.lines.length} lignes (attendu 10 pour 5 répliques)`);
+    }
+    if (studentA !== 5 || studentB !== 5) {
+      err(`${lessonId}/${dlg.id}`, `dialogue PO : A=${studentA} B=${studentB} (attendu 5/5)`);
     }
   }
-  if (lesson.poDialogues && lesson.poDialogues.length < 10) {
-    warn(lessonId, `pool PO : ${lesson.poDialogues.length} situations (< 10)`);
+  if (lesson.poDialogues && lesson.poDialogues.length < 20) {
+    warn(lessonId, `pool PO : ${lesson.poDialogues.length} situations (< 20)`);
   }
   for (const p of lesson.pePrompts ?? []) {
     if (p.minWords !== 50 && p.minWords !== 80) {
@@ -73,8 +91,14 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
     }
     if (p.maxWords <= p.minWords) err(`${lessonId}/${p.id}`, "maxWords PE ≤ minWords");
   }
-  if (lesson.pePrompts && lesson.pePrompts.length < 10) {
-    warn(lessonId, `pool PE : ${lesson.pePrompts.length} consignes (< 10)`);
+  if (lesson.pePrompts && lesson.pePrompts.length < 20) {
+    warn(lessonId, `pool PE : ${lesson.pePrompts.length} consignes (< 20)`);
+  }
+  if (lesson.peEmailPrompts && lesson.peEmailPrompts.length < 20) {
+    warn(lessonId, `pool PE e-mail : ${lesson.peEmailPrompts.length} consignes (< 20)`);
+  }
+  for (const p of lesson.peEmailPrompts ?? []) {
+    if (!p.sourceMessage?.body?.trim()) err(`${lessonId}/${p.id}`, "PE e-mail sans sourceMessage");
   }
 
   for (const ex of exs) {
@@ -135,7 +159,19 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
     for (const t of tasks) {
       if (t.kind === "fill") stats.fill++;
       else if (t.image) stats.image++;
-      else if (t.choices.length === 3 && t.choices[0]!.label === "Vrai") stats.vf++;
+      else if (
+        t.choices.length === 3 &&
+        (
+          (t.choices[0]!.label === "Oui" &&
+            t.choices[1]!.label === "Non" &&
+            t.choices[2]!.label === "On ne sait pas") ||
+          (t.choices[0]!.label === "Vrai" &&
+            t.choices[1]!.label === "Faux" &&
+            t.choices[2]!.label === "On ne sait pas")
+        )
+      ) {
+        stats.vf++;
+      }
       else stats.text++;
     }
     const expectTotal = imageable > 0 ? 5 : 4;
@@ -143,7 +179,15 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
       err(ctx, `tirage ${tasks.length} tâches (attendu ${expectTotal}) — ${JSON.stringify(stats)}`);
     }
     if (pool.length >= expectTotal) {
-      if (stats.text < 2) err(ctx, `tirage : ${stats.text} QCM texte (attendu 2) — ${JSON.stringify(stats)}`);
+      const vfStyleText = pool.filter(
+        (q) =>
+          q.textChoices.length === 3 &&
+          q.textChoices[0]?.trim().toLowerCase() === "oui" &&
+          q.textChoices[1]?.trim().toLowerCase() === "non" &&
+          q.textChoices[2]?.trim().toLowerCase() === "on ne sait pas",
+      ).length;
+      const minText = vfStyleText > 0 && pool.length - vfStyleText < 4 ? 1 : 2;
+      if (stats.text < minText) err(ctx, `tirage : ${stats.text} QCM texte (attendu ${minText}) — ${JSON.stringify(stats)}`);
       if (stats.vf !== 1) err(ctx, `tirage : ${stats.vf} vrai/faux (attendu 1)`);
       if (stats.fill !== 1) err(ctx, `tirage : ${stats.fill} saisie (attendu 1)`);
       if (imageable > 0 && stats.image !== 1) err(ctx, `tirage : ${stats.image} QCM image (attendu 1)`);
