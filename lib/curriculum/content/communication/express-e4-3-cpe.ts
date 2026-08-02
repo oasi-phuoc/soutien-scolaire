@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E4.3 Aller à la boulangerie ───────────────────── */
+/* ── Compréhension écrite — E4.3 Aller à la boulangerie ── */
 
-const CE_TEXT = `Boulangerie Le Blé d'Or — Bienvenue !
+const CE_TEXT_1 = `Boulangerie Le Blé d'Or — Bienvenue !
 
 Notre boulangerie est ouverte tous les jours. Elle est ouverte de 6 h 30 à 19 h. Le dimanche après-midi, c'est fermé.
 Le matin, les croissants sont chauds à partir de 7 h. La baguette coûte 1 franc 20.
@@ -20,8 +20,8 @@ Le matin, les croissants sont chauds à partir de 7 h. La baguette coûte 1 fran
 Pour une fête, commandez votre tarte deux jours avant. Les tartes sont aux pommes, au citron ou aux fraises. La tarte est pour six ou huit personnes.
 Vous pouvez payer par carte, sans contact. C'est possible à partir de 5 francs.`;
 
-const CE_POOL = buildExpressPool("e4-3-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e4-3-1", [
+q({
     id: "ce-q1",
     textQ: "Quels jours la boulangerie est-elle ouverte ?",
     text: ["Tous les jours", "Seulement le week-end", "Du lundi au vendredi"],
@@ -113,11 +113,1666 @@ const CE_POOL = buildExpressPool("e4-3-ce", [
   }),
 ]);
 
-export const E4_3_CE: CommunicationExercise = readingPoolExercise({
-  id: "e4-3-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Boulangerie du Coin
+
+Ouverte de 6 h 30 à 19 h. Fermée le dimanche après-midi.
+Baguette : 1,20 francs. Croissants chauds dès 7 h.
+Formule midi : 12 francs (sandwich, boisson, dessert).
+Tartes aux pommes sur commande, deux jours avant.`;
+
+const CE_POOL_2 = buildExpressPool("e4-3-2", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 30", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,20 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "120",
+    vfQ: "Baguette : 1,20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["12 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "12",
+    vfQ: "Formule : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux pommes", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "pommes",
+    vfQ: "Tartes aux pommes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Boulangerie du Coin
+
+Ouverte de 7 h à 18 h 30. Fermée le dimanche après-midi.
+Baguette : 1,30 francs. Croissants chauds dès 7 h.
+Formule midi : 11 francs (sandwich, boisson, dessert).
+Tartes aux citron sur commande, deux jours avant.`;
+
+const CE_POOL_3 = buildExpressPool("e4-3-3", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["7 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 18 h 30.",
+    fill: "7",
+    vfQ: "Ouverture : 7 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["18 h 30", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "18",
+    vfQ: "Fermeture : 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,30 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "130",
+    vfQ: "Baguette : 1,30 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["11 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "11",
+    vfQ: "Formule : 11 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux citron", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "citron",
+    vfQ: "Tartes aux citron.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Boulangerie du Coin
+
+Ouverte de 6 h à 20 h. Fermée le dimanche après-midi.
+Baguette : 1,10 francs. Croissants chauds dès 7 h.
+Formule midi : 13 francs (sandwich, boisson, dessert).
+Tartes aux fraises sur commande, deux jours avant.`;
+
+const CE_POOL_4 = buildExpressPool("e4-3-4", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 20 h.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["20 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "20",
+    vfQ: "Fermeture : 20 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,10 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "110",
+    vfQ: "Baguette : 1,10 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["13 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "13",
+    vfQ: "Formule : 13 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux fraises", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "fraises",
+    vfQ: "Tartes aux fraises.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Boulangerie du Coin
+
+Ouverte de 6 h 30 à 19 h 30. Fermée le dimanche après-midi.
+Baguette : 1,25 francs. Croissants chauds dès 7 h.
+Formule midi : 12 francs (sandwich, boisson, dessert).
+Tartes aux chocolat sur commande, deux jours avant.`;
+
+const CE_POOL_5 = buildExpressPool("e4-3-5", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 30", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h 30.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h 30", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,25 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "125",
+    vfQ: "Baguette : 1,25 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["12 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "12",
+    vfQ: "Formule : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux chocolat", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "chocolat",
+    vfQ: "Tartes aux chocolat.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Boulangerie du Coin
+
+Ouverte de 7 h à 18 h. Fermée le dimanche après-midi.
+Baguette : 1,40 francs. Croissants chauds dès 7 h.
+Formule midi : 14 francs (sandwich, boisson, dessert).
+Tartes aux abricot sur commande, deux jours avant.`;
+
+const CE_POOL_6 = buildExpressPool("e4-3-6", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["7 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 18 h.",
+    fill: "7",
+    vfQ: "Ouverture : 7 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["18 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "18",
+    vfQ: "Fermeture : 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,40 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "140",
+    vfQ: "Baguette : 1,40 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["14 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "14",
+    vfQ: "Formule : 14 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux abricot", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "abricot",
+    vfQ: "Tartes aux abricot.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Boulangerie du Coin
+
+Ouverte de 6 h 15 à 19 h. Fermée le dimanche après-midi.
+Baguette : 1,15 francs. Croissants chauds dès 7 h.
+Formule midi : 11 francs (sandwich, boisson, dessert).
+Tartes aux pommes sur commande, deux jours avant.`;
+
+const CE_POOL_7 = buildExpressPool("e4-3-7", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 15", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,15 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "115",
+    vfQ: "Baguette : 1,15 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["11 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "11",
+    vfQ: "Formule : 11 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux pommes", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "pommes",
+    vfQ: "Tartes aux pommes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Boulangerie du Coin
+
+Ouverte de 6 h 30 à 18 h 30. Fermée le dimanche après-midi.
+Baguette : 1,35 francs. Croissants chauds dès 7 h.
+Formule midi : 12 francs (sandwich, boisson, dessert).
+Tartes aux myrtilles sur commande, deux jours avant.`;
+
+const CE_POOL_8 = buildExpressPool("e4-3-8", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 30", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 18 h 30.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["18 h 30", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "18",
+    vfQ: "Fermeture : 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,35 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "135",
+    vfQ: "Baguette : 1,35 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["12 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "12",
+    vfQ: "Formule : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux myrtilles", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "myrtilles",
+    vfQ: "Tartes aux myrtilles.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Boulangerie du Coin
+
+Ouverte de 7 h à 19 h. Fermée le dimanche après-midi.
+Baguette : 1,20 francs. Croissants chauds dès 7 h.
+Formule midi : 13 francs (sandwich, boisson, dessert).
+Tartes aux citron sur commande, deux jours avant.`;
+
+const CE_POOL_9 = buildExpressPool("e4-3-9", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["7 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h.",
+    fill: "7",
+    vfQ: "Ouverture : 7 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,20 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "120",
+    vfQ: "Baguette : 1,20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["13 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "13",
+    vfQ: "Formule : 13 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux citron", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "citron",
+    vfQ: "Tartes aux citron.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Boulangerie du Coin
+
+Ouverte de 6 h à 19 h 30. Fermée le dimanche après-midi.
+Baguette : 1,10 francs. Croissants chauds dès 7 h.
+Formule midi : 11 francs (sandwich, boisson, dessert).
+Tartes aux framboises sur commande, deux jours avant.`;
+
+const CE_POOL_10 = buildExpressPool("e4-3-10", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h 30.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h 30", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,10 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "110",
+    vfQ: "Baguette : 1,10 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["11 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "11",
+    vfQ: "Formule : 11 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux framboises", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "framboises",
+    vfQ: "Tartes aux framboises.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Boulangerie du Coin
+
+Ouverte de 6 h 30 à 18 h. Fermée le dimanche après-midi.
+Baguette : 1,45 francs. Croissants chauds dès 7 h.
+Formule midi : 15 francs (sandwich, boisson, dessert).
+Tartes aux pommes sur commande, deux jours avant.`;
+
+const CE_POOL_11 = buildExpressPool("e4-3-11", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 30", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 18 h.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["18 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "18",
+    vfQ: "Fermeture : 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,45 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "145",
+    vfQ: "Baguette : 1,45 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["15 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "15",
+    vfQ: "Formule : 15 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux pommes", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "pommes",
+    vfQ: "Tartes aux pommes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Boulangerie du Coin
+
+Ouverte de 7 h à 20 h. Fermée le dimanche après-midi.
+Baguette : 1,30 francs. Croissants chauds dès 7 h.
+Formule midi : 12 francs (sandwich, boisson, dessert).
+Tartes aux poire sur commande, deux jours avant.`;
+
+const CE_POOL_12 = buildExpressPool("e4-3-12", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["7 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 20 h.",
+    fill: "7",
+    vfQ: "Ouverture : 7 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["20 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "20",
+    vfQ: "Fermeture : 20 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,30 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "130",
+    vfQ: "Baguette : 1,30 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["12 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "12",
+    vfQ: "Formule : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux poire", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "poire",
+    vfQ: "Tartes aux poire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Boulangerie du Coin
+
+Ouverte de 6 h 15 à 19 h. Fermée le dimanche après-midi.
+Baguette : 1,20 francs. Croissants chauds dès 7 h.
+Formule midi : 11 francs (sandwich, boisson, dessert).
+Tartes aux fraises sur commande, deux jours avant.`;
+
+const CE_POOL_13 = buildExpressPool("e4-3-13", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 15", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,20 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "120",
+    vfQ: "Baguette : 1,20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["11 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "11",
+    vfQ: "Formule : 11 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux fraises", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "fraises",
+    vfQ: "Tartes aux fraises.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Boulangerie du Coin
+
+Ouverte de 6 h 30 à 18 h 30. Fermée le dimanche après-midi.
+Baguette : 1,25 francs. Croissants chauds dès 7 h.
+Formule midi : 13 francs (sandwich, boisson, dessert).
+Tartes aux chocolat sur commande, deux jours avant.`;
+
+const CE_POOL_14 = buildExpressPool("e4-3-14", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 30", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 18 h 30.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["18 h 30", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "18",
+    vfQ: "Fermeture : 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,25 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "125",
+    vfQ: "Baguette : 1,25 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["13 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "13",
+    vfQ: "Formule : 13 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux chocolat", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "chocolat",
+    vfQ: "Tartes aux chocolat.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Boulangerie du Coin
+
+Ouverte de 7 h à 19 h. Fermée le dimanche après-midi.
+Baguette : 1,15 francs. Croissants chauds dès 7 h.
+Formule midi : 12 francs (sandwich, boisson, dessert).
+Tartes aux citron sur commande, deux jours avant.`;
+
+const CE_POOL_15 = buildExpressPool("e4-3-15", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["7 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h.",
+    fill: "7",
+    vfQ: "Ouverture : 7 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,15 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "115",
+    vfQ: "Baguette : 1,15 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["12 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "12",
+    vfQ: "Formule : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux citron", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "citron",
+    vfQ: "Tartes aux citron.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Boulangerie du Coin
+
+Ouverte de 6 h à 18 h. Fermée le dimanche après-midi.
+Baguette : 1,40 francs. Croissants chauds dès 7 h.
+Formule midi : 14 francs (sandwich, boisson, dessert).
+Tartes aux pommes sur commande, deux jours avant.`;
+
+const CE_POOL_16 = buildExpressPool("e4-3-16", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 18 h.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["18 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "18",
+    vfQ: "Fermeture : 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,40 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "140",
+    vfQ: "Baguette : 1,40 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["14 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "14",
+    vfQ: "Formule : 14 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux pommes", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "pommes",
+    vfQ: "Tartes aux pommes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Boulangerie du Coin
+
+Ouverte de 6 h 30 à 19 h 30. Fermée le dimanche après-midi.
+Baguette : 1,10 francs. Croissants chauds dès 7 h.
+Formule midi : 11 francs (sandwich, boisson, dessert).
+Tartes aux abricot sur commande, deux jours avant.`;
+
+const CE_POOL_17 = buildExpressPool("e4-3-17", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 30", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h 30.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h 30", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,10 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "110",
+    vfQ: "Baguette : 1,10 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["11 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "11",
+    vfQ: "Formule : 11 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux abricot", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "abricot",
+    vfQ: "Tartes aux abricot.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Boulangerie du Coin
+
+Ouverte de 7 h à 20 h. Fermée le dimanche après-midi.
+Baguette : 1,35 francs. Croissants chauds dès 7 h.
+Formule midi : 12 francs (sandwich, boisson, dessert).
+Tartes aux fraises sur commande, deux jours avant.`;
+
+const CE_POOL_18 = buildExpressPool("e4-3-18", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["7 h", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 20 h.",
+    fill: "7",
+    vfQ: "Ouverture : 7 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["20 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "20",
+    vfQ: "Fermeture : 20 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,35 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "135",
+    vfQ: "Baguette : 1,35 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["12 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "12",
+    vfQ: "Formule : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux fraises", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "fraises",
+    vfQ: "Tartes aux fraises.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Boulangerie du Coin
+
+Ouverte de 6 h 15 à 18 h 30. Fermée le dimanche après-midi.
+Baguette : 1,20 francs. Croissants chauds dès 7 h.
+Formule midi : 13 francs (sandwich, boisson, dessert).
+Tartes aux myrtilles sur commande, deux jours avant.`;
+
+const CE_POOL_19 = buildExpressPool("e4-3-19", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 15", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 18 h 30.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["18 h 30", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "18",
+    vfQ: "Fermeture : 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,20 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "120",
+    vfQ: "Baguette : 1,20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["13 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "13",
+    vfQ: "Formule : 13 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux myrtilles", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "myrtilles",
+    vfQ: "Tartes aux myrtilles.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Boulangerie du Coin
+
+Ouverte de 6 h 30 à 19 h. Fermée le dimanche après-midi.
+Baguette : 1,30 francs. Croissants chauds dès 7 h.
+Formule midi : 12 francs (sandwich, boisson, dessert).
+Tartes aux chocolat sur commande, deux jours avant.`;
+
+const CE_POOL_20 = buildExpressPool("e4-3-20", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure ouvre la boulangerie ?",
+    text: ["6 h 30", "midi", "minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverte de _________ à 19 h.",
+    fill: "6",
+    vfQ: "Ouverture : 6 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme-t-elle ?",
+    text: ["19 h", "3 h", "5 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermée à _________.",
+    fill: "19",
+    vfQ: "Fermeture : 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûte la baguette ?",
+    text: ["1,30 francs", "10 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Baguette : _________ francs.",
+    fill: "130",
+    vfQ: "Baguette : 1,30 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûte la formule midi ?",
+    text: ["12 francs", "50 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Formule : _________ francs.",
+    fill: "12",
+    vfQ: "Formule : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quelles tartes sont disponibles ?",
+    text: ["Aux chocolat", "aux carottes", "au fromage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tartes aux _________.",
+    fill: "chocolat",
+    vfQ: "Tartes aux chocolat.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand commander une tarte ?",
+    text: ["Deux jours avant", "Le jour même", "Un mois avant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Commander _________ jours avant.",
+    fill: "deux",
+    vfQ: "Commander deux jours avant.",
+    vfC: 0,
+  }),
+]);
+
+export const E4_3_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e4-3-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e4-3-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e4-3-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e4-3-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e4-3-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e4-3-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e4-3-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e4-3-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e4-3-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e4-3-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e4-3-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e4-3-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e4-3-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e4-3-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e4-3-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e4-3-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e4-3-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e4-3-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e4-3-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e4-3-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème boulangerie) ─────────────── */
 
@@ -315,6 +1970,196 @@ export const E4_3_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+{
+  id: "e4-3-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-3-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : la boulangerie.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la boulangerie." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -413,4 +2258,134 @@ export const E4_3_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e4-3-pe-11",
+  title: "Texte sur la boulangerie — variante 11",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-12",
+  title: "Texte sur la boulangerie — variante 12",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-13",
+  title: "Texte sur la boulangerie — variante 13",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-14",
+  title: "Texte sur la boulangerie — variante 14",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-15",
+  title: "Texte sur la boulangerie — variante 15",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-16",
+  title: "Texte sur la boulangerie — variante 16",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-17",
+  title: "Texte sur la boulangerie — variante 17",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-18",
+  title: "Texte sur la boulangerie — variante 18",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-19",
+  title: "Texte sur la boulangerie — variante 19",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-3-pe-20",
+  title: "Texte sur la boulangerie — variante 20",
+  situation: "Situation liée au thème « la boulangerie ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la boulangerie — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

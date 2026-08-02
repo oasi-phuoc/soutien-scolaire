@@ -10,17 +10,17 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E2.2 Avoir un problème domestique ─────────────── */
+/* ── Compréhension écrite — E2.2 Avoir un problème domestique ── */
 
-const CE_TEXT = `Dépann'Express — Votre service de dépannage à domicile
+const CE_TEXT_1 = `Dépann'Express — Votre service de dépannage à domicile
 
 Une panne d'électricité ? Une fuite d'eau ? Votre machine à laver ne marche plus ? Appelez Dépann'Express !
 Nos techniciens viennent chez vous du lundi au samedi. Ils travaillent de 7 h à 20 h. Un plombier ou un électricien peut venir le dimanche. C'est pour les urgences.
 Le technicien regarde d'abord la panne. Puis il fait un devis gratuit. Vous payez seulement si vous êtes d'accord avec le prix.
 Attention : pour une panne de gaz, n'attendez pas. Appelez tout de suite le numéro d'urgence.`;
 
-const CE_POOL = buildExpressPool("e2-2-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e2-2-1", [
+q({
     id: "ce-q1",
     textQ: "Quels problèmes Dépann'Express répare-t-il ?",
     text: ["Les pannes à la maison", "Les voitures en panne", "Les téléphones cassés"],
@@ -122,11 +122,1666 @@ const CE_POOL = buildExpressPool("e2-2-ce", [
   }),
 ]);
 
-export const E2_2_CE: CommunicationExercise = readingPoolExercise({
-  id: "e2-2-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Annonce — Dépann'Express
+
+Vous avez une fuite d'eau ? Appelez Dépann'Express !
+Un plombier peut venir lundi. Il travaille de 7 h à 20 h.
+Le plombier regarde la panne sous l'évier. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_2 = buildExpressPool("e2-2-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Fuite d'eau", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "d'eau",
+    vfQ: "Le problème est une fuite d'eau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Plombier", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["plombier", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "plombier",
+    vfQ: "Un plombier peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Lundi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un plombier peut venir _________.",
+    fill: "lundi",
+    vfQ: "Le plombier vient lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Sous l'évier", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "sous évier",
+    vfQ: "La panne est sous l'évier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_3 = `Annonce — Dépann'Express
+
+Vous avez une panne d'électricité ? Appelez Dépann'Express !
+Un électricien peut venir mardi. Il travaille de 7 h à 20 h.
+Le électricien regarde la panne dans la cuisine. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_3 = buildExpressPool("e2-2-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Panne d'électricité", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "d'électricité",
+    vfQ: "Le problème est une panne d'électricité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Électricien", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["électricien", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "électricien",
+    vfQ: "Un électricien peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Mardi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un électricien peut venir _________.",
+    fill: "mardi",
+    vfQ: "Le électricien vient mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la cuisine", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la cuisine",
+    vfQ: "La panne est dans la cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_4 = `Annonce — Dépann'Express
+
+Vous avez une chauffage en panne ? Appelez Dépann'Express !
+Un technicien peut venir mercredi. Il travaille de 7 h à 20 h.
+Le technicien regarde la panne dans le salon. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_4 = buildExpressPool("e2-2-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Chauffage en panne", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "chauffage en panne",
+    vfQ: "Le problème est une chauffage en panne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Technicien", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "technicien",
+    vfQ: "Un technicien peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Mercredi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un technicien peut venir _________.",
+    fill: "mercredi",
+    vfQ: "Le technicien vient mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans le salon", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "le salon",
+    vfQ: "La panne est dans le salon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_5 = `Annonce — Dépann'Express
+
+Vous avez une machine à laver ? Appelez Dépann'Express !
+Un réparateur peut venir jeudi. Il travaille de 7 h à 20 h.
+Le réparateur regarde la panne dans la salle de bains. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_5 = buildExpressPool("e2-2-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Machine à laver", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "machine à laver",
+    vfQ: "Le problème est une machine à laver.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Réparateur", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "réparateur",
+    vfQ: "Un réparateur peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Jeudi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un réparateur peut venir _________.",
+    fill: "jeudi",
+    vfQ: "Le réparateur vient jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la salle de bains", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la salle de bains",
+    vfQ: "La panne est dans la salle de bains.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_6 = `Annonce — Dépann'Express
+
+Vous avez une porte bloquée ? Appelez Dépann'Express !
+Un serrurier peut venir vendredi. Il travaille de 7 h à 20 h.
+Le serrurier regarde la panne à l'entrée. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_6 = buildExpressPool("e2-2-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Porte bloquée", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "porte bloquée",
+    vfQ: "Le problème est une porte bloquée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Serrurier", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "serrurier",
+    vfQ: "Un serrurier peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Vendredi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un serrurier peut venir _________.",
+    fill: "vendredi",
+    vfQ: "Le serrurier vient vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["À l'entrée", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "entrée",
+    vfQ: "La panne est à l'entrée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_7 = `Annonce — Dépann'Express
+
+Vous avez une fenêtre cassée ? Appelez Dépann'Express !
+Un vitrier peut venir samedi. Il travaille de 7 h à 20 h.
+Le vitrier regarde la panne dans la chambre. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_7 = buildExpressPool("e2-2-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Fenêtre cassée", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "fenêtre cassée",
+    vfQ: "Le problème est une fenêtre cassée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Vitrier", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "vitrier",
+    vfQ: "Un vitrier peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Samedi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un vitrier peut venir _________.",
+    fill: "samedi",
+    vfQ: "Le vitrier vient samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la chambre", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la chambre",
+    vfQ: "La panne est dans la chambre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_8 = `Annonce — Dépann'Express
+
+Vous avez une fuite de gaz ? Appelez Dépann'Express !
+Un urgence peut venir tout de suite. Il travaille de 7 h à 20 h.
+Le urgence regarde la panne dans la cuisine. Puis il fait un numéro d'urgence.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_8 = buildExpressPool("e2-2-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Fuite de gaz", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "fuite de gaz",
+    vfQ: "Le problème est une fuite de gaz.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Urgence", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "urgence",
+    vfQ: "Un urgence peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Tout de suite", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un urgence peut venir _________.",
+    fill: "tout de suite",
+    vfQ: "Le urgence vient tout de suite.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "numéro",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la cuisine", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la cuisine",
+    vfQ: "La panne est dans la cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_9 = `Annonce — Dépann'Express
+
+Vous avez une robinet qui goutte ? Appelez Dépann'Express !
+Un plombier peut venir lundi. Il travaille de 7 h à 20 h.
+Le plombier regarde la panne dans la salle de bains. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_9 = buildExpressPool("e2-2-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Robinet qui goutte", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "robinet qui goutte",
+    vfQ: "Le problème est une robinet qui goutte.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Plombier", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["plombier", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "plombier",
+    vfQ: "Un plombier peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Lundi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un plombier peut venir _________.",
+    fill: "lundi",
+    vfQ: "Le plombier vient lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la salle de bains", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la salle de bains",
+    vfQ: "La panne est dans la salle de bains.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_10 = `Annonce — Dépann'Express
+
+Vous avez une prise électrique ? Appelez Dépann'Express !
+Un électricien peut venir mardi. Il travaille de 7 h à 20 h.
+Le électricien regarde la panne dans le bureau. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_10 = buildExpressPool("e2-2-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Prise électrique", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "prise électrique",
+    vfQ: "Le problème est une prise électrique.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Électricien", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["électricien", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "électricien",
+    vfQ: "Un électricien peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Mardi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un électricien peut venir _________.",
+    fill: "mardi",
+    vfQ: "Le électricien vient mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans le bureau", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "le bureau",
+    vfQ: "La panne est dans le bureau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_11 = `Annonce — Dépann'Express
+
+Vous avez une chaudière ? Appelez Dépann'Express !
+Un chauffagiste peut venir mercredi. Il travaille de 7 h à 20 h.
+Le chauffagiste regarde la panne dans la cave. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_11 = buildExpressPool("e2-2-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Chaudière", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "chaudière",
+    vfQ: "Le problème est une chaudière.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Chauffagiste", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "chauffagiste",
+    vfQ: "Un chauffagiste peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Mercredi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un chauffagiste peut venir _________.",
+    fill: "mercredi",
+    vfQ: "Le chauffagiste vient mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la cave", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la cave",
+    vfQ: "La panne est dans la cave.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_12 = `Annonce — Dépann'Express
+
+Vous avez une lave-vaisselle ? Appelez Dépann'Express !
+Un réparateur peut venir jeudi. Il travaille de 7 h à 20 h.
+Le réparateur regarde la panne dans la cuisine. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_12 = buildExpressPool("e2-2-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Lave-vaisselle", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "lave-vaisselle",
+    vfQ: "Le problème est une lave-vaisselle.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Réparateur", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "réparateur",
+    vfQ: "Un réparateur peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Jeudi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un réparateur peut venir _________.",
+    fill: "jeudi",
+    vfQ: "Le réparateur vient jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la cuisine", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la cuisine",
+    vfQ: "La panne est dans la cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_13 = `Annonce — Dépann'Express
+
+Vous avez une toilettes bouchées ? Appelez Dépann'Express !
+Un plombier peut venir vendredi. Il travaille de 7 h à 20 h.
+Le plombier regarde la panne aux toilettes. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_13 = buildExpressPool("e2-2-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Toilettes bouchées", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "toilettes bouchées",
+    vfQ: "Le problème est une toilettes bouchées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Plombier", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["plombier", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "plombier",
+    vfQ: "Un plombier peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Vendredi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un plombier peut venir _________.",
+    fill: "vendredi",
+    vfQ: "Le plombier vient vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Aux toilettes", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "aux toilettes",
+    vfQ: "La panne est aux toilettes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_14 = `Annonce — Dépann'Express
+
+Vous avez une ampoule grillée ? Appelez Dépann'Express !
+Un électricien peut venir samedi. Il travaille de 7 h à 20 h.
+Le électricien regarde la panne dans le couloir. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_14 = buildExpressPool("e2-2-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Ampoule grillée", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "ampoule grillée",
+    vfQ: "Le problème est une ampoule grillée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Électricien", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["électricien", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "électricien",
+    vfQ: "Un électricien peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Samedi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un électricien peut venir _________.",
+    fill: "samedi",
+    vfQ: "Le électricien vient samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans le couloir", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "le couloir",
+    vfQ: "La panne est dans le couloir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_15 = `Annonce — Dépann'Express
+
+Vous avez une radiateur froid ? Appelez Dépann'Express !
+Un technicien peut venir lundi. Il travaille de 7 h à 20 h.
+Le technicien regarde la panne dans la chambre. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_15 = buildExpressPool("e2-2-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Radiateur froid", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "radiateur froid",
+    vfQ: "Le problème est une radiateur froid.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Technicien", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "technicien",
+    vfQ: "Un technicien peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Lundi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un technicien peut venir _________.",
+    fill: "lundi",
+    vfQ: "Le technicien vient lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la chambre", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la chambre",
+    vfQ: "La panne est dans la chambre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_16 = `Annonce — Dépann'Express
+
+Vous avez une évier bouché ? Appelez Dépann'Express !
+Un plombier peut venir mardi. Il travaille de 7 h à 20 h.
+Le plombier regarde la panne dans la cuisine. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_16 = buildExpressPool("e2-2-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Évier bouché", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "évier bouché",
+    vfQ: "Le problème est une évier bouché.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Plombier", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["plombier", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "plombier",
+    vfQ: "Un plombier peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Mardi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un plombier peut venir _________.",
+    fill: "mardi",
+    vfQ: "Le plombier vient mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la cuisine", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la cuisine",
+    vfQ: "La panne est dans la cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_17 = `Annonce — Dépann'Express
+
+Vous avez une disjoncteur ? Appelez Dépann'Express !
+Un électricien peut venir mercredi. Il travaille de 7 h à 20 h.
+Le électricien regarde la panne dans le tableau. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_17 = buildExpressPool("e2-2-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Disjoncteur", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "disjoncteur",
+    vfQ: "Le problème est une disjoncteur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Électricien", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["électricien", "facteur", "professeur"],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "électricien",
+    vfQ: "Un électricien peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Mercredi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un électricien peut venir _________.",
+    fill: "mercredi",
+    vfQ: "Le électricien vient mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans le tableau", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "le tableau",
+    vfQ: "La panne est dans le tableau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_18 = `Annonce — Dépann'Express
+
+Vous avez une frigo en panne ? Appelez Dépann'Express !
+Un réparateur peut venir jeudi. Il travaille de 7 h à 20 h.
+Le réparateur regarde la panne dans la cuisine. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_18 = buildExpressPool("e2-2-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Frigo en panne", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "frigo en panne",
+    vfQ: "Le problème est une frigo en panne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Réparateur", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "réparateur",
+    vfQ: "Un réparateur peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Jeudi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un réparateur peut venir _________.",
+    fill: "jeudi",
+    vfQ: "Le réparateur vient jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans la cuisine", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la cuisine",
+    vfQ: "La panne est dans la cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_19 = `Annonce — Dépann'Express
+
+Vous avez une serrure cassée ? Appelez Dépann'Express !
+Un serrurier peut venir vendredi. Il travaille de 7 h à 20 h.
+Le serrurier regarde la panne à la porte. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_19 = buildExpressPool("e2-2-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Serrure cassée", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "serrure cassée",
+    vfQ: "Le problème est une serrure cassée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Serrurier", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "serrurier",
+    vfQ: "Un serrurier peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Vendredi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un serrurier peut venir _________.",
+    fill: "vendredi",
+    vfQ: "Le serrurier vient vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["À la porte", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "la porte",
+    vfQ: "La panne est à la porte.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+const CE_TEXT_20 = `Annonce — Dépann'Express
+
+Vous avez une volet bloqué ? Appelez Dépann'Express !
+Un réparateur peut venir samedi. Il travaille de 7 h à 20 h.
+Le réparateur regarde la panne dans le salon. Puis il fait un devis gratuit.
+Vous payez seulement si vous êtes d'accord.`;
+
+const CE_POOL_20 = buildExpressPool("e2-2-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le problème ?",
+    text: ["Volet bloqué", "un chat perdu", "un colis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous avez une _________ ?",
+    fill: "volet bloqué",
+    vfQ: "Le problème est une volet bloqué.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Qui peut venir ?",
+    text: ["Réparateur", "un facteur", "un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un _________ peut venir.",
+    fill: "réparateur",
+    vfQ: "Un réparateur peut venir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quand peut-on appeler ?",
+    text: ["Samedi", "jamais", "dans un an"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un réparateur peut venir _________.",
+    fill: "samedi",
+    vfQ: "Le réparateur vient samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Le devis est-il payant ?",
+    text: ["Non, il est gratuit", "Oui, 100 francs", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il fait un _________.",
+    fill: "devis",
+    vfQ: "Le devis est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est la panne ?",
+    text: ["Dans le salon", "à l'école", "au parc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La panne est _________.",
+    fill: "le salon",
+    vfQ: "La panne est dans le salon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il payer avant le travail ?",
+    text: ["Non, seulement si on est d'accord", "Oui, tout de suite", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous payez seulement si vous êtes _________.",
+    fill: "d'accord",
+    vfQ: "Il faut payer avant le travail.",
+    vfC: 1,
+  }),
+]);
+
+export const E2_2_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e2-2-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e2-2-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e2-2-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e2-2-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e2-2-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e2-2-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e2-2-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e2-2-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e2-2-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e2-2-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e2-2-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e2-2-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e2-2-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e2-2-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e2-2-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e2-2-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e2-2-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e2-2-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e2-2-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e2-2-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème pannes / dépannage) ───────── */
 
@@ -324,6 +1979,196 @@ export const E2_2_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+{
+  id: "e2-2-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-2-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : un problème domestique.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de un problème domestique." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -422,4 +2267,134 @@ export const E2_2_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e2-2-pe-11",
+  title: "Texte sur un problème domestique — variante 11",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-12",
+  title: "Texte sur un problème domestique — variante 12",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-13",
+  title: "Texte sur un problème domestique — variante 13",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-14",
+  title: "Texte sur un problème domestique — variante 14",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-15",
+  title: "Texte sur un problème domestique — variante 15",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-16",
+  title: "Texte sur un problème domestique — variante 16",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-17",
+  title: "Texte sur un problème domestique — variante 17",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-18",
+  title: "Texte sur un problème domestique — variante 18",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-19",
+  title: "Texte sur un problème domestique — variante 19",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-2-pe-20",
+  title: "Texte sur un problème domestique — variante 20",
+  situation: "Situation liée au thème « un problème domestique ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur un problème domestique — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

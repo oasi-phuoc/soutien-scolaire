@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E4.1 Acheter des vêtements ────────────────────── */
+/* ── Compréhension écrite — E4.1 Acheter des vêtements ── */
 
-const CE_TEXT = `Boutique Élégance — Soldes d'hiver
+const CE_TEXT_1 = `Boutique Élégance — Soldes d'hiver
 
 Cette semaine, les manteaux et les vestes sont à moitié prix.
 Les pulls en laine coûtent maintenant 30 francs. Les écharpes coûtent 10 francs.
@@ -21,8 +21,8 @@ Les cabines d'essayage sont au premier étage. Vous pouvez essayer trois vêteme
 La boutique est ouverte du mardi au samedi. Elle est ouverte de 9 h à 18 h.
 Attention : les baskets ne sont pas en solde. Bon shopping !`;
 
-const CE_POOL = buildExpressPool("e4-1-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e4-1-1", [
+q({
     id: "ce-q1",
     textQ: "Qu'est-ce qui est à moitié prix cette semaine ?",
     text: [
@@ -103,11 +103,1666 @@ const CE_POOL = buildExpressPool("e4-1-ce", [
   }),
 ]);
 
-export const E4_1_CE: CommunicationExercise = readingPoolExercise({
-  id: "e4-1-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Boutique Mode — Soldes
+
+Cette semaine, les manteaux sont à 50 % de réduction.
+Les pulls coûtent 30 francs. Les écharpes coûtent 10 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_2 = buildExpressPool("e4-1-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Manteaux", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "manteaux",
+    vfQ: "Soldes sur les manteaux.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les manteaux ?",
+    text: ["50 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "50",
+    vfQ: "Réduction : 50 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les pulls ?",
+    text: ["30 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les pulls coûtent _________.",
+    fill: "30",
+    vfQ: "Prix des pulls : 30 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les écharpes ?",
+    text: ["10 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les écharpes coûtent _________.",
+    fill: "10",
+    vfQ: "Prix des écharpes : 10 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Boutique Mode — Soldes
+
+Cette semaine, les robes sont à 40 % de réduction.
+Les pantalons coûtent 45 francs. Les chaussettes coûtent 5 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_3 = buildExpressPool("e4-1-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Robes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "robes",
+    vfQ: "Soldes sur les robes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les robes ?",
+    text: ["40 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "40",
+    vfQ: "Réduction : 40 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les pantalons ?",
+    text: ["45 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les pantalons coûtent _________.",
+    fill: "45",
+    vfQ: "Prix des pantalons : 45 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les chaussettes ?",
+    text: ["5 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les chaussettes coûtent _________.",
+    fill: "5",
+    vfQ: "Prix des chaussettes : 5 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Boutique Mode — Soldes
+
+Cette semaine, les vestes sont à 30 % de réduction.
+Les jeans coûtent 60 francs. Les gants coûtent 12 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_4 = buildExpressPool("e4-1-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Vestes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "vestes",
+    vfQ: "Soldes sur les vestes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les vestes ?",
+    text: ["30 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "30",
+    vfQ: "Réduction : 30 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les jeans ?",
+    text: ["60 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les jeans coûtent _________.",
+    fill: "60",
+    vfQ: "Prix des jeans : 60 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les gants ?",
+    text: ["12 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les gants coûtent _________.",
+    fill: "12",
+    vfQ: "Prix des gants : 12 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Boutique Mode — Soldes
+
+Cette semaine, les chemises sont à 25 % de réduction.
+Les shorts coûtent 25 francs. Les ceintures coûtent 15 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_5 = buildExpressPool("e4-1-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Chemises", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "chemises",
+    vfQ: "Soldes sur les chemises.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les chemises ?",
+    text: ["25 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "25",
+    vfQ: "Réduction : 25 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les shorts ?",
+    text: ["25 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les shorts coûtent _________.",
+    fill: "25",
+    vfQ: "Prix des shorts : 25 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les ceintures ?",
+    text: ["15 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les ceintures coûtent _________.",
+    fill: "15",
+    vfQ: "Prix des ceintures : 15 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Boutique Mode — Soldes
+
+Cette semaine, les bottes sont à 50 % de réduction.
+Les sweats coûtent 35 francs. Les bonnets coûtent 8 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_6 = buildExpressPool("e4-1-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Bottes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "bottes",
+    vfQ: "Soldes sur les bottes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les bottes ?",
+    text: ["50 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "50",
+    vfQ: "Réduction : 50 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les sweats ?",
+    text: ["35 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les sweats coûtent _________.",
+    fill: "35",
+    vfQ: "Prix des sweats : 35 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les bonnets ?",
+    text: ["8 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les bonnets coûtent _________.",
+    fill: "8",
+    vfQ: "Prix des bonnets : 8 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Boutique Mode — Soldes
+
+Cette semaine, les costumes sont à 20 % de réduction.
+Les cravates coûtent 20 francs. Les chaussons coûtent 10 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_7 = buildExpressPool("e4-1-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Costumes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "costumes",
+    vfQ: "Soldes sur les costumes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les costumes ?",
+    text: ["20 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "20",
+    vfQ: "Réduction : 20 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les cravates ?",
+    text: ["20 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cravates coûtent _________.",
+    fill: "20",
+    vfQ: "Prix des cravates : 20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les chaussons ?",
+    text: ["10 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les chaussons coûtent _________.",
+    fill: "10",
+    vfQ: "Prix des chaussons : 10 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Boutique Mode — Soldes
+
+Cette semaine, les jupes sont à 35 % de réduction.
+Les blousons coûtent 55 francs. Les foulards coûtent 18 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_8 = buildExpressPool("e4-1-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Jupes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "jupes",
+    vfQ: "Soldes sur les jupes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les jupes ?",
+    text: ["35 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "35",
+    vfQ: "Réduction : 35 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les blousons ?",
+    text: ["55 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les blousons coûtent _________.",
+    fill: "55",
+    vfQ: "Prix des blousons : 55 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les foulards ?",
+    text: ["18 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les foulards coûtent _________.",
+    fill: "18",
+    vfQ: "Prix des foulards : 18 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Boutique Mode — Soldes
+
+Cette semaine, les pyjamas sont à 30 % de réduction.
+Les maillots coûtent 40 francs. Les sandales coûtent 22 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_9 = buildExpressPool("e4-1-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Pyjamas", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "pyjamas",
+    vfQ: "Soldes sur les pyjamas.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les pyjamas ?",
+    text: ["30 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "30",
+    vfQ: "Réduction : 30 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les maillots ?",
+    text: ["40 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les maillots coûtent _________.",
+    fill: "40",
+    vfQ: "Prix des maillots : 40 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les sandales ?",
+    text: ["22 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les sandales coûtent _________.",
+    fill: "22",
+    vfQ: "Prix des sandales : 22 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Boutique Mode — Soldes
+
+Cette semaine, les parkas sont à 45 % de réduction.
+Les polos coûtent 28 francs. Les baskets coûtent 70 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_10 = buildExpressPool("e4-1-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Parkas", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "parkas",
+    vfQ: "Soldes sur les parkas.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les parkas ?",
+    text: ["45 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "45",
+    vfQ: "Réduction : 45 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les polos ?",
+    text: ["28 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les polos coûtent _________.",
+    fill: "28",
+    vfQ: "Prix des polos : 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les baskets ?",
+    text: ["70 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les baskets coûtent _________.",
+    fill: "70",
+    vfQ: "Prix des baskets : 70 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Boutique Mode — Soldes
+
+Cette semaine, les cardigans sont à 40 % de réduction.
+Les leggings coûtent 20 francs. Les chapeaux coûtent 25 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_11 = buildExpressPool("e4-1-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Cardigans", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "cardigans",
+    vfQ: "Soldes sur les cardigans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les cardigans ?",
+    text: ["40 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "40",
+    vfQ: "Réduction : 40 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les leggings ?",
+    text: ["20 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les leggings coûtent _________.",
+    fill: "20",
+    vfQ: "Prix des leggings : 20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les chapeaux ?",
+    text: ["25 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les chapeaux coûtent _________.",
+    fill: "25",
+    vfQ: "Prix des chapeaux : 25 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Boutique Mode — Soldes
+
+Cette semaine, les manteaux sont à 50 % de réduction.
+Les gilets coûtent 32 francs. Les écharpes coûtent 9 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_12 = buildExpressPool("e4-1-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Manteaux", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "manteaux",
+    vfQ: "Soldes sur les manteaux.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les manteaux ?",
+    text: ["50 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "50",
+    vfQ: "Réduction : 50 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les gilets ?",
+    text: ["32 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les gilets coûtent _________.",
+    fill: "32",
+    vfQ: "Prix des gilets : 32 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les écharpes ?",
+    text: ["9 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les écharpes coûtent _________.",
+    fill: "9",
+    vfQ: "Prix des écharpes : 9 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Boutique Mode — Soldes
+
+Cette semaine, les robes sont à 30 % de réduction.
+Les combinaisons coûtent 65 francs. Les gants coûtent 11 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_13 = buildExpressPool("e4-1-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Robes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "robes",
+    vfQ: "Soldes sur les robes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les robes ?",
+    text: ["30 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "30",
+    vfQ: "Réduction : 30 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les combinaisons ?",
+    text: ["65 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les combinaisons coûtent _________.",
+    fill: "65",
+    vfQ: "Prix des combinaisons : 65 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les gants ?",
+    text: ["11 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les gants coûtent _________.",
+    fill: "11",
+    vfQ: "Prix des gants : 11 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Boutique Mode — Soldes
+
+Cette semaine, les vestes sont à 35 % de réduction.
+Les pullovers coûtent 38 francs. Les chaussettes coûtent 6 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_14 = buildExpressPool("e4-1-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Vestes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "vestes",
+    vfQ: "Soldes sur les vestes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les vestes ?",
+    text: ["35 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "35",
+    vfQ: "Réduction : 35 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les pullovers ?",
+    text: ["38 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les pullovers coûtent _________.",
+    fill: "38",
+    vfQ: "Prix des pullovers : 38 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les chaussettes ?",
+    text: ["6 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les chaussettes coûtent _________.",
+    fill: "6",
+    vfQ: "Prix des chaussettes : 6 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Boutique Mode — Soldes
+
+Cette semaine, les chemises sont à 20 % de réduction.
+Les bermudas coûtent 30 francs. Les ceintures coûtent 14 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_15 = buildExpressPool("e4-1-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Chemises", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "chemises",
+    vfQ: "Soldes sur les chemises.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les chemises ?",
+    text: ["20 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "20",
+    vfQ: "Réduction : 20 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les bermudas ?",
+    text: ["30 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les bermudas coûtent _________.",
+    fill: "30",
+    vfQ: "Prix des bermudas : 30 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les ceintures ?",
+    text: ["14 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les ceintures coûtent _________.",
+    fill: "14",
+    vfQ: "Prix des ceintures : 14 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Boutique Mode — Soldes
+
+Cette semaine, les bottes sont à 40 % de réduction.
+Les hoodies coûtent 42 francs. Les bonnets coûtent 7 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_16 = buildExpressPool("e4-1-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Bottes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "bottes",
+    vfQ: "Soldes sur les bottes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les bottes ?",
+    text: ["40 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "40",
+    vfQ: "Réduction : 40 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les hoodies ?",
+    text: ["42 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les hoodies coûtent _________.",
+    fill: "42",
+    vfQ: "Prix des hoodies : 42 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les bonnets ?",
+    text: ["7 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les bonnets coûtent _________.",
+    fill: "7",
+    vfQ: "Prix des bonnets : 7 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Boutique Mode — Soldes
+
+Cette semaine, les costumes sont à 25 % de réduction.
+Les nœuds papillon coûtent 18 francs. Les chaussons coûtent 9 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_17 = buildExpressPool("e4-1-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Costumes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "costumes",
+    vfQ: "Soldes sur les costumes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les costumes ?",
+    text: ["25 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "25",
+    vfQ: "Réduction : 25 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les nœuds papillon ?",
+    text: ["18 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les nœuds papillon coûtent _________.",
+    fill: "18",
+    vfQ: "Prix des nœuds papillon : 18 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les chaussons ?",
+    text: ["9 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les chaussons coûtent _________.",
+    fill: "9",
+    vfQ: "Prix des chaussons : 9 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Boutique Mode — Soldes
+
+Cette semaine, les jupes sont à 45 % de réduction.
+Les doudounes coûtent 80 francs. Les foulards coûtent 16 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_18 = buildExpressPool("e4-1-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Jupes", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "jupes",
+    vfQ: "Soldes sur les jupes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les jupes ?",
+    text: ["45 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "45",
+    vfQ: "Réduction : 45 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les doudounes ?",
+    text: ["80 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les doudounes coûtent _________.",
+    fill: "80",
+    vfQ: "Prix des doudounes : 80 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les foulards ?",
+    text: ["16 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les foulards coûtent _________.",
+    fill: "16",
+    vfQ: "Prix des foulards : 16 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Boutique Mode — Soldes
+
+Cette semaine, les pyjamas sont à 35 % de réduction.
+Les bikinis coûtent 35 francs. Les sandales coûtent 20 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_19 = buildExpressPool("e4-1-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Pyjamas", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "pyjamas",
+    vfQ: "Soldes sur les pyjamas.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les pyjamas ?",
+    text: ["35 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "35",
+    vfQ: "Réduction : 35 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les bikinis ?",
+    text: ["35 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les bikinis coûtent _________.",
+    fill: "35",
+    vfQ: "Prix des bikinis : 35 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les sandales ?",
+    text: ["20 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les sandales coûtent _________.",
+    fill: "20",
+    vfQ: "Prix des sandales : 20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Boutique Mode — Soldes
+
+Cette semaine, les parkas sont à 50 % de réduction.
+Les t-shirts coûtent 15 francs. Les baskets coûtent 65 francs.
+Les cabines d'essayage sont au premier étage.
+Vous pouvez essayer trois vêtements maximum.`;
+
+const CE_POOL_20 = buildExpressPool("e4-1-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels articles sont en soldes ?",
+    text: ["Parkas", "voitures", "maisons"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les _________ sont en soldes.",
+    fill: "parkas",
+    vfQ: "Soldes sur les parkas.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quelle est la réduction sur les parkas ?",
+    text: ["50 %", "100 %", "0 %"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Réduction de _________.",
+    fill: "50",
+    vfQ: "Réduction : 50 %.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Combien coûtent les t-shirts ?",
+    text: ["15 francs", "1000 francs", "1 franc"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les t-shirts coûtent _________.",
+    fill: "15",
+    vfQ: "Prix des t-shirts : 15 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien coûtent les baskets ?",
+    text: ["65 francs", "500 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les baskets coûtent _________.",
+    fill: "65",
+    vfQ: "Prix des baskets : 65 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où sont les cabines ?",
+    text: ["Au premier étage", "Au sous-sol", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cabines sont au _________ étage.",
+    fill: "premier",
+    vfQ: "Cabines au premier étage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Combien de vêtements peut-on essayer ?",
+    text: ["Trois maximum", "Dix", "Aucun"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Essayer _________ vêtements maximum.",
+    fill: "trois",
+    vfQ: "Maximum trois vêtements.",
+    vfC: 0,
+  }),
+]);
+
+export const E4_1_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e4-1-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e4-1-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e4-1-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e4-1-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e4-1-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e4-1-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e4-1-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e4-1-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e4-1-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e4-1-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e4-1-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e4-1-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e4-1-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e4-1-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e4-1-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e4-1-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e4-1-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e4-1-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e4-1-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e4-1-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème vêtements) ───────────────── */
 
@@ -305,6 +1960,196 @@ export const E4_1_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+{
+  id: "e4-1-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-1-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : les vêtements.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de les vêtements." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -403,4 +2248,134 @@ export const E4_1_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e4-1-pe-11",
+  title: "Texte sur les vêtements — variante 11",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-12",
+  title: "Texte sur les vêtements — variante 12",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-13",
+  title: "Texte sur les vêtements — variante 13",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-14",
+  title: "Texte sur les vêtements — variante 14",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-15",
+  title: "Texte sur les vêtements — variante 15",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-16",
+  title: "Texte sur les vêtements — variante 16",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-17",
+  title: "Texte sur les vêtements — variante 17",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-18",
+  title: "Texte sur les vêtements — variante 18",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-19",
+  title: "Texte sur les vêtements — variante 19",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-1-pe-20",
+  title: "Texte sur les vêtements — variante 20",
+  situation: "Situation liée au thème « les vêtements ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur les vêtements — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

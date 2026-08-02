@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E4.2 Aller au restaurant ──────────────────────── */
+/* ── Compréhension écrite — E4.2 Aller au restaurant ── */
 
-const CE_TEXT = `Restaurant Chez Marie — Informations
+const CE_TEXT_1 = `Restaurant Chez Marie — Informations
 
 Le restaurant est ouvert du mardi au dimanche. Le lundi, c'est fermé.
 Le midi, nous proposons un menu du jour à 19 francs. Il y a une entrée, un plat et un dessert.
@@ -21,8 +21,8 @@ Il y a aussi un plat sans viande et sans poisson. C'est pour les clients végét
 Le soir, pensez à réserver votre table. Téléphonez-nous avant 17 h.
 Les boissons ne sont pas comprises dans le menu. Mais la carafe d'eau est gratuite.`;
 
-const CE_POOL = buildExpressPool("e4-2-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e4-2-1", [
+q({
     id: "ce-q1",
     textQ: "Quel jour le restaurant est-il fermé ?",
     text: ["Le lundi", "Le dimanche", "Le samedi"],
@@ -121,11 +121,1666 @@ const CE_POOL = buildExpressPool("e4-2-ce", [
   }),
 ]);
 
-export const E4_2_CE: CommunicationExercise = readingPoolExercise({
-  id: "e4-2-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Restaurant Le Gourmet — Infos
+
+Ouvert du mardi au dimanche. Fermé le lundi.
+Menu du jour : 19 francs. Entrée, plat, dessert.
+Aujourd'hui : soupe, poulet et tarte.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_2 = buildExpressPool("e4-2-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "mardi",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["19 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "19",
+    vfQ: "Menu : 19 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Soupe", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "soupe",
+    vfQ: "Entrée : soupe.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Poulet", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "poulet",
+    vfQ: "Plat : poulet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Tarte", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "tarte",
+    vfQ: "Dessert : tarte.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Restaurant Le Gourmet — Infos
+
+Ouvert du mercredi au lundi. Fermé le lundi.
+Menu du jour : 22 francs. Entrée, plat, dessert.
+Aujourd'hui : salade, poisson et glace.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_3 = buildExpressPool("e4-2-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du mercredi au lundi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "mercredi",
+    vfQ: "Ouvert du mercredi au lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["22 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "22",
+    vfQ: "Menu : 22 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Salade", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "salade",
+    vfQ: "Entrée : salade.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Poisson", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "poisson",
+    vfQ: "Plat : poisson.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Glace", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "glace",
+    vfQ: "Dessert : glace.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Restaurant Le Gourmet — Infos
+
+Ouvert du jeudi au mardi. Fermé le lundi.
+Menu du jour : 18 francs. Entrée, plat, dessert.
+Aujourd'hui : quiche, steak et mousse.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_4 = buildExpressPool("e4-2-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du jeudi au mardi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "jeudi",
+    vfQ: "Ouvert du jeudi au mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["18 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "18",
+    vfQ: "Menu : 18 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Quiche", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "quiche",
+    vfQ: "Entrée : quiche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Steak", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "steak",
+    vfQ: "Plat : steak.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Mousse", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "mousse",
+    vfQ: "Dessert : mousse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Restaurant Le Gourmet — Infos
+
+Ouvert du vendredi au mercredi. Fermé le lundi.
+Menu du jour : 25 francs. Entrée, plat, dessert.
+Aujourd'hui : velouté, pâtes et crème.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_5 = buildExpressPool("e4-2-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du vendredi au mercredi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "vendredi",
+    vfQ: "Ouvert du vendredi au mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["25 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "25",
+    vfQ: "Menu : 25 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Velouté", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "velouté",
+    vfQ: "Entrée : velouté.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Pâtes", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "pâtes",
+    vfQ: "Plat : pâtes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Crème", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "crème",
+    vfQ: "Dessert : crème.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Restaurant Le Gourmet — Infos
+
+Ouvert du samedi au jeudi. Fermé le lundi.
+Menu du jour : 20 francs. Entrée, plat, dessert.
+Aujourd'hui : carottes, riz et fruit.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_6 = buildExpressPool("e4-2-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du samedi au jeudi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "samedi",
+    vfQ: "Ouvert du samedi au jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["20 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "20",
+    vfQ: "Menu : 20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Carottes", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "carottes",
+    vfQ: "Entrée : carottes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Riz", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "riz",
+    vfQ: "Plat : riz.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Fruit", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "fruit",
+    vfQ: "Dessert : fruit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Restaurant Le Gourmet — Infos
+
+Ouvert du dimanche au vendredi. Fermé le lundi.
+Menu du jour : 21 francs. Entrée, plat, dessert.
+Aujourd'hui : tomate, canard et brownie.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_7 = buildExpressPool("e4-2-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du dimanche au vendredi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du dimanche au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["21 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "21",
+    vfQ: "Menu : 21 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Tomate", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "tomate",
+    vfQ: "Entrée : tomate.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Canard", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "canard",
+    vfQ: "Plat : canard.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Brownie", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "brownie",
+    vfQ: "Dessert : brownie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Restaurant Le Gourmet — Infos
+
+Ouvert du lundi au samedi. Fermé le lundi.
+Menu du jour : 17 francs. Entrée, plat, dessert.
+Aujourd'hui : légumes, saumon et yaourt.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_8 = buildExpressPool("e4-2-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du lundi au samedi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "lundi",
+    vfQ: "Ouvert du lundi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["17 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "17",
+    vfQ: "Menu : 17 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Légumes", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "légumes",
+    vfQ: "Entrée : légumes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Saumon", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "saumon",
+    vfQ: "Plat : saumon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Yaourt", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "yaourt",
+    vfQ: "Dessert : yaourt.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Restaurant Le Gourmet — Infos
+
+Ouvert du mardi au dimanche. Fermé le lundi.
+Menu du jour : 23 francs. Entrée, plat, dessert.
+Aujourd'hui : potage, agneau et sorbet.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_9 = buildExpressPool("e4-2-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "mardi",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["23 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "23",
+    vfQ: "Menu : 23 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Potage", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "potage",
+    vfQ: "Entrée : potage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Agneau", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "agneau",
+    vfQ: "Plat : agneau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Sorbet", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "sorbet",
+    vfQ: "Dessert : sorbet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Restaurant Le Gourmet — Infos
+
+Ouvert du mercredi au lundi. Fermé le lundi.
+Menu du jour : 19 francs. Entrée, plat, dessert.
+Aujourd'hui : crudités, dinde et flan.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_10 = buildExpressPool("e4-2-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du mercredi au lundi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "mercredi",
+    vfQ: "Ouvert du mercredi au lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["19 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "19",
+    vfQ: "Menu : 19 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Crudités", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "crudités",
+    vfQ: "Entrée : crudités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Dinde", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "dinde",
+    vfQ: "Plat : dinde.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Flan", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "flan",
+    vfQ: "Dessert : flan.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Restaurant Le Gourmet — Infos
+
+Ouvert du jeudi au mardi. Fermé le lundi.
+Menu du jour : 24 francs. Entrée, plat, dessert.
+Aujourd'hui : oignon, bœuf et tiramisu.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_11 = buildExpressPool("e4-2-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du jeudi au mardi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "jeudi",
+    vfQ: "Ouvert du jeudi au mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["24 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "24",
+    vfQ: "Menu : 24 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Oignon", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "oignon",
+    vfQ: "Entrée : oignon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Bœuf", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "bœuf",
+    vfQ: "Plat : bœuf.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Tiramisu", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "tiramisu",
+    vfQ: "Dessert : tiramisu.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Restaurant Le Gourmet — Infos
+
+Ouvert du vendredi au mercredi. Fermé le lundi.
+Menu du jour : 20 francs. Entrée, plat, dessert.
+Aujourd'hui : épinards, truite et compote.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_12 = buildExpressPool("e4-2-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du vendredi au mercredi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "vendredi",
+    vfQ: "Ouvert du vendredi au mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["20 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "20",
+    vfQ: "Menu : 20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Épinards", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "épinards",
+    vfQ: "Entrée : épinards.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Truite", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "truite",
+    vfQ: "Plat : truite.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Compote", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "compote",
+    vfQ: "Dessert : compote.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Restaurant Le Gourmet — Infos
+
+Ouvert du samedi au jeudi. Fermé le lundi.
+Menu du jour : 18 francs. Entrée, plat, dessert.
+Aujourd'hui : champignons, porc et cookie.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_13 = buildExpressPool("e4-2-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du samedi au jeudi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "samedi",
+    vfQ: "Ouvert du samedi au jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["18 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "18",
+    vfQ: "Menu : 18 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Champignons", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "champignons",
+    vfQ: "Entrée : champignons.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Porc", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "porc",
+    vfQ: "Plat : porc.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Cookie", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "cookie",
+    vfQ: "Dessert : cookie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Restaurant Le Gourmet — Infos
+
+Ouvert du dimanche au vendredi. Fermé le lundi.
+Menu du jour : 26 francs. Entrée, plat, dessert.
+Aujourd'hui : céleri, veau et profiterole.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_14 = buildExpressPool("e4-2-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du dimanche au vendredi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du dimanche au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["26 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "26",
+    vfQ: "Menu : 26 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Céleri", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "céleri",
+    vfQ: "Entrée : céleri.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Veau", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "veau",
+    vfQ: "Plat : veau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Profiterole", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "profiterole",
+    vfQ: "Dessert : profiterole.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Restaurant Le Gourmet — Infos
+
+Ouvert du lundi au samedi. Fermé le lundi.
+Menu du jour : 19 francs. Entrée, plat, dessert.
+Aujourd'hui : brocoli, cabillaud et muffin.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_15 = buildExpressPool("e4-2-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du lundi au samedi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "lundi",
+    vfQ: "Ouvert du lundi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["19 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "19",
+    vfQ: "Menu : 19 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Brocoli", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "brocoli",
+    vfQ: "Entrée : brocoli.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Cabillaud", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "cabillaud",
+    vfQ: "Plat : cabillaud.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Muffin", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "muffin",
+    vfQ: "Dessert : muffin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Restaurant Le Gourmet — Infos
+
+Ouvert du mardi au dimanche. Fermé le lundi.
+Menu du jour : 22 francs. Entrée, plat, dessert.
+Aujourd'hui : courgette, lapin et macaron.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_16 = buildExpressPool("e4-2-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "mardi",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["22 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "22",
+    vfQ: "Menu : 22 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Courgette", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "courgette",
+    vfQ: "Entrée : courgette.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Lapin", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "lapin",
+    vfQ: "Plat : lapin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Macaron", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "macaron",
+    vfQ: "Dessert : macaron.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Restaurant Le Gourmet — Infos
+
+Ouvert du mercredi au lundi. Fermé le lundi.
+Menu du jour : 21 francs. Entrée, plat, dessert.
+Aujourd'hui : navet, colin et clafoutis.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_17 = buildExpressPool("e4-2-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du mercredi au lundi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "mercredi",
+    vfQ: "Ouvert du mercredi au lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["21 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "21",
+    vfQ: "Menu : 21 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Navet", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "navet",
+    vfQ: "Entrée : navet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Colin", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "colin",
+    vfQ: "Plat : colin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Clafoutis", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "clafoutis",
+    vfQ: "Dessert : clafoutis.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Restaurant Le Gourmet — Infos
+
+Ouvert du jeudi au mardi. Fermé le lundi.
+Menu du jour : 20 francs. Entrée, plat, dessert.
+Aujourd'hui : poireau, saucisse et éclair.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_18 = buildExpressPool("e4-2-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du jeudi au mardi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "jeudi",
+    vfQ: "Ouvert du jeudi au mardi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["20 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "20",
+    vfQ: "Menu : 20 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Poireau", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "poireau",
+    vfQ: "Entrée : poireau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Saucisse", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "saucisse",
+    vfQ: "Plat : saucisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Éclair", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "éclair",
+    vfQ: "Dessert : éclair.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Restaurant Le Gourmet — Infos
+
+Ouvert du vendredi au mercredi. Fermé le lundi.
+Menu du jour : 23 francs. Entrée, plat, dessert.
+Aujourd'hui : haricots, omelette et donut.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_19 = buildExpressPool("e4-2-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du vendredi au mercredi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "vendredi",
+    vfQ: "Ouvert du vendredi au mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["23 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "23",
+    vfQ: "Menu : 23 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Haricots", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "haricots",
+    vfQ: "Entrée : haricots.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Omelette", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "omelette",
+    vfQ: "Plat : omelette.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Donut", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "donut",
+    vfQ: "Dessert : donut.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Restaurant Le Gourmet — Infos
+
+Ouvert du samedi au jeudi. Fermé le lundi.
+Menu du jour : 19 francs. Entrée, plat, dessert.
+Aujourd'hui : maïs, burger et panna cotta.
+Plat végétarien disponible. Réservation conseillée.`;
+
+const CE_POOL_20 = buildExpressPool("e4-2-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le restaurant est-il ouvert ?",
+    text: ["Du samedi au jeudi", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du _________.",
+    fill: "samedi",
+    vfQ: "Ouvert du samedi au jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien coûte le menu du jour ?",
+    text: ["19 francs", "100 francs", "gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Menu à _________.",
+    fill: "19",
+    vfQ: "Menu : 19 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle est l'entrée du jour ?",
+    text: ["Maïs", "pizza", "sushi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Entrée : _________.",
+    fill: "maïs",
+    vfQ: "Entrée : maïs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel est le plat du jour ?",
+    text: ["Burger", "glace", "pain"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat : _________.",
+    fill: "burger",
+    vfQ: "Plat : burger.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel est le dessert ?",
+    text: ["Panna cotta", "salade", "soupe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Dessert : _________.",
+    fill: "panna cotta",
+    vfQ: "Dessert : panna cotta.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il un plat végétarien ?",
+    text: ["Oui", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Plat _________ disponible.",
+    fill: "végétarien",
+    vfQ: "Plat végétarien disponible.",
+    vfC: 0,
+  }),
+]);
+
+export const E4_2_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e4-2-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e4-2-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e4-2-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e4-2-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e4-2-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e4-2-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e4-2-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e4-2-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e4-2-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e4-2-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e4-2-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e4-2-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e4-2-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e4-2-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e4-2-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e4-2-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e4-2-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e4-2-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e4-2-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e4-2-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème restaurant) ──────────────── */
 
@@ -323,6 +1978,196 @@ export const E4_2_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+{
+  id: "e4-2-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e4-2-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : le restaurant.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le restaurant." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -421,4 +2266,134 @@ export const E4_2_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e4-2-pe-11",
+  title: "Texte sur le restaurant — variante 11",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-12",
+  title: "Texte sur le restaurant — variante 12",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-13",
+  title: "Texte sur le restaurant — variante 13",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-14",
+  title: "Texte sur le restaurant — variante 14",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-15",
+  title: "Texte sur le restaurant — variante 15",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-16",
+  title: "Texte sur le restaurant — variante 16",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-17",
+  title: "Texte sur le restaurant — variante 17",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-18",
+  title: "Texte sur le restaurant — variante 18",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-19",
+  title: "Texte sur le restaurant — variante 19",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e4-2-pe-20",
+  title: "Texte sur le restaurant — variante 20",
+  situation: "Situation liée au thème « le restaurant ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le restaurant — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

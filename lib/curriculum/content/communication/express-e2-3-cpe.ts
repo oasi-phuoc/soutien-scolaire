@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E2.3 Respecter le règlement ───────────────────── */
+/* ── Compréhension écrite — E2.3 Respecter le règlement ── */
 
-const CE_TEXT = `Règlement de l'immeuble — Résidence des Tilleuls
+const CE_TEXT_1 = `Règlement de l'immeuble — Résidence des Tilleuls
 
 Chers habitants,
 Pour bien vivre ensemble, merci de respecter ces règles :
@@ -23,8 +23,8 @@ Pour bien vivre ensemble, merci de respecter ces règles :
 — Il est interdit de fumer dans les couloirs et dans l'ascenseur.
 Pour toute question, écrivez à la gérance. Merci et bonne journée à tous !`;
 
-const CE_POOL = buildExpressPool("e2-3-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e2-3-1", [
+q({
     id: "ce-q1",
     textQ: "Après quelle heure ne faut-il pas faire de bruit ?",
     text: ["Après 22 heures", "Après 20 heures", "Après minuit"],
@@ -124,11 +124,1723 @@ const CE_POOL = buildExpressPool("e2-3-ce", [
   }),
 ]);
 
-export const E2_3_CE: CommunicationExercise = readingPoolExercise({
-  id: "e2-3-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Règlement — Résidence 2
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de bruit après 22 heures.
+— Rangez les vélos dans le local vélo.
+— Le ascenseur doit rester libre.
+— Les animaux sont interdits après 22 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_2 = buildExpressPool("e2-3-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["22 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de bruit après _________.",
+    fill: "22eures",
+    vfQ: "Il faut être calme après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les vélos ?",
+    text: ["Les ranger dans le local vélo", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les vélos dans le _________.",
+    fill: "vélo",
+    vfQ: "Il faut ranger les vélos.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Ascenseur", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le ascenseur doit rester _________.",
+    fill: "libre",
+    vfQ: "Le ascenseur doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de bruit après 22 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 22 heures.",
+    fill: "bruit",
+    vfQ: "Pas de bruit après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les animaux ?",
+    text: ["Interdits après 22 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les animaux sont _________ après 22 heures.",
+    fill: "interdits",
+    vfQ: "Les animaux sont interdits après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Règlement — Résidence 3
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de musique après 21 heures.
+— Rangez les poussettes dans le hall.
+— Le escalier doit rester libre.
+— Les fêtes sont interdits après 21 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_3 = buildExpressPool("e2-3-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["21 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de musique après _________.",
+    fill: "21eures",
+    vfQ: "Il faut être calme après 21 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les poussettes ?",
+    text: ["Les ranger dans le hall", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les poussettes dans le _________.",
+    fill: "hall",
+    vfQ: "Il faut ranger les poussettes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Escalier", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le escalier doit rester _________.",
+    fill: "libre",
+    vfQ: "Le escalier doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de musique après 21 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 21 heures.",
+    fill: "musique",
+    vfQ: "Pas de musique après 21 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les fêtes ?",
+    text: ["Interdits après 21 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les fêtes sont _________ après 21 heures.",
+    fill: "interdits",
+    vfQ: "Les fêtes sont interdits après 21 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Règlement — Résidence 4
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de télévision après 23 heures.
+— Rangez les objets dans le cave.
+— Le parking doit rester libre.
+— Les barbecue sont interdits après 23 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_4 = buildExpressPool("e2-3-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["23 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de télévision après _________.",
+    fill: "23eures",
+    vfQ: "Il faut être calme après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les objets ?",
+    text: ["Les ranger dans le cave", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les objets dans le _________.",
+    fill: "cave",
+    vfQ: "Il faut ranger les objets.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Parking", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le parking doit rester _________.",
+    fill: "libre",
+    vfQ: "Le parking doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de télévision après 23 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 23 heures.",
+    fill: "télévision",
+    vfQ: "Pas de télévision après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les barbecue ?",
+    text: ["Interdits après 23 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les barbecue sont _________ après 23 heures.",
+    fill: "interdits",
+    vfQ: "Les barbecue sont interdits après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Règlement — Résidence 5
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de voix après 20 heures.
+— Rangez les colis dans le boîtes aux lettres.
+— Le jardin doit rester libre.
+— Les ballons sont interdits après 20 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_5 = buildExpressPool("e2-3-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["20 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de voix après _________.",
+    fill: "20eures",
+    vfQ: "Il faut être calme après 20 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les colis ?",
+    text: ["Les ranger dans le boîtes aux lettres", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les colis dans le _________.",
+    fill: "lettres",
+    vfQ: "Il faut ranger les colis.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Jardin", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jardin doit rester _________.",
+    fill: "libre",
+    vfQ: "Le jardin doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de voix après 20 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 20 heures.",
+    fill: "voix",
+    vfQ: "Pas de voix après 20 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les ballons ?",
+    text: ["Interdits après 20 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les ballons sont _________ après 20 heures.",
+    fill: "interdits",
+    vfQ: "Les ballons sont interdits après 20 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Règlement — Résidence 6
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de bruit après 22 h 30.
+— Rangez les vélos dans le garage.
+— Le local poubelles doit rester libre.
+— Les fenêtres sont interdits après 22 h 30.
+Merci de votre compréhension.`;
+
+const CE_POOL_6 = buildExpressPool("e2-3-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["22 h 30", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de bruit après _________.",
+    fill: "22",
+    vfQ: "Il faut être calme après 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les vélos ?",
+    text: ["Les ranger dans le garage", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les vélos dans le _________.",
+    fill: "garage",
+    vfQ: "Il faut ranger les vélos.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Local poubelles", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le local poubelles doit rester _________.",
+    fill: "libre",
+    vfQ: "Le local poubelles doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de bruit après 22 h 30", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 22 h 30.",
+    fill: "bruit",
+    vfQ: "Pas de bruit après 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les fenêtres ?",
+    text: ["Interdits après 22 h 30", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les fenêtres sont _________ après 22 h 30.",
+    fill: "interdits",
+    vfQ: "Les fenêtres sont interdits après 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Règlement — Résidence 7
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de fêtes après 21 h 30.
+— Rangez les trottinettes dans le local.
+— Le hall doit rester libre.
+— Les musique sont interdits après 21 h 30.
+Merci de votre compréhension.`;
+
+const CE_POOL_7 = buildExpressPool("e2-3-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["21 h 30", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de fêtes après _________.",
+    fill: "21",
+    vfQ: "Il faut être calme après 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les trottinettes ?",
+    text: ["Les ranger dans le local", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les trottinettes dans le _________.",
+    fill: "local",
+    vfQ: "Il faut ranger les trottinettes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Hall", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le hall doit rester _________.",
+    fill: "libre",
+    vfQ: "Le hall doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de fêtes après 21 h 30", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 21 h 30.",
+    fill: "fêtes",
+    vfQ: "Pas de fêtes après 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les musique ?",
+    text: ["Interdits après 21 h 30", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les musique sont _________ après 21 h 30.",
+    fill: "interdits",
+    vfQ: "Les musique sont interdits après 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Règlement — Résidence 8
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de enfants après 22 heures.
+— Rangez les jouets dans le hall.
+— Le ascenseur doit rester libre.
+— Les portes sont interdits après 22 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_8 = buildExpressPool("e2-3-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["22 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de enfants après _________.",
+    fill: "22eures",
+    vfQ: "Il faut être calme après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les jouets ?",
+    text: ["Les ranger dans le hall", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les jouets dans le _________.",
+    fill: "hall",
+    vfQ: "Il faut ranger les jouets.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Ascenseur", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le ascenseur doit rester _________.",
+    fill: "libre",
+    vfQ: "Le ascenseur doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de enfants après 22 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 22 heures.",
+    fill: "enfants",
+    vfQ: "Pas de enfants après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les portes ?",
+    text: ["Interdits après 22 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les portes sont _________ après 22 heures.",
+    fill: "interdits",
+    vfQ: "Les portes sont interdits après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Règlement — Résidence 9
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de bruit après 20 h 30.
+— Rangez les vélos dans le cave.
+— Le escalier doit rester libre.
+— Les voitures sont interdits après 20 h 30.
+Merci de votre compréhension.`;
+
+const CE_POOL_9 = buildExpressPool("e2-3-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["20 h 30", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de bruit après _________.",
+    fill: "20",
+    vfQ: "Il faut être calme après 20 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les vélos ?",
+    text: ["Les ranger dans le cave", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les vélos dans le _________.",
+    fill: "cave",
+    vfQ: "Il faut ranger les vélos.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Escalier", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le escalier doit rester _________.",
+    fill: "libre",
+    vfQ: "Le escalier doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de bruit après 20 h 30", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 20 h 30.",
+    fill: "bruit",
+    vfQ: "Pas de bruit après 20 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les voitures ?",
+    text: ["Interdits après 20 h 30", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les voitures sont _________ après 20 h 30.",
+    fill: "interdits",
+    vfQ: "Les voitures sont interdits après 20 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Règlement — Résidence 10
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de musique après 23 heures.
+— Rangez les objets dans le local vélo.
+— Le parking doit rester libre.
+— Les fêtes sont interdits après 23 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_10 = buildExpressPool("e2-3-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["23 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de musique après _________.",
+    fill: "23eures",
+    vfQ: "Il faut être calme après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les objets ?",
+    text: ["Les ranger dans le local vélo", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les objets dans le _________.",
+    fill: "vélo",
+    vfQ: "Il faut ranger les objets.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Parking", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le parking doit rester _________.",
+    fill: "libre",
+    vfQ: "Le parking doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de musique après 23 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 23 heures.",
+    fill: "musique",
+    vfQ: "Pas de musique après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les fêtes ?",
+    text: ["Interdits après 23 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les fêtes sont _________ après 23 heures.",
+    fill: "interdits",
+    vfQ: "Les fêtes sont interdits après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Règlement — Résidence 11
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de télé après 22 heures.
+— Rangez les poussettes dans le hall.
+— Le jardin doit rester libre.
+— Les animaux sont interdits après 22 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_11 = buildExpressPool("e2-3-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["22 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de télé après _________.",
+    fill: "22eures",
+    vfQ: "Il faut être calme après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les poussettes ?",
+    text: ["Les ranger dans le hall", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les poussettes dans le _________.",
+    fill: "hall",
+    vfQ: "Il faut ranger les poussettes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Jardin", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jardin doit rester _________.",
+    fill: "libre",
+    vfQ: "Le jardin doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de télé après 22 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 22 heures.",
+    fill: "télé",
+    vfQ: "Pas de télé après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les animaux ?",
+    text: ["Interdits après 22 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les animaux sont _________ après 22 heures.",
+    fill: "interdits",
+    vfQ: "Les animaux sont interdits après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Règlement — Résidence 12
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de bruit après 21 heures.
+— Rangez les colis dans le boîtes aux lettres.
+— Le ascenseur doit rester libre.
+— Les fenêtres sont interdits après 21 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_12 = buildExpressPool("e2-3-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["21 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de bruit après _________.",
+    fill: "21eures",
+    vfQ: "Il faut être calme après 21 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les colis ?",
+    text: ["Les ranger dans le boîtes aux lettres", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les colis dans le _________.",
+    fill: "lettres",
+    vfQ: "Il faut ranger les colis.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Ascenseur", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le ascenseur doit rester _________.",
+    fill: "libre",
+    vfQ: "Le ascenseur doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de bruit après 21 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 21 heures.",
+    fill: "bruit",
+    vfQ: "Pas de bruit après 21 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les fenêtres ?",
+    text: ["Interdits après 21 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les fenêtres sont _________ après 21 heures.",
+    fill: "interdits",
+    vfQ: "Les fenêtres sont interdits après 21 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Règlement — Résidence 13
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de voix après 22 h 30.
+— Rangez les vélos dans le garage.
+— Le local poubelles doit rester libre.
+— Les barbecue sont interdits après 22 h 30.
+Merci de votre compréhension.`;
+
+const CE_POOL_13 = buildExpressPool("e2-3-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["22 h 30", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de voix après _________.",
+    fill: "22",
+    vfQ: "Il faut être calme après 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les vélos ?",
+    text: ["Les ranger dans le garage", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les vélos dans le _________.",
+    fill: "garage",
+    vfQ: "Il faut ranger les vélos.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Local poubelles", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le local poubelles doit rester _________.",
+    fill: "libre",
+    vfQ: "Le local poubelles doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de voix après 22 h 30", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 22 h 30.",
+    fill: "voix",
+    vfQ: "Pas de voix après 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les barbecue ?",
+    text: ["Interdits après 22 h 30", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les barbecue sont _________ après 22 h 30.",
+    fill: "interdits",
+    vfQ: "Les barbecue sont interdits après 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Règlement — Résidence 14
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de musique après 20 heures.
+— Rangez les trottinettes dans le local.
+— Le hall doit rester libre.
+— Les ballons sont interdits après 20 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_14 = buildExpressPool("e2-3-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["20 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de musique après _________.",
+    fill: "20eures",
+    vfQ: "Il faut être calme après 20 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les trottinettes ?",
+    text: ["Les ranger dans le local", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les trottinettes dans le _________.",
+    fill: "local",
+    vfQ: "Il faut ranger les trottinettes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Hall", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le hall doit rester _________.",
+    fill: "libre",
+    vfQ: "Le hall doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de musique après 20 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 20 heures.",
+    fill: "musique",
+    vfQ: "Pas de musique après 20 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les ballons ?",
+    text: ["Interdits après 20 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les ballons sont _________ après 20 heures.",
+    fill: "interdits",
+    vfQ: "Les ballons sont interdits après 20 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Règlement — Résidence 15
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de bruit après 23 heures.
+— Rangez les objets dans le cave.
+— Le parking doit rester libre.
+— Les portes sont interdits après 23 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_15 = buildExpressPool("e2-3-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["23 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de bruit après _________.",
+    fill: "23eures",
+    vfQ: "Il faut être calme après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les objets ?",
+    text: ["Les ranger dans le cave", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les objets dans le _________.",
+    fill: "cave",
+    vfQ: "Il faut ranger les objets.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Parking", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le parking doit rester _________.",
+    fill: "libre",
+    vfQ: "Le parking doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de bruit après 23 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 23 heures.",
+    fill: "bruit",
+    vfQ: "Pas de bruit après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les portes ?",
+    text: ["Interdits après 23 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les portes sont _________ après 23 heures.",
+    fill: "interdits",
+    vfQ: "Les portes sont interdits après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Règlement — Résidence 16
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de fêtes après 22 heures.
+— Rangez les poussettes dans le hall.
+— Le escalier doit rester libre.
+— Les animaux sont interdits après 22 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_16 = buildExpressPool("e2-3-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["22 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de fêtes après _________.",
+    fill: "22eures",
+    vfQ: "Il faut être calme après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les poussettes ?",
+    text: ["Les ranger dans le hall", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les poussettes dans le _________.",
+    fill: "hall",
+    vfQ: "Il faut ranger les poussettes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Escalier", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le escalier doit rester _________.",
+    fill: "libre",
+    vfQ: "Le escalier doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de fêtes après 22 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 22 heures.",
+    fill: "fêtes",
+    vfQ: "Pas de fêtes après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les animaux ?",
+    text: ["Interdits après 22 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les animaux sont _________ après 22 heures.",
+    fill: "interdits",
+    vfQ: "Les animaux sont interdits après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Règlement — Résidence 17
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de télé après 21 h 30.
+— Rangez les vélos dans le local vélo.
+— Le jardin doit rester libre.
+— Les voitures sont interdits après 21 h 30.
+Merci de votre compréhension.`;
+
+const CE_POOL_17 = buildExpressPool("e2-3-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["21 h 30", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de télé après _________.",
+    fill: "21",
+    vfQ: "Il faut être calme après 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les vélos ?",
+    text: ["Les ranger dans le local vélo", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les vélos dans le _________.",
+    fill: "vélo",
+    vfQ: "Il faut ranger les vélos.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Jardin", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jardin doit rester _________.",
+    fill: "libre",
+    vfQ: "Le jardin doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de télé après 21 h 30", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 21 h 30.",
+    fill: "télé",
+    vfQ: "Pas de télé après 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les voitures ?",
+    text: ["Interdits après 21 h 30", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les voitures sont _________ après 21 h 30.",
+    fill: "interdits",
+    vfQ: "Les voitures sont interdits après 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Règlement — Résidence 18
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de enfants après 22 heures.
+— Rangez les colis dans le boîtes aux lettres.
+— Le ascenseur doit rester libre.
+— Les musique sont interdits après 22 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_18 = buildExpressPool("e2-3-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["22 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de enfants après _________.",
+    fill: "22eures",
+    vfQ: "Il faut être calme après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les colis ?",
+    text: ["Les ranger dans le boîtes aux lettres", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les colis dans le _________.",
+    fill: "lettres",
+    vfQ: "Il faut ranger les colis.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Ascenseur", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le ascenseur doit rester _________.",
+    fill: "libre",
+    vfQ: "Le ascenseur doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de enfants après 22 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 22 heures.",
+    fill: "enfants",
+    vfQ: "Pas de enfants après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les musique ?",
+    text: ["Interdits après 22 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les musique sont _________ après 22 heures.",
+    fill: "interdits",
+    vfQ: "Les musique sont interdits après 22 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Règlement — Résidence 19
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de bruit après 20 h 30.
+— Rangez les objets dans le garage.
+— Le local poubelles doit rester libre.
+— Les fenêtres sont interdits après 20 h 30.
+Merci de votre compréhension.`;
+
+const CE_POOL_19 = buildExpressPool("e2-3-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["20 h 30", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de bruit après _________.",
+    fill: "20",
+    vfQ: "Il faut être calme après 20 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les objets ?",
+    text: ["Les ranger dans le garage", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les objets dans le _________.",
+    fill: "garage",
+    vfQ: "Il faut ranger les objets.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Local poubelles", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le local poubelles doit rester _________.",
+    fill: "libre",
+    vfQ: "Le local poubelles doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de bruit après 20 h 30", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 20 h 30.",
+    fill: "bruit",
+    vfQ: "Pas de bruit après 20 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les fenêtres ?",
+    text: ["Interdits après 20 h 30", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les fenêtres sont _________ après 20 h 30.",
+    fill: "interdits",
+    vfQ: "Les fenêtres sont interdits après 20 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Règlement — Résidence 20
+
+Chers habitants,
+Merci de respecter ces règles :
+— Pas de musique après 23 heures.
+— Rangez les trottinettes dans le local.
+— Le parking doit rester libre.
+— Les barbecue sont interdits après 23 heures.
+Merci de votre compréhension.`;
+
+const CE_POOL_20 = buildExpressPool("e2-3-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Jusqu'à quelle heure faut-il être calme ?",
+    text: ["23 heures", "midi", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de musique après _________.",
+    fill: "23eures",
+    vfQ: "Il faut être calme après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faut-il faire avec les trottinettes ?",
+    text: ["Les ranger dans le local", "Les laisser dans le hall", "Les vendre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Rangez les trottinettes dans le _________.",
+    fill: "local",
+    vfQ: "Il faut ranger les trottinettes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quelle zone doit rester libre ?",
+    text: ["Parking", "la cave", "le toit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le parking doit rester _________.",
+    fill: "libre",
+    vfQ: "Le parking doit rester libre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que dit le règlement sur le bruit ?",
+    text: ["Pas de musique après 23 heures", "Du bruit toute la nuit", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pas de _________ après 23 heures.",
+    fill: "musique",
+    vfQ: "Pas de musique après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que dit le règlement sur les barbecue ?",
+    text: ["Interdits après 23 heures", "Toujours autorisés", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les barbecue sont _________ après 23 heures.",
+    fill: "interdits",
+    vfQ: "Les barbecue sont interdits après 23 heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À qui s'adresse ce texte ?",
+    text: ["Aux habitants", "Aux touristes", "Aux enfants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chers _________,",
+    fill: "habitants",
+    vfQ: "Le texte s'adresse aux habitants.",
+    vfC: 0,
+  }),
+]);
+
+export const E2_3_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e2-3-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e2-3-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e2-3-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e2-3-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e2-3-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e2-3-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e2-3-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e2-3-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e2-3-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e2-3-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e2-3-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e2-3-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e2-3-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e2-3-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e2-3-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e2-3-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e2-3-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e2-3-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e2-3-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e2-3-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème règlement) ────────────────── */
 
@@ -327,6 +2039,196 @@ export const E2_3_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+{
+  id: "e2-3-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e2-3-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : le règlement.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le règlement." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -425,4 +2327,134 @@ export const E2_3_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e2-3-pe-11",
+  title: "Texte sur le règlement — variante 11",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-12",
+  title: "Texte sur le règlement — variante 12",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-13",
+  title: "Texte sur le règlement — variante 13",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-14",
+  title: "Texte sur le règlement — variante 14",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-15",
+  title: "Texte sur le règlement — variante 15",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-16",
+  title: "Texte sur le règlement — variante 16",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-17",
+  title: "Texte sur le règlement — variante 17",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-18",
+  title: "Texte sur le règlement — variante 18",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-19",
+  title: "Texte sur le règlement — variante 19",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e2-3-pe-20",
+  title: "Texte sur le règlement — variante 20",
+  situation: "Situation liée au thème « le règlement ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le règlement — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];
