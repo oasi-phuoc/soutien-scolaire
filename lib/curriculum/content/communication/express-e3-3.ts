@@ -17,7 +17,7 @@ export const EXPRESS_E3_3: CommunicationLesson = {
       items: [
         { code: "E3.2", title: "Quotidien", href: "/communication/E3-2" },
         { code: "V1.6", title: "Description morale", href: "/francais/vocabulaire/v1-description-morale" },
-        { code: "G2.4", title: "Genre des adjectifs", href: "/francais/grammaire/a1-gr-l03" }
+        { code: "G2.7", title: "Genre des adjectifs", href: "/francais/grammaire/a1-gr-l03" }
       ],
     },
     {
