@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E1.3 Inviter à une fête ────────────────────────── */
+/* ── Compréhension écrite — E1.3 Inviter à une fête ── */
 
-const CE_TEXT = `Invitation — Fête d'anniversaire
+const CE_TEXT_1 = `Invitation — Fête d'anniversaire
 
 Chers voisins,
 Samedi 14 juin, nous organisons une fête. C'est pour les 30 ans de Karim. C'est un apéro dans le jardin, derrière l'immeuble.
@@ -22,8 +22,8 @@ Attention ! S'il pleut, la fête est annulée. Merci de répondre avant mercredi
 À samedi !
 Karim et Julie`;
 
-const CE_POOL = buildExpressPool("e1-3-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e1-3-1", [
+q({
     id: "ce-q1",
     textQ: "Qu'est-ce que Karim et Julie organisent ?",
     text: ["Une fête d'anniversaire", "Un pique-nique", "Un repas au restaurant"],
@@ -129,11 +129,1723 @@ const CE_POOL = buildExpressPool("e1-3-ce", [
   }),
 ]);
 
-export const E1_3_CE: CommunicationExercise = readingPoolExercise({
-  id: "e1-3-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Invitation
+
+Chers amis,
+Samir organise une anniversaire. C'est samedi 5 juillet.
+La fête commence à 19 h. Elle finit vers 22 h.
+C'est dans le jardin. Vous pouvez apporter du gâteau.
+Merci de répondre avant mercredi.
+À bientôt !
+Samir`;
+
+const CE_POOL_2 = buildExpressPool("e1-3-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Samir", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Samir organise une _________.",
+    fill: "anniversaire",
+    vfQ: "Samir organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 5 juillet", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 5 juillet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["19 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "19",
+    vfQ: "La fête commence à 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le jardin", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "jardin",
+    vfQ: "La fête est dans le jardin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Gâteau", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "gâteau",
+    vfQ: "On peut apporter du gâteau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Invitation
+
+Chers amis,
+Nina organise une soirée jeux. C'est vendredi 20 mars.
+La fête commence à 18 h 30. Elle finit vers 23 h.
+C'est dans le salon. Vous pouvez apporter du chips.
+Merci de répondre avant mercredi.
+À bientôt !
+Nina`;
+
+const CE_POOL_3 = buildExpressPool("e1-3-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Nina", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nina organise une _________.",
+    fill: "soirée jeux",
+    vfQ: "Nina organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Vendredi 20 mars", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "vendredi",
+    vfQ: "La fête est vendredi 20 mars.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["18 h 30", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "18",
+    vfQ: "La fête commence à 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le salon", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "salon",
+    vfQ: "La fête est dans le salon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Chips", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "chips",
+    vfQ: "On peut apporter du chips.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Invitation
+
+Chers amis,
+Paul organise une barbecue. C'est dimanche 12 avril.
+La fête commence à 12 h. Elle finit vers 16 h.
+C'est dans le terrasse. Vous pouvez apporter du salade.
+Merci de répondre avant mercredi.
+À bientôt !
+Paul`;
+
+const CE_POOL_4 = buildExpressPool("e1-3-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Paul", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Paul organise une _________.",
+    fill: "barbecue",
+    vfQ: "Paul organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Dimanche 12 avril", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "dimanche",
+    vfQ: "La fête est dimanche 12 avril.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["12 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "12",
+    vfQ: "La fête commence à 12 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le terrasse", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "terrasse",
+    vfQ: "La fête est dans le terrasse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Salade", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "salade",
+    vfQ: "On peut apporter du salade.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Invitation
+
+Chers amis,
+Aïcha organise une fête de fin d'année. C'est samedi 8 mai.
+La fête commence à 20 h. Elle finit vers minuit.
+C'est dans le appartement. Vous pouvez apporter du boissons.
+Merci de répondre avant mercredi.
+À bientôt !
+Aïcha`;
+
+const CE_POOL_5 = buildExpressPool("e1-3-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Aïcha", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Aïcha organise une _________.",
+    fill: "fête de fin d'année",
+    vfQ: "Aïcha organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 8 mai", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 8 mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["20 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "20",
+    vfQ: "La fête commence à 20 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le appartement", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "appartement",
+    vfQ: "La fête est dans le appartement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Boissons", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "boissons",
+    vfQ: "On peut apporter du boissons.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Invitation
+
+Chers amis,
+Marc organise une apéro. C'est jeudi 1er juin.
+La fête commence à 17 h. Elle finit vers 20 h.
+C'est dans le balcon. Vous pouvez apporter du fromage.
+Merci de répondre avant mercredi.
+À bientôt !
+Marc`;
+
+const CE_POOL_6 = buildExpressPool("e1-3-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Marc", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Marc organise une _________.",
+    fill: "apéro",
+    vfQ: "Marc organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Jeudi 1er juin", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "jeudi",
+    vfQ: "La fête est jeudi 1er juin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["17 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "17",
+    vfQ: "La fête commence à 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le balcon", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "balcon",
+    vfQ: "La fête est dans le balcon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Fromage", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "fromage",
+    vfQ: "On peut apporter du fromage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Invitation
+
+Chers amis,
+Léa organise une brunch. C'est samedi 15 août.
+La fête commence à 11 h. Elle finit vers 15 h.
+C'est dans le cuisine. Vous pouvez apporter du fruits.
+Merci de répondre avant mercredi.
+À bientôt !
+Léa`;
+
+const CE_POOL_7 = buildExpressPool("e1-3-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Léa", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Léa organise une _________.",
+    fill: "brunch",
+    vfQ: "Léa organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 15 août", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 15 août.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["11 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "11",
+    vfQ: "La fête commence à 11 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le cuisine", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "cuisine",
+    vfQ: "La fête est dans le cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Fruits", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "fruits",
+    vfQ: "On peut apporter du fruits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Invitation
+
+Chers amis,
+Hugo organise une Halloween. C'est vendredi 25 septembre.
+La fête commence à 19 h. Elle finit vers 23 h 30.
+C'est dans le maison. Vous pouvez apporter du bonbons.
+Merci de répondre avant mercredi.
+À bientôt !
+Hugo`;
+
+const CE_POOL_8 = buildExpressPool("e1-3-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Hugo", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Hugo organise une _________.",
+    fill: "Halloween",
+    vfQ: "Hugo organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Vendredi 25 septembre", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "vendredi",
+    vfQ: "La fête est vendredi 25 septembre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["19 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "19",
+    vfQ: "La fête commence à 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le maison", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "maison",
+    vfQ: "La fête est dans le maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Bonbons", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "bonbons",
+    vfQ: "On peut apporter du bonbons.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Invitation
+
+Chers amis,
+Inès organise une fête des voisins. C'est samedi 10 octobre.
+La fête commence à 18 h. Elle finit vers 22 h.
+C'est dans le cour. Vous pouvez apporter du tarte.
+Merci de répondre avant mercredi.
+À bientôt !
+Inès`;
+
+const CE_POOL_9 = buildExpressPool("e1-3-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Inès", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inès organise une _________.",
+    fill: "fête des voisins",
+    vfQ: "Inès organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 10 octobre", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 10 octobre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["18 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "18",
+    vfQ: "La fête commence à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le cour", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "cour",
+    vfQ: "La fête est dans le cour.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Tarte", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "tarte",
+    vfQ: "On peut apporter du tarte.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Invitation
+
+Chers amis,
+David organise une soirée dansante. C'est samedi 21 novembre.
+La fête commence à 20 h. Elle finit vers 1 h.
+C'est dans le salle. Vous pouvez apporter du pizza.
+Merci de répondre avant mercredi.
+À bientôt !
+David`;
+
+const CE_POOL_10 = buildExpressPool("e1-3-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["David", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "David organise une _________.",
+    fill: "soirée dansante",
+    vfQ: "David organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 21 novembre", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 21 novembre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["20 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "20",
+    vfQ: "La fête commence à 20 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le salle", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "salle",
+    vfQ: "La fête est dans le salle.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Pizza", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "pizza",
+    vfQ: "On peut apporter du pizza.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Invitation
+
+Chers amis,
+Camille organise une goûter de Noël. C'est dimanche 6 décembre.
+La fête commence à 16 h. Elle finit vers 19 h.
+C'est dans le salon. Vous pouvez apporter du chocolat.
+Merci de répondre avant mercredi.
+À bientôt !
+Camille`;
+
+const CE_POOL_11 = buildExpressPool("e1-3-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Camille", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Camille organise une _________.",
+    fill: "goûter de Noël",
+    vfQ: "Camille organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Dimanche 6 décembre", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "dimanche",
+    vfQ: "La fête est dimanche 6 décembre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["16 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "16",
+    vfQ: "La fête commence à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le salon", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "salon",
+    vfQ: "La fête est dans le salon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Chocolat", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "chocolat",
+    vfQ: "On peut apporter du chocolat.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Invitation
+
+Chers amis,
+Romain organise une Saint-Valentin. C'est samedi 14 février.
+La fête commence à 19 h 30. Elle finit vers 23 h.
+C'est dans le restaurant maison. Vous pouvez apporter du dessert.
+Merci de répondre avant mercredi.
+À bientôt !
+Romain`;
+
+const CE_POOL_12 = buildExpressPool("e1-3-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Romain", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Romain organise une _________.",
+    fill: "Saint-Valentin",
+    vfQ: "Romain organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 14 février", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 14 février.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["19 h 30", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "19",
+    vfQ: "La fête commence à 19 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le restaurant maison", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "restaurant maison",
+    vfQ: "La fête est dans le restaurant maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Dessert", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "dessert",
+    vfQ: "On peut apporter du dessert.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Invitation
+
+Chers amis,
+Salma organise une fête de printemps. C'est samedi 3 avril.
+La fête commence à 18 h. Elle finit vers 21 h.
+C'est dans le parc. Vous pouvez apporter du jus.
+Merci de répondre avant mercredi.
+À bientôt !
+Salma`;
+
+const CE_POOL_13 = buildExpressPool("e1-3-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Salma", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Salma organise une _________.",
+    fill: "fête de printemps",
+    vfQ: "Salma organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 3 avril", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 3 avril.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["18 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "18",
+    vfQ: "La fête commence à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le parc", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "parc",
+    vfQ: "La fête est dans le parc.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Jus", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "jus",
+    vfQ: "On peut apporter du jus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Invitation
+
+Chers amis,
+Victor organise une pot de départ. C'est vendredi 17 mai.
+La fête commence à 19 h. Elle finit vers 22 h.
+C'est dans le bureau transformé. Vous pouvez apporter du vin.
+Merci de répondre avant mercredi.
+À bientôt !
+Victor`;
+
+const CE_POOL_14 = buildExpressPool("e1-3-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Victor", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Victor organise une _________.",
+    fill: "pot de départ",
+    vfQ: "Victor organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Vendredi 17 mai", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "vendredi",
+    vfQ: "La fête est vendredi 17 mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["19 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "19",
+    vfQ: "La fête commence à 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le bureau transformé", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "bureau transformé",
+    vfQ: "La fête est dans le bureau transformé.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Vin", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "vin",
+    vfQ: "On peut apporter du vin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Invitation
+
+Chers amis,
+Élise organise une pique-nique. C'est samedi 28 juin.
+La fête commence à 17 h. Elle finit vers 20 h.
+C'est dans le lac. Vous pouvez apporter du sandwichs.
+Merci de répondre avant mercredi.
+À bientôt !
+Élise`;
+
+const CE_POOL_15 = buildExpressPool("e1-3-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Élise", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Élise organise une _________.",
+    fill: "pique-nique",
+    vfQ: "Élise organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 28 juin", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 28 juin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["17 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "17",
+    vfQ: "La fête commence à 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le lac", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "lac",
+    vfQ: "La fête est dans le lac.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Sandwichs", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "sandwichs",
+    vfQ: "On peut apporter du sandwichs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Invitation
+
+Chers amis,
+Karim organise une fête surprise. C'est samedi 9 juillet.
+La fête commence à 20 h. Elle finit vers 23 h.
+C'est dans le jardin. Vous pouvez apporter du bougie.
+Merci de répondre avant mercredi.
+À bientôt !
+Karim`;
+
+const CE_POOL_16 = buildExpressPool("e1-3-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Karim", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Karim organise une _________.",
+    fill: "fête surprise",
+    vfQ: "Karim organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 9 juillet", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 9 juillet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["20 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "20",
+    vfQ: "La fête commence à 20 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le jardin", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "jardin",
+    vfQ: "La fête est dans le jardin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Bougie", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "bougie",
+    vfQ: "On peut apporter du bougie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Invitation
+
+Chers amis,
+Julie organise une déjeuner familial. C'est dimanche 20 septembre.
+La fête commence à 12 h 30. Elle finit vers 17 h.
+C'est dans le salle à manger. Vous pouvez apporter du tarte.
+Merci de répondre avant mercredi.
+À bientôt !
+Julie`;
+
+const CE_POOL_17 = buildExpressPool("e1-3-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Julie", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Julie organise une _________.",
+    fill: "déjeuner familial",
+    vfQ: "Julie organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Dimanche 20 septembre", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "dimanche",
+    vfQ: "La fête est dimanche 20 septembre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["12 h 30", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "12",
+    vfQ: "La fête commence à 12 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le salle à manger", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "salle à manger",
+    vfQ: "La fête est dans le salle à manger.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Tarte", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "tarte",
+    vfQ: "On peut apporter du tarte.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Invitation
+
+Chers amis,
+Antoine organise une soirée costumée. C'est samedi 31 octobre.
+La fête commence à 19 h. Elle finit vers 23 h.
+C'est dans le maison. Vous pouvez apporter du citrouille.
+Merci de répondre avant mercredi.
+À bientôt !
+Antoine`;
+
+const CE_POOL_18 = buildExpressPool("e1-3-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Antoine", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Antoine organise une _________.",
+    fill: "soirée costumée",
+    vfQ: "Antoine organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 31 octobre", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 31 octobre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["19 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "19",
+    vfQ: "La fête commence à 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le maison", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "maison",
+    vfQ: "La fête est dans le maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Citrouille", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "citrouille",
+    vfQ: "On peut apporter du citrouille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Invitation
+
+Chers amis,
+Maya organise une fête de fin d'année. C'est samedi 12 décembre.
+La fête commence à 18 h. Elle finit vers 22 h.
+C'est dans le loft. Vous pouvez apporter du champagne.
+Merci de répondre avant mercredi.
+À bientôt !
+Maya`;
+
+const CE_POOL_19 = buildExpressPool("e1-3-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Maya", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Maya organise une _________.",
+    fill: "fête de fin d'année",
+    vfQ: "Maya organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 12 décembre", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 12 décembre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["18 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "18",
+    vfQ: "La fête commence à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le loft", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "loft",
+    vfQ: "La fête est dans le loft.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Champagne", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "champagne",
+    vfQ: "On peut apporter du champagne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Invitation
+
+Chers amis,
+Thomas organise une réveillon. C'est samedi 16 janvier.
+La fête commence à 19 h. Elle finit vers 22 h 30.
+C'est dans le appartement. Vous pouvez apporter du galette.
+Merci de répondre avant mercredi.
+À bientôt !
+Thomas`;
+
+const CE_POOL_20 = buildExpressPool("e1-3-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui organise la fête ?",
+    text: ["Thomas", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Thomas organise une _________.",
+    fill: "réveillon",
+    vfQ: "Thomas organise la fête.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour a lieu la fête ?",
+    text: ["Samedi 16 janvier", "Lundi prochain", "Mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________.",
+    fill: "samedi",
+    vfQ: "La fête est samedi 16 janvier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure commence la fête ?",
+    text: ["19 h", "8 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La fête commence à _________.",
+    fill: "19",
+    vfQ: "La fête commence à 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où a lieu la fête ?",
+    text: ["Dans le appartement", "À l'école", "Au cinéma"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est dans le _________.",
+    fill: "appartement",
+    vfQ: "La fête est dans le appartement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que peut-on apporter ?",
+    text: ["Galette", "Un livre", "Un vélo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous pouvez apporter du _________.",
+    fill: "galette",
+    vfQ: "On peut apporter du galette.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Faut-il répondre à l'invitation ?",
+    text: ["Oui, avant mercredi", "Non", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de répondre avant _________.",
+    fill: "mercredi",
+    vfQ: "Il faut répondre avant mercredi.",
+    vfC: 0,
+  }),
+]);
+
+export const E1_3_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e1-3-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e1-3-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e1-3-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e1-3-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e1-3-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e1-3-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e1-3-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e1-3-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e1-3-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e1-3-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e1-3-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e1-3-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e1-3-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e1-3-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e1-3-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e1-3-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e1-3-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e1-3-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e1-3-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e1-3-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème invitation) ───────────────── */
 
@@ -328,6 +2040,196 @@ export const E1_3_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Oui, avec plaisir !" },
 ],
   },
+{
+  id: "e1-3-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-3-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : inviter.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de inviter." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -426,4 +2328,134 @@ export const E1_3_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e1-3-pe-11",
+  title: "Texte sur inviter — variante 11",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-12",
+  title: "Texte sur inviter — variante 12",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-13",
+  title: "Texte sur inviter — variante 13",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-14",
+  title: "Texte sur inviter — variante 14",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-15",
+  title: "Texte sur inviter — variante 15",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-16",
+  title: "Texte sur inviter — variante 16",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-17",
+  title: "Texte sur inviter — variante 17",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-18",
+  title: "Texte sur inviter — variante 18",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-19",
+  title: "Texte sur inviter — variante 19",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pe-20",
+  title: "Texte sur inviter — variante 20",
+  situation: "Situation liée au thème « inviter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur inviter — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

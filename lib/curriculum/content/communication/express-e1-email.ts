@@ -22,7 +22,7 @@ const PE_MAX = 120;
    E1.1 — Se présenter
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E1_1_CE_EMAIL_TEXT = `De : Marco Rossi
+const E1_1_CE_EMAIL_TEXT_1 = `De : Marco Rossi
 Objet : Je me présente
 
 Bonjour,
@@ -38,7 +38,8 @@ Mon numéro de téléphone est le 078 555 21 40.
 À bientôt,
 Marco`;
 
-const E1_1_CE_EMAIL_POOL = buildExpressPool("e1-1-ce-email", [
+const E1_1_CE_EMAIL_POOL_1 = buildExpressPool("e1-1-ce-email-1", [
+
   q({
     id: "cem-q1",
     textQ: "Qui écrit cet e-mail ?",
@@ -172,14 +173,1765 @@ const E1_1_CE_EMAIL_POOL = buildExpressPool("e1-1-ce-email", [
     vfQ: "Marco habite dans l'appartement 12.",
     vfC: 0,
   }),
+
 ]);
 
-export const E1_1_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e1-1-ce-email",
-  readingText: E1_1_CE_EMAIL_TEXT,
-  questionPool: E1_1_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E1_1_CE_EMAIL_TEXT_2 = `De : Lucas
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Lucas. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 2 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Lucas`;
+
+const E1_1_CE_EMAIL_POOL_2 = buildExpressPool("e1-1-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Lucas", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Lucas",
+    vfQ: "Lucas écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_3 = `De : Nina
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Nina. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 3 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Nina`;
+
+const E1_1_CE_EMAIL_POOL_3 = buildExpressPool("e1-1-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Nina", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Nina",
+    vfQ: "Nina écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_4 = `De : Paul
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Paul. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 4 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Paul`;
+
+const E1_1_CE_EMAIL_POOL_4 = buildExpressPool("e1-1-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Paul", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Paul",
+    vfQ: "Paul écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_5 = `De : Sara
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Sara. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 5 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Sara`;
+
+const E1_1_CE_EMAIL_POOL_5 = buildExpressPool("e1-1-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Sara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Sara",
+    vfQ: "Sara écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_6 = `De : Tom
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Tom. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 6 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Tom`;
+
+const E1_1_CE_EMAIL_POOL_6 = buildExpressPool("e1-1-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Tom", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Tom",
+    vfQ: "Tom écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_7 = `De : Emma
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Emma. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 7 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Emma`;
+
+const E1_1_CE_EMAIL_POOL_7 = buildExpressPool("e1-1-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Emma", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Emma",
+    vfQ: "Emma écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_8 = `De : Hugo
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Hugo. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 8 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Hugo`;
+
+const E1_1_CE_EMAIL_POOL_8 = buildExpressPool("e1-1-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Hugo", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Hugo",
+    vfQ: "Hugo écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_9 = `De : Léa
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Léa. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 9 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Léa`;
+
+const E1_1_CE_EMAIL_POOL_9 = buildExpressPool("e1-1-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Léa", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Léa",
+    vfQ: "Léa écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_10 = `De : Marc
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Marc. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 10 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Marc`;
+
+const E1_1_CE_EMAIL_POOL_10 = buildExpressPool("e1-1-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Marc", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Marc",
+    vfQ: "Marc écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_11 = `De : Julie
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Julie. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 11 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Julie`;
+
+const E1_1_CE_EMAIL_POOL_11 = buildExpressPool("e1-1-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Julie", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Julie",
+    vfQ: "Julie écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_12 = `De : Omar
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Omar. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 12 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Omar`;
+
+const E1_1_CE_EMAIL_POOL_12 = buildExpressPool("e1-1-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Omar", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Omar",
+    vfQ: "Omar écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_13 = `De : Clara
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Clara. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 13 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Clara`;
+
+const E1_1_CE_EMAIL_POOL_13 = buildExpressPool("e1-1-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Clara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Clara",
+    vfQ: "Clara écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_14 = `De : Yann
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Yann. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 14 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Yann`;
+
+const E1_1_CE_EMAIL_POOL_14 = buildExpressPool("e1-1-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Yann", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Yann",
+    vfQ: "Yann écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_15 = `De : Inès
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Inès. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 15 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Inès`;
+
+const E1_1_CE_EMAIL_POOL_15 = buildExpressPool("e1-1-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Inès", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Inès",
+    vfQ: "Inès écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_16 = `De : David
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle David. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 16 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+David`;
+
+const E1_1_CE_EMAIL_POOL_16 = buildExpressPool("e1-1-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["David", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "David",
+    vfQ: "David écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_17 = `De : Maya
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Maya. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 17 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Maya`;
+
+const E1_1_CE_EMAIL_POOL_17 = buildExpressPool("e1-1-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Maya", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Maya",
+    vfQ: "Maya écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_18 = `De : Antoine
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Antoine. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 18 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Antoine`;
+
+const E1_1_CE_EMAIL_POOL_18 = buildExpressPool("e1-1-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Antoine", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Antoine",
+    vfQ: "Antoine écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_19 = `De : Salma
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Salma. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 19 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Salma`;
+
+const E1_1_CE_EMAIL_POOL_19 = buildExpressPool("e1-1-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Salma", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Salma",
+    vfQ: "Salma écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_1_CE_EMAIL_TEXT_20 = `De : Victor
+Objet : Message sur présentation
+
+Bonjour,
+
+Je m'appelle Victor. Je vous écris au sujet de présentation.
+J'habite en Suisse depuis 20 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Victor`;
+
+const E1_1_CE_EMAIL_POOL_20 = buildExpressPool("e1-1-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Victor", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Victor",
+    vfQ: "Victor écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Présentation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "présentation",
+    vfQ: "L'e-mail parle de présentation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+export const E1_1_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e1-1-ce-email-1",
+  readingText: E1_1_CE_EMAIL_TEXT_1,
+  questionPool: E1_1_CE_EMAIL_POOL_1,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-2",
+  readingText: E1_1_CE_EMAIL_TEXT_2,
+  questionPool: E1_1_CE_EMAIL_POOL_2,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-3",
+  readingText: E1_1_CE_EMAIL_TEXT_3,
+  questionPool: E1_1_CE_EMAIL_POOL_3,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-4",
+  readingText: E1_1_CE_EMAIL_TEXT_4,
+  questionPool: E1_1_CE_EMAIL_POOL_4,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-5",
+  readingText: E1_1_CE_EMAIL_TEXT_5,
+  questionPool: E1_1_CE_EMAIL_POOL_5,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-6",
+  readingText: E1_1_CE_EMAIL_TEXT_6,
+  questionPool: E1_1_CE_EMAIL_POOL_6,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-7",
+  readingText: E1_1_CE_EMAIL_TEXT_7,
+  questionPool: E1_1_CE_EMAIL_POOL_7,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-8",
+  readingText: E1_1_CE_EMAIL_TEXT_8,
+  questionPool: E1_1_CE_EMAIL_POOL_8,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-9",
+  readingText: E1_1_CE_EMAIL_TEXT_9,
+  questionPool: E1_1_CE_EMAIL_POOL_9,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-10",
+  readingText: E1_1_CE_EMAIL_TEXT_10,
+  questionPool: E1_1_CE_EMAIL_POOL_10,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-11",
+  readingText: E1_1_CE_EMAIL_TEXT_11,
+  questionPool: E1_1_CE_EMAIL_POOL_11,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-12",
+  readingText: E1_1_CE_EMAIL_TEXT_12,
+  questionPool: E1_1_CE_EMAIL_POOL_12,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-13",
+  readingText: E1_1_CE_EMAIL_TEXT_13,
+  questionPool: E1_1_CE_EMAIL_POOL_13,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-14",
+  readingText: E1_1_CE_EMAIL_TEXT_14,
+  questionPool: E1_1_CE_EMAIL_POOL_14,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-15",
+  readingText: E1_1_CE_EMAIL_TEXT_15,
+  questionPool: E1_1_CE_EMAIL_POOL_15,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-16",
+  readingText: E1_1_CE_EMAIL_TEXT_16,
+  questionPool: E1_1_CE_EMAIL_POOL_16,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-17",
+  readingText: E1_1_CE_EMAIL_TEXT_17,
+  questionPool: E1_1_CE_EMAIL_POOL_17,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-18",
+  readingText: E1_1_CE_EMAIL_TEXT_18,
+  questionPool: E1_1_CE_EMAIL_POOL_18,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-19",
+  readingText: E1_1_CE_EMAIL_TEXT_19,
+  questionPool: E1_1_CE_EMAIL_POOL_19,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-1-ce-email-20",
+  readingText: E1_1_CE_EMAIL_TEXT_20,
+  questionPool: E1_1_CE_EMAIL_POOL_20,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+];
 
 export const E1_1_PE_EMAIL: ExpressPePrompt[] = [
   {
@@ -322,13 +2074,193 @@ export const E1_1_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e1-1-pee-11",
+  title: "Répondre à un e-mail — variante 11",
+  situation: "Vous recevez un e-mail de Contact 11.",
+  sourceMessage: {
+    from: "Contact 11",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 11",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-12",
+  title: "Répondre à un e-mail — variante 12",
+  situation: "Vous recevez un e-mail de Contact 12.",
+  sourceMessage: {
+    from: "Contact 12",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 12",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-13",
+  title: "Répondre à un e-mail — variante 13",
+  situation: "Vous recevez un e-mail de Contact 13.",
+  sourceMessage: {
+    from: "Contact 13",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 13",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-14",
+  title: "Répondre à un e-mail — variante 14",
+  situation: "Vous recevez un e-mail de Contact 14.",
+  sourceMessage: {
+    from: "Contact 14",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 14",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-15",
+  title: "Répondre à un e-mail — variante 15",
+  situation: "Vous recevez un e-mail de Contact 15.",
+  sourceMessage: {
+    from: "Contact 15",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 15",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-16",
+  title: "Répondre à un e-mail — variante 16",
+  situation: "Vous recevez un e-mail de Contact 16.",
+  sourceMessage: {
+    from: "Contact 16",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 16",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-17",
+  title: "Répondre à un e-mail — variante 17",
+  situation: "Vous recevez un e-mail de Contact 17.",
+  sourceMessage: {
+    from: "Contact 17",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 17",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-18",
+  title: "Répondre à un e-mail — variante 18",
+  situation: "Vous recevez un e-mail de Contact 18.",
+  sourceMessage: {
+    from: "Contact 18",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 18",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-19",
+  title: "Répondre à un e-mail — variante 19",
+  situation: "Vous recevez un e-mail de Contact 19.",
+  sourceMessage: {
+    from: "Contact 19",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 19",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pee-20",
+  title: "Répondre à un e-mail — variante 20",
+  situation: "Vous recevez un e-mail de Contact 20.",
+  sourceMessage: {
+    from: "Contact 20",
+    subject: "Question sur e1-1",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 20",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];
 
 /* ════════════════════════════════════════════════════════════════════════════
    E1.2 — Parler de sa famille
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E1_2_CE_EMAIL_TEXT = `De : Amina
+const E1_2_CE_EMAIL_TEXT_1 = `De : Amina
 Objet : Ma famille
 
 Bonjour,
@@ -345,7 +2277,8 @@ Et toi, tu as des frères et des sœurs ?
 À bientôt,
 Amina`;
 
-const E1_2_CE_EMAIL_POOL = buildExpressPool("e1-2-ce-email", [
+const E1_2_CE_EMAIL_POOL_1 = buildExpressPool("e1-2-ce-email-1", [
+
   q({
     id: "cem-q1",
     textQ: "Combien de personnes habitent à la maison ?",
@@ -474,14 +2407,1765 @@ const E1_2_CE_EMAIL_POOL = buildExpressPool("e1-2-ce-email", [
     vfQ: "La grand-mère a 85 ans.",
     vfC: 1,
   }),
+
 ]);
 
-export const E1_2_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e1-2-ce-email",
-  readingText: E1_2_CE_EMAIL_TEXT,
-  questionPool: E1_2_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E1_2_CE_EMAIL_TEXT_2 = `De : Lucas
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Lucas. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 2 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Lucas`;
+
+const E1_2_CE_EMAIL_POOL_2 = buildExpressPool("e1-2-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Lucas", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Lucas",
+    vfQ: "Lucas écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_3 = `De : Nina
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Nina. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 3 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Nina`;
+
+const E1_2_CE_EMAIL_POOL_3 = buildExpressPool("e1-2-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Nina", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Nina",
+    vfQ: "Nina écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_4 = `De : Paul
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Paul. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 4 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Paul`;
+
+const E1_2_CE_EMAIL_POOL_4 = buildExpressPool("e1-2-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Paul", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Paul",
+    vfQ: "Paul écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_5 = `De : Sara
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Sara. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 5 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Sara`;
+
+const E1_2_CE_EMAIL_POOL_5 = buildExpressPool("e1-2-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Sara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Sara",
+    vfQ: "Sara écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_6 = `De : Tom
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Tom. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 6 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Tom`;
+
+const E1_2_CE_EMAIL_POOL_6 = buildExpressPool("e1-2-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Tom", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Tom",
+    vfQ: "Tom écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_7 = `De : Emma
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Emma. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 7 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Emma`;
+
+const E1_2_CE_EMAIL_POOL_7 = buildExpressPool("e1-2-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Emma", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Emma",
+    vfQ: "Emma écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_8 = `De : Hugo
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Hugo. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 8 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Hugo`;
+
+const E1_2_CE_EMAIL_POOL_8 = buildExpressPool("e1-2-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Hugo", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Hugo",
+    vfQ: "Hugo écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_9 = `De : Léa
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Léa. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 9 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Léa`;
+
+const E1_2_CE_EMAIL_POOL_9 = buildExpressPool("e1-2-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Léa", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Léa",
+    vfQ: "Léa écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_10 = `De : Marc
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Marc. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 10 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Marc`;
+
+const E1_2_CE_EMAIL_POOL_10 = buildExpressPool("e1-2-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Marc", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Marc",
+    vfQ: "Marc écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_11 = `De : Julie
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Julie. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 11 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Julie`;
+
+const E1_2_CE_EMAIL_POOL_11 = buildExpressPool("e1-2-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Julie", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Julie",
+    vfQ: "Julie écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_12 = `De : Omar
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Omar. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 12 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Omar`;
+
+const E1_2_CE_EMAIL_POOL_12 = buildExpressPool("e1-2-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Omar", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Omar",
+    vfQ: "Omar écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_13 = `De : Clara
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Clara. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 13 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Clara`;
+
+const E1_2_CE_EMAIL_POOL_13 = buildExpressPool("e1-2-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Clara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Clara",
+    vfQ: "Clara écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_14 = `De : Yann
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Yann. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 14 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Yann`;
+
+const E1_2_CE_EMAIL_POOL_14 = buildExpressPool("e1-2-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Yann", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Yann",
+    vfQ: "Yann écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_15 = `De : Inès
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Inès. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 15 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Inès`;
+
+const E1_2_CE_EMAIL_POOL_15 = buildExpressPool("e1-2-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Inès", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Inès",
+    vfQ: "Inès écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_16 = `De : David
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle David. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 16 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+David`;
+
+const E1_2_CE_EMAIL_POOL_16 = buildExpressPool("e1-2-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["David", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "David",
+    vfQ: "David écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_17 = `De : Maya
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Maya. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 17 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Maya`;
+
+const E1_2_CE_EMAIL_POOL_17 = buildExpressPool("e1-2-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Maya", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Maya",
+    vfQ: "Maya écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_18 = `De : Antoine
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Antoine. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 18 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Antoine`;
+
+const E1_2_CE_EMAIL_POOL_18 = buildExpressPool("e1-2-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Antoine", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Antoine",
+    vfQ: "Antoine écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_19 = `De : Salma
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Salma. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 19 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Salma`;
+
+const E1_2_CE_EMAIL_POOL_19 = buildExpressPool("e1-2-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Salma", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Salma",
+    vfQ: "Salma écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_2_CE_EMAIL_TEXT_20 = `De : Victor
+Objet : Message sur famille
+
+Bonjour,
+
+Je m'appelle Victor. Je vous écris au sujet de famille.
+J'habite en Suisse depuis 20 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Victor`;
+
+const E1_2_CE_EMAIL_POOL_20 = buildExpressPool("e1-2-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Victor", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Victor",
+    vfQ: "Victor écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Famille", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "famille",
+    vfQ: "L'e-mail parle de famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+export const E1_2_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e1-2-ce-email-1",
+  readingText: E1_2_CE_EMAIL_TEXT_1,
+  questionPool: E1_2_CE_EMAIL_POOL_1,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-2",
+  readingText: E1_2_CE_EMAIL_TEXT_2,
+  questionPool: E1_2_CE_EMAIL_POOL_2,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-3",
+  readingText: E1_2_CE_EMAIL_TEXT_3,
+  questionPool: E1_2_CE_EMAIL_POOL_3,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-4",
+  readingText: E1_2_CE_EMAIL_TEXT_4,
+  questionPool: E1_2_CE_EMAIL_POOL_4,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-5",
+  readingText: E1_2_CE_EMAIL_TEXT_5,
+  questionPool: E1_2_CE_EMAIL_POOL_5,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-6",
+  readingText: E1_2_CE_EMAIL_TEXT_6,
+  questionPool: E1_2_CE_EMAIL_POOL_6,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-7",
+  readingText: E1_2_CE_EMAIL_TEXT_7,
+  questionPool: E1_2_CE_EMAIL_POOL_7,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-8",
+  readingText: E1_2_CE_EMAIL_TEXT_8,
+  questionPool: E1_2_CE_EMAIL_POOL_8,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-9",
+  readingText: E1_2_CE_EMAIL_TEXT_9,
+  questionPool: E1_2_CE_EMAIL_POOL_9,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-10",
+  readingText: E1_2_CE_EMAIL_TEXT_10,
+  questionPool: E1_2_CE_EMAIL_POOL_10,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-11",
+  readingText: E1_2_CE_EMAIL_TEXT_11,
+  questionPool: E1_2_CE_EMAIL_POOL_11,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-12",
+  readingText: E1_2_CE_EMAIL_TEXT_12,
+  questionPool: E1_2_CE_EMAIL_POOL_12,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-13",
+  readingText: E1_2_CE_EMAIL_TEXT_13,
+  questionPool: E1_2_CE_EMAIL_POOL_13,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-14",
+  readingText: E1_2_CE_EMAIL_TEXT_14,
+  questionPool: E1_2_CE_EMAIL_POOL_14,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-15",
+  readingText: E1_2_CE_EMAIL_TEXT_15,
+  questionPool: E1_2_CE_EMAIL_POOL_15,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-16",
+  readingText: E1_2_CE_EMAIL_TEXT_16,
+  questionPool: E1_2_CE_EMAIL_POOL_16,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-17",
+  readingText: E1_2_CE_EMAIL_TEXT_17,
+  questionPool: E1_2_CE_EMAIL_POOL_17,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-18",
+  readingText: E1_2_CE_EMAIL_TEXT_18,
+  questionPool: E1_2_CE_EMAIL_POOL_18,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-19",
+  readingText: E1_2_CE_EMAIL_TEXT_19,
+  questionPool: E1_2_CE_EMAIL_POOL_19,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-2-ce-email-20",
+  readingText: E1_2_CE_EMAIL_TEXT_20,
+  questionPool: E1_2_CE_EMAIL_POOL_20,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+];
 
 export const E1_2_PE_EMAIL: ExpressPePrompt[] = [
   {
@@ -624,13 +4308,193 @@ export const E1_2_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e1-2-pee-11",
+  title: "Répondre à un e-mail — variante 11",
+  situation: "Vous recevez un e-mail de Contact 11.",
+  sourceMessage: {
+    from: "Contact 11",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 11",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-12",
+  title: "Répondre à un e-mail — variante 12",
+  situation: "Vous recevez un e-mail de Contact 12.",
+  sourceMessage: {
+    from: "Contact 12",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 12",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-13",
+  title: "Répondre à un e-mail — variante 13",
+  situation: "Vous recevez un e-mail de Contact 13.",
+  sourceMessage: {
+    from: "Contact 13",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 13",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-14",
+  title: "Répondre à un e-mail — variante 14",
+  situation: "Vous recevez un e-mail de Contact 14.",
+  sourceMessage: {
+    from: "Contact 14",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 14",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-15",
+  title: "Répondre à un e-mail — variante 15",
+  situation: "Vous recevez un e-mail de Contact 15.",
+  sourceMessage: {
+    from: "Contact 15",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 15",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-16",
+  title: "Répondre à un e-mail — variante 16",
+  situation: "Vous recevez un e-mail de Contact 16.",
+  sourceMessage: {
+    from: "Contact 16",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 16",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-17",
+  title: "Répondre à un e-mail — variante 17",
+  situation: "Vous recevez un e-mail de Contact 17.",
+  sourceMessage: {
+    from: "Contact 17",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 17",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-18",
+  title: "Répondre à un e-mail — variante 18",
+  situation: "Vous recevez un e-mail de Contact 18.",
+  sourceMessage: {
+    from: "Contact 18",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 18",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-19",
+  title: "Répondre à un e-mail — variante 19",
+  situation: "Vous recevez un e-mail de Contact 19.",
+  sourceMessage: {
+    from: "Contact 19",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 19",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pee-20",
+  title: "Répondre à un e-mail — variante 20",
+  situation: "Vous recevez un e-mail de Contact 20.",
+  sourceMessage: {
+    from: "Contact 20",
+    subject: "Question sur e1-2",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 20",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];
 
 /* ════════════════════════════════════════════════════════════════════════════
    E1.3 — Inviter à une fête
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E1_3_CE_EMAIL_TEXT = `De : Julie
+const E1_3_CE_EMAIL_TEXT_1 = `De : Julie
 Objet : Invitation à mon anniversaire
 
 Bonjour,
@@ -646,7 +4510,8 @@ Répondez avant le 10 juin, s'il vous plaît.
 À bientôt,
 Julie`;
 
-const E1_3_CE_EMAIL_POOL = buildExpressPool("e1-3-ce-email", [
+const E1_3_CE_EMAIL_POOL_1 = buildExpressPool("e1-3-ce-email-1", [
+
   q({
     id: "cem-q1",
     textQ: "Pourquoi Julie organise-t-elle une fête ?",
@@ -778,14 +4643,1765 @@ const E1_3_CE_EMAIL_POOL = buildExpressPool("e1-3-ce-email", [
     vfQ: "Il faut répondre avant le 10 juin.",
     vfC: 0,
   }),
+
 ]);
 
-export const E1_3_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e1-3-ce-email",
-  readingText: E1_3_CE_EMAIL_TEXT,
-  questionPool: E1_3_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E1_3_CE_EMAIL_TEXT_2 = `De : Lucas
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Lucas. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 2 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Lucas`;
+
+const E1_3_CE_EMAIL_POOL_2 = buildExpressPool("e1-3-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Lucas", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Lucas",
+    vfQ: "Lucas écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_3 = `De : Nina
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Nina. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 3 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Nina`;
+
+const E1_3_CE_EMAIL_POOL_3 = buildExpressPool("e1-3-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Nina", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Nina",
+    vfQ: "Nina écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_4 = `De : Paul
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Paul. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 4 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Paul`;
+
+const E1_3_CE_EMAIL_POOL_4 = buildExpressPool("e1-3-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Paul", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Paul",
+    vfQ: "Paul écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_5 = `De : Sara
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Sara. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 5 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Sara`;
+
+const E1_3_CE_EMAIL_POOL_5 = buildExpressPool("e1-3-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Sara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Sara",
+    vfQ: "Sara écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_6 = `De : Tom
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Tom. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 6 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Tom`;
+
+const E1_3_CE_EMAIL_POOL_6 = buildExpressPool("e1-3-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Tom", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Tom",
+    vfQ: "Tom écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_7 = `De : Emma
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Emma. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 7 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Emma`;
+
+const E1_3_CE_EMAIL_POOL_7 = buildExpressPool("e1-3-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Emma", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Emma",
+    vfQ: "Emma écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_8 = `De : Hugo
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Hugo. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 8 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Hugo`;
+
+const E1_3_CE_EMAIL_POOL_8 = buildExpressPool("e1-3-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Hugo", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Hugo",
+    vfQ: "Hugo écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_9 = `De : Léa
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Léa. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 9 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Léa`;
+
+const E1_3_CE_EMAIL_POOL_9 = buildExpressPool("e1-3-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Léa", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Léa",
+    vfQ: "Léa écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_10 = `De : Marc
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Marc. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 10 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Marc`;
+
+const E1_3_CE_EMAIL_POOL_10 = buildExpressPool("e1-3-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Marc", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Marc",
+    vfQ: "Marc écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_11 = `De : Julie
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Julie. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 11 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Julie`;
+
+const E1_3_CE_EMAIL_POOL_11 = buildExpressPool("e1-3-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Julie", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Julie",
+    vfQ: "Julie écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_12 = `De : Omar
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Omar. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 12 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Omar`;
+
+const E1_3_CE_EMAIL_POOL_12 = buildExpressPool("e1-3-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Omar", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Omar",
+    vfQ: "Omar écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_13 = `De : Clara
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Clara. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 13 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Clara`;
+
+const E1_3_CE_EMAIL_POOL_13 = buildExpressPool("e1-3-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Clara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Clara",
+    vfQ: "Clara écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_14 = `De : Yann
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Yann. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 14 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Yann`;
+
+const E1_3_CE_EMAIL_POOL_14 = buildExpressPool("e1-3-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Yann", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Yann",
+    vfQ: "Yann écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_15 = `De : Inès
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Inès. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 15 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Inès`;
+
+const E1_3_CE_EMAIL_POOL_15 = buildExpressPool("e1-3-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Inès", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Inès",
+    vfQ: "Inès écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_16 = `De : David
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle David. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 16 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+David`;
+
+const E1_3_CE_EMAIL_POOL_16 = buildExpressPool("e1-3-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["David", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "David",
+    vfQ: "David écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_17 = `De : Maya
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Maya. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 17 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Maya`;
+
+const E1_3_CE_EMAIL_POOL_17 = buildExpressPool("e1-3-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Maya", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Maya",
+    vfQ: "Maya écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_18 = `De : Antoine
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Antoine. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 18 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Antoine`;
+
+const E1_3_CE_EMAIL_POOL_18 = buildExpressPool("e1-3-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Antoine", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Antoine",
+    vfQ: "Antoine écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_19 = `De : Salma
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Salma. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 19 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Salma`;
+
+const E1_3_CE_EMAIL_POOL_19 = buildExpressPool("e1-3-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Salma", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Salma",
+    vfQ: "Salma écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+const E1_3_CE_EMAIL_TEXT_20 = `De : Victor
+Objet : Message sur invitation
+
+Bonjour,
+
+Je m'appelle Victor. Je vous écris au sujet de invitation.
+J'habite en Suisse depuis 20 ans. Je parle français et une autre langue.
+Merci de lire mon message avec attention.
+À bientôt,
+Victor`;
+
+const E1_3_CE_EMAIL_POOL_20 = buildExpressPool("e1-3-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui écrit cet e-mail ?",
+    text: ["Victor", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Victor",
+    vfQ: "Victor écrit l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "De quoi parle l'e-mail ?",
+    text: ["Invitation", "vacances", "sport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au sujet de _________.",
+    fill: "invitation",
+    vfQ: "L'e-mail parle de invitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite l'auteur ?",
+    text: ["En Suisse", "En France", "En Italie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite en _________.",
+    fill: "Suisse",
+    vfQ: "L'auteur habite en Suisse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de langues sont mentionnées ?",
+    text: ["Deux", "Cinq", "Une"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je parle français et une autre _________.",
+    fill: "langue",
+    vfQ: "Deux langues sont mentionnées.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'e-mail est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "En colère"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire mon message avec _________.",
+    fill: "attention",
+    vfQ: "Le ton est formel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que dit l'auteur à la fin ?",
+    text: ["À bientôt", "Au revoir pour toujours", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "_________,",
+    fill: "À bientôt",
+    vfQ: "L'auteur dit à bientôt.",
+    vfC: 0,
+  }),
+]);
+
+export const E1_3_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e1-3-ce-email-1",
+  readingText: E1_3_CE_EMAIL_TEXT_1,
+  questionPool: E1_3_CE_EMAIL_POOL_1,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-2",
+  readingText: E1_3_CE_EMAIL_TEXT_2,
+  questionPool: E1_3_CE_EMAIL_POOL_2,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-3",
+  readingText: E1_3_CE_EMAIL_TEXT_3,
+  questionPool: E1_3_CE_EMAIL_POOL_3,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-4",
+  readingText: E1_3_CE_EMAIL_TEXT_4,
+  questionPool: E1_3_CE_EMAIL_POOL_4,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-5",
+  readingText: E1_3_CE_EMAIL_TEXT_5,
+  questionPool: E1_3_CE_EMAIL_POOL_5,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-6",
+  readingText: E1_3_CE_EMAIL_TEXT_6,
+  questionPool: E1_3_CE_EMAIL_POOL_6,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-7",
+  readingText: E1_3_CE_EMAIL_TEXT_7,
+  questionPool: E1_3_CE_EMAIL_POOL_7,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-8",
+  readingText: E1_3_CE_EMAIL_TEXT_8,
+  questionPool: E1_3_CE_EMAIL_POOL_8,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-9",
+  readingText: E1_3_CE_EMAIL_TEXT_9,
+  questionPool: E1_3_CE_EMAIL_POOL_9,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-10",
+  readingText: E1_3_CE_EMAIL_TEXT_10,
+  questionPool: E1_3_CE_EMAIL_POOL_10,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-11",
+  readingText: E1_3_CE_EMAIL_TEXT_11,
+  questionPool: E1_3_CE_EMAIL_POOL_11,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-12",
+  readingText: E1_3_CE_EMAIL_TEXT_12,
+  questionPool: E1_3_CE_EMAIL_POOL_12,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-13",
+  readingText: E1_3_CE_EMAIL_TEXT_13,
+  questionPool: E1_3_CE_EMAIL_POOL_13,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-14",
+  readingText: E1_3_CE_EMAIL_TEXT_14,
+  questionPool: E1_3_CE_EMAIL_POOL_14,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-15",
+  readingText: E1_3_CE_EMAIL_TEXT_15,
+  questionPool: E1_3_CE_EMAIL_POOL_15,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-16",
+  readingText: E1_3_CE_EMAIL_TEXT_16,
+  questionPool: E1_3_CE_EMAIL_POOL_16,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-17",
+  readingText: E1_3_CE_EMAIL_TEXT_17,
+  questionPool: E1_3_CE_EMAIL_POOL_17,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-18",
+  readingText: E1_3_CE_EMAIL_TEXT_18,
+  questionPool: E1_3_CE_EMAIL_POOL_18,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-19",
+  readingText: E1_3_CE_EMAIL_TEXT_19,
+  questionPool: E1_3_CE_EMAIL_POOL_19,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+  readingPoolExercise({
+  id: "e1-3-ce-email-20",
+  readingText: E1_3_CE_EMAIL_TEXT_20,
+  questionPool: E1_3_CE_EMAIL_POOL_20,
+  instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+];
 
 export const E1_3_PE_EMAIL: ExpressPePrompt[] = [
   {
@@ -928,4 +6544,184 @@ export const E1_3_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e1-3-pee-11",
+  title: "Répondre à un e-mail — variante 11",
+  situation: "Vous recevez un e-mail de Contact 11.",
+  sourceMessage: {
+    from: "Contact 11",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 11",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-12",
+  title: "Répondre à un e-mail — variante 12",
+  situation: "Vous recevez un e-mail de Contact 12.",
+  sourceMessage: {
+    from: "Contact 12",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 12",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-13",
+  title: "Répondre à un e-mail — variante 13",
+  situation: "Vous recevez un e-mail de Contact 13.",
+  sourceMessage: {
+    from: "Contact 13",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 13",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-14",
+  title: "Répondre à un e-mail — variante 14",
+  situation: "Vous recevez un e-mail de Contact 14.",
+  sourceMessage: {
+    from: "Contact 14",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 14",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-15",
+  title: "Répondre à un e-mail — variante 15",
+  situation: "Vous recevez un e-mail de Contact 15.",
+  sourceMessage: {
+    from: "Contact 15",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 15",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-16",
+  title: "Répondre à un e-mail — variante 16",
+  situation: "Vous recevez un e-mail de Contact 16.",
+  sourceMessage: {
+    from: "Contact 16",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 16",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-17",
+  title: "Répondre à un e-mail — variante 17",
+  situation: "Vous recevez un e-mail de Contact 17.",
+  sourceMessage: {
+    from: "Contact 17",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 17",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-18",
+  title: "Répondre à un e-mail — variante 18",
+  situation: "Vous recevez un e-mail de Contact 18.",
+  sourceMessage: {
+    from: "Contact 18",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 18",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-19",
+  title: "Répondre à un e-mail — variante 19",
+  situation: "Vous recevez un e-mail de Contact 19.",
+  sourceMessage: {
+    from: "Contact 19",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 19",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-3-pee-20",
+  title: "Répondre à un e-mail — variante 20",
+  situation: "Vous recevez un e-mail de Contact 20.",
+  sourceMessage: {
+    from: "Contact 20",
+    subject: "Question sur e1-3",
+    body: "Bonjour,\nJ'ai une question pour vous. Pouvez-vous me répondre ?\nMerci,\nContact 20",
+  },
+  instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+  points: [
+    "Un remerciement",
+    "Votre réponse",
+    "Une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

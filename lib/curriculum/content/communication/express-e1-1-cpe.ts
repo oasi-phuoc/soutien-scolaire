@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E1.1 Se présenter ──────────────────────────────── */
+/* ── Compréhension écrite — E1.1 Se présenter ── */
 
-const CE_TEXT = `Message sur le forum de l'école de langues
+const CE_TEXT_1 = `Message sur le forum de l'école de langues
 
 Bonjour à tous !
 Je m'appelle Amina. J'ai 28 ans. Je suis tunisienne. J'habite à Lausanne depuis six mois. Je suis mariée et j'ai une petite fille de trois ans.
@@ -21,8 +21,8 @@ J'aime la musique et la natation. Je cherche des amis pour parler français apr�
 Vous pouvez répondre à mon message ici, sur le forum. À bientôt !
 Amina`;
 
-const CE_POOL = buildExpressPool("e1-1-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e1-1-1", [
+q({
     id: "ce-q1",
     textQ: "Quel âge a Amina ?",
     text: ["28 ans", "38 ans", "18 ans"],
@@ -129,11 +129,1704 @@ const CE_POOL = buildExpressPool("e1-1-ce", [
   }),
 ]);
 
-export const E1_1_CE: CommunicationExercise = readingPoolExercise({
-  id: "e1-1-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Lucas. J'ai 19 ans. Je suis brésilien. J'habite à Genève depuis un an.
+Je suis étudiant. Le soir, j'étudie le français à l'école.
+J'aime le foot et la lecture. Je cherche des amis pour parler français.
+À bientôt,
+Lucas`;
+
+const CE_POOL_2 = buildExpressPool("e1-1-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Lucas", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Lucas",
+    vfQ: "La personne s'appelle Lucas.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Lucas ?",
+    text: ["19 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "19",
+    vfQ: "Lucas a 19 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Lucas ?",
+    text: ["À Genève", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Genève",
+    vfQ: "Lucas habite à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Lucas ?",
+    text: ["Étudiant", "médecin", "avocat"],
+    textC: 0,
+    img: ["étudiant", "médecin", "avocat"],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "étudiant",
+    vfQ: "Lucas est étudiant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Lucas écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Lucas cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Lucas habite dans la ville ?",
+    text: ["Depuis un an", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Genève depuis _________.",
+    fill: "un an",
+    vfQ: "Lucas habite à Genève depuis un an.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Nadia. J'ai 35 ans. Je suis marocaine. J'habite à Fribourg depuis deux ans.
+Je suis infirmière. Le soir, j'étudie le français à l'école.
+J'aime la danse et le cinéma. Je cherche des amis pour parler français.
+À bientôt,
+Nadia`;
+
+const CE_POOL_3 = buildExpressPool("e1-1-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Nadia", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Nadia",
+    vfQ: "La personne s'appelle Nadia.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Nadia ?",
+    text: ["35 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "35",
+    vfQ: "Nadia a 35 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Nadia ?",
+    text: ["À Fribourg", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Fribourg",
+    vfQ: "Nadia habite à Fribourg.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Nadia ?",
+    text: ["Infirmière", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "infirmière",
+    vfQ: "Nadia est infirmière.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Nadia écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Nadia cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Nadia habite dans la ville ?",
+    text: ["Depuis deux ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Fribourg depuis _________.",
+    fill: "ans",
+    vfQ: "Nadia habite à Fribourg depuis deux ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Yuki. J'ai 27 ans. Je suis japonaise. J'habite à Zurich depuis huit mois.
+Je suis graphiste. Le soir, j'étudie le français à l'école.
+J'aime la photo et les voyages. Je cherche des amis pour parler français.
+À bientôt,
+Yuki`;
+
+const CE_POOL_4 = buildExpressPool("e1-1-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Yuki", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Yuki",
+    vfQ: "La personne s'appelle Yuki.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Yuki ?",
+    text: ["27 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "27",
+    vfQ: "Yuki a 27 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Yuki ?",
+    text: ["À Zurich", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Zurich",
+    vfQ: "Yuki habite à Zurich.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Yuki ?",
+    text: ["Graphiste", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "graphiste",
+    vfQ: "Yuki est graphiste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Yuki écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Yuki cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Yuki habite dans la ville ?",
+    text: ["Depuis huit mois", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Zurich depuis _________.",
+    fill: "mois",
+    vfQ: "Yuki habite à Zurich depuis huit mois.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Pierre. J'ai 45 ans. Je suis français. J'habite à Neuchâtel depuis cinq ans.
+Je suis professeur. Le soir, j'étudie le français à l'école.
+J'aime la randonnée et la cuisine. Je cherche des amis pour parler français.
+À bientôt,
+Pierre`;
+
+const CE_POOL_5 = buildExpressPool("e1-1-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Pierre", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Pierre",
+    vfQ: "La personne s'appelle Pierre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Pierre ?",
+    text: ["45 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "45",
+    vfQ: "Pierre a 45 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Pierre ?",
+    text: ["À Neuchâtel", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Neuchâtel",
+    vfQ: "Pierre habite à Neuchâtel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Pierre ?",
+    text: ["Professeur", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "professeur",
+    vfQ: "Pierre est professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Pierre écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Pierre cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Pierre habite dans la ville ?",
+    text: ["Depuis cinq ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Neuchâtel depuis _________.",
+    fill: "ans",
+    vfQ: "Pierre habite à Neuchâtel depuis cinq ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Sara. J'ai 22 ans. Je suis espagnole. J'habite à Bâle depuis trois mois.
+Je suis serveuse. Le soir, j'étudie le français à l'école.
+J'aime la musique et le sport. Je cherche des amis pour parler français.
+À bientôt,
+Sara`;
+
+const CE_POOL_6 = buildExpressPool("e1-1-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Sara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Sara",
+    vfQ: "La personne s'appelle Sara.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Sara ?",
+    text: ["22 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "22",
+    vfQ: "Sara a 22 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Sara ?",
+    text: ["À Bâle", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Bâle",
+    vfQ: "Sara habite à Bâle.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Sara ?",
+    text: ["Serveuse", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "serveuse",
+    vfQ: "Sara est serveuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Sara écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Sara cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Sara habite dans la ville ?",
+    text: ["Depuis trois mois", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Bâle depuis _________.",
+    fill: "mois",
+    vfQ: "Sara habite à Bâle depuis trois mois.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Omar. J'ai 31 ans. Je suis algérien. J'habite à Lausanne depuis un an.
+Je suis mécanicien. Le soir, j'étudie le français à l'école.
+J'aime le basketball et les films. Je cherche des amis pour parler français.
+À bientôt,
+Omar`;
+
+const CE_POOL_7 = buildExpressPool("e1-1-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Omar", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Omar",
+    vfQ: "La personne s'appelle Omar.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Omar ?",
+    text: ["31 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "31",
+    vfQ: "Omar a 31 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Omar ?",
+    text: ["À Lausanne", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lausanne",
+    vfQ: "Omar habite à Lausanne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Omar ?",
+    text: ["Mécanicien", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "mécanicien",
+    vfQ: "Omar est mécanicien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Omar écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Omar cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Omar habite dans la ville ?",
+    text: ["Depuis un an", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Lausanne depuis _________.",
+    fill: "un an",
+    vfQ: "Omar habite à Lausanne depuis un an.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Elena. J'ai 26 ans. Je suis ukrainienne. J'habite à Berne depuis six mois.
+Je suis coiffeuse. Le soir, j'étudie le français à l'école.
+J'aime la natation et la peinture. Je cherche des amis pour parler français.
+À bientôt,
+Elena`;
+
+const CE_POOL_8 = buildExpressPool("e1-1-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Elena", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Elena",
+    vfQ: "La personne s'appelle Elena.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Elena ?",
+    text: ["26 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "26",
+    vfQ: "Elena a 26 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Elena ?",
+    text: ["À Berne", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Berne",
+    vfQ: "Elena habite à Berne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Elena ?",
+    text: ["Coiffeuse", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "coiffeuse",
+    vfQ: "Elena est coiffeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Elena écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Elena cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Elena habite dans la ville ?",
+    text: ["Depuis six mois", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Berne depuis _________.",
+    fill: "mois",
+    vfQ: "Elena habite à Berne depuis six mois.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Tom. J'ai 40 ans. Je suis belge. J'habite à Sion depuis dix ans.
+Je suis boulanger. Le soir, j'étudie le français à l'école.
+J'aime le vélo et le jardinage. Je cherche des amis pour parler français.
+À bientôt,
+Tom`;
+
+const CE_POOL_9 = buildExpressPool("e1-1-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Tom", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Tom",
+    vfQ: "La personne s'appelle Tom.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Tom ?",
+    text: ["40 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "40",
+    vfQ: "Tom a 40 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Tom ?",
+    text: ["À Sion", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Sion",
+    vfQ: "Tom habite à Sion.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Tom ?",
+    text: ["Boulanger", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "boulanger",
+    vfQ: "Tom est boulanger.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Tom écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Tom cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Tom habite dans la ville ?",
+    text: ["Depuis dix ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Sion depuis _________.",
+    fill: "ans",
+    vfQ: "Tom habite à Sion depuis dix ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Fatou. J'ai 33 ans. Je suis sénégalaise. J'habite à Lugano depuis quatre mois.
+Je suis vendeuse. Le soir, j'étudie le français à l'école.
+J'aime la couture et la cuisine. Je cherche des amis pour parler français.
+À bientôt,
+Fatou`;
+
+const CE_POOL_10 = buildExpressPool("e1-1-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Fatou", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Fatou",
+    vfQ: "La personne s'appelle Fatou.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Fatou ?",
+    text: ["33 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "33",
+    vfQ: "Fatou a 33 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Fatou ?",
+    text: ["À Lugano", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Lugano",
+    vfQ: "Fatou habite à Lugano.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Fatou ?",
+    text: ["Vendeuse", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "vendeuse",
+    vfQ: "Fatou est vendeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Fatou écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Fatou cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Fatou habite dans la ville ?",
+    text: ["Depuis quatre mois", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Lugano depuis _________.",
+    fill: "mois",
+    vfQ: "Fatou habite à Lugano depuis quatre mois.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Ivan. J'ai 29 ans. Je suis croate. J'habite à Vevey depuis deux ans.
+Je suis plombier. Le soir, j'étudie le français à l'école.
+J'aime le ski et la pêche. Je cherche des amis pour parler français.
+À bientôt,
+Ivan`;
+
+const CE_POOL_11 = buildExpressPool("e1-1-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Ivan", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Ivan",
+    vfQ: "La personne s'appelle Ivan.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Ivan ?",
+    text: ["29 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "29",
+    vfQ: "Ivan a 29 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Ivan ?",
+    text: ["À Vevey", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Vevey",
+    vfQ: "Ivan habite à Vevey.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Ivan ?",
+    text: ["Plombier", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "plombier",
+    vfQ: "Ivan est plombier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Ivan écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Ivan cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Ivan habite dans la ville ?",
+    text: ["Depuis deux ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Vevey depuis _________.",
+    fill: "ans",
+    vfQ: "Ivan habite à Vevey depuis deux ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Mei. J'ai 24 ans. Je suis chinoise. J'habite à Montreux depuis un an.
+Je suis étudiante. Le soir, j'étudie le français à l'école.
+J'aime le piano et les mangas. Je cherche des amis pour parler français.
+À bientôt,
+Mei`;
+
+const CE_POOL_12 = buildExpressPool("e1-1-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Mei", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Mei",
+    vfQ: "La personne s'appelle Mei.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Mei ?",
+    text: ["24 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "24",
+    vfQ: "Mei a 24 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Mei ?",
+    text: ["À Montreux", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Montreux",
+    vfQ: "Mei habite à Montreux.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Mei ?",
+    text: ["Étudiante", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "étudiante",
+    vfQ: "Mei est étudiante.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Mei écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Mei cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Mei habite dans la ville ?",
+    text: ["Depuis un an", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Montreux depuis _________.",
+    fill: "un an",
+    vfQ: "Mei habite à Montreux depuis un an.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Hassan. J'ai 38 ans. Je suis égyptien. J'habite à Yverdon depuis trois ans.
+Je suis chauffeur. Le soir, j'étudie le français à l'école.
+J'aime le football et la famille. Je cherche des amis pour parler français.
+À bientôt,
+Hassan`;
+
+const CE_POOL_13 = buildExpressPool("e1-1-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Hassan", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Hassan",
+    vfQ: "La personne s'appelle Hassan.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Hassan ?",
+    text: ["38 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "38",
+    vfQ: "Hassan a 38 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Hassan ?",
+    text: ["À Yverdon", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Yverdon",
+    vfQ: "Hassan habite à Yverdon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Hassan ?",
+    text: ["Chauffeur", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "chauffeur",
+    vfQ: "Hassan est chauffeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Hassan écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Hassan cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Hassan habite dans la ville ?",
+    text: ["Depuis trois ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Yverdon depuis _________.",
+    fill: "ans",
+    vfQ: "Hassan habite à Yverdon depuis trois ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Clara. J'ai 21 ans. Je suis portugaise. J'habite à Nyon depuis cinq mois.
+Je suis babysitter. Le soir, j'étudie le français à l'école.
+J'aime les animaux et la plage. Je cherche des amis pour parler français.
+À bientôt,
+Clara`;
+
+const CE_POOL_14 = buildExpressPool("e1-1-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Clara", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Clara",
+    vfQ: "La personne s'appelle Clara.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Clara ?",
+    text: ["21 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "21",
+    vfQ: "Clara a 21 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Clara ?",
+    text: ["À Nyon", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Nyon",
+    vfQ: "Clara habite à Nyon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Clara ?",
+    text: ["Babysitter", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "babysitter",
+    vfQ: "Clara est babysitter.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Clara écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Clara cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Clara habite dans la ville ?",
+    text: ["Depuis cinq mois", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Nyon depuis _________.",
+    fill: "mois",
+    vfQ: "Clara habite à Nyon depuis cinq mois.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Raj. J'ai 36 ans. Je suis indien. J'habite à Delémont depuis deux ans.
+Je suis informaticien. Le soir, j'étudie le français à l'école.
+J'aime le tennis et les jeux. Je cherche des amis pour parler français.
+À bientôt,
+Raj`;
+
+const CE_POOL_15 = buildExpressPool("e1-1-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Raj", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Raj",
+    vfQ: "La personne s'appelle Raj.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Raj ?",
+    text: ["36 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "36",
+    vfQ: "Raj a 36 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Raj ?",
+    text: ["À Delémont", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Delémont",
+    vfQ: "Raj habite à Delémont.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Raj ?",
+    text: ["Informaticien", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "informaticien",
+    vfQ: "Raj est informaticien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Raj écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Raj cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Raj habite dans la ville ?",
+    text: ["Depuis deux ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Delémont depuis _________.",
+    fill: "ans",
+    vfQ: "Raj habite à Delémont depuis deux ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Inès. J'ai 30 ans. Je suis tunisienne. J'habite à Payerne depuis un an.
+Je suis pharmacienne. Le soir, j'étudie le français à l'école.
+J'aime la lecture et le yoga. Je cherche des amis pour parler français.
+À bientôt,
+Inès`;
+
+const CE_POOL_16 = buildExpressPool("e1-1-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Inès", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Inès",
+    vfQ: "La personne s'appelle Inès.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Inès ?",
+    text: ["30 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "30",
+    vfQ: "Inès a 30 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Inès ?",
+    text: ["À Payerne", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Payerne",
+    vfQ: "Inès habite à Payerne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Inès ?",
+    text: ["Pharmacienne", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "pharmacienne",
+    vfQ: "Inès est pharmacienne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Inès écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Inès cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Inès habite dans la ville ?",
+    text: ["Depuis un an", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Payerne depuis _________.",
+    fill: "un an",
+    vfQ: "Inès habite à Payerne depuis un an.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Miguel. J'ai 42 ans. Je suis mexicain. J'habite à Aigle depuis quatre ans.
+Je suis cuisinier. Le soir, j'étudie le français à l'école.
+J'aime la guitare et le foot. Je cherche des amis pour parler français.
+À bientôt,
+Miguel`;
+
+const CE_POOL_17 = buildExpressPool("e1-1-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Miguel", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Miguel",
+    vfQ: "La personne s'appelle Miguel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Miguel ?",
+    text: ["42 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "42",
+    vfQ: "Miguel a 42 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Miguel ?",
+    text: ["À Aigle", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Aigle",
+    vfQ: "Miguel habite à Aigle.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Miguel ?",
+    text: ["Cuisinier", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "cuisinier",
+    vfQ: "Miguel est cuisinier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Miguel écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Miguel cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Miguel habite dans la ville ?",
+    text: ["Depuis quatre ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Aigle depuis _________.",
+    fill: "ans",
+    vfQ: "Miguel habite à Aigle depuis quatre ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Lina. J'ai 18 ans. Je suis libanaise. J'habite à Morges depuis six mois.
+Je suis élève. Le soir, j'étudie le français à l'école.
+J'aime le dessin et les amis. Je cherche des amis pour parler français.
+À bientôt,
+Lina`;
+
+const CE_POOL_18 = buildExpressPool("e1-1-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Lina", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Lina",
+    vfQ: "La personne s'appelle Lina.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Lina ?",
+    text: ["18 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "18",
+    vfQ: "Lina a 18 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Lina ?",
+    text: ["À Morges", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Morges",
+    vfQ: "Lina habite à Morges.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Lina ?",
+    text: ["Élève", "médecin", "avocat"],
+    textC: 0,
+    img: ["étudiant", "médecin", "avocat"],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "élève",
+    vfQ: "Lina est élève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Lina écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Lina cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Lina habite dans la ville ?",
+    text: ["Depuis six mois", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Morges depuis _________.",
+    fill: "mois",
+    vfQ: "Lina habite à Morges depuis six mois.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Klaus. J'ai 50 ans. Je suis allemand. J'habite à Bienne depuis quinze ans.
+Je suis architecte. Le soir, j'étudie le français à l'école.
+J'aime la photo et la nature. Je cherche des amis pour parler français.
+À bientôt,
+Klaus`;
+
+const CE_POOL_19 = buildExpressPool("e1-1-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Klaus", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Klaus",
+    vfQ: "La personne s'appelle Klaus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Klaus ?",
+    text: ["50 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "50",
+    vfQ: "Klaus a 50 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Klaus ?",
+    text: ["À Bienne", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Bienne",
+    vfQ: "Klaus habite à Bienne.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Klaus ?",
+    text: ["Architecte", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "architecte",
+    vfQ: "Klaus est architecte.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Klaus écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Klaus cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Klaus habite dans la ville ?",
+    text: ["Depuis quinze ans", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Bienne depuis _________.",
+    fill: "ans",
+    vfQ: "Klaus habite à Bienne depuis quinze ans.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Note sur le forum de l'école
+
+Bonjour !
+Je m'appelle Zoé. J'ai 28 ans. Je suis canadienne. J'habite à Renens depuis neuf mois.
+Je suis journaliste. Le soir, j'étudie le français à l'école.
+J'aime le théâtre et les voyages. Je cherche des amis pour parler français.
+À bientôt,
+Zoé`;
+
+const CE_POOL_20 = buildExpressPool("e1-1-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Zoé", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Zoé",
+    vfQ: "La personne s'appelle Zoé.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel âge a Zoé ?",
+    text: ["28 ans", "20 ans", "50 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'ai _________ ans.",
+    fill: "28",
+    vfQ: "Zoé a 28 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où habite Zoé ?",
+    text: ["À Renens", "À Paris", "À Lyon"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à _________.",
+    fill: "Renens",
+    vfQ: "Zoé habite à Renens.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle est la profession de Zoé ?",
+    text: ["Journaliste", "médecin", "avocat"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je suis _________.",
+    fill: "journaliste",
+    vfQ: "Zoé est journaliste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Pourquoi Zoé écrit ce message ?",
+    text: ["Pour chercher des amis", "Pour vendre un vélo", "Pour trouver un travail"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je cherche des _________ pour parler français.",
+    fill: "amis",
+    vfQ: "Zoé cherche un nouveau travail.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Depuis combien de temps Zoé habite dans la ville ?",
+    text: ["Depuis neuf mois", "Depuis une semaine", "Depuis vingt ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "J'habite à Renens depuis _________.",
+    fill: "mois",
+    vfQ: "Zoé habite à Renens depuis neuf mois.",
+    vfC: 0,
+  }),
+]);
+
+export const E1_1_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e1-1-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e1-1-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e1-1-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e1-1-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e1-1-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e1-1-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e1-1-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e1-1-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e1-1-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e1-1-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e1-1-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e1-1-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e1-1-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e1-1-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e1-1-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e1-1-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e1-1-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e1-1-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e1-1-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e1-1-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème se présenter) ─────────────── */
 
@@ -328,6 +2021,196 @@ export const E1_1_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+{
+  id: "e1-1-po-11",
+  title: "Au parc",
+  context: "Vous rencontrez quelqu'un au parc.",
+  roleA: { title: "La promeneuse", vous: "la promeneuse" },
+  roleB: { title: "Le promeneur", vous: "le promeneur" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-12",
+  title: "À la piscine",
+  context: "Premier jour à la piscine municipale.",
+  roleA: { title: "Le moniteur", vous: "le moniteur / la monitrice" },
+  roleB: { title: "Le nageur", vous: "le nageur / la nageuse" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-13",
+  title: "Chez le médecin",
+  context: "Première visite chez le médecin.",
+  roleA: { title: "La secrétaire", vous: "le secrétaire / la secrétaire" },
+  roleB: { title: "Le patient", vous: "le patient / la patiente" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-14",
+  title: "À l'université",
+  context: "Journée portes ouvertes.",
+  roleA: { title: "L'étudiant", vous: "l'étudiant / l'étudiante" },
+  roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-15",
+  title: "Au marché",
+  context: "Vous parlez avec un vendeur.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Le client", vous: "le client / la cliente" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-16",
+  title: "À la gare",
+  context: "Vous attendez le train.",
+  roleA: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+  roleB: { title: "La voyageuse", vous: "le voyageur / la voyageuse" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-17",
+  title: "En ligne",
+  context: "Premier cours en visio.",
+  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
+  roleB: { title: "L'élève", vous: "l'élève / l'élève" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-18",
+  title: "Au café",
+  context: "Vous commandez un café.",
+  roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
+  roleB: { title: "Le client", vous: "le client / la cliente" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-19",
+  title: "À l'hôtel",
+  context: "Vous arrivez à l'hôtel.",
+  roleA: { title: "La réceptionniste", vous: "la réceptionniste" },
+  roleB: { title: "Le client", vous: "le client / la cliente" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-1-po-20",
+  title: "Au musée",
+  context: "Vous visitez un musée.",
+  roleA: { title: "Le guide", vous: "le guide / la guide" },
+  roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+  lines: [
+    { role: "A", text: "Bonjour ! Comment vous appelez-vous ?" },
+    { role: "B", text: "Bonjour, je m'appelle Karim." },
+    { role: "A", text: "Enchanté ! Vous êtes de quelle nationalité ?" },
+    { role: "B", text: "Je suis marocain. Et vous ?" },
+    { role: "A", text: "Je suis suisse. Vous habitez où ?" },
+    { role: "B", text: "J'habite à Lausanne, près du lac." },
+    { role: "A", text: "Vous faites quoi dans la vie ?" },
+    { role: "B", text: "Je suis étudiant en informatique." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -426,4 +2309,134 @@ export const E1_1_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e1-1-pe-11",
+  title: "Texte sur se présenter — variante 11",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-12",
+  title: "Texte sur se présenter — variante 12",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-13",
+  title: "Texte sur se présenter — variante 13",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-14",
+  title: "Texte sur se présenter — variante 14",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-15",
+  title: "Texte sur se présenter — variante 15",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-16",
+  title: "Texte sur se présenter — variante 16",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-17",
+  title: "Texte sur se présenter — variante 17",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-18",
+  title: "Texte sur se présenter — variante 18",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-19",
+  title: "Texte sur se présenter — variante 19",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-1-pe-20",
+  title: "Texte sur se présenter — variante 20",
+  situation: "Situation liée au thème « se présenter ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur se présenter — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

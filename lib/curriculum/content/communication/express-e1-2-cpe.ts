@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E1.2 Parler de sa famille ──────────────────────── */
+/* ── Compréhension écrite — E1.2 Parler de sa famille ── */
 
-const CE_TEXT = `E-mail à une correspondante
+const CE_TEXT_1 = `E-mail à une correspondante
 
 Chère Julia,
 Merci pour ta lettre ! Aujourd'hui, je te présente ma famille. Nous sommes cinq à la maison. C'est mon père, ma mère, mes deux frères et moi.
@@ -21,8 +21,8 @@ J'ai aussi une grande sœur, Léa. Elle est mariée et elle a un bébé. Elle n'
 Sur la photo, tu vois toute la famille. Nous sommes chez mes grands-parents.
 Et toi, tu as des frères et sœurs ?`;
 
-const CE_POOL = buildExpressPool("e1-2-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e1-2-1", [
+q({
     id: "ce-q1",
     textQ: "Combien de personnes habitent à la maison ?",
     text: ["Cinq", "Quatre", "Six"],
@@ -119,11 +119,1704 @@ const CE_POOL = buildExpressPool("e1-2-ce", [
   }),
 ]);
 
-export const E1_2_CE: CommunicationExercise = readingPoolExercise({
-  id: "e1-2-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Message à un ami
+
+Salut !
+Je m'appelle Karim. Je te parle de ma famille. Nous sommes 4 à la maison.
+Père chauffeur 48 ans, mère vendeuse 44 ans, sœur 15 ans.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Karim`;
+
+const CE_POOL_2 = buildExpressPool("e1-2-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Karim", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Karim",
+    vfQ: "La personne s'appelle Karim.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["4", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "4",
+    vfQ: "Ils sont 4 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le père est chauffeur ?",
+    text: ["Chauffeur", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : chauffeur.",
+    fill: "chauffeur",
+    vfQ: "Le père est chauffeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Message à un ami
+
+Salut !
+Je m'appelle Léa. Je te parle de ma famille. Nous sommes 3 à la maison.
+Parents agriculteurs, frère jumeau 12 ans.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Léa`;
+
+const CE_POOL_3 = buildExpressPool("e1-2-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Léa", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Léa",
+    vfQ: "La personne s'appelle Léa.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["3", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "3",
+    vfQ: "Ils sont 3 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Ils sont trois à la maison ?",
+    text: ["Ils sont trois à la maison", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : trois.",
+    fill: "trois",
+    vfQ: "Ils sont trois à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Message à un ami
+
+Salut !
+Je m'appelle Diego. Je te parle de ma famille. Nous sommes 5 à la maison.
+Père médecin, mère professeur, deux sœurs.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Diego`;
+
+const CE_POOL_4 = buildExpressPool("e1-2-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Diego", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Diego",
+    vfQ: "La personne s'appelle Diego.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["5", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "5",
+    vfQ: "Ils sont 5 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le père est médecin ?",
+    text: ["Médecin", "facteur", "pilote"],
+    textC: 0,
+    img: ["médecin", "boulanger", "facteur"],
+    imgC: 0,
+    fillQ: "Ma famille : médecin.",
+    fill: "médecin",
+    vfQ: "Le père est médecin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Message à un ami
+
+Salut !
+Je m'appelle Hana. Je te parle de ma famille. Nous sommes 6 à la maison.
+Grands-parents, parents, elle et son frère.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Hana`;
+
+const CE_POOL_5 = buildExpressPool("e1-2-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Hana", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Hana",
+    vfQ: "La personne s'appelle Hana.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["6", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "6",
+    vfQ: "Ils sont 6 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Ils sont six à la maison ?",
+    text: ["Ils sont six à la maison", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : six.",
+    fill: "six",
+    vfQ: "Ils sont six à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Message à un ami
+
+Salut !
+Je m'appelle Noah. Je te parle de ma famille. Nous sommes 4 à la maison.
+Mère infirmière célibataire, lui et sa sœur.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Noah`;
+
+const CE_POOL_6 = buildExpressPool("e1-2-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Noah", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Noah",
+    vfQ: "La personne s'appelle Noah.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["4", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "4",
+    vfQ: "Ils sont 4 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "La mère est infirmière ?",
+    text: ["Infirmière", "facteur", "pilote"],
+    textC: 0,
+    img: ["infirmière", "vendeuse", "coiffeuse"],
+    imgC: 0,
+    fillQ: "Ma famille : infirmière.",
+    fill: "infirmière",
+    vfQ: "La mère est infirmière.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Message à un ami
+
+Salut !
+Je m'appelle Sofia. Je te parle de ma famille. Nous sommes 5 à la maison.
+Père cuisinier, mère secrétaire, frère et sœur.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Sofia`;
+
+const CE_POOL_7 = buildExpressPool("e1-2-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Sofia", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Sofia",
+    vfQ: "La personne s'appelle Sofia.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["5", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "5",
+    vfQ: "Ils sont 5 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le père est cuisinier ?",
+    text: ["Cuisinier", "facteur", "pilote"],
+    textC: 0,
+    img: ["cuisinier", "plombier", "peintre"],
+    imgC: 0,
+    fillQ: "Ma famille : cuisinier.",
+    fill: "cuisinier",
+    vfQ: "Le père est cuisinier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Message à un ami
+
+Salut !
+Je m'appelle Adam. Je te parle de ma famille. Nous sommes 3 à la maison.
+Ses parents et lui seulement.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Adam`;
+
+const CE_POOL_8 = buildExpressPool("e1-2-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Adam", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Adam",
+    vfQ: "La personne s'appelle Adam.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["3", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "3",
+    vfQ: "Ils sont 3 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Ils sont trois ?",
+    text: ["Ils sont trois", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : trois.",
+    fill: "trois",
+    vfQ: "Ils sont trois.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Message à un ami
+
+Salut !
+Je m'appelle Mila. Je te parle de ma famille. Nous sommes 4 à la maison.
+Père retraité, mère fleuriste, grand-mère.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Mila`;
+
+const CE_POOL_9 = buildExpressPool("e1-2-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Mila", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Mila",
+    vfQ: "La personne s'appelle Mila.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["4", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "4",
+    vfQ: "Ils sont 4 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "La mère est fleuriste ?",
+    text: ["Fleuriste", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : fleuriste.",
+    fill: "fleuriste",
+    vfQ: "La mère est fleuriste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Message à un ami
+
+Salut !
+Je m'appelle Youssef. Je te parle de ma famille. Nous sommes 5 à la maison.
+Deux frères, deux sœurs, parents.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Youssef`;
+
+const CE_POOL_10 = buildExpressPool("e1-2-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Youssef", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Youssef",
+    vfQ: "La personne s'appelle Youssef.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["5", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "5",
+    vfQ: "Ils sont 5 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Il a deux frères ?",
+    text: ["Il a deux frères", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : deux.",
+    fill: "deux",
+    vfQ: "Il a deux frères.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Message à un ami
+
+Salut !
+Je m'appelle Chloé. Je te parle de ma famille. Nous sommes 4 à la maison.
+Père policier, mère coiffeuse, petit frère 6 ans.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Chloé`;
+
+const CE_POOL_11 = buildExpressPool("e1-2-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Chloé", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Chloé",
+    vfQ: "La personne s'appelle Chloé.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["4", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "4",
+    vfQ: "Ils sont 4 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le père est policier ?",
+    text: ["Policier", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : policier.",
+    fill: "policier",
+    vfQ: "Le père est policier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Message à un ami
+
+Salut !
+Je m'appelle Emre. Je te parle de ma famille. Nous sommes 3 à la maison.
+Parents et sœur aînée mariée.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Emre`;
+
+const CE_POOL_12 = buildExpressPool("e1-2-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Emre", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Emre",
+    vfQ: "La personne s'appelle Emre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["3", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "3",
+    vfQ: "Ils sont 3 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Sa sœur est mariée ?",
+    text: ["Mariée", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : mariée.",
+    fill: "mariée",
+    vfQ: "Sa sœur est mariée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Message à un ami
+
+Salut !
+Je m'appelle Anna. Je te parle de ma famille. Nous sommes 5 à la maison.
+Père ingénieur, mère dentiste, jumeaux.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Anna`;
+
+const CE_POOL_13 = buildExpressPool("e1-2-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Anna", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Anna",
+    vfQ: "La personne s'appelle Anna.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["5", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "5",
+    vfQ: "Ils sont 5 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "La mère est dentiste ?",
+    text: ["Dentiste", "facteur", "pilote"],
+    textC: 0,
+    img: ["dentiste", "serveuse", "vendeuse"],
+    imgC: 0,
+    fillQ: "Ma famille : dentiste.",
+    fill: "dentiste",
+    vfQ: "La mère est dentiste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Message à un ami
+
+Salut !
+Je m'appelle Bilal. Je te parle de ma famille. Nous sommes 4 à la maison.
+Famille nombreuse : 4 enfants.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Bilal`;
+
+const CE_POOL_14 = buildExpressPool("e1-2-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Bilal", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Bilal",
+    vfQ: "La personne s'appelle Bilal.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["4", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "4",
+    vfQ: "Ils sont 4 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Il y a quatre enfants ?",
+    text: ["Il y a quatre enfants", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : quatre.",
+    fill: "quatre",
+    vfQ: "Il y a quatre enfants.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Message à un ami
+
+Salut !
+Je m'appelle Emma. Je te parle de ma famille. Nous sommes 3 à la maison.
+Mère et père professeurs, elle seule enfant.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Emma`;
+
+const CE_POOL_15 = buildExpressPool("e1-2-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Emma", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Emma",
+    vfQ: "La personne s'appelle Emma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["3", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "3",
+    vfQ: "Ils sont 3 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Elle est fille unique ?",
+    text: ["Unique", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : unique.",
+    fill: "unique",
+    vfQ: "Elle est fille unique.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Message à un ami
+
+Salut !
+Je m'appelle Ravi. Je te parle de ma famille. Nous sommes 5 à la maison.
+Oncle, tante, cousins à la maison le week-end.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Ravi`;
+
+const CE_POOL_16 = buildExpressPool("e1-2-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Ravi", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Ravi",
+    vfQ: "La personne s'appelle Ravi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["5", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "5",
+    vfQ: "Ils sont 5 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Des cousins viennent le week-end ?",
+    text: ["Des cousins viennent le week-end", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : week-end.",
+    fill: "week-end",
+    vfQ: "Des cousins viennent le week-end.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Message à un ami
+
+Salut !
+Je m'appelle Lucie. Je te parle de ma famille. Nous sommes 4 à la maison.
+Père boulanger, mère à la maison, deux frères.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Lucie`;
+
+const CE_POOL_17 = buildExpressPool("e1-2-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Lucie", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Lucie",
+    vfQ: "La personne s'appelle Lucie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["4", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "4",
+    vfQ: "Ils sont 4 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le père est boulanger ?",
+    text: ["Boulanger", "facteur", "pilote"],
+    textC: 0,
+    img: ["boulanger", "journaliste", "pilote"],
+    imgC: 0,
+    fillQ: "Ma famille : boulanger.",
+    fill: "boulanger",
+    vfQ: "Le père est boulanger.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Message à un ami
+
+Salut !
+Je m'appelle Samir. Je te parle de ma famille. Nous sommes 6 à la maison.
+Parents, trois frères, grand-père.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Samir`;
+
+const CE_POOL_18 = buildExpressPool("e1-2-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Samir", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Samir",
+    vfQ: "La personne s'appelle Samir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["6", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "6",
+    vfQ: "Ils sont 6 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le grand-père habite avec eux ?",
+    text: ["Le grand-père habite avec eux", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : grand-père.",
+    fill: "grand-père",
+    vfQ: "Le grand-père habite avec eux.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Message à un ami
+
+Salut !
+Je m'appelle Julie. Je te parle de ma famille. Nous sommes 4 à la maison.
+Mère divorcée, julie et son frère.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Julie`;
+
+const CE_POOL_19 = buildExpressPool("e1-2-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Julie", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Julie",
+    vfQ: "La personne s'appelle Julie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["4", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "4",
+    vfQ: "Ils sont 4 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "La mère est divorcée ?",
+    text: ["Divorcée", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : divorcée.",
+    fill: "divorcée",
+    vfQ: "La mère est divorcée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Message à un ami
+
+Salut !
+Je m'appelle Mateo. Je te parle de ma famille. Nous sommes 5 à la maison.
+Père musicien, mère traductrice, sœur bébé.
+Ma famille est très sympa. On mange ensemble le soir.
+Et toi, tu as une grande famille ?
+Mateo`;
+
+const CE_POOL_20 = buildExpressPool("e1-2-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Comment s'appelle la personne ?",
+    text: ["Mateo", "Paul", "Marie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je m'appelle _________.",
+    fill: "Mateo",
+    vfQ: "La personne s'appelle Mateo.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Combien de personnes habitent à la maison ?",
+    text: ["5", "deux", "dix"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Nous sommes _________ à la maison.",
+    fill: "5",
+    vfQ: "Ils sont 5 à la maison.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le père est musicien ?",
+    text: ["Musicien", "facteur", "pilote"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille : musicien.",
+    fill: "musicien",
+    vfQ: "Le père est musicien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand la famille mange-t-elle ensemble ?",
+    text: ["Le soir", "Le matin", "À midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On mange ensemble le _________.",
+    fill: "soir",
+    vfQ: "La famille mange ensemble le soir.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "De quoi parle le message ?",
+    text: ["De la famille", "Du travail", "Des vacances"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je te parle de ma _________.",
+    fill: "famille",
+    vfQ: "Le message parle de vacances.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "La famille est-elle sympa ?",
+    text: ["Oui, très sympa", "Non, pas sympa", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ma famille est très _________.",
+    fill: "sympa",
+    vfQ: "La famille est sympa.",
+    vfC: 0,
+  }),
+]);
+
+export const E1_2_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e1-2-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e1-2-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e1-2-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e1-2-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e1-2-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e1-2-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e1-2-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e1-2-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e1-2-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e1-2-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e1-2-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e1-2-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e1-2-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e1-2-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e1-2-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e1-2-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e1-2-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e1-2-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e1-2-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e1-2-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème famille) ──────────────────── */
 
@@ -318,6 +2011,196 @@ export const E1_2_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À tout à l'heure !" },
 ],
   },
+{
+  id: "e1-2-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e1-2-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : la famille.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de la famille." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -416,4 +2299,134 @@ export const E1_2_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e1-2-pe-11",
+  title: "Texte sur la famille — variante 11",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-12",
+  title: "Texte sur la famille — variante 12",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-13",
+  title: "Texte sur la famille — variante 13",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-14",
+  title: "Texte sur la famille — variante 14",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-15",
+  title: "Texte sur la famille — variante 15",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-16",
+  title: "Texte sur la famille — variante 16",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-17",
+  title: "Texte sur la famille — variante 17",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-18",
+  title: "Texte sur la famille — variante 18",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-19",
+  title: "Texte sur la famille — variante 19",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e1-2-pe-20",
+  title: "Texte sur la famille — variante 20",
+  situation: "Situation liée au thème « la famille ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur la famille — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];
