@@ -1,25 +1,23 @@
-import { notFound } from "next/navigation";
-import { getConjLesson } from "@/lib/curriculum/conjugation-data";
-import { GrammaireRunner } from "@/components/francais/GrammaireRunner";
+import { redirect } from "next/navigation";
+import {
+  getGrammarLesson,
+  getConjLesson,
+  resolveFrenchPrereqSlug,
+} from "@/lib/curriculum/grammar-data";
 
 type Props = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ returnTab?: string }>;
 };
 
-export default async function ConjugaisonPage({ params, searchParams }: Props) {
+/** Ancien onglet conjugaison : redirection vers la leçon de grammaire fusionnée. */
+export default async function ConjugaisonPage({ params }: Props) {
   const { slug } = await params;
-  const { returnTab } = await searchParams;
-  const lesson = getConjLesson(slug);
-  if (!lesson) notFound();
-  const resolvedLesson = lesson!;
-  const subject =
-    returnTab === "grammaire"   ? "Grammaire" :
-    returnTab === "vocabulaire" ? "Vocabulaire" :
-    "Conjugaison";
-  return (
-    <main className="flex min-h-screen flex-col">
-      <GrammaireRunner lesson={resolvedLesson} subject={subject} />
-    </main>
-  );
+  const target = resolveFrenchPrereqSlug(slug);
+  if (getGrammarLesson(target) || getConjLesson(target)) {
+    redirect(`/francais/grammaire/${target}`);
+  }
+  if (getGrammarLesson(slug) || getConjLesson(slug)) {
+    redirect(`/francais/grammaire/${slug}`);
+  }
+  redirect("/francais?tab=grammaire");
 }

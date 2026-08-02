@@ -15,33 +15,31 @@ type SectionState = "locked" | "in_progress" | "completed";
 type LessonState  = "locked" | "available" | "completed";
 
 
-/** Chapitre = module Gx ; Unité = leçon (G1.1 = Unité 1, G2.1 = Unité 11…). */
+/** Module = Gx ; leçon = Gx.y (affichage du code, sans « Unité » / « Chapitre »). */
 const GRAMMAR_GROUPS: SectionDef[] = [
-  { id: "G1", code: "G1", title: "Chapitre 1 — Les fondamentaux" },
-  { id: "G2", code: "G2", title: "Chapitre 2 — Décrire et situer" },
-  { id: "G3", code: "G3", title: "Chapitre 3 — Pronoms et relations" },
-  { id: "G4", code: "G4", title: "Chapitre 4 — Temps et modes" },
-];
-
-/** Numéro d'unité global depuis un code Gx.y (10 unités par chapitre). */
-function grammarUnitLabel(code: string): string | null {
-  const m = /^G(\d+)\.(\d+)$/.exec(code);
-  if (!m) return null;
-  const chapter = Number(m[1]);
-  const unit = Number(m[2]);
-  if (!Number.isFinite(chapter) || !Number.isFinite(unit) || unit < 1) return null;
-  return `Unité ${(chapter - 1) * 10 + unit}`;
-}
-
-const CONJ_GROUPS: SectionDef[] = [
-  { id: "C1", code: "C1", title: "Les verbes essentiels" },
-  { id: "C2", code: "C2", title: "Le passé" },
-  { id: "C3", code: "C3", title: "Le futur" },
-  { id: "C4", code: "C4", title: "Les autres temps" },
+  { id: "G1", code: "G1", title: "Le présent" },
+  { id: "G2", code: "G2", title: "Le nom" },
+  { id: "G3", code: "G3", title: "L'adjectif qualificatif" },
+  { id: "G4", code: "G4", title: "Les déterminants" },
+  { id: "G5", code: "G5", title: "La structure de la phrase" },
+  { id: "G6", code: "G6", title: "Bilan A1" },
+  { id: "G7", code: "G7", title: "Les prépositions de lieu" },
+  { id: "G8", code: "G8", title: "Le passé" },
+  { id: "G9", code: "G9", title: "Le futur" },
+  { id: "G10", code: "G10", title: "La comparaison" },
+  { id: "G11", code: "G11", title: "L'expression de temps" },
+  { id: "G12", code: "G12", title: "Les pronoms" },
+  { id: "G13", code: "G13", title: "Bilan A2" },
+  { id: "G14", code: "G14", title: "Les adverbes" },
+  { id: "G15", code: "G15", title: "Les mots de liaison" },
+  { id: "G16", code: "G16", title: "Les autres temps des verbes" },
+  { id: "G17", code: "G17", title: "Les phrases complexes" },
+  { id: "G18", code: "G18", title: "Bilan B1" },
+  { id: "G19", code: "G19", title: "Compléments" },
 ];
 
 function moduleGroupId(code: string): string {
-  const m = /^(G\d+|C\d+)\./.exec(code);
+  const m = /^(G\d+)\./.exec(code);
   return m?.[1] ?? "";
 }
 
@@ -58,44 +56,24 @@ const VOCAB_MODULES: SectionDef[] = [
   { id: "V10", code: "V10", title: "Services, voyages et animaux" },
 ];
 
-const TABS: { id: FrenchTab; label: string; short: string }[] = [
+type ActiveFrenchTab = "vocabulaire" | "grammaire" | "communication";
+
+const TABS: { id: ActiveFrenchTab; label: string; short: string }[] = [
   { id: "vocabulaire", label: "Vocabulaire", short: "Voca." },
-  { id: "conjugaison", label: "Conjugaison", short: "Conj." },
   { id: "grammaire", label: "Grammaire", short: "Gram." },
   { id: "communication", label: "Communication", short: "Comm." },
 ];
 
-const VALID_TABS: FrenchTab[] = ["vocabulaire", "conjugaison", "grammaire", "communication"];
-
-const TAB_TITLES: Record<Exclude<FrenchTab, "general">, string> = {
+const TAB_TITLES: Record<ActiveFrenchTab, string> = {
   vocabulaire: "Vocabulaire",
-  conjugaison: "Conjugaison",
   grammaire: "Grammaire",
   communication: "Communication",
 };
 
-const GRAMMAR_AVAILABLE = new Set(["G1"]);
-const CONJ_AVAILABLE = new Set(["C1", "C2", "C3", "C4"]);
-
-/** Déblocage losange conjugaison : C1 → (C2 et C3) → C4. */
-function isConjModuleAccessible(
-  grpId: string,
-  themesByGroup: Map<string, FrenchTheme[]>,
-  completedSlugs: Set<string>,
-): boolean {
-  const allDone = (id: string) => {
-    const themes = themesByGroup.get(id) ?? [];
-    return themes.length > 0 && themes.every((th) => completedSlugs.has(th.slug));
-  };
-  if (grpId === "C1") return true;
-  if (grpId === "C2" || grpId === "C3") return allDone("C1");
-  if (grpId === "C4") return allDone("C2") && allDone("C3");
-  return false;
-}
+const GRAMMAR_AVAILABLE = new Set(GRAMMAR_GROUPS.map((g) => g.id));
 
 function lessonHref(th: FrenchTheme): string {
-  if (th.tab === "conjugaison") return `/francais/conjugaison/${th.slug}`;
-  if (th.tab === "grammaire")   return `/francais/grammaire/${th.slug}`;
+  if (th.tab === "grammaire" || th.tab === "conjugaison") return `/francais/grammaire/${th.slug}`;
   if (th.tab === "vocabulaire") return `/francais/vocabulaire/${th.slug}`;
   return `/francais/${th.slug}`;
 }
@@ -225,6 +203,7 @@ function SectionCard({
   returnTab,
   vocabGrades,
   isAdmin,
+  freeAccess,
   comingSoon,
 }: {
   sec: SectionDef;
@@ -235,6 +214,7 @@ function SectionCard({
   returnTab?: FrenchTab;
   vocabGrades?: Record<string, { score: number; passed: boolean }>;
   isAdmin?: boolean;
+  freeAccess?: boolean;
   comingSoon?: boolean;
 }) {
   const locked     = state === "locked";
@@ -242,6 +222,7 @@ function SectionCard({
   const [expanded, setExpanded] = useState(false);
   // in_progress section is always open; completed/locked can be toggled
   const showContent = inProgress || expanded;
+  const unlockAll = Boolean(isAdmin || freeAccess);
 
   // First uncompleted lesson — the only one accessible in in_progress
   const firstAvailableSlug =
@@ -257,9 +238,9 @@ function SectionCard({
     }
     if (locked) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
-    // Completed section or admin: all lessons accessible
-    if (state === "completed" || isAdmin) return "available";
-    // In-progress: only the first uncompleted lesson is accessible
+    // Accès libre / admin / section terminée : toutes les leçons
+    if (state === "completed" || unlockAll) return "available";
+    // Parcours normal : seule la première leçon non complétée
     if (th.slug === firstAvailableSlug) return "available";
     return "locked";
   }
@@ -350,7 +331,7 @@ function SectionCard({
                   <LessonDot state={ls} />
                   <div className="min-w-0 flex-1">
                     <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
-                      {grammarUnitLabel(th.code) ?? th.code}
+                      {th.code}
                     </span>
                     <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">{th.title}</span>
                   </div>
@@ -407,14 +388,24 @@ function SectionCard({
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
+export function FrancaisClient({
+  isAdmin = false,
+  freeAccess = false,
+}: {
+  isAdmin?: boolean;
+  freeAccess?: boolean;
+}) {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab") as FrenchTab | null;
   const { overrides } = useContentEditor();
   const frenchThemes = resolveFrenchThemes(FRENCH_THEMES, overrides);
-  const [tab, setTab] = useState<FrenchTab>(
-    tabParam && VALID_TABS.includes(tabParam) ? tabParam : "vocabulaire",
-  );
+  const asActiveTab = (value: string | null): ActiveFrenchTab | null =>
+    value === "vocabulaire" || value === "grammaire" || value === "communication"
+      ? value
+      : null;
+  const initialTab: ActiveFrenchTab =
+    tabParam === "conjugaison" ? "grammaire" : asActiveTab(tabParam) ?? "vocabulaire";
+  const [tab, setTab] = useState<ActiveFrenchTab>(initialTab);
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);
   const [vocabGrades, setVocabGrades] = useState<Record<string, { score: number; passed: boolean }>>({});
@@ -429,7 +420,13 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
   // Sync with sidebar / URL (?tab=) — soft nav does not remount the page
   useEffect(() => {
-    if (tabParam && VALID_TABS.includes(tabParam)) setTab(tabParam);
+    if (tabParam === "conjugaison") {
+      setTab("grammaire");
+      window.history.replaceState(null, "", "/francais?tab=grammaire");
+      return;
+    }
+    const next = asActiveTab(tabParam);
+    if (next) setTab(next);
   }, [tabParam]);
 
   useEffect(() => {
@@ -440,13 +437,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
     return () => window.removeEventListener("soutien-french-lesson-complete", refreshProgress);
   }, []);
 
-  function renderModuleGroups(
-    groups: SectionDef[],
-    available: Set<string>,
-    opts?: { conjDiamond?: boolean },
-  ) {
-    // Regroupe par code G*/C* (pas par champ tab) : certaines leçons de temps
-    // sont en module C tout en restant routées via grammaire.
+  function renderModuleGroups(groups: SectionDef[], available: Set<string>) {
     const allTabThemes = groups.flatMap((grp) =>
       frenchThemes.filter((th) => moduleGroupId(th.code) === grp.id),
     );
@@ -458,14 +449,15 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
         allTabThemes
           .filter((th) => moduleGroupId(th.code) === grp.id)
           .sort((a, b) => {
-            const ua = Number(/^G\d+\.(\d+)$/.exec(a.code)?.[1] ?? /^C\d+\.(\d+)$/.exec(a.code)?.[1] ?? 0);
-            const ub = Number(/^G\d+\.(\d+)$/.exec(b.code)?.[1] ?? /^C\d+\.(\d+)$/.exec(b.code)?.[1] ?? 0);
+            const ua = Number(/^G\d+\.(\d+)$/.exec(a.code)?.[1] ?? 0);
+            const ub = Number(/^G\d+\.(\d+)$/.exec(b.code)?.[1] ?? 0);
             return ua - ub;
           }),
       );
     }
 
     let prevCount = 0;
+    const unlockAll = isAdmin || freeAccess;
 
     return (
       <>
@@ -473,24 +465,19 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
           const themes = themesByGroup.get(grp.id) ?? [];
           if (themes.length === 0) return null;
 
-
-          const isComingSoon = !available.has(grp.id) && !isAdmin;
+          const isComingSoon = !available.has(grp.id) && !unlockAll;
 
           let state: SectionState;
-          if (!hydrated || (!available.has(grp.id) && !isAdmin)) {
+          if (!hydrated || (!available.has(grp.id) && !unlockAll)) {
             state = "locked";
           } else {
-            const sectionAccessible = opts?.conjDiamond
-              ? isConjModuleAccessible(grp.id, themesByGroup, completedSlugs) || !!isAdmin
-              : (() => {
-                  const prevThemes = allTabThemes.slice(0, prevCount);
-                  return (
-                    prevThemes.length === 0 ||
-                    prevThemes.every((th) => completedSlugs.has(th.slug))
-                  );
-                })();
+            const prevThemes = allTabThemes.slice(0, prevCount);
+            const sectionAccessible =
+              unlockAll ||
+              prevThemes.length === 0 ||
+              prevThemes.every((th) => completedSlugs.has(th.slug));
 
-            if (!sectionAccessible && !isAdmin) {
+            if (!sectionAccessible) {
               state = "locked";
             } else {
               const allDone = themes.every((th) => completedSlugs.has(th.slug));
@@ -510,6 +497,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
               hydrated={hydrated}
               returnTab={tab}
               isAdmin={isAdmin}
+              freeAccess={freeAccess}
               comingSoon={isComingSoon}
             />
           );
@@ -537,7 +525,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
         <div className="relative z-10">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">Français</p>
           <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
-            {TAB_TITLES[tab === "general" ? "vocabulaire" : tab]}
+            {TAB_TITLES[tab]}
           </h1>
         </div>
       </header>
@@ -546,7 +534,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
       <div
         role="tablist"
         aria-label="Catégories français"
-        className="grid grid-cols-4 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)]/15 p-1 lg:hidden"
+        className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)]/15 p-1 lg:hidden"
       >
         {TABS.map(({ id, label, short }) => (
           <button
@@ -595,12 +583,11 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
                   returnTab={tab}
                   vocabGrades={vocabGrades}
                   isAdmin={isAdmin}
+                  freeAccess={freeAccess}
                 />
               );
             })}
           </>
-        ) : tab === "conjugaison" ? (
-          renderModuleGroups(CONJ_GROUPS, CONJ_AVAILABLE, { conjDiamond: true })
         ) : tab === "grammaire" ? (
           renderModuleGroups(GRAMMAR_GROUPS, GRAMMAR_AVAILABLE)
         ) : null}

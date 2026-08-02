@@ -1,7 +1,7 @@
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { VOCAB_THEMES } from "@/lib/curriculum/vocabulary-data";
-import { getAllGrammarLessons, getAllConjLessons } from "@/lib/curriculum/grammar-data";
+import { getAllGrammarLessons } from "@/lib/curriculum/grammar-data";
 import { MATH_TRAINING_LEVEL_LABELS, MATH_TRAINING_LEVEL_TOGGLE } from "@/lib/placement/math-training-levels";
 
 export type ImpressionSubject = "maths" | "francais" | "placement";
@@ -83,20 +83,7 @@ function buildFrenchDocuments(): ImpressionDocument[] {
     ref: lesson.slug,
   }));
 
-  const conj = getAllConjLessons().map((lesson) => ({
-    id: `conj:${lesson.slug}`,
-    subject: "francais" as const,
-    kind: "conjugation" as const,
-    group: "conjugaison",
-    groupLabel: "Conjugaison",
-    code: lesson.code,
-    title: lesson.title,
-    course: "Français" as const,
-    accentColor: FR_ACCENT,
-    ref: lesson.slug,
-  }));
-
-  return [...vocab, ...grammar, ...conj];
+  return [...vocab, ...grammar];
 }
 
 function buildPlacementDocuments(): ImpressionDocument[] {

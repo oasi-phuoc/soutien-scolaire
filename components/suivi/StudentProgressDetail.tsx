@@ -252,7 +252,7 @@ export function StudentProgressDetail({
 
   const [openSubject, setOpenSubject] = useState<"math" | "french" | "lecture" | "placement" | null>(null);
   const [mathBranch, setMathBranch] = useState<"algebra" | "geometry" | null>(null);
-  const [frenchTab, setFrenchTab] = useState<"vocabulaire" | "conjugaison" | "grammaire" | "communication" | null>(null);
+  const [frenchTab, setFrenchTab] = useState<"vocabulaire" | "grammaire" | "communication" | null>(null);
   const [lectureSection, setLectureSection] = useState<"apprendre" | null>(null);
 
   useEffect(() => {
@@ -343,7 +343,6 @@ export function StudentProgressDetail({
         <BranchToggle
           options={[
             { id: "vocabulaire" as const, label: "Vocabulaire" },
-            { id: "conjugaison" as const, label: "Conjugaison" },
             { id: "grammaire" as const, label: "Grammaire" },
             { id: "communication" as const, label: "Communication" },
           ]}

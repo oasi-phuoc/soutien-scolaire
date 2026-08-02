@@ -8,7 +8,7 @@ export const EXPRESS_E4_1: CommunicationLesson = {
   id: "E4-1",
   code: "E4.1",
   title: "Acheter des vêtements",
-  prerequisiteFrenchSlugs: ["v6-vetements", "v6-accessoires", "v6-couleurs", "v6-matieres", "a2-conj-l04"],
+  prerequisiteFrenchSlugs: ["v6-vetements", "v6-accessoires", "v6-couleurs", "v6-matieres", "a1-gr-conditionnel-present"],
   prerequisiteCommIds: ["E3-3"],
   theory: [
     { type: "heading", text: "Acheter des vêtements", black: true, trans: t("Buying clothes") },
@@ -17,7 +17,7 @@ export const EXPRESS_E4_1: CommunicationLesson = {
       items: [
         { code: "E3.3", title: "Travail", href: "/communication/E3-3" },
         { code: "V6.1", title: "Vêtements", href: "/francais/vocabulaire/v6-vetements" },
-        { code: "C6.1", title: "Conditionnel de politesse", href: "/francais/conjugaison/a2-conj-l04" }
+        { code: "G16.8", title: "Conditionnel de politesse", href: "/francais/grammaire/a1-gr-conditionnel-present" }
       ],
     },
     {

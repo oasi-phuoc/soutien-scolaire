@@ -28,6 +28,7 @@ export default async function AdminPage() {
   const rows: UserRow[] = (users ?? []).map((u) => ({
     ...u,
     can_print: Boolean((u as { can_print?: boolean }).can_print),
+    can_free_access: Boolean((u as { can_free_access?: boolean }).can_free_access),
   })).sort((a, b) => {
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
     const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();

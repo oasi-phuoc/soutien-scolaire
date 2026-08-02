@@ -8,7 +8,7 @@ export const EXPRESS_E2_2: CommunicationLesson = {
   id: "E2-2",
   code: "E2.2",
   title: "Avoir un problème domestique",
-  prerequisiteFrenchSlugs: ["v4-appareils-electromenagers", "v4-pannes", "a1-conj-l08", "a1-conj-l15"],
+  prerequisiteFrenchSlugs: ["v4-appareils-electromenagers", "v4-pannes", "a1-conj-l08", "a1-gr-modaux"],
   prerequisiteCommIds: ["E2-1"],
   theory: [
     { type: "heading", text: "Avoir un problème domestique", black: true, trans: t("Having a home problem") },
@@ -18,8 +18,8 @@ export const EXPRESS_E2_2: CommunicationLesson = {
         { code: "E2.1", title: "Décrire son logement", href: "/communication/E2-1" },
         { code: "V4.4", title: "Électroménager", href: "/francais/vocabulaire/v4-appareils-electromenagers" },
         { code: "V4.5", title: "Pannes", href: "/francais/vocabulaire/v4-pannes" },
-        { code: "C2.1", title: "Verbes de mouvement", href: "/francais/conjugaison/a1-conj-l08" },
-        { code: "C2.3", title: "Modaux", href: "/francais/conjugaison/a1-conj-l15" }
+        { code: "G19.33", title: "Verbes de mouvement", href: "/francais/grammaire/a1-conj-l08" },
+        { code: "G1.6", title: "Modaux", href: "/francais/grammaire/a1-gr-modaux" }
       ],
     },
     {

@@ -18,7 +18,7 @@ export default async function FrancaisPage() {
   const isAdmin = access.role === "admin" || access.role === "prof";
   return (
     <Suspense>
-      <FrancaisClient isAdmin={isAdmin} />
+      <FrancaisClient isAdmin={isAdmin} freeAccess={access.canFreeAccess} />
     </Suspense>
   );
 }

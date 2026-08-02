@@ -292,7 +292,7 @@ const GRAMMAR_TASK_MODULES: ModuleOpt[] = Object.entries(GRAMMAR_MODULE_TITLES).
     label: `${id} — ${label}`,
     lessons: FRENCH_THEMES
       .filter((theme) =>
-        (theme.tab === "grammaire" || theme.tab === "conjugaison")
+        theme.tab === "grammaire"
         && theme.code.startsWith(`${id}.`)
       )
       .map((theme) => ({ id: theme.code, label: `${theme.code} — ${theme.title}` })),
