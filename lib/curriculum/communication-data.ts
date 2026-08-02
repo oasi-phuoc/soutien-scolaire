@@ -59,7 +59,7 @@ export const COMM_MODULES: CommunicationModule[] = [
         comm: ["E1-1"],
       }),
       s("E1-3", "E1.3", "Inviter à une fête", {
-        french: ["v2-jours-mois-dates", "v2-heure", "a1-conj-l07", "a1-gr-l02"],
+        french: ["v2-jours-mois-dates", "v2-heure", "a1-conj-l07", "a1-gr-negation-ne-pas"],
         comm: ["E1-2"],
       }),
     ],
