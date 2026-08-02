@@ -18,7 +18,7 @@ export const EXPRESS_E2_1: CommunicationLesson = {
         { code: "E1.3", title: "Inviter à une fête", href: "/communication/E1-3" },
         { code: "V4.1", title: "Types de logement", href: "/francais/vocabulaire/v4-type-logement" },
         { code: "V4.2", title: "Pièces", href: "/francais/vocabulaire/v4-pieces-maison" },
-        { code: "G1.3", title: "Articles", href: "/francais/grammaire/a1-gr-l04" }
+        { code: "G1.2", title: "Articles", href: "/francais/grammaire/a1-gr-l04" }
       ],
     },
     {

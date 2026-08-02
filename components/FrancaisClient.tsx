@@ -15,14 +15,23 @@ type SectionState = "locked" | "in_progress" | "completed";
 type LessonState  = "locked" | "available" | "completed";
 
 
+/** Chapitre = module Gx ; Unité = leçon (G1.1 = Unité 1, G2.1 = Unité 11…). */
 const GRAMMAR_GROUPS: SectionDef[] = [
-  { id: "G1", code: "G1", title: "Les fondamentaux" },
-  { id: "G2", code: "G2", title: "L'interrogation" },
-  { id: "G3", code: "G3", title: "Les adjectifs" },
-  { id: "G4", code: "G4", title: "Les pronoms" },
-  { id: "G5", code: "G5", title: "Les marqueurs" },
-  { id: "G6", code: "G6", title: "La comparaison" },
+  { id: "G1", code: "G1", title: "Chapitre 1 — Les fondamentaux" },
+  { id: "G2", code: "G2", title: "Chapitre 2 — Décrire et situer" },
+  { id: "G3", code: "G3", title: "Chapitre 3 — Pronoms et relations" },
+  { id: "G4", code: "G4", title: "Chapitre 4 — Temps et modes" },
 ];
+
+/** Numéro d'unité global depuis un code Gx.y (10 unités par chapitre). */
+function grammarUnitLabel(code: string): string | null {
+  const m = /^G(\d+)\.(\d+)$/.exec(code);
+  if (!m) return null;
+  const chapter = Number(m[1]);
+  const unit = Number(m[2]);
+  if (!Number.isFinite(chapter) || !Number.isFinite(unit) || unit < 1) return null;
+  return `Unité ${(chapter - 1) * 10 + unit}`;
+}
 
 const CONJ_GROUPS: SectionDef[] = [
   { id: "C1", code: "C1", title: "Les verbes essentiels" },
@@ -340,7 +349,9 @@ function SectionCard({
                 <div className={`flex min-h-[52px] items-center gap-3 px-4 py-2.5 ${isLocked ? "opacity-40" : ""}`}>
                   <LessonDot state={ls} />
                   <div className="min-w-0 flex-1">
-                    <span className="text-xs font-semibold text-[var(--color-text-secondary)]">{th.code}</span>
+                    <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                      {grammarUnitLabel(th.code) ?? th.code}
+                    </span>
                     <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">{th.title}</span>
                   </div>
                   {vocabGrade && (
@@ -444,7 +455,13 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
     for (const grp of groups) {
       themesByGroup.set(
         grp.id,
-        allTabThemes.filter((th) => moduleGroupId(th.code) === grp.id),
+        allTabThemes
+          .filter((th) => moduleGroupId(th.code) === grp.id)
+          .sort((a, b) => {
+            const ua = Number(/^G\d+\.(\d+)$/.exec(a.code)?.[1] ?? /^C\d+\.(\d+)$/.exec(a.code)?.[1] ?? 0);
+            const ub = Number(/^G\d+\.(\d+)$/.exec(b.code)?.[1] ?? /^C\d+\.(\d+)$/.exec(b.code)?.[1] ?? 0);
+            return ua - ub;
+          }),
       );
     }
 

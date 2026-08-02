@@ -50,12 +50,10 @@ const VOCAB_MODULE_TITLES: Record<string, string> = {
 };
 
 const GRAMMAR_MODULE_TITLES: Record<string, string> = {
-  G1: "Les fondamentaux",
-  G2: "L'interrogation",
-  G3: "Les adjectifs",
-  G4: "Les pronoms",
-  G5: "Les marqueurs",
-  G6: "La comparaison",
+  G1: "Chapitre 1 — Les fondamentaux",
+  G2: "Chapitre 2 — Décrire et situer",
+  G3: "Chapitre 3 — Pronoms et relations",
+  G4: "Chapitre 4 — Temps et modes",
   C1: "Les verbes essentiels",
   C2: "Le passé",
   C3: "Le futur",

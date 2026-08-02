@@ -38,12 +38,10 @@ const VOCAB_MODULE_DEFS = [
 ];
 
 const GRAMMAR_MODULE_DEFS = [
-  { id: "G1", code: "G1", title: "Les fondamentaux" },
-  { id: "G2", code: "G2", title: "L'interrogation" },
-  { id: "G3", code: "G3", title: "Les adjectifs" },
-  { id: "G4", code: "G4", title: "Les pronoms" },
-  { id: "G5", code: "G5", title: "Les marqueurs" },
-  { id: "G6", code: "G6", title: "La comparaison" },
+  { id: "G1", code: "G1", title: "Chapitre 1 — Les fondamentaux" },
+  { id: "G2", code: "G2", title: "Chapitre 2 — Décrire et situer" },
+  { id: "G3", code: "G3", title: "Chapitre 3 — Pronoms et relations" },
+  { id: "G4", code: "G4", title: "Chapitre 4 — Temps et modes" },
 ];
 
 const CONJ_MODULE_DEFS = [

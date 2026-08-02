@@ -13,77 +13,75 @@ function lesson(
 
 /** Parcours complet français (vocabulaire, grammaire, conjugaison). */
 const BASE_FRENCH_THEMES: FrenchTheme[] = [
-  // ── G1 — Fondamentaux A1 (R1.1–R1.9) ───────────────────────────────────────
-  lesson("A1", "a1-conj-l00", "R1.1", "Les pronoms personnels sujets",               "Je, tu, il, elle, on, nous, vous, ils, elles — choisir et utiliser le bon pronom.",     "conjugaison"),
-  lesson("A1", "a1-conj-l01", "R1.2", "Les verbes être et avoir",                    "Conjugaison complète de être et avoir au présent + expressions courantes.",              "conjugaison"),
-  lesson("A1", "a1-gr-l04",   "R1.3", "Les articles définis et indéfinis",           "Le, la, l', les / un, une, des : choisir le bon article selon le contexte.",            "grammaire"),
-  lesson("A1", "a1-gr-l03",   "R1.4", "Le genre des noms et des adjectifs",          "Masculin/féminin : noms courants et adjectifs de nationalité.",                         "grammaire"),
-  lesson("A1", "a1-conj-l07", "R1.5", "Les verbes en -er au présent",                "Conjuguer les verbes du 1er groupe : parler, aimer, habiter, travailler…",              "conjugaison"),
-  lesson("A1", "a1-gr-phrases", "R1.6", "Les phrases",                               "Structure Sujet + Verbe + Complément : reconnaître et construire une phrase simple.",     "grammaire"),
-  lesson("A1", "a1-gr-l02",   "R1.7", "La négation",                                 "Ne…pas : construire une phrase négative avec être et avoir.",                           "grammaire"),
-  lesson("A1", "a1-gr-cest-il-est", "R1.9", "C'est, ce sont, il est ou ils sont ?",   "Distinguer les formes d'identification et de description au singulier et au pluriel.", "grammaire"),
+  // ── G1 — Chapitre 1 — Unités 1–10 ────────────────────────────────────────────
+  lesson("A1", "a1-gr-l01",         "G1.1", "Pronoms sujets et le verbe être",       "Je, tu, il, elle, on, nous, vous, ils, elles et le verbe être au présent.",              "grammaire"),
+  lesson("A1", "a1-gr-l04",         "G1.2", "Les articles définis et indéfinis",     "Le, la, l', les / un, une, des : choisir le bon article selon le contexte.",            "grammaire"),
+  lesson("A1", "a1-gr-l03",         "G1.3", "Le genre des noms et des adjectifs",    "Masculin/féminin : noms courants et adjectifs de nationalité.",                         "grammaire"),
+  lesson("A1", "a1-gr-phrases",     "G1.4", "Les phrases",                           "Structure Sujet + Verbe + Complément : reconnaître et construire une phrase simple.",     "grammaire"),
+  lesson("A1", "a1-gr-l02",         "G1.5", "La négation",                           "Ne…pas : construire une phrase négative avec être et avoir.",                           "grammaire"),
+  lesson("A1", "a1-gr-cest-il-est", "G1.6", "C'est, ce sont, il est ou ils sont ?", "Distinguer les formes d'identification et de description au singulier et au pluriel.", "grammaire"),
+  lesson("A1", "a1-gr-interro",     "G1.7", "L'interrogation de base",               "Est-ce que et l'intonation montante : construire une question simple.",                  "grammaire"),
+  lesson("A1", "a1-gr-l10",         "G1.8", "Les questions ouvertes",                "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
+  lesson("A1", "a1-gr-l19",         "G1.9", "Les adjectifs possessifs",              "Mon/ma/mes, ton/ta/tes, son/sa/ses… : exprimer l'appartenance.",                        "grammaire"),
+  lesson("A1", "a1-gr-l18",         "G1.10","Les adjectifs démonstratifs",           "Ce, cet, cette, ces : désigner et montrer quelque chose.",                              "grammaire"),
 
-  // ── G2 — Verbes essentiels (R2.1–R2.5) ──────────────────────────────────────
-  lesson("A1", "a1-conj-l08", "R2.1", "Les verbes de mouvement",                     "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.", "conjugaison"),
-  lesson("A1", "a1-conj-l09", "R2.2", "Les verbes pronominaux",                      "Se lever, se coucher, s'appeler : les pronominaux du quotidien.",                        "conjugaison"),
-  lesson("A1", "a1-conj-l15", "R2.3", "Les verbes modaux",                           "Les verbes modaux : conjugaison et emploi au présent.",                                  "conjugaison"),
-  lesson("A2", "a2-conj-irreguliers", "R2.4", "Verbes irréguliers",                  "Faire, croire, boire, naître, savoir, connaître, prendre au présent.",                   "conjugaison"),
-  lesson("A2", "a2-conj-l02", "R2.5", "Les verbes en -ir",                           "Deuxième et troisième groupes : finir et choisir, ou partir, venir et ouvrir.",          "conjugaison"),
+  // ── G2 — Chapitre 2 — Unités 11–20 ───────────────────────────────────────────
+  lesson("A1", "a1-gr-l11",                      "G2.1", "Les prépositions de lieu",              "Dans, sur, sous, devant, derrière, à côté de, en face de…",                            "grammaire"),
+  lesson("A1", "a1-gr-l14",                      "G2.2", "Les adjectifs partitifs",               "Du, de la, de l', des + un kilo de, beaucoup de, un peu de…",                          "grammaire"),
+  lesson("A1", "a1-gr-l23",                      "G2.3", "Les adjectifs qualificatifs",           "Genre, nombre et place de l'adjectif dans la phrase.",                                  "grammaire"),
+  lesson("A2", "a2-gr-l07",                      "G2.4", "Les questions fermées",                 "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",   "grammaire"),
+  lesson("A2", "a2-gr-l09",                      "G2.5", "Répondre aux questions fermées",        "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",             "grammaire"),
+  lesson("A1", "a1-gr-expressions-temps",        "G2.6", "Les expressions de temps",              "Aujourd'hui, demain, après-demain, la semaine prochaine…",                             "grammaire"),
+  lesson("A1", "a1-gr-l22",                      "G2.7", "Les adverbes de fréquence",             "Toujours, souvent, parfois, rarement, jamais : situer une action dans le temps.",      "grammaire"),
+  lesson("A2", "a2-gr-l39",                      "G2.8", "Le comparatif",                         "Comparer des adjectifs, adverbes, verbes et noms avec plus, aussi, autant ou moins.",  "grammaire"),
+  lesson("A2", "a2-gr-bon-bien-meilleur-mieux",  "G2.9", "Bon ou bien, meilleur ou mieux ?",      "Adjectif, adverbe et formes irrégulières du comparatif et du superlatif.",             "grammaire"),
+  lesson("A2", "a2-gr-superlatif",               "G2.10","Le superlatif",                         "Le, la ou les plus et moins ; le meilleur, le mieux et le pire.",                      "grammaire"),
 
-  // ── RI — L'interrogation ─────────────────────────────────────────────────────
-  lesson("A1", "a1-gr-interro", "R1.8",  "L'interrogation de base",                  "Est-ce que et l'intonation montante : construire une question simple.",                  "grammaire"),
-  lesson("A2", "a2-gr-l07",    "RX.12", "Les questions fermées",                      "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",   "grammaire"),
-  lesson("A2", "a2-gr-l09",    "RX.13", "Répondre aux questions fermées",             "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",             "grammaire"),
-  lesson("A1", "a1-gr-l10",    "RI.4",  "Les questions ouvertes",                     "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
+  // ── G3 — Chapitre 3 — Unités 21–30 ───────────────────────────────────────────
+  lesson("A2", "a2-gr-l42",                        "G3.1", "La négation (2/2)",                         "Ne…jamais, ne…rien, ne…personne ; rien et personne comme sujets.",                     "grammaire"),
+  lesson("A2", "a2-gr-l19",                        "G3.2", "Les pronoms relatifs qui et que",           "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",      "grammaire"),
+  lesson("A2", "a2-gr-l35",                        "G3.3", "Les pronoms COD et COI",                    "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",           "grammaire"),
+  lesson("A2", "a2-gr-l36",                        "G3.4", "Les pronoms Y et EN",                       "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",                     "grammaire"),
+  lesson("A2", "gr-marqueurs-temps-complet",       "G3.5", "Les marqueurs de temps",                    "Présent, passé, futur : depuis, il y a, pendant, dans, pour, hier, demain, la veille…","grammaire"),
+  lesson("A2", "a2-gr-l52",                        "G3.6", "Les relations logiques — Cause et conséquence", "Parce que, car, comme, à cause de, grâce à, donc, c'est pourquoi et par conséquent.", "grammaire"),
+  lesson("A2", "a2-gr-adverbes-types",             "G3.7", "Les adverbes",                              "Adverbes de lieu, de temps, de manière et l'adverbe tout.",                            "grammaire"),
+  lesson("A1", "a1-gr-verbes-double-auxiliaire",   "G3.8", "Les verbes à double auxiliaire",            "Sortir, rentrer, entrer, passer, monter, descendre et retourner : être ou avoir.",     "grammaire"),
+  lesson("A1", "a1-gr-pronominaux-passe-compose",  "G3.9", "Les verbes pronominaux au passé composé",   "Auxiliaire être, accord avec le sujet réel et négation.",                              "grammaire"),
+  lesson("A2", "a2-gr-passe-compose-ou-imparfait", "G3.10","Passé composé ou imparfait ?",              "Événement ponctuel, habitude, description, contexte et simultanéité.",                 "grammaire"),
 
-  // ── G3 — Les adjectifs A1 ────────────────────────────────────────────────────
-  lesson("A1", "a1-gr-l23",   "R3.7", "Les adjectifs qualificatifs",                 "Genre, nombre et place de l'adjectif dans la phrase.",                                  "grammaire"),
-  lesson("A1", "a1-gr-l18",   "R3.4", "Les adjectifs démonstratifs",                 "Ce, cet, cette, ces : désigner et montrer quelque chose.",                              "grammaire"),
-  lesson("A1", "a1-gr-l19",   "R3.5", "Les adjectifs possessifs",                    "Mon/ma/mes, ton/ta/tes, son/sa/ses… : exprimer l'appartenance.",                        "grammaire"),
-  lesson("A1", "a1-gr-l14",   "R3.1", "Les adjectifs partitifs",                     "Du, de la, de l', des + un kilo de, beaucoup de, un peu de…",                          "grammaire"),
-  lesson("A1", "a1-gr-l11",   "R3.3", "Les prépositions de lieu",                    "Dans, sur, sous, devant, derrière, à côté de, en face de…",                            "grammaire"),
+  // ── G4 — Chapitre 4 — Unités 31–37 ───────────────────────────────────────────
+  lesson("A2", "a2-gr-imparfait-irreguliers",    "G4.1", "Les verbes irréguliers à l'imparfait",     "Être et les bases particulières des verbes fréquents.",                                "grammaire"),
+  lesson("A2", "a2-gr-futur-irreguliers",        "G4.2", "Les verbes irréguliers au futur simple",   "Les quinze bases irrégulières essentielles.",                                          "grammaire"),
+  lesson("A2", "a2-gr-futur-simple-ou-proche",   "G4.3", "Futur simple ou futur proche ?",           "Choisir selon la proximité, l'intention, la promesse ou la prévision.",                "grammaire"),
+  lesson("A2", "a2-gr-hypothese-futur",          "G4.4", "L'hypothèse sur le futur",                 "Si + présent, puis futur simple ; condition, conséquence et élision avec il.",         "grammaire"),
+  lesson("A2", "a2-gr-conditionnel",             "G4.5", "Le conditionnel",                          "Conditionnel présent et passé ; phrases hypothétiques avec si.",                       "grammaire"),
+  lesson("A2", "a2-gr-gerondif",                 "G4.6", "Le gérondif",                              "En + participe présent : simultanéité, manière, condition et cause.",                  "grammaire"),
+  lesson("A2", "a2-gr-subjonctif",               "G4.7", "Le subjonctif",                            "Formation, irréguliers et emplois : vouloir que, il faut que, bien que…",              "grammaire"),
 
-  // ── G5 — Le passé ────────────────────────────────────────────────────────────
-  lesson("A1", "a1-conj-l28", "R5.1",  "Passé récent et présent continu",               "Venir de + infinitif (ce qui vient de se passer) ; être en train de + infinitif.",       "conjugaison"),
-  lesson("A1", "a1-conj-l29", "R5.2",  "Passé composé avec avoir",                      "Participes passés réguliers (-é/-i) et irréguliers (fait, dit, pris…).",                 "conjugaison"),
-  lesson("A1", "a1-conj-l30", "R5.3",  "Passé composé avec être",                       "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.",           "conjugaison"),
-  lesson("A1", "negation-passe-compose",   "R5.4",  "Négation au passé composé",                     "Ne…pas, jamais, plus, rien : encadrer l'auxiliaire et placer les mots négatifs.",         "conjugaison"),
-  lesson("A1", "a1-gr-verbes-double-auxiliaire",    "R5.5", "Les verbes à double auxiliaire",             "Sortir, rentrer, entrer, passer, monter, descendre et retourner : être sans COD, avoir avec COD.", "grammaire"),
-  lesson("A1", "a1-gr-pronominaux-passe-compose",   "R5.6", "Les verbes pronominaux au passé composé",   "Auxiliaire être, accord avec le sujet réel et négation.",                              "grammaire"),
-  lesson("A2", "a2-conj-l07", "R5.8",  "Les verbes réguliers à l'imparfait",            "Base de nous au présent et terminaisons -ais, -ais, -ait, -ions, -iez, -aient.",          "conjugaison"),
-  lesson("A2", "a2-gr-imparfait-irreguliers",       "R5.9",  "Les verbes irréguliers à l'imparfait",    "Être et les bases particulières des verbes fréquents.",                                "grammaire"),
-  lesson("A2", "a2-gr-passe-compose-ou-imparfait",  "R5.10", "Passé composé ou imparfait ?",             "Événement ponctuel, habitude, description, contexte et simultanéité.",                 "grammaire"),
+  // ── C1 — Verbes essentiels ───────────────────────────────────────────────────
+  lesson("A1", "a1-conj-l00", "C1.1", "Les pronoms personnels sujets", "Je, tu, il, elle, on, nous, vous, ils, elles — choisir et utiliser le bon pronom.", "conjugaison"),
+  lesson("A1", "a1-conj-l01", "C1.2", "Les verbes être et avoir", "Conjugaison complète de être et avoir au présent + expressions courantes.", "conjugaison"),
+  lesson("A1", "a1-conj-l07", "C1.3", "Les verbes en -er au présent", "Conjuguer les verbes du 1er groupe : parler, aimer, habiter, travailler…", "conjugaison"),
+  lesson("A1", "a1-conj-l08", "C1.4", "Les verbes de mouvement", "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.", "conjugaison"),
+  lesson("A1", "a1-conj-l09", "C1.5", "Les verbes pronominaux", "Se lever, se coucher, s'appeler : les pronominaux du quotidien.", "conjugaison"),
+  lesson("A1", "a1-conj-l15", "C1.6", "Les verbes modaux", "Les verbes modaux : conjugaison et emploi au présent.", "conjugaison"),
+  lesson("A2", "a2-conj-irreguliers", "C1.7", "Verbes irréguliers", "Faire, croire, boire, naître, savoir, connaître, prendre au présent.", "conjugaison"),
+  lesson("A2", "a2-conj-l02", "C1.8", "Les verbes en -ir", "Deuxième et troisième groupes : finir et choisir, ou partir, venir et ouvrir.", "conjugaison"),
 
-  // ── G4 — Le futur ────────────────────────────────────────────────────────────
-  lesson("A1", "a1-conj-l20",            "R4.1", "Le futur proche",                      "Aller + infinitif : parler de ce qui va arriver bientôt.",                               "conjugaison"),
-  lesson("A1", "a1-gr-l22",              "R4.3", "Les adverbes de fréquence",            "Toujours, souvent, parfois, rarement, jamais : situer une action dans le temps.",        "grammaire"),
-  lesson("A2", "a2-conj-l08",            "R4.4", "Les verbes réguliers au futur simple", "Infinitif et terminaisons ; particularités des verbes en -re, -eler et -eter.",          "conjugaison"),
-  lesson("A2", "a2-gr-futur-irreguliers","R4.5", "Les verbes irréguliers au futur simple","Les quinze bases irrégulières essentielles.",                                            "grammaire"),
-  lesson("A2", "a2-gr-futur-simple-ou-proche","R4.6","Futur simple ou futur proche ?",   "Choisir selon la proximité, l'intention, la promesse ou la prévision.",                  "grammaire"),
-  lesson("A2", "a2-gr-hypothese-futur",  "R4.8", "L'hypothèse sur le futur",            "Si + présent, puis futur simple ; condition, conséquence et élision avec il.",           "grammaire"),
+  // ── C2 — Le passé ────────────────────────────────────────────────────────────
+  lesson("A1", "a1-conj-l28", "C2.1", "Passé récent et présent continu", "Venir de + infinitif ; être en train de + infinitif.", "conjugaison"),
+  lesson("A1", "a1-conj-l29", "C2.2", "Passé composé avec avoir", "Participes passés réguliers (-é/-i) et irréguliers (fait, dit, pris…).", "conjugaison"),
+  lesson("A1", "a1-conj-l30", "C2.3", "Passé composé avec être", "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.", "conjugaison"),
+  lesson("A1", "negation-passe-compose", "C2.4", "Négation au passé composé", "Ne…pas, jamais, plus, rien : encadrer l'auxiliaire et placer les mots négatifs.", "conjugaison"),
+  lesson("A2", "a2-conj-l07", "C2.5", "Les verbes réguliers à l'imparfait", "Base de nous au présent et terminaisons -ais, -ais, -ait, -ions, -iez, -aient.", "conjugaison"),
 
-  // ── G9 — Les marqueurs de temps ──────────────────────────────────────────────
-  lesson("A2", "gr-marqueurs-temps-complet", "R9.1", "Les marqueurs de temps",                       "Présent, passé, futur : depuis, il y a, pendant, dans, pour, hier, demain, la veille…",     "grammaire"),
-  lesson("A2", "a2-gr-l52",                  "R9.2", "Les relations logiques — Cause et conséquence","Parce que, car, comme, à cause de, grâce à, donc, c'est pourquoi et par conséquent.",       "grammaire"),
-  lesson("A1", "a1-gr-expressions-temps",    "R9.3", "Les expressions de temps",                     "Aujourd'hui, demain, après-demain, la semaine prochaine…",                                   "grammaire"),
+  // ── C3 — Le futur ────────────────────────────────────────────────────────────
+  lesson("A1", "a1-conj-l20", "C3.1", "Le futur proche", "Aller + infinitif : parler de ce qui va arriver bientôt.", "conjugaison"),
+  lesson("A2", "a2-conj-l08", "C3.2", "Les verbes réguliers au futur simple", "Infinitif et terminaisons ; particularités des verbes en -re, -eler et -eter.", "conjugaison"),
 
-  // ── G10 — La comparaison ─────────────────────────────────────────────────────
-  lesson("A2", "a2-gr-l39", "R8.1", "Le comparatif", "Comparer des adjectifs, adverbes, verbes et noms avec plus, aussi, autant ou moins.", "grammaire"),
-  lesson("A2", "a2-gr-bon-bien-meilleur-mieux", "R8.2", "Bon ou bien, meilleur ou mieux ?", "Adjectif, adverbe et formes irrégulières du comparatif et du superlatif.", "grammaire"),
-  lesson("A2", "a2-gr-superlatif", "R8.3", "Le superlatif", "Le, la ou les plus et moins ; le meilleur, le mieux et le pire.", "grammaire"),
-  lesson("A2", "a2-gr-l42", "R8.4", "La négation (2/2)", "Ne…jamais, ne…rien, ne…personne ; rien et personne comme sujets.", "grammaire"),
-
-  // ── G6 — Les autres temps ────────────────────────────────────────────────────
-  lesson("A2", "a2-conj-l04",        "R6.1", "Le conditionnel de politesse", "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.", "conjugaison"),
-  lesson("A2", "a2-gr-conditionnel", "R6.2", "Le conditionnel",              "Conditionnel présent et passé ; phrases hypothétiques avec si + imparfait ou plus-que-parfait.", "grammaire"),
-  lesson("A2", "a2-conj-l05",        "R6.3", "L'impératif",                  "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.", "conjugaison"),
-  lesson("A2", "a2-gr-gerondif",     "R6.4", "Le gérondif",                  "En + participe présent : simultanéité, manière, condition et cause.", "grammaire"),
-  lesson("A2", "a2-gr-subjonctif",   "R6.5", "Le subjonctif",                "Formation, irréguliers et emplois : vouloir que, il faut que, bien que, pour que, avant que.", "grammaire"),
-
-  // ── RP — Les pronoms ─────────────────────────────────────────────────────────
-  lesson("A2", "a2-gr-l19",   "RP.1", "Les pronoms relatifs qui et que",                 "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",          "grammaire"),
-  lesson("A2", "a2-gr-l35",   "RP.2", "Les pronoms COD et COI",                          "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",                "grammaire"),
-  lesson("A2", "a2-gr-l36",   "RP.3", "Les pronoms Y et EN",                             "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",                         "grammaire"),
+  // ── C4 — Les autres temps ────────────────────────────────────────────────────
+  lesson("A2", "a2-conj-l04", "C4.1", "Le conditionnel de politesse", "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.", "conjugaison"),
+  lesson("A2", "a2-conj-l05", "C4.2", "L'impératif", "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.", "conjugaison"),
 
   // ── V1 — L'identité ──────────────────────────────────────────────────────────
   lesson("V1", "v1-nationalites",         "V1.1", "Les nationalités",       "Nationalités masculin/féminin, pays d'Europe et du monde.",         "vocabulaire"),
@@ -152,47 +150,57 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
 
 /**
  * Codes pédagogiques :
- * - G1–G6 = Grammaire (fondamentaux, interrogation, adjectifs, pronoms, marqueurs, comparaison)
- * - C1–C4 = Conjugaison (verbes essentiels, passé, futur, autres temps)
+ * - G1–G4 = Grammaire (chapitres) ; chaque leçon = une unité (G1.1 = Unité 1, G2.1 = Unité 11…)
+ * - C1–C4 = Conjugaison
+ * Pas d'annexes : tout le contenu existant est placé dans une unité.
  */
 const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
-  // G1 — Fondamentaux (sans conjugaison)
-  "a1-gr-l04": "G1.1",
-  "a1-gr-l03": "G1.2",
-  "a1-gr-phrases": "G1.3",
-  "a1-gr-l02": "G1.4",
-  "a1-gr-cest-il-est": "G1.5",
+  // G1 — Chapitre 1 (unités 1–10)
+  "a1-gr-l01": "G1.1",
+  "a1-gr-l04": "G1.2",
+  "a1-gr-l03": "G1.3",
+  "a1-gr-phrases": "G1.4",
+  "a1-gr-l02": "G1.5",
+  "a1-gr-cest-il-est": "G1.6",
+  "a1-gr-interro": "G1.7",
+  "a1-gr-l10": "G1.8",
+  "a1-gr-l19": "G1.9",
+  "a1-gr-l18": "G1.10",
 
-  // G2 — Interrogation (ex-R3)
-  "a1-gr-interro": "G2.1",
-  "a2-gr-l07": "G2.2",
-  "a2-gr-l09": "G2.3",
-  "a1-gr-l10": "G2.4",
+  // G2 — Chapitre 2 (unités 11–20)
+  "a1-gr-l11": "G2.1",
+  "a1-gr-l14": "G2.2",
+  "a1-gr-l23": "G2.3",
+  "a2-gr-l07": "G2.4",
+  "a2-gr-l09": "G2.5",
+  "a1-gr-expressions-temps": "G2.6",
+  "a1-gr-l22": "G2.7",
+  "a2-gr-l39": "G2.8",
+  "a2-gr-bon-bien-meilleur-mieux": "G2.9",
+  "a2-gr-superlatif": "G2.10",
 
-  // G3 — Adjectifs (ex-R4)
-  "a1-gr-l23": "G3.1",
-  "a1-gr-l18": "G3.2",
-  "a1-gr-l19": "G3.3",
-  "a1-gr-l14": "G3.4",
-  "a1-gr-l11": "G3.5",
+  // G3 — Chapitre 3 (unités 21–30)
+  "a2-gr-l42": "G3.1",
+  "a2-gr-l19": "G3.2",
+  "a2-gr-l35": "G3.3",
+  "a2-gr-l36": "G3.4",
+  "gr-marqueurs-temps-complet": "G3.5",
+  "a2-gr-l52": "G3.6",
+  "a2-gr-adverbes-types": "G3.7",
+  "a1-gr-verbes-double-auxiliaire": "G3.8",
+  "a1-gr-pronominaux-passe-compose": "G3.9",
+  "a2-gr-passe-compose-ou-imparfait": "G3.10",
 
-  // G4 — Pronoms (ex-R5)
-  "a2-gr-l19": "G4.1",
-  "a2-gr-l35": "G4.2",
-  "a2-gr-l36": "G4.3",
+  // G4 — Chapitre 4 (unités 31–37)
+  "a2-gr-imparfait-irreguliers": "G4.1",
+  "a2-gr-futur-irreguliers": "G4.2",
+  "a2-gr-futur-simple-ou-proche": "G4.3",
+  "a2-gr-hypothese-futur": "G4.4",
+  "a2-gr-conditionnel": "G4.5",
+  "a2-gr-gerondif": "G4.6",
+  "a2-gr-subjonctif": "G4.7",
 
-  // G5 — Marqueurs (ex-R9)
-  "gr-marqueurs-temps-complet": "G5.1",
-  "a2-gr-l52": "G5.2",
-  "a1-gr-expressions-temps": "G5.3",
-
-  // G6 — Comparaison (ex-R10)
-  "a2-gr-l39": "G6.1",
-  "a2-gr-bon-bien-meilleur-mieux": "G6.2",
-  "a2-gr-superlatif": "G6.3",
-  "a2-gr-l42": "G6.4",
-
-  // C1 — Verbes essentiels (pronoms, être/avoir, R1.5 + R2)
+  // C1 — Verbes essentiels
   "a1-conj-l00": "C1.1",
   "a1-conj-l01": "C1.2",
   "a1-conj-l07": "C1.3",
@@ -202,31 +210,20 @@ const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
   "a2-conj-irreguliers": "C1.7",
   "a2-conj-l02": "C1.8",
 
-  // C2 — Le passé (ex-R6)
+  // C2 — Le passé
   "a1-conj-l28": "C2.1",
   "a1-conj-l29": "C2.2",
   "a1-conj-l30": "C2.3",
   "negation-passe-compose": "C2.4",
-  "a1-gr-verbes-double-auxiliaire": "C2.5",
-  "a1-gr-pronominaux-passe-compose": "C2.6",
-  "a2-conj-l07": "C2.7",
-  "a2-gr-imparfait-irreguliers": "C2.8",
-  "a2-gr-passe-compose-ou-imparfait": "C2.9",
+  "a2-conj-l07": "C2.5",
 
-  // C3 — Le futur (ex-R7)
+  // C3 — Le futur
   "a1-conj-l20": "C3.1",
-  "a1-gr-l22": "C3.2",
-  "a2-conj-l08": "C3.3",
-  "a2-gr-futur-irreguliers": "C3.4",
-  "a2-gr-futur-simple-ou-proche": "C3.5",
-  "a2-gr-hypothese-futur": "C3.6",
+  "a2-conj-l08": "C3.2",
 
-  // C4 — Les autres temps (ex-R8)
+  // C4 — Les autres temps
   "a2-conj-l04": "C4.1",
-  "a2-gr-conditionnel": "C4.2",
-  "a2-conj-l05": "C4.3",
-  "a2-gr-gerondif": "C4.4",
-  "a2-gr-subjonctif": "C4.5",
+  "a2-conj-l05": "C4.2",
 };
 
 export const FRENCH_THEMES: FrenchTheme[] = BASE_FRENCH_THEMES
