@@ -303,7 +303,7 @@ const POOL_069 = buildExpressPool("e2-3-069", [
     textQ: "Comment Flo parle-t-elle à Manon ?",
     text: ["Au téléphone", "Devant la maison", "À l'école"],
     textC: 0,
-    img: ["téléphone", "maison", "école"],
+    img: ["téléphone", "maison", "cartable"],
     imgC: 0,
     fillQ: "_________ Manon, c'est Flo…",
     fill: "allo",

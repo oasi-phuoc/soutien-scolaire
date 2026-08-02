@@ -1,7 +1,11 @@
-import { buildListeningAudio, type FixedQ } from "./express-lesson-factory";
+import { A1, buildListeningAudio, type FixedQ } from "./express-lesson-factory";
+import { buildExpressPool, type ExpressRawQ } from "./express-listening-helpers";
 
 const qs = (prefix: string, items: Omit<FixedQ, "id">[]): FixedQ[] =>
   items.map((item, i) => ({ ...item, id: `${prefix}-q${i + 1}` }));
+
+/* Audio 024 construit via buildExpressPool (imgQ non supporté par FixedQ). */
+const rq = (item: ExpressRawQ): ExpressRawQ => item;
 
 export const E1_2_TRAINING = [
   buildListeningAudio({
@@ -133,6 +137,8 @@ export const E1_2_TRAINING = [
         textQ: "Où la jeune fille connaît-elle Fabien ?",
         text: ["À l'université", "Au travail", "Dans le quartier"],
         textC: 0,
+        img: ["école", "travail", "parc"],
+        imgC: 0,
         fillQ: "Fabien est étudiant dans mon _________.",
         fill: "université",
         fillA: ["universite"],
@@ -214,63 +220,81 @@ export const E1_2_TRAINING = [
       },
     ]),
   }),
-  buildListeningAudio({
+  {
     id: "e1-2-024",
-    level: "A1",
-    num: 24,
+    audioSrc: A1(24),
+    audioLabel: "Audio 024",
     transcript: `En général, les familles françaises ont un ou deux enfants. Les parents sont jeunes. Ils ont entre 30 et 35 ans et sont souvent mariés ou pacsés. Mais ils peuvent aussi être séparés ou divorcés.`,
-    questions: qs("024", [
-      {
+    instruction: "Écoutez l'enregistrement et répondez aux questions.",
+    pool: buildExpressPool("e1-2-024", [
+      rq({
+        id: "024-q1",
         textQ: "Combien d'enfants ont les familles françaises, en général ?",
         text: ["Un ou deux", "Trois ou quatre", "Cinq ou six"],
         textC: 0,
+        img: ["", "", ""],
+        imgC: 0,
         fillQ: "Les familles françaises ont un ou _________ enfants.",
         fill: "deux",
         fillA: ["2"],
         vfQ: "Les familles françaises ont, en général, un ou deux enfants.",
         vfC: 0,
-      },
-      {
+      }),
+      rq({
+        id: "024-q2",
         textQ: "Quel âge ont les parents, en général ?",
         text: ["Entre 30 et 35 ans", "Entre 20 et 25 ans", "Entre 40 et 45 ans"],
         textC: 0,
+        img: ["", "", ""],
+        imgC: 0,
         fillQ: "Ils ont entre 30 et _________ ans.",
         fill: "35",
         fillA: ["trente-cinq"],
         vfQ: "Les parents ont entre 40 et 45 ans.",
         vfC: 1,
-      },
-      {
+      }),
+      rq({
+        id: "024-q3",
         textQ: "Comment sont les parents ?",
         text: ["Jeunes", "Âgés", "Retraités"],
         textC: 0,
+        imgQ: "De qui parle cet audio ?",
+        img: ["parents", "collègue", "directeur"],
+        imgC: 0,
         fillQ: "Les parents sont _________.",
         fill: "jeunes",
         vfQ: "Les parents sont jeunes.",
         vfC: 0,
-      },
-      {
+      }),
+      rq({
+        id: "024-q4",
         textQ: "Est-ce que les parents sont toujours mariés ?",
         text: ["Non, pas toujours", "Oui, toujours", "On ne sait pas"],
         textC: 0,
+        img: ["", "", ""],
+        imgC: 0,
         fillQ: "Ils sont souvent mariés ou _________.",
         fill: "pacsés",
         fillA: ["pacses"],
         vfQ: "Les parents sont toujours mariés.",
         vfC: 1,
-      },
-      {
+      }),
+      rq({
+        id: "024-q5",
         textQ: "Que peuvent aussi être les parents ?",
         text: ["Séparés ou divorcés", "Toujours célibataires", "Toujours veufs"],
         textC: 0,
+        img: ["", "", ""],
+        imgC: 0,
         fillQ: "Ils peuvent aussi être séparés ou _________.",
         fill: "divorcés",
         fillA: ["divorces"],
         vfQ: "Certains parents sont séparés ou divorcés.",
         vfC: 0,
-      },
+      }),
     ]),
-  }),
+    questionCount: 5,
+  },
 ];
 
 export const E1_2_EVAL = [

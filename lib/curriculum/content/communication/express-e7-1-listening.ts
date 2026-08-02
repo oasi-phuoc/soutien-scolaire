@@ -360,7 +360,7 @@ const POOL_203 = buildExpressPool("e7-1-203", [
     textQ: "Quel repas n'est pas proposé ?",
     text: ["Le déjeuner", "Le petit déjeuner", "Le dîner"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["dejeuner", "prendre-petit-dejeuner", "manger-repas-famille"],
     imgC: 0,
     fillQ: "Nous n'avons pas de _________.",
     fill: "déjeuner",

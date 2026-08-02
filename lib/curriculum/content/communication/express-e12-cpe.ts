@@ -1574,7 +1574,7 @@ const E12_5_CE_POOL = buildExpressPool("e12-5-ce", [
     textQ: "Que faut-il éviter le soir pour mieux dormir ?",
     text: ["Les écrans", "Le sport", "La lecture"],
     textC: 0,
-    img: ["téléphone", "sport", "livre"],
+    img: ["téléphone", "sport", "Lecture et écriture"],
     imgC: 0,
     fillQ: "Évitez les _________ le soir.",
     fill: "écrans",

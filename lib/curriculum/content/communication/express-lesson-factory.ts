@@ -40,6 +40,8 @@ export type FixedQ = {
   textQ: string;
   text: [string, string, string];
   textC?: 0 | 1 | 2;
+  /** Question affichée pour le QCM image (défaut : textQ). */
+  imgQ?: string;
   /** Labels illustrables (résolus via scène/lecture). Omis = jamais en QCM image. */
   img?: [string, string, string];
   imgC?: 0 | 1 | 2;
@@ -59,6 +61,7 @@ export function fixedQ(item: FixedQ): ExpressRawQ {
     textQ: item.textQ,
     text: item.text,
     textC: item.textC ?? 0,
+    imgQ: item.imgQ,
     img: item.img ?? ["", "", ""],
     imgC: item.imgC ?? 0,
     fillQ: item.fillQ ?? "",

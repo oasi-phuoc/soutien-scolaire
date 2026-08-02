@@ -115,7 +115,7 @@ const POOL_166 = buildExpressPool("e6-1-166", [
     textQ: "Où habite Magali ?",
     text: ["À côté d'un parc", "Au centre-ville", "Près de la mairie"],
     textC: 0,
-    img: ["parc", "ville", "mairie"],
+    img: ["parc", "centre commercial", "mairie"],
     imgC: 0,
     fillQ: "J'habite à côté du _________ Mon Repos.",
     fill: "parc",
