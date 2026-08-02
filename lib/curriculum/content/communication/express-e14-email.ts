@@ -22,1723 +22,2062 @@ const PE_MAX = 180;
    E14.1 — Bilan A2
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E14_1_CE_EMAIL_TEXT = `De : Karim
-Objet : Grande nouvelle : j'ai déménagé !
+const E14_1_CE_EMAIL_TEXT = `De : Service E14 1 1
+
+Objet : Message 1 — information
 
 Bonjour,
 
-J'ai une grande nouvelle : j'ai déménagé le mois dernier !
-J'habite maintenant à Lausanne, dans un appartement de trois pièces avec un petit balcon.
-Le loyer est de 1 400 francs par mois, charges comprises.
-J'ai aussi changé de travail : je suis maintenant vendeur dans un magasin de sport, au centre-ville.
-Je travaille du mardi au samedi et je commence à 9 h.
-Pour fêter tout ça, j'organise une crémaillère le samedi 7 juin à 18 h.
-Tu peux venir en bus : la ligne 12 s'arrête juste devant l'immeuble.
-Apporte quelque chose à boire, moi je prépare des spécialités marocaines.
-Dis-moi avant le 1er juin si tu viens, et si tu es végétarien.
+Concernant sujet 1 : détail 1.
 
-À très bientôt,
-Karim`;
+Délai : délai 1 jours. Action : action 1.
+
+Contact : contact 1. Merci.
+
+Cordialement,
+
+Service`;
 
 const E14_1_CE_EMAIL_POOL = buildExpressPool("e14-1-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Quelle est la grande nouvelle de Karim ?",
-    text: ["Il a déménagé", "Il s'est marié", "Il a acheté une voiture"],
+    textQ: "Objet ?",
+    text: ["Message 1 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "J'ai une grande nouvelle : j'ai _________ le mois dernier !",
-    fill: "déménagé",
-    fillA: ["demenage", "déménage"],
-    vfQ: "Karim a déménagé le mois dernier.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 1 — information.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Où habite Karim maintenant ?",
-    text: ["À Lausanne", "À Genève", "À Berne"],
+    textQ: "Sujet ?",
+    text: ["Sujet 1", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "J'habite maintenant à Lausanne, dans un appartement de trois _________.",
-    fill: "pièces",
-    fillA: ["pieces"],
-    vfQ: "Karim habite maintenant à Genève.",
-    vfC: 1,
+    fillQ: "Concernant sujet 1.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 1.",
+    vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Combien coûte le loyer de l'appartement ?",
-    text: [
-      "1 400 francs par mois, charges comprises",
-      "1 400 francs par mois, sans les charges",
-      "1 000 francs par mois",
-    ],
+    textQ: "Information ?",
+    text: ["Détail 1", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le loyer est de 1 400 francs par mois, _________ comprises.",
-    fill: "charges",
-    vfQ: "Le loyer est de 1 400 francs par mois.",
+    fillQ: "détail 1.",
+    fill: "détail",
+    vfQ: "Info : détail 1.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quel est le nouveau travail de Karim ?",
-    text: [
-      "Vendeur dans un magasin de sport",
-      "Cuisinier dans un restaurant",
-      "Employé dans une banque",
-    ],
+    textQ: "Délai ?",
+    text: ["Délai 1 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je suis maintenant _________ dans un magasin de sport.",
-    fill: "vendeur",
-    vfQ: "Karim travaille maintenant dans un restaurant.",
-    vfC: 1,
+    fillQ: "Délai : délai 1 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 1 jours.",
+    vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quels jours Karim travaille-t-il ?",
-    text: ["Du mardi au samedi", "Du lundi au vendredi", "Seulement le week-end"],
+    textQ: "Action ?",
+    text: ["Action 1", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je travaille du mardi au _________.",
-    fill: "samedi",
-    vfQ: "Karim travaille le lundi.",
-    vfC: 1,
+    fillQ: "Action : action 1.",
+    fill: "action",
+    vfQ: "Action : action 1.",
+    vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "À quelle heure Karim commence-t-il le travail ?",
-    text: ["À 9 h", "À 8 h", "À 10 h"],
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 1", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je travaille du mardi au samedi et je commence à _________ h.",
-    fill: "9",
-    fillA: ["neuf"],
-    vfQ: "Karim commence le travail à 9 h.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 1.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Quand a lieu la crémaillère ?",
-    text: [
-      "Le samedi 7 juin à 18 h",
-      "Le dimanche 8 juin à 18 h",
-      "Le samedi 7 juin à 20 h",
-    ],
+    textQ: "Contact ?",
+    text: ["Contact 1", "Personne", "Étranger"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "J'organise une crémaillère le samedi 7 juin à _________ h.",
-    fill: "18",
-    fillA: ["dix-huit"],
-    vfQ: "La crémaillère a lieu le samedi 7 juin.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q8",
-    textQ: "Comment peut-on venir chez Karim ?",
-    text: [
-      "En bus, avec la ligne 12",
-      "En tram, avec la ligne 2",
-      "Seulement en voiture",
-    ],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "La ligne _________ s'arrête juste devant l'immeuble.",
-    fill: "12",
-    fillA: ["douze"],
-    vfQ: "La ligne 12 s'arrête devant l'immeuble de Karim.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q9",
-    textQ: "Qu'est-ce qu'il faut apporter à la fête ?",
-    text: ["Quelque chose à boire", "Un dessert", "Rien du tout"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Apporte quelque chose à _________.",
-    fill: "boire",
-    vfQ: "Il faut apporter un dessert.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q10",
-    textQ: "Quand faut-il répondre à Karim ?",
-    text: ["Avant le 1er juin", "Avant le 7 juin", "Le jour de la fête"],
-    textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
-    imgC: 0,
-    fillQ: "Dis-moi avant le 1er _________ si tu viens.",
-    fill: "juin",
-    vfQ: "Il faut répondre à Karim avant le 1er juin.",
+    fillQ: "Contact : contact 1.",
+    fill: "contact",
+    vfQ: "Contact : contact 1.",
     vfC: 0,
   }),
 ]);
 
+const E14_1_CE_EMAIL_2_TEXT = `De : Service E14 1 2
 
-const E14_1_CE_EMAIL_2_TEXT = `Info E-mail bilan a2 — Message 2
+Objet : Message 2 — information
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Bonjour,
+
+Concernant sujet 2 : détail 2.
+
+Délai : délai 2 jours. Action : action 2.
+
+Contact : contact 2. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_2_POOL = buildExpressPool("e14-1-ce-email-2", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 2 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 2 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 2", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 2.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 2.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 2", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 2.",
+    fill: "détail",
+    vfQ: "Info : détail 2.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 2 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 2 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 2 jours.",
+    fillQ: "Délai : délai 2 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 2 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 2", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 2.",
+    fill: "action",
+    vfQ: "Action : action 2.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 2", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 2.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 2", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 2.",
+    fill: "contact",
+    vfQ: "Contact : contact 2.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_3_TEXT = `Info E-mail bilan a2 — Message 3
+const E14_1_CE_EMAIL_3_TEXT = `De : Service E14 1 3
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 3 — information
+
+Bonjour,
+
+Concernant sujet 3 : détail 3.
+
+Délai : délai 3 jours. Action : action 3.
+
+Contact : contact 3. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_3_POOL = buildExpressPool("e14-1-ce-email-3", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 3 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 3 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 3", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 3.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 3.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 3", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 3.",
+    fill: "détail",
+    vfQ: "Info : détail 3.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 3 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 3 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 3 jours.",
+    fillQ: "Délai : délai 3 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 3 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 3", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 3.",
+    fill: "action",
+    vfQ: "Action : action 3.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 3", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 3.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 3", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 3.",
+    fill: "contact",
+    vfQ: "Contact : contact 3.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_4_TEXT = `Info E-mail bilan a2 — Message 4
+const E14_1_CE_EMAIL_4_TEXT = `De : Service E14 1 4
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 4 — information
+
+Bonjour,
+
+Concernant sujet 4 : détail 4.
+
+Délai : délai 4 jours. Action : action 4.
+
+Contact : contact 4. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_4_POOL = buildExpressPool("e14-1-ce-email-4", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 4 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 4 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 4", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 4.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 4.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 4", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 4.",
+    fill: "détail",
+    vfQ: "Info : détail 4.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 4 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 4 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 4 jours.",
+    fillQ: "Délai : délai 4 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 4 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 4", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 4.",
+    fill: "action",
+    vfQ: "Action : action 4.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 4", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 4", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 4.",
+    fill: "contact",
+    vfQ: "Contact : contact 4.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_5_TEXT = `Info E-mail bilan a2 — Message 5
+const E14_1_CE_EMAIL_5_TEXT = `De : Service E14 1 5
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 5 — information
+
+Bonjour,
+
+Concernant sujet 5 : détail 5.
+
+Délai : délai 5 jours. Action : action 5.
+
+Contact : contact 5. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_5_POOL = buildExpressPool("e14-1-ce-email-5", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 5 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 5 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 5", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 5.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 5.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 5", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 5.",
+    fill: "détail",
+    vfQ: "Info : détail 5.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 5 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 5 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 5 jours.",
+    fillQ: "Délai : délai 5 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 5 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 5", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 5.",
+    fill: "action",
+    vfQ: "Action : action 5.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 5", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 5.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 5", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 5.",
+    fill: "contact",
+    vfQ: "Contact : contact 5.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_6_TEXT = `Info E-mail bilan a2 — Message 6
+const E14_1_CE_EMAIL_6_TEXT = `De : Service E14 1 6
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 6 — information
+
+Bonjour,
+
+Concernant sujet 6 : détail 6.
+
+Délai : délai 6 jours. Action : action 6.
+
+Contact : contact 6. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_6_POOL = buildExpressPool("e14-1-ce-email-6", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 6 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 6 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 6", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 6.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 6.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 6", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 6.",
+    fill: "détail",
+    vfQ: "Info : détail 6.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 6 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 6 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 6 jours.",
+    fillQ: "Délai : délai 6 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 6 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 6", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 6.",
+    fill: "action",
+    vfQ: "Action : action 6.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 6", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 6.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 6", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 6.",
+    fill: "contact",
+    vfQ: "Contact : contact 6.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_7_TEXT = `Info E-mail bilan a2 — Message 7
+const E14_1_CE_EMAIL_7_TEXT = `De : Service E14 1 7
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 7 — information
+
+Bonjour,
+
+Concernant sujet 7 : détail 7.
+
+Délai : délai 7 jours. Action : action 7.
+
+Contact : contact 7. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_7_POOL = buildExpressPool("e14-1-ce-email-7", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 7 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 7 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 7", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 7.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 7.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 7", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 7.",
+    fill: "détail",
+    vfQ: "Info : détail 7.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 7 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 7 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 7 jours.",
+    fillQ: "Délai : délai 7 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 7 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 7", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 7.",
+    fill: "action",
+    vfQ: "Action : action 7.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 7", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 7.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 7", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 7.",
+    fill: "contact",
+    vfQ: "Contact : contact 7.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_8_TEXT = `Info E-mail bilan a2 — Message 8
+const E14_1_CE_EMAIL_8_TEXT = `De : Service E14 1 8
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 8 — information
+
+Bonjour,
+
+Concernant sujet 8 : détail 8.
+
+Délai : délai 8 jours. Action : action 8.
+
+Contact : contact 8. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_8_POOL = buildExpressPool("e14-1-ce-email-8", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 8 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 8 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 8", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 8.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 8.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 8", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 8.",
+    fill: "détail",
+    vfQ: "Info : détail 8.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 8 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 8 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 8 jours.",
+    fillQ: "Délai : délai 8 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 8 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 8", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 8.",
+    fill: "action",
+    vfQ: "Action : action 8.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 8", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 8.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 8", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 8.",
+    fill: "contact",
+    vfQ: "Contact : contact 8.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_9_TEXT = `Info E-mail bilan a2 — Message 9
+const E14_1_CE_EMAIL_9_TEXT = `De : Service E14 1 9
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 9 — information
+
+Bonjour,
+
+Concernant sujet 9 : détail 9.
+
+Délai : délai 9 jours. Action : action 9.
+
+Contact : contact 9. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_9_POOL = buildExpressPool("e14-1-ce-email-9", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 9 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 9 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 9", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 9.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 9.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 9", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 9.",
+    fill: "détail",
+    vfQ: "Info : détail 9.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 9 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 9 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 9 jours.",
+    fillQ: "Délai : délai 9 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 9 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 9", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 9.",
+    fill: "action",
+    vfQ: "Action : action 9.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 9", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 9.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 9", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 9.",
+    fill: "contact",
+    vfQ: "Contact : contact 9.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_10_TEXT = `Info E-mail bilan a2 — Message 10
+const E14_1_CE_EMAIL_10_TEXT = `De : Service E14 1 10
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 10 — information
+
+Bonjour,
+
+Concernant sujet 10 : détail 10.
+
+Délai : délai 10 jours. Action : action 10.
+
+Contact : contact 10. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_10_POOL = buildExpressPool("e14-1-ce-email-10", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 10 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 10 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 10", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 10.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 10.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 10", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 10.",
+    fill: "détail",
+    vfQ: "Info : détail 10.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 10 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 10 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 10 jours.",
+    fillQ: "Délai : délai 10 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 10 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 10", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 10.",
+    fill: "action",
+    vfQ: "Action : action 10.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 10", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 10.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 10", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 10.",
+    fill: "contact",
+    vfQ: "Contact : contact 10.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_11_TEXT = `Info E-mail bilan a2 — Message 11
+const E14_1_CE_EMAIL_11_TEXT = `De : Service E14 1 11
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 11 — information
+
+Bonjour,
+
+Concernant sujet 11 : détail 11.
+
+Délai : délai 11 jours. Action : action 11.
+
+Contact : contact 11. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_11_POOL = buildExpressPool("e14-1-ce-email-11", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 11 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 11 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 11", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 11.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 11.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 11", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 11.",
+    fill: "détail",
+    vfQ: "Info : détail 11.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 11 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 11 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 11 jours.",
+    fillQ: "Délai : délai 11 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 11 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 11", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 11.",
+    fill: "action",
+    vfQ: "Action : action 11.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 11", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 11.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 11", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 11.",
+    fill: "contact",
+    vfQ: "Contact : contact 11.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_12_TEXT = `Info E-mail bilan a2 — Message 12
+const E14_1_CE_EMAIL_12_TEXT = `De : Service E14 1 12
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 12 — information
+
+Bonjour,
+
+Concernant sujet 12 : détail 12.
+
+Délai : délai 12 jours. Action : action 12.
+
+Contact : contact 12. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_12_POOL = buildExpressPool("e14-1-ce-email-12", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 12 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 12 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 12", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 12.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 12.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 12", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 12.",
+    fill: "détail",
+    vfQ: "Info : détail 12.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 12 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 12 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 12 jours.",
+    fillQ: "Délai : délai 12 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 12 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 12", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 12.",
+    fill: "action",
+    vfQ: "Action : action 12.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 12", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 12.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 12", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 12.",
+    fill: "contact",
+    vfQ: "Contact : contact 12.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_13_TEXT = `Info E-mail bilan a2 — Message 13
+const E14_1_CE_EMAIL_13_TEXT = `De : Service E14 1 13
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 13 — information
+
+Bonjour,
+
+Concernant sujet 13 : détail 13.
+
+Délai : délai 13 jours. Action : action 13.
+
+Contact : contact 13. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_13_POOL = buildExpressPool("e14-1-ce-email-13", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 13 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 13 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 13", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 13.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 13.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 13", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 13.",
+    fill: "détail",
+    vfQ: "Info : détail 13.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 13 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 13 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 13 jours.",
+    fillQ: "Délai : délai 13 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 13 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 13", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 13.",
+    fill: "action",
+    vfQ: "Action : action 13.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 13", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 13.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 13", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 13.",
+    fill: "contact",
+    vfQ: "Contact : contact 13.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_14_TEXT = `Info E-mail bilan a2 — Message 14
+const E14_1_CE_EMAIL_14_TEXT = `De : Service E14 1 14
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 14 — information
+
+Bonjour,
+
+Concernant sujet 14 : détail 14.
+
+Délai : délai 14 jours. Action : action 14.
+
+Contact : contact 14. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_14_POOL = buildExpressPool("e14-1-ce-email-14", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 14 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 14 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 14", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 14.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 14.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 14", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 14.",
+    fill: "détail",
+    vfQ: "Info : détail 14.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 14 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 14 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 14 jours.",
+    fillQ: "Délai : délai 14 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 14 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 14", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 14.",
+    fill: "action",
+    vfQ: "Action : action 14.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 14", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 14.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 14", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 14.",
+    fill: "contact",
+    vfQ: "Contact : contact 14.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_15_TEXT = `Info E-mail bilan a2 — Message 15
+const E14_1_CE_EMAIL_15_TEXT = `De : Service E14 1 15
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 15 — information
+
+Bonjour,
+
+Concernant sujet 15 : détail 15.
+
+Délai : délai 15 jours. Action : action 15.
+
+Contact : contact 15. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_15_POOL = buildExpressPool("e14-1-ce-email-15", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 15 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 15 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 15", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 15.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 15.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 15", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 15.",
+    fill: "détail",
+    vfQ: "Info : détail 15.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 15 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 15 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 15 jours.",
+    fillQ: "Délai : délai 15 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 15 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 15", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 15.",
+    fill: "action",
+    vfQ: "Action : action 15.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 15", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 15", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 15.",
+    fill: "contact",
+    vfQ: "Contact : contact 15.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_16_TEXT = `Info E-mail bilan a2 — Message 16
+const E14_1_CE_EMAIL_16_TEXT = `De : Service E14 1 16
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 16 — information
+
+Bonjour,
+
+Concernant sujet 16 : détail 16.
+
+Délai : délai 16 jours. Action : action 16.
+
+Contact : contact 16. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_16_POOL = buildExpressPool("e14-1-ce-email-16", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 16 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 16 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 16", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 16.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 16.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 16", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 16.",
+    fill: "détail",
+    vfQ: "Info : détail 16.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 16 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 16 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 16 jours.",
+    fillQ: "Délai : délai 16 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 16 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 16", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 16.",
+    fill: "action",
+    vfQ: "Action : action 16.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 16", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 16.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 16", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 16.",
+    fill: "contact",
+    vfQ: "Contact : contact 16.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_17_TEXT = `Info E-mail bilan a2 — Message 17
+const E14_1_CE_EMAIL_17_TEXT = `De : Service E14 1 17
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 17 — information
+
+Bonjour,
+
+Concernant sujet 17 : détail 17.
+
+Délai : délai 17 jours. Action : action 17.
+
+Contact : contact 17. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_17_POOL = buildExpressPool("e14-1-ce-email-17", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 17 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 17 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 17", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 17.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 17.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 17", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 17.",
+    fill: "détail",
+    vfQ: "Info : détail 17.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 17 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 17 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 17 jours.",
+    fillQ: "Délai : délai 17 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 17 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 17", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 17.",
+    fill: "action",
+    vfQ: "Action : action 17.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 17", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 17.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 17", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 17.",
+    fill: "contact",
+    vfQ: "Contact : contact 17.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_18_TEXT = `Info E-mail bilan a2 — Message 18
+const E14_1_CE_EMAIL_18_TEXT = `De : Service E14 1 18
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 18 — information
+
+Bonjour,
+
+Concernant sujet 18 : détail 18.
+
+Délai : délai 18 jours. Action : action 18.
+
+Contact : contact 18. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_18_POOL = buildExpressPool("e14-1-ce-email-18", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 18 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 18 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 18", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 18.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 18.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 18", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 18.",
+    fill: "détail",
+    vfQ: "Info : détail 18.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 18 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 18 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 18 jours.",
+    fillQ: "Délai : délai 18 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 18 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 18", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 18.",
+    fill: "action",
+    vfQ: "Action : action 18.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 18", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 18.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 18", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 18.",
+    fill: "contact",
+    vfQ: "Contact : contact 18.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_19_TEXT = `Info E-mail bilan a2 — Message 19
+const E14_1_CE_EMAIL_19_TEXT = `De : Service E14 1 19
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 19 — information
+
+Bonjour,
+
+Concernant sujet 19 : détail 19.
+
+Délai : délai 19 jours. Action : action 19.
+
+Contact : contact 19. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_19_POOL = buildExpressPool("e14-1-ce-email-19", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 19 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 19 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 19", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 19.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 19.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 19", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 19.",
+    fill: "détail",
+    vfQ: "Info : détail 19.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 19 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 19 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 19 jours.",
+    fillQ: "Délai : délai 19 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 19 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 19", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 19.",
+    fill: "action",
+    vfQ: "Action : action 19.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 19", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 19.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 19", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 19.",
+    fill: "contact",
+    vfQ: "Contact : contact 19.",
     vfC: 0,
   }),
 ]);
 
-const E14_1_CE_EMAIL_20_TEXT = `Info E-mail bilan a2 — Message 20
+const E14_1_CE_EMAIL_20_TEXT = `De : Service E14 1 20
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail bilan A2.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Message 20 — information
+
+Bonjour,
+
+Concernant sujet 20 : détail 20.
+
+Délai : délai 20 jours. Action : action 20.
+
+Contact : contact 20. Merci.
+
+Cordialement,
+
+Service`;
+
 const E14_1_CE_EMAIL_20_POOL = buildExpressPool("e14-1-ce-email-20", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail bilan a2", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Message 20 — information", "Facture", "Menu"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ bilan A2.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail bilan A2.",
+    fillQ: "Objet : _________",
+    fill: "Message",
+    vfQ: "Objet : Message 20 — information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sujet 20", "Rien", "Sport"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sujet 20.",
+    fill: "sujet",
+    vfQ: "Sujet : sujet 20.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Détail 20", "Aucune", "Secret"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "détail 20.",
+    fill: "détail",
+    vfQ: "Info : détail 20.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai 20 jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 20 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 20 jours.",
+    fillQ: "Délai : délai 20 jours.",
+    fill: "délai",
+    vfQ: "Délai : délai 20 jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Action 20", "Rien", "Dormir"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : action 20.",
+    fill: "action",
+    vfQ: "Action : action 20.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service E14 1 20", "Facteur", "Ami"],
     textC: 0,
-    img: ["cuisinier", "médecin", "professeur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service E14 1 20.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Contact 20", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : contact 20.",
+    fill: "contact",
+    vfQ: "Contact : contact 20.",
     vfC: 0,
   }),
 ]);
@@ -1748,7 +2087,7 @@ readingPoolExercise({
   id: "e14-1-ce-email",
   readingText: E14_1_CE_EMAIL_TEXT,
   questionPool: E14_1_CE_EMAIL_POOL,
-instruction: "Lisez l'e-mail et répondez aux questions."
+  instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-2",
