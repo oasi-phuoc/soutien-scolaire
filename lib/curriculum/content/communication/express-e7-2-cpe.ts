@@ -10,9 +10,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E7.2 Pratiquer une activité sportive ──────────── */
 
-const CE_TEXT = `Base de loisirs du Lac — Programme d'été
+/* ── Compréhension écrite — E7.2 Pratiquer une activité sportive ── */
+
+const E7_2_CE_TEXT_1 = `Base de loisirs du Lac — Programme d'été
 
 La base de loisirs du Lac est ouverte tous les jours.
 La base est ouverte de 9 h à 18 h.
@@ -26,8 +27,8 @@ Attention ! Avec la pluie, les activités sur le lac sont annulées.
 Avec beaucoup de vent, elles sont annulées aussi.
 Inscription à l'accueil de la base.`;
 
-const CE_POOL = buildExpressPool("e7-2-ce", [
-  q({
+const E7_2_CE_POOL_1 = buildExpressPool("e7-2-ce-1", [
+q({
     id: "ce-q1",
     textQ: "Quelles activités peut-on faire le matin ?",
     text: [
@@ -125,21 +126,2001 @@ const CE_POOL = buildExpressPool("e7-2-ce", [
   }),
 ]);
 
-export const E7_2_CE: CommunicationExercise = readingPoolExercise({
-  id: "e7-2-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const E7_2_CE_TEXT_2 = `Club sportif Les Aigles — Programme
 
-/* ── Production orale — dialogues à jouer (thème sport) ───────────────────── */
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_2 = buildExpressPool("e7-2-ce-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_3 = `Club sportif Le Stade — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_3 = buildExpressPool("e7-2-ce-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_4 = `Club sportif Sport Plus — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_4 = buildExpressPool("e7-2-ce-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_5 = `Club sportif Active Life — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_5 = buildExpressPool("e7-2-ce-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_6 = `Club sportif Fit Club — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_6 = buildExpressPool("e7-2-ce-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_7 = `Club sportif Energy — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_7 = buildExpressPool("e7-2-ce-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_8 = `Club sportif Champion — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_8 = buildExpressPool("e7-2-ce-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_9 = `Club sportif Victoire — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_9 = buildExpressPool("e7-2-ce-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_10 = `Club sportif Dynamo — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_10 = buildExpressPool("e7-2-ce-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_11 = `Club sportif Olympique — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_11 = buildExpressPool("e7-2-ce-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_12 = `Club sportif Riviera Sport — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_12 = buildExpressPool("e7-2-ce-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_13 = `Club sportif Montagne Active — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_13 = buildExpressPool("e7-2-ce-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_14 = `Club sportif Aqua Club — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_14 = buildExpressPool("e7-2-ce-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_15 = `Club sportif Tennis Club — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_15 = buildExpressPool("e7-2-ce-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_16 = `Club sportif Vélo Club — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_16 = buildExpressPool("e7-2-ce-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_17 = `Club sportif Escalade Plus — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_17 = buildExpressPool("e7-2-ce-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_18 = `Club sportif Nature Sport — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_18 = buildExpressPool("e7-2-ce-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_19 = `Club sportif Forme Club — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_19 = buildExpressPool("e7-2-ce-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+const E7_2_CE_TEXT_20 = `Club sportif Bouge Club — Programme
+
+Cours de natation : lundi et mercredi, 18 h – 19 h.
+VTT en groupe : samedi matin, départ à 9 h.
+Escalade : mardi et jeudi, 17 h – 19 h.
+Inscription : sur place ou par e-mail.
+Tarif : 120 € par trimestre, tous les cours inclus.
+Équipement fourni sauf chaussures de sport.
+Annulation possible jusqu'à 24 h avant le cours.
+Centre ouvert de 7 h à 22 h, du lundi au samedi.`;
+
+const E7_2_CE_POOL_20 = buildExpressPool("e7-2-ce-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand a lieu la natation ?",
+    text: ["Lundi et mercredi", "Tous les jours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Natation : lundi et _________.",
+    fill: "mercredi",
+    vfQ: "La natation est lundi et mercredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Heure du VTT ?",
+    text: ["Samedi à 9 h", "Lundi à 6 h", "Vendredi soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "VTT : samedi matin, départ à _________ h.",
+    fill: "9",
+    vfQ: "Le VTT part à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix par trimestre ?",
+    text: ["120 €", "50 €", "200 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif : _________ € par trimestre.",
+    fill: "120",
+    vfQ: "Le tarif est 120 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il apporter des chaussures ?",
+    text: ["Oui", "Non, tout est fourni", "Seulement des gants"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Équipement fourni sauf _________ de sport.",
+    fill: "chaussures",
+    vfQ: "Il faut apporter des chaussures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Comment s'inscrire ?",
+    text: ["Sur place ou par e-mail", "Par téléphone seulement", "Par courrier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Inscription : sur place ou par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On peut s'inscrire par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand annuler un cours ?",
+    text: ["24 h avant", "Le jour même", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Annulation jusqu'à _________ h avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 h avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Horaires du centre ?",
+    text: ["7 h – 22 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Centre ouvert de 7 h à _________ h.",
+    fill: "22",
+    vfQ: "Le centre ferme à 22 h.",
+    vfC: 0,
+  }),
+]);
+
+export const E7_2_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e7-2-ce-1",
+    readingText: E7_2_CE_TEXT_1,
+    questionPool: E7_2_CE_POOL_1,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-2",
+    readingText: E7_2_CE_TEXT_2,
+    questionPool: E7_2_CE_POOL_2,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-3",
+    readingText: E7_2_CE_TEXT_3,
+    questionPool: E7_2_CE_POOL_3,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-4",
+    readingText: E7_2_CE_TEXT_4,
+    questionPool: E7_2_CE_POOL_4,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-5",
+    readingText: E7_2_CE_TEXT_5,
+    questionPool: E7_2_CE_POOL_5,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-6",
+    readingText: E7_2_CE_TEXT_6,
+    questionPool: E7_2_CE_POOL_6,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-7",
+    readingText: E7_2_CE_TEXT_7,
+    questionPool: E7_2_CE_POOL_7,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-8",
+    readingText: E7_2_CE_TEXT_8,
+    questionPool: E7_2_CE_POOL_8,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-9",
+    readingText: E7_2_CE_TEXT_9,
+    questionPool: E7_2_CE_POOL_9,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-10",
+    readingText: E7_2_CE_TEXT_10,
+    questionPool: E7_2_CE_POOL_10,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-11",
+    readingText: E7_2_CE_TEXT_11,
+    questionPool: E7_2_CE_POOL_11,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-12",
+    readingText: E7_2_CE_TEXT_12,
+    questionPool: E7_2_CE_POOL_12,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-13",
+    readingText: E7_2_CE_TEXT_13,
+    questionPool: E7_2_CE_POOL_13,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-14",
+    readingText: E7_2_CE_TEXT_14,
+    questionPool: E7_2_CE_POOL_14,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-15",
+    readingText: E7_2_CE_TEXT_15,
+    questionPool: E7_2_CE_POOL_15,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-16",
+    readingText: E7_2_CE_TEXT_16,
+    questionPool: E7_2_CE_POOL_16,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-17",
+    readingText: E7_2_CE_TEXT_17,
+    questionPool: E7_2_CE_POOL_17,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-18",
+    readingText: E7_2_CE_TEXT_18,
+    questionPool: E7_2_CE_POOL_18,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-19",
+    readingText: E7_2_CE_TEXT_19,
+    questionPool: E7_2_CE_POOL_19,
+  }),
+  readingPoolExercise({
+    id: "e7-2-ce-20",
+    readingText: E7_2_CE_TEXT_20,
+    questionPool: E7_2_CE_POOL_20,
+  }),
+];
+
+/* ── Production orale — dialogues à jouer ──────────────────────────────────── */
+
 
 const MONITEUR = { title: "Le moniteur", vous: "le moniteur / la monitrice" };
 const CLIENT = { title: "Le client", vous: "le client / la cliente" };
 const AMI_1 = { title: "Le premier ami", vous: "le premier ami / la première amie" };
 const AMI_2 = { title: "Le deuxième ami", vous: "le deuxième ami / la deuxième amie" };
 
+
 export const E7_2_PO: ExpressPoDialogue[] = [
-  {
+{
     id: "e7-2-po-1",
     title: "S'inscrire à un cours de voile",
     context: "Vous êtes à la base de loisirs. Vous voulez apprendre la voile.",
@@ -329,7 +2310,198 @@ export const E7_2_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Merci, toi aussi !" },
 ],
   },
+  {
+    id: "e7-2-po-11",
+    title: "S'inscrire à la natation",
+    context: "Vous voulez apprendre à nager.",
+    roleA: { title: "Le moniteur", vous: "le moniteur / la monitrice" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Bonjour, cours de natation ?" },
+      { role: "B", text: "Oui, lundi et mercredi." },
+      { role: "A", text: "Je suis débutant." },
+      { role: "B", text: "Pas de problème." },
+      { role: "A", text: "Je m'inscris." },
+      { role: "B", text: "120 € le trimestre." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-12",
+    title: "Louer un VTT",
+    context: "Vous louez un vélo.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Un VTT pour l'après-midi ?" },
+      { role: "B", text: "Oui, 25 €." },
+      { role: "A", text: "Casque inclus ?" },
+      { role: "B", text: "Oui." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Bonne balade !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-13",
+    title: "Cours annulé",
+    context: "Le cours est annulé.",
+    roleA: { title: "Le moniteur", vous: "le moniteur / la monitrice" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Le cours de ce soir ?" },
+      { role: "B", text: "Annulé, le moniteur est malade." },
+      { role: "A", text: "Et demain ?" },
+      { role: "B", text: "Normal, à 18 h." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Désolé." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-14",
+    title: "Escalade",
+    context: "Premier cours d'escalade.",
+    roleA: { title: "Le moniteur", vous: "le moniteur / la monitrice" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Première fois." },
+      { role: "B", text: "Pas de souci. Chaussures là." },
+      { role: "A", text: "C'est haut !" },
+      { role: "B", text: "Allez-y doucement." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Bravo !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-15",
+    title: "Météo",
+    context: "Il pleut, sortie annulée ?",
+    roleA: { title: "Le moniteur", vous: "le moniteur / la monitrice" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "On fait le VTT ?" },
+      { role: "B", text: "Non, il pleut. Reporté samedi." },
+      { role: "A", text: "D'accord." },
+      { role: "B", text: "Je vous préviens." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-16",
+    title: "Tennis",
+    context: "Vous réservez un court.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Un court à 16 h ?" },
+      { role: "B", text: "Oui, court 3." },
+      { role: "A", text: "Raquettes ?" },
+      { role: "B", text: "Location 5 €." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Bon match !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-17",
+    title: "Ski",
+    context: "Vous vous renseignez sur le ski.",
+    roleA: { title: "Le moniteur", vous: "le moniteur / la monitrice" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Cours de ski ?" },
+      { role: "B", text: "En janvier, 200 € la semaine." },
+      { role: "A", text: "Matériel inclus ?" },
+      { role: "B", text: "Skis et bâtons oui." },
+      { role: "A", text: "Je réfléchis." },
+      { role: "B", text: "Pas de souci." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-18",
+    title: "Sport entre amis",
+    context: "Vous proposez une activité.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "On fait du vélo samedi ?" },
+      { role: "B", text: "Bonne idée !" },
+      { role: "A", text: "9 h ?" },
+      { role: "B", text: "Parfait." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-19",
+    title: "Niveau",
+    context: "Quel niveau pour le cours ?",
+    roleA: { title: "Le moniteur", vous: "le moniteur / la monitrice" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Quel niveau ?" },
+      { role: "B", text: "Débutant." },
+      { role: "A", text: "Groupe débutant mardi." },
+      { role: "B", text: "Je m'inscris." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-2-po-20",
+    title: "Abonnement",
+    context: "Vous prenez un abonnement.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Abonnement mensuel ?" },
+      { role: "B", text: "50 €, tous les cours." },
+      { role: "A", text: "Je prends." },
+      { role: "B", text: "Voici votre carte." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
 ];
+
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
 
@@ -337,7 +2509,7 @@ const PE_MIN = 50;
 const PE_MAX = 120;
 
 export const E7_2_PE: ExpressPePrompt[] = [
-  {
+{
     id: "e7-2-pe-1",
     title: "Proposer une activité",
     situation: "Il fait très beau ce week-end.",
@@ -426,5 +2598,95 @@ export const E7_2_PE: ExpressPePrompt[] = [
     points: ["Un sport pour commencer", "Le matériel nécessaire", "Une idée de cours débutant"],
     minWords: PE_MIN,
     maxWords: PE_MAX,
+  },
+  {
+    id: "e7-2-pe-11",
+    title: "Mon sport préféré",
+    situation: "Parlez de votre sport.",
+    instruction: "Décrivez pourquoi vous aimez ce sport.",
+    points: ["Le sport", "Pourquoi", "Fréquence"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-12",
+    title: "Proposer une activité",
+    situation: "Invitez un ami.",
+    instruction: "Proposez une sortie sportive.",
+    points: ["L'activité", "Date et heure", "Équipement"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-13",
+    title: "Inscription club",
+    situation: "Vous voulez vous inscrire.",
+    instruction: "Écrivez au club : sport choisi et questions.",
+    points: ["Le sport", "Vos questions", "Disponibilités"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-14",
+    title: "Journée sportive",
+    situation: "Racontez une journée.",
+    instruction: "Décrivez une journée de sport.",
+    points: ["Le matin", "L'après-midi", "Impressions"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-15",
+    title: "Météo et sport",
+    situation: "Le temps change vos plans.",
+    instruction: "Expliquez comment la météo influence vos activités.",
+    points: ["Beau temps", "Mauvais temps", "Alternative"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-16",
+    title: "Conseils débutant",
+    situation: "Un ami commence le running.",
+    instruction: "Donnez des conseils.",
+    points: ["Équipement", "Fréquence", "Sécurité"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-17",
+    title: "Comparer sports",
+    situation: "Tennis ou natation ?",
+    instruction: "Comparez deux sports.",
+    points: ["Sport 1", "Sport 2", "Préférence"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-18",
+    title: "Reporter sortie",
+    situation: "Vous ne pouvez pas venir.",
+    instruction: "Écrivez à votre ami pour reporter.",
+    points: ["L'excuse", "Nouvelle date", "Excuses"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-19",
+    title: "Famille et sport",
+    situation: "Décrivez les sports de votre famille.",
+    instruction: "Qui fait quoi et à quelle fréquence.",
+    points: ["Membre 1", "Membre 2", "Ensemble"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-2-pe-20",
+    title: "Louer du matériel",
+    situation: "Vous louez du matériel.",
+    instruction: "Décrivez la location : quoi, prix, durée.",
+    points: ["Le matériel", "Le prix", "La durée"],
+    minWords: 50,
+    maxWords: 120,
   },
 ];

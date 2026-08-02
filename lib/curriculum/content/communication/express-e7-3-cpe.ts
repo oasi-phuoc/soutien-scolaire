@@ -10,9 +10,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E7.3 Visiter des lieux culturels ──────────────── */
 
-const CE_TEXT = `Musée des Beaux-Arts — Exposition « Couleurs du Sud »
+/* ── Compréhension écrite — E7.3 Visiter des lieux culturels ── */
+
+const E7_3_CE_TEXT_1 = `Musée des Beaux-Arts — Exposition « Couleurs du Sud »
 
 Le musée présente une grande exposition de peinture.
 L'exposition dure du 3 juin au 30 août.
@@ -25,8 +26,8 @@ Avec la carte d'étudiant, le billet est à 6 €.
 Il y a une visite guidée le samedi à 14 h.
 Vous pouvez acheter vos e-billets en ligne sur le site du musée.`;
 
-const CE_POOL = buildExpressPool("e7-3-ce", [
-  q({
+const E7_3_CE_POOL_1 = buildExpressPool("e7-3-ce-1", [
+q({
     id: "ce-q1",
     textQ: "Qu'est-ce que le musée présente cet été ?",
     text: [
@@ -124,21 +125,1982 @@ const CE_POOL = buildExpressPool("e7-3-ce", [
   }),
 ]);
 
-export const E7_3_CE: CommunicationExercise = readingPoolExercise({
-  id: "e7-3-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const E7_3_CE_TEXT_2 = `Musée des Beaux-Arts — Informations
 
-/* ── Production orale — dialogues à jouer (thème lieux culturels) ─────────── */
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_2 = buildExpressPool("e7-3-ce-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_3 = `Théâtre Municipal — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_3 = buildExpressPool("e7-3-ce-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_4 = `Cinéma Rex — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_4 = buildExpressPool("e7-3-ce-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_5 = `Château historique — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_5 = buildExpressPool("e7-3-ce-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_6 = `Galerie Moderne — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_6 = buildExpressPool("e7-3-ce-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_7 = `Opéra de la Ville — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_7 = buildExpressPool("e7-3-ce-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_8 = `Centre culturel — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_8 = buildExpressPool("e7-3-ce-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_9 = `Exposition Photo — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_9 = buildExpressPool("e7-3-ce-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_10 = `Bibliothèque musée — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_10 = buildExpressPool("e7-3-ce-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_11 = `Festival d'été — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_11 = buildExpressPool("e7-3-ce-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_12 = `Maison des Arts — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_12 = buildExpressPool("e7-3-ce-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_13 = `Planetarium — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_13 = buildExpressPool("e7-3-ce-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_14 = `Musée d'Histoire — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_14 = buildExpressPool("e7-3-ce-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_15 = `Salle de concert — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_15 = buildExpressPool("e7-3-ce-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_16 = `Parc des Sculptures — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_16 = buildExpressPool("e7-3-ce-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_17 = `Musée de la Science — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_17 = buildExpressPool("e7-3-ce-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_18 = `Théâtre de poche — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_18 = buildExpressPool("e7-3-ce-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_19 = `Cinéma Art — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_19 = buildExpressPool("e7-3-ce-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+const E7_3_CE_TEXT_20 = `Palais culturel — Informations
+
+Ouvert du mardi au dimanche, 10 h – 18 h.
+Fermé le lundi.
+Tarif adulte : 12 €, tarif réduit : 8 € (étudiants, seniors).
+Gratuit pour les moins de 12 ans.
+Visite guidée à 14 h et 16 h (durée : 1 h 30).
+Réservation conseillée pour les groupes.
+Boutique et café sur place.
+Dernière entrée 30 minutes avant la fermeture.`;
+
+const E7_3_CE_POOL_20 = buildExpressPool("e7-3-ce-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours d'ouverture ?",
+    text: ["Du mardi au dimanche", "Tous les jours", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouvert du mardi au _________.",
+    fill: "dimanche",
+    vfQ: "Ouvert du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel jour fermé ?",
+    text: ["Le lundi", "Le samedi", "Le jeudi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Fermé le _________.",
+    fill: "lundi",
+    vfQ: "Fermé le lundi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix adulte ?",
+    text: ["12 €", "8 €", "20 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif adulte : _________ €.",
+    fill: "12",
+    vfQ: "L'entrée adulte coûte 12 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Tarif réduit pour qui ?",
+    text: ["Étudiants et seniors", "Tout le monde", "Personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tarif réduit : étudiants, _________.",
+    fill: "seniors",
+    vfQ: "Réduction pour étudiants et seniors.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Gratuit pour qui ?",
+    text: ["Moins de 12 ans", "Tout le monde", "Plus de 60 ans"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Gratuit pour les moins de _________ ans.",
+    fill: "12",
+    vfQ: "Gratuit pour les moins de 12 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Heures des visites guidées ?",
+    text: ["14 h et 16 h", "10 h seulement", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Visite guidée à 14 h et _________ h.",
+    fill: "16",
+    vfQ: "Visites à 14 h et 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Y a-t-il un café ?",
+    text: ["Oui, sur place", "Non", "Dehors seulement"],
+    textC: 0,
+    img: ["musée", "cinéma", "théâtre"],
+    imgC: 0,
+    fillQ: "Boutique et _________ sur place.",
+    fill: "café",
+    vfQ: "Il y a un café sur place.",
+    vfC: 0,
+  }),
+]);
+
+export const E7_3_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e7-3-ce-1",
+    readingText: E7_3_CE_TEXT_1,
+    questionPool: E7_3_CE_POOL_1,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-2",
+    readingText: E7_3_CE_TEXT_2,
+    questionPool: E7_3_CE_POOL_2,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-3",
+    readingText: E7_3_CE_TEXT_3,
+    questionPool: E7_3_CE_POOL_3,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-4",
+    readingText: E7_3_CE_TEXT_4,
+    questionPool: E7_3_CE_POOL_4,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-5",
+    readingText: E7_3_CE_TEXT_5,
+    questionPool: E7_3_CE_POOL_5,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-6",
+    readingText: E7_3_CE_TEXT_6,
+    questionPool: E7_3_CE_POOL_6,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-7",
+    readingText: E7_3_CE_TEXT_7,
+    questionPool: E7_3_CE_POOL_7,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-8",
+    readingText: E7_3_CE_TEXT_8,
+    questionPool: E7_3_CE_POOL_8,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-9",
+    readingText: E7_3_CE_TEXT_9,
+    questionPool: E7_3_CE_POOL_9,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-10",
+    readingText: E7_3_CE_TEXT_10,
+    questionPool: E7_3_CE_POOL_10,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-11",
+    readingText: E7_3_CE_TEXT_11,
+    questionPool: E7_3_CE_POOL_11,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-12",
+    readingText: E7_3_CE_TEXT_12,
+    questionPool: E7_3_CE_POOL_12,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-13",
+    readingText: E7_3_CE_TEXT_13,
+    questionPool: E7_3_CE_POOL_13,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-14",
+    readingText: E7_3_CE_TEXT_14,
+    questionPool: E7_3_CE_POOL_14,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-15",
+    readingText: E7_3_CE_TEXT_15,
+    questionPool: E7_3_CE_POOL_15,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-16",
+    readingText: E7_3_CE_TEXT_16,
+    questionPool: E7_3_CE_POOL_16,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-17",
+    readingText: E7_3_CE_TEXT_17,
+    questionPool: E7_3_CE_POOL_17,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-18",
+    readingText: E7_3_CE_TEXT_18,
+    questionPool: E7_3_CE_POOL_18,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-19",
+    readingText: E7_3_CE_TEXT_19,
+    questionPool: E7_3_CE_POOL_19,
+  }),
+  readingPoolExercise({
+    id: "e7-3-ce-20",
+    readingText: E7_3_CE_TEXT_20,
+    questionPool: E7_3_CE_POOL_20,
+  }),
+];
+
+/* ── Production orale — dialogues à jouer ──────────────────────────────────── */
+
 
 const EMPLOYE = { title: "L'employé", vous: "l'employé / l'employée" };
 const VISITEUR = { title: "Le visiteur", vous: "le visiteur / la visiteuse" };
 const AMI_1 = { title: "Le premier ami", vous: "le premier ami / la première amie" };
 const AMI_2 = { title: "Le deuxième ami", vous: "le deuxième ami / la deuxième amie" };
 
+
 export const E7_3_PO: ExpressPoDialogue[] = [
-  {
+{
     id: "e7-3-po-1",
     title: "Acheter des billets au musée",
     context: "Vous achetez des billets pour l'exposition avec votre famille.",
@@ -328,7 +2290,198 @@ export const E7_3_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+  {
+    id: "e7-3-po-11",
+    title: "Billets musée",
+    context: "Vous achetez des billets.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "Deux billets adultes ?" },
+      { role: "B", text: "24 €." },
+      { role: "A", text: "Visite guidée ?" },
+      { role: "B", text: "À 14 h, places disponibles." },
+      { role: "A", text: "On prend." },
+      { role: "B", text: "Voici vos billets." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-12",
+    title: "Horaires",
+    context: "Vous demandez les horaires.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "C'est ouvert le lundi ?" },
+      { role: "B", text: "Non, fermé le lundi." },
+      { role: "A", text: "Et dimanche ?" },
+      { role: "B", text: "Oui, 10 h – 18 h." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Bonne visite !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-13",
+    title: "Réduction étudiant",
+    context: "Vous avez une carte étudiant.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "Tarif réduit ?" },
+      { role: "B", text: "Oui, avec carte. 8 €." },
+      { role: "A", text: "Voici." },
+      { role: "B", text: "Merci." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-14",
+    title: "Cinéma",
+    context: "Vous choisissez un film.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "Quel film ?" },
+      { role: "B", text: "Comédie à 20 h ou drame à 18 h ?" },
+      { role: "A", text: "La comédie." },
+      { role: "B", text: "Salle 2." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-15",
+    title: "Concert",
+    context: "Vous réservez des places.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "Concert samedi ?" },
+      { role: "B", text: "Il reste des places." },
+      { role: "A", text: "Deux en rang A." },
+      { role: "B", text: "80 €." },
+      { role: "A", text: "Je prends." },
+      { role: "B", text: "Voici." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-16",
+    title: "Exposition",
+    context: "Vous demandez des infos.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "L'exposition photo ?" },
+      { role: "B", text: "Jusqu'au 30 juin." },
+      { role: "A", text: "Gratuit ?" },
+      { role: "B", text: "Non, 8 €." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Bonne visite." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-17",
+    title: "Office tourisme",
+    context: "Vous êtes à l'office.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "Que visiter ?" },
+      { role: "B", text: "Le château et le musée." },
+      { role: "A", text: "Combien de temps ?" },
+      { role: "B", text: "Une journée." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Bon séjour !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-18",
+    title: "Après le film",
+    context: "Vous discutez.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Le film ?" },
+      { role: "B", text: "Super ! J'ai adoré." },
+      { role: "A", text: "Moi aussi." },
+      { role: "B", text: "On y retourne ?" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-19",
+    title: "Inviter au musée",
+    context: "Vous invitez un ami.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Musée samedi ?" },
+      { role: "B", text: "Volontiers !" },
+      { role: "A", text: "14 h ?" },
+      { role: "B", text: "Parfait." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-3-po-20",
+    title: "Théâtre",
+    context: "Vous réservez.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le visiteur", vous: "le visiteur / la visiteuse" },
+    lines: [
+      { role: "A", text: "Pièce de samedi ?" },
+      { role: "B", text: "Il reste 3 places." },
+      { role: "A", text: "On les prend." },
+      { role: "B", text: "45 €." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
 ];
+
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
 
@@ -336,7 +2489,7 @@ const PE_MIN = 50;
 const PE_MAX = 120;
 
 export const E7_3_PE: ExpressPePrompt[] = [
-  {
+{
     id: "e7-3-pe-1",
     title: "Invitation au musée",
     situation: "Une grande exposition de peinture arrive dans votre ville.",
@@ -425,5 +2578,95 @@ export const E7_3_PE: ExpressPePrompt[] = [
     points: ["Votre préférence", "Deux raisons", "Un souvenir de sortie"],
     minWords: PE_MIN,
     maxWords: PE_MAX,
+  },
+  {
+    id: "e7-3-pe-11",
+    title: "Invitation musée",
+    situation: "Invitez un ami.",
+    instruction: "Proposez une visite au musée.",
+    points: ["Le musée", "La date", "Le prix"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-12",
+    title: "Raconter une visite",
+    situation: "Vous avez visité un château.",
+    instruction: "Racontez votre visite.",
+    points: ["Le lieu", "Ce que vous avez vu", "Impressions"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-13",
+    title: "Programme week-end",
+    situation: "Proposez un programme culturel.",
+    instruction: "Trois activités pour le week-end.",
+    points: ["Activité 1", "Activité 2", "Activité 3"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-14",
+    title: "Avis exposition",
+    situation: "Donnez votre avis.",
+    instruction: "Décrivez une exposition vue récemment.",
+    points: ["Le thème", "Ce qui vous a plu", "Ce qui vous a moins plu"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-15",
+    title: "Réserver visite guidée",
+    situation: "Écrivez pour réserver.",
+    instruction: "Demandez une visite guidée pour un groupe.",
+    points: ["Le groupe", "La date", "Questions"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-16",
+    title: "Mon film préféré",
+    situation: "Parlez d'un film.",
+    instruction: "Décrivez votre film préféré.",
+    points: ["Le film", "L'histoire", "Pourquoi"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-17",
+    title: "Cinéma ou théâtre",
+    situation: "Comparez.",
+    instruction: "Dites lequel vous préférez et pourquoi.",
+    points: ["Le cinéma", "Le théâtre", "Votre choix"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-18",
+    title: "Lieu culturel",
+    situation: "Présentez un lieu de votre ville.",
+    instruction: "Décrivez un musée ou théâtre.",
+    points: ["Le lieu", "Les horaires", "Pourquoi y aller"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-19",
+    title: "Soirée cinéma",
+    situation: "Racontez une soirée.",
+    instruction: "Décrivez votre soirée au cinéma.",
+    points: ["Le film", "Avec qui", "Impressions"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-3-pe-20",
+    title: "Demander réductions",
+    situation: "Vous écrivez au musée.",
+    instruction: "Demandez les tarifs réduits.",
+    points: ["Votre situation", "Les tarifs", "Vos questions"],
+    minWords: 50,
+    maxWords: 120,
   },
 ];

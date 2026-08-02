@@ -10,9 +10,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E7.1 Aller à l'hôtel ──────────────────────────── */
 
-const CE_TEXT = `Hôtel Bellevue — Informations pour les clients
+/* ── Compréhension écrite — E7.1 Aller à l'hôtel ── */
+
+const E7_1_CE_TEXT_1 = `Hôtel Bellevue — Informations pour les clients
 
 L'hôtel Bellevue se trouve à côté de la plage.
 Il est entre la piscine et le parc.
@@ -26,8 +27,8 @@ La réception est ouverte de 7 h à 22 h.
 Pour réserver, téléphonez à la réception ou envoyez un e-mail.
 Attention : l'hôtel est complet en août. Réservez tôt !`;
 
-const CE_POOL = buildExpressPool("e7-1-ce", [
-  q({
+const E7_1_CE_POOL_1 = buildExpressPool("e7-1-ce-1", [
+q({
     id: "ce-q1",
     textQ: "Où se trouve l'hôtel Bellevue ?",
     text: ["À côté de la plage", "À la montagne", "Au bord du lac"],
@@ -108,21 +109,1982 @@ const CE_POOL = buildExpressPool("e7-1-ce", [
   }),
 ]);
 
-export const E7_1_CE: CommunicationExercise = readingPoolExercise({
-  id: "e7-1-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const E7_1_CE_TEXT_2 = `Hôtel du Lac — Informations
 
-/* ── Production orale — dialogues à jouer (thème hôtel / camping) ─────────── */
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_2 = buildExpressPool("e7-1-ce-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_3 = `Hôtel Bellevue — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_3 = buildExpressPool("e7-1-ce-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_4 = `Hôtel Central — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_4 = buildExpressPool("e7-1-ce-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_5 = `Hôtel Riviera — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_5 = buildExpressPool("e7-1-ce-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_6 = `Hôtel Mont-Blanc — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_6 = buildExpressPool("e7-1-ce-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_7 = `Hôtel des Alpes — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_7 = buildExpressPool("e7-1-ce-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_8 = `Hôtel Soleil — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_8 = buildExpressPool("e7-1-ce-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_9 = `Hôtel Paradis — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_9 = buildExpressPool("e7-1-ce-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_10 = `Hôtel Étoile — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_10 = buildExpressPool("e7-1-ce-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_11 = `Hôtel Jardin — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_11 = buildExpressPool("e7-1-ce-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_12 = `Hôtel Plage — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_12 = buildExpressPool("e7-1-ce-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_13 = `Hôtel Forêt — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_13 = buildExpressPool("e7-1-ce-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_14 = `Hôtel Village — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_14 = buildExpressPool("e7-1-ce-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_15 = `Hôtel Gare — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_15 = buildExpressPool("e7-1-ce-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_16 = `Hôtel Parc — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_16 = buildExpressPool("e7-1-ce-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_17 = `Hôtel Royal — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_17 = buildExpressPool("e7-1-ce-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_18 = `Hôtel Moderne — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_18 = buildExpressPool("e7-1-ce-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_19 = `Hôtel Classique — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_19 = buildExpressPool("e7-1-ce-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+const E7_1_CE_TEXT_20 = `Hôtel Confort — Informations
+
+Chambres disponibles : simple, double et familiale.
+Prix : 75 € la nuit en chambre double, petit déjeuner inclus.
+Check-in à partir de 15 h, check-out avant 11 h.
+Wi-Fi gratuit dans tout l'hôtel.
+Parking : 10 € par jour.
+L'hôtel est à côté de la plage, à 5 minutes à pied du centre.
+Animaux acceptés : 15 € par nuit.
+Réservation par téléphone ou sur le site Internet.`;
+
+const E7_1_CE_POOL_20 = buildExpressPool("e7-1-ce-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel type de chambres ?",
+    text: ["Simple, double et familiale", "Seulement simple", "Seulement luxe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Chambres : simple, double et _________.",
+    fill: "familiale",
+    vfQ: "Il y a des chambres familiales.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Prix chambre double ?",
+    text: ["75 € la nuit", "100 €", "50 €"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prix : _________ € la nuit.",
+    fill: "75",
+    vfQ: "La chambre double coûte 75 €.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le petit déjeuner est-il inclus ?",
+    text: ["Oui", "Non", "Seulement le week-end"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Petit déjeuner _________.",
+    fill: "inclus",
+    vfQ: "Le petit déjeuner est inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Heure du check-in ?",
+    text: ["À partir de 15 h", "À 10 h", "À minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Check-in à partir de _________ h.",
+    fill: "15",
+    vfQ: "Le check-in est à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le Wi-Fi est-il gratuit ?",
+    text: ["Oui", "Non", "Payant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Wi-Fi _________ dans tout l'hôtel.",
+    fill: "gratuit",
+    vfQ: "Le Wi-Fi est gratuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où est l'hôtel ?",
+    text: ["À côté de la plage", "En montagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'hôtel est à côté de la _________.",
+    fill: "plage",
+    vfQ: "L'hôtel est près de la plage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Les animaux sont-ils acceptés ?",
+    text: ["Oui, 15 € par nuit", "Non, jamais", "Gratuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Animaux acceptés : _________ € par nuit.",
+    fill: "15",
+    vfQ: "Les animaux coûtent 15 € par nuit.",
+    vfC: 0,
+  }),
+]);
+
+export const E7_1_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e7-1-ce-1",
+    readingText: E7_1_CE_TEXT_1,
+    questionPool: E7_1_CE_POOL_1,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-2",
+    readingText: E7_1_CE_TEXT_2,
+    questionPool: E7_1_CE_POOL_2,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-3",
+    readingText: E7_1_CE_TEXT_3,
+    questionPool: E7_1_CE_POOL_3,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-4",
+    readingText: E7_1_CE_TEXT_4,
+    questionPool: E7_1_CE_POOL_4,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-5",
+    readingText: E7_1_CE_TEXT_5,
+    questionPool: E7_1_CE_POOL_5,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-6",
+    readingText: E7_1_CE_TEXT_6,
+    questionPool: E7_1_CE_POOL_6,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-7",
+    readingText: E7_1_CE_TEXT_7,
+    questionPool: E7_1_CE_POOL_7,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-8",
+    readingText: E7_1_CE_TEXT_8,
+    questionPool: E7_1_CE_POOL_8,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-9",
+    readingText: E7_1_CE_TEXT_9,
+    questionPool: E7_1_CE_POOL_9,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-10",
+    readingText: E7_1_CE_TEXT_10,
+    questionPool: E7_1_CE_POOL_10,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-11",
+    readingText: E7_1_CE_TEXT_11,
+    questionPool: E7_1_CE_POOL_11,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-12",
+    readingText: E7_1_CE_TEXT_12,
+    questionPool: E7_1_CE_POOL_12,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-13",
+    readingText: E7_1_CE_TEXT_13,
+    questionPool: E7_1_CE_POOL_13,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-14",
+    readingText: E7_1_CE_TEXT_14,
+    questionPool: E7_1_CE_POOL_14,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-15",
+    readingText: E7_1_CE_TEXT_15,
+    questionPool: E7_1_CE_POOL_15,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-16",
+    readingText: E7_1_CE_TEXT_16,
+    questionPool: E7_1_CE_POOL_16,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-17",
+    readingText: E7_1_CE_TEXT_17,
+    questionPool: E7_1_CE_POOL_17,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-18",
+    readingText: E7_1_CE_TEXT_18,
+    questionPool: E7_1_CE_POOL_18,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-19",
+    readingText: E7_1_CE_TEXT_19,
+    questionPool: E7_1_CE_POOL_19,
+  }),
+  readingPoolExercise({
+    id: "e7-1-ce-20",
+    readingText: E7_1_CE_TEXT_20,
+    questionPool: E7_1_CE_POOL_20,
+  }),
+];
+
+/* ── Production orale — dialogues à jouer ──────────────────────────────────── */
+
 
 const RECEPTIONNISTE = { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" };
 const CLIENT = { title: "Le client", vous: "le client / la cliente" };
 const AMI_1 = { title: "Le premier ami", vous: "le premier ami / la première amie" };
 const AMI_2 = { title: "Le deuxième ami", vous: "le deuxième ami / la deuxième amie" };
 
+
 export const E7_1_PO: ExpressPoDialogue[] = [
-  {
+{
     id: "e7-1-po-1",
     title: "Réserver une chambre par téléphone",
     context: "Vous téléphonez à l'hôtel pour réserver une chambre pour deux personnes.",
@@ -312,7 +2274,198 @@ export const E7_1_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Très bien. Au revoir !" },
 ],
   },
+  {
+    id: "e7-1-po-11",
+    title: "Réserver par téléphone",
+    context: "Vous réservez une chambre.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Bonjour, Hôtel du Lac." },
+      { role: "B", text: "Bonjour, une chambre double pour samedi ?" },
+      { role: "A", text: "Pour combien de nuits ?" },
+      { role: "B", text: "Deux nuits." },
+      { role: "A", text: "75 € par nuit. Je réserve ?" },
+      { role: "B", text: "Oui, merci." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-12",
+    title: "Arrivée à l'hôtel",
+    context: "Vous arrivez à l'hôtel.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Bonjour, j'ai une réservation." },
+      { role: "B", text: "Nom, s'il vous plaît ?" },
+      { role: "A", text: "Martin." },
+      { role: "B", text: "Chambre 204, 2e étage." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Bon séjour !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-13",
+    title: "Problème chambre",
+    context: "La climatisation ne marche pas.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "La clim ne marche pas." },
+      { role: "B", text: "Désolé. On envoie quelqu'un." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Chambre 204, dans dix minutes." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-14",
+    title: "Hôtel complet",
+    context: "L'hôtel est complet.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Une chambre ce soir ?" },
+      { role: "B", text: "Désolé, complet." },
+      { role: "A", text: "Un autre hôtel ?" },
+      { role: "B", text: "L'Hôtel Central, à côté." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Bonne soirée." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-15",
+    title: "Camping",
+    context: "Vous cherchez une place au camping.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Une place pour deux nuits ?" },
+      { role: "B", text: "Oui, emplacement 15." },
+      { role: "A", text: "Prix ?" },
+      { role: "B", text: "30 € par nuit." },
+      { role: "A", text: "Je prends." },
+      { role: "B", text: "Voici la clé." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-16",
+    title: "Départ",
+    context: "Vous quittez l'hôtel.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Je pars." },
+      { role: "B", text: "Chambre 204 ?" },
+      { role: "A", text: "Oui. La clé." },
+      { role: "B", text: "Tout est en ordre. Au revoir !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-17",
+    title: "Demi-pension",
+    context: "Vous demandez la demi-pension.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Demi-pension ?" },
+      { role: "B", text: "Petit déjeuner et dîner, 25 € de plus." },
+      { role: "A", text: "D'accord." },
+      { role: "B", text: "C'est noté." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-18",
+    title: "Où est l'hôtel",
+    context: "Vous demandez le chemin.",
+    roleA: { title: "Le client", vous: "le client / la cliente" },
+    roleB: { title: "Le passant", vous: "le passant / la passante" },
+    lines: [
+      { role: "A", text: "L'Hôtel du Lac ?" },
+      { role: "B", text: "Tout droit, à côté de la plage." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "De rien." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-19",
+    title: "Hôtel ou camping",
+    context: "Vous hésitez.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Hôtel ou camping ?" },
+      { role: "B", text: "Camping, c'est moins cher." },
+      { role: "A", text: "D'accord." },
+      { role: "B", text: "Et plus sympa !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e7-1-po-20",
+    title: "Wi-Fi",
+    context: "Le Wi-Fi ne marche pas.",
+    roleA: { title: "Le réceptionniste", vous: "le réceptionniste / la réceptionniste" },
+    roleB: { title: "Le client", vous: "le client / la cliente" },
+    lines: [
+      { role: "A", text: "Le Wi-Fi ne marche pas." },
+      { role: "B", text: "Mot de passe : hotel2024." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "De rien." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
 ];
+
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
 
@@ -320,7 +2473,7 @@ const PE_MIN = 50;
 const PE_MAX = 120;
 
 export const E7_1_PE: ExpressPePrompt[] = [
-  {
+{
     id: "e7-1-pe-1",
     title: "E-mail de réservation",
     situation: "Vous voulez passer trois nuits à l'hôtel Bellevue au mois de juillet.",
@@ -409,5 +2562,95 @@ export const E7_1_PE: ExpressPePrompt[] = [
     points: ["Le point de départ (gare, arrêt de bus…)", "Deux prépositions de lieu", "Un lieu connu à côté de l'hôtel"],
     minWords: PE_MIN,
     maxWords: PE_MAX,
+  },
+  {
+    id: "e7-1-pe-11",
+    title: "Réservation hôtel",
+    situation: "Vous écrivez pour réserver.",
+    instruction: "Demandez une chambre : dates, type et questions.",
+    points: ["Dates", "Type de chambre", "Questions"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-12",
+    title: "Carte postale",
+    situation: "Vous êtes en vacances.",
+    instruction: "Écrivez une carte postale : lieu, hôtel et activités.",
+    points: ["Le lieu", "L'hôtel", "Activités"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-13",
+    title: "Réclamation",
+    situation: "Problème dans la chambre.",
+    instruction: "Décrivez le problème et demandez une solution.",
+    points: ["Le problème", "Depuis quand", "Votre demande"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-14",
+    title: "Comparer hôtel et camping",
+    situation: "Pour les vacances.",
+    instruction: "Comparez les deux options.",
+    points: ["L'hôtel", "Le camping", "Votre choix"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-15",
+    title: "Mon séjour idéal",
+    situation: "Décrivez vos vacances idéales.",
+    instruction: "Où, dans quel hébergement et quelles activités.",
+    points: ["Le lieu", "L'hébergement", "Activités"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-16",
+    title: "Annuler réservation",
+    situation: "Vous devez annuler.",
+    instruction: "Expliquez pourquoi et demandez confirmation.",
+    points: ["L'annulation", "La raison", "Confirmation"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-17",
+    title: "Avis hôtel",
+    situation: "Vous écrivez un avis.",
+    instruction: "Décrivez les points positifs et négatifs.",
+    points: ["Positif", "Négatif", "Note"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-18",
+    title: "Inviter un ami",
+    situation: "Vous invitez un ami.",
+    instruction: "Proposez de partager une chambre d'hôtel.",
+    points: ["L'invitation", "Les dates", "Le prix"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-19",
+    title: "Premier jour",
+    situation: "Racontez votre arrivée.",
+    instruction: "Décrivez l'arrivée à l'hôtel.",
+    points: ["Le trajet", "L'accueil", "La chambre"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e7-1-pe-20",
+    title: "Budget vacances",
+    situation: "Planifiez votre budget.",
+    instruction: "Listez les dépenses : hébergement, nourriture, activités.",
+    points: ["Hébergement", "Nourriture", "Activités"],
+    minWords: 50,
+    maxWords: 120,
   },
 ];
