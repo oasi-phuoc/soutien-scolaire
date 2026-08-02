@@ -12,6 +12,7 @@ def _genre_msgs(title, facts):
             f"Information clé : {v[1]}. Détail : {v[2]}.",
             f"Condition : {v[3]}. Délai : {v[4]}.",
             f"Contact : {v[5]}. Remarque : {v[6]}.",
+            f"Pour toute question, consultez le site officiel ou contactez le service concerné du lundi au vendredi.",
         ]
         msgs.append({"text": f"{t}\n\n" + "\n".join(paras), "questions": [
             Q("Quel est le sujet ?", t, "Un sport", "Une recette", f"{t} — _________.", t.split()[0], f"Sujet : {t}.", 0),

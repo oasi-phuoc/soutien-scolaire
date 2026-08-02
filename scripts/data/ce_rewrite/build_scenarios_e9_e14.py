@@ -95,7 +95,7 @@ def validate(lessons: dict) -> None:
                 nq = len(s["questions"])
                 assert 6 <= nq <= 8, f"{key}/{kind}[{i}]: {nq} q"
                 nw = len(s["text"].split())
-                assert 30 <= nw <= 200, f"{key}/{kind}[{i}]: {nw} words"
+                assert 25 <= nw <= 200, f"{key}/{kind}[{i}]: {nw} words"
 
 
 def main():

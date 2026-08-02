@@ -23,1781 +23,2142 @@ const PE_MAX = 180;
    E9.1 — Faire des achats
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E9_1_CE_EMAIL_TEXT = `De : Magasin ÉlectroHome
-Objet : Votre commande n° 4582
+const E9_1_CE_EMAIL_TEXT = `De : Boutique Lina
+
+Objet : Confirmation commande n° 2847
 
 Bonjour,
 
-Nous vous remercions pour votre commande n° 4582 du 3 février.
-Vous avez acheté un aspirateur pendant les soldes, au prix de 149 francs au lieu de 220 francs.
-La livraison à domicile est gratuite à partir de 100 francs d'achat.
-Le livreur passera chez vous le jeudi 8 février, entre 14 h et 17 h.
-Si l'appareil ne vous convient pas, vous pouvez le rapporter dans un délai de trente jours, avec le ticket de caisse.
-L'aspirateur est garanti deux ans.
-Pour toute question, notre service après-vente répond au 021 555 88 22, du lundi au vendredi.
+Nous vous informons concernant commande n° 2847 du 12 mars.
 
-Avec nos meilleures salutations,
-Le service clients ÉlectroHome`;
+Vous avez concerné : un sac à dos. Montant ou détail : 45 €.
+
+Délai ou date : 15 mars entre 10 h et 12 h. Information complémentaire : suivre votre colis sur notre site.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
+Cordialement,
+
+Boutique`;
 
 const E9_1_CE_EMAIL_POOL = buildExpressPool("e9-1-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Quel numéro figure sur la commande ?",
-    text: ["Le numéro 4582", "Le numéro 4285", "Le numéro 5482"],
+    textQ: "Quel est l'objet ?",
+    text: ["Confirmation commande n° 2847", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Nous vous remercions pour votre commande n° _________ du 3 février.",
-    fill: "4582",
-    vfQ: "La commande porte le numéro 4582.",
+    fillQ: "Objet : _________",
+    fill: "Confirmation",
+    vfQ: "L'objet est Confirmation commande n° 2847.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Qu'est-ce que le client a acheté ?",
-    text: ["Un aspirateur", "Un lave-linge", "Un téléphone"],
+    textQ: "Quel est le sujet principal ?",
+    text: ["Commande n° 2847 du 12 mars", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Vous avez acheté un _________ pendant les soldes.",
-    fill: "aspirateur",
-    vfQ: "Le client a acheté un lave-linge.",
-    vfC: 1,
+    fillQ: "concernant commande n° 2847 du 12 mars.",
+    fill: "commande",
+    vfQ: "Sujet : commande n° 2847 du 12 mars.",
+    vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Combien le client a-t-il payé l'aspirateur ?",
-    text: ["149 francs", "220 francs", "100 francs"],
+    textQ: "Quel produit ou élément ?",
+    text: ["Un sac à dos", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Au prix de _________ francs au lieu de 220 francs.",
-    fill: "149",
-    fillA: ["cent quarante-neuf"],
-    vfQ: "Pendant les soldes, l'aspirateur coûte 149 francs.",
+    fillQ: "Vous avez concerné : un sac à dos.",
+    fill: "dos",
+    vfQ: "Élément : un sac à dos.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "À partir de quel montant la livraison est-elle gratuite ?",
-    text: ["100 francs d'achat", "50 francs d'achat", "200 francs d'achat"],
+    textQ: "Quel montant ou détail ?",
+    text: ["45 €", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "La livraison à domicile est gratuite à partir de _________ francs d'achat.",
-    fill: "100",
-    fillA: ["cent"],
-    vfQ: "La livraison est gratuite à partir de 200 francs d'achat.",
-    vfC: 1,
+    fillQ: "Montant ou détail : 45 €.",
+    fill: "45",
+    vfQ: "Détail : 45 €.",
+    vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel jour le livreur passe-t-il ?",
-    text: ["Le jeudi 8 février", "Le mardi 6 février", "Le samedi 10 février"],
+    textQ: "Quel délai ou date ?",
+    text: ["15 mars entre 10 h et 12 h", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le livreur passera chez vous le jeudi 8 _________.",
-    fill: "février",
-    fillA: ["fevrier"],
-    vfQ: "Le livreur passe le jeudi 8 février.",
+    fillQ: "Délai ou date : 15 mars entre 10 h et 12 h.",
+    fill: "15",
+    vfQ: "Délai : 15 mars entre 10 h et 12 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "À quelle heure le livreur passe-t-il ?",
-    text: ["Entre 14 h et 17 h", "Entre 8 h et 11 h", "Entre 18 h et 20 h"],
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entre 14 h et _________ h.",
-    fill: "17",
-    fillA: ["dix-sept"],
-    vfQ: "Le livreur passe le matin.",
-    vfC: 1,
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Dans quel délai peut-on rapporter l'appareil ?",
-    text: ["Trente jours", "Dix jours", "Une semaine"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Boutique Lina", "Le facteur", "La mairie"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Vous pouvez le rapporter dans un délai de _________ jours.",
-    fill: "trente",
-    fillA: ["30"],
-    vfQ: "On peut rapporter l'appareil pendant trente jours.",
+    fillQ: "De : _________",
+    fill: "Boutique",
+    vfQ: "L'expéditeur est Boutique Lina.",
     vfC: 0,
-  }),
-  q({
-    id: "cem-q8",
-    textQ: "Que faut-il présenter pour rapporter l'appareil ?",
-    text: ["Le ticket de caisse", "Le passeport", "La carte bancaire"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Vous pouvez le rapporter avec le _________ de caisse.",
-    fill: "ticket",
-    vfQ: "Pour rapporter l'appareil, il faut le ticket de caisse.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q9",
-    textQ: "Combien de temps dure la garantie ?",
-    text: ["Deux ans", "Un an", "Cinq ans"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "L'aspirateur est garanti _________ ans.",
-    fill: "deux",
-    fillA: ["2"],
-    vfQ: "La garantie dure cinq ans.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q10",
-    textQ: "Quand le service après-vente répond-il ?",
-    text: ["Du lundi au vendredi", "Tous les jours", "Seulement le samedi"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Notre service après-vente répond au 021 555 88 22, du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service après-vente répond le dimanche.",
-    vfC: 1,
   }),
 ]);
 
+const E9_1_CE_EMAIL_2_TEXT = `De : ÉlectroHome
 
-const E9_1_CE_EMAIL_2_TEXT = `De : Boutique Lina
-Objet : Confirmation de commande
+Objet : Votre commande n° 4582
 
 Bonjour,
-Votre commande n° 2847 du 12 mars est confirmée.
-Vous avez commandé un sac à dos à 45 €.
-La livraison est prévue le 15 mars entre 10 h et 12 h.
-Vous pouvez suivre votre colis sur notre site.
+
+Nous vous informons concernant commande n° 4582 du 3 février.
+
+Vous avez concerné : un aspirateur. Montant ou détail : 149 francs.
+
+Délai ou date : jeudi 8 février entre 14 h et 17 h. Information complémentaire : rapporter dans un délai de trente jours.
+
+Action requise : information. Contact : information.
+
 Merci pour votre confiance.
-Boutique Lina`;
+
+Cordialement,
+
+ÉlectroHome`;
+
 const E9_1_CE_EMAIL_2_POOL = buildExpressPool("e9-1-ce-email-2", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["2847", "2748", "2487"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Votre commande n° 4582", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est confirmée.",
-    fill: "2847",
-    vfQ: "La commande porte le numéro 2847.",
+    fillQ: "Objet : _________",
+    fill: "Votre",
+    vfQ: "L'objet est Votre commande n° 4582.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Qu'a commandé le client ?",
-    text: ["Un sac à dos", "Un manteau", "Un téléphone"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Commande n° 4582 du 3 février", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Vous avez commandé un _________ à dos.",
-    fill: "sac",
-    vfQ: "Le client a commandé un sac à dos.",
+    fillQ: "concernant commande n° 4582 du 3 février.",
+    fill: "commande",
+    vfQ: "Sujet : commande n° 4582 du 3 février.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quel est le prix ?",
-    text: ["45 €", "55 €", "35 €"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Un aspirateur", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un sac à dos à _________ €.",
-    fill: "45",
-    vfQ: "Le sac coûte 45 €.",
+    fillQ: "Vous avez concerné : un aspirateur.",
+    fill: "aspirateur",
+    vfQ: "Élément : un aspirateur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quand est la livraison ?",
-    text: ["Le 15 mars", "Le 12 mars", "Le 20 mars"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["149 francs", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "La livraison est prévue le 15 _________.",
-    fill: "mars",
-    vfQ: "La livraison est le 15 mars.",
+    fillQ: "Montant ou détail : 149 francs.",
+    fill: "149",
+    vfQ: "Détail : 149 francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "À quelle heure ?",
-    text: ["Entre 10 h et 12 h", "Entre 14 h et 16 h", "Le soir"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Jeudi 8 février entre 14 h et 17 h", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entre 10 h et _________ h.",
-    fill: "12",
-    vfQ: "La livraison est le matin.",
+    fillQ: "Délai ou date : jeudi 8 février entre 14 h et 17 h.",
+    fill: "jeudi",
+    vfQ: "Délai : jeudi 8 février entre 14 h et 17 h.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Peut-on suivre le colis ?",
-    text: ["Oui, sur le site", "Non", "Seulement par téléphone"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Vous pouvez _________ votre colis sur notre site.",
-    fill: "suivre",
-    vfQ: "On peut suivre le colis en ligne.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["ÉlectroHome", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "ÉlectroHome",
+    vfQ: "L'expéditeur est ÉlectroHome.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_3_TEXT = `De : Service Home
-Objet : Votre commande n° 1002
+const E9_1_CE_EMAIL_3_TEXT = `De : Mode Élégance
+
+Objet : Retard de livraison
 
 Bonjour,
-Votre commande n° 1002 du 7 avril est en cours de préparation.
-Montant : 40 €. Livraison gratuite.
-Délai estimé : 5 jours ouvrés.
-Retour possible sous 16 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant commande n° 9921.
+
+Vous avez concerné : un manteau. Montant ou détail : 189 €.
+
+Délai ou date : cinq jours supplémentaires. Information complémentaire : bon d'achat de vingt francs.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Mode`;
+
 const E9_1_CE_EMAIL_3_POOL = buildExpressPool("e9-1-ce-email-3", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1002", "1003", "1001"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Retard de livraison", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1002",
-    vfQ: "La commande est la n° 1002.",
+    fillQ: "Objet : _________",
+    fill: "Retard",
+    vfQ: "L'objet est Retard de livraison.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["40 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Commande n° 9921", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "40",
-    vfQ: "Le montant est 40 €.",
+    fillQ: "concernant commande n° 9921.",
+    fill: "commande",
+    vfQ: "Sujet : commande n° 9921.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Un manteau", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : un manteau.",
+    fill: "manteau",
+    vfQ: "Élément : un manteau.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["5 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["189 €", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "5",
-    vfQ: "Le délai est 5 jours.",
+    fillQ: "Montant ou détail : 189 €.",
+    fill: "189",
+    vfQ: "Détail : 189 €.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["16 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Cinq jours supplémentaires", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "16",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : cinq jours supplémentaires.",
+    fill: "cinq",
+    vfQ: "Délai : cinq jours supplémentaires.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Mode Élégance", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Mode",
+    vfQ: "L'expéditeur est Mode Élégance.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_4_TEXT = `De : Service Sport
-Objet : Votre commande n° 1003
+const E9_1_CE_EMAIL_4_TEXT = `De : TechShop
+
+Objet : Produit endommagé
 
 Bonjour,
-Votre commande n° 1003 du 8 avril est en cours de préparation.
-Montant : 45 €. Livraison gratuite.
-Délai estimé : 6 jours ouvrés.
-Retour possible sous 17 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant colis n° 7734.
+
+Vous avez concerné : un écran. Montant ou détail : remplacement gratuit.
+
+Délai ou date : photo du dommage. Information complémentaire : enquête sous quarante-huit heures.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+TechShop`;
+
 const E9_1_CE_EMAIL_4_POOL = buildExpressPool("e9-1-ce-email-4", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1003", "1004", "1002"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Produit endommagé", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1003",
-    vfQ: "La commande est la n° 1003.",
+    fillQ: "Objet : _________",
+    fill: "Produit",
+    vfQ: "L'objet est Produit endommagé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["45 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Colis n° 7734", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "45",
-    vfQ: "Le montant est 45 €.",
+    fillQ: "concernant colis n° 7734.",
+    fill: "colis",
+    vfQ: "Sujet : colis n° 7734.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Un écran", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : un écran.",
+    fill: "écran",
+    vfQ: "Élément : un écran.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["6 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Remplacement gratuit", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "6",
-    vfQ: "Le délai est 6 jours.",
+    fillQ: "Montant ou détail : remplacement gratuit.",
+    fill: "remplacement",
+    vfQ: "Détail : remplacement gratuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["17 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Photo du dommage", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "17",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : photo du dommage.",
+    fill: "photo",
+    vfQ: "Délai : photo du dommage.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["TechShop", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "TechShop",
+    vfQ: "L'expéditeur est TechShop.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_5_TEXT = `De : Service Bio
-Objet : Votre commande n° 1004
+const E9_1_CE_EMAIL_5_TEXT = `De : Fidélité Max
+
+Objet : Votre carte avantages
 
 Bonjour,
-Votre commande n° 1004 du 9 avril est en cours de préparation.
-Montant : 50 €. Livraison gratuite.
-Délai estimé : 3 jours ouvrés.
-Retour possible sous 18 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant carte fidélité.
+
+Vous avez concerné : moins dix pour cent. Montant ou détail : gratuite.
+
+Délai ou date : magasins partenaires. Information complémentaire : application mobile.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Fidélité`;
+
 const E9_1_CE_EMAIL_5_POOL = buildExpressPool("e9-1-ce-email-5", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1004", "1005", "1003"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Votre carte avantages", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1004",
-    vfQ: "La commande est la n° 1004.",
+    fillQ: "Objet : _________",
+    fill: "Votre",
+    vfQ: "L'objet est Votre carte avantages.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["50 €", "10 ans", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Carte fidélité", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "50",
-    vfQ: "Le montant est 50 €.",
+    fillQ: "concernant carte fidélité.",
+    fill: "carte",
+    vfQ: "Sujet : carte fidélité.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Moins dix pour cent", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
+    fillQ: "Vous avez concerné : moins dix pour cent.",
+    fill: "cent",
+    vfQ: "Élément : moins dix pour cent.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Gratuite", "Gratuit", "Mille euros"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Montant ou détail : gratuite.",
     fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    vfQ: "Détail : gratuite.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["3 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Magasins partenaires", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "3",
-    vfQ: "Le délai est 3 jours.",
+    fillQ: "Délai ou date : magasins partenaires.",
+    fill: "magasins",
+    vfQ: "Délai : magasins partenaires.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["18 jours", "7 jours", "60 jours"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "18",
-    vfQ: "Un retour est possible.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Fidélité Max", "Le facteur", "La mairie"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "De : _________",
+    fill: "Fidélité",
+    vfQ: "L'expéditeur est Fidélité Max.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_6_TEXT = `De : Service Moda
-Objet : Votre commande n° 1005
+const E9_1_CE_EMAIL_6_TEXT = `De : Panier Vert
+
+Objet : Vous avez oublié des articles
 
 Bonjour,
-Votre commande n° 1005 du 10 avril est en cours de préparation.
-Montant : 55 €. Livraison gratuite.
-Délai estimé : 4 jours ouvrés.
-Retour possible sous 19 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant trois articles.
+
+Vous avez concerné : panier en ligne. Montant ou détail : vingt-quatre heures.
+
+Délai ou date : livraison gratuite. Information complémentaire : code promo BIENVENUE.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Panier`;
+
 const E9_1_CE_EMAIL_6_POOL = buildExpressPool("e9-1-ce-email-6", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1005", "1006", "1004"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Vous avez oublié des articles", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1005",
-    vfQ: "La commande est la n° 1005.",
+    fillQ: "Objet : _________",
+    fill: "Vous",
+    vfQ: "L'objet est Vous avez oublié des articles.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["55 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Trois articles", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "55",
-    vfQ: "Le montant est 55 €.",
+    fillQ: "concernant trois articles.",
+    fill: "trois",
+    vfQ: "Sujet : trois articles.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Panier en ligne", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : panier en ligne.",
+    fill: "ligne",
+    vfQ: "Élément : panier en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["4 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Vingt-quatre heures", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "4",
-    vfQ: "Le délai est 4 jours.",
+    fillQ: "Montant ou détail : vingt-quatre heures.",
+    fill: "vingt-quatre",
+    vfQ: "Détail : vingt-quatre heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["19 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Livraison gratuite", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "19",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : livraison gratuite.",
+    fill: "livraison",
+    vfQ: "Délai : livraison gratuite.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Panier Vert", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Panier",
+    vfQ: "L'expéditeur est Panier Vert.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_7_TEXT = `De : Service Tech
-Objet : Votre commande n° 1006
+const E9_1_CE_EMAIL_7_TEXT = `De : Avis Plus
+
+Objet : Donnez votre avis
 
 Bonjour,
-Votre commande n° 1006 du 11 avril est en cours de préparation.
-Montant : 60 €. Livraison gratuite.
-Délai estimé : 5 jours ouvrés.
-Retour possible sous 20 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant aspirateur acheté.
+
+Vous avez concerné : cinq étoiles. Montant ou détail : cinq minutes.
+
+Délai ou date : bon de dix francs. Information complémentaire : modération sous sept jours.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Avis`;
+
 const E9_1_CE_EMAIL_7_POOL = buildExpressPool("e9-1-ce-email-7", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1006", "1007", "1005"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Donnez votre avis", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1006",
-    vfQ: "La commande est la n° 1006.",
+    fillQ: "Objet : _________",
+    fill: "Donnez",
+    vfQ: "L'objet est Donnez votre avis.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["60 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Aspirateur acheté", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "60",
-    vfQ: "Le montant est 60 €.",
+    fillQ: "concernant aspirateur acheté.",
+    fill: "aspirateur",
+    vfQ: "Sujet : aspirateur acheté.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Cinq étoiles", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : cinq étoiles.",
+    fill: "étoiles",
+    vfQ: "Élément : cinq étoiles.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["5 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Cinq minutes", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "5",
-    vfQ: "Le délai est 5 jours.",
+    fillQ: "Montant ou détail : cinq minutes.",
+    fill: "cinq",
+    vfQ: "Détail : cinq minutes.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["20 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Bon de dix francs", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "20",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : bon de dix francs.",
+    fill: "bon",
+    vfQ: "Délai : bon de dix francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Avis Plus", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Avis",
+    vfQ: "L'expéditeur est Avis Plus.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_8_TEXT = `De : Service Home
-Objet : Votre commande n° 1007
+const E9_1_CE_EMAIL_8_TEXT = `De : Remboursement Rapide
+
+Objet : Remboursement effectué
 
 Bonjour,
-Votre commande n° 1007 du 12 avril est en cours de préparation.
-Montant : 65 €. Livraison gratuite.
-Délai estimé : 6 jours ouvrés.
-Retour possible sous 21 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant commande n° 5512.
+
+Vous avez concerné : soixante-douze francs. Montant ou détail : trois jours ouvrés.
+
+Délai ou date : compte bancaire. Information complémentaire : ticket de caisse.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Remboursement`;
+
 const E9_1_CE_EMAIL_8_POOL = buildExpressPool("e9-1-ce-email-8", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1007", "1008", "1006"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Remboursement effectué", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1007",
-    vfQ: "La commande est la n° 1007.",
+    fillQ: "Objet : _________",
+    fill: "Remboursement",
+    vfQ: "L'objet est Remboursement effectué.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["65 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Commande n° 5512", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "65",
-    vfQ: "Le montant est 65 €.",
+    fillQ: "concernant commande n° 5512.",
+    fill: "commande",
+    vfQ: "Sujet : commande n° 5512.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Soixante-douze francs", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : soixante-douze francs.",
+    fill: "francs",
+    vfQ: "Élément : soixante-douze francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["6 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Trois jours ouvrés", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "6",
-    vfQ: "Le délai est 6 jours.",
+    fillQ: "Montant ou détail : trois jours ouvrés.",
+    fill: "trois",
+    vfQ: "Détail : trois jours ouvrés.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["21 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Compte bancaire", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "21",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : compte bancaire.",
+    fill: "compte",
+    vfQ: "Délai : compte bancaire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Remboursement Rapide", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Remboursement",
+    vfQ: "L'expéditeur est Remboursement Rapide.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_9_TEXT = `De : Service Sport
-Objet : Votre commande n° 1008
+const E9_1_CE_EMAIL_9_TEXT = `De : Taille Parfaite
+
+Objet : Échange de taille
 
 Bonjour,
-Votre commande n° 1008 du 13 avril est en cours de préparation.
-Montant : 70 €. Livraison gratuite.
-Délai estimé : 3 jours ouvrés.
-Retour possible sous 22 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant pantalon taille 40.
+
+Vous avez concerné : taille 42. Montant ou détail : gratuit.
+
+Délai ou date : étiquette d'expédition. Information complémentaire : point relais.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Taille`;
+
 const E9_1_CE_EMAIL_9_POOL = buildExpressPool("e9-1-ce-email-9", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1008", "1009", "1007"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Échange de taille", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1008",
-    vfQ: "La commande est la n° 1008.",
+    fillQ: "Objet : _________",
+    fill: "Échange",
+    vfQ: "L'objet est Échange de taille.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["70 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Pantalon taille 40", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "70",
-    vfQ: "Le montant est 70 €.",
+    fillQ: "concernant pantalon taille 40.",
+    fill: "pantalon",
+    vfQ: "Sujet : pantalon taille 40.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Taille 42", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : taille 42.",
+    fill: "42",
+    vfQ: "Élément : taille 42.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["3 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Gratuit", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "3",
-    vfQ: "Le délai est 3 jours.",
+    fillQ: "Montant ou détail : gratuit.",
+    fill: "gratuit",
+    vfQ: "Détail : gratuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["22 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Étiquette d'expédition", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "22",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : étiquette d'expédition.",
+    fill: "étiquette",
+    vfQ: "Délai : étiquette d'expédition.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Taille Parfaite", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Taille",
+    vfQ: "L'expéditeur est Taille Parfaite.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_10_TEXT = `De : Service Bio
-Objet : Votre commande n° 1009
+const E9_1_CE_EMAIL_10_TEXT = `De : Réserve & Go
+
+Objet : Article disponible en magasin
 
 Bonjour,
-Votre commande n° 1009 du 14 avril est en cours de préparation.
-Montant : 75 €. Livraison gratuite.
-Délai estimé : 4 jours ouvrés.
-Retour possible sous 23 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant réfrigérateur.
+
+Vous avez concerné : magasin de Lausanne. Montant ou détail : quarante-huit heures.
+
+Délai ou date : pièce d'identité. Information complémentaire : paiement sur place.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Réserve`;
+
 const E9_1_CE_EMAIL_10_POOL = buildExpressPool("e9-1-ce-email-10", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1009", "1010", "1008"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Article disponible en magasin", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1009",
-    vfQ: "La commande est la n° 1009.",
+    fillQ: "Objet : _________",
+    fill: "Article",
+    vfQ: "L'objet est Article disponible en magasin.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["75 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Réfrigérateur", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "75",
-    vfQ: "Le montant est 75 €.",
+    fillQ: "concernant réfrigérateur.",
+    fill: "réfrigérateur",
+    vfQ: "Sujet : réfrigérateur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Magasin de lausanne", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : magasin de Lausanne.",
+    fill: "Lausanne",
+    vfQ: "Élément : magasin de Lausanne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["4 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Quarante-huit heures", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "4",
-    vfQ: "Le délai est 4 jours.",
+    fillQ: "Montant ou détail : quarante-huit heures.",
+    fill: "quarante-huit",
+    vfQ: "Détail : quarante-huit heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["23 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Pièce d'identité", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "23",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : pièce d'identité.",
+    fill: "pièce",
+    vfQ: "Délai : pièce d'identité.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Réserve & Go", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Réserve",
+    vfQ: "L'expéditeur est Réserve & Go.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_11_TEXT = `De : Service Moda
-Objet : Votre commande n° 1010
+const E9_1_CE_EMAIL_11_TEXT = `De : Promo Perso
+
+Objet : Offre personnalisée
 
 Bonjour,
-Votre commande n° 1010 du 15 avril est en cours de préparation.
-Montant : 80 €. Livraison gratuite.
-Délai estimé : 5 jours ouvrés.
-Retour possible sous 14 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant moins vingt-cinq pour cent.
+
+Vous avez concerné : chaussures de sport. Montant ou détail : dimanche minuit.
+
+Délai ou date : code SPORT25. Information complémentaire : non cumulable.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Promo`;
+
 const E9_1_CE_EMAIL_11_POOL = buildExpressPool("e9-1-ce-email-11", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1010", "1011", "1009"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Offre personnalisée", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1010",
-    vfQ: "La commande est la n° 1010.",
+    fillQ: "Objet : _________",
+    fill: "Offre",
+    vfQ: "L'objet est Offre personnalisée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["80 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Moins vingt-cinq pour cent", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "80",
-    vfQ: "Le montant est 80 €.",
+    fillQ: "concernant moins vingt-cinq pour cent.",
+    fill: "moins",
+    vfQ: "Sujet : moins vingt-cinq pour cent.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Chaussures de sport", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : chaussures de sport.",
+    fill: "sport",
+    vfQ: "Élément : chaussures de sport.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["5 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Dimanche minuit", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "5",
-    vfQ: "Le délai est 5 jours.",
+    fillQ: "Montant ou détail : dimanche minuit.",
+    fill: "dimanche",
+    vfQ: "Détail : dimanche minuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["14 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Code sport25", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "14",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : code SPORT25.",
+    fill: "code",
+    vfQ: "Délai : code SPORT25.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Promo Perso", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Promo",
+    vfQ: "L'expéditeur est Promo Perso.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_12_TEXT = `De : Service Tech
-Objet : Votre commande n° 1011
+const E9_1_CE_EMAIL_12_TEXT = `De : Facture Express
+
+Objet : Votre facture demandée
 
 Bonjour,
-Votre commande n° 1011 du 16 avril est en cours de préparation.
-Montant : 85 €. Livraison gratuite.
-Délai estimé : 6 jours ouvrés.
-Retour possible sous 15 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant facture n° 8821.
+
+Vous avez concerné : pièce jointe PDF. Montant ou détail : comptabilité.
+
+Délai ou date : TVA incluse. Information complémentaire : archivage deux ans.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Facture`;
+
 const E9_1_CE_EMAIL_12_POOL = buildExpressPool("e9-1-ce-email-12", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1011", "1012", "1010"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Votre facture demandée", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1011",
-    vfQ: "La commande est la n° 1011.",
+    fillQ: "Objet : _________",
+    fill: "Votre",
+    vfQ: "L'objet est Votre facture demandée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["85 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Facture n° 8821", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "85",
-    vfQ: "Le montant est 85 €.",
+    fillQ: "concernant facture n° 8821.",
+    fill: "facture",
+    vfQ: "Sujet : facture n° 8821.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Pièce jointe pdf", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : pièce jointe PDF.",
+    fill: "PDF",
+    vfQ: "Élément : pièce jointe PDF.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["6 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Comptabilité", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "6",
-    vfQ: "Le délai est 6 jours.",
+    fillQ: "Montant ou détail : comptabilité.",
+    fill: "comptabilité",
+    vfQ: "Détail : comptabilité.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["15 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Tva incluse", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "15",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : TVA incluse.",
+    fill: "TVA",
+    vfQ: "Délai : TVA incluse.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Facture Express", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Facture",
+    vfQ: "L'expéditeur est Facture Express.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_13_TEXT = `De : Service Home
-Objet : Votre commande n° 1012
+const E9_1_CE_EMAIL_13_TEXT = `De : Garantie Plus
+
+Objet : Extension de garantie
 
 Bonjour,
-Votre commande n° 1012 du 17 avril est en cours de préparation.
-Montant : 90 €. Livraison gratuite.
-Délai estimé : 3 jours ouvrés.
-Retour possible sous 16 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant deux ans supplémentaires.
+
+Vous avez concerné : trente-neuf francs. Montant ou détail : lave-linge.
+
+Délai ou date : sans engagement. Information complémentaire : activation en ligne.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Garantie`;
+
 const E9_1_CE_EMAIL_13_POOL = buildExpressPool("e9-1-ce-email-13", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1012", "1013", "1011"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Extension de garantie", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1012",
-    vfQ: "La commande est la n° 1012.",
+    fillQ: "Objet : _________",
+    fill: "Extension",
+    vfQ: "L'objet est Extension de garantie.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["90 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Deux ans supplémentaires", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "90",
-    vfQ: "Le montant est 90 €.",
+    fillQ: "concernant deux ans supplémentaires.",
+    fill: "deux",
+    vfQ: "Sujet : deux ans supplémentaires.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Trente-neuf francs", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : trente-neuf francs.",
+    fill: "francs",
+    vfQ: "Élément : trente-neuf francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["3 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Lave-linge", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "3",
-    vfQ: "Le délai est 3 jours.",
+    fillQ: "Montant ou détail : lave-linge.",
+    fill: "lave-linge",
+    vfQ: "Détail : lave-linge.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["16 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Sans engagement", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "16",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : sans engagement.",
+    fill: "sans",
+    vfQ: "Délai : sans engagement.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Garantie Plus", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Garantie",
+    vfQ: "L'expéditeur est Garantie Plus.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_14_TEXT = `De : Service Sport
-Objet : Votre commande n° 1013
+const E9_1_CE_EMAIL_14_TEXT = `De : Stock Alert
+
+Objet : Produit de nouveau disponible
 
 Bonjour,
-Votre commande n° 1013 du 18 avril est en cours de préparation.
-Montant : 95 €. Livraison gratuite.
-Délai estimé : 4 jours ouvrés.
-Retour possible sous 17 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant robot cuisine.
+
+Vous avez concerné : cinq exemplaires. Montant ou détail : réservation prioritaire.
+
+Délai ou date : notification SMS. Information complémentaire : délai quarante-huit heures.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Stock`;
+
 const E9_1_CE_EMAIL_14_POOL = buildExpressPool("e9-1-ce-email-14", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1013", "1014", "1012"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Produit de nouveau disponible", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1013",
-    vfQ: "La commande est la n° 1013.",
+    fillQ: "Objet : _________",
+    fill: "Produit",
+    vfQ: "L'objet est Produit de nouveau disponible.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["95 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Robot cuisine", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "95",
-    vfQ: "Le montant est 95 €.",
+    fillQ: "concernant robot cuisine.",
+    fill: "robot",
+    vfQ: "Sujet : robot cuisine.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Cinq exemplaires", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : cinq exemplaires.",
+    fill: "exemplaires",
+    vfQ: "Élément : cinq exemplaires.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["4 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Réservation prioritaire", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "4",
-    vfQ: "Le délai est 4 jours.",
+    fillQ: "Montant ou détail : réservation prioritaire.",
+    fill: "réservation",
+    vfQ: "Détail : réservation prioritaire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["17 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Notification sms", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "17",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : notification SMS.",
+    fill: "notification",
+    vfQ: "Délai : notification SMS.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Stock Alert", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Stock",
+    vfQ: "L'expéditeur est Stock Alert.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_15_TEXT = `De : Service Bio
-Objet : Votre commande n° 1014
+const E9_1_CE_EMAIL_15_TEXT = `De : Événement Magasin
+
+Objet : Invitation soirée VIP
 
 Bonjour,
-Votre commande n° 1014 du 19 avril est en cours de préparation.
-Montant : 100 €. Livraison gratuite.
-Délai estimé : 5 jours ouvrés.
-Retour possible sous 18 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant jeudi 18 h.
+
+Vous avez concerné : nouvelle collection. Montant ou détail : cocktail.
+
+Délai ou date : réservation obligatoire. Information complémentaire : places limitées.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Événement`;
+
 const E9_1_CE_EMAIL_15_POOL = buildExpressPool("e9-1-ce-email-15", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1014", "1015", "1013"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Invitation soirée VIP", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1014",
-    vfQ: "La commande est la n° 1014.",
+    fillQ: "Objet : _________",
+    fill: "Invitation",
+    vfQ: "L'objet est Invitation soirée VIP.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["100 €", "50 €", "10 ans"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Jeudi 18 h", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "100",
-    vfQ: "Le montant est 100 €.",
+    fillQ: "concernant jeudi 18 h.",
+    fill: "jeudi",
+    vfQ: "Sujet : jeudi 18 h.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Nouvelle collection", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : nouvelle collection.",
+    fill: "collection",
+    vfQ: "Élément : nouvelle collection.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["5 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Cocktail", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "5",
-    vfQ: "Le délai est 5 jours.",
+    fillQ: "Montant ou détail : cocktail.",
+    fill: "cocktail",
+    vfQ: "Détail : cocktail.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["18 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Réservation obligatoire", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "18",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : réservation obligatoire.",
+    fill: "réservation",
+    vfQ: "Délai : réservation obligatoire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Événement Magasin", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Événement",
+    vfQ: "L'expéditeur est Événement Magasin.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_16_TEXT = `De : Service Moda
-Objet : Votre commande n° 1015
+const E9_1_CE_EMAIL_16_TEXT = `De : Correction Prix
+
+Objet : Erreur de prix corrigée
 
 Bonjour,
-Votre commande n° 1015 du 20 avril est en cours de préparation.
-Montant : 105 €. Livraison gratuite.
-Délai estimé : 6 jours ouvrés.
-Retour possible sous 19 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant téléphone.
+
+Vous avez concerné : soixante-neuf francs au lieu de cent. Montant ou détail : remboursement différence.
+
+Délai ou date : excuses. Information complémentaire : confirmation sous vingt-quatre heures.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Correction`;
+
 const E9_1_CE_EMAIL_16_POOL = buildExpressPool("e9-1-ce-email-16", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1015", "1016", "1014"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Erreur de prix corrigée", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1015",
-    vfQ: "La commande est la n° 1015.",
+    fillQ: "Objet : _________",
+    fill: "Erreur",
+    vfQ: "L'objet est Erreur de prix corrigée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["105 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Téléphone", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "105",
-    vfQ: "Le montant est 105 €.",
+    fillQ: "concernant téléphone.",
+    fill: "téléphone",
+    vfQ: "Sujet : téléphone.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Soixante-neuf francs au lieu de cent", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : soixante-neuf francs au lieu de cent.",
+    fill: "cent",
+    vfQ: "Élément : soixante-neuf francs au lieu de cent.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["6 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Remboursement différence", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "6",
-    vfQ: "Le délai est 6 jours.",
+    fillQ: "Montant ou détail : remboursement différence.",
+    fill: "remboursement",
+    vfQ: "Détail : remboursement différence.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["19 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Excuses", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "19",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : excuses.",
+    fill: "excuses",
+    vfQ: "Délai : excuses.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Correction Prix", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Correction",
+    vfQ: "L'expéditeur est Correction Prix.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_17_TEXT = `De : Service Tech
-Objet : Votre commande n° 1016
+const E9_1_CE_EMAIL_17_TEXT = `De : Point Relais
+
+Objet : Colis disponible
 
 Bonjour,
-Votre commande n° 1016 du 21 avril est en cours de préparation.
-Montant : 110 €. Livraison gratuite.
-Délai estimé : 3 jours ouvrés.
-Retour possible sous 20 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant colis n° 3399.
+
+Vous avez concerné : bureau de tabac. Montant ou détail : sept jours.
+
+Délai ou date : pièce d'identité. Information complémentaire : code confidentiel.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Point`;
+
 const E9_1_CE_EMAIL_17_POOL = buildExpressPool("e9-1-ce-email-17", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1016", "1017", "1015"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Colis disponible", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1016",
-    vfQ: "La commande est la n° 1016.",
+    fillQ: "Objet : _________",
+    fill: "Colis",
+    vfQ: "L'objet est Colis disponible.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["110 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Colis n° 3399", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "110",
-    vfQ: "Le montant est 110 €.",
+    fillQ: "concernant colis n° 3399.",
+    fill: "colis",
+    vfQ: "Sujet : colis n° 3399.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Bureau de tabac", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : bureau de tabac.",
+    fill: "tabac",
+    vfQ: "Élément : bureau de tabac.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["3 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Sept jours", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "3",
-    vfQ: "Le délai est 3 jours.",
+    fillQ: "Montant ou détail : sept jours.",
+    fill: "sept",
+    vfQ: "Détail : sept jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["20 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Pièce d'identité", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "20",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : pièce d'identité.",
+    fill: "pièce",
+    vfQ: "Délai : pièce d'identité.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Point Relais", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Point",
+    vfQ: "L'expéditeur est Point Relais.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_18_TEXT = `De : Service Home
-Objet : Votre commande n° 1017
+const E9_1_CE_EMAIL_18_TEXT = `De : Service SAV
+
+Objet : Ticket ouvert n° 4412
 
 Bonjour,
-Votre commande n° 1017 du 22 avril est en cours de préparation.
-Montant : 115 €. Livraison gratuite.
-Délai estimé : 4 jours ouvrés.
-Retour possible sous 21 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant réparation.
+
+Vous avez concerné : délai cinq jours. Montant ou détail : devis gratuit.
+
+Délai ou date : bon de retour. Information complémentaire : suivi en ligne.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Service`;
+
 const E9_1_CE_EMAIL_18_POOL = buildExpressPool("e9-1-ce-email-18", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1017", "1018", "1016"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Ticket ouvert n° 4412", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1017",
-    vfQ: "La commande est la n° 1017.",
+    fillQ: "Objet : _________",
+    fill: "Ticket",
+    vfQ: "L'objet est Ticket ouvert n° 4412.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["115 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Réparation", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "115",
-    vfQ: "Le montant est 115 €.",
+    fillQ: "concernant réparation.",
+    fill: "réparation",
+    vfQ: "Sujet : réparation.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Délai cinq jours", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : délai cinq jours.",
+    fill: "jours",
+    vfQ: "Élément : délai cinq jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["4 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Devis gratuit", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "4",
-    vfQ: "Le délai est 4 jours.",
+    fillQ: "Montant ou détail : devis gratuit.",
+    fill: "devis",
+    vfQ: "Détail : devis gratuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["21 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Bon de retour", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "21",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : bon de retour.",
+    fill: "bon",
+    vfQ: "Délai : bon de retour.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service SAV", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "L'expéditeur est Service SAV.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_19_TEXT = `De : Service Sport
-Objet : Votre commande n° 1018
+const E9_1_CE_EMAIL_19_TEXT = `De : Anniversaire Club
+
+Objet : Joyeux anniversaire !
 
 Bonjour,
-Votre commande n° 1018 du 23 avril est en cours de préparation.
-Montant : 120 €. Livraison gratuite.
-Délai estimé : 5 jours ouvrés.
-Retour possible sous 22 jours avec ticket.
-Garantie : 1 an(s).
+
+Nous vous informons concernant code ANNI2025.
+
+Vous avez concerné : moins quinze pour cent. Montant ou détail : valable trente jours.
+
+Délai ou date : tout le site. Information complémentaire : cadeau surprise.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Anniversaire`;
+
 const E9_1_CE_EMAIL_19_POOL = buildExpressPool("e9-1-ce-email-19", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1018", "1019", "1017"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Joyeux anniversaire !", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1018",
-    vfQ: "La commande est la n° 1018.",
+    fillQ: "Objet : _________",
+    fill: "Joyeux",
+    vfQ: "L'objet est Joyeux anniversaire !.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["120 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Code anni2025", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "120",
-    vfQ: "Le montant est 120 €.",
+    fillQ: "concernant code ANNI2025.",
+    fill: "code",
+    vfQ: "Sujet : code ANNI2025.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Moins quinze pour cent", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : moins quinze pour cent.",
+    fill: "cent",
+    vfQ: "Élément : moins quinze pour cent.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["5 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Valable trente jours", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "5",
-    vfQ: "Le délai est 5 jours.",
+    fillQ: "Montant ou détail : valable trente jours.",
+    fill: "valable",
+    vfQ: "Détail : valable trente jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["22 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Tout le site", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "22",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : tout le site.",
+    fill: "tout",
+    vfQ: "Délai : tout le site.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["1 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "1",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Anniversaire Club", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Anniversaire",
+    vfQ: "L'expéditeur est Anniversaire Club.",
     vfC: 0,
   }),
 ]);
 
-const E9_1_CE_EMAIL_20_TEXT = `De : Service Bio
-Objet : Votre commande n° 1019
+const E9_1_CE_EMAIL_20_TEXT = `De : Alerte Sécurité
+
+Objet : Tentative de connexion suspecte
 
 Bonjour,
-Votre commande n° 1019 du 24 avril est en cours de préparation.
-Montant : 125 €. Livraison gratuite.
-Délai estimé : 6 jours ouvrés.
-Retour possible sous 23 jours avec ticket.
-Garantie : 2 an(s).
+
+Nous vous informons concernant compte client.
+
+Vous avez concerné : changer mot de passe. Montant ou détail : support client.
+
+Délai ou date : vérification identité. Information complémentaire : signalement immédiat.
+
+Action requise : information. Contact : information.
+
+Merci pour votre confiance.
+
 Cordialement,
-Le service clients`;
+
+Alerte`;
+
 const E9_1_CE_EMAIL_20_POOL = buildExpressPool("e9-1-ce-email-20", [
   q({
-    id: "ce-q1",
-    textQ: "Quel numéro de commande ?",
-    text: ["1019", "1020", "1018"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Tentative de connexion suspecte", "Une facture d'électricité", "Un horaire"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre commande n° _________ est en préparation.",
-    fill: "1019",
-    vfQ: "La commande est la n° 1019.",
+    fillQ: "Objet : _________",
+    fill: "Tentative",
+    vfQ: "L'objet est Tentative de connexion suspecte.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quel est le montant ?",
-    text: ["125 €", "50 €", "100 €"],
+    id: "cem-q2",
+    textQ: "Quel est le sujet principal ?",
+    text: ["Compte client", "Rien", "Un voyage"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Montant : _________ €.",
-    fill: "125",
-    vfQ: "Le montant est 125 €.",
+    fillQ: "concernant compte client.",
+    fill: "compte",
+    vfQ: "Sujet : compte client.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "La livraison est-elle gratuite ?",
-    text: ["Oui", "Non", "On ne sait pas"],
+    id: "cem-q3",
+    textQ: "Quel produit ou élément ?",
+    text: ["Changer mot de passe", "Un chat", "Une maison"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison _________.",
-    fill: "gratuite",
-    vfQ: "La livraison est gratuite.",
+    fillQ: "Vous avez concerné : changer mot de passe.",
+    fill: "passe",
+    vfQ: "Élément : changer mot de passe.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Quel est le délai ?",
-    text: ["6 jours ouvrés", "Un jour", "Deux semaines"],
+    id: "cem-q4",
+    textQ: "Quel montant ou détail ?",
+    text: ["Support client", "Gratuit", "Mille euros"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai estimé : _________ jours ouvrés.",
-    fill: "6",
-    vfQ: "Le délai est 6 jours.",
+    fillQ: "Montant ou détail : support client.",
+    fill: "support",
+    vfQ: "Détail : support client.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Combien de temps pour un retour ?",
-    text: ["23 jours", "7 jours", "60 jours"],
+    id: "cem-q5",
+    textQ: "Quel délai ou date ?",
+    text: ["Vérification identité", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Retour possible sous _________ jours.",
-    fill: "23",
-    vfQ: "Un retour est possible.",
+    fillQ: "Délai ou date : vérification identité.",
+    fill: "vérification",
+    vfQ: "Délai : vérification identité.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Quelle garantie ?",
-    text: ["2 an(s)", "5 ans", "Aucune"],
+    id: "cem-q6",
+    textQ: "Quelle action requise ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Garantie : _________ an(s).",
-    fill: "2",
-    vfQ: "Il y a une garantie.",
+    fillQ: "Action requise : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Alerte Sécurité", "Le facteur", "La mairie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Alerte",
+    vfQ: "L'expéditeur est Alerte Sécurité.",
     vfC: 0,
   }),
 ]);
@@ -1807,7 +2168,7 @@ readingPoolExercise({
   id: "e9-1-ce-email",
   readingText: E9_1_CE_EMAIL_TEXT,
   questionPool: E9_1_CE_EMAIL_POOL,
-instruction: "Lisez l'e-mail et répondez aux questions."
+  instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e9-1-ce-email-2",
@@ -2184,1713 +2545,2102 @@ sourceMessage: {
    E9.2 — Se déplacer
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E9_2_CE_EMAIL_TEXT = `De : Transports de la Ville (TVL)
-Objet : Travaux sur la ligne 12
+const E9_2_CE_EMAIL_TEXT = `De : CFF Info
+
+Objet : Retard de votre train IC 5
 
 Bonjour,
 
-À partir du lundi 4 mai, des travaux commencent sur la ligne 12 du tram.
-Les travaux dureront trois semaines, jusqu'au vendredi 22 mai.
-Pendant cette période, les trams ne circuleront pas entre la gare et la place du Marché.
-Une navette gratuite remplacera le tram toutes les dix minutes, de 6 h à 22 h.
-L'arrêt de la navette se trouve devant la poste, à la sortie nord de la gare.
-Attention : le matin, comptez quinze minutes de trajet en plus.
-Les abonnements restent valables dans la navette et sur toutes les autres lignes.
-Pour plus d'informations, consultez notre application ou appelez le 021 555 66 77.
+Information : quarante-cinq minutes. Détail : correspondance Genève.
 
-Avec nos meilleures salutations,
-Les Transports de la Ville`;
+Date ou délai : remboursement partiel. Montant : application CFF.
+
+Action : prochain départ quatorze heures. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+CFF`;
 
 const E9_2_CE_EMAIL_POOL = buildExpressPool("e9-2-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Sur quelle ligne y a-t-il des travaux ?",
-    text: ["Sur la ligne 12", "Sur la ligne 2", "Sur la ligne 21"],
+    textQ: "Quel est l'objet ?",
+    text: ["Retard de votre train IC 5", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Des travaux commencent sur la ligne _________ du tram.",
-    fill: "12",
-    fillA: ["douze"],
-    vfQ: "Les travaux concernent la ligne 12 du tram.",
+    fillQ: "Objet : _________",
+    fill: "Retard",
+    vfQ: "Objet : Retard de votre train IC 5.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quand commencent les travaux ?",
-    text: ["Le lundi 4 mai", "Le vendredi 22 mai", "Le lundi 4 mars"],
+    textQ: "Quelle information principale ?",
+    text: ["Quarante-cinq minutes", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "À partir du lundi 4 _________, des travaux commencent.",
-    fill: "mai",
-    vfQ: "Les travaux commencent le lundi 4 mai.",
+    fillQ: "Information : quarante-cinq minutes.",
+    fill: "quarante-cinq",
+    vfQ: "Info : quarante-cinq minutes.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Combien de temps durent les travaux ?",
-    text: ["Trois semaines", "Trois jours", "Trois mois"],
+    textQ: "Quel détail ?",
+    text: ["Correspondance genève", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les travaux dureront trois _________, jusqu'au vendredi 22 mai.",
-    fill: "semaines",
-    vfQ: "Les travaux durent trois mois.",
-    vfC: 1,
+    fillQ: "Détail : correspondance Genève.",
+    fill: "correspondance",
+    vfQ: "Détail : correspondance Genève.",
+    vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Qu'est-ce qui remplace le tram ?",
-    text: ["Une navette gratuite", "Un train spécial", "Des taxis"],
+    textQ: "Quel montant ?",
+    text: ["Application cff", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Une _________ gratuite remplacera le tram.",
-    fill: "navette",
-    vfQ: "La navette est payante.",
-    vfC: 1,
+    fillQ: "Montant : application CFF.",
+    fill: "application",
+    vfQ: "Montant : application CFF.",
+    vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "La navette passe tous les combien ?",
-    text: ["Toutes les dix minutes", "Toutes les trente minutes", "Une fois par heure"],
+    textQ: "Quelle action ?",
+    text: ["Prochain départ quatorze heures", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "La navette remplacera le tram toutes les _________ minutes.",
-    fill: "dix",
-    fillA: ["10"],
-    vfQ: "La navette passe toutes les dix minutes.",
+    fillQ: "Action : prochain départ quatorze heures.",
+    fill: "prochain",
+    vfQ: "Action : prochain départ quatorze heures.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Où se trouve l'arrêt de la navette ?",
-    text: ["Devant la poste", "Devant la mairie", "Sur la place du Marché"],
+    textQ: "Qui écrit ?",
+    text: ["CFF Info", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "L'arrêt de la navette se trouve devant la _________.",
-    fill: "poste",
-    vfQ: "L'arrêt de la navette est devant la poste.",
+    fillQ: "De : _________",
+    fill: "CFF",
+    vfQ: "Expéditeur : CFF Info.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Combien de temps de trajet faut-il compter en plus le matin ?",
-    text: ["Quinze minutes", "Cinq minutes", "Une heure"],
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le matin, comptez _________ minutes de trajet en plus.",
-    fill: "quinze",
-    fillA: ["15"],
-    vfQ: "Le matin, le trajet est plus court que d'habitude.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q8",
-    textQ: "Les abonnements sont-ils valables dans la navette ?",
-    text: [
-      "Oui, ils restent valables",
-      "Non, il faut un nouveau billet",
-      "Seulement le week-end",
-    ],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Les abonnements restent _________ dans la navette.",
-    fill: "valables",
-    vfQ: "Il faut acheter un nouveau billet pour la navette.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q9",
-    textQ: "Jusqu'à quelle heure circule la navette ?",
-    text: ["Jusqu'à 22 h", "Jusqu'à 20 h", "Jusqu'à minuit"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "La navette circule de 6 h à _________ h.",
-    fill: "22",
-    fillA: ["vingt-deux"],
-    vfQ: "La navette circule de 6 h à 22 h.",
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
-  }),
-  q({
-    id: "cem-q10",
-    textQ: "Entre quels arrêts le tram ne circule-t-il pas ?",
-    text: [
-      "Entre la gare et la place du Marché",
-      "Entre la gare et l'hôpital",
-      "Entre la poste et le stade",
-    ],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Les trams ne _________ pas entre la gare et la place du Marché.",
-    fill: "circuleront",
-    vfQ: "Le tram circule normalement entre la gare et la place du Marché.",
-    vfC: 1,
   }),
 ]);
 
+const E9_2_CE_EMAIL_2_TEXT = `De : EasyJet
 
-const E9_2_CE_EMAIL_2_TEXT = `Info E-mail déplacements — Message 2
+Objet : Confirmation vol EZS 218
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Bonjour,
+
+Information : Genève–Lisbonne. Détail : embarquement porte A7.
+
+Date ou délai : jeudi 6 juin. Montant : bagage cabine dix kilos.
+
+Action : enregistrement en ligne. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+EasyJet`;
+
 const E9_2_CE_EMAIL_2_POOL = buildExpressPool("e9-2-ce-email-2", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Confirmation vol EZS 218", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Confirmation",
+    vfQ: "Objet : Confirmation vol EZS 218.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Genève–lisbonne", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : Genève–Lisbonne.",
+    fill: "Genève–Lisbonne",
+    vfQ: "Info : Genève–Lisbonne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Embarquement porte a7", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : embarquement porte A7.",
+    fill: "embarquement",
+    vfQ: "Détail : embarquement porte A7.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Bagage cabine dix kilos", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 2 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 2 jours.",
+    fillQ: "Montant : bagage cabine dix kilos.",
+    fill: "bagage",
+    vfQ: "Montant : bagage cabine dix kilos.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Enregistrement en ligne", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : enregistrement en ligne.",
+    fill: "enregistrement",
+    vfQ: "Action : enregistrement en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["EasyJet", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "EasyJet",
+    vfQ: "Expéditeur : EasyJet.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_3_TEXT = `Info E-mail déplacements — Message 3
+const E9_2_CE_EMAIL_3_TEXT = `De : TPG Abonnement
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Renouvellement Mobilis
+
+Bonjour,
+
+Information : échéance 30 avril. Détail : soixante-quinze francs.
+
+Date ou délai : paiement automatique. Montant : carte nouvelle.
+
+Action : zones 110-111. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+TPG`;
+
 const E9_2_CE_EMAIL_3_POOL = buildExpressPool("e9-2-ce-email-3", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Renouvellement Mobilis", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Renouvellement",
+    vfQ: "Objet : Renouvellement Mobilis.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Échéance 30 avril", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : échéance 30 avril.",
+    fill: "échéance",
+    vfQ: "Info : échéance 30 avril.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Soixante-quinze francs", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : soixante-quinze francs.",
+    fill: "soixante-quinze",
+    vfQ: "Détail : soixante-quinze francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Carte nouvelle", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 3 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 3 jours.",
+    fillQ: "Montant : carte nouvelle.",
+    fill: "carte",
+    vfQ: "Montant : carte nouvelle.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Zones 110-111", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : zones 110-111.",
+    fill: "zones",
+    vfQ: "Action : zones 110-111.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["TPG Abonnement", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "TPG",
+    vfQ: "Expéditeur : TPG Abonnement.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_4_TEXT = `Info E-mail déplacements — Message 4
+const E9_2_CE_EMAIL_4_TEXT = `De : Mobility
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Réservation confirmée
+
+Bonjour,
+
+Information : véhicule type B. Détail : samedi 9 h.
+
+Date ou délai : Place du Marché. Montant : carburant inclus.
+
+Action : prolongation possible. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Mobility`;
+
 const E9_2_CE_EMAIL_4_POOL = buildExpressPool("e9-2-ce-email-4", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Réservation confirmée", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Réservation",
+    vfQ: "Objet : Réservation confirmée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Véhicule type b", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : véhicule type B.",
+    fill: "véhicule",
+    vfQ: "Info : véhicule type B.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Samedi 9 h", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["4 jours ouvrés", "Un jour", "Un mois"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Les délais sont de 4 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 4 jours.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fillQ: "Détail : samedi 9 h.",
     fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    vfQ: "Détail : samedi 9 h.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Carburant inclus", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "Montant : carburant inclus.",
+    fill: "carburant",
+    vfQ: "Montant : carburant inclus.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Prolongation possible", "Rien", "Dormir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Action : prolongation possible.",
+    fill: "prolongation",
+    vfQ: "Action : prolongation possible.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Mobility", "Le facteur", "Un ami"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Mobility",
+    vfQ: "Expéditeur : Mobility.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_5_TEXT = `Info E-mail déplacements — Message 5
+const E9_2_CE_EMAIL_5_TEXT = `De : Parking Aéroport
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Réservation parking P1
+
+Bonjour,
+
+Information : du 12 au 19 mai. Détail : cent vingt-six francs.
+
+Date ou délai : navette gratuite. Montant : étage 3.
+
+Action : modification en ligne. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Parking`;
+
 const E9_2_CE_EMAIL_5_POOL = buildExpressPool("e9-2-ce-email-5", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Réservation parking P1", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Réservation",
+    vfQ: "Objet : Réservation parking P1.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Du 12 au 19 mai", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : du 12 au 19 mai.",
+    fill: "du",
+    vfQ: "Info : du 12 au 19 mai.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Cent vingt-six francs", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : cent vingt-six francs.",
+    fill: "cent",
+    vfQ: "Détail : cent vingt-six francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Étage 3", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 5 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 5 jours.",
+    fillQ: "Montant : étage 3.",
+    fill: "étage",
+    vfQ: "Montant : étage 3.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Modification en ligne", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : modification en ligne.",
+    fill: "modification",
+    vfQ: "Action : modification en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Parking Aéroport", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Parking",
+    vfQ: "Expéditeur : Parking Aéroport.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_6_TEXT = `Info E-mail déplacements — Message 6
+const E9_2_CE_EMAIL_6_TEXT = `De : FlixBus
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Billet Genève–Milan
+
+Bonjour,
+
+Information : référence FB8821. Détail : départ huit heures trente.
+
+Date ou délai : quai 4. Montant : e-billet en pièce jointe.
+
+Action : annulation vingt-quatre heures. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+FlixBus`;
+
 const E9_2_CE_EMAIL_6_POOL = buildExpressPool("e9-2-ce-email-6", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Billet Genève–Milan", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Billet",
+    vfQ: "Objet : Billet Genève–Milan.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Référence fb8821", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : référence FB8821.",
+    fill: "référence",
+    vfQ: "Info : référence FB8821.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Départ huit heures trente", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : départ huit heures trente.",
+    fill: "départ",
+    vfQ: "Détail : départ huit heures trente.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["E-billet en pièce jointe", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 6 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 6 jours.",
+    fillQ: "Montant : e-billet en pièce jointe.",
+    fill: "e-billet",
+    vfQ: "Montant : e-billet en pièce jointe.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Annulation vingt-quatre heures", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : annulation vingt-quatre heures.",
+    fill: "annulation",
+    vfQ: "Action : annulation vingt-quatre heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["FlixBus", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "FlixBus",
+    vfQ: "Expéditeur : FlixBus.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_7_TEXT = `Info E-mail déplacements — Message 7
+const E9_2_CE_EMAIL_7_TEXT = `De : Taxi Central
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Course confirmée
+
+Bonjour,
+
+Information : aéroport vers centre. Détail : mercredi minuit.
+
+Date ou délai : trente-cinq francs forfait. Montant : chauffeur Ahmed.
+
+Action : paiement carte. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Taxi`;
+
 const E9_2_CE_EMAIL_7_POOL = buildExpressPool("e9-2-ce-email-7", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Course confirmée", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Course",
+    vfQ: "Objet : Course confirmée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Aéroport vers centre", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : aéroport vers centre.",
+    fill: "aéroport",
+    vfQ: "Info : aéroport vers centre.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Mercredi minuit", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : mercredi minuit.",
+    fill: "mercredi",
+    vfQ: "Détail : mercredi minuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Chauffeur ahmed", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 7 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 7 jours.",
+    fillQ: "Montant : chauffeur Ahmed.",
+    fill: "chauffeur",
+    vfQ: "Montant : chauffeur Ahmed.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Paiement carte", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : paiement carte.",
+    fill: "paiement",
+    vfQ: "Action : paiement carte.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Taxi Central", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Taxi",
+    vfQ: "Expéditeur : Taxi Central.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_8_TEXT = `Info E-mail déplacements — Message 8
+const E9_2_CE_EMAIL_8_TEXT = `De : VéloCité
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Contrat location vélo
+
+Bonjour,
+
+Information : trois mois minimum. Détail : quarante-neuf francs par mois.
+
+Date ou délai : livraison lundi. Montant : antivol inclus.
+
+Action : atelier partenaire. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+VéloCité`;
+
 const E9_2_CE_EMAIL_8_POOL = buildExpressPool("e9-2-ce-email-8", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Contrat location vélo", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Contrat",
+    vfQ: "Objet : Contrat location vélo.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Trois mois minimum", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : trois mois minimum.",
+    fill: "trois",
+    vfQ: "Info : trois mois minimum.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Quarante-neuf francs par mois", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : quarante-neuf francs par mois.",
+    fill: "quarante-neuf",
+    vfQ: "Détail : quarante-neuf francs par mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Antivol inclus", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 8 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 8 jours.",
+    fillQ: "Montant : antivol inclus.",
+    fill: "antivol",
+    vfQ: "Montant : antivol inclus.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Atelier partenaire", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : atelier partenaire.",
+    fill: "atelier",
+    vfQ: "Action : atelier partenaire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["VéloCité", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "VéloCité",
+    vfQ: "Expéditeur : VéloCité.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_9_TEXT = `Info E-mail déplacements — Message 9
+const E9_2_CE_EMAIL_9_TEXT = `De : CGN Bateaux
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Billet Lausanne–Évian
+
+Bonjour,
+
+Information : aller simple. Détail : dix-huit francs.
+
+Date ou délai : départ quinze heures. Montant : pont supérieur.
+
+Action : vélo supplément cinq francs. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+CGN`;
+
 const E9_2_CE_EMAIL_9_POOL = buildExpressPool("e9-2-ce-email-9", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Billet Lausanne–Évian", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Billet",
+    vfQ: "Objet : Billet Lausanne–Évian.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Aller simple", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : aller simple.",
+    fill: "aller",
+    vfQ: "Info : aller simple.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Dix-huit francs", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : dix-huit francs.",
+    fill: "dix-huit",
+    vfQ: "Détail : dix-huit francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Pont supérieur", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 9 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 9 jours.",
+    fillQ: "Montant : pont supérieur.",
+    fill: "pont",
+    vfQ: "Montant : pont supérieur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Vélo supplément cinq francs", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : vélo supplément cinq francs.",
+    fill: "vélo",
+    vfQ: "Action : vélo supplément cinq francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["CGN Bateaux", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "CGN",
+    vfQ: "Expéditeur : CGN Bateaux.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_10_TEXT = `Info E-mail déplacements — Message 10
+const E9_2_CE_EMAIL_10_TEXT = `De : SBB Carte
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Demande demi-tarif reçue
+
+Bonjour,
+
+Information : traitement dix jours. Détail : photo requise.
+
+Date ou délai : cent quatre-vingt-cinq francs. Montant : envoi par courrier.
+
+Action : validité un an. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+SBB`;
+
 const E9_2_CE_EMAIL_10_POOL = buildExpressPool("e9-2-ce-email-10", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Demande demi-tarif reçue", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Demande",
+    vfQ: "Objet : Demande demi-tarif reçue.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Traitement dix jours", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : traitement dix jours.",
+    fill: "traitement",
+    vfQ: "Info : traitement dix jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Photo requise", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : photo requise.",
+    fill: "photo",
+    vfQ: "Détail : photo requise.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Envoi par courrier", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 10 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 10 jours.",
+    fillQ: "Montant : envoi par courrier.",
+    fill: "envoi",
+    vfQ: "Montant : envoi par courrier.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Validité un an", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : validité un an.",
+    fill: "validité",
+    vfQ: "Action : validité un an.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["SBB Carte", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "SBB",
+    vfQ: "Expéditeur : SBB Carte.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_11_TEXT = `Info E-mail déplacements — Message 11
+const E9_2_CE_EMAIL_11_TEXT = `De : Alerte Trafic
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Déviation bus ligne 12
+
+Bonjour,
+
+Information : travaux rue du Stand. Détail : arrêt provisoire Place Neuve.
+
+Date ou délai : jusqu'au 20 mai. Montant : bus de remplacement.
+
+Action : info temps réel. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Alerte`;
+
 const E9_2_CE_EMAIL_11_POOL = buildExpressPool("e9-2-ce-email-11", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Déviation bus ligne 12", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Déviation",
+    vfQ: "Objet : Déviation bus ligne 12.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Travaux rue du stand", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : travaux rue du Stand.",
+    fill: "travaux",
+    vfQ: "Info : travaux rue du Stand.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Arrêt provisoire place neuve", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : arrêt provisoire Place Neuve.",
+    fill: "arrêt",
+    vfQ: "Détail : arrêt provisoire Place Neuve.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Bus de remplacement", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 11 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 11 jours.",
+    fillQ: "Montant : bus de remplacement.",
+    fill: "bus",
+    vfQ: "Montant : bus de remplacement.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Info temps réel", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : info temps réel.",
+    fill: "info",
+    vfQ: "Action : info temps réel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Alerte Trafic", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Alerte",
+    vfQ: "Expéditeur : Alerte Trafic.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_12_TEXT = `Info E-mail déplacements — Message 12
+const E9_2_CE_EMAIL_12_TEXT = `De : Navette Entreprise
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Réservation place navette
+
+Bonjour,
+
+Information : lundi matin. Détail : huit heures Parking P3.
+
+Date ou délai : confirmation requise. Montant : cinquante places.
+
+Action : badge entreprise. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Navette`;
+
 const E9_2_CE_EMAIL_12_POOL = buildExpressPool("e9-2-ce-email-12", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Réservation place navette", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Réservation",
+    vfQ: "Objet : Réservation place navette.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Lundi matin", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : lundi matin.",
+    fill: "lundi",
+    vfQ: "Info : lundi matin.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Huit heures parking p3", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : huit heures Parking P3.",
+    fill: "huit",
+    vfQ: "Détail : huit heures Parking P3.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Cinquante places", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 12 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 12 jours.",
+    fillQ: "Montant : cinquante places.",
+    fill: "cinquante",
+    vfQ: "Montant : cinquante places.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Badge entreprise", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : badge entreprise.",
+    fill: "badge",
+    vfQ: "Action : badge entreprise.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Navette Entreprise", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Navette",
+    vfQ: "Expéditeur : Navette Entreprise.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_13_TEXT = `Info E-mail déplacements — Message 13
+const E9_2_CE_EMAIL_13_TEXT = `De : Location Van
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Confirmation location
+
+Bonjour,
+
+Information : samedi-dimanche. Détail : quatre-vingt-dix-neuf francs.
+
+Date ou délai : caution cinq cents francs. Montant : permis B.
+
+Action : carburant plein. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Location`;
+
 const E9_2_CE_EMAIL_13_POOL = buildExpressPool("e9-2-ce-email-13", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Confirmation location", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Confirmation",
+    vfQ: "Objet : Confirmation location.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Samedi-dimanche", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : samedi-dimanche.",
+    fill: "samedi-dimanche",
+    vfQ: "Info : samedi-dimanche.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Quatre-vingt-dix-neuf francs", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : quatre-vingt-dix-neuf francs.",
+    fill: "quatre-vingt-dix-neuf",
+    vfQ: "Détail : quatre-vingt-dix-neuf francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Permis b", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 13 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 13 jours.",
+    fillQ: "Montant : permis B.",
+    fill: "permis",
+    vfQ: "Montant : permis B.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Carburant plein", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : carburant plein.",
+    fill: "carburant",
+    vfQ: "Action : carburant plein.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Location Van", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Location",
+    vfQ: "Expéditeur : Location Van.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_14_TEXT = `Info E-mail déplacements — Message 14
+const E9_2_CE_EMAIL_14_TEXT = `De : Lime Support
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Fin de course signalée
+
+Bonjour,
+
+Information : durée douze minutes. Détail : coût cinq francs cinquante.
+
+Date ou délai : photo stationnement. Montant : facture en pièce jointe.
+
+Action : signalement possible. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Lime`;
+
 const E9_2_CE_EMAIL_14_POOL = buildExpressPool("e9-2-ce-email-14", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Fin de course signalée", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Fin",
+    vfQ: "Objet : Fin de course signalée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Durée douze minutes", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : durée douze minutes.",
+    fill: "durée",
+    vfQ: "Info : durée douze minutes.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Coût cinq francs cinquante", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : coût cinq francs cinquante.",
+    fill: "coût",
+    vfQ: "Détail : coût cinq francs cinquante.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Facture en pièce jointe", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 14 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 14 jours.",
+    fillQ: "Montant : facture en pièce jointe.",
+    fill: "facture",
+    vfQ: "Montant : facture en pièce jointe.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Signalement possible", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : signalement possible.",
+    fill: "signalement",
+    vfQ: "Action : signalement possible.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Lime Support", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Lime",
+    vfQ: "Expéditeur : Lime Support.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_15_TEXT = `Info E-mail déplacements — Message 15
+const E9_2_CE_EMAIL_15_TEXT = `De : Train Nuit
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Billet couchette Paris
+
+Bonjour,
+
+Information : compartiment quatre places. Détail : quatre-vingt-neuf euros.
+
+Date ou délai : départ vingt-et-une heures. Montant : petit-déjeuner option.
+
+Action : annulation payante. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Train`;
+
 const E9_2_CE_EMAIL_15_POOL = buildExpressPool("e9-2-ce-email-15", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Billet couchette Paris", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Billet",
+    vfQ: "Objet : Billet couchette Paris.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Compartiment quatre places", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : compartiment quatre places.",
+    fill: "compartiment",
+    vfQ: "Info : compartiment quatre places.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Quatre-vingt-neuf euros", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : quatre-vingt-neuf euros.",
+    fill: "quatre-vingt-neuf",
+    vfQ: "Détail : quatre-vingt-neuf euros.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Petit-déjeuner option", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 15 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 15 jours.",
+    fillQ: "Montant : petit-déjeuner option.",
+    fill: "petit-déjeuner",
+    vfQ: "Montant : petit-déjeuner option.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Annulation payante", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : annulation payante.",
+    fill: "annulation",
+    vfQ: "Action : annulation payante.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Train Nuit", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Train",
+    vfQ: "Expéditeur : Train Nuit.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_16_TEXT = `Info E-mail déplacements — Message 16
+const E9_2_CE_EMAIL_16_TEXT = `De : Autopartage
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Place libérée
+
+Bonjour,
+
+Information : quartier Pâquis. Détail : disponible immédiatement.
+
+Date ou délai : réservation une heure. Montant : véhicule compact.
+
+Action : nettoyage signalé. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Autopartage`;
+
 const E9_2_CE_EMAIL_16_POOL = buildExpressPool("e9-2-ce-email-16", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Place libérée", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Place",
+    vfQ: "Objet : Place libérée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Quartier pâquis", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : quartier Pâquis.",
+    fill: "quartier",
+    vfQ: "Info : quartier Pâquis.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Disponible immédiatement", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : disponible immédiatement.",
+    fill: "disponible",
+    vfQ: "Détail : disponible immédiatement.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Véhicule compact", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 16 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 16 jours.",
+    fillQ: "Montant : véhicule compact.",
+    fill: "véhicule",
+    vfQ: "Montant : véhicule compact.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Nettoyage signalé", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : nettoyage signalé.",
+    fill: "nettoyage",
+    vfQ: "Action : nettoyage signalé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Autopartage", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Autopartage",
+    vfQ: "Expéditeur : Autopartage.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_17_TEXT = `Info E-mail déplacements — Message 17
+const E9_2_CE_EMAIL_17_TEXT = `De : Info Mairie
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Changement sens rue
+
+Bonjour,
+
+Information : rue du Rhône. Détail : trois semaines.
+
+Date ou délai : trottoir alterné. Montant : horaires travaux.
+
+Action : accessibilité maintenue. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Info`;
+
 const E9_2_CE_EMAIL_17_POOL = buildExpressPool("e9-2-ce-email-17", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Changement sens rue", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Changement",
+    vfQ: "Objet : Changement sens rue.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Rue du rhône", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : rue du Rhône.",
+    fill: "rue",
+    vfQ: "Info : rue du Rhône.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Trois semaines", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : trois semaines.",
+    fill: "trois",
+    vfQ: "Détail : trois semaines.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Horaires travaux", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 17 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 17 jours.",
+    fillQ: "Montant : horaires travaux.",
+    fill: "horaires",
+    vfQ: "Montant : horaires travaux.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Accessibilité maintenue", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : accessibilité maintenue.",
+    fill: "accessibilité",
+    vfQ: "Action : accessibilité maintenue.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Info Mairie", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Info",
+    vfQ: "Expéditeur : Info Mairie.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_18_TEXT = `Info E-mail déplacements — Message 18
+const E9_2_CE_EMAIL_18_TEXT = `De : CFF Réclamation
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Remboursement accepté
+
+Bonjour,
+
+Information : retard IC 5. Détail : quinze francs.
+
+Date ou délai : crédit sous sept jours. Montant : numéro dossier 8821.
+
+Action : excuses. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+CFF`;
+
 const E9_2_CE_EMAIL_18_POOL = buildExpressPool("e9-2-ce-email-18", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Remboursement accepté", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Remboursement",
+    vfQ: "Objet : Remboursement accepté.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Retard ic 5", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : retard IC 5.",
+    fill: "retard",
+    vfQ: "Info : retard IC 5.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Quinze francs", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : quinze francs.",
+    fill: "quinze",
+    vfQ: "Détail : quinze francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Numéro dossier 8821", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 18 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 18 jours.",
+    fillQ: "Montant : numéro dossier 8821.",
+    fill: "numéro",
+    vfQ: "Montant : numéro dossier 8821.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Excuses", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : excuses.",
+    fill: "excuses",
+    vfQ: "Action : excuses.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["CFF Réclamation", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "CFF",
+    vfQ: "Expéditeur : CFF Réclamation.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_19_TEXT = `Info E-mail déplacements — Message 19
+const E9_2_CE_EMAIL_19_TEXT = `De : EasyJet Retard
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Vol retardé deux heures
+
+Bonjour,
+
+Information : nouveau départ seize heures. Détail : bon repas quinze euros.
+
+Date ou délai : compensation possible. Montant : suivi en ligne.
+
+Action : assistance aéroport. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+EasyJet`;
+
 const E9_2_CE_EMAIL_19_POOL = buildExpressPool("e9-2-ce-email-19", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Vol retardé deux heures", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Vol",
+    vfQ: "Objet : Vol retardé deux heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Nouveau départ seize heures", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : nouveau départ seize heures.",
+    fill: "nouveau",
+    vfQ: "Info : nouveau départ seize heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Bon repas quinze euros", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : bon repas quinze euros.",
+    fill: "bon",
+    vfQ: "Détail : bon repas quinze euros.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Suivi en ligne", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 19 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 19 jours.",
+    fillQ: "Montant : suivi en ligne.",
+    fill: "suivi",
+    vfQ: "Montant : suivi en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Assistance aéroport", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : assistance aéroport.",
+    fill: "assistance",
+    vfQ: "Action : assistance aéroport.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["EasyJet Retard", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "EasyJet",
+    vfQ: "Expéditeur : EasyJet Retard.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_2_CE_EMAIL_20_TEXT = `Info E-mail déplacements — Message 20
+const E9_2_CE_EMAIL_20_TEXT = `De : Mobility Facture
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail déplacements.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Facture mois d'avril
+
+Bonjour,
+
+Information : trois locations. Détail : quatre-vingt-sept francs.
+
+Date ou délai : détail en pièce jointe. Montant : prélèvement automatique.
+
+Action : service client. Contact : information.
+
+Merci de votre compréhension.
+
+Cordialement,
+
+Mobility`;
+
 const E9_2_CE_EMAIL_20_POOL = buildExpressPool("e9-2-ce-email-20", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail déplacements", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Quel est l'objet ?",
+    text: ["Facture mois d'avril", "Une facture", "Un menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ déplacements.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail déplacements.",
+    fillQ: "Objet : _________",
+    fill: "Facture",
+    vfQ: "Objet : Facture mois d'avril.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Quelle information principale ?",
+    text: ["Trois locations", "Rien", "Un chat"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Information : trois locations.",
+    fill: "trois",
+    vfQ: "Info : trois locations.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Quel détail ?",
+    text: ["Quatre-vingt-sept francs", "Aucun", "Un secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "Détail : quatre-vingt-sept francs.",
+    fill: "quatre-vingt-sept",
+    vfQ: "Détail : quatre-vingt-sept francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Quel montant ?",
+    text: ["Prélèvement automatique", "Mille euros", "Gratuit"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 20 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 20 jours.",
+    fillQ: "Montant : prélèvement automatique.",
+    fill: "prélèvement",
+    vfQ: "Montant : prélèvement automatique.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Quelle action ?",
+    text: ["Service client", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : service client.",
+    fill: "service",
+    vfQ: "Action : service client.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Qui écrit ?",
+    text: ["Mobility Facture", "Le facteur", "Un ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Mobility",
+    vfQ: "Expéditeur : Mobility Facture.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Quel contact ?",
+    text: ["Information", "Personne", "L'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
@@ -3900,7 +4650,7 @@ readingPoolExercise({
   id: "e9-2-ce-email",
   readingText: E9_2_CE_EMAIL_TEXT,
   questionPool: E9_2_CE_EMAIL_POOL,
-instruction: "Lisez l'e-mail et répondez aux questions."
+  instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e9-2-ce-email-2",
@@ -4277,1730 +5027,2062 @@ sourceMessage: {
    E9.3 — Chercher un logement
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E9_3_CE_EMAIL_TEXT = `De : Régie Bellevue
-Objet : Visite de l'appartement — rue des Lilas 15
+const E9_3_CE_EMAIL_TEXT = `De : Régie du Lac
+
+Objet : Candidature reçue
 
 Bonjour,
 
-Nous avons bien reçu votre demande pour l'appartement de trois pièces à la rue des Lilas 15.
-Le loyer est de 1 650 francs par mois, charges comprises.
-L'appartement se trouve au cinquième étage et l'immeuble a un ascenseur.
-Il est lumineux, avec un balcon exposé sud, et il est libre à partir du 1er juillet.
-Une visite est organisée le mercredi 12 juin à 17 h 30, devant l'entrée de l'immeuble.
-Si l'appartement vous intéresse, vous devez remplir un dossier de location avec une copie de votre pièce d'identité et vos trois dernières fiches de salaire.
-La caution est de deux mois de loyer.
-Merci de confirmer votre présence avant lundi.
+Concernant appartement trois pièces : dossier complet.
 
-Avec nos meilleures salutations,
-Régie Bellevue`;
+Délai : réponse sous dix jours. Action : visite possible.
+
+Contact : Agence du Parc. Merci.
+
+Cordialement,
+
+Régie`;
 
 const E9_3_CE_EMAIL_POOL = buildExpressPool("e9-3-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Combien de pièces a l'appartement ?",
-    text: ["Trois pièces", "Deux pièces", "Quatre pièces"],
+    textQ: "Objet ?",
+    text: ["Candidature reçue", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre demande pour l'appartement de trois _________ à la rue des Lilas 15.",
-    fill: "pièces",
-    fillA: ["pieces"],
-    vfQ: "L'appartement a trois pièces.",
+    fillQ: "Objet : _________",
+    fill: "Candidature",
+    vfQ: "Objet : Candidature reçue.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel est le loyer de l'appartement ?",
-    text: [
-      "1 650 francs, charges comprises",
-      "1 650 francs, sans les charges",
-      "1 850 francs, charges comprises",
-    ],
+    textQ: "Sujet ?",
+    text: ["Appartement trois pièces", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le loyer est de 1 650 francs par mois, charges _________.",
-    fill: "comprises",
-    vfQ: "Les charges sont comprises dans le loyer.",
+    fillQ: "Concernant appartement trois pièces.",
+    fill: "appartement",
+    vfQ: "Sujet : appartement trois pièces.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quel étage se trouve l'appartement ?",
-    text: ["Au cinquième étage", "Au premier étage", "Au troisième étage"],
+    textQ: "Information ?",
+    text: ["Dossier complet", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "L'appartement se trouve au _________ étage.",
-    fill: "cinquième",
-    fillA: ["cinquieme", "5e", "5ème", "5"],
-    vfQ: "L'appartement est au rez-de-chaussée.",
-    vfC: 1,
+    fillQ: "dossier complet.",
+    fill: "dossier",
+    vfQ: "Info : dossier complet.",
+    vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Y a-t-il un ascenseur dans l'immeuble ?",
-    text: [
-      "Oui, l'immeuble a un ascenseur",
-      "Non, il n'y a pas d'ascenseur",
-      "Oui, mais il est en panne",
-    ],
+    textQ: "Délai ?",
+    text: ["Réponse sous dix jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "L'immeuble a un _________.",
-    fill: "ascenseur",
-    vfQ: "Il n'y a pas d'ascenseur dans l'immeuble.",
-    vfC: 1,
+    fillQ: "Délai : réponse sous dix jours.",
+    fill: "réponse",
+    vfQ: "Délai : réponse sous dix jours.",
+    vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quand l'appartement est-il libre ?",
-    text: [
-      "À partir du 1er juillet",
-      "À partir du 12 juin",
-      "À partir du 1er juin",
-    ],
+    textQ: "Action ?",
+    text: ["Visite possible", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il est libre à partir du 1er _________.",
-    fill: "juillet",
-    vfQ: "L'appartement est libre à partir du 1er juillet.",
+    fillQ: "Action : visite possible.",
+    fill: "visite",
+    vfQ: "Action : visite possible.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quand a lieu la visite ?",
-    text: [
-      "Le mercredi 12 juin à 17 h 30",
-      "Le mercredi 12 juin à 7 h 30",
-      "Le lundi 10 juin à 17 h 30",
-    ],
+    textQ: "Expéditeur ?",
+    text: ["Régie du Lac", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Une visite est organisée le mercredi 12 juin à 17 h _________.",
-    fill: "30",
-    fillA: ["trente"],
-    vfQ: "La visite a lieu le matin.",
-    vfC: 1,
+    fillQ: "De : _________",
+    fill: "Régie",
+    vfQ: "Expéditeur : Régie du Lac.",
+    vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Où a lieu le rendez-vous pour la visite ?",
-    text: [
-      "Devant l'entrée de l'immeuble",
-      "Au bureau de la régie",
-      "Sur le balcon de l'appartement",
-    ],
+    textQ: "Contact ?",
+    text: ["Agence du parc", "Personne", "Étranger"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le rendez-vous est devant l'_________ de l'immeuble.",
-    fill: "entrée",
-    fillA: ["entree"],
-    vfQ: "Le rendez-vous est devant l'entrée de l'immeuble.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q8",
-    textQ: "Quels documents faut-il pour le dossier de location ?",
-    text: [
-      "Une pièce d'identité et trois fiches de salaire",
-      "Un passeport et une photo",
-      "Seulement une lettre de motivation",
-    ],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Vos trois dernières fiches de _________.",
-    fill: "salaire",
-    vfQ: "Il faut trois fiches de salaire pour le dossier.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q9",
-    textQ: "Quel est le montant de la caution ?",
-    text: ["Deux mois de loyer", "Un mois de loyer", "Trois mois de loyer"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "La caution est de _________ mois de loyer.",
-    fill: "deux",
-    fillA: ["2"],
-    vfQ: "La caution est d'un mois de loyer.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q10",
-    textQ: "Quand faut-il confirmer sa présence ?",
-    text: ["Avant lundi", "Avant vendredi", "Après la visite"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Merci de confirmer votre présence avant _________.",
-    fill: "lundi",
-    vfQ: "Il faut confirmer sa présence avant lundi.",
+    fillQ: "Contact : Agence du Parc.",
+    fill: "Agence",
+    vfQ: "Contact : Agence du Parc.",
     vfC: 0,
   }),
 ]);
 
+const E9_3_CE_EMAIL_2_TEXT = `De : Propriétaire M. Dubois
 
-const E9_3_CE_EMAIL_2_TEXT = `Info E-mail logement — Message 2
+Objet : Confirmation visite
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Bonjour,
+
+Concernant samedi quatorze heures : rue des Alpes 12.
+
+Délai : apporter pièce identité. Action : durée trente minutes.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Propriétaire`;
+
 const E9_3_CE_EMAIL_2_POOL = buildExpressPool("e9-3-ce-email-2", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Confirmation visite", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Confirmation",
+    vfQ: "Objet : Confirmation visite.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Samedi quatorze heures", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["2 jours ouvrés", "Un jour", "Un mois"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Les délais sont de 2 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 2 jours.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fillQ: "Concernant samedi quatorze heures.",
     fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    vfQ: "Sujet : samedi quatorze heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Rue des alpes 12", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "rue des Alpes 12.",
+    fill: "rue",
+    vfQ: "Info : rue des Alpes 12.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Apporter pièce identité", "Jamais", "Hier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Délai : apporter pièce identité.",
+    fill: "apporter",
+    vfQ: "Délai : apporter pièce identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Durée trente minutes", "Rien", "Dormir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Action : durée trente minutes.",
+    fill: "durée",
+    vfQ: "Action : durée trente minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Propriétaire M. Dubois", "Facteur", "Ami"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Propriétaire",
+    vfQ: "Expéditeur : Propriétaire M. Dubois.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_3_TEXT = `Info E-mail logement — Message 3
+const E9_3_CE_EMAIL_3_TEXT = `De : Coloc Étudiants
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Chambre disponible
+
+Bonjour,
+
+Concernant septembre : six cent cinquante francs.
+
+Délai : cuisine partagée. Action : dossier demandé.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Coloc`;
+
 const E9_3_CE_EMAIL_3_POOL = buildExpressPool("e9-3-ce-email-3", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Chambre disponible", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Chambre",
+    vfQ: "Objet : Chambre disponible.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Septembre", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant septembre.",
+    fill: "septembre",
+    vfQ: "Sujet : septembre.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Six cent cinquante francs", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "six cent cinquante francs.",
+    fill: "six",
+    vfQ: "Info : six cent cinquante francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Cuisine partagée", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 3 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 3 jours.",
+    fillQ: "Délai : cuisine partagée.",
+    fill: "cuisine",
+    vfQ: "Délai : cuisine partagée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Dossier demandé", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : dossier demandé.",
+    fill: "dossier",
+    vfQ: "Action : dossier demandé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Coloc Étudiants", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Coloc",
+    vfQ: "Expéditeur : Coloc Étudiants.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_4_TEXT = `Info E-mail logement — Message 4
+const E9_3_CE_EMAIL_4_TEXT = `De : Assurance Habitation
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Attestation envoyée
+
+Bonjour,
+
+Concernant responsabilité civile : quarante-cinq francs.
+
+Délai : validité un an. Action : PDF joint.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Assurance`;
+
 const E9_3_CE_EMAIL_4_POOL = buildExpressPool("e9-3-ce-email-4", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Attestation envoyée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Attestation",
+    vfQ: "Objet : Attestation envoyée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Responsabilité civile", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant responsabilité civile.",
+    fill: "responsabilité",
+    vfQ: "Sujet : responsabilité civile.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Quarante-cinq francs", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "quarante-cinq francs.",
+    fill: "quarante-cinq",
+    vfQ: "Info : quarante-cinq francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Validité un an", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 4 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 4 jours.",
+    fillQ: "Délai : validité un an.",
+    fill: "validité",
+    vfQ: "Délai : validité un an.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Pdf joint", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : PDF joint.",
+    fill: "PDF",
+    vfQ: "Action : PDF joint.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Assurance Habitation", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Assurance",
+    vfQ: "Expéditeur : Assurance Habitation.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_5_TEXT = `Info E-mail logement — Message 5
+const E9_3_CE_EMAIL_5_TEXT = `De : Régie Centrale
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : État des lieux entrée
+
+Bonjour,
+
+Concernant premier octobre dix heures : présence obligatoire.
+
+Délai : clés remises. Action : procès-verbal.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Régie`;
+
 const E9_3_CE_EMAIL_5_POOL = buildExpressPool("e9-3-ce-email-5", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["État des lieux entrée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "État",
+    vfQ: "Objet : État des lieux entrée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Premier octobre dix heures", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant premier octobre dix heures.",
+    fill: "premier",
+    vfQ: "Sujet : premier octobre dix heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Présence obligatoire", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "présence obligatoire.",
+    fill: "présence",
+    vfQ: "Info : présence obligatoire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Clés remises", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 5 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 5 jours.",
+    fillQ: "Délai : clés remises.",
+    fill: "clés",
+    vfQ: "Délai : clés remises.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Procès-verbal", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : procès-verbal.",
+    fill: "procès-verbal",
+    vfQ: "Action : procès-verbal.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Régie Centrale", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Régie",
+    vfQ: "Expéditeur : Régie Centrale.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_6_TEXT = `Info E-mail logement — Message 6
+const E9_3_CE_EMAIL_6_TEXT = `De : Service Logement
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Subvention accordée
+
+Bonjour,
+
+Concernant complément loyer : cent quatre-vingts francs.
+
+Délai : versement mensuel. Action : renouvellement annuel.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Service`;
+
 const E9_3_CE_EMAIL_6_POOL = buildExpressPool("e9-3-ce-email-6", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Subvention accordée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Subvention",
+    vfQ: "Objet : Subvention accordée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Complément loyer", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant complément loyer.",
+    fill: "complément",
+    vfQ: "Sujet : complément loyer.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Cent quatre-vingts francs", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "cent quatre-vingts francs.",
+    fill: "cent",
+    vfQ: "Info : cent quatre-vingts francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Versement mensuel", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 6 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 6 jours.",
+    fillQ: "Délai : versement mensuel.",
+    fill: "versement",
+    vfQ: "Délai : versement mensuel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Renouvellement annuel", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : renouvellement annuel.",
+    fill: "renouvellement",
+    vfQ: "Action : renouvellement annuel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service Logement", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service Logement.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_7_TEXT = `Info E-mail logement — Message 7
+const E9_3_CE_EMAIL_7_TEXT = `De : Agence ImmoPlus
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Bail à signer
+
+Bonjour,
+
+Concernant studio meublé : loyer mille cent francs.
+
+Délai : caution trois mois. Action : rendez-vous mercredi.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Agence`;
+
 const E9_3_CE_EMAIL_7_POOL = buildExpressPool("e9-3-ce-email-7", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Bail à signer", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Bail",
+    vfQ: "Objet : Bail à signer.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Studio meublé", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant studio meublé.",
+    fill: "studio",
+    vfQ: "Sujet : studio meublé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Loyer mille cent francs", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "loyer mille cent francs.",
+    fill: "loyer",
+    vfQ: "Info : loyer mille cent francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Caution trois mois", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 7 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 7 jours.",
+    fillQ: "Délai : caution trois mois.",
+    fill: "caution",
+    vfQ: "Délai : caution trois mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Rendez-vous mercredi", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : rendez-vous mercredi.",
+    fill: "rendez-vous",
+    vfQ: "Action : rendez-vous mercredi.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Agence ImmoPlus", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Agence",
+    vfQ: "Expéditeur : Agence ImmoPlus.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_8_TEXT = `Info E-mail logement — Message 8
+const E9_3_CE_EMAIL_8_TEXT = `De : Copropriété Les Tilleuls
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Travaux façade
+
+Bonjour,
+
+Concernant juin à septembre : nuisances possibles.
+
+Délai : ascenseur maintenu. Action : réunion info.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Copropriété`;
+
 const E9_3_CE_EMAIL_8_POOL = buildExpressPool("e9-3-ce-email-8", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Travaux façade", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Travaux",
+    vfQ: "Objet : Travaux façade.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Juin à septembre", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant juin à septembre.",
+    fill: "juin",
+    vfQ: "Sujet : juin à septembre.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Nuisances possibles", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "nuisances possibles.",
+    fill: "nuisances",
+    vfQ: "Info : nuisances possibles.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Ascenseur maintenu", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 8 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 8 jours.",
+    fillQ: "Délai : ascenseur maintenu.",
+    fill: "ascenseur",
+    vfQ: "Délai : ascenseur maintenu.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Réunion info", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : réunion info.",
+    fill: "réunion",
+    vfQ: "Action : réunion info.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Copropriété Les Tilleuls", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Copropriété",
+    vfQ: "Expéditeur : Copropriété Les Tilleuls.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_9_TEXT = `Info E-mail logement — Message 9
+const E9_3_CE_EMAIL_9_TEXT = `De : Hôtel Résidence
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Confirmation séjour
+
+Bonjour,
+
+Concernant sept nuits minimum : quatre-vingt-dix francs par nuit.
+
+Délai : studio équipé. Action : ménage inclus.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Hôtel`;
+
 const E9_3_CE_EMAIL_9_POOL = buildExpressPool("e9-3-ce-email-9", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Confirmation séjour", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Confirmation",
+    vfQ: "Objet : Confirmation séjour.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Sept nuits minimum", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant sept nuits minimum.",
+    fill: "sept",
+    vfQ: "Sujet : sept nuits minimum.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Quatre-vingt-dix francs par nuit", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "quatre-vingt-dix francs par nuit.",
+    fill: "quatre-vingt-dix",
+    vfQ: "Info : quatre-vingt-dix francs par nuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Studio équipé", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 9 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 9 jours.",
+    fillQ: "Délai : studio équipé.",
+    fill: "studio",
+    vfQ: "Délai : studio équipé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Ménage inclus", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : ménage inclus.",
+    fill: "ménage",
+    vfQ: "Action : ménage inclus.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Hôtel Résidence", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Hôtel",
+    vfQ: "Expéditeur : Hôtel Résidence.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_10_TEXT = `Info E-mail logement — Message 10
+const E9_3_CE_EMAIL_10_TEXT = `De : Cautionnement.ch
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Garantie acceptée
+
+Bonjour,
+
+Concernant caution solidaire : dossier validé.
+
+Délai : attestation envoyée. Action : propriétaire informé.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Cautionnement.ch`;
+
 const E9_3_CE_EMAIL_10_POOL = buildExpressPool("e9-3-ce-email-10", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Garantie acceptée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Garantie",
+    vfQ: "Objet : Garantie acceptée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Caution solidaire", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant caution solidaire.",
+    fill: "caution",
+    vfQ: "Sujet : caution solidaire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Dossier validé", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "dossier validé.",
+    fill: "dossier",
+    vfQ: "Info : dossier validé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Attestation envoyée", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 10 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 10 jours.",
+    fillQ: "Délai : attestation envoyée.",
+    fill: "attestation",
+    vfQ: "Délai : attestation envoyée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Propriétaire informé", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : propriétaire informé.",
+    fill: "propriétaire",
+    vfQ: "Action : propriétaire informé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Cautionnement.ch", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Cautionnement.ch",
+    vfQ: "Expéditeur : Cautionnement.ch.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_11_TEXT = `Info E-mail logement — Message 11
+const E9_3_CE_EMAIL_11_TEXT = `De : Déménagement Express
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Réservation ascenseur
+
+Bonjour,
+
+Concernant samedi huit heures : caution deux cents francs.
+
+Délai : protection sols. Action : gardien prévenu.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Déménagement`;
+
 const E9_3_CE_EMAIL_11_POOL = buildExpressPool("e9-3-ce-email-11", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Réservation ascenseur", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Réservation",
+    vfQ: "Objet : Réservation ascenseur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Samedi huit heures", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["11 jours ouvrés", "Un jour", "Un mois"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Les délais sont de 11 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 11 jours.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fillQ: "Concernant samedi huit heures.",
     fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    vfQ: "Sujet : samedi huit heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Caution deux cents francs", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "caution deux cents francs.",
+    fill: "caution",
+    vfQ: "Info : caution deux cents francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Protection sols", "Jamais", "Hier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Délai : protection sols.",
+    fill: "protection",
+    vfQ: "Délai : protection sols.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Gardien prévenu", "Rien", "Dormir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Action : gardien prévenu.",
+    fill: "gardien",
+    vfQ: "Action : gardien prévenu.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Déménagement Express", "Facteur", "Ami"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Déménagement",
+    vfQ: "Expéditeur : Déménagement Express.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_12_TEXT = `Info E-mail logement — Message 12
+const E9_3_CE_EMAIL_12_TEXT = `De : Diagnostic Pro
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Rapport énergétique
+
+Bonjour,
+
+Concernant classe C : travaux recommandés.
+
+Délai : validité dix ans. Action : PDF joint.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Diagnostic`;
+
 const E9_3_CE_EMAIL_12_POOL = buildExpressPool("e9-3-ce-email-12", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Rapport énergétique", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Rapport",
+    vfQ: "Objet : Rapport énergétique.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Classe c", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant classe C.",
+    fill: "classe",
+    vfQ: "Sujet : classe C.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Travaux recommandés", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "travaux recommandés.",
+    fill: "travaux",
+    vfQ: "Info : travaux recommandés.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Validité dix ans", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 12 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 12 jours.",
+    fillQ: "Délai : validité dix ans.",
+    fill: "validité",
+    vfQ: "Délai : validité dix ans.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Pdf joint", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : PDF joint.",
+    fill: "PDF",
+    vfQ: "Action : PDF joint.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Diagnostic Pro", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Diagnostic",
+    vfQ: "Expéditeur : Diagnostic Pro.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_13_TEXT = `Info E-mail logement — Message 13
+const E9_3_CE_EMAIL_13_TEXT = `De : Airbnb Support
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Règlement quartier
+
+Bonjour,
+
+Concernant locations courtes : autorisation requise.
+
+Délai : nuisances interdites. Action : amende possible.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Airbnb`;
+
 const E9_3_CE_EMAIL_13_POOL = buildExpressPool("e9-3-ce-email-13", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Règlement quartier", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Règlement",
+    vfQ: "Objet : Règlement quartier.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Locations courtes", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant locations courtes.",
+    fill: "locations",
+    vfQ: "Sujet : locations courtes.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Autorisation requise", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "autorisation requise.",
+    fill: "autorisation",
+    vfQ: "Info : autorisation requise.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Nuisances interdites", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 13 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 13 jours.",
+    fillQ: "Délai : nuisances interdites.",
+    fill: "nuisances",
+    vfQ: "Délai : nuisances interdites.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Amende possible", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : amende possible.",
+    fill: "amende",
+    vfQ: "Action : amende possible.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Airbnb Support", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Airbnb",
+    vfQ: "Expéditeur : Airbnb Support.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_14_TEXT = `Info E-mail logement — Message 14
+const E9_3_CE_EMAIL_14_TEXT = `De : Garage Sécurisé
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Location confirmée
+
+Bonjour,
+
+Concernant quinze mètres carrés : cent quatre-vingts francs.
+
+Délai : badge accès. Action : bail un an.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Garage`;
+
 const E9_3_CE_EMAIL_14_POOL = buildExpressPool("e9-3-ce-email-14", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Location confirmée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Location",
+    vfQ: "Objet : Location confirmée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Quinze mètres carrés", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant quinze mètres carrés.",
+    fill: "quinze",
+    vfQ: "Sujet : quinze mètres carrés.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Cent quatre-vingts francs", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "cent quatre-vingts francs.",
+    fill: "cent",
+    vfQ: "Info : cent quatre-vingts francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Badge accès", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 14 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 14 jours.",
+    fillQ: "Délai : badge accès.",
+    fill: "badge",
+    vfQ: "Délai : badge accès.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Bail un an", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : bail un an.",
+    fill: "bail",
+    vfQ: "Action : bail un an.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Garage Sécurisé", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Garage",
+    vfQ: "Expéditeur : Garage Sécurisé.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_15_TEXT = `Info E-mail logement — Message 15
+const E9_3_CE_EMAIL_15_TEXT = `De : Quittance Online
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Quittance mars
+
+Bonjour,
+
+Concernant loyer payé : preuve envoyée.
+
+Délai : format PDF. Action : archivage.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Quittance`;
+
 const E9_3_CE_EMAIL_15_POOL = buildExpressPool("e9-3-ce-email-15", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Quittance mars", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Quittance",
+    vfQ: "Objet : Quittance mars.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Loyer payé", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant loyer payé.",
+    fill: "loyer",
+    vfQ: "Sujet : loyer payé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Preuve envoyée", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "preuve envoyée.",
+    fill: "preuve",
+    vfQ: "Info : preuve envoyée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Format pdf", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 15 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 15 jours.",
+    fillQ: "Délai : format PDF.",
+    fill: "format",
+    vfQ: "Délai : format PDF.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Archivage", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : archivage.",
+    fill: "archivage",
+    vfQ: "Action : archivage.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Quittance Online", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Quittance",
+    vfQ: "Expéditeur : Quittance Online.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_16_TEXT = `Info E-mail logement — Message 16
+const E9_3_CE_EMAIL_16_TEXT = `De : Résiliation Service
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Préavis enregistré
+
+Bonjour,
+
+Concernant trois mois : fin juin.
+
+Délai : état des lieux prévu. Action : caution restituée.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Résiliation`;
+
 const E9_3_CE_EMAIL_16_POOL = buildExpressPool("e9-3-ce-email-16", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Préavis enregistré", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Préavis",
+    vfQ: "Objet : Préavis enregistré.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Trois mois", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant trois mois.",
+    fill: "trois",
+    vfQ: "Sujet : trois mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Fin juin", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "fin juin.",
+    fill: "fin",
+    vfQ: "Info : fin juin.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["État des lieux prévu", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 16 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 16 jours.",
+    fillQ: "Délai : état des lieux prévu.",
+    fill: "état",
+    vfQ: "Délai : état des lieux prévu.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Caution restituée", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : caution restituée.",
+    fill: "caution",
+    vfQ: "Action : caution restituée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Résiliation Service", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Résiliation",
+    vfQ: "Expéditeur : Résiliation Service.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_17_TEXT = `Info E-mail logement — Message 17
+const E9_3_CE_EMAIL_17_TEXT = `De : Visite Virtuelle
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Lien vidéo appartement
+
+Bonjour,
+
+Concernant trois pièces : candidature en ligne.
+
+Délai : réponse une semaine. Action : priorité premier arrivé.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Visite`;
+
 const E9_3_CE_EMAIL_17_POOL = buildExpressPool("e9-3-ce-email-17", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Lien vidéo appartement", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Lien",
+    vfQ: "Objet : Lien vidéo appartement.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Trois pièces", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant trois pièces.",
+    fill: "trois",
+    vfQ: "Sujet : trois pièces.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Candidature en ligne", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "candidature en ligne.",
+    fill: "candidature",
+    vfQ: "Info : candidature en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Réponse une semaine", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 17 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 17 jours.",
+    fillQ: "Délai : réponse une semaine.",
+    fill: "réponse",
+    vfQ: "Délai : réponse une semaine.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Priorité premier arrivé", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : priorité premier arrivé.",
+    fill: "priorité",
+    vfQ: "Action : priorité premier arrivé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Visite Virtuelle", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Visite",
+    vfQ: "Expéditeur : Visite Virtuelle.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_18_TEXT = `Info E-mail logement — Message 18
+const E9_3_CE_EMAIL_18_TEXT = `De : Logement Social
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Dossier reçu
+
+Bonjour,
+
+Concernant candidature enregistrée : délai six mois.
+
+Délai : priorité familles. Action : visite si attribution.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Logement`;
+
 const E9_3_CE_EMAIL_18_POOL = buildExpressPool("e9-3-ce-email-18", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Dossier reçu", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Dossier",
+    vfQ: "Objet : Dossier reçu.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Candidature enregistrée", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant candidature enregistrée.",
+    fill: "candidature",
+    vfQ: "Sujet : candidature enregistrée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Délai six mois", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "délai six mois.",
+    fill: "délai",
+    vfQ: "Info : délai six mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Priorité familles", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 18 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 18 jours.",
+    fillQ: "Délai : priorité familles.",
+    fill: "priorité",
+    vfQ: "Délai : priorité familles.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Visite si attribution", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : visite si attribution.",
+    fill: "visite",
+    vfQ: "Action : visite si attribution.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Logement Social", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Logement",
+    vfQ: "Expéditeur : Logement Social.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_19_TEXT = `Info E-mail logement — Message 19
+const E9_3_CE_EMAIL_19_TEXT = `De : Sous-location Été
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Confirmation juillet-août
+
+Bonjour,
+
+Concernant mille cinq cents par mois : meublé.
+
+Délai : contrat écrit. Action : proche lac.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Sous-location`;
+
 const E9_3_CE_EMAIL_19_POOL = buildExpressPool("e9-3-ce-email-19", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Confirmation juillet-août", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Confirmation",
+    vfQ: "Objet : Confirmation juillet-août.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Mille cinq cents par mois", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant mille cinq cents par mois.",
+    fill: "mille",
+    vfQ: "Sujet : mille cinq cents par mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Meublé", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "meublé.",
+    fill: "meublé",
+    vfQ: "Info : meublé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Contrat écrit", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 19 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 19 jours.",
+    fillQ: "Délai : contrat écrit.",
+    fill: "contrat",
+    vfQ: "Délai : contrat écrit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Proche lac", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : proche lac.",
+    fill: "proche",
+    vfQ: "Action : proche lac.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Sous-location Été", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Sous-location",
+    vfQ: "Expéditeur : Sous-location Été.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_3_CE_EMAIL_20_TEXT = `Info E-mail logement — Message 20
+const E9_3_CE_EMAIL_20_TEXT = `De : Charges Régie
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail logement.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Régularisation annuelle
+
+Bonjour,
+
+Concernant provision deux cent vingt francs : remboursement quarante francs.
+
+Délai : compteur individuel. Action : facture jointe.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Charges`;
+
 const E9_3_CE_EMAIL_20_POOL = buildExpressPool("e9-3-ce-email-20", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail logement", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Régularisation annuelle", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ logement.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail logement.",
+    fillQ: "Objet : _________",
+    fill: "Régularisation",
+    vfQ: "Objet : Régularisation annuelle.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Provision deux cent vingt francs", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant provision deux cent vingt francs.",
+    fill: "provision",
+    vfQ: "Sujet : provision deux cent vingt francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Remboursement quarante francs", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "remboursement quarante francs.",
+    fill: "remboursement",
+    vfQ: "Info : remboursement quarante francs.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Compteur individuel", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 20 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 20 jours.",
+    fillQ: "Délai : compteur individuel.",
+    fill: "compteur",
+    vfQ: "Délai : compteur individuel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Facture jointe", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : facture jointe.",
+    fill: "facture",
+    vfQ: "Action : facture jointe.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Charges Régie", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Charges",
+    vfQ: "Expéditeur : Charges Régie.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
@@ -6010,7 +7092,7 @@ readingPoolExercise({
   id: "e9-3-ce-email",
   readingText: E9_3_CE_EMAIL_TEXT,
   questionPool: E9_3_CE_EMAIL_POOL,
-instruction: "Lisez l'e-mail et répondez aux questions."
+  instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e9-3-ce-email-2",
@@ -6387,1724 +7469,2062 @@ sourceMessage: {
    E9.4 — Faire des démarches administratives
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E9_4_CE_EMAIL_TEXT = `De : Administration communale de Renens
-Objet : Renouvellement de votre permis de séjour
+const E9_4_CE_EMAIL_TEXT = `De : Préfecture
+
+Objet : Convocation renouvellement
 
 Bonjour,
 
-Votre permis de séjour arrive à expiration le 30 septembre.
-Pour le renouveler, vous devez prendre rendez-vous au bureau des habitants.
-Le bureau est ouvert du lundi au vendredi, de 8 h à 11 h 30, et le jeudi aussi l'après-midi, de 14 h à 18 h.
-Apportez votre passeport, une photo récente, votre contrat de travail et une attestation de votre assurance maladie.
-Le renouvellement coûte 65 francs. Vous pouvez payer par carte ou en espèces.
-Attention : faites votre demande au moins deux semaines avant l'expiration.
-Le bureau se trouve au premier étage de la mairie, guichet 3.
+Concernant titre de séjour : mercredi quatorze heures.
 
-Avec nos meilleures salutations,
-Le bureau des habitants`;
+Délai : dossier complet. Action : bureau 204.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Préfecture`;
 
 const E9_4_CE_EMAIL_POOL = buildExpressPool("e9-4-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Quand le permis de séjour expire-t-il ?",
-    text: ["Le 30 septembre", "Le 13 septembre", "Le 30 novembre"],
+    textQ: "Objet ?",
+    text: ["Convocation renouvellement", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Votre permis de séjour arrive à expiration le 30 _________.",
-    fill: "septembre",
-    vfQ: "Le permis de séjour expire le 30 septembre.",
+    fillQ: "Objet : _________",
+    fill: "Convocation",
+    vfQ: "Objet : Convocation renouvellement.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Que faut-il faire pour renouveler le permis ?",
-    text: [
-      "Prendre rendez-vous au bureau des habitants",
-      "Envoyer une lettre à la police",
-      "Aller à la banque",
-    ],
+    textQ: "Sujet ?",
+    text: ["Titre de séjour", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Vous devez prendre rendez-vous au bureau des _________.",
-    fill: "habitants",
-    vfQ: "Il faut prendre rendez-vous à la banque.",
-    vfC: 1,
+    fillQ: "Concernant titre de séjour.",
+    fill: "titre",
+    vfQ: "Sujet : titre de séjour.",
+    vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quels jours le bureau est-il ouvert le matin ?",
-    text: ["Du lundi au vendredi", "Seulement le jeudi", "Le samedi et le dimanche"],
+    textQ: "Information ?",
+    text: ["Mercredi quatorze heures", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le bureau est ouvert du lundi au _________, de 8 h à 11 h 30.",
-    fill: "vendredi",
-    vfQ: "Le bureau est ouvert le samedi matin.",
-    vfC: 1,
+    fillQ: "mercredi quatorze heures.",
+    fill: "mercredi",
+    vfQ: "Info : mercredi quatorze heures.",
+    vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quel jour le bureau est-il aussi ouvert l'après-midi ?",
-    text: ["Le jeudi", "Le lundi", "Le mardi"],
+    textQ: "Délai ?",
+    text: ["Dossier complet", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le bureau est aussi ouvert le _________ après-midi, de 14 h à 18 h.",
-    fill: "jeudi",
-    vfQ: "Le jeudi, le bureau est ouvert l'après-midi.",
+    fillQ: "Délai : dossier complet.",
+    fill: "dossier",
+    vfQ: "Délai : dossier complet.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quels documents faut-il apporter ?",
-    text: [
-      "Le passeport, une photo, le contrat de travail et une attestation d'assurance",
-      "Seulement le passeport",
-      "Le permis de conduire et une lettre",
-    ],
+    textQ: "Action ?",
+    text: ["Bureau 204", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Apportez votre passeport, une _________ récente et votre contrat de travail.",
-    fill: "photo",
-    vfQ: "Il faut apporter une photo récente.",
+    fillQ: "Action : bureau 204.",
+    fill: "bureau",
+    vfQ: "Action : bureau 204.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Combien coûte le renouvellement ?",
-    text: ["65 francs", "45 francs", "95 francs"],
+    textQ: "Expéditeur ?",
+    text: ["Préfecture", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le renouvellement coûte _________ francs.",
-    fill: "65",
-    fillA: ["soixante-cinq"],
-    vfQ: "Le renouvellement est gratuit.",
-    vfC: 1,
+    fillQ: "De : _________",
+    fill: "Préfecture",
+    vfQ: "Expéditeur : Préfecture.",
+    vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Comment peut-on payer ?",
-    text: [
-      "Par carte ou en espèces",
-      "Par virement seulement",
-      "En espèces seulement",
-    ],
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Vous pouvez payer par carte ou en _________.",
-    fill: "espèces",
-    fillA: ["especes"],
-    vfQ: "On peut payer par carte.",
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
-  }),
-  q({
-    id: "cem-q8",
-    textQ: "Quand faut-il faire la demande ?",
-    text: [
-      "Au moins deux semaines avant l'expiration",
-      "La veille de l'expiration",
-      "Après l'expiration",
-    ],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Faites votre demande au moins deux _________ avant l'expiration.",
-    fill: "semaines",
-    vfQ: "On peut faire la demande après l'expiration du permis.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q9",
-    textQ: "Où se trouve le bureau des habitants ?",
-    text: [
-      "Au premier étage de la mairie",
-      "Au troisième étage de la gare",
-      "À la poste",
-    ],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Le bureau se trouve au _________ étage de la mairie.",
-    fill: "premier",
-    fillA: ["1er", "1"],
-    vfQ: "Le bureau est au premier étage de la mairie.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q10",
-    textQ: "À quel guichet faut-il aller ?",
-    text: ["Au guichet 3", "Au guichet 8", "Au guichet 1"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Au premier étage de la mairie, guichet _________.",
-    fill: "3",
-    fillA: ["trois"],
-    vfQ: "Il faut aller au guichet 5.",
-    vfC: 1,
   }),
 ]);
 
+const E9_4_CE_EMAIL_2_TEXT = `De : Mairie de Sion
 
-const E9_4_CE_EMAIL_2_TEXT = `Info E-mail démarches administratives — Message 2
+Objet : Inscription électorale
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Bonjour,
+
+Concernant liste électorale : carte électorale.
+
+Délai : avant trente et un mars. Action : bureau vote.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Mairie`;
+
 const E9_4_CE_EMAIL_2_POOL = buildExpressPool("e9-4-ce-email-2", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Inscription électorale", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Inscription",
+    vfQ: "Objet : Inscription électorale.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Liste électorale", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant liste électorale.",
+    fill: "liste",
+    vfQ: "Sujet : liste électorale.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Carte électorale", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "carte électorale.",
+    fill: "carte",
+    vfQ: "Info : carte électorale.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Avant trente et un mars", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 2 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 2 jours.",
+    fillQ: "Délai : avant trente et un mars.",
+    fill: "avant",
+    vfQ: "Délai : avant trente et un mars.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Bureau vote", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : bureau vote.",
+    fill: "bureau",
+    vfQ: "Action : bureau vote.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Mairie de Sion", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Mairie",
+    vfQ: "Expéditeur : Mairie de Sion.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_3_TEXT = `Info E-mail démarches administratives — Message 3
+const E9_4_CE_EMAIL_3_TEXT = `De : CAF
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Dossier aide logement
+
+Bonjour,
+
+Concernant traitement six semaines : versement mensuel.
+
+Délai : documents reçus. Action : espace en ligne.
+
+Contact : information. Merci.
+
+Cordialement,
+
+CAF`;
+
 const E9_4_CE_EMAIL_3_POOL = buildExpressPool("e9-4-ce-email-3", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Dossier aide logement", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Dossier",
+    vfQ: "Objet : Dossier aide logement.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Traitement six semaines", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant traitement six semaines.",
+    fill: "traitement",
+    vfQ: "Sujet : traitement six semaines.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Versement mensuel", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "versement mensuel.",
+    fill: "versement",
+    vfQ: "Info : versement mensuel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Documents reçus", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 3 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 3 jours.",
+    fillQ: "Délai : documents reçus.",
+    fill: "documents",
+    vfQ: "Délai : documents reçus.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Espace en ligne", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : espace en ligne.",
+    fill: "espace",
+    vfQ: "Action : espace en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["CAF", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "CAF",
+    vfQ: "Expéditeur : CAF.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_4_TEXT = `Info E-mail démarches administratives — Message 4
+const E9_4_CE_EMAIL_4_TEXT = `De : Impôts
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Avis imposition disponible
+
+Bonjour,
+
+Concernant déclaration validée : remboursement deux cents euros.
+
+Délai : virement sous quinze jours. Action : espace impots.gouv.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Impôts`;
+
 const E9_4_CE_EMAIL_4_POOL = buildExpressPool("e9-4-ce-email-4", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Avis imposition disponible", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Avis",
+    vfQ: "Objet : Avis imposition disponible.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Déclaration validée", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant déclaration validée.",
+    fill: "déclaration",
+    vfQ: "Sujet : déclaration validée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Remboursement deux cents euros", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "remboursement deux cents euros.",
+    fill: "remboursement",
+    vfQ: "Info : remboursement deux cents euros.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Virement sous quinze jours", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 4 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 4 jours.",
+    fillQ: "Délai : virement sous quinze jours.",
+    fill: "virement",
+    vfQ: "Délai : virement sous quinze jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Espace impots.gouv", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : espace impots.gouv.",
+    fill: "espace",
+    vfQ: "Action : espace impots.gouv.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Impôts", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Impôts",
+    vfQ: "Expéditeur : Impôts.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_5_TEXT = `Info E-mail démarches administratives — Message 5
+const E9_4_CE_EMAIL_5_TEXT = `De : Pôle Emploi
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Rappel actualisation
+
+Bonjour,
+
+Concernant mensuelle obligatoire : avant fin du mois.
+
+Délai : Internet ou téléphone. Action : indemnisation.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Pôle`;
+
 const E9_4_CE_EMAIL_5_POOL = buildExpressPool("e9-4-ce-email-5", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Rappel actualisation", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Rappel",
+    vfQ: "Objet : Rappel actualisation.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Mensuelle obligatoire", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant mensuelle obligatoire.",
+    fill: "mensuelle",
+    vfQ: "Sujet : mensuelle obligatoire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Avant fin du mois", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "avant fin du mois.",
+    fill: "avant",
+    vfQ: "Info : avant fin du mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Internet ou téléphone", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 5 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 5 jours.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fillQ: "Délai : Internet ou téléphone.",
     fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    vfQ: "Délai : Internet ou téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Indemnisation", "Rien", "Dormir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Action : indemnisation.",
+    fill: "indemnisation",
+    vfQ: "Action : indemnisation.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Pôle Emploi", "Facteur", "Ami"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Pôle",
+    vfQ: "Expéditeur : Pôle Emploi.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_6_TEXT = `Info E-mail démarches administratives — Message 6
+const E9_4_CE_EMAIL_6_TEXT = `De : Ameli
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Carte Vitale mise à jour
+
+Bonjour,
+
+Concernant nouvelle adresse : délai quinze jours.
+
+Délai : envoi automatique. Action : espace ameli.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Ameli`;
+
 const E9_4_CE_EMAIL_6_POOL = buildExpressPool("e9-4-ce-email-6", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Carte Vitale mise à jour", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Carte",
+    vfQ: "Objet : Carte Vitale mise à jour.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Nouvelle adresse", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant nouvelle adresse.",
+    fill: "nouvelle",
+    vfQ: "Sujet : nouvelle adresse.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Délai quinze jours", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "délai quinze jours.",
+    fill: "délai",
+    vfQ: "Info : délai quinze jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Envoi automatique", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 6 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 6 jours.",
+    fillQ: "Délai : envoi automatique.",
+    fill: "envoi",
+    vfQ: "Délai : envoi automatique.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Espace ameli", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : espace ameli.",
+    fill: "espace",
+    vfQ: "Action : espace ameli.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Ameli", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Ameli",
+    vfQ: "Expéditeur : Ameli.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_7_TEXT = `Info E-mail démarches administratives — Message 7
+const E9_4_CE_EMAIL_7_TEXT = `De : Consulat
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Passeport prêt
+
+Bonjour,
+
+Concernant retrait sur place : lundi à vendredi.
+
+Délai : pièce identité. Action : délai six semaines.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Consulat`;
+
 const E9_4_CE_EMAIL_7_POOL = buildExpressPool("e9-4-ce-email-7", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Passeport prêt", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Passeport",
+    vfQ: "Objet : Passeport prêt.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Retrait sur place", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant retrait sur place.",
+    fill: "retrait",
+    vfQ: "Sujet : retrait sur place.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Lundi à vendredi", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "lundi à vendredi.",
+    fill: "lundi",
+    vfQ: "Info : lundi à vendredi.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Pièce identité", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 7 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 7 jours.",
+    fillQ: "Délai : pièce identité.",
+    fill: "pièce",
+    vfQ: "Délai : pièce identité.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Délai six semaines", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : délai six semaines.",
+    fill: "délai",
+    vfQ: "Action : délai six semaines.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Consulat", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Consulat",
+    vfQ: "Expéditeur : Consulat.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_8_TEXT = `Info E-mail démarches administratives — Message 8
+const E9_4_CE_EMAIL_8_TEXT = `De : La Poste
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Redirection courrier activée
+
+Bonjour,
+
+Concernant six mois : nouvelle adresse.
+
+Délai : confirmation. Action : gratuit.
+
+Contact : information. Merci.
+
+Cordialement,
+
+La`;
+
 const E9_4_CE_EMAIL_8_POOL = buildExpressPool("e9-4-ce-email-8", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Redirection courrier activée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Redirection",
+    vfQ: "Objet : Redirection courrier activée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Six mois", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant six mois.",
+    fill: "six",
+    vfQ: "Sujet : six mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Nouvelle adresse", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "nouvelle adresse.",
+    fill: "nouvelle",
+    vfQ: "Info : nouvelle adresse.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Confirmation", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 8 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 8 jours.",
+    fillQ: "Délai : confirmation.",
+    fill: "confirmation",
+    vfQ: "Délai : confirmation.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Gratuit", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : gratuit.",
+    fill: "gratuit",
+    vfQ: "Action : gratuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["La Poste", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "La",
+    vfQ: "Expéditeur : La Poste.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_9_TEXT = `Info E-mail démarches administratives — Message 9
+const E9_4_CE_EMAIL_9_TEXT = `De : Banque Populaire
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Compte ouvert
+
+Bonjour,
+
+Concernant carte sous dix jours : application mobile.
+
+Délai : RIB joint. Action : rendez-vous conseiller.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Banque`;
+
 const E9_4_CE_EMAIL_9_POOL = buildExpressPool("e9-4-ce-email-9", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Compte ouvert", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Compte",
+    vfQ: "Objet : Compte ouvert.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Carte sous dix jours", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant carte sous dix jours.",
+    fill: "carte",
+    vfQ: "Sujet : carte sous dix jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Application mobile", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "application mobile.",
+    fill: "application",
+    vfQ: "Info : application mobile.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Rib joint", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 9 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 9 jours.",
+    fillQ: "Délai : RIB joint.",
+    fill: "RIB",
+    vfQ: "Délai : RIB joint.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Rendez-vous conseiller", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : rendez-vous conseiller.",
+    fill: "rendez-vous",
+    vfQ: "Action : rendez-vous conseiller.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Banque Populaire", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Banque",
+    vfQ: "Expéditeur : Banque Populaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_10_TEXT = `Info E-mail démarches administratives — Message 10
+const E9_4_CE_EMAIL_10_TEXT = `De : CPAM
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Affiliation confirmée
+
+Bonjour,
+
+Concernant droits ouverts : carte Vitale.
+
+Délai : médecin traitant. Action : remboursements.
+
+Contact : information. Merci.
+
+Cordialement,
+
+CPAM`;
+
 const E9_4_CE_EMAIL_10_POOL = buildExpressPool("e9-4-ce-email-10", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Affiliation confirmée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Affiliation",
+    vfQ: "Objet : Affiliation confirmée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Droits ouverts", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant droits ouverts.",
+    fill: "droits",
+    vfQ: "Sujet : droits ouverts.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Carte vitale", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "carte Vitale.",
+    fill: "carte",
+    vfQ: "Info : carte Vitale.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Médecin traitant", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 10 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 10 jours.",
+    fillQ: "Délai : médecin traitant.",
+    fill: "médecin",
+    vfQ: "Délai : médecin traitant.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Remboursements", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : remboursements.",
+    fill: "remboursements",
+    vfQ: "Action : remboursements.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["CPAM", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "CPAM",
+    vfQ: "Expéditeur : CPAM.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_11_TEXT = `Info E-mail démarches administratives — Message 11
+const E9_4_CE_EMAIL_11_TEXT = `De : Préfecture Permis
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Échange permis accepté
+
+Bonjour,
+
+Concernant retrait dans deux mois : visite médicale validée.
+
+Délai : frais quatre-vingt-six euros. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Préfecture`;
+
 const E9_4_CE_EMAIL_11_POOL = buildExpressPool("e9-4-ce-email-11", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Échange permis accepté", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Échange",
+    vfQ: "Objet : Échange permis accepté.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Retrait dans deux mois", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant retrait dans deux mois.",
+    fill: "retrait",
+    vfQ: "Sujet : retrait dans deux mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Visite médicale validée", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "visite médicale validée.",
+    fill: "visite",
+    vfQ: "Info : visite médicale validée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Frais quatre-vingt-six euros", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 11 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 11 jours.",
+    fillQ: "Délai : frais quatre-vingt-six euros.",
+    fill: "frais",
+    vfQ: "Délai : frais quatre-vingt-six euros.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Préfecture Permis", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Préfecture",
+    vfQ: "Expéditeur : Préfecture Permis.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_12_TEXT = `Info E-mail démarches administratives — Message 12
+const E9_4_CE_EMAIL_12_TEXT = `De : École Communale
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Inscription confirmée
+
+Bonjour,
+
+Concernant rentrée septembre : affectation école.
+
+Délai : liste fournitures. Action : réunion parents.
+
+Contact : information. Merci.
+
+Cordialement,
+
+École`;
+
 const E9_4_CE_EMAIL_12_POOL = buildExpressPool("e9-4-ce-email-12", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Inscription confirmée", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Inscription",
+    vfQ: "Objet : Inscription confirmée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Rentrée septembre", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant rentrée septembre.",
+    fill: "rentrée",
+    vfQ: "Sujet : rentrée septembre.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Affectation école", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "affectation école.",
+    fill: "affectation",
+    vfQ: "Info : affectation école.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Liste fournitures", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 12 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 12 jours.",
+    fillQ: "Délai : liste fournitures.",
+    fill: "liste",
+    vfQ: "Délai : liste fournitures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Réunion parents", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : réunion parents.",
+    fill: "réunion",
+    vfQ: "Action : réunion parents.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["École Communale", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "École",
+    vfQ: "Expéditeur : École Communale.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_13_TEXT = `Info E-mail démarches administratives — Message 13
+const E9_4_CE_EMAIL_13_TEXT = `De : CAF Famille
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Allocations accordées
+
+Bonjour,
+
+Concernant versement trimestriel : enfants à charge.
+
+Délai : renouvellement annuel. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+CAF`;
+
 const E9_4_CE_EMAIL_13_POOL = buildExpressPool("e9-4-ce-email-13", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Allocations accordées", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Allocations",
+    vfQ: "Objet : Allocations accordées.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Versement trimestriel", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant versement trimestriel.",
+    fill: "versement",
+    vfQ: "Sujet : versement trimestriel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Enfants à charge", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "enfants à charge.",
+    fill: "enfants",
+    vfQ: "Info : enfants à charge.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Renouvellement annuel", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 13 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 13 jours.",
+    fillQ: "Délai : renouvellement annuel.",
+    fill: "renouvellement",
+    vfQ: "Délai : renouvellement annuel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["CAF Famille", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "CAF",
+    vfQ: "Expéditeur : CAF Famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_14_TEXT = `Info E-mail démarches administratives — Message 14
+const E9_4_CE_EMAIL_14_TEXT = `De : MDPH
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Dossier handicap reçu
+
+Bonjour,
+
+Concernant entretien programmé : délai quatre mois.
+
+Délai : droits possibles. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+MDPH`;
+
 const E9_4_CE_EMAIL_14_POOL = buildExpressPool("e9-4-ce-email-14", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Dossier handicap reçu", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Dossier",
+    vfQ: "Objet : Dossier handicap reçu.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Entretien programmé", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant entretien programmé.",
+    fill: "entretien",
+    vfQ: "Sujet : entretien programmé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Délai quatre mois", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "délai quatre mois.",
+    fill: "délai",
+    vfQ: "Info : délai quatre mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Droits possibles", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 14 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 14 jours.",
+    fillQ: "Délai : droits possibles.",
+    fill: "droits",
+    vfQ: "Délai : droits possibles.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["MDPH", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "MDPH",
+    vfQ: "Expéditeur : MDPH.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_15_TEXT = `Info E-mail démarches administratives — Message 15
+const E9_4_CE_EMAIL_15_TEXT = `De : Service Naturalisation
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Dossier complet
+
+Bonjour,
+
+Concernant test langue programmé : entretien civique.
+
+Délai : délai dix-huit mois. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Service`;
+
 const E9_4_CE_EMAIL_15_POOL = buildExpressPool("e9-4-ce-email-15", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Dossier complet", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Dossier",
+    vfQ: "Objet : Dossier complet.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Test langue programmé", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant test langue programmé.",
+    fill: "test",
+    vfQ: "Sujet : test langue programmé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Entretien civique", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "entretien civique.",
+    fill: "entretien",
+    vfQ: "Info : entretien civique.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Délai dix-huit mois", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 15 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 15 jours.",
+    fillQ: "Délai : délai dix-huit mois.",
+    fill: "délai",
+    vfQ: "Délai : délai dix-huit mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Service Naturalisation", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Service",
+    vfQ: "Expéditeur : Service Naturalisation.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_16_TEXT = `Info E-mail démarches administratives — Message 16
+const E9_4_CE_EMAIL_16_TEXT = `De : État Civil
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Acte naissance délivré
+
+Bonjour,
+
+Concernant livret famille : gratuit.
+
+Délai : retrait mairie. Action : trois jours délai.
+
+Contact : information. Merci.
+
+Cordialement,
+
+État`;
+
 const E9_4_CE_EMAIL_16_POOL = buildExpressPool("e9-4-ce-email-16", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Acte naissance délivré", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Acte",
+    vfQ: "Objet : Acte naissance délivré.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Livret famille", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant livret famille.",
+    fill: "livret",
+    vfQ: "Sujet : livret famille.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Gratuit", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "gratuit.",
+    fill: "gratuit",
+    vfQ: "Info : gratuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Retrait mairie", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 16 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 16 jours.",
+    fillQ: "Délai : retrait mairie.",
+    fill: "retrait",
+    vfQ: "Délai : retrait mairie.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Trois jours délai", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : trois jours délai.",
+    fill: "trois",
+    vfQ: "Action : trois jours délai.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["État Civil", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "État",
+    vfQ: "Expéditeur : État Civil.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_17_TEXT = `Info E-mail démarches administratives — Message 17
+const E9_4_CE_EMAIL_17_TEXT = `De : Mairie Mariage
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Publication bans
+
+Bonjour,
+
+Concernant cérémonie programmée : dossier validé.
+
+Délai : témoins confirmés. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Mairie`;
+
 const E9_4_CE_EMAIL_17_POOL = buildExpressPool("e9-4-ce-email-17", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Publication bans", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Publication",
+    vfQ: "Objet : Publication bans.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Cérémonie programmée", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant cérémonie programmée.",
+    fill: "cérémonie",
+    vfQ: "Sujet : cérémonie programmée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Dossier validé", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "dossier validé.",
+    fill: "dossier",
+    vfQ: "Info : dossier validé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Témoins confirmés", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 17 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 17 jours.",
+    fillQ: "Délai : témoins confirmés.",
+    fill: "témoins",
+    vfQ: "Délai : témoins confirmés.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Mairie Mariage", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Mairie",
+    vfQ: "Expéditeur : Mairie Mariage.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_18_TEXT = `Info E-mail démarches administratives — Message 18
+const E9_4_CE_EMAIL_18_TEXT = `De : JDC Service
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Convocation recensement
+
+Bonjour,
+
+Concernant journée défense : formulaire joint.
+
+Délai : obligatoire. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+JDC`;
+
 const E9_4_CE_EMAIL_18_POOL = buildExpressPool("e9-4-ce-email-18", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Convocation recensement", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Convocation",
+    vfQ: "Objet : Convocation recensement.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Journée défense", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant journée défense.",
+    fill: "journée",
+    vfQ: "Sujet : journée défense.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Formulaire joint", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "formulaire joint.",
+    fill: "formulaire",
+    vfQ: "Info : formulaire joint.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Obligatoire", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 18 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 18 jours.",
+    fillQ: "Délai : obligatoire.",
+    fill: "obligatoire",
+    vfQ: "Délai : obligatoire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["JDC Service", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "JDC",
+    vfQ: "Expéditeur : JDC Service.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_19_TEXT = `Info E-mail démarches administratives — Message 19
+const E9_4_CE_EMAIL_19_TEXT = `De : Casier Judiciaire
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Bulletin n°3 disponible
+
+Bonjour,
+
+Concernant PDF sécurisé : téléchargement vingt-quatre heures.
+
+Délai : gratuit. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Casier`;
+
 const E9_4_CE_EMAIL_19_POOL = buildExpressPool("e9-4-ce-email-19", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Bulletin n°3 disponible", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Bulletin",
+    vfQ: "Objet : Bulletin n°3 disponible.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Pdf sécurisé", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant PDF sécurisé.",
+    fill: "PDF",
+    vfQ: "Sujet : PDF sécurisé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Téléchargement vingt-quatre heures", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "téléchargement vingt-quatre heures.",
+    fill: "téléchargement",
+    vfQ: "Info : téléchargement vingt-quatre heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Gratuit", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 19 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 19 jours.",
+    fillQ: "Délai : gratuit.",
+    fill: "gratuit",
+    vfQ: "Délai : gratuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Casier Judiciaire", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Casier",
+    vfQ: "Expéditeur : Casier Judiciaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_4_CE_EMAIL_20_TEXT = `Info E-mail démarches administratives — Message 20
+const E9_4_CE_EMAIL_20_TEXT = `De : Hébergement Attestation
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail démarches administratives.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Modèle validé
+
+Bonjour,
+
+Concernant signature hébergeur : validité trois mois.
+
+Délai : démarches possibles. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Hébergement`;
+
 const E9_4_CE_EMAIL_20_POOL = buildExpressPool("e9-4-ce-email-20", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail démarches administratives", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Modèle validé", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ démarches administratives.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail démarches administratives.",
+    fillQ: "Objet : _________",
+    fill: "Modèle",
+    vfQ: "Objet : Modèle validé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Signature hébergeur", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant signature hébergeur.",
+    fill: "signature",
+    vfQ: "Sujet : signature hébergeur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Validité trois mois", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "validité trois mois.",
+    fill: "validité",
+    vfQ: "Info : validité trois mois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Démarches possibles", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 20 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 20 jours.",
+    fillQ: "Délai : démarches possibles.",
+    fill: "démarches",
+    vfQ: "Délai : démarches possibles.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Hébergement Attestation", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Hébergement",
+    vfQ: "Expéditeur : Hébergement Attestation.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
@@ -8114,7 +9534,7 @@ readingPoolExercise({
   id: "e9-4-ce-email",
   readingText: E9_4_CE_EMAIL_TEXT,
   questionPool: E9_4_CE_EMAIL_POOL,
-instruction: "Lisez l'e-mail et répondez aux questions."
+  instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e9-4-ce-email-2",
@@ -8491,1718 +9911,2062 @@ sourceMessage: {
    E9.5 — S'informer sur l'actualité
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E9_5_CE_EMAIL_TEXT = `De : Journal de la Ville — Newsletter
-Objet : Ce week-end dans votre ville
+const E9_5_CE_EMAIL_TEXT = `De : La Tribune
+
+Objet : Newsletter municipales
 
 Bonjour,
 
-Voici les informations de la semaine.
-Samedi 15 juin, la fête de la musique commence à 16 h sur la place centrale.
-Vingt concerts gratuits sont prévus jusqu'à minuit.
-Dimanche, le marché aux puces ouvre de 9 h à 17 h au bord du lac.
-Météo : samedi, il fera beau et chaud, 28 degrés. Dimanche, attention, des orages arriveront dans l'après-midi.
-Circulation : le centre-ville sera fermé aux voitures samedi, de 14 h à minuit.
-Prenez les transports publics : les bus seront gratuits toute la journée.
-La semaine prochaine, notre journal fête ses cinquante ans : une édition spéciale paraîtra jeudi.
+Concernant élection dimanche : cinq candidats.
 
-Bonne lecture,
-La rédaction`;
+Délai : débat jeudi. Action : bureaux ouverts.
+
+Contact : information. Merci.
+
+Cordialement,
+
+La`;
 
 const E9_5_CE_EMAIL_POOL = buildExpressPool("e9-5-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Quand commence la fête de la musique ?",
-    text: ["Samedi à 16 h", "Samedi à 18 h", "Dimanche à 16 h"],
+    textQ: "Objet ?",
+    text: ["Newsletter municipales", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "La fête de la musique commence à _________ h sur la place centrale.",
-    fill: "16",
-    fillA: ["seize"],
-    vfQ: "La fête de la musique commence samedi à 16 h.",
+    fillQ: "Objet : _________",
+    fill: "Newsletter",
+    vfQ: "Objet : Newsletter municipales.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Où a lieu la fête de la musique ?",
-    text: ["Sur la place centrale", "Au bord du lac", "Dans la gare"],
+    textQ: "Sujet ?",
+    text: ["Élection dimanche", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "La fête de la musique commence à 16 h sur la place _________.",
-    fill: "centrale",
-    vfQ: "La fête de la musique a lieu au bord du lac.",
-    vfC: 1,
+    fillQ: "Concernant élection dimanche.",
+    fill: "élection",
+    vfQ: "Sujet : élection dimanche.",
+    vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Combien de concerts sont prévus ?",
-    text: ["Vingt concerts", "Douze concerts", "Cinquante concerts"],
+    textQ: "Information ?",
+    text: ["Cinq candidats", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "_________ concerts gratuits sont prévus jusqu'à minuit.",
-    fill: "vingt",
-    fillA: ["20"],
-    vfQ: "Les concerts sont payants.",
-    vfC: 1,
+    fillQ: "cinq candidats.",
+    fill: "cinq",
+    vfQ: "Info : cinq candidats.",
+    vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quand le marché aux puces est-il ouvert ?",
-    text: [
-      "Dimanche, de 9 h à 17 h",
-      "Samedi, de 9 h à 17 h",
-      "Dimanche, de 14 h à minuit",
-    ],
+    textQ: "Délai ?",
+    text: ["Débat jeudi", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le marché aux puces ouvre de 9 h à _________ h.",
-    fill: "17",
-    fillA: ["dix-sept"],
-    vfQ: "Le marché aux puces a lieu dimanche.",
+    fillQ: "Délai : débat jeudi.",
+    fill: "débat",
+    vfQ: "Délai : débat jeudi.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Où se trouve le marché aux puces ?",
-    text: ["Au bord du lac", "Sur la place centrale", "Devant la mairie"],
+    textQ: "Action ?",
+    text: ["Bureaux ouverts", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le marché aux puces ouvre au bord du _________.",
-    fill: "lac",
-    vfQ: "Le marché aux puces est au bord du lac.",
+    fillQ: "Action : bureaux ouverts.",
+    fill: "bureaux",
+    vfQ: "Action : bureaux ouverts.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel temps fera-t-il samedi ?",
-    text: [
-      "Beau et chaud, 28 degrés",
-      "Froid et pluvieux",
-      "Des orages toute la journée",
-    ],
+    textQ: "Expéditeur ?",
+    text: ["La Tribune", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Samedi, il fera beau et chaud, _________ degrés.",
-    fill: "28",
-    fillA: ["vingt-huit"],
-    vfQ: "Samedi, il fera 28 degrés.",
+    fillQ: "De : _________",
+    fill: "La",
+    vfQ: "Expéditeur : La Tribune.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Que se passera-t-il dimanche après-midi ?",
-    text: ["Des orages arriveront", "Il fera très chaud", "Il neigera"],
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Dimanche, des _________ arriveront dans l'après-midi.",
-    fill: "orages",
-    vfQ: "Dimanche après-midi, le temps restera beau.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q8",
-    textQ: "Quand le centre-ville est-il fermé aux voitures ?",
-    text: [
-      "Samedi, de 14 h à minuit",
-      "Dimanche matin",
-      "Toute la semaine",
-    ],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Le centre-ville sera fermé aux voitures samedi, de 14 h à _________.",
-    fill: "minuit",
-    vfQ: "Samedi après-midi, le centre-ville est fermé aux voitures.",
-    vfC: 0,
-  }),
-  q({
-    id: "cem-q9",
-    textQ: "Combien coûtent les bus samedi ?",
-    text: ["Ils sont gratuits", "Deux francs le trajet", "Cinq francs la journée"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Les bus seront _________ toute la journée.",
-    fill: "gratuits",
-    vfQ: "Samedi, il faut payer le bus.",
-    vfC: 1,
-  }),
-  q({
-    id: "cem-q10",
-    textQ: "Quel anniversaire le journal fête-t-il ?",
-    text: ["Ses cinquante ans", "Ses quinze ans", "Ses cent ans"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Notre journal fête ses _________ ans.",
-    fill: "cinquante",
-    fillA: ["50"],
-    vfQ: "Une édition spéciale paraîtra jeudi.",
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
+const E9_5_CE_EMAIL_2_TEXT = `De : Météo Alert
 
-const E9_5_CE_EMAIL_2_TEXT = `Info E-mail l'actualité — Message 2
+Objet : Vigilance orange
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Bonjour,
+
+Concernant orages vendredi : éviter déplacements.
+
+Délai : mise à jour seize heures. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Météo`;
+
 const E9_5_CE_EMAIL_2_POOL = buildExpressPool("e9-5-ce-email-2", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Vigilance orange", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Vigilance",
+    vfQ: "Objet : Vigilance orange.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Orages vendredi", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant orages vendredi.",
+    fill: "orages",
+    vfQ: "Sujet : orages vendredi.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Éviter déplacements", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "éviter déplacements.",
+    fill: "éviter",
+    vfQ: "Info : éviter déplacements.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Mise à jour seize heures", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 2 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 2 jours.",
+    fillQ: "Délai : mise à jour seize heures.",
+    fill: "mise",
+    vfQ: "Délai : mise à jour seize heures.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Météo Alert", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Météo",
+    vfQ: "Expéditeur : Météo Alert.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_3_TEXT = `Info E-mail l'actualité — Message 3
+const E9_5_CE_EMAIL_3_TEXT = `De : Festival Musique
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Billets en vente
+
+Bonjour,
+
+Concernant juillet trois jours : camping sur place.
+
+Délai : programme site. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Festival`;
+
 const E9_5_CE_EMAIL_3_POOL = buildExpressPool("e9-5-ce-email-3", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Billets en vente", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Billets",
+    vfQ: "Objet : Billets en vente.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Juillet trois jours", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant juillet trois jours.",
+    fill: "juillet",
+    vfQ: "Sujet : juillet trois jours.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Camping sur place", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "camping sur place.",
+    fill: "camping",
+    vfQ: "Info : camping sur place.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Programme site", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 3 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 3 jours.",
+    fillQ: "Délai : programme site.",
+    fill: "programme",
+    vfQ: "Délai : programme site.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Festival Musique", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Festival",
+    vfQ: "Expéditeur : Festival Musique.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_4_TEXT = `Info E-mail l'actualité — Message 4
+const E9_5_CE_EMAIL_4_TEXT = `De : Info Trafic
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Grève mardi
+
+Bonjour,
+
+Concernant bus tramways perturbés : télétravail conseillé.
+
+Délai : reprise mercredi. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Info`;
+
 const E9_5_CE_EMAIL_4_POOL = buildExpressPool("e9-5-ce-email-4", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Grève mardi", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Grève",
+    vfQ: "Objet : Grève mardi.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Bus tramways perturbés", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant bus tramways perturbés.",
+    fill: "bus",
+    vfQ: "Sujet : bus tramways perturbés.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Télétravail conseillé", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "télétravail conseillé.",
+    fill: "télétravail",
+    vfQ: "Info : télétravail conseillé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Reprise mercredi", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 4 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 4 jours.",
+    fillQ: "Délai : reprise mercredi.",
+    fill: "reprise",
+    vfQ: "Délai : reprise mercredi.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Info Trafic", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Info",
+    vfQ: "Expéditeur : Info Trafic.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_5_TEXT = `Info E-mail l'actualité — Message 5
+const E9_5_CE_EMAIL_5_TEXT = `De : TV Locale
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Reportage agriculture
+
+Bonjour,
+
+Concernant producteurs locaux : marché hebdomadaire.
+
+Délai : interview. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+TV`;
+
 const E9_5_CE_EMAIL_5_POOL = buildExpressPool("e9-5-ce-email-5", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Reportage agriculture", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Reportage",
+    vfQ: "Objet : Reportage agriculture.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Producteurs locaux", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant producteurs locaux.",
+    fill: "producteurs",
+    vfQ: "Sujet : producteurs locaux.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Marché hebdomadaire", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "marché hebdomadaire.",
+    fill: "marché",
+    vfQ: "Info : marché hebdomadaire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Interview", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 5 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 5 jours.",
+    fillQ: "Délai : interview.",
+    fill: "interview",
+    vfQ: "Délai : interview.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["TV Locale", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "TV",
+    vfQ: "Expéditeur : TV Locale.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_6_TEXT = `Info E-mail l'actualité — Message 6
+const E9_5_CE_EMAIL_6_TEXT = `De : Blog Vélo
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Piste cyclable
+
+Bonjour,
+
+Concernant douze kilomètres : fin automne.
+
+Délai : réunion publique. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Blog`;
+
 const E9_5_CE_EMAIL_6_POOL = buildExpressPool("e9-5-ce-email-6", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Piste cyclable", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Piste",
+    vfQ: "Objet : Piste cyclable.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Douze kilomètres", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant douze kilomètres.",
+    fill: "douze",
+    vfQ: "Sujet : douze kilomètres.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Fin automne", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "fin automne.",
+    fill: "fin",
+    vfQ: "Info : fin automne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Réunion publique", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 6 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 6 jours.",
+    fillQ: "Délai : réunion publique.",
+    fill: "réunion",
+    vfQ: "Délai : réunion publique.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Blog Vélo", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Blog",
+    vfQ: "Expéditeur : Blog Vélo.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_7_TEXT = `Info E-mail l'actualité — Message 7
+const E9_5_CE_EMAIL_7_TEXT = `De : Agence Éco
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Chômage baisse
+
+Bonjour,
+
+Concernant taux cinq pour cent : créations emploi.
+
+Délai : prévisions positives. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Agence`;
+
 const E9_5_CE_EMAIL_7_POOL = buildExpressPool("e9-5-ce-email-7", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Chômage baisse", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Chômage",
+    vfQ: "Objet : Chômage baisse.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Taux cinq pour cent", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant taux cinq pour cent.",
+    fill: "taux",
+    vfQ: "Sujet : taux cinq pour cent.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Créations emploi", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "créations emploi.",
+    fill: "créations",
+    vfQ: "Info : créations emploi.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Prévisions positives", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 7 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 7 jours.",
+    fillQ: "Délai : prévisions positives.",
+    fill: "prévisions",
+    vfQ: "Délai : prévisions positives.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Agence Éco", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Agence",
+    vfQ: "Expéditeur : Agence Éco.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_8_TEXT = `Info E-mail l'actualité — Message 8
+const E9_5_CE_EMAIL_8_TEXT = `De : Santé Publique
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Campagne vaccination
+
+Bonjour,
+
+Concernant grippe saisonnière : gratuit plus soixante-cinq ans.
+
+Délai : rendez-vous en ligne. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Santé`;
+
 const E9_5_CE_EMAIL_8_POOL = buildExpressPool("e9-5-ce-email-8", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Campagne vaccination", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Campagne",
+    vfQ: "Objet : Campagne vaccination.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Grippe saisonnière", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant grippe saisonnière.",
+    fill: "grippe",
+    vfQ: "Sujet : grippe saisonnière.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Gratuit plus soixante-cinq ans", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "gratuit plus soixante-cinq ans.",
+    fill: "gratuit",
+    vfQ: "Info : gratuit plus soixante-cinq ans.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Rendez-vous en ligne", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 8 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 8 jours.",
+    fillQ: "Délai : rendez-vous en ligne.",
+    fill: "rendez-vous",
+    vfQ: "Délai : rendez-vous en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Santé Publique", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Santé",
+    vfQ: "Expéditeur : Santé Publique.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_9_TEXT = `Info E-mail l'actualité — Message 9
+const E9_5_CE_EMAIL_9_TEXT = `De : Podcast Éducation
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Réforme scolaire
+
+Bonjour,
+
+Concernant numérique classe : déploiement trois ans.
+
+Délai : expert interviewé. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Podcast`;
+
 const E9_5_CE_EMAIL_9_POOL = buildExpressPool("e9-5-ce-email-9", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Réforme scolaire", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Réforme",
+    vfQ: "Objet : Réforme scolaire.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Numérique classe", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant numérique classe.",
+    fill: "numérique",
+    vfQ: "Sujet : numérique classe.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Déploiement trois ans", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "déploiement trois ans.",
+    fill: "déploiement",
+    vfQ: "Info : déploiement trois ans.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Expert interviewé", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 9 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 9 jours.",
+    fillQ: "Délai : expert interviewé.",
+    fill: "expert",
+    vfQ: "Délai : expert interviewé.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Podcast Éducation", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Podcast",
+    vfQ: "Expéditeur : Podcast Éducation.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_10_TEXT = `Info E-mail l'actualité — Message 10
+const E9_5_CE_EMAIL_10_TEXT = `De : Flash Route
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Accident A9
+
+Bonjour,
+
+Concernant bouchon cinq kilomètres : circulation alternée.
+
+Délai : éviter secteur. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Flash`;
+
 const E9_5_CE_EMAIL_10_POOL = buildExpressPool("e9-5-ce-email-10", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Accident A9", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Accident",
+    vfQ: "Objet : Accident A9.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Bouchon cinq kilomètres", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant bouchon cinq kilomètres.",
+    fill: "bouchon",
+    vfQ: "Sujet : bouchon cinq kilomètres.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Circulation alternée", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "circulation alternée.",
+    fill: "circulation",
+    vfQ: "Info : circulation alternée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Éviter secteur", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 10 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 10 jours.",
+    fillQ: "Délai : éviter secteur.",
+    fill: "éviter",
+    vfQ: "Délai : éviter secteur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Flash Route", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Flash",
+    vfQ: "Expéditeur : Flash Route.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_11_TEXT = `Info E-mail l'actualité — Message 11
+const E9_5_CE_EMAIL_11_TEXT = `De : Enquête Env
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Soixante-dix pour cent préoccupés
+
+Bonjour,
+
+Concernant recyclage : transports publics.
+
+Délai : résultats. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Enquête`;
+
 const E9_5_CE_EMAIL_11_POOL = buildExpressPool("e9-5-ce-email-11", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Soixante-dix pour cent préoccupés", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Soixante-dix",
+    vfQ: "Objet : Soixante-dix pour cent préoccupés.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Recyclage", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant recyclage.",
+    fill: "recyclage",
+    vfQ: "Sujet : recyclage.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Transports publics", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "transports publics.",
+    fill: "transports",
+    vfQ: "Info : transports publics.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Résultats", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 11 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 11 jours.",
+    fillQ: "Délai : résultats.",
+    fill: "résultats",
+    vfQ: "Délai : résultats.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Enquête Env", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Enquête",
+    vfQ: "Expéditeur : Enquête Env.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_12_TEXT = `Info E-mail l'actualité — Message 12
+const E9_5_CE_EMAIL_12_TEXT = `De : Culture Plus
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Exposition art
+
+Bonjour,
+
+Concernant entrée gratuite dimanche : jusqu'au trente juin.
+
+Délai : réservation. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Culture`;
+
 const E9_5_CE_EMAIL_12_POOL = buildExpressPool("e9-5-ce-email-12", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Exposition art", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Exposition",
+    vfQ: "Objet : Exposition art.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Entrée gratuite dimanche", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant entrée gratuite dimanche.",
+    fill: "entrée",
+    vfQ: "Sujet : entrée gratuite dimanche.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Jusqu'au trente juin", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "jusqu'au trente juin.",
+    fill: "jusqu'au",
+    vfQ: "Info : jusqu'au trente juin.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Réservation", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 12 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 12 jours.",
+    fillQ: "Délai : réservation.",
+    fill: "réservation",
+    vfQ: "Délai : réservation.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Culture Plus", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Culture",
+    vfQ: "Expéditeur : Culture Plus.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_13_TEXT = `Info E-mail l'actualité — Message 13
+const E9_5_CE_EMAIL_13_TEXT = `De : Sport Hebdo
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Marathon dimanche
+
+Bonjour,
+
+Concernant dix mille participants : inscriptions complètes.
+
+Délai : huit heures départ. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Sport`;
+
 const E9_5_CE_EMAIL_13_POOL = buildExpressPool("e9-5-ce-email-13", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Marathon dimanche", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Marathon",
+    vfQ: "Objet : Marathon dimanche.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Dix mille participants", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant dix mille participants.",
+    fill: "dix",
+    vfQ: "Sujet : dix mille participants.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Inscriptions complètes", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "inscriptions complètes.",
+    fill: "inscriptions",
+    vfQ: "Info : inscriptions complètes.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Huit heures départ", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 13 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 13 jours.",
+    fillQ: "Délai : huit heures départ.",
+    fill: "huit",
+    vfQ: "Délai : huit heures départ.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Sport Hebdo", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Sport",
+    vfQ: "Expéditeur : Sport Hebdo.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_14_TEXT = `Info E-mail l'actualité — Message 14
+const E9_5_CE_EMAIL_14_TEXT = `De : Tech News
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Fibre optique
+
+Bonjour,
+
+Concernant quatre-vingts pour cent foyers : installation gratuite.
+
+Délai : inscription en ligne. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Tech`;
+
 const E9_5_CE_EMAIL_14_POOL = buildExpressPool("e9-5-ce-email-14", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Fibre optique", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Fibre",
+    vfQ: "Objet : Fibre optique.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Quatre-vingts pour cent foyers", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant quatre-vingts pour cent foyers.",
+    fill: "quatre-vingts",
+    vfQ: "Sujet : quatre-vingts pour cent foyers.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Installation gratuite", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "installation gratuite.",
+    fill: "installation",
+    vfQ: "Info : installation gratuite.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Inscription en ligne", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 14 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 14 jours.",
+    fillQ: "Délai : inscription en ligne.",
+    fill: "inscription",
+    vfQ: "Délai : inscription en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Tech News", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Tech",
+    vfQ: "Expéditeur : Tech News.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_15_TEXT = `Info E-mail l'actualité — Message 15
+const E9_5_CE_EMAIL_15_TEXT = `De : Société Logement
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Pénurie chambres étudiant
+
+Bonjour,
+
+Concernant prix hausse : aides étudiants.
+
+Délai : témoignages. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Société`;
+
 const E9_5_CE_EMAIL_15_POOL = buildExpressPool("e9-5-ce-email-15", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Pénurie chambres étudiant", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Pénurie",
+    vfQ: "Objet : Pénurie chambres étudiant.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Prix hausse", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant prix hausse.",
+    fill: "prix",
+    vfQ: "Sujet : prix hausse.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Aides étudiants", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "aides étudiants.",
+    fill: "aides",
+    vfQ: "Info : aides étudiants.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Témoignages", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 15 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 15 jours.",
+    fillQ: "Délai : témoignages.",
+    fill: "témoignages",
+    vfQ: "Délai : témoignages.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Société Logement", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Société",
+    vfQ: "Expéditeur : Société Logement.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_16_TEXT = `Info E-mail l'actualité — Message 16
+const E9_5_CE_EMAIL_16_TEXT = `De : Info International
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Sommet climat
+
+Bonjour,
+
+Concernant accord partiel : manifestations.
+
+Délai : analyse expert. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Info`;
+
 const E9_5_CE_EMAIL_16_POOL = buildExpressPool("e9-5-ce-email-16", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Sommet climat", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Sommet",
+    vfQ: "Objet : Sommet climat.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Accord partiel", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant accord partiel.",
+    fill: "accord",
+    vfQ: "Sujet : accord partiel.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Manifestations", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "manifestations.",
+    fill: "manifestations",
+    vfQ: "Info : manifestations.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Analyse expert", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 16 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 16 jours.",
+    fillQ: "Délai : analyse expert.",
+    fill: "analyse",
+    vfQ: "Délai : analyse expert.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Info International", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Info",
+    vfQ: "Expéditeur : Info International.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_17_TEXT = `Info E-mail l'actualité — Message 17
+const E9_5_CE_EMAIL_17_TEXT = `De : Faits Divers
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Vol vélo campus
+
+Bonjour,
+
+Concernant caméras surveillance : plainte déposée.
+
+Délai : conseils sécurité. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Faits`;
+
 const E9_5_CE_EMAIL_17_POOL = buildExpressPool("e9-5-ce-email-17", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Vol vélo campus", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Vol",
+    vfQ: "Objet : Vol vélo campus.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Caméras surveillance", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant caméras surveillance.",
+    fill: "caméras",
+    vfQ: "Sujet : caméras surveillance.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Plainte déposée", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "plainte déposée.",
+    fill: "plainte",
+    vfQ: "Info : plainte déposée.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Conseils sécurité", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 17 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 17 jours.",
+    fillQ: "Délai : conseils sécurité.",
+    fill: "conseils",
+    vfQ: "Délai : conseils sécurité.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Faits Divers", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Faits",
+    vfQ: "Expéditeur : Faits Divers.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_18_TEXT = `Info E-mail l'actualité — Message 18
+const E9_5_CE_EMAIL_18_TEXT = `De : Économie Locale
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Ouverture magasin
+
+Bonjour,
+
+Concernant cent cinquante emplois : samedi inauguration.
+
+Délai : promotions. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Économie`;
+
 const E9_5_CE_EMAIL_18_POOL = buildExpressPool("e9-5-ce-email-18", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Ouverture magasin", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Ouverture",
+    vfQ: "Objet : Ouverture magasin.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Cent cinquante emplois", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant cent cinquante emplois.",
+    fill: "cent",
+    vfQ: "Sujet : cent cinquante emplois.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Samedi inauguration", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["18 jours ouvrés", "Un jour", "Un mois"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Les délais sont de 18 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 18 jours.",
-    vfC: 0,
-  }),
-  q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
-    textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
-    imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fillQ: "samedi inauguration.",
     fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    vfQ: "Info : samedi inauguration.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Promotions", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "Délai : promotions.",
+    fill: "promotions",
+    vfQ: "Délai : promotions.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Économie Locale", "Facteur", "Ami"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De : _________",
+    fill: "Économie",
+    vfQ: "Expéditeur : Économie Locale.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_19_TEXT = `Info E-mail l'actualité — Message 19
+const E9_5_CE_EMAIL_19_TEXT = `De : Santé Canicule
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Températures trente-cinq degrés
+
+Bonjour,
+
+Concernant recommandations préfecture : îlots fraîcheur.
+
+Délai : information. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Santé`;
+
 const E9_5_CE_EMAIL_19_POOL = buildExpressPool("e9-5-ce-email-19", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Températures trente-cinq degrés", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Températures",
+    vfQ: "Objet : Températures trente-cinq degrés.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Recommandations préfecture", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant recommandations préfecture.",
+    fill: "recommandations",
+    vfQ: "Sujet : recommandations préfecture.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Îlots fraîcheur", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "îlots fraîcheur.",
+    fill: "îlots",
+    vfQ: "Info : îlots fraîcheur.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Information", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 19 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 19 jours.",
+    fillQ: "Délai : information.",
+    fill: "information",
+    vfQ: "Délai : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Santé Canicule", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Santé",
+    vfQ: "Expéditeur : Santé Canicule.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
 
-const E9_5_CE_EMAIL_20_TEXT = `Info E-mail l'actualité — Message 20
+const E9_5_CE_EMAIL_20_TEXT = `De : Médias Local
 
-Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail l'actualité.
-Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
-Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
-Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
-Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+Objet : Nouveau journal
+
+Bonjour,
+
+Concernant lancement septembre : gratuit.
+
+Délai : version en ligne. Action : information.
+
+Contact : information. Merci.
+
+Cordialement,
+
+Médias`;
+
 const E9_5_CE_EMAIL_20_POOL = buildExpressPool("e9-5-ce-email-20", [
   q({
-    id: "ce-q1",
-    textQ: "Quel thème traite ce message ?",
-    text: ["E-mail l'actualité", "Le sport", "La cuisine"],
+    id: "cem-q1",
+    textQ: "Objet ?",
+    text: ["Nouveau journal", "Facture", "Menu"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les informations concernent _________ l'actualité.",
-    fill: "e-mail",
-    vfQ: "Le texte parle de e-mail l'actualité.",
+    fillQ: "Objet : _________",
+    fill: "Nouveau",
+    vfQ: "Objet : Nouveau journal.",
     vfC: 0,
   }),
   q({
-    id: "ce-q2",
-    textQ: "Quels sont les horaires d'ouverture ?",
-    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    id: "cem-q2",
+    textQ: "Sujet ?",
+    text: ["Lancement septembre", "Rien", "Sport"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le service est ouvert du lundi au _________.",
-    fill: "vendredi",
-    vfQ: "Le service est ouvert en semaine.",
+    fillQ: "Concernant lancement septembre.",
+    fill: "lancement",
+    vfQ: "Sujet : lancement septembre.",
     vfC: 0,
   }),
   q({
-    id: "ce-q3",
-    textQ: "Quels documents faut-il apporter ?",
-    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    id: "cem-q3",
+    textQ: "Information ?",
+    text: ["Gratuit", "Aucune", "Secret"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
-    fill: "identité",
-    vfQ: "Il faut une pièce d'identité.",
+    fillQ: "gratuit.",
+    fill: "gratuit",
+    vfQ: "Info : gratuit.",
     vfC: 0,
   }),
   q({
-    id: "ce-q4",
-    textQ: "Combien de temps pour le traitement ?",
-    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    id: "cem-q4",
+    textQ: "Délai ?",
+    text: ["Version en ligne", "Jamais", "Hier"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les délais sont de 20 jours _________.",
-    fill: "ouvrés",
-    vfQ: "Le délai moyen est 20 jours.",
+    fillQ: "Délai : version en ligne.",
+    fill: "version",
+    vfQ: "Délai : version en ligne.",
     vfC: 0,
   }),
   q({
-    id: "ce-q5",
-    textQ: "Peut-on contacter le service le samedi ?",
-    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    id: "cem-q5",
+    textQ: "Action ?",
+    text: ["Information", "Rien", "Dormir"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Un numéro spécial est disponible le _________ matin.",
-    fill: "samedi",
-    vfQ: "Un numéro est disponible le samedi matin.",
+    fillQ: "Action : information.",
+    fill: "information",
+    vfQ: "Action : information.",
     vfC: 0,
   }),
   q({
-    id: "ce-q6",
-    textQ: "Où trouver plus d'informations ?",
-    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    id: "cem-q6",
+    textQ: "Expéditeur ?",
+    text: ["Médias Local", "Facteur", "Ami"],
     textC: 0,
-    img: ["vendeur", "boulanger", "serveur"],
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
-    fill: "Internet",
-    vfQ: "On peut consulter le site Internet.",
+    fillQ: "De : _________",
+    fill: "Médias",
+    vfQ: "Expéditeur : Médias Local.",
+    vfC: 0,
+  }),
+  q({
+    id: "cem-q7",
+    textQ: "Contact ?",
+    text: ["Information", "Personne", "Étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contact : information.",
+    fill: "information",
+    vfQ: "Contact : information.",
     vfC: 0,
   }),
 ]);
@@ -10212,7 +11976,7 @@ readingPoolExercise({
   id: "e9-5-ce-email",
   readingText: E9_5_CE_EMAIL_TEXT,
   questionPool: E9_5_CE_EMAIL_POOL,
-instruction: "Lisez l'e-mail et répondez aux questions."
+  instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e9-5-ce-email-2",
