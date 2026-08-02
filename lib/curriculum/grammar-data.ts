@@ -80,6 +80,7 @@ export type ConjLesson = {
 // ── Imports — grammaire ───────────────────────────────────────────────────────
 
 import { A1_GR_L01 } from "./content/francais/grammaire-r1.1";
+import { A1_GR_AVOIR } from "./content/francais/grammaire-a1-avoir";
 import { A1_GR_CEST } from "./content/francais/grammaire-r1.9";
 import { A1_GR_PHRASES } from "./content/francais/grammaire-r1.6";
 import { A1_GR_L02 } from "./content/francais/grammaire-r1.7";
@@ -160,45 +161,46 @@ import {
 const REORGANIZED_CODES: Record<string, string> = {
   // G1 — Chapitre 1 (unités 1–10)
   "a1-gr-l01": "G1.1",
-  "a1-gr-l04": "G1.2",
-  "a1-gr-l03": "G1.3",
-  "a1-gr-phrases": "G1.4",
-  "a1-gr-l02": "G1.5",
-  "a1-gr-cest-il-est": "G1.6",
-  "a1-gr-interro": "G1.7",
-  "a1-gr-l10": "G1.8",
-  "a1-gr-l19": "G1.9",
-  "a1-gr-l18": "G1.10",
+  "a1-gr-avoir": "G1.2",
+  "a1-gr-cest-il-est": "G1.3",
+  "a1-gr-l04": "G1.4",
+  "a1-gr-l03": "G1.5",
+  "a1-gr-phrases": "G1.6",
+  "a1-gr-l02": "G1.7",
+  "a1-gr-interro": "G1.8",
+  "a1-gr-l10": "G1.9",
+  "a1-gr-l19": "G1.10",
   // G2 — Chapitre 2 (unités 11–20)
-  "a1-gr-l11": "G2.1",
-  "a1-gr-l14": "G2.2",
-  "a1-gr-l23": "G2.3",
-  "a2-gr-l07": "G2.4",
-  "a2-gr-l09": "G2.5",
-  "a1-gr-expressions-temps": "G2.6",
-  "a1-gr-l22": "G2.7",
-  "a2-gr-l39": "G2.8",
-  "a2-gr-bon-bien-meilleur-mieux": "G2.9",
-  "a2-gr-superlatif": "G2.10",
+  "a1-gr-l18": "G2.1",
+  "a1-gr-l11": "G2.2",
+  "a1-gr-l14": "G2.3",
+  "a1-gr-l23": "G2.4",
+  "a2-gr-l07": "G2.5",
+  "a2-gr-l09": "G2.6",
+  "a1-gr-expressions-temps": "G2.7",
+  "a1-gr-l22": "G2.8",
+  "a2-gr-l39": "G2.9",
+  "a2-gr-bon-bien-meilleur-mieux": "G2.10",
   // G3 — Chapitre 3 (unités 21–30)
-  "a2-gr-l42": "G3.1",
-  "a2-gr-l19": "G3.2",
-  "a2-gr-l35": "G3.3",
-  "a2-gr-l36": "G3.4",
-  "gr-marqueurs-temps-complet": "G3.5",
-  "a2-gr-l52": "G3.6",
-  "a2-gr-adverbes-types": "G3.7",
-  "a1-gr-verbes-double-auxiliaire": "G3.8",
-  "a1-gr-pronominaux-passe-compose": "G3.9",
-  "a2-gr-passe-compose-ou-imparfait": "G3.10",
-  // G4 — Chapitre 4 (unités 31–37)
-  "a2-gr-imparfait-irreguliers": "G4.1",
-  "a2-gr-futur-irreguliers": "G4.2",
-  "a2-gr-futur-simple-ou-proche": "G4.3",
-  "a2-gr-hypothese-futur": "G4.4",
-  "a2-gr-conditionnel": "G4.5",
-  "a2-gr-gerondif": "G4.6",
-  "a2-gr-subjonctif": "G4.7",
+  "a2-gr-superlatif": "G3.1",
+  "a2-gr-l42": "G3.2",
+  "a2-gr-l19": "G3.3",
+  "a2-gr-l35": "G3.4",
+  "a2-gr-l36": "G3.5",
+  "gr-marqueurs-temps-complet": "G3.6",
+  "a2-gr-l52": "G3.7",
+  "a2-gr-adverbes-types": "G3.8",
+  "a1-gr-verbes-double-auxiliaire": "G3.9",
+  "a1-gr-pronominaux-passe-compose": "G3.10",
+  // G4 — Chapitre 4 (unités 31–38)
+  "a2-gr-passe-compose-ou-imparfait": "G4.1",
+  "a2-gr-imparfait-irreguliers": "G4.2",
+  "a2-gr-futur-irreguliers": "G4.3",
+  "a2-gr-futur-simple-ou-proche": "G4.4",
+  "a2-gr-hypothese-futur": "G4.5",
+  "a2-gr-conditionnel": "G4.6",
+  "a2-gr-gerondif": "G4.7",
+  "a2-gr-subjonctif": "G4.8",
   // C1 — Verbes essentiels
   "a1-conj-l00": "C1.1",
   "a1-conj-l01": "C1.2",
@@ -224,7 +226,7 @@ const REORGANIZED_CODES: Record<string, string> = {
 
 const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
   ...A1_GR_L23,
-  code: "G2.3",
+  code: "G2.4",
   title: "Les adjectifs qualificatifs",
 };
 
@@ -275,6 +277,7 @@ function augmentGrammarLessonExercises(lesson: GrammarLesson): GrammarLesson {
 
 const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L01,
+  A1_GR_AVOIR,
   A1_GR_CEST,
   A1_GR_PHRASES,
   A1_GR_L02,

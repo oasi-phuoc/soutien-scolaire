@@ -1,0 +1,121 @@
+import type { GrammarLesson } from "../../grammar-data";
+
+/** Unité 2 — Le verbe avoir (G1.2) */
+export const A1_GR_AVOIR: GrammarLesson = {
+  slug: "a1-gr-avoir",
+  code: "G1.2",
+  level: "A1",
+  title: "Le verbe avoir",
+  theory: [
+    {
+      type: "heading",
+      text: "Utilisation",
+      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
+    },
+    {
+      type: "plain_list",
+      label: "Le verbe avoir est utilisé pour :",
+      items: [
+        "dire l'âge. → Il {a}a{/a} 30 ans.",
+        "parler de la famille et des amis. → Tu {a}as{/a} une amie française ? / Nous {a}avons{/a} deux frères.",
+        "dire ce qu'on possède. → J'{a}ai{/a} une tablette. / Elle {a}a{/a} un portable.",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "note",
+      text: "Le verbe avoir est aussi utilisé dans quelques expressions qui expriment une sensation : avoir chaud, avoir froid, avoir faim, avoir soif, avoir mal, avoir peur.",
+    },
+    {
+      type: "heading",
+      text: "Conjugaison",
+      trans: { en: "Conjugation", ar: "التصريف", fa: "صرف", ti: "ምጽራይ", uk: "Дієвідміна" },
+    },
+    {
+      type: "grid",
+      headers: ["Pronom sujet", "Verbe", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["J'", "ai", "une sœur."],
+        ["Tu", "as", "30 ans."],
+        ["Il / Elle / On", "a", "faim."],
+        ["Nous", "avons", "un chat."],
+        ["Vous", "avez", "quel âge ?"],
+        ["Ils / Elles", "ont", "chaud."],
+      ],
+    },
+    {
+      type: "heading",
+      text: "Prononciation et orthographe",
+      trans: { en: "Pronunciation and spelling", ar: "النطق والإملاء", fa: "تلفظ و املا", ti: "ኣደማምጻን ኣጸሓሕፋን", uk: "Вимова та правопис" },
+    },
+    {
+      type: "plain_list",
+      items: [
+        "On ne prononce pas le {a}e{/a} final de {a}elle{/a}. → Elle a 10 ans.",
+        "On fait la liaison. → On a, nous avons, vous avez, ils ont, elles ont.",
+        "Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle. → {s}Je ai{/s} → {a}J'ai{/a} 20 ans.",
+      ],
+      allBullets: true,
+    },
+  ],
+  exercises: [
+    {
+      type: "qcm",
+      title: "Conjugaison d'avoir",
+      instruction: "Choisissez la forme correcte du verbe avoir.",
+      transInstruction: {
+        en: "Choose the correct form of avoir (to have).",
+        ar: "اختر الصيغة الصحيحة للفعل avoir.",
+        fa: "صورت درست فعل avoir را انتخاب کنید.",
+        ti: "ምረጽ ቅኑዕ ቅርጺ ናይ avoir.",
+        uk: "Виберіть правильну форму avoir.",
+      },
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "J'___ une sœur.", choices: ["ai", "as", "a", "ont"], correctIdx: 0 },
+        { sentence: "Tu ___ 30 ans.", choices: ["as", "ai", "a", "avez"], correctIdx: 0 },
+        { sentence: "Il ___ faim.", choices: ["a", "as", "ai", "ont"], correctIdx: 0 },
+        { sentence: "Nous ___ un chat.", choices: ["avons", "avez", "ont", "ai"], correctIdx: 0 },
+        { sentence: "Vous ___ quel âge ?", choices: ["avez", "avons", "as", "ont"], correctIdx: 0 },
+        { sentence: "Ils ___ chaud.", choices: ["ont", "a", "avez", "avons"], correctIdx: 0 },
+        { sentence: "Elle ___ un portable.", choices: ["a", "as", "ai", "ont"], correctIdx: 0 },
+        { sentence: "On ___ soif.", choices: ["a", "as", "ont", "ai"], correctIdx: 0 },
+        { sentence: "Elles ___ deux frères.", choices: ["ont", "a", "avez", "ai"], correctIdx: 0 },
+        { sentence: "Tu ___ une amie française ?", choices: ["as", "a", "ai", "avez"], correctIdx: 0 },
+        { sentence: "J'___ froid.", choices: ["ai", "suis", "as", "a"], correctIdx: 0 },
+        { sentence: "Nous ___ peur.", choices: ["avons", "sommes", "avez", "ont"], correctIdx: 0 },
+        { sentence: "Il ___ 20 ans.", choices: ["a", "est", "as", "ont"], correctIdx: 0 },
+        { sentence: "Vous ___ mal ?", choices: ["avez", "êtes", "as", "ont"], correctIdx: 0 },
+        { sentence: "Elle ___ une tablette.", choices: ["a", "est", "as", "ont"], correctIdx: 0 },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Complétez avec avoir",
+      instruction: "Conjuguez le verbe avoir au présent.",
+      transInstruction: {
+        en: "Conjugate the verb avoir in the present tense.",
+        ar: "صرّف الفعل avoir في المضارع.",
+        fa: "فعل avoir را در زمان حال صرف کنید.",
+        ti: "ግሲ avoir ኣብ ሕጂ ግዜ ኣጻርይ.",
+        uk: "Відмінюйте avoir у теперішньому часі.",
+      },
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "J'___ (avoir) une sœur.", hint: "avoir → je", answer: "ai" },
+        { sentence: "Tu ___ (avoir) 25 ans.", hint: "avoir → tu", answer: "as" },
+        { sentence: "Elle ___ (avoir) faim.", hint: "avoir → elle", answer: "a" },
+        { sentence: "Nous ___ (avoir) un chien.", hint: "avoir → nous", answer: "avons" },
+        { sentence: "Vous ___ (avoir) soif ?", hint: "avoir → vous", answer: "avez" },
+        { sentence: "Ils ___ (avoir) chaud.", hint: "avoir → ils", answer: "ont" },
+        { sentence: "On ___ (avoir) peur.", hint: "avoir → on", answer: "a" },
+        { sentence: "Elles ___ (avoir) un portable.", hint: "avoir → elles", answer: "ont" },
+        { sentence: "Il ___ (avoir) mal à la tête.", hint: "avoir → il", answer: "a" },
+        { sentence: "Tu ___ (avoir) une amie ?", hint: "avoir → tu", answer: "as" },
+      ],
+    },
+  ],
+};

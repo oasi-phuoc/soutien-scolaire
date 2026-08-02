@@ -4,41 +4,88 @@ export const A1_GR_L01: GrammarLesson = {
   slug: "a1-gr-l01",
   code: "R1.1",
   level: "A1",
-  title: "Pronoms sujets et le verbe être",
+  title: "Le verbe être et les pronoms sujets",
   theory: [
-    { type: "heading", text: "Les pronoms sujets", trans: { en: "Subject pronouns", ar: "ضمائر الفاعل", fa: "ضمایر فاعلی", ti: "ናይ ርእሲ ጸጋ ቃላት", uk: "Особові займенники" } },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "être",
-          rows: [
-            { pronoun: "je", form: "suis" },
-            { pronoun: "tu", form: "es" },
-            { pronoun: "il / elle", form: "est" },
-            { pronoun: "nous", form: "sommes" },
-            { pronoun: "vous", form: "êtes" },
-            { pronoun: "ils / elles", form: "sont" },
-          ],
-        },
+      type: "heading",
+      text: "Utilisation",
+      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
+    },
+    {
+      type: "plain_list",
+      label: "Le verbe être est utilisé pour :",
+      items: [
+        "se présenter. → Je {a}suis{/a} Mme Doucet.",
+        "dire sa nationalité. → Il {a}est{/a} français.",
+        "dire sa profession. → Nous {a}sommes{/a} journalistes.",
+        "décrire une personne ou une chose. → Ils {a}sont{/a} grands. / La salle {a}est{/a} grande.",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "heading",
+      text: "Conjugaison",
+      trans: { en: "Conjugation", ar: "التصريف", fa: "صرف", ti: "ምጽራይ", uk: "Дієвідміна" },
+    },
+    {
+      type: "grid",
+      headers: ["Pronom sujet", "Verbe", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Je", "suis", "brésilien."],
+        ["Tu", "es", "espagnol."],
+        ["Il / Elle / On", "est", "anglais / belge / japonais."],
+        ["Nous", "sommes", "polonais."],
+        ["Vous", "êtes", "chinois."],
+        ["Ils / Elles", "sont", "suisses / allemandes."],
       ],
     },
     {
-      type: "rule",
-      text: "J'utilise ÊTRE pour la nationalité, la profession ou un adjectif.",
-      examples: [
-        { correct: "Je suis française." },
-        { correct: "Il est professeur." },
-        { correct: "Nous sommes étudiants." },
-      ],
+      type: "heading",
+      text: "Prononciation",
+      trans: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", ti: "ኣደማምጻ", uk: "Вимова" },
     },
     {
-      type: "rule",
-      text: "TU = informel (amis, famille) ; VOUS = formel ou pluriel.",
-      examples: [
-        { correct: "Salut ! Tu es française ? (informel)" },
-        { correct: "Bonjour Madame, vous êtes française ? (formel)" },
+      type: "plain_list",
+      items: [
+        "On ne prononce pas le {a}e{/a} final de {a}elle{/a}. → Elle est…",
+        "On fait la liaison. → On est, vous êtes.",
       ],
+      allBullets: true,
+    },
+    {
+      type: "heading",
+      text: "Remarques",
+      trans: { en: "Notes", ar: "ملاحظات", fa: "نکات", ti: "መተሓሳሰቢታት", uk: "Зауваження" },
+    },
+    {
+      type: "highlight",
+      label: "Tu",
+      items: [
+        "pour parler à une personne, dans une situation familière.",
+        "Tu es fatigué ?",
+      ],
+      noBulletItems: [1],
+    },
+    {
+      type: "highlight",
+      label: "Vous",
+      items: [
+        "pour parler à une personne, dans une situation formelle (politesse).",
+        "Vous êtes monsieur Brou ?",
+        "pour parler à plusieurs personnes (pluriel).",
+        "Anne et Bruno, vous êtes français ?",
+      ],
+      noBulletItems: [1, 3],
+    },
+    {
+      type: "highlight",
+      label: "On",
+      items: [
+        "s'emploie à la place de {a}nous{/a}, dans une situation familière.",
+        "Marie et moi, on est belges.",
+      ],
+      noBulletItems: [1],
     },
     {
       type: "note",

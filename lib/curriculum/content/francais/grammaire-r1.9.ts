@@ -4,8 +4,66 @@ export const A1_GR_CEST: GrammarLesson = {
   slug: "a1-gr-cest-il-est",
   code: "R1.9",
   level: "A1",
-  title: "C'est, ce sont, il est ou ils sont ?",
+  title: "Il y a… C'est… Il/Elle est…",
   theory: [
+    // ── Unité 3 — Il y a / C'est / Il est ─────────────────────────────────────
+    {
+      type: "heading",
+      text: "Utilisation",
+      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
+    },
+    {
+      type: "plain_list",
+      label: "On utilise il y a et c'est pour :",
+      items: [
+        "indiquer la présence d'une personne ou d'une chose dans un lieu. → Il y a beaucoup de photos.",
+        "identifier une personne ou une chose. → C'est mon cousin.",
+      ],
+      allBullets: true,
+    },
+
+    {
+      type: "heading",
+      text: "Structures",
+      sub: true,
+      trans: { en: "Structures", ar: "التراكيب", fa: "ساختارها", ti: "አቃቅም", uk: "Структури" },
+    },
+    {
+      type: "highlight",
+      label: "Il y a + nom singulier ou pluriel",
+      items: [
+        "Cette structure indique la présence d'une personne ou d'une chose dans un lieu. Les noms s'emploient avec un déterminant (article).",
+        "Sur la tablette, {a}il y a{/a} des photos.",
+        "Sur la photo, {a}il y a{/a} un garçon.",
+      ],
+      noBulletItems: [1, 2],
+    },
+    {
+      type: "highlight",
+      label: "C'est + nom singulier / Ce sont + nom pluriel",
+      items: [
+        "Ces structures servent à identifier une personne, indiquer une profession ou présenter une chose. Les noms s'emploient avec un déterminant.",
+        "Julien, {a}c'est{/a} l'ami d'Élodie.",
+        "Claire et Paul, {a}ce sont{/a} des informaticiens.",
+        "{a}C'est{/a} un jardin public.",
+      ],
+      noBulletItems: [1, 2, 3],
+    },
+    {
+      type: "highlight",
+      label: "Il/Elle est + nom singulier / Ils/Elles sont + nom pluriel",
+      items: [
+        "Ces structures servent à indiquer une profession. Les noms s'emploient {a}sans{/a} déterminant.",
+        "{a}Elle est{/a} médecin.",
+        "{a}Elles sont{/a} employées de bureau.",
+      ],
+      noBulletItems: [1, 2],
+    },
+    {
+      type: "note",
+      text: "Devant un adjectif masculin : commentaire général → c'est (Regarder des photos, c'est super !). Commentaire sur une chose précise → il est (Ce dessin, il est super !).",
+    },
+
     // ── Intro ──────────────────────────────────────────────────────────────────
     {
       type: "plain_list",
