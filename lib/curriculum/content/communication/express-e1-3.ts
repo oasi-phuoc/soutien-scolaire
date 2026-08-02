@@ -8,7 +8,7 @@ export const EXPRESS_E1_3: CommunicationLesson = {
   id: "E1-3",
   code: "E1.3",
   title: "Inviter à une fête",
-  prerequisiteFrenchSlugs: ["v2-jours-mois-dates", "v2-heure", "a1-conj-l07", "a1-gr-l02"],
+  prerequisiteFrenchSlugs: ["v2-jours-mois-dates", "v2-heure", "a1-conj-l07", "a1-gr-negation-ne-pas"],
   prerequisiteCommIds: ["E1-2"],
   theory: [
     { type: "heading", text: "Inviter à une fête", black: true, trans: t("Inviting someone to a party") },
@@ -19,7 +19,7 @@ export const EXPRESS_E1_3: CommunicationLesson = {
         { code: "V2.1", title: "Jours, mois, dates", href: "/francais/vocabulaire/v2-jours-mois-dates" },
         { code: "V2.2", title: "L'heure", href: "/francais/vocabulaire/v2-heure" },
         { code: "C1.5", title: "Verbes en -er", href: "/francais/conjugaison/a1-conj-l07" },
-        { code: "G4.3", title: "La négation", href: "/francais/grammaire/a1-gr-l02" }
+        { code: "G4.1", title: "La négation ne… pas", href: "/francais/grammaire/a1-gr-negation-ne-pas" }
       ],
     },
     {
