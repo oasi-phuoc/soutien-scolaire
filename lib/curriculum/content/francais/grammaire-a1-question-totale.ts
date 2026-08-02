@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 28 — La question totale (= question fermée) (G3.8) */
+/** Unité 28 — La question fermée (= question totale) (G3.8) */
 export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
   slug: "a1-gr-question-totale",
   code: "G3.8",
   level: "A1",
-  title: "La question totale (question fermée)",
+  title: "La question fermée",
   theory: [
     {
       type: "heading",
@@ -14,7 +14,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "La question totale est une {a}question fermée{/a} : on attend une réponse oui/non (sans autre information).",
+        "La {a}question fermée{/a} (aussi appelée question totale) attend une réponse oui/non (sans autre information).",
         "Réponses possibles : Oui. ; Non. ; Je ne sais pas. ; Si. (pour contredire une question négative) ; Peut-être.",
       ],
       allBullets: true,
@@ -68,12 +68,12 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
         { sentence: "___ il arrête la voiture ?", choices: ["Est-ce qu'", "Est-ce que", "Est que", "Qu'est-ce que"], correctIdx: 0 },
         { sentence: "Forme interrogative (intonation) :", choices: ["Il regarde les papiers ?", "Il regarde les papiers.", "Regarde-t-il les papiers ? Il.", "Est-ce les papiers ?"], correctIdx: 0 },
         { sentence: "Réponse pour contredire une question négative :", choices: ["Si.", "Oui.", "Non.", "Peut-être."], correctIdx: 0 },
-        { sentence: "La question totale est une question ___ .", choices: ["fermée", "ouverte", "partielle", "négative"], correctIdx: 0 },
+        { sentence: "Une question oui/non est une question ___ .", choices: ["fermée", "ouverte", "partielle", "négative"], correctIdx: 0 },
         { sentence: "___ je conduis bien ?", choices: ["Est-ce que", "Est-ce qu'", "Qu'est-ce que", "Est que"], correctIdx: 0 },
         { sentence: "Vous avez les papiers de la voiture ?", choices: ["Oui, monsieur, voilà.", "Où sont-ils ?", "Pourquoi ?", "Combien ?"], correctIdx: 0 },
         { sentence: "À l'écrit, on ajoute ___ .", choices: ["?", ".", "!", "…"], correctIdx: 0 },
         { sentence: "Devant une voyelle : est-ce ___ il vient ?", choices: ["qu'", "que", "qui", "quoi"], correctIdx: 0 },
-        { sentence: "Réponse possible à une question totale :", choices: ["Je ne sais pas.", "À Paris.", "Parce que…", "Trois."], correctIdx: 0 },
+        { sentence: "Réponse possible à une question fermée :", choices: ["Je ne sais pas.", "À Paris.", "Parce que…", "Trois."], correctIdx: 0 },
       ],
     },
     {
