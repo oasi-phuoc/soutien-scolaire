@@ -4,6 +4,7 @@ from scenarios_common import (
     render_ad_coloc, render_email, render_forum, render_postcard,
     render_sms, render_welcome_note,
 )
+from e1_2_unique_family import e1_2_emails, e1_2_messages
 
 
 def build_e1_lessons():
@@ -205,107 +206,11 @@ def _e1_1_emails():
 
 
 def _e1_2_messages():
-    msgs = []
-    families = [
-        ("E-mail à une correspondante", "Julia", "cinq", "mécanicien", 45, "vendeuse", 42, "étudiant", 20, "8", "Léa", "mariée", "grands-parents"),
-        ("SMS familial", "Maman", "quatre", "chauffeur", 50, "infirmière", 47, None, None, "14", "grand-mère", "avec nous", "dimanche"),
-        ("Carte postale familiale", "Carlos", "six", "boulanger", 48, "coiffeuse", 44, "lycéen", 16, "11", "oncle", "en Espagne", "été"),
-        ("Message WhatsApp", "Fatima", "sept", "électricien", 55, "secrétaire", 50, "étudiante", 19, "6", "cousins", "en vacances", "samedi"),
-        ("Note sur le frigo", "Papa", "trois", "plombier", 40, "pharmacienne", 38, None, None, "9", "tante", "à Genève", "ce soir"),
-        ("Journal intime (extrait)", "Lina", "cinq", "professeur", 43, "vendeuse", 41, "étudiant", 22, "5", "bébé", "né en mars", "heureux"),
-        ("Forum « Ma famille »", "Roberto", "quatre", "cuisinier", 46, "serveuse", 43, "collégien", 13, "7", "nièce", "en Italie", "Noël"),
-        ("Fiche scolaire — famille", "Amadou", "six", "médecin", 52, "infirmière", 49, "primaire", 8, "4", "jumeaux", "de 3 ans", "école"),
-        ("Lettre à un ami", "Elena", "cinq", "journaliste", 44, "architecte", 42, "lycéenne", 17, "10", "grand-père", "80 ans", "photo"),
-        ("Annonce famille recomposée", "Stéphane", "quatre", "chauffeur", 39, "coiffeuse", 37, "primaire", 9, "3", "beau-fils", "12 ans", "week-end"),
-        ("Message groupe famille", "Aïcha", "huit", "boucher", 56, "vendeuse", 53, "étudiant", 21, "15", "arrière-grand-mère", "90 ans", "fête"),
-        ("Carte de vœux", "Henri", "trois", "retraité", 70, "retraitée", 68, None, None, None, "petite-fille", "5 ans", "anniversaire"),
-        ("Profil réseau social", "Mia", "cinq", "vétérinaire", 41, "professeure", 39, "bébé", 1, None, "chien", "Max", "animaux"),
-        ("Description photo", "Jonas", "quatre", "peintre", 47, "libraire", 45, "lycéen", 15, "12", "cousin", "en Allemagne", "mariage"),
-        ("Message au prof", "Sofia", "six", "facteur", 51, "coiffeuse", 48, "primaire", 7, "6", "frère", "jumeau", "projet"),
-        ("Petite annonce — baby-sitter", "Nadia", "cinq", "infirmier", 42, "secrétaire", 40, "primaire", 6, "4", "jumeaux", "2 ans", "mercredi"),
-        ("Invitation famille élargie", "Georges", "dix", "agriculteur", 60, "fermière", 58, "adulte", 25, "18", "oncle", "en Grèce", "Pâques"),
-        ("Réponse sondage", "Yasmin", "quatre", "pharmacien", 49, "dentiste", 46, "collégien", 14, "8", "sœur", "à Lausanne", "enquête"),
-        ("Blog personnel", "Théo", "cinq", "menuisier", 45, "vendeuse", 43, "étudiante", 18, "11", "grand-mère", "en maison de retraite", "visite"),
-        ("Message vocal transcrit", "Rosa", "sept", "serveur", 53, "cuisinière", 50, "lycéen", 16, "13", "neveu", "6 mois", "baptême"),
-    ]
-    for header, writer, count, dad_job, dad_age, mom_job, mom_age, sib_role, sib_age, sib_age2, other, other_info, occasion in families:
-        sib_line = f"Mon frère/mon enfant a {sib_age} ans." if sib_age else ""
-        text = f"""{header}
-
-Chère amie, chers amis,
-Je te présente ma famille. Nous sommes {count} à la maison.
-Mon père a {dad_age} ans. Il est {dad_job}.
-Ma mère a {mom_age} ans. Elle est {mom_job}.
-{sib_line}
-J'ai aussi {other}. {other_info.capitalize()}.
-{occasion.capitalize()} — c'est un moment important pour nous.
-Et toi, tu as une grande famille ?
-{writer}"""
-        count_opts = {"trois": "Trois", "quatre": "Quatre", "cinq": "Cinq", "six": "Six", "sept": "Sept", "huit": "Huit", "neuf": "Neuf", "dix": "Dix"}
-        wrong_counts = [v for k, v in count_opts.items() if k != count][:2]
-        msgs.append({"text": text, "questions": [
-            Q("Combien de personnes à la maison ?", count_opts.get(count, count.capitalize()), wrong_counts[0], wrong_counts[1], f"Nous sommes _________ à la maison.", count, f"Ils sont {count} à la maison.", 0),
-            Q("Quelle est la profession du père ?", dad_job.capitalize(), "Pilote", "Avocat", f"Mon père est _________.", dad_job, f"Le père est {dad_job}.", 0, prof=True),
-            Q("Quel âge a la mère ?", f"{mom_age} ans", f"{mom_age+10} ans", f"{mom_age-10} ans", f"Ma mère a _________ ans.", str(mom_age), f"La mère a {mom_age} ans.", 0),
-            Q("Quelle est la profession de la mère ?", mom_job.capitalize(), "Pilote", "Mécanicien", f"Ma mère est _________.", mom_job, f"La mère est {mom_job}.", 0, prof=True),
-            Q(f"Qui est {other} ?", other.capitalize(), "Un voisin", "Un prof", f"J'ai aussi un(e) _________.", other, f"{other.capitalize()} fait partie de la famille.", 0),
-            Q("Quel événement est mentionné ?", occasion.capitalize(), "Un examen", "Un voyage seul", f"_________ — c'est un moment important.", occasion.split()[0], f"L'événement est {occasion}.", 0),
-            Q("Quel âge a le père ?", f"{dad_age} ans", f"{dad_age+10} ans", f"{dad_age-10} ans", f"Mon père a _________ ans.", str(dad_age), f"Le père a {dad_age} ans.", 0),
-        ]})
-    assert len(msgs) == 20
-    return msgs
+    return e1_2_messages()
 
 
 def _e1_2_emails():
-    emails = []
-    specs = [
-        ("Amina Benali", "Ma famille", "six", "chauffeur de taxi", 52, "vendeuse", 48, "marié", "2 ans", "10", "75"),
-        ("Lucas Martin", "Ma famille en Suisse", "quatre", "mécanicien", 45, "infirmière", 42, "célibataire", None, "20", None),
-        ("Nina Rossi", "Les miens", "cinq", "boulanger", 50, "coiffeuse", 47, "étudiante", None, "18", "70"),
-        ("Paul Garcia", "Famille Garcia", "sept", "électricien", 55, "secrétaire", 52, "marié", "1 an", "15", "80"),
-        ("Sara Kim", "Chez nous", "trois", "professeur", 48, "pharmacienne", 45, None, None, None, "68"),
-        ("Tom Weber", "Ma famille", "cinq", "plombier", 46, "vendeuse", 44, "primaire", None, "8", "72"),
-        ("Emma Dubois", "Nous sommes cinq", "cinq", "cuisinier", 47, "serveuse", 43, "lycéenne", None, "16", None),
-        ("Hugo Blanc", "Famille", "quatre", "journaliste", 49, "architecte", 46, "collégien", None, "13", None),
-        ("Léa Costa", "Ma famille au Portugal", "six", "chauffeur", 51, "coiffeuse", 48, "étudiant", None, "19", "78"),
-        ("Marc Singh", "Chez les Singh", "huit", "médecin", 58, "infirmière", 55, "bébé", "6 mois", "22", "85"),
-        ("Julie Petit", "Ma tribu", "cinq", "facteur", 50, "libraire", 47, "primaire", None, "7", None),
-        ("Omar Hassan", "Famille élargie", "neuf", "serveur", 54, "cuisinière", 51, "marié", "3 ans", "17", "82"),
-        ("Clara Rossi", "La famille Rossi", "quatre", "menuisier", 47, "vendeuse", 44, "lycéen", None, "15", None),
-        ("Yann Leroy", "Chez nous à Lyon", "six", "peintre", 52, "dentiste", 49, "étudiante", None, "21", "76"),
-        ("Inès Moreau", "Ma famille espagnole", "cinq", "agriculteur", 56, "fermière", 53, "primaire", None, "9", "88"),
-        ("David Kim", "Famille Kim", "quatre", "ingénieur", 48, "professeure", 45, "bébé", "1 an", None, None),
-        ("Maya Patel", "Chez les Patel", "sept", "vétérinaire", 50, "secrétaire", 47, "collégien", None, "14", "74"),
-        ("Antoine Blanc", "Notre famille", "cinq", "boucher", 49, "coiffeuse", 46, "lycéen", None, "16", None),
-        ("Salma Ben", "Ma grande famille", "dix", "pharmacien", 60, "vendeuse", 57, "marié", "4 ans", "23", "90"),
-        ("Victor Pop", "Famille Pop", "quatre", "professeur", 53, "infirmière", 50, "étudiant", None, "18", "79"),
-    ]
-    for sender, subject, count, dad_job, dad_age, mom_job, mom_age, sib_status, baby_age, sib_age, grandma_age in specs:
-        lines = [
-            f"Merci pour ton message ! Je te présente ma famille.",
-            f"Nous sommes {count} à la maison.",
-            f"Mon père a {dad_age} ans. Il est {dad_job}.",
-            f"Ma mère a {mom_age} ans. Elle est {mom_job}.",
-        ]
-        if sib_age:
-            lines.append(f"Mon frère/mon enfant a {sib_age} ans. Il/Elle est {sib_status}.")
-        if baby_age:
-            lines.append(f"Il/Elle a un bébé de {baby_age}.")
-        if grandma_age:
-            lines.append(f"Ma grand-mère habite avec nous. Elle a {grandma_age} ans.")
-        lines.append("Et toi, tu as des frères et des sœurs ?")
-        qs = [
-            Q("Combien de personnes à la maison ?", count.capitalize(), "Deux", "Une", f"Nous sommes _________ à la maison.", count, f"Ils sont {count} à la maison.", 0),
-            Q("Quelle est la profession du père ?", dad_job.capitalize(), "Pilote", "Avocat", f"Mon père est _________.", dad_job, f"Le père est {dad_job}.", 0, prof=True),
-            Q("Quel âge a le père ?", f"{dad_age} ans", f"{dad_age+10} ans", f"{dad_age-10} ans", f"Mon père a _________ ans.", str(dad_age), f"Le père a {dad_age} ans.", 0),
-            Q("Quelle est la profession de la mère ?", mom_job.capitalize(), "Pilote", "Mécanicien", f"Ma mère est _________.", mom_job, f"La mère est {mom_job}.", 0, prof=True),
-            Q("Quel âge a la mère ?", f"{mom_age} ans", f"{mom_age+10} ans", f"{mom_age-10} ans", f"Ma mère a _________ ans.", str(mom_age), f"La mère a {mom_age} ans.", 0),
-            Q("La grand-mère habite-t-elle avec eux ?", "Oui" if grandma_age else "Non", "Non" if grandma_age else "Oui", "On ne sait pas", "Ma grand-mère _________ avec nous.", "habite" if grandma_age else "n'habite pas", "La grand-mère habite avec eux." if grandma_age else "La grand-mère n'habite pas avec eux.", 0),
-            Q("Le texte pose-t-il une question à la fin ?", "Oui", "Non", "On ne sait pas", "Et toi, tu as des _________ et des sœurs ?", "frères", "Le texte pose une question.", 0),
-        ]
-        emails.append(render_email(sender, subject, lines, qs))
-    assert len(emails) == 20
-    return emails
+    return e1_2_emails()
 
 
 def _e1_3_messages():

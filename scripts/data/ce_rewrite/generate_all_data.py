@@ -5,7 +5,7 @@ Each scenario = distinct genre/situation with auto-generated coherent questions.
 """
 from __future__ import annotations
 
-import json
+import pprint
 import re
 import sys
 from pathlib import Path
@@ -19,15 +19,18 @@ EMPTY_IMG = ["", "", ""]
 
 PROFESSION_IMG = {
     "agriculteur": "agriculteur", "architecte": "architecte", "avocat": "avocat",
+    "avocate": "avocat",
     "bibliothécaire": "libraire", "boucher": "boucher", "boulanger": "boulanger",
     "boulangère": "boulanger", "chanteur": "chanteur", "chanteuse": "chanteuse",
     "chauffeur": "chauffeur", "coiffeur": "coiffeur", "coiffeuse": "coiffeuse",
     "comptable": "secrétaire", "cuisinier": "cuisinier", "cuisinière": "cuisinier",
     "dentiste": "dentiste", "docteur": "docteur", "électricien": "électricien",
-    "facteur": "facteur", "fermier": "fermier", "fermière": "fermier",
+    "facteur": "facteur", "factrice": "facteur", "fermier": "fermier", "fermière": "fermier",
     "infirmier": "infirmier", "infirmière": "infirmier", "ingénieur": "ingénieur",
-    "ingénieure": "ingénieur", "jardinier": "jardinier", "journaliste": "journaliste",
+    "ingénieure": "ingénieur", "jardinier": "jardinier", "jardinière": "jardinier",
+    "journaliste": "journaliste",
     "libraire": "libraire", "maçon": "maçon", "mécanicien": "mécanicien",
+    "mécanicienne": "mécanicien",
     "médecin": "médecin", "menuisier": "menuisier", "peintre": "peintre",
     "pharmacien": "pharmacien", "pharmacienne": "pharmacien", "pilote": "pilote",
     "plombier": "plombier", "policier": "policier", "pompier": "pompier",
@@ -84,19 +87,20 @@ def transport_img(choices: list[str]) -> list[str]:
 def write_data_py(level: int, lessons: dict) -> None:
     path = OUT_DIR / f"e{level}_data.py"
     lines = ['"""Auto-generated CE data."""\n', "LESSONS = "]
-    lines.append(json.dumps(lessons, ensure_ascii=False, indent=2))
+    lines.append(pprint.pformat(lessons, sort_dicts=False, width=120))
     lines.append("\n")
     path.write_text("".join(lines), encoding="utf-8")
     print(f"Wrote {path} ({path.stat().st_size} bytes)")
 
 
-# Import scenario modules
-from scenarios_e1 import build_e1_lessons  # noqa: E402
-from scenarios_e2 import build_e2_lessons  # noqa: E402
-from scenarios_e3 import build_e3_lessons  # noqa: E402
-from scenarios_e4 import build_e4_lessons  # noqa: E402
+def builders():
+    # Imported lazily so scenario modules can safely import Q from this file.
+    from scenarios_e1 import build_e1_lessons  # noqa: E402
+    from scenarios_e2 import build_e2_lessons  # noqa: E402
+    from scenarios_e3 import build_e3_lessons  # noqa: E402
+    from scenarios_e4 import build_e4_lessons  # noqa: E402
 
-BUILDERS = {1: build_e1_lessons, 2: build_e2_lessons, 3: build_e3_lessons, 4: build_e4_lessons}
+    return {1: build_e1_lessons, 2: build_e2_lessons, 3: build_e3_lessons, 4: build_e4_lessons}
 
 
 def main():
@@ -105,8 +109,9 @@ def main():
     p.add_argument("level", nargs="?", default="all")
     args = p.parse_args()
     levels = [1, 2, 3, 4] if args.level == "all" else [int(args.level)]
+    scenario_builders = builders()
     for lv in levels:
-        lessons = BUILDERS[lv]()
+        lessons = scenario_builders[lv]()
         for k, v in lessons.items():
             assert len(v["messages"]) == 20, f"{k} messages: {len(v['messages'])}"
             assert len(v["emails"]) == 20, f"{k} emails: {len(v['emails'])}"
