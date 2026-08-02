@@ -304,6 +304,9 @@ function mathExercisePrintItem(
     id: String(ex.id),
     label: `${ex.id}. ${ex.label}`,
     defaultPoints: ex.maxPoints,
+    supportsPrintLayout: ex.printQuestions != null,
+    defaultQuestionCount: ex.printQuestions,
+    defaultColumns: ex.printColumns,
     preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} />,
     correctionPreview: (
       <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} correction />

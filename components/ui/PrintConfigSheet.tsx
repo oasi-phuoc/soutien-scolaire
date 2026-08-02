@@ -80,6 +80,8 @@ export interface PrintExercise {
    * Affiche les options « Nombre de questions » / « Nombre de colonnes ».
    */
   defaultQuestionCount?: number;
+  /** Colonnes par défaut (mise en page actuelle de l'exercice). */
+  defaultColumns?: PrintExerciseColumns;
   /** Active les options de mise en page (questions / colonnes) pour cet exercice. */
   supportsPrintLayout?: boolean;
 }
@@ -715,7 +717,7 @@ export function PrintConfigSheet({
       included: true,
       occurrences: 1,
       questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
-      columns: 1 as PrintExerciseColumns,
+      columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
       spacing: 3,
       points: Math.max(1, ex.defaultPoints ?? 1),
     }))

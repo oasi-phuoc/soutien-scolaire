@@ -303,7 +303,7 @@ export function ImpressionHubClient() {
         included: true,
         occurrences: 1,
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
-        columns: 1 as PrintExerciseColumns,
+        columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
         spacing: 3,
         points: Math.max(1, ex.defaultPoints ?? 1),
       })),

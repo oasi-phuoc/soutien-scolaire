@@ -14,8 +14,16 @@ import {
   placementShuffle as shuffle,
   placementRandom,
 } from "@/components/math/placement/placement-print-rng";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+
+/** Classes de liste selon les colonnes d'impression (1 = pile). */
+function printColsClass(columns: 1 | 2 | 3, stacked = "space-y-3"): string {
+  if (columns === 2) return "grid grid-cols-2 items-start gap-x-4 gap-y-3";
+  if (columns === 3) return "grid grid-cols-3 items-start gap-x-3 gap-y-3";
+  return stacked;
+}
 
 function parseNum(input: string): number {
   return parseFloat(input.replace(/\s/g, "").replace(",", "."));
@@ -97,7 +105,7 @@ function GeoRow({ label, unit, value, answer, onChange, validated }: {
   const correct = fmtMeasure(value);
   return (
     <div className="flex items-center gap-2">
-      <span className="w-24 text-sm text-[var(--color-text-secondary)]">{label} =</span>
+      <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">{label} =</span>
       <CorrectionInput value={answer} onChange={onChange} correct={correct} validated={validated} width="w-20" />
       <span className="text-sm text-[var(--color-text-secondary)]">{unit}</span>
     </div>
@@ -213,45 +221,42 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
   );
 }
 
-export function Exercise17({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const data = useMemo(() => {
-    const s1 = genSeq17Int();
-    const s2 = genSeq17Dec();
-    return { s1, s2 };
+export function Exercise17({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(2);
+  const rows = useMemo(
+    () => Array.from({ length: questionCount }, (_, i) =>
+      i % 2 === 0 ? { ...genSeq17Int(), isInt: true } : { ...genSeq17Dec(), isInt: false }),
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  [exerciseKey, questionCount]);
 
-  const [ans1, setAns1] = useState<string[]>(["", "", "", ""]);
-  const [ans2, setAns2] = useState<string[]>(["", "", "", ""]);
+  const [answers, setAnswers] = useState<string[][]>(() => rows.map(() => ["", "", "", ""]));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
-    const { s1, s2 } = data;
     let pts = 0;
-    // Build blank positions for s1
-    const blanks1 = s1.vals.map((_, i) => i !== s1.visPos[0] && i !== s1.visPos[1]);
-    const blanksVals1 = s1.vals.filter((_, i) => blanks1[i]);
-    const all1 = blanksVals1.every((v, i) => matchInt(ans1[i] ?? "", v));
-    if (all1) pts += 1.5;
-    const blanks2 = s2.vals.map((_, i) => i !== s2.visPos[0] && i !== s2.visPos[1]);
-    const blanksVals2 = s2.vals.filter((_, i) => blanks2[i]);
-    const all2 = blanksVals2.every((v, i) => matchNum(ans2[i] ?? "", v, 0.001));
-    if (all2) pts += 1.5;
-    onValidated(pts, 3);
+    rows.forEach((row, r) => {
+      const blankVals = row.vals.filter((_, i) => i !== row.visPos[0] && i !== row.visPos[1]);
+      const all = blankVals.every((v, k) => row.isInt
+        ? matchInt(answers[r]?.[k] ?? "", v)
+        : matchNum(answers[r]?.[k] ?? "", v, 0.001));
+      if (all) pts += 1.5;
+    });
+    onValidated(pts, rows.length * 1.5);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
-      <div className="flex items-center gap-2">
-        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <SeqRow vals={data.s1.vals} visPos={data.s1.visPos} isInt answers={ans1}
-          onChange={(i, v) => setAns1(p => { const n = [...p]; n[i] = v; return n; })} validated={validated} />
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <SeqRow vals={data.s2.vals} visPos={data.s2.visPos} isInt={false} answers={ans2}
-          onChange={(i, v) => setAns2(p => { const n = [...p]; n[i] = v; return n; })} validated={validated} />
+      <div className={forPrint ? printColsClass(columns, "space-y-5") : "space-y-5"}>
+        {rows.map((row, r) => (
+          <div key={r} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{r + 1}.</span>
+            <SeqRow vals={row.vals} visPos={row.visPos} isInt={row.isInt} answers={answers[r] ?? []}
+              onChange={(k, v) => setAnswers(p => p.map((rowAns, ri) =>
+                ri === r ? rowAns.map((a, j) => j === k ? v : a) : rowAns))}
+              validated={validated} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -271,14 +276,13 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
     correctOrder.every((v, i) => selected[i] === v)
   );
   const sep = desc ? ">" : "<";
-  const blankCount = correctOrder?.length ?? numbers.length;
 
   const chipBase = `${chipW} flex h-10 items-center justify-center rounded-lg border px-1.5 text-base font-mono font-bold transition-colors `;
 
   if (forPrint) {
-    const blankValues: Array<number | null> = validated && correctOrder
-      ? correctOrder
-      : Array.from({ length: blankCount }, () => null);
+    // Lignes de réponse : mêmes traits que l'Exercise17 (CorrectionInput compact),
+    // corrigé standard ambre (réponse attendue bold text-amber-600).
+    const blanks = correctOrder ?? numbers;
     return (
       <div className="space-y-3">
         <div className="flex flex-wrap gap-2">
@@ -297,12 +301,11 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
           {numberLabel && (
             <span className="mr-1 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{numberLabel}</span>
           )}
-          {blankValues.map((n, bi) => (
+          {blanks.map((n, bi) => (
             <React.Fragment key={bi}>
-              <span className="inline-flex min-w-[4rem] items-end justify-center border-b-2 border-black px-1 pb-0.5 font-mono text-sm font-bold text-[var(--color-text-primary)]">
-                {n !== null ? fmt(n) : "\u00a0"}
-              </span>
-              {bi < blankValues.length - 1 && (
+              <CorrectionInput value="" onChange={() => {}} correct={fmt(n)}
+                validated={validated} width={chipW} compact />
+              {bi < blanks.length - 1 && (
                 <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>
               )}
             </React.Fragment>
@@ -373,63 +376,69 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
   );
 }
 
+type SortSeries = { numbers: number[]; correctOrder: number[]; desc: boolean; isInt: boolean };
+
+// Série entiers : 3 nombres à 6 chiffres + 1 à 5 chiffres, ordre croissant.
+//   n1 & n2 partagent les 2 premiers chiffres ; n1 & n3 les 3 derniers.
+function genSortIntSeries(): SortSeries {
+  const top2 = randInt(10, 99);
+  let top2b = randInt(10, 99);
+  while (top2b === top2) top2b = randInt(10, 99);
+  const bot3 = randInt(100, 999);       // shared last 3 digits for n1 & n3
+  let bot3b = randInt(100, 999);        // last 3 digits for n2
+  while (bot3b === bot3) bot3b = randInt(100, 999);
+  const n1 = top2 * 10000 + randInt(0, 9) * 1000 + bot3;
+  const n2 = top2 * 10000 + randInt(0, 9) * 1000 + bot3b;
+  const n3 = top2b * 10000 + randInt(0, 9) * 1000 + bot3;
+  const n4 = randInt(10000, 99999);
+  const numbers = shuffle([n1, n2, n3, n4]);
+  return { numbers, correctOrder: [...numbers].sort((a, b) => a - b), desc: false, isInt: true };
+}
+
+// Série décimaux : même partie entière (10–49), décimales variées, ordre décroissant.
+// Contient une paire type 44,9 / 44,09 (même chiffre en dixièmes puis centièmes).
+function genSortDecSeries(): SortSeries {
+  const intPart = randInt(10, 49);
+  const tenths = randInt(1, 9);
+  const decsBase = [
+    parseFloat((intPart + tenths / 10).toFixed(1)),
+    parseFloat((intPart + tenths / 100).toFixed(2)),
+  ];
+  while (decsBase.length < 4) {
+    const decimals = placementRandom() < 0.5
+      ? randInt(1, 9) * 10
+      : randInt(11, 99);
+    if (decimals % 10 === 0 && decimals / 10 === tenths) continue;
+    const candidate = parseFloat((intPart + decimals / 100).toFixed(decimals % 10 === 0 ? 1 : 2));
+    if (!decsBase.includes(candidate)) decsBase.push(candidate);
+  }
+  const numbers = shuffle(decsBase);
+  return { numbers, correctOrder: [...numbers].sort((a, b) => b - a), desc: true, isInt: false };
+}
+
 export function Exercise18({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
-  const data = useMemo(() => {
-    // Series 1: 3 six-digit numbers + 1 five-digit number.
-    //   n1 & n2 share first 2 digits.
-    //   n1 & n3 share last 3 digits.
-    const top2 = randInt(10, 99);
-    let top2b = randInt(10, 99);
-    while (top2b === top2) top2b = randInt(10, 99);
-    const bot3 = randInt(100, 999);       // shared last 3 digits for n1 & n3
-    let bot3b = randInt(100, 999);        // last 3 digits for n2
-    while (bot3b === bot3) bot3b = randInt(100, 999);
-    const n1 = top2 * 10000 + randInt(0, 9) * 1000 + bot3;
-    const n2 = top2 * 10000 + randInt(0, 9) * 1000 + bot3b;
-    const n3 = top2b * 10000 + randInt(0, 9) * 1000 + bot3;
-    const n4 = randInt(10000, 99999);
-    const ints = shuffle([n1, n2, n3, n4]);
-    const sortedInts = [...ints].sort((a, b) => a - b);
-
-    // Series 2: 4 decimals, same integer part (10–49), varying decimals.
-    // Include a pair like 44,9 and 44,09: same digit, once in tenths and once in hundredths.
-    const intPart = randInt(10, 49);
-    const tenths = randInt(1, 9);
-    const decsBase = [
-      parseFloat((intPart + tenths / 10).toFixed(1)),
-      parseFloat((intPart + tenths / 100).toFixed(2)),
-    ];
-    while (decsBase.length < 4) {
-      const decimals = placementRandom() < 0.5
-        ? randInt(1, 9) * 10
-        : randInt(11, 99);
-      if (decimals % 10 === 0 && decimals / 10 === tenths) continue;
-      const candidate = parseFloat((intPart + decimals / 100).toFixed(decimals % 10 === 0 ? 1 : 2));
-      if (!decsBase.includes(candidate)) decsBase.push(candidate);
-    }
-    const decs = shuffle(decsBase);
-    const sortedDecs = [...decs].sort((a, b) => a - b);
-    const sortedDecsDesc = [...sortedDecs].reverse();
-
-    return { ints, sortedInts, decs, sortedDecs, sortedDecsDesc };
+  const { questionCount, columns } = usePrintQuestionLayout(2);
+  const series = useMemo(
+    () => Array.from({ length: questionCount }, (_, i) =>
+      i % 2 === 0 ? genSortIntSeries() : genSortDecSeries()),
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  [exerciseKey, questionCount]);
 
-  const [sel1, setSel1] = useState<number[]>([]);
-  const [sel2, setSel2] = useState<number[]>([]);
+  const [sels, setSels] = useState<number[][]>(() => series.map(() => []));
 
-  const toggle = (setter: React.Dispatch<React.SetStateAction<number[]>>) => (n: number) => {
-    setter(prev => prev.includes(n) ? prev.filter(x => x !== n) : [...prev, n]);
+  const toggle = (idx: number) => (n: number) => {
+    setSels(prev => prev.map((sel, i) =>
+      i === idx ? (sel.includes(n) ? sel.filter(x => x !== n) : [...sel, n]) : sel));
   };
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    const ok1 = sel1.length === data.sortedInts.length && data.sortedInts.every((v, i) => sel1[i] === v);
-    if (ok1) pts++;
-    const ok2 = sel2.length === data.sortedDecsDesc.length && data.sortedDecsDesc.every((v, i) => sel2[i] === v);
-    if (ok2) pts++;
-    onValidated(pts, 2);
+    series.forEach((s, i) => {
+      const sel = sels[i] ?? [];
+      if (sel.length === s.correctOrder.length && s.correctOrder.every((v, k) => sel[k] === v)) pts++;
+    });
+    onValidated(pts, series.length);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fmtDec2 = (n: number) => fmtDec(n, String(n).includes(".") && String(n).split(".")[1]!.length === 2 ? 2 : 1);
@@ -437,17 +446,20 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre demandée.</p>
-      <div className="space-y-3">
-        <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
-        <OrderingChips numbers={data.ints} selected={sel1} onToggle={toggle(setSel1)}
-          validated={validated} fmt={(n) => String(n)} chipW="w-[4.9rem]" numberLabel="1."
-          correctOrder={data.sortedInts} forPrint={forPrint} />
-      </div>
-      <div className="space-y-3">
-        <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
-        <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
-          validated={validated} fmt={fmtDec2} desc chipW="w-[4.9rem]" numberLabel="2."
-          correctOrder={data.sortedDecsDesc} forPrint={forPrint} />
+      <div className={forPrint ? printColsClass(columns, "space-y-5") : "space-y-5"}>
+        {series.map((s, i) => (
+          <div key={i} className="space-y-3">
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              {s.desc
+                ? "Dans l'ordre décroissant (plus grand au plus petit)"
+                : "Dans l'ordre croissant (plus petit au plus grand)"}
+            </p>
+            <OrderingChips numbers={s.numbers} selected={sels[i] ?? []} onToggle={toggle(i)}
+              validated={validated} fmt={s.isInt ? (n) => String(n) : fmtDec2} desc={s.desc}
+              chipW="w-[4.9rem]" numberLabel={`${i + 1}.`}
+              correctOrder={s.correctOrder} forPrint={forPrint} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -490,6 +502,32 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   const correctResultDigits = decStrToDigits(fmtDec(Math.round(resNum * 100) / 100, 2));
   const correctADigits = decStrToDigits(aStr);
   const correctBDigits = decStrToDigits(bStr);
+
+  // Retenues attendues (même convention que computeDecCarries d'A5) :
+  // addition → valeur de la retenue ; soustraction → chiffre du minuende décrémenté.
+  const expectedCarries: (number | null)[] = (() => {
+    const row: (number | null)[] = [null, null, null, null, null];
+    if (op === "+") {
+      let c = 0;
+      for (let i = 4; i >= 0; i--) {
+        const s = (correctADigits[i] ?? 0) + (correctBDigits[i] ?? 0) + c;
+        c = Math.floor(s / 10);
+        if (i > 0 && c > 0) row[i - 1] = c;
+      }
+    } else {
+      let borrow = 0;
+      for (let i = 4; i >= 0; i--) {
+        const d = (correctADigits[i] ?? 0) - (correctBDigits[i] ?? 0) - borrow;
+        if (d < 0) {
+          borrow = 1;
+          if (i > 0) row[i - 1] = (correctADigits[i - 1] ?? 0) > 0 ? (correctADigits[i - 1] ?? 0) - 1 : 9;
+        } else {
+          borrow = 0;
+        }
+      }
+    }
+    return row;
+  })();
 
   const commaCell = (key: string) => (
     <td key={key} className="w-8 text-center">
@@ -554,14 +592,31 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
     );
   };
 
-  const carryInput = (col: number) => (
-    <td key={col} className="w-8 p-0.5 text-center">
-      <input type="text" inputMode="numeric" maxLength={1} value={carries[col] ?? ""}
-        disabled={validated}
-        onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-        className={carryStyle} />
-    </td>
-  );
+  const carryInput = (col: number) => {
+    const val = (carries[col] ?? "").trim();
+    if (validated) {
+      const expected = expectedCarries[col] ?? null;
+      const expStr = expected === null ? "" : String(expected);
+      const isOk = expected === null ? (val === "" || val === "0") : val === expStr;
+      return (
+        <td key={col} className="w-8 p-0.5 text-center">
+          <div className={`flex h-5 w-8 items-center justify-center rounded-none border-0 border-b-2 font-mono text-[10px] ${
+            isOk ? "border-[var(--color-accent-alg)]/30 text-orange-500" : "border-amber-500 font-bold text-amber-600"
+          }`}>
+            {isOk ? val : expStr}
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={col} className="w-8 p-0.5 text-center">
+        <input type="text" inputMode="numeric" maxLength={1} value={carries[col] ?? ""}
+          disabled={validated}
+          onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          className={carryStyle} />
+      </td>
+    );
+  };
 
   return (
     <div className="p-1">
@@ -614,7 +669,8 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   );
 }
 
-export function Exercise19({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise19({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(4);
   const data = useMemo(() => {
     function mkQ(a: number, b: number, op: "+" | "-", decA: number, decB: number) {
       const aStr = fmtDec(a, decA); const bStr = fmtDec(b, decB);
@@ -622,29 +678,38 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
       const resultDigits = decStrToDigits(fmtDec(Math.round(result * 100) / 100, 2));
       return { aStr, bStr, op, result, resultDigits };
     }
-    const a1 = randInt(10, 90) + randInt(1, 99) / 100;
-    const b1 = randInt(10, 90) + randInt(1, 99) / 100;
-    const a2 = randInt(10, 90) + randInt(1, 9) / 10;
-    const b2 = randInt(1, 9) + randInt(1, 99) / 100;
-    let a3 = randInt(20, 90) + randInt(1, 99) / 100;
-    let b3 = randInt(5, 40) + randInt(1, 99) / 100;
-    if (b3 > a3) [a3, b3] = [b3, a3];
-    let a4 = randInt(20, 90) + randInt(1, 9) / 10;
-    const b4 = randInt(1, 9) + randInt(1, 99) / 100;
-    if (b4 > a4) { a4 += 10; }
-    return [
-      mkQ(Math.round(a1 * 100) / 100, Math.round(b1 * 100) / 100, "+", 2, 2),
-      mkQ(Math.round(a2 * 10) / 10, Math.round(b2 * 100) / 100, "+", 1, 2),
-      mkQ(Math.round(a3 * 100) / 100, Math.round(b3 * 100) / 100, "-", 2, 2),
-      mkQ(Math.round(a4 * 10) / 10, Math.round(b4 * 100) / 100, "-", 1, 2),
+    const makers = [
+      () => {
+        const a = randInt(10, 90) + randInt(1, 99) / 100;
+        const b = randInt(10, 90) + randInt(1, 99) / 100;
+        return mkQ(Math.round(a * 100) / 100, Math.round(b * 100) / 100, "+", 2, 2);
+      },
+      () => {
+        const a = randInt(10, 90) + randInt(1, 9) / 10;
+        const b = randInt(1, 9) + randInt(1, 99) / 100;
+        return mkQ(Math.round(a * 10) / 10, Math.round(b * 100) / 100, "+", 1, 2);
+      },
+      () => {
+        let a = randInt(20, 90) + randInt(1, 99) / 100;
+        let b = randInt(5, 40) + randInt(1, 99) / 100;
+        if (b > a) [a, b] = [b, a];
+        return mkQ(Math.round(a * 100) / 100, Math.round(b * 100) / 100, "-", 2, 2);
+      },
+      () => {
+        let a = randInt(20, 90) + randInt(1, 9) / 10;
+        const b = randInt(1, 9) + randInt(1, 99) / 100;
+        if (b > a) { a += 10; }
+        return mkQ(Math.round(a * 10) / 10, Math.round(b * 100) / 100, "-", 1, 2);
+      },
     ];
+    return Array.from({ length: questionCount }, (_, i) => makers[i % makers.length]!());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [aAnswers, setAAnswers] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
-  const [bAnswers, setBAnswers] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
-  const [resultAnswers, setResultAnswers] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
-  const [carries, setCarries] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
+  const [aAnswers, setAAnswers] = useState<string[][]>(() => data.map(() => Array(5).fill("")));
+  const [bAnswers, setBAnswers] = useState<string[][]>(() => data.map(() => Array(5).fill("")));
+  const [resultAnswers, setResultAnswers] = useState<string[][]>(() => data.map(() => Array(5).fill("")));
+  const [carries, setCarries] = useState<string[][]>(() => data.map(() => Array(5).fill("")));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -659,13 +724,13 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
       });
       if (ok) pts++;
     });
-    onValidated(pts, 4);
+    onValidated(pts, data.length);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les calculs en colonnes." />
-      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-start gap-x-4 gap-y-3"}>
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
@@ -720,6 +785,21 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
   const partial1Digits = String(aInt * onesDigit).padStart(4, "0").slice(-4).split("").map(Number);
   const partial2Digits = String(aInt * tensDigit).padStart(3, "0").slice(-3).split("").map(Number);
   const totalDigits = String(aInt * bInt).padStart(4, "0").slice(-4).split("").map(Number);
+
+  // Retenues attendues pour a × chiffre (même convention que GenericModuleContent "×") :
+  // la retenue produite en colonne i s'écrit au-dessus de la colonne i-1.
+  const mulCarryRow = (mult: number): (number | null)[] => {
+    const row: (number | null)[] = [null, null, null, null];
+    let c = 0;
+    for (let i = 3; i >= 0; i--) {
+      const p = ad[i]! * mult + c;
+      c = Math.floor(p / 10);
+      if (i > 0 && c > 0) row[i - 1] = c;
+    }
+    return row;
+  };
+  const r1Expected = mulCarryRow(onesDigit);
+  const r2Expected = mulCarryRow(tensDigit);
   const inputCls = "h-8 w-8 rounded-none border-0 border-b-2 text-center font-mono text-sm outline-none transition-colors border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
   const carryCls = "h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
 
@@ -750,15 +830,32 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
       </td>
     );
   };
-  const carryIn = (base: number, col: number) => (
-    <td key={col} className="w-8 text-center p-0.5">
-      <input type="text" inputMode="numeric" maxLength={1}
-        value={cells[base + col] ?? ""}
-        disabled={validated}
-        onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-        className={carryCls} />
-    </td>
-  );
+  const carryIn = (base: number, col: number, expectedRow: (number | null)[]) => {
+    const val = (cells[base + col] ?? "").trim();
+    if (validated) {
+      const expected = expectedRow[col] ?? null;
+      const expStr = expected === null ? "" : String(expected);
+      const isOk = expected === null ? (val === "" || val === "0") : val === expStr;
+      return (
+        <td key={col} className="w-8 text-center p-0.5">
+          <div className={`flex h-5 w-8 items-center justify-center rounded-none border-0 border-b-2 font-mono text-[10px] ${
+            isOk ? "border-[var(--color-accent-alg)]/30 text-orange-500" : "border-amber-500 font-bold text-amber-600"
+          }`}>
+            {isOk ? val : expStr}
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={col} className="w-8 text-center p-0.5">
+        <input type="text" inputMode="numeric" maxLength={1}
+          value={cells[base + col] ?? ""}
+          disabled={validated}
+          onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          className={carryCls} />
+      </td>
+    );
+  };
   const _pre = (digits: number[], col: number, firstNz: number) => (
     <td key={col} className="w-8 text-center p-0.5">
       <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
@@ -808,11 +905,11 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
         <tbody>
           <tr>
             <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
-            {[0,1,2,3].map(col => carryIn(8, col))}
+            {[0,1,2,3].map(col => carryIn(8, col, r2Expected))}
           </tr>
           <tr>
             <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
-            {[0,1,2,3].map(col => carryIn(12, col))}
+            {[0,1,2,3].map(col => carryIn(12, col, r1Expected))}
           </tr>
           <tr>
             <td />
@@ -866,9 +963,10 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
 
 // ── Exercise 20 — Column multiplication with decimals (A5.5 Ex7 layout) ──────
 
-export function Exercise20({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise20({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(2);
   const data = useMemo(() => {
-    return Array.from({ length: 2 }, () => {
+    return Array.from({ length: questionCount }, () => {
       const aDecimals = placementRandom() < 0.5 ? 1 : 2;
       let bInt: number;
       do { bInt = randInt(11, 29); } while (bInt % 10 === 0);
@@ -884,22 +982,22 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
       };
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [cells, setCells] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(28).fill("")));
-  const [decResults, setDecResults] = useState<string[]>(["", ""]);
+  const [cells, setCells] = useState<string[][]>(() => data.map(() => Array(28).fill("")));
+  const [decResults, setDecResults] = useState<string[]>(() => data.map(() => ""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     data.forEach((q, i) => { if (matchNum(decResults[i] ?? "", q.result, 0.005)) pts += 2; });
-    onValidated(pts, 4);
+    onValidated(pts, data.length * 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les multiplications en colonnes." />
-      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-start gap-x-4 gap-y-3"}>
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
@@ -1166,7 +1264,8 @@ function DecimalDivisionGrid({
   );
 }
 
-export function Exercise21({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise21({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(2);
   const data = useMemo(() => {
     const makeQ = (decPlaces: 1 | 2) => {
       const scale = decPlaces === 1 ? 10 : 100;
@@ -1213,17 +1312,15 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
       }
     };
 
-    return [
-      makeQ(1),
-      makeSmallDecimalQ(),
-    ];
+    return Array.from({ length: questionCount }, (_, i) =>
+      i % 2 === 0 ? makeQ(1) : makeSmallDecimalQ());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [quotients, setQuotients] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(5).fill("")));
-  const [remainders, setRemainders] = useState<string[]>(["", ""]);
-  const [works, setWorks] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(80).fill("")));
-  const [answers, setAnswers] = useState<string[]>(["", ""]);
+  const [quotients, setQuotients] = useState<string[][]>(() => data.map(() => Array(5).fill("")));
+  const [remainders, setRemainders] = useState<string[]>(() => data.map(() => ""));
+  const [works, setWorks] = useState<string[][]>(() => data.map(() => Array(80).fill("")));
+  const [answers, setAnswers] = useState<string[]>(() => data.map(() => ""));
   const [dividendInputs, setDividendInputs] = useState<string[][]>(() =>
     data.map(q => Array(String(q.dividendInt).length).fill(""))
   );
@@ -1235,13 +1332,13 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
     if (validateTrigger === 0) return;
     let pts = 0;
     data.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.quotient, 0.005)) pts += 2; });
-    onValidated(pts, 4);
+    onValidated(pts, data.length * 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les divisions en colonnes." />
-      <div className="grid grid-cols-2 items-start gap-x-4 gap-y-3">
+      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-start gap-x-4 gap-y-3"}>
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
@@ -1320,57 +1417,28 @@ function pickMultiShapeCfg(): { kind: ShapeKind; d: number } {
   return shuffle(pickers)[0]!();
 }
 
-function genFracColorItems(): FracShapeItem[] {
+// Première moitié : formes simples ; seconde moitié : multi-formes.
+// Le plafond d'essais évite une boucle infinie quand le nombre de
+// configurations distinctes est épuisé (impression avec beaucoup de questions).
+function genFracItems(count: number): FracShapeItem[] {
   const items: FracShapeItem[] = [];
   const usedConfigs = new Set<string>();
+  const singles = Math.ceil(count / 2);
 
-  // Generate 2 single shapes
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < count; i++) {
+    const isSingle = i < singles;
     let cfg;
+    let tries = 0;
     do {
-      cfg = pickSingleShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+      cfg = isSingle ? pickSingleShapeCfg() : pickMultiShapeCfg();
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`) && ++tries < 40);
     usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    items.push({ ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false });
-  }
-
-  // Generate 2 multi-shapes
-  for (let i = 0; i < 2; i++) {
-    let cfg;
-    do {
-      cfg = pickMultiShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
-    usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    const copies = randInt(2, 3);
-    items.push({ ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true });
-  }
-
-  return items;
-}
-
-function genFracReadItems(): FracShapeItem[] {
-  const items: FracShapeItem[] = [];
-  const usedConfigs = new Set<string>();
-
-  // Generate 2 single shapes
-  for (let i = 0; i < 2; i++) {
-    let cfg;
-    do {
-      cfg = pickSingleShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
-    usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    items.push({ ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false });
-  }
-
-  // Generate 2 multi-shapes
-  for (let i = 0; i < 2; i++) {
-    let cfg;
-    do {
-      cfg = pickMultiShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
-    usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    const copies = randInt(2, 3);
-    items.push({ ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true });
+    if (isSingle) {
+      items.push({ ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false });
+    } else {
+      const copies = randInt(2, 3);
+      items.push({ ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true });
+    }
   }
 
   return items;
@@ -1378,15 +1446,17 @@ function genFracReadItems(): FracShapeItem[] {
 
 // ── Exercise 22 — Colorier les fractions (A4.1 Ex2+Ex4 style) ────────────────
 
-export function Exercise22({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const items = useMemo(genFracColorItems, [exerciseKey]);
+export function Exercise22({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(4);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const items = useMemo(() => genFracItems(questionCount), [exerciseKey, questionCount]);
   const [coloredSets, setColoredSets] = useState<Set<number>[]>(() => items.map(() => new Set<number>()));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     items.forEach((item, i) => { if ((coloredSets[i]?.size ?? 0) === item.n) pts += 0.5; });
-    onValidated(pts, 2);
+    onValidated(pts, items.length * 0.5);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function toggle(i: number, idx: number) {
@@ -1401,7 +1471,7 @@ export function Exercise22({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les parties pour colorier la fraction demandée.</p>
-      <div className="grid grid-cols-2 items-stretch gap-3">
+      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-stretch gap-3"}>
         {items.map((item, i) => {
           const correctSet = item.multi
             ? preColorFlat(item.n, item.d)
@@ -1447,10 +1517,12 @@ export function Exercise22({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── ExerciseFracRead — Lire les fractions (A4.1 Ex3+Ex5 style) ───────────────
 
-export function ExerciseFracRead({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const items = useMemo(genFracReadItems, [exerciseKey]);
-  const [nums, setNums] = useState<string[]>(() => Array(4).fill(""));
-  const [dens, setDens] = useState<string[]>(() => Array(4).fill(""));
+export function ExerciseFracRead({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(4);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const items = useMemo(() => genFracItems(questionCount), [exerciseKey, questionCount]);
+  const [nums, setNums] = useState<string[]>(() => Array(items.length).fill(""));
+  const [dens, setDens] = useState<string[]>(() => Array(items.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -1460,13 +1532,13 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
       const d = parseInt(dens[i] ?? "");
       if (!isNaN(n) && !isNaN(d) && n === item.n && d === item.d) pts += 0.5;
     });
-    onValidated(pts, 2);
+    onValidated(pts, items.length * 0.5);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Observez les formes coloriées et écrivez la fraction représentée." />
-      <div className="grid grid-cols-2 items-stretch gap-3">
+      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-stretch gap-3"}>
         {items.map((item, i) => {
           const preColored = item.multi ? preColorFlat(item.n, item.d) : new Set(Array.from({ length: item.n }, (_, k) => k));
           return (
@@ -1519,19 +1591,21 @@ function convFactor(from: string, to: string): number {
   return Math.pow(10, ti - fi);
 }
 
-export function Exercise23({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise23({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(8);
   const questions = useMemo(() => {
-    const qs: { value: number; from: string; to: string; result: number; decPlaces: number }[] = [];
-    // 4 integer conversions, 4 decimal
+    // Première moitié : conversions entières ; seconde moitié : décimales.
     const pairs = [
       ["km", "m"], ["m", "cm"], ["km", "hm"], ["cm", "mm"],
       ["m", "km"], ["cm", "m"], ["mm", "m"], ["hm", "m"],
     ];
-    const shuffled = shuffle(pairs).slice(0, 8);
-    shuffled.forEach(([from, to], i) => {
+    const pool = shuffle(pairs);
+    const intCount = Math.ceil(questionCount / 2);
+    return Array.from({ length: questionCount }, (_, i) => {
+      const [from, to] = pool[i % pool.length]!;
       const factor = convFactor(from!, to!);
       let value: number, decPlaces: number;
-      if (i < 4) {
+      if (i < intCount) {
         value = randInt(1, 999);
         decPlaces = 0;
       } else {
@@ -1541,32 +1615,32 @@ export function Exercise23({ exerciseKey, validated, onValidated, validateTrigge
         decPlaces = 1;
       }
       const result = Math.round(value * factor * 1000) / 1000;
-      qs.push({ value, from: from!, to: to!, result, decPlaces });
+      return { value, from: from!, to: to!, result, decPlaces };
     });
-    return qs;
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(8).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.result, q.result > 1 ? 0.01 : 0.0001)) pts += 0.5; });
-    onValidated(pts, 4);
+    onValidated(pts, questions.length * 0.5);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+      <div className={`${forPrint ? printColsClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3"} text-sm`}>
         {questions.map((q, i) => {
           const displayVal = q.decPlaces > 0 ? fmtDec(q.value, 1) : String(q.value);
           const correct = q.result % 1 === 0 ? String(q.result) : fmtDec(q.result, q.result.toString().split(".")[1]?.length ?? 1);
           return (
             <div key={i} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="font-mono text-[var(--color-text-primary)]">{displayVal} {q.from}</span>
+              {/* Largeur fixe pour aligner verticalement les « = » entre questions */}
+              <span className="inline-flex w-20 shrink-0 justify-end font-mono text-[var(--color-text-primary)]">{displayVal} {q.from}</span>
               <span className="text-[var(--color-text-secondary)]">=</span>
               <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
                 correct={correct} validated={validated} width="w-20" />
@@ -1583,62 +1657,82 @@ export function Exercise23({ exerciseKey, validated, onValidated, validateTrigge
 
 const SPECIAL_FACTORS = [0.2, 0.25, 0.5, 0.75];
 
-export function Exercise24({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise24({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(8);
   const questions = useMemo(() => {
     function r1(min: number, max: number) { return Math.round((placementRandom() * (max - min) + min) * 10) / 10; }
-    const qs: { left: string; op: string; right: string; result: number }[] = [];
-    // 1. int + dec
-    const a1 = randInt(10, 50), b1 = r1(1, 9);
-    qs.push({ left: String(a1), op: "+", right: fmtDec(b1, 1), result: Math.round((a1 + b1) * 10) / 10 });
-    // 2. dec + dec
-    const a2 = r1(5, 20), b2 = r1(1, 10);
-    qs.push({ left: fmtDec(a2, 1), op: "+", right: fmtDec(b2, 1), result: Math.round((a2 + b2) * 10) / 10 });
-    // 3. int - dec
-    const a3 = randInt(15, 50), b3 = r1(1, 9);
-    qs.push({ left: String(a3), op: "−", right: fmtDec(b3, 1), result: Math.round((a3 - b3) * 10) / 10 });
-    // 4. dec - dec
-    const a4 = r1(10, 30); const b4 = r1(1, a4 - 1);
-    qs.push({ left: fmtDec(a4, 1), op: "−", right: fmtDec(b4, 1), result: Math.round((a4 - b4) * 10) / 10 });
-    // 5. int × special factor
-    const f5 = SPECIAL_FACTORS[randInt(0, 3)]!;
-    let a5 = randInt(4, 20);
-    while ((a5 * f5 * 100) % 1 !== 0) a5++;
-    qs.push({ left: String(a5), op: "×", right: fmtDec(f5, f5 === 0.2 || f5 === 0.5 ? 1 : 2), result: Math.round(a5 * f5 * 100) / 100 });
-    // 6. dec × int
-    const a6 = r1(1, 9), b6 = randInt(2, 8);
-    qs.push({ left: fmtDec(a6, 1), op: "×", right: String(b6), result: Math.round(a6 * b6 * 10) / 10 });
-    // 7. int ÷ special factor
-    const f7 = SPECIAL_FACTORS[randInt(0, 3)]!;
-    let a7 = randInt(2, 15);
-    while ((a7 / f7) % 1 !== 0) a7++;
-    qs.push({ left: String(a7), op: "÷", right: fmtDec(f7, f7 === 0.2 || f7 === 0.5 ? 1 : 2), result: Math.round(a7 / f7 * 100) / 100 });
-    // 8. dec ÷ int
-    const b8 = randInt(2, 6); const q8 = r1(1, 9);
-    const a8 = Math.round(q8 * b8 * 10) / 10;
-    qs.push({ left: fmtDec(a8, 1), op: "÷", right: String(b8), result: q8 });
-    return qs;
+    type Q = { left: string; op: string; right: string; result: number };
+    const makers: (() => Q)[] = [
+      // 1. int + dec
+      () => {
+        const a = randInt(10, 50), b = r1(1, 9);
+        return { left: String(a), op: "+", right: fmtDec(b, 1), result: Math.round((a + b) * 10) / 10 };
+      },
+      // 2. dec + dec
+      () => {
+        const a = r1(5, 20), b = r1(1, 10);
+        return { left: fmtDec(a, 1), op: "+", right: fmtDec(b, 1), result: Math.round((a + b) * 10) / 10 };
+      },
+      // 3. int - dec
+      () => {
+        const a = randInt(15, 50), b = r1(1, 9);
+        return { left: String(a), op: "−", right: fmtDec(b, 1), result: Math.round((a - b) * 10) / 10 };
+      },
+      // 4. dec - dec
+      () => {
+        const a = r1(10, 30); const b = r1(1, a - 1);
+        return { left: fmtDec(a, 1), op: "−", right: fmtDec(b, 1), result: Math.round((a - b) * 10) / 10 };
+      },
+      // 5. int × special factor
+      () => {
+        const f = SPECIAL_FACTORS[randInt(0, 3)]!;
+        let a = randInt(4, 20);
+        while ((a * f * 100) % 1 !== 0) a++;
+        return { left: String(a), op: "×", right: fmtDec(f, f === 0.2 || f === 0.5 ? 1 : 2), result: Math.round(a * f * 100) / 100 };
+      },
+      // 6. dec × int
+      () => {
+        const a = r1(1, 9), b = randInt(2, 8);
+        return { left: fmtDec(a, 1), op: "×", right: String(b), result: Math.round(a * b * 10) / 10 };
+      },
+      // 7. int ÷ special factor
+      () => {
+        const f = SPECIAL_FACTORS[randInt(0, 3)]!;
+        let a = randInt(2, 15);
+        while ((a / f) % 1 !== 0) a++;
+        return { left: String(a), op: "÷", right: fmtDec(f, f === 0.2 || f === 0.5 ? 1 : 2), result: Math.round(a / f * 100) / 100 };
+      },
+      // 8. dec ÷ int
+      () => {
+        const b = randInt(2, 6); const q = r1(1, 9);
+        const a = Math.round(q * b * 10) / 10;
+        return { left: fmtDec(a, 1), op: "÷", right: String(b), result: q };
+      },
+    ];
+    return Array.from({ length: questionCount }, (_, i) => makers[i % makers.length]!());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(8).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.result, 0.01)) pts += 0.5; });
-    onValidated(pts, 4);
+    onValidated(pts, questions.length * 0.5);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-3">
       <PlacementInstruction text="Effectuez les calculs." />
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+      <div className={`${forPrint ? printColsClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3"} text-sm`}>
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="font-mono text-[var(--color-text-primary)]">{q.left}</span>
-            <span className="font-mono text-[var(--color-text-secondary)]">{q.op}</span>
-            <span className="font-mono text-[var(--color-text-primary)]">{q.right}</span>
+            {/* Largeurs fixes pour aligner verticalement les « = » entre questions */}
+            <span className="inline-flex w-12 shrink-0 justify-end font-mono text-[var(--color-text-primary)]">{q.left}</span>
+            <span className="inline-flex w-4 shrink-0 justify-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="inline-flex w-12 shrink-0 justify-start font-mono text-[var(--color-text-primary)]">{q.right}</span>
             <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
               correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />

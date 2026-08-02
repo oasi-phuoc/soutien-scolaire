@@ -6,6 +6,10 @@ import {
   placementShuffle as shuffle,
   placementRandom,
 } from "@/components/math/placement/placement-print-rng";
+import {
+  printQuestionsListClass,
+  usePrintQuestionLayout,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -137,19 +141,19 @@ function FracInput({
   return (
     <span className="inline-flex w-16 flex-col items-center justify-center align-middle">
       {cell(numVal, numCorrect, numWrong, onNumChange)}
-      <span className="my-0.5 h-px w-14 bg-[var(--color-text-primary)]" />
+      <span className="my-0.5 h-[2px] w-14 rounded bg-[var(--color-theme)]" />
       {cell(denVal, denCorrect, denWrong, onDenChange)}
     </span>
   );
 }
 
 // Fraction display helper
-function Frac({ n, d, className = "", bold = true }: { n: React.ReactNode; d: React.ReactNode; className?: string; bold?: boolean }) {
+function Frac({ n, d, className = "", bold = true, barClass = "bg-current" }: { n: React.ReactNode; d: React.ReactNode; className?: string; bold?: boolean; barClass?: string }) {
   const weight = bold ? "font-bold" : "font-normal";
   return (
     <span className={`inline-flex flex-col items-center gap-[2px] align-middle ${className}`}>
       <span className={`flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm ${weight} tabular-nums`}>{n}</span>
-      <span className="h-px w-full min-w-[1.5rem] bg-current" />
+      <span className={`h-px w-full min-w-[1.5rem] ${barClass}`} />
       <span className={`flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm ${weight} tabular-nums`}>{d}</span>
     </span>
   );
@@ -157,39 +161,46 @@ function Frac({ n, d, className = "", bold = true }: { n: React.ReactNode; d: Re
 
 // ── Exercise 28: Powers, roots, ×÷ by powers of 10 ──────────────────────────
 
-export function Exercise28({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const data = useMemo(() => {
-    const b = randInt(2, 7);
+type Ex28Q =
+  | { kind: "cube"; base: number; ans: number }
+  | { kind: "sqrt"; sq: number; ans: number }
+  | { kind: "mul10"; mult: number; pwr10: number; ans: number }
+  | { kind: "div10"; divVal: number; pwr10: number; ans: number };
+
+const EX28_POWERS = [10, 100, 1000, 10000];
+
+function genEx28Q(slot: number): Ex28Q {
+  if (slot === 0) {
+    const base = randInt(2, 7);
+    return { kind: "cube", base, ans: base ** 3 };
+  }
+  if (slot === 1) {
     const sq = [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169][randInt(0, 11)]!;
-    const sqRoot = Math.sqrt(sq);
+    return { kind: "sqrt", sq, ans: Math.sqrt(sq) };
+  }
+  if (slot === 2) {
     const mult = parseFloat((placementRandom() < 0.5 ? randInt(1, 99) * 0.1 : randInt(1, 999) * 0.01).toFixed(2));
-    const powers = [10, 100, 1000, 10000];
-    const pwr10mult = powers[randInt(0, powers.length - 1)]!;
-    let pwr10div = powers[randInt(0, powers.length - 1)]!;
-    while (pwr10div === pwr10mult) pwr10div = powers[randInt(0, powers.length - 1)]!;
-    const divVal = parseFloat((randInt(1, 999) * (pwr10div === 10 ? 10 : pwr10div === 100 ? 100 : 1000)).toFixed(0));
+    const pwr10 = EX28_POWERS[randInt(0, EX28_POWERS.length - 1)]!;
+    return { kind: "mul10", mult, pwr10, ans: parseFloat((mult * pwr10).toFixed(4)) };
+  }
+  const pwr10 = EX28_POWERS[randInt(0, EX28_POWERS.length - 1)]!;
+  const divVal = parseFloat((randInt(1, 999) * (pwr10 === 10 ? 10 : pwr10 === 100 ? 100 : 1000)).toFixed(0));
+  return { kind: "div10", divVal, pwr10, ans: parseFloat((divVal / pwr10).toFixed(4)) };
+}
 
-    return {
-      q1: { base: b, ans: b ** 3 },                                                    // a³
-      q2: { sq, sqRoot },                                                               // √sq
-      q3: { mult, pwr10: pwr10mult, ans: parseFloat((mult * pwr10mult).toFixed(4)) },  // ×10^n
-      q4: { divVal, pwr10: pwr10div, ans: parseFloat((divVal / pwr10div).toFixed(4)) },// ÷10^n
-    };
+export function Exercise28({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(4);
+  const questions = useMemo(
+    () => Array.from({ length: questionCount }, (_, i) => genEx28Q(i % 4)),
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  [exerciseKey, questionCount]);
 
-  const [a1, setA1] = useState("");
-  const [a2, setA2] = useState("");
-  const [a3, setA3] = useState("");
-  const [a4, setA4] = useState("");
+  const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchNum(a1, data.q1.ans)) pts++;
-    if (matchNum(a2, data.q2.sqRoot)) pts++;
-    if (matchNum(a3, data.q3.ans, 0.001)) pts++;
-    if (matchNum(a4, data.q4.ans, 0.001)) pts++;
+    questions.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.ans, 0.001)) pts++; });
     onValidated(pts, 4);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
@@ -199,35 +210,34 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
     return fmtDec(n, 2);
   };
   const pow10Exp = (n: number) => Math.round(Math.log10(n));
+  const exprFor = (q: Ex28Q) => {
+    if (q.kind === "cube") return <span>{q.base}<sup>3</sup></span>;
+    if (q.kind === "sqrt") return <span>√{q.sq}</span>;
+    if (q.kind === "mul10") return <span className="font-mono">{fmtDec(q.mult, 2)} × 10<sup>{pow10Exp(q.pwr10)}</sup></span>;
+    return <span className="font-mono">{q.divVal} ÷ 10<sup>{pow10Exp(q.pwr10)}</sup></span>;
+  };
+  const correctFor = (q: Ex28Q) => (q.kind === "cube" || q.kind === "sqrt" ? String(q.ans) : fmtAns(q.ans));
+
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
 
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-        <div className="flex items-center gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <span>{data.q1.base}<sup>3</sup></span>
-          <span className="text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} width="w-20" />
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-          <span>√{data.q2.sq}</span>
-          <span className="text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.sqRoot)} validated={validated} width="w-20" />
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-          <span className="font-mono">{fmtDec(data.q3.mult, 2)} × 10<sup>{pow10Exp(data.q3.pwr10)}</sup></span>
-          <span className="text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a3} onChange={setA3} correct={fmtAns(data.q3.ans)} validated={validated} width="w-20" />
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-          <span className="font-mono">{data.q4.divVal} ÷ 10<sup>{pow10Exp(data.q4.pwr10)}</sup></span>
-          <span className="text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a4} onChange={setA4} correct={fmtAns(data.q4.ans)} validated={validated} width="w-20" />
-        </div>
+      <div className={`${listCls} text-sm`}>
+        {questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {exprFor(q)}
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <CorrectionInput
+              value={answers[i] ?? ""}
+              onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
+              correct={correctFor(q)}
+              validated={validated}
+              width="w-20"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -237,7 +247,8 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
 
 type NumericExpression = { expr: React.ReactNode; text: string; ans: number };
 
-export function Exercise29({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise29({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(4);
   const data = useMemo(() => {
     const templates: Array<() => NumericExpression>[] = [
       [
@@ -265,35 +276,38 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
         () => { const a = randInt(2, 8), b = randInt(2, 6), c = randInt(2, 8), d = randInt(1, 7); return { text: `${a}³ − [${b} × ${c}] + ${d}`, expr: <>{a}<sup>3</sup> − [{b} × {c}] + {d}</>, ans: a ** 3 - b * c + d }; },
       ],
     ];
-    return [0, 1, 1, 1].map((tier) => templates[tier]![randInt(0, 9)]!());
+    // Motif actuel [0, 1, 1, 1] répété : 1 question facile pour 3 difficiles.
+    return Array.from({ length: questionCount }, (_, i) =>
+      templates[i % 4 === 0 ? 0 : 1]![randInt(0, 9)]!()
+    );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [a1, setA1] = useState("");
-  const [a2, setA2] = useState("");
-  const [a3, setA3] = useState("");
-  const [a4, setA4] = useState("");
+  const [answers, setAnswers] = useState<string[]>(() => Array(data.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    [a1, a2, a3, a4].forEach((answer, i) => { if (matchNum(answer, data[i]!.ans)) pts++; });
+    data.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.ans)) pts++; });
     onValidated(pts, 4);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+      <div className={`${listCls} text-sm`}>
         {data.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="font-mono">{q.expr}</span>
+            {/* Largeur fixe → tous les « = » alignés verticalement */}
+            <span className="inline-block w-[18ch] shrink-0 text-right font-mono">{q.expr}</span>
             <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
-              value={[a1, a2, a3, a4][i] ?? ""}
-              onChange={[setA1, setA2, setA3, setA4][i]!}
+              value={answers[i] ?? ""}
+              onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
               correct={Number.isInteger(q.ans) ? String(q.ans) : fmtDec(q.ans, 2)}
               validated={validated}
               width="w-20"
@@ -307,35 +321,34 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 30: Relative numbers ─────────────────────────────────────────────
 
-export function Exercise30({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+function genEx30Q(opSlot: number): { left: string; op: string; right: string; ans: number } {
+  const sign = () => (placementRandom() < 0.5 ? 1 : -1);
+  const fmtN = (n: number) => n < 0 ? `(${n})` : `(+${n})`;
+  if (opSlot === 0) {
+    const a = sign() * randInt(2, 15), b = sign() * randInt(2, 15);
+    return { left: fmtN(a), op: "+", right: fmtN(b), ans: a + b };
+  }
+  if (opSlot === 1) {
+    const a = sign() * randInt(2, 15), b = sign() * randInt(2, 15);
+    return { left: fmtN(a), op: "−", right: fmtN(b), ans: a - b };
+  }
+  if (opSlot === 2) {
+    const a = sign() * randInt(2, 9), b = sign() * randInt(2, 9);
+    return { left: fmtN(a), op: "×", right: fmtN(b), ans: a * b };
+  }
+  const n = sign() * randInt(2, 9) * randInt(2, 9), d = sign() * randInt(2, 9);
+  return { left: fmtN(n), op: "÷", right: fmtN(d), ans: n / d };
+}
+
+export function Exercise30({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(8);
   const data = useMemo(() => {
-    // 2 additions, 2 subtractions, 2 multiplications, 2 divisions
-    const sign = () => (placementRandom() < 0.5 ? 1 : -1);
-    const a1 = sign() * randInt(2, 15), b1 = sign() * randInt(2, 15);
-    const a2 = sign() * randInt(2, 15), b2 = sign() * randInt(2, 15);
-    const a3 = sign() * randInt(2, 15), b3 = sign() * randInt(2, 15);
-    const a4 = sign() * randInt(2, 15), b4 = sign() * randInt(2, 15);
-    const m1 = sign() * randInt(2, 9), m2 = sign() * randInt(2, 9);
-    const m3 = sign() * randInt(2, 9), m4 = sign() * randInt(2, 9);
-    const d1n = sign() * randInt(2, 9) * randInt(2, 9), d1d = sign() * randInt(2, 9);
-    const d2n = sign() * randInt(2, 9) * randInt(2, 9), d2d = sign() * randInt(2, 9);
-
-    const fmtN = (n: number) => n < 0 ? `(${n})` : `(+${n})`;
-
-    return [
-      { left: fmtN(a1), op: "+", right: fmtN(b1), ans: a1 + b1 },
-      { left: fmtN(a2), op: "+", right: fmtN(b2), ans: a2 + b2 },
-      { left: fmtN(a3), op: "−", right: fmtN(b3), ans: a3 - b3 },
-      { left: fmtN(a4), op: "−", right: fmtN(b4), ans: a4 - b4 },
-      { left: fmtN(m1), op: "×", right: fmtN(m2), ans: m1 * m2 },
-      { left: fmtN(m3), op: "×", right: fmtN(m4), ans: m3 * m4 },
-      { left: fmtN(d1n), op: "÷", right: fmtN(d1d), ans: d1n / d1d },
-      { left: fmtN(d2n), op: "÷", right: fmtN(d2d), ans: d2n / d2d },
-    ];
+    // Motif actuel répété : 2 additions, 2 soustractions, 2 multiplications, 2 divisions
+    return Array.from({ length: questionCount }, (_, i) => genEx30Q(Math.floor((i % 8) / 2)));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(9).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(data.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -347,16 +360,19 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+      <div className={`${listCls} text-sm`}>
         {data.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="font-mono">{q.left}</span>
-            <span className="font-mono text-[var(--color-text-secondary)]">{q.op}</span>
-            <span className="font-mono">{q.right}</span>
+            {/* Largeurs fixes → tous les « = » alignés verticalement */}
+            <span className="inline-block w-12 shrink-0 text-center font-mono">{q.left}</span>
+            <span className="inline-block w-4 shrink-0 text-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="inline-block w-12 shrink-0 text-center font-mono">{q.right}</span>
             <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
@@ -380,87 +396,73 @@ function simplify(n: number, d: number): [number, number] {
   return [n / g, d / g];
 }
 
-export function Exercise31({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const data = useMemo(() => {
-    const pickReduced = () => {
-      for (;;) {
-        const n = randInt(2, 9);
-        const d = randInt(3, 12);
-        if (n !== d && gcd(n, d) === 1) return { n, d };
-      }
-    };
-    const fracAns = (n: number, d: number) => {
-      const [rawN, rawD] = simplify(n, d);
-      const sn = rawD < 0 ? -rawN : rawN;
-      const sd = Math.abs(rawD);
-      return sd === 1 ? String(sn) : `${sn}/${sd}`;
-    };
-    const makePair = () => {
-      const a = pickReduced();
-      const b = pickReduced();
-      return { a, b };
-    };
+type Ex31Frac = { n: number; d: number };
+type Ex31Q =
+  | { kind: "simplify1"; fullN: number; fullD: number; n: number; d: number; ask: "num" | "den" }
+  | { kind: "simplify2"; fullN: number; fullD: number; n: number; d: number }
+  | { kind: "op"; a: Ex31Frac; b: Ex31Frac; negA: boolean; negB: boolean; op: "+" | "−" | "×" | "÷"; ans: string };
 
-    const q1Base = pickReduced();
-    const q1Factor = randInt(2, 6);
-    const q1Ask = placementRandom() < 0.5 ? "num" as const : "den" as const;
+function pickReducedFrac(): Ex31Frac {
+  for (;;) {
+    const n = randInt(2, 9);
+    const d = randInt(3, 12);
+    if (n !== d && gcd(n, d) === 1) return { n, d };
+  }
+}
+function fracAnsStr(n: number, d: number): string {
+  const [rawN, rawD] = simplify(n, d);
+  const sn = rawD < 0 ? -rawN : rawN;
+  const sd = Math.abs(rawD);
+  return sd === 1 ? String(sn) : `${sn}/${sd}`;
+}
 
-    const q2Base = pickReduced();
-    const q2Factor = randInt(2, 6);
+// Motif actuel (8 questions) : simplification ×2, +, −, ×, ÷, ± signée, ×÷ signée.
+function genEx31Q(slot: number): Ex31Q {
+  if (slot === 0) {
+    const base = pickReducedFrac();
+    const factor = randInt(2, 6);
+    const ask = placementRandom() < 0.5 ? "num" as const : "den" as const;
+    return { kind: "simplify1", fullN: base.n * factor, fullD: base.d * factor, n: base.n, d: base.d, ask };
+  }
+  if (slot === 1) {
+    const base = pickReducedFrac();
+    const factor = randInt(2, 6);
+    return { kind: "simplify2", fullN: base.n * factor, fullD: base.d * factor, n: base.n, d: base.d };
+  }
+  const a = pickReducedFrac();
+  const b = pickReducedFrac();
+  if (slot === 2) return { kind: "op", a, b, negA: false, negB: false, op: "+", ans: fracAnsStr(a.n * b.d + b.n * a.d, a.d * b.d) };
+  if (slot === 3) return { kind: "op", a, b, negA: false, negB: false, op: "−", ans: fracAnsStr(a.n * b.d - b.n * a.d, a.d * b.d) };
+  if (slot === 4) return { kind: "op", a, b, negA: false, negB: false, op: "×", ans: fracAnsStr(a.n * b.n, a.d * b.d) };
+  if (slot === 5) return { kind: "op", a, b, negA: false, negB: false, op: "÷", ans: fracAnsStr(a.n * b.d, a.d * b.n) };
+  const op = slot === 6
+    ? (placementRandom() < 0.5 ? "+" as const : "−" as const)
+    : (placementRandom() < 0.5 ? "×" as const : "÷" as const);
+  let negA = placementRandom() < 0.5;
+  const negB = placementRandom() < 0.5;
+  if (!negA && !negB) negA = true;
+  const aN = negA ? -a.n : a.n;
+  const bN = negB ? -b.n : b.n;
+  let ans: string;
+  if (op === "+") ans = fracAnsStr(aN * b.d + bN * a.d, a.d * b.d);
+  else if (op === "−") ans = fracAnsStr(aN * b.d - bN * a.d, a.d * b.d);
+  else if (op === "×") ans = fracAnsStr(aN * bN, a.d * b.d);
+  else ans = fracAnsStr(aN * b.d, a.d * bN);
+  return { kind: "op", a, b, negA, negB, op, ans };
+}
 
-    const q3 = makePair();
-    const q3Ans = fracAns(q3.a.n * q3.b.d + q3.b.n * q3.a.d, q3.a.d * q3.b.d);
-
-    const q4 = makePair();
-    const q4Ans = fracAns(q4.a.n * q4.b.d - q4.b.n * q4.a.d, q4.a.d * q4.b.d);
-
-    const q5 = makePair();
-    const q5Ans = fracAns(q5.a.n * q5.b.n, q5.a.d * q5.b.d);
-
-    const q6 = makePair();
-    const q6Ans = fracAns(q6.a.n * q6.b.d, q6.a.d * q6.b.n);
-
-    const q7 = makePair();
-    const q7Op = placementRandom() < 0.5 ? "+" as const : "−" as const;
-    let q7NegA = placementRandom() < 0.5;
-    const q7NegB = placementRandom() < 0.5;
-    if (!q7NegA && !q7NegB) q7NegA = true;
-    const q7aN = q7NegA ? -q7.a.n : q7.a.n;
-    const q7bN = q7NegB ? -q7.b.n : q7.b.n;
-    const q7Ans = q7Op === "+"
-      ? fracAns(q7aN * q7.b.d + q7bN * q7.a.d, q7.a.d * q7.b.d)
-      : fracAns(q7aN * q7.b.d - q7bN * q7.a.d, q7.a.d * q7.b.d);
-
-    const q8 = makePair();
-    const q8Op = placementRandom() < 0.5 ? "×" as const : "÷" as const;
-    let q8NegA = placementRandom() < 0.5;
-    const q8NegB = placementRandom() < 0.5;
-    if (!q8NegA && !q8NegB) q8NegA = true;
-    const q8aN = q8NegA ? -q8.a.n : q8.a.n;
-    const q8bN = q8NegB ? -q8.b.n : q8.b.n;
-    const q8Ans = q8Op === "×"
-      ? fracAns(q8aN * q8bN, q8.a.d * q8.b.d)
-      : fracAns(q8aN * q8.b.d, q8.a.d * q8bN);
-
-    return {
-      q1: { fullN: q1Base.n * q1Factor, fullD: q1Base.d * q1Factor, n: q1Base.n, d: q1Base.d, ask: q1Ask },
-      q2: { fullN: q2Base.n * q2Factor, fullD: q2Base.d * q2Factor, n: q2Base.n, d: q2Base.d },
-      q3: { ...q3, ans: q3Ans },
-      q4: { ...q4, ans: q4Ans },
-      q5: { ...q5, ans: q5Ans },
-      q6: { ...q6, ans: q6Ans },
-      q7: { ...q7, op: q7Op, negA: q7NegA, negB: q7NegB, ans: q7Ans },
-      q8: { ...q8, op: q8Op, negA: q8NegA, negB: q8NegB, ans: q8Ans },
-    };
+export function Exercise31({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(8);
+  const questions = useMemo(
+    () => Array.from({ length: questionCount }, (_, i) => genEx31Q(i % 8)),
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  [exerciseKey, questionCount]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(8).fill(""));
-  const setAns = (i: number) => (v: string) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a));
-  const [fracNums, setFracNums] = useState<string[]>(() => Array(6).fill(""));
-  const [fracDens, setFracDens] = useState<string[]>(() => Array(6).fill(""));
-  const setFN = (i: number) => (v: string) => setFracNums(prev => prev.map((a, j) => j === i ? v : a));
-  const setFD = (i: number) => (v: string) => setFracDens(prev => prev.map((a, j) => j === i ? v : a));
+  // numAns[i] = numérateur (ou case unique) ; denAns[i] = dénominateur
+  const [numAns, setNumAns] = useState<string[]>(() => Array(questions.length).fill(""));
+  const [denAns, setDenAns] = useState<string[]>(() => Array(questions.length).fill(""));
+  const setNA = (i: number) => (v: string) => setNumAns((prev) => prev.map((a, j) => j === i ? v : a));
+  const setDA = (i: number) => (v: string) => setDenAns((prev) => prev.map((a, j) => j === i ? v : a));
 
   const splitAns = (ans: string): [string, string] => {
     if (ans.includes("/")) {
@@ -474,25 +476,23 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
     if (validateTrigger === 0) return;
     let pts = 0;
     const norm = (s: string) => s.trim().replace(/\s/g, "");
-    const checks = [
-      () => norm(answers[0] ?? "") === String(data.q1.ask === "num" ? data.q1.n : data.q1.d),
-      () => norm(answers[1] ?? "") === String(data.q2.n) && norm(answers[2] ?? "") === String(data.q2.d),
-      () => { const [en,ed]=splitAns(data.q3.ans); return norm(fracNums[0]??"")=== en && norm(fracDens[0]??"")=== ed; },
-      () => { const [en,ed]=splitAns(data.q4.ans); return norm(fracNums[1]??"")=== en && norm(fracDens[1]??"")=== ed; },
-      () => { const [en,ed]=splitAns(data.q5.ans); return norm(fracNums[2]??"")=== en && norm(fracDens[2]??"")=== ed; },
-      () => { const [en,ed]=splitAns(data.q6.ans); return norm(fracNums[3]??"")=== en && norm(fracDens[3]??"")=== ed; },
-      () => { const [en,ed]=splitAns(data.q7.ans); return norm(fracNums[4]??"")=== en && norm(fracDens[4]??"")=== ed; },
-      () => { const [en,ed]=splitAns(data.q8.ans); return norm(fracNums[5]??"")=== en && norm(fracDens[5]??"")=== ed; },
-    ];
-    checks.forEach((check) => { if (check()) pts += 0.5; });
+    questions.forEach((q, i) => {
+      const nv = norm(numAns[i] ?? "");
+      const dv = norm(denAns[i] ?? "");
+      let ok = false;
+      if (q.kind === "simplify1") ok = nv === String(q.ask === "num" ? q.n : q.d);
+      else if (q.kind === "simplify2") ok = nv === String(q.n) && dv === String(q.d);
+      else { const [en, ed] = splitAns(q.ans); ok = nv === en && dv === ed; }
+      if (ok) pts += 0.5;
+    });
     onValidated(pts, 4);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const smallBox = (idx: number, correct: string) => (
+  const smallBox = (value: string, onChange: (v: string) => void, correct: string) => (
     <CorrectionInput
-      value={answers[idx] ?? ""}
-      onChange={(v) => setAns(idx)(v.replace(/[^0-9/-]/g, ""))}
+      value={value}
+      onChange={(v) => onChange(v.replace(/[^0-9/-]/g, ""))}
       correct={correct}
       validated={validated}
       width="w-14"
@@ -502,58 +502,56 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
   const negFrac = (neg: boolean, n: number, d: number) =>
     neg ? <Frac n={<>−{n}</>} d={d} /> : <Frac n={n} d={d} />;
 
-  const opRows: Array<{ num: number; fa: React.ReactNode; op: string; fb: React.ReactNode; fi: number; ans: string }> = [
-    { num: 3, fa: <Frac n={data.q3.a.n} d={data.q3.a.d} />, op: "+",       fb: <Frac n={data.q3.b.n} d={data.q3.b.d} />, fi: 0, ans: data.q3.ans },
-    { num: 4, fa: <Frac n={data.q4.a.n} d={data.q4.a.d} />, op: "−",       fb: <Frac n={data.q4.b.n} d={data.q4.b.d} />, fi: 1, ans: data.q4.ans },
-    { num: 5, fa: <Frac n={data.q5.a.n} d={data.q5.a.d} />, op: "×",       fb: <Frac n={data.q5.b.n} d={data.q5.b.d} />, fi: 2, ans: data.q5.ans },
-    { num: 6, fa: <Frac n={data.q6.a.n} d={data.q6.a.d} />, op: "÷",       fb: <Frac n={data.q6.b.n} d={data.q6.b.d} />, fi: 3, ans: data.q6.ans },
-    { num: 7, fa: negFrac(data.q7.negA, data.q7.a.n, data.q7.a.d), op: data.q7.op, fb: negFrac(data.q7.negB, data.q7.b.n, data.q7.b.d), fi: 4, ans: data.q7.ans },
-    { num: 8, fa: negFrac(data.q8.negA, data.q8.a.n, data.q8.a.d), op: data.q8.op, fb: negFrac(data.q8.negB, data.q8.b.n, data.q8.b.d), fi: 5, ans: data.q8.ans },
-  ];
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+  const THEME_BAR = "bg-[var(--color-theme)]";
 
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez et simplifiez les fractions.</p>
 
-      {/* q1, q2: simplification */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-        <div className="flex items-center gap-2 text-sm">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <Frac n={data.q1.fullN} d={data.q1.fullD} />
-          <span>=</span>
-          <Frac
-            n={data.q1.ask === "num" ? smallBox(0, String(data.q1.n)) : data.q1.n}
-            d={data.q1.ask === "den" ? smallBox(0, String(data.q1.d)) : data.q1.d}
-          />
-        </div>
-        <div className="flex items-center gap-2 text-sm">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-          <Frac n={data.q2.fullN} d={data.q2.fullD} />
-          <span>=</span>
-          <Frac
-            n={smallBox(1, String(data.q2.n))}
-            d={smallBox(2, String(data.q2.d))}
-          />
-        </div>
-      </div>
-
-      {/* q3-q8: opérations */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-        {opRows.map(({ num, fa, op, fb, fi, ans }) => (
-          <div key={num} className="flex items-center gap-2">
-            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{num}.</span>
-            <div className="flex justify-center">{fa}</div>
-            <span className="text-base font-semibold text-[var(--color-text-primary)]">{op}</span>
-            <div className="flex justify-center">{fb}</div>
-            <span className="text-base font-semibold text-[var(--color-text-secondary)]">=</span>
-            <FracInput
-              numVal={fracNums[fi] ?? ""} denVal={fracDens[fi] ?? ""}
-              numCorrect={splitAns(ans)[0]} denCorrect={splitAns(ans)[1]}
-              onNumChange={setFN(fi)} onDenChange={setFD(fi)}
-              validated={validated}
-            />
-          </div>
-        ))}
+      <div className={listCls}>
+        {questions.map((q, i) => {
+          const label = <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>;
+          if (q.kind === "simplify1") return (
+            <div key={i} className="flex items-center gap-2 text-sm">
+              {label}
+              <Frac n={q.fullN} d={q.fullD} />
+              <span>=</span>
+              <Frac
+                barClass={THEME_BAR}
+                n={q.ask === "num" ? smallBox(numAns[i] ?? "", setNA(i), String(q.n)) : q.n}
+                d={q.ask === "den" ? smallBox(numAns[i] ?? "", setNA(i), String(q.d)) : q.d}
+              />
+            </div>
+          );
+          if (q.kind === "simplify2") return (
+            <div key={i} className="flex items-center gap-2 text-sm">
+              {label}
+              <Frac n={q.fullN} d={q.fullD} />
+              <span>=</span>
+              <Frac
+                barClass={THEME_BAR}
+                n={smallBox(numAns[i] ?? "", setNA(i), String(q.n))}
+                d={smallBox(denAns[i] ?? "", setDA(i), String(q.d))}
+              />
+            </div>
+          );
+          return (
+            <div key={i} className="flex items-center gap-2">
+              {label}
+              <div className="flex justify-center">{negFrac(q.negA, q.a.n, q.a.d)}</div>
+              <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.op}</span>
+              <div className="flex justify-center">{negFrac(q.negB, q.b.n, q.b.d)}</div>
+              <span className="text-base font-semibold text-[var(--color-text-secondary)]">=</span>
+              <FracInput
+                numVal={numAns[i] ?? ""} denVal={denAns[i] ?? ""}
+                numCorrect={splitAns(q.ans)[0]} denCorrect={splitAns(q.ans)[1]}
+                onNumChange={setNA(i)} onDenChange={setDA(i)}
+                validated={validated}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -561,63 +559,81 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 32: Percentage + rule of 3 ──────────────────────────────────────
 
-export function Exercise32({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const fruits = ["pommes", "bananes", "oranges", "poires", "fraises", "carottes", "tomates", "citrons", "raisins", "prunes"];
-  const data = useMemo(() => {
-    // q1: percentage of a number
-    const pct1 = [10, 20, 25, 30, 50, 75][randInt(0, 5)]!;
-    const base1 = randInt(2, 20) * 10;
-    const ans1 = (pct1 * base1) / 100;
+const EX32_FRUITS = ["pommes", "bananes", "oranges", "poires", "fraises", "carottes", "tomates", "citrons", "raisins", "prunes"];
 
-    // q2: proportional price in kg
-    const knownQty = randInt(3, 9);
-    let targetQty = randInt(3, 9);
-    while (targetQty === knownQty) targetQty = randInt(3, 9);
-    const fruitName = fruits[randInt(0, fruits.length - 1)]!;
-    const unitPrice = 0.5 + randInt(3, 15) * 0.1;
-    const knownPrice = parseFloat((knownQty * unitPrice).toFixed(2));
-    const ans2 = parseFloat((targetQty * unitPrice).toFixed(2));
+type Ex32Q =
+  | { kind: "pct"; pct: number; base: number; ans: number }
+  | { kind: "prop"; knownQty: number; targetQty: number; fruitName: string; knownPrice: number; ans: number };
 
-    return { pct1, base1, ans1, knownQty, targetQty, fruitName, knownPrice, ans2 };
+function genEx32Q(slot: number): Ex32Q {
+  if (slot === 0) {
+    // pourcentage d'un nombre
+    const pct = [10, 20, 25, 30, 50, 75][randInt(0, 5)]!;
+    const base = randInt(2, 20) * 10;
+    return { kind: "pct", pct, base, ans: (pct * base) / 100 };
+  }
+  // prix proportionnel au kg (règle de trois)
+  const knownQty = randInt(3, 9);
+  let targetQty = randInt(3, 9);
+  while (targetQty === knownQty) targetQty = randInt(3, 9);
+  const fruitName = EX32_FRUITS[randInt(0, EX32_FRUITS.length - 1)]!;
+  const unitPrice = 0.5 + randInt(3, 15) * 0.1;
+  const knownPrice = parseFloat((knownQty * unitPrice).toFixed(2));
+  const ans = parseFloat((targetQty * unitPrice).toFixed(2));
+  return { kind: "prop", knownQty, targetQty, fruitName, knownPrice, ans };
+}
+
+export function Exercise32({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(2);
+  const questions = useMemo(
+    () => Array.from({ length: questionCount }, (_, i) => genEx32Q(i % 2)),
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  [exerciseKey, questionCount]);
 
-  const [a1, setA1] = useState("");
-  const [a2, setA2] = useState("");
+  const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
+  const setAns = (i: number) => (v: string) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchNum(a1, data.ans1, 0.01)) pts++;
-    if (matchNum(a2, data.ans2, 0.01)) pts++;
+    questions.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.ans, 0.01)) pts++; });
     onValidated(pts, 2);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-        <div className="flex items-center gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <span>{data.pct1}% de {data.base1}</span>
-          <span className="text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} width="w-20" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex items-start gap-2">
-            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-            <div className="min-w-0 space-y-1">
-              <div>{data.knownQty} kg de {data.fruitName} → {fmtDec(data.knownPrice, data.knownPrice % 1 === 0 ? 0 : 1)} CHF</div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span>{data.targetQty} kg de {data.fruitName}</span>
-                <span className="text-[var(--color-text-secondary)]">=</span>
-                <CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-24" />
-                <span className="text-[var(--color-text-secondary)]">CHF</span>
+      <div className={`${listCls} text-sm`}>
+        {questions.map((q, i) => {
+          const label = <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>;
+          if (q.kind === "pct") return (
+            <div key={i} className="flex items-center gap-2">
+              {label}
+              <span>{q.pct}% de {q.base}</span>
+              <span className="text-[var(--color-text-secondary)]">=</span>
+              <CorrectionInput value={answers[i] ?? ""} onChange={setAns(i)} correct={Number.isInteger(q.ans) ? String(q.ans) : fmtDec(q.ans, 2)} validated={validated} width="w-20" />
+            </div>
+          );
+          return (
+            <div key={i} className="flex flex-col gap-2">
+              <div className="flex items-start gap-2">
+                {label}
+                <div className="min-w-0 space-y-1">
+                  <div>{q.knownQty} kg de {q.fruitName} → {fmtDec(q.knownPrice, q.knownPrice % 1 === 0 ? 0 : 1)} CHF</div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span>{q.targetQty} kg de {q.fruitName}</span>
+                    <span className="text-[var(--color-text-secondary)]">=</span>
+                    <CorrectionInput value={answers[i] ?? ""} onChange={setAns(i)} correct={fmtDec(q.ans, 2)} validated={validated} width="w-24" />
+                    <span className="text-[var(--color-text-secondary)]">CHF</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -625,7 +641,8 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 33: Algebraic simplification ────────────────────────────────────
 
-export function Exercise33({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise33({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(4);
   const data = useMemo(() => {
     const clean = (s: string) => s.replace(/\+ -/g, "− ").replace(/- /g, "− ");
     const lin1 = (x: number, c = 0) => clean(`${x}x ${c >= 0 ? "+" : "−"} ${Math.abs(c)}`);
@@ -691,11 +708,13 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
       () => { const a=randInt(2,6), b=randInt(2,9); return { expr:`(${a}x + ${b})²`, corr:`${a*a}x² + ${2*a*b}x + ${b*b}` }; },
       () => { const a=randInt(2,6), b=randInt(2,9); return { expr:`(${a}x − ${b})²`, corr:`${a*a}x² − ${2*a*b}x + ${b*b}` }; },
     ];
-    return [pick(oneUnknown)(), pick(twoUnknown)(), pick(threeUnknown)(), pick(identities)()];
+    // Motif actuel répété : 1 inconnue, 2 inconnues, 3 inconnues, identité remarquable.
+    const categories = [oneUnknown, twoUnknown, threeUnknown, identities];
+    return Array.from({ length: questionCount }, (_, i) => pick(categories[i % 4]!)());
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(4).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(data.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -709,29 +728,49 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Simplifiez les expressions.</p>
-      <div className="grid w-full items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem minmax(0, max-content) 1rem minmax(0, 1fr)"}}>
-        {data.map((q, i) => (
-          <React.Fragment key={i}>
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="min-w-0 font-mono">{q.expr}</span>
-            <span className="text-center text-[var(--color-text-secondary)]">=</span>
-            <CorrectionInputText
-              value={answers[i] ?? ""}
-              onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
-              correct={q.corr}
-              validated={validated}
-              width="w-full"
-            />
-          </React.Fragment>
-        ))}
-      </div>
+      {forPrint && columns > 1 ? (
+        <div className={printQuestionsListClass(columns)}>
+          {data.map((q, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="font-mono">{q.expr}</span>
+              <span className="text-[var(--color-text-secondary)]">=</span>
+              <CorrectionInputText
+                value={answers[i] ?? ""}
+                onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
+                correct={q.corr}
+                validated={validated}
+                width="min-w-0 flex-1"
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid w-full items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem minmax(0, max-content) 1rem minmax(0, 1fr)"}}>
+          {data.map((q, i) => (
+            <React.Fragment key={i}>
+              <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="min-w-0 font-mono">{q.expr}</span>
+              <span className="text-center text-[var(--color-text-secondary)]">=</span>
+              <CorrectionInputText
+                value={answers[i] ?? ""}
+                onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
+                correct={q.corr}
+                validated={validated}
+                width="w-full"
+              />
+            </React.Fragment>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 // ── Exercise 34: Evaluate expressions with variables ─────────────────────────
 
-export function Exercise34({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise34({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(2);
   const data = useMemo(() => {
     const letters = shuffle(["a", "b", "c", "x", "y", "z", "m", "n"]).slice(0, 3);
     const nums = shuffle([2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3);
@@ -758,21 +797,25 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
       ];
       return variants[randInt(0, variants.length - 1)]!;
     });
-    return { assignments: letters.map((letter) => ({ letter, value: values[letter]! })), q1: easy[randInt(0, 19)]!(), q2: hard[randInt(0, 19)]!() };
+    // Motif actuel répété : alternance facile / difficile.
+    const questions = Array.from({ length: questionCount }, (_, i) =>
+      (i % 2 === 0 ? easy : hard)[randInt(0, 19)]!()
+    );
+    return { assignments: letters.map((letter) => ({ letter, value: values[letter]! })), questions };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [a1, setA1] = useState("");
-  const [a2, setA2] = useState("");
+  const [answers, setAnswers] = useState<string[]>(() => Array(data.questions.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchNum(a1, data.q1.ans)) pts++;
-    if (matchNum(a2, data.q2.ans)) pts++;
+    data.questions.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.ans)) pts++; });
     onValidated(pts, 2);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
+
+  const listCls = forPrint ? printQuestionsListClass(columns, "space-y-3") : "space-y-3";
 
   return (
     <div className="space-y-3">
@@ -788,16 +831,22 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
           </React.Fragment>
         ))}
       </p>
-      <div className="grid w-full items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem minmax(0, max-content) 1rem minmax(0, 1fr)"}}>
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <span className="min-w-0 font-mono">{data.q1.expr}</span>
-        <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} width="w-full" />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="min-w-0 font-mono">{data.q2.expr}</span>
-        <span className="text-center text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.ans)} validated={validated} width="w-full" />
+      <div className={listCls}>
+        {data.questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-2 text-sm">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {/* Largeur fixe → tous les « = » alignés verticalement */}
+            <span className="inline-block w-[19ch] shrink-0 text-right font-mono">{q.expr}</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <CorrectionInput
+              value={answers[i] ?? ""}
+              onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
+              correct={String(q.ans)}
+              validated={validated}
+              width="min-w-0 flex-1"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -805,94 +854,94 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 35: Solve equations ──────────────────────────────────────────────
 
-export function Exercise35({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const data = useMemo(() => {
-    const fmtSigned = (n: number) => n < 0 ? `− ${Math.abs(n)}` : `+ ${n}`;
-    const easy = Array.from({ length: 20 }, () => () => {
-      const x = randInt(-9, 9) || 4;
-      const a = randInt(2, 8), b = randInt(1, 12);
-      const variants = [
-        { left: `${a}x ${fmtSigned(b)}`, right: String(a * x + b), x },
-        { left: `${a}(x ${fmtSigned(b)})`, right: String(a * (x + b)), x },
-        { left: `${a}x ${fmtSigned(-b)}`, right: String(a * x - b), x },
-        { left: `${a}(x − ${b}) + ${randInt(1, 8)}`, right: "", x },
-      ];
-      const picked = variants[randInt(0, variants.length - 1)]!;
-      if (picked.right === "") {
-        const c = randInt(1, 8);
-        return { left: `${a}(x − ${b}) + ${c}`, right: String(a * (x - b) + c), x };
-      }
-      return picked;
-    });
-    const hard = Array.from({ length: 20 }, () => () => {
-      const x = randInt(-8, 8) || -3;
-      const d = randInt(2, 6);
-      const a = randInt(2, 8), b = randInt(1, 12), c = randInt(1, 9);
-      const numerator = d * (c - b) - a * x;
-      const variants = [
-        { left: <><Frac n={`${a}x + ${numerator}`} d={d} bold={false} /> + {b}</>, right: String(c), x },
-        { left: <>{a}x + <Frac n={b} d={d} bold={false} /></>, right: <><Frac n={a * x * d + b} d={d} bold={false} /></>, x },
-        { left: <><Frac n={`${a}x − ${b}`} d={d} bold={false} /> − {c}</>, right: <><Frac n={a * x - b - c * d} d={d} bold={false} /></>, x },
-      ];
-      return variants[randInt(0, variants.length - 1)]!;
-    });
-    return { q1: easy[randInt(0, 19)]!(), q2: hard[randInt(0, 19)]!() };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+type Ex35Q = { left: React.ReactNode; right: React.ReactNode; x: number };
 
-  const [a1, setA1] = useState("");
-  const [a2, setA2] = useState("");
+function genEx35Easy(): Ex35Q {
+  const fmtSigned = (n: number) => n < 0 ? `− ${Math.abs(n)}` : `+ ${n}`;
+  const x = randInt(-9, 9) || 4;
+  const a = randInt(2, 8), b = randInt(1, 12);
+  const variants = [
+    { left: `${a}x ${fmtSigned(b)}`, right: String(a * x + b), x },
+    { left: `${a}(x ${fmtSigned(b)})`, right: String(a * (x + b)), x },
+    { left: `${a}x ${fmtSigned(-b)}`, right: String(a * x - b), x },
+    { left: `${a}(x − ${b}) + ${randInt(1, 8)}`, right: "", x },
+  ];
+  const picked = variants[randInt(0, variants.length - 1)]!;
+  if (picked.right === "") {
+    const c = randInt(1, 8);
+    return { left: `${a}(x − ${b}) + ${c}`, right: String(a * (x - b) + c), x };
+  }
+  return picked;
+}
+
+function genEx35Hard(): Ex35Q {
+  const x = randInt(-8, 8) || -3;
+  const d = randInt(2, 6);
+  const a = randInt(2, 8), b = randInt(1, 12), c = randInt(1, 9);
+  const numerator = d * (c - b) - a * x;
+  const variants: Ex35Q[] = [
+    { left: <><Frac n={`${a}x + ${numerator}`} d={d} bold={false} /> + {b}</>, right: String(c), x },
+    { left: <>{a}x + <Frac n={b} d={d} bold={false} /></>, right: <><Frac n={a * x * d + b} d={d} bold={false} /></>, x },
+    { left: <><Frac n={`${a}x − ${b}`} d={d} bold={false} /> − {c}</>, right: <><Frac n={a * x - b - c * d} d={d} bold={false} /></>, x },
+  ];
+  return variants[randInt(0, variants.length - 1)]!;
+}
+
+export function Exercise35({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(2);
+  const questions = useMemo(
+    // Motif actuel répété : alternance facile / difficile.
+    () => Array.from({ length: questionCount }, (_, i) => (i % 2 === 0 ? genEx35Easy() : genEx35Hard())),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [exerciseKey, questionCount]);
+
+  const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchNum(a1, data.q1.x)) pts++;
-    if (matchNum(a2, data.q2.x)) pts++;
+    questions.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.x)) pts++; });
     onValidated(pts, 2);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
+  // Lignes de développement « ___ = ___ » en couleur thème
   const workLine = (key: string) => (
     <div key={key} className="flex w-full items-center gap-2">
-      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-black" />
+      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-[var(--color-theme)]" />
       <span className="text-[var(--color-text-secondary)]">=</span>
-      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-black" />
+      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-[var(--color-theme)]" />
     </div>
   );
+
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-6 gap-y-4";
 
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Trouver la valeur de x.</p>
-      <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
-        <div className="flex flex-col items-stretch gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-            <span className="font-mono">{data.q1.left}</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
-            <span className="font-mono">{data.q1.right}</span>
+      <div className={`${listCls} text-sm`}>
+        {questions.map((q, i) => (
+          <div key={i} className="flex flex-col items-stretch gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="font-mono">{q.left}</span>
+              <span className="text-[var(--color-text-secondary)]">=</span>
+              <span className="font-mono">{q.right}</span>
+            </div>
+            {[0, 1, 2].map(w => workLine(`q${i}-w${w}`))}
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[var(--color-text-primary)]">x</span>
+              <span className="text-[var(--color-text-secondary)]">=</span>
+              <CorrectionInput
+                value={answers[i] ?? ""}
+                onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
+                correct={String(q.x)}
+                validated={validated}
+                width="w-20"
+              />
+            </div>
           </div>
-          {[0, 1, 2].map(i => workLine(`q1-w${i}`))}
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-[var(--color-text-primary)]">x</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
-            <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.x)} validated={validated} width="w-20" />
-          </div>
-        </div>
-
-        <div className="flex flex-col items-stretch gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-            <span className="font-mono">{data.q2.left}</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
-            <span className="font-mono">{data.q2.right}</span>
-          </div>
-          {[0, 1, 2].map(i => workLine(`q2-w${i}`))}
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-[var(--color-text-primary)]">x</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
-            <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.x)} validated={validated} width="w-20" />
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
@@ -932,18 +981,16 @@ function genConversion(group: UnitGroup): { value: number; from: string; to: str
   return { value, from: group.units[fi]!, to: group.units[ti]!, ans: value * factor };
 }
 
-export function Exercise36({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+export function Exercise36({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
+  const { questionCount, columns } = usePrintQuestionLayout(4);
   const questions = useMemo(() => {
-    return [
-      genConversion(UNIT_GROUPS.area!),
-      genConversion(UNIT_GROUPS.volume!),
-      genConversion(UNIT_GROUPS.capacity!),
-      genConversion(UNIT_GROUPS.mass!),
-    ];
+    // Motif actuel répété : aire, volume, capacité, masse.
+    const groups = [UNIT_GROUPS.area!, UNIT_GROUPS.volume!, UNIT_GROUPS.capacity!, UNIT_GROUPS.mass!];
+    return Array.from({ length: questionCount }, (_, i) => genConversion(groups[i % 4]!));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+  }, [exerciseKey, questionCount]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(4).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -963,14 +1010,17 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
     return fmtDec(n, Math.min(dp, 10)).replace(/,?0+$/, "");
   };
 
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+      <div className={`${listCls} text-sm`}>
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span>{fmtV(q.value)} {q.from}</span>
+            {/* Largeur fixe → tous les « = » alignés verticalement */}
+            <span className="inline-block w-[11ch] shrink-0 text-right font-mono">{fmtV(q.value)} {q.from}</span>
             <span className="text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
@@ -1043,12 +1093,12 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
       </svg>
       <div className="grid grid-cols-2 gap-4">
         <div className="flex items-center gap-2">
-          <span className="w-28 shrink-0 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
+          <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
           <CorrectionInput value={ansP} onChange={setAnsP} correct={fmtMeasure(data.perimeter)} validated={validated} />
           <span className="text-sm text-[var(--color-text-secondary)]">cm</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-28 shrink-0 text-sm text-[var(--color-text-secondary)]">Aire =</span>
+          <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Aire =</span>
           <CorrectionInput value={ansA} onChange={setAnsA}
             correct={Number.isInteger(data.area) ? String(data.area) : fmtDec(data.area, 1)}
             validated={validated} />
@@ -1108,14 +1158,14 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
       </svg>
       <div className="grid grid-cols-2 gap-4">
         <div className="flex items-center gap-2">
-          <span className="w-36 shrink-0 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
+          <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
           <CorrectionInput value={ansC} onChange={setAnsC}
             correct={fmtDec(data.perimeter, 2)}
             validated={validated} width="w-20" />
           <span className="text-sm text-[var(--color-text-secondary)]">cm</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-36 shrink-0 text-sm text-[var(--color-text-secondary)]">Aire =</span>
+          <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Aire =</span>
           <CorrectionInput value={ansA} onChange={setAnsA}
             correct={fmtDec(data.area, 3)}
             validated={validated} width="w-24" />
