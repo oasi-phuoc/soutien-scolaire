@@ -240,10 +240,8 @@ function WritingExercise({
   return (
     <div className="space-y-5">
       <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-white/75 p-4">
-        <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
         {prompt.sourceMessage && (
-          <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/85 p-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
+          <div className="mb-3 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/85 p-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
             {prompt.sourceMessage.from && (
               <p><span className="font-semibold">De :</span> {prompt.sourceMessage.from}</p>
             )}
@@ -255,7 +253,7 @@ function WritingExercise({
             </div>
           </div>
         )}
-        <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
+        <p className="text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
         {prompt.points.length > 0 && (
           <ul className="mt-3 space-y-1">
             {prompt.points.map((point) => (
@@ -860,10 +858,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const poPoolAll = !lesson || lesson.writingLevel ? [] : (lesson.poDialogues ?? []);
   const pePoolAll = !lesson || lesson.writingLevel ? [] : (lesson.pePrompts ?? []);
 
-  const [{ trainingExercises, evalPack, evalSteps }] = useState(() => {
+  const [{ evalPack, evalSteps }, setEvalBundle] = useState(() => {
     if (!lesson || lesson.writingLevel) {
       return {
-        trainingExercises: [] as CommunicationExercise[],
         evalPack: {
           co: null as CommunicationExercise | null,
           ce: null as CommunicationExercise | null,
@@ -876,12 +873,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     }
     const split = splitOralExercises(lesson, seedNum);
     const trainingCe = pickSeeded(cePool, seedNum + 11);
-    const trainingCeEmail = pickSeeded(ceEmailPoolAll, seedNum + 12);
-    const training = [
-      ...split.training,
-      ...(trainingCe ? [trainingCe] : []),
-      ...(trainingCeEmail ? [trainingCeEmail] : []),
-    ];
     const co = pickSeeded(
       split.evalEx.length > 0 ? split.evalEx : split.training,
       seedNum + 21,
@@ -901,7 +892,19 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     if (pack.ce) steps.push("ce");
     if (pack.po) steps.push("po");
     if (pack.pe) steps.push("pe");
-    return { trainingExercises: training, evalPack: pack, evalSteps: steps };
+    return { evalPack: pack, evalSteps: steps };
+  });
+
+  const [trainingExercises, setTrainingExercises] = useState<CommunicationExercise[]>(() => {
+    if (!lesson || lesson.writingLevel) return [];
+    const split = splitOralExercises(lesson, seedNum);
+    const trainingCe = pickSeeded(cePool, seedNum + 11);
+    const trainingCeEmail = pickSeeded(ceEmailPoolAll, seedNum + 12);
+    return [
+      ...split.training,
+      ...(trainingCe ? [trainingCe] : []),
+      ...(trainingCeEmail ? [trainingCeEmail] : []),
+    ];
   });
 
   const [phase, setPhase] = useState<Phase>(() => {
@@ -1150,7 +1153,14 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     if (phase === "eval_ce") {
       setEvalCeAnswer(null);
       setEvalCeValidated(false);
-      if (evalPack.ce) {
+      const nextCe = pickSeededOther(cePool, evalPack.ce?.id, Date.now());
+      if (nextCe) {
+        setEvalBundle((prev) => ({
+          ...prev,
+          evalPack: { ...prev.evalPack, ce: nextCe },
+        }));
+        setExerciseSeeds((prev) => ({ ...prev, [nextCe.id]: String(Date.now() % 100000) }));
+      } else if (evalPack.ce) {
         setExerciseSeeds((prev) => ({ ...prev, [evalPack.ce!.id]: String(Date.now() % 100000) }));
       }
       return;
@@ -1168,7 +1178,29 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     }
     // Entraînement : re-randomise le tirage de l'exercice courant.
     const ex = trainingExercises[exIndex];
-    if (ex) {
+    if (ex?.readingText) {
+      // CE message / CE e-mail : nouveau texte du pool (+ nouvelles questions).
+      const pool = ceEmailPoolAll.some((e) => e.id === ex.id)
+        ? ceEmailPoolAll
+        : cePool.some((e) => e.id === ex.id)
+          ? cePool
+          : ex.id.includes("email")
+            ? ceEmailPoolAll
+            : cePool;
+      const next = pickSeededOther(pool, ex.id, Date.now() + exIndex * 7919);
+      if (next) {
+        setTrainingExercises((prev) => prev.map((e, i) => (i === exIndex ? next : e)));
+        setExerciseSeeds((prev) => ({
+          ...prev,
+          [next.id]: String((Date.now() + exIndex * 7919) % 100000),
+        }));
+      } else {
+        setExerciseSeeds((prev) => ({
+          ...prev,
+          [ex.id]: String((Date.now() + exIndex * 7919) % 100000),
+        }));
+      }
+    } else if (ex) {
       setExerciseSeeds((prev) => ({
         ...prev,
         [ex.id]: String((Date.now() + exIndex * 7919) % 100000),

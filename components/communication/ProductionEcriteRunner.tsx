@@ -457,10 +457,8 @@ function WritingExercise({
   return (
     <div className="space-y-5">
       <div>
-        <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
-        <p className="mt-2 w-full text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
         <SourceMessageCard prompt={prompt} />
-        <p className="mt-3 w-full text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
+        <p className="w-full text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
         {prompt.points.length > 0 && (
           <ul className="mt-3 space-y-1">
             {prompt.points.map((point) => (
