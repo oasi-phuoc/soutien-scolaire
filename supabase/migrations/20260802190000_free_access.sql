@@ -1,5 +1,6 @@
--- Accès libre aux leçons de grammaire (sans verrouillage séquentiel).
--- Les admins / profs ont déjà un bypass côté app.
+-- Accès libre aux leçons (sans verrouillage séquentiel grammaire).
+-- À appliquer sur le projet Supabase (SQL Editor ou `supabase db push`).
+-- Les admins / profs ont déjà un bypass côté app, indépendamment du flag.
 
 ALTER TABLE public.profiles
   ADD COLUMN IF NOT EXISTS can_free_access boolean NOT NULL DEFAULT false;
@@ -11,12 +12,14 @@ CREATE INDEX IF NOT EXISTS profiles_can_free_access_idx
   ON public.profiles (can_free_access)
   WHERE can_free_access = true;
 
+-- Empêche un utilisateur non-admin de s'accorder / retirer can_free_access via UPDATE direct.
 CREATE OR REPLACE FUNCTION public.protect_profiles_can_free_access()
 RETURNS trigger
 LANGUAGE plpgsql
 AS $$
 BEGIN
   IF NEW.can_free_access IS DISTINCT FROM OLD.can_free_access THEN
+    -- service_role / migrations : auth.uid() est souvent NULL → autorisé
     IF auth.uid() IS NOT NULL
        AND NOT EXISTS (
          SELECT 1 FROM public.profiles
@@ -35,6 +38,7 @@ CREATE TRIGGER trg_protect_profiles_can_free_access
   FOR EACH ROW
   EXECUTE FUNCTION public.protect_profiles_can_free_access();
 
+-- Lecture : l'utilisateur connecté a-t-il l'accès libre aux leçons ?
 CREATE OR REPLACE FUNCTION public.can_access_free_lessons()
 RETURNS boolean
 LANGUAGE sql
@@ -52,6 +56,7 @@ AS $$
   );
 $$;
 
+-- Admin : accorder / retirer l'accès libre à un compte.
 CREATE OR REPLACE FUNCTION public.set_user_free_access(p_user_id uuid, p_enabled boolean)
 RETURNS boolean
 LANGUAGE plpgsql
@@ -82,7 +87,7 @@ REVOKE ALL ON FUNCTION public.set_user_free_access(uuid, boolean) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.can_access_free_lessons() TO authenticated;
 GRANT EXECUTE ON FUNCTION public.set_user_free_access(uuid, boolean) TO authenticated;
 
--- Exposer can_free_access dans la liste admin.
+-- Exposer can_free_access dans la liste admin (en plus de can_print).
 DROP FUNCTION IF EXISTS public.get_users_for_admin();
 
 CREATE FUNCTION public.get_users_for_admin()
