@@ -78,23 +78,6 @@ export const A1_GR_L04: GrammarLesson = {
       ],
       allBullets: true,
     },
-    {
-      type: "heading",
-      text: "Contractions avec les prépositions",
-      sub: true,
-      accent: true,
-    },
-    {
-      type: "highlight",
-      label: "Attention",
-      items: [
-        "à + {a}le{/a} → {a}au{/a} · à + {a}les{/a} → {a}aux{/a}",
-        "de + {a}le{/a} → {a}du{/a} · de + {a}les{/a} → {a}des{/a}",
-        "Exemples : Je parle {a}au{/a} professeur. · Je parle {a}du{/a} professeur.",
-      ],
-      noBulletItems: [0, 1, 2],
-      inlineArrows: true,
-    },
   ],
   exercises: [
     {
