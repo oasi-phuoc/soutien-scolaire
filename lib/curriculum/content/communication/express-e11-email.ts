@@ -170,14 +170,1671 @@ const E11_1_CE_EMAIL_POOL = buildExpressPool("e11-1-ce-email", [
   }),
 ]);
 
-export const E11_1_CE_EMAIL: CommunicationExercise = readingPoolExercise({
+
+const E11_1_CE_EMAIL_2_TEXT = `Info E-mail cuisine — Message 2
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_2_POOL = buildExpressPool("e11-1-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 2 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 2 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_3_TEXT = `Info E-mail cuisine — Message 3
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_3_POOL = buildExpressPool("e11-1-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 3 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 3 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_4_TEXT = `Info E-mail cuisine — Message 4
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_4_POOL = buildExpressPool("e11-1-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 4 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 4 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_5_TEXT = `Info E-mail cuisine — Message 5
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_5_POOL = buildExpressPool("e11-1-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 5 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 5 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_6_TEXT = `Info E-mail cuisine — Message 6
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_6_POOL = buildExpressPool("e11-1-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 6 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 6 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_7_TEXT = `Info E-mail cuisine — Message 7
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_7_POOL = buildExpressPool("e11-1-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 7 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 7 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_8_TEXT = `Info E-mail cuisine — Message 8
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_8_POOL = buildExpressPool("e11-1-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 8 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 8 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_9_TEXT = `Info E-mail cuisine — Message 9
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_9_POOL = buildExpressPool("e11-1-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 9 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 9 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_10_TEXT = `Info E-mail cuisine — Message 10
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_10_POOL = buildExpressPool("e11-1-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 10 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 10 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_11_TEXT = `Info E-mail cuisine — Message 11
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_11_POOL = buildExpressPool("e11-1-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 11 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 11 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_12_TEXT = `Info E-mail cuisine — Message 12
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_12_POOL = buildExpressPool("e11-1-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 12 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 12 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_13_TEXT = `Info E-mail cuisine — Message 13
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_13_POOL = buildExpressPool("e11-1-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 13 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 13 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_14_TEXT = `Info E-mail cuisine — Message 14
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_14_POOL = buildExpressPool("e11-1-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 14 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 14 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_15_TEXT = `Info E-mail cuisine — Message 15
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_15_POOL = buildExpressPool("e11-1-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 15 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 15 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_16_TEXT = `Info E-mail cuisine — Message 16
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_16_POOL = buildExpressPool("e11-1-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 16 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 16 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_17_TEXT = `Info E-mail cuisine — Message 17
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_17_POOL = buildExpressPool("e11-1-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 17 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 17 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_18_TEXT = `Info E-mail cuisine — Message 18
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_18_POOL = buildExpressPool("e11-1-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 18 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 18 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_19_TEXT = `Info E-mail cuisine — Message 19
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_19_POOL = buildExpressPool("e11-1-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 19 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 19 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_1_CE_EMAIL_20_TEXT = `Info E-mail cuisine — Message 20
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail cuisine.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_1_CE_EMAIL_20_POOL = buildExpressPool("e11-1-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail cuisine", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail cuisine.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 20 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 20 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+export const E11_1_CE_EMAIL: CommunicationExercise[] = [
+readingPoolExercise({
   id: "e11-1-ce-email",
   readingText: E11_1_CE_EMAIL_TEXT,
   questionPool: E11_1_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-2",
+  readingText: E11_1_CE_EMAIL_2_TEXT,
+  questionPool: E11_1_CE_EMAIL_2_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-3",
+  readingText: E11_1_CE_EMAIL_3_TEXT,
+  questionPool: E11_1_CE_EMAIL_3_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-4",
+  readingText: E11_1_CE_EMAIL_4_TEXT,
+  questionPool: E11_1_CE_EMAIL_4_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-5",
+  readingText: E11_1_CE_EMAIL_5_TEXT,
+  questionPool: E11_1_CE_EMAIL_5_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-6",
+  readingText: E11_1_CE_EMAIL_6_TEXT,
+  questionPool: E11_1_CE_EMAIL_6_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-7",
+  readingText: E11_1_CE_EMAIL_7_TEXT,
+  questionPool: E11_1_CE_EMAIL_7_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-8",
+  readingText: E11_1_CE_EMAIL_8_TEXT,
+  questionPool: E11_1_CE_EMAIL_8_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-9",
+  readingText: E11_1_CE_EMAIL_9_TEXT,
+  questionPool: E11_1_CE_EMAIL_9_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-10",
+  readingText: E11_1_CE_EMAIL_10_TEXT,
+  questionPool: E11_1_CE_EMAIL_10_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-11",
+  readingText: E11_1_CE_EMAIL_11_TEXT,
+  questionPool: E11_1_CE_EMAIL_11_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-12",
+  readingText: E11_1_CE_EMAIL_12_TEXT,
+  questionPool: E11_1_CE_EMAIL_12_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-13",
+  readingText: E11_1_CE_EMAIL_13_TEXT,
+  questionPool: E11_1_CE_EMAIL_13_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-14",
+  readingText: E11_1_CE_EMAIL_14_TEXT,
+  questionPool: E11_1_CE_EMAIL_14_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-15",
+  readingText: E11_1_CE_EMAIL_15_TEXT,
+  questionPool: E11_1_CE_EMAIL_15_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-16",
+  readingText: E11_1_CE_EMAIL_16_TEXT,
+  questionPool: E11_1_CE_EMAIL_16_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-17",
+  readingText: E11_1_CE_EMAIL_17_TEXT,
+  questionPool: E11_1_CE_EMAIL_17_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-18",
+  readingText: E11_1_CE_EMAIL_18_TEXT,
+  questionPool: E11_1_CE_EMAIL_18_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-19",
+  readingText: E11_1_CE_EMAIL_19_TEXT,
+  questionPool: E11_1_CE_EMAIL_19_POOL
+}),
+readingPoolExercise({
+  id: "e11-1-ce-email-20",
+  readingText: E11_1_CE_EMAIL_20_TEXT,
+  questionPool: E11_1_CE_EMAIL_20_POOL
+}),
+];
 
 export const E11_1_PE_EMAIL: ExpressPePrompt[] = [
+
   {
     id: "e11-1-pee-1",
     title: "Accepter une invitation à dîner",
@@ -318,6 +1975,136 @@ export const E11_1_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e11-1-pee-11",
+    title: "Répondre — cuisine (11)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1100",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-12",
+    title: "Répondre — cuisine (12)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1200",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-13",
+    title: "Répondre — cuisine (13)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1300",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-14",
+    title: "Répondre — cuisine (14)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1400",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-15",
+    title: "Répondre — cuisine (15)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1500",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-16",
+    title: "Répondre — cuisine (16)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1600",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-17",
+    title: "Répondre — cuisine (17)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1700",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-18",
+    title: "Répondre — cuisine (18)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1800",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-19",
+    title: "Répondre — cuisine (19)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 1900",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-1-pee-20",
+    title: "Répondre — cuisine (20)",
+    situation: "Vous avez reçu un e-mail concernant cuisine.",
+sourceMessage: {
+  from: "Service Cuisine",
+  subject: "Votre demande — référence 2000",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant cuisine.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  }
 ];
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -489,14 +2276,1671 @@ const E11_2_CE_EMAIL_POOL = buildExpressPool("e11-2-ce-email", [
   }),
 ]);
 
-export const E11_2_CE_EMAIL: CommunicationExercise = readingPoolExercise({
+
+const E11_2_CE_EMAIL_2_TEXT = `Info E-mail activités — Message 2
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_2_POOL = buildExpressPool("e11-2-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 2 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 2 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_3_TEXT = `Info E-mail activités — Message 3
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_3_POOL = buildExpressPool("e11-2-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 3 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 3 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_4_TEXT = `Info E-mail activités — Message 4
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_4_POOL = buildExpressPool("e11-2-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 4 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 4 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_5_TEXT = `Info E-mail activités — Message 5
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_5_POOL = buildExpressPool("e11-2-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 5 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 5 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_6_TEXT = `Info E-mail activités — Message 6
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_6_POOL = buildExpressPool("e11-2-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 6 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 6 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_7_TEXT = `Info E-mail activités — Message 7
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_7_POOL = buildExpressPool("e11-2-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 7 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 7 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_8_TEXT = `Info E-mail activités — Message 8
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_8_POOL = buildExpressPool("e11-2-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 8 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 8 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_9_TEXT = `Info E-mail activités — Message 9
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_9_POOL = buildExpressPool("e11-2-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 9 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 9 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_10_TEXT = `Info E-mail activités — Message 10
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_10_POOL = buildExpressPool("e11-2-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 10 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 10 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_11_TEXT = `Info E-mail activités — Message 11
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_11_POOL = buildExpressPool("e11-2-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 11 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 11 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_12_TEXT = `Info E-mail activités — Message 12
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_12_POOL = buildExpressPool("e11-2-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 12 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 12 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_13_TEXT = `Info E-mail activités — Message 13
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_13_POOL = buildExpressPool("e11-2-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 13 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 13 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_14_TEXT = `Info E-mail activités — Message 14
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_14_POOL = buildExpressPool("e11-2-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 14 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 14 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_15_TEXT = `Info E-mail activités — Message 15
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_15_POOL = buildExpressPool("e11-2-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 15 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 15 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_16_TEXT = `Info E-mail activités — Message 16
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_16_POOL = buildExpressPool("e11-2-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 16 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 16 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_17_TEXT = `Info E-mail activités — Message 17
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_17_POOL = buildExpressPool("e11-2-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 17 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 17 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_18_TEXT = `Info E-mail activités — Message 18
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_18_POOL = buildExpressPool("e11-2-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 18 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 18 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_19_TEXT = `Info E-mail activités — Message 19
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_19_POOL = buildExpressPool("e11-2-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 19 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 19 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_2_CE_EMAIL_20_TEXT = `Info E-mail activités — Message 20
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail activités.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_2_CE_EMAIL_20_POOL = buildExpressPool("e11-2-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail activités", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail activités.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail activités.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 20 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 20 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+export const E11_2_CE_EMAIL: CommunicationExercise[] = [
+readingPoolExercise({
   id: "e11-2-ce-email",
   readingText: E11_2_CE_EMAIL_TEXT,
   questionPool: E11_2_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-2",
+  readingText: E11_2_CE_EMAIL_2_TEXT,
+  questionPool: E11_2_CE_EMAIL_2_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-3",
+  readingText: E11_2_CE_EMAIL_3_TEXT,
+  questionPool: E11_2_CE_EMAIL_3_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-4",
+  readingText: E11_2_CE_EMAIL_4_TEXT,
+  questionPool: E11_2_CE_EMAIL_4_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-5",
+  readingText: E11_2_CE_EMAIL_5_TEXT,
+  questionPool: E11_2_CE_EMAIL_5_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-6",
+  readingText: E11_2_CE_EMAIL_6_TEXT,
+  questionPool: E11_2_CE_EMAIL_6_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-7",
+  readingText: E11_2_CE_EMAIL_7_TEXT,
+  questionPool: E11_2_CE_EMAIL_7_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-8",
+  readingText: E11_2_CE_EMAIL_8_TEXT,
+  questionPool: E11_2_CE_EMAIL_8_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-9",
+  readingText: E11_2_CE_EMAIL_9_TEXT,
+  questionPool: E11_2_CE_EMAIL_9_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-10",
+  readingText: E11_2_CE_EMAIL_10_TEXT,
+  questionPool: E11_2_CE_EMAIL_10_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-11",
+  readingText: E11_2_CE_EMAIL_11_TEXT,
+  questionPool: E11_2_CE_EMAIL_11_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-12",
+  readingText: E11_2_CE_EMAIL_12_TEXT,
+  questionPool: E11_2_CE_EMAIL_12_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-13",
+  readingText: E11_2_CE_EMAIL_13_TEXT,
+  questionPool: E11_2_CE_EMAIL_13_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-14",
+  readingText: E11_2_CE_EMAIL_14_TEXT,
+  questionPool: E11_2_CE_EMAIL_14_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-15",
+  readingText: E11_2_CE_EMAIL_15_TEXT,
+  questionPool: E11_2_CE_EMAIL_15_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-16",
+  readingText: E11_2_CE_EMAIL_16_TEXT,
+  questionPool: E11_2_CE_EMAIL_16_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-17",
+  readingText: E11_2_CE_EMAIL_17_TEXT,
+  questionPool: E11_2_CE_EMAIL_17_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-18",
+  readingText: E11_2_CE_EMAIL_18_TEXT,
+  questionPool: E11_2_CE_EMAIL_18_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-19",
+  readingText: E11_2_CE_EMAIL_19_TEXT,
+  questionPool: E11_2_CE_EMAIL_19_POOL
+}),
+readingPoolExercise({
+  id: "e11-2-ce-email-20",
+  readingText: E11_2_CE_EMAIL_20_TEXT,
+  questionPool: E11_2_CE_EMAIL_20_POOL
+}),
+];
 
 export const E11_2_PE_EMAIL: ExpressPePrompt[] = [
+
   {
     id: "e11-2-pee-1",
     title: "Accepter un cours d'essai",
@@ -637,6 +4081,136 @@ export const E11_2_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e11-2-pee-11",
+    title: "Répondre — activités (11)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1100",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-12",
+    title: "Répondre — activités (12)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1200",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-13",
+    title: "Répondre — activités (13)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1300",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-14",
+    title: "Répondre — activités (14)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1400",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-15",
+    title: "Répondre — activités (15)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1500",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-16",
+    title: "Répondre — activités (16)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1600",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-17",
+    title: "Répondre — activités (17)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1700",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-18",
+    title: "Répondre — activités (18)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1800",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-19",
+    title: "Répondre — activités (19)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 1900",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-2-pee-20",
+    title: "Répondre — activités (20)",
+    situation: "Vous avez reçu un e-mail concernant activités.",
+sourceMessage: {
+  from: "Service Activités",
+  subject: "Votre demande — référence 2000",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant activités.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  }
 ];
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -797,14 +4371,1671 @@ const E11_3_CE_EMAIL_POOL = buildExpressPool("e11-3-ce-email", [
   }),
 ]);
 
-export const E11_3_CE_EMAIL: CommunicationExercise = readingPoolExercise({
+
+const E11_3_CE_EMAIL_2_TEXT = `Info E-mail goûts — Message 2
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_2_POOL = buildExpressPool("e11-3-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 2 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 2 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_3_TEXT = `Info E-mail goûts — Message 3
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_3_POOL = buildExpressPool("e11-3-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 3 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 3 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_4_TEXT = `Info E-mail goûts — Message 4
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_4_POOL = buildExpressPool("e11-3-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 4 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 4 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_5_TEXT = `Info E-mail goûts — Message 5
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_5_POOL = buildExpressPool("e11-3-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 5 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 5 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_6_TEXT = `Info E-mail goûts — Message 6
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_6_POOL = buildExpressPool("e11-3-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 6 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 6 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_7_TEXT = `Info E-mail goûts — Message 7
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_7_POOL = buildExpressPool("e11-3-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 7 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 7 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_8_TEXT = `Info E-mail goûts — Message 8
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_8_POOL = buildExpressPool("e11-3-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 8 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 8 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_9_TEXT = `Info E-mail goûts — Message 9
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_9_POOL = buildExpressPool("e11-3-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 9 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 9 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_10_TEXT = `Info E-mail goûts — Message 10
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_10_POOL = buildExpressPool("e11-3-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 10 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 10 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_11_TEXT = `Info E-mail goûts — Message 11
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_11_POOL = buildExpressPool("e11-3-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 11 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 11 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_12_TEXT = `Info E-mail goûts — Message 12
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_12_POOL = buildExpressPool("e11-3-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 12 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 12 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_13_TEXT = `Info E-mail goûts — Message 13
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_13_POOL = buildExpressPool("e11-3-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 13 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 13 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_14_TEXT = `Info E-mail goûts — Message 14
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_14_POOL = buildExpressPool("e11-3-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 14 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 14 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_15_TEXT = `Info E-mail goûts — Message 15
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_15_POOL = buildExpressPool("e11-3-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 15 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 15 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_16_TEXT = `Info E-mail goûts — Message 16
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_16_POOL = buildExpressPool("e11-3-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 16 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 16 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_17_TEXT = `Info E-mail goûts — Message 17
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_17_POOL = buildExpressPool("e11-3-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 17 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 17 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_18_TEXT = `Info E-mail goûts — Message 18
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_18_POOL = buildExpressPool("e11-3-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 18 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 18 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_19_TEXT = `Info E-mail goûts — Message 19
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_19_POOL = buildExpressPool("e11-3-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 19 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 19 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_3_CE_EMAIL_20_TEXT = `Info E-mail goûts — Message 20
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail goûts.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_3_CE_EMAIL_20_POOL = buildExpressPool("e11-3-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail goûts", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail goûts.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail goûts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 20 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 20 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+export const E11_3_CE_EMAIL: CommunicationExercise[] = [
+readingPoolExercise({
   id: "e11-3-ce-email",
   readingText: E11_3_CE_EMAIL_TEXT,
   questionPool: E11_3_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-2",
+  readingText: E11_3_CE_EMAIL_2_TEXT,
+  questionPool: E11_3_CE_EMAIL_2_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-3",
+  readingText: E11_3_CE_EMAIL_3_TEXT,
+  questionPool: E11_3_CE_EMAIL_3_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-4",
+  readingText: E11_3_CE_EMAIL_4_TEXT,
+  questionPool: E11_3_CE_EMAIL_4_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-5",
+  readingText: E11_3_CE_EMAIL_5_TEXT,
+  questionPool: E11_3_CE_EMAIL_5_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-6",
+  readingText: E11_3_CE_EMAIL_6_TEXT,
+  questionPool: E11_3_CE_EMAIL_6_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-7",
+  readingText: E11_3_CE_EMAIL_7_TEXT,
+  questionPool: E11_3_CE_EMAIL_7_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-8",
+  readingText: E11_3_CE_EMAIL_8_TEXT,
+  questionPool: E11_3_CE_EMAIL_8_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-9",
+  readingText: E11_3_CE_EMAIL_9_TEXT,
+  questionPool: E11_3_CE_EMAIL_9_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-10",
+  readingText: E11_3_CE_EMAIL_10_TEXT,
+  questionPool: E11_3_CE_EMAIL_10_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-11",
+  readingText: E11_3_CE_EMAIL_11_TEXT,
+  questionPool: E11_3_CE_EMAIL_11_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-12",
+  readingText: E11_3_CE_EMAIL_12_TEXT,
+  questionPool: E11_3_CE_EMAIL_12_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-13",
+  readingText: E11_3_CE_EMAIL_13_TEXT,
+  questionPool: E11_3_CE_EMAIL_13_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-14",
+  readingText: E11_3_CE_EMAIL_14_TEXT,
+  questionPool: E11_3_CE_EMAIL_14_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-15",
+  readingText: E11_3_CE_EMAIL_15_TEXT,
+  questionPool: E11_3_CE_EMAIL_15_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-16",
+  readingText: E11_3_CE_EMAIL_16_TEXT,
+  questionPool: E11_3_CE_EMAIL_16_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-17",
+  readingText: E11_3_CE_EMAIL_17_TEXT,
+  questionPool: E11_3_CE_EMAIL_17_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-18",
+  readingText: E11_3_CE_EMAIL_18_TEXT,
+  questionPool: E11_3_CE_EMAIL_18_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-19",
+  readingText: E11_3_CE_EMAIL_19_TEXT,
+  questionPool: E11_3_CE_EMAIL_19_POOL
+}),
+readingPoolExercise({
+  id: "e11-3-ce-email-20",
+  readingText: E11_3_CE_EMAIL_20_TEXT,
+  questionPool: E11_3_CE_EMAIL_20_POOL
+}),
+];
 
 export const E11_3_PE_EMAIL: ExpressPePrompt[] = [
+
   {
     id: "e11-3-pee-1",
     title: "Accepter une soirée cinéma",
@@ -945,6 +6176,136 @@ export const E11_3_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e11-3-pee-11",
+    title: "Répondre — goûts (11)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1100",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-12",
+    title: "Répondre — goûts (12)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1200",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-13",
+    title: "Répondre — goûts (13)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1300",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-14",
+    title: "Répondre — goûts (14)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1400",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-15",
+    title: "Répondre — goûts (15)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1500",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-16",
+    title: "Répondre — goûts (16)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1600",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-17",
+    title: "Répondre — goûts (17)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1700",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-18",
+    title: "Répondre — goûts (18)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1800",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-19",
+    title: "Répondre — goûts (19)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 1900",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-3-pee-20",
+    title: "Répondre — goûts (20)",
+    situation: "Vous avez reçu un e-mail concernant goûts.",
+sourceMessage: {
+  from: "Service Goûts",
+  subject: "Votre demande — référence 2000",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant goûts.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  }
 ];
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -1106,14 +6467,1671 @@ const E11_4_CE_EMAIL_POOL = buildExpressPool("e11-4-ce-email", [
   }),
 ]);
 
-export const E11_4_CE_EMAIL: CommunicationExercise = readingPoolExercise({
+
+const E11_4_CE_EMAIL_2_TEXT = `Info E-mail vacances — Message 2
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 2 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_2_POOL = buildExpressPool("e11-4-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["2 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 2 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 2 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_3_TEXT = `Info E-mail vacances — Message 3
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 3 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_3_POOL = buildExpressPool("e11-4-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["3 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 3 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 3 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_4_TEXT = `Info E-mail vacances — Message 4
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 4 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_4_POOL = buildExpressPool("e11-4-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["4 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 4 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 4 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_5_TEXT = `Info E-mail vacances — Message 5
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 5 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_5_POOL = buildExpressPool("e11-4-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["5 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 5 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 5 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_6_TEXT = `Info E-mail vacances — Message 6
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 6 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_6_POOL = buildExpressPool("e11-4-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["6 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 6 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 6 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_7_TEXT = `Info E-mail vacances — Message 7
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 7 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_7_POOL = buildExpressPool("e11-4-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["7 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 7 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 7 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_8_TEXT = `Info E-mail vacances — Message 8
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 8 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_8_POOL = buildExpressPool("e11-4-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["8 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 8 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 8 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_9_TEXT = `Info E-mail vacances — Message 9
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 9 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_9_POOL = buildExpressPool("e11-4-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["9 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 9 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 9 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_10_TEXT = `Info E-mail vacances — Message 10
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 10 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_10_POOL = buildExpressPool("e11-4-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["10 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 10 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 10 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_11_TEXT = `Info E-mail vacances — Message 11
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 11 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_11_POOL = buildExpressPool("e11-4-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["11 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 11 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 11 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_12_TEXT = `Info E-mail vacances — Message 12
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 12 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_12_POOL = buildExpressPool("e11-4-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["12 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 12 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 12 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_13_TEXT = `Info E-mail vacances — Message 13
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 13 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_13_POOL = buildExpressPool("e11-4-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["13 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 13 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 13 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_14_TEXT = `Info E-mail vacances — Message 14
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 14 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_14_POOL = buildExpressPool("e11-4-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["14 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 14 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 14 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_15_TEXT = `Info E-mail vacances — Message 15
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 15 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_15_POOL = buildExpressPool("e11-4-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["15 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 15 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 15 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_16_TEXT = `Info E-mail vacances — Message 16
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 16 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_16_POOL = buildExpressPool("e11-4-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["16 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 16 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 16 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_17_TEXT = `Info E-mail vacances — Message 17
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 17 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_17_POOL = buildExpressPool("e11-4-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["17 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 17 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 17 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_18_TEXT = `Info E-mail vacances — Message 18
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 18 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_18_POOL = buildExpressPool("e11-4-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["18 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 18 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 18 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_19_TEXT = `Info E-mail vacances — Message 19
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 19 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_19_POOL = buildExpressPool("e11-4-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["19 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 19 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 19 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+const E11_4_CE_EMAIL_20_TEXT = `Info E-mail vacances — Message 20
+
+Chers lecteurs, voici les informations importantes pour cette semaine concernant e-mail vacances.
+Le service est ouvert du lundi au vendredi, de 9 h à 18 h. Pour toute demande, contactez-nous par téléphone ou par e-mail.
+Les démarches se font en ligne ou sur place, selon votre situation. Pensez à apporter une pièce d'identité et un justificatif de domicile.
+Les délais de traitement sont de 20 jours ouvrés en moyenne. En cas d'urgence, un numéro spécial est disponible le samedi matin.
+Pour plus de détails, consultez notre site Internet ou rendez-vous à l'accueil. Notre équipe se tient à votre disposition.`;
+const E11_4_CE_EMAIL_20_POOL = buildExpressPool("e11-4-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel thème traite ce message ?",
+    text: ["E-mail vacances", "Le sport", "La cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les informations concernent e-mail vacances.",
+    fill: "e-mail",
+    vfQ: "Le texte parle de e-mail vacances.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires d'ouverture ?",
+    text: ["Du lundi au vendredi, 9 h–18 h", "Le dimanche seulement", "24 h sur 24"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le service est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le service est ouvert en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels documents faut-il apporter ?",
+    text: ["Pièce d'identité et justificatif de domicile", "Un passeport seulement", "Rien"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pensez à apporter une pièce d'_________ et un justificatif de domicile.",
+    fill: "identité",
+    vfQ: "Il faut une pièce d'identité.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps pour le traitement ?",
+    text: ["20 jours ouvrés", "Un jour", "Un mois"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les délais sont de 20 jours _________.",
+    fill: "ouvrés",
+    vfQ: "Le délai moyen est 20 jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Peut-on contacter le service le samedi ?",
+    text: ["Oui, le matin", "Non, jamais", "Seulement le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un numéro spécial est disponible le _________ matin.",
+    fill: "samedi",
+    vfQ: "Un numéro est disponible le samedi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Où trouver plus d'informations ?",
+    text: ["Sur le site Internet ou à l'accueil", "À la bibliothèque", "À l'étranger"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Consultez notre site _________ ou rendez-vous à l'accueil.",
+    fill: "Internet",
+    vfQ: "On peut consulter le site Internet.",
+    vfC: 0,
+  }),
+]);
+
+export const E11_4_CE_EMAIL: CommunicationExercise[] = [
+readingPoolExercise({
   id: "e11-4-ce-email",
   readingText: E11_4_CE_EMAIL_TEXT,
   questionPool: E11_4_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+instruction: "Lisez l'e-mail et répondez aux questions."
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-2",
+  readingText: E11_4_CE_EMAIL_2_TEXT,
+  questionPool: E11_4_CE_EMAIL_2_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-3",
+  readingText: E11_4_CE_EMAIL_3_TEXT,
+  questionPool: E11_4_CE_EMAIL_3_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-4",
+  readingText: E11_4_CE_EMAIL_4_TEXT,
+  questionPool: E11_4_CE_EMAIL_4_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-5",
+  readingText: E11_4_CE_EMAIL_5_TEXT,
+  questionPool: E11_4_CE_EMAIL_5_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-6",
+  readingText: E11_4_CE_EMAIL_6_TEXT,
+  questionPool: E11_4_CE_EMAIL_6_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-7",
+  readingText: E11_4_CE_EMAIL_7_TEXT,
+  questionPool: E11_4_CE_EMAIL_7_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-8",
+  readingText: E11_4_CE_EMAIL_8_TEXT,
+  questionPool: E11_4_CE_EMAIL_8_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-9",
+  readingText: E11_4_CE_EMAIL_9_TEXT,
+  questionPool: E11_4_CE_EMAIL_9_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-10",
+  readingText: E11_4_CE_EMAIL_10_TEXT,
+  questionPool: E11_4_CE_EMAIL_10_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-11",
+  readingText: E11_4_CE_EMAIL_11_TEXT,
+  questionPool: E11_4_CE_EMAIL_11_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-12",
+  readingText: E11_4_CE_EMAIL_12_TEXT,
+  questionPool: E11_4_CE_EMAIL_12_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-13",
+  readingText: E11_4_CE_EMAIL_13_TEXT,
+  questionPool: E11_4_CE_EMAIL_13_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-14",
+  readingText: E11_4_CE_EMAIL_14_TEXT,
+  questionPool: E11_4_CE_EMAIL_14_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-15",
+  readingText: E11_4_CE_EMAIL_15_TEXT,
+  questionPool: E11_4_CE_EMAIL_15_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-16",
+  readingText: E11_4_CE_EMAIL_16_TEXT,
+  questionPool: E11_4_CE_EMAIL_16_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-17",
+  readingText: E11_4_CE_EMAIL_17_TEXT,
+  questionPool: E11_4_CE_EMAIL_17_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-18",
+  readingText: E11_4_CE_EMAIL_18_TEXT,
+  questionPool: E11_4_CE_EMAIL_18_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-19",
+  readingText: E11_4_CE_EMAIL_19_TEXT,
+  questionPool: E11_4_CE_EMAIL_19_POOL
+}),
+readingPoolExercise({
+  id: "e11-4-ce-email-20",
+  readingText: E11_4_CE_EMAIL_20_TEXT,
+  questionPool: E11_4_CE_EMAIL_20_POOL
+}),
+];
 
 export const E11_4_PE_EMAIL: ExpressPePrompt[] = [
+
   {
     id: "e11-4-pee-1",
     title: "Préparer son arrivée à l'hôtel",
@@ -1254,4 +8272,134 @@ export const E11_4_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e11-4-pee-11",
+    title: "Répondre — vacances (11)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1100",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-12",
+    title: "Répondre — vacances (12)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1200",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-13",
+    title: "Répondre — vacances (13)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1300",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-14",
+    title: "Répondre — vacances (14)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1400",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-15",
+    title: "Répondre — vacances (15)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1500",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-16",
+    title: "Répondre — vacances (16)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1600",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-17",
+    title: "Répondre — vacances (17)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1700",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-18",
+    title: "Répondre — vacances (18)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1800",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-19",
+    title: "Répondre — vacances (19)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 1900",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  },
+  {
+    id: "e11-4-pee-20",
+    title: "Répondre — vacances (20)",
+    situation: "Vous avez reçu un e-mail concernant vacances.",
+sourceMessage: {
+  from: "Service Vacances",
+  subject: "Votre demande — référence 2000",
+  body: "Bonjour,\nNous avons bien reçu votre message concernant vacances.\nPouvez-vous nous préciser votre disponibilité ?\nCordialement,\nLe service",
+},    instruction: "Répondez poliment : confirmez la réception, répondez aux questions et proposez une suite.",
+    points: ["Confirmation de réception", "Réponses aux questions", "Proposition de suite"],
+    minWords: PE_MIN,
+    maxWords: PE_MAX,
+  }
 ];
