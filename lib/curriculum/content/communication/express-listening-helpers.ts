@@ -27,6 +27,28 @@ function supportsImageFormat(choices: { label: string; image: string }[]): boole
   return choices.every((c) => !!c.image);
 }
 
+/**
+ * QCM image uniquement pour une question de métier dont les 3 choix sont
+ * des professions illustrables. Jamais pour quantité, âge, lieu, oui/non, etc.
+ */
+function canUseImageFormat(q: ExpressMultiQuestion): boolean {
+  if (!supportsImageFormat(q.imageChoices)) return false;
+  const labels = q.imageChoices.map((c) => c.label.trim());
+  if (!labels.every((l) => l && isProfessionLabel(l))) return false;
+
+  const prompt = (q.imageQ || q.textQ).toLowerCase();
+  if (
+    /\b(combien|âge|ans|habitent|maison|sympa|sait pas|de quoi parle|message|prix|euro|franc|horaire|quand)\b/.test(
+      prompt,
+    )
+  ) {
+    return false;
+  }
+  return /\b(profession|métier|travaille|père|mère|frère|sœur|soeur|est-il|est-elle)\b/.test(
+    prompt,
+  );
+}
+
 /** Image « lecture » (fond blanc) pour un label — jamais le vocabulaire. */
 function lectureImageFor(label: string): string {
   const word = resolveWordImage(label);
@@ -199,7 +221,7 @@ export function buildExpressListeningTasks(
     }
   };
 
-  takeFirst((q) => supportsImageFormat(q.imageChoices), "image");
+  takeFirst(canUseImageFormat, "image");
   takeFirst(hasVfData, "vf");
   takeFirst(hasFillData, "fill");
 
