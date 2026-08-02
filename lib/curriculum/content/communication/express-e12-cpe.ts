@@ -21,8 +21,8 @@ const AMI = { title: "L'ami", vous: "l'ami / l'amie" };
 
 const E12_1_CE_TEXT = `Affiche — Une séance pour préparer une consultation
 
-La Maison des Acacias organise une séance pour préparer une consultation lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour une séance pour préparer une consultation.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez une carte d'assurance.
 Objectif : poser des questions au médecin. Inscription à l'accueil.`;
 
@@ -2362,8 +2362,8 @@ export const E12_1_PE: ExpressPePrompt[] = [
 
 const E12_2_CE_TEXT = `Affiche — Un entraînement course débutant
 
-La Maison des Acacias organise un entraînement course débutant lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour un entraînement course débutant.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez des baskets adaptées.
 Objectif : courir sans se blesser. Inscription à l'accueil.`;
 
@@ -4702,8 +4702,8 @@ export const E12_2_PE: ExpressPePrompt[] = [
 
 const E12_3_CE_TEXT = `Affiche — Un atelier assiette équilibrée
 
-La Maison des Acacias organise un atelier assiette équilibrée lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour un atelier assiette équilibrée.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez une assiette vide.
 Objectif : composer un repas complet. Inscription à l'accueil.`;
 
@@ -7039,8 +7039,8 @@ export const E12_3_PE: ExpressPePrompt[] = [
 
 const E12_4_CE_TEXT = `Affiche — Une balade pour lire le plan du quartier
 
-La Maison des Acacias organise une balade pour lire le plan du quartier lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour une balade pour lire le plan du quartier.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez un plan papier.
 Objectif : se repérer plus facilement. Inscription à l'accueil.`;
 
@@ -9376,8 +9376,8 @@ export const E12_4_PE: ExpressPePrompt[] = [
 
 const E12_5_CE_TEXT = `Affiche — Un atelier bonnes résolutions réalistes
 
-La Maison des Acacias organise un atelier bonnes résolutions réalistes lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour un atelier bonnes résolutions réalistes.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez une liste de trois objectifs.
 Objectif : choisir une résolution possible. Inscription à l'accueil.`;
 

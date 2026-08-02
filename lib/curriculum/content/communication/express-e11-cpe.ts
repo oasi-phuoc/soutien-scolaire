@@ -21,8 +21,8 @@ const AMI = { title: "L'ami", vous: "l'ami / l'amie" };
 
 const E11_1_CE_TEXT = `Affiche — Un atelier soupe de saison
 
-La Maison des Acacias organise un atelier soupe de saison lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour un atelier soupe de saison.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez un tablier propre.
 Objectif : exprimer ce qu'on aime dans un plat. Inscription à l'accueil.`;
 
@@ -2358,8 +2358,8 @@ export const E11_1_PE: ExpressPePrompt[] = [
 
 const E11_2_CE_TEXT = `Affiche — Une marche facile au bord du lac
 
-La Maison des Acacias organise une marche facile au bord du lac lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour une marche facile au bord du lac.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez des chaussures confortables.
 Objectif : bouger sans fatigue. Inscription à l'accueil.`;
 
@@ -4695,8 +4695,8 @@ export const E11_2_PE: ExpressPePrompt[] = [
 
 const E11_3_CE_TEXT = `Affiche — Un cercle de discussion sur les séries
 
-La Maison des Acacias organise un cercle de discussion sur les séries lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour un cercle de discussion sur les séries.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez le nom d'une série.
 Objectif : dire pourquoi on aime une histoire. Inscription à l'accueil.`;
 
@@ -7032,8 +7032,8 @@ export const E11_3_PE: ExpressPePrompt[] = [
 
 const E11_4_CE_TEXT = `Affiche — Une réunion pour préparer le séjour à la mer
 
-La Maison des Acacias organise une réunion pour préparer le séjour à la mer lundi 6 mai à 9 h.
-Activité animée par la responsable Nadia. La participation est gratuite.
+Rendez-vous lundi 6 mai à 9 h : la Maison des Acacias ouvre ses portes pour une réunion pour préparer le séjour à la mer.
+La responsable Nadia accueille le groupe. La participation est gratuite.
 Il reste 8 places. Apportez une carte de la côte.
 Objectif : choisir les activités du séjour. Inscription à l'accueil.`;
 

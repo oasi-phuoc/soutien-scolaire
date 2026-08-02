@@ -18,13 +18,11 @@ const PE_MAX = 180;
    travail, voyages)
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E14_1_CE_TEXT = `Affiche — Bilan A2
+const E14_1_CE_TEXT = `Affiche — Porte ouverte Bilan A2
 
-Activité : visite d'un appartement.
-Réunion d'information le lundi 4 mars à 8 h 30.
-Lieu : Rue des Lilas 12. Entrée gratuite.
-À préparer : votre dossier complet.
-Contact : Mme Martin, 021 880 30 40.`;
+Rue des Lilas 12 ouvre ses portes le lundi 4 mars dès 8 h 30. Le public pourra découvrir la visite d'un appartement avec Mme Martin.
+L'entrée est libre, mais chaque visiteur doit venir avec votre dossier complet.
+Pour les questions de dernière minute, le numéro à garder est le 021 880 30 40.`;
 
 const E14_1_CE_POOL = buildExpressPool("e14-1-ce", [
   q({
@@ -46,7 +44,7 @@ const E14_1_CE_POOL = buildExpressPool("e14-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "appartement",
     vfQ: "L'activité indiquée est : visite d'un appartement.",
     vfC: 0,
@@ -116,10 +114,9 @@ const E14_1_CE_POOL = buildExpressPool("e14-1-ce", [
 
 const E14_1_CE_2_TEXT = `SMS — Dr Keller
 
-Bonjour, petit rappel : activité prévue le mardi 12 mars : rendez-vous chez le médecin.
-Rendez-vous à 9 h. Lieu : Cabinet Santé Plus.
-Merci de préparer votre carte d'assurance.
-Répondez OUI si vous venez.`;
+Bonjour ! Je vous confirme le rendez-vous pour le rendez-vous chez le médecin.
+On se voit mardi 12 mars à 9 h, directement au Cabinet Santé Plus.
+N'oubliez pas votre carte d'assurance. Répondez OUI si vous pouvez venir.`;
 
 const E14_1_CE_2_POOL = buildExpressPool("e14-1-ce-2", [
   q({
@@ -141,7 +138,7 @@ const E14_1_CE_2_POOL = buildExpressPool("e14-1-ce-2", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "médecin",
     vfQ: "L'activité indiquée est : rendez-vous chez le médecin.",
     vfC: 0,
@@ -209,12 +206,11 @@ const E14_1_CE_2_POOL = buildExpressPool("e14-1-ce-2", [
   }),
 ]);
 
-const E14_1_CE_3_TEXT = `Note interne — Bilan A2
+const E14_1_CE_3_TEXT = `Note interne — accueil
 
-Pour l'équipe d'accueil : une personne vient pour réunion des parents.
-Elle arrive le mercredi 20 mars à 9 h 15.
-Lieu à indiquer : École du Parc. Merci d'appeler M. Favre.
-Le dossier doit contenir le carnet de liaison.`;
+Une personne se présentera mercredi 20 mars à 9 h 15 pour la réunion des parents.
+Merci de l'orienter vers École du Parc et de prévenir M. Favre dès son arrivée.
+Son dossier doit contenir le carnet de liaison; sans ce document, le rendez-vous sera reporté.`;
 
 const E14_1_CE_3_POOL = buildExpressPool("e14-1-ce-3", [
   q({
@@ -236,7 +232,7 @@ const E14_1_CE_3_POOL = buildExpressPool("e14-1-ce-3", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "parents",
     vfQ: "L'activité indiquée est : réunion des parents.",
     vfC: 0,
@@ -304,12 +300,11 @@ const E14_1_CE_3_POOL = buildExpressPool("e14-1-ce-3", [
   }),
 ]);
 
-const E14_1_CE_4_TEXT = `Page web — Bilan A2
+const E14_1_CE_4_TEXT = `Page web — informations pratiques
 
-Nouvelle page ouverte : achat d'un billet de train.
-Les informations pratiques sont simples : jeudi 28 mars, 10 h. Lieu : Gare de Lausanne.
-Avant de venir, préparez votre carte demi-tarif.
-Besoin d'aide ? Écrivez à Mme Rossi ou appelez le 021 880 33 43.`;
+Vous cherchez des renseignements sur l'achat d'un billet de train ? La prochaine session est prévue le jeudi 28 mars.
+L'accueil commence à 10 h à la Gare de Lausanne. Mme Rossi répond aux questions simples par téléphone au 021 880 33 43.
+Avant de partir, vérifiez que vous avez votre carte demi-tarif.`;
 
 const E14_1_CE_4_POOL = buildExpressPool("e14-1-ce-4", [
   q({
@@ -331,7 +326,7 @@ const E14_1_CE_4_POOL = buildExpressPool("e14-1-ce-4", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "achat",
     vfQ: "L'activité indiquée est : achat d'un billet de train.",
     vfC: 0,
@@ -399,13 +394,11 @@ const E14_1_CE_4_POOL = buildExpressPool("e14-1-ce-4", [
   }),
 ]);
 
-const E14_1_CE_5_TEXT = `Programme — Bilan A2
+const E14_1_CE_5_TEXT = `Programme — matinée Bilan A2
 
-10 h 30 : accueil des participants à Piscine du Lac.
-10 h 30 : présentation de inscription au cours de natation.
-Fin prévue une heure plus tard.
-Date : vendredi 5 avril. Responsable : M. Nguyen.
-Matériel demandé : un bonnet de bain.`;
+10 h 30 : arrivée du groupe à la Piscine du Lac.
+Ensuite, M. Nguyen présente l'inscription au cours de natation avec des exemples concrets.
+La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte un bonnet de bain.`;
 
 const E14_1_CE_5_POOL = buildExpressPool("e14-1-ce-5", [
   q({
@@ -427,7 +420,7 @@ const E14_1_CE_5_POOL = buildExpressPool("e14-1-ce-5", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "inscription",
     vfQ: "L'activité indiquée est : inscription au cours de natation.",
     vfC: 0,
@@ -495,12 +488,11 @@ const E14_1_CE_5_POOL = buildExpressPool("e14-1-ce-5", [
   }),
 ]);
 
-const E14_1_CE_6_TEXT = `Planning — Bilan A2
+const E14_1_CE_6_TEXT = `Planning partagé
 
-Semaine du samedi 13 avril.
-11 h | invitation à un anniversaire | salle ou lieu : Salle des Fêtes.
-Karim vérifie la présence des participants.
-Chaque personne apporte une boisson sans alcool.`;
+Dans le calendrier de l'équipe, le créneau du samedi 13 avril est réservé à la invitation à un anniversaire.
+Le groupe se retrouve à 11 h dans la Salle des Fêtes.
+Karim fera l'appel; merci de préparer une boisson sans alcool avant d'entrer.`;
 
 const E14_1_CE_6_POOL = buildExpressPool("e14-1-ce-6", [
   q({
@@ -522,7 +514,7 @@ const E14_1_CE_6_POOL = buildExpressPool("e14-1-ce-6", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "invitation",
     vfQ: "L'activité indiquée est : invitation à un anniversaire.",
     vfC: 0,
@@ -590,13 +582,11 @@ const E14_1_CE_6_POOL = buildExpressPool("e14-1-ce-6", [
   }),
 ]);
 
-const E14_1_CE_7_TEXT = `Règlement — Bilan A2
+const E14_1_CE_7_TEXT = `Règlement — participation
 
-Pour retour de livres à la bibliothèque, soyez à l'heure : arrivée à 13 h 30 le lundi 22 avril.
-L'accueil se fait ici : Bibliothèque Centrale.
-Il est interdit de manger dans la salle.
-Le document obligatoire est les trois livres.
-En cas de problème, demandez Mme Durand.`;
+Pour le retour de livres à la bibliothèque, la ponctualité est importante : les portes de Bibliothèque Centrale ferment dix minutes après 13 h 30.
+La date retenue est le lundi 22 avril. Les personnes sans les trois livres doivent passer à l'accueil.
+En cas de difficulté, demandez Mme Durand; il ou elle vous indiquera la bonne salle.`;
 
 const E14_1_CE_7_POOL = buildExpressPool("e14-1-ce-7", [
   q({
@@ -618,7 +608,7 @@ const E14_1_CE_7_POOL = buildExpressPool("e14-1-ce-7", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "retour",
     vfQ: "L'activité indiquée est : retour de livres à la bibliothèque.",
     vfC: 0,
@@ -686,14 +676,11 @@ const E14_1_CE_7_POOL = buildExpressPool("e14-1-ce-7", [
   }),
 ]);
 
-const E14_1_CE_8_TEXT = `Ticket — Bilan A2
+const E14_1_CE_8_TEXT = `Ticket de passage — A2-18
 
-Numéro : A2-18.
-Service : tri des déchets du quartier.
-Date et heure : mardi 30 avril, 14 h.
-Guichet : Place du Marché.
-Agent : M. Blanc.
-À montrer : un sac transparent.`;
+Conservez ce ticket jusqu'à la fin de le tri des déchets du quartier.
+Il donne accès à Place du Marché le mardi 30 avril, à partir de 14 h.
+Le contrôle sera fait par M. Blanc. Le document demandé est un sac transparent.`;
 
 const E14_1_CE_8_POOL = buildExpressPool("e14-1-ce-8", [
   q({
@@ -715,7 +702,7 @@ const E14_1_CE_8_POOL = buildExpressPool("e14-1-ce-8", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "tri",
     vfQ: "L'activité indiquée est : tri des déchets du quartier.",
     vfC: 0,
@@ -783,13 +770,11 @@ const E14_1_CE_8_POOL = buildExpressPool("e14-1-ce-8", [
   }),
 ]);
 
-const E14_1_CE_9_TEXT = `Article local — Bilan A2
+const E14_1_CE_9_TEXT = `Article local — service de proximité
 
-La maison de quartier annonce rendez-vous à la banque.
-La rencontre aura lieu le mercredi 8 mai à 14 h 30.
-Lieu : Banque Cantonale.
-Mme Girard explique que les places sont limitées.
-Les participants doivent apporter votre pièce d'identité.`;
+Le quartier annonce le rendez-vous à la banque pour aider les habitants dans leurs démarches.
+La rencontre aura lieu le mercredi 8 mai à 14 h 30, à la Banque Cantonale.
+Selon Mme Girard, il suffit d'apporter votre pièce d'identité et de poser ses questions simplement.`;
 
 const E14_1_CE_9_POOL = buildExpressPool("e14-1-ce-9", [
   q({
@@ -811,7 +796,7 @@ const E14_1_CE_9_POOL = buildExpressPool("e14-1-ce-9", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "à",
     vfQ: "L'activité indiquée est : rendez-vous à la banque.",
     vfC: 0,
@@ -879,13 +864,12 @@ const E14_1_CE_9_POOL = buildExpressPool("e14-1-ce-9", [
   }),
 ]);
 
-const E14_1_CE_10_TEXT = `Fil de discussion — Bilan A2
+const E14_1_CE_10_TEXT = `Fil de discussion — groupe A2
 
-Mina : Tu vas à garde d'un enfant après l'école ?
-Ali : Oui, c'est le jeudi 16 mai à 15 h.
-Mina : Où exactement ?
-Ali : Lieu : Accueil Périscolaire. M. Lopez nous attend.
-Mina : D'accord, je prépare le goûter de l'enfant.`;
+Mina : Tu viens à la garde d'un enfant après l'école ?
+Ali : Oui, c'est jeudi 16 mai à 15 h.
+Mina : Je vais où ?
+Ali : à l'Accueil Périscolaire. M. Lopez nous attendra, et il faut prendre le goûter de l'enfant.`;
 
 const E14_1_CE_10_POOL = buildExpressPool("e14-1-ce-10", [
   q({
@@ -907,7 +891,7 @@ const E14_1_CE_10_POOL = buildExpressPool("e14-1-ce-10", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "garde",
     vfQ: "L'activité indiquée est : garde d'un enfant après l'école.",
     vfC: 0,
@@ -975,13 +959,11 @@ const E14_1_CE_10_POOL = buildExpressPool("e14-1-ce-10", [
   }),
 ]);
 
-const E14_1_CE_11_TEXT = `Fiche pratique — Bilan A2
+const E14_1_CE_11_TEXT = `Fiche pratique — avant de venir
 
-Objectif : comprendre changement d'arrêt de bus.
-Quand : vendredi 24 mai, à 15 h 30.
-Où : Arrêt Pont-Neuf.
-Qui contacter : Mme Steiner.
-À ne pas oublier : votre abonnement de bus.`;
+Pour le changement d'arrêt de bus, notez trois informations : le rendez-vous est vendredi 24 mai, l'heure est 15 h 30, le lieu est Arrêt Pont-Neuf.
+La personne à contacter est Mme Steiner.
+Dernière vérification dans le sac : votre abonnement de bus.`;
 
 const E14_1_CE_11_POOL = buildExpressPool("e14-1-ce-11", [
   q({
@@ -1003,7 +985,7 @@ const E14_1_CE_11_POOL = buildExpressPool("e14-1-ce-11", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "changement",
     vfQ: "L'activité indiquée est : changement d'arrêt de bus.",
     vfC: 0,
@@ -1071,13 +1053,11 @@ const E14_1_CE_11_POOL = buildExpressPool("e14-1-ce-11", [
   }),
 ]);
 
-const E14_1_CE_12_TEXT = `Avis sur la porte — Bilan A2
+const E14_1_CE_12_TEXT = `Avis sur la porte
 
-Attention : changement de lieu le lundi 3 juin.
-Nouveau lieu : Pharmacie du Centre.
-Les personnes inscrites à commande à la pharmacie sont attendues à 16 h.
-Merci de préparer l'ordonnance originale avant l'arrivée.
-Pour entrer, sonnez chez M. Bernard.`;
+Changement d'organisation pour la commande à la pharmacie.
+Le rendez-vous reste le lundi 3 juin à 16 h, mais l'entrée se fait par Pharmacie du Centre.
+Sonnez chez M. Bernard et gardez l'ordonnance originale à la main pour gagner du temps.`;
 
 const E14_1_CE_12_POOL = buildExpressPool("e14-1-ce-12", [
   q({
@@ -1099,7 +1079,7 @@ const E14_1_CE_12_POOL = buildExpressPool("e14-1-ce-12", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "commande",
     vfQ: "L'activité indiquée est : commande à la pharmacie.",
     vfC: 0,
@@ -1167,13 +1147,11 @@ const E14_1_CE_12_POOL = buildExpressPool("e14-1-ce-12", [
   }),
 ]);
 
-const E14_1_CE_13_TEXT = `Invitation — Bilan A2
+const E14_1_CE_13_TEXT = `Invitation — rencontre utile
 
-Vous êtes invité(e) à une rencontre sur repas des voisins.
-Elle aura lieu le mardi 11 juin à 16 h 30.
-Lieu : Jardin partagé.
-Nadia présentera les étapes et répondra aux questions.
-Merci d'apporter un plat froid.`;
+Vous êtes invité(e) à participer à le repas des voisins.
+La rencontre se déroule mardi 11 juin à 16 h 30, au Jardin partagé.
+Nadia expliquera les étapes et répondra aux questions. Merci d'apporter un plat froid.`;
 
 const E14_1_CE_13_POOL = buildExpressPool("e14-1-ce-13", [
   q({
@@ -1195,7 +1173,7 @@ const E14_1_CE_13_POOL = buildExpressPool("e14-1-ce-13", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "repas",
     vfQ: "L'activité indiquée est : repas des voisins.",
     vfC: 0,
@@ -1263,13 +1241,11 @@ const E14_1_CE_13_POOL = buildExpressPool("e14-1-ce-13", [
   }),
 ]);
 
-const E14_1_CE_14_TEXT = `Confirmation — Bilan A2
+const E14_1_CE_14_TEXT = `Confirmation imprimée
 
-Votre place est confirmée pour cours de français du soir.
-Rendez-vous le mercredi 19 juin à 17 h.
-Lieu : Centre Horizon.
-Mme Perrin vous accueillera à l'entrée.
-Le jour même, montrez votre cahier de cours.`;
+Votre place est gardée pour le cours de français du soir.
+Présentez-vous au Centre Horizon le mercredi 19 juin, quelques minutes avant 17 h.
+Mme Perrin vous accueillera à l'entrée. Le jour même, montrez votre cahier de cours.`;
 
 const E14_1_CE_14_POOL = buildExpressPool("e14-1-ce-14", [
   q({
@@ -1291,7 +1267,7 @@ const E14_1_CE_14_POOL = buildExpressPool("e14-1-ce-14", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "français",
     vfQ: "L'activité indiquée est : cours de français du soir.",
     vfC: 0,
@@ -1359,14 +1335,11 @@ const E14_1_CE_14_POOL = buildExpressPool("e14-1-ce-14", [
   }),
 ]);
 
-const E14_1_CE_15_TEXT = `Formulaire — Bilan A2
+const E14_1_CE_15_TEXT = `Formulaire commenté — Bilan A2
 
-Nom de la démarche : nouvel horaire de travail.
-Date choisie : jeudi 27 juin.
-Heure choisie : 17 h 30.
-Lieu choisi : Bureau du personnel.
-Référent : M. Robert.
-Pièce à joindre : le planning signé.`;
+Le formulaire est court : il demande votre nom, puis il confirme le nouvel horaire de travail.
+La ligne suivante indique Bureau du personnel, avec un rendez-vous le jeudi 27 juin à 17 h 30.
+À la fin, M. Robert rappelle d'ajouter le planning signé au dossier.`;
 
 const E14_1_CE_15_POOL = buildExpressPool("e14-1-ce-15", [
   q({
@@ -1388,7 +1361,7 @@ const E14_1_CE_15_POOL = buildExpressPool("e14-1-ce-15", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "nouvel",
     vfQ: "L'activité indiquée est : nouvel horaire de travail.",
     vfC: 0,
@@ -1456,14 +1429,11 @@ const E14_1_CE_15_POOL = buildExpressPool("e14-1-ce-15", [
   }),
 ]);
 
-const E14_1_CE_16_TEXT = `Petite annonce — Bilan A2
+const E14_1_CE_16_TEXT = `Petite annonce — besoin de participants
 
-Nous cherchons des personnes intéressées par réparation du chauffage.
-Présentation le vendredi 5 juillet à 18 h.
-Lieu : Immeuble Bellevue.
-Aucun frais à payer sur place.
-Apportez seulement la clé de la cave.
-Contact rapide : Mme Huber.`;
+Nous cherchons des personnes intéressées par la réparation du chauffage.
+Une présentation simple est organisée le vendredi 5 juillet à 18 h, à l'Immeuble Bellevue.
+Aucun achat n'est demandé; venez seulement avec la clé de la cave. Contact rapide : Mme Huber.`;
 
 const E14_1_CE_16_POOL = buildExpressPool("e14-1-ce-16", [
   q({
@@ -1485,7 +1455,7 @@ const E14_1_CE_16_POOL = buildExpressPool("e14-1-ce-16", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "réparation",
     vfQ: "L'activité indiquée est : réparation du chauffage.",
     vfC: 0,
@@ -1553,12 +1523,11 @@ const E14_1_CE_16_POOL = buildExpressPool("e14-1-ce-16", [
   }),
 ]);
 
-const E14_1_CE_17_TEXT = `Compte rendu — Bilan A2
+const E14_1_CE_17_TEXT = `Compte rendu — décision du groupe
 
-Réunion du matin : M. Moreau a présenté démarche à la mairie.
-La prochaine étape est fixée au lundi 15 juillet à 18 h 30.
-Le groupe se retrouve au lieu indiqué : Mairie Annexe.
-Chaque participant prépare le formulaire rempli.`;
+Pendant la réunion, M. Moreau a proposé de continuer avec la démarche à la mairie.
+Le groupe a choisi Mairie Annexe pour la prochaine étape.
+La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare le formulaire rempli.`;
 
 const E14_1_CE_17_POOL = buildExpressPool("e14-1-ce-17", [
   q({
@@ -1580,7 +1549,7 @@ const E14_1_CE_17_POOL = buildExpressPool("e14-1-ce-17", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "démarche",
     vfQ: "L'activité indiquée est : démarche à la mairie.",
     vfC: 0,
@@ -1648,14 +1617,12 @@ const E14_1_CE_17_POOL = buildExpressPool("e14-1-ce-17", [
   }),
 ]);
 
-const E14_1_CE_18_TEXT = `FAQ — Bilan A2
+const E14_1_CE_18_TEXT = `FAQ — questions fréquentes
 
-Question : Quand commence marché de légumes ?
-Réponse : le mardi 23 juillet à 19 h.
-Question : Où aller ?
-Réponse : Marché couvert.
-Question : Qui peut aider ?
-Réponse : Mme Costa. Il faut préparer un sac de courses.`;
+Quand commence le marché de légumes ? Le mardi 23 juillet à 19 h.
+Où faut-il aller ? au Marché couvert.
+Qui peut aider ? Mme Costa.
+Que faut-il préparer ? un sac de courses.`;
 
 const E14_1_CE_18_POOL = buildExpressPool("e14-1-ce-18", [
   q({
@@ -1677,7 +1644,7 @@ const E14_1_CE_18_POOL = buildExpressPool("e14-1-ce-18", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "marché",
     vfQ: "L'activité indiquée est : marché de légumes.",
     vfC: 0,
@@ -1745,12 +1712,11 @@ const E14_1_CE_18_POOL = buildExpressPool("e14-1-ce-18", [
   }),
 ]);
 
-const E14_1_CE_19_TEXT = `Plan d'accès — Bilan A2
+const E14_1_CE_19_TEXT = `Plan d'accès — entrée conseillée
 
-Pour réservation d'un week-end, entrez par la porte bleue de Hôtel du Port.
-Prenez l'escalier à gauche et attendez M. Simon.
-Le rendez-vous est le mercredi 31 juillet à 19 h 30.
-Gardez la confirmation de réservation dans votre sac.`;
+Pour la réservation d'un week-end, entrez par la porte principale de Hôtel du Port.
+Prenez le couloir à gauche et attendez M. Simon près du panneau bleu.
+Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez la confirmation de réservation dans votre sac.`;
 
 const E14_1_CE_19_POOL = buildExpressPool("e14-1-ce-19", [
   q({
@@ -1772,7 +1738,7 @@ const E14_1_CE_19_POOL = buildExpressPool("e14-1-ce-19", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "réservation",
     vfQ: "L'activité indiquée est : réservation d'un week-end.",
     vfC: 0,
@@ -1840,13 +1806,11 @@ const E14_1_CE_19_POOL = buildExpressPool("e14-1-ce-19", [
   }),
 ]);
 
-const E14_1_CE_20_TEXT = `Message vocal transcrit — Bilan A2
+const E14_1_CE_20_TEXT = `Message vocal transcrit — Mme Leroy
 
-Bonjour, c'est Mme Leroy.
-Je confirme sac perdu dans le bus le jeudi 8 août à 20 h.
-Le lieu est : Service des objets trouvés.
-N'oubliez pas une description du sac.
-Vous pouvez rappeler au 021 880 49 59.`;
+Bonjour, c'est Mme Leroy. Je vous laisse un message pour confirmer le sac perdu dans le bus.
+Nous nous retrouvons jeudi 8 août à 20 h au Service des objets trouvés.
+N'oubliez pas une description du sac. Si besoin, rappelez-moi au 021 880 49 59.`;
 
 const E14_1_CE_20_POOL = buildExpressPool("e14-1-ce-20", [
   q({
@@ -1868,7 +1832,7 @@ const E14_1_CE_20_POOL = buildExpressPool("e14-1-ce-20", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "sac",
     vfQ: "L'activité indiquée est : sac perdu dans le bus.",
     vfC: 0,
@@ -1941,101 +1905,121 @@ readingPoolExercise({
   id: "e14-1-ce",
   readingText: E14_1_CE_TEXT,
   questionPool: E14_1_CE_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-2",
   readingText: E14_1_CE_2_TEXT,
   questionPool: E14_1_CE_2_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-3",
   readingText: E14_1_CE_3_TEXT,
   questionPool: E14_1_CE_3_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-4",
   readingText: E14_1_CE_4_TEXT,
   questionPool: E14_1_CE_4_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-5",
   readingText: E14_1_CE_5_TEXT,
   questionPool: E14_1_CE_5_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-6",
   readingText: E14_1_CE_6_TEXT,
   questionPool: E14_1_CE_6_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-7",
   readingText: E14_1_CE_7_TEXT,
   questionPool: E14_1_CE_7_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-8",
   readingText: E14_1_CE_8_TEXT,
   questionPool: E14_1_CE_8_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-9",
   readingText: E14_1_CE_9_TEXT,
   questionPool: E14_1_CE_9_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-10",
   readingText: E14_1_CE_10_TEXT,
   questionPool: E14_1_CE_10_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-11",
   readingText: E14_1_CE_11_TEXT,
   questionPool: E14_1_CE_11_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-12",
   readingText: E14_1_CE_12_TEXT,
   questionPool: E14_1_CE_12_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-13",
   readingText: E14_1_CE_13_TEXT,
   questionPool: E14_1_CE_13_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-14",
   readingText: E14_1_CE_14_TEXT,
   questionPool: E14_1_CE_14_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-15",
   readingText: E14_1_CE_15_TEXT,
   questionPool: E14_1_CE_15_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-16",
   readingText: E14_1_CE_16_TEXT,
   questionPool: E14_1_CE_16_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-17",
   readingText: E14_1_CE_17_TEXT,
   questionPool: E14_1_CE_17_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-18",
   readingText: E14_1_CE_18_TEXT,
   questionPool: E14_1_CE_18_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-19",
   readingText: E14_1_CE_19_TEXT,
   questionPool: E14_1_CE_19_POOL,
+  questionCount: 6,
 }),
 readingPoolExercise({
   id: "e14-1-ce-20",
   readingText: E14_1_CE_20_TEXT,
   questionPool: E14_1_CE_20_POOL,
+  questionCount: 6,
 }),
 ];
 

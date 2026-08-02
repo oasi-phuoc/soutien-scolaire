@@ -28,8 +28,8 @@ Objet : Inscription à une séance pour préparer une consultation
 
 Bonjour,
 
-Votre inscription à une séance pour préparer une consultation est bien notée.
-Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+C'est confirmé : vous avez une place pour une séance pour préparer une consultation.
+Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter une carte d'assurance. La participation est gratuite.
 Cette rencontre aide à poser des questions au médecin.
 
@@ -130,8 +130,8 @@ Objet : Rappel pour mardi 14 mai
 
 Bonjour à toutes et à tous,
 
-Petit rappel : un atelier pharmacie sans ordonnance aura lieu mardi 14 mai.
-Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Je vous rappelle que un atelier pharmacie sans ordonnance est prévu mardi 14 mai.
+Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas une liste de médicaments et lisez bien cette consigne : les médicaments ne se partagent pas.
 
@@ -232,8 +232,8 @@ Objet : Question avant une rencontre sur les petits maux d'hiver
 
 Bonjour,
 
-Je voudrais participer à une rencontre sur les petits maux d'hiver, mais j'ai une question.
-Faut-il vraiment apporter un paquet de mouchoirs ?
+J'ai vu l'annonce pour une rencontre sur les petits maux d'hiver et je voudrais m'inscrire.
+Pouvez-vous confirmer qu'il faut apporter un paquet de mouchoirs ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de réagir quand on tousse. Merci pour votre réponse.
 
@@ -334,8 +334,8 @@ Objet : Confirmation de votre place
 
 Madame, Monsieur,
 
-Nous confirmons votre place pour une information sur le sommeil.
-La séance se passe à la ferme des Lilas jeudi 30 mai.
+Votre place pour une information sur le sommeil est réservée.
+La séance aura lieu jeudi 30 mai à la ferme des Lilas.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -436,8 +436,8 @@ Objet : Conseil pratique : une notice de médicament
 
 Salut,
 
-Pour un cours pour lire une notice, pense à mettre une notice de médicament dans ton sac.
-On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Petit conseil pour un cours pour lire une notice : mets une notice de médicament dans ton sac.
+Je t'attends vendredi 7 juin à 14 h à le foyer Bellevue.
 Si tu veux prendre un médicament correctement, cette séance est très utile.
 Attention : la notice ne remplace pas le médecin.
 
@@ -538,9 +538,9 @@ Objet : Changement de salle
 
 Bonjour,
 
-La salle prévue n'est plus disponible pour une discussion sur les rendez-vous médicaux.
+Petit changement pour une discussion sur les rendez-vous médicaux : la salle prévue n'est plus libre.
 Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
-Le prix reste 15 CHF et 16 places sont gardées.
+Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer un agenda.
 
 Merci de votre compréhension,
@@ -640,8 +640,8 @@ Objet : Merci pour votre participation
 
 Bonjour,
 
-Merci d'être venu à un atelier trousse de premiers secours à la terrasse du Marché.
-Plusieurs participants ont dit que cela aide à aider sans paniquer.
+Merci pour votre présence lors de un atelier trousse de premiers secours à la terrasse du Marché.
+Plusieurs personnes ont expliqué que la séance aide à aider sans paniquer.
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur des pansements a été notée.
 
@@ -742,8 +742,8 @@ Objet : Invitation santé
 
 Bonjour les amis,
 
-Je vous propose de venir avec moi à une séance gestes en cas de fièvre.
-C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Ça vous dit de venir avec moi à une séance gestes en cas de fièvre ?
+Le rendez-vous est lundi 1er juillet à 17 h 30 à le local des Jeunes.
 Il faut réserver directement sur place car il y a seulement 20 places.
 Apportez un thermomètre et un peu de bonne humeur.
 
@@ -844,10 +844,10 @@ Objet : Liste du matériel
 
 Bonjour,
 
-Voici la liste pour une présentation du cabinet infirmier : un carnet de questions, une bouteille d'eau et un stylo.
+Pour une présentation du cabinet infirmier, la petite liste est simple : un carnet de questions, une bouteille d'eau et un stylo.
 Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
-Nous parlerons surtout de la manière de savoir où demander un soin.
+Le thème principal sera : savoir où demander un soin.
 
 Merci,
 
@@ -946,9 +946,9 @@ Objet : Places disponibles
 
 Bonjour,
 
-Bonne nouvelle : il reste 24 places pour un échange sur les allergies.
+Bonne nouvelle : un échange sur les allergies n'est pas complet, il reste 24 places.
 La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
-Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez une liste des allergies. Le prix est 30 CHF.
 
 Cordialement,
@@ -1048,8 +1048,8 @@ Objet : Retour sur l'activité
 
 Bonjour,
 
-Après une matinée tension et respiration, nous avons reçu beaucoup de messages positifs.
-Les participants ont apprécié se calmer quand on est essoufflé.
+Depuis une matinée tension et respiration, nous recevons des messages très positifs.
+Les participants ont surtout apprécié de se calmer quand on est essoufflé.
 La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
 Cette fois, merci d'apporter une bouteille d'eau.
 
@@ -1150,8 +1150,8 @@ Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Votre rendez-vous pour un atelier pour expliquer sa douleur commence à 8 h 30.
-Merci d'être à la maison médicale dix minutes avant.
+Votre rendez-vous lié à un atelier pour expliquer sa douleur commence à 8 h 30.
+Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer un dessin du corps.
 
@@ -1252,8 +1252,8 @@ Objet : Préparation de groupe
 
 Chers participants,
 
-Pour préparer une rencontre prévention des écrans, nous faisons deux petits groupes.
-Le premier groupe arrive à 13 h à le parc des Amandiers.
+Pour que une rencontre prévention des écrans se passe bien, nous formons deux petits groupes.
+Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier un chronomètre avant de partir.
 
@@ -1354,8 +1354,8 @@ Objet : Demande d'information
 
 Bonjour,
 
-Je cherche des informations sur un point info assurance maladie.
-J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Je vous écris car je cherche des informations sur un point info assurance maladie.
+J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horizon.
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour comprendre un remboursement.
 
@@ -1456,10 +1456,10 @@ Objet : Choix entre deux dates
 
 Bonjour,
 
-Deux dates étaient proposées, mais nous gardons lundi 26 août.
+Après vos réponses, nous gardons finalement la date du lundi 26 août.
 L'horaire choisi est 16 h 30 à le centre scolaire.
 Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste une séance hygiène des mains avec un petit savon.
+Le contenu reste le même : une séance hygiène des mains, avec un petit savon à prévoir.
 
 Merci pour vos réponses,
 
@@ -1558,9 +1558,9 @@ Objet : Dernier rappel
 
 Bonjour,
 
-Dernier rappel avant un atelier ordonnance claire !
+Dernier message avant un atelier ordonnance claire !
 Rendez-vous mardi 3 septembre à 17 h à la place du Village.
-Sans inscription au stand d'information, l'entrée n'est pas garantie.
+L'entrée n'est garantie que si l'inscription est faite au stand d'information.
 Apportez une ordonnance récente et gardez 16 CHF si besoin.
 
 À tout à l'heure,
@@ -1660,9 +1660,9 @@ Objet : Message de la responsable
 
 Bonjour,
 
-La coach Ana vous écrit au sujet de une discussion santé mentale simple.
+Message de La coach Ana au sujet de une discussion santé mentale simple.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
-Le but est simple : dire quand on ne va pas bien.
+Le but reste simple : apprendre à dire quand on ne va pas bien.
 Merci de respecter cette règle : personne n'est obligé de parler de sa vie privée.
 
 Bien cordialement,
@@ -1762,10 +1762,10 @@ Objet : Organisation du samedi
 
 Bonjour,
 
-Samedi, l'équipe installe le salon Harmonie pour une information sur les vaccins.
+L'équipe prépare le salon Harmonie pour une information sur les vaccins.
 Les participants arrivent à 11 h 30 avec un carnet de vaccination.
 La date exacte est jeudi 19 septembre.
-Après la séance, un court échange expliquera comment comprendre le rappel d'un vaccin.
+Après la séance, un court échange expliquera comment réussir à comprendre le rappel d'un vaccin.
 
 Merci de votre aide,
 
@@ -1864,10 +1864,10 @@ Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Vous avez participé à un parcours santé du quartier à la résidence du Parc.
+Vous avez récemment participé à un parcours santé du quartier à la résidence du Parc.
 Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
-Votre avis nous aidera à mieux bouger un peu chaque semaine.
+Votre avis nous aidera à mieux organiser les moments pour bouger un peu chaque semaine.
 
 Merci pour votre retour,
 
@@ -1966,10 +1966,10 @@ Objet : Prochaine rencontre
 
 Bonjour,
 
-Nous préparons une nouvelle rencontre autour de une permanence questions médicales.
+Nous préparons une prochaine rencontre autour de une permanence questions médicales.
 Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
-Cette fois, nous demanderons à chacun d'apporter un stylo.
+Cette fois, chacun devra apporter un stylo.
 
 À bientôt,
 
@@ -2470,8 +2470,8 @@ Objet : Inscription à un entraînement course débutant
 
 Bonjour,
 
-Votre inscription à un entraînement course débutant est bien notée.
-Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+C'est confirmé : vous avez une place pour un entraînement course débutant.
+Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter des baskets adaptées. La participation est gratuite.
 Cette rencontre aide à courir sans se blesser.
 
@@ -2572,8 +2572,8 @@ Objet : Rappel pour mardi 14 mai
 
 Bonjour à toutes et à tous,
 
-Petit rappel : une séance d'étirements aura lieu mardi 14 mai.
-Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Je vous rappelle que une séance d'étirements est prévu mardi 14 mai.
+Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas une serviette et lisez bien cette consigne : les mouvements brusques sont évités.
 
@@ -2674,8 +2674,8 @@ Objet : Question avant un cours de natation douce
 
 Bonjour,
 
-Je voudrais participer à un cours de natation douce, mais j'ai une question.
-Faut-il vraiment apporter un bonnet de bain ?
+J'ai vu l'annonce pour un cours de natation douce et je voudrais m'inscrire.
+Pouvez-vous confirmer qu'il faut apporter un bonnet de bain ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de nager avec confiance. Merci pour votre réponse.
 
@@ -2776,8 +2776,8 @@ Objet : Confirmation de votre place
 
 Madame, Monsieur,
 
-Nous confirmons votre place pour un atelier équilibre sur tapis.
-La séance se passe à la ferme des Lilas jeudi 30 mai.
+Votre place pour un atelier équilibre sur tapis est réservée.
+La séance aura lieu jeudi 30 mai à la ferme des Lilas.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -2878,8 +2878,8 @@ Objet : Conseil pratique : un ballon
 
 Salut,
 
-Pour une initiation au basket loisirs, pense à mettre un ballon dans ton sac.
-On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Petit conseil pour une initiation au basket loisirs : mets un ballon dans ton sac.
+Je t'attends vendredi 7 juin à 14 h à le foyer Bellevue.
 Si tu veux jouer en équipe, cette séance est très utile.
 Attention : les bijoux restent au vestiaire.
 
@@ -2980,9 +2980,9 @@ Objet : Changement de salle
 
 Bonjour,
 
-La salle prévue n'est plus disponible pour une marche rapide en groupe.
+Petit changement pour une marche rapide en groupe : la salle prévue n'est plus libre.
 Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
-Le prix reste 15 CHF et 16 places sont gardées.
+Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer une gourde pleine.
 
 Merci de votre compréhension,
@@ -3082,8 +3082,8 @@ Objet : Merci pour votre participation
 
 Bonjour,
 
-Merci d'être venu à un circuit renforcement léger à la terrasse du Marché.
-Plusieurs participants ont dit que cela aide à renforcer le dos.
+Merci pour votre présence lors de un circuit renforcement léger à la terrasse du Marché.
+Plusieurs personnes ont expliqué que la séance aide à renforcer le dos.
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur un élastique souple a été notée.
 
@@ -3184,8 +3184,8 @@ Objet : Invitation sport
 
 Bonjour les amis,
 
-Je vous propose de venir avec moi à une découverte du volley.
-C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Ça vous dit de venir avec moi à une découverte du volley ?
+Le rendez-vous est lundi 1er juillet à 17 h 30 à le local des Jeunes.
 Il faut réserver directement sur place car il y a seulement 20 places.
 Apportez des genouillères et un peu de bonne humeur.
 
@@ -3286,10 +3286,10 @@ Objet : Liste du matériel
 
 Bonjour,
 
-Voici la liste pour une séance de respiration après effort : un vêtement sec, une bouteille d'eau et un stylo.
+Pour une séance de respiration après effort, la petite liste est simple : un vêtement sec, une bouteille d'eau et un stylo.
 Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
-Nous parlerons surtout de la manière de récupérer calmement.
+Le thème principal sera : récupérer calmement.
 
 Merci,
 
@@ -3388,9 +3388,9 @@ Objet : Places disponibles
 
 Bonjour,
 
-Bonne nouvelle : il reste 24 places pour un test de vélo en sécurité.
+Bonne nouvelle : un test de vélo en sécurité n'est pas complet, il reste 24 places.
 La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
-Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez un casque. Le prix est 30 CHF.
 
 Cordialement,
@@ -3490,8 +3490,8 @@ Objet : Retour sur l'activité
 
 Bonjour,
 
-Après une matinée sports en famille, nous avons reçu beaucoup de messages positifs.
-Les participants ont apprécié bouger avec les enfants.
+Depuis une matinée sports en famille, nous recevons des messages très positifs.
+Les participants ont surtout apprécié de bouger avec les enfants.
 La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
 Cette fois, merci d'apporter une tenue de sport.
 
@@ -3592,8 +3592,8 @@ Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Votre rendez-vous pour un entraînement fractionné facile commence à 8 h 30.
-Merci d'être à la maison médicale dix minutes avant.
+Votre rendez-vous lié à un entraînement fractionné facile commence à 8 h 30.
+Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer une montre simple.
 
@@ -3694,8 +3694,8 @@ Objet : Préparation de groupe
 
 Chers participants,
 
-Pour préparer une séance d'échauffement guidé, nous faisons deux petits groupes.
-Le premier groupe arrive à 13 h à le parc des Amandiers.
+Pour que une séance d'échauffement guidé se passe bien, nous formons deux petits groupes.
+Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier une corde à sauter avant de partir.
 
@@ -3796,8 +3796,8 @@ Objet : Demande d'information
 
 Bonjour,
 
-Je cherche des informations sur un cours de tennis découverte.
-J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Je vous écris car je cherche des informations sur un cours de tennis découverte.
+J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horizon.
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour tenir la raquette sans douleur.
 
@@ -3898,10 +3898,10 @@ Objet : Choix entre deux dates
 
 Bonjour,
 
-Deux dates étaient proposées, mais nous gardons lundi 26 août.
+Après vos réponses, nous gardons finalement la date du lundi 26 août.
 L'horaire choisi est 16 h 30 à le centre scolaire.
 Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste une sortie raquettes en salle avec des chaussures propres.
+Le contenu reste le même : une sortie raquettes en salle, avec des chaussures propres à prévoir.
 
 Merci pour vos réponses,
 
@@ -4000,9 +4000,9 @@ Objet : Dernier rappel
 
 Bonjour,
 
-Dernier rappel avant une initiation à l'escalade basse !
+Dernier message avant une initiation à l'escalade basse !
 Rendez-vous mardi 3 septembre à 17 h à la place du Village.
-Sans inscription au stand d'information, l'entrée n'est pas garantie.
+L'entrée n'est garantie que si l'inscription est faite au stand d'information.
 Apportez un baudrier fourni et gardez 16 CHF si besoin.
 
 À tout à l'heure,
@@ -4102,9 +4102,9 @@ Objet : Message de la responsable
 
 Bonjour,
 
-La coach Ana vous écrit au sujet de un atelier récupération musculaire.
+Message de La coach Ana au sujet de un atelier récupération musculaire.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
-Le but est simple : éviter les courbatures.
+Le but reste simple : apprendre à éviter les courbatures.
 Merci de respecter cette règle : les massages forts sont déconseillés.
 
 Bien cordialement,
@@ -4204,10 +4204,10 @@ Objet : Organisation du samedi
 
 Bonjour,
 
-Samedi, l'équipe installe le salon Harmonie pour une rencontre avec un coach.
+L'équipe prépare le salon Harmonie pour une rencontre avec un coach.
 Les participants arrivent à 11 h 30 avec un carnet d'objectifs.
 La date exacte est jeudi 19 septembre.
-Après la séance, un court échange expliquera comment choisir un objectif réaliste.
+Après la séance, un court échange expliquera comment réussir à choisir un objectif réaliste.
 
 Merci de votre aide,
 
@@ -4306,10 +4306,10 @@ Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Vous avez participé à un défi pas quotidiens à la résidence du Parc.
+Vous avez récemment participé à un défi pas quotidiens à la résidence du Parc.
 Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
-Votre avis nous aidera à mieux marcher davantage chaque jour.
+Votre avis nous aidera à mieux organiser les moments pour marcher davantage chaque jour.
 
 Merci pour votre retour,
 
@@ -4408,10 +4408,10 @@ Objet : Prochaine rencontre
 
 Bonjour,
 
-Nous préparons une nouvelle rencontre autour de une séance sport sans compétition.
+Nous préparons une prochaine rencontre autour de une séance sport sans compétition.
 Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
-Cette fois, nous demanderons à chacun d'apporter un sourire.
+Cette fois, chacun devra apporter un sourire.
 
 À bientôt,
 
@@ -4912,8 +4912,8 @@ Objet : Inscription à un atelier assiette équilibrée
 
 Bonjour,
 
-Votre inscription à un atelier assiette équilibrée est bien notée.
-Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+C'est confirmé : vous avez une place pour un atelier assiette équilibrée.
+Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter une assiette vide. La participation est gratuite.
 Cette rencontre aide à composer un repas complet.
 
@@ -5014,8 +5014,8 @@ Objet : Rappel pour mardi 14 mai
 
 Bonjour à toutes et à tous,
 
-Petit rappel : une visite au rayon fruits aura lieu mardi 14 mai.
-Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Je vous rappelle que une visite au rayon fruits est prévu mardi 14 mai.
+Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas un sac réutilisable et lisez bien cette consigne : les fruits abîmés ne sont pas utilisés.
 
@@ -5116,8 +5116,8 @@ Objet : Question avant un cours petit déjeuner simple
 
 Bonjour,
 
-Je voudrais participer à un cours petit déjeuner simple, mais j'ai une question.
-Faut-il vraiment apporter un bol ?
+J'ai vu l'annonce pour un cours petit déjeuner simple et je voudrais m'inscrire.
+Pouvez-vous confirmer qu'il faut apporter un bol ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de éviter d'avoir faim trop vite. Merci pour votre réponse.
 
@@ -5218,8 +5218,8 @@ Objet : Confirmation de votre place
 
 Madame, Monsieur,
 
-Nous confirmons votre place pour une discussion sur les boissons sucrées.
-La séance se passe à la ferme des Lilas jeudi 30 mai.
+Votre place pour une discussion sur les boissons sucrées est réservée.
+La séance aura lieu jeudi 30 mai à la ferme des Lilas.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -5320,8 +5320,8 @@ Objet : Conseil pratique : une boîte à goûter
 
 Salut,
 
-Pour un atelier goûter sain, pense à mettre une boîte à goûter dans ton sac.
-On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Petit conseil pour un atelier goûter sain : mets une boîte à goûter dans ton sac.
+Je t'attends vendredi 7 juin à 14 h à le foyer Bellevue.
 Si tu veux préparer une collation pratique, cette séance est très utile.
 Attention : les noix sont séparées à cause des allergies.
 
@@ -5422,9 +5422,9 @@ Objet : Changement de salle
 
 Bonjour,
 
-La salle prévue n'est plus disponible pour une séance menu de la semaine.
+Petit changement pour une séance menu de la semaine : la salle prévue n'est plus libre.
 Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
-Le prix reste 15 CHF et 16 places sont gardées.
+Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer un calendrier.
 
 Merci de votre compréhension,
@@ -5524,8 +5524,8 @@ Objet : Merci pour votre participation
 
 Bonjour,
 
-Merci d'être venu à une lecture d'étiquettes nutritionnelles à la terrasse du Marché.
-Plusieurs participants ont dit que cela aide à repérer le sel et le gras.
+Merci pour votre présence lors de une lecture d'étiquettes nutritionnelles à la terrasse du Marché.
+Plusieurs personnes ont expliqué que la séance aide à repérer le sel et le gras.
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur un emballage alimentaire a été notée.
 
@@ -5626,8 +5626,8 @@ Objet : Invitation alimentation
 
 Bonjour les amis,
 
-Je vous propose de venir avec moi à un échange recettes avec légumes.
-C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Ça vous dit de venir avec moi à un échange recettes avec légumes ?
+Le rendez-vous est lundi 1er juillet à 17 h 30 à le local des Jeunes.
 Il faut réserver directement sur place car il y a seulement 20 places.
 Apportez un légume préféré et un peu de bonne humeur.
 
@@ -5728,10 +5728,10 @@ Objet : Liste du matériel
 
 Bonjour,
 
-Voici la liste pour une préparation de salade complète : un grand saladier, une bouteille d'eau et un stylo.
+Pour une préparation de salade complète, la petite liste est simple : un grand saladier, une bouteille d'eau et un stylo.
 Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
-Nous parlerons surtout de la manière de manger frais sans compliquer.
+Le thème principal sera : manger frais sans compliquer.
 
 Merci,
 
@@ -5830,9 +5830,9 @@ Objet : Places disponibles
 
 Bonjour,
 
-Bonne nouvelle : il reste 24 places pour un atelier portions raisonnables.
+Bonne nouvelle : un atelier portions raisonnables n'est pas complet, il reste 24 places.
 La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
-Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez une cuillère doseuse. Le prix est 30 CHF.
 
 Cordialement,
@@ -5932,8 +5932,8 @@ Objet : Retour sur l'activité
 
 Bonjour,
 
-Après une rencontre avec une diététicienne, nous avons reçu beaucoup de messages positifs.
-Les participants ont apprécié poser des questions sur son alimentation.
+Depuis une rencontre avec une diététicienne, nous recevons des messages très positifs.
+Les participants ont surtout apprécié de poser des questions sur son alimentation.
 La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
 Cette fois, merci d'apporter un carnet alimentaire.
 
@@ -6034,8 +6034,8 @@ Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Votre rendez-vous pour un défi eau pendant la journée commence à 8 h 30.
-Merci d'être à la maison médicale dix minutes avant.
+Votre rendez-vous lié à un défi eau pendant la journée commence à 8 h 30.
+Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer une bouteille d'eau.
 
@@ -6136,8 +6136,8 @@ Objet : Préparation de groupe
 
 Chers participants,
 
-Pour préparer une séance courses avec petit budget, nous faisons deux petits groupes.
-Le premier groupe arrive à 13 h à le parc des Amandiers.
+Pour que une séance courses avec petit budget se passe bien, nous formons deux petits groupes.
+Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier une liste de courses avant de partir.
 
@@ -6238,8 +6238,8 @@ Objet : Demande d'information
 
 Bonjour,
 
-Je cherche des informations sur un cours soupe repas.
-J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Je vous écris car je cherche des informations sur un cours soupe repas.
+J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horizon.
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour faire un dîner léger.
 
@@ -6340,10 +6340,10 @@ Objet : Choix entre deux dates
 
 Bonjour,
 
-Deux dates étaient proposées, mais nous gardons lundi 26 août.
+Après vos réponses, nous gardons finalement la date du lundi 26 août.
 L'horaire choisi est 16 h 30 à le centre scolaire.
 Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste une information sur les protéines avec une boîte de pois chiches.
+Le contenu reste le même : une information sur les protéines, avec une boîte de pois chiches à prévoir.
 
 Merci pour vos réponses,
 
@@ -6442,9 +6442,9 @@ Objet : Dernier rappel
 
 Bonjour,
 
-Dernier rappel avant un atelier lunch au travail !
+Dernier message avant un atelier lunch au travail !
 Rendez-vous mardi 3 septembre à 17 h à la place du Village.
-Sans inscription au stand d'information, l'entrée n'est pas garantie.
+L'entrée n'est garantie que si l'inscription est faite au stand d'information.
 Apportez une boîte repas et gardez 16 CHF si besoin.
 
 À tout à l'heure,
@@ -6544,9 +6544,9 @@ Objet : Message de la responsable
 
 Bonjour,
 
-La coach Ana vous écrit au sujet de une comparaison pain blanc et pain complet.
+Message de La coach Ana au sujet de une comparaison pain blanc et pain complet.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
-Le but est simple : choisir un pain plus nourrissant.
+Le but reste simple : apprendre à choisir un pain plus nourrissant.
 Merci de respecter cette règle : on goûte avant de juger.
 
 Bien cordialement,
@@ -6646,10 +6646,10 @@ Objet : Organisation du samedi
 
 Bonjour,
 
-Samedi, l'équipe installe le salon Harmonie pour une animation fruits de saison.
+L'équipe prépare le salon Harmonie pour une animation fruits de saison.
 Les participants arrivent à 11 h 30 avec un fruit de saison.
 La date exacte est jeudi 19 septembre.
-Après la séance, un court échange expliquera comment manger selon la saison.
+Après la séance, un court échange expliquera comment réussir à manger selon la saison.
 
 Merci de votre aide,
 
@@ -6748,10 +6748,10 @@ Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Vous avez participé à une discussion sur les repas rapides à la résidence du Parc.
+Vous avez récemment participé à une discussion sur les repas rapides à la résidence du Parc.
 Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
-Votre avis nous aidera à mieux améliorer un repas rapide.
+Votre avis nous aidera à mieux organiser les moments pour améliorer un repas rapide.
 
 Merci pour votre retour,
 
@@ -6850,10 +6850,10 @@ Objet : Prochaine rencontre
 
 Bonjour,
 
-Nous préparons une nouvelle rencontre autour de un pique-nique équilibré.
+Nous préparons une prochaine rencontre autour de un pique-nique équilibré.
 Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
-Cette fois, nous demanderons à chacun d'apporter une nappe.
+Cette fois, chacun devra apporter une nappe.
 
 À bientôt,
 
@@ -7354,8 +7354,8 @@ Objet : Inscription à une balade pour lire le plan du quartier
 
 Bonjour,
 
-Votre inscription à une balade pour lire le plan du quartier est bien notée.
-Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+C'est confirmé : vous avez une place pour une balade pour lire le plan du quartier.
+Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter un plan papier. La participation est gratuite.
 Cette rencontre aide à se repérer plus facilement.
 
@@ -7456,8 +7456,8 @@ Objet : Rappel pour mardi 14 mai
 
 Bonjour à toutes et à tous,
 
-Petit rappel : un atelier transports publics aura lieu mardi 14 mai.
-Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Je vous rappelle que un atelier transports publics est prévu mardi 14 mai.
+Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas une carte de bus et lisez bien cette consigne : les tickets doivent être validés.
 
@@ -7558,8 +7558,8 @@ Objet : Question avant une visite des services municipaux
 
 Bonjour,
 
-Je voudrais participer à une visite des services municipaux, mais j'ai une question.
-Faut-il vraiment apporter une pièce d'identité ?
+J'ai vu l'annonce pour une visite des services municipaux et je voudrais m'inscrire.
+Pouvez-vous confirmer qu'il faut apporter une pièce d'identité ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de savoir où faire une demande. Merci pour votre réponse.
 
@@ -7660,8 +7660,8 @@ Objet : Confirmation de votre place
 
 Madame, Monsieur,
 
-Nous confirmons votre place pour une discussion voisins et bruit.
-La séance se passe à la ferme des Lilas jeudi 30 mai.
+Votre place pour une discussion voisins et bruit est réservée.
+La séance aura lieu jeudi 30 mai à la ferme des Lilas.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -7762,8 +7762,8 @@ Objet : Conseil pratique : un sac de tri
 
 Salut,
 
-Pour un point info tri des déchets, pense à mettre un sac de tri dans ton sac.
-On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Petit conseil pour un point info tri des déchets : mets un sac de tri dans ton sac.
+Je t'attends vendredi 7 juin à 14 h à le foyer Bellevue.
 Si tu veux trier sans se tromper, cette séance est très utile.
 Attention : les bouteilles vont dans le bon bac.
 
@@ -7864,9 +7864,9 @@ Objet : Changement de salle
 
 Bonjour,
 
-La salle prévue n'est plus disponible pour une marche sécurité piétons.
+Petit changement pour une marche sécurité piétons : la salle prévue n'est plus libre.
 Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
-Le prix reste 15 CHF et 16 places sont gardées.
+Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer un gilet clair.
 
 Merci de votre compréhension,
@@ -7966,8 +7966,8 @@ Objet : Merci pour votre participation
 
 Bonjour,
 
-Merci d'être venu à une réunion jardin en ville à la terrasse du Marché.
-Plusieurs participants ont dit que cela aide à mettre plus de vert dans la rue.
+Merci pour votre présence lors de une réunion jardin en ville à la terrasse du Marché.
+Plusieurs personnes ont expliqué que la séance aide à mettre plus de vert dans la rue.
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur des graines a été notée.
 
@@ -8068,8 +8068,8 @@ Objet : Invitation ville
 
 Bonjour les amis,
 
-Je vous propose de venir avec moi à un atelier trouver une adresse.
-C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Ça vous dit de venir avec moi à un atelier trouver une adresse ?
+Le rendez-vous est lundi 1er juillet à 17 h 30 à le local des Jeunes.
 Il faut réserver directement sur place car il y a seulement 20 places.
 Apportez un carnet d'adresses et un peu de bonne humeur.
 
@@ -8170,10 +8170,10 @@ Objet : Liste du matériel
 
 Bonjour,
 
-Voici la liste pour une présentation des marchés locaux : un panier, une bouteille d'eau et un stylo.
+Pour une présentation des marchés locaux, la petite liste est simple : un panier, une bouteille d'eau et un stylo.
 Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
-Nous parlerons surtout de la manière de acheter près de chez soi.
+Le thème principal sera : acheter près de chez soi.
 
 Merci,
 
@@ -8272,9 +8272,9 @@ Objet : Places disponibles
 
 Bonjour,
 
-Bonne nouvelle : il reste 24 places pour une séance comparer ville et campagne.
+Bonne nouvelle : une séance comparer ville et campagne n'est pas complet, il reste 24 places.
 La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
-Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez deux photos. Le prix est 30 CHF.
 
 Cordialement,
@@ -8374,8 +8374,8 @@ Objet : Retour sur l'activité
 
 Bonjour,
 
-Après un café citoyen sur les espaces verts, nous avons reçu beaucoup de messages positifs.
-Les participants ont apprécié imaginer un parc plus agréable.
+Depuis un café citoyen sur les espaces verts, nous recevons des messages très positifs.
+Les participants ont surtout apprécié de imaginer un parc plus agréable.
 La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
 Cette fois, merci d'apporter une idée d'arbre.
 
@@ -8476,8 +8476,8 @@ Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Votre rendez-vous pour une information travaux de rue commence à 8 h 30.
-Merci d'être à la maison médicale dix minutes avant.
+Votre rendez-vous lié à une information travaux de rue commence à 8 h 30.
+Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer une photo de la rue.
 
@@ -8578,8 +8578,8 @@ Objet : Préparation de groupe
 
 Chers participants,
 
-Pour préparer un atelier vivre en immeuble, nous faisons deux petits groupes.
-Le premier groupe arrive à 13 h à le parc des Amandiers.
+Pour que un atelier vivre en immeuble se passe bien, nous formons deux petits groupes.
+Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier le règlement de l'immeuble avant de partir.
 
@@ -8680,8 +8680,8 @@ Objet : Demande d'information
 
 Bonjour,
 
-Je cherche des informations sur une découverte des pistes cyclables.
-J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Je vous écris car je cherche des informations sur une découverte des pistes cyclables.
+J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horizon.
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour rouler sans gêner les piétons.
 
@@ -8782,10 +8782,10 @@ Objet : Choix entre deux dates
 
 Bonjour,
 
-Deux dates étaient proposées, mais nous gardons lundi 26 août.
+Après vos réponses, nous gardons finalement la date du lundi 26 août.
 L'horaire choisi est 16 h 30 à le centre scolaire.
 Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste une réunion sur les loyers avec une annonce de logement.
+Le contenu reste le même : une réunion sur les loyers, avec une annonce de logement à prévoir.
 
 Merci pour vos réponses,
 
@@ -8884,9 +8884,9 @@ Objet : Dernier rappel
 
 Bonjour,
 
-Dernier rappel avant une visite de la médiathèque !
+Dernier message avant une visite de la médiathèque !
 Rendez-vous mardi 3 septembre à 17 h à la place du Village.
-Sans inscription au stand d'information, l'entrée n'est pas garantie.
+L'entrée n'est garantie que si l'inscription est faite au stand d'information.
 Apportez une carte de lecteur et gardez 16 CHF si besoin.
 
 À tout à l'heure,
@@ -8986,9 +8986,9 @@ Objet : Message de la responsable
 
 Bonjour,
 
-La coach Ana vous écrit au sujet de un parcours commerces utiles.
+Message de La coach Ana au sujet de un parcours commerces utiles.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
-Le but est simple : trouver les magasins essentiels.
+Le but reste simple : apprendre à trouver les magasins essentiels.
 Merci de respecter cette règle : les achats ne sont pas obligatoires.
 
 Bien cordialement,
@@ -9088,10 +9088,10 @@ Objet : Organisation du samedi
 
 Bonjour,
 
-Samedi, l'équipe installe le salon Harmonie pour un échange sur les animaux en ville.
+L'équipe prépare le salon Harmonie pour un échange sur les animaux en ville.
 Les participants arrivent à 11 h 30 avec une laisse.
 La date exacte est jeudi 19 septembre.
-Après la séance, un court échange expliquera comment respecter les voisins et les animaux.
+Après la séance, un court échange expliquera comment réussir à respecter les voisins et les animaux.
 
 Merci de votre aide,
 
@@ -9190,10 +9190,10 @@ Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Vous avez participé à une lecture des panneaux publics à la résidence du Parc.
+Vous avez récemment participé à une lecture des panneaux publics à la résidence du Parc.
 Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
-Votre avis nous aidera à mieux comprendre une consigne publique.
+Votre avis nous aidera à mieux organiser les moments pour comprendre une consigne publique.
 
 Merci pour votre retour,
 
@@ -9292,10 +9292,10 @@ Objet : Prochaine rencontre
 
 Bonjour,
 
-Nous préparons une nouvelle rencontre autour de un projet fresque de quartier.
+Nous préparons une prochaine rencontre autour de un projet fresque de quartier.
 Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
-Cette fois, nous demanderons à chacun d'apporter un croquis.
+Cette fois, chacun devra apporter un croquis.
 
 À bientôt,
 
@@ -9796,8 +9796,8 @@ Objet : Inscription à un atelier bonnes résolutions réalistes
 
 Bonjour,
 
-Votre inscription à un atelier bonnes résolutions réalistes est bien notée.
-Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+C'est confirmé : vous avez une place pour un atelier bonnes résolutions réalistes.
+Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter une liste de trois objectifs. La participation est gratuite.
 Cette rencontre aide à choisir une résolution possible.
 
@@ -9898,8 +9898,8 @@ Objet : Rappel pour mardi 14 mai
 
 Bonjour à toutes et à tous,
 
-Petit rappel : une séance relaxation courte aura lieu mardi 14 mai.
-Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Je vous rappelle que une séance relaxation courte est prévu mardi 14 mai.
+Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas un coussin et lisez bien cette consigne : les téléphones restent hors du cercle.
 
@@ -10000,8 +10000,8 @@ Objet : Question avant une information sur les insomnies
 
 Bonjour,
 
-Je voudrais participer à une information sur les insomnies, mais j'ai une question.
-Faut-il vraiment apporter un carnet de nuit ?
+J'ai vu l'annonce pour une information sur les insomnies et je voudrais m'inscrire.
+Pouvez-vous confirmer qu'il faut apporter un carnet de nuit ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de repérer ce qui empêche de dormir. Merci pour votre réponse.
 
@@ -10102,8 +10102,8 @@ Objet : Confirmation de votre place
 
 Madame, Monsieur,
 
-Nous confirmons votre place pour un atelier soin du visage.
-La séance se passe à la ferme des Lilas jeudi 30 mai.
+Votre place pour un atelier soin du visage est réservée.
+La séance aura lieu jeudi 30 mai à la ferme des Lilas.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -10204,8 +10204,8 @@ Objet : Conseil pratique : une brosse à dents
 
 Salut,
 
-Pour une discussion hygiène quotidienne, pense à mettre une brosse à dents dans ton sac.
-On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Petit conseil pour une discussion hygiène quotidienne : mets une brosse à dents dans ton sac.
+Je t'attends vendredi 7 juin à 14 h à le foyer Bellevue.
 Si tu veux garder de bonnes habitudes, cette séance est très utile.
 Attention : les affaires personnelles restent dans le sac.
 
@@ -10306,9 +10306,9 @@ Objet : Changement de salle
 
 Bonjour,
 
-La salle prévue n'est plus disponible pour un cours respiration anti-stress.
+Petit changement pour un cours respiration anti-stress : la salle prévue n'est plus libre.
 Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
-Le prix reste 15 CHF et 16 places sont gardées.
+Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer un minuteur.
 
 Merci de votre compréhension,
@@ -10408,8 +10408,8 @@ Objet : Merci pour votre participation
 
 Bonjour,
 
-Merci d'être venu à une séance organiser sa semaine à la terrasse du Marché.
-Plusieurs participants ont dit que cela aide à prévoir du repos.
+Merci pour votre présence lors de une séance organiser sa semaine à la terrasse du Marché.
+Plusieurs personnes ont expliqué que la séance aide à prévoir du repos.
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur un agenda a été notée.
 
@@ -10510,8 +10510,8 @@ Objet : Invitation bien-être
 
 Bonjour les amis,
 
-Je vous propose de venir avec moi à un atelier pause sans écran.
-C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Ça vous dit de venir avec moi à un atelier pause sans écran ?
+Le rendez-vous est lundi 1er juillet à 17 h 30 à le local des Jeunes.
 Il faut réserver directement sur place car il y a seulement 20 places.
 Apportez une boîte pour le téléphone et un peu de bonne humeur.
 
@@ -10612,10 +10612,10 @@ Objet : Liste du matériel
 
 Bonjour,
 
-Voici la liste pour une rencontre image de soi : un miroir de poche, une bouteille d'eau et un stylo.
+Pour une rencontre image de soi, la petite liste est simple : un miroir de poche, une bouteille d'eau et un stylo.
 Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
-Nous parlerons surtout de la manière de se parler avec respect.
+Le thème principal sera : se parler avec respect.
 
 Merci,
 
@@ -10714,9 +10714,9 @@ Objet : Places disponibles
 
 Bonjour,
 
-Bonne nouvelle : il reste 24 places pour un moment bain de pieds.
+Bonne nouvelle : un moment bain de pieds n'est pas complet, il reste 24 places.
 La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
-Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez une petite bassine. Le prix est 30 CHF.
 
 Cordialement,
@@ -10816,8 +10816,8 @@ Objet : Retour sur l'activité
 
 Bonjour,
 
-Après une initiation automassage, nous avons reçu beaucoup de messages positifs.
-Les participants ont apprécié soulager une tension légère.
+Depuis une initiation automassage, nous recevons des messages très positifs.
+Les participants ont surtout apprécié de soulager une tension légère.
 La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
 Cette fois, merci d'apporter une balle souple.
 
@@ -10918,8 +10918,8 @@ Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Votre rendez-vous pour un échange sur les habitudes du soir commence à 8 h 30.
-Merci d'être à la maison médicale dix minutes avant.
+Votre rendez-vous lié à un échange sur les habitudes du soir commence à 8 h 30.
+Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer un pyjama confortable.
 
@@ -11020,8 +11020,8 @@ Objet : Préparation de groupe
 
 Chers participants,
 
-Pour préparer une séance choisir un cadeau bien-être, nous faisons deux petits groupes.
-Le premier groupe arrive à 13 h à le parc des Amandiers.
+Pour que une séance choisir un cadeau bien-être se passe bien, nous formons deux petits groupes.
+Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier une idée de cadeau avant de partir.
 
@@ -11122,8 +11122,8 @@ Objet : Demande d'information
 
 Bonjour,
 
-Je cherche des informations sur un atelier rangement apaisant.
-J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Je vous écris car je cherche des informations sur un atelier rangement apaisant.
+J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horizon.
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour rendre la chambre plus calme.
 
@@ -11224,10 +11224,10 @@ Objet : Choix entre deux dates
 
 Bonjour,
 
-Deux dates étaient proposées, mais nous gardons lundi 26 août.
+Après vos réponses, nous gardons finalement la date du lundi 26 août.
 L'horaire choisi est 16 h 30 à le centre scolaire.
 Ce choix convient mieux à la professeure Léa et au groupe.
-Le contenu reste une promenade lente pour se calmer avec des chaussures faciles.
+Le contenu reste le même : une promenade lente pour se calmer, avec des chaussures faciles à prévoir.
 
 Merci pour vos réponses,
 
@@ -11326,9 +11326,9 @@ Objet : Dernier rappel
 
 Bonjour,
 
-Dernier rappel avant une discussion dire non poliment !
+Dernier message avant une discussion dire non poliment !
 Rendez-vous mardi 3 septembre à 17 h à la place du Village.
-Sans inscription au stand d'information, l'entrée n'est pas garantie.
+L'entrée n'est garantie que si l'inscription est faite au stand d'information.
 Apportez une phrase préparée et gardez 16 CHF si besoin.
 
 À tout à l'heure,
@@ -11428,9 +11428,9 @@ Objet : Message de la responsable
 
 Bonjour,
 
-La coach Ana vous écrit au sujet de un point info produits de toilette.
+Message de La coach Ana au sujet de un point info produits de toilette.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
-Le but est simple : lire une étiquette simple.
+Le but reste simple : apprendre à lire une étiquette simple.
 Merci de respecter cette règle : les produits irritants sont évités.
 
 Bien cordialement,
@@ -11530,10 +11530,10 @@ Objet : Organisation du samedi
 
 Bonjour,
 
-Samedi, l'équipe installe le salon Harmonie pour un atelier rituel du matin.
+L'équipe prépare le salon Harmonie pour un atelier rituel du matin.
 Les participants arrivent à 11 h 30 avec un réveil.
 La date exacte est jeudi 19 septembre.
-Après la séance, un court échange expliquera comment commencer la journée doucement.
+Après la séance, un court échange expliquera comment réussir à commencer la journée doucement.
 
 Merci de votre aide,
 
@@ -11632,10 +11632,10 @@ Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Vous avez participé à une séance gratitude simple à la résidence du Parc.
+Vous avez récemment participé à une séance gratitude simple à la résidence du Parc.
 Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
-Votre avis nous aidera à mieux voir les petites choses positives.
+Votre avis nous aidera à mieux organiser les moments pour voir les petites choses positives.
 
 Merci pour votre retour,
 
@@ -11734,10 +11734,10 @@ Objet : Prochaine rencontre
 
 Bonjour,
 
-Nous préparons une nouvelle rencontre autour de une journée prendre soin de soi.
+Nous préparons une prochaine rencontre autour de une journée prendre soin de soi.
 Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
-Cette fois, nous demanderons à chacun d'apporter une gourde.
+Cette fois, chacun devra apporter une gourde.
 
 À bientôt,
 

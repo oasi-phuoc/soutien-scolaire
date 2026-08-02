@@ -28,12 +28,9 @@ Objet : Confirmation de rendez-vous — Suivre une formation
 
 Bonjour,
 
-Votre rendez-vous est confirmé.
-Activité : formation de bureautique.
-Nous vous attendons le lundi 4 mars à 8 h 30.
-Lieu : Centre Horizon.
-Mme Rochat vous recevra à l'accueil.
-Merci d'apporter votre carte d'identité.
+Votre rendez-vous est confirmé pour la formation de bureautique.
+Nous vous accueillerons le lundi 4 mars à 8 h 30 au Centre Horizon.
+Mme Rochat sera à l'entrée pour vous guider. Merci d'apporter votre carte d'identité.
 
 Merci,
 Accueil Horizon`;
@@ -70,7 +67,7 @@ const E13_1_CE_EMAIL_POOL = buildExpressPool("e13-1-ce-email", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "bureautique",
     vfQ: "L'e-mail parle de formation de bureautique.",
     vfC: 0,
@@ -132,12 +129,9 @@ Objet : Documents à apporter — Suivre une formation
 
 Bonjour,
 
-Pour préparer cette activité (atelier de français professionnel), merci d'apporter :
-- votre CV simple
-- un stylo
-La rencontre aura lieu le mardi 12 mars à 9 h.
-Lieu : Salle Jura.
-Votre contact est M. Diallo.
+Pour préparer l'atelier de français professionnel, mettez votre CV simple dans votre sac.
+La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Jura.
+Si vous avez une question, M. Diallo répond au 021 610 31 41.
 
 Merci,
 Mme Bernard`;
@@ -174,7 +168,7 @@ const E13_1_CE_EMAIL_2_POOL = buildExpressPool("e13-1-ce-email-2", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "français",
     vfQ: "L'e-mail parle de atelier de français professionnel.",
     vfC: 0,
@@ -236,10 +230,9 @@ Objet : Changement d'horaire — Suivre une formation
 
 Bonjour,
 
-Attention, l'horaire de cours Excel débutant change.
-Le nouveau rendez-vous est le mercredi 20 mars à 9 h 15.
-Le lieu ne change pas : Bureau CPF.
-En cas de question, appelez Mme Perrin au 021 610 32 42.
+L'horaire de le cours Excel débutant change légèrement.
+Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
+Le lieu reste Bureau CPF. Pensez à prévenir Mme Perrin si vous ne pouvez pas venir.
 
 Merci,
 Secrétariat Central`;
@@ -276,7 +269,7 @@ const E13_1_CE_EMAIL_3_POOL = buildExpressPool("e13-1-ce-email-3", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "Excel",
     vfQ: "L'e-mail parle de cours Excel débutant.",
     vfC: 0,
@@ -338,10 +331,9 @@ Objet : Réponse à votre demande — Suivre une formation
 
 Bonjour,
 
-Nous avons bien reçu votre demande pour séance sur le CPF.
-Vous pouvez venir le jeudi 28 mars.
-L'accueil ouvre à 10 h. Lieu : École des Métiers.
-Pensez à préparer une copie du diplôme.
+Nous avons bien reçu votre demande concernant la séance sur le CPF.
+Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à l'École des Métiers.
+Le dossier sera plus vite traité avec une copie du diplôme.
 
 Merci,
 M. Lopez`;
@@ -378,7 +370,7 @@ const E13_1_CE_EMAIL_4_POOL = buildExpressPool("e13-1-ce-email-4", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "CPF",
     vfQ: "L'e-mail parle de séance sur le CPF.",
     vfC: 0,
@@ -440,11 +432,9 @@ Objet : Programme de la journée — Suivre une formation
 
 Bonjour,
 
-Voici le programme de la journée :
-10 h 30 : accueil. Lieu : Maison de quartier
-10 h 30 : présentation de formation courte en cuisine
-Mme Rossi animera la rencontre.
-À apporter : un stylo bleu.
+Voici le déroulement prévu le vendredi 5 avril.
+À 10 h 30, accueil à Maison de quartier. Ensuite, Mme Rossi présentera la formation courte en cuisine.
+La séance est courte; gardez simplement un stylo bleu avec vous.
 
 Merci,
 Service administratif`;
@@ -481,7 +471,7 @@ const E13_1_CE_EMAIL_5_POOL = buildExpressPool("e13-1-ce-email-5", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "courte",
     vfQ: "L'e-mail parle de formation courte en cuisine.",
     vfC: 0,
@@ -543,10 +533,9 @@ Objet : Rappel avant la visite — Suivre une formation
 
 Bonjour,
 
-Petit rappel avant votre visite : activité prévue le samedi 13 avril (module de sécurité au travail).
-Merci d'arriver à 11 h. Lieu : Salle Léman.
-Le dossier doit contenir votre attestation CPF.
-M. Meyer vérifiera les documents.
+Petit rappel avant votre visite : le module de sécurité au travail est bien prévu le samedi 13 avril.
+Merci d'arriver à 11 h dans la Salle Léman.
+M. Meyer vérifiera que votre dossier contient votre attestation CPF.
 
 Merci,
 Mme Garcia`;
@@ -583,7 +572,7 @@ const E13_1_CE_EMAIL_6_POOL = buildExpressPool("e13-1-ce-email-6", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "module",
     vfQ: "L'e-mail parle de module de sécurité au travail.",
     vfC: 0,
@@ -645,11 +634,9 @@ Objet : Invitation à une réunion — Suivre une formation
 
 Bonjour,
 
-Vous êtes invité(e) à une réunion sur cours du soir en informatique.
-La réunion aura lieu le lundi 22 avril à 13 h 30.
-Lieu : Centre Horizon.
-Merci de répondre avant vendredi.
-Contact : Mme Rochat.
+Nous vous invitons à une réunion au sujet de le cours du soir en informatique.
+Elle se tiendra le lundi 22 avril à 13 h 30, au Centre Horizon.
+Répondez avant vendredi et signalez à Mme Rochat si votre carte d'identité manque encore.
 
 Merci,
 Bureau des inscriptions`;
@@ -686,7 +673,7 @@ const E13_1_CE_EMAIL_7_POOL = buildExpressPool("e13-1-ce-email-7", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "soir",
     vfQ: "L'e-mail parle de cours du soir en informatique.",
     vfC: 0,
@@ -748,10 +735,9 @@ Objet : Résultat de votre dossier — Suivre une formation
 
 Bonjour,
 
-Votre dossier pour atelier pour changer de métier est complet.
-Prochaine étape : venir le mardi 30 avril à 14 h.
-L'adresse est : Salle Jura.
-Gardez votre CV simple avec vous.
+Votre dossier pour l'atelier pour changer de métier est maintenant complet.
+La prochaine étape se fera le mardi 30 avril à 14 h.
+Rendez-vous dans la Salle Jura; gardez votre CV simple avec vous jusqu'à la fin.
 
 Merci,
 M. Girard`;
@@ -788,7 +774,7 @@ const E13_1_CE_EMAIL_8_POOL = buildExpressPool("e13-1-ce-email-8", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "changer",
     vfQ: "L'e-mail parle de atelier pour changer de métier.",
     vfC: 0,
@@ -850,10 +836,9 @@ Objet : Pièce manquante — Suivre une formation
 
 Bonjour,
 
-Il manque encore votre numéro AVS dans votre dossier.
-Vous pouvez le déposer le mercredi 8 mai.
-Le bureau est ouvert à partir de 14 h 30. Lieu : Bureau CPF.
-Demandez Mme Perrin à l'accueil.
+Il manque encore votre numéro AVS.
+Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, au Bureau CPF.
+Demandez Mme Perrin à l'accueil pour éviter une attente trop longue.
 
 Merci,
 Service planning`;
@@ -890,7 +875,7 @@ const E13_1_CE_EMAIL_9_POOL = buildExpressPool("e13-1-ce-email-9", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "aide",
     vfQ: "L'e-mail parle de formation d'aide à domicile.",
     vfC: 0,
@@ -952,10 +937,9 @@ Objet : Nouveau créneau proposé — Suivre une formation
 
 Bonjour,
 
-Le rendez-vous pour test de niveau A2 est reporté.
-Nous proposons le jeudi 16 mai à 15 h.
-Le lieu est toujours : École des Métiers.
-Merci de confirmer à M. Favre.
+Le rendez-vous pour le test de niveau A2 est reporté.
+Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à l'École des Métiers.
+Merci de confirmer votre présence à M. Favre.
 
 Merci,
 Mme Nguyen`;
@@ -992,7 +976,7 @@ const E13_1_CE_EMAIL_10_POOL = buildExpressPool("e13-1-ce-email-10", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "test",
     vfQ: "L'e-mail parle de test de niveau A2.",
     vfC: 0,
@@ -1054,10 +1038,9 @@ Objet : Deux choix possibles — Suivre une formation
 
 Bonjour,
 
-Pour présentation des formations gratuites, deux choix étaient possibles.
-Vous avez choisi le vendredi 24 mai à 15 h 30.
-Lieu de la rencontre : Maison de quartier.
-Apportez un stylo bleu.
+Deux choix étaient possibles pour la présentation des formations gratuites.
+Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
+La rencontre aura lieu à Maison de quartier; apportez un stylo bleu.
 
 Merci,
 Accueil formation`;
@@ -1094,7 +1077,7 @@ const E13_1_CE_EMAIL_11_POOL = buildExpressPool("e13-1-ce-email-11", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "formations",
     vfQ: "L'e-mail parle de présentation des formations gratuites.",
     vfC: 0,
@@ -1156,9 +1139,8 @@ Objet : Suite à notre appel — Suivre une formation
 
 Bonjour,
 
-Suite à notre appel, je confirme les informations.
-cours de calcul professionnel aura lieu le lundi 3 juin à 16 h.
-Le lieu du rendez-vous est : Salle Léman.
+Suite à notre appel, je résume les informations.
+Le cours de calcul professionnel aura lieu le lundi 3 juin à 16 h, dans la Salle Léman.
 M. Meyer vous attendra avec la liste des participants.
 
 Merci,
@@ -1196,7 +1178,7 @@ const E13_1_CE_EMAIL_12_POOL = buildExpressPool("e13-1-ce-email-12", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "calcul",
     vfQ: "L'e-mail parle de cours de calcul professionnel.",
     vfC: 0,
@@ -1258,10 +1240,9 @@ Objet : Premier jour — Suivre une formation
 
 Bonjour,
 
-Pour votre premier jour lié à atelier pour remplir un dossier, arrivez à 16 h 30.
-La date est le mardi 11 juin.
-L'accueil se trouve ici : Centre Horizon.
-Merci d'apporter votre carte d'identité.
+Pour votre premier jour lié à l'atelier pour remplir un dossier, arrivez un peu avant 16 h 30.
+La date est le mardi 11 juin, et l'accueil se trouve au Centre Horizon.
+Merci d'apporter votre carte d'identité; cela facilitera l'inscription.
 
 Merci,
 Service dossiers`;
@@ -1298,7 +1279,7 @@ const E13_1_CE_EMAIL_13_POOL = buildExpressPool("e13-1-ce-email-13", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "remplir",
     vfQ: "L'e-mail parle de atelier pour remplir un dossier.",
     vfC: 0,
@@ -1361,10 +1342,8 @@ Objet : Merci pour votre réponse — Suivre une formation
 Bonjour,
 
 Merci pour votre réponse positive.
-Votre place pour formation en vente est gardée.
-Rendez-vous le mercredi 19 juin à 17 h.
-Lieu : Salle Jura.
-M. Diallo vous donnera les consignes.
+Votre place pour la formation en vente est gardée le mercredi 19 juin à 17 h.
+Dans la salle jura, M. Diallo donnera les consignes et vérifiera votre CV simple.
 
 Merci,
 Mme Moreau`;
@@ -1401,7 +1380,7 @@ const E13_1_CE_EMAIL_14_POOL = buildExpressPool("e13-1-ce-email-14", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "en",
     vfQ: "L'e-mail parle de formation en vente.",
     vfC: 0,
@@ -1463,10 +1442,9 @@ Objet : Contact à noter — Suivre une formation
 
 Bonjour,
 
-Voici le contact à noter pour séance de conseil individuel : Mme Perrin.
+Voici le contact à noter pour la séance de conseil individuel : Mme Perrin.
 Vous pouvez appeler le 021 610 44 54 seulement le matin.
-La prochaine rencontre est le jeudi 27 juin à 17 h 30.
-Lieu : Bureau CPF.
+La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, au Bureau CPF.
 
 Merci,
 Équipe coordination`;
@@ -1503,7 +1481,7 @@ const E13_1_CE_EMAIL_15_POOL = buildExpressPool("e13-1-ce-email-15", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "conseil",
     vfQ: "L'e-mail parle de séance de conseil individuel.",
     vfC: 0,
@@ -1565,11 +1543,9 @@ Objet : Message au groupe — Suivre une formation
 
 Bonjour,
 
-Message pour tout le groupe : cours de communication au travail commence bientôt.
-Merci d'être présent(e) le vendredi 5 juillet à 18 h.
-Lieu : École des Métiers.
-Chaque personne prépare une copie du diplôme.
-M. Favre fera l'appel.
+Message pour tout le groupe : Le cours de communication au travail commence bientôt.
+Soyez présent(e) le vendredi 5 juillet à 18 h, à l'École des Métiers.
+Chaque personne prépare une copie du diplôme; M. Favre fera l'appel.
 
 Merci,
 M. Petit`;
@@ -1606,7 +1582,7 @@ const E13_1_CE_EMAIL_16_POOL = buildExpressPool("e13-1-ce-email-16", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "communication",
     vfQ: "L'e-mail parle de cours de communication au travail.",
     vfC: 0,
@@ -1668,10 +1644,9 @@ Objet : Résumé de la rencontre — Suivre une formation
 
 Bonjour,
 
-Résumé de la rencontre : nous avons parlé de bilan avant inscription.
-Le groupe a choisi ce lieu pour la suite : Maison de quartier.
-La prochaine date est le lundi 15 juillet à 18 h 30.
-À faire avant : préparer un stylo bleu.
+Résumé de la rencontre : nous avons parlé de le bilan avant inscription.
+Le groupe a choisi Maison de quartier pour la suite.
+La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer un stylo bleu.
 
 Merci,
 Service suivi`;
@@ -1708,7 +1683,7 @@ const E13_1_CE_EMAIL_17_POOL = buildExpressPool("e13-1-ce-email-17", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "bilan",
     vfQ: "L'e-mail parle de bilan avant inscription.",
     vfC: 0,
@@ -1771,8 +1746,7 @@ Objet : Rendez-vous individuel — Suivre une formation
 Bonjour,
 
 Votre rendez-vous individuel avec M. Meyer est fixé.
-Il concerne atelier sur les horaires de cours.
-Venez le mardi 23 juillet à 19 h. Lieu : Salle Léman.
+Il concerne l'atelier sur les horaires de cours. Venez le mardi 23 juillet à 19 h, dans la Salle Léman.
 N'oubliez pas votre attestation CPF.
 
 Merci,
@@ -1810,7 +1784,7 @@ const E13_1_CE_EMAIL_18_POOL = buildExpressPool("e13-1-ce-email-18", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "horaires",
     vfQ: "L'e-mail parle de atelier sur les horaires de cours.",
     vfC: 0,
@@ -1872,11 +1846,9 @@ Objet : Solution proposée — Suivre une formation
 
 Bonjour,
 
-Nous avons trouvé une solution pour visite du centre de formation.
-Vous pouvez passer le mercredi 31 juillet à 19 h 30.
-Lieu : Centre Horizon.
-Mme Rochat vous expliquera la suite.
-Apportez aussi votre carte d'identité.
+Nous avons trouvé une solution pour la visite du centre de formation.
+Vous pouvez passer le mercredi 31 juillet à 19 h 30 au Centre Horizon.
+Mme Rochat vous expliquera la suite; apportez aussi votre carte d'identité.
 
 Merci,
 Accueil principal`;
@@ -1913,7 +1885,7 @@ const E13_1_CE_EMAIL_19_POOL = buildExpressPool("e13-1-ce-email-19", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "visite",
     vfQ: "L'e-mail parle de visite du centre de formation.",
     vfC: 0,
@@ -1975,12 +1947,9 @@ Objet : Dernières informations — Suivre une formation
 
 Bonjour,
 
-Dernières informations avant rappel avant le premier cours :
-date : jeudi 8 août
-heure : 20 h
-lieu : Salle Jura
-contact : M. Diallo
-à préparer : votre CV simple
+Dernières informations avant le rappel avant le premier cours.
+Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
+Le lieu est Salle Jura, le contact est M. Diallo, et le document à préparer est votre CV simple.
 
 Merci,
 M. Simon`;
@@ -2017,7 +1986,7 @@ const E13_1_CE_EMAIL_20_POOL = buildExpressPool("e13-1-ce-email-20", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "premier",
     vfQ: "L'e-mail parle de rappel avant le premier cours.",
     vfC: 0,
@@ -2078,102 +2047,122 @@ readingPoolExercise({
   id: "e13-1-ce-email",
   readingText: E13_1_CE_EMAIL_TEXT,
   questionPool: E13_1_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-2",
   readingText: E13_1_CE_EMAIL_2_TEXT,
-  questionPool: E13_1_CE_EMAIL_2_POOL
+  questionPool: E13_1_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-3",
   readingText: E13_1_CE_EMAIL_3_TEXT,
-  questionPool: E13_1_CE_EMAIL_3_POOL
+  questionPool: E13_1_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-4",
   readingText: E13_1_CE_EMAIL_4_TEXT,
-  questionPool: E13_1_CE_EMAIL_4_POOL
+  questionPool: E13_1_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-5",
   readingText: E13_1_CE_EMAIL_5_TEXT,
-  questionPool: E13_1_CE_EMAIL_5_POOL
+  questionPool: E13_1_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-6",
   readingText: E13_1_CE_EMAIL_6_TEXT,
-  questionPool: E13_1_CE_EMAIL_6_POOL
+  questionPool: E13_1_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-7",
   readingText: E13_1_CE_EMAIL_7_TEXT,
-  questionPool: E13_1_CE_EMAIL_7_POOL
+  questionPool: E13_1_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-8",
   readingText: E13_1_CE_EMAIL_8_TEXT,
-  questionPool: E13_1_CE_EMAIL_8_POOL
+  questionPool: E13_1_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-9",
   readingText: E13_1_CE_EMAIL_9_TEXT,
-  questionPool: E13_1_CE_EMAIL_9_POOL
+  questionPool: E13_1_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-10",
   readingText: E13_1_CE_EMAIL_10_TEXT,
-  questionPool: E13_1_CE_EMAIL_10_POOL
+  questionPool: E13_1_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-11",
   readingText: E13_1_CE_EMAIL_11_TEXT,
-  questionPool: E13_1_CE_EMAIL_11_POOL
+  questionPool: E13_1_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-12",
   readingText: E13_1_CE_EMAIL_12_TEXT,
-  questionPool: E13_1_CE_EMAIL_12_POOL
+  questionPool: E13_1_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-13",
   readingText: E13_1_CE_EMAIL_13_TEXT,
-  questionPool: E13_1_CE_EMAIL_13_POOL
+  questionPool: E13_1_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-14",
   readingText: E13_1_CE_EMAIL_14_TEXT,
-  questionPool: E13_1_CE_EMAIL_14_POOL
+  questionPool: E13_1_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-15",
   readingText: E13_1_CE_EMAIL_15_TEXT,
-  questionPool: E13_1_CE_EMAIL_15_POOL
+  questionPool: E13_1_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-16",
   readingText: E13_1_CE_EMAIL_16_TEXT,
-  questionPool: E13_1_CE_EMAIL_16_POOL
+  questionPool: E13_1_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-17",
   readingText: E13_1_CE_EMAIL_17_TEXT,
-  questionPool: E13_1_CE_EMAIL_17_POOL
+  questionPool: E13_1_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-18",
   readingText: E13_1_CE_EMAIL_18_TEXT,
-  questionPool: E13_1_CE_EMAIL_18_POOL
+  questionPool: E13_1_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-19",
   readingText: E13_1_CE_EMAIL_19_TEXT,
-  questionPool: E13_1_CE_EMAIL_19_POOL
+  questionPool: E13_1_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-1-ce-email-20",
   readingText: E13_1_CE_EMAIL_20_TEXT,
-  questionPool: E13_1_CE_EMAIL_20_POOL
+  questionPool: E13_1_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
@@ -2461,12 +2450,9 @@ Objet : Confirmation de rendez-vous — Trouver un stage
 
 Bonjour,
 
-Votre rendez-vous est confirmé.
-Activité : recherche de stage en crèche.
-Nous vous attendons le lundi 4 mars à 8 h 30.
-Lieu : Agence Emploi Plus.
-Mme Keller vous recevra à l'accueil.
-Merci d'apporter votre convention signée.
+Votre rendez-vous est confirmé pour la recherche de stage en crèche.
+Nous vous accueillerons le lundi 4 mars à 8 h 30 à l'Agence Emploi Plus.
+Mme Keller sera à l'entrée pour vous guider. Merci d'apporter votre convention signée.
 
 Merci,
 Accueil Horizon`;
@@ -2503,7 +2489,7 @@ const E13_2_CE_EMAIL_POOL = buildExpressPool("e13-2-ce-email", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "recherche",
     vfQ: "L'e-mail parle de recherche de stage en crèche.",
     vfC: 0,
@@ -2565,12 +2551,9 @@ Objet : Documents à apporter — Trouver un stage
 
 Bonjour,
 
-Pour préparer cette activité (atelier CV pour un stage), merci d'apporter :
-- un CV imprimé
-- un stylo
-La rencontre aura lieu le mardi 12 mars à 9 h.
-Lieu : Salle Rhône.
-Votre contact est M. Benali.
+Pour préparer l'atelier CV pour un stage, mettez un CV imprimé dans votre sac.
+La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Rhône.
+Si vous avez une question, M. Benali répond au 022 420 31 41.
 
 Merci,
 Mme Bernard`;
@@ -2607,7 +2590,7 @@ const E13_2_CE_EMAIL_2_POOL = buildExpressPool("e13-2-ce-email-2", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "CV",
     vfQ: "L'e-mail parle de atelier CV pour un stage.",
     vfC: 0,
@@ -2669,10 +2652,9 @@ Objet : Changement d'horaire — Trouver un stage
 
 Bonjour,
 
-Attention, l'horaire de visite d'une entreprise locale change.
-Le nouveau rendez-vous est le mercredi 20 mars à 9 h 15.
-Le lieu ne change pas : Crèche Les Pivoines.
-En cas de question, appelez Mme Arnaud au 022 420 32 42.
+L'horaire de la visite d'une entreprise locale change légèrement.
+Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
+Le lieu reste Crèche Les Pivoines. Pensez à prévenir Mme Arnaud si vous ne pouvez pas venir.
 
 Merci,
 Secrétariat Central`;
@@ -2709,7 +2691,7 @@ const E13_2_CE_EMAIL_3_POOL = buildExpressPool("e13-2-ce-email-3", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "locale",
     vfQ: "L'e-mail parle de visite d'une entreprise locale.",
     vfC: 0,
@@ -2771,10 +2753,9 @@ Objet : Réponse à votre demande — Trouver un stage
 
 Bonjour,
 
-Nous avons bien reçu votre demande pour rencontre avec une conseillère stage.
-Vous pouvez venir le jeudi 28 mars.
-L'accueil ouvre à 10 h. Lieu : Atelier Municipal.
-Pensez à préparer vos disponibilités.
+Nous avons bien reçu votre demande concernant la rencontre avec une conseillère stage.
+Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à Atelier Municipal.
+Le dossier sera plus vite traité avec vos disponibilités.
 
 Merci,
 M. Lopez`;
@@ -2811,7 +2792,7 @@ const E13_2_CE_EMAIL_4_POOL = buildExpressPool("e13-2-ce-email-4", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "rencontre",
     vfQ: "L'e-mail parle de rencontre avec une conseillère stage.",
     vfC: 0,
@@ -2873,11 +2854,9 @@ Objet : Programme de la journée — Trouver un stage
 
 Bonjour,
 
-Voici le programme de la journée :
-10 h 30 : accueil. Lieu : Magasin Centre-Ville
-10 h 30 : présentation de stage découverte en logistique
-Mme Costa animera la rencontre.
-À apporter : une copie du permis.
+Voici le déroulement prévu le vendredi 5 avril.
+À 10 h 30, accueil à Magasin Centre-Ville. Ensuite, Mme Costa présentera le stage découverte en logistique.
+La séance est courte; gardez simplement une copie du permis avec vous.
 
 Merci,
 Service administratif`;
@@ -2914,7 +2893,7 @@ const E13_2_CE_EMAIL_5_POOL = buildExpressPool("e13-2-ce-email-5", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "découverte",
     vfQ: "L'e-mail parle de stage découverte en logistique.",
     vfC: 0,
@@ -2976,10 +2955,9 @@ Objet : Rappel avant la visite — Trouver un stage
 
 Bonjour,
 
-Petit rappel avant votre visite : activité prévue le samedi 13 avril (appel à candidatures pour un stage).
-Merci d'arriver à 11 h. Lieu : Bibliothèque Est.
-Le dossier doit contenir votre carte d'identité.
-M. Weber vérifiera les documents.
+Petit rappel avant votre visite : l'appel à candidatures pour un stage est bien prévu le samedi 13 avril.
+Merci d'arriver à 11 h à la Bibliothèque Est.
+M. Weber vérifiera que votre dossier contient votre carte d'identité.
 
 Merci,
 Mme Garcia`;
@@ -3016,7 +2994,7 @@ const E13_2_CE_EMAIL_6_POOL = buildExpressPool("e13-2-ce-email-6", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "appel",
     vfQ: "L'e-mail parle de appel à candidatures pour un stage.",
     vfC: 0,
@@ -3078,11 +3056,9 @@ Objet : Invitation à une réunion — Trouver un stage
 
 Bonjour,
 
-Vous êtes invité(e) à une réunion sur préparation d'un entretien de stage.
-La réunion aura lieu le lundi 22 avril à 13 h 30.
-Lieu : Agence Emploi Plus.
-Merci de répondre avant vendredi.
-Contact : Mme Keller.
+Nous vous invitons à une réunion au sujet de la préparation d'un entretien de stage.
+Elle se tiendra le lundi 22 avril à 13 h 30, à l'Agence Emploi Plus.
+Répondez avant vendredi et signalez à Mme Keller si votre convention signée manque encore.
 
 Merci,
 Bureau des inscriptions`;
@@ -3119,7 +3095,7 @@ const E13_2_CE_EMAIL_7_POOL = buildExpressPool("e13-2-ce-email-7", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "préparation",
     vfQ: "L'e-mail parle de préparation d'un entretien de stage.",
     vfC: 0,
@@ -3181,10 +3157,9 @@ Objet : Résultat de votre dossier — Trouver un stage
 
 Bonjour,
 
-Votre dossier pour séance sur les sites d'emploi est complet.
-Prochaine étape : venir le mardi 30 avril à 14 h.
-L'adresse est : Salle Rhône.
-Gardez un CV imprimé avec vous.
+Votre dossier pour la séance sur les sites d'emploi est maintenant complet.
+La prochaine étape se fera le mardi 30 avril à 14 h.
+Rendez-vous dans la Salle Rhône; gardez un CV imprimé avec vous jusqu'à la fin.
 
 Merci,
 M. Girard`;
@@ -3221,7 +3196,7 @@ const E13_2_CE_EMAIL_8_POOL = buildExpressPool("e13-2-ce-email-8", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "sites",
     vfQ: "L'e-mail parle de séance sur les sites d'emploi.",
     vfC: 0,
@@ -3283,10 +3258,9 @@ Objet : Pièce manquante — Trouver un stage
 
 Bonjour,
 
-Il manque encore une lettre courte dans votre dossier.
-Vous pouvez le déposer le mercredi 8 mai.
-Le bureau est ouvert à partir de 14 h 30. Lieu : Crèche Les Pivoines.
-Demandez Mme Arnaud à l'accueil.
+Il manque encore une lettre courte.
+Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, à Crèche Les Pivoines.
+Demandez Mme Arnaud à l'accueil pour éviter une attente trop longue.
 
 Merci,
 Service planning`;
@@ -3323,7 +3297,7 @@ const E13_2_CE_EMAIL_9_POOL = buildExpressPool("e13-2-ce-email-9", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "en",
     vfQ: "L'e-mail parle de stage en cuisine collective.",
     vfC: 0,
@@ -3385,10 +3359,9 @@ Objet : Nouveau créneau proposé — Trouver un stage
 
 Bonjour,
 
-Le rendez-vous pour forum des stages est reporté.
-Nous proposons le jeudi 16 mai à 15 h.
-Le lieu est toujours : Atelier Municipal.
-Merci de confirmer à M. Schmid.
+Le rendez-vous pour le forum des stages est reporté.
+Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à Atelier Municipal.
+Merci de confirmer votre présence à M. Schmid.
 
 Merci,
 Mme Nguyen`;
@@ -3425,7 +3398,7 @@ const E13_2_CE_EMAIL_10_POOL = buildExpressPool("e13-2-ce-email-10", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "forum",
     vfQ: "L'e-mail parle de forum des stages.",
     vfC: 0,
@@ -3487,10 +3460,9 @@ Objet : Deux choix possibles — Trouver un stage
 
 Bonjour,
 
-Pour dépôt de dossier de stage, deux choix étaient possibles.
-Vous avez choisi le vendredi 24 mai à 15 h 30.
-Lieu de la rencontre : Magasin Centre-Ville.
-Apportez une copie du permis.
+Deux choix étaient possibles pour le dépôt de dossier de stage.
+Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
+La rencontre aura lieu à Magasin Centre-Ville; apportez une copie du permis.
 
 Merci,
 Accueil formation`;
@@ -3527,7 +3499,7 @@ const E13_2_CE_EMAIL_11_POOL = buildExpressPool("e13-2-ce-email-11", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "dossier",
     vfQ: "L'e-mail parle de dépôt de dossier de stage.",
     vfC: 0,
@@ -3589,9 +3561,8 @@ Objet : Suite à notre appel — Trouver un stage
 
 Bonjour,
 
-Suite à notre appel, je confirme les informations.
-stage en bibliothèque aura lieu le lundi 3 juin à 16 h.
-Le lieu du rendez-vous est : Bibliothèque Est.
+Suite à notre appel, je résume les informations.
+Le stage en bibliothèque aura lieu le lundi 3 juin à 16 h, à la Bibliothèque Est.
 M. Weber vous attendra avec la liste des participants.
 
 Merci,
@@ -3629,7 +3600,7 @@ const E13_2_CE_EMAIL_12_POOL = buildExpressPool("e13-2-ce-email-12", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "en",
     vfQ: "L'e-mail parle de stage en bibliothèque.",
     vfC: 0,
@@ -3691,10 +3662,9 @@ Objet : Premier jour — Trouver un stage
 
 Bonjour,
 
-Pour votre premier jour lié à stage en maison de retraite, arrivez à 16 h 30.
-La date est le mardi 11 juin.
-L'accueil se trouve ici : Agence Emploi Plus.
-Merci d'apporter votre convention signée.
+Pour votre premier jour lié à le stage en maison de retraite, arrivez un peu avant 16 h 30.
+La date est le mardi 11 juin, et l'accueil se trouve à l'Agence Emploi Plus.
+Merci d'apporter votre convention signée; cela facilitera l'inscription.
 
 Merci,
 Service dossiers`;
@@ -3731,7 +3701,7 @@ const E13_2_CE_EMAIL_13_POOL = buildExpressPool("e13-2-ce-email-13", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "en",
     vfQ: "L'e-mail parle de stage en maison de retraite.",
     vfC: 0,
@@ -3794,10 +3764,8 @@ Objet : Merci pour votre réponse — Trouver un stage
 Bonjour,
 
 Merci pour votre réponse positive.
-Votre place pour atelier lettre de motivation est gardée.
-Rendez-vous le mercredi 19 juin à 17 h.
-Lieu : Salle Rhône.
-M. Benali vous donnera les consignes.
+Votre place pour l'atelier lettre de motivation est gardée le mercredi 19 juin à 17 h.
+Dans la salle rhône, M. Benali donnera les consignes et vérifiera un CV imprimé.
 
 Merci,
 Mme Moreau`;
@@ -3834,7 +3802,7 @@ const E13_2_CE_EMAIL_14_POOL = buildExpressPool("e13-2-ce-email-14", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "lettre",
     vfQ: "L'e-mail parle de atelier lettre de motivation.",
     vfC: 0,
@@ -3896,10 +3864,9 @@ Objet : Contact à noter — Trouver un stage
 
 Bonjour,
 
-Voici le contact à noter pour stage court en magasin : Mme Arnaud.
+Voici le contact à noter pour le stage court en magasin : Mme Arnaud.
 Vous pouvez appeler le 022 420 44 54 seulement le matin.
-La prochaine rencontre est le jeudi 27 juin à 17 h 30.
-Lieu : Crèche Les Pivoines.
+La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, à Crèche Les Pivoines.
 
 Merci,
 Équipe coordination`;
@@ -3936,7 +3903,7 @@ const E13_2_CE_EMAIL_15_POOL = buildExpressPool("e13-2-ce-email-15", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "court",
     vfQ: "L'e-mail parle de stage court en magasin.",
     vfC: 0,
@@ -3998,11 +3965,9 @@ Objet : Message au groupe — Trouver un stage
 
 Bonjour,
 
-Message pour tout le groupe : permanence Pôle Emploi commence bientôt.
-Merci d'être présent(e) le vendredi 5 juillet à 18 h.
-Lieu : Atelier Municipal.
-Chaque personne prépare vos disponibilités.
-M. Schmid fera l'appel.
+Message pour tout le groupe : La permanence pôle emploi commence bientôt.
+Soyez présent(e) le vendredi 5 juillet à 18 h, à Atelier Municipal.
+Chaque personne prépare vos disponibilités; M. Schmid fera l'appel.
 
 Merci,
 M. Petit`;
@@ -4039,7 +4004,7 @@ const E13_2_CE_EMAIL_16_POOL = buildExpressPool("e13-2-ce-email-16", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "permanence",
     vfQ: "L'e-mail parle de permanence Pôle Emploi.",
     vfC: 0,
@@ -4101,10 +4066,9 @@ Objet : Résumé de la rencontre — Trouver un stage
 
 Bonjour,
 
-Résumé de la rencontre : nous avons parlé de visite du service technique.
-Le groupe a choisi ce lieu pour la suite : Magasin Centre-Ville.
-La prochaine date est le lundi 15 juillet à 18 h 30.
-À faire avant : préparer une copie du permis.
+Résumé de la rencontre : nous avons parlé de la visite du service technique.
+Le groupe a choisi Magasin Centre-Ville pour la suite.
+La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer une copie du permis.
 
 Merci,
 Service suivi`;
@@ -4141,7 +4105,7 @@ const E13_2_CE_EMAIL_17_POOL = buildExpressPool("e13-2-ce-email-17", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "technique",
     vfQ: "L'e-mail parle de visite du service technique.",
     vfC: 0,
@@ -4204,8 +4168,7 @@ Objet : Rendez-vous individuel — Trouver un stage
 Bonjour,
 
 Votre rendez-vous individuel avec M. Weber est fixé.
-Il concerne stage en accueil administratif.
-Venez le mardi 23 juillet à 19 h. Lieu : Bibliothèque Est.
+Il concerne le stage en accueil administratif. Venez le mardi 23 juillet à 19 h, à la Bibliothèque Est.
 N'oubliez pas votre carte d'identité.
 
 Merci,
@@ -4243,7 +4206,7 @@ const E13_2_CE_EMAIL_18_POOL = buildExpressPool("e13-2-ce-email-18", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "en",
     vfQ: "L'e-mail parle de stage en accueil administratif.",
     vfC: 0,
@@ -4305,11 +4268,9 @@ Objet : Solution proposée — Trouver un stage
 
 Bonjour,
 
-Nous avons trouvé une solution pour réunion avec les tuteurs.
-Vous pouvez passer le mercredi 31 juillet à 19 h 30.
-Lieu : Agence Emploi Plus.
-Mme Keller vous expliquera la suite.
-Apportez aussi votre convention signée.
+Nous avons trouvé une solution pour la réunion avec les tuteurs.
+Vous pouvez passer le mercredi 31 juillet à 19 h 30 à l'Agence Emploi Plus.
+Mme Keller vous expliquera la suite; apportez aussi votre convention signée.
 
 Merci,
 Accueil principal`;
@@ -4346,7 +4307,7 @@ const E13_2_CE_EMAIL_19_POOL = buildExpressPool("e13-2-ce-email-19", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "tuteurs",
     vfQ: "L'e-mail parle de réunion avec les tuteurs.",
     vfC: 0,
@@ -4408,12 +4369,9 @@ Objet : Dernières informations — Trouver un stage
 
 Bonjour,
 
-Dernières informations avant rappel avant le début du stage :
-date : jeudi 8 août
-heure : 20 h
-lieu : Salle Rhône
-contact : M. Benali
-à préparer : un CV imprimé
+Dernières informations avant le rappel avant le début du stage.
+Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
+Le lieu est Salle Rhône, le contact est M. Benali, et le document à préparer est un CV imprimé.
 
 Merci,
 M. Simon`;
@@ -4450,7 +4408,7 @@ const E13_2_CE_EMAIL_20_POOL = buildExpressPool("e13-2-ce-email-20", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "début",
     vfQ: "L'e-mail parle de rappel avant le début du stage.",
     vfC: 0,
@@ -4511,102 +4469,122 @@ readingPoolExercise({
   id: "e13-2-ce-email",
   readingText: E13_2_CE_EMAIL_TEXT,
   questionPool: E13_2_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-2",
   readingText: E13_2_CE_EMAIL_2_TEXT,
-  questionPool: E13_2_CE_EMAIL_2_POOL
+  questionPool: E13_2_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-3",
   readingText: E13_2_CE_EMAIL_3_TEXT,
-  questionPool: E13_2_CE_EMAIL_3_POOL
+  questionPool: E13_2_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-4",
   readingText: E13_2_CE_EMAIL_4_TEXT,
-  questionPool: E13_2_CE_EMAIL_4_POOL
+  questionPool: E13_2_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-5",
   readingText: E13_2_CE_EMAIL_5_TEXT,
-  questionPool: E13_2_CE_EMAIL_5_POOL
+  questionPool: E13_2_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-6",
   readingText: E13_2_CE_EMAIL_6_TEXT,
-  questionPool: E13_2_CE_EMAIL_6_POOL
+  questionPool: E13_2_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-7",
   readingText: E13_2_CE_EMAIL_7_TEXT,
-  questionPool: E13_2_CE_EMAIL_7_POOL
+  questionPool: E13_2_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-8",
   readingText: E13_2_CE_EMAIL_8_TEXT,
-  questionPool: E13_2_CE_EMAIL_8_POOL
+  questionPool: E13_2_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-9",
   readingText: E13_2_CE_EMAIL_9_TEXT,
-  questionPool: E13_2_CE_EMAIL_9_POOL
+  questionPool: E13_2_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-10",
   readingText: E13_2_CE_EMAIL_10_TEXT,
-  questionPool: E13_2_CE_EMAIL_10_POOL
+  questionPool: E13_2_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-11",
   readingText: E13_2_CE_EMAIL_11_TEXT,
-  questionPool: E13_2_CE_EMAIL_11_POOL
+  questionPool: E13_2_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-12",
   readingText: E13_2_CE_EMAIL_12_TEXT,
-  questionPool: E13_2_CE_EMAIL_12_POOL
+  questionPool: E13_2_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-13",
   readingText: E13_2_CE_EMAIL_13_TEXT,
-  questionPool: E13_2_CE_EMAIL_13_POOL
+  questionPool: E13_2_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-14",
   readingText: E13_2_CE_EMAIL_14_TEXT,
-  questionPool: E13_2_CE_EMAIL_14_POOL
+  questionPool: E13_2_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-15",
   readingText: E13_2_CE_EMAIL_15_TEXT,
-  questionPool: E13_2_CE_EMAIL_15_POOL
+  questionPool: E13_2_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-16",
   readingText: E13_2_CE_EMAIL_16_TEXT,
-  questionPool: E13_2_CE_EMAIL_16_POOL
+  questionPool: E13_2_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-17",
   readingText: E13_2_CE_EMAIL_17_TEXT,
-  questionPool: E13_2_CE_EMAIL_17_POOL
+  questionPool: E13_2_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-18",
   readingText: E13_2_CE_EMAIL_18_TEXT,
-  questionPool: E13_2_CE_EMAIL_18_POOL
+  questionPool: E13_2_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-19",
   readingText: E13_2_CE_EMAIL_19_TEXT,
-  questionPool: E13_2_CE_EMAIL_19_POOL
+  questionPool: E13_2_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-2-ce-email-20",
   readingText: E13_2_CE_EMAIL_20_TEXT,
-  questionPool: E13_2_CE_EMAIL_20_POOL
+  questionPool: E13_2_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
@@ -4894,12 +4872,9 @@ Objet : Confirmation de rendez-vous — Répondre à une offre d'emploi
 
 Bonjour,
 
-Votre rendez-vous est confirmé.
-Activité : candidature pour agent d'accueil.
-Nous vous attendons le lundi 4 mars à 8 h 30.
-Lieu : Bureau Emploi.
-Mme Marchand vous recevra à l'accueil.
-Merci d'apporter votre CV à jour.
+Votre rendez-vous est confirmé pour la candidature pour agent d'accueil.
+Nous vous accueillerons le lundi 4 mars à 8 h 30 au Bureau Emploi.
+Mme Marchand sera à l'entrée pour vous guider. Merci d'apporter votre CV à jour.
 
 Merci,
 Accueil Horizon`;
@@ -4936,7 +4911,7 @@ const E13_3_CE_EMAIL_POOL = buildExpressPool("e13-3-ce-email", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "agent",
     vfQ: "L'e-mail parle de candidature pour agent d'accueil.",
     vfC: 0,
@@ -4998,12 +4973,9 @@ Objet : Documents à apporter — Répondre à une offre d'emploi
 
 Bonjour,
 
-Pour préparer cette activité (réponse à une offre de vendeur), merci d'apporter :
-- une lettre signée
-- un stylo
-La rencontre aura lieu le mardi 12 mars à 9 h.
-Lieu : Salle Alpes.
-Votre contact est M. Laurent.
+Pour préparer la réponse à une offre de vendeur, mettez une lettre signée dans votre sac.
+La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Alpes.
+Si vous avez une question, M. Laurent répond au 024 730 31 41.
 
 Merci,
 Mme Bernard`;
@@ -5040,7 +5012,7 @@ const E13_3_CE_EMAIL_2_POOL = buildExpressPool("e13-3-ce-email-2", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "à",
     vfQ: "L'e-mail parle de réponse à une offre de vendeur.",
     vfC: 0,
@@ -5102,10 +5074,9 @@ Objet : Changement d'horaire — Répondre à une offre d'emploi
 
 Bonjour,
 
-Attention, l'horaire de envoi d'un CV de serveur change.
-Le nouveau rendez-vous est le mercredi 20 mars à 9 h 15.
-Le lieu ne change pas : Entreprise Nova.
-En cas de question, appelez Mme Huber au 024 730 32 42.
+L'horaire de l'envoi d'un CV de serveur change légèrement.
+Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
+Le lieu reste Entreprise Nova. Pensez à prévenir Mme Huber si vous ne pouvez pas venir.
 
 Merci,
 Secrétariat Central`;
@@ -5142,7 +5113,7 @@ const E13_3_CE_EMAIL_3_POOL = buildExpressPool("e13-3-ce-email-3", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "envoi",
     vfQ: "L'e-mail parle de envoi d'un CV de serveur.",
     vfC: 0,
@@ -5204,10 +5175,9 @@ Objet : Réponse à votre demande — Répondre à une offre d'emploi
 
 Bonjour,
 
-Nous avons bien reçu votre demande pour atelier candidature spontanée.
-Vous pouvez venir le jeudi 28 mars.
-L'accueil ouvre à 10 h. Lieu : Agence Travail Direct.
-Pensez à préparer deux références.
+Nous avons bien reçu votre demande concernant l'atelier candidature spontanée.
+Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à l'Agence Travail Direct.
+Le dossier sera plus vite traité avec deux références.
 
 Merci,
 M. Lopez`;
@@ -5244,7 +5214,7 @@ const E13_3_CE_EMAIL_4_POOL = buildExpressPool("e13-3-ce-email-4", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "spontanée",
     vfQ: "L'e-mail parle de atelier candidature spontanée.",
     vfC: 0,
@@ -5306,11 +5276,9 @@ Objet : Programme de la journée — Répondre à une offre d'emploi
 
 Bonjour,
 
-Voici le programme de la journée :
-10 h 30 : accueil. Lieu : Espace Candidats
-10 h 30 : présentation de dossier pour aide de cuisine
-Mme Rossi animera la rencontre.
-À apporter : votre adresse e-mail.
+Voici le déroulement prévu le vendredi 5 avril.
+À 10 h 30, accueil à Espace Candidats. Ensuite, Mme Rossi présentera le dossier pour aide de cuisine.
+La séance est courte; gardez simplement votre adresse e-mail avec vous.
 
 Merci,
 Service administratif`;
@@ -5347,7 +5315,7 @@ const E13_3_CE_EMAIL_5_POOL = buildExpressPool("e13-3-ce-email-5", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "dossier",
     vfQ: "L'e-mail parle de dossier pour aide de cuisine.",
     vfC: 0,
@@ -5409,10 +5377,9 @@ Objet : Rappel avant la visite — Répondre à une offre d'emploi
 
 Bonjour,
 
-Petit rappel avant votre visite : activité prévue le samedi 13 avril (offre de secrétaire à temps partiel).
-Merci d'arriver à 11 h. Lieu : Guichet 3.
-Le dossier doit contenir le numéro de l'offre.
-M. Clerc vérifiera les documents.
+Petit rappel avant votre visite : l'offre de secrétaire à temps partiel est bien prévu le samedi 13 avril.
+Merci d'arriver à 11 h à Guichet 3.
+M. Clerc vérifiera que votre dossier contient le numéro de l'offre.
 
 Merci,
 Mme Garcia`;
@@ -5449,7 +5416,7 @@ const E13_3_CE_EMAIL_6_POOL = buildExpressPool("e13-3-ce-email-6", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "secrétaire",
     vfQ: "L'e-mail parle de offre de secrétaire à temps partiel.",
     vfC: 0,
@@ -5511,11 +5478,9 @@ Objet : Invitation à une réunion — Répondre à une offre d'emploi
 
 Bonjour,
 
-Vous êtes invité(e) à une réunion sur relecture d'une lettre de motivation.
-La réunion aura lieu le lundi 22 avril à 13 h 30.
-Lieu : Bureau Emploi.
-Merci de répondre avant vendredi.
-Contact : Mme Marchand.
+Nous vous invitons à une réunion au sujet de la relecture d'une lettre de motivation.
+Elle se tiendra le lundi 22 avril à 13 h 30, au Bureau Emploi.
+Répondez avant vendredi et signalez à Mme Marchand si votre CV à jour manque encore.
 
 Merci,
 Bureau des inscriptions`;
@@ -5552,7 +5517,7 @@ const E13_3_CE_EMAIL_7_POOL = buildExpressPool("e13-3-ce-email-7", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "relecture",
     vfQ: "L'e-mail parle de relecture d'une lettre de motivation.",
     vfC: 0,
@@ -5614,10 +5579,9 @@ Objet : Résultat de votre dossier — Répondre à une offre d'emploi
 
 Bonjour,
 
-Votre dossier pour candidature en ligne est complet.
-Prochaine étape : venir le mardi 30 avril à 14 h.
-L'adresse est : Salle Alpes.
-Gardez une lettre signée avec vous.
+Votre dossier pour la candidature en ligne est maintenant complet.
+La prochaine étape se fera le mardi 30 avril à 14 h.
+Rendez-vous dans la Salle Alpes; gardez une lettre signée avec vous jusqu'à la fin.
 
 Merci,
 M. Girard`;
@@ -5654,7 +5618,7 @@ const E13_3_CE_EMAIL_8_POOL = buildExpressPool("e13-3-ce-email-8", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "en",
     vfQ: "L'e-mail parle de candidature en ligne.",
     vfC: 0,
@@ -5716,10 +5680,9 @@ Objet : Pièce manquante — Répondre à une offre d'emploi
 
 Bonjour,
 
-Il manque encore vos certificats de travail dans votre dossier.
-Vous pouvez le déposer le mercredi 8 mai.
-Le bureau est ouvert à partir de 14 h 30. Lieu : Entreprise Nova.
-Demandez Mme Huber à l'accueil.
+Il manque encore vos certificats de travail.
+Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, à l'Entreprise Nova.
+Demandez Mme Huber à l'accueil pour éviter une attente trop longue.
 
 Merci,
 Service planning`;
@@ -5756,7 +5719,7 @@ const E13_3_CE_EMAIL_9_POOL = buildExpressPool("e13-3-ce-email-9", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "magasinier",
     vfQ: "L'e-mail parle de offre de magasinier.",
     vfC: 0,
@@ -5818,10 +5781,9 @@ Objet : Nouveau créneau proposé — Répondre à une offre d'emploi
 
 Bonjour,
 
-Le rendez-vous pour séance sur les annonces est reporté.
-Nous proposons le jeudi 16 mai à 15 h.
-Le lieu est toujours : Agence Travail Direct.
-Merci de confirmer à M. Morel.
+Le rendez-vous pour la séance sur les annonces est reporté.
+Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à l'Agence Travail Direct.
+Merci de confirmer votre présence à M. Morel.
 
 Merci,
 Mme Nguyen`;
@@ -5858,7 +5820,7 @@ const E13_3_CE_EMAIL_10_POOL = buildExpressPool("e13-3-ce-email-10", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "annonces",
     vfQ: "L'e-mail parle de séance sur les annonces.",
     vfC: 0,
@@ -5920,10 +5882,9 @@ Objet : Deux choix possibles — Répondre à une offre d'emploi
 
 Bonjour,
 
-Pour préparation des références, deux choix étaient possibles.
-Vous avez choisi le vendredi 24 mai à 15 h 30.
-Lieu de la rencontre : Espace Candidats.
-Apportez votre adresse e-mail.
+Deux choix étaient possibles pour la préparation des références.
+Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
+La rencontre aura lieu à Espace Candidats; apportez votre adresse e-mail.
 
 Merci,
 Accueil formation`;
@@ -5960,7 +5921,7 @@ const E13_3_CE_EMAIL_11_POOL = buildExpressPool("e13-3-ce-email-11", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "références",
     vfQ: "L'e-mail parle de préparation des références.",
     vfC: 0,
@@ -6022,9 +5983,8 @@ Objet : Suite à notre appel — Répondre à une offre d'emploi
 
 Bonjour,
 
-Suite à notre appel, je confirme les informations.
-poste d'assistant administratif aura lieu le lundi 3 juin à 16 h.
-Le lieu du rendez-vous est : Guichet 3.
+Suite à notre appel, je résume les informations.
+Le poste d'assistant administratif aura lieu le lundi 3 juin à 16 h, à Guichet 3.
 M. Clerc vous attendra avec la liste des participants.
 
 Merci,
@@ -6062,7 +6022,7 @@ const E13_3_CE_EMAIL_12_POOL = buildExpressPool("e13-3-ce-email-12", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "poste",
     vfQ: "L'e-mail parle de poste d'assistant administratif.",
     vfC: 0,
@@ -6124,10 +6084,9 @@ Objet : Premier jour — Répondre à une offre d'emploi
 
 Bonjour,
 
-Pour votre premier jour lié à offre de chauffeur livreur, arrivez à 16 h 30.
-La date est le mardi 11 juin.
-L'accueil se trouve ici : Bureau Emploi.
-Merci d'apporter votre CV à jour.
+Pour votre premier jour lié à l'offre de chauffeur livreur, arrivez un peu avant 16 h 30.
+La date est le mardi 11 juin, et l'accueil se trouve au Bureau Emploi.
+Merci d'apporter votre CV à jour; cela facilitera l'inscription.
 
 Merci,
 Service dossiers`;
@@ -6164,7 +6123,7 @@ const E13_3_CE_EMAIL_13_POOL = buildExpressPool("e13-3-ce-email-13", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "chauffeur",
     vfQ: "L'e-mail parle de offre de chauffeur livreur.",
     vfC: 0,
@@ -6227,10 +6186,8 @@ Objet : Merci pour votre réponse — Répondre à une offre d'emploi
 Bonjour,
 
 Merci pour votre réponse positive.
-Votre place pour dépôt de dossier au guichet est gardée.
-Rendez-vous le mercredi 19 juin à 17 h.
-Lieu : Salle Alpes.
-M. Laurent vous donnera les consignes.
+Votre place pour le dépôt de dossier au guichet est gardée le mercredi 19 juin à 17 h.
+Dans la salle alpes, M. Laurent donnera les consignes et vérifiera une lettre signée.
 
 Merci,
 Mme Moreau`;
@@ -6267,7 +6224,7 @@ const E13_3_CE_EMAIL_14_POOL = buildExpressPool("e13-3-ce-email-14", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "dossier",
     vfQ: "L'e-mail parle de dépôt de dossier au guichet.",
     vfC: 0,
@@ -6329,10 +6286,9 @@ Objet : Contact à noter — Répondre à une offre d'emploi
 
 Bonjour,
 
-Voici le contact à noter pour réponse pour un CDI : Mme Huber.
+Voici le contact à noter pour la réponse pour un CDI : Mme Huber.
 Vous pouvez appeler le 024 730 44 54 seulement le matin.
-La prochaine rencontre est le jeudi 27 juin à 17 h 30.
-Lieu : Entreprise Nova.
+La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, à l'Entreprise Nova.
 
 Merci,
 Équipe coordination`;
@@ -6369,7 +6325,7 @@ const E13_3_CE_EMAIL_15_POOL = buildExpressPool("e13-3-ce-email-15", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "CDI",
     vfQ: "L'e-mail parle de réponse pour un CDI.",
     vfC: 0,
@@ -6431,11 +6387,9 @@ Objet : Message au groupe — Répondre à une offre d'emploi
 
 Bonjour,
 
-Message pour tout le groupe : réponse pour un emploi temporaire commence bientôt.
-Merci d'être présent(e) le vendredi 5 juillet à 18 h.
-Lieu : Agence Travail Direct.
-Chaque personne prépare deux références.
-M. Morel fera l'appel.
+Message pour tout le groupe : La réponse pour un emploi temporaire commence bientôt.
+Soyez présent(e) le vendredi 5 juillet à 18 h, à l'Agence Travail Direct.
+Chaque personne prépare deux références; M. Morel fera l'appel.
 
 Merci,
 M. Petit`;
@@ -6472,7 +6426,7 @@ const E13_3_CE_EMAIL_16_POOL = buildExpressPool("e13-3-ce-email-16", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "emploi",
     vfQ: "L'e-mail parle de réponse pour un emploi temporaire.",
     vfC: 0,
@@ -6534,10 +6488,9 @@ Objet : Résumé de la rencontre — Répondre à une offre d'emploi
 
 Bonjour,
 
-Résumé de la rencontre : nous avons parlé de atelier sur le profil en ligne.
-Le groupe a choisi ce lieu pour la suite : Espace Candidats.
-La prochaine date est le lundi 15 juillet à 18 h 30.
-À faire avant : préparer votre adresse e-mail.
+Résumé de la rencontre : nous avons parlé de l'atelier sur le profil en ligne.
+Le groupe a choisi Espace Candidats pour la suite.
+La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer votre adresse e-mail.
 
 Merci,
 Service suivi`;
@@ -6574,7 +6527,7 @@ const E13_3_CE_EMAIL_17_POOL = buildExpressPool("e13-3-ce-email-17", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "profil",
     vfQ: "L'e-mail parle de atelier sur le profil en ligne.",
     vfC: 0,
@@ -6637,8 +6590,7 @@ Objet : Rendez-vous individuel — Répondre à une offre d'emploi
 Bonjour,
 
 Votre rendez-vous individuel avec M. Clerc est fixé.
-Il concerne appel après une candidature.
-Venez le mardi 23 juillet à 19 h. Lieu : Guichet 3.
+Il concerne l'appel après une candidature. Venez le mardi 23 juillet à 19 h, à Guichet 3.
 N'oubliez pas le numéro de l'offre.
 
 Merci,
@@ -6676,7 +6628,7 @@ const E13_3_CE_EMAIL_18_POOL = buildExpressPool("e13-3-ce-email-18", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "appel",
     vfQ: "L'e-mail parle de appel après une candidature.",
     vfC: 0,
@@ -6738,11 +6690,9 @@ Objet : Solution proposée — Répondre à une offre d'emploi
 
 Bonjour,
 
-Nous avons trouvé une solution pour mise à jour du CV.
-Vous pouvez passer le mercredi 31 juillet à 19 h 30.
-Lieu : Bureau Emploi.
-Mme Marchand vous expliquera la suite.
-Apportez aussi votre CV à jour.
+Nous avons trouvé une solution pour la mise à jour du CV.
+Vous pouvez passer le mercredi 31 juillet à 19 h 30 au Bureau Emploi.
+Mme Marchand vous expliquera la suite; apportez aussi votre CV à jour.
 
 Merci,
 Accueil principal`;
@@ -6779,7 +6729,7 @@ const E13_3_CE_EMAIL_19_POOL = buildExpressPool("e13-3-ce-email-19", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "mise",
     vfQ: "L'e-mail parle de mise à jour du CV.",
     vfC: 0,
@@ -6841,12 +6791,9 @@ Objet : Dernières informations — Répondre à une offre d'emploi
 
 Bonjour,
 
-Dernières informations avant rappel avant envoi du dossier :
-date : jeudi 8 août
-heure : 20 h
-lieu : Salle Alpes
-contact : M. Laurent
-à préparer : une lettre signée
+Dernières informations avant le rappel avant envoi du dossier.
+Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
+Le lieu est Salle Alpes, le contact est M. Laurent, et le document à préparer est une lettre signée.
 
 Merci,
 M. Simon`;
@@ -6883,7 +6830,7 @@ const E13_3_CE_EMAIL_20_POOL = buildExpressPool("e13-3-ce-email-20", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "envoi",
     vfQ: "L'e-mail parle de rappel avant envoi du dossier.",
     vfC: 0,
@@ -6944,102 +6891,122 @@ readingPoolExercise({
   id: "e13-3-ce-email",
   readingText: E13_3_CE_EMAIL_TEXT,
   questionPool: E13_3_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-2",
   readingText: E13_3_CE_EMAIL_2_TEXT,
-  questionPool: E13_3_CE_EMAIL_2_POOL
+  questionPool: E13_3_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-3",
   readingText: E13_3_CE_EMAIL_3_TEXT,
-  questionPool: E13_3_CE_EMAIL_3_POOL
+  questionPool: E13_3_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-4",
   readingText: E13_3_CE_EMAIL_4_TEXT,
-  questionPool: E13_3_CE_EMAIL_4_POOL
+  questionPool: E13_3_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-5",
   readingText: E13_3_CE_EMAIL_5_TEXT,
-  questionPool: E13_3_CE_EMAIL_5_POOL
+  questionPool: E13_3_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-6",
   readingText: E13_3_CE_EMAIL_6_TEXT,
-  questionPool: E13_3_CE_EMAIL_6_POOL
+  questionPool: E13_3_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-7",
   readingText: E13_3_CE_EMAIL_7_TEXT,
-  questionPool: E13_3_CE_EMAIL_7_POOL
+  questionPool: E13_3_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-8",
   readingText: E13_3_CE_EMAIL_8_TEXT,
-  questionPool: E13_3_CE_EMAIL_8_POOL
+  questionPool: E13_3_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-9",
   readingText: E13_3_CE_EMAIL_9_TEXT,
-  questionPool: E13_3_CE_EMAIL_9_POOL
+  questionPool: E13_3_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-10",
   readingText: E13_3_CE_EMAIL_10_TEXT,
-  questionPool: E13_3_CE_EMAIL_10_POOL
+  questionPool: E13_3_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-11",
   readingText: E13_3_CE_EMAIL_11_TEXT,
-  questionPool: E13_3_CE_EMAIL_11_POOL
+  questionPool: E13_3_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-12",
   readingText: E13_3_CE_EMAIL_12_TEXT,
-  questionPool: E13_3_CE_EMAIL_12_POOL
+  questionPool: E13_3_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-13",
   readingText: E13_3_CE_EMAIL_13_TEXT,
-  questionPool: E13_3_CE_EMAIL_13_POOL
+  questionPool: E13_3_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-14",
   readingText: E13_3_CE_EMAIL_14_TEXT,
-  questionPool: E13_3_CE_EMAIL_14_POOL
+  questionPool: E13_3_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-15",
   readingText: E13_3_CE_EMAIL_15_TEXT,
-  questionPool: E13_3_CE_EMAIL_15_POOL
+  questionPool: E13_3_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-16",
   readingText: E13_3_CE_EMAIL_16_TEXT,
-  questionPool: E13_3_CE_EMAIL_16_POOL
+  questionPool: E13_3_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-17",
   readingText: E13_3_CE_EMAIL_17_TEXT,
-  questionPool: E13_3_CE_EMAIL_17_POOL
+  questionPool: E13_3_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-18",
   readingText: E13_3_CE_EMAIL_18_TEXT,
-  questionPool: E13_3_CE_EMAIL_18_POOL
+  questionPool: E13_3_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-19",
   readingText: E13_3_CE_EMAIL_19_TEXT,
-  questionPool: E13_3_CE_EMAIL_19_POOL
+  questionPool: E13_3_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-3-ce-email-20",
   readingText: E13_3_CE_EMAIL_20_TEXT,
-  questionPool: E13_3_CE_EMAIL_20_POOL
+  questionPool: E13_3_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
@@ -7327,12 +7294,9 @@ Objet : Confirmation de rendez-vous — Passer un entretien
 
 Bonjour,
 
-Votre rendez-vous est confirmé.
-Activité : entretien pour un poste d'accueil.
-Nous vous attendons le lundi 4 mars à 8 h 30.
-Lieu : Entreprise Alpina.
-Mme Duval vous recevra à l'accueil.
-Merci d'apporter votre CV imprimé.
+Votre rendez-vous est confirmé pour l'entretien pour un poste d'accueil.
+Nous vous accueillerons le lundi 4 mars à 8 h 30 à l'Entreprise Alpina.
+Mme Duval sera à l'entrée pour vous guider. Merci d'apporter votre CV imprimé.
 
 Merci,
 Accueil Horizon`;
@@ -7369,7 +7333,7 @@ const E13_4_CE_EMAIL_POOL = buildExpressPool("e13-4-ce-email", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "poste",
     vfQ: "L'e-mail parle de entretien pour un poste d'accueil.",
     vfC: 0,
@@ -7431,12 +7395,9 @@ Objet : Documents à apporter — Passer un entretien
 
 Bonjour,
 
-Pour préparer cette activité (simulation d'entretien), merci d'apporter :
-- une pièce d'identité
-- un stylo
-La rencontre aura lieu le mardi 12 mars à 9 h.
-Lieu : Salle Entretien.
-Votre contact est M. Steiner.
+Pour préparer la simulation d'entretien, mettez une pièce d'identité dans votre sac.
+La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Entretien.
+Si vous avez une question, M. Steiner répond au 026 840 31 41.
 
 Merci,
 Mme Bernard`;
@@ -7473,7 +7434,7 @@ const E13_4_CE_EMAIL_2_POOL = buildExpressPool("e13-4-ce-email-2", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "simulation",
     vfQ: "L'e-mail parle de simulation d'entretien.",
     vfC: 0,
@@ -7535,10 +7496,9 @@ Objet : Changement d'horaire — Passer un entretien
 
 Bonjour,
 
-Attention, l'horaire de entretien avec les ressources humaines change.
-Le nouveau rendez-vous est le mercredi 20 mars à 9 h 15.
-Le lieu ne change pas : Bureau RH.
-En cas de question, appelez Mme Chevalier au 026 840 32 42.
+L'horaire de l'entretien avec les ressources humaines change légèrement.
+Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
+Le lieu reste Bureau RH. Pensez à prévenir Mme Chevalier si vous ne pouvez pas venir.
 
 Merci,
 Secrétariat Central`;
@@ -7575,7 +7535,7 @@ const E13_4_CE_EMAIL_3_POOL = buildExpressPool("e13-4-ce-email-3", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "ressources",
     vfQ: "L'e-mail parle de entretien avec les ressources humaines.",
     vfC: 0,
@@ -7637,10 +7597,9 @@ Objet : Réponse à votre demande — Passer un entretien
 
 Bonjour,
 
-Nous avons bien reçu votre demande pour préparation des questions fermées.
-Vous pouvez venir le jeudi 28 mars.
-L'accueil ouvre à 10 h. Lieu : Hôtel Central.
-Pensez à préparer vos certificats.
+Nous avons bien reçu votre demande concernant la préparation des questions fermées.
+Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à l'Hôtel Central.
+Le dossier sera plus vite traité avec vos certificats.
 
 Merci,
 M. Lopez`;
@@ -7677,7 +7636,7 @@ const E13_4_CE_EMAIL_4_POOL = buildExpressPool("e13-4-ce-email-4", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "questions",
     vfQ: "L'e-mail parle de préparation des questions fermées.",
     vfC: 0,
@@ -7739,11 +7698,9 @@ Objet : Programme de la journée — Passer un entretien
 
 Bonjour,
 
-Voici le programme de la journée :
-10 h 30 : accueil. Lieu : Agence Recrutement
-10 h 30 : présentation de entretien pour un CDI
-Mme Aubert animera la rencontre.
-À apporter : un stylo noir.
+Voici le déroulement prévu le vendredi 5 avril.
+À 10 h 30, accueil à l'Agence Recrutement. Ensuite, Mme Aubert présentera l'entretien pour un CDI.
+La séance est courte; gardez simplement un stylo noir avec vous.
 
 Merci,
 Service administratif`;
@@ -7780,7 +7737,7 @@ const E13_4_CE_EMAIL_5_POOL = buildExpressPool("e13-4-ce-email-5", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "CDI",
     vfQ: "L'e-mail parle de entretien pour un CDI.",
     vfC: 0,
@@ -7842,10 +7799,9 @@ Objet : Rappel avant la visite — Passer un entretien
 
 Bonjour,
 
-Petit rappel avant votre visite : activité prévue le samedi 13 avril (atelier qualités et défauts).
-Merci d'arriver à 11 h. Lieu : Salle Mont-Blanc.
-Le dossier doit contenir la liste de vos questions.
-M. Blanc vérifiera les documents.
+Petit rappel avant votre visite : l'atelier qualités et défauts est bien prévu le samedi 13 avril.
+Merci d'arriver à 11 h dans la Salle Mont-Blanc.
+M. Blanc vérifiera que votre dossier contient la liste de vos questions.
 
 Merci,
 Mme Garcia`;
@@ -7882,7 +7838,7 @@ const E13_4_CE_EMAIL_6_POOL = buildExpressPool("e13-4-ce-email-6", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "qualités",
     vfQ: "L'e-mail parle de atelier qualités et défauts.",
     vfC: 0,
@@ -7944,11 +7900,9 @@ Objet : Invitation à une réunion — Passer un entretien
 
 Bonjour,
 
-Vous êtes invité(e) à une réunion sur rendez-vous avec un recruteur.
-La réunion aura lieu le lundi 22 avril à 13 h 30.
-Lieu : Entreprise Alpina.
-Merci de répondre avant vendredi.
-Contact : Mme Duval.
+Nous vous invitons à une réunion au sujet de le rendez-vous avec un recruteur.
+Elle se tiendra le lundi 22 avril à 13 h 30, à l'Entreprise Alpina.
+Répondez avant vendredi et signalez à Mme Duval si votre CV imprimé manque encore.
 
 Merci,
 Bureau des inscriptions`;
@@ -7985,7 +7939,7 @@ const E13_4_CE_EMAIL_7_POOL = buildExpressPool("e13-4-ce-email-7", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "recruteur",
     vfQ: "L'e-mail parle de rendez-vous avec un recruteur.",
     vfC: 0,
@@ -8047,10 +8001,9 @@ Objet : Résultat de votre dossier — Passer un entretien
 
 Bonjour,
 
-Votre dossier pour test oral avant entretien est complet.
-Prochaine étape : venir le mardi 30 avril à 14 h.
-L'adresse est : Salle Entretien.
-Gardez une pièce d'identité avec vous.
+Votre dossier pour le test oral avant entretien est maintenant complet.
+La prochaine étape se fera le mardi 30 avril à 14 h.
+Rendez-vous dans la Salle Entretien; gardez une pièce d'identité avec vous jusqu'à la fin.
 
 Merci,
 M. Girard`;
@@ -8087,7 +8040,7 @@ const E13_4_CE_EMAIL_8_POOL = buildExpressPool("e13-4-ce-email-8", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "test",
     vfQ: "L'e-mail parle de test oral avant entretien.",
     vfC: 0,
@@ -8149,10 +8102,9 @@ Objet : Pièce manquante — Passer un entretien
 
 Bonjour,
 
-Il manque encore la convocation dans votre dossier.
-Vous pouvez le déposer le mercredi 8 mai.
-Le bureau est ouvert à partir de 14 h 30. Lieu : Bureau RH.
-Demandez Mme Chevalier à l'accueil.
+Il manque encore la convocation.
+Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, au Bureau RH.
+Demandez Mme Chevalier à l'accueil pour éviter une attente trop longue.
 
 Merci,
 Service planning`;
@@ -8189,7 +8141,7 @@ const E13_4_CE_EMAIL_9_POOL = buildExpressPool("e13-4-ce-email-9", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "hôtel",
     vfQ: "L'e-mail parle de entretien dans un hôtel.",
     vfC: 0,
@@ -8251,10 +8203,9 @@ Objet : Nouveau créneau proposé — Passer un entretien
 
 Bonjour,
 
-Le rendez-vous pour séance sur la ponctualité est reporté.
-Nous proposons le jeudi 16 mai à 15 h.
-Le lieu est toujours : Hôtel Central.
-Merci de confirmer à M. Kurz.
+Le rendez-vous pour la séance sur la ponctualité est reporté.
+Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à l'Hôtel Central.
+Merci de confirmer votre présence à M. Kurz.
 
 Merci,
 Mme Nguyen`;
@@ -8291,7 +8242,7 @@ const E13_4_CE_EMAIL_10_POOL = buildExpressPool("e13-4-ce-email-10", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "ponctualité",
     vfQ: "L'e-mail parle de séance sur la ponctualité.",
     vfC: 0,
@@ -8353,10 +8304,9 @@ Objet : Deux choix possibles — Passer un entretien
 
 Bonjour,
 
-Pour entretien pour un apprentissage adulte, deux choix étaient possibles.
-Vous avez choisi le vendredi 24 mai à 15 h 30.
-Lieu de la rencontre : Agence Recrutement.
-Apportez un stylo noir.
+Deux choix étaient possibles pour l'entretien pour un apprentissage adulte.
+Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
+La rencontre aura lieu à l'Agence Recrutement; apportez un stylo noir.
 
 Merci,
 Accueil formation`;
@@ -8393,7 +8343,7 @@ const E13_4_CE_EMAIL_11_POOL = buildExpressPool("e13-4-ce-email-11", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "apprentissage",
     vfQ: "L'e-mail parle de entretien pour un apprentissage adulte.",
     vfC: 0,
@@ -8455,9 +8405,8 @@ Objet : Suite à notre appel — Passer un entretien
 
 Bonjour,
 
-Suite à notre appel, je confirme les informations.
-préparation de la présentation personnelle aura lieu le lundi 3 juin à 16 h.
-Le lieu du rendez-vous est : Salle Mont-Blanc.
+Suite à notre appel, je résume les informations.
+La préparation de la présentation personnelle aura lieu le lundi 3 juin à 16 h, dans la Salle Mont-Blanc.
 M. Blanc vous attendra avec la liste des participants.
 
 Merci,
@@ -8495,7 +8444,7 @@ const E13_4_CE_EMAIL_12_POOL = buildExpressPool("e13-4-ce-email-12", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "personnelle",
     vfQ: "L'e-mail parle de préparation de la présentation personnelle.",
     vfC: 0,
@@ -8557,10 +8506,9 @@ Objet : Premier jour — Passer un entretien
 
 Bonjour,
 
-Pour votre premier jour lié à entretien téléphonique, arrivez à 16 h 30.
-La date est le mardi 11 juin.
-L'accueil se trouve ici : Entreprise Alpina.
-Merci d'apporter votre CV imprimé.
+Pour votre premier jour lié à l'entretien téléphonique, arrivez un peu avant 16 h 30.
+La date est le mardi 11 juin, et l'accueil se trouve à l'Entreprise Alpina.
+Merci d'apporter votre CV imprimé; cela facilitera l'inscription.
 
 Merci,
 Service dossiers`;
@@ -8597,7 +8545,7 @@ const E13_4_CE_EMAIL_13_POOL = buildExpressPool("e13-4-ce-email-13", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "téléphonique",
     vfQ: "L'e-mail parle de entretien téléphonique.",
     vfC: 0,
@@ -8660,10 +8608,8 @@ Objet : Merci pour votre réponse — Passer un entretien
 Bonjour,
 
 Merci pour votre réponse positive.
-Votre place pour visite avant entretien est gardée.
-Rendez-vous le mercredi 19 juin à 17 h.
-Lieu : Salle Entretien.
-M. Steiner vous donnera les consignes.
+Votre place pour la visite avant entretien est gardée le mercredi 19 juin à 17 h.
+Dans la salle entretien, M. Steiner donnera les consignes et vérifiera une pièce d'identité.
 
 Merci,
 Mme Moreau`;
@@ -8700,7 +8646,7 @@ const E13_4_CE_EMAIL_14_POOL = buildExpressPool("e13-4-ce-email-14", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "visite",
     vfQ: "L'e-mail parle de visite avant entretien.",
     vfC: 0,
@@ -8762,10 +8708,9 @@ Objet : Contact à noter — Passer un entretien
 
 Bonjour,
 
-Voici le contact à noter pour entretien pour un poste de vendeur : Mme Chevalier.
+Voici le contact à noter pour l'entretien pour un poste de vendeur : Mme Chevalier.
 Vous pouvez appeler le 026 840 44 54 seulement le matin.
-La prochaine rencontre est le jeudi 27 juin à 17 h 30.
-Lieu : Bureau RH.
+La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, au Bureau RH.
 
 Merci,
 Équipe coordination`;
@@ -8802,7 +8747,7 @@ const E13_4_CE_EMAIL_15_POOL = buildExpressPool("e13-4-ce-email-15", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "poste",
     vfQ: "L'e-mail parle de entretien pour un poste de vendeur.",
     vfC: 0,
@@ -8864,11 +8809,9 @@ Objet : Message au groupe — Passer un entretien
 
 Bonjour,
 
-Message pour tout le groupe : atelier tenue professionnelle commence bientôt.
-Merci d'être présent(e) le vendredi 5 juillet à 18 h.
-Lieu : Hôtel Central.
-Chaque personne prépare vos certificats.
-M. Kurz fera l'appel.
+Message pour tout le groupe : L'atelier tenue professionnelle commence bientôt.
+Soyez présent(e) le vendredi 5 juillet à 18 h, à l'Hôtel Central.
+Chaque personne prépare vos certificats; M. Kurz fera l'appel.
 
 Merci,
 M. Petit`;
@@ -8905,7 +8848,7 @@ const E13_4_CE_EMAIL_16_POOL = buildExpressPool("e13-4-ce-email-16", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "tenue",
     vfQ: "L'e-mail parle de atelier tenue professionnelle.",
     vfC: 0,
@@ -8967,10 +8910,9 @@ Objet : Résumé de la rencontre — Passer un entretien
 
 Bonjour,
 
-Résumé de la rencontre : nous avons parlé de rappel des documents d'entretien.
-Le groupe a choisi ce lieu pour la suite : Agence Recrutement.
-La prochaine date est le lundi 15 juillet à 18 h 30.
-À faire avant : préparer un stylo noir.
+Résumé de la rencontre : nous avons parlé de le rappel des documents d'entretien.
+Le groupe a choisi Agence Recrutement pour la suite.
+La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer un stylo noir.
 
 Merci,
 Service suivi`;
@@ -9007,7 +8949,7 @@ const E13_4_CE_EMAIL_17_POOL = buildExpressPool("e13-4-ce-email-17", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "documents",
     vfQ: "L'e-mail parle de rappel des documents d'entretien.",
     vfC: 0,
@@ -9070,8 +9012,7 @@ Objet : Rendez-vous individuel — Passer un entretien
 Bonjour,
 
 Votre rendez-vous individuel avec M. Blanc est fixé.
-Il concerne entretien avec deux responsables.
-Venez le mardi 23 juillet à 19 h. Lieu : Salle Mont-Blanc.
+Il concerne l'entretien avec deux responsables. Venez le mardi 23 juillet à 19 h, dans la Salle Mont-Blanc.
 N'oubliez pas la liste de vos questions.
 
 Merci,
@@ -9109,7 +9050,7 @@ const E13_4_CE_EMAIL_18_POOL = buildExpressPool("e13-4-ce-email-18", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "deux",
     vfQ: "L'e-mail parle de entretien avec deux responsables.",
     vfC: 0,
@@ -9171,11 +9112,9 @@ Objet : Solution proposée — Passer un entretien
 
 Bonjour,
 
-Nous avons trouvé une solution pour bilan après simulation.
-Vous pouvez passer le mercredi 31 juillet à 19 h 30.
-Lieu : Entreprise Alpina.
-Mme Duval vous expliquera la suite.
-Apportez aussi votre CV imprimé.
+Nous avons trouvé une solution pour le bilan après simulation.
+Vous pouvez passer le mercredi 31 juillet à 19 h 30 à l'Entreprise Alpina.
+Mme Duval vous expliquera la suite; apportez aussi votre CV imprimé.
 
 Merci,
 Accueil principal`;
@@ -9212,7 +9151,7 @@ const E13_4_CE_EMAIL_19_POOL = buildExpressPool("e13-4-ce-email-19", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "bilan",
     vfQ: "L'e-mail parle de bilan après simulation.",
     vfC: 0,
@@ -9274,12 +9213,9 @@ Objet : Dernières informations — Passer un entretien
 
 Bonjour,
 
-Dernières informations avant message avant l'entretien final :
-date : jeudi 8 août
-heure : 20 h
-lieu : Salle Entretien
-contact : M. Steiner
-à préparer : une pièce d'identité
+Dernières informations avant le message avant l'entretien final.
+Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
+Le lieu est Salle Entretien, le contact est M. Steiner, et le document à préparer est une pièce d'identité.
 
 Merci,
 M. Simon`;
@@ -9316,7 +9252,7 @@ const E13_4_CE_EMAIL_20_POOL = buildExpressPool("e13-4-ce-email-20", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "message",
     vfQ: "L'e-mail parle de message avant l'entretien final.",
     vfC: 0,
@@ -9377,102 +9313,122 @@ readingPoolExercise({
   id: "e13-4-ce-email",
   readingText: E13_4_CE_EMAIL_TEXT,
   questionPool: E13_4_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-2",
   readingText: E13_4_CE_EMAIL_2_TEXT,
-  questionPool: E13_4_CE_EMAIL_2_POOL
+  questionPool: E13_4_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-3",
   readingText: E13_4_CE_EMAIL_3_TEXT,
-  questionPool: E13_4_CE_EMAIL_3_POOL
+  questionPool: E13_4_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-4",
   readingText: E13_4_CE_EMAIL_4_TEXT,
-  questionPool: E13_4_CE_EMAIL_4_POOL
+  questionPool: E13_4_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-5",
   readingText: E13_4_CE_EMAIL_5_TEXT,
-  questionPool: E13_4_CE_EMAIL_5_POOL
+  questionPool: E13_4_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-6",
   readingText: E13_4_CE_EMAIL_6_TEXT,
-  questionPool: E13_4_CE_EMAIL_6_POOL
+  questionPool: E13_4_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-7",
   readingText: E13_4_CE_EMAIL_7_TEXT,
-  questionPool: E13_4_CE_EMAIL_7_POOL
+  questionPool: E13_4_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-8",
   readingText: E13_4_CE_EMAIL_8_TEXT,
-  questionPool: E13_4_CE_EMAIL_8_POOL
+  questionPool: E13_4_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-9",
   readingText: E13_4_CE_EMAIL_9_TEXT,
-  questionPool: E13_4_CE_EMAIL_9_POOL
+  questionPool: E13_4_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-10",
   readingText: E13_4_CE_EMAIL_10_TEXT,
-  questionPool: E13_4_CE_EMAIL_10_POOL
+  questionPool: E13_4_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-11",
   readingText: E13_4_CE_EMAIL_11_TEXT,
-  questionPool: E13_4_CE_EMAIL_11_POOL
+  questionPool: E13_4_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-12",
   readingText: E13_4_CE_EMAIL_12_TEXT,
-  questionPool: E13_4_CE_EMAIL_12_POOL
+  questionPool: E13_4_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-13",
   readingText: E13_4_CE_EMAIL_13_TEXT,
-  questionPool: E13_4_CE_EMAIL_13_POOL
+  questionPool: E13_4_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-14",
   readingText: E13_4_CE_EMAIL_14_TEXT,
-  questionPool: E13_4_CE_EMAIL_14_POOL
+  questionPool: E13_4_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-15",
   readingText: E13_4_CE_EMAIL_15_TEXT,
-  questionPool: E13_4_CE_EMAIL_15_POOL
+  questionPool: E13_4_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-16",
   readingText: E13_4_CE_EMAIL_16_TEXT,
-  questionPool: E13_4_CE_EMAIL_16_POOL
+  questionPool: E13_4_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-17",
   readingText: E13_4_CE_EMAIL_17_TEXT,
-  questionPool: E13_4_CE_EMAIL_17_POOL
+  questionPool: E13_4_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-18",
   readingText: E13_4_CE_EMAIL_18_TEXT,
-  questionPool: E13_4_CE_EMAIL_18_POOL
+  questionPool: E13_4_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-19",
   readingText: E13_4_CE_EMAIL_19_TEXT,
-  questionPool: E13_4_CE_EMAIL_19_POOL
+  questionPool: E13_4_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-4-ce-email-20",
   readingText: E13_4_CE_EMAIL_20_TEXT,
-  questionPool: E13_4_CE_EMAIL_20_POOL
+  questionPool: E13_4_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
@@ -9760,12 +9716,9 @@ Objet : Confirmation de rendez-vous — S'intégrer à l'entreprise
 
 Bonjour,
 
-Votre rendez-vous est confirmé.
-Activité : accueil du premier jour.
-Nous vous attendons le lundi 4 mars à 8 h 30.
-Lieu : Accueil principal.
-Mme Muller vous recevra à l'accueil.
-Merci d'apporter votre badge provisoire.
+Votre rendez-vous est confirmé pour l'accueil du premier jour.
+Nous vous accueillerons le lundi 4 mars à 8 h 30 à l'Accueil principal.
+Mme Muller sera à l'entrée pour vous guider. Merci d'apporter votre badge provisoire.
 
 Merci,
 Accueil Horizon`;
@@ -9802,7 +9755,7 @@ const E13_5_CE_EMAIL_POOL = buildExpressPool("e13-5-ce-email", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "premier",
     vfQ: "L'e-mail parle de accueil du premier jour.",
     vfC: 0,
@@ -9864,12 +9817,9 @@ Objet : Documents à apporter — S'intégrer à l'entreprise
 
 Bonjour,
 
-Pour préparer cette activité (visite des bureaux), merci d'apporter :
-- le cahier de notes
-- un stylo
-La rencontre aura lieu le mardi 12 mars à 9 h.
-Lieu : Salle Équipe.
-Votre contact est M. Rossi.
+Pour préparer la visite des bureaux, mettez le cahier de notes dans votre sac.
+La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Équipe.
+Si vous avez une question, M. Rossi répond au 027 950 31 41.
 
 Merci,
 Mme Bernard`;
@@ -9906,7 +9856,7 @@ const E13_5_CE_EMAIL_2_POOL = buildExpressPool("e13-5-ce-email-2", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "bureaux",
     vfQ: "L'e-mail parle de visite des bureaux.",
     vfC: 0,
@@ -9968,10 +9918,9 @@ Objet : Changement d'horaire — S'intégrer à l'entreprise
 
 Bonjour,
 
-Attention, l'horaire de réunion avec l'équipe change.
-Le nouveau rendez-vous est le mercredi 20 mars à 9 h 15.
-Le lieu ne change pas : Bureau 204.
-En cas de question, appelez Mme Fontaine au 027 950 32 42.
+L'horaire de la réunion avec l'équipe change légèrement.
+Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
+Le lieu reste Bureau 204. Pensez à prévenir Mme Fontaine si vous ne pouvez pas venir.
 
 Merci,
 Secrétariat Central`;
@@ -10008,7 +9957,7 @@ const E13_5_CE_EMAIL_3_POOL = buildExpressPool("e13-5-ce-email-3", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "équipe",
     vfQ: "L'e-mail parle de réunion avec l'équipe.",
     vfC: 0,
@@ -10070,10 +10019,9 @@ Objet : Réponse à votre demande — S'intégrer à l'entreprise
 
 Bonjour,
 
-Nous avons bien reçu votre demande pour formation au logiciel interne.
-Vous pouvez venir le jeudi 28 mars.
-L'accueil ouvre à 10 h. Lieu : Atelier Nord.
-Pensez à préparer la fiche d'urgence.
+Nous avons bien reçu votre demande concernant la formation au logiciel interne.
+Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à Atelier Nord.
+Le dossier sera plus vite traité avec la fiche d'urgence.
 
 Merci,
 M. Lopez`;
@@ -10110,7 +10058,7 @@ const E13_5_CE_EMAIL_4_POOL = buildExpressPool("e13-5-ce-email-4", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "logiciel",
     vfQ: "L'e-mail parle de formation au logiciel interne.",
     vfC: 0,
@@ -10172,11 +10120,9 @@ Objet : Programme de la journée — S'intégrer à l'entreprise
 
 Bonjour,
 
-Voici le programme de la journée :
-10 h 30 : accueil. Lieu : Service Clients
-10 h 30 : présentation de présentation des consignes de sécurité
-Mme Bonnet animera la rencontre.
-À apporter : vos horaires signés.
+Voici le déroulement prévu le vendredi 5 avril.
+À 10 h 30, accueil au Service Clients. Ensuite, Mme Bonnet présentera la présentation des consignes de sécurité.
+La séance est courte; gardez simplement vos horaires signés avec vous.
 
 Merci,
 Service administratif`;
@@ -10213,7 +10159,7 @@ const E13_5_CE_EMAIL_5_POOL = buildExpressPool("e13-5-ce-email-5", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "consignes",
     vfQ: "L'e-mail parle de présentation des consignes de sécurité.",
     vfC: 0,
@@ -10275,10 +10221,9 @@ Objet : Rappel avant la visite — S'intégrer à l'entreprise
 
 Bonjour,
 
-Petit rappel avant votre visite : activité prévue le samedi 13 avril (remise du badge).
-Merci d'arriver à 11 h. Lieu : Espace Pause.
-Le dossier doit contenir le règlement lu.
-M. Bernard vérifiera les documents.
+Petit rappel avant votre visite : la remise du badge est bien prévu le samedi 13 avril.
+Merci d'arriver à 11 h à Espace Pause.
+M. Bernard vérifiera que votre dossier contient le règlement lu.
 
 Merci,
 Mme Garcia`;
@@ -10315,7 +10260,7 @@ const E13_5_CE_EMAIL_6_POOL = buildExpressPool("e13-5-ce-email-6", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "remise",
     vfQ: "L'e-mail parle de remise du badge.",
     vfC: 0,
@@ -10377,11 +10322,9 @@ Objet : Invitation à une réunion — S'intégrer à l'entreprise
 
 Bonjour,
 
-Vous êtes invité(e) à une réunion sur pause café avec les collègues.
-La réunion aura lieu le lundi 22 avril à 13 h 30.
-Lieu : Accueil principal.
-Merci de répondre avant vendredi.
-Contact : Mme Muller.
+Nous vous invitons à une réunion au sujet de la pause café avec les collègues.
+Elle se tiendra le lundi 22 avril à 13 h 30, à l'Accueil principal.
+Répondez avant vendredi et signalez à Mme Muller si votre badge provisoire manque encore.
 
 Merci,
 Bureau des inscriptions`;
@@ -10418,7 +10361,7 @@ const E13_5_CE_EMAIL_7_POOL = buildExpressPool("e13-5-ce-email-7", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "pause",
     vfQ: "L'e-mail parle de pause café avec les collègues.",
     vfC: 0,
@@ -10480,10 +10423,9 @@ Objet : Résultat de votre dossier — S'intégrer à l'entreprise
 
 Bonjour,
 
-Votre dossier pour lecture du règlement est complet.
-Prochaine étape : venir le mardi 30 avril à 14 h.
-L'adresse est : Salle Équipe.
-Gardez le cahier de notes avec vous.
+Votre dossier pour la lecture du règlement est maintenant complet.
+La prochaine étape se fera le mardi 30 avril à 14 h.
+Rendez-vous dans la Salle Équipe; gardez le cahier de notes avec vous jusqu'à la fin.
 
 Merci,
 M. Girard`;
@@ -10520,7 +10462,7 @@ const E13_5_CE_EMAIL_8_POOL = buildExpressPool("e13-5-ce-email-8", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "lecture",
     vfQ: "L'e-mail parle de lecture du règlement.",
     vfC: 0,
@@ -10582,10 +10524,9 @@ Objet : Pièce manquante — S'intégrer à l'entreprise
 
 Bonjour,
 
-Il manque encore votre mot de passe dans votre dossier.
-Vous pouvez le déposer le mercredi 8 mai.
-Le bureau est ouvert à partir de 14 h 30. Lieu : Bureau 204.
-Demandez Mme Fontaine à l'accueil.
+Il manque encore votre mot de passe.
+Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, au Bureau 204.
+Demandez Mme Fontaine à l'accueil pour éviter une attente trop longue.
 
 Merci,
 Service planning`;
@@ -10622,7 +10563,7 @@ const E13_5_CE_EMAIL_9_POOL = buildExpressPool("e13-5-ce-email-9", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "tutrice",
     vfQ: "L'e-mail parle de réunion avec la tutrice.",
     vfC: 0,
@@ -10684,10 +10625,9 @@ Objet : Nouveau créneau proposé — S'intégrer à l'entreprise
 
 Bonjour,
 
-Le rendez-vous pour atelier sur les procédures est reporté.
-Nous proposons le jeudi 16 mai à 15 h.
-Le lieu est toujours : Atelier Nord.
-Merci de confirmer à M. Garcia.
+Le rendez-vous pour l'atelier sur les procédures est reporté.
+Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à Atelier Nord.
+Merci de confirmer votre présence à M. Garcia.
 
 Merci,
 Mme Nguyen`;
@@ -10724,7 +10664,7 @@ const E13_5_CE_EMAIL_10_POOL = buildExpressPool("e13-5-ce-email-10", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "procédures",
     vfQ: "L'e-mail parle de atelier sur les procédures.",
     vfC: 0,
@@ -10786,10 +10726,9 @@ Objet : Deux choix possibles — S'intégrer à l'entreprise
 
 Bonjour,
 
-Pour organisation de la première semaine, deux choix étaient possibles.
-Vous avez choisi le vendredi 24 mai à 15 h 30.
-Lieu de la rencontre : Service Clients.
-Apportez vos horaires signés.
+Deux choix étaient possibles pour l'organisation de la première semaine.
+Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
+La rencontre aura lieu au Service Clients; apportez vos horaires signés.
 
 Merci,
 Accueil formation`;
@@ -10826,7 +10765,7 @@ const E13_5_CE_EMAIL_11_POOL = buildExpressPool("e13-5-ce-email-11", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "organisation",
     vfQ: "L'e-mail parle de organisation de la première semaine.",
     vfC: 0,
@@ -10888,9 +10827,8 @@ Objet : Suite à notre appel — S'intégrer à l'entreprise
 
 Bonjour,
 
-Suite à notre appel, je confirme les informations.
-présentation du planning aura lieu le lundi 3 juin à 16 h.
-Le lieu du rendez-vous est : Espace Pause.
+Suite à notre appel, je résume les informations.
+La présentation du planning aura lieu le lundi 3 juin à 16 h, à Espace Pause.
 M. Bernard vous attendra avec la liste des participants.
 
 Merci,
@@ -10928,7 +10866,7 @@ const E13_5_CE_EMAIL_12_POOL = buildExpressPool("e13-5-ce-email-12", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "planning",
     vfQ: "L'e-mail parle de présentation du planning.",
     vfC: 0,
@@ -10990,10 +10928,9 @@ Objet : Premier jour — S'intégrer à l'entreprise
 
 Bonjour,
 
-Pour votre premier jour lié à demande d'accès informatique, arrivez à 16 h 30.
-La date est le mardi 11 juin.
-L'accueil se trouve ici : Accueil principal.
-Merci d'apporter votre badge provisoire.
+Pour votre premier jour lié à la demande d'accès informatique, arrivez un peu avant 16 h 30.
+La date est le mardi 11 juin, et l'accueil se trouve à l'Accueil principal.
+Merci d'apporter votre badge provisoire; cela facilitera l'inscription.
 
 Merci,
 Service dossiers`;
@@ -11030,7 +10967,7 @@ const E13_5_CE_EMAIL_13_POOL = buildExpressPool("e13-5-ce-email-13", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "demande",
     vfQ: "L'e-mail parle de demande d'accès informatique.",
     vfC: 0,
@@ -11093,10 +11030,8 @@ Objet : Merci pour votre réponse — S'intégrer à l'entreprise
 Bonjour,
 
 Merci pour votre réponse positive.
-Votre place pour point avec le chef de service est gardée.
-Rendez-vous le mercredi 19 juin à 17 h.
-Lieu : Salle Équipe.
-M. Rossi vous donnera les consignes.
+Votre place pour le point avec le chef de service est gardée le mercredi 19 juin à 17 h.
+Dans la salle équipe, M. Rossi donnera les consignes et vérifiera le cahier de notes.
 
 Merci,
 Mme Moreau`;
@@ -11133,7 +11068,7 @@ const E13_5_CE_EMAIL_14_POOL = buildExpressPool("e13-5-ce-email-14", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "point",
     vfQ: "L'e-mail parle de point avec le chef de service.",
     vfC: 0,
@@ -11195,10 +11130,9 @@ Objet : Contact à noter — S'intégrer à l'entreprise
 
 Bonjour,
 
-Voici le contact à noter pour découverte de la cantine : Mme Fontaine.
+Voici le contact à noter pour la découverte de la cantine : Mme Fontaine.
 Vous pouvez appeler le 027 950 44 54 seulement le matin.
-La prochaine rencontre est le jeudi 27 juin à 17 h 30.
-Lieu : Bureau 204.
+La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, au Bureau 204.
 
 Merci,
 Équipe coordination`;
@@ -11235,7 +11169,7 @@ const E13_5_CE_EMAIL_15_POOL = buildExpressPool("e13-5-ce-email-15", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "découverte",
     vfQ: "L'e-mail parle de découverte de la cantine.",
     vfC: 0,
@@ -11297,11 +11231,9 @@ Objet : Message au groupe — S'intégrer à l'entreprise
 
 Bonjour,
 
-Message pour tout le groupe : séance sur les congés commence bientôt.
-Merci d'être présent(e) le vendredi 5 juillet à 18 h.
-Lieu : Atelier Nord.
-Chaque personne prépare la fiche d'urgence.
-M. Garcia fera l'appel.
+Message pour tout le groupe : La séance sur les congés commence bientôt.
+Soyez présent(e) le vendredi 5 juillet à 18 h, à Atelier Nord.
+Chaque personne prépare la fiche d'urgence; M. Garcia fera l'appel.
 
 Merci,
 M. Petit`;
@@ -11338,7 +11270,7 @@ const E13_5_CE_EMAIL_16_POOL = buildExpressPool("e13-5-ce-email-16", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "congés",
     vfQ: "L'e-mail parle de séance sur les congés.",
     vfC: 0,
@@ -11400,10 +11332,9 @@ Objet : Résumé de la rencontre — S'intégrer à l'entreprise
 
 Bonjour,
 
-Résumé de la rencontre : nous avons parlé de compte rendu de réunion.
-Le groupe a choisi ce lieu pour la suite : Service Clients.
-La prochaine date est le lundi 15 juillet à 18 h 30.
-À faire avant : préparer vos horaires signés.
+Résumé de la rencontre : nous avons parlé de le compte rendu de réunion.
+Le groupe a choisi Service Clients pour la suite.
+La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer vos horaires signés.
 
 Merci,
 Service suivi`;
@@ -11440,7 +11371,7 @@ const E13_5_CE_EMAIL_17_POOL = buildExpressPool("e13-5-ce-email-17", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "compte",
     vfQ: "L'e-mail parle de compte rendu de réunion.",
     vfC: 0,
@@ -11503,8 +11434,7 @@ Objet : Rendez-vous individuel — S'intégrer à l'entreprise
 Bonjour,
 
 Votre rendez-vous individuel avec M. Bernard est fixé.
-Il concerne formation au téléphone.
-Venez le mardi 23 juillet à 19 h. Lieu : Espace Pause.
+Il concerne la formation au téléphone. Venez le mardi 23 juillet à 19 h, à Espace Pause.
 N'oubliez pas le règlement lu.
 
 Merci,
@@ -11542,7 +11472,7 @@ const E13_5_CE_EMAIL_18_POOL = buildExpressPool("e13-5-ce-email-18", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "téléphone",
     vfQ: "L'e-mail parle de formation au téléphone.",
     vfC: 0,
@@ -11604,11 +11534,9 @@ Objet : Solution proposée — S'intégrer à l'entreprise
 
 Bonjour,
 
-Nous avons trouvé une solution pour bilan après une semaine.
-Vous pouvez passer le mercredi 31 juillet à 19 h 30.
-Lieu : Accueil principal.
-Mme Muller vous expliquera la suite.
-Apportez aussi votre badge provisoire.
+Nous avons trouvé une solution pour le bilan après une semaine.
+Vous pouvez passer le mercredi 31 juillet à 19 h 30 à l'Accueil principal.
+Mme Muller vous expliquera la suite; apportez aussi votre badge provisoire.
 
 Merci,
 Accueil principal`;
@@ -11645,7 +11573,7 @@ const E13_5_CE_EMAIL_19_POOL = buildExpressPool("e13-5-ce-email-19", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "bilan",
     vfQ: "L'e-mail parle de bilan après une semaine.",
     vfC: 0,
@@ -11707,12 +11635,9 @@ Objet : Dernières informations — S'intégrer à l'entreprise
 
 Bonjour,
 
-Dernières informations avant rappel des horaires d'équipe :
-date : jeudi 8 août
-heure : 20 h
-lieu : Salle Équipe
-contact : M. Rossi
-à préparer : le cahier de notes
+Dernières informations avant le rappel des horaires d'équipe.
+Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
+Le lieu est Salle Équipe, le contact est M. Rossi, et le document à préparer est le cahier de notes.
 
 Merci,
 M. Simon`;
@@ -11749,7 +11674,7 @@ const E13_5_CE_EMAIL_20_POOL = buildExpressPool("e13-5-ce-email-20", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "horaires",
     vfQ: "L'e-mail parle de rappel des horaires d'équipe.",
     vfC: 0,
@@ -11810,102 +11735,122 @@ readingPoolExercise({
   id: "e13-5-ce-email",
   readingText: E13_5_CE_EMAIL_TEXT,
   questionPool: E13_5_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-2",
   readingText: E13_5_CE_EMAIL_2_TEXT,
-  questionPool: E13_5_CE_EMAIL_2_POOL
+  questionPool: E13_5_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-3",
   readingText: E13_5_CE_EMAIL_3_TEXT,
-  questionPool: E13_5_CE_EMAIL_3_POOL
+  questionPool: E13_5_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-4",
   readingText: E13_5_CE_EMAIL_4_TEXT,
-  questionPool: E13_5_CE_EMAIL_4_POOL
+  questionPool: E13_5_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-5",
   readingText: E13_5_CE_EMAIL_5_TEXT,
-  questionPool: E13_5_CE_EMAIL_5_POOL
+  questionPool: E13_5_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-6",
   readingText: E13_5_CE_EMAIL_6_TEXT,
-  questionPool: E13_5_CE_EMAIL_6_POOL
+  questionPool: E13_5_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-7",
   readingText: E13_5_CE_EMAIL_7_TEXT,
-  questionPool: E13_5_CE_EMAIL_7_POOL
+  questionPool: E13_5_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-8",
   readingText: E13_5_CE_EMAIL_8_TEXT,
-  questionPool: E13_5_CE_EMAIL_8_POOL
+  questionPool: E13_5_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-9",
   readingText: E13_5_CE_EMAIL_9_TEXT,
-  questionPool: E13_5_CE_EMAIL_9_POOL
+  questionPool: E13_5_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-10",
   readingText: E13_5_CE_EMAIL_10_TEXT,
-  questionPool: E13_5_CE_EMAIL_10_POOL
+  questionPool: E13_5_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-11",
   readingText: E13_5_CE_EMAIL_11_TEXT,
-  questionPool: E13_5_CE_EMAIL_11_POOL
+  questionPool: E13_5_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-12",
   readingText: E13_5_CE_EMAIL_12_TEXT,
-  questionPool: E13_5_CE_EMAIL_12_POOL
+  questionPool: E13_5_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-13",
   readingText: E13_5_CE_EMAIL_13_TEXT,
-  questionPool: E13_5_CE_EMAIL_13_POOL
+  questionPool: E13_5_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-14",
   readingText: E13_5_CE_EMAIL_14_TEXT,
-  questionPool: E13_5_CE_EMAIL_14_POOL
+  questionPool: E13_5_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-15",
   readingText: E13_5_CE_EMAIL_15_TEXT,
-  questionPool: E13_5_CE_EMAIL_15_POOL
+  questionPool: E13_5_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-16",
   readingText: E13_5_CE_EMAIL_16_TEXT,
-  questionPool: E13_5_CE_EMAIL_16_POOL
+  questionPool: E13_5_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-17",
   readingText: E13_5_CE_EMAIL_17_TEXT,
-  questionPool: E13_5_CE_EMAIL_17_POOL
+  questionPool: E13_5_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-18",
   readingText: E13_5_CE_EMAIL_18_TEXT,
-  questionPool: E13_5_CE_EMAIL_18_POOL
+  questionPool: E13_5_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-19",
   readingText: E13_5_CE_EMAIL_19_TEXT,
-  questionPool: E13_5_CE_EMAIL_19_POOL
+  questionPool: E13_5_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e13-5-ce-email-20",
   readingText: E13_5_CE_EMAIL_20_TEXT,
-  questionPool: E13_5_CE_EMAIL_20_POOL
+  questionPool: E13_5_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 

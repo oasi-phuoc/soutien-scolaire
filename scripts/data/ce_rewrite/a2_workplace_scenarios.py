@@ -234,7 +234,7 @@ def make_questions(genre, activity, place, date, time, person, requirement, fals
             activity,
             "Un repas de famille",
             "Un cours de sport",
-            "Activité : _________.",
+            "Thème principal : _________.",
             content_word(activity),
             f"L'activité indiquée est : {activity}.",
             0,
@@ -293,184 +293,188 @@ def make_questions(genre, activity, place, date, time, person, requirement, fals
     ]
 
 
+ARTICLE_BY_FIRST = {
+    "accueil": "l'", "achat": "l'", "appel": "l'", "atelier": "l'", "bilan": "le ",
+    "candidature": "la ", "changement": "le ", "commande": "la ", "compte": "le ", "cours": "le ",
+    "découverte": "la ", "demande": "la ", "démarche": "la ", "dépôt": "le ", "dossier": "le ",
+    "envoi": "l'", "entretien": "l'", "formation": "la ", "forum": "le ", "garde": "la ",
+    "inscription": "l'", "lecture": "la ", "marché": "le ", "message": "le ", "module": "le ",
+    "nouvel": "le ", "offre": "l'", "organisation": "l'", "pause": "la ", "permanence": "la ",
+    "point": "le ", "poste": "le ", "préparation": "la ", "présentation": "la ", "rappel": "le ",
+    "recherche": "la ", "relecture": "la ", "remise": "la ", "rendez-vous": "le ", "réparation": "la ",
+    "réponse": "la ", "réservation": "la ", "repas": "le ", "retour": "le ", "réunion": "la ",
+    "sac": "le ", "séance": "la ", "simulation": "la ", "stage": "le ", "test": "le ",
+    "tri": "le ", "visite": "la ",
+}
+
+
+def activity_phrase(value: str) -> str:
+    lowered = value.lower()
+    if lowered.startswith(("un ", "une ", "le ", "la ", "les ", "l'", "des ", "du ", "de l'")):
+        return value
+    first = lowered.split()[0]
+    return f"{ARTICLE_BY_FIRST.get(first, 'la ')}{value}"
+
+
+def place_phrase(value: str) -> str:
+    if value.startswith("Rue "):
+        return f"à l'adresse {value}"
+    if value.startswith("Salle "):
+        return f"dans la {value}"
+    if value.startswith(("Centre ", "Bureau ", "Cabinet ", "Jardin ", "Marché ", "Service ")):
+        return f"au {value}"
+    if value.startswith(("École ", "Agence ", "Accueil ", "Entreprise ", "Immeuble ", "Hôtel ")):
+        return f"à l'{value}"
+    if value.startswith(("Gare ", "Piscine ", "Bibliothèque ", "Banque ", "Mairie ", "Pharmacie ", "Place ")):
+        return f"à la {value}"
+    if value.startswith("Arrêt "):
+        return f"à l'{value}"
+    return f"à {value}"
+
+
 def message_text(i, title, activity, place, date, time, person, requirement, phone):
-    genre = GENRES[i]
+    a = activity_phrase(activity)
+    p = place_phrase(place)
     if i == 0:
         return (
-            f"Affiche — {title}\n\n"
-            f"Activité : {activity}.\n"
-            f"Réunion d'information le {date} à {time}.\n"
-            f"Lieu : {place}. Entrée gratuite.\n"
-            f"À préparer : {requirement}.\n"
-            f"Contact : {person}, {phone}."
+            f"Affiche — Porte ouverte {title}\n\n"
+            f"{place} ouvre ses portes le {date} dès {time}. Le public pourra découvrir {a} avec {person}.\n"
+            f"L'entrée est libre, mais chaque visiteur doit venir avec {requirement}.\n"
+            f"Pour les questions de dernière minute, le numéro à garder est le {phone}."
         )
     if i == 1:
         return (
             f"SMS — {person}\n\n"
-            f"Bonjour, petit rappel : activité prévue le {date} : {activity}.\n"
-            f"Rendez-vous à {time}. Lieu : {place}.\n"
-            f"Merci de préparer {requirement}.\n"
-            f"Répondez OUI si vous venez."
+            f"Bonjour ! Je vous confirme le rendez-vous pour {a}.\n"
+            f"On se voit {date} à {time}, directement {p}.\n"
+            f"N'oubliez pas {requirement}. Répondez OUI si vous pouvez venir."
         )
     if i == 2:
         return (
-            f"Note interne — {title}\n\n"
-            f"Pour l'équipe d'accueil : une personne vient pour {activity}.\n"
-            f"Elle arrive le {date} à {time}.\n"
-            f"Lieu à indiquer : {place}. Merci d'appeler {person}.\n"
-            f"Le dossier doit contenir {requirement}."
+            f"Note interne — accueil\n\n"
+            f"Une personne se présentera {date} à {time} pour {a}.\n"
+            f"Merci de l'orienter vers {place} et de prévenir {person} dès son arrivée.\n"
+            f"Son dossier doit contenir {requirement}; sans ce document, le rendez-vous sera reporté."
         )
     if i == 3:
         return (
-            f"Page web — {title}\n\n"
-            f"Nouvelle page ouverte : {activity}.\n"
-            f"Les informations pratiques sont simples : {date}, {time}. Lieu : {place}.\n"
-            f"Avant de venir, préparez {requirement}.\n"
-            f"Besoin d'aide ? Écrivez à {person} ou appelez le {phone}."
+            f"Page web — informations pratiques\n\n"
+            f"Vous cherchez des renseignements sur {a} ? La prochaine session est prévue le {date}.\n"
+            f"L'accueil commence à {time} {p}. {person} répond aux questions simples par téléphone au {phone}.\n"
+            f"Avant de partir, vérifiez que vous avez {requirement}."
         )
     if i == 4:
         return (
-            f"Programme — {title}\n\n"
-            f"{time} : accueil des participants à {place}.\n"
-            f"{time} : présentation de {activity}.\n"
-            f"Fin prévue une heure plus tard.\n"
-            f"Date : {date}. Responsable : {person}.\n"
-            f"Matériel demandé : {requirement}."
+            f"Programme — matinée {title}\n\n"
+            f"{time} : arrivée du groupe {p}.\n"
+            f"Ensuite, {person} présente {a} avec des exemples concrets.\n"
+            f"La rencontre dure environ une heure. Le {date}, chaque participant apporte {requirement}."
         )
     if i == 5:
         return (
-            f"Planning — {title}\n\n"
-            f"Semaine du {date}.\n"
-            f"{time} | {activity} | salle ou lieu : {place}.\n"
-            f"{person} vérifie la présence des participants.\n"
-            f"Chaque personne apporte {requirement}."
+            f"Planning partagé\n\n"
+            f"Dans le calendrier de l'équipe, le créneau du {date} est réservé à {a}.\n"
+            f"Le groupe se retrouve à {time} {p}.\n"
+            f"{person} fera l'appel; merci de préparer {requirement} avant d'entrer."
         )
     if i == 6:
         return (
-            f"Règlement — {title}\n\n"
-            f"Pour {activity}, soyez à l'heure : arrivée à {time} le {date}.\n"
-            f"L'accueil se fait ici : {place}.\n"
-            f"Il est interdit de manger dans la salle.\n"
-            f"Le document obligatoire est {requirement}.\n"
-            f"En cas de problème, demandez {person}."
+            f"Règlement — participation\n\n"
+            f"Pour {a}, la ponctualité est importante : les portes de {place} ferment dix minutes après {time}.\n"
+            f"La date retenue est le {date}. Les personnes sans {requirement} doivent passer à l'accueil.\n"
+            f"En cas de difficulté, demandez {person}; il ou elle vous indiquera la bonne salle."
         )
     if i == 7:
         return (
-            f"Ticket — {title}\n\n"
-            f"Numéro : A2-{i + 11}.\n"
-            f"Service : {activity}.\n"
-            f"Date et heure : {date}, {time}.\n"
-            f"Guichet : {place}.\n"
-            f"Agent : {person}.\n"
-            f"À montrer : {requirement}."
+            f"Ticket de passage — A2-{i + 11}\n\n"
+            f"Conservez ce ticket jusqu'à la fin de {a}.\n"
+            f"Il donne accès à {place} le {date}, à partir de {time}.\n"
+            f"Le contrôle sera fait par {person}. Le document demandé est {requirement}."
         )
     if i == 8:
         return (
-            f"Article local — {title}\n\n"
-            f"La maison de quartier annonce {activity}.\n"
-            f"La rencontre aura lieu le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"{person} explique que les places sont limitées.\n"
-            f"Les participants doivent apporter {requirement}."
+            f"Article local — service de proximité\n\n"
+            f"Le quartier annonce {a} pour aider les habitants dans leurs démarches.\n"
+            f"La rencontre aura lieu le {date} à {time}, {p}.\n"
+            f"Selon {person}, il suffit d'apporter {requirement} et de poser ses questions simplement."
         )
     if i == 9:
         return (
-            f"Fil de discussion — {title}\n\n"
-            f"Mina : Tu vas à {activity} ?\n"
-            f"Ali : Oui, c'est le {date} à {time}.\n"
-            f"Mina : Où exactement ?\n"
-            f"Ali : Lieu : {place}. {person} nous attend.\n"
-            f"Mina : D'accord, je prépare {requirement}."
+            f"Fil de discussion — groupe A2\n\n"
+            f"Mina : Tu viens à {a} ?\n"
+            f"Ali : Oui, c'est {date} à {time}.\n"
+            f"Mina : Je vais où ?\n"
+            f"Ali : {p}. {person} nous attendra, et il faut prendre {requirement}."
         )
     if i == 10:
         return (
-            f"Fiche pratique — {title}\n\n"
-            f"Objectif : comprendre {activity}.\n"
-            f"Quand : {date}, à {time}.\n"
-            f"Où : {place}.\n"
-            f"Qui contacter : {person}.\n"
-            f"À ne pas oublier : {requirement}."
+            f"Fiche pratique — avant de venir\n\n"
+            f"Pour {a}, notez trois informations : le rendez-vous est {date}, l'heure est {time}, le lieu est {place}.\n"
+            f"La personne à contacter est {person}.\n"
+            f"Dernière vérification dans le sac : {requirement}."
         )
     if i == 11:
         return (
-            f"Avis sur la porte — {title}\n\n"
-            f"Attention : changement de lieu le {date}.\n"
-            f"Nouveau lieu : {place}.\n"
-            f"Les personnes inscrites à {activity} sont attendues à {time}.\n"
-            f"Merci de préparer {requirement} avant l'arrivée.\n"
-            f"Pour entrer, sonnez chez {person}."
+            f"Avis sur la porte\n\n"
+            f"Changement d'organisation pour {a}.\n"
+            f"Le rendez-vous reste le {date} à {time}, mais l'entrée se fait par {place}.\n"
+            f"Sonnez chez {person} et gardez {requirement} à la main pour gagner du temps."
         )
     if i == 12:
         return (
-            f"Invitation — {title}\n\n"
-            f"Vous êtes invité(e) à une rencontre sur {activity}.\n"
-            f"Elle aura lieu le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"{person} présentera les étapes et répondra aux questions.\n"
-            f"Merci d'apporter {requirement}."
+            f"Invitation — rencontre utile\n\n"
+            f"Vous êtes invité(e) à participer à {a}.\n"
+            f"La rencontre se déroule {date} à {time}, {p}.\n"
+            f"{person} expliquera les étapes et répondra aux questions. Merci d'apporter {requirement}."
         )
     if i == 13:
         return (
-            f"Confirmation — {title}\n\n"
-            f"Votre place est confirmée pour {activity}.\n"
-            f"Rendez-vous le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"{person} vous accueillera à l'entrée.\n"
-            f"Le jour même, montrez {requirement}."
+            f"Confirmation imprimée\n\n"
+            f"Votre place est gardée pour {a}.\n"
+            f"Présentez-vous {p} le {date}, quelques minutes avant {time}.\n"
+            f"{person} vous accueillera à l'entrée. Le jour même, montrez {requirement}."
         )
     if i == 14:
         return (
-            f"Formulaire — {title}\n\n"
-            f"Nom de la démarche : {activity}.\n"
-            f"Date choisie : {date}.\n"
-            f"Heure choisie : {time}.\n"
-            f"Lieu choisi : {place}.\n"
-            f"Référent : {person}.\n"
-            f"Pièce à joindre : {requirement}."
+            f"Formulaire commenté — {title}\n\n"
+            f"Le formulaire est court : il demande votre nom, puis il confirme {a}.\n"
+            f"La ligne suivante indique {place}, avec un rendez-vous le {date} à {time}.\n"
+            f"À la fin, {person} rappelle d'ajouter {requirement} au dossier."
         )
     if i == 15:
         return (
-            f"Petite annonce — {title}\n\n"
-            f"Nous cherchons des personnes intéressées par {activity}.\n"
-            f"Présentation le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"Aucun frais à payer sur place.\n"
-            f"Apportez seulement {requirement}.\n"
-            f"Contact rapide : {person}."
+            f"Petite annonce — besoin de participants\n\n"
+            f"Nous cherchons des personnes intéressées par {a}.\n"
+            f"Une présentation simple est organisée le {date} à {time}, {p}.\n"
+            f"Aucun achat n'est demandé; venez seulement avec {requirement}. Contact rapide : {person}."
         )
     if i == 16:
         return (
-            f"Compte rendu — {title}\n\n"
-            f"Réunion du matin : {person} a présenté {activity}.\n"
-            f"La prochaine étape est fixée au {date} à {time}.\n"
-            f"Le groupe se retrouve au lieu indiqué : {place}.\n"
-            f"Chaque participant prépare {requirement}."
+            f"Compte rendu — décision du groupe\n\n"
+            f"Pendant la réunion, {person} a proposé de continuer avec {a}.\n"
+            f"Le groupe a choisi {place} pour la prochaine étape.\n"
+            f"La date retenue est {date} à {time}. Chaque participant prépare {requirement}."
         )
     if i == 17:
         return (
-            f"FAQ — {title}\n\n"
-            f"Question : Quand commence {activity} ?\n"
-            f"Réponse : le {date} à {time}.\n"
-            f"Question : Où aller ?\n"
-            f"Réponse : {place}.\n"
-            f"Question : Qui peut aider ?\n"
-            f"Réponse : {person}. Il faut préparer {requirement}."
+            f"FAQ — questions fréquentes\n\n"
+            f"Quand commence {a} ? Le {date} à {time}.\n"
+            f"Où faut-il aller ? {p}.\n"
+            f"Qui peut aider ? {person}.\n"
+            f"Que faut-il préparer ? {requirement}."
         )
     if i == 18:
         return (
-            f"Plan d'accès — {title}\n\n"
-            f"Pour {activity}, entrez par la porte bleue de {place}.\n"
-            f"Prenez l'escalier à gauche et attendez {person}.\n"
-            f"Le rendez-vous est le {date} à {time}.\n"
-            f"Gardez {requirement} dans votre sac."
+            f"Plan d'accès — entrée conseillée\n\n"
+            f"Pour {a}, entrez par la porte principale de {place}.\n"
+            f"Prenez le couloir à gauche et attendez {person} près du panneau bleu.\n"
+            f"Le rendez-vous est fixé au {date} à {time}. Gardez {requirement} dans votre sac."
         )
     return (
-        f"Message vocal transcrit — {title}\n\n"
-        f"Bonjour, c'est {person}.\n"
-        f"Je confirme {activity} le {date} à {time}.\n"
-        f"Le lieu est : {place}.\n"
-        f"N'oubliez pas {requirement}.\n"
-        f"Vous pouvez rappeler au {phone}."
+        f"Message vocal transcrit — {person}\n\n"
+        f"Bonjour, c'est {person}. Je vous laisse un message pour confirmer {a}.\n"
+        f"Nous nous retrouvons {date} à {time} {p}.\n"
+        f"N'oubliez pas {requirement}. Si besoin, rappelez-moi au {phone}."
     )
 
 
@@ -479,159 +483,129 @@ def email_text(i, title, activity, place, date, time, person, requirement, phone
     subject = f"{EMAIL_SUBJECTS[i]} — {title}"
     greeting = "Bonjour,"
     closing = f"Merci,\n{sender}"
+    a = activity_phrase(activity)
+    p = place_phrase(place)
     if i == 0:
         body = (
-            f"Votre rendez-vous est confirmé.\n"
-            f"Activité : {activity}.\n"
-            f"Nous vous attendons le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"{person} vous recevra à l'accueil.\n"
-            f"Merci d'apporter {requirement}."
+            f"Votre rendez-vous est confirmé pour {a}.\n"
+            f"Nous vous accueillerons le {date} à {time} {p}.\n"
+            f"{person} sera à l'entrée pour vous guider. Merci d'apporter {requirement}."
         )
     elif i == 1:
         body = (
-            f"Pour préparer cette activité ({activity}), merci d'apporter :\n"
-            f"- {requirement}\n"
-            f"- un stylo\n"
-            f"La rencontre aura lieu le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"Votre contact est {person}."
+            f"Pour préparer {a}, mettez {requirement} dans votre sac.\n"
+            f"La rencontre aura lieu le {date} à {time}, {p}.\n"
+            f"Si vous avez une question, {person} répond au {phone}."
         )
     elif i == 2:
         body = (
-            f"Attention, l'horaire de {activity} change.\n"
-            f"Le nouveau rendez-vous est le {date} à {time}.\n"
-            f"Le lieu ne change pas : {place}.\n"
-            f"En cas de question, appelez {person} au {phone}."
+            f"L'horaire de {a} change légèrement.\n"
+            f"Le nouveau rendez-vous est fixé au {date} à {time}.\n"
+            f"Le lieu reste {place}. Pensez à prévenir {person} si vous ne pouvez pas venir."
         )
     elif i == 3:
         body = (
-            f"Nous avons bien reçu votre demande pour {activity}.\n"
-            f"Vous pouvez venir le {date}.\n"
-            f"L'accueil ouvre à {time}. Lieu : {place}.\n"
-            f"Pensez à préparer {requirement}."
+            f"Nous avons bien reçu votre demande concernant {a}.\n"
+            f"Vous pouvez passer le {date}; l'accueil ouvrira à {time} {p}.\n"
+            f"Le dossier sera plus vite traité avec {requirement}."
         )
     elif i == 4:
         body = (
-            f"Voici le programme de la journée :\n"
-            f"{time} : accueil. Lieu : {place}\n"
-            f"{time} : présentation de {activity}\n"
-            f"{person} animera la rencontre.\n"
-            f"À apporter : {requirement}."
+            f"Voici le déroulement prévu le {date}.\n"
+            f"À {time}, accueil {p}. Ensuite, {person} présentera {a}.\n"
+            f"La séance est courte; gardez simplement {requirement} avec vous."
         )
     elif i == 5:
         body = (
-            f"Petit rappel avant votre visite : activité prévue le {date} ({activity}).\n"
-            f"Merci d'arriver à {time}. Lieu : {place}.\n"
-            f"Le dossier doit contenir {requirement}.\n"
-            f"{person} vérifiera les documents."
+            f"Petit rappel avant votre visite : {a} est bien prévu le {date}.\n"
+            f"Merci d'arriver à {time} {p}.\n"
+            f"{person} vérifiera que votre dossier contient {requirement}."
         )
     elif i == 6:
         body = (
-            f"Vous êtes invité(e) à une réunion sur {activity}.\n"
-            f"La réunion aura lieu le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"Merci de répondre avant vendredi.\n"
-            f"Contact : {person}."
+            f"Nous vous invitons à une réunion au sujet de {a}.\n"
+            f"Elle se tiendra le {date} à {time}, {p}.\n"
+            f"Répondez avant vendredi et signalez à {person} si {requirement} manque encore."
         )
     elif i == 7:
         body = (
-            f"Votre dossier pour {activity} est complet.\n"
-            f"Prochaine étape : venir le {date} à {time}.\n"
-            f"L'adresse est : {place}.\n"
-            f"Gardez {requirement} avec vous."
+            f"Votre dossier pour {a} est maintenant complet.\n"
+            f"La prochaine étape se fera le {date} à {time}.\n"
+            f"Rendez-vous {p}; gardez {requirement} avec vous jusqu'à la fin."
         )
     elif i == 8:
         body = (
-            f"Il manque encore {requirement} dans votre dossier.\n"
-            f"Vous pouvez le déposer le {date}.\n"
-            f"Le bureau est ouvert à partir de {time}. Lieu : {place}.\n"
-            f"Demandez {person} à l'accueil."
+            f"Il manque encore {requirement}.\n"
+            f"Vous pouvez le déposer le {date} à partir de {time}, {p}.\n"
+            f"Demandez {person} à l'accueil pour éviter une attente trop longue."
         )
     elif i == 9:
         body = (
-            f"Le rendez-vous pour {activity} est reporté.\n"
-            f"Nous proposons le {date} à {time}.\n"
-            f"Le lieu est toujours : {place}.\n"
-            f"Merci de confirmer à {person}."
+            f"Le rendez-vous pour {a} est reporté.\n"
+            f"Nous proposons maintenant le {date} à {time}, toujours {p}.\n"
+            f"Merci de confirmer votre présence à {person}."
         )
     elif i == 10:
         body = (
-            f"Pour {activity}, deux choix étaient possibles.\n"
-            f"Vous avez choisi le {date} à {time}.\n"
-            f"Lieu de la rencontre : {place}.\n"
-            f"Apportez {requirement}."
+            f"Deux choix étaient possibles pour {a}.\n"
+            f"Vous avez choisi le créneau du {date} à {time}.\n"
+            f"La rencontre aura lieu {p}; apportez {requirement}."
         )
     elif i == 11:
         body = (
-            f"Suite à notre appel, je confirme les informations.\n"
-            f"{activity} aura lieu le {date} à {time}.\n"
-            f"Le lieu du rendez-vous est : {place}.\n"
+            f"Suite à notre appel, je résume les informations.\n"
+            f"{activity_phrase(activity).capitalize()} aura lieu le {date} à {time}, {p}.\n"
             f"{person} vous attendra avec la liste des participants."
         )
     elif i == 12:
         body = (
-            f"Pour votre premier jour lié à {activity}, arrivez à {time}.\n"
-            f"La date est le {date}.\n"
-            f"L'accueil se trouve ici : {place}.\n"
-            f"Merci d'apporter {requirement}."
+            f"Pour votre premier jour lié à {a}, arrivez un peu avant {time}.\n"
+            f"La date est le {date}, et l'accueil se trouve {p}.\n"
+            f"Merci d'apporter {requirement}; cela facilitera l'inscription."
         )
     elif i == 13:
         body = (
             f"Merci pour votre réponse positive.\n"
-            f"Votre place pour {activity} est gardée.\n"
-            f"Rendez-vous le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"{person} vous donnera les consignes."
+            f"Votre place pour {a} est gardée le {date} à {time}.\n"
+            f"{p.capitalize()}, {person} donnera les consignes et vérifiera {requirement}."
         )
     elif i == 14:
         body = (
-            f"Voici le contact à noter pour {activity} : {person}.\n"
+            f"Voici le contact à noter pour {a} : {person}.\n"
             f"Vous pouvez appeler le {phone} seulement le matin.\n"
-            f"La prochaine rencontre est le {date} à {time}.\n"
-            f"Lieu : {place}."
+            f"La prochaine rencontre aura lieu le {date} à {time}, {p}."
         )
     elif i == 15:
         body = (
-            f"Message pour tout le groupe : {activity} commence bientôt.\n"
-            f"Merci d'être présent(e) le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"Chaque personne prépare {requirement}.\n"
-            f"{person} fera l'appel."
+            f"Message pour tout le groupe : {activity_phrase(activity).capitalize()} commence bientôt.\n"
+            f"Soyez présent(e) le {date} à {time}, {p}.\n"
+            f"Chaque personne prépare {requirement}; {person} fera l'appel."
         )
     elif i == 16:
         body = (
-            f"Résumé de la rencontre : nous avons parlé de {activity}.\n"
-            f"Le groupe a choisi ce lieu pour la suite : {place}.\n"
-            f"La prochaine date est le {date} à {time}.\n"
-            f"À faire avant : préparer {requirement}."
+            f"Résumé de la rencontre : nous avons parlé de {a}.\n"
+            f"Le groupe a choisi {place} pour la suite.\n"
+            f"La prochaine date est {date} à {time}. À faire avant : préparer {requirement}."
         )
     elif i == 17:
         body = (
             f"Votre rendez-vous individuel avec {person} est fixé.\n"
-            f"Il concerne {activity}.\n"
-            f"Venez le {date} à {time}. Lieu : {place}.\n"
+            f"Il concerne {a}. Venez le {date} à {time}, {p}.\n"
             f"N'oubliez pas {requirement}."
         )
     elif i == 18:
         body = (
-            f"Nous avons trouvé une solution pour {activity}.\n"
-            f"Vous pouvez passer le {date} à {time}.\n"
-            f"Lieu : {place}.\n"
-            f"{person} vous expliquera la suite.\n"
-            f"Apportez aussi {requirement}."
+            f"Nous avons trouvé une solution pour {a}.\n"
+            f"Vous pouvez passer le {date} à {time} {p}.\n"
+            f"{person} vous expliquera la suite; apportez aussi {requirement}."
         )
     else:
         body = (
-            f"Dernières informations avant {activity} :\n"
-            f"date : {date}\n"
-            f"heure : {time}\n"
-            f"lieu : {place}\n"
-            f"contact : {person}\n"
-            f"à préparer : {requirement}"
+            f"Dernières informations avant {a}.\n"
+            f"Le rendez-vous est confirmé pour le {date} à {time}.\n"
+            f"Le lieu est {place}, le contact est {person}, et le document à préparer est {requirement}."
         )
     return f"De : {sender}\n\nObjet : {subject}\n\n{greeting}\n\n{body}\n\n{closing}"
-
 
 def email_questions(i, title, activity, place, date, time, person, requirement, false_place):
     sender = EMAIL_SENDERS[i]
@@ -662,7 +636,7 @@ def email_questions(i, title, activity, place, date, time, person, requirement, 
             activity,
             "Un déménagement",
             "Un match de foot",
-            "Activité : _________.",
+            "Thème principal : _________.",
             content_word(activity),
             f"L'e-mail parle de {activity}.",
             0,

@@ -28,12 +28,9 @@ Objet : Confirmation de rendez-vous — Bilan A2
 
 Bonjour,
 
-Votre rendez-vous est confirmé.
-Activité : visite d'un appartement.
-Nous vous attendons le lundi 4 mars à 8 h 30.
-Lieu : Rue des Lilas 12.
-Mme Martin vous recevra à l'accueil.
-Merci d'apporter votre dossier complet.
+Votre rendez-vous est confirmé pour la visite d'un appartement.
+Nous vous accueillerons le lundi 4 mars à 8 h 30 à l'adresse Rue des Lilas 12.
+Mme Martin sera à l'entrée pour vous guider. Merci d'apporter votre dossier complet.
 
 Merci,
 Accueil Horizon`;
@@ -70,7 +67,7 @@ const E14_1_CE_EMAIL_POOL = buildExpressPool("e14-1-ce-email", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "appartement",
     vfQ: "L'e-mail parle de visite d'un appartement.",
     vfC: 0,
@@ -132,12 +129,9 @@ Objet : Documents à apporter — Bilan A2
 
 Bonjour,
 
-Pour préparer cette activité (rendez-vous chez le médecin), merci d'apporter :
-- votre carte d'assurance
-- un stylo
-La rencontre aura lieu le mardi 12 mars à 9 h.
-Lieu : Cabinet Santé Plus.
-Votre contact est Dr Keller.
+Pour préparer le rendez-vous chez le médecin, mettez votre carte d'assurance dans votre sac.
+La rencontre aura lieu le mardi 12 mars à 9 h, au Cabinet Santé Plus.
+Si vous avez une question, Dr Keller répond au 021 880 31 41.
 
 Merci,
 Mme Bernard`;
@@ -174,7 +168,7 @@ const E14_1_CE_EMAIL_2_POOL = buildExpressPool("e14-1-ce-email-2", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "médecin",
     vfQ: "L'e-mail parle de rendez-vous chez le médecin.",
     vfC: 0,
@@ -236,10 +230,9 @@ Objet : Changement d'horaire — Bilan A2
 
 Bonjour,
 
-Attention, l'horaire de réunion des parents change.
-Le nouveau rendez-vous est le mercredi 20 mars à 9 h 15.
-Le lieu ne change pas : École du Parc.
-En cas de question, appelez M. Favre au 021 880 32 42.
+L'horaire de la réunion des parents change légèrement.
+Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
+Le lieu reste École du Parc. Pensez à prévenir M. Favre si vous ne pouvez pas venir.
 
 Merci,
 Secrétariat Central`;
@@ -276,7 +269,7 @@ const E14_1_CE_EMAIL_3_POOL = buildExpressPool("e14-1-ce-email-3", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "parents",
     vfQ: "L'e-mail parle de réunion des parents.",
     vfC: 0,
@@ -338,10 +331,9 @@ Objet : Réponse à votre demande — Bilan A2
 
 Bonjour,
 
-Nous avons bien reçu votre demande pour achat d'un billet de train.
-Vous pouvez venir le jeudi 28 mars.
-L'accueil ouvre à 10 h. Lieu : Gare de Lausanne.
-Pensez à préparer votre carte demi-tarif.
+Nous avons bien reçu votre demande concernant l'achat d'un billet de train.
+Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à la Gare de Lausanne.
+Le dossier sera plus vite traité avec votre carte demi-tarif.
 
 Merci,
 M. Lopez`;
@@ -378,7 +370,7 @@ const E14_1_CE_EMAIL_4_POOL = buildExpressPool("e14-1-ce-email-4", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "achat",
     vfQ: "L'e-mail parle de achat d'un billet de train.",
     vfC: 0,
@@ -440,11 +432,9 @@ Objet : Programme de la journée — Bilan A2
 
 Bonjour,
 
-Voici le programme de la journée :
-10 h 30 : accueil. Lieu : Piscine du Lac
-10 h 30 : présentation de inscription au cours de natation
-M. Nguyen animera la rencontre.
-À apporter : un bonnet de bain.
+Voici le déroulement prévu le vendredi 5 avril.
+À 10 h 30, accueil à la Piscine du Lac. Ensuite, M. Nguyen présentera l'inscription au cours de natation.
+La séance est courte; gardez simplement un bonnet de bain avec vous.
 
 Merci,
 Service administratif`;
@@ -481,7 +471,7 @@ const E14_1_CE_EMAIL_5_POOL = buildExpressPool("e14-1-ce-email-5", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "inscription",
     vfQ: "L'e-mail parle de inscription au cours de natation.",
     vfC: 0,
@@ -543,10 +533,9 @@ Objet : Rappel avant la visite — Bilan A2
 
 Bonjour,
 
-Petit rappel avant votre visite : activité prévue le samedi 13 avril (invitation à un anniversaire).
-Merci d'arriver à 11 h. Lieu : Salle des Fêtes.
-Le dossier doit contenir une boisson sans alcool.
-Karim vérifiera les documents.
+Petit rappel avant votre visite : la invitation à un anniversaire est bien prévu le samedi 13 avril.
+Merci d'arriver à 11 h dans la Salle des Fêtes.
+Karim vérifiera que votre dossier contient une boisson sans alcool.
 
 Merci,
 Mme Garcia`;
@@ -583,7 +572,7 @@ const E14_1_CE_EMAIL_6_POOL = buildExpressPool("e14-1-ce-email-6", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "invitation",
     vfQ: "L'e-mail parle de invitation à un anniversaire.",
     vfC: 0,
@@ -645,11 +634,9 @@ Objet : Invitation à une réunion — Bilan A2
 
 Bonjour,
 
-Vous êtes invité(e) à une réunion sur retour de livres à la bibliothèque.
-La réunion aura lieu le lundi 22 avril à 13 h 30.
-Lieu : Bibliothèque Centrale.
-Merci de répondre avant vendredi.
-Contact : Mme Durand.
+Nous vous invitons à une réunion au sujet de le retour de livres à la bibliothèque.
+Elle se tiendra le lundi 22 avril à 13 h 30, à la Bibliothèque Centrale.
+Répondez avant vendredi et signalez à Mme Durand si les trois livres manque encore.
 
 Merci,
 Bureau des inscriptions`;
@@ -686,7 +673,7 @@ const E14_1_CE_EMAIL_7_POOL = buildExpressPool("e14-1-ce-email-7", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "retour",
     vfQ: "L'e-mail parle de retour de livres à la bibliothèque.",
     vfC: 0,
@@ -748,10 +735,9 @@ Objet : Résultat de votre dossier — Bilan A2
 
 Bonjour,
 
-Votre dossier pour tri des déchets du quartier est complet.
-Prochaine étape : venir le mardi 30 avril à 14 h.
-L'adresse est : Place du Marché.
-Gardez un sac transparent avec vous.
+Votre dossier pour le tri des déchets du quartier est maintenant complet.
+La prochaine étape se fera le mardi 30 avril à 14 h.
+Rendez-vous à la Place du Marché; gardez un sac transparent avec vous jusqu'à la fin.
 
 Merci,
 M. Girard`;
@@ -788,7 +774,7 @@ const E14_1_CE_EMAIL_8_POOL = buildExpressPool("e14-1-ce-email-8", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "tri",
     vfQ: "L'e-mail parle de tri des déchets du quartier.",
     vfC: 0,
@@ -850,10 +836,9 @@ Objet : Pièce manquante — Bilan A2
 
 Bonjour,
 
-Il manque encore votre pièce d'identité dans votre dossier.
-Vous pouvez le déposer le mercredi 8 mai.
-Le bureau est ouvert à partir de 14 h 30. Lieu : Banque Cantonale.
-Demandez Mme Girard à l'accueil.
+Il manque encore votre pièce d'identité.
+Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, à la Banque Cantonale.
+Demandez Mme Girard à l'accueil pour éviter une attente trop longue.
 
 Merci,
 Service planning`;
@@ -890,7 +875,7 @@ const E14_1_CE_EMAIL_9_POOL = buildExpressPool("e14-1-ce-email-9", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "à",
     vfQ: "L'e-mail parle de rendez-vous à la banque.",
     vfC: 0,
@@ -952,10 +937,9 @@ Objet : Nouveau créneau proposé — Bilan A2
 
 Bonjour,
 
-Le rendez-vous pour garde d'un enfant après l'école est reporté.
-Nous proposons le jeudi 16 mai à 15 h.
-Le lieu est toujours : Accueil Périscolaire.
-Merci de confirmer à M. Lopez.
+Le rendez-vous pour la garde d'un enfant après l'école est reporté.
+Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à l'Accueil Périscolaire.
+Merci de confirmer votre présence à M. Lopez.
 
 Merci,
 Mme Nguyen`;
@@ -992,7 +976,7 @@ const E14_1_CE_EMAIL_10_POOL = buildExpressPool("e14-1-ce-email-10", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "garde",
     vfQ: "L'e-mail parle de garde d'un enfant après l'école.",
     vfC: 0,
@@ -1054,10 +1038,9 @@ Objet : Deux choix possibles — Bilan A2
 
 Bonjour,
 
-Pour changement d'arrêt de bus, deux choix étaient possibles.
-Vous avez choisi le vendredi 24 mai à 15 h 30.
-Lieu de la rencontre : Arrêt Pont-Neuf.
-Apportez votre abonnement de bus.
+Deux choix étaient possibles pour le changement d'arrêt de bus.
+Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
+La rencontre aura lieu à l'Arrêt Pont-Neuf; apportez votre abonnement de bus.
 
 Merci,
 Accueil formation`;
@@ -1094,7 +1077,7 @@ const E14_1_CE_EMAIL_11_POOL = buildExpressPool("e14-1-ce-email-11", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "changement",
     vfQ: "L'e-mail parle de changement d'arrêt de bus.",
     vfC: 0,
@@ -1156,9 +1139,8 @@ Objet : Suite à notre appel — Bilan A2
 
 Bonjour,
 
-Suite à notre appel, je confirme les informations.
-commande à la pharmacie aura lieu le lundi 3 juin à 16 h.
-Le lieu du rendez-vous est : Pharmacie du Centre.
+Suite à notre appel, je résume les informations.
+La commande à la pharmacie aura lieu le lundi 3 juin à 16 h, à la Pharmacie du Centre.
 M. Bernard vous attendra avec la liste des participants.
 
 Merci,
@@ -1196,7 +1178,7 @@ const E14_1_CE_EMAIL_12_POOL = buildExpressPool("e14-1-ce-email-12", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "commande",
     vfQ: "L'e-mail parle de commande à la pharmacie.",
     vfC: 0,
@@ -1258,10 +1240,9 @@ Objet : Premier jour — Bilan A2
 
 Bonjour,
 
-Pour votre premier jour lié à repas des voisins, arrivez à 16 h 30.
-La date est le mardi 11 juin.
-L'accueil se trouve ici : Jardin partagé.
-Merci d'apporter un plat froid.
+Pour votre premier jour lié à le repas des voisins, arrivez un peu avant 16 h 30.
+La date est le mardi 11 juin, et l'accueil se trouve au Jardin partagé.
+Merci d'apporter un plat froid; cela facilitera l'inscription.
 
 Merci,
 Service dossiers`;
@@ -1298,7 +1279,7 @@ const E14_1_CE_EMAIL_13_POOL = buildExpressPool("e14-1-ce-email-13", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "repas",
     vfQ: "L'e-mail parle de repas des voisins.",
     vfC: 0,
@@ -1361,10 +1342,8 @@ Objet : Merci pour votre réponse — Bilan A2
 Bonjour,
 
 Merci pour votre réponse positive.
-Votre place pour cours de français du soir est gardée.
-Rendez-vous le mercredi 19 juin à 17 h.
-Lieu : Centre Horizon.
-Mme Perrin vous donnera les consignes.
+Votre place pour le cours de français du soir est gardée le mercredi 19 juin à 17 h.
+Au centre horizon, Mme Perrin donnera les consignes et vérifiera votre cahier de cours.
 
 Merci,
 Mme Moreau`;
@@ -1401,7 +1380,7 @@ const E14_1_CE_EMAIL_14_POOL = buildExpressPool("e14-1-ce-email-14", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "français",
     vfQ: "L'e-mail parle de cours de français du soir.",
     vfC: 0,
@@ -1463,10 +1442,9 @@ Objet : Contact à noter — Bilan A2
 
 Bonjour,
 
-Voici le contact à noter pour nouvel horaire de travail : M. Robert.
+Voici le contact à noter pour le nouvel horaire de travail : M. Robert.
 Vous pouvez appeler le 021 880 44 54 seulement le matin.
-La prochaine rencontre est le jeudi 27 juin à 17 h 30.
-Lieu : Bureau du personnel.
+La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, au Bureau du personnel.
 
 Merci,
 Équipe coordination`;
@@ -1503,7 +1481,7 @@ const E14_1_CE_EMAIL_15_POOL = buildExpressPool("e14-1-ce-email-15", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "nouvel",
     vfQ: "L'e-mail parle de nouvel horaire de travail.",
     vfC: 0,
@@ -1565,11 +1543,9 @@ Objet : Message au groupe — Bilan A2
 
 Bonjour,
 
-Message pour tout le groupe : réparation du chauffage commence bientôt.
-Merci d'être présent(e) le vendredi 5 juillet à 18 h.
-Lieu : Immeuble Bellevue.
-Chaque personne prépare la clé de la cave.
-Mme Huber fera l'appel.
+Message pour tout le groupe : La réparation du chauffage commence bientôt.
+Soyez présent(e) le vendredi 5 juillet à 18 h, à l'Immeuble Bellevue.
+Chaque personne prépare la clé de la cave; Mme Huber fera l'appel.
 
 Merci,
 M. Petit`;
@@ -1606,7 +1582,7 @@ const E14_1_CE_EMAIL_16_POOL = buildExpressPool("e14-1-ce-email-16", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "réparation",
     vfQ: "L'e-mail parle de réparation du chauffage.",
     vfC: 0,
@@ -1668,10 +1644,9 @@ Objet : Résumé de la rencontre — Bilan A2
 
 Bonjour,
 
-Résumé de la rencontre : nous avons parlé de démarche à la mairie.
-Le groupe a choisi ce lieu pour la suite : Mairie Annexe.
-La prochaine date est le lundi 15 juillet à 18 h 30.
-À faire avant : préparer le formulaire rempli.
+Résumé de la rencontre : nous avons parlé de la démarche à la mairie.
+Le groupe a choisi Mairie Annexe pour la suite.
+La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer le formulaire rempli.
 
 Merci,
 Service suivi`;
@@ -1708,7 +1683,7 @@ const E14_1_CE_EMAIL_17_POOL = buildExpressPool("e14-1-ce-email-17", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "démarche",
     vfQ: "L'e-mail parle de démarche à la mairie.",
     vfC: 0,
@@ -1771,8 +1746,7 @@ Objet : Rendez-vous individuel — Bilan A2
 Bonjour,
 
 Votre rendez-vous individuel avec Mme Costa est fixé.
-Il concerne marché de légumes.
-Venez le mardi 23 juillet à 19 h. Lieu : Marché couvert.
+Il concerne le marché de légumes. Venez le mardi 23 juillet à 19 h, au Marché couvert.
 N'oubliez pas un sac de courses.
 
 Merci,
@@ -1810,7 +1784,7 @@ const E14_1_CE_EMAIL_18_POOL = buildExpressPool("e14-1-ce-email-18", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "marché",
     vfQ: "L'e-mail parle de marché de légumes.",
     vfC: 0,
@@ -1872,11 +1846,9 @@ Objet : Solution proposée — Bilan A2
 
 Bonjour,
 
-Nous avons trouvé une solution pour réservation d'un week-end.
-Vous pouvez passer le mercredi 31 juillet à 19 h 30.
-Lieu : Hôtel du Port.
-M. Simon vous expliquera la suite.
-Apportez aussi la confirmation de réservation.
+Nous avons trouvé une solution pour la réservation d'un week-end.
+Vous pouvez passer le mercredi 31 juillet à 19 h 30 à l'Hôtel du Port.
+M. Simon vous expliquera la suite; apportez aussi la confirmation de réservation.
 
 Merci,
 Accueil principal`;
@@ -1913,7 +1885,7 @@ const E14_1_CE_EMAIL_19_POOL = buildExpressPool("e14-1-ce-email-19", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "réservation",
     vfQ: "L'e-mail parle de réservation d'un week-end.",
     vfC: 0,
@@ -1975,12 +1947,9 @@ Objet : Dernières informations — Bilan A2
 
 Bonjour,
 
-Dernières informations avant sac perdu dans le bus :
-date : jeudi 8 août
-heure : 20 h
-lieu : Service des objets trouvés
-contact : Mme Leroy
-à préparer : une description du sac
+Dernières informations avant le sac perdu dans le bus.
+Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
+Le lieu est Service des objets trouvés, le contact est Mme Leroy, et le document à préparer est une description du sac.
 
 Merci,
 M. Simon`;
@@ -2017,7 +1986,7 @@ const E14_1_CE_EMAIL_20_POOL = buildExpressPool("e14-1-ce-email-20", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
+    fillQ: "Thème principal : _________.",
     fill: "sac",
     vfQ: "L'e-mail parle de sac perdu dans le bus.",
     vfC: 0,
@@ -2078,102 +2047,122 @@ readingPoolExercise({
   id: "e14-1-ce-email",
   readingText: E14_1_CE_EMAIL_TEXT,
   questionPool: E14_1_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-2",
   readingText: E14_1_CE_EMAIL_2_TEXT,
-  questionPool: E14_1_CE_EMAIL_2_POOL
+  questionPool: E14_1_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-3",
   readingText: E14_1_CE_EMAIL_3_TEXT,
-  questionPool: E14_1_CE_EMAIL_3_POOL
+  questionPool: E14_1_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-4",
   readingText: E14_1_CE_EMAIL_4_TEXT,
-  questionPool: E14_1_CE_EMAIL_4_POOL
+  questionPool: E14_1_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-5",
   readingText: E14_1_CE_EMAIL_5_TEXT,
-  questionPool: E14_1_CE_EMAIL_5_POOL
+  questionPool: E14_1_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-6",
   readingText: E14_1_CE_EMAIL_6_TEXT,
-  questionPool: E14_1_CE_EMAIL_6_POOL
+  questionPool: E14_1_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-7",
   readingText: E14_1_CE_EMAIL_7_TEXT,
-  questionPool: E14_1_CE_EMAIL_7_POOL
+  questionPool: E14_1_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-8",
   readingText: E14_1_CE_EMAIL_8_TEXT,
-  questionPool: E14_1_CE_EMAIL_8_POOL
+  questionPool: E14_1_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-9",
   readingText: E14_1_CE_EMAIL_9_TEXT,
-  questionPool: E14_1_CE_EMAIL_9_POOL
+  questionPool: E14_1_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-10",
   readingText: E14_1_CE_EMAIL_10_TEXT,
-  questionPool: E14_1_CE_EMAIL_10_POOL
+  questionPool: E14_1_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-11",
   readingText: E14_1_CE_EMAIL_11_TEXT,
-  questionPool: E14_1_CE_EMAIL_11_POOL
+  questionPool: E14_1_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-12",
   readingText: E14_1_CE_EMAIL_12_TEXT,
-  questionPool: E14_1_CE_EMAIL_12_POOL
+  questionPool: E14_1_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-13",
   readingText: E14_1_CE_EMAIL_13_TEXT,
-  questionPool: E14_1_CE_EMAIL_13_POOL
+  questionPool: E14_1_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-14",
   readingText: E14_1_CE_EMAIL_14_TEXT,
-  questionPool: E14_1_CE_EMAIL_14_POOL
+  questionPool: E14_1_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-15",
   readingText: E14_1_CE_EMAIL_15_TEXT,
-  questionPool: E14_1_CE_EMAIL_15_POOL
+  questionPool: E14_1_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-16",
   readingText: E14_1_CE_EMAIL_16_TEXT,
-  questionPool: E14_1_CE_EMAIL_16_POOL
+  questionPool: E14_1_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-17",
   readingText: E14_1_CE_EMAIL_17_TEXT,
-  questionPool: E14_1_CE_EMAIL_17_POOL
+  questionPool: E14_1_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-18",
   readingText: E14_1_CE_EMAIL_18_TEXT,
-  questionPool: E14_1_CE_EMAIL_18_POOL
+  questionPool: E14_1_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-19",
   readingText: E14_1_CE_EMAIL_19_TEXT,
-  questionPool: E14_1_CE_EMAIL_19_POOL
+  questionPool: E14_1_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e14-1-ce-email-20",
   readingText: E14_1_CE_EMAIL_20_TEXT,
-  questionPool: E14_1_CE_EMAIL_20_POOL
+  questionPool: E14_1_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
