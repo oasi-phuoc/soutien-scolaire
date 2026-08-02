@@ -77,7 +77,7 @@ export interface PrintExercise {
   forceNewPage?: boolean;
   /**
    * Impression maths : nombre de questions par défaut (pool size).
-   * Affiche les options « Nombre de questions » / « Nombre de colonnes ».
+   * Affiche les options « Questions » / « Colonnes ».
    */
   defaultQuestionCount?: number;
   /** Colonnes par défaut (mise en page actuelle de l'exercice). */
@@ -91,7 +91,7 @@ export interface ExercisePrintSelection {
   included: boolean;
   /** Combien de fois l'exercice est répété (blocs Exercice N distincts). */
   occurrences: number;
-  /** Nombre de questions dans un bloc (pool size). */
+  /** Questions dans un bloc (pool size). */
   questionCount: number;
   /** Colonnes pour répartir les questions (1–3). */
   columns: PrintExerciseColumns;
@@ -1144,7 +1144,7 @@ export function PrintConfigSheet({
                           <>
                             <div className="flex items-center justify-between gap-3">
                               <span className="text-xs text-[var(--color-text-secondary)]">
-                                Nombre de questions
+                                Questions
                               </span>
                               <Counter
                                 value={sel.questionCount}
@@ -1156,7 +1156,7 @@ export function PrintConfigSheet({
                             </div>
                             <div className="flex items-center justify-between gap-3">
                               <span className="text-xs text-[var(--color-text-secondary)]">
-                                Nombre de colonnes
+                                Colonnes
                               </span>
                               <Counter
                                 value={sel.columns}

@@ -656,7 +656,7 @@ export function ImpressionHubClient() {
                               <>
                                 <div className="flex items-center justify-between gap-3">
                                   <span className="text-xs text-[var(--color-text-secondary)]">
-                                    Nombre de questions
+                                    Questions
                                   </span>
                                   <Counter
                                     value={sel.questionCount}
@@ -670,7 +670,7 @@ export function ImpressionHubClient() {
                                 </div>
                                 <div className="flex items-center justify-between gap-3">
                                   <span className="text-xs text-[var(--color-text-secondary)]">
-                                    Nombre de colonnes
+                                    Colonnes
                                   </span>
                                   <Counter
                                     value={sel.columns}
