@@ -17,7 +17,7 @@ export const EXPRESS_E4_2: CommunicationLesson = {
       items: [
         { code: "E4.1", title: "Vêtements", href: "/communication/E4-1" },
         { code: "V10.1", title: "Restaurant", href: "/francais/vocabulaire/v7-restaurant" },
-        { code: "G4.18", title: "Partitifs", href: "/francais/grammaire/a1-gr-l14" }
+        { code: "G4.21", title: "Partitifs", href: "/francais/grammaire/a1-gr-l14" }
       ],
     },
     {
