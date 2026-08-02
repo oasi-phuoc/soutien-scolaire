@@ -32,7 +32,7 @@ export const EXPRESS_E12_1: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "S'occuper de sa santé", black: true, trans: t("S'occuper de sa santé") },
     prereqItems([
-      { code: "G4.23", title: "Le subjonctif", href: "/francais/grammaire/a2-gr-subjonctif" },
+      { code: "G4.25", title: "Le subjonctif", href: "/francais/grammaire/a2-gr-subjonctif" },
     ]),
     {
       type: "plain",
@@ -203,7 +203,7 @@ export const EXPRESS_E12_3: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Manger équilibré", black: true, trans: t("Manger équilibré") },
     prereqItems([
-      { code: "G4.12", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
+      { code: "G4.14", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
     ]),
     {
       type: "plain",
@@ -289,7 +289,7 @@ export const EXPRESS_E12_4: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Vivre en ville", black: true, trans: t("Vivre en ville") },
     prereqItems([
-      { code: "G4.4", title: "Le comparatif", href: "/francais/grammaire/a2-gr-l39" },
+      { code: "G4.6", title: "Le comparatif", href: "/francais/grammaire/a2-gr-l39" },
     ]),
     {
       type: "plain",
@@ -374,7 +374,7 @@ export const EXPRESS_E12_5: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Prendre soin de soi", black: true, trans: t("Taking care of yourself") },
     prereqItems([
-      { code: "G4.12", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
+      { code: "G4.14", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
     ]),
     {
       type: "plain",

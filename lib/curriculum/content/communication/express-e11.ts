@@ -30,7 +30,7 @@ export const EXPRESS_E11_1: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Apprécier la cuisine", black: true, trans: t("Apprécier la cuisine") },
     prereqItems([
-      { code: "G4.11", title: "Les marqueurs de temps", href: "/francais/grammaire/gr-marqueurs-temps-complet" },
+      { code: "G4.13", title: "Les marqueurs de temps", href: "/francais/grammaire/gr-marqueurs-temps-complet" },
     ]),
     {
       type: "plain",
@@ -118,7 +118,7 @@ export const EXPRESS_E11_2: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Pratiquer une activité", black: true, trans: t("Pratiquer une activité") },
     prereqItems([
-      { code: "G4.9", title: "Les pronoms COD et COI", href: "/francais/grammaire/a2-gr-l35" },
+      { code: "G4.11", title: "Les pronoms COD et COI", href: "/francais/grammaire/a2-gr-l35" },
     ]),
     {
       type: "plain",
@@ -203,7 +203,7 @@ export const EXPRESS_E11_3: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Partager ses goûts", black: true, trans: t("Partager ses goûts") },
     prereqItems([
-      { code: "G4.9", title: "Les pronoms COD et COI", href: "/francais/grammaire/a2-gr-l35" },
+      { code: "G4.11", title: "Les pronoms COD et COI", href: "/francais/grammaire/a2-gr-l35" },
     ]),
     {
       type: "plain",
@@ -289,7 +289,7 @@ export const EXPRESS_E11_4: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Passer des vacances", black: true, trans: t("Passer des vacances") },
     prereqItems([
-      { code: "G4.20", title: "L'hypothèse sur le futur", href: "/francais/grammaire/a2-gr-hypothese-futur" },
+      { code: "G4.22", title: "L'hypothèse sur le futur", href: "/francais/grammaire/a2-gr-hypothese-futur" },
     ]),
     {
       type: "plain",
