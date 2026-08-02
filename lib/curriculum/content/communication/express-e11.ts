@@ -13,6 +13,12 @@ import {
   E11_3_CE, E11_3_PO, E11_3_PE,
   E11_4_CE, E11_4_PO, E11_4_PE,
 } from "./express-e11-cpe";
+import {
+  E11_1_CE_EMAIL, E11_1_PE_EMAIL,
+  E11_2_CE_EMAIL, E11_2_PE_EMAIL,
+  E11_3_CE_EMAIL, E11_3_PE_EMAIL,
+  E11_4_CE_EMAIL, E11_4_PE_EMAIL,
+} from "./express-e11-email";
 import type { CommunicationLesson } from "./express-types";
 
 export const EXPRESS_E11_1: CommunicationLesson = lessonFromListening({
@@ -97,8 +103,10 @@ export const EXPRESS_E11_1: CommunicationLesson = lessonFromListening({
   training: E11_1_TRAINING,
   evalAudios: E11_1_EVAL,
   ceExercise: E11_1_CE,
+  ceEmailExercise: E11_1_CE_EMAIL,
   poDialogues: E11_1_PO,
   pePrompts: E11_1_PE,
+  peEmailPrompts: E11_1_PE_EMAIL,
 });
 
 export const EXPRESS_E11_2: CommunicationLesson = lessonFromListening({
@@ -180,8 +188,10 @@ export const EXPRESS_E11_2: CommunicationLesson = lessonFromListening({
   training: E11_2_TRAINING,
   evalAudios: E11_2_EVAL,
   ceExercise: E11_2_CE,
+  ceEmailExercise: E11_2_CE_EMAIL,
   poDialogues: E11_2_PO,
   pePrompts: E11_2_PE,
+  peEmailPrompts: E11_2_PE_EMAIL,
 });
 
 export const EXPRESS_E11_3: CommunicationLesson = lessonFromListening({
@@ -264,8 +274,10 @@ export const EXPRESS_E11_3: CommunicationLesson = lessonFromListening({
   training: E11_3_TRAINING,
   evalAudios: E11_3_EVAL,
   ceExercise: E11_3_CE,
+  ceEmailExercise: E11_3_CE_EMAIL,
   poDialogues: E11_3_PO,
   pePrompts: E11_3_PE,
+  peEmailPrompts: E11_3_PE_EMAIL,
 });
 
 export const EXPRESS_E11_4: CommunicationLesson = lessonFromListening({
@@ -347,8 +359,10 @@ export const EXPRESS_E11_4: CommunicationLesson = lessonFromListening({
   training: E11_4_TRAINING,
   evalAudios: E11_4_EVAL,
   ceExercise: E11_4_CE,
+  ceEmailExercise: E11_4_CE_EMAIL,
   poDialogues: E11_4_PO,
   pePrompts: E11_4_PE,
+  peEmailPrompts: E11_4_PE_EMAIL,
 });
 
 export const EXPRESS_E11_LESSONS: CommunicationLesson[] = [

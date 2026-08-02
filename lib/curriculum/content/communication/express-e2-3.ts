@@ -1,6 +1,7 @@
 import { listeningPoolExercise, type CommunicationLesson } from "./express-types";
 import { E2_3_TRAINING, E2_3_EVAL } from "./express-e2-3-listening";
 import { E2_3_CE, E2_3_PO, E2_3_PE } from "./express-e2-3-cpe";
+import { E2_3_CE_EMAIL, E2_3_PE_EMAIL } from "./express-e2-email";
 import { A1, t } from "./express-lesson-factory";
 
 export const EXPRESS_E2_3: CommunicationLesson = {
@@ -97,6 +98,8 @@ export const EXPRESS_E2_3: CommunicationLesson = {
     }),
   ),
   ceExercise: E2_3_CE,
+  ceEmailExercise: E2_3_CE_EMAIL,
   poDialogues: E2_3_PO,
   pePrompts: E2_3_PE,
+  peEmailPrompts: E2_3_PE_EMAIL,
 };

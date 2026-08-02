@@ -14,6 +14,13 @@ import {
   E13_4_CE, E13_4_PO, E13_4_PE,
   E13_5_CE, E13_5_PO, E13_5_PE,
 } from "./express-e13-cpe";
+import {
+  E13_1_CE_EMAIL, E13_1_PE_EMAIL,
+  E13_2_CE_EMAIL, E13_2_PE_EMAIL,
+  E13_3_CE_EMAIL, E13_3_PE_EMAIL,
+  E13_4_CE_EMAIL, E13_4_PE_EMAIL,
+  E13_5_CE_EMAIL, E13_5_PE_EMAIL,
+} from "./express-e13-email";
 import type { CommunicationLesson } from "./express-types";
 
 export const EXPRESS_E13_1: CommunicationLesson = lessonFromListening({
@@ -95,8 +102,10 @@ export const EXPRESS_E13_1: CommunicationLesson = lessonFromListening({
   training: E13_1_TRAINING,
   evalAudios: E13_1_EVAL,
   ceExercise: E13_1_CE,
+  ceEmailExercise: E13_1_CE_EMAIL,
   poDialogues: E13_1_PO,
   pePrompts: E13_1_PE,
+  peEmailPrompts: E13_1_PE_EMAIL,
 });
 
 export const EXPRESS_E13_2: CommunicationLesson = lessonFromListening({
@@ -178,8 +187,10 @@ export const EXPRESS_E13_2: CommunicationLesson = lessonFromListening({
   training: E13_2_TRAINING,
   evalAudios: E13_2_EVAL,
   ceExercise: E13_2_CE,
+  ceEmailExercise: E13_2_CE_EMAIL,
   poDialogues: E13_2_PO,
   pePrompts: E13_2_PE,
+  peEmailPrompts: E13_2_PE_EMAIL,
 });
 
 export const EXPRESS_E13_3: CommunicationLesson = lessonFromListening({
@@ -261,8 +272,10 @@ export const EXPRESS_E13_3: CommunicationLesson = lessonFromListening({
   training: E13_3_TRAINING,
   evalAudios: E13_3_EVAL,
   ceExercise: E13_3_CE,
+  ceEmailExercise: E13_3_CE_EMAIL,
   poDialogues: E13_3_PO,
   pePrompts: E13_3_PE,
+  peEmailPrompts: E13_3_PE_EMAIL,
 });
 
 export const EXPRESS_E13_4: CommunicationLesson = lessonFromListening({
@@ -346,8 +359,10 @@ export const EXPRESS_E13_4: CommunicationLesson = lessonFromListening({
   training: E13_4_TRAINING,
   evalAudios: E13_4_EVAL,
   ceExercise: E13_4_CE,
+  ceEmailExercise: E13_4_CE_EMAIL,
   poDialogues: E13_4_PO,
   pePrompts: E13_4_PE,
+  peEmailPrompts: E13_4_PE_EMAIL,
 });
 
 export const EXPRESS_E13_5: CommunicationLesson = lessonFromListening({
@@ -429,8 +444,10 @@ export const EXPRESS_E13_5: CommunicationLesson = lessonFromListening({
   training: E13_5_TRAINING,
   evalAudios: E13_5_EVAL,
   ceExercise: E13_5_CE,
+  ceEmailExercise: E13_5_CE_EMAIL,
   poDialogues: E13_5_PO,
   pePrompts: E13_5_PE,
+  peEmailPrompts: E13_5_PE_EMAIL,
 });
 
 export const EXPRESS_E13_LESSONS: CommunicationLesson[] = [
