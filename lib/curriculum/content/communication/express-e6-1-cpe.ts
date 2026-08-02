@@ -10,9 +10,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E6.1 Demander son chemin ──────────────────────── */
 
-const CE_TEXT = `Office du tourisme — Se déplacer en ville
+/* ── Compréhension écrite — E6.1 Demander son chemin ── */
+
+const E6_1_CE_TEXT_1 = `Office du tourisme — Se déplacer en ville
 
 Bienvenue ! Pour visiter la ville, prenez les transports publics.
 Le bus 14 passe par la mairie et le musée.
@@ -26,8 +27,8 @@ Un carnet de dix tickets coûte 15 euros.
 Vous préférez le vélo ? Il y a des vélos en libre-service au centre-ville.
 N'oubliez pas de valider votre ticket dans le bus !`;
 
-const CE_POOL = buildExpressPool("e6-1-ce", [
-  q({
+const E6_1_CE_POOL_1 = buildExpressPool("e6-1-ce-1", [
+q({
     id: "ce-q1",
     textQ: "Quel bus passe par la mairie et le musée ?",
     text: ["Le 14", "Le 4", "Le 30"],
@@ -120,20 +121,2019 @@ const CE_POOL = buildExpressPool("e6-1-ce", [
   }),
 ]);
 
-export const E6_1_CE: CommunicationExercise = readingPoolExercise({
-  id: "e6-1-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const E6_1_CE_TEXT_2 = `Plan de la ville — Trouver la mairie
 
-/* ── Production orale — dialogues à jouer (thème demander son chemin) ─────── */
+La mairie est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La mairie est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Mairie ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_2 = buildExpressPool("e6-1-ce-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la mairie ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La mairie est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La mairie est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Mairie »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Mairie ».",
+    fill: "Mairie",
+    vfQ: "L'arrêt s'appelle Mairie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_3 = `Plan de la ville — Trouver la poste
+
+La poste est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La poste est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Poste ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_3 = buildExpressPool("e6-1-ce-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la poste ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La poste est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La poste est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Poste »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Poste ».",
+    fill: "Poste",
+    vfQ: "L'arrêt s'appelle Poste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_4 = `Plan de la ville — Trouver la gare
+
+La gare est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La gare est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Gare ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_4 = buildExpressPool("e6-1-ce-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la gare ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La gare est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La gare est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Gare »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Gare ».",
+    fill: "Gare",
+    vfQ: "L'arrêt s'appelle Gare.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_5 = `Plan de la ville — Trouver la musée
+
+La musée est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La musée est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Musée ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_5 = buildExpressPool("e6-1-ce-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la musée ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La musée est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La musée est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Musée »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Musée ».",
+    fill: "Musée",
+    vfQ: "L'arrêt s'appelle Musée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_6 = `Plan de la ville — Trouver la parc
+
+La parc est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La parc est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Parc ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_6 = buildExpressPool("e6-1-ce-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la parc ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La parc est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La parc est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Parc »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Parc ».",
+    fill: "Parc",
+    vfQ: "L'arrêt s'appelle Parc.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_7 = `Plan de la ville — Trouver la bibliothèque
+
+La bibliothèque est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La bibliothèque est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Bibliothèque ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_7 = buildExpressPool("e6-1-ce-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la bibliothèque ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La bibliothèque est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La bibliothèque est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Bibliothèque »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Bibliothèque ».",
+    fill: "Bibliothèque",
+    vfQ: "L'arrêt s'appelle Bibliothèque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_8 = `Plan de la ville — Trouver la piscine
+
+La piscine est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La piscine est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Piscine ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_8 = buildExpressPool("e6-1-ce-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la piscine ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La piscine est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La piscine est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Piscine »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Piscine ».",
+    fill: "Piscine",
+    vfQ: "L'arrêt s'appelle Piscine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_9 = `Plan de la ville — Trouver la hôpital
+
+La hôpital est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La hôpital est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Hôpital ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_9 = buildExpressPool("e6-1-ce-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la hôpital ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La hôpital est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La hôpital est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Hôpital »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Hôpital ».",
+    fill: "Hôpital",
+    vfQ: "L'arrêt s'appelle Hôpital.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_10 = `Plan de la ville — Trouver la école
+
+La école est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La école est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « École ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_10 = buildExpressPool("e6-1-ce-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la école ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La école est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La école est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « École »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « École ».",
+    fill: "École",
+    vfQ: "L'arrêt s'appelle École.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_11 = `Plan de la ville — Trouver la marché
+
+La marché est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La marché est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Marché ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_11 = buildExpressPool("e6-1-ce-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la marché ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La marché est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La marché est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Marché »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Marché ».",
+    fill: "Marché",
+    vfQ: "L'arrêt s'appelle Marché.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_12 = `Plan de la ville — Trouver la banque
+
+La banque est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La banque est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Banque ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_12 = buildExpressPool("e6-1-ce-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la banque ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La banque est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La banque est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Banque »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Banque ».",
+    fill: "Banque",
+    vfQ: "L'arrêt s'appelle Banque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_13 = `Plan de la ville — Trouver la église
+
+La église est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La église est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Église ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_13 = buildExpressPool("e6-1-ce-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la église ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La église est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La église est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Église »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Église ».",
+    fill: "Église",
+    vfQ: "L'arrêt s'appelle Église.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_14 = `Plan de la ville — Trouver la stade
+
+La stade est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La stade est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Stade ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_14 = buildExpressPool("e6-1-ce-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la stade ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La stade est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La stade est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Stade »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Stade ».",
+    fill: "Stade",
+    vfQ: "L'arrêt s'appelle Stade.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_15 = `Plan de la ville — Trouver la cinéma
+
+La cinéma est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La cinéma est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Cinéma ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_15 = buildExpressPool("e6-1-ce-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la cinéma ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La cinéma est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La cinéma est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Cinéma »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Cinéma ».",
+    fill: "Cinéma",
+    vfQ: "L'arrêt s'appelle Cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_16 = `Plan de la ville — Trouver la restaurant
+
+La restaurant est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La restaurant est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Restaurant ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_16 = buildExpressPool("e6-1-ce-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la restaurant ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La restaurant est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La restaurant est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Restaurant »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Restaurant ».",
+    fill: "Restaurant",
+    vfQ: "L'arrêt s'appelle Restaurant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_17 = `Plan de la ville — Trouver la pharmacie
+
+La pharmacie est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La pharmacie est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Pharmacie ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_17 = buildExpressPool("e6-1-ce-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la pharmacie ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La pharmacie est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La pharmacie est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Pharmacie »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Pharmacie ».",
+    fill: "Pharmacie",
+    vfQ: "L'arrêt s'appelle Pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_18 = `Plan de la ville — Trouver la supermarché
+
+La supermarché est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La supermarché est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Supermarché ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_18 = buildExpressPool("e6-1-ce-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la supermarché ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La supermarché est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La supermarché est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Supermarché »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Supermarché ».",
+    fill: "Supermarché",
+    vfQ: "L'arrêt s'appelle Supermarché.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_19 = `Plan de la ville — Trouver la office du tourisme
+
+La office du tourisme est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La office du tourisme est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Office du tourisme ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_19 = buildExpressPool("e6-1-ce-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la office du tourisme ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La office du tourisme est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La office du tourisme est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Office du tourisme »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Office du tourisme ».",
+    fill: "Office du tourisme",
+    vfQ: "L'arrêt s'appelle Office du tourisme.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+const E6_1_CE_TEXT_20 = `Plan de la ville — Trouver la arrêt de bus
+
+La arrêt de bus est au centre-ville.
+Pour y aller à pied : prenez la rue du Lac, tout droit pendant cinq minutes.
+Tournez à gauche au feu rouge. La arrêt de bus est à droite.
+En bus : prenez le bus numéro 3 ou le bus 7.
+Descendez à l'arrêt « Arrêt de bus ».
+Le bus passe toutes les dix minutes, de 6 h à 22 h.
+À vélo : il y a une piste cyclable le long de la rivière.
+C'est gratuit et rapide.`;
+
+const E6_1_CE_POOL_20 = buildExpressPool("e6-1-ce-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est la arrêt de bus ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La arrêt de bus est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "La arrêt de bus est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Que faire au feu rouge ?",
+    text: ["Tourner à gauche", "Tourner à droite", "Continuer tout droit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Tournez à _________ au feu rouge.",
+    fill: "gauche",
+    vfQ: "Il faut tourner à gauche au feu rouge.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels bus prendre ?",
+    text: ["Le 3 ou le 7", "Le 1 seulement", "Le 99"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Prenez le bus numéro 3 ou le bus _________.",
+    fill: "7",
+    vfQ: "Les bus 3 et 7 passent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où descendre du bus ?",
+    text: ["À l'arrêt « Arrêt de bus »", "Au premier arrêt", "À la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Descendez à l'arrêt « Arrêt de bus ».",
+    fill: "Arrêt de bus",
+    vfQ: "L'arrêt s'appelle Arrêt de bus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle fréquence passe le bus ?",
+    text: ["Toutes les dix minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le bus passe toutes les _________ minutes.",
+    fill: "dix",
+    fillA: ["10"],
+    vfQ: "Le bus passe toutes les dix minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment aller à vélo ?",
+    text: ["Par la piste cyclable", "Sur l'autoroute", "Dans le parc interdit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il y a une piste _________ le long de la rivière.",
+    fill: "cyclable",
+    vfQ: "On peut aller à vélo par la piste cyclable.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le trajet à vélo est-il payant ?",
+    text: ["Non, c'est gratuit", "Oui, 5 francs", "Oui, 20 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est _________ et rapide.",
+    fill: "gratuit",
+    vfQ: "Le trajet à vélo est gratuit.",
+    vfC: 0,
+  }),
+]);
+
+export const E6_1_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e6-1-ce-1",
+    readingText: E6_1_CE_TEXT_1,
+    questionPool: E6_1_CE_POOL_1,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-2",
+    readingText: E6_1_CE_TEXT_2,
+    questionPool: E6_1_CE_POOL_2,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-3",
+    readingText: E6_1_CE_TEXT_3,
+    questionPool: E6_1_CE_POOL_3,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-4",
+    readingText: E6_1_CE_TEXT_4,
+    questionPool: E6_1_CE_POOL_4,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-5",
+    readingText: E6_1_CE_TEXT_5,
+    questionPool: E6_1_CE_POOL_5,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-6",
+    readingText: E6_1_CE_TEXT_6,
+    questionPool: E6_1_CE_POOL_6,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-7",
+    readingText: E6_1_CE_TEXT_7,
+    questionPool: E6_1_CE_POOL_7,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-8",
+    readingText: E6_1_CE_TEXT_8,
+    questionPool: E6_1_CE_POOL_8,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-9",
+    readingText: E6_1_CE_TEXT_9,
+    questionPool: E6_1_CE_POOL_9,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-10",
+    readingText: E6_1_CE_TEXT_10,
+    questionPool: E6_1_CE_POOL_10,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-11",
+    readingText: E6_1_CE_TEXT_11,
+    questionPool: E6_1_CE_POOL_11,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-12",
+    readingText: E6_1_CE_TEXT_12,
+    questionPool: E6_1_CE_POOL_12,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-13",
+    readingText: E6_1_CE_TEXT_13,
+    questionPool: E6_1_CE_POOL_13,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-14",
+    readingText: E6_1_CE_TEXT_14,
+    questionPool: E6_1_CE_POOL_14,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-15",
+    readingText: E6_1_CE_TEXT_15,
+    questionPool: E6_1_CE_POOL_15,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-16",
+    readingText: E6_1_CE_TEXT_16,
+    questionPool: E6_1_CE_POOL_16,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-17",
+    readingText: E6_1_CE_TEXT_17,
+    questionPool: E6_1_CE_POOL_17,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-18",
+    readingText: E6_1_CE_TEXT_18,
+    questionPool: E6_1_CE_POOL_18,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-19",
+    readingText: E6_1_CE_TEXT_19,
+    questionPool: E6_1_CE_POOL_19,
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-20",
+    readingText: E6_1_CE_TEXT_20,
+    questionPool: E6_1_CE_POOL_20,
+  }),
+];
+
+/* ── Production orale — dialogues à jouer ──────────────────────────────────── */
+
 
 const TOURISTE = { title: "Le touriste", vous: "le touriste / la touriste" };
 const PASSANT = { title: "Le passant", vous: "le passant / la passante" };
 const EMPLOYE = { title: "L'employé", vous: "l'employé / l'employée" };
 
+
 export const E6_1_PO: ExpressPoDialogue[] = [
-  {
+{
     id: "e6-1-po-1",
     title: "Trouver la poste",
     context: "Vous êtes dans une nouvelle ville et vous cherchez la poste.",
@@ -323,7 +2323,198 @@ export const E6_1_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+  {
+    id: "e6-1-po-11",
+    title: "Trouver la bibliothèque",
+    context: "Vous cherchez la bibliothèque.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "Le passant", vous: "le passant / la passante" },
+    lines: [
+      { role: "A", text: "Excusez-moi, la bibliothèque, c'est où ?" },
+      { role: "B", text: "Tout droit, puis à gauche après l'église." },
+      { role: "A", text: "C'est loin ?" },
+      { role: "B", text: "Non, cinq minutes à pied." },
+      { role: "A", text: "Merci ! Et le bus ?" },
+      { role: "B", text: "Le bus 5, arrêt Bibliothèque." },
+      { role: "A", text: "Parfait, merci beaucoup !" },
+      { role: "B", text: "De rien, bonne journée !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-12",
+    title: "Aller à la piscine",
+    context: "Vous demandez le chemin de la piscine.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "Le passant", vous: "le passant / la passante" },
+    lines: [
+      { role: "A", text: "Bonjour, la piscine, s'il vous plaît ?" },
+      { role: "B", text: "Prenez la rue des Fleurs jusqu'au bout." },
+      { role: "A", text: "Puis ?" },
+      { role: "B", text: "Tournez à droite. C'est la grande piscine bleue." },
+      { role: "A", text: "C'est ouvert aujourd'hui ?" },
+      { role: "B", text: "Oui, de 10 h à 20 h." },
+      { role: "A", text: "Merci infiniment !" },
+      { role: "B", text: "Je vous en prie." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-13",
+    title: "Quel métro ?",
+    context: "Vous voulez aller au centre.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "L'employé", vous: "l'employé / l'employée" },
+    lines: [
+      { role: "A", text: "Bonjour, pour aller au centre ?" },
+      { role: "B", text: "Prenez le métro ligne 1." },
+      { role: "A", text: "Où ?" },
+      { role: "B", text: "Direction Nord, trois stations." },
+      { role: "A", text: "Je change ?" },
+      { role: "B", text: "Non, c'est direct." },
+      { role: "A", text: "Merci beaucoup !" },
+      { role: "B", text: "Bonne journée !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-14",
+    title: "Perdu près de la gare",
+    context: "Vous ne trouvez pas votre hôtel.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "L'employé", vous: "l'employé / l'employée" },
+    lines: [
+      { role: "A", text: "Excusez-moi, l'Hôtel du Lac ?" },
+      { role: "B", text: "Sortez de la gare, tournez à droite." },
+      { role: "A", text: "C'est loin ?" },
+      { role: "B", text: "Non, deux minutes." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "L'hôtel est en face du parc." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-15",
+    title: "À vélo",
+    context: "Vous louez un vélo.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le touriste", vous: "le touriste / la touriste" },
+    lines: [
+      { role: "A", text: "Bonjour, un vélo pour deux heures ?" },
+      { role: "B", text: "Oui, voici. Suivez la piste bleue." },
+      { role: "A", text: "Où va la piste ?" },
+      { role: "B", text: "Le long de la rivière, jusqu'au parc." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Bonne balade !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-16",
+    title: "Le marché",
+    context: "Vous cherchez le marché.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "Le passant", vous: "le passant / la passante" },
+    lines: [
+      { role: "A", text: "Le marché, c'est par où ?" },
+      { role: "B", text: "Place du Marché, derrière l'église." },
+      { role: "A", text: "C'est quel jour ?" },
+      { role: "B", text: "Mardi et samedi matin." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "De rien !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-17",
+    title: "Dernier bus",
+    context: "Vous voulez savoir l'heure du dernier bus.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "L'employé", vous: "l'employé / l'employée" },
+    lines: [
+      { role: "A", text: "Le dernier bus pour le centre ?" },
+      { role: "B", text: "À 23 h 15." },
+      { role: "A", text: "Et le premier ?" },
+      { role: "B", text: "À 5 h 30." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Bonne soirée !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-18",
+    title: "Plan de ville",
+    context: "Vous êtes à l'office du tourisme.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le touriste", vous: "le touriste / la touriste" },
+    lines: [
+      { role: "A", text: "Bonjour, un plan de la ville ?" },
+      { role: "B", text: "Oui, voici. C'est gratuit." },
+      { role: "A", text: "Où est le musée ?" },
+      { role: "B", text: "Regardez ici, rue des Arts." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Bonne visite !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-19",
+    title: "Taxi ou bus",
+    context: "Vous hésitez entre taxi et bus.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "On prend le bus ?" },
+      { role: "B", text: "Oui, c'est moins cher." },
+      { role: "A", text: "C'est combien ?" },
+      { role: "B", text: "Trois francs par personne." },
+      { role: "A", text: "D'accord !" },
+      { role: "B", text: "L'arrêt est là-bas." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-1-po-20",
+    title: "Chemin pour un ami",
+    context: "Votre ami ne trouve pas votre maison.",
+    roleA: { title: "Le touriste", vous: "le touriste / la touriste" },
+    roleB: { title: "L'ami", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Je suis perdu !" },
+      { role: "B", text: "Tu es où ?" },
+      { role: "A", text: "Devant la boulangerie." },
+      { role: "B", text: "Tourne à droite, maison numéro 12." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Je t'attends !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
 ];
+
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
 
@@ -331,7 +2522,7 @@ const PE_MIN = 50;
 const PE_MAX = 120;
 
 export const E6_1_PE: ExpressPePrompt[] = [
-  {
+{
     id: "e6-1-pe-1",
     title: "Le chemin jusqu'à chez vous",
     situation: "Un ami vient chez vous pour la première fois samedi.",
@@ -420,5 +2611,95 @@ export const E6_1_PE: ExpressPePrompt[] = [
     points: ["Deux ou trois lieux du quartier", "Où ils se trouvent", "Comment y aller"],
     minWords: PE_MIN,
     maxWords: PE_MAX,
+  },
+  {
+    id: "e6-1-pe-11",
+    title: "Chemin vers le stade",
+    situation: "Un ami veut aller au stade.",
+    instruction: "Expliquez le chemin : à pied, en bus ou à vélo.",
+    points: ["À pied", "En bus", "Conseil"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-12",
+    title: "Mon trajet quotidien",
+    situation: "Décrivez votre trajet maison-travail.",
+    instruction: "Expliquez comment vous allez au travail chaque jour.",
+    points: ["Le départ", "Le transport", "La durée"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-13",
+    title: "Inviter chez soi",
+    situation: "Vous invitez un collègue.",
+    instruction: "Donnez l'adresse et le chemin depuis la gare.",
+    points: ["L'adresse", "Depuis la gare", "L'heure"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-14",
+    title: "Comparer bus et métro",
+    situation: "Vous expliquez les transports.",
+    instruction: "Comparez le bus et le métro pour aller au centre.",
+    points: ["Le bus", "Le métro", "Votre conseil"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-15",
+    title: "Perdu en ville",
+    situation: "Vous vous êtes perdu.",
+    instruction: "Racontez comment vous avez demandé votre chemin et ce qu'on vous a dit.",
+    points: ["Où vous étiez", "Qui vous a aidé", "Le chemin"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-16",
+    title: "Le quartier",
+    situation: "Un nouveau voisin arrive.",
+    instruction: "Décrivez le quartier : commerces, transports, lieux importants.",
+    points: ["Commerces", "Transports", "Lieux"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-17",
+    title: "Aller à l'école",
+    situation: "Expliquez le chemin de l'école.",
+    instruction: "Décrivez le trajet depuis votre maison.",
+    points: ["Le départ", "Le chemin", "Le temps"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-18",
+    title: "Week-end en ville",
+    situation: "Vous proposez une balade.",
+    instruction: "Proposez un itinéraire pour visiter trois lieux.",
+    points: ["Lieu 1", "Lieu 2", "Lieu 3"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-19",
+    title: "Application de transport",
+    situation: "Vous utilisez une application.",
+    instruction: "Expliquez comment acheter un billet sur l'application.",
+    points: ["L'application", "Les étapes", "Le prix"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pe-20",
+    title: "Conseils à un touriste",
+    situation: "Un touriste demande des conseils.",
+    instruction: "Donnez des conseils pour se déplacer dans votre ville.",
+    points: ["Transports", "À éviter", "Astuce"],
+    minWords: 50,
+    maxWords: 120,
   },
 ];

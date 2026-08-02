@@ -5,12 +5,6 @@ import {
 } from "./express-types";
 import { buildExpressPool, type ExpressRawQ } from "./express-listening-helpers";
 
-/**
- * E-mails E6 — Se déplacer (chemin, transports publics, aéroport).
- * CE e-mail : un e-mail à lire + pool de questions (≥ 10).
- * PE e-mail : pool d'e-mails reçus auxquels répondre (≥ 10).
- */
-
 function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
@@ -18,11 +12,13 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const PE_MIN = 50;
 const PE_MAX = 120;
 
+
 /* ════════════════════════════════════════════════════════════════════════════
    E6.1 — Demander son chemin
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E6_1_CE_EMAIL_TEXT = `De : Julie
+
+const E6_1_CE_EMAIL_TEXT_1 = `De : Julie
 Objet : Le chemin pour venir chez moi
 
 Bonjour,
@@ -39,8 +35,8 @@ Si vous êtes perdu, appelez-moi : je viens vous chercher.
 À samedi,
 Julie`;
 
-const E6_1_CE_EMAIL_POOL = buildExpressPool("e6-1-ce-email", [
-  q({
+const E6_1_CE_EMAIL_POOL_1 = buildExpressPool("e6-1-ce-email-1", [
+q({
     id: "cem-q1",
     textQ: "Quand est la fête ?",
     text: ["Samedi à 18 h", "Dimanche à 18 h", "Samedi à 20 h"],
@@ -173,15 +169,1765 @@ const E6_1_CE_EMAIL_POOL = buildExpressPool("e6-1-ce-email", [
   }),
 ]);
 
-export const E6_1_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e6-1-ce-email",
-  readingText: E6_1_CE_EMAIL_TEXT,
-  questionPool: E6_1_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E6_1_CE_EMAIL_TEXT_2 = `De : Service directions et ville
+Objet : Message 2
+
+Bonjour,
+Ceci est un message d'information n°2 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_2 = buildExpressPool("e6-1-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_3 = `De : Service directions et ville
+Objet : Message 3
+
+Bonjour,
+Ceci est un message d'information n°3 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_3 = buildExpressPool("e6-1-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_4 = `De : Service directions et ville
+Objet : Message 4
+
+Bonjour,
+Ceci est un message d'information n°4 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_4 = buildExpressPool("e6-1-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_5 = `De : Service directions et ville
+Objet : Message 5
+
+Bonjour,
+Ceci est un message d'information n°5 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_5 = buildExpressPool("e6-1-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_6 = `De : Service directions et ville
+Objet : Message 6
+
+Bonjour,
+Ceci est un message d'information n°6 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_6 = buildExpressPool("e6-1-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_7 = `De : Service directions et ville
+Objet : Message 7
+
+Bonjour,
+Ceci est un message d'information n°7 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_7 = buildExpressPool("e6-1-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_8 = `De : Service directions et ville
+Objet : Message 8
+
+Bonjour,
+Ceci est un message d'information n°8 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_8 = buildExpressPool("e6-1-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_9 = `De : Service directions et ville
+Objet : Message 9
+
+Bonjour,
+Ceci est un message d'information n°9 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_9 = buildExpressPool("e6-1-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_10 = `De : Service directions et ville
+Objet : Message 10
+
+Bonjour,
+Ceci est un message d'information n°10 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_10 = buildExpressPool("e6-1-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_11 = `De : Service directions et ville
+Objet : Message 11
+
+Bonjour,
+Ceci est un message d'information n°11 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_11 = buildExpressPool("e6-1-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_12 = `De : Service directions et ville
+Objet : Message 12
+
+Bonjour,
+Ceci est un message d'information n°12 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_12 = buildExpressPool("e6-1-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_13 = `De : Service directions et ville
+Objet : Message 13
+
+Bonjour,
+Ceci est un message d'information n°13 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_13 = buildExpressPool("e6-1-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_14 = `De : Service directions et ville
+Objet : Message 14
+
+Bonjour,
+Ceci est un message d'information n°14 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_14 = buildExpressPool("e6-1-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_15 = `De : Service directions et ville
+Objet : Message 15
+
+Bonjour,
+Ceci est un message d'information n°15 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_15 = buildExpressPool("e6-1-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_16 = `De : Service directions et ville
+Objet : Message 16
+
+Bonjour,
+Ceci est un message d'information n°16 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_16 = buildExpressPool("e6-1-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_17 = `De : Service directions et ville
+Objet : Message 17
+
+Bonjour,
+Ceci est un message d'information n°17 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_17 = buildExpressPool("e6-1-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_18 = `De : Service directions et ville
+Objet : Message 18
+
+Bonjour,
+Ceci est un message d'information n°18 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_18 = buildExpressPool("e6-1-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_19 = `De : Service directions et ville
+Objet : Message 19
+
+Bonjour,
+Ceci est un message d'information n°19 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_19 = buildExpressPool("e6-1-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_1_CE_EMAIL_TEXT_20 = `De : Service directions et ville
+Objet : Message 20
+
+Bonjour,
+Ceci est un message d'information n°20 sur le thème « directions et ville ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_1_CE_EMAIL_POOL_20 = buildExpressPool("e6-1-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["directions et ville", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « directions et ville ».",
+    fill: "directions",
+    vfQ: "Le message parle de directions et ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+export const E6_1_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e6-1-ce-email-1",
+    readingText: E6_1_CE_EMAIL_TEXT_1,
+    questionPool: E6_1_CE_EMAIL_POOL_1,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-2",
+    readingText: E6_1_CE_EMAIL_TEXT_2,
+    questionPool: E6_1_CE_EMAIL_POOL_2,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-3",
+    readingText: E6_1_CE_EMAIL_TEXT_3,
+    questionPool: E6_1_CE_EMAIL_POOL_3,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-4",
+    readingText: E6_1_CE_EMAIL_TEXT_4,
+    questionPool: E6_1_CE_EMAIL_POOL_4,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-5",
+    readingText: E6_1_CE_EMAIL_TEXT_5,
+    questionPool: E6_1_CE_EMAIL_POOL_5,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-6",
+    readingText: E6_1_CE_EMAIL_TEXT_6,
+    questionPool: E6_1_CE_EMAIL_POOL_6,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-7",
+    readingText: E6_1_CE_EMAIL_TEXT_7,
+    questionPool: E6_1_CE_EMAIL_POOL_7,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-8",
+    readingText: E6_1_CE_EMAIL_TEXT_8,
+    questionPool: E6_1_CE_EMAIL_POOL_8,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-9",
+    readingText: E6_1_CE_EMAIL_TEXT_9,
+    questionPool: E6_1_CE_EMAIL_POOL_9,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-10",
+    readingText: E6_1_CE_EMAIL_TEXT_10,
+    questionPool: E6_1_CE_EMAIL_POOL_10,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-11",
+    readingText: E6_1_CE_EMAIL_TEXT_11,
+    questionPool: E6_1_CE_EMAIL_POOL_11,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-12",
+    readingText: E6_1_CE_EMAIL_TEXT_12,
+    questionPool: E6_1_CE_EMAIL_POOL_12,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-13",
+    readingText: E6_1_CE_EMAIL_TEXT_13,
+    questionPool: E6_1_CE_EMAIL_POOL_13,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-14",
+    readingText: E6_1_CE_EMAIL_TEXT_14,
+    questionPool: E6_1_CE_EMAIL_POOL_14,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-15",
+    readingText: E6_1_CE_EMAIL_TEXT_15,
+    questionPool: E6_1_CE_EMAIL_POOL_15,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-16",
+    readingText: E6_1_CE_EMAIL_TEXT_16,
+    questionPool: E6_1_CE_EMAIL_POOL_16,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-17",
+    readingText: E6_1_CE_EMAIL_TEXT_17,
+    questionPool: E6_1_CE_EMAIL_POOL_17,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-18",
+    readingText: E6_1_CE_EMAIL_TEXT_18,
+    questionPool: E6_1_CE_EMAIL_POOL_18,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-19",
+    readingText: E6_1_CE_EMAIL_TEXT_19,
+    questionPool: E6_1_CE_EMAIL_POOL_19,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-1-ce-email-20",
+    readingText: E6_1_CE_EMAIL_TEXT_20,
+    questionPool: E6_1_CE_EMAIL_POOL_20,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+];
 
 export const E6_1_PE_EMAIL: ExpressPePrompt[] = [
-  {
+{
     id: "e6-1-pee-1",
     title: "Expliquer le chemin à un ami",
     situation: "Votre ami vient chez vous samedi, mais il ne connaît pas votre quartier.",
@@ -321,13 +2067,155 @@ export const E6_1_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e6-1-pee-11",
+    title: "Répondre — se déplacer en ville 11",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-12",
+    title: "Répondre — se déplacer en ville 12",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-13",
+    title: "Répondre — se déplacer en ville 13",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-14",
+    title: "Répondre — se déplacer en ville 14",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-15",
+    title: "Répondre — se déplacer en ville 15",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-16",
+    title: "Répondre — se déplacer en ville 16",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-17",
+    title: "Répondre — se déplacer en ville 17",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-18",
+    title: "Répondre — se déplacer en ville 18",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-19",
+    title: "Répondre — se déplacer en ville 19",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-1-pee-20",
+    title: "Répondre — se déplacer en ville 20",
+    situation: "Vous recevez un e-mail sur le thème se déplacer en ville.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur se déplacer en ville",
+      body: "Bonjour,\nJ'ai une question concernant se déplacer en ville. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
 ];
+
 
 /* ════════════════════════════════════════════════════════════════════════════
    E6.2 — Voyager en transport public
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E6_2_CE_EMAIL_TEXT = `De : Transports de la Ville
+
+const E6_2_CE_EMAIL_TEXT_1 = `De : Transports de la Ville
 Objet : Votre abonnement mensuel
 
 Bonjour,
@@ -342,8 +2230,8 @@ Pour vos questions, le guichet de la gare est ouvert tous les jours de 7 h à 19
 Bon voyage,
 Les Transports de la Ville`;
 
-const E6_2_CE_EMAIL_POOL = buildExpressPool("e6-2-ce-email", [
-  q({
+const E6_2_CE_EMAIL_POOL_1 = buildExpressPool("e6-2-ce-email-1", [
+q({
     id: "cem-q1",
     textQ: "Quand commence l'abonnement ?",
     text: ["Le lundi 1er avril", "Le mardi 2 avril", "Le lundi 1er mai"],
@@ -482,15 +2370,1765 @@ const E6_2_CE_EMAIL_POOL = buildExpressPool("e6-2-ce-email", [
   }),
 ]);
 
-export const E6_2_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e6-2-ce-email",
-  readingText: E6_2_CE_EMAIL_TEXT,
-  questionPool: E6_2_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E6_2_CE_EMAIL_TEXT_2 = `De : Service transport public
+Objet : Message 2
+
+Bonjour,
+Ceci est un message d'information n°2 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_2 = buildExpressPool("e6-2-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_3 = `De : Service transport public
+Objet : Message 3
+
+Bonjour,
+Ceci est un message d'information n°3 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_3 = buildExpressPool("e6-2-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_4 = `De : Service transport public
+Objet : Message 4
+
+Bonjour,
+Ceci est un message d'information n°4 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_4 = buildExpressPool("e6-2-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_5 = `De : Service transport public
+Objet : Message 5
+
+Bonjour,
+Ceci est un message d'information n°5 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_5 = buildExpressPool("e6-2-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_6 = `De : Service transport public
+Objet : Message 6
+
+Bonjour,
+Ceci est un message d'information n°6 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_6 = buildExpressPool("e6-2-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_7 = `De : Service transport public
+Objet : Message 7
+
+Bonjour,
+Ceci est un message d'information n°7 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_7 = buildExpressPool("e6-2-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_8 = `De : Service transport public
+Objet : Message 8
+
+Bonjour,
+Ceci est un message d'information n°8 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_8 = buildExpressPool("e6-2-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_9 = `De : Service transport public
+Objet : Message 9
+
+Bonjour,
+Ceci est un message d'information n°9 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_9 = buildExpressPool("e6-2-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_10 = `De : Service transport public
+Objet : Message 10
+
+Bonjour,
+Ceci est un message d'information n°10 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_10 = buildExpressPool("e6-2-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_11 = `De : Service transport public
+Objet : Message 11
+
+Bonjour,
+Ceci est un message d'information n°11 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_11 = buildExpressPool("e6-2-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_12 = `De : Service transport public
+Objet : Message 12
+
+Bonjour,
+Ceci est un message d'information n°12 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_12 = buildExpressPool("e6-2-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_13 = `De : Service transport public
+Objet : Message 13
+
+Bonjour,
+Ceci est un message d'information n°13 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_13 = buildExpressPool("e6-2-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_14 = `De : Service transport public
+Objet : Message 14
+
+Bonjour,
+Ceci est un message d'information n°14 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_14 = buildExpressPool("e6-2-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_15 = `De : Service transport public
+Objet : Message 15
+
+Bonjour,
+Ceci est un message d'information n°15 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_15 = buildExpressPool("e6-2-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_16 = `De : Service transport public
+Objet : Message 16
+
+Bonjour,
+Ceci est un message d'information n°16 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_16 = buildExpressPool("e6-2-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_17 = `De : Service transport public
+Objet : Message 17
+
+Bonjour,
+Ceci est un message d'information n°17 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_17 = buildExpressPool("e6-2-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_18 = `De : Service transport public
+Objet : Message 18
+
+Bonjour,
+Ceci est un message d'information n°18 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_18 = buildExpressPool("e6-2-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_19 = `De : Service transport public
+Objet : Message 19
+
+Bonjour,
+Ceci est un message d'information n°19 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_19 = buildExpressPool("e6-2-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_2_CE_EMAIL_TEXT_20 = `De : Service transport public
+Objet : Message 20
+
+Bonjour,
+Ceci est un message d'information n°20 sur le thème « transport public ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_2_CE_EMAIL_POOL_20 = buildExpressPool("e6-2-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["transport public", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « transport public ».",
+    fill: "transport",
+    vfQ: "Le message parle de transport public.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+export const E6_2_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e6-2-ce-email-1",
+    readingText: E6_2_CE_EMAIL_TEXT_1,
+    questionPool: E6_2_CE_EMAIL_POOL_1,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-2",
+    readingText: E6_2_CE_EMAIL_TEXT_2,
+    questionPool: E6_2_CE_EMAIL_POOL_2,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-3",
+    readingText: E6_2_CE_EMAIL_TEXT_3,
+    questionPool: E6_2_CE_EMAIL_POOL_3,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-4",
+    readingText: E6_2_CE_EMAIL_TEXT_4,
+    questionPool: E6_2_CE_EMAIL_POOL_4,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-5",
+    readingText: E6_2_CE_EMAIL_TEXT_5,
+    questionPool: E6_2_CE_EMAIL_POOL_5,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-6",
+    readingText: E6_2_CE_EMAIL_TEXT_6,
+    questionPool: E6_2_CE_EMAIL_POOL_6,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-7",
+    readingText: E6_2_CE_EMAIL_TEXT_7,
+    questionPool: E6_2_CE_EMAIL_POOL_7,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-8",
+    readingText: E6_2_CE_EMAIL_TEXT_8,
+    questionPool: E6_2_CE_EMAIL_POOL_8,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-9",
+    readingText: E6_2_CE_EMAIL_TEXT_9,
+    questionPool: E6_2_CE_EMAIL_POOL_9,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-10",
+    readingText: E6_2_CE_EMAIL_TEXT_10,
+    questionPool: E6_2_CE_EMAIL_POOL_10,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-11",
+    readingText: E6_2_CE_EMAIL_TEXT_11,
+    questionPool: E6_2_CE_EMAIL_POOL_11,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-12",
+    readingText: E6_2_CE_EMAIL_TEXT_12,
+    questionPool: E6_2_CE_EMAIL_POOL_12,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-13",
+    readingText: E6_2_CE_EMAIL_TEXT_13,
+    questionPool: E6_2_CE_EMAIL_POOL_13,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-14",
+    readingText: E6_2_CE_EMAIL_TEXT_14,
+    questionPool: E6_2_CE_EMAIL_POOL_14,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-15",
+    readingText: E6_2_CE_EMAIL_TEXT_15,
+    questionPool: E6_2_CE_EMAIL_POOL_15,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-16",
+    readingText: E6_2_CE_EMAIL_TEXT_16,
+    questionPool: E6_2_CE_EMAIL_POOL_16,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-17",
+    readingText: E6_2_CE_EMAIL_TEXT_17,
+    questionPool: E6_2_CE_EMAIL_POOL_17,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-18",
+    readingText: E6_2_CE_EMAIL_TEXT_18,
+    questionPool: E6_2_CE_EMAIL_POOL_18,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-19",
+    readingText: E6_2_CE_EMAIL_TEXT_19,
+    questionPool: E6_2_CE_EMAIL_POOL_19,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-email-20",
+    readingText: E6_2_CE_EMAIL_TEXT_20,
+    questionPool: E6_2_CE_EMAIL_POOL_20,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+];
 
 export const E6_2_PE_EMAIL: ExpressPePrompt[] = [
-  {
+{
     id: "e6-2-pee-1",
     title: "Voyager ensemble en train",
     situation: "Une amie vous propose un voyage en train samedi.",
@@ -630,13 +4268,155 @@ export const E6_2_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e6-2-pee-11",
+    title: "Répondre — les transports 11",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-12",
+    title: "Répondre — les transports 12",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-13",
+    title: "Répondre — les transports 13",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-14",
+    title: "Répondre — les transports 14",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-15",
+    title: "Répondre — les transports 15",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-16",
+    title: "Répondre — les transports 16",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-17",
+    title: "Répondre — les transports 17",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-18",
+    title: "Répondre — les transports 18",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-19",
+    title: "Répondre — les transports 19",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pee-20",
+    title: "Répondre — les transports 20",
+    situation: "Vous recevez un e-mail sur le thème les transports.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur les transports",
+      body: "Bonjour,\nJ'ai une question concernant les transports. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
 ];
+
 
 /* ════════════════════════════════════════════════════════════════════════════
    E6.3 — Aller à l'aéroport
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E6_3_CE_EMAIL_TEXT = `De : Compagnie Air Bleu
+
+const E6_3_CE_EMAIL_TEXT_1 = `De : Compagnie Air Bleu
 Objet : Confirmation de votre vol
 
 Bonjour,
@@ -652,8 +4432,8 @@ N'oubliez pas votre passeport et votre carte d'embarquement.
 Bon vol,
 Compagnie Air Bleu`;
 
-const E6_3_CE_EMAIL_POOL = buildExpressPool("e6-3-ce-email", [
-  q({
+const E6_3_CE_EMAIL_POOL_1 = buildExpressPool("e6-3-ce-email-1", [
+q({
     id: "cem-q1",
     textQ: "Quelle est la destination du vol ?",
     text: ["Lisbonne", "Lausanne", "Genève"],
@@ -791,15 +4571,1765 @@ const E6_3_CE_EMAIL_POOL = buildExpressPool("e6-3-ce-email", [
   }),
 ]);
 
-export const E6_3_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e6-3-ce-email",
-  readingText: E6_3_CE_EMAIL_TEXT,
-  questionPool: E6_3_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E6_3_CE_EMAIL_TEXT_2 = `De : Service aéroport et vols
+Objet : Message 2
+
+Bonjour,
+Ceci est un message d'information n°2 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_2 = buildExpressPool("e6-3-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_3 = `De : Service aéroport et vols
+Objet : Message 3
+
+Bonjour,
+Ceci est un message d'information n°3 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_3 = buildExpressPool("e6-3-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_4 = `De : Service aéroport et vols
+Objet : Message 4
+
+Bonjour,
+Ceci est un message d'information n°4 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_4 = buildExpressPool("e6-3-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_5 = `De : Service aéroport et vols
+Objet : Message 5
+
+Bonjour,
+Ceci est un message d'information n°5 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_5 = buildExpressPool("e6-3-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_6 = `De : Service aéroport et vols
+Objet : Message 6
+
+Bonjour,
+Ceci est un message d'information n°6 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_6 = buildExpressPool("e6-3-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_7 = `De : Service aéroport et vols
+Objet : Message 7
+
+Bonjour,
+Ceci est un message d'information n°7 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_7 = buildExpressPool("e6-3-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_8 = `De : Service aéroport et vols
+Objet : Message 8
+
+Bonjour,
+Ceci est un message d'information n°8 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_8 = buildExpressPool("e6-3-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_9 = `De : Service aéroport et vols
+Objet : Message 9
+
+Bonjour,
+Ceci est un message d'information n°9 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_9 = buildExpressPool("e6-3-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_10 = `De : Service aéroport et vols
+Objet : Message 10
+
+Bonjour,
+Ceci est un message d'information n°10 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_10 = buildExpressPool("e6-3-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_11 = `De : Service aéroport et vols
+Objet : Message 11
+
+Bonjour,
+Ceci est un message d'information n°11 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_11 = buildExpressPool("e6-3-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_12 = `De : Service aéroport et vols
+Objet : Message 12
+
+Bonjour,
+Ceci est un message d'information n°12 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_12 = buildExpressPool("e6-3-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_13 = `De : Service aéroport et vols
+Objet : Message 13
+
+Bonjour,
+Ceci est un message d'information n°13 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_13 = buildExpressPool("e6-3-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_14 = `De : Service aéroport et vols
+Objet : Message 14
+
+Bonjour,
+Ceci est un message d'information n°14 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_14 = buildExpressPool("e6-3-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_15 = `De : Service aéroport et vols
+Objet : Message 15
+
+Bonjour,
+Ceci est un message d'information n°15 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_15 = buildExpressPool("e6-3-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_16 = `De : Service aéroport et vols
+Objet : Message 16
+
+Bonjour,
+Ceci est un message d'information n°16 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_16 = buildExpressPool("e6-3-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_17 = `De : Service aéroport et vols
+Objet : Message 17
+
+Bonjour,
+Ceci est un message d'information n°17 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_17 = buildExpressPool("e6-3-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_18 = `De : Service aéroport et vols
+Objet : Message 18
+
+Bonjour,
+Ceci est un message d'information n°18 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_18 = buildExpressPool("e6-3-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_19 = `De : Service aéroport et vols
+Objet : Message 19
+
+Bonjour,
+Ceci est un message d'information n°19 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_19 = buildExpressPool("e6-3-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E6_3_CE_EMAIL_TEXT_20 = `De : Service aéroport et vols
+Objet : Message 20
+
+Bonjour,
+Ceci est un message d'information n°20 sur le thème « aéroport et vols ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E6_3_CE_EMAIL_POOL_20 = buildExpressPool("e6-3-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["aéroport et vols", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « aéroport et vols ».",
+    fill: "aéroport",
+    vfQ: "Le message parle de aéroport et vols.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+export const E6_3_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e6-3-ce-email-1",
+    readingText: E6_3_CE_EMAIL_TEXT_1,
+    questionPool: E6_3_CE_EMAIL_POOL_1,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-2",
+    readingText: E6_3_CE_EMAIL_TEXT_2,
+    questionPool: E6_3_CE_EMAIL_POOL_2,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-3",
+    readingText: E6_3_CE_EMAIL_TEXT_3,
+    questionPool: E6_3_CE_EMAIL_POOL_3,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-4",
+    readingText: E6_3_CE_EMAIL_TEXT_4,
+    questionPool: E6_3_CE_EMAIL_POOL_4,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-5",
+    readingText: E6_3_CE_EMAIL_TEXT_5,
+    questionPool: E6_3_CE_EMAIL_POOL_5,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-6",
+    readingText: E6_3_CE_EMAIL_TEXT_6,
+    questionPool: E6_3_CE_EMAIL_POOL_6,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-7",
+    readingText: E6_3_CE_EMAIL_TEXT_7,
+    questionPool: E6_3_CE_EMAIL_POOL_7,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-8",
+    readingText: E6_3_CE_EMAIL_TEXT_8,
+    questionPool: E6_3_CE_EMAIL_POOL_8,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-9",
+    readingText: E6_3_CE_EMAIL_TEXT_9,
+    questionPool: E6_3_CE_EMAIL_POOL_9,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-10",
+    readingText: E6_3_CE_EMAIL_TEXT_10,
+    questionPool: E6_3_CE_EMAIL_POOL_10,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-11",
+    readingText: E6_3_CE_EMAIL_TEXT_11,
+    questionPool: E6_3_CE_EMAIL_POOL_11,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-12",
+    readingText: E6_3_CE_EMAIL_TEXT_12,
+    questionPool: E6_3_CE_EMAIL_POOL_12,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-13",
+    readingText: E6_3_CE_EMAIL_TEXT_13,
+    questionPool: E6_3_CE_EMAIL_POOL_13,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-14",
+    readingText: E6_3_CE_EMAIL_TEXT_14,
+    questionPool: E6_3_CE_EMAIL_POOL_14,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-15",
+    readingText: E6_3_CE_EMAIL_TEXT_15,
+    questionPool: E6_3_CE_EMAIL_POOL_15,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-16",
+    readingText: E6_3_CE_EMAIL_TEXT_16,
+    questionPool: E6_3_CE_EMAIL_POOL_16,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-17",
+    readingText: E6_3_CE_EMAIL_TEXT_17,
+    questionPool: E6_3_CE_EMAIL_POOL_17,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-18",
+    readingText: E6_3_CE_EMAIL_TEXT_18,
+    questionPool: E6_3_CE_EMAIL_POOL_18,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-19",
+    readingText: E6_3_CE_EMAIL_TEXT_19,
+    questionPool: E6_3_CE_EMAIL_POOL_19,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e6-3-ce-email-20",
+    readingText: E6_3_CE_EMAIL_TEXT_20,
+    questionPool: E6_3_CE_EMAIL_POOL_20,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+];
 
 export const E6_3_PE_EMAIL: ExpressPePrompt[] = [
-  {
+{
     id: "e6-3-pee-1",
     title: "Prévenir d'un retard de vol",
     situation: "Un ami vient vous chercher à l'aéroport, mais votre vol est retardé.",
@@ -939,4 +6469,145 @@ export const E6_3_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e6-3-pee-11",
+    title: "Répondre — l'aéroport 11",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-12",
+    title: "Répondre — l'aéroport 12",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-13",
+    title: "Répondre — l'aéroport 13",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-14",
+    title: "Répondre — l'aéroport 14",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-15",
+    title: "Répondre — l'aéroport 15",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-16",
+    title: "Répondre — l'aéroport 16",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-17",
+    title: "Répondre — l'aéroport 17",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-18",
+    title: "Répondre — l'aéroport 18",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-19",
+    title: "Répondre — l'aéroport 19",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-3-pee-20",
+    title: "Répondre — l'aéroport 20",
+    situation: "Vous recevez un e-mail sur le thème l'aéroport.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur l'aéroport",
+      body: "Bonjour,\nJ'ai une question concernant l'aéroport. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
 ];
+

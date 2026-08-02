@@ -10,9 +10,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E6.2 Voyager en transport public ──────────────── */
 
-const CE_TEXT = `Objet : Notre voyage à Marseille
+/* ── Compréhension écrite — E6.2 Voyager en transport public ── */
+
+const E6_2_CE_TEXT_1 = `Objet : Notre voyage à Marseille
 
 Salut Karim !
 
@@ -27,8 +28,8 @@ N'oublie pas ton billet !
 À samedi,
 Julie`;
 
-const CE_POOL = buildExpressPool("e6-2-ce", [
-  q({
+const E6_2_CE_POOL_1 = buildExpressPool("e6-2-ce-1", [
+q({
     id: "ce-q1",
     textQ: "Quel train Julie et Karim prennent-ils ?",
     text: ["Le TGV de 8 h 10", "Le TER de 8 h 10", "Le TGV de 10 h 08"],
@@ -129,19 +130,2018 @@ const CE_POOL = buildExpressPool("e6-2-ce", [
   }),
 ]);
 
-export const E6_2_CE: CommunicationExercise = readingPoolExercise({
-  id: "e6-2-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const E6_2_CE_TEXT_2 = `Gare de Lausanne — Information voyageurs n°1
 
-/* ── Production orale — dialogues à jouer (thème transport public) ────────── */
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_2 = buildExpressPool("e6-2-ce-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_3 = `Gare de Lausanne — Information voyageurs n°2
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_3 = buildExpressPool("e6-2-ce-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_4 = `Gare de Lausanne — Information voyageurs n°3
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_4 = buildExpressPool("e6-2-ce-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_5 = `Gare de Lausanne — Information voyageurs n°4
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_5 = buildExpressPool("e6-2-ce-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_6 = `Gare de Lausanne — Information voyageurs n°5
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_6 = buildExpressPool("e6-2-ce-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_7 = `Gare de Lausanne — Information voyageurs n°6
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_7 = buildExpressPool("e6-2-ce-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_8 = `Gare de Lausanne — Information voyageurs n°7
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_8 = buildExpressPool("e6-2-ce-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_9 = `Gare de Lausanne — Information voyageurs n°8
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_9 = buildExpressPool("e6-2-ce-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_10 = `Gare de Lausanne — Information voyageurs n°9
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_10 = buildExpressPool("e6-2-ce-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_11 = `Gare de Lausanne — Information voyageurs n°10
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_11 = buildExpressPool("e6-2-ce-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_12 = `Gare de Lausanne — Information voyageurs n°11
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_12 = buildExpressPool("e6-2-ce-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_13 = `Gare de Lausanne — Information voyageurs n°12
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_13 = buildExpressPool("e6-2-ce-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_14 = `Gare de Lausanne — Information voyageurs n°13
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_14 = buildExpressPool("e6-2-ce-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_15 = `Gare de Lausanne — Information voyageurs n°14
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_15 = buildExpressPool("e6-2-ce-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_16 = `Gare de Lausanne — Information voyageurs n°15
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_16 = buildExpressPool("e6-2-ce-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_17 = `Gare de Lausanne — Information voyageurs n°16
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_17 = buildExpressPool("e6-2-ce-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_18 = `Gare de Lausanne — Information voyageurs n°17
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_18 = buildExpressPool("e6-2-ce-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_19 = `Gare de Lausanne — Information voyageurs n°18
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_19 = buildExpressPool("e6-2-ce-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const E6_2_CE_TEXT_20 = `Gare de Lausanne — Information voyageurs n°19
+
+Le train pour Genève part toutes les 30 minutes.
+Le premier train part à 5 h 15, le dernier à 23 h 45.
+Un billet coûte 28 francs en 2e classe.
+Réservez sur l'application ou au guichet.
+Le quai 4 est pour les trains vers Genève.
+Présentez-vous 5 minutes avant le départ.
+Les bagages volumineux sont interdits dans le TER.`;
+
+const E6_2_CE_POOL_20 = buildExpressPool("e6-2-ce-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Pour quelle destination ?",
+    text: ["Genève", "Zurich", "Paris"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train va vers _________.",
+    fill: "Genève",
+    vfQ: "Le train va à Genève.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle fréquence ?",
+    text: ["Toutes les 30 minutes", "Toutes les heures", "Une fois par jour"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le train part toutes les _________ minutes.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "Le train part toutes les 30 minutes.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Prix du billet ?",
+    text: ["28 francs", "10 francs", "50 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un billet coûte _________ francs.",
+    fill: "28",
+    fillA: ["vingt-huit"],
+    vfQ: "Le billet coûte 28 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quel quai ?",
+    text: ["Le quai 4", "Le quai 1", "Le quai 9"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le quai _________ est pour Genève.",
+    fill: "4",
+    vfQ: "C'est le quai 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien de temps avant le départ ?",
+    text: ["5 minutes", "30 minutes", "1 heure"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Présentez-vous _________ minutes avant.",
+    fill: "5",
+    fillA: ["cinq"],
+    vfQ: "Il faut arriver 5 minutes avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Peut-on prendre de gros bagages ?",
+    text: ["Non dans le TER", "Oui, toujours", "Seulement le dimanche"],
+    textC: 0,
+    img: ["train", "avion", "bus"],
+    imgC: 0,
+    fillQ: "Les bagages volumineux sont _________ dans le TER.",
+    fill: "interdits",
+    vfQ: "Les gros bagages sont interdits.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Heure du dernier train ?",
+    text: ["23 h 45", "20 h", "Minuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le dernier train part à _________ h 45.",
+    fill: "23",
+    vfQ: "Le dernier train est à 23 h 45.",
+    vfC: 0,
+  }),
+]);
+
+export const E6_2_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e6-2-ce-1",
+    readingText: E6_2_CE_TEXT_1,
+    questionPool: E6_2_CE_POOL_1,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-2",
+    readingText: E6_2_CE_TEXT_2,
+    questionPool: E6_2_CE_POOL_2,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-3",
+    readingText: E6_2_CE_TEXT_3,
+    questionPool: E6_2_CE_POOL_3,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-4",
+    readingText: E6_2_CE_TEXT_4,
+    questionPool: E6_2_CE_POOL_4,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-5",
+    readingText: E6_2_CE_TEXT_5,
+    questionPool: E6_2_CE_POOL_5,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-6",
+    readingText: E6_2_CE_TEXT_6,
+    questionPool: E6_2_CE_POOL_6,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-7",
+    readingText: E6_2_CE_TEXT_7,
+    questionPool: E6_2_CE_POOL_7,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-8",
+    readingText: E6_2_CE_TEXT_8,
+    questionPool: E6_2_CE_POOL_8,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-9",
+    readingText: E6_2_CE_TEXT_9,
+    questionPool: E6_2_CE_POOL_9,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-10",
+    readingText: E6_2_CE_TEXT_10,
+    questionPool: E6_2_CE_POOL_10,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-11",
+    readingText: E6_2_CE_TEXT_11,
+    questionPool: E6_2_CE_POOL_11,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-12",
+    readingText: E6_2_CE_TEXT_12,
+    questionPool: E6_2_CE_POOL_12,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-13",
+    readingText: E6_2_CE_TEXT_13,
+    questionPool: E6_2_CE_POOL_13,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-14",
+    readingText: E6_2_CE_TEXT_14,
+    questionPool: E6_2_CE_POOL_14,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-15",
+    readingText: E6_2_CE_TEXT_15,
+    questionPool: E6_2_CE_POOL_15,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-16",
+    readingText: E6_2_CE_TEXT_16,
+    questionPool: E6_2_CE_POOL_16,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-17",
+    readingText: E6_2_CE_TEXT_17,
+    questionPool: E6_2_CE_POOL_17,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-18",
+    readingText: E6_2_CE_TEXT_18,
+    questionPool: E6_2_CE_POOL_18,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-19",
+    readingText: E6_2_CE_TEXT_19,
+    questionPool: E6_2_CE_POOL_19,
+  }),
+  readingPoolExercise({
+    id: "e6-2-ce-20",
+    readingText: E6_2_CE_TEXT_20,
+    questionPool: E6_2_CE_POOL_20,
+  }),
+];
+
+/* ── Production orale — dialogues à jouer ──────────────────────────────────── */
+
 
 const EMPLOYE = { title: "L'employé", vous: "l'employé / l'employée" };
 const VOYAGEUR = { title: "Le voyageur", vous: "le voyageur / la voyageuse" };
 
+
 export const E6_2_PO: ExpressPoDialogue[] = [
-  {
+{
     id: "e6-2-po-1",
     title: "Acheter un billet au guichet",
     context: "Vous achetez un billet de train au guichet de la gare.",
@@ -331,7 +2331,198 @@ export const E6_2_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Merci, vous aussi !" },
 ],
   },
+  {
+    id: "e6-2-po-11",
+    title: "Billet aller-retour",
+    context: "Vous achetez un billet.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "Bonjour, un billet pour Berne ?" },
+      { role: "B", text: "Aller simple ou aller-retour ?" },
+      { role: "A", text: "Aller-retour, s'il vous plaît." },
+      { role: "B", text: "Ça fait 45 francs." },
+      { role: "A", text: "Je paie par carte." },
+      { role: "B", text: "Voici votre billet. Bon voyage !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-12",
+    title: "Train manqué",
+    context: "Vous avez raté votre train.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "J'ai raté mon train !" },
+      { role: "B", text: "Le prochain part dans vingt minutes." },
+      { role: "A", text: "Même quai ?" },
+      { role: "B", text: "Non, quai 6 maintenant." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "De rien." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-13",
+    title: "Place fenêtre",
+    context: "Vous voulez une place fenêtre.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "Une place côté fenêtre ?" },
+      { role: "B", text: "Oui, voici en voiture 3." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Bon voyage !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-14",
+    title: "Abonnement",
+    context: "Vous renouvelez votre abonnement.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "Je voudrais renouveler mon abonnement." },
+      { role: "B", text: "Votre carte, s'il vous plaît." },
+      { role: "A", text: "Voici." },
+      { role: "B", text: "C'est 80 francs pour un mois." },
+      { role: "A", text: "Je paie." },
+      { role: "B", text: "Merci, bon voyage !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-15",
+    title: "Grève",
+    context: "Il y a une grève de bus.",
+    roleA: { title: "L'ami", vous: "l'ami / l'amie" },
+    roleB: { title: "L'amie", vous: "l'ami / l'amie" },
+    lines: [
+      { role: "A", text: "Les bus ne passent pas !" },
+      { role: "B", text: "On prend le train ?" },
+      { role: "A", text: "Bonne idée." },
+      { role: "B", text: "Allons à la gare." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-16",
+    title: "Covoiturage",
+    context: "Vous organisez un covoiturage.",
+    roleA: { title: "Le conducteur", vous: "le conducteur" },
+    roleB: { title: "Le passager", vous: "le passager" },
+    lines: [
+      { role: "A", text: "On part à quelle heure ?" },
+      { role: "B", text: "À 8 h devant la gare." },
+      { role: "A", text: "D'accord." },
+      { role: "B", text: "J'apporte des sandwiches." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-17",
+    title: "Retard",
+    context: "Votre train a du retard.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "Mon train est en retard ?" },
+      { role: "B", text: "Oui, trente minutes." },
+      { role: "A", text: "Pourquoi ?" },
+      { role: "B", text: "Travaux sur la voie." },
+      { role: "A", text: "Merci." },
+      { role: "B", text: "Désolé pour l'attente." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-18",
+    title: "Mauvais quai",
+    context: "Vous êtes au mauvais quai.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "Le train pour Fribourg ?" },
+      { role: "B", text: "Quai 2, de l'autre côté." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Dépêchez-vous, il part !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Je vous en prie." },
+      { role: "B", text: "Au revoir !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-19",
+    title: "Premier voyage",
+    context: "C'est votre premier voyage en train.",
+    roleA: { title: "L'employé", vous: "l'employé / l'employée" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "C'est ma première fois." },
+      { role: "B", text: "Pas de stress. Voici votre billet." },
+      { role: "A", text: "Où m'asseoir ?" },
+      { role: "B", text: "N'importe où en 2e classe." },
+      { role: "A", text: "Merci !" },
+      { role: "B", text: "Bon voyage !" },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e6-2-po-20",
+    title: "Ticket invalide",
+    context: "Votre billet n'est pas valable.",
+    roleA: { title: "Le contrôleur", vous: "le contrôleur" },
+    roleB: { title: "Le voyageur", vous: "le voyageur / la voyageuse" },
+    lines: [
+      { role: "A", text: "Votre billet, s'il vous plaît." },
+      { role: "B", text: "Voici." },
+      { role: "A", text: "Il n'est pas composté." },
+      { role: "B", text: "Ah, je ne savais pas !" },
+      { role: "A", text: "Compostez-le à la prochaine gare." },
+      { role: "B", text: "D'accord, désolé." },
+      { role: "A", text: "Très bien." },
+      { role: "B", text: "Merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
 ];
+
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
 
@@ -339,7 +2530,7 @@ const PE_MIN = 50;
 const PE_MAX = 120;
 
 export const E6_2_PE: ExpressPePrompt[] = [
-  {
+{
     id: "e6-2-pe-1",
     title: "Proposer un voyage en train",
     situation: "Vous voulez partir en week-end en train avec un ami.",
@@ -428,5 +2619,95 @@ export const E6_2_PE: ExpressPePrompt[] = [
     points: ["Le transport et pourquoi", "Quand vous le prenez", "Un souvenir de voyage"],
     minWords: PE_MIN,
     maxWords: PE_MAX,
+  },
+  {
+    id: "e6-2-pe-11",
+    title: "Mon voyage en train",
+    situation: "Racontez un voyage récent.",
+    instruction: "Décrivez le trajet, le prix et ce qui s'est passé.",
+    points: ["Le trajet", "Le prix", "L'expérience"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-12",
+    title: "Comparer train et voiture",
+    situation: "Quel transport choisir ?",
+    instruction: "Comparez le train et la voiture pour un voyage.",
+    points: ["Le train", "La voiture", "Conclusion"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-13",
+    title: "Réclamation retard",
+    situation: "Votre train avait 2 heures de retard.",
+    instruction: "Écrivez une réclamation : décrivez le problème et demandez un remboursement.",
+    points: ["Le retard", "Les conséquences", "La demande"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-14",
+    title: "Covoiturage",
+    situation: "Vous proposez un covoiturage.",
+    instruction: "Écrivez un message : destination, heure, prix et conditions.",
+    points: ["Destination", "Horaire", "Prix"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-15",
+    title: "Acheter en ligne",
+    situation: "Expliquez comment acheter un billet.",
+    instruction: "Décrivez les étapes sur l'application.",
+    points: ["Étape 1", "Étape 2", "Conseil"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-16",
+    title: "Grève de transport",
+    situation: "Les transports sont en grève demain.",
+    instruction: "Écrivez à votre chef : expliquez le problème et proposez une solution.",
+    points: ["La grève", "Le problème", "La solution"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-17",
+    title: "Premier TER",
+    situation: "C'est votre premier voyage en TER.",
+    instruction: "Racontez votre expérience : achat du billet, quai, voyage.",
+    points: ["Le billet", "Le quai", "Le voyage"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-18",
+    title: "Objet perdu",
+    situation: "Vous avez perdu quelque chose dans le bus.",
+    instruction: "Écrivez au service : décrivez l'objet et le trajet.",
+    points: ["L'objet", "Le trajet", "Vos coordonnées"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-19",
+    title: "Abonnement mensuel",
+    situation: "Vous voulez un abonnement.",
+    instruction: "Comparez les options et dites laquelle vous choisissez.",
+    points: ["Option 1", "Option 2", "Votre choix"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e6-2-pe-20",
+    title: "Voyage en groupe",
+    situation: "Vous organisez un voyage avec des amis.",
+    instruction: "Proposez un plan : transport, horaire et budget.",
+    points: ["Transport", "Horaire", "Budget"],
+    minWords: 50,
+    maxWords: 120,
   },
 ];
