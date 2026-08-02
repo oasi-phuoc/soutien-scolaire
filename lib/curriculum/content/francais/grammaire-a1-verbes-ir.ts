@@ -18,7 +18,6 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
     {
       type: "heading",
       text: "Modèle finir",
-      trans: { en: "Model: finir", ar: "نموذج finir", fa: "الگوی finir", ti: "ሞዴል finir", uk: "Модель finir" },
     },
     {
       type: "grid",
@@ -49,7 +48,6 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
     {
       type: "heading",
       text: "Modèle ouvrir",
-      trans: { en: "Model: ouvrir", ar: "نموذج ouvrir", fa: "الگوی ouvrir", ti: "ሞዴል ouvrir", uk: "Модель ouvrir" },
     },
     {
       type: "grid",
@@ -73,6 +71,74 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       ],
       allBullets: true,
     },
+
+    {
+      type: "heading",
+      text: "Modèle partir, dormir, servir",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Ces verbes ont deux radicaux : au singulier {a}par- / dor- / ser-{/a} ; au pluriel comme l'infinitif {a}part- / dorm- / serv-{/a}.",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "grid",
+      headers: ["Pronom", "Partir", "Dormir", "Servir"],
+      boldFirstCol: true,
+      rows: [
+        ["Je", "pars", "dors", "sers"],
+        ["Tu", "pars", "dors", "sers"],
+        ["Il / Elle / On", "part", "dort", "sert"],
+        ["Nous", "partons", "dormons", "servons"],
+        ["Vous", "partez", "dormez", "servez"],
+        ["Ils / Elles", "partent", "dorment", "servent"],
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Comme partir : sentir, mentir, sortir…",
+        "Comme dormir : s'endormir…",
+        "Comme servir : resservir…",
+        "On ne prononce pas le s et le t finaux au singulier ; on prononce la consonne du 2e radical au pluriel (il part / ils partent).",
+      ],
+      allBullets: true,
+    },
+
+    {
+      type: "heading",
+      text: "Modèle venir et tenir",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Ces verbes ont trois radicaux, avec des prononciations différentes.",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "grid",
+      headers: ["Pronom", "Venir", "Tenir"],
+      boldFirstCol: true,
+      rows: [
+        ["Je", "viens", "tiens"],
+        ["Tu", "viens", "tiens"],
+        ["Il / Elle / On", "vient", "tient"],
+        ["Nous", "venons", "tenons"],
+        ["Vous", "venez", "tenez"],
+        ["Ils / Elles", "viennent", "tiennent"],
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Comme venir : revenir, prévenir, (se) souvenir…",
+        "Comme tenir : obtenir, appartenir, soutenir, retenir…",
+      ],
+      allBullets: true,
+    },
   ],
   exercises: [
     {
@@ -85,13 +151,18 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         { sentence: "Je ___ le petit-déjeuner.", choices: ["finis", "finit", "finissons", "finissent"], correctIdx: 0 },
         { sentence: "Nous ___ le plat.", choices: ["finissons", "finissez", "finis", "finissent"], correctIdx: 0 },
         { sentence: "Ils ___ le dessert.", choices: ["finissent", "finit", "finis", "finissons"], correctIdx: 0 },
-        { sentence: "Tu ___ le fromage.", choices: ["finis", "finit", "finissez", "finissent"], correctIdx: 0 },
-        { sentence: "Elle ___ le dîner.", choices: ["finit", "finis", "finissons", "finissent"], correctIdx: 0 },
         { sentence: "J'___ la porte.", choices: ["ouvre", "ouvres", "ouvrons", "ouvrez"], correctIdx: 0 },
         { sentence: "Vous ___ le lave-vaisselle.", choices: ["ouvrez", "ouvrons", "ouvre", "ouvrent"], correctIdx: 0 },
-        { sentence: "Ils ___ la machine à laver.", choices: ["ouvrent", "ouvre", "ouvrons", "ouvrez"], correctIdx: 0 },
-        { sentence: "Nous ___ le réfrigérateur.", choices: ["ouvrons", "ouvrez", "ouvre", "ouvrent"], correctIdx: 0 },
-        { sentence: "Tu ___ les fenêtres.", choices: ["ouvres", "ouvre", "ouvrez", "ouvrent"], correctIdx: 0 },
+        { sentence: "Je ___ en vacances.", choices: ["pars", "part", "partons", "partent"], correctIdx: 0 },
+        { sentence: "Nous ___ à l'hôtel.", choices: ["dormons", "dormez", "dors", "dorment"], correctIdx: 0 },
+        { sentence: "Il ___ une pizza.", choices: ["sert", "sers", "servons", "servent"], correctIdx: 0 },
+        { sentence: "Tu ___ en métro.", choices: ["viens", "vient", "venons", "viennent"], correctIdx: 0 },
+        { sentence: "Ils ___ mon sac.", choices: ["tiennent", "tient", "tenons", "tenez"], correctIdx: 0 },
+        { sentence: "Vous ___ ensemble.", choices: ["partez", "partons", "pars", "partent"], correctIdx: 0 },
+        { sentence: "Elle ___ bien.", choices: ["dort", "dors", "dormons", "dorment"], correctIdx: 0 },
+        { sentence: "Nous ___ ensemble.", choices: ["venons", "venez", "viens", "viennent"], correctIdx: 0 },
+        { sentence: "Tu ___ ton passeport.", choices: ["tiens", "tient", "tenons", "tenez"], correctIdx: 0 },
+        { sentence: "Ils ___ lundi.", choices: ["partent", "part", "pars", "partez"], correctIdx: 0 },
       ],
     },
     {
@@ -104,13 +175,18 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         { sentence: "Je ___ (finir) mon travail.", hint: "finir → je", answer: "finis" },
         { sentence: "Vous ___ (finir) le fromage.", hint: "finir → vous", answer: "finissez" },
         { sentence: "Ils ___ (choisir) un dessert.", hint: "choisir → ils", answer: "choisissent" },
-        { sentence: "Elle ___ (réussir) l'examen.", hint: "réussir → elle", answer: "réussit" },
-        { sentence: "Nous ___ (réfléchir) bien.", hint: "réfléchir → nous", answer: "réfléchissons" },
         { sentence: "J'___ (ouvrir) la porte.", hint: "ouvrir → je", answer: "ouvre" },
         { sentence: "Tu ___ (offrir) des fleurs.", hint: "offrir → tu", answer: "offres" },
-        { sentence: "Ils ___ (découvrir) la ville.", hint: "découvrir → ils", answer: "découvrent" },
-        { sentence: "Vous ___ (ouvrir) les fenêtres.", hint: "ouvrir → vous", answer: "ouvrez" },
-        { sentence: "On ___ (finir) le plat.", hint: "finir → on", answer: "finit" },
+        { sentence: "Je ___ (partir) en vacances.", hint: "partir → je", answer: "pars" },
+        { sentence: "Nous ___ (dormir) à l'hôtel.", hint: "dormir → nous", answer: "dormons" },
+        { sentence: "Elle ___ (servir) une pizza.", hint: "servir → elle", answer: "sert" },
+        { sentence: "Tu ___ (venir) seul ?", hint: "venir → tu", answer: "viens" },
+        { sentence: "Ils ___ (tenir) les bagages.", hint: "tenir → ils", answer: "tiennent" },
+        { sentence: "Vous ___ (sortir) ensemble.", hint: "sortir → vous", answer: "sortez" },
+        { sentence: "On ___ (revenir) demain.", hint: "revenir → on", answer: "revient" },
+        { sentence: "Nous ___ (tenir) les visas.", hint: "tenir → nous", answer: "tenons" },
+        { sentence: "Ils ___ (dormir) mal.", hint: "dormir → ils", answer: "dorment" },
+        { sentence: "Je ___ (servir) un café.", hint: "servir → je", answer: "sers" },
       ],
     },
   ],
