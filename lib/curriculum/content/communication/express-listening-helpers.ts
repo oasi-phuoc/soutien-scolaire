@@ -9,7 +9,7 @@ import { buildPool } from "./co-questions-helpers";
 export type ExpressRawQ = RawQ & {
   /** Énoncé vrai/faux — affirmation sur l'audio (pas une question). */
   vfQ?: string;
-  /** 0 = Vrai, 1 = Faux, 2 = On ne sait pas */
+  /** 0 = Oui, 1 = Non, 2 = On ne sait pas */
   vfC?: 0 | 1 | 2;
 };
 
@@ -132,11 +132,11 @@ function multiToExpressTask(
     };
   }
   if (format === "vf") {
-    // Ordre fixe Vrai / Faux / On ne sait pas (style CO placement).
+    // Ordre fixe Oui / Non / On ne sait pas (jamais mélangé).
     return {
       kind: "choice",
       prompt: q.vfQ ?? q.textQ,
-      choices: [{ label: "Vrai" }, { label: "Faux" }, { label: "On ne sait pas" }],
+      choices: [{ label: "Oui" }, { label: "Non" }, { label: "On ne sait pas" }],
       correct: q.vfCorrect ?? 0,
     };
   }

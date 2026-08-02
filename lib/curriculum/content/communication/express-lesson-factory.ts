@@ -51,7 +51,7 @@ export type FixedQ = {
   fillA?: string[];
   /** Affirmation vrai/faux (pas une question). */
   vfQ?: string;
-  /** 0 = Vrai, 1 = Faux, 2 = On ne sait pas */
+  /** 0 = Oui, 1 = Non, 2 = On ne sait pas */
   vfC?: 0 | 1 | 2;
 };
 
