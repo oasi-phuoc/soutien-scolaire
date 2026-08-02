@@ -38,7 +38,7 @@ export const EXPRESS_E1_2: CommunicationLesson = {
         { code: "E1.1", title: "Se présenter", href: "/communication/E1-1" },
         { code: "V1.3", title: "La famille", href: "/francais/vocabulaire/v1-famille" },
         { code: "V1.4", title: "L'état civil", href: "/francais/vocabulaire/v1-etat-civil" },
-        { code: "G3.10", title: "Les adjectifs possessifs", href: "/francais/grammaire/a1-gr-l19" },
+        { code: "G3.6", title: "Les adjectifs possessifs", href: "/francais/grammaire/a1-gr-l19" },
       ],
     },
     {
