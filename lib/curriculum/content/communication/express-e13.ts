@@ -32,7 +32,7 @@ export const EXPRESS_E13_1: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Suivre une formation", black: true, trans: t("Suivre une formation") },
     prereqItems([
-      { code: "G4.46", title: "Les pronoms Y et EN", href: "/francais/grammaire/a2-gr-l36" },
+      { code: "G4.49", title: "Les pronoms Y et EN", href: "/francais/grammaire/a2-gr-l36" },
     ]),
     {
       type: "plain",
@@ -117,7 +117,7 @@ export const EXPRESS_E13_2: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Trouver un stage", black: true, trans: t("Trouver un stage") },
     prereqItems([
-      { code: "G4.43", title: "La négation (2/2)", href: "/francais/grammaire/a2-gr-l42" },
+      { code: "G4.46", title: "La négation (2/2)", href: "/francais/grammaire/a2-gr-l42" },
     ]),
     {
       type: "plain",
@@ -202,7 +202,7 @@ export const EXPRESS_E13_3: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Répondre à une offre d'emploi", black: true, trans: t("Répondre à une offre d'emploi") },
     prereqItems([
-      { code: "G4.48", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
+      { code: "G4.51", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
     ]),
     {
       type: "plain",
@@ -287,7 +287,7 @@ export const EXPRESS_E13_4: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Passer un entretien", black: true, trans: t("Job interview") },
     prereqItems([
-      { code: "G4.36", title: "Les questions fermées", href: "/francais/grammaire/a2-gr-l07" },
+      { code: "G4.39", title: "Les questions fermées", href: "/francais/grammaire/a2-gr-l07" },
     ]),
     {
       type: "plain",
@@ -374,7 +374,7 @@ export const EXPRESS_E13_5: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "S'intégrer à l'entreprise", black: true, trans: t("Settling into a company") },
     prereqItems([
-      { code: "G4.48", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
+      { code: "G4.51", title: "Les relations logiques — Cause et conséquence", href: "/francais/grammaire/a2-gr-l52" },
     ]),
     {
       type: "plain",
