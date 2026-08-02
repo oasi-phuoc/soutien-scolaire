@@ -145,12 +145,15 @@ function FillView({
     <div className="space-y-2">
       <div className="flex flex-wrap items-baseline gap-x-1 gap-y-2 text-sm text-[var(--color-text-primary)]">
         <span>{parts[0]}</span>
-        {correction ? (
-          <span
-            className={`min-w-[6rem] border-b-2 px-1 pb-0.5 font-semibold ${
-              ok ? "border-amber-400 text-amber-700" : "border-red-300 text-red-600"
-            }`}
-          >
+        {correction && !ok ? (
+          <span className="inline-flex min-w-[6rem] flex-col items-center border-0 border-b-2 border-amber-500 px-1 pb-0.5">
+            <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">
+              {inputValue.trim() || "—"}
+            </span>
+            <span className="text-xs font-bold leading-none text-amber-600">{task.answer}</span>
+          </span>
+        ) : correction ? (
+          <span className="min-w-[6rem] border-b-2 border-amber-400 px-1 pb-0.5 font-semibold text-amber-700">
             {shown || "—"}
           </span>
         ) : (
@@ -166,9 +169,6 @@ function FillView({
         )}
         <span>{parts[1] ?? ""}</span>
       </div>
-      {correction && inputValue.trim() && !ok ? (
-        <p className="text-xs text-amber-700">Réponse attendue : {task.answer}</p>
-      ) : null}
     </div>
   );
 }

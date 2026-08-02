@@ -21,7 +21,7 @@ export function buildWritingConsigne(prompt: WritingPrompt): string {
   const source = formatSourceMessage(prompt);
   if (source) lines.push("", "— Message reçu —", source);
   if (prompt.points.length) {
-    lines.push("", "Indiquez :", ...prompt.points.map((point) => `• ${point}`));
+    lines.push("", ...prompt.points.map((point) => `• ${point}`));
   }
   return lines.join("\n").trim();
 }

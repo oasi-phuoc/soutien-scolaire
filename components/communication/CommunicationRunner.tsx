@@ -225,14 +225,15 @@ function WritingExercise({
           </div>
         )}
         <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
-        <p className="mt-3 text-xs font-semibold text-[var(--color-text-secondary)]">Indiquez :</p>
-        <ul className="mt-1 space-y-1">
-          {prompt.points.map((point) => (
-            <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-              <span className="text-[var(--color-accent-fr)]">•</span><span>{point} ;</span>
-            </li>
-          ))}
-        </ul>
+        {prompt.points.length > 0 && (
+          <ul className="mt-3 space-y-1">
+            {prompt.points.map((point) => (
+              <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
+                <span className="text-[var(--color-accent-fr)]">•</span><span>{point} ;</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div>
@@ -1123,15 +1124,13 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     if (phase === "pe") {
+      // Entraînement : on peut valider sans saisir (minimum de mots conseillé seulement).
       if (!pePrompt || exerciseValidated || grammarChecking) return;
-      // Minimum de mots requis (A1 : 50, A2 : 80).
-      if (wordCount(writingText) < pePrompt.minWords) return;
       await runGrammarCheck();
       return;
     }
     if (phase === "peEmail") {
       if (!peEmailPrompt || peEmailChecked || grammarChecking) return;
-      if (wordCount(peEmailText) < peEmailPrompt.minWords) return;
       await runPeEmailGrammarCheck();
       return;
     }
@@ -1204,9 +1203,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     if (phase === "po") {
-      if (!poDone) return;
       if (hasPe) {
         setPhase("pe");
+        return;
+      }
+      if (hasPeEmail) {
+        setPhase("peEmail");
         return;
       }
       if (hasEval) {
@@ -1217,7 +1219,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     if (phase === "pe") {
-      if (!exerciseValidated) return;
       if (hasPeEmail) {
         setPhase("peEmail");
         return;
@@ -1230,7 +1231,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     if (phase === "peEmail") {
-      if (!peEmailChecked) return;
       if (hasEval) {
         setPhase("eval_announce");
         return;
@@ -1275,12 +1275,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     phase === "po" ||
     phase === "pe" ||
     phase === "peEmail";
+  // Entraînement PO / PE / PE e-mail : Suivant libre (pas besoin de valider).
   const nextDisabled =
     (phase === "writing" && !exerciseValidated) ||
     (phase === "form" && !formValidated) ||
-    (phase === "po" && !poDone) ||
-    (phase === "pe" && !exerciseValidated) ||
-    (phase === "peEmail" && !peEmailChecked) ||
     phase === "eval_announce";
   const currentExValidated = activeValidated[activeIndex] ?? false;
 
@@ -1684,11 +1682,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                         : phase === "po"
                           ? poDone
                           : phase === "pe"
-                            ? exerciseValidated ||
-                              wordCount(writingText) < (pePrompt?.minWords ?? 0)
+                            ? exerciseValidated
                             : phase === "peEmail"
-                              ? peEmailChecked ||
-                                wordCount(peEmailText) < (peEmailPrompt?.minWords ?? 0)
+                              ? peEmailChecked
                               : exerciseValidated) || grammarChecking
                   }
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"

@@ -121,8 +121,7 @@ export function ExpressPoDialogueExercise({
       </h2>
       <p className="mb-1 text-sm text-[var(--color-text-secondary)]">
         Jouez le dialogue : vous êtes <strong>{studentTitle.vous}</strong>. Écoutez votre
-        interlocuteur, puis répondez à voix haute (ou au clavier). L&apos;ampoule montre une
-        réplique proposée.
+        interlocuteur, puis répondez à voix haute (ou au clavier).
       </p>
       <div className="mb-4 rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-4 py-3">
         <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
@@ -187,9 +186,8 @@ export function ExpressPoDialogueExercise({
                     onStop={stopListening}
                   />
                 )}
-                <HintButton active={hintOpen} onClick={() => setOpenHint(hintOpen ? null : lineIdx)} />
               </div>
-              {(hintOpen || validated) && (
+              {validated && (
                 <p className="pl-9 text-sm italic text-[var(--color-text-secondary)]">{line.text}</p>
               )}
               {!validated ? (

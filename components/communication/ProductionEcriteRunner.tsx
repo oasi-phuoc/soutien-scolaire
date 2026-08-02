@@ -461,14 +461,15 @@ function WritingExercise({
         <p className="mt-2 w-full text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
         <SourceMessageCard prompt={prompt} />
         <p className="mt-3 w-full text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
-        <p className="mt-3 text-xs font-semibold text-[var(--color-text-secondary)]">Indiquez :</p>
-        <ul className="mt-1 space-y-1">
-          {prompt.points.map((point) => (
-            <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-              <span className="text-[var(--color-accent-fr)]">•</span><span>{point}</span>
-            </li>
-          ))}
-        </ul>
+        {prompt.points.length > 0 && (
+          <ul className="mt-3 space-y-1">
+            {prompt.points.map((point) => (
+              <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
+                <span className="text-[var(--color-accent-fr)]">•</span><span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div>
         <div className="mb-2 flex items-center justify-between gap-3">

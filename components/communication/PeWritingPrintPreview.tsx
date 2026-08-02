@@ -130,15 +130,16 @@ export function PeWritingPrintPrompt({ prompt }: { prompt: WritingPrompt }) {
       <p className="mt-3 w-full text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">
         {prompt.instruction}
       </p>
-      <p className="mt-3 text-xs font-semibold text-[var(--color-text-secondary)]">Indiquez :</p>
-      <ul className="mt-1 space-y-1">
-        {prompt.points.map((point) => (
-          <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-            <span className="text-[var(--color-accent-fr)]">•</span>
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
+      {prompt.points.length > 0 && (
+        <ul className="mt-3 space-y-1">
+          {prompt.points.map((point) => (
+            <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
+              <span className="text-[var(--color-accent-fr)]">•</span>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      )}
       <p className="mt-3 text-xs text-[var(--color-text-secondary)]">
         Minimum conseillé : {prompt.minWords} mots
       </p>
