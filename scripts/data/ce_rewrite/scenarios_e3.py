@@ -1,276 +1,194 @@
 """E3 scenarios — école, quotidien, travail."""
 from generate_all_data import Q
-from scenarios_common import render_email
+
+PROMPTS = {
+    "document": ("Quel type de document est-ce ?", "C'est _________.", ["une facture", "une recette"]),
+    "matière": ("Quelle matière est mentionnée ?", "La matière est _________.", ["la cuisine", "le dessin libre"]),
+    "activité": ("Quelle activité est mentionnée ?", "L'activité est _________.", ["un examen", "dormir"]),
+    "entreprise": ("Quel lieu de travail est mentionné ?", "Le lieu de travail est _________.", ["un musée", "une école vide"]),
+    "profession": ("Quelle est la profession ?", "La profession est _________.", ["serveur", "pompier"]),
+    "heure": ("Quand cela se passe-t-il ?", "C'est _________.", ["à minuit", "en 1990"]),
+    "lieu": ("Où cela se passe-t-il ?", "Le lieu est _________.", ["à la plage", "à l'aéroport"]),
+    "personne": ("Qui est mentionné ?", "La personne est _________.", ["un voisin", "le facteur"]),
+    "action": ("Que faut-il faire ?", "Il faut _________.", ["acheter une voiture", "partir loin"]),
+    "transport": ("Quel transport est mentionné ?", "Le transport est _________.", ["l'avion", "le bateau"]),
+}
+PROFS = ["secrétaire", "infirmier", "serveur", "mécanicien", "pharmacien", "professeur", "vendeur", "boulanger", "réceptionniste", "maçon", "libraire", "coiffeur", "ingénieur", "médecin", "agriculteur", "journaliste", "pompier", "jardinier"]
+
+MSG_PATTERNS = [
+    "{genre}\n\nLe sujet principal est {main}. {person} donne l'information.\nLe moment indiqué est {when}. Le rendez-vous est {place}.\nConsigne : {action}. Détail : {detail}.",
+    '{genre}\n\nPetit message pour {main}.\n{person} propose un rendez-vous {place} {when}.\nAction demandée : {action}.\n{detail}.',
+    '{genre}\n\nÀ noter : {main}.\nOn voit {person} {place}. Le moment choisi est {when}.\nAprès cela, action simple : {action}.\nRappel : Détail : {detail}.',
+    '{genre}\n\nInformation courte. {person} parle de {main}.\nLe lieu change ou se confirme : {place}.\nLe moment est {when}. La consigne reste claire : {action}.\n{detail}.',
+    "{genre}\n\nAujourd'hui, on organise {main}.\nDépart ou début {when}. Le groupe arrive {place}.\n{person} explique la suite. Pendant l'activité : {action}.\n{detail}.",
+    '{genre}\n\nBonjour. Le dossier concerne {main}.\nIl est possible de voir {person} {when}.\nLe point de rendez-vous est {place}.\nPour continuer, action nécessaire : {action}. Détail : {detail}.',
+    '{genre}\n\nMessage pour la famille ou le groupe.\n{main} est prévu {when}, {place}.\n{person} accueille les personnes.\nMerci : {action}. Détail : {detail}.',
+    '{genre}\n\nNotification : changement autour de {main}.\nLa personne à suivre est {person}. Le lieu est {place}.\nLe moment indiqué est {when}. Action demandée : {action}.\n{detail}.',
+    '{genre}\n\nCarte de rendez-vous.\nSujet : {main}. Présence de {person}.\nEntrée ou arrivée {place} {when}.\nAvant le début, consigne : {action}. Détail : {detail}.',
+    "{genre}\n\nRègle simple : attendre {person}.\nLe sujet est {main}. Le groupe arrive {place} {when}.\nPersonne ne commence avant l'action suivante : {action}.\n{detail}.",
+    "{genre}\n\nOrganisation modifiée.\n{person} accompagne le groupe {place}.\nEnsuite, {main} reprend {when}.\nPendant l'attente, action calme : {action}. Détail : {detail}.",
+    "{genre}\n\nBesoin d'aide pour {main} ?\nLa prochaine rencontre est {when}, {place}.\n{person} note les prénoms. Pour participer, action simple : {action}.\n{detail}.",
+    '{genre}\n\nMadame, Monsieur, voici une information sur {main}.\nLa présentation ou le rendez-vous est prévu {when}, {place}.\n{person} confirmera demain. Consigne : {action}.\n{detail}.',
+    "{genre}\n\nAttention, changement pour {main}.\n{person} ne peut pas garder l'organisation habituelle.\nRendez-vous {place} {when}. Le groupe doit {action}.\n{detail}.",
+    '{genre}\n\nBonjour, on cherche deux personnes pour {main}.\nLa rencontre est {place} {when}.\n{person} apporte le matériel. Si tu viens, action demandée : {action}.\n{detail}.',
+    '{genre}\n\nSéance de révision ou de préparation : {main}.\n{person} répond aux questions {when}.\nLe groupe travaille {place}, puis action finale : {action}.\n{detail}.',
+    '{genre}\n\nPetit article. Le sujet {main} avance bien.\n{person} montre un exemple {place}.\n{when}, le groupe compare ses notes. Action finale : {action}.\n{detail}.',
+    '{genre}\n\nBonjour à tous. Pour {main}, on sort ou on se déplace.\nLe rendez-vous est {place} {when}.\n{person} prend la liste. Consigne obligatoire : {action}.\n{detail}.',
+    "{genre}\n\nNouvelle tâche : {main}.\nLa ressource ou l'adresse est {place}. Fin prévue {when}.\n{person} vérifiera ensuite. Pour répondre, action demandée : {action}.\n{detail}.",
+    '{genre}\n\nJournée spéciale autour de {main}.\nLe matin, passage {place} avec {person}.\nLa présentation commence {when}. Chaque groupe doit {action}.\n{detail}.'
+]
+
+EMAIL_PATTERNS = [
+    'De : {person}\nObjet : {main}\n\nBonjour,\n\n{detail}. Le rendez-vous est {when}, {place}.\nConsigne : {action}.\n\nCordialement,\n{person}',
+    'De : Secrétariat\nObjet : Information\n\nBonjour,\n\nNous confirmons {main} {when}.\n{person} accueillera le groupe {place}. Action demandée : {action}.\n\nLe secrétariat',
+    'De : Portail\nObjet : À faire\n\nBonjour,\n\nUne nouvelle consigne est disponible pour {main}.\nOuvrez-la avant {when}; elle concerne {place}.\n{person} demande cette action : {action}. Détail : {detail}.\n\nMessage automatique',
+    'De : {person}\nObjet : Rappel\n\nBonjour à tous,\n\nJe confirme {main}. Le moment est {when}, {place}.\nVenez calmement. Action à prévoir : {action}.\n{detail}.\n\nÀ bientôt',
+    "De : Vie scolaire\nObjet : Organisation\n\nBonjour,\n\nPour {main}, l'entrée se fait autrement.\n{person} attend {place} {when}.\nUne seule consigne : {action}. Détail : {detail}.\n\nVie scolaire",
+    'De : Bibliothèque\nObjet : Document prêt\n\nBonjour,\n\nLe document ou dossier pour {main} est prêt.\nVous pouvez le demander {when}, {place}. {person} connaît votre nom.\nAction à prévoir : {action}.\n\nMerci',
+    "De : Association\nObjet : Invitation\n\nBonjour,\n\nLes familles ou amis sont invités pour {main} {when}.\nLes informations seront visibles {place}. {person} commencera l'accueil.\nConsigne : {action}.\n\nAssociation",
+    'De : Application\nObjet : Notification\n\nBonjour,\n\nUne modification concerne {main}.\nLe rendez-vous est {place} {when}. {person} ajoute : Détail : {detail}.\nAction demandée : {action}.\n\nApplication',
+    "De : Service des examens\nObjet : Convocation\n\nBonjour,\n\nVotre rendez-vous pour {main} est confirmé {when}.\nL'entrée se fait {place}; {person} vérifie la salle.\nAvant le début, consigne : {action}.\n\nService des examens",
+    'De : Laboratoire\nObjet : Sécurité\n\nBonjour,\n\nPour {main}, attendez {person}.\nLe groupe arrive {place} {when}. Détail : {detail}.\nConsigne : {action}.\n\nResponsable',
+    "De : Surveillance\nObjet : Pause\n\nBonjour,\n\n{person} accompagne les personnes {place}.\nAprès la pause, {main} reprend {when}.\nPendant l'attente, action calme : {action}.\n\nBonne journée",
+    'De : Club\nObjet : Inscription\n\nBonjour,\n\nLe club aide pour {main}. Prochaine séance : {when}.\nElle a lieu {place} avec {person}.\nPour participer, action simple : {action}. Détail : {detail}.\n\nClub',
+    'De : {person}\nObjet : Travail\n\nBonjour,\n\nJe rappelle le travail ou rendez-vous de {main}.\nIl est prévu {when}, {place}.\nAvant la séance, consigne : {action}. Détail : {detail}.\n\n{person}',
+    "De : Direction\nObjet : Changement\n\nBonjour,\n\n{main} change d'organisation. {person} accompagne le groupe {place} {when}.\nLa consigne pour tous : {action}.\n{detail}.\n\nDirection",
+    'De : Forum\nObjet : Groupe\n\nBonjour,\n\nUn groupe se forme pour {main}.\nLa rencontre est {when}, {place}. {person} organise les rôles.\nSi vous venez, pensez à {action}.\n\nForum',
+    'De : Tutorats\nObjet : Révision\n\nBonjour,\n\nLa préparation de {main} commence {when}.\nElle se passe {place}. {person} répond aux questions.\nEnsuite, action finale : {action}. Détail : {detail}.\n\nTutorats',
+    'De : Journal\nObjet : Article\n\nBonjour,\n\nNous préparons une brève nouvelle sur {main}.\nLe groupe travaille {when}, {place}. {person} vérifie les noms.\nConsigne : {action}.\n\nJournal',
+    "De : {person}\nObjet : Sortie\n\nBonjour,\n\nPour {main}, le rendez-vous est {place} {when}.\nLa tenue ou préparation doit être simple. Détail : {detail}.\nN'oubliez pas cette action : {action}.\n\n{person}",
+    'De : Portail étudiant\nObjet : Nouveau devoir\n\nBonjour,\n\nUne tâche de {main} est disponible.\nIl faut la faire avant {when}. La ressource se trouve {place}.\n{person} corrigera après. Consigne : {action}.\n\nPortail',
+    'De : Équipe pédagogique\nObjet : Journée spéciale\n\nBonjour,\n\nLa journée autour de {main} aura lieu {when}.\nLe matin, les groupes passent {place} avec {person}.\nEn fin de journée, consigne : {action}. Détail : {detail}.\n\nÉquipe pédagogique'
+]
 
 
 def build_e3_lessons():
     return {
-        "e3-1": {"title": "E3.1 À l'école / à l'université", "messages": _e3_1_messages(), "emails": _e3_1_emails()},
-        "e3-2": {"title": "E3.2 La vie quotidienne", "messages": _e3_2_messages(), "emails": _e3_2_emails()},
-        "e3-3": {"title": "E3.3 Au travail", "messages": _e3_3_messages(), "emails": _e3_3_emails()},
+        "e3-1": {"title": "E3.1 À l'école / à l'université", "messages": _make(SCHOOL, school_facts, False), "emails": _make(SCHOOL_EMAILS, school_facts, True)},
+        "e3-2": {"title": "E3.2 La vie quotidienne", "messages": _make(DAILY, daily_facts, False), "emails": _make(DAILY_EMAILS, daily_facts, True)},
+        "e3-3": {"title": "E3.3 Au travail", "messages": _make(WORK, work_facts, False), "emails": _make(WORK_EMAILS, work_facts, True)},
     }
 
 
-def _school_msg(header, writer, subject, schedule, room, teacher, exam, extra):
-    text = f"""{header}
-
-{writer}
-Matière : {subject}. Horaire : {schedule}.
-Salle : {room}. Professeur : {teacher}.
-{exam}
-{extra}"""
-    return {"text": text, "questions": [
-        Q("Quelle matière ?", subject.capitalize(), "Sport seul", "Cuisine", f"Matière : _________.", subject, f"C'est {subject}.", 0),
-        Q("Quel horaire ?", schedule, "Minuit", "3 h du matin", f"Horaire : _________.", schedule.split()[0], f"Horaire : {schedule}.", 0),
-        Q("Quelle salle ?", room.capitalize(), "Dehors", "À la plage", f"Salle : _________.", room, f"Salle : {room}.", 0),
-        Q("Quel professeur ?", teacher, "Personne", "Un chat", f"Professeur : _________.", teacher, f"Professeur : {teacher}.", 0, prof=True),
-        Q("Y a-t-il un examen ?", exam.split(".")[0].capitalize(), "Non", "Jamais", f"_________ .", exam.split()[0], f"Examen : {exam}.", 0),
-        Q("Quelle information supplémentaire ?", extra.split(".")[0].capitalize(), "Rien", "Un chat", f"_________ .", extra.split()[0], f"Info : {extra}.", 0),
-    ]}
+def _prof_wrongs(answer):
+    return [p for p in PROFS if p != answer][:2]
 
 
-def _e3_1_messages():
-    specs = [
-        ("Affichage école", "École du Lac —", "Mathématiques", "lundi 8 h – 9 h", "salle 12", "M. Dupont", "Examen le 15 mars.", "Apporter calculatrice et règle."),
-        ("SMS groupe classe", "Salut la classe !", "Français", "mardi 10 h – 11 h", "salle 5", "Mme Martin", "Contrôle de lecture vendredi.", "Lire le chapitre 3."),
-        ("Note du professeur", "Chers élèves,", "Histoire", "mercredi 14 h – 15 h", "salle 8", "M. Weber", "Devoir à rendre lundi.", "Préparer un exposé."),
-        ("E-mail étudiant", "Bonjour,", "Anglais", "jeudi 9 h – 10 h 30", "salle 3", "Mme Rossi", "Test oral la semaine prochaine.", "Réviser le vocabulaire."),
-        ("Agenda université", "Faculté de médecine —", "Anatomie", "vendredi 8 h – 12 h", "amphi A", "Dr. Keller", "Examen final en juin.", "Apporter blouse blanche."),
-        ("Message parents", "Chers parents,", "Sciences", "lundi 13 h – 14 h", "labo 2", "Mme Petit", "Sortie au musée jeudi.", "Autorisation parentale obligatoire."),
-        ("Forum étudiants", "Bonjour,", "Informatique", "mardi 15 h – 17 h", "salle info 4", "M. Garcia", "Projet en groupe à rendre.", "Travailler en équipe de 3."),
-        ("WhatsApp cours", "Hey !", "Allemand", "mercredi 11 h – 12 h", "salle 7", "M. Müller", "Dictée vendredi.", "Apprendre les verbes."),
-        ("Annonce bibliothèque", "Bibliothèque scolaire —", "Recherche documentaire", "jeudi 10 h – 11 h", "bibliothèque", "Mme Costa", "Pas d'examen.", "Apporter carte étudiant."),
-        ("Note directeur", "Chers élèves,", "Éducation civique", "vendredi 9 h – 10 h", "salle 1", "M. Blanc", "Débat en classe.", "Préparer ses arguments."),
-        ("SMS rappel", "Rappel !", "Géographie", "lundi 11 h – 12 h", "salle 9", "Mme Hassan", "Carte à rendre mardi.", "Couleurs obligatoires."),
-        ("E-mail prof", "Bonjour Monsieur,", "Physique", "mardi 8 h – 9 h 30", "labo 1", "M. Leroy", "TP mercredi.", "Apporter blouse."),
-        ("Affichage examen", "IMPORTANT —", "Chimie", "mercredi 13 h – 15 h", "labo 3", "Mme Singh", "Examen écrit le 20 avril.", "Réviser chapitres 4 et 5."),
-        ("Message secrétariat", "Secrétariat —", "Orientation", "jeudi 14 h – 15 h", "bureau 2", "Mme Pop", "Pas d'examen.", "Prendre rendez-vous."),
-        ("Groupe WhatsApp fac", "Salut !", "Biologie", "vendredi 10 h – 12 h", "amphi B", "Dr. Martin", "QCM la semaine prochaine.", "Réviser les cours."),
-        ("Note tableau", "Cours annulé —", "Musique", "lundi 15 h – 16 h", "salle musique", "M. Rossi", "Pas de cours lundi.", "Reporté à mardi."),
-        ("E-mail université", "Service scolarité —", "Droit", "mardi 14 h – 16 h", "amphi C", "Prof. Dubois", "Examen partiel en mai.", "Documents autorisés."),
-        ("SMS prof remplaçant", "Bonjour,", "EPS", "mercredi 10 h – 11 h", "gymnase", "M. Antoine", "Pas d'examen.", "Tenue de sport obligatoire."),
-        ("Annonce portail", "Portail étudiant —", "Économie", "jeudi 8 h – 10 h", "salle 15", "Mme Kim", "Devoir en ligne.", "Date limite : vendredi."),
-        ("Message association", "Association étudiante —", "Projet interdisciplinaire", "vendredi 14 h – 17 h", "salle polyvalente", "Équipe pédagogique", "Présentation finale.", "Inviter les familles."),
-    ]
-    return [_school_msg(h, w, s, sch, r, t, e, x) for h, w, s, sch, r, t, e, x in specs]
+def F(kind, answer):
+    q, fill_q, wrongs = PROMPTS[kind]
+    if kind == "profession":
+        wrongs = _prof_wrongs(answer)
+    return Q(q, answer, wrongs[0], wrongs[1], fill_q, answer, f"Le texte mentionne {answer}.", 0, prof=kind == "profession")
 
 
-def _e3_1_emails():
-    emails = []
-    specs = [
-        ("École du Lac", "Rentrée scolaire", "lundi 26 août", "8 h", "cour de l'école", "cahiers et stylos", "M. Dupont"),
-        ("Faculté de médecine", "Horaires de cours", "septembre", "8 h – 17 h", "campus principal", "carte étudiant", "Dr. Keller"),
-        ("M. Martin", "Devoir de français", "vendredi 15 mars", "23 h 59", "plateforme en ligne", "dissertation 300 mots", "Mme Martin"),
-        ("Secrétariat", "Sortie scolaire", "jeudi 20 mars", "8 h 30", "musée d'histoire", "pique-nique", "Mme Petit"),
-        ("Université de Genève", "Examen partiel", "mardi 8 avril", "14 h", "amphi A", "calculatrice", "Prof. Dubois"),
-        ("Bibliothèque", "Horaires vacances", "juillet-août", "9 h – 17 h", "bibliothèque centrale", "carte membre", "Mme Costa"),
-        ("Association parents", "Réunion", "mercredi 3 avril", "19 h", "salle polyvalente", "questions sur le projet", "M. Blanc"),
-        ("Service scolarité", "Inscription", "avant le 30 avril", "en ligne", "portail étudiant", "pièces d'identité", "Mme Singh"),
-        ("M. Weber", "Exposé histoire", "lundi 10 mars", "en classe", "salle 8", "diapositives", "M. Weber"),
-        ("Club sport scolaire", "Entraînement", "mardi et jeudi", "17 h", "gymnase", "tenue de sport", "M. Antoine"),
-        ("Mme Rossi", "Test d'anglais", "vendredi 22 mars", "10 h", "salle 3", "vocabulaire unité 4", "Mme Rossi"),
-        ("Laboratoire", "TP chimie", "mercredi 17 avril", "13 h", "labo 3", "blouse et lunettes", "Mme Hassan"),
-        ("Orientation", "Conseil orientation", "jeudi 25 avril", "15 h", "bureau 2", "bulletins scolaires", "Mme Pop"),
-        ("Faculté droit", "Conférence", "mardi 14 mai", "18 h", "amphi C", "inscription gratuite", "Prof. Dubois"),
-        ("École primaire", "Goûter fin d'année", "mercredi 26 juin", "16 h", "cour de l'école", "plat à partager", "Mme Martin"),
-        ("Portail étudiant", "Devoir en ligne", "vendredi 5 avril", "minuit", "plateforme Moodle", "rapport de 5 pages", "Mme Kim"),
-        ("Gymnase", "Cours annulé", "lundi 1 avril", "—", "salle musique", "reporté à mardi", "M. Rossi"),
-        ("Association étudiante", "Soirée intégration", "samedi 21 septembre", "20 h", "campus", "boisson à apporter", "Bureau AE"),
-        ("M. Garcia", "Projet informatique", "lundi 29 avril", "en groupe", "salle info 4", "présentation PowerPoint", "M. Garcia"),
-        ("Dr. Martin", "QCM biologie", "mercredi 15 mai", "10 h", "amphi B", "réviser chapitres 1-5", "Dr. Martin"),
-    ]
-    for sender, subject, date, hour, place, bring, contact in specs:
-        lines = [
-            f"Information importante pour les élèves/étudiants.",
-            f"Événement : {subject}.",
-            f"Date : {date}. Heure : {hour}.",
-            f"Lieu : {place}.",
-            f"À apporter : {bring}. Contact : {contact}.",
-        ]
-        qs = [
-            Q("Quel est l'événement ?", subject, "Un barbecue", "Un film", f"Événement : _________.", subject.split()[0], f"C'est {subject}.", 0),
-            Q("Quelle date ?", date.capitalize(), "Hier", "En 1990", f"Date : _________.", date.split()[0], f"Date : {date}.", 0),
-            Q("À quelle heure ?", hour, "3 h du matin", "Minuit", f"Heure : _________.", hour.replace(" h", "").split("–")[0].strip(), f"Heure : {hour}.", 0),
-            Q("Où ?", place.capitalize(), "À la plage", "À l'aéroport", f"Lieu : _________.", place.split()[0], f"Lieu : {place}.", 0),
-            Q("Quoi apporter ?", bring.capitalize(), "Rien", "Un passeport", f"À apporter : _________.", bring.split()[0], f"Apporter : {bring}.", 0),
-            Q("Qui contacter ?", contact, "Le facteur", "Un voisin", f"Contact : _________.", contact.split()[-1], f"Contact : {contact}.", 0),
-        ]
-        emails.append(render_email(sender, subject, lines, qs))
-    return emails
+def _make(rows, fact_builder, email):
+    patterns = EMAIL_PATTERNS if email else MSG_PATTERNS
+    items = []
+    for idx, row in enumerate(rows):
+        genre, doc, main, when, place, person, action, detail = row
+        text = patterns[idx].format(genre=genre, main=main, when=when, place=place, person=person, action=action, detail=detail)
+        items.append({"text": text, "questions": [F(k, v) for k, v in fact_builder(row)]})
+    return items
 
 
-def _daily_msg(header, writer, activity, time, place, with_who, transport, cost):
-    text = f"""{header}
-
-{writer}
-Activité : {activity}. Heure : {time}.
-Lieu : {place}. Avec : {with_who}.
-Transport : {transport}. Coût : {cost}."""
-    return {"text": text, "questions": [
-        Q("Quelle activité ?", activity.capitalize(), "Dormir", "Travailler seul", f"Activité : _________.", activity, f"C'est {activity}.", 0),
-        Q("À quelle heure ?", time, "Minuit", "4 h du matin", f"Heure : _________.", time.split()[0], f"Heure : {time}.", 0),
-        Q("Où ?", place.capitalize(), "À l'hôpital", "En mer", f"Lieu : _________.", place.split()[0], f"Lieu : {place}.", 0),
-        Q("Avec qui ?", with_who.capitalize(), "Seul", "Personne", f"Avec : _________.", with_who.split()[0], f"Avec {with_who}.", 0),
-        Q("Quel transport ?", transport.capitalize(), "Avion privé", "Fusée", f"Transport : _________.", transport.split()[0], f"Transport : {transport}.", 0),
-        Q("Quel coût ?", cost, "Gratuit toujours", "10000 francs", f"Coût : _________.", cost.split()[0], f"Coût : {cost}.", 0),
-        Q("L'activité est-elle en groupe ?", "Oui" if with_who not in ("seul", "seule") else "Non", "Non" if with_who not in ("seul", "seule") else "Oui", "On ne sait pas", f"Avec : _________.", with_who.split()[0], f"Avec {with_who}.", 0),
-    ]}
+def school_facts(r):
+    return [("document", r[1]), ("matière", r[2]), ("heure", r[3]), ("lieu", r[4]), ("personne", r[5]), ("action", r[6])]
 
 
-def _e3_2_messages():
-    specs = [
-        ("SMS à un ami", "Salut !", "courses au supermarché", "17 h", "Migros du centre", "ma mère", "à pied", "45 francs"),
-        ("Agenda personnel", "Aujourd'hui —", "rendez-vous chez le médecin", "10 h 30", "cabinet Dr. Martin", "seul", "bus n° 5", "gratuit avec assurance"),
-        ("WhatsApp famille", "Coucou !", "déjeuner en famille", "12 h 30", "restaurant Le Lac", "mes parents", "voiture", "35 francs"),
-        ("Note rappel", "N'oublie pas —", "sport à la salle", "19 h", "FitPlus", "mon ami Tom", "vélo", "abonnement mensuel"),
-        ("E-mail banque", "Bonjour,", "retrait au distributeur", "14 h", "banque UBS", "seul", "à pied", "200 francs"),
-        ("Message coiffeur", "Bonjour,", "coupe de cheveux", "16 h", "salon Élégance", "seule", "tram 12", "45 francs"),
-        ("Liste courses", "À acheter —", "pain, lait et fruits", "18 h", "Coop du quartier", "ma sœur", "à pied", "25 francs"),
-        ("SMS dentiste", "Rappel :", "contrôle dentaire", "9 h", "cabinet dentaire", "seul", "bus", "couverte par assurance"),
-        ("Planning semaine", "Mercredi —", "cinéma", "20 h", "cinéma ABC", "Léa et Marc", "métro", "18 francs"),
-        ("Message pharmacie", "Bonjour,", "chercher médicaments", "11 h", "pharmacie du centre", "pour mon fils", "à pied", "15 francs"),
-        ("WhatsApp sport", "Hey !", "match de tennis", "15 h", "club de tennis", "Hugo", "voiture", "20 francs"),
-        ("Note frigo", "Ce soir —", "cours de cuisine", "18 h 30", "école culinaire", "groupe de 8", "bus 3", "60 francs"),
-        ("SMS bibliothèque", "Bonjour,", "rendre des livres", "17 h 30", "bibliothèque municipale", "seul", "vélo", "gratuit"),
-        ("Agenda", "Samedi —", "marché", "8 h", "place du Marché", "ma grand-mère", "tram", "30 francs"),
-        ("Message vélo", "Salut !", "balade à vélo", "10 h", "bord du lac", "Emma", "vélo", "gratuit"),
-        ("Rappel téléphone", "Rappel —", "appeler la banque", "14 h", "de la maison", "seul", "téléphone", "gratuit"),
-        ("WhatsApp voisins", "Bonjour,", "apéro de quartier", "18 h", "cour de l'immeuble", "les voisins", "à pied", "gratuit"),
-        ("Note", "Demain —", "laverie", "9 h", "laverie automatique", "seul", "à pied", "8 francs"),
-        ("SMS piscine", "Salut !", "natation", "7 h", "piscine municipale", "David", "bus 8", "entrée 7 francs"),
-        ("Planning", "Dimanche —", "brunch", "10 h", "café du Port", "mes amis", "voiture", "28 francs"),
-    ]
-    return [_daily_msg(h, w, a, t, p, w2, tr, c) for h, w, a, t, p, w2, tr, c in specs]
+def daily_facts(r):
+    return [("document", r[1]), ("activité", r[2]), ("heure", r[3]), ("lieu", r[4]), ("personne", r[5]), ("transport", r[6])]
 
 
-def _e3_2_emails():
-    emails = []
-    specs = [
-        ("Dr. Martin", "Rendez-vous médical", "contrôle annuel", "mardi 12 mars", "10 h 30", "cabinet médical", "carte d'assurance"),
-        ("Salon Élégance", "Confirmation RDV", "coupe + brushing", "vendredi 8 mars", "16 h", "salon du centre", "arriver 5 min avant"),
-        ("FitPlus", "Cours de yoga", "cours débutant", "lundi et mercredi", "19 h", "salle de sport", "tapis de yoga"),
-        ("Cinéma ABC", "Réservation", "film français", "samedi 9 mars", "20 h", "salle 3", "billets en pièce jointe"),
-        ("Pharmacie Centrale", "Médicaments prêts", "ordonnance", "aujourd'hui", "toute la journée", "pharmacie", "carte d'assurance"),
-        ("Bibliothèque", "Livres en retard", "rappel retour", "avant vendredi", "17 h", "bibliothèque", "éviter pénalité"),
-        ("Restaurant Le Lac", "Réservation confirmée", "dîner", "samedi 16 mars", "19 h 30", "table près de la fenêtre", "menu 45 francs"),
-        ("Banque UBS", "Relevé de compte", "document mensuel", "disponible", "en ligne", "portail bancaire", "mot de passe"),
-        ("Club de tennis", "Match amical", "tennis double", "dimanche 10 mars", "15 h", "court n° 2", "raquette"),
-        ("École culinaire", "Atelier pasta", "cours cuisine", "mardi 19 mars", "18 h 30", "cuisine école", "tablier"),
-        ("Coiffeur Express", "Rappel RDV", "coloration", "jeudi 21 mars", "14 h", "salon Express", "test allergie"),
-        ("Piscine municipale", "Horaires Pâques", "ouverture spéciale", "lundi de Pâques", "9 h – 18 h", "piscine", "entrée réduite"),
-        ("Marché", "Marché bio", "producteurs locaux", "samedi", "8 h – 13 h", "place du Marché", "sac réutilisable"),
-        ("Dentiste", "Rappel contrôle", "examen dentaire", "mercredi 27 mars", "9 h", "cabinet", "brosse à dents"),
-        ("Café du Port", "Brunch réservé", "brunch dominical", "dimanche 24 mars", "10 h", "terrasse", "réservation 2 personnes"),
-        ("Laverie", "Machine disponible", "lave-linge libre", "maintenant", "—", "laverie rez-de-chaussée", "pièces de 2 francs"),
-        ("Médecin", "Résultats analyses", "documents médicaux", "à retirer", "14 h – 17 h", "secrétariat", "pièce d'identité"),
-        ("Supermarché", "Offre spéciale", "promotions semaine", "jusqu'à dimanche", "toute la journée", "Migros centre", "carte fidélité"),
-        ("Voisins", "Fête de quartier", "apéro collectif", "samedi 30 mars", "17 h", "cour", "boisson à apporter"),
-        ("Sport club", "Entraînement", "football", "mardi et jeudi", "18 h", "stade municipal", "chaussures de sport"),
-    ]
-    for sender, subject, activity, date, hour, place, note in specs:
-        lines = [
-            f"Information sur votre activité quotidienne.",
-            f"Activité : {activity}.",
-            f"Date : {date}. Heure : {hour}.",
-            f"Lieu : {place}.",
-            f"Note : {note}.",
-        ]
-        qs = [
-            Q("Quelle activité ?", activity.capitalize(), "Dormir", "Voyager loin", f"Activité : _________.", activity.split()[0], f"C'est {activity}.", 0),
-            Q("Quelle date ?", date.capitalize(), "Hier", "En 1800", f"Date : _________.", date.split()[0], f"Date : {date}.", 0),
-            Q("À quelle heure ?", hour, "Minuit", "4 h", f"Heure : _________.", hour.replace(" h", "").split("–")[0].strip(), f"Heure : {hour}.", 0),
-            Q("Où ?", place.capitalize(), "En mer", "Dans l'espace", f"Lieu : _________.", place.split()[0], f"Lieu : {place}.", 0),
-            Q("Quelle note importante ?", note.capitalize(), "Rien", "Un chat", f"Note : _________.", note.split()[0], f"Note : {note}.", 0),
-            Q("Quel est l'objet ?", subject, "Une facture d'électricité", "Un divorce", f"Objet : _________", subject.split()[0], f"Objet : {subject}.", 0),
-        ]
-        emails.append(render_email(sender, subject, lines, qs))
-    return emails
+def work_facts(r):
+    return [("document", r[1]), ("entreprise", r[2]), ("profession", r[7]), ("heure", r[3]), ("lieu", r[4]), ("action", r[6])]
 
-
-def _work_msg(header, writer, company, job, schedule, colleague, task, meeting):
-    text = f"""{header}
-
-{writer}
-Entreprise : {company}. Poste : {job}.
-Horaires : {schedule}. Collègue : {colleague}.
-Tâche du jour : {task}.
-Réunion : {meeting}."""
-    return {"text": text, "questions": [
-        Q("Quelle entreprise ?", company, "Une école", "Un zoo", f"Entreprise : _________.", company, f"C'est {company}.", 0),
-        Q("Quel poste ?", job.capitalize(), "Roi", "Astronaute", f"Poste : _________.", job, f"Poste : {job}.", 0, prof=True),
-        Q("Quels horaires ?", schedule, "Toute la nuit", "Jamais", f"Horaires : _________.", schedule.split()[0], f"Horaires : {schedule}.", 0),
-        Q("Quel collègue ?", colleague, "Personne", "Un chat", f"Collègue : _________.", colleague, f"Collègue : {colleague}.", 0),
-        Q("Quelle tâche ?", task.capitalize(), "Dormir", "Voyager", f"Tâche : _________.", task.split()[0], f"Tâche : {task}.", 0),
-        Q("Quelle réunion ?", meeting.capitalize(), "Aucune", "Une fête", f"Réunion : _________.", meeting.split()[0], f"Réunion : {meeting}.", 0),
-        Q("Le message vient-il du travail ?", "Oui", "Non", "On ne sait pas", f"Entreprise : _________.", company.split()[0], "Le message vient du travail.", 0),
-    ]}
-
-
-def _e3_3_messages():
-    specs = [
-        ("E-mail interne", "Bonjour l'équipe,", "SwissTech SA", "secrétaire", "8 h – 17 h", "Marie", "répondre aux e-mails", "lundi 9 h en salle 2"),
-        ("Note bureau", "Rappel —", "Hôpital cantonal", "infirmier", "6 h – 14 h", "Dr. Keller", "soins aux patients", "briefing à 5 h 45"),
-        ("SMS collègue", "Salut !", "Restaurant Le Sapin", "serveur", "11 h – 23 h", "Chef Marco", "servir les clients", "réunion service à 10 h 30"),
-        ("WhatsApp équipe", "Hey !", "Garage Central", "mécanicien", "7 h – 16 h", "Paul", "réparer une voiture", "point équipe à 7 h"),
-        ("Annonce RH", "Ressources Humaines —", "Banque Populaire", "conseiller", "9 h – 18 h", "Sophie", "accueillir les clients", "formation mardi 14 h"),
-        ("Message manager", "Bonjour,", "Pharmacie du Lac", "pharmacien", "8 h 30 – 18 h 30", "Julie", "préparer les ordonnances", "inventaire vendredi"),
-        ("Planning", "Semaine 12 —", "École primaire", "professeur", "8 h – 16 h", "Mme Martin", "cours de mathématiques", "conseil de classe jeudi"),
-        ("E-mail client", "Bonjour,", "Agence Voyage", "vendeur", "9 h – 19 h", "Emma", "préparer un devis", "réunion commerciale mercredi"),
-        ("Note réunion", "Ordre du jour —", "Boulangerie Martin", "boulanger", "4 h – 12 h", "Thomas", "faire le pain", "réunion qualité lundi 6 h"),
-        ("SMS manager", "Rappel :", "Cabinet d'avocats", "secrétaire", "8 h 30 – 17 h 30", "Maître Blanc", "classer les dossiers", "audience mardi 10 h"),
-        ("Intranet", "Info —", "Hôtel Bellevue", "réceptionniste", "7 h – 15 h ou 15 h – 23 h", "Hugo", "accueillir les clients", "briefing à chaque shift"),
-        ("WhatsApp chantier", "Salut !", "BTP Construction", "maçon", "6 h 30 – 15 h 30", "Karim", "monter un mur", "sécurité à 6 h 15"),
-        ("E-mail équipe", "Bonjour,", "Librairie du Centre", "libraire", "9 h 30 – 18 h 30", "Nina", "ranger les livres", "réunion mensuelle vendredi"),
-        ("Note", "Aujourd'hui —", "Salon de coiffure", "coiffeur", "9 h – 19 h", "Clara", "couper les cheveux", "réunion tendances mardi"),
-        ("Message RH", "RH —", "Usine Omega", "ingénieur", "7 h – 16 h", "David", "contrôler la production", "audit jeudi 8 h"),
-        ("Planning", "Lundi —", "Cabinet médical", "médecin", "8 h – 18 h", "Infirmière Léa", "consulter les patients", "réunion équipe 8 h"),
-        ("SMS", "Salut !", "Ferme des Alpes", "agriculteur", "5 h – 18 h", "Victor", "traire les vaches", "marché samedi 6 h"),
-        ("E-mail", "Bonjour,", "Journal Le Quotidien", "journaliste", "10 h – 19 h", "Antoine", "écrire un article", "conférence de presse 11 h"),
-        ("Annonce", "Direction —", "Pompier service", "pompier", "24 h/24 en rotation", "Marc", "interventions", "briefing chaque matin"),
-        ("WhatsApp", "Hey !", "Crèche Les Petits", "éducatrice", "7 h 30 – 17 h", "Sara", "s'occuper des enfants", "réunion parents jeudi 18 h"),
-    ]
-    return [_work_msg(h, w, c, j, s, col, t, m) for h, w, c, j, s, col, t, m in specs]
-
-
-def _e3_3_emails():
-    emails = []
-    specs = [
-        ("Marie Dubois", "Réunion lundi", "SwissTech SA", "secrétaire", "lundi 9 h", "salle 2", "ordre du jour en pièce jointe"),
-        ("Dr. Keller", "Briefing matinal", "Hôpital cantonal", "infirmier", "5 h 45", "salle de réunion", "présence obligatoire"),
-        ("Chef Marco", "Service du soir", "Restaurant Le Sapin", "serveur", "10 h 30", "cuisine", "tenue impeccable"),
-        ("Paul Garcia", "Voiture à réparer", "Garage Central", "mécanicien", "7 h", "atelier", "pièces commandées"),
-        ("Sophie Martin", "Formation", "Banque Populaire", "conseiller", "mardi 14 h", "salle formation", "apporter cahier"),
-        ("Julie Petit", "Inventaire", "Pharmacie du Lac", "pharmacien", "vendredi 18 h", "pharmacie", "compter les stocks"),
-        ("M. Martin", "Conseil de classe", "École primaire", "professeur", "jeudi 17 h", "salle des profs", "bulletins à préparer"),
-        ("Emma Laurent", "Devis client", "Agence Voyage", "vendeur", "mercredi 11 h", "bureau", "devis Bali en pièce jointe"),
-        ("Thomas Keller", "Contrôle qualité", "Boulangerie Martin", "boulanger", "lundi 6 h", "laboratoire", "checklist à remplir"),
-        ("Maître Blanc", "Audience", "Cabinet d'avocats", "secrétaire", "mardi 10 h", "tribunal", "dossier n° 45"),
-        ("Hugo Martin", "Shift soir", "Hôtel Bellevue", "réceptionniste", "15 h", "réception", "arriver 10 min avant"),
-        ("Karim Ben", "Sécurité chantier", "BTP Construction", "maçon", "6 h 15", "chantier", "casque obligatoire"),
-        ("Nina Costa", "Réunion mensuelle", "Librairie du Centre", "libraire", "vendredi 18 h", "librairie", "chiffres du mois"),
-        ("Clara Rossi", "Nouvelle collection", "Salon de coiffure", "coiffeur", "mardi 9 h", "salon", "photos tendances"),
-        ("David Kim", "Audit production", "Usine Omega", "ingénieur", "jeudi 8 h", "usine", "rapport trimestriel"),
-        ("Dr. Martin", "Réunion équipe", "Cabinet médical", "médecin", "8 h", "cabinet", "planning semaine"),
-        ("Victor Pop", "Marché", "Ferme des Alpes", "agriculteur", "samedi 6 h", "marché de Sion", "charger le camion"),
-        ("Antoine Blanc", "Article urgent", "Journal Le Quotidien", "journaliste", "11 h", "salle de rédaction", "deadline 17 h"),
-        ("Marc Singh", "Intervention", "Service pompiers", "pompier", "immédiat", "caserne", "équipe Alpha"),
-        ("Sara Alami", "Réunion parents", "Crèche Les Petits", "éducatrice", "jeudi 18 h", "crèche", "rapport mensuel enfant"),
-    ]
-    for sender, subject, company, job, when, where, detail in specs:
-        lines = [
-            f"Message professionnel de {company}.",
-            f"Poste concerné : {job}.",
-            f"Quand : {when}. Où : {where}.",
-            f"Détail : {detail}.",
-            "Merci de confirmer votre présence.",
-        ]
-        qs = [
-            Q("Quelle entreprise ?", company, "Une plage", "Un volcan", f"Entreprise : _________.", company.split()[0], f"C'est {company}.", 0),
-            Q("Quel poste ?", job.capitalize(), "Pilote de F1", "Astronaute", f"Poste : _________.", job, f"Poste : {job}.", 0, prof=True),
-            Q("Quand ?", when.capitalize(), "Jamais", "En 1800", f"Quand : _________.", when.split()[0], f"Quand : {when}.", 0),
-            Q("Où ?", where.capitalize(), "En mer", "Dans l'espace", f"Où : _________.", where.split()[0], f"Où : {where}.", 0),
-            Q("Quel détail important ?", detail.capitalize(), "Rien", "Un chat", f"Détail : _________.", detail.split()[0], f"Détail : {detail}.", 0),
-            Q("Quel est l'objet ?", subject, "Une invitation à un mariage", "Un menu", f"Objet : _________", subject.split()[0], f"Objet : {subject}.", 0),
-        ]
-        emails.append(render_email(sender, subject, lines, qs))
-    return emails
+SCHOOL = [
+    ("Panneau à l'entrée du collège", "un panneau", "les mathématiques", "lundi à 8 h 15", "en salle 12", "Mme Martin", "prendre un cahier bleu", "Les parents restent devant le portail"),
+    ("Message vocal transcrit", "un message vocal", "le français", "dans dix minutes", "devant la salle 5", "M. Girard", "entrer doucement", "Le chapitre 3 est sur le bureau"),
+    ("Page d'agenda de Léo", "une page d'agenda", "l'anglais", "mercredi à 9 h", "à la bibliothèque", "Mme Rossi", "rendre le roman", "Un contrôle de vocabulaire suit la pause"),
+    ("Billet collé sur la porte", "un billet", "les sciences", "ce matin à 13 h", "en salle 8", "Mme Petit", "travailler par groupes de trois", "Le laboratoire 2 est fermé"),
+    ("Programme de la sortie scolaire", "un programme", "l'histoire", "jeudi à 8 h 30", "au musée d'histoire", "M. Weber", "garder son plan", "Le pique-nique se prend dans le jardin"),
+    ("Ticket de la bibliothèque", "un ticket", "la lecture", "avant mardi prochain", "au bureau d'accueil", "Mme Costa", "présenter la carte d'étudiant", "Le livre réservé est Le Petit Prince"),
+    ("Invitation aux parents", "une invitation", "la géographie", "vendredi entre 16 h et 17 h", "dans le couloir", "M. Blanc", "entrer par la porte principale", "Les élèves présentent leur pays préféré"),
+    ("Notification de l'application école", "une notification", "l'allemand", "aujourd'hui après la récréation", "en salle 7", "M. Müller", "ouvrir les cahiers", "La séance commence par une dictée"),
+    ("Carte d'examen", "une carte d'examen", "la chimie", "mercredi 20 avril à 13 h 45", "dans l'amphi B", "le surveillant", "éteindre le téléphone", "La calculatrice simple est autorisée"),
+    ("Règles affichées au laboratoire", "des règles", "la physique", "avant le cours", "près de la porte", "M. Leroy", "mettre la blouse blanche", "Le travail se fait à deux"),
+    ("Mot du surveillant", "un mot", "l'histoire", "après la pause de 10 h 20", "au foyer", "le surveillant", "jouer à des jeux calmes", "La cour est trop mouillée"),
+    ("Tract du club devoirs", "un tract", "le français et les maths", "mardi à 16 h", "dans la salle polyvalente", "deux étudiants", "s'inscrire au secrétariat", "L'aide est gratuite"),
+    ("Carnet de liaison", "un carnet de liaison", "les sciences", "lundi", "devant la classe", "votre enfant", "signer le mot ce soir", "L'exposé porte sur une planète"),
+    ("Annonce au micro", "une annonce au micro", "la musique", "mardi prochain", "en étude", "M. Rossi", "rester calme", "Le cours de 15 h est annulé"),
+    ("Forum des étudiants", "un message de forum", "l'informatique", "jeudi de 14 h à 16 h", "en salle info 4", "Karim", "écrire son nom", "Le projet est une application météo"),
+    ("Fiche de tutorat", "une fiche de tutorat", "le droit", "mardi", "dans l'amphi C", "Prof. Dubois", "lire un petit cas", "Les documents sont autorisés"),
+    ("Mini article du journal de l'école", "un mini article", "la biologie", "vendredi", "près de la serre", "Dr. Martin", "dessiner les plantes", "Les élèves observent des graines"),
+    ("Message du professeur d'EPS", "un message", "l'EPS", "demain à 10 h", "au stade municipal", "M. Antoine", "porter des baskets propres", "Le rendez-vous est devant l'arrêt de tram"),
+    ("Page du portail étudiant", "une page du portail", "l'économie", "avant jeudi soir", "dans l'onglet cours", "Mme Kim", "répondre aux cinq questions", "Une vidéo courte est disponible"),
+    ("Carte de la journée interdisciplinaire", "une carte de journée", "l'eau", "vendredi à 16 h", "dans le hall", "l'équipe pédagogique", "préparer une affiche", "Les familles sont invitées"),
+]
+SCHOOL_EMAILS = [
+    ("E-mail de rentrée", "un e-mail", "la rentrée", "lundi 26 août à 8 h", "dans la cour", "École du Lac", "apporter une trousse", "Un café est prévu pour les parents"),
+    ("E-mail de professeur", "un e-mail", "l'anglais oral", "jeudi à 9 h", "en salle 3", "Mme Rossi", "prendre la liste de mots", "Le manuel reste à la maison"),
+    ("E-mail de bibliothèque", "un e-mail", "la lecture", "mercredi soir", "au rez-de-chaussée", "Bibliothèque scolaire", "présenter la carte d'étudiant", "Le roman réservé attend au bureau"),
+    ("E-mail d'histoire", "un e-mail", "l'exposé sur Rome", "lundi prochain", "en salle 8", "M. Weber", "envoyer trois images", "Chaque élève parle deux minutes"),
+    ("E-mail d'examen", "un e-mail", "la chimie", "20 avril à 13 h 30", "dans l'amphi B", "Service des examens", "prendre une calculatrice simple", "La place de Sara est au rang 4"),
+    ("E-mail du club sciences", "un e-mail", "les fusées à eau", "mercredi à 14 h", "derrière le gymnase", "Club sciences", "apporter une bouteille vide", "Le club fournit les lunettes"),
+    ("E-mail des parents", "un e-mail", "la rencontre école-famille", "mardi à 19 h", "dans la salle polyvalente", "Association des parents", "préparer une question", "La directrice présente le projet lecture"),
+    ("E-mail automatique", "un e-mail", "le devoir en ligne", "avant vendredi minuit", "sur Moodle", "Application Classe+", "déposer le fichier", "Le brouillon peut rester privé"),
+    ("E-mail de laboratoire", "un e-mail", "la physique", "mercredi à 13 h", "au labo 1", "Laboratoire", "mettre la blouse", "Les lunettes sont dans l'armoire"),
+    ("E-mail d'orientation", "un e-mail", "l'orientation", "jeudi à 15 h", "au bureau 2", "Mme Pop", "apporter les bulletins", "Le rendez-vous dure vingt minutes"),
+    ("E-mail sport scolaire", "un e-mail", "l'entraînement", "mardi à 17 h", "au gymnase", "M. Antoine", "porter une tenue de sport", "Les vestiaires ouvrent avant"),
+    ("E-mail de conférence", "un e-mail", "la conférence de droit", "mardi 14 mai à 18 h", "dans l'amphi C", "Faculté de droit", "s'inscrire en ligne", "L'entrée est gratuite"),
+    ("E-mail de goûter", "un e-mail", "le goûter de fin d'année", "mercredi 26 juin à 16 h", "dans la cour", "École primaire", "apporter un plat à partager", "Les classes chantent deux chansons"),
+    ("E-mail cours annulé", "un e-mail", "la musique", "lundi 1 avril", "en salle de musique", "Gymnase", "noter le report à mardi", "Aucun élève ne doit venir à 15 h"),
+    ("E-mail intégration", "un e-mail", "la soirée d'intégration", "samedi 21 septembre à 20 h", "sur le campus", "Association étudiante", "apporter une boisson", "Les nouveaux étudiants reçoivent un badge"),
+    ("E-mail projet informatique", "un e-mail", "le projet météo", "lundi 29 avril", "en salle info 4", "M. Garcia", "préparer une présentation", "Les groupes comptent trois personnes"),
+    ("E-mail biologie", "un e-mail", "le QCM de biologie", "mercredi 15 mai à 10 h", "dans l'amphi B", "Dr. Martin", "réviser les chapitres 1 à 5", "Le QCM dure trente minutes"),
+    ("E-mail photo scolaire", "un e-mail", "la photo de classe", "vendredi à 11 h", "dans le jardin", "Photographe scolaire", "porter un haut clair", "La commande des photos viendra plus tard"),
+    ("E-mail certificat", "un e-mail", "le certificat de scolarité", "dès lundi", "au secrétariat", "Service scolarité", "montrer une pièce d'identité", "Le document est gratuit"),
+    ("E-mail journée spéciale", "un e-mail", "le thème de l'eau", "vendredi", "dans le hall", "Équipe pédagogique", "inviter les familles", "Un jus de fruit sera offert"),
+]
+DAILY = [
+    ("SMS après le travail", "un SMS", "les courses", "à 17 h", "à la Migros du centre", "ma mère", "venir à pied", "le budget est de 45 francs"),
+    ("Agenda personnel", "un agenda", "un rendez-vous médical", "à 10 h 30", "au cabinet du Dr Martin", "le médecin", "prendre le bus 5", "la carte d'assurance est dans le sac"),
+    ("WhatsApp famille", "un WhatsApp", "un déjeuner", "à 12 h 30", "au restaurant Le Lac", "mes parents", "venir en voiture", "la table est près de la fenêtre"),
+    ("Note sur la porte", "une note", "le sport", "à 19 h", "chez FitPlus", "Tom", "venir à vélo", "le badge est dans la poche"),
+    ("Notification bancaire", "une notification", "un retrait", "à 14 h", "à la banque UBS", "le conseiller", "venir à pied", "le retrait prévu est de 200 francs"),
+    ("Message du coiffeur", "un message", "une coupe de cheveux", "à 16 h", "au salon Élégance", "Clara", "prendre le tram 12", "arriver cinq minutes avant"),
+    ("Liste de courses", "une liste", "acheter du pain et des fruits", "à 18 h", "à la Coop du quartier", "ma sœur", "venir à pied", "le total prévu est de 25 francs"),
+    ("SMS du dentiste", "un SMS", "un contrôle dentaire", "à 9 h", "au cabinet dentaire", "la dentiste", "prendre le bus", "le contrôle est couvert"),
+    ("Planning de la semaine", "un planning", "le cinéma", "mercredi à 20 h", "au cinéma ABC", "Léa et Marc", "prendre le métro", "le billet coûte 18 francs"),
+    ("Message de pharmacie", "un message", "chercher des médicaments", "à 11 h", "à la pharmacie du centre", "mon fils", "venir à pied", "l'ordonnance est prête"),
+    ("WhatsApp tennis", "un WhatsApp", "un match de tennis", "à 15 h", "au club de tennis", "Hugo", "venir en voiture", "la raquette rouge est dans le coffre"),
+    ("Note sur le frigo", "une note", "un cours de cuisine", "à 18 h 30", "à l'école culinaire", "un groupe de huit", "prendre le bus 3", "il faut un tablier"),
+    ("SMS bibliothèque", "un SMS", "rendre des livres", "à 17 h 30", "à la bibliothèque municipale", "Nora", "venir à vélo", "aucune amende aujourd'hui"),
+    ("Mémo marché", "un mémo", "le marché", "samedi à 8 h", "place du Marché", "ma grand-mère", "prendre le tram", "prendre un sac réutilisable"),
+    ("Message vélo", "un message", "une balade à vélo", "à 10 h", "au bord du lac", "Emma", "venir à vélo", "la sortie est gratuite"),
+    ("Rappel téléphone", "un rappel", "appeler la banque", "à 14 h", "depuis la maison", "Mme Keller", "aucun transport", "préparer le numéro de compte"),
+    ("WhatsApp voisins", "un WhatsApp", "un apéro de quartier", "à 18 h", "dans la cour de l'immeuble", "les voisins", "venir à pied", "apporter une boisson"),
+    ("Note laverie", "une note", "faire la lessive", "demain à 9 h", "à la laverie automatique", "Sami", "venir à pied", "prévoir des pièces de 2 francs"),
+    ("SMS piscine", "un SMS", "la natation", "à 7 h", "à la piscine municipale", "David", "prendre le bus 8", "l'entrée coûte 7 francs"),
+    ("Planning du dimanche", "un planning", "un brunch", "dimanche à 10 h", "au café du Port", "mes amis", "venir en voiture", "la réservation est pour quatre"),
+]
+DAILY_EMAILS = DAILY
+WORK = [
+    ("E-mail interne", "un e-mail interne", "SwissTech SA", "à 8 h", "au bureau d'accueil", "Marie", "répondre aux e-mails", "secrétaire"),
+    ("Note du bureau", "une note", "Hôpital cantonal", "à 5 h 45", "en salle de réunion", "Dr. Keller", "préparer les soins", "infirmier"),
+    ("SMS du collègue", "un SMS", "Restaurant Le Sapin", "à 10 h 30", "en cuisine", "Chef Marco", "servir les clients", "serveur"),
+    ("WhatsApp équipe", "un WhatsApp", "Garage Central", "à 7 h", "à l'atelier", "Paul", "réparer une voiture", "mécanicien"),
+    ("Annonce RH", "une annonce RH", "Banque Populaire", "mardi à 14 h", "en salle formation", "Sophie", "accueillir les clients", "secrétaire"),
+    ("Message du manager", "un message", "Pharmacie du Lac", "vendredi à 18 h", "dans la pharmacie", "Julie", "compter les stocks", "pharmacien"),
+    ("Planning de semaine", "un planning", "École primaire", "jeudi à 17 h", "en salle des profs", "Mme Martin", "préparer les bulletins", "professeur"),
+    ("E-mail client", "un e-mail client", "Agence Voyage", "mercredi à 11 h", "au bureau", "Emma", "préparer un devis", "vendeur"),
+    ("Note de réunion", "une note de réunion", "Boulangerie Martin", "lundi à 6 h", "au laboratoire", "Thomas", "faire le pain", "boulanger"),
+    ("SMS du cabinet", "un SMS", "Cabinet d'avocats", "mardi à 10 h", "au tribunal", "Maître Blanc", "classer les dossiers", "secrétaire"),
+    ("Info intranet", "une info intranet", "Hôtel Bellevue", "à 15 h", "à la réception", "Hugo", "accueillir les clients", "réceptionniste"),
+    ("WhatsApp chantier", "un WhatsApp", "BTP Construction", "à 6 h 15", "sur le chantier", "Karim", "monter un mur", "maçon"),
+    ("E-mail équipe", "un e-mail", "Librairie du Centre", "vendredi à 18 h", "au rayon jeunesse", "Nina", "ranger les livres", "libraire"),
+    ("Note du salon", "une note", "Salon de coiffure", "mardi à 9 h", "près du fauteuil 2", "Clara", "couper les cheveux", "coiffeur"),
+    ("Message RH", "un message RH", "Usine Omega", "jeudi à 8 h", "dans l'usine", "David", "contrôler la production", "ingénieur"),
+    ("Planning médical", "un planning", "Cabinet médical", "à 8 h", "dans le cabinet", "Infirmière Léa", "consulter les patients", "médecin"),
+    ("SMS de la ferme", "un SMS", "Ferme des Alpes", "samedi à 6 h", "au marché de Sion", "Victor", "charger le camion", "agriculteur"),
+    ("E-mail rédaction", "un e-mail", "Journal Le Quotidien", "à 11 h", "en salle de rédaction", "Antoine", "écrire un article", "journaliste"),
+    ("Annonce de caserne", "une annonce", "Service pompiers", "chaque matin", "à la caserne", "Marc", "préparer les interventions", "pompier"),
+    ("WhatsApp crèche", "un WhatsApp", "Crèche Les Petits", "jeudi à 18 h", "dans le jardin", "Sara", "préparer les plantes", "jardinier"),
+]
+WORK_EMAILS = WORK

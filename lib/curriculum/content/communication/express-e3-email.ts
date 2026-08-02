@@ -23,15 +23,12 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E3_1_CE_EMAIL_TEXT_1 = `De : École du Lac
-Objet : Rentrée scolaire
+Objet : la rentrée
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Rentrée scolaire.
-Date : lundi 26 août. Heure : 8 h.
-Lieu : cour de l'école.
-À apporter : cahiers et stylos. Contact : M. Dupont.
+Un café est prévu pour les parents. Le rendez-vous est lundi 26 août à 8 h, dans la cour.
+Consigne : apporter une trousse.
 
 Cordialement,
 École du Lac`;
@@ -39,1746 +36,1688 @@ Cordialement,
 const E3_1_CE_EMAIL_POOL_1 = buildExpressPool("e3-1-ce-email-1", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Rentrée scolaire", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Rentrée",
-    vfQ: "C'est Rentrée scolaire.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Lundi 26 août", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la rentrée", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "lundi",
-    vfQ: "Date : lundi 26 août.",
+    fillQ: "La matière est _________.",
+    fill: "la rentrée",
+    vfQ: "Le texte mentionne la rentrée.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["8 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["lundi 26 août à 8 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "8",
-    vfQ: "Heure : 8 h.",
+    fillQ: "C'est _________.",
+    fill: "lundi 26 août à 8 h",
+    vfQ: "Le texte mentionne lundi 26 août à 8 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cour de l'école", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans la cour", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "cour",
-    vfQ: "Lieu : cour de l'école.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans la cour",
+    vfQ: "Le texte mentionne dans la cour.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Cahiers et stylos", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["École du Lac", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "cahiers",
-    vfQ: "Apporter : cahiers et stylos.",
+    fillQ: "La personne est _________.",
+    fill: "École du Lac",
+    vfQ: "Le texte mentionne École du Lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["M. Dupont", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["apporter une trousse", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Dupont",
-    vfQ: "Contact : M. Dupont.",
+    fillQ: "Il faut _________.",
+    fill: "apporter une trousse",
+    vfQ: "Le texte mentionne apporter une trousse.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_2 = `De : Faculté de médecine
-Objet : Horaires de cours
+const E3_1_CE_EMAIL_TEXT_2 = `De : Secrétariat
+Objet : Information
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Horaires de cours.
-Date : septembre. Heure : 8 h – 17 h.
-Lieu : campus principal.
-À apporter : carte étudiant. Contact : Dr. Keller.
+Nous confirmons l'anglais oral jeudi à 9 h.
+Mme Rossi accueillera le groupe en salle 3. Action demandée : prendre la liste de mots.
 
-Cordialement,
-Faculté de médecine`;
+Le secrétariat`;
 
 const E3_1_CE_EMAIL_POOL_2 = buildExpressPool("e3-1-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Horaires de cours", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Horaires",
-    vfQ: "C'est Horaires de cours.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Septembre", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["l'anglais oral", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "septembre",
-    vfQ: "Date : septembre.",
+    fillQ: "La matière est _________.",
+    fill: "l'anglais oral",
+    vfQ: "Le texte mentionne l'anglais oral.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["8 h – 17 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["jeudi à 9 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "8",
-    vfQ: "Heure : 8 h – 17 h.",
+    fillQ: "C'est _________.",
+    fill: "jeudi à 9 h",
+    vfQ: "Le texte mentionne jeudi à 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Campus principal", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle 3", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "campus",
-    vfQ: "Lieu : campus principal.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle 3",
+    vfQ: "Le texte mentionne en salle 3.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Carte étudiant", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Mme Rossi", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "carte",
-    vfQ: "Apporter : carte étudiant.",
+    fillQ: "La personne est _________.",
+    fill: "Mme Rossi",
+    vfQ: "Le texte mentionne Mme Rossi.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Dr. Keller", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["prendre la liste de mots", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Keller",
-    vfQ: "Contact : Dr. Keller.",
+    fillQ: "Il faut _________.",
+    fill: "prendre la liste de mots",
+    vfQ: "Le texte mentionne prendre la liste de mots.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_3 = `De : M. Martin
-Objet : Devoir de français
+const E3_1_CE_EMAIL_TEXT_3 = `De : Portail
+Objet : À faire
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Devoir de français.
-Date : vendredi 15 mars. Heure : 23 h 59.
-Lieu : plateforme en ligne.
-À apporter : dissertation 300 mots. Contact : Mme Martin.
+Une nouvelle consigne est disponible pour la lecture.
+Ouvrez-la avant mercredi soir; elle concerne au rez-de-chaussée.
+Bibliothèque scolaire demande cette action : présenter la carte d'étudiant. Détail : Le roman réservé attend au bureau.
 
-Cordialement,
-M. Martin`;
+Message automatique`;
 
 const E3_1_CE_EMAIL_POOL_3 = buildExpressPool("e3-1-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Devoir de français", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Devoir",
-    vfQ: "C'est Devoir de français.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Vendredi 15 mars", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la lecture", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "vendredi",
-    vfQ: "Date : vendredi 15 mars.",
+    fillQ: "La matière est _________.",
+    fill: "la lecture",
+    vfQ: "Le texte mentionne la lecture.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["23 h 59", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mercredi soir", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "23 59",
-    vfQ: "Heure : 23 h 59.",
+    fillQ: "C'est _________.",
+    fill: "mercredi soir",
+    vfQ: "Le texte mentionne mercredi soir.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Plateforme en ligne", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au rez-de-chaussée", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "plateforme",
-    vfQ: "Lieu : plateforme en ligne.",
+    fillQ: "Le lieu est _________.",
+    fill: "au rez-de-chaussée",
+    vfQ: "Le texte mentionne au rez-de-chaussée.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Dissertation 300 mots", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Bibliothèque scolaire", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "dissertation",
-    vfQ: "Apporter : dissertation 300 mots.",
+    fillQ: "La personne est _________.",
+    fill: "Bibliothèque scolaire",
+    vfQ: "Le texte mentionne Bibliothèque scolaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Martin", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["présenter la carte d'étudiant", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Martin",
-    vfQ: "Contact : Mme Martin.",
+    fillQ: "Il faut _________.",
+    fill: "présenter la carte d'étudiant",
+    vfQ: "Le texte mentionne présenter la carte d'étudiant.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_4 = `De : Secrétariat
-Objet : Sortie scolaire
+const E3_1_CE_EMAIL_TEXT_4 = `De : M. Weber
+Objet : Rappel
 
-Bonjour,
+Bonjour à tous,
 
-Information importante pour les élèves/étudiants.
-Événement : Sortie scolaire.
-Date : jeudi 20 mars. Heure : 8 h 30.
-Lieu : musée d'histoire.
-À apporter : pique-nique. Contact : Mme Petit.
+Je confirme l'exposé sur Rome. Le moment est lundi prochain, en salle 8.
+Venez calmement. Action à prévoir : envoyer trois images.
+Chaque élève parle deux minutes.
 
-À bientôt,
-Secrétariat`;
+À bientôt`;
 
 const E3_1_CE_EMAIL_POOL_4 = buildExpressPool("e3-1-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Sortie scolaire", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Sortie",
-    vfQ: "C'est Sortie scolaire.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Jeudi 20 mars", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["l'exposé sur Rome", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "jeudi",
-    vfQ: "Date : jeudi 20 mars.",
+    fillQ: "La matière est _________.",
+    fill: "l'exposé sur Rome",
+    vfQ: "Le texte mentionne l'exposé sur Rome.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["8 h 30", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["lundi prochain", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "8 30",
-    vfQ: "Heure : 8 h 30.",
+    fillQ: "C'est _________.",
+    fill: "lundi prochain",
+    vfQ: "Le texte mentionne lundi prochain.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Musée d'histoire", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle 8", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "musée",
-    vfQ: "Lieu : musée d'histoire.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle 8",
+    vfQ: "Le texte mentionne en salle 8.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Pique-nique", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["M. Weber", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "pique-nique",
-    vfQ: "Apporter : pique-nique.",
+    fillQ: "La personne est _________.",
+    fill: "M. Weber",
+    vfQ: "Le texte mentionne M. Weber.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Petit", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["envoyer trois images", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Petit",
-    vfQ: "Contact : Mme Petit.",
+    fillQ: "Il faut _________.",
+    fill: "envoyer trois images",
+    vfQ: "Le texte mentionne envoyer trois images.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_5 = `De : Université de Genève
-Objet : Examen partiel
+const E3_1_CE_EMAIL_TEXT_5 = `De : Vie scolaire
+Objet : Organisation
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Examen partiel.
-Date : mardi 8 avril. Heure : 14 h.
-Lieu : amphi A.
-À apporter : calculatrice. Contact : Prof. Dubois.
+Pour la chimie, l'entrée se fait autrement.
+Service des examens attend dans l'amphi B 20 avril à 13 h 30.
+Une seule consigne : prendre une calculatrice simple. Détail : La place de Sara est au rang 4.
 
-Cordialement,
-Université de Genève`;
+Vie scolaire`;
 
 const E3_1_CE_EMAIL_POOL_5 = buildExpressPool("e3-1-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Examen partiel", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Examen",
-    vfQ: "C'est Examen partiel.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mardi 8 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la chimie", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mardi",
-    vfQ: "Date : mardi 8 avril.",
+    fillQ: "La matière est _________.",
+    fill: "la chimie",
+    vfQ: "Le texte mentionne la chimie.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["14 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["20 avril à 13 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "14",
-    vfQ: "Heure : 14 h.",
+    fillQ: "C'est _________.",
+    fill: "20 avril à 13 h 30",
+    vfQ: "Le texte mentionne 20 avril à 13 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Amphi a", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans l'amphi B", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "amphi",
-    vfQ: "Lieu : amphi A.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans l'amphi B",
+    vfQ: "Le texte mentionne dans l'amphi B.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Calculatrice", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Service des examens", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "calculatrice",
-    vfQ: "Apporter : calculatrice.",
+    fillQ: "La personne est _________.",
+    fill: "Service des examens",
+    vfQ: "Le texte mentionne Service des examens.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Prof. Dubois", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["prendre une calculatrice simple", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Dubois",
-    vfQ: "Contact : Prof. Dubois.",
+    fillQ: "Il faut _________.",
+    fill: "prendre une calculatrice simple",
+    vfQ: "Le texte mentionne prendre une calculatrice simple.",
     vfC: 0,
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_6 = `De : Bibliothèque
-Objet : Horaires vacances
+Objet : Document prêt
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Horaires vacances.
-Date : juillet-août. Heure : 9 h – 17 h.
-Lieu : bibliothèque centrale.
-À apporter : carte membre. Contact : Mme Costa.
+Le document ou dossier pour les fusées à eau est prêt.
+Vous pouvez le demander mercredi à 14 h, derrière le gymnase. Club sciences connaît votre nom.
+Action à prévoir : apporter une bouteille vide.
 
-À bientôt,
-Bibliothèque`;
+Merci`;
 
 const E3_1_CE_EMAIL_POOL_6 = buildExpressPool("e3-1-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Horaires vacances", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Horaires",
-    vfQ: "C'est Horaires vacances.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Juillet-août", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["les fusées à eau", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "juillet-août",
-    vfQ: "Date : juillet-août.",
+    fillQ: "La matière est _________.",
+    fill: "les fusées à eau",
+    vfQ: "Le texte mentionne les fusées à eau.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["9 h – 17 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mercredi à 14 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "9",
-    vfQ: "Heure : 9 h – 17 h.",
+    fillQ: "C'est _________.",
+    fill: "mercredi à 14 h",
+    vfQ: "Le texte mentionne mercredi à 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Bibliothèque centrale", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["derrière le gymnase", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "bibliothèque",
-    vfQ: "Lieu : bibliothèque centrale.",
+    fillQ: "Le lieu est _________.",
+    fill: "derrière le gymnase",
+    vfQ: "Le texte mentionne derrière le gymnase.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Carte membre", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Club sciences", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "carte",
-    vfQ: "Apporter : carte membre.",
+    fillQ: "La personne est _________.",
+    fill: "Club sciences",
+    vfQ: "Le texte mentionne Club sciences.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Costa", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["apporter une bouteille vide", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Costa",
-    vfQ: "Contact : Mme Costa.",
+    fillQ: "Il faut _________.",
+    fill: "apporter une bouteille vide",
+    vfQ: "Le texte mentionne apporter une bouteille vide.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_7 = `De : Association parents
-Objet : Réunion
+const E3_1_CE_EMAIL_TEXT_7 = `De : Association
+Objet : Invitation
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Réunion.
-Date : mercredi 3 avril. Heure : 19 h.
-Lieu : salle polyvalente.
-À apporter : questions sur le projet. Contact : M. Blanc.
+Les familles ou amis sont invités pour la rencontre école-famille mardi à 19 h.
+Les informations seront visibles dans la salle polyvalente. Association des parents commencera l'accueil.
+Consigne : préparer une question.
 
-Cordialement,
-Association parents`;
+Association`;
 
 const E3_1_CE_EMAIL_POOL_7 = buildExpressPool("e3-1-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Réunion", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Réunion",
-    vfQ: "C'est Réunion.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mercredi 3 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la rencontre école-famille", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mercredi",
-    vfQ: "Date : mercredi 3 avril.",
+    fillQ: "La matière est _________.",
+    fill: "la rencontre école-famille",
+    vfQ: "Le texte mentionne la rencontre école-famille.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["19 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mardi à 19 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "19",
-    vfQ: "Heure : 19 h.",
+    fillQ: "C'est _________.",
+    fill: "mardi à 19 h",
+    vfQ: "Le texte mentionne mardi à 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle polyvalente", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans la salle polyvalente", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salle",
-    vfQ: "Lieu : salle polyvalente.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans la salle polyvalente",
+    vfQ: "Le texte mentionne dans la salle polyvalente.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Questions sur le projet", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Association des parents", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "questions",
-    vfQ: "Apporter : questions sur le projet.",
+    fillQ: "La personne est _________.",
+    fill: "Association des parents",
+    vfQ: "Le texte mentionne Association des parents.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["M. Blanc", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["préparer une question", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Blanc",
-    vfQ: "Contact : M. Blanc.",
+    fillQ: "Il faut _________.",
+    fill: "préparer une question",
+    vfQ: "Le texte mentionne préparer une question.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_8 = `De : Service scolarité
-Objet : Inscription
+const E3_1_CE_EMAIL_TEXT_8 = `De : Application
+Objet : Notification
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Inscription.
-Date : avant le 30 avril. Heure : en ligne.
-Lieu : portail étudiant.
-À apporter : pièces d'identité. Contact : Mme Singh.
+Une modification concerne le devoir en ligne.
+Le rendez-vous est sur Moodle avant vendredi minuit. Application Classe+ ajoute : Détail : Le brouillon peut rester privé.
+Action demandée : déposer le fichier.
 
-Cordialement,
-Service scolarité`;
+Application`;
 
 const E3_1_CE_EMAIL_POOL_8 = buildExpressPool("e3-1-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Inscription", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Inscription",
-    vfQ: "C'est Inscription.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Avant le 30 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["le devoir en ligne", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "avant",
-    vfQ: "Date : avant le 30 avril.",
+    fillQ: "La matière est _________.",
+    fill: "le devoir en ligne",
+    vfQ: "Le texte mentionne le devoir en ligne.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["en ligne", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["avant vendredi minuit", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "en ligne",
-    vfQ: "Heure : en ligne.",
+    fillQ: "C'est _________.",
+    fill: "avant vendredi minuit",
+    vfQ: "Le texte mentionne avant vendredi minuit.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Portail étudiant", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["sur Moodle", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "portail",
-    vfQ: "Lieu : portail étudiant.",
+    fillQ: "Le lieu est _________.",
+    fill: "sur Moodle",
+    vfQ: "Le texte mentionne sur Moodle.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Pièces d'identité", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Application Classe+", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "pièces",
-    vfQ: "Apporter : pièces d'identité.",
+    fillQ: "La personne est _________.",
+    fill: "Application Classe+",
+    vfQ: "Le texte mentionne Application Classe+.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Singh", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["déposer le fichier", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Singh",
-    vfQ: "Contact : Mme Singh.",
+    fillQ: "Il faut _________.",
+    fill: "déposer le fichier",
+    vfQ: "Le texte mentionne déposer le fichier.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_9 = `De : M. Weber
-Objet : Exposé histoire
+const E3_1_CE_EMAIL_TEXT_9 = `De : Service des examens
+Objet : Convocation
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Exposé histoire.
-Date : lundi 10 mars. Heure : en classe.
-Lieu : salle 8.
-À apporter : diapositives. Contact : M. Weber.
+Votre rendez-vous pour la physique est confirmé mercredi à 13 h.
+L'entrée se fait au labo 1; Laboratoire vérifie la salle.
+Avant le début, consigne : mettre la blouse.
 
-Cordialement,
-M. Weber`;
+Service des examens`;
 
 const E3_1_CE_EMAIL_POOL_9 = buildExpressPool("e3-1-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Exposé histoire", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Exposé",
-    vfQ: "C'est Exposé histoire.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Lundi 10 mars", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la physique", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "lundi",
-    vfQ: "Date : lundi 10 mars.",
+    fillQ: "La matière est _________.",
+    fill: "la physique",
+    vfQ: "Le texte mentionne la physique.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["en classe", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mercredi à 13 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "en classe",
-    vfQ: "Heure : en classe.",
+    fillQ: "C'est _________.",
+    fill: "mercredi à 13 h",
+    vfQ: "Le texte mentionne mercredi à 13 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle 8", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au labo 1", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salle",
-    vfQ: "Lieu : salle 8.",
+    fillQ: "Le lieu est _________.",
+    fill: "au labo 1",
+    vfQ: "Le texte mentionne au labo 1.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Diapositives", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Laboratoire", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "diapositives",
-    vfQ: "Apporter : diapositives.",
+    fillQ: "La personne est _________.",
+    fill: "Laboratoire",
+    vfQ: "Le texte mentionne Laboratoire.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["M. Weber", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["mettre la blouse", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Weber",
-    vfQ: "Contact : M. Weber.",
+    fillQ: "Il faut _________.",
+    fill: "mettre la blouse",
+    vfQ: "Le texte mentionne mettre la blouse.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_10 = `De : Club sport scolaire
-Objet : Entraînement
+const E3_1_CE_EMAIL_TEXT_10 = `De : Laboratoire
+Objet : Sécurité
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Entraînement.
-Date : mardi et jeudi. Heure : 17 h.
-Lieu : gymnase.
-À apporter : tenue de sport. Contact : M. Antoine.
+Pour l'orientation, attendez Mme Pop.
+Le groupe arrive au bureau 2 jeudi à 15 h. Détail : Le rendez-vous dure vingt minutes.
+Consigne : apporter les bulletins.
 
-Cordialement,
-Club sport scolaire`;
+Responsable`;
 
 const E3_1_CE_EMAIL_POOL_10 = buildExpressPool("e3-1-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Entraînement", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Entraînement",
-    vfQ: "C'est Entraînement.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mardi et jeudi", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["l'orientation", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mardi",
-    vfQ: "Date : mardi et jeudi.",
+    fillQ: "La matière est _________.",
+    fill: "l'orientation",
+    vfQ: "Le texte mentionne l'orientation.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["17 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["jeudi à 15 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "17",
-    vfQ: "Heure : 17 h.",
+    fillQ: "C'est _________.",
+    fill: "jeudi à 15 h",
+    vfQ: "Le texte mentionne jeudi à 15 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Gymnase", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au bureau 2", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "gymnase",
-    vfQ: "Lieu : gymnase.",
+    fillQ: "Le lieu est _________.",
+    fill: "au bureau 2",
+    vfQ: "Le texte mentionne au bureau 2.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Tenue de sport", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Mme Pop", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "tenue",
-    vfQ: "Apporter : tenue de sport.",
+    fillQ: "La personne est _________.",
+    fill: "Mme Pop",
+    vfQ: "Le texte mentionne Mme Pop.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["M. Antoine", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["apporter les bulletins", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Antoine",
-    vfQ: "Contact : M. Antoine.",
+    fillQ: "Il faut _________.",
+    fill: "apporter les bulletins",
+    vfQ: "Le texte mentionne apporter les bulletins.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_11 = `De : Mme Rossi
-Objet : Test d'anglais
+const E3_1_CE_EMAIL_TEXT_11 = `De : Surveillance
+Objet : Pause
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Test d'anglais.
-Date : vendredi 22 mars. Heure : 10 h.
-Lieu : salle 3.
-À apporter : vocabulaire unité 4. Contact : Mme Rossi.
+M. Antoine accompagne les personnes au gymnase.
+Après la pause, l'entraînement reprend mardi à 17 h.
+Pendant l'attente, action calme : porter une tenue de sport.
 
-Cordialement,
-Mme Rossi`;
+Bonne journée`;
 
 const E3_1_CE_EMAIL_POOL_11 = buildExpressPool("e3-1-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Test d'anglais", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Test",
-    vfQ: "C'est Test d'anglais.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Vendredi 22 mars", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["l'entraînement", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "vendredi",
-    vfQ: "Date : vendredi 22 mars.",
+    fillQ: "La matière est _________.",
+    fill: "l'entraînement",
+    vfQ: "Le texte mentionne l'entraînement.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["10 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mardi à 17 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "10",
-    vfQ: "Heure : 10 h.",
+    fillQ: "C'est _________.",
+    fill: "mardi à 17 h",
+    vfQ: "Le texte mentionne mardi à 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle 3", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au gymnase", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salle",
-    vfQ: "Lieu : salle 3.",
+    fillQ: "Le lieu est _________.",
+    fill: "au gymnase",
+    vfQ: "Le texte mentionne au gymnase.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Vocabulaire unité 4", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["M. Antoine", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "vocabulaire",
-    vfQ: "Apporter : vocabulaire unité 4.",
+    fillQ: "La personne est _________.",
+    fill: "M. Antoine",
+    vfQ: "Le texte mentionne M. Antoine.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Rossi", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["porter une tenue de sport", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Rossi",
-    vfQ: "Contact : Mme Rossi.",
+    fillQ: "Il faut _________.",
+    fill: "porter une tenue de sport",
+    vfQ: "Le texte mentionne porter une tenue de sport.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_12 = `De : Laboratoire
-Objet : TP chimie
+const E3_1_CE_EMAIL_TEXT_12 = `De : Club
+Objet : Inscription
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : TP chimie.
-Date : mercredi 17 avril. Heure : 13 h.
-Lieu : labo 3.
-À apporter : blouse et lunettes. Contact : Mme Hassan.
+Le club aide pour la conférence de droit. Prochaine séance : mardi 14 mai à 18 h.
+Elle a lieu dans l'amphi C avec Faculté de droit.
+Pour participer, action simple : s'inscrire en ligne. Détail : L'entrée est gratuite.
 
-À bientôt,
-Laboratoire`;
+Club`;
 
 const E3_1_CE_EMAIL_POOL_12 = buildExpressPool("e3-1-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["TP chimie", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "TP",
-    vfQ: "C'est TP chimie.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mercredi 17 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la conférence de droit", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mercredi",
-    vfQ: "Date : mercredi 17 avril.",
+    fillQ: "La matière est _________.",
+    fill: "la conférence de droit",
+    vfQ: "Le texte mentionne la conférence de droit.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["13 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mardi 14 mai à 18 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "13",
-    vfQ: "Heure : 13 h.",
+    fillQ: "C'est _________.",
+    fill: "mardi 14 mai à 18 h",
+    vfQ: "Le texte mentionne mardi 14 mai à 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Labo 3", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans l'amphi C", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "labo",
-    vfQ: "Lieu : labo 3.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans l'amphi C",
+    vfQ: "Le texte mentionne dans l'amphi C.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Blouse et lunettes", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Faculté de droit", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "blouse",
-    vfQ: "Apporter : blouse et lunettes.",
+    fillQ: "La personne est _________.",
+    fill: "Faculté de droit",
+    vfQ: "Le texte mentionne Faculté de droit.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Hassan", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["s'inscrire en ligne", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Hassan",
-    vfQ: "Contact : Mme Hassan.",
+    fillQ: "Il faut _________.",
+    fill: "s'inscrire en ligne",
+    vfQ: "Le texte mentionne s'inscrire en ligne.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_13 = `De : Orientation
-Objet : Conseil orientation
+const E3_1_CE_EMAIL_TEXT_13 = `De : École primaire
+Objet : Travail
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Conseil orientation.
-Date : jeudi 25 avril. Heure : 15 h.
-Lieu : bureau 2.
-À apporter : bulletins scolaires. Contact : Mme Pop.
+Je rappelle le travail ou rendez-vous de le goûter de fin d'année.
+Il est prévu mercredi 26 juin à 16 h, dans la cour.
+Avant la séance, consigne : apporter un plat à partager. Détail : Les classes chantent deux chansons.
 
-À bientôt,
-Orientation`;
+École primaire`;
 
 const E3_1_CE_EMAIL_POOL_13 = buildExpressPool("e3-1-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Conseil orientation", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Conseil",
-    vfQ: "C'est Conseil orientation.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Jeudi 25 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["le goûter de fin d'année", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "jeudi",
-    vfQ: "Date : jeudi 25 avril.",
+    fillQ: "La matière est _________.",
+    fill: "le goûter de fin d'année",
+    vfQ: "Le texte mentionne le goûter de fin d'année.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["15 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mercredi 26 juin à 16 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "15",
-    vfQ: "Heure : 15 h.",
+    fillQ: "C'est _________.",
+    fill: "mercredi 26 juin à 16 h",
+    vfQ: "Le texte mentionne mercredi 26 juin à 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Bureau 2", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans la cour", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "bureau",
-    vfQ: "Lieu : bureau 2.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans la cour",
+    vfQ: "Le texte mentionne dans la cour.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Bulletins scolaires", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["École primaire", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "bulletins",
-    vfQ: "Apporter : bulletins scolaires.",
+    fillQ: "La personne est _________.",
+    fill: "École primaire",
+    vfQ: "Le texte mentionne École primaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Pop", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["apporter un plat à partager", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Pop",
-    vfQ: "Contact : Mme Pop.",
+    fillQ: "Il faut _________.",
+    fill: "apporter un plat à partager",
+    vfQ: "Le texte mentionne apporter un plat à partager.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_14 = `De : Faculté droit
-Objet : Conférence
+const E3_1_CE_EMAIL_TEXT_14 = `De : Direction
+Objet : Changement
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Conférence.
-Date : mardi 14 mai. Heure : 18 h.
-Lieu : amphi C.
-À apporter : inscription gratuite. Contact : Prof. Dubois.
+la musique change d'organisation. Gymnase accompagne le groupe en salle de musique lundi 1 avril.
+La consigne pour tous : noter le report à mardi.
+Aucun élève ne doit venir à 15 h.
 
-Cordialement,
-Faculté droit`;
+Direction`;
 
 const E3_1_CE_EMAIL_POOL_14 = buildExpressPool("e3-1-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Conférence", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Conférence",
-    vfQ: "C'est Conférence.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mardi 14 mai", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la musique", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mardi",
-    vfQ: "Date : mardi 14 mai.",
+    fillQ: "La matière est _________.",
+    fill: "la musique",
+    vfQ: "Le texte mentionne la musique.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["18 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["lundi 1 avril", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "18",
-    vfQ: "Heure : 18 h.",
+    fillQ: "C'est _________.",
+    fill: "lundi 1 avril",
+    vfQ: "Le texte mentionne lundi 1 avril.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Amphi c", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle de musique", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "amphi",
-    vfQ: "Lieu : amphi C.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle de musique",
+    vfQ: "Le texte mentionne en salle de musique.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Inscription gratuite", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Gymnase", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "inscription",
-    vfQ: "Apporter : inscription gratuite.",
+    fillQ: "La personne est _________.",
+    fill: "Gymnase",
+    vfQ: "Le texte mentionne Gymnase.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Prof. Dubois", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["noter le report à mardi", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Dubois",
-    vfQ: "Contact : Prof. Dubois.",
+    fillQ: "Il faut _________.",
+    fill: "noter le report à mardi",
+    vfQ: "Le texte mentionne noter le report à mardi.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_15 = `De : École primaire
-Objet : Goûter fin d'année
+const E3_1_CE_EMAIL_TEXT_15 = `De : Forum
+Objet : Groupe
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Goûter fin d'année.
-Date : mercredi 26 juin. Heure : 16 h.
-Lieu : cour de l'école.
-À apporter : plat à partager. Contact : Mme Martin.
+Un groupe se forme pour la soirée d'intégration.
+La rencontre est samedi 21 septembre à 20 h, sur le campus. Association étudiante organise les rôles.
+Si vous venez, pensez à apporter une boisson.
 
-Cordialement,
-École primaire`;
+Forum`;
 
 const E3_1_CE_EMAIL_POOL_15 = buildExpressPool("e3-1-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Goûter fin d'année", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Goûter",
-    vfQ: "C'est Goûter fin d'année.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mercredi 26 juin", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la soirée d'intégration", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mercredi",
-    vfQ: "Date : mercredi 26 juin.",
+    fillQ: "La matière est _________.",
+    fill: "la soirée d'intégration",
+    vfQ: "Le texte mentionne la soirée d'intégration.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["16 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["samedi 21 septembre à 20 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "16",
-    vfQ: "Heure : 16 h.",
+    fillQ: "C'est _________.",
+    fill: "samedi 21 septembre à 20 h",
+    vfQ: "Le texte mentionne samedi 21 septembre à 20 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cour de l'école", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["sur le campus", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "cour",
-    vfQ: "Lieu : cour de l'école.",
+    fillQ: "Le lieu est _________.",
+    fill: "sur le campus",
+    vfQ: "Le texte mentionne sur le campus.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Plat à partager", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Association étudiante", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "plat",
-    vfQ: "Apporter : plat à partager.",
+    fillQ: "La personne est _________.",
+    fill: "Association étudiante",
+    vfQ: "Le texte mentionne Association étudiante.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Martin", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["apporter une boisson", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Martin",
-    vfQ: "Contact : Mme Martin.",
+    fillQ: "Il faut _________.",
+    fill: "apporter une boisson",
+    vfQ: "Le texte mentionne apporter une boisson.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_16 = `De : Portail étudiant
-Objet : Devoir en ligne
+const E3_1_CE_EMAIL_TEXT_16 = `De : Tutorats
+Objet : Révision
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Devoir en ligne.
-Date : vendredi 5 avril. Heure : minuit.
-Lieu : plateforme Moodle.
-À apporter : rapport de 5 pages. Contact : Mme Kim.
+La préparation de le projet météo commence lundi 29 avril.
+Elle se passe en salle info 4. M. Garcia répond aux questions.
+Ensuite, action finale : préparer une présentation. Détail : Les groupes comptent trois personnes.
 
-Cordialement,
-Portail étudiant`;
+Tutorats`;
 
 const E3_1_CE_EMAIL_POOL_16 = buildExpressPool("e3-1-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Devoir en ligne", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Devoir",
-    vfQ: "C'est Devoir en ligne.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Vendredi 5 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["le projet météo", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "vendredi",
-    vfQ: "Date : vendredi 5 avril.",
+    fillQ: "La matière est _________.",
+    fill: "le projet météo",
+    vfQ: "Le texte mentionne le projet météo.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["minuit", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["lundi 29 avril", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "minuit",
-    vfQ: "Heure : minuit.",
+    fillQ: "C'est _________.",
+    fill: "lundi 29 avril",
+    vfQ: "Le texte mentionne lundi 29 avril.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Plateforme moodle", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle info 4", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "plateforme",
-    vfQ: "Lieu : plateforme Moodle.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle info 4",
+    vfQ: "Le texte mentionne en salle info 4.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Rapport de 5 pages", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["M. Garcia", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "rapport",
-    vfQ: "Apporter : rapport de 5 pages.",
+    fillQ: "La personne est _________.",
+    fill: "M. Garcia",
+    vfQ: "Le texte mentionne M. Garcia.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Mme Kim", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["préparer une présentation", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Kim",
-    vfQ: "Contact : Mme Kim.",
+    fillQ: "Il faut _________.",
+    fill: "préparer une présentation",
+    vfQ: "Le texte mentionne préparer une présentation.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_17 = `De : Gymnase
-Objet : Cours annulé
+const E3_1_CE_EMAIL_TEXT_17 = `De : Journal
+Objet : Article
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Cours annulé.
-Date : lundi 1 avril. Heure : —.
-Lieu : salle musique.
-À apporter : reporté à mardi. Contact : M. Rossi.
+Nous préparons une brève nouvelle sur le QCM de biologie.
+Le groupe travaille mercredi 15 mai à 10 h, dans l'amphi B. Dr. Martin vérifie les noms.
+Consigne : réviser les chapitres 1 à 5.
 
-À bientôt,
-Gymnase`;
+Journal`;
 
 const E3_1_CE_EMAIL_POOL_17 = buildExpressPool("e3-1-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Cours annulé", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Cours",
-    vfQ: "C'est Cours annulé.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Lundi 1 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["le QCM de biologie", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "lundi",
-    vfQ: "Date : lundi 1 avril.",
+    fillQ: "La matière est _________.",
+    fill: "le QCM de biologie",
+    vfQ: "Le texte mentionne le QCM de biologie.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["—", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mercredi 15 mai à 10 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "—",
-    vfQ: "Heure : —.",
+    fillQ: "C'est _________.",
+    fill: "mercredi 15 mai à 10 h",
+    vfQ: "Le texte mentionne mercredi 15 mai à 10 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle musique", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans l'amphi B", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salle",
-    vfQ: "Lieu : salle musique.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans l'amphi B",
+    vfQ: "Le texte mentionne dans l'amphi B.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Reporté à mardi", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Dr. Martin", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "reporté",
-    vfQ: "Apporter : reporté à mardi.",
+    fillQ: "La personne est _________.",
+    fill: "Dr. Martin",
+    vfQ: "Le texte mentionne Dr. Martin.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["M. Rossi", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["réviser les chapitres 1 à 5", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Rossi",
-    vfQ: "Contact : M. Rossi.",
+    fillQ: "Il faut _________.",
+    fill: "réviser les chapitres 1 à 5",
+    vfQ: "Le texte mentionne réviser les chapitres 1 à 5.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_18 = `De : Association étudiante
-Objet : Soirée intégration
+const E3_1_CE_EMAIL_TEXT_18 = `De : Photographe scolaire
+Objet : Sortie
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Soirée intégration.
-Date : samedi 21 septembre. Heure : 20 h.
-Lieu : campus.
-À apporter : boisson à apporter. Contact : Bureau AE.
+Pour la photo de classe, le rendez-vous est dans le jardin vendredi à 11 h.
+La tenue ou préparation doit être simple. Détail : La commande des photos viendra plus tard.
+N'oubliez pas cette action : porter un haut clair.
 
-Cordialement,
-Association étudiante`;
+Photographe scolaire`;
 
 const E3_1_CE_EMAIL_POOL_18 = buildExpressPool("e3-1-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Soirée intégration", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Soirée",
-    vfQ: "C'est Soirée intégration.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Samedi 21 septembre", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["la photo de classe", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "samedi",
-    vfQ: "Date : samedi 21 septembre.",
+    fillQ: "La matière est _________.",
+    fill: "la photo de classe",
+    vfQ: "Le texte mentionne la photo de classe.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["20 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["vendredi à 11 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "20",
-    vfQ: "Heure : 20 h.",
+    fillQ: "C'est _________.",
+    fill: "vendredi à 11 h",
+    vfQ: "Le texte mentionne vendredi à 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Campus", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans le jardin", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "campus",
-    vfQ: "Lieu : campus.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans le jardin",
+    vfQ: "Le texte mentionne dans le jardin.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Boisson à apporter", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Photographe scolaire", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "boisson",
-    vfQ: "Apporter : boisson à apporter.",
+    fillQ: "La personne est _________.",
+    fill: "Photographe scolaire",
+    vfQ: "Le texte mentionne Photographe scolaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Bureau AE", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["porter un haut clair", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "AE",
-    vfQ: "Contact : Bureau AE.",
+    fillQ: "Il faut _________.",
+    fill: "porter un haut clair",
+    vfQ: "Le texte mentionne porter un haut clair.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_19 = `De : M. Garcia
-Objet : Projet informatique
+const E3_1_CE_EMAIL_TEXT_19 = `De : Portail étudiant
+Objet : Nouveau devoir
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : Projet informatique.
-Date : lundi 29 avril. Heure : en groupe.
-Lieu : salle info 4.
-À apporter : présentation PowerPoint. Contact : M. Garcia.
+Une tâche de le certificat de scolarité est disponible.
+Il faut la faire avant dès lundi. La ressource se trouve au secrétariat.
+Service scolarité corrigera après. Consigne : montrer une pièce d'identité.
 
-Cordialement,
-M. Garcia`;
+Portail`;
 
 const E3_1_CE_EMAIL_POOL_19 = buildExpressPool("e3-1-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["Projet informatique", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "Projet",
-    vfQ: "C'est Projet informatique.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Lundi 29 avril", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["le certificat de scolarité", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "lundi",
-    vfQ: "Date : lundi 29 avril.",
+    fillQ: "La matière est _________.",
+    fill: "le certificat de scolarité",
+    vfQ: "Le texte mentionne le certificat de scolarité.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["en groupe", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["dès lundi", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "en groupe",
-    vfQ: "Heure : en groupe.",
+    fillQ: "C'est _________.",
+    fill: "dès lundi",
+    vfQ: "Le texte mentionne dès lundi.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle info 4", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au secrétariat", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salle",
-    vfQ: "Lieu : salle info 4.",
+    fillQ: "Le lieu est _________.",
+    fill: "au secrétariat",
+    vfQ: "Le texte mentionne au secrétariat.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Présentation powerpoint", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Service scolarité", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "présentation",
-    vfQ: "Apporter : présentation PowerPoint.",
+    fillQ: "La personne est _________.",
+    fill: "Service scolarité",
+    vfQ: "Le texte mentionne Service scolarité.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["M. Garcia", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["montrer une pièce d'identité", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Garcia",
-    vfQ: "Contact : M. Garcia.",
+    fillQ: "Il faut _________.",
+    fill: "montrer une pièce d'identité",
+    vfQ: "Le texte mentionne montrer une pièce d'identité.",
     vfC: 0,
   }),
 ]);
-const E3_1_CE_EMAIL_TEXT_20 = `De : Dr. Martin
-Objet : QCM biologie
+const E3_1_CE_EMAIL_TEXT_20 = `De : Équipe pédagogique
+Objet : Journée spéciale
 
 Bonjour,
 
-Information importante pour les élèves/étudiants.
-Événement : QCM biologie.
-Date : mercredi 15 mai. Heure : 10 h.
-Lieu : amphi B.
-À apporter : réviser chapitres 1-5. Contact : Dr. Martin.
+La journée autour de le thème de l'eau aura lieu vendredi.
+Le matin, les groupes passent dans le hall avec Équipe pédagogique.
+En fin de journée, consigne : inviter les familles. Détail : Un jus de fruit sera offert.
 
-Cordialement,
-Dr. Martin`;
+Équipe pédagogique`;
 
 const E3_1_CE_EMAIL_POOL_20 = buildExpressPool("e3-1-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Quel est l'événement ?",
-    text: ["QCM biologie", "Un barbecue", "Un film"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Événement : _________.",
-    fill: "QCM",
-    vfQ: "C'est QCM biologie.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mercredi 15 mai", "Hier", "En 1990"],
+    textQ: "Quelle matière est mentionnée ?",
+    text: ["le thème de l'eau", "la cuisine", "le dessin libre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mercredi",
-    vfQ: "Date : mercredi 15 mai.",
+    fillQ: "La matière est _________.",
+    fill: "le thème de l'eau",
+    vfQ: "Le texte mentionne le thème de l'eau.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["10 h", "3 h du matin", "Minuit"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["vendredi", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "10",
-    vfQ: "Heure : 10 h.",
+    fillQ: "C'est _________.",
+    fill: "vendredi",
+    vfQ: "Le texte mentionne vendredi.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Amphi b", "À la plage", "À l'aéroport"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans le hall", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "amphi",
-    vfQ: "Lieu : amphi B.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans le hall",
+    vfQ: "Le texte mentionne dans le hall.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quoi apporter ?",
-    text: ["Réviser chapitres 1-5", "Rien", "Un passeport"],
+    textQ: "Qui est mentionné ?",
+    text: ["Équipe pédagogique", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "À apporter : _________.",
-    fill: "réviser",
-    vfQ: "Apporter : réviser chapitres 1-5.",
+    fillQ: "La personne est _________.",
+    fill: "Équipe pédagogique",
+    vfQ: "Le texte mentionne Équipe pédagogique.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Qui contacter ?",
-    text: ["Dr. Martin", "Le facteur", "Un voisin"],
+    textQ: "Que faut-il faire ?",
+    text: ["inviter les familles", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : _________.",
-    fill: "Martin",
-    vfQ: "Contact : Dr. Martin.",
+    fillQ: "Il faut _________.",
+    fill: "inviter les familles",
+    vfQ: "Le texte mentionne inviter les familles.",
     vfC: 0,
   }),
 ]);
@@ -2233,1763 +2172,1702 @@ export const E3_1_PE_EMAIL: ExpressPePrompt[] = [
    E3.2 — Décrire son quotidien
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E3_2_CE_EMAIL_TEXT_1 = `De : Dr. Martin
-Objet : Rendez-vous médical
+const E3_2_CE_EMAIL_TEXT_1 = `De : ma mère
+Objet : les courses
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : contrôle annuel.
-Date : mardi 12 mars. Heure : 10 h 30.
-Lieu : cabinet médical.
-Note : carte d'assurance.
+le budget est de 45 francs. Le rendez-vous est à 17 h, à la Migros du centre.
+Consigne : venir à pied.
 
 Cordialement,
-Dr. Martin`;
+ma mère`;
 
 const E3_2_CE_EMAIL_POOL_1 = buildExpressPool("e3-2-ce-email-1", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Contrôle annuel", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un SMS", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "contrôle",
-    vfQ: "C'est contrôle annuel.",
+    fillQ: "C'est _________.",
+    fill: "un SMS",
+    vfQ: "Le texte mentionne un SMS.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mardi 12 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["les courses", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mardi",
-    vfQ: "Date : mardi 12 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "les courses",
+    vfQ: "Le texte mentionne les courses.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["10 h 30", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 17 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "10 30",
-    vfQ: "Heure : 10 h 30.",
+    fillQ: "C'est _________.",
+    fill: "à 17 h",
+    vfQ: "Le texte mentionne à 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cabinet médical", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la Migros du centre", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "cabinet",
-    vfQ: "Lieu : cabinet médical.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la Migros du centre",
+    vfQ: "Le texte mentionne à la Migros du centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Carte d'assurance", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["ma mère", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "carte",
-    vfQ: "Note : carte d'assurance.",
+    fillQ: "La personne est _________.",
+    fill: "ma mère",
+    vfQ: "Le texte mentionne ma mère.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Rendez-vous médical", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à pied", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Rendez-vous",
-    vfQ: "Objet : Rendez-vous médical.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à pied",
+    vfQ: "Le texte mentionne venir à pied.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_2 = `De : Salon Élégance
-Objet : Confirmation RDV
+const E3_2_CE_EMAIL_TEXT_2 = `De : Secrétariat
+Objet : Information
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : coupe + brushing.
-Date : vendredi 8 mars. Heure : 16 h.
-Lieu : salon du centre.
-Note : arriver 5 min avant.
+Nous confirmons un rendez-vous médical à 10 h 30.
+le médecin accueillera le groupe au cabinet du Dr Martin. Action demandée : prendre le bus 5.
 
-Cordialement,
-Salon Élégance`;
+Le secrétariat`;
 
 const E3_2_CE_EMAIL_POOL_2 = buildExpressPool("e3-2-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Coupe + brushing", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un agenda", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "coupe",
-    vfQ: "C'est coupe + brushing.",
+    fillQ: "C'est _________.",
+    fill: "un agenda",
+    vfQ: "Le texte mentionne un agenda.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Vendredi 8 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un rendez-vous médical", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "vendredi",
-    vfQ: "Date : vendredi 8 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "un rendez-vous médical",
+    vfQ: "Le texte mentionne un rendez-vous médical.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["16 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 10 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "16",
-    vfQ: "Heure : 16 h.",
+    fillQ: "C'est _________.",
+    fill: "à 10 h 30",
+    vfQ: "Le texte mentionne à 10 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salon du centre", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au cabinet du Dr Martin", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salon",
-    vfQ: "Lieu : salon du centre.",
+    fillQ: "Le lieu est _________.",
+    fill: "au cabinet du Dr Martin",
+    vfQ: "Le texte mentionne au cabinet du Dr Martin.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Arriver 5 min avant", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["le médecin", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "arriver",
-    vfQ: "Note : arriver 5 min avant.",
+    fillQ: "La personne est _________.",
+    fill: "le médecin",
+    vfQ: "Le texte mentionne le médecin.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Confirmation RDV", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["prendre le bus 5", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Confirmation",
-    vfQ: "Objet : Confirmation RDV.",
+    fillQ: "Le transport est _________.",
+    fill: "prendre le bus 5",
+    vfQ: "Le texte mentionne prendre le bus 5.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_3 = `De : FitPlus
-Objet : Cours de yoga
+const E3_2_CE_EMAIL_TEXT_3 = `De : Portail
+Objet : À faire
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : cours débutant.
-Date : lundi et mercredi. Heure : 19 h.
-Lieu : salle de sport.
-Note : tapis de yoga.
+Une nouvelle consigne est disponible pour un déjeuner.
+Ouvrez-la avant à 12 h 30; elle concerne au restaurant Le Lac.
+mes parents demande cette action : venir en voiture. Détail : la table est près de la fenêtre.
 
-À bientôt,
-FitPlus`;
+Message automatique`;
 
 const E3_2_CE_EMAIL_POOL_3 = buildExpressPool("e3-2-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Cours débutant", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un WhatsApp", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "cours",
-    vfQ: "C'est cours débutant.",
+    fillQ: "C'est _________.",
+    fill: "un WhatsApp",
+    vfQ: "Le texte mentionne un WhatsApp.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Lundi et mercredi", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un déjeuner", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "lundi",
-    vfQ: "Date : lundi et mercredi.",
+    fillQ: "L'activité est _________.",
+    fill: "un déjeuner",
+    vfQ: "Le texte mentionne un déjeuner.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["19 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 12 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "19",
-    vfQ: "Heure : 19 h.",
+    fillQ: "C'est _________.",
+    fill: "à 12 h 30",
+    vfQ: "Le texte mentionne à 12 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle de sport", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au restaurant Le Lac", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salle",
-    vfQ: "Lieu : salle de sport.",
+    fillQ: "Le lieu est _________.",
+    fill: "au restaurant Le Lac",
+    vfQ: "Le texte mentionne au restaurant Le Lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Tapis de yoga", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["mes parents", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "tapis",
-    vfQ: "Note : tapis de yoga.",
+    fillQ: "La personne est _________.",
+    fill: "mes parents",
+    vfQ: "Le texte mentionne mes parents.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Cours de yoga", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir en voiture", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Cours",
-    vfQ: "Objet : Cours de yoga.",
+    fillQ: "Le transport est _________.",
+    fill: "venir en voiture",
+    vfQ: "Le texte mentionne venir en voiture.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_4 = `De : Cinéma ABC
-Objet : Réservation
+const E3_2_CE_EMAIL_TEXT_4 = `De : Tom
+Objet : Rappel
 
-Bonjour,
+Bonjour à tous,
 
-Information sur votre activité quotidienne.
-Activité : film français.
-Date : samedi 9 mars. Heure : 20 h.
-Lieu : salle 3.
-Note : billets en pièce jointe.
+Je confirme le sport. Le moment est à 19 h, chez FitPlus.
+Venez calmement. Action à prévoir : venir à vélo.
+le badge est dans la poche.
 
-Cordialement,
-Cinéma ABC`;
+À bientôt`;
 
 const E3_2_CE_EMAIL_POOL_4 = buildExpressPool("e3-2-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Film français", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une note", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "film",
-    vfQ: "C'est film français.",
+    fillQ: "C'est _________.",
+    fill: "une note",
+    vfQ: "Le texte mentionne une note.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Samedi 9 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["le sport", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "samedi",
-    vfQ: "Date : samedi 9 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "le sport",
+    vfQ: "Le texte mentionne le sport.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["20 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 19 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "20",
-    vfQ: "Heure : 20 h.",
+    fillQ: "C'est _________.",
+    fill: "à 19 h",
+    vfQ: "Le texte mentionne à 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle 3", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["chez FitPlus", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salle",
-    vfQ: "Lieu : salle 3.",
+    fillQ: "Le lieu est _________.",
+    fill: "chez FitPlus",
+    vfQ: "Le texte mentionne chez FitPlus.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Billets en pièce jointe", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Tom", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "billets",
-    vfQ: "Note : billets en pièce jointe.",
+    fillQ: "La personne est _________.",
+    fill: "Tom",
+    vfQ: "Le texte mentionne Tom.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réservation", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à vélo", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réservation",
-    vfQ: "Objet : Réservation.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à vélo",
+    vfQ: "Le texte mentionne venir à vélo.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_5 = `De : Pharmacie Centrale
-Objet : Médicaments prêts
+const E3_2_CE_EMAIL_TEXT_5 = `De : Vie scolaire
+Objet : Organisation
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : ordonnance.
-Date : aujourd'hui. Heure : toute la journée.
-Lieu : pharmacie.
-Note : carte d'assurance.
+Pour un retrait, l'entrée se fait autrement.
+le conseiller attend à la banque UBS à 14 h.
+Une seule consigne : venir à pied. Détail : le retrait prévu est de 200 francs.
 
-Cordialement,
-Pharmacie Centrale`;
+Vie scolaire`;
 
 const E3_2_CE_EMAIL_POOL_5 = buildExpressPool("e3-2-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Ordonnance", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une notification", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "ordonnance",
-    vfQ: "C'est ordonnance.",
+    fillQ: "C'est _________.",
+    fill: "une notification",
+    vfQ: "Le texte mentionne une notification.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Aujourd'hui", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un retrait", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "aujourd'hui",
-    vfQ: "Date : aujourd'hui.",
+    fillQ: "L'activité est _________.",
+    fill: "un retrait",
+    vfQ: "Le texte mentionne un retrait.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["toute la journée", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 14 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "toute la journée",
-    vfQ: "Heure : toute la journée.",
+    fillQ: "C'est _________.",
+    fill: "à 14 h",
+    vfQ: "Le texte mentionne à 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Pharmacie", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la banque UBS", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "pharmacie",
-    vfQ: "Lieu : pharmacie.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la banque UBS",
+    vfQ: "Le texte mentionne à la banque UBS.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Carte d'assurance", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["le conseiller", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "carte",
-    vfQ: "Note : carte d'assurance.",
+    fillQ: "La personne est _________.",
+    fill: "le conseiller",
+    vfQ: "Le texte mentionne le conseiller.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Médicaments prêts", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à pied", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Médicaments",
-    vfQ: "Objet : Médicaments prêts.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à pied",
+    vfQ: "Le texte mentionne venir à pied.",
     vfC: 0,
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_6 = `De : Bibliothèque
-Objet : Livres en retard
+Objet : Document prêt
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : rappel retour.
-Date : avant vendredi. Heure : 17 h.
-Lieu : bibliothèque.
-Note : éviter pénalité.
+Le document ou dossier pour une coupe de cheveux est prêt.
+Vous pouvez le demander à 16 h, au salon Élégance. Clara connaît votre nom.
+Action à prévoir : prendre le tram 12.
 
-À bientôt,
-Bibliothèque`;
+Merci`;
 
 const E3_2_CE_EMAIL_POOL_6 = buildExpressPool("e3-2-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Rappel retour", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un message", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "rappel",
-    vfQ: "C'est rappel retour.",
+    fillQ: "C'est _________.",
+    fill: "un message",
+    vfQ: "Le texte mentionne un message.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Avant vendredi", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["une coupe de cheveux", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "avant",
-    vfQ: "Date : avant vendredi.",
+    fillQ: "L'activité est _________.",
+    fill: "une coupe de cheveux",
+    vfQ: "Le texte mentionne une coupe de cheveux.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["17 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 16 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "17",
-    vfQ: "Heure : 17 h.",
+    fillQ: "C'est _________.",
+    fill: "à 16 h",
+    vfQ: "Le texte mentionne à 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Bibliothèque", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au salon Élégance", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "bibliothèque",
-    vfQ: "Lieu : bibliothèque.",
+    fillQ: "Le lieu est _________.",
+    fill: "au salon Élégance",
+    vfQ: "Le texte mentionne au salon Élégance.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Éviter pénalité", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Clara", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "éviter",
-    vfQ: "Note : éviter pénalité.",
+    fillQ: "La personne est _________.",
+    fill: "Clara",
+    vfQ: "Le texte mentionne Clara.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Livres en retard", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["prendre le tram 12", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Livres",
-    vfQ: "Objet : Livres en retard.",
+    fillQ: "Le transport est _________.",
+    fill: "prendre le tram 12",
+    vfQ: "Le texte mentionne prendre le tram 12.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_7 = `De : Restaurant Le Lac
-Objet : Réservation confirmée
+const E3_2_CE_EMAIL_TEXT_7 = `De : Association
+Objet : Invitation
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : dîner.
-Date : samedi 16 mars. Heure : 19 h 30.
-Lieu : table près de la fenêtre.
-Note : menu 45 francs.
+Les familles ou amis sont invités pour acheter du pain et des fruits à 18 h.
+Les informations seront visibles à la Coop du quartier. ma sœur commencera l'accueil.
+Consigne : venir à pied.
 
-Cordialement,
-Restaurant Le Lac`;
+Association`;
 
 const E3_2_CE_EMAIL_POOL_7 = buildExpressPool("e3-2-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Dîner", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une liste", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "dîner",
-    vfQ: "C'est dîner.",
+    fillQ: "C'est _________.",
+    fill: "une liste",
+    vfQ: "Le texte mentionne une liste.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Samedi 16 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["acheter du pain et des fruits", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "samedi",
-    vfQ: "Date : samedi 16 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "acheter du pain et des fruits",
+    vfQ: "Le texte mentionne acheter du pain et des fruits.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["19 h 30", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 18 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "19 30",
-    vfQ: "Heure : 19 h 30.",
+    fillQ: "C'est _________.",
+    fill: "à 18 h",
+    vfQ: "Le texte mentionne à 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Table près de la fenêtre", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la Coop du quartier", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "table",
-    vfQ: "Lieu : table près de la fenêtre.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la Coop du quartier",
+    vfQ: "Le texte mentionne à la Coop du quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Menu 45 francs", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["ma sœur", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "menu",
-    vfQ: "Note : menu 45 francs.",
+    fillQ: "La personne est _________.",
+    fill: "ma sœur",
+    vfQ: "Le texte mentionne ma sœur.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réservation confirmée", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à pied", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réservation",
-    vfQ: "Objet : Réservation confirmée.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à pied",
+    vfQ: "Le texte mentionne venir à pied.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_8 = `De : Banque UBS
-Objet : Relevé de compte
+const E3_2_CE_EMAIL_TEXT_8 = `De : Application
+Objet : Notification
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : document mensuel.
-Date : disponible. Heure : en ligne.
-Lieu : portail bancaire.
-Note : mot de passe.
+Une modification concerne un contrôle dentaire.
+Le rendez-vous est au cabinet dentaire à 9 h. la dentiste ajoute : Détail : le contrôle est couvert.
+Action demandée : prendre le bus.
 
-Cordialement,
-Banque UBS`;
+Application`;
 
 const E3_2_CE_EMAIL_POOL_8 = buildExpressPool("e3-2-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Document mensuel", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un SMS", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "document",
-    vfQ: "C'est document mensuel.",
+    fillQ: "C'est _________.",
+    fill: "un SMS",
+    vfQ: "Le texte mentionne un SMS.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Disponible", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un contrôle dentaire", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "disponible",
-    vfQ: "Date : disponible.",
+    fillQ: "L'activité est _________.",
+    fill: "un contrôle dentaire",
+    vfQ: "Le texte mentionne un contrôle dentaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["en ligne", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 9 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "en ligne",
-    vfQ: "Heure : en ligne.",
+    fillQ: "C'est _________.",
+    fill: "à 9 h",
+    vfQ: "Le texte mentionne à 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Portail bancaire", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au cabinet dentaire", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "portail",
-    vfQ: "Lieu : portail bancaire.",
+    fillQ: "Le lieu est _________.",
+    fill: "au cabinet dentaire",
+    vfQ: "Le texte mentionne au cabinet dentaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Mot de passe", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["la dentiste", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "mot",
-    vfQ: "Note : mot de passe.",
+    fillQ: "La personne est _________.",
+    fill: "la dentiste",
+    vfQ: "Le texte mentionne la dentiste.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Relevé de compte", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["prendre le bus", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Relevé",
-    vfQ: "Objet : Relevé de compte.",
+    fillQ: "Le transport est _________.",
+    fill: "prendre le bus",
+    vfQ: "Le texte mentionne prendre le bus.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_9 = `De : Club de tennis
-Objet : Match amical
+const E3_2_CE_EMAIL_TEXT_9 = `De : Service des examens
+Objet : Convocation
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : tennis double.
-Date : dimanche 10 mars. Heure : 15 h.
-Lieu : court n° 2.
-Note : raquette.
+Votre rendez-vous pour le cinéma est confirmé mercredi à 20 h.
+L'entrée se fait au cinéma ABC; Léa et Marc vérifie la salle.
+Avant le début, consigne : prendre le métro.
 
-Cordialement,
-Club de tennis`;
+Service des examens`;
 
 const E3_2_CE_EMAIL_POOL_9 = buildExpressPool("e3-2-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Tennis double", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un planning", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "tennis",
-    vfQ: "C'est tennis double.",
+    fillQ: "C'est _________.",
+    fill: "un planning",
+    vfQ: "Le texte mentionne un planning.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Dimanche 10 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["le cinéma", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "dimanche",
-    vfQ: "Date : dimanche 10 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "le cinéma",
+    vfQ: "Le texte mentionne le cinéma.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["15 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mercredi à 20 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "15",
-    vfQ: "Heure : 15 h.",
+    fillQ: "C'est _________.",
+    fill: "mercredi à 20 h",
+    vfQ: "Le texte mentionne mercredi à 20 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Court n° 2", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au cinéma ABC", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "court",
-    vfQ: "Lieu : court n° 2.",
+    fillQ: "Le lieu est _________.",
+    fill: "au cinéma ABC",
+    vfQ: "Le texte mentionne au cinéma ABC.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Raquette", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Léa et Marc", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "raquette",
-    vfQ: "Note : raquette.",
+    fillQ: "La personne est _________.",
+    fill: "Léa et Marc",
+    vfQ: "Le texte mentionne Léa et Marc.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Match amical", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["prendre le métro", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Match",
-    vfQ: "Objet : Match amical.",
+    fillQ: "Le transport est _________.",
+    fill: "prendre le métro",
+    vfQ: "Le texte mentionne prendre le métro.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_10 = `De : École culinaire
-Objet : Atelier pasta
+const E3_2_CE_EMAIL_TEXT_10 = `De : Laboratoire
+Objet : Sécurité
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : cours cuisine.
-Date : mardi 19 mars. Heure : 18 h 30.
-Lieu : cuisine école.
-Note : tablier.
+Pour chercher des médicaments, attendez mon fils.
+Le groupe arrive à la pharmacie du centre à 11 h. Détail : l'ordonnance est prête.
+Consigne : venir à pied.
 
-Cordialement,
-École culinaire`;
+Responsable`;
 
 const E3_2_CE_EMAIL_POOL_10 = buildExpressPool("e3-2-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Cours cuisine", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un message", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "cours",
-    vfQ: "C'est cours cuisine.",
+    fillQ: "C'est _________.",
+    fill: "un message",
+    vfQ: "Le texte mentionne un message.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mardi 19 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["chercher des médicaments", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mardi",
-    vfQ: "Date : mardi 19 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "chercher des médicaments",
+    vfQ: "Le texte mentionne chercher des médicaments.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["18 h 30", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 11 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "18 30",
-    vfQ: "Heure : 18 h 30.",
+    fillQ: "C'est _________.",
+    fill: "à 11 h",
+    vfQ: "Le texte mentionne à 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cuisine école", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la pharmacie du centre", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "cuisine",
-    vfQ: "Lieu : cuisine école.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la pharmacie du centre",
+    vfQ: "Le texte mentionne à la pharmacie du centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Tablier", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["mon fils", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "tablier",
-    vfQ: "Note : tablier.",
+    fillQ: "La personne est _________.",
+    fill: "mon fils",
+    vfQ: "Le texte mentionne mon fils.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Atelier pasta", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à pied", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Atelier",
-    vfQ: "Objet : Atelier pasta.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à pied",
+    vfQ: "Le texte mentionne venir à pied.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_11 = `De : Coiffeur Express
-Objet : Rappel RDV
+const E3_2_CE_EMAIL_TEXT_11 = `De : Surveillance
+Objet : Pause
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : coloration.
-Date : jeudi 21 mars. Heure : 14 h.
-Lieu : salon Express.
-Note : test allergie.
+Hugo accompagne les personnes au club de tennis.
+Après la pause, un match de tennis reprend à 15 h.
+Pendant l'attente, action calme : venir en voiture.
 
-Cordialement,
-Coiffeur Express`;
+Bonne journée`;
 
 const E3_2_CE_EMAIL_POOL_11 = buildExpressPool("e3-2-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Coloration", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un WhatsApp", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "coloration",
-    vfQ: "C'est coloration.",
+    fillQ: "C'est _________.",
+    fill: "un WhatsApp",
+    vfQ: "Le texte mentionne un WhatsApp.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Jeudi 21 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un match de tennis", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "jeudi",
-    vfQ: "Date : jeudi 21 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "un match de tennis",
+    vfQ: "Le texte mentionne un match de tennis.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["14 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 15 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "14",
-    vfQ: "Heure : 14 h.",
+    fillQ: "C'est _________.",
+    fill: "à 15 h",
+    vfQ: "Le texte mentionne à 15 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salon express", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au club de tennis", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "salon",
-    vfQ: "Lieu : salon Express.",
+    fillQ: "Le lieu est _________.",
+    fill: "au club de tennis",
+    vfQ: "Le texte mentionne au club de tennis.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Test allergie", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Hugo", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "test",
-    vfQ: "Note : test allergie.",
+    fillQ: "La personne est _________.",
+    fill: "Hugo",
+    vfQ: "Le texte mentionne Hugo.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Rappel RDV", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir en voiture", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Rappel",
-    vfQ: "Objet : Rappel RDV.",
+    fillQ: "Le transport est _________.",
+    fill: "venir en voiture",
+    vfQ: "Le texte mentionne venir en voiture.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_12 = `De : Piscine municipale
-Objet : Horaires Pâques
+const E3_2_CE_EMAIL_TEXT_12 = `De : Club
+Objet : Inscription
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : ouverture spéciale.
-Date : lundi de Pâques. Heure : 9 h – 18 h.
-Lieu : piscine.
-Note : entrée réduite.
+Le club aide pour un cours de cuisine. Prochaine séance : à 18 h 30.
+Elle a lieu à l'école culinaire avec un groupe de huit.
+Pour participer, action simple : prendre le bus 3. Détail : il faut un tablier.
 
-Cordialement,
-Piscine municipale`;
+Club`;
 
 const E3_2_CE_EMAIL_POOL_12 = buildExpressPool("e3-2-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Ouverture spéciale", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une note", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "ouverture",
-    vfQ: "C'est ouverture spéciale.",
+    fillQ: "C'est _________.",
+    fill: "une note",
+    vfQ: "Le texte mentionne une note.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Lundi de pâques", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un cours de cuisine", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "lundi",
-    vfQ: "Date : lundi de Pâques.",
+    fillQ: "L'activité est _________.",
+    fill: "un cours de cuisine",
+    vfQ: "Le texte mentionne un cours de cuisine.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["9 h – 18 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 18 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "9",
-    vfQ: "Heure : 9 h – 18 h.",
+    fillQ: "C'est _________.",
+    fill: "à 18 h 30",
+    vfQ: "Le texte mentionne à 18 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Piscine", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à l'école culinaire", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "piscine",
-    vfQ: "Lieu : piscine.",
+    fillQ: "Le lieu est _________.",
+    fill: "à l'école culinaire",
+    vfQ: "Le texte mentionne à l'école culinaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Entrée réduite", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["un groupe de huit", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "entrée",
-    vfQ: "Note : entrée réduite.",
+    fillQ: "La personne est _________.",
+    fill: "un groupe de huit",
+    vfQ: "Le texte mentionne un groupe de huit.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Horaires Pâques", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["prendre le bus 3", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Horaires",
-    vfQ: "Objet : Horaires Pâques.",
+    fillQ: "Le transport est _________.",
+    fill: "prendre le bus 3",
+    vfQ: "Le texte mentionne prendre le bus 3.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_13 = `De : Marché
-Objet : Marché bio
+const E3_2_CE_EMAIL_TEXT_13 = `De : Nora
+Objet : Travail
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : producteurs locaux.
-Date : samedi. Heure : 8 h – 13 h.
-Lieu : place du Marché.
-Note : sac réutilisable.
+Je rappelle le travail ou rendez-vous de rendre des livres.
+Il est prévu à 17 h 30, à la bibliothèque municipale.
+Avant la séance, consigne : venir à vélo. Détail : aucune amende aujourd'hui.
 
-À bientôt,
-Marché`;
+Nora`;
 
 const E3_2_CE_EMAIL_POOL_13 = buildExpressPool("e3-2-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Producteurs locaux", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un SMS", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "producteurs",
-    vfQ: "C'est producteurs locaux.",
+    fillQ: "C'est _________.",
+    fill: "un SMS",
+    vfQ: "Le texte mentionne un SMS.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Samedi", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["rendre des livres", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "samedi",
-    vfQ: "Date : samedi.",
+    fillQ: "L'activité est _________.",
+    fill: "rendre des livres",
+    vfQ: "Le texte mentionne rendre des livres.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["8 h – 13 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 17 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "8",
-    vfQ: "Heure : 8 h – 13 h.",
+    fillQ: "C'est _________.",
+    fill: "à 17 h 30",
+    vfQ: "Le texte mentionne à 17 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Place du marché", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la bibliothèque municipale", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "place",
-    vfQ: "Lieu : place du Marché.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la bibliothèque municipale",
+    vfQ: "Le texte mentionne à la bibliothèque municipale.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Sac réutilisable", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Nora", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "sac",
-    vfQ: "Note : sac réutilisable.",
+    fillQ: "La personne est _________.",
+    fill: "Nora",
+    vfQ: "Le texte mentionne Nora.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Marché bio", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à vélo", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Marché",
-    vfQ: "Objet : Marché bio.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à vélo",
+    vfQ: "Le texte mentionne venir à vélo.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_14 = `De : Dentiste
-Objet : Rappel contrôle
+const E3_2_CE_EMAIL_TEXT_14 = `De : Direction
+Objet : Changement
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : examen dentaire.
-Date : mercredi 27 mars. Heure : 9 h.
-Lieu : cabinet.
-Note : brosse à dents.
+le marché change d'organisation. ma grand-mère accompagne le groupe place du Marché samedi à 8 h.
+La consigne pour tous : prendre le tram.
+prendre un sac réutilisable.
 
-À bientôt,
-Dentiste`;
+Direction`;
 
 const E3_2_CE_EMAIL_POOL_14 = buildExpressPool("e3-2-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Examen dentaire", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un mémo", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "examen",
-    vfQ: "C'est examen dentaire.",
+    fillQ: "C'est _________.",
+    fill: "un mémo",
+    vfQ: "Le texte mentionne un mémo.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mercredi 27 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["le marché", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mercredi",
-    vfQ: "Date : mercredi 27 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "le marché",
+    vfQ: "Le texte mentionne le marché.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["9 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["samedi à 8 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "9",
-    vfQ: "Heure : 9 h.",
+    fillQ: "C'est _________.",
+    fill: "samedi à 8 h",
+    vfQ: "Le texte mentionne samedi à 8 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cabinet", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["place du Marché", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "cabinet",
-    vfQ: "Lieu : cabinet.",
+    fillQ: "Le lieu est _________.",
+    fill: "place du Marché",
+    vfQ: "Le texte mentionne place du Marché.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Brosse à dents", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["ma grand-mère", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "brosse",
-    vfQ: "Note : brosse à dents.",
+    fillQ: "La personne est _________.",
+    fill: "ma grand-mère",
+    vfQ: "Le texte mentionne ma grand-mère.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Rappel contrôle", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["prendre le tram", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Rappel",
-    vfQ: "Objet : Rappel contrôle.",
+    fillQ: "Le transport est _________.",
+    fill: "prendre le tram",
+    vfQ: "Le texte mentionne prendre le tram.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_15 = `De : Café du Port
-Objet : Brunch réservé
+const E3_2_CE_EMAIL_TEXT_15 = `De : Forum
+Objet : Groupe
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : brunch dominical.
-Date : dimanche 24 mars. Heure : 10 h.
-Lieu : terrasse.
-Note : réservation 2 personnes.
+Un groupe se forme pour une balade à vélo.
+La rencontre est à 10 h, au bord du lac. Emma organise les rôles.
+Si vous venez, pensez à venir à vélo.
 
-Cordialement,
-Café du Port`;
+Forum`;
 
 const E3_2_CE_EMAIL_POOL_15 = buildExpressPool("e3-2-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Brunch dominical", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un message", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "brunch",
-    vfQ: "C'est brunch dominical.",
+    fillQ: "C'est _________.",
+    fill: "un message",
+    vfQ: "Le texte mentionne un message.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Dimanche 24 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["une balade à vélo", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "dimanche",
-    vfQ: "Date : dimanche 24 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "une balade à vélo",
+    vfQ: "Le texte mentionne une balade à vélo.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["10 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 10 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "10",
-    vfQ: "Heure : 10 h.",
+    fillQ: "C'est _________.",
+    fill: "à 10 h",
+    vfQ: "Le texte mentionne à 10 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Terrasse", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au bord du lac", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "terrasse",
-    vfQ: "Lieu : terrasse.",
+    fillQ: "Le lieu est _________.",
+    fill: "au bord du lac",
+    vfQ: "Le texte mentionne au bord du lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Réservation 2 personnes", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Emma", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "réservation",
-    vfQ: "Note : réservation 2 personnes.",
+    fillQ: "La personne est _________.",
+    fill: "Emma",
+    vfQ: "Le texte mentionne Emma.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Brunch réservé", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à vélo", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Brunch",
-    vfQ: "Objet : Brunch réservé.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à vélo",
+    vfQ: "Le texte mentionne venir à vélo.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_16 = `De : Laverie
-Objet : Machine disponible
+const E3_2_CE_EMAIL_TEXT_16 = `De : Tutorats
+Objet : Révision
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : lave-linge libre.
-Date : maintenant. Heure : —.
-Lieu : laverie rez-de-chaussée.
-Note : pièces de 2 francs.
+La préparation de appeler la banque commence à 14 h.
+Elle se passe depuis la maison. Mme Keller répond aux questions.
+Ensuite, action finale : aucun transport. Détail : préparer le numéro de compte.
 
-À bientôt,
-Laverie`;
+Tutorats`;
 
 const E3_2_CE_EMAIL_POOL_16 = buildExpressPool("e3-2-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Lave-linge libre", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un rappel", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "lave-linge",
-    vfQ: "C'est lave-linge libre.",
+    fillQ: "C'est _________.",
+    fill: "un rappel",
+    vfQ: "Le texte mentionne un rappel.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Maintenant", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["appeler la banque", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "maintenant",
-    vfQ: "Date : maintenant.",
+    fillQ: "L'activité est _________.",
+    fill: "appeler la banque",
+    vfQ: "Le texte mentionne appeler la banque.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["—", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 14 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "—",
-    vfQ: "Heure : —.",
+    fillQ: "C'est _________.",
+    fill: "à 14 h",
+    vfQ: "Le texte mentionne à 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Laverie rez-de-chaussée", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["depuis la maison", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "laverie",
-    vfQ: "Lieu : laverie rez-de-chaussée.",
+    fillQ: "Le lieu est _________.",
+    fill: "depuis la maison",
+    vfQ: "Le texte mentionne depuis la maison.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Pièces de 2 francs", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Mme Keller", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "pièces",
-    vfQ: "Note : pièces de 2 francs.",
+    fillQ: "La personne est _________.",
+    fill: "Mme Keller",
+    vfQ: "Le texte mentionne Mme Keller.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Machine disponible", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["aucun transport", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Machine",
-    vfQ: "Objet : Machine disponible.",
+    fillQ: "Le transport est _________.",
+    fill: "aucun transport",
+    vfQ: "Le texte mentionne aucun transport.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_17 = `De : Médecin
-Objet : Résultats analyses
+const E3_2_CE_EMAIL_TEXT_17 = `De : Journal
+Objet : Article
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : documents médicaux.
-Date : à retirer. Heure : 14 h – 17 h.
-Lieu : secrétariat.
-Note : pièce d'identité.
+Nous préparons une brève nouvelle sur un apéro de quartier.
+Le groupe travaille à 18 h, dans la cour de l'immeuble. les voisins vérifie les noms.
+Consigne : venir à pied.
 
-À bientôt,
-Médecin`;
+Journal`;
 
 const E3_2_CE_EMAIL_POOL_17 = buildExpressPool("e3-2-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Documents médicaux", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un WhatsApp", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "documents",
-    vfQ: "C'est documents médicaux.",
+    fillQ: "C'est _________.",
+    fill: "un WhatsApp",
+    vfQ: "Le texte mentionne un WhatsApp.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["À retirer", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un apéro de quartier", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "à",
-    vfQ: "Date : à retirer.",
+    fillQ: "L'activité est _________.",
+    fill: "un apéro de quartier",
+    vfQ: "Le texte mentionne un apéro de quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["14 h – 17 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 18 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "14",
-    vfQ: "Heure : 14 h – 17 h.",
+    fillQ: "C'est _________.",
+    fill: "à 18 h",
+    vfQ: "Le texte mentionne à 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Secrétariat", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans la cour de l'immeuble", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "secrétariat",
-    vfQ: "Lieu : secrétariat.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans la cour de l'immeuble",
+    vfQ: "Le texte mentionne dans la cour de l'immeuble.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Pièce d'identité", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["les voisins", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "pièce",
-    vfQ: "Note : pièce d'identité.",
+    fillQ: "La personne est _________.",
+    fill: "les voisins",
+    vfQ: "Le texte mentionne les voisins.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Résultats analyses", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à pied", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Résultats",
-    vfQ: "Objet : Résultats analyses.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à pied",
+    vfQ: "Le texte mentionne venir à pied.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_18 = `De : Supermarché
-Objet : Offre spéciale
+const E3_2_CE_EMAIL_TEXT_18 = `De : Sami
+Objet : Sortie
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : promotions semaine.
-Date : jusqu'à dimanche. Heure : toute la journée.
-Lieu : Migros centre.
-Note : carte fidélité.
+Pour faire la lessive, le rendez-vous est à la laverie automatique demain à 9 h.
+La tenue ou préparation doit être simple. Détail : prévoir des pièces de 2 francs.
+N'oubliez pas cette action : venir à pied.
 
-À bientôt,
-Supermarché`;
+Sami`;
 
 const E3_2_CE_EMAIL_POOL_18 = buildExpressPool("e3-2-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Promotions semaine", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une note", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "promotions",
-    vfQ: "C'est promotions semaine.",
+    fillQ: "C'est _________.",
+    fill: "une note",
+    vfQ: "Le texte mentionne une note.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Jusqu'à dimanche", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["faire la lessive", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "jusqu'à",
-    vfQ: "Date : jusqu'à dimanche.",
+    fillQ: "L'activité est _________.",
+    fill: "faire la lessive",
+    vfQ: "Le texte mentionne faire la lessive.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["toute la journée", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["demain à 9 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "toute la journée",
-    vfQ: "Heure : toute la journée.",
+    fillQ: "C'est _________.",
+    fill: "demain à 9 h",
+    vfQ: "Le texte mentionne demain à 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Migros centre", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la laverie automatique", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "Migros",
-    vfQ: "Lieu : Migros centre.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la laverie automatique",
+    vfQ: "Le texte mentionne à la laverie automatique.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Carte fidélité", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["Sami", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "carte",
-    vfQ: "Note : carte fidélité.",
+    fillQ: "La personne est _________.",
+    fill: "Sami",
+    vfQ: "Le texte mentionne Sami.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Offre spéciale", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir à pied", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Offre",
-    vfQ: "Objet : Offre spéciale.",
+    fillQ: "Le transport est _________.",
+    fill: "venir à pied",
+    vfQ: "Le texte mentionne venir à pied.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_19 = `De : Voisins
-Objet : Fête de quartier
+const E3_2_CE_EMAIL_TEXT_19 = `De : Portail étudiant
+Objet : Nouveau devoir
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : apéro collectif.
-Date : samedi 30 mars. Heure : 17 h.
-Lieu : cour.
-Note : boisson à apporter.
+Une tâche de la natation est disponible.
+Il faut la faire avant à 7 h. La ressource se trouve à la piscine municipale.
+David corrigera après. Consigne : prendre le bus 8.
 
-À bientôt,
-Voisins`;
+Portail`;
 
 const E3_2_CE_EMAIL_POOL_19 = buildExpressPool("e3-2-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Apéro collectif", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un SMS", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "apéro",
-    vfQ: "C'est apéro collectif.",
+    fillQ: "C'est _________.",
+    fill: "un SMS",
+    vfQ: "Le texte mentionne un SMS.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Samedi 30 mars", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["la natation", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "samedi",
-    vfQ: "Date : samedi 30 mars.",
+    fillQ: "L'activité est _________.",
+    fill: "la natation",
+    vfQ: "Le texte mentionne la natation.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["17 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 7 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "17",
-    vfQ: "Heure : 17 h.",
+    fillQ: "C'est _________.",
+    fill: "à 7 h",
+    vfQ: "Le texte mentionne à 7 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cour", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la piscine municipale", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "cour",
-    vfQ: "Lieu : cour.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la piscine municipale",
+    vfQ: "Le texte mentionne à la piscine municipale.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Boisson à apporter", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["David", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "boisson",
-    vfQ: "Note : boisson à apporter.",
+    fillQ: "La personne est _________.",
+    fill: "David",
+    vfQ: "Le texte mentionne David.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Fête de quartier", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["prendre le bus 8", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Fête",
-    vfQ: "Objet : Fête de quartier.",
+    fillQ: "Le transport est _________.",
+    fill: "prendre le bus 8",
+    vfQ: "Le texte mentionne prendre le bus 8.",
     vfC: 0,
   }),
 ]);
-const E3_2_CE_EMAIL_TEXT_20 = `De : Sport club
-Objet : Entraînement
+const E3_2_CE_EMAIL_TEXT_20 = `De : Équipe pédagogique
+Objet : Journée spéciale
 
 Bonjour,
 
-Information sur votre activité quotidienne.
-Activité : football.
-Date : mardi et jeudi. Heure : 18 h.
-Lieu : stade municipal.
-Note : chaussures de sport.
+La journée autour de un brunch aura lieu dimanche à 10 h.
+Le matin, les groupes passent au café du Port avec mes amis.
+En fin de journée, consigne : venir en voiture. Détail : la réservation est pour quatre.
 
-Cordialement,
-Sport club`;
+Équipe pédagogique`;
 
 const E3_2_CE_EMAIL_POOL_20 = buildExpressPool("e3-2-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Quelle activité ?",
-    text: ["Football", "Dormir", "Voyager loin"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un planning", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Activité : _________.",
-    fill: "football",
-    vfQ: "C'est football.",
+    fillQ: "C'est _________.",
+    fill: "un planning",
+    vfQ: "Le texte mentionne un planning.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quelle date ?",
-    text: ["Mardi et jeudi", "Hier", "En 1800"],
+    textQ: "Quelle activité est mentionnée ?",
+    text: ["un brunch", "un examen", "dormir"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Date : _________.",
-    fill: "mardi",
-    vfQ: "Date : mardi et jeudi.",
+    fillQ: "L'activité est _________.",
+    fill: "un brunch",
+    vfQ: "Le texte mentionne un brunch.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "À quelle heure ?",
-    text: ["18 h", "Minuit", "4 h"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["dimanche à 10 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Heure : _________.",
-    fill: "18",
-    vfQ: "Heure : 18 h.",
+    fillQ: "C'est _________.",
+    fill: "dimanche à 10 h",
+    vfQ: "Le texte mentionne dimanche à 10 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Stade municipal", "En mer", "Dans l'espace"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au café du Port", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Lieu : _________.",
-    fill: "stade",
-    vfQ: "Lieu : stade municipal.",
+    fillQ: "Le lieu est _________.",
+    fill: "au café du Port",
+    vfQ: "Le texte mentionne au café du Port.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle note importante ?",
-    text: ["Chaussures de sport", "Rien", "Un chat"],
+    textQ: "Qui est mentionné ?",
+    text: ["mes amis", "un voisin", "le facteur"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "chaussures",
-    vfQ: "Note : chaussures de sport.",
+    fillQ: "La personne est _________.",
+    fill: "mes amis",
+    vfQ: "Le texte mentionne mes amis.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Entraînement", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quel transport est mentionné ?",
+    text: ["venir en voiture", "l'avion", "le bateau"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Entraînement",
-    vfQ: "Objet : Entraînement.",
+    fillQ: "Le transport est _________.",
+    fill: "venir en voiture",
+    vfQ: "Le texte mentionne venir en voiture.",
     vfC: 0,
   }),
 ]);
@@ -4444,1763 +4322,1702 @@ export const E3_2_PE_EMAIL: ExpressPePrompt[] = [
    E3.3 — Aller au travail
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E3_3_CE_EMAIL_TEXT_1 = `De : Marie Dubois
-Objet : Réunion lundi
+const E3_3_CE_EMAIL_TEXT_1 = `De : Marie
+Objet : SwissTech SA
 
 Bonjour,
 
-Message professionnel de SwissTech SA.
-Poste concerné : secrétaire.
-Quand : lundi 9 h. Où : salle 2.
-Détail : ordre du jour en pièce jointe.
-Merci de confirmer votre présence.
+secrétaire. Le rendez-vous est à 8 h, au bureau d'accueil.
+Consigne : répondre aux e-mails.
 
 Cordialement,
-Marie Dubois`;
+Marie`;
 
 const E3_3_CE_EMAIL_POOL_1 = buildExpressPool("e3-3-ce-email-1", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["SwissTech SA", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail interne", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "SwissTech",
-    vfQ: "C'est SwissTech SA.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail interne",
+    vfQ: "Le texte mentionne un e-mail interne.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Secrétaire", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["SwissTech SA", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "secrétaire",
-    vfQ: "Poste : secrétaire.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "SwissTech SA",
+    vfQ: "Le texte mentionne SwissTech SA.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Lundi 9 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["secrétaire", "infirmier", "serveur"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["secrétaire", "infirmier", "serveur"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "lundi",
-    vfQ: "Quand : lundi 9 h.",
+    fillQ: "La profession est _________.",
+    fill: "secrétaire",
+    vfQ: "Le texte mentionne secrétaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle 2", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 8 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "salle",
-    vfQ: "Où : salle 2.",
+    fillQ: "C'est _________.",
+    fill: "à 8 h",
+    vfQ: "Le texte mentionne à 8 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Ordre du jour en pièce jointe", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au bureau d'accueil", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "ordre",
-    vfQ: "Détail : ordre du jour en pièce jointe.",
+    fillQ: "Le lieu est _________.",
+    fill: "au bureau d'accueil",
+    vfQ: "Le texte mentionne au bureau d'accueil.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réunion lundi", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["répondre aux e-mails", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réunion",
-    vfQ: "Objet : Réunion lundi.",
+    fillQ: "Il faut _________.",
+    fill: "répondre aux e-mails",
+    vfQ: "Le texte mentionne répondre aux e-mails.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_2 = `De : Dr. Keller
-Objet : Briefing matinal
+const E3_3_CE_EMAIL_TEXT_2 = `De : Secrétariat
+Objet : Information
 
 Bonjour,
 
-Message professionnel de Hôpital cantonal.
-Poste concerné : infirmier.
-Quand : 5 h 45. Où : salle de réunion.
-Détail : présence obligatoire.
-Merci de confirmer votre présence.
+Nous confirmons Hôpital cantonal à 5 h 45.
+Dr. Keller accueillera le groupe en salle de réunion. Action demandée : préparer les soins.
 
-Cordialement,
-Dr. Keller`;
+Le secrétariat`;
 
 const E3_3_CE_EMAIL_POOL_2 = buildExpressPool("e3-3-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Hôpital cantonal", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une note", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Hôpital",
-    vfQ: "C'est Hôpital cantonal.",
+    fillQ: "C'est _________.",
+    fill: "une note",
+    vfQ: "Le texte mentionne une note.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Infirmier", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Hôpital cantonal", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "infirmier",
-    vfQ: "Poste : infirmier.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Hôpital cantonal",
+    vfQ: "Le texte mentionne Hôpital cantonal.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["5 h 45", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["infirmier", "secrétaire", "serveur"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["infirmier", "secrétaire", "serveur"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "5",
-    vfQ: "Quand : 5 h 45.",
+    fillQ: "La profession est _________.",
+    fill: "infirmier",
+    vfQ: "Le texte mentionne infirmier.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle de réunion", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 5 h 45", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "salle",
-    vfQ: "Où : salle de réunion.",
+    fillQ: "C'est _________.",
+    fill: "à 5 h 45",
+    vfQ: "Le texte mentionne à 5 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Présence obligatoire", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle de réunion", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "présence",
-    vfQ: "Détail : présence obligatoire.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle de réunion",
+    vfQ: "Le texte mentionne en salle de réunion.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Briefing matinal", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["préparer les soins", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Briefing",
-    vfQ: "Objet : Briefing matinal.",
+    fillQ: "Il faut _________.",
+    fill: "préparer les soins",
+    vfQ: "Le texte mentionne préparer les soins.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_3 = `De : Chef Marco
-Objet : Service du soir
+const E3_3_CE_EMAIL_TEXT_3 = `De : Portail
+Objet : À faire
 
 Bonjour,
 
-Message professionnel de Restaurant Le Sapin.
-Poste concerné : serveur.
-Quand : 10 h 30. Où : cuisine.
-Détail : tenue impeccable.
-Merci de confirmer votre présence.
+Une nouvelle consigne est disponible pour Restaurant Le Sapin.
+Ouvrez-la avant à 10 h 30; elle concerne en cuisine.
+Chef Marco demande cette action : servir les clients. Détail : serveur.
 
-Cordialement,
-Chef Marco`;
+Message automatique`;
 
 const E3_3_CE_EMAIL_POOL_3 = buildExpressPool("e3-3-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Restaurant Le Sapin", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un SMS", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Le Sapin.",
+    fillQ: "C'est _________.",
+    fill: "un SMS",
+    vfQ: "Le texte mentionne un SMS.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Serveur", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Restaurant Le Sapin", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "serveur",
-    vfQ: "Poste : serveur.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Restaurant Le Sapin",
+    vfQ: "Le texte mentionne Restaurant Le Sapin.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["10 h 30", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["serveur", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["serveur", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "10",
-    vfQ: "Quand : 10 h 30.",
+    fillQ: "La profession est _________.",
+    fill: "serveur",
+    vfQ: "Le texte mentionne serveur.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cuisine", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 10 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "cuisine",
-    vfQ: "Où : cuisine.",
+    fillQ: "C'est _________.",
+    fill: "à 10 h 30",
+    vfQ: "Le texte mentionne à 10 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Tenue impeccable", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en cuisine", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "tenue",
-    vfQ: "Détail : tenue impeccable.",
+    fillQ: "Le lieu est _________.",
+    fill: "en cuisine",
+    vfQ: "Le texte mentionne en cuisine.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Service du soir", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["servir les clients", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Service",
-    vfQ: "Objet : Service du soir.",
+    fillQ: "Il faut _________.",
+    fill: "servir les clients",
+    vfQ: "Le texte mentionne servir les clients.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_4 = `De : Paul Garcia
-Objet : Voiture à réparer
+const E3_3_CE_EMAIL_TEXT_4 = `De : Paul
+Objet : Rappel
 
-Bonjour,
+Bonjour à tous,
 
-Message professionnel de Garage Central.
-Poste concerné : mécanicien.
-Quand : 7 h. Où : atelier.
-Détail : pièces commandées.
-Merci de confirmer votre présence.
+Je confirme Garage Central. Le moment est à 7 h, à l'atelier.
+Venez calmement. Action à prévoir : réparer une voiture.
+mécanicien.
 
-Cordialement,
-Paul Garcia`;
+À bientôt`;
 
 const E3_3_CE_EMAIL_POOL_4 = buildExpressPool("e3-3-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Garage Central", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un WhatsApp", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Garage",
-    vfQ: "C'est Garage Central.",
+    fillQ: "C'est _________.",
+    fill: "un WhatsApp",
+    vfQ: "Le texte mentionne un WhatsApp.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Mécanicien", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Garage Central", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "mécanicien",
-    vfQ: "Poste : mécanicien.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Garage Central",
+    vfQ: "Le texte mentionne Garage Central.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["7 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["mécanicien", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["mécanicien", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "7",
-    vfQ: "Quand : 7 h.",
+    fillQ: "La profession est _________.",
+    fill: "mécanicien",
+    vfQ: "Le texte mentionne mécanicien.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Atelier", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 7 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "atelier",
-    vfQ: "Où : atelier.",
+    fillQ: "C'est _________.",
+    fill: "à 7 h",
+    vfQ: "Le texte mentionne à 7 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Pièces commandées", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à l'atelier", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "pièces",
-    vfQ: "Détail : pièces commandées.",
+    fillQ: "Le lieu est _________.",
+    fill: "à l'atelier",
+    vfQ: "Le texte mentionne à l'atelier.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Voiture à réparer", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["réparer une voiture", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Voiture",
-    vfQ: "Objet : Voiture à réparer.",
+    fillQ: "Il faut _________.",
+    fill: "réparer une voiture",
+    vfQ: "Le texte mentionne réparer une voiture.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_5 = `De : Sophie Martin
-Objet : Formation
+const E3_3_CE_EMAIL_TEXT_5 = `De : Vie scolaire
+Objet : Organisation
 
 Bonjour,
 
-Message professionnel de Banque Populaire.
-Poste concerné : conseiller.
-Quand : mardi 14 h. Où : salle formation.
-Détail : apporter cahier.
-Merci de confirmer votre présence.
+Pour Banque Populaire, l'entrée se fait autrement.
+Sophie attend en salle formation mardi à 14 h.
+Une seule consigne : accueillir les clients. Détail : secrétaire.
 
-Cordialement,
-Sophie Martin`;
+Vie scolaire`;
 
 const E3_3_CE_EMAIL_POOL_5 = buildExpressPool("e3-3-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Banque Populaire", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une annonce RH", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Banque",
-    vfQ: "C'est Banque Populaire.",
+    fillQ: "C'est _________.",
+    fill: "une annonce RH",
+    vfQ: "Le texte mentionne une annonce RH.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Conseiller", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Banque Populaire", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "conseiller",
-    vfQ: "Poste : conseiller.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Banque Populaire",
+    vfQ: "Le texte mentionne Banque Populaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Mardi 14 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["secrétaire", "infirmier", "serveur"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["secrétaire", "infirmier", "serveur"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "mardi",
-    vfQ: "Quand : mardi 14 h.",
+    fillQ: "La profession est _________.",
+    fill: "secrétaire",
+    vfQ: "Le texte mentionne secrétaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle formation", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mardi à 14 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "salle",
-    vfQ: "Où : salle formation.",
+    fillQ: "C'est _________.",
+    fill: "mardi à 14 h",
+    vfQ: "Le texte mentionne mardi à 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Apporter cahier", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle formation", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "apporter",
-    vfQ: "Détail : apporter cahier.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle formation",
+    vfQ: "Le texte mentionne en salle formation.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Formation", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["accueillir les clients", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Formation",
-    vfQ: "Objet : Formation.",
+    fillQ: "Il faut _________.",
+    fill: "accueillir les clients",
+    vfQ: "Le texte mentionne accueillir les clients.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_6 = `De : Julie Petit
-Objet : Inventaire
+const E3_3_CE_EMAIL_TEXT_6 = `De : Bibliothèque
+Objet : Document prêt
 
 Bonjour,
 
-Message professionnel de Pharmacie du Lac.
-Poste concerné : pharmacien.
-Quand : vendredi 18 h. Où : pharmacie.
-Détail : compter les stocks.
-Merci de confirmer votre présence.
+Le document ou dossier pour Pharmacie du Lac est prêt.
+Vous pouvez le demander vendredi à 18 h, dans la pharmacie. Julie connaît votre nom.
+Action à prévoir : compter les stocks.
 
-Cordialement,
-Julie Petit`;
+Merci`;
 
 const E3_3_CE_EMAIL_POOL_6 = buildExpressPool("e3-3-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Pharmacie du Lac", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un message", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Pharmacie",
-    vfQ: "C'est Pharmacie du Lac.",
+    fillQ: "C'est _________.",
+    fill: "un message",
+    vfQ: "Le texte mentionne un message.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Pharmacien", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Pharmacie du Lac", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "pharmacien",
-    vfQ: "Poste : pharmacien.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Pharmacie du Lac",
+    vfQ: "Le texte mentionne Pharmacie du Lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Vendredi 18 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["pharmacien", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["pharmacien", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "vendredi",
-    vfQ: "Quand : vendredi 18 h.",
+    fillQ: "La profession est _________.",
+    fill: "pharmacien",
+    vfQ: "Le texte mentionne pharmacien.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Pharmacie", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["vendredi à 18 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "pharmacie",
-    vfQ: "Où : pharmacie.",
+    fillQ: "C'est _________.",
+    fill: "vendredi à 18 h",
+    vfQ: "Le texte mentionne vendredi à 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Compter les stocks", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans la pharmacie", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "compter",
-    vfQ: "Détail : compter les stocks.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans la pharmacie",
+    vfQ: "Le texte mentionne dans la pharmacie.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Inventaire", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["compter les stocks", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Inventaire",
-    vfQ: "Objet : Inventaire.",
+    fillQ: "Il faut _________.",
+    fill: "compter les stocks",
+    vfQ: "Le texte mentionne compter les stocks.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_7 = `De : M. Martin
-Objet : Conseil de classe
+const E3_3_CE_EMAIL_TEXT_7 = `De : Association
+Objet : Invitation
 
 Bonjour,
 
-Message professionnel de École primaire.
-Poste concerné : professeur.
-Quand : jeudi 17 h. Où : salle des profs.
-Détail : bulletins à préparer.
-Merci de confirmer votre présence.
+Les familles ou amis sont invités pour École primaire jeudi à 17 h.
+Les informations seront visibles en salle des profs. Mme Martin commencera l'accueil.
+Consigne : préparer les bulletins.
 
-Cordialement,
-M. Martin`;
+Association`;
 
 const E3_3_CE_EMAIL_POOL_7 = buildExpressPool("e3-3-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["École primaire", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un planning", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "École",
-    vfQ: "C'est École primaire.",
+    fillQ: "C'est _________.",
+    fill: "un planning",
+    vfQ: "Le texte mentionne un planning.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Professeur", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["École primaire", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "professeur",
-    vfQ: "Poste : professeur.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "École primaire",
+    vfQ: "Le texte mentionne École primaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Jeudi 17 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["professeur", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["professeur", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "jeudi",
-    vfQ: "Quand : jeudi 17 h.",
+    fillQ: "La profession est _________.",
+    fill: "professeur",
+    vfQ: "Le texte mentionne professeur.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle des profs", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["jeudi à 17 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "salle",
-    vfQ: "Où : salle des profs.",
+    fillQ: "C'est _________.",
+    fill: "jeudi à 17 h",
+    vfQ: "Le texte mentionne jeudi à 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Bulletins à préparer", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle des profs", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "bulletins",
-    vfQ: "Détail : bulletins à préparer.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle des profs",
+    vfQ: "Le texte mentionne en salle des profs.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Conseil de classe", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["préparer les bulletins", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Conseil",
-    vfQ: "Objet : Conseil de classe.",
+    fillQ: "Il faut _________.",
+    fill: "préparer les bulletins",
+    vfQ: "Le texte mentionne préparer les bulletins.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_8 = `De : Emma Laurent
-Objet : Devis client
+const E3_3_CE_EMAIL_TEXT_8 = `De : Application
+Objet : Notification
 
 Bonjour,
 
-Message professionnel de Agence Voyage.
-Poste concerné : vendeur.
-Quand : mercredi 11 h. Où : bureau.
-Détail : devis Bali en pièce jointe.
-Merci de confirmer votre présence.
+Une modification concerne Agence Voyage.
+Le rendez-vous est au bureau mercredi à 11 h. Emma ajoute : Détail : vendeur.
+Action demandée : préparer un devis.
 
-Cordialement,
-Emma Laurent`;
+Application`;
 
 const E3_3_CE_EMAIL_POOL_8 = buildExpressPool("e3-3-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Agence Voyage", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail client", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Agence",
-    vfQ: "C'est Agence Voyage.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail client",
+    vfQ: "Le texte mentionne un e-mail client.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Vendeur", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Agence Voyage", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "vendeur",
-    vfQ: "Poste : vendeur.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Agence Voyage",
+    vfQ: "Le texte mentionne Agence Voyage.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Mercredi 11 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["vendeur", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["vendeur", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "mercredi",
-    vfQ: "Quand : mercredi 11 h.",
+    fillQ: "La profession est _________.",
+    fill: "vendeur",
+    vfQ: "Le texte mentionne vendeur.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Bureau", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mercredi à 11 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "bureau",
-    vfQ: "Où : bureau.",
+    fillQ: "C'est _________.",
+    fill: "mercredi à 11 h",
+    vfQ: "Le texte mentionne mercredi à 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Devis bali en pièce jointe", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au bureau", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "devis",
-    vfQ: "Détail : devis Bali en pièce jointe.",
+    fillQ: "Le lieu est _________.",
+    fill: "au bureau",
+    vfQ: "Le texte mentionne au bureau.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Devis client", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["préparer un devis", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Devis",
-    vfQ: "Objet : Devis client.",
+    fillQ: "Il faut _________.",
+    fill: "préparer un devis",
+    vfQ: "Le texte mentionne préparer un devis.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_9 = `De : Thomas Keller
-Objet : Contrôle qualité
+const E3_3_CE_EMAIL_TEXT_9 = `De : Service des examens
+Objet : Convocation
 
 Bonjour,
 
-Message professionnel de Boulangerie Martin.
-Poste concerné : boulanger.
-Quand : lundi 6 h. Où : laboratoire.
-Détail : checklist à remplir.
-Merci de confirmer votre présence.
+Votre rendez-vous pour Boulangerie Martin est confirmé lundi à 6 h.
+L'entrée se fait au laboratoire; Thomas vérifie la salle.
+Avant le début, consigne : faire le pain.
 
-Cordialement,
-Thomas Keller`;
+Service des examens`;
 
 const E3_3_CE_EMAIL_POOL_9 = buildExpressPool("e3-3-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Boulangerie Martin", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une note de réunion", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Martin.",
+    fillQ: "C'est _________.",
+    fill: "une note de réunion",
+    vfQ: "Le texte mentionne une note de réunion.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Boulanger", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Boulangerie Martin", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "boulanger",
-    vfQ: "Poste : boulanger.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Boulangerie Martin",
+    vfQ: "Le texte mentionne Boulangerie Martin.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Lundi 6 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["boulanger", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["boulanger", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "lundi",
-    vfQ: "Quand : lundi 6 h.",
+    fillQ: "La profession est _________.",
+    fill: "boulanger",
+    vfQ: "Le texte mentionne boulanger.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Laboratoire", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["lundi à 6 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "laboratoire",
-    vfQ: "Où : laboratoire.",
+    fillQ: "C'est _________.",
+    fill: "lundi à 6 h",
+    vfQ: "Le texte mentionne lundi à 6 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Checklist à remplir", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au laboratoire", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "checklist",
-    vfQ: "Détail : checklist à remplir.",
+    fillQ: "Le lieu est _________.",
+    fill: "au laboratoire",
+    vfQ: "Le texte mentionne au laboratoire.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Contrôle qualité", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["faire le pain", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Contrôle",
-    vfQ: "Objet : Contrôle qualité.",
+    fillQ: "Il faut _________.",
+    fill: "faire le pain",
+    vfQ: "Le texte mentionne faire le pain.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_10 = `De : Maître Blanc
-Objet : Audience
+const E3_3_CE_EMAIL_TEXT_10 = `De : Laboratoire
+Objet : Sécurité
 
 Bonjour,
 
-Message professionnel de Cabinet d'avocats.
-Poste concerné : secrétaire.
-Quand : mardi 10 h. Où : tribunal.
-Détail : dossier n° 45.
-Merci de confirmer votre présence.
+Pour Cabinet d'avocats, attendez Maître Blanc.
+Le groupe arrive au tribunal mardi à 10 h. Détail : secrétaire.
+Consigne : classer les dossiers.
 
-Cordialement,
-Maître Blanc`;
+Responsable`;
 
 const E3_3_CE_EMAIL_POOL_10 = buildExpressPool("e3-3-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Cabinet d'avocats", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un SMS", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Cabinet",
-    vfQ: "C'est Cabinet d'avocats.",
+    fillQ: "C'est _________.",
+    fill: "un SMS",
+    vfQ: "Le texte mentionne un SMS.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Secrétaire", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Cabinet d'avocats", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "secrétaire",
-    vfQ: "Poste : secrétaire.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Cabinet d'avocats",
+    vfQ: "Le texte mentionne Cabinet d'avocats.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Mardi 10 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["secrétaire", "infirmier", "serveur"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["secrétaire", "infirmier", "serveur"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "mardi",
-    vfQ: "Quand : mardi 10 h.",
+    fillQ: "La profession est _________.",
+    fill: "secrétaire",
+    vfQ: "Le texte mentionne secrétaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Tribunal", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mardi à 10 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "tribunal",
-    vfQ: "Où : tribunal.",
+    fillQ: "C'est _________.",
+    fill: "mardi à 10 h",
+    vfQ: "Le texte mentionne mardi à 10 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Dossier n° 45", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au tribunal", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "dossier",
-    vfQ: "Détail : dossier n° 45.",
+    fillQ: "Le lieu est _________.",
+    fill: "au tribunal",
+    vfQ: "Le texte mentionne au tribunal.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Audience", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["classer les dossiers", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Audience",
-    vfQ: "Objet : Audience.",
+    fillQ: "Il faut _________.",
+    fill: "classer les dossiers",
+    vfQ: "Le texte mentionne classer les dossiers.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_11 = `De : Hugo Martin
-Objet : Shift soir
+const E3_3_CE_EMAIL_TEXT_11 = `De : Surveillance
+Objet : Pause
 
 Bonjour,
 
-Message professionnel de Hôtel Bellevue.
-Poste concerné : réceptionniste.
-Quand : 15 h. Où : réception.
-Détail : arriver 10 min avant.
-Merci de confirmer votre présence.
+Hugo accompagne les personnes à la réception.
+Après la pause, Hôtel Bellevue reprend à 15 h.
+Pendant l'attente, action calme : accueillir les clients.
 
-Cordialement,
-Hugo Martin`;
+Bonne journée`;
 
 const E3_3_CE_EMAIL_POOL_11 = buildExpressPool("e3-3-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Hôtel Bellevue", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une info intranet", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Hôtel",
-    vfQ: "C'est Hôtel Bellevue.",
+    fillQ: "C'est _________.",
+    fill: "une info intranet",
+    vfQ: "Le texte mentionne une info intranet.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Réceptionniste", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Hôtel Bellevue", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "réceptionniste",
-    vfQ: "Poste : réceptionniste.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Hôtel Bellevue",
+    vfQ: "Le texte mentionne Hôtel Bellevue.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["15 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["réceptionniste", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["vendeur", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "15",
-    vfQ: "Quand : 15 h.",
+    fillQ: "La profession est _________.",
+    fill: "réceptionniste",
+    vfQ: "Le texte mentionne réceptionniste.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Réception", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 15 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "réception",
-    vfQ: "Où : réception.",
+    fillQ: "C'est _________.",
+    fill: "à 15 h",
+    vfQ: "Le texte mentionne à 15 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Arriver 10 min avant", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la réception", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "arriver",
-    vfQ: "Détail : arriver 10 min avant.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la réception",
+    vfQ: "Le texte mentionne à la réception.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Shift soir", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["accueillir les clients", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Shift",
-    vfQ: "Objet : Shift soir.",
+    fillQ: "Il faut _________.",
+    fill: "accueillir les clients",
+    vfQ: "Le texte mentionne accueillir les clients.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_12 = `De : Karim Ben
-Objet : Sécurité chantier
+const E3_3_CE_EMAIL_TEXT_12 = `De : Club
+Objet : Inscription
 
 Bonjour,
 
-Message professionnel de BTP Construction.
-Poste concerné : maçon.
-Quand : 6 h 15. Où : chantier.
-Détail : casque obligatoire.
-Merci de confirmer votre présence.
+Le club aide pour BTP Construction. Prochaine séance : à 6 h 15.
+Elle a lieu sur le chantier avec Karim.
+Pour participer, action simple : monter un mur. Détail : maçon.
 
-Cordialement,
-Karim Ben`;
+Club`;
 
 const E3_3_CE_EMAIL_POOL_12 = buildExpressPool("e3-3-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["BTP Construction", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un WhatsApp", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "BTP",
-    vfQ: "C'est BTP Construction.",
+    fillQ: "C'est _________.",
+    fill: "un WhatsApp",
+    vfQ: "Le texte mentionne un WhatsApp.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Maçon", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["BTP Construction", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "maçon",
-    vfQ: "Poste : maçon.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "BTP Construction",
+    vfQ: "Le texte mentionne BTP Construction.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["6 h 15", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["maçon", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["maçon", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "6",
-    vfQ: "Quand : 6 h 15.",
+    fillQ: "La profession est _________.",
+    fill: "maçon",
+    vfQ: "Le texte mentionne maçon.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Chantier", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 6 h 15", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "chantier",
-    vfQ: "Où : chantier.",
+    fillQ: "C'est _________.",
+    fill: "à 6 h 15",
+    vfQ: "Le texte mentionne à 6 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Casque obligatoire", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["sur le chantier", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "casque",
-    vfQ: "Détail : casque obligatoire.",
+    fillQ: "Le lieu est _________.",
+    fill: "sur le chantier",
+    vfQ: "Le texte mentionne sur le chantier.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Sécurité chantier", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["monter un mur", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Sécurité",
-    vfQ: "Objet : Sécurité chantier.",
+    fillQ: "Il faut _________.",
+    fill: "monter un mur",
+    vfQ: "Le texte mentionne monter un mur.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_13 = `De : Nina Costa
-Objet : Réunion mensuelle
+const E3_3_CE_EMAIL_TEXT_13 = `De : Nina
+Objet : Travail
 
 Bonjour,
 
-Message professionnel de Librairie du Centre.
-Poste concerné : libraire.
-Quand : vendredi 18 h. Où : librairie.
-Détail : chiffres du mois.
-Merci de confirmer votre présence.
+Je rappelle le travail ou rendez-vous de Librairie du Centre.
+Il est prévu vendredi à 18 h, au rayon jeunesse.
+Avant la séance, consigne : ranger les livres. Détail : libraire.
 
-Cordialement,
-Nina Costa`;
+Nina`;
 
 const E3_3_CE_EMAIL_POOL_13 = buildExpressPool("e3-3-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Librairie du Centre", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Librairie",
-    vfQ: "C'est Librairie du Centre.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Libraire", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Librairie du Centre", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "libraire",
-    vfQ: "Poste : libraire.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Librairie du Centre",
+    vfQ: "Le texte mentionne Librairie du Centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Vendredi 18 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["libraire", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["libraire", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "vendredi",
-    vfQ: "Quand : vendredi 18 h.",
+    fillQ: "La profession est _________.",
+    fill: "libraire",
+    vfQ: "Le texte mentionne libraire.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Librairie", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["vendredi à 18 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "librairie",
-    vfQ: "Où : librairie.",
+    fillQ: "C'est _________.",
+    fill: "vendredi à 18 h",
+    vfQ: "Le texte mentionne vendredi à 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Chiffres du mois", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au rayon jeunesse", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "chiffres",
-    vfQ: "Détail : chiffres du mois.",
+    fillQ: "Le lieu est _________.",
+    fill: "au rayon jeunesse",
+    vfQ: "Le texte mentionne au rayon jeunesse.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réunion mensuelle", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["ranger les livres", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réunion",
-    vfQ: "Objet : Réunion mensuelle.",
+    fillQ: "Il faut _________.",
+    fill: "ranger les livres",
+    vfQ: "Le texte mentionne ranger les livres.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_14 = `De : Clara Rossi
-Objet : Nouvelle collection
+const E3_3_CE_EMAIL_TEXT_14 = `De : Direction
+Objet : Changement
 
 Bonjour,
 
-Message professionnel de Salon de coiffure.
-Poste concerné : coiffeur.
-Quand : mardi 9 h. Où : salon.
-Détail : photos tendances.
-Merci de confirmer votre présence.
+Salon de coiffure change d'organisation. Clara accompagne le groupe près du fauteuil 2 mardi à 9 h.
+La consigne pour tous : couper les cheveux.
+coiffeur.
 
-Cordialement,
-Clara Rossi`;
+Direction`;
 
 const E3_3_CE_EMAIL_POOL_14 = buildExpressPool("e3-3-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Salon de coiffure", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une note", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Salon",
-    vfQ: "C'est Salon de coiffure.",
+    fillQ: "C'est _________.",
+    fill: "une note",
+    vfQ: "Le texte mentionne une note.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Coiffeur", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Salon de coiffure", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "coiffeur",
-    vfQ: "Poste : coiffeur.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Salon de coiffure",
+    vfQ: "Le texte mentionne Salon de coiffure.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Mardi 9 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["coiffeur", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["coiffeur", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "mardi",
-    vfQ: "Quand : mardi 9 h.",
+    fillQ: "La profession est _________.",
+    fill: "coiffeur",
+    vfQ: "Le texte mentionne coiffeur.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salon", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["mardi à 9 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "salon",
-    vfQ: "Où : salon.",
+    fillQ: "C'est _________.",
+    fill: "mardi à 9 h",
+    vfQ: "Le texte mentionne mardi à 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Photos tendances", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["près du fauteuil 2", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "photos",
-    vfQ: "Détail : photos tendances.",
+    fillQ: "Le lieu est _________.",
+    fill: "près du fauteuil 2",
+    vfQ: "Le texte mentionne près du fauteuil 2.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Nouvelle collection", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["couper les cheveux", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Nouvelle",
-    vfQ: "Objet : Nouvelle collection.",
+    fillQ: "Il faut _________.",
+    fill: "couper les cheveux",
+    vfQ: "Le texte mentionne couper les cheveux.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_15 = `De : David Kim
-Objet : Audit production
+const E3_3_CE_EMAIL_TEXT_15 = `De : Forum
+Objet : Groupe
 
 Bonjour,
 
-Message professionnel de Usine Omega.
-Poste concerné : ingénieur.
-Quand : jeudi 8 h. Où : usine.
-Détail : rapport trimestriel.
-Merci de confirmer votre présence.
+Un groupe se forme pour Usine Omega.
+La rencontre est jeudi à 8 h, dans l'usine. David organise les rôles.
+Si vous venez, pensez à contrôler la production.
 
-Cordialement,
-David Kim`;
+Forum`;
 
 const E3_3_CE_EMAIL_POOL_15 = buildExpressPool("e3-3-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Usine Omega", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un message RH", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Usine",
-    vfQ: "C'est Usine Omega.",
+    fillQ: "C'est _________.",
+    fill: "un message RH",
+    vfQ: "Le texte mentionne un message RH.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Ingénieur", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Usine Omega", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "ingénieur",
-    vfQ: "Poste : ingénieur.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Usine Omega",
+    vfQ: "Le texte mentionne Usine Omega.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Jeudi 8 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["ingénieur", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["ingénieur", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "jeudi",
-    vfQ: "Quand : jeudi 8 h.",
+    fillQ: "La profession est _________.",
+    fill: "ingénieur",
+    vfQ: "Le texte mentionne ingénieur.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Usine", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["jeudi à 8 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "usine",
-    vfQ: "Où : usine.",
+    fillQ: "C'est _________.",
+    fill: "jeudi à 8 h",
+    vfQ: "Le texte mentionne jeudi à 8 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Rapport trimestriel", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans l'usine", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "rapport",
-    vfQ: "Détail : rapport trimestriel.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans l'usine",
+    vfQ: "Le texte mentionne dans l'usine.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Audit production", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["contrôler la production", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Audit",
-    vfQ: "Objet : Audit production.",
+    fillQ: "Il faut _________.",
+    fill: "contrôler la production",
+    vfQ: "Le texte mentionne contrôler la production.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_16 = `De : Dr. Martin
-Objet : Réunion équipe
+const E3_3_CE_EMAIL_TEXT_16 = `De : Tutorats
+Objet : Révision
 
 Bonjour,
 
-Message professionnel de Cabinet médical.
-Poste concerné : médecin.
-Quand : 8 h. Où : cabinet.
-Détail : planning semaine.
-Merci de confirmer votre présence.
+La préparation de Cabinet médical commence à 8 h.
+Elle se passe dans le cabinet. Infirmière Léa répond aux questions.
+Ensuite, action finale : consulter les patients. Détail : médecin.
 
-Cordialement,
-Dr. Martin`;
+Tutorats`;
 
 const E3_3_CE_EMAIL_POOL_16 = buildExpressPool("e3-3-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Cabinet médical", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un planning", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Cabinet",
-    vfQ: "C'est Cabinet médical.",
+    fillQ: "C'est _________.",
+    fill: "un planning",
+    vfQ: "Le texte mentionne un planning.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Médecin", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Cabinet médical", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "médecin",
-    vfQ: "Poste : médecin.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Cabinet médical",
+    vfQ: "Le texte mentionne Cabinet médical.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["8 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["médecin", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["médecin", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "8",
-    vfQ: "Quand : 8 h.",
+    fillQ: "La profession est _________.",
+    fill: "médecin",
+    vfQ: "Le texte mentionne médecin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Cabinet", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 8 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "cabinet",
-    vfQ: "Où : cabinet.",
+    fillQ: "C'est _________.",
+    fill: "à 8 h",
+    vfQ: "Le texte mentionne à 8 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Planning semaine", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans le cabinet", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "planning",
-    vfQ: "Détail : planning semaine.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans le cabinet",
+    vfQ: "Le texte mentionne dans le cabinet.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réunion équipe", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["consulter les patients", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réunion",
-    vfQ: "Objet : Réunion équipe.",
+    fillQ: "Il faut _________.",
+    fill: "consulter les patients",
+    vfQ: "Le texte mentionne consulter les patients.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_17 = `De : Victor Pop
-Objet : Marché
+const E3_3_CE_EMAIL_TEXT_17 = `De : Journal
+Objet : Article
 
 Bonjour,
 
-Message professionnel de Ferme des Alpes.
-Poste concerné : agriculteur.
-Quand : samedi 6 h. Où : marché de Sion.
-Détail : charger le camion.
-Merci de confirmer votre présence.
+Nous préparons une brève nouvelle sur Ferme des Alpes.
+Le groupe travaille samedi à 6 h, au marché de Sion. Victor vérifie les noms.
+Consigne : charger le camion.
 
-Cordialement,
-Victor Pop`;
+Journal`;
 
 const E3_3_CE_EMAIL_POOL_17 = buildExpressPool("e3-3-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Ferme des Alpes", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un SMS", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Ferme",
-    vfQ: "C'est Ferme des Alpes.",
+    fillQ: "C'est _________.",
+    fill: "un SMS",
+    vfQ: "Le texte mentionne un SMS.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Agriculteur", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Ferme des Alpes", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "agriculteur",
-    vfQ: "Poste : agriculteur.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Ferme des Alpes",
+    vfQ: "Le texte mentionne Ferme des Alpes.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Samedi 6 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["agriculteur", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["agriculteur", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "samedi",
-    vfQ: "Quand : samedi 6 h.",
+    fillQ: "La profession est _________.",
+    fill: "agriculteur",
+    vfQ: "Le texte mentionne agriculteur.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Marché de sion", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["samedi à 6 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "marché",
-    vfQ: "Où : marché de Sion.",
+    fillQ: "C'est _________.",
+    fill: "samedi à 6 h",
+    vfQ: "Le texte mentionne samedi à 6 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Charger le camion", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["au marché de Sion", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "charger",
-    vfQ: "Détail : charger le camion.",
+    fillQ: "Le lieu est _________.",
+    fill: "au marché de Sion",
+    vfQ: "Le texte mentionne au marché de Sion.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Marché", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["charger le camion", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Marché",
-    vfQ: "Objet : Marché.",
+    fillQ: "Il faut _________.",
+    fill: "charger le camion",
+    vfQ: "Le texte mentionne charger le camion.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_18 = `De : Antoine Blanc
-Objet : Article urgent
+const E3_3_CE_EMAIL_TEXT_18 = `De : Antoine
+Objet : Sortie
 
 Bonjour,
 
-Message professionnel de Journal Le Quotidien.
-Poste concerné : journaliste.
-Quand : 11 h. Où : salle de rédaction.
-Détail : deadline 17 h.
-Merci de confirmer votre présence.
+Pour Journal Le Quotidien, le rendez-vous est en salle de rédaction à 11 h.
+La tenue ou préparation doit être simple. Détail : journaliste.
+N'oubliez pas cette action : écrire un article.
 
-Cordialement,
-Antoine Blanc`;
+Antoine`;
 
 const E3_3_CE_EMAIL_POOL_18 = buildExpressPool("e3-3-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Journal Le Quotidien", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Journal",
-    vfQ: "C'est Journal Le Quotidien.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Journaliste", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Journal Le Quotidien", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "journaliste",
-    vfQ: "Poste : journaliste.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Journal Le Quotidien",
+    vfQ: "Le texte mentionne Journal Le Quotidien.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["11 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["journaliste", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["journaliste", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "11",
-    vfQ: "Quand : 11 h.",
+    fillQ: "La profession est _________.",
+    fill: "journaliste",
+    vfQ: "Le texte mentionne journaliste.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Salle de rédaction", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 11 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "salle",
-    vfQ: "Où : salle de rédaction.",
+    fillQ: "C'est _________.",
+    fill: "à 11 h",
+    vfQ: "Le texte mentionne à 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Deadline 17 h", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["en salle de rédaction", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "deadline",
-    vfQ: "Détail : deadline 17 h.",
+    fillQ: "Le lieu est _________.",
+    fill: "en salle de rédaction",
+    vfQ: "Le texte mentionne en salle de rédaction.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Article urgent", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["écrire un article", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Article",
-    vfQ: "Objet : Article urgent.",
+    fillQ: "Il faut _________.",
+    fill: "écrire un article",
+    vfQ: "Le texte mentionne écrire un article.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_19 = `De : Marc Singh
-Objet : Intervention
+const E3_3_CE_EMAIL_TEXT_19 = `De : Portail étudiant
+Objet : Nouveau devoir
 
 Bonjour,
 
-Message professionnel de Service pompiers.
-Poste concerné : pompier.
-Quand : immédiat. Où : caserne.
-Détail : équipe Alpha.
-Merci de confirmer votre présence.
+Une tâche de Service pompiers est disponible.
+Il faut la faire avant chaque matin. La ressource se trouve à la caserne.
+Marc corrigera après. Consigne : préparer les interventions.
 
-Cordialement,
-Marc Singh`;
+Portail`;
 
 const E3_3_CE_EMAIL_POOL_19 = buildExpressPool("e3-3-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Service pompiers", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["une annonce", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Service",
-    vfQ: "C'est Service pompiers.",
+    fillQ: "C'est _________.",
+    fill: "une annonce",
+    vfQ: "Le texte mentionne une annonce.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Pompier", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Service pompiers", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "pompier",
-    vfQ: "Poste : pompier.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Service pompiers",
+    vfQ: "Le texte mentionne Service pompiers.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Immédiat", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["pompier", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["pompier", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "immédiat",
-    vfQ: "Quand : immédiat.",
+    fillQ: "La profession est _________.",
+    fill: "pompier",
+    vfQ: "Le texte mentionne pompier.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Caserne", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["chaque matin", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "caserne",
-    vfQ: "Où : caserne.",
+    fillQ: "C'est _________.",
+    fill: "chaque matin",
+    vfQ: "Le texte mentionne chaque matin.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Équipe alpha", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["à la caserne", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "équipe",
-    vfQ: "Détail : équipe Alpha.",
+    fillQ: "Le lieu est _________.",
+    fill: "à la caserne",
+    vfQ: "Le texte mentionne à la caserne.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Intervention", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["préparer les interventions", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Intervention",
-    vfQ: "Objet : Intervention.",
+    fillQ: "Il faut _________.",
+    fill: "préparer les interventions",
+    vfQ: "Le texte mentionne préparer les interventions.",
     vfC: 0,
   }),
 ]);
-const E3_3_CE_EMAIL_TEXT_20 = `De : Sara Alami
-Objet : Réunion parents
+const E3_3_CE_EMAIL_TEXT_20 = `De : Équipe pédagogique
+Objet : Journée spéciale
 
 Bonjour,
 
-Message professionnel de Crèche Les Petits.
-Poste concerné : éducatrice.
-Quand : jeudi 18 h. Où : crèche.
-Détail : rapport mensuel enfant.
-Merci de confirmer votre présence.
+La journée autour de Crèche Les Petits aura lieu jeudi à 18 h.
+Le matin, les groupes passent dans le jardin avec Sara.
+En fin de journée, consigne : préparer les plantes. Détail : jardinier.
 
-Cordialement,
-Sara Alami`;
+Équipe pédagogique`;
 
 const E3_3_CE_EMAIL_POOL_20 = buildExpressPool("e3-3-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Quelle entreprise ?",
-    text: ["Crèche Les Petits", "Une plage", "Un volcan"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un WhatsApp", "une facture", "une recette"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Entreprise : _________.",
-    fill: "Crèche",
-    vfQ: "C'est Crèche Les Petits.",
+    fillQ: "C'est _________.",
+    fill: "un WhatsApp",
+    vfQ: "Le texte mentionne un WhatsApp.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel poste ?",
-    text: ["Éducatrice", "Pilote de F1", "Astronaute"],
+    textQ: "Quel lieu de travail est mentionné ?",
+    text: ["Crèche Les Petits", "un musée", "une école vide"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Poste : _________.",
-    fill: "éducatrice",
-    vfQ: "Poste : éducatrice.",
+    fillQ: "Le lieu de travail est _________.",
+    fill: "Crèche Les Petits",
+    vfQ: "Le texte mentionne Crèche Les Petits.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Jeudi 18 h", "Jamais", "En 1800"],
+    textQ: "Quelle est la profession ?",
+    text: ["jardinier", "secrétaire", "infirmier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["jardinier", "secrétaire", "infirmier"],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "jeudi",
-    vfQ: "Quand : jeudi 18 h.",
+    fillQ: "La profession est _________.",
+    fill: "jardinier",
+    vfQ: "Le texte mentionne jardinier.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Où ?",
-    text: ["Crèche", "En mer", "Dans l'espace"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["jeudi à 18 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Où : _________.",
-    fill: "crèche",
-    vfQ: "Où : crèche.",
+    fillQ: "C'est _________.",
+    fill: "jeudi à 18 h",
+    vfQ: "Le texte mentionne jeudi à 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel détail important ?",
-    text: ["Rapport mensuel enfant", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["dans le jardin", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Détail : _________.",
-    fill: "rapport",
-    vfQ: "Détail : rapport mensuel enfant.",
+    fillQ: "Le lieu est _________.",
+    fill: "dans le jardin",
+    vfQ: "Le texte mentionne dans le jardin.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réunion parents", "Une invitation à un mariage", "Un menu"],
+    textQ: "Que faut-il faire ?",
+    text: ["préparer les plantes", "acheter une voiture", "partir loin"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réunion",
-    vfQ: "Objet : Réunion parents.",
+    fillQ: "Il faut _________.",
+    fill: "préparer les plantes",
+    vfQ: "Le texte mentionne préparer les plantes.",
     vfC: 0,
   }),
 ]);

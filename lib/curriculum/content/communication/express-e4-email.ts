@@ -22,1763 +22,1702 @@ const PE_MAX = 120;
    E4.1 — Acheter des vêtements
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E4_1_CE_EMAIL_TEXT_1 = `De : H&M Genève
-Objet : Confirmation commande
+const E4_1_CE_EMAIL_TEXT_1 = `De : H&M
+Objet : une robe d'été
 
 Bonjour,
 
-Merci pour votre intérêt chez H&M.
-Articles : robe bleue taille M.
-Prix : 59 francs.
-Livraison/délai : livraison 3-5 jours.
-Condition : retour gratuit 30 jours.
+Votre demande est notée. Information principale : 59 francs. Le détail principal est bleu.
+Consigne : essayer la robe. Détail : taille M.
 
-Cordialement,
-H&M Genève`;
+Cordialement`;
 
 const E4_1_CE_EMAIL_POOL_1 = buildExpressPool("e4-1-ce-email-1", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Robe bleue taille m", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "robe",
-    vfQ: "Articles : robe bleue taille M.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["59 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["une robe d'été", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "59",
-    vfQ: "Prix : 59 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "une robe d'été",
+    vfQ: "Le texte mentionne une robe d'été.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Livraison 3-5 jours", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["59 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "livraison",
-    vfQ: "Livraison : livraison 3-5 jours.",
+    fillQ: "Le prix est _________.",
+    fill: "59 francs",
+    vfQ: "Le texte mentionne 59 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Retour gratuit 30 jours", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["H&M", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "retour",
-    vfQ: "Condition : retour gratuit 30 jours.",
+    fillQ: "Le commerce est _________.",
+    fill: "H&M",
+    vfQ: "Le texte mentionne H&M.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Confirmation commande", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["bleu", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Confirmation",
-    vfQ: "Objet : Confirmation commande.",
+    fillQ: "La couleur est _________.",
+    fill: "bleu",
+    vfQ: "Le texte mentionne bleu.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["H&M", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille M", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "H&M",
-    vfQ: "C'est H&M Genève.",
+    fillQ: "La taille est _________.",
+    fill: "taille M",
+    vfQ: "Le texte mentionne taille M.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_2 = `De : Zara Online
-Objet : Votre colis est parti
+const E4_1_CE_EMAIL_TEXT_2 = `De : Service client
+Objet : Confirmation
 
 Bonjour,
 
-Merci pour votre intérêt chez Zara.
-Articles : chemise blanche + pantalon.
-Prix : 138 francs.
-Livraison/délai : livraison demain.
-Condition : suivi en pièce jointe.
+Nous confirmons un manteau d'hiver chez vente entre particuliers.
+Information : 80 francs. La note du dossier : noir.
+Action demandée : contacter le vendeur. Détail : taille L.
 
-Cordialement,
-Zara Online`;
+Service client`;
 
 const E4_1_CE_EMAIL_POOL_2 = buildExpressPool("e4-1-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Chemise blanche + pantalon", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "chemise",
-    vfQ: "Articles : chemise blanche + pantalon.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["138 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un manteau d'hiver", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "138",
-    vfQ: "Prix : 138 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un manteau d'hiver",
+    vfQ: "Le texte mentionne un manteau d'hiver.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Livraison demain", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["80 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "livraison",
-    vfQ: "Livraison : livraison demain.",
+    fillQ: "Le prix est _________.",
+    fill: "80 francs",
+    vfQ: "Le texte mentionne 80 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Suivi en pièce jointe", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["vente entre particuliers", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "suivi",
-    vfQ: "Condition : suivi en pièce jointe.",
+    fillQ: "Le commerce est _________.",
+    fill: "vente entre particuliers",
+    vfQ: "Le texte mentionne vente entre particuliers.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Votre colis est parti", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["noir", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Votre",
-    vfQ: "Objet : Votre colis est parti.",
+    fillQ: "La couleur est _________.",
+    fill: "noir",
+    vfQ: "Le texte mentionne noir.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Zara", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille L", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Zara",
-    vfQ: "C'est Zara Online.",
+    fillQ: "La taille est _________.",
+    fill: "taille L",
+    vfQ: "Le texte mentionne taille L.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_3 = `De : PKZ Lausanne
-Objet : Soldes d'hiver
+const E4_1_CE_EMAIL_TEXT_3 = `De : C&A
+Objet : Rappel avant votre venue
 
 Bonjour,
 
-Merci pour votre intérêt chez PKZ.
-Articles : manteaux et pulls.
-Prix : -30 à -50 %.
-Livraison/délai : jusqu'au 28 février.
-Condition : en magasin et en ligne.
+Avant de venir pour un jean slim, vérifiez gris.
+Information indiquée : 69 francs. Sur place, il faudra vérifier la cabine.
+taille 32.
 
-Cordialement,
-PKZ Lausanne`;
+Merci`;
 
 const E4_1_CE_EMAIL_POOL_3 = buildExpressPool("e4-1-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Manteaux et pulls", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "manteaux",
-    vfQ: "Articles : manteaux et pulls.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["-30 à -50 %", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un jean slim", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "-30",
-    vfQ: "Prix : -30 à -50 %.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un jean slim",
+    vfQ: "Le texte mentionne un jean slim.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Jusqu'au 28 février", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["69 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "jusqu'au",
-    vfQ: "Livraison : jusqu'au 28 février.",
+    fillQ: "Le prix est _________.",
+    fill: "69 francs",
+    vfQ: "Le texte mentionne 69 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["En magasin et en ligne", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["C&A", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "en",
-    vfQ: "Condition : en magasin et en ligne.",
+    fillQ: "Le commerce est _________.",
+    fill: "C&A",
+    vfQ: "Le texte mentionne C&A.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Soldes d'hiver", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["gris", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Soldes",
-    vfQ: "Objet : Soldes d'hiver.",
+    fillQ: "La couleur est _________.",
+    fill: "gris",
+    vfQ: "Le texte mentionne gris.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["PKZ", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille 32", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "PKZ",
-    vfQ: "C'est PKZ Lausanne.",
+    fillQ: "La taille est _________.",
+    fill: "taille 32",
+    vfQ: "Le texte mentionne taille 32.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_4 = `De : Decathlon
-Objet : Carte fidélité
+const E4_1_CE_EMAIL_TEXT_4 = `De : Boutique en ligne
+Objet : Votre suivi
 
 Bonjour,
 
-Merci pour votre intérêt chez Decathlon.
-Articles : baskets et vêtements sport.
-Prix : -10 % permanent.
-Livraison/délai : valable 1 an.
-Condition : cumulable avec promos.
+Votre demande pour un pull en laine avance.
+Point de retrait : Migros mode. Information : 45 francs.
+Détail à confirmer : rouge. Consigne : prendre la carte client.
 
-À bientôt,
-Decathlon`;
+Boutique en ligne`;
 
 const E4_1_CE_EMAIL_POOL_4 = buildExpressPool("e4-1-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Baskets et vêtements sport", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "baskets",
-    vfQ: "Articles : baskets et vêtements sport.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["-10 % permanent", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un pull en laine", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "-10",
-    vfQ: "Prix : -10 % permanent.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un pull en laine",
+    vfQ: "Le texte mentionne un pull en laine.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Valable 1 an", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["45 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "valable",
-    vfQ: "Livraison : valable 1 an.",
+    fillQ: "Le prix est _________.",
+    fill: "45 francs",
+    vfQ: "Le texte mentionne 45 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Cumulable avec promos", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Migros mode", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "cumulable",
-    vfQ: "Condition : cumulable avec promos.",
+    fillQ: "Le commerce est _________.",
+    fill: "Migros mode",
+    vfQ: "Le texte mentionne Migros mode.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Carte fidélité", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["rouge", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Carte",
-    vfQ: "Objet : Carte fidélité.",
+    fillQ: "La couleur est _________.",
+    fill: "rouge",
+    vfQ: "Le texte mentionne rouge.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Decathlon", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille S", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Decathlon",
-    vfQ: "C'est Decathlon.",
+    fillQ: "La taille est _________.",
+    fill: "taille S",
+    vfQ: "Le texte mentionne taille S.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_5 = `De : Globus
-Objet : Nouvelle collection
+const E4_1_CE_EMAIL_TEXT_5 = `De : Zara
+Objet : Offre limitée
 
 Bonjour,
 
-Merci pour votre intérêt chez Globus.
-Articles : costumes et cravates.
-Prix : à partir de 199 francs.
-Livraison/délai : conseiller en magasin.
-Condition : essayage gratuit.
+L'offre sur une chemise blanche est disponible. Information : 39 francs.
+Elle concerne blanc. Pour en profiter, consigne : demander le cintre.
+taille M.
 
-À bientôt,
-Globus`;
+À bientôt`;
 
 const E4_1_CE_EMAIL_POOL_5 = buildExpressPool("e4-1-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Costumes et cravates", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "costumes",
-    vfQ: "Articles : costumes et cravates.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["à partir de 199 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["une chemise blanche", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "à",
-    vfQ: "Prix : à partir de 199 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "une chemise blanche",
+    vfQ: "Le texte mentionne une chemise blanche.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Conseiller en magasin", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["39 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "conseiller",
-    vfQ: "Livraison : conseiller en magasin.",
+    fillQ: "Le prix est _________.",
+    fill: "39 francs",
+    vfQ: "Le texte mentionne 39 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Essayage gratuit", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Zara", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "essayage",
-    vfQ: "Condition : essayage gratuit.",
+    fillQ: "Le commerce est _________.",
+    fill: "Zara",
+    vfQ: "Le texte mentionne Zara.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Nouvelle collection", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["blanc", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Nouvelle",
-    vfQ: "Objet : Nouvelle collection.",
+    fillQ: "La couleur est _________.",
+    fill: "blanc",
+    vfQ: "Le texte mentionne blanc.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Globus", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille M", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Globus",
-    vfQ: "C'est Globus.",
+    fillQ: "La taille est _________.",
+    fill: "taille M",
+    vfQ: "Le texte mentionne taille M.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_6 = `De : Promod
-Objet : Promo spéciale
+const E4_1_CE_EMAIL_TEXT_6 = `De : Réservation
+Objet : Préparation
 
 Bonjour,
 
-Merci pour votre intérêt chez Promod.
-Articles : jupes et robes.
-Prix : -40 % cette semaine.
-Livraison/délai : code PROMO40.
-Condition : en ligne seulement.
+Nous préparons des baskets de sport. Vous pouvez passer chez Decathlon. Information : 89 francs.
+La fiche indique blanc et noir. Au comptoir, pensez à utiliser la carte fidélité.
+taille 42.
 
-À bientôt,
-Promod`;
+Réservation`;
 
 const E4_1_CE_EMAIL_POOL_6 = buildExpressPool("e4-1-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Jupes et robes", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "jupes",
-    vfQ: "Articles : jupes et robes.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["-40 % cette semaine", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["des baskets de sport", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "-40",
-    vfQ: "Prix : -40 % cette semaine.",
+    fillQ: "Le vêtement est _________.",
+    fill: "des baskets de sport",
+    vfQ: "Le texte mentionne des baskets de sport.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Code promo40", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["89 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "code",
-    vfQ: "Livraison : code PROMO40.",
+    fillQ: "Le prix est _________.",
+    fill: "89 francs",
+    vfQ: "Le texte mentionne 89 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["En ligne seulement", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Decathlon", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "en",
-    vfQ: "Condition : en ligne seulement.",
+    fillQ: "Le commerce est _________.",
+    fill: "Decathlon",
+    vfQ: "Le texte mentionne Decathlon.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Promo spéciale", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["blanc et noir", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Promo",
-    vfQ: "Objet : Promo spéciale.",
+    fillQ: "La couleur est _________.",
+    fill: "blanc et noir",
+    vfQ: "Le texte mentionne blanc et noir.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Promod", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille 42", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Promod",
-    vfQ: "C'est Promod.",
+    fillQ: "La taille est _________.",
+    fill: "taille 42",
+    vfQ: "Le texte mentionne taille 42.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_7 = `De : C&A
-Objet : 2e article -50 %
+const E4_1_CE_EMAIL_TEXT_7 = `De : Carte fidélité
+Objet : Avantage du jour
 
 Bonjour,
 
-Merci pour votre intérêt chez C&A.
-Articles : jeans et t-shirts.
-Prix : offre limitée.
-Livraison/délai : jusqu'à dimanche.
-Condition : tous les magasins.
+Votre avantage concerne un pantalon de costume.
+Il est disponible chez PKZ. Information : 99 francs. Détail : bleu marine.
+Pour l'activer, il faut réserver l'ourlet. Détail : taille 48.
 
-À bientôt,
-C&A`;
+Carte fidélité`;
 
 const E4_1_CE_EMAIL_POOL_7 = buildExpressPool("e4-1-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Jeans et t-shirts", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "jeans",
-    vfQ: "Articles : jeans et t-shirts.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["offre limitée", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un pantalon de costume", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "offre",
-    vfQ: "Prix : offre limitée.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un pantalon de costume",
+    vfQ: "Le texte mentionne un pantalon de costume.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Jusqu'à dimanche", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["99 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "jusqu'à",
-    vfQ: "Livraison : jusqu'à dimanche.",
+    fillQ: "Le prix est _________.",
+    fill: "99 francs",
+    vfQ: "Le texte mentionne 99 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Tous les magasins", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["PKZ", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "tous",
-    vfQ: "Condition : tous les magasins.",
+    fillQ: "Le commerce est _________.",
+    fill: "PKZ",
+    vfQ: "Le texte mentionne PKZ.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["2e article -50 %", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["bleu marine", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "2e",
-    vfQ: "Objet : 2e article -50 %.",
+    fillQ: "La couleur est _________.",
+    fill: "bleu marine",
+    vfQ: "Le texte mentionne bleu marine.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["C&A", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille 48", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "C&A",
-    vfQ: "C'est C&A.",
+    fillQ: "La taille est _________.",
+    fill: "taille 48",
+    vfQ: "Le texte mentionne taille 48.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_8 = `De : Manor
-Objet : Bon d'achat
+const E4_1_CE_EMAIL_TEXT_8 = `De : Boutique Soie+
+Objet : Dernière vérification
 
 Bonjour,
 
-Merci pour votre intérêt chez Manor.
-Articles : vêtements maison.
-Prix : 20 francs offerts.
-Livraison/délai : dès 100 francs d'achat.
-Condition : valable 2 semaines.
+Nous gardons une écharpe en soie. Information : 25 francs.
+La note enregistrée est vert. Consigne : passer au comptoir au moment de votre venue.
+taille unique.
 
-À bientôt,
-Manor`;
+Cordialement`;
 
 const E4_1_CE_EMAIL_POOL_8 = buildExpressPool("e4-1-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Vêtements maison", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "vêtements",
-    vfQ: "Articles : vêtements maison.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["20 francs offerts", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["une écharpe en soie", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "20",
-    vfQ: "Prix : 20 francs offerts.",
+    fillQ: "Le vêtement est _________.",
+    fill: "une écharpe en soie",
+    vfQ: "Le texte mentionne une écharpe en soie.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Dès 100 francs d'achat", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["25 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "dès",
-    vfQ: "Livraison : dès 100 francs d'achat.",
+    fillQ: "Le prix est _________.",
+    fill: "25 francs",
+    vfQ: "Le texte mentionne 25 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Valable 2 semaines", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boutique Soie+", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "valable",
-    vfQ: "Condition : valable 2 semaines.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boutique Soie+",
+    vfQ: "Le texte mentionne Boutique Soie+.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Bon d'achat", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["vert", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Bon",
-    vfQ: "Objet : Bon d'achat.",
+    fillQ: "La couleur est _________.",
+    fill: "vert",
+    vfQ: "Le texte mentionne vert.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Manor", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille unique", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Manor",
-    vfQ: "C'est Manor.",
+    fillQ: "La taille est _________.",
+    fill: "taille unique",
+    vfQ: "Le texte mentionne taille unique.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_9 = `De : Intersport
-Objet : Membre club
+const E4_1_CE_EMAIL_TEXT_9 = `De : Support
+Objet : Question reçue
 
 Bonjour,
 
-Merci pour votre intérêt chez Intersport.
-Articles : équipement sport.
-Prix : -15 % sur tout.
-Livraison/délai : adhésion gratuite.
-Condition : points fidélité.
+Vous avez posé une question sur une jupe plissée.
+Réponse : chez Promod, c'est possible. Information : 35 francs.
+Il faut seulement garder le ticket. rose. Détail : taille 38.
 
-À bientôt,
-Intersport`;
+Support`;
 
 const E4_1_CE_EMAIL_POOL_9 = buildExpressPool("e4-1-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Équipement sport", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "équipement",
-    vfQ: "Articles : équipement sport.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["-15 % sur tout", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["une jupe plissée", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "-15",
-    vfQ: "Prix : -15 % sur tout.",
+    fillQ: "Le vêtement est _________.",
+    fill: "une jupe plissée",
+    vfQ: "Le texte mentionne une jupe plissée.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Adhésion gratuite", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["35 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "adhésion",
-    vfQ: "Livraison : adhésion gratuite.",
+    fillQ: "Le prix est _________.",
+    fill: "35 francs",
+    vfQ: "Le texte mentionne 35 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Points fidélité", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Promod", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "points",
-    vfQ: "Condition : points fidélité.",
+    fillQ: "Le commerce est _________.",
+    fill: "Promod",
+    vfQ: "Le texte mentionne Promod.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Membre club", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["rose", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Membre",
-    vfQ: "Objet : Membre club.",
+    fillQ: "La couleur est _________.",
+    fill: "rose",
+    vfQ: "Le texte mentionne rose.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Intersport", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille 38", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Intersport",
-    vfQ: "C'est Intersport.",
+    fillQ: "La taille est _________.",
+    fill: "taille 38",
+    vfQ: "Le texte mentionne taille 38.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_10 = `De : Ochsner
-Objet : Pack t-shirts
+const E4_1_CE_EMAIL_TEXT_10 = `De : Intersport
+Objet : Commande de groupe
 
 Bonjour,
 
-Merci pour votre intérêt chez Ochsner.
-Articles : 3 t-shirts coton.
-Prix : 25 francs le lot.
-Livraison/délai : couleurs au choix.
-Condition : en magasin.
+La commande pour des shorts de sport est prévue. Information : 29 francs.
+Elle porte la note noir. Consigne : payer avant jeudi avant le retrait.
+taille L.
 
-À bientôt,
-Ochsner`;
+Le magasin`;
 
 const E4_1_CE_EMAIL_POOL_10 = buildExpressPool("e4-1-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["3 t-shirts coton", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "3",
-    vfQ: "Articles : 3 t-shirts coton.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["25 francs le lot", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["des shorts de sport", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "25",
-    vfQ: "Prix : 25 francs le lot.",
+    fillQ: "Le vêtement est _________.",
+    fill: "des shorts de sport",
+    vfQ: "Le texte mentionne des shorts de sport.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Couleurs au choix", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["29 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "couleurs",
-    vfQ: "Livraison : couleurs au choix.",
+    fillQ: "Le prix est _________.",
+    fill: "29 francs",
+    vfQ: "Le texte mentionne 29 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["En magasin", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Intersport", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "en",
-    vfQ: "Condition : en magasin.",
+    fillQ: "Le commerce est _________.",
+    fill: "Intersport",
+    vfQ: "Le texte mentionne Intersport.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Pack t-shirts", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["noir", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Pack",
-    vfQ: "Objet : Pack t-shirts.",
+    fillQ: "La couleur est _________.",
+    fill: "noir",
+    vfQ: "Le texte mentionne noir.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Ochsner", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille L", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Ochsner",
-    vfQ: "C'est Ochsner.",
+    fillQ: "La taille est _________.",
+    fill: "taille L",
+    vfQ: "Le texte mentionne taille L.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_11 = `De : Boutique Soie+
-Objet : Nouveautés
+const E4_1_CE_EMAIL_TEXT_11 = `De : Alerte stock
+Objet : Disponibilité
 
 Bonjour,
 
-Merci pour votre intérêt chez Boutique.
-Articles : écharpes et foulards.
-Prix : à partir de 25 francs.
-Livraison/délai : livraison offerte.
-Condition : dès 50 francs.
+des chaussettes est de nouveau disponible chez Coop mode.
+Information : 12 francs. Le détail à vérifier est blanc.
+Consigne : prendre deux packs. Détail : taille 39-42.
 
-Cordialement,
-Boutique Soie+`;
+Alerte stock`;
 
 const E4_1_CE_EMAIL_POOL_11 = buildExpressPool("e4-1-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Écharpes et foulards", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "écharpes",
-    vfQ: "Articles : écharpes et foulards.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["à partir de 25 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["des chaussettes", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "à",
-    vfQ: "Prix : à partir de 25 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "des chaussettes",
+    vfQ: "Le texte mentionne des chaussettes.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Livraison offerte", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["12 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "livraison",
-    vfQ: "Livraison : livraison offerte.",
+    fillQ: "Le prix est _________.",
+    fill: "12 francs",
+    vfQ: "Le texte mentionne 12 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Dès 50 francs", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Coop mode", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "dès",
-    vfQ: "Condition : dès 50 francs.",
+    fillQ: "Le commerce est _________.",
+    fill: "Coop mode",
+    vfQ: "Le texte mentionne Coop mode.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Nouveautés", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["blanc", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Nouveautés",
-    vfQ: "Objet : Nouveautés.",
+    fillQ: "La couleur est _________.",
+    fill: "blanc",
+    vfQ: "Le texte mentionne blanc.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Boutique", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille 39-42", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boutique",
-    vfQ: "C'est Boutique Soie+.",
+    fillQ: "La taille est _________.",
+    fill: "taille 39-42",
+    vfQ: "Le texte mentionne taille 39-42.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_12 = `De : Leboncoin
-Objet : Annonce validée
+const E4_1_CE_EMAIL_TEXT_12 = `De : Charles Vögele
+Objet : Réponse à votre message
 
 Bonjour,
 
-Merci pour votre intérêt chez Leboncoin.
-Articles : veste cuir marron.
-Prix : 120 francs.
-Livraison/délai : contact acheteurs.
-Condition : photos en ligne.
+Oui, nous avons un costume complet.
+Vous pouvez passer. Information : 250 francs. Demandez la note gris foncé.
+Ensuite, action simple : prendre rendez-vous. Détail : taille 50.
 
-À bientôt,
-Leboncoin`;
+Merci`;
 
 const E4_1_CE_EMAIL_POOL_12 = buildExpressPool("e4-1-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Veste cuir marron", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "veste",
-    vfQ: "Articles : veste cuir marron.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["120 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un costume complet", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "120",
-    vfQ: "Prix : 120 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un costume complet",
+    vfQ: "Le texte mentionne un costume complet.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Contact acheteurs", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["250 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "contact",
-    vfQ: "Livraison : contact acheteurs.",
+    fillQ: "Le prix est _________.",
+    fill: "250 francs",
+    vfQ: "Le texte mentionne 250 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Photos en ligne", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Charles Vögele", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "photos",
-    vfQ: "Condition : photos en ligne.",
+    fillQ: "Le commerce est _________.",
+    fill: "Charles Vögele",
+    vfQ: "Le texte mentionne Charles Vögele.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Annonce validée", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["gris foncé", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Annonce",
-    vfQ: "Objet : Annonce validée.",
+    fillQ: "La couleur est _________.",
+    fill: "gris foncé",
+    vfQ: "Le texte mentionne gris foncé.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Leboncoin", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille 50", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Leboncoin",
-    vfQ: "C'est Leboncoin.",
+    fillQ: "La taille est _________.",
+    fill: "taille 50",
+    vfQ: "Le texte mentionne taille 50.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_13 = `De : Gap
-Objet : Soldes finales
+const E4_1_CE_EMAIL_TEXT_13 = `De : Ardoise du jour
+Objet : Information
 
 Bonjour,
 
-Merci pour votre intérêt chez Gap.
-Articles : blousons et jeans.
-Prix : -50 %.
-Livraison/délai : derniers jours.
-Condition : stock limité.
+Aujourd'hui, nous proposons un t-shirt coton.
+C'est disponible chez Ochsner. Information : 15 francs. Détail : jaune.
+Action conseillée : choisir trois couleurs. Détail : taille L.
 
-À bientôt,
-Gap`;
+Bonne journée`;
 
 const E4_1_CE_EMAIL_POOL_13 = buildExpressPool("e4-1-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Blousons et jeans", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "blousons",
-    vfQ: "Articles : blousons et jeans.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["-50 %", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un t-shirt coton", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "-50",
-    vfQ: "Prix : -50 %.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un t-shirt coton",
+    vfQ: "Le texte mentionne un t-shirt coton.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Derniers jours", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["15 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "derniers",
-    vfQ: "Livraison : derniers jours.",
+    fillQ: "Le prix est _________.",
+    fill: "15 francs",
+    vfQ: "Le texte mentionne 15 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Stock limité", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Ochsner", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "stock",
-    vfQ: "Condition : stock limité.",
+    fillQ: "Le commerce est _________.",
+    fill: "Ochsner",
+    vfQ: "Le texte mentionne Ochsner.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Soldes finales", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["jaune", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Soldes",
-    vfQ: "Objet : Soldes finales.",
+    fillQ: "La couleur est _________.",
+    fill: "jaune",
+    vfQ: "Le texte mentionne jaune.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Gap", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille L", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Gap",
-    vfQ: "C'est Gap.",
+    fillQ: "La taille est _________.",
+    fill: "taille L",
+    vfQ: "Le texte mentionne taille L.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_14 = `De : Charles Vögele
-Objet : Costume sur mesure
+const E4_1_CE_EMAIL_TEXT_14 = `De : Rappel automatique
+Objet : Rendez-vous
 
 Bonjour,
 
-Merci pour votre intérêt chez Charles.
-Articles : costume gris.
-Prix : 250 francs.
-Livraison/délai : retouches gratuites.
-Condition : rendez-vous en magasin.
+Votre rappel concerne un blouson jeans.
+Rendez-vous chez Gap. Information : 55 francs. Vérifiez bleu clair.
+Consigne : vérifier les manches. Détail : taille M.
 
-Cordialement,
-Charles Vögele`;
+Rappel automatique`;
 
 const E4_1_CE_EMAIL_POOL_14 = buildExpressPool("e4-1-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Costume gris", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "costume",
-    vfQ: "Articles : costume gris.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["250 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un blouson jeans", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "250",
-    vfQ: "Prix : 250 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un blouson jeans",
+    vfQ: "Le texte mentionne un blouson jeans.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Retouches gratuites", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["55 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "retouches",
-    vfQ: "Livraison : retouches gratuites.",
+    fillQ: "Le prix est _________.",
+    fill: "55 francs",
+    vfQ: "Le texte mentionne 55 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Rendez-vous en magasin", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Gap", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "rendez-vous",
-    vfQ: "Condition : rendez-vous en magasin.",
+    fillQ: "Le commerce est _________.",
+    fill: "Gap",
+    vfQ: "Le texte mentionne Gap.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Costume sur mesure", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["bleu clair", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Costume",
-    vfQ: "Objet : Costume sur mesure.",
+    fillQ: "La couleur est _________.",
+    fill: "bleu clair",
+    vfQ: "Le texte mentionne bleu clair.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Charles", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille M", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Charles",
-    vfQ: "C'est Charles Vögele.",
+    fillQ: "La taille est _________.",
+    fill: "taille M",
+    vfQ: "Le texte mentionne taille M.",
     vfC: 0,
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_15 = `De : Athleta
-Objet : Bienvenue
+Objet : Nouveauté
 
 Bonjour,
 
-Merci pour votre intérêt chez Athleta.
-Articles : leggings et brassières.
-Prix : -20 % première commande.
-Livraison/délai : code BIENVENUE20.
-Condition : en ligne.
+La nouveauté un legging yoga arrive. Information : 32 francs.
+Elle est liée à violet. Pour la réserver, vous pouvez entrer le code promo.
+taille S.
 
-À bientôt,
-Athleta`;
+À bientôt`;
 
 const E4_1_CE_EMAIL_POOL_15 = buildExpressPool("e4-1-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Leggings et brassières", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "leggings",
-    vfQ: "Articles : leggings et brassières.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["-20 % première commande", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un legging yoga", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "-20",
-    vfQ: "Prix : -20 % première commande.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un legging yoga",
+    vfQ: "Le texte mentionne un legging yoga.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Code bienvenue20", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["32 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "code",
-    vfQ: "Livraison : code BIENVENUE20.",
+    fillQ: "Le prix est _________.",
+    fill: "32 francs",
+    vfQ: "Le texte mentionne 32 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["En ligne", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Athleta", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "en",
-    vfQ: "Condition : en ligne.",
+    fillQ: "Le commerce est _________.",
+    fill: "Athleta",
+    vfQ: "Le texte mentionne Athleta.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Bienvenue", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["violet", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Bienvenue",
-    vfQ: "Objet : Bienvenue.",
+    fillQ: "La couleur est _________.",
+    fill: "violet",
+    vfQ: "Le texte mentionne violet.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Athleta", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille S", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Athleta",
-    vfQ: "C'est Athleta.",
+    fillQ: "La taille est _________.",
+    fill: "taille S",
+    vfQ: "Le texte mentionne taille S.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_16 = `De : Coop mode
-Objet : Promo chaussettes
+const E4_1_CE_EMAIL_TEXT_16 = `De : Vendeur
+Objet : Message noté
 
 Bonjour,
 
-Merci pour votre intérêt chez Coop.
-Articles : pack de 3 paires.
-Prix : 2e pack gratuit.
-Livraison/délai : jusqu'à vendredi.
-Condition : en magasin.
+J'ai bien noté votre demande pour des chaussures de ville.
+Je vous attends chez friperie du Lac. Information : 60 francs. Je prépare noir.
+Sur place, vous pourrez essayer la paire. Détail : taille 40.
 
-Cordialement,
-Coop mode`;
+Le vendeur`;
 
 const E4_1_CE_EMAIL_POOL_16 = buildExpressPool("e4-1-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Pack de 3 paires", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "pack",
-    vfQ: "Articles : pack de 3 paires.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["2e pack gratuit", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["des chaussures de ville", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "2e",
-    vfQ: "Prix : 2e pack gratuit.",
+    fillQ: "Le vêtement est _________.",
+    fill: "des chaussures de ville",
+    vfQ: "Le texte mentionne des chaussures de ville.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Jusqu'à vendredi", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["60 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "jusqu'à",
-    vfQ: "Livraison : jusqu'à vendredi.",
+    fillQ: "Le prix est _________.",
+    fill: "60 francs",
+    vfQ: "Le texte mentionne 60 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["En magasin", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["friperie du Lac", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "en",
-    vfQ: "Condition : en magasin.",
+    fillQ: "Le commerce est _________.",
+    fill: "friperie du Lac",
+    vfQ: "Le texte mentionne friperie du Lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Promo chaussettes", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["noir", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Promo",
-    vfQ: "Objet : Promo chaussettes.",
+    fillQ: "La couleur est _________.",
+    fill: "noir",
+    vfQ: "Le texte mentionne noir.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Coop", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille 40", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Coop",
-    vfQ: "C'est Coop mode.",
+    fillQ: "La taille est _________.",
+    fill: "taille 40",
+    vfQ: "Le texte mentionne taille 40.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_17 = `De : Friperie du Lac
-Objet : Nouveautés
+const E4_1_CE_EMAIL_TEXT_17 = `De : Programme fidélité
+Objet : Votre offre
 
 Bonjour,
 
-Merci pour votre intérêt chez Friperie.
-Articles : vêtements seconde main.
-Prix : dès 5 francs.
-Livraison/délai : samedi et dimanche.
-Condition : bon état garanti.
+Votre offre porte sur un manteau imperméable.
+Elle fonctionne chez Globus; information : 110 francs. La condition est kaki.
+N'oubliez pas cette action : montrer la carte bonus. Détail : taille XL.
 
-Cordialement,
-Friperie du Lac`;
+Programme fidélité`;
 
 const E4_1_CE_EMAIL_POOL_17 = buildExpressPool("e4-1-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Vêtements seconde main", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "vêtements",
-    vfQ: "Articles : vêtements seconde main.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["dès 5 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un manteau imperméable", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "dès",
-    vfQ: "Prix : dès 5 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un manteau imperméable",
+    vfQ: "Le texte mentionne un manteau imperméable.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Samedi et dimanche", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["110 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "samedi",
-    vfQ: "Livraison : samedi et dimanche.",
+    fillQ: "Le prix est _________.",
+    fill: "110 francs",
+    vfQ: "Le texte mentionne 110 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Bon état garanti", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Globus", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "bon",
-    vfQ: "Condition : bon état garanti.",
+    fillQ: "Le commerce est _________.",
+    fill: "Globus",
+    vfQ: "Le texte mentionne Globus.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Nouveautés", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["kaki", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Nouveautés",
-    vfQ: "Objet : Nouveautés.",
+    fillQ: "La couleur est _________.",
+    fill: "kaki",
+    vfQ: "Le texte mentionne kaki.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Friperie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille XL", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Friperie",
-    vfQ: "C'est Friperie du Lac.",
+    fillQ: "La taille est _________.",
+    fill: "taille XL",
+    vfQ: "Le texte mentionne taille XL.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_18 = `De : Migros mode
-Objet : Pulls en laine
+const E4_1_CE_EMAIL_TEXT_18 = `De : boutique homme
+Objet : Fête confirmée
 
 Bonjour,
 
-Merci pour votre intérêt chez Migros.
-Articles : collection hiver.
-Prix : dès 29 francs.
-Livraison/délai : -30 % soldes.
-Condition : en ligne et magasin.
+Pour votre fête, une cravate en soie est réservé.
+Information : 35 francs. La fiche indique bordeaux.
+Consigne : demander un coffret. Détail : taille unique.
 
-Cordialement,
-Migros mode`;
+Cordialement`;
 
 const E4_1_CE_EMAIL_POOL_18 = buildExpressPool("e4-1-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Collection hiver", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "collection",
-    vfQ: "Articles : collection hiver.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["dès 29 francs", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["une cravate en soie", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "dès",
-    vfQ: "Prix : dès 29 francs.",
+    fillQ: "Le vêtement est _________.",
+    fill: "une cravate en soie",
+    vfQ: "Le texte mentionne une cravate en soie.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["-30 % soldes", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["35 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "-30",
-    vfQ: "Livraison : -30 % soldes.",
+    fillQ: "Le prix est _________.",
+    fill: "35 francs",
+    vfQ: "Le texte mentionne 35 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["En ligne et magasin", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["boutique homme", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "en",
-    vfQ: "Condition : en ligne et magasin.",
+    fillQ: "Le commerce est _________.",
+    fill: "boutique homme",
+    vfQ: "Le texte mentionne boutique homme.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Pulls en laine", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["bordeaux", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Pulls",
-    vfQ: "Objet : Pulls en laine.",
+    fillQ: "La couleur est _________.",
+    fill: "bordeaux",
+    vfQ: "Le texte mentionne bordeaux.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Migros", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille unique", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Migros",
-    vfQ: "C'est Migros mode.",
+    fillQ: "La taille est _________.",
+    fill: "taille unique",
+    vfQ: "Le texte mentionne taille unique.",
     vfC: 0,
   }),
 ]);
-const E4_1_CE_EMAIL_TEXT_19 = `De : Ikea textile
-Objet : Linge de maison
+const E4_1_CE_EMAIL_TEXT_19 = `De : Confirmation
+Objet : Retrait
 
 Bonjour,
 
-Merci pour votre intérêt chez Ikea.
-Articles : pyjamas et serviettes.
-Prix : promo famille.
-Livraison/délai : jusqu'au 15 mars.
-Condition : magasins Ikea.
+Votre retrait pour un pyjama coton est prêt chez Manor.
+Information : 28 francs. La note est bleu marine.
+Consigne : présenter le numéro. Détail : taille M.
 
-Cordialement,
-Ikea textile`;
+Confirmation`;
 
 const E4_1_CE_EMAIL_POOL_19 = buildExpressPool("e4-1-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Pyjamas et serviettes", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "pyjamas",
-    vfQ: "Articles : pyjamas et serviettes.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["promo famille", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["un pyjama coton", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "promo",
-    vfQ: "Prix : promo famille.",
+    fillQ: "Le vêtement est _________.",
+    fill: "un pyjama coton",
+    vfQ: "Le texte mentionne un pyjama coton.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Jusqu'au 15 mars", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["28 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "jusqu'au",
-    vfQ: "Livraison : jusqu'au 15 mars.",
+    fillQ: "Le prix est _________.",
+    fill: "28 francs",
+    vfQ: "Le texte mentionne 28 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Magasins ikea", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Manor", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "magasins",
-    vfQ: "Condition : magasins Ikea.",
+    fillQ: "Le commerce est _________.",
+    fill: "Manor",
+    vfQ: "Le texte mentionne Manor.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Linge de maison", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["bleu marine", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Linge",
-    vfQ: "Objet : Linge de maison.",
+    fillQ: "La couleur est _________.",
+    fill: "bleu marine",
+    vfQ: "Le texte mentionne bleu marine.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Ikea", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille M", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Ikea",
-    vfQ: "C'est Ikea textile.",
+    fillQ: "La taille est _________.",
+    fill: "taille M",
+    vfQ: "Le texte mentionne taille M.",
     vfC: 0,
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_20 = `De : Outlet Aubonne
-Objet : Outlet village
+Objet : Idée week-end
 
 Bonjour,
 
-Merci pour votre intérêt chez Outlet.
-Articles : marques premium.
-Prix : -60 % max.
-Livraison/délai : tous les jours.
-Condition : navette gratuite.
+Pour ce week-end, nous conseillons une veste légère.
+Information : 49 francs. Regardez beige avant de choisir.
+Vous pourrez comparer deux modèles. Détail : taille L.
 
-Cordialement,
-Outlet Aubonne`;
+Bon week-end`;
 
 const E4_1_CE_EMAIL_POOL_20 = buildExpressPool("e4-1-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Quels articles ?",
-    text: ["Marques premium", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Articles : _________.",
-    fill: "marques",
-    vfQ: "Articles : marques premium.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["-60 % max", "1 franc", "Gratuit toujours"],
+    textQ: "Quel vêtement est mentionné ?",
+    text: ["une veste légère", "un livre", "une chaise"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "-60",
-    vfQ: "Prix : -60 % max.",
+    fillQ: "Le vêtement est _________.",
+    fill: "une veste légère",
+    vfQ: "Le texte mentionne une veste légère.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quelle livraison/délai ?",
-    text: ["Tous les jours", "Jamais", "En 10 ans"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["49 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Livraison : _________.",
-    fill: "tous",
-    vfQ: "Livraison : tous les jours.",
+    fillQ: "Le prix est _________.",
+    fill: "49 francs",
+    vfQ: "Le texte mentionne 49 francs.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle condition ?",
-    text: ["Navette gratuite", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Outlet Aubonne", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Condition : _________.",
-    fill: "navette",
-    vfQ: "Condition : navette gratuite.",
+    fillQ: "Le commerce est _________.",
+    fill: "Outlet Aubonne",
+    vfQ: "Le texte mentionne Outlet Aubonne.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel est l'objet ?",
-    text: ["Outlet village", "Une facture d'électricité", "Un divorce"],
+    textQ: "Quelle couleur est mentionnée ?",
+    text: ["beige", "transparent", "multicolore"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Outlet",
-    vfQ: "Objet : Outlet village.",
+    fillQ: "La couleur est _________.",
+    fill: "beige",
+    vfQ: "Le texte mentionne beige.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quelle boutique ?",
-    text: ["Outlet", "Une pharmacie", "Une gare"],
+    textQ: "Quelle taille est indiquée ?",
+    text: ["taille L", "taille 0", "XXXL géant"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Outlet",
-    vfQ: "C'est Outlet Aubonne.",
+    fillQ: "La taille est _________.",
+    fill: "taille L",
+    vfQ: "Le texte mentionne taille L.",
     vfC: 0,
   }),
 ]);
@@ -2234,1762 +2173,1701 @@ export const E4_1_PE_EMAIL: ExpressPePrompt[] = [
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E4_2_CE_EMAIL_TEXT_1 = `De : Restaurant Le Lac
-Objet : Réservation confirmée
+Objet : salade et poisson
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : table 5 à 19 h.
-Prix : 2 personnes.
-Quand : menu à la carte.
-Note : terrasse si beau temps.
+Votre demande est notée. Information principale : à 12 h 30. Le détail principal est eau minérale.
+Consigne : réserver une table. Détail : 28 francs.
 
-Cordialement,
-Restaurant Le Lac`;
+Cordialement`;
 
 const E4_2_CE_EMAIL_POOL_1 = buildExpressPool("e4-2-ce-email-1", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Table 5 à 19 h", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "table",
-    vfQ: "Commande : table 5 à 19 h.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["2 personnes", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["salade et poisson", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "2",
-    vfQ: "Prix : 2 personnes.",
+    fillQ: "Le plat est _________.",
+    fill: "salade et poisson",
+    vfQ: "Le texte mentionne salade et poisson.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Menu à la carte", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 12 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "menu",
-    vfQ: "Quand : menu à la carte.",
+    fillQ: "C'est _________.",
+    fill: "à 12 h 30",
+    vfQ: "Le texte mentionne à 12 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Terrasse si beau temps", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Restaurant Le Lac", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "terrasse",
-    vfQ: "Note : terrasse si beau temps.",
+    fillQ: "Le lieu est _________.",
+    fill: "Restaurant Le Lac",
+    vfQ: "Le texte mentionne Restaurant Le Lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["eau minérale", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Le Lac.",
+    fillQ: "La boisson est _________.",
+    fill: "eau minérale",
+    vfQ: "Le texte mentionne eau minérale.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réservation confirmée", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["28 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réservation",
-    vfQ: "Objet : Réservation confirmée.",
+    fillQ: "Le prix est _________.",
+    fill: "28 francs",
+    vfQ: "Le texte mentionne 28 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_2 = `De : Pizzeria Roma
-Objet : Commande livraison
+const E4_2_CE_EMAIL_TEXT_2 = `De : Service client
+Objet : Confirmation
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Pizzeria.
-Commande : pizza margherita + coca.
-Prix : 28 francs.
-Quand : livraison 30 min.
-Note : paiement à la livraison.
+Nous confirmons une fondue moitié-moitié chez Fondue House.
+Information : à 19 h. La note du dossier : vin blanc.
+Action demandée : confirmer deux personnes. Détail : 35 francs.
 
-Cordialement,
-Pizzeria Roma`;
+Service client`;
 
 const E4_2_CE_EMAIL_POOL_2 = buildExpressPool("e4-2-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Pizza margherita + coca", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "pizza",
-    vfQ: "Commande : pizza margherita + coca.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["28 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["une fondue moitié-moitié", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "28",
-    vfQ: "Prix : 28 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "une fondue moitié-moitié",
+    vfQ: "Le texte mentionne une fondue moitié-moitié.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Livraison 30 min", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 19 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "livraison",
-    vfQ: "Quand : livraison 30 min.",
+    fillQ: "C'est _________.",
+    fill: "à 19 h",
+    vfQ: "Le texte mentionne à 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Paiement à la livraison", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Fondue House", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "paiement",
-    vfQ: "Note : paiement à la livraison.",
+    fillQ: "Le lieu est _________.",
+    fill: "Fondue House",
+    vfQ: "Le texte mentionne Fondue House.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Pizzeria", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["vin blanc", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Pizzeria",
-    vfQ: "C'est Pizzeria Roma.",
+    fillQ: "La boisson est _________.",
+    fill: "vin blanc",
+    vfQ: "Le texte mentionne vin blanc.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Commande livraison", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["35 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Commande",
-    vfQ: "Objet : Commande livraison.",
+    fillQ: "Le prix est _________.",
+    fill: "35 francs",
+    vfQ: "Le texte mentionne 35 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_3 = `De : Brasserie du Centre
-Objet : Menu du jour
+const E4_2_CE_EMAIL_TEXT_3 = `De : Pizzeria Roma
+Objet : Rappel avant votre venue
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Brasserie.
-Commande : poisson + dessert.
-Prix : 32 francs.
-Quand : midi 12 h – 14 h.
-Note : café inclus.
+Avant de venir pour une pizza margherita, vérifiez coca-cola.
+Information indiquée : à 20 h. Sur place, il faudra payer à la livraison.
+18 francs.
 
-Cordialement,
-Brasserie du Centre`;
+Merci`;
 
 const E4_2_CE_EMAIL_POOL_3 = buildExpressPool("e4-2-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Poisson + dessert", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "poisson",
-    vfQ: "Commande : poisson + dessert.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["32 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["une pizza margherita", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "32",
-    vfQ: "Prix : 32 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "une pizza margherita",
+    vfQ: "Le texte mentionne une pizza margherita.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Midi 12 h – 14 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 20 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "midi",
-    vfQ: "Quand : midi 12 h – 14 h.",
+    fillQ: "C'est _________.",
+    fill: "à 20 h",
+    vfQ: "Le texte mentionne à 20 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Café inclus", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Pizzeria Roma", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "café",
-    vfQ: "Note : café inclus.",
+    fillQ: "Le lieu est _________.",
+    fill: "Pizzeria Roma",
+    vfQ: "Le texte mentionne Pizzeria Roma.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Brasserie", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["coca-cola", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Brasserie",
-    vfQ: "C'est Brasserie du Centre.",
+    fillQ: "La boisson est _________.",
+    fill: "coca-cola",
+    vfQ: "Le texte mentionne coca-cola.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Menu du jour", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["18 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Menu",
-    vfQ: "Objet : Menu du jour.",
+    fillQ: "Le prix est _________.",
+    fill: "18 francs",
+    vfQ: "Le texte mentionne 18 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_4 = `De : Restaurant Le Sapin
-Objet : Anniversaire
+const E4_2_CE_EMAIL_TEXT_4 = `De : Boutique en ligne
+Objet : Votre suivi
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : menu dégustation 3 plats.
-Prix : 65 francs/personne.
-Quand : samedi 20 h 30.
-Note : gâteau offert.
+Votre demande pour un steak frites avance.
+Point de retrait : table 8. Information : à 13 h.
+Détail à confirmer : bière pression. Consigne : demander une cuisson à point.
 
-Cordialement,
-Restaurant Le Sapin`;
+Boutique en ligne`;
 
 const E4_2_CE_EMAIL_POOL_4 = buildExpressPool("e4-2-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Menu dégustation 3 plats", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "menu",
-    vfQ: "Commande : menu dégustation 3 plats.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["65 francs/personne", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un steak frites", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "65",
-    vfQ: "Prix : 65 francs/personne.",
+    fillQ: "Le plat est _________.",
+    fill: "un steak frites",
+    vfQ: "Le texte mentionne un steak frites.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Samedi 20 h 30", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 13 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "samedi",
-    vfQ: "Quand : samedi 20 h 30.",
+    fillQ: "C'est _________.",
+    fill: "à 13 h",
+    vfQ: "Le texte mentionne à 13 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Gâteau offert", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["table 8", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "gâteau",
-    vfQ: "Note : gâteau offert.",
+    fillQ: "Le lieu est _________.",
+    fill: "table 8",
+    vfQ: "Le texte mentionne table 8.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["bière pression", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Le Sapin.",
+    fillQ: "La boisson est _________.",
+    fill: "bière pression",
+    vfQ: "Le texte mentionne bière pression.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Anniversaire", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["32 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Anniversaire",
-    vfQ: "Objet : Anniversaire.",
+    fillQ: "Le prix est _________.",
+    fill: "32 francs",
+    vfQ: "Le texte mentionne 32 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_5 = `De : Café du Port
-Objet : Brunch réservé
+const E4_2_CE_EMAIL_TEXT_5 = `De : Brasserie du Centre
+Objet : Offre limitée
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Café.
-Commande : brunch complet.
-Prix : 28 francs.
-Quand : dimanche 10 h.
-Note : jus d'orange frais.
+L'offre sur un risotto aux champignons est disponible. Information : à midi.
+Elle concerne jus d'orange. Pour en profiter, consigne : choisir le plat végétarien.
+24 francs.
 
-Cordialement,
-Café du Port`;
+À bientôt`;
 
 const E4_2_CE_EMAIL_POOL_5 = buildExpressPool("e4-2-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Brunch complet", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "brunch",
-    vfQ: "Commande : brunch complet.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["28 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un risotto aux champignons", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "28",
-    vfQ: "Prix : 28 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un risotto aux champignons",
+    vfQ: "Le texte mentionne un risotto aux champignons.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Dimanche 10 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à midi", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "dimanche",
-    vfQ: "Quand : dimanche 10 h.",
+    fillQ: "C'est _________.",
+    fill: "à midi",
+    vfQ: "Le texte mentionne à midi.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Jus d'orange frais", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Brasserie du Centre", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "jus",
-    vfQ: "Note : jus d'orange frais.",
+    fillQ: "Le lieu est _________.",
+    fill: "Brasserie du Centre",
+    vfQ: "Le texte mentionne Brasserie du Centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Café", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["jus d'orange", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Café",
-    vfQ: "C'est Café du Port.",
+    fillQ: "La boisson est _________.",
+    fill: "jus d'orange",
+    vfQ: "Le texte mentionne jus d'orange.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Brunch réservé", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["24 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Brunch",
-    vfQ: "Objet : Brunch réservé.",
+    fillQ: "Le prix est _________.",
+    fill: "24 francs",
+    vfQ: "Le texte mentionne 24 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_6 = `De : Fondue House
-Objet : Réservation fondue
+const E4_2_CE_EMAIL_TEXT_6 = `De : Réservation
+Objet : Préparation
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Fondue.
-Commande : fondue moitié-moitié.
-Prix : 35 francs/personne.
-Quand : vendredi 19 h.
-Note : vin blanc conseillé.
+Nous préparons un menu dégustation. Vous pouvez passer chez Restaurant Le Sapin. Information : à 20 h 30.
+La fiche indique champagne. Au comptoir, pensez à préparer l'anniversaire.
+65 francs.
 
-Cordialement,
-Fondue House`;
+Réservation`;
 
 const E4_2_CE_EMAIL_POOL_6 = buildExpressPool("e4-2-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Fondue moitié-moitié", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "fondue",
-    vfQ: "Commande : fondue moitié-moitié.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["35 francs/personne", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un menu dégustation", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "35",
-    vfQ: "Prix : 35 francs/personne.",
+    fillQ: "Le plat est _________.",
+    fill: "un menu dégustation",
+    vfQ: "Le texte mentionne un menu dégustation.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Vendredi 19 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 20 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "vendredi",
-    vfQ: "Quand : vendredi 19 h.",
+    fillQ: "C'est _________.",
+    fill: "à 20 h 30",
+    vfQ: "Le texte mentionne à 20 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Vin blanc conseillé", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Restaurant Le Sapin", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "vin",
-    vfQ: "Note : vin blanc conseillé.",
+    fillQ: "Le lieu est _________.",
+    fill: "Restaurant Le Sapin",
+    vfQ: "Le texte mentionne Restaurant Le Sapin.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Fondue", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["champagne", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Fondue",
-    vfQ: "C'est Fondue House.",
+    fillQ: "La boisson est _________.",
+    fill: "champagne",
+    vfQ: "Le texte mentionne champagne.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réservation fondue", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["65 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réservation",
-    vfQ: "Objet : Réservation fondue.",
+    fillQ: "Le prix est _________.",
+    fill: "65 francs",
+    vfQ: "Le texte mentionne 65 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_7 = `De : Burger King
-Objet : Commande en ligne
+const E4_2_CE_EMAIL_TEXT_7 = `De : Carte fidélité
+Objet : Avantage du jour
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Burger.
-Commande : menu burger + frites.
-Prix : 18 francs.
-Quand : retrait 15 min.
-Note : code QR en pièce jointe.
+Votre avantage concerne un burger classique.
+Il est disponible chez Burger King. Information : à 18 h 30. Détail : limonade.
+Pour l'activer, il faut prendre une table en terrasse. Détail : 22 francs.
 
-Cordialement,
-Burger King`;
+Carte fidélité`;
 
 const E4_2_CE_EMAIL_POOL_7 = buildExpressPool("e4-2-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Menu burger + frites", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "menu",
-    vfQ: "Commande : menu burger + frites.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["18 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un burger classique", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "18",
-    vfQ: "Prix : 18 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un burger classique",
+    vfQ: "Le texte mentionne un burger classique.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Retrait 15 min", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 18 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "retrait",
-    vfQ: "Quand : retrait 15 min.",
+    fillQ: "C'est _________.",
+    fill: "à 18 h 30",
+    vfQ: "Le texte mentionne à 18 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Code qr en pièce jointe", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Burger King", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "code",
-    vfQ: "Note : code QR en pièce jointe.",
+    fillQ: "Le lieu est _________.",
+    fill: "Burger King",
+    vfQ: "Le texte mentionne Burger King.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Burger", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["limonade", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Burger",
-    vfQ: "C'est Burger King.",
+    fillQ: "La boisson est _________.",
+    fill: "limonade",
+    vfQ: "Le texte mentionne limonade.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Commande en ligne", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["22 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Commande",
-    vfQ: "Objet : Commande en ligne.",
+    fillQ: "Le prix est _________.",
+    fill: "22 francs",
+    vfQ: "Le texte mentionne 22 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_8 = `De : Sushi Zen
-Objet : Plateau sushi
+const E4_2_CE_EMAIL_TEXT_8 = `De : Café du Port
+Objet : Dernière vérification
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Sushi.
-Commande : plateau 24 pièces.
-Prix : 45 francs.
-Quand : livraison gratuite.
-Note : wasabi et gingembre inclus.
+Nous gardons un filet de perche. Information : ce soir.
+La note enregistrée est vin du lac. Consigne : demander la vue sur le lac au moment de votre venue.
+38 francs.
 
-Cordialement,
-Sushi Zen`;
+Cordialement`;
 
 const E4_2_CE_EMAIL_POOL_8 = buildExpressPool("e4-2-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Plateau 24 pièces", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "plateau",
-    vfQ: "Commande : plateau 24 pièces.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["45 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un filet de perche", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "45",
-    vfQ: "Prix : 45 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un filet de perche",
+    vfQ: "Le texte mentionne un filet de perche.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Livraison gratuite", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["ce soir", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "livraison",
-    vfQ: "Quand : livraison gratuite.",
+    fillQ: "C'est _________.",
+    fill: "ce soir",
+    vfQ: "Le texte mentionne ce soir.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Wasabi et gingembre inclus", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Café du Port", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "wasabi",
-    vfQ: "Note : wasabi et gingembre inclus.",
+    fillQ: "Le lieu est _________.",
+    fill: "Café du Port",
+    vfQ: "Le texte mentionne Café du Port.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Sushi", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["vin du lac", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Sushi",
-    vfQ: "C'est Sushi Zen.",
+    fillQ: "La boisson est _________.",
+    fill: "vin du lac",
+    vfQ: "Le texte mentionne vin du lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Plateau sushi", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["38 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Plateau",
-    vfQ: "Objet : Plateau sushi.",
+    fillQ: "Le prix est _________.",
+    fill: "38 francs",
+    vfQ: "Le texte mentionne 38 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_9 = `De : Crêperie Bretonne
-Objet : Crêpes sucrées
+const E4_2_CE_EMAIL_TEXT_9 = `De : Support
+Objet : Question reçue
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Crêperie.
-Commande : 2 crêpes + boisson.
-Prix : 20 francs.
-Quand : après-midi.
-Note : nutella ou sucre.
+Vous avez posé une question sur des pâtes carbonara.
+Réponse : chez Restaurant Italien, c'est possible. Information : à 19 h 30.
+Il faut seulement partager l'addition. eau gazeuse. Détail : 21 francs.
 
-Cordialement,
-Crêperie Bretonne`;
+Support`;
 
 const E4_2_CE_EMAIL_POOL_9 = buildExpressPool("e4-2-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["2 crêpes + boisson", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "2",
-    vfQ: "Commande : 2 crêpes + boisson.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["20 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["des pâtes carbonara", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "20",
-    vfQ: "Prix : 20 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "des pâtes carbonara",
+    vfQ: "Le texte mentionne des pâtes carbonara.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Après-midi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 19 h 30", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "après-midi",
-    vfQ: "Quand : après-midi.",
+    fillQ: "C'est _________.",
+    fill: "à 19 h 30",
+    vfQ: "Le texte mentionne à 19 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Nutella ou sucre", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Restaurant Italien", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "nutella",
-    vfQ: "Note : nutella ou sucre.",
+    fillQ: "Le lieu est _________.",
+    fill: "Restaurant Italien",
+    vfQ: "Le texte mentionne Restaurant Italien.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Crêperie", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["eau gazeuse", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Crêperie",
-    vfQ: "C'est Crêperie Bretonne.",
+    fillQ: "La boisson est _________.",
+    fill: "eau gazeuse",
+    vfQ: "Le texte mentionne eau gazeuse.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Crêpes sucrées", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["21 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Crêpes",
-    vfQ: "Objet : Crêpes sucrées.",
+    fillQ: "Le prix est _________.",
+    fill: "21 francs",
+    vfQ: "Le texte mentionne 21 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_10 = `De : Restaurant Indien
-Objet : Menu végétarien
+const E4_2_CE_EMAIL_TEXT_10 = `De : Snack Bar
+Objet : Commande de groupe
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : thali végétarien.
-Prix : 22 francs.
-Quand : ce soir 19 h.
-Note : épicé niveau 2.
+La commande pour une salade César est prévue. Information : à 13 h.
+Elle porte la note thé glacé. Consigne : retirer sans croûtons avant le retrait.
+16 francs.
 
-Cordialement,
-Restaurant Indien`;
+Le magasin`;
 
 const E4_2_CE_EMAIL_POOL_10 = buildExpressPool("e4-2-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Thali végétarien", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "thali",
-    vfQ: "Commande : thali végétarien.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["22 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["une salade César", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "22",
-    vfQ: "Prix : 22 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "une salade César",
+    vfQ: "Le texte mentionne une salade César.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Ce soir 19 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 13 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "ce",
-    vfQ: "Quand : ce soir 19 h.",
+    fillQ: "C'est _________.",
+    fill: "à 13 h",
+    vfQ: "Le texte mentionne à 13 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Épicé niveau 2", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Snack Bar", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "épicé",
-    vfQ: "Note : épicé niveau 2.",
+    fillQ: "Le lieu est _________.",
+    fill: "Snack Bar",
+    vfQ: "Le texte mentionne Snack Bar.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["thé glacé", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Indien.",
+    fillQ: "La boisson est _________.",
+    fill: "thé glacé",
+    vfQ: "Le texte mentionne thé glacé.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Menu végétarien", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["16 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Menu",
-    vfQ: "Objet : Menu végétarien.",
+    fillQ: "Le prix est _________.",
+    fill: "16 francs",
+    vfQ: "Le texte mentionne 16 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_11 = `De : Steakhouse
-Objet : Réservation
+const E4_2_CE_EMAIL_TEXT_11 = `De : Alerte stock
+Objet : Disponibilité
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Steakhouse.
-Commande : steak frites.
-Prix : 32 francs.
-Quand : table 8 à 20 h.
-Note : cuisson à point.
+un menu enfant est de nouveau disponible chez table 6.
+Information : à midi. Le détail à vérifier est jus de pomme.
+Consigne : demander le jouet. Détail : 12 francs.
 
-À bientôt,
-Steakhouse`;
+Alerte stock`;
 
 const E4_2_CE_EMAIL_POOL_11 = buildExpressPool("e4-2-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Steak frites", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "steak",
-    vfQ: "Commande : steak frites.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["32 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un menu enfant", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "32",
-    vfQ: "Prix : 32 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un menu enfant",
+    vfQ: "Le texte mentionne un menu enfant.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Table 8 à 20 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à midi", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "table",
-    vfQ: "Quand : table 8 à 20 h.",
+    fillQ: "C'est _________.",
+    fill: "à midi",
+    vfQ: "Le texte mentionne à midi.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Cuisson à point", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["table 6", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "cuisson",
-    vfQ: "Note : cuisson à point.",
+    fillQ: "Le lieu est _________.",
+    fill: "table 6",
+    vfQ: "Le texte mentionne table 6.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Steakhouse", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["jus de pomme", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Steakhouse",
-    vfQ: "C'est Steakhouse.",
+    fillQ: "La boisson est _________.",
+    fill: "jus de pomme",
+    vfQ: "Le texte mentionne jus de pomme.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Réservation", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["12 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Réservation",
-    vfQ: "Objet : Réservation.",
+    fillQ: "Le prix est _________.",
+    fill: "12 francs",
+    vfQ: "Le texte mentionne 12 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_12 = `De : Restaurant Chinois
-Objet : Menu famille
+const E4_2_CE_EMAIL_TEXT_12 = `De : Café Bellevue
+Objet : Réponse à votre message
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : 5 plats à partager.
-Prix : 80 francs.
-Quand : 4 personnes.
-Note : thé offert.
+Oui, nous avons une tarte aux pommes.
+Vous pouvez passer. Information : à 15 h. Demandez la note café.
+Ensuite, action simple : prendre une part maison. Détail : 8 francs.
 
-Cordialement,
-Restaurant Chinois`;
+Merci`;
 
 const E4_2_CE_EMAIL_POOL_12 = buildExpressPool("e4-2-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["5 plats à partager", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "5",
-    vfQ: "Commande : 5 plats à partager.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["80 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["une tarte aux pommes", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "80",
-    vfQ: "Prix : 80 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "une tarte aux pommes",
+    vfQ: "Le texte mentionne une tarte aux pommes.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["4 personnes", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 15 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "4",
-    vfQ: "Quand : 4 personnes.",
+    fillQ: "C'est _________.",
+    fill: "à 15 h",
+    vfQ: "Le texte mentionne à 15 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Thé offert", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Café Bellevue", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "thé",
-    vfQ: "Note : thé offert.",
+    fillQ: "Le lieu est _________.",
+    fill: "Café Bellevue",
+    vfQ: "Le texte mentionne Café Bellevue.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["café", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Chinois.",
+    fillQ: "La boisson est _________.",
+    fill: "café",
+    vfQ: "Le texte mentionne café.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Menu famille", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["8 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Menu",
-    vfQ: "Objet : Menu famille.",
+    fillQ: "Le prix est _________.",
+    fill: "8 francs",
+    vfQ: "Le texte mentionne 8 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_13 = `De : Traiteur
-Objet : Buffet événement
+const E4_2_CE_EMAIL_TEXT_13 = `De : Ardoise du jour
+Objet : Information
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Traiteur.
-Commande : plateau apéro 20 pers..
-Prix : 150 francs.
-Quand : livraison samedi.
-Note : vaisselle incluse.
+Aujourd'hui, nous proposons un plateau apéro.
+C'est disponible chez bar du Centre. Information : de 17 h à 19 h. Détail : spritz.
+Action conseillée : venir avec trois amis. Détail : 15 francs.
 
-À bientôt,
-Traiteur`;
+Bonne journée`;
 
 const E4_2_CE_EMAIL_POOL_13 = buildExpressPool("e4-2-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Plateau apéro 20 pers.", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "plateau",
-    vfQ: "Commande : plateau apéro 20 pers..",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["150 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un plateau apéro", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "150",
-    vfQ: "Prix : 150 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un plateau apéro",
+    vfQ: "Le texte mentionne un plateau apéro.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Livraison samedi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["de 17 h à 19 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "livraison",
-    vfQ: "Quand : livraison samedi.",
+    fillQ: "C'est _________.",
+    fill: "de 17 h à 19 h",
+    vfQ: "Le texte mentionne de 17 h à 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Vaisselle incluse", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["bar du Centre", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "vaisselle",
-    vfQ: "Note : vaisselle incluse.",
+    fillQ: "Le lieu est _________.",
+    fill: "bar du Centre",
+    vfQ: "Le texte mentionne bar du Centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Traiteur", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["spritz", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Traiteur",
-    vfQ: "C'est Traiteur.",
+    fillQ: "La boisson est _________.",
+    fill: "spritz",
+    vfQ: "Le texte mentionne spritz.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Buffet événement", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["15 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Buffet",
-    vfQ: "Objet : Buffet événement.",
+    fillQ: "Le prix est _________.",
+    fill: "15 francs",
+    vfQ: "Le texte mentionne 15 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_14 = `De : Restaurant Gastronomique
-Objet : Menu étoile
+const E4_2_CE_EMAIL_TEXT_14 = `De : Rappel automatique
+Objet : Rendez-vous
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : menu 5 plats.
-Prix : 120 francs.
-Quand : réservation obligatoire.
-Note : accord mets-vins.
+Votre rappel concerne une soupe du jour.
+Rendez-vous chez table 10. Information : à 12 h. Vérifiez pain.
+Consigne : commander une entrée chaude. Détail : 9 francs.
 
-Cordialement,
-Restaurant Gastronomique`;
+Rappel automatique`;
 
 const E4_2_CE_EMAIL_POOL_14 = buildExpressPool("e4-2-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Menu 5 plats", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "menu",
-    vfQ: "Commande : menu 5 plats.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["120 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["une soupe du jour", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "120",
-    vfQ: "Prix : 120 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "une soupe du jour",
+    vfQ: "Le texte mentionne une soupe du jour.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Réservation obligatoire", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 12 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "réservation",
-    vfQ: "Quand : réservation obligatoire.",
+    fillQ: "C'est _________.",
+    fill: "à 12 h",
+    vfQ: "Le texte mentionne à 12 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Accord mets-vins", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["table 10", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "accord",
-    vfQ: "Note : accord mets-vins.",
+    fillQ: "Le lieu est _________.",
+    fill: "table 10",
+    vfQ: "Le texte mentionne table 10.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["pain", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Gastronomique.",
+    fillQ: "La boisson est _________.",
+    fill: "pain",
+    vfQ: "Le texte mentionne pain.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Menu étoile", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["9 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Menu",
-    vfQ: "Objet : Menu étoile.",
+    fillQ: "Le prix est _________.",
+    fill: "9 francs",
+    vfQ: "Le texte mentionne 9 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_15 = `De : Snack Bar
-Objet : Formule midi
+const E4_2_CE_EMAIL_TEXT_15 = `De : terrasse du lac
+Objet : Nouveauté
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Snack.
-Commande : sandwich + boisson.
-Prix : 12 francs.
-Quand : 11 h – 15 h.
-Note : rapide.
+La nouveauté un plateau de fruits de mer arrive. Information : à 21 h.
+Elle est liée à vin blanc. Pour la réserver, vous pouvez confirmer la table.
+55 francs.
 
-Cordialement,
-Snack Bar`;
+À bientôt`;
 
 const E4_2_CE_EMAIL_POOL_15 = buildExpressPool("e4-2-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Sandwich + boisson", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "sandwich",
-    vfQ: "Commande : sandwich + boisson.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["12 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un plateau de fruits de mer", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "12",
-    vfQ: "Prix : 12 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un plateau de fruits de mer",
+    vfQ: "Le texte mentionne un plateau de fruits de mer.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["11 h – 15 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 21 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "11",
-    vfQ: "Quand : 11 h – 15 h.",
+    fillQ: "C'est _________.",
+    fill: "à 21 h",
+    vfQ: "Le texte mentionne à 21 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Rapide", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["terrasse du lac", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "rapide",
-    vfQ: "Note : rapide.",
+    fillQ: "Le lieu est _________.",
+    fill: "terrasse du lac",
+    vfQ: "Le texte mentionne terrasse du lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Snack", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["vin blanc", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Snack",
-    vfQ: "C'est Snack Bar.",
+    fillQ: "La boisson est _________.",
+    fill: "vin blanc",
+    vfQ: "Le texte mentionne vin blanc.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Formule midi", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["55 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Formule",
-    vfQ: "Objet : Formule midi.",
+    fillQ: "Le prix est _________.",
+    fill: "55 francs",
+    vfQ: "Le texte mentionne 55 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_16 = `De : Restaurant Italien
-Objet : Pâtes fraîches
+const E4_2_CE_EMAIL_TEXT_16 = `De : Vendeur
+Objet : Message noté
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : carbonara maison.
-Prix : 21 francs.
-Quand : ce soir.
-Note : parmesan inclus.
+J'ai bien noté votre demande pour un poulet rôti.
+Je vous attends chez table 14. Information : à 19 h. Je prépare eau.
+Sur place, vous pourrez servir sans gluten. Détail : 26 francs.
 
-Cordialement,
-Restaurant Italien`;
+Le vendeur`;
 
 const E4_2_CE_EMAIL_POOL_16 = buildExpressPool("e4-2-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Carbonara maison", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "carbonara",
-    vfQ: "Commande : carbonara maison.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["21 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un poulet rôti", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "21",
-    vfQ: "Prix : 21 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un poulet rôti",
+    vfQ: "Le texte mentionne un poulet rôti.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Ce soir", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 19 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "ce",
-    vfQ: "Quand : ce soir.",
+    fillQ: "C'est _________.",
+    fill: "à 19 h",
+    vfQ: "Le texte mentionne à 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Parmesan inclus", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["table 14", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "parmesan",
-    vfQ: "Note : parmesan inclus.",
+    fillQ: "Le lieu est _________.",
+    fill: "table 14",
+    vfQ: "Le texte mentionne table 14.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["eau", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Italien.",
+    fillQ: "La boisson est _________.",
+    fill: "eau",
+    vfQ: "Le texte mentionne eau.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Pâtes fraîches", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["26 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Pâtes",
-    vfQ: "Objet : Pâtes fraîches.",
+    fillQ: "Le prix est _________.",
+    fill: "26 francs",
+    vfQ: "Le texte mentionne 26 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_17 = `De : Bar à vin
-Objet : Dégustation
+const E4_2_CE_EMAIL_TEXT_17 = `De : Programme fidélité
+Objet : Votre offre
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Bar.
-Commande : 5 vins + fromages.
-Prix : 40 francs.
-Quand : jeudi 18 h.
-Note : réservation 6 personnes max.
+Votre offre porte sur une crêpe sucrée.
+Elle fonctionne chez Crêperie Bretonne; information : à 16 h. La condition est chocolat chaud.
+N'oubliez pas cette action : choisir sucre ou chocolat. Détail : 10 francs.
 
-Cordialement,
-Bar à vin`;
+Programme fidélité`;
 
 const E4_2_CE_EMAIL_POOL_17 = buildExpressPool("e4-2-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["5 vins + fromages", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "5",
-    vfQ: "Commande : 5 vins + fromages.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["40 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["une crêpe sucrée", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "40",
-    vfQ: "Prix : 40 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "une crêpe sucrée",
+    vfQ: "Le texte mentionne une crêpe sucrée.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Jeudi 18 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 16 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "jeudi",
-    vfQ: "Quand : jeudi 18 h.",
+    fillQ: "C'est _________.",
+    fill: "à 16 h",
+    vfQ: "Le texte mentionne à 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Réservation 6 personnes max", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Crêperie Bretonne", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "réservation",
-    vfQ: "Note : réservation 6 personnes max.",
+    fillQ: "Le lieu est _________.",
+    fill: "Crêperie Bretonne",
+    vfQ: "Le texte mentionne Crêperie Bretonne.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Bar", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["chocolat chaud", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Bar",
-    vfQ: "C'est Bar à vin.",
+    fillQ: "La boisson est _________.",
+    fill: "chocolat chaud",
+    vfQ: "Le texte mentionne chocolat chaud.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Dégustation", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["10 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Dégustation",
-    vfQ: "Objet : Dégustation.",
+    fillQ: "Le prix est _________.",
+    fill: "10 francs",
+    vfQ: "Le texte mentionne 10 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_18 = `De : Restaurant Libanais
-Objet : Mezze
+const E4_2_CE_EMAIL_TEXT_18 = `De : Formule Midi
+Objet : Fête confirmée
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : assortiment mezze.
-Prix : 25 francs.
-Quand : partage 2 pers..
-Note : houmous et falafels.
+Pour votre fête, un plat du jour et dessert est réservé.
+Information : entre 12 h et 14 h. La fiche indique café.
+Consigne : manger rapidement. Détail : 22 francs.
 
-Cordialement,
-Restaurant Libanais`;
+Cordialement`;
 
 const E4_2_CE_EMAIL_POOL_18 = buildExpressPool("e4-2-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Assortiment mezze", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "assortiment",
-    vfQ: "Commande : assortiment mezze.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["25 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un plat du jour et dessert", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "25",
-    vfQ: "Prix : 25 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un plat du jour et dessert",
+    vfQ: "Le texte mentionne un plat du jour et dessert.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Partage 2 pers.", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["entre 12 h et 14 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "partage",
-    vfQ: "Quand : partage 2 pers..",
+    fillQ: "C'est _________.",
+    fill: "entre 12 h et 14 h",
+    vfQ: "Le texte mentionne entre 12 h et 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Houmous et falafels", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Formule Midi", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "houmous",
-    vfQ: "Note : houmous et falafels.",
+    fillQ: "Le lieu est _________.",
+    fill: "Formule Midi",
+    vfQ: "Le texte mentionne Formule Midi.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["café", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Libanais.",
+    fillQ: "La boisson est _________.",
+    fill: "café",
+    vfQ: "Le texte mentionne café.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Mezze", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["22 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Mezze",
-    vfQ: "Objet : Mezze.",
+    fillQ: "Le prix est _________.",
+    fill: "22 francs",
+    vfQ: "Le texte mentionne 22 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_19 = `De : Crêperie
-Objet : Galette salée
+const E4_2_CE_EMAIL_TEXT_19 = `De : Confirmation
+Objet : Retrait
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Crêperie.
-Commande : galette complète.
-Prix : 16 francs.
-Quand : midi.
-Note : cidre en option.
+Votre retrait pour une salade niçoise est prêt chez terrasse 5.
+Information : à 20 h. La note est rosé.
+Consigne : garder la table dehors. Détail : 19 francs.
 
-À bientôt,
-Crêperie`;
+Confirmation`;
 
 const E4_2_CE_EMAIL_POOL_19 = buildExpressPool("e4-2-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Galette complète", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "galette",
-    vfQ: "Commande : galette complète.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["16 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["une salade niçoise", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "16",
-    vfQ: "Prix : 16 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "une salade niçoise",
+    vfQ: "Le texte mentionne une salade niçoise.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Midi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 20 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "midi",
-    vfQ: "Quand : midi.",
+    fillQ: "C'est _________.",
+    fill: "à 20 h",
+    vfQ: "Le texte mentionne à 20 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Cidre en option", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["terrasse 5", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "cidre",
-    vfQ: "Note : cidre en option.",
+    fillQ: "Le lieu est _________.",
+    fill: "terrasse 5",
+    vfQ: "Le texte mentionne terrasse 5.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Crêperie", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["rosé", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Crêperie",
-    vfQ: "C'est Crêperie.",
+    fillQ: "La boisson est _________.",
+    fill: "rosé",
+    vfQ: "Le texte mentionne rosé.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Galette salée", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["19 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Galette",
-    vfQ: "Objet : Galette salée.",
+    fillQ: "Le prix est _________.",
+    fill: "19 francs",
+    vfQ: "Le texte mentionne 19 francs.",
     vfC: 0,
   }),
 ]);
-const E4_2_CE_EMAIL_TEXT_20 = `De : Restaurant Végétalien
-Objet : Menu vert
+const E4_2_CE_EMAIL_TEXT_20 = `De : Restaurant Vert
+Objet : Idée week-end
 
 Bonjour,
 
-Merci pour votre commande/réservation chez Restaurant.
-Commande : 3 plats vegan.
-Prix : 30 francs.
-Quand : mardi 19 h.
-Note : produits bio.
+Pour ce week-end, nous conseillons un menu végétalien.
+Information : à 19 h. Regardez smoothie avant de choisir.
+Vous pourrez demander les options bio. Détail : 25 francs.
 
-Cordialement,
-Restaurant Végétalien`;
+Bon week-end`;
 
 const E4_2_CE_EMAIL_POOL_20 = buildExpressPool("e4-2-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["3 plats vegan", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "3",
-    vfQ: "Commande : 3 plats vegan.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["30 francs", "1 franc", "Gratuit"],
+    textQ: "Quel plat est mentionné ?",
+    text: ["un menu végétalien", "une voiture", "un cahier"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "30",
-    vfQ: "Prix : 30 francs.",
+    fillQ: "Le plat est _________.",
+    fill: "un menu végétalien",
+    vfQ: "Le texte mentionne un menu végétalien.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Mardi 19 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 19 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "mardi",
-    vfQ: "Quand : mardi 19 h.",
+    fillQ: "C'est _________.",
+    fill: "à 19 h",
+    vfQ: "Le texte mentionne à 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Produits bio", "Rien", "Un chat"],
+    textQ: "Où cela se passe-t-il ?",
+    text: ["Restaurant Vert", "à la plage", "à l'aéroport"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "produits",
-    vfQ: "Note : produits bio.",
+    fillQ: "Le lieu est _________.",
+    fill: "Restaurant Vert",
+    vfQ: "Le texte mentionne Restaurant Vert.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quel restaurant ?",
-    text: ["Restaurant", "Une pharmacie", "Une école"],
+    textQ: "Quelle boisson est mentionnée ?",
+    text: ["smoothie", "de l'essence", "du savon"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Restaurant",
-    vfQ: "C'est Restaurant Végétalien.",
+    fillQ: "La boisson est _________.",
+    fill: "smoothie",
+    vfQ: "Le texte mentionne smoothie.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Menu vert", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["25 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Menu",
-    vfQ: "Objet : Menu vert.",
+    fillQ: "Le prix est _________.",
+    fill: "25 francs",
+    vfQ: "Le texte mentionne 25 francs.",
     vfC: 0,
   }),
 ]);
@@ -4445,1762 +4323,1701 @@ export const E4_2_PE_EMAIL: ExpressPePrompt[] = [
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E4_3_CE_EMAIL_TEXT_1 = `De : Boulangerie Martin
-Objet : Commande confirmée
+Objet : une baguette tradition
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : 6 croissants + 2 baguettes.
-Prix : 15.80 francs.
-Quand : demain 8 h.
-Note : retrait au comptoir.
+Votre demande est notée. Information principale : à 7 h. Le détail principal est 2 pièces.
+Consigne : passer tôt. Détail : 2.80 francs.
 
-Cordialement,
-Boulangerie Martin`;
+Cordialement`;
 
 const E4_3_CE_EMAIL_POOL_1 = buildExpressPool("e4-3-ce-email-1", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["6 croissants + 2 baguettes", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "6",
-    vfQ: "Commande : 6 croissants + 2 baguettes.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["15.80 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["une baguette tradition", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "15.80",
-    vfQ: "Prix : 15.80 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "une baguette tradition",
+    vfQ: "Le texte mentionne une baguette tradition.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Demain 8 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 7 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "demain",
-    vfQ: "Quand : demain 8 h.",
+    fillQ: "C'est _________.",
+    fill: "à 7 h",
+    vfQ: "Le texte mentionne à 7 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Retrait au comptoir", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie Martin", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "retrait",
-    vfQ: "Note : retrait au comptoir.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie Martin",
+    vfQ: "Le texte mentionne Boulangerie Martin.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["2 pièces", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Martin.",
+    fillQ: "La quantité est _________.",
+    fill: "2 pièces",
+    vfQ: "Le texte mentionne 2 pièces.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Commande confirmée", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["2.80 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Commande",
-    vfQ: "Objet : Commande confirmée.",
+    fillQ: "Le prix est _________.",
+    fill: "2.80 francs",
+    vfQ: "Le texte mentionne 2.80 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_2 = `De : Boulangerie du Lac
-Objet : Gâteau anniversaire
+const E4_3_CE_EMAIL_TEXT_2 = `De : Service client
+Objet : Confirmation
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : gâteau chocolat 20 parts.
-Prix : 45 francs.
-Quand : samedi 14 h.
-Note : prénom sur le gâteau.
+Nous confirmons des croissants au beurre chez Boulangerie du Lac.
+Information : demain à 8 h. La note du dossier : 6 pièces.
+Action demandée : réserver au prénom Marie. Détail : 12 francs.
 
-Cordialement,
-Boulangerie du Lac`;
+Service client`;
 
 const E4_3_CE_EMAIL_POOL_2 = buildExpressPool("e4-3-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Gâteau chocolat 20 parts", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "gâteau",
-    vfQ: "Commande : gâteau chocolat 20 parts.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["45 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["des croissants au beurre", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "45",
-    vfQ: "Prix : 45 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "des croissants au beurre",
+    vfQ: "Le texte mentionne des croissants au beurre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Samedi 14 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["demain à 8 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "samedi",
-    vfQ: "Quand : samedi 14 h.",
+    fillQ: "C'est _________.",
+    fill: "demain à 8 h",
+    vfQ: "Le texte mentionne demain à 8 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Prénom sur le gâteau", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie du Lac", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "prénom",
-    vfQ: "Note : prénom sur le gâteau.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie du Lac",
+    vfQ: "Le texte mentionne Boulangerie du Lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["6 pièces", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie du Lac.",
+    fillQ: "La quantité est _________.",
+    fill: "6 pièces",
+    vfQ: "Le texte mentionne 6 pièces.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Gâteau anniversaire", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["12 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Gâteau",
-    vfQ: "Objet : Gâteau anniversaire.",
+    fillQ: "Le prix est _________.",
+    fill: "12 francs",
+    vfQ: "Le texte mentionne 12 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_3 = `De : Pain & Co
-Objet : Pain bio
+const E4_3_CE_EMAIL_TEXT_3 = `De : Pâtisserie Douceur
+Objet : Rappel avant votre venue
 
 Bonjour,
 
-Merci pour votre commande chez Pain.
-Commande : pain complet + aux noix.
-Prix : 7 francs.
-Quand : ce matin 7 h.
-Note : farine locale.
+Avant de venir pour un gâteau au chocolat, vérifiez 1 gâteau.
+Information indiquée : samedi à 10 h. Sur place, il faudra écrire le prénom.
+35 francs.
 
-Cordialement,
-Pain & Co`;
+Merci`;
 
 const E4_3_CE_EMAIL_POOL_3 = buildExpressPool("e4-3-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Pain complet + aux noix", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "pain",
-    vfQ: "Commande : pain complet + aux noix.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["7 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["un gâteau au chocolat", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "7",
-    vfQ: "Prix : 7 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "un gâteau au chocolat",
+    vfQ: "Le texte mentionne un gâteau au chocolat.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Ce matin 7 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["samedi à 10 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "ce",
-    vfQ: "Quand : ce matin 7 h.",
+    fillQ: "C'est _________.",
+    fill: "samedi à 10 h",
+    vfQ: "Le texte mentionne samedi à 10 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Farine locale", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Pâtisserie Douceur", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "farine",
-    vfQ: "Note : farine locale.",
+    fillQ: "Le commerce est _________.",
+    fill: "Pâtisserie Douceur",
+    vfQ: "Le texte mentionne Pâtisserie Douceur.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Pain", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["1 gâteau", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Pain",
-    vfQ: "C'est Pain & Co.",
+    fillQ: "La quantité est _________.",
+    fill: "1 gâteau",
+    vfQ: "Le texte mentionne 1 gâteau.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Pain bio", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["35 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Pain",
-    vfQ: "Objet : Pain bio.",
+    fillQ: "Le prix est _________.",
+    fill: "35 francs",
+    vfQ: "Le texte mentionne 35 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_4 = `De : Viennoiserie Express
-Objet : Viennoiseries bureau
+const E4_3_CE_EMAIL_TEXT_4 = `De : Boutique en ligne
+Objet : Votre suivi
 
 Bonjour,
 
-Merci pour votre commande chez Viennoiserie.
-Commande : 20 croissants + pains chocolat.
-Prix : 48 francs.
-Quand : lundi 7 h 30.
-Note : livraison entreprise.
+Votre demande pour un pain complet avance.
+Point de retrait : Pain & Co. Information : ce matin.
+Détail à confirmer : 1 pain. Consigne : prendre un sac.
 
-Cordialement,
-Viennoiserie Express`;
+Boutique en ligne`;
 
 const E4_3_CE_EMAIL_POOL_4 = buildExpressPool("e4-3-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["20 croissants + pains chocolat", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "20",
-    vfQ: "Commande : 20 croissants + pains chocolat.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["48 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["un pain complet", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "48",
-    vfQ: "Prix : 48 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "un pain complet",
+    vfQ: "Le texte mentionne un pain complet.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Lundi 7 h 30", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["ce matin", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "lundi",
-    vfQ: "Quand : lundi 7 h 30.",
+    fillQ: "C'est _________.",
+    fill: "ce matin",
+    vfQ: "Le texte mentionne ce matin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Livraison entreprise", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Pain & Co", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "livraison",
-    vfQ: "Note : livraison entreprise.",
+    fillQ: "Le commerce est _________.",
+    fill: "Pain & Co",
+    vfQ: "Le texte mentionne Pain & Co.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Viennoiserie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["1 pain", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Viennoiserie",
-    vfQ: "C'est Viennoiserie Express.",
+    fillQ: "La quantité est _________.",
+    fill: "1 pain",
+    vfQ: "Le texte mentionne 1 pain.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Viennoiseries bureau", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["3.50 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Viennoiseries",
-    vfQ: "Objet : Viennoiseries bureau.",
+    fillQ: "Le prix est _________.",
+    fill: "3.50 francs",
+    vfQ: "Le texte mentionne 3.50 francs.",
     vfC: 0,
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_5 = `De : Boulangerie Centrale
-Objet : Commande mariage
+Objet : Offre limitée
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : pièce montée 3 étages.
-Prix : 120 francs.
-Quand : samedi 16 h.
-Note : dégustation prévue.
+L'offre sur une quiche lorraine est disponible. Information : à midi.
+Elle concerne 4 parts. Pour en profiter, consigne : réchauffer cinq minutes.
+18 francs.
 
-Cordialement,
-Boulangerie Centrale`;
+À bientôt`;
 
 const E4_3_CE_EMAIL_POOL_5 = buildExpressPool("e4-3-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Pièce montée 3 étages", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "pièce",
-    vfQ: "Commande : pièce montée 3 étages.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["120 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["une quiche lorraine", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "120",
-    vfQ: "Prix : 120 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "une quiche lorraine",
+    vfQ: "Le texte mentionne une quiche lorraine.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Samedi 16 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à midi", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "samedi",
-    vfQ: "Quand : samedi 16 h.",
+    fillQ: "C'est _________.",
+    fill: "à midi",
+    vfQ: "Le texte mentionne à midi.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Dégustation prévue", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie Centrale", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "dégustation",
-    vfQ: "Note : dégustation prévue.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie Centrale",
+    vfQ: "Le texte mentionne Boulangerie Centrale.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["4 parts", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Centrale.",
+    fillQ: "La quantité est _________.",
+    fill: "4 parts",
+    vfQ: "Le texte mentionne 4 parts.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Commande mariage", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["18 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Commande",
-    vfQ: "Objet : Commande mariage.",
+    fillQ: "Le prix est _________.",
+    fill: "18 francs",
+    vfQ: "Le texte mentionne 18 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_6 = `De : Artisan Boulanger
-Objet : Pain sans gluten
+const E4_3_CE_EMAIL_TEXT_6 = `De : Réservation
+Objet : Préparation
 
 Bonjour,
 
-Merci pour votre commande chez Artisan.
-Commande : 2 pains sans gluten.
-Prix : 11 francs.
-Quand : mercredi.
-Note : certifié bio.
+Nous préparons des viennoiseries assorties. Vous pouvez passer chez Viennoiserie Express. Information : vendredi à 7 h.
+La fiche indique 12 pièces. Au comptoir, pensez à livrer à l'entreprise.
+24 francs.
 
-Cordialement,
-Artisan Boulanger`;
+Réservation`;
 
 const E4_3_CE_EMAIL_POOL_6 = buildExpressPool("e4-3-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["2 pains sans gluten", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "2",
-    vfQ: "Commande : 2 pains sans gluten.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["11 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["des viennoiseries assorties", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "11",
-    vfQ: "Prix : 11 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "des viennoiseries assorties",
+    vfQ: "Le texte mentionne des viennoiseries assorties.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Mercredi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["vendredi à 7 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "mercredi",
-    vfQ: "Quand : mercredi.",
+    fillQ: "C'est _________.",
+    fill: "vendredi à 7 h",
+    vfQ: "Le texte mentionne vendredi à 7 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Certifié bio", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Viennoiserie Express", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "certifié",
-    vfQ: "Note : certifié bio.",
+    fillQ: "Le commerce est _________.",
+    fill: "Viennoiserie Express",
+    vfQ: "Le texte mentionne Viennoiserie Express.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Artisan", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["12 pièces", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Artisan",
-    vfQ: "C'est Artisan Boulanger.",
+    fillQ: "La quantité est _________.",
+    fill: "12 pièces",
+    vfQ: "Le texte mentionne 12 pièces.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Pain sans gluten", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["24 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Pain",
-    vfQ: "Objet : Pain sans gluten.",
+    fillQ: "Le prix est _________.",
+    fill: "24 francs",
+    vfQ: "Le texte mentionne 24 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_7 = `De : Boulangerie des Alpes
-Objet : Tarte aux fruits
+const E4_3_CE_EMAIL_TEXT_7 = `De : Carte fidélité
+Objet : Avantage du jour
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : tarte saison.
-Prix : 28 francs.
-Quand : dimanche midi.
-Note : fruits de saison.
+Votre avantage concerne du pain aux noix.
+Il est disponible chez Maison du Pain. Information : à 17 h. Détail : 2 pains.
+Pour l'activer, il faut couper les tranches. Détail : 7 francs.
 
-Cordialement,
-Boulangerie des Alpes`;
+Carte fidélité`;
 
 const E4_3_CE_EMAIL_POOL_7 = buildExpressPool("e4-3-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Tarte saison", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "tarte",
-    vfQ: "Commande : tarte saison.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["28 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["du pain aux noix", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "28",
-    vfQ: "Prix : 28 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "du pain aux noix",
+    vfQ: "Le texte mentionne du pain aux noix.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Dimanche midi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 17 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "dimanche",
-    vfQ: "Quand : dimanche midi.",
+    fillQ: "C'est _________.",
+    fill: "à 17 h",
+    vfQ: "Le texte mentionne à 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Fruits de saison", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Maison du Pain", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "fruits",
-    vfQ: "Note : fruits de saison.",
+    fillQ: "Le commerce est _________.",
+    fill: "Maison du Pain",
+    vfQ: "Le texte mentionne Maison du Pain.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["2 pains", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie des Alpes.",
+    fillQ: "La quantité est _________.",
+    fill: "2 pains",
+    vfQ: "Le texte mentionne 2 pains.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Tarte aux fruits", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["7 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Tarte",
-    vfQ: "Objet : Tarte aux fruits.",
+    fillQ: "Le prix est _________.",
+    fill: "7 francs",
+    vfQ: "Le texte mentionne 7 francs.",
     vfC: 0,
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_8 = `De : Le Fournil
-Objet : Sandwichs traiteur
+Objet : Dernière vérification
 
 Bonjour,
 
-Merci pour votre commande chez Le.
-Commande : 10 sandwiches assortis.
-Prix : 50 francs.
-Quand : vendredi midi.
-Note : livraison gratuite.
+Nous gardons des sandwichs jambon-fromage. Information : de 11 h à 14 h.
+La note enregistrée est 3 sandwiches. Consigne : prendre la formule au moment de votre venue.
+15 francs.
 
-Cordialement,
-Le Fournil`;
+Cordialement`;
 
 const E4_3_CE_EMAIL_POOL_8 = buildExpressPool("e4-3-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["10 sandwiches assortis", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "10",
-    vfQ: "Commande : 10 sandwiches assortis.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["50 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["des sandwichs jambon-fromage", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "50",
-    vfQ: "Prix : 50 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "des sandwichs jambon-fromage",
+    vfQ: "Le texte mentionne des sandwichs jambon-fromage.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Vendredi midi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["de 11 h à 14 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "vendredi",
-    vfQ: "Quand : vendredi midi.",
+    fillQ: "C'est _________.",
+    fill: "de 11 h à 14 h",
+    vfQ: "Le texte mentionne de 11 h à 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Livraison gratuite", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Le Fournil", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "livraison",
-    vfQ: "Note : livraison gratuite.",
+    fillQ: "Le commerce est _________.",
+    fill: "Le Fournil",
+    vfQ: "Le texte mentionne Le Fournil.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Le", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["3 sandwiches", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Le",
-    vfQ: "C'est Le Fournil.",
+    fillQ: "La quantité est _________.",
+    fill: "3 sandwiches",
+    vfQ: "Le texte mentionne 3 sandwiches.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Sandwichs traiteur", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["15 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Sandwichs",
-    vfQ: "Objet : Sandwichs traiteur.",
+    fillQ: "Le prix est _________.",
+    fill: "15 francs",
+    vfQ: "Le texte mentionne 15 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_9 = `De : Boulangerie Rossi
-Objet : Brioches Pâques
+const E4_3_CE_EMAIL_TEXT_9 = `De : Support
+Objet : Question reçue
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : brioches décorées.
-Prix : 15 francs.
-Quand : avant Pâques.
-Note : commande 48 h avant.
+Vous avez posé une question sur une tarte aux pommes.
+Réponse : chez Boulangerie des Alpes, c'est possible. Information : dimanche.
+Il faut seulement réserver avant midi. 1 tarte. Détail : 22 francs.
 
-Cordialement,
-Boulangerie Rossi`;
+Support`;
 
 const E4_3_CE_EMAIL_POOL_9 = buildExpressPool("e4-3-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Brioches décorées", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "brioches",
-    vfQ: "Commande : brioches décorées.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["15 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["une tarte aux pommes", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "15",
-    vfQ: "Prix : 15 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "une tarte aux pommes",
+    vfQ: "Le texte mentionne une tarte aux pommes.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Avant pâques", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["dimanche", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "avant",
-    vfQ: "Quand : avant Pâques.",
+    fillQ: "C'est _________.",
+    fill: "dimanche",
+    vfQ: "Le texte mentionne dimanche.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Commande 48 h avant", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie des Alpes", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "commande",
-    vfQ: "Note : commande 48 h avant.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie des Alpes",
+    vfQ: "Le texte mentionne Boulangerie des Alpes.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["1 tarte", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Rossi.",
+    fillQ: "La quantité est _________.",
+    fill: "1 tarte",
+    vfQ: "Le texte mentionne 1 tarte.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Brioches Pâques", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["22 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Brioches",
-    vfQ: "Objet : Brioches Pâques.",
+    fillQ: "Le prix est _________.",
+    fill: "22 francs",
+    vfQ: "Le texte mentionne 22 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_10 = `De : Maison du Pain
-Objet : Abonnement pain
+const E4_3_CE_EMAIL_TEXT_10 = `De : Boulangerie Rossi
+Objet : Commande de groupe
 
 Bonjour,
 
-Merci pour votre commande chez Maison.
-Commande : pain livré chaque jour.
-Prix : 25 francs/semaine.
-Quand : dès lundi.
-Note : livraison matinale.
+La commande pour des brioches est prévue. Information : le matin.
+Elle porte la note 4 brioches. Consigne : payer ensemble avant le retrait.
+8 francs.
 
-Cordialement,
-Maison du Pain`;
+Le magasin`;
 
 const E4_3_CE_EMAIL_POOL_10 = buildExpressPool("e4-3-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Pain livré chaque jour", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "pain",
-    vfQ: "Commande : pain livré chaque jour.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["25 francs/semaine", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["des brioches", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "25",
-    vfQ: "Prix : 25 francs/semaine.",
+    fillQ: "Le produit est _________.",
+    fill: "des brioches",
+    vfQ: "Le texte mentionne des brioches.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Dès lundi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["le matin", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "dès",
-    vfQ: "Quand : dès lundi.",
+    fillQ: "C'est _________.",
+    fill: "le matin",
+    vfQ: "Le texte mentionne le matin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Livraison matinale", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie Rossi", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "livraison",
-    vfQ: "Note : livraison matinale.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie Rossi",
+    vfQ: "Le texte mentionne Boulangerie Rossi.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Maison", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["4 brioches", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Maison",
-    vfQ: "C'est Maison du Pain.",
+    fillQ: "La quantité est _________.",
+    fill: "4 brioches",
+    vfQ: "Le texte mentionne 4 brioches.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Abonnement pain", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["8 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Abonnement",
-    vfQ: "Objet : Abonnement pain.",
+    fillQ: "Le prix est _________.",
+    fill: "8 francs",
+    vfQ: "Le texte mentionne 8 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_11 = `De : Boulangerie Bio
-Objet : Farine locale
+const E4_3_CE_EMAIL_TEXT_11 = `De : Alerte stock
+Objet : Disponibilité
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : pain de campagne bio.
-Prix : 4.50 francs.
-Quand : tous les jours.
-Note : farine du moulin voisin.
+des éclairs au chocolat est de nouveau disponible chez Pâtisserie Fine.
+Information : cet après-midi. Le détail à vérifier est 6 éclairs.
+Consigne : choisir les parfums. Détail : 18 francs.
 
-Cordialement,
-Boulangerie Bio`;
+Alerte stock`;
 
 const E4_3_CE_EMAIL_POOL_11 = buildExpressPool("e4-3-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Pain de campagne bio", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "pain",
-    vfQ: "Commande : pain de campagne bio.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["4.50 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["des éclairs au chocolat", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "4.50",
-    vfQ: "Prix : 4.50 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "des éclairs au chocolat",
+    vfQ: "Le texte mentionne des éclairs au chocolat.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Tous les jours", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["cet après-midi", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "tous",
-    vfQ: "Quand : tous les jours.",
+    fillQ: "C'est _________.",
+    fill: "cet après-midi",
+    vfQ: "Le texte mentionne cet après-midi.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Farine du moulin voisin", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Pâtisserie Fine", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "farine",
-    vfQ: "Note : farine du moulin voisin.",
+    fillQ: "Le commerce est _________.",
+    fill: "Pâtisserie Fine",
+    vfQ: "Le texte mentionne Pâtisserie Fine.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["6 éclairs", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Bio.",
+    fillQ: "La quantité est _________.",
+    fill: "6 éclairs",
+    vfQ: "Le texte mentionne 6 éclairs.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Farine locale", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["18 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Farine",
-    vfQ: "Objet : Farine locale.",
+    fillQ: "Le prix est _________.",
+    fill: "18 francs",
+    vfQ: "Le texte mentionne 18 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_12 = `De : Pâtisserie Douceur
-Objet : Éclairs assortis
+const E4_3_CE_EMAIL_TEXT_12 = `De : Boulangerie Nyon
+Objet : Réponse à votre message
 
 Bonjour,
 
-Merci pour votre commande chez Pâtisserie.
-Commande : 12 éclairs 4 parfums.
-Prix : 36 francs.
-Quand : samedi.
-Note : chocolat, café, vanille, pistache.
+Oui, nous avons une fougasse aux olives.
+Vous pouvez passer. Information : à midi. Demandez la note 2 pièces.
+Ensuite, action simple : demander un sachet. Détail : 9 francs.
 
-Cordialement,
-Pâtisserie Douceur`;
+Merci`;
 
 const E4_3_CE_EMAIL_POOL_12 = buildExpressPool("e4-3-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["12 éclairs 4 parfums", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "12",
-    vfQ: "Commande : 12 éclairs 4 parfums.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["36 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["une fougasse aux olives", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "36",
-    vfQ: "Prix : 36 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "une fougasse aux olives",
+    vfQ: "Le texte mentionne une fougasse aux olives.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Samedi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à midi", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "samedi",
-    vfQ: "Quand : samedi.",
+    fillQ: "C'est _________.",
+    fill: "à midi",
+    vfQ: "Le texte mentionne à midi.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Chocolat, café, vanille, pistache", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie Nyon", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "chocolat,",
-    vfQ: "Note : chocolat, café, vanille, pistache.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie Nyon",
+    vfQ: "Le texte mentionne Boulangerie Nyon.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Pâtisserie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["2 pièces", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Pâtisserie",
-    vfQ: "C'est Pâtisserie Douceur.",
+    fillQ: "La quantité est _________.",
+    fill: "2 pièces",
+    vfQ: "Le texte mentionne 2 pièces.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Éclairs assortis", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["9 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Éclairs",
-    vfQ: "Objet : Éclairs assortis.",
+    fillQ: "Le prix est _________.",
+    fill: "9 francs",
+    vfQ: "Le texte mentionne 9 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_13 = `De : Boulangerie Express
-Objet : Commande rapide
+const E4_3_CE_EMAIL_TEXT_13 = `De : Ardoise du jour
+Objet : Information
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : baguette + croissant.
-Prix : 4.50 francs.
-Quand : dans 15 min.
-Note : paiement en ligne.
+Aujourd'hui, nous proposons un pain de campagne.
+C'est disponible chez Fournil Tradition. Information : toute la journée. Détail : 1 pain.
+Action conseillée : demander la cuisson foncée. Détail : 4 francs.
 
-Cordialement,
-Boulangerie Express`;
+Bonne journée`;
 
 const E4_3_CE_EMAIL_POOL_13 = buildExpressPool("e4-3-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Baguette + croissant", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "baguette",
-    vfQ: "Commande : baguette + croissant.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["4.50 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["un pain de campagne", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "4.50",
-    vfQ: "Prix : 4.50 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "un pain de campagne",
+    vfQ: "Le texte mentionne un pain de campagne.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Dans 15 min", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["toute la journée", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "dans",
-    vfQ: "Quand : dans 15 min.",
+    fillQ: "C'est _________.",
+    fill: "toute la journée",
+    vfQ: "Le texte mentionne toute la journée.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Paiement en ligne", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Fournil Tradition", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "paiement",
-    vfQ: "Note : paiement en ligne.",
+    fillQ: "Le commerce est _________.",
+    fill: "Fournil Tradition",
+    vfQ: "Le texte mentionne Fournil Tradition.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["1 pain", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Express.",
+    fillQ: "La quantité est _________.",
+    fill: "1 pain",
+    vfQ: "Le texte mentionne 1 pain.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Commande rapide", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["4 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Commande",
-    vfQ: "Objet : Commande rapide.",
+    fillQ: "Le prix est _________.",
+    fill: "4 francs",
+    vfQ: "Le texte mentionne 4 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_14 = `De : Fournil Tradition
-Objet : Pain au levain
+const E4_3_CE_EMAIL_TEXT_14 = `De : Rappel automatique
+Objet : Rendez-vous
 
 Bonjour,
 
-Merci pour votre commande chez Fournil.
-Commande : pain tradition 1 kg.
-Prix : 5 francs.
-Quand : ce matin.
-Note : levain naturel.
+Votre rappel concerne du pain de mie.
+Rendez-vous chez Coop boulangerie. Information : ce soir. Vérifiez 2 paquets.
+Consigne : acheter avant fermeture. Détail : 5 francs.
 
-Cordialement,
-Fournil Tradition`;
+Rappel automatique`;
 
 const E4_3_CE_EMAIL_POOL_14 = buildExpressPool("e4-3-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Pain tradition 1 kg", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "pain",
-    vfQ: "Commande : pain tradition 1 kg.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["5 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["du pain de mie", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "5",
-    vfQ: "Prix : 5 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "du pain de mie",
+    vfQ: "Le texte mentionne du pain de mie.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Ce matin", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["ce soir", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "ce",
-    vfQ: "Quand : ce matin.",
+    fillQ: "C'est _________.",
+    fill: "ce soir",
+    vfQ: "Le texte mentionne ce soir.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Levain naturel", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Coop boulangerie", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "levain",
-    vfQ: "Note : levain naturel.",
+    fillQ: "Le commerce est _________.",
+    fill: "Coop boulangerie",
+    vfQ: "Le texte mentionne Coop boulangerie.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Fournil", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["2 paquets", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Fournil",
-    vfQ: "C'est Fournil Tradition.",
+    fillQ: "La quantité est _________.",
+    fill: "2 paquets",
+    vfQ: "Le texte mentionne 2 paquets.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Pain au levain", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["5 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Pain",
-    vfQ: "Objet : Pain au levain.",
+    fillQ: "Le prix est _________.",
+    fill: "5 francs",
+    vfQ: "Le texte mentionne 5 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_15 = `De : Boulangerie Soleil
-Objet : Quiche du jour
+const E4_3_CE_EMAIL_TEXT_15 = `De : Artisan Boulanger
+Objet : Nouveauté
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : quiche lorraine 6 parts.
-Prix : 24 francs.
-Quand : midi.
-Note : réchauffer 5 min.
+La nouveauté du pain sans gluten arrive. Information : à 7 h.
+Elle est liée à 1 pain. Pour la réserver, vous pouvez réserver la veille.
+5.50 francs.
 
-Cordialement,
-Boulangerie Soleil`;
+À bientôt`;
 
 const E4_3_CE_EMAIL_POOL_15 = buildExpressPool("e4-3-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Quiche lorraine 6 parts", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "quiche",
-    vfQ: "Commande : quiche lorraine 6 parts.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["24 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["du pain sans gluten", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "24",
-    vfQ: "Prix : 24 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "du pain sans gluten",
+    vfQ: "Le texte mentionne du pain sans gluten.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Midi", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["à 7 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "midi",
-    vfQ: "Quand : midi.",
+    fillQ: "C'est _________.",
+    fill: "à 7 h",
+    vfQ: "Le texte mentionne à 7 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Réchauffer 5 min", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Artisan Boulanger", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "réchauffer",
-    vfQ: "Note : réchauffer 5 min.",
+    fillQ: "Le commerce est _________.",
+    fill: "Artisan Boulanger",
+    vfQ: "Le texte mentionne Artisan Boulanger.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["1 pain", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Soleil.",
+    fillQ: "La quantité est _________.",
+    fill: "1 pain",
+    vfQ: "Le texte mentionne 1 pain.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Quiche du jour", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["5.50 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Quiche",
-    vfQ: "Objet : Quiche du jour.",
+    fillQ: "Le prix est _________.",
+    fill: "5.50 francs",
+    vfQ: "Le texte mentionne 5.50 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_16 = `De : Pains & Gourmandises
-Objet : Goûter enfants
+const E4_3_CE_EMAIL_TEXT_16 = `De : Vendeur
+Objet : Message noté
 
 Bonjour,
 
-Merci pour votre commande chez Pains.
-Commande : madeleines + jus.
-Prix : 12 francs.
-Quand : après l'école.
-Note : sans arôme artificiel.
+J'ai bien noté votre demande pour des chaussons aux pommes.
+Je vous attends chez Boulangerie Soleil. Information : le matin. Je prépare 8 pièces.
+Sur place, vous pourrez mettre de côté. Détail : 16 francs.
 
-Cordialement,
-Pains & Gourmandises`;
+Le vendeur`;
 
 const E4_3_CE_EMAIL_POOL_16 = buildExpressPool("e4-3-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Madeleines + jus", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "madeleines",
-    vfQ: "Commande : madeleines + jus.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["12 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["des chaussons aux pommes", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "12",
-    vfQ: "Prix : 12 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "des chaussons aux pommes",
+    vfQ: "Le texte mentionne des chaussons aux pommes.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Après l'école", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["le matin", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "après",
-    vfQ: "Quand : après l'école.",
+    fillQ: "C'est _________.",
+    fill: "le matin",
+    vfQ: "Le texte mentionne le matin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Sans arôme artificiel", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie Soleil", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "sans",
-    vfQ: "Note : sans arôme artificiel.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie Soleil",
+    vfQ: "Le texte mentionne Boulangerie Soleil.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Pains", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["8 pièces", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Pains",
-    vfQ: "C'est Pains & Gourmandises.",
+    fillQ: "La quantité est _________.",
+    fill: "8 pièces",
+    vfQ: "Le texte mentionne 8 pièces.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Goûter enfants", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["16 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Goûter",
-    vfQ: "Objet : Goûter enfants.",
+    fillQ: "Le prix est _________.",
+    fill: "16 francs",
+    vfQ: "Le texte mentionne 16 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_17 = `De : Boulangerie Nyon
-Objet : Fougasse
+const E4_3_CE_EMAIL_TEXT_17 = `De : Programme fidélité
+Objet : Votre offre
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : fougasse olives 2 pièces.
-Prix : 9 francs.
-Quand : samedi matin.
-Note : olives de Provence.
+Votre offre porte sur des madeleines.
+Elle fonctionne chez Pains & Gourmandises; information : après l'école. La condition est 12 pièces.
+N'oubliez pas cette action : montrer la carte. Détail : 10 francs.
 
-Cordialement,
-Boulangerie Nyon`;
+Programme fidélité`;
 
 const E4_3_CE_EMAIL_POOL_17 = buildExpressPool("e4-3-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Fougasse olives 2 pièces", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "fougasse",
-    vfQ: "Commande : fougasse olives 2 pièces.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["9 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["des madeleines", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "9",
-    vfQ: "Prix : 9 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "des madeleines",
+    vfQ: "Le texte mentionne des madeleines.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Samedi matin", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["après l'école", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "samedi",
-    vfQ: "Quand : samedi matin.",
+    fillQ: "C'est _________.",
+    fill: "après l'école",
+    vfQ: "Le texte mentionne après l'école.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Olives de provence", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Pains & Gourmandises", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "olives",
-    vfQ: "Note : olives de Provence.",
+    fillQ: "Le commerce est _________.",
+    fill: "Pains & Gourmandises",
+    vfQ: "Le texte mentionne Pains & Gourmandises.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["12 pièces", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Nyon.",
+    fillQ: "La quantité est _________.",
+    fill: "12 pièces",
+    vfQ: "Le texte mentionne 12 pièces.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Fougasse", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["10 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Fougasse",
-    vfQ: "Objet : Fougasse.",
+    fillQ: "Le prix est _________.",
+    fill: "10 francs",
+    vfQ: "Le texte mentionne 10 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_18 = `De : Art du Pain
-Objet : Cours boulangerie
+const E4_3_CE_EMAIL_TEXT_18 = `De : Pâtisserie Mariage
+Objet : Fête confirmée
 
 Bonjour,
 
-Merci pour votre commande chez Art.
-Commande : atelier pain maison.
-Prix : 60 francs.
-Quand : samedi 9 h.
-Note : places limitées.
+Pour votre fête, une pièce montée est réservé.
+Information : samedi à 16 h. La fiche indique 3 étages.
+Consigne : confirmer le prénom. Détail : 120 francs.
 
-Cordialement,
-Art du Pain`;
+Cordialement`;
 
 const E4_3_CE_EMAIL_POOL_18 = buildExpressPool("e4-3-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Atelier pain maison", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "atelier",
-    vfQ: "Commande : atelier pain maison.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["60 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["une pièce montée", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "60",
-    vfQ: "Prix : 60 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "une pièce montée",
+    vfQ: "Le texte mentionne une pièce montée.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Samedi 9 h", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["samedi à 16 h", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "samedi",
-    vfQ: "Quand : samedi 9 h.",
+    fillQ: "C'est _________.",
+    fill: "samedi à 16 h",
+    vfQ: "Le texte mentionne samedi à 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Places limitées", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Pâtisserie Mariage", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "places",
-    vfQ: "Note : places limitées.",
+    fillQ: "Le commerce est _________.",
+    fill: "Pâtisserie Mariage",
+    vfQ: "Le texte mentionne Pâtisserie Mariage.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Art", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["3 étages", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Art",
-    vfQ: "C'est Art du Pain.",
+    fillQ: "La quantité est _________.",
+    fill: "3 étages",
+    vfQ: "Le texte mentionne 3 étages.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Cours boulangerie", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["120 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Cours",
-    vfQ: "Objet : Cours boulangerie.",
+    fillQ: "Le prix est _________.",
+    fill: "120 francs",
+    vfQ: "Le texte mentionne 120 francs.",
     vfC: 0,
   }),
 ]);
-const E4_3_CE_EMAIL_TEXT_19 = `De : Boulangerie Village
-Objet : Pain aux céréales
+const E4_3_CE_EMAIL_TEXT_19 = `De : Confirmation
+Objet : Retrait
 
 Bonjour,
 
-Merci pour votre commande chez Boulangerie.
-Commande : pain 5 céréales.
-Prix : 4.20 francs.
-Quand : tous les matins.
-Note : graines de tournesol.
+Votre retrait pour un pain aux céréales est prêt chez Boulangerie Village.
+Information : tous les matins. La note est 1 pain.
+Consigne : présenter le numéro. Détail : 4.20 francs.
 
-Cordialement,
-Boulangerie Village`;
+Confirmation`;
 
 const E4_3_CE_EMAIL_POOL_19 = buildExpressPool("e4-3-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Pain 5 céréales", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "pain",
-    vfQ: "Commande : pain 5 céréales.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["4.20 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["un pain aux céréales", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "4.20",
-    vfQ: "Prix : 4.20 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "un pain aux céréales",
+    vfQ: "Le texte mentionne un pain aux céréales.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Tous les matins", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["tous les matins", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "tous",
-    vfQ: "Quand : tous les matins.",
+    fillQ: "C'est _________.",
+    fill: "tous les matins",
+    vfQ: "Le texte mentionne tous les matins.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Graines de tournesol", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Boulangerie Village", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "graines",
-    vfQ: "Note : graines de tournesol.",
+    fillQ: "Le commerce est _________.",
+    fill: "Boulangerie Village",
+    vfQ: "Le texte mentionne Boulangerie Village.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Boulangerie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["1 pain", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Boulangerie",
-    vfQ: "C'est Boulangerie Village.",
+    fillQ: "La quantité est _________.",
+    fill: "1 pain",
+    vfQ: "Le texte mentionne 1 pain.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Pain aux céréales", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["4.20 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Pain",
-    vfQ: "Objet : Pain aux céréales.",
+    fillQ: "Le prix est _________.",
+    fill: "4.20 francs",
+    vfQ: "Le texte mentionne 4.20 francs.",
     vfC: 0,
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_20 = `De : Pâtisserie Fine
-Objet : Macarons
+Objet : Idée week-end
 
 Bonjour,
 
-Merci pour votre commande chez Pâtisserie.
-Commande : boîte 12 macarons.
-Prix : 24 francs.
-Quand : commande 24 h avant.
-Note : parfums au choix.
+Pour ce week-end, nous conseillons une boîte de macarons.
+Information : 24 h avant. Regardez 12 macarons avant de choisir.
+Vous pourrez choisir les parfums. Détail : 24 francs.
 
-Cordialement,
-Pâtisserie Fine`;
+Bon week-end`;
 
 const E4_3_CE_EMAIL_POOL_20 = buildExpressPool("e4-3-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Quelle commande ?",
-    text: ["Boîte 12 macarons", "Une voiture", "Un chat"],
+    textQ: "Quel type de document est-ce ?",
+    text: ["un e-mail", "une facture d'électricité", "une carte scolaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commande : _________.",
-    fill: "boîte",
-    vfQ: "Commande : boîte 12 macarons.",
+    fillQ: "C'est _________.",
+    fill: "un e-mail",
+    vfQ: "Le texte mentionne un e-mail.",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Quel prix ?",
-    text: ["24 francs", "1 franc", "Gratuit"],
+    textQ: "Quel produit est demandé ?",
+    text: ["une boîte de macarons", "une télévision", "un vélo"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Prix : _________.",
-    fill: "24",
-    vfQ: "Prix : 24 francs.",
+    fillQ: "Le produit est _________.",
+    fill: "une boîte de macarons",
+    vfQ: "Le texte mentionne une boîte de macarons.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Quand ?",
-    text: ["Commande 24 h avant", "Jamais", "En 1800"],
+    textQ: "Quand cela se passe-t-il ?",
+    text: ["24 h avant", "à minuit", "en 1990"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand : _________.",
-    fill: "commande",
-    vfQ: "Quand : commande 24 h avant.",
+    fillQ: "C'est _________.",
+    fill: "24 h avant",
+    vfQ: "Le texte mentionne 24 h avant.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Quelle note ?",
-    text: ["Parfums au choix", "Rien", "Un chat"],
+    textQ: "Quel commerce est mentionné ?",
+    text: ["Pâtisserie Fine", "une école", "une banque"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Note : _________.",
-    fill: "parfums",
-    vfQ: "Note : parfums au choix.",
+    fillQ: "Le commerce est _________.",
+    fill: "Pâtisserie Fine",
+    vfQ: "Le texte mentionne Pâtisserie Fine.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Quelle boulangerie ?",
-    text: ["Pâtisserie", "Une pharmacie", "Une gare"],
+    textQ: "Quelle quantité est indiquée ?",
+    text: ["12 macarons", "mille pièces", "rien"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "chez _________.",
-    fill: "Pâtisserie",
-    vfQ: "C'est Pâtisserie Fine.",
+    fillQ: "La quantité est _________.",
+    fill: "12 macarons",
+    vfQ: "Le texte mentionne 12 macarons.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Quel est l'objet ?",
-    text: ["Macarons", "Une facture d'électricité", "Un examen"],
+    textQ: "Quel prix est indiqué ?",
+    text: ["24 francs", "1000 francs", "gratuit toujours"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Macarons",
-    vfQ: "Objet : Macarons.",
+    fillQ: "Le prix est _________.",
+    fill: "24 francs",
+    vfQ: "Le texte mentionne 24 francs.",
     vfC: 0,
   }),
 ]);
