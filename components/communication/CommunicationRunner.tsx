@@ -931,9 +931,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
 
   const inEvalPhase =
     phase === "eval_co" || phase === "eval_ce" || phase === "eval_po" || phase === "eval_pe";
-  const currentEvalPart: EvalPart | null = inEvalPhase
-    ? (phase.replace("eval_", "") as EvalPart)
-    : null;
   const activeAnswers = answers;
   const activeValidated = validated;
   const activeIndex = exIndex;
