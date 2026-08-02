@@ -13,8 +13,7 @@ export const EXPRESS_E1_1: CommunicationLesson = {
   code: "E1.1",
   title: "Se présenter",
   prerequisiteFrenchSlugs: [
-    "a1-conj-l00", // C1.1 — Les pronoms personnels sujets
-    "a1-conj-l01", // C1.2 — Les verbes être et avoir
+    "a1-gr-l01", // G1.1 — Les pronoms personnels sujets / être et avoir
     "v1-nationalites", // V1.1
     "v1-professions", // V1.2
   ],
@@ -23,8 +22,8 @@ export const EXPRESS_E1_1: CommunicationLesson = {
     {
       type: "prerequisites",
       items: [
-        { code: "C1.1", title: "Les pronoms personnels sujets", href: "/francais/conjugaison/a1-conj-l00" },
-        { code: "C1.2", title: "Les verbes être et avoir", href: "/francais/conjugaison/a1-conj-l01" },
+        { code: "G1.1", title: "Les pronoms personnels sujets", href: "/francais/grammaire/a1-gr-l01" },
+        { code: "G1.1", title: "Les verbes être et avoir", href: "/francais/grammaire/a1-gr-l01" },
         { code: "V1.1", title: "Les nationalités", href: "/francais/vocabulaire/v1-nationalites" },
         { code: "V1.2", title: "Les professions", href: "/francais/vocabulaire/v1-professions" },
       ],

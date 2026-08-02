@@ -36,13 +36,15 @@ export type UserRow = {
   role: "eleve" | "prof" | "admin";
   /** Accès hub Impression (élèves / profs). Les admins y ont toujours accès. */
   can_print: boolean;
+  /** Accès libre aux leçons de grammaire (sans verrouillage séquentiel). */
+  can_free_access: boolean;
   placement_test_best: { points: number; maxPoints: number; percent: number } | null;
   placement_combined: { total: number; zone: string; mathCounted: number; frenchCounted: number; pendingFrench?: number } | null;
 };
 
 const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
 const FRENCH_VOC = FRENCH_THEMES.filter(t => t.tab === "vocabulaire");
-const FRENCH_GRAM = FRENCH_THEMES.filter(t => t.tab === "grammaire" || t.tab === "conjugaison");
+const FRENCH_GRAM = FRENCH_THEMES.filter(t => t.tab === "grammaire");
 const MATH_SUB_IDS_BY_BRANCH = {
   algebra: new Set(MATH_MODULES.filter(m => m.branch === "algebra").flatMap(m => m.submodules.map(s => s.id))),
   geometry: new Set(MATH_MODULES.filter(m => m.branch === "geometry").flatMap(m => m.submodules.map(s => s.id))),

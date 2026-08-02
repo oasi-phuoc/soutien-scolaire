@@ -8,7 +8,7 @@ export const EXPRESS_E2_3: CommunicationLesson = {
   id: "E2-3",
   code: "E2.3",
   title: "Respecter le règlement",
-  prerequisiteFrenchSlugs: ["v5-structure-ecole", "a2-conj-l05"],
+  prerequisiteFrenchSlugs: ["v5-structure-ecole", "a1-gr-imperatif"],
   prerequisiteCommIds: ["E2-2"],
   theory: [
     { type: "heading", text: "Respecter le règlement", black: true, trans: t("Respecting the building rules") },
@@ -17,7 +17,7 @@ export const EXPRESS_E2_3: CommunicationLesson = {
       items: [
         { code: "E2.2", title: "Problème domestique", href: "/communication/E2-2" },
         { code: "V5.3", title: "Structure", href: "/francais/vocabulaire/v5-structure-ecole" },
-        { code: "C6.3", title: "L'impératif", href: "/francais/conjugaison/a2-conj-l05" }
+        { code: "G16.1", title: "L'impératif", href: "/francais/grammaire/a1-gr-imperatif" }
       ],
     },
     {

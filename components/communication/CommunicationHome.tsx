@@ -6,132 +6,17 @@ import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/c
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { resolveCommModules } from "@/lib/content-editor/catalog";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
+import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
+import { resolveFrenchPrereqSlug } from "@/lib/curriculum/grammar-data";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
-const PREREQ_LABELS: Record<string, string> = {
-  "a1-conj-l00": "C1.1 Pronoms",
-  "a1-conj-l01": "C1.2 Être / avoir",
-  "a1-conj-l07": "C1.3 Verbes en -er",
-  "a1-conj-l08": "C1.4 Mouvement",
-  "a1-conj-l09": "C1.5 Pronominaux",
-  "a1-conj-l15": "C1.6 Modaux",
-  "a1-conj-l20": "C3.1 Futur proche",
-  "a1-conj-l28": "C2.1 Passé récent",
-  "a1-conj-l29": "C2.2 Passé composé (avoir)",
-  "a1-conj-l30": "C2.3 Passé composé (être)",
-  "a1-gr-l02": "Unité 85 La négation",
-  "a1-gr-l03": "Unité 83 Le genre des noms et des adjectifs",
-  "a1-gr-l04": "Unité 21 Les articles définis et indé",
-  "a1-gr-negation-ne-pas": "Unité 31 La négation ne… pas, ne… pas de/d'",
-  "a1-gr-phrase-exclamative": "Unité 34 La phrase exclamative",
-  "a1-gr-a-en-de-lieux": "Unité 35 À, en, de avec les noms de villes, pays ",
-  "a1-gr-autres-prepositions": "Unité 36 Autres prépositions et adverbes",
-  "a1-gr-passe-compose-avoir": "Unité 37 Le passé composé avec avoir",
-  "a1-gr-imparfait": "Unité 39 L'imparfait",
-  "a1-gr-imparfait-passe-compose": "Unité 41 L'imparfait / Le passé composé",
-  "a1-gr-futur-proche": "Unité 44 Le futur proche",
-  "a1-gr-comparaison-adj-adv": "Unité 47 La comparaison avec un adjectif ou un ad",
-  "a1-gr-expression-temps-moment": "Unité 50 L'expression du temps : moment précis ou",
-  "a1-gr-pronoms-toniques": "Unité 52 Les pronoms toniques",
-  "a1-gr-pronom-en": "Unité 54 Le pronom complément en",
-  "a1-gr-doubles-pronoms": "Unité 57 Les doubles pronoms",
-  "a1-gr-pronoms-indefinis": "Unité 60 Les pronoms indéfinis",
-  "a1-gr-pronom-relatif-dont": "Unité 62 Le pronom relatif dont",
-  "a1-gr-adverbes-ment": "Unité 65 Les adverbes en -ment",
-  "a1-gr-forme-passive": "Unité 68 La forme passive",
-  "a1-gr-gerondif": "Unité 69 Le gérondif",
-  "a1-gr-subjonctif-present": "Unité 70 Le subjonctif présent",
-  "a1-gr-subjonctif-passe": "Unité 71 Le subjonctif passé",
-  "a1-gr-subjonctif-ou-indicatif": "Unité 72 Subjonctif ou indicatif ?",
-  "a1-gr-subjonctif-ou-infinitif": "Unité 73 Subjonctif ou infinitif ?",
-  "a1-gr-conditionnel-present": "Unité 74 Le conditionnel présent",
-  "a1-gr-conditionnel-passe": "Unité 75 Le conditionnel passé",
-  "a1-gr-expression-cause": "Unité 76 L'expression de la cause",
-  "a1-gr-expression-consequence": "Unité 77 L'expression de la conséquence",
-  "a1-gr-conjonctions-temps": "Unité 78 Les conjonctions de temps",
-  "a1-gr-expression-but": "Unité 79 L'expression du but",
-  "a1-gr-opposition-concession": "Unité 80 L'expression de l'opposition et de la concession",
-  "a1-gr-hypothese-condition": "Unité 81 L'expression de l'hypothèse avec si et de la condition",
-  "a1-gr-discours-indirect-present": "Unité 82 Le discours indirect au présent",
-  "a1-gr-imperatif": "Unité 67 L'impératif",
-  "a1-gr-mots-liaison": "Unité 66 Les mots de liaison",
-  "a1-gr-adverbes-intensite": "Unité 64 Les adverbes d'intensité",
-  "a1-gr-pronoms-relatifs-composes": "Unité 63 Les pronoms relatifs composés",
-  "a1-gr-pronoms-relatifs-qui-que-ou": "Unité 61 Les pronoms relatifs qui, que, où",
-  "a1-gr-pronoms-possessifs": "Unité 59 Les pronoms possessifs",
-  "a1-gr-pronoms-demonstratifs": "Unité 58 Les pronoms démonstratifs",
-  "a1-gr-en-y-pronom-tonique": "Unité 56 En ou de + pronom tonique / Y ou à + pro",
-  "a1-gr-pronoms-y-en-lieu": "Unité 55 Les pronoms compléments de lieu y et en",
-  "a1-gr-pronoms-cod-coi": "Unité 53 Les pronoms compléments directs et indir",
-  "a1-gr-marqueurs-temps": "Unité 51 L'expression du temps : il y a, dans, de",
-  "a1-gr-superlatif": "Unité 49 Le superlatif",
-  "a1-gr-comparaison-nom-verbe": "Unité 48 La comparaison avec un nom ou un verbe",
-  "a1-gr-futur-anterieur": "Unité 46 Le futur antérieur",
-  "a1-gr-futur-simple": "Unité 45 Le futur simple",
-  "a1-gr-accord-participe-passe": "Unité 43 L'accord du participe passé",
-  "a1-gr-plus-que-parfait": "Unité 42 Le plus-que-parfait",
-  "a1-gr-passe-recent": "Unité 40 Le passé récent",
-  "a1-gr-passe-compose-etre": "Unité 38 Le passé composé avec être",
-  "a1-gr-l10": "Unité 87 Les questions ouvertes",
-  "a1-gr-l11": "Unité 88 Les prépositions de lieu",
-  "a1-gr-l14": "Unité 89 Les adjectifs partitifs",
-  "a1-gr-l18": "Unité 25 Les adjectifs démonstratifs",
-  "a1-gr-l19": "Unité 26 Les adjectifs possessifs",
-  "a1-gr-l23": "Unité 90 Les adjectifs qualificatifs",
-  "a1-gr-pronominaux-passe-compose": "Unité 106 Les verbes pronominaux au passé composé",
-  "a2-conj-l04": "C4.1 Conditionnel politesse",
-  "a2-conj-l05": "C4.2 Impératif",
-  "a2-conj-l07": "C2.5 Imparfait",
-  "a2-conj-l08": "C3.2 Futur simple",
-  "a2-gr-l07": "Unité 91 Les questions fermées",
-  "a2-gr-l19": "Unité 99 Les pronoms relatifs qui et que",
-  "a2-gr-l35": "Unité 100 Les pronoms COD et COI",
-  "a2-gr-l36": "Unité 101 Les pronoms Y et EN",
-  "a2-gr-l39": "Unité 95 Le comparatif",
-  "a2-gr-l42": "Unité 98 La négation (2/2)",
-  "a2-gr-l52": "Unité 103 Les relations logiques — Cause et conséq",
-  "a2-gr-hypothese-futur": "Unité 111 L'hypothèse sur le futur",
-  "a2-gr-subjonctif": "Unité 114 Le subjonctif",
-  "gr-marqueurs-temps-complet": "Unité 102 Les marqueurs de temps",
-  "v1-nationalites": "V1.1 Nationalités",
-  "v1-professions": "V1.2 Professions",
-  "v1-famille": "V1.3 Famille",
-  "v1-etat-civil": "V1.4 État civil",
-  "v1-description-morale": "V1.6 Description morale",
-  "v2-jours-mois-dates": "V2.1 Jours / mois",
-  "v2-heure": "V2.2 Heure",
-  "v2-saisons": "V2.3 Saisons",
-  "v2-meteo": "V2.4 Météo",
-  "v3-sport": "V3.1 Sport",
-  "v4-type-logement": "V4.1 Logement",
-  "v4-pieces-maison": "V4.2 Pièces",
-  "v4-equipements": "V4.3 Meubles",
-  "v4-appareils-electromenagers": "V4.4 Électroménager",
-  "v4-pannes": "V4.5 Pannes",
-  "v5-matieres": "V5.1 Matières",
-  "v5-materiel-scolaire": "V5.2 Matériel",
-  "v5-structure-ecole": "V5.3 Structure école",
-  "v6-vetements": "V6.1 Vêtements",
-  "v6-accessoires": "V6.2 Accessoires",
-  "v6-couleurs": "V6.3 Couleurs",
-  "v6-matieres": "V6.4 Matières",
-  "v7-restaurant": "V10.1 Restaurant",
-  "v7-boulangerie": "V10.2 Boulangerie",
-  "v7-recettes": "V7.4 Recettes",
-  "v7-quantites": "V7.5 Quantités",
-  "v8-corps": "V8.1 Corps",
-  "v8-maladies": "V8.2 Maladies",
-  "v8-medecins": "V8.3 Médecins",
-  "v8-pharmacie": "V8.4 Pharmacie",
-  "v9-ville": "V9.1 Ville",
-  "v9-transport": "V9.2 Transport",
-  "v9-direction": "V9.3 Direction",
-  "v9-espace-culturel": "V9.4 Culture",
-  "v9-paysage": "V9.5 Paysage",
-  "v9-aeroport": "V10.4 Aéroport",
-  "v9-hotel": "V10.5 Hôtel",
+const FRENCH_PREREQ_LABELS: Record<string, string> = Object.fromEntries(
+  FRENCH_THEMES.map((t) => [t.slug, `${t.code} ${t.title}`]),
+);
+
+const COMM_PREREQ_LABELS: Record<string, string> = {
   "E1-1": "E1.1 Se présenter",
   "E1-2": "E1.2 Famille",
   "E1-3": "E1.3 Inviter",
@@ -178,6 +63,12 @@ const PREREQ_LABELS: Record<string, string> = {
   "E13-4": "E13.4 Entretien",
   "E13-5": "E13.5 Entreprise",
 };
+
+function prereqLabel(id: string): string {
+  if (COMM_PREREQ_LABELS[id]) return COMM_PREREQ_LABELS[id];
+  const resolved = resolveFrenchPrereqSlug(id);
+  return FRENCH_PREREQ_LABELS[resolved] ?? FRENCH_PREREQ_LABELS[id] ?? id;
+}
 
 function moduleStateLabel(state: "completed" | "in_progress" | "development" | "locked") {
   if (state === "completed") return "TERMINÉ";
@@ -246,7 +137,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
 
   function frenchPrereqsMet(slugs?: string[]): boolean {
     if (!slugs?.length) return true;
-    return slugs.every((slug) => frenchDone.has(slug));
+    return slugs.every((slug) => frenchDone.has(resolveFrenchPrereqSlug(slug)));
   }
 
   function commPrereqsMet(ids?: string[]): boolean {
@@ -314,10 +205,10 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                     const missingPrereqs = [
                       ...(sub.prerequisiteCommIds ?? [])
                         .filter((id) => !completed[id])
-                        .map((id) => PREREQ_LABELS[id] ?? id),
+                        .map((id) => prereqLabel(id)),
                       ...(sub.prerequisiteFrenchSlugs ?? [])
-                        .filter((slug) => !frenchDone.has(slug))
-                        .map((slug) => PREREQ_LABELS[slug] ?? slug),
+                        .filter((slug) => !frenchDone.has(resolveFrenchPrereqSlug(slug)))
+                        .map((slug) => prereqLabel(slug)),
                     ];
                     return (
                       <li key={sub.id}

@@ -1,7 +1,7 @@
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { VOCAB_THEMES } from "@/lib/curriculum/vocabulary-data";
-import { getAllGrammarLessons, getAllConjLessons } from "@/lib/curriculum/grammar-data";
+import { getAllGrammarLessons } from "@/lib/curriculum/grammar-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import { EXPRESS_ORAL_LESSONS } from "@/lib/curriculum/content/communication/express-index";
 import {
@@ -50,18 +50,29 @@ const VOCAB_MODULE_TITLES: Record<string, string> = {
 };
 
 const GRAMMAR_MODULE_TITLES: Record<string, string> = {
-  G1: "Chapitre 1 — Les fondamentaux",
-  G2: "Chapitre 2 — Décrire et situer",
-  G3: "Chapitre 3 — Pronoms et relations",
-  G4: "Chapitre 4 — Temps et modes",
-  C1: "Les verbes essentiels",
-  C2: "Le passé",
-  C3: "Le futur",
-  C4: "Les autres temps",
+  G1: "Le présent",
+  G2: "Le nom",
+  G3: "L'adjectif qualificatif",
+  G4: "Les déterminants",
+  G5: "La structure de la phrase",
+  G6: "Bilan A1",
+  G7: "Les prépositions de lieu",
+  G8: "Le passé",
+  G9: "Le futur",
+  G10: "La comparaison",
+  G11: "L'expression de temps",
+  G12: "Les pronoms",
+  G13: "Bilan A2",
+  G14: "Les adverbes",
+  G15: "Les mots de liaison",
+  G16: "Les autres temps des verbes",
+  G17: "Les phrases complexes",
+  G18: "Bilan B1",
+  G19: "Compléments",
 };
 
 function grammarModuleCode(code: string): string {
-  const match = code.match(/^([GC]\d+)/);
+  const match = code.match(/^(G\d+)/);
   return match?.[1] ?? code.split(".")[0] ?? code;
 }
 
@@ -102,27 +113,11 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
 
   for (const lesson of getAllGrammarLessons()) {
     const moduleCode = grammarModuleCode(lesson.code);
-    const isConjTrack = moduleCode.startsWith("C");
     entries.push({
       id: `grammar:${lesson.slug}`,
       domain: "francais",
-      group: isConjTrack ? "Conjugaison" : "Grammaire",
-      moduleId: `${isConjTrack ? "conj" : "grammar"}-${moduleCode}`,
-      moduleCode,
-      moduleTitle: GRAMMAR_MODULE_TITLES[moduleCode] ?? moduleCode,
-      code: lesson.code,
-      title: lesson.title,
-    });
-  }
-
-  for (const lesson of getAllConjLessons()) {
-    const moduleCode = grammarModuleCode(lesson.code);
-    const isConjTrack = moduleCode.startsWith("C");
-    entries.push({
-      id: `conj:${lesson.slug}`,
-      domain: "francais",
-      group: isConjTrack ? "Conjugaison" : "Grammaire",
-      moduleId: `${isConjTrack ? "conj" : "grammar"}-${moduleCode}`,
+      group: "Grammaire",
+      moduleId: `grammar-${moduleCode}`,
       moduleCode,
       moduleTitle: GRAMMAR_MODULE_TITLES[moduleCode] ?? moduleCode,
       code: lesson.code,

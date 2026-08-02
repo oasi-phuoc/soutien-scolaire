@@ -116,12 +116,12 @@ export const EXPRESS_E9_2: CommunicationLesson = lessonFromListening({
   id: "E9-2",
   code: "E9.2",
   title: "Se déplacer",
-  prerequisiteFrenchSlugs: ["a1-conj-l28"],
+  prerequisiteFrenchSlugs: ["a1-gr-passe-recent"],
   prerequisiteCommIds: ["E9-1"],
   theory: [
     { type: "heading", text: "Se déplacer", black: true, trans: t("Getting around") },
     prereqItems([
-      { code: "C2.1", title: "Passé récent et présent continu", href: "/francais/conjugaison/a1-conj-l28" },
+      { code: "G8.4", title: "Passé récent et présent continu", href: "/francais/grammaire/a1-gr-passe-recent" },
     ]),
     {
       type: "plain",
@@ -207,12 +207,12 @@ export const EXPRESS_E9_3: CommunicationLesson = lessonFromListening({
   id: "E9-3",
   code: "E9.3",
   title: "Chercher un logement",
-  prerequisiteFrenchSlugs: ["a1-conj-l20"],
+  prerequisiteFrenchSlugs: ["a1-gr-futur-proche"],
   prerequisiteCommIds: ["E9-2"],
   theory: [
     { type: "heading", text: "Chercher un logement", black: true, trans: t("Looking for housing") },
     prereqItems([
-      { code: "C3.1", title: "Le futur proche", href: "/francais/conjugaison/a1-conj-l20" },
+      { code: "G9.1", title: "Le futur proche", href: "/francais/grammaire/a1-gr-futur-proche" },
     ]),
     {
       type: "plain",
@@ -302,12 +302,12 @@ export const EXPRESS_E9_4: CommunicationLesson = lessonFromListening({
   id: "E9-4",
   code: "E9.4",
   title: "Faire des démarches administratives",
-  prerequisiteFrenchSlugs: ["a1-conj-l29"],
+  prerequisiteFrenchSlugs: ["a1-gr-passe-compose-avoir"],
   prerequisiteCommIds: ["E9-3"],
   theory: [
     { type: "heading", text: "Faire des démarches administratives", black: true, trans: t("Administrative procedures") },
     prereqItems([
-      { code: "C2.2", title: "Passé composé avec avoir", href: "/francais/conjugaison/a1-conj-l29" },
+      { code: "G8.1", title: "Passé composé avec avoir", href: "/francais/grammaire/a1-gr-passe-compose-avoir" },
     ]),
     {
       type: "plain",
@@ -394,12 +394,12 @@ export const EXPRESS_E9_5: CommunicationLesson = lessonFromListening({
   id: "E9-5",
   code: "E9.5",
   title: "S'informer sur l'actualité",
-  prerequisiteFrenchSlugs: ["a1-conj-l30"],
+  prerequisiteFrenchSlugs: ["a1-gr-passe-compose-etre"],
   prerequisiteCommIds: ["E9-4"],
   theory: [
     { type: "heading", text: "S'informer sur l'actualité", black: true, trans: t("Following the news") },
     prereqItems([
-      { code: "C2.3", title: "Passé composé avec être", href: "/francais/conjugaison/a1-conj-l30" },
+      { code: "G8.2", title: "Passé composé avec être", href: "/francais/grammaire/a1-gr-passe-compose-etre" },
     ]),
     {
       type: "plain",

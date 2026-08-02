@@ -112,12 +112,12 @@ export const EXPRESS_E12_2: CommunicationLesson = lessonFromListening({
   id: "E12-2",
   code: "E12.2",
   title: "Faire du sport",
-  prerequisiteFrenchSlugs: ["a2-conj-l07"],
+  prerequisiteFrenchSlugs: ["a1-gr-imparfait"],
   prerequisiteCommIds: ["E12-1"],
   theory: [
     { type: "heading", text: "Faire du sport", black: true, trans: t("Faire du sport") },
     prereqItems([
-      { code: "C2.7", title: "Les verbes réguliers à l'imparfait", href: "/francais/conjugaison/a2-conj-l07" },
+      { code: "G8.3", title: "Les verbes réguliers à l'imparfait", href: "/francais/grammaire/a1-gr-imparfait" },
     ]),
     {
       type: "plain",

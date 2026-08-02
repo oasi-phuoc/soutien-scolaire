@@ -7,6 +7,8 @@ export type PedagogicNavAccess = {
   hasSuiviAccess: boolean;
   canEditContent: boolean;
   canPrint: boolean;
+  /** Accès libre aux leçons de grammaire (sans verrouillage séquentiel). */
+  canFreeAccess: boolean;
 };
 
 export type NavAccess = PedagogicNavAccess & {
@@ -37,6 +39,7 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
       hasSuiviAccess: false,
       canEditContent: true,
       canPrint: false,
+      canFreeAccess: true,
       placementVisible: true,
     };
   }
@@ -54,6 +57,7 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
       hasSuiviAccess: false,
       canEditContent: OPEN_LOCALLY,
       canPrint: false,
+      canFreeAccess: OPEN_LOCALLY,
       placementVisible: true,
     };
   }
@@ -67,14 +71,18 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
 
   const needsSuivi = !isAdmin && role === "prof";
   const needsPrint = !isAdmin;
+  const needsFreeAccess = role === "eleve";
   const needsPlacementGate = role !== "admin" && role !== "prof";
 
-  const [suiviRes, printRes, placementRes] = await Promise.all([
+  const [suiviRes, printRes, freeRes, placementRes] = await Promise.all([
     needsSuivi
       ? supabase.rpc("has_suivi_access")
       : Promise.resolve({ data: isAdmin, error: null }),
     needsPrint
       ? supabase.rpc("can_access_print")
+      : Promise.resolve({ data: true, error: null }),
+    needsFreeAccess
+      ? supabase.rpc("can_access_free_lessons")
       : Promise.resolve({ data: true, error: null }),
     needsPlacementGate
       ? supabase.rpc("get_placement_module_enabled")
@@ -98,6 +106,20 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
     }
   }
 
+  let canFreeAccess = role === "admin" || role === "prof";
+  if (needsFreeAccess) {
+    if (!freeRes.error) {
+      canFreeAccess = Boolean(freeRes.data);
+    } else {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("can_free_access")
+        .eq("id", user.id)
+        .maybeSingle();
+      canFreeAccess = Boolean((profile as { can_free_access?: boolean } | null)?.can_free_access);
+    }
+  }
+
   const placementVisible =
     role === "admin" || role === "prof"
       ? true
@@ -113,6 +135,7 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
     hasSuiviAccess,
     canEditContent: isAdmin,
     canPrint,
+    canFreeAccess,
     placementVisible,
   };
 });
@@ -124,5 +147,6 @@ export function pedagogicFromNavAccess(access: NavAccess): PedagogicNavAccess {
     hasSuiviAccess: access.hasSuiviAccess,
     canEditContent: access.canEditContent,
     canPrint: access.canPrint,
+    canFreeAccess: access.canFreeAccess,
   };
 }

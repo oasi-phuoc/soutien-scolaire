@@ -695,13 +695,6 @@ export function CatalogManager() {
             >
               + Leçon grammaire
             </button>
-            <button
-              type="button"
-              onClick={() => addFrenchTheme("conjugaison")}
-              className="rounded-lg border border-amber-300 px-3 py-1.5 text-xs font-bold text-amber-900"
-            >
-              + Leçon conjugaison
-            </button>
           </div>
           <ul className="max-h-[28rem] space-y-1 overflow-y-auto text-sm">
             {frenchCatalog.themes
@@ -717,9 +710,7 @@ export function CatalogManager() {
                 const href =
                   t.tab === "vocabulaire"
                     ? `/francais/vocabulaire/${t.slug}`
-                    : t.tab === "conjugaison"
-                      ? `/francais/conjugaison/${t.slug}`
-                      : `/francais/grammaire/${t.slug}`;
+                    : `/francais/grammaire/${t.slug}`;
                 return (
                   <li
                     key={t.id}

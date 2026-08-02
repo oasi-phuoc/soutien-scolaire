@@ -2651,10 +2651,10 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
     return () => clearTimeout(id);
   }, [exercisesStarted, timeLeft]);
 
-  // Auto-complete training when timer reaches 0
+  // Auto-complete training when timer reaches 0 (uniquement sans évaluation)
   useEffect(() => {
     if (timeLeft !== 0 || !exercisesStarted) return;
-    markFrenchLessonComplete(lesson.slug);
+    if (!hasEval) markFrenchLessonComplete(lesson.slug);
     router.push(returnUrl);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft]);
@@ -2752,10 +2752,17 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
     }
   }
 
+  function finishLesson() {
+    // Déblocage de la leçon suivante : note ≥ 4.0 (ou pas d'évaluation)
+    if (!hasEval || evalGrade >= PASSING_GRADE) {
+      markFrenchLessonComplete(lesson.slug);
+    }
+    router.push(returnUrl);
+  }
+
   function goNext() {
     if (isResults) {
-      markFrenchLessonComplete(lesson.slug);
-      router.push(returnUrl);
+      finishLesson();
       return;
     }
     if (isEvalPhase) {
@@ -2775,8 +2782,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
       return;
     }
     if (isLast) {
-      markFrenchLessonComplete(lesson.slug);
-      router.push(returnUrl);
+      finishLesson();
     } else {
       setStepIdx((s: number) => s + 1);
       setExerciseKey((k: number) => k + 1);
@@ -3048,10 +3054,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
             </EvalExerciseResultList>
             {isResults && (
               <EvalFinishButton
-                onClick={() => {
-                  markFrenchLessonComplete(lesson.slug);
-                  router.push(returnUrl);
-                }}
+                onClick={finishLesson}
                 accent="var(--color-accent-fr)"
               />
             )}
@@ -3115,7 +3118,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
             {/* Next */}
             <button
               type="button"
-              onClick={isResults ? () => { markFrenchLessonComplete(lesson.slug); router.push(returnUrl); } : goNext}
+              onClick={isResults ? finishLesson : goNext}
               disabled={false}
               className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:cursor-not-allowed disabled:opacity-30 ${(isExercise && hasTimer && !exercisesStarted) || isEvalAnnounce ? "invisible" : ""}`}
             >

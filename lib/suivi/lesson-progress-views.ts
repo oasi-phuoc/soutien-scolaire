@@ -22,7 +22,7 @@ export type ModuleProgressGroup = {
 };
 
 const FRENCH_VOC = FRENCH_THEMES.filter((t) => t.tab === "vocabulaire");
-const FRENCH_GRAM = FRENCH_THEMES.filter((t) => t.tab === "grammaire" || t.tab === "conjugaison");
+const FRENCH_GRAM = FRENCH_THEMES.filter((t) => t.tab === "grammaire");
 
 const VOCAB_MODULE_DEFS = [
   { id: "V1", code: "V1", title: "L'identité" },
@@ -38,21 +38,29 @@ const VOCAB_MODULE_DEFS = [
 ];
 
 const GRAMMAR_MODULE_DEFS = [
-  { id: "G1", code: "G1", title: "Chapitre 1 — Les fondamentaux" },
-  { id: "G2", code: "G2", title: "Chapitre 2 — Décrire et situer" },
-  { id: "G3", code: "G3", title: "Chapitre 3 — Pronoms et relations" },
-  { id: "G4", code: "G4", title: "Chapitre 4 — Temps et modes" },
-];
-
-const CONJ_MODULE_DEFS = [
-  { id: "C1", code: "C1", title: "Les verbes essentiels" },
-  { id: "C2", code: "C2", title: "Le passé" },
-  { id: "C3", code: "C3", title: "Le futur" },
-  { id: "C4", code: "C4", title: "Les autres temps" },
+  { id: "G1", code: "G1", title: "Le présent" },
+  { id: "G2", code: "G2", title: "Le nom" },
+  { id: "G3", code: "G3", title: "L'adjectif qualificatif" },
+  { id: "G4", code: "G4", title: "Les déterminants" },
+  { id: "G5", code: "G5", title: "La structure de la phrase" },
+  { id: "G6", code: "G6", title: "Bilan A1" },
+  { id: "G7", code: "G7", title: "Les prépositions de lieu" },
+  { id: "G8", code: "G8", title: "Le passé" },
+  { id: "G9", code: "G9", title: "Le futur" },
+  { id: "G10", code: "G10", title: "La comparaison" },
+  { id: "G11", code: "G11", title: "L'expression de temps" },
+  { id: "G12", code: "G12", title: "Les pronoms" },
+  { id: "G13", code: "G13", title: "Bilan A2" },
+  { id: "G14", code: "G14", title: "Les adverbes" },
+  { id: "G15", code: "G15", title: "Les mots de liaison" },
+  { id: "G16", code: "G16", title: "Les autres temps des verbes" },
+  { id: "G17", code: "G17", title: "Les phrases complexes" },
+  { id: "G18", code: "G18", title: "Bilan B1" },
+  { id: "G19", code: "G19", title: "Compléments" },
 ];
 
 function moduleGroupId(code: string): string {
-  const m = /^(G\d+|C\d+)\./.exec(code);
+  const m = /^(G\d+)\./.exec(code);
   return m?.[1] ?? "";
 }
 
@@ -110,7 +118,7 @@ export function getRecentMathLessons(progress: StoredProgressV1 | null, limit = 
 
 export function getFrenchModuleGroups(
   progress: StoredProgressV1 | null,
-  tab: "vocabulaire" | "conjugaison" | "grammaire" | "communication",
+  tab: "vocabulaire" | "grammaire" | "communication",
 ): ModuleProgressGroup[] {
   const completed = new Set(Object.keys(progress?.frenchLessons ?? {}));
   const comm = progress?.commProgress ?? {};
@@ -150,8 +158,7 @@ export function getFrenchModuleGroups(
     }).filter((g) => g.lessons.length > 0);
   }
 
-  const defs = tab === "conjugaison" ? CONJ_MODULE_DEFS : GRAMMAR_MODULE_DEFS;
-  return defs.map((def) => {
+  return GRAMMAR_MODULE_DEFS.map((def) => {
     const lessons = FRENCH_GRAM.filter((t) => moduleGroupId(t.code) === def.id).map((t) => ({
       id: t.slug,
       code: t.code,

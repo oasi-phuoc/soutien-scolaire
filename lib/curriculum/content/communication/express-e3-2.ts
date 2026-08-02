@@ -8,7 +8,7 @@ export const EXPRESS_E3_2: CommunicationLesson = {
   id: "E3-2",
   code: "E3.2",
   title: "Décrire son quotidien",
-  prerequisiteFrenchSlugs: ["v2-saisons", "v2-meteo", "a1-conj-l09"],
+  prerequisiteFrenchSlugs: ["v2-saisons", "v2-meteo", "a1-gr-pronominaux"],
   prerequisiteCommIds: ["E3-1"],
   theory: [
     { type: "heading", text: "Décrire son quotidien", black: true, trans: t("Describing your daily routine") },
@@ -18,7 +18,7 @@ export const EXPRESS_E3_2: CommunicationLesson = {
         { code: "E3.1", title: "Aller à l'école", href: "/communication/E3-1" },
         { code: "V2.3", title: "Saisons", href: "/francais/vocabulaire/v2-saisons" },
         { code: "V2.4", title: "Météo", href: "/francais/vocabulaire/v2-meteo" },
-        { code: "C2.2", title: "Pronominaux", href: "/francais/conjugaison/a1-conj-l09" }
+        { code: "G1.5", title: "Pronominaux", href: "/francais/grammaire/a1-gr-pronominaux" }
       ],
     },
     {

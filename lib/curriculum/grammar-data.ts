@@ -152,6 +152,9 @@ import { A1_GR_EXPRESSION_BUT } from "./content/francais/grammaire-a1-expression
 import { A1_GR_OPPOSITION_CONCESSION } from "./content/francais/grammaire-a1-opposition-concession";
 import { A1_GR_HYPOTHESE_CONDITION } from "./content/francais/grammaire-a1-hypothese-condition";
 import { A1_GR_DISCOURS_INDIRECT_PRESENT } from "./content/francais/grammaire-a1-discours-indirect-present";
+import { A1_GR_BILAN_A1 } from "./content/francais/grammaire-a1-bilan-a1";
+import { A1_GR_BILAN_A2 } from "./content/francais/grammaire-a1-bilan-a2";
+import { A1_GR_BILAN_B1 } from "./content/francais/grammaire-a1-bilan-b1";
 import { A1_GR_NOMS_COMPOSES } from "./content/francais/grammaire-a1-noms-composes";
 import { A1_GR_PLURIEL_NOMS } from "./content/francais/grammaire-a1-pluriel-noms";
 import { A1_GR_GENRE_PERSONNES } from "./content/francais/grammaire-a1-genre-personnes";
@@ -235,7 +238,6 @@ import {
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
 const REORGANIZED_CODES: Record<string, string> = {
-  // G1 — Chapitre 1 (unités 1–10)
   "a1-gr-l01": "G1.1",
   "a1-gr-avoir": "G1.2",
   "a1-gr-cest-il-est": "G1.3",
@@ -246,139 +248,135 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-verbes-ir": "G1.8",
   "a1-gr-verbes-re-oir": "G1.9",
   "a1-gr-present-progressif": "G1.10",
-  // G2 — Chapitre 2 (unités 11–20)
   "a1-gr-genre-personnes": "G2.1",
   "a1-gr-genre-choses": "G2.2",
   "a1-gr-pluriel-noms": "G2.3",
   "a1-gr-noms-composes": "G2.4",
-  "a1-gr-genre-adjectifs": "G2.5",
-  "a1-gr-feminin-adjectifs-particuliers": "G2.6",
-  "a1-gr-pluriel-adjectifs": "G2.7",
-  "a1-gr-adjectifs-accords-particuliers": "G2.8",
-  "a1-gr-place-adjectif": "G2.9",
-  "a1-gr-place-adjectif-particuliers": "G2.10",
-  // G3 — Chapitre 3 (unités 21–30)
-  "a1-gr-l04": "G3.1",
-  "a1-gr-articles-contractes": "G3.2",
-  "a1-gr-article-partitif": "G3.3",
-  "a1-gr-expression-quantite": "G3.4",
-  "a1-gr-l18": "G3.5",
-  "a1-gr-l19": "G3.6",
-  "a1-gr-adjectifs-indefinis": "G3.7",
-  "a1-gr-question-totale": "G3.8",
-  "a1-gr-question-ouverte-qui": "G3.9",
-  "a1-gr-question-ouverte-ou": "G3.10",
-  // G4 — Chapitre 4 (unités 31–100)
-  "a1-gr-negation-ne-pas": "G4.1",
-  "a1-gr-autres-negations": "G4.2",
-  "a1-gr-question-inversion": "G4.3",
-  "a1-gr-phrase-exclamative": "G4.4",
-  "a1-gr-a-en-de-lieux": "G4.5",
-  "a1-gr-autres-prepositions": "G4.6",
-  "a1-gr-passe-compose-avoir": "G4.7",
-  "a1-gr-passe-compose-etre": "G4.8",
-  "a1-gr-imparfait": "G4.9",
-  "a1-gr-passe-recent": "G4.10",
-  "a1-gr-imparfait-passe-compose": "G4.11",
-  "a1-gr-plus-que-parfait": "G4.12",
-  "a1-gr-accord-participe-passe": "G4.13",
-  "a1-gr-futur-proche": "G4.14",
-  "a1-gr-futur-simple": "G4.15",
-  "a1-gr-futur-anterieur": "G4.16",
-  "a1-gr-comparaison-adj-adv": "G4.17",
-  "a1-gr-comparaison-nom-verbe": "G4.18",
-  "a1-gr-superlatif": "G4.19",
-  "a1-gr-expression-temps-moment": "G4.20",
-  "a1-gr-marqueurs-temps": "G4.21",
-  "a1-gr-pronoms-toniques": "G4.22",
-  "a1-gr-pronoms-cod-coi": "G4.23",
-  "a1-gr-pronom-en": "G4.24",
-  "a1-gr-pronoms-y-en-lieu": "G4.25",
-  "a1-gr-en-y-pronom-tonique": "G4.26",
-  "a1-gr-doubles-pronoms": "G4.27",
-  "a1-gr-pronoms-demonstratifs": "G4.28",
-  "a1-gr-pronoms-possessifs": "G4.29",
-  "a1-gr-pronoms-indefinis": "G4.30",
-  "a1-gr-pronoms-relatifs-qui-que-ou": "G4.31",
-  "a1-gr-pronom-relatif-dont": "G4.32",
-  "a1-gr-pronoms-relatifs-composes": "G4.33",
-  "a1-gr-adverbes-intensite": "G4.34",
-  "a1-gr-adverbes-ment": "G4.35",
-  "a1-gr-mots-liaison": "G4.36",
-  "a1-gr-imperatif": "G4.37",
-  "a1-gr-forme-passive": "G4.38",
-  "a1-gr-gerondif": "G4.39",
-  "a1-gr-subjonctif-present": "G4.40",
-  "a1-gr-subjonctif-passe": "G4.41",
-  "a1-gr-subjonctif-ou-indicatif": "G4.42",
-  "a1-gr-subjonctif-ou-infinitif": "G4.43",
-  "a1-gr-conditionnel-present": "G4.44",
-  "a1-gr-conditionnel-passe": "G4.45",
-  "a1-gr-expression-cause": "G4.46",
-  "a1-gr-expression-consequence": "G4.47",
-  "a1-gr-conjonctions-temps": "G4.48",
-  "a1-gr-expression-but": "G4.49",
-  "a1-gr-opposition-concession": "G4.50",
-  "a1-gr-hypothese-condition": "G4.51",
-  "a1-gr-discours-indirect-present": "G4.52",
-  "a1-gr-l03": "G4.53",
-  "a1-gr-phrases": "G4.54",
-  "a1-gr-l02": "G4.55",
-  "a1-gr-interro": "G4.56",
-  "a1-gr-l10": "G4.57",
-  "a1-gr-l11": "G4.58",
-  "a1-gr-l14": "G4.59",
-  "a1-gr-l23": "G4.60",
-  "a2-gr-l07": "G4.61",
-  "a2-gr-l09": "G4.62",
-  "a1-gr-expressions-temps": "G4.63",
-  "a1-gr-l22": "G4.64",
-  "a2-gr-l39": "G4.65",
-  "a2-gr-bon-bien-meilleur-mieux": "G4.66",
-  "a2-gr-superlatif": "G4.67",
-  "a2-gr-l42": "G4.68",
-  "a2-gr-l19": "G4.69",
-  "a2-gr-l35": "G4.70",
-  "a2-gr-l36": "G4.71",
-  "gr-marqueurs-temps-complet": "G4.72",
-  "a2-gr-l52": "G4.73",
-  "a2-gr-adverbes-types": "G4.74",
-  "a1-gr-verbes-double-auxiliaire": "G4.75",
-  "a1-gr-pronominaux-passe-compose": "G4.76",
-  "a2-gr-passe-compose-ou-imparfait": "G4.77",
-  "a2-gr-imparfait-irreguliers": "G4.78",
-  "a2-gr-futur-irreguliers": "G4.79",
-  "a2-gr-futur-simple-ou-proche": "G4.80",
-  "a2-gr-hypothese-futur": "G4.81",
-  "a2-gr-conditionnel": "G4.82",
-  "a2-gr-gerondif": "G4.83",
-  "a2-gr-subjonctif": "G4.84",
-    // C1 — Verbes essentiels
-  "a1-conj-l00": "C1.1",
-  "a1-conj-l01": "C1.2",
-  "a1-conj-l07": "C1.3",
-  "a1-conj-l08": "C1.4",
-  "a1-conj-l09": "C1.5",
-  "a1-conj-l15": "C1.6",
-  "a2-conj-irreguliers": "C1.7",
-  "a2-conj-l02": "C1.8",
-  // C2 — Passé
-  "a1-conj-l28": "C2.1",
-  "a1-conj-l29": "C2.2",
-  "a1-conj-l30": "C2.3",
-  "negation-passe-compose": "C2.4",
-  "a2-conj-l07": "C2.5",
-  // C3 — Futur
-  "a1-conj-l20": "C3.1",
-  "a2-conj-l08": "C3.2",
-  // C4 — Autres temps
-  "a2-conj-l04": "C4.1",
-  "a2-conj-l05": "C4.2",
+  "a1-gr-genre-adjectifs": "G3.1",
+  "a1-gr-feminin-adjectifs-particuliers": "G3.2",
+  "a1-gr-pluriel-adjectifs": "G3.3",
+  "a1-gr-adjectifs-accords-particuliers": "G3.4",
+  "a1-gr-place-adjectif": "G3.5",
+  "a1-gr-place-adjectif-particuliers": "G3.6",
+  "a1-gr-l04": "G4.1",
+  "a1-gr-articles-contractes": "G4.2",
+  "a1-gr-article-partitif": "G4.3",
+  "a1-gr-expression-quantite": "G4.4",
+  "a1-gr-l18": "G4.5",
+  "a1-gr-l19": "G4.6",
+  "a1-gr-adjectifs-indefinis": "G4.7",
+  "a1-gr-question-totale": "G5.1",
+  "a1-gr-question-ouverte-qui": "G5.2",
+  "a1-gr-question-ouverte-ou": "G5.3",
+  "a1-gr-negation-ne-pas": "G5.4",
+  "a1-gr-autres-negations": "G5.5",
+  "a1-gr-question-inversion": "G5.6",
+  "a1-gr-phrase-exclamative": "G5.7",
+  "a1-gr-bilan-a1": "G6.1",
+  "a1-gr-a-en-de-lieux": "G7.1",
+  "a1-gr-autres-prepositions": "G7.2",
+  "a1-gr-passe-compose-avoir": "G8.1",
+  "a1-gr-passe-compose-etre": "G8.2",
+  "a1-gr-imparfait": "G8.3",
+  "a1-gr-passe-recent": "G8.4",
+  "a1-gr-imparfait-passe-compose": "G8.5",
+  "a1-gr-plus-que-parfait": "G8.6",
+  "a1-gr-accord-participe-passe": "G8.7",
+  "a1-gr-futur-proche": "G9.1",
+  "a1-gr-futur-simple": "G9.2",
+  "a1-gr-futur-anterieur": "G9.3",
+  "a1-gr-comparaison-adj-adv": "G10.1",
+  "a1-gr-comparaison-nom-verbe": "G10.2",
+  "a1-gr-superlatif": "G10.3",
+  "a1-gr-expression-temps-moment": "G11.1",
+  "a1-gr-marqueurs-temps": "G11.2",
+  "a1-gr-pronoms-toniques": "G12.1",
+  "a1-gr-pronoms-cod-coi": "G12.2",
+  "a1-gr-pronom-en": "G12.3",
+  "a1-gr-pronoms-y-en-lieu": "G12.4",
+  "a1-gr-en-y-pronom-tonique": "G12.5",
+  "a1-gr-doubles-pronoms": "G12.6",
+  "a1-gr-pronoms-demonstratifs": "G12.7",
+  "a1-gr-pronoms-possessifs": "G12.8",
+  "a1-gr-pronoms-indefinis": "G12.9",
+  "a1-gr-pronoms-relatifs-qui-que-ou": "G12.10",
+  "a1-gr-pronom-relatif-dont": "G12.11",
+  "a1-gr-pronoms-relatifs-composes": "G12.12",
+  "a1-gr-bilan-a2": "G13.1",
+  "a1-gr-adverbes-intensite": "G14.1",
+  "a1-gr-adverbes-ment": "G14.2",
+  "a1-gr-mots-liaison": "G15.1",
+  "a1-gr-imperatif": "G16.1",
+  "a1-gr-forme-passive": "G16.2",
+  "a1-gr-gerondif": "G16.3",
+  "a1-gr-subjonctif-present": "G16.4",
+  "a1-gr-subjonctif-passe": "G16.5",
+  "a1-gr-subjonctif-ou-indicatif": "G16.6",
+  "a1-gr-subjonctif-ou-infinitif": "G16.7",
+  "a1-gr-conditionnel-present": "G16.8",
+  "a1-gr-conditionnel-passe": "G16.9",
+  "a1-gr-expression-cause": "G17.1",
+  "a1-gr-expression-consequence": "G17.2",
+  "a1-gr-conjonctions-temps": "G17.3",
+  "a1-gr-expression-but": "G17.4",
+  "a1-gr-opposition-concession": "G17.5",
+  "a1-gr-hypothese-condition": "G17.6",
+  "a1-gr-discours-indirect-present": "G17.7",
+  "a1-gr-bilan-b1": "G18.1",
+  "a1-gr-l03": "G19.1",
+  "a1-gr-phrases": "G19.2",
+  "a1-gr-l02": "G19.3",
+  "a1-gr-interro": "G19.4",
+  "a1-gr-l10": "G19.5",
+  "a1-gr-l11": "G19.6",
+  "a1-gr-l14": "G19.7",
+  "a1-gr-l23": "G19.8",
+  "a2-gr-l07": "G19.9",
+  "a2-gr-l09": "G19.10",
+  "a1-gr-expressions-temps": "G19.11",
+  "a1-gr-l22": "G19.12",
+  "a2-gr-l39": "G19.13",
+  "a2-gr-bon-bien-meilleur-mieux": "G19.14",
+  "a2-gr-superlatif": "G19.15",
+  "a2-gr-l42": "G19.16",
+  "a2-gr-l19": "G19.17",
+  "a2-gr-l35": "G19.18",
+  "a2-gr-l36": "G19.19",
+  "gr-marqueurs-temps-complet": "G19.20",
+  "a2-gr-l52": "G19.21",
+  "a2-gr-adverbes-types": "G19.22",
+  "a1-gr-verbes-double-auxiliaire": "G19.23",
+  "a1-gr-pronominaux-passe-compose": "G19.24",
+  "a2-gr-passe-compose-ou-imparfait": "G19.25",
+  "a2-gr-imparfait-irreguliers": "G19.26",
+  "a2-gr-futur-irreguliers": "G19.27",
+  "a2-gr-futur-simple-ou-proche": "G19.28",
+  "a2-gr-hypothese-futur": "G19.29",
+  "a2-gr-conditionnel": "G19.30",
+  "a2-gr-gerondif": "G19.31",
+  "a2-gr-subjonctif": "G19.32",
+  "a1-conj-l08": "G19.33",
+  "a1-conj-l00": "G1.1",
+  "a1-conj-l01": "G1.2",
+  "a1-conj-l07": "G1.4",
+  "a1-conj-l09": "G1.5",
+  "a1-conj-l15": "G1.6",
+  "a2-conj-irreguliers": "G1.9",
+  "a2-conj-l02": "G1.8",
+  "a1-conj-l28": "G8.4",
+  "a1-conj-l29": "G8.1",
+  "a1-conj-l30": "G8.2",
+  "negation-passe-compose": "G8.1",
+  "a2-conj-l07": "G8.3",
+  "a1-conj-l20": "G9.1",
+  "a2-conj-l08": "G9.2",
+  "a2-conj-l04": "G16.8",
+  "a2-conj-l05": "G16.1",
 };
 
 const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
   ...A1_GR_L23,
-  code: "G4.60",
+  code: "G19.8",
   title: "Les adjectifs qualificatifs",
 };
 
@@ -506,6 +504,9 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_OPPOSITION_CONCESSION,
   A1_GR_HYPOTHESE_CONDITION,
   A1_GR_DISCOURS_INDIRECT_PRESENT,
+  A1_GR_BILAN_A1,
+  A1_GR_BILAN_A2,
+  A1_GR_BILAN_B1,
   A1_GR_CEST,
   A1_GR_PHRASES,
   A1_GR_L02,
@@ -546,12 +547,53 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_SUBJONCTIF,
 ];
 
-export const GRAMMAR_LESSONS: GrammarLesson[] = BASE_GRAMMAR_LESSONS
-  .map(applyReorganizedCode)
-  .map(addGeneratedExercises)
-  .map(augmentGrammarLessonExercises);
 
-// ── Registre — conjugaison ────────────────────────────────────────────────────
+/** Fusion conjugaison → grammaire : exercices (et théorie) ajoutés aux leçons cibles. */
+const CONJ_MERGE_INTO: Record<string, string[]> = {
+  "a1-gr-l01": ["a1-conj-l00", "a1-conj-l01"],
+  "a1-gr-avoir": ["a1-conj-l01"],
+  "a1-gr-verbes-er": ["a1-conj-l07"],
+  "a1-gr-pronominaux": ["a1-conj-l09"],
+  "a1-gr-modaux": ["a1-conj-l15"],
+  "a1-gr-verbes-re-oir": ["a2-conj-irreguliers"],
+  "a1-gr-verbes-ir": ["a2-conj-l02"],
+  "a1-gr-present-progressif": ["a1-conj-l28"],
+  "a1-gr-passe-recent": ["a1-conj-l28"],
+  "a1-gr-passe-compose-avoir": ["a1-conj-l29", "negation-passe-compose"],
+  "a1-gr-passe-compose-etre": ["a1-conj-l30"],
+  "a1-gr-imparfait": ["a2-conj-l07"],
+  "a1-gr-futur-proche": ["a1-conj-l20"],
+  "a1-gr-futur-simple": ["a2-conj-l08"],
+  "a1-gr-conditionnel-present": ["a2-conj-l04"],
+  "a1-gr-imperatif": ["a2-conj-l05"],
+};
+
+/** Ancien slug conjugaison → leçon grammaire qui le remplace (pour prérequis Communication). */
+export const CONJ_SLUG_TO_GRAMMAR: Record<string, string> = {
+  "a1-conj-l00": "a1-gr-l01",
+  "a1-conj-l01": "a1-gr-l01",
+  "a1-conj-l07": "a1-gr-verbes-er",
+  "a1-conj-l08": "a1-conj-l08",
+  "a1-conj-l09": "a1-gr-pronominaux",
+  "a1-conj-l15": "a1-gr-modaux",
+  "a2-conj-irreguliers": "a1-gr-verbes-re-oir",
+  "a2-conj-l02": "a1-gr-verbes-ir",
+  "a1-conj-l28": "a1-gr-passe-recent",
+  "a1-conj-l29": "a1-gr-passe-compose-avoir",
+  "negation-passe-compose": "a1-gr-passe-compose-avoir",
+  "a1-conj-l30": "a1-gr-passe-compose-etre",
+  "a2-conj-l07": "a1-gr-imparfait",
+  "a1-conj-l20": "a1-gr-futur-proche",
+  "a2-conj-l08": "a1-gr-futur-simple",
+  "a2-conj-l04": "a1-gr-conditionnel-present",
+  "a2-conj-l05": "a1-gr-imperatif",
+};
+
+export function resolveFrenchPrereqSlug(slug: string): string {
+  return CONJ_SLUG_TO_GRAMMAR[slug] ?? slug;
+}
+
+// ── Registre — conjugaison (sources pour fusion, plus d’onglet dédié) ──────────
 
 const BASE_CONJUGAISON_LESSONS: ConjLesson[] = [
   A1_CONJ_L00,
@@ -575,6 +617,44 @@ const BASE_CONJUGAISON_LESSONS: ConjLesson[] = [
   A2_CONJ_L08,
 ];
 
+function mergeConjugationIntoGrammar(lessons: GrammarLesson[]): GrammarLesson[] {
+  const conjBySlug = new Map(BASE_CONJUGAISON_LESSONS.map((l) => [l.slug, l] as const));
+  return lessons.map((lesson) => {
+    const sources = CONJ_MERGE_INTO[lesson.slug];
+    if (!sources?.length) return lesson;
+    let theory = lesson.theory;
+    let exercises = lesson.exercises;
+    for (const srcSlug of sources) {
+      const src = conjBySlug.get(srcSlug);
+      if (!src) continue;
+      if (src.theory?.length) {
+        theory = [
+          ...theory,
+          { type: "heading" as const, text: "Entraînement conjugaison" },
+          ...src.theory,
+        ];
+      }
+      if (src.exercises?.length) {
+        exercises = [...exercises, ...src.exercises];
+      }
+    }
+    return { ...lesson, theory, exercises };
+  });
+}
+
+export const GRAMMAR_LESSONS: GrammarLesson[] = [
+  ...mergeConjugationIntoGrammar(
+    BASE_GRAMMAR_LESSONS
+      .map(applyReorganizedCode)
+      .map(addGeneratedExercises)
+      .map(augmentGrammarLessonExercises),
+  ),
+  ...BASE_CONJUGAISON_LESSONS
+    .filter((l) => l.slug === "a1-conj-l08")
+    .map(applyReorganizedCode)
+    .map(addGeneratedExercises),
+];
+
 export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS
   .map(applyReorganizedCode)
   .map(addGeneratedExercises)
@@ -583,7 +663,7 @@ export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS
 // ── Fonctions de recherche ────────────────────────────────────────────────────
 
 function hasUnlockedEval(code: string): boolean {
-  return /^G1\.|^C[1-4]\./.test(code);
+  return /^G\d+\./.test(code);
 }
 
 export function getGrammarLesson(slug: string): GrammarLesson | undefined {

@@ -203,12 +203,12 @@ export const EXPRESS_E10_3: CommunicationLesson = lessonFromListening({
   id: "E10-3",
   code: "E10.3",
   title: "Organiser un événement",
-  prerequisiteFrenchSlugs: ["a2-conj-l08"],
+  prerequisiteFrenchSlugs: ["a1-gr-futur-simple"],
   prerequisiteCommIds: ["E10-2"],
   theory: [
     { type: "heading", text: "Organiser un événement", black: true, trans: t("Organiser un événement") },
     prereqItems([
-      { code: "C3.3", title: "Les verbes réguliers au futur simple", href: "/francais/conjugaison/a2-conj-l08" },
+      { code: "G9.2", title: "Les verbes réguliers au futur simple", href: "/francais/grammaire/a1-gr-futur-simple" },
     ]),
     {
       type: "plain",
@@ -379,7 +379,7 @@ export const EXPRESS_E10_5: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Participer à la vie associative", black: true, trans: t("Participer à la vie associative") },
     prereqItems([
-      { code: "C2.6", title: "Les verbes pronominaux au passé composé", href: "/francais/grammaire/a1-gr-pronominaux-passe-compose" },
+      { code: "G19.24", title: "Les verbes pronominaux au passé composé", href: "/francais/grammaire/a1-gr-pronominaux-passe-compose" },
     ]),
     {
       type: "plain",

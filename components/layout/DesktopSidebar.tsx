@@ -11,7 +11,6 @@ import {
 import { getSuiviContextAction } from "@/app/actions/suivi";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
-import { getFrenchThemeBySlug } from "@/lib/curriculum/french-data";
 import { getMathBranchForPathSegment } from "@/lib/curriculum/math-data";
 import { LearnUpLogo } from "@/components/brand/LearnUpLogo";
 
@@ -182,15 +181,13 @@ export function DesktopSidebar({
 
   const frenchTab = (() => {
     const q = searchParams.get("tab");
-    if (q === "vocabulaire" || q === "conjugaison" || q === "grammaire" || q === "communication") {
+    if (q === "vocabulaire" || q === "grammaire" || q === "communication") {
       return q;
     }
+    if (q === "conjugaison") return "grammaire";
     if (pathname.startsWith("/francais/vocabulaire")) return "vocabulaire";
     if (pathname.startsWith("/communication")) return "communication";
     if (pathname.startsWith("/francais/grammaire") || pathname.startsWith("/francais/conjugaison")) {
-      const slug = pathname.split("/")[3] ?? "";
-      const theme = getFrenchThemeBySlug(slug);
-      if (theme?.code.startsWith("C")) return "conjugaison";
       return "grammaire";
     }
     return "vocabulaire";
@@ -229,11 +226,6 @@ export function DesktopSidebar({
       href: "/francais?tab=vocabulaire",
       label: "Vocabulaire",
       active: !pathname.startsWith("/communication") && frenchTab === "vocabulaire",
-    },
-    {
-      href: "/francais?tab=conjugaison",
-      label: "Conjugaison",
-      active: !pathname.startsWith("/communication") && frenchTab === "conjugaison",
     },
     {
       href: "/francais?tab=grammaire",

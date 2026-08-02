@@ -9,6 +9,7 @@ import {
   updateUserProfileAction,
   changePasswordAction,
   setUserPrintAccessAction,
+  setUserFreeAccessAction,
 } from "@/app/actions/admin";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
@@ -286,6 +287,15 @@ export function EleveDetailPage({
     });
   }
 
+  function handleToggleFreeAccess(next: boolean) {
+    startTransition(async () => {
+      const prev = user.can_free_access;
+      setUser(u => ({ ...u, can_free_access: next }));
+      const r = await setUserFreeAccessAction(user.id, next);
+      if (!r.ok) setUser(u => ({ ...u, can_free_access: prev }));
+    });
+  }
+
   return (
     <main className={`${APP_SHELL_FULL} flex-1 py-8 pb-28`}>
 
@@ -436,6 +446,42 @@ export function EleveDetailPage({
                     <span
                       className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
                         user.can_print ? "translate-x-4" : "translate-x-0"
+                      }`}
+                    />
+                  </button>
+                </label>
+              )}
+            </div>
+          )}
+
+          {(canTogglePrint || user.role === "admin" || user.role === "prof") && canEditAccount && (
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Accès libre</h2>
+              {user.role === "admin" || user.role === "prof" ? (
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  Les comptes admin et prof ont déjà accès à toutes les leçons.
+                </p>
+              ) : (
+                <label className="flex cursor-pointer items-center justify-between gap-4 select-none">
+                  <span className="text-sm text-zinc-700 dark:text-zinc-300">
+                    Accès libre aux leçons
+                    <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">
+                      Ouvrir n&apos;importe quelle leçon sans réussir l&apos;évaluation précédente
+                    </span>
+                  </span>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={user.can_free_access}
+                    aria-label="Accès libre"
+                    onClick={() => handleToggleFreeAccess(!user.can_free_access)}
+                    className={`flex h-7 w-11 shrink-0 items-center rounded-full p-0.5 transition-colors ${
+                      user.can_free_access ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
+                    }`}
+                  >
+                    <span
+                      className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
+                        user.can_free_access ? "translate-x-4" : "translate-x-0"
                       }`}
                     />
                   </button>

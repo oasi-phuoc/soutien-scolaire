@@ -8,7 +8,7 @@ export const EXPRESS_E5_2: CommunicationLesson = {
   id: "E5-2",
   code: "E5.2",
   title: "Aller à la pharmacie",
-  prerequisiteFrenchSlugs: ["v8-pharmacie", "a1-conj-l15"],
+  prerequisiteFrenchSlugs: ["v8-pharmacie", "a1-gr-modaux"],
   prerequisiteCommIds: ["E5-1"],
   theory: [
     { type: "heading", text: "Aller à la pharmacie", black: true, trans: t("Going to the pharmacy") },
@@ -17,7 +17,7 @@ export const EXPRESS_E5_2: CommunicationLesson = {
       items: [
         { code: "E5.1", title: "Médecin", href: "/communication/E5-1" },
         { code: "V8.4", title: "Pharmacie", href: "/francais/vocabulaire/v8-pharmacie" },
-        { code: "C2.3", title: "Modaux", href: "/francais/conjugaison/a1-conj-l15" }
+        { code: "G1.6", title: "Modaux", href: "/francais/grammaire/a1-gr-modaux" }
       ],
     },
     {

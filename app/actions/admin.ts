@@ -216,7 +216,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const [{ data, error }, { data: authData }] = await Promise.all([
     svc
       .from("profiles")
-      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, placement_test_history, placement_combined_profile")
+      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, can_free_access, placement_test_history, placement_combined_profile")
       .eq("id", userId)
       .single(),
     svc.auth.admin.getUserById(userId),
@@ -241,6 +241,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
     user: {
       ...data,
       can_print: Boolean(data.can_print),
+      can_free_access: Boolean((data as { can_free_access?: boolean }).can_free_access),
       email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
       placement_combined: combined?.total !== undefined ? {
@@ -283,6 +284,36 @@ export async function setUserPrintAccessAction(
   revalidatePath("/");
   revalidatePath("/impressions");
   revalidatePath("/admin/impression");
+  return { ok: true };
+}
+
+export async function setUserFreeAccessAction(
+  userId: string,
+  enabled: boolean,
+): Promise<{ ok: boolean; reason?: string }> {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Supabase non configuré" };
+
+  const { error } = await supabase.rpc("set_user_free_access", {
+    p_user_id: userId,
+    p_enabled: enabled,
+  });
+  if (error) {
+    const svc = createServiceClient();
+    if (!svc) return { ok: false, reason: error.message };
+    const { error: svcErr } = await svc
+      .from("profiles")
+      .update({ can_free_access: enabled })
+      .eq("id", userId);
+    if (svcErr) return { ok: false, reason: svcErr.message };
+  }
+
+  revalidatePath("/admin");
+  revalidatePath(`/admin/eleves/${userId}`);
+  revalidatePath("/");
+  revalidatePath("/francais");
   return { ok: true };
 }
 
