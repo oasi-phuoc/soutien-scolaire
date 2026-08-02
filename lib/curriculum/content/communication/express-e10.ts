@@ -26,7 +26,7 @@ export const EXPRESS_E10_1: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Inviter et être invité", black: true, trans: t("Inviting and being invited") },
     prereqItems([
-      { code: "G4.5", title: "Les questions fermées", href: "/francais/grammaire/a2-gr-l07" },
+      { code: "G4.6", title: "Les questions fermées", href: "/francais/grammaire/a2-gr-l07" },
     ]),
     {
       type: "plain",
@@ -121,7 +121,7 @@ export const EXPRESS_E10_2: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Faire des rencontres", black: true, trans: t("Faire des rencontres") },
     prereqItems([
-      { code: "G4.15", title: "Les pronoms Y et EN", href: "/francais/grammaire/a2-gr-l36" },
+      { code: "G4.16", title: "Les pronoms Y et EN", href: "/francais/grammaire/a2-gr-l36" },
     ]),
     {
       type: "plain",
@@ -294,7 +294,7 @@ export const EXPRESS_E10_4: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Participer à la vie scolaire", black: true, trans: t("Participer à la vie scolaire") },
     prereqItems([
-      { code: "G4.13", title: "Les pronoms relatifs qui et que", href: "/francais/grammaire/a2-gr-l19" },
+      { code: "G4.14", title: "Les pronoms relatifs qui et que", href: "/francais/grammaire/a2-gr-l19" },
     ]),
     {
       type: "plain",
