@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E3.3 Aller au travail ─────────────────────────── */
+/* ── Compréhension écrite — E3.3 Aller au travail ── */
 
-const CE_TEXT = `Offre d'emploi — Magasin de vêtements
+const CE_TEXT_1 = `Offre d'emploi — Magasin de vêtements
 
 Notre magasin de vêtements cherche un vendeur ou une vendeuse.
 Vous êtes dynamique, patient et sérieux ? Vous aimez travailler en équipe ? Vous aimez rencontrer des personnes ? Ce travail est pour vous !
@@ -20,8 +20,8 @@ Vous travaillez du mardi au samedi. Les horaires sont de 9 h 30 à 18 heures.
 Le magasin se trouve au centre commercial. Il est à côté de la pharmacie.
 Pour un entretien, envoyez un message à la directrice. Parlez de vos qualités dans le message. Début du contrat : le 1er mars.`;
 
-const CE_POOL = buildExpressPool("e3-3-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e3-3-1", [
+q({
     id: "ce-q1",
     textQ: "Quel employé le magasin cherche-t-il ?",
     text: ["Un vendeur ou une vendeuse", "Un boulanger", "Un cuisinier"],
@@ -104,11 +104,1666 @@ const CE_POOL = buildExpressPool("e3-3-ce", [
   }),
 ]);
 
-export const E3_3_CE: CommunicationExercise = readingPoolExercise({
-  id: "e3-3-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Offre d'emploi
+
+Notre entreprise cherche un vendeur ou une vendeuse.
+Vous travaillez du mardi au samedi. Les horaires sont de 9 h 30 à 18 h.
+Le lieu de travail est au centre commercial. Il est à côté de la pharmacie.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_2 = buildExpressPool("e3-3-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Vendeur", "pilote", "astronaute"],
+    textC: 0,
+    img: ["vendeur", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "vendeur",
+    vfQ: "Poste : vendeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mardi au samedi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mardi",
+    vfQ: "Travail du mardi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 9 h 30 à 18 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 9 h 30 à _________.",
+    fill: "18",
+    vfQ: "Horaires : 9 h 30 – 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Centre commercial", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "centre commercial",
+    vfQ: "Lieu : centre commercial.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Pharmacie", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "pharmacie",
+    vfQ: "À côté de la pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Offre d'emploi
+
+Notre entreprise cherche un serveur ou une serveuse.
+Vous travaillez du mercredi au dimanche. Les horaires sont de 11 h à 22 h.
+Le lieu de travail est au restaurant. Il est à côté de la cinéma.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_3 = buildExpressPool("e3-3-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Serveur", "pilote", "astronaute"],
+    textC: 0,
+    img: ["serveur", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "serveur",
+    vfQ: "Poste : serveur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mercredi au dimanche", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mercredi",
+    vfQ: "Travail du mercredi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 11 h à 22 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 11 h à _________.",
+    fill: "22",
+    vfQ: "Horaires : 11 h – 22 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Restaurant", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "restaurant",
+    vfQ: "Lieu : restaurant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Cinéma", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "cinéma",
+    vfQ: "À côté de la cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Offre d'emploi
+
+Notre entreprise cherche un secrétaire ou une secrétairee.
+Vous travaillez du lundi au vendredi. Les horaires sont de 8 h à 17 h.
+Le lieu de travail est au bureau. Il est à côté de la banque.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_4 = buildExpressPool("e3-3-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Secrétaire", "pilote", "astronaute"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "secrétaire",
+    vfQ: "Poste : secrétaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au vendredi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 17 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 8 h à _________.",
+    fill: "17",
+    vfQ: "Horaires : 8 h – 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Bureau", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "bureau",
+    vfQ: "Lieu : bureau.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Banque", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "banque",
+    vfQ: "À côté de la banque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Offre d'emploi
+
+Notre entreprise cherche un coiffeur ou une coiffeuse.
+Vous travaillez du mardi au samedi. Les horaires sont de 9 h à 19 h.
+Le lieu de travail est au salon. Il est à côté de la magasin.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_5 = buildExpressPool("e3-3-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Coiffeur", "pilote", "astronaute"],
+    textC: 0,
+    img: ["coiffeur", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "coiffeur",
+    vfQ: "Poste : coiffeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mardi au samedi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mardi",
+    vfQ: "Travail du mardi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 9 h à 19 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 9 h à _________.",
+    fill: "19",
+    vfQ: "Horaires : 9 h – 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Salon", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "salon",
+    vfQ: "Lieu : salon.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Magasin", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "magasin",
+    vfQ: "À côté de la magasin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Offre d'emploi
+
+Notre entreprise cherche un boulanger ou une boulangere.
+Vous travaillez du tous les jours. Les horaires sont de 4 h à 14 h.
+Le lieu de travail est au boulangerie. Il est à côté de la marché.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_6 = buildExpressPool("e3-3-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Boulanger", "pilote", "astronaute"],
+    textC: 0,
+    img: ["boulanger", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "boulanger",
+    vfQ: "Poste : boulanger.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du tous les jours", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "tous",
+    vfQ: "Travail du tous les jours.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 4 h à 14 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 4 h à _________.",
+    fill: "14",
+    vfQ: "Horaires : 4 h – 14 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Boulangerie", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "boulangerie",
+    vfQ: "Lieu : boulangerie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Marché", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "marché",
+    vfQ: "À côté de la marché.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Offre d'emploi
+
+Notre entreprise cherche un infirmier ou une infirmière.
+Vous travaillez du lundi au dimanche. Les horaires sont de 7 h à 19 h.
+Le lieu de travail est au hôpital. Il est à côté de la pharmacie.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_7 = buildExpressPool("e3-3-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Infirmier", "pilote", "astronaute"],
+    textC: 0,
+    img: ["infirmier", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "infirmier",
+    vfQ: "Poste : infirmier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au dimanche", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 7 h à 19 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 7 h à _________.",
+    fill: "19",
+    vfQ: "Horaires : 7 h – 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Hôpital", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "hôpital",
+    vfQ: "Lieu : hôpital.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Pharmacie", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "pharmacie",
+    vfQ: "À côté de la pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Offre d'emploi
+
+Notre entreprise cherche un mécanicien ou une mécanicienne.
+Vous travaillez du lundi au samedi. Les horaires sont de 8 h à 18 h.
+Le lieu de travail est au garage. Il est à côté de la station.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_8 = buildExpressPool("e3-3-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Mécanicien", "pilote", "astronaute"],
+    textC: 0,
+    img: ["mécanicien", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "mécanicien",
+    vfQ: "Poste : mécanicien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au samedi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 8 h à _________.",
+    fill: "18",
+    vfQ: "Horaires : 8 h – 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Garage", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "garage",
+    vfQ: "Lieu : garage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Station", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "station",
+    vfQ: "À côté de la station.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Offre d'emploi
+
+Notre entreprise cherche un vendeuse ou une vendeusee.
+Vous travaillez du mardi au samedi. Les horaires sont de 10 h à 19 h.
+Le lieu de travail est au boutique. Il est à côté de la librairie.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_9 = buildExpressPool("e3-3-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Vendeuse", "pilote", "astronaute"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "vendeuse",
+    vfQ: "Poste : vendeuse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mardi au samedi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mardi",
+    vfQ: "Travail du mardi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 10 h à 19 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 10 h à _________.",
+    fill: "19",
+    vfQ: "Horaires : 10 h – 19 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Boutique", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "boutique",
+    vfQ: "Lieu : boutique.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Librairie", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "librairie",
+    vfQ: "À côté de la librairie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Offre d'emploi
+
+Notre entreprise cherche un cuisinier ou une cuisinière.
+Vous travaillez du mercredi au dimanche. Les horaires sont de 10 h à 23 h.
+Le lieu de travail est au restaurant. Il est à côté de la hôtel.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_10 = buildExpressPool("e3-3-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Cuisinier", "pilote", "astronaute"],
+    textC: 0,
+    img: ["cuisinier", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "cuisinier",
+    vfQ: "Poste : cuisinier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mercredi au dimanche", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mercredi",
+    vfQ: "Travail du mercredi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 10 h à 23 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 10 h à _________.",
+    fill: "23",
+    vfQ: "Horaires : 10 h – 23 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Restaurant", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "restaurant",
+    vfQ: "Lieu : restaurant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Hôtel", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "hôtel",
+    vfQ: "À côté de la hôtel.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Offre d'emploi
+
+Notre entreprise cherche un professeur ou une professeuse.
+Vous travaillez du lundi au vendredi. Les horaires sont de 8 h à 16 h.
+Le lieu de travail est au école. Il est à côté de la bibliothèque.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_11 = buildExpressPool("e3-3-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Professeur", "pilote", "astronaute"],
+    textC: 0,
+    img: ["professeur", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "professeur",
+    vfQ: "Poste : professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au vendredi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 16 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 8 h à _________.",
+    fill: "16",
+    vfQ: "Horaires : 8 h – 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["École", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "école",
+    vfQ: "Lieu : école.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Bibliothèque", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "bibliothèque",
+    vfQ: "À côté de la bibliothèque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Offre d'emploi
+
+Notre entreprise cherche un pharmacien ou une pharmacienne.
+Vous travaillez du lundi au samedi. Les horaires sont de 8 h 30 à 18 h 30.
+Le lieu de travail est au pharmacie. Il est à côté de la hôpital.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_12 = buildExpressPool("e3-3-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Pharmacien", "pilote", "astronaute"],
+    textC: 0,
+    img: ["pharmacien", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "pharmacien",
+    vfQ: "Poste : pharmacien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au samedi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h 30 à 18 h 30", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 8 h 30 à _________.",
+    fill: "18",
+    vfQ: "Horaires : 8 h 30 – 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Pharmacie", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "pharmacie",
+    vfQ: "Lieu : pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Hôpital", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "hôpital",
+    vfQ: "À côté de la hôpital.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Offre d'emploi
+
+Notre entreprise cherche un journaliste ou une journalistee.
+Vous travaillez du lundi au vendredi. Les horaires sont de 9 h à 18 h.
+Le lieu de travail est au journal. Il est à côté de la radio.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_13 = buildExpressPool("e3-3-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Journaliste", "pilote", "astronaute"],
+    textC: 0,
+    img: ["journaliste", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "journaliste",
+    vfQ: "Poste : journaliste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au vendredi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 9 h à 18 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 9 h à _________.",
+    fill: "18",
+    vfQ: "Horaires : 9 h – 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Journal", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "journal",
+    vfQ: "Lieu : journal.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Radio", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "radio",
+    vfQ: "À côté de la radio.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Offre d'emploi
+
+Notre entreprise cherche un plombier ou une plombière.
+Vous travaillez du lundi au vendredi. Les horaires sont de 7 h 30 à 17 h 30.
+Le lieu de travail est au entreprise. Il est à côté de la magasin.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_14 = buildExpressPool("e3-3-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Plombier", "pilote", "astronaute"],
+    textC: 0,
+    img: ["plombier", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "plombier",
+    vfQ: "Poste : plombier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au vendredi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 7 h 30 à 17 h 30", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 7 h 30 à _________.",
+    fill: "17",
+    vfQ: "Horaires : 7 h 30 – 17 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Entreprise", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "entreprise",
+    vfQ: "Lieu : entreprise.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Magasin", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "magasin",
+    vfQ: "À côté de la magasin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Offre d'emploi
+
+Notre entreprise cherche un dentiste ou une dentistee.
+Vous travaillez du mardi au samedi. Les horaires sont de 8 h à 18 h.
+Le lieu de travail est au cabinet. Il est à côté de la hôpital.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_15 = buildExpressPool("e3-3-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Dentiste", "pilote", "astronaute"],
+    textC: 0,
+    img: ["dentiste", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "dentiste",
+    vfQ: "Poste : dentiste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mardi au samedi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mardi",
+    vfQ: "Travail du mardi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 8 h à _________.",
+    fill: "18",
+    vfQ: "Horaires : 8 h – 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Cabinet", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "cabinet",
+    vfQ: "Lieu : cabinet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Hôpital", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "hôpital",
+    vfQ: "À côté de la hôpital.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Offre d'emploi
+
+Notre entreprise cherche un électricien ou une électricienne.
+Vous travaillez du lundi au vendredi. Les horaires sont de 7 h à 17 h.
+Le lieu de travail est au entreprise. Il est à côté de la chantier.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_16 = buildExpressPool("e3-3-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Électricien", "pilote", "astronaute"],
+    textC: 0,
+    img: ["électricien", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "électricien",
+    vfQ: "Poste : électricien.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au vendredi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 7 h à 17 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 7 h à _________.",
+    fill: "17",
+    vfQ: "Horaires : 7 h – 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Entreprise", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "entreprise",
+    vfQ: "Lieu : entreprise.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Chantier", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "chantier",
+    vfQ: "À côté de la chantier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Offre d'emploi
+
+Notre entreprise cherche un libraire ou une librairee.
+Vous travaillez du mardi au samedi. Les horaires sont de 9 h 30 à 18 h 30.
+Le lieu de travail est au librairie. Il est à côté de la école.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_17 = buildExpressPool("e3-3-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Libraire", "pilote", "astronaute"],
+    textC: 0,
+    img: ["libraire", "pilote", "astronaute"],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "libraire",
+    vfQ: "Poste : libraire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mardi au samedi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mardi",
+    vfQ: "Travail du mardi au samedi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 9 h 30 à 18 h 30", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 9 h 30 à _________.",
+    fill: "18",
+    vfQ: "Horaires : 9 h 30 – 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Librairie", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "librairie",
+    vfQ: "Lieu : librairie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["École", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "école",
+    vfQ: "À côté de la école.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Offre d'emploi
+
+Notre entreprise cherche un agent ou une agente.
+Vous travaillez du lundi au vendredi. Les horaires sont de 8 h 30 à 17 h 30.
+Le lieu de travail est au agence. Il est à côté de la banque.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_18 = buildExpressPool("e3-3-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Agent", "pilote", "astronaute"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "agent",
+    vfQ: "Poste : agent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au vendredi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h 30 à 17 h 30", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 8 h 30 à _________.",
+    fill: "17",
+    vfQ: "Horaires : 8 h 30 – 17 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Agence", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "agence",
+    vfQ: "Lieu : agence.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Banque", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "banque",
+    vfQ: "À côté de la banque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Offre d'emploi
+
+Notre entreprise cherche un caissier ou une caissière.
+Vous travaillez du mardi au dimanche. Les horaires sont de 9 h à 20 h.
+Le lieu de travail est au supermarché. Il est à côté de la boulangerie.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_19 = buildExpressPool("e3-3-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Caissier", "pilote", "astronaute"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "caissier",
+    vfQ: "Poste : caissier.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du mardi au dimanche", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "mardi",
+    vfQ: "Travail du mardi au dimanche.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 9 h à 20 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 9 h à _________.",
+    fill: "20",
+    vfQ: "Horaires : 9 h – 20 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Supermarché", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "supermarché",
+    vfQ: "Lieu : supermarché.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Boulangerie", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "boulangerie",
+    vfQ: "À côté de la boulangerie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Offre d'emploi
+
+Notre entreprise cherche un graphiste ou une graphistee.
+Vous travaillez du lundi au vendredi. Les horaires sont de 9 h à 18 h.
+Le lieu de travail est au studio. Il est à côté de la agence.
+Envoyez votre CV par e-mail.`;
+
+const CE_POOL_20 = buildExpressPool("e3-3-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel poste est proposé ?",
+    text: ["Graphiste", "pilote", "astronaute"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "On cherche un _________.",
+    fill: "graphiste",
+    vfQ: "Poste : graphiste.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels jours travaille-t-on ?",
+    text: ["Du lundi au vendredi", "Le dimanche seulement", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Du _________.",
+    fill: "lundi",
+    vfQ: "Travail du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 9 h à 18 h", "De minuit à 2 h", "De 20 h à 6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "De 9 h à _________.",
+    fill: "18",
+    vfQ: "Horaires : 9 h – 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où est le lieu de travail ?",
+    text: ["Studio", "à la plage", "dans l'espace"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Au _________.",
+    fill: "studio",
+    vfQ: "Lieu : studio.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qu'est-ce qui est à côté ?",
+    text: ["Agence", "un zoo", "un volcan"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À côté de la _________.",
+    fill: "agence",
+    vfQ: "À côté de la agence.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Comment postuler ?",
+    text: ["Par e-mail avec un CV", "Par téléphone seulement", "En personne sans CV"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Envoyez votre _________ par e-mail.",
+    fill: "CV",
+    vfQ: "Il faut envoyer un CV par e-mail.",
+    vfC: 0,
+  }),
+]);
+
+export const E3_3_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e3-3-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e3-3-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e3-3-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e3-3-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e3-3-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e3-3-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e3-3-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e3-3-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e3-3-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e3-3-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e3-3-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e3-3-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e3-3-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e3-3-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e3-3-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e3-3-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e3-3-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e3-3-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e3-3-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e3-3-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème travail) ─────────────────── */
 
@@ -306,6 +1961,196 @@ export const E3_3_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À tout à l'heure !" },
 ],
   },
+{
+  id: "e3-3-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-3-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : le travail.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le travail." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -404,4 +2249,134 @@ export const E3_3_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e3-3-pe-11",
+  title: "Texte sur le travail — variante 11",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-12",
+  title: "Texte sur le travail — variante 12",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-13",
+  title: "Texte sur le travail — variante 13",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-14",
+  title: "Texte sur le travail — variante 14",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-15",
+  title: "Texte sur le travail — variante 15",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-16",
+  title: "Texte sur le travail — variante 16",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-17",
+  title: "Texte sur le travail — variante 17",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-18",
+  title: "Texte sur le travail — variante 18",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-19",
+  title: "Texte sur le travail — variante 19",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-3-pe-20",
+  title: "Texte sur le travail — variante 20",
+  situation: "Situation liée au thème « le travail ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le travail — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

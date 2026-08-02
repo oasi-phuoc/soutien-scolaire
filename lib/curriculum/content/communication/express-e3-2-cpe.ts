@@ -10,17 +10,17 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E3.2 Décrire son quotidien ────────────────────── */
+/* ── Compréhension écrite — E3.2 Décrire son quotidien ── */
 
-const CE_TEXT = `Le blog de Camille — Ma semaine
+const CE_TEXT_1 = `Le blog de Camille — Ma semaine
 
 Du lundi au vendredi, je me lève à 6 h 30. Je me douche et je m'habille. Je prends mon petit déjeuner : du pain et un café.
 Je commence le travail à 8 h 30. Je finis à 17 heures. Après, je fais les courses. Je rentre à la maison et je cuisine.
 Le soir, je me couche tôt, à 22 heures. Je n'aime pas être fatiguée.
 Le week-end, pas de réveil ! Je me lève à 10 heures et je me promène. Le dimanche, j'invite des amis à déjeuner.`;
 
-const CE_POOL = buildExpressPool("e3-2-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e3-2-1", [
+q({
     id: "ce-q1",
     textQ: "À quelle heure Camille se lève-t-elle en semaine ?",
     text: ["À 6 h 30", "À 8 h 30", "À 10 heures"],
@@ -106,11 +106,1647 @@ const CE_POOL = buildExpressPool("e3-2-ce", [
   }),
 ]);
 
-export const E3_2_CE: CommunicationExercise = readingPoolExercise({
-  id: "e3-2-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Blog — Ma semaine de Camille
+
+Du lundi au vendredi, je me lève à 6 h 30. Je commence le travail à 8 h 30.
+Je finis à 17 h. Le soir, je fais du courses.
+Je me couche à 22 h. Le week-end, je me lève à 10 h.`;
+
+const CE_POOL_2 = buildExpressPool("e3-2-2", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 30", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 30 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 30", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Courses", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "courses",
+    vfQ: "Activité du soir : courses.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["10 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "10",
+    vfQ: "Week-end : réveil à 10 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Blog — Ma semaine de Marc
+
+Du lundi au vendredi, je me lève à 7 h. Je commence le travail à 9 h.
+Je finis à 18 h. Le soir, je fais du sport.
+Je me couche à 23 h. Le week-end, je me lève à 9 h.`;
+
+const CE_POOL_3 = buildExpressPool("e3-2-3", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["9 h", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "9",
+    vfQ: "Le travail commence à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["18 h", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "18",
+    vfQ: "Le travail finit à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Sport", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "sport",
+    vfQ: "Activité du soir : sport.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["23 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "23",
+    vfQ: "Coucher à 23 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["9 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "9",
+    vfQ: "Week-end : réveil à 9 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Blog — Ma semaine de Nina
+
+Du lundi au vendredi, je me lève à 6 h. Je commence le travail à 8 h.
+Je finis à 16 h 30. Le soir, je fais du ménage.
+Je me couche à 21 h 30. Le week-end, je me lève à 11 h.`;
+
+const CE_POOL_4 = buildExpressPool("e3-2-4", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["16 h 30", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "16",
+    vfQ: "Le travail finit à 16 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Ménage", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "ménage",
+    vfQ: "Activité du soir : ménage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["21 h 30", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "21",
+    vfQ: "Coucher à 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["11 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "11",
+    vfQ: "Week-end : réveil à 11 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Blog — Ma semaine de Paul
+
+Du lundi au vendredi, je me lève à 6 h 45. Je commence le travail à 8 h 15.
+Je finis à 17 h 30. Le soir, je fais du lecture.
+Je me couche à 22 h 30. Le week-end, je me lève à 9 h 30.`;
+
+const CE_POOL_5 = buildExpressPool("e3-2-5", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 45", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 45 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 15", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h 30", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Lecture", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "lecture",
+    vfQ: "Activité du soir : lecture.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h 30", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["9 h 30", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "9",
+    vfQ: "Week-end : réveil à 9 h 30.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Blog — Ma semaine de Léa
+
+Du lundi au vendredi, je me lève à 7 h 15. Je commence le travail à 9 h 30.
+Je finis à 18 h 30. Le soir, je fais du amis.
+Je me couche à 23 h. Le week-end, je me lève à 10 h 30.`;
+
+const CE_POOL_6 = buildExpressPool("e3-2-6", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h 15", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h 15 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["9 h 30", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "9",
+    vfQ: "Le travail commence à 9 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["18 h 30", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "18",
+    vfQ: "Le travail finit à 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Amis", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "amis",
+    vfQ: "Activité du soir : amis.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["23 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "23",
+    vfQ: "Coucher à 23 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["10 h 30", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "10",
+    vfQ: "Week-end : réveil à 10 h 30.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Blog — Ma semaine de Tom
+
+Du lundi au vendredi, je me lève à 6 h 30. Je commence le travail à 8 h.
+Je finis à 17 h. Le soir, je fais du jardinage.
+Je me couche à 22 h. Le week-end, je me lève à 8 h.`;
+
+const CE_POOL_7 = buildExpressPool("e3-2-7", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 30", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 30 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Jardinage", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "jardinage",
+    vfQ: "Activité du soir : jardinage.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["8 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "8",
+    vfQ: "Week-end : réveil à 8 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Blog — Ma semaine de Sara
+
+Du lundi au vendredi, je me lève à 7 h. Je commence le travail à 8 h 45.
+Je finis à 16 h 45. Le soir, je fais du cinéma.
+Je me couche à 21 h. Le week-end, je me lève à 10 h.`;
+
+const CE_POOL_8 = buildExpressPool("e3-2-8", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 45", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8 45",
+    vfQ: "Le travail commence à 8 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["16 h 45", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "16",
+    vfQ: "Le travail finit à 16 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Cinéma", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "cinéma",
+    vfQ: "Activité du soir : cinéma.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["21 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "21",
+    vfQ: "Coucher à 21 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["10 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "10",
+    vfQ: "Week-end : réveil à 10 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Blog — Ma semaine de Noah
+
+Du lundi au vendredi, je me lève à 6 h 15. Je commence le travail à 8 h 30.
+Je finis à 17 h 15. Le soir, je fais du vélo.
+Je me couche à 22 h 15. Le week-end, je me lève à 9 h 15.`;
+
+const CE_POOL_9 = buildExpressPool("e3-2-9", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 15", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 15 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 30", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h 15", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Vélo", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "vélo",
+    vfQ: "Activité du soir : vélo.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h 15", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["9 h 15", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "9",
+    vfQ: "Week-end : réveil à 9 h 15.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Blog — Ma semaine de Emma
+
+Du lundi au vendredi, je me lève à 7 h 30. Je commence le travail à 9 h.
+Je finis à 18 h. Le soir, je fais du yoga.
+Je me couche à 23 h 30. Le week-end, je me lève à 11 h 30.`;
+
+const CE_POOL_10 = buildExpressPool("e3-2-10", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h 30", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h 30 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["9 h", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "9",
+    vfQ: "Le travail commence à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["18 h", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "18",
+    vfQ: "Le travail finit à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Yoga", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "yoga",
+    vfQ: "Activité du soir : yoga.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["23 h 30", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "23",
+    vfQ: "Coucher à 23 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["11 h 30", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "11",
+    vfQ: "Week-end : réveil à 11 h 30.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Blog — Ma semaine de Lucas
+
+Du lundi au vendredi, je me lève à 6 h 45. Je commence le travail à 8 h 15.
+Je finis à 17 h 45. Le soir, je fais du musique.
+Je me couche à 22 h 45. Le week-end, je me lève à 9 h 45.`;
+
+const CE_POOL_11 = buildExpressPool("e3-2-11", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 45", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 45 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 15", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h 45", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Musique", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "musique",
+    vfQ: "Activité du soir : musique.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h 45", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["9 h 45", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "9",
+    vfQ: "Week-end : réveil à 9 h 45.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Blog — Ma semaine de Inès
+
+Du lundi au vendredi, je me lève à 7 h. Je commence le travail à 8 h 30.
+Je finis à 16 h 30. Le soir, je fais du cuisine.
+Je me couche à 21 h 30. Le week-end, je me lève à 10 h.`;
+
+const CE_POOL_12 = buildExpressPool("e3-2-12", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 30", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["16 h 30", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "16",
+    vfQ: "Le travail finit à 16 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Cuisine", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "cuisine",
+    vfQ: "Activité du soir : cuisine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["21 h 30", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "21",
+    vfQ: "Coucher à 21 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["10 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "10",
+    vfQ: "Week-end : réveil à 10 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Blog — Ma semaine de Hugo
+
+Du lundi au vendredi, je me lève à 6 h 30. Je commence le travail à 8 h.
+Je finis à 17 h. Le soir, je fais du football.
+Je me couche à 22 h. Le week-end, je me lève à 8 h 30.`;
+
+const CE_POOL_13 = buildExpressPool("e3-2-13", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 30", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 30 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Football", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "football",
+    vfQ: "Activité du soir : football.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["8 h 30", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "8",
+    vfQ: "Week-end : réveil à 8 h 30.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Blog — Ma semaine de Mila
+
+Du lundi au vendredi, je me lève à 7 h 15. Je commence le travail à 9 h 15.
+Je finis à 18 h 15. Le soir, je fais du peinture.
+Je me couche à 23 h 15. Le week-end, je me lève à 10 h 15.`;
+
+const CE_POOL_14 = buildExpressPool("e3-2-14", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h 15", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h 15 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["9 h 15", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "9",
+    vfQ: "Le travail commence à 9 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["18 h 15", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "18",
+    vfQ: "Le travail finit à 18 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Peinture", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "peinture",
+    vfQ: "Activité du soir : peinture.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["23 h 15", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "23",
+    vfQ: "Coucher à 23 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["10 h 15", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "10",
+    vfQ: "Week-end : réveil à 10 h 15.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Blog — Ma semaine de Adam
+
+Du lundi au vendredi, je me lève à 6 h. Je commence le travail à 8 h 45.
+Je finis à 16 h 45. Le soir, je fais du natation.
+Je me couche à 21 h 45. Le week-end, je me lève à 9 h.`;
+
+const CE_POOL_15 = buildExpressPool("e3-2-15", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 45", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8 45",
+    vfQ: "Le travail commence à 8 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["16 h 45", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "16",
+    vfQ: "Le travail finit à 16 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Natation", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "natation",
+    vfQ: "Activité du soir : natation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["21 h 45", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "21",
+    vfQ: "Coucher à 21 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["9 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "9",
+    vfQ: "Week-end : réveil à 9 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Blog — Ma semaine de Zoé
+
+Du lundi au vendredi, je me lève à 7 h 30. Je commence le travail à 9 h 30.
+Je finis à 18 h 30. Le soir, je fais du danse.
+Je me couche à 22 h 30. Le week-end, je me lève à 11 h.`;
+
+const CE_POOL_16 = buildExpressPool("e3-2-16", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h 30", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h 30 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["9 h 30", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "9",
+    vfQ: "Le travail commence à 9 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["18 h 30", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "18",
+    vfQ: "Le travail finit à 18 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Danse", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "danse",
+    vfQ: "Activité du soir : danse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h 30", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["11 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "11",
+    vfQ: "Week-end : réveil à 11 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Blog — Ma semaine de Yann
+
+Du lundi au vendredi, je me lève à 6 h 45. Je commence le travail à 8 h 15.
+Je finis à 17 h 15. Le soir, je fais du photo.
+Je me couche à 22 h 15. Le week-end, je me lève à 9 h 30.`;
+
+const CE_POOL_17 = buildExpressPool("e3-2-17", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 45", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 45 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 15", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h 15", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Photo", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "photo",
+    vfQ: "Activité du soir : photo.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h 15", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["9 h 30", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "9",
+    vfQ: "Week-end : réveil à 9 h 30.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Blog — Ma semaine de Clara
+
+Du lundi au vendredi, je me lève à 7 h. Je commence le travail à 8 h 30.
+Je finis à 17 h 30. Le soir, je fais du théâtre.
+Je me couche à 23 h. Le week-end, je me lève à 10 h 30.`;
+
+const CE_POOL_18 = buildExpressPool("e3-2-18", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h 30", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["17 h 30", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "17",
+    vfQ: "Le travail finit à 17 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Théâtre", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "théâtre",
+    vfQ: "Activité du soir : théâtre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["23 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "23",
+    vfQ: "Coucher à 23 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["10 h 30", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "10",
+    vfQ: "Week-end : réveil à 10 h 30.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Blog — Ma semaine de Omar
+
+Du lundi au vendredi, je me lève à 6 h 30. Je commence le travail à 8 h.
+Je finis à 16 h. Le soir, je fais du course.
+Je me couche à 21 h. Le week-end, je me lève à 8 h.`;
+
+const CE_POOL_19 = buildExpressPool("e3-2-19", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["6 h 30", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "6",
+    vfQ: "Réveil à 6 h 30 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["8 h", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "8",
+    vfQ: "Le travail commence à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["16 h", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "16",
+    vfQ: "Le travail finit à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Course", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "course",
+    vfQ: "Activité du soir : course.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["21 h", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "21",
+    vfQ: "Coucher à 21 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["8 h", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "8",
+    vfQ: "Week-end : réveil à 8 h.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Blog — Ma semaine de Nadia
+
+Du lundi au vendredi, je me lève à 7 h 15. Je commence le travail à 9 h.
+Je finis à 18 h. Le soir, je fais du famille.
+Je me couche à 22 h 45. Le week-end, je me lève à 11 h 15.`;
+
+const CE_POOL_20 = buildExpressPool("e3-2-20", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure se lève-t-on en semaine ?",
+    text: ["7 h 15", "midi", "14 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me lève à _________.",
+    fill: "7",
+    vfQ: "Réveil à 7 h 15 en semaine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure commence le travail ?",
+    text: ["9 h", "minuit", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je commence le travail à _________.",
+    fill: "9",
+    vfQ: "Le travail commence à 9 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "À quelle heure finit le travail ?",
+    text: ["18 h", "8 h", "10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je finis à _________.",
+    fill: "18",
+    vfQ: "Le travail finit à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quelle activité le soir ?",
+    text: ["Famille", "ski", "plongée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je fais du _________.",
+    fill: "famille",
+    vfQ: "Activité du soir : famille.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "À quelle heure se couche-t-on ?",
+    text: ["22 h 45", "6 h", "8 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Je me couche à _________.",
+    fill: "22",
+    vfQ: "Coucher à 22 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "À quelle heure le week-end ?",
+    text: ["11 h 15", "5 h", "6 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le week-end, je me lève à _________.",
+    fill: "11",
+    vfQ: "Week-end : réveil à 11 h 15.",
+    vfC: 0,
+  }),
+]);
+
+export const E3_2_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e3-2-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e3-2-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e3-2-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e3-2-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e3-2-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e3-2-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e3-2-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e3-2-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e3-2-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e3-2-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e3-2-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e3-2-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e3-2-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e3-2-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e3-2-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e3-2-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e3-2-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e3-2-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e3-2-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e3-2-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème quotidien) ───────────────── */
 
@@ -308,6 +1944,196 @@ export const E3_2_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+{
+  id: "e3-2-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-2-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : le quotidien.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de le quotidien." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -406,4 +2232,134 @@ export const E3_2_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e3-2-pe-11",
+  title: "Texte sur le quotidien — variante 11",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-12",
+  title: "Texte sur le quotidien — variante 12",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-13",
+  title: "Texte sur le quotidien — variante 13",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-14",
+  title: "Texte sur le quotidien — variante 14",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-15",
+  title: "Texte sur le quotidien — variante 15",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-16",
+  title: "Texte sur le quotidien — variante 16",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-17",
+  title: "Texte sur le quotidien — variante 17",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-18",
+  title: "Texte sur le quotidien — variante 18",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-19",
+  title: "Texte sur le quotidien — variante 19",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-2-pe-20",
+  title: "Texte sur le quotidien — variante 20",
+  situation: "Situation liée au thème « le quotidien ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur le quotidien — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];

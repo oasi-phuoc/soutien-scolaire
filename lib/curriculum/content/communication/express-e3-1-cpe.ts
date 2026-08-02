@@ -10,9 +10,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E3.1 Aller à l'école ──────────────────────────── */
+/* ── Compréhension écrite — E3.1 Aller à l'école ── */
 
-const CE_TEXT = `Bienvenue à la faculté des lettres !
+const CE_TEXT_1 = `Bienvenue à la faculté des lettres !
 
 Informations pour les nouveaux étudiants :
 Le secrétariat est ouvert du lundi au vendredi. Il est ouvert de 9 h à 12 h. Venez chercher votre carte d'étudiant. Apportez une photo et le formulaire de demande.
@@ -20,8 +20,8 @@ Avec la carte, vous entrez à la faculté. Vous pouvez emprunter des livres à l
 Les cours commencent lundi 15 septembre. Le cours d'économie a lieu dans l'amphi A12. Il commence à 9 heures.
 Vous avez une question ? L'association des étudiants vous aide dans la salle 20. C'est à côté de la bibliothèque.`;
 
-const CE_POOL = buildExpressPool("e3-1-ce", [
-  q({
+const CE_POOL_1 = buildExpressPool("e3-1-1", [
+q({
     id: "ce-q1",
     textQ: "Quels jours le secrétariat est-il ouvert ?",
     text: ["Du lundi au vendredi", "Tous les jours", "Le week-end seulement"],
@@ -105,11 +105,1704 @@ const CE_POOL = buildExpressPool("e3-1-ce", [
   }),
 ]);
 
-export const E3_1_CE: CommunicationExercise = readingPoolExercise({
-  id: "e3-1-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const CE_TEXT_2 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 15. Le premier cours est maths en salle 12.
+À midi, les élèves mangent à la cantine. L'après-midi, il y a cours.
+La bibliothèque et le bibliothèque sont ouverts après les cours jusqu'à 15 h 30.
+Cordialement,
+L'école`;
+
+const CE_POOL_2 = buildExpressPool("e3-1-2", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 15", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Maths", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "maths",
+    vfQ: "Le premier cours est maths.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 12", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 12",
+    vfQ: "Le cours est en salle 12.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cantine", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cantine",
+    vfQ: "Les élèves mangent à la cantine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h 30", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Bibliothèque", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "bibliothèque",
+    vfQ: "Le bibliothèque est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_3 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h. Le premier cours est français en salle 3.
+À midi, les élèves mangent à la cour. L'après-midi, il y a cours.
+La bibliothèque et le gymnase sont ouverts après les cours jusqu'à 16 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_3 = buildExpressPool("e3-1-3", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Français", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "français",
+    vfQ: "Le premier cours est français.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 3", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 3",
+    vfQ: "Le cours est en salle 3.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cour", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cour",
+    vfQ: "Les élèves mangent à la cour.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Gymnase", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "gymnase",
+    vfQ: "Le gymnase est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_4 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 30. Le premier cours est histoire en salle 7.
+À midi, les élèves mangent à la réfectoire. L'après-midi, il y a cours.
+La bibliothèque et le labo sont ouverts après les cours jusqu'à 15 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_4 = buildExpressPool("e3-1-4", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 30", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Histoire", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "histoire",
+    vfQ: "Le premier cours est histoire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 7", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 7",
+    vfQ: "Le cours est en salle 7.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Réfectoire", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "réfectoire",
+    vfQ: "Les élèves mangent à la réfectoire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Labo", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "labo",
+    vfQ: "Le labo est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_5 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 7 h 45. Le premier cours est sciences en salle 5.
+À midi, les élèves mangent à la cantine. L'après-midi, il y a cours.
+La bibliothèque et le bibliothèque sont ouverts après les cours jusqu'à 16 h 15.
+Cordialement,
+L'école`;
+
+const CE_POOL_5 = buildExpressPool("e3-1-5", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["7 h 45", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "7",
+    vfQ: "Les cours commencent à 7 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Sciences", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "sciences",
+    vfQ: "Le premier cours est sciences.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 5", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 5",
+    vfQ: "Le cours est en salle 5.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cantine", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cantine",
+    vfQ: "Les élèves mangent à la cantine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h 15", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Bibliothèque", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "bibliothèque",
+    vfQ: "Le bibliothèque est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_6 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h. Le premier cours est anglais en salle 9.
+À midi, les élèves mangent à la cour. L'après-midi, il y a cours.
+La bibliothèque et le salle info sont ouverts après les cours jusqu'à 15 h 45.
+Cordialement,
+L'école`;
+
+const CE_POOL_6 = buildExpressPool("e3-1-6", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Anglais", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "anglais",
+    vfQ: "Le premier cours est anglais.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 9", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 9",
+    vfQ: "Le cours est en salle 9.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cour", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cour",
+    vfQ: "Les élèves mangent à la cour.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h 45", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Salle info", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "salle info",
+    vfQ: "Le salle info est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_7 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 15. Le premier cours est sport en gymnase.
+À midi, les élèves mangent à la vestiaire. L'après-midi, il y a cours.
+La bibliothèque et le bibliothèque sont ouverts après les cours jusqu'à 16 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_7 = buildExpressPool("e3-1-7", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 15", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Sport", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "sport",
+    vfQ: "Le premier cours est sport.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Gymnase", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "gymnase",
+    vfQ: "Le cours est en gymnase.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Vestiaire", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "vestiaire",
+    vfQ: "Les élèves mangent à la vestiaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Bibliothèque", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "bibliothèque",
+    vfQ: "Le bibliothèque est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_8 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 30. Le premier cours est arts en salle 2.
+À midi, les élèves mangent à la cantine. L'après-midi, il y a cours.
+La bibliothèque et le labo sont ouverts après les cours jusqu'à 15 h 30.
+Cordialement,
+L'école`;
+
+const CE_POOL_8 = buildExpressPool("e3-1-8", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 30", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Arts", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "arts",
+    vfQ: "Le premier cours est arts.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 2", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 2",
+    vfQ: "Le cours est en salle 2.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cantine", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cantine",
+    vfQ: "Les élèves mangent à la cantine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h 30", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Labo", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "labo",
+    vfQ: "Le labo est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_9 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h. Le premier cours est géographie en salle 11.
+À midi, les élèves mangent à la cour. L'après-midi, il y a cours.
+La bibliothèque et le CDI sont ouverts après les cours jusqu'à 16 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_9 = buildExpressPool("e3-1-9", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Géographie", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "géographie",
+    vfQ: "Le premier cours est géographie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 11", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 11",
+    vfQ: "Le cours est en salle 11.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cour", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cour",
+    vfQ: "Les élèves mangent à la cour.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Cdi", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "CDI",
+    vfQ: "Le CDI est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_10 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 7 h 50. Le premier cours est musique en salle 4.
+À midi, les élèves mangent à la réfectoire. L'après-midi, il y a cours.
+La bibliothèque et le gymnase sont ouverts après les cours jusqu'à 15 h 15.
+Cordialement,
+L'école`;
+
+const CE_POOL_10 = buildExpressPool("e3-1-10", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["7 h 50", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "7 50",
+    vfQ: "Les cours commencent à 7 h 50.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Musique", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "musique",
+    vfQ: "Le premier cours est musique.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 4", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 4",
+    vfQ: "Le cours est en salle 4.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Réfectoire", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "réfectoire",
+    vfQ: "Les élèves mangent à la réfectoire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h 15", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Gymnase", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "gymnase",
+    vfQ: "Le gymnase est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_11 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 15. Le premier cours est technologie en salle 8.
+À midi, les élèves mangent à la cantine. L'après-midi, il y a cours.
+La bibliothèque et le atelier sont ouverts après les cours jusqu'à 16 h 30.
+Cordialement,
+L'école`;
+
+const CE_POOL_11 = buildExpressPool("e3-1-11", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 15", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Technologie", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "technologie",
+    vfQ: "Le premier cours est technologie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 8", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 8",
+    vfQ: "Le cours est en salle 8.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cantine", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cantine",
+    vfQ: "Les élèves mangent à la cantine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h 30", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Atelier", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "atelier",
+    vfQ: "Le atelier est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_12 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h. Le premier cours est allemand en salle 6.
+À midi, les élèves mangent à la cour. L'après-midi, il y a cours.
+La bibliothèque et le bibliothèque sont ouverts après les cours jusqu'à 15 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_12 = buildExpressPool("e3-1-12", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Allemand", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "allemand",
+    vfQ: "Le premier cours est allemand.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 6", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 6",
+    vfQ: "Le cours est en salle 6.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cour", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cour",
+    vfQ: "Les élèves mangent à la cour.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Bibliothèque", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "bibliothèque",
+    vfQ: "Le bibliothèque est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_13 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 30. Le premier cours est EPS en stade.
+À midi, les élèves mangent à la vestiaire. L'après-midi, il y a cours.
+La bibliothèque et le gymnase sont ouverts après les cours jusqu'à 16 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_13 = buildExpressPool("e3-1-13", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 30", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Eps", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "EPS",
+    vfQ: "Le premier cours est EPS.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Stade", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "stade",
+    vfQ: "Le cours est en stade.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Vestiaire", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "vestiaire",
+    vfQ: "Les élèves mangent à la vestiaire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Gymnase", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "gymnase",
+    vfQ: "Le gymnase est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_14 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h. Le premier cours est philosophie en salle 10.
+À midi, les élèves mangent à la cantine. L'après-midi, il y a cours.
+La bibliothèque et le CDI sont ouverts après les cours jusqu'à 15 h 45.
+Cordialement,
+L'école`;
+
+const CE_POOL_14 = buildExpressPool("e3-1-14", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Philosophie", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "philosophie",
+    vfQ: "Le premier cours est philosophie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 10", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 10",
+    vfQ: "Le cours est en salle 10.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cantine", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cantine",
+    vfQ: "Les élèves mangent à la cantine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h 45", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Cdi", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "CDI",
+    vfQ: "Le CDI est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_15 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 7 h 45. Le premier cours est informatique en salle info.
+À midi, les élèves mangent à la cour. L'après-midi, il y a cours.
+La bibliothèque et le labo sont ouverts après les cours jusqu'à 16 h 15.
+Cordialement,
+L'école`;
+
+const CE_POOL_15 = buildExpressPool("e3-1-15", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["7 h 45", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "7",
+    vfQ: "Les cours commencent à 7 h 45.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Informatique", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "informatique",
+    vfQ: "Le premier cours est informatique.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle info", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle info",
+    vfQ: "Le cours est en salle info.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cour", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cour",
+    vfQ: "Les élèves mangent à la cour.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h 15", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Labo", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "labo",
+    vfQ: "Le labo est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_16 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 15. Le premier cours est biologie en labo.
+À midi, les élèves mangent à la réfectoire. L'après-midi, il y a cours.
+La bibliothèque et le bibliothèque sont ouverts après les cours jusqu'à 15 h 30.
+Cordialement,
+L'école`;
+
+const CE_POOL_16 = buildExpressPool("e3-1-16", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 15", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Biologie", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "biologie",
+    vfQ: "Le premier cours est biologie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Labo", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "labo",
+    vfQ: "Le cours est en labo.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Réfectoire", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "réfectoire",
+    vfQ: "Les élèves mangent à la réfectoire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h 30", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Bibliothèque", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "bibliothèque",
+    vfQ: "Le bibliothèque est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_17 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h. Le premier cours est économie en salle 1.
+À midi, les élèves mangent à la cantine. L'après-midi, il y a cours.
+La bibliothèque et le CDI sont ouverts après les cours jusqu'à 16 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_17 = buildExpressPool("e3-1-17", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Économie", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "économie",
+    vfQ: "Le premier cours est économie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 1", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 1",
+    vfQ: "Le cours est en salle 1.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cantine", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cantine",
+    vfQ: "Les élèves mangent à la cantine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Cdi", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "CDI",
+    vfQ: "Le CDI est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_18 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h 30. Le premier cours est latin en salle 14.
+À midi, les élèves mangent à la cour. L'après-midi, il y a cours.
+La bibliothèque et le bibliothèque sont ouverts après les cours jusqu'à 15 h.
+Cordialement,
+L'école`;
+
+const CE_POOL_18 = buildExpressPool("e3-1-18", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h 30", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Latin", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "latin",
+    vfQ: "Le premier cours est latin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 14", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 14",
+    vfQ: "Le cours est en salle 14.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cour", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cour",
+    vfQ: "Les élèves mangent à la cour.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Bibliothèque", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "bibliothèque",
+    vfQ: "Le bibliothèque est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_19 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 8 h. Le premier cours est chimie en labo.
+À midi, les élèves mangent à la cantine. L'après-midi, il y a cours.
+La bibliothèque et le salle info sont ouverts après les cours jusqu'à 16 h 30.
+Cordialement,
+L'école`;
+
+const CE_POOL_19 = buildExpressPool("e3-1-19", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["8 h", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "8",
+    vfQ: "Les cours commencent à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Chimie", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "chimie",
+    vfQ: "Le premier cours est chimie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Labo", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "labo",
+    vfQ: "Le cours est en labo.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Cantine", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "cantine",
+    vfQ: "Les élèves mangent à la cantine.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["16 h 30", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "16",
+    vfQ: "Ouvert jusqu'à 16 h 30.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Salle info", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "salle info",
+    vfQ: "Le salle info est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+const CE_TEXT_20 = `Note de l'école
+
+Bonjour,
+Les cours commencent à 7 h 50. Le premier cours est théâtre en salle 13.
+À midi, les élèves mangent à la réfectoire. L'après-midi, il y a cours.
+La bibliothèque et le gymnase sont ouverts après les cours jusqu'à 15 h 15.
+Cordialement,
+L'école`;
+
+const CE_POOL_20 = buildExpressPool("e3-1-20", [
+  q({
+    id: "ce-q1",
+    textQ: "À quelle heure commencent les cours ?",
+    text: ["7 h 50", "10 h", "midi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les cours commencent à _________.",
+    fill: "7 50",
+    vfQ: "Les cours commencent à 7 h 50.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est le premier cours ?",
+    text: ["Théâtre", "danse", "cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le premier cours est _________.",
+    fill: "théâtre",
+    vfQ: "Le premier cours est théâtre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où a lieu le premier cours ?",
+    text: ["Salle 13", "au parc", "à la plage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En _________.",
+    fill: "salle 13",
+    vfQ: "Le cours est en salle 13.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Où mangent les élèves à midi ?",
+    text: ["Réfectoire", "au cinéma", "à la gare"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "À la _________.",
+    fill: "réfectoire",
+    vfQ: "Les élèves mangent à la réfectoire.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Jusqu'à quelle heure la bibliothèque est-elle ouverte ?",
+    text: ["15 h 15", "8 h", "20 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Ouverts jusqu'à _________.",
+    fill: "15",
+    vfQ: "Ouvert jusqu'à 15 h 15.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel lieu est ouvert après les cours ?",
+    text: ["Gymnase", "la piscine", "le zoo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ est ouvert.",
+    fill: "gymnase",
+    vfQ: "Le gymnase est ouvert.",
+    vfC: 0,
+  }),
+]);
+
+export const E3_1_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+  id: "e3-1-1",
+  readingText: CE_TEXT_1,
+  questionPool: CE_POOL_1
+}),
+  readingPoolExercise({
+  id: "e3-1-2",
+  readingText: CE_TEXT_2,
+  questionPool: CE_POOL_2
+}),
+  readingPoolExercise({
+  id: "e3-1-3",
+  readingText: CE_TEXT_3,
+  questionPool: CE_POOL_3
+}),
+  readingPoolExercise({
+  id: "e3-1-4",
+  readingText: CE_TEXT_4,
+  questionPool: CE_POOL_4
+}),
+  readingPoolExercise({
+  id: "e3-1-5",
+  readingText: CE_TEXT_5,
+  questionPool: CE_POOL_5
+}),
+  readingPoolExercise({
+  id: "e3-1-6",
+  readingText: CE_TEXT_6,
+  questionPool: CE_POOL_6
+}),
+  readingPoolExercise({
+  id: "e3-1-7",
+  readingText: CE_TEXT_7,
+  questionPool: CE_POOL_7
+}),
+  readingPoolExercise({
+  id: "e3-1-8",
+  readingText: CE_TEXT_8,
+  questionPool: CE_POOL_8
+}),
+  readingPoolExercise({
+  id: "e3-1-9",
+  readingText: CE_TEXT_9,
+  questionPool: CE_POOL_9
+}),
+  readingPoolExercise({
+  id: "e3-1-10",
+  readingText: CE_TEXT_10,
+  questionPool: CE_POOL_10
+}),
+  readingPoolExercise({
+  id: "e3-1-11",
+  readingText: CE_TEXT_11,
+  questionPool: CE_POOL_11
+}),
+  readingPoolExercise({
+  id: "e3-1-12",
+  readingText: CE_TEXT_12,
+  questionPool: CE_POOL_12
+}),
+  readingPoolExercise({
+  id: "e3-1-13",
+  readingText: CE_TEXT_13,
+  questionPool: CE_POOL_13
+}),
+  readingPoolExercise({
+  id: "e3-1-14",
+  readingText: CE_TEXT_14,
+  questionPool: CE_POOL_14
+}),
+  readingPoolExercise({
+  id: "e3-1-15",
+  readingText: CE_TEXT_15,
+  questionPool: CE_POOL_15
+}),
+  readingPoolExercise({
+  id: "e3-1-16",
+  readingText: CE_TEXT_16,
+  questionPool: CE_POOL_16
+}),
+  readingPoolExercise({
+  id: "e3-1-17",
+  readingText: CE_TEXT_17,
+  questionPool: CE_POOL_17
+}),
+  readingPoolExercise({
+  id: "e3-1-18",
+  readingText: CE_TEXT_18,
+  questionPool: CE_POOL_18
+}),
+  readingPoolExercise({
+  id: "e3-1-19",
+  readingText: CE_TEXT_19,
+  questionPool: CE_POOL_19
+}),
+  readingPoolExercise({
+  id: "e3-1-20",
+  readingText: CE_TEXT_20,
+  questionPool: CE_POOL_20
+}),
+];
 
 /* ── Production orale — dialogues à jouer (thème école / université) ──────── */
 
@@ -309,6 +2002,196 @@ export const E3_1_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Super. À bientôt !" },
 ],
   },
+{
+  id: "e3-1-po-11",
+  title: "À la mairie",
+  context: "Situation : à la mairie. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-12",
+  title: "Au téléphone",
+  context: "Situation : au téléphone. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-13",
+  title: "Chez le voisin",
+  context: "Situation : chez le voisin. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-14",
+  title: "À l'accueil",
+  context: "Situation : à l'accueil. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-15",
+  title: "Dans la rue",
+  context: "Situation : dans la rue. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-16",
+  title: "Au bureau",
+  context: "Situation : au bureau. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-17",
+  title: "À la réception",
+  context: "Situation : à la réception. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-18",
+  title: "En visio",
+  context: "Situation : en visio. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-19",
+  title: "Au guichet",
+  context: "Situation : au guichet. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+},
+{
+  id: "e3-1-po-20",
+  title: "Dans un magasin",
+  context: "Situation : dans un magasin. Thème : l'école.",
+  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
+  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  lines: [
+    { role: "A", text: "Bonjour, je peux vous aider ?" },
+    { role: "B", text: "Oui, bonjour. J'ai une question." },
+    { role: "A", text: "Bien sûr. Dites-moi tout." },
+    { role: "B", text: "C'est au sujet de l'école." },
+    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
+    { role: "B", text: "Oui, je voudrais plus d'informations." },
+    { role: "A", text: "Très bien, je note." },
+    { role: "B", text: "Merci beaucoup pour votre aide." },
+    { role: "A", text: "Ravi(e) de faire votre connaissance." },
+    { role: "B", text: "Moi aussi. À bientôt !" },
+  ],
+}
 ];
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
@@ -407,4 +2290,134 @@ export const E3_1_PE: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+{
+  id: "e3-1-pe-11",
+  title: "Texte sur l'école — variante 11",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 11.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-12",
+  title: "Texte sur l'école — variante 12",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 12.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-13",
+  title: "Texte sur l'école — variante 13",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 13.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-14",
+  title: "Texte sur l'école — variante 14",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 14.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-15",
+  title: "Texte sur l'école — variante 15",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 15.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-16",
+  title: "Texte sur l'école — variante 16",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 16.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-17",
+  title: "Texte sur l'école — variante 17",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 17.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-18",
+  title: "Texte sur l'école — variante 18",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 18.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-19",
+  title: "Texte sur l'école — variante 19",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 19.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+},
+{
+  id: "e3-1-pe-20",
+  title: "Texte sur l'école — variante 20",
+  situation: "Situation liée au thème « l'école ».",
+  instruction: "Écrivez un texte de 50 à 120 mots sur le thème : texte sur l'école — variante 20.",
+  points: [
+    "Votre introduction",
+    "Les détails importants",
+    "Une conclusion ou une question",
+  ],
+  minWords: PE_MIN,
+  maxWords: PE_MAX,
+}
 ];
