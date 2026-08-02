@@ -5,12 +5,6 @@ import {
 } from "./express-types";
 import { buildExpressPool, type ExpressRawQ } from "./express-listening-helpers";
 
-/**
- * E-mails E5 — Santé (médecin, pharmacie).
- * CE e-mail : un e-mail à lire + pool de questions (≥ 10).
- * PE e-mail : pool d'e-mails reçus auxquels répondre (≥ 10).
- */
-
 function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
@@ -18,11 +12,13 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const PE_MIN = 50;
 const PE_MAX = 120;
 
+
 /* ════════════════════════════════════════════════════════════════════════════
    E5.1 — Aller chez le médecin
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E5_1_CE_EMAIL_TEXT = `De : Cabinet médical du Dr Morel
+
+const E5_1_CE_EMAIL_TEXT_1 = `De : Cabinet médical du Dr Morel
 Objet : Confirmation de votre rendez-vous
 
 Bonjour,
@@ -36,8 +32,8 @@ Le secrétariat est ouvert du lundi au vendredi, de 8 h à 17 h.
 Cordialement,
 Le secrétariat du cabinet`;
 
-const E5_1_CE_EMAIL_POOL = buildExpressPool("e5-1-ce-email", [
-  q({
+const E5_1_CE_EMAIL_POOL_1 = buildExpressPool("e5-1-ce-email-1", [
+q({
     id: "cem-q1",
     textQ: "Quel jour est le rendez-vous ?",
     text: ["Le mardi 14 mars", "Le mercredi 15 mars", "Le vendredi 17 mars"],
@@ -173,15 +169,1767 @@ const E5_1_CE_EMAIL_POOL = buildExpressPool("e5-1-ce-email", [
   }),
 ]);
 
-export const E5_1_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e5-1-ce-email",
-  readingText: E5_1_CE_EMAIL_TEXT,
-  questionPool: E5_1_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E5_1_CE_EMAIL_TEXT_2 = `De : Dr Blanc
+Objet : Rappel de rendez-vous
+
+Bonjour,
+Nous vous rappelons votre rendez-vous du mercredi 8 mai à 15 h.
+Merci d'arriver dix minutes en avance.
+Apportez votre carte d'assurance.
+Le secrétariat
+
+Cordialement,
+Dr Blanc`;
+
+const E5_1_CE_EMAIL_POOL_2 = buildExpressPool("e5-1-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui envoie cet e-mail ?",
+    text: ["Blanc", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail vient de Blanc.",
+    fill: "Blanc",
+    vfQ: "Cet e-mail vient de Dr Blanc.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rappel de rendez-vous", "Vacances", "Fête"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'objet est : Rappel de rendez-vous.",
+    fill: "rappel",
+    vfQ: "L'objet de l'e-mail est « Rappel de rendez-vous ».",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "L'e-mail est-il une bonne nouvelle ?",
+    text: ["Oui, en général", "Non, c'est une mauvaise nouvelle", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail contient des informations _________.",
+    fill: "importantes",
+    vfQ: "L'e-mail est en français.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il répondre à cet e-mail ?",
+    text: ["Peut-être, selon le message", "Non, jamais", "Oui, toujours"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Lisez bien le message avant de _________.",
+    fill: "répondre",
+    vfQ: "Il faut toujours répondre immédiatement.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le message est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "C'est une blague"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le message utilise « Bonjour » et « Cordialement » : c'est _________.",
+    fill: "formel",
+    vfQ: "Le message est très familier.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il une date dans l'e-mail ?",
+    text: ["Oui ou non selon le message", "Toujours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vérifiez s'il y a une _________ dans le texte.",
+    fill: "date",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_3 = `De : Dr Blanc
+Objet : Résultats normaux
+
+Bonjour,
+Vos analyses sont normales. Pas d'inquiétude.
+Revenez nous voir dans six mois pour un contrôle.
+Dr Blanc
+
+Cordialement,
+Dr Blanc`;
+
+const E5_1_CE_EMAIL_POOL_3 = buildExpressPool("e5-1-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui envoie cet e-mail ?",
+    text: ["Blanc", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail vient de Blanc.",
+    fill: "Blanc",
+    vfQ: "Cet e-mail vient de Dr Blanc.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Résultats normaux", "Vacances", "Fête"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'objet est : Résultats normaux.",
+    fill: "résultats",
+    vfQ: "L'objet de l'e-mail est « Résultats normaux ».",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "L'e-mail est-il une bonne nouvelle ?",
+    text: ["Oui, en général", "Non, c'est une mauvaise nouvelle", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail contient des informations _________.",
+    fill: "importantes",
+    vfQ: "L'e-mail est en français.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il répondre à cet e-mail ?",
+    text: ["Peut-être, selon le message", "Non, jamais", "Oui, toujours"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Lisez bien le message avant de _________.",
+    fill: "répondre",
+    vfQ: "Il faut toujours répondre immédiatement.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le message est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "C'est une blague"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le message utilise « Bonjour » et « Cordialement » : c'est _________.",
+    fill: "formel",
+    vfQ: "Le message est très familier.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il une date dans l'e-mail ?",
+    text: ["Oui ou non selon le message", "Toujours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vérifiez s'il y a une _________ dans le texte.",
+    fill: "date",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_4 = `De : Cabinet SantéPlus
+Objet : Nouveau médecin
+
+Bonjour,
+Le Dr Martin rejoint notre cabinet à partir du 1er juin.
+Il reçoit les mardi et jeudi.
+Pour un rendez-vous, appelez-nous.
+Le secrétariat
+
+Cordialement,
+Cabinet SantéPlus`;
+
+const E5_1_CE_EMAIL_POOL_4 = buildExpressPool("e5-1-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui envoie cet e-mail ?",
+    text: ["Cabinet SantéPlus", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail vient de Cabinet SantéPlus.",
+    fill: "Cabinet",
+    vfQ: "Cet e-mail vient de Cabinet SantéPlus.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Nouveau médecin", "Vacances", "Fête"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'objet est : Nouveau médecin.",
+    fill: "nouveau",
+    vfQ: "L'objet de l'e-mail est « Nouveau médecin ».",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "L'e-mail est-il une bonne nouvelle ?",
+    text: ["Oui, en général", "Non, c'est une mauvaise nouvelle", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail contient des informations _________.",
+    fill: "importantes",
+    vfQ: "L'e-mail est en français.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il répondre à cet e-mail ?",
+    text: ["Peut-être, selon le message", "Non, jamais", "Oui, toujours"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Lisez bien le message avant de _________.",
+    fill: "répondre",
+    vfQ: "Il faut toujours répondre immédiatement.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le message est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "C'est une blague"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le message utilise « Bonjour » et « Cordialement » : c'est _________.",
+    fill: "formel",
+    vfQ: "Le message est très familier.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il une date dans l'e-mail ?",
+    text: ["Oui ou non selon le message", "Toujours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vérifiez s'il y a une _________ dans le texte.",
+    fill: "date",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_5 = `De : Dr Leroy
+Objet : Consultation reportée
+
+Bonjour,
+Votre rendez-vous de vendredi est reporté au lundi 12 mai à 9 h.
+Désolé pour ce changement.
+Dr Leroy
+
+Cordialement,
+Dr Leroy`;
+
+const E5_1_CE_EMAIL_POOL_5 = buildExpressPool("e5-1-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui envoie cet e-mail ?",
+    text: ["Leroy", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail vient de Leroy.",
+    fill: "Leroy",
+    vfQ: "Cet e-mail vient de Dr Leroy.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Consultation reportée", "Vacances", "Fête"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'objet est : Consultation reportée.",
+    fill: "consultation",
+    vfQ: "L'objet de l'e-mail est « Consultation reportée ».",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "L'e-mail est-il une bonne nouvelle ?",
+    text: ["Oui, en général", "Non, c'est une mauvaise nouvelle", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail contient des informations _________.",
+    fill: "importantes",
+    vfQ: "L'e-mail est en français.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il répondre à cet e-mail ?",
+    text: ["Peut-être, selon le message", "Non, jamais", "Oui, toujours"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Lisez bien le message avant de _________.",
+    fill: "répondre",
+    vfQ: "Il faut toujours répondre immédiatement.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le message est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "C'est une blague"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le message utilise « Bonjour » et « Cordialement » : c'est _________.",
+    fill: "formel",
+    vfQ: "Le message est très familier.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il une date dans l'e-mail ?",
+    text: ["Oui ou non selon le message", "Toujours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vérifiez s'il y a une _________ dans le texte.",
+    fill: "date",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_6 = `De : Infirmerie Collège
+Objet : Visite médicale
+
+Bonjour,
+La visite médicale obligatoire aura lieu le 20 mai à l'infirmerie.
+Merci d'apporter le carnet de santé de votre enfant.
+Mme Dubois, infirmière
+
+Cordialement,
+Infirmerie Collège`;
+
+const E5_1_CE_EMAIL_POOL_6 = buildExpressPool("e5-1-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Qui envoie cet e-mail ?",
+    text: ["Infirmerie Collège", "Marie", "Paul"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail vient de Infirmerie Collège.",
+    fill: "Infirmerie",
+    vfQ: "Cet e-mail vient de Infirmerie Collège.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Visite médicale", "Vacances", "Fête"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'objet est : Visite médicale.",
+    fill: "visite",
+    vfQ: "L'objet de l'e-mail est « Visite médicale ».",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "L'e-mail est-il une bonne nouvelle ?",
+    text: ["Oui, en général", "Non, c'est une mauvaise nouvelle", "On ne sait pas"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail contient des informations _________.",
+    fill: "importantes",
+    vfQ: "L'e-mail est en français.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Faut-il répondre à cet e-mail ?",
+    text: ["Peut-être, selon le message", "Non, jamais", "Oui, toujours"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Lisez bien le message avant de _________.",
+    fill: "répondre",
+    vfQ: "Il faut toujours répondre immédiatement.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Le message est-il formel ?",
+    text: ["Oui, assez formel", "Non, très familier", "C'est une blague"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le message utilise « Bonjour » et « Cordialement » : c'est _________.",
+    fill: "formel",
+    vfQ: "Le message est très familier.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Y a-t-il une date dans l'e-mail ?",
+    text: ["Oui ou non selon le message", "Toujours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vérifiez s'il y a une _________ dans le texte.",
+    fill: "date",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_7 = `De : Cabinet médical
+Objet : Information n°7
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_7 = buildExpressPool("e5-1-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_8 = `De : Cabinet médical
+Objet : Information n°8
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_8 = buildExpressPool("e5-1-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_9 = `De : Cabinet médical
+Objet : Information n°9
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_9 = buildExpressPool("e5-1-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_10 = `De : Cabinet médical
+Objet : Information n°10
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_10 = buildExpressPool("e5-1-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_11 = `De : Cabinet médical
+Objet : Information n°11
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_11 = buildExpressPool("e5-1-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_12 = `De : Cabinet médical
+Objet : Information n°12
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_12 = buildExpressPool("e5-1-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_13 = `De : Cabinet médical
+Objet : Information n°13
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_13 = buildExpressPool("e5-1-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_14 = `De : Cabinet médical
+Objet : Information n°14
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_14 = buildExpressPool("e5-1-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_15 = `De : Cabinet médical
+Objet : Information n°15
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_15 = buildExpressPool("e5-1-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_16 = `De : Cabinet médical
+Objet : Information n°16
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_16 = buildExpressPool("e5-1-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_17 = `De : Cabinet médical
+Objet : Information n°17
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_17 = buildExpressPool("e5-1-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_18 = `De : Cabinet médical
+Objet : Information n°18
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_18 = buildExpressPool("e5-1-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_19 = `De : Cabinet médical
+Objet : Information n°19
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_19 = buildExpressPool("e5-1-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_EMAIL_TEXT_20 = `De : Cabinet médical
+Objet : Information n°20
+
+Bonjour,
+Le cabinet sera fermé le jour férié du 1er mai.
+Pour une urgence, appelez le 144.
+Merci de votre compréhension.
+Le secrétariat`;
+
+const E5_1_CE_EMAIL_POOL_20 = buildExpressPool("e5-1-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Pourquoi le cabinet écrit-il ?",
+    text: ["Pour informer d'une fermeture", "Pour une fête", "Pour un voyage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera _________ le 1er mai.",
+    fill: "fermé",
+    vfQ: "Le cabinet est ouvert le 1er mai.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quel numéro pour une urgence ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence, appelez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Quel jour est concerné ?",
+    text: ["Le 1er mai", "Le 1er juin", "Le 25 décembre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet sera fermé le 1er _________.",
+    fill: "mai",
+    vfQ: "La fermeture est le 1er mai.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe l'e-mail ?",
+    text: ["Le secrétariat", "Un élève", "Un enfant"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "secrétariat",
+    fillA: ["secretariat"],
+    vfQ: "Le secrétariat signe l'e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Non, c'est une information", "Oui, obligatoirement", "Seulement par téléphone"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est une simple _________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le 144 est pour quoi ?",
+    text: ["Les urgences médicales", "La police", "La météo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le 144 est pour les urgences _________.",
+    fill: "médicales",
+    fillA: ["medicales", "sante"],
+    vfQ: "Le 144 est un numéro d'urgence.",
+    vfC: 0,
+  }),
+]);
+
+export const E5_1_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e5-1-ce-email-1",
+    readingText: E5_1_CE_EMAIL_TEXT_1,
+    questionPool: E5_1_CE_EMAIL_POOL_1,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-2",
+    readingText: E5_1_CE_EMAIL_TEXT_2,
+    questionPool: E5_1_CE_EMAIL_POOL_2,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-3",
+    readingText: E5_1_CE_EMAIL_TEXT_3,
+    questionPool: E5_1_CE_EMAIL_POOL_3,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-4",
+    readingText: E5_1_CE_EMAIL_TEXT_4,
+    questionPool: E5_1_CE_EMAIL_POOL_4,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-5",
+    readingText: E5_1_CE_EMAIL_TEXT_5,
+    questionPool: E5_1_CE_EMAIL_POOL_5,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-6",
+    readingText: E5_1_CE_EMAIL_TEXT_6,
+    questionPool: E5_1_CE_EMAIL_POOL_6,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-7",
+    readingText: E5_1_CE_EMAIL_TEXT_7,
+    questionPool: E5_1_CE_EMAIL_POOL_7,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-8",
+    readingText: E5_1_CE_EMAIL_TEXT_8,
+    questionPool: E5_1_CE_EMAIL_POOL_8,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-9",
+    readingText: E5_1_CE_EMAIL_TEXT_9,
+    questionPool: E5_1_CE_EMAIL_POOL_9,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-10",
+    readingText: E5_1_CE_EMAIL_TEXT_10,
+    questionPool: E5_1_CE_EMAIL_POOL_10,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-11",
+    readingText: E5_1_CE_EMAIL_TEXT_11,
+    questionPool: E5_1_CE_EMAIL_POOL_11,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-12",
+    readingText: E5_1_CE_EMAIL_TEXT_12,
+    questionPool: E5_1_CE_EMAIL_POOL_12,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-13",
+    readingText: E5_1_CE_EMAIL_TEXT_13,
+    questionPool: E5_1_CE_EMAIL_POOL_13,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-14",
+    readingText: E5_1_CE_EMAIL_TEXT_14,
+    questionPool: E5_1_CE_EMAIL_POOL_14,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-15",
+    readingText: E5_1_CE_EMAIL_TEXT_15,
+    questionPool: E5_1_CE_EMAIL_POOL_15,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-16",
+    readingText: E5_1_CE_EMAIL_TEXT_16,
+    questionPool: E5_1_CE_EMAIL_POOL_16,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-17",
+    readingText: E5_1_CE_EMAIL_TEXT_17,
+    questionPool: E5_1_CE_EMAIL_POOL_17,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-18",
+    readingText: E5_1_CE_EMAIL_TEXT_18,
+    questionPool: E5_1_CE_EMAIL_POOL_18,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-19",
+    readingText: E5_1_CE_EMAIL_TEXT_19,
+    questionPool: E5_1_CE_EMAIL_POOL_19,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-email-20",
+    readingText: E5_1_CE_EMAIL_TEXT_20,
+    questionPool: E5_1_CE_EMAIL_POOL_20,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+];
 
 export const E5_1_PE_EMAIL: ExpressPePrompt[] = [
-  {
+{
     id: "e5-1-pee-1",
     title: "Confirmer un rendez-vous",
     situation: "Le cabinet médical vous propose un rendez-vous par e-mail.",
@@ -321,13 +2069,155 @@ export const E5_1_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e5-1-pee-11",
+    title: "Question sur les horaires",
+    situation: "Le cabinet demande vos disponibilités.",
+    sourceMessage: {
+      from: "Secrétariat",
+      subject: "Vos disponibilités",
+      body: "Bonjour,\nPour votre rendez-vous, quels jours vous conviennent ?\nLe secrétariat",
+    },
+    instruction: "Répondez : donnez deux créneaux possibles et posez une question.",
+    points: ["Deux créneaux", "Une question", "Formule de politesse"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-12",
+    title: "Remercier le médecin",
+    situation: "Le médecin vous a aidé.",
+    sourceMessage: {
+      from: "Dr Martin",
+      subject: "Suivi",
+      body: "Bonjour,\nComment allez-vous après le traitement ?\nDr Martin",
+    },
+    instruction: "Remerciez-le et dites que vous allez mieux.",
+    points: ["Remerciement", "Votre état de santé", "Au revoir"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-13",
+    title: "Demander une ordonnance",
+    situation: "Vous avez besoin d'un renouvellement.",
+    sourceMessage: {
+      from: "Dr Leroy",
+      subject: "Ordonnance",
+      body: "Bonjour,\nAvez-vous encore besoin de vos comprimés ?\nDr Leroy",
+    },
+    instruction: "Expliquez pourquoi et demandez une ordonnance.",
+    points: ["Le médicament", "Pourquoi", "La demande"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-14",
+    title: "Prévenir d'un retard",
+    situation: "Vous serez en retard.",
+    sourceMessage: {
+      from: "Secrétariat",
+      subject: "Rendez-vous",
+      body: "Bonjour,\nVotre rendez-vous est à 14 h aujourd'hui.\nLe secrétariat",
+    },
+    instruction: "Excusez-vous et dites à quelle heure vous arrivez.",
+    points: ["L'excuse", "L'heure", "Politesse"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-15",
+    title: "Conseil à un parent",
+    situation: "Un parent demande conseil.",
+    sourceMessage: {
+      from: "Sofia",
+      subject: "Mon fils tousse",
+      body: "Bonjour,\nMon fils tousse depuis trois jours. Que faire ?\nSofia",
+    },
+    instruction: "Donnez deux conseils pour un enfant malade.",
+    points: ["Conseil 1", "Conseil 2", "Quand consulter"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-16",
+    title: "Confirmer une annulation",
+    situation: "Vous annulez votre rendez-vous.",
+    sourceMessage: {
+      from: "Secrétariat",
+      subject: "Annulation",
+      body: "Bonjour,\nConfirmez-vous l'annulation de demain ?\nLe secrétariat",
+    },
+    instruction: "Confirmez l'annulation et demandez un nouveau rendez-vous.",
+    points: ["L'annulation", "La raison", "Nouveau RDV"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-17",
+    title: "Question sur un vaccin",
+    situation: "Le cabinet propose un vaccin.",
+    sourceMessage: {
+      from: "Dr Blanc",
+      subject: "Vaccin grippe",
+      body: "Bonjour,\nVoulez-vous le vaccin contre la grippe ?\nDr Blanc",
+    },
+    instruction: "Posez trois questions sur le vaccin.",
+    points: ["Question 1", "Question 2", "Question 3"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-18",
+    title: "Informer son employeur",
+    situation: "Votre chef demande des nouvelles.",
+    sourceMessage: {
+      from: "M. Favre",
+      subject: "Absence",
+      body: "Bonjour,\nQuand revenez-vous au travail ?\nM. Favre",
+    },
+    instruction: "Dites que vous êtes malade et quand vous revenez.",
+    points: ["Votre maladie", "Le médecin", "Date de retour"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-19",
+    title: "Aider un ami",
+    situation: "Un ami ne veut pas aller chez le médecin.",
+    sourceMessage: {
+      from: "Karim",
+      subject: "Je n'aime pas les médecins",
+      body: "Salut,\nJe déteste aller chez le médecin !\nKarim",
+    },
+    instruction: "Convainquez-le d'y aller et proposez de l'accompagner.",
+    points: ["Pourquoi y aller", "Vos arguments", "Votre proposition"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pee-20",
+    title: "Demander des précisions",
+    situation: "Le médecin a donné des instructions.",
+    sourceMessage: {
+      from: "Dr Morel",
+      subject: "Votre traitement",
+      body: "Bonjour,\nPrenez un comprimé matin et soir.\nDr Morel",
+    },
+    instruction: "Demandez des précisions sur le traitement.",
+    points: ["Ce que vous avez compris", "Vos questions", "Remerciement"],
+    minWords: 50,
+    maxWords: 120,
+  },
 ];
+
 
 /* ════════════════════════════════════════════════════════════════════════════
    E5.2 — Aller à la pharmacie
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E5_2_CE_EMAIL_TEXT = `De : Pharmacie du Centre
+
+const E5_2_CE_EMAIL_TEXT_1 = `De : Pharmacie du Centre
 Objet : Votre commande est prête
 
 Bonjour,
@@ -342,8 +2232,8 @@ Si vous avez des questions, téléphonez-nous au 021 555 44 33.
 Avec nos meilleures salutations,
 Votre pharmacie`;
 
-const E5_2_CE_EMAIL_POOL = buildExpressPool("e5-2-ce-email", [
-  q({
+const E5_2_CE_EMAIL_POOL_1 = buildExpressPool("e5-2-ce-email-1", [
+q({
     id: "cem-q1",
     textQ: "Pourquoi la pharmacie écrit-elle cet e-mail ?",
     text: [
@@ -486,15 +2376,1765 @@ const E5_2_CE_EMAIL_POOL = buildExpressPool("e5-2-ce-email", [
   }),
 ]);
 
-export const E5_2_CE_EMAIL: CommunicationExercise = readingPoolExercise({
-  id: "e5-2-ce-email",
-  readingText: E5_2_CE_EMAIL_TEXT,
-  questionPool: E5_2_CE_EMAIL_POOL,
-  instruction: "Lisez l'e-mail et répondez aux questions.",
-});
+const E5_2_CE_EMAIL_TEXT_2 = `De : Service pharmacie
+Objet : Message 2
+
+Bonjour,
+Ceci est un message d'information n°2 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_2 = buildExpressPool("e5-2-ce-email-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_3 = `De : Service pharmacie
+Objet : Message 3
+
+Bonjour,
+Ceci est un message d'information n°3 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_3 = buildExpressPool("e5-2-ce-email-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_4 = `De : Service pharmacie
+Objet : Message 4
+
+Bonjour,
+Ceci est un message d'information n°4 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_4 = buildExpressPool("e5-2-ce-email-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_5 = `De : Service pharmacie
+Objet : Message 5
+
+Bonjour,
+Ceci est un message d'information n°5 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_5 = buildExpressPool("e5-2-ce-email-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_6 = `De : Service pharmacie
+Objet : Message 6
+
+Bonjour,
+Ceci est un message d'information n°6 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_6 = buildExpressPool("e5-2-ce-email-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_7 = `De : Service pharmacie
+Objet : Message 7
+
+Bonjour,
+Ceci est un message d'information n°7 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_7 = buildExpressPool("e5-2-ce-email-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_8 = `De : Service pharmacie
+Objet : Message 8
+
+Bonjour,
+Ceci est un message d'information n°8 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_8 = buildExpressPool("e5-2-ce-email-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_9 = `De : Service pharmacie
+Objet : Message 9
+
+Bonjour,
+Ceci est un message d'information n°9 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_9 = buildExpressPool("e5-2-ce-email-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_10 = `De : Service pharmacie
+Objet : Message 10
+
+Bonjour,
+Ceci est un message d'information n°10 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_10 = buildExpressPool("e5-2-ce-email-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_11 = `De : Service pharmacie
+Objet : Message 11
+
+Bonjour,
+Ceci est un message d'information n°11 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_11 = buildExpressPool("e5-2-ce-email-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_12 = `De : Service pharmacie
+Objet : Message 12
+
+Bonjour,
+Ceci est un message d'information n°12 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_12 = buildExpressPool("e5-2-ce-email-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_13 = `De : Service pharmacie
+Objet : Message 13
+
+Bonjour,
+Ceci est un message d'information n°13 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_13 = buildExpressPool("e5-2-ce-email-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_14 = `De : Service pharmacie
+Objet : Message 14
+
+Bonjour,
+Ceci est un message d'information n°14 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_14 = buildExpressPool("e5-2-ce-email-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_15 = `De : Service pharmacie
+Objet : Message 15
+
+Bonjour,
+Ceci est un message d'information n°15 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_15 = buildExpressPool("e5-2-ce-email-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_16 = `De : Service pharmacie
+Objet : Message 16
+
+Bonjour,
+Ceci est un message d'information n°16 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_16 = buildExpressPool("e5-2-ce-email-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_17 = `De : Service pharmacie
+Objet : Message 17
+
+Bonjour,
+Ceci est un message d'information n°17 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_17 = buildExpressPool("e5-2-ce-email-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_18 = `De : Service pharmacie
+Objet : Message 18
+
+Bonjour,
+Ceci est un message d'information n°18 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_18 = buildExpressPool("e5-2-ce-email-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_19 = `De : Service pharmacie
+Objet : Message 19
+
+Bonjour,
+Ceci est un message d'information n°19 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_19 = buildExpressPool("e5-2-ce-email-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+const E5_2_CE_EMAIL_TEXT_20 = `De : Service pharmacie
+Objet : Message 20
+
+Bonjour,
+Ceci est un message d'information n°20 sur le thème « pharmacie ».
+Merci de lire attentivement ce texte.
+Pour plus d'informations, contactez-nous par téléphone.
+Cordialement,
+Le service`;
+
+const E5_2_CE_EMAIL_POOL_20 = buildExpressPool("e5-2-ce-email-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Quel est le thème du message ?",
+    text: ["pharmacie", "Sport", "Cuisine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le thème est « pharmacie ».",
+    fill: "pharmacie",
+    vfQ: "Le message parle de pharmacie.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment contacter le service ?",
+    text: ["Par téléphone", "Par courrier seulement", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Contactez-nous par _________.",
+    fill: "téléphone",
+    fillA: ["telephone"],
+    vfQ: "On peut contacter le service par téléphone.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Le message est-il informatif ?",
+    text: ["Oui", "Non, c'est une blague", "C'est une publicité"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Merci de lire _________ ce texte.",
+    fill: "attentivement",
+    vfQ: "Le message demande de lire attentivement.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Qui signe le message ?",
+    text: ["Le service", "Un enfant", "Un animal"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'e-mail est signé par le _________.",
+    fill: "service",
+    vfQ: "Le service signe le message.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Faut-il répondre ?",
+    text: ["Pas obligatoirement", "Oui, toujours", "Non, jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "C'est un message d'_________.",
+    fill: "information",
+    vfQ: "Il faut toujours répondre.",
+    vfC: 1,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Le prix est-il indiqué ?",
+    text: ["Non", "Oui, clairement", "Oui, en annexe"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le _________ n'est pas indiqué.",
+    fill: "prix",
+    vfQ: "Le prix est indiqué dans l'e-mail.",
+    vfC: 1,
+  }),
+]);
+
+export const E5_2_CE_EMAIL: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e5-2-ce-email-1",
+    readingText: E5_2_CE_EMAIL_TEXT_1,
+    questionPool: E5_2_CE_EMAIL_POOL_1,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-2",
+    readingText: E5_2_CE_EMAIL_TEXT_2,
+    questionPool: E5_2_CE_EMAIL_POOL_2,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-3",
+    readingText: E5_2_CE_EMAIL_TEXT_3,
+    questionPool: E5_2_CE_EMAIL_POOL_3,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-4",
+    readingText: E5_2_CE_EMAIL_TEXT_4,
+    questionPool: E5_2_CE_EMAIL_POOL_4,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-5",
+    readingText: E5_2_CE_EMAIL_TEXT_5,
+    questionPool: E5_2_CE_EMAIL_POOL_5,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-6",
+    readingText: E5_2_CE_EMAIL_TEXT_6,
+    questionPool: E5_2_CE_EMAIL_POOL_6,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-7",
+    readingText: E5_2_CE_EMAIL_TEXT_7,
+    questionPool: E5_2_CE_EMAIL_POOL_7,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-8",
+    readingText: E5_2_CE_EMAIL_TEXT_8,
+    questionPool: E5_2_CE_EMAIL_POOL_8,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-9",
+    readingText: E5_2_CE_EMAIL_TEXT_9,
+    questionPool: E5_2_CE_EMAIL_POOL_9,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-10",
+    readingText: E5_2_CE_EMAIL_TEXT_10,
+    questionPool: E5_2_CE_EMAIL_POOL_10,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-11",
+    readingText: E5_2_CE_EMAIL_TEXT_11,
+    questionPool: E5_2_CE_EMAIL_POOL_11,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-12",
+    readingText: E5_2_CE_EMAIL_TEXT_12,
+    questionPool: E5_2_CE_EMAIL_POOL_12,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-13",
+    readingText: E5_2_CE_EMAIL_TEXT_13,
+    questionPool: E5_2_CE_EMAIL_POOL_13,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-14",
+    readingText: E5_2_CE_EMAIL_TEXT_14,
+    questionPool: E5_2_CE_EMAIL_POOL_14,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-15",
+    readingText: E5_2_CE_EMAIL_TEXT_15,
+    questionPool: E5_2_CE_EMAIL_POOL_15,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-16",
+    readingText: E5_2_CE_EMAIL_TEXT_16,
+    questionPool: E5_2_CE_EMAIL_POOL_16,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-17",
+    readingText: E5_2_CE_EMAIL_TEXT_17,
+    questionPool: E5_2_CE_EMAIL_POOL_17,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-18",
+    readingText: E5_2_CE_EMAIL_TEXT_18,
+    questionPool: E5_2_CE_EMAIL_POOL_18,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-19",
+    readingText: E5_2_CE_EMAIL_TEXT_19,
+    questionPool: E5_2_CE_EMAIL_POOL_19,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+  readingPoolExercise({
+    id: "e5-2-ce-email-20",
+    readingText: E5_2_CE_EMAIL_TEXT_20,
+    questionPool: E5_2_CE_EMAIL_POOL_20,
+    instruction: "Lisez l'e-mail et répondez aux questions.",
+  }),
+];
 
 export const E5_2_PE_EMAIL: ExpressPePrompt[] = [
-  {
+{
     id: "e5-2-pee-1",
     title: "Répondre à la pharmacie",
     situation: "La pharmacie vous informe que votre médicament est prêt.",
@@ -634,4 +4274,145 @@ export const E5_2_PE_EMAIL: ExpressPePrompt[] = [
     minWords: PE_MIN,
     maxWords: PE_MAX,
   },
+  {
+    id: "e5-2-pee-11",
+    title: "Répondre — la pharmacie 11",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-12",
+    title: "Répondre — la pharmacie 12",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-13",
+    title: "Répondre — la pharmacie 13",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-14",
+    title: "Répondre — la pharmacie 14",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-15",
+    title: "Répondre — la pharmacie 15",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-16",
+    title: "Répondre — la pharmacie 16",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-17",
+    title: "Répondre — la pharmacie 17",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-18",
+    title: "Répondre — la pharmacie 18",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-19",
+    title: "Répondre — la pharmacie 19",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-2-pee-20",
+    title: "Répondre — la pharmacie 20",
+    situation: "Vous recevez un e-mail sur le thème la pharmacie.",
+    sourceMessage: {
+      from: "Contact",
+      subject: "Question sur la pharmacie",
+      body: "Bonjour,\nJ'ai une question concernant la pharmacie. Pouvez-vous m'aider ?\nMerci,\nContact",
+    },
+    instruction: "Répondez à l'e-mail : remerciez, donnez les informations demandées et posez une question.",
+    points: ["Votre réponse", "Les informations", "Une question"],
+    minWords: 50,
+    maxWords: 120,
+  },
 ];
+

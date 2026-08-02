@@ -10,9 +10,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
   return item;
 }
 
-/* ── Compréhension écrite — E5.1 Aller chez le médecin ─────────────────────── */
 
-const CE_TEXT = `Cabinet médical du Parc — Informations aux patients
+/* ── Compréhension écrite — E5.1 Aller chez le médecin ── */
+
+const E5_1_CE_TEXT_1 = `Cabinet médical du Parc — Informations aux patients
 
 Le cabinet est ouvert du lundi au vendredi.
 Le cabinet ouvre à 8 h et ferme à 18 h.
@@ -23,8 +24,8 @@ Apportez votre carte d'assurance à chaque visite.
 Le week-end, le cabinet est fermé.
 Pour une urgence, allez aux urgences de l'hôpital.`;
 
-const CE_POOL = buildExpressPool("e5-1-ce", [
-  q({
+const E5_1_CE_POOL_1 = buildExpressPool("e5-1-ce-1", [
+q({
     id: "ce-q1",
     textQ: "Quels jours le cabinet est-il ouvert ?",
     text: ["Du lundi au vendredi", "Tous les jours", "Seulement le week-end"],
@@ -117,20 +118,2060 @@ const CE_POOL = buildExpressPool("e5-1-ce", [
   }),
 ]);
 
-export const E5_1_CE: CommunicationExercise = readingPoolExercise({
-  id: "e5-1-ce",
-  readingText: CE_TEXT,
-  questionPool: CE_POOL,
-});
+const E5_1_CE_TEXT_2 = `Centre de santé Les Lilas — Informations
 
-/* ── Production orale — dialogues à jouer (thème médecin) ──────────────────── */
+Le centre est ouvert du lundi au vendredi, de 7 h 30 à 19 h.
+Le samedi, le centre ouvre de 8 h à 12 h.
+Pour un rendez-vous, appelez le 021 444 55 66 ou utilisez notre site.
+Le médecin généraliste reçoit sans rendez-vous le mercredi matin.
+Les enfants ont un cabinet spécial au rez-de-chaussée.
+En cas d'urgence la nuit, composez le 144.
+Apportez toujours votre carte d'assurance.`;
+
+const E5_1_CE_POOL_2 = buildExpressPool("e5-1-ce-2", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours le centre est-il ouvert en semaine ?",
+    text: ["Du lundi au vendredi", "Du lundi au samedi", "Seulement le mercredi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le centre est ouvert du lundi au _________.",
+    fill: "vendredi",
+    vfQ: "Le centre est ouvert du lundi au vendredi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ouvre-t-il le samedi ?",
+    text: ["À 8 h", "À 7 h 30", "À 10 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le samedi, le centre ouvre à _________ h.",
+    fill: "8",
+    fillA: ["huit"],
+    vfQ: "Le samedi, le centre ouvre à 8 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur le site", "Par courrier", "En personne seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Appelez le 021 444 55 66 ou utilisez notre _________.",
+    fill: "site",
+    vfQ: "On peut prendre rendez-vous sur le site.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand le médecin reçoit-il sans rendez-vous ?",
+    text: ["Le mercredi matin", "Le vendredi soir", "Le dimanche"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le médecin généraliste reçoit sans rendez-vous le _________ matin.",
+    fill: "mercredi",
+    vfQ: "Le médecin reçoit sans rendez-vous le mercredi matin.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Où est le cabinet pour les enfants ?",
+    text: ["Au rez-de-chaussée", "Au 3e étage", "Dans un autre bâtiment"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les enfants ont un cabinet spécial au _________.",
+    fill: "rez-de-chaussée",
+    fillA: ["rez de chaussee", "RDC"],
+    vfQ: "Le cabinet enfants est au rez-de-chaussée.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel numéro appeler en urgence la nuit ?",
+    text: ["Le 144", "Le 117", "Le 112 seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas d'urgence la nuit, composez le _________.",
+    fill: "144",
+    vfQ: "Le numéro d'urgence la nuit est le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance", "Un passeport", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez toujours votre carte d'_________.",
+    fill: "assurance",
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_3 = `Cabinet du Dr Martin — Consignes patients
+
+Bienvenue au cabinet du Dr Martin.
+Les consultations sont sur rendez-vous, du mardi au jeudi.
+Le cabinet ouvre à 8 h et ferme à 17 h.
+Le lundi et le vendredi, le Dr Martin travaille à l'hôpital.
+Pour annuler, appelez 24 heures avant votre rendez-vous.
+Les enfants de moins de 12 ans doivent venir avec un parent.
+Si vous toussez, mettez un masque dans la salle d'attente.
+Le cabinet est au 1er étage, porte 3.`;
+
+const E5_1_CE_POOL_3 = buildExpressPool("e5-1-ce-3", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours y a-t-il des consultations au cabinet ?",
+    text: ["Du mardi au jeudi", "Tous les jours", "Seulement le lundi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les consultations sont du mardi au _________.",
+    fill: "jeudi",
+    vfQ: "Les consultations sont du mardi au jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ferme le cabinet ?",
+    text: ["À 17 h", "À 18 h", "À 19 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet ferme à _________ h.",
+    fill: "17",
+    fillA: ["dix-sept"],
+    vfQ: "Le cabinet ferme à 17 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Où travaille le Dr Martin le lundi ?",
+    text: ["À l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Le lundi, le Dr Martin travaille à l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le lundi, le Dr Martin est à l'hôpital.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps avant faut-il annuler ?",
+    text: ["24 heures avant", "Une semaine avant", "Le jour même"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour annuler, appelez _________ heures avant.",
+    fill: "24",
+    vfQ: "Il faut annuler 24 heures avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Qui doit accompagner les enfants de moins de 12 ans ?",
+    text: ["Un parent", "Un professeur", "Un voisin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les enfants doivent venir avec un _________.",
+    fill: "parent",
+    vfQ: "Les enfants doivent venir avec un parent.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire si on tousse ?",
+    text: ["Mettre un masque", "Attendre dehors", "Ne rien faire"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Si vous toussez, mettez un _________ dans la salle d'attente.",
+    fill: "masque",
+    vfQ: "Il faut mettre un masque si on tousse.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où se trouve le cabinet ?",
+    text: ["Au 1er étage", "Au rez-de-chaussée", "Au 3e étage"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________ étage.",
+    fill: "1er",
+    fillA: ["premier", "1"],
+    vfQ: "Le cabinet est au 5e étage.",
+    vfC: 1,
+  }),
+]);
+
+const E5_1_CE_TEXT_4 = `Urgences pédiatriques — Hôpital des Enfants
+
+Les urgences pédiatriques sont ouvertes 24 heures sur 24.
+Elles accueillent les enfants de 0 à 16 ans.
+Un parent doit rester avec l'enfant à tout moment.
+L'attente peut durer une à trois heures.
+Apportez le carnet de santé de l'enfant.
+Pour les petits bobos, consultez d'abord votre pédiatre.
+Le parking de l'hôpital coûte 2 francs par heure.
+L'entrée des urgences est côté nord, porte B.`;
+
+const E5_1_CE_POOL_4 = buildExpressPool("e5-1-ce-4", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand les urgences pédiatriques sont-elles ouvertes ?",
+    text: ["24 heures sur 24", "Seulement le jour", "Le week-end seulement"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les urgences sont ouvertes _________ heures sur 24.",
+    fill: "24",
+    vfQ: "Les urgences sont ouvertes 24 h sur 24.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Pour quels enfants ?",
+    text: ["De 0 à 16 ans", "De 6 à 18 ans", "Seulement les bébés"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Elles accueillent les enfants de 0 à _________ ans.",
+    fill: "16",
+    vfQ: "Les urgences accueillent les enfants jusqu'à 16 ans.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Qui doit rester avec l'enfant ?",
+    text: ["Un parent", "Un médecin", "Un professeur"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Un parent doit rester avec l'_________.",
+    fill: "enfant",
+    vfQ: "Un parent doit rester avec l'enfant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Combien de temps peut durer l'attente ?",
+    text: ["Une à trois heures", "Dix minutes", "Une journée"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'attente peut durer une à _________ heures.",
+    fill: "trois",
+    fillA: ["3"],
+    vfQ: "L'attente peut durer une à trois heures.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Quel document apporter ?",
+    text: ["Le carnet de santé", "Le passeport", "Le permis"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez le _________ de santé de l'enfant.",
+    fill: "carnet",
+    vfQ: "Il faut apporter le carnet de santé.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire pour les petits bobos ?",
+    text: ["Consulter d'abord le pédiatre", "Aller directement aux urgences", "Attendre une semaine"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour les petits bobos, consultez d'abord votre _________.",
+    fill: "pédiatre",
+    fillA: ["pediatre"],
+    vfQ: "Pour les petits bobos, il faut d'abord voir le pédiatre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où est l'entrée des urgences ?",
+    text: ["Côté nord, porte B", "Côté sud, porte A", "À la pharmacie"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'entrée est côté nord, porte _________.",
+    fill: "B",
+    vfQ: "L'entrée des urgences est côté nord, porte B.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_TEXT_5 = `Infirmerie scolaire — Collège des Alpes
+
+L'infirmerie est ouverte tous les jours de 8 h à 16 h.
+L'infirmière s'appelle Mme Dubois.
+Si un élève est malade, il vient à l'infirmerie avec un professeur.
+L'infirmière appelle les parents en cas de fièvre ou de blessure.
+Elle donne un peu d'eau et du repos, mais pas de médicaments sans autorisation.
+Pour une urgence grave, elle appelle le 144.
+L'infirmerie se trouve près de la cantine, au rez-de-chaussée.`;
+
+const E5_1_CE_POOL_5 = buildExpressPool("e5-1-ce-5", [
+  q({
+    id: "ce-q1",
+    textQ: "Quand l'infirmerie est-elle ouverte ?",
+    text: ["De 8 h à 16 h", "De 9 h à 17 h", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'infirmerie est ouverte de 8 h à _________ h.",
+    fill: "16",
+    fillA: ["dix-sept"],
+    vfQ: "L'infirmerie est ouverte de 8 h à 16 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Comment s'appelle l'infirmière ?",
+    text: ["Mme Dubois", "Mme Martin", "M. Bernard"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'infirmière s'appelle Mme _________.",
+    fill: "Dubois",
+    vfQ: "L'infirmière s'appelle Mme Dubois.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Qui accompagne l'élève malade ?",
+    text: ["Un professeur", "Un ami", "Personne"],
+    textC: 0,
+    img: ["professeur", "médecin", "infirmier"],
+    imgC: 0,
+    fillQ: "L'élève vient avec un _________.",
+    fill: "professeur",
+    vfQ: "L'élève malade vient avec un professeur.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand l'infirmière appelle-t-elle les parents ?",
+    text: ["En cas de fièvre ou de blessure", "Tous les jours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Elle appelle les parents en cas de fièvre ou de _________.",
+    fill: "blessure",
+    vfQ: "L'infirmière appelle les parents en cas de fièvre.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "L'infirmière donne-t-elle des médicaments ?",
+    text: ["Pas sans autorisation", "Oui, toujours", "Seulement le soir"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Elle ne donne pas de médicaments sans _________.",
+    fill: "autorisation",
+    vfQ: "L'infirmière ne donne pas de médicaments sans autorisation.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quel numéro pour une urgence grave ?",
+    text: ["Le 144", "Le 117", "Le 021"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour une urgence grave, elle appelle le _________.",
+    fill: "144",
+    vfQ: "Pour une urgence grave, on appelle le 144.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où est l'infirmerie ?",
+    text: ["Près de la cantine", "Au 3e étage", "Dehors"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "L'infirmerie est près de la _________.",
+    fill: "cantine",
+    vfQ: "Le prix des médicaments est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_6 = `Téléconsultation — Cabinet du Dr Leroy
+
+Le Dr Leroy propose des consultations par vidéo.
+Les téléconsultations ont lieu le mardi et le jeudi, de 14 h à 18 h.
+Il faut réserver sur Internet au moins un jour avant.
+Vous recevez un lien par e-mail dix minutes avant le rendez-vous.
+Préparez votre carte d'assurance et la liste de vos médicaments.
+La téléconsultation coûte 30 francs, comme une visite normale.
+Pour un examen physique, il faut venir au cabinet.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_6 = buildExpressPool("e5-1-ce-6", [
+  q({
+    id: "ce-q1",
+    textQ: "Quels jours a lieu la téléconsultation ?",
+    text: ["Le mardi et le jeudi", "Tous les jours", "Seulement le lundi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les téléconsultations ont lieu le mardi et le _________.",
+    fill: "jeudi",
+    vfQ: "La téléconsultation a lieu le mardi et le jeudi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "À quelle heure ?",
+    text: ["De 14 h à 18 h", "De 8 h à 12 h", "De 20 h à 22 h"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Elles ont lieu de 14 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "La téléconsultation est de 14 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment réserver ?",
+    text: ["Sur Internet un jour avant", "Par téléphone le jour même", "En personne"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il faut réserver sur Internet au moins un _________ avant.",
+    fill: "jour",
+    vfQ: "Il faut réserver au moins un jour avant.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Que recevez-vous avant le rendez-vous ?",
+    text: ["Un lien par e-mail", "Un SMS", "Une lettre"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Vous recevez un lien par _________.",
+    fill: "e-mail",
+    fillA: ["email", "mail"],
+    vfQ: "On reçoit un lien par e-mail.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Combien coûte la téléconsultation ?",
+    text: ["30 francs", "Gratuit", "100 francs"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "La téléconsultation coûte _________ francs.",
+    fill: "30",
+    fillA: ["trente"],
+    vfQ: "La téléconsultation coûte 30 francs.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Quand faut-il venir au cabinet ?",
+    text: ["Pour un examen physique", "Toujours", "Jamais"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Pour un examen physique, il faut venir au _________.",
+    fill: "cabinet",
+    vfQ: "Pour un examen physique, il faut venir au cabinet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Le cabinet est-il ouvert le week-end ?",
+    text: ["Non, il est fermé", "Oui, tout le week-end", "Seulement le samedi"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est fermé le _________.",
+    fill: "week-end",
+    vfQ: "Le cabinet est fermé le week-end.",
+    vfC: 0,
+  }),
+]);
+
+const E5_1_CE_TEXT_7 = `Cabinet du Dr Blanc — Informations
+
+Le cabinet du Dr Blanc est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le lundi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_7 = buildExpressPool("e5-1-ce-7", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le lundi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le lundi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le lundi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_8 = `Cabinet du Dr Moreau — Informations
+
+Le cabinet du Dr Moreau est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le mardi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_8 = buildExpressPool("e5-1-ce-8", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le mardi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mardi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le mardi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_9 = `Cabinet du Dr Simon — Informations
+
+Le cabinet du Dr Simon est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le mercredi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_9 = buildExpressPool("e5-1-ce-9", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le mercredi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mercredi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le mercredi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_10 = `Cabinet du Dr Laurent — Informations
+
+Le cabinet du Dr Laurent est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le jeudi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_10 = buildExpressPool("e5-1-ce-10", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le jeudi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jeudi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le jeudi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_11 = `Cabinet du Dr Michel — Informations
+
+Le cabinet du Dr Michel est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le vendredi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_11 = buildExpressPool("e5-1-ce-11", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le vendredi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le vendredi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le vendredi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_12 = `Cabinet du Dr Garcia — Informations
+
+Le cabinet du Dr Garcia est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le lundi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_12 = buildExpressPool("e5-1-ce-12", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le lundi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le lundi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le lundi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_13 = `Cabinet du Dr David — Informations
+
+Le cabinet du Dr David est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le mardi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_13 = buildExpressPool("e5-1-ce-13", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le mardi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mardi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le mardi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_14 = `Cabinet du Dr Bertrand — Informations
+
+Le cabinet du Dr Bertrand est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le mercredi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_14 = buildExpressPool("e5-1-ce-14", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le mercredi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mercredi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le mercredi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_15 = `Cabinet du Dr Roux — Informations
+
+Le cabinet du Dr Roux est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le jeudi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_15 = buildExpressPool("e5-1-ce-15", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le jeudi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jeudi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le jeudi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_16 = `Cabinet du Dr Vincent — Informations
+
+Le cabinet du Dr Vincent est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le vendredi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_16 = buildExpressPool("e5-1-ce-16", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le vendredi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le vendredi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le vendredi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_17 = `Cabinet du Dr Fournier — Informations
+
+Le cabinet du Dr Fournier est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le lundi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_17 = buildExpressPool("e5-1-ce-17", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le lundi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le lundi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le lundi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_18 = `Cabinet du Dr Garnier — Informations
+
+Le cabinet du Dr Garnier est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le mardi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_18 = buildExpressPool("e5-1-ce-18", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le mardi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mardi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le mardi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_19 = `Cabinet du Dr Chevalier — Informations
+
+Le cabinet du Dr Chevalier est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le mercredi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_19 = buildExpressPool("e5-1-ce-19", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le mercredi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le mercredi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le mercredi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+const E5_1_CE_TEXT_20 = `Cabinet du Dr Mercier — Informations
+
+Le cabinet du Dr Mercier est au centre-ville.
+Il est ouvert du lundi au vendredi, de 8 h à 18 h.
+Les rendez-vous se prennent par téléphone ou sur Internet.
+Le jeudi, le médecin reçoit les nouveaux patients l'après-midi.
+Apportez votre carte d'assurance et vos anciennes ordonnances.
+En cas de fièvre, mettez un masque dans la salle d'attente.
+Pour une urgence le soir, allez aux urgences de l'hôpital.
+Le cabinet est fermé le week-end.`;
+
+const E5_1_CE_POOL_20 = buildExpressPool("e5-1-ce-20", [
+  q({
+    id: "ce-q1",
+    textQ: "Où est le cabinet ?",
+    text: ["Au centre-ville", "À la campagne", "À l'aéroport"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le cabinet est au _________.",
+    fill: "centre-ville",
+    fillA: ["centre ville"],
+    vfQ: "Le cabinet est au centre-ville.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q2",
+    textQ: "Quels sont les horaires ?",
+    text: ["De 8 h à 18 h en semaine", "24 h sur 24", "Seulement le matin"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Il est ouvert de 8 h à _________ h.",
+    fill: "18",
+    fillA: ["dix-huit"],
+    vfQ: "Le cabinet ouvre de 8 h à 18 h.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q3",
+    textQ: "Comment prendre rendez-vous ?",
+    text: ["Par téléphone ou sur Internet", "Par lettre", "Sans rendez-vous"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Les rendez-vous se prennent par téléphone ou sur _________.",
+    fill: "Internet",
+    fillA: ["internet"],
+    vfQ: "On peut prendre rendez-vous sur Internet.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q4",
+    textQ: "Quand reçoit-il les nouveaux patients ?",
+    text: ["Le jeudi l'après-midi", "Le dimanche", "La nuit"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Le jeudi, le médecin reçoit les nouveaux patients l'_________.",
+    fill: "après-midi",
+    fillA: ["apres-midi"],
+    vfQ: "Les nouveaux patients viennent le jeudi l'après-midi.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q5",
+    textQ: "Que faut-il apporter ?",
+    text: ["La carte d'assurance et les ordonnances", "Un cadeau", "Une photo"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "Apportez votre carte d'assurance et vos _________.",
+    fill: "ordonnances",
+    vfQ: "Il faut apporter la carte d'assurance.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q6",
+    textQ: "Que faire en cas de fièvre ?",
+    text: ["Mettre un masque", "Rentrer chez soi", "Crier"],
+    textC: 0,
+    img: ["", "", ""],
+    imgC: 0,
+    fillQ: "En cas de fièvre, mettez un _________.",
+    fill: "masque",
+    vfQ: "En cas de fièvre, il faut mettre un masque.",
+    vfC: 0,
+  }),
+  q({
+    id: "ce-q7",
+    textQ: "Où aller en urgence le soir ?",
+    text: ["Aux urgences de l'hôpital", "À la pharmacie", "À l'école"],
+    textC: 0,
+    img: ["hôpital", "pharmacie", "école"],
+    imgC: 0,
+    fillQ: "Pour une urgence le soir, allez aux urgences de l'_________.",
+    fill: "hôpital",
+    fillA: ["hopital"],
+    vfQ: "Le prix de la consultation est indiqué.",
+    vfC: 2,
+  }),
+]);
+
+export const E5_1_CE: CommunicationExercise[] = [
+  readingPoolExercise({
+    id: "e5-1-ce-1",
+    readingText: E5_1_CE_TEXT_1,
+    questionPool: E5_1_CE_POOL_1,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-2",
+    readingText: E5_1_CE_TEXT_2,
+    questionPool: E5_1_CE_POOL_2,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-3",
+    readingText: E5_1_CE_TEXT_3,
+    questionPool: E5_1_CE_POOL_3,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-4",
+    readingText: E5_1_CE_TEXT_4,
+    questionPool: E5_1_CE_POOL_4,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-5",
+    readingText: E5_1_CE_TEXT_5,
+    questionPool: E5_1_CE_POOL_5,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-6",
+    readingText: E5_1_CE_TEXT_6,
+    questionPool: E5_1_CE_POOL_6,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-7",
+    readingText: E5_1_CE_TEXT_7,
+    questionPool: E5_1_CE_POOL_7,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-8",
+    readingText: E5_1_CE_TEXT_8,
+    questionPool: E5_1_CE_POOL_8,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-9",
+    readingText: E5_1_CE_TEXT_9,
+    questionPool: E5_1_CE_POOL_9,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-10",
+    readingText: E5_1_CE_TEXT_10,
+    questionPool: E5_1_CE_POOL_10,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-11",
+    readingText: E5_1_CE_TEXT_11,
+    questionPool: E5_1_CE_POOL_11,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-12",
+    readingText: E5_1_CE_TEXT_12,
+    questionPool: E5_1_CE_POOL_12,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-13",
+    readingText: E5_1_CE_TEXT_13,
+    questionPool: E5_1_CE_POOL_13,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-14",
+    readingText: E5_1_CE_TEXT_14,
+    questionPool: E5_1_CE_POOL_14,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-15",
+    readingText: E5_1_CE_TEXT_15,
+    questionPool: E5_1_CE_POOL_15,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-16",
+    readingText: E5_1_CE_TEXT_16,
+    questionPool: E5_1_CE_POOL_16,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-17",
+    readingText: E5_1_CE_TEXT_17,
+    questionPool: E5_1_CE_POOL_17,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-18",
+    readingText: E5_1_CE_TEXT_18,
+    questionPool: E5_1_CE_POOL_18,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-19",
+    readingText: E5_1_CE_TEXT_19,
+    questionPool: E5_1_CE_POOL_19,
+  }),
+  readingPoolExercise({
+    id: "e5-1-ce-20",
+    readingText: E5_1_CE_TEXT_20,
+    questionPool: E5_1_CE_POOL_20,
+  }),
+];
+
+/* ── Production orale — dialogues à jouer ──────────────────────────────────── */
+
 
 const MEDECIN = { title: "Le médecin", vous: "le médecin / la médecin" };
 const PATIENT = { title: "Le patient", vous: "le patient / la patiente" };
 const SECRETAIRE = { title: "Le secrétaire", vous: "le secrétaire / la secrétaire" };
 
+
 export const E5_1_PO: ExpressPoDialogue[] = [
-  {
+{
     id: "e5-1-po-1",
     title: "Chez le médecin — la grippe",
     context: "Vous êtes malade depuis deux jours et vous consultez le médecin.",
@@ -320,7 +2361,198 @@ export const E5_1_PO: ExpressPoDialogue[] = [
       { role: "B", text: "Moi aussi. À bientôt !" },
 ],
   },
+  {
+    id: "e5-1-po-11",
+    title: "Allergie aux médicaments",
+    context: "Vous avez une allergie et vous consultez le médecin.",
+    roleA: { title: "Le médecin", vous: "le médecin / la médecin" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Bonjour. Vous prenez des médicaments ?" },
+      { role: "B", text: "Oui, de l'aspirine, mais j'ai une allergie." },
+      { role: "A", text: "À quoi êtes-vous allergique ?" },
+      { role: "B", text: "Aux antibiotiques. J'ai de la fièvre et mal à la gorge." },
+      { role: "A", text: "D'accord. Je vous donne un autre traitement." },
+      { role: "B", text: "Merci. Je dois le prendre combien de temps ?" },
+      { role: "A", text: "Pendant cinq jours, matin et soir." },
+      { role: "B", text: "Très bien, docteur. Merci beaucoup !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-12",
+    title: "Première visite",
+    context: "C'est votre première visite dans ce cabinet médical.",
+    roleA: { title: "Le secrétaire", vous: "le secrétaire / la secrétaire" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Bonjour, c'est votre première visite ici ?" },
+      { role: "B", text: "Oui, je viens d'emménager dans le quartier." },
+      { role: "A", text: "Remplissez ce formulaire, s'il vous plaît." },
+      { role: "B", text: "D'accord. J'ai mal au dos depuis une semaine." },
+      { role: "A", text: "Le médecin vous reçoit dans dix minutes." },
+      { role: "B", text: "Merci. Dois-je payer maintenant ?" },
+      { role: "A", text: "Non, vous payez après la consultation." },
+      { role: "B", text: "Parfait, merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-13",
+    title: "Mal aux dents",
+    context: "Vous avez très mal aux dents.",
+    roleA: { title: "Le médecin", vous: "le médecin / la médecin" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Bonjour, vous avez mal où ?" },
+      { role: "B", text: "J'ai très mal aux dents depuis hier." },
+      { role: "A", text: "Ouvrez la bouche, s'il vous plaît." },
+      { role: "B", text: "Aïe ! C'est là, à droite." },
+      { role: "A", text: "Ce n'est pas mon domaine. Il faut voir un dentiste." },
+      { role: "B", text: "Vous connaissez un bon dentiste ?" },
+      { role: "A", text: "Oui, le cabinet dentaire de la Gare est bien." },
+      { role: "B", text: "Merci docteur, j'appelle tout de suite." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-14",
+    title: "Certificat médical",
+    context: "Vous avez besoin d'un certificat pour votre travail.",
+    roleA: { title: "Le médecin", vous: "le médecin / la médecin" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Bonjour. Qu'est-ce que je peux faire pour vous ?" },
+      { role: "B", text: "J'ai besoin d'un certificat médical pour mon travail." },
+      { role: "A", text: "Vous êtes malade depuis quand ?" },
+      { role: "B", text: "Depuis lundi. J'ai de la fièvre et je tousse." },
+      { role: "A", text: "Vous devez rester à la maison jusqu'à vendredi." },
+      { role: "B", text: "D'accord. Vous écrivez le certificat ?" },
+      { role: "A", text: "Oui, voici. Reposez-vous bien." },
+      { role: "B", text: "Merci beaucoup, docteur." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-15",
+    title: "Vaccin contre la grippe",
+    context: "Vous venez vous faire vacciner.",
+    roleA: { title: "Le médecin", vous: "le médecin / la médecin" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Bonjour, vous venez pour le vaccin ?" },
+      { role: "B", text: "Oui, je veux me faire vacciner contre la grippe." },
+      { role: "A", text: "Vous avez des allergies ?" },
+      { role: "B", text: "Non, aucune allergie." },
+      { role: "A", text: "Très bien. Ce n'est pas douloureux." },
+      { role: "B", text: "D'accord… Ah, c'est fini déjà ?" },
+      { role: "A", text: "Oui. Restez dix minutes ici, au cas où." },
+      { role: "B", text: "Merci docteur, bonne journée !" },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-16",
+    title: "Renouveler une ordonnance",
+    context: "Vous appelez pour renouveler une ordonnance.",
+    roleA: { title: "Le secrétaire", vous: "le secrétaire / la secrétaire" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Cabinet médical, bonjour !" },
+      { role: "B", text: "Bonjour, je voudrais renouveler mon ordonnance." },
+      { role: "A", text: "C'est pour quel médicament ?" },
+      { role: "B", text: "Pour mes comprimés contre la tension." },
+      { role: "A", text: "Le médecin vous rappelle cet après-midi." },
+      { role: "B", text: "Merci. Je peux passer chercher l'ordonnance demain ?" },
+      { role: "A", text: "Oui, à partir de 14 h." },
+      { role: "B", text: "Parfait, merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-17",
+    title: "Enfant avec de la fièvre",
+    context: "Votre fils a 38 degrés de fièvre.",
+    roleA: { title: "Le médecin", vous: "le médecin / la médecin" },
+    roleB: { title: "Le parent", vous: "le papa / la maman" },
+    lines: [
+      { role: "A", text: "Bonjour, qu'est-ce qu'il a, le petit ?" },
+      { role: "B", text: "Il a de la fièvre depuis ce matin, 38 degrés." },
+      { role: "A", text: "Il tousse ou il a mal quelque part ?" },
+      { role: "B", text: "Il tousse un peu et il dit qu'il a mal à la tête." },
+      { role: "A", text: "C'est un rhume. Du repos et beaucoup d'eau." },
+      { role: "B", text: "Je lui donne du sirop ?" },
+      { role: "A", text: "Oui, celui que je vous prescris." },
+      { role: "B", text: "Merci docteur, on suit vos conseils." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-18",
+    title: "Retard au rendez-vous",
+    context: "Vous arrivez en retard à votre rendez-vous.",
+    roleA: { title: "Le secrétaire", vous: "le secrétaire / la secrétaire" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Bonjour, vous avez rendez-vous à 10 h ?" },
+      { role: "B", text: "Oui, je suis désolé, le bus avait du retard." },
+      { role: "A", text: "Le médecin peut vous recevoir à 10 h 30." },
+      { role: "B", text: "Merci beaucoup. J'attends ici ?" },
+      { role: "A", text: "Oui, asseyez-vous dans la salle d'attente." },
+      { role: "B", text: "D'accord. Combien de temps encore ?" },
+      { role: "A", text: "Environ vingt minutes." },
+      { role: "B", text: "Merci, pas de problème." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-19",
+    title: "Douleur au genou",
+    context: "Vous vous êtes blessé au genou en jouant au foot.",
+    roleA: { title: "Le médecin", vous: "le médecin / la médecin" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Bonjour, qu'est-ce qui s'est passé ?" },
+      { role: "B", text: "Je me suis blessé au genou en jouant au foot." },
+      { role: "A", text: "Vous pouvez marcher ?" },
+      { role: "B", text: "Oui, mais j'ai mal quand je cours." },
+      { role: "A", text: "Ce n'est pas grave. Mettez de la glace ce soir." },
+      { role: "B", text: "Je peux jouer samedi ?" },
+      { role: "A", text: "Non, reposez-vous une semaine." },
+      { role: "B", text: "D'accord docteur, merci." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
+  {
+    id: "e5-1-po-20",
+    title: "Question sur les résultats",
+    context: "Vous appelez pour les résultats d'une analyse.",
+    roleA: { title: "Le secrétaire", vous: "le secrétaire / la secrétaire" },
+    roleB: { title: "Le patient", vous: "le patient / la patiente" },
+    lines: [
+      { role: "A", text: "Cabinet médical, bonjour !" },
+      { role: "B", text: "Bonjour, j'appelle pour mes résultats d'analyse." },
+      { role: "A", text: "Un instant… Oui, tout est normal." },
+      { role: "B", text: "Ah, quel soulagement ! Merci." },
+      { role: "A", text: "Le médecin veut vous revoir dans un mois." },
+      { role: "B", text: "D'accord. Je prends rendez-vous maintenant ?" },
+      { role: "A", text: "Oui, je peux vous proposer le 15 avril à 11 h." },
+      { role: "B", text: "C'est parfait, merci beaucoup." },
+      { role: "A", text: "Ravi(e) de faire votre connaissance." },
+      { role: "B", text: "Moi aussi. À bientôt !" },
+    ],
+  },
 ];
+
 
 /* ── Production écrite — consignes (A1 : 50 mots minimum) ─────────────────── */
 
@@ -328,7 +2560,7 @@ const PE_MIN = 50;
 const PE_MAX = 120;
 
 export const E5_1_PE: ExpressPePrompt[] = [
-  {
+{
     id: "e5-1-pe-1",
     title: "Message au cabinet médical",
     situation: "Vous êtes malade et vous voulez voir un médecin. Vous écrivez un message au cabinet médical.",
@@ -417,5 +2649,95 @@ export const E5_1_PE: ExpressPePrompt[] = [
     points: ["Comment prendre rendez-vous", "Ce qu'il faut apporter", "Où aller en cas d'urgence"],
     minWords: PE_MIN,
     maxWords: PE_MAX,
+  },
+  {
+    id: "e5-1-pe-11",
+    title: "Demander un certificat",
+    situation: "Vous êtes malade et vous avez besoin d'un certificat pour l'école.",
+    instruction: "Écrivez un message au professeur : expliquez que vous êtes malade et que vous allez chez le médecin pour un certificat.",
+    points: ["Votre maladie", "La visite chez le médecin", "Quand vous revenez"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-12",
+    title: "Conseils de prévention",
+    situation: "Votre ami veut éviter la grippe cet hiver.",
+    instruction: "Donnez-lui des conseils pour rester en bonne santé et expliquez quoi faire s'il est malade.",
+    points: ["Deux conseils de prévention", "Que faire si on est malade", "Où aller"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-13",
+    title: "Raconter une visite chez le pédiatre",
+    situation: "Votre fille est allée chez le pédiatre hier.",
+    instruction: "Racontez la visite à votre mère : les symptômes, ce que le médecin a dit et le traitement.",
+    points: ["Les symptômes", "Le diagnostic", "Le traitement"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-14",
+    title: "Message pour annuler",
+    situation: "Vous ne pouvez pas aller chez le médecin demain.",
+    instruction: "Écrivez au secrétariat : excusez-vous, expliquez pourquoi et demandez un autre rendez-vous.",
+    points: ["L'excuse", "La raison", "Un nouveau rendez-vous"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-15",
+    title: "Comparer deux cabinets",
+    situation: "Un ami hésite entre deux cabinets médicaux.",
+    instruction: "Décrivez les deux cabinets : horaires, services et comment prendre rendez-vous.",
+    points: ["Cabinet 1", "Cabinet 2", "Votre conseil"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-16",
+    title: "Après une chute",
+    situation: "Vous êtes tombé et vous avez mal au bras.",
+    instruction: "Décrivez l'accident, vos symptômes et ce que vous allez faire.",
+    points: ["L'accident", "Vos symptômes", "Votre décision"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-17",
+    title: "Préparer une consultation",
+    situation: "Vous avez rendez-vous chez le médecin demain.",
+    instruction: "Listez vos symptômes, vos questions pour le médecin et ce que vous devez apporter.",
+    points: ["Vos symptômes", "Vos questions", "Les documents à apporter"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-18",
+    title: "Informer son voisin",
+    situation: "Votre voisin est malade et vous voulez l'aider.",
+    instruction: "Écrivez-lui un message : donnez des conseils, proposez votre aide et dites où est la pharmacie.",
+    points: ["Des conseils", "Votre aide", "La pharmacie"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-19",
+    title: "Journal de santé",
+    situation: "Vous notez vos symptômes chaque jour.",
+    instruction: "Décrivez trois jours de maladie : les symptômes, ce que vous avez pris et si ça va mieux.",
+    points: ["Jour 1", "Jour 2", "Jour 3"],
+    minWords: 50,
+    maxWords: 120,
+  },
+  {
+    id: "e5-1-pe-20",
+    title: "Invitation à se soigner",
+    situation: "Votre collègue travaille malade.",
+    instruction: "Écrivez-lui un message : dites-lui d'aller chez le médecin et expliquez pourquoi c'est important.",
+    points: ["Le problème", "Votre conseil", "Votre proposition d'aide"],
+    minWords: 50,
+    maxWords: 120,
   },
 ];
