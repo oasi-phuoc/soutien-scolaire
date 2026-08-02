@@ -212,6 +212,44 @@ function makeProgressiveCoParts(seed: number): COPart[] {
   });
 }
 
+/**
+ * Impression du test complet : barème CO fixe 6 + 6 + 6 + 7 = 25 points.
+ * Chaque partie est re-tirée avec exactement `target` questions individuelles
+ * (les tâches composites — grilles images, objets — gardent leur place dans
+ * les tests par compétence mais pas dans le barème du complet).
+ */
+const PRINT_CO_TARGET_POINTS = [6, 6, 6, 7] as const;
+
+function makeProgressiveCoPartsForPrint(seed: number): COPart[] {
+  return PROGRESSIVE_SKILL_LEVELS.map((lvl, i) => {
+    const target = PRINT_CO_TARGET_POINTS[i] ?? 6;
+    for (let attempt = 0; attempt < 10; attempt++) {
+      const pool = makeParts(lvl, seed + i * 997 + attempt * 131_071);
+      const start = pickIndex(pool.length, `${seed}-co-pick-${i}-${attempt}`);
+      for (let k = 0; k < pool.length; k++) {
+        const cand = pool[(start + k) % pool.length]!;
+        const questions = getCoPartQuestions(
+          cand.audioGroup,
+          target,
+          `${seed}-co-print-${i}-${attempt}`,
+        );
+        const simple =
+          questions.length === target &&
+          questions.every((q) => q.kind === "choice" || q.kind === "fill");
+        if (simple) return { ...cand, points: target, questions };
+      }
+    }
+    // Repli : tronque les questions individuelles de la partie tirée.
+    const pool = makeParts(lvl, seed + i * 997);
+    const cand = pool[pickIndex(pool.length, `${seed}-co-pick-${i}`)]!;
+    const qs = cand.questions
+      .filter((q) => q.kind === "choice" || q.kind === "fill")
+      .slice(0, target);
+    if (qs.length > 0) return { ...cand, points: qs.length, questions: qs };
+    return cand;
+  });
+}
+
 function levelFromId(id: string): COLevel {
   if (id === "CO-2" || id === "comprehension-orale-2") return "moyen";
   if (id === "CO-3" || id === "comprehension-orale-3") return "avance";
@@ -1748,7 +1786,7 @@ export function buildPlacementCoPrintExercises(
   seed = 1,
   level?: "base" | "moyen" | "avance",
 ): PrintExercise[] {
-  const parts = level ? makeParts(level, seed) : makeProgressiveCoParts(seed);
+  const parts = level ? makeParts(level, seed) : makeProgressiveCoPartsForPrint(seed);
   return parts.map((part, index) => {
     const correctAnswers = buildCoCorrectAnswers(part);
     const qrItems = coAudioQrItems(part.audioGroup.items);

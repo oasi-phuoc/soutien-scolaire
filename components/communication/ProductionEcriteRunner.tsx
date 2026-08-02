@@ -351,15 +351,31 @@ function FormFieldControl({
   value,
   disabled,
   onChange,
+  forPrint = false,
 }: {
   field: FormField;
   value: string;
   disabled: boolean;
   onChange: (value: string) => void;
+  forPrint?: boolean;
 }) {
   const className = "min-h-11 w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)] disabled:opacity-70";
   // Dates en textbox (pas de sélecteur natif).
   const inputType = !field.type || field.type === "date" ? "text" : field.type;
+
+  // Impression : ligne de saisie manuscrite (pas de liste déroulante ni de
+  // champ encadré) — la correction affiche la valeur attendue sur la ligne.
+  if (forPrint) {
+    return (
+      <div className={field.wide ? "col-span-2" : ""}>
+        <span className="mb-1 block text-xs font-semibold text-[var(--color-text-secondary)]">{field.label}</span>
+        <div className="flex min-h-7 items-end border-b border-black/50 pb-0.5 text-sm font-bold text-amber-700">
+          {value}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <label className={field.wide ? "col-span-2" : ""}>
       <span className="mb-1 block text-xs font-semibold text-[var(--color-text-secondary)]">{field.label}</span>
@@ -386,12 +402,14 @@ function FormExercise({
   advanced,
   disabled,
   onChange,
+  forPrint = false,
 }: {
   template: FormTemplate;
   answers: Record<string, string>;
   advanced: boolean;
   disabled: boolean;
   onChange: (fieldId: string, value: string) => void;
+  forPrint?: boolean;
 }) {
   return (
     <div className="space-y-4">
@@ -415,6 +433,7 @@ function FormExercise({
               value={answers[field.id] ?? ""}
               disabled={disabled}
               onChange={(value) => onChange(field.id, value)}
+              forPrint={forPrint}
             />
           ))}
         </div>
@@ -984,6 +1003,7 @@ export function buildPlacementPePrintExercises(
               advanced={false}
               disabled={false}
               onChange={() => {}}
+              forPrint
             />
           </div>
         ),
@@ -995,6 +1015,7 @@ export function buildPlacementPePrintExercises(
               advanced={false}
               disabled
               onChange={() => {}}
+              forPrint
             />
             {formSample && Object.keys(formCorrectionAnswers).length === 0 ? (
               <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 text-sm whitespace-pre-line text-emerald-900">

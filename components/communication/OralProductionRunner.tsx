@@ -1995,7 +1995,7 @@ export function buildPlacementPoPrintExercises(
               {/* div (pas p.font-bold) : globals.css masque p.font-bold dans .print-ex-content */}
               <div className="flex items-baseline gap-2 text-base text-black">
                 <span className="shrink-0 font-bold tabular-nums text-[var(--color-accent-quiz)]">{i + 1}.</span>
-                <span className="rounded border-2 border-black px-2 py-0.5 font-bold">{theme.word}</span>
+                <span className="font-bold">{theme.word}</span>
               </div>
               {printBlankLines(2)}
             </div>
@@ -2011,7 +2011,7 @@ export function buildPlacementPoPrintExercises(
             <div key={`${theme.word}-${i}`} className="space-y-2 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
               <div className="flex items-baseline gap-2 text-base text-black">
                 <span className="shrink-0 font-bold tabular-nums text-[var(--color-accent-quiz)]">{i + 1}.</span>
-                <span className="rounded border-2 border-black px-2 py-0.5 font-bold">{theme.word}</span>
+                <span className="font-bold">{theme.word}</span>
               </div>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-emerald-900">
                 {getThemeSuggestions(theme.word).map((q) => (

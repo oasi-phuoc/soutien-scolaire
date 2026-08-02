@@ -262,20 +262,57 @@ const SITUATION_IMAGE: Record<string, string> = {
   "Être en colère": "signaler-probleme",
 };
 
+/**
+ * Illustrations réellement présentes dans `public/expression/co/situations/`.
+ * Un slug hors liste n'a pas d'image → la définition bascule en grille texte.
+ */
+const AVAILABLE_SITUATION_IMAGES = new Set([
+  "annoncer-evenement",
+  "annoncer-nouvelle",
+  "annuler-rdv",
+  "commander",
+  "confirmer-rdv",
+  "conseiller",
+  "decrire-personne",
+  "demander-chemin",
+  "demander-informations",
+  "demander-nouvelles",
+  "demander-service",
+  "donner-impressions",
+  "donner-indications",
+  "exprimer-gouts",
+  "feliciter",
+  "horaires",
+  "prendre-conge",
+  "prendre-rdv",
+  "presenter",
+  "proposer-activite",
+  "proposer-aide",
+  "proposer-sortie",
+  "refuser",
+  "s-excuser",
+  "signaler-probleme",
+]);
+
 function imagePath(slug: string): string | null {
+  if (!AVAILABLE_SITUATION_IMAGES.has(slug)) return null;
   return `/expression/co/situations/${slug}.webp`;
 }
 
 /**
  * Construit une tâche « associer les dialogues aux images » à partir d'une
  * définition de conversation (6 situations, 4 dialogues corrects). Renvoie null
- * si une situation n'a pas d'illustration disponible.
+ * si une situation n'a pas d'illustration disponible ou si deux situations
+ * partagent la même image (jamais deux fois la même image dans la grille).
  */
 export function buildConversationImageMatch(def: COConversationMatchDef, seed: string): COImageMatchTask | null {
   const cards: COImageMatchCard[] = [];
+  const usedSlugs = new Set<string>();
   for (const situation of def.situations) {
     const slug = SITUATION_IMAGE[situation];
     if (!slug) return null;
+    if (usedSlugs.has(slug)) return null;
+    usedSlugs.add(slug);
     const image = imagePath(slug);
     if (!image) return null;
     const dialogue = def.correctByDialogue.indexOf(situation);

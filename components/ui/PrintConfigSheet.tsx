@@ -450,25 +450,56 @@ export function PaginatedPreview({
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [metrics, blockKeys, heightsReady]);
 
+  type PageSegment = {
+    idx: number;
+    /** Décalage vertical dans le bloc (tranche d'un exercice trop long). */
+    offset: number;
+    /** Hauteur visible de la tranche (hauteur totale si bloc entier). */
+    height: number;
+    /** Le bloc continue sur la page suivante. */
+    continues: boolean;
+  };
+
   const pages = useMemo(() => {
-    if (!metrics || !heightsReady || !blockHeights) return [] as number[][];
+    if (!metrics || !heightsReady || !blockHeights) return [] as PageSegment[][];
     const page1Avail = metrics.contentH - headerH - footerH - gap;
     const pageNAvail = metrics.contentH - footerH - gap;
-    const result: number[][] = [];
-    let cur: number[] = [];
+    const result: PageSegment[][] = [];
+    let cur: PageSegment[] = [];
     let curH = 0;
     let avail = page1Avail;
+
+    const flush = () => {
+      result.push(cur);
+      cur = [];
+      curH = 0;
+      avail = pageNAvail;
+    };
+
     blocks.forEach((_, i) => {
-      const h = (blockHeights[i] ?? 0) + gap;
+      const blockH = blockHeights[i] ?? 0;
+      const h = blockH + gap;
       const forceNew = Boolean(blocks[i]?.forceNewPage && cur.length > 0);
-      if (forceNew || (cur.length > 0 && curH + h > avail)) {
-        result.push(cur);
-        cur = [];
-        curH = 0;
-        avail = pageNAvail;
+      if (forceNew || (cur.length > 0 && curH + h > avail)) flush();
+
+      if (h <= avail - curH || blockH <= 0) {
+        cur.push({ idx: i, offset: 0, height: blockH, continues: false });
+        curH += h;
+        return;
       }
-      cur.push(i);
-      curH += h;
+
+      // Bloc plus haut qu'une page : tronçonné en tranches (le reste
+      // de l'exercice continue sur la page suivante).
+      let offset = 0;
+      while (offset < blockH) {
+        const room = avail - curH - gap;
+        const sliceH = Math.min(blockH - offset, Math.max(room, 120));
+        const continues = offset + sliceH < blockH;
+        cur.push({ idx: i, offset, height: sliceH, continues });
+        curH += sliceH + gap;
+        offset += sliceH;
+        if (continues) flush();
+      }
     });
     if (cur.length > 0) result.push(cur);
     if (result.length === 0) result.push([]);
@@ -540,7 +571,7 @@ export function PaginatedPreview({
                 className="preview-pages-container flex flex-col"
                 style={{ gap: sheetGap / scale }}
               >
-                {pages.map((blockIdxs, pageIdx) => (
+                {pages.map((segments, pageIdx) => (
                   <div
                     key={pageIdx}
                     className="preview-page-sheet print-layout-context flex shrink-0 flex-col overflow-hidden rounded-sm border border-zinc-300 shadow-lg"
@@ -548,12 +579,23 @@ export function PaginatedPreview({
                   >
                     {pageIdx === 0 && header}
                     <div className="flex-1">
-                      {blockIdxs.map((bi, j) => {
-                        const block = blocks[bi];
+                      {segments.map((seg, j) => {
+                        const block = blocks[seg.idx];
                         if (!block) return null;
+                        const isSlice = seg.offset > 0 || seg.continues;
+                        const body = isSlice ? (
+                          <div style={{ height: seg.height, overflow: "hidden" }}>
+                            <div style={{ marginTop: -seg.offset }}>{block.render()}</div>
+                          </div>
+                        ) : (
+                          block.render()
+                        );
                         return (
-                          <div key={block.key} style={{ marginBottom: j < blockIdxs.length - 1 ? gap : 0 }}>
-                            {block.render()}
+                          <div
+                            key={`${block.key}-seg${seg.offset}`}
+                            style={{ marginBottom: j < segments.length - 1 ? gap : 0 }}
+                          >
+                            {body}
                           </div>
                         );
                       })}
