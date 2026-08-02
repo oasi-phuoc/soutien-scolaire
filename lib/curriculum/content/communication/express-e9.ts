@@ -26,7 +26,7 @@ export const EXPRESS_E9_1: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Faire des achats", black: true, trans: t("Shopping") },
     prereqItems([
-      { code: "G4.22", title: "Les adjectifs qualificatifs", href: "/francais/grammaire/a1-gr-l23" },
+      { code: "G4.25", title: "Les adjectifs qualificatifs", href: "/francais/grammaire/a1-gr-l23" },
     ]),
     {
       type: "plain",

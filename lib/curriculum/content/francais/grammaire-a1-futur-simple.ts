@@ -1,0 +1,135 @@
+import type { GrammarLesson } from "../../grammar-data";
+
+/** Unité 45 — Le futur simple (G4.15) */
+export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
+  slug: "a1-gr-futur-simple",
+  code: "G4.15",
+  level: "A1",
+  title: "Le futur simple",
+  theory: [
+    {
+      type: "heading",
+      text: "Utilisation",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Le futur simple sert pour des événements futurs, dans des situations de communication précises, souvent avec une idée de certitude.",
+        "Prévision : Demain, il pleuvra dans toutes les régions.",
+        "Promesse / résolution : Je te téléphonerai demain à 8 heures.",
+        "Consigne ou refus catégorique : Vous prendrez ce médicament pendant un mois. ; Je ne partirai pas avec toi !",
+        "Programme / horaire : Ce voyage commencera à Athènes.",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "heading",
+      text: "Conjugaison",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Infinitif (radical) + terminaisons {a}-ai, -as, -a, -ons, -ez, -ont{/a}. → je commencerai ; je partirai.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["", "radical", "terminaison", "suite"],
+      boldFirstCol: true,
+      rows: [
+        ["je", "changer", "ai", "d'habitudes alimentaires."],
+        ["tu", "manger", "as", "moins."],
+        ["il / elle / on", "préparer", "a", "des repas légers."],
+        ["nous", "marcher", "ons", "une heure par jour."],
+        ["vous", "choisir", "ez", "des produits frais."],
+        ["ils / elles", "maigrir", "ont", "sûrement."],
+      ],
+    },
+    {
+      type: "note",
+      text: "Verbes en {a}-e{/a} : on enlève le {a}e{/a} avant les terminaisons. → prendre → je prendrai.",
+    },
+    {
+      type: "highlight",
+      label: "Cas particuliers (-er)",
+      items: [
+        "{a}-oyer / -uyer{/a} : y → i. → nettoyer → tu nettoieras.",
+        "{a}-ayer{/a} : deux formes possibles. → payer → on paiera / on payera.",
+        "{a}-eter / -eler{/a} : à partir du {a}je{/a} du présent + {a}r{/a} + terminaison. → appeler → j'appellerai ; acheter → nous achèterons.",
+      ],
+    },
+    {
+      type: "heading",
+      text: "Radicaux irréguliers",
+    },
+    {
+      type: "grid",
+      headers: ["Infinitif", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["aller", "il ira"],
+        ["avoir", "nous aurons"],
+        ["courir", "tu courras"],
+        ["devoir", "elle devra"],
+        ["envoyer", "j'enverrai"],
+        ["être", "vous serez"],
+        ["faire", "nous ferons"],
+        ["falloir", "il faudra"],
+        ["mourir", "on mourra"],
+        ["pleuvoir", "il pleuvra"],
+        ["pouvoir", "je pourrai"],
+        ["recevoir", "on recevra"],
+        ["savoir", "tu sauras"],
+        ["tenir", "elle tiendra"],
+        ["venir", "je viendrai"],
+        ["voir", "ils verront"],
+        ["vouloir", "elles voudront"],
+      ],
+    },
+    {
+      type: "note",
+      text: "Attention à la différence entre futur proche et futur simple.",
+    },
+  ],
+  exercises: [
+    {
+      type: "qcm",
+      title: "Futur simple",
+      instruction: "Choisissez la forme correcte.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Demain, il ___ dans toutes les régions.", choices: ["pleuvra", "pleut", "a plu", "va pleuvoir"], correctIdx: 0 },
+        { sentence: "Je te ___ demain à 8 heures.", choices: ["téléphonerai", "téléphone", "ai téléphoné", "téléphonais"], correctIdx: 0 },
+        { sentence: "Vous ___ ce médicament pendant un mois.", choices: ["prendrez", "prenez", "avez pris", "prendrez-vous"], correctIdx: 0 },
+        { sentence: "Je ___ le bateau. (prendre)", choices: ["prendrai", "prendreai", "prendrais", "prends"], correctIdx: 0 },
+        { sentence: "Tu ___ ta chambre. (nettoyer)", choices: ["nettoieras", "nettoyeras", "nettoies", "nettoyais"], correctIdx: 0 },
+        { sentence: "Je vous ___ . (appeler)", choices: ["appellerai", "appelerai", "appelle", "appelais"], correctIdx: 0 },
+        { sentence: "Nous ___ lui un cadeau. (acheter)", choices: ["achèterons", "acheterons", "achetons", "achèterions"], correctIdx: 0 },
+        { sentence: "Il ___ à Paris. (aller)", choices: ["ira", "allera", "va", "allait"], correctIdx: 0 },
+        { sentence: "Vous ___ prêts. (être)", choices: ["serez", "êtes", "étiez", "seriez"], correctIdx: 0 },
+        { sentence: "Nous ___ le travail. (faire)", choices: ["ferons", "faisons", "ferions", "avons fait"], correctIdx: 0 },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Complétez",
+      instruction: "Écrivez le verbe au futur simple.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Je ___ d'habitudes. (changer)", hint: "je", answer: "changerai" },
+        { sentence: "Tu ___ moins. (manger)", hint: "tu", answer: "mangeras" },
+        { sentence: "Il ___ des repas légers. (préparer)", hint: "il", answer: "préparera" },
+        { sentence: "Nous ___ une heure. (marcher)", hint: "nous", answer: "marcherons" },
+        { sentence: "Vous ___ des produits frais. (choisir)", hint: "vous", answer: "choisirez" },
+        { sentence: "Ils ___ sûrement. (maigrir)", hint: "ils", answer: "maigriront" },
+        { sentence: "Je ___ le bateau. (prendre)", hint: "-re", answer: "prendrai" },
+        { sentence: "Il ___ dix minutes de retard. (avoir)", hint: "irrégulier", answer: "aura" },
+        { sentence: "Le train ___ au quai 18. (arriver)", hint: "il", answer: "arrivera" },
+        { sentence: "Je ___ venir. (pouvoir)", hint: "irrégulier", answer: "pourrai" },
+      ],
+    },
+  ],
+};
