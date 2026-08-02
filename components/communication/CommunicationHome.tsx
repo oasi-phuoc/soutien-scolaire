@@ -232,7 +232,6 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                    {m.description && <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">{m.description}</p>}
                   </div>
                   <ModuleStateBadge state={moduleState} />
                   {allUnavailable ? (
