@@ -18,7 +18,7 @@ export const EXPRESS_E3_1: CommunicationLesson = {
         { code: "E2.3", title: "Règlement", href: "/communication/E2-3" },
         { code: "V5.1", title: "Matières", href: "/francais/vocabulaire/v5-matieres" },
         { code: "V5.2", title: "Matériel", href: "/francais/vocabulaire/v5-materiel-scolaire" },
-        { code: "G2.5", title: "Questions ouvertes", href: "/francais/grammaire/a1-gr-l10" }
+        { code: "G2.8", title: "Questions ouvertes", href: "/francais/grammaire/a1-gr-l10" }
       ],
     },
     {

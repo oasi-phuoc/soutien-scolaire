@@ -17,7 +17,7 @@ export const EXPRESS_E7_3: CommunicationLesson = {
       items: [
         { code: "E7.2", title: "Sport", href: "/communication/E7-2" },
         { code: "V9.4", title: "Culture", href: "/francais/vocabulaire/v9-espace-culturel" },
-        { code: "G2.7", title: "Démonstratifs", href: "/francais/grammaire/a1-gr-l18" }
+        { code: "G2.10", title: "Démonstratifs", href: "/francais/grammaire/a1-gr-l18" }
       ],
     },
     {

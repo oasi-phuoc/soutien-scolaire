@@ -19,7 +19,7 @@ export const EXPRESS_E1_3: CommunicationLesson = {
         { code: "V2.1", title: "Jours, mois, dates", href: "/francais/vocabulaire/v2-jours-mois-dates" },
         { code: "V2.2", title: "L'heure", href: "/francais/vocabulaire/v2-heure" },
         { code: "C1.5", title: "Verbes en -er", href: "/francais/conjugaison/a1-conj-l07" },
-        { code: "G2.3", title: "La négation", href: "/francais/grammaire/a1-gr-l02" }
+        { code: "G2.6", title: "La négation", href: "/francais/grammaire/a1-gr-l02" }
       ],
     },
     {

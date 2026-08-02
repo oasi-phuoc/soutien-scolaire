@@ -86,6 +86,9 @@ import { A1_GR_PRONOMINAUX } from "./content/francais/grammaire-a1-pronominaux";
 import { A1_GR_MODAUX } from "./content/francais/grammaire-a1-modaux";
 import { A1_GR_VERBES_IR } from "./content/francais/grammaire-a1-verbes-ir";
 import { A1_GR_VERBES_RE_OIR } from "./content/francais/grammaire-a1-verbes-re-oir";
+import { A1_GR_GENRE_CHOSES } from "./content/francais/grammaire-a1-genre-choses";
+import { A1_GR_GENRE_PERSONNES } from "./content/francais/grammaire-a1-genre-personnes";
+import { A1_GR_PRESENT_PROGRESSIF } from "./content/francais/grammaire-a1-present-progressif";
 import { A1_GR_VERBES_ER_PART } from "./content/francais/grammaire-a1-verbes-er-particuliers";
 import { A1_GR_CEST } from "./content/francais/grammaire-r1.9";
 import { A1_GR_PHRASES } from "./content/francais/grammaire-r1.6";
@@ -175,44 +178,47 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-verbes-er-particuliers": "G1.7",
   "a1-gr-verbes-ir": "G1.8",
   "a1-gr-verbes-re-oir": "G1.9",
-  "a1-gr-l04": "G1.10",
+  "a1-gr-present-progressif": "G1.10",
   // G2 — Chapitre 2 (unités 11–20)
-  "a1-gr-l03": "G2.1",
-  "a1-gr-phrases": "G2.2",
-  "a1-gr-l02": "G2.3",
-  "a1-gr-interro": "G2.4",
-  "a1-gr-l10": "G2.5",
-  "a1-gr-l19": "G2.6",
-  "a1-gr-l18": "G2.7",
-  "a1-gr-l11": "G2.8",
-  "a1-gr-l14": "G2.9",
-  "a1-gr-l23": "G2.10",
+  "a1-gr-genre-personnes": "G2.1",
+  "a1-gr-genre-choses": "G2.2",
+  "a1-gr-l04": "G2.3",
+  "a1-gr-l03": "G2.4",
+  "a1-gr-phrases": "G2.5",
+  "a1-gr-l02": "G2.6",
+  "a1-gr-interro": "G2.7",
+  "a1-gr-l10": "G2.8",
+  "a1-gr-l19": "G2.9",
+  "a1-gr-l18": "G2.10",
   // G3 — Chapitre 3 (unités 21–30)
-  "a2-gr-l07": "G3.1",
-  "a2-gr-l09": "G3.2",
-  "a1-gr-expressions-temps": "G3.3",
-  "a1-gr-l22": "G3.4",
-  "a2-gr-l39": "G3.5",
-  "a2-gr-bon-bien-meilleur-mieux": "G3.6",
-  "a2-gr-superlatif": "G3.7",
-  "a2-gr-l42": "G3.8",
-  "a2-gr-l19": "G3.9",
-  "a2-gr-l35": "G3.10",
-  // G4 — Chapitre 4 (unités 31–44)
-  "a2-gr-l36": "G4.1",
-  "gr-marqueurs-temps-complet": "G4.2",
-  "a2-gr-l52": "G4.3",
-  "a2-gr-adverbes-types": "G4.4",
-  "a1-gr-verbes-double-auxiliaire": "G4.5",
-  "a1-gr-pronominaux-passe-compose": "G4.6",
-  "a2-gr-passe-compose-ou-imparfait": "G4.7",
-  "a2-gr-imparfait-irreguliers": "G4.8",
-  "a2-gr-futur-irreguliers": "G4.9",
-  "a2-gr-futur-simple-ou-proche": "G4.10",
-  "a2-gr-hypothese-futur": "G4.11",
-  "a2-gr-conditionnel": "G4.12",
-  "a2-gr-gerondif": "G4.13",
-  "a2-gr-subjonctif": "G4.14",
+  "a1-gr-l11": "G3.1",
+  "a1-gr-l14": "G3.2",
+  "a1-gr-l23": "G3.3",
+  "a2-gr-l07": "G3.4",
+  "a2-gr-l09": "G3.5",
+  "a1-gr-expressions-temps": "G3.6",
+  "a1-gr-l22": "G3.7",
+  "a2-gr-l39": "G3.8",
+  "a2-gr-bon-bien-meilleur-mieux": "G3.9",
+  "a2-gr-superlatif": "G3.10",
+  // G4 — Chapitre 4 (unités 31–47)
+  "a2-gr-l42": "G4.1",
+  "a2-gr-l19": "G4.2",
+  "a2-gr-l35": "G4.3",
+  "a2-gr-l36": "G4.4",
+  "gr-marqueurs-temps-complet": "G4.5",
+  "a2-gr-l52": "G4.6",
+  "a2-gr-adverbes-types": "G4.7",
+  "a1-gr-verbes-double-auxiliaire": "G4.8",
+  "a1-gr-pronominaux-passe-compose": "G4.9",
+  "a2-gr-passe-compose-ou-imparfait": "G4.10",
+  "a2-gr-imparfait-irreguliers": "G4.11",
+  "a2-gr-futur-irreguliers": "G4.12",
+  "a2-gr-futur-simple-ou-proche": "G4.13",
+  "a2-gr-hypothese-futur": "G4.14",
+  "a2-gr-conditionnel": "G4.15",
+  "a2-gr-gerondif": "G4.16",
+  "a2-gr-subjonctif": "G4.17",
     // C1 — Verbes essentiels
   "a1-conj-l00": "C1.1",
   "a1-conj-l01": "C1.2",
@@ -238,7 +244,7 @@ const REORGANIZED_CODES: Record<string, string> = {
 
 const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
   ...A1_GR_L23,
-  code: "G2.10",
+  code: "G3.3",
   title: "Les adjectifs qualificatifs",
 };
 
@@ -296,6 +302,9 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_VERBES_ER_PART,
   A1_GR_VERBES_IR,
   A1_GR_VERBES_RE_OIR,
+  A1_GR_PRESENT_PROGRESSIF,
+  A1_GR_GENRE_PERSONNES,
+  A1_GR_GENRE_CHOSES,
   A1_GR_CEST,
   A1_GR_PHRASES,
   A1_GR_L02,
