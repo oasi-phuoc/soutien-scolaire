@@ -110,6 +110,7 @@ def emit_ce_export(prefix: str, slug_base: str, count: int = 20) -> str:
   id: "{slug}",
   readingText: {prefix}_CE{suffix}_TEXT,
   questionPool: {prefix}_CE{suffix}_POOL,
+  questionCount: 6,
 }})"""
         )
     return f"export const {prefix}_CE: CommunicationExercise[] = [\n" + ",\n".join(items) + ",\n];"
@@ -142,7 +143,8 @@ def emit_ce_email_export(prefix: str, slug_base: str, count: int = 20) -> str:
             f"""readingPoolExercise({{
   id: "{slug}",
   readingText: {prefix}_CE_EMAIL{suffix}_TEXT,
-  questionPool: {prefix}_CE_EMAIL{suffix}_POOL{instr}
+  questionPool: {prefix}_CE_EMAIL{suffix}_POOL,
+  questionCount: 6{instr}
 }})"""
         )
     return f"export const {prefix}_CE_EMAIL: CommunicationExercise[] = [\n" + ",\n".join(items) + ",\n];"

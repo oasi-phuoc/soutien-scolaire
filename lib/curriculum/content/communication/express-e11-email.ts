@@ -22,2062 +22,2042 @@ const PE_MAX = 180;
    E11.1 — Apprécier la cuisine
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E11_1_CE_EMAIL_TEXT = `De : Service E11 1 1
+const E11_1_CE_EMAIL_TEXT = `De : La responsable Nadia
 
-Objet : Message 1 — information
+Objet : Inscription à un atelier soupe de saison
 
 Bonjour,
 
-Concernant sujet 1 : détail 1.
+Votre inscription à un atelier soupe de saison est bien notée.
+Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+Merci d'apporter un tablier propre. La participation est gratuite.
+Cette rencontre aide à exprimer ce qu'on aime dans un plat.
 
-Délai : délai 1 jours. Action : action 1.
+À bientôt,
 
-Contact : contact 1. Merci.
-
-Cordialement,
-
-Service`;
+La responsable Nadia`;
 
 const E11_1_CE_EMAIL_POOL = buildExpressPool("e11-1-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 1 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Inscription à un atelier soupe de saison", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 1 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Inscription",
+    vfQ: "L'objet de l'e-mail est « Inscription à un atelier soupe de saison ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 1", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["La responsable Nadia", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 1.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 1.",
+    fillQ: "De : _________.",
+    fill: "responsable",
+    vfQ: "L'e-mail est envoyé par La responsable Nadia.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 1", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 6 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 1.",
-    fill: "détail",
-    vfQ: "Info : détail 1.",
+    fillQ: "La date est _________ 6 mai.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 6 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 1 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 1 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 1 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 1", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier soupe de saison", "un match de football", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 1.",
-    fill: "action",
-    vfQ: "Action : action 1.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier soupe de saison.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 1", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un tablier propre", "un casque de vélo", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 1.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "tablier",
+    vfQ: "Il faut prévoir un tablier propre.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 1", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["gratuit", "8 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 1.",
-    fill: "contact",
-    vfQ: "Contact : contact 1.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "gratuit",
+    vfQ: "Le prix indiqué est gratuit.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_2_TEXT = `De : Service E11 1 2
+const E11_1_CE_EMAIL_2_TEXT = `De : Accueil du quartier
 
-Objet : Message 2 — information
+Objet : Rappel pour mardi 14 mai
 
-Bonjour,
+Bonjour à toutes et à tous,
 
-Concernant sujet 2 : détail 2.
+Petit rappel : une dégustation de fromages doux aura lieu mardi 14 mai.
+Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Comme il y a 10 places, merci de prévenir en cas d'absence.
+N'oubliez pas une petite assiette et lisez bien cette consigne : les fromages restent au frais jusqu'au service.
 
-Délai : délai 2 jours. Action : action 2.
+Bonne journée,
 
-Contact : contact 2. Merci.
-
-Cordialement,
-
-Service`;
+Accueil du quartier`;
 
 const E11_1_CE_EMAIL_2_POOL = buildExpressPool("e11-1-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 2 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rappel pour mardi 14 mai", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 2 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rappel",
+    vfQ: "L'objet de l'e-mail est « Rappel pour mardi 14 mai ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 2", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Accueil du quartier", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 2.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 2.",
+    fillQ: "De : _________.",
+    fill: "Accueil",
+    vfQ: "L'e-mail est envoyé par Accueil du quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 2", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 14 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 2.",
-    fill: "détail",
-    vfQ: "Info : détail 2.",
+    fillQ: "La date est _________ 14 mai.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 14 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 2 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["10 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 2 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 2 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "10",
+    vfQ: "L'heure indiquée est 10 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 2", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une dégustation de fromages doux", "une réunion bancaire", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 2.",
-    fill: "action",
-    vfQ: "Action : action 2.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "dégustation",
+    vfQ: "Le texte parle de l'activité suivante : une dégustation de fromages doux.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 2", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une petite assiette", "un passeport", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 2.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "petite",
+    vfQ: "Il faut prévoir une petite assiette.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 2", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["5 CHF", "10 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 2.",
-    fill: "contact",
-    vfQ: "Contact : contact 2.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "5",
+    vfQ: "Le prix indiqué est 5 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_3_TEXT = `De : Service E11 1 3
+const E11_1_CE_EMAIL_3_TEXT = `De : Service activités
 
-Objet : Message 3 — information
+Objet : Question avant un cours de crêpes fines
 
 Bonjour,
 
-Concernant sujet 3 : détail 3.
-
-Délai : délai 3 jours. Action : action 3.
-
-Contact : contact 3. Merci.
+Je voudrais participer à un cours de crêpes fines, mais j'ai une question.
+Faut-il vraiment apporter une poêle légère ?
+Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
+Mon objectif est de réussir une pâte simple. Merci pour votre réponse.
 
 Cordialement,
 
-Service`;
+Rami`;
 
 const E11_1_CE_EMAIL_3_POOL = buildExpressPool("e11-1-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 3 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Question avant un cours de crêpes fines", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 3 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Question",
+    vfQ: "L'objet de l'e-mail est « Question avant un cours de crêpes fines ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 3", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service activités", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 3.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 3.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service activités.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 3", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 22 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 3.",
-    fill: "détail",
-    vfQ: "Info : détail 3.",
+    fillQ: "La date est _________ 22 mai.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 22 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 3 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 3 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 3 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 3", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un cours de crêpes fines", "un cours de mécanique", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 3.",
-    fill: "action",
-    vfQ: "Action : action 3.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "cours",
+    vfQ: "Le texte parle de l'activité suivante : un cours de crêpes fines.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 3", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une poêle légère", "une lampe de poche", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 3.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "poêle",
+    vfQ: "Il faut prévoir une poêle légère.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 3", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["8 CHF", "12 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 3.",
-    fill: "contact",
-    vfQ: "Contact : contact 3.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "8",
+    vfQ: "Le prix indiqué est 8 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_4_TEXT = `De : Service E11 1 4
+const E11_1_CE_EMAIL_4_TEXT = `De : Association Bellevue
 
-Objet : Message 4 — information
+Objet : Confirmation de votre place
 
-Bonjour,
+Madame, Monsieur,
 
-Concernant sujet 4 : détail 4.
+Nous confirmons votre place pour une visite du marché.
+La séance se passe à la ferme des Lilas jeudi 30 mai.
+Merci d'arriver à 12 h 30. La participation est de 10 CHF.
+Le bénévole Marco sera sur place pour vous accueillir.
 
-Délai : délai 4 jours. Action : action 4.
+Avec nos salutations,
 
-Contact : contact 4. Merci.
-
-Cordialement,
-
-Service`;
+Association Bellevue`;
 
 const E11_1_CE_EMAIL_4_POOL = buildExpressPool("e11-1-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 4 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Confirmation de votre place", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 4 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Confirmation",
+    vfQ: "L'objet de l'e-mail est « Confirmation de votre place ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 4", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Association Bellevue", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 4.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 4.",
+    fillQ: "De : _________.",
+    fill: "Association",
+    vfQ: "L'e-mail est envoyé par Association Bellevue.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 4", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 30 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 4.",
-    fill: "détail",
-    vfQ: "Info : détail 4.",
+    fillQ: "La date est _________ 30 mai.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 30 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 4 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["12 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 4 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 4 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "12",
+    vfQ: "L'heure indiquée est 12 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 4", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une visite du marché", "un match de football", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 4.",
-    fill: "action",
-    vfQ: "Action : action 4.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "visite",
+    vfQ: "Le texte parle de l'activité suivante : une visite du marché.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 4", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un panier vide", "un casque de vélo", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 4.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "panier",
+    vfQ: "Il faut prévoir un panier vide.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 4", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["10 CHF", "14 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 4.",
-    fill: "contact",
-    vfQ: "Contact : contact 4.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "10",
+    vfQ: "Le prix indiqué est 10 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_5_TEXT = `De : Service E11 1 5
+const E11_1_CE_EMAIL_5_TEXT = `De : Secrétariat du centre
 
-Objet : Message 5 — information
+Objet : Conseil pratique : un carnet de recettes
 
-Bonjour,
+Salut,
 
-Concernant sujet 5 : détail 5.
+Pour un atelier sauces rapides, pense à mettre un carnet de recettes dans ton sac.
+On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Si tu veux donner plus de goût à un repas, cette séance est très utile.
+Attention : les sauces très piquantes sont séparées.
 
-Délai : délai 5 jours. Action : action 5.
+À demain,
 
-Contact : contact 5. Merci.
-
-Cordialement,
-
-Service`;
+Noé`;
 
 const E11_1_CE_EMAIL_5_POOL = buildExpressPool("e11-1-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 5 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Conseil pratique : un carnet de recettes", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 5 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Conseil",
+    vfQ: "L'objet de l'e-mail est « Conseil pratique : un carnet de recettes ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 5", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Secrétariat du centre", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 5.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 5.",
+    fillQ: "De : _________.",
+    fill: "Secrétariat",
+    vfQ: "L'e-mail est envoyé par Secrétariat du centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 5", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 7 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 5.",
-    fill: "détail",
-    vfQ: "Info : détail 5.",
+    fillQ: "La date est _________ 7 juin.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 7 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 5 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 5 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 5 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 5", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier sauces rapides", "une réunion bancaire", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 5.",
-    fill: "action",
-    vfQ: "Action : action 5.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier sauces rapides.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 5", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un carnet de recettes", "un passeport", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 5.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "carnet",
+    vfQ: "Il faut prévoir un carnet de recettes.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 5", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["12 CHF", "15 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 5.",
-    fill: "contact",
-    vfQ: "Contact : contact 5.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "12",
+    vfQ: "Le prix indiqué est 12 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_6_TEXT = `De : Service E11 1 6
+const E11_1_CE_EMAIL_6_TEXT = `De : Équipe organisation
 
-Objet : Message 6 — information
+Objet : Changement de salle
 
 Bonjour,
 
-Concernant sujet 6 : détail 6.
+La salle prévue n'est plus disponible pour une table autour des épices.
+Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
+Le prix reste 15 CHF et 16 places sont gardées.
+Merci de préparer une cuillère en bois.
 
-Délai : délai 6 jours. Action : action 6.
+Merci de votre compréhension,
 
-Contact : contact 6. Merci.
-
-Cordialement,
-
-Service`;
+Équipe organisation`;
 
 const E11_1_CE_EMAIL_6_POOL = buildExpressPool("e11-1-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 6 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Changement de salle", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 6 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Changement",
+    vfQ: "L'objet de l'e-mail est « Changement de salle ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 6", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe organisation", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 6.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 6.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe organisation.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 6", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 15 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 6.",
-    fill: "détail",
-    vfQ: "Info : détail 6.",
+    fillQ: "La date est _________ 15 juin.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 15 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 6 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 6 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 6 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 6", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une table autour des épices", "un cours de mécanique", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 6.",
-    fill: "action",
-    vfQ: "Action : action 6.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "table",
+    vfQ: "Le texte parle de l'activité suivante : une table autour des épices.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 6", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une cuillère en bois", "une lampe de poche", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 6.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "cuillère",
+    vfQ: "Il faut prévoir une cuillère en bois.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 6", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["15 CHF", "16 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 6.",
-    fill: "contact",
-    vfQ: "Contact : contact 6.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "15",
+    vfQ: "Le prix indiqué est 15 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_7_TEXT = `De : Service E11 1 7
+const E11_1_CE_EMAIL_7_TEXT = `De : Club des habitants
 
-Objet : Message 7 — information
+Objet : Merci pour votre participation
 
 Bonjour,
 
-Concernant sujet 7 : détail 7.
+Merci d'être venu à un repas partagé sans gaspillage à la terrasse du Marché.
+Plusieurs participants ont dit que cela aide à partager sans jeter de nourriture.
+Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
+Votre remarque sur une boîte réutilisable a été notée.
 
-Délai : délai 7 jours. Action : action 7.
+Bien à vous,
 
-Contact : contact 7. Merci.
-
-Cordialement,
-
-Service`;
+Club des habitants`;
 
 const E11_1_CE_EMAIL_7_POOL = buildExpressPool("e11-1-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 7 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Merci pour votre participation", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 7 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Merci",
+    vfQ: "L'objet de l'e-mail est « Merci pour votre participation ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 7", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Club des habitants", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 7.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 7.",
+    fillQ: "De : _________.",
+    fill: "Club",
+    vfQ: "L'e-mail est envoyé par Club des habitants.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 7", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 23 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 7.",
-    fill: "détail",
-    vfQ: "Info : détail 7.",
+    fillQ: "La date est _________ 23 juin.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 23 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 7 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 7 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 7 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 7", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un repas partagé sans gaspillage", "un match de football", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 7.",
-    fill: "action",
-    vfQ: "Action : action 7.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "repas",
+    vfQ: "Le texte parle de l'activité suivante : un repas partagé sans gaspillage.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 7", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une boîte réutilisable", "un casque de vélo", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 7.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "boîte",
+    vfQ: "Il faut prévoir une boîte réutilisable.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 7", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["18 CHF", "18 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 7.",
-    fill: "contact",
-    vfQ: "Contact : contact 7.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "18",
+    vfQ: "Le prix indiqué est 18 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_8_TEXT = `De : Service E11 1 8
+const E11_1_CE_EMAIL_8_TEXT = `De : Maison commune
 
-Objet : Message 8 — information
+Objet : Invitation cuisine
 
-Bonjour,
+Bonjour les amis,
 
-Concernant sujet 8 : détail 8.
+Je vous propose de venir avec moi à une préparation de desserts aux fruits.
+C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Il faut réserver directement sur place car il y a seulement 20 places.
+Apportez deux fruits lavés et un peu de bonne humeur.
 
-Délai : délai 8 jours. Action : action 8.
+À très vite,
 
-Contact : contact 8. Merci.
-
-Cordialement,
-
-Service`;
+Mina`;
 
 const E11_1_CE_EMAIL_8_POOL = buildExpressPool("e11-1-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 8 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Invitation cuisine", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 8 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Invitation",
+    vfQ: "L'objet de l'e-mail est « Invitation cuisine ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 8", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Maison commune", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 8.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 8.",
+    fillQ: "De : _________.",
+    fill: "Maison",
+    vfQ: "L'e-mail est envoyé par Maison commune.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 8", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 1er juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 8.",
-    fill: "détail",
-    vfQ: "Info : détail 8.",
+    fillQ: "La date est _________ 1er juillet.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 1er juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 8 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 8 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 8 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 8", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une préparation de desserts aux fruits", "une réunion bancaire", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 8.",
-    fill: "action",
-    vfQ: "Action : action 8.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "préparation",
+    vfQ: "Le texte parle de l'activité suivante : une préparation de desserts aux fruits.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 8", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["deux fruits lavés", "un passeport", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 8.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "deux",
+    vfQ: "Il faut prévoir deux fruits lavés.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 8", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["20 CHF", "20 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 8.",
-    fill: "contact",
-    vfQ: "Contact : contact 8.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "20",
+    vfQ: "Le prix indiqué est 20 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_9_TEXT = `De : Service E11 1 9
+const E11_1_CE_EMAIL_9_TEXT = `De : Bureau des inscriptions
 
-Objet : Message 9 — information
+Objet : Liste du matériel
 
 Bonjour,
 
-Concernant sujet 9 : détail 9.
+Voici la liste pour un cours de pain maison : un torchon, une bouteille d'eau et un stylo.
+Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
+Le tarif est 25 CHF.
+Nous parlerons surtout de la manière de faire lever la pâte tranquillement.
 
-Délai : délai 9 jours. Action : action 9.
+Merci,
 
-Contact : contact 9. Merci.
-
-Cordialement,
-
-Service`;
+Bureau des inscriptions`;
 
 const E11_1_CE_EMAIL_9_POOL = buildExpressPool("e11-1-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 9 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Liste du matériel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 9 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Liste",
+    vfQ: "L'objet de l'e-mail est « Liste du matériel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 9", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Bureau des inscriptions", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 9.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 9.",
+    fillQ: "De : _________.",
+    fill: "Bureau",
+    vfQ: "L'e-mail est envoyé par Bureau des inscriptions.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 9", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 9 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 9.",
-    fill: "détail",
-    vfQ: "Info : détail 9.",
+    fillQ: "La date est _________ 9 juillet.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 9 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 9 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 9 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 9 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 9", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un cours de pain maison", "un cours de mécanique", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 9.",
-    fill: "action",
-    vfQ: "Action : action 9.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "cours",
+    vfQ: "Le texte parle de l'activité suivante : un cours de pain maison.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 9", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un torchon", "une lampe de poche", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 9.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "torchon",
+    vfQ: "Il faut prévoir un torchon.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 9", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["25 CHF", "22 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 9.",
-    fill: "contact",
-    vfQ: "Contact : contact 9.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "25",
+    vfQ: "Le prix indiqué est 25 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_10_TEXT = `De : Service E11 1 10
+const E11_1_CE_EMAIL_10_TEXT = `De : Info loisirs
 
-Objet : Message 10 — information
+Objet : Places disponibles
 
 Bonjour,
 
-Concernant sujet 10 : détail 10.
-
-Délai : délai 10 jours. Action : action 10.
-
-Contact : contact 10. Merci.
+Bonne nouvelle : il reste 24 places pour une découverte des plats du monde.
+La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
+Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Prévoyez une recette de son pays. Le prix est 30 CHF.
 
 Cordialement,
 
-Service`;
+Info loisirs`;
 
 const E11_1_CE_EMAIL_10_POOL = buildExpressPool("e11-1-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 10 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Places disponibles", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 10 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Places",
+    vfQ: "L'objet de l'e-mail est « Places disponibles ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 10", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Info loisirs", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 10.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 10.",
+    fillQ: "De : _________.",
+    fill: "Info",
+    vfQ: "L'e-mail est envoyé par Info loisirs.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 10", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 17 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 10.",
-    fill: "détail",
-    vfQ: "Info : détail 10.",
+    fillQ: "La date est _________ 17 juillet.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 17 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 10 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 10 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 10 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 10", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une découverte des plats du monde", "un match de football", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 10.",
-    fill: "action",
-    vfQ: "Action : action 10.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "découverte",
+    vfQ: "Le texte parle de l'activité suivante : une découverte des plats du monde.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 10", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une recette de son pays", "un casque de vélo", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 10.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "recette",
+    vfQ: "Il faut prévoir une recette de son pays.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 10", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["30 CHF", "24 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 10.",
-    fill: "contact",
-    vfQ: "Contact : contact 10.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "30",
+    vfQ: "Le prix indiqué est 30 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_11_TEXT = `De : Service E11 1 11
+const E11_1_CE_EMAIL_11_TEXT = `De : Groupe des bénévoles
 
-Objet : Message 11 — information
+Objet : Retour sur l'activité
 
 Bonjour,
 
-Concernant sujet 11 : détail 11.
+Après une pause café avec pâtisseries, nous avons reçu beaucoup de messages positifs.
+Les participants ont apprécié décrire une pâtisserie avec précision.
+La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
+Cette fois, merci d'apporter une tasse personnelle.
 
-Délai : délai 11 jours. Action : action 11.
+Au plaisir de vous revoir,
 
-Contact : contact 11. Merci.
-
-Cordialement,
-
-Service`;
+Groupe des bénévoles`;
 
 const E11_1_CE_EMAIL_11_POOL = buildExpressPool("e11-1-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 11 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Retour sur l'activité", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 11 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Retour",
+    vfQ: "L'objet de l'e-mail est « Retour sur l'activité ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 11", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Groupe des bénévoles", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 11.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 11.",
+    fillQ: "De : _________.",
+    fill: "Groupe",
+    vfQ: "L'e-mail est envoyé par Groupe des bénévoles.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 11", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 25 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 11.",
-    fill: "détail",
-    vfQ: "Info : détail 11.",
+    fillQ: "La date est _________ 25 juillet.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 25 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 11 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["19 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 11 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 11 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "19",
+    vfQ: "L'heure indiquée est 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 11", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une pause café avec pâtisseries", "une réunion bancaire", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 11.",
-    fill: "action",
-    vfQ: "Action : action 11.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "pause",
+    vfQ: "Le texte parle de l'activité suivante : une pause café avec pâtisseries.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 11", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une tasse personnelle", "un passeport", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 11.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "tasse",
+    vfQ: "Il faut prévoir une tasse personnelle.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 11", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["4 CHF", "6 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 11.",
-    fill: "contact",
-    vfQ: "Contact : contact 11.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "4",
+    vfQ: "Le prix indiqué est 4 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_12_TEXT = `De : Service E11 1 12
+const E11_1_CE_EMAIL_12_TEXT = `De : Réception
 
-Objet : Message 12 — information
+Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Concernant sujet 12 : détail 12.
+Votre rendez-vous pour une lecture d'étiquettes alimentaires commence à 8 h 30.
+Merci d'être à la maison médicale dix minutes avant.
+La date est vendredi 2 août et le prix est 6 CHF.
+La docteure Morel conseille de préparer une loupe ou ses lunettes.
 
-Délai : délai 12 jours. Action : action 12.
+Meilleures salutations,
 
-Contact : contact 12. Merci.
-
-Cordialement,
-
-Service`;
+Réception`;
 
 const E11_1_CE_EMAIL_12_POOL = buildExpressPool("e11-1-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 12 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rendez-vous à 8 h 30", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 12 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rendez",
+    vfQ: "L'objet de l'e-mail est « Rendez-vous à 8 h 30 ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 12", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Réception", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 12.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 12.",
+    fillQ: "De : _________.",
+    fill: "Réception",
+    vfQ: "L'e-mail est envoyé par Réception.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 12", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 2 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 12.",
-    fill: "détail",
-    vfQ: "Info : détail 12.",
+    fillQ: "La date est _________ 2 août.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 2 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 12 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["8 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 12 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 12 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "8",
+    vfQ: "L'heure indiquée est 8 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 12", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une lecture d'étiquettes alimentaires", "un cours de mécanique", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 12.",
-    fill: "action",
-    vfQ: "Action : action 12.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "lecture",
+    vfQ: "Le texte parle de l'activité suivante : une lecture d'étiquettes alimentaires.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 12", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une loupe ou ses lunettes", "une lampe de poche", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 12.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "loupe",
+    vfQ: "Il faut prévoir une loupe ou ses lunettes.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 12", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["6 CHF", "9 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 12.",
-    fill: "contact",
-    vfQ: "Contact : contact 12.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "6",
+    vfQ: "Le prix indiqué est 6 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_13_TEXT = `De : Service E11 1 13
+const E11_1_CE_EMAIL_13_TEXT = `De : Atelier A2
 
-Objet : Message 13 — information
+Objet : Préparation de groupe
 
-Bonjour,
+Chers participants,
 
-Concernant sujet 13 : détail 13.
+Pour préparer un atelier pique-nique équilibré, nous faisons deux petits groupes.
+Le premier groupe arrive à 13 h à le parc des Amandiers.
+La séance a lieu samedi 10 août avec l'entraîneuse Emma.
+Merci de vérifier une gourde avant de partir.
 
-Délai : délai 13 jours. Action : action 13.
+À bientôt,
 
-Contact : contact 13. Merci.
-
-Cordialement,
-
-Service`;
+Atelier A2`;
 
 const E11_1_CE_EMAIL_13_POOL = buildExpressPool("e11-1-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 13 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Préparation de groupe", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 13 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Préparation",
+    vfQ: "L'objet de l'e-mail est « Préparation de groupe ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 13", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Atelier A2", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 13.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 13.",
+    fillQ: "De : _________.",
+    fill: "Atelier",
+    vfQ: "L'e-mail est envoyé par Atelier A2.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 13", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 10 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 13.",
-    fill: "détail",
-    vfQ: "Info : détail 13.",
+    fillQ: "La date est _________ 10 août.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 10 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 13 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["13 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 13 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 13 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "13",
+    vfQ: "L'heure indiquée est 13 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 13", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier pique-nique équilibré", "un match de football", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 13.",
-    fill: "action",
-    vfQ: "Action : action 13.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier pique-nique équilibré.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 13", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une gourde", "un casque de vélo", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 13.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "gourde",
+    vfQ: "Il faut prévoir une gourde.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 13", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["9 CHF", "11 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 13.",
-    fill: "contact",
-    vfQ: "Contact : contact 13.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "9",
+    vfQ: "Le prix indiqué est 9 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_14_TEXT = `De : Service E11 1 14
+const E11_1_CE_EMAIL_14_TEXT = `De : Coordination locale
 
-Objet : Message 14 — information
+Objet : Demande d'information
 
 Bonjour,
 
-Concernant sujet 14 : détail 14.
+Je cherche des informations sur une rencontre avec un maraîcher.
+J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Pouvez-vous confirmer le prix de 11 CHF ?
+Je viens surtout pour poser des questions sur les légumes.
 
-Délai : délai 14 jours. Action : action 14.
+Merci d'avance,
 
-Contact : contact 14. Merci.
-
-Cordialement,
-
-Service`;
+Salma`;
 
 const E11_1_CE_EMAIL_14_POOL = buildExpressPool("e11-1-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 14 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Demande d'information", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 14 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Demande",
+    vfQ: "L'objet de l'e-mail est « Demande d'information ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 14", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Coordination locale", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 14.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 14.",
+    fillQ: "De : _________.",
+    fill: "Coordination",
+    vfQ: "L'e-mail est envoyé par Coordination locale.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 14", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 18 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 14.",
-    fill: "détail",
-    vfQ: "Info : détail 14.",
+    fillQ: "La date est _________ 18 août.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 18 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 14 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 14 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 14 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 14", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une rencontre avec un maraîcher", "une réunion bancaire", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 14.",
-    fill: "action",
-    vfQ: "Action : action 14.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "rencontre",
+    vfQ: "Le texte parle de l'activité suivante : une rencontre avec un maraîcher.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 14", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un sac en tissu", "un passeport", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 14.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "sac",
+    vfQ: "Il faut prévoir un sac en tissu.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 14", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["11 CHF", "13 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 14.",
-    fill: "contact",
-    vfQ: "Contact : contact 14.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "11",
+    vfQ: "Le prix indiqué est 11 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_15_TEXT = `De : Service E11 1 15
+const E11_1_CE_EMAIL_15_TEXT = `De : Agenda citoyen
 
-Objet : Message 15 — information
+Objet : Choix entre deux dates
 
 Bonjour,
 
-Concernant sujet 15 : détail 15.
+Deux dates étaient proposées, mais nous gardons lundi 26 août.
+L'horaire choisi est 16 h 30 à le centre scolaire.
+Ce choix convient mieux à la professeure Léa et au groupe.
+Le contenu reste un goûter parents-enfants avec une serviette.
 
-Délai : délai 15 jours. Action : action 15.
+Merci pour vos réponses,
 
-Contact : contact 15. Merci.
-
-Cordialement,
-
-Service`;
+Agenda citoyen`;
 
 const E11_1_CE_EMAIL_15_POOL = buildExpressPool("e11-1-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 15 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 15 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Choix",
+    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 15", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 15.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 15.",
+    fillQ: "De : _________.",
+    fill: "Agenda",
+    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 15", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 15.",
-    fill: "détail",
-    vfQ: "Info : détail 15.",
+    fillQ: "La date est _________ 26 août.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 26 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 15 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 15 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 15 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 15", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un goûter parents-enfants", "un cours de mécanique", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 15.",
-    fill: "action",
-    vfQ: "Action : action 15.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "goûter",
+    vfQ: "Le texte parle de l'activité suivante : un goûter parents-enfants.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 15", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une serviette", "une lampe de poche", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 15.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "serviette",
+    vfQ: "Il faut prévoir une serviette.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 15", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["14 CHF", "17 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 15.",
-    fill: "contact",
-    vfQ: "Contact : contact 15.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "14",
+    vfQ: "Le prix indiqué est 14 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_16_TEXT = `De : Service E11 1 16
+const E11_1_CE_EMAIL_16_TEXT = `De : Service rappel
 
-Objet : Message 16 — information
+Objet : Dernier rappel
 
 Bonjour,
 
-Concernant sujet 16 : détail 16.
+Dernier rappel avant une séance pour dresser une jolie table !
+Rendez-vous mardi 3 septembre à 17 h à la place du Village.
+Sans inscription au stand d'information, l'entrée n'est pas garantie.
+Apportez quatre verres et gardez 16 CHF si besoin.
 
-Délai : délai 16 jours. Action : action 16.
+À tout à l'heure,
 
-Contact : contact 16. Merci.
-
-Cordialement,
-
-Service`;
+Service rappel`;
 
 const E11_1_CE_EMAIL_16_POOL = buildExpressPool("e11-1-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 16 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Dernier rappel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 16 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Dernier",
+    vfQ: "L'objet de l'e-mail est « Dernier rappel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 16", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service rappel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 16.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 16.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service rappel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 16", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 3 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 16.",
-    fill: "détail",
-    vfQ: "Info : détail 16.",
+    fillQ: "La date est _________ 3 septembre.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 3 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 16 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 16 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 16 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 16", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une séance pour dresser une jolie table", "un match de football", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 16.",
-    fill: "action",
-    vfQ: "Action : action 16.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "séance",
+    vfQ: "Le texte parle de l'activité suivante : une séance pour dresser une jolie table.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 16", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["quatre verres", "un casque de vélo", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 16.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "quatre",
+    vfQ: "Il faut prévoir quatre verres.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 16", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["16 CHF", "19 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 16.",
-    fill: "contact",
-    vfQ: "Contact : contact 16.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "16",
+    vfQ: "Le prix indiqué est 16 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_17_TEXT = `De : Service E11 1 17
+const E11_1_CE_EMAIL_17_TEXT = `De : Responsable du projet
 
-Objet : Message 17 — information
+Objet : Message de la responsable
 
 Bonjour,
 
-Concernant sujet 17 : détail 17.
+La coach Ana vous écrit au sujet de un atelier lunch box du midi.
+La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
+Le but est simple : manger dehors sans acheter trop cher.
+Merci de respecter cette règle : les sauces ferment bien dans le sac.
 
-Délai : délai 17 jours. Action : action 17.
+Bien cordialement,
 
-Contact : contact 17. Merci.
-
-Cordialement,
-
-Service`;
+Responsable du projet`;
 
 const E11_1_CE_EMAIL_17_POOL = buildExpressPool("e11-1-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 17 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Message de la responsable", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
+    fillQ: "Objet : _________.",
     fill: "Message",
-    vfQ: "Objet : Message 17 — information.",
+    vfQ: "L'objet de l'e-mail est « Message de la responsable ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 17", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Responsable du projet", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 17.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 17.",
+    fillQ: "De : _________.",
+    fill: "Responsable",
+    vfQ: "L'e-mail est envoyé par Responsable du projet.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 17", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 11 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 17.",
-    fill: "détail",
-    vfQ: "Info : détail 17.",
+    fillQ: "La date est _________ 11 septembre.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 11 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 17 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 17 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 17 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 17", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier lunch box du midi", "une réunion bancaire", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 17.",
-    fill: "action",
-    vfQ: "Action : action 17.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier lunch box du midi.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 17", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une boîte à repas", "un passeport", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 17.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "boîte",
+    vfQ: "Il faut prévoir une boîte à repas.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 17", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["22 CHF", "deux groupes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 17.",
-    fill: "contact",
-    vfQ: "Contact : contact 17.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "22",
+    vfQ: "Le prix indiqué est 22 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_18_TEXT = `De : Service E11 1 18
+const E11_1_CE_EMAIL_18_TEXT = `De : Équipe du samedi
 
-Objet : Message 18 — information
+Objet : Organisation du samedi
 
 Bonjour,
 
-Concernant sujet 18 : détail 18.
+Samedi, l'équipe installe le salon Harmonie pour une initiation aux herbes fraîches.
+Les participants arrivent à 11 h 30 avec un petit pot vide.
+La date exacte est jeudi 19 septembre.
+Après la séance, un court échange expliquera comment utiliser le basilic, la menthe et le persil.
 
-Délai : délai 18 jours. Action : action 18.
+Merci de votre aide,
 
-Contact : contact 18. Merci.
-
-Cordialement,
-
-Service`;
+Équipe du samedi`;
 
 const E11_1_CE_EMAIL_18_POOL = buildExpressPool("e11-1-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 18 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Organisation du samedi", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 18 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Organisation",
+    vfQ: "L'objet de l'e-mail est « Organisation du samedi ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 18", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe du samedi", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 18.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 18.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe du samedi.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 18", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 19 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 18.",
-    fill: "détail",
-    vfQ: "Info : détail 18.",
+    fillQ: "La date est _________ 19 septembre.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 19 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 18 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 18 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 18 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 18", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une initiation aux herbes fraîches", "un cours de mécanique", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 18.",
-    fill: "action",
-    vfQ: "Action : action 18.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "initiation",
+    vfQ: "Le texte parle de l'activité suivante : une initiation aux herbes fraîches.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 18", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un petit pot vide", "une lampe de poche", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 18.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "petit",
+    vfQ: "Il faut prévoir un petit pot vide.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 18", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["28 CHF", "un petit groupe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 18.",
-    fill: "contact",
-    vfQ: "Contact : contact 18.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "28",
+    vfQ: "Le prix indiqué est 28 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_19_TEXT = `De : Service E11 1 19
+const E11_1_CE_EMAIL_19_TEXT = `De : Questionnaire qualité
 
-Objet : Message 19 — information
+Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Concernant sujet 19 : détail 19.
+Vous avez participé à un repas solidaire du quartier à la résidence du Parc.
+Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
+La prochaine séance est prévue vendredi 27 septembre.
+Votre avis nous aidera à mieux servir un repas à plusieurs voisins.
 
-Délai : délai 19 jours. Action : action 19.
+Merci pour votre retour,
 
-Contact : contact 19. Merci.
-
-Cordialement,
-
-Service`;
+Questionnaire qualité`;
 
 const E11_1_CE_EMAIL_19_POOL = buildExpressPool("e11-1-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 19 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Votre avis nous intéresse", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 19 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Votre",
+    vfQ: "L'objet de l'e-mail est « Votre avis nous intéresse ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 19", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Questionnaire qualité", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 19.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 19.",
+    fillQ: "De : _________.",
+    fill: "Questionnaire",
+    vfQ: "L'e-mail est envoyé par Questionnaire qualité.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 19", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 27 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 19.",
-    fill: "détail",
-    vfQ: "Info : détail 19.",
+    fillQ: "La date est _________ 27 septembre.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 27 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 19 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 19 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 19 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 19", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un repas solidaire du quartier", "un match de football", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 19.",
-    fill: "action",
-    vfQ: "Action : action 19.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "repas",
+    vfQ: "Le texte parle de l'activité suivante : un repas solidaire du quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 19", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un plat à partager", "un casque de vélo", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 19.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "plat",
+    vfQ: "Il faut prévoir un plat à partager.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 19", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["35 CHF", "toute la classe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 19.",
-    fill: "contact",
-    vfQ: "Contact : contact 19.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "35",
+    vfQ: "Le prix indiqué est 35 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_1_CE_EMAIL_20_TEXT = `De : Service E11 1 20
+const E11_1_CE_EMAIL_20_TEXT = `De : Centre culturel
 
-Objet : Message 20 — information
+Objet : Prochaine rencontre
 
 Bonjour,
 
-Concernant sujet 20 : détail 20.
+Nous préparons une nouvelle rencontre autour de une soirée recettes de famille.
+Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
+Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
+Cette fois, nous demanderons à chacun d'apporter une photo de famille.
 
-Délai : délai 20 jours. Action : action 20.
+À bientôt,
 
-Contact : contact 20. Merci.
-
-Cordialement,
-
-Service`;
+Centre culturel`;
 
 const E11_1_CE_EMAIL_20_POOL = buildExpressPool("e11-1-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 20 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Prochaine rencontre", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 20 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Prochaine",
+    vfQ: "L'objet de l'e-mail est « Prochaine rencontre ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 20", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Centre culturel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 20.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 20.",
+    fillQ: "De : _________.",
+    fill: "Centre",
+    vfQ: "L'e-mail est envoyé par Centre culturel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 20", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 5 octobre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 20.",
-    fill: "détail",
-    vfQ: "Info : détail 20.",
+    fillQ: "La date est _________ 5 octobre.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 5 octobre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 20 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 20 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 20 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 20", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une soirée recettes de famille", "une réunion bancaire", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 20.",
-    fill: "action",
-    vfQ: "Action : action 20.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "soirée",
+    vfQ: "Le texte parle de l'activité suivante : une soirée recettes de famille.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 1 20", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une photo de famille", "un passeport", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 1 20.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "photo",
+    vfQ: "Il faut prévoir une photo de famille.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 20", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["40 CHF", "les vingt premiers inscrits", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 20.",
-    fill: "contact",
-    vfQ: "Contact : contact 20.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "40",
+    vfQ: "Le prix indiqué est 40 CHF.",
     vfC: 0,
   }),
 ]);
@@ -2087,102 +2067,122 @@ readingPoolExercise({
   id: "e11-1-ce-email",
   readingText: E11_1_CE_EMAIL_TEXT,
   questionPool: E11_1_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-2",
   readingText: E11_1_CE_EMAIL_2_TEXT,
-  questionPool: E11_1_CE_EMAIL_2_POOL
+  questionPool: E11_1_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-3",
   readingText: E11_1_CE_EMAIL_3_TEXT,
-  questionPool: E11_1_CE_EMAIL_3_POOL
+  questionPool: E11_1_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-4",
   readingText: E11_1_CE_EMAIL_4_TEXT,
-  questionPool: E11_1_CE_EMAIL_4_POOL
+  questionPool: E11_1_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-5",
   readingText: E11_1_CE_EMAIL_5_TEXT,
-  questionPool: E11_1_CE_EMAIL_5_POOL
+  questionPool: E11_1_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-6",
   readingText: E11_1_CE_EMAIL_6_TEXT,
-  questionPool: E11_1_CE_EMAIL_6_POOL
+  questionPool: E11_1_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-7",
   readingText: E11_1_CE_EMAIL_7_TEXT,
-  questionPool: E11_1_CE_EMAIL_7_POOL
+  questionPool: E11_1_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-8",
   readingText: E11_1_CE_EMAIL_8_TEXT,
-  questionPool: E11_1_CE_EMAIL_8_POOL
+  questionPool: E11_1_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-9",
   readingText: E11_1_CE_EMAIL_9_TEXT,
-  questionPool: E11_1_CE_EMAIL_9_POOL
+  questionPool: E11_1_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-10",
   readingText: E11_1_CE_EMAIL_10_TEXT,
-  questionPool: E11_1_CE_EMAIL_10_POOL
+  questionPool: E11_1_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-11",
   readingText: E11_1_CE_EMAIL_11_TEXT,
-  questionPool: E11_1_CE_EMAIL_11_POOL
+  questionPool: E11_1_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-12",
   readingText: E11_1_CE_EMAIL_12_TEXT,
-  questionPool: E11_1_CE_EMAIL_12_POOL
+  questionPool: E11_1_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-13",
   readingText: E11_1_CE_EMAIL_13_TEXT,
-  questionPool: E11_1_CE_EMAIL_13_POOL
+  questionPool: E11_1_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-14",
   readingText: E11_1_CE_EMAIL_14_TEXT,
-  questionPool: E11_1_CE_EMAIL_14_POOL
+  questionPool: E11_1_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-15",
   readingText: E11_1_CE_EMAIL_15_TEXT,
-  questionPool: E11_1_CE_EMAIL_15_POOL
+  questionPool: E11_1_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-16",
   readingText: E11_1_CE_EMAIL_16_TEXT,
-  questionPool: E11_1_CE_EMAIL_16_POOL
+  questionPool: E11_1_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-17",
   readingText: E11_1_CE_EMAIL_17_TEXT,
-  questionPool: E11_1_CE_EMAIL_17_POOL
+  questionPool: E11_1_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-18",
   readingText: E11_1_CE_EMAIL_18_TEXT,
-  questionPool: E11_1_CE_EMAIL_18_POOL
+  questionPool: E11_1_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-19",
   readingText: E11_1_CE_EMAIL_19_TEXT,
-  questionPool: E11_1_CE_EMAIL_19_POOL
+  questionPool: E11_1_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-1-ce-email-20",
   readingText: E11_1_CE_EMAIL_20_TEXT,
-  questionPool: E11_1_CE_EMAIL_20_POOL
+  questionPool: E11_1_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
@@ -2464,2062 +2464,2042 @@ sourceMessage: {
    E11.2 — Pratiquer une activité
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E11_2_CE_EMAIL_TEXT = `De : Service E11 2 1
+const E11_2_CE_EMAIL_TEXT = `De : La responsable Nadia
 
-Objet : Message 1 — information
+Objet : Inscription à une marche facile au bord du lac
 
 Bonjour,
 
-Concernant sujet 1 : détail 1.
+Votre inscription à une marche facile au bord du lac est bien notée.
+Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+Merci d'apporter des chaussures confortables. La participation est gratuite.
+Cette rencontre aide à bouger sans fatigue.
 
-Délai : délai 1 jours. Action : action 1.
+À bientôt,
 
-Contact : contact 1. Merci.
-
-Cordialement,
-
-Service`;
+La responsable Nadia`;
 
 const E11_2_CE_EMAIL_POOL = buildExpressPool("e11-2-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 1 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Inscription à une marche facile au bord du lac", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 1 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Inscription",
+    vfQ: "L'objet de l'e-mail est « Inscription à une marche facile au bord du lac ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 1", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["La responsable Nadia", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 1.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 1.",
+    fillQ: "De : _________.",
+    fill: "responsable",
+    vfQ: "L'e-mail est envoyé par La responsable Nadia.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 1", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 6 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 1.",
-    fill: "détail",
-    vfQ: "Info : détail 1.",
+    fillQ: "La date est _________ 6 mai.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 6 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 1 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 1 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 1 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 1", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une marche facile au bord du lac", "une dégustation de soupe", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 1.",
-    fill: "action",
-    vfQ: "Action : action 1.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "marche",
+    vfQ: "Le texte parle de l'activité suivante : une marche facile au bord du lac.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 1", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["des chaussures confortables", "un tablier de cuisine", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 1.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "chaussures",
+    vfQ: "Il faut prévoir des chaussures confortables.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 1", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["gratuit", "8 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 1.",
-    fill: "contact",
-    vfQ: "Contact : contact 1.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "gratuit",
+    vfQ: "Le prix indiqué est gratuit.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_2_TEXT = `De : Service E11 2 2
+const E11_2_CE_EMAIL_2_TEXT = `De : Accueil du quartier
 
-Objet : Message 2 — information
+Objet : Rappel pour mardi 14 mai
 
-Bonjour,
+Bonjour à toutes et à tous,
 
-Concernant sujet 2 : détail 2.
+Petit rappel : un atelier poterie débutant aura lieu mardi 14 mai.
+Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Comme il y a 10 places, merci de prévenir en cas d'absence.
+N'oubliez pas un vieux t-shirt et lisez bien cette consigne : l'argile tache les vêtements.
 
-Délai : délai 2 jours. Action : action 2.
+Bonne journée,
 
-Contact : contact 2. Merci.
-
-Cordialement,
-
-Service`;
+Accueil du quartier`;
 
 const E11_2_CE_EMAIL_2_POOL = buildExpressPool("e11-2-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 2 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rappel pour mardi 14 mai", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 2 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rappel",
+    vfQ: "L'objet de l'e-mail est « Rappel pour mardi 14 mai ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 2", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Accueil du quartier", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 2.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 2.",
+    fillQ: "De : _________.",
+    fill: "Accueil",
+    vfQ: "L'e-mail est envoyé par Accueil du quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 2", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 14 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 2.",
-    fill: "détail",
-    vfQ: "Info : détail 2.",
+    fillQ: "La date est _________ 14 mai.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 14 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 2 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["10 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 2 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 2 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "10",
+    vfQ: "L'heure indiquée est 10 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 2", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier poterie débutant", "un rendez-vous médical", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 2.",
-    fill: "action",
-    vfQ: "Action : action 2.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier poterie débutant.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 2", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un vieux t-shirt", "une carte bancaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 2.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "vieux",
+    vfQ: "Il faut prévoir un vieux t-shirt.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 2", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["5 CHF", "10 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 2.",
-    fill: "contact",
-    vfQ: "Contact : contact 2.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "5",
+    vfQ: "Le prix indiqué est 5 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_3_TEXT = `De : Service E11 2 3
+const E11_2_CE_EMAIL_3_TEXT = `De : Service activités
 
-Objet : Message 3 — information
+Objet : Question avant une séance de danse latino
 
 Bonjour,
 
-Concernant sujet 3 : détail 3.
-
-Délai : délai 3 jours. Action : action 3.
-
-Contact : contact 3. Merci.
+Je voudrais participer à une séance de danse latino, mais j'ai une question.
+Faut-il vraiment apporter une bouteille d'eau ?
+Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
+Mon objectif est de oser danser devant les autres. Merci pour votre réponse.
 
 Cordialement,
 
-Service`;
+Rami`;
 
 const E11_2_CE_EMAIL_3_POOL = buildExpressPool("e11-2-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 3 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Question avant une séance de danse latino", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 3 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Question",
+    vfQ: "L'objet de l'e-mail est « Question avant une séance de danse latino ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 3", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service activités", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 3.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 3.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service activités.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 3", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 22 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 3.",
-    fill: "détail",
-    vfQ: "Info : détail 3.",
+    fillQ: "La date est _________ 22 mai.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 22 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 3 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 3 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 3 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 3", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une séance de danse latino", "une vente de meubles", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 3.",
-    fill: "action",
-    vfQ: "Action : action 3.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "séance",
+    vfQ: "Le texte parle de l'activité suivante : une séance de danse latino.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 3", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une bouteille d'eau", "un livre de grammaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 3.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "bouteille",
+    vfQ: "Il faut prévoir une bouteille d'eau.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 3", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["8 CHF", "12 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 3.",
-    fill: "contact",
-    vfQ: "Contact : contact 3.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "8",
+    vfQ: "Le prix indiqué est 8 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_4_TEXT = `De : Service E11 2 4
+const E11_2_CE_EMAIL_4_TEXT = `De : Association Bellevue
 
-Objet : Message 4 — information
+Objet : Confirmation de votre place
 
-Bonjour,
+Madame, Monsieur,
 
-Concernant sujet 4 : détail 4.
+Nous confirmons votre place pour une initiation au dessin urbain.
+La séance se passe à la ferme des Lilas jeudi 30 mai.
+Merci d'arriver à 12 h 30. La participation est de 10 CHF.
+Le bénévole Marco sera sur place pour vous accueillir.
 
-Délai : délai 4 jours. Action : action 4.
+Avec nos salutations,
 
-Contact : contact 4. Merci.
-
-Cordialement,
-
-Service`;
+Association Bellevue`;
 
 const E11_2_CE_EMAIL_4_POOL = buildExpressPool("e11-2-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 4 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Confirmation de votre place", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 4 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Confirmation",
+    vfQ: "L'objet de l'e-mail est « Confirmation de votre place ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 4", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Association Bellevue", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 4.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 4.",
+    fillQ: "De : _________.",
+    fill: "Association",
+    vfQ: "L'e-mail est envoyé par Association Bellevue.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 4", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 30 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 4.",
-    fill: "détail",
-    vfQ: "Info : détail 4.",
+    fillQ: "La date est _________ 30 mai.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 30 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 4 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["12 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 4 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 4 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "12",
+    vfQ: "L'heure indiquée est 12 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 4", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une initiation au dessin urbain", "une dégustation de soupe", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 4.",
-    fill: "action",
-    vfQ: "Action : action 4.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "initiation",
+    vfQ: "Le texte parle de l'activité suivante : une initiation au dessin urbain.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 4", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un crayon noir", "un tablier de cuisine", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 4.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "crayon",
+    vfQ: "Il faut prévoir un crayon noir.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 4", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["10 CHF", "14 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 4.",
-    fill: "contact",
-    vfQ: "Contact : contact 4.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "10",
+    vfQ: "Le prix indiqué est 10 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_5_TEXT = `De : Service E11 2 5
+const E11_2_CE_EMAIL_5_TEXT = `De : Secrétariat du centre
 
-Objet : Message 5 — information
+Objet : Conseil pratique : un casque
 
-Bonjour,
+Salut,
 
-Concernant sujet 5 : détail 5.
+Pour une sortie vélo tranquille, pense à mettre un casque dans ton sac.
+On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Si tu veux rouler en sécurité, cette séance est très utile.
+Attention : les vélos sont vérifiés avant le départ.
 
-Délai : délai 5 jours. Action : action 5.
+À demain,
 
-Contact : contact 5. Merci.
-
-Cordialement,
-
-Service`;
+Noé`;
 
 const E11_2_CE_EMAIL_5_POOL = buildExpressPool("e11-2-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 5 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Conseil pratique : un casque", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 5 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Conseil",
+    vfQ: "L'objet de l'e-mail est « Conseil pratique : un casque ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 5", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Secrétariat du centre", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 5.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 5.",
+    fillQ: "De : _________.",
+    fill: "Secrétariat",
+    vfQ: "L'e-mail est envoyé par Secrétariat du centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 5", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 7 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 5.",
-    fill: "détail",
-    vfQ: "Info : détail 5.",
+    fillQ: "La date est _________ 7 juin.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 7 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 5 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 5 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 5 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 5", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une sortie vélo tranquille", "un rendez-vous médical", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 5.",
-    fill: "action",
-    vfQ: "Action : action 5.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "sortie",
+    vfQ: "Le texte parle de l'activité suivante : une sortie vélo tranquille.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 5", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un casque", "une carte bancaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 5.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "casque",
+    vfQ: "Il faut prévoir un casque.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 5", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["12 CHF", "15 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 5.",
-    fill: "contact",
-    vfQ: "Contact : contact 5.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "12",
+    vfQ: "Le prix indiqué est 12 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_6_TEXT = `De : Service E11 2 6
+const E11_2_CE_EMAIL_6_TEXT = `De : Équipe organisation
 
-Objet : Message 6 — information
+Objet : Changement de salle
 
 Bonjour,
 
-Concernant sujet 6 : détail 6.
+La salle prévue n'est plus disponible pour un cours de photographie avec téléphone.
+Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
+Le prix reste 15 CHF et 16 places sont gardées.
+Merci de préparer un téléphone chargé.
 
-Délai : délai 6 jours. Action : action 6.
+Merci de votre compréhension,
 
-Contact : contact 6. Merci.
-
-Cordialement,
-
-Service`;
+Équipe organisation`;
 
 const E11_2_CE_EMAIL_6_POOL = buildExpressPool("e11-2-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 6 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Changement de salle", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 6 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Changement",
+    vfQ: "L'objet de l'e-mail est « Changement de salle ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 6", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe organisation", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 6.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 6.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe organisation.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 6", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 15 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 6.",
-    fill: "détail",
-    vfQ: "Info : détail 6.",
+    fillQ: "La date est _________ 15 juin.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 15 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 6 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 6 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 6 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 6", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un cours de photographie avec téléphone", "une vente de meubles", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 6.",
-    fill: "action",
-    vfQ: "Action : action 6.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "cours",
+    vfQ: "Le texte parle de l'activité suivante : un cours de photographie avec téléphone.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 6", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un téléphone chargé", "un livre de grammaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 6.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "téléphone",
+    vfQ: "Il faut prévoir un téléphone chargé.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 6", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["15 CHF", "16 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 6.",
-    fill: "contact",
-    vfQ: "Contact : contact 6.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "15",
+    vfQ: "Le prix indiqué est 15 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_7_TEXT = `De : Service E11 2 7
+const E11_2_CE_EMAIL_7_TEXT = `De : Club des habitants
 
-Objet : Message 7 — information
+Objet : Merci pour votre participation
 
 Bonjour,
 
-Concernant sujet 7 : détail 7.
+Merci d'être venu à une partie de pétanque amicale à la terrasse du Marché.
+Plusieurs participants ont dit que cela aide à jouer sans esprit de compétition.
+Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
+Votre remarque sur une casquette a été notée.
 
-Délai : délai 7 jours. Action : action 7.
+Bien à vous,
 
-Contact : contact 7. Merci.
-
-Cordialement,
-
-Service`;
+Club des habitants`;
 
 const E11_2_CE_EMAIL_7_POOL = buildExpressPool("e11-2-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 7 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Merci pour votre participation", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 7 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Merci",
+    vfQ: "L'objet de l'e-mail est « Merci pour votre participation ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 7", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Club des habitants", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 7.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 7.",
+    fillQ: "De : _________.",
+    fill: "Club",
+    vfQ: "L'e-mail est envoyé par Club des habitants.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 7", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 23 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 7.",
-    fill: "détail",
-    vfQ: "Info : détail 7.",
+    fillQ: "La date est _________ 23 juin.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 23 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 7 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 7 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 7 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 7", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une partie de pétanque amicale", "une dégustation de soupe", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 7.",
-    fill: "action",
-    vfQ: "Action : action 7.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "partie",
+    vfQ: "Le texte parle de l'activité suivante : une partie de pétanque amicale.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 7", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une casquette", "un tablier de cuisine", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 7.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "casquette",
+    vfQ: "Il faut prévoir une casquette.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 7", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["18 CHF", "18 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 7.",
-    fill: "contact",
-    vfQ: "Contact : contact 7.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "18",
+    vfQ: "Le prix indiqué est 18 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_8_TEXT = `De : Service E11 2 8
+const E11_2_CE_EMAIL_8_TEXT = `De : Maison commune
 
-Objet : Message 8 — information
+Objet : Invitation loisirs
 
-Bonjour,
+Bonjour les amis,
 
-Concernant sujet 8 : détail 8.
+Je vous propose de venir avec moi à un atelier théâtre court.
+C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Il faut réserver directement sur place car il y a seulement 20 places.
+Apportez un texte court et un peu de bonne humeur.
 
-Délai : délai 8 jours. Action : action 8.
+À très vite,
 
-Contact : contact 8. Merci.
-
-Cordialement,
-
-Service`;
+Mina`;
 
 const E11_2_CE_EMAIL_8_POOL = buildExpressPool("e11-2-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 8 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Invitation loisirs", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 8 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Invitation",
+    vfQ: "L'objet de l'e-mail est « Invitation loisirs ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 8", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Maison commune", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 8.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 8.",
+    fillQ: "De : _________.",
+    fill: "Maison",
+    vfQ: "L'e-mail est envoyé par Maison commune.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 8", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 1er juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 8.",
-    fill: "détail",
-    vfQ: "Info : détail 8.",
+    fillQ: "La date est _________ 1er juillet.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 1er juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 8 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 8 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 8 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 8", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier théâtre court", "un rendez-vous médical", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 8.",
-    fill: "action",
-    vfQ: "Action : action 8.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier théâtre court.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 8", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un texte court", "une carte bancaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 8.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "texte",
+    vfQ: "Il faut prévoir un texte court.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 8", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["20 CHF", "20 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 8.",
-    fill: "contact",
-    vfQ: "Contact : contact 8.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "20",
+    vfQ: "Le prix indiqué est 20 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_9_TEXT = `De : Service E11 2 9
+const E11_2_CE_EMAIL_9_TEXT = `De : Bureau des inscriptions
 
-Objet : Message 9 — information
+Objet : Liste du matériel
 
 Bonjour,
 
-Concernant sujet 9 : détail 9.
+Voici la liste pour une séance de jardinage collectif : des gants de jardin, une bouteille d'eau et un stylo.
+Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
+Le tarif est 25 CHF.
+Nous parlerons surtout de la manière de embellir un espace commun.
 
-Délai : délai 9 jours. Action : action 9.
+Merci,
 
-Contact : contact 9. Merci.
-
-Cordialement,
-
-Service`;
+Bureau des inscriptions`;
 
 const E11_2_CE_EMAIL_9_POOL = buildExpressPool("e11-2-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 9 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Liste du matériel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 9 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Liste",
+    vfQ: "L'objet de l'e-mail est « Liste du matériel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 9", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Bureau des inscriptions", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 9.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 9.",
+    fillQ: "De : _________.",
+    fill: "Bureau",
+    vfQ: "L'e-mail est envoyé par Bureau des inscriptions.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 9", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 9 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 9.",
-    fill: "détail",
-    vfQ: "Info : détail 9.",
+    fillQ: "La date est _________ 9 juillet.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 9 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 9 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 9 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 9 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 9", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une séance de jardinage collectif", "une vente de meubles", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 9.",
-    fill: "action",
-    vfQ: "Action : action 9.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "séance",
+    vfQ: "Le texte parle de l'activité suivante : une séance de jardinage collectif.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 9", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["des gants de jardin", "un livre de grammaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 9.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "gants",
+    vfQ: "Il faut prévoir des gants de jardin.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 9", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["25 CHF", "22 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 9.",
-    fill: "contact",
-    vfQ: "Contact : contact 9.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "25",
+    vfQ: "Le prix indiqué est 25 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_10_TEXT = `De : Service E11 2 10
+const E11_2_CE_EMAIL_10_TEXT = `De : Info loisirs
 
-Objet : Message 10 — information
+Objet : Places disponibles
 
 Bonjour,
 
-Concernant sujet 10 : détail 10.
-
-Délai : délai 10 jours. Action : action 10.
-
-Contact : contact 10. Merci.
+Bonne nouvelle : il reste 24 places pour une découverte du badminton.
+La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
+Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Prévoyez des baskets propres. Le prix est 30 CHF.
 
 Cordialement,
 
-Service`;
+Info loisirs`;
 
 const E11_2_CE_EMAIL_10_POOL = buildExpressPool("e11-2-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 10 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Places disponibles", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 10 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Places",
+    vfQ: "L'objet de l'e-mail est « Places disponibles ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 10", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Info loisirs", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 10.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 10.",
+    fillQ: "De : _________.",
+    fill: "Info",
+    vfQ: "L'e-mail est envoyé par Info loisirs.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 10", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 17 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 10.",
-    fill: "détail",
-    vfQ: "Info : détail 10.",
+    fillQ: "La date est _________ 17 juillet.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 17 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 10 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 10 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 10 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 10", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une découverte du badminton", "une dégustation de soupe", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 10.",
-    fill: "action",
-    vfQ: "Action : action 10.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "découverte",
+    vfQ: "Le texte parle de l'activité suivante : une découverte du badminton.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 10", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["des baskets propres", "un tablier de cuisine", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 10.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "baskets",
+    vfQ: "Il faut prévoir des baskets propres.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 10", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["30 CHF", "24 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 10.",
-    fill: "contact",
-    vfQ: "Contact : contact 10.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "30",
+    vfQ: "Le prix indiqué est 30 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_11_TEXT = `De : Service E11 2 11
+const E11_2_CE_EMAIL_11_TEXT = `De : Groupe des bénévoles
 
-Objet : Message 11 — information
+Objet : Retour sur l'activité
 
 Bonjour,
 
-Concernant sujet 11 : détail 11.
+Après un club de jeux de société, nous avons reçu beaucoup de messages positifs.
+Les participants ont apprécié passer une soirée calme.
+La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
+Cette fois, merci d'apporter un jeu préféré.
 
-Délai : délai 11 jours. Action : action 11.
+Au plaisir de vous revoir,
 
-Contact : contact 11. Merci.
-
-Cordialement,
-
-Service`;
+Groupe des bénévoles`;
 
 const E11_2_CE_EMAIL_11_POOL = buildExpressPool("e11-2-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 11 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Retour sur l'activité", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 11 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Retour",
+    vfQ: "L'objet de l'e-mail est « Retour sur l'activité ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 11", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Groupe des bénévoles", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 11.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 11.",
+    fillQ: "De : _________.",
+    fill: "Groupe",
+    vfQ: "L'e-mail est envoyé par Groupe des bénévoles.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 11", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 25 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 11.",
-    fill: "détail",
-    vfQ: "Info : détail 11.",
+    fillQ: "La date est _________ 25 juillet.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 25 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 11 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["19 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 11 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 11 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "19",
+    vfQ: "L'heure indiquée est 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 11", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un club de jeux de société", "un rendez-vous médical", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 11.",
-    fill: "action",
-    vfQ: "Action : action 11.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "club",
+    vfQ: "Le texte parle de l'activité suivante : un club de jeux de société.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 11", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un jeu préféré", "une carte bancaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 11.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "jeu",
+    vfQ: "Il faut prévoir un jeu préféré.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 11", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["4 CHF", "6 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 11.",
-    fill: "contact",
-    vfQ: "Contact : contact 11.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "4",
+    vfQ: "Le prix indiqué est 4 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_12_TEXT = `De : Service E11 2 12
+const E11_2_CE_EMAIL_12_TEXT = `De : Réception
 
-Objet : Message 12 — information
+Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Concernant sujet 12 : détail 12.
+Votre rendez-vous pour une promenade avec observation des oiseaux commence à 8 h 30.
+Merci d'être à la maison médicale dix minutes avant.
+La date est vendredi 2 août et le prix est 6 CHF.
+La docteure Morel conseille de préparer des jumelles si possible.
 
-Délai : délai 12 jours. Action : action 12.
+Meilleures salutations,
 
-Contact : contact 12. Merci.
-
-Cordialement,
-
-Service`;
+Réception`;
 
 const E11_2_CE_EMAIL_12_POOL = buildExpressPool("e11-2-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 12 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rendez-vous à 8 h 30", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 12 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rendez",
+    vfQ: "L'objet de l'e-mail est « Rendez-vous à 8 h 30 ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 12", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Réception", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 12.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 12.",
+    fillQ: "De : _________.",
+    fill: "Réception",
+    vfQ: "L'e-mail est envoyé par Réception.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 12", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 2 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 12.",
-    fill: "détail",
-    vfQ: "Info : détail 12.",
+    fillQ: "La date est _________ 2 août.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 2 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 12 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["8 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 12 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 12 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "8",
+    vfQ: "L'heure indiquée est 8 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 12", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une promenade avec observation des oiseaux", "une vente de meubles", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 12.",
-    fill: "action",
-    vfQ: "Action : action 12.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "promenade",
+    vfQ: "Le texte parle de l'activité suivante : une promenade avec observation des oiseaux.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 12", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["des jumelles si possible", "un livre de grammaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 12.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "jumelles",
+    vfQ: "Il faut prévoir des jumelles si possible.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 12", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["6 CHF", "9 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 12.",
-    fill: "contact",
-    vfQ: "Contact : contact 12.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "6",
+    vfQ: "Le prix indiqué est 6 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_13_TEXT = `De : Service E11 2 13
+const E11_2_CE_EMAIL_13_TEXT = `De : Atelier A2
 
-Objet : Message 13 — information
+Objet : Préparation de groupe
 
-Bonjour,
+Chers participants,
 
-Concernant sujet 13 : détail 13.
+Pour préparer un atelier réparation de vélo, nous faisons deux petits groupes.
+Le premier groupe arrive à 13 h à le parc des Amandiers.
+La séance a lieu samedi 10 août avec l'entraîneuse Emma.
+Merci de vérifier une chambre à air usée avant de partir.
 
-Délai : délai 13 jours. Action : action 13.
+À bientôt,
 
-Contact : contact 13. Merci.
-
-Cordialement,
-
-Service`;
+Atelier A2`;
 
 const E11_2_CE_EMAIL_13_POOL = buildExpressPool("e11-2-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 13 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Préparation de groupe", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 13 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Préparation",
+    vfQ: "L'objet de l'e-mail est « Préparation de groupe ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 13", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Atelier A2", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 13.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 13.",
+    fillQ: "De : _________.",
+    fill: "Atelier",
+    vfQ: "L'e-mail est envoyé par Atelier A2.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 13", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 10 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 13.",
-    fill: "détail",
-    vfQ: "Info : détail 13.",
+    fillQ: "La date est _________ 10 août.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 10 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 13 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["13 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 13 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 13 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "13",
+    vfQ: "L'heure indiquée est 13 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 13", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier réparation de vélo", "une dégustation de soupe", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 13.",
-    fill: "action",
-    vfQ: "Action : action 13.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier réparation de vélo.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 13", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une chambre à air usée", "un tablier de cuisine", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 13.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "chambre",
+    vfQ: "Il faut prévoir une chambre à air usée.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 13", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["9 CHF", "11 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 13.",
-    fill: "contact",
-    vfQ: "Contact : contact 13.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "9",
+    vfQ: "Le prix indiqué est 9 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_14_TEXT = `De : Service E11 2 14
+const E11_2_CE_EMAIL_14_TEXT = `De : Coordination locale
 
-Objet : Message 14 — information
+Objet : Demande d'information
 
 Bonjour,
 
-Concernant sujet 14 : détail 14.
+Je cherche des informations sur une initiation au chant en groupe.
+J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Pouvez-vous confirmer le prix de 11 CHF ?
+Je viens surtout pour chanter juste avec le groupe.
 
-Délai : délai 14 jours. Action : action 14.
+Merci d'avance,
 
-Contact : contact 14. Merci.
-
-Cordialement,
-
-Service`;
+Salma`;
 
 const E11_2_CE_EMAIL_14_POOL = buildExpressPool("e11-2-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 14 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Demande d'information", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 14 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Demande",
+    vfQ: "L'objet de l'e-mail est « Demande d'information ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 14", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Coordination locale", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 14.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 14.",
+    fillQ: "De : _________.",
+    fill: "Coordination",
+    vfQ: "L'e-mail est envoyé par Coordination locale.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 14", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 18 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 14.",
-    fill: "détail",
-    vfQ: "Info : détail 14.",
+    fillQ: "La date est _________ 18 août.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 18 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 14 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 14 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 14 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 14", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une initiation au chant en groupe", "un rendez-vous médical", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 14.",
-    fill: "action",
-    vfQ: "Action : action 14.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "initiation",
+    vfQ: "Le texte parle de l'activité suivante : une initiation au chant en groupe.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 14", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une chanson connue", "une carte bancaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 14.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "chanson",
+    vfQ: "Il faut prévoir une chanson connue.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 14", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["11 CHF", "13 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 14.",
-    fill: "contact",
-    vfQ: "Contact : contact 14.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "11",
+    vfQ: "Le prix indiqué est 11 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_15_TEXT = `De : Service E11 2 15
+const E11_2_CE_EMAIL_15_TEXT = `De : Agenda citoyen
 
-Objet : Message 15 — information
+Objet : Choix entre deux dates
 
 Bonjour,
 
-Concernant sujet 15 : détail 15.
+Deux dates étaient proposées, mais nous gardons lundi 26 août.
+L'horaire choisi est 16 h 30 à le centre scolaire.
+Ce choix convient mieux à la professeure Léa et au groupe.
+Le contenu reste un cours de couture simple avec un morceau de tissu.
 
-Délai : délai 15 jours. Action : action 15.
+Merci pour vos réponses,
 
-Contact : contact 15. Merci.
-
-Cordialement,
-
-Service`;
+Agenda citoyen`;
 
 const E11_2_CE_EMAIL_15_POOL = buildExpressPool("e11-2-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 15 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 15 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Choix",
+    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 15", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 15.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 15.",
+    fillQ: "De : _________.",
+    fill: "Agenda",
+    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 15", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 15.",
-    fill: "détail",
-    vfQ: "Info : détail 15.",
+    fillQ: "La date est _________ 26 août.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 26 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 15 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 15 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 15 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 15", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un cours de couture simple", "une vente de meubles", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 15.",
-    fill: "action",
-    vfQ: "Action : action 15.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "cours",
+    vfQ: "Le texte parle de l'activité suivante : un cours de couture simple.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 15", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un morceau de tissu", "un livre de grammaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 15.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "morceau",
+    vfQ: "Il faut prévoir un morceau de tissu.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 15", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["14 CHF", "17 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 15.",
-    fill: "contact",
-    vfQ: "Contact : contact 15.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "14",
+    vfQ: "Le prix indiqué est 14 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_16_TEXT = `De : Service E11 2 16
+const E11_2_CE_EMAIL_16_TEXT = `De : Service rappel
 
-Objet : Message 16 — information
+Objet : Dernier rappel
 
 Bonjour,
 
-Concernant sujet 16 : détail 16.
+Dernier rappel avant une séance de yoga doux !
+Rendez-vous mardi 3 septembre à 17 h à la place du Village.
+Sans inscription au stand d'information, l'entrée n'est pas garantie.
+Apportez un tapis et gardez 16 CHF si besoin.
 
-Délai : délai 16 jours. Action : action 16.
+À tout à l'heure,
 
-Contact : contact 16. Merci.
-
-Cordialement,
-
-Service`;
+Service rappel`;
 
 const E11_2_CE_EMAIL_16_POOL = buildExpressPool("e11-2-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 16 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Dernier rappel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 16 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Dernier",
+    vfQ: "L'objet de l'e-mail est « Dernier rappel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 16", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service rappel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 16.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 16.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service rappel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 16", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 3 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 16.",
-    fill: "détail",
-    vfQ: "Info : détail 16.",
+    fillQ: "La date est _________ 3 septembre.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 3 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 16 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 16 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 16 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 16", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une séance de yoga doux", "une dégustation de soupe", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 16.",
-    fill: "action",
-    vfQ: "Action : action 16.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "séance",
+    vfQ: "Le texte parle de l'activité suivante : une séance de yoga doux.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 16", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un tapis", "un tablier de cuisine", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 16.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "tapis",
+    vfQ: "Il faut prévoir un tapis.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 16", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["16 CHF", "19 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 16.",
-    fill: "contact",
-    vfQ: "Contact : contact 16.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "16",
+    vfQ: "Le prix indiqué est 16 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_17_TEXT = `De : Service E11 2 17
+const E11_2_CE_EMAIL_17_TEXT = `De : Responsable du projet
 
-Objet : Message 17 — information
+Objet : Message de la responsable
 
 Bonjour,
 
-Concernant sujet 17 : détail 17.
+La coach Ana vous écrit au sujet de un atelier bricolage en bois.
+La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
+Le but est simple : fabriquer une petite étagère.
+Merci de respecter cette règle : les lunettes de protection sont obligatoires.
 
-Délai : délai 17 jours. Action : action 17.
+Bien cordialement,
 
-Contact : contact 17. Merci.
-
-Cordialement,
-
-Service`;
+Responsable du projet`;
 
 const E11_2_CE_EMAIL_17_POOL = buildExpressPool("e11-2-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 17 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Message de la responsable", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
+    fillQ: "Objet : _________.",
     fill: "Message",
-    vfQ: "Objet : Message 17 — information.",
+    vfQ: "L'objet de l'e-mail est « Message de la responsable ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 17", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Responsable du projet", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 17.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 17.",
+    fillQ: "De : _________.",
+    fill: "Responsable",
+    vfQ: "L'e-mail est envoyé par Responsable du projet.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 17", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 11 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 17.",
-    fill: "détail",
-    vfQ: "Info : détail 17.",
+    fillQ: "La date est _________ 11 septembre.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 11 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 17 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 17 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 17 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 17", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier bricolage en bois", "un rendez-vous médical", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 17.",
-    fill: "action",
-    vfQ: "Action : action 17.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier bricolage en bois.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 17", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un mètre pliant", "une carte bancaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 17.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "mètre",
+    vfQ: "Il faut prévoir un mètre pliant.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 17", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["22 CHF", "deux groupes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 17.",
-    fill: "contact",
-    vfQ: "Contact : contact 17.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "22",
+    vfQ: "Le prix indiqué est 22 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_18_TEXT = `De : Service E11 2 18
+const E11_2_CE_EMAIL_18_TEXT = `De : Équipe du samedi
 
-Objet : Message 18 — information
+Objet : Organisation du samedi
 
 Bonjour,
 
-Concernant sujet 18 : détail 18.
+Samedi, l'équipe installe le salon Harmonie pour une visite guidée du quartier.
+Les participants arrivent à 11 h 30 avec une veste légère.
+La date exacte est jeudi 19 septembre.
+Après la séance, un court échange expliquera comment connaître l'histoire des rues.
 
-Délai : délai 18 jours. Action : action 18.
+Merci de votre aide,
 
-Contact : contact 18. Merci.
-
-Cordialement,
-
-Service`;
+Équipe du samedi`;
 
 const E11_2_CE_EMAIL_18_POOL = buildExpressPool("e11-2-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 18 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Organisation du samedi", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 18 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Organisation",
+    vfQ: "L'objet de l'e-mail est « Organisation du samedi ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 18", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe du samedi", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 18.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 18.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe du samedi.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 18", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 19 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 18.",
-    fill: "détail",
-    vfQ: "Info : détail 18.",
+    fillQ: "La date est _________ 19 septembre.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 19 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 18 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 18 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 18 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 18", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une visite guidée du quartier", "une vente de meubles", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 18.",
-    fill: "action",
-    vfQ: "Action : action 18.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "visite",
+    vfQ: "Le texte parle de l'activité suivante : une visite guidée du quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 18", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une veste légère", "un livre de grammaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 18.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "veste",
+    vfQ: "Il faut prévoir une veste légère.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 18", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["28 CHF", "un petit groupe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 18.",
-    fill: "contact",
-    vfQ: "Contact : contact 18.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "28",
+    vfQ: "Le prix indiqué est 28 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_19_TEXT = `De : Service E11 2 19
+const E11_2_CE_EMAIL_19_TEXT = `De : Questionnaire qualité
 
-Objet : Message 19 — information
+Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Concernant sujet 19 : détail 19.
+Vous avez participé à un entraînement de marche nordique à la résidence du Parc.
+Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
+La prochaine séance est prévue vendredi 27 septembre.
+Votre avis nous aidera à mieux marcher avec un bon rythme.
 
-Délai : délai 19 jours. Action : action 19.
+Merci pour votre retour,
 
-Contact : contact 19. Merci.
-
-Cordialement,
-
-Service`;
+Questionnaire qualité`;
 
 const E11_2_CE_EMAIL_19_POOL = buildExpressPool("e11-2-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 19 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Votre avis nous intéresse", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 19 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Votre",
+    vfQ: "L'objet de l'e-mail est « Votre avis nous intéresse ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 19", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Questionnaire qualité", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 19.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 19.",
+    fillQ: "De : _________.",
+    fill: "Questionnaire",
+    vfQ: "L'e-mail est envoyé par Questionnaire qualité.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 19", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 27 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 19.",
-    fill: "détail",
-    vfQ: "Info : détail 19.",
+    fillQ: "La date est _________ 27 septembre.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 27 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 19 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 19 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 19 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 19", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un entraînement de marche nordique", "une dégustation de soupe", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 19.",
-    fill: "action",
-    vfQ: "Action : action 19.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "entraînement",
+    vfQ: "Le texte parle de l'activité suivante : un entraînement de marche nordique.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 19", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["deux bâtons", "un tablier de cuisine", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 19.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "deux",
+    vfQ: "Il faut prévoir deux bâtons.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 19", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["35 CHF", "toute la classe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 19.",
-    fill: "contact",
-    vfQ: "Contact : contact 19.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "35",
+    vfQ: "Le prix indiqué est 35 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_2_CE_EMAIL_20_TEXT = `De : Service E11 2 20
+const E11_2_CE_EMAIL_20_TEXT = `De : Centre culturel
 
-Objet : Message 20 — information
+Objet : Prochaine rencontre
 
 Bonjour,
 
-Concernant sujet 20 : détail 20.
+Nous préparons une nouvelle rencontre autour de une soirée cinéma-débat.
+Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
+Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
+Cette fois, nous demanderons à chacun d'apporter une idée de film.
 
-Délai : délai 20 jours. Action : action 20.
+À bientôt,
 
-Contact : contact 20. Merci.
-
-Cordialement,
-
-Service`;
+Centre culturel`;
 
 const E11_2_CE_EMAIL_20_POOL = buildExpressPool("e11-2-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 20 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Prochaine rencontre", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 20 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Prochaine",
+    vfQ: "L'objet de l'e-mail est « Prochaine rencontre ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 20", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Centre culturel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 20.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 20.",
+    fillQ: "De : _________.",
+    fill: "Centre",
+    vfQ: "L'e-mail est envoyé par Centre culturel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 20", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 5 octobre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 20.",
-    fill: "détail",
-    vfQ: "Info : détail 20.",
+    fillQ: "La date est _________ 5 octobre.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 5 octobre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 20 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 20 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 20 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 20", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une soirée cinéma-débat", "un rendez-vous médical", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 20.",
-    fill: "action",
-    vfQ: "Action : action 20.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "soirée",
+    vfQ: "Le texte parle de l'activité suivante : une soirée cinéma-débat.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 2 20", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une idée de film", "une carte bancaire", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 2 20.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "idée",
+    vfQ: "Il faut prévoir une idée de film.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 20", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["40 CHF", "les vingt premiers inscrits", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 20.",
-    fill: "contact",
-    vfQ: "Contact : contact 20.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "40",
+    vfQ: "Le prix indiqué est 40 CHF.",
     vfC: 0,
   }),
 ]);
@@ -4529,102 +4509,122 @@ readingPoolExercise({
   id: "e11-2-ce-email",
   readingText: E11_2_CE_EMAIL_TEXT,
   questionPool: E11_2_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-2",
   readingText: E11_2_CE_EMAIL_2_TEXT,
-  questionPool: E11_2_CE_EMAIL_2_POOL
+  questionPool: E11_2_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-3",
   readingText: E11_2_CE_EMAIL_3_TEXT,
-  questionPool: E11_2_CE_EMAIL_3_POOL
+  questionPool: E11_2_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-4",
   readingText: E11_2_CE_EMAIL_4_TEXT,
-  questionPool: E11_2_CE_EMAIL_4_POOL
+  questionPool: E11_2_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-5",
   readingText: E11_2_CE_EMAIL_5_TEXT,
-  questionPool: E11_2_CE_EMAIL_5_POOL
+  questionPool: E11_2_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-6",
   readingText: E11_2_CE_EMAIL_6_TEXT,
-  questionPool: E11_2_CE_EMAIL_6_POOL
+  questionPool: E11_2_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-7",
   readingText: E11_2_CE_EMAIL_7_TEXT,
-  questionPool: E11_2_CE_EMAIL_7_POOL
+  questionPool: E11_2_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-8",
   readingText: E11_2_CE_EMAIL_8_TEXT,
-  questionPool: E11_2_CE_EMAIL_8_POOL
+  questionPool: E11_2_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-9",
   readingText: E11_2_CE_EMAIL_9_TEXT,
-  questionPool: E11_2_CE_EMAIL_9_POOL
+  questionPool: E11_2_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-10",
   readingText: E11_2_CE_EMAIL_10_TEXT,
-  questionPool: E11_2_CE_EMAIL_10_POOL
+  questionPool: E11_2_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-11",
   readingText: E11_2_CE_EMAIL_11_TEXT,
-  questionPool: E11_2_CE_EMAIL_11_POOL
+  questionPool: E11_2_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-12",
   readingText: E11_2_CE_EMAIL_12_TEXT,
-  questionPool: E11_2_CE_EMAIL_12_POOL
+  questionPool: E11_2_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-13",
   readingText: E11_2_CE_EMAIL_13_TEXT,
-  questionPool: E11_2_CE_EMAIL_13_POOL
+  questionPool: E11_2_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-14",
   readingText: E11_2_CE_EMAIL_14_TEXT,
-  questionPool: E11_2_CE_EMAIL_14_POOL
+  questionPool: E11_2_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-15",
   readingText: E11_2_CE_EMAIL_15_TEXT,
-  questionPool: E11_2_CE_EMAIL_15_POOL
+  questionPool: E11_2_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-16",
   readingText: E11_2_CE_EMAIL_16_TEXT,
-  questionPool: E11_2_CE_EMAIL_16_POOL
+  questionPool: E11_2_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-17",
   readingText: E11_2_CE_EMAIL_17_TEXT,
-  questionPool: E11_2_CE_EMAIL_17_POOL
+  questionPool: E11_2_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-18",
   readingText: E11_2_CE_EMAIL_18_TEXT,
-  questionPool: E11_2_CE_EMAIL_18_POOL
+  questionPool: E11_2_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-19",
   readingText: E11_2_CE_EMAIL_19_TEXT,
-  questionPool: E11_2_CE_EMAIL_19_POOL
+  questionPool: E11_2_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-2-ce-email-20",
   readingText: E11_2_CE_EMAIL_20_TEXT,
-  questionPool: E11_2_CE_EMAIL_20_POOL
+  questionPool: E11_2_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
@@ -4906,2062 +4906,2042 @@ sourceMessage: {
    E11.3 — Partager ses goûts
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E11_3_CE_EMAIL_TEXT = `De : Service E11 3 1
+const E11_3_CE_EMAIL_TEXT = `De : La responsable Nadia
 
-Objet : Message 1 — information
+Objet : Inscription à un cercle de discussion sur les séries
 
 Bonjour,
 
-Concernant sujet 1 : détail 1.
+Votre inscription à un cercle de discussion sur les séries est bien notée.
+Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+Merci d'apporter le nom d'une série. La participation est gratuite.
+Cette rencontre aide à dire pourquoi on aime une histoire.
 
-Délai : délai 1 jours. Action : action 1.
+À bientôt,
 
-Contact : contact 1. Merci.
-
-Cordialement,
-
-Service`;
+La responsable Nadia`;
 
 const E11_3_CE_EMAIL_POOL = buildExpressPool("e11-3-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 1 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Inscription à un cercle de discussion sur les séries", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 1 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Inscription",
+    vfQ: "L'objet de l'e-mail est « Inscription à un cercle de discussion sur les séries ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 1", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["La responsable Nadia", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 1.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 1.",
+    fillQ: "De : _________.",
+    fill: "responsable",
+    vfQ: "L'e-mail est envoyé par La responsable Nadia.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 1", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 6 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 1.",
-    fill: "détail",
-    vfQ: "Info : détail 1.",
+    fillQ: "La date est _________ 6 mai.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 6 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 1 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 1 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 1 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 1", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un cercle de discussion sur les séries", "un contrôle de maths", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 1.",
-    fill: "action",
-    vfQ: "Action : action 1.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "cercle",
+    vfQ: "Le texte parle de l'activité suivante : un cercle de discussion sur les séries.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 1", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["le nom d'une série", "une fourchette", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 1.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "nom",
+    vfQ: "Il faut prévoir le nom d'une série.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 1", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["gratuit", "8 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 1.",
-    fill: "contact",
-    vfQ: "Contact : contact 1.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "gratuit",
+    vfQ: "Le prix indiqué est gratuit.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_2_TEXT = `De : Service E11 3 2
+const E11_3_CE_EMAIL_2_TEXT = `De : Accueil du quartier
 
-Objet : Message 2 — information
+Objet : Rappel pour mardi 14 mai
 
-Bonjour,
+Bonjour à toutes et à tous,
 
-Concernant sujet 2 : détail 2.
+Petit rappel : une écoute de chansons francophones aura lieu mardi 14 mai.
+Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Comme il y a 10 places, merci de prévenir en cas d'absence.
+N'oubliez pas un écouteur et lisez bien cette consigne : le volume reste bas.
 
-Délai : délai 2 jours. Action : action 2.
+Bonne journée,
 
-Contact : contact 2. Merci.
-
-Cordialement,
-
-Service`;
+Accueil du quartier`;
 
 const E11_3_CE_EMAIL_2_POOL = buildExpressPool("e11-3-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 2 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rappel pour mardi 14 mai", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 2 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rappel",
+    vfQ: "L'objet de l'e-mail est « Rappel pour mardi 14 mai ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 2", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Accueil du quartier", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 2.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 2.",
+    fillQ: "De : _________.",
+    fill: "Accueil",
+    vfQ: "L'e-mail est envoyé par Accueil du quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 2", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 14 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 2.",
-    fill: "détail",
-    vfQ: "Info : détail 2.",
+    fillQ: "La date est _________ 14 mai.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 14 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 2 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["10 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 2 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 2 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "10",
+    vfQ: "L'heure indiquée est 10 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 2", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une écoute de chansons francophones", "une visite médicale", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 2.",
-    fill: "action",
-    vfQ: "Action : action 2.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "écoute",
+    vfQ: "Le texte parle de l'activité suivante : une écoute de chansons francophones.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 2", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un écouteur", "un sac de ciment", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 2.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "écouteur",
+    vfQ: "Il faut prévoir un écouteur.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 2", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["5 CHF", "10 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 2.",
-    fill: "contact",
-    vfQ: "Contact : contact 2.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "5",
+    vfQ: "Le prix indiqué est 5 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_3_TEXT = `De : Service E11 3 3
+const E11_3_CE_EMAIL_3_TEXT = `De : Service activités
 
-Objet : Message 3 — information
+Objet : Question avant un échange de livres préférés
 
 Bonjour,
 
-Concernant sujet 3 : détail 3.
-
-Délai : délai 3 jours. Action : action 3.
-
-Contact : contact 3. Merci.
+Je voudrais participer à un échange de livres préférés, mais j'ai une question.
+Faut-il vraiment apporter un livre à conseiller ?
+Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
+Mon objectif est de conseiller une lecture à un ami. Merci pour votre réponse.
 
 Cordialement,
 
-Service`;
+Rami`;
 
 const E11_3_CE_EMAIL_3_POOL = buildExpressPool("e11-3-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 3 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Question avant un échange de livres préférés", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 3 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Question",
+    vfQ: "L'objet de l'e-mail est « Question avant un échange de livres préférés ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 3", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service activités", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 3.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 3.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service activités.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 3", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 22 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 3.",
-    fill: "détail",
-    vfQ: "Info : détail 3.",
+    fillQ: "La date est _________ 22 mai.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 22 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 3 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 3 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 3 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 3", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un échange de livres préférés", "un entraînement silencieux", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 3.",
-    fill: "action",
-    vfQ: "Action : action 3.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "échange",
+    vfQ: "Le texte parle de l'activité suivante : un échange de livres préférés.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 3", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un livre à conseiller", "un billet d'avion", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 3.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "livre",
+    vfQ: "Il faut prévoir un livre à conseiller.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 3", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["8 CHF", "12 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 3.",
-    fill: "contact",
-    vfQ: "Contact : contact 3.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "8",
+    vfQ: "Le prix indiqué est 8 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_4_TEXT = `De : Service E11 3 4
+const E11_3_CE_EMAIL_4_TEXT = `De : Association Bellevue
 
-Objet : Message 4 — information
+Objet : Confirmation de votre place
 
-Bonjour,
+Madame, Monsieur,
 
-Concernant sujet 4 : détail 4.
+Nous confirmons votre place pour une visite d'exposition colorée.
+La séance se passe à la ferme des Lilas jeudi 30 mai.
+Merci d'arriver à 12 h 30. La participation est de 10 CHF.
+Le bénévole Marco sera sur place pour vous accueillir.
 
-Délai : délai 4 jours. Action : action 4.
+Avec nos salutations,
 
-Contact : contact 4. Merci.
-
-Cordialement,
-
-Service`;
+Association Bellevue`;
 
 const E11_3_CE_EMAIL_4_POOL = buildExpressPool("e11-3-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 4 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Confirmation de votre place", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 4 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Confirmation",
+    vfQ: "L'objet de l'e-mail est « Confirmation de votre place ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 4", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Association Bellevue", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 4.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 4.",
+    fillQ: "De : _________.",
+    fill: "Association",
+    vfQ: "L'e-mail est envoyé par Association Bellevue.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 4", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 30 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 4.",
-    fill: "détail",
-    vfQ: "Info : détail 4.",
+    fillQ: "La date est _________ 30 mai.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 30 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 4 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["12 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 4 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 4 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "12",
+    vfQ: "L'heure indiquée est 12 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 4", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une visite d'exposition colorée", "un contrôle de maths", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 4.",
-    fill: "action",
-    vfQ: "Action : action 4.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "visite",
+    vfQ: "Le texte parle de l'activité suivante : une visite d'exposition colorée.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 4", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un carnet de notes", "une fourchette", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 4.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "carnet",
+    vfQ: "Il faut prévoir un carnet de notes.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 4", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["10 CHF", "14 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 4.",
-    fill: "contact",
-    vfQ: "Contact : contact 4.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "10",
+    vfQ: "Le prix indiqué est 10 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_5_TEXT = `De : Service E11 3 5
+const E11_3_CE_EMAIL_5_TEXT = `De : Secrétariat du centre
 
-Objet : Message 5 — information
+Objet : Conseil pratique : le titre d'un film
 
-Bonjour,
+Salut,
 
-Concernant sujet 5 : détail 5.
+Pour un atelier critiques de films, pense à mettre le titre d'un film dans ton sac.
+On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Si tu veux donner un avis clair sur un film, cette séance est très utile.
+Attention : les avis négatifs restent respectueux.
 
-Délai : délai 5 jours. Action : action 5.
+À demain,
 
-Contact : contact 5. Merci.
-
-Cordialement,
-
-Service`;
+Noé`;
 
 const E11_3_CE_EMAIL_5_POOL = buildExpressPool("e11-3-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 5 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Conseil pratique : le titre d'un film", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 5 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Conseil",
+    vfQ: "L'objet de l'e-mail est « Conseil pratique : le titre d'un film ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 5", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Secrétariat du centre", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 5.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 5.",
+    fillQ: "De : _________.",
+    fill: "Secrétariat",
+    vfQ: "L'e-mail est envoyé par Secrétariat du centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 5", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 7 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 5.",
-    fill: "détail",
-    vfQ: "Info : détail 5.",
+    fillQ: "La date est _________ 7 juin.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 7 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 5 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 5 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 5 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 5", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier critiques de films", "une visite médicale", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 5.",
-    fill: "action",
-    vfQ: "Action : action 5.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier critiques de films.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 5", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["le titre d'un film", "un sac de ciment", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 5.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "titre",
+    vfQ: "Il faut prévoir le titre d'un film.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 5", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["12 CHF", "15 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 5.",
-    fill: "contact",
-    vfQ: "Contact : contact 5.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "12",
+    vfQ: "Le prix indiqué est 12 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_6_TEXT = `De : Service E11 3 6
+const E11_3_CE_EMAIL_6_TEXT = `De : Équipe organisation
 
-Objet : Message 6 — information
+Objet : Changement de salle
 
 Bonjour,
 
-Concernant sujet 6 : détail 6.
+La salle prévue n'est plus disponible pour une playlist collective.
+Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
+Le prix reste 15 CHF et 16 places sont gardées.
+Merci de préparer trois chansons.
 
-Délai : délai 6 jours. Action : action 6.
+Merci de votre compréhension,
 
-Contact : contact 6. Merci.
-
-Cordialement,
-
-Service`;
+Équipe organisation`;
 
 const E11_3_CE_EMAIL_6_POOL = buildExpressPool("e11-3-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 6 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Changement de salle", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 6 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Changement",
+    vfQ: "L'objet de l'e-mail est « Changement de salle ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 6", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe organisation", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 6.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 6.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe organisation.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 6", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 15 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 6.",
-    fill: "détail",
-    vfQ: "Info : détail 6.",
+    fillQ: "La date est _________ 15 juin.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 15 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 6 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 6 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 6 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 6", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une playlist collective", "un entraînement silencieux", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 6.",
-    fill: "action",
-    vfQ: "Action : action 6.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "playlist",
+    vfQ: "Le texte parle de l'activité suivante : une playlist collective.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 6", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["trois chansons", "un billet d'avion", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 6.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "trois",
+    vfQ: "Il faut prévoir trois chansons.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 6", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["15 CHF", "16 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 6.",
-    fill: "contact",
-    vfQ: "Contact : contact 6.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "15",
+    vfQ: "Le prix indiqué est 15 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_7_TEXT = `De : Service E11 3 7
+const E11_3_CE_EMAIL_7_TEXT = `De : Club des habitants
 
-Objet : Message 7 — information
+Objet : Merci pour votre participation
 
 Bonjour,
 
-Concernant sujet 7 : détail 7.
+Merci d'être venu à un café-débat sur les jeux vidéo à la terrasse du Marché.
+Plusieurs participants ont dit que cela aide à dire ce qu'on aime dans un jeu.
+Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
+Votre remarque sur une manette si possible a été notée.
 
-Délai : délai 7 jours. Action : action 7.
+Bien à vous,
 
-Contact : contact 7. Merci.
-
-Cordialement,
-
-Service`;
+Club des habitants`;
 
 const E11_3_CE_EMAIL_7_POOL = buildExpressPool("e11-3-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 7 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Merci pour votre participation", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 7 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Merci",
+    vfQ: "L'objet de l'e-mail est « Merci pour votre participation ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 7", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Club des habitants", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 7.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 7.",
+    fillQ: "De : _________.",
+    fill: "Club",
+    vfQ: "L'e-mail est envoyé par Club des habitants.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 7", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 23 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 7.",
-    fill: "détail",
-    vfQ: "Info : détail 7.",
+    fillQ: "La date est _________ 23 juin.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 23 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 7 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 7 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 7 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 7", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un café-débat sur les jeux vidéo", "un contrôle de maths", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 7.",
-    fill: "action",
-    vfQ: "Action : action 7.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "café",
+    vfQ: "Le texte parle de l'activité suivante : un café-débat sur les jeux vidéo.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 7", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une manette si possible", "une fourchette", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 7.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "manette",
+    vfQ: "Il faut prévoir une manette si possible.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 7", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["18 CHF", "18 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 7.",
-    fill: "contact",
-    vfQ: "Contact : contact 7.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "18",
+    vfQ: "Le prix indiqué est 18 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_8_TEXT = `De : Service E11 3 8
+const E11_3_CE_EMAIL_8_TEXT = `De : Maison commune
 
-Objet : Message 8 — information
+Objet : Invitation goûts
 
-Bonjour,
+Bonjour les amis,
 
-Concernant sujet 8 : détail 8.
+Je vous propose de venir avec moi à un club manga débutant.
+C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Il faut réserver directement sur place car il y a seulement 20 places.
+Apportez un manga déjà lu et un peu de bonne humeur.
 
-Délai : délai 8 jours. Action : action 8.
+À très vite,
 
-Contact : contact 8. Merci.
-
-Cordialement,
-
-Service`;
+Mina`;
 
 const E11_3_CE_EMAIL_8_POOL = buildExpressPool("e11-3-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 8 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Invitation goûts", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 8 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Invitation",
+    vfQ: "L'objet de l'e-mail est « Invitation goûts ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 8", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Maison commune", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 8.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 8.",
+    fillQ: "De : _________.",
+    fill: "Maison",
+    vfQ: "L'e-mail est envoyé par Maison commune.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 8", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 1er juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 8.",
-    fill: "détail",
-    vfQ: "Info : détail 8.",
+    fillQ: "La date est _________ 1er juillet.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 1er juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 8 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 8 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 8 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 8", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un club manga débutant", "une visite médicale", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 8.",
-    fill: "action",
-    vfQ: "Action : action 8.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "club",
+    vfQ: "Le texte parle de l'activité suivante : un club manga débutant.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 8", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un manga déjà lu", "un sac de ciment", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 8.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "manga",
+    vfQ: "Il faut prévoir un manga déjà lu.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 8", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["20 CHF", "20 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 8.",
-    fill: "contact",
-    vfQ: "Contact : contact 8.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "20",
+    vfQ: "Le prix indiqué est 20 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_9_TEXT = `De : Service E11 3 9
+const E11_3_CE_EMAIL_9_TEXT = `De : Bureau des inscriptions
 
-Objet : Message 9 — information
+Objet : Liste du matériel
 
 Bonjour,
 
-Concernant sujet 9 : détail 9.
+Voici la liste pour une soirée poésie courte : un petit poème, une bouteille d'eau et un stylo.
+Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
+Le tarif est 25 CHF.
+Nous parlerons surtout de la manière de écouter les goûts des autres.
 
-Délai : délai 9 jours. Action : action 9.
+Merci,
 
-Contact : contact 9. Merci.
-
-Cordialement,
-
-Service`;
+Bureau des inscriptions`;
 
 const E11_3_CE_EMAIL_9_POOL = buildExpressPool("e11-3-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 9 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Liste du matériel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 9 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Liste",
+    vfQ: "L'objet de l'e-mail est « Liste du matériel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 9", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Bureau des inscriptions", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 9.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 9.",
+    fillQ: "De : _________.",
+    fill: "Bureau",
+    vfQ: "L'e-mail est envoyé par Bureau des inscriptions.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 9", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 9 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 9.",
-    fill: "détail",
-    vfQ: "Info : détail 9.",
+    fillQ: "La date est _________ 9 juillet.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 9 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 9 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 9 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 9 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 9", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une soirée poésie courte", "un entraînement silencieux", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 9.",
-    fill: "action",
-    vfQ: "Action : action 9.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "soirée",
+    vfQ: "Le texte parle de l'activité suivante : une soirée poésie courte.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 9", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un petit poème", "un billet d'avion", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 9.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "petit",
+    vfQ: "Il faut prévoir un petit poème.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 9", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["25 CHF", "22 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 9.",
-    fill: "contact",
-    vfQ: "Contact : contact 9.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "25",
+    vfQ: "Le prix indiqué est 25 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_10_TEXT = `De : Service E11 3 10
+const E11_3_CE_EMAIL_10_TEXT = `De : Info loisirs
 
-Objet : Message 10 — information
+Objet : Places disponibles
 
 Bonjour,
 
-Concernant sujet 10 : détail 10.
-
-Délai : délai 10 jours. Action : action 10.
-
-Contact : contact 10. Merci.
+Bonne nouvelle : il reste 24 places pour un atelier affiches de concerts.
+La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
+Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Prévoyez une image de concert. Le prix est 30 CHF.
 
 Cordialement,
 
-Service`;
+Info loisirs`;
 
 const E11_3_CE_EMAIL_10_POOL = buildExpressPool("e11-3-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 10 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Places disponibles", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 10 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Places",
+    vfQ: "L'objet de l'e-mail est « Places disponibles ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 10", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Info loisirs", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 10.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 10.",
+    fillQ: "De : _________.",
+    fill: "Info",
+    vfQ: "L'e-mail est envoyé par Info loisirs.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 10", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 17 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 10.",
-    fill: "détail",
-    vfQ: "Info : détail 10.",
+    fillQ: "La date est _________ 17 juillet.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 17 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 10 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 10 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 10 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 10", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier affiches de concerts", "un contrôle de maths", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 10.",
-    fill: "action",
-    vfQ: "Action : action 10.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier affiches de concerts.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 10", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une image de concert", "une fourchette", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 10.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "image",
+    vfQ: "Il faut prévoir une image de concert.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 10", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["30 CHF", "24 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 10.",
-    fill: "contact",
-    vfQ: "Contact : contact 10.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "30",
+    vfQ: "Le prix indiqué est 30 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_11_TEXT = `De : Service E11 3 11
+const E11_3_CE_EMAIL_11_TEXT = `De : Groupe des bénévoles
 
-Objet : Message 11 — information
+Objet : Retour sur l'activité
 
 Bonjour,
 
-Concernant sujet 11 : détail 11.
+Après une rencontre autour du street art, nous avons reçu beaucoup de messages positifs.
+Les participants ont apprécié observer les couleurs de la ville.
+La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
+Cette fois, merci d'apporter une photo de mur peint.
 
-Délai : délai 11 jours. Action : action 11.
+Au plaisir de vous revoir,
 
-Contact : contact 11. Merci.
-
-Cordialement,
-
-Service`;
+Groupe des bénévoles`;
 
 const E11_3_CE_EMAIL_11_POOL = buildExpressPool("e11-3-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 11 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Retour sur l'activité", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 11 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Retour",
+    vfQ: "L'objet de l'e-mail est « Retour sur l'activité ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 11", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Groupe des bénévoles", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 11.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 11.",
+    fillQ: "De : _________.",
+    fill: "Groupe",
+    vfQ: "L'e-mail est envoyé par Groupe des bénévoles.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 11", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 25 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 11.",
-    fill: "détail",
-    vfQ: "Info : détail 11.",
+    fillQ: "La date est _________ 25 juillet.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 25 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 11 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["19 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 11 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 11 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "19",
+    vfQ: "L'heure indiquée est 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 11", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une rencontre autour du street art", "une visite médicale", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 11.",
-    fill: "action",
-    vfQ: "Action : action 11.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "rencontre",
+    vfQ: "Le texte parle de l'activité suivante : une rencontre autour du street art.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 11", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une photo de mur peint", "un sac de ciment", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 11.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "photo",
+    vfQ: "Il faut prévoir une photo de mur peint.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 11", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["4 CHF", "6 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 11.",
-    fill: "contact",
-    vfQ: "Contact : contact 11.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "4",
+    vfQ: "Le prix indiqué est 4 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_12_TEXT = `De : Service E11 3 12
+const E11_3_CE_EMAIL_12_TEXT = `De : Réception
 
-Objet : Message 12 — information
+Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Concernant sujet 12 : détail 12.
+Votre rendez-vous pour une discussion sur les podcasts commence à 8 h 30.
+Merci d'être à la maison médicale dix minutes avant.
+La date est vendredi 2 août et le prix est 6 CHF.
+La docteure Morel conseille de préparer un podcast court.
 
-Délai : délai 12 jours. Action : action 12.
+Meilleures salutations,
 
-Contact : contact 12. Merci.
-
-Cordialement,
-
-Service`;
+Réception`;
 
 const E11_3_CE_EMAIL_12_POOL = buildExpressPool("e11-3-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 12 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rendez-vous à 8 h 30", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 12 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rendez",
+    vfQ: "L'objet de l'e-mail est « Rendez-vous à 8 h 30 ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 12", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Réception", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 12.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 12.",
+    fillQ: "De : _________.",
+    fill: "Réception",
+    vfQ: "L'e-mail est envoyé par Réception.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 12", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 2 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 12.",
-    fill: "détail",
-    vfQ: "Info : détail 12.",
+    fillQ: "La date est _________ 2 août.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 2 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 12 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["8 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 12 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 12 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "8",
+    vfQ: "L'heure indiquée est 8 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 12", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une discussion sur les podcasts", "un entraînement silencieux", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 12.",
-    fill: "action",
-    vfQ: "Action : action 12.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "discussion",
+    vfQ: "Le texte parle de l'activité suivante : une discussion sur les podcasts.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 12", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un podcast court", "un billet d'avion", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 12.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "podcast",
+    vfQ: "Il faut prévoir un podcast court.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 12", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["6 CHF", "9 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 12.",
-    fill: "contact",
-    vfQ: "Contact : contact 12.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "6",
+    vfQ: "Le prix indiqué est 6 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_13_TEXT = `De : Service E11 3 13
+const E11_3_CE_EMAIL_13_TEXT = `De : Atelier A2
 
-Objet : Message 13 — information
+Objet : Préparation de groupe
 
-Bonjour,
+Chers participants,
 
-Concernant sujet 13 : détail 13.
+Pour préparer un vote pour le menu de fête, nous faisons deux petits groupes.
+Le premier groupe arrive à 13 h à le parc des Amandiers.
+La séance a lieu samedi 10 août avec l'entraîneuse Emma.
+Merci de vérifier une idée de plat avant de partir.
 
-Délai : délai 13 jours. Action : action 13.
+À bientôt,
 
-Contact : contact 13. Merci.
-
-Cordialement,
-
-Service`;
+Atelier A2`;
 
 const E11_3_CE_EMAIL_13_POOL = buildExpressPool("e11-3-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 13 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Préparation de groupe", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 13 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Préparation",
+    vfQ: "L'objet de l'e-mail est « Préparation de groupe ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 13", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Atelier A2", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 13.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 13.",
+    fillQ: "De : _________.",
+    fill: "Atelier",
+    vfQ: "L'e-mail est envoyé par Atelier A2.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 13", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 10 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 13.",
-    fill: "détail",
-    vfQ: "Info : détail 13.",
+    fillQ: "La date est _________ 10 août.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 10 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 13 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["13 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 13 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 13 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "13",
+    vfQ: "L'heure indiquée est 13 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 13", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un vote pour le menu de fête", "un contrôle de maths", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 13.",
-    fill: "action",
-    vfQ: "Action : action 13.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "vote",
+    vfQ: "Le texte parle de l'activité suivante : un vote pour le menu de fête.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 13", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une idée de plat", "une fourchette", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 13.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "idée",
+    vfQ: "Il faut prévoir une idée de plat.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 13", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["9 CHF", "11 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 13.",
-    fill: "contact",
-    vfQ: "Contact : contact 13.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "9",
+    vfQ: "Le prix indiqué est 9 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_14_TEXT = `De : Service E11 3 14
+const E11_3_CE_EMAIL_14_TEXT = `De : Coordination locale
 
-Objet : Message 14 — information
+Objet : Demande d'information
 
 Bonjour,
 
-Concernant sujet 14 : détail 14.
+Je cherche des informations sur un mur des coups de cœur.
+J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Pouvez-vous confirmer le prix de 11 CHF ?
+Je viens surtout pour afficher ses préférences.
 
-Délai : délai 14 jours. Action : action 14.
+Merci d'avance,
 
-Contact : contact 14. Merci.
-
-Cordialement,
-
-Service`;
+Salma`;
 
 const E11_3_CE_EMAIL_14_POOL = buildExpressPool("e11-3-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 14 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Demande d'information", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 14 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Demande",
+    vfQ: "L'objet de l'e-mail est « Demande d'information ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 14", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Coordination locale", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 14.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 14.",
+    fillQ: "De : _________.",
+    fill: "Coordination",
+    vfQ: "L'e-mail est envoyé par Coordination locale.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 14", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 18 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 14.",
-    fill: "détail",
-    vfQ: "Info : détail 14.",
+    fillQ: "La date est _________ 18 août.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 18 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 14 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 14 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 14 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 14", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un mur des coups de cœur", "une visite médicale", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 14.",
-    fill: "action",
-    vfQ: "Action : action 14.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "mur",
+    vfQ: "Le texte parle de l'activité suivante : un mur des coups de cœur.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 14", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["trois papiers colorés", "un sac de ciment", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 14.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "trois",
+    vfQ: "Il faut prévoir trois papiers colorés.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 14", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["11 CHF", "13 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 14.",
-    fill: "contact",
-    vfQ: "Contact : contact 14.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "11",
+    vfQ: "Le prix indiqué est 11 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_15_TEXT = `De : Service E11 3 15
+const E11_3_CE_EMAIL_15_TEXT = `De : Agenda citoyen
 
-Objet : Message 15 — information
+Objet : Choix entre deux dates
 
 Bonjour,
 
-Concernant sujet 15 : détail 15.
+Deux dates étaient proposées, mais nous gardons lundi 26 août.
+L'horaire choisi est 16 h 30 à le centre scolaire.
+Ce choix convient mieux à la professeure Léa et au groupe.
+Le contenu reste une présentation de photos aimées avec une photo imprimée.
 
-Délai : délai 15 jours. Action : action 15.
+Merci pour vos réponses,
 
-Contact : contact 15. Merci.
-
-Cordialement,
-
-Service`;
+Agenda citoyen`;
 
 const E11_3_CE_EMAIL_15_POOL = buildExpressPool("e11-3-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 15 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 15 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Choix",
+    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 15", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 15.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 15.",
+    fillQ: "De : _________.",
+    fill: "Agenda",
+    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 15", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 15.",
-    fill: "détail",
-    vfQ: "Info : détail 15.",
+    fillQ: "La date est _________ 26 août.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 26 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 15 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 15 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 15 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 15", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une présentation de photos aimées", "un entraînement silencieux", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 15.",
-    fill: "action",
-    vfQ: "Action : action 15.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "présentation",
+    vfQ: "Le texte parle de l'activité suivante : une présentation de photos aimées.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 15", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une photo imprimée", "un billet d'avion", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 15.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "photo",
+    vfQ: "Il faut prévoir une photo imprimée.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 15", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["14 CHF", "17 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 15.",
-    fill: "contact",
-    vfQ: "Contact : contact 15.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "14",
+    vfQ: "Le prix indiqué est 14 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_16_TEXT = `De : Service E11 3 16
+const E11_3_CE_EMAIL_16_TEXT = `De : Service rappel
 
-Objet : Message 16 — information
+Objet : Dernier rappel
 
 Bonjour,
 
-Concernant sujet 16 : détail 16.
+Dernier rappel avant un atelier goûts et couleurs !
+Rendez-vous mardi 3 septembre à 17 h à la place du Village.
+Sans inscription au stand d'information, l'entrée n'est pas garantie.
+Apportez un objet de sa couleur préférée et gardez 16 CHF si besoin.
 
-Délai : délai 16 jours. Action : action 16.
+À tout à l'heure,
 
-Contact : contact 16. Merci.
-
-Cordialement,
-
-Service`;
+Service rappel`;
 
 const E11_3_CE_EMAIL_16_POOL = buildExpressPool("e11-3-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 16 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Dernier rappel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 16 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Dernier",
+    vfQ: "L'objet de l'e-mail est « Dernier rappel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 16", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service rappel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 16.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 16.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service rappel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 16", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 3 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 16.",
-    fill: "détail",
-    vfQ: "Info : détail 16.",
+    fillQ: "La date est _________ 3 septembre.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 3 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 16 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 16 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 16 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 16", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier goûts et couleurs", "un contrôle de maths", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 16.",
-    fill: "action",
-    vfQ: "Action : action 16.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier goûts et couleurs.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 16", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un objet de sa couleur préférée", "une fourchette", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 16.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "objet",
+    vfQ: "Il faut prévoir un objet de sa couleur préférée.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 16", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["16 CHF", "19 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 16.",
-    fill: "contact",
-    vfQ: "Contact : contact 16.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "16",
+    vfQ: "Le prix indiqué est 16 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_17_TEXT = `De : Service E11 3 17
+const E11_3_CE_EMAIL_17_TEXT = `De : Responsable du projet
 
-Objet : Message 17 — information
+Objet : Message de la responsable
 
 Bonjour,
 
-Concernant sujet 17 : détail 17.
+La coach Ana vous écrit au sujet de une lecture de critiques simples.
+La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
+Le but est simple : comprendre une critique.
+Merci de respecter cette règle : les textes difficiles sont expliqués.
 
-Délai : délai 17 jours. Action : action 17.
+Bien cordialement,
 
-Contact : contact 17. Merci.
-
-Cordialement,
-
-Service`;
+Responsable du projet`;
 
 const E11_3_CE_EMAIL_17_POOL = buildExpressPool("e11-3-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 17 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Message de la responsable", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
+    fillQ: "Objet : _________.",
     fill: "Message",
-    vfQ: "Objet : Message 17 — information.",
+    vfQ: "L'objet de l'e-mail est « Message de la responsable ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 17", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Responsable du projet", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 17.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 17.",
+    fillQ: "De : _________.",
+    fill: "Responsable",
+    vfQ: "L'e-mail est envoyé par Responsable du projet.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 17", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 11 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 17.",
-    fill: "détail",
-    vfQ: "Info : détail 17.",
+    fillQ: "La date est _________ 11 septembre.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 11 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 17 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 17 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 17 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 17", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une lecture de critiques simples", "une visite médicale", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 17.",
-    fill: "action",
-    vfQ: "Action : action 17.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "lecture",
+    vfQ: "Le texte parle de l'activité suivante : une lecture de critiques simples.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 17", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un avis écrit", "un sac de ciment", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 17.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "avis",
+    vfQ: "Il faut prévoir un avis écrit.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 17", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["22 CHF", "deux groupes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 17.",
-    fill: "contact",
-    vfQ: "Contact : contact 17.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "22",
+    vfQ: "Le prix indiqué est 22 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_18_TEXT = `De : Service E11 3 18
+const E11_3_CE_EMAIL_18_TEXT = `De : Équipe du samedi
 
-Objet : Message 18 — information
+Objet : Organisation du samedi
 
 Bonjour,
 
-Concernant sujet 18 : détail 18.
+Samedi, l'équipe installe le salon Harmonie pour un échange de recommandations.
+Les participants arrivent à 11 h 30 avec une recommandation.
+La date exacte est jeudi 19 septembre.
+Après la séance, un court échange expliquera comment proposer quelque chose à un ami.
 
-Délai : délai 18 jours. Action : action 18.
+Merci de votre aide,
 
-Contact : contact 18. Merci.
-
-Cordialement,
-
-Service`;
+Équipe du samedi`;
 
 const E11_3_CE_EMAIL_18_POOL = buildExpressPool("e11-3-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 18 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Organisation du samedi", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 18 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Organisation",
+    vfQ: "L'objet de l'e-mail est « Organisation du samedi ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 18", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe du samedi", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 18.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 18.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe du samedi.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 18", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 19 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 18.",
-    fill: "détail",
-    vfQ: "Info : détail 18.",
+    fillQ: "La date est _________ 19 septembre.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 19 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 18 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 18 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 18 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 18", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un échange de recommandations", "un entraînement silencieux", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 18.",
-    fill: "action",
-    vfQ: "Action : action 18.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "échange",
+    vfQ: "Le texte parle de l'activité suivante : un échange de recommandations.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 18", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une recommandation", "un billet d'avion", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 18.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "recommandation",
+    vfQ: "Il faut prévoir une recommandation.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 18", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["28 CHF", "un petit groupe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 18.",
-    fill: "contact",
-    vfQ: "Contact : contact 18.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "28",
+    vfQ: "Le prix indiqué est 28 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_19_TEXT = `De : Service E11 3 19
+const E11_3_CE_EMAIL_19_TEXT = `De : Questionnaire qualité
 
-Objet : Message 19 — information
+Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Concernant sujet 19 : détail 19.
+Vous avez participé à un quiz sur les styles musicaux à la résidence du Parc.
+Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
+La prochaine séance est prévue vendredi 27 septembre.
+Votre avis nous aidera à mieux reconnaître un style de musique.
 
-Délai : délai 19 jours. Action : action 19.
+Merci pour votre retour,
 
-Contact : contact 19. Merci.
-
-Cordialement,
-
-Service`;
+Questionnaire qualité`;
 
 const E11_3_CE_EMAIL_19_POOL = buildExpressPool("e11-3-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 19 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Votre avis nous intéresse", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 19 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Votre",
+    vfQ: "L'objet de l'e-mail est « Votre avis nous intéresse ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 19", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Questionnaire qualité", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 19.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 19.",
+    fillQ: "De : _________.",
+    fill: "Questionnaire",
+    vfQ: "L'e-mail est envoyé par Questionnaire qualité.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 19", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 27 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 19.",
-    fill: "détail",
-    vfQ: "Info : détail 19.",
+    fillQ: "La date est _________ 27 septembre.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 27 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 19 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 19 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 19 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 19", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un quiz sur les styles musicaux", "un contrôle de maths", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 19.",
-    fill: "action",
-    vfQ: "Action : action 19.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "quiz",
+    vfQ: "Le texte parle de l'activité suivante : un quiz sur les styles musicaux.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 19", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un casque audio", "une fourchette", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 19.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "casque",
+    vfQ: "Il faut prévoir un casque audio.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 19", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["35 CHF", "toute la classe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 19.",
-    fill: "contact",
-    vfQ: "Contact : contact 19.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "35",
+    vfQ: "Le prix indiqué est 35 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_3_CE_EMAIL_20_TEXT = `De : Service E11 3 20
+const E11_3_CE_EMAIL_20_TEXT = `De : Centre culturel
 
-Objet : Message 20 — information
+Objet : Prochaine rencontre
 
 Bonjour,
 
-Concernant sujet 20 : détail 20.
+Nous préparons une nouvelle rencontre autour de une table ronde sur les loisirs préférés.
+Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
+Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
+Cette fois, nous demanderons à chacun d'apporter une liste de loisirs.
 
-Délai : délai 20 jours. Action : action 20.
+À bientôt,
 
-Contact : contact 20. Merci.
-
-Cordialement,
-
-Service`;
+Centre culturel`;
 
 const E11_3_CE_EMAIL_20_POOL = buildExpressPool("e11-3-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 20 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Prochaine rencontre", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 20 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Prochaine",
+    vfQ: "L'objet de l'e-mail est « Prochaine rencontre ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 20", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Centre culturel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 20.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 20.",
+    fillQ: "De : _________.",
+    fill: "Centre",
+    vfQ: "L'e-mail est envoyé par Centre culturel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 20", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 5 octobre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 20.",
-    fill: "détail",
-    vfQ: "Info : détail 20.",
+    fillQ: "La date est _________ 5 octobre.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 5 octobre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 20 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 20 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 20 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 20", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une table ronde sur les loisirs préférés", "une visite médicale", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 20.",
-    fill: "action",
-    vfQ: "Action : action 20.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "table",
+    vfQ: "Le texte parle de l'activité suivante : une table ronde sur les loisirs préférés.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 3 20", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une liste de loisirs", "un sac de ciment", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 3 20.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "liste",
+    vfQ: "Il faut prévoir une liste de loisirs.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 20", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["40 CHF", "les vingt premiers inscrits", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 20.",
-    fill: "contact",
-    vfQ: "Contact : contact 20.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "40",
+    vfQ: "Le prix indiqué est 40 CHF.",
     vfC: 0,
   }),
 ]);
@@ -6971,102 +6951,122 @@ readingPoolExercise({
   id: "e11-3-ce-email",
   readingText: E11_3_CE_EMAIL_TEXT,
   questionPool: E11_3_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-2",
   readingText: E11_3_CE_EMAIL_2_TEXT,
-  questionPool: E11_3_CE_EMAIL_2_POOL
+  questionPool: E11_3_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-3",
   readingText: E11_3_CE_EMAIL_3_TEXT,
-  questionPool: E11_3_CE_EMAIL_3_POOL
+  questionPool: E11_3_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-4",
   readingText: E11_3_CE_EMAIL_4_TEXT,
-  questionPool: E11_3_CE_EMAIL_4_POOL
+  questionPool: E11_3_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-5",
   readingText: E11_3_CE_EMAIL_5_TEXT,
-  questionPool: E11_3_CE_EMAIL_5_POOL
+  questionPool: E11_3_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-6",
   readingText: E11_3_CE_EMAIL_6_TEXT,
-  questionPool: E11_3_CE_EMAIL_6_POOL
+  questionPool: E11_3_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-7",
   readingText: E11_3_CE_EMAIL_7_TEXT,
-  questionPool: E11_3_CE_EMAIL_7_POOL
+  questionPool: E11_3_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-8",
   readingText: E11_3_CE_EMAIL_8_TEXT,
-  questionPool: E11_3_CE_EMAIL_8_POOL
+  questionPool: E11_3_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-9",
   readingText: E11_3_CE_EMAIL_9_TEXT,
-  questionPool: E11_3_CE_EMAIL_9_POOL
+  questionPool: E11_3_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-10",
   readingText: E11_3_CE_EMAIL_10_TEXT,
-  questionPool: E11_3_CE_EMAIL_10_POOL
+  questionPool: E11_3_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-11",
   readingText: E11_3_CE_EMAIL_11_TEXT,
-  questionPool: E11_3_CE_EMAIL_11_POOL
+  questionPool: E11_3_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-12",
   readingText: E11_3_CE_EMAIL_12_TEXT,
-  questionPool: E11_3_CE_EMAIL_12_POOL
+  questionPool: E11_3_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-13",
   readingText: E11_3_CE_EMAIL_13_TEXT,
-  questionPool: E11_3_CE_EMAIL_13_POOL
+  questionPool: E11_3_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-14",
   readingText: E11_3_CE_EMAIL_14_TEXT,
-  questionPool: E11_3_CE_EMAIL_14_POOL
+  questionPool: E11_3_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-15",
   readingText: E11_3_CE_EMAIL_15_TEXT,
-  questionPool: E11_3_CE_EMAIL_15_POOL
+  questionPool: E11_3_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-16",
   readingText: E11_3_CE_EMAIL_16_TEXT,
-  questionPool: E11_3_CE_EMAIL_16_POOL
+  questionPool: E11_3_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-17",
   readingText: E11_3_CE_EMAIL_17_TEXT,
-  questionPool: E11_3_CE_EMAIL_17_POOL
+  questionPool: E11_3_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-18",
   readingText: E11_3_CE_EMAIL_18_TEXT,
-  questionPool: E11_3_CE_EMAIL_18_POOL
+  questionPool: E11_3_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-19",
   readingText: E11_3_CE_EMAIL_19_TEXT,
-  questionPool: E11_3_CE_EMAIL_19_POOL
+  questionPool: E11_3_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-3-ce-email-20",
   readingText: E11_3_CE_EMAIL_20_TEXT,
-  questionPool: E11_3_CE_EMAIL_20_POOL
+  questionPool: E11_3_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
@@ -7348,2062 +7348,2042 @@ sourceMessage: {
    E11.4 — Passer des vacances
    ════════════════════════════════════════════════════════════════════════════ */
 
-const E11_4_CE_EMAIL_TEXT = `De : Service E11 4 1
+const E11_4_CE_EMAIL_TEXT = `De : La responsable Nadia
 
-Objet : Message 1 — information
+Objet : Inscription à une réunion pour préparer le séjour à la mer
 
 Bonjour,
 
-Concernant sujet 1 : détail 1.
+Votre inscription à une réunion pour préparer le séjour à la mer est bien notée.
+Le rendez-vous est fixé lundi 6 mai à 9 h à la Maison des Acacias.
+Merci d'apporter une carte de la côte. La participation est gratuite.
+Cette rencontre aide à choisir les activités du séjour.
 
-Délai : délai 1 jours. Action : action 1.
+À bientôt,
 
-Contact : contact 1. Merci.
-
-Cordialement,
-
-Service`;
+La responsable Nadia`;
 
 const E11_4_CE_EMAIL_POOL = buildExpressPool("e11-4-ce-email", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 1 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Inscription à une réunion pour préparer le séjour à la mer", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 1 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Inscription",
+    vfQ: "L'objet de l'e-mail est « Inscription à une réunion pour préparer le séjour à la mer ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 1", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["La responsable Nadia", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 1.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 1.",
+    fillQ: "De : _________.",
+    fill: "responsable",
+    vfQ: "L'e-mail est envoyé par La responsable Nadia.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 1", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 6 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 1.",
-    fill: "détail",
-    vfQ: "Info : détail 1.",
+    fillQ: "La date est _________ 6 mai.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 6 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 1 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 1 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 1 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 1", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une réunion pour préparer le séjour à la mer", "un atelier couture", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 1.",
-    fill: "action",
-    vfQ: "Action : action 1.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "réunion",
+    vfQ: "Le texte parle de l'activité suivante : une réunion pour préparer le séjour à la mer.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 1", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une carte de la côte", "un marteau", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 1.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "carte",
+    vfQ: "Il faut prévoir une carte de la côte.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 1", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["gratuit", "8 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 1.",
-    fill: "contact",
-    vfQ: "Contact : contact 1.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "gratuit",
+    vfQ: "Le prix indiqué est gratuit.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_2_TEXT = `De : Service E11 4 2
+const E11_4_CE_EMAIL_2_TEXT = `De : Accueil du quartier
 
-Objet : Message 2 — information
+Objet : Rappel pour mardi 14 mai
 
-Bonjour,
+Bonjour à toutes et à tous,
 
-Concernant sujet 2 : détail 2.
+Petit rappel : un atelier valise légère aura lieu mardi 14 mai.
+Nous vous attendons à 10 h 15 devant la salle Jean-Monnet.
+Comme il y a 10 places, merci de prévenir en cas d'absence.
+N'oubliez pas une petite valise et lisez bien cette consigne : les liquides restent dans une poche séparée.
 
-Délai : délai 2 jours. Action : action 2.
+Bonne journée,
 
-Contact : contact 2. Merci.
-
-Cordialement,
-
-Service`;
+Accueil du quartier`;
 
 const E11_4_CE_EMAIL_2_POOL = buildExpressPool("e11-4-ce-email-2", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 2 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rappel pour mardi 14 mai", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 2 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rappel",
+    vfQ: "L'objet de l'e-mail est « Rappel pour mardi 14 mai ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 2", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Accueil du quartier", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 2.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 2.",
+    fillQ: "De : _________.",
+    fill: "Accueil",
+    vfQ: "L'e-mail est envoyé par Accueil du quartier.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 2", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 14 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 2.",
-    fill: "détail",
-    vfQ: "Info : détail 2.",
+    fillQ: "La date est _________ 14 mai.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 14 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 2 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["10 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 2 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 2 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "10",
+    vfQ: "L'heure indiquée est 10 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 2", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier valise légère", "un cours de piano", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 2.",
-    fill: "action",
-    vfQ: "Action : action 2.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier valise légère.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 2", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une petite valise", "un dictionnaire lourd", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 2.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "petite",
+    vfQ: "Il faut prévoir une petite valise.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 2", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["5 CHF", "10 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 2.",
-    fill: "contact",
-    vfQ: "Contact : contact 2.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "5",
+    vfQ: "Le prix indiqué est 5 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_3_TEXT = `De : Service E11 4 3
+const E11_4_CE_EMAIL_3_TEXT = `De : Service activités
 
-Objet : Message 3 — information
+Objet : Question avant une présentation du camping familial
 
 Bonjour,
 
-Concernant sujet 3 : détail 3.
-
-Délai : délai 3 jours. Action : action 3.
-
-Contact : contact 3. Merci.
+Je voudrais participer à une présentation du camping familial, mais j'ai une question.
+Faut-il vraiment apporter un sac de couchage ?
+Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
+Mon objectif est de vivre quelques jours en groupe. Merci pour votre réponse.
 
 Cordialement,
 
-Service`;
+Rami`;
 
 const E11_4_CE_EMAIL_3_POOL = buildExpressPool("e11-4-ce-email-3", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 3 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Question avant une présentation du camping familial", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 3 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Question",
+    vfQ: "L'objet de l'e-mail est « Question avant une présentation du camping familial ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 3", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service activités", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 3.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 3.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service activités.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 3", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 22 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 3.",
-    fill: "détail",
-    vfQ: "Info : détail 3.",
+    fillQ: "La date est _________ 22 mai.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 22 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 3 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 3 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 3 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 3", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une présentation du camping familial", "une permanence administrative", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 3.",
-    fill: "action",
-    vfQ: "Action : action 3.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "présentation",
+    vfQ: "Le texte parle de l'activité suivante : une présentation du camping familial.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 3", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un sac de couchage", "un uniforme de travail", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 3.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "sac",
+    vfQ: "Il faut prévoir un sac de couchage.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 3", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["8 CHF", "12 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 3.",
-    fill: "contact",
-    vfQ: "Contact : contact 3.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "8",
+    vfQ: "Le prix indiqué est 8 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_4_TEXT = `De : Service E11 4 4
+const E11_4_CE_EMAIL_4_TEXT = `De : Association Bellevue
 
-Objet : Message 4 — information
+Objet : Confirmation de votre place
 
-Bonjour,
+Madame, Monsieur,
 
-Concernant sujet 4 : détail 4.
+Nous confirmons votre place pour une sortie test en train régional.
+La séance se passe à la ferme des Lilas jeudi 30 mai.
+Merci d'arriver à 12 h 30. La participation est de 10 CHF.
+Le bénévole Marco sera sur place pour vous accueillir.
 
-Délai : délai 4 jours. Action : action 4.
+Avec nos salutations,
 
-Contact : contact 4. Merci.
-
-Cordialement,
-
-Service`;
+Association Bellevue`;
 
 const E11_4_CE_EMAIL_4_POOL = buildExpressPool("e11-4-ce-email-4", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 4 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Confirmation de votre place", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 4 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Confirmation",
+    vfQ: "L'objet de l'e-mail est « Confirmation de votre place ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 4", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Association Bellevue", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 4.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 4.",
+    fillQ: "De : _________.",
+    fill: "Association",
+    vfQ: "L'e-mail est envoyé par Association Bellevue.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 4", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 30 mai", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 4.",
-    fill: "détail",
-    vfQ: "Info : détail 4.",
+    fillQ: "La date est _________ 30 mai.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 30 mai.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 4 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["12 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 4 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 4 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "12",
+    vfQ: "L'heure indiquée est 12 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 4", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une sortie test en train régional", "un atelier couture", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 4.",
-    fill: "action",
-    vfQ: "Action : action 4.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "sortie",
+    vfQ: "Le texte parle de l'activité suivante : une sortie test en train régional.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 4", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une carte de transport", "un marteau", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 4.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "carte",
+    vfQ: "Il faut prévoir une carte de transport.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 4", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["10 CHF", "14 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 4.",
-    fill: "contact",
-    vfQ: "Contact : contact 4.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "10",
+    vfQ: "Le prix indiqué est 10 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_5_TEXT = `De : Service E11 4 5
+const E11_4_CE_EMAIL_5_TEXT = `De : Secrétariat du centre
 
-Objet : Message 5 — information
+Objet : Conseil pratique : une brochure touristique
 
-Bonjour,
+Salut,
 
-Concernant sujet 5 : détail 5.
+Pour un cours pour lire une brochure, pense à mettre une brochure touristique dans ton sac.
+On se retrouve vendredi 7 juin à 14 h à le foyer Bellevue.
+Si tu veux trouver les informations importantes, cette séance est très utile.
+Attention : les prix peuvent changer selon la saison.
 
-Délai : délai 5 jours. Action : action 5.
+À demain,
 
-Contact : contact 5. Merci.
-
-Cordialement,
-
-Service`;
+Noé`;
 
 const E11_4_CE_EMAIL_5_POOL = buildExpressPool("e11-4-ce-email-5", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 5 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Conseil pratique : une brochure touristique", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 5 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Conseil",
+    vfQ: "L'objet de l'e-mail est « Conseil pratique : une brochure touristique ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 5", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Secrétariat du centre", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 5.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 5.",
+    fillQ: "De : _________.",
+    fill: "Secrétariat",
+    vfQ: "L'e-mail est envoyé par Secrétariat du centre.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 5", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 7 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 5.",
-    fill: "détail",
-    vfQ: "Info : détail 5.",
+    fillQ: "La date est _________ 7 juin.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 7 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 5 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 5 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 5 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 5", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un cours pour lire une brochure", "un cours de piano", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 5.",
-    fill: "action",
-    vfQ: "Action : action 5.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "cours",
+    vfQ: "Le texte parle de l'activité suivante : un cours pour lire une brochure.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 5", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une brochure touristique", "un dictionnaire lourd", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 5.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "brochure",
+    vfQ: "Il faut prévoir une brochure touristique.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 5", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["12 CHF", "15 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 5.",
-    fill: "contact",
-    vfQ: "Contact : contact 5.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "12",
+    vfQ: "Le prix indiqué est 12 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_6_TEXT = `De : Service E11 4 6
+const E11_4_CE_EMAIL_6_TEXT = `De : Équipe organisation
 
-Objet : Message 6 — information
+Objet : Changement de salle
 
 Bonjour,
 
-Concernant sujet 6 : détail 6.
+La salle prévue n'est plus disponible pour une discussion sur les vacances pas chères.
+Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : samedi 15 juin à 15 h 15.
+Le prix reste 15 CHF et 16 places sont gardées.
+Merci de préparer un tableau de dépenses.
 
-Délai : délai 6 jours. Action : action 6.
+Merci de votre compréhension,
 
-Contact : contact 6. Merci.
-
-Cordialement,
-
-Service`;
+Équipe organisation`;
 
 const E11_4_CE_EMAIL_6_POOL = buildExpressPool("e11-4-ce-email-6", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 6 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Changement de salle", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 6 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Changement",
+    vfQ: "L'objet de l'e-mail est « Changement de salle ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 6", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe organisation", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 6.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 6.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe organisation.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 6", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 15 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 6.",
-    fill: "détail",
-    vfQ: "Info : détail 6.",
+    fillQ: "La date est _________ 15 juin.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 15 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 6 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 6 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 6 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 6", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une discussion sur les vacances pas chères", "une permanence administrative", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 6.",
-    fill: "action",
-    vfQ: "Action : action 6.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "discussion",
+    vfQ: "Le texte parle de l'activité suivante : une discussion sur les vacances pas chères.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 6", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un tableau de dépenses", "un uniforme de travail", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 6.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "tableau",
+    vfQ: "Il faut prévoir un tableau de dépenses.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 6", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["15 CHF", "16 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 6.",
-    fill: "contact",
-    vfQ: "Contact : contact 6.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "15",
+    vfQ: "Le prix indiqué est 15 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_7_TEXT = `De : Service E11 4 7
+const E11_4_CE_EMAIL_7_TEXT = `De : Club des habitants
 
-Objet : Message 7 — information
+Objet : Merci pour votre participation
 
 Bonjour,
 
-Concernant sujet 7 : détail 7.
+Merci d'être venu à une préparation de pique-nique de plage à la terrasse du Marché.
+Plusieurs participants ont dit que cela aide à manger dehors simplement.
+Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
+Votre remarque sur une glacière a été notée.
 
-Délai : délai 7 jours. Action : action 7.
+Bien à vous,
 
-Contact : contact 7. Merci.
-
-Cordialement,
-
-Service`;
+Club des habitants`;
 
 const E11_4_CE_EMAIL_7_POOL = buildExpressPool("e11-4-ce-email-7", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 7 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Merci pour votre participation", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 7 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Merci",
+    vfQ: "L'objet de l'e-mail est « Merci pour votre participation ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 7", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Club des habitants", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 7.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 7.",
+    fillQ: "De : _________.",
+    fill: "Club",
+    vfQ: "L'e-mail est envoyé par Club des habitants.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 7", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 23 juin", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 7.",
-    fill: "détail",
-    vfQ: "Info : détail 7.",
+    fillQ: "La date est _________ 23 juin.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 23 juin.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 7 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 7 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 7 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 7", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une préparation de pique-nique de plage", "un atelier couture", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 7.",
-    fill: "action",
-    vfQ: "Action : action 7.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "préparation",
+    vfQ: "Le texte parle de l'activité suivante : une préparation de pique-nique de plage.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 7", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une glacière", "un marteau", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 7.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "glacière",
+    vfQ: "Il faut prévoir une glacière.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 7", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["18 CHF", "18 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 7.",
-    fill: "contact",
-    vfQ: "Contact : contact 7.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "18",
+    vfQ: "Le prix indiqué est 18 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_8_TEXT = `De : Service E11 4 8
+const E11_4_CE_EMAIL_8_TEXT = `De : Maison commune
 
-Objet : Message 8 — information
+Objet : Invitation vacances
 
-Bonjour,
+Bonjour les amis,
 
-Concernant sujet 8 : détail 8.
+Je vous propose de venir avec moi à une séance sécurité au soleil.
+C'est lundi 1er juillet à 17 h 30 à le local des Jeunes.
+Il faut réserver directement sur place car il y a seulement 20 places.
+Apportez de la crème solaire et un peu de bonne humeur.
 
-Délai : délai 8 jours. Action : action 8.
+À très vite,
 
-Contact : contact 8. Merci.
-
-Cordialement,
-
-Service`;
+Mina`;
 
 const E11_4_CE_EMAIL_8_POOL = buildExpressPool("e11-4-ce-email-8", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 8 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Invitation vacances", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 8 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Invitation",
+    vfQ: "L'objet de l'e-mail est « Invitation vacances ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 8", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Maison commune", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 8.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 8.",
+    fillQ: "De : _________.",
+    fill: "Maison",
+    vfQ: "L'e-mail est envoyé par Maison commune.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 8", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 1er juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 8.",
-    fill: "détail",
-    vfQ: "Info : détail 8.",
+    fillQ: "La date est _________ 1er juillet.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 1er juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 8 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 8 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 8 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 8", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une séance sécurité au soleil", "un cours de piano", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 8.",
-    fill: "action",
-    vfQ: "Action : action 8.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "séance",
+    vfQ: "Le texte parle de l'activité suivante : une séance sécurité au soleil.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 8", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["de la crème solaire", "un dictionnaire lourd", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 8.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "crème",
+    vfQ: "Il faut prévoir de la crème solaire.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 8", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["20 CHF", "20 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 8.",
-    fill: "contact",
-    vfQ: "Contact : contact 8.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "20",
+    vfQ: "Le prix indiqué est 20 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_9_TEXT = `De : Service E11 4 9
+const E11_4_CE_EMAIL_9_TEXT = `De : Bureau des inscriptions
 
-Objet : Message 9 — information
+Objet : Liste du matériel
 
 Bonjour,
 
-Concernant sujet 9 : détail 9.
+Voici la liste pour un échange de cartes postales : une adresse postale, une bouteille d'eau et un stylo.
+Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
+Le tarif est 25 CHF.
+Nous parlerons surtout de la manière de écrire un message court.
 
-Délai : délai 9 jours. Action : action 9.
+Merci,
 
-Contact : contact 9. Merci.
-
-Cordialement,
-
-Service`;
+Bureau des inscriptions`;
 
 const E11_4_CE_EMAIL_9_POOL = buildExpressPool("e11-4-ce-email-9", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 9 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Liste du matériel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 9 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Liste",
+    vfQ: "L'objet de l'e-mail est « Liste du matériel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 9", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Bureau des inscriptions", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 9.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 9.",
+    fillQ: "De : _________.",
+    fill: "Bureau",
+    vfQ: "L'e-mail est envoyé par Bureau des inscriptions.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 9", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 9 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 9.",
-    fill: "détail",
-    vfQ: "Info : détail 9.",
+    fillQ: "La date est _________ 9 juillet.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 9 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 9 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 9 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 9 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 9", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un échange de cartes postales", "une permanence administrative", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 9.",
-    fill: "action",
-    vfQ: "Action : action 9.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "échange",
+    vfQ: "Le texte parle de l'activité suivante : un échange de cartes postales.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 9", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une adresse postale", "un uniforme de travail", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 9.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "adresse",
+    vfQ: "Il faut prévoir une adresse postale.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 9", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["25 CHF", "22 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 9.",
-    fill: "contact",
-    vfQ: "Contact : contact 9.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "25",
+    vfQ: "Le prix indiqué est 25 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_10_TEXT = `De : Service E11 4 10
+const E11_4_CE_EMAIL_10_TEXT = `De : Info loisirs
 
-Objet : Message 10 — information
+Objet : Places disponibles
 
 Bonjour,
 
-Concernant sujet 10 : détail 10.
-
-Délai : délai 10 jours. Action : action 10.
-
-Contact : contact 10. Merci.
+Bonne nouvelle : il reste 24 places pour une recherche d'activités de pluie.
+La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
+Inscrivez-vous avec le QR code de l'affiche avant demain soir.
+Prévoyez un jeu de cartes. Le prix est 30 CHF.
 
 Cordialement,
 
-Service`;
+Info loisirs`;
 
 const E11_4_CE_EMAIL_10_POOL = buildExpressPool("e11-4-ce-email-10", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 10 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Places disponibles", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 10 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Places",
+    vfQ: "L'objet de l'e-mail est « Places disponibles ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 10", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Info loisirs", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 10.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 10.",
+    fillQ: "De : _________.",
+    fill: "Info",
+    vfQ: "L'e-mail est envoyé par Info loisirs.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 10", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 17 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 10.",
-    fill: "détail",
-    vfQ: "Info : détail 10.",
+    fillQ: "La date est _________ 17 juillet.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 17 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 10 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 10 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 10 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 10", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une recherche d'activités de pluie", "un atelier couture", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 10.",
-    fill: "action",
-    vfQ: "Action : action 10.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "recherche",
+    vfQ: "Le texte parle de l'activité suivante : une recherche d'activités de pluie.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 10", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un jeu de cartes", "un marteau", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 10.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "jeu",
+    vfQ: "Il faut prévoir un jeu de cartes.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 10", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["30 CHF", "24 places", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 10.",
-    fill: "contact",
-    vfQ: "Contact : contact 10.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "30",
+    vfQ: "Le prix indiqué est 30 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_11_TEXT = `De : Service E11 4 11
+const E11_4_CE_EMAIL_11_TEXT = `De : Groupe des bénévoles
 
-Objet : Message 11 — information
+Objet : Retour sur l'activité
 
 Bonjour,
 
-Concernant sujet 11 : détail 11.
+Après un atelier budget vacances, nous avons reçu beaucoup de messages positifs.
+Les participants ont apprécié prévoir les dépenses principales.
+La prochaine date est jeudi 25 juillet à 19 h à le café du Pont.
+Cette fois, merci d'apporter une calculatrice.
 
-Délai : délai 11 jours. Action : action 11.
+Au plaisir de vous revoir,
 
-Contact : contact 11. Merci.
-
-Cordialement,
-
-Service`;
+Groupe des bénévoles`;
 
 const E11_4_CE_EMAIL_11_POOL = buildExpressPool("e11-4-ce-email-11", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 11 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Retour sur l'activité", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 11 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Retour",
+    vfQ: "L'objet de l'e-mail est « Retour sur l'activité ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 11", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Groupe des bénévoles", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 11.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 11.",
+    fillQ: "De : _________.",
+    fill: "Groupe",
+    vfQ: "L'e-mail est envoyé par Groupe des bénévoles.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 11", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 25 juillet", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 11.",
-    fill: "détail",
-    vfQ: "Info : détail 11.",
+    fillQ: "La date est _________ 25 juillet.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 25 juillet.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 11 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["19 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 11 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 11 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "19",
+    vfQ: "L'heure indiquée est 19 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 11", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier budget vacances", "un cours de piano", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 11.",
-    fill: "action",
-    vfQ: "Action : action 11.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier budget vacances.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 11", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une calculatrice", "un dictionnaire lourd", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 11.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "calculatrice",
+    vfQ: "Il faut prévoir une calculatrice.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 11", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["4 CHF", "6 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 11.",
-    fill: "contact",
-    vfQ: "Contact : contact 11.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "4",
+    vfQ: "Le prix indiqué est 4 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_12_TEXT = `De : Service E11 4 12
+const E11_4_CE_EMAIL_12_TEXT = `De : Réception
 
-Objet : Message 12 — information
+Objet : Rendez-vous à 8 h 30
 
 Bonjour,
 
-Concernant sujet 12 : détail 12.
+Votre rendez-vous pour une initiation aux réservations en ligne commence à 8 h 30.
+Merci d'être à la maison médicale dix minutes avant.
+La date est vendredi 2 août et le prix est 6 CHF.
+La docteure Morel conseille de préparer un mot de passe.
 
-Délai : délai 12 jours. Action : action 12.
+Meilleures salutations,
 
-Contact : contact 12. Merci.
-
-Cordialement,
-
-Service`;
+Réception`;
 
 const E11_4_CE_EMAIL_12_POOL = buildExpressPool("e11-4-ce-email-12", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 12 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Rendez-vous à 8 h 30", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 12 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Rendez",
+    vfQ: "L'objet de l'e-mail est « Rendez-vous à 8 h 30 ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 12", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Réception", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 12.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 12.",
+    fillQ: "De : _________.",
+    fill: "Réception",
+    vfQ: "L'e-mail est envoyé par Réception.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 12", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 2 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 12.",
-    fill: "détail",
-    vfQ: "Info : détail 12.",
+    fillQ: "La date est _________ 2 août.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 2 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 12 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["8 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 12 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 12 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "8",
+    vfQ: "L'heure indiquée est 8 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 12", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une initiation aux réservations en ligne", "une permanence administrative", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 12.",
-    fill: "action",
-    vfQ: "Action : action 12.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "initiation",
+    vfQ: "Le texte parle de l'activité suivante : une initiation aux réservations en ligne.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 12", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un mot de passe", "un uniforme de travail", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 12.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "mot",
+    vfQ: "Il faut prévoir un mot de passe.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 12", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["6 CHF", "9 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 12.",
-    fill: "contact",
-    vfQ: "Contact : contact 12.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "6",
+    vfQ: "Le prix indiqué est 6 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_13_TEXT = `De : Service E11 4 13
+const E11_4_CE_EMAIL_13_TEXT = `De : Atelier A2
 
-Objet : Message 13 — information
+Objet : Préparation de groupe
 
-Bonjour,
+Chers participants,
 
-Concernant sujet 13 : détail 13.
+Pour préparer une marche découverte avant le départ, nous faisons deux petits groupes.
+Le premier groupe arrive à 13 h à le parc des Amandiers.
+La séance a lieu samedi 10 août avec l'entraîneuse Emma.
+Merci de vérifier une gourde avant de partir.
 
-Délai : délai 13 jours. Action : action 13.
+À bientôt,
 
-Contact : contact 13. Merci.
-
-Cordialement,
-
-Service`;
+Atelier A2`;
 
 const E11_4_CE_EMAIL_13_POOL = buildExpressPool("e11-4-ce-email-13", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 13 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Préparation de groupe", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 13 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Préparation",
+    vfQ: "L'objet de l'e-mail est « Préparation de groupe ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 13", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Atelier A2", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 13.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 13.",
+    fillQ: "De : _________.",
+    fill: "Atelier",
+    vfQ: "L'e-mail est envoyé par Atelier A2.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 13", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 10 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 13.",
-    fill: "détail",
-    vfQ: "Info : détail 13.",
+    fillQ: "La date est _________ 10 août.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 10 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 13 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["13 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 13 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 13 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "13",
+    vfQ: "L'heure indiquée est 13 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 13", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une marche découverte avant le départ", "un atelier couture", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 13.",
-    fill: "action",
-    vfQ: "Action : action 13.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "marche",
+    vfQ: "Le texte parle de l'activité suivante : une marche découverte avant le départ.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 13", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une gourde", "un marteau", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 13.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "gourde",
+    vfQ: "Il faut prévoir une gourde.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 13", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["9 CHF", "11 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 13.",
-    fill: "contact",
-    vfQ: "Contact : contact 13.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "9",
+    vfQ: "Le prix indiqué est 9 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_14_TEXT = `De : Service E11 4 14
+const E11_4_CE_EMAIL_14_TEXT = `De : Coordination locale
 
-Objet : Message 14 — information
+Objet : Demande d'information
 
 Bonjour,
 
-Concernant sujet 14 : détail 14.
+Je cherche des informations sur une rencontre avec une agence locale.
+J'ai lu que c'était dimanche 18 août à 14 h 45 à la boutique Horizon.
+Pouvez-vous confirmer le prix de 11 CHF ?
+Je viens surtout pour poser des questions précises.
 
-Délai : délai 14 jours. Action : action 14.
+Merci d'avance,
 
-Contact : contact 14. Merci.
-
-Cordialement,
-
-Service`;
+Salma`;
 
 const E11_4_CE_EMAIL_14_POOL = buildExpressPool("e11-4-ce-email-14", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 14 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Demande d'information", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 14 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Demande",
+    vfQ: "L'objet de l'e-mail est « Demande d'information ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 14", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Coordination locale", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 14.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 14.",
+    fillQ: "De : _________.",
+    fill: "Coordination",
+    vfQ: "L'e-mail est envoyé par Coordination locale.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 14", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["dimanche 18 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 14.",
-    fill: "détail",
-    vfQ: "Info : détail 14.",
+    fillQ: "La date est _________ 18 août.",
+    fill: "dimanche",
+    vfQ: "L'activité a lieu dimanche 18 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 14 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["14 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 14 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 14 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "14",
+    vfQ: "L'heure indiquée est 14 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 14", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une rencontre avec une agence locale", "un cours de piano", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 14.",
-    fill: "action",
-    vfQ: "Action : action 14.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "rencontre",
+    vfQ: "Le texte parle de l'activité suivante : une rencontre avec une agence locale.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 14", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une liste de questions", "un dictionnaire lourd", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 14.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "liste",
+    vfQ: "Il faut prévoir une liste de questions.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 14", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["11 CHF", "13 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 14.",
-    fill: "contact",
-    vfQ: "Contact : contact 14.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "11",
+    vfQ: "Le prix indiqué est 11 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_15_TEXT = `De : Service E11 4 15
+const E11_4_CE_EMAIL_15_TEXT = `De : Agenda citoyen
 
-Objet : Message 15 — information
+Objet : Choix entre deux dates
 
 Bonjour,
 
-Concernant sujet 15 : détail 15.
+Deux dates étaient proposées, mais nous gardons lundi 26 août.
+L'horaire choisi est 16 h 30 à le centre scolaire.
+Ce choix convient mieux à la professeure Léa et au groupe.
+Le contenu reste un atelier itinéraire de deux jours avec un plan imprimé.
 
-Délai : délai 15 jours. Action : action 15.
+Merci pour vos réponses,
 
-Contact : contact 15. Merci.
-
-Cordialement,
-
-Service`;
+Agenda citoyen`;
 
 const E11_4_CE_EMAIL_15_POOL = buildExpressPool("e11-4-ce-email-15", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 15 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Choix entre deux dates", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 15 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Choix",
+    vfQ: "L'objet de l'e-mail est « Choix entre deux dates ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 15", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Agenda citoyen", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 15.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 15.",
+    fillQ: "De : _________.",
+    fill: "Agenda",
+    vfQ: "L'e-mail est envoyé par Agenda citoyen.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 15", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["lundi 26 août", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 15.",
-    fill: "détail",
-    vfQ: "Info : détail 15.",
+    fillQ: "La date est _________ 26 août.",
+    fill: "lundi",
+    vfQ: "L'activité a lieu lundi 26 août.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 15 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["16 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 15 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 15 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "16",
+    vfQ: "L'heure indiquée est 16 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 15", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un atelier itinéraire de deux jours", "une permanence administrative", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 15.",
-    fill: "action",
-    vfQ: "Action : action 15.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "atelier",
+    vfQ: "Le texte parle de l'activité suivante : un atelier itinéraire de deux jours.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 15", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["un plan imprimé", "un uniforme de travail", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 15.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "plan",
+    vfQ: "Il faut prévoir un plan imprimé.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 15", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["14 CHF", "17 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 15.",
-    fill: "contact",
-    vfQ: "Contact : contact 15.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "14",
+    vfQ: "Le prix indiqué est 14 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_16_TEXT = `De : Service E11 4 16
+const E11_4_CE_EMAIL_16_TEXT = `De : Service rappel
 
-Objet : Message 16 — information
+Objet : Dernier rappel
 
 Bonjour,
 
-Concernant sujet 16 : détail 16.
+Dernier rappel avant une séance souvenirs de voyage !
+Rendez-vous mardi 3 septembre à 17 h à la place du Village.
+Sans inscription au stand d'information, l'entrée n'est pas garantie.
+Apportez trois photos et gardez 16 CHF si besoin.
 
-Délai : délai 16 jours. Action : action 16.
+À tout à l'heure,
 
-Contact : contact 16. Merci.
-
-Cordialement,
-
-Service`;
+Service rappel`;
 
 const E11_4_CE_EMAIL_16_POOL = buildExpressPool("e11-4-ce-email-16", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 16 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Dernier rappel", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 16 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Dernier",
+    vfQ: "L'objet de l'e-mail est « Dernier rappel ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 16", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Service rappel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 16.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 16.",
+    fillQ: "De : _________.",
+    fill: "Service",
+    vfQ: "L'e-mail est envoyé par Service rappel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 16", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mardi 3 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 16.",
-    fill: "détail",
-    vfQ: "Info : détail 16.",
+    fillQ: "La date est _________ 3 septembre.",
+    fill: "mardi",
+    vfQ: "L'activité a lieu mardi 3 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 16 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["17 h", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 16 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 16 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "17",
+    vfQ: "L'heure indiquée est 17 h.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 16", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une séance souvenirs de voyage", "un atelier couture", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 16.",
-    fill: "action",
-    vfQ: "Action : action 16.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "séance",
+    vfQ: "Le texte parle de l'activité suivante : une séance souvenirs de voyage.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 16", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["trois photos", "un marteau", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 16.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "trois",
+    vfQ: "Il faut prévoir trois photos.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 16", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["16 CHF", "19 personnes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 16.",
-    fill: "contact",
-    vfQ: "Contact : contact 16.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "16",
+    vfQ: "Le prix indiqué est 16 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_17_TEXT = `De : Service E11 4 17
+const E11_4_CE_EMAIL_17_TEXT = `De : Responsable du projet
 
-Objet : Message 17 — information
+Objet : Message de la responsable
 
 Bonjour,
 
-Concernant sujet 17 : détail 17.
+La coach Ana vous écrit au sujet de un contrôle des papiers de voyage.
+La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
+Le but est simple : partir avec les bons documents.
+Merci de respecter cette règle : les photocopies ne remplacent pas toujours l'original.
 
-Délai : délai 17 jours. Action : action 17.
+Bien cordialement,
 
-Contact : contact 17. Merci.
-
-Cordialement,
-
-Service`;
+Responsable du projet`;
 
 const E11_4_CE_EMAIL_17_POOL = buildExpressPool("e11-4-ce-email-17", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 17 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Message de la responsable", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
+    fillQ: "Objet : _________.",
     fill: "Message",
-    vfQ: "Objet : Message 17 — information.",
+    vfQ: "L'objet de l'e-mail est « Message de la responsable ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 17", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Responsable du projet", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 17.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 17.",
+    fillQ: "De : _________.",
+    fill: "Responsable",
+    vfQ: "L'e-mail est envoyé par Responsable du projet.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 17", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["mercredi 11 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 17.",
-    fill: "détail",
-    vfQ: "Info : détail 17.",
+    fillQ: "La date est _________ 11 septembre.",
+    fill: "mercredi",
+    vfQ: "L'activité a lieu mercredi 11 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 17 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["9 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 17 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 17 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "9",
+    vfQ: "L'heure indiquée est 9 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 17", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["un contrôle des papiers de voyage", "un cours de piano", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 17.",
-    fill: "action",
-    vfQ: "Action : action 17.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "contrôle",
+    vfQ: "Le texte parle de l'activité suivante : un contrôle des papiers de voyage.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 17", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une pièce d'identité", "un dictionnaire lourd", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 17.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "pièce",
+    vfQ: "Il faut prévoir une pièce d'identité.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 17", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["22 CHF", "deux groupes", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 17.",
-    fill: "contact",
-    vfQ: "Contact : contact 17.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "22",
+    vfQ: "Le prix indiqué est 22 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_18_TEXT = `De : Service E11 4 18
+const E11_4_CE_EMAIL_18_TEXT = `De : Équipe du samedi
 
-Objet : Message 18 — information
+Objet : Organisation du samedi
 
 Bonjour,
 
-Concernant sujet 18 : détail 18.
+Samedi, l'équipe installe le salon Harmonie pour une présentation des règles du chalet.
+Les participants arrivent à 11 h 30 avec des chaussons propres.
+La date exacte est jeudi 19 septembre.
+Après la séance, un court échange expliquera comment respecter un logement partagé.
 
-Délai : délai 18 jours. Action : action 18.
+Merci de votre aide,
 
-Contact : contact 18. Merci.
-
-Cordialement,
-
-Service`;
+Équipe du samedi`;
 
 const E11_4_CE_EMAIL_18_POOL = buildExpressPool("e11-4-ce-email-18", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 18 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Organisation du samedi", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 18 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Organisation",
+    vfQ: "L'objet de l'e-mail est « Organisation du samedi ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 18", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Équipe du samedi", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 18.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 18.",
+    fillQ: "De : _________.",
+    fill: "Équipe",
+    vfQ: "L'e-mail est envoyé par Équipe du samedi.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 18", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["jeudi 19 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 18.",
-    fill: "détail",
-    vfQ: "Info : détail 18.",
+    fillQ: "La date est _________ 19 septembre.",
+    fill: "jeudi",
+    vfQ: "L'activité a lieu jeudi 19 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 18 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["11 h 30", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 18 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 18 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "11",
+    vfQ: "L'heure indiquée est 11 h 30.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 18", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une présentation des règles du chalet", "une permanence administrative", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 18.",
-    fill: "action",
-    vfQ: "Action : action 18.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "présentation",
+    vfQ: "Le texte parle de l'activité suivante : une présentation des règles du chalet.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 18", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["des chaussons propres", "un uniforme de travail", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 18.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "chaussons",
+    vfQ: "Il faut prévoir des chaussons propres.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 18", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["28 CHF", "un petit groupe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 18.",
-    fill: "contact",
-    vfQ: "Contact : contact 18.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "28",
+    vfQ: "Le prix indiqué est 28 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_19_TEXT = `De : Service E11 4 19
+const E11_4_CE_EMAIL_19_TEXT = `De : Questionnaire qualité
 
-Objet : Message 19 — information
+Objet : Votre avis nous intéresse
 
 Bonjour,
 
-Concernant sujet 19 : détail 19.
+Vous avez participé à une préparation du sac de randonnée à la résidence du Parc.
+Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
+La prochaine séance est prévue vendredi 27 septembre.
+Votre avis nous aidera à mieux marcher sans oublier l'essentiel.
 
-Délai : délai 19 jours. Action : action 19.
+Merci pour votre retour,
 
-Contact : contact 19. Merci.
-
-Cordialement,
-
-Service`;
+Questionnaire qualité`;
 
 const E11_4_CE_EMAIL_19_POOL = buildExpressPool("e11-4-ce-email-19", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 19 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Votre avis nous intéresse", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 19 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Votre",
+    vfQ: "L'objet de l'e-mail est « Votre avis nous intéresse ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 19", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Questionnaire qualité", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 19.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 19.",
+    fillQ: "De : _________.",
+    fill: "Questionnaire",
+    vfQ: "L'e-mail est envoyé par Questionnaire qualité.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 19", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["vendredi 27 septembre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 19.",
-    fill: "détail",
-    vfQ: "Info : détail 19.",
+    fillQ: "La date est _________ 27 septembre.",
+    fill: "vendredi",
+    vfQ: "L'activité a lieu vendredi 27 septembre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 19 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["15 h 45", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 19 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 19 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "15",
+    vfQ: "L'heure indiquée est 15 h 45.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 19", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une préparation du sac de randonnée", "un atelier couture", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 19.",
-    fill: "action",
-    vfQ: "Action : action 19.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "préparation",
+    vfQ: "Le texte parle de l'activité suivante : une préparation du sac de randonnée.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 19", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une veste de pluie", "un marteau", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 19.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "veste",
+    vfQ: "Il faut prévoir une veste de pluie.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 19", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["35 CHF", "toute la classe", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 19.",
-    fill: "contact",
-    vfQ: "Contact : contact 19.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "35",
+    vfQ: "Le prix indiqué est 35 CHF.",
     vfC: 0,
   }),
 ]);
 
-const E11_4_CE_EMAIL_20_TEXT = `De : Service E11 4 20
+const E11_4_CE_EMAIL_20_TEXT = `De : Centre culturel
 
-Objet : Message 20 — information
+Objet : Prochaine rencontre
 
 Bonjour,
 
-Concernant sujet 20 : détail 20.
+Nous préparons une nouvelle rencontre autour de une soirée photos de vacances.
+Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
+Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
+Cette fois, nous demanderons à chacun d'apporter une clé USB.
 
-Délai : délai 20 jours. Action : action 20.
+À bientôt,
 
-Contact : contact 20. Merci.
-
-Cordialement,
-
-Service`;
+Centre culturel`;
 
 const E11_4_CE_EMAIL_20_POOL = buildExpressPool("e11-4-ce-email-20", [
   q({
     id: "cem-q1",
-    textQ: "Objet ?",
-    text: ["Message 20 — information", "Facture", "Menu"],
+    textQ: "Quel est l'objet de l'e-mail ?",
+    text: ["Prochaine rencontre", "Facture oubliée", "Invitation sans date"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Objet : _________",
-    fill: "Message",
-    vfQ: "Objet : Message 20 — information.",
+    fillQ: "Objet : _________.",
+    fill: "Prochaine",
+    vfQ: "L'objet de l'e-mail est « Prochaine rencontre ».",
     vfC: 0,
   }),
   q({
     id: "cem-q2",
-    textQ: "Sujet ?",
-    text: ["Sujet 20", "Rien", "Sport"],
+    textQ: "Qui envoie l'e-mail ?",
+    text: ["Centre culturel", "un voisin inconnu", "le service des impôts"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Concernant sujet 20.",
-    fill: "sujet",
-    vfQ: "Sujet : sujet 20.",
+    fillQ: "De : _________.",
+    fill: "Centre",
+    vfQ: "L'e-mail est envoyé par Centre culturel.",
     vfC: 0,
   }),
   q({
     id: "cem-q3",
-    textQ: "Information ?",
-    text: ["Détail 20", "Aucune", "Secret"],
+    textQ: "Quand cela a-t-il lieu ?",
+    text: ["samedi 5 octobre", "la semaine prochaine sans date", "un dimanche de novembre"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "détail 20.",
-    fill: "détail",
-    vfQ: "Info : détail 20.",
+    fillQ: "La date est _________ 5 octobre.",
+    fill: "samedi",
+    vfQ: "L'activité a lieu samedi 5 octobre.",
     vfC: 0,
   }),
   q({
     id: "cem-q4",
-    textQ: "Délai ?",
-    text: ["Délai 20 jours", "Jamais", "Hier"],
+    textQ: "À quelle heure faut-il arriver ?",
+    text: ["18 h 15", "7 h", "21 h 30"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Délai : délai 20 jours.",
-    fill: "délai",
-    vfQ: "Délai : délai 20 jours.",
+    fillQ: "Il faut arriver à _________.",
+    fill: "18",
+    vfQ: "L'heure indiquée est 18 h 15.",
     vfC: 0,
   }),
   q({
     id: "cem-q5",
-    textQ: "Action ?",
-    text: ["Action 20", "Rien", "Dormir"],
+    textQ: "Quelle activité est proposée ?",
+    text: ["une soirée photos de vacances", "un cours de piano", "une réunion sans thème"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Action : action 20.",
-    fill: "action",
-    vfQ: "Action : action 20.",
+    fillQ: "L'activité proposée est : _________.",
+    fill: "soirée",
+    vfQ: "Le texte parle de l'activité suivante : une soirée photos de vacances.",
     vfC: 0,
   }),
   q({
     id: "cem-q6",
-    textQ: "Expéditeur ?",
-    text: ["Service E11 4 20", "Facteur", "Ami"],
+    textQ: "Que faut-il apporter ou préparer ?",
+    text: ["une clé USB", "un dictionnaire lourd", "un ordinateur cassé"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "De : _________",
-    fill: "Service",
-    vfQ: "Expéditeur : Service E11 4 20.",
+    fillQ: "Il faut apporter ou préparer _________.",
+    fill: "clé",
+    vfQ: "Il faut prévoir une clé USB.",
     vfC: 0,
   }),
   q({
     id: "cem-q7",
-    textQ: "Contact ?",
-    text: ["Contact 20", "Personne", "Étranger"],
+    textQ: "Quelle information pratique est donnée ?",
+    text: ["40 CHF", "les vingt premiers inscrits", "aucun horaire"],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Contact : contact 20.",
-    fill: "contact",
-    vfQ: "Contact : contact 20.",
+    fillQ: "Le prix indiqué est _________.",
+    fill: "40",
+    vfQ: "Le prix indiqué est 40 CHF.",
     vfC: 0,
   }),
 ]);
@@ -9413,102 +9393,122 @@ readingPoolExercise({
   id: "e11-4-ce-email",
   readingText: E11_4_CE_EMAIL_TEXT,
   questionPool: E11_4_CE_EMAIL_POOL,
+  questionCount: 6,
   instruction: "Lisez l'e-mail et répondez aux questions."
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-2",
   readingText: E11_4_CE_EMAIL_2_TEXT,
-  questionPool: E11_4_CE_EMAIL_2_POOL
+  questionPool: E11_4_CE_EMAIL_2_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-3",
   readingText: E11_4_CE_EMAIL_3_TEXT,
-  questionPool: E11_4_CE_EMAIL_3_POOL
+  questionPool: E11_4_CE_EMAIL_3_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-4",
   readingText: E11_4_CE_EMAIL_4_TEXT,
-  questionPool: E11_4_CE_EMAIL_4_POOL
+  questionPool: E11_4_CE_EMAIL_4_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-5",
   readingText: E11_4_CE_EMAIL_5_TEXT,
-  questionPool: E11_4_CE_EMAIL_5_POOL
+  questionPool: E11_4_CE_EMAIL_5_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-6",
   readingText: E11_4_CE_EMAIL_6_TEXT,
-  questionPool: E11_4_CE_EMAIL_6_POOL
+  questionPool: E11_4_CE_EMAIL_6_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-7",
   readingText: E11_4_CE_EMAIL_7_TEXT,
-  questionPool: E11_4_CE_EMAIL_7_POOL
+  questionPool: E11_4_CE_EMAIL_7_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-8",
   readingText: E11_4_CE_EMAIL_8_TEXT,
-  questionPool: E11_4_CE_EMAIL_8_POOL
+  questionPool: E11_4_CE_EMAIL_8_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-9",
   readingText: E11_4_CE_EMAIL_9_TEXT,
-  questionPool: E11_4_CE_EMAIL_9_POOL
+  questionPool: E11_4_CE_EMAIL_9_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-10",
   readingText: E11_4_CE_EMAIL_10_TEXT,
-  questionPool: E11_4_CE_EMAIL_10_POOL
+  questionPool: E11_4_CE_EMAIL_10_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-11",
   readingText: E11_4_CE_EMAIL_11_TEXT,
-  questionPool: E11_4_CE_EMAIL_11_POOL
+  questionPool: E11_4_CE_EMAIL_11_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-12",
   readingText: E11_4_CE_EMAIL_12_TEXT,
-  questionPool: E11_4_CE_EMAIL_12_POOL
+  questionPool: E11_4_CE_EMAIL_12_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-13",
   readingText: E11_4_CE_EMAIL_13_TEXT,
-  questionPool: E11_4_CE_EMAIL_13_POOL
+  questionPool: E11_4_CE_EMAIL_13_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-14",
   readingText: E11_4_CE_EMAIL_14_TEXT,
-  questionPool: E11_4_CE_EMAIL_14_POOL
+  questionPool: E11_4_CE_EMAIL_14_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-15",
   readingText: E11_4_CE_EMAIL_15_TEXT,
-  questionPool: E11_4_CE_EMAIL_15_POOL
+  questionPool: E11_4_CE_EMAIL_15_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-16",
   readingText: E11_4_CE_EMAIL_16_TEXT,
-  questionPool: E11_4_CE_EMAIL_16_POOL
+  questionPool: E11_4_CE_EMAIL_16_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-17",
   readingText: E11_4_CE_EMAIL_17_TEXT,
-  questionPool: E11_4_CE_EMAIL_17_POOL
+  questionPool: E11_4_CE_EMAIL_17_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-18",
   readingText: E11_4_CE_EMAIL_18_TEXT,
-  questionPool: E11_4_CE_EMAIL_18_POOL
+  questionPool: E11_4_CE_EMAIL_18_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-19",
   readingText: E11_4_CE_EMAIL_19_TEXT,
-  questionPool: E11_4_CE_EMAIL_19_POOL
+  questionPool: E11_4_CE_EMAIL_19_POOL,
+  questionCount: 6
 }),
 readingPoolExercise({
   id: "e11-4-ce-email-20",
   readingText: E11_4_CE_EMAIL_20_TEXT,
-  questionPool: E11_4_CE_EMAIL_20_POOL
+  questionPool: E11_4_CE_EMAIL_20_POOL,
+  questionCount: 6
 }),
 ];
 
