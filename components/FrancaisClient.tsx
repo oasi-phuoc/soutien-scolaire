@@ -58,10 +58,10 @@ const VOCAB_MODULES: SectionDef[] = [
 
 type ActiveFrenchTab = "vocabulaire" | "grammaire" | "communication";
 
-const TABS: { id: ActiveFrenchTab; label: string; short: string }[] = [
-  { id: "vocabulaire", label: "Vocabulaire", short: "Voca." },
-  { id: "grammaire", label: "Grammaire", short: "Gram." },
-  { id: "communication", label: "Communication", short: "Comm." },
+const TABS: { id: ActiveFrenchTab; label: string }[] = [
+  { id: "vocabulaire", label: "Vocabulaire" },
+  { id: "grammaire", label: "Grammaire" },
+  { id: "communication", label: "Communication" },
 ];
 
 const TAB_TITLES: Record<ActiveFrenchTab, string> = {
@@ -536,24 +536,25 @@ export function FrancaisClient({
         aria-label="Catégories français"
         className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)]/15 p-1 lg:hidden"
       >
-        {TABS.map(({ id, label, short }) => (
+        {TABS.map(({ id, label }) => (
           <button
             key={id}
             type="button"
             role="tab"
             aria-label={label}
             aria-selected={tab === id}
+            title={label}
             onClick={() => {
               setTab(id);
               window.history.replaceState(null, "", `/francais?tab=${id}`);
             }}
-            className={`min-h-11 rounded-[var(--radius-lg)] px-1 text-xs font-medium transition-colors sm:text-sm ${
+            className={`min-h-11 min-w-0 truncate rounded-[var(--radius-lg)] px-1 text-xs font-medium transition-colors sm:text-sm ${
               tab === id
                 ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
                 : "bg-transparent text-[var(--color-accent-fr)] hover:bg-white/40"
             }`}
           >
-            {short}
+            {label}
           </button>
         ))}
       </div>
