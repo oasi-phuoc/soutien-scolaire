@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 78 — Les conjonctions de temps (G4.45 ; 74–76 en attente) */
+/** Unité 78 — Les conjonctions de temps (G4.48) */
 export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
   slug: "a1-gr-conjonctions-temps",
-  code: "G4.45",
+  code: "G4.48",
   level: "A1",
   title: "Les conjonctions de temps",
   theory: [

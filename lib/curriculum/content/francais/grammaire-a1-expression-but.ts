@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 79 — L'expression du but (G4.46 ; 74–76 en attente) */
+/** Unité 79 — L'expression du but (G4.49) */
 export const A1_GR_EXPRESSION_BUT: GrammarLesson = {
   slug: "a1-gr-expression-but",
-  code: "G4.46",
+  code: "G4.49",
   level: "A1",
   title: "L'expression du but",
   theory: [

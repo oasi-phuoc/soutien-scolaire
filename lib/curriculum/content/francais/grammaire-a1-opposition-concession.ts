@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 80 — L'expression de l'opposition et de la concession (G4.47) */
+/** Unité 80 — L'expression de l'opposition et de la concession (G4.50) */
 export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
   slug: "a1-gr-opposition-concession",
-  code: "G4.47",
+  code: "G4.50",
   level: "A1",
   title: "L'expression de l'opposition et de la concession",
   theory: [

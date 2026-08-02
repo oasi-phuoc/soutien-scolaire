@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 81 — L'expression de l'hypothèse avec si et de la condition (G4.48) */
+/** Unité 81 — L'expression de l'hypothèse avec si et de la condition (G4.51) */
 export const A1_GR_HYPOTHESE_CONDITION: GrammarLesson = {
   slug: "a1-gr-hypothese-condition",
-  code: "G4.48",
+  code: "G4.51",
   level: "A1",
   title: "L'expression de l'hypothèse avec si et de la condition",
   theory: [

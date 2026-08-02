@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 82 — Le discours indirect au présent (G4.49) */
+/** Unité 82 — Le discours indirect au présent (G4.52) */
 export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
   slug: "a1-gr-discours-indirect-present",
-  code: "G4.49",
+  code: "G4.52",
   level: "A1",
   title: "Le discours indirect au présent",
   theory: [

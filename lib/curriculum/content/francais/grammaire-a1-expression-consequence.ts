@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 77 — L'expression de la conséquence (G4.44 ; 74–76 en attente) */
+/** Unité 77 — L'expression de la conséquence (G4.47) */
 export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
   slug: "a1-gr-expression-consequence",
-  code: "G4.44",
+  code: "G4.47",
   level: "A1",
   title: "L'expression de la conséquence",
   theory: [
