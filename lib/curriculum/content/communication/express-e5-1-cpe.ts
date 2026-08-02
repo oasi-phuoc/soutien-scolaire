@@ -14,12 +14,14 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Cabinet médical du Parc — Informations aux patients
 
-Le cabinet est ouvert du lundi au vendredi, de 8 h à 18 h.
-Pour voir un médecin, prenez rendez-vous par téléphone ou sur Internet.
+Le cabinet est ouvert du lundi au vendredi.
+Le cabinet ouvre à 8 h et ferme à 18 h.
+Vous voulez voir un médecin ? Prenez rendez-vous par téléphone ou sur Internet.
 Le pédiatre reçoit les enfants le mercredi matin.
-Si vous avez de la fièvre ou si vous toussez, mettez un masque dans la salle d'attente.
+Vous toussez ou vous avez de la fièvre ? Mettez un masque dans la salle d'attente.
 Apportez votre carte d'assurance à chaque visite.
-Le week-end, le cabinet est fermé : pour une urgence, allez aux urgences de l'hôpital.`;
+Le week-end, le cabinet est fermé.
+Pour une urgence, allez aux urgences de l'hôpital.`;
 
 const CE_POOL = buildExpressPool("e5-1-ce", [
   q({
@@ -70,7 +72,7 @@ const CE_POOL = buildExpressPool("e5-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Si vous toussez, mettez un _________ dans la salle d'attente.",
+    fillQ: "Mettez un _________ dans la salle d'attente.",
     fill: "masque",
     vfQ: "Une personne qui tousse doit mettre un masque.",
     vfC: 0,
@@ -107,7 +109,7 @@ const CE_POOL = buildExpressPool("e5-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le cabinet est ouvert de 8 h à _________ h.",
+    fillQ: "Le cabinet ouvre à 8 h et ferme à _________ h.",
     fill: "18",
     fillA: ["dix-huit"],
     vfQ: "Le prix de la consultation est indiqué dans le texte.",

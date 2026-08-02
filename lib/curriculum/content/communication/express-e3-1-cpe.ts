@@ -15,10 +15,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const CE_TEXT = `Bienvenue à la faculté des lettres !
 
 Informations pour les nouveaux étudiants :
-Le secrétariat est ouvert du lundi au vendredi, de 9 h à 12 h. Venez chercher votre carte d'étudiant avec une photo et le formulaire de demande.
-Avec la carte d'étudiant, vous pouvez entrer à la faculté, emprunter des livres à la bibliothèque et manger à la cafétéria.
-Les cours commencent lundi 15 septembre. Le cours d'économie a lieu dans l'amphi A12, à 9 heures.
-Une question ? L'association des étudiants vous aide dans la salle 20, à côté de la bibliothèque.`;
+Le secrétariat est ouvert du lundi au vendredi. Il est ouvert de 9 h à 12 h. Venez chercher votre carte d'étudiant. Apportez une photo et le formulaire de demande.
+Avec la carte, vous entrez à la faculté. Vous pouvez emprunter des livres à la bibliothèque. Vous pouvez manger à la cafétéria.
+Les cours commencent lundi 15 septembre. Le cours d'économie a lieu dans l'amphi A12. Il commence à 9 heures.
+Vous avez une question ? L'association des étudiants vous aide dans la salle 20. C'est à côté de la bibliothèque.`;
 
 const CE_POOL = buildExpressPool("e3-1-ce", [
   q({
@@ -44,7 +44,7 @@ const CE_POOL = buildExpressPool("e3-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Venez avec une photo et le _________ de demande.",
+    fillQ: "Apportez une photo et le _________ de demande.",
     fill: "formulaire",
     vfQ: "Il faut une photo pour la carte d'étudiant.",
     vfC: 0,

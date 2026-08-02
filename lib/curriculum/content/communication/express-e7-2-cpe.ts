@@ -14,12 +14,16 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Base de loisirs du Lac — Programme d'été
 
-La base de loisirs du Lac vous propose des activités sportives tous les jours, de 9 h à 18 h.
-Le matin, vous pouvez faire du canoé-kayak sur le lac ou prendre un cours de voile.
+La base de loisirs du Lac est ouverte tous les jours.
+La base est ouverte de 9 h à 18 h.
+Le matin, vous pouvez faire du canoé-kayak sur le lac.
+Vous pouvez aussi prendre un cours de voile.
 L'après-midi, il y a de l'escalade et du VTT dans la forêt.
-Les cours pour les débutants ont lieu le mardi et le jeudi à 10 h.
+Les cours pour les débutants ont lieu le mardi et le jeudi.
+Ils commencent à 10 h.
 La location d'un VTT coûte 15 € la journée.
-Attention : quand il pleut ou quand il y a beaucoup de vent, les activités sur le lac sont annulées.
+Attention ! Avec la pluie, les activités sur le lac sont annulées.
+Avec beaucoup de vent, elles sont annulées aussi.
 Inscription à l'accueil de la base.`;
 
 const CE_POOL = buildExpressPool("e7-2-ce", [
@@ -34,7 +38,7 @@ const CE_POOL = buildExpressPool("e7-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le matin, vous pouvez faire du canoé-kayak ou prendre un cours de _________.",
+    fillQ: "Vous pouvez aussi prendre un cours de _________.",
     fill: "voile",
     vfQ: "Le matin, on peut faire du canoé-kayak sur le lac.",
     vfC: 0,
@@ -59,9 +63,9 @@ const CE_POOL = buildExpressPool("e7-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les cours pour les débutants ont lieu le mardi et le _________ à 10 h.",
+    fillQ: "Les cours pour les débutants ont lieu le mardi et le _________.",
     fill: "jeudi",
-    vfQ: "Les cours pour les débutants ont lieu à 10 h.",
+    vfQ: "Les cours pour les débutants commencent à 10 h.",
     vfC: 0,
   }),
   q({
@@ -88,10 +92,10 @@ const CE_POOL = buildExpressPool("e7-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Quand il pleut, les activités sur le lac sont _________.",
+    fillQ: "Avec la pluie, les activités sur le lac sont _________.",
     fill: "annulées",
     fillA: ["annulees", "annulée", "annulee"],
-    vfQ: "Quand il y a beaucoup de vent, les activités sur le lac sont annulées.",
+    vfQ: "Avec beaucoup de vent, les activités sur le lac sont annulées.",
     vfC: 0,
   }),
   q({
@@ -113,7 +117,7 @@ const CE_POOL = buildExpressPool("e7-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les activités sont proposées tous les jours, de 9 h à _________ h.",
+    fillQ: "La base est ouverte de 9 h à _________ h.",
     fill: "18",
     fillA: ["dix-huit"],
     vfQ: "La base de loisirs est fermée le dimanche.",

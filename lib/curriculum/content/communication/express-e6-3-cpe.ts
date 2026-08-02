@@ -14,11 +14,16 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Compagnie Air Bleu — Informations pour les passagers
 
-Votre vol part à 14 h 30. L'enregistrement ouvre trois heures avant le départ, au comptoir 24.
-Vous pouvez enregistrer une valise de 23 kilos maximum. La valise cabine ne doit pas dépasser 8 kilos.
+Votre vol part à 14 h 30.
+L'enregistrement ouvre trois heures avant le départ.
+L'enregistrement est au comptoir 24.
+Vous pouvez enregistrer une valise de 23 kilos maximum.
+La valise cabine reste avec vous. Elle pèse 8 kilos maximum.
 Au contrôle de sécurité, les bouteilles d'eau sont interdites.
-Présentez votre passeport et votre carte d'embarquement à la porte B6. L'embarquement commence à 13 h 50.
-Attention : la porte ferme vingt minutes avant le départ. Bon vol !`;
+Présentez votre passeport et votre carte d'embarquement à la porte B6.
+L'embarquement commence à 13 h 50.
+Attention ! La porte ferme vingt minutes avant le départ.
+Bon vol !`;
 
 const CE_POOL = buildExpressPool("e6-3-ce", [
   q({
@@ -88,7 +93,7 @@ const CE_POOL = buildExpressPool("e6-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Présentez votre passeport et votre carte d'_________.",
+    fillQ: "Présentez votre passeport et votre carte d'_________ à la porte B6.",
     fill: "embarquement",
     vfQ: "Il faut présenter son passeport à la porte B6.",
     vfC: 0,

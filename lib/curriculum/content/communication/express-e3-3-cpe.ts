@@ -15,18 +15,18 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const CE_TEXT = `Offre d'emploi — Magasin de vêtements
 
 Notre magasin de vêtements cherche un vendeur ou une vendeuse.
-Vous êtes dynamique, patient et sérieux ? Vous aimez travailler en équipe et rencontrer des personnes ? Ce travail est pour vous !
-Horaires : du mardi au samedi, de 9 h 30 à 18 heures.
-Le magasin se trouve au centre commercial, à côté de la pharmacie.
-Pour un entretien, envoyez un message à la directrice et parlez de vos qualités. Début du contrat : le 1er mars.`;
+Vous êtes dynamique, patient et sérieux ? Vous aimez travailler en équipe ? Vous aimez rencontrer des personnes ? Ce travail est pour vous !
+Vous travaillez du mardi au samedi. Les horaires sont de 9 h 30 à 18 heures.
+Le magasin se trouve au centre commercial. Il est à côté de la pharmacie.
+Pour un entretien, envoyez un message à la directrice. Parlez de vos qualités dans le message. Début du contrat : le 1er mars.`;
 
 const CE_POOL = buildExpressPool("e3-3-ce", [
   q({
     id: "ce-q1",
     textQ: "Quel employé le magasin cherche-t-il ?",
-    text: ["Un vendeur ou une vendeuse", "Un informaticien", "Un cuisinier"],
+    text: ["Un vendeur ou une vendeuse", "Un boulanger", "Un cuisinier"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["vendeur", "boulanger", "cuisinier"],
     imgC: 0,
     fillQ: "Notre magasin de vêtements cherche un _________ ou une vendeuse.",
     fill: "vendeur",
@@ -57,7 +57,7 @@ const CE_POOL = buildExpressPool("e3-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Horaires : du mardi au _________, de 9 h 30 à 18 heures.",
+    fillQ: "Vous travaillez du mardi au _________.",
     fill: "samedi",
     vfQ: "On travaille le dimanche dans ce magasin.",
     vfC: 1,

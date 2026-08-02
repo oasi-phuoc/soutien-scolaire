@@ -15,9 +15,13 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const CE_TEXT = `Office du tourisme — Se déplacer en ville
 
 Bienvenue ! Pour visiter la ville, prenez les transports publics.
-Le bus 14 passe par la mairie et le musée. Le trajet dure 30 minutes.
-Le métro est plus rapide : la station est en face de la gare, à côté de l'office du tourisme.
-Achetez vos tickets au distributeur automatique ou par SMS avec votre téléphone portable.
+Le bus 14 passe par la mairie et le musée.
+Le trajet en bus dure 30 minutes.
+Le métro est plus rapide.
+La station de métro est en face de la gare.
+Elle est à côté de l'office du tourisme.
+Achetez vos tickets au distributeur automatique ou par SMS.
+Envoyez le SMS avec votre téléphone portable.
 Un carnet de dix tickets coûte 15 euros.
 Vous préférez le vélo ? Il y a des vélos en libre-service au centre-ville.
 N'oubliez pas de valider votre ticket dans le bus !`;
@@ -44,8 +48,8 @@ const CE_POOL = buildExpressPool("e6-1-ce", [
     img: ["", "", ""],
     imgC: 0,
     fillQ: "Le trajet en bus dure _________ minutes.",
-    fill: "trente",
-    fillA: ["30"],
+    fill: "30",
+    fillA: ["trente"],
     vfQ: "Le trajet en bus dure 40 minutes.",
     vfC: 1,
   }),
@@ -56,8 +60,8 @@ const CE_POOL = buildExpressPool("e6-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La station de métro est en face de la _________.",
-    fill: "gare",
+    fillQ: "La station de métro est en _________ de la gare.",
+    fill: "face",
     vfQ: "La station de métro est à côté de l'office du tourisme.",
     vfC: 0,
   }),
@@ -72,7 +76,7 @@ const CE_POOL = buildExpressPool("e6-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Achetez vos tickets au _________ automatique.",
+    fillQ: "Achetez vos tickets au _________ automatique ou par SMS.",
     fill: "distributeur",
     vfQ: "On peut acheter les tickets par SMS.",
     vfC: 0,
@@ -85,8 +89,8 @@ const CE_POOL = buildExpressPool("e6-1-ce", [
     img: ["", "", ""],
     imgC: 0,
     fillQ: "Un carnet de dix tickets coûte _________ euros.",
-    fill: "quinze",
-    fillA: ["15"],
+    fill: "15",
+    fillA: ["quinze"],
     vfQ: "Le carnet de dix tickets coûte 25 euros.",
     vfC: 1,
   }),
@@ -109,7 +113,7 @@ const CE_POOL = buildExpressPool("e6-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "N'oubliez pas de _________ votre ticket dans le bus.",
+    fillQ: "N'oubliez pas de _________ votre ticket dans le bus !",
     fill: "valider",
     vfQ: "Il faut valider son ticket dans le bus.",
     vfC: 0,

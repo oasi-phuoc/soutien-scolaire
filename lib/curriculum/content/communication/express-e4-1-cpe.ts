@@ -14,11 +14,11 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Boutique Élégance — Soldes d'hiver
 
-Cette semaine, tous les manteaux et toutes les vestes sont à moitié prix.
-Les pulls en laine coûtent maintenant 30 francs et les écharpes 10 francs.
-Vous cherchez une robe pour une fête ? Notre nouvelle collection arrive samedi, avec beaucoup de couleurs : bleu, rouge, vert et noir.
+Cette semaine, les manteaux et les vestes sont à moitié prix.
+Les pulls en laine coûtent maintenant 30 francs. Les écharpes coûtent 10 francs.
+Vous cherchez une robe pour une fête ? Notre nouvelle collection arrive samedi. Il y a beaucoup de couleurs : bleu, rouge, vert et noir.
 Les cabines d'essayage sont au premier étage. Vous pouvez essayer trois vêtements au maximum.
-La boutique est ouverte du mardi au samedi, de 9 h à 18 h.
+La boutique est ouverte du mardi au samedi. Elle est ouverte de 9 h à 18 h.
 Attention : les baskets ne sont pas en solde. Bon shopping !`;
 
 const CE_POOL = buildExpressPool("e4-1-ce", [
@@ -33,7 +33,7 @@ const CE_POOL = buildExpressPool("e4-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Les manteaux et les vestes sont à moitié _________.",
+    fillQ: "Cette semaine, les manteaux et les vestes sont à moitié _________.",
     fill: "prix",
     vfQ: "Cette semaine, les manteaux sont à moitié prix.",
     vfC: 0,
@@ -83,7 +83,7 @@ const CE_POOL = buildExpressPool("e4-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La boutique est ouverte de 9 h à _________ h.",
+    fillQ: "Elle est ouverte de 9 h à _________ h.",
     fill: "18",
     fillA: ["18 h", "dix-huit"],
     vfQ: "La boutique ferme à 18 h.",

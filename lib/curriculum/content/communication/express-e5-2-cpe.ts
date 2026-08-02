@@ -14,11 +14,15 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Pharmacie du Centre — Informations aux clients
 
-La pharmacie est ouverte du lundi au samedi, de 8 h à 19 h.
-Pour les médicaments avec ordonnance, présentez votre ordonnance et votre carte d'assurance au comptoir.
-Sans ordonnance, notre équipe vous conseille pour les petits problèmes de santé : toux, fièvre, mal de tête.
-Le dimanche, la pharmacie de garde est la pharmacie de la Gare, ouverte de 9 h à 18 h.
-Attention : le sirop contre la toux ne convient pas aux enfants de moins de 6 ans. Demandez conseil à votre pharmacien.`;
+La pharmacie est ouverte du lundi au samedi.
+La pharmacie ouvre à 8 h et ferme à 19 h.
+Vous avez une ordonnance ? Présentez votre ordonnance et votre carte d'assurance au comptoir.
+Sans ordonnance, le pharmacien vous conseille pour les petits problèmes de santé.
+Exemples : la toux, la fièvre, le mal de tête.
+Le dimanche, la pharmacie de garde est la pharmacie de la Gare.
+Elle est ouverte de 9 h à 18 h.
+Attention au sirop contre la toux. Il ne convient pas aux enfants de moins de six ans.
+Demandez conseil à votre pharmacien.`;
 
 const CE_POOL = buildExpressPool("e5-2-ce", [
   q({
@@ -38,13 +42,13 @@ const CE_POOL = buildExpressPool("e5-2-ce", [
     textQ: "Que faut-il présenter pour un médicament avec ordonnance ?",
     text: [
       "L'ordonnance et la carte d'assurance",
-      "Le passeport et un photo",
+      "Le passeport et une photo",
       "La carte bancaire seulement",
     ],
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Présentez votre ordonnance et votre carte d'_________.",
+    fillQ: "Présentez votre ordonnance et votre carte d'_________ au comptoir.",
     fill: "assurance",
     vfQ: "Il faut montrer son ordonnance au comptoir.",
     vfC: 0,
@@ -54,10 +58,11 @@ const CE_POOL = buildExpressPool("e5-2-ce", [
     textQ: "Où se trouve la pharmacie de garde le dimanche ?",
     text: ["À la gare", "Au centre commercial", "À l'hôpital"],
     textC: 0,
-    img: ["gare", "Centre commercial", "hôpital"],
+    // Pas de QCM image : « gare » est un label bloqué (isStreetLabel).
+    img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le dimanche, la pharmacie de garde est la pharmacie de la _________.",
-    fill: "gare",
+    fillQ: "Le dimanche, la pharmacie de _________ est la pharmacie de la Gare.",
+    fill: "garde",
     vfQ: "La pharmacie de garde du dimanche ouvre de 9 h à 18 h.",
     vfC: 0,
   }),
@@ -68,7 +73,7 @@ const CE_POOL = buildExpressPool("e5-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La pharmacie est ouverte de 8 h à _________ h.",
+    fillQ: "La pharmacie ouvre à 8 h et ferme à _________ h.",
     fill: "19",
     fillA: ["19 h", "dix-neuf"],
     vfQ: "La pharmacie du Centre ferme à 19 h.",
@@ -85,7 +90,7 @@ const CE_POOL = buildExpressPool("e5-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le sirop ne convient pas aux enfants de moins de _________ ans.",
+    fillQ: "Il ne convient pas aux enfants de moins de _________ ans.",
     fill: "six",
     fillA: ["6"],
     vfQ: "Le sirop contre la toux convient à tous les enfants.",
@@ -93,16 +98,12 @@ const CE_POOL = buildExpressPool("e5-2-ce", [
   }),
   q({
     id: "ce-q6",
-    textQ: "Est-ce que la pharmacie aide aussi sans ordonnance ?",
-    text: [
-      "Oui, pour les petits problèmes de santé",
-      "Non, jamais",
-      "Seulement pour les enfants",
-    ],
+    textQ: "Qui vous conseille pour les petits problèmes de santé ?",
+    text: ["Le pharmacien", "Le médecin", "Le professeur"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["pharmacien", "médecin", "professeur"],
     imgC: 0,
-    fillQ: "Sans ordonnance, l'équipe vous _________ pour les petits problèmes.",
+    fillQ: "Sans ordonnance, le pharmacien vous _________ pour les petits problèmes de santé.",
     fill: "conseille",
     vfQ: "Le prix des médicaments est indiqué dans le texte.",
     vfC: 2,

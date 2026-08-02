@@ -14,9 +14,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Bonjour Léa,
 
-Comment vas-tu ? Moi, tout va bien ! J'habite maintenant dans un appartement grand et lumineux, avec une belle terrasse. Le quartier est calme et les voisins sont sympas.
-Je travaille comme serveuse dans un restaurant italien. Je commence à 10 heures et je finis tard, mais le lundi, le restaurant est fermé : je me repose !
-En juillet, je pars deux semaines au Portugal avec mon frère. On prend le train, c'est plus simple que l'avion.
+Comment vas-tu ? Moi, tout va bien ! J'habite dans un appartement grand et lumineux. Il a une belle terrasse. Le quartier est calme et les voisins sont sympas.
+Je travaille comme serveuse dans un restaurant italien. Je commence à 10 heures et je finis tard. Le lundi, le restaurant est fermé : je me repose !
+En juillet, je pars en vacances. Je pars deux semaines au Portugal avec mon frère. On prend le train, c'est plus simple que l'avion.
 Viens me voir bientôt ! Samedi, il y a un festival de musique au bord du lac.
 
 À bientôt,
@@ -25,7 +25,7 @@ Emma`;
 const CE_POOL = buildExpressPool("e8-1-ce", [
   q({
     id: "ce-q1",
-    textQ: "Comment est le nouvel appartement d'Emma ?",
+    textQ: "Comment est l'appartement d'Emma ?",
     text: ["Grand et lumineux", "Petit et sombre", "Vieux et bruyant"],
     textC: 0,
     img: ["", "", ""],

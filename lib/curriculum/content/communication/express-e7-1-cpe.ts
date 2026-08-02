@@ -14,11 +14,16 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Hôtel Bellevue — Informations pour les clients
 
-L'hôtel Bellevue se trouve à côté de la plage, entre la piscine et le parc.
-La chambre double coûte 85 € la nuit et le petit déjeuner coûte 9 € par personne.
-La demi-pension est à 110 € : elle comprend le petit déjeuner et le repas du soir au restaurant de l'hôtel.
+L'hôtel Bellevue se trouve à côté de la plage.
+Il est entre la piscine et le parc.
+La chambre double coûte 85 € la nuit.
+Le petit déjeuner coûte 9 € par personne.
+La demi-pension coûte 110 €.
+La demi-pension comprend le petit déjeuner et le repas du soir.
+Le repas du soir est au restaurant de l'hôtel.
 La piscine est ouverte du 1er juin au 15 septembre.
-La réception est ouverte de 7 h à 22 h. Pour réserver une chambre, téléphonez à la réception ou envoyez un e-mail.
+La réception est ouverte de 7 h à 22 h.
+Pour réserver, téléphonez à la réception ou envoyez un e-mail.
 Attention : l'hôtel est complet en août. Réservez tôt !`;
 
 const CE_POOL = buildExpressPool("e7-1-ce", [

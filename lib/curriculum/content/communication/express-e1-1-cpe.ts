@@ -15,8 +15,8 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const CE_TEXT = `Message sur le forum de l'école de langues
 
 Bonjour à tous !
-Je me présente : je m'appelle Amina et j'ai 28 ans. Je suis tunisienne et j'habite à Lausanne depuis six mois. Je suis mariée et j'ai une petite fille de 3 ans.
-Je suis cuisinière : je travaille dans un restaurant au centre-ville. Le soir, j'étudie le français à l'école, le lundi et le jeudi.
+Je m'appelle Amina. J'ai 28 ans. Je suis tunisienne. J'habite à Lausanne depuis six mois. Je suis mariée et j'ai une petite fille de trois ans.
+Je suis cuisinière. Je travaille dans un restaurant au centre-ville. Le soir, j'étudie le français à l'école. Les cours sont le lundi et le jeudi.
 J'aime la musique et la natation. Je cherche des amis pour parler français après les cours.
 Vous pouvez répondre à mon message ici, sur le forum. À bientôt !
 Amina`;
@@ -29,7 +29,7 @@ const CE_POOL = buildExpressPool("e1-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Elle a _________ ans.",
+    fillQ: "J'ai _________ ans.",
     fill: "28",
     fillA: ["vingt-huit"],
     vfQ: "Amina a 28 ans.",
@@ -42,7 +42,7 @@ const CE_POOL = buildExpressPool("e1-1-ce", [
     textC: 0,
     img: ["cuisinier", "journaliste", "fleuriste"],
     imgC: 0,
-    fillQ: "Elle travaille dans un _________ au centre-ville.",
+    fillQ: "Je travaille dans un _________ au centre-ville.",
     fill: "restaurant",
     vfQ: "Amina est journaliste.",
     vfC: 1,
@@ -67,7 +67,7 @@ const CE_POOL = buildExpressPool("e1-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Elle a une petite fille de _________ ans.",
+    fillQ: "Je suis mariée et j'ai une petite fille de _________ ans.",
     fill: "trois",
     fillA: ["3"],
     vfQ: "Amina a deux enfants.",
@@ -96,7 +96,7 @@ const CE_POOL = buildExpressPool("e1-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je cherche des _________ pour parler français.",
+    fillQ: "Je cherche des _________ pour parler français après les cours.",
     fill: "amis",
     fillA: ["amies", "ami"],
     vfQ: "Amina cherche un nouveau travail.",
@@ -121,7 +121,7 @@ const CE_POOL = buildExpressPool("e1-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je suis _________ et j'ai une petite fille.",
+    fillQ: "Je suis _________ et j'ai une petite fille de trois ans.",
     fill: "mariée",
     fillA: ["mariee"],
     vfQ: "Le message donne la profession du mari d'Amina.",

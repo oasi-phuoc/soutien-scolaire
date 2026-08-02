@@ -15,10 +15,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const CE_TEXT = `Invitation — Fête d'anniversaire
 
 Chers voisins,
-Samedi 14 juin, nous organisons une fête pour les 30 ans de Karim. C'est un apéro dans le jardin, derrière l'immeuble.
-La fête commence à 18 heures et finit vers 23 heures. Nous préparons un grand buffet : salades, pizzas et boissons fraîches.
-Vous pouvez apporter quelque chose pour le dessert : un gâteau, une tarte ou une salade de fruits.
-Attention : la fête est annulée s'il pleut. Merci de répondre avant mercredi.
+Samedi 14 juin, nous organisons une fête. C'est pour les 30 ans de Karim. C'est un apéro dans le jardin, derrière l'immeuble.
+La fête commence à 18 heures. Elle finit vers 23 heures. Nous préparons un grand buffet. Il y a des salades, des pizzas et des boissons fraîches.
+Vous pouvez apporter quelque chose pour le dessert. Par exemple : un gâteau, une tarte ou une salade de fruits.
+Attention ! S'il pleut, la fête est annulée. Merci de répondre avant mercredi.
 À samedi !
 Karim et Julie`;
 
@@ -30,7 +30,7 @@ const CE_POOL = buildExpressPool("e1-3-ce", [
     textC: 0,
     img: ["anniversaire", "pique-nique", "restaurant"],
     imgC: 0,
-    fillQ: "Nous organisons une _________ pour les 30 ans de Karim.",
+    fillQ: "Samedi 14 juin, nous organisons une _________.",
     fill: "fête",
     fillA: ["fete"],
     vfQ: "La fête est pour un anniversaire.",
@@ -68,7 +68,7 @@ const CE_POOL = buildExpressPool("e1-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Vous pouvez apporter un gâteau, une tarte ou une salade de _________.",
+    fillQ: "Par exemple : un gâteau, une tarte ou une salade de _________.",
     fill: "fruits",
     vfQ: "Les invités doivent apporter les boissons.",
     vfC: 1,
@@ -80,7 +80,7 @@ const CE_POOL = buildExpressPool("e1-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La fête est _________ s'il pleut.",
+    fillQ: "S'il pleut, la fête est _________.",
     fill: "annulée",
     fillA: ["annulee"],
     vfQ: "S'il pleut, la fête est annulée.",
@@ -105,7 +105,7 @@ const CE_POOL = buildExpressPool("e1-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "C'est une fête pour les _________ ans de Karim.",
+    fillQ: "C'est pour les _________ ans de Karim.",
     fill: "30",
     fillA: ["trente"],
     vfQ: "Le message dit combien d'invités viennent à la fête.",

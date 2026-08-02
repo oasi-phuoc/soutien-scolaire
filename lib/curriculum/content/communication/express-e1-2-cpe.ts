@@ -15,10 +15,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
 const CE_TEXT = `E-mail à une correspondante
 
 Chère Julia,
-Merci pour ta lettre ! Aujourd'hui, je te présente ma famille. Nous sommes cinq à la maison : mon père, ma mère, mes deux frères et moi.
-Mon père a 45 ans, il est mécanicien. Ma mère a 42 ans, elle est vendeuse. Mon grand frère a 20 ans, il est étudiant. Mon petit frère a 8 ans.
+Merci pour ta lettre ! Aujourd'hui, je te présente ma famille. Nous sommes cinq à la maison. C'est mon père, ma mère, mes deux frères et moi.
+Mon père est mécanicien. Il a 45 ans. Ma mère a 42 ans. Elle est vendeuse. Mon grand frère est étudiant. Il a 20 ans. Mon petit frère a 8 ans.
 J'ai aussi une grande sœur, Léa. Elle est mariée et elle a un bébé. Elle n'habite pas avec nous.
-Sur la photo, tu peux voir toute la famille chez mes grands-parents.
+Sur la photo, tu vois toute la famille. Nous sommes chez mes grands-parents.
 Et toi, tu as des frères et sœurs ?`;
 
 const CE_POOL = buildExpressPool("e1-2-ce", [
@@ -42,7 +42,7 @@ const CE_POOL = buildExpressPool("e1-2-ce", [
     textC: 0,
     img: ["mécanicien", "facteur", "cuisinier"],
     imgC: 0,
-    fillQ: "Mon père a 45 ans, il est _________.",
+    fillQ: "Mon père est _________.",
     fill: "mécanicien",
     fillA: ["mecanicien"],
     vfQ: "Le père est cuisinier.",
@@ -68,7 +68,7 @@ const CE_POOL = buildExpressPool("e1-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Mon grand frère a 20 ans, il est _________.",
+    fillQ: "Mon grand frère est _________.",
     fill: "étudiant",
     fillA: ["etudiant"],
     vfQ: "Le grand frère a 18 ans.",
@@ -98,7 +98,7 @@ const CE_POOL = buildExpressPool("e1-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Sur la photo, tu peux voir toute la famille chez mes _________.",
+    fillQ: "Nous sommes chez mes _________.",
     fill: "grands-parents",
     fillA: ["grands parents"],
     vfQ: "La photo est prise en vacances.",

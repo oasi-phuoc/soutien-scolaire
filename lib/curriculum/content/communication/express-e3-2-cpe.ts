@@ -14,10 +14,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Le blog de Camille — Ma semaine
 
-Du lundi au vendredi, je me lève à 6 h 30. Je me douche, je m'habille et je prends mon petit déjeuner : du pain et un café.
-Je commence le travail à 8 h 30 et je finis à 17 heures. Après, je fais les courses et je rentre à la maison pour cuisiner.
-Le soir, je me couche tôt, à 22 heures, parce que je n'aime pas être fatiguée.
-Le week-end, pas de réveil ! Je me lève à 10 heures, je me promène et, le dimanche, j'invite des amis à déjeuner.`;
+Du lundi au vendredi, je me lève à 6 h 30. Je me douche et je m'habille. Je prends mon petit déjeuner : du pain et un café.
+Je commence le travail à 8 h 30. Je finis à 17 heures. Après, je fais les courses. Je rentre à la maison et je cuisine.
+Le soir, je me couche tôt, à 22 heures. Je n'aime pas être fatiguée.
+Le week-end, pas de réveil ! Je me lève à 10 heures et je me promène. Le dimanche, j'invite des amis à déjeuner.`;
 
 const CE_POOL = buildExpressPool("e3-2-ce", [
   q({
@@ -53,7 +53,7 @@ const CE_POOL = buildExpressPool("e3-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Je commence le travail à 8 h 30 et je finis à _________ heures.",
+    fillQ: "Je finis à _________ heures.",
     fill: "17",
     fillA: ["dix-sept"],
     vfQ: "Camille finit le travail à 17 heures.",
@@ -70,7 +70,7 @@ const CE_POOL = buildExpressPool("e3-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Après, je fais les _________ et je rentre à la maison.",
+    fillQ: "Après, je fais les _________.",
     fill: "courses",
     vfQ: "Après le travail, Camille va au cinéma.",
     vfC: 1,

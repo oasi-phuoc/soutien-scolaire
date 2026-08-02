@@ -14,11 +14,11 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Boulangerie Le Blé d'Or — Bienvenue !
 
-Notre boulangerie est ouverte tous les jours de 6 h 30 à 19 h, sauf le dimanche après-midi.
+Notre boulangerie est ouverte tous les jours. Elle est ouverte de 6 h 30 à 19 h. Le dimanche après-midi, c'est fermé.
 Le matin, les croissants sont chauds à partir de 7 h. La baguette coûte 1 franc 20.
-À midi, nous proposons une formule déjeuner à 12 francs : un sandwich, une boisson et un dessert au choix.
-Pour une fête, commandez votre tarte deux jours avant : aux pommes, au citron ou aux fraises, pour six ou huit personnes.
-Le paiement par carte, sans contact, est possible à partir de 5 francs.`;
+À midi, nous proposons une formule déjeuner à 12 francs. Il y a un sandwich, une boisson et un dessert au choix.
+Pour une fête, commandez votre tarte deux jours avant. Les tartes sont aux pommes, au citron ou aux fraises. La tarte est pour six ou huit personnes.
+Vous pouvez payer par carte, sans contact. C'est possible à partir de 5 francs.`;
 
 const CE_POOL = buildExpressPool("e4-3-ce", [
   q({
@@ -28,7 +28,7 @@ const CE_POOL = buildExpressPool("e4-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "La boulangerie est ouverte de 6 h 30 à _________ h.",
+    fillQ: "Elle est ouverte de 6 h 30 à _________ h.",
     fill: "19",
     fillA: ["19 h", "dix-neuf"],
     vfQ: "La boulangerie est fermée le dimanche après-midi.",
@@ -68,9 +68,9 @@ const CE_POOL = buildExpressPool("e4-3-ce", [
       "Deux croissants et un jus",
     ],
     textC: 0,
-    img: ["", "", ""],
+    img: ["sandwich", "soupe", "croissant"],
     imgC: 0,
-    fillQ: "La formule déjeuner : un sandwich, une boisson et un _________.",
+    fillQ: "Il y a un sandwich, une boisson et un _________ au choix.",
     fill: "dessert",
     vfQ: "La formule déjeuner coûte 12 francs.",
     vfC: 0,
@@ -82,7 +82,7 @@ const CE_POOL = buildExpressPool("e4-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Commandez votre tarte deux _________ avant.",
+    fillQ: "Pour une fête, commandez votre tarte deux _________ avant.",
     fill: "jours",
     vfQ: "Il faut commander la tarte une semaine avant.",
     vfC: 1,
@@ -94,7 +94,7 @@ const CE_POOL = buildExpressPool("e4-3-ce", [
     textC: 0,
     img: ["tarte", "gâteau", "croissant"],
     imgC: 0,
-    fillQ: "Une tarte aux pommes, au citron ou aux _________.",
+    fillQ: "Les tartes sont aux pommes, au citron ou aux _________.",
     fill: "fraises",
     vfQ: "La tarte peut être pour six ou huit personnes.",
     vfC: 0,
@@ -106,7 +106,7 @@ const CE_POOL = buildExpressPool("e4-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le paiement par carte, sans _________, est possible.",
+    fillQ: "Vous pouvez payer par carte, sans _________.",
     fill: "contact",
     vfQ: "Le nom du boulanger est indiqué dans le texte.",
     vfC: 2,

@@ -14,12 +14,12 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Restaurant Chez Marie — Informations
 
-Le restaurant est ouvert tous les jours, sauf le lundi.
-Le midi, nous proposons un menu du jour à 19 francs : une entrée, un plat et un dessert.
-Aujourd'hui, le chef propose une soupe de légumes, du poisson avec du riz et une tarte aux pommes.
-Pour les clients végétariens, il y a aussi un plat sans viande et sans poisson.
-Le soir, pensez à réserver votre table : téléphonez-nous avant 17 h.
-Les boissons ne sont pas comprises dans le menu, mais la carafe d'eau est gratuite.`;
+Le restaurant est ouvert du mardi au dimanche. Le lundi, c'est fermé.
+Le midi, nous proposons un menu du jour à 19 francs. Il y a une entrée, un plat et un dessert.
+Aujourd'hui, le chef propose une soupe de légumes. Il propose aussi du poisson avec du riz. En dessert, il y a une tarte aux pommes.
+Il y a aussi un plat sans viande et sans poisson. C'est pour les clients végétariens.
+Le soir, pensez à réserver votre table. Téléphonez-nous avant 17 h.
+Les boissons ne sont pas comprises dans le menu. Mais la carafe d'eau est gratuite.`;
 
 const CE_POOL = buildExpressPool("e4-2-ce", [
   q({
@@ -29,7 +29,7 @@ const CE_POOL = buildExpressPool("e4-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le restaurant est ouvert tous les jours, sauf le _________.",
+    fillQ: "Le _________, c'est fermé.",
     fill: "lundi",
     vfQ: "Le restaurant est fermé le lundi.",
     vfC: 0,
@@ -58,7 +58,7 @@ const CE_POOL = buildExpressPool("e4-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le menu du jour : une entrée, un plat et un _________.",
+    fillQ: "Il y a une entrée, un plat et un _________.",
     fill: "dessert",
     vfQ: "Le menu du jour est servi le midi.",
     vfC: 0,
@@ -70,7 +70,7 @@ const CE_POOL = buildExpressPool("e4-2-ce", [
     textC: 0,
     img: ["tarte", "glace", "gâteau"],
     imgC: 0,
-    fillQ: "Aujourd'hui, il y a une tarte aux _________.",
+    fillQ: "En dessert, il y a une tarte aux _________.",
     fill: "pommes",
     vfQ: "Aujourd'hui, le chef propose une soupe de légumes.",
     vfC: 0,
@@ -112,7 +112,7 @@ const CE_POOL = buildExpressPool("e4-2-ce", [
     textQ: "Quelle boisson est gratuite ?",
     text: ["La carafe d'eau", "Le jus d'orange", "Le café"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["eau", "Jus d'orange", "café"],
     imgC: 0,
     fillQ: "Les boissons ne sont pas _________ dans le menu.",
     fill: "comprises",

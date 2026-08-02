@@ -14,10 +14,10 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Dépann'Express — Votre service de dépannage à domicile
 
-Une panne d'électricité ? Une fuite d'eau ? Une machine à laver qui ne marche plus ? Appelez Dépann'Express !
-Nos techniciens viennent chez vous du lundi au samedi, de 7 h à 20 h. Pour les urgences, un plombier ou un électricien peut venir le dimanche.
-Le technicien regarde d'abord la panne, puis il fait un devis gratuit. Vous payez seulement si vous êtes d'accord avec le prix.
-Attention : pour une panne de gaz, n'attendez pas et appelez tout de suite le numéro d'urgence.`;
+Une panne d'électricité ? Une fuite d'eau ? Votre machine à laver ne marche plus ? Appelez Dépann'Express !
+Nos techniciens viennent chez vous du lundi au samedi. Ils travaillent de 7 h à 20 h. Un plombier ou un électricien peut venir le dimanche. C'est pour les urgences.
+Le technicien regarde d'abord la panne. Puis il fait un devis gratuit. Vous payez seulement si vous êtes d'accord avec le prix.
+Attention : pour une panne de gaz, n'attendez pas. Appelez tout de suite le numéro d'urgence.`;
 
 const CE_POOL = buildExpressPool("e2-2-ce", [
   q({
@@ -27,7 +27,7 @@ const CE_POOL = buildExpressPool("e2-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Dépann'Express, votre service de _________ à domicile.",
+    fillQ: "Dépann'Express — Votre service de _________ à domicile.",
     fill: "dépannage",
     fillA: ["depannage"],
     vfQ: "Dépann'Express est un service de dépannage à domicile.",
@@ -90,7 +90,7 @@ const CE_POOL = buildExpressPool("e2-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Pour une panne de gaz, appelez tout de suite le numéro d'_________.",
+    fillQ: "Appelez tout de suite le numéro d'_________.",
     fill: "urgence",
     vfQ: "Le prix d'une réparation d'électricité est indiqué dans le texte.",
     vfC: 2,
@@ -102,7 +102,7 @@ const CE_POOL = buildExpressPool("e2-2-ce", [
     textC: 0,
     img: ["machine a laver", "voiture", "vélo"],
     imgC: 0,
-    fillQ: "Une _________ à laver qui ne marche plus ?",
+    fillQ: "Votre _________ à laver ne marche plus ?",
     fill: "machine",
     vfQ: "La publicité parle d'une machine à laver.",
     vfC: 0,
@@ -114,7 +114,7 @@ const CE_POOL = buildExpressPool("e2-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Nos techniciens viennent de 7 h à _________ h.",
+    fillQ: "Ils travaillent de 7 h à _________ h.",
     fill: "20",
     fillA: ["vingt", "20 h"],
     vfQ: "Les techniciens commencent à 7 h le matin.",

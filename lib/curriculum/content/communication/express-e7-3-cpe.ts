@@ -14,11 +14,15 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Musée des Beaux-Arts — Exposition « Couleurs du Sud »
 
-Le musée des Beaux-Arts présente une grande exposition de peinture du 3 juin au 30 août.
-Le musée est ouvert tous les jours, sauf le lundi, de 10 h à 18 h.
-Le billet coûte 12 € pour les adultes. C'est gratuit pour les enfants de moins de 10 ans.
+Le musée présente une grande exposition de peinture.
+L'exposition dure du 3 juin au 30 août.
+Le musée est ouvert du mardi au dimanche.
+Il est ouvert de 10 h à 18 h.
+Le musée est fermé le lundi.
+Le billet coûte 12 € pour les adultes.
+C'est gratuit pour les enfants de moins de 10 ans.
 Avec la carte d'étudiant, le billet est à 6 €.
-Une visite guidée est proposée le samedi à 14 h.
+Il y a une visite guidée le samedi à 14 h.
 Vous pouvez acheter vos e-billets en ligne sur le site du musée.`;
 
 const CE_POOL = buildExpressPool("e7-3-ce", [
@@ -45,7 +49,7 @@ const CE_POOL = buildExpressPool("e7-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Le musée est ouvert tous les jours, sauf le _________.",
+    fillQ: "Le musée est fermé le _________.",
     fill: "lundi",
     vfQ: "Le musée est ouvert le dimanche.",
     vfC: 0,
@@ -87,7 +91,7 @@ const CE_POOL = buildExpressPool("e7-3-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Une visite guidée est proposée le samedi à _________ h.",
+    fillQ: "Il y a une visite guidée le samedi à _________ h.",
     fill: "14",
     fillA: ["quatorze"],
     vfQ: "La visite guidée a lieu le samedi.",
@@ -98,7 +102,7 @@ const CE_POOL = buildExpressPool("e7-3-ce", [
     textQ: "Où peut-on acheter des e-billets ?",
     text: ["Sur le site du musée", "À la mairie", "Au cinéma"],
     textC: 0,
-    img: ["", "", ""],
+    img: ["internet", "mairie", "cinéma"],
     imgC: 0,
     fillQ: "Vous pouvez acheter vos e-billets en _________ sur le site du musée.",
     fill: "ligne",

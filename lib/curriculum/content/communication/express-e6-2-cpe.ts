@@ -17,11 +17,12 @@ const CE_TEXT = `Objet : Notre voyage à Marseille
 Salut Karim !
 
 J'ai les billets pour Marseille. Nous partons samedi matin avec le TGV de 8 h 10.
-Le trajet dure trois heures, avec un arrêt à Lyon.
-J'ai réservé deux places côté fenêtre, dans la voiture 12.
+Le trajet dure trois heures. Il y a un arrêt à Lyon.
+J'ai réservé deux places côté fenêtre. Les places sont dans la voiture 12.
 Le billet aller-retour coûte 58 euros par personne.
-Attention : il y a une grève jeudi et vendredi, mais pas samedi.
-Rendez-vous à la gare à 7 h 45, devant le quai numéro 3. N'oublie pas ton billet !
+Attention ! Il y a une grève jeudi et vendredi. Samedi, il n'y a pas de grève.
+Le rendez-vous est à la gare, à 7 h 45. Je t'attends devant le quai numéro 3.
+N'oublie pas ton billet !
 
 À samedi,
 Julie`;
@@ -107,7 +108,7 @@ const CE_POOL = buildExpressPool("e6-2-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Rendez-vous devant le quai numéro _________.",
+    fillQ: "Je t'attends devant le quai numéro _________.",
     fill: "3",
     fillA: ["trois"],
     vfQ: "L'heure d'arrivée à Marseille est indiquée dans le message.",

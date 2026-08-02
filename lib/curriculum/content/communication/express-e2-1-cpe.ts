@@ -14,8 +14,9 @@ function q(item: ExpressRawQ): ExpressRawQ {
 
 const CE_TEXT = `Salut Emma !
 
-Ça y est, j'habite dans mon nouvel appartement ! Il est au 2e étage d'un immeuble neuf, dans un quartier calme. Il y a un grand salon très lumineux, deux chambres, une cuisine équipée et une petite salle de bains. J'ai aussi un balcon avec une jolie vue sur le parc.
-Mon ancien studio était sombre et le quartier était bruyant, alors je suis très contente ! Tu veux venir visiter samedi ? On peut manger sur le balcon.
+Ça y est, j'habite dans mon nouvel appartement ! Il est au 2e étage d'un immeuble neuf. Le quartier est calme.
+Il y a un grand salon très lumineux. Il y a deux chambres et une cuisine équipée. Il y a une petite salle de bains. J'ai aussi un balcon avec une jolie vue sur le parc.
+Mon ancien studio était sombre. Mon ancien quartier était bruyant. Alors, je suis très contente ! Tu veux venir visiter samedi ? On peut manger sur le balcon.
 
 À bientôt,
 Léa`;
@@ -53,7 +54,7 @@ const CE_POOL = buildExpressPool("e2-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Il y a un grand salon, deux _________ et une cuisine équipée.",
+    fillQ: "Il y a deux _________ et une cuisine équipée.",
     fill: "chambres",
     vfQ: "L'appartement a trois chambres.",
     vfC: 1,
@@ -65,7 +66,7 @@ const CE_POOL = buildExpressPool("e2-1-ce", [
     textC: 0,
     img: ["parc", "plage", "montagne"],
     imgC: 0,
-    fillQ: "J'ai un balcon avec une jolie vue sur le _________.",
+    fillQ: "J'ai aussi un balcon avec une jolie vue sur le _________.",
     fill: "parc",
     vfQ: "Depuis le balcon, on voit le parc.",
     vfC: 0,
@@ -77,7 +78,7 @@ const CE_POOL = buildExpressPool("e2-1-ce", [
     textC: 0,
     img: ["", "", ""],
     imgC: 0,
-    fillQ: "Mon ancien studio était _________ et le quartier était bruyant.",
+    fillQ: "Mon ancien studio était _________.",
     fill: "sombre",
     vfQ: "L'ancien quartier était calme.",
     vfC: 1,
