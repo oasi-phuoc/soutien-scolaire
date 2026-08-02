@@ -94,6 +94,12 @@ export type ExpressPePrompt = {
   id: string;
   title: string;
   situation: string;
+  /** E-mail reçu à lire avant d'écrire (PE « répondre à un e-mail »). */
+  sourceMessage?: {
+    from?: string;
+    subject?: string;
+    body: string;
+  };
   instruction: string;
   points: string[];
   minWords: number;
@@ -131,10 +137,14 @@ export type CommunicationLesson = {
   prerequisiteCommIds?: string[];
   /** Compréhension écrite : exercice texte + questions (fin d'entraînement). */
   ceExercise?: CommunicationExercise;
+  /** Compréhension écrite : e-mail à lire + questions (après le CE texte). */
+  ceEmailExercise?: CommunicationExercise;
   /** Production orale : pool de dialogues à jouer (≥ 10 situations si possible). */
   poDialogues?: ExpressPoDialogue[];
   /** Production écrite : pool de consignes (≥ 10) — A1 min 50 mots, A2 min 80. */
   pePrompts?: ExpressPePrompt[];
+  /** Production écrite : pool d'e-mails auxquels répondre (avec sourceMessage). */
+  peEmailPrompts?: ExpressPePrompt[];
 };
 
 function mulberry32(seed: number) {

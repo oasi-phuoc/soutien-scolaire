@@ -35,10 +35,15 @@ function norm(s: string): string {
 }
 
 function isImageable(q: ExpressMultiQuestion): boolean {
-  return (
-    q.imageChoices.length === 3 &&
-    q.imageChoices.every((c) => !!ceCoImageSource(c.image, c.label))
-  );
+  return q.imageChoices.length === 3 && q.imageChoices.every((c) => !!c.image);
+}
+
+/** Dossier d'une image de choix (homogénéité par question). */
+function imageFolder(path: string): string {
+  if (path.startsWith("/assets/words/lecture/")) return "lecture";
+  if (path.startsWith("/assets/expression/images/scene/")) return "scene";
+  if (path.startsWith("/assets/words/vocab/")) return "vocab";
+  return "autre";
 }
 
 for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
@@ -103,6 +108,17 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
       if (q.fillQ && !q.fillAnswer) err(ctx, `${q.id} : fillQ sans réponse`);
       if (q.fillAnswer && q.fillAnswer.length > 30) {
         warn(ctx, `${q.id} : réponse saisie longue (${q.fillAnswer})`);
+      }
+    }
+
+    // Homogénéité des images d'une même question (jamais vocab, jamais mélange)
+    for (const q of pool) {
+      const imgs = q.imageChoices.map((c) => c.image).filter(Boolean);
+      if (imgs.length === 0) continue;
+      const folders = new Set(imgs.map(imageFolder));
+      if (folders.has("vocab")) err(ctx, `${q.id} : image du dossier vocabulaire interdite`);
+      if (imgs.length === 3 && folders.size > 1) {
+        err(ctx, `${q.id} : images de dossiers mélangés (${[...folders].join(", ")})`);
       }
     }
 

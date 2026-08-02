@@ -478,13 +478,15 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
             ]}
           />
         ) : null}
-        {lesson.theory.flatMap((block, bi) =>
-          expressTheoryLines(block).map((line, li) => (
-            <p key={`${bi}-${li}`} className={block.type === "heading" ? "font-bold" : undefined}>
-              {line}
-            </p>
-          )),
-        )}
+        {lesson.theory
+          .filter((block) => !["prerequisites", "table", "vocab"].includes(block.type))
+          .flatMap((block, bi) =>
+            expressTheoryLines(block).map((line, li) => (
+              <p key={`${bi}-${li}`} className={block.type === "heading" ? "font-bold" : undefined}>
+                {line}
+              </p>
+            )),
+          )}
       </div>
     ),
     exercises: picked.map((ex, i) => {

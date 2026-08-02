@@ -107,6 +107,7 @@ type Phase =
   | "exercises"
   | "po"
   | "pe"
+  | "peEmail"
   | "eval_announce"
   | "eval"
   | "score";
@@ -824,8 +825,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [{ trainingExercises, evalExercises }] = useState(() => {
     if (!lesson || lesson.writingLevel) return { trainingExercises: [] as CommunicationExercise[], evalExercises: [] as CommunicationExercise[] };
     const split = splitOralExercises(lesson, Number(lessonSeed) || 1);
-    // Compréhension écrite : ajoutée en fin d'entraînement (mêmes mécaniques).
-    const training = lesson.ceExercise ? [...split.training, lesson.ceExercise] : split.training;
+    // Compréhension écrite : texte puis e-mail, en fin d'entraînement.
+    const training = [
+      ...split.training,
+      ...(lesson.ceExercise ? [lesson.ceExercise] : []),
+      ...(lesson.ceEmailExercise ? [lesson.ceEmailExercise] : []),
+    ];
     return { trainingExercises: training, evalExercises: split.evalEx };
   });
 
@@ -868,6 +873,16 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const poStudentRole: "A" | "B" = poSeed % 2 === 0 ? "B" : "A";
   const [peSeed, setPeSeed] = useState(() => Math.floor(Math.random() * 1e6));
   const pePrompt: WritingPrompt | null = hasPe ? pePool[peSeed % pePool.length] ?? null : null;
+  // ——— Production écrite « répondre à un e-mail » ———
+  const peEmailPool = lesson?.writingLevel ? [] : (lesson?.peEmailPrompts ?? []);
+  const hasPeEmail = peEmailPool.length > 0;
+  const [peEmailSeed, setPeEmailSeed] = useState(() => Math.floor(Math.random() * 1e6));
+  const peEmailPrompt: WritingPrompt | null = hasPeEmail
+    ? peEmailPool[peEmailSeed % peEmailPool.length] ?? null
+    : null;
+  const [peEmailText, setPeEmailText] = useState("");
+  const [peEmailFeedback, setPeEmailFeedback] = useState<GrammarMatch[]>([]);
+  const [peEmailChecked, setPeEmailChecked] = useState(false);
   const [writingText, setWritingText] = useState("");
   const [grammarFeedback, setGrammarFeedback] = useState<GrammarMatch[]>([]);
   const [grammarChecking, setGrammarChecking] = useState(false);
@@ -897,7 +912,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const hasEval = evalExercises.length > 0;
   const isOral = !lesson.writingLevel;
   const trainingTotalSteps = isOral
-    ? 1 + trainingExercises.length + (hasPo ? 1 : 0) + (hasPe ? 1 : 0) + (hasEval ? 1 : 0)
+    ? 1 +
+      trainingExercises.length +
+      (hasPo ? 1 : 0) +
+      (hasPe ? 1 : 0) +
+      (hasPeEmail ? 1 : 0) +
+      (hasEval ? 1 : 0)
     : 0;
   const oralStepIdx =
     phase === "theory"
@@ -908,9 +928,11 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
           ? 1 + trainingExercises.length
           : phase === "pe"
             ? 1 + trainingExercises.length + (hasPo ? 1 : 0)
-            : phase === "eval_announce"
-              ? trainingTotalSteps - 1
-              : 0;
+            : phase === "peEmail"
+              ? 1 + trainingExercises.length + (hasPo ? 1 : 0) + (hasPe ? 1 : 0)
+              : phase === "eval_announce"
+                ? trainingTotalSteps - 1
+                : 0;
 
   const activeWritingPhases = lesson.writingLevel
     ? (["form", "writing"] as const).filter((item) => (item === "form" ? !formValidated : !exerciseValidated))
@@ -924,6 +946,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       phase === "exercises" ||
       phase === "po" ||
       phase === "pe" ||
+      phase === "peEmail" ||
       phase === "eval_announce");
   const showWritingBar =
     Boolean(lesson.writingLevel) &&
@@ -964,8 +987,16 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         setPhase("exercises");
         setExIndex(trainingExercises.length - 1);
       } else setPhase("theory");
-    } else if (phase === "eval_announce") {
+    } else if (phase === "peEmail") {
       if (hasPe) setPhase("pe");
+      else if (hasPo) setPhase("po");
+      else if (trainingExercises.length > 0) {
+        setPhase("exercises");
+        setExIndex(trainingExercises.length - 1);
+      } else setPhase("theory");
+    } else if (phase === "eval_announce") {
+      if (hasPeEmail) setPhase("peEmail");
+      else if (hasPe) setPhase("pe");
       else if (hasPo) setPhase("po");
       else if (trainingExercises.length > 0) {
         setPhase("exercises");
@@ -1014,6 +1045,14 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setExerciseValidated(false);
       return;
     }
+    if (phase === "peEmail") {
+      // Nouvel e-mail à répondre.
+      setPeEmailSeed((prev) => prev + 1 + (Date.now() % 7));
+      setPeEmailText("");
+      setPeEmailFeedback([]);
+      setPeEmailChecked(false);
+      return;
+    }
     if (phase === "eval") {
       setEvalAnswers((prev) => prev.map((a, i) => (i === evalIndex ? null : a)));
       setEvalValidated((prev) => prev.map((v, i) => (i === evalIndex ? false : v)));
@@ -1031,28 +1070,40 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     setValidated((prev) => prev.map((v, i) => (i === exIndex ? false : v)));
   }
 
-  async function runGrammarCheck() {
-    if (!writingText.trim()) {
-      setGrammarFeedback([]);
-      setExerciseValidated(true);
-      return;
-    }
-    setGrammarChecking(true);
+  async function fetchGrammarMatches(text: string): Promise<GrammarMatch[]> {
+    if (!text.trim()) return [];
     try {
       const response = await fetch("/api/check-grammar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: writingText }),
+        body: JSON.stringify({ text }),
       });
       const data = (await response.json()) as { matches?: GrammarMatch[] };
-      setGrammarFeedback(
-        (data.matches ?? []).filter((match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? "")),
+      return (data.matches ?? []).filter(
+        (match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? ""),
       );
     } catch {
-      setGrammarFeedback([]);
+      return [];
+    }
+  }
+
+  async function runGrammarCheck() {
+    setGrammarChecking(true);
+    try {
+      setGrammarFeedback(await fetchGrammarMatches(writingText));
     } finally {
       setGrammarChecking(false);
       setExerciseValidated(true);
+    }
+  }
+
+  async function runPeEmailGrammarCheck() {
+    setGrammarChecking(true);
+    try {
+      setPeEmailFeedback(await fetchGrammarMatches(peEmailText));
+    } finally {
+      setGrammarChecking(false);
+      setPeEmailChecked(true);
     }
   }
 
@@ -1076,6 +1127,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       // Minimum de mots requis (A1 : 50, A2 : 80).
       if (wordCount(writingText) < pePrompt.minWords) return;
       await runGrammarCheck();
+      return;
+    }
+    if (phase === "peEmail") {
+      if (!peEmailPrompt || peEmailChecked || grammarChecking) return;
+      if (wordCount(peEmailText) < peEmailPrompt.minWords) return;
+      await runPeEmailGrammarCheck();
       return;
     }
     if (phase === "exercises") {
@@ -1161,6 +1218,19 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     }
     if (phase === "pe") {
       if (!exerciseValidated) return;
+      if (hasPeEmail) {
+        setPhase("peEmail");
+        return;
+      }
+      if (hasEval) {
+        setPhase("eval_announce");
+        return;
+      }
+      handleFinish();
+      return;
+    }
+    if (phase === "peEmail") {
+      if (!peEmailChecked) return;
       if (hasEval) {
         setPhase("eval_announce");
         return;
@@ -1203,12 +1273,14 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     phase === "writing" ||
     phase === "form" ||
     phase === "po" ||
-    phase === "pe";
+    phase === "pe" ||
+    phase === "peEmail";
   const nextDisabled =
     (phase === "writing" && !exerciseValidated) ||
     (phase === "form" && !formValidated) ||
     (phase === "po" && !poDone) ||
     (phase === "pe" && !exerciseValidated) ||
+    (phase === "peEmail" && !peEmailChecked) ||
     phase === "eval_announce";
   const currentExValidated = activeValidated[activeIndex] ?? false;
 
@@ -1373,9 +1445,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       {phase === "theory" && (
         <div className="flex flex-1 flex-col">
           <div className="flex-1">
-            {lesson.theory.map((block, i) => (
-              <TheoryBlock key={i} block={block} />
-            ))}
+            {/* Théorie allégée : sans prérequis, sans tableau ni lexique de fin. */}
+            {lesson.theory
+              .filter((block) => !["prerequisites", "table", "vocab"].includes(block.type))
+              .map((block, i) => (
+                <TheoryBlock key={i} block={block} />
+              ))}
           </div>
         </div>
       )}
@@ -1442,6 +1517,29 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
             }}
             feedback={grammarFeedback}
             checked={exerciseValidated}
+            checking={grammarChecking}
+            teachers={teachers}
+          />
+        </div>
+      )}
+
+      {phase === "peEmail" && peEmailPrompt && (
+        <div className="flex flex-1 flex-col">
+          <h2 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">
+            Exercice {trainingExercises.length + (hasPo ? 1 : 0) + (hasPe ? 1 : 0) + 1} — Répondre à
+            un e-mail
+          </h2>
+          <WritingExercise
+            lessonCode={lesson.code}
+            prompt={peEmailPrompt}
+            text={peEmailText}
+            onTextChange={(value) => {
+              setPeEmailText(value);
+              setPeEmailChecked(false);
+              setPeEmailFeedback([]);
+            }}
+            feedback={peEmailFeedback}
+            checked={peEmailChecked}
             checking={grammarChecking}
             teachers={teachers}
           />
@@ -1588,7 +1686,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                           : phase === "pe"
                             ? exerciseValidated ||
                               wordCount(writingText) < (pePrompt?.minWords ?? 0)
-                            : exerciseValidated) || grammarChecking
+                            : phase === "peEmail"
+                              ? peEmailChecked ||
+                                wordCount(peEmailText) < (peEmailPrompt?.minWords ?? 0)
+                              : exerciseValidated) || grammarChecking
                   }
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                   style={{ background: ACCENT }}

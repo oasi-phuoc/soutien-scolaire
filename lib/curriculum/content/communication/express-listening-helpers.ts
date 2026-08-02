@@ -23,27 +23,84 @@ export type ExpressMultiQuestion = COMultiQuestion & {
 function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
   if (choices.some((c) => isSinglePrice(c.label) || isPriceRange(c.label))) return false;
   if (hasBlockedImageChoices(choices.map((c) => c.label))) return false;
-  return choices.every((c) => !!ceCoImageSource(c.image, c.label));
+  // Images déjà résolues de façon homogène par buildExpressPool (même dossier).
+  return choices.every((c) => !!c.image);
+}
+
+/** Image « lecture » (fond blanc) pour un label — jamais le vocabulaire. */
+function lectureImageFor(label: string): string {
+  const word = resolveWordImage(label);
+  return word && word.startsWith("/assets/words/lecture/") ? word : "";
+}
+
+/** Image « scène » (manga) pour un label. */
+function sceneImageFor(label: string): string {
+  if (!isCeCoImageableLabel(label)) return "";
+  return resolveCeCoWordImage(label) ?? "";
+}
+
+/** Métiers / professions : toujours illustrés par les images de lecture. */
+const PROFESSION_LABELS = new Set(
+  [
+    "agriculteur", "architecte", "avocat", "boucher", "boulanger", "boulangère",
+    "chanteur", "chanteuse", "chauffeur", "coiffeur", "coiffeuse", "cuisinier",
+    "cuisinière", "dentiste", "docteur", "électricien", "facteur", "fermier",
+    "infirmier", "infirmière", "ingénieur", "ingénieure", "jardinier",
+    "journaliste", "libraire", "maçon", "mécanicien", "médecin", "menuisier",
+    "peintre", "pharmacien", "pharmacienne", "pilote", "plombier", "policier",
+    "pompier", "professeur", "secrétaire", "serveur", "serveuse", "vendeur",
+    "vendeuse", "vétérinaire",
+  ].map((s) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase()),
+);
+
+function isProfessionLabel(label: string): boolean {
+  const norm = label.trim().normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  return PROFESSION_LABELS.has(norm);
 }
 
 /**
- * Image d'un choix QCM Express : scène CE/CO en priorité, sinon image mot
- * (lecture / vocabulaire). Chaîne vide = choix non illustrable.
+ * Image d'un choix QCM Express (usage hors pool) : lecture pour les métiers,
+ * sinon scène puis lecture. Jamais d'image du dossier vocabulaire.
  */
 export function expressChoiceImage(label: string): string {
   if (!label.trim()) return "";
-  if (isCeCoImageableLabel(label)) {
-    const scene = resolveCeCoWordImage(label);
-    if (scene) return scene;
+  if (isProfessionLabel(label)) return lectureImageFor(label);
+  return sceneImageFor(label) || lectureImageFor(label);
+}
+
+/**
+ * Résout les 3 images d'une question dans un MÊME dossier : lecture si la
+ * question parle de métiers ou si les trois labels ont une image lecture,
+ * sinon scène si les trois ont une scène — jamais un mélange, jamais le
+ * dossier vocabulaire. Sinon la question n'est pas illustrable.
+ */
+function resolveHomogeneousImages(
+  choices: ExpressMultiQuestion["imageChoices"],
+): ExpressMultiQuestion["imageChoices"] {
+  const labels = choices.map((c) => c.label);
+  if (labels.some((l) => !l.trim())) {
+    return choices.map((c) => ({ label: c.label, image: "" })) as typeof choices;
   }
-  const word = resolveWordImage(label);
-  if (
-    word &&
-    (word.startsWith("/assets/words/lecture/") || word.startsWith("/assets/words/vocab/"))
-  ) {
-    return word;
+  const lecture = labels.map(lectureImageFor);
+  const scene = labels.map(sceneImageFor);
+  const allLecture = lecture.every(Boolean);
+  const allScene = scene.every(Boolean);
+  const hasProfession = labels.some(isProfessionLabel);
+
+  if (hasProfession) {
+    // Métiers : uniquement les images de lecture (toutes du même dossier).
+    return choices.map((c, i) => ({
+      label: c.label,
+      image: allLecture ? lecture[i]! : "",
+    })) as typeof choices;
   }
-  return "";
+  if (allScene) {
+    return choices.map((c, i) => ({ label: c.label, image: scene[i]! })) as typeof choices;
+  }
+  if (allLecture) {
+    return choices.map((c, i) => ({ label: c.label, image: lecture[i]! })) as typeof choices;
+  }
+  return choices.map((c) => ({ label: c.label, image: "" })) as typeof choices;
 }
 
 export function buildExpressPool(groupSlug: string, items: ExpressRawQ[]): ExpressMultiQuestion[] {
@@ -52,9 +109,7 @@ export function buildExpressPool(groupSlug: string, items: ExpressRawQ[]): Expre
     const raw = items[i]!;
     return {
       ...q,
-      imageChoices: q.imageChoices.map((c) =>
-        c.image ? c : { label: c.label, image: expressChoiceImage(c.label) },
-      ) as ExpressMultiQuestion["imageChoices"],
+      imageChoices: resolveHomogeneousImages(q.imageChoices),
       vfQ: raw.vfQ,
       vfCorrect: raw.vfC,
     };
