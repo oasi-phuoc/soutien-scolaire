@@ -238,6 +238,12 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
 
     {
       type: "heading",
+      text: "Verbe irrégulier",
+    },
+    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRREGULIER },
+
+    {
+      type: "heading",
       text: "Verbes en -dre",
     },
     { type: "verb_toggle", buttonCols: 3, verbs: VT_DRE },
@@ -247,12 +253,6 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       text: "Verbes en -ire",
     },
     { type: "verb_toggle", buttonCols: 3, verbs: VT_IRE },
-
-    {
-      type: "heading",
-      text: "Verbe irrégulier",
-    },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRREGULIER },
 
     {
       type: "heading",

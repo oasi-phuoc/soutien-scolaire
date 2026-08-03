@@ -275,16 +275,6 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         },
       ],
     },
-    {
-      type: "plain_list",
-      label: "Autres verbes du même type :",
-      items: [
-        "comme appeler : épeler, jeter…",
-        "comme acheter : mener, lever, (se) promener…",
-        "comme préférer : espérer, régler, répéter, compléter…",
-      ],
-      allBullets: true,
-    },
   ],
   exercises: [
     {
