@@ -17,6 +17,13 @@ export const A1_GR_CEST: GrammarLesson = {
       items: [
         "{a}Il y a{/a} permet d'indiquer la présence d'une personne ou d'une chose dans un lieu.",
       ],
+      transItems: {
+        en: ["{a}Il y a{/a} is used to indicate the presence of a person or thing in a place."],
+        ar: ["تُستخدم {a}Il y a{/a} للدلالة على وجود شخص أو شيء في مكان ما."],
+        fa: ["از {a}Il y a{/a} برای نشان دادن حضور یک شخص یا وجود یک چیز در مکانی استفاده می‌شود."],
+        ti: ["{a}Il y a{/a} ኣብ ሓደ ቦታ ሰብ ወይ ነገር ከም ዘሎ ንምግላጽ ይጥቀም።"],
+        uk: ["{a}Il y a{/a} вживається, щоб указати на наявність людини або речі в певному місці."],
+      },
     },
     {
       type: "highlight",
@@ -29,6 +36,13 @@ export const A1_GR_CEST: GrammarLesson = {
       items: [
         "{a}C'est{/a} permet d'identifier une personne ou une chose.",
       ],
+      transItems: {
+        en: ["{a}C'est{/a} is used to identify a person or thing."],
+        ar: ["تُستخدم {a}C'est{/a} للتعريف بشخص أو شيء."],
+        fa: ["از {a}C'est{/a} برای شناسایی یک شخص یا چیز استفاده می‌شود."],
+        ti: ["{a}C'est{/a} ሰብ ወይ ነገር ንምልላይ ይጥቀም።"],
+        uk: ["{a}C'est{/a} вживається, щоб ідентифікувати людину або річ."],
+      },
     },
     {
       type: "highlight",
@@ -54,12 +68,26 @@ export const A1_GR_CEST: GrammarLesson = {
     {
       type: "grid",
       headers: ["Singulier", "Pluriel", "Emploi"],
+      transHeaders: {
+        en: ["Singular", "Plural", "Use"],
+        ar: ["المفرد", "الجمع", "الاستخدام"],
+        fa: ["مفرد", "جمع", "کاربرد"],
+        ti: ["ንጽል", "ብዙሕ", "ኣጠቓቕማ"],
+        uk: ["Однина", "Множина", "Вживання"],
+      },
       rows: [
         ["Il y a", "Il y a", "Indiquer la présence"],
         ["C'est", "Ce sont", "Identifier ou présenter"],
         ["Il est", "Ils sont", "Décrire au masculin"],
         ["Elle est", "Elles sont", "Décrire au féminin"],
       ],
+      transRows: {
+        en: [["Il y a", "Il y a", "Indicate presence"], ["C'est", "Ce sont", "Identify or introduce"], ["Il est", "Ils sont", "Describe in the masculine"], ["Elle est", "Elles sont", "Describe in the feminine"]],
+        ar: [["Il y a", "Il y a", "الدلالة على الوجود"], ["C'est", "Ce sont", "التعريف أو التقديم"], ["Il est", "Ils sont", "الوصف بصيغة المذكر"], ["Elle est", "Elles sont", "الوصف بصيغة المؤنث"]],
+        fa: [["Il y a", "Il y a", "نشان دادن وجود"], ["C'est", "Ce sont", "شناسایی یا معرفی"], ["Il est", "Ils sont", "توصیف به صورت مذکر"], ["Elle est", "Elles sont", "توصیف به صورت مؤنث"]],
+        ti: [["Il y a", "Il y a", "ህላወ ምግላጽ"], ["C'est", "Ce sont", "ምልላይ ወይ ምቕራብ"], ["Il est", "Ils sont", "ብተባዕታይ ምግላጽ"], ["Elle est", "Elles sont", "ብኣንስታይ ምግላጽ"]],
+        uk: [["Il y a", "Il y a", "Указати на наявність"], ["C'est", "Ce sont", "Ідентифікувати або представити"], ["Il est", "Ils sont", "Описати в чоловічому роді"], ["Elle est", "Elles sont", "Описати в жіночому роді"]],
+      },
       boldFirstCol: true,
     },
 
@@ -207,6 +235,13 @@ export const A1_GR_CEST: GrammarLesson = {
     {
       type: "grid",
       headers: ["C'est / Ce sont …", "Il est / Ils sont …"],
+      transHeaders: {
+        en: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        ar: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        fa: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        ti: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        uk: ["C'est / Ce sont …", "Il est / Ils sont …"],
+      },
       equalCols: true,
       rows: [
         ["C'est {a}un{/a} professeur.", "Il est {a}professeur{/a}."],

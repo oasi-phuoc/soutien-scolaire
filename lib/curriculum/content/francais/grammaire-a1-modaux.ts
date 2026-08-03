@@ -75,20 +75,48 @@ export const A1_GR_MODAUX: GrammarLesson = {
       items: [
         "Ces verbes expriment un état, une capacité ou une obligation. Ils sont toujours suivis d'un infinitif.",
       ],
+      transItems: {
+        en: ["These verbs express a state, an ability or an obligation. They are always followed by an infinitive."],
+        ar: ["تعبّر هذه الأفعال عن حالة أو قدرة أو التزام. ويتبعها دائماً فعل في المصدر."],
+        fa: ["این فعل‌ها حالت، توانایی یا الزام را بیان می‌کنند. همیشه پس از آن‌ها یک فعل در حالت مصدر می‌آید."],
+        ti: ["እዞም ግሲታት ኩነታት፣ ዓቕሚ ወይ ግዴታ ይገልጹ። ወትሩ መሰረታዊ ግሲ ይስዕቦም።"],
+        uk: ["Ці дієслова виражають стан, здатність або обов'язок. Після них завжди вживається інфінітив."],
+      },
     },
 
     {
       type: "plain_list",
       items: ["{a}Vouloir{/a} sert à exprimer un désir ou une volonté."],
+      transItems: {
+        en: ["{a}Vouloir{/a} is used to express a desire or an intention."],
+        ar: ["يُستخدم {a}Vouloir{/a} للتعبير عن رغبة أو إرادة."],
+        fa: ["{a}Vouloir{/a} برای بیان خواسته یا اراده به کار می‌رود."],
+        ti: ["{a}Vouloir{/a} ድሌት ወይ ፍቓድ ንምግላጽ ይጥቀም።"],
+        uk: ["{a}Vouloir{/a} вживається для вираження бажання або наміру."],
+      },
     },
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      transHeaders: {
+        en: ["Use", "Example"],
+        ar: ["الاستخدام", "مثال"],
+        fa: ["کاربرد", "مثال"],
+        ti: ["ኣጠቓቕማ", "ኣብነት"],
+        uk: ["Вживання", "Приклад"],
+      },
       colWidths: ["15.5rem", "auto"],
       rows: [
         ["Désir", "Je {a}veux{/a} manger une pizza."],
         ["Volonté", "Je {a}veux{/a} apprendre le français."],
       ],
+      transRows: {
+        en: [["Desire", "Je {a}veux{/a} manger une pizza."], ["Intention", "Je {a}veux{/a} apprendre le français."]],
+        ar: [["رغبة", "Je {a}veux{/a} manger une pizza."], ["إرادة", "Je {a}veux{/a} apprendre le français."]],
+        fa: [["خواسته", "Je {a}veux{/a} manger une pizza."], ["اراده", "Je {a}veux{/a} apprendre le français."]],
+        ti: [["ድሌት", "Je {a}veux{/a} manger une pizza."], ["ፍቓድ", "Je {a}veux{/a} apprendre le français."]],
+        uk: [["Бажання", "Je {a}veux{/a} manger une pizza."], ["Намір", "Je {a}veux{/a} apprendre le français."]],
+      },
     },
 
     {
@@ -96,10 +124,24 @@ export const A1_GR_MODAUX: GrammarLesson = {
       items: [
         "{a}Pouvoir{/a} sert à exprimer une capacité, une possibilité, une autorisation ou une interdiction (à la forme négative).",
       ],
+      transItems: {
+        en: ["{a}Pouvoir{/a} is used to express an ability, a possibility, permission or a prohibition (in the negative form)."],
+        ar: ["يُستخدم {a}Pouvoir{/a} للتعبير عن قدرة أو إمكانية أو إذن أو منع (في صيغة النفي)."],
+        fa: ["{a}Pouvoir{/a} برای بیان توانایی، امکان، اجازه یا ممنوعیت (در صورت منفی) به کار می‌رود."],
+        ti: ["{a}Pouvoir{/a} ዓቕሚ፣ ተኽእሎ፣ ፍቓድ ወይ ክልከላ (ብኣሉታዊ ቅርጺ) ንምግላጽ ይጥቀም።"],
+        uk: ["{a}Pouvoir{/a} вживається для вираження здатності, можливості, дозволу або заборони (у заперечній формі)."],
+      },
     },
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      transHeaders: {
+        en: ["Use", "Example"],
+        ar: ["الاستخدام", "مثال"],
+        fa: ["کاربرد", "مثال"],
+        ti: ["ኣጠቓቕማ", "ኣብነት"],
+        uk: ["Вживання", "Приклад"],
+      },
       colWidths: ["15.5rem", "auto"],
       rows: [
         ["Capacité", "Je {a}peux{/a} nager."],
@@ -107,6 +149,13 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ["Autorisation", "Est-ce que je {a}peux{/a} entrer ?"],
         ["Interdiction", "Vous ne {a}pouvez{/a} pas fumer ici."],
       ],
+      transRows: {
+        en: [["Ability", "Je {a}peux{/a} nager."], ["Possibility", "Nous {a}pouvons{/a} partir maintenant."], ["Permission", "Est-ce que je {a}peux{/a} entrer ?"], ["Prohibition", "Vous ne {a}pouvez{/a} pas fumer ici."]],
+        ar: [["قدرة", "Je {a}peux{/a} nager."], ["إمكانية", "Nous {a}pouvons{/a} partir maintenant."], ["إذن", "Est-ce que je {a}peux{/a} entrer ?"], ["منع", "Vous ne {a}pouvez{/a} pas fumer ici."]],
+        fa: [["توانایی", "Je {a}peux{/a} nager."], ["امکان", "Nous {a}pouvons{/a} partir maintenant."], ["اجازه", "Est-ce que je {a}peux{/a} entrer ?"], ["ممنوعیت", "Vous ne {a}pouvez{/a} pas fumer ici."]],
+        ti: [["ዓቕሚ", "Je {a}peux{/a} nager."], ["ተኽእሎ", "Nous {a}pouvons{/a} partir maintenant."], ["ፍቓድ", "Est-ce que je {a}peux{/a} entrer ?"], ["ክልከላ", "Vous ne {a}pouvez{/a} pas fumer ici."]],
+        uk: [["Здатність", "Je {a}peux{/a} nager."], ["Можливість", "Nous {a}pouvons{/a} partir maintenant."], ["Дозвіл", "Est-ce que je {a}peux{/a} entrer ?"], ["Заборона", "Vous ne {a}pouvez{/a} pas fumer ici."]],
+      },
     },
 
     {
@@ -114,10 +163,24 @@ export const A1_GR_MODAUX: GrammarLesson = {
       items: [
         "{a}Devoir{/a} sert à exprimer une obligation, une nécessité, une interdiction (à la forme négative) ou une somme à payer.",
       ],
+      transItems: {
+        en: ["{a}Devoir{/a} is used to express an obligation, a necessity, a prohibition (in the negative form) or an amount to be paid."],
+        ar: ["يُستخدم {a}Devoir{/a} للتعبير عن التزام أو ضرورة أو منع (في صيغة النفي) أو مبلغ يجب دفعه."],
+        fa: ["{a}Devoir{/a} برای بیان الزام، ضرورت، ممنوعیت (در صورت منفی) یا مبلغی برای پرداخت به کار می‌رود."],
+        ti: ["{a}Devoir{/a} ግዴታ፣ ኣድላይነት፣ ክልከላ (ብኣሉታዊ ቅርጺ) ወይ ክኽፈል ዘለዎ ገንዘብ ንምግላጽ ይጥቀም።"],
+        uk: ["{a}Devoir{/a} вживається для вираження обов'язку, необхідності, заборони (у заперечній формі) або суми до сплати."],
+      },
     },
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      transHeaders: {
+        en: ["Use", "Example"],
+        ar: ["الاستخدام", "مثال"],
+        fa: ["کاربرد", "مثال"],
+        ti: ["ኣጠቓቕማ", "ኣብነት"],
+        uk: ["Вживання", "Приклад"],
+      },
       colWidths: ["15.5rem", "auto"],
       rows: [
         ["Obligation", "Je {a}dois{/a} faire mes devoirs."],
@@ -125,6 +188,13 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ["Interdiction", "Tu ne {a}dois{/a} pas courir."],
         ["Somme à payer", "Je vous {a}dois{/a} 20 francs."],
       ],
+      transRows: {
+        en: [["Obligation", "Je {a}dois{/a} faire mes devoirs."], ["Necessity", "Nous {a}devons{/a} partir tôt."], ["Prohibition", "Tu ne {a}dois{/a} pas courir."], ["Amount to be paid", "Je vous {a}dois{/a} 20 francs."]],
+        ar: [["التزام", "Je {a}dois{/a} faire mes devoirs."], ["ضرورة", "Nous {a}devons{/a} partir tôt."], ["منع", "Tu ne {a}dois{/a} pas courir."], ["مبلغ للدفع", "Je vous {a}dois{/a} 20 francs."]],
+        fa: [["الزام", "Je {a}dois{/a} faire mes devoirs."], ["ضرورت", "Nous {a}devons{/a} partir tôt."], ["ممنوعیت", "Tu ne {a}dois{/a} pas courir."], ["مبلغ قابل پرداخت", "Je vous {a}dois{/a} 20 francs."]],
+        ti: [["ግዴታ", "Je {a}dois{/a} faire mes devoirs."], ["ኣድላይነት", "Nous {a}devons{/a} partir tôt."], ["ክልከላ", "Tu ne {a}dois{/a} pas courir."], ["ክኽፈል ዘለዎ ገንዘብ", "Je vous {a}dois{/a} 20 francs."]],
+        uk: [["Обов'язок", "Je {a}dois{/a} faire mes devoirs."], ["Необхідність", "Nous {a}devons{/a} partir tôt."], ["Заборона", "Tu ne {a}dois{/a} pas courir."], ["Сума до сплати", "Je vous {a}dois{/a} 20 francs."]],
+      },
     },
 
     {
@@ -132,15 +202,36 @@ export const A1_GR_MODAUX: GrammarLesson = {
       items: [
         "{a}Il faut{/a} sert à exprimer une nécessité générale ou une interdiction (à la forme négative).",
       ],
+      transItems: {
+        en: ["{a}Il faut{/a} is used to express a general necessity or a prohibition (in the negative form)."],
+        ar: ["تُستخدم {a}Il faut{/a} للتعبير عن ضرورة عامة أو منع (في صيغة النفي)."],
+        fa: ["{a}Il faut{/a} برای بیان ضرورت کلی یا ممنوعیت (در صورت منفی) به کار می‌رود."],
+        ti: ["{a}Il faut{/a} ሓፈሻዊ ኣድላይነት ወይ ክልከላ (ብኣሉታዊ ቅርጺ) ንምግላጽ ይጥቀም።"],
+        uk: ["{a}Il faut{/a} вживається для вираження загальної необхідності або заборони (у заперечній формі)."],
+      },
     },
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      transHeaders: {
+        en: ["Use", "Example"],
+        ar: ["الاستخدام", "مثال"],
+        fa: ["کاربرد", "مثال"],
+        ti: ["ኣጠቓቕማ", "ኣብነት"],
+        uk: ["Вживання", "Приклад"],
+      },
       colWidths: ["15.5rem", "auto"],
       rows: [
         ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."],
         ["Interdiction", "Il ne {a}faut{/a} pas parler pendant l'examen."],
       ],
+      transRows: {
+        en: [["General necessity", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."], ["Prohibition", "Il ne {a}faut{/a} pas parler pendant l'examen."]],
+        ar: [["ضرورة عامة", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."], ["منع", "Il ne {a}faut{/a} pas parler pendant l'examen."]],
+        fa: [["ضرورت کلی", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."], ["ممنوعیت", "Il ne {a}faut{/a} pas parler pendant l'examen."]],
+        ti: [["ሓፈሻዊ ኣድላይነት", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."], ["ክልከላ", "Il ne {a}faut{/a} pas parler pendant l'examen."]],
+        uk: [["Загальна необхідність", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."], ["Заборона", "Il ne {a}faut{/a} pas parler pendant l'examen."]],
+      },
     },
 
     {
@@ -148,15 +239,36 @@ export const A1_GR_MODAUX: GrammarLesson = {
       items: [
         "{a}Savoir{/a} sert à exprimer une connaissance, une compétence ou un savoir-faire.",
       ],
+      transItems: {
+        en: ["{a}Savoir{/a} is used to express knowledge, a skill or know-how."],
+        ar: ["يُستخدم {a}Savoir{/a} للتعبير عن معرفة أو مهارة أو خبرة عملية."],
+        fa: ["{a}Savoir{/a} برای بیان دانش، مهارت یا توانایی عملی به کار می‌رود."],
+        ti: ["{a}Savoir{/a} ፍልጠት፣ ክእለት ወይ ተግባራዊ ፍልጠት ንምግላጽ ይጥቀም።"],
+        uk: ["{a}Savoir{/a} вживається для вираження знання, навички або вміння."],
+      },
     },
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      transHeaders: {
+        en: ["Use", "Example"],
+        ar: ["الاستخدام", "مثال"],
+        fa: ["کاربرد", "مثال"],
+        ti: ["ኣጠቓቕማ", "ኣብነት"],
+        uk: ["Вживання", "Приклад"],
+      },
       colWidths: ["15.5rem", "auto"],
       rows: [
         ["Connaissance", "Je {a}sais{/a} où habite Marie."],
         ["Compétence / savoir-faire", "Elle {a}sait{/a} cuisiner."],
       ],
+      transRows: {
+        en: [["Knowledge", "Je {a}sais{/a} où habite Marie."], ["Skill / know-how", "Elle {a}sait{/a} cuisiner."]],
+        ar: [["معرفة", "Je {a}sais{/a} où habite Marie."], ["مهارة / خبرة عملية", "Elle {a}sait{/a} cuisiner."]],
+        fa: [["دانش", "Je {a}sais{/a} où habite Marie."], ["مهارت / توانایی عملی", "Elle {a}sait{/a} cuisiner."]],
+        ti: [["ፍልጠት", "Je {a}sais{/a} où habite Marie."], ["ክእለት / ተግባራዊ ፍልጠት", "Elle {a}sait{/a} cuisiner."]],
+        uk: [["Знання", "Je {a}sais{/a} où habite Marie."], ["Навичка / уміння", "Elle {a}sait{/a} cuisiner."]],
+      },
     },
 
     {
@@ -183,6 +295,13 @@ export const A1_GR_MODAUX: GrammarLesson = {
       items: [
         "Pour demander quelque chose de façon polie, on utilise souvent {a}Je voudrais{/a} à la place de {a}Je veux{/a}.",
       ],
+      transItems: {
+        en: ["To ask for something politely, {a}Je voudrais{/a} is often used instead of {a}Je veux{/a}."],
+        ar: ["لطلب شيء بأدب، نستخدم غالباً {a}Je voudrais{/a} بدلاً من {a}Je veux{/a}."],
+        fa: ["برای درخواست مؤدبانهٔ چیزی، اغلب به‌جای {a}Je veux{/a} از {a}Je voudrais{/a} استفاده می‌شود."],
+        ti: ["ገለ ነገር ብኣኽብሮት ንምሕታት፣ ኣብ ክንዲ {a}Je veux{/a} መብዛሕትኡ ግዜ {a}Je voudrais{/a} ንጥቀም።"],
+        uk: ["Щоб ввічливо попросити щось, часто вживають {a}Je voudrais{/a} замість {a}Je veux{/a}."],
+      },
     },
     {
       type: "highlight",
@@ -196,6 +315,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
       type: "qcm",
       title: "Pouvoir, vouloir, devoir",
       instruction: "Choisissez la forme correcte.",
+      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
       items: [],
       poolSize: 5,
       pool: [
@@ -217,6 +337,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
       type: "fill",
       title: "Conjuguez le verbe",
       instruction: "Conjuguez le verbe entre parenthèses au présent.",
+      transInstruction: { en: "Conjugate the verb in parentheses in the present tense.", ar: "صرّف الفعل بين القوسين في زمن المضارع.", fa: "فعل داخل پرانتز را در زمان حال صرف کنید.", ti: "ነቲ ኣብ ቅንፍ ዘሎ ግሲ ብህሉው ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках у теперішньому часі." },
       items: [],
       poolSize: 5,
       pool: [

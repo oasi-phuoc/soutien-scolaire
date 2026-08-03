@@ -234,41 +234,54 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       items: [
         "Les verbes avec un infinitif en {a}-re{/a} ou en {a}-oir{/a} ont des conjugaisons très irrégulières. Ils ont un, deux ou trois radicaux. Il y a plusieurs modèles de conjugaison. Les terminaisons sont généralement : {a}s, s, t/d, ons, ez, ent{/a}.",
       ],
+      transItems: {
+        en: ["Verbs with an infinitive ending in {a}-re{/a} or {a}-oir{/a} have very irregular conjugations. They have one, two or three stems. There are several conjugation patterns. The endings are generally: {a}s, s, t/d, ons, ez, ent{/a}."],
+        ar: ["الأفعال التي ينتهي مصدرها بـ {a}-re{/a} أو {a}-oir{/a} لها تصريفات شاذة جداً. ولها جذر واحد أو جذران أو ثلاثة جذور. توجد عدة نماذج للتصريف. والنهايات عموماً هي: {a}s, s, t/d, ons, ez, ent{/a}."],
+        fa: ["فعل‌هایی که مصدرشان به {a}-re{/a} یا {a}-oir{/a} ختم می‌شود، صرف‌های بسیار بی‌قاعده‌ای دارند. آن‌ها یک، دو یا سه بن دارند. چندین الگوی صرف وجود دارد. شناسه‌ها معمولاً عبارت‌اند از: {a}s, s, t/d, ons, ez, ent{/a}."],
+        ti: ["መሰረታዊ ቅርጾም ብ {a}-re{/a} ወይ {a}-oir{/a} ዝውዳእ ግሲታት ኣዝዮም ዘይስሩዕ ምጽራይ ኣለዎም። ሓደ፣ ክልተ ወይ ሰለስተ ሱራት ኣለዎም። ብዙሓት ሞዴላት ምጽራይ ኣለዉ። መወዳእታታቱ ብሓፈሻ፦ {a}s, s, t/d, ons, ez, ent{/a}።"],
+        uk: ["Дієслова з інфінітивом на {a}-re{/a} або {a}-oir{/a} мають дуже неправильні дієвідміни. Вони мають одну, дві або три основи. Існує кілька моделей дієвідміни. Закінчення зазвичай такі: {a}s, s, t/d, ons, ez, ent{/a}."],
+      },
     },
 
     {
       type: "heading",
       text: "Verbe irrégulier",
+      trans: { en: "Irregular verb", ar: "الفعل الشاذ", fa: "فعل بی‌قاعده", ti: "ዘይስሩዕ ግሲ", uk: "Неправильне дієслово" },
     },
     { type: "verb_toggle", buttonCols: 3, verbs: VT_IRREGULIER },
 
     {
       type: "heading",
       text: "Verbes en -dre",
+      trans: { en: "Verbs ending in -dre", ar: "الأفعال المنتهية بـ -dre", fa: "فعل‌های پایان‌یافته به -dre", ti: "ብ -dre ዝውድኡ ግሲታት", uk: "Дієслова на -dre" },
     },
     { type: "verb_toggle", buttonCols: 3, verbs: VT_DRE },
 
     {
       type: "heading",
       text: "Verbes en -ire",
+      trans: { en: "Verbs ending in -ire", ar: "الأفعال المنتهية بـ -ire", fa: "فعل‌های پایان‌یافته به -ire", ti: "ብ -ire ዝውድኡ ግሲታት", uk: "Дієслова на -ire" },
     },
     { type: "verb_toggle", buttonCols: 3, verbs: VT_IRE },
 
     {
       type: "heading",
       text: "Verbes en -oir",
+      trans: { en: "Verbs ending in -oir", ar: "الأفعال المنتهية بـ -oir", fa: "فعل‌های پایان‌یافته به -oir", ti: "ብ -oir ዝውድኡ ግሲታት", uk: "Дієслова на -oir" },
     },
     { type: "verb_toggle", buttonCols: 3, verbs: VT_OIR },
 
     {
       type: "heading",
       text: "Verbes en -indre",
+      trans: { en: "Verbs ending in -indre", ar: "الأفعال المنتهية بـ -indre", fa: "فعل‌های پایان‌یافته به -indre", ti: "ብ -indre ዝውድኡ ግሲታት", uk: "Дієслова на -indre" },
     },
     { type: "verb_toggle", buttonCols: 3, verbs: VT_INDRE },
 
     {
       type: "heading",
       text: "Savoir et connaître",
+      trans: { en: "Savoir and connaître", ar: "Savoir وconnaître", fa: "Savoir و connaître", ti: "Savoirን connaîtreን", uk: "Savoir і connaître" },
     },
     { type: "verb_toggle", buttonCols: 2, verbs: VT_SAVOIR_CONNAITRE },
     {
@@ -276,6 +289,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       text: "SAVOIR ou CONNAÎTRE ?",
       sub: true,
       accent: true,
+      trans: { en: "SAVOIR or CONNAÎTRE?", ar: "SAVOIR أم CONNAÎTRE؟", fa: "SAVOIR یا CONNAÎTRE؟", ti: "SAVOIR ወይ CONNAÎTRE?", uk: "SAVOIR чи CONNAÎTRE?" },
     },
     {
       type: "grid",
@@ -289,6 +303,20 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         ["connaître", "+ lieu / chose", "Elle connaît bien Paris."],
         ["connaître", "+ œuvre / domaine", "Tu connais ce film ?"],
       ],
+      transHeaders: {
+        en: ["Verb", "Usage", "Example"],
+        ar: ["الفعل", "الاستخدام", "مثال"],
+        fa: ["فعل", "کاربرد", "مثال"],
+        ti: ["ግሲ", "ኣጠቓቕማ", "ኣብነት"],
+        uk: ["Дієслово", "Вживання", "Приклад"],
+      },
+      transRows: {
+        en: [["savoir", "+ infinitive (ability)", "Je sais nager."], ["savoir", "+ que / si / où… (fact)", "Je sais qu'il est français."], ["savoir", "+ noun (information)", "Tu sais l'heure ?"], ["connaître", "+ person", "Je connais Marco."], ["connaître", "+ place / thing", "Elle connaît bien Paris."], ["connaître", "+ work / field", "Tu connais ce film ?"]],
+        ar: [["savoir", "+ المصدر (القدرة)", "Je sais nager."], ["savoir", "+ que / si / où… (حقيقة)", "Je sais qu'il est français."], ["savoir", "+ اسم (معلومة)", "Tu sais l'heure ?"], ["connaître", "+ شخص", "Je connais Marco."], ["connaître", "+ مكان / شيء", "Elle connaît bien Paris."], ["connaître", "+ عمل / مجال", "Tu connais ce film ?"]],
+        fa: [["savoir", "+ مصدر (توانایی)", "Je sais nager."], ["savoir", "+ que / si / où… (واقعیت)", "Je sais qu'il est français."], ["savoir", "+ اسم (اطلاعات)", "Tu sais l'heure ?"], ["connaître", "+ شخص", "Je connais Marco."], ["connaître", "+ مکان / چیز", "Elle connaît bien Paris."], ["connaître", "+ اثر / حوزه", "Tu connais ce film ?"]],
+        ti: [["savoir", "+ መሰረታዊ ግሲ (ዓቕሚ)", "Je sais nager."], ["savoir", "+ que / si / où… (ሓቂ)", "Je sais qu'il est français."], ["savoir", "+ ስም (ሓበሬታ)", "Tu sais l'heure ?"], ["connaître", "+ ሰብ", "Je connais Marco."], ["connaître", "+ ቦታ / ነገር", "Elle connaît bien Paris."], ["connaître", "+ ስራሕ / ዓውዲ", "Tu connais ce film ?"]],
+        uk: [["savoir", "+ інфінітив (уміння)", "Je sais nager."], ["savoir", "+ que / si / où… (факт)", "Je sais qu'il est français."], ["savoir", "+ іменник (інформація)", "Tu sais l'heure ?"], ["connaître", "+ особа", "Je connais Marco."], ["connaître", "+ місце / річ", "Elle connaît bien Paris."], ["connaître", "+ твір / галузь", "Tu connais ce film ?"]],
+      },
     },
     {
       type: "highlight",
@@ -297,6 +325,14 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         "{a}Savoir{/a} = un fait, une information, une capacité.",
         "{a}Connaître{/a} = être familier avec une personne, un lieu ou une chose.",
       ],
+      transLabel: { en: "Simple rule", ar: "قاعدة بسيطة", fa: "قاعده ساده", ti: "ቀሊል ሕጊ", uk: "Просте правило" },
+      transItems: {
+        en: ["{a}Savoir{/a} = a fact, information or an ability.", "{a}Connaître{/a} = to be familiar with a person, place or thing."],
+        ar: ["{a}Savoir{/a} = حقيقة أو معلومة أو قدرة.", "{a}Connaître{/a} = معرفة شخص أو مكان أو شيء معرفةً مسبقة."],
+        fa: ["{a}Savoir{/a} = یک واقعیت، اطلاعات یا توانایی.", "{a}Connaître{/a} = با یک شخص، مکان یا چیز آشنا بودن."],
+        ti: ["{a}Savoir{/a} = ሓቂ፣ ሓበሬታ ወይ ዓቕሚ።", "{a}Connaître{/a} = ምስ ሰብ፣ ቦታ ወይ ነገር ዝተላለኻ ምዃን።"],
+        uk: ["{a}Savoir{/a} = факт, інформація або вміння.", "{a}Connaître{/a} = бути знайомим з особою, місцем або річчю."],
+      },
     },
     {
       type: "highlight",
@@ -305,6 +341,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         "On ne dit pas {s}je sais Paris{/s} mais {a}je connais Paris{/a}.",
         "On ne dit pas {s}je connais nager{/s} mais {a}je sais nager{/a}.",
       ],
+      transLabel: { en: "Caution", ar: "تنبيه", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
     },
   ],
   exercises: [
@@ -312,6 +349,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       type: "qcm",
       title: "Verbes en -re et -oir",
       instruction: "Choisissez la forme correcte.",
+      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
       items: [],
       poolSize: 5,
       pool: [
@@ -336,6 +374,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       type: "fill",
       title: "Conjuguez",
       instruction: "Conjuguez le verbe entre parenthèses au présent.",
+      transInstruction: { en: "Conjugate the verb in parentheses in the present tense.", ar: "صرّف الفعل بين القوسين في زمن الحاضر.", fa: "فعل داخل پرانتز را در زمان حال صرف کنید.", ti: "ነቲ ኣብ ቅንፍ ዘሎ ግሲ ኣብ ህሉው ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках у теперішньому часі." },
       items: [],
       poolSize: 5,
       pool: [
