@@ -14,57 +14,30 @@ export const A1_GR_CEST: GrammarLesson = {
     },
     {
       type: "plain_list",
-      label: "On utilise il y a et c'est pour :",
       items: [
-        "indiquer la présence d'une personne ou d'une chose dans un lieu. → Il y a beaucoup de photos.",
-        "identifier une personne ou une chose. → C'est mon cousin.",
+        "{a}Il y a{/a} permet d'indiquer la présence d'une personne ou d'une chose dans un lieu.",
       ],
-      allBullets: true,
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["{a}Il y a{/a} beaucoup de photos."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}C'est{/a} permet d'identifier une personne ou une chose.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["{a}C'est{/a} mon cousin."],
+      noBulletItems: [0],
     },
 
-    {
-      type: "heading",
-      text: "Structures",
-      sub: true,
-      trans: { en: "Structures", ar: "التراكيب", fa: "ساختارها", ti: "አቃቅም", uk: "Структури" },
-    },
-    {
-      type: "highlight",
-      label: "Il y a + nom singulier ou pluriel",
-      items: [
-        "Cette structure indique la présence d'une personne ou d'une chose dans un lieu. Les noms s'emploient avec un déterminant (article).",
-        "Sur la tablette, {a}il y a{/a} des photos.",
-        "Sur la photo, {a}il y a{/a} un garçon.",
-      ],
-      noBulletItems: [1, 2],
-    },
-    {
-      type: "highlight",
-      label: "C'est + nom singulier / Ce sont + nom pluriel",
-      items: [
-        "Ces structures servent à identifier une personne, indiquer une profession ou présenter une chose. Les noms s'emploient avec un déterminant.",
-        "Julien, {a}c'est{/a} l'ami d'Élodie.",
-        "Claire et Paul, {a}ce sont{/a} des informaticiens.",
-        "{a}C'est{/a} un jardin public.",
-      ],
-      noBulletItems: [1, 2, 3],
-    },
-    {
-      type: "highlight",
-      label: "Il/Elle est + nom singulier / Ils/Elles sont + nom pluriel",
-      items: [
-        "Ces structures servent à indiquer une profession. Les noms s'emploient {a}sans{/a} déterminant.",
-        "{a}Elle est{/a} médecin.",
-        "{a}Elles sont{/a} employées de bureau.",
-      ],
-      noBulletItems: [1, 2],
-    },
-    {
-      type: "note",
-      text: "Devant un adjectif masculin : commentaire général → c'est (Regarder des photos, c'est super !). Commentaire sur une chose précise → il est (Ce dessin, il est super !).",
-    },
-
-    // ── Intro ──────────────────────────────────────────────────────────────────
+    // ── Intro + tableau ───────────────────────────────────────────────────────
     {
       type: "plain_list",
       items: [
@@ -78,12 +51,11 @@ export const A1_GR_CEST: GrammarLesson = {
         uk: ["Вирази {a}c'est{/a} та {a}il est{/a} обидва служать для представлення або опису когось чи чогось, але вживаються по-різному."],
       },
     },
-
-    // ── C'EST ──────────────────────────────────────────────────────────────────
     {
       type: "grid",
       headers: ["Singulier", "Pluriel", "Emploi"],
       rows: [
+        ["Il y a", "Il y a", "Indiquer la présence"],
         ["C'est", "Ce sont", "Identifier ou présenter"],
         ["Il est", "Ils sont", "Décrire au masculin"],
         ["Elle est", "Elles sont", "Décrire au féminin"],
