@@ -10,21 +10,21 @@ import {
 } from "./g1-exercise-builders";
 
 const TAILS_ER = [
-  " français.",
-  " à Genève.",
-  " la radio.",
-  " une pomme.",
-  " au football.",
+  " souvent.",
   " le matin.",
-  " en ville.",
   " avec des amis.",
   " le week-end.",
-  " à Paris.",
-  " la télé.",
-  " du café.",
-  " souvent.",
+  " en ville.",
   " à l'école.",
   " le soir.",
+  " ici.",
+  " ensemble.",
+  " tous les jours.",
+  " un peu.",
+  " beaucoup.",
+  " maintenant.",
+  " après les cours.",
+  " en famille.",
 ];
 
 const TAILS_ETRE = [
