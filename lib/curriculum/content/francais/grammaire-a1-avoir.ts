@@ -9,8 +9,8 @@ export const A1_GR_AVOIR: GrammarLesson = {
   theory: [
     {
       type: "heading",
-      text: "AVOIR",
-      trans: { en: "TO HAVE", ar: "يملك", fa: "داشتن", ti: "ምሓዝ", uk: "AVOIR" },
+      text: "Utilisation",
+      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
     },
     {
       type: "plain_list",
@@ -33,27 +33,6 @@ export const A1_GR_AVOIR: GrammarLesson = {
         ["Âge", "Elle {a}a{/a} 25 ans."],
         ["Sensations", "Nous {a}avons{/a} faim."],
         ["Expressions", "Il {a}a{/a} de la chance."],
-      ],
-    },
-    {
-      type: "heading",
-      text: "Expressions avec AVOIR",
-      sub: true,
-      accent: true,
-    },
-    {
-      type: "grid",
-      headers: ["Expression", "Signification"],
-      equalCols: true,
-      rows: [
-        ["{a}Avoir faim{/a}", "vouloir manger"],
-        ["{a}Avoir soif{/a}", "vouloir boire"],
-        ["{a}Avoir froid{/a}", "ressentir le froid"],
-        ["{a}Avoir chaud{/a}", "ressentir la chaleur"],
-        ["{a}Avoir peur{/a}", "être effrayé(e)"],
-        ["{a}Avoir mal{/a}", "ressentir une douleur"],
-        ["{a}Avoir raison{/a}", "être correct(e)"],
-        ["{a}Avoir tort{/a}", "se tromper"],
       ],
     },
     {
@@ -81,12 +60,55 @@ export const A1_GR_AVOIR: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: [
-        "On ne prononce pas le {a}e{/a} final de {a}elle{/a}. → Elle a 10 ans.",
-        "On fait la liaison. → O{li}n|a{/li}, nou{li}s|a{/li}vons, vou{li}s|a{/li}vez, il{li}s|o{/li}nt, elle{li}s|o{/li}nt.",
-        "Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle. → {s}Je ai{/s} → {a}J'ai{/a} 20 ans.",
+      items: ["On ne prononce pas le {a}e{/a} final de {a}elle{/a}."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Elle a 10 ans."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["On fait la liaison."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["O{li}n|a{/li}, nou{li}s|a{/li}vons, vou{li}s|a{/li}vez, il{li}s|o{/li}nt, elle{li}s|o{/li}nt."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["{s}Je ai{/s} → {a}J'ai{/a} 20 ans."],
+      noBulletItems: [0],
+      inlineArrows: true,
+    },
+    {
+      type: "heading",
+      text: "Expressions avec AVOIR",
+      sub: true,
+      accent: true,
+    },
+    {
+      type: "grid",
+      headers: ["Expression", "Signification"],
+      equalCols: true,
+      rows: [
+        ["{a}Avoir faim{/a}", "vouloir manger"],
+        ["{a}Avoir soif{/a}", "vouloir boire"],
+        ["{a}Avoir froid{/a}", "ressentir le froid"],
+        ["{a}Avoir chaud{/a}", "ressentir la chaleur"],
+        ["{a}Avoir peur{/a}", "être effrayé(e)"],
+        ["{a}Avoir mal{/a}", "ressentir une douleur"],
+        ["{a}Avoir raison{/a}", "être correct(e)"],
+        ["{a}Avoir tort{/a}", "se tromper"],
       ],
-      allBullets: true,
     },
   ],
   exercises: [
