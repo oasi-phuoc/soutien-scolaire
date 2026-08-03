@@ -14,40 +14,123 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      label: "Le présent de l'indicatif est utilisé pour :",
       items: [
-        "parler d'une action qui se passe au moment où l'on parle. → Vous regardez la télévision en ce moment ?",
-        "parler d'une action habituelle. → Tous les matins, je regarde mes mails.",
-        "faire une description générale au présent, ou exprimer des goûts et des idées. → Vous habitez à Paris ? Tu aimes danser ?",
+        "Les verbes en {a}-er{/a} sont les verbes les plus fréquents en français. Ils font partie du 1er groupe. Le présent de l'indicatif est utilisé pour :",
       ],
-      allBullets: true,
     },
     {
+      type: "plain_list",
+      items: ["parler d'une action qui se passe au moment où l'on parle."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Vous regardez la télévision en ce moment ?"],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["parler d'une action habituelle."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Tous les matins, je regarde mes mails."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["faire une description générale au présent, ou exprimer des goûts et des idées."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Vous habitez à Paris ? Tu aimes danser ?"],
+      noBulletItems: [0],
+    },
+
+    {
       type: "heading",
-      text: "Conjugaison",
-      trans: { en: "Conjugation", ar: "التصريف", fa: "صرف", ti: "ምጽራይ", uk: "Дієвідміна" },
+      text: "Comment former le verbe ?",
+      trans: { en: "How to form the verb?", ar: "كيف تصرّف الفعل؟", fa: "چگونه فعل را صرف کنیم؟", ti: "ግሲ ብኸመይ ትሰርሕ?", uk: "Як утворити дієслово?" },
     },
     {
       type: "plain_list",
       items: [
-        "La majorité des verbes français ont un infinitif en {a}-er{/a}.",
-        "On ajoute les terminaisons {a}e, es, e, ons, ez, ent{/a} au radical du verbe.",
+        "En général, les verbes en {a}-er{/a} ont une base verbale. On ajoute la terminaison {a}e, es, e, ons, ez, ent{/a} à cette base.",
       ],
-      allBullets: true,
     },
     {
       type: "grid",
       headers: ["Infinitif", "Pronom", "Verbe", "Complément"],
       boldFirstCol: true,
       rows: [
-        ["regard{a}er{/a}", "Je", "regard{a}e{/a}", "mes mails."],
-        ["écout{a}er{/a}", "Tu", "écout{a}es{/a}", "la radio."],
-        ["habit{a}er{/a}", "Il / Elle / On", "habit{a}e{/a}", "à Paris."],
-        ["parl{a}er{/a}", "Nous", "parl{a}ons{/a}", "français."],
-        ["jou{a}er{/a}", "Vous", "jou{a}ez{/a}", "au football."],
-        ["étudi{a}er{/a}", "Ils / Elles", "étudi{a}ent{/a}", "les relations internationales."],
+        ["regarder", "Je", "regarde", "mes mails."],
+        ["écouter", "Tu", "écoutes", "la radio."],
+        ["habiter", "Il / Elle / On", "habite", "à Paris."],
+        ["parler", "Nous", "parlons", "français."],
+        ["jouer", "Vous", "jouez", "au football."],
+        ["étudier", "Ils / Elles", "étudient", "les relations internationales."],
       ],
     },
+    {
+      type: "plain_list",
+      items: ["On prend le verbe et on enlève {a}-er{/a}."],
+    },
+    {
+      type: "verb_toggle",
+      verbs: [
+        {
+          infinitive: "parler",
+          radical: "parl",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "aimer",
+          radical: "aim",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "écouter",
+          radical: "écout",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "habiter",
+          radical: "habit",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+      ],
+    },
+
     {
       type: "heading",
       text: "Prononciation et orthographe",
@@ -57,7 +140,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       type: "plain_list",
       items: [
         "On prononce la consonne finale du radical, mais on ne prononce pas les terminaisons {a}-e, -es, -ent{/a}.",
-        "On fait la liaison. → On aime, nous écoutons, vous étudiez, ils habitent, elles oublient.",
+        "On fait la liaison. → O{li}n|a{/li}ime, nou{li}s|é{/li}coutons, vou{li}s|é{/li}tudiez, il{li}s|h{/li}abitent, elle{li}s|o{/li}ublient.",
         "Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle ou un h muet. → {s}Je aime{/s} → {a}J'aime{/a} ma ville. / {s}Je habite{/s} → {a}J'habite{/a} à Paris.",
       ],
       allBullets: true,

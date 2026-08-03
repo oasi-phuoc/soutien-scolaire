@@ -57,6 +57,42 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       trans: { en: "Verbs in -ayer, -oyer and -uyer", ar: "أفعال -ayer / -oyer / -uyer", fa: "افعال -ayer / -oyer / -uyer", ti: "ግሲያት -ayer / -oyer / -uyer", uk: "Дієслова на -ayer, -oyer і -uyer" },
     },
     {
+      type: "plain_list",
+      items: [
+        "Le {a}y{/a} devient {a}i{/a} devant une terminaison muette (je, tu, il, ils).",
+        "Avec {a}je, tu, il/elle/on, ils/elles{/a}, le {a}y{/a} du radical est remplacé par un {a}i{/a}.",
+        "Les verbes en {a}-ayer{/a} ont deux orthographes possibles (paie / paye).",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "verb_toggle",
+      verbs: [
+        {
+          infinitive: "payer", radical: "pay",
+          rows: [
+            { pronoun: "je", ending: "e", radical: "pai" },
+            { pronoun: "tu", ending: "es", radical: "pai" },
+            { pronoun: "il / elle / on", ending: "e", radical: "pai" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent", radical: "pai" },
+          ],
+        },
+        {
+          infinitive: "nettoyer", radical: "nettoy",
+          rows: [
+            { pronoun: "je", ending: "e", radical: "nettoi" },
+            { pronoun: "tu", ending: "es", radical: "nettoi" },
+            { pronoun: "il / elle / on", ending: "e", radical: "nettoi" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent", radical: "nettoi" },
+          ],
+        },
+      ],
+    },
+    {
       type: "grid",
       headers: ["Pronom", "Payer", "Envoyer", "S'ennuyer"],
       boldFirstCol: true,
@@ -69,19 +105,73 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         ["Ils / Elles", "paient / payent", "envoient", "s'ennuient"],
       ],
     },
-    {
-      type: "plain_list",
-      items: [
-        "Avec {a}je, tu, il/elle/on, ils/elles{/a}, le {a}y{/a} du radical est remplacé par un {a}i{/a}.",
-        "Les verbes en {a}-ayer{/a} ont deux orthographes possibles (paie / paye).",
-      ],
-      allBullets: true,
-    },
 
     {
       type: "heading",
       text: "Verbes en -ger et -cer",
       trans: { en: "Verbs in -ger and -cer", ar: "أفعال -ger / -cer", fa: "افعال -ger / -cer", ti: "ግሲያት -ger / -cer", uk: "Дієслова на -ger і -cer" },
+    },
+    {
+      type: "plain_list",
+      items: ["On ajoute {a}e{/a} après le {a}g{/a} à la forme {a}nous{/a} pour garder le son [ʒ]."],
+    },
+    {
+      type: "verb_toggle",
+      verbs: [
+        {
+          infinitive: "manger", radical: "mang",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons", radical: "mange" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "voyager", radical: "voyag",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons", radical: "voyage" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "plain_list",
+      items: ["Le {a}c{/a} devient {a}ç{/a} devant {a}o{/a} à la forme {a}nous{/a} pour garder le son [s]."],
+    },
+    {
+      type: "verb_toggle",
+      verbs: [
+        {
+          infinitive: "commencer", radical: "commenc",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons", radical: "commenç" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "avancer", radical: "avanc",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons", radical: "avanç" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+      ],
     },
     {
       type: "grid",
@@ -111,8 +201,37 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       items: [
         "Avec {a}je, tu, il/elle/on, ils/elles{/a}, ces verbes ont une particularité orthographique qui change la prononciation.",
         "Ils ont deux radicaux : le 1er (comme l'infinitif) pour {a}nous{/a} et {a}vous{/a} ; le 2e (modifié) pour les autres personnes.",
+        "Les verbes comme {a}jeter{/a} doublent le {a}t{/a} devant une terminaison muette.",
+        "Les verbes comme {a}appeler{/a} doublent le {a}l{/a} devant une terminaison muette.",
       ],
       allBullets: true,
+    },
+    {
+      type: "verb_toggle",
+      verbs: [
+        {
+          infinitive: "jeter", radical: "jet",
+          rows: [
+            { pronoun: "je", ending: "e", radical: "jett" },
+            { pronoun: "tu", ending: "es", radical: "jett" },
+            { pronoun: "il / elle / on", ending: "e", radical: "jett" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent", radical: "jett" },
+          ],
+        },
+        {
+          infinitive: "appeler", radical: "appel",
+          rows: [
+            { pronoun: "j'", ending: "e", radical: "appell" },
+            { pronoun: "tu", ending: "es", radical: "appell" },
+            { pronoun: "il / elle / on", ending: "e", radical: "appell" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent", radical: "appell" },
+          ],
+        },
+      ],
     },
     {
       type: "grid",
