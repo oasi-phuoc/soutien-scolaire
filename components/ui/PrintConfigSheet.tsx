@@ -97,6 +97,11 @@ export interface ExercisePrintSelection {
   columns: PrintExerciseColumns;
   /** Espacement vertical entre les questions (1 = serré … 5 = aéré, 3 = défaut). */
   spacing: number;
+  /**
+   * Force un saut de page avant cet exercice.
+   * Défaut `false` — sauf si l’exercice catalogue a déjà `forceNewPage`.
+   */
+  pageBreak: boolean;
   points: number;
 }
 
@@ -719,6 +724,7 @@ export function PrintConfigSheet({
       questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
       columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
       spacing: 3,
+      pageBreak: Boolean(ex.forceNewPage),
       points: Math.max(1, ex.defaultPoints ?? 1),
     }))
   );
@@ -1180,6 +1186,20 @@ export function PrintConfigSheet({
                             />
                           </div>
                         )}
+                        {sel.occurrences > 0 && (
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="text-xs text-[var(--color-text-secondary)]">Saut de page</span>
+                            <CheckBox
+                              checked={sel.pageBreak}
+                              onChange={(pageBreak) =>
+                                setSelection((prev) =>
+                                  prev.map((s) => (s.id === ex.id ? { ...s, pageBreak } : s)),
+                                )
+                              }
+                              accent={accentColor}
+                            />
+                          </div>
+                        )}
                         {evalMode && sel.occurrences > 0 && (
                           <div className="flex items-center justify-between gap-3">
                             <span className="text-xs text-[var(--color-text-secondary)]">Points</span>
@@ -1307,7 +1327,12 @@ export function PrintConfigSheet({
                   const sectionNodes: { key: string; node: ReactNode; forceNewPage?: boolean }[] = [];
                   const isCorrectionSection = Boolean(block.title);
                   /** Packing par défaut ; saut seulement si opt-in ou 1er exo après l’annonce. */
-                  const exerciseBreak = (exercise: PrintExercise | undefined, index: number) => {
+                  const exerciseBreak = (
+                    exercise: PrintExercise | undefined,
+                    index: number,
+                    sel: ExercisePrintSelection,
+                  ) => {
+                    if (sel.pageBreak) return true;
                     if (exercise?.forceNewPage === true) return true;
                     if (index === 0 && theory && Boolean(announcementPreview) && !isCorrectionSection) {
                       return true;
@@ -1484,7 +1509,7 @@ export function PrintConfigSheet({
 
                     sectionNodes.push({
                       key: item.key,
-                      forceNewPage: exerciseBreak(exercise, index),
+                      forceNewPage: exerciseBreak(exercise, index, item.selection),
                       node: (
                         <div className="print-exercise">
                           <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>

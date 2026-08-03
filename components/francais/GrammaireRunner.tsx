@@ -35,6 +35,7 @@ import {
   CORRECTION_INLINE_STRIKE,
   CORRECTION_MATCH_WRONG,
 } from "@/components/correction-styles";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -700,10 +701,12 @@ function QcmExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.poolSize ?? (exercise.pool?.length ? 5 : exercise.items.length || 5);
+  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     const raw = exercise.pool && exercise.pool.length > 0
-      ? sampleFromPool(exercise.pool, exercise.poolSize ?? 5)
-      : exercise.items;
+      ? sampleFromPool(exercise.pool, questionCount)
+      : exercise.items.slice(0, questionCount);
     if (exercise.toggleChoices) return raw;
     return raw.map(item => {
       const indexed = item.choices.map((c, i) => ({ c, isCorrect: i === item.correctIdx }));
@@ -756,6 +759,7 @@ function QcmExercise({
       <div>
         <p className="text-sm text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>{translatedInstruction ?? exercise.instruction}</p>
       </div>
+      <div className={listClass}>
       {items.map((item: QcmItem, i) => {
         const hasInlineToggle = exercise.toggleChoices && item.sentence.includes(" → ");
         const arrowPos = hasInlineToggle ? item.sentence.indexOf(" → ") : -1;
@@ -880,6 +884,7 @@ function QcmExercise({
           </div>
         );
       })}
+      </div>
     </div>
   );
 }
@@ -936,12 +941,13 @@ function FillExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.poolSize ?? (exercise.pool?.length ? 5 : exercise.items.length || 5);
+  const { questionCount, columns, listClass } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
-      const size = exercise.poolSize ?? 5;
-      return sampleFromPool(exercise.pool, size);
+      return sampleFromPool(exercise.pool, questionCount);
     }
-    return exercise.items;
+    return exercise.items.slice(0, questionCount);
   });
   const [inputs, setInputs] = useState<string[]>(
     () => new Array(items.length).fill(""),
@@ -984,7 +990,7 @@ function FillExercise({
     ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
     : undefined;
 
-  const twoCols = /^Exercice\s*[12]\b/i.test(exercise.title);
+  const twoCols = columns >= 2 || /^Exercice\s*[12]\b/i.test(exercise.title);
 
   const renderTextWithVerbHint = (s: string) =>
     s.split(/(\([^)]+\))/g).map((chunk, ci) =>
@@ -1002,7 +1008,7 @@ function FillExercise({
       <div>
         <p className="text-sm text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>{translatedInstruction ?? exercise.instruction}</p>
       </div>
-      <div className={twoCols ? "grid gap-x-8 gap-y-4 lg:grid-cols-2" : "space-y-5"}>
+      <div className={columns >= 2 ? listClass : twoCols ? "grid gap-x-8 gap-y-4 lg:grid-cols-2" : listClass}>
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
         const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
@@ -1092,11 +1098,13 @@ function FillSelectExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.poolSize ?? (exercise.pool?.length ? 5 : exercise.items.length || 5);
+  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
   const [items] = useState<FillItem[]>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
-      return shuffle(exercise.pool).slice(0, exercise.poolSize ?? 5);
+      return shuffle(exercise.pool).slice(0, questionCount);
     }
-    return exercise.items;
+    return exercise.items.slice(0, questionCount);
   });
   const [selected, setSelected] = useState<string[]>(() => new Array(items.length).fill(""));
   const [validated, setValidated] = useState(false);
@@ -1159,7 +1167,7 @@ function FillSelectExercise({
 
       {letterSelect ? (
         // ── Letter-select mode (like vocab Ex5): sentence on left, letter select on right ──
-        <div className="space-y-2">
+        <div className={listClass}>
           {items.map((item, i) => {
             const userLetter = selected[i] ?? "";
             const correctLetter = correctLetterForItem(item);
@@ -1201,7 +1209,7 @@ function FillSelectExercise({
         </div>
       ) : (
         // ── Word-select mode (like vocab Ex6): select inline in sentence ──
-        <div className="space-y-4">
+        <div className={listClass}>
           {items.map((item, i) => {
             const userAnswer = selected[i] ?? "";
             const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
@@ -1257,8 +1265,10 @@ function ClockReadExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const { questionCount, listClass } = usePrintQuestionLayout(exercise.clocks.length);
+  const [clocks] = useState(() => exercise.clocks.slice(0, questionCount));
   const [inputs, setInputs] = useState<string[]>(
-    () => new Array(exercise.clocks.length).fill(""),
+    () => new Array(clocks.length).fill(""),
   );
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
@@ -1275,7 +1285,7 @@ function ClockReadExercise({
   function validate() {
     if (validated) return;
     setValidated(true);
-    const allCorrect = exercise.clocks.every(
+    const allCorrect = clocks.every(
       (clk, i) => normalizeAnswer(inputs[i] ?? "") === normalizeAnswer(clk.answer),
     );
     onValidated(allCorrect);
@@ -1293,8 +1303,8 @@ function ClockReadExercise({
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {exercise.clocks.map((clk, i) => {
+      <div className={listClass === "space-y-4" ? "grid grid-cols-2 gap-3 sm:grid-cols-4" : listClass}>
+        {clocks.map((clk, i) => {
           const userAnswer = inputs[i] ?? "";
           const correct = normalizeAnswer(userAnswer) === normalizeAnswer(clk.answer);
           return (
@@ -1360,10 +1370,12 @@ function MatchExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.poolSize ?? (exercise.pool?.length ? 8 : exercise.pairs.length);
+  const { questionCount } = usePrintQuestionLayout(fallback);
   const [pairs] = useState<MatchPair[]>(() => {
     const raw = exercise.pool && exercise.pool.length > 0
-      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 8)
-      : exercise.pairs;
+      ? shuffle(exercise.pool).slice(0, questionCount)
+      : exercise.pairs.slice(0, questionCount);
     return raw;
   });
   const [rightItems] = useState<{ pair: MatchPair; origIdx: number }[]>(() =>
@@ -1591,24 +1603,26 @@ function WriteExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.verbPoolSize ?? exercise.promptPoolSize ?? exercise.prompts?.length ?? 5;
+  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
   const [activeVerbs] = useState<string[]>(() => {
     if (!exercise.verbPool?.length) return [];
-    return shuffle([...exercise.verbPool]).slice(0, exercise.verbPoolSize ?? 5);
+    return shuffle([...exercise.verbPool]).slice(0, questionCount);
   });
   const [[resolvedWriteImage, displayedPrompts]] = useState<[string | null, string[]]>(() => {
     if (exercise.imagePool?.length) {
       const group = exercise.imagePool[Math.floor(Math.random() * exercise.imagePool.length)]!;
-      return [group.image, shuffle([...group.promptPool]).slice(0, exercise.promptPoolSize ?? 5)];
+      return [group.image, shuffle([...group.promptPool]).slice(0, questionCount)];
     }
     if (exercise.promptPool?.length) {
-      return [null, shuffle([...exercise.promptPool]).slice(0, exercise.promptPoolSize ?? 5)];
+      return [null, shuffle([...exercise.promptPool]).slice(0, questionCount)];
     }
     if (exercise.levelPromptPools) {
       const levelled = (Object.entries(exercise.levelPromptPools) as Array<["A1" | "A2" | "B1", string[]]>)
         .flatMap(([difficulty, prompts]) => prompts.map((prompt) => ({ prompt, difficulty })));
-      return [null, shuffle(levelled).slice(0, exercise.promptPoolSize ?? 5).map((item) => item.prompt)];
+      return [null, shuffle(levelled).slice(0, questionCount).map((item) => item.prompt)];
     }
-    return [null, exercise.prompts ?? []];
+    return [null, (exercise.prompts ?? []).slice(0, questionCount)];
   });
   const promptCount = activeVerbs.length > 0 ? activeVerbs.length : displayedPrompts.length;
   const [inputs, setInputs] = useState<string[]>(() => new Array(promptCount).fill(""));
@@ -1721,6 +1735,7 @@ function WriteExercise({
         <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
       )}
 
+      <div className={listClass}>
       {Array.from({ length: promptCount }, (_, i) => {
         const perVerb = activeVerbs[i];
         const ltErrors = grammarErrors[i] ?? [];
@@ -1809,6 +1824,7 @@ function WriteExercise({
           </div>
         );
       })}
+      </div>
     </div>
   );
 }
@@ -1826,9 +1842,11 @@ function TrueFalseExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.poolSize ?? (exercise.items.length || 5);
+  const { questionCount } = usePrintQuestionLayout(fallback);
   const [resolved] = useState<{ image: string | null; items: { statement: string; answer: boolean }[] }>(() => {
-    const total = exercise.poolSize ?? 5;
-    const trueCount = Math.random() < 0.5 ? 2 : 3;
+    const total = questionCount;
+    const trueCount = Math.min(Math.max(1, Math.floor(total / 2) + (Math.random() < 0.5 ? 0 : 1)), total - 1);
     const falseCount = total - trueCount;
 
     if (exercise.imagePool && exercise.imagePool.length > 0) {
@@ -1838,7 +1856,7 @@ function TrueFalseExercise({
       const picked = shuffle([...trueItems, ...falseItems]);
       return { image: group.image, items: picked };
     }
-    return { image: null, items: exercise.items };
+    return { image: null, items: exercise.items.slice(0, total) };
   });
 
   const items = resolved.items;
@@ -1929,10 +1947,12 @@ function OrderExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const { questionCount, listClass } = usePrintQuestionLayout(exercise.items.length);
+  const [items] = useState(() => exercise.items.slice(0, questionCount));
   const [pools, setPools] = useState<string[][]>(() =>
-    exercise.items.map((item) => shuffle(item.sentence.split(" "))),
+    items.map((item) => shuffle(item.sentence.split(" "))),
   );
-  const [builts, setBuilts] = useState<string[][]>(() => exercise.items.map(() => []));
+  const [builts, setBuilts] = useState<string[][]>(() => items.map(() => []));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1944,7 +1964,7 @@ function OrderExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(builts.every((b, i) => b.join(" ") === exercise.items[i]!.sentence));
+      onValidated(builts.every((b, i) => b.join(" ") === items[i]!.sentence));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -1966,7 +1986,8 @@ function OrderExercise({
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      {exercise.items.map((item, i) => {
+      <div className={listClass}>
+      {items.map((item, i) => {
         const built = builts[i]!;
         const pool = pools[i]!;
         const correct = built.join(" ") === item.sentence;
@@ -2016,6 +2037,7 @@ function OrderExercise({
           </div>
         );
       })}
+      </div>
     </div>
   );
 }
@@ -2033,10 +2055,12 @@ function ClassifyExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.poolSize ?? (exercise.pool?.length ? 8 : exercise.items.length);
+  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     const raw = exercise.pool && exercise.pool.length > 0
-      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 8)
-      : exercise.items;
+      ? shuffle(exercise.pool).slice(0, questionCount)
+      : exercise.items.slice(0, questionCount);
     return shuffle(raw);
   });
   const [chosen, setChosen] = useState<(number | null)[]>(() => new Array(items.length).fill(null));
@@ -2059,7 +2083,7 @@ function ClassifyExercise({
   return (
     <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      <div className="space-y-4">
+      <div className={listClass}>
         {items.map((item, i) => {
           const sel = chosen[i];
           const isRight = sel === item.categoryIdx;
@@ -2121,11 +2145,13 @@ function WordOrderExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const fallback = exercise.poolSize ?? (exercise.pool?.length ?? exercise.items.length);
+  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
   const [activeItems] = useState(() => {
     if (exercise.pool?.length) {
-      return shuffle([...exercise.pool]).slice(0, exercise.poolSize ?? exercise.pool.length);
+      return shuffle([...exercise.pool]).slice(0, questionCount);
     }
-    return exercise.items;
+    return exercise.items.slice(0, questionCount);
   });
   const [states] = useState(() =>
     activeItems.map((item) => {
@@ -2171,6 +2197,7 @@ function WordOrderExercise({
   return (
     <div className="space-y-6">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <div className={listClass}>
       {states.map((item, qi) => {
         const arr = arranged[qi]!;
         const pool = pools[qi]!;
@@ -2225,6 +2252,7 @@ function WordOrderExercise({
           </div>
         );
       })}
+      </div>
     </div>
   );
 }
@@ -2248,9 +2276,11 @@ function ColorHighlightExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const { questionCount, listClass } = usePrintQuestionLayout(exercise.items.length);
+  const [items] = useState(() => exercise.items.slice(0, questionCount));
   const [activeColor, setActiveColor] = useState<number>(0);
   const [colored, setColored] = useState<(number | null)[][]>(() =>
-    exercise.items.map((item) => new Array(item.words.length).fill(null)),
+    items.map((item) => new Array(item.words.length).fill(null)),
   );
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
@@ -2264,7 +2294,7 @@ function ColorHighlightExercise({
     if (validateCommand > 0 && !validated) {
       setValidated(true);
       const allCorrect = colored.every((row, qi) =>
-        exercise.items[qi]!.answers.every((ans, wi) => ans === null || row[wi] === ans),
+        items[qi]!.answers.every((ans, wi) => ans === null || row[wi] === ans),
       );
       onValidated(allCorrect);
     }
@@ -2308,8 +2338,8 @@ function ColorHighlightExercise({
       </div>
 
       {/* Sentences */}
-      <div className="space-y-4">
-        {exercise.items.map((item, qi) => {
+      <div className={listClass}>
+        {items.map((item, qi) => {
           const row = colored[qi]!;
           const itemCorrect = !validated || !revealCorrection || item.answers.every((ans, wi) => ans === null || row[wi] === ans);
           return (
@@ -2414,8 +2444,9 @@ function Tag2Exercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const { questionCount, listClass } = usePrintQuestionLayout(exercise.poolSize ?? 10);
   const [items] = useState(() =>
-    shuffle([...exercise.pool]).slice(0, exercise.poolSize ?? 10),
+    shuffle([...exercise.pool]).slice(0, questionCount),
   );
   const [answers, setAnswers] = useState<{ n: "S" | "P" | null; g: "M" | "F" | null }[]>(() =>
     items.map(() => ({ n: null, g: null })),
@@ -2444,7 +2475,7 @@ function Tag2Exercise({
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      <div className="space-y-1">
+      <div className={listClass === "space-y-4" ? "space-y-1" : listClass}>
         {items.map((item, i) => {
           const ans = answers[i]!;
           const nWrong = validated && revealCorrection && ans.n !== item.number;

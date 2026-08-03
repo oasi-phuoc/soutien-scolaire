@@ -305,6 +305,7 @@ export function ImpressionHubClient() {
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
         columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
         spacing: 3,
+        pageBreak: Boolean(ex.forceNewPage),
         points: Math.max(1, ex.defaultPoints ?? 1),
       })),
     );
@@ -698,6 +699,16 @@ export function ImpressionHubClient() {
                                 onChange={(spacing) => patchSelection(ex.id, { spacing })}
                               />
                             </div>
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-xs text-[var(--color-text-secondary)]">
+                                Saut de page
+                              </span>
+                              <CheckBox
+                                checked={sel.pageBreak}
+                                onChange={(pageBreak) => patchSelection(ex.id, { pageBreak })}
+                                accent={accent}
+                              />
+                            </div>
                             {evalMode && (
                               <div className="flex items-center justify-between gap-3">
                                 <span className="text-xs text-[var(--color-text-secondary)]">Points</span>
@@ -755,48 +766,148 @@ export function ImpressionHubClient() {
                 />
               }
               theoryNode={theoryNode}
-              exerciseNodes={previewBlocks.map((item) => ({
-                key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-corr${item.correction ? 1 : 0}`,
-                /**
-                 * Packing style placement maths : enchaîner les exercices s’ils
-                 * tiennent entièrement sur la page, sinon page suivante.
-                 * Saut forcé uniquement pour (1) le 1er exo après l’annonce,
-                 * (2) le début du corrigé, (3) un exercice qui l’exige.
-                 */
-                forceNewPage: item.correction
-                  ? item.displayIndex === 0
-                  : (theory && hasAnnouncement && item.displayIndex === 0)
-                    || item.exercise?.forceNewPage === true,
-                render: () => (
-                  <div className="print-exercise">
-                    <div
-                      className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"
-                      style={{ color: accent }}
-                    >
-                      <span className="flex-1">
-                        Exercice {item.displayIndex + 1}{item.correction ? " — Corrigé" : ""}
+              exerciseNodes={previewBlocks.flatMap((item) => {
+                const ex = item.exercise;
+                const layoutKey = `q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-pb${item.selection.pageBreak ? 1 : 0}-corr${item.correction ? 1 : 0}`;
+                const softBreak =
+                  item.correction
+                    ? item.displayIndex === 0 || Boolean(item.selection.pageBreak)
+                    : (theory && hasAnnouncement && item.displayIndex === 0)
+                      || Boolean(item.selection.pageBreak);
+
+                const titleRow = (suffix?: string) => (
+                  <div
+                    className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"
+                    style={{ color: accent }}
+                  >
+                    <span className="flex-1">
+                      Exercice {item.displayIndex + 1}
+                      {suffix ? ` — ${suffix}` : item.correction ? " — Corrigé" : ""}
+                    </span>
+                    {evalMode && (
+                      <span style={{ color: "black" }}>
+                        {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
                       </span>
-                      {evalMode && (
-                        <span style={{ color: "black" }}>
-                          {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                        </span>
-                      )}
-                    </div>
-                    <PrintExerciseBody
-                      key={`${item.key}-body-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-o${item.occurrence}-corr${item.correction ? 1 : 0}`}
-                      selection={item.selection}
-                      answerKey={item.correction}
-                    >
-                      {clonePreview(
-                        (item.correction
-                          ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
-                          : item.exercise?.preview) ?? <div className="h-7 border-b border-black/40" />,
-                        `${item.key}-preview-${item.occurrence}`,
-                      )}
-                    </PrintExerciseBody>
+                    )}
                   </div>
-                ),
-              }))}
+                );
+
+                const bodyPreview = item.correction
+                  ? (ex?.correctionPreview ?? ex?.preview)
+                  : ex?.preview;
+
+                const bodyNode = (key: string, forceNewPage: boolean, titleSuffix?: string) => ({
+                  key: `${key}-${layoutKey}`,
+                  forceNewPage,
+                  render: () => (
+                    <div className="print-exercise">
+                      {titleRow(titleSuffix)}
+                      <PrintExerciseBody
+                        key={`${key}-body-${layoutKey}-o${item.occurrence}`}
+                        selection={item.selection}
+                        answerKey={item.correction}
+                      >
+                        {clonePreview(
+                          bodyPreview ?? <div className="h-7 border-b border-black/40" />,
+                          `${key}-preview-${item.occurrence}`,
+                        )}
+                      </PrintExerciseBody>
+                    </div>
+                  ),
+                });
+
+                const plainNode = (
+                  key: string,
+                  preview: ReactNode,
+                  forceNewPage: boolean,
+                  titleSuffix: string,
+                ) => ({
+                  key: `${key}-${layoutKey}`,
+                  forceNewPage,
+                  render: () => (
+                    <div className="print-exercise">
+                      {titleRow(titleSuffix)}
+                      <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                        {clonePreview(preview, `${key}-plain-${item.occurrence}`)}
+                      </div>
+                    </div>
+                  ),
+                });
+
+                // Placement FR (CE/CO/PE/PO) : leads / follows déjà structurés en pages.
+                if (item.correction && ex?.correctionLeadPreview) {
+                  const nodes = [
+                    plainNode(
+                      `${item.key}-corr-lead`,
+                      ex.correctionLeadPreview,
+                      true,
+                      ex.correctionLeadTitle ?? "Audios & transcriptions",
+                    ),
+                    bodyNode(item.key, true, "Corrigé"),
+                  ];
+                  (ex.correctionFollowPreviews ?? []).forEach((follow, fi) => {
+                    nodes.push(
+                      plainNode(
+                        `${item.key}-corr-follow-${fi}`,
+                        follow.preview,
+                        true,
+                        follow.title ?? "Suite",
+                      ),
+                    );
+                  });
+                  return nodes;
+                }
+
+                if (!item.correction && ex?.leadPreview) {
+                  const nodes = [
+                    plainNode(`${item.key}-lead`, ex.leadPreview, true, ""),
+                    bodyNode(item.key, true, ex.leadFollowTitle ?? "Grille"),
+                  ];
+                  (ex.followPreviews ?? []).forEach((follow, fi) => {
+                    nodes.push(
+                      plainNode(
+                        `${item.key}-follow-${fi}`,
+                        follow.preview,
+                        true,
+                        follow.title ?? "Suite",
+                      ),
+                    );
+                  });
+                  return nodes;
+                }
+
+                if (item.correction && (ex?.correctionFollowPreviews?.length ?? 0) > 0) {
+                  const nodes = [bodyNode(item.key, softBreak, "Corrigé")];
+                  (ex!.correctionFollowPreviews ?? []).forEach((follow, fi) => {
+                    nodes.push(
+                      plainNode(
+                        `${item.key}-corr-follow-${fi}`,
+                        follow.preview,
+                        true,
+                        follow.title ?? "Suite",
+                      ),
+                    );
+                  });
+                  return nodes;
+                }
+
+                if (!item.correction && (ex?.followPreviews?.length ?? 0) > 0) {
+                  const nodes = [bodyNode(item.key, softBreak)];
+                  (ex!.followPreviews ?? []).forEach((follow, fi) => {
+                    nodes.push(
+                      plainNode(
+                        `${item.key}-follow-${fi}`,
+                        follow.preview,
+                        true,
+                        follow.title ?? "Suite",
+                      ),
+                    );
+                  });
+                  return nodes;
+                }
+
+                return [bodyNode(item.key, softBreak)];
+              })}
             />
           )}
           <span className="hidden">

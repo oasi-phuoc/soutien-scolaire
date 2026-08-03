@@ -11,7 +11,7 @@ import {
   PaginatedPreview,
   PrintDocumentFooter,
   PrintDocumentHeader,
-  printSpacingProps,
+  PrintExerciseBody,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -278,6 +278,7 @@ export function ImpressionsClient() {
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 8),
         columns: ex.defaultColumns ?? 1,
         spacing: 3,
+        pageBreak: Boolean(ex.forceNewPage),
         points: ex.defaultPoints ?? 1,
       })),
     );
@@ -652,6 +653,54 @@ export function ImpressionsClient() {
                                   }
                                 />
                               </div>
+                              {ex.supportsPrintLayout && (
+                                <>
+                                  <div className="flex items-center justify-between gap-2">
+                                    <span className="text-[11px] text-[var(--color-text-secondary)]">Questions</span>
+                                    <Counter
+                                      value={sel.questionCount}
+                                      accent={accent}
+                                      min={1}
+                                      max={30}
+                                      onChange={(questionCount) =>
+                                        setSelection((prev) =>
+                                          prev.map((s) => (s.id === ex.id ? { ...s, questionCount } : s)),
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                  <div className="flex items-center justify-between gap-2">
+                                    <span className="text-[11px] text-[var(--color-text-secondary)]">Colonnes</span>
+                                    <Counter
+                                      value={sel.columns}
+                                      accent={accent}
+                                      min={1}
+                                      max={3}
+                                      onChange={(v) =>
+                                        setSelection((prev) =>
+                                          prev.map((s) =>
+                                            s.id === ex.id
+                                              ? { ...s, columns: (v === 2 || v === 3 ? v : 1) as typeof s.columns }
+                                              : s,
+                                          ),
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </>
+                              )}
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">Saut de page</span>
+                                <CheckBox
+                                  checked={sel.pageBreak}
+                                  onChange={(pageBreak) =>
+                                    setSelection((prev) =>
+                                      prev.map((s) => (s.id === ex.id ? { ...s, pageBreak } : s)),
+                                    )
+                                  }
+                                  accent={accent}
+                                />
+                              </div>
                               {evalMode && (
                                 <div className="flex items-center justify-between gap-2">
                                   <span className="text-[11px] text-[var(--color-text-secondary)]">Pts</span>
@@ -711,13 +760,13 @@ export function ImpressionsClient() {
               }
               theoryNode={theoryNode}
               exerciseNodes={previewBlocks.map((item) => {
-                const spacingProps = printSpacingProps(item.selection.spacing);
                 return {
-                  key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-corr${item.correction ? 1 : 0}`,
+                  key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-pb${item.selection.pageBreak ? 1 : 0}-corr${item.correction ? 1 : 0}`,
                   /** Packing style placement maths (voir ImpressionHubClient). */
                   forceNewPage: item.correction
-                    ? item.displayIndex === 0
+                    ? item.displayIndex === 0 || Boolean(item.selection.pageBreak)
                     : Boolean(item.forceNewPage && item.displayIndex === 0)
+                      || Boolean(item.selection.pageBreak)
                       || item.exercise?.forceNewPage === true,
                   render: () => (
                     <div className="print-exercise">
@@ -734,14 +783,14 @@ export function ImpressionsClient() {
                           </span>
                         )}
                       </div>
-                      <div
-                        className={`print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none${item.correction ? " print-answer-key" : ""}${spacingProps.className}`}
-                        style={spacingProps.style}
+                      <PrintExerciseBody
+                        selection={item.selection}
+                        answerKey={item.correction}
                       >
                         {(item.correction
                           ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
                           : item.exercise?.preview) ?? <div className="h-7 border-b border-black/40" />}
-                      </div>
+                      </PrintExerciseBody>
                     </div>
                   ),
                 };

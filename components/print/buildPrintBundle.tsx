@@ -6,8 +6,8 @@ import {
   getLessonBySubmoduleId,
   getModuleIdForSubmodule,
 } from "@/lib/curriculum/lessons-registry";
-import { getVocabTheme } from "@/lib/curriculum/vocabulary-data";
-import { getGrammarLesson, getConjLesson } from "@/lib/curriculum/grammar-data";
+import { getVocabTheme, type VocabTheme } from "@/lib/curriculum/vocabulary-data";
+import { getGrammarLesson, getConjLesson, type Exercise } from "@/lib/curriculum/grammar-data";
 import { MathTheoryPrintView } from "@/components/print/MathTheoryPrintView";
 import { buildA1PrintExercises } from "@/components/math/A1ModuleContent";
 import {
@@ -51,7 +51,6 @@ import {
 } from "@/components/print/PlacementPrintAnnounce";
 import { PLACEMENT_FRENCH_PRINT_PARTS } from "@/lib/print/catalog";
 import type { PlacementLevel, PlacementSkill } from "@/lib/placement/types";
-import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import {
   EXPRESS_ORAL_BY_ID,
 } from "@/lib/curriculum/content/communication/express-index";
@@ -118,23 +117,50 @@ function buildMathBundle(submoduleId: string): PrintBundle | null {
   };
 }
 
-function vocabTrainingSteps(theme: VocabTheme): { key: string; label: string }[] {
+function vocabTrainingSteps(theme: VocabTheme): { key: string; label: string; defaultQuestionCount: number }[] {
   const hasMF = theme.words.filter((w) => !!w.feminine).length >= 5;
   const n = (base: number) => (hasMF ? base + 1 : base);
   return [
-    { key: "ex1-image-match", label: "Ex. 1" },
-    { key: "ex2-article", label: "Ex. 2" },
-    { key: "ex4-missing-letters", label: "Ex. 3" },
-    { key: "ex3-anagram", label: "Ex. 4" },
-    { key: "ex5-definition-match", label: "Ex. 5" },
-    { key: "ex6-fill-sentences", label: "Ex. 6" },
-    ...(hasMF ? [{ key: "ex-masc-fem", label: "Ex. 7" }] : []),
-    { key: "ex7-image-write", label: `Ex. ${n(7)}` },
-    { key: "ex8-dictation", label: `Ex. ${n(8)}` },
-    { key: "ex-word-order", label: `Ex. ${n(9)}` },
-    { key: "ex9-sentence-write", label: `Ex. ${n(10)}` },
-    { key: "ex10-question-write", label: `Ex. ${n(11)}` },
+    { key: "ex1-image-match", label: "Ex. 1", defaultQuestionCount: 6 },
+    { key: "ex2-article", label: "Ex. 2", defaultQuestionCount: 6 },
+    { key: "ex4-missing-letters", label: "Ex. 3", defaultQuestionCount: 5 },
+    { key: "ex3-anagram", label: "Ex. 4", defaultQuestionCount: 5 },
+    { key: "ex5-definition-match", label: "Ex. 5", defaultQuestionCount: 5 },
+    { key: "ex6-fill-sentences", label: "Ex. 6", defaultQuestionCount: 5 },
+    ...(hasMF ? [{ key: "ex-masc-fem", label: "Ex. 7", defaultQuestionCount: 6 }] : []),
+    { key: "ex7-image-write", label: `Ex. ${n(7)}`, defaultQuestionCount: 5 },
+    { key: "ex8-dictation", label: `Ex. ${n(8)}`, defaultQuestionCount: 6 },
+    { key: "ex-word-order", label: `Ex. ${n(9)}`, defaultQuestionCount: 5 },
+    { key: "ex9-sentence-write", label: `Ex. ${n(10)}`, defaultQuestionCount: 5 },
+    { key: "ex10-question-write", label: `Ex. ${n(11)}`, defaultQuestionCount: 5 },
   ];
+}
+
+function grammarDefaultQuestionCount(ex: Exercise): number {
+  switch (ex.type) {
+    case "write":
+      return ex.verbPoolSize ?? ex.promptPoolSize ?? ex.prompts?.length ?? 5;
+    case "match":
+      return ex.poolSize ?? ex.pairs.length;
+    case "tag2":
+      return ex.poolSize ?? 10;
+    case "classify":
+      return ex.poolSize ?? (ex.pool?.length ? 8 : ex.items.length);
+    case "word_order":
+      return ex.poolSize ?? (ex.pool?.length ? ex.pool.length : ex.items.length);
+    case "trueFalse":
+      return ex.poolSize ?? ex.items.length;
+    case "order":
+    case "color_highlight":
+    case "clock_read":
+      return "items" in ex ? ex.items.length : "clocks" in ex ? ex.clocks.length : 5;
+    case "qcm":
+    case "fill":
+    case "fill_select":
+      return ex.poolSize ?? (ex.pool?.length ? 5 : ex.items.length || 5);
+    default:
+      return 5;
+  }
 }
 
 function vocabExPreview(
@@ -193,6 +219,9 @@ function buildVocabBundle(slug: string): PrintBundle | null {
       return {
         id: step.key,
         label: step.label || `Exercice ${index + 1}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: step.defaultQuestionCount,
+        defaultColumns: 1 as const,
         preview: (
           <PlacementPrintSeedRoot seed={seed}>
             {vocabExPreview(step.key, theme, 0)}
@@ -226,6 +255,9 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
         return {
           id: String(i),
           label: ex.title ?? `Exercice ${i + 1}`,
+          supportsPrintLayout: true,
+          defaultQuestionCount: grammarDefaultQuestionCount(ex),
+          defaultColumns: 1 as const,
           preview: (
             <PlacementPrintSeedRoot seed={seed}>
               <GrammarExerciseView
@@ -270,6 +302,9 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
       return {
         id: String(i),
         label: ex.title ?? `Exercice ${i + 1}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: grammarDefaultQuestionCount(ex),
+        defaultColumns: 1 as const,
         preview: (
           <PlacementPrintSeedRoot seed={seed}>
             <GrammarExerciseView
