@@ -13,24 +13,23 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       trans: { en: "The verb aller", ar: "فعل aller", fa: "فعل aller", ti: "ግሲ aller", uk: "Дієслово aller" },
     },
     {
-      type: "heading",
-      text: "Utilisation",
-      sub: true,
-      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
+      type: "plain_list",
+      items: [
+        "Le verbe {a}aller{/a} sert à indiquer un déplacement (il est alors suivi d'un lieu ou d'un infinitif) ou à prendre et donner des nouvelles.",
+      ],
     },
     {
-      type: "plain_list",
-      label: "Le verbe aller est utilisé pour :",
-      items: [
-        "indiquer un déplacement. Il est toujours suivi d'un lieu ou d'un infinitif. → Tu vas où ? / Nous allons en Espagne. / Je vais acheter du pain.",
-        "prendre et donner des nouvelles. → Tu vas bien ? — Oui, je vais bien.",
+      type: "grid",
+      headers: ["Emploi", "Exemple"],
+      colWidths: ["15.5rem", "auto"],
+      rows: [
+        ["Déplacement", "Tu {a}vas{/a} où ? / Nous {a}allons{/a} en Espagne."],
+        ["Nouvelles", "Tu {a}vas{/a} bien ? — Oui, je {a}vais{/a} bien."],
       ],
-      allBullets: true,
     },
     {
       type: "heading",
       text: "Conjugaison",
-      sub: true,
       trans: { en: "Conjugation", ar: "التصريف", fa: "صرف", ti: "ምጽራይ", uk: "Дієвідміна" },
     },
     {
@@ -47,8 +46,19 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       ],
     },
     {
-      type: "note",
-      text: "On fait la liaison : nous allons, vous allez.",
+      type: "heading",
+      text: "Prononciation",
+      trans: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", ti: "ኣደማምጻ", uk: "Вимова" },
+    },
+    {
+      type: "plain_list",
+      items: ["{a}1.{/a} On fait la liaison."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Nou{li}s|a{/li}llons, vou{li}s|a{/li}llez."],
+      noBulletItems: [0],
     },
 
     {
@@ -58,15 +68,19 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: [
-        "Le {a}y{/a} devient {a}i{/a} devant une terminaison muette (je, tu, il, ils).",
-        "Avec {a}je, tu, il/elle/on, ils/elles{/a}, le {a}y{/a} du radical est remplacé par un {a}i{/a}.",
-        "Les verbes en {a}-ayer{/a} ont deux orthographes possibles (paie / paye).",
-      ],
-      allBullets: true,
+      items: ["{a}1.{/a} Le {a}y{/a} devient {a}i{/a} devant une terminaison muette (je, tu, il, ils)."],
+    },
+    {
+      type: "plain_list",
+      items: ["{a}2.{/a} Avec {a}je, tu, il/elle/on, ils/elles{/a}, le {a}y{/a} du radical est remplacé par un {a}i{/a}."],
+    },
+    {
+      type: "plain_list",
+      items: ["{a}3.{/a} Les verbes en {a}-ayer{/a} ont deux orthographes possibles (paie / paye)."],
     },
     {
       type: "verb_toggle",
+      buttonCols: 3,
       verbs: [
         {
           infinitive: "payer", radical: "pay",
@@ -90,19 +104,18 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent", radical: "nettoi" },
           ],
         },
-      ],
-    },
-    {
-      type: "grid",
-      headers: ["Pronom", "Payer", "Envoyer", "S'ennuyer"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "paie / paye", "envoie", "m'ennuie"],
-        ["Tu", "paies / payes", "envoies", "t'ennuies"],
-        ["Il / Elle / On", "paie / paye", "envoie", "s'ennuie"],
-        ["Nous", "payons", "envoyons", "nous ennuyons"],
-        ["Vous", "payez", "envoyez", "vous ennuyez"],
-        ["Ils / Elles", "paient / payent", "envoient", "s'ennuient"],
+        {
+          infinitive: "s'ennuyer", radical: "ennuy",
+          reflexivePronouns: ["m'", "t'", "s'", "nous", "vous", "s'"],
+          rows: [
+            { pronoun: "je", ending: "e", radical: "ennui" },
+            { pronoun: "tu", ending: "es", radical: "ennui" },
+            { pronoun: "il / elle / on", ending: "e", radical: "ennui" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent", radical: "ennui" },
+          ],
+        },
       ],
     },
 
@@ -117,6 +130,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
     },
     {
       type: "verb_toggle",
+      buttonCols: 3,
       verbs: [
         {
           infinitive: "manger", radical: "mang",
@@ -140,6 +154,17 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
+        {
+          infinitive: "changer", radical: "chang",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons", radical: "change" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
       ],
     },
     {
@@ -148,6 +173,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
     },
     {
       type: "verb_toggle",
+      buttonCols: 3,
       verbs: [
         {
           infinitive: "commencer", radical: "commenc",
@@ -171,24 +197,18 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
+        {
+          infinitive: "lancer", radical: "lanc",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons", radical: "lanç" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
       ],
-    },
-    {
-      type: "grid",
-      headers: ["Pronom", "Voyager", "Commencer"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "voyage beaucoup.", "commence demain."],
-        ["Tu", "voyages seul(e) ?", "commences tôt."],
-        ["Il / Elle / On", "voyage souvent.", "commence à 7 heures."],
-        ["Nous", "voyage{a}ons{/a} en groupe.", "commen{a}ç{/a}ons jeudi."],
-        ["Vous", "voyagez un peu.", "commencez bientôt."],
-        ["Ils / Elles", "voyagent ensemble.", "commencent ce soir."],
-      ],
-    },
-    {
-      type: "note",
-      text: "Avec nous, tous les verbes en -ger et -cer ont une particularité orthographique : on garde e (voyageons) ou on met ç (commençons).",
     },
 
     {
@@ -199,15 +219,26 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Avec {a}je, tu, il/elle/on, ils/elles{/a}, ces verbes ont une particularité orthographique qui change la prononciation.",
-        "Ils ont deux radicaux : le 1er (comme l'infinitif) pour {a}nous{/a} et {a}vous{/a} ; le 2e (modifié) pour les autres personnes.",
-        "Les verbes comme {a}jeter{/a} doublent le {a}t{/a} devant une terminaison muette.",
-        "Les verbes comme {a}appeler{/a} doublent le {a}l{/a} devant une terminaison muette.",
+        "{a}1.{/a} Avec {a}je, tu, il/elle/on, ils/elles{/a}, ces verbes ont une particularité orthographique qui change la prononciation.",
       ],
-      allBullets: true,
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}2.{/a} Ils ont deux radicaux : le 1er (comme l'infinitif) pour {a}nous{/a} et {a}vous{/a} ; le 2e (modifié) pour les autres personnes.",
+      ],
+    },
+    {
+      type: "plain_list",
+      items: ["{a}3.{/a} Les verbes comme {a}jeter{/a} doublent le {a}t{/a} devant une terminaison muette."],
+    },
+    {
+      type: "plain_list",
+      items: ["{a}4.{/a} Les verbes comme {a}appeler{/a} doublent le {a}l{/a} devant une terminaison muette."],
     },
     {
       type: "verb_toggle",
+      buttonCols: 3,
       verbs: [
         {
           infinitive: "jeter", radical: "jet",
@@ -231,19 +262,17 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent", radical: "appell" },
           ],
         },
-      ],
-    },
-    {
-      type: "grid",
-      headers: ["Pronom", "Appeler", "Acheter", "Préférer"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "appelle", "achète", "préfère"],
-        ["Tu", "appelles", "achètes", "préfères"],
-        ["Il / Elle / On", "appelle", "achète", "préfère"],
-        ["Nous", "appelons", "achetons", "préférons"],
-        ["Vous", "appelez", "achetez", "préférez"],
-        ["Ils / Elles", "appellent", "achètent", "préfèrent"],
+        {
+          infinitive: "préférer", radical: "préfér",
+          rows: [
+            { pronoun: "je", ending: "e", radical: "préfèr" },
+            { pronoun: "tu", ending: "es", radical: "préfèr" },
+            { pronoun: "il / elle / on", ending: "e", radical: "préfèr" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent", radical: "préfèr" },
+          ],
+        },
       ],
     },
     {
