@@ -170,12 +170,18 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       type: "plain_list",
       items: [
         "Les pronoms {a}me, te, se{/a} deviennent {a}m', t', s'{/a} devant une voyelle ou un h muet.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
         "Je {s}me{/s} habille → Je {a}m'{/a}habille.",
         "Tu {s}te{/s} amuses → Tu {a}t'{/a}amuses.",
         "Elle {s}se{/s} arrête → Elle {a}s'{/a}arrête.",
         "Ils {s}se{/s} embrassent → Ils {a}s'{/a}embrassent.",
       ],
-      allBullets: true,
+      noBulletItems: [0, 1, 2, 3],
     },
 
     {
@@ -194,9 +200,13 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       type: "plain_list",
       items: [
         "La négation {a}ne … pas{/a} encadre le pronom réfléchi ET le verbe.",
-        "Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}",
       ],
-      allBullets: true,
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}"],
+      noBulletItems: [0],
     },
     { type: "verb_toggle", negation: true, verbs: PRONOMINAUX_VERBS, buttonCols: 3 },
 
@@ -217,15 +227,23 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
-      label: "Attention",
-      inlineArrows: true,
+      type: "heading",
+      text: "Attention",
+    },
+    {
+      type: "plain_list",
       items: [
         "Quand le verbe commence par une voyelle ou un h, {a}me / te / se{/a} devient {a}m' / t' / s'{/a}.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
         "je {s}me{/s} appelle → je {a}m'{/a}appelle",
         "il {s}se{/s} habille → il {a}s'{/a}habille",
       ],
-      noBulletItems: [0],
+      noBulletItems: [0, 1],
     },
   ],
   exercises: [
