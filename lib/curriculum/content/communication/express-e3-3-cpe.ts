@@ -16,7 +16,11 @@ const CE_TEXT_1 = `E-mail interne
 
 Le sujet principal est SwissTech SA. Marie donne l'information.
 Le moment indiqué est à 8 h. Le rendez-vous est au bureau d'accueil.
-Consigne : répondre aux e-mails. Détail : secrétaire.`;
+Consigne : répondre aux e-mails. Détail : secrétaire.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+À très bientôt, prends soin de toi.`;
 
 const CE_POOL_1 = buildExpressPool("e3-3-1", [
   q({
@@ -97,7 +101,13 @@ const CE_TEXT_2 = `Note du bureau
 Petit message pour Hôpital cantonal.
 Dr. Keller propose un rendez-vous en salle de réunion à 5 h 45.
 Action demandée : préparer les soins.
-infirmier.`;
+infirmier.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_2 = buildExpressPool("e3-3-2", [
   q({
@@ -178,7 +188,12 @@ const CE_TEXT_3 = `SMS du collègue
 À noter : Restaurant Le Sapin.
 On voit Chef Marco en cuisine. Le moment choisi est à 10 h 30.
 Après cela, action simple : servir les clients.
-Rappel : Détail : serveur.`;
+Rappel : Détail : serveur.
+Le trajet est simple, ne t'inquiète pas.
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Merci de lire ce message jusqu'à la fin.`;
 
 const CE_POOL_3 = buildExpressPool("e3-3-3", [
   q({
@@ -259,7 +274,12 @@ const CE_TEXT_4 = `WhatsApp équipe
 Information courte. Paul parle de Garage Central.
 Le lieu change ou se confirme : à l'atelier.
 Le moment est à 7 h. La consigne reste claire : réparer une voiture.
-mécanicien.`;
+mécanicien.
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Passe le bonjour à tout le monde.`;
 
 const CE_POOL_4 = buildExpressPool("e3-3-4", [
   q({
@@ -340,7 +360,12 @@ const CE_TEXT_5 = `Annonce RH
 Aujourd'hui, on organise Banque Populaire.
 Départ ou début mardi à 14 h. Le groupe arrive en salle formation.
 Sophie explique la suite. Pendant l'activité : accueillir les clients.
-secrétaire.`;
+secrétaire.
+Nous vous souhaitons une excellente journée.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.`;
 
 const CE_POOL_5 = buildExpressPool("e3-3-5", [
   q({
@@ -421,7 +446,11 @@ const CE_TEXT_6 = `Message du manager
 Bonjour. Le dossier concerne Pharmacie du Lac.
 Il est possible de voir Julie vendredi à 18 h.
 Le point de rendez-vous est dans la pharmacie.
-Pour continuer, action nécessaire : compter les stocks. Détail : pharmacien.`;
+Pour continuer, action nécessaire : compter les stocks. Détail : pharmacien.
+Je reste près de mon téléphone aujourd'hui.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const CE_POOL_6 = buildExpressPool("e3-3-6", [
   q({
@@ -502,6 +531,11 @@ const CE_TEXT_7 = `Planning de semaine
 Message pour la famille ou le groupe.
 École primaire est prévu jeudi à 17 h, en salle des profs.
 Mme Martin accueille les personnes.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Merci : préparer les bulletins. Détail : professeur.`;
 
 const CE_POOL_7 = buildExpressPool("e3-3-7", [
@@ -583,7 +617,12 @@ const CE_TEXT_8 = `E-mail client
 Notification : changement autour de Agence Voyage.
 La personne à suivre est Emma. Le lieu est au bureau.
 Le moment indiqué est mercredi à 11 h. Action demandée : préparer un devis.
-vendeur.`;
+vendeur.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Bonne journée à toutes et à tous.`;
 
 const CE_POOL_8 = buildExpressPool("e3-3-8", [
   q({
@@ -664,7 +703,11 @@ const CE_TEXT_9 = `Note de réunion
 Carte de rendez-vous.
 Sujet : Boulangerie Martin. Présence de Thomas.
 Entrée ou arrivée au laboratoire lundi à 6 h.
-Avant le début, consigne : faire le pain. Détail : boulanger.`;
+Avant le début, consigne : faire le pain. Détail : boulanger.
+Les informations sont valables pour cette semaine.
+Si quelque chose n'est pas clair, posez la question.
+Pensez à vérifier la date et le lieu.
+Merci de confirmer la bonne réception.`;
 
 const CE_POOL_9 = buildExpressPool("e3-3-9", [
   q({
@@ -745,7 +788,13 @@ const CE_TEXT_10 = `SMS du cabinet
 Règle simple : attendre Maître Blanc.
 Le sujet est Cabinet d'avocats. Le groupe arrive au tribunal mardi à 10 h.
 Personne ne commence avant l'action suivante : classer les dossiers.
-secrétaire.`;
+secrétaire.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+En cas de changement, un nouvel avis sera publié.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const CE_POOL_10 = buildExpressPool("e3-3-10", [
   q({
@@ -826,7 +875,11 @@ const CE_TEXT_11 = `Info intranet
 Organisation modifiée.
 Hugo accompagne le groupe à la réception.
 Ensuite, Hôtel Bellevue reprend à 15 h.
-Pendant l'attente, action calme : accueillir les clients. Détail : réceptionniste.`;
+Pendant l'attente, action calme : accueillir les clients. Détail : réceptionniste.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const CE_POOL_11 = buildExpressPool("e3-3-11", [
   q({
@@ -907,7 +960,13 @@ const CE_TEXT_12 = `WhatsApp chantier
 Besoin d'aide pour BTP Construction ?
 La prochaine rencontre est à 6 h 15, sur le chantier.
 Karim note les prénoms. Pour participer, action simple : monter un mur.
-maçon.`;
+maçon.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Nous restons disponibles pour vous aider.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.`;
 
 const CE_POOL_12 = buildExpressPool("e3-3-12", [
   q({
@@ -988,7 +1047,13 @@ const CE_TEXT_13 = `E-mail équipe
 Madame, Monsieur, voici une information sur Librairie du Centre.
 La présentation ou le rendez-vous est prévu vendredi à 18 h, au rayon jeunesse.
 Nina confirmera demain. Consigne : ranger les livres.
-libraire.`;
+libraire.
+Je reste à votre disposition pour toute précision.
+Merci encore pour votre compréhension.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.`;
 
 const CE_POOL_13 = buildExpressPool("e3-3-13", [
   q({
@@ -1069,7 +1134,12 @@ const CE_TEXT_14 = `Note du salon
 Attention, changement pour Salon de coiffure.
 Clara ne peut pas garder l'organisation habituelle.
 Rendez-vous près du fauteuil 2 mardi à 9 h. Le groupe doit couper les cheveux.
-coiffeur.`;
+coiffeur.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_14 = buildExpressPool("e3-3-14", [
   q({
@@ -1150,7 +1220,12 @@ const CE_TEXT_15 = `Message RH
 Bonjour, on cherche deux personnes pour Usine Omega.
 La rencontre est dans l'usine jeudi à 8 h.
 David apporte le matériel. Si tu viens, action demandée : contrôler la production.
-ingénieur.`;
+ingénieur.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const CE_POOL_15 = buildExpressPool("e3-3-15", [
   q({
@@ -1231,7 +1306,13 @@ const CE_TEXT_16 = `Planning médical
 Séance de révision ou de préparation : Cabinet médical.
 Infirmière Léa répond aux questions à 8 h.
 Le groupe travaille dans le cabinet, puis action finale : consulter les patients.
-médecin.`;
+médecin.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_16 = buildExpressPool("e3-3-16", [
   q({
@@ -1312,7 +1393,12 @@ const CE_TEXT_17 = `SMS de la ferme
 Petit article. Le sujet Ferme des Alpes avance bien.
 Victor montre un exemple au marché de Sion.
 samedi à 6 h, le groupe compare ses notes. Action finale : charger le camion.
-agriculteur.`;
+agriculteur.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const CE_POOL_17 = buildExpressPool("e3-3-17", [
   q({
@@ -1393,7 +1479,12 @@ const CE_TEXT_18 = `E-mail rédaction
 Bonjour à tous. Pour Journal Le Quotidien, on sort ou on se déplace.
 Le rendez-vous est en salle de rédaction à 11 h.
 Antoine prend la liste. Consigne obligatoire : écrire un article.
-journaliste.`;
+journaliste.
+Je reste à votre disposition pour toute précision.
+Merci de lire ce message jusqu'à la fin.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.`;
 
 const CE_POOL_18 = buildExpressPool("e3-3-18", [
   q({
@@ -1474,7 +1565,11 @@ const CE_TEXT_19 = `Annonce de caserne
 Nouvelle tâche : Service pompiers.
 La ressource ou l'adresse est à la caserne. Fin prévue chaque matin.
 Marc vérifiera ensuite. Pour répondre, action demandée : préparer les interventions.
-pompier.`;
+pompier.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_19 = buildExpressPool("e3-3-19", [
   q({
@@ -1555,7 +1650,13 @@ const CE_TEXT_20 = `WhatsApp crèche
 Journée spéciale autour de Crèche Les Petits.
 Le matin, passage dans le jardin avec Sara.
 La présentation commence jeudi à 18 h. Chaque groupe doit préparer les plantes.
-jardinier.`;
+jardinier.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Une confirmation sera envoyée ensuite.`;
 
 const CE_POOL_20 = buildExpressPool("e3-3-20", [
   q({
@@ -1934,191 +2035,191 @@ export const E3_3_PO: ExpressPoDialogue[] = [
 {
   id: "e3-3-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous parlez de votre travail.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le travail." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le travail, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e3-3-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous parlez de votre travail.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de le travail." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour travail." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e3-3-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous parlez de votre travail.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le travail." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le travail, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e3-3-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous parlez de votre travail.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le travail." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le travail, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e3-3-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous parlez de votre travail.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le travail." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le travail, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e3-3-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous parlez de votre travail.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de le travail." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour travail." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e3-3-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous parlez de votre travail.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de le travail ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour travail." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e3-3-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous parlez de votre travail.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de le travail ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour travail." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e3-3-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous parlez de votre travail.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le travail." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le travail, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e3-3-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : le travail.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous parlez de votre travail.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le travail." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le travail." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le travail, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 }
 ];

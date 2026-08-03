@@ -23,6 +23,7 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E4_1_CE_EMAIL_TEXT_1 = `De : H&M
+
 Objet : une robe d'été
 
 Bonjour,
@@ -30,6 +31,11 @@ Bonjour,
 Votre demande est notée. Information principale : 59 francs. Le détail principal est bleu.
 Consigne : essayer la robe. Détail : taille M.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Je reste près de mon téléphone aujourd'hui.
 Cordialement`;
 
 const E4_1_CE_EMAIL_POOL_1 = buildExpressPool("e4-1-ce-email-1", [
@@ -107,6 +113,7 @@ const E4_1_CE_EMAIL_POOL_1 = buildExpressPool("e4-1-ce-email-1", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_2 = `De : Service client
+
 Objet : Confirmation
 
 Bonjour,
@@ -115,7 +122,12 @@ Nous confirmons un manteau d'hiver chez vente entre particuliers.
 Information : 80 francs. La note du dossier : noir.
 Action demandée : contacter le vendeur. Détail : taille L.
 
-Service client`;
+Service client
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.`;
 
 const E4_1_CE_EMAIL_POOL_2 = buildExpressPool("e4-1-ce-email-2", [
   q({
@@ -192,6 +204,7 @@ const E4_1_CE_EMAIL_POOL_2 = buildExpressPool("e4-1-ce-email-2", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_3 = `De : C&A
+
 Objet : Rappel avant votre venue
 
 Bonjour,
@@ -200,6 +213,13 @@ Avant de venir pour un jean slim, vérifiez gris.
 Information indiquée : 69 francs. Sur place, il faudra vérifier la cabine.
 taille 32.
 
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À bientôt, et merci de votre lecture.
 Merci`;
 
 const E4_1_CE_EMAIL_POOL_3 = buildExpressPool("e4-1-ce-email-3", [
@@ -277,6 +297,7 @@ const E4_1_CE_EMAIL_POOL_3 = buildExpressPool("e4-1-ce-email-3", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_4 = `De : Boutique en ligne
+
 Objet : Votre suivi
 
 Bonjour,
@@ -285,7 +306,12 @@ Votre demande pour un pull en laine avance.
 Point de retrait : Migros mode. Information : 45 francs.
 Détail à confirmer : rouge. Consigne : prendre la carte client.
 
-Boutique en ligne`;
+Boutique en ligne
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Bonne journée à toutes et à tous.`;
 
 const E4_1_CE_EMAIL_POOL_4 = buildExpressPool("e4-1-ce-email-4", [
   q({
@@ -362,6 +388,7 @@ const E4_1_CE_EMAIL_POOL_4 = buildExpressPool("e4-1-ce-email-4", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_5 = `De : Zara
+
 Objet : Offre limitée
 
 Bonjour,
@@ -370,6 +397,12 @@ L'offre sur une chemise blanche est disponible. Information : 39 francs.
 Elle concerne blanc. Pour en profiter, consigne : demander le cintre.
 taille M.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Nous vous souhaitons une excellente journée.
 À bientôt`;
 
 const E4_1_CE_EMAIL_POOL_5 = buildExpressPool("e4-1-ce-email-5", [
@@ -447,6 +480,7 @@ const E4_1_CE_EMAIL_POOL_5 = buildExpressPool("e4-1-ce-email-5", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_6 = `De : Réservation
+
 Objet : Préparation
 
 Bonjour,
@@ -455,7 +489,12 @@ Nous préparons des baskets de sport. Vous pouvez passer chez Decathlon. Informa
 La fiche indique blanc et noir. Au comptoir, pensez à utiliser la carte fidélité.
 taille 42.
 
-Réservation`;
+Réservation
+Les horaires habituels restent les mêmes.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E4_1_CE_EMAIL_POOL_6 = buildExpressPool("e4-1-ce-email-6", [
   q({
@@ -532,6 +571,7 @@ const E4_1_CE_EMAIL_POOL_6 = buildExpressPool("e4-1-ce-email-6", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_7 = `De : Carte fidélité
+
 Objet : Avantage du jour
 
 Bonjour,
@@ -540,7 +580,10 @@ Votre avantage concerne un pantalon de costume.
 Il est disponible chez PKZ. Information : 99 francs. Détail : bleu marine.
 Pour l'activer, il faut réserver l'ourlet. Détail : taille 48.
 
-Carte fidélité`;
+Carte fidélité
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.`;
 
 const E4_1_CE_EMAIL_POOL_7 = buildExpressPool("e4-1-ce-email-7", [
   q({
@@ -617,6 +660,7 @@ const E4_1_CE_EMAIL_POOL_7 = buildExpressPool("e4-1-ce-email-7", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_8 = `De : Boutique Soie+
+
 Objet : Dernière vérification
 
 Bonjour,
@@ -625,6 +669,10 @@ Nous gardons une écharpe en soie. Information : 25 francs.
 La note enregistrée est vert. Consigne : passer au comptoir au moment de votre venue.
 taille unique.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 Cordialement`;
 
 const E4_1_CE_EMAIL_POOL_8 = buildExpressPool("e4-1-ce-email-8", [
@@ -702,6 +750,7 @@ const E4_1_CE_EMAIL_POOL_8 = buildExpressPool("e4-1-ce-email-8", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_9 = `De : Support
+
 Objet : Question reçue
 
 Bonjour,
@@ -710,7 +759,12 @@ Vous avez posé une question sur une jupe plissée.
 Réponse : chez Promod, c'est possible. Information : 35 francs.
 Il faut seulement garder le ticket. rose. Détail : taille 38.
 
-Support`;
+Support
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E4_1_CE_EMAIL_POOL_9 = buildExpressPool("e4-1-ce-email-9", [
   q({
@@ -787,6 +841,7 @@ const E4_1_CE_EMAIL_POOL_9 = buildExpressPool("e4-1-ce-email-9", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_10 = `De : Intersport
+
 Objet : Commande de groupe
 
 Bonjour,
@@ -795,7 +850,13 @@ La commande pour des shorts de sport est prévue. Information : 29 francs.
 Elle porte la note noir. Consigne : payer avant jeudi avant le retrait.
 taille L.
 
-Le magasin`;
+Le magasin
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+À très bientôt, prends soin de toi.`;
 
 const E4_1_CE_EMAIL_POOL_10 = buildExpressPool("e4-1-ce-email-10", [
   q({
@@ -872,6 +933,7 @@ const E4_1_CE_EMAIL_POOL_10 = buildExpressPool("e4-1-ce-email-10", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_11 = `De : Alerte stock
+
 Objet : Disponibilité
 
 Bonjour,
@@ -880,7 +942,11 @@ des chaussettes est de nouveau disponible chez Coop mode.
 Information : 12 francs. Le détail à vérifier est blanc.
 Consigne : prendre deux packs. Détail : taille 39-42.
 
-Alerte stock`;
+Alerte stock
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E4_1_CE_EMAIL_POOL_11 = buildExpressPool("e4-1-ce-email-11", [
   q({
@@ -957,6 +1023,7 @@ const E4_1_CE_EMAIL_POOL_11 = buildExpressPool("e4-1-ce-email-11", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_12 = `De : Charles Vögele
+
 Objet : Réponse à votre message
 
 Bonjour,
@@ -965,6 +1032,9 @@ Oui, nous avons un costume complet.
 Vous pouvez passer. Information : 250 francs. Demandez la note gris foncé.
 Ensuite, action simple : prendre rendez-vous. Détail : taille 50.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 Merci`;
 
 const E4_1_CE_EMAIL_POOL_12 = buildExpressPool("e4-1-ce-email-12", [
@@ -1042,6 +1112,7 @@ const E4_1_CE_EMAIL_POOL_12 = buildExpressPool("e4-1-ce-email-12", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_13 = `De : Ardoise du jour
+
 Objet : Information
 
 Bonjour,
@@ -1050,6 +1121,9 @@ Aujourd'hui, nous proposons un t-shirt coton.
 C'est disponible chez Ochsner. Information : 15 francs. Détail : jaune.
 Action conseillée : choisir trois couleurs. Détail : taille L.
 
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Bonne journée`;
 
 const E4_1_CE_EMAIL_POOL_13 = buildExpressPool("e4-1-ce-email-13", [
@@ -1127,6 +1201,7 @@ const E4_1_CE_EMAIL_POOL_13 = buildExpressPool("e4-1-ce-email-13", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_14 = `De : Rappel automatique
+
 Objet : Rendez-vous
 
 Bonjour,
@@ -1135,7 +1210,10 @@ Votre rappel concerne un blouson jeans.
 Rendez-vous chez Gap. Information : 55 francs. Vérifiez bleu clair.
 Consigne : vérifier les manches. Détail : taille M.
 
-Rappel automatique`;
+Rappel automatique
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.`;
 
 const E4_1_CE_EMAIL_POOL_14 = buildExpressPool("e4-1-ce-email-14", [
   q({
@@ -1212,6 +1290,7 @@ const E4_1_CE_EMAIL_POOL_14 = buildExpressPool("e4-1-ce-email-14", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_15 = `De : Athleta
+
 Objet : Nouveauté
 
 Bonjour,
@@ -1220,6 +1299,12 @@ La nouveauté un legging yoga arrive. Information : 32 francs.
 Elle est liée à violet. Pour la réserver, vous pouvez entrer le code promo.
 taille S.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+J'espère que tout se passe bien de ton côté.
 À bientôt`;
 
 const E4_1_CE_EMAIL_POOL_15 = buildExpressPool("e4-1-ce-email-15", [
@@ -1297,6 +1382,7 @@ const E4_1_CE_EMAIL_POOL_15 = buildExpressPool("e4-1-ce-email-15", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_16 = `De : Vendeur
+
 Objet : Message noté
 
 Bonjour,
@@ -1305,7 +1391,11 @@ J'ai bien noté votre demande pour des chaussures de ville.
 Je vous attends chez friperie du Lac. Information : 60 francs. Je prépare noir.
 Sur place, vous pourrez essayer la paire. Détail : taille 40.
 
-Le vendeur`;
+Le vendeur
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E4_1_CE_EMAIL_POOL_16 = buildExpressPool("e4-1-ce-email-16", [
   q({
@@ -1382,6 +1472,7 @@ const E4_1_CE_EMAIL_POOL_16 = buildExpressPool("e4-1-ce-email-16", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_17 = `De : Programme fidélité
+
 Objet : Votre offre
 
 Bonjour,
@@ -1390,7 +1481,12 @@ Votre offre porte sur un manteau imperméable.
 Elle fonctionne chez Globus; information : 110 francs. La condition est kaki.
 N'oubliez pas cette action : montrer la carte bonus. Détail : taille XL.
 
-Programme fidélité`;
+Programme fidélité
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Bonne journée à toutes et à tous.`;
 
 const E4_1_CE_EMAIL_POOL_17 = buildExpressPool("e4-1-ce-email-17", [
   q({
@@ -1467,6 +1563,7 @@ const E4_1_CE_EMAIL_POOL_17 = buildExpressPool("e4-1-ce-email-17", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_18 = `De : boutique homme
+
 Objet : Fête confirmée
 
 Bonjour,
@@ -1475,6 +1572,11 @@ Pour votre fête, une cravate en soie est réservé.
 Information : 35 francs. La fiche indique bordeaux.
 Consigne : demander un coffret. Détail : taille unique.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le lieu est facile à trouver avec les indications.
 Cordialement`;
 
 const E4_1_CE_EMAIL_POOL_18 = buildExpressPool("e4-1-ce-email-18", [
@@ -1552,6 +1654,7 @@ const E4_1_CE_EMAIL_POOL_18 = buildExpressPool("e4-1-ce-email-18", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_19 = `De : Confirmation
+
 Objet : Retrait
 
 Bonjour,
@@ -1560,7 +1663,12 @@ Votre retrait pour un pyjama coton est prêt chez Manor.
 Information : 28 francs. La note est bleu marine.
 Consigne : présenter le numéro. Détail : taille M.
 
-Confirmation`;
+Confirmation
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Je reste à votre disposition pour toute précision.
+Le lieu est facile à trouver avec les indications.`;
 
 const E4_1_CE_EMAIL_POOL_19 = buildExpressPool("e4-1-ce-email-19", [
   q({
@@ -1637,6 +1745,7 @@ const E4_1_CE_EMAIL_POOL_19 = buildExpressPool("e4-1-ce-email-19", [
   }),
 ]);
 const E4_1_CE_EMAIL_TEXT_20 = `De : Outlet Aubonne
+
 Objet : Idée week-end
 
 Bonjour,
@@ -1645,7 +1754,12 @@ Pour ce week-end, nous conseillons une veste légère.
 Information : 49 francs. Regardez beige avant de choisir.
 Vous pourrez comparer deux modèles. Détail : taille L.
 
-Bon week-end`;
+Bon week-end
+En cas de perte d'objet, passez à l'accueil.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.`;
 
 const E4_1_CE_EMAIL_POOL_20 = buildExpressPool("e4-1-ce-email-20", [
   q({
@@ -2174,6 +2288,7 @@ Amie`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E4_2_CE_EMAIL_TEXT_1 = `De : Restaurant Le Lac
+
 Objet : salade et poisson
 
 Bonjour,
@@ -2181,6 +2296,11 @@ Bonjour,
 Votre demande est notée. Information principale : à 12 h 30. Le détail principal est eau minérale.
 Consigne : réserver une table. Détail : 28 francs.
 
+Les ascenseurs se trouvent à gauche de l'entrée.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Tout est organisé pour que ce soit simple.
 Cordialement`;
 
 const E4_2_CE_EMAIL_POOL_1 = buildExpressPool("e4-2-ce-email-1", [
@@ -2258,6 +2378,7 @@ const E4_2_CE_EMAIL_POOL_1 = buildExpressPool("e4-2-ce-email-1", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_2 = `De : Service client
+
 Objet : Confirmation
 
 Bonjour,
@@ -2266,7 +2387,12 @@ Nous confirmons une fondue moitié-moitié chez Fondue House.
 Information : à 19 h. La note du dossier : vin blanc.
 Action demandée : confirmer deux personnes. Détail : 35 francs.
 
-Service client`;
+Service client
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const E4_2_CE_EMAIL_POOL_2 = buildExpressPool("e4-2-ce-email-2", [
   q({
@@ -2343,6 +2469,7 @@ const E4_2_CE_EMAIL_POOL_2 = buildExpressPool("e4-2-ce-email-2", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_3 = `De : Pizzeria Roma
+
 Objet : Rappel avant votre venue
 
 Bonjour,
@@ -2351,6 +2478,13 @@ Avant de venir pour une pizza margherita, vérifiez coca-cola.
 Information indiquée : à 20 h. Sur place, il faudra payer à la livraison.
 18 francs.
 
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+Le trajet est simple, ne t'inquiète pas.
+Pensez à arriver un peu en avance.
 Merci`;
 
 const E4_2_CE_EMAIL_POOL_3 = buildExpressPool("e4-2-ce-email-3", [
@@ -2428,6 +2562,7 @@ const E4_2_CE_EMAIL_POOL_3 = buildExpressPool("e4-2-ce-email-3", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_4 = `De : Boutique en ligne
+
 Objet : Votre suivi
 
 Bonjour,
@@ -2436,7 +2571,12 @@ Votre demande pour un steak frites avance.
 Point de retrait : table 8. Information : à 13 h.
 Détail à confirmer : bière pression. Consigne : demander une cuisson à point.
 
-Boutique en ligne`;
+Boutique en ligne
+Nous vous souhaitons une excellente journée.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.`;
 
 const E4_2_CE_EMAIL_POOL_4 = buildExpressPool("e4-2-ce-email-4", [
   q({
@@ -2513,6 +2653,7 @@ const E4_2_CE_EMAIL_POOL_4 = buildExpressPool("e4-2-ce-email-4", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_5 = `De : Brasserie du Centre
+
 Objet : Offre limitée
 
 Bonjour,
@@ -2521,6 +2662,11 @@ L'offre sur un risotto aux champignons est disponible. Information : à midi.
 Elle concerne jus d'orange. Pour en profiter, consigne : choisir le plat végétarien.
 24 francs.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 À bientôt`;
 
 const E4_2_CE_EMAIL_POOL_5 = buildExpressPool("e4-2-ce-email-5", [
@@ -2598,6 +2744,7 @@ const E4_2_CE_EMAIL_POOL_5 = buildExpressPool("e4-2-ce-email-5", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_6 = `De : Réservation
+
 Objet : Préparation
 
 Bonjour,
@@ -2606,7 +2753,12 @@ Nous préparons un menu dégustation. Vous pouvez passer chez Restaurant Le Sapi
 La fiche indique champagne. Au comptoir, pensez à préparer l'anniversaire.
 65 francs.
 
-Réservation`;
+Réservation
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Vous pouvez répondre directement à ce message.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const E4_2_CE_EMAIL_POOL_6 = buildExpressPool("e4-2-ce-email-6", [
   q({
@@ -2683,6 +2835,7 @@ const E4_2_CE_EMAIL_POOL_6 = buildExpressPool("e4-2-ce-email-6", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_7 = `De : Carte fidélité
+
 Objet : Avantage du jour
 
 Bonjour,
@@ -2691,7 +2844,10 @@ Votre avantage concerne un burger classique.
 Il est disponible chez Burger King. Information : à 18 h 30. Détail : limonade.
 Pour l'activer, il faut prendre une table en terrasse. Détail : 22 francs.
 
-Carte fidélité`;
+Carte fidélité
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E4_2_CE_EMAIL_POOL_7 = buildExpressPool("e4-2-ce-email-7", [
   q({
@@ -2768,6 +2924,7 @@ const E4_2_CE_EMAIL_POOL_7 = buildExpressPool("e4-2-ce-email-7", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_8 = `De : Café du Port
+
 Objet : Dernière vérification
 
 Bonjour,
@@ -2776,6 +2933,11 @@ Nous gardons un filet de perche. Information : ce soir.
 La note enregistrée est vin du lac. Consigne : demander la vue sur le lac au moment de votre venue.
 38 francs.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 Cordialement`;
 
 const E4_2_CE_EMAIL_POOL_8 = buildExpressPool("e4-2-ce-email-8", [
@@ -2853,6 +3015,7 @@ const E4_2_CE_EMAIL_POOL_8 = buildExpressPool("e4-2-ce-email-8", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_9 = `De : Support
+
 Objet : Question reçue
 
 Bonjour,
@@ -2861,7 +3024,12 @@ Vous avez posé une question sur des pâtes carbonara.
 Réponse : chez Restaurant Italien, c'est possible. Information : à 19 h 30.
 Il faut seulement partager l'addition. eau gazeuse. Détail : 21 francs.
 
-Support`;
+Support
+N'oubliez pas de vérifier la date.
+Joignez les documents demandés si nécessaire.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.`;
 
 const E4_2_CE_EMAIL_POOL_9 = buildExpressPool("e4-2-ce-email-9", [
   q({
@@ -2938,6 +3106,7 @@ const E4_2_CE_EMAIL_POOL_9 = buildExpressPool("e4-2-ce-email-9", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_10 = `De : Snack Bar
+
 Objet : Commande de groupe
 
 Bonjour,
@@ -2946,7 +3115,13 @@ La commande pour une salade César est prévue. Information : à 13 h.
 Elle porte la note thé glacé. Consigne : retirer sans croûtons avant le retrait.
 16 francs.
 
-Le magasin`;
+Le magasin
+Pensez à arriver un peu en avance.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.`;
 
 const E4_2_CE_EMAIL_POOL_10 = buildExpressPool("e4-2-ce-email-10", [
   q({
@@ -3023,6 +3198,7 @@ const E4_2_CE_EMAIL_POOL_10 = buildExpressPool("e4-2-ce-email-10", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_11 = `De : Alerte stock
+
 Objet : Disponibilité
 
 Bonjour,
@@ -3031,7 +3207,12 @@ un menu enfant est de nouveau disponible chez table 6.
 Information : à midi. Le détail à vérifier est jus de pomme.
 Consigne : demander le jouet. Détail : 12 francs.
 
-Alerte stock`;
+Alerte stock
+Un plan simple est disponible à l'accueil.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E4_2_CE_EMAIL_POOL_11 = buildExpressPool("e4-2-ce-email-11", [
   q({
@@ -3108,6 +3289,7 @@ const E4_2_CE_EMAIL_POOL_11 = buildExpressPool("e4-2-ce-email-11", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_12 = `De : Café Bellevue
+
 Objet : Réponse à votre message
 
 Bonjour,
@@ -3116,6 +3298,10 @@ Oui, nous avons une tarte aux pommes.
 Vous pouvez passer. Information : à 15 h. Demandez la note café.
 Ensuite, action simple : prendre une part maison. Détail : 8 francs.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Un plan simple est disponible à l'accueil.
 Merci`;
 
 const E4_2_CE_EMAIL_POOL_12 = buildExpressPool("e4-2-ce-email-12", [
@@ -3193,6 +3379,7 @@ const E4_2_CE_EMAIL_POOL_12 = buildExpressPool("e4-2-ce-email-12", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_13 = `De : Ardoise du jour
+
 Objet : Information
 
 Bonjour,
@@ -3201,6 +3388,9 @@ Aujourd'hui, nous proposons un plateau apéro.
 C'est disponible chez bar du Centre. Information : de 17 h à 19 h. Détail : spritz.
 Action conseillée : venir avec trois amis. Détail : 15 francs.
 
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Bonne journée`;
 
 const E4_2_CE_EMAIL_POOL_13 = buildExpressPool("e4-2-ce-email-13", [
@@ -3278,6 +3468,7 @@ const E4_2_CE_EMAIL_POOL_13 = buildExpressPool("e4-2-ce-email-13", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_14 = `De : Rappel automatique
+
 Objet : Rendez-vous
 
 Bonjour,
@@ -3286,7 +3477,10 @@ Votre rappel concerne une soupe du jour.
 Rendez-vous chez table 10. Information : à 12 h. Vérifiez pain.
 Consigne : commander une entrée chaude. Détail : 9 francs.
 
-Rappel automatique`;
+Rappel automatique
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const E4_2_CE_EMAIL_POOL_14 = buildExpressPool("e4-2-ce-email-14", [
   q({
@@ -3363,6 +3557,7 @@ const E4_2_CE_EMAIL_POOL_14 = buildExpressPool("e4-2-ce-email-14", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_15 = `De : terrasse du lac
+
 Objet : Nouveauté
 
 Bonjour,
@@ -3371,6 +3566,12 @@ La nouveauté un plateau de fruits de mer arrive. Information : à 21 h.
 Elle est liée à vin blanc. Pour la réserver, vous pouvez confirmer la table.
 55 francs.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Nous restons disponibles pour vous aider.
 À bientôt`;
 
 const E4_2_CE_EMAIL_POOL_15 = buildExpressPool("e4-2-ce-email-15", [
@@ -3448,6 +3649,7 @@ const E4_2_CE_EMAIL_POOL_15 = buildExpressPool("e4-2-ce-email-15", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_16 = `De : Vendeur
+
 Objet : Message noté
 
 Bonjour,
@@ -3456,7 +3658,11 @@ J'ai bien noté votre demande pour un poulet rôti.
 Je vous attends chez table 14. Information : à 19 h. Je prépare eau.
 Sur place, vous pourrez servir sans gluten. Détail : 26 francs.
 
-Le vendeur`;
+Le vendeur
+Une confirmation vous sera envoyée ensuite.
+Nous restons disponibles pour vous aider.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.`;
 
 const E4_2_CE_EMAIL_POOL_16 = buildExpressPool("e4-2-ce-email-16", [
   q({
@@ -3533,6 +3739,7 @@ const E4_2_CE_EMAIL_POOL_16 = buildExpressPool("e4-2-ce-email-16", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_17 = `De : Programme fidélité
+
 Objet : Votre offre
 
 Bonjour,
@@ -3541,7 +3748,12 @@ Votre offre porte sur une crêpe sucrée.
 Elle fonctionne chez Crêperie Bretonne; information : à 16 h. La condition est chocolat chaud.
 N'oubliez pas cette action : choisir sucre ou chocolat. Détail : 10 francs.
 
-Programme fidélité`;
+Programme fidélité
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E4_2_CE_EMAIL_POOL_17 = buildExpressPool("e4-2-ce-email-17", [
   q({
@@ -3618,6 +3830,7 @@ const E4_2_CE_EMAIL_POOL_17 = buildExpressPool("e4-2-ce-email-17", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_18 = `De : Formule Midi
+
 Objet : Fête confirmée
 
 Bonjour,
@@ -3626,6 +3839,11 @@ Pour votre fête, un plat du jour et dessert est réservé.
 Information : entre 12 h et 14 h. La fiche indique café.
 Consigne : manger rapidement. Détail : 22 francs.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Le trajet est simple, ne t'inquiète pas.
 Cordialement`;
 
 const E4_2_CE_EMAIL_POOL_18 = buildExpressPool("e4-2-ce-email-18", [
@@ -3703,6 +3921,7 @@ const E4_2_CE_EMAIL_POOL_18 = buildExpressPool("e4-2-ce-email-18", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_19 = `De : Confirmation
+
 Objet : Retrait
 
 Bonjour,
@@ -3711,7 +3930,12 @@ Votre retrait pour une salade niçoise est prêt chez terrasse 5.
 Information : à 20 h. La note est rosé.
 Consigne : garder la table dehors. Détail : 19 francs.
 
-Confirmation`;
+Confirmation
+Les informations importantes sont déjà notées plus haut.
+Pensez à arriver un peu en avance.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E4_2_CE_EMAIL_POOL_19 = buildExpressPool("e4-2-ce-email-19", [
   q({
@@ -3788,6 +4012,7 @@ const E4_2_CE_EMAIL_POOL_19 = buildExpressPool("e4-2-ce-email-19", [
   }),
 ]);
 const E4_2_CE_EMAIL_TEXT_20 = `De : Restaurant Vert
+
 Objet : Idée week-end
 
 Bonjour,
@@ -3796,7 +4021,12 @@ Pour ce week-end, nous conseillons un menu végétalien.
 Information : à 19 h. Regardez smoothie avant de choisir.
 Vous pourrez demander les options bio. Détail : 25 francs.
 
-Bon week-end`;
+Bon week-end
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E4_2_CE_EMAIL_POOL_20 = buildExpressPool("e4-2-ce-email-20", [
   q({
@@ -4325,6 +4555,7 @@ Le guide`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E4_3_CE_EMAIL_TEXT_1 = `De : Boulangerie Martin
+
 Objet : une baguette tradition
 
 Bonjour,
@@ -4332,6 +4563,11 @@ Bonjour,
 Votre demande est notée. Information principale : à 7 h. Le détail principal est 2 pièces.
 Consigne : passer tôt. Détail : 2.80 francs.
 
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+N'oubliez pas de vérifier la date et l'heure.
 Cordialement`;
 
 const E4_3_CE_EMAIL_POOL_1 = buildExpressPool("e4-3-ce-email-1", [
@@ -4409,6 +4645,7 @@ const E4_3_CE_EMAIL_POOL_1 = buildExpressPool("e4-3-ce-email-1", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_2 = `De : Service client
+
 Objet : Confirmation
 
 Bonjour,
@@ -4417,7 +4654,12 @@ Nous confirmons des croissants au beurre chez Boulangerie du Lac.
 Information : demain à 8 h. La note du dossier : 6 pièces.
 Action demandée : réserver au prénom Marie. Détail : 12 francs.
 
-Service client`;
+Service client
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+Cordialement, et bonne journée.`;
 
 const E4_3_CE_EMAIL_POOL_2 = buildExpressPool("e4-3-ce-email-2", [
   q({
@@ -4494,6 +4736,7 @@ const E4_3_CE_EMAIL_POOL_2 = buildExpressPool("e4-3-ce-email-2", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_3 = `De : Pâtisserie Douceur
+
 Objet : Rappel avant votre venue
 
 Bonjour,
@@ -4502,6 +4745,13 @@ Avant de venir pour un gâteau au chocolat, vérifiez 1 gâteau.
 Information indiquée : samedi à 10 h. Sur place, il faudra écrire le prénom.
 35 francs.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Passe le bonjour à tout le monde.
 Merci`;
 
 const E4_3_CE_EMAIL_POOL_3 = buildExpressPool("e4-3-ce-email-3", [
@@ -4579,6 +4829,7 @@ const E4_3_CE_EMAIL_POOL_3 = buildExpressPool("e4-3-ce-email-3", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_4 = `De : Boutique en ligne
+
 Objet : Votre suivi
 
 Bonjour,
@@ -4587,7 +4838,12 @@ Votre demande pour un pain complet avance.
 Point de retrait : Pain & Co. Information : ce matin.
 Détail à confirmer : 1 pain. Consigne : prendre un sac.
 
-Boutique en ligne`;
+Boutique en ligne
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.`;
 
 const E4_3_CE_EMAIL_POOL_4 = buildExpressPool("e4-3-ce-email-4", [
   q({
@@ -4664,6 +4920,7 @@ const E4_3_CE_EMAIL_POOL_4 = buildExpressPool("e4-3-ce-email-4", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_5 = `De : Boulangerie Centrale
+
 Objet : Offre limitée
 
 Bonjour,
@@ -4672,6 +4929,12 @@ L'offre sur une quiche lorraine est disponible. Information : à midi.
 Elle concerne 4 parts. Pour en profiter, consigne : réchauffer cinq minutes.
 18 francs.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 À bientôt`;
 
 const E4_3_CE_EMAIL_POOL_5 = buildExpressPool("e4-3-ce-email-5", [
@@ -4749,6 +5012,7 @@ const E4_3_CE_EMAIL_POOL_5 = buildExpressPool("e4-3-ce-email-5", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_6 = `De : Réservation
+
 Objet : Préparation
 
 Bonjour,
@@ -4757,7 +5021,11 @@ Nous préparons des viennoiseries assorties. Vous pouvez passer chez Viennoiseri
 La fiche indique 12 pièces. Au comptoir, pensez à livrer à l'entreprise.
 24 francs.
 
-Réservation`;
+Réservation
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E4_3_CE_EMAIL_POOL_6 = buildExpressPool("e4-3-ce-email-6", [
   q({
@@ -4834,6 +5102,7 @@ const E4_3_CE_EMAIL_POOL_6 = buildExpressPool("e4-3-ce-email-6", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_7 = `De : Carte fidélité
+
 Objet : Avantage du jour
 
 Bonjour,
@@ -4842,7 +5111,10 @@ Votre avantage concerne du pain aux noix.
 Il est disponible chez Maison du Pain. Information : à 17 h. Détail : 2 pains.
 Pour l'activer, il faut couper les tranches. Détail : 7 francs.
 
-Carte fidélité`;
+Carte fidélité
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.`;
 
 const E4_3_CE_EMAIL_POOL_7 = buildExpressPool("e4-3-ce-email-7", [
   q({
@@ -4919,6 +5191,7 @@ const E4_3_CE_EMAIL_POOL_7 = buildExpressPool("e4-3-ce-email-7", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_8 = `De : Le Fournil
+
 Objet : Dernière vérification
 
 Bonjour,
@@ -4927,6 +5200,12 @@ Nous gardons des sandwichs jambon-fromage. Information : de 11 h à 14 h.
 La note enregistrée est 3 sandwiches. Consigne : prendre la formule au moment de votre venue.
 15 francs.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Le service client répond aussi par téléphone.
 Cordialement`;
 
 const E4_3_CE_EMAIL_POOL_8 = buildExpressPool("e4-3-ce-email-8", [
@@ -5004,6 +5283,7 @@ const E4_3_CE_EMAIL_POOL_8 = buildExpressPool("e4-3-ce-email-8", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_9 = `De : Support
+
 Objet : Question reçue
 
 Bonjour,
@@ -5012,7 +5292,12 @@ Vous avez posé une question sur une tarte aux pommes.
 Réponse : chez Boulangerie des Alpes, c'est possible. Information : dimanche.
 Il faut seulement réserver avant midi. 1 tarte. Détail : 22 francs.
 
-Support`;
+Support
+Le personnel peut répondre en français simple.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E4_3_CE_EMAIL_POOL_9 = buildExpressPool("e4-3-ce-email-9", [
   q({
@@ -5089,6 +5374,7 @@ const E4_3_CE_EMAIL_POOL_9 = buildExpressPool("e4-3-ce-email-9", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_10 = `De : Boulangerie Rossi
+
 Objet : Commande de groupe
 
 Bonjour,
@@ -5097,7 +5383,13 @@ La commande pour des brioches est prévue. Information : le matin.
 Elle porte la note 4 brioches. Consigne : payer ensemble avant le retrait.
 8 francs.
 
-Le magasin`;
+Le magasin
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.`;
 
 const E4_3_CE_EMAIL_POOL_10 = buildExpressPool("e4-3-ce-email-10", [
   q({
@@ -5174,6 +5466,7 @@ const E4_3_CE_EMAIL_POOL_10 = buildExpressPool("e4-3-ce-email-10", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_11 = `De : Alerte stock
+
 Objet : Disponibilité
 
 Bonjour,
@@ -5182,7 +5475,12 @@ des éclairs au chocolat est de nouveau disponible chez Pâtisserie Fine.
 Information : cet après-midi. Le détail à vérifier est 6 éclairs.
 Consigne : choisir les parfums. Détail : 18 francs.
 
-Alerte stock`;
+Alerte stock
+N'oubliez pas de vérifier la date et l'heure.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.`;
 
 const E4_3_CE_EMAIL_POOL_11 = buildExpressPool("e4-3-ce-email-11", [
   q({
@@ -5259,6 +5557,7 @@ const E4_3_CE_EMAIL_POOL_11 = buildExpressPool("e4-3-ce-email-11", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_12 = `De : Boulangerie Nyon
+
 Objet : Réponse à votre message
 
 Bonjour,
@@ -5267,6 +5566,10 @@ Oui, nous avons une fougasse aux olives.
 Vous pouvez passer. Information : à midi. Demandez la note 2 pièces.
 Ensuite, action simple : demander un sachet. Détail : 9 francs.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Merci de votre attention et de votre patience.
 Merci`;
 
 const E4_3_CE_EMAIL_POOL_12 = buildExpressPool("e4-3-ce-email-12", [
@@ -5344,6 +5647,7 @@ const E4_3_CE_EMAIL_POOL_12 = buildExpressPool("e4-3-ce-email-12", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_13 = `De : Ardoise du jour
+
 Objet : Information
 
 Bonjour,
@@ -5352,6 +5656,9 @@ Aujourd'hui, nous proposons un pain de campagne.
 C'est disponible chez Fournil Tradition. Information : toute la journée. Détail : 1 pain.
 Action conseillée : demander la cuisson foncée. Détail : 4 francs.
 
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Bonne journée`;
 
 const E4_3_CE_EMAIL_POOL_13 = buildExpressPool("e4-3-ce-email-13", [
@@ -5429,6 +5736,7 @@ const E4_3_CE_EMAIL_POOL_13 = buildExpressPool("e4-3-ce-email-13", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_14 = `De : Rappel automatique
+
 Objet : Rendez-vous
 
 Bonjour,
@@ -5437,7 +5745,10 @@ Votre rappel concerne du pain de mie.
 Rendez-vous chez Coop boulangerie. Information : ce soir. Vérifiez 2 paquets.
 Consigne : acheter avant fermeture. Détail : 5 francs.
 
-Rappel automatique`;
+Rappel automatique
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.`;
 
 const E4_3_CE_EMAIL_POOL_14 = buildExpressPool("e4-3-ce-email-14", [
   q({
@@ -5514,6 +5825,7 @@ const E4_3_CE_EMAIL_POOL_14 = buildExpressPool("e4-3-ce-email-14", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_15 = `De : Artisan Boulanger
+
 Objet : Nouveauté
 
 Bonjour,
@@ -5522,6 +5834,12 @@ La nouveauté du pain sans gluten arrive. Information : à 7 h.
 Elle est liée à 1 pain. Pour la réserver, vous pouvez réserver la veille.
 5.50 francs.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Passe le bonjour à tout le monde.
 À bientôt`;
 
 const E4_3_CE_EMAIL_POOL_15 = buildExpressPool("e4-3-ce-email-15", [
@@ -5599,6 +5917,7 @@ const E4_3_CE_EMAIL_POOL_15 = buildExpressPool("e4-3-ce-email-15", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_16 = `De : Vendeur
+
 Objet : Message noté
 
 Bonjour,
@@ -5607,7 +5926,11 @@ J'ai bien noté votre demande pour des chaussons aux pommes.
 Je vous attends chez Boulangerie Soleil. Information : le matin. Je prépare 8 pièces.
 Sur place, vous pourrez mettre de côté. Détail : 16 francs.
 
-Le vendeur`;
+Le vendeur
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Le lieu est facile à trouver avec les indications.`;
 
 const E4_3_CE_EMAIL_POOL_16 = buildExpressPool("e4-3-ce-email-16", [
   q({
@@ -5684,6 +6007,7 @@ const E4_3_CE_EMAIL_POOL_16 = buildExpressPool("e4-3-ce-email-16", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_17 = `De : Programme fidélité
+
 Objet : Votre offre
 
 Bonjour,
@@ -5692,7 +6016,12 @@ Votre offre porte sur des madeleines.
 Elle fonctionne chez Pains & Gourmandises; information : après l'école. La condition est 12 pièces.
 N'oubliez pas cette action : montrer la carte. Détail : 10 francs.
 
-Programme fidélité`;
+Programme fidélité
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.`;
 
 const E4_3_CE_EMAIL_POOL_17 = buildExpressPool("e4-3-ce-email-17", [
   q({
@@ -5769,6 +6098,7 @@ const E4_3_CE_EMAIL_POOL_17 = buildExpressPool("e4-3-ce-email-17", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_18 = `De : Pâtisserie Mariage
+
 Objet : Fête confirmée
 
 Bonjour,
@@ -5777,6 +6107,11 @@ Pour votre fête, une pièce montée est réservé.
 Information : samedi à 16 h. La fiche indique 3 étages.
 Consigne : confirmer le prénom. Détail : 120 francs.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement`;
 
 const E4_3_CE_EMAIL_POOL_18 = buildExpressPool("e4-3-ce-email-18", [
@@ -5854,6 +6189,7 @@ const E4_3_CE_EMAIL_POOL_18 = buildExpressPool("e4-3-ce-email-18", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_19 = `De : Confirmation
+
 Objet : Retrait
 
 Bonjour,
@@ -5862,7 +6198,12 @@ Votre retrait pour un pain aux céréales est prêt chez Boulangerie Village.
 Information : tous les matins. La note est 1 pain.
 Consigne : présenter le numéro. Détail : 4.20 francs.
 
-Confirmation`;
+Confirmation
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.`;
 
 const E4_3_CE_EMAIL_POOL_19 = buildExpressPool("e4-3-ce-email-19", [
   q({
@@ -5939,6 +6280,7 @@ const E4_3_CE_EMAIL_POOL_19 = buildExpressPool("e4-3-ce-email-19", [
   }),
 ]);
 const E4_3_CE_EMAIL_TEXT_20 = `De : Pâtisserie Fine
+
 Objet : Idée week-end
 
 Bonjour,
@@ -5947,7 +6289,12 @@ Pour ce week-end, nous conseillons une boîte de macarons.
 Information : 24 h avant. Regardez 12 macarons avant de choisir.
 Vous pourrez choisir les parfums. Détail : 24 francs.
 
-Bon week-end`;
+Bon week-end
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Merci de confirmer la bonne réception.`;
 
 const E4_3_CE_EMAIL_POOL_20 = buildExpressPool("e4-3-ce-email-20", [
   q({

@@ -16,7 +16,12 @@ const CE_TEXT_1 = `Menu du jour
 
 Je regarde salade et poisson. Détail important : eau minérale.
 L'information affichée est à 12 h 30 chez Restaurant Le Lac.
-Avant de partir, il faut réserver une table. Détail : 28 francs.`;
+Avant de partir, il faut réserver une table. Détail : 28 francs.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Les horaires habituels restent les mêmes.`;
 
 const CE_POOL_1 = buildExpressPool("e4-2-1", [
   q({
@@ -96,7 +101,12 @@ const CE_TEXT_2 = `SMS réservation
 
 Salut ! Pour une fondue moitié-moitié, information : à 19 h.
 On se retrouve chez Fondue House. vin blanc est le détail à vérifier.
-Pense à confirmer deux personnes; Détail : 35 francs.`;
+Pense à confirmer deux personnes; Détail : 35 francs.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Pensez à arriver un peu en avance.`;
 
 const CE_POOL_2 = buildExpressPool("e4-2-2", [
   q({
@@ -177,7 +187,12 @@ const CE_TEXT_3 = `WhatsApp livraison
 À noter aujourd'hui : une pizza margherita.
 Lieu : Pizzeria Roma. Moment : à 20 h.
 Petit détail : coca-cola. Action prévue : payer à la livraison.
-18 francs.`;
+18 francs.
+N'oubliez pas de vérifier la date.
+Passe le bonjour à tout le monde.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.`;
 
 const CE_POOL_3 = buildExpressPool("e4-2-3", [
   q({
@@ -258,7 +273,13 @@ const CE_TEXT_4 = `Note serveur
 La cliente hésite encore pour un steak frites.
 Chez table 8, elle vérifie bière pression et demande conseil.
 Information : à 13 h. Elle doit demander une cuisson à point.
-32 francs.`;
+32 francs.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.`;
 
 const CE_POOL_4 = buildExpressPool("e4-2-4", [
   q({
@@ -339,7 +360,12 @@ const CE_TEXT_5 = `Affiche spécialité
 Offre courte sur un risotto aux champignons.
 Elle est disponible chez Brasserie du Centre. Information : à midi.
 Le vendeur rappelle jus d'orange. Pour profiter de l'offre, il faut choisir le plat végétarien.
-24 francs.`;
+24 francs.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+Joignez les documents demandés si nécessaire.`;
 
 const CE_POOL_5 = buildExpressPool("e4-2-5", [
   q({
@@ -420,7 +446,13 @@ const CE_TEXT_6 = `E-mail restaurant
 Bonjour, votre demande pour un menu dégustation est prête.
 Passez chez Restaurant Le Sapin. Information : à 20 h 30.
 Au comptoir, annoncez champagne et pensez à préparer l'anniversaire.
-65 francs.`;
+65 francs.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Nous vous souhaitons une excellente journée.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.`;
 
 const CE_POOL_6 = buildExpressPool("e4-2-6", [
   q({
@@ -501,7 +533,11 @@ const CE_TEXT_7 = `Liste famille
 Liste rapide avant de sortir : un burger classique.
 Adresse : Burger King. Moment prévu : à 18 h 30.
 Détail à ne pas oublier : limonade.
-Sur place, il faut prendre une table en terrasse. Détail : 22 francs.`;
+Sur place, il faut prendre une table en terrasse. Détail : 22 francs.
+N'oubliez pas de vérifier la date.
+N'hésite pas à me répondre quand tu peux.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const CE_POOL_7 = buildExpressPool("e4-2-7", [
   q({
@@ -582,7 +618,11 @@ const CE_TEXT_8 = `Notification ardoise
 Notification du magasin : un filet de perche est disponible.
 Le retrait se fait chez Café du Port. Information : ce soir.
 La note indique vin du lac.
-Le client doit demander la vue sur le lac. Détail : 38 francs.`;
+Le client doit demander la vue sur le lac. Détail : 38 francs.
+C'est important pour moi, merci beaucoup.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.`;
 
 const CE_POOL_8 = buildExpressPool("e4-2-8", [
   q({
@@ -663,7 +703,13 @@ const CE_TEXT_9 = `Avis client
 Petit avis sur des pâtes carbonara.
 J'ai testé chez Restaurant Italien; eau gazeuse m'a plu.
 J'y retourne avec cette information : à 19 h 30. Action prévue : partager l'addition.
-21 francs.`;
+21 francs.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Conservez le numéro de contact indiqué.`;
 
 const CE_POOL_9 = buildExpressPool("e4-2-9", [
   q({
@@ -744,7 +790,11 @@ const CE_TEXT_10 = `Commande de groupe
 Commande de groupe : une salade César.
 La personne responsable passe chez Snack Bar. Information notée : à 13 h.
 Elle confirme thé glacé par téléphone.
-Il reste à retirer sans croûtons. Détail : 16 francs.`;
+Il reste à retirer sans croûtons. Détail : 16 francs.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+J'espère que tout se passe bien de ton côté.`;
 
 const CE_POOL_10 = buildExpressPool("e4-2-10", [
   q({
@@ -825,7 +875,11 @@ const CE_TEXT_11 = `Alerte cantine
 Alerte du jour : un menu enfant.
 Chez table 6, il reste peu de stock.
 Information : à midi. Cherchez jus de pomme.
-Pour finaliser, il faut demander le jouet. Détail : 12 francs.`;
+Pour finaliser, il faut demander le jouet. Détail : 12 francs.
+Les informations importantes sont déjà notées plus haut.
+Merci de lire ce message jusqu'à la fin.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const CE_POOL_11 = buildExpressPool("e4-2-11", [
   q({
@@ -907,7 +961,12 @@ Conversation courte :
 — Tu veux une tarte aux pommes ?
 — Oui, chez Café Bellevue.
 — Information : à 15 h; détail : café.
-— D'accord, action : prendre une part maison. Détail : 8 francs.`;
+Nous comptons sur vous.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+— D'accord, action : prendre une part maison. Détail : 8 francs.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const CE_POOL_12 = buildExpressPool("e4-2-12", [
   q({
@@ -988,7 +1047,12 @@ const CE_TEXT_13 = `Ardoise happy hour
 Sur l'ardoise, on lit un plateau apéro.
 Le lieu est bar du Centre; l'information indiquée est de 17 h à 19 h.
 La ligne suivante parle de spritz.
-Le client doit venir avec trois amis. Détail : 15 francs.`;
+Le client doit venir avec trois amis. Détail : 15 francs.
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Voici quelques détails utiles pour la suite.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const CE_POOL_13 = buildExpressPool("e4-2-13", [
   q({
@@ -1070,7 +1134,11 @@ Rappel dans le téléphone : une soupe du jour.
 Départ ou passage avec cette information : à 12 h.
 Lieu : table 10.
 Vérifier pain avant de payer.
-Ensuite, commander une entrée chaude. Détail : 9 francs.`;
+Ensuite, commander une entrée chaude. Détail : 9 francs.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Dis-moi si tu as besoin d'autre chose.`;
 
 const CE_POOL_14 = buildExpressPool("e4-2-14", [
   q({
@@ -1151,7 +1219,12 @@ const CE_TEXT_15 = `Annonce terrasse
 Annonce locale : un plateau de fruits de mer arrive ce matin.
 Chez terrasse du lac, l'information affichée est à 21 h.
 vin blanc est mis de côté.
-Action simple : confirmer la table. Détail : 55 francs.`;
+Action simple : confirmer la table. Détail : 55 francs.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous vous souhaitons une excellente journée.`;
 
 const CE_POOL_15 = buildExpressPool("e4-2-15", [
   q({
@@ -1231,6 +1304,10 @@ const CE_TEXT_16 = `Message cuisine
 
 Petit message au vendeur : je viens pour un poulet rôti.
 Je serai chez table 14. Information : à 19 h.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Voici quelques détails utiles pour la suite.
+Nous traitons votre demande rapidement.
 Merci de préparer eau.
 Sur place, je vais servir sans gluten. Détail : 26 francs.`;
 
@@ -1313,7 +1390,12 @@ const CE_TEXT_17 = `Offre goûter
 Carte de fidélité : offre sur une crêpe sucrée.
 Elle fonctionne chez Crêperie Bretonne; information : à 16 h.
 Le détail lu en magasin est chocolat chaud.
-Pour l'utiliser, il faut choisir sucre ou chocolat. Détail : 10 francs.`;
+Pour l'utiliser, il faut choisir sucre ou chocolat. Détail : 10 francs.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+À bientôt, et merci de votre lecture.`;
 
 const CE_POOL_17 = buildExpressPool("e4-2-17", [
   q({
@@ -1394,7 +1476,11 @@ const CE_TEXT_18 = `Réservation midi
 Pour la fête, il faut un plat du jour et dessert.
 La réservation est chez Formule Midi. Information : entre 12 h et 14 h.
 La vendeuse confirme café.
-Dernière étape : manger rapidement. Détail : 22 francs.`;
+Dernière étape : manger rapidement. Détail : 22 francs.
+N'oubliez pas de vérifier la date.
+Pensez à arriver un peu en avance.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const CE_POOL_18 = buildExpressPool("e4-2-18", [
   q({
@@ -1475,7 +1561,11 @@ const CE_TEXT_19 = `Confirmation dîner
 Message de confirmation : une salade niçoise.
 Le retrait se fait chez terrasse 5. Information : à 20 h.
 La commande porte la note rosé.
-Consigne : garder la table dehors. Détail : 19 francs.`;
+Consigne : garder la table dehors. Détail : 19 francs.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Une confirmation sera envoyée ensuite.`;
 
 const CE_POOL_19 = buildExpressPool("e4-2-19", [
   q({
@@ -1556,7 +1646,11 @@ const CE_TEXT_20 = `Idée végan
 Dernière idée du week-end : un menu végétalien.
 On passe chez Restaurant Vert. Information : à 19 h.
 On regarde d'abord smoothie.
-Si tout va bien, on peut demander les options bio. Détail : 25 francs.`;
+Si tout va bien, on peut demander les options bio. Détail : 25 francs.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+À bientôt, et merci de votre lecture.`;
 
 const CE_POOL_20 = buildExpressPool("e4-2-20", [
   q({
@@ -1935,191 +2029,191 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous réservez une table au restaurant.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de le restaurant ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour restaurant." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e4-2-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous réservez une table au restaurant.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de le restaurant." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour restaurant." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-2-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous réservez une table au restaurant.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le restaurant." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le restaurant, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e4-2-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous réservez une table au restaurant.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de le restaurant ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour restaurant." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e4-2-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous réservez une table au restaurant.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le restaurant." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le restaurant, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e4-2-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous réservez une table au restaurant.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de le restaurant." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour restaurant." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-2-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous réservez une table au restaurant.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le restaurant." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le restaurant, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e4-2-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous réservez une table au restaurant.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le restaurant." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le restaurant, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e4-2-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous réservez une table au restaurant.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le restaurant." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le restaurant, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e4-2-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : le restaurant.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous réservez une table au restaurant.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le restaurant." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le restaurant." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le restaurant, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 }
 ];

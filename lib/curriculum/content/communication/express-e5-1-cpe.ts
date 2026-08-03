@@ -21,7 +21,10 @@ Pour un rendez-vous, appelez le 021 345 67 89 ou allez sur notre site Internet.
 Le Dr Martin reçoit sans rendez-vous le mercredi matin, de 9 h à 12 h.
 Si vous toussez ou si vous avez de la fièvre, mettez un masque dans la salle d'attente.
 Apportez votre carte d'assurance à chaque visite.
-Le week-end, le cabinet est fermé. Pour une urgence, composez le 144.`;
+Le week-end, le cabinet est fermé. Pour une urgence, composez le 144.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.`;
 
 const E5_1_CE_POOL_1 = buildExpressPool("e5-1-ce-1", [
   q({
@@ -119,6 +122,9 @@ Nous vous rappelons votre rendez-vous demain, mardi 8 avril, à 14 h 30.
 Adresse : rue des Lilas 12, 2e étage.
 Apportez votre carte d'assurance et vos ordonnances.
 Pour annuler, appelez avant 17 h aujourd'hui.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
 Merci, le secrétariat.`;
 
 const E5_1_CE_POOL_2 = buildExpressPool("e5-1-ce-2", [
@@ -218,6 +224,10 @@ Merci de respecter le silence.
 Portez un masque si vous toussez ou si vous avez de la fièvre.
 Une personne accompagne maximum un patient.
 Les enfants doivent rester avec un adulte.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Les horaires habituels restent les mêmes.
 Merci de votre compréhension.`;
 
 const E5_1_CE_POOL_3 = buildExpressPool("e5-1-ce-3", [
@@ -315,7 +325,10 @@ Lieu : salle polyvalente, rue du Marché 4.
 Pas besoin de rendez-vous. Apportez votre carte d'assurance.
 La vaccination est pour les personnes de plus de 65 ans et les personnes à risque.
 Les enfants ne sont pas concernés par cette séance.
-Renseignements : 021 111 22 33.`;
+Renseignements : 021 111 22 33.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.`;
 
 const E5_1_CE_POOL_4 = buildExpressPool("e5-1-ce-4", [
   q({
@@ -415,6 +428,10 @@ L'infirmière peut donner un médicament seulement avec une autorisation écrite
 Chaque élève doit avoir une petite trousse : un pansement et une fiche avec le numéro des parents.
 L'infirmière est présente le lundi, le mercredi et le vendredi de 8 h à 12 h.
 Pour une urgence grave, composez le 144.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de confirmer la bonne réception.
 Cordialement, Mme Keller, infirmière.`;
 
 const E5_1_CE_POOL_5 = buildExpressPool("e5-1-ce-5", [
@@ -513,6 +530,11 @@ Appelez le 144 si :
 — une personne ne respire plus ;
 — une personne est inconsciente ;
 — il y a une hémorragie importante ;
+Sinon on peut aussi en parler demain matin.
+À bientôt, et merci de votre lecture.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
 — une personne a une forte douleur à la poitrine.
 N'appelez pas le 144 pour un simple rhume ou une petite coupure.
 En cas de doute, le 144 vous conseille.
@@ -612,6 +634,9 @@ Je m'appelle Sofia. J'habite à Lausanne depuis deux mois.
 Je cherche un médecin qui parle espagnol et français.
 J'ai besoin d'un rendez-vous pour un contrôle général.
 Mon assurance est CSS. Je peux me déplacer près de la gare.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
 Merci de vos conseils !
 Sofia`;
 
@@ -710,10 +735,16 @@ Services disponibles :
 — médecin généraliste (sur rendez-vous) ;
 — infirmier pour les pansements ;
 — sage-femme le mardi ;
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
 — permanence sans rendez-vous le mercredi de 8 h à 10 h.
 Horaires : lundi–vendredi 7 h 30–19 h, samedi 8 h–12 h.
 Adresse : avenue des Acacias 20.
-Parking gratuit pour les patients.`;
+Parking gratuit pour les patients.
+Le lieu est facile à trouver avec les indications.`;
 
 const E5_1_CE_POOL_8 = buildExpressPool("e5-1-ce-8", [
   q({
@@ -812,7 +843,10 @@ Vous recevrez un lien par e-mail dix minutes avant.
 Utilisez un ordinateur ou une tablette avec caméra et micro.
 Installez-vous dans une pièce calme, avec une bonne connexion Internet.
 La consultation dure environ 20 minutes.
-Si la connexion ne marche pas, appelez le secrétariat au 021 222 33 44.`;
+Si la connexion ne marche pas, appelez le secrétariat au 021 222 33 44.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E5_1_CE_POOL_9 = buildExpressPool("e5-1-ce-9", [
   q({
@@ -912,7 +946,11 @@ Consultations sur rendez-vous : lundi à vendredi, 8 h–17 h.
 Le Dr Petit reçoit sans rendez-vous le mercredi de 14 h à 16 h (grippe et fièvre seulement).
 Apportez le carnet de vaccination de l'enfant.
 Les parents peuvent accompagner l'enfant dans la salle de consultation.
-Urgences pédiatriques : composez le 144.`;
+Urgences pédiatriques : composez le 144.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Le lieu est facile à trouver avec les indications.`;
 
 const E5_1_CE_POOL_10 = buildExpressPool("e5-1-ce-10", [
   q({
@@ -1010,6 +1048,11 @@ Apportez : votre carte d'assurance, une pièce d'identité, la liste de vos méd
 Si vous avez des examens récents (radio, analyse de sang), apportez les résultats.
 Ne fumez pas dans le cabinet.
 Les animaux ne sont pas acceptés, sauf chiens d'assistance.
+Les photos peuvent être prises pour le souvenir.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.
+Les horaires habituels restent les mêmes.
 Merci.`;
 
 const E5_1_CE_POOL_11 = buildExpressPool("e5-1-ce-11", [
@@ -1108,7 +1151,10 @@ Rez-de-chaussée : accueil, urgences, radiologie.
 2e étage : maternité et pédiatrie.
 3e étage : chirurgie et hospitalisation.
 Ascenseurs A et B : tous les étages.
-Visiteurs : de 14 h à 20 h. Merci de vous présenter à l'accueil.`;
+Visiteurs : de 14 h à 20 h. Merci de vous présenter à l'accueil.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.`;
 
 const E5_1_CE_POOL_12 = buildExpressPool("e5-1-ce-12", [
   q({
@@ -1206,7 +1252,9 @@ Date : jeudi 5 décembre, 8 h–12 h.
 Lieu : maison des associations, place du Marché.
 Pas de rendez-vous. Test rapide : une goutte de sang au doigt.
 Résultat en 5 minutes. Conseils avec une infirmière.
-Pour les adultes de 40 ans et plus.`;
+Pour les adultes de 40 ans et plus.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.`;
 
 const E5_1_CE_POOL_13 = buildExpressPool("e5-1-ce-13", [
   q({
@@ -1309,6 +1357,9 @@ Votre assurance rembourse 80 % : 96 francs.
 Le reste à votre charge : 24 francs.
 Le virement arrive sur votre compte dans dix jours ouvrables.
 Pour toute question : service client, 0800 123 456.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement, SantéPlus`;
 
 const E5_1_CE_POOL_14 = buildExpressPool("e5-1-ce-14", [
@@ -1409,7 +1460,10 @@ Pour vous inscrire chez un médecin traitant :
 3. Apportez votre carte d'assurance et une pièce d'identité.
 4. Signez le formulaire d'inscription au cabinet.
 Votre médecin traitant coordonne vos soins et vos spécialistes.
-Vous pouvez changer de médecin traitant une fois par an.`;
+Vous pouvez changer de médecin traitant une fois par an.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.`;
 
 const E5_1_CE_POOL_15 = buildExpressPool("e5-1-ce-15", [
   q({
@@ -1506,7 +1560,11 @@ Jeûne obligatoire : ne mangez rien pendant 12 heures avant le prélèvement.
 Vous pouvez boire de l'eau plate.
 Prenez vos ordonnances et votre carte d'assurance.
 Évitez l'alcool la veille.
-Résultats disponibles sur Internet dans 48 heures ou au guichet du laboratoire.`;
+Résultats disponibles sur Internet dans 48 heures ou au guichet du laboratoire.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+C'est important pour moi, merci beaucoup.
+Merci de votre attention et de votre patience.`;
 
 const E5_1_CE_POOL_16 = buildExpressPool("e5-1-ce-16", [
   q({
@@ -1605,7 +1663,11 @@ Pour un problème médical la nuit, appelez d'abord le 0844 000 000.
 Un médecin de garde vous rappelle dans les 30 minutes.
 Si c'est une urgence vitale, composez directement le 144.
 La consultation de nuit coûte environ 150 francs (remboursée en partie par l'assurance).
-Gardez votre carte d'assurance à portée de main.`;
+Gardez votre carte d'assurance à portée de main.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Nous traitons votre demande rapidement.`;
 
 const E5_1_CE_POOL_17 = buildExpressPool("e5-1-ce-17", [
   q({
@@ -1703,7 +1765,11 @@ Appelez le 0840 840 848 (service dentaire de garde).
 Un dentiste vous reçoit le jour même ou le lendemain matin.
 Apportez votre carte d'assurance.
 Le service est pour les urgences seulement (douleur, abcès, dent cassée).
-Pour un simple contrôle, prenez rendez-vous en semaine chez votre dentiste.`;
+Pour un simple contrôle, prenez rendez-vous en semaine chez votre dentiste.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+Gardez ce texte pour vous en souvenir.`;
 
 const E5_1_CE_POOL_18 = buildExpressPool("e5-1-ce-18", [
   q({
@@ -1800,6 +1866,12 @@ Si vous ne pouvez pas venir à votre rendez-vous :
 — ou annulez sur notre site Internet.
 En cas d'annulation tardive (moins de 24 h), des frais de 50 francs peuvent être facturés.
 En cas d'absence sans prévenir, les frais sont de 80 francs.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Les personnes à mobilité réduite sont prioritaires.
 Merci de respecter ces règles pour libérer le créneau pour d'autres patients.`;
 
 const E5_1_CE_POOL_19 = buildExpressPool("e5-1-ce-19", [
@@ -1902,7 +1974,11 @@ Ouverte du lundi au vendredi, 8 h–18 h.
 Elle délivre les médicaments prescrits pendant votre hospitalisation.
 Présentez votre bracelet patient et l'ordonnance de l'hôpital.
 Les médicaments pour sortie sont préparés 2 heures avant votre départ.
-Pour les urgences la nuit, une pharmacie de garde est indiquée à l'accueil.`;
+Pour les urgences la nuit, une pharmacie de garde est indiquée à l'accueil.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+N'hésite pas à me répondre quand tu peux.`;
 
 const E5_1_CE_POOL_20 = buildExpressPool("e5-1-ce-20", [
   q({

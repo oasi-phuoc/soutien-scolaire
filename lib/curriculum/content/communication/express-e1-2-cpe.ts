@@ -20,7 +20,10 @@ Ta sœur Zoé met la table avec moi.
 Mamie dort ici ce week-end, dans la petite chambre.
 Nous sommes cinq pour le dîner.
 Après le repas, on appelle ton oncle à Lyon.
-Bisous, maman`;
+Bisous, maman
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.`;
 
 const CE_POOL_1 = buildExpressPool("e1-2-1", [
   q({
@@ -104,7 +107,12 @@ Je suis avec mon père, ma mère et mon petit frère Noé.
 Maman lit sous le parasol ; elle est infirmière et elle se repose.
 Papa apprend à Noé à nager près du bord.
 Nous envoyons une photo à grand-père ce soir.
-Je vous embrasse, Clara`;
+Je vous embrasse, Clara
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Bonne journée à toutes et à tous.`;
 
 const CE_POOL_2 = buildExpressPool("e1-2-2", [
   q({
@@ -188,7 +196,10 @@ Mon père s'appelle Karim ; il est boulanger et il se lève très tôt.
 Ma mère, Sara, travaille à la bibliothèque.
 Mon frère Sami a neuf ans et il pose beaucoup de questions.
 Moi, je suis la grande sœur.
-Je colle le dessin dans mon cahier de français.`;
+Je colle le dessin dans mon cahier de français.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.`;
 
 const CE_POOL_3 = buildExpressPool("e1-2-3", [
   q({
@@ -272,7 +283,10 @@ Mes parents habitent à Dakar et téléphonent le dimanche.
 Ma tante est secrétaire dans une école.
 À la maison, il y a aussi mon cousin Malik, treize ans.
 Nous parlons français pour les devoirs.
-Personne à prévenir : tante Awa.`;
+Personne à prévenir : tante Awa.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.`;
 
 const CE_POOL_4 = buildExpressPool("e1-2-4", [
   q({
@@ -356,7 +370,10 @@ Le père est chauffeur et part à 13 h.
 La mère est vendeuse dans une boutique du centre.
 La baby-sitter donne le goûter et lit une petite histoire.
 Adresse : rue du Lac 8, Lausanne.
-Contact : madame Martin.`;
+Contact : madame Martin.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.`;
 
 const CE_POOL_5 = buildExpressPool("e1-2-5", [
   q({
@@ -440,7 +457,10 @@ Au centre, mon père porte le bébé, ma petite sœur Inès.
 Ma mère prend la photo ; elle est coiffeuse.
 Mon frère Léo fait une grimace derrière moi.
 Nous sommes au parc pour l'anniversaire d'Inès.
-Elle a un an aujourd'hui.`;
+Elle a un an aujourd'hui.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const CE_POOL_6 = buildExpressPool("e1-2-6", [
   q({
@@ -524,7 +544,10 @@ Maman prépare du thé et aide ma sœur Nora à lire.
 Mon frère Adam cherche toujours ses chaussures.
 Notre chat Moka dort sur le sac d'école.
 Nous sommes quatre enfants, alors la cuisine est petite.
-Mais j'aime cette maison pleine de voix.`;
+Mais j'aime cette maison pleine de voix.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.`;
 
 const CE_POOL_7 = buildExpressPool("e1-2-7", [
   q({
@@ -600,7 +623,7 @@ const CE_POOL_7 = buildExpressPool("e1-2-7", [
     vfC: 0,
   }),
 ]);
-const CE_TEXT_8 = `Message vocal transcrit
+const CE_TEXT_8 = `Message vocal d'un ami
 
 « Salut, c'est Hugo.
 Je viens samedi avec ma famille.
@@ -608,6 +631,9 @@ Ma femme Claire est dentiste, mais elle ne travaille pas ce jour-là.
 Notre fille Emma a onze ans et adore les jeux.
 Mon père vient aussi ; il marche lentement.
 Est-ce qu'il y a une chaise près de la table ?
+Nous apportons aussi un gâteau au chocolat.
+Claire peut aider à mettre la table.
+Emma veut jouer dans le jardin s'il fait beau.
 Merci et à samedi ! »`;
 
 const CE_POOL_8 = buildExpressPool("e1-2-8", [
@@ -692,7 +718,10 @@ Les parents de Nadia arrivent du Maroc vendredi soir.
 La sœur de Marc chante une chanson simple.
 Le grand-père porte les alliances.
 Après la mairie, repas chez tante Leïla.
-Réponse avant le 10 mai.`;
+Réponse avant le 10 mai.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.`;
 
 const CE_POOL_9 = buildExpressPool("e1-2-9", [
   q({
@@ -776,7 +805,10 @@ Mon mari Paul est architecte et dessine des maisons.
 Notre fils Tom a cinq ans ; il aime les trains.
 Ma belle-mère habite au troisième étage du même immeuble.
 Le vendredi, nous mangeons tous ensemble une soupe.
-Bienvenue sur mon profil familial.`;
+Bienvenue sur mon profil familial.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.`;
 
 const CE_POOL_10 = buildExpressPool("e1-2-10", [
   q({
@@ -860,6 +892,10 @@ Papa travaille au restaurant ; il est cuisinier ce soir.
 Maman rentre après son cours de français.
 N'oubliez pas d'appeler tante Sofia pour son anniversaire.
 Le dessin de Mila est pour elle.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Conservez le numéro de contact indiqué.
 Merci, Lucas`;
 
 const CE_POOL_11 = buildExpressPool("e1-2-11", [
@@ -945,7 +981,10 @@ Maman est pharmacienne et connaît déjà la pharmacie du quartier.
 Papa garde les plantes sur le balcon.
 Dimanche, nous venons te voir avec un gâteau.
 Je veux te montrer ma photo de classe.
-Je t'embrasse, Elsa`;
+Je t'embrasse, Elsa
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.`;
 
 const CE_POOL_12 = buildExpressPool("e1-2-12", [
   q({
@@ -1029,7 +1068,10 @@ Mon fils aîné, Sami, est étudiant en informatique.
 Le plus jeune, Yanis, a dix ans et joue au basket.
 Ma mère ne parle pas allemand, alors je traduis souvent.
 Le soir, chacun raconte sa journée en français.
-Avez-vous aussi une famille bilingue ?`;
+Avez-vous aussi une famille bilingue ?
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.`;
 
 const CE_POOL_13 = buildExpressPool("e1-2-13", [
   q({
@@ -1111,6 +1153,10 @@ Chers parents de Léo,
 Demain, les élèves présentent une personne de leur famille.
 Léo veut parler de son oncle Victor.
 Victor est pompier à Genève et porte un casque rouge.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Joignez les documents demandés si nécessaire.
 Merci d'apporter une petite photo de lui.
 La présentation dure deux minutes.
 Bien cordialement, Madame Perret`;
@@ -1197,7 +1243,10 @@ Papa apprend le français avec une application.
 Maman ouvre bientôt son petit salon de coiffure.
 Les jumeaux, Ali et Nora, entrent à l'école lundi.
 Nous pensons souvent à toi en Italie.
-Gros bisous de toute la famille.`;
+Gros bisous de toute la famille.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.`;
 
 const CE_POOL_15 = buildExpressPool("e1-2-15", [
   q({
@@ -1281,6 +1330,9 @@ Malo écrit une carte à sa petite sœur.
 Sami garde la photo de sa mère sous son oreiller.
 Les familles peuvent appeler entre 18 h et 19 h.
 Après 21 h, les enfants lisent en silence.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Merci de respecter le calme.`;
 
 const CE_POOL_16 = buildExpressPool("e1-2-16", [
@@ -1365,7 +1417,10 @@ Les pères préparent le café et les jus.
 Madame Rossi, boulangère, apporte deux tartes.
 Une table est réservée pour les grands-mères.
 Apportez une photo de famille pour le mur des souvenirs.
-Entrée gratuite pour tous.`;
+Entrée gratuite pour tous.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.`;
 
 const CE_POOL_17 = buildExpressPool("e1-2-17", [
   q({
@@ -1449,7 +1504,10 @@ const CE_TEXT_18 = `Transcription d'appel
 — Ton frère Diego vient aussi à la gare.
 — Super. Maman travaille encore à l'hôpital ; elle est médecin.
 — Elle prépare le dîner après son service.
-— Alors à tout à l'heure !`;
+— Alors à tout à l'heure !
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.`;
 
 const CE_POOL_18 = buildExpressPool("e1-2-18", [
   q({
@@ -1533,7 +1591,10 @@ Mon père est journaliste ; il pose beaucoup de questions.
 Ma mère est jardinière et connaît les noms des fleurs.
 Ma petite sœur Lola mélange les deux langues.
 Le dimanche, nous appelons les cousins à Madrid.
-Chez nous, les mots voyagent.`;
+Chez nous, les mots voyagent.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.`;
 
 const CE_POOL_19 = buildExpressPool("e1-2-19", [
   q({
@@ -1617,7 +1678,10 @@ Le père est menuisier et répare souvent des meubles.
 La mère est professeure de français.
 Nous cherchons une étudiante calme pour six mois.
 Repas possible avec la famille le soir.
-Écrire à famille.besson@mail.ch.`;
+Écrire à famille.besson@mail.ch.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.`;
 
 const CE_POOL_20 = buildExpressPool("e1-2-20", [
   q({
@@ -1993,191 +2057,191 @@ export const E1_2_PO: ExpressPoDialogue[] = [
 {
   id: "e1-2-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous parlez de votre famille.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur la famille." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour la famille, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e1-2-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous parlez de votre famille.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de la famille." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour la famille, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e1-2-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous parlez de votre famille.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de la famille." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour famille." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e1-2-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous parlez de votre famille.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur la famille." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour la famille, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e1-2-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous parlez de votre famille.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de la famille." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour la famille, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e1-2-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous parlez de votre famille.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de la famille." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour famille." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e1-2-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous parlez de votre famille.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur la famille." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour la famille, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e1-2-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous parlez de votre famille.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur la famille." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour la famille, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e1-2-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous parlez de votre famille.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de la famille." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour famille." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e1-2-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : la famille.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous parlez de votre famille.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la famille." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de la famille." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour la famille, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 }
 ];

@@ -17,7 +17,13 @@ const E6_3_CE_TEXT_1 = `Panneau — Départs Terminal 1
 
 Terminal 1 départs.
 Enregistrement hall A. Vols Schengen hall B.
-Contrôle sécurité : retirez liquides > 100 ml.`;
+Contrôle sécurité : retirez liquides > 100 ml.
+Photographies autorisées sans flash.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Merci de votre attention et de votre patience.`;
 
 const E6_3_CE_POOL_1 = buildExpressPool("e6-3-ce-1", [
   q({
@@ -109,7 +115,14 @@ const E6_3_CE_TEXT_2 = `Affiche — Enregistrement
 
 Enregistrement en ligne 24 h avant le vol.
 Bagage cabine 8 kg max.
-Arrivez 2 h avant vol international.`;
+Arrivez 2 h avant vol international.
+Sans confirmation, la place n'est pas garantie.
+Respectez la file d'attente, s'il vous plaît.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.`;
 
 const E6_3_CE_POOL_2 = buildExpressPool("e6-3-ce-2", [
   q({
@@ -201,7 +214,13 @@ const E6_3_CE_TEXT_3 = `Notice — Bagages
 
 Bagage soute : 23 kg max classe économique.
 Dimensions cabine : 55 × 40 × 23 cm.
-Objets interdits : couteaux, ciseaux.`;
+Objets interdits : couteaux, ciseaux.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E6_3_CE_POOL_3 = buildExpressPool("e6-3-ce-3", [
   q({
@@ -293,7 +312,14 @@ const E6_3_CE_TEXT_4 = `SMS — Vol retardé
 
 Vol LX 1234 Genève–Paris retardé 45 min.
 Nouveau départ 15 h 20 porte B 12.
-Excuses Swiss.`;
+Excuses Swiss.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Le lieu est facile à trouver avec les indications.`;
 
 const E6_3_CE_POOL_4 = buildExpressPool("e6-3-ce-4", [
   q({
@@ -386,7 +412,13 @@ const E6_3_CE_TEXT_5 = `Écran — Porte B 22
 Vol LX 567 Zurich–Londres.
 Embarquement 14 h 50.
 Départ 15 h 20.
-Statut : à l'heure.`;
+Statut : à l'heure.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E6_3_CE_POOL_5 = buildExpressPool("e6-3-ce-5", [
   q({
@@ -478,7 +510,14 @@ const E6_3_CE_TEXT_6 = `Annonce — Dernière appel
 
 Dernier appel vol AF 1234 porte A 5.
 Passagers manquants : présentez-vous immédiatement.
-Fermeture porte dans 10 min.`;
+Fermeture porte dans 10 min.
+Un plan simple est disponible à l'accueil.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.`;
 
 const E6_3_CE_POOL_6 = buildExpressPool("e6-3-ce-6", [
   q({
@@ -570,7 +609,14 @@ const E6_3_CE_TEXT_7 = `Flyer — Duty-free
 
 Boutiques duty-free après contrôle.
 Parfums, chocolats, souvenirs.
-Paiement en francs ou euros.`;
+Paiement en francs ou euros.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Une confirmation sera envoyée ensuite.`;
 
 const E6_3_CE_POOL_7 = buildExpressPool("e6-3-ce-7", [
   q({
@@ -662,7 +708,14 @@ const E6_3_CE_TEXT_8 = `Plan — Terminal 2
 
 Terminal 2 arrivées niveau 0.
 Départs niveau 1.
-Navette gratuite vers Terminal 1 toutes les 10 min.`;
+Navette gratuite vers Terminal 1 toutes les 10 min.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Les horaires habituels restent les mêmes.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.`;
 
 const E6_3_CE_POOL_8 = buildExpressPool("e6-3-ce-8", [
   q({
@@ -754,7 +807,14 @@ const E6_3_CE_TEXT_9 = `Consigne — Objets interdits
 
 Interdit en cabine : liquides > 100 ml, couteaux, outils.
 Ordinateurs et tablettes : sortir au contrôle.
-Ceinture et montre : dans le bac.`;
+Ceinture et montre : dans le bac.
+Les personnes à mobilité réduite sont prioritaires.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Je prépare déjà tout pour que ce soit prêt.
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.`;
 
 const E6_3_CE_POOL_9 = buildExpressPool("e6-3-ce-9", [
   q({
@@ -846,7 +906,14 @@ const E6_3_CE_TEXT_10 = `Affiche — Passeport
 
 Vols internationaux : passeport obligatoire.
 Vérifiez validité 6 mois après le voyage.
-Visa si nécessaire selon destination.`;
+Visa si nécessaire selon destination.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+Les personnes à mobilité réduite sont prioritaires.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.`;
 
 const E6_3_CE_POOL_10 = buildExpressPool("e6-3-ce-10", [
   q({
@@ -938,7 +1005,14 @@ const E6_3_CE_TEXT_11 = `SMS — Porte changée
 
 Vol LX 890 : porte changée.
 Nouvelle porte C 8.
-Départ 18 h 05 maintenu.`;
+Départ 18 h 05 maintenu.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const E6_3_CE_POOL_11 = buildExpressPool("e6-3-ce-11", [
   q({
@@ -1030,7 +1104,14 @@ const E6_3_CE_TEXT_12 = `Notice — Poussettes
 
 Poussettes : enregistrement gratuit à la porte.
 Récupération au tapis bagages.
-Demandez une étiquette au comptoir.`;
+Demandez une étiquette au comptoir.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Je t'envoie aussi ce détail pour être clair.`;
 
 const E6_3_CE_POOL_12 = buildExpressPool("e6-3-ce-12", [
   q({
@@ -1122,7 +1203,14 @@ const E6_3_CE_TEXT_13 = `Panneau — Navette
 
 Navette aéroport–gare gratuite.
 Départ toutes les 15 min devant Terminal 1.
-Durée 12 min.`;
+Durée 12 min.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le lieu est facile à trouver avec les indications.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.`;
 
 const E6_3_CE_POOL_13 = buildExpressPool("e6-3-ce-13", [
   q({
@@ -1214,7 +1302,14 @@ const E6_3_CE_TEXT_14 = `Affiche — WiFi aéroport
 
 WiFi gratuit : réseau Airport_Free.
 Connexion 4 h max.
-Rechargez au comptoir information.`;
+Rechargez au comptoir information.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Bonne journée à toutes et à tous.`;
 
 const E6_3_CE_POOL_14 = buildExpressPool("e6-3-ce-14", [
   q({
@@ -1306,7 +1401,14 @@ const E6_3_CE_TEXT_15 = `Message — Vol annulé
 
 Vol LX 456 annulé cause météo.
 Remboursement ou vol suivant demain 9 h.
-Comptoir Swiss hall A.`;
+Comptoir Swiss hall A.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+J'espère que tout se passe bien de ton côté.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E6_3_CE_POOL_15 = buildExpressPool("e6-3-ce-15", [
   q({
@@ -1398,7 +1500,14 @@ const E6_3_CE_TEXT_16 = `Flyer — Fast Track
 
 Fast Track sécurité : 25 fr.
 File prioritaire 5 min.
-Achat en ligne ou comptoir.`;
+Achat en ligne ou comptoir.
+Photographies autorisées sans flash.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E6_3_CE_POOL_16 = buildExpressPool("e6-3-ce-16", [
   q({
@@ -1490,7 +1599,15 @@ const E6_3_CE_TEXT_17 = `Écran — Retard
 
 Vol BA 321 Londres : retard 30 min.
 Nouveau départ 16 h 45 porte B 3.
-Excuses.`;
+Excuses.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E6_3_CE_POOL_17 = buildExpressPool("e6-3-ce-17", [
   q({
@@ -1582,7 +1699,14 @@ const E6_3_CE_TEXT_18 = `Notice — Animaux
 
 Animaux en cabine : cage max 55 cm, 8 kg.
 Réservation obligatoire.
-Frais : 50 fr.`;
+Frais : 50 fr.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.`;
 
 const E6_3_CE_POOL_18 = buildExpressPool("e6-3-ce-18", [
   q({
@@ -1674,7 +1798,13 @@ const E6_3_CE_TEXT_19 = `Affiche — Douane
 
 Marchandises à déclarer : au-delà de 300 fr.
 Formulaire bleu avant douane.
-File verte : rien à déclarer.`;
+File verte : rien à déclarer.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E6_3_CE_POOL_19 = buildExpressPool("e6-3-ce-19", [
   q({
@@ -1766,7 +1896,14 @@ const E6_3_CE_TEXT_20 = `SMS — Enregistrement
 
 Enregistrement en ligne ouvert vol LX 200.
 Départ 11 h 40 Genève–Nice.
-Carte d'embarquement sur téléphone.`;
+Carte d'embarquement sur téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+Le service est également disponible en ligne.`;
 
 const E6_3_CE_POOL_20 = buildExpressPool("e6-3-ce-20", [
   q({

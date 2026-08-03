@@ -222,6 +222,11 @@ export function ExpressListeningExercise({
     return [] as ExpressListeningTask[];
   }, [exercise, drawSeed]);
 
+  const readingRaw = exercise.readingText?.trim() ?? "";
+  const readingNl = readingRaw.indexOf("\n");
+  const readingTitle = readingNl === -1 ? readingRaw : readingRaw.slice(0, readingNl).trim();
+  const readingBody = readingNl === -1 ? "" : readingRaw.slice(readingNl).replace(/^\n+/, "");
+
   function setAnswer(index: number, value: number | string) {
     if (validated) return;
     const next = {
@@ -279,12 +284,14 @@ export function ExpressListeningExercise({
 
       {exercise.readingText ? (
         <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-4 py-3">
-          <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-            Texte à lire
+          <p className="text-sm font-bold leading-snug" style={{ color: ACCENT }}>
+            {readingTitle}
           </p>
-          <p className="whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">
-            {exercise.readingText}
-          </p>
+          {readingBody ? (
+            <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">
+              {readingBody}
+            </p>
+          ) : null}
         </div>
       ) : null}
 

@@ -23,6 +23,7 @@ const PE_MAX = 180;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E10_1_CE_EMAIL_TEXT = `De : Camille
+
 Objet : Confirmation — un dîner maison samedi soir
 Bonjour Nadia,
 Je vous confirme un dîner maison samedi soir.
@@ -31,6 +32,16 @@ il y aura une soupe, une tarte et une option végétarienne.
 Participation libre : chacun apporte une boisson.
 Merci de confirmer avant jeudi soir.
 Vous pouvez répondre par camille@exemple.fr.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Cordialement, Camille`;
 
 const E10_1_CE_EMAIL_POOL = buildExpressPool("e10-1-ce-email", [
@@ -121,6 +132,7 @@ const E10_1_CE_EMAIL_POOL = buildExpressPool("e10-1-ce-email", [
 ]);
 
 const E10_1_CE_EMAIL_2_TEXT = `De : Famille Morel
+
 Objet : Petite organisation pour un anniversaire surprise pour Inès
 Bonjour Lina,
 Nous préparons les derniers détails.
@@ -129,6 +141,16 @@ les invités doivent arriver dix minutes avant Inès.
 À retenir : Cadeau commun : 5 € maximum par personne.
 Pouvez-vous garder le secret jusqu'à dimanche ?
 Contact direct : message à Hugo.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
 À bientôt, Famille Morel`;
 
 const E10_1_CE_EMAIL_2_POOL = buildExpressPool("e10-1-ce-email-2", [
@@ -219,6 +241,7 @@ const E10_1_CE_EMAIL_2_POOL = buildExpressPool("e10-1-ce-email-2", [
 ]);
 
 const E10_1_CE_EMAIL_3_TEXT = `De : Voisins du 3e étage
+
 Objet : Réponse attendue — un apéritif de bienvenue
 Bonjour Marc,
 Votre présence nous aidera beaucoup.
@@ -227,6 +250,16 @@ L'horaire confirmé est vendredi à 18 h 45.
 les nouveaux voisins s'appellent Nora et Sami.
 Prévoir un verre ou une petite assiette salée.
 Merci de indiquer si vous venez avant la date.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Bien à vous, Voisins du 3e étage`;
 
 const E10_1_CE_EMAIL_3_POOL = buildExpressPool("e10-1-ce-email-3", [
@@ -317,6 +350,7 @@ const E10_1_CE_EMAIL_3_POOL = buildExpressPool("e10-1-ce-email-3", [
 ]);
 
 const E10_1_CE_EMAIL_4_TEXT = `De : Médiathèque Jean-Jaurès
+
 Objet : Informations pratiques
 Bonjour Ariane,
 Voici les informations pour une invitation à rencontrer une autrice.
@@ -325,6 +359,16 @@ Le début est fixé mercredi à 17 h.
 l'autrice parlera de son roman pendant trente minutes.
 Prévoir aussi : Entrée gratuite sur réservation.
 Pour toute question : accueil@mediatheque.fr.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Merci, Médiathèque Jean-Jaurès`;
 
 const E10_1_CE_EMAIL_4_POOL = buildExpressPool("e10-1-ce-email-4", [
@@ -415,6 +459,7 @@ const E10_1_CE_EMAIL_4_POOL = buildExpressPool("e10-1-ce-email-4", [
 ]);
 
 const E10_1_CE_EMAIL_5_TEXT = `De : Club Photo Lumière
+
 Objet : Invitation mise à jour
 Bonjour Omar,
 Nous avons modifié un détail pour un vernissage ouvert aux amis.
@@ -423,6 +468,16 @@ La date ne change pas : jeudi à 18 h.
 trois élèves présentent leurs photos de voyage.
 Un jus de fruit est offert à l'entrée.
 Merci de venir avec une personne maximum.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
 Bonne journée, Club Photo Lumière`;
 
 const E10_1_CE_EMAIL_5_POOL = buildExpressPool("e10-1-ce-email-5", [
@@ -513,6 +568,7 @@ const E10_1_CE_EMAIL_5_POOL = buildExpressPool("e10-1-ce-email-5", [
 ]);
 
 const E10_1_CE_EMAIL_6_TEXT = `De : Sofia
+
 Objet : Votre aide pour un pique-nique au bord du lac
 Bonjour Clara,
 Nous cherchons encore quelques personnes pour aider.
@@ -521,7 +577,17 @@ Rendez-vous dimanche à 12 h 30.
 Sofia apporte des couvertures et des jeux de cartes.
 Indication pratique : Chacun prépare un plat facile à partager.
 Si vous êtes disponible, dire ce que vous apportez.
-Réponse à sms à Sofia.`;
+Réponse à sms à Sofia.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.`;
 
 const E10_1_CE_EMAIL_6_POOL = buildExpressPool("e10-1-ce-email-6", [
   q({
@@ -611,6 +677,7 @@ const E10_1_CE_EMAIL_6_POOL = buildExpressPool("e10-1-ce-email-6", [
 ]);
 
 const E10_1_CE_EMAIL_7_TEXT = `De : Restaurant Le Safran
+
 Objet : Rappel avant demain
 Bonjour Yanis,
 Je vous rappelle une table réservée pour six personnes.
@@ -619,6 +686,16 @@ Merci d'arriver mardi à 20 h.
 la réservation est au nom de Bensaïd.
 Menu du soir : 24 € hors boissons.
 N'oubliez pas de prévenir en cas de retard.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Cordialement, Restaurant Le Safran`;
 
 const E10_1_CE_EMAIL_7_POOL = buildExpressPool("e10-1-ce-email-7", [
@@ -709,6 +786,7 @@ const E10_1_CE_EMAIL_7_POOL = buildExpressPool("e10-1-ce-email-7", [
 ]);
 
 const E10_1_CE_EMAIL_8_TEXT = `De : Centre social Bellevue
+
 Objet : Documents et horaires
 Bonjour Élise,
 Pour une soirée crêpes entre voisins, voici ce qu'il faut savoir.
@@ -716,6 +794,16 @@ Adresse : grande cuisine du centre.
 Horaire : vendredi à 19 h.
 les enfants peuvent venir avec un adulte.
 Frais ou matériel : Ingrédients fournis, boisson à apporter.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 Merci de s'inscrire à l'accueil; contact : 04 76 20 30 40.
 Avec nos salutations, Centre social Bellevue`;
 
@@ -807,6 +895,7 @@ const E10_1_CE_EMAIL_8_POOL = buildExpressPool("e10-1-ce-email-8", [
 ]);
 
 const E10_1_CE_EMAIL_9_TEXT = `De : Association Horizon
+
 Objet : Merci de confirmer
 Bonjour Malik,
 Nous devons compter les participants pour une sortie cinéma en groupe.
@@ -814,6 +903,16 @@ Le rendez-vous aura lieu à cinéma Palace, devant l'entrée.
 Il est prévu mercredi à 18 h 20.
 le film commence à 18 h 45 en version française.
 Billet réduit : 7 € pour les inscrits.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Merci de acheter le billet avant mardi.
 Réponse souhaitée : horizon.sorties@mail.fr.`;
 
@@ -905,6 +1004,7 @@ const E10_1_CE_EMAIL_9_POOL = buildExpressPool("e10-1-ce-email-9", [
 ]);
 
 const E10_1_CE_EMAIL_10_TEXT = `De : École des Lilas
+
 Objet : Changement de salle
 Bonjour Fatou,
 Une précision concerne un café des parents.
@@ -913,6 +1013,16 @@ L'horaire reste vendredi à 8 h 15.
 la directrice présentera les projets du trimestre.
 Café offert, gâteaux bienvenus.
 Merci de signaler votre présence dans le cahier.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 À bientôt, École des Lilas`;
 
 const E10_1_CE_EMAIL_10_POOL = buildExpressPool("e10-1-ce-email-10", [
@@ -1003,6 +1113,7 @@ const E10_1_CE_EMAIL_10_POOL = buildExpressPool("e10-1-ce-email-10", [
 ]);
 
 const E10_1_CE_EMAIL_11_TEXT = `De : Comité des fêtes
+
 Objet : Programme court
 Bonjour Romain,
 Voici le programme de une invitation au feu d'artifice.
@@ -1011,7 +1122,17 @@ Début samedi à 21 h 30.
 la musique commencera avant le spectacle.
 Apporter une veste chaude.
 Pour participer, venir quinze minutes avant le début.
-Questions : info@fetes-locales.fr.`;
+Questions : info@fetes-locales.fr.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.`;
 
 const E10_1_CE_EMAIL_11_POOL = buildExpressPool("e10-1-ce-email-11", [
   q({
@@ -1101,6 +1222,7 @@ const E10_1_CE_EMAIL_11_POOL = buildExpressPool("e10-1-ce-email-11", [
 ]);
 
 const E10_1_CE_EMAIL_12_TEXT = `De : Groupe Randonnée Douce
+
 Objet : Suite à votre inscription
 Bonjour Sébastien,
 Nous avons bien reçu votre inscription pour une marche facile avec invités.
@@ -1109,6 +1231,16 @@ La rencontre commence dimanche à 9 h 15.
 le parcours dure environ deux heures.
 Prévoir eau, chaussures fermées et 2 € pour le covoiturage.
 Merci de confirmer le nombre de participants.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
 Cordialement, Groupe Randonnée Douce`;
 
 const E10_1_CE_EMAIL_12_POOL = buildExpressPool("e10-1-ce-email-12", [
@@ -1199,6 +1331,7 @@ const E10_1_CE_EMAIL_12_POOL = buildExpressPool("e10-1-ce-email-12", [
 ]);
 
 const E10_1_CE_EMAIL_13_TEXT = `De : Atelier Cuisine Partagée
+
 Objet : Message aux participants
 Bonjour Julie,
 Ce message est envoyé à toutes les personnes inscrites.
@@ -1207,7 +1340,16 @@ Lieu : cuisine B du centre associatif.
 Horaire : samedi à 11 h.
 Maha montrera comment préparer le houmous.
 Participation : 6 € pour les ingrédients. Merci de indiquer les allergies alimentaires.
-Contact : atelier.cuisine@mail.fr.`;
+Contact : atelier.cuisine@mail.fr.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.`;
 
 const E10_1_CE_EMAIL_13_POOL = buildExpressPool("e10-1-ce-email-13", [
   q({
@@ -1297,6 +1439,7 @@ const E10_1_CE_EMAIL_13_POOL = buildExpressPool("e10-1-ce-email-13", [
 ]);
 
 const E10_1_CE_EMAIL_14_TEXT = `De : Bibliothèque du Lac
+
 Objet : Dernière vérification
 Bonjour Thomas,
 Avant un club lecture spécial polar, nous vérifions les détails.
@@ -1305,6 +1448,16 @@ Le rendez-vous est jeudi à 18 h 10.
 le livre choisi est disponible à l'accueil.
 Aucun achat n'est nécessaire.
 Pouvez-vous lire les deux premiers chapitres ?
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
 Merci, Bibliothèque du Lac`;
 
 const E10_1_CE_EMAIL_14_POOL = buildExpressPool("e10-1-ce-email-14", [
@@ -1395,6 +1548,7 @@ const E10_1_CE_EMAIL_14_POOL = buildExpressPool("e10-1-ce-email-14", [
 ]);
 
 const E10_1_CE_EMAIL_15_TEXT = `De : Amina
+
 Objet : Invitation personnelle
 Bonjour Luc,
 Je serais content(e) de vous voir pour une invitation personnelle à prendre un café.
@@ -1402,6 +1556,16 @@ Je propose Café du Théâtre, table près de la fenêtre.
 La date choisie est lundi à 16 h 30.
 Amina veut discuter de son nouveau travail.
 Chacun paie sa consommation.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
 Merci de répondre avant midi.
 À très vite, Amina`;
 
@@ -1493,6 +1657,7 @@ const E10_1_CE_EMAIL_15_POOL = buildExpressPool("e10-1-ce-email-15", [
 ]);
 
 const E10_1_CE_EMAIL_16_TEXT = `De : Parents de Zoé
+
 Objet : Organisation du groupe
 Bonjour Mehdi,
 Le groupe confirme un goûter après le spectacle.
@@ -1500,6 +1665,16 @@ Nous partirons de cour de l'école, près du marronnier.
 Le départ est prévu mardi à 16 h 45.
 les enfants chanteront deux chansons avant le goûter.
 Merci d'apporter un fruit ou un gâteau simple.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci de noter votre contribution sur la feuille; contact : Zoé via Pronote.
 Amicalement, Parents de Zoé`;
 
@@ -1591,6 +1766,7 @@ const E10_1_CE_EMAIL_16_POOL = buildExpressPool("e10-1-ce-email-16", [
 ]);
 
 const E10_1_CE_EMAIL_17_TEXT = `De : Maison de quartier Ouest
+
 Objet : À lire avant de venir
 Bonjour Priya,
 Avant une soirée jeux ouverte aux nouveaux, lisez ces informations.
@@ -1599,7 +1775,17 @@ Accueil vendredi à 20 h.
 des jeux courts seront expliqués par les bénévoles.
 Entrée gratuite, boisson à 1 €.
 Il faudra s'inscrire pour préparer les tables.
-Bonne réception, Maison de quartier Ouest`;
+Bonne réception, Maison de quartier Ouest
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.`;
 
 const E10_1_CE_EMAIL_17_POOL = buildExpressPool("e10-1-ce-email-17", [
   q({
@@ -1689,6 +1875,7 @@ const E10_1_CE_EMAIL_17_POOL = buildExpressPool("e10-1-ce-email-17", [
 ]);
 
 const E10_1_CE_EMAIL_18_TEXT = `De : Compagnie des Amis
+
 Objet : Compte rendu et prochaine étape
 Bonjour Nolan,
 Après notre échange, nous gardons une répétition publique de théâtre.
@@ -1697,7 +1884,17 @@ La prochaine date est samedi à 14 h.
 le public pourra donner son avis après la scène.
 Entrée libre dans la limite de 30 places.
 La prochaine étape est de arriver sans faire de bruit.
-Contact : compagnie.amis@mail.fr.`;
+Contact : compagnie.amis@mail.fr.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.`;
 
 const E10_1_CE_EMAIL_18_POOL = buildExpressPool("e10-1-ce-email-18", [
   q({
@@ -1787,6 +1984,7 @@ const E10_1_CE_EMAIL_18_POOL = buildExpressPool("e10-1-ce-email-18", [
 ]);
 
 const E10_1_CE_EMAIL_19_TEXT = `De : Réseau Familles
+
 Objet : Participation confirmée
 Bonjour Sara,
 Votre participation à une invitation à un brunch partagé est confirmée.
@@ -1795,6 +1993,16 @@ Nous commencerons dimanche à 10 h 30.
 un coin jeux sera installé pour les petits.
 Apporter un plat froid avec une étiquette.
 Merci aussi de confirmer le nombre d'enfants.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Cordialement, Réseau Familles`;
 
 const E10_1_CE_EMAIL_19_POOL = buildExpressPool("e10-1-ce-email-19", [
@@ -1885,6 +2093,7 @@ const E10_1_CE_EMAIL_19_POOL = buildExpressPool("e10-1-ce-email-19", [
 ]);
 
 const E10_1_CE_EMAIL_20_TEXT = `De : Mairie annexe
+
 Objet : Question rapide
 Bonjour Antoine,
 J'ai une question au sujet de une réception pour les nouveaux habitants.
@@ -1893,7 +2102,17 @@ Le moment proposé est jeudi à 18 h 30.
 le maire présentera les services du quartier.
 Pièce d'identité demandée à l'entrée.
 Pouvez-vous répondre au formulaire d'invitation ?
-Répondez à mairie-annexe@ville.fr.`;
+Répondez à mairie-annexe@ville.fr.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.`;
 
 const E10_1_CE_EMAIL_20_POOL = buildExpressPool("e10-1-ce-email-20", [
   q({
@@ -2385,6 +2604,7 @@ sourceMessage: {
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E10_2_CE_EMAIL_TEXT = `De : Café des langues
+
 Objet : Confirmation — une table pour pratiquer le français
 Bonjour Lena,
 Je vous confirme une table pour pratiquer le français.
@@ -2393,6 +2613,16 @@ chaque table change de langue toutes les vingt minutes.
 Une boisson minimum est demandée.
 Merci de s'inscrire sur la liste en ligne.
 Vous pouvez répondre par cafedeslangues@ville.fr.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Cordialement, Café des langues`;
 
 const E10_2_CE_EMAIL_POOL = buildExpressPool("e10-2-ce-email", [
@@ -2483,6 +2713,7 @@ const E10_2_CE_EMAIL_POOL = buildExpressPool("e10-2-ce-email", [
 ]);
 
 const E10_2_CE_EMAIL_2_TEXT = `De : Club Salsa Débutants
+
 Objet : Petite organisation pour une séance d'essai pour rencontrer le groupe
 Bonjour Nour,
 Nous préparons les derniers détails.
@@ -2491,6 +2722,16 @@ aucun partenaire n'est nécessaire pour commencer.
 À retenir : Essai gratuit, chaussures propres obligatoires.
 Pouvez-vous envoyer votre prénom avant mercredi ?
 Contact direct : sms à Diego.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
 À bientôt, Club Salsa Débutants`;
 
 const E10_2_CE_EMAIL_2_POOL = buildExpressPool("e10-2-ce-email-2", [
@@ -2581,6 +2822,7 @@ const E10_2_CE_EMAIL_2_POOL = buildExpressPool("e10-2-ce-email-2", [
 ]);
 
 const E10_2_CE_EMAIL_3_TEXT = `De : Application Voisins Actifs
+
 Objet : Réponse attendue — une rencontre autour du jardin partagé
 Bonjour Mina,
 Votre présence nous aidera beaucoup.
@@ -2589,6 +2831,16 @@ L'horaire confirmé est samedi à 10 h.
 les anciens membres expliqueront les parcelles.
 Apporter des gants si possible.
 Merci de cliquer sur Je participe avant la date.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Bien à vous, Application Voisins Actifs`;
 
 const E10_2_CE_EMAIL_3_POOL = buildExpressPool("e10-2-ce-email-3", [
@@ -2679,6 +2931,7 @@ const E10_2_CE_EMAIL_3_POOL = buildExpressPool("e10-2-ce-email-3", [
 ]);
 
 const E10_2_CE_EMAIL_4_TEXT = `De : Atelier Cuisine du Monde
+
 Objet : Informations pratiques
 Bonjour Karim,
 Voici les informations pour une activité pour faire connaissance.
@@ -2687,6 +2940,16 @@ Le début est fixé vendredi à 18 h 30.
 les participants cuisineront par groupes de trois.
 Prévoir aussi : Participation : 4 € pour les ingrédients.
 Pour toute question : mjc-cuisine@mail.fr.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Merci, Atelier Cuisine du Monde`;
 
 const E10_2_CE_EMAIL_4_POOL = buildExpressPool("e10-2-ce-email-4", [
@@ -2777,6 +3040,7 @@ const E10_2_CE_EMAIL_4_POOL = buildExpressPool("e10-2-ce-email-4", [
 ]);
 
 const E10_2_CE_EMAIL_5_TEXT = `De : Groupe Nouveaux en ville
+
 Objet : Invitation mise à jour
 Bonjour Olga,
 Nous avons modifié un détail pour un parcours découverte du centre.
@@ -2785,6 +3049,16 @@ La date ne change pas : dimanche à 14 h.
 la balade finit par un café partagé.
 Prévoir un ticket de tram au cas où.
 Merci de répondre au sondage du groupe.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Bonne journée, Groupe Nouveaux en ville`;
 
 const E10_2_CE_EMAIL_5_POOL = buildExpressPool("e10-2-ce-email-5", [
@@ -2875,6 +3149,7 @@ const E10_2_CE_EMAIL_5_POOL = buildExpressPool("e10-2-ce-email-5", [
 ]);
 
 const E10_2_CE_EMAIL_6_TEXT = `De : Médiathèque
+
 Objet : Votre aide pour un atelier conversation entre lecteurs
 Bonjour Sami,
 Nous cherchons encore quelques personnes pour aider.
@@ -2883,7 +3158,17 @@ Rendez-vous mercredi à 16 h.
 chacun présente un article court qu'il a aimé.
 Indication pratique : Carte de médiathèque demandée.
 Si vous êtes disponible, choisir un article avant de venir.
-Réponse à accueil de la médiathèque.`;
+Réponse à accueil de la médiathèque.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.`;
 
 const E10_2_CE_EMAIL_6_POOL = buildExpressPool("e10-2-ce-email-6", [
   q({
@@ -2973,6 +3258,7 @@ const E10_2_CE_EMAIL_6_POOL = buildExpressPool("e10-2-ce-email-6", [
 ]);
 
 const E10_2_CE_EMAIL_7_TEXT = `De : Club Randonnée Urbaine
+
 Objet : Rappel avant demain
 Bonjour Éva,
 Je vous rappelle une marche pour nouveaux amis.
@@ -2981,6 +3267,16 @@ Merci d'arriver samedi à 9 h 45.
 le parcours passe par trois parcs.
 Prévoir de l'eau et des baskets.
 N'oubliez pas de confirmer sa présence sur le groupe.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
 Cordialement, Club Randonnée Urbaine`;
 
 const E10_2_CE_EMAIL_7_POOL = buildExpressPool("e10-2-ce-email-7", [
@@ -3071,6 +3367,7 @@ const E10_2_CE_EMAIL_7_POOL = buildExpressPool("e10-2-ce-email-7", [
 ]);
 
 const E10_2_CE_EMAIL_8_TEXT = `De : Soirée Jeux Coopératifs
+
 Objet : Documents et horaires
 Bonjour Boris,
 Pour une table ouverte aux personnes seules, voici ce qu'il faut savoir.
@@ -3078,6 +3375,16 @@ Adresse : bar associatif La Pioche.
 Horaire : vendredi à 20 h 15.
 un animateur expliquera les règles.
 Frais ou matériel : Adhésion journée : 2 €.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci de arriver avant le début de la première partie; contact : contact@lapioche.fr.
 Avec nos salutations, Soirée Jeux Coopératifs`;
 
@@ -3169,6 +3476,7 @@ const E10_2_CE_EMAIL_8_POOL = buildExpressPool("e10-2-ce-email-8", [
 ]);
 
 const E10_2_CE_EMAIL_9_TEXT = `De : Cours de français A2
+
 Objet : Merci de confirmer
 Bonjour Jade,
 Nous devons compter les participants pour un binôme de conversation.
@@ -3176,6 +3484,16 @@ Le rendez-vous aura lieu à salle 14 du centre Alpha.
 Il est prévu lundi à 17 h 30.
 les binômes changent toutes les semaines.
 Cahier et stylo nécessaires.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Merci de noter trois questions à poser.
 Réponse souhaitée : professeur Claire.`;
 
@@ -3267,6 +3585,7 @@ const E10_2_CE_EMAIL_9_POOL = buildExpressPool("e10-2-ce-email-9", [
 ]);
 
 const E10_2_CE_EMAIL_10_TEXT = `De : Groupe Parents Solo
+
 Objet : Changement de salle
 Bonjour Hassan,
 Une précision concerne un café rencontre sans inscription compliquée.
@@ -3275,6 +3594,16 @@ L'horaire reste samedi à 15 h.
 un coin dessin est prévu pour les enfants.
 Participation libre pour le goûter.
 Merci de prévenir si un enfant vient aussi.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 À bientôt, Groupe Parents Solo`;
 
 const E10_2_CE_EMAIL_10_POOL = buildExpressPool("e10-2-ce-email-10", [
@@ -3365,6 +3694,7 @@ const E10_2_CE_EMAIL_10_POOL = buildExpressPool("e10-2-ce-email-10", [
 ]);
 
 const E10_2_CE_EMAIL_11_TEXT = `De : Maison des Jeunes
+
 Objet : Programme court
 Bonjour Ana,
 Voici le programme de une soirée karaoké pour nouveaux membres.
@@ -3373,7 +3703,17 @@ Début jeudi à 19 h 30.
 les chansons faciles seront affichées sur écran.
 Entrée gratuite avant 20 h.
 Pour participer, choisir une chanson ou venir écouter.
-Questions : MJ au 04 90 12 12 12.`;
+Questions : MJ au 04 90 12 12 12.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const E10_2_CE_EMAIL_11_POOL = buildExpressPool("e10-2-ce-email-11", [
   q({
@@ -3463,6 +3803,7 @@ const E10_2_CE_EMAIL_11_POOL = buildExpressPool("e10-2-ce-email-11", [
 ]);
 
 const E10_2_CE_EMAIL_12_TEXT = `De : Club Échecs Loisir
+
 Objet : Suite à votre inscription
 Bonjour Pavel,
 Nous avons bien reçu votre inscription pour une rencontre amicale débutants.
@@ -3471,6 +3812,16 @@ La rencontre commence mercredi à 18 h.
 les règles seront rappelées au début.
 Aucun matériel à acheter.
 Merci de venir cinq minutes en avance.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Cordialement, Club Échecs Loisir`;
 
 const E10_2_CE_EMAIL_12_POOL = buildExpressPool("e10-2-ce-email-12", [
@@ -3561,6 +3912,7 @@ const E10_2_CE_EMAIL_12_POOL = buildExpressPool("e10-2-ce-email-12", [
 ]);
 
 const E10_2_CE_EMAIL_13_TEXT = `De : Atelier Couture Partagée
+
 Objet : Message aux participants
 Bonjour Maya,
 Ce message est envoyé à toutes les personnes inscrites.
@@ -3569,7 +3921,16 @@ Lieu : local textile, 5 rue Neuve.
 Horaire : samedi à 13 h 30.
 la première heure est réservée aux présentations.
 Apporter un vêtement simple à réparer. Merci de envoyer une photo du vêtement.
-Contact : ateliertextile@ville.fr.`;
+Contact : ateliertextile@ville.fr.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E10_2_CE_EMAIL_13_POOL = buildExpressPool("e10-2-ce-email-13", [
   q({
@@ -3659,6 +4020,7 @@ const E10_2_CE_EMAIL_13_POOL = buildExpressPool("e10-2-ce-email-13", [
 ]);
 
 const E10_2_CE_EMAIL_14_TEXT = `De : Groupe Balades avec chiens
+
 Objet : Dernière vérification
 Bonjour Tom,
 Avant une promenade pour maîtres et animaux, nous vérifions les détails.
@@ -3667,6 +4029,16 @@ Le rendez-vous est dimanche à 10 h.
 les chiens doivent rester en laisse.
 Sacs propres obligatoires.
 Pouvez-vous indiquer le nom de votre chien ?
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
 Merci, Groupe Balades avec chiens`;
 
 const E10_2_CE_EMAIL_14_POOL = buildExpressPool("e10-2-ce-email-14", [
@@ -3757,6 +4129,7 @@ const E10_2_CE_EMAIL_14_POOL = buildExpressPool("e10-2-ce-email-14", [
 ]);
 
 const E10_2_CE_EMAIL_15_TEXT = `De : Cercle Ciné Discussion
+
 Objet : Invitation personnelle
 Bonjour Leïla,
 Je serais content(e) de vous voir pour une rencontre après un film.
@@ -3764,6 +4137,16 @@ Je propose hall du cinéma Rex.
 La date choisie est mardi à 20 h 40.
 la discussion durera trente minutes au café voisin.
 Billet à acheter soi-même.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Merci de venir avec une question sur le film.
 À très vite, Cercle Ciné Discussion`;
 
@@ -3855,6 +4238,7 @@ const E10_2_CE_EMAIL_15_POOL = buildExpressPool("e10-2-ce-email-15", [
 ]);
 
 const E10_2_CE_EMAIL_16_TEXT = `De : Réseau Étudiants Adultes
+
 Objet : Organisation du groupe
 Bonjour Sonia,
 Le groupe confirme un déjeuner pour nouveaux inscrits.
@@ -3862,6 +4246,16 @@ Nous partirons de restaurant universitaire, table 12.
 Le départ est prévu vendredi à 12 h 10.
 un tuteur accueillera les personnes à l'entrée.
 Menu étudiant : 3,30 € avec carte.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
 Merci de prévenir en cas de retard; contact : tuteur Ali.
 Amicalement, Réseau Étudiants Adultes`;
 
@@ -3953,6 +4347,7 @@ const E10_2_CE_EMAIL_16_POOL = buildExpressPool("e10-2-ce-email-16", [
 ]);
 
 const E10_2_CE_EMAIL_17_TEXT = `De : Club Photo Mobile
+
 Objet : À lire avant de venir
 Bonjour Ilyas,
 Avant une sortie pour apprendre à se connaître, lisez ces informations.
@@ -3961,7 +4356,17 @@ Accueil samedi à 16 h.
 chacun prendra trois photos du quartier.
 Téléphone chargé recommandé.
 Il faudra partager une photo après la sortie.
-Bonne réception, Club Photo Mobile`;
+Bonne réception, Club Photo Mobile
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const E10_2_CE_EMAIL_17_POOL = buildExpressPool("e10-2-ce-email-17", [
   q({
@@ -4051,6 +4456,7 @@ const E10_2_CE_EMAIL_17_POOL = buildExpressPool("e10-2-ce-email-17", [
 ]);
 
 const E10_2_CE_EMAIL_18_TEXT = `De : Association Bienvenue
+
 Objet : Compte rendu et prochaine étape
 Bonjour Greta,
 Après notre échange, nous gardons un parrainage entre habitants.
@@ -4059,7 +4465,17 @@ La prochaine date est lundi à 18 h.
 chaque nouveau rencontre une personne du quartier.
 Service gratuit sur inscription.
 La prochaine étape est de remplir la fiche de présentation.
-Contact : bienvenue@quartier.fr.`;
+Contact : bienvenue@quartier.fr.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.`;
 
 const E10_2_CE_EMAIL_18_POOL = buildExpressPool("e10-2-ce-email-18", [
   q({
@@ -4149,6 +4565,7 @@ const E10_2_CE_EMAIL_18_POOL = buildExpressPool("e10-2-ce-email-18", [
 ]);
 
 const E10_2_CE_EMAIL_19_TEXT = `De : Groupe Volley Détente
+
 Objet : Participation confirmée
 Bonjour Nico,
 Votre participation à un entraînement ouvert aux débutants est confirmée.
@@ -4157,6 +4574,16 @@ Nous commencerons mercredi à 19 h.
 les équipes seront mélangées après chaque set.
 Baskets propres demandées.
 Merci aussi de signaler votre niveau au responsable.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Cordialement, Groupe Volley Détente`;
 
 const E10_2_CE_EMAIL_19_POOL = buildExpressPool("e10-2-ce-email-19", [
@@ -4247,6 +4674,7 @@ const E10_2_CE_EMAIL_19_POOL = buildExpressPool("e10-2-ce-email-19", [
 ]);
 
 const E10_2_CE_EMAIL_20_TEXT = `De : Atelier Podcast Amateur
+
 Objet : Question rapide
 Bonjour Rita,
 J'ai une question au sujet de une rencontre pour créer une équipe.
@@ -4255,7 +4683,17 @@ Le moment proposé est jeudi à 18 h 15.
 le thème proposé est la vie du quartier.
 Casque prêté sur place.
 Pouvez-vous préparer une idée de sujet ?
-Répondez à podcast@mjc.fr.`;
+Répondez à podcast@mjc.fr.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.`;
 
 const E10_2_CE_EMAIL_20_POOL = buildExpressPool("e10-2-ce-email-20", [
   q({
@@ -4747,6 +5185,7 @@ sourceMessage: {
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E10_3_CE_EMAIL_TEXT = `De : Comité Mariage Lina et Paul
+
 Objet : Confirmation — l'organisation du mariage civil
 Bonjour Emma,
 Je vous confirme l'organisation du mariage civil.
@@ -4755,6 +5194,16 @@ les témoins doivent arriver avec leur pièce d'identité.
 Photos autorisées seulement après la cérémonie.
 Merci de confirmer votre présence au repas.
 Vous pouvez répondre par mariage.lina.paul@mail.fr.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
 Cordialement, Comité Mariage Lina et Paul`;
 
 const E10_3_CE_EMAIL_POOL = buildExpressPool("e10-3-ce-email", [
@@ -4845,6 +5294,7 @@ const E10_3_CE_EMAIL_POOL = buildExpressPool("e10-3-ce-email", [
 ]);
 
 const E10_3_CE_EMAIL_2_TEXT = `De : Fête du Quartier Nord
+
 Objet : Petite organisation pour la préparation des stands
 Bonjour Farid,
 Nous préparons les derniers détails.
@@ -4853,6 +5303,16 @@ les tables seront montées par les bénévoles.
 À retenir : Chaque stand reçoit deux chaises.
 Pouvez-vous choisir un créneau de montage ?
 Contact direct : comite.nord@ville.fr.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
 À bientôt, Fête du Quartier Nord`;
 
 const E10_3_CE_EMAIL_2_POOL = buildExpressPool("e10-3-ce-email-2", [
@@ -4943,6 +5403,7 @@ const E10_3_CE_EMAIL_2_POOL = buildExpressPool("e10-3-ce-email-2", [
 ]);
 
 const E10_3_CE_EMAIL_3_TEXT = `De : Équipe Concert Solidaire
+
 Objet : Réponse attendue — un concert au profit de l'épicerie sociale
 Bonjour Claire,
 Votre présence nous aidera beaucoup.
@@ -4951,6 +5412,16 @@ L'horaire confirmé est samedi à 20 h.
 trois groupes locaux joueront chacun trente minutes.
 Entrée : 8 € ou don alimentaire.
 Merci de réserver les billets avant jeudi avant la date.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
 Bien à vous, Équipe Concert Solidaire`;
 
 const E10_3_CE_EMAIL_3_POOL = buildExpressPool("e10-3-ce-email-3", [
@@ -5041,6 +5512,7 @@ const E10_3_CE_EMAIL_3_POOL = buildExpressPool("e10-3-ce-email-3", [
 ]);
 
 const E10_3_CE_EMAIL_4_TEXT = `De : MJC Bellevue
+
 Objet : Informations pratiques
 Bonjour Youssef,
 Voici les informations pour un vide-greniers de printemps.
@@ -5049,6 +5521,16 @@ Le début est fixé dimanche à 8 h.
 les exposants entrent par le portail gris.
 Prévoir aussi : Emplacement : 6 € avec table.
 Pour toute question : mjc-bellevue@ville.fr.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Merci, MJC Bellevue`;
 
 const E10_3_CE_EMAIL_4_POOL = buildExpressPool("e10-3-ce-email-4", [
@@ -5139,6 +5621,7 @@ const E10_3_CE_EMAIL_4_POOL = buildExpressPool("e10-3-ce-email-4", [
 ]);
 
 const E10_3_CE_EMAIL_5_TEXT = `De : Club Sport Santé
+
 Objet : Invitation mise à jour
 Bonjour Lou,
 Nous avons modifié un détail pour un tournoi amical de badminton.
@@ -5147,6 +5630,16 @@ La date ne change pas : mercredi à 18 h 30.
 les équipes seront tirées au sort sur place.
 Raquette prêtée si besoin.
 Merci de apporter des chaussures propres.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Bonne journée, Club Sport Santé`;
 
 const E10_3_CE_EMAIL_5_POOL = buildExpressPool("e10-3-ce-email-5", [
@@ -5237,6 +5730,7 @@ const E10_3_CE_EMAIL_5_POOL = buildExpressPool("e10-3-ce-email-5", [
 ]);
 
 const E10_3_CE_EMAIL_6_TEXT = `De : Collectif Rue Verte
+
 Objet : Votre aide pour une inauguration de fresque
 Bonjour Sacha,
 Nous cherchons encore quelques personnes pour aider.
@@ -5245,7 +5739,17 @@ Rendez-vous jeudi à 17 h 45.
 les artistes expliqueront leur travail.
 Indication pratique : Goûter offert par les commerçants.
 Si vous êtes disponible, venir sans vélo dans le passage.
-Réponse à collectif.rueverte@net.fr.`;
+Réponse à collectif.rueverte@net.fr.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.`;
 
 const E10_3_CE_EMAIL_6_POOL = buildExpressPool("e10-3-ce-email-6", [
   q({
@@ -5335,6 +5839,7 @@ const E10_3_CE_EMAIL_6_POOL = buildExpressPool("e10-3-ce-email-6", [
 ]);
 
 const E10_3_CE_EMAIL_7_TEXT = `De : Festival des Saveurs
+
 Objet : Rappel avant demain
 Bonjour Nora,
 Je vous rappelle la réunion des bénévoles avant le festival.
@@ -5343,6 +5848,16 @@ Merci d'arriver mardi à 19 h.
 les tâches seront réparties par équipe.
 Badge bénévole remis à l'entrée.
 N'oubliez pas de choisir une mission sur le tableau.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 Cordialement, Festival des Saveurs`;
 
 const E10_3_CE_EMAIL_7_POOL = buildExpressPool("e10-3-ce-email-7", [
@@ -5433,6 +5948,7 @@ const E10_3_CE_EMAIL_7_POOL = buildExpressPool("e10-3-ce-email-7", [
 ]);
 
 const E10_3_CE_EMAIL_8_TEXT = `De : École de Musique
+
 Objet : Documents et horaires
 Bonjour Adrien,
 Pour une audition de fin d'année, voici ce qu'il faut savoir.
@@ -5440,6 +5956,16 @@ Adresse : auditorium du conservatoire.
 Horaire : vendredi à 18 h.
 chaque élève jouera un morceau court.
 Frais ou matériel : Entrée libre pour deux proches.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Merci de arriver avec l'instrument accordé; contact : secretariat.musique@ville.fr.
 Avec nos salutations, École de Musique`;
 
@@ -5531,6 +6057,7 @@ const E10_3_CE_EMAIL_8_POOL = buildExpressPool("e10-3-ce-email-8", [
 ]);
 
 const E10_3_CE_EMAIL_9_TEXT = `De : Association Culture Plus
+
 Objet : Merci de confirmer
 Bonjour Mila,
 Nous devons compter les participants pour une conférence sur les jardins urbains.
@@ -5538,6 +6065,16 @@ Le rendez-vous aura lieu à salle Victor-Schœlcher.
 Il est prévu lundi à 18 h 30.
 la conférencière répondra aux questions à la fin.
 Participation conseillée : 3 €.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Merci de réserver car la salle est petite.
 Réponse souhaitée : cultureplus@asso.fr.`;
 
@@ -5629,6 +6166,7 @@ const E10_3_CE_EMAIL_9_POOL = buildExpressPool("e10-3-ce-email-9", [
 ]);
 
 const E10_3_CE_EMAIL_10_TEXT = `De : Parents de CM2
+
 Objet : Changement de salle
 Bonjour Rania,
 Une précision concerne la kermesse de fin d'année.
@@ -5637,6 +6175,16 @@ L'horaire reste samedi à 14 h.
 les jeux ouvriront après le spectacle des élèves.
 Chaque famille apporte un gâteau étiqueté.
 Merci de s'inscrire pour tenir un stand.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
 À bientôt, Parents de CM2`;
 
 const E10_3_CE_EMAIL_10_POOL = buildExpressPool("e10-3-ce-email-10", [
@@ -5727,6 +6275,7 @@ const E10_3_CE_EMAIL_10_POOL = buildExpressPool("e10-3-ce-email-10", [
 ]);
 
 const E10_3_CE_EMAIL_11_TEXT = `De : Cinéma Rex
+
 Objet : Programme court
 Bonjour Victor,
 Voici le programme de une projection débat.
@@ -5735,7 +6284,17 @@ Début jeudi à 20 h.
 le réalisateur participera par visioconférence.
 Tarif unique : 6 €.
 Pour participer, acheter la place en avance.
-Questions : contact@cinemarex.fr.`;
+Questions : contact@cinemarex.fr.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E10_3_CE_EMAIL_11_POOL = buildExpressPool("e10-3-ce-email-11", [
   q({
@@ -5825,6 +6384,7 @@ const E10_3_CE_EMAIL_11_POOL = buildExpressPool("e10-3-ce-email-11", [
 ]);
 
 const E10_3_CE_EMAIL_12_TEXT = `De : Office du Tourisme
+
 Objet : Suite à votre inscription
 Bonjour Inès,
 Nous avons bien reçu votre inscription pour une visite guidée nocturne.
@@ -5833,6 +6393,16 @@ La rencontre commence vendredi à 21 h.
 le guide racontera trois légendes locales.
 Lampe de poche recommandée.
 Merci de réserver avant mercredi midi.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Cordialement, Office du Tourisme`;
 
 const E10_3_CE_EMAIL_12_POOL = buildExpressPool("e10-3-ce-email-12", [
@@ -5923,6 +6493,7 @@ const E10_3_CE_EMAIL_12_POOL = buildExpressPool("e10-3-ce-email-12", [
 ]);
 
 const E10_3_CE_EMAIL_13_TEXT = `De : Chorale Arc-en-Ciel
+
 Objet : Message aux participants
 Bonjour Mathis,
 Ce message est envoyé à toutes les personnes inscrites.
@@ -5931,7 +6502,16 @@ Lieu : église Saint-Luc.
 Horaire : dimanche à 16 h.
 le public chantera le dernier refrain.
 Entrée gratuite, panier à la sortie. Merci de arriver avant la fermeture des portes.
-Contact : chorale.arc@mail.fr.`;
+Contact : chorale.arc@mail.fr.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.`;
 
 const E10_3_CE_EMAIL_13_POOL = buildExpressPool("e10-3-ce-email-13", [
   q({
@@ -6021,6 +6601,7 @@ const E10_3_CE_EMAIL_13_POOL = buildExpressPool("e10-3-ce-email-13", [
 ]);
 
 const E10_3_CE_EMAIL_14_TEXT = `De : Librairie Pages Ouvertes
+
 Objet : Dernière vérification
 Bonjour Salomé,
 Avant une séance de dédicace, nous vérifions les détails.
@@ -6029,6 +6610,16 @@ Le rendez-vous est samedi à 11 h.
 l'autrice signera son album après la lecture.
 Livre disponible sur place à 12 €.
 Pouvez-vous demander un ticket d'attente ?
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci, Librairie Pages Ouvertes`;
 
 const E10_3_CE_EMAIL_14_POOL = buildExpressPool("e10-3-ce-email-14", [
@@ -6119,6 +6710,7 @@ const E10_3_CE_EMAIL_14_POOL = buildExpressPool("e10-3-ce-email-14", [
 ]);
 
 const E10_3_CE_EMAIL_15_TEXT = `De : Collectif Étudiants
+
 Objet : Invitation personnelle
 Bonjour Kenji,
 Je serais content(e) de vous voir pour une soirée internationale.
@@ -6126,6 +6718,16 @@ Je propose foyer universitaire.
 La date choisie est mercredi à 19 h.
 chaque table présentera un pays.
 Apporter un petit plat si possible.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Merci de indiquer le pays choisi.
 À très vite, Collectif Étudiants`;
 
@@ -6217,6 +6819,7 @@ const E10_3_CE_EMAIL_15_POOL = buildExpressPool("e10-3-ce-email-15", [
 ]);
 
 const E10_3_CE_EMAIL_16_TEXT = `De : Service Culture
+
 Objet : Organisation du groupe
 Bonjour Maëlle,
 Le groupe confirme une exposition photo en plein air.
@@ -6224,6 +6827,16 @@ Nous partirons de grilles du parc central.
 Le départ est prévu mardi à 12 h.
 les photos resteront visibles pendant trois semaines.
 Accès libre sans billet.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Merci de respecter le sens de visite; contact : culture@ville.fr.
 Amicalement, Service Culture`;
 
@@ -6315,6 +6928,7 @@ const E10_3_CE_EMAIL_16_POOL = buildExpressPool("e10-3-ce-email-16", [
 ]);
 
 const E10_3_CE_EMAIL_17_TEXT = `De : Club Cyclo
+
 Objet : À lire avant de venir
 Bonjour Jules,
 Avant une course lente et familiale, lisez ces informations.
@@ -6323,7 +6937,17 @@ Accueil dimanche à 10 h 30.
 le gagnant sera le dernier sans poser le pied.
 Casque obligatoire pour tous.
 Il faudra vérifier les freins du vélo.
-Bonne réception, Club Cyclo`;
+Bonne réception, Club Cyclo
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E10_3_CE_EMAIL_17_POOL = buildExpressPool("e10-3-ce-email-17", [
   q({
@@ -6413,6 +7037,7 @@ const E10_3_CE_EMAIL_17_POOL = buildExpressPool("e10-3-ce-email-17", [
 ]);
 
 const E10_3_CE_EMAIL_18_TEXT = `De : Atelier Théâtre
+
 Objet : Compte rendu et prochaine étape
 Bonjour Lola,
 Après notre échange, nous gardons une soirée d'improvisation.
@@ -6421,7 +7046,17 @@ La prochaine date est vendredi à 20 h 30.
 le public proposera des mots au début.
 Participation : 5 €.
 La prochaine étape est de réserver par message.
-Contact : theatre.mjc@mail.fr.`;
+Contact : theatre.mjc@mail.fr.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.`;
 
 const E10_3_CE_EMAIL_18_POOL = buildExpressPool("e10-3-ce-email-18", [
   q({
@@ -6511,6 +7146,7 @@ const E10_3_CE_EMAIL_18_POOL = buildExpressPool("e10-3-ce-email-18", [
 ]);
 
 const E10_3_CE_EMAIL_19_TEXT = `De : Comité Jumelage
+
 Objet : Participation confirmée
 Bonjour Marco,
 Votre participation à un accueil de visiteurs italiens est confirmée.
@@ -6519,6 +7155,16 @@ Nous commencerons jeudi à 16 h 20.
 les familles porteront un badge bleu.
 Prévoir un ticket de bus pour le retour.
 Merci aussi de envoyer votre numéro de téléphone.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Cordialement, Comité Jumelage`;
 
 const E10_3_CE_EMAIL_19_POOL = buildExpressPool("e10-3-ce-email-19", [
@@ -6609,6 +7255,7 @@ const E10_3_CE_EMAIL_19_POOL = buildExpressPool("e10-3-ce-email-19", [
 ]);
 
 const E10_3_CE_EMAIL_20_TEXT = `De : Marché des Créateurs
+
 Objet : Question rapide
 Bonjour Zoé,
 J'ai une question au sujet de l'installation des exposants.
@@ -6617,7 +7264,17 @@ Le moment proposé est samedi à 7 h 30.
 les voitures doivent partir avant 9 h.
 Table fournie, rallonge non fournie.
 Pouvez-vous imprimer votre autorisation ?
-Répondez à createurs@marche.fr.`;
+Répondez à createurs@marche.fr.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.`;
 
 const E10_3_CE_EMAIL_20_POOL = buildExpressPool("e10-3-ce-email-20", [
   q({
@@ -7109,6 +7766,7 @@ sourceMessage: {
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E10_4_CE_EMAIL_TEXT = `De : École Jean-Moulin
+
 Objet : Confirmation — la réunion parents-professeurs
 Bonjour Mme Diallo,
 Je vous confirme la réunion parents-professeurs.
@@ -7117,6 +7775,16 @@ les familles entreront par le portail vert.
 Bulletin du trimestre à apporter.
 Merci de prendre un créneau avec le professeur principal.
 Vous pouvez répondre par pronote de la classe.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Cordialement, École Jean-Moulin`;
 
 const E10_4_CE_EMAIL_POOL = buildExpressPool("e10-4-ce-email", [
@@ -7207,6 +7875,7 @@ const E10_4_CE_EMAIL_POOL = buildExpressPool("e10-4-ce-email", [
 ]);
 
 const E10_4_CE_EMAIL_2_TEXT = `De : Collège Victor-Hugo
+
 Objet : Petite organisation pour une sortie au musée d'histoire
 Bonjour M. Lopez,
 Nous préparons les derniers détails.
@@ -7215,6 +7884,15 @@ le retour est prévu avant la fin des cours.
 À retenir : Pique-nique froid obligatoire.
 Pouvez-vous signer l'autorisation parentale ?
 Contact direct : vie scolaire.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
 À bientôt, Collège Victor-Hugo`;
 
 const E10_4_CE_EMAIL_2_POOL = buildExpressPool("e10-4-ce-email-2", [
@@ -7305,6 +7983,7 @@ const E10_4_CE_EMAIL_2_POOL = buildExpressPool("e10-4-ce-email-2", [
 ]);
 
 const E10_4_CE_EMAIL_3_TEXT = `De : Association des Parents
+
 Objet : Réponse attendue — un café d'accueil pour nouvelles familles
 Bonjour Nora,
 Votre présence nous aidera beaucoup.
@@ -7313,6 +7992,16 @@ L'horaire confirmé est vendredi à 8 h 30.
 deux parents expliqueront le fonctionnement de l'école.
 Café offert par l'association.
 Merci de confirmer votre présence avant la date.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Bien à vous, Association des Parents`;
 
 const E10_4_CE_EMAIL_3_POOL = buildExpressPool("e10-4-ce-email-3", [
@@ -7403,6 +8092,7 @@ const E10_4_CE_EMAIL_3_POOL = buildExpressPool("e10-4-ce-email-3", [
 ]);
 
 const E10_4_CE_EMAIL_4_TEXT = `De : Cantine Municipale
+
 Objet : Informations pratiques
 Bonjour Adam,
 Voici les informations pour le changement de menu de vendredi.
@@ -7411,6 +8101,16 @@ Le début est fixé vendredi à midi.
 le poisson sera remplacé par une omelette.
 Prévoir aussi : Menu végétarien disponible sur demande.
 Pour toute question : cantine@ville.fr.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 Merci, Cantine Municipale`;
 
 const E10_4_CE_EMAIL_4_POOL = buildExpressPool("e10-4-ce-email-4", [
@@ -7501,6 +8201,7 @@ const E10_4_CE_EMAIL_4_POOL = buildExpressPool("e10-4-ce-email-4", [
 ]);
 
 const E10_4_CE_EMAIL_5_TEXT = `De : Professeur de français
+
 Objet : Invitation mise à jour
 Bonjour Sofia,
 Nous avons modifié un détail pour un devoir de lecture à rendre.
@@ -7509,6 +8210,16 @@ La date ne change pas : lundi à 9 h.
 les élèves doivent écrire dix lignes sur le chapitre 3.
 Cahier bleu obligatoire.
 Merci de relire le texte avant le cours.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Bonne journée, Professeur de français`;
 
 const E10_4_CE_EMAIL_5_POOL = buildExpressPool("e10-4-ce-email-5", [
@@ -7599,6 +8310,7 @@ const E10_4_CE_EMAIL_5_POOL = buildExpressPool("e10-4-ce-email-5", [
 ]);
 
 const E10_4_CE_EMAIL_6_TEXT = `De : École des Platanes
+
 Objet : Votre aide pour la photo de classe
 Bonjour Léo,
 Nous cherchons encore quelques personnes pour aider.
@@ -7607,7 +8319,17 @@ Rendez-vous jeudi à 10 h 20.
 les frères et sœurs seront photographiés après la récréation.
 Indication pratique : Tenue simple recommandée.
 Si vous êtes disponible, rapporter le bon de commande signé.
-Réponse à secrétariat.`;
+Réponse à secrétariat.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.`;
 
 const E10_4_CE_EMAIL_6_POOL = buildExpressPool("e10-4-ce-email-6", [
   q({
@@ -7697,6 +8419,7 @@ const E10_4_CE_EMAIL_6_POOL = buildExpressPool("e10-4-ce-email-6", [
 ]);
 
 const E10_4_CE_EMAIL_7_TEXT = `De : Conseil d'École
+
 Objet : Rappel avant demain
 Bonjour Hajar,
 Je vous rappelle une demande de représentants de parents.
@@ -7705,6 +8428,16 @@ Merci d'arriver mardi à 17 h 45.
 deux postes sont encore libres.
 Réunion prévue quatre fois par an.
 N'oubliez pas de envoyer votre candidature.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Cordialement, Conseil d'École`;
 
 const E10_4_CE_EMAIL_7_POOL = buildExpressPool("e10-4-ce-email-7", [
@@ -7795,6 +8528,7 @@ const E10_4_CE_EMAIL_7_POOL = buildExpressPool("e10-4-ce-email-7", [
 ]);
 
 const E10_4_CE_EMAIL_8_TEXT = `De : Bibliothèque Scolaire
+
 Objet : Documents et horaires
 Bonjour Yanis,
 Pour un prêt de livres pour les vacances, voici ce qu'il faut savoir.
@@ -7802,6 +8536,16 @@ Adresse : salle BCD.
 Horaire : vendredi à 15 h.
 chaque élève pourra emprunter deux livres.
 Frais ou matériel : Carte de lecteur à présenter.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Merci de rendre les anciens livres; contact : bibliotheque.ecole@mail.fr.
 Avec nos salutations, Bibliothèque Scolaire`;
 
@@ -7893,6 +8637,7 @@ const E10_4_CE_EMAIL_8_POOL = buildExpressPool("e10-4-ce-email-8", [
 ]);
 
 const E10_4_CE_EMAIL_9_TEXT = `De : Club Devoirs
+
 Objet : Merci de confirmer
 Bonjour Maya,
 Nous devons compter les participants pour une aide aux devoirs après la classe.
@@ -7900,6 +8645,16 @@ Le rendez-vous aura lieu à salle 12 du collège.
 Il est prévu lundi et jeudi à 16 h 45.
 les groupes seront limités à huit élèves.
 Service gratuit sur inscription.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Merci de remplir la fiche avec un parent.
 Réponse souhaitée : cpe du collège.`;
 
@@ -7991,6 +8746,7 @@ const E10_4_CE_EMAIL_9_POOL = buildExpressPool("e10-4-ce-email-9", [
 ]);
 
 const E10_4_CE_EMAIL_10_TEXT = `De : Équipe EPS
+
 Objet : Changement de salle
 Bonjour Noé,
 Une précision concerne la journée sportive de printemps.
@@ -7999,6 +8755,16 @@ L'horaire reste mercredi à 13 h 30.
 les classes tourneront sur quatre ateliers.
 Bouteille d'eau et casquette demandées.
 Merci de venir en tenue de sport.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 À bientôt, Équipe EPS`;
 
 const E10_4_CE_EMAIL_10_POOL = buildExpressPool("e10-4-ce-email-10", [
@@ -8089,6 +8855,7 @@ const E10_4_CE_EMAIL_10_POOL = buildExpressPool("e10-4-ce-email-10", [
 ]);
 
 const E10_4_CE_EMAIL_11_TEXT = `De : Secrétariat du lycée
+
 Objet : Programme court
 Bonjour Inès,
 Voici le programme de la remise des dossiers de bourse.
@@ -8097,7 +8864,17 @@ Début avant vendredi à 16 h.
 les dossiers incomplets seront rendus aux familles.
 Avis d'imposition à joindre.
 Pour participer, déposer le dossier signé.
-Questions : secretariat.lycee@mail.fr.`;
+Questions : secretariat.lycee@mail.fr.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.`;
 
 const E10_4_CE_EMAIL_11_POOL = buildExpressPool("e10-4-ce-email-11", [
   q({
@@ -8187,6 +8964,7 @@ const E10_4_CE_EMAIL_11_POOL = buildExpressPool("e10-4-ce-email-11", [
 ]);
 
 const E10_4_CE_EMAIL_12_TEXT = `De : Classe de CE2
+
 Objet : Suite à votre inscription
 Bonjour Mila,
 Nous avons bien reçu votre inscription pour une collecte de matériel pour les arts.
@@ -8195,6 +8973,16 @@ La rencontre commence jusqu'à mardi matin.
 les bouchons et boîtes propres seront utilisés.
 Pas de verre ni d'objet coupant.
 Merci de apporter seulement du matériel lavé.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Cordialement, Classe de CE2`;
 
 const E10_4_CE_EMAIL_12_POOL = buildExpressPool("e10-4-ce-email-12", [
@@ -8285,6 +9073,7 @@ const E10_4_CE_EMAIL_12_POOL = buildExpressPool("e10-4-ce-email-12", [
 ]);
 
 const E10_4_CE_EMAIL_13_TEXT = `De : Transport Scolaire
+
 Objet : Message aux participants
 Bonjour Basile,
 Ce message est envoyé à toutes les personnes inscrites.
@@ -8293,7 +9082,16 @@ Lieu : arrêt Les Pins.
 Horaire : vendredi à 7 h 40.
 des travaux ralentissent la route principale.
 Attente possible de dix minutes. Merci de rester à l'arrêt avec un adulte.
-Contact : ligne info transport.`;
+Contact : ligne info transport.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.`;
 
 const E10_4_CE_EMAIL_13_POOL = buildExpressPool("e10-4-ce-email-13", [
   q({
@@ -8383,6 +9181,7 @@ const E10_4_CE_EMAIL_13_POOL = buildExpressPool("e10-4-ce-email-13", [
 ]);
 
 const E10_4_CE_EMAIL_14_TEXT = `De : Infirmerie du collège
+
 Objet : Dernière vérification
 Bonjour Amel,
 Avant une séance sur le sommeil des adolescents, nous vérifions les détails.
@@ -8391,6 +9190,16 @@ Le rendez-vous est mardi à 14 h.
 l'infirmière donnera des conseils simples.
 Autorisation nécessaire pour les externes.
 Pouvez-vous rapporter le coupon réponse ?
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci, Infirmerie du collège`;
 
 const E10_4_CE_EMAIL_14_POOL = buildExpressPool("e10-4-ce-email-14", [
@@ -8481,6 +9290,7 @@ const E10_4_CE_EMAIL_14_POOL = buildExpressPool("e10-4-ce-email-14", [
 ]);
 
 const E10_4_CE_EMAIL_15_TEXT = `De : Atelier Théâtre Scolaire
+
 Objet : Invitation personnelle
 Bonjour Ruben,
 Je serais content(e) de vous voir pour les inscriptions au spectacle de fin d'année.
@@ -8488,6 +9298,16 @@ Je propose salle culturelle.
 La date choisie est jeudi à 12 h 30.
 les répétitions auront lieu pendant la pause déjeuner.
 Texte distribué après l'inscription.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci de choisir un rôle court ou long.
 À très vite, Atelier Théâtre Scolaire`;
 
@@ -8579,6 +9399,7 @@ const E10_4_CE_EMAIL_15_POOL = buildExpressPool("e10-4-ce-email-15", [
 ]);
 
 const E10_4_CE_EMAIL_16_TEXT = `De : Foyer Socio-Éducatif
+
 Objet : Organisation du groupe
 Bonjour Salma,
 Le groupe confirme une vente de gâteaux pour financer le voyage.
@@ -8586,6 +9407,16 @@ Nous partirons de devant la salle des professeurs.
 Le départ est prévu vendredi à 10 h.
 les élèves tiendront le stand par groupes de deux.
 Prix conseillé : 1 € la part.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
 Merci de apporter les gâteaux le matin; contact : foyer.college@mail.fr.
 Amicalement, Foyer Socio-Éducatif`;
 
@@ -8677,6 +9508,7 @@ const E10_4_CE_EMAIL_16_POOL = buildExpressPool("e10-4-ce-email-16", [
 ]);
 
 const E10_4_CE_EMAIL_17_TEXT = `De : Direction de l'école
+
 Objet : À lire avant de venir
 Bonjour Éric,
 Avant un exercice d'évacuation incendie, lisez ces informations.
@@ -8685,7 +9517,17 @@ Accueil lundi à 10 h 05.
 l'alarme sonnera pendant deux minutes.
 Les parents ne doivent pas entrer dans la cour.
 Il faudra rassurer les enfants avant l'école.
-Bonne réception, Direction de l'école`;
+Bonne réception, Direction de l'école
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E10_4_CE_EMAIL_17_POOL = buildExpressPool("e10-4-ce-email-17", [
   q({
@@ -8775,6 +9617,7 @@ const E10_4_CE_EMAIL_17_POOL = buildExpressPool("e10-4-ce-email-17", [
 ]);
 
 const E10_4_CE_EMAIL_18_TEXT = `De : Classe de 5e B
+
 Objet : Compte rendu et prochaine étape
 Bonjour Lina,
 Après notre échange, nous gardons un exposé par groupes.
@@ -8783,7 +9626,17 @@ La prochaine date est mercredi à 11 h.
 chaque groupe parlera pendant cinq minutes.
 Affiche A3 autorisée.
 La prochaine étape est de envoyer le plan au professeur.
-Contact : ENT de français.`;
+Contact : ENT de français.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E10_4_CE_EMAIL_18_POOL = buildExpressPool("e10-4-ce-email-18", [
   q({
@@ -8873,6 +9726,7 @@ const E10_4_CE_EMAIL_18_POOL = buildExpressPool("e10-4-ce-email-18", [
 ]);
 
 const E10_4_CE_EMAIL_19_TEXT = `De : Service Périscolaire
+
 Objet : Participation confirmée
 Bonjour Pablo,
 Votre participation à l'inscription à l'étude surveillée est confirmée.
@@ -8881,6 +9735,16 @@ Nous commencerons avant le 5 septembre.
 les places sont données selon l'ordre d'arrivée.
 Tarif calculé avec le quotient familial.
 Merci aussi de compléter le formulaire municipal.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement, Service Périscolaire`;
 
 const E10_4_CE_EMAIL_19_POOL = buildExpressPool("e10-4-ce-email-19", [
@@ -8971,6 +9835,7 @@ const E10_4_CE_EMAIL_19_POOL = buildExpressPool("e10-4-ce-email-19", [
 ]);
 
 const E10_4_CE_EMAIL_20_TEXT = `De : Musique au Collège
+
 Objet : Question rapide
 Bonjour Élina,
 J'ai une question au sujet de une répétition de chorale.
@@ -8979,7 +9844,17 @@ Le moment proposé est mardi à 12 h 15.
 les élèves prépareront deux chansons pour la fête.
 Repas rapide à prévoir avant la répétition.
 Pouvez-vous apprendre le refrain ?
-Répondez à professeur de musique.`;
+Répondez à professeur de musique.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const E10_4_CE_EMAIL_20_POOL = buildExpressPool("e10-4-ce-email-20", [
   q({
@@ -9471,6 +10346,7 @@ sourceMessage: {
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E10_5_CE_EMAIL_TEXT = `De : Maison du Bénévolat
+
 Objet : Confirmation — une réunion d'accueil des nouveaux bénévoles
 Bonjour Samir,
 Je vous confirme une réunion d'accueil des nouveaux bénévoles.
@@ -9479,6 +10355,16 @@ trois associations présenteront leurs missions.
 Entrée libre sans cotisation le premier soir.
 Merci de remplir la fiche de disponibilité.
 Vous pouvez répondre par benevolat@ville.fr.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Cordialement, Maison du Bénévolat`;
 
 const E10_5_CE_EMAIL_POOL = buildExpressPool("e10-5-ce-email", [
@@ -9569,6 +10455,7 @@ const E10_5_CE_EMAIL_POOL = buildExpressPool("e10-5-ce-email", [
 ]);
 
 const E10_5_CE_EMAIL_2_TEXT = `De : Association Les Paniers Solidaires
+
 Objet : Petite organisation pour une distribution alimentaire
 Bonjour Claire,
 Nous préparons les derniers détails.
@@ -9577,6 +10464,16 @@ les bénévoles prépareront les sacs avant l'ouverture.
 À retenir : Chaussures fermées recommandées.
 Pouvez-vous indiquer vos horaires possibles ?
 Contact direct : paniers.solidaires@mail.fr.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
 À bientôt, Association Les Paniers Solidaires`;
 
 const E10_5_CE_EMAIL_2_POOL = buildExpressPool("e10-5-ce-email-2", [
@@ -9667,6 +10564,7 @@ const E10_5_CE_EMAIL_2_POOL = buildExpressPool("e10-5-ce-email-2", [
 ]);
 
 const E10_5_CE_EMAIL_3_TEXT = `De : Club Nature du Canal
+
 Objet : Réponse attendue — un nettoyage des berges
 Bonjour Nina,
 Votre présence nous aidera beaucoup.
@@ -9675,6 +10573,16 @@ L'horaire confirmé est samedi à 9 h 30.
 les sacs et pinces seront fournis.
 Gants personnels conseillés.
 Merci de s'inscrire pour prévoir le matériel avant la date.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Bien à vous, Club Nature du Canal`;
 
 const E10_5_CE_EMAIL_3_POOL = buildExpressPool("e10-5-ce-email-3", [
@@ -9765,6 +10673,7 @@ const E10_5_CE_EMAIL_3_POOL = buildExpressPool("e10-5-ce-email-3", [
 ]);
 
 const E10_5_CE_EMAIL_4_TEXT = `De : Secours Amitié Local
+
 Objet : Informations pratiques
 Bonjour Olivier,
 Voici les informations pour une permanence d'écoute bénévole.
@@ -9773,6 +10682,16 @@ Le début est fixé lundi à 17 h.
 une formation courte est obligatoire avant de commencer.
 Prévoir aussi : Adhésion annuelle : 10 €.
 Pour toute question : coordination@secoursamitie.fr.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci, Secours Amitié Local`;
 
 const E10_5_CE_EMAIL_4_POOL = buildExpressPool("e10-5-ce-email-4", [
@@ -9863,6 +10782,7 @@ const E10_5_CE_EMAIL_4_POOL = buildExpressPool("e10-5-ce-email-4", [
 ]);
 
 const E10_5_CE_EMAIL_5_TEXT = `De : Association Sport Pour Tous
+
 Objet : Invitation mise à jour
 Bonjour Maya,
 Nous avons modifié un détail pour une séance adaptée aux seniors.
@@ -9871,6 +10791,16 @@ La date ne change pas : mercredi à 10 h.
 les bénévoles aideront à installer les tapis.
 Tenue confortable demandée.
 Merci de arriver quinze minutes avant la séance.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Bonne journée, Association Sport Pour Tous`;
 
 const E10_5_CE_EMAIL_5_POOL = buildExpressPool("e10-5-ce-email-5", [
@@ -9961,6 +10891,7 @@ const E10_5_CE_EMAIL_5_POOL = buildExpressPool("e10-5-ce-email-5", [
 ]);
 
 const E10_5_CE_EMAIL_6_TEXT = `De : Collectif Zéro Déchet
+
 Objet : Votre aide pour un atelier réparation d'objets
 Bonjour Rachid,
 Nous cherchons encore quelques personnes pour aider.
@@ -9969,7 +10900,17 @@ Rendez-vous samedi à 14 h.
 les bénévoles essaieront de réparer petit électroménager et jouets.
 Indication pratique : Un seul objet par personne.
 Si vous êtes disponible, décrire l'objet à l'avance.
-Réponse à zerodechet@ville.fr.`;
+Réponse à zerodechet@ville.fr.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.`;
 
 const E10_5_CE_EMAIL_6_POOL = buildExpressPool("e10-5-ce-email-6", [
   q({
@@ -10059,6 +11000,7 @@ const E10_5_CE_EMAIL_6_POOL = buildExpressPool("e10-5-ce-email-6", [
 ]);
 
 const E10_5_CE_EMAIL_7_TEXT = `De : Bibliothèque de Rue
+
 Objet : Rappel avant demain
 Bonjour Anaïs,
 Je vous rappelle une lecture pour enfants au square.
@@ -10067,6 +11009,16 @@ Merci d'arriver mercredi à 15 h.
 les bénévoles liront des albums sous la tente.
 Livres prêtés par la médiathèque.
 N'oubliez pas de venir avec une couverture.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Cordialement, Bibliothèque de Rue`;
 
 const E10_5_CE_EMAIL_7_POOL = buildExpressPool("e10-5-ce-email-7", [
@@ -10157,6 +11109,7 @@ const E10_5_CE_EMAIL_7_POOL = buildExpressPool("e10-5-ce-email-7", [
 ]);
 
 const E10_5_CE_EMAIL_8_TEXT = `De : Comité de Quartier Sud
+
 Objet : Documents et horaires
 Bonjour Kamel,
 Pour l'assemblée générale annuelle, voici ce qu'il faut savoir.
@@ -10164,6 +11117,16 @@ Adresse : salle des associations.
 Horaire : vendredi à 19 h.
 le budget et les projets seront présentés.
 Frais ou matériel : Cotisation possible sur place : 5 €.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Merci de voter pour le nouveau bureau; contact : quartiersud@asso.fr.
 Avec nos salutations, Comité de Quartier Sud`;
 
@@ -10255,6 +11218,7 @@ const E10_5_CE_EMAIL_8_POOL = buildExpressPool("e10-5-ce-email-8", [
 ]);
 
 const E10_5_CE_EMAIL_9_TEXT = `De : Atelier Vélo Solidaire
+
 Objet : Merci de confirmer
 Bonjour Lise,
 Nous devons compter les participants pour une permanence de réparation.
@@ -10262,6 +11226,16 @@ Le rendez-vous aura lieu à garage partagé, rue du Moulin.
 Il est prévu jeudi à 18 h.
 les bénévoles apprennent à régler les freins.
 Pièces neuves à prix coûtant.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Merci de venir avec son vélo propre.
 Réponse souhaitée : atelier.velo@mail.fr.`;
 
@@ -10353,6 +11327,7 @@ const E10_5_CE_EMAIL_9_POOL = buildExpressPool("e10-5-ce-email-9", [
 ]);
 
 const E10_5_CE_EMAIL_10_TEXT = `De : Association Lire Ensemble
+
 Objet : Changement de salle
 Bonjour Gabriel,
 Une précision concerne un appel à lecteurs bénévoles.
@@ -10361,6 +11336,16 @@ L'horaire reste mardi à 16 h 30.
 les lecteurs accompagnent de petits groupes pendant trente minutes.
 Extrait de casier demandé après inscription.
 Merci de choisir un jour de présence.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 À bientôt, Association Lire Ensemble`;
 
 const E10_5_CE_EMAIL_10_POOL = buildExpressPool("e10-5-ce-email-10", [
@@ -10451,6 +11436,7 @@ const E10_5_CE_EMAIL_10_POOL = buildExpressPool("e10-5-ce-email-10", [
 ]);
 
 const E10_5_CE_EMAIL_11_TEXT = `De : Jardins Partagés Est
+
 Objet : Programme court
 Bonjour Sara,
 Voici le programme de une matinée de plantation.
@@ -10459,7 +11445,17 @@ Début dimanche à 9 h.
 des plants de tomates et de basilic seront distribués.
 Apporter une bouteille d'eau.
 Pour participer, noter votre nom sur le tableau.
-Questions : jardins.est@mail.fr.`;
+Questions : jardins.est@mail.fr.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.`;
 
 const E10_5_CE_EMAIL_11_POOL = buildExpressPool("e10-5-ce-email-11", [
   q({
@@ -10549,6 +11545,7 @@ const E10_5_CE_EMAIL_11_POOL = buildExpressPool("e10-5-ce-email-11", [
 ]);
 
 const E10_5_CE_EMAIL_12_TEXT = `De : Association Culture Ouverte
+
 Objet : Suite à votre inscription
 Bonjour Théo,
 Nous avons bien reçu votre inscription pour un accueil de visiteurs au musée.
@@ -10557,6 +11554,16 @@ La rencontre commence samedi à 13 h.
 les bénévoles orienteront les familles vers les ateliers.
 Badge remis à l'arrivée.
 Merci de lire le plan du musée avant samedi.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Cordialement, Association Culture Ouverte`;
 
 const E10_5_CE_EMAIL_12_POOL = buildExpressPool("e10-5-ce-email-12", [
@@ -10647,6 +11654,7 @@ const E10_5_CE_EMAIL_12_POOL = buildExpressPool("e10-5-ce-email-12", [
 ]);
 
 const E10_5_CE_EMAIL_13_TEXT = `De : Banque du Temps
+
 Objet : Message aux participants
 Bonjour Yara,
 Ce message est envoyé à toutes les personnes inscrites.
@@ -10655,7 +11663,16 @@ Lieu : local associatif du marché.
 Horaire : lundi à 18 h 30.
 une heure donnée vaut une heure reçue.
 Inscription gratuite avec adresse du quartier. Merci de préparer une compétence à proposer.
-Contact : banquedutemps@net.fr.`;
+Contact : banquedutemps@net.fr.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.`;
 
 const E10_5_CE_EMAIL_13_POOL = buildExpressPool("e10-5-ce-email-13", [
   q({
@@ -10745,6 +11762,7 @@ const E10_5_CE_EMAIL_13_POOL = buildExpressPool("e10-5-ce-email-13", [
 ]);
 
 const E10_5_CE_EMAIL_14_TEXT = `De : Association Refuge Animal
+
 Objet : Dernière vérification
 Bonjour Hugo,
 Avant une collecte de couvertures, nous vérifions les détails.
@@ -10753,6 +11771,16 @@ Le rendez-vous est samedi de 10 h à 12 h.
 les couvertures doivent être propres et sans trous.
 Croquettes acceptées en petits sacs.
 Pouvez-vous déposer les dons dans les cartons marqués ?
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci, Association Refuge Animal`;
 
 const E10_5_CE_EMAIL_14_POOL = buildExpressPool("e10-5-ce-email-14", [
@@ -10843,6 +11871,7 @@ const E10_5_CE_EMAIL_14_POOL = buildExpressPool("e10-5-ce-email-14", [
 ]);
 
 const E10_5_CE_EMAIL_15_TEXT = `De : Radio Associative Onde Libre
+
 Objet : Invitation personnelle
 Bonjour Iris,
 Je serais content(e) de vous voir pour une réunion pour nouveaux chroniqueurs.
@@ -10850,6 +11879,16 @@ Je propose studio 2, maison des médias.
 La date choisie est jeudi à 18 h 45.
 la première émission parlera des initiatives locales.
 Aucune expérience radio nécessaire.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci de préparer une idée de rubrique.
 À très vite, Radio Associative Onde Libre`;
 
@@ -10941,6 +11980,7 @@ const E10_5_CE_EMAIL_15_POOL = buildExpressPool("e10-5-ce-email-15", [
 ]);
 
 const E10_5_CE_EMAIL_16_TEXT = `De : Collectif Couture Solidaire
+
 Objet : Organisation du groupe
 Bonjour Mehdi,
 Le groupe confirme un atelier de sacs en tissu.
@@ -10948,6 +11988,16 @@ Nous partirons de salle textile du centre social.
 Le départ est prévu vendredi à 14 h.
 les sacs seront donnés à l'épicerie sociale.
 Machines disponibles sur place.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci de apporter du tissu propre si possible; contact : couturesolidaire@mail.fr.
 Amicalement, Collectif Couture Solidaire`;
 
@@ -11039,6 +12089,7 @@ const E10_5_CE_EMAIL_16_POOL = buildExpressPool("e10-5-ce-email-16", [
 ]);
 
 const E10_5_CE_EMAIL_17_TEXT = `De : Association Mémoire du Quartier
+
 Objet : À lire avant de venir
 Bonjour Jeanne,
 Avant une collecte de photos anciennes, lisez ces informations.
@@ -11047,7 +12098,17 @@ Accueil mercredi à 17 h.
 les photos seront scannées puis rendues.
 Écrire le nom des personnes au dos si possible.
 Il faudra prendre rendez-vous pour scanner.
-Bonne réception, Association Mémoire du Quartier`;
+Bonne réception, Association Mémoire du Quartier
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.`;
 
 const E10_5_CE_EMAIL_17_POOL = buildExpressPool("e10-5-ce-email-17", [
   q({
@@ -11137,6 +12198,7 @@ const E10_5_CE_EMAIL_17_POOL = buildExpressPool("e10-5-ce-email-17", [
 ]);
 
 const E10_5_CE_EMAIL_18_TEXT = `De : Club Handi-Loisirs
+
 Objet : Compte rendu et prochaine étape
 Bonjour Benoît,
 Après notre échange, nous gardons une sortie accompagnée au parc.
@@ -11145,7 +12207,17 @@ La prochaine date est samedi à 10 h 15.
 chaque bénévole accompagne une personne pendant la balade.
 Pique-nique fourni par l'association.
 La prochaine étape est de confirmer votre disponibilité.
-Contact : handiloisirs@asso.fr.`;
+Contact : handiloisirs@asso.fr.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.`;
 
 const E10_5_CE_EMAIL_18_POOL = buildExpressPool("e10-5-ce-email-18", [
   q({
@@ -11235,6 +12307,7 @@ const E10_5_CE_EMAIL_18_POOL = buildExpressPool("e10-5-ce-email-18", [
 ]);
 
 const E10_5_CE_EMAIL_19_TEXT = `De : Association Aide Numérique
+
 Objet : Participation confirmée
 Bonjour Rosa,
 Votre participation à un atelier pour apprendre les démarches en ligne est confirmée.
@@ -11243,6 +12316,16 @@ Nous commencerons mardi à 9 h 30.
 les bénévoles aident à créer une adresse e-mail.
 Ordinateurs fournis sur place.
 Merci aussi de venir avec une pièce d'identité.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Cordialement, Association Aide Numérique`;
 
 const E10_5_CE_EMAIL_19_POOL = buildExpressPool("e10-5-ce-email-19", [
@@ -11333,6 +12416,7 @@ const E10_5_CE_EMAIL_19_POOL = buildExpressPool("e10-5-ce-email-19", [
 ]);
 
 const E10_5_CE_EMAIL_20_TEXT = `De : Collectif Fête Solidaire
+
 Objet : Question rapide
 Bonjour Mounir,
 J'ai une question au sujet de la préparation d'un repas partagé.
@@ -11341,7 +12425,17 @@ Le moment proposé est dimanche à 11 h.
 les plats seront servis aux habitants isolés.
 Tablier conseillé.
 Pouvez-vous choisir une équipe cuisine ou service ?
-Répondez à fetesolidaire@mail.fr.`;
+Répondez à fetesolidaire@mail.fr.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E10_5_CE_EMAIL_20_POOL = buildExpressPool("e10-5-ce-email-20", [
   q({

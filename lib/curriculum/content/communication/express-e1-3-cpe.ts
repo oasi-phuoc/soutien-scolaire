@@ -18,7 +18,14 @@ Chère Sophie,
 Je t'invite gâteau et musique !
 C'est samedi 15 mars à 19 h, chez moi.
 Confirme ta présence !
-Julie`;
+Julie
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+Je t'envoie aussi ce détail pour être clair.
+Merci de garder ce document avec vous.
+Les informations sont valables pour cette semaine.`;
 
 const CE_POOL_1 = buildExpressPool("e1-3-1", [
   q({
@@ -112,7 +119,14 @@ Salut Tom !
 Je t'invite le nouveau film français !
 C'est vendredi soir à 20 h, au cinéma du centre.
 Tu viens ?
-Léa`;
+Léa
+Je joins les détails importants juste après.
+Si le plan change, je te préviens tout de suite.
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Nous traitons votre demande rapidement.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.`;
 
 const CE_POOL_2 = buildExpressPool("e1-3-2", [
   q({
@@ -206,7 +220,14 @@ Cher Paul,
 Je t'invite un pique-nique !
 C'est dimanche prochain à 14 h, au parc de la Tournette.
 Apporte une boisson !
-Emma`;
+Emma
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Passe le bonjour à tout le monde.
+Merci de votre attention et de votre patience.`;
 
 const CE_POOL_3 = buildExpressPool("e1-3-3", [
   q({
@@ -300,7 +321,13 @@ Coucou !
 Je t'invite des tapas !
 C'est jeudi à 18 h 30, sur mon balcon.
 Dis-moi si tu peux venir.
-Nina`;
+Nina
+Si le plan change, je te préviens tout de suite.
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Vous pouvez répondre directement à ce message.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.`;
 
 const CE_POOL_4 = buildExpressPool("e1-3-4", [
   q({
@@ -394,7 +421,14 @@ Chers voisins,
 Je t'invite un barbecue !
 C'est samedi 22 à 17 h, dans la cour.
 Inscrivez-vous à la loge.
-Karim`;
+Karim
+Nous vous remercions de votre patience.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.`;
 
 const CE_POOL_5 = buildExpressPool("e1-3-5", [
   q({
@@ -488,7 +522,14 @@ Bonjour Marc,
 Je t'invite le déjeuner !
 C'est mercredi prochain à 12 h 30, au restaurant Le Lac.
 C'est pour mon anniversaire !
-Hugo`;
+Hugo
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Merci de votre attention et de votre patience.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const CE_POOL_6 = buildExpressPool("e1-3-6", [
   q({
@@ -582,7 +623,14 @@ Chers amis,
 Je t'invite notre mariage !
 C'est le 5 juin à 11 h, à la mairie de Nyon.
 Réponse avant le 1er mai.
-Clara et Yann`;
+Clara et Yann
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci de garder ce document avec vous.`;
 
 const CE_POOL_7 = buildExpressPool("e1-3-7", [
   q({
@@ -676,7 +724,14 @@ Chers collègues,
 Je t'invite un gâteau d'adieu !
 C'est vendredi à 16 h, dans la salle de pause.
 Je pars à la retraite !
-Michel`;
+Michel
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Joignez les documents demandés si nécessaire.`;
 
 const CE_POOL_8 = buildExpressPool("e1-3-8", [
   q({
@@ -770,7 +825,14 @@ Bonjour à tous,
 Je t'invite une visite au musée !
 C'est le 10 avril à 8 h, devant l'école.
 Les parents sont les bienvenus.
-Prof. Martin`;
+Prof. Martin
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+C'est important pour moi, merci beaucoup.`;
 
 const CE_POOL_9 = buildExpressPool("e1-3-9", [
   q({
@@ -858,13 +920,19 @@ const CE_POOL_9 = buildExpressPool("e1-3-9", [
     vfC: 0,
   }),
 ]);
-const CE_TEXT_10 = `Message vocal transcrit
+const CE_TEXT_10 = `Message vocal d'un ami
 
 Salut !
 Je t'invite une baignade !
 C'est samedi à 15 h, à la piscine.
 Amène ton maillot !
-Omar`;
+Omar
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Je t'envoie aussi ce détail pour être clair.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.`;
 
 const CE_POOL_10 = buildExpressPool("e1-3-10", [
   q({
@@ -958,7 +1026,14 @@ FÊTE DE QUARTIER
 Je t'invite musique et jeux !
 C'est le 1er juillet à 18 h, place du Marché.
 Entrée gratuite.
-Comité des fêtes`;
+Comité des fêtes
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Je prépare déjà tout pour que ce soit prêt.
+Si tu veux, on peut faire une liste ensemble.`;
 
 const CE_POOL_11 = buildExpressPool("e1-3-11", [
   q({
@@ -1052,7 +1127,14 @@ Chère amie,
 Je t'invite une fête pour le bébé !
 C'est le 20 mai à 14 h, chez Anna.
 Cadeau surprise bienvenue.
-Sara`;
+Sara
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+Le service client répond aussi par téléphone.`;
 
 const CE_POOL_12 = buildExpressPool("e1-3-12", [
   q({
@@ -1146,7 +1228,13 @@ Hey !
 Je t'invite le match !
 C'est dimanche à 10 h, au stade municipal.
 On se retrouve à l'entrée.
-Antoine`;
+Antoine
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Un plan simple est disponible à l'accueil.`;
 
 const CE_POOL_13 = buildExpressPool("e1-3-13", [
   q({
@@ -1239,6 +1327,13 @@ const CE_TEXT_14 = `Carte — goûter enfants
 Chers parents,
 Je t'invite un goûter de fin d'année !
 C'est mercredi à 16 h, à l'école.
+Pensez à vérifier la date et le lieu.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+Respectez la file d'attente, s'il vous plaît.
 Merci d'apporter un plat.
 École du Lac`;
 
@@ -1334,7 +1429,14 @@ Bonjour,
 Je t'invite l'exposition de photos !
 C'est jeudi soir à 19 h, à la galerie Art Plus.
 Vernissage avec vin et fromage.
-Sophie`;
+Sophie
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+C'est important pour moi, merci beaucoup.`;
 
 const CE_POOL_15 = buildExpressPool("e1-3-15", [
   q({
@@ -1428,7 +1530,13 @@ Les amis !
 Je t'invite une soirée feu de camp !
 C'est le 8 août à 20 h, à la plage.
 Chacun apporte à manger.
-David`;
+David
+Les informations importantes sont déjà notées plus haut.
+Respectez la file d'attente, s'il vous plaît.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const CE_POOL_16 = buildExpressPool("e1-3-16", [
   q({
@@ -1522,7 +1630,14 @@ Bonjour à tous,
 Je t'invite la réunion de projet !
 C'est lundi à 9 h, en salle 3.
 Préparez vos idées.
-Chef de projet`;
+Chef de projet
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const CE_POOL_17 = buildExpressPool("e1-3-17", [
   q({
@@ -1616,7 +1731,12 @@ Salut !
 Je t'invite le concert de jazz !
 C'est le 12 octobre à 20 h 30, à la salle Métropole.
 J'ai deux places. Tu en veux une ?
-Maya`;
+Maya
+Le trajet est simple, ne t'inquiète pas.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Voici quelques détails utiles pour la suite.`;
 
 const CE_POOL_18 = buildExpressPool("e1-3-18", [
   q({
@@ -1710,7 +1830,13 @@ Coucou !
 Je t'invite un brunch !
 C'est dimanche matin à 10 h, au café du Port.
 Réserve ta place vite !
-Inès`;
+Inès
+Les photos peuvent être prises pour le souvenir.
+Le service client répond aussi par téléphone.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.
+Tout le monde est le bienvenu.`;
 
 const CE_POOL_19 = buildExpressPool("e1-3-19", [
   q({
@@ -1804,7 +1930,13 @@ Bonjour !
 Je t'invite un atelier pasta !
 C'est mardi prochain à 18 h, dans ma cuisine.
 Places limitées à 6 personnes.
-Marco`;
+Marco
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Passe le bonjour à tout le monde.`;
 
 const CE_POOL_20 = buildExpressPool("e1-3-20", [
   q({
@@ -2192,191 +2324,191 @@ export const E1_3_PO: ExpressPoDialogue[] = [
 {
   id: "e1-3-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de inviter." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour inviter." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e1-3-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de inviter ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour inviter." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e1-3-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur inviter." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour l'invitation, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e1-3-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de inviter." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour inviter." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e1-3-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur inviter." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour l'invitation, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e1-3-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de inviter ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour inviter." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e1-3-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de inviter." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour l'invitation, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e1-3-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de inviter." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour l'invitation, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e1-3-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur inviter." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour l'invitation, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e1-3-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : inviter.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous invitez quelqu'un à une sortie.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de inviter." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur inviter." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour l'invitation, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 }
 ];

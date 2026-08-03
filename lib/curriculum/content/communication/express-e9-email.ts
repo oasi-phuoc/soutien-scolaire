@@ -39,6 +39,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
 Cordialement,
 
 Boutique`;
@@ -146,6 +154,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
 Cordialement,
 
 ÉlectroHome`;
@@ -253,6 +269,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 
 Mode`;
@@ -360,6 +384,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
 Cordialement,
 
 TechShop`;
@@ -467,6 +499,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
 Cordialement,
 
 Fidélité`;
@@ -574,6 +614,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 
 Panier`;
@@ -681,6 +729,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
 Cordialement,
 
 Avis`;
@@ -788,6 +844,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
 Cordialement,
 
 Remboursement`;
@@ -895,6 +959,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
 Cordialement,
 
 Taille`;
@@ -1002,6 +1074,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
 Cordialement,
 
 Réserve`;
@@ -1109,6 +1189,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
 Cordialement,
 
 Promo`;
@@ -1216,6 +1304,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
 Cordialement,
 
 Facture`;
@@ -1323,6 +1419,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
 Cordialement,
 
 Garantie`;
@@ -1430,6 +1534,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.
+Je joins les détails importants juste après.
+Si le plan change, je te préviens tout de suite.
 Cordialement,
 
 Stock`;
@@ -1537,6 +1649,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
 Cordialement,
 
 Événement`;
@@ -1644,6 +1764,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
 Cordialement,
 
 Correction`;
@@ -1751,6 +1879,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
 Cordialement,
 
 Point`;
@@ -1858,6 +1994,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
 Cordialement,
 
 Service`;
@@ -1965,6 +2109,13 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
 Cordialement,
 
 Anniversaire`;
@@ -2072,6 +2223,14 @@ Action requise : information. Contact : information.
 
 Merci pour votre confiance.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
 Cordialement,
 
 Alerte`;
@@ -2559,6 +2718,15 @@ Action : prochain départ quatorze heures. Contact : information.
 
 Merci de votre compréhension.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
 Cordialement,
 
 CFF`;
@@ -2664,6 +2832,15 @@ Action : enregistrement en ligne. Contact : information.
 
 Merci de votre compréhension.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
 Cordialement,
 
 EasyJet`;
@@ -2769,6 +2946,15 @@ Action : zones 110-111. Contact : information.
 
 Merci de votre compréhension.
 
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
 Cordialement,
 
 TPG`;
@@ -2874,6 +3060,15 @@ Action : prolongation possible. Contact : information.
 
 Merci de votre compréhension.
 
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
 Cordialement,
 
 Mobility`;
@@ -2979,6 +3174,15 @@ Action : modification en ligne. Contact : information.
 
 Merci de votre compréhension.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 
 Parking`;
@@ -3084,6 +3288,15 @@ Action : annulation vingt-quatre heures. Contact : information.
 
 Merci de votre compréhension.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
 Cordialement,
 
 FlixBus`;
@@ -3189,6 +3402,15 @@ Action : paiement carte. Contact : information.
 
 Merci de votre compréhension.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
 Cordialement,
 
 Taxi`;
@@ -3294,6 +3516,15 @@ Action : atelier partenaire. Contact : information.
 
 Merci de votre compréhension.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
 Cordialement,
 
 VéloCité`;
@@ -3399,6 +3630,15 @@ Action : vélo supplément cinq francs. Contact : information.
 
 Merci de votre compréhension.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
 Cordialement,
 
 CGN`;
@@ -3504,6 +3744,15 @@ Action : validité un an. Contact : information.
 
 Merci de votre compréhension.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
 Cordialement,
 
 SBB`;
@@ -3609,6 +3858,15 @@ Action : info temps réel. Contact : information.
 
 Merci de votre compréhension.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 
 Alerte`;
@@ -3714,6 +3972,15 @@ Action : badge entreprise. Contact : information.
 
 Merci de votre compréhension.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
 Cordialement,
 
 Navette`;
@@ -3819,6 +4086,15 @@ Action : carburant plein. Contact : information.
 
 Merci de votre compréhension.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
 Cordialement,
 
 Location`;
@@ -3924,6 +4200,15 @@ Action : signalement possible. Contact : information.
 
 Merci de votre compréhension.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Merci de parler doucement dans les couloirs.
 Cordialement,
 
 Lime`;
@@ -4029,6 +4314,15 @@ Action : annulation payante. Contact : information.
 
 Merci de votre compréhension.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
 Cordialement,
 
 Train`;
@@ -4134,6 +4428,15 @@ Action : nettoyage signalé. Contact : information.
 
 Merci de votre compréhension.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
 Cordialement,
 
 Autopartage`;
@@ -4239,6 +4542,15 @@ Action : accessibilité maintenue. Contact : information.
 
 Merci de votre compréhension.
 
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
 Cordialement,
 
 Info`;
@@ -4344,6 +4656,15 @@ Action : excuses. Contact : information.
 
 Merci de votre compréhension.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
 Cordialement,
 
 CFF`;
@@ -4449,6 +4770,15 @@ Action : assistance aéroport. Contact : information.
 
 Merci de votre compréhension.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
 Cordialement,
 
 EasyJet`;
@@ -4554,6 +4884,15 @@ Action : service client. Contact : information.
 
 Merci de votre compréhension.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
 Cordialement,
 
 Mobility`;
@@ -5039,6 +5378,18 @@ Délai : réponse sous dix jours. Action : visite possible.
 
 Contact : Agence du Parc. Merci.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
 Cordialement,
 
 Régie`;
@@ -5142,6 +5493,17 @@ Délai : apporter pièce identité. Action : durée trente minutes.
 
 Contact : information. Merci.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
 Cordialement,
 
 Propriétaire`;
@@ -5245,6 +5607,18 @@ Délai : cuisine partagée. Action : dossier demandé.
 
 Contact : information. Merci.
 
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
 Cordialement,
 
 Coloc`;
@@ -5348,6 +5722,18 @@ Délai : validité un an. Action : PDF joint.
 
 Contact : information. Merci.
 
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
 Cordialement,
 
 Assurance`;
@@ -5451,6 +5837,18 @@ Délai : clés remises. Action : procès-verbal.
 
 Contact : information. Merci.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
 Cordialement,
 
 Régie`;
@@ -5554,6 +5952,18 @@ Délai : versement mensuel. Action : renouvellement annuel.
 
 Contact : information. Merci.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
 Cordialement,
 
 Service`;
@@ -5657,6 +6067,18 @@ Délai : caution trois mois. Action : rendez-vous mercredi.
 
 Contact : information. Merci.
 
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
 Cordialement,
 
 Agence`;
@@ -5760,6 +6182,18 @@ Délai : ascenseur maintenu. Action : réunion info.
 
 Contact : information. Merci.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 
 Copropriété`;
@@ -5863,6 +6297,18 @@ Délai : studio équipé. Action : ménage inclus.
 
 Contact : information. Merci.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
 Cordialement,
 
 Hôtel`;
@@ -5966,6 +6412,18 @@ Délai : attestation envoyée. Action : propriétaire informé.
 
 Contact : information. Merci.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
 Cordialement,
 
 Cautionnement.ch`;
@@ -6069,6 +6527,18 @@ Délai : protection sols. Action : gardien prévenu.
 
 Contact : information. Merci.
 
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 
 Déménagement`;
@@ -6172,6 +6642,18 @@ Délai : validité dix ans. Action : PDF joint.
 
 Contact : information. Merci.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
 Cordialement,
 
 Diagnostic`;
@@ -6275,6 +6757,18 @@ Délai : nuisances interdites. Action : amende possible.
 
 Contact : information. Merci.
 
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 Cordialement,
 
 Airbnb`;
@@ -6378,6 +6872,18 @@ Délai : badge accès. Action : bail un an.
 
 Contact : information. Merci.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
 Cordialement,
 
 Garage`;
@@ -6481,6 +6987,18 @@ Délai : format PDF. Action : archivage.
 
 Contact : information. Merci.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
 Cordialement,
 
 Quittance`;
@@ -6584,6 +7102,18 @@ Délai : état des lieux prévu. Action : caution restituée.
 
 Contact : information. Merci.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
 Cordialement,
 
 Résiliation`;
@@ -6687,6 +7217,18 @@ Délai : réponse une semaine. Action : priorité premier arrivé.
 
 Contact : information. Merci.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
 Cordialement,
 
 Visite`;
@@ -6790,6 +7332,18 @@ Délai : priorité familles. Action : visite si attribution.
 
 Contact : information. Merci.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
 Cordialement,
 
 Logement`;
@@ -6893,6 +7447,18 @@ Délai : contrat écrit. Action : proche lac.
 
 Contact : information. Merci.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Je prépare déjà tout pour que ce soit prêt.
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+On pourra aussi inviter une autre personne.
+Je reste à votre disposition pour toute précision.
 Cordialement,
 
 Sous-location`;
@@ -6996,6 +7562,18 @@ Délai : compteur individuel. Action : facture jointe.
 
 Contact : information. Merci.
 
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
 Cordialement,
 
 Charges`;
@@ -7481,6 +8059,18 @@ Délai : dossier complet. Action : bureau 204.
 
 Contact : information. Merci.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
 Cordialement,
 
 Préfecture`;
@@ -7584,6 +8174,18 @@ Délai : avant trente et un mars. Action : bureau vote.
 
 Contact : information. Merci.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
 Cordialement,
 
 Mairie`;
@@ -7687,6 +8289,18 @@ Délai : documents reçus. Action : espace en ligne.
 
 Contact : information. Merci.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
 Cordialement,
 
 CAF`;
@@ -7790,6 +8404,18 @@ Délai : virement sous quinze jours. Action : espace impots.gouv.
 
 Contact : information. Merci.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
 Cordialement,
 
 Impôts`;
@@ -7893,6 +8519,18 @@ Délai : Internet ou téléphone. Action : indemnisation.
 
 Contact : information. Merci.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
 Cordialement,
 
 Pôle`;
@@ -7996,6 +8634,18 @@ Délai : envoi automatique. Action : espace ameli.
 
 Contact : information. Merci.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
 Cordialement,
 
 Ameli`;
@@ -8099,6 +8749,18 @@ Délai : pièce identité. Action : délai six semaines.
 
 Contact : information. Merci.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
 Cordialement,
 
 Consulat`;
@@ -8202,6 +8864,18 @@ Délai : confirmation. Action : gratuit.
 
 Contact : information. Merci.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
 Cordialement,
 
 La`;
@@ -8305,6 +8979,18 @@ Délai : RIB joint. Action : rendez-vous conseiller.
 
 Contact : information. Merci.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
 Cordialement,
 
 Banque`;
@@ -8408,6 +9094,18 @@ Délai : médecin traitant. Action : remboursements.
 
 Contact : information. Merci.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
 Cordialement,
 
 CPAM`;
@@ -8511,6 +9209,18 @@ Délai : frais quatre-vingt-six euros. Action : information.
 
 Contact : information. Merci.
 
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
 Cordialement,
 
 Préfecture`;
@@ -8614,6 +9324,18 @@ Délai : liste fournitures. Action : réunion parents.
 
 Contact : information. Merci.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
 Cordialement,
 
 École`;
@@ -8717,6 +9439,18 @@ Délai : renouvellement annuel. Action : information.
 
 Contact : information. Merci.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
 Cordialement,
 
 CAF`;
@@ -8820,6 +9554,18 @@ Délai : droits possibles. Action : information.
 
 Contact : information. Merci.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
 Cordialement,
 
 MDPH`;
@@ -8923,6 +9669,18 @@ Délai : délai dix-huit mois. Action : information.
 
 Contact : information. Merci.
 
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
 Cordialement,
 
 Service`;
@@ -9026,6 +9784,18 @@ Délai : retrait mairie. Action : trois jours délai.
 
 Contact : information. Merci.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
 Cordialement,
 
 État`;
@@ -9129,6 +9899,18 @@ Délai : témoins confirmés. Action : information.
 
 Contact : information. Merci.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 Cordialement,
 
 Mairie`;
@@ -9232,6 +10014,18 @@ Délai : obligatoire. Action : information.
 
 Contact : information. Merci.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
 Cordialement,
 
 JDC`;
@@ -9335,6 +10129,18 @@ Délai : gratuit. Action : information.
 
 Contact : information. Merci.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
 Cordialement,
 
 Casier`;
@@ -9438,6 +10244,18 @@ Délai : démarches possibles. Action : information.
 
 Contact : information. Merci.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
 Cordialement,
 
 Hébergement`;
@@ -9923,6 +10741,18 @@ Délai : débat jeudi. Action : bureaux ouverts.
 
 Contact : information. Merci.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
 Cordialement,
 
 La`;
@@ -10026,6 +10856,18 @@ Délai : mise à jour seize heures. Action : information.
 
 Contact : information. Merci.
 
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
 Cordialement,
 
 Météo`;
@@ -10129,6 +10971,18 @@ Délai : programme site. Action : information.
 
 Contact : information. Merci.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
 Cordialement,
 
 Festival`;
@@ -10232,6 +11086,18 @@ Délai : reprise mercredi. Action : information.
 
 Contact : information. Merci.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
 Cordialement,
 
 Info`;
@@ -10335,6 +11201,18 @@ Délai : interview. Action : information.
 
 Contact : information. Merci.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
 Cordialement,
 
 TV`;
@@ -10438,6 +11316,18 @@ Délai : réunion publique. Action : information.
 
 Contact : information. Merci.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
 Cordialement,
 
 Blog`;
@@ -10541,6 +11431,18 @@ Délai : prévisions positives. Action : information.
 
 Contact : information. Merci.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
 Cordialement,
 
 Agence`;
@@ -10644,6 +11546,18 @@ Délai : rendez-vous en ligne. Action : information.
 
 Contact : information. Merci.
 
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
 Cordialement,
 
 Santé`;
@@ -10747,6 +11661,18 @@ Délai : expert interviewé. Action : information.
 
 Contact : information. Merci.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 
 Podcast`;
@@ -10850,6 +11776,18 @@ Délai : éviter secteur. Action : information.
 
 Contact : information. Merci.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
 Cordialement,
 
 Flash`;
@@ -10953,6 +11891,18 @@ Délai : résultats. Action : information.
 
 Contact : information. Merci.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
 Cordialement,
 
 Enquête`;
@@ -11056,6 +12006,18 @@ Délai : réservation. Action : information.
 
 Contact : information. Merci.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
 Cordialement,
 
 Culture`;
@@ -11159,6 +12121,18 @@ Délai : huit heures départ. Action : information.
 
 Contact : information. Merci.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
 Cordialement,
 
 Sport`;
@@ -11262,6 +12236,18 @@ Délai : inscription en ligne. Action : information.
 
 Contact : information. Merci.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Je prépare déjà tout pour que ce soit prêt.
 Cordialement,
 
 Tech`;
@@ -11365,6 +12351,18 @@ Délai : témoignages. Action : information.
 
 Contact : information. Merci.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
 Cordialement,
 
 Société`;
@@ -11468,6 +12466,18 @@ Délai : analyse expert. Action : information.
 
 Contact : information. Merci.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
 Cordialement,
 
 Info`;
@@ -11571,6 +12581,18 @@ Délai : conseils sécurité. Action : information.
 
 Contact : information. Merci.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
 Cordialement,
 
 Faits`;
@@ -11674,6 +12696,18 @@ Délai : promotions. Action : information.
 
 Contact : information. Merci.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
 Cordialement,
 
 Économie`;
@@ -11777,6 +12811,18 @@ Délai : information. Action : information.
 
 Contact : information. Merci.
 
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
 Cordialement,
 
 Santé`;
@@ -11880,6 +12926,18 @@ Délai : version en ligne. Action : information.
 
 Contact : information. Merci.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
 Cordialement,
 
 Médias`;

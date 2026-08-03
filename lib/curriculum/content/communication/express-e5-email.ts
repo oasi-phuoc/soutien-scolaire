@@ -18,6 +18,7 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E5_1_CE_EMAIL_TEXT_1 = `De : Cabinet du Dr Morel
+
 Objet : Confirmation de rendez-vous
 
 Bonjour,
@@ -28,6 +29,11 @@ Apportez votre carte d'assurance.
 Pour annuler, appelez 24 h avant.
 
 Cordialement,
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Conservez le numéro de contact indiqué.
 Le secrétariat`;
 
 const E5_1_CE_EMAIL_POOL_1 = buildExpressPool("e5-1-ce-email-1", [
@@ -119,6 +125,7 @@ const E5_1_CE_EMAIL_POOL_1 = buildExpressPool("e5-1-ce-email-1", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_2 = `De : Dr Blanc
+
 Objet : Report de votre rendez-vous
 
 Bonjour Mme Favre,
@@ -128,7 +135,13 @@ Nouvelle date proposée : vendredi 11 avril à 15 h.
 Répondez à cet e-mail pour confirmer.
 Désolé pour ce changement.
 
-Dr Blanc`;
+Dr Blanc
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+Les personnes à mobilité réduite sont prioritaires.`;
 
 const E5_1_CE_EMAIL_POOL_2 = buildExpressPool("e5-1-ce-email-2", [
   q({
@@ -221,6 +234,7 @@ const E5_1_CE_EMAIL_POOL_2 = buildExpressPool("e5-1-ce-email-2", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_3 = `De : Laboratoire MediLab
+
 Objet : Vos résultats d'analyse
 
 Bonjour,
@@ -230,7 +244,13 @@ Connectez-vous sur www.medilab.ch avec votre code patient.
 Pour une copie papier, passez au guichet du laboratoire.
 En cas de valeur anormale, votre médecin vous contactera.
 
-MediLab`;
+MediLab
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Le personnel peut répondre en français simple.`;
 
 const E5_1_CE_EMAIL_POOL_3 = buildExpressPool("e5-1-ce-email-3", [
   q({
@@ -321,6 +341,7 @@ const E5_1_CE_EMAIL_POOL_3 = buildExpressPool("e5-1-ce-email-3", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_4 = `De : Cabinet SantéPlus
+
 Objet : Rappel — vaccination grippe
 
 Bonjour,
@@ -330,6 +351,11 @@ Rendez-vous : appelez le 021 333 44 55.
 Gratuit pour les patients du cabinet de plus de 65 ans.
 Merci de venir avec votre carte d'assurance.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Nous restons disponibles pour vous aider.
 Le secrétariat`;
 
 const E5_1_CE_EMAIL_POOL_4 = buildExpressPool("e5-1-ce-email-4", [
@@ -421,6 +447,7 @@ const E5_1_CE_EMAIL_POOL_4 = buildExpressPool("e5-1-ce-email-4", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_5 = `De : Cabinet des Lilas
+
 Objet : Nouveau médecin dans notre équipe
 
 Bonjour,
@@ -431,6 +458,10 @@ Spécialité : médecine générale.
 Vous pouvez prendre rendez-vous avec elle dès maintenant.
 
 Bienvenue à elle !
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+On peut aussi en parler demain matin.
 Le secrétariat`;
 
 const E5_1_CE_EMAIL_POOL_5 = buildExpressPool("e5-1-ce-email-5", [
@@ -523,6 +554,7 @@ const E5_1_CE_EMAIL_POOL_5 = buildExpressPool("e5-1-ce-email-5", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_6 = `De : Cabinet du Dr Leroy
+
 Objet : Fermeture estivale
 
 Bonjour,
@@ -533,7 +565,11 @@ Pour un médecin de garde : 0844 000 000.
 Réouverture le 1er août aux horaires habituels.
 Bonnes vacances !
 
-Dr Leroy`;
+Dr Leroy
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E5_1_CE_EMAIL_POOL_6 = buildExpressPool("e5-1-ce-email-6", [
   q({
@@ -624,6 +660,7 @@ const E5_1_CE_EMAIL_POOL_6 = buildExpressPool("e5-1-ce-email-6", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_7 = `De : Téléconsultation SantéNet
+
 Objet : Lien pour votre consultation en ligne
 
 Bonjour M. Costa,
@@ -633,7 +670,13 @@ Cliquez sur ce lien 5 minutes avant : https://santenett.ch/rdv-8821
 Testez votre caméra et votre micro.
 Si problème technique, appelez le 021 777 88 99.
 
-L'équipe SantéNet`;
+L'équipe SantéNet
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E5_1_CE_EMAIL_POOL_7 = buildExpressPool("e5-1-ce-email-7", [
   q({
@@ -725,6 +768,7 @@ const E5_1_CE_EMAIL_POOL_7 = buildExpressPool("e5-1-ce-email-7", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_8 = `De : Cabinet du Dr Simon
+
 Objet : Facture de consultation
 
 Bonjour,
@@ -735,6 +779,10 @@ Votre part après remboursement assurance : 19 francs.
 Paiement par virement sous 30 jours.
 IBAN : CH12 3456 7890 1234 5678 9.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le personnel peut répondre en français simple.
 Merci,
 Comptabilité`;
 
@@ -830,6 +878,7 @@ const E5_1_CE_EMAIL_POOL_8 = buildExpressPool("e5-1-ce-email-8", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_9 = `De : Assurance SantéVie
+
 Objet : Votre carte d'assurance expire bientôt
 
 Bonjour,
@@ -839,7 +888,12 @@ Commandez la nouvelle carte sur notre site avant cette date.
 Sans carte valide, le remboursement des soins peut être retardé.
 Besoin d'aide ? Appelez le 0800 456 789.
 
-SantéVie`;
+SantéVie
+N'oubliez pas de vérifier la date et l'heure.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.`;
 
 const E5_1_CE_EMAIL_POOL_9 = buildExpressPool("e5-1-ce-email-9", [
   q({
@@ -931,6 +985,7 @@ const E5_1_CE_EMAIL_POOL_9 = buildExpressPool("e5-1-ce-email-9", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_10 = `De : Mairie de Renens
+
 Objet : Invitation — dépistage gratuit
 
 Bonjour,
@@ -940,7 +995,12 @@ Date : samedi 18 mai, 9 h–13 h.
 Lieu : salle communale, rue de Lausanne 15.
 Sans rendez-vous. Apportez une pièce d'identité.
 
-Service santé publique`;
+Service santé publique
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const E5_1_CE_EMAIL_POOL_10 = buildExpressPool("e5-1-ce-email-10", [
   q({
@@ -1034,6 +1094,7 @@ const E5_1_CE_EMAIL_POOL_10 = buildExpressPool("e5-1-ce-email-10", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_11 = `De : Cabinet du Dr Garcia
+
 Objet : Annulation de votre rendez-vous
 
 Bonjour M. Weber,
@@ -1043,6 +1104,9 @@ Nous vous proposons le jeudi 11 avril à 11 h ou le vendredi 12 avril à 9 h.
 Répondez avant vendredi 5 avril.
 Désolé pour la gêne occasionnée.
 
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Le secrétariat`;
 
 const E5_1_CE_EMAIL_POOL_11 = buildExpressPool("e5-1-ce-email-11", [
@@ -1133,6 +1197,7 @@ const E5_1_CE_EMAIL_POOL_11 = buildExpressPool("e5-1-ce-email-11", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_12 = `De : Dr Martin
+
 Objet : Renouvellement d'ordonnance
 
 Bonjour Mme Dubois,
@@ -1142,7 +1207,13 @@ Passez au cabinet pour un contrôle avant renouvellement.
 Prenez rendez-vous en ligne ou par téléphone.
 N'arrêtez pas le traitement sans avis médical.
 
-Dr Martin`;
+Dr Martin
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+N'oubliez pas de vérifier la date et l'heure.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.`;
 
 const E5_1_CE_EMAIL_POOL_12 = buildExpressPool("e5-1-ce-email-12", [
   q({
@@ -1235,6 +1306,7 @@ const E5_1_CE_EMAIL_POOL_12 = buildExpressPool("e5-1-ce-email-12", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_13 = `De : Cabinet du Dr Roux
+
 Objet : Rappel — contrôle annuel
 
 Bonjour,
@@ -1245,6 +1317,11 @@ Disponibilités : mardi et jeudi matin.
 Appelez le 021 888 99 00 ou réservez sur notre site.
 
 À bientôt,
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Le secrétariat`;
 
 const E5_1_CE_EMAIL_POOL_13 = buildExpressPool("e5-1-ce-email-13", [
@@ -1336,6 +1413,7 @@ const E5_1_CE_EMAIL_POOL_13 = buildExpressPool("e5-1-ce-email-13", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_14 = `De : Centre médical Nord
+
 Objet : Changement d'horaires
 
 Bonjour,
@@ -1343,6 +1421,12 @@ Bonjour,
 À partir du 1er septembre, nous ouvrons à 7 h 30 (au lieu de 8 h).
 Fermeture inchangée : 18 h.
 Le secrétariat répond au téléphone de 7 h 30 à 17 h.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Je reste près de mon téléphone aujourd'hui.
 Merci de votre compréhension.
 
 Direction`;
@@ -1439,11 +1523,16 @@ const E5_1_CE_EMAIL_POOL_14 = buildExpressPool("e5-1-ce-email-14", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_15 = `De : Infirmerie, École des Cerisiers
+
 Objet : Votre enfant a de la fièvre
 
 Bonjour M. et Mme Keller,
 
 Votre fils Lucas a de la fièvre à l'école (38,5 °C).
+Sans confirmation, la place n'est pas garantie.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Une confirmation sera envoyée ensuite.
 Merci de venir le chercher dès que possible.
 Il attend à l'infirmerie avec Mme Rossi.
 En cas d'impossibilité, appelez le 079 123 45 67.
@@ -1540,6 +1629,7 @@ const E5_1_CE_EMAIL_POOL_15 = buildExpressPool("e5-1-ce-email-15", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_16 = `De : Cabinet du Dr Vincent
+
 Objet : Urgence — consultez aux urgences
 
 Bonjour Mme Lefebvre,
@@ -1547,7 +1637,14 @@ Bonjour Mme Lefebvre,
 D'après vos symptômes décrits par téléphone, allez aux urgences de l'hôpital aujourd'hui.
 Ne attendez pas un rendez-vous au cabinet.
 Apportez votre carte d'assurance et la liste de vos médicaments.
-Le Dr Vincent`;
+Le Dr Vincent
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.`;
 
 const E5_1_CE_EMAIL_POOL_16 = buildExpressPool("e5-1-ce-email-16", [
   q({
@@ -1640,6 +1737,7 @@ const E5_1_CE_EMAIL_POOL_16 = buildExpressPool("e5-1-ce-email-16", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_17 = `De : Cabinet du Dr Bertrand
+
 Objet : Votre certificat médical est prêt
 
 Bonjour,
@@ -1649,6 +1747,10 @@ Vous pouvez le retirer du lundi au vendredi, 8 h–17 h.
 Pensez à apporter une pièce d'identité.
 Le certificat est valable 7 jours à partir d'aujourd'hui.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 Le secrétariat`;
 
 const E5_1_CE_EMAIL_POOL_17 = buildExpressPool("e5-1-ce-email-17", [
@@ -1744,6 +1846,7 @@ const E5_1_CE_EMAIL_POOL_17 = buildExpressPool("e5-1-ce-email-17", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_18 = `De : SantéConnect
+
 Objet : Questionnaire santé à remplir
 
 Bonjour,
@@ -1752,6 +1855,12 @@ Avant votre première visite, remplissez le questionnaire en ligne.
 Lien : https://santeconnect.ch/form-442
 Durée : environ 10 minutes.
 Répondez sur vos antécédents, allergies et médicaments.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Je t'envoie aussi ce détail pour être clair.
 Merci de le faire 48 h avant le rendez-vous.
 
 SantéConnect`;
@@ -1848,6 +1957,7 @@ const E5_1_CE_EMAIL_POOL_18 = buildExpressPool("e5-1-ce-email-18", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_19 = `De : Laboratoire BioCheck
+
 Objet : Rappel — jeûne avant prise de sang
 
 Bonjour M. Patel,
@@ -1858,7 +1968,11 @@ L'eau plate est autorisée.
 Lieu : BioCheck, rue du Simplon 3, rez-de-chaussée.
 Apportez votre ordonnance.
 
-BioCheck`;
+BioCheck
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+Nous restons disponibles pour vous aider.`;
 
 const E5_1_CE_EMAIL_POOL_19 = buildExpressPool("e5-1-ce-email-19", [
   q({
@@ -1949,6 +2063,7 @@ const E5_1_CE_EMAIL_POOL_19 = buildExpressPool("e5-1-ce-email-19", [
 ]);
 
 const E5_1_CE_EMAIL_TEXT_20 = `De : Cabinet du Dr Mercier
+
 Objet : Bienvenue — nouveau patient
 
 Bonjour Mme Aydin,
@@ -1958,6 +2073,10 @@ Premier rendez-vous : mercredi 22 mai à 14 h.
 Adresse : boulevard de la Gare 17, 2e étage.
 Apportez carte d'assurance, pièce d'identité et liste des médicaments.
 À mercredi,
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Le trajet est simple, ne t'inquiète pas.
 Le secrétariat`;
 
 const E5_1_CE_EMAIL_POOL_20 = buildExpressPool("e5-1-ce-email-20", [
@@ -2503,6 +2622,7 @@ Marc`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E5_2_CE_EMAIL_TEXT_1 = `De : Pharmacie du Centre
+
 Objet : Votre commande est prête
 
 Bonjour,
@@ -2511,7 +2631,13 @@ Votre commande est prête. Retirez-la avant 19 h aujourd'hui.
 Comptoir 2, entrée rue du Rhône.
 Apportez votre carte d'assurance.
 
-Pharmacie du Centre`;
+Pharmacie du Centre
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.`;
 
 const E5_2_CE_EMAIL_POOL_1 = buildExpressPool("e5-2-ce-email-1", [
   q({
@@ -2602,6 +2728,7 @@ const E5_2_CE_EMAIL_POOL_1 = buildExpressPool("e5-2-ce-email-1", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_2 = `De : Pharmacie Santé+
+
 Objet : Médicament indisponible — substitut proposé
 
 Bonjour M. Rossi,
@@ -2611,7 +2738,12 @@ Nous proposons ParaGène 500 mg, même effet.
 Répondez oui/non à cet e-mail.
 Réapprovisionnement Dolirène : 5 jours.
 
-Votre pharmacien`;
+Votre pharmacien
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.`;
 
 const E5_2_CE_EMAIL_POOL_2 = buildExpressPool("e5-2-ce-email-2", [
   q({
@@ -2704,6 +2836,7 @@ const E5_2_CE_EMAIL_POOL_2 = buildExpressPool("e5-2-ce-email-2", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_3 = `De : Pharmacie du Lac
+
 Objet : Rappel — renouvellement ordonnance
 
 Bonjour,
@@ -2713,7 +2846,13 @@ Contactez votre médecin pour un renouvellement.
 Nous pouvons vous délivrer un appointement d'urgence de 7 jours si besoin.
 Appelez le 021 444 55 66.
 
-Pharmacie du Lac`;
+Pharmacie du Lac
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.`;
 
 const E5_2_CE_EMAIL_POOL_3 = buildExpressPool("e5-2-ce-email-3", [
   q({
@@ -2805,6 +2944,7 @@ const E5_2_CE_EMAIL_POOL_3 = buildExpressPool("e5-2-ce-email-3", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_4 = `De : Pharmacie Bien-Être
+
 Objet : Promotions de mars
 
 Bonjour,
@@ -2814,6 +2954,12 @@ Bonjour,
 Offre valable en magasin seulement.
 Carte fidélité : points doublés ce week-end.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+Merci de votre attention et de votre patience.
 À bientôt !`;
 
 const E5_2_CE_EMAIL_POOL_4 = buildExpressPool("e5-2-ce-email-4", [
@@ -2906,6 +3052,7 @@ const E5_2_CE_EMAIL_POOL_4 = buildExpressPool("e5-2-ce-email-4", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_5 = `De : Pharmacie du Parc
+
 Objet : Livraison confirmée
 
 Bonjour Mme Dubois,
@@ -2915,7 +3062,13 @@ Adresse : rue des Fleurs 8, 3e étage.
 Montant : 42 francs + 5 francs livraison.
 Paiement à la livraison : carte ou espèces.
 
-Pharmacie du Parc`;
+Pharmacie du Parc
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E5_2_CE_EMAIL_POOL_5 = buildExpressPool("e5-2-ce-email-5", [
   q({
@@ -3007,6 +3160,7 @@ const E5_2_CE_EMAIL_POOL_5 = buildExpressPool("e5-2-ce-email-5", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_6 = `De : Pharmacie Centrale
+
 Objet : Vaccination grippe disponible
 
 Bonjour,
@@ -3016,7 +3170,12 @@ Lundi–vendredi 9 h–17 h.
 35 francs, remboursé en partie.
 Apportez carte d'assurance.
 
-Pharmacie Centrale`;
+Pharmacie Centrale
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Respectez la file d'attente, s'il vous plaît.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E5_2_CE_EMAIL_POOL_6 = buildExpressPool("e5-2-ce-email-6", [
   q({
@@ -3107,6 +3266,7 @@ const E5_2_CE_EMAIL_POOL_6 = buildExpressPool("e5-2-ce-email-6", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_7 = `De : PharmaRappel
+
 Objet : Rappel — prendre votre médicament
 
 Bonjour,
@@ -3115,7 +3275,13 @@ Rappel : CardioPlus, 1 comprimé, ce soir à 20 h.
 Programme de rappel gratuit PharmaRappel.
 Pour désactiver : répondez STOP.
 
-PharmaRappel`;
+PharmaRappel
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E5_2_CE_EMAIL_POOL_7 = buildExpressPool("e5-2-ce-email-7", [
   q({
@@ -3207,6 +3373,7 @@ const E5_2_CE_EMAIL_POOL_7 = buildExpressPool("e5-2-ce-email-7", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_8 = `De : Pharmacie des Alpes
+
 Objet : Facture de votre achat
 
 Bonjour,
@@ -3215,6 +3382,10 @@ Facture du 6 mars : 28,50 francs.
 Produits : pansements, sirop toux.
 Part assurance déduite : 22 francs.
 Reste à payer : 6,50 francs.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Respectez la file d'attente, s'il vous plaît.
 Merci de votre visite.
 
 Pharmacie des Alpes`;
@@ -3309,6 +3480,7 @@ const E5_2_CE_EMAIL_POOL_8 = buildExpressPool("e5-2-ce-email-8", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_9 = `De : Pharmacie du Centre
+
 Objet : Attention — interaction médicaments
 
 Bonjour M. Keller,
@@ -3317,7 +3489,12 @@ Votre nouvelle ordonnance peut interagir avec CardioPlus.
 Ne prenez pas les deux sans avis du pharmacien.
 Passez au comptoir ou appelez le 021 333 22 11.
 
-Votre pharmacien`;
+Votre pharmacien
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+N'oubliez pas de vérifier la date et l'heure.`;
 
 const E5_2_CE_EMAIL_POOL_9 = buildExpressPool("e5-2-ce-email-9", [
   q({
@@ -3407,6 +3584,7 @@ const E5_2_CE_EMAIL_POOL_9 = buildExpressPool("e5-2-ce-email-9", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_10 = `De : Pharmacie Santé+
+
 Objet : Carte fidélité activée
 
 Bonjour,
@@ -3416,7 +3594,12 @@ Numéro : 8844221.
 100 points = bon de 5 francs.
 20 points offerts aujourd'hui.
 
-Pharmacie Santé+`;
+Pharmacie Santé+
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Pensez à arriver un peu en avance.`;
 
 const E5_2_CE_EMAIL_POOL_10 = buildExpressPool("e5-2-ce-email-10", [
   q({
@@ -3507,6 +3690,7 @@ const E5_2_CE_EMAIL_POOL_10 = buildExpressPool("e5-2-ce-email-10", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_11 = `De : Pharmacie du Lac
+
 Objet : Ordonnance reçue par fax
 
 Bonjour,
@@ -3516,7 +3700,13 @@ Votre médicament sera prêt demain à 10 h.
 Retrait comptoir 1.
 Apportez carte d'assurance.
 
-Pharmacie du Lac`;
+Pharmacie du Lac
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.`;
 
 const E5_2_CE_EMAIL_POOL_11 = buildExpressPool("e5-2-ce-email-11", [
   q({
@@ -3608,6 +3798,7 @@ const E5_2_CE_EMAIL_POOL_11 = buildExpressPool("e5-2-ce-email-11", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_12 = `De : Pharmacie Centrale
+
 Objet : Médicament périmé — rapportez-le
 
 Bonjour,
@@ -3616,7 +3807,14 @@ Ne utilisez pas le lot Dolirène 500 mg lot A882 (périmé 02/2026).
 Rapportez-le en pharmacie pour destruction gratuite.
 Nous vous remboursons sur présentation du ticket.
 
-Pharmacie Centrale`;
+Pharmacie Centrale
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.`;
 
 const E5_2_CE_EMAIL_POOL_12 = buildExpressPool("e5-2-ce-email-12", [
   q({
@@ -3708,6 +3906,7 @@ const E5_2_CE_EMAIL_POOL_12 = buildExpressPool("e5-2-ce-email-12", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_13 = `De : Pharmacie Bien-Être
+
 Objet : Newsletter santé — conseils d'hiver
 
 Bonjour,
@@ -3716,7 +3915,14 @@ Bonjour,
 Lire la suite sur notre blog.
 Désabonnement : lien en bas de page.
 
-Pharmacie Bien-Être`;
+Pharmacie Bien-Être
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.`;
 
 const E5_2_CE_EMAIL_POOL_13 = buildExpressPool("e5-2-ce-email-13", [
   q({
@@ -3807,6 +4013,7 @@ const E5_2_CE_EMAIL_POOL_13 = buildExpressPool("e5-2-ce-email-13", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_14 = `De : Pharmacie des Alpes
+
 Objet : Changement de pharmacien responsable
 
 Bonjour,
@@ -3815,7 +4022,13 @@ M. Weber remplace Mme Keller comme pharmacien responsable à partir du 1er mai.
 Même adresse, mêmes horaires.
 M. Weber parle français et allemand.
 
-Direction`;
+Direction
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Passe le bonjour à tout le monde.`;
 
 const E5_2_CE_EMAIL_POOL_14 = buildExpressPool("e5-2-ce-email-14", [
   q({
@@ -3905,6 +4118,7 @@ const E5_2_CE_EMAIL_POOL_14 = buildExpressPool("e5-2-ce-email-14", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_15 = `De : Pharmacie du Parc
+
 Objet : Réservation conseil — confirmée
 
 Bonjour Mme Aydin,
@@ -3914,7 +4128,13 @@ Mardi 7 mai à 15 h 30, bureau conseil, 1er étage.
 Sujet : choix de crème solaire pour enfant.
 Durée : 20 minutes. Gratuit.
 
-Pharmacie du Parc`;
+Pharmacie du Parc
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Merci de confirmer la bonne réception de ce message.`;
 
 const E5_2_CE_EMAIL_POOL_15 = buildExpressPool("e5-2-ce-email-15", [
   q({
@@ -4005,6 +4225,7 @@ const E5_2_CE_EMAIL_POOL_15 = buildExpressPool("e5-2-ce-email-15", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_16 = `De : Pharmacie Centrale
+
 Objet : Résultat test COVID
 
 Bonjour,
@@ -4013,7 +4234,14 @@ Votre test antigénique du 4 avril : négatif.
 Vous pouvez retirer le certificat au comptoir 3.
 En cas de symptômes, refaites un test ou consultez.
 
-Pharmacie Centrale`;
+Pharmacie Centrale
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const E5_2_CE_EMAIL_POOL_16 = buildExpressPool("e5-2-ce-email-16", [
   q({
@@ -4105,6 +4333,7 @@ const E5_2_CE_EMAIL_POOL_16 = buildExpressPool("e5-2-ce-email-16", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_17 = `De : Assurance SantéVie
+
 Objet : Remboursement pharmacie
 
 Bonjour,
@@ -4113,7 +4342,13 @@ Remboursement de votre achat du 15 mars : 18 francs.
 Virement sous 10 jours.
 Montant total achat : 45 francs. Votre part : 27 francs.
 
-SantéVie`;
+SantéVie
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Le trajet est simple, ne t'inquiète pas.
+Merci encore pour votre confiance.`;
 
 const E5_2_CE_EMAIL_POOL_17 = buildExpressPool("e5-2-ce-email-17", [
   q({
@@ -4203,6 +4438,7 @@ const E5_2_CE_EMAIL_POOL_17 = buildExpressPool("e5-2-ce-email-17", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_18 = `De : Pharmacie du Soleil
+
 Objet : Horaires jours fériés
 
 Bonjour,
@@ -4212,7 +4448,13 @@ Ascension (9 mai) : ouvert 9 h–13 h.
 Pentecôte (20 mai) : fermé.
 Pharmacie de garde : composez le 1818.
 
-Pharmacie du Soleil`;
+Pharmacie du Soleil
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.`;
 
 const E5_2_CE_EMAIL_POOL_18 = buildExpressPool("e5-2-ce-email-18", [
   q({
@@ -4305,6 +4547,7 @@ const E5_2_CE_EMAIL_POOL_18 = buildExpressPool("e5-2-ce-email-18", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_19 = `De : Pharmacie Santé+
+
 Objet : Rappel produit — lot retiré
 
 Bonjour,
@@ -4314,7 +4557,13 @@ Si vous l'avez acheté chez nous, rapportez-le.
 Remboursement intégral sur présentation du ticket.
 Substitut disponible : TouxPlus Nouvelle Formule.
 
-Pharmacie Santé+`;
+Pharmacie Santé+
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E5_2_CE_EMAIL_POOL_19 = buildExpressPool("e5-2-ce-email-19", [
   q({
@@ -4406,6 +4655,7 @@ const E5_2_CE_EMAIL_POOL_19 = buildExpressPool("e5-2-ce-email-19", [
 ]);
 
 const E5_2_CE_EMAIL_TEXT_20 = `De : Pharmacie des Alpes
+
 Objet : Merci pour votre visite
 
 Bonjour,
@@ -4415,6 +4665,12 @@ Votre avis compte : questionnaire de 2 minutes.
 Lien : https://pharma-alpes.ch/avis
 10 points fidélité offerts si vous répondez.
 
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+En cas de perte d'objet, passez à l'accueil.
 À bientôt,
 Pharmacie des Alpes`;
 

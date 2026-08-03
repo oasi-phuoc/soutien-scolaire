@@ -21,7 +21,11 @@ Fermée le dimanche.
 Ordonnance ? Présentez-la au comptoir avec votre carte d'assurance.
 Conseils gratuits sur les médicaments sans ordonnance.
 Paiement : espèces, carte bancaire ou Twint.
-Pharmacie de garde le week-end : appelez le 1818.`;
+Pharmacie de garde le week-end : appelez le 1818.
+À très bientôt, prends soin de toi.
+Je joins les détails importants juste après.
+Si le plan change, je te préviens tout de suite.
+À bientôt, et merci de votre lecture.`;
 
 const E5_2_CE_POOL_1 = buildExpressPool("e5-2-ce-1", [
   q({
@@ -118,7 +122,10 @@ Posologie : 5 ml, 3 fois par jour, après les repas.
 Secouez la bouteille avant utilisation.
 Conservez au frais après ouverture. Utilisez dans les 3 mois.
 Ne pas donner si l'enfant est allergique au miel.
-En cas de fièvre persistante, consultez un médecin.`;
+En cas de fièvre persistante, consultez un médecin.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.`;
 
 const E5_2_CE_POOL_2 = buildExpressPool("e5-2-ce-2", [
   q({
@@ -220,7 +227,12 @@ Pharmacie de la Gare, place de la Gare 3.
 Ouverte 24 h sur 24.
 Téléphone : 021 555 66 77.
 Pour savoir quelle pharmacie est de garde : composez le 1818 depuis un téléphone fixe.
-Apportez toujours votre ordonnance et votre carte d'assurance.`;
+Apportez toujours votre ordonnance et votre carte d'assurance.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Passe le bonjour à tout le monde.`;
 
 const E5_2_CE_POOL_3 = buildExpressPool("e5-2-ce-3", [
   q({
@@ -316,7 +328,11 @@ Appliquez généreusement 30 minutes avant l'exposition au soleil.
 Renouvelez toutes les 2 heures et après la bain.
 Évitez le soleil entre 11 h et 15 h.
 En cas de réaction cutanée, arrêtez l'utilisation et demandez conseil au pharmacien.
-Ne pas utiliser sur les blessures ouvertes.`;
+Ne pas utiliser sur les blessures ouvertes.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Merci de votre attention et de votre patience.`;
 
 const E5_2_CE_POOL_4 = buildExpressPool("e5-2-ce-4", [
   q({
@@ -415,7 +431,10 @@ Lisez toujours la notice avant utilisation.
 Ne dépassez pas la dose indiquée.
 Ne donnez pas votre médicament à une autre personne.
 En cas de doute, demandez conseil à votre pharmacien.
-Les médicaments ne se jettent pas aux ordures : rapportez-les en pharmacie.`;
+Les médicaments ne se jettent pas aux ordures : rapportez-les en pharmacie.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.`;
 
 const E5_2_CE_POOL_5 = buildExpressPool("e5-2-ce-5", [
   q({
@@ -512,6 +531,11 @@ Bonjour Mme Rossi,
 Votre commande est prête. Vous pouvez la retirer aujourd'hui avant 19 h.
 Comptoir 2, entrée rue du Rhône.
 N'oubliez pas votre carte d'assurance pour les produits remboursés.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+J'espère que tout se passe bien de ton côté.
 Merci, l'équipe de la Pharmacie Centrale.`;
 
 const E5_2_CE_POOL_6 = buildExpressPool("e5-2-ce-6", [
@@ -610,7 +634,11 @@ File d'attente ordonnances : tirez un numéro à l'entrée.
 Temps d'attente moyen : 10 à 15 minutes.
 Préparez votre ordonnance et votre carte d'assurance avant d'approcher le comptoir.
 Les médicaments génériques sont moins chers et tout aussi efficaces.
-Questions sur la posologie ? Le pharmacien répond à vos questions.`;
+Questions sur la posologie ? Le pharmacien répond à vos questions.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const E5_2_CE_POOL_7 = buildExpressPool("e5-2-ce-7", [
   q({
@@ -708,7 +736,11 @@ Sans rendez-vous : lundi à vendredi, 9 h–17 h.
 Prix : 35 francs (remboursé en partie par l'assurance).
 Apportez votre carte d'assurance.
 La vaccination est recommandée pour les personnes de plus de 65 ans et les professionnels de santé.
-Durée : 10 minutes.`;
+Durée : 10 minutes.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Le lieu est facile à trouver avec les indications.`;
 
 const E5_2_CE_POOL_8 = buildExpressPool("e5-2-ce-8", [
   q({
@@ -808,7 +840,11 @@ Pas besoin d'ordonnance pour ces produits.
 Conseils personnalisés avec notre pharmacienne Mme Keller.
 Promotions du mois : -20 % sur les crèmes mains jusqu'au 30 avril.
 Rayon accessible sans file d'attente ordonnances.
-Paiement à la caisse 3.`;
+Paiement à la caisse 3.
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Nous traitons votre demande rapidement.`;
 
 const E5_2_CE_POOL_9 = buildExpressPool("e5-2-ce-9", [
   q({
@@ -903,7 +939,12 @@ La Pharmacie du Parc propose la livraison à domicile pour les personnes à mobi
 Commande par téléphone avant 14 h pour une livraison le jour même.
 Frais de livraison : 5 francs (gratuit pour les plus de 75 ans).
 Zone : Lausanne et communes voisines.
-Paiement à la livraison : espèces ou carte.`;
+Paiement à la livraison : espèces ou carte.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Bonne journée à toutes et à tous.`;
 
 const E5_2_CE_POOL_10 = buildExpressPool("e5-2-ce-10", [
   q({
@@ -1003,6 +1044,11 @@ Dimanche et jours fériés : ouvert de 10 h à 14 h uniquement.
 Le 25 décembre et le 1er janvier : fermé.
 Pharmacie de garde la nuit : composez le 1818.
 Pendant les vacances d'été (juillet–août) : ouverture continue de 8 h à 20 h en semaine.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Un plan simple est disponible à l'accueil.
 Merci de votre compréhension.`;
 
 const E5_2_CE_POOL_11 = buildExpressPool("e5-2-ce-11", [
@@ -1104,7 +1150,10 @@ Résultat en 15 minutes.
 Prix : 25 francs (non remboursé par l'assurance de base).
 Apportez une pièce d'identité.
 Pour les personnes avec symptômes ou contact avec une personne positive.
-Si le test est positif, isolez-vous et informez vos contacts.`;
+Si le test est positif, isolez-vous et informez vos contacts.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E5_2_CE_POOL_12 = buildExpressPool("e5-2-ce-12", [
   q({
@@ -1206,7 +1255,11 @@ Température idéale : 15–25 °C.
 Ne conservez pas les médicaments dans la salle de bain (humidité).
 Vérifiez la date de péremption régulièrement.
 Les médicaments périmés : rapportez-les en pharmacie, ne les jetez pas.
-Gardez les médicaments hors de portée des enfants.`;
+Gardez les médicaments hors de portée des enfants.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+En cas de question, vous pouvez écrire ou téléphoner.`;
 
 const E5_2_CE_POOL_13 = buildExpressPool("e5-2-ce-13", [
   q({
@@ -1303,7 +1356,11 @@ Située dans la gare, hall principal, à côté de la billetterie.
 Ouverte tous les jours de 7 h à 22 h.
 Idéale pour les voyageurs : pansements, médicaments contre le mal des transports, crème solaire.
 Ordonnances acceptées. Conseils en plusieurs langues : français, allemand, anglais.
-Accès PMR (personnes à mobilité réduite) par ascenseur.`;
+Accès PMR (personnes à mobilité réduite) par ascenseur.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const E5_2_CE_POOL_14 = buildExpressPool("e5-2-ce-14", [
   q({
@@ -1401,6 +1458,9 @@ Notre pharmacien propose un médicament équivalent : ParaGène 500 mg.
 Même principe actif, même efficacité.
 Délai de réapprovisionnement : environ 5 jours.
 Pour toute question, parlez au comptoir 1.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 Merci de votre patience.`;
 
 const E5_2_CE_POOL_15 = buildExpressPool("e5-2-ce-15", [
@@ -1497,7 +1557,11 @@ Nouveau rayon produits naturels au sous-sol.
 Conseils avec notre spécialiste M. Weber, mardi et jeudi 14 h–18 h.
 Produits bio, huiles essentielles, homéopathie.
 Pas de remboursement assurance pour la plupart des produits.
-Essai gratuit d'une crème mains bio ce samedi.`;
+Essai gratuit d'une crème mains bio ce samedi.
+Les animaux ne sont pas autorisés, sauf chiens guides.
+Photographies autorisées sans flash.
+Un point d'eau potable est gratuit près de l'entrée.
+Conservez le numéro de contact indiqué.`;
 
 const E5_2_CE_POOL_16 = buildExpressPool("e5-2-ce-16", [
   q({
@@ -1594,7 +1658,12 @@ Modes de paiement acceptés : espèces, carte bancaire (EC, Visa, Mastercard), T
 Pas de paiement par chèque.
 Facture remise à chaque achat pour remboursement assurance.
 Pour les ordonnances : la part assurance est déduite automatiquement si vous présentez votre carte.
-Ticket de caisse à conserver.`;
+Ticket de caisse à conserver.
+Sans confirmation, la place n'est pas garantie.
+Un plan simple est disponible à l'accueil.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.`;
 
 const E5_2_CE_POOL_17 = buildExpressPool("e5-2-ce-17", [
   q({
@@ -1692,7 +1761,10 @@ const E5_2_CE_TEXT_18 = `Article blog — 5 conseils de votre pharmacien en hive
 3. Aérez votre logement chaque jour.
 4. Portez un masque si vous toussez dans les transports.
 5. Consultez votre pharmacien avant d'acheter un médicament.
-Publié par la Pharmacie Bien-Être, janvier 2026.`;
+Publié par la Pharmacie Bien-Être, janvier 2026.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E5_2_CE_POOL_18 = buildExpressPool("e5-2-ce-18", [
   q({
@@ -1792,7 +1864,10 @@ Inscription gratuite à la caisse.
 100 points = bon de 5 francs sur votre prochain achat.
 Offre de bienvenue : 20 points offerts à l'inscription.
 Valable 12 mois. Non cumulable avec d'autres promotions.
-Renseignements au comptoir 4.`;
+Renseignements au comptoir 4.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.`;
 
 const E5_2_CE_POOL_19 = buildExpressPool("e5-2-ce-19", [
   q({
@@ -1890,7 +1965,11 @@ const E5_2_CE_TEXT_20 = `Affiche — Promotions du mois de mars
 Achetez 2 crèmes solaires, la 3e offerte.
 Pansements hydrocolloïdes : 2e boîte à -50 %.
 Offre valable en magasin uniquement, pas sur Internet.
-Stocks limités. Une offre par client pour la 3e crème offerte.`;
+Stocks limités. Une offre par client pour la 3e crème offerte.
+Les informations importantes sont déjà notées plus haut.
+Vous pouvez répondre directement à ce message.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E5_2_CE_POOL_20 = buildExpressPool("e5-2-ce-20", [
   q({

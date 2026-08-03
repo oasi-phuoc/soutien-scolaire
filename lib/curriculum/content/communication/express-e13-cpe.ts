@@ -21,7 +21,20 @@ const E13_1_CE_TEXT = `Affiche — Porte ouverte Suivre une formation
 
 Centre Horizon ouvre ses portes le lundi 4 mars dès 8 h 30. Le public pourra découvrir la formation de bureautique avec Mme Rochat.
 L'entrée est libre, mais chaque visiteur doit venir avec votre carte d'identité.
-Pour les questions de dernière minute, le numéro à garder est le 021 610 30 40.`;
+Pour les questions de dernière minute, le numéro à garder est le 021 610 30 40.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.`;
 
 const E13_1_CE_POOL = buildExpressPool("e13-1-ce", [
   q({
@@ -115,7 +128,18 @@ const E13_1_CE_2_TEXT = `SMS — M. Diallo
 
 Bonjour ! Je vous confirme le rendez-vous pour l'atelier de français professionnel.
 On se voit mardi 12 mars à 9 h, directement dans la Salle Jura.
-N'oubliez pas votre CV simple. Répondez OUI si vous pouvez venir.`;
+N'oubliez pas votre CV simple. Répondez OUI si vous pouvez venir.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci encore, et à bientôt.`;
 
 const E13_1_CE_2_POOL = buildExpressPool("e13-1-ce-2", [
   q({
@@ -208,6 +232,20 @@ const E13_1_CE_2_POOL = buildExpressPool("e13-1-ce-2", [
 const E13_1_CE_3_TEXT = `Note interne — accueil
 
 Une personne se présentera mercredi 20 mars à 9 h 15 pour le cours Excel débutant.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Merci de garder ce document avec vous.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
 Merci de l'orienter vers Bureau CPF et de prévenir Mme Perrin dès son arrivée.
 Son dossier doit contenir votre numéro AVS; sans ce document, le rendez-vous sera reporté.`;
 
@@ -303,7 +341,19 @@ const E13_1_CE_4_TEXT = `Page web — informations pratiques
 
 Vous cherchez des renseignements sur la séance sur le CPF ? La prochaine session est prévue le jeudi 28 mars.
 L'accueil commence à 10 h à l'École des Métiers. M. Favre répond aux questions simples par téléphone au 021 610 33 43.
-Avant de partir, vérifiez que vous avez une copie du diplôme.`;
+Avant de partir, vérifiez que vous avez une copie du diplôme.
+Les informations importantes sont déjà notées plus haut.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_1_CE_4_POOL = buildExpressPool("e13-1-ce-4", [
   q({
@@ -397,7 +447,20 @@ const E13_1_CE_5_TEXT = `Programme — matinée Suivre une formation
 
 10 h 30 : arrivée du groupe à Maison de quartier.
 Ensuite, Mme Rossi présente la formation courte en cuisine avec des exemples concrets.
-La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte un stylo bleu.`;
+La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte un stylo bleu.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E13_1_CE_5_POOL = buildExpressPool("e13-1-ce-5", [
   q({
@@ -491,7 +554,21 @@ const E13_1_CE_6_TEXT = `Planning partagé
 
 Dans le calendrier de l'équipe, le créneau du samedi 13 avril est réservé à le module de sécurité au travail.
 Le groupe se retrouve à 11 h dans la Salle Léman.
-M. Meyer fera l'appel; merci de préparer votre attestation CPF avant d'entrer.`;
+M. Meyer fera l'appel; merci de préparer votre attestation CPF avant d'entrer.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.`;
 
 const E13_1_CE_6_POOL = buildExpressPool("e13-1-ce-6", [
   q({
@@ -585,7 +662,19 @@ const E13_1_CE_7_TEXT = `Règlement — participation
 
 Pour le cours du soir en informatique, la ponctualité est importante : les portes de Centre Horizon ferment dix minutes après 13 h 30.
 La date retenue est le lundi 22 avril. Les personnes sans votre carte d'identité doivent passer à l'accueil.
-En cas de difficulté, demandez Mme Rochat; il ou elle vous indiquera la bonne salle.`;
+En cas de difficulté, demandez Mme Rochat; il ou elle vous indiquera la bonne salle.
+Une question ? Écrivez ou téléphonez.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E13_1_CE_7_POOL = buildExpressPool("e13-1-ce-7", [
   q({
@@ -679,7 +768,20 @@ const E13_1_CE_8_TEXT = `Ticket de passage — A2-18
 
 Conservez ce ticket jusqu'à la fin de l'atelier pour changer de métier.
 Il donne accès à Salle Jura le mardi 30 avril, à partir de 14 h.
-Le contrôle sera fait par M. Diallo. Le document demandé est votre CV simple.`;
+Le contrôle sera fait par M. Diallo. Le document demandé est votre CV simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E13_1_CE_8_POOL = buildExpressPool("e13-1-ce-8", [
   q({
@@ -773,7 +875,21 @@ const E13_1_CE_9_TEXT = `Article local — service de proximité
 
 Le quartier annonce la formation d'aide à domicile pour aider les habitants dans leurs démarches.
 La rencontre aura lieu le mercredi 8 mai à 14 h 30, au Bureau CPF.
-Selon Mme Perrin, il suffit d'apporter votre numéro AVS et de poser ses questions simplement.`;
+Selon Mme Perrin, il suffit d'apporter votre numéro AVS et de poser ses questions simplement.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E13_1_CE_9_POOL = buildExpressPool("e13-1-ce-9", [
   q({
@@ -868,7 +984,19 @@ const E13_1_CE_10_TEXT = `Fil de discussion — groupe A2
 Mina : Tu viens à le test de niveau A2 ?
 Ali : Oui, c'est jeudi 16 mai à 15 h.
 Mina : Je vais où ?
-Ali : à l'École des Métiers. M. Favre nous attendra, et il faut prendre une copie du diplôme.`;
+Ali : à l'École des Métiers. M. Favre nous attendra, et il faut prendre une copie du diplôme.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Bonne journée à toutes et à tous.`;
 
 const E13_1_CE_10_POOL = buildExpressPool("e13-1-ce-10", [
   q({
@@ -962,7 +1090,21 @@ const E13_1_CE_11_TEXT = `Fiche pratique — avant de venir
 
 Pour la présentation des formations gratuites, notez trois informations : le rendez-vous est vendredi 24 mai, l'heure est 15 h 30, le lieu est Maison de quartier.
 La personne à contacter est Mme Rossi.
-Dernière vérification dans le sac : un stylo bleu.`;
+Dernière vérification dans le sac : un stylo bleu.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.
+Tout le monde est le bienvenu.
+Merci encore pour votre compréhension.
+Tout est organisé pour que ce soit simple.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.`;
 
 const E13_1_CE_11_POOL = buildExpressPool("e13-1-ce-11", [
   q({
@@ -1056,7 +1198,20 @@ const E13_1_CE_12_TEXT = `Avis sur la porte
 
 Changement d'organisation pour le cours de calcul professionnel.
 Le rendez-vous reste le lundi 3 juin à 16 h, mais l'entrée se fait par Salle Léman.
-Sonnez chez M. Meyer et gardez votre attestation CPF à la main pour gagner du temps.`;
+Sonnez chez M. Meyer et gardez votre attestation CPF à la main pour gagner du temps.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Merci de votre attention et de votre patience.`;
 
 const E13_1_CE_12_POOL = buildExpressPool("e13-1-ce-12", [
   q({
@@ -1150,7 +1305,20 @@ const E13_1_CE_13_TEXT = `Invitation — rencontre utile
 
 Vous êtes invité(e) à participer à l'atelier pour remplir un dossier.
 La rencontre se déroule mardi 11 juin à 16 h 30, au Centre Horizon.
-Mme Rochat expliquera les étapes et répondra aux questions. Merci d'apporter votre carte d'identité.`;
+Mme Rochat expliquera les étapes et répondra aux questions. Merci d'apporter votre carte d'identité.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Bonne journée à toutes et à tous.`;
 
 const E13_1_CE_13_POOL = buildExpressPool("e13-1-ce-13", [
   q({
@@ -1244,7 +1412,20 @@ const E13_1_CE_14_TEXT = `Confirmation imprimée
 
 Votre place est gardée pour la formation en vente.
 Présentez-vous dans la Salle Jura le mercredi 19 juin, quelques minutes avant 17 h.
-M. Diallo vous accueillera à l'entrée. Le jour même, montrez votre CV simple.`;
+M. Diallo vous accueillera à l'entrée. Le jour même, montrez votre CV simple.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.`;
 
 const E13_1_CE_14_POOL = buildExpressPool("e13-1-ce-14", [
   q({
@@ -1338,7 +1519,21 @@ const E13_1_CE_15_TEXT = `Formulaire commenté — Suivre une formation
 
 Le formulaire est court : il demande votre nom, puis il confirme la séance de conseil individuel.
 La ligne suivante indique Bureau CPF, avec un rendez-vous le jeudi 27 juin à 17 h 30.
-À la fin, Mme Perrin rappelle d'ajouter votre numéro AVS au dossier.`;
+À la fin, Mme Perrin rappelle d'ajouter votre numéro AVS au dossier.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.`;
 
 const E13_1_CE_15_POOL = buildExpressPool("e13-1-ce-15", [
   q({
@@ -1432,7 +1627,20 @@ const E13_1_CE_16_TEXT = `Petite annonce — besoin de participants
 
 Nous cherchons des personnes intéressées par le cours de communication au travail.
 Une présentation simple est organisée le vendredi 5 juillet à 18 h, à l'École des Métiers.
-Aucun achat n'est demandé; venez seulement avec une copie du diplôme. Contact rapide : M. Favre.`;
+Aucun achat n'est demandé; venez seulement avec une copie du diplôme. Contact rapide : M. Favre.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_1_CE_16_POOL = buildExpressPool("e13-1-ce-16", [
   q({
@@ -1526,7 +1734,20 @@ const E13_1_CE_17_TEXT = `Compte rendu — décision du groupe
 
 Pendant la réunion, Mme Rossi a proposé de continuer avec le bilan avant inscription.
 Le groupe a choisi Maison de quartier pour la prochaine étape.
-La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare un stylo bleu.`;
+La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare un stylo bleu.
+N'oubliez pas de vérifier la date.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.`;
 
 const E13_1_CE_17_POOL = buildExpressPool("e13-1-ce-17", [
   q({
@@ -1621,7 +1842,17 @@ const E13_1_CE_18_TEXT = `FAQ — questions fréquentes
 Quand commence l'atelier sur les horaires de cours ? Le mardi 23 juillet à 19 h.
 Où faut-il aller ? dans la Salle Léman.
 Qui peut aider ? M. Meyer.
-Que faut-il préparer ? votre attestation CPF.`;
+Que faut-il préparer ? votre attestation CPF.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.`;
 
 const E13_1_CE_18_POOL = buildExpressPool("e13-1-ce-18", [
   q({
@@ -1715,7 +1946,20 @@ const E13_1_CE_19_TEXT = `Plan d'accès — entrée conseillée
 
 Pour la visite du centre de formation, entrez par la porte principale de Centre Horizon.
 Prenez le couloir à gauche et attendez Mme Rochat près du panneau bleu.
-Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre carte d'identité dans votre sac.`;
+Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre carte d'identité dans votre sac.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.`;
 
 const E13_1_CE_19_POOL = buildExpressPool("e13-1-ce-19", [
   q({
@@ -1809,7 +2053,17 @@ const E13_1_CE_20_TEXT = `Message vocal transcrit — M. Diallo
 
 Bonjour, c'est M. Diallo. Je vous laisse un message pour confirmer le rappel avant le premier cours.
 Nous nous retrouvons jeudi 8 août à 20 h dans la Salle Jura.
-N'oubliez pas votre CV simple. Si besoin, rappelez-moi au 021 610 49 59.`;
+N'oubliez pas votre CV simple. Si besoin, rappelez-moi au 021 610 49 59.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.`;
 
 const E13_1_CE_20_POOL = buildExpressPool("e13-1-ce-20", [
   q({
@@ -2226,190 +2480,190 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-11",
   title: "Demander des informations sur formation",
-  context: "Vous devez gérer une situation : Demander des informations sur formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes à l'accueil et vous demandez des informations sur une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour sur formation." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-1-po-12",
   title: "Résoudre un problème lié à formation",
-  context: "Vous devez gérer une situation : Résoudre un problème lié à formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes au guichet et vous voulez résoudre un problème lié à une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de à formation." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e13-1-po-13",
   title: "Prendre un rendez-vous pour formation",
-  context: "Vous devez gérer une situation : Prendre un rendez-vous pour formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes au téléphone et vous voulez prendre un rendez-vous pour une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur une formation." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-1-po-14",
   title: "Confirmer un rendez-vous formation",
-  context: "Vous devez gérer une situation : Confirmer un rendez-vous formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes au téléphone et vous confirmez un rendez-vous concernant une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour une formation." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-1-po-15",
   title: "Demander conseil à un proche sur formation",
-  context: "Vous devez gérer une situation : Demander conseil à un proche sur formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes chez un ami et vous demandez conseil à un proche au sujet de une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur une formation." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-1-po-16",
   title: "Signaler un retard lié à formation",
-  context: "Vous devez gérer une situation : Signaler un retard lié à formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes au téléphone et vous signalez un retard lié à une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour à formation." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-1-po-17",
   title: "Faire une réclamation polie sur formation",
-  context: "Vous devez gérer une situation : Faire une réclamation polie sur formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes au service clients et vous faites une réclamation polie au sujet de une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur une formation." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-1-po-18",
   title: "Obtenir un renseignement urgent sur formation",
-  context: "Vous devez gérer une situation : Obtenir un renseignement urgent sur formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes à l'accueil et vous avez besoin d'un renseignement urgent sur une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour une formation." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais obtenir un renseignement urgent de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-1-po-19",
   title: "Comparer deux options pour formation",
-  context: "Vous devez gérer une situation : Comparer deux options pour formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes au bureau et vous comparez deux options pour une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur une formation." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-1-po-20",
   title: "Remercier pour une aide concernant formation",
-  context: "Vous devez gérer une situation : Remercier pour une aide concernant formation.",
-  roleA: { title: "Le professeur", vous: "le professeur / la professeure" },
-  roleB: { title: "L'élève", vous: "l'élève" },
+  context: "Vous êtes en face à face et vous remerciez quelqu'un pour son aide concernant une formation.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur formation." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de une formation." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 }
@@ -2607,7 +2861,20 @@ const E13_2_CE_TEXT = `Affiche — Porte ouverte Trouver un stage
 
 Agence Emploi Plus ouvre ses portes le lundi 4 mars dès 8 h 30. Le public pourra découvrir la recherche de stage en crèche avec Mme Keller.
 L'entrée est libre, mais chaque visiteur doit venir avec votre convention signée.
-Pour les questions de dernière minute, le numéro à garder est le 022 420 30 40.`;
+Pour les questions de dernière minute, le numéro à garder est le 022 420 30 40.
+Les informations importantes sont déjà notées plus haut.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E13_2_CE_POOL = buildExpressPool("e13-2-ce", [
   q({
@@ -2701,7 +2968,19 @@ const E13_2_CE_2_TEXT = `SMS — M. Benali
 
 Bonjour ! Je vous confirme le rendez-vous pour l'atelier CV pour un stage.
 On se voit mardi 12 mars à 9 h, directement dans la Salle Rhône.
-N'oubliez pas un CV imprimé. Répondez OUI si vous pouvez venir.`;
+N'oubliez pas un CV imprimé. Répondez OUI si vous pouvez venir.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.`;
 
 const E13_2_CE_2_POOL = buildExpressPool("e13-2-ce-2", [
   q({
@@ -2794,6 +3073,19 @@ const E13_2_CE_2_POOL = buildExpressPool("e13-2-ce-2", [
 const E13_2_CE_3_TEXT = `Note interne — accueil
 
 Une personne se présentera mercredi 20 mars à 9 h 15 pour la visite d'une entreprise locale.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Merci de l'orienter vers Crèche Les Pivoines et de prévenir Mme Arnaud dès son arrivée.
 Son dossier doit contenir une lettre courte; sans ce document, le rendez-vous sera reporté.`;
 
@@ -2889,7 +3181,19 @@ const E13_2_CE_4_TEXT = `Page web — informations pratiques
 
 Vous cherchez des renseignements sur la rencontre avec une conseillère stage ? La prochaine session est prévue le jeudi 28 mars.
 L'accueil commence à 10 h à Atelier Municipal. M. Schmid répond aux questions simples par téléphone au 022 420 33 43.
-Avant de partir, vérifiez que vous avez vos disponibilités.`;
+Avant de partir, vérifiez que vous avez vos disponibilités.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E13_2_CE_4_POOL = buildExpressPool("e13-2-ce-4", [
   q({
@@ -2983,7 +3287,20 @@ const E13_2_CE_5_TEXT = `Programme — matinée Trouver un stage
 
 10 h 30 : arrivée du groupe à Magasin Centre-Ville.
 Ensuite, Mme Costa présente le stage découverte en logistique avec des exemples concrets.
-La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte une copie du permis.`;
+La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte une copie du permis.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.`;
 
 const E13_2_CE_5_POOL = buildExpressPool("e13-2-ce-5", [
   q({
@@ -3077,7 +3394,21 @@ const E13_2_CE_6_TEXT = `Planning partagé
 
 Dans le calendrier de l'équipe, le créneau du samedi 13 avril est réservé à l'appel à candidatures pour un stage.
 Le groupe se retrouve à 11 h à la Bibliothèque Est.
-M. Weber fera l'appel; merci de préparer votre carte d'identité avant d'entrer.`;
+M. Weber fera l'appel; merci de préparer votre carte d'identité avant d'entrer.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de votre attention et de votre patience.`;
 
 const E13_2_CE_6_POOL = buildExpressPool("e13-2-ce-6", [
   q({
@@ -3171,7 +3502,20 @@ const E13_2_CE_7_TEXT = `Règlement — participation
 
 Pour la préparation d'un entretien de stage, la ponctualité est importante : les portes de Agence Emploi Plus ferment dix minutes après 13 h 30.
 La date retenue est le lundi 22 avril. Les personnes sans votre convention signée doivent passer à l'accueil.
-En cas de difficulté, demandez Mme Keller; il ou elle vous indiquera la bonne salle.`;
+En cas de difficulté, demandez Mme Keller; il ou elle vous indiquera la bonne salle.
+Tout le monde est le bienvenu.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E13_2_CE_7_POOL = buildExpressPool("e13-2-ce-7", [
   q({
@@ -3265,7 +3609,19 @@ const E13_2_CE_8_TEXT = `Ticket de passage — A2-18
 
 Conservez ce ticket jusqu'à la fin de la séance sur les sites d'emploi.
 Il donne accès à Salle Rhône le mardi 30 avril, à partir de 14 h.
-Le contrôle sera fait par M. Benali. Le document demandé est un CV imprimé.`;
+Le contrôle sera fait par M. Benali. Le document demandé est un CV imprimé.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E13_2_CE_8_POOL = buildExpressPool("e13-2-ce-8", [
   q({
@@ -3359,7 +3715,21 @@ const E13_2_CE_9_TEXT = `Article local — service de proximité
 
 Le quartier annonce le stage en cuisine collective pour aider les habitants dans leurs démarches.
 La rencontre aura lieu le mercredi 8 mai à 14 h 30, à Crèche Les Pivoines.
-Selon Mme Arnaud, il suffit d'apporter une lettre courte et de poser ses questions simplement.`;
+Selon Mme Arnaud, il suffit d'apporter une lettre courte et de poser ses questions simplement.
+Les informations sont valables pour cette semaine.
+Si quelque chose n'est pas clair, posez la question.
+Pensez à vérifier la date et le lieu.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.`;
 
 const E13_2_CE_9_POOL = buildExpressPool("e13-2-ce-9", [
   q({
@@ -3454,7 +3824,19 @@ const E13_2_CE_10_TEXT = `Fil de discussion — groupe A2
 Mina : Tu viens à le forum des stages ?
 Ali : Oui, c'est jeudi 16 mai à 15 h.
 Mina : Je vais où ?
-Ali : à Atelier Municipal. M. Schmid nous attendra, et il faut prendre vos disponibilités.`;
+Ali : à Atelier Municipal. M. Schmid nous attendra, et il faut prendre vos disponibilités.
+Les photos peuvent être prises pour le souvenir.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.`;
 
 const E13_2_CE_10_POOL = buildExpressPool("e13-2-ce-10", [
   q({
@@ -3548,7 +3930,21 @@ const E13_2_CE_11_TEXT = `Fiche pratique — avant de venir
 
 Pour le dépôt de dossier de stage, notez trois informations : le rendez-vous est vendredi 24 mai, l'heure est 15 h 30, le lieu est Magasin Centre-Ville.
 La personne à contacter est Mme Costa.
-Dernière vérification dans le sac : une copie du permis.`;
+Dernière vérification dans le sac : une copie du permis.
+N'oubliez pas de vérifier la date.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.`;
 
 const E13_2_CE_11_POOL = buildExpressPool("e13-2-ce-11", [
   q({
@@ -3642,7 +4038,20 @@ const E13_2_CE_12_TEXT = `Avis sur la porte
 
 Changement d'organisation pour le stage en bibliothèque.
 Le rendez-vous reste le lundi 3 juin à 16 h, mais l'entrée se fait par Bibliothèque Est.
-Sonnez chez M. Weber et gardez votre carte d'identité à la main pour gagner du temps.`;
+Sonnez chez M. Weber et gardez votre carte d'identité à la main pour gagner du temps.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.`;
 
 const E13_2_CE_12_POOL = buildExpressPool("e13-2-ce-12", [
   q({
@@ -3736,7 +4145,20 @@ const E13_2_CE_13_TEXT = `Invitation — rencontre utile
 
 Vous êtes invité(e) à participer à le stage en maison de retraite.
 La rencontre se déroule mardi 11 juin à 16 h 30, à l'Agence Emploi Plus.
-Mme Keller expliquera les étapes et répondra aux questions. Merci d'apporter votre convention signée.`;
+Mme Keller expliquera les étapes et répondra aux questions. Merci d'apporter votre convention signée.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+Merci de garder ce document avec vous.
+Les informations sont valables pour cette semaine.
+Si quelque chose n'est pas clair, posez la question.
+Pensez à vérifier la date et le lieu.`;
 
 const E13_2_CE_13_POOL = buildExpressPool("e13-2-ce-13", [
   q({
@@ -3830,7 +4252,20 @@ const E13_2_CE_14_TEXT = `Confirmation imprimée
 
 Votre place est gardée pour l'atelier lettre de motivation.
 Présentez-vous dans la Salle Rhône le mercredi 19 juin, quelques minutes avant 17 h.
-M. Benali vous accueillera à l'entrée. Le jour même, montrez un CV imprimé.`;
+M. Benali vous accueillera à l'entrée. Le jour même, montrez un CV imprimé.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+En cas de question, vous pouvez écrire ou téléphoner.
+Merci de votre attention et de votre patience.`;
 
 const E13_2_CE_14_POOL = buildExpressPool("e13-2-ce-14", [
   q({
@@ -3924,7 +4359,21 @@ const E13_2_CE_15_TEXT = `Formulaire commenté — Trouver un stage
 
 Le formulaire est court : il demande votre nom, puis il confirme le stage court en magasin.
 La ligne suivante indique Crèche Les Pivoines, avec un rendez-vous le jeudi 27 juin à 17 h 30.
-À la fin, Mme Arnaud rappelle d'ajouter une lettre courte au dossier.`;
+À la fin, Mme Arnaud rappelle d'ajouter une lettre courte au dossier.
+Sinon on peut aussi en parler demain matin.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.
+Je joins les détails importants juste après.`;
 
 const E13_2_CE_15_POOL = buildExpressPool("e13-2-ce-15", [
   q({
@@ -4018,7 +4467,20 @@ const E13_2_CE_16_TEXT = `Petite annonce — besoin de participants
 
 Nous cherchons des personnes intéressées par la permanence Pôle Emploi.
 Une présentation simple est organisée le vendredi 5 juillet à 18 h, à Atelier Municipal.
-Aucun achat n'est demandé; venez seulement avec vos disponibilités. Contact rapide : M. Schmid.`;
+Aucun achat n'est demandé; venez seulement avec vos disponibilités. Contact rapide : M. Schmid.
+Nous vous souhaitons une excellente journée.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E13_2_CE_16_POOL = buildExpressPool("e13-2-ce-16", [
   q({
@@ -4112,7 +4574,20 @@ const E13_2_CE_17_TEXT = `Compte rendu — décision du groupe
 
 Pendant la réunion, Mme Costa a proposé de continuer avec la visite du service technique.
 Le groupe a choisi Magasin Centre-Ville pour la prochaine étape.
-La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare une copie du permis.`;
+La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare une copie du permis.
+Nous comptons sur vous.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E13_2_CE_17_POOL = buildExpressPool("e13-2-ce-17", [
   q({
@@ -4207,7 +4682,17 @@ const E13_2_CE_18_TEXT = `FAQ — questions fréquentes
 Quand commence le stage en accueil administratif ? Le mardi 23 juillet à 19 h.
 Où faut-il aller ? à la Bibliothèque Est.
 Qui peut aider ? M. Weber.
-Que faut-il préparer ? votre carte d'identité.`;
+Que faut-il préparer ? votre carte d'identité.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.`;
 
 const E13_2_CE_18_POOL = buildExpressPool("e13-2-ce-18", [
   q({
@@ -4301,7 +4786,19 @@ const E13_2_CE_19_TEXT = `Plan d'accès — entrée conseillée
 
 Pour la réunion avec les tuteurs, entrez par la porte principale de Agence Emploi Plus.
 Prenez le couloir à gauche et attendez Mme Keller près du panneau bleu.
-Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre convention signée dans votre sac.`;
+Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre convention signée dans votre sac.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E13_2_CE_19_POOL = buildExpressPool("e13-2-ce-19", [
   q({
@@ -4395,7 +4892,18 @@ const E13_2_CE_20_TEXT = `Message vocal transcrit — M. Benali
 
 Bonjour, c'est M. Benali. Je vous laisse un message pour confirmer le rappel avant le début du stage.
 Nous nous retrouvons jeudi 8 août à 20 h dans la Salle Rhône.
-N'oubliez pas un CV imprimé. Si besoin, rappelez-moi au 022 420 49 59.`;
+N'oubliez pas un CV imprimé. Si besoin, rappelez-moi au 022 420 49 59.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const E13_2_CE_20_POOL = buildExpressPool("e13-2-ce-20", [
   q({
@@ -4812,191 +5320,191 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-11",
   title: "Demander des informations sur stage",
-  context: "Vous devez gérer une situation : Demander des informations sur stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes à l'accueil et vous demandez des informations sur stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour sur stage." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-2-po-12",
   title: "Résoudre un problème lié à stage",
-  context: "Vous devez gérer une situation : Résoudre un problème lié à stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au guichet et vous voulez résoudre un problème lié à stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour à stage." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais résoudre un problème de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-2-po-13",
   title: "Prendre un rendez-vous pour stage",
-  context: "Vous devez gérer une situation : Prendre un rendez-vous pour stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous voulez prendre un rendez-vous pour stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur stage." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-2-po-14",
   title: "Confirmer un rendez-vous stage",
-  context: "Vous devez gérer une situation : Confirmer un rendez-vous stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous confirmez un rendez-vous concernant stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur stage." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-2-po-15",
   title: "Demander conseil à un proche sur stage",
-  context: "Vous devez gérer une situation : Demander conseil à un proche sur stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes chez un ami et vous demandez conseil à un proche au sujet de stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour stage." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-2-po-16",
   title: "Signaler un retard lié à stage",
-  context: "Vous devez gérer une situation : Signaler un retard lié à stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous signalez un retard lié à stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur à stage." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-2-po-17",
   title: "Faire une réclamation polie sur stage",
-  context: "Vous devez gérer une situation : Faire une réclamation polie sur stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au service clients et vous faites une réclamation polie au sujet de stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur stage." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-2-po-18",
   title: "Obtenir un renseignement urgent sur stage",
-  context: "Vous devez gérer une situation : Obtenir un renseignement urgent sur stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes à l'accueil et vous avez besoin d'un renseignement urgent sur stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour stage." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais obtenir un renseignement urgent de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-2-po-19",
   title: "Comparer deux options pour stage",
-  context: "Vous devez gérer une situation : Comparer deux options pour stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au bureau et vous comparez deux options pour stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour stage." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-2-po-20",
   title: "Remercier pour une aide concernant stage",
-  context: "Vous devez gérer une situation : Remercier pour une aide concernant stage.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes en face à face et vous remerciez quelqu'un pour son aide concernant stage.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur stage." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour stage." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais remercier pour une aide de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 }
 ];
@@ -5193,7 +5701,20 @@ const E13_3_CE_TEXT = `Affiche — Porte ouverte Répondre à une offre d'emploi
 
 Bureau Emploi ouvre ses portes le lundi 4 mars dès 8 h 30. Le public pourra découvrir la candidature pour agent d'accueil avec Mme Marchand.
 L'entrée est libre, mais chaque visiteur doit venir avec votre CV à jour.
-Pour les questions de dernière minute, le numéro à garder est le 024 730 30 40.`;
+Pour les questions de dernière minute, le numéro à garder est le 024 730 30 40.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_3_CE_POOL = buildExpressPool("e13-3-ce", [
   q({
@@ -5287,7 +5808,19 @@ const E13_3_CE_2_TEXT = `SMS — M. Laurent
 
 Bonjour ! Je vous confirme le rendez-vous pour la réponse à une offre de vendeur.
 On se voit mardi 12 mars à 9 h, directement dans la Salle Alpes.
-N'oubliez pas une lettre signée. Répondez OUI si vous pouvez venir.`;
+N'oubliez pas une lettre signée. Répondez OUI si vous pouvez venir.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.`;
 
 const E13_3_CE_2_POOL = buildExpressPool("e13-3-ce-2", [
   q({
@@ -5380,6 +5913,20 @@ const E13_3_CE_2_POOL = buildExpressPool("e13-3-ce-2", [
 const E13_3_CE_3_TEXT = `Note interne — accueil
 
 Une personne se présentera mercredi 20 mars à 9 h 15 pour l'envoi d'un CV de serveur.
+Si quelque chose n'est pas clair, posez la question.
+Pensez à vérifier la date et le lieu.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
 Merci de l'orienter vers Entreprise Nova et de prévenir Mme Huber dès son arrivée.
 Son dossier doit contenir vos certificats de travail; sans ce document, le rendez-vous sera reporté.`;
 
@@ -5475,7 +6022,18 @@ const E13_3_CE_4_TEXT = `Page web — informations pratiques
 
 Vous cherchez des renseignements sur l'atelier candidature spontanée ? La prochaine session est prévue le jeudi 28 mars.
 L'accueil commence à 10 h à l'Agence Travail Direct. M. Morel répond aux questions simples par téléphone au 024 730 33 43.
-Avant de partir, vérifiez que vous avez deux références.`;
+Avant de partir, vérifiez que vous avez deux références.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.`;
 
 const E13_3_CE_4_POOL = buildExpressPool("e13-3-ce-4", [
   q({
@@ -5569,7 +6127,19 @@ const E13_3_CE_5_TEXT = `Programme — matinée Répondre à une offre d'emploi
 
 10 h 30 : arrivée du groupe à Espace Candidats.
 Ensuite, Mme Rossi présente le dossier pour aide de cuisine avec des exemples concrets.
-La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte votre adresse e-mail.`;
+La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte votre adresse e-mail.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.`;
 
 const E13_3_CE_5_POOL = buildExpressPool("e13-3-ce-5", [
   q({
@@ -5663,7 +6233,20 @@ const E13_3_CE_6_TEXT = `Planning partagé
 
 Dans le calendrier de l'équipe, le créneau du samedi 13 avril est réservé à l'offre de secrétaire à temps partiel.
 Le groupe se retrouve à 11 h à Guichet 3.
-M. Clerc fera l'appel; merci de préparer le numéro de l'offre avant d'entrer.`;
+M. Clerc fera l'appel; merci de préparer le numéro de l'offre avant d'entrer.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Merci encore, et à bientôt.`;
 
 const E13_3_CE_6_POOL = buildExpressPool("e13-3-ce-6", [
   q({
@@ -5757,7 +6340,20 @@ const E13_3_CE_7_TEXT = `Règlement — participation
 
 Pour la relecture d'une lettre de motivation, la ponctualité est importante : les portes de Bureau Emploi ferment dix minutes après 13 h 30.
 La date retenue est le lundi 22 avril. Les personnes sans votre CV à jour doivent passer à l'accueil.
-En cas de difficulté, demandez Mme Marchand; il ou elle vous indiquera la bonne salle.`;
+En cas de difficulté, demandez Mme Marchand; il ou elle vous indiquera la bonne salle.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E13_3_CE_7_POOL = buildExpressPool("e13-3-ce-7", [
   q({
@@ -5851,7 +6447,19 @@ const E13_3_CE_8_TEXT = `Ticket de passage — A2-18
 
 Conservez ce ticket jusqu'à la fin de la candidature en ligne.
 Il donne accès à Salle Alpes le mardi 30 avril, à partir de 14 h.
-Le contrôle sera fait par M. Laurent. Le document demandé est une lettre signée.`;
+Le contrôle sera fait par M. Laurent. Le document demandé est une lettre signée.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E13_3_CE_8_POOL = buildExpressPool("e13-3-ce-8", [
   q({
@@ -5945,7 +6553,21 @@ const E13_3_CE_9_TEXT = `Article local — service de proximité
 
 Le quartier annonce l'offre de magasinier pour aider les habitants dans leurs démarches.
 La rencontre aura lieu le mercredi 8 mai à 14 h 30, à l'Entreprise Nova.
-Selon Mme Huber, il suffit d'apporter vos certificats de travail et de poser ses questions simplement.`;
+Selon Mme Huber, il suffit d'apporter vos certificats de travail et de poser ses questions simplement.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.`;
 
 const E13_3_CE_9_POOL = buildExpressPool("e13-3-ce-9", [
   q({
@@ -6040,7 +6662,19 @@ const E13_3_CE_10_TEXT = `Fil de discussion — groupe A2
 Mina : Tu viens à la séance sur les annonces ?
 Ali : Oui, c'est jeudi 16 mai à 15 h.
 Mina : Je vais où ?
-Ali : à l'Agence Travail Direct. M. Morel nous attendra, et il faut prendre deux références.`;
+Ali : à l'Agence Travail Direct. M. Morel nous attendra, et il faut prendre deux références.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.`;
 
 const E13_3_CE_10_POOL = buildExpressPool("e13-3-ce-10", [
   q({
@@ -6134,7 +6768,21 @@ const E13_3_CE_11_TEXT = `Fiche pratique — avant de venir
 
 Pour la préparation des références, notez trois informations : le rendez-vous est vendredi 24 mai, l'heure est 15 h 30, le lieu est Espace Candidats.
 La personne à contacter est Mme Rossi.
-Dernière vérification dans le sac : votre adresse e-mail.`;
+Dernière vérification dans le sac : votre adresse e-mail.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.`;
 
 const E13_3_CE_11_POOL = buildExpressPool("e13-3-ce-11", [
   q({
@@ -6228,7 +6876,20 @@ const E13_3_CE_12_TEXT = `Avis sur la porte
 
 Changement d'organisation pour le poste d'assistant administratif.
 Le rendez-vous reste le lundi 3 juin à 16 h, mais l'entrée se fait par Guichet 3.
-Sonnez chez M. Clerc et gardez le numéro de l'offre à la main pour gagner du temps.`;
+Sonnez chez M. Clerc et gardez le numéro de l'offre à la main pour gagner du temps.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Merci de votre attention et de votre patience.`;
 
 const E13_3_CE_12_POOL = buildExpressPool("e13-3-ce-12", [
   q({
@@ -6322,7 +6983,20 @@ const E13_3_CE_13_TEXT = `Invitation — rencontre utile
 
 Vous êtes invité(e) à participer à l'offre de chauffeur livreur.
 La rencontre se déroule mardi 11 juin à 16 h 30, au Bureau Emploi.
-Mme Marchand expliquera les étapes et répondra aux questions. Merci d'apporter votre CV à jour.`;
+Mme Marchand expliquera les étapes et répondra aux questions. Merci d'apporter votre CV à jour.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_3_CE_13_POOL = buildExpressPool("e13-3-ce-13", [
   q({
@@ -6416,7 +7090,19 @@ const E13_3_CE_14_TEXT = `Confirmation imprimée
 
 Votre place est gardée pour le dépôt de dossier au guichet.
 Présentez-vous dans la Salle Alpes le mercredi 19 juin, quelques minutes avant 17 h.
-M. Laurent vous accueillera à l'entrée. Le jour même, montrez une lettre signée.`;
+M. Laurent vous accueillera à l'entrée. Le jour même, montrez une lettre signée.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E13_3_CE_14_POOL = buildExpressPool("e13-3-ce-14", [
   q({
@@ -6510,7 +7196,20 @@ const E13_3_CE_15_TEXT = `Formulaire commenté — Répondre à une offre d'empl
 
 Le formulaire est court : il demande votre nom, puis il confirme la réponse pour un CDI.
 La ligne suivante indique Entreprise Nova, avec un rendez-vous le jeudi 27 juin à 17 h 30.
-À la fin, Mme Huber rappelle d'ajouter vos certificats de travail au dossier.`;
+À la fin, Mme Huber rappelle d'ajouter vos certificats de travail au dossier.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const E13_3_CE_15_POOL = buildExpressPool("e13-3-ce-15", [
   q({
@@ -6604,7 +7303,20 @@ const E13_3_CE_16_TEXT = `Petite annonce — besoin de participants
 
 Nous cherchons des personnes intéressées par la réponse pour un emploi temporaire.
 Une présentation simple est organisée le vendredi 5 juillet à 18 h, à l'Agence Travail Direct.
-Aucun achat n'est demandé; venez seulement avec deux références. Contact rapide : M. Morel.`;
+Aucun achat n'est demandé; venez seulement avec deux références. Contact rapide : M. Morel.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.`;
 
 const E13_3_CE_16_POOL = buildExpressPool("e13-3-ce-16", [
   q({
@@ -6698,7 +7410,19 @@ const E13_3_CE_17_TEXT = `Compte rendu — décision du groupe
 
 Pendant la réunion, Mme Rossi a proposé de continuer avec l'atelier sur le profil en ligne.
 Le groupe a choisi Espace Candidats pour la prochaine étape.
-La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare votre adresse e-mail.`;
+La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare votre adresse e-mail.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E13_3_CE_17_POOL = buildExpressPool("e13-3-ce-17", [
   q({
@@ -6793,7 +7517,18 @@ const E13_3_CE_18_TEXT = `FAQ — questions fréquentes
 Quand commence l'appel après une candidature ? Le mardi 23 juillet à 19 h.
 Où faut-il aller ? à Guichet 3.
 Qui peut aider ? M. Clerc.
-Que faut-il préparer ? le numéro de l'offre.`;
+Que faut-il préparer ? le numéro de l'offre.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.`;
 
 const E13_3_CE_18_POOL = buildExpressPool("e13-3-ce-18", [
   q({
@@ -6887,7 +7622,20 @@ const E13_3_CE_19_TEXT = `Plan d'accès — entrée conseillée
 
 Pour la mise à jour du CV, entrez par la porte principale de Bureau Emploi.
 Prenez le couloir à gauche et attendez Mme Marchand près du panneau bleu.
-Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre CV à jour dans votre sac.`;
+Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre CV à jour dans votre sac.
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.`;
 
 const E13_3_CE_19_POOL = buildExpressPool("e13-3-ce-19", [
   q({
@@ -6981,7 +7729,18 @@ const E13_3_CE_20_TEXT = `Message vocal transcrit — M. Laurent
 
 Bonjour, c'est M. Laurent. Je vous laisse un message pour confirmer le rappel avant envoi du dossier.
 Nous nous retrouvons jeudi 8 août à 20 h dans la Salle Alpes.
-N'oubliez pas une lettre signée. Si besoin, rappelez-moi au 024 730 49 59.`;
+N'oubliez pas une lettre signée. Si besoin, rappelez-moi au 024 730 49 59.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.`;
 
 const E13_3_CE_20_POOL = buildExpressPool("e13-3-ce-20", [
   q({
@@ -7396,191 +8155,191 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-11",
   title: "Demander des informations sur emploi",
-  context: "Vous devez gérer une situation : Demander des informations sur emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes à l'accueil et vous demandez des informations sur emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour sur emploi." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais demander des informations de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-3-po-12",
   title: "Résoudre un problème lié à emploi",
-  context: "Vous devez gérer une situation : Résoudre un problème lié à emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au guichet et vous voulez résoudre un problème lié à emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour à emploi." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-3-po-13",
   title: "Prendre un rendez-vous pour emploi",
-  context: "Vous devez gérer une situation : Prendre un rendez-vous pour emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous voulez prendre un rendez-vous pour emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de emploi." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e13-3-po-14",
   title: "Confirmer un rendez-vous emploi",
-  context: "Vous devez gérer une situation : Confirmer un rendez-vous emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous confirmez un rendez-vous concernant emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour emploi." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais confirmer un rendez-vous de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-3-po-15",
   title: "Demander conseil à un proche sur emploi",
-  context: "Vous devez gérer une situation : Demander conseil à un proche sur emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes chez un ami et vous demandez conseil à un proche au sujet de emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de emploi." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e13-3-po-16",
   title: "Signaler un retard lié à emploi",
-  context: "Vous devez gérer une situation : Signaler un retard lié à emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous signalez un retard lié à emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour à emploi." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais signaler un retard de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-3-po-17",
   title: "Faire une réclamation polie sur emploi",
-  context: "Vous devez gérer une situation : Faire une réclamation polie sur emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au service clients et vous faites une réclamation polie au sujet de emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de emploi." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e13-3-po-18",
   title: "Obtenir un renseignement urgent sur emploi",
-  context: "Vous devez gérer une situation : Obtenir un renseignement urgent sur emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes à l'accueil et vous avez besoin d'un renseignement urgent sur emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur emploi." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-3-po-19",
   title: "Comparer deux options pour emploi",
-  context: "Vous devez gérer une situation : Comparer deux options pour emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au bureau et vous comparez deux options pour emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de emploi." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e13-3-po-20",
   title: "Remercier pour une aide concernant emploi",
-  context: "Vous devez gérer une situation : Remercier pour une aide concernant emploi.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes en face à face et vous remerciez quelqu'un pour son aide concernant emploi.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur emploi." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour emploi." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 }
 ];
@@ -7777,7 +8536,20 @@ const E13_4_CE_TEXT = `Affiche — Porte ouverte Passer un entretien
 
 Entreprise Alpina ouvre ses portes le lundi 4 mars dès 8 h 30. Le public pourra découvrir l'entretien pour un poste d'accueil avec Mme Duval.
 L'entrée est libre, mais chaque visiteur doit venir avec votre CV imprimé.
-Pour les questions de dernière minute, le numéro à garder est le 026 840 30 40.`;
+Pour les questions de dernière minute, le numéro à garder est le 026 840 30 40.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.`;
 
 const E13_4_CE_POOL = buildExpressPool("e13-4-ce", [
   q({
@@ -7871,7 +8643,19 @@ const E13_4_CE_2_TEXT = `SMS — M. Steiner
 
 Bonjour ! Je vous confirme le rendez-vous pour la simulation d'entretien.
 On se voit mardi 12 mars à 9 h, directement dans la Salle Entretien.
-N'oubliez pas une pièce d'identité. Répondez OUI si vous pouvez venir.`;
+N'oubliez pas une pièce d'identité. Répondez OUI si vous pouvez venir.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.`;
 
 const E13_4_CE_2_POOL = buildExpressPool("e13-4-ce-2", [
   q({
@@ -7964,6 +8748,19 @@ const E13_4_CE_2_POOL = buildExpressPool("e13-4-ce-2", [
 const E13_4_CE_3_TEXT = `Note interne — accueil
 
 Une personne se présentera mercredi 20 mars à 9 h 15 pour l'entretien avec les ressources humaines.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Merci de l'orienter vers Bureau RH et de prévenir Mme Chevalier dès son arrivée.
 Son dossier doit contenir la convocation; sans ce document, le rendez-vous sera reporté.`;
 
@@ -8059,7 +8856,19 @@ const E13_4_CE_4_TEXT = `Page web — informations pratiques
 
 Vous cherchez des renseignements sur la préparation des questions fermées ? La prochaine session est prévue le jeudi 28 mars.
 L'accueil commence à 10 h à l'Hôtel Central. M. Kurz répond aux questions simples par téléphone au 026 840 33 43.
-Avant de partir, vérifiez que vous avez vos certificats.`;
+Avant de partir, vérifiez que vous avez vos certificats.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Voici quelques détails utiles pour la suite.`;
 
 const E13_4_CE_4_POOL = buildExpressPool("e13-4-ce-4", [
   q({
@@ -8153,7 +8962,20 @@ const E13_4_CE_5_TEXT = `Programme — matinée Passer un entretien
 
 10 h 30 : arrivée du groupe à l'Agence Recrutement.
 Ensuite, Mme Aubert présente l'entretien pour un CDI avec des exemples concrets.
-La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte un stylo noir.`;
+La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte un stylo noir.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_4_CE_5_POOL = buildExpressPool("e13-4-ce-5", [
   q({
@@ -8247,7 +9069,21 @@ const E13_4_CE_6_TEXT = `Planning partagé
 
 Dans le calendrier de l'équipe, le créneau du samedi 13 avril est réservé à l'atelier qualités et défauts.
 Le groupe se retrouve à 11 h dans la Salle Mont-Blanc.
-M. Blanc fera l'appel; merci de préparer la liste de vos questions avant d'entrer.`;
+M. Blanc fera l'appel; merci de préparer la liste de vos questions avant d'entrer.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const E13_4_CE_6_POOL = buildExpressPool("e13-4-ce-6", [
   q({
@@ -8341,7 +9177,20 @@ const E13_4_CE_7_TEXT = `Règlement — participation
 
 Pour le rendez-vous avec un recruteur, la ponctualité est importante : les portes de Entreprise Alpina ferment dix minutes après 13 h 30.
 La date retenue est le lundi 22 avril. Les personnes sans votre CV imprimé doivent passer à l'accueil.
-En cas de difficulté, demandez Mme Duval; il ou elle vous indiquera la bonne salle.`;
+En cas de difficulté, demandez Mme Duval; il ou elle vous indiquera la bonne salle.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+Merci de respecter le calme des autres personnes.`;
 
 const E13_4_CE_7_POOL = buildExpressPool("e13-4-ce-7", [
   q({
@@ -8435,7 +9284,20 @@ const E13_4_CE_8_TEXT = `Ticket de passage — A2-18
 
 Conservez ce ticket jusqu'à la fin de le test oral avant entretien.
 Il donne accès à Salle Entretien le mardi 30 avril, à partir de 14 h.
-Le contrôle sera fait par M. Steiner. Le document demandé est une pièce d'identité.`;
+Le contrôle sera fait par M. Steiner. Le document demandé est une pièce d'identité.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E13_4_CE_8_POOL = buildExpressPool("e13-4-ce-8", [
   q({
@@ -8529,7 +9391,21 @@ const E13_4_CE_9_TEXT = `Article local — service de proximité
 
 Le quartier annonce l'entretien dans un hôtel pour aider les habitants dans leurs démarches.
 La rencontre aura lieu le mercredi 8 mai à 14 h 30, au Bureau RH.
-Selon Mme Chevalier, il suffit d'apporter la convocation et de poser ses questions simplement.`;
+Selon Mme Chevalier, il suffit d'apporter la convocation et de poser ses questions simplement.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.`;
 
 const E13_4_CE_9_POOL = buildExpressPool("e13-4-ce-9", [
   q({
@@ -8624,7 +9500,19 @@ const E13_4_CE_10_TEXT = `Fil de discussion — groupe A2
 Mina : Tu viens à la séance sur la ponctualité ?
 Ali : Oui, c'est jeudi 16 mai à 15 h.
 Mina : Je vais où ?
-Ali : à l'Hôtel Central. M. Kurz nous attendra, et il faut prendre vos certificats.`;
+Ali : à l'Hôtel Central. M. Kurz nous attendra, et il faut prendre vos certificats.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.`;
 
 const E13_4_CE_10_POOL = buildExpressPool("e13-4-ce-10", [
   q({
@@ -8718,7 +9606,21 @@ const E13_4_CE_11_TEXT = `Fiche pratique — avant de venir
 
 Pour l'entretien pour un apprentissage adulte, notez trois informations : le rendez-vous est vendredi 24 mai, l'heure est 15 h 30, le lieu est Agence Recrutement.
 La personne à contacter est Mme Aubert.
-Dernière vérification dans le sac : un stylo noir.`;
+Dernière vérification dans le sac : un stylo noir.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const E13_4_CE_11_POOL = buildExpressPool("e13-4-ce-11", [
   q({
@@ -8812,7 +9714,20 @@ const E13_4_CE_12_TEXT = `Avis sur la porte
 
 Changement d'organisation pour la préparation de la présentation personnelle.
 Le rendez-vous reste le lundi 3 juin à 16 h, mais l'entrée se fait par Salle Mont-Blanc.
-Sonnez chez M. Blanc et gardez la liste de vos questions à la main pour gagner du temps.`;
+Sonnez chez M. Blanc et gardez la liste de vos questions à la main pour gagner du temps.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E13_4_CE_12_POOL = buildExpressPool("e13-4-ce-12", [
   q({
@@ -8906,7 +9821,20 @@ const E13_4_CE_13_TEXT = `Invitation — rencontre utile
 
 Vous êtes invité(e) à participer à l'entretien téléphonique.
 La rencontre se déroule mardi 11 juin à 16 h 30, à l'Entreprise Alpina.
-Mme Duval expliquera les étapes et répondra aux questions. Merci d'apporter votre CV imprimé.`;
+Mme Duval expliquera les étapes et répondra aux questions. Merci d'apporter votre CV imprimé.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.`;
 
 const E13_4_CE_13_POOL = buildExpressPool("e13-4-ce-13", [
   q({
@@ -9000,7 +9928,20 @@ const E13_4_CE_14_TEXT = `Confirmation imprimée
 
 Votre place est gardée pour la visite avant entretien.
 Présentez-vous dans la Salle Entretien le mercredi 19 juin, quelques minutes avant 17 h.
-M. Steiner vous accueillera à l'entrée. Le jour même, montrez une pièce d'identité.`;
+M. Steiner vous accueillera à l'entrée. Le jour même, montrez une pièce d'identité.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+Merci de votre attention et de votre patience.`;
 
 const E13_4_CE_14_POOL = buildExpressPool("e13-4-ce-14", [
   q({
@@ -9094,7 +10035,21 @@ const E13_4_CE_15_TEXT = `Formulaire commenté — Passer un entretien
 
 Le formulaire est court : il demande votre nom, puis il confirme l'entretien pour un poste de vendeur.
 La ligne suivante indique Bureau RH, avec un rendez-vous le jeudi 27 juin à 17 h 30.
-À la fin, Mme Chevalier rappelle d'ajouter la convocation au dossier.`;
+À la fin, Mme Chevalier rappelle d'ajouter la convocation au dossier.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.`;
 
 const E13_4_CE_15_POOL = buildExpressPool("e13-4-ce-15", [
   q({
@@ -9188,7 +10143,20 @@ const E13_4_CE_16_TEXT = `Petite annonce — besoin de participants
 
 Nous cherchons des personnes intéressées par l'atelier tenue professionnelle.
 Une présentation simple est organisée le vendredi 5 juillet à 18 h, à l'Hôtel Central.
-Aucun achat n'est demandé; venez seulement avec vos certificats. Contact rapide : M. Kurz.`;
+Aucun achat n'est demandé; venez seulement avec vos certificats. Contact rapide : M. Kurz.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.`;
 
 const E13_4_CE_16_POOL = buildExpressPool("e13-4-ce-16", [
   q({
@@ -9282,7 +10250,20 @@ const E13_4_CE_17_TEXT = `Compte rendu — décision du groupe
 
 Pendant la réunion, Mme Aubert a proposé de continuer avec le rappel des documents d'entretien.
 Le groupe a choisi Agence Recrutement pour la prochaine étape.
-La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare un stylo noir.`;
+La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare un stylo noir.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.
+Je joins les détails importants juste après.
+Si le plan change, je te préviens tout de suite.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.`;
 
 const E13_4_CE_17_POOL = buildExpressPool("e13-4-ce-17", [
   q({
@@ -9377,7 +10358,17 @@ const E13_4_CE_18_TEXT = `FAQ — questions fréquentes
 Quand commence l'entretien avec deux responsables ? Le mardi 23 juillet à 19 h.
 Où faut-il aller ? dans la Salle Mont-Blanc.
 Qui peut aider ? M. Blanc.
-Que faut-il préparer ? la liste de vos questions.`;
+Que faut-il préparer ? la liste de vos questions.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.`;
 
 const E13_4_CE_18_POOL = buildExpressPool("e13-4-ce-18", [
   q({
@@ -9471,7 +10462,20 @@ const E13_4_CE_19_TEXT = `Plan d'accès — entrée conseillée
 
 Pour le bilan après simulation, entrez par la porte principale de Entreprise Alpina.
 Prenez le couloir à gauche et attendez Mme Duval près du panneau bleu.
-Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre CV imprimé dans votre sac.`;
+Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre CV imprimé dans votre sac.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.`;
 
 const E13_4_CE_19_POOL = buildExpressPool("e13-4-ce-19", [
   q({
@@ -9565,7 +10569,18 @@ const E13_4_CE_20_TEXT = `Message vocal transcrit — M. Steiner
 
 Bonjour, c'est M. Steiner. Je vous laisse un message pour confirmer le message avant l'entretien final.
 Nous nous retrouvons jeudi 8 août à 20 h dans la Salle Entretien.
-N'oubliez pas une pièce d'identité. Si besoin, rappelez-moi au 026 840 49 59.`;
+N'oubliez pas une pièce d'identité. Si besoin, rappelez-moi au 026 840 49 59.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.`;
 
 const E13_4_CE_20_POOL = buildExpressPool("e13-4-ce-20", [
   q({
@@ -9977,191 +10992,191 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-11",
   title: "Demander des informations sur entretien",
-  context: "Vous devez gérer une situation : Demander des informations sur entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes à l'accueil et vous demandez des informations sur entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour sur entretien." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-4-po-12",
   title: "Résoudre un problème lié à entretien",
-  context: "Vous devez gérer une situation : Résoudre un problème lié à entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au guichet et vous voulez résoudre un problème lié à entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour à entretien." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais résoudre un problème de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-4-po-13",
   title: "Prendre un rendez-vous pour entretien",
-  context: "Vous devez gérer une situation : Prendre un rendez-vous pour entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous voulez prendre un rendez-vous pour entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur entretien." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-4-po-14",
   title: "Confirmer un rendez-vous entretien",
-  context: "Vous devez gérer une situation : Confirmer un rendez-vous entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous confirmez un rendez-vous concernant entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur entretien." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-4-po-15",
   title: "Demander conseil à un proche sur entretien",
-  context: "Vous devez gérer une situation : Demander conseil à un proche sur entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes chez un ami et vous demandez conseil à un proche au sujet de entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour entretien." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-4-po-16",
   title: "Signaler un retard lié à entretien",
-  context: "Vous devez gérer une situation : Signaler un retard lié à entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au téléphone et vous signalez un retard lié à entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur à entretien." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-4-po-17",
   title: "Faire une réclamation polie sur entretien",
-  context: "Vous devez gérer une situation : Faire une réclamation polie sur entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au service clients et vous faites une réclamation polie au sujet de entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur entretien." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-4-po-18",
   title: "Obtenir un renseignement urgent sur entretien",
-  context: "Vous devez gérer une situation : Obtenir un renseignement urgent sur entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes à l'accueil et vous avez besoin d'un renseignement urgent sur entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour entretien." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais obtenir un renseignement urgent de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-4-po-19",
   title: "Comparer deux options pour entretien",
-  context: "Vous devez gérer une situation : Comparer deux options pour entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes au bureau et vous comparez deux options pour entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour entretien." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-4-po-20",
   title: "Remercier pour une aide concernant entretien",
-  context: "Vous devez gérer une situation : Remercier pour une aide concernant entretien.",
-  roleA: { title: "Le responsable RH", vous: "le responsable RH" },
-  roleB: { title: "Le candidat", vous: "le candidat / la candidate" },
+  context: "Vous êtes en face à face et vous remerciez quelqu'un pour son aide concernant entretien.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entretien." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour entretien." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais remercier pour une aide de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 }
 ];
@@ -10358,7 +11373,20 @@ const E13_5_CE_TEXT = `Affiche — Porte ouverte S'intégrer à l'entreprise
 
 Accueil principal ouvre ses portes le lundi 4 mars dès 8 h 30. Le public pourra découvrir l'accueil du premier jour avec Mme Muller.
 L'entrée est libre, mais chaque visiteur doit venir avec votre badge provisoire.
-Pour les questions de dernière minute, le numéro à garder est le 027 950 30 40.`;
+Pour les questions de dernière minute, le numéro à garder est le 027 950 30 40.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.`;
 
 const E13_5_CE_POOL = buildExpressPool("e13-5-ce", [
   q({
@@ -10452,7 +11480,19 @@ const E13_5_CE_2_TEXT = `SMS — M. Rossi
 
 Bonjour ! Je vous confirme le rendez-vous pour la visite des bureaux.
 On se voit mardi 12 mars à 9 h, directement dans la Salle Équipe.
-N'oubliez pas le cahier de notes. Répondez OUI si vous pouvez venir.`;
+N'oubliez pas le cahier de notes. Répondez OUI si vous pouvez venir.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.`;
 
 const E13_5_CE_2_POOL = buildExpressPool("e13-5-ce-2", [
   q({
@@ -10545,6 +11585,20 @@ const E13_5_CE_2_POOL = buildExpressPool("e13-5-ce-2", [
 const E13_5_CE_3_TEXT = `Note interne — accueil
 
 Une personne se présentera mercredi 20 mars à 9 h 15 pour la réunion avec l'équipe.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Tout est organisé pour que ce soit simple.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci de l'orienter vers Bureau 204 et de prévenir Mme Fontaine dès son arrivée.
 Son dossier doit contenir votre mot de passe; sans ce document, le rendez-vous sera reporté.`;
 
@@ -10640,7 +11694,19 @@ const E13_5_CE_4_TEXT = `Page web — informations pratiques
 
 Vous cherchez des renseignements sur la formation au logiciel interne ? La prochaine session est prévue le jeudi 28 mars.
 L'accueil commence à 10 h à Atelier Nord. M. Garcia répond aux questions simples par téléphone au 027 950 33 43.
-Avant de partir, vérifiez que vous avez la fiche d'urgence.`;
+Avant de partir, vérifiez que vous avez la fiche d'urgence.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E13_5_CE_4_POOL = buildExpressPool("e13-5-ce-4", [
   q({
@@ -10734,7 +11800,20 @@ const E13_5_CE_5_TEXT = `Programme — matinée S'intégrer à l'entreprise
 
 10 h 30 : arrivée du groupe au Service Clients.
 Ensuite, Mme Bonnet présente la présentation des consignes de sécurité avec des exemples concrets.
-La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte vos horaires signés.`;
+La rencontre dure environ une heure. Le vendredi 5 avril, chaque participant apporte vos horaires signés.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const E13_5_CE_5_POOL = buildExpressPool("e13-5-ce-5", [
   q({
@@ -10828,7 +11907,20 @@ const E13_5_CE_6_TEXT = `Planning partagé
 
 Dans le calendrier de l'équipe, le créneau du samedi 13 avril est réservé à la remise du badge.
 Le groupe se retrouve à 11 h à Espace Pause.
-M. Bernard fera l'appel; merci de préparer le règlement lu avant d'entrer.`;
+M. Bernard fera l'appel; merci de préparer le règlement lu avant d'entrer.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.`;
 
 const E13_5_CE_6_POOL = buildExpressPool("e13-5-ce-6", [
   q({
@@ -10922,7 +12014,19 @@ const E13_5_CE_7_TEXT = `Règlement — participation
 
 Pour la pause café avec les collègues, la ponctualité est importante : les portes de Accueil principal ferment dix minutes après 13 h 30.
 La date retenue est le lundi 22 avril. Les personnes sans votre badge provisoire doivent passer à l'accueil.
-En cas de difficulté, demandez Mme Muller; il ou elle vous indiquera la bonne salle.`;
+En cas de difficulté, demandez Mme Muller; il ou elle vous indiquera la bonne salle.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+Merci encore, et à bientôt.`;
 
 const E13_5_CE_7_POOL = buildExpressPool("e13-5-ce-7", [
   q({
@@ -11016,7 +12120,19 @@ const E13_5_CE_8_TEXT = `Ticket de passage — A2-18
 
 Conservez ce ticket jusqu'à la fin de la lecture du règlement.
 Il donne accès à Salle Équipe le mardi 30 avril, à partir de 14 h.
-Le contrôle sera fait par M. Rossi. Le document demandé est le cahier de notes.`;
+Le contrôle sera fait par M. Rossi. Le document demandé est le cahier de notes.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.`;
 
 const E13_5_CE_8_POOL = buildExpressPool("e13-5-ce-8", [
   q({
@@ -11110,7 +12226,21 @@ const E13_5_CE_9_TEXT = `Article local — service de proximité
 
 Le quartier annonce la réunion avec la tutrice pour aider les habitants dans leurs démarches.
 La rencontre aura lieu le mercredi 8 mai à 14 h 30, au Bureau 204.
-Selon Mme Fontaine, il suffit d'apporter votre mot de passe et de poser ses questions simplement.`;
+Selon Mme Fontaine, il suffit d'apporter votre mot de passe et de poser ses questions simplement.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_5_CE_9_POOL = buildExpressPool("e13-5-ce-9", [
   q({
@@ -11205,7 +12335,19 @@ const E13_5_CE_10_TEXT = `Fil de discussion — groupe A2
 Mina : Tu viens à l'atelier sur les procédures ?
 Ali : Oui, c'est jeudi 16 mai à 15 h.
 Mina : Je vais où ?
-Ali : à Atelier Nord. M. Garcia nous attendra, et il faut prendre la fiche d'urgence.`;
+Ali : à Atelier Nord. M. Garcia nous attendra, et il faut prendre la fiche d'urgence.
+Les informations importantes sont déjà notées plus haut.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_5_CE_10_POOL = buildExpressPool("e13-5-ce-10", [
   q({
@@ -11299,7 +12441,21 @@ const E13_5_CE_11_TEXT = `Fiche pratique — avant de venir
 
 Pour l'organisation de la première semaine, notez trois informations : le rendez-vous est vendredi 24 mai, l'heure est 15 h 30, le lieu est Service Clients.
 La personne à contacter est Mme Bonnet.
-Dernière vérification dans le sac : vos horaires signés.`;
+Dernière vérification dans le sac : vos horaires signés.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.`;
 
 const E13_5_CE_11_POOL = buildExpressPool("e13-5-ce-11", [
   q({
@@ -11393,7 +12549,20 @@ const E13_5_CE_12_TEXT = `Avis sur la porte
 
 Changement d'organisation pour la présentation du planning.
 Le rendez-vous reste le lundi 3 juin à 16 h, mais l'entrée se fait par Espace Pause.
-Sonnez chez M. Bernard et gardez le règlement lu à la main pour gagner du temps.`;
+Sonnez chez M. Bernard et gardez le règlement lu à la main pour gagner du temps.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.`;
 
 const E13_5_CE_12_POOL = buildExpressPool("e13-5-ce-12", [
   q({
@@ -11487,7 +12656,20 @@ const E13_5_CE_13_TEXT = `Invitation — rencontre utile
 
 Vous êtes invité(e) à participer à la demande d'accès informatique.
 La rencontre se déroule mardi 11 juin à 16 h 30, à l'Accueil principal.
-Mme Muller expliquera les étapes et répondra aux questions. Merci d'apporter votre badge provisoire.`;
+Mme Muller expliquera les étapes et répondra aux questions. Merci d'apporter votre badge provisoire.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Un plan est disponible sur demande.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.`;
 
 const E13_5_CE_13_POOL = buildExpressPool("e13-5-ce-13", [
   q({
@@ -11581,7 +12763,20 @@ const E13_5_CE_14_TEXT = `Confirmation imprimée
 
 Votre place est gardée pour le point avec le chef de service.
 Présentez-vous dans la Salle Équipe le mercredi 19 juin, quelques minutes avant 17 h.
-M. Rossi vous accueillera à l'entrée. Le jour même, montrez le cahier de notes.`;
+M. Rossi vous accueillera à l'entrée. Le jour même, montrez le cahier de notes.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.
+Tout le monde est le bienvenu.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Tout est organisé pour que ce soit simple.
+Je reste près de mon téléphone aujourd'hui.
+À bientôt, et merci de votre lecture.`;
 
 const E13_5_CE_14_POOL = buildExpressPool("e13-5-ce-14", [
   q({
@@ -11675,7 +12870,21 @@ const E13_5_CE_15_TEXT = `Formulaire commenté — S'intégrer à l'entreprise
 
 Le formulaire est court : il demande votre nom, puis il confirme la découverte de la cantine.
 La ligne suivante indique Bureau 204, avec un rendez-vous le jeudi 27 juin à 17 h 30.
-À la fin, Mme Fontaine rappelle d'ajouter votre mot de passe au dossier.`;
+À la fin, Mme Fontaine rappelle d'ajouter votre mot de passe au dossier.
+Les informations importantes sont déjà notées plus haut.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E13_5_CE_15_POOL = buildExpressPool("e13-5-ce-15", [
   q({
@@ -11769,7 +12978,20 @@ const E13_5_CE_16_TEXT = `Petite annonce — besoin de participants
 
 Nous cherchons des personnes intéressées par la séance sur les congés.
 Une présentation simple est organisée le vendredi 5 juillet à 18 h, à Atelier Nord.
-Aucun achat n'est demandé; venez seulement avec la fiche d'urgence. Contact rapide : M. Garcia.`;
+Aucun achat n'est demandé; venez seulement avec la fiche d'urgence. Contact rapide : M. Garcia.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.`;
 
 const E13_5_CE_16_POOL = buildExpressPool("e13-5-ce-16", [
   q({
@@ -11863,7 +13085,20 @@ const E13_5_CE_17_TEXT = `Compte rendu — décision du groupe
 
 Pendant la réunion, Mme Bonnet a proposé de continuer avec le compte rendu de réunion.
 Le groupe a choisi Service Clients pour la prochaine étape.
-La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare vos horaires signés.`;
+La date retenue est lundi 15 juillet à 18 h 30. Chaque participant prépare vos horaires signés.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E13_5_CE_17_POOL = buildExpressPool("e13-5-ce-17", [
   q({
@@ -11958,7 +13193,17 @@ const E13_5_CE_18_TEXT = `FAQ — questions fréquentes
 Quand commence la formation au téléphone ? Le mardi 23 juillet à 19 h.
 Où faut-il aller ? à Espace Pause.
 Qui peut aider ? M. Bernard.
-Que faut-il préparer ? le règlement lu.`;
+Que faut-il préparer ? le règlement lu.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.`;
 
 const E13_5_CE_18_POOL = buildExpressPool("e13-5-ce-18", [
   q({
@@ -12052,7 +13297,20 @@ const E13_5_CE_19_TEXT = `Plan d'accès — entrée conseillée
 
 Pour le bilan après une semaine, entrez par la porte principale de Accueil principal.
 Prenez le couloir à gauche et attendez Mme Muller près du panneau bleu.
-Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre badge provisoire dans votre sac.`;
+Le rendez-vous est fixé au mercredi 31 juillet à 19 h 30. Gardez votre badge provisoire dans votre sac.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.`;
 
 const E13_5_CE_19_POOL = buildExpressPool("e13-5-ce-19", [
   q({
@@ -12146,7 +13404,18 @@ const E13_5_CE_20_TEXT = `Message vocal transcrit — M. Rossi
 
 Bonjour, c'est M. Rossi. Je vous laisse un message pour confirmer le rappel des horaires d'équipe.
 Nous nous retrouvons jeudi 8 août à 20 h dans la Salle Équipe.
-N'oubliez pas le cahier de notes. Si besoin, rappelez-moi au 027 950 49 59.`;
+N'oubliez pas le cahier de notes. Si besoin, rappelez-moi au 027 950 49 59.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.`;
 
 const E13_5_CE_20_POOL = buildExpressPool("e13-5-ce-20", [
   q({
@@ -12561,190 +13830,190 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-11",
   title: "Demander des informations sur entreprise",
-  context: "Vous devez gérer une situation : Demander des informations sur entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes à l'accueil et vous demandez des informations sur entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer  sur entreprise." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-5-po-12",
   title: "Résoudre un problème lié à entreprise",
-  context: "Vous devez gérer une situation : Résoudre un problème lié à entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes au guichet et vous voulez résoudre un problème lié à entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de à entreprise." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e13-5-po-13",
   title: "Prendre un rendez-vous pour entreprise",
-  context: "Vous devez gérer une situation : Prendre un rendez-vous pour entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes au téléphone et vous voulez prendre un rendez-vous pour entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour entreprise." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-5-po-14",
   title: "Confirmer un rendez-vous entreprise",
-  context: "Vous devez gérer une situation : Confirmer un rendez-vous entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes au téléphone et vous confirmez un rendez-vous concernant entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur entreprise." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-5-po-15",
   title: "Demander conseil à un proche sur entreprise",
-  context: "Vous devez gérer une situation : Demander conseil à un proche sur entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes chez un ami et vous demandez conseil à un proche au sujet de entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour entreprise." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-5-po-16",
   title: "Signaler un retard lié à entreprise",
-  context: "Vous devez gérer une situation : Signaler un retard lié à entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes au téléphone et vous signalez un retard lié à entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour. Je voudrais avancer sur à entreprise." },
+    { role: "A", text: "Qu'est-ce qui bloque exactement ?" },
+    { role: "B", text: "Je n'ai pas toutes les informations nécessaires." },
+    { role: "A", text: "Je vais vous les donner. Vous avez une pièce d'identité ?" },
+    { role: "B", text: "Oui, la voici." },
+    { role: "A", text: "Merci. Je note votre demande dans le système." },
+    { role: "B", text: "Quand aurai-je une réponse ?" },
+    { role: "A", text: "Dans deux jours ouvrés, au plus tard." },
+    { role: "B", text: "D'accord, merci pour votre aide !" },
   ],
 },
 {
   id: "e13-5-po-17",
   title: "Faire une réclamation polie sur entreprise",
-  context: "Vous devez gérer une situation : Faire une réclamation polie sur entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes au service clients et vous faites une réclamation polie au sujet de entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour entreprise." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-5-po-18",
   title: "Obtenir un renseignement urgent sur entreprise",
-  context: "Vous devez gérer une situation : Obtenir un renseignement urgent sur entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes à l'accueil et vous avez besoin d'un renseignement urgent sur entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Service clients, bonjour !" },
+    { role: "B", text: "Bonjour, j'appelle pour entreprise." },
+    { role: "A", text: "Je vois. Que souhaitez-vous faire aujourd'hui ?" },
+    { role: "B", text: "Je voudrais obtenir un renseignement urgent de façon simple." },
+    { role: "A", text: "Très bien. Je vous propose deux créneaux : mardi 10 h ou jeudi 16 h." },
+    { role: "B", text: "Jeudi 16 h me convient mieux." },
+    { role: "A", text: "C'est noté. Je vous envoie une confirmation SMS." },
+    { role: "B", text: "Pouvez-vous aussi m'envoyer un e-mail ?" },
+    { role: "A", text: "Oui, bien sûr. À jeudi alors !" },
+    { role: "B", text: "Merci, à jeudi !" },
   ],
 },
 {
   id: "e13-5-po-19",
   title: "Comparer deux options pour entreprise",
-  context: "Vous devez gérer une situation : Comparer deux options pour entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes au bureau et vous comparez deux options pour entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
-    { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
-    { role: "B", text: "Parfait, merci beaucoup !" },
+    { role: "A", text: "Bonjour ! Vous avez un numéro de dossier ?" },
+    { role: "B", text: "Non, pas encore. Je viens pour entreprise." },
+    { role: "A", text: "Pas de souci. Je crée un dossier maintenant." },
+    { role: "B", text: "Combien de temps faut-il prévoir ?" },
+    { role: "A", text: "Environ vingt minutes, si tout est en ordre." },
+    { role: "B", text: "Et quels documents faut-il ?" },
+    { role: "A", text: "Une pièce d'identité et un justificatif récent." },
+    { role: "B", text: "Je les ai. On peut commencer ?" },
+    { role: "A", text: "Oui, asseyez-vous. On y va." },
+    { role: "B", text: "Merci beaucoup !" },
   ],
 },
 {
   id: "e13-5-po-20",
   title: "Remercier pour une aide concernant entreprise",
-  context: "Vous devez gérer une situation : Remercier pour une aide concernant entreprise.",
-  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
-  roleB: { title: "Le collègue", vous: "le collègue / la collègue" },
+  context: "Vous êtes en face à face et vous remerciez quelqu'un pour son aide concernant entreprise.",
+  roleA: { title: "L'interlocuteur", vous: "l'interlocuteur / l'interlocutrice" },
+  roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
     { role: "A", text: "Bonjour ! Je peux vous aider ?" },
-    { role: "B", text: "Bonjour, j'ai une question sur entreprise." },
-    { role: "A", text: "Bien sûr, dites-moi." },
-    { role: "B", text: "C'est au sujet de mon dossier / ma situation." },
-    { role: "A", text: "Je comprends. Quand avez-vous besoin d'une réponse ?" },
-    { role: "B", text: "Le plus tôt possible, si c'est possible." },
-    { role: "A", text: "Je vais vérifier et vous recontacte." },
-    { role: "B", text: "Merci. Vous pouvez m'envoyer un e-mail ?" },
-    { role: "A", text: "Oui, je vous écris dans la journée." },
+    { role: "B", text: "Bonjour, j'ai besoin d'aide au sujet de entreprise." },
+    { role: "A", text: "D'accord. Pouvez-vous m'expliquer la situation ?" },
+    { role: "B", text: "Oui. C'est important pour moi et j'aimerais une réponse claire." },
+    { role: "A", text: "Je comprends. Vous avez déjà contacté quelqu'un ?" },
+    { role: "B", text: "Pas encore. C'est pour ça que je viens vous voir." },
+    { role: "A", text: "Très bien. Je vais vérifier et vous expliquer les démarches." },
+    { role: "B", text: "Est-ce que je dois remplir un formulaire ?" },
+    { role: "A", text: "Oui, celui-ci. Ensuite je vous confirme par e-mail." },
     { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 }

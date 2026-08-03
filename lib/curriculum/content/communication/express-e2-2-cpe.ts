@@ -18,7 +18,13 @@ Bonjour,
 J'ai un problème : la chaudière ne marche plus.
 Cela dure depuis deux jours. C'est urgent.
 Pouvez-vous envoyer un plombier ?
-Contact : 079 123 45 67`;
+Contact : 079 123 45 67
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.`;
 
 const CE_POOL_1 = buildExpressPool("e2-2-1", [
   q({
@@ -100,7 +106,13 @@ Madame, Monsieur,
 J'ai un problème : une fuite d'eau sous l'évier.
 Cela dure depuis ce matin. C'est très urgent.
 Pouvez-vous intervenir rapidement ?
-Contact : regie@immo.ch`;
+Contact : regie@immo.ch
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Nous traitons votre demande rapidement.
+Joignez les documents demandés si nécessaire.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.`;
 
 const CE_POOL_2 = buildExpressPool("e2-2-2", [
   q({
@@ -182,7 +194,12 @@ Bonjour,
 J'ai un problème : la porte d'entrée ne ferme plus.
 Cela dure depuis une semaine. C'est important.
 Pouvez-vous faire réparer la serrure ?
-Contact : gardien@immeuble.ch`;
+Contact : gardien@immeuble.ch
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Je reste près de mon téléphone aujourd'hui.
+Merci encore, et à bientôt.`;
 
 const CE_POOL_3 = buildExpressPool("e2-2-3", [
   q({
@@ -264,7 +281,13 @@ Salut,
 J'ai un problème : plus d'électricité dans la cuisine.
 Cela dure depuis hier soir. C'est urgent.
 Pouvez-vous vérifier le disjoncteur ?
-Contact : 076 234 56 78`;
+Contact : 076 234 56 78
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.`;
 
 const CE_POOL_4 = buildExpressPool("e2-2-4", [
   q({
@@ -346,7 +369,13 @@ Chers voisins,
 J'ai un problème : l'ascenseur est en panne.
 Cela dure depuis trois jours. C'est gênant.
 Pouvez-vous appeler la régie ?
-Contact : 032 345 67 89`;
+Contact : 032 345 67 89
+Les ascenseurs se trouvent à gauche de l'entrée.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.`;
 
 const CE_POOL_5 = buildExpressPool("e2-2-5", [
   q({
@@ -428,7 +457,13 @@ Allô,
 J'ai un problème : le chauffage ne fonctionne pas.
 Cela dure depuis cinq jours. C'est très froid.
 Pouvez-vous envoyer un technicien ?
-Contact : 079 456 78 90`;
+Contact : 079 456 78 90
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.`;
 
 const CE_POOL_6 = buildExpressPool("e2-2-6", [
   q({
@@ -510,7 +545,14 @@ Bonjour,
 J'ai un problème : un dégât des eaux au plafond.
 Cela dure depuis la semaine dernière. C'est grave.
 Pouvez-vous envoyer un expert ?
-Contact : assurance@home.ch`;
+Contact : assurance@home.ch
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.`;
 
 const CE_POOL_7 = buildExpressPool("e2-2-7", [
   q({
@@ -592,7 +634,13 @@ Bonjour,
 J'ai un problème : des nuisances sonores la nuit.
 Cela dure depuis un mois. C'est insupportable.
 Pouvez-vous parler au voisin ?
-Contact : forum@locataires.ch`;
+Contact : forum@locataires.ch
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Merci de garder ce document avec vous.`;
 
 const CE_POOL_8 = buildExpressPool("e2-2-8", [
   q({
@@ -674,7 +722,13 @@ Bonjour,
 J'ai un problème : les toilettes sont bouchées.
 Cela dure depuis aujourd'hui. C'est urgent.
 Pouvez-vous passer cet après-midi ?
-Contact : 079 567 89 01`;
+Contact : 079 567 89 01
+Tu peux partager ce message si besoin.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.`;
 
 const CE_POOL_9 = buildExpressPool("e2-2-9", [
   q({
@@ -756,7 +810,12 @@ Madame, Monsieur,
 J'ai un problème : la fenêtre ne ferme plus.
 Cela dure depuis deux semaines. C'est important.
 Pouvez-vous remplacer la fenêtre ?
-Contact : syndic@copro.ch`;
+Contact : syndic@copro.ch
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+C'est important pour moi, merci beaucoup.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_10 = buildExpressPool("e2-2-10", [
   q({
@@ -838,7 +897,13 @@ Madame, Monsieur,
 J'ai un problème : pas d'eau chaude.
 Cela dure depuis quatre jours. C'est urgent.
 Pouvez-vous réparer la chaudière ?
-Contact : reclamation@mail.ch`;
+Contact : reclamation@mail.ch
+Les informations importantes sont déjà notées plus haut.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const CE_POOL_11 = buildExpressPool("e2-2-11", [
   q({
@@ -920,7 +985,13 @@ Salut,
 J'ai un problème : le lave-linge est en panne.
 Cela dure depuis hier. C'est gênant.
 Pouvez-vous appeler le réparateur ?
-Contact : 078 678 90 12`;
+Contact : 078 678 90 12
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.`;
 
 const CE_POOL_12 = buildExpressPool("e2-2-12", [
   q({
@@ -1002,7 +1073,13 @@ Bonjour,
 J'ai un problème : des cafards dans la cuisine.
 Cela dure depuis plusieurs jours. C'est urgent.
 Pouvez-vous faire désinsectiser ?
-Contact : proprio@mail.ch`;
+Contact : proprio@mail.ch
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.`;
 
 const CE_POOL_13 = buildExpressPool("e2-2-13", [
   q({
@@ -1084,7 +1161,13 @@ URGENT —
 J'ai un problème : odeur de gaz dans l'appartement.
 Cela dure depuis maintenant. C'est très dangereux.
 Pouvez-vous appeler le gaz d'urgence ?
-Contact : 144`;
+Contact : 144
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const CE_POOL_14 = buildExpressPool("e2-2-14", [
   q({
@@ -1166,7 +1249,13 @@ Bonjour,
 J'ai un problème : le voisin fume dans les parties communes.
 Cela dure depuis longtemps. C'est gênant.
 Pouvez-vous rappeler le règlement ?
-Contact : regie2@immo.ch`;
+Contact : regie2@immo.ch
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.`;
 
 const CE_POOL_15 = buildExpressPool("e2-2-15", [
   q({
@@ -1248,7 +1337,13 @@ Bonjour,
 J'ai un problème : les prises ne marchent plus.
 Cela dure depuis ce matin. C'est urgent.
 Pouvez-vous passer aujourd'hui ?
-Contact : 079 789 01 23`;
+Contact : 079 789 01 23
+N'oubliez pas de vérifier la date.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.`;
 
 const CE_POOL_16 = buildExpressPool("e2-2-16", [
   q({
@@ -1330,7 +1425,13 @@ Bonjour,
 J'ai un problème : de l'eau qui coule du plafond.
 Cela dure depuis deux heures. C'est très urgent.
 Pouvez-vous fermer la vanne d'eau ?
-Contact : voisin@mail.ch`;
+Contact : voisin@mail.ch
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const CE_POOL_17 = buildExpressPool("e2-2-17", [
   q({
@@ -1412,7 +1513,13 @@ Allô,
 J'ai un problème : un problème de moisissure.
 Cela dure depuis plusieurs mois. C'est mauvais pour la santé.
 Pouvez-vous envoyer un expert ?
-Contact : sante@mail.ch`;
+Contact : sante@mail.ch
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.`;
 
 const CE_POOL_18 = buildExpressPool("e2-2-18", [
   q({
@@ -1494,7 +1601,13 @@ Bonjour,
 J'ai un problème : la hotte de cuisine ne marche plus.
 Cela dure depuis une semaine. C'est gênant.
 Pouvez-vous envoyer un électricien ?
-Contact : forum@depannage.ch`;
+Contact : forum@depannage.ch
+Pensez à vérifier la date et le lieu.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.`;
 
 const CE_POOL_19 = buildExpressPool("e2-2-19", [
   q({
@@ -1576,7 +1689,12 @@ Bonjour,
 J'ai un problème : une vitre cassée par la tempête.
 Cela dure depuis hier. C'est important.
 Pouvez-vous envoyer un vitrier ?
-Contact : assur@home.ch`;
+Contact : assur@home.ch
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const CE_POOL_20 = buildExpressPool("e2-2-20", [
   q({
@@ -1955,191 +2073,191 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous expliquez un problème domestique.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de un problème domestique ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour problème domestique." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e2-2-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous expliquez un problème domestique.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de un problème domestique." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le problème domestique, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-2-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous expliquez un problème domestique.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de un problème domestique." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour problème domestique." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e2-2-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous expliquez un problème domestique.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de un problème domestique ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour problème domestique." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e2-2-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous expliquez un problème domestique.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de un problème domestique." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour problème domestique." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e2-2-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous expliquez un problème domestique.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de un problème domestique." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le problème domestique, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-2-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous expliquez un problème domestique.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur un problème domestique." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le problème domestique, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-2-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous expliquez un problème domestique.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur un problème domestique." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le problème domestique, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-2-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous expliquez un problème domestique.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de un problème domestique." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour problème domestique." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e2-2-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : un problème domestique.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous expliquez un problème domestique.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de un problème domestique." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de un problème domestique." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour problème domestique." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 }
 ];

@@ -18,6 +18,7 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E7_1_CE_EMAIL_TEXT_1 = `De : Hôtel du Lac
+
 Objet : Confirmation réservation
 
 Bonjour,
@@ -26,6 +27,11 @@ Réservation confirmée chambre 204.
 Arrivée 15 h, départ 11 h.
 WiFi gratuit. Petit-déjeuner inclus.
 
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Hôtel du Lac`;
 
@@ -116,6 +122,7 @@ const E7_1_CE_EMAIL_POOL_1 = buildExpressPool("e7-1-ce-email-1", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_2 = `De : Hôtel Bellevue
+
 Objet : Bienvenue
 
 Bonjour,
@@ -124,6 +131,11 @@ Bienvenue à l'Hôtel Bellevue !
 Check-in 15 h. Mot de passe WiFi : lac2025.
 Réception 24 h/24.
 
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Hôtel Bellevue`;
 
@@ -214,6 +226,7 @@ const E7_1_CE_EMAIL_POOL_2 = buildExpressPool("e7-1-ce-email-2", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_3 = `De : Réception Central
+
 Objet : Chambre prête
 
 Bonjour,
@@ -222,6 +235,12 @@ Votre chambre 312 est prête.
 3e étage, ascenseur A.
 Clés à la réception.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Les personnes à mobilité réduite sont prioritaires.
 Cordialement,
 Réception Central`;
 
@@ -312,6 +331,7 @@ const E7_1_CE_EMAIL_POOL_3 = buildExpressPool("e7-1-ce-email-3", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_4 = `De : Hôtel Mont-Blanc
+
 Objet : Rappel check-out
 
 Bonjour,
@@ -320,6 +340,12 @@ Rappel : check-out demain 11 h.
 Facture à régler à la réception.
 Consigne bagages gratuite.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le personnel peut répondre en français simple.
 Cordialement,
 Hôtel Mont-Blanc`;
 
@@ -410,6 +436,7 @@ const E7_1_CE_EMAIL_POOL_4 = buildExpressPool("e7-1-ce-email-4", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_5 = `De : Auberge du Port
+
 Objet : Annulation
 
 Bonjour,
@@ -418,6 +445,13 @@ Votre réservation du 12 mars est annulée.
 Remboursement sous 5 jours.
 À bientôt.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le lieu est facile à trouver avec les indications.
 Cordialement,
 Auberge du Port`;
 
@@ -508,6 +542,7 @@ const E7_1_CE_EMAIL_POOL_5 = buildExpressPool("e7-1-ce-email-5", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_6 = `De : Hôtel du Lac
+
 Objet : Room service
 
 Bonjour,
@@ -516,6 +551,12 @@ Room service disponible 7 h–22 h.
 Menu sur la télé chambre.
 Commande au poste 0.
 
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 Hôtel du Lac`;
 
@@ -606,6 +647,7 @@ const E7_1_CE_EMAIL_POOL_6 = buildExpressPool("e7-1-ce-email-6", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_7 = `De : Hôtel Riviera
+
 Objet : Offre spa
 
 Bonjour,
@@ -614,6 +656,12 @@ Spa gratuit pour les clients.
 Ouvert 9 h–20 h.
 Réservation à la réception.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Hôtel Riviera`;
 
@@ -704,6 +752,7 @@ const E7_1_CE_EMAIL_POOL_7 = buildExpressPool("e7-1-ce-email-7", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_8 = `De : Réception Bellevue
+
 Objet : Objet trouvé
 
 Bonjour,
@@ -712,6 +761,12 @@ Nous avons trouvé un parapluie.
 Disponible à la réception.
 Décrivez-le pour le récupérer.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+À très bientôt, prends soin de toi.
 Cordialement,
 Réception Bellevue`;
 
@@ -802,6 +857,7 @@ const E7_1_CE_EMAIL_POOL_8 = buildExpressPool("e7-1-ce-email-8", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_9 = `De : Hôtel Central
+
 Objet : Facture
 
 Bonjour,
@@ -810,6 +866,12 @@ Votre facture séjour : 420 fr.
 Détail en pièce jointe.
 Merci de votre visite.
 
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Passe le bonjour à tout le monde.
 Cordialement,
 Hôtel Central`;
 
@@ -900,6 +962,7 @@ const E7_1_CE_EMAIL_POOL_9 = buildExpressPool("e7-1-ce-email-9", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_10 = `De : Hôtel du Parc
+
 Objet : Parking
 
 Bonjour,
@@ -908,6 +971,13 @@ Place parking P2 réservée.
 25 fr/nuit.
 Entrée par rue des Alpes.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Vous pouvez répondre directement à ce message.
 Cordialement,
 Hôtel du Parc`;
 
@@ -998,6 +1068,7 @@ const E7_1_CE_EMAIL_POOL_10 = buildExpressPool("e7-1-ce-email-10", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_11 = `De : Réception Lac
+
 Objet : Chambre non fumeur
 
 Bonjour,
@@ -1006,6 +1077,13 @@ Chambre 108 non fumeur confirmée.
 Étage 1.
 Animaux non acceptés.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Vous pouvez répondre directement à ce message.
 Cordialement,
 Réception Lac`;
 
@@ -1096,6 +1174,7 @@ const E7_1_CE_EMAIL_POOL_11 = buildExpressPool("e7-1-ce-email-11", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_12 = `De : Hôtel Alpes
+
 Objet : Petit-déjeuner
 
 Bonjour,
@@ -1104,6 +1183,12 @@ Petit-déjeuner buffet 7 h–10 h.
 Salle Alpes rez-de-chaussée.
 Boissons chaudes incluses.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Dis-moi si tu as besoin d'autre chose.
 Cordialement,
 Hôtel Alpes`;
 
@@ -1194,6 +1279,7 @@ const E7_1_CE_EMAIL_POOL_12 = buildExpressPool("e7-1-ce-email-12", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_13 = `De : Hôtel Ouchy
+
 Objet : Vue lac
 
 Bonjour,
@@ -1202,6 +1288,12 @@ Chambre vue lac confirmée.
 Étage 5 chambre 502.
 Arrivée possible dès 14 h.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Le personnel peut répondre en français simple.
 Cordialement,
 Hôtel Ouchy`;
 
@@ -1292,6 +1384,7 @@ const E7_1_CE_EMAIL_POOL_13 = buildExpressPool("e7-1-ce-email-13", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_14 = `De : Réception
+
 Objet : Carte perdue
 
 Bonjour,
@@ -1300,6 +1393,12 @@ Carte chambre désactivée.
 Nouvelle carte à la réception.
 Pièce d'identité requise.
 
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+En cas de perte d'objet, passez à l'accueil.
 À bientôt,
 Réception`;
 
@@ -1390,6 +1489,7 @@ const E7_1_CE_EMAIL_POOL_14 = buildExpressPool("e7-1-ce-email-14", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_15 = `De : Hôtel Gare
+
 Objet : Train tôt
 
 Bonjour,
@@ -1398,6 +1498,12 @@ Petit-déjeuner à emporter possible.
 Demandez la veille avant 20 h.
 Départ gare 5 min à pied.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Une confirmation sera envoyée ensuite.
 Cordialement,
 Hôtel Gare`;
 
@@ -1488,6 +1594,7 @@ const E7_1_CE_EMAIL_POOL_15 = buildExpressPool("e7-1-ce-email-15", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_16 = `De : Hôtel Flon
+
 Objet : Séjour prolongé
 
 Bonjour,
@@ -1496,6 +1603,12 @@ Prolongation 2 nuits acceptée.
 Même chambre 215.
 Tarif inchangé.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+En cas de perte d'objet, passez à l'accueil.
 Cordialement,
 Hôtel Flon`;
 
@@ -1586,6 +1699,7 @@ const E7_1_CE_EMAIL_POOL_16 = buildExpressPool("e7-1-ce-email-16", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_17 = `De : Réception
+
 Objet : Nettoyage
 
 Bonjour,
@@ -1594,6 +1708,11 @@ Ménage chambre 10 h–14 h.
 Panneau « Ne pas déranger » disponible.
 Service gratuit.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
 À bientôt,
 Réception`;
 
@@ -1684,6 +1803,7 @@ const E7_1_CE_EMAIL_POOL_17 = buildExpressPool("e7-1-ce-email-17", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_18 = `De : Hôtel Morges
+
 Objet : Confirmation groupe
 
 Bonjour,
@@ -1692,6 +1812,12 @@ Réservation groupe 4 chambres OK.
 Arrivée vendredi 16 h.
 Facture unique à la réception.
 
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Hôtel Morges`;
 
@@ -1782,6 +1908,7 @@ const E7_1_CE_EMAIL_POOL_18 = buildExpressPool("e7-1-ce-email-18", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_19 = `De : Hôtel Nyon
+
 Objet : WiFi problème
 
 Bonjour,
@@ -1790,6 +1917,12 @@ WiFi réparé.
 Nouveau mot de passe : nyon2025.
 Redémarrez votre appareil.
 
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+N'oubliez pas de vérifier la date et l'heure.
 Cordialement,
 Hôtel Nyon`;
 
@@ -1880,6 +2013,7 @@ const E7_1_CE_EMAIL_POOL_19 = buildExpressPool("e7-1-ce-email-19", [
   }),
 ]);
 const E7_1_CE_EMAIL_TEXT_20 = `De : Réception
+
 Objet : Merci
 
 Bonjour,
@@ -1888,6 +2022,12 @@ Merci pour votre séjour.
 Laissez un avis en ligne.
 Réduction 10 % prochaine visite.
 
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+J'espère que tout se passe bien de ton côté.
 À bientôt,
 Réception`;
 
@@ -2431,6 +2571,7 @@ La réception`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E7_2_CE_EMAIL_TEXT_1 = `De : Fit+
+
 Objet : Inscription confirmée
 
 Bonjour,
@@ -2439,6 +2580,12 @@ Inscription cours yoga confirmée.
 Mardi 18 h salle 2.
 Tenue confortable.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+C'est important pour moi, merci beaucoup.
 À bientôt,
 Fit+`;
 
@@ -2529,6 +2676,7 @@ const E7_2_CE_EMAIL_POOL_1 = buildExpressPool("e7-2-ce-email-1", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_2 = `De : Tennis Club
+
 Objet : Réservation terrain
 
 Bonjour,
@@ -2537,6 +2685,12 @@ Terrain réservé samedi 10 h.
 Durée 1 h.
 Raquettes disponibles au club.
 
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
 Cordialement,
 Tennis Club`;
 
@@ -2627,6 +2781,7 @@ const E7_2_CE_EMAIL_POOL_2 = buildExpressPool("e7-2-ce-email-2", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_3 = `De : Piscine Lausanne
+
 Objet : Cours natation
 
 Bonjour,
@@ -2635,6 +2790,13 @@ Cours natation enfant confirmé.
 Mardi 16 h.
 Maillot et bonnet obligatoires.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Les informations importantes sont déjà indiquées plus haut.
 Cordialement,
 Piscine Lausanne`;
 
@@ -2725,6 +2887,7 @@ const E7_2_CE_EMAIL_POOL_3 = buildExpressPool("e7-2-ce-email-3", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_4 = `De : Running Team
+
 Objet : Sortie dimanche
 
 Bonjour,
@@ -2733,6 +2896,12 @@ Sortie running dimanche 8 h.
 Départ parc Mon-Repos.
 Distances 5 et 10 km.
 
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+N'hésite pas à me répondre quand tu peux.
 Cordialement,
 Running Team`;
 
@@ -2823,6 +2992,7 @@ const E7_2_CE_EMAIL_POOL_4 = buildExpressPool("e7-2-ce-email-4", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_5 = `De : Gym Center
+
 Objet : Abonnement
 
 Bonjour,
@@ -2831,6 +3001,13 @@ Abonnement mensuel activé.
 75 fr/mois.
 Accès 5 h 30–23 h.
 
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Je reste à votre disposition pour toute précision.
+Nous restons disponibles pour vous aider.
 Cordialement,
 Gym Center`;
 
@@ -2921,6 +3098,7 @@ const E7_2_CE_EMAIL_POOL_5 = buildExpressPool("e7-2-ce-email-5", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_6 = `De : Foot club
+
 Objet : Match samedi
 
 Bonjour,
@@ -2929,6 +3107,13 @@ Match samedi 15 h stade.
 Rassemblement 14 h 30.
 Tenue verte.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Un plan simple est disponible à l'accueil.
 Cordialement,
 Foot club`;
 
@@ -3019,6 +3204,7 @@ const E7_2_CE_EMAIL_POOL_6 = buildExpressPool("e7-2-ce-email-6", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_7 = `De : Yoga studio
+
 Objet : Cours annulé
 
 Bonjour,
@@ -3027,6 +3213,13 @@ Cours mardi annulé.
 Report jeudi même heure.
 Excuses.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 Yoga studio`;
 
@@ -3117,6 +3310,7 @@ const E7_2_CE_EMAIL_POOL_7 = buildExpressPool("e7-2-ce-email-7", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_8 = `De : Escalade
+
 Objet : Initiation
 
 Bonjour,
@@ -3125,6 +3319,12 @@ Cours initiation samedi 11 h.
 Chaussons fournis.
 Réservation confirmée.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Respectez la file d'attente, s'il vous plaît.
 À bientôt,
 Escalade`;
 
@@ -3215,6 +3415,7 @@ const E7_2_CE_EMAIL_POOL_8 = buildExpressPool("e7-2-ce-email-8", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_9 = `De : Danse
+
 Objet : Soirée salsa
 
 Bonjour,
@@ -3223,6 +3424,11 @@ Soirée salsa vendredi 20 h.
 Cours débutant 19 h.
 Entrée 15 fr.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
 À bientôt,
 Danse`;
 
@@ -3313,6 +3519,7 @@ const E7_2_CE_EMAIL_POOL_9 = buildExpressPool("e7-2-ce-email-9", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_10 = `De : Badminton
+
 Objet : Tournoi
 
 Bonjour,
@@ -3321,6 +3528,12 @@ Tournoi samedi 9 h.
 Inscription jusqu'à vendredi.
 Prix : 20 fr.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Respectez la file d'attente, s'il vous plaît.
 À bientôt,
 Badminton`;
 
@@ -3411,6 +3624,7 @@ const E7_2_CE_EMAIL_POOL_10 = buildExpressPool("e7-2-ce-email-10", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_11 = `De : Vélo club
+
 Objet : Balade
 
 Bonjour,
@@ -3419,6 +3633,11 @@ Balade dimanche 9 h gare.
 Parcours plat 30 km.
 Casque obligatoire.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 Vélo club`;
 
@@ -3509,6 +3728,7 @@ const E7_2_CE_EMAIL_POOL_11 = buildExpressPool("e7-2-ce-email-11", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_12 = `De : Basket
+
 Objet : Entraînement
 
 Bonjour,
@@ -3517,6 +3737,12 @@ Entraînement mercredi 18 h gym.
 Chaussures salle.
 Première séance gratuite.
 
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Dis-moi si tu as besoin d'autre chose.
 À bientôt,
 Basket`;
 
@@ -3607,6 +3833,7 @@ const E7_2_CE_EMAIL_POOL_12 = buildExpressPool("e7-2-ce-email-12", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_13 = `De : Ski club
+
 Objet : Sortie
 
 Bonjour,
@@ -3615,6 +3842,13 @@ Sortie ski 6 h parking.
 Bus réservé.
 Forfait à votre charge.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement,
 Ski club`;
 
@@ -3705,6 +3939,7 @@ const E7_2_CE_EMAIL_POOL_13 = buildExpressPool("e7-2-ce-email-13", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_14 = `De : Boxe fit
+
 Objet : Place confirmée
 
 Bonjour,
@@ -3713,6 +3948,12 @@ Cours cardio boxe mardi 18 h 30.
 Gants fournis.
 Arrivez 10 min avant.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Le trajet est simple, ne t'inquiète pas.
 Cordialement,
 Boxe fit`;
 
@@ -3803,6 +4044,7 @@ const E7_2_CE_EMAIL_POOL_14 = buildExpressPool("e7-2-ce-email-14", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_15 = `De : Golf
+
 Objet : Cours samedi
 
 Bonjour,
@@ -3811,6 +4053,12 @@ Cours initiation samedi 10 h.
 Clubs prêtés.
 Réservation OK.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Nous traitons votre demande rapidement.
 À bientôt,
 Golf`;
 
@@ -3901,6 +4149,7 @@ const E7_2_CE_EMAIL_POOL_15 = buildExpressPool("e7-2-ce-email-15", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_16 = `De : Volley
+
 Objet : Équipe complète
 
 Bonjour,
@@ -3909,6 +4158,12 @@ Bonjour,
 Match jeudi 19 h.
 Terrain sable.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Merci de lire ce message jusqu'à la fin.
 À bientôt,
 Volley`;
 
@@ -3999,6 +4254,7 @@ const E7_2_CE_EMAIL_POOL_16 = buildExpressPool("e7-2-ce-email-16", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_17 = `De : Patinage
+
 Objet : Session libre
 
 Bonjour,
@@ -4007,6 +4263,12 @@ Patinoire samedi 14 h–17 h.
 Location patins 8 fr.
 Bonne glace !
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Une confirmation sera envoyée ensuite.
 À bientôt,
 Patinage`;
 
@@ -4097,6 +4359,7 @@ const E7_2_CE_EMAIL_POOL_17 = buildExpressPool("e7-2-ce-email-17", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_18 = `De : Natation
+
 Objet : Licence
 
 Bonjour,
@@ -4105,6 +4368,13 @@ Licence annuelle enregistrée.
 80 fr.
 Valable 12 mois.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Le service client répond aussi par téléphone.
 À bientôt,
 Natation`;
 
@@ -4195,6 +4465,7 @@ const E7_2_CE_EMAIL_POOL_18 = buildExpressPool("e7-2-ce-email-18", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_19 = `De : Sport municipal
+
 Objet : Horaires été
 
 Bonjour,
@@ -4203,6 +4474,11 @@ Piscine ouverte 8 h–21 h en été.
 Cours aquagym samedi.
 Bonne saison !
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 Cordialement,
 Sport municipal`;
 
@@ -4293,6 +4569,7 @@ const E7_2_CE_EMAIL_POOL_19 = buildExpressPool("e7-2-ce-email-19", [
   }),
 ]);
 const E7_2_CE_EMAIL_TEXT_20 = `De : Coach Martin
+
 Objet : Programme perso
 
 Bonjour,
@@ -4301,6 +4578,12 @@ Programme musculation envoyé.
 3 séances/semaine.
 Questions : répondez à ce mail.
 
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+Dis-moi si tu as besoin d'autre chose.
 Cordialement,
 Coach Martin`;
 
@@ -4844,6 +5127,7 @@ Ton ami`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E7_3_CE_EMAIL_TEXT_1 = `De : Musée d'art
+
 Objet : Exposition temporaire
 
 Bonjour,
@@ -4852,6 +5136,11 @@ Nouvelle exposition dès vendredi.
 Billet combiné 18 fr.
 Ouvert 10 h–18 h.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 Cordialement,
 Musée d'art`;
 
@@ -4942,6 +5231,7 @@ const E7_3_CE_EMAIL_POOL_1 = buildExpressPool("e7-3-ce-email-1", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_2 = `De : Théâtre municipal
+
 Objet : Billets confirmés
 
 Bonjour,
@@ -4950,6 +5240,12 @@ Bonjour,
 Rang C places 12–13.
 Arrivez 15 min avant.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Théâtre municipal`;
 
@@ -5040,6 +5336,7 @@ const E7_3_CE_EMAIL_POOL_2 = buildExpressPool("e7-3-ce-email-2", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_3 = `De : Cinéma Rex
+
 Objet : Séance demain
 
 Bonjour,
@@ -5048,6 +5345,12 @@ Film demain 17 h salle 2.
 Ticket électronique en pièce jointe.
 Bon film !
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 Cordialement,
 Cinéma Rex`;
 
@@ -5138,6 +5441,7 @@ const E7_3_CE_EMAIL_POOL_3 = buildExpressPool("e7-3-ce-email-3", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_4 = `De : Bibliothèque
+
 Objet : Livre disponible
 
 Bonjour,
@@ -5146,6 +5450,12 @@ Votre livre réservé est disponible.
 Retrait avant vendredi.
 Prolongation possible en ligne.
 
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Nous restons disponibles pour vous aider.
 À bientôt,
 Bibliothèque`;
 
@@ -5236,6 +5546,7 @@ const E7_3_CE_EMAIL_POOL_4 = buildExpressPool("e7-3-ce-email-4", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_5 = `De : Opéra
+
 Objet : Programme saison
 
 Bonjour,
@@ -5244,6 +5555,12 @@ Nouvelle saison disponible.
 Abonnement 3 spectacles 90 fr.
 Réservation en ligne.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 À bientôt,
 Opéra`;
 
@@ -5334,6 +5651,7 @@ const E7_3_CE_EMAIL_POOL_5 = buildExpressPool("e7-3-ce-email-5", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_6 = `De : Festival
+
 Objet : Pass confirmé
 
 Bonjour,
@@ -5342,6 +5660,12 @@ Pass 3 jours confirmé.
 Valable 12–14 juillet.
 Bracelet à l'entrée.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Un plan simple est disponible à l'accueil.
 À bientôt,
 Festival`;
 
@@ -5432,6 +5756,7 @@ const E7_3_CE_EMAIL_POOL_6 = buildExpressPool("e7-3-ce-email-6", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_7 = `De : Galerie
+
 Objet : Vernissage
 
 Bonjour,
@@ -5440,6 +5765,11 @@ Vernissage jeudi 18 h.
 Entrée libre.
 Vin et snacks.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 À bientôt,
 Galerie`;
 
@@ -5530,6 +5860,7 @@ const E7_3_CE_EMAIL_POOL_7 = buildExpressPool("e7-3-ce-email-7", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_8 = `De : Concert jazz
+
 Objet : Réservation
 
 Bonjour,
@@ -5538,6 +5869,13 @@ Table réservée vendredi 21 h.
 2 personnes.
 Arrivez 20 h 45.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+N'hésite pas à me répondre quand tu peux.
 Cordialement,
 Concert jazz`;
 
@@ -5628,6 +5966,7 @@ const E7_3_CE_EMAIL_POOL_8 = buildExpressPool("e7-3-ce-email-8", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_9 = `De : Zoo
+
 Objet : Visite école
 
 Bonjour,
@@ -5636,6 +5975,12 @@ Visite groupe confirmée mardi 10 h.
 Tarif groupe 12 fr/enfant.
 Guide fourni.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Une confirmation sera envoyée ensuite.
 À bientôt,
 Zoo`;
 
@@ -5726,6 +6071,7 @@ const E7_3_CE_EMAIL_POOL_9 = buildExpressPool("e7-3-ce-email-9", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_10 = `De : Château
+
 Objet : Visite guidée
 
 Bonjour,
@@ -5734,6 +6080,12 @@ Visite guidée samedi 14 h.
 Départ cour intérieure.
 Durée 1 h.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 À bientôt,
 Château`;
 
@@ -5824,6 +6176,7 @@ const E7_3_CE_EMAIL_POOL_10 = buildExpressPool("e7-3-ce-email-10", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_11 = `De : Cinéma plein air
+
 Objet : Météo OK
 
 Bonjour,
@@ -5832,6 +6185,12 @@ Séance maintenue ce soir 21 h 30.
 Apportez couverture.
 Pop-corn sur place.
 
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+N'hésite pas à me répondre quand tu peux.
 Cordialement,
 Cinéma plein air`;
 
@@ -5922,6 +6281,7 @@ const E7_3_CE_EMAIL_POOL_11 = buildExpressPool("e7-3-ce-email-11", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_12 = `De : Atelier
+
 Objet : Place confirmée
 
 Bonjour,
@@ -5930,6 +6290,12 @@ Place atelier poterie samedi OK.
 14 h rue des Arts 3.
 Tablier fourni.
 
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+C'est important pour moi, merci beaucoup.
 À bientôt,
 Atelier`;
 
@@ -6020,6 +6386,7 @@ const E7_3_CE_EMAIL_POOL_12 = buildExpressPool("e7-3-ce-email-12", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_13 = `De : Théâtre enfants
+
 Objet : Billets
 
 Bonjour,
@@ -6028,6 +6395,12 @@ Bonjour,
 Spectacle 45 min.
 Accès fauteuils roulants.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+Les personnes à mobilité réduite sont prioritaires.
 Cordialement,
 Théâtre enfants`;
 
@@ -6118,6 +6491,7 @@ const E7_3_CE_EMAIL_POOL_13 = buildExpressPool("e7-3-ce-email-13", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_14 = `De : Office culture
+
 Objet : Visite ville
 
 Bonjour,
@@ -6126,6 +6500,13 @@ Visite guidée samedi 10 h.
 Départ place Palud.
 Gratuit.
 
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+À très bientôt, prends soin de toi.
 Cordialement,
 Office culture`;
 
@@ -6216,6 +6597,7 @@ const E7_3_CE_EMAIL_POOL_14 = buildExpressPool("e7-3-ce-email-14", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_15 = `De : Monument
+
 Objet : Horaires été
 
 Bonjour,
@@ -6224,6 +6606,13 @@ Tour ouverte 9 h–19 h en été.
 Ticket 5 fr.
 Dernier accès 18 h 30.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+En cas de question, vous pouvez écrire ou téléphoner.
 À bientôt,
 Monument`;
 
@@ -6314,6 +6703,7 @@ const E7_3_CE_EMAIL_POOL_15 = buildExpressPool("e7-3-ce-email-15", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_16 = `De : Marché artisanal
+
 Objet : Stand confirmé
 
 Bonjour,
@@ -6322,6 +6712,12 @@ Stand dimanche 9 h–16 h.
 Place du Marché.
 Tables fournies.
 
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Merci de votre attention et de votre patience.
 Cordialement,
 Marché artisanal`;
 
@@ -6412,6 +6808,7 @@ const E7_3_CE_EMAIL_POOL_16 = buildExpressPool("e7-3-ce-email-16", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_17 = `De : Musée
+
 Objet : Audioguide
 
 Bonjour,
@@ -6420,6 +6817,12 @@ Audioguide 5 fr en supplément.
 Disponible à l'accueil.
 Langues FR/EN/DE.
 
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Une confirmation sera envoyée ensuite.
 À bientôt,
 Musée`;
 
@@ -6510,6 +6913,7 @@ const E7_3_CE_EMAIL_POOL_17 = buildExpressPool("e7-3-ce-email-17", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_18 = `De : Opéra
+
 Objet : Annulation
 
 Bonjour,
@@ -6518,6 +6922,13 @@ Spectacle vendredi annulé.
 Remboursement automatique.
 Excuses.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous vous souhaitons une excellente journée.
 À bientôt,
 Opéra`;
 
@@ -6608,6 +7019,7 @@ const E7_3_CE_EMAIL_POOL_18 = buildExpressPool("e7-3-ce-email-18", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_19 = `De : Bibliothèque
+
 Objet : Amende
 
 Bonjour,
@@ -6616,6 +7028,13 @@ Livre en retard : amende 5 fr.
 Réglez à l'accueil.
 Merci.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Bonne journée à toutes et à tous.
 À bientôt,
 Bibliothèque`;
 
@@ -6706,6 +7125,7 @@ const E7_3_CE_EMAIL_POOL_19 = buildExpressPool("e7-3-ce-email-19", [
   }),
 ]);
 const E7_3_CE_EMAIL_TEXT_20 = `De : Festival
+
 Objet : Programme
 
 Bonjour,
@@ -6714,6 +7134,13 @@ Programme complet en pièce jointe.
 Scène principale et secondaire.
 Bonne fête !
 
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Pensez à arriver un peu en avance.
 À bientôt,
 Festival`;
 

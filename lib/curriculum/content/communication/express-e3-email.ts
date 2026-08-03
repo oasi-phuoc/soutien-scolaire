@@ -23,6 +23,7 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E3_1_CE_EMAIL_TEXT_1 = `De : École du Lac
+
 Objet : la rentrée
 
 Bonjour,
@@ -30,6 +31,12 @@ Bonjour,
 Un café est prévu pour les parents. Le rendez-vous est lundi 26 août à 8 h, dans la cour.
 Consigne : apporter une trousse.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Les personnes à mobilité réduite sont prioritaires.
 Cordialement,
 École du Lac`;
 
@@ -108,6 +115,7 @@ const E3_1_CE_EMAIL_POOL_1 = buildExpressPool("e3-1-ce-email-1", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_2 = `De : Secrétariat
+
 Objet : Information
 
 Bonjour,
@@ -115,6 +123,12 @@ Bonjour,
 Nous confirmons l'anglais oral jeudi à 9 h.
 Mme Rossi accueillera le groupe en salle 3. Action demandée : prendre la liste de mots.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Les personnes à mobilité réduite sont prioritaires.
 Le secrétariat`;
 
 const E3_1_CE_EMAIL_POOL_2 = buildExpressPool("e3-1-ce-email-2", [
@@ -192,6 +206,7 @@ const E3_1_CE_EMAIL_POOL_2 = buildExpressPool("e3-1-ce-email-2", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_3 = `De : Portail
+
 Objet : À faire
 
 Bonjour,
@@ -200,7 +215,13 @@ Une nouvelle consigne est disponible pour la lecture.
 Ouvrez-la avant mercredi soir; elle concerne au rez-de-chaussée.
 Bibliothèque scolaire demande cette action : présenter la carte d'étudiant. Détail : Le roman réservé attend au bureau.
 
-Message automatique`;
+Message automatique
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Bonne journée à toutes et à tous.`;
 
 const E3_1_CE_EMAIL_POOL_3 = buildExpressPool("e3-1-ce-email-3", [
   q({
@@ -277,6 +298,7 @@ const E3_1_CE_EMAIL_POOL_3 = buildExpressPool("e3-1-ce-email-3", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_4 = `De : M. Weber
+
 Objet : Rappel
 
 Bonjour à tous,
@@ -285,6 +307,11 @@ Je confirme l'exposé sur Rome. Le moment est lundi prochain, en salle 8.
 Venez calmement. Action à prévoir : envoyer trois images.
 Chaque élève parle deux minutes.
 
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Les personnes à mobilité réduite sont prioritaires.
 À bientôt`;
 
 const E3_1_CE_EMAIL_POOL_4 = buildExpressPool("e3-1-ce-email-4", [
@@ -362,6 +389,7 @@ const E3_1_CE_EMAIL_POOL_4 = buildExpressPool("e3-1-ce-email-4", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_5 = `De : Vie scolaire
+
 Objet : Organisation
 
 Bonjour,
@@ -370,7 +398,13 @@ Pour la chimie, l'entrée se fait autrement.
 Service des examens attend dans l'amphi B 20 avril à 13 h 30.
 Une seule consigne : prendre une calculatrice simple. Détail : La place de Sara est au rang 4.
 
-Vie scolaire`;
+Vie scolaire
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+N'hésite pas à me répondre quand tu peux.`;
 
 const E3_1_CE_EMAIL_POOL_5 = buildExpressPool("e3-1-ce-email-5", [
   q({
@@ -447,6 +481,7 @@ const E3_1_CE_EMAIL_POOL_5 = buildExpressPool("e3-1-ce-email-5", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_6 = `De : Bibliothèque
+
 Objet : Document prêt
 
 Bonjour,
@@ -455,6 +490,12 @@ Le document ou dossier pour les fusées à eau est prêt.
 Vous pouvez le demander mercredi à 14 h, derrière le gymnase. Club sciences connaît votre nom.
 Action à prévoir : apporter une bouteille vide.
 
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le service est également disponible en ligne.
 Merci`;
 
 const E3_1_CE_EMAIL_POOL_6 = buildExpressPool("e3-1-ce-email-6", [
@@ -532,6 +573,7 @@ const E3_1_CE_EMAIL_POOL_6 = buildExpressPool("e3-1-ce-email-6", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_7 = `De : Association
+
 Objet : Invitation
 
 Bonjour,
@@ -540,7 +582,13 @@ Les familles ou amis sont invités pour la rencontre école-famille mardi à 19 
 Les informations seront visibles dans la salle polyvalente. Association des parents commencera l'accueil.
 Consigne : préparer une question.
 
-Association`;
+Association
+N'oubliez pas de vérifier la date et l'heure.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.`;
 
 const E3_1_CE_EMAIL_POOL_7 = buildExpressPool("e3-1-ce-email-7", [
   q({
@@ -617,6 +665,7 @@ const E3_1_CE_EMAIL_POOL_7 = buildExpressPool("e3-1-ce-email-7", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_8 = `De : Application
+
 Objet : Notification
 
 Bonjour,
@@ -625,7 +674,13 @@ Une modification concerne le devoir en ligne.
 Le rendez-vous est sur Moodle avant vendredi minuit. Application Classe+ ajoute : Détail : Le brouillon peut rester privé.
 Action demandée : déposer le fichier.
 
-Application`;
+Application
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const E3_1_CE_EMAIL_POOL_8 = buildExpressPool("e3-1-ce-email-8", [
   q({
@@ -702,6 +757,7 @@ const E3_1_CE_EMAIL_POOL_8 = buildExpressPool("e3-1-ce-email-8", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_9 = `De : Service des examens
+
 Objet : Convocation
 
 Bonjour,
@@ -710,7 +766,14 @@ Votre rendez-vous pour la physique est confirmé mercredi à 13 h.
 L'entrée se fait au labo 1; Laboratoire vérifie la salle.
 Avant le début, consigne : mettre la blouse.
 
-Service des examens`;
+Service des examens
+Nous vous souhaitons une excellente journée.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E3_1_CE_EMAIL_POOL_9 = buildExpressPool("e3-1-ce-email-9", [
   q({
@@ -787,6 +850,7 @@ const E3_1_CE_EMAIL_POOL_9 = buildExpressPool("e3-1-ce-email-9", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_10 = `De : Laboratoire
+
 Objet : Sécurité
 
 Bonjour,
@@ -795,7 +859,13 @@ Pour l'orientation, attendez Mme Pop.
 Le groupe arrive au bureau 2 jeudi à 15 h. Détail : Le rendez-vous dure vingt minutes.
 Consigne : apporter les bulletins.
 
-Responsable`;
+Responsable
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+À bientôt, et merci de votre lecture.`;
 
 const E3_1_CE_EMAIL_POOL_10 = buildExpressPool("e3-1-ce-email-10", [
   q({
@@ -872,6 +942,7 @@ const E3_1_CE_EMAIL_POOL_10 = buildExpressPool("e3-1-ce-email-10", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_11 = `De : Surveillance
+
 Objet : Pause
 
 Bonjour,
@@ -880,6 +951,11 @@ M. Antoine accompagne les personnes au gymnase.
 Après la pause, l'entraînement reprend mardi à 17 h.
 Pendant l'attente, action calme : porter une tenue de sport.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Merci de confirmer la bonne réception.
 Bonne journée`;
 
 const E3_1_CE_EMAIL_POOL_11 = buildExpressPool("e3-1-ce-email-11", [
@@ -957,6 +1033,7 @@ const E3_1_CE_EMAIL_POOL_11 = buildExpressPool("e3-1-ce-email-11", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_12 = `De : Club
+
 Objet : Inscription
 
 Bonjour,
@@ -965,7 +1042,11 @@ Le club aide pour la conférence de droit. Prochaine séance : mardi 14 mai à 1
 Elle a lieu dans l'amphi C avec Faculté de droit.
 Pour participer, action simple : s'inscrire en ligne. Détail : L'entrée est gratuite.
 
-Club`;
+Club
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E3_1_CE_EMAIL_POOL_12 = buildExpressPool("e3-1-ce-email-12", [
   q({
@@ -1042,6 +1123,7 @@ const E3_1_CE_EMAIL_POOL_12 = buildExpressPool("e3-1-ce-email-12", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_13 = `De : École primaire
+
 Objet : Travail
 
 Bonjour,
@@ -1050,7 +1132,13 @@ Je rappelle le travail ou rendez-vous de le goûter de fin d'année.
 Il est prévu mercredi 26 juin à 16 h, dans la cour.
 Avant la séance, consigne : apporter un plat à partager. Détail : Les classes chantent deux chansons.
 
-École primaire`;
+École primaire
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.`;
 
 const E3_1_CE_EMAIL_POOL_13 = buildExpressPool("e3-1-ce-email-13", [
   q({
@@ -1127,6 +1215,7 @@ const E3_1_CE_EMAIL_POOL_13 = buildExpressPool("e3-1-ce-email-13", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_14 = `De : Direction
+
 Objet : Changement
 
 Bonjour,
@@ -1135,7 +1224,13 @@ la musique change d'organisation. Gymnase accompagne le groupe en salle de musiq
 La consigne pour tous : noter le report à mardi.
 Aucun élève ne doit venir à 15 h.
 
-Direction`;
+Direction
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Gardez ce texte pour vous en souvenir.`;
 
 const E3_1_CE_EMAIL_POOL_14 = buildExpressPool("e3-1-ce-email-14", [
   q({
@@ -1212,6 +1307,7 @@ const E3_1_CE_EMAIL_POOL_14 = buildExpressPool("e3-1-ce-email-14", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_15 = `De : Forum
+
 Objet : Groupe
 
 Bonjour,
@@ -1220,7 +1316,13 @@ Un groupe se forme pour la soirée d'intégration.
 La rencontre est samedi 21 septembre à 20 h, sur le campus. Association étudiante organise les rôles.
 Si vous venez, pensez à apporter une boisson.
 
-Forum`;
+Forum
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+J'espère que tout se passe bien de ton côté.`;
 
 const E3_1_CE_EMAIL_POOL_15 = buildExpressPool("e3-1-ce-email-15", [
   q({
@@ -1297,6 +1399,7 @@ const E3_1_CE_EMAIL_POOL_15 = buildExpressPool("e3-1-ce-email-15", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_16 = `De : Tutorats
+
 Objet : Révision
 
 Bonjour,
@@ -1305,7 +1408,12 @@ La préparation de le projet météo commence lundi 29 avril.
 Elle se passe en salle info 4. M. Garcia répond aux questions.
 Ensuite, action finale : préparer une présentation. Détail : Les groupes comptent trois personnes.
 
-Tutorats`;
+Tutorats
+Le trajet est simple, ne t'inquiète pas.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E3_1_CE_EMAIL_POOL_16 = buildExpressPool("e3-1-ce-email-16", [
   q({
@@ -1382,6 +1490,7 @@ const E3_1_CE_EMAIL_POOL_16 = buildExpressPool("e3-1-ce-email-16", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_17 = `De : Journal
+
 Objet : Article
 
 Bonjour,
@@ -1390,7 +1499,13 @@ Nous préparons une brève nouvelle sur le QCM de biologie.
 Le groupe travaille mercredi 15 mai à 10 h, dans l'amphi B. Dr. Martin vérifie les noms.
 Consigne : réviser les chapitres 1 à 5.
 
-Journal`;
+Journal
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Je t'envoie aussi ce détail pour être clair.`;
 
 const E3_1_CE_EMAIL_POOL_17 = buildExpressPool("e3-1-ce-email-17", [
   q({
@@ -1467,6 +1582,7 @@ const E3_1_CE_EMAIL_POOL_17 = buildExpressPool("e3-1-ce-email-17", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_18 = `De : Photographe scolaire
+
 Objet : Sortie
 
 Bonjour,
@@ -1475,7 +1591,13 @@ Pour la photo de classe, le rendez-vous est dans le jardin vendredi à 11 h.
 La tenue ou préparation doit être simple. Détail : La commande des photos viendra plus tard.
 N'oubliez pas cette action : porter un haut clair.
 
-Photographe scolaire`;
+Photographe scolaire
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.`;
 
 const E3_1_CE_EMAIL_POOL_18 = buildExpressPool("e3-1-ce-email-18", [
   q({
@@ -1552,6 +1674,7 @@ const E3_1_CE_EMAIL_POOL_18 = buildExpressPool("e3-1-ce-email-18", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_19 = `De : Portail étudiant
+
 Objet : Nouveau devoir
 
 Bonjour,
@@ -1560,7 +1683,12 @@ Une tâche de le certificat de scolarité est disponible.
 Il faut la faire avant dès lundi. La ressource se trouve au secrétariat.
 Service scolarité corrigera après. Consigne : montrer une pièce d'identité.
 
-Portail`;
+Portail
+Merci de lire ce message jusqu'à la fin.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E3_1_CE_EMAIL_POOL_19 = buildExpressPool("e3-1-ce-email-19", [
   q({
@@ -1637,6 +1765,7 @@ const E3_1_CE_EMAIL_POOL_19 = buildExpressPool("e3-1-ce-email-19", [
   }),
 ]);
 const E3_1_CE_EMAIL_TEXT_20 = `De : Équipe pédagogique
+
 Objet : Journée spéciale
 
 Bonjour,
@@ -1645,7 +1774,13 @@ La journée autour de le thème de l'eau aura lieu vendredi.
 Le matin, les groupes passent dans le hall avec Équipe pédagogique.
 En fin de journée, consigne : inviter les familles. Détail : Un jus de fruit sera offert.
 
-Équipe pédagogique`;
+Équipe pédagogique
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E3_1_CE_EMAIL_POOL_20 = buildExpressPool("e3-1-ce-email-20", [
   q({
@@ -2174,6 +2309,7 @@ Cordialement`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E3_2_CE_EMAIL_TEXT_1 = `De : ma mère
+
 Objet : les courses
 
 Bonjour,
@@ -2181,6 +2317,12 @@ Bonjour,
 le budget est de 45 francs. Le rendez-vous est à 17 h, à la Migros du centre.
 Consigne : venir à pied.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+À très bientôt, prends soin de toi.
 Cordialement,
 ma mère`;
 
@@ -2259,6 +2401,7 @@ const E3_2_CE_EMAIL_POOL_1 = buildExpressPool("e3-2-ce-email-1", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_2 = `De : Secrétariat
+
 Objet : Information
 
 Bonjour,
@@ -2266,6 +2409,12 @@ Bonjour,
 Nous confirmons un rendez-vous médical à 10 h 30.
 le médecin accueillera le groupe au cabinet du Dr Martin. Action demandée : prendre le bus 5.
 
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Le service est également disponible en ligne.
 Le secrétariat`;
 
 const E3_2_CE_EMAIL_POOL_2 = buildExpressPool("e3-2-ce-email-2", [
@@ -2343,6 +2492,7 @@ const E3_2_CE_EMAIL_POOL_2 = buildExpressPool("e3-2-ce-email-2", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_3 = `De : Portail
+
 Objet : À faire
 
 Bonjour,
@@ -2351,7 +2501,13 @@ Une nouvelle consigne est disponible pour un déjeuner.
 Ouvrez-la avant à 12 h 30; elle concerne au restaurant Le Lac.
 mes parents demande cette action : venir en voiture. Détail : la table est près de la fenêtre.
 
-Message automatique`;
+Message automatique
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E3_2_CE_EMAIL_POOL_3 = buildExpressPool("e3-2-ce-email-3", [
   q({
@@ -2428,6 +2584,7 @@ const E3_2_CE_EMAIL_POOL_3 = buildExpressPool("e3-2-ce-email-3", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_4 = `De : Tom
+
 Objet : Rappel
 
 Bonjour à tous,
@@ -2436,6 +2593,11 @@ Je confirme le sport. Le moment est à 19 h, chez FitPlus.
 Venez calmement. Action à prévoir : venir à vélo.
 le badge est dans la poche.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Le service est également disponible en ligne.
 À bientôt`;
 
 const E3_2_CE_EMAIL_POOL_4 = buildExpressPool("e3-2-ce-email-4", [
@@ -2513,6 +2675,7 @@ const E3_2_CE_EMAIL_POOL_4 = buildExpressPool("e3-2-ce-email-4", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_5 = `De : Vie scolaire
+
 Objet : Organisation
 
 Bonjour,
@@ -2521,7 +2684,13 @@ Pour un retrait, l'entrée se fait autrement.
 le conseiller attend à la banque UBS à 14 h.
 Une seule consigne : venir à pied. Détail : le retrait prévu est de 200 francs.
 
-Vie scolaire`;
+Vie scolaire
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Le service est également disponible en ligne.`;
 
 const E3_2_CE_EMAIL_POOL_5 = buildExpressPool("e3-2-ce-email-5", [
   q({
@@ -2598,6 +2767,7 @@ const E3_2_CE_EMAIL_POOL_5 = buildExpressPool("e3-2-ce-email-5", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_6 = `De : Bibliothèque
+
 Objet : Document prêt
 
 Bonjour,
@@ -2606,6 +2776,12 @@ Le document ou dossier pour une coupe de cheveux est prêt.
 Vous pouvez le demander à 16 h, au salon Élégance. Clara connaît votre nom.
 Action à prévoir : prendre le tram 12.
 
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+On pourra aussi inviter une autre personne.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+N'hésite pas à me répondre quand tu peux.
 Merci`;
 
 const E3_2_CE_EMAIL_POOL_6 = buildExpressPool("e3-2-ce-email-6", [
@@ -2683,6 +2859,7 @@ const E3_2_CE_EMAIL_POOL_6 = buildExpressPool("e3-2-ce-email-6", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_7 = `De : Association
+
 Objet : Invitation
 
 Bonjour,
@@ -2691,7 +2868,13 @@ Les familles ou amis sont invités pour acheter du pain et des fruits à 18 h.
 Les informations seront visibles à la Coop du quartier. ma sœur commencera l'accueil.
 Consigne : venir à pied.
 
-Association`;
+Association
+Les informations importantes sont déjà notées plus haut.
+Bonne journée à toutes et à tous.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E3_2_CE_EMAIL_POOL_7 = buildExpressPool("e3-2-ce-email-7", [
   q({
@@ -2768,6 +2951,7 @@ const E3_2_CE_EMAIL_POOL_7 = buildExpressPool("e3-2-ce-email-7", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_8 = `De : Application
+
 Objet : Notification
 
 Bonjour,
@@ -2776,7 +2960,13 @@ Une modification concerne un contrôle dentaire.
 Le rendez-vous est au cabinet dentaire à 9 h. la dentiste ajoute : Détail : le contrôle est couvert.
 Action demandée : prendre le bus.
 
-Application`;
+Application
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Conservez le numéro de contact indiqué.`;
 
 const E3_2_CE_EMAIL_POOL_8 = buildExpressPool("e3-2-ce-email-8", [
   q({
@@ -2853,6 +3043,7 @@ const E3_2_CE_EMAIL_POOL_8 = buildExpressPool("e3-2-ce-email-8", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_9 = `De : Service des examens
+
 Objet : Convocation
 
 Bonjour,
@@ -2861,7 +3052,14 @@ Votre rendez-vous pour le cinéma est confirmé mercredi à 20 h.
 L'entrée se fait au cinéma ABC; Léa et Marc vérifie la salle.
 Avant le début, consigne : prendre le métro.
 
-Service des examens`;
+Service des examens
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E3_2_CE_EMAIL_POOL_9 = buildExpressPool("e3-2-ce-email-9", [
   q({
@@ -2938,6 +3136,7 @@ const E3_2_CE_EMAIL_POOL_9 = buildExpressPool("e3-2-ce-email-9", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_10 = `De : Laboratoire
+
 Objet : Sécurité
 
 Bonjour,
@@ -2946,7 +3145,13 @@ Pour chercher des médicaments, attendez mon fils.
 Le groupe arrive à la pharmacie du centre à 11 h. Détail : l'ordonnance est prête.
 Consigne : venir à pied.
 
-Responsable`;
+Responsable
+Les ascenseurs se trouvent à gauche de l'entrée.
+Je reste à votre disposition pour toute précision.
+Nous vous souhaitons une excellente journée.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.`;
 
 const E3_2_CE_EMAIL_POOL_10 = buildExpressPool("e3-2-ce-email-10", [
   q({
@@ -3023,6 +3228,7 @@ const E3_2_CE_EMAIL_POOL_10 = buildExpressPool("e3-2-ce-email-10", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_11 = `De : Surveillance
+
 Objet : Pause
 
 Bonjour,
@@ -3031,6 +3237,12 @@ Hugo accompagne les personnes au club de tennis.
 Après la pause, un match de tennis reprend à 15 h.
 Pendant l'attente, action calme : venir en voiture.
 
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Bonne journée`;
 
 const E3_2_CE_EMAIL_POOL_11 = buildExpressPool("e3-2-ce-email-11", [
@@ -3108,6 +3320,7 @@ const E3_2_CE_EMAIL_POOL_11 = buildExpressPool("e3-2-ce-email-11", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_12 = `De : Club
+
 Objet : Inscription
 
 Bonjour,
@@ -3116,7 +3329,11 @@ Le club aide pour un cours de cuisine. Prochaine séance : à 18 h 30.
 Elle a lieu à l'école culinaire avec un groupe de huit.
 Pour participer, action simple : prendre le bus 3. Détail : il faut un tablier.
 
-Club`;
+Club
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E3_2_CE_EMAIL_POOL_12 = buildExpressPool("e3-2-ce-email-12", [
   q({
@@ -3193,6 +3410,7 @@ const E3_2_CE_EMAIL_POOL_12 = buildExpressPool("e3-2-ce-email-12", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_13 = `De : Nora
+
 Objet : Travail
 
 Bonjour,
@@ -3201,7 +3419,12 @@ Je rappelle le travail ou rendez-vous de rendre des livres.
 Il est prévu à 17 h 30, à la bibliothèque municipale.
 Avant la séance, consigne : venir à vélo. Détail : aucune amende aujourd'hui.
 
-Nora`;
+Nora
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E3_2_CE_EMAIL_POOL_13 = buildExpressPool("e3-2-ce-email-13", [
   q({
@@ -3278,6 +3501,7 @@ const E3_2_CE_EMAIL_POOL_13 = buildExpressPool("e3-2-ce-email-13", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_14 = `De : Direction
+
 Objet : Changement
 
 Bonjour,
@@ -3286,7 +3510,13 @@ le marché change d'organisation. ma grand-mère accompagne le groupe place du M
 La consigne pour tous : prendre le tram.
 prendre un sac réutilisable.
 
-Direction`;
+Direction
+Je reste à votre disposition pour toute précision.
+Le service est également disponible en ligne.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.`;
 
 const E3_2_CE_EMAIL_POOL_14 = buildExpressPool("e3-2-ce-email-14", [
   q({
@@ -3363,6 +3593,7 @@ const E3_2_CE_EMAIL_POOL_14 = buildExpressPool("e3-2-ce-email-14", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_15 = `De : Forum
+
 Objet : Groupe
 
 Bonjour,
@@ -3371,7 +3602,13 @@ Un groupe se forme pour une balade à vélo.
 La rencontre est à 10 h, au bord du lac. Emma organise les rôles.
 Si vous venez, pensez à venir à vélo.
 
-Forum`;
+Forum
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci de votre attention et de votre patience.`;
 
 const E3_2_CE_EMAIL_POOL_15 = buildExpressPool("e3-2-ce-email-15", [
   q({
@@ -3448,6 +3685,7 @@ const E3_2_CE_EMAIL_POOL_15 = buildExpressPool("e3-2-ce-email-15", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_16 = `De : Tutorats
+
 Objet : Révision
 
 Bonjour,
@@ -3456,7 +3694,12 @@ La préparation de appeler la banque commence à 14 h.
 Elle se passe depuis la maison. Mme Keller répond aux questions.
 Ensuite, action finale : aucun transport. Détail : préparer le numéro de compte.
 
-Tutorats`;
+Tutorats
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Le service est également disponible en ligne.`;
 
 const E3_2_CE_EMAIL_POOL_16 = buildExpressPool("e3-2-ce-email-16", [
   q({
@@ -3533,6 +3776,7 @@ const E3_2_CE_EMAIL_POOL_16 = buildExpressPool("e3-2-ce-email-16", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_17 = `De : Journal
+
 Objet : Article
 
 Bonjour,
@@ -3541,7 +3785,13 @@ Nous préparons une brève nouvelle sur un apéro de quartier.
 Le groupe travaille à 18 h, dans la cour de l'immeuble. les voisins vérifie les noms.
 Consigne : venir à pied.
 
-Journal`;
+Journal
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const E3_2_CE_EMAIL_POOL_17 = buildExpressPool("e3-2-ce-email-17", [
   q({
@@ -3618,6 +3868,7 @@ const E3_2_CE_EMAIL_POOL_17 = buildExpressPool("e3-2-ce-email-17", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_18 = `De : Sami
+
 Objet : Sortie
 
 Bonjour,
@@ -3626,7 +3877,13 @@ Pour faire la lessive, le rendez-vous est à la laverie automatique demain à 9 
 La tenue ou préparation doit être simple. Détail : prévoir des pièces de 2 francs.
 N'oubliez pas cette action : venir à pied.
 
-Sami`;
+Sami
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Joignez les documents demandés si nécessaire.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E3_2_CE_EMAIL_POOL_18 = buildExpressPool("e3-2-ce-email-18", [
   q({
@@ -3703,6 +3960,7 @@ const E3_2_CE_EMAIL_POOL_18 = buildExpressPool("e3-2-ce-email-18", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_19 = `De : Portail étudiant
+
 Objet : Nouveau devoir
 
 Bonjour,
@@ -3711,7 +3969,11 @@ Une tâche de la natation est disponible.
 Il faut la faire avant à 7 h. La ressource se trouve à la piscine municipale.
 David corrigera après. Consigne : prendre le bus 8.
 
-Portail`;
+Portail
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E3_2_CE_EMAIL_POOL_19 = buildExpressPool("e3-2-ce-email-19", [
   q({
@@ -3788,6 +4050,7 @@ const E3_2_CE_EMAIL_POOL_19 = buildExpressPool("e3-2-ce-email-19", [
   }),
 ]);
 const E3_2_CE_EMAIL_TEXT_20 = `De : Équipe pédagogique
+
 Objet : Journée spéciale
 
 Bonjour,
@@ -3796,7 +4059,13 @@ La journée autour de un brunch aura lieu dimanche à 10 h.
 Le matin, les groupes passent au café du Port avec mes amis.
 En fin de journée, consigne : venir en voiture. Détail : la réservation est pour quatre.
 
-Équipe pédagogique`;
+Équipe pédagogique
+Nous sommes ouverts du lundi au vendredi.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.`;
 
 const E3_2_CE_EMAIL_POOL_20 = buildExpressPool("e3-2-ce-email-20", [
   q({
@@ -4325,6 +4594,7 @@ Votre coach`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E3_3_CE_EMAIL_TEXT_1 = `De : Marie
+
 Objet : SwissTech SA
 
 Bonjour,
@@ -4332,6 +4602,12 @@ Bonjour,
 secrétaire. Le rendez-vous est à 8 h, au bureau d'accueil.
 Consigne : répondre aux e-mails.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Le service client répond aussi par téléphone.
 Cordialement,
 Marie`;
 
@@ -4410,6 +4686,7 @@ const E3_3_CE_EMAIL_POOL_1 = buildExpressPool("e3-3-ce-email-1", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_2 = `De : Secrétariat
+
 Objet : Information
 
 Bonjour,
@@ -4417,6 +4694,12 @@ Bonjour,
 Nous confirmons Hôpital cantonal à 5 h 45.
 Dr. Keller accueillera le groupe en salle de réunion. Action demandée : préparer les soins.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Le service est également disponible en ligne.
 Le secrétariat`;
 
 const E3_3_CE_EMAIL_POOL_2 = buildExpressPool("e3-3-ce-email-2", [
@@ -4494,6 +4777,7 @@ const E3_3_CE_EMAIL_POOL_2 = buildExpressPool("e3-3-ce-email-2", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_3 = `De : Portail
+
 Objet : À faire
 
 Bonjour,
@@ -4502,7 +4786,12 @@ Une nouvelle consigne est disponible pour Restaurant Le Sapin.
 Ouvrez-la avant à 10 h 30; elle concerne en cuisine.
 Chef Marco demande cette action : servir les clients. Détail : serveur.
 
-Message automatique`;
+Message automatique
+Une question ? Écrivez ou téléphonez.
+Nous traitons votre demande rapidement.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E3_3_CE_EMAIL_POOL_3 = buildExpressPool("e3-3-ce-email-3", [
   q({
@@ -4579,6 +4868,7 @@ const E3_3_CE_EMAIL_POOL_3 = buildExpressPool("e3-3-ce-email-3", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_4 = `De : Paul
+
 Objet : Rappel
 
 Bonjour à tous,
@@ -4587,6 +4877,12 @@ Je confirme Garage Central. Le moment est à 7 h, à l'atelier.
 Venez calmement. Action à prévoir : réparer une voiture.
 mécanicien.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Le service est également disponible en ligne.
 À bientôt`;
 
 const E3_3_CE_EMAIL_POOL_4 = buildExpressPool("e3-3-ce-email-4", [
@@ -4664,6 +4960,7 @@ const E3_3_CE_EMAIL_POOL_4 = buildExpressPool("e3-3-ce-email-4", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_5 = `De : Vie scolaire
+
 Objet : Organisation
 
 Bonjour,
@@ -4672,7 +4969,13 @@ Pour Banque Populaire, l'entrée se fait autrement.
 Sophie attend en salle formation mardi à 14 h.
 Une seule consigne : accueillir les clients. Détail : secrétaire.
 
-Vie scolaire`;
+Vie scolaire
+Nous vous souhaitons une excellente journée.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.`;
 
 const E3_3_CE_EMAIL_POOL_5 = buildExpressPool("e3-3-ce-email-5", [
   q({
@@ -4749,6 +5052,7 @@ const E3_3_CE_EMAIL_POOL_5 = buildExpressPool("e3-3-ce-email-5", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_6 = `De : Bibliothèque
+
 Objet : Document prêt
 
 Bonjour,
@@ -4757,6 +5061,12 @@ Le document ou dossier pour Pharmacie du Lac est prêt.
 Vous pouvez le demander vendredi à 18 h, dans la pharmacie. Julie connaît votre nom.
 Action à prévoir : compter les stocks.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Merci de votre attention et de votre patience.
 Merci`;
 
 const E3_3_CE_EMAIL_POOL_6 = buildExpressPool("e3-3-ce-email-6", [
@@ -4834,6 +5144,7 @@ const E3_3_CE_EMAIL_POOL_6 = buildExpressPool("e3-3-ce-email-6", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_7 = `De : Association
+
 Objet : Invitation
 
 Bonjour,
@@ -4842,7 +5153,13 @@ Les familles ou amis sont invités pour École primaire jeudi à 17 h.
 Les informations seront visibles en salle des profs. Mme Martin commencera l'accueil.
 Consigne : préparer les bulletins.
 
-Association`;
+Association
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const E3_3_CE_EMAIL_POOL_7 = buildExpressPool("e3-3-ce-email-7", [
   q({
@@ -4919,6 +5236,7 @@ const E3_3_CE_EMAIL_POOL_7 = buildExpressPool("e3-3-ce-email-7", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_8 = `De : Application
+
 Objet : Notification
 
 Bonjour,
@@ -4927,7 +5245,13 @@ Une modification concerne Agence Voyage.
 Le rendez-vous est au bureau mercredi à 11 h. Emma ajoute : Détail : vendeur.
 Action demandée : préparer un devis.
 
-Application`;
+Application
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Merci de confirmer la bonne réception.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.`;
 
 const E3_3_CE_EMAIL_POOL_8 = buildExpressPool("e3-3-ce-email-8", [
   q({
@@ -5004,6 +5328,7 @@ const E3_3_CE_EMAIL_POOL_8 = buildExpressPool("e3-3-ce-email-8", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_9 = `De : Service des examens
+
 Objet : Convocation
 
 Bonjour,
@@ -5012,7 +5337,13 @@ Votre rendez-vous pour Boulangerie Martin est confirmé lundi à 6 h.
 L'entrée se fait au laboratoire; Thomas vérifie la salle.
 Avant le début, consigne : faire le pain.
 
-Service des examens`;
+Service des examens
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci de votre attention et de votre patience.
+Merci encore, et à bientôt.`;
 
 const E3_3_CE_EMAIL_POOL_9 = buildExpressPool("e3-3-ce-email-9", [
   q({
@@ -5089,6 +5420,7 @@ const E3_3_CE_EMAIL_POOL_9 = buildExpressPool("e3-3-ce-email-9", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_10 = `De : Laboratoire
+
 Objet : Sécurité
 
 Bonjour,
@@ -5097,7 +5429,13 @@ Pour Cabinet d'avocats, attendez Maître Blanc.
 Le groupe arrive au tribunal mardi à 10 h. Détail : secrétaire.
 Consigne : classer les dossiers.
 
-Responsable`;
+Responsable
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Le personnel peut répondre en français simple.`;
 
 const E3_3_CE_EMAIL_POOL_10 = buildExpressPool("e3-3-ce-email-10", [
   q({
@@ -5174,6 +5512,7 @@ const E3_3_CE_EMAIL_POOL_10 = buildExpressPool("e3-3-ce-email-10", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_11 = `De : Surveillance
+
 Objet : Pause
 
 Bonjour,
@@ -5182,6 +5521,12 @@ Hugo accompagne les personnes à la réception.
 Après la pause, Hôtel Bellevue reprend à 15 h.
 Pendant l'attente, action calme : accueillir les clients.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+On peut aussi en parler demain matin.
 Bonne journée`;
 
 const E3_3_CE_EMAIL_POOL_11 = buildExpressPool("e3-3-ce-email-11", [
@@ -5259,6 +5604,7 @@ const E3_3_CE_EMAIL_POOL_11 = buildExpressPool("e3-3-ce-email-11", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_12 = `De : Club
+
 Objet : Inscription
 
 Bonjour,
@@ -5267,7 +5613,12 @@ Le club aide pour BTP Construction. Prochaine séance : à 6 h 15.
 Elle a lieu sur le chantier avec Karim.
 Pour participer, action simple : monter un mur. Détail : maçon.
 
-Club`;
+Club
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E3_3_CE_EMAIL_POOL_12 = buildExpressPool("e3-3-ce-email-12", [
   q({
@@ -5344,6 +5695,7 @@ const E3_3_CE_EMAIL_POOL_12 = buildExpressPool("e3-3-ce-email-12", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_13 = `De : Nina
+
 Objet : Travail
 
 Bonjour,
@@ -5352,7 +5704,13 @@ Je rappelle le travail ou rendez-vous de Librairie du Centre.
 Il est prévu vendredi à 18 h, au rayon jeunesse.
 Avant la séance, consigne : ranger les livres. Détail : libraire.
 
-Nina`;
+Nina
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Une confirmation sera envoyée ensuite.`;
 
 const E3_3_CE_EMAIL_POOL_13 = buildExpressPool("e3-3-ce-email-13", [
   q({
@@ -5429,6 +5787,7 @@ const E3_3_CE_EMAIL_POOL_13 = buildExpressPool("e3-3-ce-email-13", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_14 = `De : Direction
+
 Objet : Changement
 
 Bonjour,
@@ -5437,7 +5796,14 @@ Salon de coiffure change d'organisation. Clara accompagne le groupe près du fau
 La consigne pour tous : couper les cheveux.
 coiffeur.
 
-Direction`;
+Direction
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Respectez la file d'attente, s'il vous plaît.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.`;
 
 const E3_3_CE_EMAIL_POOL_14 = buildExpressPool("e3-3-ce-email-14", [
   q({
@@ -5514,6 +5880,7 @@ const E3_3_CE_EMAIL_POOL_14 = buildExpressPool("e3-3-ce-email-14", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_15 = `De : Forum
+
 Objet : Groupe
 
 Bonjour,
@@ -5522,7 +5889,13 @@ Un groupe se forme pour Usine Omega.
 La rencontre est jeudi à 8 h, dans l'usine. David organise les rôles.
 Si vous venez, pensez à contrôler la production.
 
-Forum`;
+Forum
+Joignez les documents demandés si nécessaire.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.`;
 
 const E3_3_CE_EMAIL_POOL_15 = buildExpressPool("e3-3-ce-email-15", [
   q({
@@ -5599,6 +5972,7 @@ const E3_3_CE_EMAIL_POOL_15 = buildExpressPool("e3-3-ce-email-15", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_16 = `De : Tutorats
+
 Objet : Révision
 
 Bonjour,
@@ -5607,7 +5981,12 @@ La préparation de Cabinet médical commence à 8 h.
 Elle se passe dans le cabinet. Infirmière Léa répond aux questions.
 Ensuite, action finale : consulter les patients. Détail : médecin.
 
-Tutorats`;
+Tutorats
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E3_3_CE_EMAIL_POOL_16 = buildExpressPool("e3-3-ce-email-16", [
   q({
@@ -5684,6 +6063,7 @@ const E3_3_CE_EMAIL_POOL_16 = buildExpressPool("e3-3-ce-email-16", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_17 = `De : Journal
+
 Objet : Article
 
 Bonjour,
@@ -5692,7 +6072,13 @@ Nous préparons une brève nouvelle sur Ferme des Alpes.
 Le groupe travaille samedi à 6 h, au marché de Sion. Victor vérifie les noms.
 Consigne : charger le camion.
 
-Journal`;
+Journal
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation sera envoyée ensuite.`;
 
 const E3_3_CE_EMAIL_POOL_17 = buildExpressPool("e3-3-ce-email-17", [
   q({
@@ -5769,6 +6155,7 @@ const E3_3_CE_EMAIL_POOL_17 = buildExpressPool("e3-3-ce-email-17", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_18 = `De : Antoine
+
 Objet : Sortie
 
 Bonjour,
@@ -5777,7 +6164,12 @@ Pour Journal Le Quotidien, le rendez-vous est en salle de rédaction à 11 h.
 La tenue ou préparation doit être simple. Détail : journaliste.
 N'oubliez pas cette action : écrire un article.
 
-Antoine`;
+Antoine
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E3_3_CE_EMAIL_POOL_18 = buildExpressPool("e3-3-ce-email-18", [
   q({
@@ -5854,6 +6246,7 @@ const E3_3_CE_EMAIL_POOL_18 = buildExpressPool("e3-3-ce-email-18", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_19 = `De : Portail étudiant
+
 Objet : Nouveau devoir
 
 Bonjour,
@@ -5862,7 +6255,11 @@ Une tâche de Service pompiers est disponible.
 Il faut la faire avant chaque matin. La ressource se trouve à la caserne.
 Marc corrigera après. Consigne : préparer les interventions.
 
-Portail`;
+Portail
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E3_3_CE_EMAIL_POOL_19 = buildExpressPool("e3-3-ce-email-19", [
   q({
@@ -5939,6 +6336,7 @@ const E3_3_CE_EMAIL_POOL_19 = buildExpressPool("e3-3-ce-email-19", [
   }),
 ]);
 const E3_3_CE_EMAIL_TEXT_20 = `De : Équipe pédagogique
+
 Objet : Journée spéciale
 
 Bonjour,
@@ -5947,7 +6345,12 @@ La journée autour de Crèche Les Petits aura lieu jeudi à 18 h.
 Le matin, les groupes passent dans le jardin avec Sara.
 En fin de journée, consigne : préparer les plantes. Détail : jardinier.
 
-Équipe pédagogique`;
+Équipe pédagogique
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Le service client répond aussi par téléphone.
+Merci encore, et à bientôt.`;
 
 const E3_3_CE_EMAIL_POOL_20 = buildExpressPool("e3-3-ce-email-20", [
   q({

@@ -16,7 +16,12 @@ const CE_TEXT_1 = `SMS amie
 
 Je regarde une robe d'été. Détail important : bleu.
 L'information affichée est 59 francs chez H&M.
-Avant de partir, il faut essayer la robe. Détail : taille M.`;
+Avant de partir, il faut essayer la robe. Détail : taille M.
+Je reste près de mon téléphone aujourd'hui.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const CE_POOL_1 = buildExpressPool("e4-1-1", [
   q({
@@ -96,7 +101,12 @@ const CE_TEXT_2 = `Petite annonce
 
 Salut ! Pour un manteau d'hiver, information : 80 francs.
 On se retrouve chez vente entre particuliers. noir est le détail à vérifier.
-Pense à contacter le vendeur; Détail : taille L.`;
+Pense à contacter le vendeur; Détail : taille L.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Une confirmation sera envoyée ensuite.`;
 
 const CE_POOL_2 = buildExpressPool("e4-1-2", [
   q({
@@ -177,7 +187,13 @@ const CE_TEXT_3 = `WhatsApp shopping
 À noter aujourd'hui : un jean slim.
 Lieu : C&A. Moment : 69 francs.
 Petit détail : gris. Action prévue : vérifier la cabine.
-taille 32.`;
+taille 32.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const CE_POOL_3 = buildExpressPool("e4-1-3", [
   q({
@@ -258,7 +274,13 @@ const CE_TEXT_4 = `Note shopping
 La cliente hésite encore pour un pull en laine.
 Chez Migros mode, elle vérifie rouge et demande conseil.
 Information : 45 francs. Elle doit prendre la carte client.
-taille S.`;
+taille S.
+Pensez à vérifier la date et le lieu.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+Les personnes à mobilité réduite sont prioritaires.`;
 
 const CE_POOL_4 = buildExpressPool("e4-1-4", [
   q({
@@ -339,7 +361,12 @@ const CE_TEXT_5 = `Message vendeur
 Offre courte sur une chemise blanche.
 Elle est disponible chez Zara. Information : 39 francs.
 Le vendeur rappelle blanc. Pour profiter de l'offre, il faut demander le cintre.
-taille M.`;
+taille M.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Le lieu est facile à trouver avec les indications.
+Merci d'avance pour ta réponse.`;
 
 const CE_POOL_5 = buildExpressPool("e4-1-5", [
   q({
@@ -420,7 +447,13 @@ const CE_TEXT_6 = `Forum mode
 Bonjour, votre demande pour des baskets de sport est prête.
 Passez chez Decathlon. Information : 89 francs.
 Au comptoir, annoncez blanc et noir et pensez à utiliser la carte fidélité.
-taille 42.`;
+taille 42.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+À bientôt, et merci de votre lecture.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const CE_POOL_6 = buildExpressPool("e4-1-6", [
   q({
@@ -501,7 +534,11 @@ const CE_TEXT_7 = `E-mail boutique
 Liste rapide avant de sortir : un pantalon de costume.
 Adresse : PKZ. Moment prévu : 99 francs.
 Détail à ne pas oublier : bleu marine.
-Sur place, il faut réserver l'ourlet. Détail : taille 48.`;
+Sur place, il faut réserver l'ourlet. Détail : taille 48.
+Nous restons disponibles pour vous aider.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.`;
 
 const CE_POOL_7 = buildExpressPool("e4-1-7", [
   q({
@@ -582,7 +619,11 @@ const CE_TEXT_8 = `Affiche vitrine
 Notification du magasin : une écharpe en soie est disponible.
 Le retrait se fait chez Boutique Soie+. Information : 25 francs.
 La note indique vert.
-Le client doit passer au comptoir. Détail : taille unique.`;
+Le client doit passer au comptoir. Détail : taille unique.
+Les informations importantes sont déjà notées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const CE_POOL_8 = buildExpressPool("e4-1-8", [
   q({
@@ -663,7 +704,13 @@ const CE_TEXT_9 = `Avis client
 Petit avis sur une jupe plissée.
 J'ai testé chez Promod; rose m'a plu.
 J'y retourne avec cette information : 35 francs. Action prévue : garder le ticket.
-taille 38.`;
+taille 38.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+À très bientôt, prends soin de toi.`;
 
 const CE_POOL_9 = buildExpressPool("e4-1-9", [
   q({
@@ -744,7 +791,11 @@ const CE_TEXT_10 = `Commande de groupe
 Commande de groupe : des shorts de sport.
 La personne responsable passe chez Intersport. Information notée : 29 francs.
 Elle confirme noir par téléphone.
-Il reste à payer avant jeudi. Détail : taille L.`;
+Il reste à payer avant jeudi. Détail : taille L.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const CE_POOL_10 = buildExpressPool("e4-1-10", [
   q({
@@ -825,7 +876,11 @@ const CE_TEXT_11 = `Alerte stock
 Alerte du jour : des chaussettes.
 Chez Coop mode, il reste peu de stock.
 Information : 12 francs. Cherchez blanc.
-Pour finaliser, il faut prendre deux packs. Détail : taille 39-42.`;
+Pour finaliser, il faut prendre deux packs. Détail : taille 39-42.
+N'oubliez pas de vérifier la date.
+Vous pouvez répondre directement à ce message.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const CE_POOL_11 = buildExpressPool("e4-1-11", [
   q({
@@ -907,6 +962,11 @@ Conversation courte :
 — Tu veux un costume complet ?
 — Oui, chez Charles Vögele.
 — Information : 250 francs; détail : gris foncé.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Merci encore pour votre compréhension.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
 — D'accord, action : prendre rendez-vous. Détail : taille 50.`;
 
 const CE_POOL_12 = buildExpressPool("e4-1-12", [
@@ -988,7 +1048,11 @@ const CE_TEXT_13 = `Ardoise soldes
 Sur l'ardoise, on lit un t-shirt coton.
 Le lieu est Ochsner; l'information indiquée est 15 francs.
 La ligne suivante parle de jaune.
-Le client doit choisir trois couleurs. Détail : taille L.`;
+Le client doit choisir trois couleurs. Détail : taille L.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_13 = buildExpressPool("e4-1-13", [
   q({
@@ -1070,7 +1134,11 @@ Rappel dans le téléphone : un blouson jeans.
 Départ ou passage avec cette information : 55 francs.
 Lieu : Gap.
 Vérifier bleu clair avant de payer.
-Ensuite, vérifier les manches. Détail : taille M.`;
+Ensuite, vérifier les manches. Détail : taille M.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_14 = buildExpressPool("e4-1-14", [
   q({
@@ -1151,7 +1219,12 @@ const CE_TEXT_15 = `Annonce locale
 Annonce locale : un legging yoga arrive ce matin.
 Chez Athleta, l'information affichée est 32 francs.
 violet est mis de côté.
-Action simple : entrer le code promo. Détail : taille S.`;
+Action simple : entrer le code promo. Détail : taille S.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+Gardez ce texte pour vous en souvenir.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.`;
 
 const CE_POOL_15 = buildExpressPool("e4-1-15", [
   q({
@@ -1231,6 +1304,10 @@ const CE_TEXT_16 = `Message au vendeur
 
 Petit message au vendeur : je viens pour des chaussures de ville.
 Je serai chez friperie du Lac. Information : 60 francs.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Le service client répond aussi par téléphone.
 Merci de préparer noir.
 Sur place, je vais essayer la paire. Détail : taille 40.`;
 
@@ -1313,7 +1390,12 @@ const CE_TEXT_17 = `Offre fidélité
 Carte de fidélité : offre sur un manteau imperméable.
 Elle fonctionne chez Globus; information : 110 francs.
 Le détail lu en magasin est kaki.
-Pour l'utiliser, il faut montrer la carte bonus. Détail : taille XL.`;
+Pour l'utiliser, il faut montrer la carte bonus. Détail : taille XL.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Le trajet est simple, ne t'inquiète pas.`;
 
 const CE_POOL_17 = buildExpressPool("e4-1-17", [
   q({
@@ -1394,7 +1476,11 @@ const CE_TEXT_18 = `Réservation fête
 Pour la fête, il faut une cravate en soie.
 La réservation est chez boutique homme. Information : 35 francs.
 La vendeuse confirme bordeaux.
-Dernière étape : demander un coffret. Détail : taille unique.`;
+Dernière étape : demander un coffret. Détail : taille unique.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les horaires habituels restent les mêmes.`;
 
 const CE_POOL_18 = buildExpressPool("e4-1-18", [
   q({
@@ -1475,7 +1561,11 @@ const CE_TEXT_19 = `Confirmation retrait
 Message de confirmation : un pyjama coton.
 Le retrait se fait chez Manor. Information : 28 francs.
 La commande porte la note bleu marine.
-Consigne : présenter le numéro. Détail : taille M.`;
+Consigne : présenter le numéro. Détail : taille M.
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Nous vous souhaitons une excellente journée.`;
 
 const CE_POOL_19 = buildExpressPool("e4-1-19", [
   q({
@@ -1556,7 +1646,11 @@ const CE_TEXT_20 = `Idée week-end
 Dernière idée du week-end : une veste légère.
 On passe chez Outlet Aubonne. Information : 49 francs.
 On regarde d'abord beige.
-Si tout va bien, on peut comparer deux modèles. Détail : taille L.`;
+Si tout va bien, on peut comparer deux modèles. Détail : taille L.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const CE_POOL_20 = buildExpressPool("e4-1-20", [
   q({
@@ -1935,191 +2029,191 @@ export const E4_1_PO: ExpressPoDialogue[] = [
 {
   id: "e4-1-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de les vêtements." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour vêtements." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-1-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur les vêtements." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour les vêtements, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e4-1-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de les vêtements ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour vêtements." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e4-1-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de les vêtements." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour vêtements." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-1-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur les vêtements." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour les vêtements, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e4-1-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de les vêtements ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour vêtements." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e4-1-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de les vêtements." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour vêtements." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-1-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de les vêtements." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour vêtements." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-1-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de les vêtements ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour vêtements." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e4-1-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : les vêtements.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous demandez des conseils pour des vêtements.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de les vêtements." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur les vêtements." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour les vêtements, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 }
 ];

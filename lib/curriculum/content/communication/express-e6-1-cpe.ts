@@ -17,7 +17,14 @@ const E6_1_CE_TEXT_1 = `Panneau — Rue de la Gare
 
 Gare : tout droit 300 m, puis à gauche.
 Musée : à droite après le pont.
-Hôtel Central : deuxième rue à droite.`;
+Hôtel Central : deuxième rue à droite.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E6_1_CE_POOL_1 = buildExpressPool("e6-1-ce-1", [
   q({
@@ -109,7 +116,14 @@ const E6_1_CE_TEXT_2 = `Panneau — Place du Marché
 
 Mairie : tout droit 200 m.
 Église : à gauche place Saint-Pierre.
-Port : au fond, après le parking.`;
+Port : au fond, après le parking.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Le service client répond aussi par téléphone.`;
 
 const E6_1_CE_POOL_2 = buildExpressPool("e6-1-ce-2", [
   q({
@@ -201,7 +215,14 @@ const E6_1_CE_TEXT_3 = `Panneau — Avenue du Lac
 
 Plage : descendre vers le lac.
 Office du tourisme : face à la gare.
-Musée : rue du Temple, à droite.`;
+Musée : rue du Temple, à droite.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+À bientôt, et merci de votre lecture.`;
 
 const E6_1_CE_POOL_3 = buildExpressPool("e6-1-ce-3", [
   q({
@@ -293,7 +314,13 @@ const E6_1_CE_TEXT_4 = `Panneau — Quartier Gare
 
 Guichet CFF : hall principal.
 Métro M2 : niveau -1, flèches bleues.
-Taxis : sortie nord.`;
+Taxis : sortie nord.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E6_1_CE_POOL_4 = buildExpressPool("e6-1-ce-4", [
   q({
@@ -385,7 +412,14 @@ const E6_1_CE_TEXT_5 = `Panneau — Vieille Ville
 
 Cathédrale : monter la rue Pierre.
 Château : au sommet de la colline.
-Place de la Palud : redescendre rue du Grand-Pont.`;
+Place de la Palud : redescendre rue du Grand-Pont.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Le lieu est facile à trouver avec les indications.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E6_1_CE_POOL_5 = buildExpressPool("e6-1-ce-5", [
   q({
@@ -477,7 +511,13 @@ const E6_1_CE_TEXT_6 = `Panneau — Bord du lac
 
 Jetée : promenade vers l'ouest.
 Restaurant du Port : après les bateaux.
-Parc : derrière l'hôtel Beau-Rivage.`;
+Parc : derrière l'hôtel Beau-Rivage.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.`;
 
 const E6_1_CE_POOL_6 = buildExpressPool("e6-1-ce-6", [
   q({
@@ -569,7 +609,14 @@ const E6_1_CE_TEXT_7 = `Panneau — Campus UNIL
 
 Bibliothèque : bâtiment Anthropole.
 Mensa : face au parking.
-Arrêt bus : devant le bâtiment Géopolis.`;
+Arrêt bus : devant le bâtiment Géopolis.
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+On pourra aussi inviter une autre personne.
+C'est important pour moi, merci beaucoup.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.`;
 
 const E6_1_CE_POOL_7 = buildExpressPool("e6-1-ce-7", [
   q({
@@ -661,7 +708,14 @@ const E6_1_CE_TEXT_8 = `Panneau — Zone industrielle
 
 Usine : rue de l'Industrie 12.
 Cafétéria : entrée principale.
-Parking visiteurs : à droite du portail.`;
+Parking visiteurs : à droite du portail.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Les personnes à mobilité réduite sont prioritaires.`;
 
 const E6_1_CE_POOL_8 = buildExpressPool("e6-1-ce-8", [
   q({
@@ -753,7 +807,14 @@ const E6_1_CE_TEXT_9 = `Panneau — Marché couvert
 
 Entrée marché : place de la Riponne.
 Fromager : allée centrale.
-Sortie est : vers la cathédrale.`;
+Sortie est : vers la cathédrale.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.
+Photographies autorisées sans flash.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Une confirmation sera envoyée ensuite.`;
 
 const E6_1_CE_POOL_9 = buildExpressPool("e6-1-ce-9", [
   q({
@@ -845,7 +906,14 @@ const E6_1_CE_TEXT_10 = `Panneau — Parc de l'Indépendance
 
 Fontaine : centre du parc.
 Aire de jeux : côté nord.
-Sortie sud : vers le lac.`;
+Sortie sud : vers le lac.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Bonne journée à toutes et à tous.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E6_1_CE_POOL_10 = buildExpressPool("e6-1-ce-10", [
   q({
@@ -938,7 +1006,13 @@ const E6_1_CE_TEXT_11 = `Plan — Centre de Morges
 Place du Marché : centre A3.
 Église Saint-Jean : B2 nord.
 Port : D4 sud.
-Gare : A1 ouest.`;
+Gare : A1 ouest.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Les informations importantes sont déjà indiquées plus haut.`;
 
 const E6_1_CE_POOL_11 = buildExpressPool("e6-1-ce-11", [
   q({
@@ -1031,7 +1105,13 @@ const E6_1_CE_TEXT_12 = `Plan — Centre de Lausanne
 Cathédrale : C4 centre.
 Gare : A2 ouest.
 Flon : B3 est.
-Ouchy : D1 sud.`;
+Ouchy : D1 sud.
+Les informations importantes sont déjà notées plus haut.
+Nous traitons votre demande rapidement.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E6_1_CE_POOL_12 = buildExpressPool("e6-1-ce-12", [
   q({
@@ -1124,7 +1204,13 @@ const E6_1_CE_TEXT_13 = `Plan — Centre de Nyon
 Château : B1 nord.
 Musée : C2 centre.
 Lac : D3 sud.
-Gare : A1 ouest.`;
+Gare : A1 ouest.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Je reste près de mon téléphone aujourd'hui.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const E6_1_CE_POOL_13 = buildExpressPool("e6-1-ce-13", [
   q({
@@ -1217,7 +1303,16 @@ const E6_1_CE_TEXT_14 = `Plan — Centre de Vevey
 Grande Place : centre.
 Gare : nord.
 Port : sud.
-Musée : est.`;
+Musée : est.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+En cas de question, vous pouvez écrire ou téléphoner.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const E6_1_CE_POOL_14 = buildExpressPool("e6-1-ce-14", [
   q({
@@ -1310,7 +1405,13 @@ const E6_1_CE_TEXT_15 = `Plan — Centre de Yverdon
 Centre thermal : A2.
 Lac : sud.
 Gare : ouest.
-Château : nord.`;
+Château : nord.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E6_1_CE_POOL_15 = buildExpressPool("e6-1-ce-15", [
   q({
@@ -1403,7 +1504,13 @@ const E6_1_CE_TEXT_16 = `Affiche — Office du tourisme de Lausanne
 Ouvert lun–ven 9 h–18 h, sam 10 h–17 h.
 Adresse : place de la Palud 2.
 Plans gratuits, conseils en français et anglais.
-Visites guidées : départ 14 h, place de la Palud.`;
+Visites guidées : départ 14 h, place de la Palud.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Nous traitons votre demande rapidement.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.`;
 
 const E6_1_CE_POOL_16 = buildExpressPool("e6-1-ce-16", [
   q({
@@ -1496,7 +1603,13 @@ const E6_1_CE_TEXT_17 = `Affiche — Office du tourisme de Genève
 Ouvert lun–ven 8 h–19 h, sam 9 h–18 h.
 Adresse : rue du Mont-Blanc 14.
 Plans gratuits, conseils en français et allemand.
-Visites guidées : départ 11 h, gare Cornavin.`;
+Visites guidées : départ 11 h, gare Cornavin.
+Bonne journée à toutes et à tous.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E6_1_CE_POOL_17 = buildExpressPool("e6-1-ce-17", [
   q({
@@ -1589,7 +1702,13 @@ const E6_1_CE_TEXT_18 = `Affiche — Office du tourisme de Montreux
 Ouvert lun–ven 9 h–17 h, sam 10 h–16 h.
 Adresse : avenue des Alpes 1.
 Plans gratuits, conseils en français et anglais.
-Visites guidées : départ 15 h, gare.`;
+Visites guidées : départ 15 h, gare.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+Vous pouvez répondre directement à ce message.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.`;
 
 const E6_1_CE_POOL_18 = buildExpressPool("e6-1-ce-18", [
   q({
@@ -1682,7 +1801,13 @@ const E6_1_CE_TEXT_19 = `Affiche — Office du tourisme de Neuchâtel
 Ouvert lun–ven 9 h–12 h et 14 h–18 h, sam 10 h–14 h.
 Adresse : rue du Seyon 1.
 Plans gratuits, conseils en français.
-Visites guidées : départ 10 h 30, place Pury.`;
+Visites guidées : départ 10 h 30, place Pury.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+À bientôt, et merci de votre lecture.
+Merci de lire attentivement toutes les informations.`;
 
 const E6_1_CE_POOL_19 = buildExpressPool("e6-1-ce-19", [
   q({
@@ -1775,7 +1900,13 @@ const E6_1_CE_TEXT_20 = `Affiche — Office du tourisme de Sion
 Ouvert lun–ven 8 h 30–17 h, sam 9 h–12 h.
 Adresse : place de la Planta 2.
 Plans gratuits, conseils en français et italien.
-Visites guidées : départ 16 h, château.`;
+Visites guidées : départ 16 h, château.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Joignez les documents demandés si nécessaire.`;
 
 const E6_1_CE_POOL_20 = buildExpressPool("e6-1-ce-20", [
   q({

@@ -17,7 +17,14 @@ const E7_2_CE_TEXT_1 = `Affiche — Salle Fit+
 
 Ouvert 6 h–22 h lun–sam.
 Cours : yoga mardi 18 h, aquagym jeudi 19 h.
-Essai gratuit : 1 jour.`;
+Essai gratuit : 1 jour.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E7_2_CE_POOL_1 = buildExpressPool("e7-2-ce-1", [
   q({
@@ -109,7 +116,14 @@ const E7_2_CE_TEXT_2 = `Affiche — Gym Center
 
 Ouvert 5 h 30–23 h.
 Cours : spinning lundi 19 h, pilates mercredi 17 h.
-Essai gratuit : 1 séance.`;
+Essai gratuit : 1 séance.
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Merci encore pour votre compréhension.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.`;
 
 const E7_2_CE_POOL_2 = buildExpressPool("e7-2-ce-2", [
   q({
@@ -201,7 +215,14 @@ const E7_2_CE_TEXT_3 = `Affiche — Sport Club Morges
 
 Ouvert 7 h–21 h.
 Cours : musculation tous les jours, crossfit vendredi 18 h.
-Essai gratuit : 1 semaine.`;
+Essai gratuit : 1 semaine.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+J'espère que tout se passe bien de ton côté.`;
 
 const E7_2_CE_POOL_3 = buildExpressPool("e7-2-ce-3", [
   q({
@@ -293,7 +314,14 @@ const E7_2_CE_TEXT_4 = `Affiche — Piscine Lausanne
 
 Ouvert 12 h–20 h mer–dim.
 Cours : natation enfants mardi 16 h, aquagym samedi 10 h.
-Essai gratuit : 1 entrée.`;
+Essai gratuit : 1 entrée.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+En cas de question, vous pouvez écrire ou téléphoner.`;
 
 const E7_2_CE_POOL_4 = buildExpressPool("e7-2-ce-4", [
   q({
@@ -385,7 +413,14 @@ const E7_2_CE_TEXT_5 = `Affiche — Tennis Club
 
 Ouvert 8 h–22 h.
 Cours : cours débutant lundi 17 h, tournoi dimanche.
-Essai gratuit : 1 cours.`;
+Essai gratuit : 1 cours.
+Sans confirmation, la place n'est pas garantie.
+Le service est également disponible en ligne.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.`;
 
 const E7_2_CE_POOL_5 = buildExpressPool("e7-2-ce-5", [
   q({
@@ -478,7 +513,13 @@ const E7_2_CE_TEXT_6 = `Flyer — Football club
 Cours foot lundi et mercredi 17 h.
 Inscription au bureau.
 Tenue de sport obligatoire.
-Premier cours gratuit.`;
+Premier cours gratuit.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Le lieu est facile à trouver avec les indications.`;
 
 const E7_2_CE_POOL_6 = buildExpressPool("e7-2-ce-6", [
   q({
@@ -570,7 +611,14 @@ const E7_2_CE_TEXT_7 = `Flyer — Club running
 
 Sortie running samedi 8 h parc.
 Tous niveaux.
-Inscription gratuite en ligne.`;
+Inscription gratuite en ligne.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Le lieu est facile à trouver avec les indications.`;
 
 const E7_2_CE_POOL_7 = buildExpressPool("e7-2-ce-7", [
   q({
@@ -662,7 +710,13 @@ const E7_2_CE_TEXT_8 = `Flyer — Escalade indoor
 
 Mur 15 m. Ouvert 10 h–22 h.
 Chaussons location 5 fr.
-Cours initiation samedi.`;
+Cours initiation samedi.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Merci de lire ce message jusqu'à la fin.`;
 
 const E7_2_CE_POOL_8 = buildExpressPool("e7-2-ce-8", [
   q({
@@ -754,7 +808,15 @@ const E7_2_CE_TEXT_9 = `Flyer — Danse studio
 
 Salsa mardi 19 h, bachata jeudi 20 h.
 Partenaire non obligatoire.
-Essai 10 fr.`;
+Essai 10 fr.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Les ascenseurs se trouvent à gauche de l'entrée.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E7_2_CE_POOL_9 = buildExpressPool("e7-2-ce-9", [
   q({
@@ -846,7 +908,14 @@ const E7_2_CE_TEXT_10 = `Flyer — Badminton hall
 
 Terrains réservation en ligne.
 Raquettes location 3 fr.
-Tournoi mensuel.`;
+Tournoi mensuel.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+Les toilettes se trouvent au fond du couloir.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const E7_2_CE_POOL_10 = buildExpressPool("e7-2-ce-10", [
   q({
@@ -938,7 +1007,14 @@ const E7_2_CE_TEXT_11 = `Flyer — Vélo club
 
 Balade dimanche 9 h gare.
 Casque obligatoire.
-Parcours 30 km.`;
+Parcours 30 km.
+Une version en plusieurs langues est disponible à l'accueil.
+Dis-moi si tu as besoin d'autre chose.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.
+Photographies autorisées sans flash.
+Un point d'eau potable est gratuit près de l'entrée.`;
 
 const E7_2_CE_POOL_11 = buildExpressPool("e7-2-ce-11", [
   q({
@@ -1030,7 +1106,14 @@ const E7_2_CE_TEXT_12 = `Flyer — Natation masters
 
 Entraînement lun/mer/ven 7 h.
 Piscine 50 m.
-Licence annuelle 80 fr.`;
+Licence annuelle 80 fr.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.`;
 
 const E7_2_CE_POOL_12 = buildExpressPool("e7-2-ce-12", [
   q({
@@ -1122,7 +1205,14 @@ const E7_2_CE_TEXT_13 = `Flyer — Yoga parc
 
 Cours gratuit été 18 h parc.
 Tapis fourni.
-Tous niveaux bienvenus.`;
+Tous niveaux bienvenus.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+Les toilettes se trouvent au fond du couloir.
+Le service client répond aussi par téléphone.`;
 
 const E7_2_CE_POOL_13 = buildExpressPool("e7-2-ce-13", [
   q({
@@ -1214,7 +1304,13 @@ const E7_2_CE_TEXT_14 = `Flyer — Musculation
 
 Salle 24 h avec badge.
 Coach lundi 18 h gratuit.
-Douche et casiers.`;
+Douche et casiers.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E7_2_CE_POOL_14 = buildExpressPool("e7-2-ce-14", [
   q({
@@ -1306,7 +1402,14 @@ const E7_2_CE_TEXT_15 = `Flyer — Basket club
 
 Match amical samedi 15 h.
 Gymnase municipal.
-Inscription 20 fr.`;
+Inscription 20 fr.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Conservez le numéro de contact indiqué.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.`;
 
 const E7_2_CE_POOL_15 = buildExpressPool("e7-2-ce-15", [
   q({
@@ -1398,7 +1501,14 @@ const E7_2_CE_TEXT_16 = `Flyer — Ski club
 
 Sortie ski 6 h bus parking.
 Forfait non inclus.
-Réunion info jeudi 19 h.`;
+Réunion info jeudi 19 h.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Gardez ce texte pour vous en souvenir.`;
 
 const E7_2_CE_POOL_16 = buildExpressPool("e7-2-ce-16", [
   q({
@@ -1490,7 +1600,13 @@ const E7_2_CE_TEXT_17 = `Flyer — Volley plage
 
 Terrain sable juin–août.
 Cours mer 17 h.
-Équipe 6 joueurs.`;
+Équipe 6 joueurs.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.`;
 
 const E7_2_CE_POOL_17 = buildExpressPool("e7-2-ce-17", [
   q({
@@ -1582,7 +1698,14 @@ const E7_2_CE_TEXT_18 = `Flyer — Golf initiation
 
 Cours samedi 10 h practice.
 Clubs prêtés.
-10 balles incluses.`;
+10 balles incluses.
+Nous vous remercions de votre patience.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.`;
 
 const E7_2_CE_POOL_18 = buildExpressPool("e7-2-ce-18", [
   q({
@@ -1674,7 +1797,13 @@ const E7_2_CE_TEXT_19 = `Flyer — Boxe fitness
 
 Cours cardio boxe mardi 18 h 30.
 Gants fournis.
-Réservation obligatoire.`;
+Réservation obligatoire.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.`;
 
 const E7_2_CE_POOL_19 = buildExpressPool("e7-2-ce-19", [
   q({
@@ -1766,7 +1895,14 @@ const E7_2_CE_TEXT_20 = `Flyer — Patinage
 
 Patinoire oct–mars 14 h–21 h.
 Location patins 8 fr.
-Cours enfants samedi.`;
+Cours enfants samedi.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Passe le bonjour à tout le monde.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.`;
 
 const E7_2_CE_POOL_20 = buildExpressPool("e7-2-ce-20", [
   q({

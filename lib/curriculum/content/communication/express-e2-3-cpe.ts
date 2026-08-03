@@ -18,7 +18,13 @@ Règlement de l'immeuble — Article 3
 Le silence est obligatoire après 22 h.
 Sanction : avertissement écrit.
 Horaires concernés : 22 h – 7 h.
-Pour toute question : le gardien.`;
+Pour toute question : le gardien.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Un plan simple est disponible à l'accueil.`;
 
 const CE_POOL_1 = buildExpressPool("e2-3-1", [
   q({
@@ -112,7 +118,13 @@ Règlement de l'immeuble — Article 7
 Les animaux doivent être tenus en laisse.
 Sanction : amende de 50 francs.
 Horaires concernés : tous les jours.
-Pour toute question : syndic@copro.ch.`;
+Pour toute question : syndic@copro.ch.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Nous restons disponibles pour vous aider.`;
 
 const CE_POOL_2 = buildExpressPool("e2-3-2", [
   q({
@@ -206,7 +218,13 @@ Règlement de l'immeuble — Article 12
 Interdiction de fumer dans les parties communes.
 Sanction : amende de 100 francs.
 Horaires concernés : 24 h/24.
-Pour toute question : la régie.`;
+Pour toute question : la régie.
+C'est important pour moi, merci beaucoup.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.`;
 
 const CE_POOL_3 = buildExpressPool("e2-3-3", [
   q({
@@ -300,7 +318,12 @@ Règlement de l'immeuble — Article 5
 Le linge ne doit pas sécher sur les balcons.
 Sanction : avertissement.
 Horaires concernés : 8 h – 20 h.
-Pour toute question : le concierge.`;
+Pour toute question : le concierge.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const CE_POOL_4 = buildExpressPool("e2-3-4", [
   q({
@@ -394,7 +417,12 @@ Règlement de l'immeuble — Article 9
 Maximum 4 personnes dans l'ascenseur.
 Sanction : interdiction d'usage.
 Horaires concernés : tous les jours.
-Pour toute question : 079 111 22 33.`;
+Pour toute question : 079 111 22 33.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const CE_POOL_5 = buildExpressPool("e2-3-5", [
   q({
@@ -488,7 +516,13 @@ Règlement de l'immeuble — Article 15
 Douche obligatoire avant la baignade.
 Sanction : exclusion temporaire.
 Horaires concernés : 7 h – 21 h.
-Pour toute question : piscine@immeuble.ch.`;
+Pour toute question : piscine@immeuble.ch.
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+On pourra aussi inviter une autre personne.
+N'hésite pas à me répondre quand tu peux.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.`;
 
 const CE_POOL_6 = buildExpressPool("e2-3-6", [
   q({
@@ -582,7 +616,13 @@ Règlement de l'immeuble — Article 8
 Une place par appartement seulement.
 Sanction : amende de 80 francs.
 Horaires concernés : 24 h/24.
-Pour toute question : le gardien.`;
+Pour toute question : le gardien.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+C'est important pour moi, merci beaucoup.`;
 
 const CE_POOL_7 = buildExpressPool("e2-3-7", [
   q({
@@ -676,7 +716,13 @@ Règlement de l'immeuble — Article 11
 Interdiction de stocker des produits inflammables.
 Sanction : retrait immédiat.
 Horaires concernés : tous les jours.
-Pour toute question : syndic@copro.ch.`;
+Pour toute question : syndic@copro.ch.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Joignez les documents demandés si nécessaire.
+Merci de votre attention et de votre patience.`;
 
 const CE_POOL_8 = buildExpressPool("e2-3-8", [
   q({
@@ -770,7 +816,13 @@ Règlement de l'immeuble — Article 2
 Pas de musique forte après 20 h.
 Sanction : amende de 200 francs.
 Horaires concernés : 20 h – 8 h.
-Pour toute question : voisins@immeuble.ch.`;
+Pour toute question : voisins@immeuble.ch.
+Je joins les détails importants juste après.
+Si le plan change, je te préviens tout de suite.
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Pensez à arriver un peu en avance.
+Bonne journée et à tout de suite !`;
 
 const CE_POOL_9 = buildExpressPool("e2-3-9", [
   q({
@@ -864,7 +916,13 @@ Règlement de l'immeuble — Article 18
 Le jardin ferme à 21 h.
 Sanction : exclusion.
 Horaires concernés : 7 h – 21 h.
-Pour toute question : le jardinier.`;
+Pour toute question : le jardinier.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Pensez à arriver un peu en avance.
+Merci de votre attention et de votre patience.`;
 
 const CE_POOL_10 = buildExpressPool("e2-3-10", [
   q({
@@ -958,7 +1016,13 @@ Règlement de l'immeuble — Article 6
 Les poubelles doivent être sorties le lundi matin.
 Sanction : frais de nettoyage.
 Horaires concernés : 6 h – 8 h.
-Pour toute question : concierge@mail.ch.`;
+Pour toute question : concierge@mail.ch.
+Les animaux ne sont pas autorisés, sauf chiens guides.
+Photographies autorisées sans flash.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Nous restons disponibles pour vous aider.`;
 
 const CE_POOL_11 = buildExpressPool("e2-3-11", [
   q({
@@ -1052,7 +1116,13 @@ Règlement de l'immeuble — Article 14
 Les vélos ne doivent pas bloquer l'entrée.
 Sanction : mise en fourrière.
 Horaires concernés : 24 h/24.
-Pour toute question : le gardien.`;
+Pour toute question : le gardien.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Bonne journée à toutes et à tous.`;
 
 const CE_POOL_12 = buildExpressPool("e2-3-12", [
   q({
@@ -1146,7 +1216,13 @@ Règlement de l'immeuble — Article 10
 Les visiteurs doivent annoncer leur arrivée.
 Sanction : refus d'accès.
 Horaires concernés : 8 h – 22 h.
-Pour toute question : interphone.`;
+Pour toute question : interphone.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+Les informations importantes sont déjà indiquées plus haut.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.`;
 
 const CE_POOL_13 = buildExpressPool("e2-3-13", [
   q({
@@ -1240,7 +1316,13 @@ Règlement de l'immeuble — Article 16
 Une machine à la fois par foyer.
 Sanction : interdiction 1 semaine.
 Horaires concernés : 7 h – 22 h.
-Pour toute question : laverie@immeuble.ch.`;
+Pour toute question : laverie@immeuble.ch.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Les horaires habituels restent les mêmes.`;
 
 const CE_POOL_14 = buildExpressPool("e2-3-14", [
   q({
@@ -1334,7 +1416,13 @@ Règlement de l'immeuble — Article 4
 Déménagement uniquement en semaine.
 Sanction : amende de 150 francs.
 Horaires concernés : lundi – vendredi.
-Pour toute question : régie@immo.ch.`;
+Pour toute question : régie@immo.ch.
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Passe le bonjour à tout le monde.`;
 
 const CE_POOL_15 = buildExpressPool("e2-3-15", [
   q({
@@ -1428,7 +1516,13 @@ Règlement de l'immeuble — Article 13
 Maximum un animal par appartement.
 Sanction : avertissement.
 Horaires concernés : tous les jours.
-Pour toute question : syndic@copro.ch.`;
+Pour toute question : syndic@copro.ch.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de confirmer la bonne réception.
+Merci de votre attention et de votre patience.`;
 
 const CE_POOL_16 = buildExpressPool("e2-3-16", [
   q({
@@ -1522,7 +1616,13 @@ Règlement de l'immeuble — Article 19
 Barbecue interdit sur les balcons.
 Sanction : amende de 100 francs.
 Horaires concernés : été seulement.
-Pour toute question : le syndic.`;
+Pour toute question : le syndic.
+Les animaux ne sont pas autorisés, sauf chiens guides.
+Photographies autorisées sans flash.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Vous pouvez répondre directement à ce message.`;
 
 const CE_POOL_17 = buildExpressPool("e2-3-17", [
   q({
@@ -1616,7 +1716,13 @@ Règlement de l'immeuble — Article 17
 Ne pas laisser entrer des inconnus.
 Sanction : responsabilité locataire.
 Horaires concernés : 24 h/24.
-Pour toute question : la sécurité.`;
+Pour toute question : la sécurité.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+C'est important pour moi, merci beaucoup.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.`;
 
 const CE_POOL_18 = buildExpressPool("e2-3-18", [
   q({
@@ -1710,7 +1816,13 @@ Règlement de l'immeuble — Article 1
 Respecter la propreté des lieux.
 Sanction : frais de nettoyage.
 Horaires concernés : tous les jours.
-Pour toute question : le concierge.`;
+Pour toute question : le concierge.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+En cas de question, vous pouvez écrire ou téléphoner.`;
 
 const CE_POOL_19 = buildExpressPool("e2-3-19", [
   q({
@@ -1804,7 +1916,13 @@ Règlement de l'immeuble — Article 20
 Ne pas couvrir les radiateurs.
 Sanction : avertissement.
 Horaires concernés : hiver.
-Pour toute question : technicien@chauffage.ch.`;
+Pour toute question : technicien@chauffage.ch.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Pensez à arriver un peu en avance.`;
 
 const CE_POOL_20 = buildExpressPool("e2-3-20", [
   q({
@@ -2196,191 +2314,191 @@ export const E2_3_PO: ExpressPoDialogue[] = [
 {
   id: "e2-3-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous demandez des précisions sur le règlement.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le règlement." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le règlement, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-3-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous demandez des précisions sur le règlement.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le règlement." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le règlement, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-3-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous demandez des précisions sur le règlement.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de le règlement." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour règlement." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e2-3-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous demandez des précisions sur le règlement.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le règlement." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le règlement, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-3-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous demandez des précisions sur le règlement.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le règlement." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le règlement, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-3-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous demandez des précisions sur le règlement.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de le règlement." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour règlement." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e2-3-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous demandez des précisions sur le règlement.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le règlement." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le règlement, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-3-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous demandez des précisions sur le règlement.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le règlement." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le règlement, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-3-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous demandez des précisions sur le règlement.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de le règlement." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour règlement." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e2-3-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : le règlement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous demandez des précisions sur le règlement.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le règlement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le règlement." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le règlement, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 }
 ];

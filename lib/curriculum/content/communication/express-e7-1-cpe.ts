@@ -17,7 +17,12 @@ const E7_1_CE_TEXT_1 = `Carte bienvenue — Hôtel du Lac
 
 Bienvenue ! WiFi : Lac2024. Mot de passe : accueil123.
 Petit-déjeuner 7 h–10 h salle Riviera.
-Réception 24 h/24.`;
+Réception 24 h/24.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+Le personnel peut répondre en français simple.
+Merci de respecter le calme des autres personnes.`;
 
 const E7_1_CE_POOL_1 = buildExpressPool("e7-1-ce-1", [
   q({
@@ -109,7 +114,12 @@ const E7_1_CE_TEXT_2 = `Carte bienvenue — Hôtel Bellevue
 
 Bienvenue ! WiFi : Bellevue_Guest. Mot de passe : lac2025.
 Petit-déjeuner 6 h 30–10 h 30 salle Alpes.
-Réception 24 h/24.`;
+Réception 24 h/24.
+Vous pouvez répondre directement à ce message.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E7_1_CE_POOL_2 = buildExpressPool("e7-1-ce-2", [
   q({
@@ -201,7 +211,12 @@ const E7_1_CE_TEXT_3 = `Carte bienvenue — Hôtel Central
 
 Bienvenue ! WiFi : Central_WiFi. Mot de passe : welcome99.
 Petit-déjeuner 7 h–11 h salle Jardin.
-Réception 6 h–23 h.`;
+Réception 6 h–23 h.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+À très bientôt, prends soin de toi.`;
 
 const E7_1_CE_POOL_3 = buildExpressPool("e7-1-ce-3", [
   q({
@@ -293,7 +308,12 @@ const E7_1_CE_TEXT_4 = `Carte bienvenue — Hôtel Mont-Blanc
 
 Bienvenue ! WiFi : MontBlanc. Mot de passe : hotel2024.
 Petit-déjeuner 7 h–10 h salle Panorama.
-Réception 24 h/24.`;
+Réception 24 h/24.
+Tout est organisé pour que ce soit simple.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.`;
 
 const E7_1_CE_POOL_4 = buildExpressPool("e7-1-ce-4", [
   q({
@@ -385,7 +405,12 @@ const E7_1_CE_TEXT_5 = `Carte bienvenue — Auberge du Port
 
 Bienvenue ! WiFi : Port_Free. Mot de passe : bateau12.
 Petit-déjeuner 8 h–10 h salle Marina.
-Réception 7 h–22 h.`;
+Réception 7 h–22 h.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Le service client répond aussi par téléphone.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.`;
 
 const E7_1_CE_POOL_5 = buildExpressPool("e7-1-ce-5", [
   q({
@@ -477,7 +502,13 @@ const E7_1_CE_TEXT_6 = `Affiche — Réception hôtel
 
 Check-in 15 h. Check-out 11 h.
 Passeport ou carte d'identité obligatoire.
-Caution : carte bancaire.`;
+Caution : carte bancaire.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Vous pouvez répondre directement à ce message.`;
 
 const E7_1_CE_POOL_6 = buildExpressPool("e7-1-ce-6", [
   q({
@@ -569,7 +600,13 @@ const E7_1_CE_TEXT_7 = `Affiche — Réception hôtel
 
 Check-in 14 h. Check-out 10 h.
 Pièce d'identité obligatoire.
-Caution : carte bancaire ou espèces.`;
+Caution : carte bancaire ou espèces.
+Gardez ce texte pour vous en souvenir.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E7_1_CE_POOL_7 = buildExpressPool("e7-1-ce-7", [
   q({
@@ -661,7 +698,13 @@ const E7_1_CE_TEXT_8 = `Affiche — Réception hôtel
 
 Check-in 15 h. Check-out 11 h.
 Passeport obligatoire.
-Caution : empreinte carte.`;
+Caution : empreinte carte.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Pensez à arriver un peu en avance.
+Merci de votre attention et de votre patience.`;
 
 const E7_1_CE_POOL_8 = buildExpressPool("e7-1-ce-8", [
   q({
@@ -753,7 +796,13 @@ const E7_1_CE_TEXT_9 = `Affiche — Réception hôtel
 
 Check-in 16 h. Check-out 12 h.
 Carte d'identité obligatoire.
-Caution : carte bancaire.`;
+Caution : carte bancaire.
+Les toilettes se trouvent au fond du couloir.
+Une version en plusieurs langues est disponible à l'accueil.
+Je reste près de mon téléphone aujourd'hui.
+Merci de ne pas bloquer les issues de secours.
+Le personnel porte un badge visible.
+Les animaux ne sont pas autorisés, sauf chiens guides.`;
 
 const E7_1_CE_POOL_9 = buildExpressPool("e7-1-ce-9", [
   q({
@@ -845,7 +894,13 @@ const E7_1_CE_TEXT_10 = `Affiche — Réception hôtel
 
 Check-in 15 h. Check-out 11 h.
 Passeport ou permis obligatoire.
-Caution : carte bancaire.`;
+Caution : carte bancaire.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E7_1_CE_POOL_10 = buildExpressPool("e7-1-ce-10", [
   q({
@@ -937,7 +992,14 @@ const E7_1_CE_TEXT_11 = `Note — Règlement intérieur
 
 Silence après 22 h.
 Animaux interdits.
-Fumer interdit dans les chambres.`;
+Fumer interdit dans les chambres.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+Merci de votre attention et de votre patience.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.`;
 
 const E7_1_CE_POOL_11 = buildExpressPool("e7-1-ce-11", [
   q({
@@ -1029,7 +1091,14 @@ const E7_1_CE_TEXT_12 = `Note — Mini-bar
 
 Mini-bar : eau 5 fr, jus 6 fr, bière 8 fr.
 Facturation à la chambre.
-Remplissage quotidien.`;
+Remplissage quotidien.
+N'oubliez pas de vérifier la date.
+Une confirmation sera envoyée ensuite.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.`;
 
 const E7_1_CE_POOL_12 = buildExpressPool("e7-1-ce-12", [
   q({
@@ -1121,7 +1190,13 @@ const E7_1_CE_TEXT_13 = `Note — Service chambre
 
 Room service 7 h–22 h.
 Menu sur la télévision.
-Commande au poste 0.`;
+Commande au poste 0.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E7_1_CE_POOL_13 = buildExpressPool("e7-1-ce-13", [
   q({
@@ -1213,7 +1288,13 @@ const E7_1_CE_TEXT_14 = `Note — Parking
 
 Parking souterrain 25 fr/nuit.
 Places limitées.
-Réservation à la réception.`;
+Réservation à la réception.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E7_1_CE_POOL_14 = buildExpressPool("e7-1-ce-14", [
   q({
@@ -1305,7 +1386,14 @@ const E7_1_CE_TEXT_15 = `Note — Piscine
 
 Piscine 7 h–21 h.
 Bonnet obligatoire.
-Enfants accompagnés.`;
+Enfants accompagnés.
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Nous restons disponibles pour vous aider.
+Merci de garder ce document avec vous.
+Les informations sont valables pour cette semaine.
+Si quelque chose n'est pas clair, posez la question.
+Pensez à vérifier la date et le lieu.`;
 
 const E7_1_CE_POOL_15 = buildExpressPool("e7-1-ce-15", [
   q({
@@ -1397,7 +1485,14 @@ const E7_1_CE_TEXT_16 = `Note — Blanchisserie
 
 Service blanchisserie express.
 Dépôt avant 9 h, retour 18 h.
-Tarif : 15 fr/kg.`;
+Tarif : 15 fr/kg.
+Nous vous attendons avec plaisir.
+Les places sont limitées, merci de confirmer.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+Pensez à arriver un peu en avance.`;
 
 const E7_1_CE_POOL_16 = buildExpressPool("e7-1-ce-16", [
   q({
@@ -1489,7 +1584,15 @@ const E7_1_CE_TEXT_17 = `Note — Réveil
 
 Réveil téléphonique sur demande.
 Composer 0 pour réception.
-Gratuit.`;
+Gratuit.
+Si quelque chose n'est pas clair, posez la question.
+Pensez à vérifier la date et le lieu.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Le lieu est accessible en bus et à pied.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const E7_1_CE_POOL_17 = buildExpressPool("e7-1-ce-17", [
   q({
@@ -1581,7 +1684,14 @@ const E7_1_CE_TEXT_18 = `Note — Consigne
 
 Consigne bagages gratuite.
 Accès 24 h avec carte chambre.
-Rez-de-chaussée.`;
+Rez-de-chaussée.
+En cas d'annulation, prévenez-nous rapidement.
+Le règlement est simple et affiché à l'entrée.
+Un goûter ou une boisson est parfois offert.
+Les photos peuvent être prises pour le souvenir.
+N'oubliez pas de vérifier la date et l'heure.
+Merci de respecter le calme des autres personnes.
+Le personnel peut vous aider en français simple.`;
 
 const E7_1_CE_POOL_18 = buildExpressPool("e7-1-ce-18", [
   q({
@@ -1673,7 +1783,15 @@ const E7_1_CE_TEXT_19 = `Note — Ascenseur
 
 Ascenseur panne : utiliser escalier B.
 Réparation prévue demain 10 h.
-Excuses.`;
+Excuses.
+Tout le monde est le bienvenu.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.`;
 
 const E7_1_CE_POOL_19 = buildExpressPool("e7-1-ce-19", [
   q({
@@ -1765,7 +1883,13 @@ const E7_1_CE_TEXT_20 = `Note — Climatisation
 
 Climatisation : télécommande murale.
 Température 20–24 °C.
-Fenêtre fermée.`;
+Fenêtre fermée.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.`;
 
 const E7_1_CE_POOL_20 = buildExpressPool("e7-1-ce-20", [
   q({

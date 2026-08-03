@@ -18,6 +18,7 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E6_1_CE_EMAIL_TEXT_1 = `De : Léo Martin
+
 Objet : Soirée samedi — le chemin
 
 Bonjour,
@@ -26,6 +27,12 @@ Samedi 20 h chez moi : chemin des Vignes 14.
 Bus 25, arrêt Vignes.
 Si perdu, appelle-moi.
 
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.
+Je joins les détails importants juste après.
+Joignez les documents demandés si nécessaire.
 Cordialement,
 Léo Martin`;
 
@@ -116,6 +123,7 @@ const E6_1_CE_EMAIL_POOL_1 = buildExpressPool("e6-1-ce-email-1", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_2 = `De : Office de tourisme
+
 Objet : Plan gratuit Lausanne
 
 Bonjour,
@@ -124,6 +132,12 @@ Plan gratuit à l'office, place de la Palud 2.
 Ouvert 9 h–18 h.
 Visite guidée 14 h.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Les horaires habituels restent les mêmes.
 Cordialement,
 Office de tourisme`;
 
@@ -214,6 +228,7 @@ const E6_1_CE_EMAIL_POOL_2 = buildExpressPool("e6-1-ce-email-2", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_3 = `De : Marie Dupont
+
 Objet : Rendez-vous place Centrale
 
 Bonjour,
@@ -222,6 +237,12 @@ RDV mardi 18 h place Centrale.
 Métro M1, arrêt Riponne.
 Je porte une veste rouge.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Marie Dupont`;
 
@@ -312,6 +333,7 @@ const E6_1_CE_EMAIL_POOL_3 = buildExpressPool("e6-1-ce-email-3", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_4 = `De : Paul Girard
+
 Objet : Chemin pour la fête
 
 Bonjour,
@@ -320,6 +342,12 @@ Fête vendredi 19 h rue du Lac 8.
 Tram 2 jusqu'à Ouchy.
 Puis 5 min à pied le long du lac.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Le personnel peut répondre en français simple.
 Cordialement,
 Paul Girard`;
 
@@ -410,6 +438,7 @@ const E6_1_CE_EMAIL_POOL_4 = buildExpressPool("e6-1-ce-email-4", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_5 = `De : Sophie Weber
+
 Objet : Visite appartement
 
 Bonjour,
@@ -418,6 +447,12 @@ Visite mercredi 17 h rue des Alpes 22.
 Bus 8 arrêt Alpes.
 Sonner au 3e étage.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Les personnes à mobilité réduite sont prioritaires.
 Cordialement,
 Sophie Weber`;
 
@@ -508,6 +543,7 @@ const E6_1_CE_EMAIL_POOL_5 = buildExpressPool("e6-1-ce-email-5", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_6 = `De : Hugo Blanc
+
 Objet : Match de foot dimanche
 
 Bonjour,
@@ -516,6 +552,11 @@ Match dimanche 15 h stade de la Pontaise.
 Bus 21 arrêt Stade.
 On se retrouve à l'entrée.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
 Cordialement,
 Hugo Blanc`;
 
@@ -606,6 +647,7 @@ const E6_1_CE_EMAIL_POOL_6 = buildExpressPool("e6-1-ce-email-6", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_7 = `De : Emma Laurent
+
 Objet : Anniversaire au parc
 
 Bonjour,
@@ -614,6 +656,12 @@ Anniversaire samedi 14 h parc Mon-Repos.
 Entrée avenue Eglantine.
 Apporte un gâteau !
 
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Le service est également disponible en ligne.
 Cordialement,
 Emma Laurent`;
 
@@ -704,6 +752,7 @@ const E6_1_CE_EMAIL_POOL_7 = buildExpressPool("e6-1-ce-email-7", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_8 = `De : Nina Costa
+
 Objet : Cours de français
 
 Bonjour,
@@ -712,6 +761,12 @@ Cours lundi 9 h école de langues, rue Centrale 5.
 Métro M2 arrêt Grancy.
 Première leçon gratuite.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Dis-moi si tu as besoin d'autre chose.
 Cordialement,
 Nina Costa`;
 
@@ -802,6 +857,7 @@ const E6_1_CE_EMAIL_POOL_8 = buildExpressPool("e6-1-ce-email-8", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_9 = `De : David Kim
+
 Objet : Colocation à visiter
 
 Bonjour,
@@ -810,6 +866,12 @@ Coloc à voir jeudi 18 h 30 avenue de la Gare 12.
 Gare à 5 min à pied.
 Chambre au 2e étage.
 
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+On pourra aussi inviter une autre personne.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 David Kim`;
 
@@ -900,6 +962,7 @@ const E6_1_CE_EMAIL_POOL_9 = buildExpressPool("e6-1-ce-email-9", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_10 = `De : Sara Alami
+
 Objet : Marché samedi matin
 
 Bonjour,
@@ -908,6 +971,12 @@ Marché samedi 8 h place de la Riponne.
 Tram 7 arrêt Riponne.
 On achète des fraises.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Conservez le numéro de contact indiqué.
 Cordialement,
 Sara Alami`;
 
@@ -998,6 +1067,7 @@ const E6_1_CE_EMAIL_POOL_10 = buildExpressPool("e6-1-ce-email-10", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_11 = `De : Tom Müller
+
 Objet : Randonnée dimanche
 
 Bonjour,
@@ -1006,6 +1076,12 @@ Randonnée dimanche 8 h départ gare Morges.
 Train IC direction Lausanne.
 Prévoir chaussures de marche.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Le service est également disponible en ligne.
 Cordialement,
 Tom Müller`;
 
@@ -1096,6 +1172,7 @@ const E6_1_CE_EMAIL_POOL_11 = buildExpressPool("e6-1-ce-email-11", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_12 = `De : Julie Petit
+
 Objet : Réunion association
 
 Bonjour,
@@ -1104,6 +1181,12 @@ Réunion lundi 19 h 30 mairie, salle 2.
 Entrée place du Marché.
 Ordre du jour : budget.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 Julie Petit`;
 
@@ -1194,6 +1277,7 @@ const E6_1_CE_EMAIL_POOL_12 = buildExpressPool("e6-1-ce-email-12", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_13 = `De : Omar Hassan
+
 Objet : Garage — récupérer la voiture
 
 Bonjour,
@@ -1202,6 +1286,12 @@ Voiture prête mardi 16 h garage rue de l'Industrie 3.
 Bus 12 arrêt Industrie.
 Facture à payer sur place.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
 Cordialement,
 Omar Hassan`;
 
@@ -1292,6 +1382,7 @@ const E6_1_CE_EMAIL_POOL_13 = buildExpressPool("e6-1-ce-email-13", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_14 = `De : Clara Rossi
+
 Objet : Concert vendredi
 
 Bonjour,
@@ -1300,6 +1391,12 @@ Concert vendredi 20 h salle Paderewski.
 Métro M1 arrêt Flon.
 Billets à l'entrée.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+En cas de changement, un nouvel avis sera publié.
 Cordialement,
 Clara Rossi`;
 
@@ -1390,6 +1487,7 @@ const E6_1_CE_EMAIL_POOL_14 = buildExpressPool("e6-1-ce-email-14", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_15 = `De : Yann Leroy
+
 Objet : Pique-nique au lac
 
 Bonjour,
@@ -1398,6 +1496,12 @@ Pique-nique dimanche 12 h plage d'Ouchy.
 Métro M2 terminus Ouchy.
 Apporte une serviette.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Yann Leroy`;
 
@@ -1488,6 +1592,7 @@ const E6_1_CE_EMAIL_POOL_15 = buildExpressPool("e6-1-ce-email-15", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_16 = `De : Inès Moreau
+
 Objet : Cours de cuisine
 
 Bonjour,
@@ -1496,6 +1601,12 @@ Cours mercredi 18 h école cuisine, rue du Port 4.
 Bus 1 arrêt Port.
 Tablier fourni.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Inès Moreau`;
 
@@ -1586,6 +1697,7 @@ const E6_1_CE_EMAIL_POOL_16 = buildExpressPool("e6-1-ce-email-16", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_17 = `De : Victor Stein
+
 Objet : Visite musée
 
 Bonjour,
@@ -1594,6 +1706,12 @@ Musée samedi 10 h entrée groupes.
 Tram 8 arrêt Beaulieu.
 Tarif réduit avec carte étudiant.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+À bientôt, et merci de votre lecture.
 Cordialement,
 Victor Stein`;
 
@@ -1684,6 +1802,7 @@ const E6_1_CE_EMAIL_POOL_17 = buildExpressPool("e6-1-ce-email-17", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_18 = `De : Léa Bernard
+
 Objet : Déménagement — aide
 
 Bonjour,
@@ -1692,6 +1811,12 @@ Déménagement samedi 9 h rue des Fleurs 6.
 Parking visiteurs derrière l'immeuble.
 Merci d'apporter des cartons.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Dis-moi si tu as besoin d'autre chose.
 Cordialement,
 Léa Bernard`;
 
@@ -1782,6 +1907,7 @@ const E6_1_CE_EMAIL_POOL_18 = buildExpressPool("e6-1-ce-email-18", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_19 = `De : Marc Dubois
+
 Objet : Point de rencontre gare
 
 Bonjour,
@@ -1790,6 +1916,12 @@ On se retrouve vendredi 8 h 15 hall gare Lausanne.
 Sous la grande horloge.
 Train pour Genève 8 h 32.
 
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous restons disponibles pour vous aider.
 Cordialement,
 Marc Dubois`;
 
@@ -1880,6 +2012,7 @@ const E6_1_CE_EMAIL_POOL_19 = buildExpressPool("e6-1-ce-email-19", [
   }),
 ]);
 const E6_1_CE_EMAIL_TEXT_20 = `De : Anna Weber
+
 Objet : Chemin école enfants
 
 Bonjour,
@@ -1888,6 +2021,12 @@ Bonjour,
 Traverser le parc, sortie nord.
 Cloche à 8 h 20.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Merci de lire ce message jusqu'à la fin.
 Cordialement,
 Anna Weber`;
 
@@ -2431,6 +2570,7 @@ Yanis`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E6_2_CE_EMAIL_TEXT_1 = `De : CFF Info
+
 Objet : Retard train IC 5
 
 Bonjour,
@@ -2439,6 +2579,13 @@ Train IC 5 : 20 min de retard.
 Nouveau départ 16 h 40 voie 7.
 Excuses CFF.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+N'hésite pas à me répondre quand tu peux.
 Cordialement,
 CFF Info`;
 
@@ -2529,6 +2676,7 @@ const E6_2_CE_EMAIL_POOL_1 = buildExpressPool("e6-2-ce-email-1", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_2 = `De : TL Lausanne
+
 Objet : Bus 12 — info
 
 Bonjour,
@@ -2537,6 +2685,12 @@ Bus 12 : départ gare 8 h.
 Direction Pully.
 Toutes les 10 min.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le lieu est facile à trouver avec les indications.
 Cordialement,
 TL Lausanne`;
 
@@ -2627,6 +2781,7 @@ const E6_2_CE_EMAIL_POOL_2 = buildExpressPool("e6-2-ce-email-2", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_3 = `De : SBB Mobile
+
 Objet : Billet confirmé
 
 Bonjour,
@@ -2635,6 +2790,12 @@ Votre billet Lausanne–Genève est confirmé.
 Départ 14 h 32 voie 3.
 Carte mobile valide.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Merci de parler doucement dans les couloirs.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 SBB Mobile`;
 
@@ -2725,6 +2886,7 @@ const E6_2_CE_EMAIL_POOL_3 = buildExpressPool("e6-2-ce-email-3", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_4 = `De : RATP
+
 Objet : RER A perturbé
 
 Bonjour,
@@ -2733,6 +2895,12 @@ RER A : 15 min retard.
 Prochain train 9 h 45.
 Motif : incident technique.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le temps est beau, alors tout devrait bien se passer.
+Le service client répond aussi par téléphone.
 À bientôt,
 RATP`;
 
@@ -2823,6 +2991,7 @@ const E6_2_CE_EMAIL_POOL_4 = buildExpressPool("e6-2-ce-email-4", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_5 = `De : TL Info
+
 Objet : Tram 1 ce soir
 
 Bonjour,
@@ -2831,6 +3000,12 @@ Tram 1 : dernier passage 0 h 30.
 Direction Renens.
 Bonne soirée.
 
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+En cas de perte d'objet, passez à l'accueil.
 Cordialement,
 TL Info`;
 
@@ -2921,6 +3096,7 @@ const E6_2_CE_EMAIL_POOL_5 = buildExpressPool("e6-2-ce-email-5", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_6 = `De : CFF
+
 Objet : Changement de voie
 
 Bonjour,
@@ -2929,6 +3105,12 @@ Votre train pour Berne part voie 9.
 Départ 10 h 15.
 Merci de votre compréhension.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Merci de parler doucement dans les couloirs.
+Merci de lire ce message jusqu'à la fin.
 À bientôt,
 CFF`;
 
@@ -3019,6 +3201,7 @@ const E6_2_CE_EMAIL_POOL_6 = buildExpressPool("e6-2-ce-email-6", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_7 = `De : Mobilis
+
 Objet : Abonnement renouvelé
 
 Bonjour,
@@ -3027,6 +3210,12 @@ Votre abonnement zone 11 est renouvelé.
 Valable 1 mois.
 Prix : 75 fr.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Nous restons disponibles pour vous aider.
 À bientôt,
 Mobilis`;
 
@@ -3117,6 +3306,7 @@ const E6_2_CE_EMAIL_POOL_7 = buildExpressPool("e6-2-ce-email-7", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_8 = `De : FlixBus
+
 Objet : Réservation bus
 
 Bonjour,
@@ -3125,6 +3315,13 @@ Bus Genève–Lyon confirmé.
 Départ 7 h 30 gare routière.
 Place 12.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+À très bientôt, prends soin de toi.
 À bientôt,
 FlixBus`;
 
@@ -3215,6 +3412,7 @@ const E6_2_CE_EMAIL_POOL_8 = buildExpressPool("e6-2-ce-email-8", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_9 = `De : Swiss Travel
+
 Objet : Demi-tarif actif
 
 Bonjour,
@@ -3223,6 +3421,12 @@ Votre carte demi-tarif est active.
 Réduction 50 % sur les trains.
 Présentez-la à chaque voyage.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 Swiss Travel`;
 
@@ -3313,6 +3517,7 @@ const E6_2_CE_EMAIL_POOL_9 = buildExpressPool("e6-2-ce-email-9", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_10 = `De : TL Grève
+
 Objet : Info grève vendredi
 
 Bonjour,
@@ -3321,6 +3526,12 @@ Grève vendredi bus et tram.
 Bus remplacement ligne 8.
 Horaires 7 h–19 h.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Joignez les documents demandés si nécessaire.
 Cordialement,
 TL Grève`;
 
@@ -3411,6 +3622,7 @@ const E6_2_CE_EMAIL_POOL_10 = buildExpressPool("e6-2-ce-email-10", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_11 = `De : CFF
+
 Objet : Train supprimé
 
 Bonjour,
@@ -3419,6 +3631,13 @@ Train 18 h 12 Lausanne–Zurich supprimé.
 Train suivant 18 h 42.
 Excuses.
 
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+À très bientôt, prends soin de toi.
 À bientôt,
 CFF`;
 
@@ -3509,6 +3728,7 @@ const E6_2_CE_EMAIL_POOL_11 = buildExpressPool("e6-2-ce-email-11", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_12 = `De : TGV INOUI
+
 Objet : Billet Paris–Lyon
 
 Bonjour,
@@ -3517,6 +3737,12 @@ Billet confirmé 8 h 12 voie 5.
 Arrivée Lyon 10 h.
 Siège 42 voiture 8.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Vous pouvez répondre directement à ce message.
 Cordialement,
 TGV INOUI`;
 
@@ -3607,6 +3833,7 @@ const E6_2_CE_EMAIL_POOL_12 = buildExpressPool("e6-2-ce-email-12", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_13 = `De : TL
+
 Objet : Bus 25 retard
 
 Bonjour,
@@ -3615,6 +3842,12 @@ Bus 25 : 5 min retard.
 Cause : trafic.
 Prochain départ 14 h 20.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Tout est organisé pour que ce soit simple.
 À bientôt,
 TL`;
 
@@ -3705,6 +3938,7 @@ const E6_2_CE_EMAIL_POOL_13 = buildExpressPool("e6-2-ce-email-13", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_14 = `De : SBB
+
 Objet : Réservation place
 
 Bonjour,
@@ -3713,6 +3947,11 @@ Place fenêtre réservée.
 Voiture 4 siège 21.
 Train IC 1 demain 7 h 05.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 À bientôt,
 SBB`;
 
@@ -3803,6 +4042,7 @@ const E6_2_CE_EMAIL_POOL_14 = buildExpressPool("e6-2-ce-email-14", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_15 = `De : Navette aéroport
+
 Objet : Navette gratuite
 
 Bonjour,
@@ -3811,6 +4051,12 @@ Navette gare–aéroport gratuite.
 Départ toutes les 30 min.
 Durée 15 min.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Passe le bonjour à tout le monde.
 Cordialement,
 Navette aéroport`;
 
@@ -3901,6 +4147,7 @@ const E6_2_CE_EMAIL_POOL_15 = buildExpressPool("e6-2-ce-email-15", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_16 = `De : CFF
+
 Objet : Correspondance ratée
 
 Bonjour,
@@ -3909,6 +4156,12 @@ Votre correspondance est manquée.
 Prochain train dans 30 min.
 Billet toujours valable.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+J'espère que tout se passe bien de ton côté.
 À bientôt,
 CFF`;
 
@@ -3999,6 +4252,7 @@ const E6_2_CE_EMAIL_POOL_16 = buildExpressPool("e6-2-ce-email-16", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_17 = `De : TL
+
 Objet : Nouvelle ligne bus
 
 Bonjour,
@@ -4007,6 +4261,12 @@ Nouvelle ligne bus 32 dès lundi.
 Lausanne–Epalinges.
 Départ toutes les 15 min.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Nous traitons votre demande rapidement.
 À bientôt,
 TL`;
 
@@ -4097,6 +4357,7 @@ const E6_2_CE_EMAIL_POOL_17 = buildExpressPool("e6-2-ce-email-17", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_18 = `De : Parking CFF
+
 Objet : Place réservée
 
 Bonjour,
@@ -4105,6 +4366,12 @@ Place parking P1 réservée.
 Gare Lausanne.
 Valable 24 h.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Joignez les documents demandés si nécessaire.
 Cordialement,
 Parking CFF`;
 
@@ -4195,6 +4462,7 @@ const E6_2_CE_EMAIL_POOL_18 = buildExpressPool("e6-2-ce-email-18", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_19 = `De : CFF
+
 Objet : Train à l'heure
 
 Bonjour,
@@ -4203,6 +4471,14 @@ Votre train 15 h 32 est à l'heure.
 Voie 4.
 Bon voyage.
 
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
 À bientôt,
 CFF`;
 
@@ -4293,6 +4569,7 @@ const E6_2_CE_EMAIL_POOL_19 = buildExpressPool("e6-2-ce-email-19", [
   }),
 ]);
 const E6_2_CE_EMAIL_TEXT_20 = `De : TL
+
 Objet : Ticket mobile
 
 Bonjour,
@@ -4301,6 +4578,12 @@ Achetez vos tickets sur l'app TL.
 Horaires en temps réel.
 Gratuit à télécharger.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Merci encore pour votre compréhension.
 À bientôt,
 TL`;
 
@@ -4844,6 +5127,7 @@ Sophie`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E6_3_CE_EMAIL_TEXT_1 = `De : Swiss
+
 Objet : Vol confirmé LX 123
 
 Bonjour,
@@ -4852,6 +5136,11 @@ Vol LX 123 Genève–Paris confirmé.
 Départ 15 h 10 porte B 22.
 Enregistrement en ligne ouvert.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 À bientôt,
 Swiss`;
 
@@ -4942,6 +5231,7 @@ const E6_3_CE_EMAIL_POOL_1 = buildExpressPool("e6-3-ce-email-1", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_2 = `De : Swiss
+
 Objet : Retard vol LX 456
 
 Bonjour,
@@ -4950,6 +5240,12 @@ Vol LX 456 retardé 45 min.
 Nouveau départ 16 h 20 porte C 8.
 Excuses pour la gêne.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Les informations importantes sont déjà indiquées plus haut.
 À bientôt,
 Swiss`;
 
@@ -5040,6 +5336,7 @@ const E6_3_CE_EMAIL_POOL_2 = buildExpressPool("e6-3-ce-email-2", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_3 = `De : EasyJet
+
 Objet : Enregistrement ouvert
 
 Bonjour,
@@ -5048,6 +5345,12 @@ Enregistrement en ligne ouvert.
 Vol demain 7 h 30 Genève–Barcelone.
 Bagage cabine 8 kg max.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+N'oubliez pas de vérifier la date et l'heure.
 À bientôt,
 EasyJet`;
 
@@ -5138,6 +5441,7 @@ const E6_3_CE_EMAIL_POOL_3 = buildExpressPool("e6-3-ce-email-3", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_4 = `De : Air France
+
 Objet : Porte modifiée
 
 Bonjour,
@@ -5146,6 +5450,11 @@ Vol AF 890 : porte changée.
 Nouvelle porte A 12.
 Départ 14 h 05 maintenu.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
 Cordialement,
 Air France`;
 
@@ -5236,6 +5545,7 @@ const E6_3_CE_EMAIL_POOL_4 = buildExpressPool("e6-3-ce-email-4", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_5 = `De : Aéroport Genève
+
 Objet : Navette gratuite
 
 Bonjour,
@@ -5244,6 +5554,12 @@ Navette gare–aéroport gratuite.
 Départ toutes les 15 min.
 Durée 12 min.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement,
 Aéroport Genève`;
 
@@ -5334,6 +5650,7 @@ const E6_3_CE_EMAIL_POOL_5 = buildExpressPool("e6-3-ce-email-5", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_6 = `De : Swiss
+
 Objet : Vol annulé
 
 Bonjour,
@@ -5342,6 +5659,12 @@ Vol LX 789 annulé cause météo.
 Remboursement ou vol demain 9 h.
 Comptoir hall A.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Les personnes à mobilité réduite sont prioritaires.
 À bientôt,
 Swiss`;
 
@@ -5432,6 +5755,7 @@ const E6_3_CE_EMAIL_POOL_6 = buildExpressPool("e6-3-ce-email-6", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_7 = `De : Ryanair
+
 Objet : Billet électronique
 
 Bonjour,
@@ -5440,6 +5764,12 @@ Votre billet Dublin–Genève est prêt.
 Présentez carte d'embarquement sur téléphone.
 Arrivez 2 h avant.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+Nous restons disponibles pour vous aider.
 À bientôt,
 Ryanair`;
 
@@ -5530,6 +5860,7 @@ const E6_3_CE_EMAIL_POOL_7 = buildExpressPool("e6-3-ce-email-7", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_8 = `De : Swiss
+
 Objet : Bagage enregistré
 
 Bonjour,
@@ -5538,6 +5869,12 @@ Bagage enregistré 18 kg.
 Étiquette sur votre e-mail.
 Récupération tapis 3.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Bonne journée à toutes et à tous.
 À bientôt,
 Swiss`;
 
@@ -5628,6 +5965,7 @@ const E6_3_CE_EMAIL_POOL_8 = buildExpressPool("e6-3-ce-email-8", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_9 = `De : Lufthansa
+
 Objet : Correspondance Zurich
 
 Bonjour,
@@ -5636,6 +5974,13 @@ Correspondance Zurich 45 min.
 Porte B 25.
 Train aéroport 5 min.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Pensez à arriver un peu en avance.
 À bientôt,
 Lufthansa`;
 
@@ -5726,6 +6071,7 @@ const E6_3_CE_EMAIL_POOL_9 = buildExpressPool("e6-3-ce-email-9", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_10 = `De : Aéroport Genève
+
 Objet : Contrôle sécurité
 
 Bonjour,
@@ -5734,6 +6080,12 @@ Arrivez 2 h avant vol international.
 Liquides max 100 ml en cabine.
 Ordinateur à sortir du sac.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Le trajet est simple, ne t'inquiète pas.
 Cordialement,
 Aéroport Genève`;
 
@@ -5824,6 +6176,7 @@ const E6_3_CE_EMAIL_POOL_10 = buildExpressPool("e6-3-ce-email-10", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_11 = `De : British Airways
+
 Objet : Vol à l'heure
 
 Bonjour,
@@ -5832,6 +6185,12 @@ Vol BA 321 Londres à l'heure.
 Embarquement 10 h 40 porte B 3.
 Bonne journée.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+C'est important pour moi, merci beaucoup.
 Cordialement,
 British Airways`;
 
@@ -5922,6 +6281,7 @@ const E6_3_CE_EMAIL_POOL_11 = buildExpressPool("e6-3-ce-email-11", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_12 = `De : Swiss
+
 Objet : Siège confirmé
 
 Bonjour,
@@ -5930,6 +6290,12 @@ Siège 12A fenêtre confirmé.
 Vol LX 200 Genève–Nice.
 Départ 11 h 40.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Merci encore pour votre compréhension.
 À bientôt,
 Swiss`;
 
@@ -6020,6 +6386,7 @@ const E6_3_CE_EMAIL_POOL_12 = buildExpressPool("e6-3-ce-email-12", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_13 = `De : Vueling
+
 Objet : Enregistrement ferme
 
 Bonjour,
@@ -6028,6 +6395,12 @@ Enregistrement ferme dans 1 h.
 Vol VY 1234 Barcelone.
 Présentez-vous au comptoir.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Merci encore pour votre compréhension.
 À bientôt,
 Vueling`;
 
@@ -6118,6 +6491,7 @@ const E6_3_CE_EMAIL_POOL_13 = buildExpressPool("e6-3-ce-email-13", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_14 = `De : Aéroport Genève
+
 Objet : Parking P1
 
 Bonjour,
@@ -6126,6 +6500,12 @@ Place parking P1 réservée 24 h.
 Tarif 38 fr.
 Sortie ticket au comptoir.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 Cordialement,
 Aéroport Genève`;
 
@@ -6216,6 +6596,7 @@ const E6_3_CE_EMAIL_POOL_14 = buildExpressPool("e6-3-ce-email-14", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_15 = `De : Swiss
+
 Objet : Fast Track offre
 
 Bonjour,
@@ -6224,6 +6605,12 @@ Fast Track sécurité 25 fr.
 File rapide 5 min.
 Achat en ligne.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Nous restons disponibles pour vous aider.
 À bientôt,
 Swiss`;
 
@@ -6314,6 +6701,7 @@ const E6_3_CE_EMAIL_POOL_15 = buildExpressPool("e6-3-ce-email-15", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_16 = `De : Turkish Airlines
+
 Objet : Vol Istanbul
 
 Bonjour,
@@ -6322,6 +6710,12 @@ Vol TK 190 confirmé.
 Départ 13 h 25 porte C 6.
 Passeport obligatoire.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous restons disponibles pour vous aider.
 Cordialement,
 Turkish Airlines`;
 
@@ -6412,6 +6806,7 @@ const E6_3_CE_EMAIL_POOL_16 = buildExpressPool("e6-3-ce-email-16", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_17 = `De : Swiss
+
 Objet : Dernière appel
 
 Bonjour,
@@ -6420,6 +6815,12 @@ Dernier appel vol LX 55 porte A 5.
 Fermeture porte dans 10 min.
 Présentez-vous immédiatement.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Conservez le numéro de contact indiqué.
 À bientôt,
 Swiss`;
 
@@ -6510,6 +6911,7 @@ const E6_3_CE_EMAIL_POOL_17 = buildExpressPool("e6-3-ce-email-17", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_18 = `De : Aéroport Genève
+
 Objet : WiFi gratuit
 
 Bonjour,
@@ -6518,6 +6920,12 @@ WiFi Airport_Free gratuit 4 h.
 Mot de passe sur écran d'accueil.
 Recharge au comptoir info.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Aéroport Genève`;
 
@@ -6608,6 +7016,7 @@ const E6_3_CE_EMAIL_POOL_18 = buildExpressPool("e6-3-ce-email-18", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_19 = `De : Emirates
+
 Objet : Vol Dubai
 
 Bonjour,
@@ -6616,6 +7025,12 @@ Vol EK 89 confirmé.
 Départ 22 h 10 porte B 18.
 Enregistrement 3 h avant.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Le personnel peut répondre en français simple.
 À bientôt,
 Emirates`;
 
@@ -6706,6 +7121,7 @@ const E6_3_CE_EMAIL_POOL_19 = buildExpressPool("e6-3-ce-email-19", [
   }),
 ]);
 const E6_3_CE_EMAIL_TEXT_20 = `De : Swiss
+
 Objet : Merci de voyager
 
 Bonjour,
@@ -6714,6 +7130,13 @@ Merci d'avoir voyagé avec Swiss.
 Donnez votre avis sur le vol.
 À bientôt.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+J'espère que tout se passe bien de ton côté.
 À bientôt,
 Swiss`;
 

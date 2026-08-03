@@ -33,6 +33,17 @@ Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter un tablier propre. La participation est gratuite.
 Cette rencontre aide à exprimer ce qu'on aime dans un plat.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 À bientôt,
 
 La responsable Nadia`;
@@ -135,6 +146,18 @@ Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas une petite assiette et lisez bien cette consigne : les fromages restent au frais jusqu'au service.
 
+Sans confirmation, la place n'est pas garantie.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Bonne journée,
 
 Accueil du quartier`;
@@ -237,6 +260,17 @@ Pouvez-vous confirmer qu'il faut apporter une poêle légère ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de réussir une pâte simple. Merci pour votre réponse.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 
 Rami`;
@@ -336,6 +370,16 @@ Madame, Monsieur,
 
 Votre place pour une visite du marché est réservée.
 La séance aura lieu jeudi 30 mai à la ferme des Lilas.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -443,7 +487,20 @@ Attention : les sauces très piquantes sont séparées.
 
 À demain,
 
-Noé`;
+Noé
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Cordialement, et bonne journée.`;
 
 const E11_1_CE_EMAIL_5_POOL = buildExpressPool("e11-1-ce-email-5", [
   q({
@@ -543,6 +600,17 @@ Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : 
 Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer une cuillère en bois.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci de votre compréhension,
 
 Équipe organisation`;
@@ -645,6 +713,18 @@ Plusieurs personnes ont expliqué que la séance aide à partager sans jeter de 
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur une boîte réutilisable a été notée.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Bien à vous,
 
 Club des habitants`;
@@ -749,7 +829,20 @@ Apportez deux fruits lavés et un peu de bonne humeur.
 
 À très vite,
 
-Mina`;
+Mina
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E11_1_CE_EMAIL_8_POOL = buildExpressPool("e11-1-ce-email-8", [
   q({
@@ -849,6 +942,18 @@ Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
 Le thème principal sera : faire lever la pâte tranquillement.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
 Merci,
 
 Bureau des inscriptions`;
@@ -951,6 +1056,17 @@ La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
 Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez une recette de son pays. Le prix est 30 CHF.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Cordialement,
 
 Info loisirs`;
@@ -1055,7 +1171,20 @@ Cette fois, merci d'apporter une tasse personnelle.
 
 Au plaisir de vous revoir,
 
-Groupe des bénévoles`;
+Groupe des bénévoles
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.`;
 
 const E11_1_CE_EMAIL_11_POOL = buildExpressPool("e11-1-ce-email-11", [
   q({
@@ -1151,6 +1280,18 @@ Objet : Rendez-vous à 8 h 30
 Bonjour,
 
 Votre rendez-vous lié à une lecture d'étiquettes alimentaires commence à 8 h 30.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer une loupe ou ses lunettes.
@@ -1257,6 +1398,18 @@ Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier une gourde avant de partir.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 À bientôt,
 
 Atelier A2`;
@@ -1359,6 +1512,18 @@ J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horiz
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour poser des questions sur les légumes.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Merci d'avance,
 
 Salma`;
@@ -1451,12 +1616,25 @@ const E11_1_CE_EMAIL_14_POOL = buildExpressPool("e11-1-ce-email-14", [
 ]);
 
 const E11_1_CE_EMAIL_15_TEXT = `De : Marché des Saveurs
+
 Objet : Atelier confitures annulé
 
 Bonjour,
 L'atelier confitures de dimanche est annulé : la cuisinière est malade.
 Nous proposons une nouvelle date : samedi 28 septembre à 10 h.
 Si cette date ne vous convient pas, répondez pour un remboursement complet (25 CHF).
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci de votre compréhension.
 L'équipe du Marché des Saveurs`;
 
@@ -1548,7 +1726,20 @@ Apportez quatre verres et gardez 16 CHF si besoin.
 
 À tout à l'heure,
 
-Service rappel`;
+Service rappel
+Les informations importantes sont déjà notées plus haut.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E11_1_CE_EMAIL_16_POOL = buildExpressPool("e11-1-ce-email-16", [
   q({
@@ -1646,6 +1837,17 @@ Bonjour,
 Message de La coach Ana au sujet de un atelier lunch box du midi.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
 Le but reste simple : apprendre à manger dehors sans acheter trop cher.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
 Merci de respecter cette règle : les sauces ferment bien dans le sac.
 
 Bien cordialement,
@@ -1750,6 +1952,18 @@ Les participants arrivent à 11 h 30 avec un petit pot vide.
 La date exacte est jeudi 19 septembre.
 Après la séance, un court échange expliquera comment réussir à utiliser le basilic, la menthe et le persil.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
 Merci de votre aide,
 
 Équipe du samedi`;
@@ -1852,6 +2066,18 @@ Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
 Votre avis nous aidera à mieux organiser les moments pour servir un repas à plusieurs voisins.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Merci pour votre retour,
 
 Questionnaire qualité`;
@@ -1954,6 +2180,18 @@ Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
 Cette fois, chacun devra apporter une photo de famille.
 
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 À bientôt,
 
 Centre culturel`;
@@ -2458,6 +2696,16 @@ Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter des chaussures confortables. La participation est gratuite.
 Cette rencontre aide à bouger sans fatigue.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
 À bientôt,
 
 La responsable Nadia`;
@@ -2560,6 +2808,18 @@ Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas un vieux t-shirt et lisez bien cette consigne : l'argile tache les vêtements.
 
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+Le trajet est simple, ne t'inquiète pas.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Bonne journée,
 
 Accueil du quartier`;
@@ -2662,6 +2922,17 @@ Pouvez-vous confirmer qu'il faut apporter une bouteille d'eau ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de oser danser devant les autres. Merci pour votre réponse.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Cordialement,
 
 Rami`;
@@ -2761,6 +3032,17 @@ Madame, Monsieur,
 
 Votre place pour une initiation au dessin urbain est réservée.
 La séance aura lieu jeudi 30 mai à la ferme des Lilas.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -2868,7 +3150,20 @@ Attention : les vélos sont vérifiés avant le départ.
 
 À demain,
 
-Noé`;
+Noé
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Je reste à votre disposition pour toute précision.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci de confirmer la bonne réception de ce message.`;
 
 const E11_2_CE_EMAIL_5_POOL = buildExpressPool("e11-2-ce-email-5", [
   q({
@@ -2968,6 +3263,17 @@ Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : 
 Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer un téléphone chargé.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
 Merci de votre compréhension,
 
 Équipe organisation`;
@@ -3070,6 +3376,18 @@ Plusieurs personnes ont expliqué que la séance aide à jouer sans esprit de co
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur une casquette a été notée.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Bien à vous,
 
 Club des habitants`;
@@ -3174,7 +3492,20 @@ Apportez un texte court et un peu de bonne humeur.
 
 À très vite,
 
-Mina`;
+Mina
+Les informations importantes sont déjà notées plus haut.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E11_2_CE_EMAIL_8_POOL = buildExpressPool("e11-2-ce-email-8", [
   q({
@@ -3274,6 +3605,17 @@ Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
 Le thème principal sera : embellir un espace commun.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
 Merci,
 
 Bureau des inscriptions`;
@@ -3376,6 +3718,17 @@ La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
 Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez des baskets propres. Le prix est 30 CHF.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
 Cordialement,
 
 Info loisirs`;
@@ -3480,7 +3833,20 @@ Cette fois, merci d'apporter un jeu préféré.
 
 Au plaisir de vous revoir,
 
-Groupe des bénévoles`;
+Groupe des bénévoles
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.`;
 
 const E11_2_CE_EMAIL_11_POOL = buildExpressPool("e11-2-ce-email-11", [
   q({
@@ -3576,6 +3942,18 @@ Objet : Rendez-vous à 8 h 30
 Bonjour,
 
 Votre rendez-vous lié à une promenade avec observation des oiseaux commence à 8 h 30.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer des jumelles si possible.
@@ -3682,6 +4060,18 @@ Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier une chambre à air usée avant de partir.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 À bientôt,
 
 Atelier A2`;
@@ -3784,6 +4174,18 @@ J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horiz
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour chanter juste avec le groupe.
 
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci d'avance,
 
 Salma`;
@@ -3876,6 +4278,7 @@ const E11_2_CE_EMAIL_14_POOL = buildExpressPool("e11-2-ce-email-14", [
 ]);
 
 const E11_2_CE_EMAIL_15_TEXT = `De : Club Escalade Jura
+
 Objet : Sortie falaise — liste complète
 
 Bonjour à toutes et à tous,
@@ -3883,7 +4286,20 @@ La liste pour la sortie falaise du 3 octobre est complète (16 places).
 Prochaine session initiation : dimanche 12 octobre, parking de St-Ursanne à 8 h 45.
 Matériel fourni sauf chaussures d'approche.
 Adhésion club obligatoire (40 CHF/an).
-Sportivement, Karim`;
+Sportivement, Karim
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E11_2_CE_EMAIL_15_POOL = buildExpressPool("e11-2-ce-email-15", [
   q({
@@ -3973,7 +4389,20 @@ Apportez un tapis et gardez 16 CHF si besoin.
 
 À tout à l'heure,
 
-Service rappel`;
+Service rappel
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E11_2_CE_EMAIL_16_POOL = buildExpressPool("e11-2-ce-email-16", [
   q({
@@ -4071,6 +4500,18 @@ Bonjour,
 Message de La coach Ana au sujet de un atelier bricolage en bois.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
 Le but reste simple : apprendre à fabriquer une petite étagère.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Merci de respecter cette règle : les lunettes de protection sont obligatoires.
 
 Bien cordialement,
@@ -4175,6 +4616,18 @@ Les participants arrivent à 11 h 30 avec une veste légère.
 La date exacte est jeudi 19 septembre.
 Après la séance, un court échange expliquera comment réussir à connaître l'histoire des rues.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
 Merci de votre aide,
 
 Équipe du samedi`;
@@ -4277,6 +4730,18 @@ Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
 Votre avis nous aidera à mieux organiser les moments pour marcher avec un bon rythme.
 
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Merci pour votre retour,
 
 Questionnaire qualité`;
@@ -4379,6 +4844,18 @@ Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
 Cette fois, chacun devra apporter une idée de film.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 À bientôt,
 
 Centre culturel`;
@@ -4883,6 +5360,17 @@ Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter le nom d'une série. La participation est gratuite.
 Cette rencontre aide à dire pourquoi on aime une histoire.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
 À bientôt,
 
 La responsable Nadia`;
@@ -4985,6 +5473,18 @@ Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas un écouteur et lisez bien cette consigne : le volume reste bas.
 
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Bonne journée,
 
 Accueil du quartier`;
@@ -5087,6 +5587,17 @@ Pouvez-vous confirmer qu'il faut apporter un livre à conseiller ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de conseiller une lecture à un ami. Merci pour votre réponse.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Cordialement,
 
 Rami`;
@@ -5186,6 +5697,17 @@ Madame, Monsieur,
 
 Votre place pour une visite d'exposition colorée est réservée.
 La séance aura lieu jeudi 30 mai à la ferme des Lilas.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le bâtiment est ouvert dès 8 heures.
+Je reste à votre disposition pour toute précision.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -5293,7 +5815,20 @@ Attention : les avis négatifs restent respectueux.
 
 À demain,
 
-Noé`;
+Noé
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.`;
 
 const E11_3_CE_EMAIL_5_POOL = buildExpressPool("e11-3-ce-email-5", [
   q({
@@ -5393,6 +5928,17 @@ Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : 
 Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer trois chansons.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Merci de votre compréhension,
 
 Équipe organisation`;
@@ -5495,6 +6041,18 @@ Plusieurs personnes ont expliqué que la séance aide à dire ce qu'on aime dans
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur une manette si possible a été notée.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Bien à vous,
 
 Club des habitants`;
@@ -5599,7 +6157,20 @@ Apportez un manga déjà lu et un peu de bonne humeur.
 
 À très vite,
 
-Mina`;
+Mina
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Cordialement, et bonne journée.`;
 
 const E11_3_CE_EMAIL_8_POOL = buildExpressPool("e11-3-ce-email-8", [
   q({
@@ -5699,6 +6270,18 @@ Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
 Le thème principal sera : écouter les goûts des autres.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
 Merci,
 
 Bureau des inscriptions`;
@@ -5801,6 +6384,17 @@ La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
 Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez une image de concert. Le prix est 30 CHF.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Cordialement,
 
 Info loisirs`;
@@ -5905,7 +6499,20 @@ Cette fois, merci d'apporter une photo de mur peint.
 
 Au plaisir de vous revoir,
 
-Groupe des bénévoles`;
+Groupe des bénévoles
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.`;
 
 const E11_3_CE_EMAIL_11_POOL = buildExpressPool("e11-3-ce-email-11", [
   q({
@@ -6001,6 +6608,17 @@ Objet : Rendez-vous à 8 h 30
 Bonjour,
 
 Votre rendez-vous lié à une discussion sur les podcasts commence à 8 h 30.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer un podcast court.
@@ -6107,6 +6725,18 @@ Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier une idée de plat avant de partir.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 À bientôt,
 
 Atelier A2`;
@@ -6209,6 +6839,17 @@ J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horiz
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour afficher ses préférences.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Merci d'avance,
 
 Salma`;
@@ -6301,11 +6942,22 @@ const E11_3_CE_EMAIL_14_POOL = buildExpressPool("e11-3-ce-email-14", [
 ]);
 
 const E11_3_CE_EMAIL_15_TEXT = `De : Médiathèque Rivage
+
 Objet : Votre liste de coups de cœur
 
 Bonjour Alex,
 Voici trois suggestions selon vos goûts :
 1) Roman : « Vent du sud » (facile A2)
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
 2) BD : « Les Voyages de Mina »
 3) Podcast : « Goûts et couleurs » (20 min)
 Tous disponibles jusqu'au 30 juin. Prolongation possible une fois en ligne.
@@ -6401,7 +7053,19 @@ Apportez un objet de sa couleur préférée et gardez 16 CHF si besoin.
 
 À tout à l'heure,
 
-Service rappel`;
+Service rappel
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E11_3_CE_EMAIL_16_POOL = buildExpressPool("e11-3-ce-email-16", [
   q({
@@ -6499,6 +7163,17 @@ Bonjour,
 Message de La coach Ana au sujet de une lecture de critiques simples.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
 Le but reste simple : apprendre à comprendre une critique.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Merci de respecter cette règle : les textes difficiles sont expliqués.
 
 Bien cordialement,
@@ -6603,6 +7278,18 @@ Les participants arrivent à 11 h 30 avec une recommandation.
 La date exacte est jeudi 19 septembre.
 Après la séance, un court échange expliquera comment réussir à proposer quelque chose à un ami.
 
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci de votre aide,
 
 Équipe du samedi`;
@@ -6705,6 +7392,18 @@ Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
 Votre avis nous aidera à mieux organiser les moments pour reconnaître un style de musique.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Merci pour votre retour,
 
 Questionnaire qualité`;
@@ -6807,6 +7506,17 @@ Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
 Cette fois, chacun devra apporter une liste de loisirs.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
 À bientôt,
 
 Centre culturel`;
@@ -7311,6 +8021,17 @@ Notez bien le rendez-vous : lundi 6 mai, 9 h, à la Maison des Acacias.
 Merci d'apporter une carte de la côte. La participation est gratuite.
 Cette rencontre aide à choisir les activités du séjour.
 
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 À bientôt,
 
 La responsable Nadia`;
@@ -7413,6 +8134,18 @@ Le groupe se retrouve à 10 h 15 devant la salle Jean-Monnet.
 Comme il y a 10 places, merci de prévenir en cas d'absence.
 N'oubliez pas une petite valise et lisez bien cette consigne : les liquides restent dans une poche séparée.
 
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Bonne journée,
 
 Accueil du quartier`;
@@ -7515,6 +8248,17 @@ Pouvez-vous confirmer qu'il faut apporter un sac de couchage ?
 Je peux venir mercredi 22 mai à 11 h à le centre du Lac.
 Mon objectif est de vivre quelques jours en groupe. Merci pour votre réponse.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Cordialement,
 
 Rami`;
@@ -7614,6 +8358,17 @@ Madame, Monsieur,
 
 Votre place pour une sortie test en train régional est réservée.
 La séance aura lieu jeudi 30 mai à la ferme des Lilas.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 Merci d'arriver à 12 h 30. La participation est de 10 CHF.
 Le bénévole Marco sera sur place pour vous accueillir.
 
@@ -7721,7 +8476,20 @@ Attention : les prix peuvent changer selon la saison.
 
 À demain,
 
-Noé`;
+Noé
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const E11_4_CE_EMAIL_5_POOL = buildExpressPool("e11-4-ce-email-5", [
   q({
@@ -7821,6 +8589,17 @@ Le nouveau lieu est la bibliothèque Nord. La date et l'heure ne changent pas : 
 Le prix reste 15 CHF et les 16 places sont gardées.
 Merci de préparer un tableau de dépenses.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Merci de votre compréhension,
 
 Équipe organisation`;
@@ -7923,6 +8702,18 @@ Plusieurs personnes ont expliqué que la séance aide à manger dehors simplemen
 Pour la prochaine fois, nous garderons dimanche 23 juin à 16 h.
 Votre remarque sur une glacière a été notée.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Bien à vous,
 
 Club des habitants`;
@@ -8027,7 +8818,20 @@ Apportez de la crème solaire et un peu de bonne humeur.
 
 À très vite,
 
-Mina`;
+Mina
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de vérifier les informations avant de répondre.`;
 
 const E11_4_CE_EMAIL_8_POOL = buildExpressPool("e11-4-ce-email-8", [
   q({
@@ -8127,6 +8931,18 @@ Le rendez-vous reste mardi 9 juillet à 18 h à la salle des Fêtes.
 Le tarif est 25 CHF.
 Le thème principal sera : écrire un message court.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci,
 
 Bureau des inscriptions`;
@@ -8229,6 +9045,17 @@ La séance aura lieu mercredi 17 juillet à 18 h 45 à le jardin partagé.
 Merci de vous inscrire avec le QR code de l'affiche avant demain soir.
 Prévoyez un jeu de cartes. Le prix est 30 CHF.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Cordialement,
 
 Info loisirs`;
@@ -8333,7 +9160,20 @@ Cette fois, merci d'apporter une calculatrice.
 
 Au plaisir de vous revoir,
 
-Groupe des bénévoles`;
+Groupe des bénévoles
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.`;
 
 const E11_4_CE_EMAIL_11_POOL = buildExpressPool("e11-4-ce-email-11", [
   q({
@@ -8429,6 +9269,18 @@ Objet : Rendez-vous à 8 h 30
 Bonjour,
 
 Votre rendez-vous lié à une initiation aux réservations en ligne commence à 8 h 30.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci d'arriver à la maison médicale dix minutes avant.
 La date est vendredi 2 août et le prix est 6 CHF.
 La docteure Morel conseille de préparer un mot de passe.
@@ -8535,6 +9387,18 @@ Le premier groupe est attendu à 13 h à le parc des Amandiers.
 La séance a lieu samedi 10 août avec l'entraîneuse Emma.
 Merci de vérifier une gourde avant de partir.
 
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+On pourra aussi inviter une autre personne.
+Je reste à votre disposition pour toute précision.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
 À bientôt,
 
 Atelier A2`;
@@ -8637,6 +9501,18 @@ J'ai noté la date, dimanche 18 août, et l'heure, 14 h 45, à la boutique Horiz
 Pouvez-vous confirmer le prix de 11 CHF ?
 Je viens surtout pour poser des questions précises.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci d'avance,
 
 Salma`;
@@ -8729,6 +9605,7 @@ const E11_4_CE_EMAIL_14_POOL = buildExpressPool("e11-4-ce-email-14", [
 ]);
 
 const E11_4_CE_EMAIL_15_TEXT = `De : Agence Voyages Clair
+
 Objet : Modification de vol — vacances Nice
 
 Bonjour Mme Rossi,
@@ -8736,6 +9613,15 @@ Votre vol Genève–Nice du 8 août part finalement à 15 h 05 (au lieu de 11 h 
 Arrivez à l'aéroport 2 heures avant. Porte prévue : B12.
 Hôtel « Les Palmiers » inchangé (check-in 16 h).
 Désolé pour ce changement. Un voucher boisson vous attend au comptoir.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Cordialement, Agence Clair`;
 
 const E11_4_CE_EMAIL_15_POOL = buildExpressPool("e11-4-ce-email-15", [
@@ -8826,7 +9712,20 @@ Apportez trois photos et gardez 16 CHF si besoin.
 
 À tout à l'heure,
 
-Service rappel`;
+Service rappel
+Dis-moi si tu as des questions, je réponds vite.
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.`;
 
 const E11_4_CE_EMAIL_16_POOL = buildExpressPool("e11-4-ce-email-16", [
   q({
@@ -8924,6 +9823,18 @@ Bonjour,
 Message de La coach Ana au sujet de un contrôle des papiers de voyage.
 La rencontre est prévue mercredi 11 septembre à 9 h 45 à la halle des Sports.
 Le but reste simple : apprendre à partir avec les bons documents.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
 Merci de respecter cette règle : les photocopies ne remplacent pas toujours l'original.
 
 Bien cordialement,
@@ -9028,6 +9939,18 @@ Les participants arrivent à 11 h 30 avec des chaussons propres.
 La date exacte est jeudi 19 septembre.
 Après la séance, un court échange expliquera comment réussir à respecter un logement partagé.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Merci de votre aide,
 
 Équipe du samedi`;
@@ -9130,6 +10053,17 @@ Pouvez-vous dire si l'horaire de 15 h 45 vous convient ?
 La prochaine séance est prévue vendredi 27 septembre.
 Votre avis nous aidera à mieux organiser les moments pour marcher sans oublier l'essentiel.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Merci pour votre retour,
 
 Questionnaire qualité`;
@@ -9232,6 +10166,18 @@ Elle aura lieu samedi 5 octobre à 18 h 15 à le centre culturel.
 Le tarif annoncé est 40 CHF et il reste les vingt premiers inscrits.
 Cette fois, chacun devra apporter une clé USB.
 
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 À bientôt,
 
 Centre culturel`;

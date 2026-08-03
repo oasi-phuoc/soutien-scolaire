@@ -117,7 +117,9 @@ J'ai 32 ans. Je suis italien.
 Je suis architecte.
 J'aime la photo et les promenades au lac.
 Je reviens vendredi. On se voit bientôt ?
-Bises, Marco`;
+Bises, Marco
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.`;
 
 const CE_POOL_2 = buildExpressPool("e1-1-2", [
   q({
@@ -213,7 +215,11 @@ Je suis étudiante en médecine à Genève.
 J'habite à Genève.
 J'aime le cinéma et la danse.
 Tu veux aller au cinéma samedi ?
-Réponds-moi ! 😊`;
+Réponds-moi ! 😊
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Le personnel peut répondre en français simple.`;
 
 const CE_POOL_3 = buildExpressPool("e1-1-3", [
   q({
@@ -310,7 +316,9 @@ Je cherche une colocataire pour un appartement de trois pièces.
 Le loyer est de 650 francs par mois.
 Je suis vendeuse.
 J'aime la cuisine et les sorties.
-Contact : nina.coloc@mail.ch`;
+Contact : nina.coloc@mail.ch
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const CE_POOL_4 = buildExpressPool("e1-1-4", [
   q({
@@ -407,7 +415,8 @@ Il/Elle habite à Neuchâtel avec sa femme et son fils de 5 ans.
 Il/Elle parle français et allemand.
 Il/Elle aime le vélo et la randonnée.
 Son bureau est au deuxième étage.
-N'hésitez pas à lui dire bonjour !`;
+N'hésitez pas à lui dire bonjour !
+Le lieu est facile à trouver avec les indications.`;
 
 const CE_POOL_5 = buildExpressPool("e1-1-5", [
   q({
@@ -503,7 +512,12 @@ Langues : français, allemand
 J'habite à Sion avec mon mari et nos deux chats.
 J'aime la lecture, le théâtre et les promenades en montagne.
 Je cherche des membres pour notre club. On se réunit chaque mardi à 19 h.
-Contact : sophie.martin@club-mots.ch`;
+Contact : sophie.martin@club-mots.ch
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.`;
 
 const CE_POOL_6 = buildExpressPool("e1-1-6", [
   q({
@@ -587,7 +601,8 @@ J'habite au 12, rue des Lilas à Yverdon depuis trois ans.
 Je suis marié. J'ai deux fils de 8 et 12 ans.
 Je parle français et arabe.
 J'organise un apéro de bienvenue samedi à 18 h dans la cour.
-Venez nombreux ! Karim`;
+Venez nombreux ! Karim
+Merci de confirmer la bonne réception.`;
 
 const CE_POOL_7 = buildExpressPool("e1-1-7", [
   q({
@@ -672,7 +687,14 @@ DESTINATION : Genève, Suisse
 PROFESSION : étudiante en design
 ADRESSE : 8, rue du Rhône, 1204 Genève
 TÉLÉPHONE : +41 79 456 78 90
-REMARQUE : Je parle japonais, anglais et un peu français.`;
+REMARQUE : Je parle japonais, anglais et un peu français.
+Cette étiquette est collée sur ma valise bleue.
+Je voyage seule aujourd'hui et j'arrive dans l'après-midi.
+Si mon bagage est perdu, merci d'appeler mon numéro.
+Je reste joignable dès l'atterrissage à Genève.
+J'étudie à Genève depuis le mois de septembre.
+Ma famille habite encore au Japon pour le moment.
+Merci beaucoup pour votre aide.`;
 
 const CE_POOL_8 = buildExpressPool("e1-1-8", [
   q({
@@ -758,7 +780,8 @@ Position : milieu de terrain
 Langues : français, arabe, espagnol
 Hobbies : le football, la musique, la cuisine marocaine
 Objectif : intégrer l'équipe senior cette saison
-Contact : omar.benali@fc-vernier.ch`;
+Contact : omar.benali@fc-vernier.ch
+Gardez ce texte pour vous en souvenir.`;
 
 const CE_POOL_9 = buildExpressPool("e1-1-9", [
   q({
@@ -841,6 +864,9 @@ Je suis coiffeuse dans un salon à Nyon.
 J'habite en colocation avec deux amies.
 Je suis espagnole. Je parle espagnol et français.
 J'aime la danse et les sorties entre amis.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
 Rappelez-moi au 079 321 65 43. Merci ! »`;
 
 const CE_POOL_10 = buildExpressPool("e1-1-10", [
@@ -924,6 +950,10 @@ Je m'appelle David. J'ai 27 ans.
 Je suis ingénieur. J'habite à Lausanne.
 J'aime la musculation et la course.
 Information importante : le lundi, mercredi et vendredi.
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+C'est important pour moi, merci beaucoup.
 Merci de lire ma présentation avec attention.
 David`;
 
@@ -1019,6 +1049,10 @@ Je m'appelle Inès. J'ai 20 ans.
 Je suis étudiante. J'habite à Genève.
 J'aime la lecture et les langues.
 Information importante : le cours du mardi matin.
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Je reste près de mon téléphone aujourd'hui.
 Merci de lire ma présentation avec attention.
 Inès`;
 
@@ -1114,6 +1148,9 @@ Je m'appelle Antoine. J'ai 33 ans.
 Je suis journaliste. J'habite à Neuchâtel.
 J'aime le cinéma et les voyages.
 Information importante : chaque jeudi soir.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci de lire ma présentation avec attention.
 Antoine`;
 
@@ -1209,6 +1246,10 @@ Je m'appelle Salma. J'ai 29 ans.
 Je suis secrétaire. J'habite à Bienne.
 J'aime la cuisine et la famille.
 Information importante : depuis un an.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+Merci de lire ce message jusqu'à la fin.
 Merci de lire ma présentation avec attention.
 Salma`;
 
@@ -1304,6 +1345,10 @@ Je m'appelle Hugo. J'ai 38 ans.
 Je suis pharmacien. J'habite à Fribourg.
 J'aime le ski et la randonnée.
 Information importante : la pharmacie du centre.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+En cas de perte d'objet, passez à l'accueil.
 Merci de lire ma présentation avec attention.
 Hugo`;
 
@@ -1399,6 +1444,10 @@ Je m'appelle Maya. J'ai 23 ans.
 Je suis étudiante. J'habite à Lausanne.
 J'aime la musique et le théâtre.
 Information importante : l'allemand et l'anglais.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+En cas de question, vous pouvez écrire ou téléphoner.
 Merci de lire ma présentation avec attention.
 Maya`;
 
@@ -1494,6 +1543,10 @@ Je m'appelle Paul. J'ai 42 ans.
 Je suis comptable. J'habite à Genève.
 J'aime le tennis et la lecture.
 Information importante : le service financier.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.
+Nous traitons votre demande rapidement.
 Merci de lire ma présentation avec attention.
 Paul`;
 
@@ -1589,6 +1642,10 @@ Je m'appelle Emma. J'ai 31 ans.
 Je suis infirmière. J'habite à Montreux.
 J'aime la natation et les animaux.
 Information importante : Genève–Lausanne chaque lundi.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+À très bientôt, prends soin de toi.
 Merci de lire ma présentation avec attention.
 Emma`;
 
@@ -1684,6 +1741,10 @@ Je m'appelle Victor. J'ai 50 ans.
 Je suis professeur. J'habite à Sion.
 J'aime l'histoire et les musées.
 Information importante : depuis dix ans.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Joignez les documents demandés si nécessaire.
 Merci de lire ma présentation avec attention.
 Victor`;
 
@@ -1779,6 +1840,10 @@ Je m'appelle Julie. J'ai 34 ans.
 Je suis professeure. J'habite à Yverdon.
 J'aime la pédagogie et le piano.
 Information importante : les mathématiques et le français.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.
+Nous traitons votre demande rapidement.
 Merci de lire ma présentation avec attention.
 Julie`;
 

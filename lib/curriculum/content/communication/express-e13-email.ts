@@ -32,6 +32,18 @@ Votre rendez-vous est confirmé pour la formation de bureautique.
 Nous vous accueillerons le lundi 4 mars à 8 h 30 au Centre Horizon.
 Mme Rochat sera à l'entrée pour vous guider. Merci d'apporter votre carte d'identité.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Merci,
 Accueil Horizon`;
 
@@ -133,6 +145,18 @@ Pour préparer l'atelier de français professionnel, mettez votre CV simple dans
 La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Jura.
 Si vous avez une question, M. Diallo répond au 021 610 31 41.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Merci,
 Mme Bernard`;
 
@@ -234,6 +258,18 @@ L'horaire de le cours Excel débutant change légèrement.
 Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
 Le lieu reste Bureau CPF. Pensez à prévenir Mme Perrin si vous ne pouvez pas venir.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci,
 Secrétariat Central`;
 
@@ -335,6 +371,19 @@ Nous avons bien reçu votre demande concernant la séance sur le CPF.
 Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à l'École des Métiers.
 Le dossier sera plus vite traité avec une copie du diplôme.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci,
 M. Lopez`;
 
@@ -436,6 +485,18 @@ Voici le déroulement prévu le vendredi 5 avril.
 À 10 h 30, accueil à Maison de quartier. Ensuite, Mme Rossi présentera la formation courte en cuisine.
 La séance est courte; gardez simplement un stylo bleu avec vous.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Merci,
 Service administratif`;
 
@@ -537,6 +598,19 @@ Petit rappel avant votre visite : le module de sécurité au travail est bien pr
 Merci d'arriver à 11 h dans la Salle Léman.
 M. Meyer vérifiera que votre dossier contient votre attestation CPF.
 
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci,
 Mme Garcia`;
 
@@ -638,6 +712,19 @@ Nous vous invitons à une réunion au sujet de le cours du soir en informatique.
 Elle se tiendra le lundi 22 avril à 13 h 30, au Centre Horizon.
 Répondez avant vendredi et signalez à Mme Rochat si votre carte d'identité manque encore.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci,
 Bureau des inscriptions`;
 
@@ -739,6 +826,20 @@ Votre dossier pour l'atelier pour changer de métier est maintenant complet.
 La prochaine étape se fera le mardi 30 avril à 14 h.
 Rendez-vous dans la Salle Jura; gardez votre CV simple avec vous jusqu'à la fin.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Je prépare déjà tout pour que ce soit prêt.
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
 Merci,
 M. Girard`;
 
@@ -840,6 +941,18 @@ Il manque encore votre numéro AVS.
 Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, au Bureau CPF.
 Demandez Mme Perrin à l'accueil pour éviter une attente trop longue.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Merci,
 Service planning`;
 
@@ -941,6 +1054,19 @@ Le rendez-vous pour le test de niveau A2 est reporté.
 Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à l'École des Métiers.
 Merci de confirmer votre présence à M. Favre.
 
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Joignez les documents demandés si nécessaire.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci,
 Mme Nguyen`;
 
@@ -1042,6 +1168,19 @@ Deux choix étaient possibles pour la présentation des formations gratuites.
 Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
 La rencontre aura lieu à Maison de quartier; apportez un stylo bleu.
 
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Merci,
 Accueil formation`;
 
@@ -1143,6 +1282,20 @@ Suite à notre appel, je résume les informations.
 Le cours de calcul professionnel aura lieu le lundi 3 juin à 16 h, dans la Salle Léman.
 M. Meyer vous attendra avec la liste des participants.
 
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Passe le bonjour à tout le monde de ma part.
+À très bientôt, prends soin de toi.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Merci,
 M. Robert`;
 
@@ -1244,6 +1397,19 @@ Pour votre premier jour lié à l'atelier pour remplir un dossier, arrivez un pe
 La date est le mardi 11 juin, et l'accueil se trouve au Centre Horizon.
 Merci d'apporter votre carte d'identité; cela facilitera l'inscription.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci,
 Service dossiers`;
 
@@ -1345,6 +1511,18 @@ Merci pour votre réponse positive.
 Votre place pour la formation en vente est gardée le mercredi 19 juin à 17 h.
 Dans la salle jura, M. Diallo donnera les consignes et vérifiera votre CV simple.
 
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
 Merci,
 Mme Moreau`;
 
@@ -1446,6 +1624,18 @@ Voici le contact à noter pour la séance de conseil individuel : Mme Perrin.
 Vous pouvez appeler le 021 610 44 54 seulement le matin.
 La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, au Bureau CPF.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Merci,
 Équipe coordination`;
 
@@ -1547,6 +1737,18 @@ Message pour tout le groupe : Le cours de communication au travail commence bien
 Soyez présent(e) le vendredi 5 juillet à 18 h, à l'École des Métiers.
 Chaque personne prépare une copie du diplôme; M. Favre fera l'appel.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Merci,
 M. Petit`;
 
@@ -1648,6 +1850,18 @@ Résumé de la rencontre : nous avons parlé de le bilan avant inscription.
 Le groupe a choisi Maison de quartier pour la suite.
 La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer un stylo bleu.
 
+Les documents se téléchargent aussi en ligne.
+Le numéro d'urgence est affiché partout.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci,
 Service suivi`;
 
@@ -1749,6 +1963,17 @@ Votre rendez-vous individuel avec M. Meyer est fixé.
 Il concerne l'atelier sur les horaires de cours. Venez le mardi 23 juillet à 19 h, dans la Salle Léman.
 N'oubliez pas votre attestation CPF.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 Merci,
 Mme Leroy`;
 
@@ -1850,6 +2075,19 @@ Nous avons trouvé une solution pour la visite du centre de formation.
 Vous pouvez passer le mercredi 31 juillet à 19 h 30 au Centre Horizon.
 Mme Rochat vous expliquera la suite; apportez aussi votre carte d'identité.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
 Merci,
 Accueil principal`;
 
@@ -1951,6 +2189,19 @@ Dernières informations avant le rappel avant le premier cours.
 Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
 Le lieu est Salle Jura, le contact est M. Diallo, et le document à préparer est votre CV simple.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+Les places assises sont limitées le week-end.
+Un agent peut vous accompagner jusqu'au bon guichet.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
 Merci,
 M. Simon`;
 
@@ -2454,6 +2705,18 @@ Votre rendez-vous est confirmé pour la recherche de stage en crèche.
 Nous vous accueillerons le lundi 4 mars à 8 h 30 à l'Agence Emploi Plus.
 Mme Keller sera à l'entrée pour vous guider. Merci d'apporter votre convention signée.
 
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une carte de la zone est affichée dehors.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci,
 Accueil Horizon`;
 
@@ -2555,6 +2818,18 @@ Pour préparer l'atelier CV pour un stage, mettez un CV imprimé dans votre sac.
 La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Rhône.
 Si vous avez une question, M. Benali répond au 022 420 31 41.
 
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Merci,
 Mme Bernard`;
 
@@ -2656,6 +2931,17 @@ L'horaire de la visite d'une entreprise locale change légèrement.
 Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
 Le lieu reste Crèche Les Pivoines. Pensez à prévenir Mme Arnaud si vous ne pouvez pas venir.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Merci,
 Secrétariat Central`;
 
@@ -2757,6 +3043,20 @@ Nous avons bien reçu votre demande concernant la rencontre avec une conseillèr
 Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à Atelier Municipal.
 Le dossier sera plus vite traité avec vos disponibilités.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci,
 M. Lopez`;
 
@@ -2858,6 +3158,18 @@ Voici le déroulement prévu le vendredi 5 avril.
 À 10 h 30, accueil à Magasin Centre-Ville. Ensuite, Mme Costa présentera le stage découverte en logistique.
 La séance est courte; gardez simplement une copie du permis avec vous.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Merci,
 Service administratif`;
 
@@ -2959,6 +3271,19 @@ Petit rappel avant votre visite : l'appel à candidatures pour un stage est bien
 Merci d'arriver à 11 h à la Bibliothèque Est.
 M. Weber vérifiera que votre dossier contient votre carte d'identité.
 
+À très bientôt, prends soin de toi.
+Je joins les détails importants juste après.
+Si le plan change, je te préviens tout de suite.
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci,
 Mme Garcia`;
 
@@ -3060,6 +3385,19 @@ Nous vous invitons à une réunion au sujet de la préparation d'un entretien de
 Elle se tiendra le lundi 22 avril à 13 h 30, à l'Agence Emploi Plus.
 Répondez avant vendredi et signalez à Mme Keller si votre convention signée manque encore.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Merci,
 Bureau des inscriptions`;
 
@@ -3161,6 +3499,20 @@ Votre dossier pour la séance sur les sites d'emploi est maintenant complet.
 La prochaine étape se fera le mardi 30 avril à 14 h.
 Rendez-vous dans la Salle Rhône; gardez un CV imprimé avec vous jusqu'à la fin.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Merci,
 M. Girard`;
 
@@ -3262,6 +3614,19 @@ Il manque encore une lettre courte.
 Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, à Crèche Les Pivoines.
 Demandez Mme Arnaud à l'accueil pour éviter une attente trop longue.
 
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci,
 Service planning`;
 
@@ -3363,6 +3728,19 @@ Le rendez-vous pour le forum des stages est reporté.
 Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à Atelier Municipal.
 Merci de confirmer votre présence à M. Schmid.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Merci,
 Mme Nguyen`;
 
@@ -3464,6 +3842,19 @@ Deux choix étaient possibles pour le dépôt de dossier de stage.
 Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
 La rencontre aura lieu à Magasin Centre-Ville; apportez une copie du permis.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
 Merci,
 Accueil formation`;
 
@@ -3565,6 +3956,20 @@ Suite à notre appel, je résume les informations.
 Le stage en bibliothèque aura lieu le lundi 3 juin à 16 h, à la Bibliothèque Est.
 M. Weber vous attendra avec la liste des participants.
 
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Merci,
 M. Robert`;
 
@@ -3666,6 +4071,19 @@ Pour votre premier jour lié à le stage en maison de retraite, arrivez un peu a
 La date est le mardi 11 juin, et l'accueil se trouve à l'Agence Emploi Plus.
 Merci d'apporter votre convention signée; cela facilitera l'inscription.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
 Merci,
 Service dossiers`;
 
@@ -3767,6 +4185,18 @@ Merci pour votre réponse positive.
 Votre place pour l'atelier lettre de motivation est gardée le mercredi 19 juin à 17 h.
 Dans la salle rhône, M. Benali donnera les consignes et vérifiera un CV imprimé.
 
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.
+On peut décaler d'une demi-heure si besoin.
+Je reste à votre disposition pour toute précision.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci,
 Mme Moreau`;
 
@@ -3868,6 +4298,19 @@ Voici le contact à noter pour le stage court en magasin : Mme Arnaud.
 Vous pouvez appeler le 022 420 44 54 seulement le matin.
 La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, à Crèche Les Pivoines.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Nous restons disponibles pour vous aider.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Merci,
 Équipe coordination`;
 
@@ -3969,6 +4412,18 @@ Message pour tout le groupe : La permanence pôle emploi commence bientôt.
 Soyez présent(e) le vendredi 5 juillet à 18 h, à Atelier Municipal.
 Chaque personne prépare vos disponibilités; M. Schmid fera l'appel.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Merci,
 M. Petit`;
 
@@ -4070,6 +4525,18 @@ Résumé de la rencontre : nous avons parlé de la visite du service technique.
 Le groupe a choisi Magasin Centre-Ville pour la suite.
 La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer une copie du permis.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Merci,
 Service suivi`;
 
@@ -4171,6 +4638,17 @@ Votre rendez-vous individuel avec M. Weber est fixé.
 Il concerne le stage en accueil administratif. Venez le mardi 23 juillet à 19 h, à la Bibliothèque Est.
 N'oubliez pas votre carte d'identité.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Merci,
 Mme Leroy`;
 
@@ -4272,6 +4750,19 @@ Nous avons trouvé une solution pour la réunion avec les tuteurs.
 Vous pouvez passer le mercredi 31 juillet à 19 h 30 à l'Agence Emploi Plus.
 Mme Keller vous expliquera la suite; apportez aussi votre convention signée.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Merci,
 Accueil principal`;
 
@@ -4373,6 +4864,18 @@ Dernières informations avant le rappel avant le début du stage.
 Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
 Le lieu est Salle Rhône, le contact est M. Benali, et le document à préparer est un CV imprimé.
 
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci,
 M. Simon`;
 
@@ -4876,6 +5379,18 @@ Votre rendez-vous est confirmé pour la candidature pour agent d'accueil.
 Nous vous accueillerons le lundi 4 mars à 8 h 30 au Bureau Emploi.
 Mme Marchand sera à l'entrée pour vous guider. Merci d'apporter votre CV à jour.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
 Merci,
 Accueil Horizon`;
 
@@ -4977,6 +5492,18 @@ Pour préparer la réponse à une offre de vendeur, mettez une lettre signée da
 La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Alpes.
 Si vous avez une question, M. Laurent répond au 024 730 31 41.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci,
 Mme Bernard`;
 
@@ -5078,6 +5605,18 @@ L'horaire de l'envoi d'un CV de serveur change légèrement.
 Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
 Le lieu reste Entreprise Nova. Pensez à prévenir Mme Huber si vous ne pouvez pas venir.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Merci,
 Secrétariat Central`;
 
@@ -5179,6 +5718,19 @@ Nous avons bien reçu votre demande concernant l'atelier candidature spontanée.
 Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à l'Agence Travail Direct.
 Le dossier sera plus vite traité avec deux références.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Merci,
 M. Lopez`;
 
@@ -5280,6 +5832,18 @@ Voici le déroulement prévu le vendredi 5 avril.
 À 10 h 30, accueil à Espace Candidats. Ensuite, Mme Rossi présentera le dossier pour aide de cuisine.
 La séance est courte; gardez simplement votre adresse e-mail avec vous.
 
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Merci encore pour votre compréhension.
 Merci,
 Service administratif`;
 
@@ -5381,6 +5945,19 @@ Petit rappel avant votre visite : l'offre de secrétaire à temps partiel est bi
 Merci d'arriver à 11 h à Guichet 3.
 M. Clerc vérifiera que votre dossier contient le numéro de l'offre.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Merci,
 Mme Garcia`;
 
@@ -5482,6 +6059,19 @@ Nous vous invitons à une réunion au sujet de la relecture d'une lettre de moti
 Elle se tiendra le lundi 22 avril à 13 h 30, au Bureau Emploi.
 Répondez avant vendredi et signalez à Mme Marchand si votre CV à jour manque encore.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Merci,
 Bureau des inscriptions`;
 
@@ -5583,6 +6173,20 @@ Votre dossier pour la candidature en ligne est maintenant complet.
 La prochaine étape se fera le mardi 30 avril à 14 h.
 Rendez-vous dans la Salle Alpes; gardez une lettre signée avec vous jusqu'à la fin.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Merci,
 M. Girard`;
 
@@ -5684,6 +6288,19 @@ Il manque encore vos certificats de travail.
 Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, à l'Entreprise Nova.
 Demandez Mme Huber à l'accueil pour éviter une attente trop longue.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci,
 Service planning`;
 
@@ -5785,6 +6402,19 @@ Le rendez-vous pour la séance sur les annonces est reporté.
 Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à l'Agence Travail Direct.
 Merci de confirmer votre présence à M. Morel.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci,
 Mme Nguyen`;
 
@@ -5886,6 +6516,18 @@ Deux choix étaient possibles pour la préparation des références.
 Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
 La rencontre aura lieu à Espace Candidats; apportez votre adresse e-mail.
 
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Merci,
 Accueil formation`;
 
@@ -5987,6 +6629,20 @@ Suite à notre appel, je résume les informations.
 Le poste d'assistant administratif aura lieu le lundi 3 juin à 16 h, à Guichet 3.
 M. Clerc vous attendra avec la liste des participants.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+Le cachet de la date est important.
+Sans confirmation, la place n'est pas garantie.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Merci,
 M. Robert`;
 
@@ -6088,6 +6744,19 @@ Pour votre premier jour lié à l'offre de chauffeur livreur, arrivez un peu ava
 La date est le mardi 11 juin, et l'accueil se trouve au Bureau Emploi.
 Merci d'apporter votre CV à jour; cela facilitera l'inscription.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Merci,
 Service dossiers`;
 
@@ -6189,6 +6858,18 @@ Merci pour votre réponse positive.
 Votre place pour le dépôt de dossier au guichet est gardée le mercredi 19 juin à 17 h.
 Dans la salle alpes, M. Laurent donnera les consignes et vérifiera une lettre signée.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
 Merci,
 Mme Moreau`;
 
@@ -6290,6 +6971,19 @@ Voici le contact à noter pour la réponse pour un CDI : Mme Huber.
 Vous pouvez appeler le 024 730 44 54 seulement le matin.
 La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, à l'Entreprise Nova.
 
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Merci,
 Équipe coordination`;
 
@@ -6391,6 +7085,18 @@ Message pour tout le groupe : La réponse pour un emploi temporaire commence bie
 Soyez présent(e) le vendredi 5 juillet à 18 h, à l'Agence Travail Direct.
 Chaque personne prépare deux références; M. Morel fera l'appel.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci,
 M. Petit`;
 
@@ -6492,6 +7198,17 @@ Résumé de la rencontre : nous avons parlé de l'atelier sur le profil en ligne
 Le groupe a choisi Espace Candidats pour la suite.
 La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer votre adresse e-mail.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
 Merci,
 Service suivi`;
 
@@ -6593,6 +7310,17 @@ Votre rendez-vous individuel avec M. Clerc est fixé.
 Il concerne l'appel après une candidature. Venez le mardi 23 juillet à 19 h, à Guichet 3.
 N'oubliez pas le numéro de l'offre.
 
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
 Merci,
 Mme Leroy`;
 
@@ -6694,6 +7422,19 @@ Nous avons trouvé une solution pour la mise à jour du CV.
 Vous pouvez passer le mercredi 31 juillet à 19 h 30 au Bureau Emploi.
 Mme Marchand vous expliquera la suite; apportez aussi votre CV à jour.
 
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci,
 Accueil principal`;
 
@@ -6795,6 +7536,19 @@ Dernières informations avant le rappel avant envoi du dossier.
 Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
 Le lieu est Salle Alpes, le contact est M. Laurent, et le document à préparer est une lettre signée.
 
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Merci,
 M. Simon`;
 
@@ -7298,6 +8052,18 @@ Votre rendez-vous est confirmé pour l'entretien pour un poste d'accueil.
 Nous vous accueillerons le lundi 4 mars à 8 h 30 à l'Entreprise Alpina.
 Mme Duval sera à l'entrée pour vous guider. Merci d'apporter votre CV imprimé.
 
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Merci,
 Accueil Horizon`;
 
@@ -7399,6 +8165,18 @@ Pour préparer la simulation d'entretien, mettez une pièce d'identité dans vot
 La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Entretien.
 Si vous avez une question, M. Steiner répond au 026 840 31 41.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
 Merci,
 Mme Bernard`;
 
@@ -7500,6 +8278,18 @@ L'horaire de l'entretien avec les ressources humaines change légèrement.
 Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
 Le lieu reste Bureau RH. Pensez à prévenir Mme Chevalier si vous ne pouvez pas venir.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
 Merci,
 Secrétariat Central`;
 
@@ -7601,6 +8391,20 @@ Nous avons bien reçu votre demande concernant la préparation des questions fer
 Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à l'Hôtel Central.
 Le dossier sera plus vite traité avec vos certificats.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Vous pouvez venir en vélo s'il fait beau.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci,
 M. Lopez`;
 
@@ -7702,6 +8506,18 @@ Voici le déroulement prévu le vendredi 5 avril.
 À 10 h 30, accueil à l'Agence Recrutement. Ensuite, Mme Aubert présentera l'entretien pour un CDI.
 La séance est courte; gardez simplement un stylo noir avec vous.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Merci,
 Service administratif`;
 
@@ -7803,6 +8619,19 @@ Petit rappel avant votre visite : l'atelier qualités et défauts est bien prév
 Merci d'arriver à 11 h dans la Salle Mont-Blanc.
 M. Blanc vérifiera que votre dossier contient la liste de vos questions.
 
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Merci,
 Mme Garcia`;
 
@@ -7904,6 +8733,19 @@ Nous vous invitons à une réunion au sujet de le rendez-vous avec un recruteur.
 Elle se tiendra le lundi 22 avril à 13 h 30, à l'Entreprise Alpina.
 Répondez avant vendredi et signalez à Mme Duval si votre CV imprimé manque encore.
 
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Merci,
 Bureau des inscriptions`;
 
@@ -8005,6 +8847,20 @@ Votre dossier pour le test oral avant entretien est maintenant complet.
 La prochaine étape se fera le mardi 30 avril à 14 h.
 Rendez-vous dans la Salle Entretien; gardez une pièce d'identité avec vous jusqu'à la fin.
 
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Merci,
 M. Girard`;
 
@@ -8106,6 +8962,19 @@ Il manque encore la convocation.
 Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, au Bureau RH.
 Demandez Mme Chevalier à l'accueil pour éviter une attente trop longue.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Merci,
 Service planning`;
 
@@ -8207,6 +9076,19 @@ Le rendez-vous pour la séance sur la ponctualité est reporté.
 Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à l'Hôtel Central.
 Merci de confirmer votre présence à M. Kurz.
 
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
 Merci,
 Mme Nguyen`;
 
@@ -8308,6 +9190,19 @@ Deux choix étaient possibles pour l'entretien pour un apprentissage adulte.
 Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
 La rencontre aura lieu à l'Agence Recrutement; apportez un stylo noir.
 
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Merci,
 Accueil formation`;
 
@@ -8409,6 +9304,20 @@ Suite à notre appel, je résume les informations.
 La préparation de la présentation personnelle aura lieu le lundi 3 juin à 16 h, dans la Salle Mont-Blanc.
 M. Blanc vous attendra avec la liste des participants.
 
+Si le plan change, je te préviens tout de suite.
+C'est important pour moi, merci de lire jusqu'à la fin.
+Tu peux partager ce message si besoin.
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci,
 M. Robert`;
 
@@ -8510,6 +9419,19 @@ Pour votre premier jour lié à l'entretien téléphonique, arrivez un peu avant
 La date est le mardi 11 juin, et l'accueil se trouve à l'Entreprise Alpina.
 Merci d'apporter votre CV imprimé; cela facilitera l'inscription.
 
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci,
 Service dossiers`;
 
@@ -8611,6 +9533,18 @@ Merci pour votre réponse positive.
 Votre place pour la visite avant entretien est gardée le mercredi 19 juin à 17 h.
 Dans la salle entretien, M. Steiner donnera les consignes et vérifiera une pièce d'identité.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Merci,
 Mme Moreau`;
 
@@ -8712,6 +9646,18 @@ Voici le contact à noter pour l'entretien pour un poste de vendeur : Mme Cheval
 Vous pouvez appeler le 026 840 44 54 seulement le matin.
 La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, au Bureau RH.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci,
 Équipe coordination`;
 
@@ -8813,6 +9759,19 @@ Message pour tout le groupe : L'atelier tenue professionnelle commence bientôt.
 Soyez présent(e) le vendredi 5 juillet à 18 h, à l'Hôtel Central.
 Chaque personne prépare vos certificats; M. Kurz fera l'appel.
 
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Merci,
 M. Petit`;
 
@@ -8914,6 +9873,18 @@ Résumé de la rencontre : nous avons parlé de le rappel des documents d'entret
 Le groupe a choisi Agence Recrutement pour la suite.
 La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer un stylo noir.
 
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Merci,
 Service suivi`;
 
@@ -9015,6 +9986,17 @@ Votre rendez-vous individuel avec M. Blanc est fixé.
 Il concerne l'entretien avec deux responsables. Venez le mardi 23 juillet à 19 h, dans la Salle Mont-Blanc.
 N'oubliez pas la liste de vos questions.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
 Merci,
 Mme Leroy`;
 
@@ -9116,6 +10098,19 @@ Nous avons trouvé une solution pour le bilan après simulation.
 Vous pouvez passer le mercredi 31 juillet à 19 h 30 à l'Entreprise Alpina.
 Mme Duval vous expliquera la suite; apportez aussi votre CV imprimé.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Le service répond en français et en anglais.
+Une version audio est disponible sur demande.
+Les documents se téléchargent aussi en ligne.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci,
 Accueil principal`;
 
@@ -9217,6 +10212,18 @@ Dernières informations avant le message avant l'entretien final.
 Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
 Le lieu est Salle Entretien, le contact est M. Steiner, et le document à préparer est une pièce d'identité.
 
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
 Merci,
 M. Simon`;
 
@@ -9720,6 +10727,18 @@ Votre rendez-vous est confirmé pour l'accueil du premier jour.
 Nous vous accueillerons le lundi 4 mars à 8 h 30 à l'Accueil principal.
 Mme Muller sera à l'entrée pour vous guider. Merci d'apporter votre badge provisoire.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Merci,
 Accueil Horizon`;
 
@@ -9821,6 +10840,18 @@ Pour préparer la visite des bureaux, mettez le cahier de notes dans votre sac.
 La rencontre aura lieu le mardi 12 mars à 9 h, dans la Salle Équipe.
 Si vous avez une question, M. Rossi répond au 027 950 31 41.
 
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Pensez à arriver un peu en avance.
 Merci,
 Mme Bernard`;
 
@@ -9922,6 +10953,18 @@ L'horaire de la réunion avec l'équipe change légèrement.
 Le nouveau rendez-vous est fixé au mercredi 20 mars à 9 h 15.
 Le lieu reste Bureau 204. Pensez à prévenir Mme Fontaine si vous ne pouvez pas venir.
 
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Merci,
 Secrétariat Central`;
 
@@ -10023,6 +11066,19 @@ Nous avons bien reçu votre demande concernant la formation au logiciel interne.
 Vous pouvez passer le jeudi 28 mars; l'accueil ouvrira à 10 h à Atelier Nord.
 Le dossier sera plus vite traité avec la fiche d'urgence.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Merci,
 M. Lopez`;
 
@@ -10124,6 +11180,18 @@ Voici le déroulement prévu le vendredi 5 avril.
 À 10 h 30, accueil au Service Clients. Ensuite, Mme Bonnet présentera la présentation des consignes de sécurité.
 La séance est courte; gardez simplement vos horaires signés avec vous.
 
+Sans confirmation, la place n'est pas garantie.
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
 Merci,
 Service administratif`;
 
@@ -10225,6 +11293,19 @@ Petit rappel avant votre visite : la remise du badge est bien prévu le samedi 1
 Merci d'arriver à 11 h à Espace Pause.
 M. Bernard vérifiera que votre dossier contient le règlement lu.
 
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Je prépare déjà tout pour que ce soit prêt.
+Si tu veux, on peut faire une liste ensemble.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Merci,
 Mme Garcia`;
 
@@ -10326,6 +11407,19 @@ Nous vous invitons à une réunion au sujet de la pause café avec les collègue
 Elle se tiendra le lundi 22 avril à 13 h 30, à l'Accueil principal.
 Répondez avant vendredi et signalez à Mme Muller si votre badge provisoire manque encore.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Merci,
 Bureau des inscriptions`;
 
@@ -10427,6 +11521,20 @@ Votre dossier pour la lecture du règlement est maintenant complet.
 La prochaine étape se fera le mardi 30 avril à 14 h.
 Rendez-vous dans la Salle Équipe; gardez le cahier de notes avec vous jusqu'à la fin.
 
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Merci,
 M. Girard`;
 
@@ -10528,6 +11636,19 @@ Il manque encore votre mot de passe.
 Vous pouvez le déposer le mercredi 8 mai à partir de 14 h 30, au Bureau 204.
 Demandez Mme Fontaine à l'accueil pour éviter une attente trop longue.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Merci,
 Service planning`;
 
@@ -10629,6 +11750,19 @@ Le rendez-vous pour l'atelier sur les procédures est reporté.
 Nous proposons maintenant le jeudi 16 mai à 15 h, toujours à Atelier Nord.
 Merci de confirmer votre présence à M. Garcia.
 
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci,
 Mme Nguyen`;
 
@@ -10730,6 +11864,19 @@ Deux choix étaient possibles pour l'organisation de la première semaine.
 Vous avez choisi le créneau du vendredi 24 mai à 15 h 30.
 La rencontre aura lieu au Service Clients; apportez vos horaires signés.
 
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci,
 Accueil formation`;
 
@@ -10831,6 +11978,20 @@ Suite à notre appel, je résume les informations.
 La présentation du planning aura lieu le lundi 3 juin à 16 h, à Espace Pause.
 M. Bernard vous attendra avec la liste des participants.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Le lieu est facile à trouver avec les indications.
+Gardez ce texte pour vous en souvenir.
 Merci,
 M. Robert`;
 
@@ -10932,6 +12093,18 @@ Pour votre premier jour lié à la demande d'accès informatique, arrivez un peu
 La date est le mardi 11 juin, et l'accueil se trouve à l'Accueil principal.
 Merci d'apporter votre badge provisoire; cela facilitera l'inscription.
 
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci,
 Service dossiers`;
 
@@ -11033,6 +12206,17 @@ Merci pour votre réponse positive.
 Votre place pour le point avec le chef de service est gardée le mercredi 19 juin à 17 h.
 Dans la salle équipe, M. Rossi donnera les consignes et vérifiera le cahier de notes.
 
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Merci,
 Mme Moreau`;
 
@@ -11134,6 +12318,19 @@ Voici le contact à noter pour la découverte de la cantine : Mme Fontaine.
 Vous pouvez appeler le 027 950 44 54 seulement le matin.
 La prochaine rencontre aura lieu le jeudi 27 juin à 17 h 30, au Bureau 204.
 
+Bonne journée et à tout de suite !
+Je reste près de mon téléphone aujourd'hui.
+On se voit bientôt, j'ai hâte.
+Le trajet est simple, ne t'inquiète pas.
+Apporte ce dont tu as besoin, juste au cas où.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
+Le personnel peut répondre en français simple.
 Merci,
 Équipe coordination`;
 
@@ -11235,6 +12432,19 @@ Message pour tout le groupe : La séance sur les congés commence bientôt.
 Soyez présent(e) le vendredi 5 juillet à 18 h, à Atelier Nord.
 Chaque personne prépare la fiche d'urgence; M. Garcia fera l'appel.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
 Merci,
 M. Petit`;
 
@@ -11336,6 +12546,18 @@ Résumé de la rencontre : nous avons parlé de le compte rendu de réunion.
 Le groupe a choisi Service Clients pour la suite.
 La prochaine date est lundi 15 juillet à 18 h 30. À faire avant : préparer vos horaires signés.
 
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Merci,
 Service suivi`;
 
@@ -11437,6 +12659,17 @@ Votre rendez-vous individuel avec M. Bernard est fixé.
 Il concerne la formation au téléphone. Venez le mardi 23 juillet à 19 h, à Espace Pause.
 N'oubliez pas le règlement lu.
 
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+Nous avons bien noté votre situation.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
 Merci,
 Mme Leroy`;
 
@@ -11538,6 +12771,19 @@ Nous avons trouvé une solution pour le bilan après une semaine.
 Vous pouvez passer le mercredi 31 juillet à 19 h 30 à l'Accueil principal.
 Mme Muller vous expliquera la suite; apportez aussi votre badge provisoire.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Merci,
 Accueil principal`;
 
@@ -11639,6 +12885,19 @@ Dernières informations avant le rappel des horaires d'équipe.
 Le rendez-vous est confirmé pour le jeudi 8 août à 20 h.
 Le lieu est Salle Équipe, le contact est M. Rossi, et le document à préparer est le cahier de notes.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci,
 M. Simon`;
 

@@ -16,7 +16,12 @@ const CE_TEXT_1 = `Affiche vitrine
 
 Je regarde une baguette tradition. Détail important : 2 pièces.
 L'information affichée est à 7 h chez Boulangerie Martin.
-Avant de partir, il faut passer tôt. Détail : 2.80 francs.`;
+Avant de partir, il faut passer tôt. Détail : 2.80 francs.
+Les personnes à mobilité réduite sont prioritaires.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const CE_POOL_1 = buildExpressPool("e4-3-1", [
   q({
@@ -96,7 +101,12 @@ const CE_TEXT_2 = `SMS commande
 
 Salut ! Pour des croissants au beurre, information : demain à 8 h.
 On se retrouve chez Boulangerie du Lac. 6 pièces est le détail à vérifier.
-Pense à réserver au prénom Marie; Détail : 12 francs.`;
+Pense à réserver au prénom Marie; Détail : 12 francs.
+Joignez les documents demandés si nécessaire.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const CE_POOL_2 = buildExpressPool("e4-3-2", [
   q({
@@ -177,7 +187,12 @@ const CE_TEXT_3 = `Note commande
 À noter aujourd'hui : un gâteau au chocolat.
 Lieu : Pâtisserie Douceur. Moment : samedi à 10 h.
 Petit détail : 1 gâteau. Action prévue : écrire le prénom.
-35 francs.`;
+35 francs.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+À très bientôt, prends soin de toi.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.`;
 
 const CE_POOL_3 = buildExpressPool("e4-3-3", [
   q({
@@ -258,7 +273,12 @@ const CE_TEXT_4 = `WhatsApp voisin
 La cliente hésite encore pour un pain complet.
 Chez Pain & Co, elle vérifie 1 pain et demande conseil.
 Information : ce matin. Elle doit prendre un sac.
-3.50 francs.`;
+3.50 francs.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const CE_POOL_4 = buildExpressPool("e4-3-4", [
   q({
@@ -339,7 +359,12 @@ const CE_TEXT_5 = `Ardoise du jour
 Offre courte sur une quiche lorraine.
 Elle est disponible chez Boulangerie Centrale. Information : à midi.
 Le vendeur rappelle 4 parts. Pour profiter de l'offre, il faut réchauffer cinq minutes.
-18 francs.`;
+18 francs.
+Pensez à arriver un peu en avance.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.`;
 
 const CE_POOL_5 = buildExpressPool("e4-3-5", [
   q({
@@ -420,7 +445,13 @@ const CE_TEXT_6 = `E-mail bureau
 Bonjour, votre demande pour des viennoiseries assorties est prête.
 Passez chez Viennoiserie Express. Information : vendredi à 7 h.
 Au comptoir, annoncez 12 pièces et pensez à livrer à l'entreprise.
-24 francs.`;
+24 francs.
+Le service est disponible également en ligne.
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+En cas de changement, un nouvel avis sera publié.
+Merci encore pour votre confiance.`;
 
 const CE_POOL_6 = buildExpressPool("e4-3-6", [
   q({
@@ -501,7 +532,11 @@ const CE_TEXT_7 = `Liste famille
 Liste rapide avant de sortir : du pain aux noix.
 Adresse : Maison du Pain. Moment prévu : à 17 h.
 Détail à ne pas oublier : 2 pains.
-Sur place, il faut couper les tranches. Détail : 7 francs.`;
+Sur place, il faut couper les tranches. Détail : 7 francs.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Le service est également disponible en ligne.
+Merci de votre attention et de votre patience.`;
 
 const CE_POOL_7 = buildExpressPool("e4-3-7", [
   q({
@@ -582,7 +617,11 @@ const CE_TEXT_8 = `Notification sandwich
 Notification du magasin : des sandwichs jambon-fromage est disponible.
 Le retrait se fait chez Le Fournil. Information : de 11 h à 14 h.
 La note indique 3 sandwiches.
-Le client doit prendre la formule. Détail : 15 francs.`;
+Le client doit prendre la formule. Détail : 15 francs.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+Apportez une pièce d'identité si possible.
+Vous pouvez répondre directement à ce message.`;
 
 const CE_POOL_8 = buildExpressPool("e4-3-8", [
   q({
@@ -663,7 +702,12 @@ const CE_TEXT_9 = `Avis client
 Petit avis sur une tarte aux pommes.
 J'ai testé chez Boulangerie des Alpes; 1 tarte m'a plu.
 J'y retourne avec cette information : dimanche. Action prévue : réserver avant midi.
-22 francs.`;
+22 francs.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.`;
 
 const CE_POOL_9 = buildExpressPool("e4-3-9", [
   q({
@@ -744,7 +788,11 @@ const CE_TEXT_10 = `Commande de groupe
 Commande de groupe : des brioches.
 La personne responsable passe chez Boulangerie Rossi. Information notée : le matin.
 Elle confirme 4 brioches par téléphone.
-Il reste à payer ensemble. Détail : 8 francs.`;
+Il reste à payer ensemble. Détail : 8 francs.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const CE_POOL_10 = buildExpressPool("e4-3-10", [
   q({
@@ -825,7 +873,10 @@ const CE_TEXT_11 = `Alerte pâtisserie
 Alerte du jour : des éclairs au chocolat.
 Chez Pâtisserie Fine, il reste peu de stock.
 Information : cet après-midi. Cherchez 6 éclairs.
-Pour finaliser, il faut choisir les parfums. Détail : 18 francs.`;
+Pour finaliser, il faut choisir les parfums. Détail : 18 francs.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.`;
 
 const CE_POOL_11 = buildExpressPool("e4-3-11", [
   q({
@@ -907,6 +958,10 @@ Conversation courte :
 — Tu veux une fougasse aux olives ?
 — Oui, chez Boulangerie Nyon.
 — Information : à midi; détail : 2 pièces.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 — D'accord, action : demander un sachet. Détail : 9 francs.`;
 
 const CE_POOL_12 = buildExpressPool("e4-3-12", [
@@ -988,7 +1043,12 @@ const CE_TEXT_13 = `Ardoise campagne
 Sur l'ardoise, on lit un pain de campagne.
 Le lieu est Fournil Tradition; l'information indiquée est toute la journée.
 La ligne suivante parle de 1 pain.
-Le client doit demander la cuisson foncée. Détail : 4 francs.`;
+Le client doit demander la cuisson foncée. Détail : 4 francs.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Vous pouvez répondre directement à ce message.`;
 
 const CE_POOL_13 = buildExpressPool("e4-3-13", [
   q({
@@ -1070,7 +1130,11 @@ Rappel dans le téléphone : du pain de mie.
 Départ ou passage avec cette information : ce soir.
 Lieu : Coop boulangerie.
 Vérifier 2 paquets avant de payer.
-Ensuite, acheter avant fermeture. Détail : 5 francs.`;
+Ensuite, acheter avant fermeture. Détail : 5 francs.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Vous pouvez venir accompagné(e) si vous le souhaitez.`;
 
 const CE_POOL_14 = buildExpressPool("e4-3-14", [
   q({
@@ -1151,7 +1215,12 @@ const CE_TEXT_15 = `Annonce nouveauté
 Annonce locale : du pain sans gluten arrive ce matin.
 Chez Artisan Boulanger, l'information affichée est à 7 h.
 1 pain est mis de côté.
-Action simple : réserver la veille. Détail : 5.50 francs.`;
+Action simple : réserver la veille. Détail : 5.50 francs.
+Les informations importantes sont déjà notées plus haut.
+Joignez les documents demandés si nécessaire.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const CE_POOL_15 = buildExpressPool("e4-3-15", [
   q({
@@ -1231,6 +1300,10 @@ const CE_TEXT_16 = `Message au boulanger
 
 Petit message au vendeur : je viens pour des chaussons aux pommes.
 Je serai chez Boulangerie Soleil. Information : le matin.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Une confirmation sera envoyée ensuite.
 Merci de préparer 8 pièces.
 Sur place, je vais mettre de côté. Détail : 16 francs.`;
 
@@ -1313,7 +1386,12 @@ const CE_TEXT_17 = `Offre fidélité
 Carte de fidélité : offre sur des madeleines.
 Elle fonctionne chez Pains & Gourmandises; information : après l'école.
 Le détail lu en magasin est 12 pièces.
-Pour l'utiliser, il faut montrer la carte. Détail : 10 francs.`;
+Pour l'utiliser, il faut montrer la carte. Détail : 10 francs.
+Conservez le numéro de contact indiqué.
+Tout le monde est le bienvenu.
+À très bientôt, prends soin de toi.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.`;
 
 const CE_POOL_17 = buildExpressPool("e4-3-17", [
   q({
@@ -1394,7 +1472,11 @@ const CE_TEXT_18 = `Réservation mariage
 Pour la fête, il faut une pièce montée.
 La réservation est chez Pâtisserie Mariage. Information : samedi à 16 h.
 La vendeuse confirme 3 étages.
-Dernière étape : confirmer le prénom. Détail : 120 francs.`;
+Dernière étape : confirmer le prénom. Détail : 120 francs.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.`;
 
 const CE_POOL_18 = buildExpressPool("e4-3-18", [
   q({
@@ -1475,7 +1557,11 @@ const CE_TEXT_19 = `Confirmation retrait
 Message de confirmation : un pain aux céréales.
 Le retrait se fait chez Boulangerie Village. Information : tous les matins.
 La commande porte la note 1 pain.
-Consigne : présenter le numéro. Détail : 4.20 francs.`;
+Consigne : présenter le numéro. Détail : 4.20 francs.
+Merci encore pour votre compréhension.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.`;
 
 const CE_POOL_19 = buildExpressPool("e4-3-19", [
   q({
@@ -1556,7 +1642,11 @@ const CE_TEXT_20 = `Idée dessert
 Dernière idée du week-end : une boîte de macarons.
 On passe chez Pâtisserie Fine. Information : 24 h avant.
 On regarde d'abord 12 macarons.
-Si tout va bien, on peut choisir les parfums. Détail : 24 francs.`;
+Si tout va bien, on peut choisir les parfums. Détail : 24 francs.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Vous pouvez répondre directement à ce message.`;
 
 const CE_POOL_20 = buildExpressPool("e4-3-20", [
   q({
@@ -1935,191 +2025,191 @@ export const E4_3_PO: ExpressPoDialogue[] = [
 {
   id: "e4-3-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous passez une commande à la boulangerie.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de la boulangerie." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour boulangerie." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-3-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous passez une commande à la boulangerie.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de la boulangerie ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour boulangerie." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e4-3-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous passez une commande à la boulangerie.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur la boulangerie." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour la boulangerie, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e4-3-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous passez une commande à la boulangerie.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de la boulangerie." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour boulangerie." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-3-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous passez une commande à la boulangerie.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de la boulangerie ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour boulangerie." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e4-3-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous passez une commande à la boulangerie.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur la boulangerie." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour la boulangerie, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e4-3-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous passez une commande à la boulangerie.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de la boulangerie." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour boulangerie." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-3-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous passez une commande à la boulangerie.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Oui, bonjour, je vous écoute." },
+    { role: "B", text: "Bonjour, c'est au sujet de la boulangerie." },
+    { role: "A", text: "Bien sûr. Vous pouvez me donner plus de détails ?" },
+    { role: "B", text: "Oui. Je cherche une solution simple pour boulangerie." },
+    { role: "A", text: "Il y a deux possibilités. Vous préférez le matin ou l'après-midi ?" },
+    { role: "B", text: "L'après-midi, après 15 heures." },
+    { role: "A", text: "Alors je vous propose jeudi à 15 h 30." },
+    { role: "B", text: "C'est parfait. Vous m'envoyez une confirmation ?" },
+    { role: "A", text: "Oui, par SMS. Vous avez noté mon nom ?" },
+    { role: "B", text: "Oui. Merci et à jeudi !" },
   ],
 },
 {
   id: "e4-3-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous passez une commande à la boulangerie.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur la boulangerie." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour la boulangerie, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e4-3-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : la boulangerie.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous passez une commande à la boulangerie.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de la boulangerie." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de la boulangerie ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour boulangerie." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 }
 ];

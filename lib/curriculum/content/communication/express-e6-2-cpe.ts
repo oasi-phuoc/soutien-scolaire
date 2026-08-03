@@ -18,7 +18,13 @@ const E6_2_CE_TEXT_1 = `Horaires — Ligne Bus 12
 Lausanne–Pully.
 Départ gare 6 h–23 h, toutes les 10 min.
 Dernier départ 23 h 15.
-Ticket 3,50 fr.`;
+Ticket 3,50 fr.
+Merci de parler doucement dans les couloirs.
+Les sacs volumineux se déposent à l'accueil.
+Un vestiaire gratuit est disponible.
+Les consignes de sécurité sont affichées en rouge.
+Un plan simple est disponible à l'accueil.
+Merci de lire attentivement toutes les informations.`;
 
 const E6_2_CE_POOL_1 = buildExpressPool("e6-2-ce-1", [
   q({
@@ -111,7 +117,13 @@ const E6_2_CE_TEXT_2 = `Horaires — Ligne Bus 8
 Lausanne centre–Ouchy.
 Départ gare 5 h 30–0 h 30, toutes les 8 min.
 Dernier départ 0 h 22.
-Ticket 3,50 fr.`;
+Ticket 3,50 fr.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Tout est organisé pour que ce soit simple.`;
 
 const E6_2_CE_POOL_2 = buildExpressPool("e6-2-ce-2", [
   q({
@@ -204,7 +216,13 @@ const E6_2_CE_TEXT_3 = `Horaires — Ligne Bus 25
 Lausanne–Villars-Sainte-Croix.
 Départ gare 6 h–22 h, toutes les 20 min.
 Dernier départ 22 h 10.
-Ticket 4,20 fr.`;
+Ticket 4,20 fr.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Vous pouvez répondre directement à ce message.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.`;
 
 const E6_2_CE_POOL_3 = buildExpressPool("e6-2-ce-3", [
   q({
@@ -297,7 +315,12 @@ const E6_2_CE_TEXT_4 = `Horaires — Ligne Tram 1
 Flon–Renens.
 Départ gare 4 h 30–0 h 30, toutes les 5 min.
 Dernier départ 0 h 30.
-Ticket zone 11.`;
+Ticket zone 11.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E6_2_CE_POOL_4 = buildExpressPool("e6-2-ce-4", [
   q({
@@ -390,7 +413,13 @@ const E6_2_CE_TEXT_5 = `Horaires — Ligne Tram 2
 Ouchy–Grand-Pont.
 Départ gare 5 h–0 h 15, toutes les 6 min.
 Dernier départ 0 h 10.
-Ticket zone 11.`;
+Ticket zone 11.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Vous pouvez venir accompagné(e) si vous le souhaitez.`;
 
 const E6_2_CE_POOL_5 = buildExpressPool("e6-2-ce-5", [
   q({
@@ -483,7 +512,12 @@ const E6_2_CE_TEXT_6 = `Horaires — Ligne Bus 21
 Lausanne–Stade Olympique.
 Départ gare 6 h–23 h, toutes les 15 min.
 Dernier départ 23 h 05.
-Ticket 3,50 fr.`;
+Ticket 3,50 fr.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E6_2_CE_POOL_6 = buildExpressPool("e6-2-ce-6", [
   q({
@@ -576,7 +610,13 @@ const E6_2_CE_TEXT_7 = `Horaires — Ligne Bus 16
 Lausanne–Epalinges.
 Départ gare 6 h–21 h, toutes les 12 min.
 Dernier départ 21 h 20.
-Ticket 3,50 fr.`;
+Ticket 3,50 fr.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+Les toilettes se trouvent au fond du couloir.
+Conservez le numéro de contact indiqué.`;
 
 const E6_2_CE_POOL_7 = buildExpressPool("e6-2-ce-7", [
   q({
@@ -669,7 +709,12 @@ const E6_2_CE_TEXT_8 = `Horaires — Ligne Bus 3
 Lausanne–Belmont.
 Départ gare 5 h 45–23 h 30, toutes les 10 min.
 Dernier départ 23 h 40.
-Ticket 3,50 fr.`;
+Ticket 3,50 fr.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.`;
 
 const E6_2_CE_POOL_8 = buildExpressPool("e6-2-ce-8", [
   q({
@@ -762,7 +807,13 @@ const E6_2_CE_TEXT_9 = `Affiche — Gare Lausanne
 Hall principal : guichets.
 Voies 1–8 : niveau 0, direction Genève.
 Voies 9–16 : sous-sol, direction Berne.
-Ascenseur : centre du hall.`;
+Ascenseur : centre du hall.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.`;
 
 const E6_2_CE_POOL_9 = buildExpressPool("e6-2-ce-9", [
   q({
@@ -855,7 +906,13 @@ const E6_2_CE_TEXT_10 = `Affiche — Gare Genève Cornavin
 Hall : billetterie.
 Voies 1–8 : niveau 0, direction Lausanne.
 Voies 9–16 : sous-sol, direction Zurich.
-Ascenseur : niveau 0.`;
+Ascenseur : niveau 0.
+Sans confirmation, la place n'est pas garantie.
+Les informations importantes sont déjà indiquées plus haut.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.`;
 
 const E6_2_CE_POOL_10 = buildExpressPool("e6-2-ce-10", [
   q({
@@ -948,7 +1005,13 @@ const E6_2_CE_TEXT_11 = `Affiche — Gare Berne
 Hall central : guichets.
 Voies 1–8 : niveau 0, direction Zurich.
 Voies 9–16 : sous-sol, direction Genève.
-Ascenseur : côté est.`;
+Ascenseur : côté est.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Merci de votre attention et de votre patience.`;
 
 const E6_2_CE_POOL_11 = buildExpressPool("e6-2-ce-11", [
   q({
@@ -1041,7 +1104,12 @@ const E6_2_CE_TEXT_12 = `Affiche — Gare Zurich HB
 Hall principal.
 Voies 1–8 : niveau 0, direction Berne.
 Voies 9–16 : sous-sol, direction Bâle.
-Ascenseur : milieu du hall.`;
+Ascenseur : milieu du hall.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E6_2_CE_POOL_12 = buildExpressPool("e6-2-ce-12", [
   q({
@@ -1134,7 +1202,13 @@ const E6_2_CE_TEXT_13 = `Billet — TGV Paris–Lyon
 Départ : 8 h 12, voie 5.
 Arrivée : 10 h 00.
 Place : voiture 8, siège 42.
-Carte d'embarquement sur téléphone : acceptée.`;
+Carte d'embarquement sur téléphone : acceptée.
+Si tu veux, on peut faire une liste ensemble.
+Le budget reste simple et raisonnable.
+On pourra aussi inviter une autre personne.
+N'oubliez pas de vérifier la date et l'heure.
+Merci de garder ce document avec vous.
+Les informations sont valables pour cette semaine.`;
 
 const E6_2_CE_POOL_13 = buildExpressPool("e6-2-ce-13", [
   q({
@@ -1227,7 +1301,13 @@ const E6_2_CE_TEXT_14 = `Billet — IC 5 Lausanne–Genève
 Départ : 14 h 32, voie 3.
 Arrivée : 15 h 15.
 Place : voiture 4, siège 27.
-Carte d'embarquement sur téléphone : acceptée.`;
+Carte d'embarquement sur téléphone : acceptée.
+Le personnel peut vous aider en français simple.
+Conservez le numéro de contact indiqué.
+Tout le monde est le bienvenu.
+Merci de lire ce message jusqu'à la fin.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.`;
 
 const E6_2_CE_POOL_14 = buildExpressPool("e6-2-ce-14", [
   q({
@@ -1320,7 +1400,13 @@ const E6_2_CE_TEXT_15 = `Billet — IR 70 Berne–Zurich
 Départ : 9 h 05, voie 7.
 Arrivée : 10 h 02.
 Place : voiture 2, siège 15.
-Carte d'embarquement sur téléphone : acceptée.`;
+Carte d'embarquement sur téléphone : acceptée.
+Les informations sont valables pour cette semaine.
+Si quelque chose n'est pas clair, posez la question.
+Pensez à vérifier la date et le lieu.
+Une réponse rapide nous aide beaucoup.
+Vous pouvez venir avec un ami ou un membre de la famille.
+C'est important pour moi, merci beaucoup.`;
 
 const E6_2_CE_POOL_15 = buildExpressPool("e6-2-ce-15", [
   q({
@@ -1413,7 +1499,13 @@ const E6_2_CE_TEXT_16 = `Billet — RE Genève–Lausanne
 Départ : 17 h 48, voie 2.
 Arrivée : 18 h 35.
 Place : voiture 6, siège 81.
-Carte d'embarquement sur téléphone : acceptée.`;
+Carte d'embarquement sur téléphone : acceptée.
+Tout le monde est le bienvenu.
+On peut aussi en parler demain matin.
+À bientôt, et merci de votre lecture.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.`;
 
 const E6_2_CE_POOL_16 = buildExpressPool("e6-2-ce-16", [
   q({
@@ -1505,7 +1597,12 @@ const E6_2_CE_TEXT_17 = `Panneau — Quai 3
 
 Train pour Genève. Départ 14 h 32.
 Attention à la marche.
-Correspondance M1 : panneaux jaunes.`;
+Correspondance M1 : panneaux jaunes.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E6_2_CE_POOL_17 = buildExpressPool("e6-2-ce-17", [
   q({
@@ -1596,7 +1693,12 @@ const E6_2_CE_POOL_17 = buildExpressPool("e6-2-ce-17", [
 const E6_2_CE_TEXT_18 = `Message — RER A retard
 
 RER A : 15 min de retard. Cause : incident technique.
-Prochain passage 9 h 45. Excuses de la RATP.`;
+Prochain passage 9 h 45. Excuses de la RATP.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E6_2_CE_POOL_18 = buildExpressPool("e6-2-ce-18", [
   q({
@@ -1688,7 +1790,13 @@ const E6_2_CE_TEXT_19 = `Note — Grève vendredi
 
 Grève vendredi des transports publics.
 Bus de remplacement ligne 8. Horaires 7 h–19 h.
-Infos : tl.ch/greve`;
+Infos : tl.ch/greve
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+En cas de perte d'objet, passez à l'accueil.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.`;
 
 const E6_2_CE_POOL_19 = buildExpressPool("e6-2-ce-19", [
   q({
@@ -1780,7 +1888,13 @@ const E6_2_CE_TEXT_20 = `Flyer — Abonnement mensuel
 
 Abonnement mensuel TL : 75 fr.
 Valable bus, tram et métro zone 11.
-Photo obligatoire. Achat au guichet gare.`;
+Photo obligatoire. Achat au guichet gare.
+Les ascenseurs se trouvent à gauche de l'entrée.
+En cas de changement, un nouvel avis sera publié.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.`;
 
 const E6_2_CE_POOL_20 = buildExpressPool("e6-2-ce-20", [
   q({

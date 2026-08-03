@@ -19,6 +19,8 @@ Mon logement a trois pièces. Il est au deuxième étage à Genève.
 Le loyer est de 1200 francs par mois.
 Il y a un balcon avec vue sur le lac.
 Mon voisin du dessus s'appelle Marc. Il est très sympa.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Merci de lire mon message.`;
 
 const CE_POOL_1 = buildExpressPool("e2-1-1", [
@@ -114,6 +116,9 @@ Mon logement a deux pièces. Il est au premier étage à Lausanne.
 Le loyer est de 950 francs par mois.
 Il y a une cuisine équipée.
 Mon voisin du dessus s'appelle Sophie. Elle habite depuis deux ans.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
 Merci de lire mon message.`;
 
 const CE_POOL_2 = buildExpressPool("e2-1-2", [
@@ -209,6 +214,9 @@ Mon logement a quatre pièces. Il est au troisième étage à Fribourg.
 Le loyer est de 1400 francs par mois.
 Il y a deux chambres et un bureau.
 Mon voisin du dessus s'appelle Paul. L'appartement est lumineux.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Merci de lire mon message.`;
 
 const CE_POOL_3 = buildExpressPool("e2-1-3", [
@@ -304,6 +312,9 @@ Mon logement a trois pièces. Il est au cinquième étage à Neuchâtel.
 Le loyer est de 1100 francs par mois.
 Il y a un ascenseur et une cave.
 Mon voisin du dessus s'appelle Anna. La cave est au sous-sol.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Merci de lire mon message.`;
 
 const CE_POOL_4 = buildExpressPool("e2-1-4", [
@@ -399,6 +410,8 @@ Mon logement a deux pièces. Il est au quatrième étage à Montreux.
 Le loyer est de 1300 francs par mois.
 Il y a une grande terrasse.
 Mon voisin du dessus s'appelle Lucas. La vue est magnifique.
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
 Merci de lire mon message.`;
 
 const CE_POOL_5 = buildExpressPool("e2-1-5", [
@@ -494,6 +507,9 @@ Mon logement a cinq pièces. Il est au rez-de-chaussée étage à Yverdon.
 Le loyer est de 1600 francs par mois.
 Il y a un jardin partagé.
 Mon voisin du dessus s'appelle Karim. Le jardin est calme.
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Merci de lire mon message.`;
 
 const CE_POOL_6 = buildExpressPool("e2-1-6", [
@@ -589,6 +605,9 @@ Mon logement a trois pièces. Il est au sixième étage à Bienne.
 Le loyer est de 980 francs par mois.
 Il y a un parking souterrain.
 Mon voisin du dessus s'appelle Julie. La place est numéro 12.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Merci de lire mon message.`;
 
 const CE_POOL_7 = buildExpressPool("e2-1-7", [
@@ -684,6 +703,8 @@ Mon logement a deux pièces. Il est au septième étage à Sion.
 Le loyer est de 1050 francs par mois.
 Il y a un petit bureau.
 Mon voisin du dessus s'appelle Hugo. L'appartement est meublé.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
 Merci de lire mon message.`;
 
 const CE_POOL_8 = buildExpressPool("e2-1-8", [
@@ -779,6 +800,9 @@ Mon logement a quatre pièces. Il est au huitième étage à Nyon.
 Le loyer est de 1500 francs par mois.
 Il y a deux salles de bain.
 Mon voisin du dessus s'appelle Emma. Le chauffage est inclus.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci de lire mon message.`;
 
 const CE_POOL_9 = buildExpressPool("e2-1-9", [
@@ -874,6 +898,9 @@ Mon logement a trois pièces. Il est au neuvième étage à Vevey.
 Le loyer est de 1250 francs par mois.
 Il y a un parquet neuf.
 Mon voisin du dessus s'appelle Tom. Les fenêtres sont doubles.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Merci de lire mon message.`;
 
 const CE_POOL_10 = buildExpressPool("e2-1-10", [
@@ -969,6 +996,8 @@ Mon logement a quatre pièces. Il est au dixième étage à Delémont.
 Le loyer est de 900 francs par mois.
 Il y a un grand salon.
 Mon voisin du dessus s'appelle Nina. Le loyer est partagé.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Merci de lire mon message.`;
 
 const CE_POOL_11 = buildExpressPool("e2-1-11", [
@@ -1064,6 +1093,9 @@ Mon logement a deux pièces. Il est au onzième étage à Payerne.
 Le loyer est de 850 francs par mois.
 Il y a une cuisine ouverte.
 Mon voisin du dessus s'appelle David. Proche des transports.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Merci de lire mon message.`;
 
 const CE_POOL_12 = buildExpressPool("e2-1-12", [
@@ -1159,6 +1191,9 @@ Mon logement a trois pièces. Il est au douzième étage à Aigle.
 Le loyer est de 1000 francs par mois.
 Il y a un cellier.
 Mon voisin du dessus s'appelle Sara. Le cellier est grand.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
 Merci de lire mon message.`;
 
 const CE_POOL_13 = buildExpressPool("e2-1-13", [
@@ -1254,6 +1289,9 @@ Mon logement a cinq pièces. Il est au treizième étage à Morges.
 Le loyer est de 1700 francs par mois.
 Il y a un jardin privatif.
 Mon voisin du dessus s'appelle Antoine. Quartier calme.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Merci de lire mon message.`;
 
 const CE_POOL_14 = buildExpressPool("e2-1-14", [
@@ -1349,6 +1387,8 @@ Mon logement a trois pièces. Il est au quatorzième étage à Gland.
 Le loyer est de 1150 francs par mois.
 Il y a un balcon fermé.
 Mon voisin du dessus s'appelle Léa. Proche de la gare.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Merci de lire mon message.`;
 
 const CE_POOL_15 = buildExpressPool("e2-1-15", [
@@ -1444,6 +1484,9 @@ Mon logement a deux pièces. Il est au quinzième étage à Rolle.
 Le loyer est de 1080 francs par mois.
 Il y a peinture neuve.
 Mon voisin du dessus s'appelle Marc. État impeccable.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Merci de lire mon message.`;
 
 const CE_POOL_16 = buildExpressPool("e2-1-16", [
@@ -1539,6 +1582,8 @@ Mon logement a quatre pièces. Il est au seizième étage à Genève.
 Le loyer est de 2000 francs par mois.
 Il y a vue sur les Alpes.
 Mon voisin du dessus s'appelle Omar. Cher mais magnifique.
+Je t'envoie aussi ce détail pour être clair.
+Le trajet est simple, ne t'inquiète pas.
 Merci de lire mon message.`;
 
 const CE_POOL_17 = buildExpressPool("e2-1-17", [
@@ -1634,6 +1679,9 @@ Mon logement a trois pièces. Il est au dix-septième étage à Carouge.
 Le loyer est de 1180 francs par mois.
 Il y a un parquet ancien.
 Mon voisin du dessus s'appelle Clara. Charme ancien.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Merci de lire mon message.`;
 
 const CE_POOL_18 = buildExpressPool("e2-1-18", [
@@ -1729,6 +1777,9 @@ Mon logement a deux pièces. Il est au dix-huitième étage à Plan-les-Ouates.
 Le loyer est de 1020 francs par mois.
 Il y a un interphone vidéo.
 Mon voisin du dessus s'appelle Victor. Sécurité renforcée.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Merci de lire mon message.`;
 
 const CE_POOL_19 = buildExpressPool("e2-1-19", [
@@ -1824,6 +1875,8 @@ Mon logement a quatre pièces. Il est au dix-neuvième étage à Thônex.
 Le loyer est de 1350 francs par mois.
 Il y a proche école et parc.
 Mon voisin du dessus s'appelle Inès. Idéal pour famille.
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
 Merci de lire mon message.`;
 
 const CE_POOL_20 = buildExpressPool("e2-1-20", [
@@ -2217,191 +2270,191 @@ export const E2_1_PO: ExpressPoDialogue[] = [
 {
   id: "e2-1-po-11",
   title: "À la mairie",
-  context: "Situation : à la mairie. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la mairie et vous demandez des informations sur un logement.",
+  roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande des renseignements" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le logement." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le logement, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-1-po-12",
   title: "Au téléphone",
-  context: "Situation : au téléphone. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au téléphone et vous demandez des informations sur un logement.",
+  roleA: { title: "L'interlocuteur", vous: "la personne au téléphone" },
+  roleB: { title: "Vous", vous: "la personne qui appelle" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de le logement ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour logement." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e2-1-po-13",
   title: "Chez le voisin",
-  context: "Situation : chez le voisin. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes chez le voisin et vous demandez des informations sur un logement.",
+  roleA: { title: "Le voisin", vous: "le voisin / la voisine" },
+  roleB: { title: "Vous", vous: "la personne qui vient parler" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le logement." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le logement, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-1-po-14",
   title: "À l'accueil",
-  context: "Situation : à l'accueil. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à l'accueil et vous demandez des informations sur un logement.",
+  roleA: { title: "L'accueil", vous: "la personne à l'accueil" },
+  roleB: { title: "Vous", vous: "la personne qui demande de l'aide" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le logement." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le logement, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-1-po-15",
   title: "Dans la rue",
-  context: "Situation : dans la rue. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans la rue et vous demandez des informations sur un logement.",
+  roleA: { title: "Le passant", vous: "le passant / la passante" },
+  roleB: { title: "Vous", vous: "la personne qui demande son chemin" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de le logement ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour logement." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 },
 {
   id: "e2-1-po-16",
   title: "Au bureau",
-  context: "Situation : au bureau. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au bureau et vous demandez des informations sur un logement.",
+  roleA: { title: "Le collègue", vous: "le collègue / la collègue" },
+  roleB: { title: "Vous", vous: "le collègue / la collègue" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le logement." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le logement, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-1-po-17",
   title: "À la réception",
-  context: "Situation : à la réception. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes à la réception et vous demandez des informations sur un logement.",
+  roleA: { title: "Le réceptionniste", vous: "le / la réceptionniste" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le logement." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le logement, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-1-po-18",
-  title: "En visio",
-  context: "Situation : en visio. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  title: "En visioconférence",
+  context: "Vous êtes en visio et vous demandez des informations sur un logement.",
+  roleA: { title: "Le correspondant", vous: "le correspondant / la correspondante" },
+  roleB: { title: "Vous", vous: "la personne en visio" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour ! Vous cherchez quelque chose ?" },
+    { role: "B", text: "Bonjour, j'ai une question à propos de le logement." },
+    { role: "A", text: "D'accord. Vous êtes déjà passé(e) ici pour ça ?" },
+    { role: "B", text: "Non, c'est la première fois. Je suis un peu perdu(e)." },
+    { role: "A", text: "Je comprends. Pour le logement, il faut d'abord prendre un numéro." },
+    { role: "B", text: "Et ensuite, j'attends où ?" },
+    { role: "A", text: "Dans la salle d'attente, à droite. On vous appellera." },
+    { role: "B", text: "Combien de temps ça prend, environ ?" },
+    { role: "A", text: "En général, dix à quinze minutes." },
+    { role: "B", text: "Parfait, merci beaucoup !" },
   ],
 },
 {
   id: "e2-1-po-19",
   title: "Au guichet",
-  context: "Situation : au guichet. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes au guichet et vous demandez des informations sur un logement.",
+  roleA: { title: "L'employé", vous: "l'employé / l'employée du guichet" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
-    { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "A", text: "Bonjour, vous désirez ?" },
+    { role: "B", text: "Bonjour, je voudrais des informations sur le logement." },
+    { role: "A", text: "Avec plaisir. C'est urgent ?" },
+    { role: "B", text: "Oui, un peu. J'ai besoin d'une réponse rapidement." },
+    { role: "A", text: "Pour le logement, je peux vous donner les infos principales." },
+    { role: "B", text: "Super. Est-ce que je dois apporter des documents ?" },
+    { role: "A", text: "Oui : une pièce d'identité et un justificatif de domicile." },
+    { role: "B", text: "Je les ai dans mon sac. Je peux les montrer maintenant ?" },
+    { role: "A", text: "Oui, venez au bureau 2. Je vous suis." },
+    { role: "B", text: "Merci, c'est très gentil !" },
   ],
 },
 {
   id: "e2-1-po-20",
   title: "Dans un magasin",
-  context: "Situation : dans un magasin. Thème : le logement.",
-  roleA: { title: "L'interlocuteur A", vous: "l'interlocuteur A" },
-  roleB: { title: "L'interlocuteur B", vous: "l'interlocuteur B" },
+  context: "Vous êtes dans un magasin et vous demandez des informations sur un logement.",
+  roleA: { title: "Le vendeur", vous: "le vendeur / la vendeuse" },
+  roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
     { role: "A", text: "Bonjour, je peux vous aider ?" },
-    { role: "B", text: "Oui, bonjour. J'ai une question." },
-    { role: "A", text: "Bien sûr. Dites-moi tout." },
-    { role: "B", text: "C'est au sujet de le logement." },
-    { role: "A", text: "D'accord. Pouvez-vous préciser ?" },
-    { role: "B", text: "Oui, je voudrais plus d'informations." },
-    { role: "A", text: "Très bien, je note." },
-    { role: "B", text: "Merci beaucoup pour votre aide." },
-    { role: "A", text: "Ravi(e) de faire votre connaissance." },
-    { role: "B", text: "Moi aussi. À bientôt !" },
+    { role: "B", text: "Bonjour, je peux vous parler de le logement ?" },
+    { role: "A", text: "Bien sûr. Que souhaitez-vous savoir exactement ?" },
+    { role: "B", text: "Je voudrais comprendre comment ça marche pour logement." },
+    { role: "A", text: "Je vais vous expliquer. Vous avez déjà un dossier ?" },
+    { role: "B", text: "Pas encore. C'est la première fois." },
+    { role: "A", text: "Pas de problème. Prenez ce formulaire et remplissez-le." },
+    { role: "B", text: "D'accord. Je peux le rendre aujourd'hui ?" },
+    { role: "A", text: "Oui, avant 17 heures, c'est parfait." },
+    { role: "B", text: "Merci beaucoup pour votre aide !" },
   ],
 }
 ];

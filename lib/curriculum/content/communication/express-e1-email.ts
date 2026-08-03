@@ -23,6 +23,7 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E1_1_CE_EMAIL_TEXT_1 = `De : Marco Rossi
+
 Objet : Je me présente
 
 Bonjour,
@@ -124,6 +125,7 @@ const E1_1_CE_EMAIL_POOL_1 = buildExpressPool("e1-1-ce-email-1", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_2 = `De : Lucas Ferreira
+
 Objet : Nouveau dans le quartier
 
 Bonjour,
@@ -134,6 +136,8 @@ Je suis étudiant. Je travaille dans l'université de Genève.
 J'habite au premier étage, appartement 3.
 Mon numéro de téléphone est le 079 111 22 33.
 
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Lucas Ferreira`;
 
@@ -224,6 +228,7 @@ const E1_1_CE_EMAIL_POOL_2 = buildExpressPool("e1-1-ce-email-2", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_3 = `De : Nina Costa
+
 Objet : Présentation rapide
 
 Bonjour,
@@ -234,6 +239,8 @@ Je suis vendeuse. Je travaille dans une boutique à Fribourg.
 J'habite au deuxième étage, appartement 7.
 Mon numéro de téléphone est le 076 222 33 44.
 
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Cordialement,
 Nina Costa`;
 
@@ -324,6 +331,7 @@ const E1_1_CE_EMAIL_POOL_3 = buildExpressPool("e1-1-ce-email-3", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_4 = `De : Paul Dubois
+
 Objet : Enchanté !
 
 Bonjour,
@@ -425,6 +433,7 @@ const E1_1_CE_EMAIL_POOL_4 = buildExpressPool("e1-1-ce-email-4", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_5 = `De : Sara Alami
+
 Objet : Bonjour de Sara
 
 Bonjour,
@@ -435,6 +444,8 @@ Je suis étudiante. Je travaille dans l'école de commerce.
 J'habite au quatrième étage, appartement 15.
 Mon numéro de téléphone est le 078 999 88 77.
 
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 Sara Alami`;
 
@@ -525,6 +536,7 @@ const E1_1_CE_EMAIL_POOL_5 = buildExpressPool("e1-1-ce-email-5", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_6 = `De : Tom Müller
+
 Objet : Je suis Tom
 
 Bonjour,
@@ -626,6 +638,7 @@ const E1_1_CE_EMAIL_POOL_6 = buildExpressPool("e1-1-ce-email-6", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_7 = `De : Emma Laurent
+
 Objet : Présentation
 
 Bonjour,
@@ -727,6 +740,7 @@ const E1_1_CE_EMAIL_POOL_7 = buildExpressPool("e1-1-ce-email-7", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_8 = `De : Hugo Martin
+
 Objet : Bonjour !
 
 Bonjour,
@@ -737,6 +751,7 @@ Je suis journaliste. Je travaille dans un journal à Neuchâtel.
 J'habite au deuxième étage, appartement 5.
 Mon numéro de téléphone est le 079 567 89 01.
 
+Merci de lire ce message jusqu'à la fin.
 Cordialement,
 Hugo Martin`;
 
@@ -827,6 +842,7 @@ const E1_1_CE_EMAIL_POOL_8 = buildExpressPool("e1-1-ce-email-8", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_9 = `De : Léa Bernard
+
 Objet : Coucou !
 
 Bonjour,
@@ -837,6 +853,7 @@ Je suis étudiante. Je travaille dans la faculté de médecine.
 J'habite au sixième étage, appartement 18.
 Mon numéro de téléphone est le 079 678 90 12.
 
+Pensez à arriver un peu en avance.
 Cordialement,
 Léa Bernard`;
 
@@ -927,6 +944,7 @@ const E1_1_CE_EMAIL_POOL_9 = buildExpressPool("e1-1-ce-email-9", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_10 = `De : Marc Weber
+
 Objet : Présentation courte
 
 Bonjour,
@@ -1028,6 +1046,7 @@ const E1_1_CE_EMAIL_POOL_10 = buildExpressPool("e1-1-ce-email-10", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_11 = `De : Julie Petit
+
 Objet : Bonjour à tous
 
 Bonjour,
@@ -1038,6 +1057,8 @@ Je suis pharmacienne. Je travaille dans une pharmacie à Yverdon.
 J'habite au rez-de-chaussée étage, appartement 4.
 Mon numéro de téléphone est le 024 345 67 89.
 
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 Julie Petit`;
 
@@ -1128,6 +1149,7 @@ const E1_1_CE_EMAIL_POOL_11 = buildExpressPool("e1-1-ce-email-11", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_12 = `De : Omar Hassan
+
 Objet : Salut !
 
 Bonjour,
@@ -1138,6 +1160,7 @@ Je suis serveur. Je travaille dans un restaurant à Genève.
 J'habite au troisième étage, appartement 9.
 Mon numéro de téléphone est le 079 789 01 23.
 
+Les horaires habituels restent les mêmes.
 Cordialement,
 Omar Hassan`;
 
@@ -1228,6 +1251,7 @@ const E1_1_CE_EMAIL_POOL_12 = buildExpressPool("e1-1-ce-email-12", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_13 = `De : Clara Rossi
+
 Objet : Je me présente
 
 Bonjour,
@@ -1329,6 +1353,7 @@ const E1_1_CE_EMAIL_POOL_13 = buildExpressPool("e1-1-ce-email-13", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_14 = `De : Yann Leroy
+
 Objet : Bonjour
 
 Bonjour,
@@ -1430,6 +1455,7 @@ const E1_1_CE_EMAIL_POOL_14 = buildExpressPool("e1-1-ce-email-14", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_15 = `De : Inès Moreau
+
 Objet : Enchantée
 
 Bonjour,
@@ -1440,6 +1466,8 @@ Je suis étudiante. Je travaille dans l'école de langues.
 J'habite au cinquième étage, appartement 14.
 Mon numéro de téléphone est le 079 890 12 34.
 
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Inès Moreau`;
 
@@ -1530,6 +1558,7 @@ const E1_1_CE_EMAIL_POOL_15 = buildExpressPool("e1-1-ce-email-15", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_16 = `De : David Kim
+
 Objet : Présentation
 
 Bonjour,
@@ -1631,6 +1660,7 @@ const E1_1_CE_EMAIL_POOL_16 = buildExpressPool("e1-1-ce-email-16", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_17 = `De : Maya Singh
+
 Objet : Bonjour !
 
 Bonjour,
@@ -1641,6 +1671,7 @@ Je suis vendeuse. Je travaille dans un magasin à Berne.
 J'habite au premier étage, appartement 3.
 Mon numéro de téléphone est le 031 678 90 12.
 
+Le lieu est facile à trouver avec les indications.
 Cordialement,
 Maya Singh`;
 
@@ -1731,6 +1762,7 @@ const E1_1_CE_EMAIL_POOL_17 = buildExpressPool("e1-1-ce-email-17", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_18 = `De : Antoine Blanc
+
 Objet : Salut
 
 Bonjour,
@@ -1832,6 +1864,7 @@ const E1_1_CE_EMAIL_POOL_18 = buildExpressPool("e1-1-ce-email-18", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_19 = `De : Salma Ben
+
 Objet : Je me présente
 
 Bonjour,
@@ -1842,6 +1875,8 @@ Je suis secrétaire. Je travaille dans un bureau à Lausanne.
 J'habite au troisième étage, appartement 10.
 Mon numéro de téléphone est le 021 789 01 23.
 
+Le personnel peut répondre en français simple.
+En cas de changement, un nouvel avis sera publié.
 Cordialement,
 Salma Ben`;
 
@@ -1932,6 +1967,7 @@ const E1_1_CE_EMAIL_POOL_19 = buildExpressPool("e1-1-ce-email-19", [
   }),
 ]);
 const E1_1_CE_EMAIL_TEXT_20 = `De : Victor Pop
+
 Objet : Bonjour
 
 Bonjour,
@@ -2495,6 +2531,7 @@ Merci`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E1_2_CE_EMAIL_TEXT_1 = `De : Amina Benali
+
 Objet : Avant ton arrivée
 
 Bonjour Léa,
@@ -2506,6 +2543,9 @@ Mon petit frère Sami a sept ans ; il aime les cartes.
 Le soir, nous mangeons avec ma grand-mère.
 Elle raconte toujours une histoire courte.
 
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 À bientôt,
 Amina`;
 
@@ -2584,6 +2624,7 @@ const E1_2_CE_EMAIL_POOL_1 = buildExpressPool("e1-2-ce-email-1", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_2 = `De : Lucas Martin
+
 Objet : Mon dessin pour le cours
 
 Bonjour Madame,
@@ -2595,6 +2636,9 @@ Ma sœur Alice a quinze ans et porte des lunettes.
 Notre chien Pico est aussi sur le dessin.
 Je peux présenter le dessin en deux minutes.
 
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Cordialement,
 Lucas Martin`;
 
@@ -2673,6 +2717,7 @@ const E1_2_CE_EMAIL_POOL_2 = buildExpressPool("e1-2-ce-email-2", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_3 = `De : Nina Rossi
+
 Objet : Repas de dimanche
 
 Bonjour Marco,
@@ -2685,7 +2730,11 @@ Nous sommes neuf avec les cousins.
 Tu peux venir aussi si tu veux.
 
 Bises,
-Nina`;
+Nina
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Merci de votre attention et de votre patience.`;
 
 const E1_2_CE_EMAIL_POOL_3 = buildExpressPool("e1-2-ce-email-3", [
   q({
@@ -2762,6 +2811,7 @@ const E1_2_CE_EMAIL_POOL_3 = buildExpressPool("e1-2-ce-email-3", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_4 = `De : Paul Garcia
+
 Objet : La photo jointe
 
 Bonjour,
@@ -2773,6 +2823,9 @@ Ma mère est vétérinaire et tient notre chat.
 Mon mari David sourit à droite.
 Nous habitons tous près du lac Léman.
 
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Paul Garcia`;
 
@@ -2851,6 +2904,7 @@ const E1_2_CE_EMAIL_POOL_4 = buildExpressPool("e1-2-ce-email-4", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_5 = `De : Sara Kim
+
 Objet : Pour la colonie
 
 Bonjour,
@@ -2862,6 +2916,9 @@ Sa grand-mère peut répondre si le père est absent.
 Mina garde une photo de son frère dans sa valise.
 Merci de noter le numéro de la famille.
 
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Cordialement,
 Sara Kim`;
 
@@ -2940,6 +2997,7 @@ const E1_2_CE_EMAIL_POOL_5 = buildExpressPool("e1-2-ce-email-5", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_6 = `De : Tom Weber
+
 Objet : Changement d'adresse
 
 Bonjour Madame,
@@ -2951,6 +3009,9 @@ Mon beau-père est électricien.
 Mia a quatre ans et commence l'école en août.
 Merci d'envoyer les lettres à la nouvelle adresse.
 
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
 Cordialement,
 Tom Weber`;
 
@@ -3029,6 +3090,7 @@ const E1_2_CE_EMAIL_POOL_6 = buildExpressPool("e1-2-ce-email-6", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_7 = `De : Emma Dubois
+
 Objet : Question pour le livre de classe
 
 Bonjour Monsieur,
@@ -3040,6 +3102,9 @@ Ma mère raconte une histoire à mon frère Jules.
 Jules a six ans et lit les titres tout seul.
 Est-ce que cette phrase est assez simple ?
 
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Emma Dubois`;
 
@@ -3118,6 +3183,7 @@ const E1_2_CE_EMAIL_POOL_7 = buildExpressPool("e1-2-ce-email-7", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_8 = `De : Hugo Blanc
+
 Objet : Absence de ma sœur
 
 Bonjour,
@@ -3129,6 +3195,9 @@ Je donne les devoirs à Léonie ce soir.
 Nous habitons dans le même immeuble que notre tante.
 Merci pour votre compréhension.
 
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
+Je t'envoie aussi ce détail pour être clair.
 Cordialement,
 Hugo Blanc`;
 
@@ -3207,6 +3276,7 @@ const E1_2_CE_EMAIL_POOL_8 = buildExpressPool("e1-2-ce-email-8", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_9 = `De : Léa Costa
+
 Objet : Anniversaire de grand-père
 
 Bonjour les cousins,
@@ -3219,7 +3289,11 @@ Chaque petit-enfant apporte un dessin.
 La fête commence à 17 h.
 
 Bises,
-Léa`;
+Léa
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+On peut aussi en parler demain matin.`;
 
 const E1_2_CE_EMAIL_POOL_9 = buildExpressPool("e1-2-ce-email-9", [
   q({
@@ -3296,6 +3370,7 @@ const E1_2_CE_EMAIL_POOL_9 = buildExpressPool("e1-2-ce-email-9", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_10 = `De : Marc Singh
+
 Objet : Au sujet du bébé
 
 Bonjour Madame Morel,
@@ -3307,6 +3382,9 @@ Moi, je garde le sac avec les biberons.
 Notre fille Tara reste chez sa grand-mère.
 Merci de prévoir un endroit calme.
 
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
+Nous restons disponibles pour vous aider.
 Cordialement,
 Marc Singh`;
 
@@ -3385,6 +3463,7 @@ const E1_2_CE_EMAIL_POOL_10 = buildExpressPool("e1-2-ce-email-10", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_11 = `De : Julie Petit
+
 Objet : Pour l'affiche du quartier
 
 Bonjour,
@@ -3396,6 +3475,9 @@ Au deuxième étage, mon frère et moi aidons à installer les tables.
 Notre mère prépare du thé à la menthe.
 Le but est de mieux connaître les voisins.
 
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement,
 Julie Petit`;
 
@@ -3474,6 +3556,7 @@ const E1_2_CE_EMAIL_POOL_11 = buildExpressPool("e1-2-ce-email-11", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_12 = `De : Omar Hassan
+
 Objet : Nouvelle pour la famille
 
 Bonjour tante Nadia,
@@ -3486,7 +3569,10 @@ Maman cherche une robe bleue pour la fête.
 Toute la famille parle déjà de musique et de gâteau.
 
 Affectueusement,
-Omar`;
+Omar
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.`;
 
 const E1_2_CE_EMAIL_POOL_12 = buildExpressPool("e1-2-ce-email-12", [
   q({
@@ -3563,6 +3649,7 @@ const E1_2_CE_EMAIL_POOL_12 = buildExpressPool("e1-2-ce-email-12", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_13 = `De : Clara Rossi
+
 Objet : Fiche médicale de Lili
 
 Bonjour Docteur,
@@ -3574,6 +3661,9 @@ La grand-mère garde Lili le mercredi.
 Lili aime son doudou rose pendant les visites.
 Je joins aussi le numéro de Marco.
 
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Clara Rossi`;
 
@@ -3652,6 +3742,7 @@ const E1_2_CE_EMAIL_POOL_13 = buildExpressPool("e1-2-ce-email-13", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_14 = `De : Yann Leroy
+
 Objet : Famille et transport
 
 Bonjour,
@@ -3663,6 +3754,9 @@ Elle peut nous déposer devant le musée.
 Mon père vient aussi, mais il marche avec une canne.
 Nous aurons besoin de temps pour entrer.
 
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Cordialement,
 Yann Leroy`;
 
@@ -3741,6 +3835,7 @@ const E1_2_CE_EMAIL_POOL_14 = buildExpressPool("e1-2-ce-email-14", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_15 = `De : Inès Moreau
+
 Objet : Recette de ma mère
 
 Bonjour Ana,
@@ -3753,7 +3848,11 @@ Nous mangeons la soupe avec du pain chaud.
 Cette recette vient de ma grand-mère espagnole.
 
 Bises,
-Inès`;
+Inès
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E1_2_CE_EMAIL_POOL_15 = buildExpressPool("e1-2-ce-email-15", [
   q({
@@ -3830,6 +3929,7 @@ const E1_2_CE_EMAIL_POOL_15 = buildExpressPool("e1-2-ce-email-15", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_16 = `De : David Kim
+
 Objet : Présentation pour le club
 
 Bonjour,
@@ -3841,6 +3941,9 @@ Mon frère Min habite près du stade.
 Le samedi, il accompagne souvent Jun.
 Nous cherchons une équipe pour débutants.
 
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Cordialement,
 David Kim`;
 
@@ -3919,6 +4022,7 @@ const E1_2_CE_EMAIL_POOL_16 = buildExpressPool("e1-2-ce-email-16", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_17 = `De : Maya Patel
+
 Objet : Mes grands-parents
 
 Bonjour Sophie,
@@ -3930,6 +4034,9 @@ Ma grand-mère fait du thé avec beaucoup de lait.
 Leur fille, ma mère, va les voir chaque vendredi.
 Moi, je téléphone le mercredi soir.
 
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 Amitiés,
 Maya`;
 
@@ -4008,6 +4115,7 @@ const E1_2_CE_EMAIL_POOL_17 = buildExpressPool("e1-2-ce-email-17", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_18 = `De : Antoine Blanc
+
 Objet : Organisation du week-end
 
 Bonjour Camille,
@@ -4019,6 +4127,9 @@ Sa femme est coiffeuse et finit à 14 h.
 Nous irons au parc si le temps est bon.
 Tu peux passer prendre un café vers 16 h.
 
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 À bientôt,
 Antoine`;
 
@@ -4097,6 +4208,7 @@ const E1_2_CE_EMAIL_POOL_18 = buildExpressPool("e1-2-ce-email-18", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_19 = `De : Salma Ben
+
 Objet : Arbre généalogique
 
 Bonjour Madame Perret,
@@ -4108,6 +4220,9 @@ Mon père, le plus jeune, est médecin à Lausanne.
 Ma mère est dentiste dans le même quartier.
 Je peux expliquer l'arbre lundi en classe.
 
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Salma Ben`;
 
@@ -4186,6 +4301,7 @@ const E1_2_CE_EMAIL_POOL_19 = buildExpressPool("e1-2-ce-email-19", [
   }),
 ]);
 const E1_2_CE_EMAIL_TEXT_20 = `De : Victor Pop
+
 Objet : Visite de ma nièce
 
 Bonjour,
@@ -4197,6 +4313,9 @@ Notre fils Alex prépare son ancien bureau pour Elena.
 Le soir de son arrivée, nous invitons aussi mon oncle.
 Nous serons six autour de la table.
 
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 Victor Pop`;
 
@@ -4730,6 +4849,7 @@ Cordialement`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E1_3_CE_EMAIL_TEXT_1 = `De : Julie Martin
+
 Objet : Invitation anniversaire
 
 Bonjour,
@@ -4740,6 +4860,10 @@ On se retrouve chez moi à Lausanne.
 Gâteau et musique.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+N'oubliez pas de vérifier la date et l'heure.
 Cordialement,
 Julie Martin`;
 
@@ -4830,6 +4954,7 @@ const E1_3_CE_EMAIL_POOL_1 = buildExpressPool("e1-3-ce-email-1", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_2 = `De : Lucas Ferreira
+
 Objet : Soirée jeux
 
 Bonjour,
@@ -4840,6 +4965,10 @@ On se retrouve chez Lucas.
 Pizza et boissons.
 Dis-moi si tu peux venir avant jeudi.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Un plan simple est disponible à l'accueil.
 Cordialement,
 Lucas Ferreira`;
 
@@ -4930,6 +5059,7 @@ const E1_3_CE_EMAIL_POOL_2 = buildExpressPool("e1-3-ce-email-2", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_3 = `De : Nina Costa
+
 Objet : Apéro sur le balcon
 
 Bonjour,
@@ -4940,6 +5070,10 @@ On se retrouve son balcon à Fribourg.
 Vue sur la cathédrale.
 Dis-moi si tu peux venir avant jeudi.
 
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+N'oubliez pas de vérifier la date et l'heure.
 Cordialement,
 Nina Costa`;
 
@@ -5030,6 +5164,7 @@ const E1_3_CE_EMAIL_POOL_3 = buildExpressPool("e1-3-ce-email-3", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_4 = `De : Paul Dubois
+
 Objet : Barbecue
 
 Bonjour,
@@ -5040,6 +5175,10 @@ On se retrouve le jardin de Paul.
 Viande et salades.
 Dis-moi si tu peux venir avant jeudi.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Merci encore pour votre compréhension.
 Cordialement,
 Paul Dubois`;
 
@@ -5130,6 +5269,7 @@ const E1_3_CE_EMAIL_POOL_4 = buildExpressPool("e1-3-ce-email-4", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_5 = `De : Sara Alami
+
 Objet : Cinéma
 
 Bonjour,
@@ -5140,6 +5280,10 @@ On se retrouve le cinéma ABC.
 Places déjà réservées.
 Dis-moi si tu peux venir avant jeudi.
 
+Je reste à votre disposition pour toute précision.
+Merci de confirmer la bonne réception de ce message.
+Vous pouvez répondre directement à cet e-mail.
+À bientôt, et merci de votre lecture.
 Cordialement,
 Sara Alami`;
 
@@ -5230,6 +5374,7 @@ const E1_3_CE_EMAIL_POOL_5 = buildExpressPool("e1-3-ce-email-5", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_6 = `De : Tom Müller
+
 Objet : Randonnée
 
 Bonjour,
@@ -5240,6 +5385,10 @@ On se retrouve devant la gare de Bienne.
 Pique-nique à prévoir.
 Dis-moi si tu peux venir avant jeudi.
 
+Vous pouvez répondre directement à cet e-mail.
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Un plan simple est disponible à l'accueil.
 Cordialement,
 Tom Müller`;
 
@@ -5330,6 +5479,7 @@ const E1_3_CE_EMAIL_POOL_6 = buildExpressPool("e1-3-ce-email-6", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_7 = `De : Emma Laurent
+
 Objet : Brunch
 
 Bonjour,
@@ -5340,6 +5490,10 @@ On se retrouve le café du Port à Montreux.
 Réservation faite.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous traitons votre demande dans les meilleurs délais.
+N'hésitez pas à nous indiquer vos disponibilités.
+Ce message contient les informations essentielles.
+Dis-moi si tu as besoin d'autre chose.
 Cordialement,
 Emma Laurent`;
 
@@ -5430,6 +5584,7 @@ const E1_3_CE_EMAIL_POOL_7 = buildExpressPool("e1-3-ce-email-7", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_8 = `De : Hugo Martin
+
 Objet : Concert
 
 Bonjour,
@@ -5440,6 +5595,10 @@ On se retrouve la salle Métropole.
 Deux billets gratuits.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous vous remercions de votre compréhension.
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Hugo Martin`;
 
@@ -5530,6 +5689,7 @@ const E1_3_CE_EMAIL_POOL_8 = buildExpressPool("e1-3-ce-email-8", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_9 = `De : Léa Bernard
+
 Objet : Pique-nique
 
 Bonjour,
@@ -5540,6 +5700,10 @@ On se retrouve le parc des Eaux-Vives.
 Chacun apporte quelque chose.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous comptons sur vous.
+Après cela, vous recevrez un petit rappel.
+Gardez une copie papier si possible.
+J'espère que tout se passe bien de ton côté.
 Cordialement,
 Léa Bernard`;
 
@@ -5630,6 +5794,7 @@ const E1_3_CE_EMAIL_POOL_9 = buildExpressPool("e1-3-ce-email-9", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_10 = `De : Marc Weber
+
 Objet : Dîner
 
 Bonjour,
@@ -5640,6 +5805,10 @@ On se retrouve le restaurant Le Sapin.
 Menu à 35 francs.
 Dis-moi si tu peux venir avant jeudi.
 
+Pensez à joindre les documents demandés.
+Votre dossier sera mis à jour après votre réponse.
+Nous vous souhaitons une excellente journée.
+En cas de changement, un nouvel avis sera publié.
 Cordialement,
 Marc Weber`;
 
@@ -5730,6 +5899,7 @@ const E1_3_CE_EMAIL_POOL_10 = buildExpressPool("e1-3-ce-email-10", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_11 = `De : Julie Petit
+
 Objet : Fête des voisins
 
 Bonjour,
@@ -5740,6 +5910,10 @@ On se retrouve la cour de l'immeuble.
 Musique et jeux pour enfants.
 Dis-moi si tu peux venir avant jeudi.
 
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Le service est également disponible en ligne.
 Cordialement,
 Julie Petit`;
 
@@ -5830,6 +6004,7 @@ const E1_3_CE_EMAIL_POOL_11 = buildExpressPool("e1-3-ce-email-11", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_12 = `De : Omar Hassan
+
 Objet : Match de foot
 
 Bonjour,
@@ -5840,6 +6015,10 @@ On se retrouve le stade de Genève.
 Maillot et chaussures.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+Si une information manque, écrivez-nous rapidement.
+En cas de perte d'objet, passez à l'accueil.
 Cordialement,
 Omar Hassan`;
 
@@ -5930,6 +6109,7 @@ const E1_3_CE_EMAIL_POOL_12 = buildExpressPool("e1-3-ce-email-12", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_13 = `De : Clara Rossi
+
 Objet : Atelier cuisine
 
 Bonjour,
@@ -5940,6 +6120,10 @@ On se retrouve sa cuisine.
 6 places maximum.
 Dis-moi si tu peux venir avant jeudi.
 
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+Il y a une fontaine d'eau près de l'entrée principale.
+À bientôt, et merci de votre lecture.
 Cordialement,
 Clara Rossi`;
 
@@ -6030,6 +6214,7 @@ const E1_3_CE_EMAIL_POOL_13 = buildExpressPool("e1-3-ce-email-13", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_14 = `De : Yann Leroy
+
 Objet : Exposition
 
 Bonjour,
@@ -6040,6 +6225,10 @@ On se retrouve la galerie Art Plus.
 Vin et fromage.
 Dis-moi si tu peux venir avant jeudi.
 
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+Merci de vérifier les informations avant de répondre.
+Le personnel peut répondre en français simple.
 Cordialement,
 Yann Leroy`;
 
@@ -6130,6 +6319,7 @@ const E1_3_CE_EMAIL_POOL_14 = buildExpressPool("e1-3-ce-email-14", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_15 = `De : Inès Moreau
+
 Objet : Soirée dansante
 
 Bonjour,
@@ -6140,6 +6330,10 @@ On se retrouve la salle des fêtes.
 Cours débutant à 20 h.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous vous souhaitons une excellente journée.
+Merci encore pour votre confiance.
+Voici quelques détails utiles pour la suite.
+Vous pouvez répondre directement à ce message.
 Cordialement,
 Inès Moreau`;
 
@@ -6230,6 +6424,7 @@ const E1_3_CE_EMAIL_POOL_15 = buildExpressPool("e1-3-ce-email-15", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_16 = `De : David Kim
+
 Objet : Visite musée
 
 Bonjour,
@@ -6240,6 +6435,10 @@ On se retrouve le musée d'art.
 Entrée gratuite.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 David Kim`;
 
@@ -6330,6 +6529,7 @@ const E1_3_CE_EMAIL_POOL_16 = buildExpressPool("e1-3-ce-email-16", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_17 = `De : Maya Singh
+
 Objet : Goûter enfants
 
 Bonjour,
@@ -6340,6 +6540,10 @@ On se retrouve l'école du Lac.
 Apporter un plat.
 Dis-moi si tu peux venir avant jeudi.
 
+Pour toute urgence, appelez-nous pendant les heures d'ouverture.
+Conservez ce message pour vos dossiers.
+Une confirmation vous sera envoyée ensuite.
+En cas de changement, un nouvel avis sera publié.
 Cordialement,
 Maya Singh`;
 
@@ -6430,6 +6634,7 @@ const E1_3_CE_EMAIL_POOL_17 = buildExpressPool("e1-3-ce-email-17", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_18 = `De : Antoine Blanc
+
 Objet : Piscine
 
 Bonjour,
@@ -6440,6 +6645,10 @@ On se retrouve la piscine municipale.
 Maillot obligatoire.
 Dis-moi si tu peux venir avant jeudi.
 
+Merci de vérifier les informations avant de répondre.
+Nous sommes ouverts du lundi au vendredi.
+Cordialement, et bonne journée.
+J'espère que tout se passe bien de ton côté.
 Cordialement,
 Antoine Blanc`;
 
@@ -6530,6 +6739,7 @@ const E1_3_CE_EMAIL_POOL_18 = buildExpressPool("e1-3-ce-email-18", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_19 = `De : Salma Ben
+
 Objet : Thé
 
 Bonjour,
@@ -6540,6 +6750,10 @@ On se retrouve chez Salma.
 Pâtisseries maison.
 Dis-moi si tu peux venir avant jeudi.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le service client répond aussi par téléphone.
 Cordialement,
 Salma Ben`;
 
@@ -6630,6 +6844,7 @@ const E1_3_CE_EMAIL_POOL_19 = buildExpressPool("e1-3-ce-email-19", [
   }),
 ]);
 const E1_3_CE_EMAIL_TEXT_20 = `De : Victor Pop
+
 Objet : Réunion amicale
 
 Bonjour,
@@ -6640,6 +6855,10 @@ On se retrouve le café Central.
 Ordre du jour en pièce jointe.
 Dis-moi si tu peux venir avant jeudi.
 
+Nous comptons sur vous.
+Pensez à arriver un peu en avance.
+Le trajet dure environ quinze minutes à pied.
+Une confirmation sera envoyée ensuite.
 Cordialement,
 Victor Pop`;
 

@@ -23,6 +23,7 @@ const PE_MAX = 120;
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E2_1_CE_EMAIL_TEXT_1 = `De : Thomas Keller
+
 Objet : Mon nouvel appartement
 
 Bonjour,
@@ -33,6 +34,9 @@ Le loyer est de 1250 francs par mois.
 Il y a un(e) balcon. C'est proche de parc.
 Disponible à partir du 15 mars.
 
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Thomas Keller`;
 
@@ -123,6 +127,7 @@ const E2_1_CE_EMAIL_POOL_1 = buildExpressPool("e2-1-ce-email-1", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_2 = `De : Sophie Martin
+
 Objet : Notre maison
 
 Bonjour,
@@ -133,6 +138,9 @@ Le loyer est de 2200 francs par mois.
 Il y a un(e) jardin. C'est proche de école.
 Disponible à partir du 1er avril.
 
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
 Cordialement,
 Sophie Martin`;
 
@@ -223,6 +231,7 @@ const E2_1_CE_EMAIL_POOL_2 = buildExpressPool("e2-1-ce-email-2", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_3 = `De : Marc Dubois
+
 Objet : Mon studio
 
 Bonjour,
@@ -233,6 +242,9 @@ Le loyer est de 780 francs par mois.
 Il y a un(e) cuisine équipée. C'est proche de gare.
 Disponible à partir du immédiat.
 
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Cordialement,
 Marc Dubois`;
 
@@ -323,6 +335,7 @@ const E2_1_CE_EMAIL_POOL_3 = buildExpressPool("e2-1-ce-email-3", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_4 = `De : Anna Weber
+
 Objet : Appartement à louer
 
 Bonjour,
@@ -333,6 +346,9 @@ Le loyer est de 1350 francs par mois.
 Il y a un(e) terrasse. C'est proche de lac.
 Disponible à partir du 1er mai.
 
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 Anna Weber`;
 
@@ -423,6 +439,7 @@ const E2_1_CE_EMAIL_POOL_4 = buildExpressPool("e2-1-ce-email-4", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_5 = `De : Lucas Ferreira
+
 Objet : Visite appartement
 
 Bonjour,
@@ -433,6 +450,9 @@ Le loyer est de 1400 francs par mois.
 Il y a un(e) vue lac. C'est proche de centre.
 Disponible à partir du samedi 10 h.
 
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
 Cordialement,
 Lucas Ferreira`;
 
@@ -523,6 +543,7 @@ const E2_1_CE_EMAIL_POOL_5 = buildExpressPool("e2-1-ce-email-5", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_6 = `De : Emma Laurent
+
 Objet : Description logement
 
 Bonjour,
@@ -533,6 +554,9 @@ Le loyer est de 950 francs par mois.
 Il y a un(e) cave. C'est proche de commerces.
 Disponible à partir du juin.
 
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 Cordialement,
 Emma Laurent`;
 
@@ -623,6 +647,7 @@ const E2_1_CE_EMAIL_POOL_6 = buildExpressPool("e2-1-ce-email-6", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_7 = `De : Hugo Blanc
+
 Objet : Colocation
 
 Bonjour,
@@ -633,6 +658,9 @@ Le loyer est de 1100 francs par mois.
 Il y a un(e) salon grand. C'est proche de université.
 Disponible à partir du septembre.
 
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Cordialement,
 Hugo Blanc`;
 
@@ -723,6 +751,7 @@ const E2_1_CE_EMAIL_POOL_7 = buildExpressPool("e2-1-ce-email-7", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_8 = `De : Nina Costa
+
 Objet : Sous-location été
 
 Bonjour,
@@ -733,6 +762,9 @@ Le loyer est de 1000 francs par mois.
 Il y a un(e) meublé. C'est proche de montagne.
 Disponible à partir du juillet-août.
 
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
 Cordialement,
 Nina Costa`;
 
@@ -823,6 +855,7 @@ const E2_1_CE_EMAIL_POOL_8 = buildExpressPool("e2-1-ce-email-8", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_9 = `De : David Kim
+
 Objet : État des lieux
 
 Bonjour,
@@ -833,6 +866,9 @@ Le loyer est de 1200 francs par mois.
 Il y a un(e) parquet neuf. C'est proche de lac.
 Disponible à partir du 20 avril.
 
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 Cordialement,
 David Kim`;
 
@@ -923,6 +959,7 @@ const E2_1_CE_EMAIL_POOL_9 = buildExpressPool("e2-1-ce-email-9", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_10 = `De : Sara Alami
+
 Objet : Mon logement
 
 Bonjour,
@@ -933,6 +970,9 @@ Le loyer est de 1150 francs par mois.
 Il y a un(e) ascenseur. C'est proche de gare.
 Disponible à partir du octobre.
 
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Cordialement,
 Sara Alami`;
 
@@ -1023,6 +1063,7 @@ const E2_1_CE_EMAIL_POOL_10 = buildExpressPool("e2-1-ce-email-10", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_11 = `De : Paul Garcia
+
 Objet : Appartement familial
 
 Bonjour,
@@ -1033,6 +1074,9 @@ Le loyer est de 1500 francs par mois.
 Il y a un(e) deux salles de bain. C'est proche de parc.
 Disponible à partir du décembre.
 
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
 Cordialement,
 Paul Garcia`;
 
@@ -1123,6 +1167,7 @@ const E2_1_CE_EMAIL_POOL_11 = buildExpressPool("e2-1-ce-email-11", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_12 = `De : Léa Bernard
+
 Objet : Studio étudiant
 
 Bonjour,
@@ -1133,6 +1178,9 @@ Le loyer est de 900 francs par mois.
 Il y a un(e) proche tram. C'est proche de université.
 Disponible à partir du août.
 
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
 Cordialement,
 Léa Bernard`;
 
@@ -1223,6 +1271,7 @@ const E2_1_CE_EMAIL_POOL_12 = buildExpressPool("e2-1-ce-email-12", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_13 = `De : Tom Müller
+
 Objet : Maison avec jardin
 
 Bonjour,
@@ -1233,6 +1282,9 @@ Le loyer est de 1800 francs par mois.
 Il y a un(e) garage. C'est proche de campagne.
 Disponible à partir du mai.
 
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Cordialement,
 Tom Müller`;
 
@@ -1323,6 +1375,7 @@ const E2_1_CE_EMAIL_POOL_13 = buildExpressPool("e2-1-ce-email-13", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_14 = `De : Julie Petit
+
 Objet : Appartement lumineux
 
 Bonjour,
@@ -1333,6 +1386,9 @@ Le loyer est de 1050 francs par mois.
 Il y a un(e) double vitrage. C'est proche de vignobles.
 Disponible à partir du mars.
 
+Respectez la file d'attente, s'il vous plaît.
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
 Cordialement,
 Julie Petit`;
 
@@ -1423,6 +1479,7 @@ const E2_1_CE_EMAIL_POOL_14 = buildExpressPool("e2-1-ce-email-14", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_15 = `De : Omar Hassan
+
 Objet : Colocation cherchée
 
 Bonjour,
@@ -1433,6 +1490,9 @@ Le loyer est de 1300 francs par mois.
 Il y a un(e) bureau. C'est proche de lac.
 Disponible à partir du avril.
 
+Le service client répond aussi par téléphone.
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
 Cordialement,
 Omar Hassan`;
 
@@ -1523,6 +1583,7 @@ const E2_1_CE_EMAIL_POOL_15 = buildExpressPool("e2-1-ce-email-15", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_16 = `De : Clara Rossi
+
 Objet : Visite possible
 
 Bonjour,
@@ -1533,6 +1594,9 @@ Le loyer est de 1100 francs par mois.
 Il y a un(e) balcon. C'est proche de CERN.
 Disponible à partir du mercredi.
 
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Cordialement,
 Clara Rossi`;
 
@@ -1623,6 +1687,7 @@ const E2_1_CE_EMAIL_POOL_16 = buildExpressPool("e2-1-ce-email-16", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_17 = `De : Yann Leroy
+
 Objet : Location longue durée
 
 Bonjour,
@@ -1633,6 +1698,9 @@ Le loyer est de 1250 francs par mois.
 Il y a un(e) terrasse. C'est proche de plage.
 Disponible à partir du année.
 
+Le lieu est facile à trouver avec les indications.
+Pensez à arriver un peu en avance.
+Gardez ce texte pour vous en souvenir.
 Cordialement,
 Yann Leroy`;
 
@@ -1723,6 +1791,7 @@ const E2_1_CE_EMAIL_POOL_17 = buildExpressPool("e2-1-ce-email-17", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_18 = `De : Inès Moreau
+
 Objet : Petit appartement
 
 Bonjour,
@@ -1733,6 +1802,9 @@ Le loyer est de 1080 francs par mois.
 Il y a un(e) charme ancien. C'est proche de Genève.
 Disponible à partir du juin.
 
+Merci encore pour votre compréhension.
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
 Cordialement,
 Inès Moreau`;
 
@@ -1823,6 +1895,7 @@ const E2_1_CE_EMAIL_POOL_18 = buildExpressPool("e2-1-ce-email-18", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_19 = `De : Victor Pop
+
 Objet : Appartement proche gare
 
 Bonjour,
@@ -1833,6 +1906,9 @@ Le loyer est de 1180 francs par mois.
 Il y a un(e) parking. C'est proche de tram.
 Disponible à partir du juillet.
 
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Cordialement,
 Victor Pop`;
 
@@ -1923,6 +1999,7 @@ const E2_1_CE_EMAIL_POOL_19 = buildExpressPool("e2-1-ce-email-19", [
   }),
 ]);
 const E2_1_CE_EMAIL_TEXT_20 = `De : Maya Singh
+
 Objet : Logement neuf
 
 Bonjour,
@@ -1933,6 +2010,9 @@ Le loyer est de 1450 francs par mois.
 Il y a un(e) isolation. C'est proche de entreprises.
 Disponible à partir du septembre.
 
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Un plan simple est disponible à l'accueil.
+N'oubliez pas de vérifier la date et l'heure.
 Cordialement,
 Maya Singh`;
 
@@ -2475,6 +2555,7 @@ Cordialement`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E2_2_CE_EMAIL_TEXT_1 = `De : Lucas Martin
+
 Objet : Problème de chauffage
 
 Bonjour,
@@ -2485,6 +2566,9 @@ Cela dure depuis trois jours. C'est urgent.
 Pouvez-vous envoyer un technicien ?
 Merci d'intervenir lundi.
 
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement,
 Lucas Martin`;
 
@@ -2563,6 +2647,7 @@ const E2_2_CE_EMAIL_POOL_1 = buildExpressPool("e2-2-ce-email-1", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_2 = `De : Emma Dubois
+
 Objet : Fuite d'eau
 
 Bonjour,
@@ -2573,6 +2658,9 @@ Cela dure depuis ce matin. C'est très urgent.
 Pouvez-vous intervenir rapidement ?
 Merci d'intervenir aujourd'hui.
 
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
+Une confirmation sera envoyée ensuite.
 Cordialement,
 Emma Dubois`;
 
@@ -2651,6 +2739,7 @@ const E2_2_CE_EMAIL_POOL_2 = buildExpressPool("e2-2-ce-email-2", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_3 = `De : Paul Garcia
+
 Objet : Serrure cassée
 
 Bonjour,
@@ -2661,6 +2750,9 @@ Cela dure depuis une semaine. C'est important.
 Pouvez-vous changer la serrure ?
 Merci d'intervenir cette semaine.
 
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Cordialement,
 Paul Garcia`;
 
@@ -2739,6 +2831,7 @@ const E2_2_CE_EMAIL_POOL_3 = buildExpressPool("e2-2-ce-email-3", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_4 = `De : Sara Kim
+
 Objet : Plus d'électricité
 
 Bonjour,
@@ -2749,6 +2842,9 @@ Cela dure depuis hier. C'est urgent.
 Pouvez-vous vérifier l'installation ?
 Merci d'intervenir demain.
 
+Le trajet est simple, ne t'inquiète pas.
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
 Cordialement,
 Sara Kim`;
 
@@ -2827,6 +2923,7 @@ const E2_2_CE_EMAIL_POOL_4 = buildExpressPool("e2-2-ce-email-4", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_5 = `De : Tom Weber
+
 Objet : Ascenseur en panne
 
 Bonjour,
@@ -2837,6 +2934,9 @@ Cela dure depuis deux jours. C'est gênant.
 Pouvez-vous appeler le réparateur ?
 Merci d'intervenir vite.
 
+Joignez les documents demandés si nécessaire.
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
 Cordialement,
 Tom Weber`;
 
@@ -2915,6 +3015,7 @@ const E2_2_CE_EMAIL_POOL_5 = buildExpressPool("e2-2-ce-email-5", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_6 = `De : Nina Costa
+
 Objet : Toilettes bouchées
 
 Bonjour,
@@ -2925,6 +3026,9 @@ Cela dure depuis aujourd'hui. C'est urgent.
 Pouvez-vous envoyer un plombier ?
 Merci d'intervenir cet après-midi.
 
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
 Cordialement,
 Nina Costa`;
 
@@ -3003,6 +3107,7 @@ const E2_2_CE_EMAIL_POOL_6 = buildExpressPool("e2-2-ce-email-6", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_7 = `De : David Kim
+
 Objet : Fenêtre cassée
 
 Bonjour,
@@ -3013,6 +3118,9 @@ Cela dure depuis la tempête d'hier. C'est important.
 Pouvez-vous remplacer la vitre ?
 Merci d'intervenir semaine prochaine.
 
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
 Cordialement,
 David Kim`;
 
@@ -3091,6 +3199,7 @@ const E2_2_CE_EMAIL_POOL_7 = buildExpressPool("e2-2-ce-email-7", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_8 = `De : Hugo Blanc
+
 Objet : Nuisances sonores
 
 Bonjour,
@@ -3101,6 +3210,9 @@ Cela dure depuis un mois. C'est insupportable.
 Pouvez-vous intervenir ?
 Merci d'intervenir rapidement.
 
+Vous pouvez répondre directement à ce message.
+Merci de confirmer la bonne réception.
+Joignez les documents demandés si nécessaire.
 Cordialement,
 Hugo Blanc`;
 
@@ -3179,6 +3291,7 @@ const E2_2_CE_EMAIL_POOL_8 = buildExpressPool("e2-2-ce-email-8", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_9 = `De : Léa Bernard
+
 Objet : Pas d'eau chaude
 
 Bonjour,
@@ -3189,6 +3302,9 @@ Cela dure depuis quatre jours. C'est urgent.
 Pouvez-vous réparer la chaudière ?
 Merci d'intervenir urgence.
 
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
+Je reste près de mon téléphone aujourd'hui.
 Cordialement,
 Léa Bernard`;
 
@@ -3267,6 +3383,7 @@ const E2_2_CE_EMAIL_POOL_9 = buildExpressPool("e2-2-ce-email-9", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_10 = `De : Marc Singh
+
 Objet : Lave-linge en panne
 
 Bonjour,
@@ -3277,6 +3394,9 @@ Cela dure depuis hier. C'est gênant.
 Pouvez-vous envoyer un réparateur ?
 Merci d'intervenir cette semaine.
 
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Cordialement,
 Marc Singh`;
 
@@ -3355,6 +3475,7 @@ const E2_2_CE_EMAIL_POOL_10 = buildExpressPool("e2-2-ce-email-10", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_11 = `De : Julie Petit
+
 Objet : Odeur de gaz
 
 Bonjour,
@@ -3365,6 +3486,9 @@ Cela dure depuis maintenant. C'est très dangereux.
 Pouvez-vous intervenir immédiatement ?
 Merci d'intervenir tout de suite.
 
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
 Cordialement,
 Julie Petit`;
 
@@ -3443,6 +3567,7 @@ const E2_2_CE_EMAIL_POOL_11 = buildExpressPool("e2-2-ce-email-11", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_12 = `De : Omar Hassan
+
 Objet : Cafards
 
 Bonjour,
@@ -3453,6 +3578,9 @@ Cela dure depuis plusieurs jours. C'est urgent.
 Pouvez-vous faire désinsectiser ?
 Merci d'intervenir rapidement.
 
+Les personnes à mobilité réduite sont prioritaires.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
 Cordialement,
 Omar Hassan`;
 
@@ -3531,6 +3659,7 @@ const E2_2_CE_EMAIL_POOL_12 = buildExpressPool("e2-2-ce-email-12", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_13 = `De : Clara Rossi
+
 Objet : Moisissure
 
 Bonjour,
@@ -3541,6 +3670,9 @@ Cela dure depuis deux mois. C'est mauvais pour la santé.
 Pouvez-vous envoyer un expert ?
 Merci d'intervenir bientôt.
 
+Merci de lire ce message jusqu'à la fin.
+Les informations importantes sont déjà indiquées plus haut.
+En cas de question, vous pouvez écrire ou téléphoner.
 Cordialement,
 Clara Rossi`;
 
@@ -3619,6 +3751,7 @@ const E2_2_CE_EMAIL_POOL_13 = buildExpressPool("e2-2-ce-email-13", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_14 = `De : Yann Leroy
+
 Objet : Hotte en panne
 
 Bonjour,
@@ -3629,6 +3762,9 @@ Cela dure depuis une semaine. C'est gênant.
 Pouvez-vous envoyer un électricien ?
 Merci d'intervenir semaine prochaine.
 
+Nous vous souhaitons une excellente journée.
+Le service est également disponible en ligne.
+Respectez la file d'attente, s'il vous plaît.
 Cordialement,
 Yann Leroy`;
 
@@ -3707,6 +3843,7 @@ const E2_2_CE_EMAIL_POOL_14 = buildExpressPool("e2-2-ce-email-14", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_15 = `De : Inès Moreau
+
 Objet : Dégât des eaux
 
 Bonjour,
@@ -3717,6 +3854,9 @@ Cela dure depuis deux heures. C'est très urgent.
 Pouvez-vous fermer la vanne ?
 Merci d'intervenir immédiatement.
 
+Je reste près de mon téléphone aujourd'hui.
+Dis-moi si tu as besoin d'autre chose.
+On peut aussi en parler demain matin.
 Cordialement,
 Inès Moreau`;
 
@@ -3795,6 +3935,7 @@ const E2_2_CE_EMAIL_POOL_15 = buildExpressPool("e2-2-ce-email-15", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_16 = `De : Antoine Blanc
+
 Objet : Prises défectueuses
 
 Bonjour,
@@ -3805,6 +3946,9 @@ Cela dure depuis ce matin. C'est urgent.
 Pouvez-vous envoyer un électricien ?
 Merci d'intervenir aujourd'hui.
 
+On peut aussi en parler demain matin.
+J'espère que tout se passe bien de ton côté.
+N'hésite pas à me répondre quand tu peux.
 Cordialement,
 Antoine Blanc`;
 
@@ -3883,6 +4027,7 @@ const E2_2_CE_EMAIL_POOL_16 = buildExpressPool("e2-2-ce-email-16", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_17 = `De : Salma Ben
+
 Objet : Fumée dans les parties communes
 
 Bonjour,
@@ -3893,6 +4038,9 @@ Cela dure depuis longtemps. C'est gênant.
 Pouvez-vous rappeler le règlement ?
 Merci d'intervenir bientôt.
 
+En cas de changement, un nouvel avis sera publié.
+Bonne journée à toutes et à tous.
+Merci encore pour votre compréhension.
 Cordialement,
 Salma Ben`;
 
@@ -3971,6 +4119,7 @@ const E2_2_CE_EMAIL_POOL_17 = buildExpressPool("e2-2-ce-email-17", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_18 = `De : Victor Pop
+
 Objet : Vitre cassée
 
 Bonjour,
@@ -3981,6 +4130,9 @@ Cela dure depuis hier. C'est important.
 Pouvez-vous envoyer un vitrier ?
 Merci d'intervenir cette semaine.
 
+Conservez le numéro de contact indiqué.
+Tout est organisé pour que ce soit simple.
+À bientôt, et merci de votre lecture.
 Cordialement,
 Victor Pop`;
 
@@ -4059,6 +4211,7 @@ const E2_2_CE_EMAIL_POOL_18 = buildExpressPool("e2-2-ce-email-18", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_19 = `De : Maya Singh
+
 Objet : Interphone en panne
 
 Bonjour,
@@ -4069,6 +4222,9 @@ Cela dure depuis cinq jours. C'est gênant.
 Pouvez-vous faire réparer ?
 Merci d'intervenir rapidement.
 
+Passe le bonjour à tout le monde.
+À très bientôt, prends soin de toi.
+C'est important pour moi, merci beaucoup.
 Cordialement,
 Maya Singh`;
 
@@ -4147,6 +4303,7 @@ const E2_2_CE_EMAIL_POOL_19 = buildExpressPool("e2-2-ce-email-19", [
   }),
 ]);
 const E2_2_CE_EMAIL_TEXT_20 = `De : Emma Laurent
+
 Objet : Radiateur froid
 
 Bonjour,
@@ -4157,6 +4314,9 @@ Cela dure depuis une semaine. C'est urgent.
 Pouvez-vous purger le radiateur ?
 Merci d'intervenir demain.
 
+C'est important pour moi, merci beaucoup.
+Nous traitons votre demande rapidement.
+Vous pouvez répondre directement à ce message.
 Cordialement,
 Emma Laurent`;
 
@@ -4687,6 +4847,7 @@ Urgence habitat`,
    ════════════════════════════════════════════════════════════════════════════ */
 
 const E2_3_CE_EMAIL_TEXT_1 = `De : Régie Immobilière
+
 Objet : Rappel règlement — bruit
 
 Bonjour,
@@ -4697,6 +4858,10 @@ Sanction en cas de non-respect : amende de 200 francs.
 Horaires concernés : 20 h – 8 h.
 Merci de respecter ces règles pour le bien de tous.
 
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+Merci de lire ce message jusqu'à la fin.
 Cordialement,
 Régie Immobilière`;
 
@@ -4775,6 +4940,7 @@ const E2_3_CE_EMAIL_POOL_1 = buildExpressPool("e2-3-ce-email-1", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_2 = `De : Syndic Copro
+
 Objet : Animaux dans l'immeuble
 
 Bonjour,
@@ -4785,6 +4951,10 @@ Sanction en cas de non-respect : amende de 50 francs.
 Horaires concernés : tous les jours.
 Merci de respecter ces règles pour le bien de tous.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Nous traitons votre demande rapidement.
 Cordialement,
 Syndic Copro`;
 
@@ -4863,6 +5033,7 @@ const E2_3_CE_EMAIL_POOL_2 = buildExpressPool("e2-3-ce-email-2", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_3 = `De : Gardien
+
 Objet : Poubelles
 
 Bonjour,
@@ -4873,6 +5044,10 @@ Sanction en cas de non-respect : frais de nettoyage.
 Horaires concernés : 6 h – 8 h.
 Merci de respecter ces règles pour le bien de tous.
 
+Le trajet est simple, ne t'inquiète pas.
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Passe le bonjour à tout le monde.
 À bientôt,
 Gardien`;
 
@@ -4951,6 +5126,7 @@ const E2_3_CE_EMAIL_POOL_3 = buildExpressPool("e2-3-ce-email-3", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_4 = `De : Régie du Lac
+
 Objet : Parking
 
 Bonjour,
@@ -4961,6 +5137,10 @@ Sanction en cas de non-respect : amende de 80 francs.
 Horaires concernés : 24 h/24.
 Merci de respecter ces règles pour le bien de tous.
 
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Le personnel peut répondre en français simple.
 Cordialement,
 Régie du Lac`;
 
@@ -5039,6 +5219,7 @@ const E2_3_CE_EMAIL_POOL_4 = buildExpressPool("e2-3-ce-email-4", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_5 = `De : Syndic
+
 Objet : Parties communes
 
 Bonjour,
@@ -5049,6 +5230,10 @@ Sanction en cas de non-respect : frais de nettoyage.
 Horaires concernés : tous les jours.
 Merci de respecter ces règles pour le bien de tous.
 
+N'oublie pas de me confirmer dès que tu peux.
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+N'hésite pas à me répondre quand tu peux.
 À bientôt,
 Syndic`;
 
@@ -5127,6 +5312,7 @@ const E2_3_CE_EMAIL_POOL_5 = buildExpressPool("e2-3-ce-email-5", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_6 = `De : Concierge
+
 Objet : Ascenseur
 
 Bonjour,
@@ -5137,6 +5323,10 @@ Sanction en cas de non-respect : interdiction.
 Horaires concernés : tous les jours.
 Merci de respecter ces règles pour le bien de tous.
 
+Le trajet est simple, ne t'inquiète pas.
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+C'est important pour moi, merci beaucoup.
 À bientôt,
 Concierge`;
 
@@ -5215,6 +5405,7 @@ const E2_3_CE_EMAIL_POOL_6 = buildExpressPool("e2-3-ce-email-6", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_7 = `De : Régie Centrale
+
 Objet : Fumer
 
 Bonjour,
@@ -5225,6 +5416,10 @@ Sanction en cas de non-respect : amende de 100 francs.
 Horaires concernés : 24 h/24.
 Merci de respecter ces règles pour le bien de tous.
 
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Les horaires habituels restent les mêmes.
 Cordialement,
 Régie Centrale`;
 
@@ -5303,6 +5498,7 @@ const E2_3_CE_EMAIL_POOL_7 = buildExpressPool("e2-3-ce-email-7", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_8 = `De : Syndic Alpes
+
 Objet : Linge sur balcon
 
 Bonjour,
@@ -5313,6 +5509,10 @@ Sanction en cas de non-respect : avertissement.
 Horaires concernés : 8 h – 20 h.
 Merci de respecter ces règles pour le bien de tous.
 
+À très bientôt, prends soin de toi.
+Je joins les détails importants juste après.
+Si le plan change, je te préviens tout de suite.
+Nous vous souhaitons une excellente journée.
 Cordialement,
 Syndic Alpes`;
 
@@ -5391,6 +5591,7 @@ const E2_3_CE_EMAIL_POOL_8 = buildExpressPool("e2-3-ce-email-8", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_9 = `De : Gardien
+
 Objet : Vélos
 
 Bonjour,
@@ -5401,6 +5602,10 @@ Sanction en cas de non-respect : mise en fourrière.
 Horaires concernés : 24 h/24.
 Merci de respecter ces règles pour le bien de tous.
 
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.
+Bonne journée à toutes et à tous.
+Le personnel peut répondre en français simple.
 À bientôt,
 Gardien`;
 
@@ -5479,6 +5684,7 @@ const E2_3_CE_EMAIL_POOL_9 = buildExpressPool("e2-3-ce-email-9", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_10 = `De : Régie Soleil
+
 Objet : Visiteurs
 
 Bonjour,
@@ -5489,6 +5695,10 @@ Sanction en cas de non-respect : refus d'accès.
 Horaires concernés : 8 h – 22 h.
 Merci de respecter ces règles pour le bien de tous.
 
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+À très bientôt, prends soin de toi.
 Cordialement,
 Régie Soleil`;
 
@@ -5567,6 +5777,7 @@ const E2_3_CE_EMAIL_POOL_10 = buildExpressPool("e2-3-ce-email-10", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_11 = `De : Syndic
+
 Objet : Déménagement
 
 Bonjour,
@@ -5577,6 +5788,9 @@ Sanction en cas de non-respect : amende de 150 francs.
 Horaires concernés : lundi – vendredi.
 Merci de respecter ces règles pour le bien de tous.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 À bientôt,
 Syndic`;
 
@@ -5655,6 +5869,7 @@ const E2_3_CE_EMAIL_POOL_11 = buildExpressPool("e2-3-ce-email-11", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_12 = `De : Concierge
+
 Objet : Laverie
 
 Bonjour,
@@ -5665,6 +5880,10 @@ Sanction en cas de non-respect : interdiction 1 semaine.
 Horaires concernés : 7 h – 22 h.
 Merci de respecter ces règles pour le bien de tous.
 
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date et l'heure.
 À bientôt,
 Concierge`;
 
@@ -5743,6 +5962,7 @@ const E2_3_CE_EMAIL_POOL_12 = buildExpressPool("e2-3-ce-email-12", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_13 = `De : Régie
+
 Objet : Cave
 
 Bonjour,
@@ -5753,6 +5973,10 @@ Sanction en cas de non-respect : retrait immédiat.
 Horaires concernés : tous les jours.
 Merci de respecter ces règles pour le bien de tous.
 
+Les informations importantes sont déjà notées plus haut.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+En cas de changement, un nouvel avis sera publié.
 À bientôt,
 Régie`;
 
@@ -5831,6 +6055,7 @@ const E2_3_CE_EMAIL_POOL_13 = buildExpressPool("e2-3-ce-email-13", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_14 = `De : Syndic
+
 Objet : Jardin
 
 Bonjour,
@@ -5841,6 +6066,10 @@ Sanction en cas de non-respect : exclusion.
 Horaires concernés : 7 h – 21 h.
 Merci de respecter ces règles pour le bien de tous.
 
+Le temps est beau, alors tout devrait bien se passer.
+Prenez un pull, au cas où il ferait plus frais.
+Le parking le plus proche est gratuit le soir.
+Respectez la file d'attente, s'il vous plaît.
 À bientôt,
 Syndic`;
 
@@ -5919,6 +6148,7 @@ const E2_3_CE_EMAIL_POOL_14 = buildExpressPool("e2-3-ce-email-14", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_15 = `De : Gardien
+
 Objet : Piscine
 
 Bonjour,
@@ -5929,6 +6159,10 @@ Sanction en cas de non-respect : exclusion temporaire.
 Horaires concernés : 7 h – 21 h.
 Merci de respecter ces règles pour le bien de tous.
 
+Apporte ce dont tu as besoin, juste au cas où.
+Encore merci, vraiment.
+Voici quelques détails utiles pour la suite.
+N'hésite pas à me répondre quand tu peux.
 À bientôt,
 Gardien`;
 
@@ -6007,6 +6241,7 @@ const E2_3_CE_EMAIL_POOL_15 = buildExpressPool("e2-3-ce-email-15", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_16 = `De : Régie
+
 Objet : Barbecue
 
 Bonjour,
@@ -6017,6 +6252,10 @@ Sanction en cas de non-respect : amende de 100 francs.
 Horaires concernés : été.
 Merci de respecter ces règles pour le bien de tous.
 
+Tu peux m'appeler si c'est plus simple pour toi.
+J'espère que tu vas bien et que tout se passe comme prévu.
+N'oublie pas de me confirmer dès que tu peux.
+Une confirmation sera envoyée ensuite.
 À bientôt,
 Régie`;
 
@@ -6095,6 +6334,7 @@ const E2_3_CE_EMAIL_POOL_16 = buildExpressPool("e2-3-ce-email-16", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_17 = `De : Syndic
+
 Objet : Interphone
 
 Bonjour,
@@ -6105,6 +6345,10 @@ Sanction en cas de non-respect : responsabilité locataire.
 Horaires concernés : 24 h/24.
 Merci de respecter ces règles pour le bien de tous.
 
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Une confirmation sera envoyée ensuite.
 À bientôt,
 Syndic`;
 
@@ -6183,6 +6427,7 @@ const E2_3_CE_EMAIL_POOL_17 = buildExpressPool("e2-3-ce-email-17", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_18 = `De : Concierge
+
 Objet : Chauffage
 
 Bonjour,
@@ -6193,6 +6438,10 @@ Sanction en cas de non-respect : avertissement.
 Horaires concernés : hiver.
 Merci de respecter ces règles pour le bien de tous.
 
+Sans confirmation, la place n'est pas garantie.
+Je t'écris aussi pour te donner un peu plus de nouvelles.
+Dis-moi si tu as des questions, je réponds vite.
+Le trajet est simple, ne t'inquiète pas.
 À bientôt,
 Concierge`;
 
@@ -6271,6 +6520,7 @@ const E2_3_CE_EMAIL_POOL_18 = buildExpressPool("e2-3-ce-email-18", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_19 = `De : Régie
+
 Objet : Silence
 
 Bonjour,
@@ -6281,6 +6531,9 @@ Sanction en cas de non-respect : avertissement écrit.
 Horaires concernés : 22 h – 7 h.
 Merci de respecter ces règles pour le bien de tous.
 
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
 À bientôt,
 Régie`;
 
@@ -6359,6 +6612,7 @@ const E2_3_CE_EMAIL_POOL_19 = buildExpressPool("e2-3-ce-email-19", [
   }),
 ]);
 const E2_3_CE_EMAIL_TEXT_20 = `De : Syndic
+
 Objet : Animaux nombre
 
 Bonjour,
@@ -6369,6 +6623,10 @@ Sanction en cas de non-respect : avertissement.
 Horaires concernés : tous les jours.
 Merci de respecter ces règles pour le bien de tous.
 
+Sinon on peut aussi en parler demain matin.
+Merci d'avance pour ta réponse.
+Je suis disponible après 18 heures.
+Conservez le numéro de contact indiqué.
 À bientôt,
 Syndic`;
 

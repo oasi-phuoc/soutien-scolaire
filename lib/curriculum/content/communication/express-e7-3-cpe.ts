@@ -18,7 +18,12 @@ const E7_3_CE_TEXT_1 = `Affiche — Musée d'art
 Fermé lundi.
 Ouvert mar–dim 10 h–18 h.
 Billet adulte 12 fr. Gratuit -18 ans.
-Audioguide 5 fr.`;
+Audioguide 5 fr.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+C'est important pour moi, merci beaucoup.`;
 
 const E7_3_CE_POOL_1 = buildExpressPool("e7-3-ce-1", [
   q({
@@ -111,7 +116,11 @@ const E7_3_CE_TEXT_2 = `Affiche — Musée historique
 Fermé mardi.
 Ouvert mer–dim 11 h–17 h.
 Billet adulte 10 fr. Gratuit -16 ans.
-Audioguide 4 fr.`;
+Audioguide 4 fr.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E7_3_CE_POOL_2 = buildExpressPool("e7-3-ce-2", [
   q({
@@ -204,7 +213,12 @@ const E7_3_CE_TEXT_3 = `Affiche — Galerie contemporaine
 Fermé lundi.
 Ouvert jeu–dim 12 h–20 h.
 Billet adulte 15 fr. Gratuit -12 ans.
-Audioguide 6 fr.`;
+Audioguide 6 fr.
+Passe le bonjour à tout le monde.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.`;
 
 const E7_3_CE_POOL_3 = buildExpressPool("e7-3-ce-3", [
   q({
@@ -297,7 +311,12 @@ const E7_3_CE_TEXT_4 = `Affiche — Musée sciences
 Fermé lundi.
 Ouvert mar–ven 9 h–17 h, sam–dim 10 h–18 h.
 Billet adulte 18 fr. Gratuit -6 ans.
-Audioguide 5 fr.`;
+Audioguide 5 fr.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Tout est organisé pour que ce soit simple.`;
 
 const E7_3_CE_POOL_4 = buildExpressPool("e7-3-ce-4", [
   q({
@@ -390,7 +409,12 @@ const E7_3_CE_TEXT_5 = `Affiche — Château médiéval
 Fermé lundi hiver.
 Ouvert avril–oct 10 h–18 h.
 Billet adulte 14 fr. Gratuit -10 ans.
-Audioguide 7 fr.`;
+Audioguide 7 fr.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Je reste près de mon téléphone aujourd'hui.`;
 
 const E7_3_CE_POOL_5 = buildExpressPool("e7-3-ce-5", [
   q({
@@ -483,7 +507,13 @@ const E7_3_CE_TEXT_6 = `Horaires — Théâtre municipal
 Saison sept–juin.
 Spectacles mer–sam 20 h.
 Billetterie 14 h–19 h.
-Tarif 25–45 fr.`;
+Tarif 25–45 fr.
+J'espère que tout se passe bien de ton côté.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.`;
 
 const E7_3_CE_POOL_6 = buildExpressPool("e7-3-ce-6", [
   q({
@@ -575,7 +605,14 @@ const E7_3_CE_TEXT_7 = `Horaires — Cinéma Rex
 
 Films en VF et VO.
 Séances 14 h, 17 h, 20 h.
-Ticket 15 fr, étudiant 12 fr.`;
+Ticket 15 fr, étudiant 12 fr.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Merci de votre attention et de votre patience.`;
 
 const E7_3_CE_POOL_7 = buildExpressPool("e7-3-ce-7", [
   q({
@@ -667,7 +704,14 @@ const E7_3_CE_TEXT_8 = `Horaires — Bibliothèque centrale
 
 Inscription gratuite.
 Ouvert lun–ven 10 h–19 h.
-Prêt 4 semaines, 10 livres max.`;
+Prêt 4 semaines, 10 livres max.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Vous pouvez demander de l'aide si besoin.
+Passe le bonjour à tout le monde.`;
 
 const E7_3_CE_POOL_8 = buildExpressPool("e7-3-ce-8", [
   q({
@@ -759,7 +803,14 @@ const E7_3_CE_TEXT_9 = `Horaires — Opéra de Lausanne
 
 Saison oct–mai.
 Représentations jeu–dim.
-Places à partir de 35 fr.`;
+Places à partir de 35 fr.
+Une confirmation sera envoyée ensuite.
+Merci de lire attentivement toutes les informations.
+En cas de doute, demandez de l'aide à l'accueil.
+Les horaires peuvent changer en cas d'urgence.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.`;
 
 const E7_3_CE_POOL_9 = buildExpressPool("e7-3-ce-9", [
   q({
@@ -851,7 +902,14 @@ const E7_3_CE_TEXT_10 = `Horaires — Festival musique
 
 3 jours en juillet.
 Parc la Grange.
-Pass 1 jour 40 fr, 3 jours 90 fr.`;
+Pass 1 jour 40 fr, 3 jours 90 fr.
+Les informations importantes sont déjà notées plus haut.
+Gardez ce texte pour vous en souvenir.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E7_3_CE_POOL_10 = buildExpressPool("e7-3-ce-10", [
   q({
@@ -943,7 +1001,14 @@ const E7_3_CE_TEXT_11 = `Horaires — Exposition photo
 
 Galerie rue du Lac 5.
 Entrée libre.
-Ouvert 11 h–18 h mer–dim.`;
+Ouvert 11 h–18 h mer–dim.
+Gardez votre ticket ou votre confirmation avec vous.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Merci encore pour votre compréhension.`;
 
 const E7_3_CE_POOL_11 = buildExpressPool("e7-3-ce-11", [
   q({
@@ -1035,7 +1100,13 @@ const E7_3_CE_TEXT_12 = `Horaires — Concert jazz
 
 Club Blue Note.
 Vendredi et samedi 21 h.
-Entrée 20 fr, réservation conseillée.`;
+Entrée 20 fr, réservation conseillée.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.`;
 
 const E7_3_CE_POOL_12 = buildExpressPool("e7-3-ce-12", [
   q({
@@ -1127,7 +1198,14 @@ const E7_3_CE_TEXT_13 = `Horaires — Zoo
 
 Ouvert 9 h–18 h.
 Adulte 28 fr, enfant 18 fr.
-Repas animaux 11 h et 15 h.`;
+Repas animaux 11 h et 15 h.
+Les enfants doivent rester accompagnés d'un adulte.
+Respectez la file d'attente, s'il vous plaît.
+Un plan simple est affiché juste à côté.
+Les personnes à mobilité réduite sont prioritaires.
+Pour plus d'infos, scannez le QR code ou demandez au guichet.
+Nous vous remercions de votre patience.
+Un plan simple est disponible à l'accueil.`;
 
 const E7_3_CE_POOL_13 = buildExpressPool("e7-3-ce-13", [
   q({
@@ -1219,7 +1297,13 @@ const E7_3_CE_TEXT_14 = `Horaires — Château de Chillon
 
 Ouvert 9 h–19 h été.
 Adulte 13 fr.
-Visite guidée 14 h.`;
+Visite guidée 14 h.
+En cas de changement, un nouvel avis sera publié.
+Nous sommes là pour vous aider.
+Gardez ce texte pour vous en souvenir.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.`;
 
 const E7_3_CE_POOL_14 = buildExpressPool("e7-3-ce-14", [
   q({
@@ -1311,7 +1395,14 @@ const E7_3_CE_TEXT_15 = `Horaires — Cinéma plein air
 
 Été seulement, parc.
 Films vendredi 21 h 30.
-Entrée 10 fr, couverture conseillée.`;
+Entrée 10 fr, couverture conseillée.
+Les informations importantes sont déjà notées plus haut.
+J'espère que tout se passe bien de ton côté.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.
+Prenez votre temps pour comprendre le message.
+En cas de changement, un nouvel avis sera publié.`;
 
 const E7_3_CE_POOL_15 = buildExpressPool("e7-3-ce-15", [
   q({
@@ -1403,7 +1494,14 @@ const E7_3_CE_TEXT_16 = `Horaires — Atelier poterie
 
 Cours samedi 14 h.
 Matériel fourni.
-Inscription 8 personnes max.`;
+Inscription 8 personnes max.
+N'hésite pas à me répondre quand tu peux.
+Bonne journée à toutes et à tous.
+Ce document complète les informations déjà données.
+Nous comptons sur vous.
+J'ai noté votre numéro dans mon téléphone.
+Le message est aussi envoyé au groupe WhatsApp.
+Si vous changez d'avis, dites-le sans attendre.`;
 
 const E7_3_CE_POOL_16 = buildExpressPool("e7-3-ce-16", [
   q({
@@ -1495,7 +1593,13 @@ const E7_3_CE_TEXT_17 = `Horaires — Spectacle enfants
 
 Dimanche 15 h théâtre.
 Durée 45 min.
-Ticket 12 fr, -6 ans gratuit.`;
+Ticket 12 fr, -6 ans gratuit.
+Les horaires habituels restent les mêmes.
+Une question ? Écrivez ou téléphonez.
+Merci encore, et à bientôt.
+Tout est organisé pour que ce soit simple.
+Le contact est indiqué dans le message.
+N'oubliez pas de vérifier la date.`;
 
 const E7_3_CE_POOL_17 = buildExpressPool("e7-3-ce-17", [
   q({
@@ -1587,7 +1691,14 @@ const E7_3_CE_TEXT_18 = `Horaires — Visite guidée ville
 
 Départ place Palud samedi 10 h.
 Durée 1 h 30.
-Gratuit, sans réservation.`;
+Gratuit, sans réservation.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Joignez les documents demandés si nécessaire.`;
 
 const E7_3_CE_POOL_18 = buildExpressPool("e7-3-ce-18", [
   q({
@@ -1679,7 +1790,15 @@ const E7_3_CE_TEXT_19 = `Horaires — Monument historique
 
 Tour clocher ouverte 10 h–17 h.
 Vue panoramique.
-Ticket 5 fr.`;
+Ticket 5 fr.
+Vous pouvez demander de l'aide si besoin.
+Les informations importantes sont déjà notées plus haut.
+Nous restons disponibles pour vous aider.
+Les horaires habituels restent les mêmes.
+Vous pouvez venir accompagné(e) si vous le souhaitez.
+Merci de votre attention et de votre patience.
+Une confirmation arrivera ensuite.
+Le lieu est facile à trouver.`;
 
 const E7_3_CE_POOL_19 = buildExpressPool("e7-3-ce-19", [
   q({
@@ -1771,7 +1890,14 @@ const E7_3_CE_TEXT_20 = `Horaires — Marché artisanal
 
 Premier dimanche du mois.
 Place du Marché 9 h–16 h.
-Entrée libre.`;
+Entrée libre.
+Un point d'eau potable est gratuit près de l'entrée.
+En cas de perte d'objet, passez à l'accueil.
+Le service client répond aussi par téléphone.
+Bonne visite et merci de votre attention.
+Voici quelques détails utiles pour la suite.
+Lisez bien jusqu'à la fin, s'il vous plaît.
+Conservez le numéro de contact indiqué.`;
 
 const E7_3_CE_POOL_20 = buildExpressPool("e7-3-ce-20", [
   q({
