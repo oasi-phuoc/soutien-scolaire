@@ -60,17 +60,11 @@ export const A1_GR_AVOIR: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["On ne prononce pas le {a}e{/a} final de {a}elle{/a}."],
-    },
-    {
-      type: "highlight",
-      label: "",
-      items: ["Elle a 10 ans."],
-      noBulletItems: [0],
+      items: ["{a}1.{/a} On ne prononce pas le {a}e{/a} final de {a}elle{/a}."],
     },
     {
       type: "plain_list",
-      items: ["On fait la liaison."],
+      items: ["{a}2.{/a} On fait la liaison."],
     },
     {
       type: "highlight",
@@ -80,7 +74,7 @@ export const A1_GR_AVOIR: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle."],
+      items: ["{a}3.{/a} Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle."],
     },
     {
       type: "highlight",
@@ -92,8 +86,6 @@ export const A1_GR_AVOIR: GrammarLesson = {
     {
       type: "heading",
       text: "Expressions avec AVOIR",
-      sub: true,
-      accent: true,
     },
     {
       type: "grid",
