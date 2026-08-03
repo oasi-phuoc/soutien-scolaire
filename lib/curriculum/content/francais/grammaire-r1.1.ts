@@ -47,12 +47,6 @@ export const A1_GR_L01: GrammarLesson = {
       text: "Cas spéciaux",
     },
     {
-      type: "plain_list",
-      items: [
-        "On utilise « {a}on{/a} » pour représenter plusieurs personnes (= nous). Il est très utilisé à l'oral familier. Le verbe est toujours au singulier.",
-      ],
-    },
-    {
       type: "highlight",
       label: "ON",
       noBulletItems: [0, 1],
@@ -65,7 +59,7 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",
+        "On utilise « {a}on{/a} » pour représenter plusieurs personnes (= nous). Il est très utilisé à l'oral familier. Le verbe est toujours au singulier.",
       ],
     },
     {
@@ -73,13 +67,13 @@ export const A1_GR_L01: GrammarLesson = {
       label: "TU",
       noBulletItems: [0],
       items: [
-        "{a}Tu{/a} (= un ami) es fatiguée ?",
+        "{a}Tu{/a} (= un ami) es fatigué ?",
       ],
     },
     {
       type: "plain_list",
       items: [
-        "On utilise « {a}vous{/a} » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur). On appelle cela la forme de politesse.",
+        "On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",
       ],
     },
     {
@@ -93,7 +87,7 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "On utilise « {a}ils{/a} » quand il y a un groupe mixte de femmes et d'hommes. Même s'il y a beaucoup de femmes et un seul homme.",
+        "On utilise « {a}vous{/a} » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur). On appelle cela la forme de politesse.",
       ],
     },
     {
@@ -103,6 +97,12 @@ export const A1_GR_L01: GrammarLesson = {
       inlineArrows: true,
       items: [
         "Ali ♂ et Alona ♀ vont au cinéma → {a}Ils{/a} vont au cinéma.",
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "On utilise « {a}ils{/a} » quand il y a un groupe mixte de femmes et d'hommes. Même s'il y a beaucoup de femmes et un seul homme.",
       ],
     },
     {
