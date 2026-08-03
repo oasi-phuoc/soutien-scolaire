@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 8 — Les verbes en -ir (G1.8) */
+/** Unité 8 — Les verbes en -ir (G1.9) */
 export const A1_GR_VERBES_IR: GrammarLesson = {
   slug: "a1-gr-verbes-ir",
-  code: "G1.8",
+  code: "G1.9",
   level: "A1",
   title: "Les verbes en -ir",
   theory: [

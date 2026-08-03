@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 10 — Le présent progressif (G1.10) */
+/** Unité 10 — Le présent progressif (G1.11) */
 export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
   slug: "a1-gr-present-progressif",
-  code: "G1.10",
+  code: "G1.11",
   level: "A1",
   title: "Le présent progressif",
   theory: [

@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 6 — Pouvoir, vouloir, devoir et falloir (G1.6) */
+/** Unité 6 — Pouvoir, vouloir, devoir et falloir (G1.7) */
 export const A1_GR_MODAUX: GrammarLesson = {
   slug: "a1-gr-modaux",
-  code: "G1.6",
+  code: "G1.7",
   level: "A1",
   title: "Les verbes pouvoir, vouloir, devoir et falloir",
   theory: [

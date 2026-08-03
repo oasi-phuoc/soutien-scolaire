@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 9 — Les verbes en -re et en -oir (G1.9) */
+/** Unité 9 — Les verbes en -re et en -oir (G1.10) */
 export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
   slug: "a1-gr-verbes-re-oir",
-  code: "G1.9",
+  code: "G1.10",
   level: "A1",
   title: "Les verbes en -re et en -oir",
   theory: [
