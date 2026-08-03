@@ -2427,6 +2427,7 @@ Loris`,
       subject: "Services de l'hôtel",
       body: `Bonjour,
 Nous répondons volontiers à vos questions sur nos services avant votre réservation.
+Pouvez-vous nous écrire avec les services que vous souhaitez vérifier ?
 La réception`,
     },
     instruction: "Répondez à l'hôtel en demandant s'il y a un parking, Internet, une piscine et un restaurant ouvert le soir.",
@@ -7363,7 +7364,9 @@ export const E7_3_PE_EMAIL: ExpressPePrompt[] = [
       from: "Amis",
       subject: "Ta visite",
       body: `Bonjour,
-Tu visites une belle ville. Envoie-nous une carte postale avec tes activités culturelles.
+Tu visites une belle ville.
+Envoie-nous une carte postale avec tes activités culturelles.
+Peux-tu nous raconter ce que tu vois et ce que tu fais ?
 Tes amis`,
     },
     instruction: "Répondez à vos amis comme dans une carte postale en racontant vos activités culturelles dans la ville.",
@@ -7524,6 +7527,7 @@ Merci`,
       subject: "Carte postale",
       body: `Bonjour,
 Nous aimerions recevoir des nouvelles de ta visite du monument célèbre.
+Peux-tu nous répondre comme dans une carte postale avec la vue, les photos et tes impressions ?
 Tes grands-parents`,
     },
     instruction: "Répondez à vos grands-parents comme dans une carte postale en décrivant le monument, la vue et les photos.",

@@ -2489,7 +2489,9 @@ Merci`,
       from: "Rita",
       subject: "Cinéma ce soir",
       body: `Coucou,
-Je viens au cinéma, mais je ne sais pas quel transport prendre ni où te retrouver.
+Je viens au cinéma, mais je ne sais pas quel transport prendre.
+Je ne sais pas non plus où te retrouver.
+Peux-tu me répondre avec le chemin et le lieu exact du rendez-vous ?
 Rita`,
     },
     instruction: "Répondez à Rita en donnant le meilleur transport, le chemin jusqu'au cinéma et le lieu exact du rendez-vous.",
@@ -4934,7 +4936,9 @@ Merci`,
       from: "Famille",
       subject: "Ce week-end",
       body: `Bonjour,
-Nous voulons savoir comment tu viens ce week-end et qui doit venir te chercher.
+Nous voulons savoir comment tu viens ce week-end.
+Nous pouvons venir te chercher si nécessaire.
+Peux-tu nous répondre avec ton trajet, ton heure d'arrivée et tes bagages ?
 La famille`,
     },
     instruction: "Répondez à votre famille en annonçant votre trajet, votre heure d'arrivée, vos bagages et la personne qui vous récupère.",
@@ -5094,7 +5098,9 @@ Maman`,
       from: "Antoine",
       subject: "Je viens te chercher",
       body: `Salut,
+Je peux venir te chercher à la gare.
 Donne-moi ton numéro de train, l'heure d'arrivée et le quai si tu le connais.
+Peux-tu aussi me dire où t'attendre ?
 Antoine`,
     },
     instruction: "Répondez à Antoine en donnant les informations du train, l'heure, le quai probable et le lieu où vous attendre.",
@@ -7503,7 +7509,9 @@ Laura`,
       from: "Adrien",
       subject: "Je viens te chercher",
       body: `Salut,
+Je peux venir te chercher à l'aéroport.
 Envoie-moi ton numéro de vol, le terminal et l'heure prévue pour que je t'attende au bon endroit.
+Peux-tu aussi confirmer le lieu de rendez-vous ?
 Adrien`,
     },
     instruction: "Répondez à Adrien avec les informations du vol, le terminal, l'heure prévue et le lieu de rendez-vous.",

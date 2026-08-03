@@ -2318,7 +2318,9 @@ Nadia`,
       from: "Lucas Martin",
       subject: "Je suis malade",
       body: `Bonjour docteur,
-J'ai très mal à la tête et j'ai de la fièvre depuis hier soir. Je ne sais pas quoi faire.
+J'ai très mal à la tête et j'ai de la fièvre depuis hier soir.
+Je ne sais pas quoi faire.
+Pouvez-vous me répondre et me dire quelles informations vous voulez connaître ?
 Lucas Martin`,
     },
     instruction: "Répondez comme médecin à Lucas en lui posant des questions sur ses symptômes, la durée de la maladie et les médicaments déjà pris.",
