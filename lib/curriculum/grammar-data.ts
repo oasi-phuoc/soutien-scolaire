@@ -80,6 +80,7 @@ export type ConjLesson = {
 // ── Imports — grammaire ───────────────────────────────────────────────────────
 
 import { A1_GR_L01 } from "./content/francais/grammaire-r1.1";
+import { A1_GR_ETRE } from "./content/francais/grammaire-a1-etre";
 import { A1_GR_AVOIR } from "./content/francais/grammaire-a1-avoir";
 import { A1_GR_VERBES_ER } from "./content/francais/grammaire-a1-verbes-er";
 import { A1_GR_PRONOMINAUX } from "./content/francais/grammaire-a1-pronominaux";
@@ -239,15 +240,16 @@ import {
 
 const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-l01": "G1.1",
-  "a1-gr-avoir": "G1.2",
-  "a1-gr-cest-il-est": "G1.3",
-  "a1-gr-verbes-er": "G1.4",
-  "a1-gr-pronominaux": "G1.5",
-  "a1-gr-modaux": "G1.6",
-  "a1-gr-verbes-er-particuliers": "G1.7",
-  "a1-gr-verbes-ir": "G1.8",
-  "a1-gr-verbes-re-oir": "G1.9",
-  "a1-gr-present-progressif": "G1.10",
+  "a1-gr-etre": "G1.2",
+  "a1-gr-avoir": "G1.3",
+  "a1-gr-cest-il-est": "G1.4",
+  "a1-gr-verbes-er": "G1.5",
+  "a1-gr-pronominaux": "G1.6",
+  "a1-gr-modaux": "G1.7",
+  "a1-gr-verbes-er-particuliers": "G1.8",
+  "a1-gr-verbes-ir": "G1.9",
+  "a1-gr-verbes-re-oir": "G1.10",
+  "a1-gr-present-progressif": "G1.11",
   "a1-gr-genre-personnes": "G2.1",
   "a1-gr-genre-choses": "G2.2",
   "a1-gr-pluriel-noms": "G2.3",
@@ -358,11 +360,11 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-conj-l08": "G19.33",
   "a1-conj-l00": "G1.1",
   "a1-conj-l01": "G1.2",
-  "a1-conj-l07": "G1.4",
-  "a1-conj-l09": "G1.5",
-  "a1-conj-l15": "G1.6",
-  "a2-conj-irreguliers": "G1.9",
-  "a2-conj-l02": "G1.8",
+  "a1-conj-l07": "G1.5",
+  "a1-conj-l09": "G1.6",
+  "a1-conj-l15": "G1.7",
+  "a2-conj-irreguliers": "G1.10",
+  "a2-conj-l02": "G1.9",
   "a1-conj-l28": "G8.4",
   "a1-conj-l29": "G8.1",
   "a1-conj-l30": "G8.2",
@@ -427,6 +429,7 @@ function augmentGrammarLessonExercises(lesson: GrammarLesson): GrammarLesson {
 
 const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L01,
+  A1_GR_ETRE,
   A1_GR_AVOIR,
   A1_GR_VERBES_ER,
   A1_GR_PRONOMINAUX,
@@ -550,8 +553,7 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
 
 /** Fusion conjugaison → grammaire : exercices (et théorie) ajoutés aux leçons cibles. */
 const CONJ_MERGE_INTO: Record<string, string[]> = {
-  "a1-gr-l01": ["a1-conj-l00", "a1-conj-l01"],
-  "a1-gr-avoir": ["a1-conj-l01"],
+  // G1.1 / G1.2 / G1.3 : contenu déjà intégré dans les leçons grammaire
   "a1-gr-verbes-er": ["a1-conj-l07"],
   "a1-gr-pronominaux": ["a1-conj-l09"],
   "a1-gr-modaux": ["a1-conj-l15"],
@@ -571,7 +573,7 @@ const CONJ_MERGE_INTO: Record<string, string[]> = {
 /** Ancien slug conjugaison → leçon grammaire qui le remplace (pour prérequis Communication). */
 export const CONJ_SLUG_TO_GRAMMAR: Record<string, string> = {
   "a1-conj-l00": "a1-gr-l01",
-  "a1-conj-l01": "a1-gr-l01",
+  "a1-conj-l01": "a1-gr-etre",
   "a1-conj-l07": "a1-gr-verbes-er",
   "a1-conj-l08": "a1-conj-l08",
   "a1-conj-l09": "a1-gr-pronominaux",
@@ -633,6 +635,9 @@ function mergeConjugationIntoGrammar(lessons: GrammarLesson[]): GrammarLesson[] 
           { type: "heading" as const, text: "Entraînement conjugaison" },
           ...src.theory,
         ];
+      }
+      if (src.midExercises?.length) {
+        exercises = [...exercises, ...src.midExercises];
       }
       if (src.exercises?.length) {
         exercises = [...exercises, ...src.exercises];

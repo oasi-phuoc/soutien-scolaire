@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 7 — Les verbes en -er : cas particuliers (G1.7) */
+/** Unité 7 — Les verbes en -er : cas particuliers (G1.8) */
 export const A1_GR_VERBES_ER_PART: GrammarLesson = {
   slug: "a1-gr-verbes-er-particuliers",
-  code: "G1.7",
+  code: "G1.8",
   level: "A1",
   title: "Les verbes en -er : cas particuliers",
   theory: [

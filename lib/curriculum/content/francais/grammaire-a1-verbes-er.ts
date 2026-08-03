@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 4 — Les verbes en -er : cas général (G1.4) */
+/** Unité 4 — Les verbes en -er : cas général (G1.5) */
 export const A1_GR_VERBES_ER: GrammarLesson = {
   slug: "a1-gr-verbes-er",
-  code: "G1.4",
+  code: "G1.5",
   level: "A1",
   title: "Les verbes en -er : cas général",
   theory: [

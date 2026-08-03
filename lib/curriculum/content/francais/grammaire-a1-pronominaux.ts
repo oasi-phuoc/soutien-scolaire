@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 5 — Les verbes pronominaux (G1.5) */
+/** Unité 5 — Les verbes pronominaux (G1.6) */
 export const A1_GR_PRONOMINAUX: GrammarLesson = {
   slug: "a1-gr-pronominaux",
-  code: "G1.5",
+  code: "G1.6",
   level: "A1",
   title: "Les verbes pronominaux",
   theory: [
