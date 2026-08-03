@@ -2297,7 +2297,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-11",
   title: "Demander une information sur une activité",
-  context: "Vous parlez en français simple. Vous devez demander une information sur une activité : un atelier de peinture pour adultes.",
+  context: "Vous voulez un atelier de peinture pour adultes.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2316,7 +2316,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-12",
   title: "Expliquer un problème avec une activité",
-  context: "Vous parlez en français simple. Vous devez expliquer un problème avec une activité : je ne peux pas venir au cours aujourd'hui.",
+  context: "Vous expliquez un problème : je ne peux pas venir au cours aujourd'hui.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2335,7 +2335,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-13",
   title: "Prendre rendez-vous pour une activité",
-  context: "Vous parlez en français simple. Vous devez prendre rendez-vous pour une activité : essayer le cours de danse.",
+  context: "Vous voulez prendre rendez-vous pour essayer le cours de danse.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2354,7 +2354,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous parlez en français simple. Vous devez confirmer un rendez-vous : mon inscription à l'atelier photo.",
+  context: "Vous confirmez ceci : mon inscription à l'atelier photo.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2373,7 +2373,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-15",
   title: "Demander conseil sur une activité",
-  context: "Vous parlez en français simple. Vous devez demander conseil sur une activité : choisir une activité calme.",
+  context: "Vous demandez conseil pour choisir une activité calme.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2392,7 +2392,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-16",
   title: "Signaler un retard",
-  context: "Vous parlez en français simple. Vous devez signaler un retard : j'arrive en retard au club.",
+  context: "Vous signalez un retard : j'arrive en retard au club.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2411,7 +2411,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous parlez en français simple. Vous devez faire une réclamation polie : la salle était fermée hier.",
+  context: "Vous faites une réclamation : la salle était fermée hier.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2430,7 +2430,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-18",
   title: "Demander une aide urgente",
-  context: "Vous parlez en français simple. Vous devez demander une aide urgente : savoir si le cours est maintenu ce soir.",
+  context: "Vous devez demander une aide urgente : savoir si le cours est maintenu ce soir.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2449,7 +2449,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous parlez en français simple. Vous devez comparer deux possibilités : le yoga et la danse.",
+  context: "Vous devez comparer deux possibilités : le yoga et la danse.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2468,7 +2468,7 @@ export const E7_2_PO: ExpressPoDialogue[] = [
   {
   id: "e7-2-po-20",
   title: "Remercier pour une aide",
-  context: "Vous parlez en français simple. Vous devez remercier pour une aide : l'accueil au club.",
+  context: "Vous remerciez pour une aide : l'accueil au club.",
   roleA: { title: "L'animateur", vous: "l'animateur / l'animatrice" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [

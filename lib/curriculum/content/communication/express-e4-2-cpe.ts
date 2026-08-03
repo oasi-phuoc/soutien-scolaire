@@ -2029,7 +2029,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-11",
   title: "Demander une information sur un restaurant",
-  context: "Vous parlez en français simple. Vous devez demander une information sur un restaurant : réserver une table pour deux.",
+  context: "Vous voulez réserver une table pour deux.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2048,7 +2048,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-12",
   title: "Expliquer un problème avec un restaurant",
-  context: "Vous parlez en français simple. Vous devez expliquer un problème avec un restaurant : ma réservation n'apparaît pas.",
+  context: "Vous expliquez un problème : ma réservation n'apparaît pas.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2067,7 +2067,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-13",
   title: "Prendre rendez-vous pour un restaurant",
-  context: "Vous parlez en français simple. Vous devez prendre rendez-vous pour un restaurant : organiser un repas de groupe.",
+  context: "Vous voulez prendre rendez-vous pour organiser un repas de groupe.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2086,7 +2086,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous parlez en français simple. Vous devez confirmer un rendez-vous : la table de ce soir.",
+  context: "Vous confirmez ceci : la table de ce soir.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2105,7 +2105,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-15",
   title: "Demander conseil sur un restaurant",
-  context: "Vous parlez en français simple. Vous devez demander conseil sur un restaurant : choisir un plat sans viande.",
+  context: "Vous demandez conseil pour choisir un plat sans viande.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2124,7 +2124,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-16",
   title: "Signaler un retard",
-  context: "Vous parlez en français simple. Vous devez signaler un retard : nous arrivons en retard au restaurant.",
+  context: "Vous signalez un retard : nous arrivons en retard au restaurant.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2143,7 +2143,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous parlez en français simple. Vous devez faire une réclamation polie : mon plat est froid.",
+  context: "Vous faites une réclamation : mon plat est froid.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2162,7 +2162,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-18",
   title: "Demander une aide urgente",
-  context: "Vous parlez en français simple. Vous devez demander une aide urgente : trouver une table maintenant.",
+  context: "Vous devez demander une aide urgente : trouver une table maintenant.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2181,7 +2181,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous parlez en français simple. Vous devez comparer deux possibilités : le menu du jour et la carte.",
+  context: "Vous devez comparer deux possibilités : le menu du jour et la carte.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [
@@ -2200,7 +2200,7 @@ export const E4_2_PO: ExpressPoDialogue[] = [
 {
   id: "e4-2-po-20",
   title: "Remercier pour une aide",
-  context: "Vous parlez en français simple. Vous devez remercier pour une aide : votre accueil au restaurant.",
+  context: "Vous remerciez pour une aide : votre accueil au restaurant.",
   roleA: { title: "Le serveur", vous: "le serveur / la serveuse" },
   roleB: { title: "Vous", vous: "le client / la cliente" },
   lines: [

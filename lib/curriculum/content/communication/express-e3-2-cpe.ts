@@ -2024,7 +2024,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-11",
   title: "Demander une information sur la ville",
-  context: "Vous parlez en français simple. Vous devez demander une information sur la ville : trouver la bibliothèque municipale.",
+  context: "Vous voulez trouver la bibliothèque municipale.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2043,7 +2043,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-12",
   title: "Expliquer un problème avec la ville",
-  context: "Vous parlez en français simple. Vous devez expliquer un problème avec la ville : le lampadaire devant chez moi ne fonctionne plus.",
+  context: "Vous expliquez un problème : le lampadaire devant chez moi ne fonctionne plus.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2062,7 +2062,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-13",
   title: "Prendre rendez-vous pour la ville",
-  context: "Vous parlez en français simple. Vous devez prendre rendez-vous pour la ville : rencontrer le service logement de la ville.",
+  context: "Vous voulez prendre rendez-vous pour rencontrer le service logement de la ville.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2081,7 +2081,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous parlez en français simple. Vous devez confirmer un rendez-vous : la visite guidée du centre.",
+  context: "Vous confirmez ceci : la visite guidée du centre.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2100,7 +2100,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-15",
   title: "Demander conseil sur la ville",
-  context: "Vous parlez en français simple. Vous devez demander conseil sur la ville : choisir un quartier calme.",
+  context: "Vous demandez conseil pour choisir un quartier calme.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2119,7 +2119,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-16",
   title: "Signaler un retard",
-  context: "Vous parlez en français simple. Vous devez signaler un retard : j'arrive en retard à la visite.",
+  context: "Vous signalez un retard : j'arrive en retard à la visite.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2138,7 +2138,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous parlez en français simple. Vous devez faire une réclamation polie : les poubelles de ma rue débordent.",
+  context: "Vous faites une réclamation : les poubelles de ma rue débordent.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2157,7 +2157,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-18",
   title: "Demander une aide urgente",
-  context: "Vous parlez en français simple. Vous devez demander une aide urgente : trouver une pharmacie ouverte ce soir.",
+  context: "Vous devez demander une aide urgente : trouver une pharmacie ouverte ce soir.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2176,7 +2176,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous parlez en français simple. Vous devez comparer deux possibilités : prendre le bus ou marcher jusqu'au marché.",
+  context: "Vous devez comparer deux possibilités : prendre le bus ou marcher jusqu'au marché.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2195,7 +2195,7 @@ export const E3_2_PO: ExpressPoDialogue[] = [
 {
   id: "e3-2-po-20",
   title: "Remercier pour une aide",
-  context: "Vous parlez en français simple. Vous devez remercier pour une aide : vos informations sur la ville.",
+  context: "Vous remerciez pour une aide : vos informations sur la ville.",
   roleA: { title: "L'agent d'accueil", vous: "l'agent / l'agente d'accueil" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [

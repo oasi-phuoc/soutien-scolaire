@@ -2027,7 +2027,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-11",
   title: "Demander une information sur la vie scolaire",
-  context: "Vous parlez en français simple. Vous devez demander une information sur la vie scolaire : inscrire mon fils à la cantine.",
+  context: "Vous voulez inscrire mon fils à la cantine.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2046,7 +2046,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-12",
   title: "Expliquer un problème avec la vie scolaire",
-  context: "Vous parlez en français simple. Vous devez expliquer un problème avec la vie scolaire : ma fille a perdu son carnet.",
+  context: "Vous expliquez un problème : ma fille a perdu son carnet.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2065,7 +2065,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-13",
   title: "Prendre rendez-vous pour la vie scolaire",
-  context: "Vous parlez en français simple. Vous devez prendre rendez-vous pour la vie scolaire : voir la maîtresse de mon fils.",
+  context: "Vous voulez prendre rendez-vous pour voir la maîtresse de mon fils.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2084,7 +2084,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous parlez en français simple. Vous devez confirmer un rendez-vous : la réunion parents-professeurs.",
+  context: "Vous confirmez ceci : la réunion parents-professeurs.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2103,7 +2103,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-15",
   title: "Demander conseil sur la vie scolaire",
-  context: "Vous parlez en français simple. Vous devez demander conseil sur la vie scolaire : aider mon enfant à faire ses devoirs.",
+  context: "Vous demandez conseil pour aider mon enfant à faire ses devoirs.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2122,7 +2122,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-16",
   title: "Signaler un retard",
-  context: "Vous parlez en français simple. Vous devez signaler un retard : mon enfant arrive en retard.",
+  context: "Vous signalez un retard : mon enfant arrive en retard.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2141,7 +2141,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous parlez en français simple. Vous devez faire une réclamation polie : un autre enfant prend souvent son goûter.",
+  context: "Vous faites une réclamation : un autre enfant prend souvent son goûter.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2160,7 +2160,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-18",
   title: "Demander une aide urgente",
-  context: "Vous parlez en français simple. Vous devez demander une aide urgente : récupérer mon fils malade.",
+  context: "Vous devez demander une aide urgente : récupérer mon fils malade.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2179,7 +2179,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous parlez en français simple. Vous devez comparer deux possibilités : l'étude surveillée et l'aide aux devoirs.",
+  context: "Vous devez comparer deux possibilités : l'étude surveillée et l'aide aux devoirs.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2198,7 +2198,7 @@ export const E3_1_PO: ExpressPoDialogue[] = [
 {
   id: "e3-1-po-20",
   title: "Remercier pour une aide",
-  context: "Vous parlez en français simple. Vous devez remercier pour une aide : votre aide pour l'inscription.",
+  context: "Vous remerciez pour une aide : votre aide pour l'inscription.",
   roleA: { title: "La secrétaire", vous: "la secrétaire de l'école" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [

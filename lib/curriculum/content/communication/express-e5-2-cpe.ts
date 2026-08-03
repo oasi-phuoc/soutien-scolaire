@@ -2364,7 +2364,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-11",
   title: "Demander une information sur la santé",
-  context: "Vous parlez en français simple. Vous devez demander une information sur la santé : prendre ma tension à la pharmacie.",
+  context: "Vous voulez prendre ma tension à la pharmacie.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2383,7 +2383,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-12",
   title: "Expliquer un problème avec la santé",
-  context: "Vous parlez en français simple. Vous devez expliquer un problème avec la santé : j'ai mal au genou depuis hier.",
+  context: "Vous expliquez un problème : j'ai mal au genou depuis hier.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2402,7 +2402,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-13",
   title: "Prendre rendez-vous pour la santé",
-  context: "Vous parlez en français simple. Vous devez prendre rendez-vous pour la santé : un rendez-vous chez le dentiste.",
+  context: "Vous voulez prendre rendez-vous pour un rendez-vous chez le dentiste.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2421,7 +2421,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous parlez en français simple. Vous devez confirmer un rendez-vous : mon rendez-vous de contrôle.",
+  context: "Vous confirmez ceci : mon rendez-vous de contrôle.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2440,7 +2440,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-15",
   title: "Demander conseil sur la santé",
-  context: "Vous parlez en français simple. Vous devez demander conseil sur la santé : choisir un sirop pour la toux.",
+  context: "Vous demandez conseil pour choisir un sirop pour la toux.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2459,7 +2459,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-16",
   title: "Signaler un retard",
-  context: "Vous parlez en français simple. Vous devez signaler un retard : je serai en retard chez le médecin.",
+  context: "Vous signalez un retard : je serai en retard chez le médecin.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2478,7 +2478,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous parlez en français simple. Vous devez faire une réclamation polie : mon ordonnance n'est pas complète.",
+  context: "Vous faites une réclamation : mon ordonnance n'est pas complète.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2497,7 +2497,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-18",
   title: "Demander une aide urgente",
-  context: "Vous parlez en français simple. Vous devez demander une aide urgente : une fièvre forte chez mon enfant.",
+  context: "Vous devez demander une aide urgente : une fièvre forte chez mon enfant.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2516,7 +2516,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous parlez en français simple. Vous devez comparer deux possibilités : un rendez-vous en cabinet ou en téléconsultation.",
+  context: "Vous devez comparer deux possibilités : un rendez-vous en cabinet ou en téléconsultation.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2535,7 +2535,7 @@ export const E5_2_PO: ExpressPoDialogue[] = [
   {
   id: "e5-2-po-20",
   title: "Remercier pour une aide",
-  context: "Vous parlez en français simple. Vous devez remercier pour une aide : votre aide après ma chute.",
+  context: "Vous remerciez pour une aide : votre aide après ma chute.",
   roleA: { title: "La secrétaire médicale", vous: "la secrétaire médicale" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [

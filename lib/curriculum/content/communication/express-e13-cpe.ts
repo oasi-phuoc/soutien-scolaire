@@ -2290,7 +2290,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
   {
   id: "e13-1-po-1",
   title: "Demander conseil sur une formation",
-  context: "Vous êtes dans une situation réelle. Vous devez demander conseil sur une formation : choisir entre français et informatique.",
+  context: "Vous demandez conseil pour choisir entre français et informatique.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2480,7 +2480,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-11",
   title: "Demander une information sur une formation",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une information sur une formation : un cours de français professionnel.",
+  context: "Vous voulez un cours de français professionnel.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2499,7 +2499,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-12",
   title: "Expliquer un problème avec une formation",
-  context: "Vous êtes dans une situation réelle. Vous devez expliquer un problème avec une formation : je ne vois pas mon inscription en ligne.",
+  context: "Vous expliquez un problème : je ne vois pas mon inscription en ligne.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2518,7 +2518,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-13",
   title: "Prendre rendez-vous pour une formation",
-  context: "Vous êtes dans une situation réelle. Vous devez prendre rendez-vous pour une formation : un entretien pour choisir une formation.",
+  context: "Vous voulez prendre rendez-vous pour un entretien pour choisir une formation.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2537,7 +2537,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous êtes dans une situation réelle. Vous devez confirmer un rendez-vous : ma place dans le cours.",
+  context: "Vous confirmez ceci : ma place dans le cours.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2556,7 +2556,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-15",
   title: "Demander conseil sur une formation",
-  context: "Vous êtes dans une situation réelle. Vous devez demander conseil sur une formation : choisir entre français et informatique.",
+  context: "Vous demandez conseil pour choisir entre français et informatique.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2575,7 +2575,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-16",
   title: "Signaler un retard",
-  context: "Vous êtes dans une situation réelle. Vous devez signaler un retard : je serai en retard au cours.",
+  context: "Vous signalez un retard : je serai en retard au cours.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2594,7 +2594,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous êtes dans une situation réelle. Vous devez faire une réclamation polie : je n'ai pas reçu les documents du cours.",
+  context: "Vous faites une réclamation : je n'ai pas reçu les documents du cours.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2613,7 +2613,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-18",
   title: "Demander une aide urgente",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une aide urgente : savoir si je peux encore m'inscrire.",
+  context: "Vous devez demander une aide urgente : savoir si je peux encore m'inscrire.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2632,7 +2632,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous êtes dans une situation réelle. Vous devez comparer deux possibilités : un cours du soir et un cours intensif.",
+  context: "Vous comparez deux options : un cours du soir et un cours intensif.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2651,7 +2651,7 @@ export const E13_1_PO: ExpressPoDialogue[] = [
 {
   id: "e13-1-po-20",
   title: "Remercier pour une aide",
-  context: "Vous êtes dans une situation réelle. Vous devez remercier pour une aide : votre aide pour l'inscription.",
+  context: "Vous remerciez pour une aide : votre aide pour l'inscription.",
   roleA: { title: "Le conseiller", vous: "le conseiller / la conseillère" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5320,7 +5320,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-11",
   title: "Demander une information sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une information sur un emploi : postuler pour un poste de vendeur.",
+  context: "Vous voulez postuler pour un poste de vendeur.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5339,7 +5339,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-12",
   title: "Expliquer un problème avec un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez expliquer un problème avec un emploi : je n'arrive pas à envoyer ma candidature.",
+  context: "Vous expliquez un problème : je n'arrive pas à envoyer ma candidature.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5358,7 +5358,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-13",
   title: "Prendre rendez-vous pour un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez prendre rendez-vous pour un emploi : préparer un entretien d'embauche.",
+  context: "Vous voulez prendre rendez-vous pour préparer un entretien d'embauche.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5377,7 +5377,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous êtes dans une situation réelle. Vous devez confirmer un rendez-vous : mon entretien de demain.",
+  context: "Vous confirmez ceci : mon entretien de demain.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5396,7 +5396,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-15",
   title: "Demander conseil sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander conseil sur un emploi : améliorer mon CV.",
+  context: "Vous demandez conseil pour améliorer mon CV.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5415,7 +5415,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-16",
   title: "Signaler un retard",
-  context: "Vous êtes dans une situation réelle. Vous devez signaler un retard : j'arrive en retard à l'entretien.",
+  context: "Vous signalez un retard : j'arrive en retard à l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5434,7 +5434,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous êtes dans une situation réelle. Vous devez faire une réclamation polie : je n'ai pas reçu de réponse après l'entretien.",
+  context: "Vous faites une réclamation : je n'ai pas reçu de réponse après l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5453,7 +5453,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-18",
   title: "Demander une aide urgente",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
+  context: "Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5472,7 +5472,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous êtes dans une situation réelle. Vous devez comparer deux possibilités : un stage et un petit emploi.",
+  context: "Vous comparez deux options : un stage et un petit emploi.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -5491,7 +5491,7 @@ export const E13_2_PO: ExpressPoDialogue[] = [
 {
   id: "e13-2-po-20",
   title: "Remercier pour une aide",
-  context: "Vous êtes dans une situation réelle. Vous devez remercier pour une aide : vos conseils pour l'entretien.",
+  context: "Vous remerciez pour une aide : vos conseils pour l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8155,7 +8155,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-11",
   title: "Demander une information sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une information sur un emploi : postuler pour un poste de vendeur.",
+  context: "Vous voulez postuler pour un poste de vendeur.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8174,7 +8174,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-12",
   title: "Expliquer un problème avec un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez expliquer un problème avec un emploi : je n'arrive pas à envoyer ma candidature.",
+  context: "Vous expliquez un problème : je n'arrive pas à envoyer ma candidature.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8193,7 +8193,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-13",
   title: "Prendre rendez-vous pour un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez prendre rendez-vous pour un emploi : préparer un entretien d'embauche.",
+  context: "Vous voulez prendre rendez-vous pour préparer un entretien d'embauche.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8212,7 +8212,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous êtes dans une situation réelle. Vous devez confirmer un rendez-vous : mon entretien de demain.",
+  context: "Vous confirmez ceci : mon entretien de demain.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8231,7 +8231,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-15",
   title: "Demander conseil sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander conseil sur un emploi : améliorer mon CV.",
+  context: "Vous demandez conseil pour améliorer mon CV.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8250,7 +8250,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-16",
   title: "Signaler un retard",
-  context: "Vous êtes dans une situation réelle. Vous devez signaler un retard : j'arrive en retard à l'entretien.",
+  context: "Vous signalez un retard : j'arrive en retard à l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8269,7 +8269,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous êtes dans une situation réelle. Vous devez faire une réclamation polie : je n'ai pas reçu de réponse après l'entretien.",
+  context: "Vous faites une réclamation : je n'ai pas reçu de réponse après l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8288,7 +8288,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-18",
   title: "Demander une aide urgente",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
+  context: "Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8307,7 +8307,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous êtes dans une situation réelle. Vous devez comparer deux possibilités : un stage et un petit emploi.",
+  context: "Vous comparez deux options : un stage et un petit emploi.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -8326,7 +8326,7 @@ export const E13_3_PO: ExpressPoDialogue[] = [
 {
   id: "e13-3-po-20",
   title: "Remercier pour une aide",
-  context: "Vous êtes dans une situation réelle. Vous devez remercier pour une aide : vos conseils pour l'entretien.",
+  context: "Vous remerciez pour une aide : vos conseils pour l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -10992,7 +10992,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-11",
   title: "Demander une information sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une information sur un emploi : postuler pour un poste de vendeur.",
+  context: "Vous voulez postuler pour un poste de vendeur.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11011,7 +11011,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-12",
   title: "Expliquer un problème avec un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez expliquer un problème avec un emploi : je n'arrive pas à envoyer ma candidature.",
+  context: "Vous expliquez un problème : je n'arrive pas à envoyer ma candidature.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11030,7 +11030,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-13",
   title: "Prendre rendez-vous pour un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez prendre rendez-vous pour un emploi : préparer un entretien d'embauche.",
+  context: "Vous voulez prendre rendez-vous pour préparer un entretien d'embauche.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11049,7 +11049,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous êtes dans une situation réelle. Vous devez confirmer un rendez-vous : mon entretien de demain.",
+  context: "Vous confirmez ceci : mon entretien de demain.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11068,7 +11068,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-15",
   title: "Demander conseil sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander conseil sur un emploi : améliorer mon CV.",
+  context: "Vous demandez conseil pour améliorer mon CV.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11087,7 +11087,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-16",
   title: "Signaler un retard",
-  context: "Vous êtes dans une situation réelle. Vous devez signaler un retard : j'arrive en retard à l'entretien.",
+  context: "Vous signalez un retard : j'arrive en retard à l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11106,7 +11106,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous êtes dans une situation réelle. Vous devez faire une réclamation polie : je n'ai pas reçu de réponse après l'entretien.",
+  context: "Vous faites une réclamation : je n'ai pas reçu de réponse après l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11125,7 +11125,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-18",
   title: "Demander une aide urgente",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
+  context: "Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11144,7 +11144,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous êtes dans une situation réelle. Vous devez comparer deux possibilités : un stage et un petit emploi.",
+  context: "Vous comparez deux options : un stage et un petit emploi.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -11163,7 +11163,7 @@ export const E13_4_PO: ExpressPoDialogue[] = [
 {
   id: "e13-4-po-20",
   title: "Remercier pour une aide",
-  context: "Vous êtes dans une situation réelle. Vous devez remercier pour une aide : vos conseils pour l'entretien.",
+  context: "Vous remerciez pour une aide : vos conseils pour l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13830,7 +13830,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-11",
   title: "Demander une information sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une information sur un emploi : postuler pour un poste de vendeur.",
+  context: "Vous voulez postuler pour un poste de vendeur.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13849,7 +13849,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-12",
   title: "Expliquer un problème avec un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez expliquer un problème avec un emploi : je n'arrive pas à envoyer ma candidature.",
+  context: "Vous expliquez un problème : je n'arrive pas à envoyer ma candidature.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13868,7 +13868,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-13",
   title: "Prendre rendez-vous pour un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez prendre rendez-vous pour un emploi : préparer un entretien d'embauche.",
+  context: "Vous voulez prendre rendez-vous pour préparer un entretien d'embauche.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13887,7 +13887,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous êtes dans une situation réelle. Vous devez confirmer un rendez-vous : mon entretien de demain.",
+  context: "Vous confirmez ceci : mon entretien de demain.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13906,7 +13906,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-15",
   title: "Demander conseil sur un emploi",
-  context: "Vous êtes dans une situation réelle. Vous devez demander conseil sur un emploi : améliorer mon CV.",
+  context: "Vous demandez conseil pour améliorer mon CV.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13925,7 +13925,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-16",
   title: "Signaler un retard",
-  context: "Vous êtes dans une situation réelle. Vous devez signaler un retard : j'arrive en retard à l'entretien.",
+  context: "Vous signalez un retard : j'arrive en retard à l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13944,7 +13944,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous êtes dans une situation réelle. Vous devez faire une réclamation polie : je n'ai pas reçu de réponse après l'entretien.",
+  context: "Vous faites une réclamation : je n'ai pas reçu de réponse après l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13963,7 +13963,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-18",
   title: "Demander une aide urgente",
-  context: "Vous êtes dans une situation réelle. Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
+  context: "Vous devez demander une aide urgente : trouver quelqu'un pour relire ma lettre.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -13982,7 +13982,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous êtes dans une situation réelle. Vous devez comparer deux possibilités : un stage et un petit emploi.",
+  context: "Vous comparez deux options : un stage et un petit emploi.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -14001,7 +14001,7 @@ export const E13_5_PO: ExpressPoDialogue[] = [
 {
   id: "e13-5-po-20",
   title: "Remercier pour une aide",
-  context: "Vous êtes dans une situation réelle. Vous devez remercier pour une aide : vos conseils pour l'entretien.",
+  context: "Vous remerciez pour une aide : vos conseils pour l'entretien.",
   roleA: { title: "Le conseiller emploi", vous: "le conseiller / la conseillère emploi" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [

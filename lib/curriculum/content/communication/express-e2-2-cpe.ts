@@ -2073,7 +2073,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-11",
   title: "Demander une information sur un logement",
-  context: "Vous parlez en français simple. Vous devez demander une information sur un logement : visiter un studio près de la gare.",
+  context: "Vous voulez visiter un studio près de la gare.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2092,7 +2092,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-12",
   title: "Expliquer un problème avec un logement",
-  context: "Vous parlez en français simple. Vous devez expliquer un problème avec un logement : le chauffage ne marche plus dans le salon.",
+  context: "Vous expliquez un problème : le chauffage ne marche plus dans le salon.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2111,7 +2111,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-13",
   title: "Prendre rendez-vous pour un logement",
-  context: "Vous parlez en français simple. Vous devez prendre rendez-vous pour un logement : une visite pour un appartement de deux pièces.",
+  context: "Vous voulez prendre rendez-vous pour une visite pour un appartement de deux pièces.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2130,7 +2130,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-14",
   title: "Confirmer un rendez-vous",
-  context: "Vous parlez en français simple. Vous devez confirmer un rendez-vous : la visite de l'appartement.",
+  context: "Vous confirmez ceci : la visite de l'appartement.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2149,7 +2149,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-15",
   title: "Demander conseil sur un logement",
-  context: "Vous parlez en français simple. Vous devez demander conseil sur un logement : choisir entre un studio proche du travail et un appartement plus grand.",
+  context: "Vous demandez conseil pour choisir entre un studio proche du travail et un appartement plus grand.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2168,7 +2168,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-16",
   title: "Signaler un retard",
-  context: "Vous parlez en français simple. Vous devez signaler un retard : la visite du logement.",
+  context: "Vous signalez un retard : la visite du logement.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2187,7 +2187,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-17",
   title: "Faire une réclamation polie",
-  context: "Vous parlez en français simple. Vous devez faire une réclamation polie : une fenêtre cassée depuis une semaine.",
+  context: "Vous faites une réclamation : une fenêtre cassée depuis une semaine.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2206,7 +2206,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-18",
   title: "Demander une aide urgente",
-  context: "Vous parlez en français simple. Vous devez demander une aide urgente : une fuite d'eau dans la cuisine.",
+  context: "Vous devez demander une aide urgente : une fuite d'eau dans la cuisine.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2225,7 +2225,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-19",
   title: "Comparer deux possibilités",
-  context: "Vous parlez en français simple. Vous devez comparer deux possibilités : un studio meublé et un deux-pièces vide.",
+  context: "Vous devez comparer deux possibilités : un studio meublé et un deux-pièces vide.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
@@ -2244,7 +2244,7 @@ export const E2_2_PO: ExpressPoDialogue[] = [
 {
   id: "e2-2-po-20",
   title: "Remercier pour une aide",
-  context: "Vous parlez en français simple. Vous devez remercier pour une aide : la visite du logement.",
+  context: "Vous remerciez pour une aide : la visite du logement.",
   roleA: { title: "La régie", vous: "l'employé(e) de la régie" },
   roleB: { title: "Vous", vous: "la personne qui parle" },
   lines: [
