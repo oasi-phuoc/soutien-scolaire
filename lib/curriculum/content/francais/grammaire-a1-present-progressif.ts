@@ -1,15 +1,15 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 10 — Les aspects du présent (G1.11) */
+/** Unité 10 — Le présent progressif (G1.11) */
 export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
   slug: "a1-gr-present-progressif",
   code: "G1.11",
   level: "A1",
-  title: "Les aspects du présent",
+  title: "Le présent progressif",
   theory: [
     {
       type: "heading",
-      text: "Le présent progressif",
+      text: "Utilisation",
     },
     {
       type: "plain_list",
@@ -37,65 +37,6 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         ["Présent simple", "Non, je {a}prends{/a} ma douche. (information)"],
         ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"],
       ],
-    },
-    {
-      type: "heading",
-      text: "Forme",
-    },
-    {
-      type: "plain_list",
-      items: ["Verbe {a}être{/a} (présent) + {a}en train de{/a} + infinitif."],
-    },
-    {
-      type: "highlight",
-      label: "",
-      items: ["Il {a}est en train de{/a} dormir."],
-      noBulletItems: [0],
-    },
-    {
-      type: "plain_list",
-      items: ["Avec un verbe pronominal, le pronom se place devant l'infinitif."],
-    },
-    {
-      type: "highlight",
-      label: "",
-      items: ["Elles {a}sont en train de{/a} se préparer."],
-      noBulletItems: [0],
-    },
-    {
-      type: "plain_list",
-      items: ["À la forme négative, {a}ne… pas{/a} encadre le verbe être."],
-    },
-    {
-      type: "highlight",
-      label: "",
-      items: ["Ils {a}ne{/a} sont {a}pas{/a} en train de travailler."],
-      noBulletItems: [0],
-    },
-    {
-      type: "heading",
-      text: "Orthographe",
-    },
-    {
-      type: "plain_list",
-      items: [
-        "{a}De{/a} devient {a}d'{/a} devant un verbe qui commence par une voyelle ou un h muet.",
-      ],
-    },
-    {
-      type: "highlight",
-      label: "",
-      items: [
-        "Nous sommes en train {s}de{/s} apprendre le français.",
-        "Nous sommes en train {a}d'{/a}apprendre le français.",
-      ],
-      noBulletItems: [0, 1],
-      inlineArrows: true,
-    },
-
-    {
-      type: "heading",
-      text: "Le présent continu",
     },
     {
       type: "heading",
