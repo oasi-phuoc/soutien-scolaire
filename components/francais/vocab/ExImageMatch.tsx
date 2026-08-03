@@ -96,8 +96,8 @@ export function ExImageMatch({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Associez chaque image au mot en écrivant la lettre correspondante.
       </p>
-      {/* Word list — two columns, lettered */}
-      <div className="mb-3 grid grid-cols-2 gap-x-6 gap-y-1">
+      {/* Word list — même espacement que Ex5 / Ex6 */}
+      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
         {words.map((w, i) => (
           <div key={w.word} className="flex items-baseline">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
@@ -108,6 +108,9 @@ export function ExImageMatch({
           </div>
         ))}
       </div>
+      {/* Séparateur propositions → images (comme Ex5 / Ex6) */}
+      <hr className="mt-3 border-[var(--color-border-default)]" />
+      <div className="mb-4" />
       {/* Image cards — grille 2×2, cadre 4:3, image entière */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-8">
         {shownCards.map((w, cardIdx) => {

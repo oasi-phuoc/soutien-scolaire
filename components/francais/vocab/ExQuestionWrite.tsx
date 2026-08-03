@@ -221,9 +221,10 @@ export function ExQuestionWrite({
                 <span className="shrink-0 text-[var(--color-text-secondary)]">:</span>
               </div>
               {isPrint ? (
-                <div className="mt-1 space-y-2">
-                  <div className="h-7 border-b-2 border-[var(--color-accent-fr)]/50" />
-                  <div className="h-7 border-b-2 border-[var(--color-accent-fr)]/50" />
+                <div>
+                  {/* 1er trait collé comme l’ancien input ; 2e trait plus bas pour écrire */}
+                  <div className="border-b-2 border-[var(--color-accent-fr)]/50" />
+                  <div className="mt-5 h-7 border-b-2 border-[var(--color-accent-fr)]/50" />
                 </div>
               ) : isCheckedDone && hasErrors && revealCorrection ? (
                 <div className="border-b border-amber-400 py-1 text-center">
