@@ -659,16 +659,16 @@ function Counter({
   accent: string;
 }) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2">
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
-        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
+        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
         aria-label="Moins"
       >−</button>
       <span
-        className="min-w-[2rem] text-center text-sm font-semibold tabular-nums"
+        className="min-w-[1.75rem] text-center text-sm font-semibold tabular-nums"
         style={{ color: accent }}
       >
         {value}
@@ -677,7 +677,7 @@ function Counter({
         type="button"
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
-        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
+        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
         aria-label="Plus"
       >+</button>
     </div>
@@ -990,7 +990,7 @@ export function PrintConfigSheet({
               <h2 className="mb-3 text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
                 Niveau
               </h2>
-              <div className="grid grid-cols-3 gap-1 rounded-xl border border-[var(--color-border-default)] p-1">
+              <div className="grid grid-cols-3 gap-2">
                 {(
                   [
                     { value: "base" as const, label: "A1" },
@@ -1002,10 +1002,10 @@ export function PrintConfigSheet({
                     key={option.value}
                     type="button"
                     onClick={() => onFrenchLevelChange(option.value)}
-                    className="min-h-11 rounded-lg px-3 text-sm font-semibold transition-colors"
+                    className="min-h-11 rounded-xl border px-3 text-sm font-semibold transition-colors"
                     style={frenchLevel === option.value
-                      ? { background: accentColor, color: "white" }
-                      : { color: "var(--color-text-secondary)" }}
+                      ? { background: accentColor, color: "white", borderColor: accentColor }
+                      : { color: "var(--color-text-secondary)", borderColor: "var(--color-border-default)", background: "var(--color-bg-primary)" }}
                     aria-pressed={frenchLevel === option.value}
                   >
                     {option.label}

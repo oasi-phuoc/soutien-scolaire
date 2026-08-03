@@ -98,24 +98,24 @@ function Counter({
   accent: string;
 }) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2">
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
-        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
+        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
         aria-label="Moins"
       >
         −
       </button>
-      <span className="min-w-[2rem] text-center text-sm font-semibold tabular-nums" style={{ color: accent }}>
+      <span className="min-w-[1.75rem] text-center text-sm font-semibold tabular-nums" style={{ color: accent }}>
         {value}
       </span>
       <button
         type="button"
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
-        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
+        className="flex h-7 w-7 items-center justify-center rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-sm font-bold text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
         aria-label="Plus"
       >
         +

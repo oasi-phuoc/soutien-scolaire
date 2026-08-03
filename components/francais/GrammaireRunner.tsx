@@ -762,38 +762,42 @@ function QcmExercise({
         const sentLine1 = hasInlineToggle ? item.sentence.slice(0, arrowPos) : item.sentence;
         const sentLine2 = hasInlineToggle ? item.sentence.slice(arrowPos + 3) : "";
 
-        const mkToggleBtn = (choice: string, ci: number, fixed: boolean) => {
+        const choiceBtnClass = (ci: number, opts?: { fixed?: boolean; compact?: boolean }) => {
           const isSelected = selected[i] === ci;
           const isCorrect = ci === item.correctIdx;
-          let cls = `${fixed ? "w-14 py-1.5" : exercise.inlineChoices ? "px-4 py-2" : "flex-1 py-2.5"} text-sm font-medium text-center transition-colors whitespace-nowrap `;
-          if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
+          const isFour = item.choices.length >= 4;
+          let cls = opts?.fixed
+            ? "min-w-[3.25rem] rounded-[var(--radius-md)] border px-2 py-1.5 text-sm font-medium text-center transition-colors whitespace-nowrap "
+            : opts?.compact
+              ? "rounded-[var(--radius-md)] border px-2 py-1.5 text-xs font-medium text-center transition-colors whitespace-nowrap "
+              : `rounded-[var(--radius-md)] border ${isFour ? "px-0.5 py-2 text-sm" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
           if (!validated || !revealCorrection) {
             cls += isSelected
-              ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
-              : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+              ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+              : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
           } else {
             const userWrong = selected[i] !== item.correctIdx;
             if (isSelected && !isCorrect) {
-              cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+              cls += "border-amber-500 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
             } else if (!isSelected && isCorrect && userWrong) {
-              cls += "text-amber-500 font-semibold";
+              cls += "border-amber-500 bg-transparent text-amber-500 font-semibold";
             } else {
               cls += isSelected
-                ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
-                : "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
+                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
             }
           }
-          return (
-            <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
-              {choice}
-            </button>
-          );
+          return cls;
         };
 
         if (hasInlineToggle) {
           const inlineGroup = (
-            <span className={`inline-flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500" : "border-[var(--color-border-default)]"} align-middle`}>
-              {item.choices.map((c, ci) => mkToggleBtn(c, ci, true))}
+            <span className="inline-flex flex-wrap items-center gap-1.5 align-middle">
+              {item.choices.map((c, ci) => (
+                <button key={ci} type="button" className={choiceBtnClass(ci, { fixed: true })} onClick={() => select(i, ci)} disabled={validated}>
+                  {c}
+                </button>
+              ))}
             </span>
           );
           const line2Parts = sentLine2.split("___");
@@ -822,10 +826,8 @@ function QcmExercise({
           );
         }
 
-        // ── Stacked SVG layout: num | image | 3 toggle buttons (vertical) ──────
+        // ── Stacked SVG layout: num | image | separate choice buttons ─────────
         if (exercise.svgChoiceLayout === "stacked" && item.svg) {
-          const borderCls = validated && revealCorrection && selected[i] !== item.correctIdx
-            ? "border-amber-500" : "border-[var(--color-border-default)]";
           return (
             <div key={i} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-xs font-semibold text-[var(--color-accent-fr)]">{i + 1}.</span>
@@ -833,34 +835,12 @@ function QcmExercise({
                 className="w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-[var(--color-bg-secondary)] p-1"
                 dangerouslySetInnerHTML={{ __html: item.svg }}
               />
-              <div className={`flex flex-1 flex-col overflow-hidden rounded-[var(--radius-md)] border h-16 ${borderCls}`}>
-                {item.choices.map((choice, ci) => {
-                  const isSelected = selected[i] === ci;
-                  const isCorrect = ci === item.correctIdx;
-                  let cls = "flex flex-1 items-center justify-center text-xs font-medium text-center transition-colors ";
-                  if (ci > 0) cls += "border-t border-[var(--color-border-default)] ";
-                  if (!validated || !revealCorrection) {
-                    cls += isSelected
-                      ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
-                      : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-                  } else {
-                    const userWrong = selected[i] !== item.correctIdx;
-                    if (isSelected && !isCorrect) {
-                      cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
-                    } else if (!isSelected && isCorrect && userWrong) {
-                      cls += "text-amber-500 font-semibold";
-                    } else {
-                      cls += isSelected
-                        ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
-                        : "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
-                    }
-                  }
-                  return (
-                    <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
-                      {choice}
-                    </button>
-                  );
-                })}
+              <div className="flex flex-1 flex-col gap-1">
+                {item.choices.map((choice, ci) => (
+                  <button key={ci} type="button" className={choiceBtnClass(ci, { compact: true })} onClick={() => select(i, ci)} disabled={validated}>
+                    {choice}
+                  </button>
+                ))}
               </div>
             </div>
           );
@@ -884,50 +864,19 @@ function QcmExercise({
                 <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
               </p>
             )}
-            {exercise.toggleChoices ? (
-              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500" : "border-[var(--color-border-default)]"}`}>
-                {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
-              </div>
-            ) : (
-              <div className={`grid gap-2 ${item.choices.length >= 4 ? "grid-cols-4" : item.choices.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
-                {item.choices.map((choice, ci) => {
-                  const isSelected = selected[i] === ci;
-                  const isCorrect = ci === item.correctIdx;
-                  const isFour = item.choices.length >= 4;
-                  let cls =
-                    `rounded-[var(--radius-md)] border ${isFour ? "px-0.5 py-2 text-sm" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
-                  if (!validated || !revealCorrection) {
-                    cls += isSelected
-                      ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-                  } else {
-                    const userWrong = selected[i] !== item.correctIdx;
-                    if (isSelected && !isCorrect) {
-                      cls +=
-                        "border-amber-500 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-                    } else if (!isSelected && isCorrect && userWrong) {
-                      cls +=
-                        "border-amber-500 bg-transparent text-amber-500 font-semibold";
-                    } else {
-                      cls += isSelected
-                        ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                        : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
-                    }
-                  }
-                  return (
-                    <button
-                      key={ci}
-                      type="button"
-                      className={cls}
-                      onClick={() => select(i, ci)}
-                      disabled={validated}
-                    >
-                      {choice}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+            <div className={`grid gap-2 ${item.choices.length >= 4 ? "grid-cols-4" : item.choices.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+              {item.choices.map((choice, ci) => (
+                <button
+                  key={ci}
+                  type="button"
+                  className={choiceBtnClass(ci)}
+                  onClick={() => select(i, ci)}
+                  disabled={validated}
+                >
+                  {choice}
+                </button>
+              ))}
+            </div>
           </div>
         );
       })}
@@ -1935,14 +1884,14 @@ function TrueFalseExercise({
             const showCorrection = validated && revealCorrection;
             if (isSelected) {
               if (showCorrection && !isRight) {
-                return "px-4 py-1.5 text-xs font-medium bg-amber-50 text-amber-600";
+                return "border-amber-500 px-4 py-1.5 text-xs font-medium bg-amber-50 text-amber-600";
               }
-              return "px-4 py-1.5 text-xs font-semibold bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+              return "border-[var(--color-accent-fr)] px-4 py-1.5 text-xs font-semibold bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
             }
             if (showCorrection && !isRight && val === correct) {
-              return "px-4 py-1.5 text-xs font-semibold bg-amber-50 text-amber-600";
+              return "border-amber-500 px-4 py-1.5 text-xs font-semibold bg-amber-50 text-amber-600";
             }
-            return "px-4 py-1.5 text-xs font-medium text-[var(--color-text-secondary)]";
+            return "border-[var(--color-border)] px-4 py-1.5 text-xs font-medium text-[var(--color-text-secondary)]";
           };
 
           return (
@@ -1951,12 +1900,11 @@ function TrueFalseExercise({
                 <span className="w-5 shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
                 <p className="text-sm text-[var(--color-text-primary)]">{item.statement}</p>
               </div>
-              <div className="flex shrink-0 overflow-hidden rounded border border-[var(--color-border)]">
-                <button onClick={() => pick(i, true)} disabled={validated} className={`${segCls(true)} transition-colors disabled:cursor-default`}>
+              <div className="flex shrink-0 gap-1.5">
+                <button onClick={() => pick(i, true)} disabled={validated} className={`rounded-[var(--radius-md)] border ${segCls(true)} transition-colors disabled:cursor-default`}>
                   Vrai
                 </button>
-                <div className="w-px shrink-0 bg-[var(--color-border)]" />
-                <button onClick={() => pick(i, false)} disabled={validated} className={`${segCls(false)} transition-colors disabled:cursor-default`}>
+                <button onClick={() => pick(i, false)} disabled={validated} className={`rounded-[var(--radius-md)] border ${segCls(false)} transition-colors disabled:cursor-default`}>
                   Faux
                 </button>
               </div>
@@ -2121,18 +2069,23 @@ function ClassifyExercise({
                 <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
                 {renderInlineMarkup(item.word, false)}
               </p>
-              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500" : "border-[var(--color-border-default)]"}`}>
+              <div className={`grid gap-1.5 ${exercise.categories.length >= 4 ? "grid-cols-2 sm:grid-cols-4" : exercise.categories.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
                   const userWrong = validated && revealCorrection && !isRight;
-                  let cls = "flex-1 py-1.5 text-center text-xs font-medium transition-colors ";
-                  if (ci > 0) cls += `border-l ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500" : "border-[var(--color-border-default)]"} `;
-                  if (active) {
-                    cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+                  let cls = "rounded-[var(--radius-md)] border px-2 py-1.5 text-center text-xs font-medium transition-colors ";
+                  if (!validated || !revealCorrection) {
+                    cls += active
+                      ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
+                  } else if (active && !isRight) {
+                    cls += "border-amber-500 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                   } else if (userWrong && ci === item.categoryIdx) {
-                    cls += "font-semibold text-amber-500";
+                    cls += "border-amber-500 bg-transparent font-semibold text-amber-500";
+                  } else if (active) {
+                    cls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                   } else {
-                    cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
+                    cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-60";
                   }
                   return (
                     <button
@@ -2140,6 +2093,7 @@ function ClassifyExercise({
                       type="button"
                       onClick={() => !validated && setChosen((prev) => prev.map((v, idx) => idx === i ? ci : v))}
                       className={cls}
+                      disabled={validated}
                     >
                       {cat}
                     </button>
@@ -2335,8 +2289,8 @@ function ColorHighlightExercise({
     <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
 
-      {/* Color selector */}
-      <div className="flex overflow-hidden rounded-full border border-[var(--color-border-default)]">
+      {/* Color selector — boutons séparés */}
+      <div className="flex flex-wrap gap-1.5">
         {exercise.colors.map((label, ci) => {
           const style = HIGHLIGHT_STYLES[ci]!;
           const active = activeColor === ci;
@@ -2345,7 +2299,7 @@ function ColorHighlightExercise({
               key={ci}
               type="button"
               onClick={() => setActiveColor(ci)}
-              className={`flex-1 py-1.5 text-center text-xs font-semibold transition-all ${ci > 0 ? "border-l border-[var(--color-border-default)]" : ""} ${active ? `${style.btn} ring-2 ring-inset ring-white/40` : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"}`}
+              className={`rounded-full border px-3 py-1.5 text-center text-xs font-semibold transition-all ${active ? `${style.btn} border-transparent ring-2 ring-inset ring-white/40` : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"}`}
             >
               {label}
             </button>
@@ -2420,13 +2374,18 @@ function PillGroup<T extends string>({
   onChange: (v: T) => void;
 }) {
   const revealCorrection = useEvalReveal();
+  const userWrong = validated && revealCorrection && value !== correct;
   return (
-    <div className={`inline-flex overflow-hidden rounded-xl border ${validated && revealCorrection && value !== correct ? "border-amber-500" : "border-[var(--color-border)]"} text-xs font-semibold`}>
-      {options.map((opt, oi) => {
+    <div className="inline-flex gap-1.5 text-xs font-semibold">
+      {options.map((opt) => {
         const active = value === opt;
-        const userWrong = validated && revealCorrection && value !== correct;
-        let cls = "px-3 py-1 transition-colors ";
-        if (oi > 0) cls += `border-l ${validated && revealCorrection && value !== correct ? "border-amber-500" : "border-[var(--color-border)]"} `;
+        let cls =
+          "rounded-[var(--radius-md)] border px-3 py-1 transition-colors ";
+        if (userWrong) {
+          cls += "border-amber-500 ";
+        } else {
+          cls += "border-[var(--color-border)] ";
+        }
         if (active) {
           cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
         } else if (userWrong && opt === correct) {
@@ -2435,7 +2394,7 @@ function PillGroup<T extends string>({
           cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-accent-fr)]/10";
         }
         return (
-          <button key={opt} onClick={() => !validated && onChange(opt)} className={cls}>
+          <button key={opt} type="button" onClick={() => !validated && onChange(opt)} className={cls}>
             {opt}
           </button>
         );
@@ -2513,10 +2472,10 @@ function Tag2Exercise({
                     onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: v } : a))}
                   />
                 ) : (
-                  /* Invisible spacer — same size as M/F PillGroup so words align */
-                  <div className="inline-flex overflow-hidden rounded-xl border border-transparent text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
-                    <span className="px-3 py-1">M</span>
-                    <span className="px-3 py-1 border-l border-transparent">F</span>
+                  /* Invisible spacer — same footprint as M/F PillGroup so words align */
+                  <div className="inline-flex gap-1.5 text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
+                    <span className="rounded-[var(--radius-md)] border border-transparent px-3 py-1">M</span>
+                    <span className="rounded-[var(--radius-md)] border border-transparent px-3 py-1">F</span>
                   </div>
                 )}
               </div>

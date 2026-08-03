@@ -716,10 +716,16 @@ input[type=number] {
 /*
  * Corrigé d'impression : pas de tentative élève (vide / « — ») ni trait amber.
  * On ne garde que la bonne réponse, en ambre (math / français / placement).
+ * Ne pas cibler les <button> (choix QCM) — seulement les empilements fill.
  */
-.print-layout-context .print-answer-key [class*="border-amber"] > :first-child:not(:only-child),
-.print-layout-context .print-answer-key [class*="border-orange"] > :first-child:not(:only-child) {
+.print-layout-context .print-answer-key [class*="border-amber"] > :first-child:not(:only-child):not(button),
+.print-layout-context .print-answer-key [class*="border-orange"] > :first-child:not(:only-child):not(button) {
   display: none !important;
+}
+
+/* Les boutons de choix QCM doivent rester visibles dans le corrigé. */
+.print-layout-context .print-answer-key button {
+  display: inline-flex !important;
 }
 
 .print-layout-context .print-answer-key [class*="border-amber"],
