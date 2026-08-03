@@ -20,7 +20,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["1. Parler d'une action qui se passe au moment où l'on parle."],
+      items: ["{a}1.{/a} Parler d'une action qui se passe au moment où l'on parle."],
     },
     {
       type: "highlight",
@@ -30,7 +30,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["2. Parler d'une action habituelle."],
+      items: ["{a}2.{/a} Parler d'une action habituelle."],
     },
     {
       type: "highlight",
@@ -40,7 +40,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["3. Faire une description générale au présent, ou exprimer des goûts et des idées."],
+      items: ["{a}3.{/a} Faire une description générale au présent, ou exprimer des goûts et des idées."],
     },
     {
       type: "highlight",
@@ -79,6 +79,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "verb_toggle",
+      buttonCols: 3,
       verbs: [
         {
           infinitive: "parler",
