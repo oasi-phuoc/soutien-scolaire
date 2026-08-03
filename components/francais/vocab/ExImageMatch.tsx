@@ -7,8 +7,9 @@ import {
 import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { resolveVocabImage } from "@/lib/curriculum/vocab-image";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
-const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
+const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string; placeholder: string }) {
   const [failed, setFailed] = useState(false);
@@ -34,8 +35,9 @@ type MatchState = { answer: string; checked: boolean; correct: boolean };
 export function ExImageMatch({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
+  const { questionCount } = usePrintQuestionLayout(6);
   const [{ words, shownCards }] = useState(() => {
-    const picked = pickN(theme.words, 6);
+    const picked = pickN(theme.words, questionCount);
     const subset = shuffle([...picked]).slice(0, 4);
     return { words: picked, shownCards: subset };
   });
@@ -129,7 +131,7 @@ export function ExImageMatch({
                   <AppSelect
                     value={s.answer}
                     onChange={(v) => handleSelect(w.word, v)}
-                    options={WORD_LETTERS.map((letter) => ({ value: letter, label: letter }))}
+                    options={WORD_LETTERS.slice(0, words.length).map((letter) => ({ value: letter, label: letter }))}
                     placeholder=""
                     emptyOption={{ value: "", label: "" }}
                     disabled={s.checked}

@@ -5,6 +5,7 @@ import {
 } from "./vocabUtils";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -13,9 +14,10 @@ type SentState = { answer: string; checked: boolean; correct: boolean };
 export function ExFillSentences({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
+  const { questionCount, listClass } = usePrintQuestionLayout(5);
   const allSentences = theme.sentences ?? [];
 
-  // Pick 5 sentences each with a DIFFERENT answer word to avoid repetition
+  // Pick N sentences each with a DIFFERENT answer word to avoid repetition
   const [sentences] = useState(() => {
     const byAnswer = new Map<string, typeof allSentences[number][]>();
     for (const s of allSentences) {
@@ -25,7 +27,7 @@ export function ExFillSentences({
     const uniqueAnswers = shuffle([...byAnswer.keys()]);
     const picked: typeof allSentences[number][] = [];
     for (const ans of uniqueAnswers) {
-      if (picked.length >= 5) break;
+      if (picked.length >= questionCount) break;
       const group = byAnswer.get(ans)!;
       picked.push(group[Math.floor(Math.random() * group.length)]!);
     }
@@ -104,7 +106,7 @@ export function ExFillSentences({
       <hr className="mt-3 border-[var(--color-border-default)]" />
       <div className="mb-4" />
       {/* Sentences */}
-      <div className="space-y-4">
+      <div className={listClass}>
         {sentences.map((sent, i) => {
           const s = states[i]!;
           const [before, after] = sent.sentence.split("___");

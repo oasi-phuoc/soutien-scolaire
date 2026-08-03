@@ -5,17 +5,19 @@ import {
 } from "./vocabUtils";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
-const WORD_LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h"];
+const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
 export function ExDefinitionMatch({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
+  const { questionCount, listClass } = usePrintQuestionLayout(5);
   const [{ words, shownDefs, pickedDefs }] = useState(() => {
     const withDef = theme.words.filter((w) => !!w.definition);
-    const shown = pickN(withDef, Math.min(5, withDef.length));
+    const shown = pickN(withDef, Math.min(questionCount, withDef.length));
     const shownSet = new Set(shown.map((w) => w.word));
     const distractors = pickN(
       theme.words.filter((w) => !shownSet.has(w.word)),
@@ -96,8 +98,8 @@ export function ExDefinitionMatch({
       {/* Separator */}
       <hr className="mt-3 border-[var(--color-border-default)]" />
       <div className="mb-4" />
-      {/* Definition rows — numbered 1–4, select shows letters a–f */}
-      <div className="space-y-2">
+      {/* Definition rows — numbered, select shows letters */}
+      <div className={listClass}>
         {shownDefs.map((w, idx) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
@@ -115,7 +117,7 @@ export function ExDefinitionMatch({
                   <AppSelect
                     value={s.answer}
                     onChange={(v) => handleSelect(w.word, v)}
-                    options={WORD_LETTERS.map((letter) => ({ value: letter, label: letter }))}
+                    options={WORD_LETTERS.slice(0, words.length).map((letter) => ({ value: letter, label: letter }))}
                     placeholder=""
                     emptyOption={{ value: "", label: "" }}
                     disabled={s.checked}

@@ -5,6 +5,7 @@ import {
   ExerciseProps, pickN, playWord, normalizeText, SoundIcon,
 } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 
@@ -12,7 +13,8 @@ export function ExDictation({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
   exerciseNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => pickN(theme.words, 6));
+  const { questionCount } = usePrintQuestionLayout(6);
+  const [words] = useState<VocabWord[]>(() => pickN(theme.words, questionCount));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );

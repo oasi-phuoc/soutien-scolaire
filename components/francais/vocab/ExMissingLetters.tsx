@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, shuffle, normalizeText } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 const VOWELS = "aeiouàâäèéêëîïôùûüœæ";
 
@@ -32,7 +33,8 @@ type WordState = {
 export function ExMissingLetters({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => shuffle(theme.words).slice(0, 7));
+  const { questionCount, listClass } = usePrintQuestionLayout(7);
+  const [words] = useState<VocabWord[]>(() => shuffle(theme.words).slice(0, questionCount));
   const [patterns] = useState<Record<string, string[]>>(() =>
     Object.fromEntries(words.map((w) => [w.word, makePatternChars(w.word)]))
   );
@@ -86,7 +88,7 @@ export function ExMissingLetters({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez les lettres manquantes pour compléter le mot.
       </p>
-      <div className="space-y-6">
+      <div className={listClass}>
         {words.map((w, i) => {
           const s = states[w.word]!;
           const pattern = patterns[w.word]!;

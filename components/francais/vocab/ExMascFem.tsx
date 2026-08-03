@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, pickN, normalizeText } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 type WordEntry = { word: VocabWord; mascArt: string };
@@ -50,8 +51,9 @@ function checkAnswer(userAns: string, feminine: string, mascArt: string): boolea
 export function ExMascFem({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
+  const { questionCount, listClass } = usePrintQuestionLayout(6);
   const [entries] = useState<WordEntry[]>(() =>
-    pickN(theme.words.filter((w) => !!w.feminine), 6).map((w) => ({
+    pickN(theme.words.filter((w) => !!w.feminine), questionCount).map((w) => ({
       word: w,
       mascArt: randomMascArt(w),
     }))
@@ -90,7 +92,7 @@ export function ExMascFem({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Mettez les mots au féminin avec l&apos;article.
       </p>
-      <div className="space-y-3">
+      <div className={listClass}>
         {entries.map(({ word: w, mascArt }, i) => {
           const s = states[w.word]!;
           const mascDisplay = mascArt.endsWith("'") ? `${mascArt}${w.word}` : `${mascArt} ${w.word}`;

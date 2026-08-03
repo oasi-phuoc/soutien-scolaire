@@ -5,6 +5,7 @@ import {
   ExerciseProps, shuffle, normalizeText,
 } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
 
@@ -25,7 +26,7 @@ function toDefiniteArticle(art: string, word: string): string {
 }
 
 
-function buildWordList(theme: VocabTheme): VocabWord[] {
+function buildWordList(theme: VocabTheme, count: number): VocabWord[] {
   const result: VocabWord[] = [];
 
   for (const w of theme.words) {
@@ -57,13 +58,14 @@ function buildWordList(theme: VocabTheme): VocabWord[] {
 
   // Deduplicate by word, shuffle, limit
   const deduped = [...new Map(result.map((w) => [w.word, w])).values()];
-  return shuffle(deduped).slice(0, 5);
+  return shuffle(deduped).slice(0, count);
 }
 
 export function ExArticle({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => buildWordList(theme));
+  const { questionCount, listClass } = usePrintQuestionLayout(5);
+  const [words] = useState<VocabWord[]>(() => buildWordList(theme, questionCount));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
@@ -115,7 +117,7 @@ export function ExArticle({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez l&apos;article défini (le, la, l&apos;, les).
       </p>
-      <div className="flex flex-col gap-5">
+      <div className={listClass}>
         {words.map((w, i) => {
           const s = states[w.word]!;
           return (

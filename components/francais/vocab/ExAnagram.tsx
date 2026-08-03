@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, pickN, shuffle, normalizeText } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 type LetterTile = { id: string; char: string };
 type WordAnagram = {
@@ -20,8 +21,9 @@ function makeTiles(word: string): LetterTile[] {
 export function ExAnagram({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
+  const { questionCount, listClass } = usePrintQuestionLayout(5);
   const [items, setItems] = useState<WordAnagram[]>(() =>
-    pickN(theme.words, 5).map((w) => ({
+    pickN(theme.words, questionCount).map((w) => ({
       word: w,
       remaining: makeTiles(w.word),
       answer: [],
@@ -84,7 +86,7 @@ export function ExAnagram({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Cliquez sur les lettres pour former le mot.
       </p>
-      <div className="space-y-5">
+      <div className={listClass}>
         {items.map((item, idx) => {
           const builtWord = item.answer.map((t) => t.char).join("");
           return (

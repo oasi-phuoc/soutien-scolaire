@@ -7,6 +7,7 @@ import {
 } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { resolveVocabImage } from "@/lib/curriculum/vocab-image";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 
@@ -74,7 +75,8 @@ export function ExImageWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
   exerciseNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => pickN(theme.words, 5));
+  const { questionCount, listClass } = usePrintQuestionLayout(5);
+  const [words] = useState<VocabWord[]>(() => pickN(theme.words, questionCount));
 
   const imageFolder = theme.imageFolder ?? theme.section;
   function resolveImg(img?: string) {
@@ -110,7 +112,7 @@ export function ExImageWrite({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Regardez et écrivez le mot correspondant avec l&apos;article défini ou indéfini.
       </p>
-      <div className="space-y-3">
+      <div className={listClass}>
         {words.map((w, i) => {
           const s = states[w.word]!;
           return (

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, shuffle } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 const LT_IGNORE = new Set(["WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE", "UNPAIRED_BRACKETS"]);
 
@@ -49,8 +50,8 @@ function buildPrompts(theme: VocabTheme, count: number): Prompt[] {
   }
   const shuffled = shuffle([...candidates]);
 
-  if (count < 5) {
-    // Eval mode: just pick words without level selection
+  if (count !== 5) {
+    // Eval / print layout: just pick words without level selection
     return shuffled.slice(0, count).map(({ word, source }) => {
       const anyLevel = source.exampleSentences;
       const allSentences = [...(anyLevel?.a1 ?? []), ...(anyLevel?.a2 ?? []), ...(anyLevel?.b1 ?? [])];
@@ -123,7 +124,8 @@ function checkBasic(answer: string, word: string): string[] {
 export function ExQuestionWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
-  const [prompts] = useState<Prompt[]>(() => buildPrompts(theme, isEval ? 2 : 5));
+  const { questionCount, listClass } = usePrintQuestionLayout(isEval ? 2 : 5);
+  const [prompts] = useState<Prompt[]>(() => buildPrompts(theme, questionCount));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
@@ -205,7 +207,7 @@ export function ExQuestionWrite({
         <strong className="font-bold text-[var(--color-accent-fr)]">pourquoi</strong>…).
         Commencez par une majuscule et terminez par un point d&apos;interrogation.
       </p>
-      <div className="space-y-4">
+      <div className={listClass}>
         {prompts.map((p, i) => {
           const s = states[p.word]!;
           const hasErrors = s.basicErrors.length > 0 || s.grammarErrors.length > 0;

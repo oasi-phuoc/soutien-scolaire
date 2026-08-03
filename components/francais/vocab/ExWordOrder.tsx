@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { ExerciseProps, shuffle } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 type Token = { id: string; text: string };
 
@@ -23,8 +24,9 @@ function normalize(s: string) {
 export function ExWordOrder({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
+  const { questionCount, listClass } = usePrintQuestionLayout(5);
   const [phrases] = useState<string[]>(() =>
-    (theme.sentences ?? []).slice(0, 5).map((s) => s.sentence.replace("___", s.answer))
+    (theme.sentences ?? []).slice(0, questionCount).map((s) => s.sentence.replace("___", s.answer))
   );
 
   const [states, setStates] = useState<PhraseState[]>(() =>
@@ -79,7 +81,7 @@ export function ExWordOrder({
         Cliquez sur les mots pour former une phrase.
         Un mot commence par une majuscule et un mot contient la ponctuation.
       </p>
-      <div className="space-y-5">
+      <div className={listClass}>
         {states.map((s, idx) => {
           const builtPhrase = s.answer.map((t) => t.text).join(" ");
           return (

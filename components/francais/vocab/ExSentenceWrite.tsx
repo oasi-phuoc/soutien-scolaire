@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, pickN } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 const LT_IGNORE = new Set(["WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE", "UNPAIRED_BRACKETS"]);
 
@@ -72,7 +73,8 @@ function checkBasic(answer: string, word: string): string[] {
 export function ExSentenceWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
-  const [prompts] = useState<PromptWord[]>(() => buildPool(theme, isEval ? 2 : 4));
+  const { questionCount, listClass } = usePrintQuestionLayout(isEval ? 2 : 4);
+  const [prompts] = useState<PromptWord[]>(() => buildPool(theme, questionCount));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
@@ -147,7 +149,7 @@ export function ExSentenceWrite({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez une phrase complète avec le mot proposé.<br />Commencez par une majuscule et terminez par un point.
       </p>
-      <div className="space-y-4">
+      <div className={listClass}>
         {prompts.map((p, i) => {
           const s = states[p.word]!;
           const hasErrors = s.basicErrors.length > 0 || s.grammarErrors.length > 0;
