@@ -8,34 +8,106 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
   title: "Le masculin et le féminin des noms (personnes)",
   theory: [
     {
-      type: "heading",
-      text: "Utilisation",
+      type: "plain_list",
+      items: [
+        "En français, les noms ont un genre. Un nom peut être :",
+        "masculin",
+        "féminin",
+      ],
     },
     {
       type: "plain_list",
       items: [
-        "Pour les personnes, les noms indiquent souvent une profession (un ingénieur), un lien de famille (le fils) ou une nationalité (une Espagnole). Ils sont masculins ou féminins.",
-        "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} homme, {a}une{/a} femme.",
+        "Pour les personnes, les noms indiquent souvent une profession, un lien de famille ou une nationalité.",
       ],
-      allBullets: true,
     },
     {
+      type: "plain_list",
+      items: [
+        "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} homme, {a}une{/a} femme.",
+      ],
+    },
+
+    {
       type: "heading",
-      text: "Formation du féminin : cas général",
+      text: "Comment reconnaître le genre ?",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Il n'y a pas toujours une règle. Il faut souvent apprendre le nom avec son article.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Souvent masculins",
+      items: [
+        "{a}-age{/a} → le village",
+        "{a}-ment{/a} → le document",
+        "{a}-eau{/a} → le bateau",
+      ],
+      inlineArrows: true,
+    },
+    {
+      type: "highlight",
+      label: "Souvent féminins",
+      items: [
+        "{a}-tion{/a} → la question",
+        "{a}-ette{/a} → la tablette",
+        "{a}-ure{/a} → la voiture",
+      ],
+      inlineArrows: true,
+    },
+    {
+      type: "highlight",
+      label: "Astuce",
+      items: [
+        "La majorité des mots qui terminent par {a}-e{/a} sont féminins, mais il existe des exceptions.",
+      ],
+      noBulletItems: [0],
+    },
+
+    {
+      type: "heading",
+      text: "Formation du féminin",
     },
     {
       type: "plain_list",
       items: [
         "Au masculin, les noms ont des terminaisons très variées : un employé, un célibataire, un Espagnol, un commerçant, un Suédois…",
-        "En général, nom féminin = nom masculin + {a}e{/a}. → un employé / une employée ; un ami / une amie ; un ingénieur / une ingénieure ; un étudiant / une étudiante ; un Espagnol / une Espagnole.",
-        "Quand le nom masculin se termine déjà par {a}e{/a}, le féminin ne change pas. → un journaliste / une journaliste ; un fonctionnaire / une fonctionnaire.",
       ],
-      allBullets: true,
     },
     {
-      type: "note",
-      text: "Exception : enfant a la même forme au masculin et au féminin — un enfant / une enfant.",
+      type: "plain_list",
+      items: ["En général, nom féminin = nom masculin + {a}e{/a}."],
     },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "un employé → une employée",
+        "un ami → une amie",
+      ],
+      noBulletItems: [0, 1],
+      inlineArrows: true,
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Quand le nom masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "un journaliste → une journaliste",
+        "un fonctionnaire → une fonctionnaire",
+      ],
+      noBulletItems: [0, 1],
+      inlineArrows: true,
+    },
+
     {
       type: "heading",
       text: "Prononciation et orthographe",
@@ -43,11 +115,33 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Même prononciation quand le masculin se termine par une voyelle, ou par {a}l{/a} / {a}eur{/a}. → un employé / une employée ; un ami / une amie ; un Espagnol / une Espagnole ; un ingénieur / une ingénieure.",
-        "Prononciation différente quand le masculin se termine par une consonne (le e final fait entendre la consonne). → un Anglais / une Anglaise ; un assistant / une assistante ; un Mexicain / une Mexicaine.",
-        "Les noms de nationalité prennent une majuscule. → un Irlandais.",
+        "{a}1.{/a} Même prononciation quand le masculin se termine par une voyelle, ou par {a}l{/a} / {a}eur{/a}.",
       ],
-      allBullets: true,
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "un Espagnol / une Espagnole",
+        "un ingénieur / une ingénieure",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}2.{/a} Prononciation différente quand le masculin se termine par une consonne (le {a}e{/a} final fait entendre la consonne).",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "un Anglais → une Anglaise",
+        "un assistant → une assistante",
+      ],
+      noBulletItems: [0, 1],
+      inlineArrows: true,
     },
   ],
   exercises: [
