@@ -1,4 +1,115 @@
-import type { GrammarLesson } from "../../grammar-data";
+import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+
+const PRONOMINAUX_VERBS: VerbToggleVerb[] = [
+  {
+    infinitive: "se lever", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e",    radical: "lèv" },
+      { pronoun: "tu",              ending: "es",   radical: "lèv" },
+      { pronoun: "il / elle / on",  ending: "e",    radical: "lèv" },
+      { pronoun: "nous",            ending: "ons",  radical: "lev" },
+      { pronoun: "vous",            ending: "ez",   radical: "lev" },
+      { pronoun: "ils / elles",     ending: "ent",  radical: "lèv" },
+    ],
+  },
+  {
+    infinitive: "se coucher", radical: "couch",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "se laver", radical: "lav",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "se doucher", radical: "douch",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "se brosser", radical: "bross",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "se raser", radical: "ras",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "se coiffer", radical: "coiff",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "s'habiller", radical: "habill",
+    reflexivePronouns: ["m'", "t'", "s'", "nous", "vous", "s'"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "se reposer", radical: "repos",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",              ending: "e"   },
+      { pronoun: "tu",              ending: "es"  },
+      { pronoun: "il / elle / on",  ending: "e"   },
+      { pronoun: "nous",            ending: "ons" },
+      { pronoun: "vous",            ending: "ez"  },
+      { pronoun: "ils / elles",     ending: "ent" },
+    ],
+  },
+];
 
 /** Unité 5 — Les verbes pronominaux (G1.6) */
 export const A1_GR_PRONOMINAUX: GrammarLesson = {
@@ -13,23 +124,18 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
     },
     {
-      type: "highlight",
-      label: "Les verbes réfléchis",
+      type: "plain_list",
       items: [
-        "Le sujet du verbe fait l'action sur lui-même.",
-        "Elle {a}se{/a} regarde. → Elle se regarde dans le miroir.",
+        "Le sujet du verbe fait l'action sur lui-même. Un verbe pronominal est toujours accompagné d'un pronom réfléchi.",
       ],
-      noBulletItems: [1],
     },
     {
       type: "highlight",
-      label: "Les verbes réciproques",
-      items: [
-        "Plusieurs personnes font l'action les unes sur les autres. On conjugue seulement avec les pronoms pluriels ({a}on, nous, vous, ils, elles{/a}).",
-        "Ils {a}se{/a} regardent.",
-      ],
-      noBulletItems: [1],
+      label: "",
+      items: ["Elle {a}se regarde{/a} dans le miroir."],
+      noBulletItems: [0],
     },
+
     {
       type: "heading",
       text: "Conjugaison",
@@ -38,24 +144,23 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Les verbes pronominaux se conjuguent avec deux pronoms : le pronom sujet + un second pronom de la même personne.",
-        "À l'infinitif, on utilise le pronom {a}se{/a} : se lever, se doucher.",
+        "Les verbes pronominaux se conjuguent avec deux pronoms : le pronom sujet + un second pronom de la même personne. À l'infinitif, on utilise le pronom {a}se{/a} : se lever, se doucher.",
       ],
-      allBullets: true,
     },
     {
       type: "grid",
-      headers: ["Pronom sujet", "Pronom", "Verbe / phrase"],
+      headers: ["Sujet", "Pronom réfléchi"],
       boldFirstCol: true,
       rows: [
-        ["Je", "me", "réveille à 8 h."],
-        ["Tu", "te", "lèves tôt."],
-        ["Il / Elle / On", "se", "douche le soir."],
-        ["Nous", "nous", "préparons vite."],
-        ["Vous", "vous", "coiffez comment ?"],
-        ["Ils / Elles", "se", "couchent tard."],
+        ["je", "me (m')"],
+        ["tu", "te (t')"],
+        ["il / elle / on", "se (s')"],
+        ["nous", "nous"],
+        ["vous", "vous"],
+        ["ils / elles", "se (s')"],
       ],
     },
+
     {
       type: "heading",
       text: "Prononciation et orthographe",
@@ -65,22 +170,60 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       type: "plain_list",
       items: [
         "Les pronoms {a}me, te, se{/a} deviennent {a}m', t', s'{/a} devant une voyelle ou un h muet.",
-        "{s}Je me habille{/s} → {a}Je m'habille{/a}.",
-        "{s}Tu te amuses{/s} → {a}Tu t'amuses{/a}.",
-        "{s}Elle se arrête{/s} → {a}Elle s'arrête{/a}.",
-        "{s}Ils se embrassent{/s} → {a}Ils s'embrassent{/a}.",
+        "Je {s}me{/s} habille → Je {a}m'{/a}habille.",
+        "Tu {s}te{/s} amuses → Tu {a}t'{/a}amuses.",
+        "Elle {s}se{/s} arrête → Elle {a}s'{/a}arrête.",
+        "Ils {s}se{/s} embrassent → Ils {a}s'{/a}embrassent.",
       ],
       allBullets: true,
     },
+
     {
-      type: "note",
-      text: "Attention à l'ordre des mots dans la phrase négative : Je ne me lève pas tôt. (sujet + ne + pronom + verbe + pas)",
+      type: "heading",
+      text: "Verbes pronominaux courants",
+      trans: { en: "Common reflexive verbs", ar: "أفعال انعكاسية شائعة", fa: "افعال انعکاسی پرکاربرد", ti: "ልሙዳት ናይ ርእሰ-ግሲታት", uk: "Поширені зворотні дієслова" },
+    },
+    { type: "verb_toggle", verbs: PRONOMINAUX_VERBS, buttonCols: 3 },
+
+    {
+      type: "heading",
+      text: "La négation",
+      trans: { en: "The negation", ar: "النفي", fa: "نفی", ti: "ኣሉታ", uk: "Заперечення" },
     },
     {
       type: "plain_list",
-      label: "À l'oral, le e de je, me, te, se et ne n'est pas toujours prononcé :",
       items: [
-        "Je me couche. / Tu te douches. / Il ne se douche pas.",
+        "La négation {a}ne … pas{/a} encadre le pronom réfléchi ET le verbe.",
+        "Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}",
+      ],
+      allBullets: true,
+    },
+    { type: "verb_toggle", negation: true, verbs: PRONOMINAUX_VERBS, buttonCols: 3 },
+
+    {
+      type: "heading",
+      text: "Réfléchis vs réciproques",
+      sub: true,
+      accent: true,
+      trans: { en: "Reflexive vs reciprocal", ar: "انعكاسي مقابل متبادل", fa: "انعکاسی در برابر متقابل", ti: "ርእሰ-ግሲ ኣንጻር ምልውዋጥ", uk: "Зворотні проти взаємних" },
+    },
+    {
+      type: "grid",
+      headers: ["Type", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Réfléchi", "Le sujet agit sur lui-même.", "Je {a}me{/a} regarde dans le miroir."],
+        ["Réciproque", "Les sujets agissent l'un sur l'autre.", "Nous {a}nous{/a} regardons. (each other)"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Attention",
+      inlineArrows: true,
+      items: [
+        "Quand le verbe commence par une voyelle ou un h, {a}me / te / se{/a} devient {a}m' / t' / s'{/a}.",
+        "je {s}me{/s} appelle → je {a}m'{/a}appelle",
+        "il {s}se{/s} habille → il {a}s'{/a}habille",
       ],
       noBulletItems: [0],
     },
