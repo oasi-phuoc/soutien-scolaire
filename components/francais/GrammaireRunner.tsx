@@ -663,6 +663,32 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+/**
+ * Tire `size` items du pool.
+ * Si les items ont un `gabaritId`, un même gabarit n'apparaît qu'une fois
+ * (pronom / variante tirés au hasard parmi les variantes du gabarit).
+ */
+function sampleFromPool<T extends { gabaritId?: string; difficulty?: "A1" | "A2" | "B1" }>(
+  pool: T[],
+  size: number,
+): T[] {
+  const hasGabarits = pool.some((item) => item.gabaritId);
+  if (!hasGabarits) return shuffle(pool).slice(0, size);
+
+  const byId = new Map<string, T[]>();
+  for (const item of pool) {
+    const id = item.gabaritId ?? `__solo_${byId.size}`;
+    const list = byId.get(id);
+    if (list) list.push(item);
+    else byId.set(id, [item]);
+  }
+  const pickedIds = shuffle([...byId.keys()]).slice(0, size);
+  return pickedIds.map((id) => {
+    const variants = byId.get(id)!;
+    return variants[Math.floor(Math.random() * variants.length)]!;
+  });
+}
+
 function QcmExercise({
   exercise,
   onValidated,
@@ -676,7 +702,7 @@ function QcmExercise({
 }) {
   const [items] = useState<typeof exercise.items>(() => {
     const raw = exercise.pool && exercise.pool.length > 0
-      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 5)
+      ? sampleFromPool(exercise.pool, exercise.poolSize ?? 5)
       : exercise.items;
     if (exercise.toggleChoices) return raw;
     return raw.map(item => {
@@ -964,7 +990,7 @@ function FillExercise({
   const [items] = useState<typeof exercise.items>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
       const size = exercise.poolSize ?? 5;
-      return shuffle(exercise.pool).slice(0, size);
+      return sampleFromPool(exercise.pool, size);
     }
     return exercise.items;
   });

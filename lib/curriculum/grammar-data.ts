@@ -37,8 +37,8 @@ export type TheoryBlock =
   | { type: "selector"; labelPrefix?: string; buttonCols?: number; tabs: Array<{ label: string; content: TheoryBlock[] }> };
 
 export type ExerciseDifficulty = "A1" | "A2" | "B1";
-export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number; difficulty?: ExerciseDifficulty };
-export type FillItem = { sentence: string; hint: string; answer: string; difficulty?: ExerciseDifficulty };
+export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string };
+export type FillItem = { sentence: string; hint: string; answer: string; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string };
 export type MatchPair = { left: string; right: string };
 
 export type Exercise =

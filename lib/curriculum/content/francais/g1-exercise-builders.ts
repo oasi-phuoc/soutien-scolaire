@@ -1,27 +1,46 @@
 import type { Exercise, FillItem, QcmItem } from "../../grammar-data";
 import { STANDARD_PRONOUNS, type VerbConj } from "./conj-exercise-builders";
 
-/** Taille du pool stocké (phrases disponibles). */
-export const G1_POOL_SIZE = 25;
+/** Nombre de gabarits (phrases modèles) par exercice. */
+export const G1_GABARIT_COUNT = 25;
 /** Questions tirées par session. */
 export const G1_SESSION_SIZE = 5;
 /** Prompts d'écriture affichés. */
 export const G1_WRITE_SIZE = 5;
 
 const ER_PAD = ["e", "es", "ons", "ez", "ent", "is", "it", "s", "t", "ons", "ez"];
+const SING_PLUR_PAIRS = [
+  { s: 0, p: 4 }, // je → nous
+  { s: 1, p: 5 }, // tu → vous
+  { s: 2, p: 6 }, // il → ils
+  { s: 3, p: 7 }, // elle → elles
+] as const;
 
 export type G1Style = "ending" | "form";
 
+/** Gabarit = verbe + complément ; le pronom est variable (× 8). */
+export type G1Gabarit = {
+  verb: VerbConj;
+  /** Complément après le verbe, ex. « une pomme. » ou « à Genève. » */
+  tail: string;
+};
+
+/** Gabarit exercice 6 : un verbe correct + distracteurs sémantiques. */
+export type G1VerbChoiceGabarit = {
+  verb: VerbConj;
+  tail: string;
+  distractors: VerbConj[];
+};
+
 export type G1LessonProfile = {
-  verbs: VerbConj[];
-  /** Compléments A1 (sujet + verbe + complément complet). */
-  tails: string[];
-  /** ending = radical + __ ; form = blanc pour forme entière (être, avoir, irréguliers). */
+  /** ending = radical + __ ; form = blanc pour forme entière. */
   style: G1Style;
+  /** 25 gabarits (verbe + complément) pour les ex. 1–5. */
+  gabarits: G1Gabarit[];
   /** Prompts « Infinitif / complément : » pour l'exercice 7. */
   writePrompts: string[];
-  /** Pool sémantique exercice 6 (sinon généré automatiquement). */
-  verbChoicePool?: QcmItem[];
+  /** 25 gabarits sémantiques pour l'exercice 6 (sinon dérivés des gabarits). */
+  verbChoiceGabarits?: G1VerbChoiceGabarit[];
   /** Présent progressif (être en train de). */
   progressif?: boolean;
 };
@@ -60,18 +79,127 @@ function pickChoices(correct: string, candidates: string[], pad: string[] = ER_P
   return out.slice(0, 4);
 }
 
-function trimPool<T>(items: T[], size = G1_POOL_SIZE): T[] {
-  if (items.length >= size) return items.slice(0, size);
-  if (items.length === 0) return items;
-  const out = [...items];
-  while (out.length < size) out.push(items[out.length % items.length]!);
-  return out;
-}
-
 function conjugatedAnswer(v: VerbConj, idx: number): string {
   const i = idx % 8;
   if (v.reflexive) return `${v.reflexive[i]} ${v.forms[i]}`;
   return v.forms[i]!;
+}
+
+function ensureGabarits(gabarits: G1Gabarit[]): G1Gabarit[] {
+  if (gabarits.length === 0) return gabarits;
+  const out = [...gabarits];
+  while (out.length < G1_GABARIT_COUNT) {
+    out.push(gabarits[out.length % gabarits.length]!);
+  }
+  return out.slice(0, G1_GABARIT_COUNT);
+}
+
+function normalizeTail(tail: string): string {
+  const t = tail.trim();
+  if (!t) return ".";
+  return t.startsWith(" ") ? t : ` ${t}`;
+}
+
+/** Développe un gabarit sur les 8 pronoms. */
+function forEachPronoun(gabarit: G1Gabarit, fn: (idx: number, v: VerbConj, tail: string) => void) {
+  const tail = normalizeTail(gabarit.tail);
+  for (let idx = 0; idx < 8; idx++) {
+    fn(idx, gabarit.verb, tail);
+  }
+}
+
+function buildItemsFromGabarit(
+  style: G1Style,
+  gabarit: G1Gabarit,
+  idx: number,
+  tail: string,
+  gabaritId: string,
+): {
+  endingQcm: QcmItem;
+  endingFill: FillItem;
+  conjQcm: QcmItem;
+  conjFill: FillItem;
+} {
+  const v = gabarit.verb;
+  const ends = endingsOf(v);
+  const ending = ends[idx]!;
+  const full = conjugatedAnswer(v, idx);
+
+  let endingQcm: QcmItem;
+  let endingFill: FillItem;
+
+  if (style === "ending" && v.stem) {
+    const subj = subjectOf(idx, v.stem);
+    endingQcm = {
+      sentence: `${subj.display}${subj.sep}${v.stem}__${tail}`,
+      choices: pickChoices(ending, ends),
+      correctIdx: 0,
+      gabaritId,
+    };
+    endingFill = {
+      sentence: `${subj.display}${subj.sep}${v.stem}___${tail}`,
+      hint: v.hint,
+      answer: ending,
+      gabaritId,
+    };
+  } else {
+    const subj = subjectOf(idx, full);
+    endingQcm = {
+      sentence: `${subj.display}${subj.sep}___${tail}`,
+      choices: pickChoices(full, [
+        conjugatedAnswer(v, (idx + 1) % 8),
+        conjugatedAnswer(v, (idx + 4) % 8),
+        conjugatedAnswer(v, (idx + 5) % 8),
+        ...v.forms,
+      ]),
+      correctIdx: 0,
+      gabaritId,
+    };
+    endingFill = {
+      sentence: `${subj.display}${subj.sep}___${tail}`,
+      hint: v.hint,
+      answer: full,
+      gabaritId,
+    };
+  }
+
+  const conjSubj = subjectOf(idx, full);
+  const conjQcm: QcmItem = {
+    sentence: `${conjSubj.display}${conjSubj.sep}___ (${v.infinitive})${tail}`,
+    choices: pickChoices(full, [
+      conjugatedAnswer(v, (idx + 1) % 8),
+      conjugatedAnswer(v, (idx + 4) % 8),
+      conjugatedAnswer(v, (idx + 5) % 8),
+      ...v.forms,
+    ]),
+    correctIdx: 0,
+    gabaritId,
+  };
+  const conjFill: FillItem = {
+    sentence: `${conjSubj.display}${conjSubj.sep}___ (${v.infinitive})${tail}`,
+    hint: v.infinitive,
+    answer: full,
+    gabaritId,
+  };
+
+  return { endingQcm, endingFill, conjQcm, conjFill };
+}
+
+function buildPluralFromGabarit(gabarit: G1Gabarit, gabaritId: string): FillItem[] {
+  const v = gabarit.verb;
+  const tail = normalizeTail(gabarit.tail);
+  return SING_PLUR_PAIRS.map(({ s, p }) => {
+    const singForm = conjugatedAnswer(v, s);
+    const plurForm = conjugatedAnswer(v, p);
+    const sp = subjectOf(s, singForm);
+    const pp = subjectOf(p, plurForm);
+    return {
+      sentence: `${sp.display}${sp.sep}${singForm}${tail} → ${pp.display} ___${tail}`,
+      hint: "mettre au pluriel",
+      answer: plurForm,
+      gabaritId,
+    };
+  });
 }
 
 function buildProgressifPools(profile: G1LessonProfile): {
@@ -82,71 +210,64 @@ function buildProgressifPools(profile: G1LessonProfile): {
   plural: FillItem[];
 } {
   const etreForms = ["suis", "es", "est", "est", "sommes", "êtes", "sont", "sont"] as const;
-  const tails = profile.tails;
-  const verbs = profile.verbs;
+  const gabarits = ensureGabarits(profile.gabarits);
   const endingQcm: QcmItem[] = [];
   const endingFill: FillItem[] = [];
   const conjQcm: QcmItem[] = [];
   const conjFill: FillItem[] = [];
   const plural: FillItem[] = [];
-  const pairs = [
-    { s: 0, p: 4 },
-    { s: 1, p: 5 },
-    { s: 2, p: 6 },
-    { s: 3, p: 7 },
-  ];
 
-  for (let i = 0; i < G1_POOL_SIZE; i++) {
-    const idx = i % 8;
-    const v = verbs[i % verbs.length]!;
-    const form = etreForms[idx]!;
-    const inf = v.infinitive;
+  for (let gi = 0; gi < gabarits.length; gi++) {
+    const g = gabarits[gi]!;
+    const gid = `g${gi}`;
+    const inf = g.verb.infinitive;
     const de = startsWithVowel(inf) ? "d'" : "de ";
-    const tail = tails[i % tails.length]!;
-    const subj = subjectOf(idx, form);
-    const answerProg = `${form} en train ${de}${inf}`.replace(/d' /, "d'");
-
-    endingQcm.push({
-      sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
-      choices: pickChoices(form, [...etreForms]),
-      correctIdx: 0,
-    });
-    endingFill.push({
-      sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
-      hint: "être en train de",
-      answer: form,
-    });
-    conjQcm.push({
-      sentence: `${subj.display}${subj.sep}___ (${inf})${tail}`,
-      choices: pickChoices(answerProg, [
-        `${etreForms[(idx + 1) % 8]} en train ${de}${inf}`,
-        `${etreForms[(idx + 4) % 8]} en train ${de}${inf}`,
-        `${form} en train de ${inf}`,
-      ]),
-      correctIdx: 0,
-    });
-    conjFill.push({
-      sentence: `${subj.display}${subj.sep}___ (${inf})${tail}`,
-      hint: "être en train de + infinitif",
-      answer: answerProg.replace(/\s+/g, " ").trim(),
-    });
-  }
-
-  for (let i = 0; i < G1_POOL_SIZE; i++) {
-    const { s, p } = pairs[i % pairs.length]!;
-    const v = verbs[i % verbs.length]!;
-    const inf = v.infinitive;
-    const de = startsWithVowel(inf) ? "d'" : "de ";
-    const tail = tails[i % tails.length]!;
-    const sp = STANDARD_PRONOUNS[s]!;
-    const pp = STANDARD_PRONOUNS[p]!;
-    const sForm = etreForms[s]!;
-    const pForm = etreForms[p]!;
-    plural.push({
-      sentence: `${sp.display} ${sForm} en train ${de}${inf}${tail} → ${pp.display} ___${tail}`,
-      hint: "pluriel — être en train de",
-      answer: `${pForm} en train ${de}${inf}`.replace(/\s+/g, " ").trim(),
-    });
+    const tail = normalizeTail(g.tail);
+    for (let idx = 0; idx < 8; idx++) {
+      const form = etreForms[idx]!;
+      const subj = subjectOf(idx, form);
+      const answerProg = `${form} en train ${de}${inf}`.replace(/\s+/g, " ").trim();
+      endingQcm.push({
+        sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
+        choices: pickChoices(form, [...etreForms]),
+        correctIdx: 0,
+        gabaritId: gid,
+      });
+      endingFill.push({
+        sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
+        hint: "être en train de",
+        answer: form,
+        gabaritId: gid,
+      });
+      conjQcm.push({
+        sentence: `${subj.display}${subj.sep}___ (${inf})${tail}`,
+        choices: pickChoices(answerProg, [
+          `${etreForms[(idx + 1) % 8]} en train ${de}${inf}`,
+          `${etreForms[(idx + 4) % 8]} en train ${de}${inf}`,
+          `${form} en train de ${inf}`,
+        ]),
+        correctIdx: 0,
+        gabaritId: gid,
+      });
+      conjFill.push({
+        sentence: `${subj.display}${subj.sep}___ (${inf})${tail}`,
+        hint: "être en train de + infinitif",
+        answer: answerProg,
+        gabaritId: gid,
+      });
+    }
+    for (const { s, p } of SING_PLUR_PAIRS) {
+      const sForm = etreForms[s]!;
+      const pForm = etreForms[p]!;
+      const sp = STANDARD_PRONOUNS[s]!;
+      const pp = STANDARD_PRONOUNS[p]!;
+      plural.push({
+        sentence: `${sp.display} ${sForm} en train ${de}${inf}${tail} → ${pp.display} ___${tail}`,
+        hint: "pluriel — être en train de",
+        answer: `${pForm} en train ${de}${inf}`.replace(/\s+/g, " ").trim(),
+        gabaritId: gid,
+      });
+    }
   }
 
   return { endingQcm, endingFill, conjQcm, conjFill, plural };
@@ -161,148 +282,90 @@ function buildCorePools(profile: G1LessonProfile): {
 } {
   if (profile.progressif) return buildProgressifPools(profile);
 
+  const gabarits = ensureGabarits(profile.gabarits);
   const endingQcm: QcmItem[] = [];
   const endingFill: FillItem[] = [];
   const conjQcm: QcmItem[] = [];
   const conjFill: FillItem[] = [];
   const plural: FillItem[] = [];
-  const pairs = [
-    { s: 0, p: 4 },
-    { s: 1, p: 5 },
-    { s: 2, p: 6 },
-    { s: 3, p: 7 },
-  ];
 
-  // Interleave verbes × pronoms pour couvrir tout le paradigme (~25 items).
-  const selected: Array<{ v: VerbConj; idx: number; tail: string }> = [];
-  for (let i = 0; i < G1_POOL_SIZE; i++) {
-    selected.push({
-      v: profile.verbs[i % profile.verbs.length]!,
-      idx: i % 8,
-      tail: profile.tails[i % profile.tails.length]!,
+  for (let gi = 0; gi < gabarits.length; gi++) {
+    const g = gabarits[gi]!;
+    const gid = `g${gi}`;
+    forEachPronoun(g, (idx, _v, tail) => {
+      const items = buildItemsFromGabarit(profile.style, g, idx, tail, gid);
+      endingQcm.push(items.endingQcm);
+      endingFill.push(items.endingFill);
+      conjQcm.push(items.conjQcm);
+      conjFill.push(items.conjFill);
     });
+    plural.push(...buildPluralFromGabarit(g, gid));
   }
 
-  for (const { v, idx, tail } of selected) {
-    const ends = endingsOf(v);
-    const ending = ends[idx]!;
-    const form = v.forms[idx]!;
-    const full = conjugatedAnswer(v, idx);
-
-    if (profile.style === "ending" && v.stem) {
-      const next = v.stem;
-      const subj = subjectOf(idx, next);
-      // Ex1 — QCM terminaison (underscores visibles)
-      endingQcm.push({
-        sentence: `${subj.display}${subj.sep}${v.stem}__${tail}`,
-        choices: pickChoices(ending, ends),
-        correctIdx: 0,
-      });
-      // Ex2 — fill terminaison
-      endingFill.push({
-        sentence: `${subj.display}${subj.sep}${v.stem}___${tail}`,
-        hint: v.hint,
-        answer: ending,
-      });
-    } else {
-      const next = full;
-      const subj = subjectOf(idx, next);
-      endingQcm.push({
-        sentence: `${subj.display}${subj.sep}___${tail}`,
-        choices: pickChoices(full, [
-          conjugatedAnswer(v, (idx + 1) % 8),
-          conjugatedAnswer(v, (idx + 4) % 8),
-          conjugatedAnswer(v, (idx + 5) % 8),
-          ...v.forms,
-        ]),
-        correctIdx: 0,
-      });
-      endingFill.push({
-        sentence: `${subj.display}${subj.sep}___${tail}`,
-        hint: v.hint,
-        answer: full,
-      });
-    }
-
-    const conjNext = full;
-    const conjSubj = subjectOf(idx, conjNext);
-    const blankAnswer = full;
-    conjQcm.push({
-      sentence: `${conjSubj.display}${conjSubj.sep}___ (${v.infinitive})${tail}`,
-      choices: pickChoices(blankAnswer, [
-        conjugatedAnswer(v, (idx + 1) % 8),
-        conjugatedAnswer(v, (idx + 4) % 8),
-        conjugatedAnswer(v, (idx + 5) % 8),
-        ...v.forms,
-      ]),
-      correctIdx: 0,
-    });
-    conjFill.push({
-      sentence: `${conjSubj.display}${conjSubj.sep}___ (${v.infinitive})${tail}`,
-      hint: v.infinitive,
-      answer: blankAnswer,
-    });
-  }
-
-  for (let i = 0; i < G1_POOL_SIZE; i++) {
-    const { s, p } = pairs[i % pairs.length]!;
-    const v = profile.verbs[i % profile.verbs.length]!;
-    const tail = profile.tails[i % profile.tails.length]!;
-    const singForm = conjugatedAnswer(v, s);
-    const plurForm = conjugatedAnswer(v, p);
-    const sp = subjectOf(s, singForm);
-    const pp = subjectOf(p, plurForm);
-    plural.push({
-      sentence: `${sp.display}${sp.sep}${singForm}${tail} → ${pp.display} ___${tail}`,
-      hint: "mettre au pluriel",
-      answer: plurForm,
-    });
-  }
-
-  return {
-    endingQcm: trimPool(endingQcm),
-    endingFill: trimPool(endingFill),
-    conjQcm: trimPool(conjQcm),
-    conjFill: trimPool(conjFill),
-    plural: trimPool(plural),
-  };
+  return { endingQcm, endingFill, conjQcm, conjFill, plural };
 }
 
-/** Génère un pool « choisissez le verbe correct » à partir des verbes + compléments. */
 function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
-  if (profile.verbChoicePool?.length) return trimPool(profile.verbChoicePool);
-
   const items: QcmItem[] = [];
-  const verbs = profile.verbs;
-  for (let i = 0; i < G1_POOL_SIZE; i++) {
-    const v = verbs[i % verbs.length]!;
-    const idx = (i % 3) + 2; // il / elle / nous variés — surtout 3e personne
-    const person = i % 2 === 0 ? 2 : 3; // il / elle
-    const form = conjugatedAnswer(v, person);
-    const tail = profile.tails[i % profile.tails.length]!;
-    const p = STANDARD_PRONOUNS[person]!;
-    const distractors = verbs
-      .filter((x) => x.infinitive !== v.infinitive)
-      .map((x) => conjugatedAnswer(x, person));
-    items.push({
-      sentence: `${p.display} ___${tail}`,
-      choices: pickChoices(form, distractors),
-      correctIdx: 0,
-    });
-    void idx;
+
+  if (profile.verbChoiceGabarits?.length) {
+    const list = [...profile.verbChoiceGabarits];
+    while (list.length < G1_GABARIT_COUNT) list.push(profile.verbChoiceGabarits[list.length % profile.verbChoiceGabarits.length]!);
+    for (let gi = 0; gi < G1_GABARIT_COUNT; gi++) {
+      const g = list[gi]!;
+      const gid = `vc${gi}`;
+      const tail = normalizeTail(g.tail);
+      for (let idx = 0; idx < 8; idx++) {
+        const form = conjugatedAnswer(g.verb, idx);
+        const subj = subjectOf(idx, form);
+        const distractors = g.distractors.map((d) => conjugatedAnswer(d, idx));
+        items.push({
+          sentence: `${subj.display}${subj.sep}___${tail}`,
+          choices: pickChoices(form, distractors),
+          correctIdx: 0,
+          gabaritId: gid,
+        });
+      }
+    }
+    return items;
   }
-  return trimPool(items);
+
+  // Dérivé auto : chaque gabarit × 8 pronoms, distracteurs = autres verbes des gabarits.
+  const gabarits = ensureGabarits(profile.gabarits);
+  const allVerbs = [...new Map(gabarits.map((g) => [g.verb.infinitive, g.verb])).values()];
+  for (let gi = 0; gi < gabarits.length; gi++) {
+    const g = gabarits[gi]!;
+    const gid = `vc${gi}`;
+    const tail = normalizeTail(g.tail);
+    const distractors = allVerbs.filter((x) => x.infinitive !== g.verb.infinitive);
+    for (let idx = 0; idx < 8; idx++) {
+      const form = conjugatedAnswer(g.verb, idx);
+      const subj = subjectOf(idx, form);
+      items.push({
+        sentence: `${subj.display}${subj.sep}___${tail}`,
+        choices: pickChoices(
+          form,
+          distractors.map((d) => conjugatedAnswer(d, idx)),
+        ),
+        correctIdx: 0,
+        gabaritId: gid,
+      });
+    }
+  }
+  return items;
 }
 
 /**
- * Pack harmonisé G1 — 7 exercices :
- * 1 QCM terminaison · 2 fill terminaison · 3 QCM conjugaison · 4 fill conjugaison
- * 5 pluriel · 6 verbe correct · 7 écriture (LanguageTool)
+ * Pack harmonisé G1 — 7 exercices.
+ * Banque = 25 gabarits × 8 pronoms (tirage aléatoire via shuffle du pool).
  */
 export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
   const pools = buildCorePools(profile);
   const verbChoice = buildVerbChoicePool(profile);
-  const writePrompts = trimPool(profile.writePrompts, Math.max(profile.writePrompts.length, G1_WRITE_SIZE));
+  const writePrompts = [...profile.writePrompts];
+  while (writePrompts.length < G1_WRITE_SIZE && profile.writePrompts.length > 0) {
+    writePrompts.push(profile.writePrompts[writePrompts.length % profile.writePrompts.length]!);
+  }
 
   return [
     {
@@ -403,4 +466,13 @@ export function reflErVowel(inf: string, stem: string): VerbConj {
     ...er(inf, stem),
     reflexive: ["m'", "t'", "s'", "s'", "nous", "vous", "s'", "s'"],
   };
+}
+
+/** Raccourci : liste de gabarits `{ verb, tails[] }` → gabarits plats. */
+export function gabaritsFrom(pairs: Array<{ verb: VerbConj; tails: string[] }>): G1Gabarit[] {
+  const out: G1Gabarit[] = [];
+  for (const { verb, tails } of pairs) {
+    for (const tail of tails) out.push({ verb, tail });
+  }
+  return out;
 }
