@@ -3,9 +3,10 @@
  * Usage : npx tsx scripts/validate-express-pools.ts [--lesson E5-2]
  *
  * Règles :
- * - pool ≥ 4 questions, textQ uniques
- * - ≥ 1 question illustrable (QCM image), ≥ 1 vrai/faux, ≥ 1 saisie
- * - le tirage produit 2 QCM texte + 1 image (si dispo) + 1 VF + 1 saisie
+ * - pool ≥ 5 questions, textQ uniques
+ * - ≥ 1 vrai/faux, ≥ 1 saisie (1 mot), QCM image si illustrable
+ * - le tirage produit 5 questions : ≥1 QCM texte + ≥1 saisie,
+ *   ≤1 image, ≤1 VF ; formats aussi distincts que possible
  */
 import { EXPRESS_ORAL_BY_ID } from "../lib/curriculum/content/communication/express-index";
 import {
@@ -174,23 +175,38 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
       }
       else stats.text++;
     }
-    const expectTotal = imageable > 0 ? 5 : 4;
-    if (pool.length >= expectTotal && tasks.length !== expectTotal) {
+    const expectTotal = Math.min(ex.questionCount ?? 5, pool.length);
+    if (pool.length >= 5 && tasks.length !== expectTotal) {
       err(ctx, `tirage ${tasks.length} tâches (attendu ${expectTotal}) — ${JSON.stringify(stats)}`);
     }
-    if (pool.length >= expectTotal) {
-      const vfStyleText = pool.filter(
-        (q) =>
-          q.textChoices.length === 3 &&
-          q.textChoices[0]?.trim().toLowerCase() === "oui" &&
-          q.textChoices[1]?.trim().toLowerCase() === "non" &&
-          q.textChoices[2]?.trim().toLowerCase() === "on ne sait pas",
-      ).length;
-      const minText = vfStyleText > 0 && pool.length - vfStyleText < 4 ? 1 : 2;
-      if (stats.text < minText) err(ctx, `tirage : ${stats.text} QCM texte (attendu ${minText}) — ${JSON.stringify(stats)}`);
-      if (stats.vf !== 1) err(ctx, `tirage : ${stats.vf} vrai/faux (attendu 1)`);
+    if (pool.length >= 5) {
+      if (stats.text < 1) err(ctx, `tirage : ${stats.text} QCM texte (attendu ≥1) — ${JSON.stringify(stats)}`);
       if (stats.fill !== 1) err(ctx, `tirage : ${stats.fill} saisie (attendu 1)`);
-      if (imageable > 0 && stats.image !== 1) err(ctx, `tirage : ${stats.image} QCM image (attendu 1)`);
+      if (stats.vf > 1) err(ctx, `tirage : ${stats.vf} vrai/faux (attendu ≤1)`);
+      if (stats.image > 1) err(ctx, `tirage : ${stats.image} QCM image (attendu ≤1)`);
+      if (vfCount > 0 && stats.vf !== 1) err(ctx, `tirage : ${stats.vf} vrai/faux (attendu 1 car pool VF dispo)`);
+      // Le QCM texte est le seul format répétable pour atteindre 5.
+      const otherUnique =
+        (stats.image > 0 ? 1 : 0) + (stats.vf > 0 ? 1 : 0) + (stats.fill > 0 ? 1 : 0);
+      const maxText = Math.max(1, expectTotal - otherUnique);
+      if (stats.text > maxText) {
+        err(ctx, `tirage : trop de QCM texte (${stats.text} > ${maxText}) — ${JSON.stringify(stats)}`);
+      }
+    }
+
+    // Saisie = un seul mot — uniquement pour la CO (audio), pas la CE
+    if (ex.audioSrc && !ex.readingText) {
+      for (const q of pool) {
+        if (!q.fillAnswer) continue;
+        if (/\s/.test(q.fillAnswer.trim())) {
+          err(ctx, `saisie multi-mots interdite : « ${q.fillAnswer} » (${q.id})`);
+        }
+        for (const a of q.fillAccept ?? []) {
+          if (/\s/.test(a.trim())) {
+            warn(ctx, `fillA multi-mots : « ${a} » (${q.id})`);
+          }
+        }
+      }
     }
   }
 }

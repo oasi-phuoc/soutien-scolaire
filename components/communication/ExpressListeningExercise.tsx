@@ -160,8 +160,13 @@ function FillView({
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => {
+              // Saisie d'un seul mot (pas d'espaces).
+              const raw = e.target.value.replace(/\s+/g, "");
+              onChange(raw);
+            }}
             disabled={locked}
+            inputMode="text"
             className="min-w-[6rem] border-0 border-b-2 border-[var(--color-accent-comm)]/60 bg-transparent px-1 pb-0.5 text-sm outline-none focus:border-[var(--color-accent-comm)] disabled:opacity-70"
             autoComplete="off"
             spellCheck={false}

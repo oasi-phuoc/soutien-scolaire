@@ -195,10 +195,13 @@ function hasFillData(q: ExpressMultiQuestion): boolean {
 }
 
 /**
- * Tire des questions UNIQUES du pool (jamais le même fait sous deux formats)
- * et compose l'exercice comme la CO placement :
- * 1 QCM image (si une question illustrable existe) + 1 vrai/faux +
- * 1 texte à saisir + 2 QCM texte.
+ * Tire des questions UNIQUES du pool (jamais le même fait sous deux formats).
+ *
+ * Composition (cible = `count`, défaut 5) :
+ * - toujours ≥ 1 QCM texte + ≥ 1 texte à saisir
+ * - au plus 1 image, 1 vrai/faux, 1 saisie
+ * - formats aussi distincts que possible ; un 2ᵉ QCM texte est autorisé
+ *   uniquement pour atteindre 5 questions (4 formats max)
  */
 export function buildExpressListeningTasks(
   pool: ExpressMultiQuestion[],
@@ -209,48 +212,56 @@ export function buildExpressListeningTasks(
   const shuffled = seededShuffle(pool, seed);
   const used = new Set<string>();
   const picks: { q: ExpressMultiQuestion; format: ExpressListeningFormat }[] = [];
+  const usedFormats = new Set<ExpressListeningFormat>();
+
+  const isVfStyleText = (q: ExpressMultiQuestion) => {
+    const labels = q.textChoices.map((c) => c.trim().toLowerCase());
+    if (labels.length !== 3) return false;
+    const set = new Set(labels);
+    return set.has("oui") && set.has("non") && set.has("on ne sait pas");
+  };
 
   const takeFirst = (
     pred: (q: ExpressMultiQuestion) => boolean,
     format: ExpressListeningFormat,
+    allowDuplicateFormat = false,
   ) => {
+    if (!allowDuplicateFormat && usedFormats.has(format)) return false;
     const q = shuffled.find((c) => !used.has(c.id) && pred(c));
-    if (q) {
-      used.add(q.id);
-      picks.push({ q, format });
-    }
+    if (!q) return false;
+    used.add(q.id);
+    usedFormats.add(format);
+    picks.push({ q, format });
+    return true;
   };
 
+  const target = Math.min(count, pool.length);
+
+  // Obligatoires : saisie + QCM texte
+  takeFirst(hasFillData, "fill");
+  takeFirst((q) => !isVfStyleText(q), "text");
+
+  // Formats complémentaires uniques
   takeFirst(canUseImageFormat, "image");
   takeFirst(hasVfData, "vf");
-  takeFirst(hasFillData, "fill");
 
-  // 2 QCM texte (ou plus si `count` le permet et que le pool est assez grand).
-  // Évite les choix déjà au format Oui/Non/On ne sait pas (réservés au VF).
-  const isVfStyleText = (q: ExpressMultiQuestion) => {
-    const labels = q.textChoices.map((c) => c.trim().toLowerCase());
-    return (
-      labels.length === 3 &&
-      labels[0] === "oui" &&
-      labels[1] === "non" &&
-      labels[2] === "on ne sait pas"
-    );
-  };
-  const target = Math.min(count, pool.length, Math.max(picks.length + 2, 4));
-  for (const q of shuffled) {
-    if (picks.length >= target) break;
-    if (used.has(q.id)) continue;
-    if (isVfStyleText(q)) continue;
-    used.add(q.id);
-    picks.push({ q, format: "text" });
+  // Compléter jusqu'à `target` avec d'autres QCM texte (seul format répétable)
+  while (picks.length < target) {
+    const ok = takeFirst((q) => !isVfStyleText(q), "text", true);
+    if (!ok) break;
   }
-  // Compléter avec d'autres QCM texte (jamais un 2ᵉ VF).
-  for (const q of shuffled) {
-    if (picks.length >= target) break;
-    if (used.has(q.id)) continue;
-    if (isVfStyleText(q)) continue;
-    used.add(q.id);
-    picks.push({ q, format: "text" });
+  // Dernier recours : n'importe quelle question restante en QCM texte
+  while (picks.length < target) {
+    const ok = takeFirst(() => true, "text", true);
+    if (!ok) break;
+  }
+
+  // Si la saisie manquait et qu'il reste de la place, tenter encore (pools incomplets)
+  if (!usedFormats.has("fill") && picks.length < target) {
+    takeFirst(hasFillData, "fill");
+  }
+  if (!usedFormats.has("text") && picks.length < target) {
+    takeFirst((q) => !isVfStyleText(q), "text");
   }
 
   const ordered = seededShuffle(picks, `${seed}-order`);

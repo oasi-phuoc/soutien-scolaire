@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import {
   getExpressionTeachersAction,
   submitExpressionAction,
@@ -895,13 +895,26 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     return { evalPack: pack, evalSteps: steps };
   });
 
+  const coTrainingPool = useMemo(() => {
+    if (!lesson || lesson.writingLevel) return [] as CommunicationExercise[];
+    return splitOralExercises(lesson, seedNum).training;
+  }, [lesson, seedNum]);
+
+  const coEvalPool = useMemo(() => {
+    if (!lesson || lesson.writingLevel) return [] as CommunicationExercise[];
+    const split = splitOralExercises(lesson, seedNum);
+    return split.evalEx.length > 0 ? split.evalEx : split.training;
+  }, [lesson, seedNum]);
+
   const [trainingExercises, setTrainingExercises] = useState<CommunicationExercise[]>(() => {
     if (!lesson || lesson.writingLevel) return [];
     const split = splitOralExercises(lesson, seedNum);
+    // Un seul exercice CO (audio tiré du pool) ; refresh en re-tirera un autre.
+    const trainingCo = pickSeeded(split.training, seedNum + 10);
     const trainingCe = pickSeeded(cePool, seedNum + 11);
     const trainingCeEmail = pickSeeded(ceEmailPoolAll, seedNum + 12);
     return [
-      ...split.training,
+      ...(trainingCo ? [trainingCo] : []),
       ...(trainingCe ? [trainingCe] : []),
       ...(trainingCeEmail ? [trainingCeEmail] : []),
     ];
@@ -1145,7 +1158,15 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     if (phase === "eval_co") {
       setEvalCoAnswer(null);
       setEvalCoValidated(false);
-      if (evalPack.co) {
+      // Nouveau tirage audio d'évaluation + nouvelles questions.
+      const next = pickSeededOther(coEvalPool, evalPack.co?.id, Date.now());
+      if (next) {
+        setEvalBundle((prev) => ({
+          ...prev,
+          evalPack: { ...prev.evalPack, co: next },
+        }));
+        setExerciseSeeds((prev) => ({ ...prev, [next.id]: String(Date.now() % 100000) }));
+      } else if (evalPack.co) {
         setExerciseSeeds((prev) => ({ ...prev, [evalPack.co!.id]: String(Date.now() % 100000) }));
       }
       return;
@@ -1201,10 +1222,20 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         }));
       }
     } else if (ex) {
-      setExerciseSeeds((prev) => ({
-        ...prev,
-        [ex.id]: String((Date.now() + exIndex * 7919) % 100000),
-      }));
+      // CO : nouveau tirage audio principal + nouvelles questions du pool.
+      const next = pickSeededOther(coTrainingPool, ex.id, Date.now() + exIndex * 7919);
+      if (next) {
+        setTrainingExercises((prev) => prev.map((e, i) => (i === exIndex ? next : e)));
+        setExerciseSeeds((prev) => ({
+          ...prev,
+          [next.id]: String((Date.now() + exIndex * 7919) % 100000),
+        }));
+      } else {
+        setExerciseSeeds((prev) => ({
+          ...prev,
+          [ex.id]: String((Date.now() + exIndex * 7919) % 100000),
+        }));
+      }
     }
     setAnswers((prev) => prev.map((a, i) => (i === exIndex ? null : a)));
     setValidated((prev) => prev.map((v, i) => (i === exIndex ? false : v)));
