@@ -12,7 +12,6 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       items: [
         "Les verbes avec un infinitif en {a}-ir{/a} n'ont pas tous la même conjugaison. Il y a quatre modèles de conjugaison.",
       ],
-      noBulletItems: [0],
     },
 
     {
@@ -20,29 +19,66 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       text: "Modèle finir",
     },
     {
-      type: "grid",
-      headers: ["Pronom", "Finir", "Exemple"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "finis", "le petit-déjeuner."],
-        ["Tu", "finis", "le déjeuner."],
-        ["Il / Elle / On", "finit", "le dîner."],
-        ["Nous", "finissons", "le plat."],
-        ["Vous", "finissez", "le fromage."],
-        ["Ils / Elles", "finissent", "le dessert."],
+      type: "plain_list",
+      items: [
+        "Ce verbe a deux radicaux : {a}fini-{/a} au singulier et {a}finiss-{/a} au pluriel.",
+      ],
+    },
+    {
+      type: "verb_toggle",
+      buttonCols: 3,
+      verbs: [
+        {
+          infinitive: "finir", radical: "fini",
+          rows: [
+            { pronoun: "je", ending: "s" },
+            { pronoun: "tu", ending: "s" },
+            { pronoun: "il / elle / on", ending: "t" },
+            { pronoun: "nous", ending: "ons", radical: "finiss" },
+            { pronoun: "vous", ending: "ez", radical: "finiss" },
+            { pronoun: "ils / elles", ending: "ent", radical: "finiss" },
+          ],
+        },
+        {
+          infinitive: "choisir", radical: "choisi",
+          rows: [
+            { pronoun: "je", ending: "s" },
+            { pronoun: "tu", ending: "s" },
+            { pronoun: "il / elle / on", ending: "t" },
+            { pronoun: "nous", ending: "ons", radical: "choisiss" },
+            { pronoun: "vous", ending: "ez", radical: "choisiss" },
+            { pronoun: "ils / elles", ending: "ent", radical: "choisiss" },
+          ],
+        },
+        {
+          infinitive: "réfléchir", radical: "réfléchi",
+          rows: [
+            { pronoun: "je", ending: "s" },
+            { pronoun: "tu", ending: "s" },
+            { pronoun: "il / elle / on", ending: "t" },
+            { pronoun: "nous", ending: "ons", radical: "réfléchiss" },
+            { pronoun: "vous", ending: "ez", radical: "réfléchiss" },
+            { pronoun: "ils / elles", ending: "ent", radical: "réfléchiss" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "heading",
+      text: "Prononciation",
+      accent: true,
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}1.{/a} On ne prononce pas le {a}s{/a} et le {a}t{/a} finaux au singulier (fini{a}s{/a}, fini{a}t{/a}).",
       ],
     },
     {
       type: "plain_list",
       items: [
-        "Ce verbe a deux radicaux : {a}fini-{/a} au singulier et {a}finiss-{/a} au pluriel.",
-        "Même modèle : agir, applaudir, atterrir, choisir, grossir, maigrir, obéir, ralentir, réagir, réfléchir, remplir, (se) réunir, réussir, rougir, vieillir…",
+        "{a}2.{/a} Au pluriel, on prononce le {a}ss{/a} pour distinguer : il finit / ils fini{a}ss{/a}ent.",
       ],
-      allBullets: true,
-    },
-    {
-      type: "note",
-      text: "On ne prononce pas le s et le t finaux au singulier (finis, finit). Au pluriel, on prononce le ss pour distinguer : il finit / ils finissent.",
     },
 
     {
@@ -50,26 +86,49 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       text: "Modèle ouvrir",
     },
     {
-      type: "grid",
-      headers: ["Pronom", "Ouvrir", "Exemple"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "ouvre", "la porte."],
-        ["Tu", "ouvres", "les fenêtres."],
-        ["Il / Elle / On", "ouvre", "l'appartement."],
-        ["Nous", "ouvrons", "le réfrigérateur."],
-        ["Vous", "ouvrez", "le lave-vaisselle."],
-        ["Ils / Elles", "ouvrent", "la machine à laver."],
+      type: "plain_list",
+      items: [
+        "Le radical est le même que l'infinitif ({a}ouvr-{/a}). Les terminaisons sont les mêmes que pour les verbes en {a}-er{/a}.",
       ],
     },
     {
-      type: "plain_list",
-      items: [
-        "Le radical est le même que l'infinitif ({a}ouvr-{/a}).",
-        "Les terminaisons sont les mêmes que pour les verbes en {a}-er{/a} (voir Unité 4).",
-        "Même modèle : découvrir, offrir, souffrir…",
+      type: "verb_toggle",
+      buttonCols: 3,
+      verbs: [
+        {
+          infinitive: "ouvrir", radical: "ouvr",
+          rows: [
+            { pronoun: "j'", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "offrir", radical: "offr",
+          rows: [
+            { pronoun: "j'", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "découvrir", radical: "découvr",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
       ],
-      allBullets: true,
     },
 
     {
@@ -81,30 +140,62 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       items: [
         "Ces verbes ont deux radicaux : au singulier {a}par- / dor- / ser-{/a} ; au pluriel comme l'infinitif {a}part- / dorm- / serv-{/a}.",
       ],
-      allBullets: true,
     },
     {
-      type: "grid",
-      headers: ["Pronom", "Partir", "Dormir", "Servir"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "pars", "dors", "sers"],
-        ["Tu", "pars", "dors", "sers"],
-        ["Il / Elle / On", "part", "dort", "sert"],
-        ["Nous", "partons", "dormons", "servons"],
-        ["Vous", "partez", "dormez", "servez"],
-        ["Ils / Elles", "partent", "dorment", "servent"],
+      type: "verb_toggle",
+      buttonCols: 3,
+      verbs: [
+        {
+          infinitive: "partir", radical: "part",
+          rows: [
+            { pronoun: "je", ending: "s", radical: "par" },
+            { pronoun: "tu", ending: "s", radical: "par" },
+            { pronoun: "il / elle / on", ending: "t", radical: "par" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "dormir", radical: "dorm",
+          rows: [
+            { pronoun: "je", ending: "s", radical: "dor" },
+            { pronoun: "tu", ending: "s", radical: "dor" },
+            { pronoun: "il / elle / on", ending: "t", radical: "dor" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "servir", radical: "serv",
+          rows: [
+            { pronoun: "je", ending: "s", radical: "ser" },
+            { pronoun: "tu", ending: "s", radical: "ser" },
+            { pronoun: "il / elle / on", ending: "t", radical: "ser" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "heading",
+      text: "Prononciation",
+      accent: true,
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}1.{/a} On ne prononce pas le {a}s{/a} et le {a}t{/a} finaux au singulier.",
       ],
     },
     {
       type: "plain_list",
       items: [
-        "Comme partir : sentir, mentir, sortir…",
-        "Comme dormir : s'endormir…",
-        "Comme servir : resservir…",
-        "On ne prononce pas le s et le t finaux au singulier ; on prononce la consonne du 2e radical au pluriel (il part / ils partent).",
+        "{a}2.{/a} On prononce la consonne du 2e radical au pluriel (il part / ils par{a}tent{/a}).",
       ],
-      allBullets: true,
     },
 
     {
@@ -116,54 +207,42 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       items: [
         "Ces verbes ont trois radicaux, avec des prononciations différentes.",
       ],
-      allBullets: true,
-    },
-    {
-      type: "grid",
-      headers: ["Pronom", "Venir", "Tenir"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "viens", "tiens"],
-        ["Tu", "viens", "tiens"],
-        ["Il / Elle / On", "vient", "tient"],
-        ["Nous", "venons", "tenons"],
-        ["Vous", "venez", "tenez"],
-        ["Ils / Elles", "viennent", "tiennent"],
-      ],
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Comme venir : revenir, prévenir, (se) souvenir…",
-        "Comme tenir : obtenir, appartenir, soutenir, retenir…",
-      ],
-      allBullets: true,
-    },
-
-    {
-      type: "heading",
-      text: "Naître",
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Le verbe {a}naître{/a} est irrégulier. Au pluriel, le radical devient {a}naiss-{/a} (proche du modèle finir).",
-      ],
     },
     {
       type: "verb_toggle",
-      buttonCols: 1,
+      buttonCols: 3,
       verbs: [
         {
-          infinitive: "naître",
-          radical: "",
+          infinitive: "venir", radical: "",
           rows: [
-            { pronoun: "je", ending: "nais" },
-            { pronoun: "tu", ending: "nais" },
-            { pronoun: "il / elle / on", ending: "naît" },
-            { pronoun: "nous", ending: "naissons" },
-            { pronoun: "vous", ending: "naissez" },
-            { pronoun: "ils / elles", ending: "naissent" },
+            { pronoun: "je", ending: "viens" },
+            { pronoun: "tu", ending: "viens" },
+            { pronoun: "il / elle / on", ending: "vient" },
+            { pronoun: "nous", ending: "venons" },
+            { pronoun: "vous", ending: "venez" },
+            { pronoun: "ils / elles", ending: "viennent" },
+          ],
+        },
+        {
+          infinitive: "tenir", radical: "",
+          rows: [
+            { pronoun: "je", ending: "tiens" },
+            { pronoun: "tu", ending: "tiens" },
+            { pronoun: "il / elle / on", ending: "tient" },
+            { pronoun: "nous", ending: "tenons" },
+            { pronoun: "vous", ending: "tenez" },
+            { pronoun: "ils / elles", ending: "tiennent" },
+          ],
+        },
+        {
+          infinitive: "obtenir", radical: "",
+          rows: [
+            { pronoun: "j'", ending: "obtiens" },
+            { pronoun: "tu", ending: "obtiens" },
+            { pronoun: "il / elle / on", ending: "obtient" },
+            { pronoun: "nous", ending: "obtenons" },
+            { pronoun: "vous", ending: "obtenez" },
+            { pronoun: "ils / elles", ending: "obtiennent" },
           ],
         },
       ],
