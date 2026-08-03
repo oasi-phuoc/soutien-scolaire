@@ -9,7 +9,7 @@ export const A1_GR_ETRE: GrammarLesson = {
   theory: [
     {
       type: "heading",
-      text: "ÊTRE",
+      text: "Utilisation",
     },
     {
       type: "plain_list",
