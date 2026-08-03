@@ -1,6 +1,84 @@
 import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
 
-const VT_FAIRE: VerbToggleVerb[] = [
+const VT_DRE: VerbToggleVerb[] = [
+  {
+    infinitive: "prendre",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "prends" },
+      { pronoun: "tu", ending: "prends" },
+      { pronoun: "il / elle / on", ending: "prend" },
+      { pronoun: "nous", ending: "prenons" },
+      { pronoun: "vous", ending: "prenez" },
+      { pronoun: "ils / elles", ending: "prennent" },
+    ],
+  },
+  {
+    infinitive: "attendre",
+    radical: "attend",
+    rows: [
+      { pronoun: "j'", ending: "s" },
+      { pronoun: "tu", ending: "s" },
+      { pronoun: "il / elle / on", ending: "" },
+      { pronoun: "nous", ending: "ons" },
+      { pronoun: "vous", ending: "ez" },
+      { pronoun: "ils / elles", ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "vendre",
+    radical: "vend",
+    rows: [
+      { pronoun: "je", ending: "s" },
+      { pronoun: "tu", ending: "s" },
+      { pronoun: "il / elle / on", ending: "" },
+      { pronoun: "nous", ending: "ons" },
+      { pronoun: "vous", ending: "ez" },
+      { pronoun: "ils / elles", ending: "ent" },
+    ],
+  },
+];
+
+const VT_IRE: VerbToggleVerb[] = [
+  {
+    infinitive: "lire",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "lis" },
+      { pronoun: "tu", ending: "lis" },
+      { pronoun: "il / elle / on", ending: "lit" },
+      { pronoun: "nous", ending: "lisons" },
+      { pronoun: "vous", ending: "lisez" },
+      { pronoun: "ils / elles", ending: "lisent" },
+    ],
+  },
+  {
+    infinitive: "écrire",
+    radical: "",
+    rows: [
+      { pronoun: "j'", ending: "écris" },
+      { pronoun: "tu", ending: "écris" },
+      { pronoun: "il / elle / on", ending: "écrit" },
+      { pronoun: "nous", ending: "écrivons" },
+      { pronoun: "vous", ending: "écrivez" },
+      { pronoun: "ils / elles", ending: "écrivent" },
+    ],
+  },
+  {
+    infinitive: "rire",
+    radical: "ri",
+    rows: [
+      { pronoun: "je", ending: "s" },
+      { pronoun: "tu", ending: "s" },
+      { pronoun: "il / elle / on", ending: "t" },
+      { pronoun: "nous", ending: "ons" },
+      { pronoun: "vous", ending: "ez" },
+      { pronoun: "ils / elles", ending: "ent" },
+    ],
+  },
+];
+
+const VT_IRREGULIER: VerbToggleVerb[] = [
   {
     infinitive: "faire",
     radical: "",
@@ -13,19 +91,106 @@ const VT_FAIRE: VerbToggleVerb[] = [
       { pronoun: "ils / elles", ending: "font" },
     ],
   },
-];
-
-const VT_PRENDRE: VerbToggleVerb[] = [
   {
-    infinitive: "prendre",
+    infinitive: "dire",
     radical: "",
     rows: [
-      { pronoun: "je", ending: "prends" },
-      { pronoun: "tu", ending: "prends" },
-      { pronoun: "il / elle / on", ending: "prend" },
-      { pronoun: "nous", ending: "prenons" },
-      { pronoun: "vous", ending: "prenez" },
-      { pronoun: "ils / elles", ending: "prennent" },
+      { pronoun: "je", ending: "dis" },
+      { pronoun: "tu", ending: "dis" },
+      { pronoun: "il / elle / on", ending: "dit" },
+      { pronoun: "nous", ending: "disons" },
+      { pronoun: "vous", ending: "dites" },
+      { pronoun: "ils / elles", ending: "disent" },
+    ],
+  },
+  {
+    infinitive: "mettre",
+    radical: "mett",
+    rows: [
+      { pronoun: "je", ending: "s", radical: "met" },
+      { pronoun: "tu", ending: "s", radical: "met" },
+      { pronoun: "il / elle / on", ending: "", radical: "met" },
+      { pronoun: "nous", ending: "ons" },
+      { pronoun: "vous", ending: "ez" },
+      { pronoun: "ils / elles", ending: "ent" },
+    ],
+  },
+];
+
+const VT_OIR: VerbToggleVerb[] = [
+  {
+    infinitive: "voir",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "vois" },
+      { pronoun: "tu", ending: "vois" },
+      { pronoun: "il / elle / on", ending: "voit" },
+      { pronoun: "nous", ending: "voyons" },
+      { pronoun: "vous", ending: "voyez" },
+      { pronoun: "ils / elles", ending: "voient" },
+    ],
+  },
+  {
+    infinitive: "recevoir",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "reçois" },
+      { pronoun: "tu", ending: "reçois" },
+      { pronoun: "il / elle / on", ending: "reçoit" },
+      { pronoun: "nous", ending: "recevons" },
+      { pronoun: "vous", ending: "recevez" },
+      { pronoun: "ils / elles", ending: "reçoivent" },
+    ],
+  },
+  {
+    infinitive: "boire",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "bois" },
+      { pronoun: "tu", ending: "bois" },
+      { pronoun: "il / elle / on", ending: "boit" },
+      { pronoun: "nous", ending: "buvons" },
+      { pronoun: "vous", ending: "buvez" },
+      { pronoun: "ils / elles", ending: "boivent" },
+    ],
+  },
+];
+
+const VT_INDRE: VerbToggleVerb[] = [
+  {
+    infinitive: "peindre",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "peins" },
+      { pronoun: "tu", ending: "peins" },
+      { pronoun: "il / elle / on", ending: "peint" },
+      { pronoun: "nous", ending: "peignons" },
+      { pronoun: "vous", ending: "peignez" },
+      { pronoun: "ils / elles", ending: "peignent" },
+    ],
+  },
+  {
+    infinitive: "éteindre",
+    radical: "",
+    rows: [
+      { pronoun: "j'", ending: "éteins" },
+      { pronoun: "tu", ending: "éteins" },
+      { pronoun: "il / elle / on", ending: "éteint" },
+      { pronoun: "nous", ending: "éteignons" },
+      { pronoun: "vous", ending: "éteignez" },
+      { pronoun: "ils / elles", ending: "éteignent" },
+    ],
+  },
+  {
+    infinitive: "rejoindre",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "rejoins" },
+      { pronoun: "tu", ending: "rejoins" },
+      { pronoun: "il / elle / on", ending: "rejoint" },
+      { pronoun: "nous", ending: "rejoignons" },
+      { pronoun: "vous", ending: "rejoignez" },
+      { pronoun: "ils / elles", ending: "rejoignent" },
     ],
   },
 ];
@@ -57,33 +222,6 @@ const VT_SAVOIR_CONNAITRE: VerbToggleVerb[] = [
   },
 ];
 
-const VT_CROIRE_BOIRE: VerbToggleVerb[] = [
-  {
-    infinitive: "croire",
-    radical: "",
-    rows: [
-      { pronoun: "je", ending: "crois" },
-      { pronoun: "tu", ending: "crois" },
-      { pronoun: "il / elle / on", ending: "croit" },
-      { pronoun: "nous", ending: "croyons" },
-      { pronoun: "vous", ending: "croyez" },
-      { pronoun: "ils / elles", ending: "croient" },
-    ],
-  },
-  {
-    infinitive: "boire",
-    radical: "",
-    rows: [
-      { pronoun: "je", ending: "bois" },
-      { pronoun: "tu", ending: "bois" },
-      { pronoun: "il / elle / on", ending: "boit" },
-      { pronoun: "nous", ending: "buvons" },
-      { pronoun: "vous", ending: "buvez" },
-      { pronoun: "ils / elles", ending: "boivent" },
-    ],
-  },
-];
-
 /** Unité 9 — Les verbes en -re et en -oir (G1.10) */
 export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
   slug: "a1-gr-verbes-re-oir",
@@ -96,99 +234,41 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       items: [
         "Les verbes avec un infinitif en {a}-re{/a} ou en {a}-oir{/a} ont des conjugaisons très irrégulières. Ils ont un, deux ou trois radicaux. Il y a plusieurs modèles de conjugaison. Les terminaisons sont généralement : {a}s, s, t/d, ons, ez, ent{/a}.",
       ],
-      noBulletItems: [0],
     },
+
     {
       type: "heading",
-      text: "Verbes en -ire : lire, écrire, rire",
+      text: "Verbes en -dre",
     },
-    {
-      type: "grid",
-      headers: ["Pronom", "Lire", "Écrire", "Rire"],
-      boldFirstCol: true,
-      rows: [
-        ["Je / J'", "lis", "écris", "ris"],
-        ["Tu", "lis", "écris", "ris"],
-        ["Il / Elle / On", "lit", "écrit", "rit"],
-        ["Nous", "lisons", "écrivons", "rions"],
-        ["Vous", "lisez", "écrivez", "riez"],
-        ["Ils / Elles", "lisent", "écrivent", "rient"],
-      ],
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Comme lire : conduire, construire, élire, produire, traduire…",
-        "Comme écrire : décrire, inscrire…",
-        "Comme rire : sourire…",
-      ],
-      allBullets: true,
-    },
+    { type: "verb_toggle", buttonCols: 3, verbs: VT_DRE },
+
     {
       type: "heading",
-      text: "Faire, dire et mettre",
+      text: "Verbes en -ire",
     },
-    {
-      type: "grid",
-      headers: ["Pronom", "Faire", "Dire", "Mettre"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "fais", "dis", "mets"],
-        ["Tu", "fais", "dis", "mets"],
-        ["Il / Elle / On", "fait", "dit", "met"],
-        ["Nous", "faisons", "disons", "mettons"],
-        ["Vous", "faites", "dites", "mettez"],
-        ["Ils / Elles", "font", "disent", "mettent"],
-      ],
-    },
-    { type: "verb_toggle", buttonCols: 1, verbs: VT_FAIRE },
-    {
-      type: "note",
-      text: "Attention à la prononciation de faisons. Formes irrégulières : vous faites, vous dites ; ils/elles font.",
-    },
+    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRE },
+
     {
       type: "heading",
-      text: "Verbes en -dre : prendre et attendre",
+      text: "Verbe irrégulier",
     },
+    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRREGULIER },
+
     {
-      type: "grid",
-      headers: ["Pronom", "Prendre", "Attendre"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "prends", "attends"],
-        ["Tu", "prends", "attends"],
-        ["Il / Elle / On", "prend", "attend"],
-        ["Nous", "prenons", "attendons"],
-        ["Vous", "prenez", "attendez"],
-        ["Ils / Elles", "prennent", "attendent"],
-      ],
+      type: "heading",
+      text: "Verbes en -oir",
     },
-    { type: "verb_toggle", buttonCols: 1, verbs: VT_PRENDRE },
+    { type: "verb_toggle", buttonCols: 3, verbs: VT_OIR },
+
     {
-      type: "plain_list",
-      items: [
-        "{a}Prendre{/a}, apprendre et comprendre suivent le même modèle. Au pluriel, le radical devient {a}pren-{/a} ; à la 3e personne du pluriel, le n est doublé : {a}prennent{/a}.",
-        "Comme prendre : apprendre, comprendre…",
-        "Comme attendre : descendre, entendre, perdre, répondre, vendre…",
-      ],
-      allBullets: true,
+      type: "heading",
+      text: "Verbes en -indre",
     },
+    { type: "verb_toggle", buttonCols: 3, verbs: VT_INDRE },
+
     {
       type: "heading",
       text: "Savoir et connaître",
-    },
-    {
-      type: "grid",
-      headers: ["Pronom", "Savoir", "Connaître"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "sais", "connais"],
-        ["Tu", "sais", "connais"],
-        ["Il / Elle / On", "sait", "connaît"],
-        ["Nous", "savons", "connaissons"],
-        ["Vous", "savez", "connaissez"],
-        ["Ils / Elles", "savent", "connaissent"],
-      ],
     },
     { type: "verb_toggle", buttonCols: 2, verbs: VT_SAVOIR_CONNAITRE },
     {
@@ -225,56 +305,6 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         "On ne dit pas {s}je sais Paris{/s} mais {a}je connais Paris{/a}.",
         "On ne dit pas {s}je connais nager{/s} mais {a}je sais nager{/a}.",
       ],
-    },
-    {
-      type: "heading",
-      text: "Voir, recevoir et boire",
-    },
-    {
-      type: "grid",
-      headers: ["Pronom", "Voir", "Recevoir", "Boire"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "vois", "reçois", "bois"],
-        ["Tu", "vois", "reçois", "bois"],
-        ["Il / Elle / On", "voit", "reçoit", "boit"],
-        ["Nous", "voyons", "recevons", "buvons"],
-        ["Vous", "voyez", "recevez", "buvez"],
-        ["Ils / Elles", "voient", "reçoivent", "boivent"],
-      ],
-    },
-    { type: "verb_toggle", buttonCols: 2, verbs: VT_CROIRE_BOIRE },
-    {
-      type: "plain_list",
-      items: [
-        "Comme voir : croire, prévoir, revoir…",
-        "Comme recevoir : apercevoir…",
-      ],
-      allBullets: true,
-    },
-    {
-      type: "heading",
-      text: "Verbes en -indre : peindre",
-    },
-    {
-      type: "grid",
-      headers: ["Pronom", "Peindre"],
-      boldFirstCol: true,
-      rows: [
-        ["Je", "peins"],
-        ["Tu", "peins"],
-        ["Il / Elle / On", "peint"],
-        ["Nous", "peignons"],
-        ["Vous", "peignez"],
-        ["Ils / Elles", "peignent"],
-      ],
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Comme peindre : craindre, éteindre, rejoindre…",
-      ],
-      allBullets: true,
     },
   ],
   exercises: [
