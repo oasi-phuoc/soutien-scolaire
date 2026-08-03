@@ -397,14 +397,21 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
           case "grid": {
             const transH = useTrans ? block.transHeaders?.[pivot as keyof typeof block.transHeaders] : undefined;
             const transR = useTrans ? block.transRows?.[pivot as keyof typeof block.transRows] : undefined;
+            const useFixed = Boolean(block.equalCols || block.colWidths?.length);
             return (
               <div key={i} className="space-y-2">
                 <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
-                  <table className="w-full text-sm" style={block.equalCols ? { tableLayout: "fixed" } : undefined}>
-                    {block.equalCols && (
+                  <table className="w-full text-sm" style={useFixed ? { tableLayout: "fixed" } : undefined}>
+                    {(block.equalCols || block.colWidths?.length) && (
                       <colgroup>
                         {block.headers.map((_, ci) => (
-                          <col key={ci} style={{ width: `${100 / block.headers.length}%` }} />
+                          <col
+                            key={ci}
+                            style={{
+                              width: block.colWidths?.[ci]
+                                ?? (block.equalCols ? `${100 / block.headers.length}%` : undefined),
+                            }}
+                          />
                         ))}
                       </colgroup>
                     )}

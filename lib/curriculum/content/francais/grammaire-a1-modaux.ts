@@ -84,9 +84,10 @@ export const A1_GR_MODAUX: GrammarLesson = {
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      colWidths: ["15.5rem", "auto"],
       rows: [
-        ["Désir :", "Je veux manger une pizza."],
-        ["Volonté :", "Je veux apprendre le français."],
+        ["Désir", "Je {a}veux{/a} manger une pizza."],
+        ["Volonté", "Je {a}veux{/a} apprendre le français."],
       ],
     },
 
@@ -99,11 +100,12 @@ export const A1_GR_MODAUX: GrammarLesson = {
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      colWidths: ["15.5rem", "auto"],
       rows: [
-        ["Capacité :", "Je peux nager."],
-        ["Possibilité :", "Nous pouvons partir maintenant."],
-        ["Autorisation :", "Est-ce que je peux entrer ?"],
-        ["Interdiction :", "Vous ne pouvez pas fumer ici."],
+        ["Capacité", "Je {a}peux{/a} nager."],
+        ["Possibilité", "Nous {a}pouvons{/a} partir maintenant."],
+        ["Autorisation", "Est-ce que je {a}peux{/a} entrer ?"],
+        ["Interdiction", "Vous ne {a}pouvez{/a} pas fumer ici."],
       ],
     },
 
@@ -116,11 +118,12 @@ export const A1_GR_MODAUX: GrammarLesson = {
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      colWidths: ["15.5rem", "auto"],
       rows: [
-        ["Obligation :", "Je dois faire mes devoirs."],
-        ["Nécessité :", "Nous devons partir tôt."],
-        ["Interdiction :", "Tu ne dois pas courir."],
-        ["Somme à payer :", "Je vous dois 20 francs."],
+        ["Obligation", "Je {a}dois{/a} faire mes devoirs."],
+        ["Nécessité", "Nous {a}devons{/a} partir tôt."],
+        ["Interdiction", "Tu ne {a}dois{/a} pas courir."],
+        ["Somme à payer", "Je vous {a}dois{/a} 20 francs."],
       ],
     },
 
@@ -133,9 +136,10 @@ export const A1_GR_MODAUX: GrammarLesson = {
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      colWidths: ["15.5rem", "auto"],
       rows: [
-        ["Nécessité générale :", "Il faut un passeport pour voyager. / Il faut arriver à l'heure."],
-        ["Interdiction :", "Il ne faut pas parler pendant l'examen."],
+        ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."],
+        ["Interdiction", "Il ne {a}faut{/a} pas parler pendant l'examen."],
       ],
     },
 
@@ -148,9 +152,10 @@ export const A1_GR_MODAUX: GrammarLesson = {
     {
       type: "grid",
       headers: ["Emploi", "Exemple"],
+      colWidths: ["15.5rem", "auto"],
       rows: [
-        ["Connaissance :", "Je sais où habite Marie."],
-        ["Compétence / savoir-faire :", "Elle sait cuisiner."],
+        ["Connaissance", "Je {a}sais{/a} où habite Marie."],
+        ["Compétence / savoir-faire", "Elle {a}sait{/a} cuisiner."],
       ],
     },
 
@@ -177,9 +182,13 @@ export const A1_GR_MODAUX: GrammarLesson = {
       type: "plain_list",
       items: [
         "Pour demander quelque chose de façon polie, on utilise souvent {a}Je voudrais{/a} à la place de {a}Je veux{/a}.",
-        "{a}Je voudrais{/a} un ticket de métro, s'il vous plaît.",
       ],
-      allBullets: true,
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["{a}Je voudrais{/a} un ticket de métro, s'il vous plaît."],
+      noBulletItems: [0],
     },
   ],
   exercises: [
