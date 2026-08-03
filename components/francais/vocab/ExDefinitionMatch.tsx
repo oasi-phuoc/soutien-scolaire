@@ -95,55 +95,78 @@ export function ExDefinitionMatch({
       </div>
       <hr className="mt-3 border-[var(--color-border-default)]" />
       <div className="mb-4" />
-      <div
-        className={
-          listClass.startsWith("grid")
-            ? listClass
-            : "inline-grid max-w-full grid-cols-[1.25rem_auto_2.5rem] items-center gap-x-1.5 gap-y-2.5"
-        }
-      >
-        {shownDefs.map((w, idx) => {
-          const s = states[w.word]!;
-          const correctIdx = words.findIndex((p) => p.word === w.word);
-          const letterField =
-            s.checked && !s.correct && revealCorrection ? (
-              <div className="flex h-8 w-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
-                <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
-                <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
-              </div>
-            ) : (
-              <input
-                type="text"
-                inputMode="text"
-                maxLength={1}
-                value={s.answer}
-                onChange={(e) => handleChange(w.word, e.target.value)}
-                readOnly={s.checked}
-                className={LETTER_INPUT_CLS}
-                aria-label={`Lettre pour la définition ${idx + 1}`}
-              />
-            );
-          if (listClass.startsWith("grid")) {
+      {listClass.startsWith("grid") ? (
+        <div className={listClass}>
+          {shownDefs.map((w, idx) => {
+            const s = states[w.word]!;
+            const correctIdx = words.findIndex((p) => p.word === w.word);
             return (
               <div
                 key={w.word}
-                className="grid grid-cols-[1.25rem_minmax(0,1fr)_2.5rem] items-center gap-x-1.5"
+                className="flex items-center gap-x-1.5"
               >
-                <span className="text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
+                <span className="shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
                 <p className="min-w-0 text-sm leading-snug text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
-                {letterField}
+                {s.checked && !s.correct && revealCorrection ? (
+                  <div className="flex h-8 w-10 shrink-0 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    inputMode="text"
+                    maxLength={1}
+                    value={s.answer}
+                    onChange={(e) => handleChange(w.word, e.target.value)}
+                    readOnly={s.checked}
+                    className={`${LETTER_INPUT_CLS} shrink-0`}
+                    aria-label={`Lettre pour la définition ${idx + 1}`}
+                  />
+                )}
               </div>
             );
-          }
-          return (
-            <div key={w.word} className="contents">
-              <span className="text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-              <p className="max-w-[36rem] text-sm leading-snug text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
-              {letterField}
-            </div>
-          );
-        })}
-      </div>
+          })}
+        </div>
+      ) : (
+        <table className="w-auto max-w-full border-collapse">
+          <tbody>
+            {shownDefs.map((w, idx) => {
+              const s = states[w.word]!;
+              const correctIdx = words.findIndex((p) => p.word === w.word);
+              return (
+                <tr key={w.word}>
+                  <td className="whitespace-nowrap py-1 pr-1.5 align-middle text-sm font-bold text-[var(--color-accent-fr)]">
+                    {idx + 1}.
+                  </td>
+                  <td className="py-1 pr-1.5 align-middle text-sm leading-snug text-[var(--color-text-primary)]">
+                    {pickedDefs[w.word]}
+                  </td>
+                  <td className="py-1 align-middle">
+                    {s.checked && !s.correct && revealCorrection ? (
+                      <div className="flex h-8 w-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                        <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
+                      </div>
+                    ) : (
+                      <input
+                        type="text"
+                        inputMode="text"
+                        maxLength={1}
+                        value={s.answer}
+                        onChange={(e) => handleChange(w.word, e.target.value)}
+                        readOnly={s.checked}
+                        className={LETTER_INPUT_CLS}
+                        aria-label={`Lettre pour la définition ${idx + 1}`}
+                      />
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

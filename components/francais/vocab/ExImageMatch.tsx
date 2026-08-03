@@ -15,8 +15,9 @@ const LETTER_INPUT_CLS =
   "bg-transparent px-0 pb-0.5 text-center text-sm outline-none " +
   "transition-colors focus:border-[var(--color-accent-fr)]";
 
+/** Cadre 4:3 — hauteur ≈ 2× l’ancien h-14/h-16 (≈7–8 rem). */
 const IMG_FRAME_CLS =
-  "relative mx-auto aspect-[4/3] w-full max-w-[9.5rem] overflow-hidden rounded border border-[var(--color-border-default)] bg-white sm:max-w-[10.5rem]";
+  "relative mx-auto aspect-[4/3] h-[7rem] w-auto overflow-hidden rounded border border-[var(--color-border-default)] bg-white sm:h-[8rem]";
 
 function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string; placeholder: string }) {
   const [failed, setFailed] = useState(false);
@@ -24,9 +25,9 @@ function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string
     return (
       <div className={IMG_FRAME_CLS}>
         <Image src={src} alt={alt} fill
-          className="object-contain"
+          className="object-contain object-center p-0.5"
           onError={() => setFailed(true)}
-          sizes="(max-width: 640px) 45vw, 168px" />
+          sizes="180px" />
       </div>
     );
   }
