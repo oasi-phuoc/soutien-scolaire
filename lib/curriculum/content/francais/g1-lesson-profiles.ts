@@ -196,7 +196,7 @@ export const G1_3_PROFILE: G1LessonProfile = {
 /** G1.5 — verbes en -er (général) */
 export const G1_5_PROFILE: G1LessonProfile = {
   style: "ending",
-  verbs: [PARLER, HABITER, ECOUTER, REGARDER, TRAVAILLER, AIMER, PENSER, JOUER, MANGER, ETUDIER],
+  verbs: [AIMER, ECOUTER, ETUDIER, HABITER, PARLER, REGARDER, TRAVAILLER, PENSER, JOUER, MANGER],
   tails: TAILS_ER,
   writePrompts: [
     "Manger / une pomme :",
