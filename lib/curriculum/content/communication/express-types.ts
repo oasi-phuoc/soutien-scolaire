@@ -299,7 +299,7 @@ export function listeningPoolExercise(spec: {
     audioLabel: spec.audioLabel,
     transcript: spec.transcript,
     questionPool: spec.questionPool,
-    questionCount: spec.questionCount ?? 5,
+    questionCount: spec.questionCount ?? 3,
   };
 }
 
@@ -345,7 +345,7 @@ export function scoreCommunicationExercise(
     const seed = payload.seed ?? "0";
     const tasks = buildExpressListeningTasks(
       ex.questionPool,
-      ex.questionCount ?? 5,
+      ex.questionCount ?? (ex.audioSrc && !ex.readingText ? 3 : 5),
       `${ex.id}-${seed}`,
     );
     const { correct, total } = scoreExpressListeningTasks(tasks, payload.answers ?? {});

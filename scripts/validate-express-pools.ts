@@ -3,10 +3,10 @@
  * Usage : npx tsx scripts/validate-express-pools.ts [--lesson E5-2]
  *
  * Règles :
- * - pool ≥ 5 questions, textQ uniques
+ * - pool ≥ 3 questions (CO), textQ uniques
  * - ≥ 1 vrai/faux, ≥ 1 saisie (1 mot), QCM image si illustrable
- * - le tirage produit 5 questions : ≥1 QCM texte + ≥1 saisie,
- *   ≤1 image, ≤1 VF ; formats aussi distincts que possible
+ * - le tirage CO produit 3 questions : ≥1 QCM texte + ≥1 saisie,
+ *   ≤1 image, ≤1 VF ; formats distincts autant que possible
  */
 import { EXPRESS_ORAL_BY_ID } from "../lib/curriculum/content/communication/express-index";
 import {
@@ -107,7 +107,7 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
     const ctx = `${lessonId}/${ex.id}`;
     const pool = ex.questionPool;
 
-    if (pool.length < 4) err(ctx, `pool trop petit (${pool.length} < 4)`);
+    if (pool.length < 3) err(ctx, `pool trop petit (${pool.length} < 3)`);
 
     const seen = new Map<string, string>();
     for (const q of pool) {
@@ -155,7 +155,8 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
     if (imageable === 0) warn(ctx, "aucune question illustrable (QCM image)");
 
     // Composition du tirage
-    const tasks = buildExpressListeningTasks(pool, ex.questionCount ?? 5, "validate-seed");
+    const defaultCount = ex.audioSrc && !ex.readingText ? 3 : 5;
+    const tasks = buildExpressListeningTasks(pool, ex.questionCount ?? defaultCount, "validate-seed");
     const stats = { text: 0, image: 0, vf: 0, fill: 0 };
     for (const t of tasks) {
       if (t.kind === "fill") stats.fill++;
@@ -175,17 +176,23 @@ for (const [lessonId, lesson] of Object.entries(EXPRESS_ORAL_BY_ID)) {
       }
       else stats.text++;
     }
-    const expectTotal = Math.min(ex.questionCount ?? 5, pool.length);
-    if (pool.length >= 5 && tasks.length !== expectTotal) {
+    const expectTotal = Math.min(ex.questionCount ?? defaultCount, pool.length);
+    if (pool.length >= expectTotal && tasks.length !== expectTotal) {
       err(ctx, `tirage ${tasks.length} tâches (attendu ${expectTotal}) — ${JSON.stringify(stats)}`);
     }
-    if (pool.length >= 5) {
+    if (pool.length >= expectTotal) {
       if (stats.text < 1) err(ctx, `tirage : ${stats.text} QCM texte (attendu ≥1) — ${JSON.stringify(stats)}`);
       if (stats.fill !== 1) err(ctx, `tirage : ${stats.fill} saisie (attendu 1)`);
       if (stats.vf > 1) err(ctx, `tirage : ${stats.vf} vrai/faux (attendu ≤1)`);
       if (stats.image > 1) err(ctx, `tirage : ${stats.image} QCM image (attendu ≤1)`);
-      if (vfCount > 0 && stats.vf !== 1) err(ctx, `tirage : ${stats.vf} vrai/faux (attendu 1 car pool VF dispo)`);
-      // Le QCM texte est le seul format répétable pour atteindre 5.
+      if (vfCount > 0 && expectTotal >= 3 && stats.vf !== 1) {
+        // Pour 3 questions : fill+text+vf (ou image) — VF attendu si présent et pas d'image prise
+        // Si image a été prise à la place du VF, OK
+        if (stats.vf === 0 && stats.image === 0) {
+          err(ctx, `tirage : ${stats.vf} vrai/faux (attendu 1 car pool VF dispo)`);
+        }
+      }
+      // Le QCM texte est le seul format répétable pour atteindre la cible.
       const otherUnique =
         (stats.image > 0 ? 1 : 0) + (stats.vf > 0 ? 1 : 0) + (stats.fill > 0 ? 1 : 0);
       const maxText = Math.max(1, expectTotal - otherUnique);

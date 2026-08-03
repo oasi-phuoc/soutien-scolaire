@@ -89,7 +89,7 @@ export function buildListeningAudio(spec: {
     transcript: formatDialogueTranscript(spec.transcript),
     instruction: spec.instruction ?? "Écoutez l'enregistrement et répondez aux questions.",
     pool: buildExpressPool(spec.id, spec.questions.map(fixedQ)),
-    questionCount: spec.questionCount ?? 5,
+    questionCount: spec.questionCount ?? 3,
   };
 }
 

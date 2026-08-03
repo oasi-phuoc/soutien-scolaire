@@ -82,7 +82,7 @@ function exerciseResultStats(
     const seed = payload.seed ?? fallbackSeed;
     const tasks = buildExpressListeningTasks(
       ex.questionPool,
-      ex.questionCount ?? 5,
+      ex.questionCount ?? (ex.audioSrc && !ex.readingText ? 3 : 5),
       `${ex.id}-${seed}`,
     );
     const { correct, total } = scoreExpressListeningTasks(tasks, payload.answers ?? {});

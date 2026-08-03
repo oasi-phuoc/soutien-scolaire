@@ -197,11 +197,10 @@ function hasFillData(q: ExpressMultiQuestion): boolean {
 /**
  * Tire des questions UNIQUES du pool (jamais le même fait sous deux formats).
  *
- * Composition (cible = `count`, défaut 5) :
+ * Composition (cible = `count`, défaut CO = 3) :
  * - toujours ≥ 1 QCM texte + ≥ 1 texte à saisir
  * - au plus 1 image, 1 vrai/faux, 1 saisie
- * - formats aussi distincts que possible ; un 2ᵉ QCM texte est autorisé
- *   uniquement pour atteindre 5 questions (4 formats max)
+ * - formats distincts autant que possible (3 formats pour 3 questions)
  */
 export function buildExpressListeningTasks(
   pool: ExpressMultiQuestion[],
@@ -241,9 +240,9 @@ export function buildExpressListeningTasks(
   takeFirst(hasFillData, "fill");
   takeFirst((q) => !isVfStyleText(q), "text");
 
-  // Formats complémentaires uniques
-  takeFirst(canUseImageFormat, "image");
-  takeFirst(hasVfData, "vf");
+  // 3ᵉ format unique : image prioritaire, sinon vrai/faux
+  if (picks.length < target) takeFirst(canUseImageFormat, "image");
+  if (picks.length < target) takeFirst(hasVfData, "vf");
 
   // Compléter jusqu'à `target` avec d'autres QCM texte (seul format répétable)
   while (picks.length < target) {
@@ -254,14 +253,6 @@ export function buildExpressListeningTasks(
   while (picks.length < target) {
     const ok = takeFirst(() => true, "text", true);
     if (!ok) break;
-  }
-
-  // Si la saisie manquait et qu'il reste de la place, tenter encore (pools incomplets)
-  if (!usedFormats.has("fill") && picks.length < target) {
-    takeFirst(hasFillData, "fill");
-  }
-  if (!usedFormats.has("text") && picks.length < target) {
-    takeFirst((q) => !isVfStyleText(q), "text");
   }
 
   const ordered = seededShuffle(picks, `${seed}-order`);

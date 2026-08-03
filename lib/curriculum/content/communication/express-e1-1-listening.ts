@@ -529,7 +529,7 @@ export const E1_1_LISTENING_AUDIOS: ExpressListeningAudio[] = [
     transcript: TRANSCRIPT_005,
     instruction: "Écoutez l'enregistrement et répondez aux questions.",
     pool: POOL_005,
-    questionCount: 5,
+    questionCount: 3,
   },
   {
     id: "e1-1-011",
@@ -538,7 +538,7 @@ export const E1_1_LISTENING_AUDIOS: ExpressListeningAudio[] = [
     transcript: TRANSCRIPT_011,
     instruction: "Écoutez l'enregistrement et répondez aux questions.",
     pool: POOL_011,
-    questionCount: 5,
+    questionCount: 3,
   },
   {
     id: "e1-1-012",
@@ -547,7 +547,7 @@ export const E1_1_LISTENING_AUDIOS: ExpressListeningAudio[] = [
     transcript: TRANSCRIPT_012,
     instruction: "Écoutez l'enregistrement et répondez aux questions.",
     pool: POOL_012,
-    questionCount: 5,
+    questionCount: 3,
   },
   {
     id: "e1-1-013",
@@ -556,7 +556,7 @@ export const E1_1_LISTENING_AUDIOS: ExpressListeningAudio[] = [
     transcript: TRANSCRIPT_013,
     instruction: "Écoutez l'enregistrement et répondez aux questions.",
     pool: POOL_013,
-    questionCount: 5,
+    questionCount: 3,
   },
 ];
 
@@ -568,7 +568,7 @@ export const E1_1_EVAL_AUDIOS: ExpressListeningAudio[] = [
     transcript: TRANSCRIPT_014,
     instruction: "Écoutez l'enregistrement et répondez aux questions.",
     pool: POOL_014,
-    questionCount: 5,
+    questionCount: 3,
   },
   {
     id: "e1-1-015",
@@ -577,6 +577,6 @@ export const E1_1_EVAL_AUDIOS: ExpressListeningAudio[] = [
     transcript: TRANSCRIPT_015,
     instruction: "Écoutez l'enregistrement et répondez aux questions.",
     pool: POOL_015,
-    questionCount: 5,
+    questionCount: 3,
   },
 ];

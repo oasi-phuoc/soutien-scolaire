@@ -220,7 +220,7 @@ export function ExpressListeningExercise({
     if (exercise.questionPool?.length) {
       return buildExpressListeningTasks(
         exercise.questionPool,
-        exercise.questionCount ?? 5,
+        exercise.questionCount ?? (exercise.audioSrc && !exercise.readingText ? 3 : 5),
         `${exercise.id}-${drawSeed}`,
       );
     }

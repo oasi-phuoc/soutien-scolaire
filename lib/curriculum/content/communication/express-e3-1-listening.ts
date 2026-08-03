@@ -480,7 +480,7 @@ export const E3_1_TRAINING: ExpressListeningAudio[] = [
   transcript: TR_072,
   instruction: "Écoutez l'enregistrement et répondez aux questions.",
   pool: POOL_072,
-  questionCount: 5,
+  questionCount: 3,
 },
 {
   id: "e3-1-078",
@@ -489,7 +489,7 @@ export const E3_1_TRAINING: ExpressListeningAudio[] = [
   transcript: TR_078,
   instruction: "Écoutez l'enregistrement et répondez aux questions.",
   pool: POOL_078,
-  questionCount: 5,
+  questionCount: 3,
 },
 {
   id: "e3-1-079",
@@ -498,7 +498,7 @@ export const E3_1_TRAINING: ExpressListeningAudio[] = [
   transcript: TR_079,
   instruction: "Écoutez l'enregistrement et répondez aux questions.",
   pool: POOL_079,
-  questionCount: 5,
+  questionCount: 3,
 },
 {
   id: "e3-1-080",
@@ -507,7 +507,7 @@ export const E3_1_TRAINING: ExpressListeningAudio[] = [
   transcript: TR_080,
   instruction: "Écoutez l'enregistrement et répondez aux questions.",
   pool: POOL_080,
-  questionCount: 5,
+  questionCount: 3,
 }
 ];
 
@@ -519,7 +519,7 @@ export const E3_1_EVAL: ExpressListeningAudio[] = [
   transcript: TR_081,
   instruction: "Écoutez l'enregistrement et répondez aux questions.",
   pool: POOL_081,
-  questionCount: 5,
+  questionCount: 3,
 },
 {
   id: "e3-1-082",
@@ -528,6 +528,6 @@ export const E3_1_EVAL: ExpressListeningAudio[] = [
   transcript: TR_082,
   instruction: "Écoutez l'enregistrement et répondez aux questions.",
   pool: POOL_082,
-  questionCount: 5,
+  questionCount: 3,
 }
 ];

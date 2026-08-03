@@ -293,7 +293,7 @@ export const E1_2_TRAINING = [
         vfC: 0,
       }),
     ]),
-    questionCount: 5,
+    questionCount: 3,
   },
 ];
 
