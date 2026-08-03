@@ -9,7 +9,7 @@ import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutCo
 const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 const LETTER_INPUT_CLS =
-  "h-8 w-10 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 " +
+  "h-8 w-12 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)] " +
   "bg-transparent px-0 pb-0.5 text-center text-sm outline-none " +
   "transition-colors focus:border-[var(--color-accent-fr)]";
 
@@ -95,78 +95,58 @@ export function ExDefinitionMatch({
       </div>
       <hr className="mt-3 border-[var(--color-border-default)]" />
       <div className="mb-4" />
-      {listClass.startsWith("grid") ? (
-        <div className={listClass}>
-          {shownDefs.map((w, idx) => {
-            const s = states[w.word]!;
-            const correctIdx = words.findIndex((p) => p.word === w.word);
-            return (
+      <div
+        className={
+          listClass.startsWith("grid")
+            ? listClass
+            : "grid w-max max-w-full grid-cols-[auto_auto_3rem] items-center gap-x-1.5 gap-y-2.5"
+        }
+      >
+        {shownDefs.map((w, idx) => {
+          const s = states[w.word]!;
+          const correctIdx = words.findIndex((p) => p.word === w.word);
+          const letterField =
+            s.checked && !s.correct && revealCorrection ? (
               <div
-                key={w.word}
-                className="flex items-center gap-x-1.5"
+                key={`ans-${w.word}`}
+                className="flex h-8 w-12 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500"
               >
+                <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
+              </div>
+            ) : (
+              <input
+                key={`ans-${w.word}`}
+                type="text"
+                inputMode="text"
+                maxLength={1}
+                value={s.answer}
+                onChange={(e) => handleChange(w.word, e.target.value)}
+                readOnly={s.checked}
+                className={LETTER_INPUT_CLS}
+                aria-label={`Lettre pour la définition ${idx + 1}`}
+              />
+            );
+          if (listClass.startsWith("grid")) {
+            return (
+              <div key={w.word} className="flex items-center gap-x-1.5">
                 <span className="shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
                 <p className="min-w-0 text-sm leading-snug text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
-                {s.checked && !s.correct && revealCorrection ? (
-                  <div className="flex h-8 w-10 shrink-0 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
-                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
-                    <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
-                  </div>
-                ) : (
-                  <input
-                    type="text"
-                    inputMode="text"
-                    maxLength={1}
-                    value={s.answer}
-                    onChange={(e) => handleChange(w.word, e.target.value)}
-                    readOnly={s.checked}
-                    className={`${LETTER_INPUT_CLS} shrink-0`}
-                    aria-label={`Lettre pour la définition ${idx + 1}`}
-                  />
-                )}
+                {letterField}
               </div>
             );
-          })}
-        </div>
-      ) : (
-        <table className="w-auto max-w-full border-collapse">
-          <tbody>
-            {shownDefs.map((w, idx) => {
-              const s = states[w.word]!;
-              const correctIdx = words.findIndex((p) => p.word === w.word);
-              return (
-                <tr key={w.word}>
-                  <td className="whitespace-nowrap py-1 pr-1.5 align-middle text-sm font-bold text-[var(--color-accent-fr)]">
-                    {idx + 1}.
-                  </td>
-                  <td className="py-1 pr-1.5 align-middle text-sm leading-snug text-[var(--color-text-primary)]">
-                    {pickedDefs[w.word]}
-                  </td>
-                  <td className="py-1 align-middle">
-                    {s.checked && !s.correct && revealCorrection ? (
-                      <div className="flex h-8 w-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
-                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
-                        <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
-                      </div>
-                    ) : (
-                      <input
-                        type="text"
-                        inputMode="text"
-                        maxLength={1}
-                        value={s.answer}
-                        onChange={(e) => handleChange(w.word, e.target.value)}
-                        readOnly={s.checked}
-                        className={LETTER_INPUT_CLS}
-                        aria-label={`Lettre pour la définition ${idx + 1}`}
-                      />
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+          }
+          return [
+            <span key={`n-${w.word}`} className="text-sm font-bold text-[var(--color-accent-fr)]">
+              {idx + 1}.
+            </span>,
+            <span key={`d-${w.word}`} className="text-sm leading-snug text-[var(--color-text-primary)]">
+              {pickedDefs[w.word]}
+            </span>,
+            letterField,
+          ];
+        })}
+      </div>
     </div>
   );
 }
