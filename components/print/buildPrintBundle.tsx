@@ -117,11 +117,16 @@ function buildMathBundle(submoduleId: string): PrintBundle | null {
   };
 }
 
-function vocabTrainingSteps(theme: VocabTheme): { key: string; label: string; defaultQuestionCount: number }[] {
+function vocabTrainingSteps(theme: VocabTheme): {
+  key: string;
+  label: string;
+  defaultQuestionCount: number;
+  defaultSpacing?: number;
+}[] {
   const hasMF = theme.words.filter((w) => !!w.feminine).length >= 5;
   const n = (base: number) => (hasMF ? base + 1 : base);
   return [
-    { key: "ex1-image-match", label: "Ex. 1", defaultQuestionCount: 6 },
+    { key: "ex1-image-match", label: "Ex. 1", defaultQuestionCount: 6, defaultSpacing: 5 },
     { key: "ex2-article", label: "Ex. 2", defaultQuestionCount: 6 },
     { key: "ex4-missing-letters", label: "Ex. 3", defaultQuestionCount: 5 },
     { key: "ex3-anagram", label: "Ex. 4", defaultQuestionCount: 5 },
@@ -129,10 +134,10 @@ function vocabTrainingSteps(theme: VocabTheme): { key: string; label: string; de
     { key: "ex6-fill-sentences", label: "Ex. 6", defaultQuestionCount: 5 },
     ...(hasMF ? [{ key: "ex-masc-fem", label: "Ex. 7", defaultQuestionCount: 6 }] : []),
     { key: "ex7-image-write", label: `Ex. ${n(7)}`, defaultQuestionCount: 5 },
-    { key: "ex8-dictation", label: `Ex. ${n(8)}`, defaultQuestionCount: 6 },
+    { key: "ex8-dictation", label: `Ex. ${n(8)}`, defaultQuestionCount: 6, defaultSpacing: 5 },
     { key: "ex-word-order", label: `Ex. ${n(9)}`, defaultQuestionCount: 5 },
-    { key: "ex9-sentence-write", label: `Ex. ${n(10)}`, defaultQuestionCount: 5 },
-    { key: "ex10-question-write", label: `Ex. ${n(11)}`, defaultQuestionCount: 5 },
+    { key: "ex9-sentence-write", label: `Ex. ${n(10)}`, defaultQuestionCount: 5, defaultSpacing: 5 },
+    { key: "ex10-question-write", label: `Ex. ${n(11)}`, defaultQuestionCount: 5, defaultSpacing: 5 },
   ];
 }
 
@@ -222,6 +227,7 @@ function buildVocabBundle(slug: string): PrintBundle | null {
         supportsPrintLayout: true,
         defaultQuestionCount: step.defaultQuestionCount,
         defaultColumns: 1 as const,
+        defaultSpacing: step.defaultSpacing,
         preview: (
           <PlacementPrintSeedRoot seed={seed}>
             {vocabExPreview(step.key, theme, 0)}

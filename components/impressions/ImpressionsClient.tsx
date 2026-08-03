@@ -277,7 +277,7 @@ export function ImpressionsClient() {
         occurrences: 1,
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 8),
         columns: ex.defaultColumns ?? 1,
-        spacing: 3,
+        spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? 3)),
         pageBreak: Boolean(ex.forceNewPage),
         points: ex.defaultPoints ?? 1,
       })),

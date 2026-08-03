@@ -95,33 +95,51 @@ export function ExDefinitionMatch({
       </div>
       <hr className="mt-3 border-[var(--color-border-default)]" />
       <div className="mb-4" />
-      <div className={listClass}>
+      <div
+        className={
+          listClass.startsWith("grid")
+            ? listClass
+            : "inline-grid max-w-full grid-cols-[1.25rem_auto_2.5rem] items-center gap-x-1.5 gap-y-2.5"
+        }
+      >
         {shownDefs.map((w, idx) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
-          return (
-            <div key={w.word} className="flex items-center gap-2">
-              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-              <p className="min-w-0 flex-1 text-sm text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
-              <div className="shrink-0">
-                {s.checked && !s.correct && revealCorrection ? (
-                  <div className="flex h-8 w-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
-                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
-                    <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
-                  </div>
-                ) : (
-                  <input
-                    type="text"
-                    inputMode="text"
-                    maxLength={1}
-                    value={s.answer}
-                    onChange={(e) => handleChange(w.word, e.target.value)}
-                    readOnly={s.checked}
-                    className={LETTER_INPUT_CLS}
-                    aria-label={`Lettre pour la définition ${idx + 1}`}
-                  />
-                )}
+          const letterField =
+            s.checked && !s.correct && revealCorrection ? (
+              <div className="flex h-8 w-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
               </div>
+            ) : (
+              <input
+                type="text"
+                inputMode="text"
+                maxLength={1}
+                value={s.answer}
+                onChange={(e) => handleChange(w.word, e.target.value)}
+                readOnly={s.checked}
+                className={LETTER_INPUT_CLS}
+                aria-label={`Lettre pour la définition ${idx + 1}`}
+              />
+            );
+          if (listClass.startsWith("grid")) {
+            return (
+              <div
+                key={w.word}
+                className="grid grid-cols-[1.25rem_minmax(0,1fr)_2.5rem] items-center gap-x-1.5"
+              >
+                <span className="text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
+                <p className="min-w-0 text-sm leading-snug text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
+                {letterField}
+              </div>
+            );
+          }
+          return (
+            <div key={w.word} className="contents">
+              <span className="text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
+              <p className="max-w-[36rem] text-sm leading-snug text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
+              {letterField}
             </div>
           );
         })}

@@ -7,7 +7,7 @@ import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 const WORD_INPUT_CLS =
-  "mx-1 inline-block h-8 w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 " +
+  "mx-1 inline-block h-8 w-[10.5rem] rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 " +
   "bg-transparent px-0 pb-0.5 text-center text-sm outline-none " +
   "transition-colors focus:border-[var(--color-accent-fr)]";
 
@@ -119,7 +119,7 @@ export function ExFillSentences({
               <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <span className="text-[var(--color-text-primary)]">{before}</span>
               {s.checked && !s.correct && revealCorrection ? (
-                <span className="mx-1 inline-flex h-8 w-28 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 align-middle">
+                <span className="mx-1 inline-flex h-8 w-[10.5rem] flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 align-middle">
                   <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
                   <span className="text-xs font-bold leading-none text-amber-600">{sent.answer}</span>
                 </span>

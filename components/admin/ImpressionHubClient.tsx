@@ -304,7 +304,7 @@ export function ImpressionHubClient() {
         occurrences: 1,
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
         columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
-        spacing: 3,
+        spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? 3)),
         pageBreak: Boolean(ex.forceNewPage),
         points: Math.max(1, ex.defaultPoints ?? 1),
       })),

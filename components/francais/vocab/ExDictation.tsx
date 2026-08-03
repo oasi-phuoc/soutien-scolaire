@@ -46,7 +46,7 @@ export function ExDictation({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écoutez et écrivez le mot.
       </p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-x-3 gap-y-6">
         {words.map((w) => {
           const s = states[w.word]!;
           return (

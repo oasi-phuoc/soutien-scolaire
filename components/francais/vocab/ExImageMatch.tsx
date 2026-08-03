@@ -15,20 +15,23 @@ const LETTER_INPUT_CLS =
   "bg-transparent px-0 pb-0.5 text-center text-sm outline-none " +
   "transition-colors focus:border-[var(--color-accent-fr)]";
 
+const IMG_FRAME_CLS =
+  "relative mx-auto aspect-[4/3] w-full max-w-[9.5rem] overflow-hidden rounded border border-[var(--color-border-default)] bg-white sm:max-w-[10.5rem]";
+
 function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string; placeholder: string }) {
   const [failed, setFailed] = useState(false);
   if (src && !failed) {
     return (
-      <div className="relative h-14 w-full overflow-hidden rounded border border-[var(--color-border-default)] bg-white sm:h-16">
+      <div className={IMG_FRAME_CLS}>
         <Image src={src} alt={alt} fill
-          className="object-cover"
+          className="object-contain"
           onError={() => setFailed(true)}
-          sizes="(max-width: 640px) 40vw, 90px" />
+          sizes="(max-width: 640px) 45vw, 168px" />
       </div>
     );
   }
   return (
-    <div className="flex h-14 w-full items-center justify-center rounded border border-[var(--color-border-default)] bg-white text-center text-[10px] text-[var(--color-text-tertiary)] sm:h-16">
+    <div className={`flex items-center justify-center text-center text-[10px] text-[var(--color-text-tertiary)] ${IMG_FRAME_CLS}`}>
       {placeholder}
     </div>
   );
@@ -104,15 +107,15 @@ export function ExImageMatch({
           </div>
         ))}
       </div>
-      {/* Image cards — 4 compact cards */}
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      {/* Image cards — grille 2×2, cadre 4:3, image entière */}
+      <div className="grid grid-cols-2 gap-x-6 gap-y-8">
         {shownCards.map((w, cardIdx) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
           return (
             <div
               key={w.word}
-              className="flex flex-col items-center gap-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1"
+              className="flex flex-col items-center gap-2"
             >
               <ImgOrPlaceholder
                 src={resolveImg(w.image)}

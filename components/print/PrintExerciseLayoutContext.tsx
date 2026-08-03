@@ -40,14 +40,25 @@ export function usePrintColumns(): PrintExerciseColumns {
   return cols === 2 || cols === 3 ? cols : 1;
 }
 
+/** True lorsque le composant est rendu dans un aperçu / document d'impression. */
+export function useIsPrintLayout(): boolean {
+  return useContext(PrintExerciseLayoutContext) !== null;
+}
+
 /** Convenience: count + columns + list class for print-aware exercise UIs. */
 export function usePrintQuestionLayout(fallbackCount: number) {
-  const questionCount = usePrintQuestionCount(fallbackCount);
-  const columns = usePrintColumns();
+  const ctx = useContext(PrintExerciseLayoutContext);
+  const questionCount = ctx
+    ? Math.max(1, Math.min(30, ctx.questionCount))
+    : fallbackCount;
+  const rawCols = ctx?.columns ?? 1;
+  const columns: PrintExerciseColumns =
+    rawCols === 2 || rawCols === 3 ? rawCols : 1;
   return {
     questionCount,
     columns,
     listClass: printQuestionsListClass(columns),
+    isPrint: ctx !== null,
   };
 }
 

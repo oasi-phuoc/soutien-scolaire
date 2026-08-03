@@ -73,7 +73,7 @@ function checkBasic(answer: string, word: string): string[] {
 export function ExSentenceWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
-  const { questionCount, listClass } = usePrintQuestionLayout(isEval ? 2 : 4);
+  const { questionCount, listClass, isPrint } = usePrintQuestionLayout(isEval ? 2 : 4);
   const [prompts] = useState<PromptWord[]>(() => buildPool(theme, questionCount));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
@@ -166,7 +166,12 @@ export function ExSentenceWrite({
                 <span className="shrink-0 font-semibold text-[var(--color-text-primary)]">{promptLabel}</span>
                 <span className="shrink-0 text-[var(--color-text-secondary)]">:</span>
               </div>
-              {isCheckedDone && hasErrors && revealCorrection ? (
+              {isPrint ? (
+                <div className="mt-1 space-y-2">
+                  <div className="h-7 border-b-2 border-[var(--color-accent-fr)]/50" />
+                  <div className="h-7 border-b-2 border-[var(--color-accent-fr)]/50" />
+                </div>
+              ) : isCheckedDone && hasErrors && revealCorrection ? (
                 <div className="border-b border-amber-400 py-1 text-center">
                   <p className="text-sm text-amber-600 line-through">{s.answer || "—"}</p>
                   <ul className="mt-0.5 space-y-0.5">

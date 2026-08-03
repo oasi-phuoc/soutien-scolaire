@@ -82,6 +82,8 @@ export interface PrintExercise {
   defaultQuestionCount?: number;
   /** Colonnes par défaut (mise en page actuelle de l'exercice). */
   defaultColumns?: PrintExerciseColumns;
+  /** Espacement vertical par défaut (1–5, défaut global = 3). */
+  defaultSpacing?: number;
   /** Active les options de mise en page (questions / colonnes) pour cet exercice. */
   supportsPrintLayout?: boolean;
 }
@@ -723,7 +725,7 @@ export function PrintConfigSheet({
       occurrences: 1,
       questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
       columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
-      spacing: 3,
+      spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? PRINT_SPACING_DEFAULT)),
       pageBreak: Boolean(ex.forceNewPage),
       points: Math.max(1, ex.defaultPoints ?? 1),
     }))
