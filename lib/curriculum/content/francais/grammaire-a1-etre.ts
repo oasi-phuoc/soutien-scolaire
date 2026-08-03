@@ -58,11 +58,23 @@ export const A1_GR_ETRE: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: [
-        "On ne prononce pas le {a}e{/a} final de {a}elle{/a}. → Elle est…",
-        "On fait la liaison. → O{li}n|e{/li}st, vou{li}s|ê{/li}tes.",
-      ],
-      allBullets: true,
+      items: ["On ne prononce pas le {a}e{/a} final de {a}elle{/a}."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Elle est…"],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["On fait la liaison."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["O{li}n|e{/li}st, vou{li}s|ê{/li}tes."],
+      noBulletItems: [0],
     },
   ],
   exercises: [
