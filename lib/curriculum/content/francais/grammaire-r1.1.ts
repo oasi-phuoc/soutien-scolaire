@@ -22,8 +22,8 @@ export const A1_GR_L01: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "Ali parle.",
-        "Ali habite en Suisse.",
+        "Ali parle français.",
+        "{a}Il{/a} habite en Suisse.",
       ],
       noBulletItems: [0, 1],
     },
@@ -47,44 +47,62 @@ export const A1_GR_L01: GrammarLesson = {
       text: "Cas spéciaux",
     },
     {
+      type: "plain_list",
+      items: [
+        "On utilise « {a}on{/a} » pour représenter plusieurs personnes (= nous). Il est très utilisé à l'oral familier. Le verbe est toujours au singulier.",
+      ],
+    },
+    {
       type: "highlight",
       label: "ON",
-      noBulletItems: [0, 1, 2],
+      noBulletItems: [0, 1],
       inlineArrows: true,
       items: [
-        "On utilise « on » pour représenter plusieurs personnes (= {a}nous{/a}). Il est très utilisé à l'{a}oral familier{/a}. Le verbe est {a}toujours au singulier{/a}.",
-        "On va au magasin. → Nous allons au magasin.",
-        "En Suisse, on parle français. → Les gens parlent français.",
+        "{a}On{/a} va au magasin. → {a}Nous{/a} allons au magasin.",
+        "En Suisse, {a}on{/a} parle français. → {a}Les gens{/a} parlent français.",
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",
       ],
     },
     {
       type: "highlight",
       label: "TU",
-      noBulletItems: [0, 1],
+      noBulletItems: [0],
       items: [
-        "On utilise « tu » pour parler à une personne qu'on connaît, dans une situation familière.",
-        "{a}Tu{/a} ({a}un ami{/a}) es fatiguée ?",
+        "{a}Tu{/a} (= un ami) es fatiguée ?",
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "On utilise « {a}vous{/a} » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur). On appelle cela la forme de politesse.",
       ],
     },
     {
       type: "highlight",
       label: "VOUS",
-      noBulletItems: [0, 1, 2],
+      noBulletItems: [0],
       items: [
-        "On utilise « vous » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur).",
-        "On appelle cela la forme de politesse.",
-        "Madame, vous allez bien ?",
+        "Madame, {a}vous{/a} allez bien ?",
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "On utilise « {a}ils{/a} » quand il y a un groupe mixte de femmes et d'hommes. Même s'il y a beaucoup de femmes et un seul homme.",
       ],
     },
     {
       type: "highlight",
       label: "ILS",
-      noBulletItems: [0, 1, 2],
+      noBulletItems: [0],
       inlineArrows: true,
       items: [
-        "On utilise « ils » quand il y a un groupe mixte de femmes et d'hommes.",
-        "Même s'il y a beaucoup de femmes et un seul homme.",
-        "Ali ♂ et Alona ♀ → ils",
+        "Ali ♂ et Alona ♀ vont au cinéma → {a}Ils{/a} vont au cinéma.",
       ],
     },
     {
