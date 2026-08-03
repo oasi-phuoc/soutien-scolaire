@@ -165,7 +165,8 @@ function buildItemsFromGabarit(
 
   const conjSubj = subjectOf(idx, full);
   const conjQcm: QcmItem = {
-    sentence: `${conjSubj.display}${conjSubj.sep}___ (${v.infinitive})${tail}`,
+    // Pas de ___ : le choix se fait via les boutons (indice verbe entre parenthèses).
+    sentence: `${conjSubj.display}${conjSubj.sep || " "}(${v.infinitive})${tail}`,
     choices: pickChoices(full, [
       conjugatedAnswer(v, (idx + 1) % 8),
       conjugatedAnswer(v, (idx + 4) % 8),
@@ -240,7 +241,8 @@ function buildProgressifPools(profile: G1LessonProfile): {
         gabaritId: gid,
       });
       conjQcm.push({
-        sentence: `${subj.display}${subj.sep}___ (${inf})${tail}`,
+        // Pas de ___ : choix via boutons (infinitif entre parenthèses).
+        sentence: `${subj.display}${subj.sep || " "}(${inf})${tail}`,
         choices: pickChoices(answerProg, [
           `${etreForms[(idx + 1) % 8]} en train ${de}${inf}`,
           `${etreForms[(idx + 4) % 8]} en train ${de}${inf}`,
@@ -400,6 +402,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: pools.conjFill,
       poolSize: G1_SESSION_SIZE,
+      inputWidth: "w-[10.5rem]",
     },
     {
       type: "fill",
@@ -408,6 +411,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: pools.plural,
       poolSize: G1_SESSION_SIZE,
+      inputWidth: "w-[10.5rem]",
     },
     {
       type: "qcm",

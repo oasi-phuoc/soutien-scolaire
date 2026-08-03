@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type {
@@ -36,6 +36,8 @@ import {
   CORRECTION_MATCH_WRONG,
 } from "@/components/correction-styles";
 import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
+import { PrintAnswerLines } from "@/components/print/PrintAnswerLines";
+import { scaleCssLength } from "@/components/print/printLength";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -702,7 +704,7 @@ function QcmExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const fallback = exercise.poolSize ?? (exercise.pool?.length ? 5 : exercise.items.length || 5);
-  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
+  const { questionCount, listClass, lengthScale } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     const raw = exercise.pool && exercise.pool.length > 0
       ? sampleFromPool(exercise.pool, questionCount)
@@ -719,6 +721,15 @@ function QcmExercise({
   );
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
+
+  /** Largeur uniforme des boutons de choix (min + max du contenu × échelle Longueurs). */
+  const choiceWidthCh = useMemo(() => {
+    const longest = items.reduce(
+      (max, it) => Math.max(max, ...it.choices.map((c) => c.length)),
+      0,
+    );
+    return Math.max(6, Math.ceil(Math.max(longest, 4) * lengthScale));
+  }, [items, lengthScale]);
 
   function select(itemIdx: number, choiceIdx: number) {
     if (validated) return;
@@ -771,14 +782,14 @@ function QcmExercise({
           const isCorrect = ci === item.correctIdx;
           const isFour = item.choices.length >= 4;
           let cls = opts?.fixed
-            ? "min-w-[3.25rem] rounded-[var(--radius-md)] border px-2 py-1.5 text-sm font-medium text-center transition-colors whitespace-nowrap "
+            ? "rounded-[var(--radius-md)] border-2 px-2 py-1.5 text-sm font-medium text-center transition-colors whitespace-nowrap "
             : opts?.compact
-              ? "rounded-[var(--radius-md)] border px-2 py-1.5 text-xs font-medium text-center transition-colors whitespace-nowrap "
-              : `rounded-[var(--radius-md)] border ${isFour ? "px-0.5 py-2 text-sm" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
+              ? "rounded-[var(--radius-md)] border-2 px-2 py-1.5 text-xs font-medium text-center transition-colors whitespace-nowrap "
+              : `rounded-[var(--radius-md)] border-2 ${isFour ? "px-1.5 py-2 text-sm" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
           if (!validated || !revealCorrection) {
             cls += isSelected
               ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-              : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+              : "border-[var(--color-accent-fr)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-accent-fr)]/5";
           } else {
             const userWrong = selected[i] !== item.correctIdx;
             if (isSelected && !isCorrect) {
@@ -788,17 +799,19 @@ function QcmExercise({
             } else {
               cls += isSelected
                 ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                : "border-[var(--color-accent-fr)]/40 bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
             }
           }
           return cls;
         };
 
+        const choiceStyle = { width: `${choiceWidthCh}ch` } as const;
+
         if (hasInlineToggle) {
           const inlineGroup = (
             <span className="inline-flex flex-wrap items-center gap-1.5 align-middle">
               {item.choices.map((c, ci) => (
-                <button key={ci} type="button" className={choiceBtnClass(ci, { fixed: true })} onClick={() => select(i, ci)} disabled={validated}>
+                <button key={ci} type="button" style={choiceStyle} className={choiceBtnClass(ci, { fixed: true })} onClick={() => select(i, ci)} disabled={validated}>
                   {c}
                 </button>
               ))}
@@ -841,7 +854,7 @@ function QcmExercise({
               />
               <div className="flex flex-1 flex-col gap-1">
                 {item.choices.map((choice, ci) => (
-                  <button key={ci} type="button" className={choiceBtnClass(ci, { compact: true })} onClick={() => select(i, ci)} disabled={validated}>
+                  <button key={ci} type="button" style={choiceStyle} className={choiceBtnClass(ci, { compact: true })} onClick={() => select(i, ci)} disabled={validated}>
                     {choice}
                   </button>
                 ))}
@@ -868,11 +881,12 @@ function QcmExercise({
                 <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
               </p>
             )}
-            <div className={`grid gap-2 ${item.choices.length >= 4 ? "grid-cols-4" : item.choices.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+            <div className="flex flex-wrap gap-2">
               {item.choices.map((choice, ci) => (
                 <button
                   key={ci}
                   type="button"
+                  style={choiceStyle}
                   className={choiceBtnClass(ci)}
                   onClick={() => select(i, ci)}
                   disabled={validated}
@@ -912,7 +926,7 @@ function renderFillSentence(sentence: string) {
         <React.Fragment key={i}>
           {renderAccentParentheses(part)}
           {i < parts.length - 1 && (
-            <span className="inline-block w-10 border-b-2 border-current mx-0.5 align-bottom" />
+            <span className="mx-0.5 inline-block w-10 border-b-2 border-[var(--color-accent-fr)] align-bottom" />
           )}
         </React.Fragment>
       ))}
@@ -942,7 +956,7 @@ function FillExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const fallback = exercise.poolSize ?? (exercise.pool?.length ? 5 : exercise.items.length || 5);
-  const { questionCount, columns, listClass } = usePrintQuestionLayout(fallback);
+  const { questionCount, columns, listClass, lengthScale } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
       return sampleFromPool(exercise.pool, questionCount);
@@ -1003,6 +1017,14 @@ function FillExercise({
       ),
     );
 
+  const widthClassToRem = (cls: string): string => {
+    if (cls === "w-16") return "4rem";
+    if (cls === "w-28") return "7rem";
+    if (cls === "w-[10.5rem]") return "10.5rem";
+    const m = cls.match(/^w-\[([\d.]+rem)\]$/);
+    return m?.[1] ?? "7rem";
+  };
+
   return (
     <div className="space-y-5">
       <div>
@@ -1024,17 +1046,23 @@ function FillExercise({
         const sentLine1 = nlIdx >= 0 ? rawSentence.slice(0, nlIdx) : arrowIdx >= 0 ? rawSentence.slice(0, arrowIdx) : rawSentence;
         const sentLine2 = nlIdx >= 0 ? rawSentence.slice(nlIdx + 1) : arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
-        const inputWidth = exercise.inputWidth ?? "w-28";
+        const inputWidthCls = exercise.inputWidth ?? "w-28";
+        const inputWidthStyle =
+          lengthScale !== 1
+            ? { width: scaleCssLength(widthClassToRem(inputWidthCls), lengthScale) }
+            : undefined;
+        const inputWidth = lengthScale !== 1 ? "" : inputWidthCls;
 
         const inputEl = validated && revealCorrection ? (
           correct || !userAnswer.trim() ? (
             <span
+              style={inputWidthStyle}
               className={`inline-block h-8 ${inputWidth} border-0 border-b-2 border-amber-500 px-2 text-center text-sm font-semibold text-amber-600 mx-1 align-middle leading-8`}
             >
               {item.answer}
             </span>
           ) : (
-            <span className={`inline-flex h-8 ${inputWidth} flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle`}>
+            <span style={inputWidthStyle} className={`inline-flex h-8 ${inputWidth} flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle`}>
               <span className="text-[10px] leading-none text-zinc-900">{userAnswer || "—"}</span>
               <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500">{item.answer}</span>
             </span>
@@ -1045,6 +1073,8 @@ function FillExercise({
             value={userAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
             disabled={validated}
+            data-print-answer=""
+            style={inputWidthStyle}
             className={`inline-block h-8 ${inputWidth} rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)]`}
           />
         );
@@ -1604,7 +1634,7 @@ function WriteExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const fallback = exercise.verbPoolSize ?? exercise.promptPoolSize ?? exercise.prompts?.length ?? 5;
-  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
+  const { questionCount, listClass, isPrint, fullLineCount } = usePrintQuestionLayout(fallback);
   const [activeVerbs] = useState<string[]>(() => {
     if (!exercise.verbPool?.length) return [];
     return shuffle([...exercise.verbPool]).slice(0, questionCount);
@@ -1750,24 +1780,28 @@ function WriteExercise({
         const isClean = validated && revealCorrection && !checking && ltErrors.length === 0 && inputText.length > 2 && verbOk;
 
         return (
-          <div key={i} className="space-y-1.5">
+          <div key={i} className="space-y-1">
             {exercise.promptLayout === "stacked" ? (
               <>
                 <p className="text-sm font-medium text-[var(--color-text-primary)]">
                   <span className={`font-medium ${isClean ? "text-emerald-500" : "text-[var(--color-accent-fr)]"}`}>{i + 1}.</span>{" "}
                   {perVerb ? `(${perVerb})` : displayedPrompts[i]}
                 </p>
-                <input
-                  type="text"
-                  value={inputs[i] ?? ""}
-                  onChange={(e) => setInput(i, e.target.value)}
-                  disabled={validated}
-                  className={`w-full rounded-none border-0 border-b-2 bg-transparent px-0 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors disabled:opacity-70 ${
-                    isClean
-                      ? "border-emerald-400"
-                      : "border-[var(--color-accent-fr)]/60 focus:border-[var(--color-accent-fr)]"
-                  }`}
-                />
+                {isPrint ? (
+                  <PrintAnswerLines count={fullLineCount} />
+                ) : (
+                  <input
+                    type="text"
+                    value={inputs[i] ?? ""}
+                    onChange={(e) => setInput(i, e.target.value)}
+                    disabled={validated}
+                    className={`w-full rounded-none border-0 border-b-2 bg-transparent px-0 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors disabled:opacity-70 ${
+                      isClean
+                        ? "border-emerald-400"
+                        : "border-[var(--color-accent-fr)]/60 focus:border-[var(--color-accent-fr)]"
+                    }`}
+                  />
+                )}
               </>
             ) : (
               <div className="flex items-center gap-2">

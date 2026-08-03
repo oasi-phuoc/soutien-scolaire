@@ -258,12 +258,14 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
       ),
       exercises: lesson.exercises.map((ex, i) => {
         const seed = 4_000_000 + i;
+        const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
         return {
           id: String(i),
           label: ex.title ?? `Exercice ${i + 1}`,
           supportsPrintLayout: true,
           defaultQuestionCount: grammarDefaultQuestionCount(ex),
           defaultColumns: 1 as const,
+          defaultSpacing: isWriteStacked ? 5 : undefined,
           preview: (
             <PlacementPrintSeedRoot seed={seed}>
               <GrammarExerciseView
@@ -305,12 +307,14 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
     ),
     exercises: lesson.exercises.map((ex, i) => {
       const seed = 5_000_000 + i;
+      const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
       return {
         id: String(i),
         label: ex.title ?? `Exercice ${i + 1}`,
         supportsPrintLayout: true,
         defaultQuestionCount: grammarDefaultQuestionCount(ex),
         defaultColumns: 1 as const,
+        defaultSpacing: isWriteStacked ? 5 : undefined,
         preview: (
           <PlacementPrintSeedRoot seed={seed}>
             <GrammarExerciseView

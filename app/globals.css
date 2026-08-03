@@ -758,6 +758,16 @@ input[type=number] {
   row-gap: calc(1rem * var(--print-q-scale, 1)) !important;
 }
 
+/*
+ * Option « Longueurs » : allonge les textbox soulignés (hors cellules
+ * compactes w-5…w-8 et hors w-full). Les traits pleine largeur sont
+ * gérés en JS (lignes supplémentaires).
+ */
+.print-layout-context .print-ex-content.print-answer-length input[type="text"]:not([class*="w-full"]):not([class*="w-8"]):not([class*="w-7"]):not([class*="w-5"]),
+.print-layout-context .print-ex-content.print-answer-length [data-print-answer] {
+  min-width: calc(5.5rem * var(--print-len-scale, 1)) !important;
+}
+
 .print-layout-context .print-ex-content > h2:first-child,
 .print-layout-context .print-ex-content > div > h2:first-child,
 .print-layout-context .print-ex-content > .space-y-4 > h2:first-child,

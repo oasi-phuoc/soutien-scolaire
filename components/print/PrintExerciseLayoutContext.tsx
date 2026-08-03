@@ -1,6 +1,12 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
+import {
+  PRINT_LENGTH_DEFAULT,
+  clampPrintLength,
+  printLengthFullLines,
+  printLengthWidthScale,
+} from "@/components/print/printLength";
 
 export type PrintExerciseColumns = 1 | 2 | 3;
 
@@ -9,6 +15,8 @@ export type PrintExerciseLayoutValue = {
   questionCount: number;
   /** Répartition des questions en colonnes (1–3). */
   columns: PrintExerciseColumns;
+  /** Longueurs des traits / boutons (1–5, défaut 3). */
+  length: number;
 };
 
 const PrintExerciseLayoutContext = createContext<PrintExerciseLayoutValue | null>(null);
@@ -45,7 +53,7 @@ export function useIsPrintLayout(): boolean {
   return useContext(PrintExerciseLayoutContext) !== null;
 }
 
-/** Convenience: count + columns + list class for print-aware exercise UIs. */
+/** Convenience: count + columns + list class + longueurs for print-aware exercise UIs. */
 export function usePrintQuestionLayout(fallbackCount: number) {
   const ctx = useContext(PrintExerciseLayoutContext);
   const questionCount = ctx
@@ -54,11 +62,18 @@ export function usePrintQuestionLayout(fallbackCount: number) {
   const rawCols = ctx?.columns ?? 1;
   const columns: PrintExerciseColumns =
     rawCols === 2 || rawCols === 3 ? rawCols : 1;
+  const length = ctx ? clampPrintLength(ctx.length) : PRINT_LENGTH_DEFAULT;
+  const isPrint = ctx !== null;
   return {
     questionCount,
     columns,
     listClass: printQuestionsListClass(columns),
-    isPrint: ctx !== null,
+    isPrint,
+    length,
+    /** Multiplicateur de largeur (1 hors impression ou au défaut). */
+    lengthScale: isPrint ? printLengthWidthScale(length) : 1,
+    /** Nombre de traits pleine largeur à l’impression. */
+    fullLineCount: isPrint ? printLengthFullLines(length) : 1,
   };
 }
 

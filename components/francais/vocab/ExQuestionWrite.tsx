@@ -4,6 +4,7 @@ import type { VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, shuffle } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
+import { PrintAnswerLines } from "@/components/print/PrintAnswerLines";
 
 const LT_IGNORE = new Set(["WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE", "UNPAIRED_BRACKETS"]);
 
@@ -124,7 +125,7 @@ function checkBasic(answer: string, word: string): string[] {
 export function ExQuestionWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
-  const { questionCount, listClass, isPrint } = usePrintQuestionLayout(isEval ? 2 : 5);
+  const { questionCount, listClass, isPrint, fullLineCount } = usePrintQuestionLayout(isEval ? 2 : 5);
   const [prompts] = useState<Prompt[]>(() => buildPrompts(theme, questionCount));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
@@ -221,11 +222,7 @@ export function ExQuestionWrite({
                 <span className="shrink-0 text-[var(--color-text-secondary)]">:</span>
               </div>
               {isPrint ? (
-                <div>
-                  {/* 1er trait collé comme l’ancien input ; 2e trait plus bas pour écrire */}
-                  <div className="border-b-2 border-[var(--color-accent-fr)]/50" />
-                  <div className="mt-5 h-7 border-b-2 border-[var(--color-accent-fr)]/50" />
-                </div>
+                <PrintAnswerLines count={fullLineCount} />
               ) : isCheckedDone && hasErrors && revealCorrection ? (
                 <div className="border-b border-amber-400 py-1 text-center">
                   <p className="text-sm text-amber-600 line-through">{s.answer || "—"}</p>

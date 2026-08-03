@@ -305,6 +305,7 @@ export function ImpressionHubClient() {
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
         columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
         spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? 3)),
+        length: Math.max(1, Math.min(5, ex.defaultLength ?? 3)),
         pageBreak: Boolean(ex.forceNewPage),
         points: Math.max(1, ex.defaultPoints ?? 1),
       })),
@@ -701,6 +702,18 @@ export function ImpressionHubClient() {
                             </div>
                             <div className="flex items-center justify-between gap-3">
                               <span className="text-xs text-[var(--color-text-secondary)]">
+                                Longueurs
+                              </span>
+                              <Counter
+                                value={sel.length}
+                                accent={accent}
+                                min={1}
+                                max={5}
+                                onChange={(length) => patchSelection(ex.id, { length })}
+                              />
+                            </div>
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-xs text-[var(--color-text-secondary)]">
                                 Saut de page
                               </span>
                               <CheckBox
@@ -768,7 +781,7 @@ export function ImpressionHubClient() {
               theoryNode={theoryNode}
               exerciseNodes={previewBlocks.flatMap((item) => {
                 const ex = item.exercise;
-                const layoutKey = `q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-pb${item.selection.pageBreak ? 1 : 0}-corr${item.correction ? 1 : 0}`;
+                const layoutKey = `q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-l${item.selection.length}-pb${item.selection.pageBreak ? 1 : 0}-corr${item.correction ? 1 : 0}`;
                 const softBreak =
                   item.correction
                     ? item.displayIndex === 0 || Boolean(item.selection.pageBreak)

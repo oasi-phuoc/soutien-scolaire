@@ -278,6 +278,7 @@ export function ImpressionsClient() {
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 8),
         columns: ex.defaultColumns ?? 1,
         spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? 3)),
+        length: Math.max(1, Math.min(5, ex.defaultLength ?? 3)),
         pageBreak: Boolean(ex.forceNewPage),
         points: ex.defaultPoints ?? 1,
       })),
@@ -653,6 +654,20 @@ export function ImpressionsClient() {
                                   }
                                 />
                               </div>
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">Longueurs</span>
+                                <Counter
+                                  value={sel.length}
+                                  accent={accent}
+                                  min={1}
+                                  max={5}
+                                  onChange={(length) =>
+                                    setSelection((prev) =>
+                                      prev.map((s) => (s.id === ex.id ? { ...s, length } : s)),
+                                    )
+                                  }
+                                />
+                              </div>
                               {ex.supportsPrintLayout && (
                                 <>
                                   <div className="flex items-center justify-between gap-2">
@@ -761,7 +776,7 @@ export function ImpressionsClient() {
               theoryNode={theoryNode}
               exerciseNodes={previewBlocks.map((item) => {
                 return {
-                  key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-pb${item.selection.pageBreak ? 1 : 0}-corr${item.correction ? 1 : 0}`,
+                  key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-l${item.selection.length}-pb${item.selection.pageBreak ? 1 : 0}-corr${item.correction ? 1 : 0}`,
                   /** Packing style placement maths (voir ImpressionHubClient). */
                   forceNewPage: item.correction
                     ? item.displayIndex === 0 || Boolean(item.selection.pageBreak)
