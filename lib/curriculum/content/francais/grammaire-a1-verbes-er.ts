@@ -20,32 +20,32 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["parler d'une action qui se passe au moment où l'on parle."],
+      items: ["1. Parler d'une action qui se passe au moment où l'on parle."],
     },
     {
       type: "highlight",
       label: "",
-      items: ["Vous regardez la télévision en ce moment ?"],
+      items: ["Vous {a}regardez{/a} la télévision en ce moment ?"],
       noBulletItems: [0],
     },
     {
       type: "plain_list",
-      items: ["parler d'une action habituelle."],
+      items: ["2. Parler d'une action habituelle."],
     },
     {
       type: "highlight",
       label: "",
-      items: ["Tous les matins, je regarde mes mails."],
+      items: ["Tous les matins, je {a}regarde{/a} mes mails."],
       noBulletItems: [0],
     },
     {
       type: "plain_list",
-      items: ["faire une description générale au présent, ou exprimer des goûts et des idées."],
+      items: ["3. Faire une description générale au présent, ou exprimer des goûts et des idées."],
     },
     {
       type: "highlight",
       label: "",
-      items: ["Vous habitez à Paris ? Tu aimes danser ?"],
+      items: ["Vous {a}habitez{/a} à Paris ?"],
       noBulletItems: [0],
     },
 
@@ -65,12 +65,12 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       headers: ["Infinitif", "Pronom", "Verbe", "Complément"],
       boldFirstCol: true,
       rows: [
-        ["regarder", "Je", "regarde", "mes mails."],
-        ["écouter", "Tu", "écoutes", "la radio."],
-        ["habiter", "Il / Elle / On", "habite", "à Paris."],
-        ["parler", "Nous", "parlons", "français."],
-        ["jouer", "Vous", "jouez", "au football."],
-        ["étudier", "Ils / Elles", "étudient", "les relations internationales."],
+        ["regarder", "Je", "regard{a}e{/a}", "mes mails."],
+        ["écouter", "Tu", "écout{a}es{/a}", "la radio."],
+        ["habiter", "Il / Elle / On", "habit{a}e{/a}", "à Paris."],
+        ["parler", "Nous", "parl{a}ons{/a}", "français."],
+        ["aimer", "Vous", "aim{a}ez{/a}", "le football."],
+        ["étudier", "Ils / Elles", "étudi{a}ent{/a}", "les relations internationales."],
       ],
     },
     {
@@ -128,6 +128,30 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
+        {
+          infinitive: "regarder",
+          radical: "regard",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "étudier",
+          radical: "étudi",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
       ],
     },
 
@@ -138,12 +162,28 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: [
-        "On prononce la consonne finale du radical, mais on ne prononce pas les terminaisons {a}-e, -es, -ent{/a}.",
-        "On fait la liaison. → O{li}n|a{/li}ime, nou{li}s|é{/li}coutons, vou{li}s|é{/li}tudiez, il{li}s|h{/li}abitent, elle{li}s|o{/li}ublient.",
-        "Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle ou un h muet. → {s}Je aime{/s} → {a}J'aime{/a} ma ville. / {s}Je habite{/s} → {a}J'habite{/a} à Paris.",
-      ],
-      allBullets: true,
+      items: ["On prononce la consonne finale du radical, mais on ne prononce pas les terminaisons {a}-e, -es, -ent{/a}."],
+    },
+    {
+      type: "plain_list",
+      items: ["On fait la liaison."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["O{li}n|a{/li}ime, nou{li}s|é{/li}coutons, vou{li}s|é{/li}tudiez, il{li}s|h{/li}abitent, elle{li}s|o{/li}ublient."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle ou un h muet."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["{s}Je aime{/s} → {a}J'aime{/a} ma ville. / {s}Je habite{/s} → {a}J'habite{/a} à Paris."],
+      noBulletItems: [0],
+      inlineArrows: true,
     },
   ],
   exercises: [
