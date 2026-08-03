@@ -1,4 +1,5 @@
 import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 const MODAL_VERBS: VerbToggleVerb[] = [
   {
@@ -310,50 +311,5 @@ export const A1_GR_MODAUX: GrammarLesson = {
       noBulletItems: [0],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Pouvoir, vouloir, devoir",
-      instruction: "Choisissez la forme correcte.",
-      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ aller avec toi.", choices: ["veux", "veut", "voulons", "peux"], correctIdx: 0 },
-        { sentence: "Tu ___ parler français ?", choices: ["peux", "peut", "dois", "veux"], correctIdx: 0 },
-        { sentence: "Il ___ être à l'aéroport avant 10 h.", choices: ["doit", "dois", "peut", "veut"], correctIdx: 0 },
-        { sentence: "Nous ___ entrer ?", choices: ["pouvons", "pouvez", "devons", "voulons"], correctIdx: 0 },
-        { sentence: "Vous ___ une chambre ?", choices: ["voulez", "veulent", "pouvez", "devez"], correctIdx: 0 },
-        { sentence: "Ils ___ aller à l'aéroport.", choices: ["doivent", "doit", "peuvent", "veulent"], correctIdx: 0 },
-        { sentence: "On ___ pas fumer dans l'avion.", choices: ["ne doit", "ne dois", "ne peut", "ne veut"], correctIdx: 0 },
-        { sentence: "Il ___ faire la queue.", choices: ["faut", "dois", "peut", "veut"], correctIdx: 0 },
-        { sentence: "Elle ___ une terrasse.", choices: ["veut", "veux", "peut", "doit"], correctIdx: 0 },
-        { sentence: "Vous ___ parler sept langues !", choices: ["pouvez", "pouvons", "devez", "voulez"], correctIdx: 0 },
-        { sentence: "Je ___ nager.", choices: ["sais", "sait", "connais", "savons"], correctIdx: 0 },
-        { sentence: "Elle ___ cuisiner.", choices: ["sait", "sais", "connaît", "savez"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Conjuguez le verbe",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      transInstruction: { en: "Conjugate the verb in parentheses in the present tense.", ar: "صرّف الفعل بين القوسين في زمن المضارع.", fa: "فعل داخل پرانتز را در زمان حال صرف کنید.", ti: "ነቲ ኣብ ቅንፍ ዘሎ ግሲ ብህሉው ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках у теперішньому часі." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ (vouloir) un ticket.", hint: "vouloir → je", answer: "veux" },
-        { sentence: "Tu ___ (pouvoir) m'aider ?", hint: "pouvoir → tu", answer: "peux" },
-        { sentence: "Il ___ (devoir) partir.", hint: "devoir → il", answer: "doit" },
-        { sentence: "Nous ___ (pouvoir) entrer ?", hint: "pouvoir → nous", answer: "pouvons" },
-        { sentence: "Vous ___ (vouloir) un café ?", hint: "vouloir → vous", answer: "voulez" },
-        { sentence: "Ils ___ (devoir) faire la queue.", hint: "devoir → ils", answer: "doivent" },
-        { sentence: "Elle ___ (pouvoir) venir.", hint: "pouvoir → elle", answer: "peut" },
-        { sentence: "On ___ (devoir) attendre.", hint: "devoir → on", answer: "doit" },
-        { sentence: "Il ___ (falloir) un passeport.", hint: "falloir → il", answer: "faut" },
-        { sentence: "Je ___ (devoir) combien ?", hint: "devoir → je", answer: "dois" },
-        { sentence: "Je ___ (savoir) où habite Marie.", hint: "savoir → je", answer: "sais" },
-        { sentence: "Elle ___ (savoir) cuisiner.", hint: "savoir → elle", answer: "sait" },
-      ],
-    },
-  ],
+  exercises: G1_EXERCISES["G1.7"](),
 };

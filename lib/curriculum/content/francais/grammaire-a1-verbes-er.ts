@@ -1,4 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 4 — Les verbes en -er : cas général (G1.5) */
 export const A1_GR_VERBES_ER: GrammarLesson = {
@@ -260,46 +261,5 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       inlineArrows: true,
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Terminaisons des verbes en -er",
-      instruction: "Choisissez la bonne terminaison.",
-      transInstruction: { en: "Choose the correct ending.", ar: "اختر النهاية الصحيحة.", fa: "پایان درست را انتخاب کنید.", ti: "ቅኑዕ መወዳእታ ምረጽ።", uk: "Оберіть правильне закінчення." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je regard__ la télé.", choices: ["e", "es", "ons", "ez"], correctIdx: 0 },
-        { sentence: "Tu habit__ à Paris ?", choices: ["es", "e", "ez", "ent"], correctIdx: 0 },
-        { sentence: "Il parl__ français.", choices: ["e", "es", "ons", "ent"], correctIdx: 0 },
-        { sentence: "Nous travaill__ ici.", choices: ["ons", "ez", "e", "ent"], correctIdx: 0 },
-        { sentence: "Vous jou__ au football.", choices: ["ez", "ons", "e", "es"], correctIdx: 0 },
-        { sentence: "Ils étudi__ le français.", choices: ["ent", "e", "ons", "ez"], correctIdx: 0 },
-        { sentence: "Elle aim__ danser.", choices: ["e", "es", "ons", "ent"], correctIdx: 0 },
-        { sentence: "On écout__ la radio.", choices: ["e", "es", "ez", "ent"], correctIdx: 0 },
-        { sentence: "Tu pens__ au quartier ?", choices: ["es", "e", "ez", "ons"], correctIdx: 0 },
-        { sentence: "Nous habit__ en banlieue.", choices: ["ons", "ez", "ent", "e"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Conjuguez les verbes en -er",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      transInstruction: { en: "Conjugate the verb in parentheses in the present tense.", ar: "صرّف الفعل بين القوسين في زمن المضارع.", fa: "فعل داخل پرانتز را در زمان حال صرف کنید.", ti: "ነቲ ኣብ ቅንፍ ዘሎ ግሲ ብህሉው ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках у теперішньому часі." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ (habiter) en banlieue.", hint: "habiter → je", answer: "habite" },
-        { sentence: "Tu ___ (travailler) ici ?", hint: "travailler → tu", answer: "travailles" },
-        { sentence: "Il ___ (parler) français.", hint: "parler → il", answer: "parle" },
-        { sentence: "Nous ___ (étudier) le français.", hint: "étudier → nous", answer: "étudions" },
-        { sentence: "Vous ___ (habiter) dans le quartier ?", hint: "habiter → vous", answer: "habitez" },
-        { sentence: "Ils ___ (aimer) danser.", hint: "aimer → ils", answer: "aiment" },
-        { sentence: "Elle ___ (écouter) la radio.", hint: "écouter → elle", answer: "écoute" },
-        { sentence: "On ___ (regarder) la télévision.", hint: "regarder → on", answer: "regarde" },
-        { sentence: "Tu ___ (jouer) au football.", hint: "jouer → tu", answer: "joues" },
-        { sentence: "Nous ___ (penser) au projet.", hint: "penser → nous", answer: "pensons" },
-      ],
-    },
-  ],
+  exercises: G1_EXERCISES["G1.5"](),
 };

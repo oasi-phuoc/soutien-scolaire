@@ -1,4 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 8 — Les verbes en -ir (G1.9) */
 export const A1_GR_VERBES_IR: GrammarLesson = {
@@ -317,56 +318,5 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Verbes en -ir",
-      instruction: "Choisissez la forme correcte.",
-      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ le petit-déjeuner.", choices: ["finis", "finit", "finissons", "finissent"], correctIdx: 0 },
-        { sentence: "Nous ___ le plat.", choices: ["finissons", "finissez", "finis", "finissent"], correctIdx: 0 },
-        { sentence: "Ils ___ le dessert.", choices: ["finissent", "finit", "finis", "finissons"], correctIdx: 0 },
-        { sentence: "J'___ la porte.", choices: ["ouvre", "ouvres", "ouvrons", "ouvrez"], correctIdx: 0 },
-        { sentence: "Vous ___ le lave-vaisselle.", choices: ["ouvrez", "ouvrons", "ouvre", "ouvrent"], correctIdx: 0 },
-        { sentence: "Je ___ en vacances.", choices: ["pars", "part", "partons", "partent"], correctIdx: 0 },
-        { sentence: "Nous ___ à l'hôtel.", choices: ["dormons", "dormez", "dors", "dorment"], correctIdx: 0 },
-        { sentence: "Il ___ une pizza.", choices: ["sert", "sers", "servons", "servent"], correctIdx: 0 },
-        { sentence: "Tu ___ en métro.", choices: ["viens", "vient", "venons", "viennent"], correctIdx: 0 },
-        { sentence: "Ils ___ mon sac.", choices: ["tiennent", "tient", "tenons", "tenez"], correctIdx: 0 },
-        { sentence: "Vous ___ ensemble.", choices: ["partez", "partons", "pars", "partent"], correctIdx: 0 },
-        { sentence: "Elle ___ bien.", choices: ["dort", "dors", "dormons", "dorment"], correctIdx: 0 },
-        { sentence: "Nous ___ ensemble.", choices: ["venons", "venez", "viens", "viennent"], correctIdx: 0 },
-        { sentence: "Tu ___ ton passeport.", choices: ["tiens", "tient", "tenons", "tenez"], correctIdx: 0 },
-        { sentence: "Ils ___ lundi.", choices: ["partent", "part", "pars", "partez"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Conjuguez les verbes en -ir",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      transInstruction: { en: "Conjugate the verb in parentheses in the present tense.", ar: "صرّف الفعل بين القوسين في زمن الحاضر.", fa: "فعل داخل پرانتز را در زمان حال صرف کنید.", ti: "ነቲ ኣብ ቅንፍ ዘሎ ግሲ ኣብ ህሉው ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках у теперішньому часі." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ (finir) mon travail.", hint: "finir → je", answer: "finis" },
-        { sentence: "Vous ___ (finir) le fromage.", hint: "finir → vous", answer: "finissez" },
-        { sentence: "Ils ___ (choisir) un dessert.", hint: "choisir → ils", answer: "choisissent" },
-        { sentence: "J'___ (ouvrir) la porte.", hint: "ouvrir → je", answer: "ouvre" },
-        { sentence: "Tu ___ (offrir) des fleurs.", hint: "offrir → tu", answer: "offres" },
-        { sentence: "Je ___ (partir) en vacances.", hint: "partir → je", answer: "pars" },
-        { sentence: "Nous ___ (dormir) à l'hôtel.", hint: "dormir → nous", answer: "dormons" },
-        { sentence: "Elle ___ (servir) une pizza.", hint: "servir → elle", answer: "sert" },
-        { sentence: "Tu ___ (venir) seul ?", hint: "venir → tu", answer: "viens" },
-        { sentence: "Ils ___ (tenir) les bagages.", hint: "tenir → ils", answer: "tiennent" },
-        { sentence: "Vous ___ (sortir) ensemble.", hint: "sortir → vous", answer: "sortez" },
-        { sentence: "On ___ (revenir) demain.", hint: "revenir → on", answer: "revient" },
-        { sentence: "Nous ___ (tenir) les visas.", hint: "tenir → nous", answer: "tenons" },
-        { sentence: "Ils ___ (dormir) mal.", hint: "dormir → ils", answer: "dorment" },
-        { sentence: "Je ___ (servir) un café.", hint: "servir → je", answer: "sers" },
-      ],
-    },
-  ],
+  exercises: G1_EXERCISES["G1.9"](),
 };

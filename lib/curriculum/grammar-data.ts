@@ -556,7 +556,7 @@ const CONJ_MERGE_INTO: Record<string, string[]> = {
   "a1-gr-modaux": ["a1-conj-l15"],
   "a1-gr-verbes-re-oir": ["a2-conj-irreguliers"],
   "a1-gr-verbes-ir": ["a2-conj-l02"],
-  "a1-gr-present-progressif": ["a1-conj-l28"],
+  // présent progressif : exercices locaux G1.11 (plus de fusion passé récent)
   "a1-gr-passe-recent": ["a1-conj-l28"],
   "a1-gr-passe-compose-avoir": ["a1-conj-l29", "negation-passe-compose"],
   "a1-gr-passe-compose-etre": ["a1-conj-l30"],

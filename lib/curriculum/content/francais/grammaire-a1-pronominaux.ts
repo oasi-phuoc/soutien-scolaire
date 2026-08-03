@@ -1,4 +1,5 @@
 import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 const PRONOMINAUX_VERBS: VerbToggleVerb[] = [
   {
@@ -310,46 +311,5 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       noBulletItems: [0, 1],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Pronoms réfléchis",
-      instruction: "Choisissez le bon pronom.",
-      transInstruction: { en: "Choose the correct pronoun.", ar: "اختر الضمير الصحيح.", fa: "ضمیر درست را انتخاب کنید.", ti: "ቅኑዕ ተካኢ ስም ምረጽ።", uk: "Оберіть правильний займенник." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ réveille à 8 h.", choices: ["me", "te", "se", "nous"], correctIdx: 0 },
-        { sentence: "Tu ___ lèves tôt.", choices: ["te", "me", "se", "vous"], correctIdx: 0 },
-        { sentence: "Elle ___ douche le soir.", choices: ["se", "me", "te", "nous"], correctIdx: 0 },
-        { sentence: "Nous ___ préparons vite.", choices: ["nous", "vous", "se", "me"], correctIdx: 0 },
-        { sentence: "Vous ___ coiffez comment ?", choices: ["vous", "nous", "se", "te"], correctIdx: 0 },
-        { sentence: "Ils ___ couchent tard.", choices: ["se", "me", "nous", "vous"], correctIdx: 0 },
-        { sentence: "On ___ regarde dans le miroir.", choices: ["se", "me", "te", "nous"], correctIdx: 0 },
-        { sentence: "Je ___ habille.", choices: ["m'", "t'", "s'", "nous"], correctIdx: 0 },
-        { sentence: "Tu ___ amuses.", choices: ["t'", "m'", "s'", "vous"], correctIdx: 0 },
-        { sentence: "Elle ___ arrête.", choices: ["s'", "m'", "t'", "se"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Conjuguez les verbes pronominaux",
-      instruction: "Complétez avec le pronom et le verbe conjugués (ex. me lève).",
-      transInstruction: { en: "Complete with the pronoun and the conjugated verb (e.g. me lève).", ar: "أكمل بالضمير والفعل مصرّفاً (مثال: me lève).", fa: "با ضمیر و فعل صرف‌شده کامل کنید (مثلاً me lève).", ti: "ብተካኢ ስምን ዝተጻረየ ግስን ምላእ (ንኣብነት፦ me lève)።", uk: "Доповніть займенником і відміненою формою дієслова (напр., me lève)." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ (se lever) tôt.", hint: "se lever → je", answer: "me lève" },
-        { sentence: "Tu ___ (se coucher) tard.", hint: "se coucher → tu", answer: "te couches" },
-        { sentence: "Il ___ (se doucher) le soir.", hint: "se doucher → il", answer: "se douche" },
-        { sentence: "Nous ___ (se préparer) vite.", hint: "se préparer → nous", answer: "nous préparons" },
-        { sentence: "Vous ___ (se lever) à quelle heure ?", hint: "se lever → vous", answer: "vous levez" },
-        { sentence: "Ils ___ (se regarder).", hint: "se regarder → ils", answer: "se regardent" },
-        { sentence: "Elle ___ (s'habiller).", hint: "s'habiller → elle", answer: "s'habille" },
-        { sentence: "Je ___ (s'appeler) Leila.", hint: "s'appeler → je", answer: "m'appelle" },
-        { sentence: "On ___ (se coucher) tôt.", hint: "se coucher → on", answer: "se couche" },
-        { sentence: "Tu ___ (s'amuser) bien ?", hint: "s'amuser → tu", answer: "t'amuses" },
-      ],
-    },
-  ],
+  exercises: G1_EXERCISES["G1.6"](),
 };

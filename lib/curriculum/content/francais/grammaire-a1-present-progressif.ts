@@ -1,4 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 10 — Le présent progressif (G1.11) */
 export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
@@ -159,46 +160,5 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       inlineArrows: true,
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Présent progressif",
-      instruction: "Choisissez la forme correcte.",
-      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ en train de prendre ma douche.", choices: ["suis", "es", "est", "sommes"], correctIdx: 0 },
-        { sentence: "Il ___ en train de dormir.", choices: ["est", "es", "suis", "sont"], correctIdx: 0 },
-        { sentence: "Nous ___ en train d'apprendre le français.", choices: ["sommes", "êtes", "suis", "sont"], correctIdx: 0 },
-        { sentence: "Elles sont en train ___ se préparer.", choices: ["de", "d'", "à", "pour"], correctIdx: 0 },
-        { sentence: "Nous sommes en train ___ apprendre.", choices: ["d'", "de", "à", "pour"], correctIdx: 0 },
-        { sentence: "Ils ne ___ pas en train de travailler.", choices: ["sont", "est", "suis", "êtes"], correctIdx: 0 },
-        { sentence: "Tu ___ en train de répondre ?", choices: ["es", "est", "suis", "êtes"], correctIdx: 0 },
-        { sentence: "Vous ___ en train de manger.", choices: ["êtes", "sommes", "sont", "es"], correctIdx: 0 },
-        { sentence: "On ___ en train de partir.", choices: ["est", "sont", "suis", "es"], correctIdx: 0 },
-        { sentence: "Elle est en train ___ écrire.", choices: ["d'", "de", "à", "pour"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Complétez avec la forme correcte (être + en train de / d').",
-      transInstruction: { en: "Complete with the correct form (être + en train de / d').", ar: "أكمل بالصيغة الصحيحة (être + en train de / d').", fa: "با صورت درست کامل کنید (être + en train de / d').", ti: "ብቅኑዕ ቅርጺ ምላእ (être + en train de / d')።", uk: "Доповніть правильною формою (être + en train de / d')." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ prendre ma douche.", hint: "suis en train de", answer: "suis en train de" },
-        { sentence: "Il ___ dormir.", hint: "est en train de", answer: "est en train de" },
-        { sentence: "Nous ___ apprendre le français.", hint: "sommes en train d'", answer: "sommes en train d'" },
-        { sentence: "Elles ___ se préparer.", hint: "sont en train de", answer: "sont en train de" },
-        { sentence: "Tu ___ répondre ?", hint: "es en train de", answer: "es en train de" },
-        { sentence: "Vous ___ manger.", hint: "êtes en train de", answer: "êtes en train de" },
-        { sentence: "Ils ne ___ pas travailler.", hint: "sont en train de", answer: "sont en train de" },
-        { sentence: "Elle ___ écrire un message.", hint: "est en train d'", answer: "est en train d'" },
-        { sentence: "On ___ partir.", hint: "est en train de", answer: "est en train de" },
-        { sentence: "Je ___ m'habiller.", hint: "suis en train de", answer: "suis en train de" },
-      ],
-    },
-  ],
+  exercises: G1_EXERCISES["G1.11"](),
 };

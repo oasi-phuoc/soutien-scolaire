@@ -911,14 +911,26 @@ function QcmExercise({
 
 // ── Fill exercise ─────────────────────────────────────────────────────────────
 
+function renderAccentParentheses(text: string) {
+  return text.split(/(\([^)]+\))/g).map((chunk, ci) =>
+    chunk.startsWith("(") && chunk.endsWith(")") ? (
+      <strong key={ci} className="font-bold text-[var(--color-accent-fr)]">
+        {chunk}
+      </strong>
+    ) : (
+      <React.Fragment key={ci}>{chunk}</React.Fragment>
+    ),
+  );
+}
+
 function renderFillSentence(sentence: string) {
   const parts = sentence.split("___");
-  if (parts.length <= 1) return <>{sentence}</>;
+  if (parts.length <= 1) return <>{renderAccentParentheses(sentence)}</>;
   return (
     <>
       {parts.map((part, i) => (
         <React.Fragment key={i}>
-          {part}
+          {renderAccentParentheses(part)}
           {i < parts.length - 1 && (
             <span className="inline-block w-10 border-b-2 border-current mx-0.5 align-bottom" />
           )}

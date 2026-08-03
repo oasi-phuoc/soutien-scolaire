@@ -1,4 +1,5 @@
 import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 const VT_DRE: VerbToggleVerb[] = [
   {
@@ -344,51 +345,5 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       transLabel: { en: "Caution", ar: "تنبيه", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Verbes en -re et -oir",
-      instruction: "Choisissez la forme correcte.",
-      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ un magazine.", choices: ["lis", "lit", "lisons", "lisent"], correctIdx: 0 },
-        { sentence: "Nous ___ une lettre.", choices: ["écrivons", "écrivez", "écris", "écrivent"], correctIdx: 0 },
-        { sentence: "Vous ___ du rugby.", choices: ["faites", "faisons", "font", "fais"], correctIdx: 0 },
-        { sentence: "Ils ___ de l'escalade.", choices: ["font", "fait", "faites", "faisons"], correctIdx: 0 },
-        { sentence: "Vous ___ « Oui ».", choices: ["dites", "disons", "disent", "dis"], correctIdx: 0 },
-        { sentence: "Je ___ le métro.", choices: ["prends", "prend", "prenons", "prennent"], correctIdx: 0 },
-        { sentence: "Ils ___ le bateau.", choices: ["prennent", "prend", "prends", "prenez"], correctIdx: 0 },
-        { sentence: "Je ___ conduire.", choices: ["sais", "sait", "connais", "savons"], correctIdx: 0 },
-        { sentence: "Je ___ mes voisins.", choices: ["connais", "sais", "connaît", "savons"], correctIdx: 0 },
-        { sentence: "Nous ___ une ville.", choices: ["voyons", "voyez", "vois", "voient"], correctIdx: 0 },
-        { sentence: "Ils ___ une carte.", choices: ["reçoivent", "reçoit", "recevons", "recevez"], correctIdx: 0 },
-        { sentence: "Vous ___ de l'eau.", choices: ["buvez", "buvons", "bois", "boivent"], correctIdx: 0 },
-        { sentence: "Nous ___ le salon.", choices: ["peignons", "peignez", "peins", "peignent"], correctIdx: 0 },
-        { sentence: "Elle ___ un chapeau.", choices: ["met", "mets", "mettez", "mettent"], correctIdx: 0 },
-        { sentence: "Tu ___ le journal.", choices: ["lis", "lit", "lisez", "lisent"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Conjuguez",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      transInstruction: { en: "Conjugate the verb in parentheses in the present tense.", ar: "صرّف الفعل بين القوسين في زمن الحاضر.", fa: "فعل داخل پرانتز را در زمان حال صرف کنید.", ti: "ነቲ ኣብ ቅንፍ ዘሎ ግሲ ኣብ ህሉው ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках у теперішньому часі." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ (lire) le journal.", hint: "lire → je", answer: "lis" },
-        { sentence: "Ils ___ (écrire) mal.", hint: "écrire → ils", answer: "écrivent" },
-        { sentence: "Vous ___ (faire) du foot.", hint: "faire → vous", answer: "faites" },
-        { sentence: "Ils ___ (faire) du vélo.", hint: "faire → ils", answer: "font" },
-        { sentence: "Vous ___ (dire) oui.", hint: "dire → vous", answer: "dites" },
-        { sentence: "Je ___ (prendre) le bus.", hint: "prendre → je", answer: "prends" },
-        { sentence: "Ils ___ (prendre) le train.", hint: "prendre → ils", answer: "prennent" },
-        { sentence: "Je ___ (savoir) nager.", hint: "savoir → je", answer: "sais" },
-        { sentence: "Elle ___ (connaître) Paris.", hint: "connaître → elle", answer: "connaît" },
-        { sentence: "Nous ___ (boire) de l'eau.", hint: "boire → nous", answer: "buvons" },
-      ],
-    },
-  ],
+  exercises: G1_EXERCISES["G1.10"](),
 };

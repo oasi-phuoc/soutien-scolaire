@@ -210,35 +210,7 @@ export const A1_CONJ_L07: ConjLesson = {
   title: "Les verbes en -er au présent",
   // Théorie intégrée dans G1.5 (général) et G1.8 (particularités) — ne pas re-fusionner ici.
   theory: [],
-  exercises: [
-    {
-      type: "fill",
-      title: "Exercice 1",
-      instruction: "Complétez la terminaison des verbes.",
-      transInstruction: { en: "Complete the verb endings.", ar: "أكمل نهايات الأفعال.", fa: "پایانه‌های فعل را کامل کنید.", ti: "መወዳእታ ግሲታት ምላእ።", uk: "Доповніть закінчення дієслів." },
-      items: [],
-      pool: EX1_POOL,
-      poolSize: 8,
-    },
-    {
-      type: "fill",
-      title: "Exercice 2",
-      instruction: "Conjuguez les verbes entre parenthèses.",
-      transInstruction: { en: "Conjugate the verbs in parentheses.", ar: "صرّف الأفعال الموجودة بين القوسين.", fa: "افعال داخل پرانتز را صرف کنید.", ti: "ኣብ ቅንፍ ዘለዉ ግሲታት ኣጻርይ።", uk: "Відмінюйте дієслова в дужках." },
-      items: [],
-      pool: EX2_POOL,
-      poolSize: 8,
-    },
-    {
-      type: "fill",
-      title: "Exercice 3",
-      instruction: "Mettez les phrases au pluriel.",
-      transInstruction: { en: "Put the sentences in the plural.", ar: "ضع الجمل في صيغة الجمع.", fa: "جمله‌ها را به صورت جمع بنویسید.", ti: "ነቶም ሓረጋት ናብ ብዙሕ ቅርጺ ኣቐምጥ።", uk: "Поставте речення у множину." },
-      items: [],
-      pool: EX3_POOL,
-      poolSize: 8,
-    },
-  ],
+  exercises: [],
   evalExercises: [
     {
       type: "fill",

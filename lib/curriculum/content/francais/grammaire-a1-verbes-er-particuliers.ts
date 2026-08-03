@@ -1,4 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 7 — Les verbes en -er : cas particuliers (G1.8) */
 export const A1_GR_VERBES_ER_PART: GrammarLesson = {
@@ -374,46 +375,5 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Aller et cas particuliers",
-      instruction: "Choisissez la forme correcte.",
-      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ au cinéma.", choices: ["vais", "vas", "va", "vont"], correctIdx: 0 },
-        { sentence: "Nous ___ à la médiathèque.", choices: ["allons", "allez", "vont", "vais"], correctIdx: 0 },
-        { sentence: "Ils ___ à la piscine.", choices: ["vont", "va", "allons", "allez"], correctIdx: 0 },
-        { sentence: "Tu ___ l'addition ?", choices: ["paies", "payons", "payez", "paient"], correctIdx: 0 },
-        { sentence: "J'___ une lettre.", choices: ["envoie", "envoies", "envoyons", "envoyez"], correctIdx: 0 },
-        { sentence: "Nous ___ en groupe.", choices: ["voyageons", "voyagons", "voyagez", "voyagent"], correctIdx: 0 },
-        { sentence: "Nous ___ jeudi.", choices: ["commençons", "commencons", "commencez", "commencent"], correctIdx: 0 },
-        { sentence: "J'___ du pain.", choices: ["achète", "achete", "achetons", "achetez"], correctIdx: 0 },
-        { sentence: "Ils ___ des amis.", choices: ["appellent", "apelent", "appelons", "appelez"], correctIdx: 0 },
-        { sentence: "Je ___ sortir.", choices: ["préfère", "préfére", "préférons", "préférez"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Conjuguez",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      transInstruction: { en: "Conjugate the verb in parentheses in the present tense.", ar: "صرّف الفعل بين القوسين في زمن المضارع.", fa: "فعل داخل پرانتز را در زمان حال صرف کنید.", ti: "ነቲ ኣብ ቅንፍ ዘሎ ግሲ ብህሉው ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках у теперішньому часі." },
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ (aller) au distributeur.", hint: "aller → je", answer: "vais" },
-        { sentence: "Vous ___ (aller) au gymnase.", hint: "aller → vous", answer: "allez" },
-        { sentence: "Il ___ (envoyer) un mail.", hint: "envoyer → il", answer: "envoie" },
-        { sentence: "Nous ___ (voyager) souvent.", hint: "voyager → nous", answer: "voyageons" },
-        { sentence: "Nous ___ (commencer) demain.", hint: "commencer → nous", answer: "commençons" },
-        { sentence: "Tu ___ (acheter) du beurre.", hint: "acheter → tu", answer: "achètes" },
-        { sentence: "Elle ___ (appeler) le médecin.", hint: "appeler → elle", answer: "appelle" },
-        { sentence: "Ils ___ (préférer) lire.", hint: "préférer → ils", answer: "préfèrent" },
-        { sentence: "Je ___ (s'ennuyer).", hint: "s'ennuyer → je", answer: "m'ennuie" },
-        { sentence: "On ___ (aller) en Espagne.", hint: "aller → on", answer: "va" },
-      ],
-    },
-  ],
+  exercises: G1_EXERCISES["G1.8"](),
 };
