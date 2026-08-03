@@ -163,11 +163,11 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["On prononce la consonne finale du radical, mais on ne prononce pas les terminaisons {a}-e, -es, -ent{/a}."],
+      items: ["{a}1.{/a} On prononce la consonne finale du radical, mais on ne prononce pas les terminaisons {a}-e, -es, -ent{/a}."],
     },
     {
       type: "plain_list",
-      items: ["On fait la liaison."],
+      items: ["{a}2.{/a} On fait la liaison."],
     },
     {
       type: "highlight",
@@ -177,13 +177,16 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: ["Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle ou un h muet."],
+      items: ["{a}3.{/a} Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle ou un h muet."],
     },
     {
       type: "highlight",
       label: "",
-      items: ["{s}Je aime{/s} → {a}J'aime{/a} ma ville. / {s}Je habite{/s} → {a}J'habite{/a} à Paris."],
-      noBulletItems: [0],
+      items: [
+        "{s}Je aime{/s} → {a}J'aime{/a} ma ville.",
+        "{s}Je habite{/s} → {a}J'habite{/a} à Paris.",
+      ],
+      noBulletItems: [0, 1],
       inlineArrows: true,
     },
   ],
