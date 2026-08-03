@@ -9,22 +9,52 @@ export const A1_GR_AVOIR: GrammarLesson = {
   theory: [
     {
       type: "heading",
-      text: "Utilisation",
-      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
+      text: "AVOIR",
+      trans: { en: "TO HAVE", ar: "يملك", fa: "داشتن", ti: "ምሓዝ", uk: "AVOIR" },
     },
     {
       type: "plain_list",
-      label: "Le verbe avoir est utilisé pour :",
       items: [
-        "dire l'âge. → Il {a}a{/a} 30 ans.",
-        "parler de la famille et des amis. → Tu {a}as{/a} une amie française ? / Nous {a}avons{/a} deux frères.",
-        "dire ce qu'on possède. → J'{a}ai{/a} une tablette. / Elle {a}a{/a} un portable.",
+        "Le verbe AVOIR sert à dire l'âge, de parler de la famille et des amis, de dire ce qu'on possède ou d'exprimer une sensation.",
       ],
-      allBullets: true,
     },
     {
-      type: "note",
-      text: "Le verbe avoir est aussi utilisé dans quelques expressions qui expriment une sensation : avoir chaud, avoir froid, avoir faim, avoir soif, avoir mal, avoir peur.",
+      type: "heading",
+      text: "Exemple",
+      sub: true,
+      accent: true,
+    },
+    {
+      type: "grid",
+      headers: ["", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Possession", "J'{a}ai{/a} un téléphone."],
+        ["Âge", "Elle {a}a{/a} 25 ans."],
+        ["Sensations", "Nous {a}avons{/a} faim."],
+        ["Expressions", "Il {a}a{/a} de la chance."],
+      ],
+    },
+    {
+      type: "heading",
+      text: "Expressions avec AVOIR",
+      sub: true,
+      accent: true,
+    },
+    {
+      type: "grid",
+      headers: ["Expression", "Signification"],
+      equalCols: true,
+      rows: [
+        ["{a}Avoir faim{/a}", "vouloir manger"],
+        ["{a}Avoir soif{/a}", "vouloir boire"],
+        ["{a}Avoir froid{/a}", "ressentir le froid"],
+        ["{a}Avoir chaud{/a}", "ressentir la chaleur"],
+        ["{a}Avoir peur{/a}", "être effrayé(e)"],
+        ["{a}Avoir mal{/a}", "ressentir une douleur"],
+        ["{a}Avoir raison{/a}", "être correct(e)"],
+        ["{a}Avoir tort{/a}", "se tromper"],
+      ],
     },
     {
       type: "heading",
@@ -53,7 +83,7 @@ export const A1_GR_AVOIR: GrammarLesson = {
       type: "plain_list",
       items: [
         "On ne prononce pas le {a}e{/a} final de {a}elle{/a}. → Elle a 10 ans.",
-        "On fait la liaison. → On a, nous avons, vous avez, ils ont, elles ont.",
+        "On fait la liaison. → O{li}n|a{/li}, nou{li}s|a{/li}vons, vou{li}s|a{/li}vez, il{li}s|o{/li}nt, elle{li}s|o{/li}nt.",
         "Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle. → {s}Je ai{/s} → {a}J'ai{/a} 20 ans.",
       ],
       allBullets: true,

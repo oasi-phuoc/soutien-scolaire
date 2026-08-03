@@ -28,11 +28,11 @@ export const A1_GR_ETRE: GrammarLesson = {
       headers: ["", "Exemple"],
       boldFirstCol: true,
       rows: [
-        ["Identité", "Je suis Ali."],
-        ["Nationalité", "Elle est française."],
-        ["Profession", "Nous sommes étudiants."],
-        ["Description", "Il est grand."],
-        ["Situation", "Tu es à Genève."],
+        ["Identité", "Je {a}suis{/a} Ali."],
+        ["Nationalité", "Elle {a}est{/a} française."],
+        ["Profession", "Nous {a}sommes{/a} étudiants."],
+        ["Description", "Il {a}est{/a} grand."],
+        ["Situation", "Tu {a}es{/a} à Genève."],
       ],
     },
     {
@@ -60,7 +60,7 @@ export const A1_GR_ETRE: GrammarLesson = {
       type: "plain_list",
       items: [
         "On ne prononce pas le {a}e{/a} final de {a}elle{/a}. → Elle est…",
-        "On fait la liaison. → On est, vous êtes.",
+        "On fait la liaison. → O{li}n|e{/li}st, vou{li}s|ê{/li}tes.",
       ],
       allBullets: true,
     },

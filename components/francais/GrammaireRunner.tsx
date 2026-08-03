@@ -77,8 +77,31 @@ function renderArrow(text: string) {
   );
 }
 
+function LiaisonPair({ left, right }: { left: string; right: string }) {
+  return (
+    <span className="relative inline-flex items-end gap-[0.15em] px-[0.05em] pt-2">
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute left-0 right-0 top-0 h-2.5 w-full"
+        viewBox="0 0 60 12"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M 4 10 Q 30 -2 56 10"
+          fill="none"
+          stroke="var(--color-accent-fr)"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+      </svg>
+      <span className="font-bold text-[var(--color-accent-fr)]">{left}</span>
+      <span className="font-bold text-[var(--color-accent-fr)]">{right}</span>
+    </span>
+  );
+}
+
 function renderInlineMarkup(text: string, useArrow = true): React.ReactNode {
-  const parts = text.split(/(\{(?:su|ve|co|a|b|s)\}[\s\S]*?\{\/(?:su|ve|co|a|b|s)\})/);
+  const parts = text.split(/(\{(?:su|ve|co|a|b|s|li)\}[\s\S]*?\{\/(?:su|ve|co|a|b|s|li)\})/);
   if (parts.length === 1) return useArrow ? renderArrow(text) : <>{text}</>;
   return (
     <>
@@ -89,12 +112,14 @@ function renderInlineMarkup(text: string, useArrow = true): React.ReactNode {
         const sujetMatch  = part.match(/^\{su\}([\s\S]*?)\{\/su\}$/);
         const verbeMatch  = part.match(/^\{ve\}([\s\S]*?)\{\/ve\}$/);
         const compMatch   = part.match(/^\{co\}([\s\S]*?)\{\/co\}$/);
+        const liaisonMatch = part.match(/^\{li\}([\s\S]*?)\|([\s\S]*?)\{\/li\}$/);
         if (accentMatch) return <span key={i} className="font-semibold text-[var(--color-accent-fr)]">{accentMatch[1]}</span>;
         if (strikeMatch) return <span key={i} className="font-semibold line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
         if (boldMatch)   return <span key={i} className="font-semibold">{boldMatch[1]}</span>;
         if (sujetMatch)  return <span key={i} className="font-bold underline decoration-yellow-400 decoration-[3px] underline-offset-2">{sujetMatch[1]}</span>;
         if (verbeMatch)  return <span key={i} className="font-bold underline decoration-red-500 decoration-[3px] underline-offset-2">{verbeMatch[1]}</span>;
         if (compMatch)   return <span key={i} className="font-bold underline decoration-green-500 decoration-[3px] underline-offset-2">{compMatch[1]}</span>;
+        if (liaisonMatch) return <LiaisonPair key={i} left={liaisonMatch[1]!} right={liaisonMatch[2]!} />;
         return <React.Fragment key={i}>{useArrow ? renderArrow(part) : part}</React.Fragment>;
       })}
     </>
