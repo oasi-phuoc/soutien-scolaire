@@ -157,13 +157,15 @@ export function ExSentenceWrite({
           const articleDisplay = p.displayArticle
             ? (p.displayArticle.endsWith("'") ? p.displayArticle : `${p.displayArticle} `)
             : "";
+          const promptLabel = `${articleDisplay}${p.word}`;
           return (
-            <div key={p.word} className="space-y-0.5">
-              <p className="text-sm font-bold text-[var(--color-text-primary)]">
-                <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
-                {articleDisplay && <span className="font-normal text-[var(--color-text-secondary)]">{articleDisplay}</span>}
-                {p.word}
-              </p>
+            <div key={p.word} className="space-y-1">
+              {/* div (pas p.font-bold) : globals.css masque p.font-bold dans .print-ex-content */}
+              <div className="flex min-w-0 items-baseline gap-1.5 text-sm">
+                <span className="shrink-0 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
+                <span className="shrink-0 font-semibold text-[var(--color-text-primary)]">{promptLabel}</span>
+                <span className="shrink-0 text-[var(--color-text-secondary)]">:</span>
+              </div>
               {isCheckedDone && hasErrors && revealCorrection ? (
                 <div className="border-b border-amber-400 py-1 text-center">
                   <p className="text-sm text-amber-600 line-through">{s.answer || "—"}</p>
@@ -188,6 +190,7 @@ export function ExSentenceWrite({
                   onChange={(e) => setStates((prev) => ({ ...prev, [p.word]: { ...initState(), answer: e.target.value } }))}
                   readOnly={s.checked}
                   className="w-full rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)]"
+                  aria-label={`Phrase avec ${promptLabel}`}
                 />
               )}
               {s.checked && s.grammarChecking && (

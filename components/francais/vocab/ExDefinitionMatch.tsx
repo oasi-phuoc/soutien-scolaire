@@ -1,13 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
+  ExerciseProps, pickN, shuffle, normalizeText,
 } from "./vocabUtils";
-import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
+
+const LETTER_INPUT_CLS =
+  "h-8 w-10 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 " +
+  "bg-transparent px-0 pb-0.5 text-center text-sm outline-none " +
+  "transition-colors focus:border-[var(--color-accent-fr)]";
 
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
@@ -62,17 +66,12 @@ export function ExDefinitionMatch({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  function handleSelect(cardWord: string, newValue: string) {
-    setStates((prev) => {
-      const oldValue = prev[cardWord]?.answer ?? "";
-      const next = { ...prev };
-      const clash = Object.entries(prev).find(([w, s]) => w !== cardWord && s.answer === newValue && newValue !== "");
-      if (clash) {
-        next[clash[0]] = { ...prev[clash[0]]!, answer: oldValue, checked: false, correct: false };
-      }
-      next[cardWord] = { ...prev[cardWord]!, answer: newValue, checked: false, correct: false };
-      return next;
-    });
+  function handleChange(cardWord: string, raw: string) {
+    const letter = raw.replace(/[^a-zA-Z]/g, "").slice(-1).toLowerCase();
+    setStates((prev) => ({
+      ...prev,
+      [cardWord]: { ...prev[cardWord]!, answer: letter, checked: false, correct: false },
+    }));
   }
 
   const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 5}` : "Exercice 5";
@@ -81,9 +80,8 @@ export function ExDefinitionMatch({
     <div>
       <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
-        Associez chaque définition au mot correspondant en choisissant la lettre.
+        Associez chaque définition au mot correspondant en écrivant la lettre.
       </p>
-      {/* Word list — three columns, 9 words, lettered a–i */}
       <div className="grid grid-cols-2 gap-x-4 gap-y-1">
         {words.map((w, i) => (
           <div key={w.word} className="flex items-baseline">
@@ -95,10 +93,8 @@ export function ExDefinitionMatch({
           </div>
         ))}
       </div>
-      {/* Separator */}
       <hr className="mt-3 border-[var(--color-border-default)]" />
       <div className="mb-4" />
-      {/* Definition rows — numbered, select shows letters */}
       <div className={listClass}>
         {shownDefs.map((w, idx) => {
           const s = states[w.word]!;
@@ -106,23 +102,23 @@ export function ExDefinitionMatch({
           return (
             <div key={w.word} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-              <p className="flex-1 text-sm text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
+              <p className="min-w-0 flex-1 text-sm text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
               <div className="shrink-0">
                 {s.checked && !s.correct && revealCorrection ? (
-                  <div className={`h-8 w-20 ${WRONG_BOX_CLS}`}>
-                    <span className="text-[9px] leading-none text-amber-600 line-through">{s.answer || "—"}</span>
-                    <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{WORD_LETTERS[correctIdx]}</span>
+                  <div className="flex h-8 w-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{WORD_LETTERS[correctIdx]}</span>
                   </div>
                 ) : (
-                  <AppSelect
+                  <input
+                    type="text"
+                    inputMode="text"
+                    maxLength={1}
                     value={s.answer}
-                    onChange={(v) => handleSelect(w.word, v)}
-                    options={WORD_LETTERS.slice(0, words.length).map((letter) => ({ value: letter, label: letter }))}
-                    placeholder=""
-                    emptyOption={{ value: "", label: "" }}
-                    disabled={s.checked}
-                    size="sm"
-                    className="w-20"
+                    onChange={(e) => handleChange(w.word, e.target.value)}
+                    readOnly={s.checked}
+                    className={LETTER_INPUT_CLS}
+                    aria-label={`Lettre pour la définition ${idx + 1}`}
                   />
                 )}
               </div>

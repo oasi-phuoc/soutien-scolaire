@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS,
+  ExerciseProps, shuffle, normalizeText,
 } from "./vocabUtils";
-import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
+
+const WORD_INPUT_CLS =
+  "mx-1 inline-block h-8 w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 " +
+  "bg-transparent px-0 pb-0.5 text-center text-sm outline-none " +
+  "transition-colors focus:border-[var(--color-accent-fr)]";
 
 const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -115,26 +119,24 @@ export function ExFillSentences({
               <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <span className="text-[var(--color-text-primary)]">{before}</span>
               {s.checked && !s.correct && revealCorrection ? (
-                <span className={`mx-1 inline-flex h-8 w-28 ${WRONG_BOX_CLS}`}>
-                  <span className="text-[9px] leading-none text-amber-600 line-through">{s.answer || "—"}</span>
-                  <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{sent.answer}</span>
+                <span className="mx-1 inline-flex h-8 w-28 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 align-middle">
+                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                  <span className="text-xs font-bold leading-none text-amber-600">{sent.answer}</span>
                 </span>
               ) : (
-                <AppSelect
+                <input
+                  type="text"
                   value={s.answer}
-                  onChange={(v) =>
+                  onChange={(e) =>
                     setStates((prev) =>
                       prev.map((st, j) =>
-                        j === i ? { ...st, answer: v, checked: false, correct: false } : st
+                        j === i ? { ...st, answer: e.target.value, checked: false, correct: false } : st
                       )
                     )
                   }
-                  options={bankWords.map((word) => ({ value: word, label: word }))}
-                  placeholder=""
-                  emptyOption={{ value: "", label: "" }}
-                  disabled={s.checked}
-                  size="sm"
-                  className="mx-1 inline-block w-28"
+                  readOnly={s.checked}
+                  className={WORD_INPUT_CLS}
+                  aria-label={`Mot manquant phrase ${i + 1}`}
                 />
               )}
               <span className="text-[var(--color-text-primary)]">{after}</span>
