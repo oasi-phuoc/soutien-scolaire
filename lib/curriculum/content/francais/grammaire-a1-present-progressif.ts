@@ -1,47 +1,155 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 10 — Le présent progressif (G1.11) */
+/** Unité 10 — Les aspects du présent (G1.11) */
 export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
   slug: "a1-gr-present-progressif",
   code: "G1.11",
   level: "A1",
-  title: "Le présent progressif",
+  title: "Les aspects du présent",
   theory: [
     {
       type: "heading",
-      text: "Utilisation",
+      text: "Le présent progressif",
     },
     {
       type: "plain_list",
       items: [
-        "On utilise le présent progressif à la place du présent simple pour parler d'une action qui se passe au moment exact où l'on parle.",
-        "Présent simple : Non, je {a}prends{/a} ma douche. (information)",
-        "Présent progressif : Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)",
-        "On l'emploie souvent pour expliquer pourquoi on ne peut pas faire autre chose.",
-        "Son emploi n'est pas obligatoire : on peut utiliser le présent simple. Mais on {a}ne peut pas{/a} l'utiliser pour une action habituelle ou une description générale.",
+        "{a}1.{/a} On utilise le présent progressif à la place du présent simple pour parler d'une action qui se passe au moment exact où l'on parle.",
       ],
-      allBullets: true,
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}2.{/a} On l'emploie souvent pour expliquer pourquoi on ne peut pas faire autre chose.",
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}3.{/a} On ne peut pas l'utiliser pour une action habituelle ou une description générale.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Aspect", "Exemple"],
+      colWidths: ["11rem", "auto"],
+      rows: [
+        ["Présent simple", "Non, je {a}prends{/a} ma douche. (information)"],
+        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"],
+      ],
     },
     {
       type: "heading",
-      text: "Formes",
+      text: "Forme",
     },
     {
       type: "plain_list",
-      items: [
-        "Verbe {a}être{/a} (présent) + {a}en train de{/a} + infinitif. → Il est en train de dormir.",
-        "Avec un verbe pronominal, le pronom se place devant l'infinitif. → Elles sont en train de se préparer.",
-        "À la forme négative, {a}ne… pas{/a} encadre le verbe être. → Ils ne sont pas en train de travailler. / Tu n'es pas en train de te préparer ?",
-      ],
-      allBullets: true,
+      items: ["Verbe {a}être{/a} (présent) + {a}en train de{/a} + infinitif."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Il {a}est en train de{/a} dormir."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["Avec un verbe pronominal, le pronom se place devant l'infinitif."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Elles {a}sont en train de{/a} se préparer."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["À la forme négative, {a}ne… pas{/a} encadre le verbe être."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Ils {a}ne{/a} sont {a}pas{/a} en train de travailler."],
+      noBulletItems: [0],
     },
     {
       type: "heading",
       text: "Orthographe",
     },
     {
-      type: "note",
-      text: "De devient d' devant un verbe qui commence par une voyelle ou un h muet. → Nous sommes en train d'apprendre le français.",
+      type: "plain_list",
+      items: [
+        "{a}De{/a} devient {a}d'{/a} devant un verbe qui commence par une voyelle ou un h muet.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "Nous sommes en train {s}de{/s} apprendre le français.",
+        "Nous sommes en train {a}d'{/a}apprendre le français.",
+      ],
+      noBulletItems: [0, 1],
+      inlineArrows: true,
+    },
+
+    {
+      type: "heading",
+      text: "Le présent continu",
+    },
+    {
+      type: "heading",
+      text: "Forme",
+    },
+    {
+      type: "plain_list",
+      items: ["Verbe {a}être{/a} (présent) + {a}en train de{/a} + infinitif."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Il {a}est en train de{/a} dormir."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["Avec un verbe pronominal, le pronom se place devant l'infinitif."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Elles {a}sont en train de{/a} se préparer."],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: ["À la forme négative, {a}ne… pas{/a} encadre le verbe être."],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: ["Ils {a}ne{/a} sont {a}pas{/a} en train de travailler."],
+      noBulletItems: [0],
+    },
+    {
+      type: "heading",
+      text: "Orthographe",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}De{/a} devient {a}d'{/a} devant un verbe qui commence par une voyelle ou un h muet.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "Nous sommes en train {s}de{/s} apprendre le français.",
+        "Nous sommes en train {a}d'{/a}apprendre le français.",
+      ],
+      noBulletItems: [0, 1],
+      inlineArrows: true,
     },
   ],
   exercises: [

@@ -24,7 +24,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-verbes-er-particuliers", "G1.8", "Les verbes en -er : cas particuliers", "Aller ; -ayer/-oyer/-uyer ; -ger/-cer ; -eler/-eter/-érer.", "grammaire"),
   lesson("A1", "a1-gr-verbes-ir", "G1.9", "Les verbes en -ir", "Quatre modèles : finir, ouvrir, partir/dormir/servir, venir/tenir.", "grammaire"),
   lesson("A1", "a1-gr-verbes-re-oir", "G1.10", "Les verbes en -re et en -oir", "Modèles lire, faire, prendre, savoir/connaître, voir, peindre…", "grammaire"),
-  lesson("A1", "a1-gr-present-progressif", "G1.11", "Le présent progressif", "Être en train de + infinitif : action en cours au moment où l'on parle.", "grammaire"),
+  lesson("A1", "a1-gr-present-progressif", "G1.11", "Les aspects du présent", "Présent progressif et présent continu : être en train de + infinitif.", "grammaire"),
   // ── G2 — Le nom ──
   lesson("A1", "a1-gr-genre-personnes", "G2.1", "Le masculin et le féminin des noms (personnes)", "Formation du féminin des noms de personnes et nationalités.", "grammaire"),
   lesson("A1", "a1-gr-genre-choses", "G2.2", "Le masculin et le féminin des noms (choses)", "Repères de genre pour les noms de choses : terminaisons et déterminants.", "grammaire"),
