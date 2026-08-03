@@ -122,6 +122,7 @@ function vocabTrainingSteps(theme: VocabTheme): {
   label: string;
   defaultQuestionCount: number;
   defaultSpacing?: number;
+  printLengthMode?: "width" | "lines" | "none";
 }[] {
   const hasMF = theme.words.filter((w) => !!w.feminine).length >= 5;
   const n = (base: number) => (hasMF ? base + 1 : base);
@@ -129,15 +130,35 @@ function vocabTrainingSteps(theme: VocabTheme): {
     { key: "ex1-image-match", label: "Ex. 1", defaultQuestionCount: 6, defaultSpacing: 5 },
     { key: "ex2-article", label: "Ex. 2", defaultQuestionCount: 6 },
     { key: "ex4-missing-letters", label: "Ex. 3", defaultQuestionCount: 5 },
-    { key: "ex3-anagram", label: "Ex. 4", defaultQuestionCount: 5 },
+    // Trait flex (reste du conteneur) : Longueurs non applicable
+    { key: "ex3-anagram", label: "Ex. 4", defaultQuestionCount: 5, printLengthMode: "none" },
     { key: "ex5-definition-match", label: "Ex. 5", defaultQuestionCount: 5 },
     { key: "ex6-fill-sentences", label: "Ex. 6", defaultQuestionCount: 5 },
-    ...(hasMF ? [{ key: "ex-masc-fem", label: "Ex. 7", defaultQuestionCount: 6 }] : []),
-    { key: "ex7-image-write", label: `Ex. ${n(7)}`, defaultQuestionCount: 5 },
+    ...(hasMF
+      ? [{ key: "ex-masc-fem", label: "Ex. 7", defaultQuestionCount: 6, printLengthMode: "none" as const }]
+      : []),
+    {
+      key: "ex7-image-write",
+      label: `Ex. ${n(7)}`,
+      defaultQuestionCount: 5,
+      printLengthMode: "none",
+    },
     { key: "ex8-dictation", label: `Ex. ${n(8)}`, defaultQuestionCount: 6, defaultSpacing: 5 },
     { key: "ex-word-order", label: `Ex. ${n(9)}`, defaultQuestionCount: 5 },
-    { key: "ex9-sentence-write", label: `Ex. ${n(10)}`, defaultQuestionCount: 5, defaultSpacing: 5 },
-    { key: "ex10-question-write", label: `Ex. ${n(11)}`, defaultQuestionCount: 5, defaultSpacing: 5 },
+    {
+      key: "ex9-sentence-write",
+      label: `Ex. ${n(10)}`,
+      defaultQuestionCount: 5,
+      defaultSpacing: 5,
+      printLengthMode: "lines",
+    },
+    {
+      key: "ex10-question-write",
+      label: `Ex. ${n(11)}`,
+      defaultQuestionCount: 5,
+      defaultSpacing: 5,
+      printLengthMode: "lines",
+    },
   ];
 }
 
@@ -228,6 +249,7 @@ function buildVocabBundle(slug: string): PrintBundle | null {
         defaultQuestionCount: step.defaultQuestionCount,
         defaultColumns: 1 as const,
         defaultSpacing: step.defaultSpacing,
+        printLengthMode: step.printLengthMode,
         preview: (
           <PlacementPrintSeedRoot seed={seed}>
             {vocabExPreview(step.key, theme, 0)}
@@ -266,6 +288,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
           defaultQuestionCount: grammarDefaultQuestionCount(ex),
           defaultColumns: 1 as const,
           defaultSpacing: isWriteStacked ? 5 : undefined,
+          printLengthMode: isWriteStacked ? ("lines" as const) : ("width" as const),
           preview: (
             <PlacementPrintSeedRoot seed={seed}>
               <GrammarExerciseView
@@ -315,6 +338,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
         defaultQuestionCount: grammarDefaultQuestionCount(ex),
         defaultColumns: 1 as const,
         defaultSpacing: isWriteStacked ? 5 : undefined,
+        printLengthMode: isWriteStacked ? ("lines" as const) : ("width" as const),
         preview: (
           <PlacementPrintSeedRoot seed={seed}>
             <GrammarExerciseView

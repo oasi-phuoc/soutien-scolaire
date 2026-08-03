@@ -423,14 +423,31 @@ input[type=number] {
   padding: 0 !important;
 }
 
-/* Autres cartes décoratives (énoncés / blocs d'exercice) : sans bordure à l'impression. */
-.print-layout-context .print-ex-content .rounded-xl,
-.print-layout-context .print-ex-content .rounded-lg,
-.print-layout-context .print-ex-content .rounded-md,
-.print-layout-context .print-ex-content [class*="rounded-[var(--radius"] {
+/* Autres cartes décoratives (énoncés / blocs d'exercice) : sans bordure à l'impression.
+ * Les boutons de choix (QCM etc.) conservent leur contour thème. */
+.print-layout-context .print-ex-content .rounded-xl:not(button):not(.print-choice-btn),
+.print-layout-context .print-ex-content .rounded-lg:not(button):not(.print-choice-btn),
+.print-layout-context .print-ex-content .rounded-md:not(button):not(.print-choice-btn),
+.print-layout-context .print-ex-content [class*="rounded-[var(--radius"]:not(button):not(.print-choice-btn) {
   border: none !important;
   background-color: transparent !important;
   box-shadow: none !important;
+}
+
+/* Contours des boutons de choix visibles à l'impression. */
+.print-layout-context .print-ex-content button.print-choice-btn {
+  border-style: solid !important;
+  border-color: var(--color-accent-fr) !important;
+  background-color: transparent !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--selected {
+  border-width: 2px !important;
+  background-color: color-mix(in oklch, var(--color-accent-fr) 10%, transparent) !important;
+}
+.print-layout-context .print-ex-content button.print-choice-btn:not(.print-choice-btn--selected) {
+  border-width: 1px !important;
 }
 
 /* Masquer les indices « Calcul » / détails écran sur la feuille d'impression. */

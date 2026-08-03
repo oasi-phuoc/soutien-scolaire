@@ -128,10 +128,15 @@ function buildItemsFromGabarit(
   let endingQcm: QcmItem;
   let endingFill: FillItem;
 
-  if (style === "ending" && v.stem) {
+  // Radical + ___ dès qu'il y a un stem et des terminaisons courtes (ex. mang___).
+  // Sinon (être / avoir / formes irrégulières) : blanc pour la forme entière.
+  const useStemBlank =
+    Boolean(v.stem) && (style === "ending" || ends.every((e) => e.length <= 4));
+
+  if (useStemBlank) {
     const subj = subjectOf(idx, v.stem);
     endingQcm = {
-      sentence: `${subj.display}${subj.sep}${v.stem}__${tail}`,
+      sentence: `${subj.display}${subj.sep}${v.stem}___${tail}`,
       choices: pickChoices(ending, ends),
       correctIdx: 0,
       gabaritId,

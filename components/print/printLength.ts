@@ -1,37 +1,42 @@
-/** Échelle « Longueurs » (1–5) pour traits de réponse / boutons de choix. */
-export const PRINT_LENGTH_DEFAULT = 3;
+/**
+ * Option « Longueurs » : défaut 0, plage -10…+10.
+ * Chaque cran = ±10 % de la largeur de base.
+ * Mode « lines » (traits pleine largeur) : minimum -1 (retire 1 ligne).
+ */
+export const PRINT_LENGTH_DEFAULT = 0;
+export const PRINT_LENGTH_MIN = -10;
+export const PRINT_LENGTH_MAX = 10;
+/** Minimum pour les exercices à traits pleine largeur (write / vocab phrase). */
+export const PRINT_LENGTH_LINES_MIN = -1;
 
-/** Multiplicateur de largeur des textbox / boutons (défaut = 1). */
-export const PRINT_LENGTH_WIDTH_SCALE: Record<number, number> = {
-  1: 0.7,
-  2: 0.85,
-  3: 1,
-  4: 1.4,
-  5: 1.8,
-};
+export type PrintLengthMode = "width" | "lines" | "none";
+
+export function clampPrintLength(
+  length: number | undefined,
+  mode: PrintLengthMode = "width",
+): number {
+  const raw = length ?? PRINT_LENGTH_DEFAULT;
+  if (mode === "none") return PRINT_LENGTH_DEFAULT;
+  const min = mode === "lines" ? PRINT_LENGTH_LINES_MIN : PRINT_LENGTH_MIN;
+  return Math.max(min, Math.min(PRINT_LENGTH_MAX, raw));
+}
+
+/** Multiplicateur de largeur : 1 + length × 0.1 (ex. +2 → 1.2). */
+export function printLengthWidthScale(
+  length: number | undefined,
+  mode: PrintLengthMode = "width",
+): number {
+  if (mode === "none") return 1;
+  return 1 + clampPrintLength(length, mode) * 0.1;
+}
 
 /**
- * Nombre de traits pleine largeur (ex. write / vocab phrase).
- * Défaut 2 (comme Ex11–12 vocab / Ex7 grammaire).
+ * Nombre de traits pleine largeur.
+ * Base = 2 à length 0 ; -1 → 1 ligne ; +n → 2+n lignes.
  */
-export const PRINT_LENGTH_FULL_LINES: Record<number, number> = {
-  1: 1,
-  2: 1,
-  3: 2,
-  4: 3,
-  5: 4,
-};
-
-export function clampPrintLength(length: number | undefined): number {
-  return Math.max(1, Math.min(5, length ?? PRINT_LENGTH_DEFAULT));
-}
-
-export function printLengthWidthScale(length: number | undefined): number {
-  return PRINT_LENGTH_WIDTH_SCALE[clampPrintLength(length)] ?? 1;
-}
-
 export function printLengthFullLines(length: number | undefined): number {
-  return PRINT_LENGTH_FULL_LINES[clampPrintLength(length)] ?? 2;
+  const l = clampPrintLength(length, "lines");
+  return Math.max(1, 2 + l);
 }
 
 /** Largeur CSS à partir d’une largeur de base (ex. "7rem") et de l’échelle. */

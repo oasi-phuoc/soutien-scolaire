@@ -160,7 +160,7 @@ export function ExSentenceWrite({
             : "";
           const promptLabel = `${articleDisplay}${p.word}`;
           return (
-            <div key={p.word} className="space-y-1">
+            <div key={p.word} className={isPrint ? undefined : "space-y-1"}>
               {/* div (pas p.font-bold) : globals.css masque p.font-bold dans .print-ex-content */}
               <div className="flex min-w-0 items-baseline gap-1.5 text-sm">
                 <span className="shrink-0 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>

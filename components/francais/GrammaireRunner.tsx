@@ -722,13 +722,14 @@ function QcmExercise({
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
-  /** Largeur uniforme des boutons de choix (min + max du contenu × échelle Longueurs). */
+  /** Largeur uniforme des boutons (contenu le plus long + marge, × Longueurs). */
   const choiceWidthCh = useMemo(() => {
     const longest = items.reduce(
       (max, it) => Math.max(max, ...it.choices.map((c) => c.length)),
       0,
     );
-    return Math.max(6, Math.ceil(Math.max(longest, 4) * lengthScale));
+    // +2 ch pour le padding interne ; évite le dépassement du texte
+    return Math.max(5, Math.ceil((Math.max(longest, 3) + 2) * lengthScale));
   }, [items, lengthScale]);
 
   function select(itemIdx: number, choiceIdx: number) {
@@ -780,12 +781,11 @@ function QcmExercise({
         const choiceBtnClass = (ci: number, opts?: { fixed?: boolean; compact?: boolean }) => {
           const isSelected = selected[i] === ci;
           const isCorrect = ci === item.correctIdx;
-          const isFour = item.choices.length >= 4;
-          let cls = opts?.fixed
-            ? "rounded-[var(--radius-md)] border-2 px-2 py-1.5 text-sm font-medium text-center transition-colors whitespace-nowrap "
-            : opts?.compact
-              ? "rounded-[var(--radius-md)] border-2 px-2 py-1.5 text-xs font-medium text-center transition-colors whitespace-nowrap "
-              : `rounded-[var(--radius-md)] border-2 ${isFour ? "px-1.5 py-2 text-sm" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
+          // Contour fin au repos, épais à la sélection ; print-choice-btn pour l'impression
+          let cls =
+            "print-choice-btn box-border rounded-md px-2.5 text-center font-medium transition-[border-width,background-color,color] whitespace-nowrap " +
+            (opts?.compact ? "py-1.5 text-xs " : "py-2 text-sm ") +
+            (isSelected ? "print-choice-btn--selected border-2 " : "border ");
           if (!validated || !revealCorrection) {
             cls += isSelected
               ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -799,13 +799,13 @@ function QcmExercise({
             } else {
               cls += isSelected
                 ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                : "border-[var(--color-accent-fr)]/40 bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                : "border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
             }
           }
           return cls;
         };
 
-        const choiceStyle = { width: `${choiceWidthCh}ch` } as const;
+        const choiceStyle = { width: `${choiceWidthCh}ch`, minWidth: `${choiceWidthCh}ch` } as const;
 
         if (hasInlineToggle) {
           const inlineGroup = (
@@ -1780,7 +1780,7 @@ function WriteExercise({
         const isClean = validated && revealCorrection && !checking && ltErrors.length === 0 && inputText.length > 2 && verbOk;
 
         return (
-          <div key={i} className="space-y-1">
+          <div key={i} className={isPrint && exercise.promptLayout === "stacked" ? undefined : "space-y-1"}>
             {exercise.promptLayout === "stacked" ? (
               <>
                 <p className="text-sm font-medium text-[var(--color-text-primary)]">
@@ -1934,16 +1934,19 @@ function TrueFalseExercise({
           const segCls = (val: boolean) => {
             const isSelected = chosen === val;
             const showCorrection = validated && revealCorrection;
+            const base =
+              "print-choice-btn rounded-md px-4 py-1.5 text-xs transition-[border-width,background-color] disabled:cursor-default " +
+              (isSelected ? "print-choice-btn--selected border-2 font-semibold " : "border font-medium ");
             if (isSelected) {
               if (showCorrection && !isRight) {
-                return "border-amber-500 px-4 py-1.5 text-xs font-medium bg-amber-50 text-amber-600";
+                return `${base}border-amber-500 bg-amber-50 text-amber-600`;
               }
-              return "border-[var(--color-accent-fr)] px-4 py-1.5 text-xs font-semibold bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+              return `${base}border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]`;
             }
             if (showCorrection && !isRight && val === correct) {
-              return "border-amber-500 px-4 py-1.5 text-xs font-semibold bg-amber-50 text-amber-600";
+              return `${base}border-amber-500 bg-amber-50 text-amber-600`;
             }
-            return "border-[var(--color-border)] px-4 py-1.5 text-xs font-medium text-[var(--color-text-secondary)]";
+            return `${base}border-[var(--color-accent-fr)] text-[var(--color-text-secondary)]`;
           };
 
           return (
@@ -1953,10 +1956,10 @@ function TrueFalseExercise({
                 <p className="text-sm text-[var(--color-text-primary)]">{item.statement}</p>
               </div>
               <div className="flex shrink-0 gap-1.5">
-                <button onClick={() => pick(i, true)} disabled={validated} className={`rounded-[var(--radius-md)] border ${segCls(true)} transition-colors disabled:cursor-default`}>
+                <button type="button" onClick={() => pick(i, true)} disabled={validated} className={segCls(true)}>
                   Vrai
                 </button>
-                <button onClick={() => pick(i, false)} disabled={validated} className={`rounded-[var(--radius-md)] border ${segCls(false)} transition-colors disabled:cursor-default`}>
+                <button type="button" onClick={() => pick(i, false)} disabled={validated} className={segCls(false)}>
                   Faux
                 </button>
               </div>
@@ -2131,11 +2134,13 @@ function ClassifyExercise({
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
                   const userWrong = validated && revealCorrection && !isRight;
-                  let cls = "rounded-[var(--radius-md)] border px-2 py-1.5 text-center text-xs font-medium transition-colors ";
+                  let cls =
+                    "print-choice-btn rounded-md px-2 py-1.5 text-center text-xs font-medium transition-[border-width,background-color] " +
+                    (active ? "print-choice-btn--selected border-2 " : "border ");
                   if (!validated || !revealCorrection) {
                     cls += active
                       ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
+                      : "border-[var(--color-accent-fr)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-accent-fr)]/5";
                   } else if (active && !isRight) {
                     cls += "border-amber-500 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                   } else if (userWrong && ci === item.categoryIdx) {
@@ -2143,7 +2148,7 @@ function ClassifyExercise({
                   } else if (active) {
                     cls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                   } else {
-                    cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-60";
+                    cls += "border-[var(--color-accent-fr)]/50 text-[var(--color-text-secondary)] opacity-60";
                   }
                   return (
                     <button

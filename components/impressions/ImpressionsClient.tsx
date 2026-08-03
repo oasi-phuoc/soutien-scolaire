@@ -108,8 +108,8 @@ function Counter({
       >
         −
       </button>
-      <span className="min-w-[1.75rem] text-center text-sm font-semibold tabular-nums" style={{ color: accent }}>
-        {value}
+      <span className="min-w-[2rem] text-center text-sm font-semibold tabular-nums" style={{ color: accent }}>
+        {value > 0 ? `+${value}` : value}
       </span>
       <button
         type="button"
@@ -278,7 +278,8 @@ export function ImpressionsClient() {
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 8),
         columns: ex.defaultColumns ?? 1,
         spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? 3)),
-        length: Math.max(1, Math.min(5, ex.defaultLength ?? 3)),
+        length: ex.defaultLength ?? 0,
+        printLengthMode: ex.printLengthMode ?? "width",
         pageBreak: Boolean(ex.forceNewPage),
         points: ex.defaultPoints ?? 1,
       })),
@@ -654,20 +655,22 @@ export function ImpressionsClient() {
                                   }
                                 />
                               </div>
-                              <div className="flex items-center justify-between gap-2">
-                                <span className="text-[11px] text-[var(--color-text-secondary)]">Longueurs</span>
-                                <Counter
-                                  value={sel.length}
-                                  accent={accent}
-                                  min={1}
-                                  max={5}
-                                  onChange={(length) =>
-                                    setSelection((prev) =>
-                                      prev.map((s) => (s.id === ex.id ? { ...s, length } : s)),
-                                    )
-                                  }
-                                />
-                              </div>
+                              {sel.printLengthMode !== "none" && (
+                                <div className="flex items-center justify-between gap-2">
+                                  <span className="text-[11px] text-[var(--color-text-secondary)]">Longueurs</span>
+                                  <Counter
+                                    value={sel.length}
+                                    accent={accent}
+                                    min={sel.printLengthMode === "lines" ? -1 : -10}
+                                    max={10}
+                                    onChange={(length) =>
+                                      setSelection((prev) =>
+                                        prev.map((s) => (s.id === ex.id ? { ...s, length } : s)),
+                                      )
+                                    }
+                                  />
+                                </div>
+                              )}
                               {ex.supportsPrintLayout && (
                                 <>
                                   <div className="flex items-center justify-between gap-2">

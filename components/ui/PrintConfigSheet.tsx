@@ -11,7 +11,12 @@ import {
 } from "@/components/print/PrintExerciseLayoutContext";
 import {
   PRINT_LENGTH_DEFAULT,
-  PRINT_LENGTH_WIDTH_SCALE,
+  PRINT_LENGTH_LINES_MIN,
+  PRINT_LENGTH_MAX,
+  PRINT_LENGTH_MIN,
+  type PrintLengthMode,
+  clampPrintLength,
+  printLengthWidthScale,
 } from "@/components/print/printLength";
 import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 
@@ -88,8 +93,15 @@ export interface PrintExercise {
   defaultColumns?: PrintExerciseColumns;
   /** Espacement vertical par défaut (1–5, défaut global = 3). */
   defaultSpacing?: number;
-  /** Longueurs des traits / boutons par défaut (1–5, défaut global = 3). */
+  /** Longueurs des traits / boutons par défaut (−10…+10, défaut 0). */
   defaultLength?: number;
+  /**
+   * Mode Longueurs :
+   * - `width` (défaut) : ±10 % de largeur par cran
+   * - `lines` : ajoute/retire des traits pleine largeur (min −1)
+   * - `none` : option masquée (trait flex pleine largeur restante)
+   */
+  printLengthMode?: PrintLengthMode;
   /** Active les options de mise en page (questions / colonnes) pour cet exercice. */
   supportsPrintLayout?: boolean;
 }
@@ -105,8 +117,10 @@ export interface ExercisePrintSelection {
   columns: PrintExerciseColumns;
   /** Espacement vertical entre les questions (1 = serré … 5 = aéré, 3 = défaut). */
   spacing: number;
-  /** Longueurs des traits de réponse / cadres de choix (1–5, 3 = défaut). */
+  /** Longueurs des traits de réponse / cadres de choix (−10…+10, 0 = défaut). */
   length: number;
+  /** Mode Longueurs (copié depuis le catalogue à l’init). */
+  printLengthMode: PrintLengthMode;
   /**
    * Force un saut de page avant cet exercice.
    * Défaut `false` — sauf si l’exercice catalogue a déjà `forceNewPage`.
@@ -201,21 +215,23 @@ export function PrintExerciseBody({
   children: ReactNode;
 }) {
   const spacing = printSpacingProps(selection.spacing);
-  const length = Math.max(1, Math.min(5, selection.length ?? PRINT_LENGTH_DEFAULT));
-  const lengthScale = PRINT_LENGTH_WIDTH_SCALE[length] ?? 1;
+  const lengthMode: PrintLengthMode = selection.printLengthMode ?? "width";
+  const length = clampPrintLength(selection.length, lengthMode);
+  const lengthScale = printLengthWidthScale(length, lengthMode);
   return (
     <PrintExerciseLayoutProvider
       value={{
         questionCount: selection.questionCount,
         columns: selection.columns,
         length,
+        lengthMode,
       }}
     >
       <div
-        className={`${printExContentClass(answerKey)}${spacing.className}${length !== PRINT_LENGTH_DEFAULT ? " print-answer-length" : ""}`}
+        className={`${printExContentClass(answerKey)}${spacing.className}${lengthMode === "width" && length !== PRINT_LENGTH_DEFAULT ? " print-answer-length" : ""}`}
         style={{
           ...spacing.style,
-          ...(length !== PRINT_LENGTH_DEFAULT
+          ...(lengthMode === "width" && length !== PRINT_LENGTH_DEFAULT
             ? ({ "--print-len-scale": lengthScale } as CSSProperties)
             : undefined),
         }}
@@ -697,10 +713,10 @@ function Counter({
         aria-label="Moins"
       >−</button>
       <span
-        className="min-w-[1.75rem] text-center text-sm font-semibold tabular-nums"
+        className="min-w-[2rem] text-center text-sm font-semibold tabular-nums"
         style={{ color: accent }}
       >
-        {value}
+        {value > 0 ? `+${value}` : value}
       </span>
       <button
         type="button"
@@ -748,7 +764,8 @@ export function PrintConfigSheet({
       questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
       columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
       spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? PRINT_SPACING_DEFAULT)),
-      length: Math.max(1, Math.min(5, ex.defaultLength ?? PRINT_LENGTH_DEFAULT)),
+      length: clampPrintLength(ex.defaultLength ?? PRINT_LENGTH_DEFAULT, ex.printLengthMode ?? "width"),
+      printLengthMode: ex.printLengthMode ?? "width",
       pageBreak: Boolean(ex.forceNewPage),
       points: Math.max(1, ex.defaultPoints ?? 1),
     }))
@@ -1214,14 +1231,14 @@ export function PrintConfigSheet({
                             />
                           </div>
                         )}
-                        {sel.occurrences > 0 && (
+                        {sel.occurrences > 0 && sel.printLengthMode !== "none" && (
                           <div className="flex items-center justify-between gap-3">
                             <span className="text-xs text-[var(--color-text-secondary)]">Longueurs</span>
                             <Counter
                               value={sel.length}
                               onChange={(length) => setLength(ex.id, length)}
-                              min={1}
-                              max={5}
+                              min={sel.printLengthMode === "lines" ? PRINT_LENGTH_LINES_MIN : PRINT_LENGTH_MIN}
+                              max={PRINT_LENGTH_MAX}
                               accent={accentColor}
                             />
                           </div>
