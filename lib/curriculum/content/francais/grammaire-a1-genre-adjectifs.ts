@@ -1,25 +1,65 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 15 — Le masculin et le féminin des adjectifs (G2.5) */
+/** Unité 15 — Le masculin et le féminin des adjectifs (G3.1) */
 export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
   slug: "a1-gr-genre-adjectifs",
-  code: "G2.5",
+  code: "G3.1",
   level: "A1",
   title: "Le masculin et le féminin des adjectifs",
   theory: [
     {
       type: "heading",
-      text: "Utilisation",
+      text: "Les adjectifs",
     },
     {
       type: "plain_list",
       items: [
-        "L'adjectif qualificatif est utilisé pour décrire.",
-        "Il est masculin si le nom ou le pronom est masculin ({a}Il est petit{/a}) ; féminin si le nom ou le pronom est féminin ({a}Léa est petite{/a}).",
-        "On décrit une personne (Il est français), un lieu (La ville est grande), un objet (La chaise est bleue) ou une opinion (Le livre est intéressant).",
+        "L'adjectif donne une information sur le nom. Les adjectifs changent aussi selon le genre.",
       ],
-      allBullets: true,
     },
+    {
+      type: "plain_list",
+      items: ["On ajoute souvent {a}-e{/a} au féminin."],
+    },
+    {
+      type: "grid",
+      headers: ["Masculin", "Féminin"],
+      equalCols: true,
+      rows: [
+        ["Le sac est petit.", "La voiture est petit{a}e{/a}."],
+        ["Un homme français parle.", "Une femme français{a}e{/a} parle."],
+      ],
+    },
+    {
+      type: "plain_list",
+      items: ["On ajoute souvent {a}-s{/a} au pluriel."],
+    },
+    {
+      type: "grid",
+      headers: ["Singulier", "Pluriel"],
+      equalCols: true,
+      rows: [
+        ["Le sac est petit.", "Les sacs sont petit{a}s{/a}."],
+        ["La voiture est petite.", "Les voitures sont petite{a}s{/a}."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Adjectifs spéciaux",
+      items: ["Certains adjectifs changent beaucoup."],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Masculin", "Féminin"],
+      equalCols: true,
+      rows: [
+        ["beau", "bell{a}e{/a}"],
+        ["nouveau", "nouvell{a}e{/a}"],
+        ["vieux", "vieil{a}le{/a}"],
+      ],
+    },
+
     {
       type: "heading",
       text: "Formation du féminin : cas général",

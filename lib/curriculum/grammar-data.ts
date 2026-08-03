@@ -165,7 +165,6 @@ import { A1_GR_CEST } from "./content/francais/grammaire-r1.9";
 import { A1_GR_PHRASES } from "./content/francais/grammaire-r1.6";
 import { A1_GR_L02 } from "./content/francais/grammaire-r1.7";
 import { A1_GR_INTERRO } from "./content/francais/grammaire-r1.8";
-import { A1_GR_L03 } from "./content/francais/grammaire-r1.4";
 import { A1_GR_L04 } from "./content/francais/grammaire-r1.3";
 import { A1_GR_L10 } from "./content/francais/grammaire-r2.4";
 import { A1_GR_L11 } from "./content/francais/grammaire-r2.5";
@@ -325,7 +324,6 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-hypothese-condition": "G17.6",
   "a1-gr-discours-indirect-present": "G17.7",
   "a1-gr-bilan-b1": "G18.1",
-  "a1-gr-l03": "G19.1",
   "a1-gr-phrases": "G19.2",
   "a1-gr-l02": "G19.3",
   "a1-gr-interro": "G19.4",
@@ -514,7 +512,6 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_PHRASES,
   A1_GR_L02,
   A1_GR_INTERRO,
-  A1_GR_L03,
   A1_GR_L04,
   A1_GR_L10,
   ADJECTIFS_QUALIFICATIFS,

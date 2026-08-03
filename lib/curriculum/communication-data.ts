@@ -99,7 +99,7 @@ export const COMM_MODULES: CommunicationModule[] = [
         comm: ["E3-1"],
       }),
       s("E3-3", "E3.3", "Aller au travail", {
-        french: ["v1-description-morale", "a1-gr-l03"],
+        french: ["v1-description-morale", "a1-gr-genre-adjectifs"],
         comm: ["E3-2"],
       }),
     ],

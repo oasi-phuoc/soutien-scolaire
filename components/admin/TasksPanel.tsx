@@ -194,7 +194,6 @@ const RAW_CURRICULUM: MatiereOpt[] = [
         { id: "R1.1", label: "R1.1 — Les pronoms personnels sujets" },
         { id: "R1.2", label: "R1.2 — Les verbes être et avoir" },
         { id: "R1.3", label: "R1.3 — Les articles définis et indéfinis" },
-        { id: "R1.4", label: "R1.4 — Le genre des noms et des adjectifs" },
         { id: "R1.5", label: "R1.5 — Les verbes en -er au présent" },
         { id: "R1.6", label: "R1.6 — Les phrases" },
         { id: "R1.7", label: "R1.7 — La négation" },

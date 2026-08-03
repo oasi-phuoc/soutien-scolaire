@@ -8,7 +8,7 @@ export const EXPRESS_E3_3: CommunicationLesson = {
   id: "E3-3",
   code: "E3.3",
   title: "Aller au travail",
-  prerequisiteFrenchSlugs: ["v1-description-morale", "a1-gr-l03"],
+  prerequisiteFrenchSlugs: ["v1-description-morale", "a1-gr-genre-adjectifs"],
   prerequisiteCommIds: ["E3-2"],
   theory: [
     { type: "heading", text: "Aller au travail", black: true, trans: t("Going to work") },
@@ -17,7 +17,7 @@ export const EXPRESS_E3_3: CommunicationLesson = {
       items: [
         { code: "E3.2", title: "Quotidien", href: "/communication/E3-2" },
         { code: "V1.6", title: "Description morale", href: "/francais/vocabulaire/v1-description-morale" },
-        { code: "G4.53", title: "Genre des adjectifs", href: "/francais/grammaire/a1-gr-l03" }
+        { code: "G3.1", title: "Genre des adjectifs", href: "/francais/grammaire/a1-gr-genre-adjectifs" }
       ],
     },
     {

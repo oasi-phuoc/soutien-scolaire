@@ -118,7 +118,6 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   // ── G18 — Bilan B1 ──
   lesson("B1", "a1-gr-bilan-b1", "G18.1", "Bilan B1", "Révision des points essentiels du niveau B1.", "grammaire"),
   // ── G19 — Compléments et leçons hors parcours ──
-  lesson("A1", "a1-gr-l03", "G19.1", "Le genre des noms et des adjectifs", "Masculin/féminin : noms courants et adjectifs de nationalité.", "grammaire"),
   lesson("A1", "a1-gr-phrases", "G19.2", "Les phrases", "Structure Sujet + Verbe + Complément : reconnaître et construire une phrase simple.", "grammaire"),
   lesson("A1", "a1-gr-l02", "G19.3", "La négation", "Ne…pas : construire une phrase négative avec être et avoir.", "grammaire"),
   lesson("A1", "a1-gr-interro", "G19.4", "L'interrogation de base", "Est-ce que et l'intonation montante : construire une question simple.", "grammaire"),
@@ -307,7 +306,6 @@ const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
   "a1-gr-hypothese-condition": "G17.6",
   "a1-gr-discours-indirect-present": "G17.7",
   "a1-gr-bilan-b1": "G18.1",
-  "a1-gr-l03": "G19.1",
   "a1-gr-phrases": "G19.2",
   "a1-gr-l02": "G19.3",
   "a1-gr-interro": "G19.4",
