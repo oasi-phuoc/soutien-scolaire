@@ -1,4 +1,88 @@
-import type { GrammarLesson } from "../../grammar-data";
+import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+
+const VT_FAIRE: VerbToggleVerb[] = [
+  {
+    infinitive: "faire",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "fais" },
+      { pronoun: "tu", ending: "fais" },
+      { pronoun: "il / elle / on", ending: "fait" },
+      { pronoun: "nous", ending: "faisons" },
+      { pronoun: "vous", ending: "faites" },
+      { pronoun: "ils / elles", ending: "font" },
+    ],
+  },
+];
+
+const VT_PRENDRE: VerbToggleVerb[] = [
+  {
+    infinitive: "prendre",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "prends" },
+      { pronoun: "tu", ending: "prends" },
+      { pronoun: "il / elle / on", ending: "prend" },
+      { pronoun: "nous", ending: "prenons" },
+      { pronoun: "vous", ending: "prenez" },
+      { pronoun: "ils / elles", ending: "prennent" },
+    ],
+  },
+];
+
+const VT_SAVOIR_CONNAITRE: VerbToggleVerb[] = [
+  {
+    infinitive: "savoir",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "sais" },
+      { pronoun: "tu", ending: "sais" },
+      { pronoun: "il / elle / on", ending: "sait" },
+      { pronoun: "nous", ending: "savons" },
+      { pronoun: "vous", ending: "savez" },
+      { pronoun: "ils / elles", ending: "savent" },
+    ],
+  },
+  {
+    infinitive: "connaître",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "connais" },
+      { pronoun: "tu", ending: "connais" },
+      { pronoun: "il / elle / on", ending: "connaît" },
+      { pronoun: "nous", ending: "connaissons" },
+      { pronoun: "vous", ending: "connaissez" },
+      { pronoun: "ils / elles", ending: "connaissent" },
+    ],
+  },
+];
+
+const VT_CROIRE_BOIRE: VerbToggleVerb[] = [
+  {
+    infinitive: "croire",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "crois" },
+      { pronoun: "tu", ending: "crois" },
+      { pronoun: "il / elle / on", ending: "croit" },
+      { pronoun: "nous", ending: "croyons" },
+      { pronoun: "vous", ending: "croyez" },
+      { pronoun: "ils / elles", ending: "croient" },
+    ],
+  },
+  {
+    infinitive: "boire",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "bois" },
+      { pronoun: "tu", ending: "bois" },
+      { pronoun: "il / elle / on", ending: "boit" },
+      { pronoun: "nous", ending: "buvons" },
+      { pronoun: "vous", ending: "buvez" },
+      { pronoun: "ils / elles", ending: "boivent" },
+    ],
+  },
+];
 
 /** Unité 9 — Les verbes en -re et en -oir (G1.10) */
 export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
@@ -57,6 +141,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         ["Ils / Elles", "font", "disent", "mettent"],
       ],
     },
+    { type: "verb_toggle", buttonCols: 1, verbs: VT_FAIRE },
     {
       type: "note",
       text: "Attention à la prononciation de faisons. Formes irrégulières : vous faites, vous dites ; ils/elles font.",
@@ -78,9 +163,11 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         ["Ils / Elles", "prennent", "attendent"],
       ],
     },
+    { type: "verb_toggle", buttonCols: 1, verbs: VT_PRENDRE },
     {
       type: "plain_list",
       items: [
+        "{a}Prendre{/a}, apprendre et comprendre suivent le même modèle. Au pluriel, le radical devient {a}pren-{/a} ; à la 3e personne du pluriel, le n est doublé : {a}prennent{/a}.",
         "Comme prendre : apprendre, comprendre…",
         "Comme attendre : descendre, entendre, perdre, répondre, vendre…",
       ],
@@ -103,13 +190,41 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         ["Ils / Elles", "savent", "connaissent"],
       ],
     },
+    { type: "verb_toggle", buttonCols: 2, verbs: VT_SAVOIR_CONNAITRE },
     {
-      type: "plain_list",
-      items: [
-        "{a}connaître{/a} (+ nom) = être familiarisé avec. → Je connais bien la France.",
-        "{a}savoir{/a} (+ verbe) = résultat d'un apprentissage. → Je sais conduire.",
+      type: "heading",
+      text: "SAVOIR ou CONNAÎTRE ?",
+      sub: true,
+      accent: true,
+    },
+    {
+      type: "grid",
+      headers: ["Verbe", "Utilisation", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["savoir", "+ infinitif (capacité)", "Je sais nager."],
+        ["savoir", "+ que / si / où… (fait)", "Je sais qu'il est français."],
+        ["savoir", "+ nom (information)", "Tu sais l'heure ?"],
+        ["connaître", "+ personne", "Je connais Marco."],
+        ["connaître", "+ lieu / chose", "Elle connaît bien Paris."],
+        ["connaître", "+ œuvre / domaine", "Tu connais ce film ?"],
       ],
-      allBullets: true,
+    },
+    {
+      type: "highlight",
+      label: "Règle simple",
+      items: [
+        "{a}Savoir{/a} = un fait, une information, une capacité.",
+        "{a}Connaître{/a} = être familier avec une personne, un lieu ou une chose.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "On ne dit pas {s}je sais Paris{/s} mais {a}je connais Paris{/a}.",
+        "On ne dit pas {s}je connais nager{/s} mais {a}je sais nager{/a}.",
+      ],
     },
     {
       type: "heading",
@@ -128,6 +243,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         ["Ils / Elles", "voient", "reçoivent", "boivent"],
       ],
     },
+    { type: "verb_toggle", buttonCols: 2, verbs: VT_CROIRE_BOIRE },
     {
       type: "plain_list",
       items: [
@@ -198,16 +314,11 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         { sentence: "Vous ___ (faire) du foot.", hint: "faire → vous", answer: "faites" },
         { sentence: "Ils ___ (faire) du vélo.", hint: "faire → ils", answer: "font" },
         { sentence: "Vous ___ (dire) oui.", hint: "dire → vous", answer: "dites" },
-        { sentence: "Tu ___ (mettre) une écharpe.", hint: "mettre → tu", answer: "mets" },
-        { sentence: "Nous ___ (prendre) le train.", hint: "prendre → nous", answer: "prenons" },
-        { sentence: "Elle ___ (attendre) le métro.", hint: "attendre → elle", answer: "attend" },
+        { sentence: "Je ___ (prendre) le bus.", hint: "prendre → je", answer: "prends" },
+        { sentence: "Ils ___ (prendre) le train.", hint: "prendre → ils", answer: "prennent" },
         { sentence: "Je ___ (savoir) nager.", hint: "savoir → je", answer: "sais" },
-        { sentence: "Tu ___ (connaître) ce restaurant ?", hint: "connaître → tu", answer: "connais" },
-        { sentence: "Il ___ (voir) une plage.", hint: "voir → il", answer: "voit" },
-        { sentence: "Je ___ (recevoir) une lettre.", hint: "recevoir → je", answer: "reçois" },
-        { sentence: "Nous ___ (boire) du thé.", hint: "boire → nous", answer: "buvons" },
-        { sentence: "Ils ___ (peindre) la cuisine.", hint: "peindre → ils", answer: "peignent" },
-        { sentence: "On ___ (comprendre) la question.", hint: "comprendre → on", answer: "comprend" },
+        { sentence: "Elle ___ (connaître) Paris.", hint: "connaître → elle", answer: "connaît" },
+        { sentence: "Nous ___ (boire) de l'eau.", hint: "boire → nous", answer: "buvons" },
       ],
     },
   ],

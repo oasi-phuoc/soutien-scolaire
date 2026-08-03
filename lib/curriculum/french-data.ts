@@ -20,7 +20,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-cest-il-est", "G1.4", "Il y a… C'est… Il/Elle est…", "Présence (il y a), identification (c'est) et profession (il/elle est).", "grammaire"),
   lesson("A1", "a1-gr-verbes-er", "G1.5", "Les verbes en -er : cas général", "Présent des verbes en -er : radical + e, es, e, ons, ez, ent.", "grammaire"),
   lesson("A1", "a1-gr-pronominaux", "G1.6", "Les verbes pronominaux", "Verbes réfléchis et réciproques : me/te/se/nous/vous + verbe.", "grammaire"),
-  lesson("A1", "a1-gr-modaux", "G1.7", "Les verbes pouvoir, vouloir, devoir et falloir", "Désir, capacité, obligation et nécessité avec pouvoir, vouloir, devoir, falloir.", "grammaire"),
+  lesson("A1", "a1-gr-modaux", "G1.7", "Les verbes pouvoir, vouloir, devoir, savoir et falloir", "Désir, capacité, obligation, savoir-faire et nécessité avec pouvoir, vouloir, devoir, savoir, falloir.", "grammaire"),
   lesson("A1", "a1-gr-verbes-er-particuliers", "G1.8", "Les verbes en -er : cas particuliers", "Aller ; -ayer/-oyer/-uyer ; -ger/-cer ; -eler/-eter/-érer.", "grammaire"),
   lesson("A1", "a1-gr-verbes-ir", "G1.9", "Les verbes en -ir", "Quatre modèles : finir, ouvrir, partir/dormir/servir, venir/tenir.", "grammaire"),
   lesson("A1", "a1-gr-verbes-re-oir", "G1.10", "Les verbes en -re et en -oir", "Modèles lire, faire, prendre, savoir/connaître, voir, peindre…", "grammaire"),

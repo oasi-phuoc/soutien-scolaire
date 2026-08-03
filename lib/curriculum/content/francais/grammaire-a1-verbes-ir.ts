@@ -139,6 +139,35 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       ],
       allBullets: true,
     },
+
+    {
+      type: "heading",
+      text: "Naître",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Le verbe {a}naître{/a} est irrégulier. Au pluriel, le radical devient {a}naiss-{/a} (proche du modèle finir).",
+      ],
+    },
+    {
+      type: "verb_toggle",
+      buttonCols: 1,
+      verbs: [
+        {
+          infinitive: "naître",
+          radical: "",
+          rows: [
+            { pronoun: "je", ending: "nais" },
+            { pronoun: "tu", ending: "nais" },
+            { pronoun: "il / elle / on", ending: "naît" },
+            { pronoun: "nous", ending: "naissons" },
+            { pronoun: "vous", ending: "naissez" },
+            { pronoun: "ils / elles", ending: "naissent" },
+          ],
+        },
+      ],
+    },
   ],
   exercises: [
     {
