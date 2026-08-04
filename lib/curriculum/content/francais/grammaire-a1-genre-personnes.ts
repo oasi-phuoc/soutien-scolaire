@@ -68,6 +68,158 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       noBulletItems: [0, 1],
       inlineArrows: true,
     },
+    {
+      type: "plain_list",
+      items: [
+        "Certains noms ont des terminaisons très différentes au masculin et au féminin.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "-en",
+          content: [
+            {
+              type: "plain_list",
+              items: ["{a}-en{/a} → {a}-enne{/a}"],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Noms masculins", "Noms féminins"],
+              rows: [
+                ["un musici{a}en{/a}", "une musici{a}enne{/a}"],
+                ["un itali{a}en{/a}", "une itali{a}enne{/a}"],
+                ["un canadi{a}en{/a}", "une canadi{a}enne{/a}"],
+                ["un parisi{a}en{/a}", "une parisi{a}enne{/a}"],
+              ],
+            },
+          ],
+        },
+        {
+          label: "-on",
+          content: [
+            {
+              type: "plain_list",
+              items: ["{a}-on{/a} → {a}-onne{/a}"],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Noms masculins", "Noms féminins"],
+              rows: [
+                ["un champi{a}on{/a}", "une champi{a}onne{/a}"],
+                ["un li{a}on{/a}", "une li{a}onne{/a}"],
+                ["un patr{a}on{/a}", "une patr{a}onne{/a}"],
+                ["un Bret{a}on{/a}", "une Bret{a}onne{/a}"],
+              ],
+            },
+          ],
+        },
+        {
+          label: "-er",
+          content: [
+            {
+              type: "plain_list",
+              items: ["{a}-er{/a} → {a}-ère{/a}"],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Noms masculins", "Noms féminins"],
+              rows: [
+                ["un cuisini{a}er{/a}", "une cuisini{a}ère{/a}"],
+                ["un boulang{a}er{/a}", "une boulang{a}ère{/a}"],
+                ["un infirmi{a}er{/a}", "une infirmi{a}ère{/a}"],
+                ["un écoli{a}er{/a}", "une écoli{a}ère{/a}"],
+              ],
+            },
+          ],
+        },
+        {
+          label: "-eur",
+          content: [
+            {
+              type: "plain_list",
+              items: ["{a}-eur{/a} → {a}-euse{/a}"],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Noms masculins", "Noms féminins"],
+              rows: [
+                ["un serv{a}eur{/a}", "une serv{a}euse{/a}"],
+                ["un vend{a}eur{/a}", "une vend{a}euse{/a}"],
+                ["un dans{a}eur{/a}", "une dans{a}euse{/a}"],
+                ["un coiff{a}eur{/a}", "une coiff{a}euse{/a}"],
+              ],
+            },
+          ],
+        },
+        {
+          label: "-teur",
+          content: [
+            {
+              type: "plain_list",
+              items: ["{a}-teur{/a} → {a}-trice{/a} ou {a}-teuse{/a}"],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Noms masculins", "Noms féminins"],
+              rows: [
+                ["un ac{a}teur{/a}", "une ac{a}trice{/a}"],
+                ["un direc{a}teur{/a}", "une direc{a}trice{/a}"],
+                ["un chan{a}teur{/a}", "une chan{a}teuse{/a}"],
+                ["un men{a}teur{/a}", "une men{a}teuse{/a}"],
+              ],
+            },
+          ],
+        },
+        {
+          label: "-f",
+          content: [
+            {
+              type: "plain_list",
+              items: ["{a}-f{/a} → {a}-ve{/a}"],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Noms masculins", "Noms féminins"],
+              rows: [
+                ["un sporti{a}f{/a}", "une sporti{a}ve{/a}"],
+                ["un acti{a}f{/a}", "une acti{a}ve{/a}"],
+                ["un créati{a}f{/a}", "une créati{a}ve{/a}"],
+                ["un naï{a}f{/a}", "une naï{a}ve{/a}"],
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: "plain_list",
+      items: ["Cas particuliers"],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "un homme → une femme",
+        "un garçon → une fille",
+        "un père → une mère",
+        "un frère → une sœur",
+        "un mari → une femme",
+        "un fils → une fille",
+        "un copain → une copine",
+      ],
+      noBulletItems: [0, 1, 2, 3, 4, 5, 6],
+    },
 
     {
       type: "heading",
