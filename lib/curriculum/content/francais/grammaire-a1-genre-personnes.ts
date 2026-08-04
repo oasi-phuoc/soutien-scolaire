@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 11 — Masculin et féminin des noms (personnes) (G2.1) */
+/** Unité 11 — Le genre des noms : personnes (G2.1) */
 export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
   slug: "a1-gr-genre-personnes",
   code: "G2.1",
   level: "A1",
-  title: "Le masculin et le féminin des noms (personnes)",
+  title: "Le genre des noms : personnes",
   theory: [
     {
       type: "plain_list",
@@ -30,45 +30,6 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
 
     {
       type: "heading",
-      text: "Comment reconnaître le genre ?",
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Il n'y a pas toujours une règle. Il faut souvent apprendre le nom avec son article.",
-      ],
-    },
-    {
-      type: "highlight",
-      label: "Souvent masculins",
-      items: [
-        "{a}-age{/a} → le village",
-        "{a}-ment{/a} → le document",
-        "{a}-eau{/a} → le bateau",
-      ],
-      inlineArrows: true,
-    },
-    {
-      type: "highlight",
-      label: "Souvent féminins",
-      items: [
-        "{a}-tion{/a} → la question",
-        "{a}-ette{/a} → la tablette",
-        "{a}-ure{/a} → la voiture",
-      ],
-      inlineArrows: true,
-    },
-    {
-      type: "highlight",
-      label: "Astuce",
-      items: [
-        "La majorité des mots qui terminent par {a}-e{/a} sont féminins, mais il existe des exceptions.",
-      ],
-      noBulletItems: [0],
-    },
-
-    {
-      type: "heading",
       text: "Formation du féminin",
     },
     {
@@ -85,8 +46,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "un employé → une employée",
-        "un ami → une amie",
+        "un employé → une employé{a}e{/a}",
+        "un ami → une ami{a}e{/a}",
       ],
       noBulletItems: [0, 1],
       inlineArrows: true,
@@ -101,8 +62,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "un journaliste → une journaliste",
-        "un fonctionnaire → une fonctionnaire",
+        "un journaliste → une journalist{a}e{/a}",
+        "un fonctionnaire → une fonctionnair{a}e{/a}",
       ],
       noBulletItems: [0, 1],
       inlineArrows: true,
@@ -122,8 +83,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "un Espagnol / une Espagnole",
-        "un ingénieur / une ingénieure",
+        "un Espagnol / une Espagno{li}|le{/li}",
+        "un ingénieur / une ingénieu{li}|re{/li}",
       ],
       noBulletItems: [0, 1],
     },
@@ -137,8 +98,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "un Anglais → une Anglaise",
-        "un assistant → une assistante",
+        "un Anglais → une Anglai{li}|se{/li}",
+        "un assistant → une assistan{li}|te{/li}",
       ],
       noBulletItems: [0, 1],
       inlineArrows: true,

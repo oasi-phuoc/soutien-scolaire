@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 12 — Masculin et féminin des noms (choses) (G2.2) */
+/** Unité 12 — Le genre des noms : choses (G2.2) */
 export const A1_GR_GENRE_CHOSES: GrammarLesson = {
   slug: "a1-gr-genre-choses",
   code: "G2.2",
   level: "A1",
-  title: "Le masculin et le féminin des noms (choses)",
+  title: "Le genre des noms : choses",
   theory: [
     {
       type: "heading",
@@ -15,6 +15,44 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       type: "plain_list",
       items: [
         "Les noms de choses désignent des objets, des lieux, des idées.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "heading",
+      text: "Comment reconnaître le genre ?",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Il n'y a pas toujours une règle. Il faut souvent apprendre le nom avec son article.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Souvent masculins",
+      items: [
+        "{a}-age{/a} → le village",
+        "{a}-ment{/a} → le document",
+        "{a}-eau{/a} → le bateau",
+      ],
+      inlineArrows: true,
+    },
+    {
+      type: "highlight",
+      label: "Souvent féminins",
+      items: [
+        "{a}-tion{/a} → la question",
+        "{a}-ette{/a} → la tablette",
+        "{a}-ure{/a} → la voiture",
+      ],
+      inlineArrows: true,
+    },
+    {
+      type: "highlight",
+      label: "Astuce",
+      items: [
+        "La majorité des mots qui terminent par {a}-e{/a} sont féminins, mais il existe des exceptions.",
       ],
       noBulletItems: [0],
     },

@@ -26,9 +26,9 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-verbes-re-oir", "G1.10", "Les verbes en -re et en -oir", "Modèles lire, faire, prendre, savoir/connaître, voir, peindre…", "grammaire"),
   lesson("A1", "a1-gr-present-progressif", "G1.11", "Le présent progressif", "Être en train de + infinitif : action en cours au moment où l'on parle.", "grammaire"),
   // ── G2 — Le nom ──
-  lesson("A1", "a1-gr-genre-personnes", "G2.1", "Le masculin et le féminin des noms (personnes)", "Formation du féminin des noms de personnes et nationalités.", "grammaire"),
-  lesson("A1", "a1-gr-genre-choses", "G2.2", "Le masculin et le féminin des noms (choses)", "Repères de genre pour les noms de choses : terminaisons et déterminants.", "grammaire"),
-  lesson("A1", "a1-gr-pluriel-noms", "G2.3", "Le singulier et le pluriel des noms", "Pluriel en -s et cas particuliers (-aux, -eaux, -eux, œil/yeux).", "grammaire"),
+  lesson("A1", "a1-gr-genre-personnes", "G2.1", "Le genre des noms : personnes", "Formation du féminin des noms de personnes et nationalités.", "grammaire"),
+  lesson("A1", "a1-gr-genre-choses", "G2.2", "Le genre des noms : choses", "Repères de genre pour les noms de choses : terminaisons et déterminants.", "grammaire"),
+  lesson("A1", "a1-gr-pluriel-noms", "G2.3", "Le pluriel des noms", "Pluriel en -s et cas particuliers (-aux, -eaux, -eux, œil/yeux).", "grammaire"),
   lesson("A1", "a1-gr-noms-composes", "G2.4", "Les noms composés", "Formation et accord au pluriel des noms composés.", "grammaire"),
   // ── G3 — L'adjectif qualificatif ──
   lesson("A1", "a1-gr-genre-adjectifs", "G3.1", "Le masculin et le féminin des adjectifs", "Accord de l'adjectif qualificatif au féminin : cas général.", "grammaire"),

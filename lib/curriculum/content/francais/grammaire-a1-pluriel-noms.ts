@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 13 — Le singulier et le pluriel des noms (G2.3) */
+/** Unité 13 — Le pluriel des noms (G2.3) */
 export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
   slug: "a1-gr-pluriel-noms",
   code: "G2.3",
   level: "A1",
-  title: "Le singulier et le pluriel des noms",
+  title: "Le pluriel des noms",
   theory: [
     {
       type: "heading",
