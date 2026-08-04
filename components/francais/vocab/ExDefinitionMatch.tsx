@@ -82,7 +82,7 @@ export function ExDefinitionMatch({
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
         Associez chaque définition au mot correspondant en écrivant la lettre.
       </p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+      <div className="vocab-letter-bank grid grid-cols-2 gap-x-4">
         {words.map((w, i) => (
           <div key={w.word} className="flex items-baseline">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>

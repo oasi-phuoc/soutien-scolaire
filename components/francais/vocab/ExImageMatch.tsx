@@ -96,8 +96,8 @@ export function ExImageMatch({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Associez chaque image au mot en écrivant la lettre correspondante.
       </p>
-      {/* Word list — même espacement que Ex5 / Ex6 */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+      {/* Banque de mots — gap-y hors print-q-spacing (évite l’inflation Espacement) */}
+      <div className="vocab-letter-bank grid grid-cols-2 gap-x-4">
         {words.map((w, i) => (
           <div key={w.word} className="flex items-baseline">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>

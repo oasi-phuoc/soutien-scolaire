@@ -100,7 +100,7 @@ export function ExFillSentences({
         Complétez chaque phrase avec le mot correct.
       </p>
       {/* Word bank — plain lettered list, no pill borders */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+      <div className="vocab-letter-bank grid grid-cols-2 gap-x-4">
         {bankWords.map((word, i) => (
           <div key={word} className="flex items-baseline">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>

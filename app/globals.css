@@ -762,6 +762,7 @@ input[type=number] {
  * Espacement personnalisé entre les questions imprimées (paramètre
  * « Espacement » 1–5). Ne s'applique que si ≠ défaut (classe présente).
  * Cible les listes de questions (space-y / gap-y) proches de la racine.
+ * Exclut .vocab-letter-bank (propositions a/b/c) qui garde un gap fixe.
  */
 .print-q-spacing > [class*="space-y-"] > :not([hidden]) ~ :not([hidden]),
 .print-q-spacing > * > [class*="space-y-"] > :not([hidden]) ~ :not([hidden]),
@@ -769,10 +770,15 @@ input[type=number] {
   margin-top: calc(1rem * var(--print-q-scale, 1)) !important;
 }
 
-.print-q-spacing > [class*="gap-y-"],
-.print-q-spacing > * > [class*="gap-y-"],
-.print-q-spacing > * > * > [class*="gap-y-"] {
+.print-q-spacing > [class*="gap-y-"]:not(.vocab-letter-bank),
+.print-q-spacing > * > [class*="gap-y-"]:not(.vocab-letter-bank),
+.print-q-spacing > * > * > [class*="gap-y-"]:not(.vocab-letter-bank) {
   row-gap: calc(1rem * var(--print-q-scale, 1)) !important;
+}
+
+/* Banque de lettres vocab (Ex1/5/6) — même densité, hors échelle Espacement */
+.vocab-letter-bank {
+  row-gap: 0.25rem;
 }
 
 /*
