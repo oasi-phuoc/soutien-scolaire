@@ -32,6 +32,22 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "plain_list",
+      items: [
+        "Si l'adjectif masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Masculin", "Féminin"],
+      equalCols: true,
+      rows: [
+        ["Ce lit est moderne.", "Cette chaise est moderne."],
+        ["Ce garçon est calme.", "Cette fille est calme."],
+      ],
+    },
+    {
+      type: "plain_list",
       items: ["On ajoute souvent {a}-s{/a} au pluriel."],
     },
     {
@@ -58,32 +74,6 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         ["nouveau", "nouvell{a}e{/a}"],
         ["vieux", "vieil{a}le{/a}"],
       ],
-    },
-
-    {
-      type: "heading",
-      text: "Formation du féminin : cas général",
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Au masculin, les terminaisons varient : carré, moderne, espagnol, chinois, grand, petit…",
-        "En général, adjectif féminin = adjectif masculin + {a}e{/a}. → Le bureau est carré. / La table est carrée. — Ce garçon est danois. / Cette fille est danoise.",
-        "Si l'adjectif masculin se termine déjà par {a}e{/a}, le féminin ne change pas. → Ce lit est moderne. / Cette chaise est moderne.",
-      ],
-      allBullets: true,
-    },
-    {
-      type: "heading",
-      text: "Prononciation et orthographe",
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Même prononciation si le masculin se termine par une voyelle, ou par {a}r{/a} / {a}l{/a}. → Il est joli. / Elle est jolie. — Le sac est noir et original. / La valise est noire et originale.",
-        "Prononciation différente si le masculin se termine par une consonne (le e fait entendre la consonne). → Il est grand. / Elle est grande. — Il est ouvert. / Elle est ouverte. — Il est français. / Elle est française. — Il est marocain. / Elle est marocaine. — Il est brun. / Elle est brune.",
-      ],
-      allBullets: true,
     },
   ],
   exercises: [
