@@ -255,6 +255,7 @@ function g(verb: VerbConj, tail: string): G1Gabarit {
 
 export const G1_2_PROFILE: G1LessonProfile = {
   style: "form",
+  skipEndingExercises: true,
   gabarits: [
     g(ETRE, " à Genève."),
     g(ETRE, " à Paris."),
@@ -300,6 +301,7 @@ export const G1_2_PROFILE: G1LessonProfile = {
 
 export const G1_3_PROFILE: G1LessonProfile = {
   style: "form",
+  skipEndingExercises: true,
   gabarits: [
     g(AVOIR, " faim."),
     g(AVOIR, " 20 ans."),
@@ -635,6 +637,7 @@ export const G1_8_PROFILE: G1LessonProfile = {
 
 export const G1_9_PROFILE: G1LessonProfile = {
   style: "form",
+  skipEndingExercises: true,
   gabarits: [
     g(FINIR, " le travail."),
     g(FINIR, " le petit-déjeuner."),
@@ -707,6 +710,7 @@ export const G1_9_PROFILE: G1LessonProfile = {
 
 export const G1_10_PROFILE: G1LessonProfile = {
   style: "form",
+  skipEndingExercises: true,
   gabarits: [
     g(LIRE, " un magazine."),
     g(LIRE, " le journal."),
@@ -780,6 +784,7 @@ export const G1_10_PROFILE: G1LessonProfile = {
 export const G1_11_PROFILE: G1LessonProfile = {
   style: "form",
   progressif: true,
+  skipEndingExercises: true,
   gabarits: [
     g(MANGER, " une pomme."),
     g(MANGER, " une pizza."),
@@ -808,16 +813,16 @@ export const G1_11_PROFILE: G1LessonProfile = {
     g(BOIRE, " un café."),
   ],
   writePrompts: [
-    "Être en train de / manger une pomme :",
-    "Être en train de / travailler :",
-    "Être en train d' / écouter la radio :",
-    "Être en train de / parler français :",
-    "Être en train de / regarder la télé :",
-    "Être en train d' / étudier le français :",
-    "Être en train de / lire un livre :",
-    "Être en train d' / écrire un mail :",
-    "Être en train de / boire un café :",
-    "Être en train de / finir le travail :",
+    "Manger / une pomme :",
+    "Travailler / à l'hôpital :",
+    "Écouter / la radio :",
+    "Parler / français :",
+    "Regarder / la télé :",
+    "Étudier / le français :",
+    "Lire / un livre :",
+    "Écrire / un mail :",
+    "Boire / un café :",
+    "Finir / le travail :",
   ],
   verbChoiceGabarits: [
     vc(MANGER, " une pomme.", [ECOUTER, PARLER, REGARDER]),

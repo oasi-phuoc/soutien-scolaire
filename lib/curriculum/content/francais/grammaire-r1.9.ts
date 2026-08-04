@@ -326,7 +326,7 @@ export const A1_GR_CEST: GrammarLesson = {
       title: "Exercice 1",
       instruction: "Classez chaque phrase : identification ou description.",
       transInstruction: { en: "Sort each sentence: identification or description.", ar: "صنّف كل جملة: تعريف أم وصف.", fa: "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።", uk: "Розсортуйте кожне речення: ідентифікація чи опис." },
-      categories: ["Identification (C'est)", "Description (Il / Elle est)"],
+      categories: ["Identification", "Description"],
       items: [],
       poolSize: 5,
       allowPartialValidation: true,

@@ -43,6 +43,8 @@ export type G1LessonProfile = {
   verbChoiceGabarits?: G1VerbChoiceGabarit[];
   /** Présent progressif (être en train de). */
   progressif?: boolean;
+  /** Masque les exercices 1–2 (terminaisons) et renumérote la suite. */
+  skipEndingExercises?: boolean;
 };
 
 function startsWithVowel(s: string): boolean {
@@ -106,7 +108,10 @@ function pickChoices(correct: string, candidates: string[], pad: string[] = ER_P
 
 function conjugatedAnswer(v: VerbConj, idx: number): string {
   const i = idx % 8;
-  if (v.reflexive) return `${v.reflexive[i]} ${v.forms[i]}`;
+  if (v.reflexive) {
+    const r = v.reflexive[i]!;
+    return r.endsWith("'") ? `${r}${v.forms[i]}` : `${r} ${v.forms[i]}`;
+  }
   return v.forms[i]!;
 }
 
@@ -154,9 +159,12 @@ function buildItemsFromGabarit(
 
   // Radical + ___ si fiable pour cette personne ; sinon ___ (infinitif).
   const blank = resolveEndingBlank(v, idx);
+  const refl = v.reflexive?.[idx % 8];
+  const reflChunk = refl ? (refl.endsWith("'") ? refl : `${refl} `) : "";
 
   if (blank) {
-    const subj = subjectOf(idx, blank.stem);
+    // Élision du sujet contre le pronom réfléchi (me/m'), pas le radical.
+    const subj = subjectOf(idx, refl ?? blank.stem);
     const endingChoices = ends.every((e) => e.length > 0)
       ? pickChoices(blank.ending, ends)
       : pickChoices(blank.ending, [
@@ -165,13 +173,13 @@ function buildItemsFromGabarit(
           endingsOf(v)[(idx + 5) % 8]!,
         ]);
     endingQcm = {
-      sentence: `${subj.display}${subj.sep}${blank.stem}___${tail}`,
+      sentence: `${subj.display}${subj.sep}${reflChunk}${blank.stem}___${tail}`,
       choices: endingChoices,
       correctIdx: 0,
       gabaritId,
     };
     endingFill = {
-      sentence: `${subj.display}${subj.sep}${blank.stem}___ (${v.infinitive})${tail}`,
+      sentence: `${subj.display}${subj.sep}${reflChunk}${blank.stem}___ (${v.infinitive})${tail}`,
       hint: v.hint,
       answer: blank.ending,
       gabaritId,
@@ -261,7 +269,6 @@ function buildProgressifPools(profile: G1LessonProfile): {
     for (let idx = 0; idx < 8; idx++) {
       const form = etreForms[idx]!;
       const subj = subjectOf(idx, form);
-      const answerProg = `${form} en train ${de}${inf}`.replace(/\s+/g, " ").trim();
       endingQcm.push({
         sentence: `${subj.display}${subj.sep}___ (être) en train ${de}${inf}${tail}`,
         choices: pickChoices(form, [...etreForms]),
@@ -275,20 +282,16 @@ function buildProgressifPools(profile: G1LessonProfile): {
         gabaritId: gid,
       });
       conjQcm.push({
-        // Pas de ___ : choix via boutons (infinitif entre parenthèses).
-        sentence: `${subj.display}${subj.sep || " "}(${inf})${tail}`,
-        choices: pickChoices(answerProg, [
-          `${etreForms[(idx + 1) % 8]} en train ${de}${inf}`,
-          `${etreForms[(idx + 4) % 8]} en train ${de}${inf}`,
-          `${form} en train de ${inf}`,
-        ]),
+        // en train de dans la phrase ; pastilles = formes conjuguées d'être.
+        sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
+        choices: pickChoices(form, [...etreForms]),
         correctIdx: 0,
         gabaritId: gid,
       });
       conjFill.push({
-        sentence: `${subj.display}${subj.sep}___ (${inf})${tail}`,
-        hint: "être en train de + infinitif",
-        answer: answerProg,
+        sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
+        hint: "être en train de",
+        answer: form,
         gabaritId: gid,
       });
     }
@@ -343,6 +346,45 @@ function buildCorePools(profile: G1LessonProfile): {
 
 function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
   const items: QcmItem[] = [];
+  const etreForms = ["suis", "es", "est", "est", "sommes", "êtes", "sont", "sont"] as const;
+
+  if (profile.progressif) {
+    const source = profile.verbChoiceGabarits?.length
+      ? profile.verbChoiceGabarits
+      : profile.gabarits.map((g) => {
+          const others = profile.gabarits
+            .map((x) => x.verb)
+            .filter((v) => v.infinitive !== g.verb.infinitive);
+          return { verb: g.verb, tail: g.tail, distractors: others.slice(0, 3) };
+        });
+    const list = [...source];
+    while (list.length < G1_GABARIT_COUNT) {
+      list.push(source[list.length % source.length]!);
+    }
+    for (let gi = 0; gi < G1_GABARIT_COUNT; gi++) {
+      const g = list[gi]!;
+      const gid = `vc${gi}`;
+      const tail = normalizeTail(g.tail);
+      const inf = g.verb.infinitive;
+      const de = startsWithVowel(inf) ? "d'" : "de ";
+      const distractorInfs = (
+        "distractors" in g && g.distractors.length
+          ? g.distractors
+          : profile.gabarits.map((x) => x.verb).filter((v) => v.infinitive !== inf)
+      ).map((v) => v.infinitive);
+      for (let idx = 0; idx < 8; idx++) {
+        const form = etreForms[idx]!;
+        const subj = subjectOf(idx, form);
+        items.push({
+          sentence: `${subj.display}${subj.sep}${form} en train ${de}___${tail}`,
+          choices: pickChoices(inf, distractorInfs),
+          correctIdx: 0,
+          gabaritId: gid,
+        });
+      }
+    }
+    return items;
+  }
 
   if (profile.verbChoiceGabarits?.length) {
     const list = [...profile.verbChoiceGabarits];
@@ -392,7 +434,7 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
 }
 
 /**
- * Pack harmonisé G1 — 7 exercices.
+ * Pack harmonisé G1 — 7 exercices (ou 5 si skipEndingExercises).
  * Banque = 25 gabarits × 8 pronoms (tirage aléatoire via shuffle du pool).
  */
 export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
@@ -403,7 +445,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
     writePrompts.push(profile.writePrompts[writePrompts.length % profile.writePrompts.length]!);
   }
 
-  return [
+  const all: Exercise[] = [
     {
       type: "qcm",
       title: "Exercice 1",
@@ -425,7 +467,9 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
     {
       type: "qcm",
       title: "Exercice 3",
-      instruction: "Choisissez la bonne conjugaison du verbe entre parenthèses au présent.",
+      instruction: profile.progressif
+        ? "Choisissez la bonne conjugaison d'être (présent progressif)."
+        : "Choisissez la bonne conjugaison du verbe entre parenthèses au présent.",
       items: [],
       pool: pools.conjQcm,
       poolSize: G1_SESSION_SIZE,
@@ -433,7 +477,9 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
     {
       type: "fill",
       title: "Exercice 4",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
+      instruction: profile.progressif
+        ? "Complétez avec la forme d'être (présent progressif)."
+        : "Conjuguez le verbe entre parenthèses au présent.",
       items: [],
       pool: pools.conjFill,
       poolSize: G1_SESSION_SIZE,
@@ -451,7 +497,9 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
     {
       type: "qcm",
       title: "Exercice 6",
-      instruction: "Choisissez le verbe correct.",
+      instruction: profile.progressif
+        ? "Choisissez l'infinitif correct (présent progressif)."
+        : "Choisissez le verbe correct.",
       items: [],
       pool: verbChoice,
       poolSize: G1_SESSION_SIZE,
@@ -466,6 +514,9 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       promptPoolSize: G1_WRITE_SIZE,
     },
   ];
+
+  const selected = profile.skipEndingExercises ? all.slice(2) : all;
+  return selected.map((ex, i) => ({ ...ex, title: `Exercice ${i + 1}` }));
 }
 
 // ── Helpers verbes ────────────────────────────────────────────────────────────

@@ -1809,25 +1809,46 @@ function WriteExercise({
           <div key={i} className={isPrint && exercise.promptLayout === "stacked" ? undefined : "space-y-1"}>
             {exercise.promptLayout === "stacked" ? (
               <>
-                <p className="text-sm font-medium text-[var(--color-text-primary)]">
-                  <span className={`font-medium ${isClean ? "text-emerald-500" : "text-[var(--color-accent-fr)]"}`}>{i + 1}.</span>{" "}
-                  {perVerb ? `(${perVerb})` : displayedPrompts[i]}
-                </p>
-                {isPrint ? (
-                  <PrintAnswerLines count={fullLineCount} />
-                ) : (
-                  <input
-                    type="text"
-                    value={inputs[i] ?? ""}
-                    onChange={(e) => setInput(i, e.target.value)}
-                    disabled={validated}
-                    className={`w-full rounded-none border-0 border-b-2 bg-transparent px-0 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors disabled:opacity-70 ${
-                      isClean
-                        ? "border-emerald-400"
-                        : "border-[var(--color-accent-fr)]/60 focus:border-[var(--color-accent-fr)]"
-                    }`}
-                  />
-                )}
+                {(() => {
+                  const raw = perVerb ? `(${perVerb})` : (displayedPrompts[i] ?? "");
+                  const arrowSplit = raw.match(/^(.*?)\s*→\s*(.*)$/);
+                  const line1 = arrowSplit ? arrowSplit[1]!.trim() : raw;
+                  const line2Rest = arrowSplit ? arrowSplit[2]!.trim() : null;
+                  const showArrow = Boolean(arrowSplit);
+                  const answerEl = isPrint ? (
+                    <PrintAnswerLines count={fullLineCount} />
+                  ) : (
+                    <input
+                      type="text"
+                      value={inputs[i] ?? ""}
+                      onChange={(e) => setInput(i, e.target.value)}
+                      disabled={validated}
+                      className={`w-full rounded-none border-0 border-b-2 bg-transparent px-0 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors disabled:opacity-70 ${
+                        isClean
+                          ? "border-emerald-400"
+                          : "border-[var(--color-accent-fr)]/60 focus:border-[var(--color-accent-fr)]"
+                      }`}
+                    />
+                  );
+                  return (
+                    <>
+                      <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                        <span className={`font-medium ${isClean ? "text-emerald-500" : "text-[var(--color-accent-fr)]"}`}>{i + 1}.</span>{" "}
+                        {line1}
+                      </p>
+                      {showArrow ? (
+                        <div className="ml-4 flex items-center gap-2">
+                          <span className="shrink-0 text-sm font-medium text-[var(--color-text-primary)]">
+                            →{line2Rest ? ` ${line2Rest}` : ""}
+                          </span>
+                          <div className="min-w-0 flex-1">{answerEl}</div>
+                        </div>
+                      ) : (
+                        answerEl
+                      )}
+                    </>
+                  );
+                })()}
               </>
             ) : (
               <div className="flex items-center gap-2">
