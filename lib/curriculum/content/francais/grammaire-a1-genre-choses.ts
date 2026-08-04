@@ -10,9 +10,22 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "En français, tous les noms ont un genre : ils sont masculins ou féminins. Le genre ne dépend pas toujours du sens du mot. Il faut donc apprendre chaque nom avec son déterminant.",
+        "En français, les noms ont un genre. Un nom peut être :",
+        "masculin",
+        "féminin",
       ],
-      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Pour les choses, les noms indiquent souvent un objet, un lieu ou une idée.",
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} livre, {a}une{/a} ville.",
+      ],
     },
     {
       type: "heading",
