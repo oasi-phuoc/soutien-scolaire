@@ -8,21 +8,34 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
   title: "Les noms composés",
   theory: [
     {
-      type: "heading",
-      text: "Formation",
-    },
-    {
       type: "plain_list",
       items: [
-        "Un nom composé est formé de plusieurs mots associés (noms, adjectifs, prépositions, verbes).",
-        "Reliés par un trait d'union : le sous-sol, le tire-bouchon, un ouvre-boîte.",
-        "Reliés par une préposition ({a}à, de, en{/a}) : une salle de bains, le rez-de-chaussée, une chambre à coucher, un arc-en-ciel.",
+        "Un nom composé est un nom formé de deux ou plusieurs mots qui créent ensemble un seul nom. Les mots peuvent être reliés par un trait d'union ou par une préposition ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a}).",
       ],
-      allBullets: true,
+      noBulletItems: [0],
     },
     {
-      type: "note",
-      text: "Les mots ne sont pas toujours reliés par un trait d'union.",
+      type: "highlight",
+      label: "Par un trait d'union",
+      items: [
+        "le sous-sol",
+        "un ouvre-boîte",
+        "un coffre-fort",
+        "un tire-bouchon",
+        "une grand-mère",
+      ],
+      noBulletItems: [0, 1, 2, 3, 4],
+    },
+    {
+      type: "highlight",
+      label: "Par une préposition",
+      items: [
+        "une salle de bains",
+        "une chambre à coucher",
+        "le rez-de-chaussée",
+        "un arc-en-ciel",
+      ],
+      noBulletItems: [0, 1, 2, 3],
     },
     {
       type: "heading",
@@ -31,14 +44,90 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Au singulier, le second mot peut déjà être au pluriel. → un porte-documents ; un porte-bagages ; un porte-clés ; une boîte aux lettres.",
-        "Au pluriel, verbes et prépositions sont invariables ; noms et adjectifs varient. → un taille-crayon / des taille-crayons ; une grand-mère / des grands-mères ; un canapé-lit / des canapés-lits.",
+        "Le second mot peut déjà être au pluriel lorsqu'il désigne ce que contient ou ce à quoi sert l'objet.",
       ],
-      allBullets: true,
+      noBulletItems: [0],
     },
     {
-      type: "note",
-      text: "Exceptions (logique) : des porte-monnaie, des porte-bonheur, des pommes de terre, des après-midi. Origine étrangère : seul le second mot s'accorde — des week-ends, des night-clubs.",
+      type: "highlight",
+      label: "",
+      items: [
+        "un porte-documents",
+        "un porte-bagages",
+        "un porte-clés",
+        "une boîte aux lettres",
+      ],
+      noBulletItems: [0, 1, 2, 3],
+    },
+    {
+      type: "highlight",
+      label: "Au pluriel",
+      items: [],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Les mots varient ou pas selon le type des mots.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}1.{/a} Les verbes restent invariables.",
+        "{a}2.{/a} Les prépositions restent invariables.",
+        "{a}3.{/a} Les noms prennent un {a}-s{/a} si le sens le permet.",
+        "{a}4.{/a} Les adjectifs s'accordent avec le nom.",
+      ],
+      noBulletItems: [0, 1, 2, 3],
+    },
+    {
+      type: "grid",
+      headers: ["", "Singulier", "Pluriel"],
+      boldFirstCol: true,
+      rows: [
+        ["verbe + nom", "un taille-crayon", "des taille-crayons"],
+        ["adjectif + nom", "une grand-mère", "des grands-mères"],
+        ["nom + nom", "un canapé-lit", "des canapés-lits"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Exception",
+      items: [],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Certains noms composés ne suivent pas la règle générale.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "des porte-monnaie",
+        "des porte-bonheur",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "En général, seul le dernier mot s'accorde pour les mots d'origine étrangère.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "un week-end → des week-ends",
+        "un night-club → des night-clubs",
+      ],
+      noBulletItems: [0, 1],
+      inlineArrows: true,
     },
   ],
   exercises: [
