@@ -960,26 +960,14 @@ function normalizeAnswer(s: string): string {
   return t;
 }
 
-/** Pronoms sujets pouvant précéder le blanc (déjà affichés dans la phrase). */
-const FILL_SUBJECT_PRONOUNS = new Set([
-  "je",
-  "j'",
-  "tu",
-  "il",
-  "elle",
-  "on",
-  "nous",
-  "vous",
-  "ils",
-  "elles",
-  "c'",
-]);
-
 /**
- * Compare une réponse fill (exacte après normalisation).
- * Si le pronom sujet est déjà avant le blanc (« Il ___ »), accepte aussi
- * « il est » lorsque l'attendu est « est » — pas de réponse partielle ni de
- * reprise du texte après le blanc (« en train de… »).
+ * Compare une réponse fill (insensible à la casse / accents via normalizeAnswer).
+ * Accepte :
+ * - la réponse exacte (« est », « ce », « e ») ;
+ * - la même phrase une fois le blanc rempli ;
+ * - pronom et/ou radical déjà affichés + terminaison
+ *   (« il est » pour « Il ___ », « commence » pour « Il commen___ » / « Il commenc___ »).
+ * N'accepte pas les réponses partielles ni la reprise du texte après le blanc.
  */
 function fillAnswerMatches(user: string, expected: string, sentence: string): boolean {
   const u = normalizeAnswer(user);
@@ -987,17 +975,28 @@ function fillAnswerMatches(user: string, expected: string, sentence: string): bo
   if (!e) return !u;
   if (u === e) return true;
 
-  const beforeRaw = (sentence.split("___")[0] ?? "")
-    .replace(/\([^)]*\)/g, "")
-    .replace(/→/g, " ");
-  const beforeWords = normalizeAnswer(beforeRaw).split(" ").filter(Boolean);
-  const subj = beforeWords[beforeWords.length - 1] ?? "";
-  if (!FILL_SUBJECT_PRONOUNS.has(subj)) return false;
+  const [beforePart = "", afterPart = ""] = sentence.split("___");
+  const rawBefore = beforePart.replace(/\([^)]*\)/g, "");
+  const rawAfter = afterPart.replace(/\([^)]*\)/g, "");
 
-  const withSubject = subj.endsWith("'")
-    ? normalizeAnswer(`${subj}${e}`)
-    : normalizeAnswer(`${subj} ${e}`);
-  return u === withSubject;
+  // Même phrase complète (casse / accents / ponctuation près du blanc)
+  if (
+    normalizeAnswer(`${rawBefore}${user}${rawAfter}`) ===
+    normalizeAnswer(`${rawBefore}${expected}${rawAfter}`)
+  ) {
+    return true;
+  }
+
+  // L'élève a resaisi le radical et/ou le pronom avec la terminaison attendue
+  if (!u.endsWith(e)) return false;
+  const prefix = normalizeAnswer(u.slice(0, Math.max(0, u.length - e.length)));
+  const beforeNorm = normalizeAnswer(rawBefore.replace(/→/g, " "));
+  if (!prefix || !beforeNorm) return false;
+  return (
+    beforeNorm === prefix ||
+    beforeNorm.endsWith(prefix) ||
+    beforeNorm.endsWith(` ${prefix}`)
+  );
 }
 
 function FillExercise({

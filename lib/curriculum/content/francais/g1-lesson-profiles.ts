@@ -129,9 +129,10 @@ const VOYAGER: VerbConj = {
 };
 const COMMENCER: VerbConj = {
   infinitive: "commencer",
-  stem: "commen",
+  /* Radical « commenc- » ; nous (commençons) → blanc entier via resolveEndingBlank. */
+  stem: "commenc",
   hint: "nous commençons",
-  endings: ["ce", "ces", "ce", "ce", "çons", "cez", "cent", "cent"],
+  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
   forms: ["commence", "commences", "commence", "commence", "commençons", "commencez", "commencent", "commencent"],
 };
 const ENVOYER: VerbConj = {
