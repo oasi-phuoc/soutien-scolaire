@@ -53,7 +53,7 @@ export type Exercise =
   | { type: "word_order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; words: string[]; difficulty?: ExerciseDifficulty }[]; pool?: { sentence: string; words: string[]; difficulty?: ExerciseDifficulty }[]; poolSize?: number; allowPartialValidation?: boolean }
   | { type: "color_highlight"; title: string; instruction: string; transInstruction?: Trans; colors: string[]; items: { words: string[]; answers: (number | null)[] }[] }
   | { type: "clock_read"; title: string; instruction: string; transInstruction?: Trans; clocks: { h: number; m: number; label: string; answer: string }[] }
-  | { type: "tag2"; title: string; instruction: string; transInstruction?: Trans; pool: { word: string; companion?: string; gender: "M" | "F" | null; number: "S" | "P" }[]; poolSize?: number };
+  | { type: "tag2"; title: string; instruction: string; transInstruction?: Trans; pool: { word: string; companion?: string; gender: "M" | "F" | null; number: "S" | "P" }[]; poolSize?: number; /** Affiche uniquement M/F (pas S/P). À l'impression : trait à remplir. */ genderOnly?: boolean };
 
 export type GrammarLesson = {
   slug: string;

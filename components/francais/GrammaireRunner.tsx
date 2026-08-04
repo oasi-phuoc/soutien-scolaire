@@ -2679,12 +2679,13 @@ function Tag2Exercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
-  const { questionCount, listClass } = usePrintQuestionLayout(exercise.poolSize ?? 10);
+  const genderOnly = Boolean(exercise.genderOnly);
+  const { questionCount, listClass, isPrint, lengthScale } = usePrintQuestionLayout(exercise.poolSize ?? 10);
   const [items] = useState(() =>
     shuffle([...exercise.pool]).slice(0, questionCount),
   );
   const [answers, setAnswers] = useState<{ n: "S" | "P" | null; g: "M" | "F" | null }[]>(() =>
-    items.map(() => ({ n: null, g: null })),
+    items.map((item) => ({ n: genderOnly ? item.number : null, g: null })),
   );
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
@@ -2699,6 +2700,7 @@ function Tag2Exercise({
       setValidated(true);
       onValidated(items.filter((item, i) => {
           const ans = answers[i]!;
+          if (genderOnly) return item.gender !== null && ans.g === item.gender;
           return ans.n === item.number && (item.gender === null || ans.g === item.gender);
         }).length, items.length);
     }
@@ -2711,51 +2713,61 @@ function Tag2Exercise({
       <div className={listClass === "space-y-4" ? "space-y-1" : listClass}>
         {items.map((item, i) => {
           const ans = answers[i]!;
-          const nWrong = validated && revealCorrection && ans.n !== item.number;
+          const nWrong = !genderOnly && validated && revealCorrection && ans.n !== item.number;
           const gWrong = validated && revealCorrection && item.gender !== null && ans.g !== item.gender;
           return (
             <div key={i} className="flex items-center gap-3 py-1.5">
               {/* Number */}
               <span className="w-5 shrink-0 text-right text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
 
-              {/* Toggles — always same total width */}
-              <div className="flex shrink-0 items-center gap-2">
-                <PillGroup
-                  options={["S", "P"] as const}
-                  value={ans.n}
-                  correct={item.number}
-                  validated={validated}
-                  onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: v } : a))}
-                />
-                {item.gender !== null ? (
-                  <PillGroup
-                    options={["M", "F"] as const}
-                    value={ans.g}
-                    correct={item.gender}
-                    validated={validated}
-                    onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: v } : a))}
-                  />
-                ) : (
-                  /* Invisible spacer — same footprint as M/F PillGroup so words align */
-                  <div className="inline-flex gap-1.5 text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
-                    <span className="rounded-[var(--radius-md)] border border-transparent px-3 py-1">M</span>
-                    <span className="rounded-[var(--radius-md)] border border-transparent px-3 py-1">F</span>
-                  </div>
-                )}
-              </div>
-
               {/* Word (+ optional companion noun) */}
-              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+              <span className="min-w-[6rem] text-sm font-semibold text-[var(--color-text-primary)]">
                 {item.word}
                 {item.companion && (
                   <span className="ml-1.5 font-normal text-[var(--color-text-secondary)]">{item.companion}</span>
                 )}
               </span>
 
+              {/* Toggles — or print blank for genderOnly */}
+              {genderOnly && isPrint ? (
+                <span
+                  className="inline-block h-7 border-b-2 border-[var(--color-accent-fr)]/60"
+                  style={{ width: scaleCssLength("3.5rem", lengthScale) }}
+                  aria-hidden
+                />
+              ) : (
+                <div className="flex shrink-0 items-center gap-2">
+                  {!genderOnly && (
+                    <PillGroup
+                      options={["S", "P"] as const}
+                      value={ans.n}
+                      correct={item.number}
+                      validated={validated}
+                      onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: v } : a))}
+                    />
+                  )}
+                  {item.gender !== null ? (
+                    <PillGroup
+                      options={["M", "F"] as const}
+                      value={ans.g}
+                      correct={item.gender}
+                      validated={validated}
+                      onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: v } : a))}
+                    />
+                  ) : !genderOnly ? (
+                    /* Invisible spacer — same footprint as M/F PillGroup so words align */
+                    <div className="inline-flex gap-1.5 text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
+                      <span className="rounded-[var(--radius-md)] border border-transparent px-3 py-1">M</span>
+                      <span className="rounded-[var(--radius-md)] border border-transparent px-3 py-1">F</span>
+                    </div>
+                  ) : null}
+                </div>
+              )}
+
               {/* Correction */}
               {(nWrong || gWrong) && (
                 <span className="ml-auto text-xs font-medium text-emerald-600">
-                  → {item.number}{item.gender ? ` ${item.gender}` : ""}
+                  → {genderOnly ? (item.gender ?? "") : `${item.number}${item.gender ? ` ${item.gender}` : ""}`}
                 </span>
               )}
             </div>
