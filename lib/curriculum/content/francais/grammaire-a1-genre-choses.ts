@@ -14,9 +14,10 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Les noms de choses désignent des objets, des lieux, des idées.",
+        "En français, tous les noms ont un genre : ils sont masculins ou féminins.",
+        "Le genre ne dépend pas toujours du sens du mot. Il faut donc apprendre chaque nom avec son déterminant.",
       ],
-      noBulletItems: [0],
+      noBulletItems: [0, 1],
     },
     {
       type: "heading",
@@ -25,66 +26,111 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Il n'y a pas toujours une règle. Il faut souvent apprendre le nom avec son article.",
+        "Il n'existe pas de règle absolue.",
+        "Pour connaître le genre d'un nom, on peut :",
       ],
-    },
-    {
-      type: "highlight",
-      label: "Souvent masculins",
-      items: [
-        "{a}-age{/a} → le village",
-        "{a}-ment{/a} → le document",
-        "{a}-eau{/a} → le bateau",
-      ],
-      inlineArrows: true,
-    },
-    {
-      type: "highlight",
-      label: "Souvent féminins",
-      items: [
-        "{a}-tion{/a} → la question",
-        "{a}-ette{/a} → la tablette",
-        "{a}-ure{/a} → la voiture",
-      ],
-      inlineArrows: true,
-    },
-    {
-      type: "highlight",
-      label: "Astuce",
-      items: [
-        "La majorité des mots qui terminent par {a}-e{/a} sont féminins, mais il existe des exceptions.",
-      ],
-      noBulletItems: [0],
-    },
-    {
-      type: "heading",
-      text: "Formes : masculin ou féminin ?",
+      noBulletItems: [0, 1],
     },
     {
       type: "plain_list",
       items: [
-        "Il n'y a pas de règle absolue pour connaître le genre d'une chose. On s'aide de la terminaison et du déterminant : {a}un/le{/a} jardin, {a}une/la{/a} place.",
-        "Souvent, il faut vérifier dans un dictionnaire et mémoriser le genre.",
+        "{a}1.{/a} regarder le déterminant (un, une, le, la) ;",
+        "{a}2.{/a} observer la terminaison du mot ;",
+        "{a}3.{/a} vérifier dans un dictionnaire ;",
+        "{a}4.{/a} apprendre le nom avec son article.",
       ],
-      allBullets: true,
+      noBulletItems: [0, 1, 2, 3],
+    },
+    {
+      type: "selector",
+      buttonCols: 2,
+      tabs: [
+        {
+          label: "Masculin",
+          content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les noms qui se terminent par ces lettres sont souvent masculins.",
+              ],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Terminaison", "Exemple"],
+              rows: [
+                ["{a}-age{/a}", "le village, le garage, le fromage"],
+                ["{a}-ment{/a}", "le document, le médicament"],
+                ["{a}-eau{/a}", "le bateau, le château"],
+                ["{a}-phone{/a}", "le téléphone, le smartphone"],
+                ["{a}-isme{/a}", "le tourisme, le réalisme"],
+                ["{a}-oir{/a}", "le miroir, le couloir"],
+                ["{a}-teur{/a}", "le moteur, le compteur"],
+                ["{a}-ail{/a}", "le travail, le détail"],
+                ["{a}-al{/a}", "le journal, le cheval"],
+              ],
+            },
+          ],
+        },
+        {
+          label: "Féminin",
+          content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les noms qui se terminent par ces lettres sont souvent féminins.",
+              ],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Terminaison", "Exemple"],
+              rows: [
+                ["{a}-tion{/a}", "la question, la solution"],
+                ["{a}-ssion{/a}", "la profession, la discussion"],
+                ["{a}-ette{/a}", "la tablette, la bicyclette"],
+                ["{a}-ure{/a}", "la voiture, la peinture"],
+                ["{a}-té{/a}", "la liberté, la beauté"],
+                ["{a}-ie{/a}", "la boulangerie, la pharmacie"],
+                ["{a}-ance{/a}", "la chance, la connaissance"],
+                ["{a}-ence{/a}", "la différence, la patience"],
+                ["{a}-aison{/a}", "la maison, la comparaison"],
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "La majorité des noms qui se terminent par {a}-e{/a} sont féminins.",
+      ],
+      noBulletItems: [0],
     },
     {
       type: "highlight",
-      label: "Terminaisons souvent féminines",
+      label: "",
       items: [
-        "{a}-e, -é, -ée{/a} : la France, la ville, la table, la liberté, une journée… — Exceptions (masculin) : un livre, un dictionnaire, un café, un musée.",
-        "{a}-tion, -ssion{/a} : la solution, la passion…",
+        "la table, la ville, la voiture, etc.",
       ],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Les noms qui se terminent par une consonne ou une voyelle ({a}a{/a}, {a}i{/a}, {a}o{/a} ou {a}u{/a}) sont souvent masculins.",
+      ],
+      noBulletItems: [0],
     },
     {
       type: "highlight",
-      label: "Terminaisons souvent masculines",
+      label: "",
       items: [
-        "{a}-a, -i, -o, -u{/a} : un agenda, un taxi, un vélo… — Exceptions (féminin) : l'eau, la photo…",
-        "Une consonne : un pays, un magasin, un monument, un ordinateur… — Exceptions (féminin) : -son/-sion (la maison, la télévision…), certains -eur (la couleur, une erreur, la douceur…).",
-        "{a}-age{/a} : le message, le visage, un étage… — Exceptions (féminin) : une page, une image…",
-        "{a}-phone{/a} : un téléphone…",
+        "le pays, le magasin, le monument, etc.",
+        "un agenda, un taxi, un vélo, etc.",
       ],
+      noBulletItems: [0, 1],
     },
     {
       type: "heading",
