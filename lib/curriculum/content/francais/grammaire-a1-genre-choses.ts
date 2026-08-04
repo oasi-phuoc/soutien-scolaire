@@ -14,22 +14,44 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         "masculin",
         "féminin",
       ],
+      transItems: {
+        en: ["In French, nouns have a gender. A noun can be:", "masculine", "feminine"],
+        ar: ["في الفرنسية، للأسماء جنس. يمكن أن يكون الاسم:", "مذكراً", "مؤنثاً"],
+        fa: ["در فرانسوی، اسم‌ها جنس دارند. یک اسم می‌تواند باشد:", "مذکر", "مؤنث"],
+        ti: ["ብፈረንሳይኛ፣ ስማት ጾታ ኣለዎም። ሓደ ስም ክኸውን ይኽእል:", "ተባዕታይ", "ኣንስተይቲ"],
+        uk: ["У французькій мові іменники мають рід. Іменник може бути:", "чоловічого роду", "жіночого роду"],
+      },
     },
     {
       type: "plain_list",
       items: [
         "Pour les choses, les noms indiquent souvent un objet, un lieu ou une idée.",
       ],
+      transItems: {
+        en: ["For things, nouns often name an object, a place or an idea."],
+        ar: ["بالنسبة إلى الأشياء، تشير الأسماء غالباً إلى غرض أو مكان أو فكرة."],
+        fa: ["برای چیزها، اسم‌ها اغلب یک شیء، یک مکان یا یک ایده را نشان می‌دهند."],
+        ti: ["ንነገራት፣ ስማት መብዛሕትኡ ግዜ ነገር፣ ቦታ ወይ ሓሳብ የመልክቱ።"],
+        uk: ["Для речей іменники часто позначають предмет, місце або ідею."],
+      },
     },
     {
       type: "plain_list",
       items: [
         "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} livre, {a}une{/a} ville.",
       ],
+      transItems: {
+        en: ["A noun is always used with a determiner (un, la, des, ce, mon…). The determiner shows the gender: {a}un{/a} livre, {a}une{/a} ville."],
+        ar: ["يُستعمل الاسم دائماً مع محدد (un, la, des, ce, mon…). المحدد يدل على الجنس: {a}un{/a} livre, {a}une{/a} ville."],
+        fa: ["اسم همیشه با یک حرف تعریف (un, la, des, ce, mon…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} livre, {a}une{/a} ville."],
+        ti: ["ስም ኩሉ ግዜ ምስ መወሰኒ (un, la, des, ce, mon…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት: {a}un{/a} livre, {a}une{/a} ville."],
+        uk: ["Іменник завжди вживається з означенням (un, la, des, ce, mon…). Означення показує рід: {a}un{/a} livre, {a}une{/a} ville."],
+      },
     },
     {
       type: "heading",
       text: "Comment reconnaître le genre ?",
+      trans: { en: "How to recognize the gender?", ar: "كيف نعرف الجنس؟", fa: "چگونه جنس را بشناسیم؟", ti: "ጾታ ብኸመይ ንፈልጥ?", uk: "Як розпізнати рід?" },
     },
     {
       type: "plain_list",
@@ -37,6 +59,13 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         "Il n'existe pas de règle absolue. Pour connaître le genre d'un nom, on peut :",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["There is no absolute rule. To know the gender of a noun, you can:"],
+        ar: ["لا توجد قاعدة مطلقة. لمعرفة جنس الاسم، يمكن:"],
+        fa: ["قاعدهٔ مطلقی وجود ندارد. برای دانستن جنس یک اسم می‌توان:"],
+        ti: ["ፍጹም ሕጊ የለን። ጾታ ስም ንምፍላጥ ክትገብር ትኽእል:"],
+        uk: ["Абсолютного правила немає. Щоб дізнатися рід іменника, можна:"],
+      },
     },
     {
       type: "plain_list",
@@ -47,6 +76,38 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         "{a}4.{/a} Apprendre le nom avec son article.",
       ],
       noBulletItems: [0, 1, 2, 3],
+      transItems: {
+        en: [
+          "{a}1.{/a} Look at the determiner (un, une, le, la).",
+          "{a}2.{/a} Observe the ending of the word.",
+          "{a}3.{/a} Check in a dictionary.",
+          "{a}4.{/a} Learn the noun with its article.",
+        ],
+        ar: [
+          "{a}1.{/a} انظر إلى المحدد (un, une, le, la).",
+          "{a}2.{/a} راقب نهاية الكلمة.",
+          "{a}3.{/a} تحقق في القاموس.",
+          "{a}4.{/a} تعلّم الاسم مع أداته.",
+        ],
+        fa: [
+          "{a}1.{/a} به حرف تعریف نگاه کنید (un, une, le, la).",
+          "{a}2.{/a} پایان واژه را مشاهده کنید.",
+          "{a}3.{/a} در فرهنگ لغت بررسی کنید.",
+          "{a}4.{/a} اسم را همراه حرف تعریفش یاد بگیرید.",
+        ],
+        ti: [
+          "{a}1.{/a} ነቲ መወሰኒ ርአ (un, une, le, la).",
+          "{a}2.{/a} ናይቲ ቃል መወዳእታ ተዓዘብ።",
+          "{a}3.{/a} ኣብ መዝገበ-ቃላት ኣረጋግጽ።",
+          "{a}4.{/a} እቲ ስም ምስ ዓንቀጹ ተማሃር።",
+        ],
+        uk: [
+          "{a}1.{/a} Подивитися на означення (un, une, le, la).",
+          "{a}2.{/a} Спостерігати закінчення слова.",
+          "{a}3.{/a} Перевірити в словнику.",
+          "{a}4.{/a} Вивчити іменник разом з артиклем.",
+        ],
+      },
     },
     {
       type: "selector",
@@ -61,10 +122,24 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
                 "Les noms qui se terminent par ces lettres sont souvent masculins.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Nouns ending with these letters are often masculine."],
+                ar: ["الأسماء المنتهية بهذه الحروف غالباً مذكرة."],
+                fa: ["اسم‌هایی که به این حروف ختم می‌شوند اغلب مذکرند."],
+                ti: ["ብዚኦም ፊደላት ዝውድኡ ስማት መብዛሕትኡ ግዜ ተባዕታይ እዮም።"],
+                uk: ["Іменники з цими закінченнями часто чоловічого роду."],
+              },
             },
             {
               type: "grid",
               headers: ["Terminaison", "Exemple", ""],
+              transHeaders: {
+                en: ["Ending", "Example", ""],
+                ar: ["النهاية", "مثال", ""],
+                fa: ["پایان", "مثال", ""],
+                ti: ["መወዳእታ", "ኣብነት", ""],
+                uk: ["Закінчення", "Приклад", ""],
+              },
               rows: [
                 ["{a}-age{/a}", "le vill{a}age{/a}", "le gar{a}age{/a}"],
                 ["{a}-ment{/a}", "le docu{a}ment{/a}", "le médica{a}ment{/a}"],
@@ -88,10 +163,24 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
                 "Les noms qui se terminent par ces lettres sont souvent féminins.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Nouns ending with these letters are often feminine."],
+                ar: ["الأسماء المنتهية بهذه الحروف غالباً مؤنثة."],
+                fa: ["اسم‌هایی که به این حروف ختم می‌شوند اغلب مؤنث‌اند."],
+                ti: ["ብዚኦም ፊደላት ዝውድኡ ስማት መብዛሕትኡ ግዜ ኣንስተይቲ እዮም።"],
+                uk: ["Іменники з цими закінченнями часто жіночого роду."],
+              },
             },
             {
               type: "grid",
               headers: ["Terminaison", "Exemple", ""],
+              transHeaders: {
+                en: ["Ending", "Example", ""],
+                ar: ["النهاية", "مثال", ""],
+                fa: ["پایان", "مثال", ""],
+                ti: ["መወዳእታ", "ኣብነት", ""],
+                uk: ["Закінчення", "Приклад", ""],
+              },
               rows: [
                 ["{a}-tion{/a}", "la ques{a}tion{/a}", "la solu{a}tion{/a}"],
                 ["{a}-ssion{/a}", "la profe{a}ssion{/a}", "la discu{a}ssion{/a}"],
@@ -114,6 +203,13 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         "La majorité des noms qui se terminent par {a}-e{/a} sont féminins.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Most nouns ending in {a}-e{/a} are feminine."],
+        ar: ["غالبية الأسماء المنتهية بـ {a}-e{/a} مؤنثة."],
+        fa: ["بیشتر اسم‌هایی که به {a}-e{/a} ختم می‌شوند مؤنث‌اند."],
+        ti: ["መብዛሕትኦም ብ {a}-e{/a} ዝውድኡ ስማት ኣንስተይቲ እዮም።"],
+        uk: ["Більшість іменників на {a}-e{/a} — жіночого роду."],
+      },
     },
     {
       type: "highlight",
@@ -129,6 +225,13 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         "Les noms qui se terminent par une consonne ou une voyelle ({a}a{/a}, {a}i{/a}, {a}o{/a} ou {a}u{/a}) sont souvent masculins.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Nouns ending in a consonant or a vowel ({a}a{/a}, {a}i{/a}, {a}o{/a} or {a}u{/a}) are often masculine."],
+        ar: ["الأسماء المنتهية بحرف صامت أو بحرف علة ({a}a{/a}، {a}i{/a}، {a}o{/a} أو {a}u{/a}) غالباً مذكرة."],
+        fa: ["اسم‌هایی که به صامت یا مصوت ({a}a{/a}، {a}i{/a}، {a}o{/a} یا {a}u{/a}) ختم می‌شوند اغلب مذکرند."],
+        ti: ["ብተነባብ ወይ ብድምጺ ({a}a{/a}፣ {a}i{/a}፣ {a}o{/a} ወይ {a}u{/a}) ዝውድኡ ስማት መብዛሕትኡ ግዜ ተባዕታይ እዮም።"],
+        uk: ["Іменники, що закінчуються на приголосну або голосну ({a}a{/a}, {a}i{/a}, {a}o{/a} чи {a}u{/a}), часто чоловічого роду."],
+      },
     },
     {
       type: "highlight",
@@ -145,6 +248,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       type: "tag2",
       title: "Exercice 1",
       instruction: "Choisissez la forme correcte : M (masculin) ou F (féminin).",
+      transInstruction: { en: "Choose the correct form: M (masculine) or F (feminine).", ar: "اختر الصيغة الصحيحة: M (مذكر) أو F (مؤنث).", fa: "صورت درست را انتخاب کنید: M (مذکر) یا F (مؤنث).", ti: "እቲ ቅኑዕ ቅርጺ ምረጽ: M (ተባዕታይ) ወይ F (ኣንስተይቲ).", uk: "Оберіть правильну форму: M (чоловічий) або F (жіночий)." },
       genderOnly: true,
       poolSize: 5,
       pool: [
@@ -204,6 +308,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       type: "fill_select",
       title: "Exercice 2",
       instruction: "Choisissez l'article correct (le / la / l').",
+      transInstruction: { en: "Choose the correct article (le / la / l').", ar: "اختر الأداة الصحيحة (le / la / l').", fa: "حرف تعریف درست را انتخاب کنید (le / la / l').", ti: "እቲ ቅኑዕ ዓንቀጽ ምረጽ (le / la / l').", uk: "Оберіть правильний артикль (le / la / l')." },
       hideWordBank: true,
       wordBank: ["le", "la", "l'"],
       items: [],
@@ -266,6 +371,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Écrivez l'article le, la ou l'.",
+      transInstruction: { en: "Write the article le, la or l'.", ar: "اكتب الأداة le أو la أو l'.", fa: "حرف تعریف le، la یا l' را بنویسید.", ti: "እቲ ዓንቀጽ le፣ la ወይ l' ጽሓፍ።", uk: "Напишіть артикль le, la або l'." },
       items: [],
       poolSize: 5,
       inputWidth: "w-16",
@@ -327,6 +433,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       type: "fill",
       title: "Exercice 4",
       instruction: "Complétez les phrases avec le, la ou l'.",
+      transInstruction: { en: "Complete the sentences with le, la or l'.", ar: "أكمل الجمل بـ le أو la أو l'.", fa: "جمله‌ها را با le، la یا l' کامل کنید.", ti: "እተን ሓሳባት ብ le፣ la ወይ l' ምላእ።", uk: "Доповніть речення артиклями le, la або l'." },
       items: [],
       poolSize: 5,
       inputWidth: "w-16",
@@ -388,6 +495,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       type: "fill",
       title: "Exercice 5",
       instruction: "Complétez avec un ou une.",
+      transInstruction: { en: "Complete with un or une.", ar: "أكمل بـ un أو une.", fa: "با un یا une کامل کنید.", ti: "ብ un ወይ une ምላእ።", uk: "Доповніть словами un або une." },
       items: [],
       poolSize: 5,
       inputWidth: "w-16",
@@ -448,6 +556,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       type: "fill",
       title: "Exercice 6",
       instruction: "Réécrivez la phrase au féminin.",
+      transInstruction: { en: "Rewrite the sentence in the feminine.", ar: "أعد كتابة الجملة في صيغة المؤنث.", fa: "جمله را به صورت مؤنث بازنویسی کنید.", ti: "እታ ሓሳብ ብኣንስተይቲ ደጊምካ ጽሓፍ።", uk: "Перепишіть речення у жіночому роді." },
       items: [],
       poolSize: 5,
       inputWidth: "w-[32rem]",

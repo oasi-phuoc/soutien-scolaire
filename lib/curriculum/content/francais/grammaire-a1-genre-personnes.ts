@@ -14,33 +14,69 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         "masculin",
         "féminin",
       ],
+      transItems: {
+        en: ["In French, nouns have a gender. A noun can be:", "masculine", "feminine"],
+        ar: ["في الفرنسية، للأسماء جنس. يمكن أن يكون الاسم:", "مذكراً", "مؤنثاً"],
+        fa: ["در فرانسوی، اسم‌ها جنس دارند. یک اسم می‌تواند باشد:", "مذکر", "مؤنث"],
+        ti: ["ብፈረንሳይኛ፣ ስማት ጾታ ኣለዎም። ሓደ ስም ክኸውን ይኽእል:", "ተባዕታይ", "ኣንስተይቲ"],
+        uk: ["У французькій мові іменники мають рід. Іменник може бути:", "чоловічого роду", "жіночого роду"],
+      },
     },
     {
       type: "plain_list",
       items: [
         "Pour les personnes, les noms indiquent souvent une profession, un lien de famille ou une nationalité.",
       ],
+      transItems: {
+        en: ["For people, nouns often name a profession, a family link or a nationality."],
+        ar: ["بالنسبة إلى الأشخاص، تشير الأسماء غالباً إلى مهنة أو رابط عائلي أو جنسية."],
+        fa: ["برای اشخاص، اسم‌ها اغلب یک شغل، پیوند خانوادگی یا ملیت را نشان می‌دهند."],
+        ti: ["ንሰባት፣ ስማት መብዛሕትኡ ግዜ ሞያ፣ ስድራቤታዊ ምትእስሳር ወይ ዜግነት የመልክቱ።"],
+        uk: ["Для осіб іменники часто позначають професію, родинний зв’язок або національність."],
+      },
     },
     {
       type: "plain_list",
       items: [
         "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} homme, {a}une{/a} femme.",
       ],
+      transItems: {
+        en: ["A noun is always used with a determiner (un, la, des, ce, mon…). The determiner shows the gender: {a}un{/a} homme, {a}une{/a} femme."],
+        ar: ["يُستعمل الاسم دائماً مع محدد (un, la, des, ce, mon…). المحدد يدل على الجنس: {a}un{/a} homme, {a}une{/a} femme."],
+        fa: ["اسم همیشه با یک حرف تعریف (un, la, des, ce, mon…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} homme, {a}une{/a} femme."],
+        ti: ["ስም ኩሉ ግዜ ምስ መወሰኒ (un, la, des, ce, mon…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት: {a}un{/a} homme, {a}une{/a} femme."],
+        uk: ["Іменник завжди вживається з означенням (un, la, des, ce, mon…). Означення показує рід: {a}un{/a} homme, {a}une{/a} femme."],
+      },
     },
 
     {
       type: "heading",
       text: "Formation du féminin",
+      trans: { en: "Forming the feminine", ar: "تكوين المؤنث", fa: "ساخت مؤنث", ti: "ኣንስተይቲ ምስራሕ", uk: "Утворення жіночого роду" },
     },
     {
       type: "plain_list",
       items: [
         "Au masculin, les noms ont des terminaisons très variées.",
       ],
+      transItems: {
+        en: ["In the masculine, nouns have very varied endings."],
+        ar: ["في المذكر، للأسماء نهايات متنوعة جداً."],
+        fa: ["در مذکر، اسم‌ها پایان‌های بسیار متنوعی دارند."],
+        ti: ["ብተባዕታይ፣ ስማት ኣዝዮም ዝተፈላለዩ መወዳእታታት ኣለዎም።"],
+        uk: ["У чоловічому роді іменники мають дуже різні закінчення."],
+      },
     },
     {
       type: "plain_list",
       items: ["En général, nom féminin = nom masculin + {a}e{/a}."],
+      transItems: {
+        en: ["In general, feminine noun = masculine noun + {a}e{/a}."],
+        ar: ["عموماً، الاسم المؤنث = الاسم المذكر + {a}e{/a}."],
+        fa: ["به‌طور کلی، اسم مؤنث = اسم مذکر + {a}e{/a}."],
+        ti: ["ብሓፈሻ፣ ኣንስተይቲ ስም = ተባዕታይ ስም + {a}e{/a}."],
+        uk: ["Зазвичай жіночий іменник = чоловічий іменник + {a}e{/a}."],
+      },
     },
     {
       type: "highlight",
@@ -57,6 +93,13 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       items: [
         "Quand le nom masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
       ],
+      transItems: {
+        en: ["When the masculine noun already ends in {a}e{/a}, the feminine does not change."],
+        ar: ["عندما ينتهي الاسم المذكر أصلاً بـ {a}e{/a}، لا يتغيّر المؤنث."],
+        fa: ["وقتی اسم مذکر از قبل به {a}e{/a} ختم شود، مؤنث تغییر نمی‌کند."],
+        ti: ["እቲ ተባዕታይ ስም ድሮ ብ {a}e{/a} እንተወዲኡ፣ እቲ ኣንስተይቲ ኣይቕየርን።"],
+        uk: ["Коли чоловічий іменник уже закінчується на {a}e{/a}, жіночий рід не змінюється."],
+      },
     },
     {
       type: "highlight",
@@ -74,6 +117,13 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         "Certains noms ont des terminaisons très différentes au masculin et au féminin.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Some nouns have very different endings in the masculine and the feminine."],
+        ar: ["لبعض الأسماء نهايات مختلفة جداً في المذكر والمؤنث."],
+        fa: ["برخی اسم‌ها در مذکر و مؤنث پایان‌های بسیار متفاوتی دارند."],
+        ti: ["ገለ ስማት ኣብ ተባዕታይን ኣንስተይትን ኣዝዮም ዝተፈላለዩ መወዳእታታት ኣለዎም።"],
+        uk: ["Деякі іменники мають дуже різні закінчення в чоловічому та жіночому роді."],
+      },
     },
     {
       type: "selector",
@@ -88,10 +138,24 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
                 "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-en{/a} in the masculine change to {a}-enne{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-en{/a} في المذكر تصبح {a}-enne{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-en{/a} ختم می‌شوند در مؤنث به {a}-enne{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-en{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-enne{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-en{/a} у чоловічому роді змінюються на {a}-enne{/a} у жіночому."],
+              },
             },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
+              transHeaders: {
+                en: ["Masculine nouns", "Feminine nouns"],
+                ar: ["أسماء مذكرة", "أسماء مؤنثة"],
+                fa: ["اسم‌های مذکر", "اسم‌های مؤنث"],
+                ti: ["ተባዕታይ ስማት", "ኣንስተይቲ ስማት"],
+                uk: ["Чоловічі іменники", "Жіночі іменники"],
+              },
               rows: [
                 ["un musici{a}en{/a}", "une musici{a}enne{/a}"],
                 ["un itali{a}en{/a}", "une itali{a}enne{/a}"],
@@ -110,10 +174,24 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
                 "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-on{/a} in the masculine change to {a}-onne{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-on{/a} في المذكر تصبح {a}-onne{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-on{/a} ختم می‌شوند در مؤنث به {a}-onne{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-on{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-onne{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-on{/a} у чоловічому роді змінюються на {a}-onne{/a} у жіночому."],
+              },
             },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
+              transHeaders: {
+                en: ["Masculine nouns", "Feminine nouns"],
+                ar: ["أسماء مذكرة", "أسماء مؤنثة"],
+                fa: ["اسم‌های مذکر", "اسم‌های مؤنث"],
+                ti: ["ተባዕታይ ስማት", "ኣንስተይቲ ስማት"],
+                uk: ["Чоловічі іменники", "Жіночі іменники"],
+              },
               rows: [
                 ["un champi{a}on{/a}", "une champi{a}onne{/a}"],
                 ["un li{a}on{/a}", "une li{a}onne{/a}"],
@@ -132,10 +210,24 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
                 "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-er{/a} in the masculine change to {a}-ère{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-er{/a} في المذكر تصبح {a}-ère{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-er{/a} ختم می‌شوند در مؤنث به {a}-ère{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-er{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-ère{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-er{/a} у чоловічому роді змінюються на {a}-ère{/a} у жіночому."],
+              },
             },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
+              transHeaders: {
+                en: ["Masculine nouns", "Feminine nouns"],
+                ar: ["أسماء مذكرة", "أسماء مؤنثة"],
+                fa: ["اسم‌های مذکر", "اسم‌های مؤنث"],
+                ti: ["ተባዕታይ ስማት", "ኣንስተይቲ ስማት"],
+                uk: ["Чоловічі іменники", "Жіночі іменники"],
+              },
               rows: [
                 ["un cuisini{a}er{/a}", "une cuisini{a}ère{/a}"],
                 ["un boulang{a}er{/a}", "une boulang{a}ère{/a}"],
@@ -154,10 +246,24 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
                 "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-eur{/a} in the masculine change to {a}-euse{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-eur{/a} في المذكر تصبح {a}-euse{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-eur{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-eur{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-euse{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-eur{/a} у чоловічому роді змінюються на {a}-euse{/a} у жіночому."],
+              },
             },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
+              transHeaders: {
+                en: ["Masculine nouns", "Feminine nouns"],
+                ar: ["أسماء مذكرة", "أسماء مؤنثة"],
+                fa: ["اسم‌های مذکر", "اسم‌های مؤنث"],
+                ti: ["ተባዕታይ ስማት", "ኣንስተይቲ ስማት"],
+                uk: ["Чоловічі іменники", "Жіночі іменники"],
+              },
               rows: [
                 ["un serv{a}eur{/a}", "une serv{a}euse{/a}"],
                 ["un vend{a}eur{/a}", "une vend{a}euse{/a}"],
@@ -176,10 +282,24 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
                 "Les mots terminant par {a}-teur{/a} au masculin changent en {a}-trice{/a} ou {a}-teuse{/a} au féminin.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-teur{/a} in the masculine change to {a}-trice{/a} or {a}-teuse{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-teur{/a} في المذكر تصبح {a}-trice{/a} أو {a}-teuse{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-teur{/a} ختم می‌شوند در مؤنث به {a}-trice{/a} یا {a}-teuse{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-teur{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-trice{/a} ወይ {a}-teuse{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-teur{/a} у чоловічому роді змінюються на {a}-trice{/a} або {a}-teuse{/a} у жіночому."],
+              },
             },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
+              transHeaders: {
+                en: ["Masculine nouns", "Feminine nouns"],
+                ar: ["أسماء مذكرة", "أسماء مؤنثة"],
+                fa: ["اسم‌های مذکر", "اسم‌های مؤنث"],
+                ti: ["ተባዕታይ ስማት", "ኣንስተይቲ ስማት"],
+                uk: ["Чоловічі іменники", "Жіночі іменники"],
+              },
               rows: [
                 ["un ac{a}teur{/a}", "une ac{a}trice{/a}"],
                 ["un direc{a}teur{/a}", "une direc{a}trice{/a}"],
@@ -198,10 +318,24 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
                 "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-f{/a} in the masculine change to {a}-ve{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-f{/a} في المذكر تصبح {a}-ve{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-f{/a} ختم می‌شوند در مؤنث به {a}-ve{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-f{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-ve{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-f{/a} у чоловічому роді змінюються на {a}-ve{/a} у жіночому."],
+              },
             },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
+              transHeaders: {
+                en: ["Masculine nouns", "Feminine nouns"],
+                ar: ["أسماء مذكرة", "أسماء مؤنثة"],
+                fa: ["اسم‌های مذکر", "اسم‌های مؤنث"],
+                ti: ["ተባዕታይ ስማት", "ኣንስተይቲ ስማት"],
+                uk: ["Чоловічі іменники", "Жіночі іменники"],
+              },
               rows: [
                 ["un sporti{a}f{/a}", "une sporti{a}ve{/a}"],
                 ["un acti{a}f{/a}", "une acti{a}ve{/a}"],
@@ -216,6 +350,13 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
     {
       type: "highlight",
       label: "Cas particuliers",
+      transLabel: {
+        en: "Special cases",
+        ar: "حالات خاصة",
+        fa: "موارد خاص",
+        ti: "ፍሉያት ኩነታት",
+        uk: "Особливі випадки",
+      },
       items: [
         "un homme → une femme",
         "un garçon → une fille",
@@ -231,6 +372,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
     {
       type: "heading",
       text: "Prononciation et orthographe",
+      trans: { en: "Pronunciation and spelling", ar: "النطق والإملاء", fa: "تلفظ و املا", ti: "ኣደማምጻን ኣጸሓሕፋን", uk: "Вимова та правопис" },
     },
     {
       type: "plain_list",
@@ -269,6 +411,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "tag2",
       title: "Exercice 1",
       instruction: "Choisissez la forme correcte : M (masculin) ou F (féminin).",
+      transInstruction: { en: "Choose the correct form: M (masculine) or F (feminine).", ar: "اختر الصيغة الصحيحة: M (مذكر) أو F (مؤنث).", fa: "صورت درست را انتخاب کنید: M (مذکر) یا F (مؤنث).", ti: "እቲ ቅኑዕ ቅርጺ ምረጽ: M (ተባዕታይ) ወይ F (ኣንስተይቲ).", uk: "Оберіть правильну форму: M (чоловічий) або F (жіночий)." },
       genderOnly: true,
       poolSize: 5,
       pool: [
@@ -328,6 +471,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "fill_select",
       title: "Exercice 2",
       instruction: "Choisissez l'article correct (le / la / l').",
+      transInstruction: { en: "Choose the correct article (le / la / l').", ar: "اختر الأداة الصحيحة (le / la / l').", fa: "حرف تعریف درست را انتخاب کنید (le / la / l').", ti: "እቲ ቅኑዕ ዓንቀጽ ምረጽ (le / la / l').", uk: "Оберіть правильний артикль (le / la / l')." },
       hideWordBank: true,
       wordBank: ["le", "la", "l'"],
       items: [],
@@ -435,6 +579,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Écrivez l'article le, la ou l'.",
+      transInstruction: { en: "Write the article le, la or l'.", ar: "اكتب الأداة le أو la أو l'.", fa: "حرف تعریف le، la یا l' را بنویسید.", ti: "እቲ ዓንቀጽ le፣ la ወይ l' ጽሓፍ።", uk: "Напишіть артикль le, la або l'." },
       items: [],
       poolSize: 5,
       inputWidth: "w-16",
@@ -541,6 +686,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "fill",
       title: "Exercice 4",
       instruction: "Complétez les phrases avec le, la ou l'.",
+      transInstruction: { en: "Complete the sentences with le, la or l'.", ar: "أكمل الجمل بـ le أو la أو l'.", fa: "جمله‌ها را با le، la یا l' کامل کنید.", ti: "እተን ሓሳባት ብ le፣ la ወይ l' ምላእ።", uk: "Доповніть речення артиклями le, la або l'." },
       items: [],
       poolSize: 5,
       inputWidth: "w-16",
@@ -647,6 +793,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "fill",
       title: "Exercice 5",
       instruction: "Écrivez la forme féminine du nom.",
+      transInstruction: { en: "Write the feminine form of the noun.", ar: "اكتب الصيغة المؤنثة للاسم.", fa: "صورت مؤنث اسم را بنویسید.", ti: "እቲ ኣንስታይ ቅርጺ ናይ ስም ጽሓፍ።", uk: "Напишіть жіночу форму іменника." },
       items: [],
       poolSize: 5,
       pool: [
@@ -706,6 +853,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "fill",
       title: "Exercice 6",
       instruction: "Réécrivez la phrase au féminin.",
+      transInstruction: { en: "Rewrite the sentence in the feminine.", ar: "أعد كتابة الجملة في صيغة المؤنث.", fa: "جمله را به صورت مؤنث بازنویسی کنید.", ti: "እታ ሓሳብ ብኣንስተይቲ ደጊምካ ጽሓፍ።", uk: "Перепишіть речення у жіночому роді." },
       items: [],
       poolSize: 5,
       inputWidth: "w-[32rem]",
