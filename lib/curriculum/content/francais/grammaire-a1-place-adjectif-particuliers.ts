@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 20 — La place de l'adjectif : cas particuliers (G2.10) */
+/** Unité 20 — La place de l'adjectif : cas particuliers (G3.6) */
 export const A1_GR_PLACE_ADJECTIF_PART: GrammarLesson = {
   slug: "a1-gr-place-adjectif-particuliers",
-  code: "G2.10",
+  code: "G3.6",
   level: "A1",
   title: "La place de l'adjectif : cas particuliers",
   theory: [

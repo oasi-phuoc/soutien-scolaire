@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 19 — La place de l'adjectif : cas général (G2.9) */
+/** Unité 19 — La place de l'adjectif : cas général (G3.5) */
 export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
   slug: "a1-gr-place-adjectif",
-  code: "G2.9",
+  code: "G3.5",
   level: "A1",
   title: "La place de l'adjectif : cas général",
   theory: [

@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 18 — L'adjectif : accords particuliers (G2.8) */
+/** Unité 18 — L'accord des adjectifs (G3.4) */
 export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
   slug: "a1-gr-adjectifs-accords-particuliers",
-  code: "G2.8",
+  code: "G3.4",
   level: "A1",
-  title: "L'adjectif : accords particuliers",
+  title: "L'accord des adjectifs",
   theory: [
     {
       type: "heading",

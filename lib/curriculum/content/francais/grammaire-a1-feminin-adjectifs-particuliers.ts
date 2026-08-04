@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 16 — Le féminin des adjectifs : cas particuliers (G2.6) */
+/** Unité 16 — Le genre des adjectifs : cas particulier (G3.2) */
 export const A1_GR_FEMININ_ADJ_PART: GrammarLesson = {
   slug: "a1-gr-feminin-adjectifs-particuliers",
-  code: "G2.6",
+  code: "G3.2",
   level: "A1",
-  title: "Le féminin des adjectifs : cas particuliers",
+  title: "Le genre des adjectifs : cas particulier",
   theory: [
     {
       type: "plain_list",

@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 17 — Le singulier et le pluriel des adjectifs (G2.7) */
+/** Unité 17 — Le pluriel des adjectifs (G3.3) */
 export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
   slug: "a1-gr-pluriel-adjectifs",
-  code: "G2.7",
+  code: "G3.3",
   level: "A1",
-  title: "Le singulier et le pluriel des adjectifs",
+  title: "Le pluriel des adjectifs",
   theory: [
     {
       type: "heading",

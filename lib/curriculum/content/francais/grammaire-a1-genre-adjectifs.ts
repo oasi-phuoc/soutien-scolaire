@@ -1,11 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 15 — Le masculin et le féminin des adjectifs (G3.1) */
+/** Unité 15 — Le genre des adjectifs : cas général (G3.1) */
 export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
   slug: "a1-gr-genre-adjectifs",
   code: "G3.1",
   level: "A1",
-  title: "Le masculin et le féminin des adjectifs",
+  title: "Le genre des adjectifs : cas général",
   theory: [
     {
       type: "heading",
