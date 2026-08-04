@@ -944,29 +944,28 @@ function renderFillSentence(sentence: string) {
 }
 
 function normalizeAnswer(s: string): string {
+  // Casse ignorée ; accents obligatoires (achète ≠ achete).
   let t = s
     .trim()
     .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
     .replace(/['\u2019\u2018]/g, "'")
     .replace(/[.!?…,;:]+$/g, "") // point final souvent saisi par l'élève
     .replace(/\s+/g, " ")
     .trim();
   // Présent progressif : « de écouter » ≡ « d'écouter »
   t = t
-    .replace(/\ben train de ([aeiouh])/g, "en train d'$1")
+    .replace(/\ben train de ([aeiouyhàâäáéèêëíìîïóòôöúùûüæœ])/gi, "en train d'$1")
     .replace(/\ben train d'\s+/g, "en train d'");
   return t;
 }
 
 /**
- * Compare une réponse fill (insensible à la casse / accents via normalizeAnswer).
+ * Compare une réponse fill (insensible à la casse ; accents obligatoires).
  * Accepte :
- * - la réponse exacte (« est », « ce », « e ») ;
+ * - la réponse exacte (« est », « e », « achète ») ;
  * - la même phrase une fois le blanc rempli ;
  * - pronom et/ou radical déjà affichés + terminaison
- *   (« il est » pour « Il ___ », « commence » pour « Il commen___ » / « Il commenc___ »).
+ *   (« il est » pour « Il ___ », « commence » pour « Il commenc___ »).
  * N'accepte pas les réponses partielles ni la reprise du texte après le blanc.
  */
 function fillAnswerMatches(user: string, expected: string, sentence: string): boolean {
@@ -979,7 +978,7 @@ function fillAnswerMatches(user: string, expected: string, sentence: string): bo
   const rawBefore = beforePart.replace(/\([^)]*\)/g, "");
   const rawAfter = afterPart.replace(/\([^)]*\)/g, "");
 
-  // Même phrase complète (casse / accents / ponctuation près du blanc)
+  // Même phrase complète (casse / ponctuation ; accents conservés)
   if (
     normalizeAnswer(`${rawBefore}${user}${rawAfter}`) ===
     normalizeAnswer(`${rawBefore}${expected}${rawAfter}`)
