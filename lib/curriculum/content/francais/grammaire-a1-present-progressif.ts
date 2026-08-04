@@ -55,10 +55,10 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
     {
       type: "grid",
       headers: ["Aspect", "Exemple"],
-      colWidths: ["11rem", "auto"],
+      colWidths: ["33%", "67%"],
       rows: [
-        ["Présent simple", "Non, je {a}prends{/a} ma douche. (information)"],
-        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"],
+        ["Présent\nsimple", "Non, je {a}prends{/a} ma douche. (information)"],
+        ["Présent\nprogressif", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"],
       ],
       transHeaders: {
         en: ["Aspect", "Example"],
@@ -68,11 +68,11 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         uk: ["Аспект", "Приклад"],
       },
       transRows: {
-        en: [["Simple present", "Non, je {a}prends{/a} ma douche. (information)"], ["Present progressive", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        ar: [["الحاضر البسيط", "Non, je {a}prends{/a} ma douche. (information)"], ["الحاضر المستمر", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        fa: [["حال ساده", "Non, je {a}prends{/a} ma douche. (information)"], ["حال استمراری", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        ti: [["ቀሊል ህሉው", "Non, je {a}prends{/a} ma douche. (information)"], ["ቀጻሊ ህሉው", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        uk: [["Простий теперішній", "Non, je {a}prends{/a} ma douche. (information)"], ["Теперішній тривалий", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
+        en: [["Simple\npresent", "Non, je {a}prends{/a} ma douche. (information)"], ["Present\nprogressive", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
+        ar: [["الحاضر\nالبسيط", "Non, je {a}prends{/a} ma douche. (information)"], ["الحاضر\nالمستمر", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
+        fa: [["حال\nساده", "Non, je {a}prends{/a} ma douche. (information)"], ["حال\nاستمراری", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
+        ti: [["ቀሊል\nህሉው", "Non, je {a}prends{/a} ma douche. (information)"], ["ቀጻሊ\nህሉው", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
+        uk: [["Простий\nтеперішній", "Non, je {a}prends{/a} ma douche. (information)"], ["Теперішній\nтривалий", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
       },
     },
     {

@@ -280,7 +280,7 @@ export const A1_GR_CEST: GrammarLesson = {
       label: "",
       items: [
         "C'est un homme {a}gentil{/a}.",
-        "C'est une grande {a}voiture{/a}.",
+        "C'est une {a}grande{/a} voiture.",
       ],
       noBulletItems: [0, 1],
     },
@@ -295,28 +295,26 @@ export const A1_GR_CEST: GrammarLesson = {
 
     {
       type: "highlight",
-      label: "Qui est-ce ? → C'est",
+      label: "C'est",
       items: [
-        "Qui est-ce ? → C'est le médecin.",
-        "Qui est-ce ? → C'est Ali.",
-        "Qui est-ce ? → C'est un professeur.",
+        "C'est le médecin.",
+        "C'est Ali.",
+        "C'est un professeur.",
       ],
       noBulletItems: [0, 1, 2],
-      inlineArrows: true,
-      transLabel: { en: "Who is it? → C'est", ar: "من هذا/هذه؟ → C'est", fa: "این کیست؟ → C'est", ti: "መን እዩ/እያ? → C'est", uk: "Хто це? → C'est" },
+      transLabel: { en: "C'est", ar: "C'est", fa: "C'est", ti: "C'est", uk: "C'est" },
     },
 
     {
       type: "highlight",
-      label: "Comment est-il / elle ? → Il est / Elle est",
+      label: "Il est / Elle est",
       items: [
-        "Comment est-il ? → Il est gentil.",
-        "Comment est-elle ? → Elle est médecin.",
-        "Comment est-il ? → Il est suisse.",
+        "Il est gentil.",
+        "Elle est médecin.",
+        "Il est suisse.",
       ],
       noBulletItems: [0, 1, 2],
-      inlineArrows: true,
-      transLabel: { en: "What is he/she like? → Il est / Elle est", ar: "كيف هو/هي؟ → Il est / Elle est", fa: "او چطور است؟ → Il est / Elle est", ti: "ከመይ ኣሎ/ኣላ? → Il est / Elle est", uk: "Який він/яка вона? → Il est / Elle est" },
+      transLabel: { en: "Il est / Elle est", ar: "Il est / Elle est", fa: "Il est / Elle est", ti: "Il est / Elle est", uk: "Il est / Elle est" },
     },
   ],
   exercises: [

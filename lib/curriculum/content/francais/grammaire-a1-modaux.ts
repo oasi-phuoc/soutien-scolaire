@@ -64,7 +64,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
   slug: "a1-gr-modaux",
   code: "G1.7",
   level: "A1",
-  title: "Les verbes pouvoir, vouloir, devoir, savoir et falloir",
+  title: "Les verbes modaux",
   theory: [
     {
       type: "heading",
@@ -106,7 +106,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ti: ["ኣጠቓቕማ", "ኣብነት"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["15.5rem", "auto"],
+      colWidths: ["33%", "67%"],
       rows: [
         ["Désir", "Je {a}veux{/a} manger une pizza."],
         ["Volonté", "Je {a}veux{/a} apprendre le français."],
@@ -143,7 +143,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ti: ["ኣጠቓቕማ", "ኣብነት"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["15.5rem", "auto"],
+      colWidths: ["33%", "67%"],
       rows: [
         ["Capacité", "Je {a}peux{/a} nager."],
         ["Possibilité", "Nous {a}pouvons{/a} partir maintenant."],
@@ -182,7 +182,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ti: ["ኣጠቓቕማ", "ኣብነት"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["15.5rem", "auto"],
+      colWidths: ["33%", "67%"],
       rows: [
         ["Obligation", "Je {a}dois{/a} faire mes devoirs."],
         ["Nécessité", "Nous {a}devons{/a} partir tôt."],
@@ -221,7 +221,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ti: ["ኣጠቓቕማ", "ኣብነት"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["15.5rem", "auto"],
+      colWidths: ["33%", "67%"],
       rows: [
         ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."],
         ["Interdiction", "Il ne {a}faut{/a} pas parler pendant l'examen."],
@@ -238,14 +238,14 @@ export const A1_GR_MODAUX: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "{a}Savoir{/a} sert à exprimer une connaissance, une compétence ou un savoir-faire.",
+        "{a}Savoir{/a} sert à exprimer une connaissance ou une compétence.",
       ],
       transItems: {
-        en: ["{a}Savoir{/a} is used to express knowledge, a skill or know-how."],
-        ar: ["يُستخدم {a}Savoir{/a} للتعبير عن معرفة أو مهارة أو خبرة عملية."],
-        fa: ["{a}Savoir{/a} برای بیان دانش، مهارت یا توانایی عملی به کار می‌رود."],
-        ti: ["{a}Savoir{/a} ፍልጠት፣ ክእለት ወይ ተግባራዊ ፍልጠት ንምግላጽ ይጥቀም።"],
-        uk: ["{a}Savoir{/a} вживається для вираження знання, навички або вміння."],
+        en: ["{a}Savoir{/a} is used to express knowledge or a skill."],
+        ar: ["يُستخدم {a}Savoir{/a} للتعبير عن معرفة أو مهارة."],
+        fa: ["{a}Savoir{/a} برای بیان دانش یا مهارت به کار می‌رود."],
+        ti: ["{a}Savoir{/a} ፍልጠት ወይ ክእለት ንምግላጽ ይጥቀም።"],
+        uk: ["{a}Savoir{/a} вживається для вираження знання або навички."],
       },
     },
     {
@@ -258,17 +258,17 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ti: ["ኣጠቓቕማ", "ኣብነት"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["15.5rem", "auto"],
+      colWidths: ["33%", "67%"],
       rows: [
         ["Connaissance", "Je {a}sais{/a} où habite Marie."],
-        ["Compétence / savoir-faire", "Elle {a}sait{/a} cuisiner."],
+        ["Compétence", "Elle {a}sait{/a} cuisiner."],
       ],
       transRows: {
-        en: [["Knowledge", "Je {a}sais{/a} où habite Marie."], ["Skill / know-how", "Elle {a}sait{/a} cuisiner."]],
-        ar: [["معرفة", "Je {a}sais{/a} où habite Marie."], ["مهارة / خبرة عملية", "Elle {a}sait{/a} cuisiner."]],
-        fa: [["دانش", "Je {a}sais{/a} où habite Marie."], ["مهارت / توانایی عملی", "Elle {a}sait{/a} cuisiner."]],
-        ti: [["ፍልጠት", "Je {a}sais{/a} où habite Marie."], ["ክእለት / ተግባራዊ ፍልጠት", "Elle {a}sait{/a} cuisiner."]],
-        uk: [["Знання", "Je {a}sais{/a} où habite Marie."], ["Навичка / уміння", "Elle {a}sait{/a} cuisiner."]],
+        en: [["Knowledge", "Je {a}sais{/a} où habite Marie."], ["Skill", "Elle {a}sait{/a} cuisiner."]],
+        ar: [["معرفة", "Je {a}sais{/a} où habite Marie."], ["مهارة", "Elle {a}sait{/a} cuisiner."]],
+        fa: [["دانش", "Je {a}sais{/a} où habite Marie."], ["مهارت", "Elle {a}sait{/a} cuisiner."]],
+        ti: [["ፍልጠት", "Je {a}sais{/a} où habite Marie."], ["ክእለት", "Elle {a}sait{/a} cuisiner."]],
+        uk: [["Знання", "Je {a}sais{/a} où habite Marie."], ["Навичка", "Elle {a}sait{/a} cuisiner."]],
       },
     },
 
