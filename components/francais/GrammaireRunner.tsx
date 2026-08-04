@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useEffect, useMemo, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type {
@@ -13,9 +13,18 @@ import type {
 } from "@/lib/curriculum/conjugation-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { AppSelect } from "@/components/ui/AppSelect";
-import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
+import { markFrenchLessonComplete, setFrenchEvalPending, clearFrenchEvalPending } from "@/lib/progress/french-progress";
 import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
+import {
+  getExpressionTeachersAction,
+  submitExpressionAction,
+  type TeacherOption,
+} from "@/app/actions/expression";
+import {
+  buildGrammarWritePromptPayload,
+  grammarWriteOriginalText,
+} from "@/lib/curriculum/content/francais/grammar-write-submission";
 import { EvalRevealContext, useEvalReveal } from "@/lib/eval-reveal-context";
 import { EvalGuardSentinel, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
@@ -699,7 +708,7 @@ function QcmExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "qcm" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -744,10 +753,10 @@ function QcmExercise({
   function validate() {
     if (validated) return;
     setValidated(true);
-    const allCorrect = items.every(
+    const correctCount = items.filter(
       (item, i) => selected[i] === item.correctIdx,
-    );
-    onValidated(allCorrect);
+    ).length;
+    onValidated(correctCount, items.length);
   }
 
   useEffect(() => {
@@ -951,7 +960,7 @@ function FillExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "fill" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -981,11 +990,11 @@ function FillExercise({
   function validate() {
     if (validated) return;
     setValidated(true);
-    const allCorrect = items.every(
+    const correctCount = items.filter(
       (item: FillItem, i) =>
         normalizeAnswer(inputs[i] ?? "") === normalizeAnswer(item.answer),
-    );
-    onValidated(allCorrect);
+    ).length;
+    onValidated(correctCount, items.length);
   }
 
   useEffect(() => {
@@ -1124,7 +1133,7 @@ function FillSelectExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "fill_select" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -1150,11 +1159,11 @@ function FillSelectExercise({
   function doValidate() {
     if (validated) return;
     setValidated(true);
-    const allCorrect = items.every((item, i) => {
+    const correctCount = items.filter((item, i) => {
       if (letterSelect) return (selected[i] ?? "") === correctLetterForItem(item);
       return normalizeAnswer(selected[i] ?? "") === normalizeAnswer(item.answer);
-    });
-    onValidated(allCorrect);
+    }).length;
+    onValidated(correctCount, items.length);
   }
 
   useEffect(() => {
@@ -1291,7 +1300,7 @@ function ClockReadExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "clock_read" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -1315,10 +1324,10 @@ function ClockReadExercise({
   function validate() {
     if (validated) return;
     setValidated(true);
-    const allCorrect = clocks.every(
+    const correctCount = clocks.filter(
       (clk, i) => normalizeAnswer(inputs[i] ?? "") === normalizeAnswer(clk.answer),
-    );
-    onValidated(allCorrect);
+    ).length;
+    onValidated(correctCount, clocks.length);
   }
 
   useEffect(() => {
@@ -1396,7 +1405,7 @@ function MatchExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "match" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -1425,11 +1434,11 @@ function MatchExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      const allCorrect = pairs.every((pair, li) => {
+      const correctCount = pairs.filter((pair, li) => {
         const ri = connections.get(li);
         return ri !== undefined && rightItems[ri]?.pair.right === pair.right;
-      });
-      onValidated(allCorrect);
+      }).length;
+      onValidated(correctCount, pairs.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -1627,11 +1636,16 @@ function WriteExercise({
   onValidated,
   validateCommand,
   onCanValidateChange,
+  isEval = false,
+  onWriteAnswers,
 }: {
   exercise: Extract<Exercise, { type: "write" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
+  /** En évaluation : pas de points auto, réponses transmises au parent pour envoi professeur. */
+  isEval?: boolean;
+  onWriteAnswers?: (payload: { prompts: string[]; texts: string[]; instruction: string }) => void;
 }) {
   const fallback = exercise.verbPoolSize ?? exercise.promptPoolSize ?? exercise.prompts?.length ?? 5;
   const { questionCount, listClass, isPrint, fullLineCount } = usePrintQuestionLayout(fallback);
@@ -1683,7 +1697,13 @@ function WriteExercise({
 
       if (parts.length === 0) {
         setChecking(false);
-        onValidated(true);
+        if (isEval) {
+          const prompts = Array.from({ length: promptCount }, (_, i) =>
+            activeVerbs[i] ? `(${activeVerbs[i]})` : (displayedPrompts[i] ?? `Phrase ${i + 1}`),
+          );
+          onWriteAnswers?.({ prompts, texts: [...snapshot], instruction: exercise.instruction });
+        }
+        onValidated(0, promptCount);
         return;
       }
 
@@ -1715,7 +1735,13 @@ function WriteExercise({
         .catch(() => setApiError(true))
         .finally(() => {
           setChecking(false);
-          onValidated(true);
+          if (isEval) {
+            const prompts = Array.from({ length: promptCount }, (_, i) =>
+              activeVerbs[i] ? `(${activeVerbs[i]})` : (displayedPrompts[i] ?? `Phrase ${i + 1}`),
+            );
+            onWriteAnswers?.({ prompts, texts: [...snapshot], instruction: exercise.instruction });
+          }
+          onValidated(0, promptCount);
         });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1859,6 +1885,16 @@ function WriteExercise({
         );
       })}
       </div>
+
+      {isEval && validated && !checking && (
+        <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-[var(--color-accent-fr)]/5 p-4">
+          <h3 className="font-bold text-[var(--color-text-primary)]">Notation professeur</h3>
+          <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+            Cet exercice n&apos;est pas noté automatiquement. À la fin de l&apos;évaluation, vous pourrez
+            envoyer vos phrases au professeur pour correction (<strong>1 point par phrase</strong>).
+          </p>
+        </section>
+      )}
     </div>
   );
 }
@@ -1872,7 +1908,7 @@ function TrueFalseExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "trueFalse" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -1906,7 +1942,7 @@ function TrueFalseExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(answers.every((a, i) => a === items[i]!.answer));
+      onValidated(answers.filter((a, i) => a === items[i]!.answer).length, answers.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -1980,7 +2016,7 @@ function OrderExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "order" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -2001,7 +2037,7 @@ function OrderExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(builts.every((b, i) => b.join(" ") === items[i]!.sentence));
+      onValidated(builts.filter((b, i) => b.join(" ") === items[i]!.sentence).length, builts.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -2088,7 +2124,7 @@ function ClassifyExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "classify" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -2112,7 +2148,7 @@ function ClassifyExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(chosen.every((c, i) => c === items[i]!.categoryIdx));
+      onValidated(chosen.filter((c, i) => c === items[i]!.categoryIdx).length, chosen.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -2180,7 +2216,7 @@ function WordOrderExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "word_order" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -2212,10 +2248,10 @@ function WordOrderExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      const allCorrect = arranged.every((arr, i) =>
+      const correctCount = arranged.filter((arr, i) =>
         arr.join(" ").replace(/ ([.?!])$/, "$1") === states[i]!.sentence,
-      );
-      onValidated(allCorrect);
+      ).length;
+      onValidated(correctCount, arranged.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -2311,7 +2347,7 @@ function ColorHighlightExercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "color_highlight" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -2332,10 +2368,10 @@ function ColorHighlightExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      const allCorrect = colored.every((row, qi) =>
+      const correctCount = colored.filter((row, qi) =>
         items[qi]!.answers.every((ans, wi) => ans === null || row[wi] === ans),
-      );
-      onValidated(allCorrect);
+      ).length;
+      onValidated(correctCount, colored.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -2479,7 +2515,7 @@ function Tag2Exercise({
   onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "tag2" }>;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
@@ -2501,12 +2537,10 @@ function Tag2Exercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(
-        items.every((item, i) => {
+      onValidated(items.filter((item, i) => {
           const ans = answers[i]!;
           return ans.n === item.number && (item.gender === null || ans.g === item.gender);
-        }),
-      );
+        }).length, items.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -2579,11 +2613,15 @@ export function GrammarExerciseView({
   onValidated,
   validateCommand,
   onCanValidateChange,
+  isEval = false,
+  onWriteAnswers,
 }: {
   exercise: Exercise;
-  onValidated: (allCorrect: boolean) => void;
+  onValidated: (correct: number, total: number) => void;
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
+  isEval?: boolean;
+  onWriteAnswers?: (payload: { prompts: string[]; texts: string[]; instruction: string }) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -2603,7 +2641,14 @@ export function GrammarExerciseView({
         <MatchExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
       {exercise.type === "write" && (
-        <WriteExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+        <WriteExercise
+          exercise={exercise}
+          onValidated={onValidated}
+          validateCommand={validateCommand}
+          onCanValidateChange={onCanValidateChange}
+          isEval={isEval}
+          onWriteAnswers={onWriteAnswers}
+        />
       )}
       {exercise.type === "trueFalse" && (
         <TrueFalseExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
@@ -2712,9 +2757,26 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
   const [evalSessionKey, setEvalSessionKey] = useState(0);
   const [evalValidateCommands, setEvalValidateCommands] = useState<number[]>(() => Array(evalExercises.length).fill(0));
   const [evalValidated, setEvalValidated] = useState<boolean[]>(() => Array(evalExercises.length).fill(false));
-  const [evalPassed, setEvalPassed] = useState<boolean[]>(() => Array(evalExercises.length).fill(false));
+  const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number } | null>>(
+    () => Array(evalExercises.length).fill(null),
+  );
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
+  const [writePayload, setWritePayload] = useState<{
+    prompts: string[];
+    texts: string[];
+    instruction: string;
+  } | null>(null);
+  const [teachers, setTeachers] = useState<TeacherOption[]>([]);
+  const [teacherId, setTeacherId] = useState("");
+  const [writeSent, setWriteSent] = useState(false);
+  const [writeSendMessage, setWriteSendMessage] = useState("");
+  const [isSendingWrite, startSendingWrite] = useTransition();
+
+  useEffect(() => {
+    if (!hasEval) return;
+    void getExpressionTeachersAction().then(setTeachers);
+  }, [hasEval]);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
@@ -2731,10 +2793,32 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
   const currentExercise = isExercise ? lesson.exercises[stepIdx - exStart] ?? null : null;
   const currentBlocks = isTheory1 ? lesson.theory : isTheory2 ? lesson.theory2! : null;
 
-  // Grade computation
-  const evalPassedCount = evalPassed.filter(Boolean).length;
-  const evalGrade = hasEval && evalExercises.length > 0 ? linearSwissGrade(evalPassedCount, evalExercises.length) : 0;
-  const evalPercent = hasEval && evalExercises.length > 0 ? (evalPassedCount / evalExercises.length) * 100 : 0;
+  // Grade : 1 point par question ; Ex7 (write) exclu du score auto (noté par le prof).
+  const autoCorrect = evalScores.reduce((sum, score, i) => {
+    if (!score || evalExercises[i]?.type === "write") return sum;
+    return sum + score.correct;
+  }, 0);
+  const autoTotal = evalScores.reduce((sum, score, i) => {
+    if (!score || evalExercises[i]?.type === "write") return sum;
+    return sum + score.total;
+  }, 0);
+  const writeMax = evalScores.reduce((sum, score, i) => {
+    if (!score || evalExercises[i]?.type !== "write") return sum;
+    return sum + score.total;
+  }, 0);
+  const hasWriteEval = evalExercises.some((ex) => ex.type === "write");
+  const maxTotal = autoTotal + writeMax;
+  const evalGradeNow = hasEval && maxTotal > 0 ? linearSwissGrade(autoCorrect, maxTotal) : 0;
+  const evalGradeBest = hasEval && maxTotal > 0 ? linearSwissGrade(autoCorrect + writeMax, maxTotal) : 0;
+  const evalOutcome: "pass" | "pending" | "fail" | "none" = !hasEval
+    ? "none"
+    : evalGradeNow >= PASSING_GRADE
+      ? "pass"
+      : evalGradeBest >= PASSING_GRADE
+        ? "pending"
+        : "fail";
+  const evalGrade = evalOutcome === "pending" ? evalGradeNow : evalGradeNow;
+  const evalPercent = hasEval && maxTotal > 0 ? (autoCorrect / maxTotal) * 100 : 0;
   const allEvalValidated = evalValidated.length > 0 && evalValidated.every(Boolean);
   const _evalMedal = hasEval ? medalFromPercent(evalPercent) : null;
 
@@ -2783,24 +2867,23 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
   evalValidatedRef.current = evalValidated;
 
 
-  const handleValidated = useCallback<(allCorrect: boolean) => void>((allCorrect: boolean) => {
-    void allCorrect;
+  const handleValidated = useCallback<(correct: number, total: number) => void>((_correct, _total) => {
+    void _correct; void _total;
     setCanValidate(false);
   }, []);
 
-  const handleEvalValidated = useCallback<(allCorrect: boolean) => void>((allCorrect: boolean) => {
+  const handleEvalValidated = useCallback<(correct: number, total: number) => void>((correct, total) => {
     const i = evalIdxRef.current;
     const newValidated = evalValidatedRef.current.map((v, j) => (j === i ? true : v));
-    setEvalPassed((prev) => prev.map((v, j) => (j === i ? allCorrect : v)));
+    setEvalScores((prev) => prev.map((s, j) => (j === i ? { correct, total } : s)));
     setEvalValidated(newValidated);
     setCanValidate(false);
-    const total = newValidated.length;
     const allDone = newValidated.every(Boolean);
     if (allDone) {
       if (hasEval && resultsIdx >= 0) setStepIdx(resultsIdx);
     } else {
-      for (let k = 1; k <= total; k++) {
-        const idx = (i + k) % total;
+      for (let k = 1; k <= newValidated.length; k++) {
+        const idx = (i + k) % newValidated.length;
         if (!newValidated[idx]) {
           setEvalIdx(idx);
           setCanValidate(true);
@@ -2816,10 +2899,58 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
     setEvalSessionKey((k) => k + 1);
     setEvalValidateCommands(Array(evalExercises.length).fill(0));
     setEvalValidated(Array(evalExercises.length).fill(false));
-    setEvalPassed(Array(evalExercises.length).fill(false));
+    setEvalScores(Array(evalExercises.length).fill(null));
+    setWritePayload(null);
+    setWriteSent(false);
+    setWriteSendMessage("");
+    setTeacherId("");
     setSelectedResultIdx(null);
     setCanValidate(true);
     setStepIdx(evalPhaseIdx);
+  }
+
+  function sendWriteToTeacher() {
+    if (!teacherId || !writePayload || writeSent) return;
+    const prompt = buildGrammarWritePromptPayload({
+      lessonCode: lesson.code,
+      lessonTitle: lesson.title,
+      instruction: writePayload.instruction,
+      prompts: writePayload.prompts,
+      texts: writePayload.texts,
+      meta: {
+        kind: "grammar_eval_write",
+        slug: lesson.slug,
+        autoCorrect,
+        autoTotal,
+        writeMax,
+      },
+    });
+    const text = grammarWriteOriginalText(prompt.exercises);
+    startSendingWrite(async () => {
+      const result = await submitExpressionAction({
+        teacherId,
+        lessonCode: lesson.code,
+        level: "base",
+        prompt,
+        text,
+        aiFeedback: [],
+        teacherMaxPoints: writeMax || writePayload.prompts.length,
+      });
+      if (result.ok) {
+        setWriteSent(true);
+        setWriteSendMessage("Phrases envoyées au professeur.");
+        setFrenchEvalPending(lesson.slug, {
+          autoCorrect,
+          autoTotal,
+          writeMax,
+          lessonCode: lesson.code,
+          submissionId: result.submissionId,
+          at: new Date().toISOString(),
+        });
+      } else {
+        setWriteSendMessage(result.reason ?? "Envoi impossible.");
+      }
+    });
   }
 
   function goBack() {
@@ -2852,9 +2983,24 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
   }
 
   function finishLesson() {
-    // Déblocage de la leçon suivante : note ≥ 4.0 (ou pas d'évaluation)
-    if (!hasEval || evalGrade >= PASSING_GRADE) {
+    if (!hasEval) {
       markFrenchLessonComplete(lesson.slug);
+      router.push(returnUrl);
+      return;
+    }
+    if (evalOutcome === "pass") {
+      clearFrenchEvalPending(lesson.slug);
+      markFrenchLessonComplete(lesson.slug);
+    } else if (evalOutcome === "pending") {
+      setFrenchEvalPending(lesson.slug, {
+        autoCorrect,
+        autoTotal,
+        writeMax,
+        lessonCode: lesson.code,
+        at: new Date().toISOString(),
+      });
+    } else {
+      clearFrenchEvalPending(lesson.slug);
     }
     router.push(returnUrl);
   }
@@ -3074,11 +3220,68 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
               <div className="mb-6 space-y-4">
                 <EvalResultsSummary
                   accent="var(--color-accent-fr)"
-                  points={evalPassedCount}
-                  maxPoints={evalExercises.length}
+                  points={autoCorrect}
+                  maxPoints={maxTotal || 1}
                   grade={evalGrade}
-                  passed={evalGrade >= PASSING_GRADE}
+                  passed={evalOutcome === "pass"}
+                  mentionOverride={evalOutcome === "pending" ? "En attente" : undefined}
                 />
+                {evalOutcome === "pending" && (
+                  <p className="text-center text-sm text-[var(--color-text-secondary)]">
+                    Score actuel {autoCorrect}/{maxTotal} (note {evalGradeNow.toFixed(1)}/6).
+                    Les points de rédaction peuvent encore faire passer l&apos;évaluation.
+                  </p>
+                )}
+                {evalOutcome === "fail" && hasWriteEval && (
+                  <p className="text-center text-sm text-amber-700">
+                    Même avec la totalité des points de rédaction ({writeMax}), la note resterait
+                    insuffisante ({evalGradeBest.toFixed(1)}/6).
+                  </p>
+                )}
+                {hasWriteEval && writePayload && (
+                  <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-[var(--color-accent-fr)]/5 p-4">
+                    <h3 className="font-bold text-[var(--color-text-primary)]">
+                      Envoyer la rédaction au professeur
+                    </h3>
+                    <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+                      {writeMax} phrase{writeMax > 1 ? "s" : ""} · 1 point par phrase · notation manuelle
+                    </p>
+                    {teachers.length ? (
+                      <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                        <AppSelect
+                          value={teacherId}
+                          onChange={setTeacherId}
+                          options={teachers.map((teacher) => ({
+                            value: teacher.id,
+                            label: [teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur",
+                          }))}
+                          placeholder="Choisissez un professeur"
+                          emptyOption={{ value: "", label: "Choisissez un professeur" }}
+                          disabled={writeSent}
+                          placement="top"
+                          className="min-h-11 flex-1"
+                        />
+                        <button
+                          type="button"
+                          onClick={sendWriteToTeacher}
+                          disabled={!teacherId || isSendingWrite || writeSent}
+                          className="min-h-11 rounded-[var(--radius-md)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white disabled:opacity-35"
+                        >
+                          {writeSent ? "Envoyé" : isSendingWrite ? "Envoi…" : "Envoyer"}
+                        </button>
+                      </div>
+                    ) : (
+                      <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+                        Aucun professeur disponible (connexion requise).
+                      </p>
+                    )}
+                    {writeSendMessage && (
+                      <p className={`mt-2 text-xs font-semibold ${writeSent ? "text-emerald-600" : "text-amber-600"}`}>
+                        {writeSendMessage}
+                      </p>
+                    )}
+                  </section>
+                )}
                 <EvalResultsHint />
               </div>
             )}
@@ -3110,7 +3313,10 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
               {evalExercises.map((ex, i) => {
                 const isActive = isEvalPhase && i === evalIdx;
                 const isSelectedResult = isResults && selectedResultIdx === i;
-                const correct = evalPassed[i] ? 1 : 0;
+                const score = evalScores[i];
+                const isWrite = ex.type === "write";
+                const correct = isWrite ? 0 : (score?.correct ?? 0);
+                const total = score?.total ?? (isWrite ? writeMax || 1 : 1);
                 return (
                   <div
                     key={`eval-${evalSessionKey}-${i}`}
@@ -3120,10 +3326,11 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
                       <EvalExerciseResultRow
                         index={i}
                         correct={correct}
-                        total={1}
+                        total={total}
                         accent="var(--color-accent-fr)"
                         isSelected={isSelectedResult}
                         onToggle={() => setSelectedResultIdx(isSelectedResult ? null : i)}
+                        scoreLabel={isWrite ? (writeSent ? "Envoyé" : "En attente") : undefined}
                       >
                         <EvalRevealContext.Provider value={isResults}>
                           <GrammarExerciseView
@@ -3131,6 +3338,8 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
                             onValidated={handleEvalValidated}
                             validateCommand={evalValidateCommands[i] ?? 0}
                             onCanValidateChange={() => {}}
+                            isEval
+                            onWriteAnswers={setWritePayload}
                           />
                         </EvalRevealContext.Provider>
                       </EvalExerciseResultRow>
@@ -3143,6 +3352,8 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
                             onValidated={handleEvalValidated}
                             validateCommand={evalValidateCommands[i] ?? 0}
                             onCanValidateChange={isActive ? setCanValidate : () => {}}
+                            isEval
+                            onWriteAnswers={setWritePayload}
                           />
                         </EvalRevealContext.Provider>
                       </div>

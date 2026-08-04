@@ -218,6 +218,7 @@ export const PE2_REPLY_RUBRIC: ExerciseRubric = {
 };
 
 export function rubricForPeExercise(kind: PeExerciseKind, maxPoints = 0): ExerciseRubric | null {
+  if (kind === "sentences") return null;
   if (kind === "form") return PE_FORM_RUBRIC;
   if (kind === "reply") return maxPoints <= 10 ? PE1_REPLY_RUBRIC : PE2_REPLY_RUBRIC;
   if (kind === "experience") return maxPoints <= 10 ? PE1_EXPERIENCE_RUBRIC : PE2_EXPERIENCE_RUBRIC;

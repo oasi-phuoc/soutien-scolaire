@@ -106,6 +106,16 @@ export function mergeProgress(
     ...(local.frenchLessons ?? {}),
   };
 
+  // Merge frenchEvalPending: local wins on same slug (plus récent côté client)
+  const mergedPending: NonNullable<StoredProgressV1["frenchEvalPending"]> = {
+    ...(cloud.frenchEvalPending ?? {}),
+    ...(local.frenchEvalPending ?? {}),
+  };
+  // Si leçon déjà completed, retirer le pending
+  for (const slug of Object.keys(mergedPending)) {
+    if (mergedFrench[slug] === "completed") delete mergedPending[slug];
+  }
+
   // Merge evaluationSnoozeUntil: take the later date per module
   const localSnooze = local.evaluationSnoozeUntil ?? {};
   const cloudSnooze = cloud.evaluationSnoozeUntil ?? {};
@@ -126,6 +136,7 @@ export function mergeProgress(
     lastActivityAt,
     version: 2,
     frenchLessons: Object.keys(mergedFrench).length > 0 ? mergedFrench : undefined,
+    frenchEvalPending: Object.keys(mergedPending).length > 0 ? mergedPending : undefined,
     evaluationSnoozeUntil: Object.keys(mergedSnooze).length > 0 ? mergedSnooze : undefined,
     commProgress: Object.keys(mergedComm).length > 0 ? mergedComm : undefined,
     lectureProgress: mergedLecture,

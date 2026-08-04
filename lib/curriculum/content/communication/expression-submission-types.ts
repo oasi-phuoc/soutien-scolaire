@@ -1,6 +1,6 @@
 import type { WritingLevel, WritingPrompt } from "./writing-prompts";
 
-export type PeExerciseKind = "form" | "experience" | "reply" | "short" | "long";
+export type PeExerciseKind = "form" | "experience" | "reply" | "short" | "long" | "sentences";
 
 export type SubmissionExercise = {
   id: string;
