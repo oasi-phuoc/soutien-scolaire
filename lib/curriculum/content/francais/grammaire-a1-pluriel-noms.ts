@@ -10,6 +10,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     {
       type: "heading",
       text: "Utilisation",
+      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
     },
     {
       type: "plain_list",
@@ -17,6 +18,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         "On utilise la forme du pluriel quand le nom désigne plusieurs éléments.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["We use the plural form when the noun names several elements."],
+        ar: ["نستعمل صيغة الجمع عندما يدل الاسم على عدة عناصر."],
+        fa: ["وقتی اسم چند عنصر را نشان می‌دهد از صورت جمع استفاده می‌کنیم."],
+        ti: ["እቲ ስም ብዙሓት ነገራት ምስ ዘመልክት፣ ባዙሕ ቅርጺ ንጥቀም።"],
+        uk: ["Форму множини вживаємо, коли іменник позначає кілька елементів."],
+      },
     },
     {
       type: "highlight",
@@ -29,6 +37,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     {
       type: "heading",
       text: "Formes",
+      trans: { en: "Forms", ar: "الصيغ", fa: "صورت‌ها", ti: "ቅርጽታት", uk: "Форми" },
     },
     {
       type: "plain_list",
@@ -36,10 +45,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         "Un nom s'emploie toujours avec un déterminant, qui indique le nombre. Dans les dictionnaires, les noms sont au singulier.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["A noun is always used with a determiner, which shows the number. In dictionaries, nouns are in the singular."],
+        ar: ["يُستعمل الاسم دائماً مع محدد يدل على العدد. في القواميس، الأسماء في المفرد."],
+        fa: ["اسم همیشه با یک حرف تعریف به کار می‌رود که شمار را نشان می‌دهد. در فرهنگ لغت، اسم‌ها مفردند."],
+        ti: ["ስም ኩሉ ግዜ ምስ መወሰኒ ይጥቀም፣ ቁጽሪ የመልክት። ኣብ መዝገበ-ቃላት፣ ስማት ብንጽል እዮም።"],
+        uk: ["Іменник завжди вживається з означенням, яке показує число. У словниках іменники стоять в однині."],
+      },
     },
     {
       type: "grid",
       headers: ["", "Indéfini", "Défini", "Nom"],
+      transHeaders: {
+        en: ["", "Indefinite", "Definite", "Noun"],
+        ar: ["", "نكرة", "معرفة", "اسم"],
+        fa: ["", "نکره", "معرفه", "اسم"],
+        ti: ["", "ዘይፍሉይ", "ፍሉይ", "ስም"],
+        uk: ["", "Неозначений", "Означений", "Іменник"],
+      },
       boldFirstCol: true,
       rows: [
         ["Singulier", "{a}une{/a}", "{a}la{/a}", "tasse"],
@@ -49,6 +72,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     {
       type: "heading",
       text: "Cas général",
+      trans: { en: "General case", ar: "الحالة العامة", fa: "مورد کلی", ti: "ሓፈሻዊ ኩነት", uk: "Загальний випадок" },
     },
     {
       type: "plain_list",
@@ -56,6 +80,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         "Nom pluriel = nom singulier + {a}-s{/a}.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Plural noun = singular noun + {a}-s{/a}."],
+        ar: ["الاسم الجمع = الاسم المفرد + {a}-s{/a}."],
+        fa: ["اسم جمع = اسم مفرد + {a}-s{/a}."],
+        ti: ["ባዙሕ ስም = ንጽል ስም + {a}-s{/a}."],
+        uk: ["Іменник у множині = іменник в однині + {a}-s{/a}."],
+      },
     },
     {
       type: "highlight",
@@ -72,6 +103,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         "Si le nom singulier se termine par {a}s{/a}, {a}x{/a} ou {a}z{/a}, le pluriel ne change pas.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["If the singular noun ends in {a}s{/a}, {a}x{/a} or {a}z{/a}, the plural does not change."],
+        ar: ["إذا انتهى الاسم المفرد بـ {a}s{/a} أو {a}x{/a} أو {a}z{/a}، لا يتغيّر الجمع."],
+        fa: ["اگر اسم مفرد به {a}s{/a}، {a}x{/a} یا {a}z{/a} ختم شود، جمع تغییر نمی‌کند."],
+        ti: ["እቲ ንጽል ስም ብ {a}s{/a}፣ {a}x{/a} ወይ {a}z{/a} እንተወዲኡ፣ እቲ ባዙሕ ኣይቕየርን።"],
+        uk: ["Якщо іменник в однині закінчується на {a}s{/a}, {a}x{/a} або {a}z{/a}, множина не змінюється."],
+      },
     },
     {
       type: "highlight",
@@ -86,6 +124,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     {
       type: "heading",
       text: "Formes particulières",
+      trans: { en: "Special forms", ar: "صيغ خاصة", fa: "صورت‌های خاص", ti: "ፍሉያት ቅርጽታት", uk: "Особливі форми" },
     },
     {
       type: "plain_list",
@@ -93,6 +132,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         "Certains noms forment leur pluriel autrement selon leur terminaison. Choisissez une terminaison pour voir les exemples et les exceptions.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Some nouns form their plural differently depending on their ending. Choose an ending to see the examples and the exceptions."],
+        ar: ["بعض الأسماء تكوّن جمعها بطريقة مختلفة بحسب نهايتها. اختر نهاية لرؤية الأمثلة والاستثناءات."],
+        fa: ["برخی اسم‌ها بسته به پایان‌شان جمع متفاوتی می‌سازند. یک پایان را انتخاب کنید تا مثال‌ها و استثناها را ببینید."],
+        ti: ["ገለ ስማት ከም መወዳእታኦም ባዙሖም ብኻልእ መገዲ ይሰርሑ። ኣብነታትን ፍሉያትን ንምርኣይ ሓደ መወዳእታ ምረጽ።"],
+        uk: ["Деякі іменники утворюють множину інакше залежно від закінчення. Оберіть закінчення, щоб побачити приклади та винятки."],
+      },
     },
     {
       type: "selector",
@@ -107,10 +153,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-al{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند."],
+                ti: ["ብንጽል ብ {a}-al{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-al{/a} в однині змінюються на {a}-aux{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               rows: [
                 ["un anim{a}al{/a}", "des anim{a}aux{/a}"],
                 ["un journ{a}al{/a}", "des journ{a}aux{/a}"],
@@ -120,6 +180,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
             {
               type: "highlight",
               label: "Exceptions",
+              transLabel: {
+                en: "Exceptions",
+                ar: "استثناءات",
+                fa: "استثناها",
+                ti: "ፍሉያት",
+                uk: "Винятки",
+              },
               items: [
                 "un b{a}al{/a} → des bal{a}s{/a}",
                 "un carnav{a}al{/a} → des carnaval{a}s{/a}",
@@ -139,10 +206,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "Les mots terminant par {a}-ail{/a} au singulier prennent un {a}-s{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-ail{/a} in the singular take an {a}-s{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-ail{/a} في المفرد تأخذ {a}-s{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-ail{/a} ختم می‌شوند در جمع {a}-s{/a} می‌گیرند."],
+                ti: ["ብንጽል ብ {a}-ail{/a} ዝውድኡ ቃላት ኣብ ባዙሕ {a}-s{/a} ይወስዱ።"],
+                uk: ["Слова на {a}-ail{/a} в однині отримують {a}-s{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               rows: [
                 ["un déta{a}il{/a}", "des déta{a}ils{/a}"],
                 ["un porta{a}il{/a}", "des porta{a}ils{/a}"],
@@ -152,6 +233,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
             {
               type: "highlight",
               label: "Exceptions",
+              transLabel: {
+                en: "Exceptions",
+                ar: "استثناءات",
+                fa: "استثناها",
+                ti: "ፍሉያት",
+                uk: "Винятки",
+              },
               items: [
                 "un trav{a}ail{/a} → des trav{a}aux{/a}",
                 "un vitr{a}ail{/a} → des vitr{a}aux{/a}",
@@ -171,10 +259,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-eau{/a} in the singular change to {a}-eaux{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-eau{/a} في المفرد تصبح {a}-eaux{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-eau{/a} ختم می‌شوند در جمع به {a}-eaux{/a} تغییر می‌کنند."],
+                ti: ["ብንጽል ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eaux{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-eau{/a} в однині змінюються на {a}-eaux{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               rows: [
                 ["un bat{a}eau{/a}", "des bat{a}eaux{/a}"],
                 ["un gât{a}eau{/a}", "des gât{a}eaux{/a}"],
@@ -193,10 +295,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "Les mots terminant par {a}-au{/a} au singulier changent en {a}-aux{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-au{/a} in the singular change to {a}-aux{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-au{/a} في المفرد تصبح {a}-aux{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-au{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند."],
+                ti: ["ብንጽል ብ {a}-au{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-au{/a} в однині змінюються на {a}-aux{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               rows: [
                 ["un tuy{a}au{/a}", "des tuy{a}aux{/a}"],
               ],
@@ -204,6 +320,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
             {
               type: "highlight",
               label: "Exceptions",
+              transLabel: {
+                en: "Exceptions",
+                ar: "استثناءات",
+                fa: "استثناها",
+                ti: "ፍሉያት",
+                uk: "Винятки",
+              },
               items: [
                 "un land{a}au{/a} → des landau{a}s{/a}",
                 "un sarr{a}au{/a} → des sarrau{a}s{/a}",
@@ -221,10 +344,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "Les mots terminant par {a}-eu{/a} au singulier changent en {a}-eux{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-eu{/a} in the singular change to {a}-eux{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-eu{/a} في المفرد تصبح {a}-eux{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-eu{/a} ختم می‌شوند در جمع به {a}-eux{/a} تغییر می‌کنند."],
+                ti: ["ብንጽል ብ {a}-eu{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eux{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-eu{/a} в однині змінюються на {a}-eux{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               rows: [
                 ["un f{a}eu{/a}", "des f{a}eux{/a}"],
                 ["un j{a}eu{/a}", "des j{a}eux{/a}"],
@@ -234,6 +371,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
             {
               type: "highlight",
               label: "Exceptions",
+              transLabel: {
+                en: "Exceptions",
+                ar: "استثناءات",
+                fa: "استثناها",
+                ti: "ፍሉያት",
+                uk: "Винятки",
+              },
               items: [
                 "un pn{a}eu{/a} → des pneu{a}s{/a}",
                 "un bl{a}eu{/a} → des bleu{a}s{/a}",
@@ -251,10 +395,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "Les mots terminant par {a}-ou{/a} au singulier prennent un {a}-s{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-ou{/a} in the singular take an {a}-s{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-ou{/a} في المفرد تأخذ {a}-s{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-ou{/a} ختم می‌شوند در جمع {a}-s{/a} می‌گیرند."],
+                ti: ["ብንጽል ብ {a}-ou{/a} ዝውድኡ ቃላት ኣብ ባዙሕ {a}-s{/a} ይወስዱ።"],
+                uk: ["Слова на {a}-ou{/a} в однині отримують {a}-s{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               rows: [
                 ["un tr{a}ou{/a}", "des trou{a}s{/a}"],
                 ["un cl{a}ou{/a}", "des clou{a}s{/a}"],
@@ -264,6 +422,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
             {
               type: "highlight",
               label: "Exceptions",
+              transLabel: {
+                en: "Exceptions",
+                ar: "استثناءات",
+                fa: "استثناها",
+                ti: "ፍሉያት",
+                uk: "Винятки",
+              },
               items: [
                 "un bij{a}ou{/a} → des bij{a}oux{/a}",
                 "un caill{a}ou{/a} → des caill{a}oux{/a}",
@@ -286,10 +451,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "Certains noms ont un pluriel irrégulier.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Some nouns have an irregular plural."],
+                ar: ["لبعض الأسماء جمع غير منتظم."],
+                fa: ["برخی اسم‌ها جمع بی‌قاعده دارند."],
+                ti: ["ገለ ስማት ዘይስሩዕ ባዙሕ ኣለዎም።"],
+                uk: ["Деякі іменники мають неправильну множину."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               rows: [
                 ["un {a}œil{/a}", "des {a}yeux{/a}"],
                 ["un {a}monsieur{/a}", "des {a}messieurs{/a}"],
@@ -307,6 +486,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Choisissez la forme plurielle correcte.",
+      transInstruction: { en: "Choose the correct plural form.", ar: "اختر صيغة الجمع الصحيحة.", fa: "صورت جمع درست را انتخاب کنید.", ti: "እቲ ቅኑዕ ባዙሕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму множини." },
       items: [],
       poolSize: 5,
       pool: [
@@ -366,6 +546,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Écrivez la forme plurielle du nom.",
+      transInstruction: { en: "Write the plural form of the noun.", ar: "اكتب صيغة الجمع للاسم.", fa: "صورت جمع اسم را بنویسید.", ti: "እቲ ባዙሕ ቅርጺ ናይ ስም ጽሓፍ።", uk: "Напишіть форму множини іменника." },
       items: [],
       poolSize: 5,
       pool: [
@@ -425,6 +606,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Réécrivez les phrases au pluriel.",
+      transInstruction: { en: "Rewrite the sentences in the plural.", ar: "أعد كتابة الجمل في صيغة الجمع.", fa: "جمله‌ها را به صورت جمع بازنویسی کنید.", ti: "እተን ሓሳባት ብባዙሕ ደጊምካ ጽሓፍ።", uk: "Перепишіть речення у множині." },
       items: [],
       poolSize: 5,
       inputWidth: "w-[32rem]",

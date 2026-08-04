@@ -1076,5 +1076,82 @@
     "fa": "جمله‌ها را با c'est تبدیل کنید.\nمثال: Il est mon ami. → C'est mon ami.",
     "ti": "ሓሳባት ብ c'est ቀይር።\nኣብነት፦ Il est mon ami. → C'est mon ami.",
     "uk": "Перетворіть речення з c'est.\nПриклад: Il est mon ami. → C'est mon ami."
+  },
+  "Choisissez la forme correcte : M (masculin) ou F (féminin).": {
+    "en": "Choose the correct form: M (masculine) or F (feminine).",
+    "ar": "اختر الصيغة الصحيحة: M (مذكر) أو F (مؤنث).",
+    "fa": "صورت درست را انتخاب کنید: M (مذکر) یا F (مؤنث).",
+    "ti": "እቲ ቅኑዕ ቅርጺ ምረጽ: M (ተባዕታይ) ወይ F (ኣንስተይቲ).",
+    "uk": "Оберіть правильну форму: M (чоловічий) або F (жіночий)."
+  },
+  "Choisissez l'article correct (le / la / l').": {
+    "en": "Choose the correct article (le / la / l').",
+    "ar": "اختر الأداة الصحيحة (le / la / l').",
+    "fa": "حرف تعریف درست را انتخاب کنید (le / la / l').",
+    "ti": "እቲ ቅኑዕ ዓንቀጽ ምረጽ (le / la / l').",
+    "uk": "Оберіть правильний артикль (le / la / l')."
+  },
+  "Écrivez l'article le, la ou l'.": {
+    "en": "Write the article le, la or l'.",
+    "ar": "اكتب الأداة le أو la أو l'.",
+    "fa": "حرف تعریف le، la یا l' را بنویسید.",
+    "ti": "እቲ ዓንቀጽ le፣ la ወይ l' ጽሓፍ።",
+    "uk": "Напишіть артикль le, la або l'."
+  },
+  "Complétez les phrases avec le, la ou l'.": {
+    "en": "Complete the sentences with le, la or l'.",
+    "ar": "أكمل الجمل بـ le أو la أو l'.",
+    "fa": "جمله‌ها را با le، la یا l' کامل کنید.",
+    "ti": "እተን ሓሳባት ብ le፣ la ወይ l' ምላእ።",
+    "uk": "Доповніть речення артиклями le, la або l'."
+  },
+  "Écrivez la forme féminine du nom.": {
+    "en": "Write the feminine form of the noun.",
+    "ar": "اكتب الصيغة المؤنثة للاسم.",
+    "fa": "صورت مؤنث اسم را بنویسید.",
+    "ti": "እቲ ኣንስታይ ቅርጺ ናይ ስም ጽሓፍ።",
+    "uk": "Напишіть жіночу форму іменника."
+  },
+  "Réécrivez la phrase au féminin.": {
+    "en": "Rewrite the sentence in the feminine.",
+    "ar": "أعد كتابة الجملة في صيغة المؤنث.",
+    "fa": "جمله را به صورت مؤنث بازنویسی کنید.",
+    "ti": "እታ ሓሳብ ብኣንስተይቲ ደጊምካ ጽሓፍ።",
+    "uk": "Перепишіть речення у жіночому роді."
+  },
+  "Complétez avec un ou une.": {
+    "en": "Complete with un or une.",
+    "ar": "أكمل بـ un أو une.",
+    "fa": "با un یا une کامل کنید.",
+    "ti": "ብ un ወይ une ምላእ።",
+    "uk": "Доповніть словами un або une."
+  },
+  "Choisissez la forme plurielle correcte.": {
+    "en": "Choose the correct plural form.",
+    "ar": "اختر صيغة الجمع الصحيحة.",
+    "fa": "صورت جمع درست را انتخاب کنید.",
+    "ti": "እቲ ቅኑዕ ባዙሕ ቅርጺ ምረጽ።",
+    "uk": "Оберіть правильну форму множини."
+  },
+  "Écrivez la forme plurielle du nom.": {
+    "en": "Write the plural form of the noun.",
+    "ar": "اكتب صيغة الجمع للاسم.",
+    "fa": "صورت جمع اسم را بنویسید.",
+    "ti": "እቲ ባዙሕ ቅርጺ ናይ ስም ጽሓፍ።",
+    "uk": "Напишіть форму множини іменника."
+  },
+  "Réécrivez les phrases au pluriel.": {
+    "en": "Rewrite the sentences in the plural.",
+    "ar": "أعد كتابة الجمل في صيغة الجمع.",
+    "fa": "جمله‌ها را به صورت جمع بازنویسی کنید.",
+    "ti": "እተን ሓሳባት ብባዙሕ ደጊምካ ጽሓፍ።",
+    "uk": "Перепишіть речення у множині."
+  },
+  "Donnez la forme plurielle du nom composé.": {
+    "en": "Give the plural form of the compound noun.",
+    "ar": "أعطِ صيغة الجمع للاسم المركب.",
+    "fa": "صورت جمع اسم مرکب را بنویسید.",
+    "ti": "እቲ ናይ ውሁድ ስም ባዙሕ ቅርጺ ሃብ።",
+    "uk": "Напишіть форму множини складного іменника."
   }
 }
