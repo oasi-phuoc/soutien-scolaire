@@ -944,13 +944,35 @@ function renderFillSentence(sentence: string) {
 }
 
 function normalizeAnswer(s: string): string {
-  return s
+  let t = s
     .trim()
     .toLowerCase()
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .replace(/['']/g, "'")
-    .replace(/\s+/g, " ");
+    .replace(/[.!?…,;:]+$/g, "") // point final souvent saisi par l'élève
+    .replace(/\s+/g, " ")
+    .trim();
+  // Présent progressif : « de écouter » ≡ « d'écouter »
+  t = t
+    .replace(/\ben train de ([aeiouh])/g, "en train d'$1")
+    .replace(/\ben train d'\s+/g, "en train d'");
+  return t;
+}
+
+/** Compare une réponse fill ; tolère le texte déjà présent après le blanc (ex. « suis en train de… »). */
+function fillAnswerMatches(user: string, expected: string, sentence: string): boolean {
+  const u = normalizeAnswer(user);
+  const e = normalizeAnswer(expected);
+  if (!e) return !u;
+  if (u === e) return true;
+
+  const afterRaw = (sentence.split("___")[1] ?? "").replace(/\([^)]*\)/g, "");
+  const after = normalizeAnswer(afterRaw);
+  if (!after || !u.startsWith(e)) return false;
+  const rest = u.slice(e.length).trim();
+  if (!rest) return true;
+  return after.startsWith(rest) || rest.startsWith(after);
 }
 
 function FillExercise({
@@ -992,7 +1014,7 @@ function FillExercise({
     setValidated(true);
     const correctCount = items.filter(
       (item: FillItem, i) =>
-        normalizeAnswer(inputs[i] ?? "") === normalizeAnswer(item.answer),
+        fillAnswerMatches(inputs[i] ?? "", item.answer, item.sentence),
     ).length;
     onValidated(correctCount, items.length);
   }
@@ -1030,6 +1052,7 @@ function FillExercise({
     if (cls === "w-16") return "4rem";
     if (cls === "w-28") return "7rem";
     if (cls === "w-[10.5rem]") return "10.5rem";
+    if (cls === "w-[22rem]") return "22rem";
     const m = cls.match(/^w-\[([\d.]+rem)\]$/);
     return m?.[1] ?? "7rem";
   };
@@ -1042,7 +1065,7 @@ function FillExercise({
       <div className={columns >= 2 ? listClass : twoCols ? "grid gap-x-8 gap-y-4 lg:grid-cols-2" : listClass}>
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
-        const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+        const correct = fillAnswerMatches(userAnswer, item.answer, item.sentence);
 
         // Detect trailing parenthetical hint: "sentence text (hint)"
         const parenMatch = item.sentence.match(/^(.*?)\s+(\([^)]+\))\s*$/);
@@ -1061,19 +1084,27 @@ function FillExercise({
             ? { width: scaleCssLength(widthClassToRem(inputWidthCls), lengthScale) }
             : undefined;
         const inputWidth = lengthScale !== 1 ? "" : inputWidthCls;
+        const longAnswer = (item.answer?.length ?? 0) >= 14 || inputWidthCls.includes("22rem");
 
         const inputEl = validated && revealCorrection ? (
           correct || !userAnswer.trim() ? (
             <span
               style={inputWidthStyle}
-              className={`inline-block h-8 ${inputWidth} border-0 border-b-2 border-amber-500 px-2 text-center text-sm font-semibold text-amber-600 mx-1 align-middle leading-8`}
+              className={`inline-flex min-h-8 ${inputWidth} items-center border-0 border-b-2 border-amber-500 px-2 text-sm font-semibold text-amber-600 mx-1 align-middle ${
+                longAnswer ? "justify-start text-left leading-snug py-1" : "justify-center text-center leading-8"
+              }`}
             >
               {item.answer}
             </span>
           ) : (
-            <span style={inputWidthStyle} className={`inline-flex h-8 ${inputWidth} flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle`}>
-              <span className="text-[10px] leading-none text-zinc-900">{userAnswer || "—"}</span>
-              <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500">{item.answer}</span>
+            <span
+              style={inputWidthStyle}
+              className={`inline-flex min-h-8 ${inputWidth} flex-col justify-center border-b-2 border-amber-400 mx-1 align-middle px-2 py-1 ${
+                longAnswer ? "items-start text-left" : "items-center text-center"
+              }`}
+            >
+              <span className="text-[10px] leading-tight text-zinc-900 break-words w-full">{userAnswer || "—"}</span>
+              <span className="mt-0.5 text-sm leading-tight font-semibold text-amber-500 break-words w-full">{item.answer}</span>
             </span>
           )
         ) : (
@@ -1084,7 +1115,9 @@ function FillExercise({
             disabled={validated}
             data-print-answer=""
             style={inputWidthStyle}
-            className={`inline-block h-8 ${inputWidth} rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)]`}
+            className={`inline-block h-8 ${inputWidth} rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
+              longAnswer ? "text-left" : "text-center"
+            }`}
           />
         );
 

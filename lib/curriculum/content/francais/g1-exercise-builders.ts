@@ -483,7 +483,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: pools.conjFill,
       poolSize: G1_SESSION_SIZE,
-      inputWidth: "w-[10.5rem]",
+      inputWidth: profile.progressif ? "w-28" : "w-[10.5rem]",
     },
     {
       type: "fill",
@@ -492,7 +492,8 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: pools.plural,
       poolSize: G1_SESSION_SIZE,
-      inputWidth: "w-[10.5rem]",
+      /* Progressif : « sommes en train de manger » nécessite un trait large. */
+      inputWidth: profile.progressif ? "w-[22rem]" : "w-[10.5rem]",
     },
     {
       type: "qcm",
