@@ -1053,6 +1053,7 @@ function FillExercise({
     if (cls === "w-28") return "7rem";
     if (cls === "w-[10.5rem]") return "10.5rem";
     if (cls === "w-[22rem]") return "22rem";
+    if (cls === "w-[32rem]") return "32rem";
     const m = cls.match(/^w-\[([\d.]+rem)\]$/);
     return m?.[1] ?? "7rem";
   };
@@ -1079,18 +1080,19 @@ function FillExercise({
         const sentLine2 = nlIdx >= 0 ? rawSentence.slice(nlIdx + 1) : arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
         const inputWidthCls = exercise.inputWidth ?? "w-28";
-        const inputWidthStyle =
-          lengthScale !== 1
-            ? { width: scaleCssLength(widthClassToRem(inputWidthCls), lengthScale) }
-            : undefined;
-        const inputWidth = lengthScale !== 1 ? "" : inputWidthCls;
-        const longAnswer = (item.answer?.length ?? 0) >= 14 || inputWidthCls.includes("22rem");
+        const baseRem = widthClassToRem(inputWidthCls);
+        // Style inline : fiable même si la classe Tailwind arbitraire n'est pas générée.
+        const inputWidthStyle = {
+          width: scaleCssLength(baseRem, lengthScale),
+          maxWidth: "100%",
+        };
+        const longAnswer = (item.answer?.length ?? 0) >= 14 || parseFloat(baseRem) >= 20;
 
         const inputEl = validated && revealCorrection ? (
           correct || !userAnswer.trim() ? (
             <span
               style={inputWidthStyle}
-              className={`inline-flex min-h-8 ${inputWidth} items-center border-0 border-b-2 border-amber-500 px-2 text-sm font-semibold text-amber-600 mx-1 align-middle ${
+              className={`inline-flex min-h-8 items-center border-0 border-b-2 border-amber-500 px-2 text-sm font-semibold text-amber-600 mx-1 align-middle ${
                 longAnswer ? "justify-start text-left leading-snug py-1" : "justify-center text-center leading-8"
               }`}
             >
@@ -1099,7 +1101,7 @@ function FillExercise({
           ) : (
             <span
               style={inputWidthStyle}
-              className={`inline-flex min-h-8 ${inputWidth} flex-col justify-center border-b-2 border-amber-400 mx-1 align-middle px-2 py-1 ${
+              className={`inline-flex min-h-8 flex-col justify-center border-b-2 border-amber-400 mx-1 align-middle px-2 py-1 ${
                 longAnswer ? "items-start text-left" : "items-center text-center"
               }`}
             >
@@ -1115,7 +1117,7 @@ function FillExercise({
             disabled={validated}
             data-print-answer=""
             style={inputWidthStyle}
-            className={`inline-block h-8 ${inputWidth} rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
+            className={`inline-block h-8 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
               longAnswer ? "text-left" : "text-center"
             }`}
           />
@@ -1143,7 +1145,9 @@ function FillExercise({
               {sentLine2 !== null && (
                 <>
                   <br />
-                  <span className="ml-4">{renderParts(sentLine2)}</span>
+                  <span className={`ml-4 ${longAnswer ? "mt-1 flex w-[calc(100%-1rem)] flex-wrap items-center gap-1" : ""}`}>
+                    {renderParts(sentLine2)}
+                  </span>
                 </>
               )}
             </p>
