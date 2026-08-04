@@ -85,6 +85,8 @@ export async function submitExpressionAction(input: {
   text: string;
   aiFeedback: unknown[];
   placementSessionId?: string;
+  /** Plafond de notation (défaut 25). Ex. grammaire Ex7 = 1 pt / phrase. */
+  teacherMaxPoints?: number;
 }): Promise<{ ok: boolean; reason?: string; submissionId?: string }> {
   const session = await currentSession();
   if (!session) return { ok: false, reason: "Vous devez être connecté." };
@@ -94,6 +96,8 @@ export async function submitExpressionAction(input: {
     return { ok: false, reason: `Le texte doit contenir entre ${input.prompt.minWords} et ${input.prompt.maxWords} mots.` };
   }
   if (!input.teacherId) return { ok: false, reason: "Choisissez un professeur." };
+
+  const maxPoints = Math.max(1, Math.min(25, Math.round(input.teacherMaxPoints ?? 25)));
 
   const { data: inserted, error } = await session.supabase.from("expression_submissions").insert({
     student_id: session.user.id,
@@ -105,6 +109,7 @@ export async function submitExpressionAction(input: {
     original_text: text,
     ai_feedback: input.aiFeedback,
     placement_session_id: input.placementSessionId ?? null,
+    teacher_max_points: maxPoints,
   }).select("id").single();
   if (error) {
     if (error.code === "42501") {
@@ -257,30 +262,32 @@ export async function reviewExpressionAction(input: {
 }): Promise<{ ok: boolean; reason?: string }> {
   const session = await currentSession();
   if (!session || !["prof", "admin"].includes(session.role)) return { ok: false, reason: "Non autorisé." };
-  const points = input.teacherGrading?.totalPoints ?? Number(input.teacherPoints);
-  if (!Number.isFinite(points) || points < 0 || points > 25) {
-    return { ok: false, reason: "Les points doivent être compris entre 0 et 25." };
-  }
-  const roundedPoints = Math.round(points * 2) / 2;
-  const finalResult = input.finalResult.trim();
-  if (!finalResult) return { ok: false, reason: "Indiquez le résultat final de l’élève." };
 
   const now = new Date().toISOString();
   const { data: submission, error: readError } = await session.supabase
     .from("expression_submissions")
-    .select("id, lesson_code, placement_session_id, student_id")
+    .select("id, lesson_code, placement_session_id, student_id, teacher_max_points, prompt")
     .eq("id", input.id)
     .eq("teacher_id", session.user.id)
     .maybeSingle();
   if (readError) return { ok: false, reason: readError.message };
   if (!submission) return { ok: false, reason: "Soumission introuvable." };
 
+  const maxPoints = Math.max(1, Number(submission.teacher_max_points ?? 25) || 25);
+  const points = input.teacherGrading?.totalPoints ?? Number(input.teacherPoints);
+  if (!Number.isFinite(points) || points < 0 || points > maxPoints) {
+    return { ok: false, reason: `Les points doivent être compris entre 0 et ${maxPoints}.` };
+  }
+  const roundedPoints = Math.round(points * 2) / 2;
+  const finalResult = input.finalResult.trim();
+  if (!finalResult) return { ok: false, reason: "Indiquez le résultat final de l’élève." };
+
   const { error } = await session.supabase.from("expression_submissions").update({
     corrected_text: input.correctedText.trim(),
     teacher_comment: input.teacherComment.trim() || null,
     annotations: input.annotations,
     teacher_points: roundedPoints,
-    teacher_max_points: 25,
+    teacher_max_points: maxPoints,
     final_result: finalResult,
     teacher_grading: input.teacherGrading
       ? { ...input.teacherGrading, totalPoints: roundedPoints }
@@ -292,6 +299,54 @@ export async function reviewExpressionAction(input: {
     teacher_read_at: now,
   }).eq("id", input.id).eq("teacher_id", session.user.id);
   if (error) return { ok: false, reason: error.message };
+
+  // Déblocage grammaire : points rédaction reçus + score auto déjà acquis.
+  const promptObj = submission.prompt && typeof submission.prompt === "object"
+    ? (submission.prompt as Record<string, unknown>)
+    : null;
+  const grammarMeta = promptObj?.grammarEvalMeta as
+    | { kind?: string; slug?: string; autoCorrect?: number; autoTotal?: number; writeMax?: number }
+    | undefined;
+  if (
+    grammarMeta?.kind === "grammar_eval_write" &&
+    typeof grammarMeta.slug === "string" &&
+    typeof grammarMeta.autoCorrect === "number" &&
+    typeof grammarMeta.autoTotal === "number" &&
+    typeof grammarMeta.writeMax === "number"
+  ) {
+    const { linearSwissGrade, PASSING_GRADE } = await import("@/lib/scoring");
+    const grade = linearSwissGrade(
+      grammarMeta.autoCorrect + roundedPoints,
+      grammarMeta.autoTotal + grammarMeta.writeMax,
+    );
+    if (grade >= PASSING_GRADE) {
+      const { data: profileRow } = await session.supabase
+        .from("profiles")
+        .select("progress_data")
+        .eq("id", submission.student_id)
+        .maybeSingle();
+      const progress = (profileRow?.progress_data ?? {}) as Record<string, unknown>;
+      const frenchLessons = {
+        ...((progress.frenchLessons as Record<string, string> | undefined) ?? {}),
+        [grammarMeta.slug]: "completed",
+      };
+      const frenchEvalPending = {
+        ...((progress.frenchEvalPending as Record<string, unknown> | undefined) ?? {}),
+      };
+      delete frenchEvalPending[grammarMeta.slug];
+      await session.supabase.from("profiles").update({
+        progress_data: {
+          ...progress,
+          frenchLessons,
+          ...(Object.keys(frenchEvalPending).length > 0
+            ? { frenchEvalPending }
+            : { frenchEvalPending: null }),
+        },
+        progress_updated_at: now,
+        updated_at: now,
+      }).eq("id", submission.student_id);
+    }
+  }
 
   if (submission.placement_session_id && submission.lesson_code?.startsWith("PLACEMENT-")) {
     const skill = submission.lesson_code.includes("-PE-") ? "pe" : submission.lesson_code.includes("-PO-") ? "po" : null;
