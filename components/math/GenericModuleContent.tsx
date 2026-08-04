@@ -11969,13 +11969,12 @@ export function GenericModuleContent({
                     </svg>
                   </button>
                 )}
-                {stepValidate && (
+                {stepValidate && stepCanValidate && (
                   <button
                     type="button"
                     onClick={stepValidate}
-                    disabled={!stepCanValidate}
                     data-nav-action="validate"
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
                     aria-label="Valider"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>

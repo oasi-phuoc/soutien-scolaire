@@ -89,6 +89,11 @@ export function ExSentenceWrite({
   }, [emptyToast]);
 
   useEffect(() => {
+    const alreadyChecked = Object.values(states).some((s) => s.checked);
+    if (alreadyChecked) {
+      onCanValidateChange(false);
+      return;
+    }
     const hasAny = Object.values(states).some((s) => s.answer.trim().length > 0);
     onCanValidateChange(hasAny);
   // eslint-disable-next-line react-hooks/exhaustive-deps

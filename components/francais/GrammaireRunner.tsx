@@ -3209,6 +3209,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
       setStepIdx((s: number) => s - 1);
       setExerciseKey((k: number) => k + 1);
       setValidateCommand(0);
+      setCanValidate(true);
     }
   }
 
@@ -3262,12 +3263,14 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
       setStepIdx((s: number) => s + 1);
       setExerciseKey((k: number) => k + 1);
       setValidateCommand(0);
+      setCanValidate(true);
     }
   }
 
   function resetExercise() {
     setExerciseKey((k: number) => k + 1);
     setValidateCommand(0);
+    setCanValidate(true);
   }
 
   return (
@@ -3619,13 +3622,14 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
               Retour
             </button>
 
-            {/* Reset + Validate */}
+            {/* Reset + Validate — Valider masqué après correction, réaffiché au refresh */}
             {(isMidEx || (isExercise && (!hasTimer || exercisesStarted)) || (isEvalPhase && !evalValidated[evalIdx])) ? (
               <div className="flex items-center gap-2">
                 {!isEvalPhase && (
                   <button
                     type="button"
                     aria-label="Recommencer l'exercice"
+                    data-nav-action="refresh"
                     onClick={resetExercise}
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
                   >
@@ -3635,23 +3639,25 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
                     </svg>
                   </button>
                 )}
-                <button
-                  type="button"
-                  aria-label="Valider l'exercice"
-                  onClick={() => {
-                    if (isEvalPhase) {
-                      setEvalValidateCommands((prev) => prev.map((v, j) => (j === evalIdx ? v + 1 : v)));
-                    } else {
-                      setValidateCommand((c: number) => c + 1);
-                    }
-                  }}
-                  disabled={false}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white transition-opacity hover:opacity-90 active:scale-90 disabled:cursor-not-allowed disabled:opacity-30"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                </button>
+                {(isEvalPhase ? !evalValidated[evalIdx] : _canValidate) && (
+                  <button
+                    type="button"
+                    aria-label="Valider l'exercice"
+                    data-nav-action="validate"
+                    onClick={() => {
+                      if (isEvalPhase) {
+                        setEvalValidateCommands((prev) => prev.map((v, j) => (j === evalIdx ? v + 1 : v)));
+                      } else {
+                        setValidateCommand((c: number) => c + 1);
+                      }
+                    }}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white transition-opacity hover:opacity-90 active:scale-90"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </button>
+                )}
               </div>
             ) : <span />}
 

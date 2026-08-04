@@ -185,6 +185,7 @@ export function VocabRunner({ theme: baseTheme }: Props) {
 
   function handleValidated(_correct: number, _total: number) {
     setValidated(true);
+    setCanValidate(false);
   }
 
   function handleEvalValidated(idx: number, correct: number, total: number) {
@@ -629,13 +630,14 @@ export function VocabRunner({ theme: baseTheme }: Props) {
               </button>
             )}
 
-            {/* Reset + Validate (exercise steps only; no reset during eval) */}
+            {/* Reset + Validate — Valider masqué après correction, réaffiché au refresh */}
             {showExButtons && (
               <div className="flex items-center gap-2">
                 {!step.isEval && (
                   <button
                     type="button"
                     aria-label="Recommencer"
+                    data-nav-action="refresh"
                     onClick={handleReset}
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
                   >
@@ -645,17 +647,19 @@ export function VocabRunner({ theme: baseTheme }: Props) {
                     </svg>
                   </button>
                 )}
-                <button
-                  type="button"
-                  aria-label="Valider"
-                  onClick={handleValidate}
-                  disabled={isInEvalPhase ? evalValidated[evalExIdx] : (inEvalPhase && validated)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-40"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                </button>
+                {(isInEvalPhase ? !evalValidated[evalExIdx] : !validated) && (
+                  <button
+                    type="button"
+                    aria-label="Valider"
+                    data-nav-action="validate"
+                    onClick={handleValidate}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </button>
+                )}
               </div>
             )}
 

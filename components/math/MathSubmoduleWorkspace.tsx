@@ -2876,26 +2876,27 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
             {isExercise ? (
               <div className="flex items-center gap-2">
                 {!isInEvalExercises && (
-                  <button type="button" aria-label="Recommencer" onClick={refresh}
+                  <button type="button" aria-label="Recommencer" data-nav-action="refresh" onClick={refresh}
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" /></svg>
                   </button>
                 )}
-                <button type="button" aria-label="Valider"
-                  onClick={() => {
-                    if (isInEvalExercises) {
-                      const i = stepIdx - evalStartIdx - 1;
-                      setEvalValidateCommands(prev => ({ ...prev, [i]: (prev[i] ?? 0) + 1 }));
-                    } else if (isCustom) {
-                      setValidateCommand(c => c + 1);
-                    } else {
-                      validateText();
-                    }
-                  }}
-                  disabled={isInEvalExercises ? !!evalExValidated[stepIdx - evalStartIdx - 1] : validateDisabled}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-90 active:scale-90 disabled:cursor-not-allowed disabled:opacity-30">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
-                </button>
+                {!(isInEvalExercises ? !!evalExValidated[stepIdx - evalStartIdx - 1] : validateDisabled) && (
+                  <button type="button" aria-label="Valider" data-nav-action="validate"
+                    onClick={() => {
+                      if (isInEvalExercises) {
+                        const i = stepIdx - evalStartIdx - 1;
+                        setEvalValidateCommands(prev => ({ ...prev, [i]: (prev[i] ?? 0) + 1 }));
+                      } else if (isCustom) {
+                        setValidateCommand(c => c + 1);
+                      } else {
+                        validateText();
+                      }
+                    }}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-90 active:scale-90">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
+                  </button>
+                )}
               </div>
             ) : <span />}
 

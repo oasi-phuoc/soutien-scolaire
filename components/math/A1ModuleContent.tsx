@@ -5529,6 +5529,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <button
                     type="button"
                     aria-label="Recommencer"
+                    data-nav-action="refresh"
                     onClick={stepReset}
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
                   >
@@ -5537,13 +5538,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     </svg>
                   </button>
                 ) : null}
-                {stepValidate ? (
+                {stepValidate && !stepValidateDisabled ? (
                   <button
                     type="button"
                     aria-label="Valider"
+                    data-nav-action="validate"
                     onClick={stepValidate}
-                    disabled={stepValidateDisabled}
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-40"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
                       <path d="M20 6L9 17l-5-5" />
