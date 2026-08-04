@@ -959,14 +959,68 @@ function normalizeAnswer(s: string): string {
   return t;
 }
 
+const FILL_SUBJECT_PRONOUNS = new Set([
+  "je",
+  "j'",
+  "tu",
+  "il",
+  "elle",
+  "on",
+  "nous",
+  "vous",
+  "ils",
+  "elles",
+  "c'",
+]);
+const FILL_REFLEXIVES = new Set(["me", "te", "se", "nous", "vous", "m'", "t'", "s'"]);
+
+/**
+ * Radical visible avant le blanc (après pronom sujet / réfléchi).
+ * Ex. « Il commenc » → « commenc » ; « Il » → null ; « Je me l » → « l ».
+ */
+function visibleFillStem(rawBefore: string): string | null {
+  // Segment après « → » (ex. pluriel) : seul le pronom cible compte.
+  const segment = rawBefore.includes("→")
+    ? (rawBefore.split("→").pop() ?? "")
+    : rawBefore;
+  const t = normalizeAnswer(segment.replace(/→/g, " "));
+  if (!t) return null;
+
+  // Élision collée en tête : j'envo, m'appel…
+  const gluedHead = t.match(/^(j'|c'|m'|t'|s')(.+)$/);
+  if (gluedHead && t.indexOf(" ") === -1) {
+    const head = gluedHead[1]!;
+    const rest = gluedHead[2]!;
+    if (FILL_SUBJECT_PRONOUNS.has(head) || FILL_REFLEXIVES.has(head)) {
+      return rest || null;
+    }
+  }
+
+  const words = t.split(" ").filter(Boolean);
+  let i = 0;
+  if (words[i] && FILL_SUBJECT_PRONOUNS.has(words[i]!)) i++;
+  if (words[i] && FILL_REFLEXIVES.has(words[i]!)) {
+    i++;
+  } else if (words[i]) {
+    // « je m'appel » → mot « m'appel »
+    const glued = words[i]!.match(/^(m'|t'|s')(.+)$/);
+    if (glued) {
+      const rest = [glued[2], ...words.slice(i + 1)].join("");
+      return rest || null;
+    }
+  }
+  const stem = words.slice(i).join("");
+  return stem || null;
+}
+
 /**
  * Compare une réponse fill (insensible à la casse ; accents obligatoires).
  * Accepte :
- * - la réponse exacte (« est », « e », « achète ») ;
- * - la même phrase une fois le blanc rempli ;
- * - pronom et/ou radical déjà affichés + terminaison
- *   (« il est » pour « Il ___ », « commence » pour « Il commenc___ »).
- * N'accepte pas les réponses partielles ni la reprise du texte après le blanc.
+ * - la réponse exacte demandée dans le blanc (« est », « e », « achète ») ;
+ * - la forme verbale complète si un radical est déjà affiché
+ *   (« commence » pour « Il commenc___ », pas « il commence ») ;
+ * - la même phrase une fois le blanc rempli.
+ * N'accepte pas de resaisir le pronom sujet déjà affiché (« il est » pour « Il ___ »).
  */
 function fillAnswerMatches(user: string, expected: string, sentence: string): boolean {
   const u = normalizeAnswer(user);
@@ -986,16 +1040,10 @@ function fillAnswerMatches(user: string, expected: string, sentence: string): bo
     return true;
   }
 
-  // L'élève a resaisi le radical et/ou le pronom avec la terminaison attendue
-  if (!u.endsWith(e)) return false;
-  const prefix = normalizeAnswer(u.slice(0, Math.max(0, u.length - e.length)));
-  const beforeNorm = normalizeAnswer(rawBefore.replace(/→/g, " "));
-  if (!prefix || !beforeNorm) return false;
-  return (
-    beforeNorm === prefix ||
-    beforeNorm.endsWith(prefix) ||
-    beforeNorm.endsWith(` ${prefix}`)
-  );
+  // Radical visible : accepter radical + terminaison (= forme complète), sans le pronom.
+  const stem = visibleFillStem(rawBefore);
+  if (!stem) return false;
+  return u === normalizeAnswer(`${stem}${e}`);
 }
 
 function FillExercise({
