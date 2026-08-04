@@ -12,6 +12,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       text: "Utilisation",
     },
     {
+      type: "plain_list",
+      items: [
+        "On utilise la forme du pluriel quand le nom désigne plusieurs éléments.",
+      ],
+      noBulletItems: [0],
+    },
+    {
       type: "highlight",
       label: "",
       items: [
@@ -26,10 +33,9 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Un nom s'emploie toujours avec un déterminant, qui indique le nombre.",
-        "Dans les dictionnaires, les noms sont au singulier.",
+        "Un nom s'emploie toujours avec un déterminant, qui indique le nombre. Dans les dictionnaires, les noms sont au singulier.",
       ],
-      noBulletItems: [0, 1],
+      noBulletItems: [0],
     },
     {
       type: "grid",
@@ -43,7 +49,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     {
       type: "heading",
       text: "Cas général",
-      accent: true,
     },
     {
       type: "plain_list",
@@ -79,9 +84,8 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       noBulletItems: [0, 1, 2],
     },
     {
-      type: "highlight",
-      label: "Certaines exceptions :",
-      items: [],
+      type: "heading",
+      text: "Formes particulières",
     },
     {
       type: "plain_list",
@@ -97,6 +101,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-al",
           content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -123,6 +134,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-ail",
           content: [
             {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-ail{/a} au singulier prennent un {a}-s{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
+            {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
               rows: [
@@ -148,6 +166,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-eau",
           content: [
             {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
+            {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
               rows: [
@@ -162,6 +187,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-au",
           content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-au{/a} au singulier changent en {a}-aux{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -183,6 +215,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-eu",
           content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-eu{/a} au singulier changent en {a}-eux{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -206,6 +245,13 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-ou",
           content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-ou{/a} au singulier prennent un {a}-s{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -232,8 +278,15 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           ],
         },
         {
-          label: "Cas particuliers",
+          label: "Autres",
           content: [
+            {
+              type: "plain_list",
+              items: [
+                "Certains noms ont un pluriel irrégulier.",
+              ],
+              noBulletItems: [0],
+            },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -376,56 +429,56 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       poolSize: 5,
       inputWidth: "w-[32rem]",
       pool: [
-        { sentence: "Une pomme tombe.\n___", hint: "pluriel", answer: "Des pommes tombent." },
-        { sentence: "Un fruit arrive.\n___", hint: "pluriel", answer: "Des fruits arrivent." },
-        { sentence: "Une banane reste.\n___", hint: "pluriel", answer: "Des bananes restent." },
-        { sentence: "Une tasse change.\n___", hint: "pluriel", answer: "Des tasses changent." },
-        { sentence: "Un livre existe.\n___", hint: "pluriel", answer: "Des livres existent." },
-        { sentence: "Une voiture manque.\n___", hint: "pluriel", answer: "Des voitures manquent." },
-        { sentence: "Un village passe.\n___", hint: "pluriel", answer: "Des villages passent." },
-        { sentence: "Le bras compte.\n___", hint: "pluriel", answer: "Les bras comptent." },
-        { sentence: "Une noix intéresse.\n___", hint: "pluriel", answer: "Des noix intéressent." },
-        { sentence: "Un nez suffit.\n___", hint: "pluriel", answer: "Des nez suffisent." },
-        { sentence: "Un animal tombe.\n___", hint: "pluriel", answer: "Des animaux tombent." },
-        { sentence: "Un journal arrive.\n___", hint: "pluriel", answer: "Des journaux arrivent." },
-        { sentence: "Un cheval reste.\n___", hint: "pluriel", answer: "Des chevaux restent." },
-        { sentence: "Un bal change.\n___", hint: "pluriel", answer: "Des bals changent." },
-        { sentence: "Un carnaval existe.\n___", hint: "pluriel", answer: "Des carnavals existent." },
-        { sentence: "Un festival manque.\n___", hint: "pluriel", answer: "Des festivals manquent." },
-        { sentence: "Un récital passe.\n___", hint: "pluriel", answer: "Des récitals passent." },
-        { sentence: "Un détail compte.\n___", hint: "pluriel", answer: "Des détails comptent." },
-        { sentence: "Un portail intéresse.\n___", hint: "pluriel", answer: "Des portails intéressent." },
-        { sentence: "Un éventail suffit.\n___", hint: "pluriel", answer: "Des éventails suffisent." },
-        { sentence: "Un travail tombe.\n___", hint: "pluriel", answer: "Des travaux tombent." },
-        { sentence: "Un vitrail arrive.\n___", hint: "pluriel", answer: "Des vitraux arrivent." },
-        { sentence: "Un corail reste.\n___", hint: "pluriel", answer: "Des coraux restent." },
-        { sentence: "Un bail change.\n___", hint: "pluriel", answer: "Des baux changent." },
-        { sentence: "Un bateau existe.\n___", hint: "pluriel", answer: "Des bateaux existent." },
-        { sentence: "Un gâteau manque.\n___", hint: "pluriel", answer: "Des gâteaux manquent." },
-        { sentence: "Un chapeau passe.\n___", hint: "pluriel", answer: "Des chapeaux passent." },
-        { sentence: "Un cadeau compte.\n___", hint: "pluriel", answer: "Des cadeaux comptent." },
-        { sentence: "Un tuyau intéresse.\n___", hint: "pluriel", answer: "Des tuyaux intéressent." },
-        { sentence: "Un landau suffit.\n___", hint: "pluriel", answer: "Des landaus suffisent." },
-        { sentence: "Un sarrau tombe.\n___", hint: "pluriel", answer: "Des sarraus tombent." },
-        { sentence: "Un feu arrive.\n___", hint: "pluriel", answer: "Des feux arrivent." },
-        { sentence: "Un jeu reste.\n___", hint: "pluriel", answer: "Des jeux restent." },
-        { sentence: "Un lieu change.\n___", hint: "pluriel", answer: "Des lieux changent." },
-        { sentence: "Un pneu existe.\n___", hint: "pluriel", answer: "Des pneus existent." },
-        { sentence: "Un bleu manque.\n___", hint: "pluriel", answer: "Des bleus manquent." },
-        { sentence: "Un trou passe.\n___", hint: "pluriel", answer: "Des trous passent." },
-        { sentence: "Un clou compte.\n___", hint: "pluriel", answer: "Des clous comptent." },
-        { sentence: "Un cou intéresse.\n___", hint: "pluriel", answer: "Des cous intéressent." },
-        { sentence: "Un bijou suffit.\n___", hint: "pluriel", answer: "Des bijoux suffisent." },
-        { sentence: "Un caillou tombe.\n___", hint: "pluriel", answer: "Des cailloux tombent." },
-        { sentence: "Un chou arrive.\n___", hint: "pluriel", answer: "Des choux arrivent." },
-        { sentence: "Un genou reste.\n___", hint: "pluriel", answer: "Des genoux restent." },
-        { sentence: "Un hibou change.\n___", hint: "pluriel", answer: "Des hiboux changent." },
-        { sentence: "Un joujou existe.\n___", hint: "pluriel", answer: "Des joujoux existent." },
-        { sentence: "Un pou manque.\n___", hint: "pluriel", answer: "Des poux manquent." },
-        { sentence: "Un œil passe.\n___", hint: "pluriel", answer: "Des yeux passent." },
-        { sentence: "Un monsieur compte.\n___", hint: "pluriel", answer: "Des messieurs comptent." },
-        { sentence: "Madame intéresse.\n___", hint: "pluriel", answer: "Mesdames intéressent." },
-        { sentence: "Mademoiselle suffit.\n___", hint: "pluriel", answer: "Mesdemoiselles suffisent." },
+        { sentence: "Une pomme tombe de l'arbre.\n___", hint: "pluriel", answer: "Des pommes tombent de l'arbre." },
+        { sentence: "Un fruit est sur la table.\n___", hint: "pluriel", answer: "Des fruits sont sur la table." },
+        { sentence: "Une banane coûte un euro.\n___", hint: "pluriel", answer: "Des bananes coûtent un euro." },
+        { sentence: "Une tasse est dans le placard.\n___", hint: "pluriel", answer: "Des tasses sont dans le placard." },
+        { sentence: "Un livre est sur la table.\n___", hint: "pluriel", answer: "Des livres sont sur la table." },
+        { sentence: "Une voiture est dans la rue.\n___", hint: "pluriel", answer: "Des voitures sont dans la rue." },
+        { sentence: "Un village est près de la mer.\n___", hint: "pluriel", answer: "Des villages sont près de la mer." },
+        { sentence: "Le bras fait mal.\n___", hint: "pluriel", answer: "Les bras font mal." },
+        { sentence: "Une noix est dans le panier.\n___", hint: "pluriel", answer: "Des noix sont dans le panier." },
+        { sentence: "Un nez saigne.\n___", hint: "pluriel", answer: "Des nez saignent." },
+        { sentence: "Un animal vit dans la forêt.\n___", hint: "pluriel", answer: "Des animaux vivent dans la forêt." },
+        { sentence: "Un journal est sur la table.\n___", hint: "pluriel", answer: "Des journaux sont sur la table." },
+        { sentence: "Un cheval court dans le pré.\n___", hint: "pluriel", answer: "Des chevaux courent dans le pré." },
+        { sentence: "Un bal a lieu samedi.\n___", hint: "pluriel", answer: "Des bals ont lieu samedi." },
+        { sentence: "Un carnaval attire les touristes.\n___", hint: "pluriel", answer: "Des carnavals attirent les touristes." },
+        { sentence: "Un festival commence demain.\n___", hint: "pluriel", answer: "Des festivals commencent demain." },
+        { sentence: "Un récital a lieu ce soir.\n___", hint: "pluriel", answer: "Des récitals ont lieu ce soir." },
+        { sentence: "Un détail est important.\n___", hint: "pluriel", answer: "Des détails sont importants." },
+        { sentence: "Un portail est ouvert.\n___", hint: "pluriel", answer: "Des portails sont ouverts." },
+        { sentence: "Un éventail est sur la table.\n___", hint: "pluriel", answer: "Des éventails sont sur la table." },
+        { sentence: "Un travail est difficile.\n___", hint: "pluriel", answer: "Des travaux sont difficiles." },
+        { sentence: "Un vitrail est magnifique.\n___", hint: "pluriel", answer: "Des vitraux sont magnifiques." },
+        { sentence: "Un corail pousse dans la mer.\n___", hint: "pluriel", answer: "Des coraux poussent dans la mer." },
+        { sentence: "Un bail dure un an.\n___", hint: "pluriel", answer: "Des baux durent un an." },
+        { sentence: "Un bateau arrive au port.\n___", hint: "pluriel", answer: "Des bateaux arrivent au port." },
+        { sentence: "Un gâteau est sur la table.\n___", hint: "pluriel", answer: "Des gâteaux sont sur la table." },
+        { sentence: "Un chapeau est sur la chaise.\n___", hint: "pluriel", answer: "Des chapeaux sont sur la chaise." },
+        { sentence: "Un cadeau est sous le sapin.\n___", hint: "pluriel", answer: "Des cadeaux sont sous le sapin." },
+        { sentence: "Un tuyau fuit dans la cuisine.\n___", hint: "pluriel", answer: "Des tuyaux fuient dans la cuisine." },
+        { sentence: "Un landau est dans le jardin.\n___", hint: "pluriel", answer: "Des landaus sont dans le jardin." },
+        { sentence: "Un sarrau est propre.\n___", hint: "pluriel", answer: "Des sarraus sont propres." },
+        { sentence: "Un feu brûle dans la cheminée.\n___", hint: "pluriel", answer: "Des feux brûlent dans la cheminée." },
+        { sentence: "Un jeu est amusant.\n___", hint: "pluriel", answer: "Des jeux sont amusants." },
+        { sentence: "Un lieu est fermé.\n___", hint: "pluriel", answer: "Des lieux sont fermés." },
+        { sentence: "Un pneu est crevé.\n___", hint: "pluriel", answer: "Des pneus sont crevés." },
+        { sentence: "Un bleu orne le tableau.\n___", hint: "pluriel", answer: "Des bleus ornent le tableau." },
+        { sentence: "Un trou est dans le mur.\n___", hint: "pluriel", answer: "Des trous sont dans le mur." },
+        { sentence: "Un clou est dans le mur.\n___", hint: "pluriel", answer: "Des clous sont dans le mur." },
+        { sentence: "Un cou est long.\n___", hint: "pluriel", answer: "Des cous sont longs." },
+        { sentence: "Un bijou brille au soleil.\n___", hint: "pluriel", answer: "Des bijoux brillent au soleil." },
+        { sentence: "Un caillou est sur le chemin.\n___", hint: "pluriel", answer: "Des cailloux sont sur le chemin." },
+        { sentence: "Un chou pousse dans le jardin.\n___", hint: "pluriel", answer: "Des choux poussent dans le jardin." },
+        { sentence: "Un genou est blessé.\n___", hint: "pluriel", answer: "Des genoux sont blessés." },
+        { sentence: "Un hibou chante la nuit.\n___", hint: "pluriel", answer: "Des hiboux chantent la nuit." },
+        { sentence: "Un joujou est cassé.\n___", hint: "pluriel", answer: "Des joujoux sont cassés." },
+        { sentence: "Un pou est très petit.\n___", hint: "pluriel", answer: "Des poux sont très petits." },
+        { sentence: "Un œil est fermé.\n___", hint: "pluriel", answer: "Des yeux sont fermés." },
+        { sentence: "Un monsieur attend à la porte.\n___", hint: "pluriel", answer: "Des messieurs attendent à la porte." },
+        { sentence: "Madame arrive demain.\n___", hint: "pluriel", answer: "Mesdames arrivent demain." },
+        { sentence: "Mademoiselle parle français.\n___", hint: "pluriel", answer: "Mesdemoiselles parlent français." },
       ],
     },
   ],

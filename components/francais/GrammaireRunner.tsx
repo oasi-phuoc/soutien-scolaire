@@ -783,8 +783,8 @@ function QcmExercise({
       (max, it) => Math.max(max, ...it.choices.map((c) => c.length)),
       0,
     );
-    // +2 ch pour le padding interne ; évite le dépassement du texte
-    return Math.max(5, Math.ceil((Math.max(longest, 3) + 2) * lengthScale));
+    // +5 ch : padding horizontal + border-2 + lettres larges (m, w…) — évite le rognage
+    return Math.max(6, Math.ceil((Math.max(longest, 3) + 5) * lengthScale));
   }, [items, lengthScale]);
 
   function select(itemIdx: number, choiceIdx: number) {
@@ -838,9 +838,10 @@ function QcmExercise({
           const isCorrect = ci === item.correctIdx;
           // Contour fin au repos, épais à la sélection ; print-choice-btn pour l'impression
           let cls =
-            "print-choice-btn box-border rounded-md px-2.5 text-center font-medium transition-[border-width,background-color,color] whitespace-nowrap " +
+            "print-choice-btn box-border rounded-md px-3 text-center font-medium transition-[background-color,color] whitespace-nowrap overflow-visible " +
             (opts?.compact ? "py-1.5 text-xs " : "py-2 text-sm ") +
-            (isSelected ? "print-choice-btn--selected border-2 " : "border ");
+            // border-2 constant : évite le rétrécissement du texte à la sélection
+            (isSelected ? "print-choice-btn--selected border-2 " : "border-2 ");
           if (!validated || !revealCorrection) {
             cls += isSelected
               ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
