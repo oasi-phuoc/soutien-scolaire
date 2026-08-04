@@ -60,15 +60,49 @@ function subjectOf(idx: number, nextToken: string): { display: string; sep: stri
   return { display: p.display, sep: p.display.endsWith("'") ? "" : " " };
 }
 
+/**
+ * Préfixe commun le plus long à toutes les formes, strictement plus court
+ * que chacune d'elles (il doit rester une terminaison à écrire).
+ * Ex. voyager → « voyag » (pas « voyage », sinon je/il n'auraient plus de blanc).
+ */
+function longestCommonPrefix(forms: readonly string[]): string {
+  if (forms.length === 0) return "";
+  let prefix = forms[0]!;
+  for (let i = 1; i < forms.length; i++) {
+    const s = forms[i]!;
+    while (prefix && !s.startsWith(prefix)) {
+      prefix = prefix.slice(0, -1);
+    }
+    if (!prefix) return "";
+  }
+  while (prefix && forms.some((f) => f.length <= prefix.length)) {
+    prefix = prefix.slice(0, -1);
+  }
+  return prefix;
+}
+
+/**
+ * Radical partagé par toutes les personnes : le plus de lettres identiques possible.
+ * Ex. commencer → « commen » (commence / commençons), pas de blanc entier pour nous.
+ */
+function sharedStemOf(v: VerbConj): string {
+  return longestCommonPrefix(v.forms);
+}
+
 function endingsOf(v: VerbConj): string[] {
+  const stem = sharedStemOf(v);
+  if (stem) {
+    return v.forms.map((f) => (f.startsWith(stem) ? f.slice(stem.length) : f));
+  }
+  // Aucun radical commun (être, aller…) : terminaisons = formes entières.
   if (v.endings) return [...v.endings];
-  return v.forms.map((f) => (f.startsWith(v.stem) ? f.slice(v.stem.length) : f));
+  return [...v.forms];
 }
 
 /**
  * Radical + terminaison pour Ex1/Ex2.
- * Retourne null si aucun radical fiable pour cette personne
- * (ex. être / venir au pluriel sans stem adapté) → blanc + (infinitif).
+ * Utilise le préfixe commun à toutes les personnes pour éviter les blancs entiers.
+ * Retourne null seulement s'il n'y a aucun radical partagé (ex. être, aller).
  */
 function resolveEndingBlank(
   v: VerbConj,
@@ -76,18 +110,9 @@ function resolveEndingBlank(
 ): { stem: string; ending: string } | null {
   const i = idx % 8;
   const form = v.forms[i]!;
-  if (!v.stem) return null;
-
-  if (v.endings) {
-    const ending = v.endings[i]!;
-    if (v.stem + ending === form) return { stem: v.stem, ending };
-  }
-
-  if (form.startsWith(v.stem) && form.length > v.stem.length) {
-    return { stem: v.stem, ending: form.slice(v.stem.length) };
-  }
-
-  return null;
+  const stem = sharedStemOf(v);
+  if (!stem || !form.startsWith(stem) || form.length <= stem.length) return null;
+  return { stem, ending: form.slice(stem.length) };
 }
 
 function pickChoices(correct: string, candidates: string[], pad: string[] = ER_PAD): string[] {
