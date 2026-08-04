@@ -487,19 +487,40 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
             const transItems = useTrans ? block.transItems?.[pivot as keyof typeof block.transItems] : undefined;
             const label = transLabel ?? block.label;
             const items = transItems ?? block.items;
+            const alignArrows = items.length > 0 && items.every((item) => item.includes(" → "));
             return (
               <div key={i} className="space-y-1.5">
-                <div className="space-y-0.5">
-                  <p className="text-sm font-bold text-[var(--color-accent-fr)]" lang={transLabel ? pivot : undefined} dir={transLabel && isRtl ? "rtl" : "ltr"}>{label}</p>
-                  {false && showTrans && transLabel && (
-                    <p className="text-xs font-bold text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                      {transLabel}
-                    </p>
-                  )}
-                </div>
+                {label ? (
+                  <div className="space-y-0.5">
+                    <p className="text-sm font-bold text-[var(--color-accent-fr)]" lang={transLabel ? pivot : undefined} dir={transLabel && isRtl ? "rtl" : "ltr"}>{label}</p>
+                    {false && showTrans && transLabel && (
+                      <p className="text-xs font-bold text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                        {transLabel}
+                      </p>
+                    )}
+                  </div>
+                ) : null}
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {items.map((item, ii) => {
                     const skipBullet = (block.noFirstBullet && !item.includes(" → ")) || (block.noBulletItems?.includes(ii) ?? false);
+                    if (alignArrows) {
+                      const arrowIdx = item.indexOf(" → ");
+                      const left = item.slice(0, arrowIdx);
+                      const right = item.slice(arrowIdx + 3);
+                      return (
+                        <li key={ii} className="space-y-0.5">
+                          <div
+                            className="grid grid-cols-[minmax(7.5rem,max-content)_1.25rem_minmax(0,1fr)] items-baseline gap-x-2 text-sm leading-relaxed text-[var(--color-text-primary)]"
+                            lang={transItems?.[ii] ? pivot : undefined}
+                            dir={transItems?.[ii] && isRtl ? "rtl" : "ltr"}
+                          >
+                            <span>{renderInlineMarkup(left, false)}</span>
+                            <span className="text-center text-[var(--color-text-secondary)]">→</span>
+                            <span>{renderInlineMarkup(right, false)}</span>
+                          </div>
+                        </li>
+                      );
+                    }
                     return (
                       <li key={ii} className="space-y-0.5">
                         <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]" lang={transItems?.[ii] ? pivot : undefined} dir={transItems?.[ii] && isRtl ? "rtl" : "ltr"}>
@@ -678,26 +699,47 @@ function shuffle<T>(arr: T[]): T[] {
  * Tire `size` items du pool.
  * Si les items ont un `gabaritId`, un même gabarit n'apparaît qu'une fois
  * (pronom / variante tirés au hasard parmi les variantes du gabarit).
+ * Si `ensureKeys` est fourni, garantit au moins un item par clé (via keyFn),
+ * puis complète au hasard et mélange le résultat.
  */
 function sampleFromPool<T extends { gabaritId?: string; difficulty?: "A1" | "A2" | "B1" }>(
   pool: T[],
   size: number,
+  ensureKeys?: string[],
+  keyFn?: (item: T) => string,
 ): T[] {
-  const hasGabarits = pool.some((item) => item.gabaritId);
-  if (!hasGabarits) return shuffle(pool).slice(0, size);
+  const norm = (s: string) => s.trim().toLowerCase();
 
-  const byId = new Map<string, T[]>();
-  for (const item of pool) {
-    const id = item.gabaritId ?? `__solo_${byId.size}`;
-    const list = byId.get(id);
-    if (list) list.push(item);
-    else byId.set(id, [item]);
+  const baseSample = (): T[] => {
+    const hasGabarits = pool.some((item) => item.gabaritId);
+    if (!hasGabarits) return shuffle(pool).slice(0, size);
+
+    const byId = new Map<string, T[]>();
+    for (const item of pool) {
+      const id = item.gabaritId ?? `__solo_${byId.size}`;
+      const list = byId.get(id);
+      if (list) list.push(item);
+      else byId.set(id, [item]);
+    }
+    const pickedIds = shuffle([...byId.keys()]).slice(0, size);
+    return pickedIds.map((id) => {
+      const variants = byId.get(id)!;
+      return variants[Math.floor(Math.random() * variants.length)]!;
+    });
+  };
+
+  if (!ensureKeys?.length || !keyFn) return baseSample();
+
+  const remaining = shuffle([...pool]);
+  const picked: T[] = [];
+  for (const key of ensureKeys.map(norm)) {
+    const idx = remaining.findIndex((item) => norm(keyFn(item)) === key);
+    if (idx >= 0) picked.push(remaining.splice(idx, 1)[0]!);
   }
-  const pickedIds = shuffle([...byId.keys()]).slice(0, size);
-  return pickedIds.map((id) => {
-    const variants = byId.get(id)!;
-    return variants[Math.floor(Math.random() * variants.length)]!;
-  });
+  while (picked.length < size && remaining.length > 0) {
+    picked.push(remaining.shift()!);
+  }
+  return shuffle(picked);
 }
 
 function QcmExercise({
@@ -715,7 +757,12 @@ function QcmExercise({
   const { questionCount, listClass, lengthScale } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     const raw = exercise.pool && exercise.pool.length > 0
-      ? sampleFromPool(exercise.pool, questionCount)
+      ? sampleFromPool(
+          exercise.pool,
+          questionCount,
+          exercise.poolEnsure,
+          (item) => item.choices[item.correctIdx] ?? "",
+        )
       : exercise.items.slice(0, questionCount);
     if (exercise.toggleChoices) return raw;
     return raw.map(item => {
@@ -1107,7 +1154,12 @@ function FillExercise({
   const { questionCount, columns, listClass, lengthScale } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
-      return sampleFromPool(exercise.pool, questionCount);
+      return sampleFromPool(
+        exercise.pool,
+        questionCount,
+        exercise.poolEnsure,
+        (item) => item.answer,
+      );
     }
     return exercise.items.slice(0, questionCount);
   });
@@ -1282,7 +1334,12 @@ function FillSelectExercise({
   const { questionCount, listClass } = usePrintQuestionLayout(fallback);
   const [items] = useState<FillItem[]>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
-      return shuffle(exercise.pool).slice(0, questionCount);
+      return sampleFromPool(
+        exercise.pool,
+        questionCount,
+        exercise.poolEnsure,
+        (item) => item.answer,
+      );
     }
     return exercise.items.slice(0, questionCount);
   });
@@ -2764,10 +2821,10 @@ function Tag2Exercise({
                 </div>
               )}
 
-              {/* Correction */}
-              {(nWrong || gWrong) && (
+              {/* Correction — genderOnly : déjà visible via PillGroup, pas de → en plus */}
+              {!genderOnly && (nWrong || gWrong) && (
                 <span className="ml-auto text-xs font-medium text-emerald-600">
-                  → {genderOnly ? (item.gender ?? "") : `${item.number}${item.gender ? ` ${item.gender}` : ""}`}
+                  → {`${item.number}${item.gender ? ` ${item.gender}` : ""}`}
                 </span>
               )}
             </div>
