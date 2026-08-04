@@ -83,8 +83,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "un Espagnol / une Espagno{li}|le{/li}",
-        "un ingénieur / une ingénieu{li}|re{/li}",
+        "un Espagnol / une Espagno{li}l|e{/li}",
+        "un ingénieur / une ingénieu{li}r|e{/li}",
       ],
       noBulletItems: [0, 1],
     },
@@ -98,8 +98,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "un Anglais → une Anglai{li}|se{/li}",
-        "un assistant → une assistan{li}|te{/li}",
+        "un Anglais → une Anglai{li}s|e{/li}",
+        "un assistant → une assistan{li}t|e{/li}",
       ],
       noBulletItems: [0, 1],
       inlineArrows: true,
