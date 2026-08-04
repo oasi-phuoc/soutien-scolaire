@@ -252,40 +252,142 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
   exercises: [
     {
       type: "qcm",
-      title: "Singulier / pluriel",
+      title: "Exercice 1",
       instruction: "Choisissez la forme plurielle correcte.",
       items: [],
       poolSize: 5,
       pool: [
+        // Cas général + s
         { sentence: "une pomme → des ___", choices: ["pommes", "pomme", "pommeses", "pomms"], correctIdx: 0 },
         { sentence: "un fruit → des ___", choices: ["fruits", "fruit", "fruites", "fruix"], correctIdx: 0 },
+        { sentence: "une banane → des ___", choices: ["bananes", "banane", "bananex", "banans"], correctIdx: 0 },
+        { sentence: "une tasse → des ___", choices: ["tasses", "tasse", "tassex", "tass"], correctIdx: 0 },
+        // s / x / z inchangé
         { sentence: "le bras → les ___", choices: ["bras", "brases", "braux", "brass"], correctIdx: 0 },
+        { sentence: "une noix → des ___", choices: ["noix", "noixes", "nois", "noixs"], correctIdx: 0 },
         { sentence: "un nez → des ___", choices: ["nez", "nezes", "neux", "ness"], correctIdx: 0 },
+        // -al → -aux
         { sentence: "un animal → des ___", choices: ["animaux", "animals", "animales", "animaus"], correctIdx: 0 },
-        { sentence: "le travail → les ___", choices: ["travaux", "travails", "travailes", "travaus"], correctIdx: 0 },
-        { sentence: "un gâteau → des ___", choices: ["gâteaux", "gâteaus", "gateaux", "gâteauxs"], correctIdx: 0 },
-        { sentence: "un feu → des ___", choices: ["feux", "feus", "feues", "feuxs"], correctIdx: 0 },
+        { sentence: "un journal → des ___", choices: ["journaux", "journals", "jornales", "journaus"], correctIdx: 0 },
+        { sentence: "un cheval → des ___", choices: ["chevaux", "chevals", "chevales", "chevaus"], correctIdx: 0 },
+        // -al exceptions
+        { sentence: "un bal → des ___", choices: ["bals", "baux", "bales", "bal"], correctIdx: 0 },
+        { sentence: "un carnaval → des ___", choices: ["carnavals", "carnavaux", "carnavales", "carnaval"], correctIdx: 0 },
+        { sentence: "un festival → des ___", choices: ["festivals", "festivaux", "festivales", "festival"], correctIdx: 0 },
+        { sentence: "un récital → des ___", choices: ["récitals", "récitaux", "récitales", "récital"], correctIdx: 0 },
+        // -ail + s
+        { sentence: "un détail → des ___", choices: ["détails", "détaux", "détailes", "détail"], correctIdx: 0 },
+        { sentence: "un portail → des ___", choices: ["portails", "portaux", "portailes", "portail"], correctIdx: 0 },
+        { sentence: "un éventail → des ___", choices: ["éventails", "éventaux", "éventailes", "éventail"], correctIdx: 0 },
+        // -ail → -aux
+        { sentence: "un travail → des ___", choices: ["travaux", "travails", "travailes", "travaus"], correctIdx: 0 },
+        { sentence: "un vitrail → des ___", choices: ["vitraux", "vitrails", "vitrailes", "vitrail"], correctIdx: 0 },
+        { sentence: "un corail → des ___", choices: ["coraux", "corails", "corailes", "corail"], correctIdx: 0 },
+        { sentence: "un bail → des ___", choices: ["baux", "bails", "bailes", "bail"], correctIdx: 0 },
+        // -eau → -eaux
+        { sentence: "un bateau → des ___", choices: ["bateaux", "bateaus", "bateaues", "bateau"], correctIdx: 0 },
+        { sentence: "un gâteau → des ___", choices: ["gâteaux", "gâteaus", "gateaux", "gâteau"], correctIdx: 0 },
+        { sentence: "un chapeau → des ___", choices: ["chapeaux", "chapeaus", "chapeaues", "chapeau"], correctIdx: 0 },
+        { sentence: "un cadeau → des ___", choices: ["cadeaux", "cadeaus", "cadeaues", "cadeau"], correctIdx: 0 },
+        // -au → -aux
+        { sentence: "un tuyau → des ___", choices: ["tuyaux", "tuyaus", "tuyaues", "tuyau"], correctIdx: 0 },
+        // -au exceptions
+        { sentence: "un landau → des ___", choices: ["landaus", "landaux", "landaues", "landau"], correctIdx: 0 },
+        { sentence: "un sarrau → des ___", choices: ["sarraus", "sarraux", "sarraues", "sarrau"], correctIdx: 0 },
+        // -eu → -eux
+        { sentence: "un feu → des ___", choices: ["feux", "feus", "feues", "feu"], correctIdx: 0 },
+        { sentence: "un jeu → des ___", choices: ["jeux", "jeus", "jeues", "jeu"], correctIdx: 0 },
+        { sentence: "un lieu → des ___", choices: ["lieux", "lieus", "lieues", "lieu"], correctIdx: 0 },
+        // -eu exceptions
+        { sentence: "un pneu → des ___", choices: ["pneus", "pneux", "pneues", "pneu"], correctIdx: 0 },
+        { sentence: "un bleu → des ___", choices: ["bleus", "bleux", "bleues", "bleu"], correctIdx: 0 },
+        // -ou + s
+        { sentence: "un trou → des ___", choices: ["trous", "troux", "troues", "trou"], correctIdx: 0 },
+        { sentence: "un clou → des ___", choices: ["clous", "cloux", "cloues", "clou"], correctIdx: 0 },
+        { sentence: "un cou → des ___", choices: ["cous", "coux", "coues", "cou"], correctIdx: 0 },
+        // -ou → -oux
+        { sentence: "un bijou → des ___", choices: ["bijoux", "bijous", "bijoues", "bijou"], correctIdx: 0 },
+        { sentence: "un caillou → des ___", choices: ["cailloux", "caillous", "cailloues", "caillou"], correctIdx: 0 },
+        { sentence: "un chou → des ___", choices: ["choux", "chous", "choues", "chou"], correctIdx: 0 },
+        { sentence: "un genou → des ___", choices: ["genoux", "genous", "genoues", "genou"], correctIdx: 0 },
+        { sentence: "un hibou → des ___", choices: ["hiboux", "hibous", "hiboues", "hibou"], correctIdx: 0 },
+        { sentence: "un joujou → des ___", choices: ["joujoux", "joujous", "joujoues", "joujou"], correctIdx: 0 },
+        { sentence: "un pou → des ___", choices: ["poux", "pous", "poues", "pou"], correctIdx: 0 },
+        // Cas particuliers
         { sentence: "un œil → des ___", choices: ["yeux", "œils", "oeils", "yeuxs"], correctIdx: 0 },
-        { sentence: "un genou → des ___", choices: ["genoux", "genous", "genoues", "genousx"], correctIdx: 0 },
+        { sentence: "un monsieur → des ___", choices: ["messieurs", "monsieurs", "monsieures", "messieur"], correctIdx: 0 },
+        { sentence: "madame → ___", choices: ["mesdames", "madames", "mesdame", "madame"], correctIdx: 0 },
+        { sentence: "mademoiselle → ___", choices: ["mesdemoiselles", "mademoiselles", "mesdemoiselle", "mademoiselle"], correctIdx: 0 },
       ],
     },
     {
       type: "fill",
-      title: "Écrivez le pluriel",
-      instruction: "Donnez la forme plurielle du nom.",
+      title: "Exercice 2",
+      instruction: "Écrivez la forme plurielle du nom.",
       items: [],
       poolSize: 5,
       pool: [
-        { sentence: "une banane → des ___", hint: "+ s", answer: "bananes" },
-        { sentence: "une noix → des ___", hint: "inchangé", answer: "noix" },
-        { sentence: "un animal → des ___", hint: "-al → -aux", answer: "animaux" },
-        { sentence: "un gâteau → des ___", hint: "-eau → -eaux", answer: "gâteaux" },
-        { sentence: "un feu → des ___", hint: "-eu → -eux", answer: "feux" },
-        { sentence: "un œil → des ___", hint: "irrégulier", answer: "yeux" },
-        { sentence: "un genou → des ___", hint: "+ x", answer: "genoux" },
-        { sentence: "le travail → les ___", hint: "-ail → -aux", answer: "travaux" },
+        // Cas général + s
+        { sentence: "une pomme → des ___", hint: "+ s", answer: "pommes" },
         { sentence: "un fruit → des ___", hint: "+ s", answer: "fruits" },
+        { sentence: "une banane → des ___", hint: "+ s", answer: "bananes" },
+        { sentence: "une tasse → des ___", hint: "+ s", answer: "tasses" },
+        // s / x / z inchangé
+        { sentence: "le bras → les ___", hint: "inchangé", answer: "bras" },
+        { sentence: "une noix → des ___", hint: "inchangé", answer: "noix" },
         { sentence: "un nez → des ___", hint: "inchangé", answer: "nez" },
+        // -al → -aux
+        { sentence: "un animal → des ___", hint: "-al → -aux", answer: "animaux" },
+        { sentence: "un journal → des ___", hint: "-al → -aux", answer: "journaux" },
+        { sentence: "un cheval → des ___", hint: "-al → -aux", answer: "chevaux" },
+        // -al exceptions
+        { sentence: "un bal → des ___", hint: "exception + s", answer: "bals" },
+        { sentence: "un carnaval → des ___", hint: "exception + s", answer: "carnavals" },
+        { sentence: "un festival → des ___", hint: "exception + s", answer: "festivals" },
+        { sentence: "un récital → des ___", hint: "exception + s", answer: "récitals" },
+        // -ail + s
+        { sentence: "un détail → des ___", hint: "+ s", answer: "détails" },
+        { sentence: "un portail → des ___", hint: "+ s", answer: "portails" },
+        { sentence: "un éventail → des ___", hint: "+ s", answer: "éventails" },
+        // -ail → -aux
+        { sentence: "un travail → des ___", hint: "-ail → -aux", answer: "travaux" },
+        { sentence: "un vitrail → des ___", hint: "-ail → -aux", answer: "vitraux" },
+        { sentence: "un corail → des ___", hint: "-ail → -aux", answer: "coraux" },
+        { sentence: "un bail → des ___", hint: "-ail → -aux", answer: "baux" },
+        // -eau → -eaux
+        { sentence: "un bateau → des ___", hint: "-eau → -eaux", answer: "bateaux" },
+        { sentence: "un gâteau → des ___", hint: "-eau → -eaux", answer: "gâteaux" },
+        { sentence: "un chapeau → des ___", hint: "-eau → -eaux", answer: "chapeaux" },
+        { sentence: "un cadeau → des ___", hint: "-eau → -eaux", answer: "cadeaux" },
+        // -au → -aux
+        { sentence: "un tuyau → des ___", hint: "-au → -aux", answer: "tuyaux" },
+        // -au exceptions
+        { sentence: "un landau → des ___", hint: "exception + s", answer: "landaus" },
+        { sentence: "un sarrau → des ___", hint: "exception + s", answer: "sarraus" },
+        // -eu → -eux
+        { sentence: "un feu → des ___", hint: "-eu → -eux", answer: "feux" },
+        { sentence: "un jeu → des ___", hint: "-eu → -eux", answer: "jeux" },
+        { sentence: "un lieu → des ___", hint: "-eu → -eux", answer: "lieux" },
+        // -eu exceptions
+        { sentence: "un pneu → des ___", hint: "exception + s", answer: "pneus" },
+        { sentence: "un bleu → des ___", hint: "exception + s", answer: "bleus" },
+        // -ou + s
+        { sentence: "un trou → des ___", hint: "+ s", answer: "trous" },
+        { sentence: "un clou → des ___", hint: "+ s", answer: "clous" },
+        { sentence: "un cou → des ___", hint: "+ s", answer: "cous" },
+        // -ou → -oux
+        { sentence: "un bijou → des ___", hint: "+ x", answer: "bijoux" },
+        { sentence: "un caillou → des ___", hint: "+ x", answer: "cailloux" },
+        { sentence: "un chou → des ___", hint: "+ x", answer: "choux" },
+        { sentence: "un genou → des ___", hint: "+ x", answer: "genoux" },
+        { sentence: "un hibou → des ___", hint: "+ x", answer: "hiboux" },
+        { sentence: "un joujou → des ___", hint: "+ x", answer: "joujoux" },
+        { sentence: "un pou → des ___", hint: "+ x", answer: "poux" },
+        // Cas particuliers
+        { sentence: "un œil → des ___", hint: "irrégulier", answer: "yeux" },
+        { sentence: "un monsieur → des ___", hint: "irrégulier", answer: "messieurs" },
+        { sentence: "madame → ___", hint: "irrégulier", answer: "mesdames" },
+        { sentence: "mademoiselle → ___", hint: "irrégulier", answer: "mesdemoiselles" },
       ],
     },
   ],
