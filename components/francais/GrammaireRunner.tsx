@@ -1160,7 +1160,16 @@ function FillExercise({
         const longAnswer = (item.answer?.length ?? 0) >= 14 || parseFloat(baseRem) >= 20;
 
         const inputEl = validated && revealCorrection ? (
-          correct || !userAnswer.trim() ? (
+          correct ? (
+            <span
+              style={inputWidthStyle}
+              className={`inline-flex min-h-8 items-center border-0 border-b-2 border-[var(--color-accent-fr)] px-2 text-sm font-semibold text-[var(--color-accent-fr)] mx-1 align-middle ${
+                longAnswer ? "justify-start text-left leading-snug py-1" : "justify-center text-center leading-8"
+              }`}
+            >
+              {userAnswer.trim() || item.answer}
+            </span>
+          ) : !userAnswer.trim() ? (
             <span
               style={inputWidthStyle}
               className={`inline-flex min-h-8 items-center border-0 border-b-2 border-amber-500 px-2 text-sm font-semibold text-amber-600 mx-1 align-middle ${
@@ -1459,12 +1468,14 @@ function ClockReadExercise({
               <AnalogClock h={clk.h} m={clk.m} size={76} />
               <p className="text-xs font-bold text-[var(--color-text-secondary)]">{clk.label}</p>
               {validated && revealCorrection ? (
-                correct || !userAnswer.trim() ? (
+                correct ? (
+                  <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{userAnswer.trim() || clk.answer}</p>
+                ) : !userAnswer.trim() ? (
                   <p className="text-center text-xs font-semibold text-amber-600">{clk.answer}</p>
                 ) : (
                   <div className="w-full rounded-xl border border-amber-400 px-2 py-1 text-center">
-                    <p className="text-xs text-amber-500">{userAnswer || "—"}</p>
-                    <p className="text-xs font-semibold text-amber-700">{clk.answer}</p>
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">{userAnswer || "—"}</p>
+                    <p className="text-xs font-semibold text-amber-600">{clk.answer}</p>
                   </div>
                 )
               ) : (
