@@ -40,7 +40,6 @@ import { ContentEditorPanel } from "@/components/content-editor/ContentEditorPan
 import { GrammarLessonFields } from "@/components/content-editor/GrammarLessonFields";
 import { conjugationLessonKey, grammarLessonKey } from "@/lib/content-editor/keys";
 import {
-  CORRECTION_CARD_DARK,
   CORRECTION_INLINE_STRIKE,
   CORRECTION_MATCH_WRONG,
 } from "@/components/correction-styles";
@@ -1046,6 +1045,53 @@ function fillAnswerMatches(user: string, expected: string, sentence: string): bo
   return u === normalizeAnswer(`${stem}${e}`);
 }
 
+/**
+ * Correction fill — même pattern que le vocabulaire (`ExFillSentences`) :
+ * trait ambre seul, sans fond ; réponse élève + bonne réponse empilées.
+ * Si la réponse est juste, on laisse l'input tel quel (disabled).
+ */
+function WrongFillCorrection({
+  user,
+  expected,
+  style,
+  className = "",
+  longAnswer = false,
+}: {
+  user: string;
+  expected: string;
+  style?: React.CSSProperties;
+  className?: string;
+  longAnswer?: boolean;
+}) {
+  return (
+    <span
+      style={style}
+      className={
+        `inline-flex h-8 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 align-middle mx-1 ` +
+        (longAnswer ? "min-h-8 w-full items-start justify-center px-2 py-1 " : "") +
+        className
+      }
+    >
+      <span
+        className={
+          "text-[10px] leading-none text-[var(--color-text-secondary)]" +
+          (longAnswer ? " w-full break-words" : "")
+        }
+      >
+        {user.trim() || "—"}
+      </span>
+      <span
+        className={
+          "text-xs font-bold leading-none text-amber-600" +
+          (longAnswer ? " w-full break-words" : "")
+        }
+      >
+        {expected}
+      </span>
+    </span>
+  );
+}
+
 function FillExercise({
   exercise,
   onValidated,
@@ -1159,37 +1205,15 @@ function FillExercise({
         };
         const longAnswer = (item.answer?.length ?? 0) >= 14 || parseFloat(baseRem) >= 20;
 
-        const inputEl = validated && revealCorrection ? (
-          correct ? (
-            <span
+        const inputEl =
+          validated && revealCorrection && !correct ? (
+            <WrongFillCorrection
+              user={userAnswer}
+              expected={item.answer}
               style={inputWidthStyle}
-              className={`inline-flex min-h-8 items-center border-0 border-b-2 border-[var(--color-accent-fr)] px-2 text-sm font-semibold text-[var(--color-accent-fr)] mx-1 align-middle ${
-                longAnswer ? "justify-start text-left leading-snug py-1" : "justify-center text-center leading-8"
-              }`}
-            >
-              {userAnswer.trim() || item.answer}
-            </span>
-          ) : !userAnswer.trim() ? (
-            <span
-              style={inputWidthStyle}
-              className={`inline-flex min-h-8 items-center border-0 border-b-2 border-amber-500 px-2 text-sm font-semibold text-amber-600 mx-1 align-middle ${
-                longAnswer ? "justify-start text-left leading-snug py-1" : "justify-center text-center leading-8"
-              }`}
-            >
-              {item.answer}
-            </span>
+              longAnswer={longAnswer}
+            />
           ) : (
-            <span
-              style={inputWidthStyle}
-              className={`inline-flex min-h-8 flex-col justify-center border-b-2 border-amber-400 mx-1 align-middle px-2 py-1 ${
-                longAnswer ? "items-start text-left" : "items-center text-center"
-              }`}
-            >
-              <span className="text-[10px] leading-tight text-zinc-900 break-words w-full">{userAnswer || "—"}</span>
-              <span className="mt-0.5 text-sm leading-tight font-semibold text-amber-500 break-words w-full">{item.answer}</span>
-            </span>
-          )
-        ) : (
           <input
             type="text"
             value={userAnswer}
@@ -1197,7 +1221,7 @@ function FillExercise({
             disabled={validated}
             data-print-answer=""
             style={inputWidthStyle}
-            className={`inline-block h-8 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
+            className={`inline-block h-8 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-100 ${
               longAnswer ? "text-left" : "text-center"
             }`}
           />
@@ -1336,10 +1360,11 @@ function FillSelectExercise({
                 <p className="flex-1 text-sm text-[var(--color-text-primary)]">{sentDisplay}</p>
                 <div className="shrink-0">
                   {wrongField ? (
-                    <div className="inline-flex h-8 w-20 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1">
-                      <span className="text-[9px] leading-none text-amber-600 line-through">{userLetter || "—"}</span>
-                      <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{correctLetter}</span>
-                    </div>
+                    <WrongFillCorrection
+                      user={userLetter}
+                      expected={correctLetter}
+                      className="!mx-0 w-20"
+                    />
                   ) : (
                     <AppSelect
                       value={userLetter}
@@ -1373,10 +1398,11 @@ function FillSelectExercise({
             const [before, after] = item.sentence.split("___");
 
             const selectEl = wrongField ? (
-              <span className="mx-1 inline-flex h-8 w-28 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1">
-                <span className="text-[9px] leading-none text-amber-600 line-through">{userAnswer || "—"}</span>
-                <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{item.answer}</span>
-              </span>
+              <WrongFillCorrection
+                user={userAnswer}
+                expected={item.answer}
+                className="w-28"
+              />
             ) : (
               <AppSelect
                 value={userAnswer}
@@ -1467,17 +1493,12 @@ function ClockReadExercise({
             <div key={i} className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] p-2">
               <AnalogClock h={clk.h} m={clk.m} size={76} />
               <p className="text-xs font-bold text-[var(--color-text-secondary)]">{clk.label}</p>
-              {validated && revealCorrection ? (
-                correct ? (
-                  <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{userAnswer.trim() || clk.answer}</p>
-                ) : !userAnswer.trim() ? (
-                  <p className="text-center text-xs font-semibold text-amber-600">{clk.answer}</p>
-                ) : (
-                  <div className="w-full rounded-xl border border-amber-400 px-2 py-1 text-center">
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">{userAnswer || "—"}</p>
-                    <p className="text-xs font-semibold text-amber-600">{clk.answer}</p>
-                  </div>
-                )
+              {validated && revealCorrection && !correct ? (
+                <WrongFillCorrection
+                  user={userAnswer}
+                  expected={clk.answer}
+                  className="!mx-0 w-full"
+                />
               ) : (
                 <input
                   type="text"
@@ -1485,7 +1506,7 @@ function ClockReadExercise({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
                   disabled={validated}
                   placeholder="..."
-                  className="w-full rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-2 py-1 text-center text-xs outline-none transition-colors focus:border-amber-500 disabled:opacity-70"
+                  className="w-full rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 py-1 text-center text-xs font-semibold text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-100"
                 />
               )}
             </div>
@@ -2209,14 +2230,16 @@ function OrderExercise({
             {item.hint && (
               <p className="text-xs text-[var(--color-text-secondary)] italic">{item.hint}</p>
             )}
-            {/* answer area */}
-            <div className={`min-h-9 flex flex-wrap gap-1.5 rounded border-2 p-2 transition-colors ${
-              validated && revealCorrection
-                ? correct
-                  ? "border-emerald-400 bg-emerald-50"
-                  : CORRECTION_CARD_DARK
-                : "border-[var(--color-accent-fr)]/40 bg-[var(--color-surface)]"
-            }`}>
+            {/* answer area — correction style vocab ExWordOrder */}
+            {validated && revealCorrection && !correct ? (
+              <div className="flex min-h-9 flex-col justify-center border-b-2 border-amber-500 pb-0.5">
+                <span className="text-sm text-[var(--color-text-secondary)] line-through">
+                  {built.join(" ") || "—"}
+                </span>
+                <span className="text-sm font-bold text-amber-600">{item.sentence}</span>
+              </div>
+            ) : (
+            <div className="min-h-9 flex flex-wrap gap-1.5 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent p-2 transition-colors">
               {built.length === 0 && (
                 <span className="text-xs text-[var(--color-text-secondary)] italic">Clique les mots ci-dessous…</span>
               )}
@@ -2225,16 +2248,15 @@ function OrderExercise({
                   key={j}
                   onClick={() => removeWord(i, j)}
                   disabled={validated}
-                  className="rounded bg-[var(--color-accent-fr)] px-2 py-0.5 text-xs font-medium text-white disabled:opacity-70"
+                  className="rounded bg-[var(--color-accent-fr)]/10 px-2 py-0.5 text-xs font-medium text-[var(--color-accent-fr)] disabled:opacity-100"
                 >
                   {w}
                 </button>
               ))}
             </div>
-            {validated && revealCorrection && !correct && (
-              <p className="text-xs text-emerald-600">✓ {item.sentence}</p>
             )}
             {/* word pool */}
+            {!validated && (
             <div className="flex flex-wrap gap-1.5">
               {pool.map((w, j) => (
                 <button
@@ -2247,6 +2269,7 @@ function OrderExercise({
                 </button>
               ))}
             </div>
+            )}
           </div>
         );
       })}
@@ -2417,34 +2440,37 @@ function WordOrderExercise({
         const arr = arranged[qi]!;
         const pool = pools[qi]!;
         const correct = arr.join(" ").replace(/ ([.?!])$/, "$1") === item.sentence;
-        // Expected tokens: split sentence, treating trailing punctuation as separate token
-        const trailingP = item.sentence.match(/([.?!])$/)?.[1] ?? null;
-        const expectedTokens = trailingP ? [...item.words, trailingP] : item.words;
         return (
           <div key={qi} className="space-y-3">
-            {/* Number + answer line */}
+            {/* Number + answer line — correction style vocab ExWordOrder */}
             <div className="flex items-end gap-2">
               <span className="shrink-0 pb-1 text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</span>
+              {validated && revealCorrection && !correct ? (
+                <div className="flex min-h-9 flex-1 flex-col justify-center border-b-2 border-amber-500 pb-0.5">
+                  <span className="text-sm text-[var(--color-text-secondary)] line-through">
+                    {arr.join(" ") || "—"}
+                  </span>
+                  <span className="text-sm font-bold text-amber-600">{item.sentence}</span>
+                </div>
+              ) : (
               <div className="flex min-h-9 flex-1 flex-wrap items-end gap-1.5 border-b-2 border-[var(--color-accent-fr)]/60 pb-1">
-                {arr.map((word, wi) => {
-                  let cls = "rounded-full px-2.5 py-0.5 text-sm font-medium transition-colors cursor-pointer ";
-                  if (!validated || !revealCorrection) {
-                    cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
-                  } else {
-                    cls += word === expectedTokens[wi]
-                      ? "bg-[var(--color-accent-fr)] text-white"
-                      : "bg-amber-500 text-white";
-                  }
-                  return (
-                    <button key={wi} type="button" onClick={() => removeWord(qi, wi)} className={cls}>
+                {arr.map((word, wi) => (
+                    <button
+                      key={wi}
+                      type="button"
+                      onClick={() => removeWord(qi, wi)}
+                      disabled={validated}
+                      className="rounded bg-[var(--color-accent-fr)]/10 px-2.5 py-0.5 text-sm font-medium text-[var(--color-accent-fr)] transition-colors disabled:opacity-100"
+                    >
                       {word}
                     </button>
-                  );
-                })}
+                ))}
               </div>
+              )}
             </div>
 
             {/* Word pool */}
+            {!validated && (
             <div className="flex flex-wrap gap-2">
               {pool.map((word, wi) => (
                 <button
@@ -2458,13 +2484,7 @@ function WordOrderExercise({
                 </button>
               ))}
             </div>
-
-            {validated && revealCorrection && !correct && (
-              <p className="text-xs font-medium text-amber-500">
-                → {item.sentence}
-              </p>
-            )}
-          </div>
+            )}          </div>
         );
       })}
       </div>
