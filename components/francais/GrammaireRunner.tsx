@@ -948,8 +948,8 @@ function normalizeAnswer(s: string): string {
     .trim()
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/['']/g, "'")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['\u2019\u2018]/g, "'")
     .replace(/[.!?…,;:]+$/g, "") // point final souvent saisi par l'élève
     .replace(/\s+/g, " ")
     .trim();
@@ -960,19 +960,44 @@ function normalizeAnswer(s: string): string {
   return t;
 }
 
-/** Compare une réponse fill ; tolère le texte déjà présent après le blanc (ex. « suis en train de… »). */
+/** Pronoms sujets pouvant précéder le blanc (déjà affichés dans la phrase). */
+const FILL_SUBJECT_PRONOUNS = new Set([
+  "je",
+  "j'",
+  "tu",
+  "il",
+  "elle",
+  "on",
+  "nous",
+  "vous",
+  "ils",
+  "elles",
+  "c'",
+]);
+
+/**
+ * Compare une réponse fill (exacte après normalisation).
+ * Si le pronom sujet est déjà avant le blanc (« Il ___ »), accepte aussi
+ * « il est » lorsque l'attendu est « est » — pas de réponse partielle ni de
+ * reprise du texte après le blanc (« en train de… »).
+ */
 function fillAnswerMatches(user: string, expected: string, sentence: string): boolean {
   const u = normalizeAnswer(user);
   const e = normalizeAnswer(expected);
   if (!e) return !u;
   if (u === e) return true;
 
-  const afterRaw = (sentence.split("___")[1] ?? "").replace(/\([^)]*\)/g, "");
-  const after = normalizeAnswer(afterRaw);
-  if (!after || !u.startsWith(e)) return false;
-  const rest = u.slice(e.length).trim();
-  if (!rest) return true;
-  return after.startsWith(rest) || rest.startsWith(after);
+  const beforeRaw = (sentence.split("___")[0] ?? "")
+    .replace(/\([^)]*\)/g, "")
+    .replace(/→/g, " ");
+  const beforeWords = normalizeAnswer(beforeRaw).split(" ").filter(Boolean);
+  const subj = beforeWords[beforeWords.length - 1] ?? "";
+  if (!FILL_SUBJECT_PRONOUNS.has(subj)) return false;
+
+  const withSubject = subj.endsWith("'")
+    ? normalizeAnswer(`${subj}${e}`)
+    : normalizeAnswer(`${subj} ${e}`);
+  return u === withSubject;
 }
 
 function FillExercise({
