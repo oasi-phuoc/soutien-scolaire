@@ -390,5 +390,77 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         { sentence: "mademoiselle → ___", hint: "irrégulier", answer: "mesdemoiselles" },
       ],
     },
+    {
+      type: "fill",
+      title: "Exercice 3",
+      instruction: "Réécrivez les phrases au pluriel.",
+      items: [],
+      poolSize: 5,
+      inputWidth: "w-[32rem]",
+      pool: [
+        // Cas général + s
+        { sentence: "Un traducteur mange une pomme.\n___", hint: "pluriel", answer: "Des traducteurs mangent des pommes." },
+        { sentence: "Une pomme est rouge.\n___", hint: "pluriel", answer: "Des pommes sont rouges." },
+        { sentence: "Un fruit tombe de l'arbre.\n___", hint: "pluriel", answer: "Des fruits tombent de l'arbre." },
+        { sentence: "Une banane est jaune.\n___", hint: "pluriel", answer: "Des bananes sont jaunes." },
+        { sentence: "Une tasse est sur la table.\n___", hint: "pluriel", answer: "Des tasses sont sur la table." },
+        // s / x / z inchangé
+        { sentence: "Le bras est long.\n___", hint: "pluriel", answer: "Les bras sont longs." },
+        { sentence: "Une noix tombe par terre.\n___", hint: "pluriel", answer: "Des noix tombent par terre." },
+        { sentence: "Un nez est rouge.\n___", hint: "pluriel", answer: "Des nez sont rouges." },
+        // -al → -aux
+        { sentence: "Un animal court dans la forêt.\n___", hint: "pluriel", answer: "Des animaux courent dans la forêt." },
+        { sentence: "Un journal est sur la table.\n___", hint: "pluriel", answer: "Des journaux sont sur la table." },
+        { sentence: "Un cheval mange de l'herbe.\n___", hint: "pluriel", answer: "Des chevaux mangent de l'herbe." },
+        // -al exceptions
+        { sentence: "Un bal a lieu ce soir.\n___", hint: "pluriel", answer: "Des bals ont lieu ce soir." },
+        { sentence: "Un carnaval anime la ville.\n___", hint: "pluriel", answer: "Des carnavals animent la ville." },
+        { sentence: "Un festival commence demain.\n___", hint: "pluriel", answer: "Des festivals commencent demain." },
+        { sentence: "Un récital plaît au public.\n___", hint: "pluriel", answer: "Des récitals plaisent au public." },
+        // -ail + s
+        { sentence: "Un détail est important.\n___", hint: "pluriel", answer: "Des détails sont importants." },
+        { sentence: "Un portail s'ouvre lentement.\n___", hint: "pluriel", answer: "Des portails s'ouvrent lentement." },
+        { sentence: "Un éventail est en soie.\n___", hint: "pluriel", answer: "Des éventails sont en soie." },
+        // -ail → -aux
+        { sentence: "Un travail est difficile.\n___", hint: "pluriel", answer: "Des travaux sont difficiles." },
+        { sentence: "Un vitrail décore l'église.\n___", hint: "pluriel", answer: "Des vitraux décorent l'église." },
+        { sentence: "Un corail pousse dans la mer.\n___", hint: "pluriel", answer: "Des coraux poussent dans la mer." },
+        { sentence: "Un bail dure trois ans.\n___", hint: "pluriel", answer: "Des baux durent trois ans." },
+        // -eau → -eaux
+        { sentence: "Un bateau traverse le lac.\n___", hint: "pluriel", answer: "Des bateaux traversent le lac." },
+        { sentence: "Un gâteau est délicieux.\n___", hint: "pluriel", answer: "Des gâteaux sont délicieux." },
+        { sentence: "Un chapeau est sur la tête.\n___", hint: "pluriel", answer: "Des chapeaux sont sur la tête." },
+        { sentence: "Un cadeau plaît à l'enfant.\n___", hint: "pluriel", answer: "Des cadeaux plaisent à l'enfant." },
+        // -au → -aux
+        { sentence: "Un tuyau fuit dans le jardin.\n___", hint: "pluriel", answer: "Des tuyaux fuient dans le jardin." },
+        // -au exceptions
+        { sentence: "Un landau est dans la rue.\n___", hint: "pluriel", answer: "Des landaus sont dans la rue." },
+        { sentence: "Un sarrau protège les vêtements.\n___", hint: "pluriel", answer: "Des sarraus protègent les vêtements." },
+        // -eu → -eux
+        { sentence: "Un feu brûle dans la cheminée.\n___", hint: "pluriel", answer: "Des feux brûlent dans la cheminée." },
+        { sentence: "Un jeu amuse les enfants.\n___", hint: "pluriel", answer: "Des jeux amusent les enfants." },
+        { sentence: "Un lieu est calme.\n___", hint: "pluriel", answer: "Des lieux sont calmes." },
+        // -eu exceptions
+        { sentence: "Un pneu est crevé.\n___", hint: "pluriel", answer: "Des pneus sont crevés." },
+        { sentence: "Un bleu marque le bras.\n___", hint: "pluriel", answer: "Des bleus marquent le bras." },
+        // -ou + s
+        { sentence: "Un trou apparaît dans le mur.\n___", hint: "pluriel", answer: "Des trous apparaissent dans le mur." },
+        { sentence: "Un clou fixe le tableau.\n___", hint: "pluriel", answer: "Des clous fixent le tableau." },
+        { sentence: "Un cou est long.\n___", hint: "pluriel", answer: "Des cous sont longs." },
+        // -ou → -oux
+        { sentence: "Un bijou brille au soleil.\n___", hint: "pluriel", answer: "Des bijoux brillent au soleil." },
+        { sentence: "Un caillou est sur le chemin.\n___", hint: "pluriel", answer: "Des cailloux sont sur le chemin." },
+        { sentence: "Un chou pousse dans le jardin.\n___", hint: "pluriel", answer: "Des choux poussent dans le jardin." },
+        { sentence: "Un genou est blessé.\n___", hint: "pluriel", answer: "Des genoux sont blessés." },
+        { sentence: "Un hibou chante la nuit.\n___", hint: "pluriel", answer: "Des hiboux chantent la nuit." },
+        { sentence: "Un joujou amuse l'enfant.\n___", hint: "pluriel", answer: "Des joujoux amusent l'enfant." },
+        { sentence: "Un pou vit dans les cheveux.\n___", hint: "pluriel", answer: "Des poux vivent dans les cheveux." },
+        // Cas particuliers
+        { sentence: "Un œil est fermé.\n___", hint: "pluriel", answer: "Des yeux sont fermés." },
+        { sentence: "Un monsieur entre dans la salle.\n___", hint: "pluriel", answer: "Des messieurs entrent dans la salle." },
+        { sentence: "Madame arrive à l'heure.\n___", hint: "pluriel", answer: "Mesdames arrivent à l'heure." },
+        { sentence: "Mademoiselle lit un livre.\n___", hint: "pluriel", answer: "Mesdemoiselles lisent un livre." },
+      ],
+    },
   ],
 };
