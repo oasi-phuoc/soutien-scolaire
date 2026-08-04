@@ -46,35 +46,6 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         ["Ce garçon est calme.", "Cette fille est calme."],
       ],
     },
-    {
-      type: "plain_list",
-      items: ["On ajoute souvent {a}-s{/a} au pluriel."],
-    },
-    {
-      type: "grid",
-      headers: ["Singulier", "Pluriel"],
-      equalCols: true,
-      rows: [
-        ["Le sac est petit.", "Les sacs sont petit{a}s{/a}."],
-        ["La voiture est petite.", "Les voitures sont petite{a}s{/a}."],
-      ],
-    },
-    {
-      type: "highlight",
-      label: "Adjectifs spéciaux",
-      items: ["Certains adjectifs changent beaucoup."],
-      noBulletItems: [0],
-    },
-    {
-      type: "grid",
-      headers: ["Masculin", "Féminin"],
-      equalCols: true,
-      rows: [
-        ["beau", "bell{a}e{/a}"],
-        ["nouveau", "nouvell{a}e{/a}"],
-        ["vieux", "vieil{a}le{/a}"],
-      ],
-    },
   ],
   exercises: [
     {

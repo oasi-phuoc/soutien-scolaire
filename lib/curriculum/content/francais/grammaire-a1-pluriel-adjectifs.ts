@@ -12,6 +12,20 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       text: "Formation du pluriel",
     },
     {
+      type: "plain_list",
+      items: ["On ajoute souvent {a}-s{/a} au pluriel."],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Singulier", "Pluriel"],
+      equalCols: true,
+      rows: [
+        ["Le sac est petit.", "Les sacs sont petit{a}s{/a}."],
+        ["La voiture est petite.", "Les voitures sont petite{a}s{/a}."],
+      ],
+    },
+    {
       type: "highlight",
       label: "Cas général",
       items: [

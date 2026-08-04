@@ -35,6 +35,22 @@ export const A1_GR_FEMININ_ADJ_PART: GrammarLesson = {
       ],
     },
     {
+      type: "highlight",
+      label: "Adjectifs spéciaux",
+      items: ["Certains adjectifs changent beaucoup."],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Masculin", "Féminin"],
+      equalCols: true,
+      rows: [
+        ["beau", "bell{a}e{/a}"],
+        ["nouveau", "nouvell{a}e{/a}"],
+        ["vieux", "vieil{a}le{/a}"],
+      ],
+    },
+    {
       type: "heading",
       text: "Adjectifs irréguliers",
     },
