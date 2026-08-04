@@ -63,6 +63,31 @@ function endingsOf(v: VerbConj): string[] {
   return v.forms.map((f) => (f.startsWith(v.stem) ? f.slice(v.stem.length) : f));
 }
 
+/**
+ * Radical + terminaison pour Ex1/Ex2.
+ * Retourne null si aucun radical fiable pour cette personne
+ * (ex. être / venir au pluriel sans stem adapté) → blanc + (infinitif).
+ */
+function resolveEndingBlank(
+  v: VerbConj,
+  idx: number,
+): { stem: string; ending: string } | null {
+  const i = idx % 8;
+  const form = v.forms[i]!;
+  if (!v.stem) return null;
+
+  if (v.endings) {
+    const ending = v.endings[i]!;
+    if (v.stem + ending === form) return { stem: v.stem, ending };
+  }
+
+  if (form.startsWith(v.stem) && form.length > v.stem.length) {
+    return { stem: v.stem, ending: form.slice(v.stem.length) };
+  }
+
+  return null;
+}
+
 function pickChoices(correct: string, candidates: string[], pad: string[] = ER_PAD): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
@@ -109,7 +134,7 @@ function forEachPronoun(gabarit: G1Gabarit, fn: (idx: number, v: VerbConj, tail:
 }
 
 function buildItemsFromGabarit(
-  style: G1Style,
+  _style: G1Style,
   gabarit: G1Gabarit,
   idx: number,
   tail: string,
@@ -122,35 +147,39 @@ function buildItemsFromGabarit(
 } {
   const v = gabarit.verb;
   const ends = endingsOf(v);
-  const ending = ends[idx]!;
   const full = conjugatedAnswer(v, idx);
 
   let endingQcm: QcmItem;
   let endingFill: FillItem;
 
-  // Radical + ___ dès qu'il y a un stem et des terminaisons courtes (ex. mang___).
-  // Sinon (être / avoir / formes irrégulières) : blanc pour la forme entière.
-  const useStemBlank =
-    Boolean(v.stem) && (style === "ending" || ends.every((e) => e.length <= 4));
+  // Radical + ___ si fiable pour cette personne ; sinon ___ (infinitif).
+  const blank = resolveEndingBlank(v, idx);
 
-  if (useStemBlank) {
-    const subj = subjectOf(idx, v.stem);
+  if (blank) {
+    const subj = subjectOf(idx, blank.stem);
+    const endingChoices = ends.every((e) => e.length > 0)
+      ? pickChoices(blank.ending, ends)
+      : pickChoices(blank.ending, [
+          endingsOf(v)[(idx + 1) % 8]!,
+          endingsOf(v)[(idx + 4) % 8]!,
+          endingsOf(v)[(idx + 5) % 8]!,
+        ]);
     endingQcm = {
-      sentence: `${subj.display}${subj.sep}${v.stem}___${tail}`,
-      choices: pickChoices(ending, ends),
+      sentence: `${subj.display}${subj.sep}${blank.stem}___${tail}`,
+      choices: endingChoices,
       correctIdx: 0,
       gabaritId,
     };
     endingFill = {
-      sentence: `${subj.display}${subj.sep}${v.stem}___${tail}`,
+      sentence: `${subj.display}${subj.sep}${blank.stem}___ (${v.infinitive})${tail}`,
       hint: v.hint,
-      answer: ending,
+      answer: blank.ending,
       gabaritId,
     };
   } else {
     const subj = subjectOf(idx, full);
     endingQcm = {
-      sentence: `${subj.display}${subj.sep}___${tail}`,
+      sentence: `${subj.display}${subj.sep}___ (${v.infinitive})${tail}`,
       choices: pickChoices(full, [
         conjugatedAnswer(v, (idx + 1) % 8),
         conjugatedAnswer(v, (idx + 4) % 8),
@@ -161,7 +190,7 @@ function buildItemsFromGabarit(
       gabaritId,
     };
     endingFill = {
-      sentence: `${subj.display}${subj.sep}___${tail}`,
+      sentence: `${subj.display}${subj.sep}___ (${v.infinitive})${tail}`,
       hint: v.hint,
       answer: full,
       gabaritId,
@@ -234,13 +263,13 @@ function buildProgressifPools(profile: G1LessonProfile): {
       const subj = subjectOf(idx, form);
       const answerProg = `${form} en train ${de}${inf}`.replace(/\s+/g, " ").trim();
       endingQcm.push({
-        sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
+        sentence: `${subj.display}${subj.sep}___ (être) en train ${de}${inf}${tail}`,
         choices: pickChoices(form, [...etreForms]),
         correctIdx: 0,
         gabaritId: gid,
       });
       endingFill.push({
-        sentence: `${subj.display}${subj.sep}___ en train ${de}${inf}${tail}`,
+        sentence: `${subj.display}${subj.sep}___ (être) en train ${de}${inf}${tail}`,
         hint: "être en train de",
         answer: form,
         gabaritId: gid,
@@ -390,7 +419,8 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: pools.endingFill,
       poolSize: G1_SESSION_SIZE,
-      inputWidth: "w-16",
+      /* Assez large pour -issent / -iennent / -ssons. */
+      inputWidth: "w-28",
     },
     {
       type: "qcm",
@@ -453,13 +483,23 @@ export function er(inf: string, stem: string): VerbConj {
   };
 }
 
+/** Verbes -ir type finir. `stem` = radical pédagogique (ex. « fini », « choisi »). */
 export function ir(inf: string, stem: string): VerbConj {
   return {
     infinitive: inf,
     stem,
     hint: IR_HINT,
-    endings: ["is", "is", "it", "it", "issons", "issez", "issent", "issent"],
-    forms: [`${stem}is`, `${stem}is`, `${stem}it`, `${stem}it`, `${stem}issons`, `${stem}issez`, `${stem}issent`, `${stem}issent`],
+    endings: ["s", "s", "t", "t", "ssons", "ssez", "ssent", "ssent"],
+    forms: [
+      `${stem}s`,
+      `${stem}s`,
+      `${stem}t`,
+      `${stem}t`,
+      `${stem}ssons`,
+      `${stem}ssez`,
+      `${stem}ssent`,
+      `${stem}ssent`,
+    ],
   };
 }
 

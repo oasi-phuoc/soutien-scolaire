@@ -49,9 +49,9 @@ const CHERCHER = er("chercher", "cherch");
 
 const SE_LEVER: VerbConj = {
   infinitive: "se lever",
-  stem: "lèv",
+  stem: "l",
   hint: "pronominal",
-  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
+  endings: ["ève", "èves", "ève", "ève", "evons", "evez", "èvent", "èvent"],
   forms: ["lève", "lèves", "lève", "lève", "levons", "levez", "lèvent", "lèvent"],
   reflexive: ["me", "te", "se", "se", "nous", "vous", "se", "se"],
 };
@@ -61,9 +61,9 @@ const SE_PREPARER = reflEr("se préparer", "prépar");
 const S_HABILLER = reflErVowel("s'habiller", "habill");
 const S_APPELER: VerbConj = {
   infinitive: "s'appeler",
-  stem: "appell",
+  stem: "appel",
   hint: "pronominal",
-  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
+  endings: ["le", "les", "le", "le", "ons", "ez", "lent", "lent"],
   forms: ["appelle", "appelles", "appelle", "appelle", "appelons", "appelez", "appellent", "appellent"],
   reflexive: ["m'", "t'", "s'", "s'", "nous", "vous", "s'", "s'"],
 };
@@ -72,48 +72,52 @@ const SE_REVEILLER = reflEr("se réveiller", "réveill");
 
 const POUVOIR: VerbConj = {
   infinitive: "pouvoir",
-  stem: "",
+  stem: "p",
   hint: "peux / peut / pouvons / pouvez / peuvent",
+  endings: ["eux", "eux", "eut", "eut", "ouvons", "ouvez", "euvent", "euvent"],
   forms: ["peux", "peux", "peut", "peut", "pouvons", "pouvez", "peuvent", "peuvent"],
 };
 const VOULOIR: VerbConj = {
   infinitive: "vouloir",
-  stem: "",
+  stem: "v",
   hint: "veux / veut / voulons / voulez / veulent",
+  endings: ["eux", "eux", "eut", "eut", "oulons", "oulez", "eulent", "eulent"],
   forms: ["veux", "veux", "veut", "veut", "voulons", "voulez", "veulent", "veulent"],
 };
 const DEVOIR: VerbConj = {
   infinitive: "devoir",
-  stem: "",
+  stem: "d",
   hint: "dois / doit / devons / devez / doivent",
+  endings: ["ois", "ois", "oit", "oit", "evons", "evez", "oivent", "oivent"],
   forms: ["dois", "dois", "doit", "doit", "devons", "devez", "doivent", "doivent"],
 };
 const SAVOIR: VerbConj = {
   infinitive: "savoir",
-  stem: "",
+  stem: "s",
   hint: "sais / sait / savons / savez / savent",
+  endings: ["ais", "ais", "ait", "ait", "avons", "avez", "avent", "avent"],
   forms: ["sais", "sais", "sait", "sait", "savons", "savez", "savent", "savent"],
 };
 
 const ACHETER: VerbConj = {
   infinitive: "acheter",
-  stem: "achèt",
+  stem: "ach",
   hint: "j'achète / nous achetons",
-  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
+  endings: ["ète", "ètes", "ète", "ète", "etons", "etez", "ètent", "ètent"],
   forms: ["achète", "achètes", "achète", "achète", "achetons", "achetez", "achètent", "achètent"],
 };
 const APPELER: VerbConj = {
   infinitive: "appeler",
-  stem: "appell",
+  stem: "appel",
   hint: "j'appelle / nous appelons",
-  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
+  endings: ["le", "les", "le", "le", "ons", "ez", "lent", "lent"],
   forms: ["appelle", "appelles", "appelle", "appelle", "appelons", "appelez", "appellent", "appellent"],
 };
 const PREFERER: VerbConj = {
   infinitive: "préférer",
-  stem: "préfèr",
+  stem: "préf",
   hint: "je préfère / nous préférons",
-  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
+  endings: ["ère", "ères", "ère", "ère", "érons", "érez", "èrent", "èrent"],
   forms: ["préfère", "préfères", "préfère", "préfère", "préférons", "préférez", "préfèrent", "préfèrent"],
 };
 const VOYAGER: VerbConj = {
@@ -125,21 +129,22 @@ const VOYAGER: VerbConj = {
 };
 const COMMENCER: VerbConj = {
   infinitive: "commencer",
-  stem: "commenc",
+  stem: "commen",
   hint: "nous commençons",
-  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
+  endings: ["ce", "ces", "ce", "ce", "çons", "cez", "cent", "cent"],
   forms: ["commence", "commences", "commence", "commence", "commençons", "commencez", "commencent", "commencent"],
 };
 const ENVOYER: VerbConj = {
   infinitive: "envoyer",
-  stem: "envoi",
+  stem: "envo",
   hint: "j'envoie / nous envoyons",
-  endings: ["e", "es", "e", "e", "ons", "ez", "ent", "ent"],
+  endings: ["ie", "ies", "ie", "ie", "yons", "yez", "ient", "ient"],
   forms: ["envoie", "envoies", "envoie", "envoie", "envoyons", "envoyez", "envoient", "envoient"],
 };
 
-const FINIR = ir("finir", "fin");
-const CHOISIR = ir("choisir", "chois");
+/* Radical pédagogique fini-/choisi- (terminaisons s/t/ssons/ssez/ssent). */
+const FINIR = ir("finir", "fini");
+const CHOISIR = ir("choisir", "choisi");
 const OUVRIR: VerbConj = {
   infinitive: "ouvrir",
   stem: "ouvr",
@@ -161,10 +166,12 @@ const DORMIR: VerbConj = {
   endings: ["s", "s", "t", "t", "mons", "mez", "ment", "ment"],
   forms: ["dors", "dors", "dort", "dort", "dormons", "dormez", "dorment", "dorment"],
 };
+/* Radical v- : venons/venez ne partagent pas « vien ». */
 const VENIR: VerbConj = {
   infinitive: "venir",
-  stem: "vien",
+  stem: "v",
   hint: "viens / vient / venons / viennent",
+  endings: ["iens", "iens", "ient", "ient", "enons", "enez", "iennent", "iennent"],
   forms: ["viens", "viens", "vient", "vient", "venons", "venez", "viennent", "viennent"],
 };
 const SERVIR: VerbConj = {
@@ -189,14 +196,16 @@ const ECRIRE: VerbConj = {
 };
 const FAIRE: VerbConj = {
   infinitive: "faire",
-  stem: "",
+  stem: "f",
   hint: "fais / fait / faisons / faites / font",
+  endings: ["ais", "ais", "ait", "ait", "aisons", "aites", "ont", "ont"],
   forms: ["fais", "fais", "fait", "fait", "faisons", "faites", "font", "font"],
 };
 const PRENDRE: VerbConj = {
   infinitive: "prendre",
-  stem: "prend",
+  stem: "pren",
   hint: "prends / prend / prenons / prennent",
+  endings: ["ds", "ds", "d", "d", "ons", "ez", "nent", "nent"],
   forms: ["prends", "prends", "prend", "prend", "prenons", "prenez", "prennent", "prennent"],
 };
 const DIRE: VerbConj = {
@@ -207,26 +216,30 @@ const DIRE: VerbConj = {
 };
 const BOIRE: VerbConj = {
   infinitive: "boire",
-  stem: "boi",
+  stem: "b",
   hint: "bois / boit / buvons / boivent",
+  endings: ["ois", "ois", "oit", "oit", "uvons", "uvez", "oivent", "oivent"],
   forms: ["bois", "bois", "boit", "boit", "buvons", "buvez", "boivent", "boivent"],
 };
 const VOIR: VerbConj = {
   infinitive: "voir",
-  stem: "voi",
+  stem: "v",
   hint: "vois / voit / voyons / voient",
+  endings: ["ois", "ois", "oit", "oit", "oyons", "oyez", "oient", "oient"],
   forms: ["vois", "vois", "voit", "voit", "voyons", "voyez", "voient", "voient"],
 };
 const CONNAITRE: VerbConj = {
   infinitive: "connaître",
-  stem: "connai",
+  stem: "conna",
   hint: "connais / connaît / connaissons",
+  endings: ["is", "is", "ît", "ît", "issons", "issez", "issent", "issent"],
   forms: ["connais", "connais", "connaît", "connaît", "connaissons", "connaissez", "connaissent", "connaissent"],
 };
 const METTRE: VerbConj = {
   infinitive: "mettre",
-  stem: "met",
+  stem: "me",
   hint: "mets / met / mettons / mettent",
+  endings: ["ts", "ts", "t", "t", "ttons", "ttez", "ttent", "ttent"],
   forms: ["mets", "mets", "met", "met", "mettons", "mettez", "mettent", "mettent"],
 };
 
