@@ -10,6 +10,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     {
       type: "heading",
       text: "Utilisation",
+      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
     },
     {
       type: "plain_list",
@@ -17,6 +18,13 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "En général, l'adjectif qualificatif se place {a}après{/a} le nom.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["In general, a descriptive adjective is placed {a}after{/a} the noun."],
+        ar: ["عمومًا، تأتي الصفة الوصفية {a}بعد{/a} الاسم."],
+        fa: ["به طور کلی، صفت توصیفی {a}بعد{/a} از اسم می‌آید."],
+        ti: ["ብሓፈሻ፣ ገላጺ ቅጽል {a}ድሕሪ{/a} ስም ይመጽእ።"],
+        uk: ["Зазвичай описовий прикметник стоїть {a}після{/a} іменника."],
+      },
     },
     {
       type: "highlight",
@@ -30,6 +38,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     {
       type: "heading",
       text: "Les adjectifs placés avant le nom",
+      trans: { en: "Adjectives placed before the noun", ar: "الصفات التي تأتي قبل الاسم", fa: "صفت‌هایی که پیش از اسم می‌آیند", ti: "ቅድሚ ስም ዝመጹ ቅጽላት", uk: "Прикметники перед іменником" },
     },
     {
       type: "plain_list",
@@ -37,10 +46,24 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "Certains adjectifs courts et très fréquents se placent généralement avant le nom. Ils appartiennent souvent à la catégorie {a}BAGS{/a}.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Some short and very common adjectives are usually placed before the noun. They often belong to the {a}BAGS{/a} category."],
+        ar: ["بعض الصفات القصيرة والشائعة جدًا تأتي عادةً قبل الاسم. وغالبًا ما تنتمي إلى فئة {a}BAGS{/a}."],
+        fa: ["بعضی صفت‌های کوتاه و بسیار رایج معمولاً پیش از اسم می‌آیند. آن‌ها اغلب به دستهٔ {a}BAGS{/a} تعلق دارند."],
+        ti: ["ገለ ሓጸርቲን ኣዝዮም ተደጋጋሚ ቅጽላትን ብሓፈሻ ቅድሚ ስም ይመጹ። ብዙሕ ግዜ ናብ ምድብ {a}BAGS{/a} ይኣትዉ።"],
+        uk: ["Деякі короткі й дуже вживані прикметники зазвичай стоять перед іменником. Вони часто належать до категорії {a}BAGS{/a}."],
+      },
     },
     {
       type: "grid",
       headers: ["Catégorie", "Adjectifs fréquents"],
+      transHeaders: {
+        en: ["Category", "Common adjectives"],
+        ar: ["الفئة", "الصفات الشائعة"],
+        fa: ["دسته", "صفت‌های رایج"],
+        ti: ["ምድብ", "ብዙሕ ዝጥቀሙሎም ቅጽላት"],
+        uk: ["Категорія", "Часті прикметники"],
+      },
       boldFirstCol: true,
       rows: [
         ["{a}B{/a}eauté", "beau, joli"],
@@ -52,6 +75,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     {
       type: "heading",
       text: "Les adjectifs placés après le nom",
+      trans: { en: "Adjectives placed after the noun", ar: "الصفات التي تأتي بعد الاسم", fa: "صفت‌هایی که پس از اسم می‌آیند", ti: "ድሕሪ ስም ዝመጹ ቅጽላት", uk: "Прикметники після іменника" },
     },
     {
       type: "plain_list",
@@ -59,10 +83,24 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "Les adjectifs se placent toujours après le nom lorsqu'ils indiquent :",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Adjectives are always placed after the noun when they indicate:"],
+        ar: ["تأتي الصفات دائمًا بعد الاسم عندما تدل على:"],
+        fa: ["صفت‌ها همیشه پس از اسم می‌آیند وقتی نشان‌دهندهٔ موارد زیر باشند:"],
+        ti: ["ቅጽላት ነዚ እንተመልከቱ ወትሩ ድሕሪ ስም ይመጹ፦"],
+        uk: ["Прикметники завжди стоять після іменника, коли вказують на:"],
+      },
     },
     {
       type: "grid",
       headers: ["Type", "Exemples"],
+      transHeaders: {
+        en: ["Type", "Examples"],
+        ar: ["النوع", "أمثلة"],
+        fa: ["نوع", "مثال‌ها"],
+        ti: ["ዓይነት", "ኣብነታት"],
+        uk: ["Тип", "Приклади"],
+      },
       boldFirstCol: true,
       colWidths: ["32%", "68%"],
       rows: [
@@ -77,6 +115,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     {
       type: "heading",
       text: "Les adjectifs qui peuvent être avant ou après",
+      trans: { en: "Adjectives that can be before or after", ar: "صفات يمكن أن تأتي قبل أو بعد الاسم", fa: "صفت‌هایی که می‌توانند پیش یا پس از اسم بیایند", ti: "ቅድሚ ወይ ድሕሪ ስም ክመጹ ዝኽእሉ ቅጽላት", uk: "Прикметники, що можуть стояти перед або після іменника" },
     },
     {
       type: "plain_list",
@@ -84,10 +123,24 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "Certains adjectifs changent de place selon le sens recherché.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Some adjectives change position depending on the intended meaning."],
+        ar: ["بعض الصفات تغيّر مكانها بحسب المعنى المقصود."],
+        fa: ["بعضی صفت‌ها بسته به معنای مورد نظر جای خود را تغییر می‌دهند."],
+        ti: ["ገለ ቅጽላት ከከም ዝድለ ትርጉም ቦታኦም ይቕይሩ።"],
+        uk: ["Деякі прикметники змінюють місце залежно від потрібного значення."],
+      },
     },
     {
       type: "grid",
       headers: ["Adjectif", "Après le nom", "Avant le nom"],
+      transHeaders: {
+        en: ["Adjective", "After the noun", "Before the noun"],
+        ar: ["الصفة", "بعد الاسم", "قبل الاسم"],
+        fa: ["صفت", "بعد از اسم", "پیش از اسم"],
+        ti: ["ቅጽል", "ድሕሪ ስም", "ቅድሚ ስም"],
+        uk: ["Прикметник", "Після іменника", "Перед іменником"],
+      },
       boldFirstCol: true,
       colWidths: ["22%", "39%", "39%"],
       rows: [
@@ -110,6 +163,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     {
       type: "heading",
       text: "Ordre des adjectifs",
+      trans: { en: "Order of adjectives", ar: "ترتيب الصفات", fa: "ترتیب صفت‌ها", ti: "ቅደም ሰዓብ ቅጽላት", uk: "Порядок прикметників" },
     },
     {
       type: "plain_list",
@@ -117,6 +171,13 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "Lorsqu'un nom est accompagné de plusieurs adjectifs, ils suivent généralement cet ordre :",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["When a noun is accompanied by several adjectives, they generally follow this order:"],
+        ar: ["عندما يرافق الاسم عدة صفات، فإنها تتبع عادةً هذا الترتيب:"],
+        fa: ["وقتی یک اسم با چند صفت همراه است، آن‌ها معمولاً این ترتیب را دنبال می‌کنند:"],
+        ti: ["ሓደ ስም ብብዙሓት ቅጽላት ምስ ዝስነ፣ ብሓፈሻ ነዚ ቅደም ሰዓብ ይኽተሉ፦"],
+        uk: ["Коли іменник має кілька прикметників, вони зазвичай дотримуються такого порядку:"],
+      },
     },
     {
       type: "plain_list",
@@ -127,6 +188,38 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "{a}4.{/a} adjectifs descriptifs",
       ],
       noBulletItems: [0, 1, 2, 3],
+      transItems: {
+        en: [
+          "{a}1.{/a} numeral adjective",
+          "{a}2.{/a} BAGS adjective",
+          "{a}3.{/a} noun",
+          "{a}4.{/a} descriptive adjectives",
+        ],
+        ar: [
+          "{a}1.{/a} صفة عددية",
+          "{a}2.{/a} صفة BAGS",
+          "{a}3.{/a} اسم",
+          "{a}4.{/a} صفات وصفية",
+        ],
+        fa: [
+          "{a}1.{/a} صفت عددی",
+          "{a}2.{/a} صفت BAGS",
+          "{a}3.{/a} اسم",
+          "{a}4.{/a} صفت‌های توصیفی",
+        ],
+        ti: [
+          "{a}1.{/a} ቁጽራዊ ቅጽል",
+          "{a}2.{/a} ቅጽል BAGS",
+          "{a}3.{/a} ስም",
+          "{a}4.{/a} ገላጺ ቅጽላት",
+        ],
+        uk: [
+          "{a}1.{/a} числівниковий прикметник",
+          "{a}2.{/a} прикметник BAGS",
+          "{a}3.{/a} іменник",
+          "{a}4.{/a} описові прикметники",
+        ],
+      },
     },
     {
       type: "highlight",
@@ -144,6 +237,13 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "L'adjectif placé le plus près du nom précise généralement sa caractéristique principale.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["The adjective placed closest to the noun generally specifies its main characteristic."],
+        ar: ["الصفة الأقرب إلى الاسم تحدد عادةً صفته الرئيسية."],
+        fa: ["صفتی که نزدیک‌تر به اسم قرار می‌گیرد معمولاً ویژگی اصلی آن را مشخص می‌کند."],
+        ti: ["እቲ ናብ ስም ቀረባ ዝተቐመጠ ቅጽል ብሓፈሻ ቀንዲ ባህርዩ ይገልጽ።"],
+        uk: ["Прикметник, що стоїть найближче до іменника, зазвичай уточнює його головну ознаку."],
+      },
     },
     {
       type: "highlight",
