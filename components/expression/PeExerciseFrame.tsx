@@ -47,16 +47,6 @@ export function PeExerciseFrame({
             {exercise.consigne}
           </div>
           <SourceMessageBlock prompt={exercise.prompt} />
-          {exercise.prompt?.points?.length ? (
-            <ul className="mt-3 space-y-1">
-              {exercise.prompt.points.map((point) => (
-                <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-                  <span className="text-[var(--color-theme)]">•</span>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
         </div>
 
         <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4">
