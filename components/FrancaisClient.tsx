@@ -35,7 +35,6 @@ const GRAMMAR_GROUPS: SectionDef[] = [
   { id: "G16", code: "G16", title: "Les autres temps des verbes" },
   { id: "G17", code: "G17", title: "Les phrases complexes" },
   { id: "G18", code: "G18", title: "Bilan B1" },
-  { id: "G19", code: "G19", title: "Compléments" },
 ];
 
 function moduleGroupId(code: string): string {

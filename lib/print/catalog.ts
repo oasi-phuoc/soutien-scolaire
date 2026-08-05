@@ -68,7 +68,6 @@ const GRAMMAR_MODULE_TITLES: Record<string, string> = {
   G16: "Les autres temps des verbes",
   G17: "Les phrases complexes",
   G18: "Bilan B1",
-  G19: "Compléments",
 };
 
 function grammarModuleCode(code: string): string {

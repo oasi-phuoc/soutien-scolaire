@@ -100,10 +100,8 @@ import { A1_GR_EXPRESSION_QUANTITE } from "./content/francais/grammaire-a1-expre
 import { A1_GR_ADJECTIFS_INDEFINIS } from "./content/francais/grammaire-a1-adjectifs-indefinis";
 import { A1_GR_QUESTION_TOTALE } from "./content/francais/grammaire-a1-question-totale";
 import { A1_GR_QUESTION_OUVERTE_QUI } from "./content/francais/grammaire-a1-question-ouverte-qui";
-import { A1_GR_QUESTION_OUVERTE_OU } from "./content/francais/grammaire-a1-question-ouverte-ou";
 import { A1_GR_NEGATION_NE_PAS } from "./content/francais/grammaire-a1-negation-ne-pas";
 import { A1_GR_AUTRES_NEGATIONS } from "./content/francais/grammaire-a1-autres-negations";
-import { A1_GR_QUESTION_INVERSION } from "./content/francais/grammaire-a1-question-inversion";
 import { A1_GR_PHRASE_EXCLAMATIVE } from "./content/francais/grammaire-a1-phrase-exclamative";
 import { A1_GR_A_EN_DE_LIEUX } from "./content/francais/grammaire-a1-a-en-de-lieux";
 import { A1_GR_AUTRES_PREPOSITIONS } from "./content/francais/grammaire-a1-autres-prepositions";
@@ -163,10 +161,8 @@ import { A1_GR_PRESENT_PROGRESSIF } from "./content/francais/grammaire-a1-presen
 import { A1_GR_VERBES_ER_PART } from "./content/francais/grammaire-a1-verbes-er-particuliers";
 import { A1_GR_CEST } from "./content/francais/grammaire-r1.9";
 import { A1_GR_PHRASES } from "./content/francais/grammaire-r1.6";
-import { A1_GR_L02 } from "./content/francais/grammaire-r1.7";
 import { A1_GR_INTERRO } from "./content/francais/grammaire-r1.8";
 import { A1_GR_L04 } from "./content/francais/grammaire-r1.3";
-import { A1_GR_L10 } from "./content/francais/grammaire-r2.4";
 import { A1_GR_L11 } from "./content/francais/grammaire-r2.5";
 import { A1_GR_TIME_EXPRESSIONS } from "./content/francais/grammaire-r4.2-temps";
 import { A1_GR_DOUBLE_AUXILIAIRE } from "./content/francais/grammaire-r5.5-double-auxiliaire";
@@ -185,15 +181,11 @@ import { A1_GR_L14 } from "./content/francais/grammaire-r3.1";
 import { A1_GR_L18 } from "./content/francais/grammaire-r3.4b";
 import { A1_GR_L19 } from "./content/francais/grammaire-r3.5b";
 import { A1_GR_L22 } from "./content/francais/grammaire-r3.6b";
-import { A1_GR_L23 } from "./content/francais/grammaire-r3.7b";
-import { A2_GR_L07 } from "./content/francais/grammaire-r4.12";
-import { A2_GR_L09 } from "./content/francais/grammaire-r4.13";
 
 import { A2_GR_L19 } from "./content/francais/grammaire-r4.19";
 import { A2_GR_L35 } from "./content/francais/grammaire-r4.22";
 import { A2_GR_L36 } from "./content/francais/grammaire-r4.23";
 import { A2_GR_L39 } from "./content/francais/grammaire-r4.27";
-import { A2_GR_L42 } from "./content/francais/grammaire-r4.21";
 import { A2_GR_L52 } from "./content/francais/grammaire-r4.28";
 
 // ── Imports — conjugaison ─────────────────────────────────────────────────────
@@ -264,26 +256,24 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-l18": "G4.5",
   "a1-gr-l19": "G4.6",
   "a1-gr-adjectifs-indefinis": "G4.7",
-  "a1-gr-question-totale": "G5.1",
-  "a1-gr-question-ouverte-qui": "G5.2",
-  "a1-gr-question-ouverte-ou": "G5.3",
-  "a1-gr-negation-ne-pas": "G5.4",
-  "a1-gr-autres-negations": "G5.5",
-  "a1-gr-question-inversion": "G5.6",
-  "a1-gr-phrase-exclamative": "G5.7",
+  "a1-gr-question-totale": "G5.4",
+  "a1-gr-question-ouverte-qui": "G5.5",
+  "a1-gr-negation-ne-pas": "G5.6",
+  "a1-gr-autres-negations": "G5.7",
+  "a1-gr-phrase-exclamative": "G5.8",
   "a1-gr-bilan-a1": "G6.1",
   "a1-gr-a-en-de-lieux": "G7.1",
   "a1-gr-autres-prepositions": "G7.2",
   "a1-gr-passe-compose-avoir": "G8.1",
   "a1-gr-passe-compose-etre": "G8.2",
-  "a1-gr-imparfait": "G8.3",
-  "a1-gr-passe-recent": "G8.4",
-  "a1-gr-imparfait-passe-compose": "G8.5",
-  "a1-gr-plus-que-parfait": "G8.6",
-  "a1-gr-accord-participe-passe": "G8.7",
+  "a1-gr-imparfait": "G8.5",
+  "a1-gr-passe-recent": "G8.6",
+  "a1-gr-imparfait-passe-compose": "G8.7",
+  "a1-gr-plus-que-parfait": "G8.8",
+  "a1-gr-accord-participe-passe": "G8.9",
   "a1-gr-futur-proche": "G9.1",
   "a1-gr-futur-simple": "G9.2",
-  "a1-gr-futur-anterieur": "G9.3",
+  "a1-gr-futur-anterieur": "G9.5",
   "a1-gr-comparaison-adj-adv": "G10.1",
   "a1-gr-comparaison-nom-verbe": "G10.2",
   "a1-gr-superlatif": "G10.3",
@@ -322,38 +312,15 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-hypothese-condition": "G17.6",
   "a1-gr-discours-indirect-present": "G17.7",
   "a1-gr-bilan-b1": "G18.1",
-  "a1-gr-phrases": "G19.2",
-  "a1-gr-l02": "G19.3",
-  "a1-gr-interro": "G19.4",
-  "a1-gr-l10": "G19.5",
-  "a1-gr-l11": "G19.6",
-  "a1-gr-l14": "G19.7",
-  "a1-gr-l23": "G19.8",
-  "a2-gr-l07": "G19.9",
-  "a2-gr-l09": "G19.10",
-  "a1-gr-expressions-temps": "G19.11",
-  "a1-gr-l22": "G19.12",
-  "a2-gr-l39": "G19.13",
-  "a2-gr-bon-bien-meilleur-mieux": "G19.14",
-  "a2-gr-superlatif": "G19.15",
-  "a2-gr-l42": "G19.16",
-  "a2-gr-l19": "G19.17",
-  "a2-gr-l35": "G19.18",
-  "a2-gr-l36": "G19.19",
-  "gr-marqueurs-temps-complet": "G19.20",
-  "a2-gr-l52": "G19.21",
-  "a2-gr-adverbes-types": "G19.22",
-  "a1-gr-verbes-double-auxiliaire": "G19.23",
-  "a1-gr-pronominaux-passe-compose": "G19.24",
-  "a2-gr-passe-compose-ou-imparfait": "G19.25",
-  "a2-gr-imparfait-irreguliers": "G19.26",
-  "a2-gr-futur-irreguliers": "G19.27",
-  "a2-gr-futur-simple-ou-proche": "G19.28",
-  "a2-gr-hypothese-futur": "G19.29",
-  "a2-gr-conditionnel": "G19.30",
-  "a2-gr-gerondif": "G19.31",
-  "a2-gr-subjonctif": "G19.32",
-  "a1-conj-l08": "G19.33",
+  "a1-gr-phrases": "G5.1",
+  "a1-gr-interro": "G5.3",
+  "a1-gr-l22": "G14.3",
+  "a2-gr-l35": "G5.2",
+  "a1-gr-verbes-double-auxiliaire": "G8.3",
+  "a1-gr-pronominaux-passe-compose": "G8.4",
+  "a2-gr-futur-simple-ou-proche": "G9.3",
+  "a2-gr-hypothese-futur": "G9.4",
+  "a1-conj-l08": "G4.2",
   "a1-conj-l00": "G1.1",
   "a1-conj-l01": "G1.2",
   "a1-conj-l07": "G1.5",
@@ -361,21 +328,15 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-conj-l15": "G1.7",
   "a2-conj-irreguliers": "G1.10",
   "a2-conj-l02": "G1.9",
-  "a1-conj-l28": "G8.4",
+  "a1-conj-l28": "G8.6",
   "a1-conj-l29": "G8.1",
   "a1-conj-l30": "G8.2",
   "negation-passe-compose": "G8.1",
-  "a2-conj-l07": "G8.3",
+  "a2-conj-l07": "G8.5",
   "a1-conj-l20": "G9.1",
   "a2-conj-l08": "G9.2",
   "a2-conj-l04": "G16.8",
   "a2-conj-l05": "G16.1",
-};
-
-const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
-  ...A1_GR_L23,
-  code: "G19.8",
-  title: "Les adjectifs qualificatifs",
 };
 
 function applyReorganizedCode<T extends GrammarLesson | ConjLesson>(lesson: T): T {
@@ -448,10 +409,8 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_ADJECTIFS_INDEFINIS,
   A1_GR_QUESTION_TOTALE,
   A1_GR_QUESTION_OUVERTE_QUI,
-  A1_GR_QUESTION_OUVERTE_OU,
   A1_GR_NEGATION_NE_PAS,
   A1_GR_AUTRES_NEGATIONS,
-  A1_GR_QUESTION_INVERSION,
   A1_GR_PHRASE_EXCLAMATIVE,
   A1_GR_A_EN_DE_LIEUX,
   A1_GR_AUTRES_PREPOSITIONS,
@@ -506,11 +465,8 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_BILAN_B1,
   A1_GR_CEST,
   A1_GR_PHRASES,
-  A1_GR_L02,
   A1_GR_INTERRO,
   A1_GR_L04,
-  A1_GR_L10,
-  ADJECTIFS_QUALIFICATIFS,
   A1_GR_L18,
   A1_GR_L19,
   A1_GR_L14,
@@ -529,13 +485,10 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_ADVERBES,
   GR_MARQUEURS_TEMPS_COMPLET,
 
-  A2_GR_L07,
-  A2_GR_L09,
   A2_GR_L19,
   A2_GR_L35,
   A2_GR_L36,
   A2_GR_L39,
-  A2_GR_L42,
   A2_GR_L52,
 
   A2_GR_CONDITIONNEL,
