@@ -26,51 +26,90 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
-      label: "Cas général",
-      items: [
-        "Adjectif pluriel = adjectif singulier + {a}s{/a}.",
-        "Ludovic est marié. Marc et Louise sont mariés.",
-        "Elle est heureuse. Elles sont heureuses.",
-      ],
-      noBulletItems: [1, 2],
-    },
-    {
-      type: "highlight",
-      label: "Cas particuliers",
+      type: "plain_list",
       items: [
         "Si l'adjectif singulier se termine par {a}s{/a} ou {a}x{/a}, le pluriel ne change pas.",
-        "Cet homme est mauvais / gros et ennuyeux / jaloux.",
-        "Ces hommes sont mauvais / gros et ennuyeux / jaloux.",
       ],
-      noBulletItems: [1, 2],
+      noBulletItems: [0],
     },
     {
-      type: "highlight",
-      label: "Pluriels masculins irréguliers",
-      items: [
-        "Le féminin pluriel reste régulier (+ {a}s{/a}).",
-        "{a}-al → -aux{/a} : Ce pantalon est original. / Cette veste est originale. → Ces pantalons sont originaux. / Ces vestes sont originales.",
-        "{a}-eau → -eaux{/a} : Ce pantalon est beau. / Cette veste est belle. → Ces pantalons sont beaux. / Ces vestes sont belles.",
+      type: "grid",
+      headers: ["Singulier", "Pluriel"],
+      equalCols: true,
+      rows: [
+        ["Cet homme est mauvais.", "Ces hommes sont mauvais."],
+        ["Le professeur est ennuyeux.", "Les professeurs sont ennuyeux."],
       ],
-      noBulletItems: [1, 2],
-    },
-    {
-      type: "note",
-      text: "Nom(s) masculin(s) + nom(s) féminin(s) = adjectif au pluriel masculin. → Ce pantalon et cette veste sont élégants.",
     },
     {
       type: "heading",
-      text: "Prononciation",
+      text: "Cas particuliers",
     },
     {
       type: "plain_list",
       items: [
-        "En général, singulier et pluriel se prononcent de la même façon. → court / courts ; courte / courtes ; nouveau / nouveaux ; nouvelle / nouvelles.",
-        "Exception : {a}-al{/a} / {a}-aux{/a} change de prononciation au masculin pluriel. → original / originale / originales ≠ originaux.",
-        "Quatre formes identiques à l'oral si le singulier se termine par une voyelle, ou si le masculin se termine par {a}r{/a} / {a}l{/a}. → marié / mariée / mariés / mariées ; noir / noire / noirs / noires.",
+        "Le féminin pluriel reste régulier (+ {a}s{/a}).",
       ],
-      allBullets: true,
+      noBulletItems: [0],
+    },
+    {
+      type: "selector",
+      buttonCols: 2,
+      tabs: [
+        {
+          label: "-al",
+          content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Singulier", "Pluriel"],
+              equalCols: true,
+              rows: [
+                ["Ce pantalon est origin{a}al{/a}.", "Ces pantalons sont origin{a}aux{/a}."],
+                ["Ce livre est nation{a}al{/a}.", "Ces livres sont nation{a}aux{/a}."],
+                ["Ce problème est princip{a}al{/a}.", "Ces problèmes sont princip{a}aux{/a}."],
+              ],
+            },
+            {
+              type: "highlight",
+              label: "Exceptions",
+              items: [
+                "fat{a}al{/a} → fatal{a}s{/a}",
+                "ban{a}al{/a} → banal{a}s{/a}",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "-eau",
+          content: [
+            {
+              type: "plain_list",
+              items: [
+                "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
+              ],
+              noBulletItems: [0],
+            },
+            {
+              type: "grid",
+              headers: ["Singulier", "Pluriel"],
+              equalCols: true,
+              rows: [
+                ["Ce pantalon est b{a}eau{/a}.", "Ces pantalons sont b{a}eaux{/a}."],
+                ["Ce lit est nouv{a}eau{/a}.", "Ces lits sont nouv{a}eaux{/a}."],
+                ["Ce frère est jum{a}eau{/a}.", "Ces frères sont jum{a}eaux{/a}."],
+              ],
+            },
+          ],
+        },
+      ],
     },
   ],
   exercises: [
