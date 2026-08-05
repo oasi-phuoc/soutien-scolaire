@@ -2468,10 +2468,22 @@ function WordOrderExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
-  const fallback = exercise.poolSize ?? (exercise.pool?.length ?? exercise.items.length);
+  const mixTotal = exercise.poolMix?.reduce((n, m) => n + m.count, 0);
+  const fallback = mixTotal ?? exercise.poolSize ?? (exercise.pool?.length ?? exercise.items.length);
   const { questionCount, listClass } = usePrintQuestionLayout(fallback);
   const [activeItems] = useState(() => {
     if (exercise.pool?.length) {
+      if (exercise.poolMix?.length) {
+        const picked: typeof exercise.pool = [];
+        for (const { gabaritId, count } of exercise.poolMix) {
+          const candidates = shuffle(exercise.pool.filter((p) => p.gabaritId === gabaritId));
+          picked.push(...candidates.slice(0, count));
+        }
+        // Si l'impression demande plus/moins de questions, on tronque ou on complète au hasard.
+        if (picked.length >= questionCount) return shuffle(picked).slice(0, questionCount);
+        const rest = shuffle(exercise.pool.filter((p) => !picked.includes(p)));
+        return shuffle([...picked, ...rest]).slice(0, questionCount);
+      }
       return shuffle([...exercise.pool]).slice(0, questionCount);
     }
     return exercise.items.slice(0, questionCount);
