@@ -113,12 +113,12 @@ export const EXPRESS_E11_2: CommunicationLesson = lessonFromListening({
   id: "E11-2",
   code: "E11.2",
   title: "Pratiquer une activité",
-  prerequisiteFrenchSlugs: ["a2-gr-l35"],
+  prerequisiteFrenchSlugs: ["a1-gr-pronoms-cod-coi"],
   prerequisiteCommIds: ["E11-1"],
   theory: [
     { type: "heading", text: "Pratiquer une activité", black: true, trans: t("Pratiquer une activité") },
     prereqItems([
-      { code: "G4.70", title: "Les pronoms COD et COI", href: "/francais/grammaire/a2-gr-l35" },
+      { code: "G12.2", title: "Les pronoms COD et COI", href: "/francais/grammaire/a1-gr-pronoms-cod-coi" },
     ]),
     {
       type: "plain",
@@ -198,12 +198,12 @@ export const EXPRESS_E11_3: CommunicationLesson = lessonFromListening({
   id: "E11-3",
   code: "E11.3",
   title: "Partager ses goûts",
-  prerequisiteFrenchSlugs: ["a2-gr-l35"],
+  prerequisiteFrenchSlugs: ["a1-gr-pronoms-cod-coi"],
   prerequisiteCommIds: ["E11-2"],
   theory: [
     { type: "heading", text: "Partager ses goûts", black: true, trans: t("Partager ses goûts") },
     prereqItems([
-      { code: "G4.70", title: "Les pronoms COD et COI", href: "/francais/grammaire/a2-gr-l35" },
+      { code: "G12.2", title: "Les pronoms COD et COI", href: "/francais/grammaire/a1-gr-pronoms-cod-coi" },
     ]),
     {
       type: "plain",

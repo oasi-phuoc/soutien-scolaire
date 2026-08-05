@@ -1,9 +1,9 @@
 import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
 
-/** G5.6 — La négation */
+/** G5.5 — La négation */
 export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
   slug: "a1-gr-negation-ne-pas",
-  code: "G5.6",
+  code: "G5.5",
   level: "A1",
   title: "La négation",
   theory: [

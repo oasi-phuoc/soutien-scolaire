@@ -254,11 +254,11 @@ export const COMM_MODULES: CommunicationModule[] = [
         comm: ["E10-5"],
       }),
       s("E11-2", "E11.2", "Pratiquer une activité", {
-        french: ["a2-gr-l35"],
+        french: ["a1-gr-pronoms-cod-coi"],
         comm: ["E11-1"],
       }),
       s("E11-3", "E11.3", "Partager ses goûts", {
-        french: ["a2-gr-l35"],
+        french: ["a1-gr-pronoms-cod-coi"],
         comm: ["E11-2"],
       }),
       s("E11-4", "E11.4", "Passer des vacances", {

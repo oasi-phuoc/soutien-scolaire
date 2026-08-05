@@ -718,6 +718,7 @@ const GENERATED_GRAMMAR_ALIAS_SLUGS = [
   "a1-gr-question-totale",
   "a1-gr-autres-negations",
   "a1-gr-pronom-en",
+  "a1-gr-pronoms-cod-coi",
   "a1-gr-pronoms-relatifs-qui-que-ou",
   "a1-gr-expression-cause",
   "a1-gr-article-partitif",
@@ -747,6 +748,10 @@ function generatedExercisesForAlias(slug: string): Exercise[] {
 
   if (slug === "a1-gr-pronom-en") {
     return buildExercises("a2-gr-l36", PROFILES["a2-gr-l36"]);
+  }
+
+  if (slug === "a1-gr-pronoms-cod-coi") {
+    return buildExercises("a2-gr-l35", PROFILES["a2-gr-l35"]);
   }
 
   if (slug === "a1-gr-pronoms-relatifs-qui-que-ou") {

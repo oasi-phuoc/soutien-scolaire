@@ -1,11 +1,12 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_L35 } from "./grammaire-r4.22";
 
-/** Unité 53 — Les pronoms compléments directs et indirects (G4.23) */
+/** G12.2 — Les pronoms COD et COI (enrichi avec l'ancien G5.2 / a2-gr-l35) */
 export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
   slug: "a1-gr-pronoms-cod-coi",
-  code: "G4.23",
+  code: "G12.2",
   level: "A1",
-  title: "Les pronoms compléments directs et indirects",
+  title: "Les pronoms COD et COI",
   theory: [
     {
       type: "heading",
@@ -89,45 +90,8 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
       ],
       allBullets: true,
     },
+    ...A2_GR_L35.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Pronoms COD / COI",
-      instruction: "Choisissez le pronom correct.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Vous avez les documents ? — Oui, je ___ ai.", choices: ["les", "leur", "lui"], correctIdx: 0 },
-        { sentence: "Je préviens madame Dupuy. → Je ___ préviens.", choices: ["la", "lui", "les"], correctIdx: 0 },
-        { sentence: "Je téléphone à madame Dupuy. → Je ___ téléphone.", choices: ["lui", "la", "les"], correctIdx: 0 },
-        { sentence: "Le directeur va ___ recevoir.", choices: ["nous", "notre", "on"], correctIdx: 0 },
-        { sentence: "Je ne ___ ai pas.", choices: ["les", "leur", "lui"], correctIdx: 0 },
-        { sentence: "Tu aimes le ski ? — Oui, j'aime ___ .", choices: ["ça", "le", "la"], correctIdx: 0 },
-        { sentence: "Je parle à mon frère. → Je ___ parle.", choices: ["lui", "le", "la"], correctIdx: 0 },
-        { sentence: "Je réponds à mes amis. → Je ___ réponds.", choices: ["leur", "lui", "les"], correctIdx: 0 },
-        { sentence: "Il pense à ses amis. → Il pense ___ .", choices: ["à eux", "leur", "les"], correctIdx: 0 },
-        { sentence: "Oui, je ___ imprime. (le document)", choices: ["l'", "le", "la"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le, la, l', les, lui, leur, me, te, nous, vous ou ça.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Les documents, je ___ ai.", hint: "COD pl.", answer: "les" },
-        { sentence: "Je ___ téléphone tout de suite. (à elle)", hint: "COI", answer: "lui" },
-        { sentence: "Elle ___ a téléphoné. (à moi)", hint: "élision", answer: "m'" },
-        { sentence: "Il ne va pas ___ recevoir.", hint: "nous", answer: "nous" },
-        { sentence: "Le rapport, je ___ termine ce soir.", hint: "COD ms", answer: "le" },
-        { sentence: "Tu aimes le chocolat ? — J'aime ___ .", hint: "chose", answer: "ça" },
-        { sentence: "Je parle à ma sœur. → Je ___ parle.", hint: "COI", answer: "lui" },
-        { sentence: "Je réponds à mes amies. → Je ___ réponds.", hint: "COI pl.", answer: "leur" },
-        { sentence: "On ___ attend. (eux)", hint: "COD", answer: "les" },
-        { sentence: "Je ___ remercie.", hint: "vous", answer: "vous" },
-      ],
-    },
-  ],
+  // Exercices de l'ancien G5.2 (a2-gr-l35) via generatedGrammarExercises.
+  exercises: [],
 };

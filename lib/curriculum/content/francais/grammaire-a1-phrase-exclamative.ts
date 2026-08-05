@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** G5.8 — La phrase exclamative */
+/** G5.7 — La phrase exclamative */
 export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
   slug: "a1-gr-phrase-exclamative",
-  code: "G5.8",
+  code: "G5.7",
   level: "A1",
   title: "La phrase exclamative",
   theory: [

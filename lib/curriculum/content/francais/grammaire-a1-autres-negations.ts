@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** G5.7 — Les autres négations */
+/** G5.6 — Les autres négations */
 export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
   slug: "a1-gr-autres-negations",
-  code: "G5.7",
+  code: "G5.6",
   level: "A1",
   title: "Les autres négations",
   theory: [

@@ -172,8 +172,6 @@ import { A1_GR_L18 } from "./content/francais/grammaire-r3.4b";
 import { A1_GR_L19 } from "./content/francais/grammaire-r3.5b";
 import { A1_GR_L22 } from "./content/francais/grammaire-r3.6b";
 
-import { A2_GR_L35 } from "./content/francais/grammaire-r4.22";
-
 // ── Imports — conjugaison ─────────────────────────────────────────────────────
 
 import { A1_CONJ_L00 } from "./content/francais/grammaire-r1.1b";
@@ -239,11 +237,11 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-l18": "G4.5",
   "a1-gr-l19": "G4.6",
   "a1-gr-adjectifs-indefinis": "G4.7",
-  "a1-gr-question-totale": "G5.4",
-  "a1-gr-question-ouverte-qui": "G5.5",
-  "a1-gr-negation-ne-pas": "G5.6",
-  "a1-gr-autres-negations": "G5.7",
-  "a1-gr-phrase-exclamative": "G5.8",
+  "a1-gr-question-totale": "G5.3",
+  "a1-gr-question-ouverte-qui": "G5.4",
+  "a1-gr-negation-ne-pas": "G5.5",
+  "a1-gr-autres-negations": "G5.6",
+  "a1-gr-phrase-exclamative": "G5.7",
   "a1-gr-bilan-a1": "G6.1",
   "a1-gr-a-en-de-lieux": "G7.1",
   "a1-gr-autres-prepositions": "G7.2",
@@ -296,9 +294,9 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-discours-indirect-present": "G17.7",
   "a1-gr-bilan-b1": "G18.1",
   "a1-gr-phrases": "G5.1",
-  "a1-gr-interro": "G5.3",
+  "a1-gr-interro": "G5.2",
   "a1-gr-l22": "G14.3",
-  "a2-gr-l35": "G5.2",
+  "a2-gr-l35": "G12.2",
   "a1-gr-verbes-double-auxiliaire": "G8.3",
   "a1-gr-pronominaux-passe-compose": "G8.4",
   "a2-gr-futur-simple-ou-proche": "G9.3",
@@ -458,8 +456,6 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_FUTUR_SIMPLE_PROCHE,
   A2_GR_HYPOTHESE_FUTUR,
 
-  A2_GR_L35,
-
 ];
 
 
@@ -487,6 +483,7 @@ export const CONJ_SLUG_TO_GRAMMAR: Record<string, string> = {
   "a1-conj-l08": "a1-gr-articles-contractes",
   "a1-conj-l09": "a1-gr-pronominaux",
   "a1-conj-l15": "a1-gr-modaux",
+  "a2-gr-l35": "a1-gr-pronoms-cod-coi",
   "a2-conj-irreguliers": "a1-gr-verbes-re-oir",
   "a2-conj-l02": "a1-gr-verbes-ir",
   "a1-conj-l28": "a1-gr-passe-recent",

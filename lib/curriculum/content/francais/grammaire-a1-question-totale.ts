@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** G5.4 — Les questions fermées */
+/** G5.3 — Les questions fermées */
 export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
   slug: "a1-gr-question-totale",
-  code: "G5.4",
+  code: "G5.3",
   level: "A1",
   title: "Les questions fermées",
   theory: [
