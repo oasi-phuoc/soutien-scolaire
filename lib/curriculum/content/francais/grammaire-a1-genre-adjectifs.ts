@@ -298,6 +298,33 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         },
       ],
     },
+    {
+      type: "heading",
+      text: "Adjectifs à trois formes masculines",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Certains adjectifs ont une forme masculine spéciale devant une voyelle ou h muet.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: [
+        "Masculin devant cons.",
+        "Masculin devant voyelle/h muet",
+        "Féminin",
+        "Pluriel masc.",
+      ],
+      rows: [
+        ["beau", "bel", "belle", "beaux"],
+        ["nouveau", "nouvel", "nouvelle", "nouveaux"],
+        ["vieux", "vieil", "vieille", "vieux"],
+        ["fou", "fol", "folle", "fous"],
+        ["mou", "mol", "molle", "mous"],
+      ],
+    },
   ],
   exercises: [
     {
