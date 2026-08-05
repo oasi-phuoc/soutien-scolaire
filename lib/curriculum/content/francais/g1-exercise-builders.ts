@@ -127,8 +127,8 @@ function pickChoices(correct: string, candidates: string[], pad: string[] = ER_P
   push(correct);
   for (const c of candidates) push(c);
   for (const c of pad) push(c);
-  while (out.length < 4) push(`x${out.length}`);
-  return out.slice(0, 4);
+  while (out.length < 3) push(`x${out.length}`);
+  return out.slice(0, 3);
 }
 
 function conjugatedAnswer(v: VerbConj, idx: number): string {

@@ -838,7 +838,7 @@ function QcmExercise({
           const isCorrect = ci === item.correctIdx;
           // Contour fin au repos, épais à la sélection ; print-choice-btn pour l'impression
           let cls =
-            "print-choice-btn box-border rounded-md px-3 text-center font-medium transition-[background-color,color] whitespace-nowrap overflow-visible " +
+            "print-choice-btn box-border inline-flex items-center justify-center rounded-md px-3 text-center font-medium transition-[background-color,color] whitespace-nowrap overflow-visible " +
             (opts?.compact ? "py-1.5 text-xs " : "py-2 text-sm ") +
             // border-2 constant : évite le rétrécissement du texte à la sélection
             (isSelected ? "print-choice-btn--selected border-2 " : "border-2 ");
@@ -1152,7 +1152,7 @@ function FillExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const fallback = exercise.poolSize ?? (exercise.pool?.length ? 5 : exercise.items.length || 5);
-  const { questionCount, columns, listClass, lengthScale } = usePrintQuestionLayout(fallback);
+  const { questionCount, columns, listClass, lengthScale, isPrint } = usePrintQuestionLayout(fallback);
   const [items] = useState<typeof exercise.items>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
       return sampleFromPool(
@@ -1205,7 +1205,8 @@ function FillExercise({
     ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
     : undefined;
 
-  const twoCols = columns >= 2 || /^Exercice\s*[12]\b/i.test(exercise.title);
+  // À l'écran : Ex1/Ex2 en 2 colonnes. À l'impression : respecter le réglage (défaut 1 col).
+  const twoCols = columns >= 2 || (!isPrint && /^Exercice\s*[12]\b/i.test(exercise.title));
 
   const renderTextWithVerbHint = (s: string) =>
     s.split(/(\([^)]+\))/g).map((chunk, ci) =>
@@ -1332,7 +1333,7 @@ function FillSelectExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const fallback = exercise.poolSize ?? (exercise.pool?.length ? 5 : exercise.items.length || 5);
-  const { questionCount, listClass } = usePrintQuestionLayout(fallback);
+  const { questionCount, listClass, isPrint } = usePrintQuestionLayout(fallback);
   const [items] = useState<FillItem[]>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
       return sampleFromPool(
@@ -1423,6 +1424,20 @@ function FillSelectExercise({
                       expected={correctLetter}
                       className="!mx-0 w-20"
                     />
+                  ) : isPrint ? (
+                    <input
+                      type="text"
+                      value={userLetter}
+                      onChange={(e) => {
+                        if (validated) return;
+                        const v = e.target.value.replace(/[^a-zA-Z]/g, "").slice(0, 1).toLowerCase();
+                        setSelected((prev) => prev.map((s, j) => (j === i ? v : s)));
+                      }}
+                      disabled={validated}
+                      data-print-answer=""
+                      maxLength={1}
+                      className="inline-block h-8 w-20 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-1 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-100"
+                    />
                   ) : (
                     <AppSelect
                       value={userLetter}
@@ -1460,6 +1475,18 @@ function FillSelectExercise({
                 user={userAnswer}
                 expected={item.answer}
                 className="w-28"
+              />
+            ) : isPrint ? (
+              <input
+                type="text"
+                value={userAnswer}
+                onChange={(e) => {
+                  if (validated) return;
+                  setSelected((prev) => prev.map((s, j) => (j === i ? e.target.value : s)));
+                }}
+                disabled={validated}
+                data-print-answer=""
+                className="mx-1 inline-block h-8 w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-100"
               />
             ) : (
               <AppSelect

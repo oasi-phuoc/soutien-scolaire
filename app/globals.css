@@ -439,6 +439,10 @@ input[type=number] {
   border-style: solid !important;
   border-color: var(--color-accent-fr) !important;
   background-color: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
@@ -447,7 +451,7 @@ input[type=number] {
   background-color: color-mix(in oklch, var(--color-accent-fr) 10%, transparent) !important;
 }
 .print-layout-context .print-ex-content button.print-choice-btn:not(.print-choice-btn--selected) {
-  border-width: 1px !important;
+  border-width: 2px !important;
 }
 
 /* Masquer les indices « Calcul » / détails écran sur la feuille d'impression. */

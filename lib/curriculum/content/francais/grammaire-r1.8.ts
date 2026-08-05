@@ -393,33 +393,33 @@ export const A1_GR_INTERRO: GrammarLesson = {
       pool: [
         {
           sentence: "Transformer : Tu parles français.",
-          choices: ["Tu parles français ?", "Parles-tu français ?", "Est-ce que tu parles français ?", "Toutes ces réponses sont correctes."],
-          correctIdx: 3,
+          choices: ["Tu parles français ?", "Parles-tu français ?", "Toutes ces réponses sont correctes."],
+          correctIdx: 2,
         },
         {
           sentence: "Forme la plus formelle pour : Il habite ici.",
-          choices: ["Habite-t-il ici ?", "Il habite ici ?", "Est-ce qu'il habite ici ?", "Habite il ici ?"],
+          choices: ["Habite-t-il ici ?", "Il habite ici ?", "Est-ce qu'il habite ici ?"],
           correctIdx: 0,
         },
         {
           sentence: "Quelle question est incorrecte ?",
-          choices: ["Habite-il ici ?", "Est-ce qu'il habite ici ?", "Il habite ici ?", "Habite-t-il ici ?"],
+          choices: ["Habite-il ici ?", "Est-ce qu'il habite ici ?", "Il habite ici ?"],
           correctIdx: 0,
         },
         {
           sentence: "Transformer avec est-ce que : Vous aimez le café.",
-          choices: ["Est-ce que vous aimez le café ?", "Vous aimez le café ?", "Aimez-vous le café ?", "Aimez vous le café ?"],
+          choices: ["Est-ce que vous aimez le café ?", "Vous aimez le café ?", "Aimez-vous le café ?"],
           correctIdx: 0,
         },
         {
           sentence: "Quelle est la forme avec inversion ?",
-          choices: ["Parle-t-elle français ?", "Est-ce qu'elle parle français ?", "Elle parle français ?", "Elle parle-t-elle français ?"],
+          choices: ["Parle-t-elle français ?", "Est-ce qu'elle parle français ?", "Elle parle français ?"],
           correctIdx: 0,
         },
         {
           sentence: "Transformer : Tu travailles le matin.",
-          choices: ["Travailles-tu le matin ?", "Est-ce que tu travailles le matin ?", "Tu travailles le matin ?", "Toutes ces réponses sont correctes."],
-          correctIdx: 3,
+          choices: ["Travailles-tu le matin ?", "Est-ce que tu travailles le matin ?", "Toutes ces réponses sont correctes."],
+          correctIdx: 2,
         },
       ],
     },
