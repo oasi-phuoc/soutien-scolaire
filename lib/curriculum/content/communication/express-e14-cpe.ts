@@ -2549,9 +2549,9 @@ export const E14_1_PE: ExpressPePrompt[] = [
 {
   id: "e14-1-pe-16",
   title: "Comparer deux options — bilan A2",
-  situation: "Vous hésitez entre deux choix pour bilan A2.",
-  instruction: "Listez les avantages et inconvénients de chaque option et indiquez votre préférence.",
-  points: ["Option A", "Option B", "Votre choix"],
+  situation: "Pour votre bilan A2, vous hésitez entre un examen blanc écrit à l'école et une simulation orale avec un camarade.",
+  instruction: "Comparez les deux préparations (examen blanc écrit / simulation orale) : avantages et inconvénients de chacune, puis indiquez votre préférence et pourquoi.",
+  points: [],
   minWords: PE_MIN,
   maxWords: PE_MAX,
 },

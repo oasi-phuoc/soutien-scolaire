@@ -253,16 +253,10 @@ function WritingExercise({
             </div>
           </div>
         )}
+        {prompt.situation ? (
+          <p className="mb-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{prompt.situation}</p>
+        ) : null}
         <p className="text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
-        {prompt.points.length > 0 && (
-          <ul className="mt-3 space-y-1">
-            {prompt.points.map((point) => (
-              <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-                <span className="text-[var(--color-accent-fr)]">•</span><span>{point} ;</span>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
 
       <div>
