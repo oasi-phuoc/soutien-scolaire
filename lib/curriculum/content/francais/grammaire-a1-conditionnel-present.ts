@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_CONDITIONNEL } from "./grammaire-r6.2";
 
-/** Unité 74 — Le conditionnel présent (G4.44) */
+/** G16.8 — Le conditionnel présent, enrichi avec G19.30 */
 export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
   slug: "a1-gr-conditionnel-present",
-  code: "G4.44",
+  code: "G16.8",
   level: "A1",
   title: "Le conditionnel présent",
   theory: [
@@ -63,45 +64,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
       type: "note",
       text: "Les verbes irréguliers au futur le sont aussi au conditionnel. → À ta place, j'{a}irais{/a} chez le médecin. ; À ma place, vous {a}feriez{/a} quoi ?",
     },
+    ...A2_GR_CONDITIONNEL.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Conditionnel présent",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Vous ___ m'apporter de l'eau ? (pouvoir)", choices: ["pourriez", "pouvez", "pourrez"], correctIdx: 0 },
-        { sentence: "Je ___ une bouteille d'eau. (préférer)", choices: ["préférerais", "préfère", "préférerai"], correctIdx: 0 },
-        { sentence: "Je ___ deux baguettes. (vouloir)", choices: ["voudrais", "veux", "voudrai"], correctIdx: 0 },
-        { sentence: "On ___ aller au cinéma. (pouvoir, suggestion)", choices: ["pourrait", "peut", "pourra"], correctIdx: 0 },
-        { sentence: "Tu ___ te renseigner. (devoir, conseil)", choices: ["devrais", "dois", "devras"], correctIdx: 0 },
-        { sentence: "À ta place, j'___ chez le médecin. (aller)", choices: ["irais", "vais", "irai"], correctIdx: 0 },
-        { sentence: "À ma place, vous ___ quoi ? (faire)", choices: ["feriez", "faites", "ferez"], correctIdx: 0 },
-        { sentence: "Formation : radical du ___ + terminaisons de l'imparfait.", choices: ["futur simple", "présent", "passé composé"], correctIdx: 0 },
-        { sentence: "___ -vous l'heure ? (avoir, poli)", choices: ["Auriez", "Avez", "Aurez"], correctIdx: 0 },
-        { sentence: "On ___ déménager. (vouloir, souhait)", choices: ["voudrait", "veut", "voudra"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le verbe au conditionnel présent.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Vous ___ m'apporter de l'eau ? (pouvoir)", hint: "poli", answer: "pourriez" },
-        { sentence: "Je ___ une bouteille. (préférer)", hint: "souhait", answer: "préférerais" },
-        { sentence: "Je ___ deux baguettes. (vouloir)", hint: "poli", answer: "voudrais" },
-        { sentence: "On ___ aller au cinéma. (pouvoir)", hint: "suggestion", answer: "pourrait" },
-        { sentence: "Tu ___ te renseigner. (devoir)", hint: "conseil", answer: "devrais" },
-        { sentence: "À ta place, j'___ chez le médecin. (aller)", hint: "irrégulier", answer: "irais" },
-        { sentence: "À ma place, vous ___ quoi ? (faire)", hint: "irrégulier", answer: "feriez" },
-        { sentence: "Nous ___ faire la fête. (aimer)", hint: "nous", answer: "aimerions" },
-        { sentence: "Ils ___ rentrer tôt. (souhaiter)", hint: "ils", answer: "souhaiteraient" },
-        { sentence: "___ -vous comment on y va ? (savoir)", hint: "poli", answer: "Sauriez" },
-      ],
-    },
-  ],
+  exercises: [],
 };

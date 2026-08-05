@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_PASSE_OU_IMPARFAIT } from "./grammaire-r6.3-passe-imparfait";
 
-/** Unité 41 — L'imparfait / Le passé composé (G4.11) */
+/** G8.7 — L'imparfait / Le passé composé, enrichi avec G19.25 */
 export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
   slug: "a1-gr-imparfait-passe-compose",
-  code: "G4.11",
+  code: "G8.7",
   level: "A1",
   title: "L'imparfait / Le passé composé",
   theory: [
@@ -59,45 +60,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
       ],
       noBulletItems: [0],
     },
+    ...A2_GR_PASSE_OU_IMPARFAIT.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Imparfait ou passé composé ?",
-      instruction: "Choisissez le temps qui convient.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Nous ___ dans le bus. (décor)", choices: ["étions", "avons été", "sommes"], correctIdx: 0 },
-        { sentence: "Je ___ un livre. (en cours)", choices: ["lisais", "ai lu", "lis"], correctIdx: 0 },
-        { sentence: "Soudain, le chauffeur ___ .", choices: ["a freiné", "freinait", "freine"], correctIdx: 0 },
-        { sentence: "Elle ___ sur moi !", choices: ["est tombée", "tombait", "tombe"], correctIdx: 0 },
-        { sentence: "Avant, j'___ au bureau en voiture. (habitude)", choices: ["allais", "suis allé", "vais"], correctIdx: 0 },
-        { sentence: "Un jour, j'___ un accident. (fin d'habitude)", choices: ["ai eu", "avais", "ai"], correctIdx: 0 },
-        { sentence: "J'___ en train de lire quand elle est tombée.", choices: ["étais", "ai été", "suis"], correctIdx: 0 },
-        { sentence: "Elle est tombée ___ je lisais.", choices: ["pendant que", "soudain", "tout à coup"], correctIdx: 0 },
-        { sentence: "___ , le chauffeur a freiné.", choices: ["Soudain", "Pendant que", "Avant"], correctIdx: 0 },
-        { sentence: "J'ai marché. ≠ Je ___ .", choices: ["marchais", "marche", "marcherai"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le verbe à l'imparfait ou au passé composé.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Il y ___ beaucoup de monde. (avoir, décor)", hint: "imparfait", answer: "avait" },
-        { sentence: "Je ___ assis. (être)", hint: "imparfait", answer: "étais" },
-        { sentence: "Le chauffeur a ___ . (freiner)", hint: "PC", answer: "freiné" },
-        { sentence: "Elle est ___ sur moi. (tomber)", hint: "PC + être", answer: "tombée" },
-        { sentence: "Avant, j'___ en voiture. (aller)", hint: "habitude", answer: "allais" },
-        { sentence: "Un jour, j'ai ___ un accident. (avoir)", hint: "PC", answer: "eu" },
-        { sentence: "J'étais en train de ___ . (lire)", hint: "infinitif", answer: "lire" },
-        { sentence: "Pendant que je ___ , elle est tombée. (lire)", hint: "imparfait", answer: "lisais" },
-        { sentence: "Soudain, il a ___ . (crier)", hint: "PC", answer: "crié" },
-        { sentence: "Nous ___ dans le bus. (être)", hint: "imparfait", answer: "étions" },
-      ],
-    },
-  ],
+  exercises: [],
 };

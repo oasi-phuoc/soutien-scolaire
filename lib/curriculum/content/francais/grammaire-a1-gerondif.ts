@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_GERONDIF } from "./grammaire-r6.4";
 
-/** Unité 69 — Le gérondif (G4.39) */
+/** G16.3 — Le gérondif, enrichi avec G19.31 */
 export const A1_GR_GERONDIF: GrammarLesson = {
   slug: "a1-gr-gerondif",
-  code: "G4.39",
+  code: "G16.3",
   level: "A1",
   title: "Le gérondif",
   theory: [
@@ -62,45 +63,7 @@ export const A1_GR_GERONDIF: GrammarLesson = {
       type: "note",
       text: "Négation : {a}en ne{/a} + participe + {a}pas{/a}. → En ne conduisant pas vite…",
     },
+    ...A2_GR_GERONDIF.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Gérondif",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Ils maigrissent ___ du sport.", choices: ["en faisant", "faisant", "en faire"], correctIdx: 0 },
-        { sentence: "Il mange ___ .", choices: ["en lisant", "lisant", "en lire"], correctIdx: 0 },
-        { sentence: "___ moins vite, on a moins d'accidents.", choices: ["En conduisant", "Conduisant", "En conduire"], correctIdx: 0 },
-        { sentence: "lire → en ___", choices: ["lisant", "lisantant", "lisont"], correctIdx: 0 },
-        { sentence: "faire → en ___", choices: ["faisant", "faisent", "faire"], correctIdx: 0 },
-        { sentence: "manger → en ___", choices: ["mangeant", "mangant", "manger"], correctIdx: 0 },
-        { sentence: "avoir → en ___", choices: ["ayant", "avonsant", "ayantant"], correctIdx: 0 },
-        { sentence: "être → en ___", choices: ["étant", "estant", "sommesant"], correctIdx: 0 },
-        { sentence: "savoir → en ___", choices: ["sachant", "savant", "savoir"], correctIdx: 0 },
-        { sentence: "En ___ pas vite…", choices: ["ne conduisant", "conduisant ne", "ne conduire"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le gérondif (en + -ant).",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Il écoute de la musique ___ . (courir)", hint: "gérondif", answer: "en courant" },
-        { sentence: "J'ai maigri ___ du sport. (faire)", hint: "gérondif", answer: "en faisant" },
-        { sentence: "Il mange ___ . (lire)", hint: "gérondif", answer: "en lisant" },
-        { sentence: "___ moins vite… (conduire)", hint: "condition", answer: "En conduisant" },
-        { sentence: "___ , on progresse. (avancer)", hint: "gérondif", answer: "En avançant" },
-        { sentence: "Il étudie ___ . (manger)", hint: "gérondif", answer: "en mangeant" },
-        { sentence: "___ raison… (avoir)", hint: "exception", answer: "En ayant" },
-        { sentence: "___ patient… (être)", hint: "exception", answer: "En étant" },
-        { sentence: "___ cela… (savoir)", hint: "exception", answer: "En sachant" },
-        { sentence: "En ___ pas trop… (manger)", hint: "négation", answer: "ne mangeant" },
-      ],
-    },
-  ],
+  exercises: [],
 };

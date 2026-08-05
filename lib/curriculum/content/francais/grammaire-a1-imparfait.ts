@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_IMPARFAIT_IRREGULIERS } from "./grammaire-r6.2-irreguliers";
 
-/** Unité 39 — L'imparfait (G4.9) */
+/** G8.5 — L'imparfait, enrichi avec G19.26 (imparfait irrégulier) */
 export const A1_GR_IMPARFAIT: GrammarLesson = {
   slug: "a1-gr-imparfait",
-  code: "G4.9",
+  code: "G8.5",
   level: "A1",
   title: "L'imparfait",
   theory: [
@@ -75,45 +76,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
         "Radical en {a}-i{/a} : double {a}i{/a}. → nous riions ; vous étudiiez.",
       ],
     },
+    ...A2_GR_IMPARFAIT_IRREGULIERS.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "L'imparfait",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Avant, les trains ___ à vapeur.", choices: ["étaient", "ont été", "sont"], correctIdx: 0 },
-        { sentence: "Quand j'___ enfant, nous allions chez mes grands-parents.", choices: ["étais", "ai été", "suis"], correctIdx: 0 },
-        { sentence: "Tu ___ chez tes grands-parents.", choices: ["allais", "es allé", "vas"], correctIdx: 0 },
-        { sentence: "Nous ___ une petite voiture.", choices: ["avions", "avons eu", "avons"], correctIdx: 0 },
-        { sentence: "Ils ___ dans la même chambre.", choices: ["dormaient", "ont dormi", "dorment"], correctIdx: 0 },
-        { sentence: "Il ___ partir tôt. (falloir)", choices: ["fallait", "a fallu", "faut"], correctIdx: 0 },
-        { sentence: "Je ___ souvent. (voyager)", choices: ["voyageais", "voyagais", "ai voyagé"], correctIdx: 0 },
-        { sentence: "Il ___ à 8 heures. (commencer)", choices: ["commençait", "commencait", "a commencé"], correctIdx: 0 },
-        { sentence: "Nous ___ toujours. (payer)", choices: ["payions", "payons", "avons payé"], correctIdx: 0 },
-        { sentence: "-ais, -ait et -aient se prononcent ___ .", choices: ["pareil", "différemment", "comme -ons"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le verbe à l'imparfait.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Avant, les trains ___ électriques. (être)", hint: "3e pl.", answer: "étaient" },
-        { sentence: "Je ___ la lecture. (détester)", hint: "je", answer: "détestais" },
-        { sentence: "Il ___ à la campagne. (vivre)", hint: "il", answer: "vivait" },
-        { sentence: "Vous ___ dans un studio. (habiter)", hint: "vous", answer: "habitiez" },
-        { sentence: "Il ___ . (pleuvoir)", hint: "impersonnel", answer: "pleuvait" },
-        { sentence: "Je ___ beaucoup. (manger)", hint: "-ger", answer: "mangeais" },
-        { sentence: "Ils ___ à midi. (commencer)", hint: "-cer", answer: "commençaient" },
-        { sentence: "Nous ___ ensemble. (rire)", hint: "double i", answer: "riions" },
-        { sentence: "Vous ___ le soir. (étudier)", hint: "double i", answer: "étudiiez" },
-        { sentence: "Nous ___ cash. (payer)", hint: "-yer", answer: "payions" },
-      ],
-    },
-  ],
+  exercises: [],
 };

@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_FUTUR_IRREGULIERS } from "./grammaire-r7.2-irreguliers";
 
-/** Unité 45 — Le futur simple (G4.15) */
+/** G9.2 — Le futur simple, enrichi avec G19.27 (futur irrégulier) */
 export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
   slug: "a1-gr-futur-simple",
-  code: "G4.15",
+  code: "G9.2",
   level: "A1",
   title: "Le futur simple",
   theory: [
@@ -91,45 +92,7 @@ export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
       type: "note",
       text: "Attention à la différence entre futur proche et futur simple.",
     },
+    ...A2_GR_FUTUR_IRREGULIERS.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Futur simple",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Demain, il ___ dans toutes les régions.", choices: ["pleuvra", "pleut", "a plu"], correctIdx: 0 },
-        { sentence: "Je te ___ demain à 8 heures.", choices: ["téléphonerai", "téléphone", "ai téléphoné"], correctIdx: 0 },
-        { sentence: "Vous ___ ce médicament pendant un mois.", choices: ["prendrez", "prenez", "avez pris"], correctIdx: 0 },
-        { sentence: "Je ___ le bateau. (prendre)", choices: ["prendrai", "prendreai", "prendrais"], correctIdx: 0 },
-        { sentence: "Tu ___ ta chambre. (nettoyer)", choices: ["nettoieras", "nettoyeras", "nettoies"], correctIdx: 0 },
-        { sentence: "Je vous ___ . (appeler)", choices: ["appellerai", "appelerai", "appelle"], correctIdx: 0 },
-        { sentence: "Nous ___ lui un cadeau. (acheter)", choices: ["achèterons", "acheterons", "achetons"], correctIdx: 0 },
-        { sentence: "Il ___ à Paris. (aller)", choices: ["ira", "allera", "va"], correctIdx: 0 },
-        { sentence: "Vous ___ prêts. (être)", choices: ["serez", "êtes", "étiez"], correctIdx: 0 },
-        { sentence: "Nous ___ le travail. (faire)", choices: ["ferons", "faisons", "ferions"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le verbe au futur simple.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ___ d'habitudes. (changer)", hint: "je", answer: "changerai" },
-        { sentence: "Tu ___ moins. (manger)", hint: "tu", answer: "mangeras" },
-        { sentence: "Il ___ des repas légers. (préparer)", hint: "il", answer: "préparera" },
-        { sentence: "Nous ___ une heure. (marcher)", hint: "nous", answer: "marcherons" },
-        { sentence: "Vous ___ des produits frais. (choisir)", hint: "vous", answer: "choisirez" },
-        { sentence: "Ils ___ sûrement. (maigrir)", hint: "ils", answer: "maigriront" },
-        { sentence: "Je ___ le bateau. (prendre)", hint: "-re", answer: "prendrai" },
-        { sentence: "Il ___ dix minutes de retard. (avoir)", hint: "irrégulier", answer: "aura" },
-        { sentence: "Le train ___ au quai 18. (arriver)", hint: "il", answer: "arrivera" },
-        { sentence: "Je ___ venir. (pouvoir)", hint: "irrégulier", answer: "pourrai" },
-      ],
-    },
-  ],
+  exercises: [],
 };

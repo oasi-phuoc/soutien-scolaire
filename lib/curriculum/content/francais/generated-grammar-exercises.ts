@@ -37,6 +37,10 @@ const TRANSFORMATION_TASKS: Record<string, string[]> = {
     "Changez le repère temporel", "Changez le temps du verbe", "Répondez à la question : Quand ?",
     "Classez le marqueur : passé, présent ou futur", "Corrigez l'expression de temps si nécessaire",
   ],
+  "a1-gr-expression-temps-moment": [
+    "Changez le repère temporel", "Changez le temps du verbe", "Répondez à la question : Quand ?",
+    "Classez le marqueur : passé, présent ou futur", "Corrigez l'expression de temps si nécessaire",
+  ],
   "a2-gr-bon-bien-meilleur-mieux": [
     "Corrigez l'erreur éventuelle", "Classez le mot : adjectif ou adverbe", "Transformez au comparatif",
     "Transformez au superlatif", "Mettez le groupe nominal au pluriel", "Mettez au masculin ou au féminin",
@@ -45,7 +49,15 @@ const TRANSFORMATION_TASKS: Record<string, string[]> = {
     "Transformez au comparatif", "Changez le genre", "Mettez au pluriel",
     "Corrigez l'accord", "Mettez au masculin ou au féminin", "Répondez avec un superlatif",
   ],
+  "a1-gr-superlatif": [
+    "Corrigez l'erreur éventuelle", "Classez le mot : adjectif ou adverbe", "Transformez au superlatif",
+    "Transformez au comparatif", "Corrigez l'accord", "Répondez avec un superlatif",
+  ],
   "a1-gr-l14": [
+    "Réécrivez au négatif", "Mettez le nom au pluriel", "Corrigez l'article partitif",
+    "Remplacez le groupe par le pronom en", "Mettez au masculin ou au féminin", "Posez une question sur la quantité",
+  ],
+  "a1-gr-article-partitif": [
     "Réécrivez au négatif", "Mettez le nom au pluriel", "Corrigez l'article partitif",
     "Remplacez le groupe par le pronom en", "Mettez au masculin ou au féminin", "Posez une question sur la quantité",
   ],
@@ -86,6 +98,10 @@ const TRANSFORMATION_TASKS: Record<string, string[]> = {
     "Posez la question correspondante", "Identifiez le complément remplacé",
   ],
   "a2-gr-l39": [
+    "Transformez au superlatif", "Inversez les deux éléments comparés", "Corrigez le comparatif",
+    "Mettez les groupes nominaux au pluriel", "Mettez au masculin ou au féminin", "Répondez en utilisant une comparaison",
+  ],
+  "a1-gr-comparaison-adj-adv": [
     "Transformez au superlatif", "Inversez les deux éléments comparés", "Corrigez le comparatif",
     "Mettez les groupes nominaux au pluriel", "Mettez au masculin ou au féminin", "Répondez en utilisant une comparaison",
   ],
@@ -701,6 +717,13 @@ const PROFILES: Record<string, GrammarProfile> = {
 const GENERATED_GRAMMAR_ALIAS_SLUGS = [
   "a1-gr-question-totale",
   "a1-gr-autres-negations",
+  "a1-gr-pronom-en",
+  "a1-gr-pronoms-relatifs-qui-que-ou",
+  "a1-gr-expression-cause",
+  "a1-gr-article-partitif",
+  "a1-gr-expression-temps-moment",
+  "a1-gr-comparaison-adj-adv",
+  "a1-gr-superlatif",
 ] as const;
 
 function renumberExercises(exercises: Exercise[]): Exercise[] {
@@ -720,6 +743,37 @@ function generatedExercisesForAlias(slug: string): Exercise[] {
 
   if (slug === "a1-gr-autres-negations") {
     return buildExercises(slug, PROFILES["a2-gr-l42"]);
+  }
+
+  if (slug === "a1-gr-pronom-en") {
+    return buildExercises("a2-gr-l36", PROFILES["a2-gr-l36"]);
+  }
+
+  if (slug === "a1-gr-pronoms-relatifs-qui-que-ou") {
+    return buildExercises("a2-gr-l19", PROFILES["a2-gr-l19"]);
+  }
+
+  if (slug === "a1-gr-expression-cause") {
+    return buildExercises("a2-gr-l52", PROFILES["a2-gr-l52"]);
+  }
+
+  if (slug === "a1-gr-article-partitif") {
+    return buildExercises(slug, PROFILES["a1-gr-l14"]);
+  }
+
+  if (slug === "a1-gr-expression-temps-moment") {
+    return buildExercises(slug, PROFILES["a1-gr-expressions-temps"]);
+  }
+
+  if (slug === "a1-gr-comparaison-adj-adv") {
+    return buildExercises(slug, PROFILES["a2-gr-l39"]);
+  }
+
+  if (slug === "a1-gr-superlatif") {
+    return renumberExercises([
+      ...buildExercises(slug, PROFILES["a2-gr-bon-bien-meilleur-mieux"]),
+      ...buildExercises(slug, PROFILES["a2-gr-superlatif"]),
+    ]);
   }
 
   return [];

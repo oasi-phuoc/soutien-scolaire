@@ -509,10 +509,7 @@ const CONJ_MERGE_INTO: Record<string, string[]> = {
   "a1-gr-passe-recent": ["a1-conj-l28"],
   "a1-gr-passe-compose-avoir": ["a1-conj-l29", "negation-passe-compose"],
   "a1-gr-passe-compose-etre": ["a1-conj-l30"],
-  "a1-gr-imparfait": ["a2-conj-l07"],
   "a1-gr-futur-proche": ["a1-conj-l20"],
-  "a1-gr-futur-simple": ["a2-conj-l08"],
-  "a1-gr-conditionnel-present": ["a2-conj-l04"],
   "a1-gr-imperatif": ["a2-conj-l05"],
 };
 

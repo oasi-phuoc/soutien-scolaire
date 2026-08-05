@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_L52 } from "./grammaire-r4.28";
 
-/** Unité 76 — L'expression de la cause (G4.46) */
+/** G17.1 — L'expression de la cause, enrichie avec G19.21 */
 export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
   slug: "a1-gr-expression-cause",
-  code: "G4.46",
+  code: "G17.1",
   level: "A1",
   title: "L'expression de la cause",
   theory: [
@@ -70,45 +71,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
       type: "note",
       text: "Articles contractés : {a}à cause du{/a} mauvais temps ; {a}grâce au{/a} soleil ; {a}en raison des{/a} pluies.",
     },
+    ...A2_GR_L52.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Expression de la cause",
-      instruction: "Choisissez la forme qui convient.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ne me repose pas ___ je veux finir.", choices: ["parce que", "comme", "grâce à"], correctIdx: 0 },
-        { sentence: "___ je veux finir ce soir, je ne m'arrête pas.", choices: ["Comme", "Parce que", "Grâce à"], correctIdx: 0 },
-        { sentence: "___ tu es fatigué, va te reposer !", choices: ["Puisque", "Parce que", "Grâce à"], correctIdx: 0 },
-        { sentence: "Je suis en retard ___ toi.", choices: ["à cause de", "grâce à", "parce que"], correctIdx: 0 },
-        { sentence: "Je finis plus vite ___ toi.", choices: ["grâce à", "à cause de", "parce que"], correctIdx: 0 },
-        { sentence: "La route est fermée ___ mauvais temps.", choices: ["en raison du", "grâce au", "parce que le"], correctIdx: 0 },
-        { sentence: "___ est toujours en tête de phrase.", choices: ["Comme", "Parce que", "Afin que"], correctIdx: 0 },
-        { sentence: "… parce que je suis fatigué et ___ je dois me lever tôt.", choices: ["que", "parce que", "comme"], correctIdx: 0 },
-        { sentence: "— Pourquoi ? — ___ j'étais malade.", choices: ["Parce que", "Comme", "Grâce à"], correctIdx: 0 },
-        { sentence: "___ soleil, on est sortis. (positif)", choices: ["Grâce au", "À cause du", "Parce que le"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Complétez avec l'expression de cause attendue.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je ne me repose pas ___ je veux finir.", hint: "pourquoi", answer: "parce que" },
-        { sentence: "___ je veux finir, je ne m'arrête pas.", hint: "en tête", answer: "Comme" },
-        { sentence: "___ tu es fatigué, va te reposer !", hint: "évident", answer: "Puisque" },
-        { sentence: "Je suis en retard ___ toi.", hint: "négatif", answer: "à cause de" },
-        { sentence: "Je finis plus vite ___ toi.", hint: "positif", answer: "grâce à" },
-        { sentence: "La route est fermée ___ mauvais temps.", hint: "officiel + contraction", answer: "en raison du" },
-        { sentence: "… parce que je suis fatigué et ___ je dois me lever tôt.", hint: "2e cause", answer: "que" },
-        { sentence: "___ mauvais temps… (négatif, contraction)", hint: "à cause", answer: "À cause du" },
-        { sentence: "___ soleil… (positif, contraction)", hint: "grâce", answer: "Grâce au" },
-        { sentence: "Va te reposer ___ tu es fatigué !", hint: "2e place", answer: "puisque" },
-      ],
-    },
-  ],
+  exercises: [],
 };

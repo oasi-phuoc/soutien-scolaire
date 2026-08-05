@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_L36 } from "./grammaire-r4.23";
 
-/** Unité 54 — Le pronom complément en (G4.24) */
+/** G12.3 — Le pronom complément en, enrichi avec G19.19 (Y et EN) */
 export const A1_GR_PRONOM_EN: GrammarLesson = {
   slug: "a1-gr-pronom-en",
-  code: "G4.24",
+  code: "G12.3",
   level: "A1",
   title: "Le pronom complément en",
   theory: [
@@ -50,45 +51,7 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
       ],
       allBullets: true,
     },
+    ...A2_GR_L36.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Pronom en",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je n'___ ai plus. (des croissants)", choices: ["en", "y", "les"], correctIdx: 0 },
-        { sentence: "Tu veux du café ? — J'___ veux bien.", choices: ["en", "y", "le"], correctIdx: 0 },
-        { sentence: "J'ai deux frères. — J'___ ai trois.", choices: ["en", "y", "les"], correctIdx: 0 },
-        { sentence: "Il y a beaucoup d'invités. → Il y ___ a beaucoup.", choices: ["en", "les", "des"], correctIdx: 0 },
-        { sentence: "J'ai acheté un paquet de café. → J'___ ai acheté un.", choices: ["en", "y", "le"], correctIdx: 0 },
-        { sentence: "Tu mets combien d'œufs ? — J'___ mets quatre.", choices: ["en", "y", "les"], correctIdx: 0 },
-        { sentence: "Il va ___ inviter trois.", choices: ["en", "y", "les"], correctIdx: 0 },
-        { sentence: "Je n'___ ai pas.", choices: ["en", "y", "les"], correctIdx: 0 },
-        { sentence: "Il ne va pas ___ acheter.", choices: ["en", "y", "les"], correctIdx: 0 },
-        { sentence: "« En » remplace un nom précédé d'une ___ .", choices: ["quantité", "préposition à", "préposition sur"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez en ou la quantité qui manque.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Désolée, je n'___ ai plus.", hint: "pronom", answer: "en" },
-        { sentence: "Tu veux du thé ? — J'___ veux bien.", hint: "pronom", answer: "en" },
-        { sentence: "Vous avez des frères ? — Oui, j'en ai ___ .", hint: "nombre", answer: "trois" },
-        { sentence: "Il ___ a invité sept.", hint: "pronom", answer: "en" },
-        { sentence: "Il va ___ inviter trois.", hint: "pronom", answer: "en" },
-        { sentence: "Elle n'___ a pas acheté.", hint: "pronom", answer: "en" },
-        { sentence: "Il y ___ a beaucoup.", hint: "pronom", answer: "en" },
-        { sentence: "J'___ mets quatre.", hint: "pronom", answer: "en" },
-        { sentence: "Il ne va pas ___ acheter.", hint: "pronom", answer: "en" },
-        { sentence: "Des fêtes, j'___ organise souvent.", hint: "pronom", answer: "en" },
-      ],
-    },
-  ],
+  exercises: [],
 };

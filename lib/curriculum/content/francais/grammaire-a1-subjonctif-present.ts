@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_SUBJONCTIF } from "./grammaire-r6.5";
 
-/** Unité 70 — Le subjonctif présent (G4.40) */
+/** G16.4 — Le subjonctif présent, enrichi avec G19.32 */
 export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
   slug: "a1-gr-subjonctif-present",
-  code: "G4.40",
+  code: "G16.4",
   level: "A1",
   title: "Le subjonctif présent",
   theory: [
@@ -125,45 +126,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
       ],
       noBulletItems: [0],
     },
+    ...A2_GR_SUBJONCTIF.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Subjonctif présent",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Il faut que nous ___ un permis.", choices: ["prenions", "prenons", "prendrons"], correctIdx: 0 },
-        { sentence: "Je suis surpris qu'aucun vaccin ne ___ nécessaire.", choices: ["soit", "est", "sera"], correctIdx: 0 },
-        { sentence: "Il faut que je ___ . (parler)", choices: ["parle", "parles", "parlions"], correctIdx: 0 },
-        { sentence: "Il faut que nous ___ . (prendre)", choices: ["prenions", "prenons", "prennent"], correctIdx: 0 },
-        { sentence: "Il faut que tu ___ . (être)", choices: ["sois", "es", "seras"], correctIdx: 0 },
-        { sentence: "Il faut que tu ___ un visa. (avoir)", choices: ["aies", "as", "ailles"], correctIdx: 0 },
-        { sentence: "Il faut que tu ___ au consulat. (aller)", choices: ["ailles", "vas", "aies"], correctIdx: 0 },
-        { sentence: "Je veux que tout ___ prêt.", choices: ["soit", "est", "sera"], correctIdx: 0 },
-        { sentence: "J'espère que vous ___ ça. (aimer)", choices: ["aimez", "aimiez", "aimiez-vous"], correctIdx: 0 },
-        { sentence: "Je souhaite ___ . (même sujet)", choices: ["partir", "que je parte", "que je partis"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le verbe au subjonctif présent.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Il faut que je ___ . (parler)", hint: "je", answer: "parle" },
-        { sentence: "Il faut que nous ___ . (parler)", hint: "nous", answer: "parlions" },
-        { sentence: "Il faut que je ___ . (prendre)", hint: "je", answer: "prenne" },
-        { sentence: "Il faut que vous ___ . (prendre)", hint: "vous", answer: "preniez" },
-        { sentence: "Il faut qu'il ___ . (être)", hint: "il", answer: "soit" },
-        { sentence: "Il faut que nous ___ . (avoir)", hint: "nous", answer: "ayons" },
-        { sentence: "Il faut qu'elle ___ . (aller)", hint: "elle", answer: "aille" },
-        { sentence: "Il faut que je ___ . (faire)", hint: "je", answer: "fasse" },
-        { sentence: "Il faut que vous ___ . (pouvoir)", hint: "vous", answer: "puissiez" },
-        { sentence: "Je l'appelle avant qu'il ___ . (partir)", hint: "conjonction", answer: "parte" },
-      ],
-    },
-  ],
+  exercises: [],
 };

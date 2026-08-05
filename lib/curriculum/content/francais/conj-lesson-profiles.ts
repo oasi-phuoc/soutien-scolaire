@@ -316,6 +316,22 @@ export const TENSE_LESSON_PROFILES: Record<string, LessonConjProfile> = {
   },
 };
 
+const TENSE_LESSON_PROFILE_ALIASES: Record<string, string> = {
+  "a1-gr-imparfait": "a2-gr-imparfait-irreguliers",
+  "a1-gr-imparfait-passe-compose": "a2-gr-passe-compose-ou-imparfait",
+  "a1-gr-futur-simple": "a2-gr-futur-irreguliers",
+  "a1-gr-gerondif": "a2-gr-gerondif",
+  "a1-gr-subjonctif-present": "a2-gr-subjonctif",
+  "a1-gr-conditionnel-present": "a2-gr-conditionnel",
+};
+
+for (const [targetSlug, sourceSlug] of Object.entries(TENSE_LESSON_PROFILE_ALIASES)) {
+  const sourceProfile = TENSE_LESSON_PROFILES[sourceSlug];
+  if (sourceProfile) {
+    TENSE_LESSON_PROFILES[targetSlug] = { ...sourceProfile, slug: targetSlug };
+  }
+}
+
 /** Profils négation seule pour enrichir R2 (présent). */
 export const R2_NEGATION_PROFILES: Record<string, LessonConjProfile> = {
   "a1-conj-l08": {

@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { GR_MARQUEURS_TEMPS_COMPLET } from "./grammaire-r9.1-marqueurs-temps";
 
-/** Unité 77 — L'expression de la conséquence (G4.47) */
+/** G17.2 — L'expression de la conséquence, enrichie avec G19.20 */
 export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
   slug: "a1-gr-expression-consequence",
-  code: "G4.47",
+  code: "G17.2",
   level: "A1",
   title: "L'expression de la conséquence",
   theory: [
@@ -67,45 +68,7 @@ export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
       type: "note",
       text: "Avec {a}avoir besoin/chaud/envie/faim/froid/mal/peur/sommeil{/a} et {a}faire attention/beau/chaud/froid/mal/plaisir{/a}, on utilise {a}si{/a} ou {a}tellement{/a}.",
     },
+    ...GR_MARQUEURS_TEMPS_COMPLET.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Conséquence",
-      instruction: "Choisissez la forme qui convient.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Il a plu toute la journée ___ je suis restée chez moi.", choices: ["alors", "avant que", "afin que"], correctIdx: 0 },
-        { sentence: "Il a plu ___ je suis restée chez moi.", choices: ["si bien que", "avant que", "afin de"], correctIdx: 0 },
-        { sentence: "Il fait très chaud, ___ la ville distribue de l'eau.", choices: ["c'est la raison pour laquelle", "avant que", "afin que"], correctIdx: 0 },
-        { sentence: "Il a fait ___ chaud ___ les piscines sont restées ouvertes.", choices: ["si / que", "tellement / de", "si / de"], correctIdx: 0 },
-        { sentence: "Il pleut ___ la rue est inondée.", choices: ["tellement que", "tellement de", "si de"], correctIdx: 0 },
-        { sentence: "Il y a ___ vent ___ je ne peux pas tenir debout.", choices: ["tellement de / que", "tellement / de", "si / de"], correctIdx: 0 },
-        { sentence: "Il a ___ plu que la rue est inondée.", choices: ["tellement", "si", "alors"], correctIdx: 0 },
-        { sentence: "___ est plus formel.", choices: ["Par conséquent", "Alors", "C'est pour ça que"], correctIdx: 0 },
-        { sentence: "___ est plus familier.", choices: ["C'est pour ça que", "Par conséquent", "Si bien que"], correctIdx: 0 },
-        { sentence: "Vous avez trop chaud ? ___ , restez chez vous !", choices: ["Alors", "Avant que", "Afin que"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Complétez avec le mot ou l'expression de conséquence.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Il a plu toute la journée ___ je suis restée chez moi.", hint: "alors / donc", answer: "alors" },
-        { sentence: "Il a plu ___ je suis restée chez moi.", hint: "si bien que", answer: "si bien que" },
-        { sentence: "Il a fait ___ chaud ___ les piscines sont ouvertes.", hint: "si… que", answer: "si" },
-        { sentence: "Il pleut ___ que la rue est inondée.", hint: "intensité", answer: "tellement" },
-        { sentence: "Il y a ___ de vent que je ne tiens pas debout.", hint: "quantité", answer: "tellement" },
-        { sentence: "Il a ___ plu que la rue est inondée.", hint: "place au PC", answer: "tellement" },
-        { sentence: "Il fait chaud, ___ on boit beaucoup. (formel)", hint: "formel", answer: "par conséquent" },
-        { sentence: "Il pleut, ___ je prends mon parapluie. (familier)", hint: "familier", answer: "c'est pour ça que" },
-        { sentence: "Il fait ___ chaud que j'ai besoin d'eau.", hint: "si/tellement", answer: "si" },
-        { sentence: "Canicule ! ___ , restez chez vous !", hint: "conséquence", answer: "Alors" },
-      ],
-    },
-  ],
+  exercises: GR_MARQUEURS_TEMPS_COMPLET.exercises,
 };
