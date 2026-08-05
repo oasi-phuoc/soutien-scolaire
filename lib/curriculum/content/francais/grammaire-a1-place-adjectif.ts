@@ -14,58 +14,96 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "En général, l'adjectif qualificatif se place {a}après{/a} le nom. → C'est un canapé confortable.",
-        "Certains adjectifs courts se placent en général {a}avant{/a} le nom : beau, joli, petit, grand, gros, bon, mauvais, jeune, vieux, nouveau. → J'ai un nouveau lit et un joli tapis.",
-        "Les adjectifs longs, de nationalité, de forme et de couleur se placent toujours {a}après{/a} le nom. → un ami japonais ; un fauteuil confortable ; une table ronde ; des meubles blancs.",
+        "En général, l'adjectif qualificatif se place {a}après{/a} le nom.",
       ],
-      allBullets: true,
+      noBulletItems: [0],
     },
     {
-      type: "note",
-      text: "Avant un nom qui commence par une voyelle ou un h muet : beau → bel ; vieux → vieil ; nouveau → nouvel. → un bel appartement ; un vieil homme ; un nouvel ordinateur.",
-    },
-    {
-      type: "heading",
-      text: "Prononciation",
-    },
-    {
-      type: "plain_list",
+      type: "highlight",
+      label: "",
       items: [
-        "L'accent tonique tombe sur la dernière syllabe du groupe nominal. → C'est un beau vase. ; Tu as une jolie chaise.",
-        "Liaison si l'adjectif avant le nom se termine par une consonne et que le nom commence par une voyelle ou un h muet. → Il a un petit appartement.",
-        "Devant une voyelle ou un h muet, le {a}d{/a} de {a}grand{/a} se prononce comme un {a}t{/a}. → mon grand ami ; un grand hôpital.",
-        "Avec liaison, {a}bon{/a}, {a}premier{/a}, {a}dernier{/a} se prononcent comme au féminin. → un bon acteur ; mon premier ordinateur.",
-      ],
-      allBullets: true,
-    },
-    {
-      type: "heading",
-      text: "Place et sens des adjectifs",
-    },
-    {
-      type: "plain_list",
-      items: [
-        "Certains adjectifs changent de sens selon qu'ils sont placés avant ou après le nom.",
-        "Exemple : une personne {a}seule{/a} (= sans amis) ≠ une {a}seule{/a} personne (= une seule).",
+        "J'habite dans une maison moderne.",
+        "Elle porte une robe rouge.",
       ],
       noBulletItems: [0, 1],
+    },
+    {
+      type: "heading",
+      text: "Les adjectifs placés avant le nom",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Certains adjectifs courts et très fréquents se placent généralement avant le nom. Ils appartiennent souvent à la catégorie {a}BAGS{/a}.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Catégorie", "Adjectifs fréquents"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}B{/a}eauté", "beau, joli"],
+        ["{a}A{/a}ge", "jeune, vieux, nouveau, ancien*"],
+        ["{a}G{/a}randeur", "grand, petit, gros, long, court"],
+        ["{a}S{/a}entiment", "bon, mauvais, gentil, méchant"],
+      ],
+    },
+    {
+      type: "heading",
+      text: "Les adjectifs placés après le nom",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Les adjectifs se placent toujours après le nom lorsqu'ils indiquent :",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Type", "Exemples"],
+      boldFirstCol: true,
+      rows: [
+        ["la nationalité", "un étudiant suisse\nune amie japonaise"],
+        ["la couleur", "une voiture rouge\ndes meubles blancs"],
+        ["la forme", "une table ronde\nune fenêtre carrée"],
+        ["la religion", "une école catholique"],
+        ["la matière", "une bague métallique"],
+        ["les adjectifs longs ou participiaux", "un exercice intéressant\nune personne fatiguée"],
+      ],
+    },
+    {
+      type: "heading",
+      text: "Les adjectifs qui peuvent être avant ou après",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Certains adjectifs changent de place selon le sens recherché.",
+      ],
+      noBulletItems: [0],
     },
     {
       type: "grid",
       headers: ["Adjectif", "Après le nom", "Avant le nom"],
       boldFirstCol: true,
+      colWidths: ["22%", "39%", "39%"],
       rows: [
-        ["ancien / ancienne", "voitures anciennes (= antiques)", "mon ancienne voiture (= d'avant)"],
-        ["cher / chère", "une maison très chère (= coûteuse)", "Chère amie… (= chère / aimée)"],
-        ["curieux / curieuse", "gens trop curieux (= indiscrets)", "une curieuse personne (= étrange)"],
-        ["dernier / dernière", "le mois dernier (= qui précède)", "la dernière ville (= la plus récente)"],
-        ["différent / différente", "endroits différents (= variés)", "différents pays (= plusieurs)"],
-        ["grand / grande", "femmes trop grandes (= de taille)", "une grande sportive (= remarquable)"],
-        ["pauvre / pauvre", "personnes pauvres (= sans argent)", "cette pauvre femme (= malheureuse)"],
-        ["prochain / prochaine", "la semaine prochaine", "le prochain train (= le suivant)"],
-        ["petit / petite", "hommes petits (= de taille)", "un petit voyageur (= qui voyage peu)"],
-        ["propre / propre", "rues propres (= nettes)", "mon propre ascenseur (= à moi)"],
-        ["seul / seule", "une personne seule (= isolée)", "une seule personne (= une seule)"],
+        ["{a}ancien / ancienne{/a}", "un bâtiment ancien\n(= vieux)", "mon ancienne maison\n(= d'avant)"],
+        ["{a}cher / chère{/a}", "une voiture chère\n(= coûteuse)", "mon cher ami\n(= bien-aimé)"],
+        ["{a}curieux / curieuse{/a}", "des voisins curieux\n(= indiscrets)", "une curieuse histoire\n(= étrange)"],
+        ["{a}dernier / dernière{/a}", "le mois dernier\n(= précédent)", "la dernière page\n(= finale)"],
+        ["{a}différent / différente{/a}", "des exercices différents\n(= variés)", "différentes personnes\n(= plusieurs)"],
+        ["{a}grand / grande{/a}", "un homme grand\n(= de grande taille)", "un grand homme\n(= célèbre)"],
+        ["{a}pauvre{/a}", "un homme pauvre\n(= sans argent)", "ce pauvre homme\n(= malheureux)"],
+        ["{a}prochain / prochaine{/a}", "la semaine prochaine\n(= à venir)", "le prochain train\n(= le suivant)"],
+        ["{a}petit / petite{/a}", "une fille petite\n(= de petite taille)", "un petit cadeau\n(= modeste)"],
+        ["{a}propre{/a}", "une cuisine propre\n(= nette)", "ma propre chambre\n(= à moi)"],
+        ["{a}seul / seule{/a}", "une personne seule\n(= isolée)", "une seule personne\n(= une seule)"],
+        ["{a}simple{/a}", "une idée simple\n(= facile)", "une simple erreur\n(= seulement)"],
+        ["{a}vrai / vraie{/a}", "une histoire vraie\n(= réelle)", "un vrai ami\n(= authentique)"],
+        ["{a}brave{/a}", "un homme brave\n(= courageux)", "un brave homme\n(= gentil)"],
       ],
     },
     {
@@ -75,10 +113,45 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Quand plusieurs adjectifs accompagnent un nom, celui qui est le plus près du nom en définit le sens principal. → Une élection présidentielle espagnole.",
-        "Les adjectifs numéraux se placent toujours avant les autres adjectifs. → Les quatre premiers étages ; les deux dernières places ; les trois prochains trains.",
+        "Lorsqu'un nom est accompagné de plusieurs adjectifs, ils suivent généralement cet ordre :",
       ],
-      allBullets: true,
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}1.{/a} adjectif numéral",
+        "{a}2.{/a} adjectif BAGS",
+        "{a}3.{/a} nom",
+        "{a}4.{/a} adjectifs descriptifs",
+      ],
+      noBulletItems: [0, 1, 2, 3],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "les trois petits chiens noirs",
+        "les quatre nouveaux élèves français",
+        "une grande maison blanche",
+      ],
+      noBulletItems: [0, 1, 2],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "L'adjectif placé le plus près du nom précise généralement sa caractéristique principale.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "une élection présidentielle espagnole",
+        "une voiture électrique allemande",
+      ],
+      noBulletItems: [0, 1],
     },
   ],
   exercises: [
