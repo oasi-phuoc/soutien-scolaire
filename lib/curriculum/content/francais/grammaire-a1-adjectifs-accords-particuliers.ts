@@ -10,6 +10,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "heading",
       text: "Les adjectifs de couleur",
+      trans: { en: "Color adjectives", ar: "صفات اللون", fa: "صفت‌های رنگ", ti: "ቅጽላት ሕብሪ", uk: "Прикметники кольору" },
     },
     {
       type: "plain_list",
@@ -17,6 +18,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "En général, les adjectifs de couleur s'accordent en genre et en nombre avec le nom qu'ils qualifient.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["In general, color adjectives agree in gender and number with the noun they describe."],
+        ar: ["عموماً، تتوافق صفات اللون في الجنس والعدد مع الاسم الذي تصفه."],
+        fa: ["به طور کلی، صفت‌های رنگ از نظر جنس و تعداد با اسمی که توصیف می‌کنند مطابقت می‌کنند."],
+        ti: ["ብሓፈሻ፣ ቅጽላት ሕብሪ ምስቲ ዝገልጽዎ ስም ብጾታን ብቍጽርን ይሰማምዑ።"],
+        uk: ["Загалом прикметники кольору узгоджуються в роді й числі з іменником, який вони описують."],
+      },
     },
     {
       type: "highlight",
@@ -33,6 +41,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Les adjectifs de couleur sont invariables dans trois cas.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Color adjectives are invariable in three cases."],
+        ar: ["صفات اللون لا تتغير في ثلاث حالات."],
+        fa: ["صفت‌های رنگ در سه حالت تغییر نمی‌کنند."],
+        ti: ["ቅጽላት ሕብሪ ኣብ ሰለስተ ኩነታት ኣይቕየሩን።"],
+        uk: ["Прикметники кольору незмінні у трьох випадках."],
+      },
     },
     {
       type: "plain_list",
@@ -40,6 +55,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "{a}1.{/a} Quand la couleur est un nom de matière, de fruit, de fleur ou d'objet",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["{a}1.{/a} When the color is a noun for a material, fruit, flower, or object"],
+        ar: ["{a}1.{/a} عندما يكون اللون اسماً لمادة أو فاكهة أو زهرة أو شيء"],
+        fa: ["{a}1.{/a} وقتی رنگ، اسم یک ماده، میوه، گل یا شیء باشد"],
+        ti: ["{a}1.{/a} እቲ ሕብሪ ስም ናይ ንጥረ ነገር፣ ፍረ፣ ዕምባባ ወይ ነገር ክኸውን ከሎ"],
+        uk: ["{a}1.{/a} Коли колір є назвою матеріалу, фрукта, квітки або предмета"],
+      },
     },
     {
       type: "highlight",
@@ -57,6 +79,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Par contre, certains noms sont devenus de véritables adjectifs et s'accordent.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["However, some nouns have become true adjectives and agree."],
+        ar: ["لكن بعض الأسماء أصبحت صفات حقيقية وتتوافق."],
+        fa: ["با این حال، برخی اسم‌ها به صفت‌های واقعی تبدیل شده‌اند و مطابقت می‌کنند."],
+        ti: ["ግን ገለ ስማት ናይ ብሓቂ ቅጽላት ኮይኖም ይሰማምዑ።"],
+        uk: ["Однак деякі іменники стали справжніми прикметниками й узгоджуються."],
+      },
     },
     {
       type: "highlight",
@@ -75,6 +104,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "{a}2.{/a} Quand la couleur est précisée par un autre adjectif ou un nom",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["{a}2.{/a} When the color is specified by another adjective or a noun"],
+        ar: ["{a}2.{/a} عندما يحدَّد اللون بصفة أخرى أو باسم"],
+        fa: ["{a}2.{/a} وقتی رنگ با صفتی دیگر یا با یک اسم مشخص شود"],
+        ti: ["{a}2.{/a} እቲ ሕብሪ ብኻልእ ቅጽል ወይ ብስም ክተንጸር ከሎ"],
+        uk: ["{a}2.{/a} Коли колір уточнюється іншим прикметником або іменником"],
+      },
     },
     {
       type: "highlight",
@@ -91,6 +127,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "{a}3.{/a} Quand la couleur est exprimée par deux adjectifs",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["{a}3.{/a} When the color is expressed by two adjectives"],
+        ar: ["{a}3.{/a} عندما يعبَّر عن اللون بصفتين"],
+        fa: ["{a}3.{/a} وقتی رنگ با دو صفت بیان شود"],
+        ti: ["{a}3.{/a} እቲ ሕብሪ ብኽልተ ቅጽላት ክግለጽ ከሎ"],
+        uk: ["{a}3.{/a} Коли колір виражений двома прикметниками"],
+      },
     },
     {
       type: "highlight",
@@ -103,12 +146,14 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "heading",
       text: "L'adjectif demi",
+      trans: { en: "The adjective demi", ar: "صفة demi", fa: "صفت demi", ti: "ቅጽል demi", uk: "Прикметник demi" },
     },
     {
       type: "heading",
       text: "Devant le nom",
       accent: true,
       sub: true,
+      trans: { en: "Before the noun", ar: "قبل الاسم", fa: "پیش از اسم", ti: "ቅድሚ ስም", uk: "Перед іменником" },
     },
     {
       type: "plain_list",
@@ -116,6 +161,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Demi est invariable.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Demi is invariable."],
+        ar: ["Demi لا يتغير."],
+        fa: ["Demi تغییر نمی‌کند."],
+        ti: ["Demi ኣይቕየርን።"],
+        uk: ["Demi є незмінним."],
+      },
     },
     {
       type: "highlight",
@@ -132,6 +184,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       text: "Après le nom",
       accent: true,
       sub: true,
+      trans: { en: "After the noun", ar: "بعد الاسم", fa: "پس از اسم", ti: "ድሕሪ ስም", uk: "Після іменника" },
     },
     {
       type: "plain_list",
@@ -139,6 +192,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Demi s'accorde seulement en genre avec le nom.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Demi agrees only in gender with the noun."],
+        ar: ["يتوافق Demi مع الاسم في الجنس فقط."],
+        fa: ["Demi فقط از نظر جنس با اسم مطابقت می‌کند."],
+        ti: ["Demi ምስቲ ስም ብጾታ ጥራይ ይሰማማዕ።"],
+        uk: ["Demi узгоджується з іменником лише за родом."],
+      },
     },
     {
       type: "highlight",
@@ -152,6 +212,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "heading",
       text: "Les adjectifs numéraux",
+      trans: { en: "Numeral adjectives", ar: "الصفات العددية", fa: "صفت‌های عددی", ti: "ቅጽላት ቍጽሪ", uk: "Числівникові прикметники" },
     },
     {
       type: "plain_list",
@@ -159,12 +220,20 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Les adjectifs numéraux indiquent une quantité ou un rang.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Numeral adjectives indicate a quantity or an order."],
+        ar: ["الصفات العددية تدل على كمية أو ترتيب."],
+        fa: ["صفت‌های عددی مقدار یا رتبه را نشان می‌دهند."],
+        ti: ["ቅጽላት ቍጽሪ መጠን ወይ ቦታ የመልክቱ።"],
+        uk: ["Числівникові прикметники вказують кількість або порядок."],
+      },
     },
     {
       type: "heading",
       text: "Les nombres cardinaux",
       accent: true,
       sub: true,
+      trans: { en: "Cardinal numbers", ar: "الأعداد الأصلية", fa: "عددهای اصلی", ti: "ቍጽሪታት ካርዲናል", uk: "Кількісні числівники" },
     },
     {
       type: "plain_list",
@@ -172,6 +241,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Ils expriment une quantité et sont invariables.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["They express a quantity and are invariable."],
+        ar: ["تعبّر عن كمية وهي لا تتغير."],
+        fa: ["آن‌ها مقدار را بیان می‌کنند و تغییر نمی‌کنند."],
+        ti: ["መጠን ይገልጹን ኣይቕየሩን።"],
+        uk: ["Вони виражають кількість і є незмінними."],
+      },
     },
     {
       type: "highlight",
@@ -187,6 +263,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       text: "Mille",
       accent: true,
       sub: true,
+      trans: { en: "Thousand", ar: "ألف", fa: "هزار", ti: "ሽሕ", uk: "Тисяча" },
     },
     {
       type: "plain_list",
@@ -194,6 +271,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Mille est toujours invariable.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Mille is always invariable."],
+        ar: ["Mille دائماً لا يتغير."],
+        fa: ["Mille همیشه تغییر نمی‌کند."],
+        ti: ["Mille ወትሩ ኣይቕየርን።"],
+        uk: ["Mille завжди є незмінним."],
+      },
     },
     {
       type: "highlight",
@@ -208,6 +292,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       text: "Vingt et cent",
       accent: true,
       sub: true,
+      trans: { en: "Twenty and hundred", ar: "عشرون ومئة", fa: "بیست و صد", ti: "ዕስራን ሚእትን", uk: "Двадцять і сто" },
     },
     {
       type: "plain_list",
@@ -215,6 +300,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Ils sont invariables lorsqu'ils sont seuls ou suivis d'un autre nombre.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["They are invariable when they stand alone or are followed by another number."],
+        ar: ["لا يتغيران عندما يكونان وحدهما أو يتبعهما عدد آخر."],
+        fa: ["وقتی تنها هستند یا عدد دیگری پس از آن‌ها می‌آید، تغییر نمی‌کنند."],
+        ti: ["በይኖም ክኾኑ ከለዉ ወይ ብኻልእ ቍጽሪ ክስዕቡ ከለዉ ኣይቕየሩን።"],
+        uk: ["Вони незмінні, коли стоять окремо або після них іде інше число."],
+      },
     },
     {
       type: "highlight",
@@ -232,6 +324,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Ils prennent un {a}s{/a} lorsqu'ils sont multipliés et ne sont suivis d'aucun autre nombre.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["They take an {a}s{/a} when they are multiplied and are not followed by any other number."],
+        ar: ["يأخذان {a}s{/a} عندما يكونان مضاعفين ولا يتبعهما أي عدد آخر."],
+        fa: ["وقتی چند برابر شده‌اند و هیچ عدد دیگری پس از آن‌ها نمی‌آید، {a}s{/a} می‌گیرند."],
+        ti: ["ተባዚሖም ክኾኑን ብኻልእ ቍጽሪ ዘይስዕቡን ከለዉ {a}s{/a} ይወስዱ።"],
+        uk: ["Вони отримують {a}s{/a}, коли помножені й після них немає іншого числа."],
+      },
     },
     {
       type: "highlight",
@@ -247,6 +346,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       text: "Million et milliard",
       accent: true,
       sub: true,
+      trans: { en: "Million and milliard", ar: "Million و milliard", fa: "Million و milliard", ti: "Millionን milliardን", uk: "Million і milliard" },
     },
     {
       type: "plain_list",
@@ -254,6 +354,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "Million et milliard sont des noms et ils s'accordent.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Million and milliard are nouns, and they agree."],
+        ar: ["Million و milliard اسمان، ويتوافقان."],
+        fa: ["Million و milliard اسم هستند و مطابقت می‌کنند."],
+        ti: ["Millionን milliardን ስማት እዮም፣ ይሰማምዑ።"],
+        uk: ["Million і milliard — це іменники, і вони узгоджуються."],
+      },
     },
     {
       type: "highlight",
