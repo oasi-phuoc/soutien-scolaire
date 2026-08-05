@@ -43,6 +43,46 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "heading",
+      text: "Les adjectifs invariables",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Les adjectifs de couleur dérivés d'un nom sont invariables.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Singulier", "Pluriel"],
+      equalCols: true,
+      rows: [
+        ["une robe orange", "des robes orange"],
+        ["une chaussure marron", "des chaussures marron"],
+        ["un œil noisette", "des yeux noisette"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Exceptions",
+      items: [
+        "Les adjectifs de couleur {a}rose{/a}, {a}mauve{/a}, {a}écarlate{/a} et {a}pourpre{/a} s'accordent en nombre comme les adjectifs réguliers.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Singulier", "Pluriel"],
+      equalCols: true,
+      rows: [
+        ["une robe rose", "des robes rose{a}s{/a}"],
+        ["une fleur mauve", "des fleurs mauve{a}s{/a}"],
+        ["une écharpe écarlate", "des écharpes écarlate{a}s{/a}"],
+        ["une robe pourpre", "des robes pourpre{a}s{/a}"],
+      ],
+    },
+    {
+      type: "heading",
       text: "Cas particuliers",
     },
     {
