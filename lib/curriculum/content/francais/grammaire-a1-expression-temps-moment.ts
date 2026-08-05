@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A1_GR_TIME_EXPRESSIONS } from "./grammaire-r4.2-temps";
 
-/** Unité 50 — L'expression du temps : moment précis ou habitude (G4.20) */
+/** Unité 50 — L'expression du temps : moment précis ou habitude (G11.1) */
 export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {
   slug: "a1-gr-expression-temps-moment",
-  code: "G4.20",
+  code: "G11.1",
   level: "A1",
   title: "L'expression du temps : moment précis ou habitude",
   theory: [
@@ -67,45 +68,7 @@ export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {
       ],
       noBulletItems: [0],
     },
+    ...A1_GR_TIME_EXPRESSIONS.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Expression du temps",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Il arrive ___ 9 heures.", choices: ["à", "en", "le"], correctIdx: 0 },
-        { sentence: "Nous avons une réunion ___ .", choices: ["lundi", "le lundi", "en lundi"], correctIdx: 0 },
-        { sentence: "On est ___ 25 mai.", choices: ["le", "à", "en"], correctIdx: 0 },
-        { sentence: "On est ___ mars.", choices: ["en", "à", "le"], correctIdx: 0 },
-        { sentence: "On est ___ 2015.", choices: ["en", "à", "le"], correctIdx: 0 },
-        { sentence: "___ printemps, les fleurs poussent.", choices: ["Au", "En", "Le"], correctIdx: 0 },
-        { sentence: "Nous sommes ___ XXIe siècle.", choices: ["au", "en", "le"], correctIdx: 0 },
-        { sentence: "J'ai eu des rendez-vous ___ matin.", choices: ["ce", "le", "en"], correctIdx: 0 },
-        { sentence: "___ samedi, je vais à la piscine. (habitude)", choices: ["Le", "En", "À"], correctIdx: 0 },
-        { sentence: "Je ne travaille pas ___ nuit.", choices: ["la", "en", "à"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez à, en, le, la, l', les, au, ce, cet ou cette.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Rendez-vous ___ 17 heures.", hint: "heure", answer: "à" },
-        { sentence: "On est ___ 22 mars.", hint: "date", answer: "le" },
-        { sentence: "On est ___ été.", hint: "saison", answer: "en" },
-        { sentence: "___ printemps, je voyage.", hint: "saison", answer: "Au" },
-        { sentence: "J'ai beaucoup de réunions ___ après-midi. (habitude)", hint: "article", answer: "l'" },
-        { sentence: "Je travaille ___ jours fériés.", hint: "habitude", answer: "les" },
-        { sentence: "J'ai eu des rendez-vous ___ semaine.", hint: "démonstratif", answer: "cette" },
-        { sentence: "___ après-midi, je suis libre.", hint: "démonstratif", answer: "Cet" },
-        { sentence: "Nous sommes ___ XXIe siècle.", hint: "siècle", answer: "au" },
-        { sentence: "___ nuit, je dors mal. (habitude)", hint: "article", answer: "La" },
-      ],
-    },
-  ],
+  exercises: [],
 };

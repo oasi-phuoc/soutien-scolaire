@@ -518,7 +518,7 @@ export const CONJ_SLUG_TO_GRAMMAR: Record<string, string> = {
   "a1-conj-l00": "a1-gr-l01",
   "a1-conj-l01": "a1-gr-etre",
   "a1-conj-l07": "a1-gr-verbes-er",
-  "a1-conj-l08": "a1-conj-l08",
+  "a1-conj-l08": "a1-gr-articles-contractes",
   "a1-conj-l09": "a1-gr-pronominaux",
   "a1-conj-l15": "a1-gr-modaux",
   "a2-conj-irreguliers": "a1-gr-verbes-re-oir",
@@ -597,10 +597,6 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
       .map(addGeneratedExercises)
       .map(augmentGrammarLessonExercises),
   ),
-  ...BASE_CONJUGAISON_LESSONS
-    .filter((l) => l.slug === "a1-conj-l08")
-    .map(applyReorganizedCode)
-    .map(addGeneratedExercises),
 ];
 
 export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS

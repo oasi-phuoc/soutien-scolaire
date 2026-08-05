@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A1_GR_L11 } from "./grammaire-r2.5";
 
-/** Unité 35 — À, en, de avec les noms de villes, pays et continents (G4.5) */
+/** Unité 35 — À, en, de avec les noms de villes, pays et continents (G7.1) */
 export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {
   slug: "a1-gr-a-en-de-lieux",
-  code: "G4.5",
+  code: "G7.1",
   level: "A1",
   title: "À, en, de avec les noms de villes, pays et continents",
   theory: [
@@ -56,45 +57,7 @@ export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {
       ],
       allBullets: true,
     },
+    ...A1_GR_L11.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "À / en / de",
-      instruction: "Choisissez la préposition correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "J'habite ___ Londres.", choices: ["à", "en", "au"], correctIdx: 0 },
-        { sentence: "J'habite ___ Angleterre.", choices: ["en", "à", "au"], correctIdx: 0 },
-        { sentence: "Je suis née ___ Kenya.", choices: ["au", "en", "à"], correctIdx: 0 },
-        { sentence: "Je viens ___ Madrid.", choices: ["de", "à", "en"], correctIdx: 0 },
-        { sentence: "Je vais ___ États-Unis.", choices: ["aux", "au", "en"], correctIdx: 0 },
-        { sentence: "Je viens ___ États-Unis.", choices: ["des", "du", "de"], correctIdx: 0 },
-        { sentence: "Je suis né ___ France.", choices: ["en", "à", "au"], correctIdx: 0 },
-        { sentence: "Il habite ___ Iran.", choices: ["en", "à", "au"], correctIdx: 0 },
-        { sentence: "Elle revient ___ Iran.", choices: ["d'", "de", "du"], correctIdx: 0 },
-        { sentence: "Je rentre ___ Allemagne.", choices: ["d'", "de", "en"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez à, en, au, aux, de, du, des ou d'.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Je suis ___ Paris.", hint: "ville", answer: "à" },
-        { sentence: "Je viens ___ Madrid.", hint: "ville", answer: "de" },
-        { sentence: "Je suis né ___ Sénégal.", hint: "pays ms", answer: "au" },
-        { sentence: "Je viens ___ Sénégal.", hint: "pays ms", answer: "du" },
-        { sentence: "Je vais ___ États-Unis.", hint: "pluriel", answer: "aux" },
-        { sentence: "Je viens ___ États-Unis.", hint: "pluriel", answer: "des" },
-        { sentence: "J'habite ___ France.", hint: "pays fs", answer: "en" },
-        { sentence: "Je reviens ___ France.", hint: "pays fs", answer: "de" },
-        { sentence: "Il habite ___ Iran.", hint: "voyelle", answer: "en" },
-        { sentence: "Je rentre ___ Allemagne.", hint: "élision", answer: "d'" },
-      ],
-    },
-  ],
+  exercises: A1_GR_L11.exercises,
 };

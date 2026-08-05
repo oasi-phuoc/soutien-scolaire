@@ -1,9 +1,10 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_L39 } from "./grammaire-r4.27";
 
-/** Unité 47 — La comparaison avec un adjectif ou un adverbe (G4.17) */
+/** Unité 47 — La comparaison avec un adjectif ou un adverbe (G10.1) */
 export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
   slug: "a1-gr-comparaison-adj-adv",
-  code: "G4.17",
+  code: "G10.1",
   level: "A1",
   title: "La comparaison avec un adjectif ou un adverbe",
   theory: [
@@ -82,45 +83,7 @@ export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
       ],
       noBulletItems: [0],
     },
+    ...A2_GR_L39.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Comparaison",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "La ville est ___ petite que Paris.", choices: ["plus", "moins", "aussi"], correctIdx: 0 },
-        { sentence: "Les appartements sont ___ chers.", choices: ["moins", "plus", "aussi"], correctIdx: 0 },
-        { sentence: "On y vit ___ bien !", choices: ["aussi", "plus", "moins"], correctIdx: 0 },
-        { sentence: "Il y a un ___ lycée.", choices: ["meilleur", "plus bon", "mieux"], correctIdx: 0 },
-        { sentence: "Dans ma ville, c'est ___ .", choices: ["pire", "plus bon", "mieux"], correctIdx: 0 },
-        { sentence: "On parle ___ vite qu'à Strasbourg.", choices: ["plus", "meilleur", "mieux"], correctIdx: 0 },
-        { sentence: "Je me sens ___ à Strasbourg.", choices: ["mieux", "plus bien", "meilleur"], correctIdx: 0 },
-        { sentence: "Ils parlent moins vite que ___ .", choices: ["toi", "tu", "te"], correctIdx: 0 },
-        { sentence: "aussi… que = ___", choices: ["égalité", "supériorité", "infériorité"], correctIdx: 0 },
-        { sentence: "moins… que = ___", choices: ["infériorité", "supériorité", "égalité"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez plus, moins, aussi, meilleur, mieux ou pire.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "Strasbourg est ___ petite que Paris.", hint: ">", answer: "plus" },
-        { sentence: "Les loyers sont ___ chers.", hint: "<", answer: "moins" },
-        { sentence: "La ville est ___ jolie que Paris.", hint: "=", answer: "aussi" },
-        { sentence: "C'est un ___ restaurant.", hint: "≠ plus bon", answer: "meilleur" },
-        { sentence: "Ici, c'est ___ .", hint: "≠ plus mauvais", answer: "pire" },
-        { sentence: "On parle ___ vite qu'ici.", hint: ">", answer: "plus" },
-        { sentence: "Je me sens ___ maintenant.", hint: "≠ plus bien", answer: "mieux" },
-        { sentence: "On vit ___ bien qu'avant.", hint: "=", answer: "aussi" },
-        { sentence: "Ils parlent ___ vite que toi.", hint: "<", answer: "moins" },
-        { sentence: "La situation est ___ qu'hier.", hint: "irrégulier", answer: "pire" },
-      ],
-    },
-  ],
+  exercises: [],
 };

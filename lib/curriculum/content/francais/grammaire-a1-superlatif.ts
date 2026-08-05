@@ -1,9 +1,11 @@
 import type { GrammarLesson } from "../../grammar-data";
+import { A2_GR_BON_BIEN } from "./grammaire-r8.2-bon-bien";
+import { A2_GR_SUPERLATIF } from "./grammaire-r8.3-superlatif";
 
-/** Unité 49 — Le superlatif (G4.19) */
+/** Unité 49 — Le superlatif (G10.3) */
 export const A1_GR_SUPERLATIF: GrammarLesson = {
   slug: "a1-gr-superlatif",
-  code: "G4.19",
+  code: "G10.3",
   level: "A1",
   title: "Le superlatif",
   theory: [
@@ -61,45 +63,8 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
       ],
       noBulletItems: [0],
     },
+    ...A2_GR_BON_BIEN.theory,
+    ...A2_GR_SUPERLATIF.theory,
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Superlatif",
-      instruction: "Choisissez la forme correcte.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "C'est ___ pâtissier de France.", choices: ["le meilleur", "le plus bon", "le mieux"], correctIdx: 0 },
-        { sentence: "C'est la région ___ visitée.", choices: ["la moins", "le moins", "la plus de"], correctIdx: 0 },
-        { sentence: "C'est l'émission qui dure ___ longtemps.", choices: ["le plus", "la plus", "le mieux"], correctIdx: 0 },
-        { sentence: "Il y a ___ de soleil.", choices: ["le plus", "la plus", "le mieux"], correctIdx: 0 },
-        { sentence: "C'est là où il pleut ___ .", choices: ["le moins", "la moins", "le mieux"], correctIdx: 0 },
-        { sentence: "La plus belle région ___ France.", choices: ["de", "du", "des"], correctIdx: 0 },
-        { sentence: "Le plus grand cabaret ___ monde.", choices: ["du", "de", "des"], correctIdx: 0 },
-        { sentence: "C'est lui qui cuisine ___ .", choices: ["le mieux", "le plus bien", "le meilleur"], correctIdx: 0 },
-        { sentence: "C'est ___ émission de la semaine.", choices: ["la pire", "la plus mauvaise", "le mieux"], correctIdx: 0 },
-        { sentence: "C'est le programme ___ intéressant.", choices: ["le moins", "la moins", "moins"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Écrivez le, la, les, plus, moins, meilleur, mieux ou pire.",
-      items: [],
-      poolSize: 5,
-      pool: [
-        { sentence: "C'est ___ meilleure pâtisserie.", hint: "article", answer: "la" },
-        { sentence: "C'est le ___ pâtissier.", hint: "≠ plus bon", answer: "meilleur" },
-        { sentence: "La région la ___ visitée.", hint: "minimum", answer: "moins" },
-        { sentence: "L'émission qui dure le ___ longtemps.", hint: "maximum", answer: "plus" },
-        { sentence: "Il y a le plus ___ soleil.", hint: "de", answer: "de" },
-        { sentence: "Il pleut le ___ .", hint: "minimum", answer: "moins" },
-        { sentence: "Il cuisine le ___ .", hint: "≠ plus bien", answer: "mieux" },
-        { sentence: "C'est la ___ émission.", hint: "négatif", answer: "pire" },
-        { sentence: "Les maisons les ___ originales.", hint: "maximum", answer: "plus" },
-        { sentence: "Le ___ grand cabaret du monde.", hint: "article", answer: "plus" },
-      ],
-    },
-  ],
+  exercises: [],
 };
