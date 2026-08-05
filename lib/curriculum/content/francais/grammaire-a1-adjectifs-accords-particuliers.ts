@@ -14,30 +14,131 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "En général, les adjectifs de couleur s'accordent en genre et en nombre. → une lumière bleue ; des chaussures rouges.",
+        "En général, les adjectifs de couleur s'accordent en genre et en nombre avec le nom qu'ils qualifient.",
       ],
       noBulletItems: [0],
     },
     {
       type: "highlight",
-      label: "Invariables dans trois cas",
+      label: "",
       items: [
-        "Quand la couleur évoque une matière ou un objet : des yeux marron ; des chaises orange ; des cafés noisette. Exceptions qui s'accordent : roses, mauves, violettes ; châtains.",
-        "Quand la couleur est précisée par un autre adjectif ou un nom : des chaussures bleu foncé ; une robe bleu ciel ; une veste bleu marine.",
-        "Quand la couleur est exprimée par deux adjectifs : une veste noir et blanc.",
+        "un pantalon noir → une jupe noir{a}e{/a}",
+        "une voiture rouge → des voitures rouge{a}s{/a}",
       ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "highlight",
+      label: "Exception",
+      items: [
+        "Les adjectifs de couleur sont invariables dans trois cas.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "1. Quand la couleur est un nom de matière, de fruit, de fleur ou d'objet",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "des yeux marron",
+        "des chaises orange",
+        "des cafés noisette",
+      ],
+      noBulletItems: [0, 1, 2],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Par contre, certains noms sont devenus de véritables adjectifs et s'accordent.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "des fleurs rose{a}s{/a}",
+        "des tissus mauve{a}s{/a}",
+        "des robes violett{a}es{/a}",
+        "des cheveux châtain{a}s{/a}",
+      ],
+      noBulletItems: [0, 1, 2, 3],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "2. Quand la couleur est précisée par un autre adjectif ou un nom",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "des chaussures bleu foncé",
+        "une robe bleu ciel",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "3. Quand la couleur est exprimée par deux adjectifs",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "une veste noir et blanc",
+      ],
+      noBulletItems: [0],
     },
     {
       type: "heading",
       text: "L'adjectif demi",
     },
     {
-      type: "plain_list",
+      type: "highlight",
+      label: "Devant le nom",
       items: [
-        "Devant le nom, {a}demi{/a} est invariable (jamais au pluriel). → une demi-heure ; des demi-heures.",
-        "Après le nom, il s'accorde seulement en genre. → une heure et demie ; deux heures et demie.",
+        "Demi est invariable.",
       ],
-      allBullets: true,
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "une demi-heure",
+        "une demi-journée",
+        "des demi-portions",
+      ],
+      noBulletItems: [0, 1, 2],
+    },
+    {
+      type: "highlight",
+      label: "Après le nom",
+      items: [
+        "Demi s'accorde seulement en genre avec le nom.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "une heure et demi{a}e{/a}",
+        "trois jours et demi",
+      ],
+      noBulletItems: [0, 1],
     },
     {
       type: "heading",
@@ -46,25 +147,86 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Les nombres sont en général invariables. → quatre semaines ; huit minutes ; onze mois ; mille fois…",
-        "{a}Million{/a} et {a}milliard{/a} s'accordent. → quatre millions ; six milliards.",
-        "{a}Vingt{/a} et {a}cent{/a} : invariables seuls ou suivis d'un autre nombre. → vingt personnes ; cent jours ; cent vingt personnes ; vingt-trois jours.",
-        "Ils prennent un {a}s{/a} quand un nombre les multiplie, sauf s'ils sont suivis d'un autre nombre. → deux cents euros ; quatre-vingts euros ; mais deux cent dix euros ; quatre-vingt-huit euros.",
+        "Les adjectifs numéraux indiquent une quantité ou un rang.",
       ],
-      allBullets: true,
+      noBulletItems: [0],
     },
     {
-      type: "heading",
-      text: "Prononciation et orthographe",
+      type: "highlight",
+      label: "Les nombres cardinaux",
+      items: [
+        "Ils expriment une quantité et sont invariables.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "dix élèves",
+        "quatre semaines",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "highlight",
+      label: "Mille",
+      items: [
+        "Mille est toujours invariable.",
+        "deux mille francs",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "highlight",
+      label: "Vingt et cent",
+      items: [
+        "Ils sont invariables lorsqu'ils sont seuls ou suivis d'un autre nombre.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "vingt personnes",
+        "cent jours",
+        "quatre-vingt-huit francs",
+      ],
+      noBulletItems: [0, 1, 2],
     },
     {
       type: "plain_list",
       items: [
-        "On fait la liaison devant un nom qui commence par une voyelle ou un h muet. → deux euros ; cent euros ; quatre-vingts euros.",
-        "Trait d'union entre dizaines et unités. → trente-trois ; cent quatre-vingt-deux.",
-        "Trait d'union avec {a}demi{/a} devant le nom. → une demi-heure.",
+        "Ils prennent un {a}s{/a} lorsqu'ils sont multipliés et ne sont suivis d'aucun autre nombre.",
       ],
-      allBullets: true,
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "cinq cent{a}s{/a} mètres",
+        "quatre-vingt{a}s{/a} voitures",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "highlight",
+      label: "Million et milliard",
+      items: [
+        "Million et milliard sont des noms et ils s'accordent.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "deux million{a}s{/a} de livres",
+        "six milliard{a}s{/a} d'habitants",
+      ],
+      noBulletItems: [0, 1],
     },
   ],
   exercises: [
