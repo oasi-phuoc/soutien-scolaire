@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 17 — Le pluriel des adjectifs (G3.3) */
+/** Unité 16 — Le pluriel des adjectifs (G3.2) */
 export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
   slug: "a1-gr-pluriel-adjectifs",
-  code: "G3.3",
+  code: "G3.2",
   level: "A1",
   title: "Le pluriel des adjectifs",
   theory: [

@@ -91,9 +91,7 @@ import { A1_GR_GENRE_CHOSES } from "./content/francais/grammaire-a1-genre-choses
 import { A1_GR_GENRE_ADJECTIFS } from "./content/francais/grammaire-a1-genre-adjectifs";
 import { A1_GR_ADJ_ACCORDS_PART } from "./content/francais/grammaire-a1-adjectifs-accords-particuliers";
 import { A1_GR_PLURIEL_ADJECTIFS } from "./content/francais/grammaire-a1-pluriel-adjectifs";
-import { A1_GR_FEMININ_ADJ_PART } from "./content/francais/grammaire-a1-feminin-adjectifs-particuliers";
 import { A1_GR_PLACE_ADJECTIF } from "./content/francais/grammaire-a1-place-adjectif";
-import { A1_GR_PLACE_ADJECTIF_PART } from "./content/francais/grammaire-a1-place-adjectif-particuliers";
 import { A1_GR_ARTICLES_CONTRACTES } from "./content/francais/grammaire-a1-articles-contractes";
 import { A1_GR_ARTICLE_PARTITIF } from "./content/francais/grammaire-a1-article-partitif";
 import { A1_GR_EXPRESSION_QUANTITE } from "./content/francais/grammaire-a1-expression-quantite";
@@ -254,11 +252,9 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a1-gr-pluriel-noms": "G2.3",
   "a1-gr-noms-composes": "G2.4",
   "a1-gr-genre-adjectifs": "G3.1",
-  "a1-gr-feminin-adjectifs-particuliers": "G3.2",
-  "a1-gr-pluriel-adjectifs": "G3.3",
-  "a1-gr-adjectifs-accords-particuliers": "G3.4",
-  "a1-gr-place-adjectif": "G3.5",
-  "a1-gr-place-adjectif-particuliers": "G3.6",
+  "a1-gr-pluriel-adjectifs": "G3.2",
+  "a1-gr-adjectifs-accords-particuliers": "G3.3",
+  "a1-gr-place-adjectif": "G3.4",
   "a1-gr-l04": "G4.1",
   "a1-gr-articles-contractes": "G4.2",
   "a1-gr-article-partitif": "G4.3",
@@ -441,11 +437,9 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_PLURIEL_NOMS,
   A1_GR_NOMS_COMPOSES,
   A1_GR_GENRE_ADJECTIFS,
-  A1_GR_FEMININ_ADJ_PART,
   A1_GR_PLURIEL_ADJECTIFS,
   A1_GR_ADJ_ACCORDS_PART,
   A1_GR_PLACE_ADJECTIF,
-  A1_GR_PLACE_ADJECTIF_PART,
   A1_GR_ARTICLES_CONTRACTES,
   A1_GR_ARTICLE_PARTITIF,
   A1_GR_EXPRESSION_QUANTITE,
