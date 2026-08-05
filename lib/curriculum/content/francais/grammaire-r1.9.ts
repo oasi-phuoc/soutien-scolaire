@@ -10,7 +10,7 @@ export const A1_GR_CEST: GrammarLesson = {
     {
       type: "heading",
       text: "Utilisation",
-      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", ti: "ኣጠቓቕማ", uk: "Вживання" },
+      trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaal", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
       type: "plain_list",
@@ -21,7 +21,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["{a}Il y a{/a} is used to indicate the presence of a person or thing in a place."],
         ar: ["تُستخدم {a}Il y a{/a} للدلالة على وجود شخص أو شيء في مكان ما."],
         fa: ["از {a}Il y a{/a} برای نشان دادن حضور یک شخص یا وجود یک چیز در مکانی استفاده می‌شود."],
+        pt: ["{a}Il y a{/a} usa-se para indicar a presença de uma pessoa ou de uma coisa num lugar."],
+        so: ["{a}Il y a{/a} waxaa loo isticmaalaa in lagu muujiyo joogitaanka qof ama shay meel ku yaal."],
         ti: ["{a}Il y a{/a} ኣብ ሓደ ቦታ ሰብ ወይ ነገር ከም ዘሎ ንምግላጽ ይጥቀም።"],
+        tr: ["{a}Il y a{/a} bir yerde bir kişi veya şeyin varlığını belirtmek için kullanılır."],
+        ps: ["{a}Il y a{/a} په یو ځای کې د کس یا شي د شتون ښودلو لپاره کارېږي."],
         uk: ["{a}Il y a{/a} вживається, щоб указати на наявність людини або речі в певному місці."],
       },
     },
@@ -40,7 +44,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["{a}C'est{/a} is used to identify a person or thing."],
         ar: ["تُستخدم {a}C'est{/a} للتعريف بشخص أو شيء."],
         fa: ["از {a}C'est{/a} برای شناسایی یک شخص یا چیز استفاده می‌شود."],
+        pt: ["{a}C'est{/a} usa-se para identificar uma pessoa ou uma coisa."],
+        so: ["{a}C'est{/a} waxaa loo isticmaalaa in lagu aqoonsado qof ama shay."],
         ti: ["{a}C'est{/a} ሰብ ወይ ነገር ንምልላይ ይጥቀም።"],
+        tr: ["{a}C'est{/a} bir kişiyi veya şeyi tanımlamak için kullanılır."],
+        ps: ["{a}C'est{/a} د یو کس یا شي د پېژندلو لپاره کارېږي."],
         uk: ["{a}C'est{/a} вживається, щоб ідентифікувати людину або річ."],
       },
     },
@@ -61,7 +69,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["The expressions {a}c'est{/a} and {a}il est{/a} both serve to present or describe someone or something, but they are not used in the same way."],
         ar: ["تُستخدم عبارتا {a}c'est{/a} و{a}il est{/a} كلتاهما لتقديم شخص أو شيء أو وصفه، لكنهما لا تُستخدمان بنفس الطريقة."],
         fa: ["هر دو عبارت {a}c'est{/a} و {a}il est{/a} برای معرفی یا توصیف کسی یا چیزی به کار می‌روند، اما به یک شکل استفاده نمی‌شوند."],
+        pt: ["As expressões {a}c'est{/a} e {a}il est{/a} servem ambas para apresentar ou descrever alguém ou alguma coisa, mas não se usam da mesma maneira."],
+        so: ["Weedhaha {a}c'est{/a} iyo {a}il est{/a} labaduba waxay u adeegaan soo bandhigid ama sharaxaad qof ama shay, laakiin si isku mid ah looma isticmaalo."],
         ti: ["ክልቲኤን ቃላት {a}c'est{/a} ከምኡ'ውን {a}il est{/a} ሰብ ወይ ነገር ንምቕራብ ወይ ንምግላጽ ይጠቅማ፣ ግን ብሓደ መንገዲ ኣይጥቀማሉን።"],
+        tr: ["{a}c'est{/a} ve {a}il est{/a} ifadeleri birini veya bir şeyi tanıtmak ya da betimlemek için kullanılır, ancak aynı şekilde kullanılmaz."],
+        ps: ["عبارتونه {a}c'est{/a} او {a}il est{/a} دواړه د چا یا شي د معرفي کولو یا تشریح لپاره کارېږي، خو په یوه ډول نه کارول کېږي."],
         uk: ["Вирази {a}c'est{/a} та {a}il est{/a} обидва служать для представлення або опису когось чи чогось, але вживаються по-різному."],
       },
     },
@@ -72,7 +84,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["Singular", "Plural", "Use"],
         ar: ["المفرد", "الجمع", "الاستخدام"],
         fa: ["مفرد", "جمع", "کاربرد"],
+        pt: ["Singular", "Plural", "Uso"],
+        so: ["Keli", "Jamac", "Isticmaal"],
         ti: ["ንጽል", "ብዙሕ", "ኣጠቓቕማ"],
+        tr: ["Tekil", "Çoğul", "Kullanım"],
+        ps: ["مفرد", "جمع", "کارونه"],
         uk: ["Однина", "Множина", "Вживання"],
       },
       rows: [
@@ -85,7 +101,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: [["Il y a", "Il y a", "Indicate presence"], ["C'est", "Ce sont", "Identify or introduce"], ["Il est", "Ils sont", "Describe in the masculine"], ["Elle est", "Elles sont", "Describe in the feminine"]],
         ar: [["Il y a", "Il y a", "الدلالة على الوجود"], ["C'est", "Ce sont", "التعريف أو التقديم"], ["Il est", "Ils sont", "الوصف بصيغة المذكر"], ["Elle est", "Elles sont", "الوصف بصيغة المؤنث"]],
         fa: [["Il y a", "Il y a", "نشان دادن وجود"], ["C'est", "Ce sont", "شناسایی یا معرفی"], ["Il est", "Ils sont", "توصیف به صورت مذکر"], ["Elle est", "Elles sont", "توصیف به صورت مؤنث"]],
+        pt: [["Il y a", "Il y a", "Indicar presença"], ["C'est", "Ce sont", "Identificar ou apresentar"], ["Il est", "Ils sont", "Descrever no masculino"], ["Elle est", "Elles sont", "Descrever no feminino"]],
+        so: [["Il y a", "Il y a", "Joogitaan muuji"], ["C'est", "Ce sont", "Aqoonsi ama soo bandhig"], ["Il est", "Ils sont", "Sharax qaabka lab"], ["Elle est", "Elles sont", "Sharax qaabka dheddig"]],
         ti: [["Il y a", "Il y a", "ህላወ ምግላጽ"], ["C'est", "Ce sont", "ምልላይ ወይ ምቕራብ"], ["Il est", "Ils sont", "ብተባዕታይ ምግላጽ"], ["Elle est", "Elles sont", "ብኣንስታይ ምግላጽ"]],
+        tr: [["Il y a", "Il y a", "Varlık belirtmek"], ["C'est", "Ce sont", "Tanımlamak veya tanıtmak"], ["Il est", "Ils sont", "Eril biçimde betimle"], ["Elle est", "Elles sont", "Dişil biçimde betimle"]],
+        ps: [["Il y a", "Il y a", "شتون ښودل"], ["C'est", "Ce sont", "پېژندل یا معرفي کول"], ["Il est", "Ils sont", "په مذکر کې تشریح کول"], ["Elle est", "Elles sont", "په مؤنث کې تشریح کول"]],
         uk: [["Il y a", "Il y a", "Указати на наявність"], ["C'est", "Ce sont", "Ідентифікувати або представити"], ["Il est", "Ils sont", "Описати в чоловічому роді"], ["Elle est", "Elles sont", "Описати в жіночому роді"]],
       },
       boldFirstCol: true,
@@ -95,7 +115,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "heading",
       text: "Quand utiliser c'est / ce sont",
       sub: true,
-      trans: { en: "When to use c'est", ar: "متى نستخدم c'est", fa: "چه وقت از c'est استفاده کنیم", ti: "መዓዝ c'est ንጠቀም", uk: "Коли вживати c'est" },
+      trans: { en: "When to use c'est", ar: "متى نستخدم c'est", fa: "چه وقت از c'est استفاده کنیم", pt: "Quando usar c'est", so: "Goorma ayaa c'est la isticmaalaa", ti: "መዓዝ c'est ንጠቀም", tr: "c'est ne zaman kullanılır", ps: "c'est کله کاروو", uk: "Коли вживати c'est" },
     },
 
     {
@@ -108,7 +128,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["We use c'est to identify, introduce or give general information."],
         ar: ["نستخدم c'est للتعريف أو التقديم أو لإعطاء معلومة عامة."],
         fa: ["از c'est برای شناسایی، معرفی یا دادن اطلاعات کلی استفاده می‌کنیم."],
+        pt: ["Usamos c'est para identificar, apresentar ou dar informação geral."],
+        so: ["Waxaan isticmaalnaa c'est si loo aqoonsado, loo soo bandhigo ama loo bixiyo macluumaad guud."],
         ti: ["c'est ንምፍላይ፣ ንምቕራብ ወይ ሓፈሻዊ ሓበሬታ ምሃብ ንጠቕሞ።"],
+        tr: ["c'est tanımlamak, tanıtmak veya genel bilgi vermek için kullanılır."],
+        ps: ["موږ c'est د پېژندلو، معرفي کولو یا عمومي معلوماتو ورکولو لپاره کاروو."],
         uk: ["Ми використовуємо c'est для ідентифікації, представлення або надання загальної інформації."],
       },
     },
@@ -121,7 +145,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est {a}la{/a} pharmacie.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a noun with an article", ar: "قبل اسم مع مقال", fa: "قبل از اسم با حرف تعریف", ti: "ቅድሚ ስም ምስ ናይ ዓንቀጽ", uk: "Перед іменником з артиклем" },
+      transLabel: { en: "Before a noun with an article", ar: "قبل اسم مع مقال", fa: "قبل از اسم با حرف تعریف", pt: "Antes de um nome com artigo", so: "Ka hor magac leh article", ti: "ቅድሚ ስም ምስ ናይ ዓንቀጽ", tr: "Artikelli bir isimden önce", ps: "د article لرونکي نوم مخکې", uk: "Перед іменником з артиклем" },
     },
 
     {
@@ -132,7 +156,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est {a}M. Mohammed Safi{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a first name or proper noun", ar: "قبل اسم شخص أو اسم علم", fa: "قبل از اسم کوچک یا اسم خاص", ti: "ቅድሚ ስም ሰብ ወይ ናይ ኣቦ ስም", uk: "Перед іменем або власною назвою" },
+      transLabel: { en: "Before a first name or proper noun", ar: "قبل اسم شخص أو اسم علم", fa: "قبل از اسم کوچک یا اسم خاص", pt: "Antes de um nome próprio", so: "Ka hor magac qof ama magac gaar ah", ti: "ቅድሚ ስም ሰብ ወይ ናይ ኣቦ ስም", tr: "Bir ad veya özel addan önce", ps: "د شخصي نوم یا خاص نوم مخکې", uk: "Перед іменем або власною назвою" },
     },
 
     {
@@ -143,7 +167,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est {a}elle{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a pronoun", ar: "قبل ضمير", fa: "قبل از ضمیر", ti: "ቅድሚ ተካኢ ስም", uk: "Перед займенником" },
+      transLabel: { en: "Before a pronoun", ar: "قبل ضمير", fa: "قبل از ضمیر", pt: "Antes de um pronome", so: "Ka hor magac-u-yaal", ti: "ቅድሚ ተካኢ ስም", tr: "Bir zamirden önce", ps: "د ضمیر مخکې", uk: "Перед займенником" },
     },
 
     {
@@ -154,7 +178,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est {a}trois heures{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "To give a date or time", ar: "لإعطاء تاريخ أو وقت", fa: "برای دادن تاریخ یا ساعت", ti: "ዕለት ወይ ሰዓት ንምሃብ", uk: "Для зазначення дати або часу" },
+      transLabel: { en: "To give a date or time", ar: "لإعطاء تاريخ أو وقت", fa: "برای دادن تاریخ یا ساعت", pt: "Para indicar uma data ou uma hora", so: "Si loo sheego taariikh ama waqti", ti: "ዕለት ወይ ሰዓት ንምሃብ", tr: "Tarih veya saat vermek için", ps: "د نېټې یا وخت ورکولو لپاره", uk: "Для зазначення дати або часу" },
     },
 
     // ── IL EST ────────────────────────────────────────────────────────────────
@@ -162,7 +186,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "heading",
       text: "Quand utiliser il est / ils sont",
       sub: true,
-      trans: { en: "When to use il est / elle est", ar: "متى نستخدم il est / elle est", fa: "چه وقت از il est / elle est استفاده کنیم", ti: "መዓዝ il est / elle est ንጠቀም", uk: "Коли вживати il est / elle est" },
+      trans: { en: "When to use il est / elle est", ar: "متى نستخدم il est / elle est", fa: "چه وقت از il est / elle est استفاده کنیم", pt: "Quando usar il est / elle est", so: "Goorma ayaa il est / elle est la isticmaalaa", ti: "መዓዝ il est / elle est ንጠቀም", tr: "il est / elle est ne zaman kullanılır", ps: "il est / elle est کله کاروو", uk: "Коли вживати il est / elle est" },
     },
 
     {
@@ -175,7 +199,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["Il est / Elle est is used to describe a person or a thing."],
         ar: ["تُستخدم il est / elle est لوصف شخص أو شيء ما."],
         fa: ["il est / elle est برای توصیف یک شخص یا یک چیز به کار می‌رود."],
+        pt: ["Il est / Elle est é usado para descrever uma pessoa ou uma coisa."],
+        so: ["Il est / Elle est waxaa loo isticmaalaa in lagu sharaxo qof ama shay."],
         ti: ["il est / elle est ሰብ ወይ ነገር ንምግላጽ ይጠቅም።"],
+        tr: ["Il est / Elle est bir kişiyi veya bir şeyi betimlemek için kullanılır."],
+        ps: ["Il est / Elle est د یو کس یا شي د تشریح لپاره کارول کېږي."],
         uk: ["Il est / Elle est використовується для опису людини або речі."],
       },
     },
@@ -188,7 +216,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "Il est {a}malade{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before an adjective", ar: "قبل صفة", fa: "قبل از صفت", ti: "ቅድሚ ቅጽል", uk: "Перед прикметником" },
+      transLabel: { en: "Before an adjective", ar: "قبل صفة", fa: "قبل از صفت", pt: "Antes de um adjetivo", so: "Ka hor sifo", ti: "ቅድሚ ቅጽል", tr: "Bir sıfattan önce", ps: "د صفت مخکې", uk: "Перед прикметником" },
     },
 
     {
@@ -199,7 +227,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "Elle est {a}infirmière{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a profession (no article)", ar: "قبل مهنة (بدون مقال)", fa: "قبل از شغل (بدون حرف تعریف)", ti: "ቅድሚ ስራሕ (ብዘይ ናይ ዓንቀጽ)", uk: "Перед назвою професії (без артикля)" },
+      transLabel: { en: "Before a profession (no article)", ar: "قبل مهنة (بدون مقال)", fa: "قبل از شغل (بدون حرف تعریف)", pt: "Antes de uma profissão (sem artigo)", so: "Ka hor xirfad (article la'aan)", ti: "ቅድሚ ስራሕ (ብዘይ ናይ ዓንቀጽ)", tr: "Bir meslekten önce (artikelsiz)", ps: "د مسلک مخکې (بې article)", uk: "Перед назвою професії (без артикля)" },
     },
 
     {
@@ -210,7 +238,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "Elle est {a}ukrainienne{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a nationality", ar: "قبل جنسية", fa: "قبل از ملیت", ti: "ቅድሚ ዜግነት", uk: "Перед назвою національності" },
+      transLabel: { en: "Before a nationality", ar: "قبل جنسية", fa: "قبل از ملیت", pt: "Antes de uma nacionalidade", so: "Ka hor jinsiyad", ti: "ቅድሚ ዜግነት", tr: "Bir milliyetten önce", ps: "د ملیت مخکې", uk: "Перед назвою національності" },
     },
 
     {
@@ -221,7 +249,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "Il est {a}bouddhiste{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a religion", ar: "قبل دين", fa: "قبل از دین", ti: "ቅድሚ ሃይማኖት", uk: "Перед назвою релігії" },
+      transLabel: { en: "Before a religion", ar: "قبل دين", fa: "قبل از دین", pt: "Antes de uma religião", so: "Ka hor diin", ti: "ቅድሚ ሃይማኖት", tr: "Bir dinden önce", ps: "د دین مخکې", uk: "Перед назвою релігії" },
     },
 
     // ── COMPARAISON ────────────────────────────────────────────────────────────
@@ -229,7 +257,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "heading",
       text: "Comparaison",
       sub: true,
-      trans: { en: "Comparison", ar: "مقارنة", fa: "مقایسه", ti: "ምስምስ", uk: "Порівняння" },
+      trans: { en: "Comparison", ar: "مقارنة", fa: "مقایسه", pt: "Comparação", so: "Isbarbardhig", ti: "ምስምስ", tr: "Karşılaştırma", ps: "پرتله", uk: "Порівняння" },
     },
 
     {
@@ -239,7 +267,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["C'est / Ce sont …", "Il est / Ils sont …"],
         ar: ["C'est / Ce sont …", "Il est / Ils sont …"],
         fa: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        pt: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        so: ["C'est / Ce sont …", "Il est / Ils sont …"],
         ti: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        tr: ["C'est / Ce sont …", "Il est / Ils sont …"],
+        ps: ["C'est / Ce sont …", "Il est / Ils sont …"],
         uk: ["C'est / Ce sont …", "Il est / Ils sont …"],
       },
       equalCols: true,
@@ -257,7 +289,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "heading",
       text: "Avec un adjectif",
       sub: true,
-      trans: { en: "With an adjective", ar: "مع صفة", fa: "با صفت", ti: "ምስ ቅጽል", uk: "З прикметником" },
+      trans: { en: "With an adjective", ar: "مع صفة", fa: "با صفت", pt: "Com um adjetivo", so: "Sifo la socota", ti: "ምስ ቅጽል", tr: "Bir sıfatla", ps: "له صفت سره", uk: "З прикметником" },
     },
 
     {
@@ -270,7 +302,11 @@ export const A1_GR_CEST: GrammarLesson = {
         en: ["When referring to a person with a noun + adjective, use {a}c'est{/a}."],
         ar: ["عند الإشارة إلى شخص باستخدام اسم + صفة، استخدم {a}c'est{/a}."],
         fa: ["وقتی با اسم + صفت به یک شخص اشاره می‌کنید، از {a}c'est{/a} استفاده کنید."],
+        pt: ["Quando se indica uma pessoa com nome + adjetivo, use {a}c'est{/a}."],
+        so: ["Marka qof loogu tilmaamayo magac + sifo, isticmaal {a}c'est{/a}."],
         ti: ["ሰብ ብስም + ቅጽል ምስ እትጠቅሶ፣ {a}c'est{/a} ጠቀም።"],
+        tr: ["Bir kişiye isim + sıfat ile atıfta bulunurken {a}c'est{/a} kullanın."],
+        ps: ["کله چې یو کس د نوم + صفت په وسیله یادوئ، {a}c'est{/a} وکاروئ."],
         uk: ["Коли позначаєте особу іменником + прикметником, використовуйте {a}c'est{/a}."],
       },
     },
@@ -290,7 +326,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "heading",
       text: "Méthode rapide",
       sub: true,
-      trans: { en: "Quick method", ar: "الطريقة السريعة", fa: "روش سریع", ti: "ቅልጡፍ መምርሒ", uk: "Швидкий метод" },
+      trans: { en: "Quick method", ar: "الطريقة السريعة", fa: "روش سریع", pt: "Método rápido", so: "Hab degdeg ah", ti: "ቅልጡፍ መምርሒ", tr: "Hızlı yöntem", ps: "چټکه طریقه", uk: "Швидкий метод" },
     },
 
     {
@@ -302,7 +338,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est un professeur.",
       ],
       noBulletItems: [0, 1, 2],
-      transLabel: { en: "C'est", ar: "C'est", fa: "C'est", ti: "C'est", uk: "C'est" },
+      transLabel: { en: "C'est", ar: "C'est", fa: "C'est", pt: "C'est", so: "C'est", ti: "C'est", tr: "C'est", ps: "C'est", uk: "C'est" },
     },
 
     {
@@ -314,7 +350,7 @@ export const A1_GR_CEST: GrammarLesson = {
         "Il est suisse.",
       ],
       noBulletItems: [0, 1, 2],
-      transLabel: { en: "Il est / Elle est", ar: "Il est / Elle est", fa: "Il est / Elle est", ti: "Il est / Elle est", uk: "Il est / Elle est" },
+      transLabel: { en: "Il est / Elle est", ar: "Il est / Elle est", fa: "Il est / Elle est", pt: "Il est / Elle est", so: "Il est / Elle est", ti: "Il est / Elle est", tr: "Il est / Elle est", ps: "Il est / Elle est", uk: "Il est / Elle est" },
     },
   ],
   exercises: [
@@ -323,7 +359,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "classify",
       title: "Exercice 1",
       instruction: "Classez chaque phrase : identification ou description.",
-      transInstruction: { en: "Sort each sentence: identification or description.", ar: "صنّف كل جملة: تعريف أم وصف.", fa: "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።", uk: "Розсортуйте кожне речення: ідентифікація чи опис." },
+      transInstruction: { en: "Sort each sentence: identification or description.", ar: "صنّف كل جملة: تعريف أم وصف.", fa: "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.", pt: "Classifique cada frase: identificação ou descrição.", so: "Kala saar jumlad kasta: aqoonsi ama sharaxaad.", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።", tr: "Her cümleyi sınıflandırın: tanımlama mı betimleme mi.", ps: "هره جمله وویشئ: پېژندنه یا تشریح.", uk: "Розсортуйте кожне речення: ідентифікація чи опис." },
       categories: ["Identification", "Description"],
       items: [],
       poolSize: 5,
@@ -388,7 +424,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "qcm",
       title: "Exercice 2",
       instruction: "Choisissez C'est ou Il / Elle est.",
-      transInstruction: { en: "Choose C'est or Il / Elle est.", ar: "اختر C'est أو Il / Elle est.", fa: "C'est یا Il / Elle est را انتخاب کنید.", ti: "C'est ወይ Il / Elle est ምረጽ።", uk: "Оберіть C'est або Il / Elle est." },
+      transInstruction: { en: "Choose C'est or Il / Elle est.", ar: "اختر C'est أو Il / Elle est.", fa: "C'est یا Il / Elle est را انتخاب کنید.", pt: "Escolha C'est ou Il / Elle est.", so: "Dooro C'est ama Il / Elle est.", ti: "C'est ወይ Il / Elle est ምረጽ።", tr: "C'est veya Il / Elle est seçin.", ps: "C'est یا Il / Elle est وټاکئ.", uk: "Оберіть C'est або Il / Elle est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -453,7 +489,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Complétez avec c'est ou il est.",
-      transInstruction: { en: "Complete with c'est or il est.", ar: "أكمل بـ c'est أو il est.", fa: "با c'est یا il est کامل کنید.", ti: "ብ c'est ወይ il est ምላእ።", uk: "Доповніть c'est або il est." },
+      transInstruction: { en: "Complete with c'est or il est.", ar: "أكمل بـ c'est أو il est.", fa: "با c'est یا il est کامل کنید.", pt: "Complete com c'est ou il est.", so: "Ku buuxi c'est ama il est.", ti: "ብ c'est ወይ il est ምላእ።", tr: "c'est veya il est ile tamamlayın.", ps: "په c'est یا il est سره بشپړ کړئ.", uk: "Доповніть c'est або il est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -516,7 +552,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "fill",
       title: "Exercice 4",
       instruction: "Complétez avec C'est, Il est ou Elle est.",
-      transInstruction: { en: "Complete with C'est, Il est or Elle est.", ar: "أكمل بـ C'est أو Il est أو Elle est.", fa: "با C'est، Il est یا Elle est کامل کنید.", ti: "ብ C'est፣ Il est ወይ Elle est ምላእ።", uk: "Доповніть C'est, Il est або Elle est." },
+      transInstruction: { en: "Complete with C'est, Il est or Elle est.", ar: "أكمل بـ C'est أو Il est أو Elle est.", fa: "با C'est، Il est یا Elle est کامل کنید.", pt: "Complete com C'est, Il est ou Elle est.", so: "Ku buuxi C'est, Il est ama Elle est.", ti: "ብ C'est፣ Il est ወይ Elle est ምላእ።", tr: "C'est, Il est veya Elle est ile tamamlayın.", ps: "په C'est، Il est یا Elle est سره بشپړ کړئ.", uk: "Доповніть C'est, Il est або Elle est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -579,7 +615,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre.",
-      transInstruction: { en: "Put the words back in the correct order.", ar: "أعد ترتيب الكلمات.", fa: "کلمات را به ترتیب صحیح بگذارید.", ti: "ቃላት ናብ ቅኑዕ ቅደም-ሰዓብ ምለሶም።", uk: "Розставте слова в правильному порядку." },
+      transInstruction: { en: "Put the words back in the correct order.", ar: "أعد ترتيب الكلمات.", fa: "کلمات را به ترتیب صحیح بگذارید.", pt: "Coloque as palavras na ordem correta.", so: "Ereyada ku celi sida saxda ah.", ti: "ቃላት ናብ ቅኑዕ ቅደም-ሰዓብ ምለሶም።", tr: "Kelimeleri doğru sıraya koyun.", ps: "کلمې بېرته په سم ترتیب کې کېږدئ.", uk: "Розставте слова в правильному порядку." },
       allowPartialValidation: true,
       items: [],
       poolSize: 5,
@@ -643,7 +679,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Transformez les phrases avec c'est.\nExemple : Il est mon ami. → C'est mon ami.",
-      transInstruction: { en: "Transform the sentences with c'est.\nExample: Il est mon ami. → C'est mon ami.", ar: "حوّل الجمل باستخدام c'est.\nمثال: Il est mon ami. → C'est mon ami.", fa: "جمله‌ها را با c'est تبدیل کنید.\nمثال: Il est mon ami. → C'est mon ami.", ti: "ሓሳባት ብ c'est ቀይር።\nኣብነት፦ Il est mon ami. → C'est mon ami.", uk: "Перетворіть речення з c'est.\nПриклад: Il est mon ami. → C'est mon ami." },
+      transInstruction: { en: "Transform the sentences with c'est.\nExample: Il est mon ami. → C'est mon ami.", ar: "حوّل الجمل باستخدام c'est.\nمثال: Il est mon ami. → C'est mon ami.", fa: "جمله‌ها را با c'est تبدیل کنید.\nمثال: Il est mon ami. → C'est mon ami.", pt: "Transforme as frases com c'est.\nExemplo: Il est mon ami. → C'est mon ami.", so: "Jumladda ku beddel c'est.\nTusaale: Il est mon ami. → C'est mon ami.", ti: "ሓሳባት ብ c'est ቀይር።\nኣብነት፦ Il est mon ami. → C'est mon ami.", tr: "Cümleleri c'est ile dönüştürün.\nÖrnek: Il est mon ami. → C'est mon ami.", ps: "جملې په c'est سره بدلې کړئ.\nبېلګه: Il est mon ami. → C'est mon ami.", uk: "Перетворіть речення з c'est.\nПриклад: Il est mon ami. → C'est mon ami." },
       promptLayout: "stacked",
       promptPool: [
         "Il est mon frère. →",
@@ -706,7 +742,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 7",
       instruction: "Transformez avec il est / elle est.\nExemple : C'est un homme gentil. → Il est gentil.",
-      transInstruction: { en: "Transform with il est / elle est.\nExample: C'est un homme gentil. → Il est gentil.", ar: "حوّل باستخدام il est / elle est.\nمثال: C'est un homme gentil. → Il est gentil.", fa: "با il est / elle est تبدیل کنید.\nمثال: C'est un homme gentil. → Il est gentil.", ti: "ብ il est / elle est ቀይር።\nኣብነት፦ C'est un homme gentil. → Il est gentil.", uk: "Перетворіть з il est / elle est.\nПриклад: C'est un homme gentil. → Il est gentil." },
+      transInstruction: { en: "Transform with il est / elle est.\nExample: C'est un homme gentil. → Il est gentil.", ar: "حوّل باستخدام il est / elle est.\nمثال: C'est un homme gentil. → Il est gentil.", fa: "با il est / elle est تبدیل کنید.\nمثال: C'est un homme gentil. → Il est gentil.", pt: "Transforme com il est / elle est.\nExemplo: C'est un homme gentil. → Il est gentil.", so: "Ku beddel il est / elle est.\nTusaale: C'est un homme gentil. → Il est gentil.", ti: "ብ il est / elle est ቀይር።\nኣብነት፦ C'est un homme gentil. → Il est gentil.", tr: "il est / elle est ile dönüştürün.\nÖrnek: C'est un homme gentil. → Il est gentil.", ps: "په il est / elle est سره بدل کړئ.\nبېلګه: C'est un homme gentil. → Il est gentil.", uk: "Перетворіть з il est / elle est.\nПриклад: C'est un homme gentil. → Il est gentil." },
       promptLayout: "stacked",
       promptPool: [
         "C'est une femme sympathique. →",
@@ -769,7 +805,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 8",
       instruction: "Écrivez une phrase avec les mots proposés.",
-      transInstruction: { en: "Write a sentence with the words provided.", ar: "اكتب جملة بالكلمات المقترحة.", fa: "یک جمله با کلمات پیشنهادی بنویسید.", ti: "ብዝቐረቡ ቃላት ሓደ ሓሳብ ጽሓፍ።", uk: "Напишіть речення з запропонованими словами." },
+      transInstruction: { en: "Write a sentence with the words provided.", ar: "اكتب جملة بالكلمات المقترحة.", fa: "یک جمله با کلمات پیشنهادی بنویسید.", pt: "Escreva uma frase com as palavras dadas.", so: "Qor jumlad adigoo adeegsanaya erayada la bixiyay.", ti: "ብዝቐረቡ ቃላት ሓደ ሓሳብ ጽሓፍ።", tr: "Verilen kelimelerle bir cümle yazın.", ps: "له ورکړل شوو کلمو سره یوه جمله ولیکئ.", uk: "Напишіть речення з запропонованими словами." },
       promptLayout: "stacked",
       prompts: [
         "Alona :",
@@ -838,7 +874,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Choisissez C'est ou Il / Elle est.",
-      transInstruction: { en: "Choose C'est or Il / Elle est.", ar: "اختر C'est أو Il / Elle est.", fa: "C'est یا Il / Elle est را انتخاب کنید.", ti: "C'est ወይ Il / Elle est ምረጽ።", uk: "Оберіть C'est або Il / Elle est." },
+      transInstruction: { en: "Choose C'est or Il / Elle est.", ar: "اختر C'est أو Il / Elle est.", fa: "C'est یا Il / Elle est را انتخاب کنید.", pt: "Escolha C'est ou Il / Elle est.", so: "Dooro C'est ama Il / Elle est.", ti: "C'est ወይ Il / Elle est ምረጽ።", tr: "C'est veya Il / Elle est seçin.", ps: "C'est یا Il / Elle est وټاکئ.", uk: "Оберіть C'est або Il / Elle est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -900,7 +936,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "fill",
       title: "Évaluation — Question 2",
       instruction: "Complétez avec c'est ou il est.",
-      transInstruction: { en: "Complete with c'est or il est.", ar: "أكمل بـ c'est أو il est.", fa: "با c'est یا il est کامل کنید.", ti: "ብ c'est ወይ il est ምላእ።", uk: "Доповніть c'est або il est." },
+      transInstruction: { en: "Complete with c'est or il est.", ar: "أكمل بـ c'est أو il est.", fa: "با c'est یا il est کامل کنید.", pt: "Complete com c'est ou il est.", so: "Ku buuxi c'est ama il est.", ti: "ብ c'est ወይ il est ምላእ።", tr: "c'est veya il est ile tamamlayın.", ps: "په c'est یا il est سره بشپړ کړئ.", uk: "Доповніть c'est або il est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -962,7 +998,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "classify",
       title: "Évaluation — Question 3",
       instruction: "Classez chaque phrase : identification ou description.",
-      transInstruction: { en: "Sort each sentence: identification or description.", ar: "صنّف كل جملة: تعريف أم وصف.", fa: "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።", uk: "Розсортуйте кожне речення: ідентифікація чи опис." },
+      transInstruction: { en: "Sort each sentence: identification or description.", ar: "صنّف كل جملة: تعريف أم وصف.", fa: "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.", pt: "Classifique cada frase: identificação ou descrição.", so: "Kala saar jumlad kasta: aqoonsi ama sharaxaad.", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።", tr: "Her cümleyi sınıflandırın: tanımlama mı betimleme mi.", ps: "هره جمله وویشئ: پېژندنه یا تشریح.", uk: "Розсортуйте кожне речення: ідентифікація чи опис." },
       categories: ["Identification (C'est)", "Description (Il / Elle est)"],
       items: [],
       poolSize: 5,
