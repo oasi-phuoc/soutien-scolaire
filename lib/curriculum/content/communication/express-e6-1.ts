@@ -18,7 +18,7 @@ export const EXPRESS_E6_1: CommunicationLesson = {
         { code: "E5.2", title: "Pharmacie", href: "/communication/E5-2" },
         { code: "V9.1", title: "Ville", href: "/francais/vocabulaire/v9-ville" },
         { code: "V9.3", title: "Direction", href: "/francais/vocabulaire/v9-direction" },
-        { code: "G19.33", title: "Aller", href: "/francais/grammaire/a1-conj-l08" }
+        { code: "G4.2", title: "Aller", href: "/francais/grammaire/a1-gr-articles-contractes" }
       ],
     },
     {

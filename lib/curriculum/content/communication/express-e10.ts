@@ -379,7 +379,7 @@ export const EXPRESS_E10_5: CommunicationLesson = lessonFromListening({
   theory: [
     { type: "heading", text: "Participer à la vie associative", black: true, trans: t("Participer à la vie associative") },
     prereqItems([
-      { code: "G19.24", title: "Les verbes pronominaux au passé composé", href: "/francais/grammaire/a1-gr-pronominaux-passe-compose" },
+      { code: "G8.4", title: "Les verbes pronominaux au passé composé", href: "/francais/grammaire/a1-gr-pronominaux-passe-compose" },
     ]),
     {
       type: "plain",

@@ -187,7 +187,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
 ];
 
 /**
- * Codes pédagogiques grammaire G1–G19 (plus de conjugaison séparée).
+ * Codes pédagogiques grammaire G1–G18 (plus de conjugaison séparée).
  */
 const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
   "a1-gr-l01": "G1.1",

@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 34 — La phrase exclamative (G4.4) */
+/** G5.8 — La phrase exclamative */
 export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
   slug: "a1-gr-phrase-exclamative",
-  code: "G4.4",
+  code: "G5.8",
   level: "A1",
   title: "La phrase exclamative",
   theory: [

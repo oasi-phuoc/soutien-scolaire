@@ -18,7 +18,7 @@ export const EXPRESS_E2_2: CommunicationLesson = {
         { code: "E2.1", title: "Décrire son logement", href: "/communication/E2-1" },
         { code: "V4.4", title: "Électroménager", href: "/francais/vocabulaire/v4-appareils-electromenagers" },
         { code: "V4.5", title: "Pannes", href: "/francais/vocabulaire/v4-pannes" },
-        { code: "G19.33", title: "Verbes de mouvement", href: "/francais/grammaire/a1-conj-l08" },
+        { code: "G4.2", title: "Verbes de mouvement", href: "/francais/grammaire/a1-gr-articles-contractes" },
         { code: "G1.6", title: "Modaux", href: "/francais/grammaire/a1-gr-modaux" }
       ],
     },

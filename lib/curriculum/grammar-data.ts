@@ -163,30 +163,16 @@ import { A1_GR_CEST } from "./content/francais/grammaire-r1.9";
 import { A1_GR_PHRASES } from "./content/francais/grammaire-r1.6";
 import { A1_GR_INTERRO } from "./content/francais/grammaire-r1.8";
 import { A1_GR_L04 } from "./content/francais/grammaire-r1.3";
-import { A1_GR_L11 } from "./content/francais/grammaire-r2.5";
-import { A1_GR_TIME_EXPRESSIONS } from "./content/francais/grammaire-r4.2-temps";
 import { A1_GR_DOUBLE_AUXILIAIRE } from "./content/francais/grammaire-r5.5-double-auxiliaire";
 import { A1_GR_PRONOMINAUX_PASSE } from "./content/francais/grammaire-r5.6-pronominaux";
-import { A2_GR_IMPARFAIT_IRREGULIERS } from "./content/francais/grammaire-r6.2-irreguliers";
-import { A2_GR_PASSE_OU_IMPARFAIT } from "./content/francais/grammaire-r6.3-passe-imparfait";
-import { A2_GR_FUTUR_IRREGULIERS } from "./content/francais/grammaire-r7.2-irreguliers";
 import { A2_GR_FUTUR_SIMPLE_PROCHE } from "./content/francais/grammaire-r7.3-futurs";
 import { A2_GR_HYPOTHESE_FUTUR } from "./content/francais/grammaire-r7.5-hypothese";
-import { GR_MARQUEURS_TEMPS_COMPLET } from "./content/francais/grammaire-r9.1-marqueurs-temps";
-import { A2_GR_BON_BIEN } from "./content/francais/grammaire-r8.2-bon-bien";
-import { A2_GR_SUPERLATIF } from "./content/francais/grammaire-r8.3-superlatif";
-import { A2_GR_ADVERBES } from "./content/francais/grammaire-r10.5-adverbes";
 
-import { A1_GR_L14 } from "./content/francais/grammaire-r3.1";
 import { A1_GR_L18 } from "./content/francais/grammaire-r3.4b";
 import { A1_GR_L19 } from "./content/francais/grammaire-r3.5b";
 import { A1_GR_L22 } from "./content/francais/grammaire-r3.6b";
 
-import { A2_GR_L19 } from "./content/francais/grammaire-r4.19";
 import { A2_GR_L35 } from "./content/francais/grammaire-r4.22";
-import { A2_GR_L36 } from "./content/francais/grammaire-r4.23";
-import { A2_GR_L39 } from "./content/francais/grammaire-r4.27";
-import { A2_GR_L52 } from "./content/francais/grammaire-r4.28";
 
 // ── Imports — conjugaison ─────────────────────────────────────────────────────
 
@@ -207,9 +193,6 @@ import { A2_CONJ_L02 } from "./content/francais/grammaire-r4.10";
 
 import { A2_CONJ_L04 } from "./content/francais/grammaire-r4.14";
 import { A2_CONJ_L05 } from "./content/francais/grammaire-r4.15";
-import { A2_GR_CONDITIONNEL } from "./content/francais/grammaire-r6.2";
-import { A2_GR_GERONDIF } from "./content/francais/grammaire-r6.4";
-import { A2_GR_SUBJONCTIF } from "./content/francais/grammaire-r6.5";
 import { A2_CONJ_L07 } from "./content/francais/grammaire-r4.25";
 import { A2_CONJ_L08 } from "./content/francais/grammaire-r4.26";
 import { generatedGrammarExercises } from "./content/francais/generated-grammar-exercises";
@@ -469,31 +452,14 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L04,
   A1_GR_L18,
   A1_GR_L19,
-  A1_GR_L14,
-  A1_GR_L11,
   A1_GR_L22,
-  A1_GR_TIME_EXPRESSIONS,
   A1_GR_DOUBLE_AUXILIAIRE,
   A1_GR_PRONOMINAUX_PASSE,
-  A2_GR_IMPARFAIT_IRREGULIERS,
-  A2_GR_PASSE_OU_IMPARFAIT,
-  A2_GR_FUTUR_IRREGULIERS,
   A2_GR_FUTUR_SIMPLE_PROCHE,
   A2_GR_HYPOTHESE_FUTUR,
-  A2_GR_BON_BIEN,
-  A2_GR_SUPERLATIF,
-  A2_GR_ADVERBES,
-  GR_MARQUEURS_TEMPS_COMPLET,
 
-  A2_GR_L19,
   A2_GR_L35,
-  A2_GR_L36,
-  A2_GR_L39,
-  A2_GR_L52,
 
-  A2_GR_CONDITIONNEL,
-  A2_GR_GERONDIF,
-  A2_GR_SUBJONCTIF,
 ];
 
 
