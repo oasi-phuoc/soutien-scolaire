@@ -44,7 +44,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       boldFirstCol: true,
       rows: [
         ["{a}B{/a}eauté", "beau, joli"],
-        ["{a}A{/a}ge", "jeune, vieux, nouveau, ancien*"],
+        ["{a}Â{/a}ge", "jeune, vieux, nouveau, ancien*"],
         ["{a}G{/a}randeur", "grand, petit, gros, long, court"],
         ["{a}S{/a}entiment", "bon, mauvais, gentil, méchant"],
       ],
