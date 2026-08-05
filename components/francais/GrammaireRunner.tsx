@@ -270,10 +270,10 @@ function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { ver
         </table>
       </div>
       {verb.note && (() => {
-        const isRtl = pivot === "ar" || pivot === "fa";
+        const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
         const useTrans = showTrans && pivot && pivot !== "fr";
-        const noteText = useTrans && pivot && verb.noteTrans?.[pivot as "en" | "ar" | "fa" | "ti" | "uk"]
-          ? verb.noteTrans[pivot as "en" | "ar" | "fa" | "ti" | "uk"]!
+        const noteText = useTrans && pivot && verb.noteTrans?.[pivot as "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk"]
+          ? verb.noteTrans[pivot as "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk"]!
           : verb.note;
         return (
           <div className="rounded-[var(--radius-md)] bg-[var(--color-accent-fr)]/8 px-3 py-2 text-sm text-[var(--color-text-primary)]" lang={useTrans ? pivot : undefined} dir={useTrans && isRtl ? "rtl" : "ltr"}>
@@ -286,7 +286,7 @@ function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { ver
 }
 
 export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot: string; showTrans: boolean }) {
-  const isRtl = pivot === "ar" || pivot === "fa";
+  const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
   const useTrans = showTrans && pivot !== "fr";
 
   return (
@@ -816,7 +816,7 @@ function QcmExercise({
 
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
-  const isRtl = pivot === "ar" || pivot === "fa";
+  const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
   const translatedInstruction = showTrans
     ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
     : undefined;
@@ -1200,7 +1200,7 @@ function FillExercise({
 
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
-  const isRtl = pivot === "ar" || pivot === "fa";
+  const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
   const translatedInstruction = showTrans
     ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
     : undefined;
@@ -1377,7 +1377,7 @@ function FillSelectExercise({
 
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
-  const isRtl = pivot === "ar" || pivot === "fa";
+  const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
   const translatedInstruction = showTrans
     ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
     : undefined;

@@ -6,8 +6,10 @@
 export type ConjugRow = { pronoun: string; form: string; phonetic?: string };
 export type ConjugTable = { verb: string; rows: ConjugRow[]; accentForms?: boolean; verbBold?: boolean };
 
-export type Trans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
-type TransList = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>;
+/** Langues pivot (hors français) — alignées sur `lib/pivot-langs.ts`. */
+export type GrammarPivotLang = "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk";
+export type Trans = Partial<Record<GrammarPivotLang, string>>;
+type TransList = Partial<Record<GrammarPivotLang, string[]>>;
 
 export type VerbToggleVerb = {
   infinitive: string;
@@ -16,7 +18,7 @@ export type VerbToggleVerb = {
   meaning?: string;
   example?: string;
   note?: string;
-  noteTrans?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
+  noteTrans?: Partial<Record<GrammarPivotLang, string>>;
   rows: Array<{ pronoun: string; ending: string; radical?: string }>;
 };
 
@@ -26,7 +28,7 @@ export type TheoryBlock =
   | { type: "rule"; text: string; examples?: { correct: string; wrong?: string }[] }
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
-  | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean; colWidths?: string[] }
+  | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<GrammarPivotLang, string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean; colWidths?: string[] }
   | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList; noBulletItems?: number[]; allBullets?: boolean }
   | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
   | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; noArrow?: boolean }
