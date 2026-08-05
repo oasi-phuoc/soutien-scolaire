@@ -10,20 +10,42 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     {
       type: "heading",
       text: "Les adjectifs",
+      trans: { en: "Adjectives", ar: "الصفات", fa: "صفت‌ها", ti: "ቅጽላት", uk: "Прикметники" },
     },
     {
       type: "plain_list",
       items: [
         "L'adjectif donne une information sur le nom. Les adjectifs changent aussi selon le genre.",
       ],
+      transItems: {
+        en: ["The adjective gives information about the noun. Adjectives also change according to gender."],
+        ar: ["الصفة تعطي معلومة عن الاسم. تتغير الصفات أيضًا حسب الجنس."],
+        fa: ["صفت دربارهٔ اسم اطلاعات می‌دهد. صفت‌ها همچنین بر اساس جنس تغییر می‌کنند."],
+        ti: ["ቅጽል ብዛዕባ ስም ሓበሬታ ይህብ። ቅጽላት ከኣ ከም ጾታ ይቕየሩ።"],
+        uk: ["Прикметник дає інформацію про іменник. Прикметники також змінюються за родом."],
+      },
     },
     {
       type: "plain_list",
       items: ["On ajoute souvent {a}-e{/a} au féminin."],
+      transItems: {
+        en: ["We often add {a}-e{/a} in the feminine."],
+        ar: ["غالبًا نضيف {a}-e{/a} في المؤنث."],
+        fa: ["اغلب برای مؤنث {a}-e{/a} اضافه می‌کنیم."],
+        ti: ["ኣብ ኣንስታይ መብዛሕትኡ ግዜ {a}-e{/a} ንውስኽ።"],
+        uk: ["Часто додаємо {a}-e{/a} у жіночому роді."],
+      },
     },
     {
       type: "grid",
       headers: ["Masculin", "Féminin"],
+      transHeaders: {
+        en: ["Masculine", "Feminine"],
+        ar: ["المذكر", "المؤنث"],
+        fa: ["مذکر", "مؤنث"],
+        ti: ["ተባዕታይ", "ኣንስታይ"],
+        uk: ["Чоловічий рід", "Жіночий рід"],
+      },
       equalCols: true,
       rows: [
         ["Le sac est petit.", "La voiture est petit{a}e{/a}."],
@@ -35,11 +57,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
       items: [
         "Si l'adjectif masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
       ],
+      transItems: {
+        en: ["If the masculine adjective already ends in {a}e{/a}, the feminine does not change."],
+        ar: ["إذا كانت الصفة المذكرة تنتهي أصلًا بـ {a}e{/a}، فإن المؤنث لا يتغير."],
+        fa: ["اگر صفت مذکر از قبل به {a}e{/a} ختم شود، صورت مؤنث تغییر نمی‌کند."],
+        ti: ["እቲ ተባዕታይ ቅጽል ኣቐዲሙ ብ {a}e{/a} እንተወዲኡ፣ እቲ ኣንስታይ ኣይቕየርን።"],
+        uk: ["Якщо прикметник чоловічого роду вже закінчується на {a}e{/a}, жіноча форма не змінюється."],
+      },
       noBulletItems: [0],
     },
     {
       type: "grid",
       headers: ["Masculin", "Féminin"],
+      transHeaders: {
+        en: ["Masculine", "Feminine"],
+        ar: ["المذكر", "المؤنث"],
+        fa: ["مذکر", "مؤنث"],
+        ti: ["ተባዕታይ", "ኣንስታይ"],
+        uk: ["Чоловічий рід", "Жіночий рід"],
+      },
       equalCols: true,
       rows: [
         ["Ce lit est modern{a}e{/a}.", "Cette chaise est modern{a}e{/a}."],
@@ -49,12 +85,20 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     {
       type: "heading",
       text: "Cas particuliers",
+      trans: { en: "Special cases", ar: "حالات خاصة", fa: "موارد خاص", ti: "ፍሉያት ኩነታት", uk: "Особливі випадки" },
     },
     {
       type: "plain_list",
       items: [
         "Certains adjectifs ont des terminaisons différentes au masculin et au féminin.",
       ],
+      transItems: {
+        en: ["Some adjectives have different endings in the masculine and feminine."],
+        ar: ["بعض الصفات لها نهايات مختلفة في المذكر والمؤنث."],
+        fa: ["برخی صفت‌ها در مذکر و مؤنث پایان‌های متفاوتی دارند."],
+        ti: ["ገለ ቅጽላት ኣብ ተባዕታይን ኣንስታይን ዝተፈላለዩ መወዳእታታት ኣለዎም።"],
+        uk: ["Деякі прикметники мають різні закінчення в чоловічому та жіночому роді."],
+      },
       noBulletItems: [0],
     },
     {
@@ -69,11 +113,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-en{/a} in the masculine change to {a}-enne{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-en{/a} في المذكر تصبح {a}-enne{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-en{/a} ختم می‌شوند در مؤنث به {a}-enne{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-en{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-enne{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-en{/a}, у жіночому роді змінюються на {a}-enne{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Le meuble est anci{a}en{/a}.", "La table est anci{a}enne{/a}."],
@@ -91,11 +149,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-on{/a} in the masculine change to {a}-onne{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-on{/a} في المذكر تصبح {a}-onne{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-on{/a} ختم می‌شوند در مؤنث به {a}-onne{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-on{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-onne{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-on{/a}, у жіночому роді змінюються на {a}-onne{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Le café est b{a}on{/a}.", "La tarte est b{a}onne{/a}."],
@@ -113,11 +185,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-el{/a} au masculin changent en {a}-elle{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-el{/a} in the masculine change to {a}-elle{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-el{/a} في المذكر تصبح {a}-elle{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-el{/a} ختم می‌شوند در مؤنث به {a}-elle{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-el{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-elle{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-el{/a}, у жіночому роді змінюються на {a}-elle{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Le parfum est natur{a}el{/a}.", "La fleur est natur{a}elle{/a}."],
@@ -135,11 +221,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-er{/a} in the masculine change to {a}-ère{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-er{/a} في المذكر تصبح {a}-ère{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-er{/a} ختم می‌شوند در مؤنث به {a}-ère{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-er{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ère{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-er{/a}, у жіночому роді змінюються на {a}-ère{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Il est étrang{a}er{/a}.", "Elle est étrang{a}ère{/a}."],
@@ -157,11 +257,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-et{/a} au masculin changent en {a}-ète{/a} ou {a}-ette{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-et{/a} in the masculine change to {a}-ète{/a} or {a}-ette{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-et{/a} في المذكر تصبح {a}-ète{/a} أو {a}-ette{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-et{/a} ختم می‌شوند در مؤنث به {a}-ète{/a} یا {a}-ette{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-et{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ète{/a} ወይ {a}-ette{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-et{/a}, у жіночому роді змінюються на {a}-ète{/a} або {a}-ette{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["L'hôtel est compl{a}et{/a}.", "La salle est compl{a}ète{/a}."],
@@ -179,11 +293,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-eux{/a} au masculin changent en {a}-euse{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-eux{/a} in the masculine change to {a}-euse{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-eux{/a} في المذكر تصبح {a}-euse{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-eux{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-eux{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-euse{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-eux{/a}, у жіночому роді змінюються на {a}-euse{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Il est heur{a}eux{/a}.", "Elle est heur{a}euse{/a}."],
@@ -201,11 +329,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-eur{/a} in the masculine change to {a}-euse{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-eur{/a} في المذكر تصبح {a}-euse{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-eur{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-eur{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-euse{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-eur{/a}, у жіночому роді змінюються на {a}-euse{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Il est travaill{a}eur{/a}.", "Elle est travaill{a}euse{/a}."],
@@ -223,11 +365,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-f{/a} in the masculine change to {a}-ve{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-f{/a} في المذكر تصبح {a}-ve{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-f{/a} ختم می‌شوند در مؤنث به {a}-ve{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-f{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ve{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-f{/a}, у жіночому роді змінюються на {a}-ve{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Le sac est neu{a}f{/a}.", "La voiture est neu{a}ve{/a}."],
@@ -245,11 +401,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Les mots terminant par {a}-eau{/a} au masculin changent en {a}-elle{/a} au féminin.",
               ],
+              transItems: {
+                en: ["Words ending in {a}-eau{/a} in the masculine change to {a}-elle{/a} in the feminine."],
+                ar: ["الكلمات المنتهية بـ {a}-eau{/a} في المذكر تصبح {a}-elle{/a} في المؤنث."],
+                fa: ["کلماتی که در مذکر به {a}-eau{/a} ختم می‌شوند در مؤنث به {a}-elle{/a} تغییر می‌کنند."],
+                ti: ["ብተባዕታይ ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-elle{/a} ይቕየሩ።"],
+                uk: ["Слова, що в чоловічому роді закінчуються на {a}-eau{/a}, у жіночому роді змінюються на {a}-elle{/a}."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Le dessin est b{a}eau{/a}.", "La peinture est b{a}elle{/a}."],
@@ -267,11 +437,25 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
               items: [
                 "Certains adjectifs sont très irréguliers pour la formation du féminin.",
               ],
+              transItems: {
+                en: ["Some adjectives are very irregular when forming the feminine."],
+                ar: ["بعض الصفات شديدة الشذوذ عند تكوين المؤنث."],
+                fa: ["برخی صفت‌ها در ساختن صورت مؤنث بسیار بی‌قاعده‌اند."],
+                ti: ["ገለ ቅጽላት ኣብ ምፍጣር ኣንስታይ ቅርጺ ኣዝዮም ዘይስሩዓት እዮም።"],
+                uk: ["Деякі прикметники дуже нерегулярні під час утворення жіночого роду."],
+              },
               noBulletItems: [0],
             },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
+              transHeaders: {
+                en: ["Masculine", "Feminine"],
+                ar: ["المذكر", "المؤنث"],
+                fa: ["مذکر", "مؤنث"],
+                ti: ["ተባዕታይ", "ኣንስታይ"],
+                uk: ["Чоловічий рід", "Жіночий рід"],
+              },
               equalCols: true,
               rows: [
                 ["Le mur est ba{a}s{/a}.", "La chaise est ba{a}sse{/a}."],
@@ -301,12 +485,26 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     {
       type: "heading",
       text: "Adjectifs à trois formes masculines",
+      trans: {
+        en: "Adjectives with three masculine forms",
+        ar: "صفات بثلاث صيغ مذكرة",
+        fa: "صفت‌هایی با سه صورت مذکر",
+        ti: "ሰለስተ ተባዕታይ ቅርጺ ዘለዎም ቅጽላት",
+        uk: "Прикметники з трьома формами чоловічого роду",
+      },
     },
     {
       type: "plain_list",
       items: [
         "Certains adjectifs ont une forme masculine spéciale devant une voyelle ou h muet.",
       ],
+      transItems: {
+        en: ["Some adjectives have a special masculine form before a vowel or silent h."],
+        ar: ["بعض الصفات لها صيغة مذكرة خاصة قبل حرف متحرك أو h صامت."],
+        fa: ["برخی صفت‌ها پیش از یک واکه یا h بی‌صدا صورت مذکر ویژه‌ای دارند."],
+        ti: ["ገለ ቅጽላት ቅድሚ ናይ ድምጺ ፊደል ወይ h ዝሕባእ ፍሉይ ተባዕታይ ቅርጺ ኣለዎም።"],
+        uk: ["Деякі прикметники мають особливу форму чоловічого роду перед голосною або німим h."],
+      },
       noBulletItems: [0],
     },
     {
@@ -317,6 +515,13 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         "Féminin",
         "Pluriel masc.",
       ],
+      transHeaders: {
+        en: ["Masculine before consonant", "Masculine before vowel/silent h", "Feminine", "Masculine plural"],
+        ar: ["المذكر قبل ساكن", "المذكر قبل حرف متحرك / h صامت", "المؤنث", "جمع المذكر"],
+        fa: ["مذکر پیش از همخوان", "مذکر پیش از واکه / h بی‌صدا", "مؤنث", "جمع مذکر"],
+        ti: ["ተባዕታይ ቅድሚ ተናባቢ", "ተባዕታይ ቅድሚ ናይ ድምጺ ፊደል / h ዝሕባእ", "ኣንስታይ", "ባዙሕ ተባዕታይ"],
+        uk: ["Чоловічий рід перед приголосною", "Чоловічий рід перед голосною/німим h", "Жіночий рід", "Множина чоловічого роду"],
+      },
       rows: [
         ["beau", "bel", "belle", "beaux"],
         ["nouveau", "nouvel", "nouvelle", "nouveaux"],
