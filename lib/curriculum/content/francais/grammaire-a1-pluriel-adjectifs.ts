@@ -10,15 +10,30 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     {
       type: "heading",
       text: "Formation du pluriel",
+      trans: { en: "Plural formation", ar: "تكوين الجمع", fa: "ساخت جمع", ti: "ምምስራት ባዙሕ", uk: "Утворення множини" },
     },
     {
       type: "plain_list",
       items: ["On ajoute souvent {a}-s{/a} au pluriel."],
       noBulletItems: [0],
+      transItems: {
+        en: ["We often add {a}-s{/a} in the plural."],
+        ar: ["غالباً نضيف {a}-s{/a} في الجمع."],
+        fa: ["در جمع اغلب {a}-s{/a} اضافه می‌کنیم."],
+        ti: ["ኣብ ባዙሕ ብዙሕ ግዜ {a}-s{/a} ንውስኽ።"],
+        uk: ["У множині часто додаємо {a}-s{/a}."],
+      },
     },
     {
       type: "grid",
       headers: ["Singulier", "Pluriel"],
+      transHeaders: {
+        en: ["Singular", "Plural"],
+        ar: ["المفرد", "الجمع"],
+        fa: ["مفرد", "جمع"],
+        ti: ["ንጽል", "ባዙሕ"],
+        uk: ["Однина", "Множина"],
+      },
       equalCols: true,
       rows: [
         ["Le sac est petit.", "Les sacs sont petit{a}s{/a}."],
@@ -31,10 +46,24 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
         "Si l'adjectif singulier se termine par {a}s{/a} ou {a}x{/a}, le pluriel ne change pas.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["If the singular adjective ends in {a}s{/a} or {a}x{/a}, the plural does not change."],
+        ar: ["إذا انتهت الصفة المفردة بـ {a}s{/a} أو {a}x{/a}، لا يتغيّر الجمع."],
+        fa: ["اگر صفت مفرد به {a}s{/a} یا {a}x{/a} ختم شود، جمع تغییر نمی‌کند."],
+        ti: ["እቲ ንጽል ቅጽል ብ {a}s{/a} ወይ {a}x{/a} እንተወዲኡ፣ እቲ ባዙሕ ኣይቕየርን።"],
+        uk: ["Якщо прикметник в однині закінчується на {a}s{/a} або {a}x{/a}, множина не змінюється."],
+      },
     },
     {
       type: "grid",
       headers: ["Singulier", "Pluriel"],
+      transHeaders: {
+        en: ["Singular", "Plural"],
+        ar: ["المفرد", "الجمع"],
+        fa: ["مفرد", "جمع"],
+        ti: ["ንጽል", "ባዙሕ"],
+        uk: ["Однина", "Множина"],
+      },
       equalCols: true,
       rows: [
         ["Cet homme est mauvais.", "Ces hommes sont mauvais."],
@@ -44,6 +73,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     {
       type: "heading",
       text: "Les adjectifs invariables",
+      trans: { en: "Invariable adjectives", ar: "الصفات غير المتغيرة", fa: "صفت‌های تغییرناپذیر", ti: "ዘይቕየሩ ቅጽላት", uk: "Незмінні прикметники" },
     },
     {
       type: "plain_list",
@@ -51,10 +81,24 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
         "Les adjectifs de couleur dérivés d'un nom sont invariables.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["Color adjectives derived from a noun are invariable."],
+        ar: ["صفات اللون المشتقة من اسم لا تتغيّر."],
+        fa: ["صفت‌های رنگی که از یک اسم ساخته شده‌اند تغییرناپذیرند."],
+        ti: ["ካብ ስም ዝመጹ ናይ ሕብሪ ቅጽላት ኣይቕየሩን።"],
+        uk: ["Прикметники кольору, утворені від іменника, є незмінними."],
+      },
     },
     {
       type: "grid",
       headers: ["Singulier", "Pluriel"],
+      transHeaders: {
+        en: ["Singular", "Plural"],
+        ar: ["المفرد", "الجمع"],
+        fa: ["مفرد", "جمع"],
+        ti: ["ንጽል", "ባዙሕ"],
+        uk: ["Однина", "Множина"],
+      },
       equalCols: true,
       rows: [
         ["une robe orange", "des robes orange"],
@@ -65,14 +109,35 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     {
       type: "highlight",
       label: "Exceptions",
+      transLabel: {
+        en: "Exceptions",
+        ar: "استثناءات",
+        fa: "استثناها",
+        ti: "ፍሉያት",
+        uk: "Винятки",
+      },
       items: [
         "Les adjectifs de couleur {a}rose{/a}, {a}mauve{/a}, {a}écarlate{/a} et {a}pourpre{/a} s'accordent en nombre comme les adjectifs réguliers.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["The color adjectives {a}rose{/a}, {a}mauve{/a}, {a}écarlate{/a}, and {a}pourpre{/a} agree in number like regular adjectives."],
+        ar: ["صفات اللون {a}rose{/a} و{a}mauve{/a} و{a}écarlate{/a} و{a}pourpre{/a} تتوافق في العدد مثل الصفات العادية."],
+        fa: ["صفت‌های رنگ {a}rose{/a}، {a}mauve{/a}، {a}écarlate{/a} و {a}pourpre{/a} از نظر شمار مانند صفت‌های منظم توافق می‌کنند."],
+        ti: ["ናይ ሕብሪ ቅጽላት {a}rose{/a}፣ {a}mauve{/a}፣ {a}écarlate{/a}ን {a}pourpre{/a}ን ከም ስሩዓት ቅጽላት ብቁጽሪ ይሰማምዑ።"],
+        uk: ["Прикметники кольору {a}rose{/a}, {a}mauve{/a}, {a}écarlate{/a} і {a}pourpre{/a} узгоджуються в числі, як звичайні прикметники."],
+      },
     },
     {
       type: "grid",
       headers: ["Singulier", "Pluriel"],
+      transHeaders: {
+        en: ["Singular", "Plural"],
+        ar: ["المفرد", "الجمع"],
+        fa: ["مفرد", "جمع"],
+        ti: ["ንጽል", "ባዙሕ"],
+        uk: ["Однина", "Множина"],
+      },
       equalCols: true,
       rows: [
         ["une robe rose", "des robes rose{a}s{/a}"],
@@ -84,6 +149,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     {
       type: "heading",
       text: "Cas particuliers",
+      trans: { en: "Special cases", ar: "حالات خاصة", fa: "موردهای خاص", ti: "ፍሉያት ኩነታት", uk: "Особливі випадки" },
     },
     {
       type: "plain_list",
@@ -91,6 +157,13 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
         "Le féminin pluriel reste régulier (+ {a}s{/a}).",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["The feminine plural stays regular (+ {a}s{/a})."],
+        ar: ["يبقى جمع المؤنث منتظماً (+ {a}s{/a})."],
+        fa: ["جمع مؤنث منظم می‌ماند (+ {a}s{/a})."],
+        ti: ["እቲ ኣንስታይ ባዙሕ ስሩዕ ኮይኑ ይቕጽል (+ {a}s{/a})።"],
+        uk: ["Жіноча форма множини залишається регулярною (+ {a}s{/a})."],
+      },
     },
     {
       type: "selector",
@@ -105,10 +178,24 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
                 "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-al{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند."],
+                ti: ["ብንጽል ብ {a}-al{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-al{/a} в однині змінюються на {a}-aux{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               equalCols: true,
               rows: [
                 ["Ce pantalon est origin{a}al{/a}.", "Ces pantalons sont origin{a}aux{/a}."],
@@ -119,6 +206,13 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
             {
               type: "highlight",
               label: "Exceptions",
+              transLabel: {
+                en: "Exceptions",
+                ar: "استثناءات",
+                fa: "استثناها",
+                ti: "ፍሉያት",
+                uk: "Винятки",
+              },
               items: [
                 "fat{a}al{/a} → fatal{a}s{/a}",
                 "ban{a}al{/a} → banal{a}s{/a}",
@@ -136,10 +230,24 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
                 "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
               ],
               noBulletItems: [0],
+              transItems: {
+                en: ["Words ending in {a}-eau{/a} in the singular change to {a}-eaux{/a} in the plural."],
+                ar: ["الكلمات المنتهية بـ {a}-eau{/a} في المفرد تصبح {a}-eaux{/a} في الجمع."],
+                fa: ["کلماتی که در مفرد به {a}-eau{/a} ختم می‌شوند در جمع به {a}-eaux{/a} تغییر می‌کنند."],
+                ti: ["ብንጽል ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eaux{/a} ይቕየሩ።"],
+                uk: ["Слова на {a}-eau{/a} в однині змінюються на {a}-eaux{/a} у множині."],
+              },
             },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
+              transHeaders: {
+                en: ["Singular", "Plural"],
+                ar: ["المفرد", "الجمع"],
+                fa: ["مفرد", "جمع"],
+                ti: ["ንጽል", "ባዙሕ"],
+                uk: ["Однина", "Множина"],
+              },
               equalCols: true,
               rows: [
                 ["Ce pantalon est b{a}eau{/a}.", "Ces pantalons sont b{a}eaux{/a}."],
