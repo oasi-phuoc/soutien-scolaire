@@ -28,8 +28,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "highlight",
-      label: "Exception",
+      type: "plain_list",
       items: [
         "Les adjectifs de couleur sont invariables dans trois cas.",
       ],
@@ -38,7 +37,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "1. Quand la couleur est un nom de matière, de fruit, de fleur ou d'objet",
+        "{a}1.{/a} Quand la couleur est un nom de matière, de fruit, de fleur ou d'objet",
       ],
       noBulletItems: [0],
     },
@@ -73,7 +72,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "2. Quand la couleur est précisée par un autre adjectif ou un nom",
+        "{a}2.{/a} Quand la couleur est précisée par un autre adjectif ou un nom",
       ],
       noBulletItems: [0],
     },
@@ -89,7 +88,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "3. Quand la couleur est exprimée par deux adjectifs",
+        "{a}3.{/a} Quand la couleur est exprimée par deux adjectifs",
       ],
       noBulletItems: [0],
     },
@@ -106,8 +105,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       text: "L'adjectif demi",
     },
     {
-      type: "highlight",
-      label: "Devant le nom",
+      type: "heading",
+      text: "Devant le nom",
+      accent: true,
+      sub: true,
+    },
+    {
+      type: "plain_list",
       items: [
         "Demi est invariable.",
       ],
@@ -124,8 +128,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       noBulletItems: [0, 1, 2],
     },
     {
-      type: "highlight",
-      label: "Après le nom",
+      type: "heading",
+      text: "Après le nom",
+      accent: true,
+      sub: true,
+    },
+    {
+      type: "plain_list",
       items: [
         "Demi s'accorde seulement en genre avec le nom.",
       ],
@@ -152,8 +161,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       noBulletItems: [0],
     },
     {
-      type: "highlight",
-      label: "Les nombres cardinaux",
+      type: "heading",
+      text: "Les nombres cardinaux",
+      accent: true,
+      sub: true,
+    },
+    {
+      type: "plain_list",
       items: [
         "Ils expriment une quantité et sont invariables.",
       ],
@@ -169,17 +183,34 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "highlight",
-      label: "Mille",
+      type: "heading",
+      text: "Mille",
+      accent: true,
+      sub: true,
+    },
+    {
+      type: "plain_list",
       items: [
         "Mille est toujours invariable.",
-        "deux mille francs",
       ],
-      noBulletItems: [0, 1],
+      noBulletItems: [0],
     },
     {
       type: "highlight",
-      label: "Vingt et cent",
+      label: "",
+      items: [
+        "deux mille francs",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "heading",
+      text: "Vingt et cent",
+      accent: true,
+      sub: true,
+    },
+    {
+      type: "plain_list",
       items: [
         "Ils sont invariables lorsqu'ils sont seuls ou suivis d'un autre nombre.",
       ],
@@ -212,8 +243,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "highlight",
-      label: "Million et milliard",
+      type: "heading",
+      text: "Million et milliard",
+      accent: true,
+      sub: true,
+    },
+    {
+      type: "plain_list",
       items: [
         "Million et milliard sont des noms et ils s'accordent.",
       ],
