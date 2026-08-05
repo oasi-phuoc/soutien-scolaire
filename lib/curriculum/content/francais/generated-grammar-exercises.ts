@@ -698,9 +698,42 @@ const PROFILES: Record<string, GrammarProfile> = {
   },
 };
 
+const GENERATED_GRAMMAR_ALIAS_SLUGS = [
+  "a1-gr-question-totale",
+  "a1-gr-autres-negations",
+] as const;
+
+function renumberExercises(exercises: Exercise[]): Exercise[] {
+  return exercises.map((exercise, index) => ({
+    ...exercise,
+    title: exercise.title.replace(/^Exercice \d+/, `Exercice ${index + 1}`),
+  })) as Exercise[];
+}
+
+function generatedExercisesForAlias(slug: string): Exercise[] {
+  if (slug === "a1-gr-question-totale") {
+    return renumberExercises([
+      ...buildExercises(slug, PROFILES["a2-gr-l07"]),
+      ...buildExercises(slug, PROFILES["a2-gr-l09"]),
+    ]);
+  }
+
+  if (slug === "a1-gr-autres-negations") {
+    return buildExercises(slug, PROFILES["a2-gr-l42"]);
+  }
+
+  return [];
+}
+
 export function generatedGrammarExercises(slug: string): Exercise[] {
+  const aliasedExercises = generatedExercisesForAlias(slug);
+  if (aliasedExercises.length > 0) return aliasedExercises;
+
   const profile = PROFILES[slug];
   return profile ? buildExercises(slug, profile) : [];
 }
 
-export const GENERATED_GRAMMAR_SLUGS = Object.freeze(Object.keys(PROFILES));
+export const GENERATED_GRAMMAR_SLUGS = Object.freeze([
+  ...Object.keys(PROFILES),
+  ...GENERATED_GRAMMAR_ALIAS_SLUGS,
+]);
