@@ -92,7 +92,14 @@ export const A1_GR_L04: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "{a}2. Quantité{/a} ({a}un{/a}/{a}une{/a} = 1 ; {a}des{/a} = une quantité indéterminée)",
+        "{a}2. Quantité{/a}",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}un{/a}/{a}une{/a} = 1 ; {a}des{/a} = une quantité indéterminée",
       ],
       noBulletItems: [0],
     },
