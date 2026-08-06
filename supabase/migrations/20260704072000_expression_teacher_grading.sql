@@ -1,4 +1,13 @@
--- Teacher-assigned grading for written and oral expression submissions.
+-- Migration manuelle : notation professeur pour PE / PO
+--
+-- À utiliser si tu ne passes pas par la commande Supabase CLI.
+-- Copier-coller ce SQL dans l'éditeur SQL de la base PostgreSQL/Supabase,
+-- puis exécuter une seule fois.
+--
+-- Objectif :
+-- - ajouter les points attribués par le professeur ;
+-- - garder le maximum à 25 points ;
+-- - enregistrer le résultat final visible par l'élève après correction.
 
 ALTER TABLE public.expression_submissions
   ADD COLUMN IF NOT EXISTS teacher_points numeric(5,2),

@@ -1,4 +1,5 @@
--- Structured rubric grading (PE moyen A2) + sync total back to teacher_points.
+-- Grille détaillée + retour des points dans la messagerie.
+-- À exécuter après 20260704072000_expression_teacher_grading.sql
 
 ALTER TABLE public.expression_submissions
   ADD COLUMN IF NOT EXISTS teacher_grading jsonb;
@@ -6,7 +7,6 @@ ALTER TABLE public.expression_submissions
 COMMENT ON COLUMN public.expression_submissions.teacher_grading IS
   'Grille détaillée : { "exercises": [{ "exerciseId", "criteria": [{ "id", "points" }], "total" }], "totalPoints" }';
 
--- When a rubric is saved, keep teacher_points aligned with totalPoints (supports 0.5 steps).
 CREATE OR REPLACE FUNCTION public.sync_expression_teacher_points()
 RETURNS trigger
 LANGUAGE plpgsql
@@ -35,7 +35,6 @@ CREATE TRIGGER expression_submissions_sync_grading
   FOR EACH ROW
   EXECUTE FUNCTION public.sync_expression_teacher_points();
 
--- Inbox: expose score when correction is returned to the student.
 DROP FUNCTION IF EXISTS public.get_expression_inbox();
 CREATE FUNCTION public.get_expression_inbox()
 RETURNS TABLE(

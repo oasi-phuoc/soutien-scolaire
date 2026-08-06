@@ -12,15 +12,15 @@ const TRANS_PATH = path.join(__dirname, "grammaire-translations.json");
 const LOOKAHEAD = 300;
 
 const DEFAULT_FILES = [
-  "grammaire-r1.1b.ts", "grammaire-r1.2.ts", "grammaire-r1.3.ts", "grammaire-r1.4.ts",
-  "grammaire-r1.5.ts", "grammaire-r1.6.ts", "grammaire-r1.7.ts", "grammaire-r1.8.ts",
-  "grammaire-r1.9.ts", "grammaire-r2.1.ts", "grammaire-r2.5.ts", "grammaire-r4.1.ts",
-  "grammaire-r4.12.ts", "grammaire-r4.14.ts", "grammaire-r4.15.ts", "grammaire-r4.25.ts",
-  "grammaire-r4.26.ts", "grammaire-r4.3.ts", "grammaire-r4.4.ts", "grammaire-r4.5.ts",
-  "grammaire-r4.6.ts", "grammaire-r5.5-double-auxiliaire.ts", "grammaire-r5.6-pronominaux.ts",
-  "grammaire-r6.2-irreguliers.ts", "grammaire-r6.2.ts", "grammaire-r6.3-passe-imparfait.ts",
-  "grammaire-r6.4.ts", "grammaire-r6.5.ts", "grammaire-r7.2-irreguliers.ts",
-  "grammaire-r7.3-futurs.ts", "grammaire-r7.5-hypothese.ts",
+  "gramm-r1.1-les-pronoms-personnels.ts", "gramm-r1.2-les-verbes-etre-et-avoir.ts", "gramm-g4.1.ts", "grammaire-r1.4.ts",
+  "gramm-r1.5-les-verbes-en-er-au-present.ts", "gramm-g5.1.ts", "grammaire-r1.7.ts", "gramm-g5.2.ts",
+  "gramm-g1.4.ts", "gramm-r2.1-les-verbes-de-mouvement.ts", "gramm-r3.3-les-prepositions-de-lieu.ts", "gramm-r4.1-le-futur-proche.ts",
+  "grammaire-r4.12.ts", "gramm-r6.1-le-conditionnel-de-politesse.ts", "gramm-r6.3-l-imperatif.ts", "gramm-r5.8-les-verbes-reguliers-a-l-imparfait.ts",
+  "gramm-r4.4-les-verbes-reguliers-au-futur-simple.ts", "gramm-r5.1-passe-recent-et-present-continu.ts", "gramm-r5.2-passe-compose-avec-avoir.ts", "gramm-r5.3-passe-compose-avec-etre.ts",
+  "gramm-r5.4-negation-au-passe-compose.ts", "gramm-g8.3.ts", "gramm-g8.4.ts",
+  "gramm-r5.9-les-verbes-irreguliers-a-l-imparfait.ts", "gramm-r6.2-le-conditionnel.ts", "gramm-r5.10-passe-compose-ou-imparfait.ts",
+  "gramm-r6.4-le-gerondif.ts", "gramm-r6.5-le-subjonctif.ts", "gramm-r4.5-les-verbes-irreguliers-au-futur-simple.ts",
+  "gramm-g9.3.ts", "gramm-g9.4.ts",
 ];
 
 const translations = JSON.parse(fs.readFileSync(TRANS_PATH, "utf8"));

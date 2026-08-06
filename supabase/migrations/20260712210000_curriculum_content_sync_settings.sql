@@ -20,15 +20,13 @@ create policy curriculum_sync_settings_admin_all
   using (
     exists (
       select 1 from public.profiles p
-      where p.id = auth.uid()
-        and (p.role::text = 'admin' or p.is_admin = true)
+      where p.id = auth.uid() and p.is_admin = true
     )
   )
   with check (
     exists (
       select 1 from public.profiles p
-      where p.id = auth.uid()
-        and (p.role::text = 'admin' or p.is_admin = true)
+      where p.id = auth.uid() and p.is_admin = true
     )
   );
 
