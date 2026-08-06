@@ -62,9 +62,10 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "heading",
-      text: "Conjugaison",
-      trans: { en: "Conjugation", ar: "التصريف", fa: "صرف", pt: "Conjugação", so: "Qorista falka", ti: "ምጽራይ", tr: "Çekim", ps: "ګردان", uk: "Дієвідміна" },
+      type: "highlight",
+      label: "Conjugaison",
+      items: [],
+      transLabel: { en: "Conjugation", ar: "التصريف", fa: "صرف", pt: "Conjugação", so: "Qorista falka", ti: "ምጽራይ", tr: "Çekim", ps: "ګردان", uk: "Дієвідміна" },
     },
     {
       type: "grid",
@@ -91,9 +92,10 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       ],
     },
     {
-      type: "heading",
-      text: "Prononciation",
-      trans: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
+      type: "highlight",
+      label: "Prononciation",
+      items: [],
+      transLabel: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
     },
     {
       type: "plain_list",

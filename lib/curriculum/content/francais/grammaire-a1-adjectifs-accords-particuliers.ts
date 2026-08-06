@@ -31,13 +31,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
-      label: "",
-      items: [
-        "un pantalon noir → une jupe noir{a}e{/a}",
-        "une voiture rouge → des voitures rouge{a}s{/a}",
+      type: "grid",
+      headers: ["", ""],
+      equalCols: true,
+      rows: [
+        ["un pantalon noir", "une jupe noire"],
+        ["une voiture rouge", "des voitures rouges"],
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "plain_list",
@@ -76,14 +76,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
-      label: "",
-      items: [
-        "des yeux marron",
-        "des chaises orange",
-        "des cafés noisette",
+      type: "grid",
+      headers: ["Exemples"],
+      rows: [
+        ["des yeux marron"],
+        ["des chaises orange"],
+        ["des cafés noisette"],
       ],
-      noBulletItems: [0, 1, 2],
     },
     {
       type: "plain_list",
@@ -104,15 +103,14 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
-      label: "",
-      items: [
-        "des fleurs rose{a}s{/a}",
-        "des tissus mauve{a}s{/a}",
-        "des robes violett{a}es{/a}",
-        "des cheveux châtain{a}s{/a}",
+      type: "grid",
+      headers: ["Exemples"],
+      rows: [
+        ["des fleurs roses"],
+        ["des tissus mauves"],
+        ["des robes violettes"],
+        ["des cheveux châtains"],
       ],
-      noBulletItems: [0, 1, 2, 3],
     },
     {
       type: "plain_list",
@@ -133,13 +131,12 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
-      label: "",
-      items: [
-        "des chaussures bleu foncé",
-        "une robe bleu ciel",
+      type: "grid",
+      headers: ["Exemples"],
+      rows: [
+        ["des chaussures bleu foncé"],
+        ["une robe bleu ciel"],
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "plain_list",
@@ -160,12 +157,12 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
-      label: "",
-      items: [
-        "une veste noir et blanc",
+      type: "grid",
+      headers: ["Exemples"],
+      rows: [
+        ["une veste noir et blanc"],
+        ["un pull noir et blanc"],
       ],
-      noBulletItems: [0],
     },
     {
       type: "heading",

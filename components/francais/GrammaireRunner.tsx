@@ -409,6 +409,7 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
             const transH = useTrans ? block.transHeaders?.[pivot as keyof typeof block.transHeaders] : undefined;
             const transR = useTrans ? block.transRows?.[pivot as keyof typeof block.transRows] : undefined;
             const useFixed = Boolean(block.equalCols || block.colWidths?.length);
+            const showHeader = block.headers.some((h) => h.trim().length > 0);
             return (
               <div key={i} className="space-y-2">
                 <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
@@ -426,15 +427,17 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                         ))}
                       </colgroup>
                     )}
+                    {showHeader ? (
                     <thead>
                       <tr className="bg-[var(--color-accent-fr)]/15">
                         {block.headers.map((h, hi) => (
-                          <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]" lang={transH?.[hi] ? pivot : undefined} dir={transH?.[hi] && isRtl ? "rtl" : "ltr"}>
+                          <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)] whitespace-pre-line" lang={transH?.[hi] ? pivot : undefined} dir={transH?.[hi] && isRtl ? "rtl" : "ltr"}>
                             {transH?.[hi] ?? h}
                           </th>
                         ))}
                       </tr>
                     </thead>
+                    ) : null}
                     <tbody>
                       {block.rows.map((row, ri) => (
                         <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
@@ -500,6 +503,7 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                     )}
                   </div>
                 ) : null}
+                {items.length > 0 ? (
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {items.map((item, ii) => {
                     const skipBullet = (block.noFirstBullet && !item.includes(" → ")) || (block.noBulletItems?.includes(ii) ?? false);
@@ -537,6 +541,7 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                     );
                   })}
                 </ul>
+                ) : null}
               </div>
             );
           }
