@@ -1,9 +1,9 @@
 import type { GrammarLesson } from "../../grammar-data";
 
-/** Unité 21 — Les articles définis et indéfinis (G3.1) */
+/** Unité 21 — Les articles définis et indéfinis (G4.1) */
 export const A1_GR_L04: GrammarLesson = {
   slug: "a1-gr-l04",
-  code: "G3.1",
+  code: "G4.1",
   level: "A1",
   title: "Les articles définis et indéfinis",
   theory: [
@@ -19,26 +19,112 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0],
     },
     {
-      type: "highlight",
-      label: "Articles définis (le, la, les)",
+      type: "heading",
+      text: "Articles définis",
+    },
+    {
+      type: "plain_list",
       items: [
-        "Pour parler d'une notion générale. → La monnaie.",
-        "Pour parler de personnes ou de choses uniques ou précises. → La carte bancaire de Marie.",
+        "Les articles définis sont {a}le{/a}, {a}la{/a}, {a}l'{/a} et {a}les{/a}. On utilise ces articles pour parler de :",
       ],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}1. Notion générale{/a}",
+      ],
+      noBulletItems: [0],
     },
     {
       type: "highlight",
-      label: "Articles indéfinis (un, une, des)",
+      label: "",
       items: [
-        "Pour désigner des objets ou des personnes non précises. → C'est un client. ; Ce sont des billets de banque.",
-        "Pour exprimer une quantité : {a}un{/a}/{a}une{/a} = 1 ; {a}des{/a} = une quantité indéterminée.",
-        "— Vous avez des pièces de 1 euro ? — Non, j'ai un billet de 10 euros.",
+        "La monnaie est importante.",
+        "Les animaux ont besoin d'eau.",
       ],
-      noBulletItems: [2],
+      noBulletItems: [0, 1],
     },
     {
-      type: "note",
-      text: "Avec les verbes de préférence (aimer, adorer, préférer, détester), on utilise toujours l'article défini. → Je n'aime pas les pièces de 1 centime.",
+      type: "plain_list",
+      items: [
+        "{a}2. Personne, objet ou lieu déjà connu{/a}",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "La carte bancaire de Marie.",
+        "Le directeur est dans son bureau.",
+        "J'ouvre la fenêtre.",
+      ],
+      noBulletItems: [0, 1, 2],
+    },
+    {
+      type: "heading",
+      text: "Articles indéfinis",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Les articles indéfinis sont {a}un{/a}, {a}une{/a} et {a}des{/a}. On utilise ces articles pour parler de :",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}1. Personne ou chose non précise{/a}",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "C'est un client.",
+        "Ce sont des billets de banque.",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "{a}2. Quantité{/a} ({a}un{/a}/{a}une{/a} = 1 ; {a}des{/a} = une quantité indéterminée)",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "Vous avez des pièces de 5 francs ?",
+        "J'ai un billet de 10 francs.",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "highlight",
+      label: "Avec les verbes de préférence",
+      items: [],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "On utilise toujours l'{a}article défini{/a} avec les verbes aimer, adorer, préférer, détester.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "J'aime les fruits.",
+        "Elle préfère le thé.",
+      ],
+      noBulletItems: [0, 1],
     },
     {
       type: "heading",
@@ -53,30 +139,16 @@ export const A1_GR_L04: GrammarLesson = {
     },
     {
       type: "grid",
-      headers: ["", "Définis", "Indéfinis"],
+      headers: ["", "Articles définis", "Articles indéfinis"],
       boldFirstCol: true,
+      colWidths: ["34%", "33%", "33%"],
       rows: [
-        ["ms", "le chèque", "un chèque"],
-        ["fs", "la carte bancaire", "une carte bancaire"],
-        ["mp", "les billets", "des billets"],
-        ["fp", "les pièces", "des pièces"],
+        ["Masculin singulier", "{a}le{/a} chèque", "{a}un{/a} chèque"],
+        ["Féminin singulier", "{a}la{/a} carte bancaire", "{a}une{/a} carte bancaire"],
+        ["Singulier devant une voyelle ou un h muet", "{a}l'{/a}argent ; {a}l'{/a}hôtel", ""],
+        ["Masculin pluriel", "{a}les{/a} billets", "{a}des{/a} billets"],
+        ["Féminin pluriel", "{a}les{/a} pièces", "{a}des{/a} pièces"],
       ],
-    },
-    {
-      type: "note",
-      text: "Devant une voyelle ou un h muet, {a}le{/a} et {a}la{/a} deviennent {a}l'{/a}. → l'euro ; l'argent ; l'économie.",
-    },
-    {
-      type: "heading",
-      text: "Prononciation",
-    },
-    {
-      type: "plain_list",
-      items: [
-        "La prononciation de l'article permet souvent de distinguer le genre ou le nombre. → un chèque / une carte ; le billet / les billets.",
-        "Liaison devant un nom qui commence par une voyelle. → un euro ; les euros ; des euros.",
-      ],
-      allBullets: true,
     },
   ],
   exercises: [
