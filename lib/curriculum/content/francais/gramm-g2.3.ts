@@ -36,7 +36,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "",
+      label: "Exemples",
       items: [
         "une pomme — {a}des{/a} pomme{a}s{/a}",
       ],

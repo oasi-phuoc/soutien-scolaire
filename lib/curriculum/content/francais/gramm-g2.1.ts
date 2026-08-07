@@ -10,37 +10,71 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "En français, les noms ont un genre. Un nom peut être :",
-        "masculin",
-        "féminin",
+        "En français, les noms de personnes ont un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
       ],
       transItems: {
-        en: ["In French, nouns have a gender. A noun can be:", "masculine", "feminine"],
-        ar: ["في الفرنسية، للأسماء جنس. يمكن أن يكون الاسم:", "مذكراً", "مؤنثاً"],
-        fa: ["در فرانسوی، اسم‌ها جنس دارند. یک اسم می‌تواند باشد:", "مذکر", "مؤنث"],
-        pt: ["Em francês, os nomes têm género. Um nome pode ser:","masculino","feminino"],
-        so: ["Af Faransiis, magacyadu waxay leeyihiin jinsi. Magac wuxuu noqon karaa:","lab","dheddig"],
-        ti: ["ብፈረንሳይኛ፣ ስማት ጾታ ኣለዎም። ሓደ ስም ክኸውን ይኽእል:", "ተባዕታይ", "ኣንስተይቲ"],
-        tr: ["Fransızcada isimlerin cinsiyeti vardır. Bir isim şu olabilir:","eril","dişil"],
-        ps: ["په فرانسوي کې نومونه جنس لري. یو نوم کېدای شي:","مذکر","مونث"],
-        uk: ["У французькій мові іменники мають рід. Іменник може бути:", "чоловічого роду", "жіночого роду"],
+        en: [
+          "In French, {a}nouns referring to people{/a} have a gender. A noun can be {a}masculine{/a} or {a}feminine{/a}."
+        ],
+        ar: [
+          "في الفرنسية، {a}أسماء الأشخاص{/a} لها جنس. يمكن أن يكون الاسم {a}مذكراً{/a} أو {a}مؤنثاً{/a}."
+        ],
+        fa: [
+          "در زبان فرانسوی، {a}اسم‌های مربوط به افراد{/a} جنس دارند. یک اسم می‌تواند {a}مذکر{/a} یا {a}مؤنث{/a} باشد."
+        ],
+        pt: [
+          "Em francês, os {a}nomes de pessoas{/a} têm género. Um nome pode ser {a}masculino{/a} ou {a}feminino{/a}."
+        ],
+        so: [
+          "Af Faransiiska, {a}magacyada dadka{/a} waxay leeyihiin jinsi. Magac wuxuu noqon karaa {a}lab{/a} ama {a}dheddig{/a}."
+        ],
+        ti: [
+          "ብፈረንሳይኛ፣ {a}ስማት ሰባት{/a} ጾታ ኣለዎም። ሓደ ስም {a}ተባዕታይ{/a} ወይ {a}ኣንስተይቲ{/a} ክኸውን ይኽእል።"
+        ],
+        tr: [
+          "Fransızcada {a}kişileri ifade eden isimlerin{/a} cinsiyeti vardır. Bir isim {a}eril{/a} ya da {a}dişil{/a} olabilir."
+        ],
+        ps: [
+          "په فرانسوي کې {a}د خلکو نومونه{/a} جنس لري. یو نوم {a}مذکر{/a} یا {a}مونث{/a} کېدای شي."
+        ],
+        uk: [
+          "У французькій мові {a}іменники, що називають людей{/a}, мають рід. Іменник може бути {a}чоловічого роду{/a} або {a}жіночого роду{/a}."
+        ],
       },
     },
     {
       type: "plain_list",
       items: [
-        "Pour les personnes, les noms indiquent souvent une profession, un lien de famille ou une nationalité.",
+        "Pour les personnes, les noms indiquent souvent une {a}profession{/a}, un {a}lien de famille{/a} ou une {a}nationalité{/a}.",
       ],
       transItems: {
-        en: ["For people, nouns often name a profession, a family link or a nationality."],
-        ar: ["بالنسبة إلى الأشخاص، تشير الأسماء غالباً إلى مهنة أو رابط عائلي أو جنسية."],
-        fa: ["برای اشخاص، اسم‌ها اغلب یک شغل، پیوند خانوادگی یا ملیت را نشان می‌دهند."],
-        pt: ["Para pessoas, os nomes indicam muitas vezes uma profissão, uma relação familiar ou uma nacionalidade."],
-        so: ["Dadka marka laga hadlayo, magacyadu badanaa waxay sheegaan xirfad, xiriir qoys ama dhalasho."],
-        ti: ["ንሰባት፣ ስማት መብዛሕትኡ ግዜ ሞያ፣ ስድራቤታዊ ምትእስሳር ወይ ዜግነት የመልክቱ።"],
-        tr: ["İnsanlar için isimler çoğu zaman bir mesleği, aile bağını veya milliyeti belirtir."],
-        ps: ["د خلکو لپاره، نومونه ډېری وخت یو مسلک، کورنۍ اړیکه یا تابعیت ښيي."],
-        uk: ["Для осіб іменники часто позначають професію, родинний зв’язок або національність."],
+        en: [
+          "For people, nouns often name a {a}profession{/a}, a {a}family relationship{/a} or a {a}nationality{/a}."
+        ],
+        ar: [
+          "بالنسبة إلى الأشخاص، تشير الأسماء غالباً إلى {a}مهنة{/a} أو {a}رابطة عائلية{/a} أو {a}جنسية{/a}."
+        ],
+        fa: [
+          "برای اشخاص، اسم‌ها اغلب یک {a}شغل{/a}، {a}رابطهٔ خانوادگی{/a} یا {a}ملیت{/a} را نشان می‌دهند."
+        ],
+        pt: [
+          "Para pessoas, os nomes indicam muitas vezes uma {a}profissão{/a}, uma {a}relação familiar{/a} ou uma {a}nacionalidade{/a}."
+        ],
+        so: [
+          "Dadka marka laga hadlayo, magacyadu badanaa waxay sheegaan {a}xirfad{/a}, {a}xiriir qoys{/a} ama {a}dhalasho{/a}."
+        ],
+        ti: [
+          "ንሰባት፣ ስማት መብዛሕትኡ ግዜ {a}ሞያ{/a}፣ {a}ስድራቤታዊ ምትእስሳር{/a} ወይ {a}ዜግነት{/a} የመልክቱ።"
+        ],
+        tr: [
+          "İnsanlar için isimler çoğu zaman bir {a}mesleği{/a}, {a}aile bağını{/a} veya {a}milliyeti{/a} belirtir."
+        ],
+        ps: [
+          "د خلکو لپاره، نومونه ډېری وخت یو {a}مسلک{/a}، {a}کورنۍ اړیکه{/a} یا {a}تابعیت{/a} ښيي."
+        ],
+        uk: [
+          "Для осіб іменники часто позначають {a}професію{/a}, {a}родинний зв’язок{/a} або {a}національність{/a}."
+        ],
       },
     },
     {
@@ -133,8 +167,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       type: "highlight",
       label: "",
       items: [
-        "un journaliste → une journalist{a}e{/a}",
-        "un fonctionnaire → une fonctionnair{a}e{/a}",
+        "un journalist{a}e{/a} → une journalist{a}e{/a}",
+        "un fonctionnair{a}e{/a} → une fonctionnair{a}e{/a}",
       ],
       noBulletItems: [0, 1],
       inlineArrows: true,
@@ -441,18 +475,32 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         ps: "ځانګړي حالتونه",
         uk: "Особливі випадки",
       },
-      items: [
-        "un homme → une femme",
-        "un garçon → une fille",
-        "un père → une mère",
-        "un frère → une sœur",
-        "un mari → une femme",
-        "un fils → une fille",
-        "un copain → une copine",
-      ],
-      noBulletItems: [0, 1, 2, 3, 4, 5, 6],
+      items: [],
     },
-
+    {
+      type: "grid",
+      headers: ["Noms masculins", "Noms féminins"],
+      transHeaders: {
+        en: ["Masculine nouns", "Feminine nouns"],
+        ar: ["أسماء مذكرة", "أسماء مؤنثة"],
+        fa: ["اسم‌های مذکر", "اسم‌های مؤنث"],
+        pt: ["Nomes masculinos", "Nomes femininos"],
+        so: ["Magacyo lab", "Magacyo dheddig"],
+        ti: ["ተባዕታይ ስማት", "ኣንስተይቲ ስማት"],
+        tr: ["Eril isimler", "Dişil isimler"],
+        ps: ["مذکر نومونه", "مونث نومونه"],
+        uk: ["Чоловічі іменники", "Жіночі іменники"],
+      },
+      rows: [
+        ["un homme", "une femme"],
+        ["un garçon", "une fille"],
+        ["un père", "une mère"],
+        ["un frère", "une sœur"],
+        ["un mari", "une femme"],
+        ["un fils", "une fille"],
+        ["un copain", "une copine"],
+      ]
+    },
     {
       type: "heading",
       text: "Prononciation et orthographe",

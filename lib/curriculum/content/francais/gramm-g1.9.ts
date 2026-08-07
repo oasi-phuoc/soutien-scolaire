@@ -88,10 +88,10 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       ],
     },
     {
-      type: "heading",
-      text: "Prononciation",
-      accent: true,
-      trans: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
+      type: "highlight",
+      label: "Prononciation",
+      items: [],
+      transLabel: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
     },
     {
       type: "plain_list",
@@ -252,10 +252,10 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       ],
     },
     {
-      type: "heading",
-      text: "Prononciation",
-      accent: true,
-      trans: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
+      type: "highlight",
+      label: "Prononciation",
+      items: [],
+      transLabel: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
     },
     {
       type: "plain_list",

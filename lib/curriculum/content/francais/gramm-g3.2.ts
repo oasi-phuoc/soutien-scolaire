@@ -82,8 +82,8 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       },
       equalCols: true,
       rows: [
-        ["Cet homme est mauvais.", "Ces hommes sont mauvais."],
-        ["Le professeur est ennuyeux.", "Les professeurs sont ennuyeux."],
+        ["Cet homme est mauvai{a}s{/a}.", "Ces hommes sont mauvai{a}s{/a}."],
+        ["Le professeur est ennuyeu{a}x{/a}.", "Les professeurs sont ennuyeu{a}x{/a}."],
       ],
     },
     {
@@ -190,19 +190,37 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Le féminin pluriel reste régulier (+ {a}s{/a}).",
+        "Le {a}féminin{/a} pluriel reste régulier (+ {a}s{/a}).",
       ],
       noBulletItems: [0],
       transItems: {
-        en: ["The feminine plural stays regular (+ {a}s{/a})."],
-        ar: ["يبقى جمع المؤنث منتظماً (+ {a}s{/a})."],
-        fa: ["جمع مؤنث منظم می‌ماند (+ {a}s{/a})."],
-        pt: ["O plural feminino mantém-se regular (+ {a}s{/a})."],
-        so: ["Jamaca dheddiggu wuxuu ahaanayaa caadi (+ {a}s{/a})."],
-        ti: ["እቲ ኣንስታይ ባዙሕ ስሩዕ ኮይኑ ይቕጽል (+ {a}s{/a})።"],
-        tr: ["Dişil çoğul düzenli kalır (+ {a}s{/a})."],
-        ps: ["مؤنث جمع منظم پاتې کېږي (+ {a}s{/a})."],
-        uk: ["Жіноча форма множини залишається регулярною (+ {a}s{/a})."],
+        en: [
+          "The {a}feminine{/a} plural stays regular (+ {a}s{/a})."
+        ],
+        ar: [
+          "يبقى جمع {a}المؤنث{/a} منتظماً (+ {a}s{/a})."
+        ],
+        fa: [
+          "جمع {a}مؤنث{/a} منظم می‌ماند (+ {a}s{/a})."
+        ],
+        pt: [
+          "O plural {a}feminino{/a} mantém-se regular (+ {a}s{/a})."
+        ],
+        so: [
+          "Jamac {a}dheddig{/a} wuxuu ahaanayaa caadi (+ {a}s{/a})."
+        ],
+        ti: [
+          "እቲ ባዙሕ {a}ኣንስተይቲ{/a} ስሩዕ ኮይኑ ይቕጽል (+ {a}s{/a})።"
+        ],
+        tr: [
+          " {a}Dişil{/a} çoğul düzenli kalır (+ {a}s{/a})."
+        ],
+        ps: [
+          "{a}مؤنث{/a} جمع منظم پاتې کېږي (+ {a}s{/a})."
+        ],
+        uk: [
+          "{a}Жіноча{/a} форма множини залишається регулярною (+ {a}s{/a})."
+        ],
       },
     },
     {
@@ -215,19 +233,37 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
             {
               type: "plain_list",
               items: [
-                "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
+                "Les mots {a}masculins{/a} terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
               ],
               noBulletItems: [0],
               transItems: {
-                en: ["Words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-al{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-al{/a} no singular passam a {a}-aux{/a} no plural."],
-                so: ["Erayada ku dhammaada {a}-al{/a} marka ay keli yihiin waxay jamaca isu beddelaan {a}-aux{/a}."],
-                ti: ["ብንጽል ብ {a}-al{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"],
-                tr: ["{a}-al{/a} ile biten tekil sözcükler çoğulda {a}-aux{/a} olur."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-al{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} ته بدلېږي."],
-                uk: ["Слова на {a}-al{/a} в однині змінюються на {a}-aux{/a} у множині."],
+                en: [
+                  " {a}Masculine{/a} words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural."
+                ],
+                ar: [
+                  "الكلمات {a}المذكرة{/a} المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع."
+                ],
+                fa: [
+                  "کلمات {a}مذکر{/a} که در مفرد به {a}-al{/a} ختم می‌شوند، در جمع به {a}-aux{/a} تغییر می‌کنند."
+                ],
+                pt: [
+                  "As palavras {a}masculinas{/a} terminadas em {a}-al{/a} no singular passam a {a}-aux{/a} no plural."
+                ],
+                so: [
+                  "Erayada {a}lab{/a} ee ku dhammaada {a}-al{/a} marka ay keli yihiin waxay jamaca isu beddelaan {a}-aux{/a}."
+                ],
+                ti: [
+                  "እቶም {a}ተባዕታይ{/a} ቃላት ብንጽል ብ {a}-al{/a} ዝውድኡ ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"
+                ],
+                tr: [
+                  "{a}Eril{/a} ve tekilde {a}-al{/a} ile biten kelimeler çoğulda {a}-aux{/a} olur."
+                ],
+                ps: [
+                  "{a}مذکر{/a} هغه کلمې چې په مفرد کې په {a}-al{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} ته بدلېږي."
+                ],
+                uk: [
+                  "{a}Чоловічі{/a} слова, що закінчуються на {a}-al{/a} в однині, змінюються на {a}-aux{/a} у множині."
+                ],
               },
             },
             {

@@ -338,6 +338,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         "{a}Savoir{/a} = un fait, une information, une capacité.",
         "{a}Connaître{/a} = être familier avec une personne, un lieu ou une chose.",
       ],
+      noBulletItems: [0, 1],
       transLabel: { en: "Simple rule", ar: "قاعدة بسيطة", fa: "قاعده ساده", pt: "Regra simples", so: "Xeer fudud", ti: "ቀሊል ሕጊ", tr: "Basit kural", ps: "ساده قاعده", uk: "Просте правило" },
       transItems: {
         en: ["{a}Savoir{/a} = a fact, information or an ability.", "{a}Connaître{/a} = to be familiar with a person, place or thing."],
@@ -358,6 +359,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
         "On ne dit pas {s}je sais Paris{/s} mais {a}je connais Paris{/a}.",
         "On ne dit pas {s}je connais nager{/s} mais {a}je sais nager{/a}.",
       ],
+      noBulletItems: [0, 1],
       transLabel: { en: "Caution", ar: "تنبيه", fa: "توجه", pt: "Atenção", so: "Feejignaan", ti: "ኣስተውዕል", tr: "Dikkat", ps: "پاملرنه", uk: "Увага" },
     },
   ],

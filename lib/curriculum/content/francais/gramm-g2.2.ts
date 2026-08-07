@@ -10,54 +10,106 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "En français, les noms ont un genre. Un nom peut être :",
-        "masculin",
-        "féminin",
+        "En français, les noms de choses ont également un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
       ],
       transItems: {
-        en: ["In French, nouns have a gender. A noun can be:", "masculine", "feminine"],
-        ar: ["في الفرنسية، للأسماء جنس. يمكن أن يكون الاسم:", "مذكراً", "مؤنثاً"],
-        fa: ["در فرانسوی، اسم‌ها جنس دارند. یک اسم می‌تواند باشد:", "مذکر", "مؤنث"],
-        pt: ["Em francês, os nomes têm género. Um nome pode ser:","masculino","feminino"],
-        so: ["Af Faransiis, magacyadu waxay leeyihiin jinsi. Magac wuxuu noqon karaa:","lab","dheddig"],
-        ti: ["ብፈረንሳይኛ፣ ስማት ጾታ ኣለዎም። ሓደ ስም ክኸውን ይኽእል:", "ተባዕታይ", "ኣንስተይቲ"],
-        tr: ["Fransızcada isimlerin cinsiyeti vardır. Bir isim şu olabilir:","eril","dişil"],
-        ps: ["په فرانسوي کې نومونه جنس لري. یو نوم کېدای شي:","مذکر","مونث"],
-        uk: ["У французькій мові іменники мають рід. Іменник може бути:", "чоловічого роду", "жіночого роду"],
+        en: [
+          "In French, {a}nouns referring to things{/a} also have a gender. A noun can be {a}masculine{/a} or {a}feminine{/a}."
+        ],
+        ar: [
+          "في الفرنسية، {a}أسماء الأشياء{/a} لها أيضاً جنس. يمكن أن يكون الاسم {a}مذكراً{/a} أو {a}مؤنثاً{/a}."
+        ],
+        fa: [
+          "در زبان فرانسوی، {a}اسم‌های مربوط به اشیا{/a} نیز جنس دارند. یک اسم می‌تواند {a}مذکر{/a} یا {a}مؤنث{/a} باشد."
+        ],
+        pt: [
+          "Em francês, os {a}nomes de coisas{/a} também têm género. Um nome pode ser {a}masculino{/a} ou {a}feminino{/a}."
+        ],
+        so: [
+          "Af Faransiiska, {a}magacyada waxyaabaha{/a} sidoo kale waxay leeyihiin jinsi. Magac wuxuu noqon karaa {a}lab{/a} ama {a}dheddig{/a}."
+        ],
+        ti: [
+          "ብፈረንሳይኛ፣ {a}ስማት ነገራት{/a} እውን ጾታ ኣለዎም። ሓደ ስም {a}ተባዕታይ{/a} ወይ {a}ኣንስተይቲ{/a} ክኸውን ይኽእል።"
+        ],
+        tr: [
+          "Fransızcada {a}nesneleri ifade eden isimlerin{/a} de cinsiyeti vardır. Bir isim {a}eril{/a} ya da {a}dişil{/a} olabilir."
+        ],
+        ps: [
+          "په فرانسوي کې {a}د شيانو نومونه{/a} هم جنس لري. یو نوم {a}مذکر{/a} یا {a}مونث{/a} کېدای شي."
+        ],
+        uk: [
+          "У французькій мові {a}іменники, що називають предмети{/a}, також мають рід. Іменник може бути {a}чоловічого роду{/a} або {a}жіночого роду{/a}."
+        ],
       },
     },
     {
       type: "plain_list",
       items: [
-        "Pour les choses, les noms indiquent souvent un objet, un lieu ou une idée.",
+        "Pour les choses, les noms indiquent souvent un {a}objet{/a}, un {a}lieu{/a} ou une {a}idée{/a}.",
       ],
       transItems: {
-        en: ["For things, nouns often name an object, a place or an idea."],
-        ar: ["بالنسبة إلى الأشياء، تشير الأسماء غالباً إلى غرض أو مكان أو فكرة."],
-        fa: ["برای چیزها، اسم‌ها اغلب یک شیء، یک مکان یا یک ایده را نشان می‌دهند."],
-        pt: ["Para coisas, os nomes indicam muitas vezes um objeto, um lugar ou uma ideia."],
-        so: ["Waxyaabaha marka laga hadlayo, magacyadu badanaa waxay sheegaan shay, meel ama fikrad."],
-        ti: ["ንነገራት፣ ስማት መብዛሕትኡ ግዜ ነገር፣ ቦታ ወይ ሓሳብ የመልክቱ።"],
-        tr: ["Nesneler için isimler çoğu zaman bir nesneyi, yeri veya fikri belirtir."],
-        ps: ["د شیانو لپاره، نومونه ډېری وخت یو څیز، ځای یا مفکوره ښيي."],
-        uk: ["Для речей іменники часто позначають предмет, місце або ідею."],
+        en: [
+          "For things, nouns often name an {a}object{/a}, a {a}place{/a} or an {a}idea{/a}."
+        ],
+        ar: [
+          "بالنسبة إلى الأشياء، تشير الأسماء غالباً إلى {a}غرض{/a} أو {a}مكان{/a} أو {a}فكرة{/a}."
+        ],
+        fa: [
+          "برای چیزها، اسم‌ها اغلب یک {a}شیء{/a}، یک {a}مکان{/a} یا یک {a}ایده{/a} را نشان می‌دهند."
+        ],
+        pt: [
+          "Para coisas, os nomes indicam muitas vezes um {a}objeto{/a}, um {a}lugar{/a} ou uma {a}ideia{/a}."
+        ],
+        so: [
+          "Waxyaabaha marka laga hadlayo, magacyadu badanaa waxay sheegaan {a}shay{/a}, {a}meel{/a} ama {a}fikrad{/a}."
+        ],
+        ti: [
+          "ንነገራት፣ ስማት መብዛሕትኡ ግዜ {a}ነገር{/a}፣ {a}ቦታ{/a} ወይ {a}ሓሳብ{/a} የመልክቱ።"
+        ],
+        tr: [
+          "Nesneler için isimler çoğu zaman bir {a}nesneyi{/a}, {a}yeri{/a} veya {a}fikri{/a} belirtir."
+        ],
+        ps: [
+          "د شیانو لپاره، نومونه ډېری وخت یو {a}څیز{/a}، {a}ځای{/a} یا {a}مفکوره{/a} ښيي."
+        ],
+        uk: [
+          "Для речей іменники часто позначають {a}предмет{/a}, {a}місце{/a} або {a}ідею{/a}."
+        ],
       },
     },
     {
       type: "plain_list",
       items: [
-        "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} livre, {a}une{/a} ville.",
+        "Un nom s'emploie toujours avec un déterminant ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Le déterminant indique le genre : {a}un{/a} livre, {a}une{/a} ville.",
       ],
       transItems: {
-        en: ["A noun is always used with a determiner (un, la, des, ce, mon…). The determiner shows the gender: {a}un{/a} livre, {a}une{/a} ville."],
-        ar: ["يُستعمل الاسم دائماً مع محدد (un, la, des, ce, mon…). المحدد يدل على الجنس: {a}un{/a} livre, {a}une{/a} ville."],
-        fa: ["اسم همیشه با یک حرف تعریف (un, la, des, ce, mon…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} livre, {a}une{/a} ville."],
-        pt: ["Um nome usa-se sempre com um determinante (un, la, des, ce, mon…). O determinante mostra o género: {a}un{/a} livre, {a}une{/a} ville."],
-        so: ["Magac mar walba waxaa lala adeegsadaa go'aamiye (un, la, des, ce, mon…). Go'aamiyuhu wuxuu muujiyaa jinsiga: {a}un{/a} livre, {a}une{/a} ville."],
-        ti: ["ስም ኩሉ ግዜ ምስ መወሰኒ (un, la, des, ce, mon…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት: {a}un{/a} livre, {a}une{/a} ville."],
-        tr: ["Bir isim her zaman bir belirleyiciyle (un, la, des, ce, mon…) kullanılır. Belirleyici cinsiyeti gösterir: {a}un{/a} livre, {a}une{/a} ville."],
-        ps: ["نوم تل له ټاکونکي سره کارېږي (un, la, des, ce, mon…). ټاکونکی جنس ښيي: {a}un{/a} livre, {a}une{/a} ville."],
-        uk: ["Іменник завжди вживається з означенням (un, la, des, ce, mon…). Означення показує рід: {a}un{/a} livre, {a}une{/a} ville."],
+        en: [
+          "A noun is always used with a determiner ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). The determiner shows the gender: {a}un{/a} livre, {a}une{/a} ville."
+        ],
+        ar: [
+          "يُستعمل الاسم دائماً مع محدد ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…). المحدد يدل على الجنس: {a}un{/a} livre، {a}une{/a} ville."
+        ],
+        fa: [
+          "اسم همیشه با یک حرف تعریف ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} livre، {a}une{/a} ville."
+        ],
+        pt: [
+          "Um nome usa-se sempre com um determinante ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). O determinante mostra o género: {a}un{/a} livre, {a}une{/a} ville."
+        ],
+        so: [
+          "Magac mar walba waxaa lala adeegsadaa go'aamiye ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Go'aamiyuhu wuxuu muujiyaa jinsiga: {a}un{/a} livre, {a}une{/a} ville."
+        ],
+        ti: [
+          "ስም ኩሉ ግዜ ምስ መወሰኒ ({a}un{/a}፣ {a}la{/a}፣ {a}des{/a}፣ {a}ce{/a}፣ {a}mon{/a}…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት፦ {a}un{/a} livre, {a}une{/a} ville."
+        ],
+        tr: [
+          "Bir isim her zaman bir belirleyiciyle ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…) kullanılır. Belirleyici cinsiyeti gösterir: {a}un{/a} livre, {a}une{/a} ville."
+        ],
+        ps: [
+          "نوم تل له ټاکونکي سره کارېږي ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…). ټاکونکی جنس ښيي: {a}un{/a} livre، {a}une{/a} ville."
+        ],
+        uk: [
+          "Іменник завжди вживається з означенням ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Означення показує рід: {a}un{/a} livre, {a}une{/a} ville."
+        ],
       },
     },
     {

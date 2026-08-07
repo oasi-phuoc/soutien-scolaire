@@ -10,19 +10,37 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Un nom composé est un nom formé de deux ou plusieurs mots qui créent ensemble un seul nom. Les mots peuvent être reliés par un trait d'union ou par une préposition ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a}).",
+        "Un nom composé est un nom formé de {a}deux{/a} ou {a}plusieurs{/a} mots qui créent ensemble un seul nom. Les mots peuvent être reliés par un {a}trait d'union{/a} ({a}-{/a}) ou par une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a}).",
       ],
       noBulletItems: [0],
       transItems: {
-        en: ["A compound noun is a noun made of two or more words that together form a single noun. The words may be linked by a hyphen or by a preposition ({a}à{/a}, {a}de{/a}, {a}en{/a} or {a}aux{/a})."],
-        ar: ["الاسم المركب هو اسم يتكوّن من كلمتين أو أكثر تشكّل معاً اسماً واحداً. قد تُربط الكلمات بشرطة أو بحرف جر ({a}à{/a}، {a}de{/a}، {a}en{/a} أو {a}aux{/a})."],
-        fa: ["اسم مرکب اسمی است که از دو یا چند کلمه ساخته شده و با هم یک اسم واحد می‌سازند. کلمات ممکن است با خط تیره یا با حرف اضافه ({a}à{/a}، {a}de{/a}، {a}en{/a} یا {a}aux{/a}) به هم وصل شوند."],
-        pt: ["Um nome composto é um nome formado por duas ou mais palavras que, juntas, criam um só nome. As palavras podem estar ligadas por um hífen ou por uma preposição ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a})."],
-        so: ["Magac isku dhafan waa magac ka samaysan laba ama ka badan ereyo oo wada sameeya hal magac. Ereyadu waxaa lagu xiri karaa jiitin ama meeleeye ({a}à{/a}, {a}de{/a}, {a}en{/a} ama {a}aux{/a})."],
-        ti: ["ውሁድ ስም ካብ ክልተ ወይ ዝያዳ ቃላት ዝቖመ ስም እዩ፣ ብሓባር ሓደ ስም ይፈጥሩ። እቶም ቃላት ብመስመር ወይ ብቅድመ-ስም ({a}à{/a}፣ {a}de{/a}፣ {a}en{/a} ወይ {a}aux{/a}) ክተኣሳሰሩ ይኽእሉ።"],
-        tr: ["Bileşik isim, birlikte tek bir isim oluşturan iki veya daha fazla kelimeden yapılan isimdir. Kelimeler bir kısa çizgiyle veya bir edatla ({a}à{/a}, {a}de{/a}, {a}en{/a} ya da {a}aux{/a}) bağlanabilir."],
-        ps: ["مرکب نوم هغه نوم دی چې له دوو یا ډېرو کلمو جوړ وي او په ګډه یو نوم جوړوي. کلمې کېدای شي په هایفن یا په حرف اضافه ({a}à{/a}, {a}de{/a}, {a}en{/a} یا {a}aux{/a}) سره ونښلول شي."],
-        uk: ["Складний іменник — це іменник, утворений з двох або більше слів, які разом створюють один іменник. Слова можуть бути з’єднані дефісом або прийменником ({a}à{/a}, {a}de{/a}, {a}en{/a} чи {a}aux{/a})."],
+        en: [
+          "A compound noun is a noun made of {a}two{/a} or {a}more{/a} words that together form a single noun. The words may be linked by a {a}hyphen{/a} ({a}-{/a}) or by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} or {a}aux{/a})."
+        ],
+        ar: [
+          "الاسم المركب هو اسم يتكوّن من {a}كلمتين{/a} أو {a}أكثر{/a} تشكّل معاً اسماً واحداً. قد تُربط الكلمات بـ{a}شرطة وصل{/a} ({a}-{/a}) أو بـ{a}حرف جر{/a} ({a}à{/a}، {a}de{/a}، {a}en{/a} أو {a}aux{/a})."
+        ],
+        fa: [
+          "اسم مرکب اسمی است که از {a}دو{/a} یا {a}چند{/a} کلمه ساخته شده و با هم یک اسم واحد می‌سازند. کلمات ممکن است با {a}خط تیره{/a} ({a}-{/a}) یا با {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a}، {a}en{/a} یا {a}aux{/a}) به هم وصل شوند."
+        ],
+        pt: [
+          "Um nome composto é um nome formado por {a}duas{/a} ou {a}mais{/a} palavras que, juntas, criam um só nome. As palavras podem estar ligadas por um {a}hífen{/a} ({a}-{/a}) ou por uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a})."
+        ],
+        so: [
+          "Magac isku dhafan waa magac ka samaysan {a}laba{/a} ama {a}in ka badan{/a} erey oo wada sameeya hal magac. Ereyadu waxaa lagu xiri karaa {a}jiitin{/a} ({a}-{/a}) ama {a}meeleeye{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ama {a}aux{/a})."
+        ],
+        ti: [
+          "ውሁድ ስም ካብ {a}ክልተ{/a} ወይ {a}ዝያዳ{/a} ቃላት ዝቖመ ስም እዩ፣ ብሓባር ሓደ ስም ይፈጥሩ። እቶም ቃላት ብ{a}መስመር ምትእስሳር{/a} ({a}-{/a}) ወይ ብ{a}ቅድመ-ስም{/a} ({a}à{/a}፣ {a}de{/a}፣ {a}en{/a} ወይ {a}aux{/a}) ክተኣሳሰሩ ይኽእሉ።"
+        ],
+        tr: [
+          "Bileşik isim, {a}iki{/a} veya {a}daha fazla{/a} kelimeden oluşan ve birlikte tek bir isim oluşturan isimdir. Kelimeler bir {a}kısa çizgi{/a} ({a}-{/a}) veya bir {a}edat{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ya da {a}aux{/a}) ile bağlanabilir."
+        ],
+        ps: [
+          "مرکب نوم هغه نوم دی چې له {a}دوو{/a} یا {a}څو{/a} کلمو جوړ وي او په ګډه یو نوم جوړوي. کلمې کېدای شي د {a}هایفن{/a} ({a}-{/a}) یا د {a}حرف اضافه{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} یا {a}aux{/a}) په وسیله ونښلول شي."
+        ],
+        uk: [
+          "Складний іменник — це іменник, утворений з {a}двох{/a} або {a}кількох{/a} слів, які разом створюють один іменник. Слова можуть бути з’єднані {a}дефісом{/a} ({a}-{/a}) або {a}прийменником{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} чи {a}aux{/a})."
+        ],
       },
     },
     {
