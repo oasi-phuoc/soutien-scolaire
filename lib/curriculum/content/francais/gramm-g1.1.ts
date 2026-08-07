@@ -59,7 +59,7 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["مفرد", "جمع"],
         uk: ["Однина", "Множина"],
       },
-      equalCols: true,
+      colWidths: ["33%", "67%"],
       rows: [
         ["je → moi", "nous → plusieurs personnes et moi"],
         ["tu → un ami", "vous → plusieurs personnes"],
@@ -149,7 +149,7 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "plain_list",
-      items: [],
+      items: ["On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",],
       transItems: {
         en: ["We use {a}tu{/a} to speak to someone we know in an informal situation."],
         ar: ["نستخدم {a}tu{/a} لمخاطبة شخص نعرفه في موقف غير رسمي."],
@@ -174,9 +174,7 @@ export const A1_GR_L01: GrammarLesson = {
       type: "highlight",
       label: "VOUS",
       noBulletItems: [0],
-      items: [
-        "Madame, {a}vous{/a} allez bien ?",
-      ],
+      items: [],
       transLabel: { en: "VOUS", ar: "VOUS", fa: "VOUS", pt: "VOUS", so: "VOUS", ti: "VOUS", tr: "VOUS", ps: "VOUS", uk: "VOUS" },
     },
     {
@@ -255,7 +253,7 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["نوم", "ضمیر"],
         uk: ["Іменник", "Займенник"],
       },
-      equalCols: true,
+      colWidths: ["33%", "67%"],
       rows: [
         ["Ali {a}♂{/a}", "il"],
         ["Alona {a}♀{/a}", "elle"],

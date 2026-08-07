@@ -119,6 +119,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         uk: ["Вживання", "Приклад"],
       },
       colWidths: ["33%", "67%"],
+      boldFirstCol: true,
       rows: [
         ["Désir", "Je {a}veux{/a} manger une pizza."],
         ["Volonté", "Je {a}veux{/a} apprendre le français."],
@@ -168,6 +169,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         uk: ["Вживання", "Приклад"],
       },
       colWidths: ["33%", "67%"],
+      boldFirstCol: true,
       rows: [
         ["Capacité", "Je {a}peux{/a} nager."],
         ["Possibilité", "Nous {a}pouvons{/a} partir maintenant."],
@@ -219,6 +221,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         uk: ["Вживання", "Приклад"],
       },
       colWidths: ["33%", "67%"],
+      boldFirstCol: true,
       rows: [
         ["Obligation", "Je {a}dois{/a} faire mes devoirs."],
         ["Nécessité", "Nous {a}devons{/a} partir tôt."],
@@ -270,6 +273,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         uk: ["Вживання", "Приклад"],
       },
       colWidths: ["33%", "67%"],
+      boldFirstCol: true,
       rows: [
         ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."],
         ["Interdiction", "Il ne {a}faut{/a} pas parler pendant l'examen."],

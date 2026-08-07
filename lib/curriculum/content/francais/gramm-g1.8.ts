@@ -45,6 +45,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         uk: ["Вживання", "Приклад"],
       },
       colWidths: ["33%", "67%"],
+      boldFirstCol: true,
       rows: [
         ["Déplacement", "Tu {a}vas{/a} où ?\nNous {a}allons{/a} en Espagne."],
         ["Nouvelles", "Tu {a}vas{/a} bien ?\nOui, je {a}vais{/a} bien."],
@@ -82,6 +83,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         uk: ["Займенник", "Aller", "Приклад"],
       },
       boldFirstCol: true,
+      colWidths: ["33%", "17%", "50"],
       rows: [
         ["Je", "vais", "au cinéma."],
         ["Tu", "vas", "à la pharmacie."],

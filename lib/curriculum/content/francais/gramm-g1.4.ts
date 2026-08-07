@@ -321,14 +321,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
     },
-
-    // ── MÉTHODE RAPIDE ─────────────────────────────────────────────────────────
-    {
-      type: "heading",
-      text: "Méthode rapide",
-      sub: true,
-      trans: { en: "Quick method", ar: "الطريقة السريعة", fa: "روش سریع", pt: "Método rápido", so: "Hab degdeg ah", ti: "ቅልጡፍ መምርሒ", tr: "Hızlı yöntem", ps: "چټکه طریقه", uk: "Швидкий метод" },
-    },
   ],
   exercises: [
     // ── Exercice 1 — Classify ──────────────────────────────────────────────────

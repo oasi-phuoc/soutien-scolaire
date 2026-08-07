@@ -127,7 +127,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Le sujet du verbe fait l'action sur lui-même. Un verbe pronominal est toujours accompagné d'un pronom réfléchi.",
+        "Le sujet du verbe fait l'action sur lui-même. Un verbe pronominal est toujours accompagné d'un {a}pronom réfléchi{/a}.",
       ],
       transItems: {
         en: ["The subject of the verb performs the action on itself. A reflexive verb is always accompanied by a reflexive pronoun."],
@@ -143,8 +143,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "",
-      items: ["Elle {a}se regarde{/a} dans le miroir."],
+      label: "Exemples",
+      items: ["Elle {a}se{/a} regarde dans le miroir."],
       noBulletItems: [0],
     },
 
@@ -184,6 +184,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         ps: ["فاعل", "انعکاسي ضمیر"],
         uk: ["Підмет", "Зворотний займенник"],
       },
+      colWidths: ["33%", "67%"],
       boldFirstCol: true,
       rows: [
         ["je", "me (m')"],
