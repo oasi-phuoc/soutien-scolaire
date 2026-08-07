@@ -142,7 +142,7 @@ export function CommunicationModuleList({
           </p>
         </li>
       ) : null}
-      {modulesView.map(({ m, visibleSubs, completedCount, allDone, moduleState, moduleAccessible }) => {
+      {modulesView.map(({ m, visibleSubs, completedCount, moduleState, moduleAccessible }) => {
         if (visibleSubs.length === 0 && !isAdmin) return null;
         const expanded = isExpanded(m.id, moduleState);
         const firstAvailableIdx = visibleSubs.findIndex((s) => !completed[s.id]);
