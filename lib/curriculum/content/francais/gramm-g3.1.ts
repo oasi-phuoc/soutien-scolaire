@@ -622,10 +622,10 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     {
       type: "grid",
       headers: [
-        "Masculin\ndevant cons.",
-        "Masculin\ndevant voyelle/h muet",
+        "Masculin\ndevant consonne",
+        "Masculin\ndevant voyelle ou h",
         "Féminin",
-        "Pluriel masc.",
+        "Pluriel\nmasculin",
       ],
       transHeaders: {
         en: ["Masculine\nbefore consonant", "Masculine\nbefore vowel/silent h", "Feminine", "Masculine plural"],

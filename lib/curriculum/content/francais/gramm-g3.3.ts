@@ -31,14 +31,23 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "grid",
-      headers: ["", ""],
-      equalCols: true,
-      rows: [
-        ["un pantalon noir", "une jupe noire"],
-        ["une voiture rouge", "des voitures rouges"],
+      type: "highlight",
+      label: "",
+      items: [
+        "un pantalon noir → une jupe noir{a}e{/a}",
+        "une voiture rouge → des voitures roug{a}es{/a}",
       ],
+      noBulletItems: [0, 1],
+      inlineArrows: true,
     },
+
+    {
+      type: "highlight",
+      label: "Invariable",
+      items: [],
+      transLabel: { en: "Invariable", ar: "", fa: "", pt: "", so: "", ti: "", tr: "", ps: "", uk: "" },
+    },
+
     {
       type: "plain_list",
       items: [
@@ -75,14 +84,16 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         uk: ["{a}1.{/a} Коли колір є назвою матеріалу, фрукта, квітки або предмета"],
       },
     },
+
     {
-      type: "grid",
-      headers: ["Exemples"],
-      rows: [
-        ["des yeux marron"],
-        ["des chaises orange"],
-        ["des cafés noisette"],
+      type: "highlight",
+      label: "Exemples",
+      items: [
+        "des yeux {a}marron{/a}",
+        "des chaises {/a}orange{/a}",
+        "des cafés {/a}noisette{/a}",
       ],
+      noBulletItems: [0, 1, 2],
     },
     {
       type: "plain_list",
@@ -102,16 +113,19 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         uk: ["Однак деякі іменники стали справжніми прикметниками й узгоджуються."],
       },
     },
+
     {
-      type: "grid",
-      headers: ["Exemples"],
-      rows: [
-        ["des fleurs roses"],
-        ["des tissus mauves"],
-        ["des robes violettes"],
-        ["des cheveux châtains"],
+      type: "highlight",
+      label: "Exemples",
+      items: [
+        "des fleurs rose{a}s{/a}",
+        "des tissus mauve{a}s{/a}",
+        "des robes violette{a}s{/a}",
+        "des cheveux châtain{a}s{/a}",
       ],
+      noBulletItems: [0, 1, 2, 3],
     },
+
     {
       type: "plain_list",
       items: [
@@ -130,13 +144,15 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         uk: ["{a}2.{/a} Коли колір уточнюється іншим прикметником або іменником"],
       },
     },
+
     {
-      type: "grid",
-      headers: ["Exemples"],
-      rows: [
-        ["des chaussures bleu foncé"],
-        ["une robe bleu ciel"],
+      type: "highlight",
+      label: "Exemples",
+      items: [
+        "des chaussures {a}vert{/a} foncé",
+        "une robe {a}bleu{/a} ciel",
       ],
+      noBulletItems: [0, 1],
     },
     {
       type: "plain_list",
@@ -156,14 +172,17 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         uk: ["{a}3.{/a} Коли колір виражений двома прикметниками"],
       },
     },
+
     {
-      type: "grid",
-      headers: ["Exemples"],
-      rows: [
-        ["une veste noir et blanc"],
-        ["un pull noir et blanc"],
+      type: "highlight",
+      label: "Exemples",
+      items: [
+        "une veste {a}noir{/a} et {a}blanc{/a}",
+        "une pull {a}jaune{/a} et {a}rouge{/a}",
       ],
+      noBulletItems: [0, 1],
     },
+    
     {
       type: "heading",
       text: "L'adjectif demi",

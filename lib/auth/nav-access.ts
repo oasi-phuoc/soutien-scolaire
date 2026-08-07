@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import type { LessonAccessFlags } from "@/lib/auth/lesson-access";
 
 export type PedagogicNavAccess = {
   showSection: boolean;
@@ -7,8 +8,12 @@ export type PedagogicNavAccess = {
   hasSuiviAccess: boolean;
   canEditContent: boolean;
   canPrint: boolean;
-  /** Accès libre aux leçons de grammaire (sans verrouillage séquentiel). */
+  /** Accès libre aux leçons (sans verrouillage séquentiel). */
   canFreeAccess: boolean;
+  /** Accès partiel français (jusqu'à G7.1 / E9.1) ou complet. */
+  canPartialFrench: boolean;
+  /** Accès partiel maths (jusqu'à A3) ou complet. */
+  canPartialMath: boolean;
 };
 
 export type NavAccess = PedagogicNavAccess & {
@@ -23,6 +28,22 @@ const OPEN_LOCALLY =
   !process.env.NEXT_PUBLIC_SUPABASE_URL ||
   !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
+function openLocalAccess(): NavAccess {
+  return {
+    authenticated: false,
+    role: "other",
+    showSection: true,
+    isAdmin: false,
+    hasSuiviAccess: false,
+    canEditContent: true,
+    canPrint: false,
+    canFreeAccess: true,
+    canPartialFrench: true,
+    canPartialMath: true,
+    placementVisible: true,
+  };
+}
+
 /**
  * Accès navigation (sidebar / nav) — une seule fois par requête RSC via `cache()`.
  * Évite le flash « options admin absentes » puis apparition après un round-trip client.
@@ -30,19 +51,7 @@ const OPEN_LOCALLY =
 export const getNavAccess = cache(async (): Promise<NavAccess> => {
   const supabase = await createSupabaseServerClient();
 
-  if (!supabase) {
-    return {
-      authenticated: false,
-      role: "other",
-      showSection: true,
-      isAdmin: false,
-      hasSuiviAccess: false,
-      canEditContent: true,
-      canPrint: false,
-      canFreeAccess: true,
-      placementVisible: true,
-    };
-  }
+  if (!supabase) return openLocalAccess();
 
   const {
     data: { user },
@@ -50,15 +59,12 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
 
   if (!user) {
     return {
-      authenticated: false,
-      role: "other",
+      ...openLocalAccess(),
       showSection: OPEN_LOCALLY,
-      isAdmin: false,
-      hasSuiviAccess: false,
       canEditContent: OPEN_LOCALLY,
-      canPrint: false,
       canFreeAccess: OPEN_LOCALLY,
-      placementVisible: true,
+      canPartialFrench: OPEN_LOCALLY,
+      canPartialMath: OPEN_LOCALLY,
     };
   }
 
@@ -68,22 +74,23 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
       ? roleRaw
       : "other";
   const isAdmin = role === "admin";
+  const isStaff = role === "admin" || role === "prof";
 
   const needsSuivi = !isAdmin && role === "prof";
   const needsPrint = !isAdmin;
-  const needsFreeAccess = role === "eleve";
+  const needsLessonAccess = role === "eleve";
   const needsPlacementGate = role !== "admin" && role !== "prof";
 
-  const [suiviRes, printRes, freeRes, placementRes] = await Promise.all([
+  const [suiviRes, printRes, lessonRes, placementRes] = await Promise.all([
     needsSuivi
       ? supabase.rpc("has_suivi_access")
       : Promise.resolve({ data: isAdmin, error: null }),
     needsPrint
       ? supabase.rpc("can_access_print")
       : Promise.resolve({ data: true, error: null }),
-    needsFreeAccess
-      ? supabase.rpc("can_access_free_lessons")
-      : Promise.resolve({ data: true, error: null }),
+    needsLessonAccess
+      ? supabase.rpc("get_my_lesson_access")
+      : Promise.resolve({ data: null, error: null }),
     needsPlacementGate
       ? supabase.rpc("get_placement_module_enabled")
       : Promise.resolve({ data: true, error: null }),
@@ -106,17 +113,38 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
     }
   }
 
-  let canFreeAccess = role === "admin" || role === "prof";
-  if (needsFreeAccess) {
-    if (!freeRes.error) {
-      canFreeAccess = Boolean(freeRes.data);
+  let canFreeAccess = isStaff;
+  let canPartialFrench = isStaff;
+  let canPartialMath = isStaff;
+
+  if (needsLessonAccess) {
+    const row = Array.isArray(lessonRes.data) ? lessonRes.data[0] : lessonRes.data;
+    if (!lessonRes.error && row && typeof row === "object") {
+      const r = row as {
+        can_free_access?: boolean;
+        can_partial_french?: boolean;
+        can_partial_math?: boolean;
+      };
+      canFreeAccess = Boolean(r.can_free_access);
+      canPartialFrench = Boolean(r.can_partial_french);
+      canPartialMath = Boolean(r.can_partial_math);
     } else {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("can_free_access")
-        .eq("id", user.id)
-        .maybeSingle();
-      canFreeAccess = Boolean((profile as { can_free_access?: boolean } | null)?.can_free_access);
+      // Fallback si RPC absente : colonnes profil (+ ancienne RPC free access)
+      const [{ data: freeRes }, { data: profile }] = await Promise.all([
+        supabase.rpc("can_access_free_lessons"),
+        supabase
+          .from("profiles")
+          .select("can_free_access, can_partial_french, can_partial_math")
+          .eq("id", user.id)
+          .maybeSingle(),
+      ]);
+      canFreeAccess = Boolean(freeRes ?? profile?.can_free_access);
+      const p = profile as {
+        can_partial_french?: boolean;
+        can_partial_math?: boolean;
+      } | null;
+      canPartialFrench = Boolean(p?.can_partial_french || canFreeAccess);
+      canPartialMath = Boolean(p?.can_partial_math || canFreeAccess);
     }
   }
 
@@ -136,6 +164,8 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
     canEditContent: isAdmin,
     canPrint,
     canFreeAccess,
+    canPartialFrench,
+    canPartialMath,
     placementVisible,
   };
 });
@@ -148,5 +178,15 @@ export function pedagogicFromNavAccess(access: NavAccess): PedagogicNavAccess {
     canEditContent: access.canEditContent,
     canPrint: access.canPrint,
     canFreeAccess: access.canFreeAccess,
+    canPartialFrench: access.canPartialFrench,
+    canPartialMath: access.canPartialMath,
+  };
+}
+
+export function lessonFlagsFromNavAccess(access: NavAccess): LessonAccessFlags {
+  return {
+    canFreeAccess: access.canFreeAccess,
+    canPartialFrench: access.canPartialFrench,
+    canPartialMath: access.canPartialMath,
   };
 }

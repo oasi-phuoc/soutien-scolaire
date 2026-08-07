@@ -24,6 +24,11 @@ import {
 } from "@/lib/progress/math-progress";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { PASSING_GRADE } from "@/lib/scoring";
+import {
+  hasMathLessonAccess,
+  mathModuleAllowed,
+  type LessonAccessFlags,
+} from "@/lib/auth/lesson-access";
 
 type ModuleDisplayState = "locked" | "available" | "in_progress" | "completed";
 
@@ -97,7 +102,17 @@ function SubDot({ done, current, accent, moduleLocked }: { done: boolean; curren
   );
 }
 
-export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { isLoggedIn?: boolean; isAdmin?: boolean }) {
+export function MathematiquesClient({
+  isLoggedIn = false,
+  isAdmin = false,
+  freeAccess = false,
+  canPartialMath = false,
+}: {
+  isLoggedIn?: boolean;
+  isAdmin?: boolean;
+  freeAccess?: boolean;
+  canPartialMath?: boolean;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
@@ -110,13 +125,22 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
   const [hydrated, setHydrated] = useState(false);
   const [manualOverrides, setManualOverrides] = useState<Record<string, boolean>>({});
 
-  function isModuleExpanded(id: string, state: ModuleDisplayState): boolean {
+  const lessonAccess: LessonAccessFlags = {
+    canFreeAccess: Boolean(isAdmin || freeAccess),
+    canPartialFrench: false,
+    canPartialMath: Boolean(isAdmin || freeAccess || canPartialMath),
+  };
+  const mathOk = isAdmin || hasMathLessonAccess(lessonAccess);
+  const unlockAll = Boolean(isAdmin || freeAccess);
+
+  function isModuleExpanded(id: string, state: ModuleDisplayState, primaryId: string | null): boolean {
     if (id in manualOverrides) return manualOverrides[id]!;
-    return state === "in_progress" || state === "available";
+    // Un seul module en cours déplié ; terminés / autres repliés
+    return id === primaryId && (state === "in_progress" || state === "available");
   }
 
-  function toggleModule(id: string, state: ModuleDisplayState) {
-    setManualOverrides((prev) => ({ ...prev, [id]: !isModuleExpanded(id, state) }));
+  function toggleModule(id: string, state: ModuleDisplayState, primaryId: string | null) {
+    setManualOverrides((prev) => ({ ...prev, [id]: !isModuleExpanded(id, state, primaryId) }));
   }
 
   // Sync with sidebar / URL (?tab=) — soft nav does not remount the page
@@ -157,6 +181,20 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
   );
 
   const accentColor = tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)";
+
+  const primaryInProgressId = useMemo(() => {
+    if (!hydrated || !mathOk) return null;
+    for (const m of modules) {
+      if (!m || m.comingSoon) continue;
+      if (!unlockAll && !mathModuleAllowed(m.id, lessonAccess)) continue;
+      const prog = progress.math[m.id];
+      const pre = isAdmin ? { ok: true as const, missing: [] as string[] } : prerequisitesMet(m, done);
+      const displayState = getModuleDisplayState(prog, pre.ok);
+      if (displayState === "in_progress" || displayState === "available") return m.id;
+    }
+    return null;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modules, hydrated, mathOk, unlockAll, progress, done, isAdmin, canPartialMath, freeAccess]);
 
   return (
     <div className="app-shell flex-1 space-y-6 pt-8 pb-32 lg:pb-28">
@@ -219,11 +257,17 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
 
 {/* Module cards */}
       <section aria-label="Liste des modules" className="space-y-4">
+        {!mathOk && hydrated ? (
+          <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
+            Accès mathématiques non accordé. Demandez à votre enseignant un accès partiel ou complet.
+          </p>
+        ) : null}
         <ul className="space-y-4">
           {modules.map((m) => {
             if (!m) return null;
 
-            if (m.comingSoon && !isAdmin) {
+            const accessAllowed = unlockAll || mathModuleAllowed(m.id, lessonAccess);
+            if ((!mathOk || !accessAllowed || (m.comingSoon && !isAdmin)) && !isAdmin) {
               return (
                 <li key={m.id}>
                   <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] opacity-50">
@@ -239,7 +283,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                           <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
                         </div>
                         <span className="shrink-0 rounded-full border border-[var(--color-border-default)] bg-white/60 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
-                          En cours de développement
+                          Verrouillé
                         </span>
                       </div>
                     </div>
@@ -250,10 +294,11 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
 
             const prog = hydrated ? progress.math[m.id] : undefined;
             const pre = hydrated
-              ? (isAdmin ? { ok: true as const, missing: [] as string[] } : prerequisitesMet(m, done))
+              ? (isAdmin || unlockAll ? { ok: true as const, missing: [] as string[] } : prerequisitesMet(m, done))
               : { ok: false as const, missing: [] as string[] };
             const displayState = hydrated ? getModuleDisplayState(prog, pre.ok) : "locked";
-            const isLocked = !isAdmin && displayState === "locked";
+            const isLocked = !isAdmin && !unlockAll && displayState === "locked";
+            const expanded = isModuleExpanded(m.id, displayState, primaryInProgressId);
             const recoHighlight = hydrated && reco.moduleId === m.id && reco.kind !== "revision_grade";
 
             const completedSubIds = new Set(
@@ -285,15 +330,13 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
               nonRevisionSubs.length > 0 &&
               nonRevisionSubs.every((sub) => completedSubIds.has(sub.id));
 
-            const expanded = isModuleExpanded(m.id, displayState);
-
             return (
               <li key={m.id}>
                 <div
                   className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
                     isLocked
                       ? "border-[var(--color-border-default)] opacity-60"
-                      : recoHighlight
+                      : recoHighlight || expanded
                         ? "border-[var(--color-accent-alg)]/50"
                         : "border-[var(--color-border-default)]"
                   }`}
@@ -306,13 +349,13 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                     <button
                       type="button"
                       onClick={() => {
-                        if (displayState === "in_progress" || displayState === "available") {
+                        if (m.id === primaryInProgressId && (displayState === "in_progress" || displayState === "available")) {
                           const target = firstAvailableSubIdx >= 0
                             ? m.submodules[firstAvailableSubIdx]
                             : m.submodules[0];
                           if (target) router.push(`/mathematiques/${target.id}`);
                         } else {
-                          toggleModule(m.id, displayState);
+                          toggleModule(m.id, displayState, primaryInProgressId);
                         }
                       }}
                       className="flex w-full items-center gap-3 px-4 py-3 text-left"

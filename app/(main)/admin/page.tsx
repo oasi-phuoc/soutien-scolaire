@@ -25,11 +25,16 @@ export default async function AdminPage() {
   };
   const { data: placementEnabled } = await supabase.rpc("get_placement_module_enabled");
 
-  const rows: UserRow[] = (users ?? []).map((u) => ({
-    ...u,
-    can_print: Boolean((u as { can_print?: boolean }).can_print),
-    can_free_access: Boolean((u as { can_free_access?: boolean }).can_free_access),
-  })).sort((a, b) => {
+  const rows: UserRow[] = (users ?? []).map((u) => {
+    const free = Boolean((u as { can_free_access?: boolean }).can_free_access);
+    return {
+      ...u,
+      can_print: Boolean((u as { can_print?: boolean }).can_print),
+      can_free_access: free,
+      can_partial_french: Boolean((u as { can_partial_french?: boolean }).can_partial_french || free),
+      can_partial_math: Boolean((u as { can_partial_math?: boolean }).can_partial_math || free),
+    };
+  }).sort((a, b) => {
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
     const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
     return na.localeCompare(nb, "fr");

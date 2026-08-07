@@ -36,8 +36,12 @@ export type UserRow = {
   role: "eleve" | "prof" | "admin";
   /** Accès hub Impression (élèves / profs). Les admins y ont toujours accès. */
   can_print: boolean;
-  /** Accès libre aux leçons de grammaire (sans verrouillage séquentiel). */
+  /** Accès complet aux leçons (sans verrouillage séquentiel). */
   can_free_access: boolean;
+  /** Accès partiel français (jusqu'à G7.1 / E9.1). */
+  can_partial_french: boolean;
+  /** Accès partiel maths (jusqu'à A3). */
+  can_partial_math: boolean;
   placement_test_best: { points: number; maxPoints: number; percent: number } | null;
   placement_combined: { total: number; zone: string; mathCounted: number; frenchCounted: number; pendingFrench?: number } | null;
 };

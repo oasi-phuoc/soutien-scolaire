@@ -18,5 +18,11 @@ const CommunicationHome = dynamic(
 export default async function CommunicationPage() {
   const access = await getNavAccess();
   const isAdmin = access.role === "admin" || access.role === "prof";
-  return <CommunicationHome isAdmin={isAdmin} />;
+  return (
+    <CommunicationHome
+      isAdmin={isAdmin}
+      freeAccess={access.canFreeAccess}
+      canPartialFrench={access.canPartialFrench}
+    />
+  );
 }

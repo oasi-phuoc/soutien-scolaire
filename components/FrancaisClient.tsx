@@ -9,6 +9,11 @@ import { resolveFrenchThemes } from "@/lib/content-editor/catalog";
 import type { FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 import { CommunicationModuleList } from "@/components/communication/CommunicationHome";
+import {
+  grammarCodeAllowed,
+  hasFrenchLessonAccess,
+  type LessonAccessFlags,
+} from "@/lib/auth/lesson-access";
 
 type SectionDef  = { id: string; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
@@ -69,8 +74,6 @@ const TAB_TITLES: Record<ActiveFrenchTab, string> = {
   communication: "Communication",
 };
 
-const GRAMMAR_AVAILABLE = new Set(GRAMMAR_GROUPS.map((g) => g.id));
-
 function lessonHref(th: FrenchTheme): string {
   if (th.tab === "grammaire" || th.tab === "conjugaison") return `/francais/grammaire/${th.slug}`;
   if (th.tab === "vocabulaire") return `/francais/vocabulaire/${th.slug}`;
@@ -79,7 +82,7 @@ function lessonHref(th: FrenchTheme): string {
 
 // ── State badges ──────────────────────────────────────────────────────────────
 
-function SectionStateBadge({ state, comingSoon }: { state: SectionState; comingSoon?: boolean }) {
+function SectionStateBadge({ state }: { state: SectionState }) {
   if (state === "completed")
     return (
       <span className="rounded-full bg-[var(--color-accent-fr)]/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
@@ -90,12 +93,6 @@ function SectionStateBadge({ state, comingSoon }: { state: SectionState; comingS
     return (
       <span className="rounded-full bg-[var(--color-accent-fr)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
         En cours
-      </span>
-    );
-  if (comingSoon)
-    return (
-      <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
-        Bientôt
       </span>
     );
   return (
@@ -203,7 +200,7 @@ function SectionCard({
   vocabGrades,
   isAdmin,
   freeAccess,
-  comingSoon,
+  autoExpand = false,
 }: {
   sec: SectionDef;
   state: SectionState;
@@ -214,16 +211,16 @@ function SectionCard({
   vocabGrades?: Record<string, { score: number; passed: boolean }>;
   isAdmin?: boolean;
   freeAccess?: boolean;
-  comingSoon?: boolean;
+  /** Un seul module « en cours » est ouvert automatiquement. */
+  autoExpand?: boolean;
 }) {
-  const locked     = state === "locked";
-  const inProgress = state === "in_progress";
+  const locked = state === "locked";
   const [expanded, setExpanded] = useState(false);
-  // in_progress section is always open; completed/locked can be toggled
-  const showContent = inProgress || expanded;
+  // Seul le module principal en cours est ouvert ; terminé / verrouillé / autres en cours → repliés
+  const showContent = autoExpand || expanded;
   const unlockAll = Boolean(isAdmin || freeAccess);
 
-  // First uncompleted lesson — the only one accessible in in_progress
+  // Première leçon non complétée du module (Gx.1 débloqué par défaut)
   const firstAvailableSlug =
     hydrated && !locked
       ? (themes.find((th) => !completedSlugs.has(th.slug))?.slug ?? null)
@@ -237,9 +234,9 @@ function SectionCard({
     }
     if (locked) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
-    // Accès libre / admin / section terminée : toutes les leçons
-    if (state === "completed" || unlockAll) return "available";
-    // Parcours normal : seule la première leçon non complétée
+    // Accès libre / admin : toutes les leçons du module
+    if (unlockAll) return "available";
+    // Parcours normal : seule la première leçon non complétée (Gx.1 puis Gx.2 après éval…)
     if (th.slug === firstAvailableSlug) return "available";
     return "locked";
   }
@@ -255,7 +252,7 @@ function SectionCard({
       className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
         locked
           ? "border-[var(--color-border-default)] opacity-50"
-          : inProgress || expanded
+          : autoExpand || expanded
             ? "border-[var(--color-accent-fr)]/50"
             : "border-[var(--color-border-default)]"
       }`}
@@ -265,13 +262,13 @@ function SectionCard({
         className="module-list-header"
         style={{ "--module-header-accent": "var(--color-accent-fr)" } as React.CSSProperties}
       >
-        {inProgress ? (
+        {autoExpand ? (
           <div className="flex w-full items-center gap-3 px-4 py-3">
             {iconBox}
             <div className="min-w-0 flex-1">
               <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
             </div>
-            <SectionStateBadge state={state} comingSoon={comingSoon} />
+            <SectionStateBadge state={state} />
           </div>
         ) : (
           <button
@@ -283,7 +280,7 @@ function SectionCard({
             <div className="min-w-0 flex-1">
               <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
             </div>
-            <SectionStateBadge state={state} comingSoon={comingSoon} />
+            <SectionStateBadge state={state} />
             <svg
               width="14" height="14" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="2"
@@ -295,8 +292,8 @@ function SectionCard({
           </button>
         )}
 
-        {/* Progress bar (in_progress only) */}
-        {inProgress && hydrated && themes.length > 0 && (
+        {/* Progress bar (module en cours principal) */}
+        {autoExpand && hydrated && themes.length > 0 && (
           <div className="px-4 pb-3">
             <div className="flex gap-1">
               {themes.map((th) => {
@@ -390,10 +387,18 @@ function SectionCard({
 export function FrancaisClient({
   isAdmin = false,
   freeAccess = false,
+  canPartialFrench = false,
 }: {
   isAdmin?: boolean;
   freeAccess?: boolean;
+  canPartialFrench?: boolean;
 }) {
+  const lessonAccess: LessonAccessFlags = {
+    canFreeAccess: Boolean(isAdmin || freeAccess),
+    canPartialFrench: Boolean(isAdmin || freeAccess || canPartialFrench),
+    canPartialMath: false,
+  };
+  const frenchOk = isAdmin || hasFrenchLessonAccess(lessonAccess);
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab") as FrenchTab | null;
   const { overrides } = useContentEditor();
@@ -436,55 +441,54 @@ export function FrancaisClient({
     return () => window.removeEventListener("soutien-french-lesson-complete", refreshProgress);
   }, []);
 
-  function renderModuleGroups(groups: SectionDef[], available: Set<string>) {
-    const allTabThemes = groups.flatMap((grp) =>
-      frenchThemes.filter((th) => moduleGroupId(th.code) === grp.id),
-    );
-
+  function renderGrammarGroups(groups: SectionDef[]) {
+    const unlockAll = isAdmin || freeAccess;
     const themesByGroup = new Map<string, FrenchTheme[]>();
+
     for (const grp of groups) {
-      themesByGroup.set(
-        grp.id,
-        allTabThemes
-          .filter((th) => moduleGroupId(th.code) === grp.id)
-          .sort((a, b) => {
-            const ua = Number(/^G\d+\.(\d+)$/.exec(a.code)?.[1] ?? 0);
-            const ub = Number(/^G\d+\.(\d+)$/.exec(b.code)?.[1] ?? 0);
-            return ua - ub;
-          }),
-      );
+      const themes = frenchThemes
+        .filter((th) => moduleGroupId(th.code) === grp.id)
+        .filter((th) => unlockAll || grammarCodeAllowed(th.code, lessonAccess))
+        .sort((a, b) => {
+          const ua = Number(/^G\d+\.(\d+)$/.exec(a.code)?.[1] ?? 0);
+          const ub = Number(/^G\d+\.(\d+)$/.exec(b.code)?.[1] ?? 0);
+          return ua - ub;
+        });
+      themesByGroup.set(grp.id, themes);
     }
 
-    let prevCount = 0;
-    const unlockAll = isAdmin || freeAccess;
+    // Premier module non terminé → seul déplié automatiquement
+    let primaryInProgressId: string | null = null;
+    if (hydrated && frenchOk) {
+      for (const grp of groups) {
+        const themes = themesByGroup.get(grp.id) ?? [];
+        if (themes.length === 0) continue;
+        if (!themes.every((th) => completedSlugs.has(th.slug))) {
+          primaryInProgressId = grp.id;
+          break;
+        }
+      }
+    }
 
     return (
       <>
+        {!frenchOk && hydrated ? (
+          <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
+            Accès français non accordé. Demandez à votre enseignant un accès partiel ou complet.
+          </p>
+        ) : null}
         {groups.map((grp) => {
           const themes = themesByGroup.get(grp.id) ?? [];
           if (themes.length === 0) return null;
 
-          const isComingSoon = !available.has(grp.id) && !unlockAll;
-
           let state: SectionState;
-          if (!hydrated || (!available.has(grp.id) && !unlockAll)) {
+          if (!hydrated || !frenchOk) {
             state = "locked";
           } else {
-            const prevThemes = allTabThemes.slice(0, prevCount);
-            const sectionAccessible =
-              unlockAll ||
-              prevThemes.length === 0 ||
-              prevThemes.every((th) => completedSlugs.has(th.slug));
-
-            if (!sectionAccessible) {
-              state = "locked";
-            } else {
-              const allDone = themes.every((th) => completedSlugs.has(th.slug));
-              state = allDone ? "completed" : "in_progress";
-            }
+            // Gx.1 de chaque module accessible : plus de verrouillage inter-modules
+            const allDone = themes.every((th) => completedSlugs.has(th.slug));
+            state = allDone ? "completed" : "in_progress";
           }
-
-          prevCount += themes.length;
 
           return (
             <SectionCard
@@ -497,7 +501,7 @@ export function FrancaisClient({
               returnTab={tab}
               isAdmin={isAdmin}
               freeAccess={freeAccess}
-              comingSoon={isComingSoon}
+              autoExpand={grp.id === primaryInProgressId}
             />
           );
         })}
@@ -560,18 +564,39 @@ export function FrancaisClient({
 
       {tab === "communication" ? (
         <section aria-label="Communication" className="space-y-4">
-          <CommunicationModuleList isAdmin={isAdmin} />
+          <CommunicationModuleList
+            isAdmin={isAdmin}
+            freeAccess={freeAccess}
+            canPartialFrench={canPartialFrench}
+          />
         </section>
       ) : null}
 
       <section className="space-y-4" aria-label={`Leçons — ${tab}`} hidden={tab === "communication"}>
         {tab === "vocabulaire" ? (
           <>
-            {VOCAB_MODULES.map((mod) => {
+            {!frenchOk && hydrated ? (
+              <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
+                Accès français non accordé. Demandez à votre enseignant un accès partiel ou complet.
+              </p>
+            ) : null}
+            {VOCAB_MODULES.map((mod, idx) => {
               const themes = frenchThemes.filter((th) => th.section === mod.id && th.tab === "vocabulaire");
               if (themes.length === 0) return null;
-              const allDone = hydrated && themes.every((th) => completedSlugs.has(th.slug));
-              const state: SectionState = !hydrated ? "locked" : allDone ? "completed" : "in_progress";
+              const allDone = hydrated && frenchOk && themes.every((th) => completedSlugs.has(th.slug));
+              const state: SectionState = !hydrated || !frenchOk
+                ? "locked"
+                : allDone
+                  ? "completed"
+                  : "in_progress";
+              const isPrimaryVocab =
+                frenchOk &&
+                hydrated &&
+                !allDone &&
+                VOCAB_MODULES.findIndex((m) => {
+                  const t = frenchThemes.filter((th) => th.section === m.id && th.tab === "vocabulaire");
+                  return t.length > 0 && !t.every((th) => completedSlugs.has(th.slug));
+                }) === idx;
               return (
                 <SectionCard
                   key={mod.id}
@@ -583,13 +608,14 @@ export function FrancaisClient({
                   returnTab={tab}
                   vocabGrades={vocabGrades}
                   isAdmin={isAdmin}
-                  freeAccess={freeAccess}
+                  freeAccess={freeAccess || frenchOk}
+                  autoExpand={isPrimaryVocab}
                 />
               );
             })}
           </>
         ) : tab === "grammaire" ? (
-          renderModuleGroups(GRAMMAR_GROUPS, GRAMMAR_AVAILABLE)
+          renderGrammarGroups(GRAMMAR_GROUPS)
         ) : null}
       </section>
 

@@ -10,7 +10,14 @@ import {
   changePasswordAction,
   setUserPrintAccessAction,
   setUserFreeAccessAction,
+  setUserPartialFrenchAction,
+  setUserPartialMathAction,
 } from "@/app/actions/admin";
+import {
+  PARTIAL_FRENCH_COMM_MAX,
+  PARTIAL_FRENCH_GRAMMAR_MAX,
+  PARTIAL_MATH_MAX_MODULE,
+} from "@/lib/auth/lesson-access";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
 import { AppSelect } from "@/components/ui/AppSelect";
@@ -296,6 +303,66 @@ export function EleveDetailPage({
     });
   }
 
+  function handleTogglePartialFrench(next: boolean) {
+    startTransition(async () => {
+      const prev = user.can_partial_french;
+      setUser(u => ({ ...u, can_partial_french: next }));
+      const r = await setUserPartialFrenchAction(user.id, next);
+      if (!r.ok) setUser(u => ({ ...u, can_partial_french: prev }));
+    });
+  }
+
+  function handleTogglePartialMath(next: boolean) {
+    startTransition(async () => {
+      const prev = user.can_partial_math;
+      setUser(u => ({ ...u, can_partial_math: next }));
+      const r = await setUserPartialMathAction(user.id, next);
+      if (!r.ok) setUser(u => ({ ...u, can_partial_math: prev }));
+    });
+  }
+
+  function AccessSwitch({
+    checked,
+    disabled,
+    label,
+    description,
+    ariaLabel,
+    onToggle,
+  }: {
+    checked: boolean;
+    disabled?: boolean;
+    label: string;
+    description: string;
+    ariaLabel: string;
+    onToggle: () => void;
+  }) {
+    return (
+      <label className={`flex items-center justify-between gap-4 select-none ${disabled ? "opacity-50" : "cursor-pointer"}`}>
+        <span className="text-sm text-zinc-700 dark:text-zinc-300">
+          {label}
+          <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">{description}</span>
+        </span>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={checked}
+          aria-label={ariaLabel}
+          disabled={disabled}
+          onClick={onToggle}
+          className={`flex h-7 w-11 shrink-0 items-center rounded-full p-0.5 transition-colors disabled:cursor-not-allowed ${
+            checked ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
+          }`}
+        >
+          <span
+            className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
+              checked ? "translate-x-4" : "translate-x-0"
+            }`}
+          />
+        </button>
+      </label>
+    );
+  }
+
   return (
     <main className={`${APP_SHELL_FULL} flex-1 py-8 pb-28`}>
 
@@ -456,36 +523,44 @@ export function EleveDetailPage({
 
           {(canTogglePrint || user.role === "admin" || user.role === "prof") && canEditAccount && (
             <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Accès libre</h2>
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Accès aux leçons</h2>
               {user.role === "admin" || user.role === "prof" ? (
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
                   Les comptes admin et prof ont déjà accès à toutes les leçons.
                 </p>
               ) : (
-                <label className="flex cursor-pointer items-center justify-between gap-4 select-none">
-                  <span className="text-sm text-zinc-700 dark:text-zinc-300">
-                    Accès libre aux leçons
-                    <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">
-                      Ouvrir n&apos;importe quelle leçon sans réussir l&apos;évaluation précédente
-                    </span>
-                  </span>
-                  <button
-                    type="button"
-                    role="switch"
-                    aria-checked={user.can_free_access}
-                    aria-label="Accès libre"
-                    onClick={() => handleToggleFreeAccess(!user.can_free_access)}
-                    className={`flex h-7 w-11 shrink-0 items-center rounded-full p-0.5 transition-colors ${
-                      user.can_free_access ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
-                    }`}
-                  >
-                    <span
-                      className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
-                        user.can_free_access ? "translate-x-4" : "translate-x-0"
-                      }`}
-                    />
-                  </button>
-                </label>
+                <div className="space-y-4">
+                  <AccessSwitch
+                    checked={user.can_free_access}
+                    label="Accès complet"
+                    description="Toutes les leçons, sans réussite de l'évaluation précédente"
+                    ariaLabel="Accès complet"
+                    onToggle={() => handleToggleFreeAccess(!user.can_free_access)}
+                  />
+                  <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
+                    <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
+                      Accès partiel
+                    </p>
+                    <div className="space-y-3">
+                      <AccessSwitch
+                        checked={user.can_free_access || user.can_partial_french}
+                        disabled={user.can_free_access}
+                        label="Français"
+                        description={`Grammaire jusqu'à ${PARTIAL_FRENCH_GRAMMAR_MAX} · Communication jusqu'à ${PARTIAL_FRENCH_COMM_MAX}`}
+                        ariaLabel="Accès partiel français"
+                        onToggle={() => handleTogglePartialFrench(!(user.can_free_access || user.can_partial_french))}
+                      />
+                      <AccessSwitch
+                        checked={user.can_free_access || user.can_partial_math}
+                        disabled={user.can_free_access}
+                        label="Mathématiques"
+                        description={`Modules jusqu'à ${PARTIAL_MATH_MAX_MODULE}`}
+                        ariaLabel="Accès partiel mathématiques"
+                        onToggle={() => handleTogglePartialMath(!(user.can_free_access || user.can_partial_math))}
+                      />
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           )}

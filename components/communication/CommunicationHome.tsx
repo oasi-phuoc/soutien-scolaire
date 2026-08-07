@@ -1,83 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { resolveCommModules } from "@/lib/content-editor/catalog";
-import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
-import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
-import { resolveFrenchPrereqSlug } from "@/lib/curriculum/grammar-data";
+import {
+  commIdAllowed,
+  hasFrenchLessonAccess,
+  type LessonAccessFlags,
+} from "@/lib/auth/lesson-access";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
-const FRENCH_PREREQ_LABELS: Record<string, string> = Object.fromEntries(
-  FRENCH_THEMES.map((t) => [t.slug, `${t.code} ${t.title}`]),
-);
-
-const COMM_PREREQ_LABELS: Record<string, string> = {
-  "E1-1": "E1.1 Se présenter",
-  "E1-2": "E1.2 Famille",
-  "E1-3": "E1.3 Inviter",
-  "E2-1": "E2.1 Logement",
-  "E2-2": "E2.2 Panne",
-  "E2-3": "E2.3 Règlement",
-  "E3-1": "E3.1 École",
-  "E3-2": "E3.2 Quotidien",
-  "E3-3": "E3.3 Travail",
-  "E4-1": "E4.1 Vêtements",
-  "E4-2": "E4.2 Restaurant",
-  "E4-3": "E4.3 Boulangerie",
-  "E5-1": "E5.1 Médecin",
-  "E5-2": "E5.2 Pharmacie",
-  "E6-1": "E6.1 Chemin",
-  "E6-2": "E6.2 Transport",
-  "E6-3": "E6.3 Aéroport",
-  "E7-1": "E7.1 Hôtel",
-  "E7-2": "E7.2 Sport",
-  "E7-3": "E7.3 Culture",
-  "E8-1": "E8.1 Bilan A1",
-  "E9-1": "E9.1 Achats",
-  "E9-2": "E9.2 Déplacements",
-  "E9-3": "E9.3 Logement",
-  "E9-4": "E9.4 Démarches",
-  "E9-5": "E9.5 Actualité",
-  "E10-1": "E10.1 Inviter",
-  "E10-2": "E10.2 Rencontres",
-  "E10-3": "E10.3 Événement",
-  "E10-4": "E10.4 Vie scolaire",
-  "E10-5": "E10.5 Association",
-  "E11-1": "E11.1 Cuisine",
-  "E11-2": "E11.2 Activité",
-  "E11-3": "E11.3 Goûts",
-  "E11-4": "E11.4 Vacances",
-  "E12-1": "E12.1 Santé",
-  "E12-2": "E12.2 Sport",
-  "E12-3": "E12.3 Alimentation",
-  "E12-4": "E12.4 Ville",
-  "E12-5": "E12.5 Soin de soi",
-  "E13-1": "E13.1 Formation",
-  "E13-2": "E13.2 Stage",
-  "E13-3": "E13.3 Offre d'emploi",
-  "E13-4": "E13.4 Entretien",
-  "E13-5": "E13.5 Entreprise",
-};
-
 function prereqLabel(id: string): string {
-  if (COMM_PREREQ_LABELS[id]) return COMM_PREREQ_LABELS[id];
-  const resolved = resolveFrenchPrereqSlug(id);
-  return FRENCH_PREREQ_LABELS[resolved] ?? FRENCH_PREREQ_LABELS[id] ?? id;
+  return id.replace("-", ".");
 }
 
-function moduleStateLabel(state: "completed" | "in_progress" | "development" | "locked") {
+function moduleStateLabel(state: "completed" | "in_progress" | "locked") {
   if (state === "completed") return "TERMINÉ";
-  if (state === "development") return "DÉVELOPPEMENT";
   if (state === "locked") return "VERROUILLÉ";
   return "EN COURS";
 }
 
-function ModuleStateBadge({ state }: { state: "completed" | "in_progress" | "development" | "locked" }) {
+function ModuleStateBadge({ state }: { state: "completed" | "in_progress" | "locked" }) {
   return (
     <span
       className="shrink-0 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide"
@@ -115,107 +62,163 @@ function ModuleProgressBar({ total, completed }: { total: number; completed: num
   );
 }
 
-export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
+export function CommunicationModuleList({
+  isAdmin = false,
+  freeAccess = false,
+  canPartialFrench = false,
+}: {
+  isAdmin?: boolean;
+  freeAccess?: boolean;
+  canPartialFrench?: boolean;
+}) {
   const router = useRouter();
   const { overrides } = useContentEditor();
   const commModules = resolveCommModules(COMM_MODULES, overrides);
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [frenchDone, setFrenchDone] = useState<Set<string>>(new Set());
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
+  const [manualExpanded, setManualExpanded] = useState<Record<string, boolean>>({});
+  const [hydrated, setHydrated] = useState(false);
+
+  const lessonAccess: LessonAccessFlags = {
+    canFreeAccess: Boolean(isAdmin || freeAccess),
+    canPartialFrench: Boolean(isAdmin || freeAccess || canPartialFrench),
+    canPartialMath: false,
+  };
+  const frenchOk = isAdmin || hasFrenchLessonAccess(lessonAccess);
+  const unlockAll = Boolean(isAdmin || freeAccess);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(COMM_PROGRESS_KEY);
       if (raw) setCompleted(normalizeCommunicationProgress(JSON.parse(raw)));
     } catch { /* ignore */ }
-    setFrenchDone(getCompletedFrenchLessons());
+    setHydrated(true);
   }, []);
 
-  function toggleExpanded(moduleId: string) {
-    setExpanded((prev) => ({ ...prev, [moduleId]: !prev[moduleId] }));
+  const modulesView = useMemo(() => {
+    return commModules.map((m) => {
+      const visibleSubs = m.submodules.filter((s) => {
+        if (!s.available && !isAdmin) return false;
+        return unlockAll || commIdAllowed(s.id, lessonAccess);
+      });
+      const completedCount = visibleSubs.filter((s) => completed[s.id]).length;
+      const allDone = completedCount === visibleSubs.length && visibleSubs.length > 0;
+      const moduleAccessible = frenchOk && visibleSubs.length > 0;
+      const moduleState: "completed" | "in_progress" | "locked" = !moduleAccessible
+        ? "locked"
+        : allDone
+          ? "completed"
+          : "in_progress";
+      return { m, visibleSubs, completedCount, allDone, moduleState, moduleAccessible };
+    });
+  // lessonAccess dérivé de unlockAll / canPartialFrench
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [commModules, completed, frenchOk, unlockAll, isAdmin, canPartialFrench, freeAccess]);
+
+  const primaryInProgressId = useMemo(() => {
+    if (!hydrated || !frenchOk) return null;
+    for (const row of modulesView) {
+      if (row.moduleAccessible && !row.allDone) return row.m.id;
+    }
+    return null;
+  }, [modulesView, hydrated, frenchOk]);
+
+  function isExpanded(moduleId: string, moduleState: "completed" | "in_progress" | "locked"): boolean {
+    if (manualExpanded[moduleId] !== undefined) return manualExpanded[moduleId];
+    // Un seul module en cours déplié ; terminés / autres repliés
+    return moduleId === primaryInProgressId && moduleState === "in_progress";
   }
 
-  function frenchPrereqsMet(slugs?: string[]): boolean {
-    if (!slugs?.length) return true;
-    return slugs.every((slug) => frenchDone.has(resolveFrenchPrereqSlug(slug)));
-  }
-
-  function commPrereqsMet(ids?: string[]): boolean {
-    if (!ids?.length) return true;
-    return ids.every((id) => completed[id]);
+  function toggleExpanded(moduleId: string, moduleState: "completed" | "in_progress" | "locked") {
+    const currently = isExpanded(moduleId, moduleState);
+    setManualExpanded((prev) => ({ ...prev, [moduleId]: !currently }));
   }
 
   return (
     <ul className="space-y-4">
-      {commModules.map((m) => {
-        const isExpanded = !!expanded[m.id];
-        const visibleSubs = m.submodules.filter((s) => s.available);
-        const allUnavailable = visibleSubs.length === 0;
-        const completedCount = visibleSubs.filter((s) => completed[s.id]).length;
-        const allDone = completedCount === visibleSubs.length && visibleSubs.length > 0;
-        const moduleState = allUnavailable ? "development" : allDone ? "completed" : "in_progress";
+      {!frenchOk && hydrated ? (
+        <li>
+          <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
+            Accès français non accordé. Demandez à votre enseignant un accès partiel ou complet.
+          </p>
+        </li>
+      ) : null}
+      {modulesView.map(({ m, visibleSubs, completedCount, allDone, moduleState, moduleAccessible }) => {
+        if (visibleSubs.length === 0 && !isAdmin) return null;
+        const expanded = isExpanded(m.id, moduleState);
+        const firstAvailableIdx = visibleSubs.findIndex((s) => !completed[s.id]);
 
         return (
           <li key={m.id}>
-            <div className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] border-[var(--color-border-default)] ${allUnavailable ? "opacity-50" : ""}`}>
+            <div
+              className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] ${
+                !moduleAccessible
+                  ? "border-[var(--color-border-default)] opacity-50"
+                  : expanded
+                    ? "border-[var(--color-border-default)]"
+                    : "border-[var(--color-border-default)]"
+              }`}
+              style={expanded && moduleAccessible ? { borderColor: `color-mix(in srgb, ${ACCENT} 50%, var(--color-border-default))` } : undefined}
+            >
               <div
                 className="module-list-header"
                 style={{ "--module-header-accent": ACCENT } as React.CSSProperties}
               >
-                <button
-                  type="button"
-                  onClick={allUnavailable ? undefined : () => toggleExpanded(m.id)}
-                  disabled={allUnavailable}
-                  className="flex w-full items-center gap-3 px-4 py-3 text-left"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
-                    <span className="text-sm font-bold" style={{ color: ACCENT }}>{m.level}</span>
+                {expanded && moduleState === "in_progress" ? (
+                  <div className="flex w-full items-center gap-3 px-4 py-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+                      <span className="text-sm font-bold" style={{ color: ACCENT }}>{m.level}</span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                    </div>
+                    <ModuleStateBadge state={moduleState} />
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                  </div>
-                  <ModuleStateBadge state={moduleState} />
-                  {allUnavailable ? (
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                        <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                      </svg>
-                    </span>
-                  ) : (
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => toggleExpanded(m.id, moduleState)}
+                    className="flex w-full items-center gap-3 px-4 py-3 text-left"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+                      <span className="text-sm font-bold" style={{ color: ACCENT }}>{m.level}</span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                    </div>
+                    <ModuleStateBadge state={moduleState} />
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                      className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${isExpanded ? "rotate-90" : ""}`} aria-hidden>
+                      className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
                       <path d="M9 18l6-6-6-6" />
                     </svg>
-                  )}
-                </button>
+                  </button>
+                )}
 
-                {!allUnavailable && <ModuleProgressBar total={visibleSubs.length} completed={completedCount} />}
+                {expanded && moduleAccessible && (
+                  <ModuleProgressBar total={visibleSubs.length} completed={completedCount} />
+                )}
               </div>
 
-              {isExpanded && (
+              {expanded && (
                 <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-                  {visibleSubs.map((sub) => {
+                  {visibleSubs.map((sub, idx) => {
                     const isDone = !!completed[sub.id];
-                    const prereqOk =
-                      isAdmin ||
-                      (frenchPrereqsMet(sub.prerequisiteFrenchSlugs) &&
-                        commPrereqsMet(sub.prerequisiteCommIds));
-                    const isAvailable = (isAdmin || sub.available) && prereqOk;
-                    const isLocked = !isAvailable && !isDone;
-                    const missingPrereqs = [
-                      ...(sub.prerequisiteCommIds ?? [])
-                        .filter((id) => !completed[id])
-                        .map((id) => prereqLabel(id)),
-                      ...(sub.prerequisiteFrenchSlugs ?? [])
-                        .filter((slug) => !frenchDone.has(resolveFrenchPrereqSlug(slug)))
-                        .map((slug) => prereqLabel(slug)),
-                    ];
+                    // E x.1 du module débloqué par défaut ; suivante après complétion
+                    const canOpen = moduleAccessible && (
+                      unlockAll
+                      || isDone
+                      || idx === firstAvailableIdx
+                    );
+                    const isLocked = !canOpen && !isDone;
+                    const missingPrereqs = !unlockAll && idx > 0 && !completed[visibleSubs[idx - 1]?.id]
+                      ? [prereqLabel(visibleSubs[idx - 1].id)]
+                      : [];
+
                     return (
                       <li key={sub.id}
                         className={`flex min-h-[52px] items-center gap-3 px-4 py-2.5 ${
-                          isDone || isAvailable ? "cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors" : "opacity-50"
+                          isDone || canOpen ? "cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors" : "opacity-50"
                         }`}
-                        onClick={isAvailable || isDone ? () => router.push(`/communication/${sub.id}`) : undefined}
+                        onClick={canOpen || isDone ? () => router.push(`/communication/${sub.id}`) : undefined}
                       >
                         {isDone ? (
                           <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white" style={{ background: ACCENT }}>
@@ -241,7 +244,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                             </p>
                           ) : null}
                         </div>
-                        {isAvailable && !isDone ? (
+                        {canOpen && !isDone ? (
                           <button type="button"
                             onClick={(e) => { e.stopPropagation(); router.push(`/communication/${sub.id}`); }}
                             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-80"
@@ -265,7 +268,15 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
   );
 }
 
-export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
+export function CommunicationHome({
+  isAdmin = false,
+  freeAccess = false,
+  canPartialFrench = false,
+}: {
+  isAdmin?: boolean;
+  freeAccess?: boolean;
+  canPartialFrench?: boolean;
+}) {
   return (
     <div className="app-shell flex-1 space-y-6 py-8 pb-32 lg:pb-28">
       <header className="space-y-1">
@@ -284,7 +295,11 @@ export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
       </header>
 
       <section aria-label="Liste des modules" className="space-y-4">
-        <CommunicationModuleList isAdmin={isAdmin} />
+        <CommunicationModuleList
+          isAdmin={isAdmin}
+          freeAccess={freeAccess}
+          canPartialFrench={canPartialFrench}
+        />
       </section>
 
       <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">

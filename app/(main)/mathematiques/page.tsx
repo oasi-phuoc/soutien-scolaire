@@ -21,7 +21,12 @@ export default async function MathematiquesPage() {
 
   return (
     <Suspense fallback={null}>
-      <MathematiquesClient isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
+      <MathematiquesClient
+        isLoggedIn={isLoggedIn}
+        isAdmin={isAdmin}
+        freeAccess={access.canFreeAccess}
+        canPartialMath={access.canPartialMath}
+      />
     </Suspense>
   );
 }
