@@ -91,6 +91,7 @@ export const A1_GR_CEST: GrammarLesson = {
         ps: ["مفرد", "جمع", "کارونه"],
         uk: ["Однина", "Множина", "Вживання"],
       },
+      equalCols: true,
       rows: [
         ["Il y a", "Il y a", "Indiquer la présence"],
         ["C'est", "Ce sont", "Identifier ou présenter"],
@@ -327,30 +328,6 @@ export const A1_GR_CEST: GrammarLesson = {
       text: "Méthode rapide",
       sub: true,
       trans: { en: "Quick method", ar: "الطريقة السريعة", fa: "روش سریع", pt: "Método rápido", so: "Hab degdeg ah", ti: "ቅልጡፍ መምርሒ", tr: "Hızlı yöntem", ps: "چټکه طریقه", uk: "Швидкий метод" },
-    },
-
-    {
-      type: "highlight",
-      label: "C'est",
-      items: [
-        "C'est le médecin.",
-        "C'est Ali.",
-        "C'est un professeur.",
-      ],
-      noBulletItems: [0, 1, 2],
-      transLabel: { en: "C'est", ar: "C'est", fa: "C'est", pt: "C'est", so: "C'est", ti: "C'est", tr: "C'est", ps: "C'est", uk: "C'est" },
-    },
-
-    {
-      type: "highlight",
-      label: "Il est / Elle est",
-      items: [
-        "Il est gentil.",
-        "Elle est médecin.",
-        "Il est suisse.",
-      ],
-      noBulletItems: [0, 1, 2],
-      transLabel: { en: "Il est / Elle est", ar: "Il est / Elle est", fa: "Il est / Elle est", pt: "Il est / Elle est", so: "Il est / Elle est", ti: "Il est / Elle est", tr: "Il est / Elle est", ps: "Il est / Elle est", uk: "Il est / Elle est" },
     },
   ],
   exercises: [

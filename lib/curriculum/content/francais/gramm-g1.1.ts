@@ -32,7 +32,7 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "",
+      label: "Exemples",
       items: [
         "Ali parle français.",
         "{a}Il{/a} habite en Suisse.",
@@ -59,6 +59,7 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["مفرد", "جمع"],
         uk: ["Однина", "Множина"],
       },
+      equalCols: true,
       rows: [
         ["je → moi", "nous → plusieurs personnes et moi"],
         ["tu → un ami", "vous → plusieurs personnes"],
@@ -110,12 +111,7 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "highlight",
       label: "ON",
-      noBulletItems: [0, 1],
-      inlineArrows: true,
-      items: [
-        "{a}On{/a} va au magasin. → {a}Nous{/a} allons au magasin.",
-        "En Suisse, {a}on{/a} parle français. → {a}Les gens{/a} parlent français.",
-      ],
+      items: [],
       transLabel: { en: "ON", ar: "ON", fa: "ON", pt: "ON", so: "ON", ti: "ON", tr: "ON", ps: "ON", uk: "ON" },
     },
     {
@@ -137,18 +133,23 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "TU",
-      noBulletItems: [0],
+      label: "",
+      noBulletItems: [0, 1],
+      inlineArrows: true,
       items: [
-        "{a}Tu{/a} (= un ami) es fatigué ?",
+        "{a}On{/a} (= {a}Nous{/a}) va au magasin.",
+        "En Suisse, {a}on{/a} (= {a}Les gens{/a}) parle français.",
       ],
+    },
+    {
+      type: "highlight",
+      label: "TU",
+      items: [],
       transLabel: { en: "TU", ar: "TU", fa: "TU", pt: "TU", so: "TU", ti: "TU", tr: "TU", ps: "TU", uk: "TU" },
     },
     {
       type: "plain_list",
-      items: [
-        "On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",
-      ],
+      items: [],
       transItems: {
         en: ["We use {a}tu{/a} to speak to someone we know in an informal situation."],
         ar: ["نستخدم {a}tu{/a} لمخاطبة شخص نعرفه في موقف غير رسمي."],
@@ -160,6 +161,14 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["موږ {a}tu{/a} له هغه چا سره د خبرو لپاره کاروو چې پېژنو یې، په غیررسمي حالت کې."],
         uk: ["{a}Tu{/a} вживаємо, коли звертаємося до знайомої людини в неформальній ситуації."],
       },
+    },
+    {
+      type: "highlight",
+      label: "",
+      noBulletItems: [0],
+      items: [
+        "{a}Tu{/a} (= un {a}ami{/a}) es fatigué ?",
+      ],
     },
     {
       type: "highlight",
@@ -189,12 +198,16 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "ILS",
+      label: "",
       noBulletItems: [0],
-      inlineArrows: true,
       items: [
-        "Ali ♂ et Alona ♀ vont au cinéma → {a}Ils{/a} vont au cinéma.",
+        "Madame, {a}vous{/a} (= {a}La professeur{/a}) allez bien ?",
       ],
+    },
+    {
+      type: "highlight",
+      label: "ILS",
+      items: [],
       transLabel: { en: "ILS", ar: "ILS", fa: "ILS", pt: "ILS", so: "ILS", ti: "ILS", tr: "ILS", ps: "ILS", uk: "ILS" },
     },
     {
@@ -215,6 +228,15 @@ export const A1_GR_L01: GrammarLesson = {
       },
     },
     {
+      type: "highlight",
+      label: "",
+      noBulletItems: [0],
+      inlineArrows: true,
+      items: [
+        "{a}Ils{/a} (= {a}Ali ♂ et Alona ♀{/a}) vont au cinéma.",
+      ],
+    },
+    {
       type: "heading",
       text: "Comment choisir ?",
       trans: { en: "How to choose?", ar: "كيف نختار؟", fa: "چگونه انتخاب کنیم؟", pt: "Como escolher?", so: "Sidee loo doortaa?", ti: "ብኸመይ ንመርጽ?", tr: "Nasıl seçilir?", ps: "څنګه انتخاب وکړو؟", uk: "Як вибрати?" },
@@ -233,14 +255,15 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["نوم", "ضمیر"],
         uk: ["Іменник", "Займенник"],
       },
+      equalCols: true,
       rows: [
-        ["Ali ♂", "il"],
-        ["Alona ♀", "elle"],
-        ["Ali ♂ et moi", "nous"],
-        ["Alona ♀ et toi", "vous"],
-        ["Ali ♂ et Hamed ♂", "ils"],
-        ["Alona ♀ et Iryna ♀", "elles"],
-        ["Ali ♂ et Alona ♀", "ils"],
+        ["Ali {a}♂{/a}", "il"],
+        ["Alona {a}♀{/a}", "elle"],
+        ["Ali {a}♂{/a} et moi", "nous"],
+        ["Alona {a}♀{/a} et toi", "vous"],
+        ["Ali {a}♂{/a} et Hamed {a}♂{/a}", "ils"],
+        ["Alona {a}♀{/a} et Iryna {a}♀{/a}", "elles"],
+        ["Ali {a}♂{/a} et Alona {a}♀{/a}", "ils"],
       ],
     },
     {
@@ -277,9 +300,10 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["جمله", "پوښتنه", "فاعل", "پایله"],
         uk: ["Речення", "Запитання", "Підмет", "Результат"],
       },
+      equalCols: true,
       rows: [
-        ["Alona ♀ mange.", "Qui mange ?", "Alona", "Elle mange."],
-        ["Ali ♂ et Alona ♀ jouent.", "Qui jouent ?", "Ali et Alona", "Ils jouent."],
+        ["Alona mange.", "Qui mange ?", "Alona", "{a}Elle{/a} mange."],
+        ["Ali et Alona jouent.", "Qui jouent ?", "Ali et Alona", "{a}Ils{/a} jouent."],
       ],
     },
   ],

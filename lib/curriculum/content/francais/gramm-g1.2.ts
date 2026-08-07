@@ -16,7 +16,7 @@ export const A1_GR_ETRE: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Le verbe ÊTRE sert à donner des informations sur une personne, comme son identité ou décrire quelqu'un.",
+        "Le verbe {a}ÊTRE{/a} sert à donner des informations sur une personne, comme son identité ou décrire quelqu'un.",
       ],
       transItems: {
         en: ["The verb ÊTRE is used to give information about a person, such as their identity, or to describe someone."],

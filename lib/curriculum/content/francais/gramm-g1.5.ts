@@ -47,9 +47,20 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "",
+      label: "Parler d'une action qui se passe au moment où l'on parle.",
       items: ["Vous {a}regardez{/a} la télévision en ce moment ?"],
       noBulletItems: [0],
+      transLabel: {
+        en: "{a}1.{/a} Talk about an action happening at the moment of speaking.",
+        ar: "{a}1.{/a} التحدث عن فعل يحدث في لحظة الكلام.",
+        fa: "{a}1.{/a} صحبت دربارهٔ کاری که در لحظهٔ گفت‌وگو اتفاق می‌افتد.",
+        pt: "{a}1.{/a} Falar de uma ação que acontece no momento em que se fala.",
+        so: "{a}1.{/a} Ka hadal ficil dhacaya xilliga hadalka.",
+        ti: "{a}1.{/a} ኣብ እዋን ምዝራብ ብዛዕባ ዝፍጸም ተግባር ምዝራብ።",
+        tr: "{a}1.{/a} Konuşma anında gerçekleşen bir eylemden söz etmek.",
+        ps: "{a}1.{/a} د هغه عمل په اړه خبرې کول چې د خبرو پر مهال کېږي.",
+        uk: "{a}1.{/a} Говорити про дію, що відбувається в момент мовлення.",
+      },
     },
     {
       type: "plain_list",

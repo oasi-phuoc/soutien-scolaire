@@ -112,6 +112,13 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         ["de + les", "{a}des{/a}", "La salle des professeurs."],
       ],
     },
+    {
+      type: "plain_list",
+      items: [
+        "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
+      ],
+      noBulletItems: [0],
+    },
   ],
   exercises: [
     {

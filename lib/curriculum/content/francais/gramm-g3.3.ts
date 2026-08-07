@@ -90,8 +90,8 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       label: "Exemples",
       items: [
         "des yeux {a}marron{/a}",
-        "des chaises {/a}orange{/a}",
-        "des cafés {/a}noisette{/a}",
+        "des chaises {a}orange{/a}",
+        "des cafés {a}noisette{/a}",
       ],
       noBulletItems: [0, 1, 2],
     },
