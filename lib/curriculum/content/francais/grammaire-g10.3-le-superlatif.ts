@@ -7,7 +7,7 @@ export const A2_GR_SUPERLATIF: GrammarLesson = {
   title: "Le superlatif",
   theory: [
     { type: "heading", text: "Le superlatif", trans: { en: "The superlative", ar: "صيغة التفضيل العليا", fa: "صفت عالی", ti: "ናይ ዝለዓለ ደረጃ ቅርጺ", uk: "Найвищий ступінь" } },
-    { { type: "text",
+    { type: "text",
       noBulletItems: [0], items: ["Le superlatif exprime le degré le plus élevé ou le plus bas."],
       transItems: {
         en: ["The superlative expresses the highest or lowest degree."],

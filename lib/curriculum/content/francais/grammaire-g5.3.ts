@@ -96,7 +96,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     { type: "heading", text: 'Questions avec "Est-ce que"', sub: true, trans: { en: 'Questions with "Est-ce que"', ar: 'الأسئلة بـ "Est-ce que"', fa: 'سوالات با "Est-ce que"', ti: 'ሕቶታት ብ "Est-ce que"', uk: 'Питання з "Est-ce que"' } },
-    { { type: "text",
+    { type: "text",
       noBulletItems: [0], items: ["C'est la forme la plus courante qui est utilisée."] },
     {
       type: "grid",
@@ -123,7 +123,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     { type: "heading", text: "L'inversion verbe-sujet", sub: true, trans: { en: "Verb-subject inversion", ar: "القلب فعل-فاعل", fa: "وارونگی فعل-فاعل", ti: "ምግልባጥ ግሲ-ርእሲ", uk: "Інверсія дієслово-підмет" } },
-    { { type: "text",
+    { type: "text",
       noBulletItems: [0], items: ["C'est la forme formelle, utilisée principalement à l'écrit et dans les situations officielles."] },
     {
       type: "grid",

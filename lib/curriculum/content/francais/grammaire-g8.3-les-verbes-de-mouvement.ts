@@ -106,7 +106,7 @@ export const A1_CONJ_L12: ConjLesson = {
   title: "Les verbes de mouvement",
   theory: [
     { type: "heading", text: "Les verbes de mouvement", trans: { en: "Verbs of movement", ar: "أفعال الحركة", fa: "افعال حرکت", ti: "ናይ ምንቅስቓስ ግሲታት", uk: "Дієслова руху" } },
-    { { type: "text", items: ["Ces verbes expriment un déplacement ou un changement de position. Voici les verbes les plus courants :"], noBulletItems: [0],
+    { type: "text", items: ["Ces verbes expriment un déplacement ou un changement de position. Voici les verbes les plus courants :"], noBulletItems: [0],
       transItems: {
         en: ["These verbs express a movement or a change of position. Here are the most common verbs:"],
         ar: ["هذه الأفعال تعبّر عن انتقال أو تغيير في الموضع. إليك الأفعال الأكثر شيوعاً:"],
