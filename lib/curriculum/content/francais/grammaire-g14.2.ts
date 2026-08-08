@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_ADVERBES } from "./gramm-r10.5-les-adverbes";
+import { A2_GR_ADVERBES } from "./grammaire-g14.2-les-adverbes";
 
 /** G14.2 — Les adverbes en -ment, enrichis avec G19.22 (types d'adverbes) */
 export const A1_GR_ADVERBES_MENT: GrammarLesson = {

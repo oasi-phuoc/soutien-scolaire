@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A1_CONJ_L00 } from "./gramm-r1.1-les-pronoms-personnels";
+import { A1_CONJ_L00 } from "./grammaire-g1.1-les-pronoms-personnels";
 
 /** G1.1 — Les pronoms sujets */
 export const A1_GR_L01: GrammarLesson = {

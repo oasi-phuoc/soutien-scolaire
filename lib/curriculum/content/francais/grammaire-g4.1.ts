@@ -14,7 +14,7 @@ export const A1_GR_L04: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Les articles accompagnent un nom et, au singulier, indiquent son genre (masculin ou féminin).",
+        "Les articles accompagnent un nom. Ils indiquent son genre ({a}masculin{/a} ou {a}féminin{/a}) et son nombre ({a}singulier{/a} ou {a}pluriel{/a}).",
       ],
       noBulletItems: [0],
     },
@@ -30,35 +30,21 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
-      items: [
-        "{a}1. Notion générale{/a}",
-      ],
-      noBulletItems: [0],
-    },
-    {
       type: "highlight",
-      label: "",
+      label: "Notion générale",
       items: [
-        "La monnaie est importante.",
-        "Les animaux ont besoin d'eau.",
+        "{a}La{/a} monnaie est importante.",
+        "{a}Les{/a} animaux ont besoin d'eau.",
       ],
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
-      items: [
-        "{a}2. Personne, objet ou lieu déjà connu{/a}",
-      ],
-      noBulletItems: [0],
-    },
-    {
       type: "highlight",
-      label: "",
+      label: "Personne, objet ou lieu déjà connu",
       items: [
-        "La carte bancaire de Marie.",
-        "Le directeur est dans son bureau.",
-        "J'ouvre la fenêtre.",
+        "{a}La{/a} carte bancaire de Marie.",
+        "{a}Le{/a} directeur est dans son bureau.",
+        "J'ouvre {a}la{/a} fenêtre.",
       ],
       noBulletItems: [0, 1, 2],
     },
@@ -74,18 +60,11 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
-      items: [
-        "{a}1. Personne ou chose non précise{/a}",
-      ],
-      noBulletItems: [0],
-    },
-    {
       type: "highlight",
-      label: "",
+      label: "Personne ou chose non précise",
       items: [
-        "C'est un client.",
-        "Ce sont des billets de banque.",
+        "{a}Un{/a} client entre dans le magasin.",
+        "Ce sont {a}des{/a} billets de banque.",
       ],
       noBulletItems: [0, 1],
     },
@@ -97,15 +76,8 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
-      items: [
-        "{a}un{/a}/{a}une{/a} = 1 ; {a}des{/a} = une quantité indéterminée",
-      ],
-      noBulletItems: [0],
-    },
-    {
       type: "highlight",
-      label: "",
+      label: "Quantité",
       items: [
         "Vous avez des pièces de 5 francs ?",
         "J'ai un billet de 10 francs.",
@@ -114,19 +86,7 @@ export const A1_GR_L04: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "Avec les verbes de préférence",
-      items: [],
-    },
-    {
-      type: "plain_list",
-      items: [
-        "On utilise toujours l'{a}article défini{/a} avec les verbes aimer, adorer, préférer, détester.",
-      ],
-      noBulletItems: [0],
-    },
-    {
-      type: "highlight",
-      label: "",
+      label: "Avec les verbes de préférence (aimer, adorer, préférer ou détester",
       items: [
         "J'aime les fruits.",
         "Elle préfère le thé.",

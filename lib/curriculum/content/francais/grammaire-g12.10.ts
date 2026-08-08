@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_L19 } from "./gramm-rp.1-les-pronoms-relatifs-qui-et-que";
+import { A2_GR_L19 } from "./grammaire-g12.10-les-pronoms-relatifs-qui-et-que";
 
 /** G12.10 — Les pronoms relatifs qui, que, où, enrichis avec G19.17 */
 export const A1_GR_PRONOMS_RELATIFS_QUI_QUE_OU: GrammarLesson = {

@@ -1,6 +1,6 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_BON_BIEN } from "./gramm-r8.2-bon-ou-bien-meilleur-ou-mieux";
-import { A2_GR_SUPERLATIF } from "./gramm-r8.3-le-superlatif";
+import { A2_GR_BON_BIEN } from "./grammaire-g10.3-bon-ou-bien-meilleur-ou-mieux";
+import { A2_GR_SUPERLATIF } from "./grammaire-g10.3-le-superlatif";
 
 /** Unité 49 — Le superlatif (G10.3) */
 export const A1_GR_SUPERLATIF: GrammarLesson = {

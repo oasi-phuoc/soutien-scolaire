@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_CONDITIONNEL } from "./gramm-r6.2-le-conditionnel";
+import { A2_GR_CONDITIONNEL } from "./grammaire-g16.8-le-conditionnel";
 
 /** G16.8 — Le conditionnel présent, enrichi avec G19.30 */
 export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {

@@ -15,6 +15,7 @@ const ADDABLE = [
   "heading",
   "plain_list",
   "highlight",
+  "highlight_text",
   "note",
   "rule",
   "vocab",
@@ -28,6 +29,7 @@ const TYPE_LABELS: Record<string, string> = {
   heading: "Titre",
   plain_list: "Liste",
   highlight: "Encadré",
+  highlight_text: "Encadré + texte",
   note: "Note",
   rule: "Règle",
   vocab: "Vocabulaire",
@@ -53,6 +55,8 @@ function emptyBlock(type: Addable): TheoryBlock {
       return { type: "plain_list", items: [""] };
     case "highlight":
       return { type: "highlight", label: "", items: [""] };
+    case "highlight_text":
+      return { type: "highlight_text", label: "", text: "", items: [""] };
     case "note":
       return { type: "note", text: "" };
     case "rule":
@@ -318,6 +322,33 @@ function BlockFields({
               value={block.label}
               onChange={(e) => onChange({ ...block, label: e.target.value })}
               className={inputCls}
+            />
+          </label>
+          <StringListEditor
+            label="Items"
+            items={block.items}
+            onChange={(items) => onChange({ ...block, items })}
+          />
+        </div>
+      );
+    case "highlight_text":
+      return (
+        <div className="space-y-3">
+          <label className="block">
+            <span className={labelCls}>Label</span>
+            <input
+              type="text"
+              value={block.label}
+              onChange={(e) => onChange({ ...block, label: e.target.value })}
+              className={inputCls}
+            />
+          </label>
+          <label className="block">
+            <span className={labelCls}>Texte</span>
+            <textarea
+              value={block.text}
+              onChange={(e) => onChange({ ...block, text: e.target.value })}
+              className={`min-h-[56px] ${areaCls}`}
             />
           </label>
           <StringListEditor

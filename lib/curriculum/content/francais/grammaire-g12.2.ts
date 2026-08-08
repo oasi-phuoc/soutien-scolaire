@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_L35 } from "./gramm-rp.2-les-pronoms-cod-et-coi";
+import { A2_GR_L35 } from "./grammaire-g12.2-les-pronoms-cod-et-coi";
 
 /** G12.2 — Les pronoms COD et COI (enrichi avec l'ancien G5.2 / a2-gr-l35) */
 export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {

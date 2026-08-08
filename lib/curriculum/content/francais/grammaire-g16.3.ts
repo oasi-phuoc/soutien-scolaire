@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_GERONDIF } from "./gramm-r6.4-le-gerondif";
+import { A2_GR_GERONDIF } from "./grammaire-g16.3-le-gerondif";
 
 /** G16.3 — Le gérondif, enrichi avec G19.31 */
 export const A1_GR_GERONDIF: GrammarLesson = {

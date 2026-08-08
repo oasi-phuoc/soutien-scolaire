@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_L52 } from "./gramm-r5.11-les-relations-logiques-cause-consequence-et-connecteurs";
+import { A2_GR_L52 } from "./grammaire-g17.1-les-relations-logiques";
 
 /** G17.1 — L'expression de la cause, enrichie avec G19.21 */
 export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {

@@ -485,10 +485,16 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
               </div>
             );
 
-          case "highlight": {
+          case "highlight":
+          case "highlight_text": {
             const transLabel = useTrans ? block.transLabel?.[pivot as keyof typeof block.transLabel] : undefined;
+            const transText =
+              block.type === "highlight_text" && useTrans
+                ? block.transText?.[pivot as keyof typeof block.transText]
+                : undefined;
             const transItems = useTrans ? block.transItems?.[pivot as keyof typeof block.transItems] : undefined;
             const label = transLabel ?? block.label;
+            const plainText = block.type === "highlight_text" ? (transText ?? block.text) : undefined;
             const items = transItems ?? block.items;
             const alignArrows = items.length > 0 && items.every((item) => item.includes(" → "));
             return (
@@ -502,6 +508,15 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                       </p>
                     )}
                   </div>
+                ) : null}
+                {plainText ? (
+                  <p
+                    className="text-sm leading-relaxed text-[var(--color-text-primary)]"
+                    lang={transText ? pivot : undefined}
+                    dir={transText && isRtl ? "rtl" : "ltr"}
+                  >
+                    {renderInlineMarkup(plainText)}
+                  </p>
                 ) : null}
                 {items.length > 0 ? (
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">

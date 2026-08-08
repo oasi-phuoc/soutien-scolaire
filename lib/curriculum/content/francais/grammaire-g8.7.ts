@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_PASSE_OU_IMPARFAIT } from "./gramm-r5.10-passe-compose-ou-imparfait";
+import { A2_GR_PASSE_OU_IMPARFAIT } from "./grammaire-g8.7-passe-compose-ou-imparfait";
 
 /** G8.7 — L'imparfait / Le passé composé, enrichi avec G19.25 */
 export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {

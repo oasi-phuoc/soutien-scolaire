@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A1_GR_L14 } from "./gramm-r3.1-les-adjectifs-partitifs";
+import { A1_GR_L14 } from "./grammaire-g4.3-les-adjectifs-partitifs";
 
 /** Unité 23 — L'article partitif (G4.3) */
 export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {

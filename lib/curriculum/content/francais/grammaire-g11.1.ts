@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A1_GR_TIME_EXPRESSIONS } from "./gramm-r4.2-les-expressions-de-temps";
+import { A1_GR_TIME_EXPRESSIONS } from "./grammaire-g11.1-les-expressions-de-temps";
 
 /** Unité 50 — L'expression du temps : moment précis ou habitude (G11.1) */
 export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {

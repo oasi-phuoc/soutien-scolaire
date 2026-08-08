@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_SUBJONCTIF } from "./gramm-r6.5-le-subjonctif";
+import { A2_GR_SUBJONCTIF } from "./grammaire-g16.4-le-subjonctif";
 
 /** G16.4 — Le subjonctif présent, enrichi avec G19.32 */
 export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {

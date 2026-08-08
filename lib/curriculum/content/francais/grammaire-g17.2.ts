@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { GR_MARQUEURS_TEMPS_COMPLET } from "./gramm-r9.1-les-marqueurs-de-temps";
+import { GR_MARQUEURS_TEMPS_COMPLET } from "./grammaire-g17.2-les-marqueurs-de-temps";
 
 /** G17.2 — L'expression de la conséquence, enrichie avec G19.20 */
 export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {

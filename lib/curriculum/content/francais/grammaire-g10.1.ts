@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_L39 } from "./gramm-r8.1-le-comparatif";
+import { A2_GR_L39 } from "./grammaire-g10.1-le-comparatif";
 
 /** Unité 47 — La comparaison avec un adjectif ou un adverbe (G10.1) */
 export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {

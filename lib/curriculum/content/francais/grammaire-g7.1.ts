@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A1_GR_L11 } from "./gramm-r3.3-les-prepositions-de-lieu";
+import { A1_GR_L11 } from "./grammaire-g7.1-les-prepositions-de-lieu";
 
 /** Unité 35 — À, en, de avec les noms de villes, pays et continents (G7.1) */
 export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {

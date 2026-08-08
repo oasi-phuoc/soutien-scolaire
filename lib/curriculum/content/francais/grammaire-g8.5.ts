@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_IMPARFAIT_IRREGULIERS } from "./gramm-r5.9-les-verbes-irreguliers-a-l-imparfait";
+import { A2_GR_IMPARFAIT_IRREGULIERS } from "./grammaire-g8.5-les-verbes-irreguliers-a-l-imparfait";
 
 /** G8.5 — L'imparfait, enrichi avec G19.26 (imparfait irrégulier) */
 export const A1_GR_IMPARFAIT: GrammarLesson = {

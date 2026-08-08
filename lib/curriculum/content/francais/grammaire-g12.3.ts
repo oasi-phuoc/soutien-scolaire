@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_L36 } from "./gramm-rp.3-les-pronoms-y-et-en";
+import { A2_GR_L36 } from "./grammaire-g12.3-les-pronoms-y-et-en";
 
 /** G12.3 — Le pronom complément en, enrichi avec G19.19 (Y et EN) */
 export const A1_GR_PRONOM_EN: GrammarLesson = {

@@ -1,5 +1,5 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_FUTUR_IRREGULIERS } from "./gramm-r4.5-les-verbes-irreguliers-au-futur-simple";
+import { A2_GR_FUTUR_IRREGULIERS } from "./grammaire-g9.2-les-verbes-irreguliers-au-futur-simple";
 
 /** G9.2 — Le futur simple, enrichi avec G19.27 (futur irrégulier) */
 export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
