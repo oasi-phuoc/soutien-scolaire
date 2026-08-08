@@ -9,7 +9,8 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
   title: "Les verbes en -ir",
   theory: [
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les verbes avec un infinitif en {a}-ir{/a} n'ont pas tous la même conjugaison. Il y a quatre modèles de conjugaison.",
       ],
@@ -32,7 +33,8 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       trans: { en: "The finir pattern", ar: "نموذج finir", fa: "الگوی finir", pt: "O modelo finir", so: "Qaabka finir", ti: "ሞዴል finir", tr: "Finir modeli", ps: "د finir بېلګه", uk: "Модель finir" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Ce verbe a deux radicaux : {a}fini-{/a} au singulier et {a}finiss-{/a} au pluriel.",
       ],
@@ -88,13 +90,14 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Prononciation",
       items: [],
       transLabel: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}1.{/a} On ne prononce pas le {a}s{/a} et le {a}t{/a} finaux au singulier (fini{a}s{/a}, fini{a}t{/a}).",
       ],
@@ -111,7 +114,8 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}2.{/a} Au pluriel, on prononce le {a}ss{/a} pour distinguer : il finit / ils fini{a}ss{/a}ent.",
       ],
@@ -134,7 +138,8 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       trans: { en: "The ouvrir pattern", ar: "نموذج ouvrir", fa: "الگوی ouvrir", pt: "O modelo ouvrir", so: "Qaabka ouvrir", ti: "ሞዴል ouvrir", tr: "Ouvrir modeli", ps: "د ouvrir بېلګه", uk: "Модель ouvrir" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le radical est le même que l'infinitif ({a}ouvr-{/a}). Les terminaisons sont les mêmes que pour les verbes en {a}-er{/a}.",
       ],
@@ -196,7 +201,8 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       trans: { en: "The partir, dormir, servir pattern", ar: "نموذج partir وdormir وservir", fa: "الگوی partir، dormir و servir", pt: "O modelo partir, dormir, servir", so: "Qaabka partir, dormir, servir", ti: "ሞዴል partir፣ dormir፣ servir", tr: "Partir, dormir, servir modeli", ps: "د partir، dormir، servir بېلګه", uk: "Модель partir, dormir, servir" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Ces verbes ont deux radicaux : au singulier {a}par- / dor- / ser-{/a} ; au pluriel comme l'infinitif {a}part- / dorm- / serv-{/a}.",
       ],
@@ -252,13 +258,14 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Prononciation",
       items: [],
       transLabel: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}1.{/a} On ne prononce pas le {a}s{/a} et le {a}t{/a} finaux au singulier.",
       ],
@@ -275,7 +282,8 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}2.{/a} On prononce la consonne du 2e radical au pluriel (il part / ils par{a}tent{/a}).",
       ],
@@ -298,7 +306,8 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       trans: { en: "The venir and tenir pattern", ar: "نموذج venir وtenir", fa: "الگوی venir و tenir", pt: "O modelo venir e tenir", so: "Qaabka venir iyo tenir", ti: "ሞዴል venirን tenirን", tr: "Venir ve tenir modeli", ps: "د venir او tenir بېلګه", uk: "Модель venir і tenir" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Ces verbes ont trois radicaux, avec des prononciations différentes.",
       ],

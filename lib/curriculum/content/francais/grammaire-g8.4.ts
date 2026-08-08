@@ -8,7 +8,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les verbes pronominaux au passé composé", trans: { en: "Reflexive verbs in the passé composé", ar: "الأفعال الانعكاسية في الماضي المركب", fa: "افعال انعکاسی در گذشته مرکب", ti: "ናይ ሕሉፍ ጊዜ ርእሰ-ጠቓሚ ግሳት", uk: "Займенникові дієслова в passé composé" } },
     {
-      type: "highlight",
+      type: "text",
       label: "Formation",
       transLabel: { en: "Formation", ar: "التكوين", fa: "ساختار", ti: "ቅርጺ", uk: "Утворення" },
       items: [
@@ -25,7 +25,8 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le participe passé s'accorde avec le sujet réel lorsque le pronom réfléchi est complément direct.",
         "Elle s'est lavée. / Ils se sont rencontrés.",
@@ -40,7 +41,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Négation",
       transLabel: { en: "Negation", ar: "النفي", fa: "نفی", ti: "ምኽፋል", uk: "Заперечення" },
       items: [

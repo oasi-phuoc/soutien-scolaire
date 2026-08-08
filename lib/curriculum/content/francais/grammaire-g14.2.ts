@@ -13,7 +13,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Souvent la manière d'une action. → Roulez prudemment. (= avec prudence)",
         "Peut modifier un adjectif ou une expression. → Ils sont généralement prudents. ; Elle est fréquemment en retard.",
@@ -26,14 +26,14 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
       text: "Formation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Cas général : féminin de l'adjectif + {a}-ment{/a}. → douce → doucement ; longue → longuement.",
       ],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Cas particuliers",
       items: [
         "Adjectif masculin en voyelle : + {a}-ment{/a} sur le masculin. → poli → poliment ; vrai → vraiment ; absolu → absolument.",
@@ -48,7 +48,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
       text: "Place",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Devant l'adjectif ou l'expression. → généralement prudents ; complètement d'accord.",
         "Après le verbe en général. → Il parle rapidement. ; Il a parlé rapidement.",
@@ -60,7 +60,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}-amment{/a} et {a}-emment{/a} se prononcent pareil. → couramment ; fréquemment.",
       ],

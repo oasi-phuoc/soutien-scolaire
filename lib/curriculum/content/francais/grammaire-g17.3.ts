@@ -12,7 +12,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Situer deux événements l'un par rapport à l'autre.",
         "Exemple : {a}Au moment où{/a} je vous parle, les négociations se poursuivent. Aucun syndicat ne reprendra le travail {a}jusqu'à ce qu'{/a}un accord soit signé.",
@@ -24,7 +24,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       text: "Deux événements en même temps",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "quand / lorsque (formel) + indicatif",
       items: [
         "Deux actions en même temps, ou une action pendant une autre.",
@@ -33,7 +33,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "au moment où + indicatif",
       items: [
         "Insiste sur un moment précis.",
@@ -41,7 +41,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "pendant que + indicatif",
       items: [
         "Insiste sur la durée ou le déroulement.",
@@ -53,7 +53,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       text: "Deux événements l'un après l'autre",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "après que + indicatif",
       items: [
         "Introduit l'action 1 (la première).",
@@ -61,7 +61,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "avant que + subjonctif",
       items: [
         "Introduit l'action 2 (la seconde).",
@@ -73,7 +73,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       text: "Même sujet → {a}avant de{/a} + infinitif. → {a}Avant de{/a} partir, on n'a pas écouté la radio.",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "dès que / aussitôt que + indicatif",
       items: [
         "Actions qui se suivent immédiatement ; introduit l'action 1.",
@@ -81,7 +81,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "jusqu'à ce que + subjonctif",
       items: [
         "L'action 1 dure jusqu'au début de l'action 2.",

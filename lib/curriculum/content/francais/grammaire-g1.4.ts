@@ -13,7 +13,8 @@ export const A1_GR_CEST: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaal", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}Il y a{/a} permet d'indiquer la présence d'une personne ou d'une chose dans un lieu.",
       ],
@@ -30,13 +31,14 @@ export const A1_GR_CEST: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["{a}Il y a{/a} beaucoup de photos."],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}C'est{/a} permet d'identifier une personne ou une chose.",
       ],
@@ -53,7 +55,7 @@ export const A1_GR_CEST: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["{a}C'est{/a} mon cousin."],
       noBulletItems: [0],
@@ -61,7 +63,8 @@ export const A1_GR_CEST: GrammarLesson = {
 
     // ── Intro + tableau ───────────────────────────────────────────────────────
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les expressions {a}c'est{/a} et {a}il est{/a} servent toutes les deux à présenter ou décrire quelqu'un ou quelque chose, mais elles ne s'utilisent pas de la même manière.",
       ],
@@ -120,7 +123,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On utilise {a}c'est{/a} au singulier et {a}ce sont{/a} au pluriel pour identifier, présenter ou donner une information générale.",
       ],
@@ -139,7 +142,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Devant un nom avec article",
       items: [
         "C'est {a}un{/a} professeur.",
@@ -150,7 +153,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Devant un prénom ou un nom propre",
       items: [
         "C'est {a}Alona{/a}.",
@@ -161,7 +164,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Devant un pronom",
       items: [
         "C'est {a}moi{/a}.",
@@ -172,7 +175,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Pour donner une date ou une heure",
       items: [
         "C'est {a}le 15 mars{/a}.",
@@ -191,7 +194,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On utilise {a}il est{/a} au singulier et {a}ils sont{/a} au pluriel pour décrire des personnes ou des choses au masculin.",
       ],
@@ -210,7 +213,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Devant un adjectif",
       items: [
         "Il est {a}grand{/a}.",
@@ -221,7 +224,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Devant une profession (sans article)",
       items: [
         "Il est {a}professeur{/a}.",
@@ -232,7 +235,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Devant une nationalité",
       items: [
         "Il est {a}suisse{/a}.",
@@ -243,7 +246,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Devant une religion",
       items: [
         "Il est {a}musulman{/a}.",
@@ -294,7 +297,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Quand on désigne une personne avec un nom + adjectif, utilise {a}c'est{/a}.",
       ],
@@ -313,7 +316,7 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "C'est un homme {a}gentil{/a}.",

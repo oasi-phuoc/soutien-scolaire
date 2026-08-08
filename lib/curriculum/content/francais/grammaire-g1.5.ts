@@ -14,7 +14,8 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaal", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les verbes en {a}-er{/a} sont les verbes les plus fréquents en français. Ils font partie du 1er groupe. Le présent de l'indicatif est utilisé pour :",
       ],
@@ -31,7 +32,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       },
     },
         {
-      type: "highlight",
+      type: "text",
       label: "Parler d'une action qui se passe au moment où l'on parle.",
       items: ["Vous {a}regardez{/a} la télévision en ce moment ?"],
       noBulletItems: [0],
@@ -48,7 +49,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Parler d'une action habituelle.",
       items: ["Tous les matins, je {a}regarde{/a} mes mails."],
       noBulletItems: [0],
@@ -65,7 +66,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Faire une description générale au présent, ou exprimer des goûts et des idées.",
       items: ["Vous {a}habitez{/a} à Paris ?"],
       noBulletItems: [0],
@@ -88,7 +89,8 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       trans: { en: "How to form the verb?", ar: "كيف تصرّف الفعل؟", fa: "چگونه فعل را صرف کنیم؟", pt: "Como formar o verbo?", so: "Sidee falka loo sameeyaa?", ti: "ግሲ ብኸመይ ትሰርሕ?", tr: "Fiil nasıl oluşturulur?", ps: "فعل څنګه جوړوو؟", uk: "Як утворити дієслово?" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "En général, les verbes en {a}-er{/a} ont une base verbale. On ajoute la terminaison {a}e, es, e, ons, ez, ent{/a} à cette base.",
       ],
@@ -129,7 +131,8 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["On prend le verbe et on enlève {a}-er{/a}."],
       transItems: {
         en: ["Take the verb and remove {a}-er{/a}."],
@@ -228,7 +231,8 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       trans: { en: "Pronunciation and spelling", ar: "النطق والإملاء", fa: "تلفظ و املا", pt: "Pronúncia e ortografia", so: "Ku dhawaaqid iyo higaad", ti: "ኣደማምጻን ኣጸሓሕፋን", tr: "Telaffuz ve yazım", ps: "تلفظ او املا", uk: "Вимова та правопис" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}1.{/a} On prononce la consonne finale du radical, mais on ne prononce pas les terminaisons {a}-e, -es, -ent{/a}."],
       transItems: {
         en: ["{a}1.{/a} The final consonant of the stem is pronounced, but the endings {a}-e, -es, -ent{/a} are not."],
@@ -243,7 +247,8 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}2.{/a} On fait la liaison."],
       transItems: {
         en: ["{a}2.{/a} A liaison is made."],
@@ -258,13 +263,14 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["O{li}n|a{/li}ime, nou{li}s|é{/li}coutons, vou{li}s|é{/li}tudiez, il{li}s|h{/li}abitent, elle{li}s|o{/li}ublient."],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}3.{/a} Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle ou un h muet."],
       transItems: {
         en: ["{a}3.{/a} The pronoun {a}je{/a} becomes {a}j'{/a} before a vowel or a silent h."],
@@ -279,7 +285,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "{s}Je aime{/s} → {a}J'aime{/a} ma ville.",

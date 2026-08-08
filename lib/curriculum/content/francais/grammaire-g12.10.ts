@@ -13,7 +13,7 @@ export const A1_GR_PRONOMS_RELATIFS_QUI_QUE_OU: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les pronoms relatifs remplacent un nom et permettent de réunir deux phrases.",
         "Tu connais cette fille ? Elle sort avec Lucas. → Tu connais cette fille qui sort avec Lucas ?",
@@ -26,28 +26,28 @@ export const A1_GR_PRONOMS_RELATIFS_QUI_QUE_OU: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Qui",
       items: [
         "Personne ou chose ; sujet du second verbe. → les jeunes mariés qui habitent à côté ; un appartement qui donne sur un parc.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Que",
       items: [
         "Personne ou chose ; COD du second verbe. → le couple que nous avons rencontré ; un studio que ses parents ont acheté.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Où",
       items: [
         "Complément de lieu ou de temps. → l'université où j'ai terminé mes études ; le jour où j'ai soutenu ma thèse.",
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Qui{/a} et {a}que{/a} peuvent remplacer un pronom tonique. → C'est toi qui m'as présenté cette fille ? ; C'est elle que je connais le mieux.",
         "Avec {a}qui{/a}, le verbe s'accorde avec la personne du pronom.",

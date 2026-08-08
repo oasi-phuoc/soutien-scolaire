@@ -8,7 +8,8 @@ export const A2_GR_L36: GrammarLesson = {
   theory: [
     { type: "heading", text: "Le pronom Y", trans: { en: "The pronoun Y", ar: "الضمير Y", fa: "ضمیر Y", ti: "ተውላጠ-ስም Y", uk: "Займенник Y" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}Y{/a} remplace un lieu ou un groupe {a}à + chose{/a} (verbes construits avec à).",
         "Il répond à la question : {a}où ?{/a} ou {a}à quoi ?{/a}",
@@ -47,7 +48,7 @@ export const A2_GR_L36: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Attention : Y ne remplace pas une personne",
       transLabel: { en: "Careful: Y does not replace a person", ar: "انتبه: Y لا يحلّ محل شخص", fa: "توجه: Y جایگزین شخص نمی‌شود", ti: "ጥንቃቐ: Y ንሰብ ኣይትክእን", uk: "Увага: Y не замінює людину" },
       items: [
@@ -66,7 +67,8 @@ export const A2_GR_L36: GrammarLesson = {
     },
     { type: "heading", text: "Le pronom EN", sub: true, accent: true, trans: { en: "The pronoun EN", ar: "الضمير EN", fa: "ضمیر EN", ti: "ተውላጠ-ስም EN", uk: "Займенник EN" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}EN{/a} remplace un groupe {a}de + nom{/a} ou un nom avec article partitif / indéfini.",
         "Il répond à la question : {a}de quoi ? combien ?{/a}",
@@ -108,7 +110,7 @@ export const A2_GR_L36: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Avec un / une : affirmatif vs négatif",
       items: [
         "À la forme affirmative ou interrogative, on peut répéter {a}un{/a} ou {a}une{/a} : Oui, j'en ai {a}un{/a}.",
@@ -124,7 +126,8 @@ export const A2_GR_L36: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Avec une quantité, on garde le {a}chiffre ou l'adverbe de quantité{/a} après le verbe.",
       ],

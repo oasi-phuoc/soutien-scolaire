@@ -12,7 +12,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "La phrase exclamative exprime différents sentiments : la surprise, l'admiration, la joie, le découragement, le regret…",
       ],
@@ -23,7 +23,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
       text: "Structures",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Toute phrase affirmative peut devenir exclamative avec une intonation différente et un point d'exclamation. → C'est beau ! ; Il y a trop de monde !",
         "On peut aussi employer des mots particuliers en début de phrase.",
@@ -31,21 +31,21 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Quel(s) / Quelle(s)",
       items: [
         "Suivi d'un groupe nominal ; s'accorde avec le nom. → Quel beau tableau !",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Que / Comme / Qu'est-ce que",
       items: [
         "Avec une phrase complète. → Que ce musée est intéressant ! ; Comme ce musée est intéressant ! ; Qu'est-ce que c'est intéressant !",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Qu'est-ce que… comme / Que de",
       items: [
         "Avec un nom pour exprimer une grande quantité. → Qu'est-ce qu'il y a comme monde ! ; Que de monde il y a ! (= Il y a beaucoup de monde !)",
@@ -58,7 +58,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ne pas confondre affirmation et exclamation. → C'est beau. / C'est beau !",
         "Ne pas confondre question et exclamation. → Quels beaux tableaux ? / Quels beaux tableaux !",

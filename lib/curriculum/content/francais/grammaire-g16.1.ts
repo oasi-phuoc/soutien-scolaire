@@ -12,7 +12,7 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ordre ou consigne : Ne faites pas de bruit ! Éteignez vos portables !",
         "Conseil : Restons ici, c'est mieux !",
@@ -25,7 +25,7 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Trois personnes seulement : {a}tu, nous, vous{/a} ; pas de pronom sujet. → Entre ! Entrons ! Entrez !",
         "Verbes en {a}-er{/a} : pas de {a}-s{/a} à la 2e personne du singulier, sauf devant {a}en{/a} ou {a}y{/a}. → Réserve des places ! ; Réserves-en trois ! ; Va à l'opéra ! ; Vas-y !",
@@ -55,7 +55,7 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
       text: "Impératif et pronoms",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Affirmatif : pronoms après le verbe, avec trait d'union ; {a}moi / toi{/a} (pas me / te). → Regarde-moi ! ; Assieds-toi ! ; Appelez-les !",
         "Négatif : pronoms devant le verbe. → Ne me regarde pas ! ; Ne t'assieds pas ! ; Ne les appelez pas !",
@@ -67,7 +67,7 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
       text: "Intonation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "L'intonation varie selon l'ordre, la consigne, le conseil ou le souhait.",
       ],

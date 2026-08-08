@@ -12,7 +12,7 @@ export const A1_GR_PRONOMS_POSSESSIFS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le pronom possessif remplace le groupe adjectif possessif + nom. → le tien = ton portable.",
         "Exemple : Quelqu'un a oublié son portable. Alex, c'est le tien ?",
@@ -24,7 +24,7 @@ export const A1_GR_PRONOMS_POSSESSIFS: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "La forme dépend du possesseur et du nom remplacé (genre et nombre).",
       ],
@@ -53,7 +53,7 @@ export const A1_GR_PRONOMS_POSSESSIFS: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Différence entre adjectifs {a}notre / votre{/a} et pronoms {a}nôtre / vôtre{/a}. → C'est bien votre voiture ? — Oui, c'est la nôtre.",
       ],

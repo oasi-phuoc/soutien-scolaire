@@ -36,7 +36,8 @@ export const A1_CONJ_L01: ConjLesson = {
       trans: { en: "TO BE", ar: "يكون", fa: "بودن", ti: "ምዃን", uk: "ÊTRE" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le verbe ÊTRE sert à donner des informations sur une personne, comme son identité ou décrire quelqu'un.",
       ],
@@ -80,7 +81,8 @@ export const A1_CONJ_L01: ConjLesson = {
       trans: { en: "TO HAVE", ar: "يملك", fa: "داشتن", ti: "ምሓዝ", uk: "AVOIR" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le verbe AVOIR sert à exprimer ce que l'on ressent ou possède.",
       ],

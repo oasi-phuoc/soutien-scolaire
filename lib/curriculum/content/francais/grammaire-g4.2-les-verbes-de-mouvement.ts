@@ -657,7 +657,7 @@ export const A1_CONJ_L08: ConjLesson = {
       trans: { en: "Movement verbs in the present", ar: "أفعال الحركة في المضارع", fa: "افعال حرکتی در زمان حال", ti: "ግሲያት ምቅስቃስ ኣብ ሕጂ ጊዜ", uk: "Дієслова руху у теперішньому часі" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ces verbes expriment un déplacement ou un mouvement. Clique sur chaque verbe pour voir sa conjugaison.",
       ],
@@ -811,7 +811,7 @@ export const A1_CONJ_L08: ConjLesson = {
       sub: true,
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains verbes de mouvement sont suivis d'une préposition qui indique la destination ou l'origine.",
       ],
@@ -826,7 +826,7 @@ export const A1_CONJ_L08: ConjLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "aller + destination",
       items: [
         "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
@@ -846,7 +846,7 @@ export const A1_CONJ_L08: ConjLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "venir + origine",
       items: [
         "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
@@ -872,7 +872,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "aller",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "Destination",
               items: [
                 "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
@@ -889,7 +889,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "venir",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "Origine",
               items: [
                 "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
@@ -906,7 +906,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "partir",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
@@ -920,7 +920,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "arriver",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
@@ -934,7 +934,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "entrer",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}dans{/a} → Il entre {a}dans{/a} la salle.",
@@ -947,7 +947,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "sortir",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}de / du / de la{/a} → Elle sort {a}de{/a} l'école.",
@@ -961,7 +961,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "monter",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}dans{/a} → Je monte {a}dans{/a} le bus.",
@@ -975,7 +975,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "descendre",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}du{/a} → Il descend {a}du{/a} train.",
@@ -989,7 +989,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "marcher",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}dans{/a} → Il marche {a}dans{/a} la rue.",
@@ -1004,7 +1004,7 @@ export const A1_CONJ_L08: ConjLesson = {
           label: "courir",
           content: [
             {
-              type: "highlight",
+              type: "text",
               label: "",
               items: [
                 "{a}dans{/a} → Il court {a}dans{/a} le parc.",
@@ -1032,7 +1032,7 @@ export const A1_CONJ_L08: ConjLesson = {
       sub: true,
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement.",
       ],
@@ -1064,12 +1064,12 @@ export const A1_CONJ_L08: ConjLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: ["à + la et de + la ne se contractent PAS."],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "Je vais {a}à la{/a} pharmacie ✅",
@@ -1078,12 +1078,12 @@ export const A1_CONJ_L08: ConjLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: ["à + l' et de + l' ne se contractent PAS."],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "Je vais {a}à l'{/a}école ✅",

@@ -12,7 +12,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les adjectifs indéfinis expriment en général une quantité : la totalité ou la pluralité. → J'ai vu tous les films de Jean-Luc Godard. ; J'ai vu plusieurs films de Jean-Luc Godard.",
         "Ils peuvent aussi exprimer la ressemblance ou la différence. → Ton ami et moi, nous avons les mêmes goûts.",
@@ -24,7 +24,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       text: "Tout, chaque et aucun(e)",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Tout",
       items: [
         "{a}Tout{/a} exprime la totalité d'un ensemble. Il est suivi d'un nom avec déterminant et s'accorde en genre et en nombre.",
@@ -34,7 +34,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [1, 2],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Chaque",
       items: [
         "{a}Chaque{/a} présente les éléments un par un. Il est invariable et suivi d'un nom singulier.",
@@ -43,7 +43,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [1],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Aucun(e)",
       items: [
         "{a}Aucun{/a} / {a}aucune{/a} : nom singulier sans article, quantité zéro, toujours avec {a}ne{/a}.",
@@ -60,7 +60,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       text: "Plusieurs et quelques",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Invariables, toujours au pluriel, suivis d'un nom sans article.",
         "{a}Plusieurs{/a} : quantité supérieure à deux, sans précision. → J'ai plusieurs amis musiciens.",
@@ -73,7 +73,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       text: "Même(s) et autre(s)",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Singulier ou pluriel ; précédés d'un déterminant et suivis d'un nom.",
         "{a}Même{/a} : ressemblance. → J'aime la même chanson que toi. ; nous aimons les mêmes chanteurs.",
@@ -87,7 +87,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On ne prononce pas le {a}s{/a} final de {a}tous{/a} devant un nom. → Vous connaissez tous les artistes ?",
         "Liaison avec {a}quelques{/a} et {a}plusieurs{/a} devant une voyelle ou un h muet. → quelques artistes ; plusieurs artistes.",

@@ -12,7 +12,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "D'autres négations que {a}ne… pas{/a} précisent le temps, les personnes ou les choses.",
         "Temps : Je ne joue jamais aux échecs. ; Nous ne sommes pas encore prêts.",
@@ -25,7 +25,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       text: "Ne… jamais, ne… plus, ne… pas encore",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Ne… jamais",
       items: [
         "Pas une seule fois. Négation de toujours, souvent, quelquefois, déjà.",
@@ -35,7 +35,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       noBulletItems: [1, 2],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Ne… plus",
       items: [
         "Avant oui, maintenant c'est fini. Négation de encore / toujours (= encore).",
@@ -45,7 +45,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       noBulletItems: [1, 2],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Ne… pas encore",
       items: [
         "L'action n'a pas encore eu lieu. Négation de déjà.",
@@ -59,7 +59,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       text: "Ne… personne / personne ne…, ne… rien / rien ne…",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Personne{/a} : pas une seule personne (≠ quelqu'un, tout le monde). Sujet ou complément. → Je ne connais personne. ; Personne ne me connaît.",
         "{a}Rien{/a} : pas une seule chose (≠ quelque chose, tout). → Je n'ai rien compris. ; Rien ne m'intéresse !",
@@ -71,7 +71,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       text: "Ne… que, ne… ni… ni",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Ne… que{/a} = seulement. → Je ne parle que français !",
         "{a}Ne… ni… ni{/a} : négation de et / ou. → Je n'aime ni le rock ni le rap.",
@@ -129,7 +129,8 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     },
     { type: "heading", text: "Au passé composé", sub: true, accent: true, trans: { en: "In the passé composé", ar: "في الماضي المركّب", fa: "در ماضی نقلی", ti: "ኣብ passé composé", uk: "У passé composé" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}jamais et rien{/a} se placent entre l'auxiliaire et le participe.",
         "{a}personne{/a} se place après le participe.",
@@ -168,7 +169,8 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     },
     { type: "heading", text: "Rien et Personne comme sujets", sub: true, accent: true, trans: { en: "Rien and Personne as subjects", ar: "Rien وPersonne كفاعلين", fa: "Rien و Personne به‌عنوان فاعل", ti: "Rien ከምኡውን Personne ከም ባዕልታት", uk: "Rien і Personne як підмети" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Quand {a}rien{/a} ou {a}personne{/a} est sujet, il se place en tête de phrase, et le verbe garde {a}ne{/a}.",
       ],
@@ -204,7 +206,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Cumul de négations",
       items: [
         "On peut combiner {a}ne…jamais…rien{/a} ou {a}ne…jamais…personne{/a}.",

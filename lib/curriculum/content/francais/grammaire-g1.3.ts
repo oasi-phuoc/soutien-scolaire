@@ -14,7 +14,8 @@ export const A1_GR_AVOIR: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaal", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le verbe {a}AVOIR{/a} sert à dire l'âge, de parler de la famille et des amis, de dire ce qu'on possède ou d'exprimer une sensation.",
       ],
@@ -151,7 +152,8 @@ export const A1_GR_AVOIR: GrammarLesson = {
       trans: { en: "Pronunciation and spelling", ar: "النطق والإملاء", fa: "تلفظ و املا", pt: "Pronúncia e ortografia", so: "Ku dhawaaqid iyo higaad", ti: "ኣደማምጻን ኣጸሓሕፋን", tr: "Telaffuz ve yazım", ps: "تلفظ او املا", uk: "Вимова та правопис" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}1.{/a} On ne prononce pas le {a}e{/a} final de {a}elle{/a}."],
       transItems: {
         en: ["{a}1.{/a} The final {a}e{/a} in {a}elle{/a} is not pronounced."],
@@ -166,7 +168,8 @@ export const A1_GR_AVOIR: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}2.{/a} On fait la liaison."],
       transItems: {
         en: ["{a}2.{/a} A liaison is made."],
@@ -181,13 +184,14 @@ export const A1_GR_AVOIR: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["O{li}n|a{/li}, nou{li}s|a{/li}vons, vou{li}s|a{/li}vez, il{li}s|o{/li}nt, elle{li}s|o{/li}nt."],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}3.{/a} Le pronom {a}je{/a} devient {a}j'{/a} devant une voyelle."],
       transItems: {
         en: ["{a}3.{/a} The pronoun {a}je{/a} becomes {a}j'{/a} before a vowel."],
@@ -202,7 +206,7 @@ export const A1_GR_AVOIR: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["{s}Je ai{/s} → {a}J'ai{/a} 20 ans."],
       noBulletItems: [0],

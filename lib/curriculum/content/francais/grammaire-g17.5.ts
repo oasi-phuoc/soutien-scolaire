@@ -12,7 +12,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Opposition : souligner la différence entre deux faits. → On travaille le samedi {a}mais{/a} pas le dimanche.",
         "Concession : une cause n'a pas eu le résultat attendu. → Les salaires n'ont pas augmenté, {a}pourtant{/a}, l'entreprise a fait des bénéfices !",
@@ -24,7 +24,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       text: "Expression de l'opposition",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "mais",
       items: [
         "Oppose deux mots ou deux propositions.",
@@ -32,7 +32,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "par contre (courant) / en revanche (formel)",
       items: [
         "Opposition plus forte.",
@@ -40,7 +40,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "alors que + indicatif",
       items: [
         "Ajoute une idée de comparaison.",
@@ -48,7 +48,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "au lieu de + infinitif",
       items: [
         "Faire une chose à la place d'une autre.",
@@ -56,7 +56,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "en fait",
       items: [
         "Oppose une idée à la réalité.",
@@ -68,7 +68,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       text: "Expression de la concession",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}mais{/a} = {a}pourtant{/a} = {a}cependant{/a} (formel).",
         "Je travaille beaucoup {a}mais{/a} je ne gagne pas beaucoup d'argent.",
@@ -79,7 +79,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "bien que / même si / avoir beau",
       items: [
         "{a}Bien que{/a} + subjonctif. → Bien que la situation {a}soit{/a} difficile…",

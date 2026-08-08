@@ -8,7 +8,8 @@ export const A1_CONJ_L30: ConjLesson = {
   theory: [
     { type: "heading", text: "Le passé composé avec être", trans: { en: "The passé composé with «être»", ar: "الماضي المركّب مع «être»", fa: "گذشته‌ی نقلی با «être»", ti: "ሕሉፍ ግዜ ምስ «être»", uk: "Passé composé з «être»" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Certains verbes utilisent {a}être{/a} (et non avoir) comme auxiliaire.",
         "Structure : {a}être{/a} (présent) + {a}participe passé{/a} (accordé avec le sujet)",
@@ -92,7 +93,7 @@ export const A1_CONJ_L30: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Tous les verbes pronominaux utilisent aussi être",
       items: [
         "Elle {a}s'est levée{/a}. (se lever → participe accordé avec elle)",

@@ -8,7 +8,8 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
   theory: [
     { type: "heading", text: "Passé composé ou imparfait ?", trans: { en: "Passé composé or imparfait?", ar: "الماضي المركّب أم الماضي الناقص؟", fa: "گذشته‌ی نقلی یا ماضی استمراری؟", ti: "ሕሉፍ ግዜ ወይ ሕሉፍ ቀጻሊ?", uk: "Passé composé чи imparfait?" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Au niveau A2, il est important de bien {a}conjuguer{/a} et bien {a}utiliser{/a} le passé composé et l'imparfait pour raconter des événements passés.",
       ],
@@ -47,7 +48,8 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
     },
     { type: "heading", text: "Les emplois du passé composé", sub: true, accent: true, trans: { en: "Uses of the passé composé", ar: "استخدامات الماضي المركّب", fa: "کاربردهای گذشتهٔ نقلی", ti: "ጥቕሚታት passé composé", uk: "Вживання passé composé" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Raconter un {a}événement ponctuel{/a} : Hier, j'{a}ai vu{/a} Lola dans la rue.",
         "Parler d'une action sur une {a}période de temps définie{/a} : Je suis née en 1985. · J'ai fait du sport pendant 2 heures. · J'ai fait du sport de 14 h à 16 h.",
@@ -62,7 +64,8 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
     },
     { type: "heading", text: "Les emplois de l'imparfait", sub: true, accent: true, trans: { en: "Uses of the imparfait", ar: "استخدامات الماضي الناقص", fa: "کاربردهای ماضی استمراری", ti: "ጥቕሚታት imparfait", uk: "Вживання imparfait" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Exprimer une {a}habitude dans le passé{/a} : Tous les matins, je {a}mangeais{/a} un pain au chocolat avec un verre de jus de fruits.",
         "Faire une {a}description{/a} : Lydie {a}était{/a} douce et gentille. · Quand j'étais petit, ma chambre {a}paraissait{/a} très grande.",
@@ -76,7 +79,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Dans un récit au passé, on utilise souvent les deux temps",
       items: [
         "Quand j'{a}ai vu{/a} Lola (= événement ponctuel), la rue {a}était{/a} déserte (= description).",
@@ -92,7 +95,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Simultanéité",
       items: [
         "Deux actions longues et simultanées se mettent souvent à l'imparfait.",
@@ -108,7 +111,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Être en train de à l'imparfait",
       items: [
         "Pour insister sur une action en cours : être à l'imparfait + en train de + infinitif.",

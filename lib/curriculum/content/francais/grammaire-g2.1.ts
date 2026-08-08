@@ -8,7 +8,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
   title: "Le genre des noms : personnes",
   theory: [
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "En français, les noms de personnes ont un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
       ],
@@ -43,7 +44,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Pour les personnes, les noms indiquent souvent une {a}profession{/a}, un {a}lien de famille{/a} ou une {a}nationalité{/a}.",
       ],
@@ -78,7 +80,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} homme, {a}une{/a} femme.",
       ],
@@ -105,7 +108,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       ps: "د مونث جوړول", uk: "Утворення жіночого роду" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Au masculin, les noms ont des terminaisons très variées.",
       ],
@@ -122,7 +126,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["En général, nom féminin = nom masculin + {a}e{/a}."],
       transItems: {
         en: ["In general, feminine noun = masculine noun + {a}e{/a}."],
@@ -137,7 +142,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un employé → une employé{a}e{/a}",
@@ -147,7 +152,8 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       inlineArrows: true,
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Quand le nom masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
       ],
@@ -164,7 +170,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un journalist{a}e{/a} → une journalist{a}e{/a}",
@@ -174,7 +180,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       inlineArrows: true,
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains noms ont des terminaisons très différentes au masculin et au féminin.",
       ],
@@ -199,7 +205,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
           label: "-en",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
               ],
@@ -243,7 +249,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
           label: "-on",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
               ],
@@ -287,7 +293,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
           label: "-er",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
               ],
@@ -331,7 +337,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
           label: "-eur",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
               ],
@@ -375,7 +381,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
           label: "-teur",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-teur{/a} au masculin changent en {a}-trice{/a} ou {a}-teuse{/a} au féminin.",
               ],
@@ -419,7 +425,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
           label: "-f",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
               ],
@@ -462,7 +468,7 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Cas particuliers",
       transLabel: {
         en: "Special cases",
@@ -511,13 +517,14 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       ps: "تلفظ او املا", uk: "Вимова та правопис" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}1.{/a} Même prononciation quand le masculin se termine par une voyelle, ou par {a}l{/a} / {a}eur{/a}.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un Espagnol / une Espagno{li}l|e{/li}",
@@ -526,13 +533,14 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}2.{/a} Prononciation différente quand le masculin se termine par une consonne (le {a}e{/a} final fait entendre la consonne).",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un Anglais → une Anglai{li}s|e{/li}",

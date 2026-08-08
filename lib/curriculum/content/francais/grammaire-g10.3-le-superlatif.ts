@@ -7,7 +7,8 @@ export const A2_GR_SUPERLATIF: GrammarLesson = {
   title: "Le superlatif",
   theory: [
     { type: "heading", text: "Le superlatif", trans: { en: "The superlative", ar: "صيغة التفضيل العليا", fa: "صفت عالی", ti: "ናይ ዝለዓለ ደረጃ ቅርጺ", uk: "Найвищий ступінь" } },
-    { type: "plain_list", items: ["Le superlatif exprime le degré le plus élevé ou le plus bas."],
+    { { type: "text",
+      noBulletItems: [0], items: ["Le superlatif exprime le degré le plus élevé ou le plus bas."],
       transItems: {
         en: ["The superlative expresses the highest or lowest degree."],
         ar: ["صيغة التفضيل العليا تعبّر عن أعلى أو أدنى درجة."],
@@ -16,7 +17,7 @@ export const A2_GR_SUPERLATIF: GrammarLesson = {
         uk: ["Найвищий ступінь виражає найвищу або найнижчу межу."],
       },
     },
-    { type: "highlight", label: "Structure", items: ["le / la / les + plus / moins + adjectif"],
+    { type: "text", label: "Structure", items: ["le / la / les + plus / moins + adjectif"],
       transLabel: { en: "Structure", ar: "البنية", fa: "ساختار", ti: "ቅርጺ", uk: "Структура" },
       transItems: {
         en: ["le / la / les + plus / moins + adjective"],
@@ -50,7 +51,7 @@ export const A2_GR_SUPERLATIF: GrammarLesson = {
     },
     { type: "heading", text: "Formes irrégulières", sub: true, trans: { en: "Irregular forms", ar: "صيغ شاذة", fa: "صورت‌های بی‌قاعده", ti: "ዘይስሩዓት ቅርጽታት", uk: "Неправильні форми" } },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "bon → comparatif : meilleur (pas : plus bon)",
         "bien → comparatif : mieux (pas : plus bien)",

@@ -18,7 +18,8 @@ export const A1_GR_TIME_EXPRESSIONS: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Elles permettent de situer une action dans le présent, le passé ou le futur.",
       ],
@@ -41,7 +42,7 @@ export const A1_GR_TIME_EXPRESSIONS: GrammarLesson = {
       boldFirstCol: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "{a}Aujourd'hui{/a}, je travaille.",

@@ -29,10 +29,8 @@ export type TheoryBlock =
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<GrammarPivotLang, string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean; colWidths?: string[] }
-  | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList; noBulletItems?: number[]; allBullets?: boolean }
-  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
-  /** Comme `highlight`, avec une ligne de texte plain entre le label et les items. */
-  | { type: "highlight_text"; label: string; text: string; items: string[]; transLabel?: Trans; transText?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
+  /** Label accent + texte plain optionnel + liste (remplace plain_list / highlight / highlight_text). */
+  | { type: "text"; label?: string; text?: string; items?: string[]; transLabel?: Trans; transText?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[]; allBullets?: boolean }
   | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; noArrow?: boolean }
   | { type: "clock_display"; clocks: { h: number; m: number; label?: string }[]; cols?: number }
   | { type: "word_cards"; items: string[]; cols?: 2 | 3 | 4 }

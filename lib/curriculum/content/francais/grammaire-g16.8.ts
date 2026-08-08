@@ -13,7 +13,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Demander un service poliment",
       items: [
         "Je {a}voudrais{/a} deux baguettes… ; Vous {a}pourriez{/a} m'apporter de l'eau…",
@@ -21,7 +21,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exprimer un souhait, un désir",
       items: [
         "On {a}voudrait{/a} déménager. ; Tu {a}aimerais{/a} aller où ?",
@@ -29,7 +29,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Suggestion / conseil",
       items: [
         "Ce soir, si tu veux, on {a}pourrait{/a} aller au cinéma.",
@@ -41,7 +41,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Radical du futur simple + terminaisons de l'imparfait ({a}-ais, -ais, -ait, -ions, -iez, -aient{/a}).",
       ],

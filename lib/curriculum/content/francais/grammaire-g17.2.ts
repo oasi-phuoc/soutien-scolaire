@@ -13,7 +13,7 @@ export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Indiquer le résultat d'un fait ou d'une action, présenté comme certain.",
         "Exemple : Vous ne supportez pas la forte chaleur ? {a}Alors{/a}, restez chez vous !",
@@ -26,7 +26,7 @@ export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
       text: "Formes et structure",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "donc / alors / par conséquent",
       items: [
         "Annoncent une conséquence ; {a}par conséquent{/a} est plus formel.",
@@ -34,7 +34,7 @@ export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "si bien que + indicatif",
       items: [
         "Annonce une conséquence.",
@@ -42,7 +42,7 @@ export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "c'est pourquoi / c'est la raison pour laquelle / c'est pour ça que",
       items: [
         "Donnent une explication ; {a}c'est pour ça que{/a} est plus familier.",
@@ -50,7 +50,7 @@ export const A1_GR_EXPRESSION_CONSEQUENCE: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Intensité / quantité",
       items: [
         "{a}tellement / si{/a} + adjectif ou adverbe + {a}que{/a}.",

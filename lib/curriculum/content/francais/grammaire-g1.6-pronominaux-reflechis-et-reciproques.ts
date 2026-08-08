@@ -12,7 +12,8 @@ export const A1_CONJ_L27: ConjLesson = {
       trans: { en: "Reflexive verbs", ar: "الأفعال الانعكاسية", fa: "افعال انعکاسی", ti: "ርእሰ-ጠቓሚ ግሳት", uk: "Зворотні дієслова" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Un verbe pronominal s'utilise avec un {a}pronom réfléchi{/a} (me, te, se, nous, vous, se).",
         "Le pronom réfléchi change selon le sujet.",
@@ -128,7 +129,7 @@ export const A1_CONJ_L27: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Verbes pronominaux courants",
       items: [
         "se lever — se coucher — se réveiller (routine quotidienne)",

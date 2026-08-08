@@ -13,7 +13,7 @@ export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "L'article partitif indique une quantité indéterminée (non comptable), pour des choses concrètes ou abstraites.",
         "Concret : {a}du{/a} poulet ; {a}de la{/a} pizza ; {a}de l'{/a}eau.",
@@ -23,7 +23,7 @@ export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Comparaison : {a}un{/a} poulet (= le poulet entier) ≠ {a}du{/a} poulet (= une part) ; {a}une{/a} pizza ≠ {a}de la{/a} pizza.",
       ],
@@ -43,7 +43,7 @@ export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Négation",
       items: [
         "À la forme négative, le partitif est remplacé par {a}de{/a} / {a}d'{/a}. La distinction masculin/féminin disparaît.",

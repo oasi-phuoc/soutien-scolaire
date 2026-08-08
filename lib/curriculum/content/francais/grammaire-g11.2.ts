@@ -12,7 +12,7 @@ export const A1_GR_MARQUEURS_TEMPS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ces expressions situent une action dans le temps (passé, présent, futur) : action terminée, en cours ou à venir ; durée, début ou fin.",
         "Exemple : Ils se sont rencontrés il y a 40 ans. Ils sont mariés depuis 35 ans. Ils veulent rester ensemble encore pour longtemps !",
@@ -24,21 +24,21 @@ export const A1_GR_MARQUEURS_TEMPS: GrammarLesson = {
       text: "Il y a, dans, depuis, pour",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Il y a",
       items: [
         "Durée entre une action terminée et le moment où l'on parle ; avec le passé composé. → Bruno est rentré de voyage il y a 3 mois.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Dans",
       items: [
         "Durée entre le moment présent et une action future ; avec le présent ou le futur. → Clara va partir dans deux mois.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Depuis",
       items: [
         "Action non terminée : point de départ ou durée jusqu'au présent. → Je travaille depuis le 1er avril. ; Je n'ai pas travaillé depuis trois mois.",
@@ -46,7 +46,7 @@ export const A1_GR_MARQUEURS_TEMPS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Pour",
       items: [
         "Durée prévue d'une action à partir du moment où l'on parle (présent, passé ou futur). → Clara va partir pour un mois.",
@@ -57,7 +57,7 @@ export const A1_GR_MARQUEURS_TEMPS: GrammarLesson = {
       text: "Pendant, en, à partir de, jusqu'à",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Pendant{/a} : durée d'une action. → Pendant les vacances, je me repose.",
         "{a}En{/a} : temps nécessaire pour faire une action. → Je vais au travail en une demi-heure.",

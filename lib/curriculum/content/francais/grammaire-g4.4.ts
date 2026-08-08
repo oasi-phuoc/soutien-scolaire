@@ -12,7 +12,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Quantités indéterminées : articles partitifs ({a}du{/a}, {a}de la{/a}, {a}de l'{/a}) ou indéfini ({a}des{/a}). → Je veux du beurre et de la confiture. ; Tu bois de l'eau. ; Je veux des frites.",
         "Quantités précises (ou relatives) : autres expressions. → Je voudrais un peu de café. ; Je mange beaucoup de chocolat.",
@@ -24,7 +24,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Quantités globales",
       items: [
         "{a}trop de{/a} = quantité excessive",
@@ -39,7 +39,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
       text: "Le nom qui suit peut être singulier ou pluriel et ne prend {a}pas{/a} d'article. → Je veux un peu de pain (pas un peu du pain). ; Je mange beaucoup d'oranges (pas beaucoup des oranges).",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Quantités précises : {a}un kilo de{/a}, {a}une bouteille de{/a}, {a}un morceau de{/a}, {a}un litre de{/a}, etc.",
       ],
@@ -50,7 +50,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
       text: "Prononciation et orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Devant une voyelle ou un h muet, {a}de{/a} devient {a}d'{/a}. → un kilo d'oranges ; une bouteille d'huile.",
         "À l'oral, le {a}e{/a} de {a}de{/a} est souvent muet. → Il mange beaucoup de pommes.",

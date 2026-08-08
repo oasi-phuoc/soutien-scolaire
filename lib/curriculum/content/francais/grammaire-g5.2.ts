@@ -8,7 +8,8 @@ export const A1_GR_INTERRO: GrammarLesson = {
   theory: [
     { type: "heading", text: "Poser une question", trans: { en: "Asking a question", ar: "طرح سؤال", fa: "پرسیدن سوال", ti: "ሕቶ ምሓታት", uk: "Постановка питання" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Il y a plusieurs façons de poser une question en français.",
         "La plus simple : monter la voix à la fin.",
@@ -23,7 +24,8 @@ export const A1_GR_INTERRO: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}Est-ce que{/a} + sujet + verbe ?",
         "Devant une voyelle : {a}est-ce qu'{/a}",
@@ -61,7 +63,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Intonation montante",
       transLabel: { en: "Rising intonation", ar: "التنغيم الصاعد", fa: "آهنگ صعودی", ti: "ዝልዓለ ቃና", uk: "Висхідна інтонація" },
       items: [
@@ -102,7 +104,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       href: "/francais/grammaire/a2-gr-l07",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Attention — épreuve orale DELF A1",
       items: [
         "Variez vos formulations : inversion verbe-sujet, {a}est-ce que{/a} et forme orale.",
@@ -118,7 +120,8 @@ export const A1_GR_INTERRO: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Répondre à une question",
       items: [
         "Question {a}fermée{/a} → réponse par {a}oui{/a} ou {a}non{/a} : Oui, j'ai faim.",

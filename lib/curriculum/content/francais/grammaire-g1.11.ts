@@ -14,7 +14,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaalka", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}1.{/a} On utilise le présent progressif à la place du présent simple pour parler d'une action qui se passe au moment exact où l'on parle.",
         "{a}3.{/a} On ne peut pas l'utiliser pour une action habituelle ou une description générale.",
@@ -87,7 +88,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       trans: { en: "Form", ar: "الصيغة", fa: "صورت", pt: "Forma", so: "Qaab", ti: "ቅርጺ", tr: "Biçim", ps: "بڼه", uk: "Форма" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["Verbe {a}être{/a} (présent) + {a}en train de{/a} + infinitif."],
       transItems: {
         en: ["Verb {a}être{/a} (present) + {a}en train de{/a} + infinitive."],
@@ -102,13 +104,14 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["Il {a}est en train de{/a} dormir."],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["Avec un verbe pronominal, le {a}pronom{/a} se place devant l'infinitif."],
       transItems: {
         en: ["With a pronominal verb, the {a}pronoun{/a} is placed before the infinitive."],
@@ -123,13 +126,14 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["Elles sont en train de {a}se{/a} préparer."],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["À la forme négative, {a}ne… pas{/a} encadre le verbe être."],
       transItems: {
         en: ["In the negative form, {a}ne… pas{/a} surrounds the verb être."],
@@ -144,7 +148,7 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["Ils {a}ne{/a} sont {a}pas{/a} en train de travailler."],
       noBulletItems: [0],
@@ -155,7 +159,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       trans: { en: "Spelling", ar: "الإملاء", fa: "املا", pt: "Ortografia", so: "Higgaad", ti: "ኣጸሓሕፋ", tr: "Yazım", ps: "املا", uk: "Правопис" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}De{/a} devient {a}d'{/a} devant un verbe qui commence par une voyelle ou un h muet.",
       ],
@@ -172,7 +177,7 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "Nous sommes en train {s}de{/s} apprendre le français.",

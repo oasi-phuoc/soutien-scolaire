@@ -17,7 +17,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On utilise la forme du pluriel quand le nom désigne plusieurs éléments.",
       ],
@@ -35,7 +35,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "une pomme — {a}des{/a} pomme{a}s{/a}",
@@ -52,7 +52,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       ps: "بڼې", uk: "Форми" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Un nom s'emploie toujours avec un déterminant, qui indique le nombre. Dans les dictionnaires, les noms sont au singulier.",
       ],
@@ -99,7 +99,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       ps: "عمومي حالت", uk: "Загальний випадок" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Nom pluriel = nom singulier + {a}-s{/a}.",
       ],
@@ -117,7 +117,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un fruit → des fruit{a}s{/a}",
@@ -126,7 +126,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Si le nom singulier se termine par {a}s{/a}, {a}x{/a} ou {a}z{/a}, le pluriel ne change pas.",
       ],
@@ -144,7 +144,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "le bra{a}s{/a} → les bra{a}s{/a}",
@@ -163,7 +163,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       ps: "ځانګړې بڼې", uk: "Особливі форми" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains noms forment leur pluriel autrement selon leur terminaison. Choisissez une terminaison pour voir les exemples et les exceptions.",
       ],
@@ -188,7 +188,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-al",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
               ],
@@ -226,7 +226,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
               ],
             },
             {
-              type: "highlight",
+              type: "text",
               label: "Exceptions",
               transLabel: {
                 en: "Exceptions",
@@ -253,7 +253,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-ail",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-ail{/a} au singulier prennent un {a}-s{/a} au pluriel.",
               ],
@@ -291,7 +291,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
               ],
             },
             {
-              type: "highlight",
+              type: "text",
               label: "Exceptions",
               transLabel: {
                 en: "Exceptions",
@@ -318,7 +318,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-eau",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
               ],
@@ -361,7 +361,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-au",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-au{/a} au singulier changent en {a}-aux{/a} au pluriel.",
               ],
@@ -399,7 +399,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
               ],
             },
             {
-              type: "highlight",
+              type: "text",
               label: "Exceptions",
               transLabel: {
                 en: "Exceptions",
@@ -424,7 +424,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-eu",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-eu{/a} au singulier changent en {a}-eux{/a} au pluriel.",
               ],
@@ -462,7 +462,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
               ],
             },
             {
-              type: "highlight",
+              type: "text",
               label: "Exceptions",
               transLabel: {
                 en: "Exceptions",
@@ -487,7 +487,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "-ou",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-ou{/a} au singulier prennent un {a}-s{/a} au pluriel.",
               ],
@@ -525,7 +525,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
               ],
             },
             {
-              type: "highlight",
+              type: "text",
               label: "Exceptions",
               transLabel: {
                 en: "Exceptions",
@@ -555,7 +555,7 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
           label: "Autres",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Certains noms ont un pluriel irrégulier.",
               ],

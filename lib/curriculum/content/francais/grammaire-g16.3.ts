@@ -13,7 +13,7 @@ export const A1_GR_GERONDIF: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le gérondif indique que deux actions sont faites en même temps par le même sujet.",
         "Temps : Il mange en lisant.",
@@ -27,7 +27,7 @@ export const A1_GR_GERONDIF: GrammarLesson = {
       text: "Forme",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Formation : {a}en{/a} + participe présent.",
         "Participe présent : même radical que le {a}nous{/a} du présent + {a}-ant{/a}.",

@@ -12,7 +12,7 @@ export const A1_GR_FORME_PASSIVE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Actif et passif : deux points de vue sur la même action.",
         "Actif (intérêt pour l'agent) : L'entreprise Eiffage a construit le viaduc de Millau.",
@@ -25,7 +25,7 @@ export const A1_GR_FORME_PASSIVE: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Formation : {a}être{/a} + participe passé. Le temps de {a}être{/a} donne le temps du passif.",
       ],
@@ -57,7 +57,7 @@ export const A1_GR_FORME_PASSIVE: GrammarLesson = {
       text: "Orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le participe s'accorde avec le sujet. → La tour Eiffel a été construite en 1889.",
       ],

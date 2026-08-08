@@ -14,7 +14,8 @@ export const A1_GR_L01: GrammarLesson = {
       trans: { en: "Why use a pronoun?", ar: "لماذا نستخدم ضميرًا؟", fa: "چرا از ضمیر استفاده می‌کنیم؟", pt: "Porquê usar um pronome?", so: "Maxaa magac-u-yaal loo isticmaalaa?", ti: "ስለምንታይ ተካኢ ስም ንጥቀም?", tr: "Neden zamir kullanılır?", ps: "ولې ضمیر کاروو؟", uk: "Навіщо вживати займенник?" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Un pronom remplace une personne ou un nom pour éviter la répétition.",
       ],
@@ -31,7 +32,7 @@ export const A1_GR_L01: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "Ali parle français.",
@@ -109,13 +110,14 @@ export const A1_GR_L01: GrammarLesson = {
       trans: { en: "Special cases", ar: "حالات خاصة", fa: "حالت‌های خاص", pt: "Casos especiais", so: "Xaalado gaar ah", ti: "ፍሉያት ኩነታት", tr: "Özel durumlar", ps: "ځانګړي حالتونه", uk: "Особливі випадки" },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "ON",
       items: [],
       transLabel: { en: "ON", ar: "ON", fa: "ON", pt: "ON", so: "ON", ti: "ON", tr: "ON", ps: "ON", uk: "ON" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "On utilise « {a}on{/a} » pour représenter plusieurs personnes (= nous). Il est très utilisé à l'oral familier. Le verbe est toujours au singulier.",
       ],
@@ -132,7 +134,7 @@ export const A1_GR_L01: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       noBulletItems: [0, 1],
       inlineArrows: true,
@@ -142,13 +144,14 @@ export const A1_GR_L01: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "TU",
       items: [],
       transLabel: { en: "TU", ar: "TU", fa: "TU", pt: "TU", so: "TU", ti: "TU", tr: "TU", ps: "TU", uk: "TU" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",],
       transItems: {
         en: ["We use {a}tu{/a} to speak to someone we know in an informal situation."],
@@ -163,7 +166,7 @@ export const A1_GR_L01: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       noBulletItems: [0],
       items: [
@@ -171,14 +174,15 @@ export const A1_GR_L01: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "VOUS",
       noBulletItems: [0],
       items: [],
       transLabel: { en: "VOUS", ar: "VOUS", fa: "VOUS", pt: "VOUS", so: "VOUS", ti: "VOUS", tr: "VOUS", ps: "VOUS", uk: "VOUS" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "On utilise « {a}vous{/a} » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur). On appelle cela la forme de politesse.",
       ],
@@ -195,7 +199,7 @@ export const A1_GR_L01: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       noBulletItems: [0],
       items: [
@@ -203,13 +207,14 @@ export const A1_GR_L01: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "ILS",
       items: [],
       transLabel: { en: "ILS", ar: "ILS", fa: "ILS", pt: "ILS", so: "ILS", ti: "ILS", tr: "ILS", ps: "ILS", uk: "ILS" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "On utilise « {a}ils{/a} » quand il y a un groupe mixte de femmes et d'hommes. Même s'il y a beaucoup de femmes et un seul homme.",
       ],
@@ -226,7 +231,7 @@ export const A1_GR_L01: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       noBulletItems: [0],
       inlineArrows: true,
@@ -265,7 +270,7 @@ export const A1_GR_L01: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Astuce",
       noFirstBullet: true,
       items: [

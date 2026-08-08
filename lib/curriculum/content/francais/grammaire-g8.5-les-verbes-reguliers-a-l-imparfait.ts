@@ -8,7 +8,8 @@ export const A2_CONJ_L07: ConjLesson = {
   theory: [
     { type: "heading", text: "L'imparfait : formation", trans: { en: "The imparfait: how it is formed", ar: "الماضي الناقص: التكوين", fa: "ماضی استمراری: ساخت", ti: "ኢምፓርፌ: ኣፈጣጥራ", uk: "Imparfait: утворення" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Formation : {a}base « nous »{/a} au présent + terminaisons de l'imparfait.",
         "Terminaisons : {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}",
@@ -40,7 +41,7 @@ export const A2_CONJ_L07: ConjLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples de bases régulières",
       transLabel: { en: "Examples of regular stems", ar: "أمثلة على الجذوع المنتظمة", fa: "نمونه‌های ریشهٔ باقاعده", ti: "ኣብነታት ስሩዓት መሰረታት", uk: "Приклади правильних основ" },
       items: [

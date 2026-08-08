@@ -8,7 +8,8 @@ export const A2_GR_L35: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les pronoms COD et COI", trans: { en: "Direct (COD) and indirect (COI) object pronouns", ar: "ضمائر المفعول المباشر (COD) وغير المباشر (COI)", fa: "ضمایر مفعول مستقیم (COD) و غیرمستقیم (COI)", ti: "ናይ ቀጥታዊ (COD) ከምኡ'ውን ዘይቀጥታዊ (COI) ዕላማ ተውላጠ-ስም", uk: "Прямі (COD) та непрямі (COI) додаткові займенники" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les pronoms personnels remplacent un {a}nom déjà mentionné{/a} pour éviter les répétitions.",
         "{a}COD{/a} = Complément d'Objet Direct (sans préposition).",
@@ -102,7 +103,8 @@ export const A2_GR_L35: GrammarLesson = {
     },
     { type: "heading", text: "Place du pronom", sub: true, accent: true, trans: { en: "Position of the pronoun", ar: "موضع الضمير", fa: "جایگاه ضمیر", ti: "ናይ ተውላጠ-ስም ቦታ", uk: "Місце займенника" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le pronom se place {a}avant{/a} le verbe conjugué.",
         "Au passé composé : avant l'auxiliaire.",

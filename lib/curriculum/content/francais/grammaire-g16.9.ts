@@ -12,7 +12,7 @@ export const A1_GR_CONDITIONNEL_PASSE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Regret",
       items: [
         "Souvent avec {a}aimer{/a}, {a}préférer{/a}, {a}souhaiter{/a}, {a}vouloir{/a}.",
@@ -20,7 +20,7 @@ export const A1_GR_CONDITIONNEL_PASSE: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Reproche",
       items: [
         "Souvent avec {a}devoir{/a}, {a}pouvoir{/a}, {a}falloir{/a}.",
@@ -37,7 +37,7 @@ export const A1_GR_CONDITIONNEL_PASSE: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Temps composé : auxiliaire {a}avoir{/a} ou {a}être{/a} au conditionnel présent + participe passé.",
         "Choix de l'auxiliaire et accord : mêmes règles qu'au passé composé.",
@@ -45,7 +45,7 @@ export const A1_GR_CONDITIONNEL_PASSE: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "Tu {a}aurais dû{/a} me prévenir.",

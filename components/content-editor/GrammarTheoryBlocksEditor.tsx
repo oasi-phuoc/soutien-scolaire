@@ -13,9 +13,7 @@ const btnIcon =
 
 const ADDABLE = [
   "heading",
-  "plain_list",
-  "highlight",
-  "highlight_text",
+  "text",
   "note",
   "rule",
   "vocab",
@@ -27,9 +25,7 @@ type Addable = (typeof ADDABLE)[number];
 
 const TYPE_LABELS: Record<string, string> = {
   heading: "Titre",
-  plain_list: "Liste",
-  highlight: "Encadré",
-  highlight_text: "Encadré + texte",
+  text: "Texte / liste",
   note: "Note",
   rule: "Règle",
   vocab: "Vocabulaire",
@@ -51,12 +47,8 @@ function emptyBlock(type: Addable): TheoryBlock {
   switch (type) {
     case "heading":
       return { type: "heading", text: "" };
-    case "plain_list":
-      return { type: "plain_list", items: [""] };
-    case "highlight":
-      return { type: "highlight", label: "", items: [""] };
-    case "highlight_text":
-      return { type: "highlight_text", label: "", text: "", items: [""] };
+    case "text":
+      return { type: "text", label: "", text: "", items: [""] };
     case "note":
       return { type: "note", text: "" };
     case "rule":
@@ -288,7 +280,7 @@ function BlockFields({
           />
         </div>
       );
-    case "plain_list":
+    case "text":
       return (
         <div className="space-y-3">
           <label className="block">
@@ -305,55 +297,22 @@ function BlockFields({
               className={inputCls}
             />
           </label>
-          <StringListEditor
-            label="Items"
-            items={block.items}
-            onChange={(items) => onChange({ ...block, items })}
-          />
-        </div>
-      );
-    case "highlight":
-      return (
-        <div className="space-y-3">
           <label className="block">
-            <span className={labelCls}>Label</span>
-            <input
-              type="text"
-              value={block.label}
-              onChange={(e) => onChange({ ...block, label: e.target.value })}
-              className={inputCls}
-            />
-          </label>
-          <StringListEditor
-            label="Items"
-            items={block.items}
-            onChange={(items) => onChange({ ...block, items })}
-          />
-        </div>
-      );
-    case "highlight_text":
-      return (
-        <div className="space-y-3">
-          <label className="block">
-            <span className={labelCls}>Label</span>
-            <input
-              type="text"
-              value={block.label}
-              onChange={(e) => onChange({ ...block, label: e.target.value })}
-              className={inputCls}
-            />
-          </label>
-          <label className="block">
-            <span className={labelCls}>Texte</span>
+            <span className={labelCls}>Texte (optionnel)</span>
             <textarea
-              value={block.text}
-              onChange={(e) => onChange({ ...block, text: e.target.value })}
+              value={block.text ?? ""}
+              onChange={(e) =>
+                onChange({
+                  ...block,
+                  text: e.target.value || undefined,
+                })
+              }
               className={`min-h-[56px] ${areaCls}`}
             />
           </label>
           <StringListEditor
             label="Items"
-            items={block.items}
+            items={block.items ?? [""]}
             onChange={(items) => onChange({ ...block, items })}
           />
         </div>

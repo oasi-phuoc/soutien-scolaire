@@ -14,7 +14,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       trans: { en: "The verb aller", ar: "فعل aller", fa: "فعل aller", pt: "O verbo aller", so: "Fal-ka aller", ti: "ግሲ aller", tr: "Aller fiili", ps: "د aller فعل", uk: "Дієслово aller" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le verbe {a}aller{/a} sert à indiquer un déplacement (il est alors suivi d'un lieu ou d'un infinitif) ou à prendre et donner des nouvelles.",
       ],
@@ -63,7 +64,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Conjugaison",
       items: [],
       transLabel: { en: "Conjugation", ar: "التصريف", fa: "صرف", pt: "Conjugação", so: "Qorista falka", ti: "ምጽራይ", tr: "Çekim", ps: "ګردان", uk: "Дієвідміна" },
@@ -94,13 +95,14 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Prononciation",
       items: [],
       transLabel: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}1.{/a} On fait la liaison."],
       transItems: {
         en: ["{a}1.{/a} A liaison is made."],
@@ -115,7 +117,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["Nou{li}s|a{/li}llons, vou{li}s|a{/li}llez."],
       noBulletItems: [0],
@@ -127,7 +129,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       trans: { en: "Verbs in -ayer, -oyer and -uyer", ar: "أفعال -ayer / -oyer / -uyer", fa: "افعال -ayer / -oyer / -uyer", pt: "Verbos em -ayer, -oyer e -uyer", so: "Falalka ku dhammaada -ayer, -oyer iyo -uyer", ti: "ግሲያት -ayer / -oyer / -uyer", tr: "-ayer, -oyer ve -uyer ile biten fiiller", ps: "په -ayer، -oyer او -uyer پای ته رسېدونکي فعلونه", uk: "Дієслова на -ayer, -oyer і -uyer" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}1.{/a} Le {a}y{/a} devient {a}i{/a} devant une terminaison muette (je, tu, il, ils)."],
       transItems: {
         en: ["{a}1.{/a} The {a}y{/a} becomes {a}i{/a} before a silent ending (je, tu, il, ils)."],
@@ -142,7 +145,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}2.{/a} Avec {a}je, tu, il/elle/on, ils/elles{/a}, le {a}y{/a} du radical est remplacé par un {a}i{/a}."],
       transItems: {
         en: ["{a}2.{/a} With {a}je, tu, il/elle/on, ils/elles{/a}, the {a}y{/a} in the stem is replaced by an {a}i{/a}."],
@@ -157,7 +161,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}3.{/a} Les verbes en {a}-ayer{/a} ont deux orthographes possibles (paie / paye)."],
       transItems: {
         en: ["{a}3.{/a} Verbs ending in {a}-ayer{/a} have two possible spellings (paie / paye)."],
@@ -218,7 +223,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       trans: { en: "Verbs in -ger and -cer", ar: "أفعال -ger / -cer", fa: "افعال -ger / -cer", pt: "Verbos em -ger e -cer", so: "Falalka ku dhammaada -ger iyo -cer", ti: "ግሲያት -ger / -cer", tr: "-ger ve -cer ile biten fiiller", ps: "په -ger او -cer پای ته رسېدونکي فعلونه", uk: "Дієслова на -ger і -cer" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["On ajoute {a}e{/a} après le {a}g{/a} à la forme {a}nous{/a} pour garder le son [ʒ]."],
       transItems: {
         en: ["An {a}e{/a} is added after {a}g{/a} in the {a}nous{/a} form to keep the [ʒ] sound."],
@@ -272,7 +278,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["Le {a}c{/a} devient {a}ç{/a} devant {a}o{/a} à la forme {a}nous{/a} pour garder le son [s]."],
       transItems: {
         en: ["The {a}c{/a} becomes {a}ç{/a} before {a}o{/a} in the {a}nous{/a} form to keep the [s] sound."],
@@ -332,7 +339,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       trans: { en: "Verbs in -eler, -eter and -érer", ar: "أفعال -eler / -eter / -érer", fa: "افعال -eler / -eter / -érer", pt: "Verbos em -eler, -eter e -érer", so: "Falalka ku dhammaada -eler, -eter iyo -érer", ti: "ግሲያት -eler / -eter / -érer", tr: "-eler, -eter ve -érer ile biten fiiller", ps: "په -eler، -eter او -érer پای ته رسېدونکي فعلونه", uk: "Дієслова на -eler, -eter і -érer" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}1.{/a} Avec {a}je, tu, il/elle/on, ils/elles{/a}, ces verbes ont une particularité orthographique qui change la prononciation.",
       ],
@@ -349,7 +357,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}2.{/a} Ils ont deux radicaux : le 1er (comme l'infinitif) pour {a}nous{/a} et {a}vous{/a} ; le 2e (modifié) pour les autres personnes.",
       ],
@@ -366,7 +375,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}3.{/a} Les verbes comme {a}jeter{/a} doublent le {a}t{/a} devant une terminaison muette."],
       transItems: {
         en: ["{a}3.{/a} Verbs like {a}jeter{/a} double the {a}t{/a} before a silent ending."],
@@ -381,7 +391,8 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}4.{/a} Les verbes comme {a}appeler{/a} doublent le {a}l{/a} devant une terminaison muette."],
       transItems: {
         en: ["{a}4.{/a} Verbs like {a}appeler{/a} double the {a}l{/a} before a silent ending."],

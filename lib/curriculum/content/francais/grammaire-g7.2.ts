@@ -12,7 +12,7 @@ export const A1_GR_AUTRES_PREPOSITIONS: GrammarLesson = {
       text: "À, chez, de",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}À{/a} et {a}chez{/a} : le lieu où l'on est ou où l'on va. {a}Chez{/a} s'emploie avec des personnes. → Chez moi.",
         "{a}De{/a} : le lieu d'où l'on vient.",
@@ -37,7 +37,7 @@ export const A1_GR_AUTRES_PREPOSITIONS: GrammarLesson = {
       text: "Sur, dans, sous",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Sur{/a} ≠ {a}sous{/a}. → Le vélo est sur le toit. ; Il y a un chat sous la voiture.",
         "{a}Dans{/a} = à l'intérieur. → Les bagages sont dans le coffre.",
@@ -50,7 +50,7 @@ export const A1_GR_AUTRES_PREPOSITIONS: GrammarLesson = {
       text: "Ici, là, là-bas",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Employés seuls, {a}ici{/a} ≈ {a}là{/a}, mais {a}là{/a} est plus courant. → Tu es là ? ; Je suis là.",
         "Pour opposer deux endroits : Michel, assieds-toi ici et Marie, assieds-toi là.",

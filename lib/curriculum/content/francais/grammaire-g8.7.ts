@@ -13,7 +13,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Pour raconter un événement passé, on combine souvent l'imparfait et le passé composé.",
         "Exemple : Nous étions dans le bus, il y avait beaucoup de monde, je lisais. Soudain, le chauffeur a freiné et elle est tombée sur moi !",
@@ -21,7 +21,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "L'imparfait",
       items: [
         "Circonstances, décor, description. → Nous étions dans le bus ; j'étais assis ; Chloé était debout.",
@@ -30,7 +30,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Le passé composé",
       items: [
         "Action avec un début et une fin. → Soudain, le chauffeur a freiné et Chloé est tombée sur moi.",
@@ -42,7 +42,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
       text: "Expressions de temps",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Souvent avec l'imparfait : {a}pendant que{/a}. → Elle est tombée sur moi pendant que je lisais.",
         "Souvent avec le passé composé : {a}quand, tout à coup, soudain, brusquement, à ce moment-là, un jour…{/a} → Soudain, le chauffeur a freiné.",
@@ -54,7 +54,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ne pas confondre passé composé et imparfait des verbes en {a}-er{/a} avec {a}je{/a}. → J'ai marché. ≠ Je marchais.",
       ],

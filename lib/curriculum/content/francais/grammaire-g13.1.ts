@@ -12,7 +12,7 @@ export const A1_GR_BILAN_A2: GrammarLesson = {
       text: "Révision A2",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Passé composé, imparfait, plus-que-parfait.",
         "Futur proche, futur simple, futur antérieur.",

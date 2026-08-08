@@ -13,7 +13,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Décrire une situation passée, souvent en contraste avec le présent. → Avant, les trains étaient à vapeur. Maintenant, les trains sont électriques.",
         "Décrire une habitude passée. → Quand j'étais enfant, tous les dimanches, nous allions chez mes grands-parents.",
@@ -25,7 +25,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "L'imparfait est très régulier : radical du {a}nous{/a} au présent + terminaisons.",
         "Terminaisons : {a}-ais, -ais, -ait, -ions, -iez, -aient{/a}.",
@@ -58,7 +58,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
       text: "Prononciation et orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les terminaisons {a}-ais{/a}, {a}-ait{/a} et {a}-aient{/a} se prononcent pareil.",
         "Ne pas confondre présent / imparfait : j'habite ≠ j'habitais ; nous buvons ≠ nous buvions.",
@@ -67,7 +67,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Orthographe — cas particuliers",
       items: [
         "Verbes en {a}-ger{/a} : un {a}e{/a} devant {a}a{/a}. → je voyageais ; il mangeait.",

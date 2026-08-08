@@ -13,7 +13,7 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}En{/a} remplace un nom (personne ou chose) précédé d'une expression de quantité. Seul ou suivi d'une quantité.",
         "Articles partitifs / indéfinis ({a}du, de la, de l', un, une, des{/a}). → Tu veux du café ? — J'en veux bien.",
@@ -28,7 +28,7 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
       text: "Place et structure",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Devant le verbe ou l'auxiliaire. → Oui, j'en ai trois. ; Il en a invité sept.",
         "Avec deux verbes : devant l'infinitif. → Il va en inviter trois.",
@@ -44,7 +44,7 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison devant voyelle ou {a}h{/a} muet. → J'en ai beaucoup. ; J'en organise souvent.",
         "À l'oral, le {a}ne{/a} de la négation tombe souvent. → J'en ai pas. ; Il y en a pas.",

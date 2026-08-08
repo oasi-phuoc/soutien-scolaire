@@ -8,7 +8,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
   title: "Les noms composés",
   theory: [
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Un nom composé est un nom formé de {a}deux{/a} ou {a}plusieurs{/a} mots qui créent ensemble un seul nom. Les mots peuvent être reliés par un {a}trait d'union{/a} ({a}-{/a}) ou par une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a}).",
       ],
@@ -44,7 +44,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Par un trait d'union",
       transLabel: {
         en: "With a hyphen",
@@ -64,7 +64,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Par une préposition",
       transLabel: {
         en: "With a preposition",
@@ -93,7 +93,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       ps: "املا", uk: "Правопис" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le second mot peut déjà être au pluriel lorsqu'il désigne ce que contient ou ce à quoi sert l'objet.",
       ],
@@ -111,7 +111,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un porte-document{a}s{/a}",
@@ -131,7 +131,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       ps: "په جمع کې", uk: "У множині" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les mots varient ou pas selon le type des mots.",
       ],
@@ -149,7 +149,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}1.{/a} Les verbes restent invariables.",
         "{a}2.{/a} Les prépositions restent invariables.",
@@ -247,7 +247,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exception",
       transLabel: {
         en: "Exception",
@@ -263,7 +263,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       items: [],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains noms composés ne suivent pas la règle générale.",
       ],
@@ -281,7 +281,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "{a}des{/a} porte-monnaie",
@@ -290,7 +290,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "En général, seul le dernier mot s'accorde pour les mots d'origine étrangère.",
       ],
@@ -308,7 +308,7 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un week-end → {a}des{/a} week-ends",

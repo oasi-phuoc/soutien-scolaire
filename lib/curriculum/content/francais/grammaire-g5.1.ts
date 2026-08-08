@@ -8,7 +8,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
   theory: [
     { type: "heading", text: "La structure de la phrase", trans: { en: "The structure of the sentence", ar: "بنية الجملة", fa: "ساختار جمله", ti: "ቅርጺ ሓሳብ", uk: "Структура речення" } },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "En français, une phrase suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
       ],
@@ -48,7 +48,8 @@ export const A1_GR_PHRASES: GrammarLesson = {
     },
     { type: "heading", text: "Le sujet (S)", sub: true, trans: { en: "The subject (S)", ar: "الفاعل (S)", fa: "فاعل (S)", ti: "ሓካይ (S)", uk: "Підмет (S)" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le sujet répond à la question : {a}Qui fait l'action ?{/a}",
         "C'est souvent un pronom ({a}je, tu, il, elle…{/a}) ou un nom ({a}Marie, le chat…{/a}).",
@@ -64,7 +65,8 @@ export const A1_GR_PHRASES: GrammarLesson = {
     },
     { type: "heading", text: "Le verbe (V)", sub: true, trans: { en: "The verb (V)", ar: "الفعل (V)", fa: "فعل (V)", ti: "ግሲ (V)", uk: "Присудок (V)" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["Le verbe exprime {a}l'action{/a} ou {a}l'état{/a} du sujet."],
       transItems: {
         en: ["The verb expresses {a}the action{/a} or {a}the state{/a} of the subject."],
@@ -75,7 +77,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples d'actions",
       items: ["manger", "partir", "travailler"],
       transLabel: { en: "Examples of actions", ar: "أمثلة على الأفعال", fa: "نمونه‌های عمل", ti: "ኣብነታት ስራሕ", uk: "Приклади дій" },
@@ -88,7 +90,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples d'états",
       items: ["être", "avoir", "sembler"],
       transLabel: { en: "Examples of states", ar: "أمثلة على الحالات", fa: "نمونه‌های حالت", ti: "ኣብነታት ሃለዋት", uk: "Приклади станів" },
@@ -102,7 +104,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
     },
     { type: "heading", text: "Le complément (C)", sub: true, trans: { en: "The complement (C)", ar: "المتمم (C)", fa: "متمم (C)", ti: "መወከስ (C)", uk: "Додаток (C)" } },
     {
-      type: "plain_list",
+      type: "text",
       items: ["Le complément complète le verbe. Le complément n'est pas toujours obligatoire. Il y a trois types :"],
       noBulletItems: [0],
       transItems: {
@@ -114,7 +116,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "COD — Complément d'Objet Direct",
       items: [
         "Le complément répond à la question {a}quoi ? / qui ?{/a}",
@@ -131,7 +133,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "COI — Complément d'Objet Indirect",
       items: [
         "Le complément répond à la question {a}à qui ? / à quoi ?{/a}",
@@ -148,7 +150,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "CC — Complément Circonstanciel",
       items: [
         "Le complément répond à la question {a}où ? / quand ? / comment ?{/a}",

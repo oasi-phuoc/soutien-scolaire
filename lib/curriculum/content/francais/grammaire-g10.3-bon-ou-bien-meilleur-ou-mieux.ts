@@ -31,7 +31,7 @@ export const A2_GR_BON_BIEN: GrammarLesson = {
         uk: [["bon, bonne, bons, bonnes", "прикметник: супроводжує іменник", "meilleur(e)(s)", "le/la/les meilleur(e)(s)"], ["bien", "прислівник: супроводжує дієслово", "mieux", "le mieux"], ["mauvais", "прикметник", "pire або plus mauvais", "le pire або le plus mauvais"]],
       },
     },
-    { type: "highlight", label: "Exemples", items: ["C'est un {a}bon{/a} livre, mais celui-ci est {a}meilleur{/a}.", "Elle chante {a}bien{/a}, mais sa sœur chante {a}mieux{/a}.", "C'est la {a}pire{/a} erreur."],
+    { type: "text", label: "Exemples", items: ["C'est un {a}bon{/a} livre, mais celui-ci est {a}meilleur{/a}.", "Elle chante {a}bien{/a}, mais sa sœur chante {a}mieux{/a}.", "C'est la {a}pire{/a} erreur."],
       transLabel: { en: "Examples", ar: "أمثلة", fa: "مثال‌ها", ti: "ኣብነታት", uk: "Приклади" },
       transItems: {
         en: ["C'est un {a}bon{/a} livre, mais celui-ci est {a}meilleur{/a}. (It's a good book, but this one is better.)", "Elle chante {a}bien{/a}, mais sa sœur chante {a}mieux{/a}. (She sings well, but her sister sings better.)", "C'est la {a}pire{/a} erreur. (It's the worst mistake.)"],

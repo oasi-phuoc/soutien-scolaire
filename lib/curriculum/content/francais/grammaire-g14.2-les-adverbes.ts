@@ -8,7 +8,8 @@ export const A2_GR_ADVERBES: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les adverbes", trans: { en: "Adverbs", ar: "الظروف", fa: "قیدها", ti: "ተወሳኺታት", uk: "Прислівники" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les adverbes servent à raconter et exprimer vos impressions sur un événement ou une expérience.",
         "Ils précisent ou modifient le sens de la phrase.",
@@ -23,7 +24,8 @@ export const A2_GR_ADVERBES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Adverbes de lieu",
       items: [
         "Pour se situer dans l'espace : {a}devant, derrière, dehors, ici, là, avant…{/a}",
@@ -38,7 +40,8 @@ export const A2_GR_ADVERBES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Adverbes de temps",
       items: [
         "Pour situer dans le temps : {a}avant, après, hier, aujourd'hui, demain, ensuite, souvent, jamais, tôt, tard…{/a}",
@@ -53,7 +56,8 @@ export const A2_GR_ADVERBES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Adverbes de manière",
       items: [
         "Pour exprimer une impression ou comparer : {a}bien, mal, vite, lentement, très, mieux, pire, comme…{/a}",
@@ -68,7 +72,8 @@ export const A2_GR_ADVERBES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Adverbes de quantité",
       items: [
         "Pour parler d'une quantité ou d'une intensité : {a}trop, peu, assez, beaucoup, plus, moins, autant, très…{/a}",
@@ -83,7 +88,8 @@ export const A2_GR_ADVERBES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Adverbes d'affirmation et de négation",
       items: [
         "Pour exprimer l'accord ou le désaccord : {a}oui, non, peut-être, si, vraiment…{/a}",

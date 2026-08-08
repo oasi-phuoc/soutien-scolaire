@@ -12,7 +12,7 @@ export const A1_GR_COMPARAISON_NOM_VERBE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Pour comparer des quantités, on utilise des noms ou des verbes.",
         "Exemple : À Paris, il y a moins de lignes de métro que de bus, mais le métro transporte plus de voyageurs. On dit que le métro ne pollue pas autant que les bus.",
@@ -64,7 +64,7 @@ export const A1_GR_COMPARAISON_NOM_VERBE: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "En français courant, on prononce généralement le {a}s{/a} de {a}plus{/a} dans ces emplois. → Ça pollue plus. ; Les voitures polluent plus que le métro.",
       ],

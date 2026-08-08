@@ -12,7 +12,7 @@ export const A1_GR_SUBJONCTIF_OU_INDICATIF: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le choix du mode dépend du verbe principal.",
         "Déclaration, constatation, réalité → {a}indicatif{/a}. → Je vous assure qu'un cambrioleur {a}est entré{/a} chez moi.",
@@ -25,7 +25,7 @@ export const A1_GR_SUBJONCTIF_OU_INDICATIF: GrammarLesson = {
       text: "Opinion : certitude ou doute ?",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Verbes comme {a}penser{/a}, {a}trouver{/a}, {a}croire{/a} ; expressions {a}être sûr{/a}, {a}être convaincu{/a}…",
         "À l'{a}affirmatif{/a} → toujours l'indicatif. → Je pense qu'il y avait un seul cambrioleur.",

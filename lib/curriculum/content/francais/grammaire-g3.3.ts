@@ -13,7 +13,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       trans: { en: "Color adjectives", ar: "صفات اللون", fa: "صفت‌های رنگ", pt: "Adjetivos de cor", so: "Sifooyinka midabka", ti: "ቅጽላት ሕብሪ", tr: "Renk sıfatları", ps: "د رنګ صفتونه", uk: "Прикметники кольору" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "En général, les adjectifs de couleur s'accordent en genre et en nombre avec le nom qu'ils qualifient.",
       ],
@@ -31,7 +31,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "un pantalon noir → une jupe noir{a}e{/a}",
@@ -42,14 +42,14 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Invariable",
       items: [],
       transLabel: { en: "Invariable", ar: "", fa: "", pt: "", so: "", ti: "", tr: "", ps: "", uk: "" },
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les adjectifs de couleur sont invariables dans trois cas.",
       ],
@@ -67,7 +67,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}1.{/a} Quand la couleur est un nom de matière, de fruit, de fleur ou d'objet",
       ],
@@ -86,7 +86,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "des yeux {a}marron{/a}",
@@ -96,7 +96,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       noBulletItems: [0, 1, 2],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Par contre, certains noms sont devenus de véritables adjectifs et s'accordent.",
       ],
@@ -115,7 +115,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "des fleurs rose{a}s{/a}",
@@ -127,7 +127,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}2.{/a} Quand la couleur est précisée par un autre adjectif ou un nom",
       ],
@@ -146,7 +146,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "des chaussures {a}vert{/a} foncé",
@@ -155,7 +155,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}3.{/a} Quand la couleur est exprimée par deux adjectifs",
       ],
@@ -174,7 +174,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "une veste {a}noir{/a} et {a}blanc{/a}",
@@ -189,7 +189,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       trans: { en: "The adjective demi", ar: "صفة demi", fa: "صفت demi", pt: "O adjetivo demi", so: "Sifada demi", ti: "ቅጽል demi", tr: "Demi sıfatı", ps: "د demi صفت", uk: "Прикметник demi" },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Demi est {a}invariable{/a} devant le nom",
       items: [
         "une demi-heure",
@@ -210,7 +210,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Demi s'accorde seulement en genre après le nom",
       items: [
         "une heure et demi{a}e{/a}",
@@ -235,7 +235,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       trans: { en: "Numeral adjectives", ar: "الصفات العددية", fa: "صفت‌های عددی", pt: "Adjetivos numerais", so: "Sifooyinka tirada", ti: "ቅጽላት ቍጽሪ", tr: "Sayı sıfatları", ps: "شمېري صفتونه", uk: "Числівникові прикметники" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les adjectifs numéraux indiquent une quantité ou un rang.",
       ],
@@ -254,7 +254,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}1.{/a} Les {a}nombres cardinaux{/a} sont toujours {a}invariables{/a}.",
       ],
@@ -272,7 +272,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "{a}dix{/a} élèves",
@@ -282,7 +282,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}2.{/a} {a}Mille{/a} est toujours {a}invariable{/a}.",
       ],
@@ -300,7 +300,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "deux {a}mille{/a} francs",
@@ -309,7 +309,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}3.{/a} {a}Vingt{/a} et {a}Cent{/a} sont {a}invariables{/a} lorsqu'ils sont seuls ou suivis d'un autre nombre.",
       ],
@@ -327,7 +327,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "{a}vingt{/a} personnes",
@@ -338,7 +338,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ils prennent un {a}s{/a} lorsqu'ils sont multipliés et ne sont suivis d'aucun autre nombre.",
       ],
@@ -356,7 +356,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "cinq cent{a}s{/a} mètres",
@@ -366,7 +366,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}4.{/a} {a}Million{/a} et {a}milliard{/a} sont des noms et ils {a}s'accordent{/a}.",
       ],
@@ -384,7 +384,7 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "deux million{a}s{/a} de livres",

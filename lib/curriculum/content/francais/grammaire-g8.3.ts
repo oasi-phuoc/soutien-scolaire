@@ -8,7 +8,8 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les verbes à double auxiliaire", trans: { en: "Verbs with two possible auxiliaries", ar: "الأفعال ذات الفعل المساعد المزدوج", fa: "افعال با دو فعل کمکی", ti: "ናይ ክልተ ሓጋዚ ግሲ ዘለዎም ግሳት", uk: "Дієслова з двома можливими допоміжними" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Certains verbes se conjuguent avec {a}être{/a} ou {a}avoir{/a} au passé composé selon leur construction.",
         "Principaux verbes : sortir, rentrer, entrer, passer, monter, descendre et retourner.",
@@ -22,7 +23,7 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Règle",
       transLabel: { en: "Rule", ar: "القاعدة", fa: "قاعده", ti: "ሕጊ", uk: "Правило" },
       items: [
@@ -63,7 +64,7 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
       equalCols: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Accord",
       transLabel: { en: "Agreement", ar: "المطابقة", fa: "مطابقت", ti: "ምስምማዕ", uk: "Узгодження" },
       items: [

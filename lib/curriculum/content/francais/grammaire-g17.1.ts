@@ -13,7 +13,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Donner des explications sur des faits réels, présentées comme certaines.",
         "{a}Puisque{/a} tu es fatigué, pourquoi tu ne te reposes pas ? — {a}Parce que{/a} je veux finir ce soir !",
@@ -25,7 +25,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
       text: "Conjonctions",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "parce que",
       items: [
         "Répond à la question {a}pourquoi{/a}.",
@@ -35,7 +35,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "comme",
       items: [
         "Relie cause et conséquence ; toujours en tête de phrase.",
@@ -43,7 +43,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "puisque",
       items: [
         "Insiste sur une cause évidente / connue ; deux places possibles.",
@@ -59,7 +59,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
       text: "Prépositions",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "à cause de / grâce à / en raison de",
       items: [
         "{a}À cause de{/a} + nom/tonique : cause négative. → … à cause de toi et du mauvais temps.",

@@ -12,7 +12,7 @@ export const A1_GR_L18: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Pour désigner une personne ou une chose que l'on montre. → Regarde, ces tableaux sont vraiment intéressants.",
         "Pour désigner une personne ou une chose déjà mentionnée. → Le tableau est de Manet. Cet artiste a vécu au XIXe siècle.",
@@ -25,7 +25,7 @@ export const A1_GR_L18: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "L'adjectif démonstratif se place devant le nom et s'accorde avec lui.",
       ],
@@ -50,7 +50,7 @@ export const A1_GR_L18: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Enchaînement avec {a}cet{/a} et {a}cette{/a} devant une voyelle ou un h muet. → cet artiste ; cette artiste ; cette histoire.",
         "Liaison avec {a}ces{/a}. → ces objets ; ces horaires.",

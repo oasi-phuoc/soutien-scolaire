@@ -12,7 +12,7 @@ export const A1_GR_DOUBLES_PRONOMS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Beaucoup de verbes ont deux compléments ; les deux peuvent être remplacés par des pronoms.",
         "Exemple : Je parle de mes vacances à mes amis. → Je leur en parle.",
@@ -24,7 +24,7 @@ export const A1_GR_DOUBLES_PRONOMS: GrammarLesson = {
       text: "Ordre des pronoms",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "me / te / nous / vous + le / la / les",
       items: [
         "Il me prête sa voiture. → Il me la prête.",
@@ -34,7 +34,7 @@ export const A1_GR_DOUBLES_PRONOMS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "le / la / les + lui / leur",
       items: [
         "Il prête sa voiture à son ami. → Il la lui prête.",
@@ -42,7 +42,7 @@ export const A1_GR_DOUBLES_PRONOMS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Pronoms de personne + en",
       items: [
         "Il me donne des conseils. → Il m'en donne.",
@@ -52,7 +52,7 @@ export const A1_GR_DOUBLES_PRONOMS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Pronoms + y",
       items: [
         "Il m'emmène à la gare. → Il m'y emmène.",

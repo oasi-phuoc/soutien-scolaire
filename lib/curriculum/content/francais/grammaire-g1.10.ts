@@ -231,7 +231,8 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
   title: "Les verbes en -re et en -oir",
   theory: [
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les verbes avec un infinitif en {a}-re{/a} ou en {a}-oir{/a} ont des conjugaisons très irrégulières. Ils ont un, deux ou trois radicaux. Il y a plusieurs modèles de conjugaison. Les terminaisons sont généralement : {a}s, s, t/d, ons, ez, ent{/a}.",
       ],
@@ -332,7 +333,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Règle simple",
       items: [
         "{a}Savoir{/a} = un fait, une information, une capacité.",
@@ -353,7 +354,7 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Attention",
       items: [
         "On ne dit pas {s}je sais Paris{/s} mais {a}je connais Paris{/a}.",

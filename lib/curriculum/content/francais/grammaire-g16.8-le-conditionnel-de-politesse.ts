@@ -8,7 +8,8 @@ export const A2_CONJ_L04: ConjLesson = {
   theory: [
     { type: "heading", text: "Le conditionnel présent", trans: { en: "The present conditional", ar: "الشرطي الحاضر", fa: "وجه شرطی حال", ti: "ህሉው ቅድመ-ኩነታዊ", uk: "Теперішній умовний спосіб" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le conditionnel exprime une action {a}hypothétique, souhaitée ou polie{/a}.",
         "Formation : {a}base du futur{/a} + terminaisons de l'imparfait",
@@ -91,7 +92,7 @@ export const A2_CONJ_L04: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Politesse : impératif vs conditionnel",
       items: [
         "{a}Impératif{/a} (direct) : Donnez-moi un café !",

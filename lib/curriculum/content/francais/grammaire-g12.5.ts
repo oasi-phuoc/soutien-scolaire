@@ -12,7 +12,7 @@ export const A1_GR_EN_Y_PRONOM_TONIQUE: GrammarLesson = {
       text: "Formes et structure",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains verbes gardent {a}à{/a} ou {a}de{/a} pour une chose et pour une personne, mais le remplacement par un pronom change.",
         "Exemple : Il pense à son prochain film → Il y pense. ; Il pense à une actrice → Il pense à elle.",
@@ -33,7 +33,7 @@ export const A1_GR_EN_Y_PRONOM_TONIQUE: GrammarLesson = {
       text: "Verbes pronominaux + en / y",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}En{/a} et {a}y{/a} se placent après le pronom réfléchi.",
         "Avec {a}en{/a} : Je m'en occupe. ; tu t'en sers. ; elle s'en souvient. ; nous nous en occupons. ; vous vous en servez. ; ils s'en moquent.",

@@ -13,7 +13,7 @@ export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On utilise des expressions de temps pour indiquer le moment précis d'une action ou pour parler d'une habitude.",
         "Exemple : Rendez-vous à la gare du Nord, le 22 mars à 17 heures 15.",
@@ -38,7 +38,7 @@ export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Période liée au moment présent : adjectif démonstratif {a}ce, cet, cette, ces{/a}. → ce matin ; cet après-midi ; cette semaine ; ces jours-ci.",
       ],
@@ -49,7 +49,7 @@ export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {
       text: "Habitude",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Articles {a}le, la, l', les{/a} avec les jours et les moments de la journée.",
         "Le samedi, je vais à la piscine. (= tous les samedis)",
@@ -62,7 +62,7 @@ export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison avec {a}en{/a} devant mois ou saisons en voyelle ou {a}h{/a} muet. → en avril ; en août ; en octobre ; en été ; en automne ; en hiver.",
       ],

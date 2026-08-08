@@ -72,7 +72,8 @@ export const A1_GR_MODAUX: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaalka", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Ces verbes expriment un état, une capacité ou une obligation. Ils sont toujours suivis d'un infinitif.",
       ],
@@ -90,7 +91,8 @@ export const A1_GR_MODAUX: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}Vouloir{/a} sert à exprimer un désir ou une volonté."],
       transItems: {
         en: ["{a}Vouloir{/a} is used to express a desire or an intention."],
@@ -138,7 +140,8 @@ export const A1_GR_MODAUX: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}Pouvoir{/a} sert à exprimer une capacité, une possibilité, une autorisation ou une interdiction (à la forme négative).",
       ],
@@ -190,7 +193,8 @@ export const A1_GR_MODAUX: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}Devoir{/a} sert à exprimer une obligation, une nécessité, une interdiction (à la forme négative) ou une somme à payer.",
       ],
@@ -242,7 +246,8 @@ export const A1_GR_MODAUX: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}Il faut{/a} sert à exprimer une nécessité générale ou une interdiction (à la forme négative).",
       ],
@@ -292,7 +297,8 @@ export const A1_GR_MODAUX: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}Savoir{/a} sert à exprimer une connaissance ou une compétence.",
       ],
@@ -360,7 +366,8 @@ export const A1_GR_MODAUX: GrammarLesson = {
       trans: { en: "Notes", ar: "ملاحظات", fa: "نکات", pt: "Notas", so: "Xusuusinno", ti: "መተሓሳሰቢታት", tr: "Notlar", ps: "يادښتونه", uk: "Зауваження" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Pour demander quelque chose de façon polie, on utilise souvent {a}Je voudrais{/a} à la place de {a}Je veux{/a}.",
       ],
@@ -377,7 +384,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["{a}Je voudrais{/a} un ticket de métro, s'il vous plaît."],
       noBulletItems: [0],

@@ -8,7 +8,8 @@ export const A2_GR_L52: GrammarLesson = {
   theory: [
     { type: "heading", text: "Exprimer la cause", trans: { en: "Expressing cause", ar: "التعبير عن السبب", fa: "بیان علت", ti: "ምኽንያት ምግላጽ", uk: "Вираження причини" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "La cause explique {a}pourquoi{/a} quelque chose se passe.",
         "On peut exprimer la cause avec différents mots selon le registre et la position dans la phrase.",
@@ -51,7 +52,8 @@ export const A2_GR_L52: GrammarLesson = {
     },
     { type: "heading", text: "Exprimer la conséquence", sub: true, accent: true, trans: { en: "Expressing consequence", ar: "التعبير عن النتيجة", fa: "بیان نتیجه", ti: "ሳዕቤን ምግላጽ", uk: "Вираження наслідку" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "La conséquence exprime {a}ce qui résulte{/a} d'une cause.",
       ],
@@ -91,7 +93,7 @@ export const A2_GR_L52: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "À cause de vs Grâce à",
       transLabel: { en: "À cause de vs Grâce à", ar: "À cause de مقابل Grâce à", fa: "À cause de در برابر Grâce à", ti: "À cause de ኣንጻር Grâce à", uk: "À cause de проти Grâce à" },
       items: [
@@ -134,7 +136,8 @@ export const A2_GR_L52: GrammarLesson = {
     },
     { type: "heading", text: "Autres connecteurs utiles", sub: true, accent: true, trans: { en: "Other useful connectors", ar: "أدوات ربط أخرى مفيدة", fa: "رابط‌های مفید دیگر", ti: "ካልኦት ጠቐሚ መራኸቢታት", uk: "Інші корисні сполучники" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Énumération",
       items: [
         "{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}",
@@ -149,7 +152,8 @@ export const A2_GR_L52: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Opposition",
       items: [
         "{a}mais{/a}",
@@ -164,7 +168,8 @@ export const A2_GR_L52: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       label: "Addition",
       items: [
         "{a}et{/a}, {a}alors{/a}",

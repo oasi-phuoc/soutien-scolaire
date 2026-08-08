@@ -125,7 +125,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaal", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le sujet du verbe fait l'action sur lui-même. Un verbe pronominal est toujours accompagné d'un {a}pronom réfléchi{/a}.",
       ],
@@ -142,7 +143,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: ["Elle {a}se{/a} regarde dans le miroir."],
       noBulletItems: [0],
@@ -154,7 +155,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       trans: { en: "Conjugation", ar: "التصريف", fa: "صرف", pt: "Conjugação", so: "Sarrifka falka", ti: "ምጽራይ", tr: "Fiil çekimi", ps: "ګردان", uk: "Дієвідміна" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les verbes pronominaux se conjuguent avec deux pronoms : le pronom sujet + un second pronom de la même personne. À l'infinitif, on utilise le pronom {a}se{/a} : se lever, se doucher.",
       ],
@@ -202,7 +204,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       trans: { en: "Pronunciation and spelling", ar: "النطق والإملاء", fa: "تلفظ و املا", pt: "Pronúncia e ortografia", so: "Ku dhawaaqid iyo higaad", ti: "ኣደማምጻን ኣጸሓሕፋን", tr: "Telaffuz ve yazım", ps: "تلفظ او املا", uk: "Вимова та правопис" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les pronoms {a}me, te, se{/a} deviennent {a}m', t', s'{/a} devant une voyelle ou un h muet.",
       ],
@@ -219,7 +222,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "Je {s}me{/s} habille → Je {a}m'{/a}habille.",
@@ -243,7 +246,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       trans: { en: "The negation", ar: "النفي", fa: "نفی", pt: "A negação", so: "Diidmada", ti: "ኣሉታ", tr: "Olumsuzluk", ps: "نفي", uk: "Заперечення" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "La négation {a}ne … pas{/a} encadre le pronom réfléchi ET le verbe.",
       ],
@@ -260,7 +264,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}"],
       transItems: {
@@ -322,7 +326,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       trans: { en: "Important", ar: "انتبه", fa: "توجه", pt: "Importante", so: "Muhiim", ti: "ኣስተውዕል", tr: "Önemli", ps: "مهم", uk: "Увага" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Quand le verbe commence par une voyelle ou un h, {a}me / te / se{/a} devient {a}m' / t' / s'{/a}.",
       ],
@@ -339,7 +344,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "je {s}me{/s} appelle → je {a}m'{/a}appelle",

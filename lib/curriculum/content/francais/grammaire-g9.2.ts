@@ -13,7 +13,7 @@ export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le futur simple sert pour des événements futurs, dans des situations de communication précises, souvent avec une idée de certitude.",
         "Prévision : Demain, il pleuvra dans toutes les régions.",
@@ -28,7 +28,7 @@ export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Infinitif (radical) + terminaisons {a}-ai, -as, -a, -ons, -ez, -ont{/a}. → je commencerai ; je partirai.",
       ],
@@ -52,7 +52,7 @@ export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
       text: "Verbes en {a}-e{/a} : on enlève le {a}e{/a} avant les terminaisons. → prendre → je prendrai.",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Cas particuliers (-er)",
       items: [
         "{a}-oyer / -uyer{/a} : y → i. → nettoyer → tu nettoieras.",

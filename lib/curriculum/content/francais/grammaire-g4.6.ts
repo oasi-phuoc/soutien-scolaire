@@ -12,7 +12,7 @@ export const A1_GR_L19: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Pour indiquer une possession. → C'est ma veste.",
         "Pour indiquer une relation entre personnes. → Je te présente mon frère.",
@@ -25,7 +25,7 @@ export const A1_GR_L19: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "L'adjectif possessif se place devant le nom et s'accorde avec lui.",
         "La forme dépend du possesseur et du genre/nombre de l'objet possédé.",
@@ -59,7 +59,7 @@ export const A1_GR_L19: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison devant une voyelle ou un h muet. → mes enfants ; ton école ; vos histoires ; leurs affaires.",
       ],

@@ -12,7 +12,7 @@ export const A1_GR_BILAN_B1: GrammarLesson = {
       text: "Révision B1",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Adverbes et mots de liaison.",
         "Impératif, passif, gérondif, subjonctif, conditionnel.",

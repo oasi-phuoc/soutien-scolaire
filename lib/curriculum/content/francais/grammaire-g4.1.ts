@@ -12,7 +12,7 @@ export const A1_GR_L04: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les articles accompagnent un nom. Ils indiquent son genre ({a}masculin{/a} ou {a}féminin{/a}) et son nombre ({a}singulier{/a} ou {a}pluriel{/a}).",
       ],
@@ -23,14 +23,14 @@ export const A1_GR_L04: GrammarLesson = {
       text: "Articles définis",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les articles définis sont {a}le{/a}, {a}la{/a}, {a}l'{/a} et {a}les{/a}. On utilise ces articles pour parler de :",
       ],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Notion générale",
       items: [
         "{a}La{/a} monnaie est importante.",
@@ -39,7 +39,7 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Personne, objet ou lieu déjà connu",
       items: [
         "{a}La{/a} carte bancaire de Marie.",
@@ -53,14 +53,14 @@ export const A1_GR_L04: GrammarLesson = {
       text: "Articles indéfinis",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les articles indéfinis sont {a}un{/a}, {a}une{/a} et {a}des{/a}. On utilise ces articles pour parler de :",
       ],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Personne ou chose non précise",
       items: [
         "{a}Un{/a} client entre dans le magasin.",
@@ -69,14 +69,14 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}2. Quantité{/a}",
       ],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Quantité",
       items: [
         "Vous avez des pièces de 5 francs ?",
@@ -85,7 +85,7 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Avec les verbes de préférence (aimer, adorer, préférer ou détester",
       items: [
         "J'aime les fruits.",
@@ -98,7 +98,7 @@ export const A1_GR_L04: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "L'article se place devant un nom ou un groupe nominal et s'accorde en genre et en nombre.",
       ],

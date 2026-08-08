@@ -12,7 +12,8 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       trans: { en: "The present conditional", ar: "الشرطي الحاضر", fa: "وجه شرطی حال", ti: "ህሉው ቅድመ-ኩነታዊ", uk: "Теперішній умовний спосіб" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Formation : {a}infinitif (ou base du futur){/a} + terminaisons de l'imparfait",
         "Terminaisons : {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}",
@@ -78,7 +79,8 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       trans: { en: "The past conditional", ar: "الشرطي الماضي", fa: "وجه شرطی گذشته", ti: "ዝሓለፈ ቅድመ-ኩነታዊ", uk: "Минулий умовний спосіб" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Formation : {a}avoir ou être au conditionnel présent{/a} + participe passé",
         "Même choix d'auxiliaire qu'au passé composé.",
@@ -159,7 +161,7 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Règle clé",
       items: [
         "Jamais de conditionnel dans la proposition avec {a}si{/a}.",

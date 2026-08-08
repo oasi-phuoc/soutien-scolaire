@@ -14,7 +14,8 @@ export const A1_GR_ETRE: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaal", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le verbe {a}ÊTRE{/a} sert à donner des informations sur une personne, comme son identité ou décrire quelqu'un.",
       ],
@@ -108,7 +109,8 @@ export const A1_GR_ETRE: GrammarLesson = {
       trans: { en: "Pronunciation", ar: "النطق", fa: "تلفظ", pt: "Pronúncia", so: "Ku dhawaaqid", ti: "ኣደማምጻ", tr: "Telaffuz", ps: "تلفظ", uk: "Вимова" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}1.{/a} On ne prononce pas le {a}e{/a} final de {a}elle{/a}."],
       transItems: {
         en: ["{a}1.{/a} The final {a}e{/a} in {a}elle{/a} is not pronounced."],
@@ -123,7 +125,8 @@ export const A1_GR_ETRE: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["{a}2.{/a} On fait la liaison."],
       transItems: {
         en: ["{a}2.{/a} A liaison is made."],
@@ -138,7 +141,7 @@ export const A1_GR_ETRE: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: ["O{li}n|e{/li}st, vou{li}s|ê{/li}tes."],
       noBulletItems: [0],

@@ -168,7 +168,8 @@ export const A1_GR_L11: GrammarLesson = {
     },
 
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les prépositions de lieu indiquent où se trouve quelque chose ou quelqu'un par rapport à un autre objet ou endroit.",
       ],
@@ -221,7 +222,7 @@ export const A1_GR_L11: GrammarLesson = {
 
     // ── Contractions obligatoires avec de ────────────────────────────────────────
     {
-      type: "highlight",
+      type: "text",
       label: "Contractions obligatoires avec de",
       items: [
         "{a}de + le{/a} → {a}du{/a} : loin {a}du{/a} centre (pas de le)",

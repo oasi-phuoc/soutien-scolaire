@@ -8,7 +8,8 @@ export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les bases irrégulières du futur simple", trans: { en: "Irregular stems of the simple future", ar: "الجذور الشاذة للمستقبل البسيط", fa: "ریشه‌های بی‌قاعده‌ی آینده‌ی ساده", ti: "ዘይስሩዓት መሰረታት ናይ ቀሊል መጻኢ", uk: "Неправильні основи простого майбутнього" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["La base change, mais les terminaisons restent toujours -ai, -as, -a, -ons, -ez, -ont."],
       transItems: {
         en: ["The stem changes, but the endings always stay -ai, -as, -a, -ons, -ez, -ont."],

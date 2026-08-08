@@ -12,7 +12,8 @@ export const A1_CONJ_L00: ConjLesson = {
       trans: { en: "Why use a pronoun?", ar: "لماذا نستخدم ضميراً؟", fa: "چرا از ضمیر استفاده می‌کنیم؟", pt: "Porquê usar um pronome?", so: "Maxaa magac-u-yaal loo isticmaalaa?", ti: "ስለምንታይ ጸጋ ቃል ንጥቀም?", tr: "Neden zamir kullanılır?", ps: "ولې ضمیر کاروو؟", uk: "Навіщо використовувати займенник?" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Un pronom remplace une personne ou un nom pour éviter la répétition.",
       ],
@@ -29,7 +30,7 @@ export const A1_CONJ_L00: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "Ali parle.",
@@ -92,7 +93,7 @@ export const A1_CONJ_L00: ConjLesson = {
       trans: { en: "Special cases", ar: "حالات خاصة", fa: "موارد ویژه", pt: "Casos especiais", so: "Xaalado gaar ah", ti: "ፍሉያት ጉዳያት", tr: "Özel durumlar", ps: "ځانګړي حالتونه", uk: "Особливі випадки" },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "ON",
       noBulletItems: [0, 1, 2, 3],
       inlineArrows: true,
@@ -117,7 +118,7 @@ export const A1_CONJ_L00: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "VOUS",
       noBulletItems: [0, 1, 2],
       items: [
@@ -139,7 +140,7 @@ export const A1_CONJ_L00: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "ILS",
       noBulletItems: [0, 1, 2],
       inlineArrows: true,
@@ -180,7 +181,7 @@ export const A1_CONJ_L00: ConjLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Astuce",
       noFirstBullet: true,
       items: [

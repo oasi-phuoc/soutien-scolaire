@@ -13,7 +13,7 @@ export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}À{/a}, {a}en{/a}, {a}de{/a} sont des prépositions de lieu.",
         "{a}À{/a} et {a}en{/a} : où l'on est ou où l'on va. → Il habite en France. ; Il va à Tokyo.",
@@ -38,7 +38,7 @@ export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Exemple : Je suis née au Kenya mais j'habite en Angleterre, à Londres.",
       ],
@@ -49,7 +49,7 @@ export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {
       text: "Prononciation et orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison avec {a}en{/a}, {a}aux{/a}, {a}des{/a}. → en Angleterre ; aux États-Unis ; des Antilles.",
         "Pas de liaison avec {a}en{/a} devant un pays en {a}h{/a}. → Je vais en Hongrie.",

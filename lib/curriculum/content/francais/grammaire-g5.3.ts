@@ -12,7 +12,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "La {a}question fermée{/a} (aussi appelée question totale) attend une réponse oui/non (sans autre information).",
         "Réponses possibles : Oui. ; Non. ; Je ne sais pas. ; Si. (pour contredire une question négative) ; Peut-être.",
@@ -24,7 +24,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       text: "Structure et intonation",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Intonation montante",
       items: [
         "On utilise une phrase affirmative avec une intonation montante.",
@@ -34,7 +34,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       noBulletItems: [1, 2],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Est-ce que",
       items: [
         "On ajoute {a}est-ce que{/a} au début d'une phrase affirmative. L'intonation peut être montante ou descendante.",
@@ -48,7 +48,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       text: "Orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Élision : {a}que{/a} → {a}qu'{/a} devant une voyelle ou un h muet. → Est-ce qu'il arrête la voiture ?",
         "À l'écrit, on ajoute un point d'interrogation {a}?{/a} à la fin.",
@@ -57,7 +57,8 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     },
     { type: "heading", text: "Les 3 formes de questions fermées", trans: { en: "The 3 forms of closed (yes/no) questions", ar: "الأشكال الثلاثة للأسئلة المغلقة (نعم/لا)", fa: "سه شکل پرسش‌های بسته (بله/خیر)", ti: "ሰለስተ ቅርጽታት ናይ ዕጹዋት ሕቶታት (እወ/ኣይፋል)", uk: "3 форми закритих питань (так/ні)" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Une question {a}fermée{/a} a pour réponse {a}oui{/a} ou {a}non{/a}.",
         "Il existe 3 structures, du plus familier au plus formel.",
@@ -95,7 +96,8 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     { type: "heading", text: 'Questions avec "Est-ce que"', sub: true, trans: { en: 'Questions with "Est-ce que"', ar: 'الأسئلة بـ "Est-ce que"', fa: 'سوالات با "Est-ce que"', ti: 'ሕቶታት ብ "Est-ce que"', uk: 'Питання з "Est-ce que"' } },
-    { type: "plain_list", items: ["C'est la forme la plus courante qui est utilisée."] },
+    { { type: "text",
+      noBulletItems: [0], items: ["C'est la forme la plus courante qui est utilisée."] },
     {
       type: "grid",
       headers: ["Affirmatif", "Question avec est-ce que"],
@@ -121,7 +123,8 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     { type: "heading", text: "L'inversion verbe-sujet", sub: true, trans: { en: "Verb-subject inversion", ar: "القلب فعل-فاعل", fa: "وارونگی فعل-فاعل", ti: "ምግልባጥ ግሲ-ርእሲ", uk: "Інверсія дієслово-підмет" } },
-    { type: "plain_list", items: ["C'est la forme formelle, utilisée principalement à l'écrit et dans les situations officielles."] },
+    { { type: "text",
+      noBulletItems: [0], items: ["C'est la forme formelle, utilisée principalement à l'écrit et dans les situations officielles."] },
     {
       type: "grid",
       headers: ["Affirmatif", "Inversion"],
@@ -148,7 +151,8 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     },
     { type: "heading", text: "Le -t- euphonique", sub: true, trans: { en: "The euphonic -t-", ar: "الـ -t- للتسهيل", fa: "حرف میانجی -t-", ti: "ናይ ምልስላስ -t-", uk: "Евфонічне -t-" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["Quand le verbe se termine par une {a}voyelle{/a} + il / elle / on, on insère {a}-t-{/a}."],
       transItems: {
         en: ["When the verb ends in a {a}vowel{/a} + il / elle / on, we insert {a}-t-{/a}."],
@@ -159,7 +163,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "va → va-{a}t{/a}-il / va-{a}t{/a}-elle / va-{a}t{/a}-on",
@@ -168,7 +172,8 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["Cette règle s'applique uniquement à l'inversion."],
       transItems: {
         en: ["This rule applies only to inversion."],
@@ -204,7 +209,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "SI : le mot clé",
       items: [
         "{a}Si{/a} s'utilise uniquement pour contredire une question négative.",
@@ -223,7 +228,8 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     },
     { type: "heading", text: "Les réponses en écho avec « moi »", sub: true, trans: { en: "Echo responses with \"moi\"", ar: "الردود الصدى مع «moi»", fa: "پاسخ‌های بازتابی با «moi»", ti: "ናይ ምስምማዕ ምላሽ ብ«moi»", uk: "Ехо-відповіді з «moi»" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["On utilise {a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} ou {a}Moi pas{/a} pour dire rapidement si on est pareil ou différent."],
       transItems: {
         en: ["We use {a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} or {a}Moi pas{/a} to quickly say whether we feel the same or different."],

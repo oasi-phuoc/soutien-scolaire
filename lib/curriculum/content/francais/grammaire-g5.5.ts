@@ -12,7 +12,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "La phrase négative exprime le contraire d'une phrase affirmative.",
         "Je suis marié. ≠ Je ne suis pas marié.",
@@ -24,7 +24,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "ne… pas",
       items: [
         "La négation est composée de deux mots placés de part et d'autre du verbe conjugué : {a}ne{/a} + verbe + {a}pas{/a}.",
@@ -34,7 +34,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       noBulletItems: [1, 2],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "ne… pas de",
       items: [
         "L'article indéfini {a}un{/a}, {a}une{/a}, {a}des{/a} est remplacé par {a}de{/a} / {a}d'{/a}.",
@@ -49,7 +49,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       text: "Prononciation et orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Ne{/a} → {a}n'{/a} devant une voyelle ou un h muet. → Il n'est pas marié. ; Il n'habite pas à Lyon.",
         "{a}Pas de{/a} → {a}pas d'{/a} devant une voyelle ou un h muet. → Il n'a pas d'enfants.",
@@ -63,7 +63,8 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       trans: { en: "The negative form", ar: "الصيغة المنفية", fa: "شکل منفی", ti: "ቅጺ ምኽሓድ", uk: "Заперечна форма" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
         "Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
@@ -120,7 +121,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       ] as VerbToggleVerb[],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Attention",
       transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
       inlineArrows: true,
@@ -165,7 +166,8 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     },
     { type: "heading", text: "Ne … plus", sub: true, accent: true, trans: { en: "Ne … plus", ar: "Ne … plus", fa: "Ne … plus", ti: "Ne … plus", uk: "Ne … plus" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}ne … plus{/a} signifie que l'action s'est arrêtée.",
         "Implique qu'avant c'était le cas, maintenant non.",
@@ -203,7 +205,8 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     },
     { type: "heading", text: "Ne … que (restriction)", sub: true, accent: true, trans: { en: "Ne … que (restriction)", ar: "Ne … que (تقييد)", fa: "Ne … que (محدودیت)", ti: "Ne … que (ድረታ)", uk: "Ne … que (обмеження)" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}ne … que{/a} = seulement. Ce n'est {a}pas une vraie négation{/a} — le sens est positif mais limité.",
         "que se place juste avant l'élément restreint.",
@@ -240,7 +243,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Articles après la négation",
       items: [
         "Avec {a}ne…pas / ne…plus{/a} : un/une/des/du/de la → {a}de{/a} (ou d' devant voyelle).",

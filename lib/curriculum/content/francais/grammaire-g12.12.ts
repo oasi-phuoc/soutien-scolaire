@@ -12,7 +12,7 @@ export const A1_GR_PRONOMS_RELATIFS_COMPOSES: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les pronoms relatifs composés remplacent un nom (chose ou personne) et permettent de réunir deux phrases.",
         "Le château dans lequel le comte de Méreux s'est marié date du XVIIe siècle.",
@@ -24,7 +24,7 @@ export const A1_GR_PRONOMS_RELATIFS_COMPOSES: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Construction : préposition + {a}lequel / laquelle / lesquels / lesquelles{/a}.",
       ],
@@ -42,7 +42,7 @@ export const A1_GR_PRONOMS_RELATIFS_COMPOSES: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Contractions avec à et de",
       items: [
         "{a}à + lequel → auquel{/a} ; {a}à + laquelle{/a} ; {a}à + lesquels → auxquels{/a} ; {a}à + lesquelles → auxquelles{/a}.",

@@ -12,7 +12,7 @@ export const A1_GR_PRONOM_RELATIF_DONT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Dont{/a} remplace un nom (chose ou personne) complément introduit par {a}de{/a} ; il réunit deux phrases.",
         "Tu as vu le film ? Je t'ai parlé de ce film. → Tu as vu le film dont je t'ai parlé ?",
@@ -21,7 +21,7 @@ export const A1_GR_PRONOM_RELATIF_DONT: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Complément d'un verbe + de",
       items: [
         "C'est le film dont je parle. ; Voici l'enfant dont je m'occupe.",
@@ -29,7 +29,7 @@ export const A1_GR_PRONOM_RELATIF_DONT: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Complément d'un adjectif + de",
       items: [
         "C'est un collègue dont je suis proche. ; C'est le dossier dont je suis responsable.",
@@ -37,7 +37,7 @@ export const A1_GR_PRONOM_RELATIF_DONT: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Complément d'un nom + de",
       items: [
         "J'ai un collègue dont la femme est actrice.",

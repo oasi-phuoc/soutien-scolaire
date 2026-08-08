@@ -32,7 +32,7 @@ export const A1_GR_PRONOMS_TONIQUES: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les pronoms toniques remplacent seulement des personnes. Ils ne sont pas sujets du verbe.",
         "Répondre rapidement ou compléter une information. → Qui est italien ? — Nous ! ; J'ai faim ! — Moi aussi !",
@@ -48,7 +48,7 @@ export const A1_GR_PRONOMS_TONIQUES: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison avec {a}chez{/a}. → J'habite chez elle.",
         "Enchaînement avec {a}avec{/a} et {a}pour{/a}. → Je voyage avec eux. ; Il travaille pour elle.",

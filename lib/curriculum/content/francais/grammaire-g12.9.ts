@@ -12,7 +12,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les pronoms indéfinis représentent des personnes ou des choses ; sujets ou compléments.",
         "Comme les adjectifs indéfinis, ils expriment une quantité (totalité, individualité, pluralité, zéro), une ressemblance, une différence ou une imprécision.",
@@ -25,7 +25,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Totalité : tout / toute / tous / toutes",
       items: [
         "{a}Tout{/a} = toutes les choses (jamais des personnes). → Tout va bien ! ; J'ai tout ?",
@@ -34,14 +34,14 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Individualité : chacun(e)",
       items: [
         "Toujours singulier. → Chacune de ces voitures est à vendre. ; J'ai demandé des conseils à chacun de mes amis.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Pluralité : quelques-un(e)s, plusieurs, certain(e)s",
       items: [
         "{a}Quelques-uns/unes{/a} : petit nombre. ; {a}Plusieurs{/a} : plus de deux, sans précision. ; {a}Certains/certaines{/a} : une partie.",
@@ -49,7 +49,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Quantité nulle : aucun(e)",
       items: [
         "Toujours singulier, avec {a}ne{/a}. → Aucune de ces voitures n'est à vendre.",
@@ -61,14 +61,14 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       text: "Formes (2)",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Identité / ressemblance : le même, la même, les mêmes",
       items: [
         "Singulier ou pluriel ; en général compléments. → Ces rollers sont à toi ? — J'ai les mêmes !",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Différence : l'autre, les autres, un(e) autre, d'autres",
       items: [
         "Singulier ou pluriel. → J'ai retrouvé une de mes chaussettes mais pas l'autre.",
@@ -77,7 +77,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Imprécision : quelque chose, quelqu'un, quelque part",
       items: [
         "Chose, personne ou lieu sans précision ; invariables. → Quelqu'un est venu. ; Tu entends quelque chose ? ; J'ai rangé mon portable quelque part.",
@@ -85,7 +85,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Indifférence : n'importe quoi / qui / où / quand / comment / lequel…",
       items: [
         "Le choix n'importe pas. → Donne-moi n'importe quoi. ; N'importe qui peut m'aider. ; Va n'importe où !",
@@ -97,7 +97,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
       text: "Prononciation et orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Trait d'union et liaison : {a}quelques-uns{/a}, {a}quelques-unes{/a}.",
         "Le {a}s{/a} final de {a}tous{/a} (pronom) se prononce. → Je les ai tous lus. ; On n'est pas tous les mêmes.",

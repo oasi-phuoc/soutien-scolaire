@@ -8,7 +8,8 @@ export const A2_GR_L39: GrammarLesson = {
   theory: [
     { type: "heading", text: "Le comparatif", trans: { en: "The comparative", ar: "صيغة المقارنة", fa: "صفت تفضیلی (مقایسه‌ای)", ti: "ናይ ምውድዳር", uk: "Порівняльний ступінь" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le comparatif sert à {a}comparer{/a} deux éléments.",
         "Il existe 3 degrés : {a}supériorité, égalité, infériorité{/a}.",

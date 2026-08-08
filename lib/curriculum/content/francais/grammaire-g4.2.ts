@@ -12,28 +12,28 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les articles définis ({a}le{/a}, {a}la{/a}, {a}l'{/a}, {a}les{/a}) sont souvent utilisés après les prépositions {a}à{/a} et {a}de{/a}.",
       ],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Lieu{/a}",
       ],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Pour indiquer un lieu, on utilise la préposition {a}à{/a} ou {a}de{/a}.",
       ],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "Je suis à la gare.",
@@ -42,21 +42,21 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Noms{/a}",
       ],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Pour relier deux noms ensemble, on utilise la préposition {a}de{/a}.",
       ],
       noBulletItems: [0],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "Le bureau de la maîtresse",
@@ -65,14 +65,14 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Verbes{/a}",
       ],
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains verbes ont besoin de ces prépositions.",
       ],
@@ -94,7 +94,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement. {a}La{/a} et {a}l'{/a} ne se contractent jamais.",
       ],
@@ -113,7 +113,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
       ],

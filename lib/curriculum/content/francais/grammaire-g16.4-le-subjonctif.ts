@@ -12,7 +12,8 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       trans: { en: "The present subjunctive", ar: "الفعل المنصوب (سوبجونكتيف)", fa: "وجه التزامی حال", ti: "ህሉው ሰብጄክቲቭ", uk: "Теперішній суб'юнктив" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Formation : radical de {a}ils{/a} au présent + terminaisons {a}-e / -es / -e / -ions / -iez / -ent{/a}",
         "Exemple : ils parl{a}ent{/a} → que je parl{a}e{/a}, que tu parl{a}es{/a}…",
@@ -77,7 +78,8 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       trans: { en: "Uses of the subjunctive", ar: "استخدامات الفعل المنصوب", fa: "کاربردهای وجه التزامی", ti: "ኣጠቓቕማ ሰብጄክቲቭ", uk: "Вживання суб'юнктива" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le subjonctif s'utilise {a}après que{/a} et exprime un doute, une volonté, un sentiment ou une nécessité.",
       ],
@@ -164,7 +166,7 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Indicatif ou subjonctif ?",
       items: [
         "{a}Indicatif{/a} → certitude, réalité : Je sais qu'il {a}vient{/a}. / Je pense qu'il {a}a{/a} raison.",

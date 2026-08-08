@@ -8,7 +8,8 @@ export const A1_GR_L22: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les adverbes de fréquence", trans: { en: "Adverbs of frequency", ar: "ظروف التكرار", fa: "قیدهای تکرار", ti: "ናይ ድግግሞሽ ተወሳኺ ቃላት", uk: "Прислівники частоти" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les adverbes de fréquence indiquent {a}combien de fois{/a} une action se produit.",
         "Ils se placent généralement {a}après le verbe{/a}.",
@@ -72,7 +73,7 @@ export const A1_GR_L22: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Ne … jamais",
       items: [
         "{a}jamais{/a} s'utilise avec {a}ne{/a} pour la négation totale.",
@@ -90,7 +91,7 @@ export const A1_GR_L22: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Expressions de fréquence",
       items: [
         "{a}tous les jours{/a} / {a}chaque jour{/a} → every day",

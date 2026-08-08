@@ -14,7 +14,7 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le superlatif exprime le degré maximum ou minimum d'une intensité, d'une quantité ou d'une qualité.",
         "C'est le meilleur pâtissier de France. (= il n'y a pas de pâtissier meilleur que lui.)",
@@ -27,7 +27,7 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Avec un adjectif : C'est la région la moins visitée.",
         "Avec un adverbe : C'est l'émission qui dure le plus longtemps.",
@@ -42,7 +42,7 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
       text: "Remarques",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Adjectif après le nom : on répète l'article. → C'est le programme le moins intéressant de la soirée.",
         "Adjectif avant le nom : deux possibilités. → C'est la région la plus belle de France. / C'est la plus belle région de France.",
@@ -57,7 +57,7 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Quand {a}plus{/a} est le dernier mot de la phrase, on prononce généralement le {a}s{/a}. → C'est le programme qui intéresse le plus !",
       ],

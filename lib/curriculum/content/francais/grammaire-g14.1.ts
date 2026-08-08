@@ -12,7 +12,7 @@ export const A1_GR_ADVERBES_INTENSITE: GrammarLesson = {
       text: "Utilisation et formes",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "L'adverbe modifie un verbe, un adjectif ou un autre adverbe ; il est invariable.",
         "Intensité / qualité : {a}assez, très, presque, un peu, bien, mal, tout{/a}. → Il joue assez / très souvent. ; Il joue bien / mal.",
@@ -33,7 +33,7 @@ export const A1_GR_ADVERBES_INTENSITE: GrammarLesson = {
       text: "Avec {a}avoir faim/soif/envie/peur/chaud/froid/mal{/a}, {a}faire attention{/a} : {a}très{/a} ou {a}un peu{/a}. → J'ai très soif. ; Fais un peu attention !",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Combinaisons fréquentes : très bien, très mal, assez bien, assez mal, beaucoup trop, un peu trop, presque trop.",
       ],
@@ -44,7 +44,7 @@ export const A1_GR_ADVERBES_INTENSITE: GrammarLesson = {
       text: "Place",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Devant l'adjectif ou l'adverbe modifié. → très longue ; très vite.",
         "Avec un verbe : après le verbe (temps simple) ; entre auxiliaire et participe (temps composé) ; devant l'infinitif (semi-auxiliaire). → Il s'entraîne beaucoup. ; Il s'est beaucoup entraîné. ; Il va beaucoup s'entraîner.",
@@ -56,7 +56,7 @@ export const A1_GR_ADVERBES_INTENSITE: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison avec {a}bien{/a} et {a}très{/a} devant voyelle. → bien entraîné ; très intéressant.",
         "En registre soigné, aussi avec {a}beaucoup{/a} et {a}trop{/a}.",

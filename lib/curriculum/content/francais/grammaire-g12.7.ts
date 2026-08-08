@@ -12,7 +12,7 @@ export const A1_GR_PRONOMS_DEMONSTRATIFS: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ils remplacent un nom désignant une personne ou une chose qu'on voit ou qu'on a déjà mentionnée.",
         "Exemple : Celui que vous avez est très bien mais il y a aussi celui-ci.",
@@ -35,7 +35,7 @@ export const A1_GR_PRONOMS_DEMONSTRATIFS: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Jamais seuls : toujours suivis d'une précision.",
         "{a}de + nom{/a} : lieu ou possession. → celui de droite ; celui de Stéphanie.",
@@ -50,7 +50,7 @@ export const A1_GR_PRONOMS_DEMONSTRATIFS: GrammarLesson = {
       text: "Ce, cela (ceci), ça",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Ce / C'est{/a} avec {a}être{/a}. → C'est mon ami. ; Ce sont mes amis. ; C'est beau.",
         "{a}Ce + relatif{/a} : la chose / les choses. → J'adore ce que tu as acheté.",
@@ -63,7 +63,7 @@ export const A1_GR_PRONOMS_DEMONSTRATIFS: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ne pas confondre {a}ce{/a} et {a}ceux{/a}. → Ce que tu as dit… ≠ Ceux qui ont parlé…",
       ],

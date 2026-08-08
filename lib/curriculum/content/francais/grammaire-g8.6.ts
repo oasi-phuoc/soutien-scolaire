@@ -12,7 +12,7 @@ export const A1_GR_PASSE_RECENT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le passé récent exprime une action qui s'est produite très peu de temps avant le moment où l'on parle.",
         "Exemple : Je viens de rentrer à la maison. (= je suis rentré(e) il y a quelques minutes)",
@@ -25,7 +25,7 @@ export const A1_GR_PASSE_RECENT: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Formation : {a}venir{/a} (présent) + {a}de{/a} / {a}d'{/a} + infinitif.",
       ],
@@ -49,7 +49,7 @@ export const A1_GR_PASSE_RECENT: GrammarLesson = {
       text: "Remarques",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On n'emploie pas le passé récent avec une indication de temps précise → passé composé. ✗ Le film vient de commencer il y a 3 minutes. → ✓ Le film a commencé il y a 3 minutes.",
         "Ne pas confondre {a}venir de{/a} (passé récent) et {a}venir{/a} seul. → Je viens de la gare. (= provenance) ≠ Je viens de rentrer de la gare. (= passé récent)",
@@ -61,7 +61,7 @@ export const A1_GR_PASSE_RECENT: GrammarLesson = {
       text: "Prononciation et orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Devant une voyelle : {a}de → d'{/a}. → Nous venons d'arriver.",
         "Devant une consonne, le {a}e{/a} de {a}de{/a} est souvent muet à l'oral. → On vient de manger. ; Il vient de partir.",

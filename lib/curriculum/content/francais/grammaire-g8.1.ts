@@ -12,7 +12,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le passé composé est le temps principal pour parler d'une action passée.",
         "On emploie souvent un indicateur de temps : hier, la semaine dernière…",
@@ -25,7 +25,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
       text: "Formation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Auxiliaire {a}avoir{/a} ou {a}être{/a} au présent + participe passé du verbe.",
         "Le choix de l'auxiliaire dépend du verbe. → Nous avons préparé la fête. ; Marc est allé à l'anniversaire de Julien.",
@@ -37,7 +37,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
       text: "Conjugaison avec avoir",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Verbes en {a}-er{/a} : le participe passé se forme en remplaçant {a}-er{/a} par {a}-é{/a}.",
       ],
@@ -69,34 +69,34 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
       text: "Formes du participe passé (-ir, -re, -oir)",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Finale -i",
       items: ["choisir → choisi ; finir → fini"],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Finale -u",
       items: [
         "attendre → attendu ; boire → bu ; connaître → connu ; courir → couru ; devoir → dû ; entendre → entendu ; lire → lu ; perdre → perdu ; pleuvoir → plu ; pouvoir → pu ; recevoir → reçu ; répondre → répondu ; savoir → su ; tenir → tenu ; vivre → vécu ; voir → vu ; vouloir → voulu",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Finale -is",
       items: ["apprendre → appris ; comprendre → compris ; mettre → mis ; prendre → pris"],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Finale -it",
       items: ["conduire → conduit ; dire → dit ; écrire → écrit ; interdire → interdit"],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Finale -ert",
       items: ["découvrir → découvert ; offrir → offert ; ouvrir → ouvert ; souffrir → souffert"],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Formes particulières",
       items: ["avoir → eu ; être → été ; faire → fait"],
     },
@@ -105,7 +105,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Pour les verbes en {a}-er{/a}, l'infinitif et le participe passé se prononcent pareil. → organiser / organisé.",
         "Présent ≠ passé composé : Je prépare. ≠ J'ai préparé.",

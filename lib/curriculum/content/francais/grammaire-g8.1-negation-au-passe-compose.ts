@@ -7,7 +7,8 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
   title: "Négation au passé composé",
   theory: [
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Au passé composé, la négation encadre l'auxiliaire (avoir ou être), pas le participe passé.",
       ],
@@ -44,7 +45,8 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Structure : sujet + ne + auxiliaire + pas + participe passé",
       ],
@@ -57,7 +59,8 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Avec d'autres mots négatifs : jamais, plus, rien, personne (après le participe passé pour personne).",
       ],

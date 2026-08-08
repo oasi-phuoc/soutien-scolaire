@@ -8,7 +8,8 @@ export const A2_CONJ_L05: ConjLesson = {
   theory: [
     { type: "heading", text: "L'impératif présent", trans: { en: "The present imperative", ar: "صيغة الأمر الحاضرة", fa: "وجه امری حال", ti: "ናይ ሕጂ ትእዛዝ", uk: "Наказовий спосіб теперішнього часу" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "L'impératif exprime un {a}ordre, un conseil, une interdiction ou une invitation{/a}.",
         "Il n'a que 3 personnes : {a}tu, nous, vous{/a} — sans pronom sujet.",
@@ -67,7 +68,7 @@ export const A2_CONJ_L05: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Attention : verbes en -er → pas de -s à la 2e personne du singulier",
       items: [
         "Parle ! (pas Parles !)",

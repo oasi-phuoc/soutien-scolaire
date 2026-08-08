@@ -12,7 +12,7 @@ export const A1_GR_BILAN_A1: GrammarLesson = {
       text: "Révision A1",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Présent (être, avoir, -er, pronominaux, modaux…).",
         "Noms et adjectifs : genre, nombre, place.",

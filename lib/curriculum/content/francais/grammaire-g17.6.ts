@@ -12,7 +12,7 @@ export const A1_GR_HYPOTHESE_CONDITION: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Hypothèse : imaginer des possibilités ou une réalité différente. → Si j'avais le temps, je ferais plus de choses.",
         "Condition : un événement doit se produire pour qu'un autre ait lieu. → Je viendrai {a}à condition que{/a} tu m'appelles.",
@@ -50,7 +50,7 @@ export const A1_GR_HYPOTHESE_CONDITION: GrammarLesson = {
       text: "Expression de la condition",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}Si{/a} + présent → futur. → Si j'ai le temps, je viendrai.",
         "{a}À condition que{/a} + subjonctif. → … à condition que mon train n'ait pas de retard.",

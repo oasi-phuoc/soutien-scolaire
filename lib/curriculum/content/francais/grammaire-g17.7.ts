@@ -12,7 +12,7 @@ export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Rapporter les paroles de quelqu'un.",
         "« Mon train a du retard. » → Elle dit que son train a du retard.",
@@ -25,7 +25,7 @@ export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Dire que (affirmation)",
       items: [
         "« Je prendrai un taxi. » → Elle dit qu'elle prendra un taxi.",
@@ -33,7 +33,7 @@ export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Demander si / ce que / où… (questions)",
       items: [
         "Oui/non : « Est-ce que l'avion a du retard ? » → Elle demande {a}si{/a} l'avion a du retard.",
@@ -44,7 +44,7 @@ export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Dire / demander de (ordre)",
       items: [
         "Verbe introducteur + {a}de{/a} + infinitif.",
@@ -58,7 +58,7 @@ export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
       text: "Remarques",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On supprime la ponctuation du discours direct (?, !, guillemets).",
         "Adapter pronoms personnels et possessifs.",

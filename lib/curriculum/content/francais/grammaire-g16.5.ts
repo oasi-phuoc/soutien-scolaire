@@ -12,7 +12,7 @@ export const A1_GR_SUBJONCTIF_PASSE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Mêmes expressions que le subjonctif présent.",
         "On l'emploie quand l'action du verbe 2 se situe {a}avant{/a} celle du verbe 1.",
@@ -27,7 +27,7 @@ export const A1_GR_SUBJONCTIF_PASSE: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Temps composé : auxiliaire {a}avoir{/a} ou {a}être{/a} au subjonctif présent + participe passé.",
         "Choix de l'auxiliaire et accord du participe : mêmes règles qu'au passé composé.",
@@ -35,7 +35,7 @@ export const A1_GR_SUBJONCTIF_PASSE: GrammarLesson = {
       allBullets: true,
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "Je trouve incroyable qu'il {a}ait gagné{/a} trois fois. (avoir)",

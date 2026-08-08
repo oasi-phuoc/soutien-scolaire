@@ -13,7 +13,7 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les pronoms compléments évitent de répéter un nom complément (personne ou chose).",
         "Le choix dépend de la construction du verbe. → Je préviens madame Dupuy → Je la préviens. ; Je téléphone à madame Dupuy → Je lui téléphone.",
@@ -25,7 +25,7 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
       text: "Place et structure",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Devant le verbe ou l'auxiliaire. → Oui, je l'ai. ; Elle m'a téléphoné.",
         "Avec deux verbes : devant l'infinitif. → Le directeur va nous recevoir et nous expliquer le problème.",
@@ -41,7 +41,7 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
       text: "Pronoms compléments directs (COD)",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Avec un verbe sans préposition (aimer, connaître, voir…).",
       ],
@@ -65,7 +65,7 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
       text: "Pronoms compléments indirects (COI)",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Remplacent seulement des personnes ; verbes avec {a}à{/a} (parler à, téléphoner à…). → Je lui ai téléphoné.",
         "Il me parle. ; Je te parle. ; Il lui parle. ; Ils nous parlent. ; On vous parle. ; Je leur parle.",
@@ -83,7 +83,7 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
       text: "Prononciation et orthographe",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison / enchaînement avec {a}les, nous, vous, leur{/a} devant voyelle ou {a}h{/a} muet. → Je les imprime. ; Elle nous attend.",
         "{a}me, te, le, la → m', t', l'{/a} devant voyelle ou {a}h{/a} muet. → Il m'a téléphoné. ; Je l'imprime.",

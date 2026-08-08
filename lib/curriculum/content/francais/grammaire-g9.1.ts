@@ -12,7 +12,7 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Exprimer un projet. → L'été prochain, je vais travailler dans un restaurant.",
         "Exprimer un événement immédiat. → Vite, on va rater le train ! ; Il va pleuvoir.",
@@ -24,7 +24,7 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Formation : {a}aller{/a} au présent + infinitif.",
       ],
@@ -48,7 +48,7 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
       text: "Structure de la phrase",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Verbe pronominal : le pronom se place devant l'infinitif. → Nous allons nous inscrire à la visite guidée.",
         "Négation : {a}ne… pas{/a} encadre {a}aller{/a}. → Je ne vais pas rester ici. ; On ne va pas s'installer en banlieue.",

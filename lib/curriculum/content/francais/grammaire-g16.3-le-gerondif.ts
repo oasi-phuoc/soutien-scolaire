@@ -12,7 +12,8 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       trans: { en: "The gerund", ar: "صيغة الفعل الاسمي (جيروندف)", fa: "وجه قیدی (گروندیف)", ti: "ጀሮንዲፍ", uk: "Герундій (le gérondif)" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Formation : {a}en{/a} + participe présent",
         "Participe présent : radical de {a}nous{/a} au présent + {a}-ant{/a}",
@@ -106,7 +107,7 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "À retenir",
       items: [
         "Le sujet du gérondif et de la phrase principale doit être {a}le même{/a}.",

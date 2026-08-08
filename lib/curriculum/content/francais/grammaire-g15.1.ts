@@ -12,7 +12,7 @@ export const A1_GR_MOTS_LIAISON: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les mots de liaison organisent le discours de façon logique : récit ou argumentation plus clairs.",
         "Exemple : D'abord, on partage un moment avec ses amis. Puis, on apprend à suivre des règles. De plus, on entraîne son cerveau et, pour finir, on se déconnecte des écrans !",
@@ -24,7 +24,7 @@ export const A1_GR_MOTS_LIAISON: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Étapes du discours",
       items: [
         "Début : d'abord, tout d'abord, premièrement, pour commencer.",
@@ -33,7 +33,7 @@ export const A1_GR_MOTS_LIAISON: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Expliquer ou ajouter",
       items: [
         "Par ailleurs, mais, de plus, d'autre part, d'un autre côté, en effet, en fait, en réalité.",
@@ -41,17 +41,17 @@ export const A1_GR_MOTS_LIAISON: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Illustrer",
       items: ["Par exemple, ainsi."],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Reformuler",
       items: ["Autrement dit, en d'autres termes, c'est-à-dire."],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Conclure",
       items: ["C'est pourquoi, donc, en résumé, en conclusion, pour finir, par conséquent, pour toutes ces raisons."],
     },

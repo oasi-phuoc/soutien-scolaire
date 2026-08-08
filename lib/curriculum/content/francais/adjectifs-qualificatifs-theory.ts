@@ -3,7 +3,8 @@ import type { TheoryBlock } from "../../grammar-data";
 export const ADJECTIFS_QUALIFICATIFS_GENERALITES: TheoryBlock[] = [
     { type: "heading", text: "L'accord des adjectifs qualificatifs", trans: { en: "Agreement of qualifying adjectives", ar: "مطابقة الصفات النعتية", fa: "مطابقت صفت‌های وصفی", ti: "ስምምዕ ቅጽላት", uk: "Узгодження якісних прикметників" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "L'adjectif s'accorde toujours en {a}genre{/a} (masculin / féminin) et en {a}nombre{/a} (singulier / pluriel) avec le nom qu'il qualifie.",
       ],
@@ -98,7 +99,7 @@ export const ADJECTIFS_QUALIFICATIFS_GENERALITES: TheoryBlock[] = [
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Adjectifs invariables",
       items: [
         "Les adjectifs de couleur dérivés d'un nom sont {a}invariables{/a}.",
@@ -120,7 +121,8 @@ export const ADJECTIFS_QUALIFICATIFS_GENERALITES: TheoryBlock[] = [
 export const ADJECTIFS_QUALIFICATIFS_PLACE: TheoryBlock[] = [
     { type: "heading", text: "Adjectifs à trois formes masculines", trans: { en: "Adjectives with three masculine forms", ar: "صفات بثلاث صيغ مذكرة", fa: "صفت‌هایی با سه شکل مذکر", ti: "ቅጽላት ብሰለስተ ተባዕታይ ቅርጺ", uk: "Прикметники з трьома формами чоловічого роду" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Certains adjectifs ont une forme masculine spéciale devant une {a}voyelle ou h muet{/a}.",
       ],
@@ -182,7 +184,8 @@ export const ADJECTIFS_QUALIFICATIFS_PLACE: TheoryBlock[] = [
     },
     { type: "heading", text: "La place des adjectifs", sub: true, accent: true, trans: { en: "The position of adjectives", ar: "موضع الصفات", fa: "جایگاه صفت‌ها", ti: "ቦታ ቅጽላት", uk: "Місце прикметників" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "En français, la majorité des adjectifs se placent {a}après{/a} le nom.",
         "Mais un groupe d'adjectifs courants se placent {a}avant{/a} le nom.",
@@ -220,7 +223,7 @@ export const ADJECTIFS_QUALIFICATIFS_PLACE: TheoryBlock[] = [
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Adjectifs qui changent de sens selon la place",
       items: [
         "{a}ancien{/a} : un {a}ancien{/a} collègue (= ex-) / un bâtiment {a}ancien{/a} (= vieux)",

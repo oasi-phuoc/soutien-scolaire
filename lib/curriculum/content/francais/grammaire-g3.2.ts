@@ -13,7 +13,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       trans: { en: "Plural formation", ar: "تكوين الجمع", fa: "ساخت جمع", pt: "Formação do plural", so: "Samaynta jamaca", ti: "ምምስራት ባዙሕ", tr: "Çoğul oluşturma", ps: "د جمع جوړونه", uk: "Утворення множини" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: ["On ajoute souvent {a}-s{/a} au pluriel."],
       noBulletItems: [0],
       transItems: {
@@ -49,7 +49,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Si l'adjectif singulier se termine par {a}s{/a} ou {a}x{/a}, le pluriel ne change pas.",
       ],
@@ -92,7 +92,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       trans: { en: "Invariable adjectives", ar: "الصفات غير المتغيرة", fa: "صفت‌های تغییرناپذیر", pt: "Adjetivos invariáveis", so: "Sifooyin aan isbeddelin", ti: "ዘይቕየሩ ቅጽላት", tr: "Değişmeyen sıfatlar", ps: "نه بدلېدونکي صفتونه", uk: "Незмінні прикметники" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les adjectifs de couleur dérivés d'un nom sont invariables.",
       ],
@@ -131,7 +131,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exceptions",
       transLabel: {
         en: "Exceptions",
@@ -188,7 +188,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       trans: { en: "Special cases", ar: "حالات خاصة", fa: "موردهای خاص", pt: "Casos especiais", so: "Xaalado gaar ah", ti: "ፍሉያት ኩነታት", tr: "Özel durumlar", ps: "ځانګړي حالتونه", uk: "Особливі випадки" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le {a}féminin{/a} pluriel reste régulier (+ {a}s{/a}).",
       ],
@@ -231,7 +231,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
           label: "-al",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots {a}masculins{/a} terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
               ],
@@ -288,7 +288,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
               ],
             },
             {
-              type: "highlight",
+              type: "text",
               label: "Exceptions",
               transLabel: {
                 en: "Exceptions",
@@ -313,7 +313,7 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
           label: "-eau",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
               ],

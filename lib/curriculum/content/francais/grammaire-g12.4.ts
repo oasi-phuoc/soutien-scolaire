@@ -12,7 +12,7 @@ export const A1_GR_PRONOMS_Y_EN_LIEU: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Le pronom y",
       items: [
         "Remplace le nom du lieu où l'on va ou où l'on est. → Tu vas souvent au cinéma ? — J'y vais une fois par semaine. ; Vous habitez en Suisse ? — Non, je n'y habite plus.",
@@ -21,7 +21,7 @@ export const A1_GR_PRONOMS_Y_EN_LIEU: GrammarLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Le pronom en",
       items: [
         "Remplace le nom du lieu d'où l'on vient. → Vous sortez de la cafétéria ? — Oui, nous en sortons à l'instant. ; Non, j'en viens.",
@@ -32,7 +32,7 @@ export const A1_GR_PRONOMS_Y_EN_LIEU: GrammarLesson = {
       text: "Place et structure",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Devant le verbe ou l'auxiliaire. → On y va. ; Nous en sortons.",
         "Avec deux verbes : devant l'infinitif. → Je vais y aller avec Jérôme. ; Il va bientôt en sortir.",
@@ -48,7 +48,7 @@ export const A1_GR_PRONOMS_Y_EN_LIEU: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison entre pronom en {a}-s{/a} et {a}y{/a} / {a}en{/a}. → Ils y habitent. ; Vous y travaillez. ; Nous en arrivons.",
         "À l'oral, le {a}ne{/a} tombe souvent. → J'y vais pas.",

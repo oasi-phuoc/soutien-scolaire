@@ -13,7 +13,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Mode verbal souvent après un verbe ou une expression + {a}que{/a}, pour exprimer une subjectivité.",
         "Indicatif (fait) : Aucun vaccin n'est nécessaire.",
@@ -27,7 +27,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
       text: "Formation régulière",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Radical du {a}ils{/a} du présent + {a}-e, -es, -e, -ions, -iez, -ent{/a}.",
         "Si {a}nous/vous{/a} ont un autre radical à l'indicatif, on le garde au subjonctif pour {a}nous/vous{/a} (deux radicaux).",
@@ -69,35 +69,35 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
       text: "Des utilisations du subjonctif",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Nécessité / obligation",
       items: [
         "Il faut que nous prenions contact… ; Il est nécessaire que les objets soient bien protégés.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Sentiment",
       items: [
         "Je suis heureux que nous déménagions. ; C'est dommage que vous ne puissiez pas venir. ; Nous avons peur qu'elle se sente seule.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Jugement / appréciation",
       items: [
         "C'est bien qu'il ait une promotion. ; Je trouve incroyable qu'il prenne sa décision si rapidement.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Volonté / souhait",
       items: [
         "Je veux que tout soit prêt. ; J'aimerais que vous soyez présents.",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Possibilité",
       items: [
         "Il est possible que nous ayons une augmentation. ; Il se peut qu'elle ne veuille pas.",
@@ -120,7 +120,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Ne pas confondre {a}avoir{/a} et {a}aller{/a} : que tu aies un visa ≠ que tu ailles au consulat.",
       ],

@@ -12,7 +12,8 @@ export const GR_MARQUEURS_TEMPS_COMPLET: GrammarLesson = {
       trans: { en: "Time markers", ar: "أدوات الزمن", fa: "نشانگرهای زمانی", ti: "ናይ ግዜ መፈለይታት", uk: "Часові маркери" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les marqueurs de temps permettent de situer une action dans le présent, le passé ou le futur.",
       ],
@@ -229,7 +230,7 @@ export const GR_MARQUEURS_TEMPS_COMPLET: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "À retenir",
       items: [
         "{a}Depuis{/a} répond à « depuis quand ? » → action toujours en cours.",

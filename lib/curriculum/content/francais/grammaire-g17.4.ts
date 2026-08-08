@@ -12,7 +12,7 @@ export const A1_GR_EXPRESSION_BUT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Exprimer une intention, un objectif, un résultat souhaité.",
         "Exemple : Je ferai tout mon possible {a}pour{/a} être là, {a}pour que{/a} nous soyons tous ensemble !",
@@ -24,7 +24,7 @@ export const A1_GR_EXPRESSION_BUT: GrammarLesson = {
       text: "Formes et structure",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}pour{/a} / {a}afin de{/a} + infinitif.",
         "{a}pour que{/a} / {a}afin que{/a} + subjonctif.",

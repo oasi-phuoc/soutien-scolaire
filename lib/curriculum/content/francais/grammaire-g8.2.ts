@@ -12,7 +12,7 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
       text: "Conjugaison — verbes de déplacement / état",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "14 verbes indiquant un changement de lieu ou d'état se conjuguent avec {a}être{/a} : aller / venir, entrer / sortir, monter / descendre, arriver / partir, passer / rester, naître / mourir, tomber, retourner.",
         "Les verbes dérivés aussi : revenir, devenir, rentrer, repartir…",
@@ -42,7 +42,7 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
       text: "Remarques",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Six verbes ({a}monter, descendre, entrer, sortir, passer, retourner{/a}) prennent {a}avoir{/a} s'ils ont un COD. → J'ai monté les valises. ≠ Je suis monté(e) en ascenseur.",
         "Avec {a}être{/a}, le participe s'accorde en genre et en nombre avec le sujet. → Paul est arrivé. ; Marie est arrivée.",
@@ -55,7 +55,7 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
       text: "Conjugaison des verbes pronominaux",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les verbes pronominaux se conjuguent avec {a}être{/a} : pronom réfléchi + être + participe passé.",
         "Exemple : Je me suis réveillé à 6 heures. ; Il s'est promené. ; Ils se sont amusés.",
@@ -83,7 +83,7 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
       text: "Négation : Je ne me suis pas endormi(e) tôt. ; Nous ne nous sommes pas couché(e)s.",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "En général, le participe s'accorde avec le sujet. → Marie s'est amusée. ; Léo et Izia se sont ennuyés.",
         "Avec {a}on{/a} (= nous), le participe est généralement au pluriel. → Anne et moi, on s'est perdues.",

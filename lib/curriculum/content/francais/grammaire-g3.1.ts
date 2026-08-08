@@ -13,7 +13,8 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
       trans: { en: "Adjectives", ar: "الصفات", fa: "صفت‌ها", pt: "Adjetivos", so: "Sifooyin", ti: "ቅጽላት", tr: "Sıfatlar", ps: "صفتونه", uk: "Прикметники" },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "L'adjectif donne une information sur le nom. Les adjectifs changent aussi selon le genre.",
       ],
@@ -30,7 +31,8 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["On ajoute souvent {a}-e{/a} au féminin."],
       transItems: {
         en: ["We often add {a}-e{/a} in the feminine."],
@@ -65,7 +67,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Si l'adjectif masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
       ],
@@ -108,7 +110,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
       trans: { en: "Special cases", ar: "حالات خاصة", fa: "موارد خاص", pt: "Casos especiais", so: "Xaalado gaar ah", ti: "ፍሉያት ኩነታት", tr: "Özel durumlar", ps: "ځانګړي حالتونه", uk: "Особливі випадки" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains adjectifs ont des terminaisons différentes au masculin et au féminin.",
       ],
@@ -133,7 +135,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-en",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
               ],
@@ -177,7 +179,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-on",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
               ],
@@ -221,7 +223,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-el",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-el{/a} au masculin changent en {a}-elle{/a} au féminin.",
               ],
@@ -265,7 +267,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-er",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
               ],
@@ -309,7 +311,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-et",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-et{/a} au masculin changent en {a}-ète{/a} ou {a}-ette{/a} au féminin.",
               ],
@@ -353,7 +355,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-eux",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-eux{/a} au masculin changent en {a}-euse{/a} au féminin.",
               ],
@@ -397,7 +399,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-eur",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
               ],
@@ -441,7 +443,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-f",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
               ],
@@ -485,7 +487,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "-eau",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les mots terminant par {a}-eau{/a} au masculin changent en {a}-elle{/a} au féminin.",
               ],
@@ -529,7 +531,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
           label: "Autres",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Certains adjectifs sont très irréguliers pour la formation du féminin.",
               ],
@@ -602,7 +604,7 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains adjectifs ont une forme masculine spéciale devant une voyelle ou h muet.",
       ],

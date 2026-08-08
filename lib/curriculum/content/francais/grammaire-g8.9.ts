@@ -12,14 +12,14 @@ export const A1_GR_ACCORD_PARTICIPE_PASSE: GrammarLesson = {
       text: "Formes",
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Avec être",
       items: [
         "Le participe s'accorde avec le sujet. → Vous êtes allé(e)(s) au cinéma ? — Oui, nous y sommes allé(e)(s).",
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Avec avoir",
       items: [
         "Le participe ne s'accorde jamais avec le sujet. → Il a réservé les places. ; Elle a réservé les places.",
@@ -27,7 +27,7 @@ export const A1_GR_ACCORD_PARTICIPE_PASSE: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "COD pronominal : {a}m', t', l', les, nous, vous{/a}. → Pierre a invité Marie. → Pierre l'a invitée.",
         "Pronom relatif {a}que{/a}. → Voici les places que j'ai prises.",
@@ -43,7 +43,7 @@ export const A1_GR_ACCORD_PARTICIPE_PASSE: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Si le participe se termine par une consonne, le féminin se fait entendre. → J'ai pris les places. ≠ Je les ai prises.",
         "Exemple : Regarde les photos que j'ai faites ! (le {a}t{/a} se prononce)",

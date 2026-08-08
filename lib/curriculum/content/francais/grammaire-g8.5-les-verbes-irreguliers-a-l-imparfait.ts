@@ -8,7 +8,8 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les verbes irréguliers à l'imparfait", trans: { en: "Irregular verbs in the imparfait", ar: "الأفعال الشاذة في الماضي الناقص", fa: "افعال بی‌قاعده در ماضی استمراری", ti: "ዘይስሩዓት ግሲታት ኣብ ሕሉፍ ቀጻሊ", uk: "Неправильні дієслова в imparfait" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "La plupart des verbes utilisent la base de {a}nous{/a} au présent, même quand leur infinitif est irrégulier.",
         "Le seul verbe avec une base totalement irrégulière est {a}être{/a} : ét-.",
@@ -42,7 +43,7 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Orthographe",
       items: [
         "Les verbes en -ger gardent le e devant a : je mangeais, ils voyageaient.",

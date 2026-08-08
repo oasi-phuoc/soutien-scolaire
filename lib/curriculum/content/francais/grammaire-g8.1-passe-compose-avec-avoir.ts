@@ -8,7 +8,8 @@ export const A1_CONJ_L29: ConjLesson = {
   theory: [
     { type: "heading", text: "Le passé composé avec avoir", trans: { en: "The passé composé with «avoir»", ar: "الماضي المركّب مع «avoir»", fa: "گذشته‌ی نقلی با «avoir»", ti: "ሕሉፍ ግዜ ምስ «avoir»", uk: "Passé composé з «avoir»" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le passé composé exprime une action {a}terminée dans le passé{/a}.",
         "Structure : {a}avoir{/a} (présent) + {a}participe passé{/a}",
@@ -22,7 +23,7 @@ export const A1_CONJ_L29: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Formule",
       items: [
         "{a}SUJET + AVOIR (au présent) + PARTICIPE PASSÉ{/a}",
@@ -40,7 +41,8 @@ export const A1_CONJ_L29: ConjLesson = {
     },
     { type: "heading", text: "Les emplois du passé composé", sub: true, accent: true, trans: { en: "Uses of the passé composé", ar: "استخدامات الماضي المركّب", fa: "کاربردهای ماضی نقلی", ti: "ጥቕሚታት passé composé", uk: "Вживання passé composé" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Raconter un événement {a}ponctuel{/a} dans le passé.",
         "Parler d'une action sur une {a}période de temps définie{/a} : Je suis née en 1985. · J'ai fait du sport pendant 2 heures.",
@@ -54,7 +56,7 @@ export const A1_CONJ_L29: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Accord avec avoir",
       items: [
         "Avec {a}avoir{/a}, le participe passé {a}ne s'accorde pas{/a} en genre ni en nombre.",
@@ -112,7 +114,7 @@ export const A1_CONJ_L29: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Participes passés irréguliers à mémoriser",
       items: [
         "avoir → {a}eu{/a}    |    être → {a}été{/a}    |    faire → {a}fait{/a}",
@@ -131,7 +133,8 @@ export const A1_CONJ_L29: ConjLesson = {
     },
     { type: "heading", text: "Forme négative", sub: true, accent: true, trans: { en: "Negative form", ar: "صيغة النفي", fa: "صورت منفی", ti: "ኣሉታዊ ቅርጺ", uk: "Заперечна форма" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}ne … pas{/a} encadre l'auxiliaire {a}avoir{/a}.",
       ],
@@ -167,7 +170,7 @@ export const A1_CONJ_L29: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Accord du participe passé avec avoir",
       items: [
         "Avec avoir, le participe passé {a}ne s'accorde PAS{/a} avec le sujet.",

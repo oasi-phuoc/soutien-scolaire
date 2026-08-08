@@ -12,7 +12,7 @@ export const A1_GR_FUTUR_ANTERIEUR: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le futur antérieur indique qu'une action secondaire a lieu {a}avant{/a} l'action principale.",
         "Exemple : Tu jugeras (action 1) quand il aura terminé (action 2) !",
@@ -26,7 +26,7 @@ export const A1_GR_FUTUR_ANTERIEUR: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Temps composé : auxiliaire {a}avoir{/a} ou {a}être{/a} au futur simple + participe passé.",
       ],

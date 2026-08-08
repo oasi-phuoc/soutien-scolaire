@@ -8,7 +8,8 @@ export const A2_CONJ_L08: ConjLesson = {
   theory: [
     { type: "heading", text: "Le futur simple : formation", trans: { en: "The simple future: how it is formed", ar: "المستقبل البسيط: التكوين", fa: "آیندهٔ ساده: ساخت", ti: "ቀሊል መጻኢ: ኣፈጣጥራ", uk: "Futur simple: утворення" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Formation régulière : {a}infinitif{/a} + terminaisons du futur.",
         "Terminaisons : {a}-ai / -as / -a / -ons / -ez / -ont{/a}",
@@ -52,7 +53,7 @@ export const A2_CONJ_L08: ConjLesson = {
       ],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Particularités orthographiques",
       transLabel: { en: "Spelling particularities", ar: "خصوصيات إملائية", fa: "ویژگی‌های املایی", ti: "ናይ ኣጸሓሕፋ ፍሉያት", uk: "Орфографічні особливості" },
       items: [

@@ -461,53 +461,18 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
             );
           }
 
-          case "plain_list":
-            const plainItems = useTrans && block.transItems?.[pivot as keyof typeof block.transItems]
-              ? block.transItems[pivot as keyof typeof block.transItems]!
-              : block.items;
-            return (
-              <div key={i} className="space-y-1">
-                {block.label && (
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-                    {block.label}
-                  </p>
-                )}
-                <ul className="space-y-1.5">
-                  {plainItems.map((item, ii) => (
-                    <li key={ii} className="space-y-0.5">
-                      <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]" lang={useTrans ? pivot : undefined} dir={useTrans && isRtl ? "rtl" : "ltr"}>
-                        {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
-                        <span>{renderInlineMarkup(item)}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-
-          case "highlight":
-          case "highlight_text": {
+          case "text": {
             const transLabel = useTrans ? block.transLabel?.[pivot as keyof typeof block.transLabel] : undefined;
-            const transText =
-              block.type === "highlight_text" && useTrans
-                ? block.transText?.[pivot as keyof typeof block.transText]
-                : undefined;
+            const transText = useTrans ? block.transText?.[pivot as keyof typeof block.transText] : undefined;
             const transItems = useTrans ? block.transItems?.[pivot as keyof typeof block.transItems] : undefined;
             const label = transLabel ?? block.label;
-            const plainText = block.type === "highlight_text" ? (transText ?? block.text) : undefined;
-            const items = transItems ?? block.items;
+            const plainText = (transText ?? block.text)?.trim() ? (transText ?? block.text) : undefined;
+            const items = transItems ?? block.items ?? [];
             const alignArrows = items.length > 0 && items.every((item) => item.includes(" → "));
             return (
               <div key={i} className="space-y-1.5">
                 {label ? (
-                  <div className="space-y-0.5">
-                    <p className="text-sm font-bold text-[var(--color-accent-fr)]" lang={transLabel ? pivot : undefined} dir={transLabel && isRtl ? "rtl" : "ltr"}>{label}</p>
-                    {false && showTrans && transLabel && (
-                      <p className="text-xs font-bold text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                        {transLabel}
-                      </p>
-                    )}
-                  </div>
+                  <p className="text-sm font-bold text-[var(--color-accent-fr)]" lang={transLabel ? pivot : undefined} dir={transLabel && isRtl ? "rtl" : "ltr"}>{label}</p>
                 ) : null}
                 {plainText ? (
                   <p
@@ -521,7 +486,10 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                 {items.length > 0 ? (
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {items.map((item, ii) => {
-                    const skipBullet = (block.noFirstBullet && !item.includes(" → ")) || (block.noBulletItems?.includes(ii) ?? false);
+                    const skipBullet = block.allBullets
+                      ? (block.noBulletItems?.includes(ii) ?? false)
+                      : (block.noBulletItems?.includes(ii) ?? false) ||
+                        (!!block.noFirstBullet && !item.includes(" → "));
                     if (alignArrows) {
                       const arrowIdx = item.indexOf(" → ");
                       const left = item.slice(0, arrowIdx);
@@ -546,12 +514,6 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                           {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
                           <span>{renderInlineMarkup(item, !block.inlineArrows)}</span>
                         </div>
-                        {false && showTrans && transItems?.[ii] && (
-                          <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                            {!skipBullet && <span className="mt-0.5 shrink-0">•</span>}
-                            <span>{renderInlineMarkup(transItems?.[ii] ?? "")}</span>
-                          </div>
-                        )}
                       </li>
                     );
                   })}

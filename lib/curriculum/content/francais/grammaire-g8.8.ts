@@ -12,7 +12,7 @@ export const A1_GR_PLUS_QUE_PARFAIT: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Le plus-que-parfait exprime une action secondaire antérieure à l'action principale dans un récit au passé.",
         "L'action principale est souvent au passé composé. → Il a appelé un serrurier (action principale) parce qu'il avait oublié ses clés (action secondaire).",
@@ -30,7 +30,7 @@ export const A1_GR_PLUS_QUE_PARFAIT: GrammarLesson = {
       text: "Conjugaison",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Temps composé : auxiliaire {a}avoir{/a} ou {a}être{/a} à l'imparfait + participe passé.",
         "Il avait oublié ses clés. ; Le train était parti. ; Je m'étais réveillé trop tard.",
@@ -46,7 +46,7 @@ export const A1_GR_PLUS_QUE_PARFAIT: GrammarLesson = {
       text: "Passé composé, imparfait ou plus-que-parfait ?",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Quand je suis arrivé, le train était parti. → le train est parti {a}avant{/a} mon arrivée.",
         "Quand je suis arrivé, le train partait. → le train était {a}en train de{/a} partir.",

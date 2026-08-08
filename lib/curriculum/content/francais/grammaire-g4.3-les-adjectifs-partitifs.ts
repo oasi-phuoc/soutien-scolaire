@@ -8,7 +8,8 @@ export const A1_GR_L14: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les articles partitifs", trans: { en: "Partitive articles", ar: "أدوات التجزئة", fa: "حروف تعریف تبعیضی", ti: "ናይ ክፍሊ መሳለጥቲ", uk: "Партитивні артиклі" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Les articles partitifs expriment une quantité indéterminée — une partie de quelque chose.",
       ],
@@ -95,7 +96,8 @@ export const A1_GR_L14: GrammarLesson = {
     },
     { type: "heading", text: "La quantité déterminée", sub: true, trans: { en: "Determined quantity", ar: "الكمية المحددة", fa: "مقدار معین", ti: "ዝተወሰነ መጠን", uk: "Визначена кількість" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: ["Avec une quantité précise : {a}quantité + de + nom{/a} (sans article)."],
       transItems: {
         en: ["With a precise quantity: {a}quantity + de + noun{/a} (without article)."],
@@ -106,7 +108,7 @@ export const A1_GR_L14: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "un kilo {a}de{/a} pommes",

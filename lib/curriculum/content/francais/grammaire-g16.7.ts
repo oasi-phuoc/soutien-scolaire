@@ -12,7 +12,7 @@ export const A1_GR_SUBJONCTIF_OU_INFINITIF: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certaines expressions exigent le subjonctif.",
         "Subjonctif seulement si les sujets des deux verbes sont {a}différents{/a}.",
@@ -28,7 +28,7 @@ export const A1_GR_SUBJONCTIF_OU_INFINITIF: GrammarLesson = {
       text: "Remarques",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Infinitif présent : Je suis heureux de {a}partir{/a} en vacances.",
         "Infinitif passé : auxiliaire {a}être{/a}/{a}avoir{/a} à l'infinitif + participe. → Je suis heureux d'{a}être allé{/a} au Portugal.",

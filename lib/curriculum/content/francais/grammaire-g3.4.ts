@@ -13,7 +13,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       trans: { en: "Usage", ar: "الاستخدام", fa: "کاربرد", pt: "Utilização", so: "Isticmaalka", ti: "ኣጠቓቕማ", tr: "Kullanım", ps: "کارونه", uk: "Вживання" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "En général, l'adjectif qualificatif se place {a}après{/a} le nom.",
       ],
@@ -31,7 +31,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "J'habite dans une maison {a}moderne{/a}.",
@@ -45,7 +45,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       trans: { en: "Adjectives placed before the noun", ar: "الصفات التي تأتي قبل الاسم", fa: "صفت‌هایی که پیش از اسم می‌آیند", pt: "Adjetivos colocados antes do nome", so: "Sifooyinka la dhigo ka hor magaca", ti: "ቅድሚ ስም ዝመጹ ቅጽላት", tr: "İsimden önce gelen sıfatlar", ps: "هغه صفتونه چې د اسم مخکې راځي", uk: "Прикметники перед іменником" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains adjectifs courts et très fréquents se placent généralement {a}avant{/a} le nom. Ils appartiennent souvent à la catégorie {a}BAGS{/a}.",
       ],
@@ -109,7 +109,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       trans: { en: "Adjectives placed after the noun", ar: "الصفات التي تأتي بعد الاسم", fa: "صفت‌هایی که پس از اسم می‌آیند", pt: "Adjetivos colocados depois do nome", so: "Sifooyinka la dhigo ka dib magaca", ti: "ድሕሪ ስም ዝመጹ ቅጽላት", tr: "İsimden sonra gelen sıfatlar", ps: "هغه صفتونه چې د اسم وروسته راځي", uk: "Прикметники після іменника" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les adjectifs se placent toujours après le nom lorsqu'ils indiquent :",
       ],
@@ -157,7 +157,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       trans: { en: "Adjectives that can be before or after", ar: "صفات يمكن أن تأتي قبل أو بعد الاسم", fa: "صفت‌هایی که می‌توانند پیش یا پس از اسم بیایند", pt: "Adjetivos que podem vir antes ou depois", so: "Sifooyin iman kara ka hor ama ka dib", ti: "ቅድሚ ወይ ድሕሪ ስም ክመጹ ዝኽእሉ ቅጽላት", tr: "Önce veya sonra gelebilen sıfatlar", ps: "هغه صفتونه چې مخکې یا وروسته راتلای شي", uk: "Прикметники, що можуть стояти перед або після іменника" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Certains adjectifs changent de place selon le sens recherché.",
       ],
@@ -364,7 +364,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       trans: { en: "Order of adjectives", ar: "ترتيب الصفات", fa: "ترتیب صفت‌ها", pt: "Ordem dos adjetivos", so: "Kala horreynta sifooyinka", ti: "ቅደም ሰዓብ ቅጽላት", tr: "Sıfatların sırası", ps: "د صفتونو ترتیب", uk: "Порядок прикметників" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Lorsqu'un nom est accompagné de plusieurs adjectifs, ils suivent généralement cet ordre :",
       ],
@@ -382,7 +382,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}1.{/a} adjectif numéral",
         "{a}2.{/a} adjectif BAGS",
@@ -448,7 +448,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Exemples",
       items: [
         "les trois petits chiens noirs",
@@ -458,7 +458,7 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
       noBulletItems: [0, 1, 2],
     },
     {
-      type: "highlight",
+      type: "text",
       label: "L'adjectif placé le plus près du nom précise généralement sa caractéristique principale.",
       items: [
         "une élection {a}présidentielle{/a} espagnole",

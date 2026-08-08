@@ -13,7 +13,7 @@ export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
       text: "Utilisation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "On compare des personnes, des choses, des actions ou des qualités avec un adjectif, un adverbe, un nom ou un verbe.",
         "La comparaison peut exprimer la supériorité (>), l'infériorité (<) ou l'égalité (=).",
@@ -26,7 +26,7 @@ export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
       text: "Formes avec un adjectif",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Même structure pour adjectif et adverbe, avec {a}que{/a} / {a}qu'{/a}.",
       ],
@@ -77,7 +77,7 @@ export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
       text: "Prononciation",
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Liaison après {a}plus{/a} et {a}moins{/a} devant voyelle ou {a}h{/a} muet. → plus agréable ; moins intéressante.",
       ],

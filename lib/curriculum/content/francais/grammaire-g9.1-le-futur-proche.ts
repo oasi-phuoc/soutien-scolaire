@@ -8,7 +8,8 @@ export const A1_CONJ_L20: ConjLesson = {
   theory: [
     { type: "heading", text: "Le futur proche", trans: { en: "The near future (futur proche)", ar: "المستقبل القريب", fa: "آینده‌ی نزدیک", ti: "ቀረባ መጻኢ", uk: "Найближче майбутнє" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Le futur proche exprime une action {a}prévue ou imminente{/a}.",
         "Structure : {a}aller{/a} (présent) + infinitif",
@@ -67,7 +68,8 @@ export const A1_CONJ_L20: ConjLesson = {
     },
     { type: "heading", text: "Forme négative", sub: true, accent: true, trans: { en: "Negative form", ar: "صيغة النفي", fa: "صورت منفی", ti: "ኣሉታዊ ቅርጺ", uk: "Заперечна форма" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "{a}ne … pas{/a} encadre le verbe {a}aller{/a}, pas l'infinitif.",
       ],
@@ -103,7 +105,7 @@ export const A1_CONJ_L20: ConjLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Quand utiliser le futur proche ?",
       items: [
         "Action prévue dans un futur proche : Je vais appeler demain.",

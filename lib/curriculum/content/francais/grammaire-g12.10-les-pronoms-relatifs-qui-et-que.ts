@@ -8,7 +8,8 @@ export const A2_GR_L19: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les pronoms relatifs : relier deux phrases", trans: { en: "Relative pronouns: linking two sentences", ar: "الضمائر الموصولة: ربط جملتين", fa: "ضمایر موصولی: پیوند دو جمله", ti: "ኣዛመድቲ ቃላት፦ ምትእስሳር ክልተ ሓረግ", uk: "Відносні займенники: з'єднання двох речень" } },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Un pronom relatif permet de {a}relier deux phrases{/a} en évitant une répétition.",
         "Les deux principaux : {a}qui{/a} (sujet) et {a}que / qu'{/a} (objet direct).",
@@ -94,7 +95,7 @@ export const A2_GR_L19: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "Comment choisir : qui ou que ?",
       items: [
         "{a}QUI{/a} → le pronom est {a}sujet{/a} : le verbe suivant n'a pas de sujet explicite.",

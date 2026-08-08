@@ -8,7 +8,8 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
   title: "Le genre des noms : choses",
   theory: [
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "En français, les noms de choses ont également un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
       ],
@@ -43,7 +44,8 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Pour les choses, les noms indiquent souvent un {a}objet{/a}, un {a}lieu{/a} ou une {a}idée{/a}.",
       ],
@@ -78,7 +80,8 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
+      noBulletItems: [0],
       items: [
         "Un nom s'emploie toujours avec un déterminant ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Le déterminant indique le genre : {a}un{/a} livre, {a}une{/a} ville.",
       ],
@@ -122,7 +125,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       ps: "جنس څنګه پېژندل کېږي؟", uk: "Як розпізнати рід?" },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Il n'existe pas de règle absolue. Pour connaître le genre d'un nom, on peut :",
       ],
@@ -140,7 +143,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       },
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "{a}1.{/a} Regarder le déterminant (un, une, le, la).",
         "{a}2.{/a} Observer la terminaison du mot.",
@@ -193,7 +196,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
           label: "Masculin",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les noms qui se terminent par ces lettres sont souvent masculins.",
               ],
@@ -242,7 +245,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
           label: "Féminin",
           content: [
             {
-              type: "plain_list",
+              type: "text",
               items: [
                 "Les noms qui se terminent par ces lettres sont souvent féminins.",
               ],
@@ -290,7 +293,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       ],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "La majorité des noms qui se terminent par {a}-e{/a} sont féminins.",
       ],
@@ -308,7 +311,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "la tabl{a}e{/a}, la vill{a}e{/a}, la voitur{a}e{/a}, etc.",
@@ -316,7 +319,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       noBulletItems: [0],
     },
     {
-      type: "plain_list",
+      type: "text",
       items: [
         "Les noms qui se terminent par une consonne ou une voyelle ({a}a{/a}, {a}i{/a}, {a}o{/a} ou {a}u{/a}) sont souvent masculins.",
       ],
@@ -334,7 +337,7 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
       },
     },
     {
-      type: "highlight",
+      type: "text",
       label: "",
       items: [
         "le pay{a}s{/a}, le magasi{a}n{/a}, le monumen{a}t{/a}, etc.",
