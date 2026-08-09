@@ -272,8 +272,8 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
         uk: "{a}3.{/a} Займенник {a}je{/a} перетворюється на {a}j'{/a} перед голосною або німою h.",
       },
       items: [
-        "{s}Je aime{/s} → {a}J'aime{/a} ma ville.",
-        "{s}Je habite{/s} → {a}J'habite{/a} à Paris."
+        "{s}Je aime{/s} ma ville. → {a}J'aime{/a} ma ville.",
+        "{s}Je habite{/s} à Martigny. → {a}J'habite{/a} à Martigny."
       ],
       inlineArrows: true,
       noBulletItems: [0, 1],
