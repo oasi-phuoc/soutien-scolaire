@@ -172,41 +172,9 @@ import { A1_GR_L18 } from "./content/francais/grammaire-g4.5";
 import { A1_GR_L19 } from "./content/francais/grammaire-g4.6";
 import { A1_GR_L22 } from "./content/francais/grammaire-g14.3";
 
-// ── Imports — conjugaison ─────────────────────────────────────────────────────
-
-import { A1_CONJ_L00 } from "./content/francais/grammaire-g1.1-les-pronoms-personnels";
-import { A1_CONJ_L01 } from "./content/francais/grammaire-g1.2-les-verbes-etre-et-avoir";
-import { A1_CONJ_L07 } from "./content/francais/grammaire-g1.5-les-verbes-en-er-au-present";
-import { A1_CONJ_L08 } from "./content/francais/grammaire-g4.2-les-verbes-de-mouvement";
-import { A1_CONJ_L09 } from "./content/francais/grammaire-g1.6-les-verbes-pronominaux";
-import { A1_CONJ_L15 } from "./content/francais/grammaire-g1.7-les-verbes-modaux";
-import { A2_CONJ_IRREGULIERS } from "./content/francais/grammaire-g1.10-verbes-irreguliers";
-import { A1_CONJ_L20 } from "./content/francais/grammaire-g9.1-le-futur-proche";
-
-import { A1_CONJ_L28 } from "./content/francais/grammaire-g8.6-passe-recent-et-present-continu";
-import { A1_CONJ_L29 } from "./content/francais/grammaire-g8.1-passe-compose-avec-avoir";
-import { A1_CONJ_L30 } from "./content/francais/grammaire-g8.2-passe-compose-avec-etre";
-import { NEGATION_PASSE_COMPOSE } from "./content/francais/grammaire-g8.1-negation-au-passe-compose";
-import { A2_CONJ_L02 } from "./content/francais/grammaire-g1.9-les-verbes-en-ir";
-
-import { A2_CONJ_L04 } from "./content/francais/grammaire-g16.8-le-conditionnel-de-politesse";
-import { A2_CONJ_L05 } from "./content/francais/grammaire-g16.1-l-imperatif";
-import { A2_CONJ_L07 } from "./content/francais/grammaire-g8.5-les-verbes-reguliers-a-l-imparfait";
-import { A2_CONJ_L08 } from "./content/francais/grammaire-g9.2-les-verbes-reguliers-au-futur-simple";
 import { generatedGrammarExercises } from "./content/francais/generated-grammar-exercises";
-import {
-  applyConjProfile,
-  bumpPoolSizes,
-  buildNegationExercises,
-  annotateConjInstructions,
-} from "./content/francais/conj-exercise-builders";
-import {
-  getProfileForLesson,
-  getR2NegationProfile,
-  NEGATION_PASSE_COMPOSE_SLUG,
-  R2_CONJ_SLUGS,
-  TENSE_LESSON_SLUGS,
-} from "./content/francais/conj-lesson-profiles";
+import { applyConjProfile } from "./content/francais/conj-exercise-builders";
+import { getProfileForLesson, TENSE_LESSON_SLUGS } from "./content/francais/conj-lesson-profiles";
 
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
@@ -331,7 +299,7 @@ function addGeneratedExercises<T extends GrammarLesson | ConjLesson>(lesson: T):
   return exercises.length > 0 ? { ...lesson, exercises } : lesson;
 }
 
-/** R6/R7/R8 temps de verbe : pack R2 (8 ex.) + négation (6 ex.). */
+/** Temps de verbe (imparfait, futur simple, conditionnel…) : pack procédural. */
 function augmentTenseLessonExercises<T extends GrammarLesson | ConjLesson>(lesson: T): T {
   const profile = getProfileForLesson(lesson.slug);
   if (profile) {
@@ -340,24 +308,6 @@ function augmentTenseLessonExercises<T extends GrammarLesson | ConjLesson>(lesso
   return lesson;
 }
 
-/** R2 : tailles de pool + bloc négation. Autres conj : tailles de pool. */
-function augmentConjLessonExercises(lesson: ConjLesson): ConjLesson {
-  if (TENSE_LESSON_SLUGS.has(lesson.slug)) {
-    return augmentTenseLessonExercises(lesson);
-  }
-  if (lesson.slug === NEGATION_PASSE_COMPOSE_SLUG) {
-    return { ...lesson, exercises: bumpPoolSizes(annotateConjInstructions(lesson.exercises, "passé composé")) };
-  }
-  if (R2_CONJ_SLUGS.has(lesson.slug)) {
-    const negProfile = getR2NegationProfile(lesson.slug);
-    const base = bumpPoolSizes(annotateConjInstructions(lesson.exercises, "présent"));
-    const neg = negProfile ? buildNegationExercises({ ...negProfile, negation: true }) : [];
-    return { ...lesson, exercises: [...base, ...neg] };
-  }
-  return { ...lesson, exercises: bumpPoolSizes(annotateConjInstructions(lesson.exercises, "présent")) };
-}
-
-/** Grammaire R6/R7/R8 (temps de verbe) : même traitement que conjugaison. */
 function augmentGrammarLessonExercises(lesson: GrammarLesson): GrammarLesson {
   if (TENSE_LESSON_SLUGS.has(lesson.slug)) {
     return augmentTenseLessonExercises(lesson);
@@ -459,23 +409,7 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
 ];
 
 
-/** Fusion conjugaison → grammaire : exercices (et théorie) ajoutés aux leçons cibles. */
-const CONJ_MERGE_INTO: Record<string, string[]> = {
-  // G1.1 / G1.2 / G1.3 : contenu déjà intégré dans les leçons grammaire
-  "a1-gr-verbes-er": ["a1-conj-l07"],
-  "a1-gr-pronominaux": ["a1-conj-l09"],
-  "a1-gr-modaux": ["a1-conj-l15"],
-  "a1-gr-verbes-re-oir": ["a2-conj-irreguliers"],
-  "a1-gr-verbes-ir": ["a2-conj-l02"],
-  // présent progressif : exercices locaux G1.11 (plus de fusion passé récent)
-  "a1-gr-passe-recent": ["a1-conj-l28"],
-  "a1-gr-passe-compose-avoir": ["a1-conj-l29", "negation-passe-compose"],
-  "a1-gr-passe-compose-etre": ["a1-conj-l30"],
-  "a1-gr-futur-proche": ["a1-conj-l20"],
-  "a1-gr-imperatif": ["a2-conj-l05"],
-};
-
-/** Ancien slug conjugaison → leçon grammaire qui le remplace (pour prérequis Communication). */
+/** Ancien slug conjugaison → leçon grammaire qui le remplace (prérequis / redirections). */
 export const CONJ_SLUG_TO_GRAMMAR: Record<string, string> = {
   "a1-conj-l00": "a1-gr-l01",
   "a1-conj-l01": "a1-gr-etre",
@@ -501,71 +435,26 @@ export function resolveFrenchPrereqSlug(slug: string): string {
   return CONJ_SLUG_TO_GRAMMAR[slug] ?? slug;
 }
 
-// ── Registre — conjugaison (sources pour fusion, plus d’onglet dédié) ──────────
-
-const BASE_CONJUGAISON_LESSONS: ConjLesson[] = [
-  A1_CONJ_L00,
-  A1_CONJ_L01,
-  A1_CONJ_L07,
-  A1_CONJ_L08,
-  A1_CONJ_L09,
-  A1_CONJ_L15,
-  A2_CONJ_IRREGULIERS,
-  A1_CONJ_L20,
-
-  A1_CONJ_L28,
-  A1_CONJ_L29,
-  A1_CONJ_L30,
-  NEGATION_PASSE_COMPOSE,
-  A2_CONJ_L02,
-
-  A2_CONJ_L04,
-  A2_CONJ_L05,
-  A2_CONJ_L07,
-  A2_CONJ_L08,
-];
-
-function mergeConjugationIntoGrammar(lessons: GrammarLesson[]): GrammarLesson[] {
-  const conjBySlug = new Map(BASE_CONJUGAISON_LESSONS.map((l) => [l.slug, l] as const));
-  return lessons.map((lesson) => {
-    const sources = CONJ_MERGE_INTO[lesson.slug];
-    if (!sources?.length) return lesson;
-    let theory = lesson.theory;
-    let exercises = lesson.exercises;
-    for (const srcSlug of sources) {
-      const src = conjBySlug.get(srcSlug);
-      if (!src) continue;
-      if (src.theory?.length) {
-        theory = [
-          ...theory,
-          { type: "heading" as const, text: "Entraînement conjugaison" },
-          ...src.theory,
-        ];
-      }
-      if (src.midExercises?.length) {
-        exercises = [...exercises, ...src.midExercises];
-      }
-      if (src.exercises?.length) {
-        exercises = [...exercises, ...src.exercises];
-      }
-    }
-    return { ...lesson, theory, exercises };
-  });
-}
-
-export const GRAMMAR_LESSONS: GrammarLesson[] = [
-  ...mergeConjugationIntoGrammar(
-    BASE_GRAMMAR_LESSONS
-      .map(applyReorganizedCode)
-      .map(addGeneratedExercises)
-      .map(augmentGrammarLessonExercises),
-  ),
-];
-
-export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS
+export const GRAMMAR_LESSONS: GrammarLesson[] = BASE_GRAMMAR_LESSONS
   .map(applyReorganizedCode)
   .map(addGeneratedExercises)
-  .map(augmentConjLessonExercises);
+  .map(augmentGrammarLessonExercises);
+
+/** Anciennes leçons conjugaison : alias vers la leçon G correspondante (plus de fichiers R/RP). */
+export const CONJUGAISON_LESSONS: ConjLesson[] = Object.entries(CONJ_SLUG_TO_GRAMMAR).map(
+  ([conjSlug, grSlug]) => {
+    const g = GRAMMAR_LESSONS.find((l) => l.slug === grSlug);
+    return {
+      slug: conjSlug,
+      code: g?.code ?? conjSlug,
+      level: g?.level ?? "A1",
+      title: g?.title ?? conjSlug,
+      theory: g?.theory ?? [],
+      exercises: g?.exercises ?? [],
+      evalExercises: g?.exercises,
+    };
+  },
+);
 
 // ── Fonctions de recherche ────────────────────────────────────────────────────
 
@@ -587,6 +476,20 @@ export function getAllGrammarLessons(): GrammarLesson[] {
 }
 
 export function getConjLesson(slug: string): ConjLesson | undefined {
+  const mapped = CONJ_SLUG_TO_GRAMMAR[slug];
+  if (mapped) {
+    const g = getGrammarLesson(mapped);
+    if (!g) return undefined;
+    return {
+      slug,
+      code: g.code,
+      level: g.level,
+      title: g.title,
+      theory: g.theory,
+      exercises: g.exercises,
+      evalExercises: g.evalExercises ?? g.exercises,
+    };
+  }
   const lesson = CONJUGAISON_LESSONS.find((l) => l.slug === slug);
   if (!lesson) return undefined;
   if (hasUnlockedEval(lesson.code)) {

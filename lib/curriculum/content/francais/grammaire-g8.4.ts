@@ -26,18 +26,39 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "Le participe passé s'accorde avec le sujet réel lorsque le pronom réfléchi est complément direct.",
+      transText: {
+        en: "The past participle agrees with the real subject when the reflexive pronoun is a direct object.",
+        ar: "يتطابق اسم المفعول مع الفاعل الحقيقي عندما يكون الضمير الانعكاسي مفعولاً مباشراً.",
+        fa: "صفت مفعولی با فاعل اصلی مطابقت دارد وقتی ضمیر انعکاسی مفعول مستقیم باشد.",
+        ti: "ናይ ሕሉፍ ተሳታፋይ ምስ ኣካላዊ ርእሲ ይሰማማዕ ናይ ርእሲ ጸጋ ቀጥታዊ ዕላማ ከሎ.",
+        uk: "Дієприкметник узгоджується з реальним підметом, коли зворотний займенник є прямим додатком.",
+      },
       items: [
-        "Le participe passé s'accorde avec le sujet réel lorsque le pronom réfléchi est complément direct.",
         "Elle s'est lavée. / Ils se sont rencontrés.",
         "Il reste invariable lorsqu'un COD est placé après le verbe : elle s'est lavé les mains.",
       ],
       transItems: {
-        en: ["The past participle agrees with the real subject when the reflexive pronoun is a direct object.", "Elle s'est lavée. (She washed herself.) / Ils se sont rencontrés. (They met.)", "It stays invariable when a COD comes after the verb: elle s'est lavé les mains. (She washed her hands.)"],
-        ar: ["يتطابق اسم المفعول مع الفاعل الحقيقي عندما يكون الضمير الانعكاسي مفعولاً مباشراً.", "Elle s'est lavée. (اغتسلت.) / Ils se sont rencontrés. (التقيا.)", "يبقى ثابتاً عندما يأتي مفعول به مباشر بعد الفعل: elle s'est lavé les mains. (غسلت يديها.)"],
-        fa: ["صفت مفعولی با فاعل اصلی مطابقت دارد وقتی ضمیر انعکاسی مفعول مستقیم باشد.", "Elle s'est lavée. (خودش را شست.) / Ils se sont rencontrés. (ملاقات کردند.)", "اگر مفعول مستقیم بعد از فعل بیاید، صفت مفعولی تغییر نمی‌کند: elle s'est lavé les mains. (دست‌هایش را شست.)"],
-        ti: ["ናይ ሕሉፍ ተሳታፋይ ምስ ኣካላዊ ርእሲ ይሰማማዕ ናይ ርእሲ ጸጋ ቀጥታዊ ዕላማ ከሎ.", "Elle s'est lavée. (ነብሳ ተሓጺባ.) / Ils se sont rencontrés. (ተራኺቦም.)", "COD ድሕሪ ግሲ ምስ ዝመጽእ ኣይቕየርን: elle s'est lavé les mains. (ኣእዳዋ ሓጺባ.)"],
-        uk: ["Дієприкметник узгоджується з реальним підметом, коли зворотний займенник є прямим додатком.", "Elle s'est lavée. (Вона помилася.) / Ils se sont rencontrés. (Вони зустрілися.)", "Залишається незмінним, коли прямий додаток стоїть після дієслова: elle s'est lavé les mains. (Вона помила руки.)"],
+        en: [
+          "Elle s'est lavée. (She washed herself.) / Ils se sont rencontrés. (They met.)",
+          "It stays invariable when a COD comes after the verb: elle s'est lavé les mains. (She washed her hands.)",
+        ],
+        ar: [
+          "Elle s'est lavée. (اغتسلت.) / Ils se sont rencontrés. (التقيا.)",
+          "يبقى ثابتاً عندما يأتي مفعول به مباشر بعد الفعل: elle s'est lavé les mains. (غسلت يديها.)",
+        ],
+        fa: [
+          "Elle s'est lavée. (خودش را شست.) / Ils se sont rencontrés. (ملاقات کردند.)",
+          "اگر مفعول مستقیم بعد از فعل بیاید، صفت مفعولی تغییر نمی‌کند: elle s'est lavé les mains. (دست‌هایش را شست.)",
+        ],
+        ti: [
+          "Elle s'est lavée. (ነብሳ ተሓጺባ.) / Ils se sont rencontrés. (ተራኺቦም.)",
+          "COD ድሕሪ ግሲ ምስ ዝመጽእ ኣይቕየርን: elle s'est lavé les mains. (ኣእዳዋ ሓጺባ.)",
+        ],
+        uk: [
+          "Elle s'est lavée. (Вона помилася.) / Ils se sont rencontrés. (Вони зустрілися.)",
+          "Залишається незмінним, коли прямий додаток стоїть після дієслова: elle s'est lavé les mains. (Вона помила руки.)",
+        ],
       },
     },
     {

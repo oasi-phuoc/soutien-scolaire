@@ -130,17 +130,33 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     { type: "heading", text: "Au passé composé", sub: true, accent: true, trans: { en: "In the passé composé", ar: "في الماضي المركّب", fa: "در ماضی نقلی", ti: "ኣብ passé composé", uk: "У passé composé" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "{a}jamais et rien{/a} se placent entre l'auxiliaire et le participe.",
+      transText: {
+        en: "{a}jamais and rien{/a} are placed between the auxiliary and the participle.",
+        ar: "{a}jamais و rien{/a} يوضعان بين الفعل المساعد واسم المفعول.",
+        fa: "{a}jamais و rien{/a} میان فعل کمکی و وجه وصفی قرار می‌گیرند.",
+        ti: "{a}jamais ከምኡውን rien{/a} ኣብ መንጎ ሓጋዚን ኣካፋዊን ይቕመጡ።",
+        uk: "{a}jamais та rien{/a} ставляться між допоміжним дієсловом і дієприкметником.",
+      },
       items: [
-        "{a}jamais et rien{/a} se placent entre l'auxiliaire et le participe.",
         "{a}personne{/a} se place après le participe.",
       ],
       transItems: {
-        en: ["{a}jamais and rien{/a} are placed between the auxiliary and the participle.", "{a}personne{/a} is placed after the participle."],
-        ar: ["{a}jamais و rien{/a} يوضعان بين الفعل المساعد واسم المفعول.", "{a}personne{/a} يوضع بعد اسم المفعول."],
-        fa: ["{a}jamais و rien{/a} میان فعل کمکی و وجه وصفی قرار می‌گیرند.", "{a}personne{/a} پس از وجه وصفی قرار می‌گیرد."],
-        ti: ["{a}jamais ከምኡውን rien{/a} ኣብ መንጎ ሓጋዚን ኣካፋዊን ይቕመጡ።", "{a}personne{/a} ድሕሪ ኣካፋዊ ይቕመጥ።"],
-        uk: ["{a}jamais та rien{/a} ставляться між допоміжним дієсловом і дієприкметником.", "{a}personne{/a} ставиться після дієприкметника."],
+        en: [
+          "{a}personne{/a} is placed after the participle.",
+        ],
+        ar: [
+          "{a}personne{/a} يوضع بعد اسم المفعول.",
+        ],
+        fa: [
+          "{a}personne{/a} پس از وجه وصفی قرار می‌گیرد.",
+        ],
+        ti: [
+          "{a}personne{/a} ድሕሪ ኣካፋዊ ይቕመጥ።",
+        ],
+        uk: [
+          "{a}personne{/a} ставиться після дієприкметника.",
+        ],
       },
     },
     {
@@ -170,16 +186,13 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     { type: "heading", text: "Rien et Personne comme sujets", sub: true, accent: true, trans: { en: "Rien and Personne as subjects", ar: "Rien وPersonne كفاعلين", fa: "Rien و Personne به‌عنوان فاعل", ti: "Rien ከምኡውን Personne ከም ባዕልታት", uk: "Rien і Personne як підмети" } },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Quand {a}rien{/a} ou {a}personne{/a} est sujet, il se place en tête de phrase, et le verbe garde {a}ne{/a}.",
-      ],
-      transItems: {
-        en: ["When {a}rien{/a} or {a}personne{/a} is the subject, it is placed at the start of the sentence, and the verb keeps {a}ne{/a}."],
-        ar: ["عندما يكون {a}rien{/a} أو {a}personne{/a} فاعلاً، يوضع في بداية الجملة، ويحتفظ الفعل بـ{a}ne{/a}."],
-        fa: ["وقتی {a}rien{/a} یا {a}personne{/a} فاعل باشد، در ابتدای جمله قرار می‌گیرد و فعل {a}ne{/a} را نگه می‌دارد."],
-        ti: ["{a}rien{/a} ወይ {a}personne{/a} ባዕሉ ኮይኑ እንተሎ፣ ኣብ መጀመርታ ሓረግ ይቕመጥ፣ እቲ ግሲ ድማ {a}ne{/a} ይዕቅብ።"],
-        uk: ["Коли {a}rien{/a} або {a}personne{/a} є підметом, він ставиться на початку речення, а дієслово зберігає {a}ne{/a}."],
+      text: "Quand {a}rien{/a} ou {a}personne{/a} est sujet, il se place en tête de phrase, et le verbe garde {a}ne{/a}.",
+      transText: {
+        en: "When {a}rien{/a} or {a}personne{/a} is the subject, it is placed at the start of the sentence, and the verb keeps {a}ne{/a}.",
+        ar: "عندما يكون {a}rien{/a} أو {a}personne{/a} فاعلاً، يوضع في بداية الجملة، ويحتفظ الفعل بـ{a}ne{/a}.",
+        fa: "وقتی {a}rien{/a} یا {a}personne{/a} فاعل باشد، در ابتدای جمله قرار می‌گیرد و فعل {a}ne{/a} را نگه می‌دارد.",
+        ti: "{a}rien{/a} ወይ {a}personne{/a} ባዕሉ ኮይኑ እንተሎ፣ ኣብ መጀመርታ ሓረግ ይቕመጥ፣ እቲ ግሲ ድማ {a}ne{/a} ይዕቅብ።",
+        uk: "Коли {a}rien{/a} або {a}personne{/a} є підметом, він ставиться на початку речення, а дієслово зберігає {a}ne{/a}.",
       },
     },
     {

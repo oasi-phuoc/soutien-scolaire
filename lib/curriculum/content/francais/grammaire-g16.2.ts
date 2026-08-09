@@ -26,10 +26,7 @@ export const A1_GR_FORME_PASSIVE: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Formation : {a}être{/a} + participe passé. Le temps de {a}être{/a} donne le temps du passif.",
-      ],
-      noBulletItems: [0],
+      text: "Formation : {a}être{/a} + participe passé. Le temps de {a}être{/a} donne le temps du passif.",
     },
     {
       type: "grid",
@@ -58,10 +55,7 @@ export const A1_GR_FORME_PASSIVE: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Le participe s'accorde avec le sujet. → La tour Eiffel a été construite en 1889.",
-      ],
-      noBulletItems: [0],
+      text: "Le participe s'accorde avec le sujet. → La tour Eiffel a été construite en 1889.",
     },
   ],
   exercises: [

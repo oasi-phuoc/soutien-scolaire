@@ -65,10 +65,7 @@ export const A1_GR_COMPARAISON_NOM_VERBE: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "En français courant, on prononce généralement le {a}s{/a} de {a}plus{/a} dans ces emplois. → Ça pollue plus. ; Les voitures polluent plus que le métro.",
-      ],
-      noBulletItems: [0],
+      text: "En français courant, on prononce généralement le {a}s{/a} de {a}plus{/a} dans ces emplois. → Ça pollue plus. ; Les voitures polluent plus que le métro.",
     },
   ],
   exercises: [

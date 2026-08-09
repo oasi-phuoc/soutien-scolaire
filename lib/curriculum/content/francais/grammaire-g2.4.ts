@@ -9,38 +9,17 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
   theory: [
     {
       type: "text",
-      items: [
-        "Un nom composé est un nom formé de {a}deux{/a} ou {a}plusieurs{/a} mots qui créent ensemble un seul nom. Les mots peuvent être reliés par un {a}trait d'union{/a} ({a}-{/a}) ou par une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a}).",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: [
-          "A compound noun is a noun made of {a}two{/a} or {a}more{/a} words that together form a single noun. The words may be linked by a {a}hyphen{/a} ({a}-{/a}) or by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} or {a}aux{/a})."
-        ],
-        ar: [
-          "الاسم المركب هو اسم يتكوّن من {a}كلمتين{/a} أو {a}أكثر{/a} تشكّل معاً اسماً واحداً. قد تُربط الكلمات بـ{a}شرطة وصل{/a} ({a}-{/a}) أو بـ{a}حرف جر{/a} ({a}à{/a}، {a}de{/a}، {a}en{/a} أو {a}aux{/a})."
-        ],
-        fa: [
-          "اسم مرکب اسمی است که از {a}دو{/a} یا {a}چند{/a} کلمه ساخته شده و با هم یک اسم واحد می‌سازند. کلمات ممکن است با {a}خط تیره{/a} ({a}-{/a}) یا با {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a}، {a}en{/a} یا {a}aux{/a}) به هم وصل شوند."
-        ],
-        pt: [
-          "Um nome composto é um nome formado por {a}duas{/a} ou {a}mais{/a} palavras que, juntas, criam um só nome. As palavras podem estar ligadas por um {a}hífen{/a} ({a}-{/a}) ou por uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a})."
-        ],
-        so: [
-          "Magac isku dhafan waa magac ka samaysan {a}laba{/a} ama {a}in ka badan{/a} erey oo wada sameeya hal magac. Ereyadu waxaa lagu xiri karaa {a}jiitin{/a} ({a}-{/a}) ama {a}meeleeye{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ama {a}aux{/a})."
-        ],
-        ti: [
-          "ውሁድ ስም ካብ {a}ክልተ{/a} ወይ {a}ዝያዳ{/a} ቃላት ዝቖመ ስም እዩ፣ ብሓባር ሓደ ስም ይፈጥሩ። እቶም ቃላት ብ{a}መስመር ምትእስሳር{/a} ({a}-{/a}) ወይ ብ{a}ቅድመ-ስም{/a} ({a}à{/a}፣ {a}de{/a}፣ {a}en{/a} ወይ {a}aux{/a}) ክተኣሳሰሩ ይኽእሉ።"
-        ],
-        tr: [
-          "Bileşik isim, {a}iki{/a} veya {a}daha fazla{/a} kelimeden oluşan ve birlikte tek bir isim oluşturan isimdir. Kelimeler bir {a}kısa çizgi{/a} ({a}-{/a}) veya bir {a}edat{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ya da {a}aux{/a}) ile bağlanabilir."
-        ],
-        ps: [
-          "مرکب نوم هغه نوم دی چې له {a}دوو{/a} یا {a}څو{/a} کلمو جوړ وي او په ګډه یو نوم جوړوي. کلمې کېدای شي د {a}هایفن{/a} ({a}-{/a}) یا د {a}حرف اضافه{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} یا {a}aux{/a}) په وسیله ونښلول شي."
-        ],
-        uk: [
-          "Складний іменник — це іменник, утворений з {a}двох{/a} або {a}кількох{/a} слів, які разом створюють один іменник. Слова можуть бути з’єднані {a}дефісом{/a} ({a}-{/a}) або {a}прийменником{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} чи {a}aux{/a})."
-        ],
+      text: "Un nom composé est un nom formé de {a}deux{/a} ou {a}plusieurs{/a} mots qui créent ensemble un seul nom. Les mots peuvent être reliés par un {a}trait d'union{/a} ({a}-{/a}) ou par une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a}).",
+      transText: {
+        en: "A compound noun is a noun made of {a}two{/a} or {a}more{/a} words that together form a single noun. The words may be linked by a {a}hyphen{/a} ({a}-{/a}) or by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} or {a}aux{/a}).",
+        ar: "الاسم المركب هو اسم يتكوّن من {a}كلمتين{/a} أو {a}أكثر{/a} تشكّل معاً اسماً واحداً. قد تُربط الكلمات بـ{a}شرطة وصل{/a} ({a}-{/a}) أو بـ{a}حرف جر{/a} ({a}à{/a}، {a}de{/a}، {a}en{/a} أو {a}aux{/a}).",
+        fa: "اسم مرکب اسمی است که از {a}دو{/a} یا {a}چند{/a} کلمه ساخته شده و با هم یک اسم واحد می‌سازند. کلمات ممکن است با {a}خط تیره{/a} ({a}-{/a}) یا با {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a}، {a}en{/a} یا {a}aux{/a}) به هم وصل شوند.",
+        pt: "Um nome composto é um nome formado por {a}duas{/a} ou {a}mais{/a} palavras que, juntas, criam um só nome. As palavras podem estar ligadas por um {a}hífen{/a} ({a}-{/a}) ou por uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ou {a}aux{/a}).",
+        so: "Magac isku dhafan waa magac ka samaysan {a}laba{/a} ama {a}in ka badan{/a} erey oo wada sameeya hal magac. Ereyadu waxaa lagu xiri karaa {a}jiitin{/a} ({a}-{/a}) ama {a}meeleeye{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ama {a}aux{/a}).",
+        ti: "ውሁድ ስም ካብ {a}ክልተ{/a} ወይ {a}ዝያዳ{/a} ቃላት ዝቖመ ስም እዩ፣ ብሓባር ሓደ ስም ይፈጥሩ። እቶም ቃላት ብ{a}መስመር ምትእስሳር{/a} ({a}-{/a}) ወይ ብ{a}ቅድመ-ስም{/a} ({a}à{/a}፣ {a}de{/a}፣ {a}en{/a} ወይ {a}aux{/a}) ክተኣሳሰሩ ይኽእሉ።",
+        tr: "Bileşik isim, {a}iki{/a} veya {a}daha fazla{/a} kelimeden oluşan ve birlikte tek bir isim oluşturan isimdir. Kelimeler bir {a}kısa çizgi{/a} ({a}-{/a}) veya bir {a}edat{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} ya da {a}aux{/a}) ile bağlanabilir.",
+        ps: "مرکب نوم هغه نوم دی چې له {a}دوو{/a} یا {a}څو{/a} کلمو جوړ وي او په ګډه یو نوم جوړوي. کلمې کېدای شي د {a}هایفن{/a} ({a}-{/a}) یا د {a}حرف اضافه{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} یا {a}aux{/a}) په وسیله ونښلول شي.",
+        uk: "Складний іменник — це іменник, утворений з {a}двох{/a} або {a}кількох{/a} слів, які разом створюють один іменник. Слова можуть бути з’єднані {a}дефісом{/a} ({a}-{/a}) або {a}прийменником{/a} ({a}à{/a}, {a}de{/a}, {a}en{/a} чи {a}aux{/a}).",
       },
     },
     {
@@ -94,32 +73,22 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Le second mot peut déjà être au pluriel lorsqu'il désigne ce que contient ou ce à quoi sert l'objet.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["The second word may already be plural when it names what the object contains or what it is used for."],
-        ar: ["قد تكون الكلمة الثانية في صيغة الجمع مسبقاً عندما تدل على ما يحتويه الشيء أو على ما يُستخدم من أجله."],
-        fa: ["کلمهٔ دوم ممکن است از قبل جمع باشد وقتی چیزی را که شیء در خود دارد یا کاربرد آن را نشان می‌دهد."],
-        pt: ["A segunda palavra já pode estar no plural quando indica o que o objeto contém ou para que serve."],
-        so: ["Ereyga labaad hore ayuu jamac u noqon karaa marka uu sheegayo waxa shaygu ka kooban yahay ama waxa loo adeegsado."],
-        ti: ["እቲ ካልኣይ ቃል ቅድም ብባዙሕ ክኸውን ይኽእል፣ እቲ ነገር እንታይ ከም ዝሓዝ ወይ ንምንታይ ከም ዝጥቀም ምስ ዘመልክት።"],
-        tr: ["İkinci kelime, nesnenin ne içerdiğini veya ne için kullanıldığını belirttiğinde zaten çoğul olabilir."],
-        ps: ["دوهمه کلمه ښايي مخکې له مخکې جمع وي کله چې دا د څیز منځپانګه یا د کارونې موخه وښيي."],
-        uk: ["Друге слово вже може бути в множині, коли воно позначає те, що містить предмет, або те, для чого він служить."],
+      text: "Le second mot peut déjà être au pluriel lorsqu'il désigne ce que contient ou ce à quoi sert l'objet.",
+      transText: {
+        en: "The second word may already be plural when it names what the object contains or what it is used for.",
+        ar: "قد تكون الكلمة الثانية في صيغة الجمع مسبقاً عندما تدل على ما يحتويه الشيء أو على ما يُستخدم من أجله.",
+        fa: "کلمهٔ دوم ممکن است از قبل جمع باشد وقتی چیزی را که شیء در خود دارد یا کاربرد آن را نشان می‌دهد.",
+        pt: "A segunda palavra já pode estar no plural quando indica o que o objeto contém ou para que serve.",
+        so: "Ereyga labaad hore ayuu jamac u noqon karaa marka uu sheegayo waxa shaygu ka kooban yahay ama waxa loo adeegsado.",
+        ti: "እቲ ካልኣይ ቃል ቅድም ብባዙሕ ክኸውን ይኽእል፣ እቲ ነገር እንታይ ከም ዝሓዝ ወይ ንምንታይ ከም ዝጥቀም ምስ ዘመልክት።",
+        tr: "İkinci kelime, nesnenin ne içerdiğini veya ne için kullanıldığını belirttiğinde zaten çoğul olabilir.",
+        ps: "دوهمه کلمه ښايي مخکې له مخکې جمع وي کله چې دا د څیز منځپانګه یا د کارونې موخه وښيي.",
+        uk: "Друге слово вже може бути в множині, коли воно позначає те, що містить предмет, або те, для чого він служить.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "un porte-document{a}s{/a}",
-        "un porte-bagage{a}s{/a}",
-        "un porte-clé{a}s{/a}",
-        "une boîte aux lettre{a}s{/a}",
-      ],
-      noBulletItems: [0, 1, 2, 3],
+      text: "un porte-document{a}s{/a}\nun porte-bagage{a}s{/a}\nun porte-clé{a}s{/a}\nune boîte aux lettre{a}s{/a}",
     },
     {
       type: "heading",
@@ -132,66 +101,32 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Les mots varient ou pas selon le type des mots.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Words change or stay the same depending on the type of word."],
-        ar: ["تتغيّر الكلمات أو تبقى كما هي بحسب نوع الكلمة."],
-        fa: ["کلمات بسته به نوع کلمه تغییر می‌کنند یا ثابت می‌مانند."],
-        pt: ["As palavras variam ou ficam iguais conforme o tipo de palavra."],
-        so: ["Ereyadu way is beddelaan ama sidooday u joogaan iyadoo ku xiran nooca ereyga."],
-        ti: ["ቃላት ከም ዓይነቶም ይቕየሩ ወይ ከም ዘለዉ ይተርፉ።"],
-        tr: ["Kelimeler, kelime türüne göre değişir veya aynı kalır."],
-        ps: ["کلمې د خپل ډول له مخې بدلېږي یا هماغسې پاتې کېږي."],
-        uk: ["Слова змінюються або ні залежно від типу слова."],
+      text: "Les mots varient ou pas selon le type des mots.",
+      transText: {
+        en: "Words change or stay the same depending on the type of word.",
+        ar: "تتغيّر الكلمات أو تبقى كما هي بحسب نوع الكلمة.",
+        fa: "کلمات بسته به نوع کلمه تغییر می‌کنند یا ثابت می‌مانند.",
+        pt: "As palavras variam ou ficam iguais conforme o tipo de palavra.",
+        so: "Ereyadu way is beddelaan ama sidooday u joogaan iyadoo ku xiran nooca ereyga.",
+        ti: "ቃላት ከም ዓይነቶም ይቕየሩ ወይ ከም ዘለዉ ይተርፉ።",
+        tr: "Kelimeler, kelime türüne göre değişir veya aynı kalır.",
+        ps: "کلمې د خپل ډول له مخې بدلېږي یا هماغسې پاتې کېږي.",
+        uk: "Слова змінюються або ні залежно від типу слова.",
       },
     },
     {
       type: "text",
-      items: [
-        "{a}1.{/a} Les verbes restent invariables.",
-        "{a}2.{/a} Les prépositions restent invariables.",
-        "{a}3.{/a} Les noms prennent un {a}-s{/a} si le sens le permet.",
-        "{a}4.{/a} Les adjectifs s'accordent avec le nom.",
-      ],
-      noBulletItems: [0, 1, 2, 3],
-      transItems: {
-        en: [
-          "{a}1.{/a} Verbs stay invariable.",
-          "{a}2.{/a} Prepositions stay invariable.",
-          "{a}3.{/a} Nouns take an {a}-s{/a} when the meaning allows it.",
-          "{a}4.{/a} Adjectives agree with the noun.",
-        ],
-        ar: [
-          "{a}1.{/a} الأفعال تبقى دون تغيير.",
-          "{a}2.{/a} حروف الجر تبقى دون تغيير.",
-          "{a}3.{/a} الأسماء تأخذ {a}-s{/a} إذا سمح المعنى بذلك.",
-          "{a}4.{/a} الصفات تتوافق مع الاسم.",
-        ],
-        fa: [
-          "{a}1.{/a} فعل‌ها تغییر نمی‌کنند.",
-          "{a}2.{/a} حروف اضافه تغییر نمی‌کنند.",
-          "{a}3.{/a} اسم‌ها اگر معنا اجازه دهد {a}-s{/a} می‌گیرند.",
-          "{a}4.{/a} صفت‌ها با اسم مطابقت می‌کنند.",
-        ],
-        pt: ["{a}1.{/a} Os verbos ficam invariáveis.","{a}2.{/a} As preposições ficam invariáveis.","{a}3.{/a} Os nomes recebem um {a}-s{/a} quando o sentido o permite.","{a}4.{/a} Os adjetivos concordam com o nome."],
-        so: ["{a}1.{/a} Falalku isma beddelaan.","{a}2.{/a} Meeleeyayaashu isma beddelaan.","{a}3.{/a} Magacyadu waxay qaataan {a}-s{/a} marka macnuhu oggolaado.","{a}4.{/a} Sifooyinku waxay la jaanqaadaan magaca."],
-        ti: [
-          "{a}1.{/a} ግሲታት ኣይቕየሩን።",
-          "{a}2.{/a} ቅድመ-ስማት ኣይቕየሩን።",
-          "{a}3.{/a} ስማት ትርጉም እንተፈቒዱ {a}-s{/a} ይወስዱ።",
-          "{a}4.{/a} ቅጽልታት ምስ ስም ይሰማምዑ።",
-        ],
-        tr: ["{a}1.{/a} Fiiller değişmez kalır.","{a}2.{/a} Edatlar değişmez kalır.","{a}3.{/a} Anlam izin verdiğinde isimler {a}-s{/a} alır.","{a}4.{/a} Sıfatlar isimle uyum sağlar."],
-        ps: ["{a}1.{/a} فعلونه نه بدلېږي.","{a}2.{/a} حرفونه اضافه نه بدلېږي.","{a}3.{/a} نومونه هغه وخت {a}-s{/a} اخلي چې معنا اجازه ورکړي.","{a}4.{/a} صفتونه له نوم سره سمون خوري."],
-        uk: [
-          "{a}1.{/a} Дієслова незмінні.",
-          "{a}2.{/a} Прийменники незмінні.",
-          "{a}3.{/a} Іменники отримують {a}-s{/a}, якщо дозволяє значення.",
-          "{a}4.{/a} Прикметники узгоджуються з іменником.",
-        ],
+      text: "{a}1.{/a} Les verbes restent invariables.\n{a}2.{/a} Les prépositions restent invariables.\n{a}3.{/a} Les noms prennent un {a}-s{/a} si le sens le permet.\n{a}4.{/a} Les adjectifs s'accordent avec le nom.",
+      transText: {
+        en: "{a}1.{/a} Verbs stay invariable.\n{a}2.{/a} Prepositions stay invariable.\n{a}3.{/a} Nouns take an {a}-s{/a} when the meaning allows it.\n{a}4.{/a} Adjectives agree with the noun.",
+        ar: "{a}1.{/a} الأفعال تبقى دون تغيير.\n{a}2.{/a} حروف الجر تبقى دون تغيير.\n{a}3.{/a} الأسماء تأخذ {a}-s{/a} إذا سمح المعنى بذلك.\n{a}4.{/a} الصفات تتوافق مع الاسم.",
+        fa: "{a}1.{/a} فعل‌ها تغییر نمی‌کنند.\n{a}2.{/a} حروف اضافه تغییر نمی‌کنند.\n{a}3.{/a} اسم‌ها اگر معنا اجازه دهد {a}-s{/a} می‌گیرند.\n{a}4.{/a} صفت‌ها با اسم مطابقت می‌کنند.",
+        pt: "{a}1.{/a} Os verbos ficam invariáveis.\n{a}2.{/a} As preposições ficam invariáveis.\n{a}3.{/a} Os nomes recebem um {a}-s{/a} quando o sentido o permite.\n{a}4.{/a} Os adjetivos concordam com o nome.",
+        so: "{a}1.{/a} Falalku isma beddelaan.\n{a}2.{/a} Meeleeyayaashu isma beddelaan.\n{a}3.{/a} Magacyadu waxay qaataan {a}-s{/a} marka macnuhu oggolaado.\n{a}4.{/a} Sifooyinku waxay la jaanqaadaan magaca.",
+        ti: "{a}1.{/a} ግሲታት ኣይቕየሩን።\n{a}2.{/a} ቅድመ-ስማት ኣይቕየሩን።\n{a}3.{/a} ስማት ትርጉም እንተፈቒዱ {a}-s{/a} ይወስዱ።\n{a}4.{/a} ቅጽልታት ምስ ስም ይሰማምዑ።",
+        tr: "{a}1.{/a} Fiiller değişmez kalır.\n{a}2.{/a} Edatlar değişmez kalır.\n{a}3.{/a} Anlam izin verdiğinde isimler {a}-s{/a} alır.\n{a}4.{/a} Sıfatlar isimle uyum sağlar.",
+        ps: "{a}1.{/a} فعلونه نه بدلېږي.\n{a}2.{/a} حرفونه اضافه نه بدلېږي.\n{a}3.{/a} نومونه هغه وخت {a}-s{/a} اخلي چې معنا اجازه ورکړي.\n{a}4.{/a} صفتونه له نوم سره سمون خوري.",
+        uk: "{a}1.{/a} Дієслова незмінні.\n{a}2.{/a} Прийменники незмінні.\n{a}3.{/a} Іменники отримують {a}-s{/a}, якщо дозволяє значення.\n{a}4.{/a} Прикметники узгоджуються з іменником.",
       },
     },
     {
@@ -264,57 +199,41 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Certains noms composés ne suivent pas la règle générale.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Some compound nouns do not follow the general rule."],
-        ar: ["بعض الأسماء المركبة لا تتبع القاعدة العامة."],
-        fa: ["برخی اسم‌های مرکب از قاعدهٔ کلی پیروی نمی‌کنند."],
-        pt: ["Alguns nomes compostos não seguem a regra geral."],
-        so: ["Magacyada isku dhafan qaarkood ma raacaan xeerka guud."],
-        ti: ["ገለ ውሁዳት ስማት ነቲ ሓፈሻዊ ሕጊ ኣይስዕቡን።"],
-        tr: ["Bazı bileşik isimler genel kurala uymaz."],
-        ps: ["ځینې مرکب نومونه عمومي قاعده نه تعقیبوي."],
-        uk: ["Деякі складні іменники не підкоряються загальному правилу."],
+      text: "Certains noms composés ne suivent pas la règle générale.",
+      transText: {
+        en: "Some compound nouns do not follow the general rule.",
+        ar: "بعض الأسماء المركبة لا تتبع القاعدة العامة.",
+        fa: "برخی اسم‌های مرکب از قاعدهٔ کلی پیروی نمی‌کنند.",
+        pt: "Alguns nomes compostos não seguem a regra geral.",
+        so: "Magacyada isku dhafan qaarkood ma raacaan xeerka guud.",
+        ti: "ገለ ውሁዳት ስማት ነቲ ሓፈሻዊ ሕጊ ኣይስዕቡን።",
+        tr: "Bazı bileşik isimler genel kurala uymaz.",
+        ps: "ځینې مرکب نومونه عمومي قاعده نه تعقیبوي.",
+        uk: "Деякі складні іменники не підкоряються загальному правилу.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "{a}des{/a} porte-monnaie",
-        "{a}des{/a} porte-bonheur",
-      ],
-      noBulletItems: [0, 1],
+      text: "{a}des{/a} porte-monnaie\n{a}des{/a} porte-bonheur",
     },
     {
       type: "text",
-      items: [
-        "En général, seul le dernier mot s'accorde pour les mots d'origine étrangère.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["In general, only the last word agrees for words of foreign origin."],
-        ar: ["عموماً، تتوافق الكلمة الأخيرة فقط في الكلمات ذات الأصل الأجنبي."],
-        fa: ["به‌طور کلی، برای واژه‌های با ریشهٔ خارجی فقط آخرین کلمه مطابقت می‌کند."],
-        pt: ["Em geral, só a última palavra concorda nas palavras de origem estrangeira."],
-        so: ["Guud ahaan, ereyada asal qalaad leh waxaa la waafajiyaa kaliya ereyga ugu dambeeya."],
-        ti: ["ብሓፈሻ፣ ንናይ ወጻኢ መበቆል ቃላት እቲ ናይ መወዳእታ ቃል ጥራይ ይሰማማዕ።"],
-        tr: ["Genel olarak, yabancı kökenli kelimelerde yalnızca son kelime uyum sağlar."],
-        ps: ["په عمومي ډول، د بهرني اصل کلمو لپاره یوازې وروستۍ کلمه سمون خوري."],
-        uk: ["Зазвичай для слів іноземного походження узгоджується лише останнє слово."],
+      text: "En général, seul le dernier mot s'accorde pour les mots d'origine étrangère.",
+      transText: {
+        en: "In general, only the last word agrees for words of foreign origin.",
+        ar: "عموماً، تتوافق الكلمة الأخيرة فقط في الكلمات ذات الأصل الأجنبي.",
+        fa: "به‌طور کلی، برای واژه‌های با ریشهٔ خارجی فقط آخرین کلمه مطابقت می‌کند.",
+        pt: "Em geral, só a última palavra concorda nas palavras de origem estrangeira.",
+        so: "Guud ahaan, ereyada asal qalaad leh waxaa la waafajiyaa kaliya ereyga ugu dambeeya.",
+        ti: "ብሓፈሻ፣ ንናይ ወጻኢ መበቆል ቃላት እቲ ናይ መወዳእታ ቃል ጥራይ ይሰማማዕ።",
+        tr: "Genel olarak, yabancı kökenli kelimelerde yalnızca son kelime uyum sağlar.",
+        ps: "په عمومي ډول، د بهرني اصل کلمو لپاره یوازې وروستۍ کلمه سمون خوري.",
+        uk: "Зазвичай для слів іноземного походження узгоджується лише останнє слово.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "un week-end → {a}des{/a} week-ends",
-        "un night-club → {a}des{/a} night-clubs",
-      ],
-      noBulletItems: [0, 1],
+      text: "un week-end → {a}des{/a} week-ends\nun night-club → {a}des{/a} night-clubs",
       inlineArrows: true,
     },
   ],

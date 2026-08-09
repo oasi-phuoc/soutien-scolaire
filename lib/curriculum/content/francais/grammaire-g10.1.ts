@@ -1,5 +1,4 @@
 import type { GrammarLesson } from "../../grammar-data";
-import { A2_GR_L39 } from "./grammaire-g10.1-le-comparatif";
 
 /** Unité 47 — La comparaison avec un adjectif ou un adverbe (G10.1) */
 export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
@@ -27,10 +26,7 @@ export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Même structure pour adjectif et adverbe, avec {a}que{/a} / {a}qu'{/a}.",
-      ],
-      noBulletItems: [0],
+      text: "Même structure pour adjectif et adverbe, avec {a}que{/a} / {a}qu'{/a}.",
     },
     {
       type: "grid",
@@ -78,12 +74,139 @@ export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Liaison après {a}plus{/a} et {a}moins{/a} devant voyelle ou {a}h{/a} muet. → plus agréable ; moins intéressante.",
-      ],
-      noBulletItems: [0],
+      text: "Liaison après {a}plus{/a} et {a}moins{/a} devant voyelle ou {a}h{/a} muet. → plus agréable ; moins intéressante.",
     },
-    ...A2_GR_L39.theory,
+    { type: "heading", text: "Le comparatif", trans: { en: "The comparative", ar: "صيغة المقارنة", fa: "صفت تفضیلی (مقایسه‌ای)", ti: "ናይ ምውድዳር", uk: "Порівняльний ступінь" } },
+    {
+      type: "text",
+      text: "Le comparatif sert à {a}comparer{/a} deux éléments.",
+      transText: {
+        en: "The comparative is used to {a}compare{/a} two elements.",
+        ar: "تُستعمل صيغة المقارنة {a}للمقارنة{/a} بين عنصرين.",
+        fa: "صفت مقایسه‌ای برای {a}مقایسهٔ{/a} دو عنصر به کار می‌رود.",
+        ti: "ናይ ምውድዳር ክልተ ነገራት ንም{a}ውድዳር{/a} የገልግል።",
+        uk: "Порівняльний ступінь служить, щоб {a}порівнювати{/a} два елементи.",
+      },
+      items: [
+        "Il existe 3 degrés : {a}supériorité, égalité, infériorité{/a}.",
+      ],
+      transItems: {
+        en: [
+          "There are 3 degrees: {a}superiority, equality, inferiority{/a}.",
+        ],
+        ar: [
+          "هناك 3 درجات: {a}التفوّق، التساوي، الأدنى{/a}.",
+        ],
+        fa: [
+          "سه درجه وجود دارد: {a}برتری، برابری، کهتری{/a}.",
+        ],
+        ti: [
+          "ሰለስተ ደረጃታት ኣለዋ: {a}ብልጫ፣ ማዕርነት፣ ትሕተት{/a}።",
+        ],
+        uk: [
+          "Є 3 ступені: {a}переваги, рівності, меншості{/a}.",
+        ],
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Degré", "Avec adjectif / adverbe", "Avec verbe", "Avec nom"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Supériorité{/a}", "{a}plus … que{/a}", "verbe + {a}plus que{/a}", "{a}plus de … que{/a}"],
+        ["{a}Égalité{/a}", "{a}aussi … que{/a}", "verbe + {a}autant que{/a}", "{a}autant de … que{/a}"],
+        ["{a}Infériorité{/a}", "{a}moins … que{/a}", "verbe + {a}moins que{/a}", "{a}moins de … que{/a}"],
+      ],
+      transHeaders: {
+        en: ["Degree", "With adjective / adverb", "With verb", "With noun"],
+        ar: ["الدرجة", "مع صفة / ظرف", "مع فعل", "مع اسم"],
+        fa: ["درجه", "با صفت / قید", "با فعل", "با اسم"],
+        ti: ["ደረጃ", "ምስ ቅጽል / ተወሳኺ", "ምስ ግሲ", "ምስ ስም"],
+        uk: ["Ступінь", "З прикметником / прислівником", "З дієсловом", "З іменником"],
+      },
+      transRows: {
+        en: [["{a}Superiority{/a}", "{a}plus … que{/a}", "verb + {a}plus que{/a}", "{a}plus de … que{/a}"], ["{a}Equality{/a}", "{a}aussi … que{/a}", "verb + {a}autant que{/a}", "{a}autant de … que{/a}"], ["{a}Inferiority{/a}", "{a}moins … que{/a}", "verb + {a}moins que{/a}", "{a}moins de … que{/a}"]],
+        ar: [["{a}التفوّق{/a}", "{a}plus … que{/a}", "فعل + {a}plus que{/a}", "{a}plus de … que{/a}"], ["{a}التساوي{/a}", "{a}aussi … que{/a}", "فعل + {a}autant que{/a}", "{a}autant de … que{/a}"], ["{a}الأدنى{/a}", "{a}moins … que{/a}", "فعل + {a}moins que{/a}", "{a}moins de … que{/a}"]],
+        fa: [["{a}برتری{/a}", "{a}plus … que{/a}", "فعل + {a}plus que{/a}", "{a}plus de … que{/a}"], ["{a}برابری{/a}", "{a}aussi … que{/a}", "فعل + {a}autant que{/a}", "{a}autant de … que{/a}"], ["{a}کهتری{/a}", "{a}moins … que{/a}", "فعل + {a}moins que{/a}", "{a}moins de … que{/a}"]],
+        ti: [["{a}ብልጫ{/a}", "{a}plus … que{/a}", "ግሲ + {a}plus que{/a}", "{a}plus de … que{/a}"], ["{a}ማዕርነት{/a}", "{a}aussi … que{/a}", "ግሲ + {a}autant que{/a}", "{a}autant de … que{/a}"], ["{a}ትሕተት{/a}", "{a}moins … que{/a}", "ግሲ + {a}moins que{/a}", "{a}moins de … que{/a}"]],
+        uk: [["{a}Перевага{/a}", "{a}plus … que{/a}", "дієслово + {a}plus que{/a}", "{a}plus de … que{/a}"], ["{a}Рівність{/a}", "{a}aussi … que{/a}", "дієслово + {a}autant que{/a}", "{a}autant de … que{/a}"], ["{a}Меншість{/a}", "{a}moins … que{/a}", "дієслово + {a}moins que{/a}", "{a}moins de … que{/a}"]],
+      },
+    },
+    { type: "heading", text: "Comparatif d'adjectifs", sub: true, accent: true, trans: { en: "Comparative of adjectives", ar: "مقارنة الصفات", fa: "مقایسهٔ صفت‌ها", ti: "ምውድዳር ቅጽላት", uk: "Порівняння прикметників" } },
+    {
+      type: "grid",
+      headers: ["Degré", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Supériorité", "Paris est {a}plus grande que{/a} Lyon."],
+        ["Égalité", "Cette ville est {a}aussi belle que{/a} l'autre."],
+        ["Infériorité", "Ce restaurant est {a}moins cher que{/a} celui-là."],
+      ],
+      transHeaders: {
+        en: ["Degree", "Example"],
+        ar: ["الدرجة", "مثال"],
+        fa: ["درجه", "مثال"],
+        ti: ["ደረጃ", "ኣብነት"],
+        uk: ["Ступінь", "Приклад"],
+      },
+      transRows: {
+        en: [["Superiority", "Paris est {a}plus grande que{/a} Lyon. (Paris is bigger than Lyon.)"], ["Equality", "Cette ville est {a}aussi belle que{/a} l'autre. (This city is as beautiful as the other.)"], ["Inferiority", "Ce restaurant est {a}moins cher que{/a} celui-là. (This restaurant is less expensive than that one.)"]],
+        ar: [["التفوّق", "Paris est {a}plus grande que{/a} Lyon. (باريس أكبر من ليون.)"], ["التساوي", "Cette ville est {a}aussi belle que{/a} l'autre. (هذه المدينة جميلة مثل الأخرى.)"], ["الأدنى", "Ce restaurant est {a}moins cher que{/a} celui-là. (هذا المطعم أقل تكلفة من ذاك.)"]],
+        fa: [["برتری", "Paris est {a}plus grande que{/a} Lyon. (پاریس از لیون بزرگ‌تر است.)"], ["برابری", "Cette ville est {a}aussi belle que{/a} l'autre. (این شهر به زیبایی شهر دیگر است.)"], ["کهتری", "Ce restaurant est {a}moins cher que{/a} celui-là. (این رستوران از آن یکی ارزان‌تر است.)"]],
+        ti: [["ብልጫ", "Paris est {a}plus grande que{/a} Lyon. (ፓሪስ ካብ ሊዮን ዓባይ እያ።)"], ["ማዕርነት", "Cette ville est {a}aussi belle que{/a} l'autre. (እዛ ከተማ ከም እታ ካልእ ጽብቕቲ እያ።)"], ["ትሕተት", "Ce restaurant est {a}moins cher que{/a} celui-là. (እዚ ቤት መግቢ ካብቲ ካልእ ዝሓሰረ እዩ።)"]],
+        uk: [["Перевага", "Paris est {a}plus grande que{/a} Lyon. (Париж більший за Ліон.)"], ["Рівність", "Cette ville est {a}aussi belle que{/a} l'autre. (Це місто таке ж гарне, як інше.)"], ["Меншість", "Ce restaurant est {a}moins cher que{/a} celui-là. (Цей ресторан дешевший за той.)"]],
+      },
+    },
+    { type: "heading", text: "Comparatif de verbes", sub: true, accent: true, trans: { en: "Comparative of verbs", ar: "مقارنة الأفعال", fa: "مقایسهٔ فعل‌ها", ti: "ምውድዳር ግስታት", uk: "Порівняння дієслів" } },
+    {
+      type: "grid",
+      headers: ["Degré", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Supériorité", "Je travaille {a}plus que{/a} toi."],
+        ["Égalité", "Il dort {a}autant que{/a} moi."],
+        ["Infériorité", "Elle mange {a}moins que{/a} lui."],
+      ],
+      transHeaders: {
+        en: ["Degree", "Example"],
+        ar: ["الدرجة", "مثال"],
+        fa: ["درجه", "مثال"],
+        ti: ["ደረጃ", "ኣብነት"],
+        uk: ["Ступінь", "Приклад"],
+      },
+      transRows: {
+        en: [["Superiority", "Je travaille {a}plus que{/a} toi. (I work more than you.)"], ["Equality", "Il dort {a}autant que{/a} moi. (He sleeps as much as I do.)"], ["Inferiority", "Elle mange {a}moins que{/a} lui. (She eats less than he does.)"]],
+        ar: [["التفوّق", "Je travaille {a}plus que{/a} toi. (أعمل أكثر منك.)"], ["التساوي", "Il dort {a}autant que{/a} moi. (ينام بقدر ما أنام.)"], ["الأدنى", "Elle mange {a}moins que{/a} lui. (تأكل أقل منه.)"]],
+        fa: [["برتری", "Je travaille {a}plus que{/a} toi. (بیشتر از تو کار می‌کنم.)"], ["برابری", "Il dort {a}autant que{/a} moi. (به اندازهٔ من می‌خوابد.)"], ["کهتری", "Elle mange {a}moins que{/a} lui. (کمتر از او می‌خورد.)"]],
+        ti: [["ብልጫ", "Je travaille {a}plus que{/a} toi. (ካባኻ ንላዕሊ እሰርሕ።)"], ["ማዕርነት", "Il dort {a}autant que{/a} moi. (ከማይ ይድቅስ።)"], ["ትሕተት", "Elle mange {a}moins que{/a} lui. (ካብኡ ንታሕቲ ትበልዕ።)"]],
+        uk: [["Перевага", "Je travaille {a}plus que{/a} toi. (Я працюю більше за тебе.)"], ["Рівність", "Il dort {a}autant que{/a} moi. (Він спить стільки ж, скільки я.)"], ["Меншість", "Elle mange {a}moins que{/a} lui. (Вона їсть менше за нього.)"]],
+      },
+    },
+    { type: "heading", text: "Comparatif de noms (quantité)", sub: true, accent: true, trans: { en: "Comparative of nouns (quantity)", ar: "مقارنة الأسماء (الكمية)", fa: "مقایسهٔ اسم‌ها (کمیت)", ti: "ምውድዳር ስማት (መጠን)", uk: "Порівняння іменників (кількість)" } },
+    {
+      type: "grid",
+      headers: ["Degré", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Supériorité", "Il a {a}plus de{/a} patience {a}que{/a} moi."],
+        ["Égalité", "J'ai {a}autant de{/a} travail {a}que{/a} toi."],
+        ["Infériorité", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui."],
+      ],
+      transHeaders: {
+        en: ["Degree", "Example"],
+        ar: ["الدرجة", "مثال"],
+        fa: ["درجه", "مثال"],
+        ti: ["ደረጃ", "ኣብነት"],
+        uk: ["Ступінь", "Приклад"],
+      },
+      transRows: {
+        en: [["Superiority", "Il a {a}plus de{/a} patience {a}que{/a} moi. (He has more patience than I do.)"], ["Equality", "J'ai {a}autant de{/a} travail {a}que{/a} toi. (I have as much work as you.)"], ["Inferiority", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui. (She earns less money than he does.)"]],
+        ar: [["التفوّق", "Il a {a}plus de{/a} patience {a}que{/a} moi. (لديه صبر أكثر مني.)"], ["التساوي", "J'ai {a}autant de{/a} travail {a}que{/a} toi. (لديّ من العمل بقدر ما لديك.)"], ["الأدنى", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui. (تكسب مالاً أقل منه.)"]],
+        fa: [["برتری", "Il a {a}plus de{/a} patience {a}que{/a} moi. (او صبر بیشتری از من دارد.)"], ["برابری", "J'ai {a}autant de{/a} travail {a}que{/a} toi. (به اندازهٔ تو کار دارم.)"], ["کهتری", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui. (او پول کمتری از او درمی‌آورد.)"]],
+        ti: [["ብልጫ", "Il a {a}plus de{/a} patience {a}que{/a} moi. (ካባይ ንላዕሊ ትዕግስቲ ኣለዎ።)"], ["ማዕርነት", "J'ai {a}autant de{/a} travail {a}que{/a} toi. (ከማኻ ብዙሕ ስራሕ ኣለኒ።)"], ["ትሕተት", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui. (ካብኡ ንታሕቲ ገንዘብ ትረክብ።)"]],
+        uk: [["Перевага", "Il a {a}plus de{/a} patience {a}que{/a} moi. (У нього більше терпіння, ніж у мене.)"], ["Рівність", "J'ai {a}autant de{/a} travail {a}que{/a} toi. (У мене стільки ж роботи, скільки в тебе.)"], ["Меншість", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui. (Вона заробляє менше грошей, ніж він.)"]],
+      },
+    },
   ],
   exercises: [],
 };

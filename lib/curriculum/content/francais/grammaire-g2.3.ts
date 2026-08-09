@@ -18,20 +18,17 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "On utilise la forme du pluriel quand le nom désigne plusieurs éléments.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["We use the plural form when the noun names several elements."],
-        ar: ["نستعمل صيغة الجمع عندما يدل الاسم على عدة عناصر."],
-        fa: ["وقتی اسم چند عنصر را نشان می‌دهد از صورت جمع استفاده می‌کنیم."],
-        pt: ["Usamos a forma do plural quando o nome designa vários elementos."],
-        so: ["Waxaan adeegsannaa qaabka jamaca marka magacu tilmaamayo dhowr walxood."],
-        ti: ["እቲ ስም ብዙሓት ነገራት ምስ ዘመልክት፣ ባዙሕ ቅርጺ ንጥቀም።"],
-        tr: ["İsim birden fazla unsuru belirttiğinde çoğul biçimi kullanırız."],
-        ps: ["موږ د جمع بڼه هغه وخت کاروو چې نوم څو توکي وښيي."],
-        uk: ["Форму множини вживаємо, коли іменник позначає кілька елементів."],
+      text: "On utilise la forme du pluriel quand le nom désigne plusieurs éléments.",
+      transText: {
+        en: "We use the plural form when the noun names several elements.",
+        ar: "نستعمل صيغة الجمع عندما يدل الاسم على عدة عناصر.",
+        fa: "وقتی اسم چند عنصر را نشان می‌دهد از صورت جمع استفاده می‌کنیم.",
+        pt: "Usamos a forma do plural quando o nome designa vários elementos.",
+        so: "Waxaan adeegsannaa qaabka jamaca marka magacu tilmaamayo dhowr walxood.",
+        ti: "እቲ ስም ብዙሓት ነገራት ምስ ዘመልክት፣ ባዙሕ ቅርጺ ንጥቀም።",
+        tr: "İsim birden fazla unsuru belirttiğinde çoğul biçimi kullanırız.",
+        ps: "موږ د جمع بڼه هغه وخت کاروو چې نوم څو توکي وښيي.",
+        uk: "Форму множини вживаємо, коли іменник позначає кілька елементів.",
       },
     },
     {
@@ -53,20 +50,17 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Un nom s'emploie toujours avec un déterminant, qui indique le nombre. Dans les dictionnaires, les noms sont au singulier.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["A noun is always used with a determiner, which shows the number. In dictionaries, nouns are in the singular."],
-        ar: ["يُستعمل الاسم دائماً مع محدد يدل على العدد. في القواميس، الأسماء في المفرد."],
-        fa: ["اسم همیشه با یک حرف تعریف به کار می‌رود که شمار را نشان می‌دهد. در فرهنگ لغت، اسم‌ها مفردند."],
-        pt: ["Um nome usa-se sempre com um determinante, que indica o número. Nos dicionários, os nomes estão no singular."],
-        so: ["Magac mar walba waxaa lala adeegsadaa go'aamiye, kaas oo muujiya tirada. Qaamuusyada, magacyadu waxay ku jiraan keli."],
-        ti: ["ስም ኩሉ ግዜ ምስ መወሰኒ ይጥቀም፣ ቁጽሪ የመልክት። ኣብ መዝገበ-ቃላት፣ ስማት ብንጽል እዮም።"],
-        tr: ["Bir isim her zaman sayıyı gösteren bir belirleyiciyle kullanılır. Sözlüklerde isimler tekil hâlde bulunur."],
-        ps: ["نوم تل له ټاکونکي سره کارېږي، چې شمېر ښيي. په قاموسونو کې نومونه په مفرد کې وي."],
-        uk: ["Іменник завжди вживається з означенням, яке показує число. У словниках іменники стоять в однині."],
+      text: "Un nom s'emploie toujours avec un déterminant, qui indique le nombre. Dans les dictionnaires, les noms sont au singulier.",
+      transText: {
+        en: "A noun is always used with a determiner, which shows the number. In dictionaries, nouns are in the singular.",
+        ar: "يُستعمل الاسم دائماً مع محدد يدل على العدد. في القواميس، الأسماء في المفرد.",
+        fa: "اسم همیشه با یک حرف تعریف به کار می‌رود که شمار را نشان می‌دهد. در فرهنگ لغت، اسم‌ها مفردند.",
+        pt: "Um nome usa-se sempre com um determinante, que indica o número. Nos dicionários, os nomes estão no singular.",
+        so: "Magac mar walba waxaa lala adeegsadaa go'aamiye, kaas oo muujiya tirada. Qaamuusyada, magacyadu waxay ku jiraan keli.",
+        ti: "ስም ኩሉ ግዜ ምስ መወሰኒ ይጥቀም፣ ቁጽሪ የመልክት። ኣብ መዝገበ-ቃላት፣ ስማት ብንጽል እዮም።",
+        tr: "Bir isim her zaman sayıyı gösteren bir belirleyiciyle kullanılır. Sözlüklerde isimler tekil hâlde bulunur.",
+        ps: "نوم تل له ټاکونکي سره کارېږي، چې شمېر ښيي. په قاموسونو کې نومونه په مفرد کې وي.",
+        uk: "Іменник завжди вживається з означенням, яке показує число. У словниках іменники стоять в однині.",
       },
     },
     {
@@ -100,58 +94,41 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Nom pluriel = nom singulier + {a}-s{/a}.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Plural noun = singular noun + {a}-s{/a}."],
-        ar: ["الاسم الجمع = الاسم المفرد + {a}-s{/a}."],
-        fa: ["اسم جمع = اسم مفرد + {a}-s{/a}."],
-        pt: ["Nome plural = nome singular + {a}-s{/a}."],
-        so: ["Magac jamac = magac keli + {a}-s{/a}."],
-        ti: ["ባዙሕ ስም = ንጽል ስም + {a}-s{/a}."],
-        tr: ["Çoğul isim = tekil isim + {a}-s{/a}."],
-        ps: ["جمع نوم = مفرد نوم + {a}-s{/a}."],
-        uk: ["Іменник у множині = іменник в однині + {a}-s{/a}."],
+      text: "Nom pluriel = nom singulier + {a}-s{/a}.",
+      transText: {
+        en: "Plural noun = singular noun + {a}-s{/a}.",
+        ar: "الاسم الجمع = الاسم المفرد + {a}-s{/a}.",
+        fa: "اسم جمع = اسم مفرد + {a}-s{/a}.",
+        pt: "Nome plural = nome singular + {a}-s{/a}.",
+        so: "Magac jamac = magac keli + {a}-s{/a}.",
+        ti: "ባዙሕ ስም = ንጽል ስም + {a}-s{/a}.",
+        tr: "Çoğul isim = tekil isim + {a}-s{/a}.",
+        ps: "جمع نوم = مفرد نوم + {a}-s{/a}.",
+        uk: "Іменник у множині = іменник в однині + {a}-s{/a}.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "un fruit → des fruit{a}s{/a}",
-        "une banane → des banane{a}s{/a}",
-      ],
-      noBulletItems: [0, 1],
+      text: "un fruit → des fruit{a}s{/a}\nune banane → des banane{a}s{/a}",
     },
     {
       type: "text",
-      items: [
-        "Si le nom singulier se termine par {a}s{/a}, {a}x{/a} ou {a}z{/a}, le pluriel ne change pas.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["If the singular noun ends in {a}s{/a}, {a}x{/a} or {a}z{/a}, the plural does not change."],
-        ar: ["إذا انتهى الاسم المفرد بـ {a}s{/a} أو {a}x{/a} أو {a}z{/a}، لا يتغيّر الجمع."],
-        fa: ["اگر اسم مفرد به {a}s{/a}، {a}x{/a} یا {a}z{/a} ختم شود، جمع تغییر نمی‌کند."],
-        pt: ["Se o nome singular termina em {a}s{/a}, {a}x{/a} ou {a}z{/a}, o plural não muda."],
-        so: ["Haddii magaca keli ku dhammaado {a}s{/a}, {a}x{/a} ama {a}z{/a}, jamacu isma beddelo."],
-        ti: ["እቲ ንጽል ስም ብ {a}s{/a}፣ {a}x{/a} ወይ {a}z{/a} እንተወዲኡ፣ እቲ ባዙሕ ኣይቕየርን።"],
-        tr: ["Tekil isim {a}s{/a}, {a}x{/a} veya {a}z{/a} ile bitiyorsa çoğul değişmez."],
-        ps: ["که مفرد نوم په {a}s{/a}، {a}x{/a} یا {a}z{/a} پای ته رسېږي، جمع نه بدلېږي."],
-        uk: ["Якщо іменник в однині закінчується на {a}s{/a}, {a}x{/a} або {a}z{/a}, множина не змінюється."],
+      text: "Si le nom singulier se termine par {a}s{/a}, {a}x{/a} ou {a}z{/a}, le pluriel ne change pas.",
+      transText: {
+        en: "If the singular noun ends in {a}s{/a}, {a}x{/a} or {a}z{/a}, the plural does not change.",
+        ar: "إذا انتهى الاسم المفرد بـ {a}s{/a} أو {a}x{/a} أو {a}z{/a}، لا يتغيّر الجمع.",
+        fa: "اگر اسم مفرد به {a}s{/a}، {a}x{/a} یا {a}z{/a} ختم شود، جمع تغییر نمی‌کند.",
+        pt: "Se o nome singular termina em {a}s{/a}, {a}x{/a} ou {a}z{/a}, o plural não muda.",
+        so: "Haddii magaca keli ku dhammaado {a}s{/a}, {a}x{/a} ama {a}z{/a}, jamacu isma beddelo.",
+        ti: "እቲ ንጽል ስም ብ {a}s{/a}፣ {a}x{/a} ወይ {a}z{/a} እንተወዲኡ፣ እቲ ባዙሕ ኣይቕየርን።",
+        tr: "Tekil isim {a}s{/a}, {a}x{/a} veya {a}z{/a} ile bitiyorsa çoğul değişmez.",
+        ps: "که مفرد نوم په {a}s{/a}، {a}x{/a} یا {a}z{/a} پای ته رسېږي، جمع نه بدلېږي.",
+        uk: "Якщо іменник в однині закінчується на {a}s{/a}, {a}x{/a} або {a}z{/a}, множина не змінюється.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "le bra{a}s{/a} → les bra{a}s{/a}",
-        "une noi{a}x{/a} → des noi{a}x{/a}",
-        "un ne{a}z{/a} → des ne{a}z{/a}",
-      ],
-      noBulletItems: [0, 1, 2],
+      text: "le bra{a}s{/a} → les bra{a}s{/a}\nune noi{a}x{/a} → des noi{a}x{/a}\nun ne{a}z{/a} → des ne{a}z{/a}",
     },
     {
       type: "heading",
@@ -164,20 +141,17 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Certains noms forment leur pluriel autrement selon leur terminaison. Choisissez une terminaison pour voir les exemples et les exceptions.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Some nouns form their plural differently depending on their ending. Choose an ending to see the examples and the exceptions."],
-        ar: ["بعض الأسماء تكوّن جمعها بطريقة مختلفة بحسب نهايتها. اختر نهاية لرؤية الأمثلة والاستثناءات."],
-        fa: ["برخی اسم‌ها بسته به پایان‌شان جمع متفاوتی می‌سازند. یک پایان را انتخاب کنید تا مثال‌ها و استثناها را ببینید."],
-        pt: ["Alguns nomes formam o plural de outra maneira conforme a sua terminação. Escolha uma terminação para ver os exemplos e as exceções."],
-        so: ["Magacyada qaar waxay jamacooda u sameeyaan si ka duwan iyadoo ku xiran dhammaadkooda. Dooro dhammaad si aad u aragto tusaalooyinka iyo ka reebitaannada."],
-        ti: ["ገለ ስማት ከም መወዳእታኦም ባዙሖም ብኻልእ መገዲ ይሰርሑ። ኣብነታትን ፍሉያትን ንምርኣይ ሓደ መወዳእታ ምረጽ።"],
-        tr: ["Bazı isimler sonlarına göre çoğullarını farklı oluşturur. Örnekleri ve istisnaları görmek için bir son seçin."],
-        ps: ["ځینې نومونه د خپل پای له مخې جمع په بله طریقه جوړوي. د بېلګو او استثناوو د لیدلو لپاره یو پای وټاکئ."],
-        uk: ["Деякі іменники утворюють множину інакше залежно від закінчення. Оберіть закінчення, щоб побачити приклади та винятки."],
+      text: "Certains noms forment leur pluriel autrement selon leur terminaison. Choisissez une terminaison pour voir les exemples et les exceptions.",
+      transText: {
+        en: "Some nouns form their plural differently depending on their ending. Choose an ending to see the examples and the exceptions.",
+        ar: "بعض الأسماء تكوّن جمعها بطريقة مختلفة بحسب نهايتها. اختر نهاية لرؤية الأمثلة والاستثناءات.",
+        fa: "برخی اسم‌ها بسته به پایان‌شان جمع متفاوتی می‌سازند. یک پایان را انتخاب کنید تا مثال‌ها و استثناها را ببینید.",
+        pt: "Alguns nomes formam o plural de outra maneira conforme a sua terminação. Escolha uma terminação para ver os exemplos e as exceções.",
+        so: "Magacyada qaar waxay jamacooda u sameeyaan si ka duwan iyadoo ku xiran dhammaadkooda. Dooro dhammaad si aad u aragto tusaalooyinka iyo ka reebitaannada.",
+        ti: "ገለ ስማት ከም መወዳእታኦም ባዙሖም ብኻልእ መገዲ ይሰርሑ። ኣብነታትን ፍሉያትን ንምርኣይ ሓደ መወዳእታ ምረጽ።",
+        tr: "Bazı isimler sonlarına göre çoğullarını farklı oluşturur. Örnekleri ve istisnaları görmek için bir son seçin.",
+        ps: "ځینې نومونه د خپل پای له مخې جمع په بله طریقه جوړوي. د بېلګو او استثناوو د لیدلو لپاره یو پای وټاکئ.",
+        uk: "Деякі іменники утворюють множину інакше залежно від закінчення. Оберіть закінчення, щоб побачити приклади та винятки.",
       },
     },
     {
@@ -187,24 +161,21 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-al",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-al{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-al{/a} no singular mudam para {a}-aux{/a} no plural."],
-                so: ["Ereyada keli ku dhammaada {a}-al{/a} waxay jamaca isku beddelaan {a}-aux{/a}."],
-                ti: ["ብንጽል ብ {a}-al{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"],
-                tr: ["Tekilde {a}-al{/a} ile biten kelimeler çoğulda {a}-aux{/a} olur."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-al{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} کېږي."],
-                uk: ["Слова на {a}-al{/a} в однині змінюються на {a}-aux{/a} у множині."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
+      transText: {
+        en: "Words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural.",
+        ar: "الكلمات المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع.",
+        fa: "کلماتی که در مفرد به {a}-al{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-al{/a} no singular mudam para {a}-aux{/a} no plural.",
+        so: "Ereyada keli ku dhammaada {a}-al{/a} waxay jamaca isku beddelaan {a}-aux{/a}.",
+        ti: "ብንጽል ብ {a}-al{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።",
+        tr: "Tekilde {a}-al{/a} ile biten kelimeler çoğulda {a}-aux{/a} olur.",
+        ps: "هغه کلمې چې په مفرد کې په {a}-al{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} کېږي.",
+        uk: "Слова на {a}-al{/a} в однині змінюються на {a}-aux{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -252,24 +223,21 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-ail",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-ail{/a} au singulier prennent un {a}-s{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-ail{/a} in the singular take an {a}-s{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-ail{/a} في المفرد تأخذ {a}-s{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-ail{/a} ختم می‌شوند در جمع {a}-s{/a} می‌گیرند."],
-                pt: ["As palavras que terminam em {a}-ail{/a} no singular recebem um {a}-s{/a} no plural."],
-                so: ["Ereyada keli ku dhammaada {a}-ail{/a} waxay jamaca qaataan {a}-s{/a}."],
-                ti: ["ብንጽል ብ {a}-ail{/a} ዝውድኡ ቃላት ኣብ ባዙሕ {a}-s{/a} ይወስዱ።"],
-                tr: ["Tekilde {a}-ail{/a} ile biten kelimeler çoğulda {a}-s{/a} alır."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-ail{/a} پای ته رسېږي، په جمع کې {a}-s{/a} اخلي."],
-                uk: ["Слова на {a}-ail{/a} в однині отримують {a}-s{/a} у множині."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-ail{/a} au singulier prennent un {a}-s{/a} au pluriel.",
+      transText: {
+        en: "Words ending in {a}-ail{/a} in the singular take an {a}-s{/a} in the plural.",
+        ar: "الكلمات المنتهية بـ {a}-ail{/a} في المفرد تأخذ {a}-s{/a} في الجمع.",
+        fa: "کلماتی که در مفرد به {a}-ail{/a} ختم می‌شوند در جمع {a}-s{/a} می‌گیرند.",
+        pt: "As palavras que terminam em {a}-ail{/a} no singular recebem um {a}-s{/a} no plural.",
+        so: "Ereyada keli ku dhammaada {a}-ail{/a} waxay jamaca qaataan {a}-s{/a}.",
+        ti: "ብንጽል ብ {a}-ail{/a} ዝውድኡ ቃላት ኣብ ባዙሕ {a}-s{/a} ይወስዱ።",
+        tr: "Tekilde {a}-ail{/a} ile biten kelimeler çoğulda {a}-s{/a} alır.",
+        ps: "هغه کلمې چې په مفرد کې په {a}-ail{/a} پای ته رسېږي، په جمع کې {a}-s{/a} اخلي.",
+        uk: "Слова на {a}-ail{/a} в однині отримують {a}-s{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -317,24 +285,21 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-eau",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-eau{/a} in the singular change to {a}-eaux{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-eau{/a} في المفرد تصبح {a}-eaux{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-eau{/a} ختم می‌شوند در جمع به {a}-eaux{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-eau{/a} no singular mudam para {a}-eaux{/a} no plural."],
-                so: ["Ereyada keli ku dhammaada {a}-eau{/a} waxay jamaca isku beddelaan {a}-eaux{/a}."],
-                ti: ["ብንጽል ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eaux{/a} ይቕየሩ።"],
-                tr: ["Tekilde {a}-eau{/a} ile biten kelimeler çoğulda {a}-eaux{/a} olur."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-eau{/a} پای ته رسېږي، په جمع کې {a}-eaux{/a} کېږي."],
-                uk: ["Слова на {a}-eau{/a} в однині змінюються на {a}-eaux{/a} у множині."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
+      transText: {
+        en: "Words ending in {a}-eau{/a} in the singular change to {a}-eaux{/a} in the plural.",
+        ar: "الكلمات المنتهية بـ {a}-eau{/a} في المفرد تصبح {a}-eaux{/a} في الجمع.",
+        fa: "کلماتی که در مفرد به {a}-eau{/a} ختم می‌شوند در جمع به {a}-eaux{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-eau{/a} no singular mudam para {a}-eaux{/a} no plural.",
+        so: "Ereyada keli ku dhammaada {a}-eau{/a} waxay jamaca isku beddelaan {a}-eaux{/a}.",
+        ti: "ብንጽል ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eaux{/a} ይቕየሩ።",
+        tr: "Tekilde {a}-eau{/a} ile biten kelimeler çoğulda {a}-eaux{/a} olur.",
+        ps: "هغه کلمې چې په مفرد کې په {a}-eau{/a} پای ته رسېږي، په جمع کې {a}-eaux{/a} کېږي.",
+        uk: "Слова на {a}-eau{/a} в однині змінюються на {a}-eaux{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -360,24 +325,21 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-au",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-au{/a} au singulier changent en {a}-aux{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-au{/a} in the singular change to {a}-aux{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-au{/a} في المفرد تصبح {a}-aux{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-au{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-au{/a} no singular mudam para {a}-aux{/a} no plural."],
-                so: ["Ereyada keli ku dhammaada {a}-au{/a} waxay jamaca isku beddelaan {a}-aux{/a}."],
-                ti: ["ብንጽል ብ {a}-au{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"],
-                tr: ["Tekilde {a}-au{/a} ile biten kelimeler çoğulda {a}-aux{/a} olur."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-au{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} کېږي."],
-                uk: ["Слова на {a}-au{/a} в однині змінюються на {a}-aux{/a} у множині."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-au{/a} au singulier changent en {a}-aux{/a} au pluriel.",
+      transText: {
+        en: "Words ending in {a}-au{/a} in the singular change to {a}-aux{/a} in the plural.",
+        ar: "الكلمات المنتهية بـ {a}-au{/a} في المفرد تصبح {a}-aux{/a} في الجمع.",
+        fa: "کلماتی که در مفرد به {a}-au{/a} ختم می‌شوند در جمع به {a}-aux{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-au{/a} no singular mudam para {a}-aux{/a} no plural.",
+        so: "Ereyada keli ku dhammaada {a}-au{/a} waxay jamaca isku beddelaan {a}-aux{/a}.",
+        ti: "ብንጽል ብ {a}-au{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።",
+        tr: "Tekilde {a}-au{/a} ile biten kelimeler çoğulda {a}-aux{/a} olur.",
+        ps: "هغه کلمې چې په مفرد کې په {a}-au{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} کېږي.",
+        uk: "Слова на {a}-au{/a} в однині змінюються на {a}-aux{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -423,24 +385,21 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-eu",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-eu{/a} au singulier changent en {a}-eux{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-eu{/a} in the singular change to {a}-eux{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-eu{/a} في المفرد تصبح {a}-eux{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-eu{/a} ختم می‌شوند در جمع به {a}-eux{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-eu{/a} no singular mudam para {a}-eux{/a} no plural."],
-                so: ["Ereyada keli ku dhammaada {a}-eu{/a} waxay jamaca isku beddelaan {a}-eux{/a}."],
-                ti: ["ብንጽል ብ {a}-eu{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eux{/a} ይቕየሩ።"],
-                tr: ["Tekilde {a}-eu{/a} ile biten kelimeler çoğulda {a}-eux{/a} olur."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-eu{/a} پای ته رسېږي، په جمع کې {a}-eux{/a} کېږي."],
-                uk: ["Слова на {a}-eu{/a} в однині змінюються на {a}-eux{/a} у множині."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-eu{/a} au singulier changent en {a}-eux{/a} au pluriel.",
+      transText: {
+        en: "Words ending in {a}-eu{/a} in the singular change to {a}-eux{/a} in the plural.",
+        ar: "الكلمات المنتهية بـ {a}-eu{/a} في المفرد تصبح {a}-eux{/a} في الجمع.",
+        fa: "کلماتی که در مفرد به {a}-eu{/a} ختم می‌شوند در جمع به {a}-eux{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-eu{/a} no singular mudam para {a}-eux{/a} no plural.",
+        so: "Ereyada keli ku dhammaada {a}-eu{/a} waxay jamaca isku beddelaan {a}-eux{/a}.",
+        ti: "ብንጽል ብ {a}-eu{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eux{/a} ይቕየሩ።",
+        tr: "Tekilde {a}-eu{/a} ile biten kelimeler çoğulda {a}-eux{/a} olur.",
+        ps: "هغه کلمې چې په مفرد کې په {a}-eu{/a} پای ته رسېږي، په جمع کې {a}-eux{/a} کېږي.",
+        uk: "Слова на {a}-eu{/a} в однині змінюються на {a}-eux{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -486,24 +445,21 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "-ou",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-ou{/a} au singulier prennent un {a}-s{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-ou{/a} in the singular take an {a}-s{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-ou{/a} في المفرد تأخذ {a}-s{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-ou{/a} ختم می‌شوند در جمع {a}-s{/a} می‌گیرند."],
-                pt: ["As palavras que terminam em {a}-ou{/a} no singular recebem um {a}-s{/a} no plural."],
-                so: ["Ereyada keli ku dhammaada {a}-ou{/a} waxay jamaca qaataan {a}-s{/a}."],
-                ti: ["ብንጽል ብ {a}-ou{/a} ዝውድኡ ቃላት ኣብ ባዙሕ {a}-s{/a} ይወስዱ።"],
-                tr: ["Tekilde {a}-ou{/a} ile biten kelimeler çoğulda {a}-s{/a} alır."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-ou{/a} پای ته رسېږي، په جمع کې {a}-s{/a} اخلي."],
-                uk: ["Слова на {a}-ou{/a} в однині отримують {a}-s{/a} у множині."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-ou{/a} au singulier prennent un {a}-s{/a} au pluriel.",
+      transText: {
+        en: "Words ending in {a}-ou{/a} in the singular take an {a}-s{/a} in the plural.",
+        ar: "الكلمات المنتهية بـ {a}-ou{/a} في المفرد تأخذ {a}-s{/a} في الجمع.",
+        fa: "کلماتی که در مفرد به {a}-ou{/a} ختم می‌شوند در جمع {a}-s{/a} می‌گیرند.",
+        pt: "As palavras que terminam em {a}-ou{/a} no singular recebem um {a}-s{/a} no plural.",
+        so: "Ereyada keli ku dhammaada {a}-ou{/a} waxay jamaca qaataan {a}-s{/a}.",
+        ti: "ብንጽል ብ {a}-ou{/a} ዝውድኡ ቃላት ኣብ ባዙሕ {a}-s{/a} ይወስዱ።",
+        tr: "Tekilde {a}-ou{/a} ile biten kelimeler çoğulda {a}-s{/a} alır.",
+        ps: "هغه کلمې چې په مفرد کې په {a}-ou{/a} پای ته رسېږي، په جمع کې {a}-s{/a} اخلي.",
+        uk: "Слова на {a}-ou{/a} в однині отримують {a}-s{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -554,24 +510,21 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         {
           label: "Autres",
           content: [
-            {
-              type: "text",
-              items: [
-                "Certains noms ont un pluriel irrégulier.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Some nouns have an irregular plural."],
-                ar: ["لبعض الأسماء جمع غير منتظم."],
-                fa: ["برخی اسم‌ها جمع بی‌قاعده دارند."],
-                pt: ["Alguns nomes têm um plural irregular."],
-                so: ["Magacyada qaar waxay leeyihiin jamac aan caadi ahayn."],
-                ti: ["ገለ ስማት ዘይስሩዕ ባዙሕ ኣለዎም።"],
-                tr: ["Bazı isimlerin düzensiz çoğulu vardır."],
-                ps: ["ځینې نومونه نامنظمه جمع لري."],
-                uk: ["Деякі іменники мають неправильну множину."],
-              },
-            },
+                {
+      type: "text",
+      text: "Certains noms ont un pluriel irrégulier.",
+      transText: {
+        en: "Some nouns have an irregular plural.",
+        ar: "لبعض الأسماء جمع غير منتظم.",
+        fa: "برخی اسم‌ها جمع بی‌قاعده دارند.",
+        pt: "Alguns nomes têm um plural irregular.",
+        so: "Magacyada qaar waxay leeyihiin jamac aan caadi ahayn.",
+        ti: "ገለ ስማት ዘይስሩዕ ባዙሕ ኣለዎም።",
+        tr: "Bazı isimlerin düzensiz çoğulu vardır.",
+        ps: "ځینې نومونه نامنظمه جمع لري.",
+        uk: "Деякі іменники мають неправильну множину.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],

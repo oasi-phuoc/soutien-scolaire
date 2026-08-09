@@ -26,10 +26,7 @@ export const A1_GR_L18: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "L'adjectif démonstratif se place devant le nom et s'accorde avec lui.",
-      ],
-      noBulletItems: [0],
+      text: "L'adjectif démonstratif se place devant le nom et s'accorde avec lui.",
     },
     {
       type: "grid",

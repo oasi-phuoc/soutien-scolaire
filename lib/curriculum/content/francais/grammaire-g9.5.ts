@@ -27,10 +27,7 @@ export const A1_GR_FUTUR_ANTERIEUR: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Temps composé : auxiliaire {a}avoir{/a} ou {a}être{/a} au futur simple + participe passé.",
-      ],
-      noBulletItems: [0],
+      text: "Temps composé : auxiliaire {a}avoir{/a} ou {a}être{/a} au futur simple + participe passé.",
     },
     {
       type: "grid",

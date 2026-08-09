@@ -22,14 +22,33 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: ["L'ordre des deux propositions peut changer : nous mangerons ensemble si tu viens demain.", "On n'utilise jamais le futur juste après si dans cette structure."],
+      text: "L'ordre des deux propositions peut changer : nous mangerons ensemble si tu viens demain.",
+      transText: {
+        en: "The order of the two clauses can change: nous mangerons ensemble si tu viens demain. (we will eat together if you come tomorrow).",
+        ar: "يمكن أن يتغير ترتيب الجملتين: nous mangerons ensemble si tu viens demain. (سنأكل معاً إذا أتيت غداً).",
+        fa: "ترتیب دو عبارت می‌تواند تغییر کند: nous mangerons ensemble si tu viens demain. (با هم غذا می‌خوریم اگر فردا بیایی).",
+        ti: "ቅደም ተኸተል ናይ ክልቲኡ ሓሳባት ክቕየር ይኽእል፦ nous mangerons ensemble si tu viens demain. (ጽባሕ እንተመጺእካ ብሓባር ክንበልዕ ኢና)።",
+        uk: "Порядок двох частин може змінюватися: nous mangerons ensemble si tu viens demain. (ми поїмо разом, якщо ти прийдеш завтра).",
+      },
+      items: [
+        "On n'utilise jamais le futur juste après si dans cette structure.",
+      ],
       transItems: {
-        en: ["The order of the two clauses can change: nous mangerons ensemble si tu viens demain. (we will eat together if you come tomorrow).", "The future is never used right after «si» in this structure."],
-        ar: ["يمكن أن يتغير ترتيب الجملتين: nous mangerons ensemble si tu viens demain. (سنأكل معاً إذا أتيت غداً).", "لا يُستخدم المستقبل أبداً مباشرة بعد «si» في هذه البنية."],
-        fa: ["ترتیب دو عبارت می‌تواند تغییر کند: nous mangerons ensemble si tu viens demain. (با هم غذا می‌خوریم اگر فردا بیایی).", "در این ساختار هرگز بعد از «si» از آینده استفاده نمی‌شود."],
-        ti: ["ቅደም ተኸተል ናይ ክልቲኡ ሓሳባት ክቕየር ይኽእል፦ nous mangerons ensemble si tu viens demain. (ጽባሕ እንተመጺእካ ብሓባር ክንበልዕ ኢና)።", "ኣብዚ ቅርጺ ድሕሪ «si» ፈጺሙ መጻኢ ኣይጥቀምን።"],
-        uk: ["Порядок двох частин може змінюватися: nous mangerons ensemble si tu viens demain. (ми поїмо разом, якщо ти прийдеш завтра).", "Майбутній час ніколи не вживається одразу після «si» в цій структурі."],
+        en: [
+          "The future is never used right after «si» in this structure.",
+        ],
+        ar: [
+          "لا يُستخدم المستقبل أبداً مباشرة بعد «si» في هذه البنية.",
+        ],
+        fa: [
+          "در این ساختار هرگز بعد از «si» از آینده استفاده نمی‌شود.",
+        ],
+        ti: [
+          "ኣብዚ ቅርጺ ድሕሪ «si» ፈጺሙ መጻኢ ኣይጥቀምን።",
+        ],
+        uk: [
+          "Майбутній час ніколи не вживається одразу після «si» в цій структурі.",
+        ],
       },
     },
     { type: "text", label: "Élision avec il", items: ["si + il → {a}s'il{/a} : s'il pleut, nous resterons à la maison.", "On écrit si elle, si on ; « si ils » n'existe pas."],
@@ -102,40 +121,41 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
     { type: "heading", text: "Quand + futur", sub: true, accent: true, trans: { en: "Quand + future", ar: "quand + المستقبل", fa: "quand + آینده", ti: "quand + መጻኢ", uk: "Quand + майбутній" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "En français, {a}quand{/a} suivi d'un futur exprime une action future certaine.",
+      transText: {
+        en: "In French, {a}quand{/a} followed by a future tense expresses a certain future action.",
+        ar: "في الفرنسية، {a}quand{/a} يليه فعل مستقبل يعبّر عن فعل مستقبلي مؤكد.",
+        fa: "در فرانسه، {a}quand{/a} + آینده یک عمل آینده‌ی حتمی را بیان می‌کند.",
+        ti: "ኣብ ፈረንሳ፣ {a}quand{/a} + መጻኢ ርጉጽ ናይ መጻኢ ተግባር የርኢ።",
+        uk: "У французькій {a}quand{/a} + майбутній виражає певну майбутню дію.",
+      },
       items: [
-        "En français, {a}quand{/a} suivi d'un futur exprime une action future certaine.",
         "Contrairement à l'anglais (when + présent), le verbe après quand est au {a}futur simple{/a}.",
         "Quand je {a}serai{/a} grand, je {a}deviendrai{/a} médecin.",
         "Elle m'appellera quand elle {a}arrivera{/a}.",
       ],
       transItems: {
         en: [
-          "In French, {a}quand{/a} followed by a future tense expresses a certain future action.",
           "Unlike English (when + present), the verb after quand is in the {a}simple future{/a}.",
           "Quand je {a}serai{/a} grand, je {a}deviendrai{/a} médecin. (When I grow up, I will become a doctor.)",
           "Elle m'appellera quand elle {a}arrivera{/a}. (She will call me when she arrives.)",
         ],
         ar: [
-          "في الفرنسية، {a}quand{/a} يليه فعل مستقبل يعبّر عن فعل مستقبلي مؤكد.",
           "خلافاً للإنجليزية (when + المضارع)، الفعل بعد quand يأتي بالمستقبل البسيط.",
           "Quand je {a}serai{/a} grand, je {a}deviendrai{/a} médecin. (عندما أكبر، سأصبح طبيباً.)",
           "Elle m'appellera quand elle {a}arrivera{/a}. (ستتصل بي عندما تصل.)",
         ],
         fa: [
-          "در فرانسه، {a}quand{/a} + آینده یک عمل آینده‌ی حتمی را بیان می‌کند.",
           "برخلاف انگلیسی (when + حال)، فعل بعد از quand در {a}آینده‌ی ساده{/a} می‌آید.",
           "Quand je {a}serai{/a} grand, je {a}deviendrai{/a} médecin. (وقتی بزرگ شوم، پزشک می‌شوم.)",
           "Elle m'appellera quand elle {a}arrivera{/a}. (وقتی برسد به من زنگ می‌زند.)",
         ],
         ti: [
-          "ኣብ ፈረንሳ፣ {a}quand{/a} + መጻኢ ርጉጽ ናይ መጻኢ ተግባር የርኢ።",
           "ካብ ቋንቋ ብሄረ እንግሊዝ (when + ህሉው) ዝተፈለ፣ ቃል ድሕሪ quand ኣብ {a}ቀሊል መጻኢ{/a} ኢዩ።",
           "Quand je {a}serai{/a} grand, je {a}deviendrai{/a} médecin. (ዓቢ ምስ ዝኸውን፣ ሓኪም ክኸውን ኢየ.)",
           "Elle m'appellera quand elle {a}arrivera{/a}. (ምስ ምብጻሓ ክትድውለለይ ኢያ.)",
         ],
         uk: [
-          "У французькій {a}quand{/a} + майбутній виражає певну майбутню дію.",
           "На відміну від англійської (when + теперішній), дієслово після quand стоїть у {a}простому майбутньому{/a}.",
           "Quand je {a}serai{/a} grand, je {a}deviendrai{/a} médecin. (Коли я виросту, я стану лікарем.)",
           "Elle m'appellera quand elle {a}arrivera{/a}. (Вона зателефонує мені, коли прийде.)",

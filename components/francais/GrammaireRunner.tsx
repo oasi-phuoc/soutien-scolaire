@@ -476,7 +476,7 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                 ) : null}
                 {plainText ? (
                   <p
-                    className="text-sm leading-relaxed text-[var(--color-text-primary)]"
+                    className="whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]"
                     lang={transText ? pivot : undefined}
                     dir={transText && isRtl ? "rtl" : "ltr"}
                   >

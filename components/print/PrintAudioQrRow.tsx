@@ -33,7 +33,7 @@ function QrCell({ item, size = 72 }: { item: PrintAudioQrItem; size?: number }) 
       width: 160,
       errorCorrectionLevel: "M",
       color: { dark: "#111111", light: "#ffffff" },
-    }).then((value) => {
+    }).then((value: string) => {
       if (!cancelled) setDataUrl(value);
     });
     return () => {

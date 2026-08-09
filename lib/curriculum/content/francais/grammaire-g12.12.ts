@@ -25,10 +25,7 @@ export const A1_GR_PRONOMS_RELATIFS_COMPOSES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Construction : préposition + {a}lequel / laquelle / lesquels / lesquelles{/a}.",
-      ],
-      noBulletItems: [0],
+      text: "Construction : préposition + {a}lequel / laquelle / lesquels / lesquelles{/a}.",
     },
     {
       type: "grid",

@@ -9,17 +9,33 @@ export const A1_GR_L22: GrammarLesson = {
     { type: "heading", text: "Les adverbes de fréquence", trans: { en: "Adverbs of frequency", ar: "ظروف التكرار", fa: "قیدهای تکرار", ti: "ናይ ድግግሞሽ ተወሳኺ ቃላት", uk: "Прислівники частоти" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "Les adverbes de fréquence indiquent {a}combien de fois{/a} une action se produit.",
+      transText: {
+        en: "Adverbs of frequency tell {a}how often{/a} an action happens.",
+        ar: "ظروف التكرار تبيّن {a}كم مرة{/a} يحدث الفعل.",
+        fa: "قیدهای تکرار نشان می‌دهند {a}چند بار{/a} یک عمل رخ می‌دهد.",
+        ti: "ናይ ድግግሞሽ ተወሳኺ ቃላት ሓደ ተግባር {a}ክንደይ ግዜ{/a} ከም ዝፍጸም የመልክቱ።",
+        uk: "Прислівники частоти показують, {a}як часто{/a} відбувається дія.",
+      },
       items: [
-        "Les adverbes de fréquence indiquent {a}combien de fois{/a} une action se produit.",
         "Ils se placent généralement {a}après le verbe{/a}.",
       ],
       transItems: {
-        en: ["Adverbs of frequency tell {a}how often{/a} an action happens.", "They are usually placed {a}after the verb{/a}."],
-        ar: ["ظروف التكرار تبيّن {a}كم مرة{/a} يحدث الفعل.", "توضع عادةً {a}بعد الفعل{/a}."],
-        fa: ["قیدهای تکرار نشان می‌دهند {a}چند بار{/a} یک عمل رخ می‌دهد.", "معمولاً {a}بعد از فعل{/a} قرار می‌گیرند."],
-        ti: ["ናይ ድግግሞሽ ተወሳኺ ቃላት ሓደ ተግባር {a}ክንደይ ግዜ{/a} ከም ዝፍጸም የመልክቱ።", "መብዛሕትኡ ግዜ {a}ድሕሪ ግሲ{/a} ይቕመጡ።"],
-        uk: ["Прислівники частоти показують, {a}як часто{/a} відбувається дія.", "Зазвичай вони ставляться {a}після дієслова{/a}."],
+        en: [
+          "They are usually placed {a}after the verb{/a}.",
+        ],
+        ar: [
+          "توضع عادةً {a}بعد الفعل{/a}.",
+        ],
+        fa: [
+          "معمولاً {a}بعد از فعل{/a} قرار می‌گیرند.",
+        ],
+        ti: [
+          "መብዛሕትኡ ግዜ {a}ድሕሪ ግሲ{/a} ይቕመጡ።",
+        ],
+        uk: [
+          "Зазвичай вони ставляться {a}після дієслова{/a}.",
+        ],
       },
     },
     {

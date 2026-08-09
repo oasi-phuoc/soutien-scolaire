@@ -38,10 +38,7 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "S'accorde en genre et en nombre avec le nom.",
-      ],
-      noBulletItems: [0],
+      text: "S'accorde en genre et en nombre avec le nom.",
     },
     {
       type: "grid",
@@ -106,10 +103,7 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "On utilise ces mots seuls ou avec {a}est-ce que{/a}. La place des mots est importante.",
-      ],
-      noBulletItems: [0],
+      text: "On utilise ces mots seuls ou avec {a}est-ce que{/a}. La place des mots est importante.",
     },
     {
       type: "grid",
@@ -143,35 +137,36 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
     { type: "heading", text: "Les questions ouvertes", trans: { en: "Open questions", ar: "الأسئلة المفتوحة", fa: "سؤالات باز", ti: "ክፉት ሕቶታት", uk: "Відкриті запитання" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "Une question ouverte est une question qui demande une réponse avec une information. On ne peut pas répondre seulement par oui ou non.",
+      transText: {
+        en: "An open question is a question that requires an answer with information. You cannot answer only yes or no.",
+        ar: "السؤال المفتوح هو سؤال يتطلب إجابة بمعلومة. لا يمكن الإجابة فقط بنعم أو لا.",
+        fa: "سؤال باز سؤالی است که پاسخی با اطلاعات می‌طلبد. نمی‌توان فقط با بله یا خیر پاسخ داد.",
+        ti: "ክፉት ሕቶ ምስ ሓበሬታ መልሲ ዝሓቱ ሕቶ እዩ። ብሆወ ወይ ኣይሆ ጥራይ ክትምልስ ኣይትኽእልን።",
+        uk: "Відкрите запитання — це запитання, що потребує відповіді з інформацією. Не можна відповісти лише так або ні.",
+      },
       items: [
-        "Une question ouverte est une question qui demande une réponse avec une information. On ne peut pas répondre seulement par oui ou non.",
         "Les questions ouvertes commencent souvent par un mot interrogatif : {a}qui{/a}, {a}quoi{/a}, {a}où{/a}, {a}quand{/a}, {a}comment{/a}, {a}pourquoi{/a}, {a}combien{/a}, {a}quel{/a}.",
         "Ces mots interrogatifs se placent en début ou en fin de phrase selon la forme de la question.",
       ],
       transItems: {
         en: [
-          "An open question is a question that requires an answer with information. You cannot answer only yes or no.",
           "Open questions often begin with a question word: {a}who{/a}, {a}what{/a}, {a}where{/a}, {a}when{/a}, {a}how{/a}, {a}why{/a}, {a}how much{/a}, {a}which{/a}.",
           "These question words are placed at the beginning or end of the sentence depending on the form of the question.",
         ],
         ar: [
-          "السؤال المفتوح هو سؤال يتطلب إجابة بمعلومة. لا يمكن الإجابة فقط بنعم أو لا.",
           "تبدأ الأسئلة المفتوحة غالباً بأداة استفهام: {a}من{/a}، {a}ماذا{/a}، {a}أين{/a}، {a}متى{/a}، {a}كيف{/a}، {a}لماذا{/a}، {a}كم{/a}، {a}أي{/a}.",
           "توضع هذه الأدوات في بداية الجملة أو نهايتها حسب شكل السؤال.",
         ],
         fa: [
-          "سؤال باز سؤالی است که پاسخی با اطلاعات می‌طلبد. نمی‌توان فقط با بله یا خیر پاسخ داد.",
           "سؤالات باز اغلب با یک کلمه‌ی پرسشی شروع می‌شوند: {a}چه کسی{/a}، {a}چه{/a}، {a}کجا{/a}، {a}کِی{/a}، {a}چطور{/a}، {a}چرا{/a}، {a}چقدر{/a}، {a}کدام{/a}.",
           "این کلمات در ابتدا یا انتهای جمله قرار می‌گیرند بسته به شکل سؤال.",
         ],
         ti: [
-          "ክፉት ሕቶ ምስ ሓበሬታ መልሲ ዝሓቱ ሕቶ እዩ። ብሆወ ወይ ኣይሆ ጥራይ ክትምልስ ኣይትኽእልን።",
           "ክፉት ሕቶታት ብናይ ሕቶ ቃል ይጅምሩ፦ {a}መን{/a}፣ {a}እንታይ{/a}፣ {a}ኣበይ{/a}፣ {a}መዓስ{/a}፣ {a}ከመይ{/a}፣ {a}ስለምንታይ{/a}፣ {a}ክንደይ{/a}፣ {a}ኣየናይ{/a}።",
           "እዞም ቃላት ኣብ መጀመርታ ወይ መወዳእታ ሓሳብ ይቕመጡ ብመሰረት ቅርጺ ሕቶ።",
         ],
         uk: [
-          "Відкрите запитання — це запитання, що потребує відповіді з інформацією. Не можна відповісти лише так або ні.",
           "Відкриті запитання часто починаються з питального слова: {a}хто{/a}, {a}що{/a}, {a}де{/a}, {a}коли{/a}, {a}як{/a}, {a}чому{/a}, {a}скільки{/a}, {a}який{/a}.",
           "Ці слова ставляться на початку або в кінці речення залежно від форми запитання.",
         ],

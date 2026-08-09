@@ -14,70 +14,57 @@ export const A1_GR_CEST: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "{a}Il y a{/a} permet d'indiquer la présence d'une personne ou d'une chose dans un lieu.",
-      ],
-      transItems: {
-        en: ["{a}Il y a{/a} is used to indicate the presence of a person or thing in a place."],
-        ar: ["تُستخدم {a}Il y a{/a} للدلالة على وجود شخص أو شيء في مكان ما."],
-        fa: ["از {a}Il y a{/a} برای نشان دادن حضور یک شخص یا وجود یک چیز در مکانی استفاده می‌شود."],
-        pt: ["{a}Il y a{/a} usa-se para indicar a presença de uma pessoa ou de uma coisa num lugar."],
-        so: ["{a}Il y a{/a} waxaa loo isticmaalaa in lagu muujiyo joogitaanka qof ama shay meel ku yaal."],
-        ti: ["{a}Il y a{/a} ኣብ ሓደ ቦታ ሰብ ወይ ነገር ከም ዘሎ ንምግላጽ ይጥቀም።"],
-        tr: ["{a}Il y a{/a} bir yerde bir kişi veya şeyin varlığını belirtmek için kullanılır."],
-        ps: ["{a}Il y a{/a} په یو ځای کې د کس یا شي د شتون ښودلو لپاره کارېږي."],
-        uk: ["{a}Il y a{/a} вживається, щоб указати на наявність людини або речі в певному місці."],
+      text: "{a}Il y a{/a} permet d'indiquer la présence d'une personne ou d'une chose dans un lieu.",
+      transText: {
+        en: "{a}Il y a{/a} is used to indicate the presence of a person or thing in a place.",
+        ar: "تُستخدم {a}Il y a{/a} للدلالة على وجود شخص أو شيء في مكان ما.",
+        fa: "از {a}Il y a{/a} برای نشان دادن حضور یک شخص یا وجود یک چیز در مکانی استفاده می‌شود.",
+        pt: "{a}Il y a{/a} usa-se para indicar a presença de uma pessoa ou de uma coisa num lugar.",
+        so: "{a}Il y a{/a} waxaa loo isticmaalaa in lagu muujiyo joogitaanka qof ama shay meel ku yaal.",
+        ti: "{a}Il y a{/a} ኣብ ሓደ ቦታ ሰብ ወይ ነገር ከም ዘሎ ንምግላጽ ይጥቀም።",
+        tr: "{a}Il y a{/a} bir yerde bir kişi veya şeyin varlığını belirtmek için kullanılır.",
+        ps: "{a}Il y a{/a} په یو ځای کې د کس یا شي د شتون ښودلو لپاره کارېږي.",
+        uk: "{a}Il y a{/a} вживається, щоб указати на наявність людини або речі в певному місці.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: ["{a}Il y a{/a} beaucoup de photos."],
-      noBulletItems: [0],
+      text: "{a}Il y a{/a} beaucoup de photos.",
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "{a}C'est{/a} permet d'identifier une personne ou une chose.",
-      ],
-      transItems: {
-        en: ["{a}C'est{/a} is used to identify a person or thing."],
-        ar: ["تُستخدم {a}C'est{/a} للتعريف بشخص أو شيء."],
-        fa: ["از {a}C'est{/a} برای شناسایی یک شخص یا چیز استفاده می‌شود."],
-        pt: ["{a}C'est{/a} usa-se para identificar uma pessoa ou uma coisa."],
-        so: ["{a}C'est{/a} waxaa loo isticmaalaa in lagu aqoonsado qof ama shay."],
-        ti: ["{a}C'est{/a} ሰብ ወይ ነገር ንምልላይ ይጥቀም።"],
-        tr: ["{a}C'est{/a} bir kişiyi veya şeyi tanımlamak için kullanılır."],
-        ps: ["{a}C'est{/a} د یو کس یا شي د پېژندلو لپاره کارېږي."],
-        uk: ["{a}C'est{/a} вживається, щоб ідентифікувати людину або річ."],
+      text: "{a}C'est{/a} permet d'identifier une personne ou une chose.",
+      transText: {
+        en: "{a}C'est{/a} is used to identify a person or thing.",
+        ar: "تُستخدم {a}C'est{/a} للتعريف بشخص أو شيء.",
+        fa: "از {a}C'est{/a} برای شناسایی یک شخص یا چیز استفاده می‌شود.",
+        pt: "{a}C'est{/a} usa-se para identificar uma pessoa ou uma coisa.",
+        so: "{a}C'est{/a} waxaa loo isticmaalaa in lagu aqoonsado qof ama shay.",
+        ti: "{a}C'est{/a} ሰብ ወይ ነገር ንምልላይ ይጥቀም።",
+        tr: "{a}C'est{/a} bir kişiyi veya şeyi tanımlamak için kullanılır.",
+        ps: "{a}C'est{/a} د یو کس یا شي د پېژندلو لپاره کارېږي.",
+        uk: "{a}C'est{/a} вживається, щоб ідентифікувати людину або річ.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: ["{a}C'est{/a} mon cousin."],
-      noBulletItems: [0],
+      text: "{a}C'est{/a} mon cousin.",
     },
 
     // ── Intro + tableau ───────────────────────────────────────────────────────
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Les expressions {a}c'est{/a} et {a}il est{/a} servent toutes les deux à présenter ou décrire quelqu'un ou quelque chose, mais elles ne s'utilisent pas de la même manière.",
-      ],
-      transItems: {
-        en: ["The expressions {a}c'est{/a} and {a}il est{/a} both serve to present or describe someone or something, but they are not used in the same way."],
-        ar: ["تُستخدم عبارتا {a}c'est{/a} و{a}il est{/a} كلتاهما لتقديم شخص أو شيء أو وصفه، لكنهما لا تُستخدمان بنفس الطريقة."],
-        fa: ["هر دو عبارت {a}c'est{/a} و {a}il est{/a} برای معرفی یا توصیف کسی یا چیزی به کار می‌روند، اما به یک شکل استفاده نمی‌شوند."],
-        pt: ["As expressões {a}c'est{/a} e {a}il est{/a} servem ambas para apresentar ou descrever alguém ou alguma coisa, mas não se usam da mesma maneira."],
-        so: ["Weedhaha {a}c'est{/a} iyo {a}il est{/a} labaduba waxay u adeegaan soo bandhigid ama sharaxaad qof ama shay, laakiin si isku mid ah looma isticmaalo."],
-        ti: ["ክልቲኤን ቃላት {a}c'est{/a} ከምኡ'ውን {a}il est{/a} ሰብ ወይ ነገር ንምቕራብ ወይ ንምግላጽ ይጠቅማ፣ ግን ብሓደ መንገዲ ኣይጥቀማሉን።"],
-        tr: ["{a}c'est{/a} ve {a}il est{/a} ifadeleri birini veya bir şeyi tanıtmak ya da betimlemek için kullanılır, ancak aynı şekilde kullanılmaz."],
-        ps: ["عبارتونه {a}c'est{/a} او {a}il est{/a} دواړه د چا یا شي د معرفي کولو یا تشریح لپاره کارېږي، خو په یوه ډول نه کارول کېږي."],
-        uk: ["Вирази {a}c'est{/a} та {a}il est{/a} обидва служать для представлення або опису когось чи чогось, але вживаються по-різному."],
+      text: "Les expressions {a}c'est{/a} et {a}il est{/a} servent toutes les deux à présenter ou décrire quelqu'un ou quelque chose, mais elles ne s'utilisent pas de la même manière.",
+      transText: {
+        en: "The expressions {a}c'est{/a} and {a}il est{/a} both serve to present or describe someone or something, but they are not used in the same way.",
+        ar: "تُستخدم عبارتا {a}c'est{/a} و{a}il est{/a} كلتاهما لتقديم شخص أو شيء أو وصفه، لكنهما لا تُستخدمان بنفس الطريقة.",
+        fa: "هر دو عبارت {a}c'est{/a} و {a}il est{/a} برای معرفی یا توصیف کسی یا چیزی به کار می‌روند، اما به یک شکل استفاده نمی‌شوند.",
+        pt: "As expressões {a}c'est{/a} e {a}il est{/a} servem ambas para apresentar ou descrever alguém ou alguma coisa, mas não se usam da mesma maneira.",
+        so: "Weedhaha {a}c'est{/a} iyo {a}il est{/a} labaduba waxay u adeegaan soo bandhigid ama sharaxaad qof ama shay, laakiin si isku mid ah looma isticmaalo.",
+        ti: "ክልቲኤን ቃላት {a}c'est{/a} ከምኡ'ውን {a}il est{/a} ሰብ ወይ ነገር ንምቕራብ ወይ ንምግላጽ ይጠቅማ፣ ግን ብሓደ መንገዲ ኣይጥቀማሉን።",
+        tr: "{a}c'est{/a} ve {a}il est{/a} ifadeleri birini veya bir şeyi tanıtmak ya da betimlemek için kullanılır, ancak aynı şekilde kullanılmaz.",
+        ps: "عبارتونه {a}c'est{/a} او {a}il est{/a} دواړه د چا یا شي د معرفي کولو یا تشریح لپاره کارېږي، خو په یوه ډول نه کارول کېږي.",
+        uk: "Вирази {a}c'est{/a} та {a}il est{/a} обидва служать для представлення або опису когось чи чогось, але вживаються по-різному.",
       },
     },
     {
@@ -124,20 +111,17 @@ export const A1_GR_CEST: GrammarLesson = {
 
     {
       type: "text",
-      items: [
-        "On utilise {a}c'est{/a} au singulier et {a}ce sont{/a} au pluriel pour identifier, présenter ou donner une information générale.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["We use c'est to identify, introduce or give general information."],
-        ar: ["نستخدم c'est للتعريف أو التقديم أو لإعطاء معلومة عامة."],
-        fa: ["از c'est برای شناسایی، معرفی یا دادن اطلاعات کلی استفاده می‌کنیم."],
-        pt: ["Usamos c'est para identificar, apresentar ou dar informação geral."],
-        so: ["Waxaan isticmaalnaa c'est si loo aqoonsado, loo soo bandhigo ama loo bixiyo macluumaad guud."],
-        ti: ["c'est ንምፍላይ፣ ንምቕራብ ወይ ሓፈሻዊ ሓበሬታ ምሃብ ንጠቕሞ።"],
-        tr: ["c'est tanımlamak, tanıtmak veya genel bilgi vermek için kullanılır."],
-        ps: ["موږ c'est د پېژندلو، معرفي کولو یا عمومي معلوماتو ورکولو لپاره کاروو."],
-        uk: ["Ми використовуємо c'est для ідентифікації, представлення або надання загальної інформації."],
+      text: "On utilise {a}c'est{/a} au singulier et {a}ce sont{/a} au pluriel pour identifier, présenter ou donner une information générale.",
+      transText: {
+        en: "We use c'est to identify, introduce or give general information.",
+        ar: "نستخدم c'est للتعريف أو التقديم أو لإعطاء معلومة عامة.",
+        fa: "از c'est برای شناسایی، معرفی یا دادن اطلاعات کلی استفاده می‌کنیم.",
+        pt: "Usamos c'est para identificar, apresentar ou dar informação geral.",
+        so: "Waxaan isticmaalnaa c'est si loo aqoonsado, loo soo bandhigo ama loo bixiyo macluumaad guud.",
+        ti: "c'est ንምፍላይ፣ ንምቕራብ ወይ ሓፈሻዊ ሓበሬታ ምሃብ ንጠቕሞ።",
+        tr: "c'est tanımlamak, tanıtmak veya genel bilgi vermek için kullanılır.",
+        ps: "موږ c'est د پېژندلو، معرفي کولو یا عمومي معلوماتو ورکولو لپاره کاروو.",
+        uk: "Ми використовуємо c'est для ідентифікації, представлення або надання загальної інформації.",
       },
     },
 
@@ -195,20 +179,17 @@ export const A1_GR_CEST: GrammarLesson = {
 
     {
       type: "text",
-      items: [
-        "On utilise {a}il est{/a} au singulier et {a}ils sont{/a} au pluriel pour décrire des personnes ou des choses au masculin.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Il est / Elle est is used to describe a person or a thing."],
-        ar: ["تُستخدم il est / elle est لوصف شخص أو شيء ما."],
-        fa: ["il est / elle est برای توصیف یک شخص یا یک چیز به کار می‌رود."],
-        pt: ["Il est / Elle est é usado para descrever uma pessoa ou uma coisa."],
-        so: ["Il est / Elle est waxaa loo isticmaalaa in lagu sharaxo qof ama shay."],
-        ti: ["il est / elle est ሰብ ወይ ነገር ንምግላጽ ይጠቅም።"],
-        tr: ["Il est / Elle est bir kişiyi veya bir şeyi betimlemek için kullanılır."],
-        ps: ["Il est / Elle est د یو کس یا شي د تشریح لپاره کارول کېږي."],
-        uk: ["Il est / Elle est використовується для опису людини або речі."],
+      text: "On utilise {a}il est{/a} au singulier et {a}ils sont{/a} au pluriel pour décrire des personnes ou des choses au masculin.",
+      transText: {
+        en: "Il est / Elle est is used to describe a person or a thing.",
+        ar: "تُستخدم il est / elle est لوصف شخص أو شيء ما.",
+        fa: "il est / elle est برای توصیف یک شخص یا یک چیز به کار می‌رود.",
+        pt: "Il est / Elle est é usado para descrever uma pessoa ou uma coisa.",
+        so: "Il est / Elle est waxaa loo isticmaalaa in lagu sharaxo qof ama shay.",
+        ti: "il est / elle est ሰብ ወይ ነገር ንምግላጽ ይጠቅም።",
+        tr: "Il est / Elle est bir kişiyi veya bir şeyi betimlemek için kullanılır.",
+        ps: "Il est / Elle est د یو کس یا شي د تشریح لپاره کارول کېږي.",
+        uk: "Il est / Elle est використовується для опису людини або речі.",
       },
     },
 
@@ -298,31 +279,23 @@ export const A1_GR_CEST: GrammarLesson = {
 
     {
       type: "text",
-      items: [
-        "Quand on désigne une personne avec un nom + adjectif, utilise {a}c'est{/a}.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["When referring to a person with a noun + adjective, use {a}c'est{/a}."],
-        ar: ["عند الإشارة إلى شخص باستخدام اسم + صفة، استخدم {a}c'est{/a}."],
-        fa: ["وقتی با اسم + صفت به یک شخص اشاره می‌کنید، از {a}c'est{/a} استفاده کنید."],
-        pt: ["Quando se indica uma pessoa com nome + adjetivo, use {a}c'est{/a}."],
-        so: ["Marka qof loogu tilmaamayo magac + sifo, isticmaal {a}c'est{/a}."],
-        ti: ["ሰብ ብስም + ቅጽል ምስ እትጠቅሶ፣ {a}c'est{/a} ጠቀም።"],
-        tr: ["Bir kişiye isim + sıfat ile atıfta bulunurken {a}c'est{/a} kullanın."],
-        ps: ["کله چې یو کس د نوم + صفت په وسیله یادوئ، {a}c'est{/a} وکاروئ."],
-        uk: ["Коли позначаєте особу іменником + прикметником, використовуйте {a}c'est{/a}."],
+      text: "Quand on désigne une personne avec un nom + adjectif, utilise {a}c'est{/a}.",
+      transText: {
+        en: "When referring to a person with a noun + adjective, use {a}c'est{/a}.",
+        ar: "عند الإشارة إلى شخص باستخدام اسم + صفة، استخدم {a}c'est{/a}.",
+        fa: "وقتی با اسم + صفت به یک شخص اشاره می‌کنید، از {a}c'est{/a} استفاده کنید.",
+        pt: "Quando se indica uma pessoa com nome + adjetivo, use {a}c'est{/a}.",
+        so: "Marka qof loogu tilmaamayo magac + sifo, isticmaal {a}c'est{/a}.",
+        ti: "ሰብ ብስም + ቅጽል ምስ እትጠቅሶ፣ {a}c'est{/a} ጠቀም።",
+        tr: "Bir kişiye isim + sıfat ile atıfta bulunurken {a}c'est{/a} kullanın.",
+        ps: "کله چې یو کس د نوم + صفت په وسیله یادوئ، {a}c'est{/a} وکاروئ.",
+        uk: "Коли позначаєте особу іменником + прикметником, використовуйте {a}c'est{/a}.",
       },
     },
 
     {
       type: "text",
-      label: "",
-      items: [
-        "C'est un homme {a}gentil{/a}.",
-        "C'est une {a}grande{/a} voiture.",
-      ],
-      noBulletItems: [0, 1],
+      text: "C'est un homme {a}gentil{/a}.\nC'est une {a}grande{/a} voiture.",
     },
   ],
   exercises: [

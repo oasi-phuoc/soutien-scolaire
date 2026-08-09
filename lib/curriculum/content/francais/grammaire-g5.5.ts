@@ -64,17 +64,33 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
+      transText: {
+        en: "The negation structure uses {a}ne{/a} + {a}pas{/a}.",
+        ar: "بنية النفي تستخدم {a}ne{/a} + {a}pas{/a}.",
+        fa: "ساختار نفی از {a}ne{/a} + {a}pas{/a} استفاده می‌کند.",
+        ti: "ዝምድና ምኽሓድ {a}ne{/a} + {a}pas{/a} ይጥቀም.",
+        uk: "Структура заперечення використовує {a}ne{/a} + {a}pas{/a}.",
+      },
       items: [
-        "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
         "Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
       ],
       transItems: {
-        en: ["The negation structure uses {a}ne{/a} + {a}pas{/a}.", "Subject + {a}ne{/a} + verb + {a}pas{/a}"],
-        ar: ["بنية النفي تستخدم {a}ne{/a} + {a}pas{/a}.", "الفاعل + {a}ne{/a} + الفعل + {a}pas{/a}"],
-        fa: ["ساختار نفی از {a}ne{/a} + {a}pas{/a} استفاده می‌کند.", "فاعل + {a}ne{/a} + فعل + {a}pas{/a}"],
-        ti: ["ዝምድና ምኽሓድ {a}ne{/a} + {a}pas{/a} ይጥቀም.", "ሓካይ + {a}ne{/a} + ግሲ + {a}pas{/a}"],
-        uk: ["Структура заперечення використовує {a}ne{/a} + {a}pas{/a}.", "Підмет + {a}ne{/a} + дієслово + {a}pas{/a}"],
+        en: [
+          "Subject + {a}ne{/a} + verb + {a}pas{/a}",
+        ],
+        ar: [
+          "الفاعل + {a}ne{/a} + الفعل + {a}pas{/a}",
+        ],
+        fa: [
+          "فاعل + {a}ne{/a} + فعل + {a}pas{/a}",
+        ],
+        ti: [
+          "ሓካይ + {a}ne{/a} + ግሲ + {a}pas{/a}",
+        ],
+        uk: [
+          "Підмет + {a}ne{/a} + дієслово + {a}pas{/a}",
+        ],
       },
     },
     {
@@ -167,17 +183,33 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     { type: "heading", text: "Ne … plus", sub: true, accent: true, trans: { en: "Ne … plus", ar: "Ne … plus", fa: "Ne … plus", ti: "Ne … plus", uk: "Ne … plus" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "{a}ne … plus{/a} signifie que l'action s'est arrêtée.",
+      transText: {
+        en: "{a}ne … plus{/a} means that the action has stopped.",
+        ar: "{a}ne … plus{/a} تعني أن الفعل توقف.",
+        fa: "{a}ne … plus{/a} یعنی کنش متوقف شده است.",
+        ti: "{a}ne … plus{/a} እቲ ተግባር ደው ከም ዝበለ የመልክት።",
+        uk: "{a}ne … plus{/a} означає, що дія припинилася.",
+      },
       items: [
-        "{a}ne … plus{/a} signifie que l'action s'est arrêtée.",
         "Implique qu'avant c'était le cas, maintenant non.",
       ],
       transItems: {
-        en: ["{a}ne … plus{/a} means that the action has stopped.", "It implies that before it was the case, now it isn't."],
-        ar: ["{a}ne … plus{/a} تعني أن الفعل توقف.", "تشير إلى أنه كان كذلك من قبل، أما الآن فلا."],
-        fa: ["{a}ne … plus{/a} یعنی کنش متوقف شده است.", "اشاره دارد که قبلاً چنین بود، اکنون نه."],
-        ti: ["{a}ne … plus{/a} እቲ ተግባር ደው ከም ዝበለ የመልክት።", "ቀደም ከምኡ ከም ዝነበረ፣ ሕጂ ግን ከም ዘይኮነ የመልክት።"],
-        uk: ["{a}ne … plus{/a} означає, що дія припинилася.", "Це означає, що раніше так було, а тепер ні."],
+        en: [
+          "It implies that before it was the case, now it isn't.",
+        ],
+        ar: [
+          "تشير إلى أنه كان كذلك من قبل، أما الآن فلا.",
+        ],
+        fa: [
+          "اشاره دارد که قبلاً چنین بود، اکنون نه.",
+        ],
+        ti: [
+          "ቀደም ከምኡ ከም ዝነበረ፣ ሕጂ ግን ከም ዘይኮነ የመልክት።",
+        ],
+        uk: [
+          "Це означає, що раніше так було, а тепер ні.",
+        ],
       },
     },
     {
@@ -206,17 +238,33 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     { type: "heading", text: "Ne … que (restriction)", sub: true, accent: true, trans: { en: "Ne … que (restriction)", ar: "Ne … que (تقييد)", fa: "Ne … que (محدودیت)", ti: "Ne … que (ድረታ)", uk: "Ne … que (обмеження)" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "{a}ne … que{/a} = seulement. Ce n'est {a}pas une vraie négation{/a} — le sens est positif mais limité.",
+      transText: {
+        en: "{a}ne … que{/a} = only. It is {a}not a real negation{/a} — the meaning is positive but limited.",
+        ar: "{a}ne … que{/a} = فقط. إنه {a}ليس نفياً حقيقياً{/a} — المعنى إيجابي لكنه محدود.",
+        fa: "{a}ne … que{/a} = فقط. این {a}یک نفی واقعی نیست{/a} — معنا مثبت اما محدود است.",
+        ti: "{a}ne … que{/a} = ጥራይ። እዚ {a}ናይ ሓቂ ኣሉታ ኣይኮነን{/a} — ትርጉሙ ኣወንታዊ ግን ድሩት እዩ።",
+        uk: "{a}ne … que{/a} = лише. Це {a}не справжнє заперечення{/a} — значення позитивне, але обмежене.",
+      },
       items: [
-        "{a}ne … que{/a} = seulement. Ce n'est {a}pas une vraie négation{/a} — le sens est positif mais limité.",
         "que se place juste avant l'élément restreint.",
       ],
       transItems: {
-        en: ["{a}ne … que{/a} = only. It is {a}not a real negation{/a} — the meaning is positive but limited.", "que is placed just before the restricted element."],
-        ar: ["{a}ne … que{/a} = فقط. إنه {a}ليس نفياً حقيقياً{/a} — المعنى إيجابي لكنه محدود.", "que يوضع مباشرة قبل العنصر المقيَّد."],
-        fa: ["{a}ne … que{/a} = فقط. این {a}یک نفی واقعی نیست{/a} — معنا مثبت اما محدود است.", "que درست پیش از عنصر محدودشده قرار می‌گیرد."],
-        ti: ["{a}ne … que{/a} = ጥራይ። እዚ {a}ናይ ሓቂ ኣሉታ ኣይኮነን{/a} — ትርጉሙ ኣወንታዊ ግን ድሩት እዩ።", "que ልክዕ ቅድሚ እቲ ድሩት ነገር ይቕመጥ።"],
-        uk: ["{a}ne … que{/a} = лише. Це {a}не справжнє заперечення{/a} — значення позитивне, але обмежене.", "que ставиться безпосередньо перед обмеженим елементом."],
+        en: [
+          "que is placed just before the restricted element.",
+        ],
+        ar: [
+          "que يوضع مباشرة قبل العنصر المقيَّد.",
+        ],
+        fa: [
+          "que درست پیش از عنصر محدودشده قرار می‌گیرد.",
+        ],
+        ti: [
+          "que ልክዕ ቅድሚ እቲ ድሩት ነገር ይቕመጥ።",
+        ],
+        uk: [
+          "que ставиться безпосередньо перед обмеженим елементом.",
+        ],
       },
     },
     {

@@ -14,18 +14,17 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: ["On ajoute souvent {a}-s{/a} au pluriel."],
-      noBulletItems: [0],
-      transItems: {
-        en: ["We often add {a}-s{/a} in the plural."],
-        ar: ["غالباً نضيف {a}-s{/a} في الجمع."],
-        fa: ["در جمع اغلب {a}-s{/a} اضافه می‌کنیم."],
-        pt: ["Muitas vezes acrescentamos {a}-s{/a} no plural."],
-        so: ["Badanaa waxaan ku darnaa {a}-s{/a} jamaca."],
-        ti: ["ኣብ ባዙሕ ብዙሕ ግዜ {a}-s{/a} ንውስኽ።"],
-        tr: ["Çoğulda genellikle {a}-s{/a} ekleriz."],
-        ps: ["په جمع کې ډېری وخت {a}-s{/a} ورزیاتوو."],
-        uk: ["У множині часто додаємо {a}-s{/a}."],
+      text: "On ajoute souvent {a}-s{/a} au pluriel.",
+      transText: {
+        en: "We often add {a}-s{/a} in the plural.",
+        ar: "غالباً نضيف {a}-s{/a} في الجمع.",
+        fa: "در جمع اغلب {a}-s{/a} اضافه می‌کنیم.",
+        pt: "Muitas vezes acrescentamos {a}-s{/a} no plural.",
+        so: "Badanaa waxaan ku darnaa {a}-s{/a} jamaca.",
+        ti: "ኣብ ባዙሕ ብዙሕ ግዜ {a}-s{/a} ንውስኽ።",
+        tr: "Çoğulda genellikle {a}-s{/a} ekleriz.",
+        ps: "په جمع کې ډېری وخت {a}-s{/a} ورزیاتوو.",
+        uk: "У множині часто додаємо {a}-s{/a}.",
       },
     },
     {
@@ -50,20 +49,17 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Si l'adjectif singulier se termine par {a}s{/a} ou {a}x{/a}, le pluriel ne change pas.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["If the singular adjective ends in {a}s{/a} or {a}x{/a}, the plural does not change."],
-        ar: ["إذا انتهت الصفة المفردة بـ {a}s{/a} أو {a}x{/a}، لا يتغيّر الجمع."],
-        fa: ["اگر صفت مفرد به {a}s{/a} یا {a}x{/a} ختم شود، جمع تغییر نمی‌کند."],
-        pt: ["Se o adjetivo no singular terminar em {a}s{/a} ou {a}x{/a}, o plural não muda."],
-        so: ["Haddii sifada keli ay ku dhammaato {a}s{/a} ama {a}x{/a}, jamacu ma isbeddelo."],
-        ti: ["እቲ ንጽል ቅጽል ብ {a}s{/a} ወይ {a}x{/a} እንተወዲኡ፣ እቲ ባዙሕ ኣይቕየርን።"],
-        tr: ["Tekil sıfat {a}s{/a} veya {a}x{/a} ile bitiyorsa, çoğul değişmez."],
-        ps: ["که مفرد صفت په {a}s{/a} یا {a}x{/a} پای ته رسېږي، جمع یې نه بدلېږي."],
-        uk: ["Якщо прикметник в однині закінчується на {a}s{/a} або {a}x{/a}, множина не змінюється."],
+      text: "Si l'adjectif singulier se termine par {a}s{/a} ou {a}x{/a}, le pluriel ne change pas.",
+      transText: {
+        en: "If the singular adjective ends in {a}s{/a} or {a}x{/a}, the plural does not change.",
+        ar: "إذا انتهت الصفة المفردة بـ {a}s{/a} أو {a}x{/a}، لا يتغيّر الجمع.",
+        fa: "اگر صفت مفرد به {a}s{/a} یا {a}x{/a} ختم شود، جمع تغییر نمی‌کند.",
+        pt: "Se o adjetivo no singular terminar em {a}s{/a} ou {a}x{/a}, o plural não muda.",
+        so: "Haddii sifada keli ay ku dhammaato {a}s{/a} ama {a}x{/a}, jamacu ma isbeddelo.",
+        ti: "እቲ ንጽል ቅጽል ብ {a}s{/a} ወይ {a}x{/a} እንተወዲኡ፣ እቲ ባዙሕ ኣይቕየርን።",
+        tr: "Tekil sıfat {a}s{/a} veya {a}x{/a} ile bitiyorsa, çoğul değişmez.",
+        ps: "که مفرد صفت په {a}s{/a} یا {a}x{/a} پای ته رسېږي، جمع یې نه بدلېږي.",
+        uk: "Якщо прикметник в однині закінчується на {a}s{/a} або {a}x{/a}, множина не змінюється.",
       },
     },
     {
@@ -93,20 +89,17 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Les adjectifs de couleur dérivés d'un nom sont invariables.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Color adjectives derived from a noun are invariable."],
-        ar: ["صفات اللون المشتقة من اسم لا تتغيّر."],
-        fa: ["صفت‌های رنگی که از یک اسم ساخته شده‌اند تغییرناپذیرند."],
-        pt: ["Os adjetivos de cor derivados de um nome são invariáveis."],
-        so: ["Sifooyinka midabka ee ka yimid magac isma beddelaan."],
-        ti: ["ካብ ስም ዝመጹ ናይ ሕብሪ ቅጽላት ኣይቕየሩን።"],
-        tr: ["Bir isimden türeyen renk sıfatları değişmez."],
-        ps: ["هغه د رنګ صفتونه چې له اسم څخه جوړ شوي وي، نه بدلېږي."],
-        uk: ["Прикметники кольору, утворені від іменника, є незмінними."],
+      text: "Les adjectifs de couleur dérivés d'un nom sont invariables.",
+      transText: {
+        en: "Color adjectives derived from a noun are invariable.",
+        ar: "صفات اللون المشتقة من اسم لا تتغيّر.",
+        fa: "صفت‌های رنگی که از یک اسم ساخته شده‌اند تغییرناپذیرند.",
+        pt: "Os adjetivos de cor derivados de um nome são invariáveis.",
+        so: "Sifooyinka midabka ee ka yimid magac isma beddelaan.",
+        ti: "ካብ ስም ዝመጹ ናይ ሕብሪ ቅጽላት ኣይቕየሩን።",
+        tr: "Bir isimden türeyen renk sıfatları değişmez.",
+        ps: "هغه د رنګ صفتونه چې له اسم څخه جوړ شوي وي، نه بدلېږي.",
+        uk: "Прикметники кольору, утворені від іменника, є незмінними.",
       },
     },
     {
@@ -189,38 +182,17 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Le {a}féminin{/a} pluriel reste régulier (+ {a}s{/a}).",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: [
-          "The {a}feminine{/a} plural stays regular (+ {a}s{/a})."
-        ],
-        ar: [
-          "يبقى جمع {a}المؤنث{/a} منتظماً (+ {a}s{/a})."
-        ],
-        fa: [
-          "جمع {a}مؤنث{/a} منظم می‌ماند (+ {a}s{/a})."
-        ],
-        pt: [
-          "O plural {a}feminino{/a} mantém-se regular (+ {a}s{/a})."
-        ],
-        so: [
-          "Jamac {a}dheddig{/a} wuxuu ahaanayaa caadi (+ {a}s{/a})."
-        ],
-        ti: [
-          "እቲ ባዙሕ {a}ኣንስተይቲ{/a} ስሩዕ ኮይኑ ይቕጽል (+ {a}s{/a})።"
-        ],
-        tr: [
-          " {a}Dişil{/a} çoğul düzenli kalır (+ {a}s{/a})."
-        ],
-        ps: [
-          "{a}مؤنث{/a} جمع منظم پاتې کېږي (+ {a}s{/a})."
-        ],
-        uk: [
-          "{a}Жіноча{/a} форма множини залишається регулярною (+ {a}s{/a})."
-        ],
+      text: "Le {a}féminin{/a} pluriel reste régulier (+ {a}s{/a}).",
+      transText: {
+        en: "The {a}feminine{/a} plural stays regular (+ {a}s{/a}).",
+        ar: "يبقى جمع {a}المؤنث{/a} منتظماً (+ {a}s{/a}).",
+        fa: "جمع {a}مؤنث{/a} منظم می‌ماند (+ {a}s{/a}).",
+        pt: "O plural {a}feminino{/a} mantém-se regular (+ {a}s{/a}).",
+        so: "Jamac {a}dheddig{/a} wuxuu ahaanayaa caadi (+ {a}s{/a}).",
+        ti: "እቲ ባዙሕ {a}ኣንስተይቲ{/a} ስሩዕ ኮይኑ ይቕጽል (+ {a}s{/a})።",
+        tr: " {a}Dişil{/a} çoğul düzenli kalır (+ {a}s{/a}).",
+        ps: "{a}مؤنث{/a} جمع منظم پاتې کېږي (+ {a}s{/a}).",
+        uk: "{a}Жіноча{/a} форма множини залишається регулярною (+ {a}s{/a}).",
       },
     },
     {
@@ -230,42 +202,21 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
         {
           label: "-al",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots {a}masculins{/a} terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: [
-                  " {a}Masculine{/a} words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural."
-                ],
-                ar: [
-                  "الكلمات {a}المذكرة{/a} المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع."
-                ],
-                fa: [
-                  "کلمات {a}مذکر{/a} که در مفرد به {a}-al{/a} ختم می‌شوند، در جمع به {a}-aux{/a} تغییر می‌کنند."
-                ],
-                pt: [
-                  "As palavras {a}masculinas{/a} terminadas em {a}-al{/a} no singular passam a {a}-aux{/a} no plural."
-                ],
-                so: [
-                  "Erayada {a}lab{/a} ee ku dhammaada {a}-al{/a} marka ay keli yihiin waxay jamaca isu beddelaan {a}-aux{/a}."
-                ],
-                ti: [
-                  "እቶም {a}ተባዕታይ{/a} ቃላት ብንጽል ብ {a}-al{/a} ዝውድኡ ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።"
-                ],
-                tr: [
-                  "{a}Eril{/a} ve tekilde {a}-al{/a} ile biten kelimeler çoğulda {a}-aux{/a} olur."
-                ],
-                ps: [
-                  "{a}مذکر{/a} هغه کلمې چې په مفرد کې په {a}-al{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} ته بدلېږي."
-                ],
-                uk: [
-                  "{a}Чоловічі{/a} слова, що закінчуються на {a}-al{/a} в однині, змінюються на {a}-aux{/a} у множині."
-                ],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots {a}masculins{/a} terminant par {a}-al{/a} au singulier changent en {a}-aux{/a} au pluriel.",
+      transText: {
+        en: " {a}Masculine{/a} words ending in {a}-al{/a} in the singular change to {a}-aux{/a} in the plural.",
+        ar: "الكلمات {a}المذكرة{/a} المنتهية بـ {a}-al{/a} في المفرد تصبح {a}-aux{/a} في الجمع.",
+        fa: "کلمات {a}مذکر{/a} که در مفرد به {a}-al{/a} ختم می‌شوند، در جمع به {a}-aux{/a} تغییر می‌کنند.",
+        pt: "As palavras {a}masculinas{/a} terminadas em {a}-al{/a} no singular passam a {a}-aux{/a} no plural.",
+        so: "Erayada {a}lab{/a} ee ku dhammaada {a}-al{/a} marka ay keli yihiin waxay jamaca isu beddelaan {a}-aux{/a}.",
+        ti: "እቶም {a}ተባዕታይ{/a} ቃላት ብንጽል ብ {a}-al{/a} ዝውድኡ ኣብ ባዙሕ ናብ {a}-aux{/a} ይቕየሩ።",
+        tr: "{a}Eril{/a} ve tekilde {a}-al{/a} ile biten kelimeler çoğulda {a}-aux{/a} olur.",
+        ps: "{a}مذکر{/a} هغه کلمې چې په مفرد کې په {a}-al{/a} پای ته رسېږي، په جمع کې {a}-aux{/a} ته بدلېږي.",
+        uk: "{a}Чоловічі{/a} слова, що закінчуються на {a}-al{/a} в однині, змінюються на {a}-aux{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],
@@ -312,24 +263,21 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
         {
           label: "-eau",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-eau{/a} in the singular change to {a}-eaux{/a} in the plural."],
-                ar: ["الكلمات المنتهية بـ {a}-eau{/a} في المفرد تصبح {a}-eaux{/a} في الجمع."],
-                fa: ["کلماتی که در مفرد به {a}-eau{/a} ختم می‌شوند در جمع به {a}-eaux{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-eau{/a} no singular passam a {a}-eaux{/a} no plural."],
-                so: ["Erayada ku dhammaada {a}-eau{/a} marka ay keli yihiin waxay jamaca isu beddelaan {a}-eaux{/a}."],
-                ti: ["ብንጽል ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eaux{/a} ይቕየሩ።"],
-                tr: ["{a}-eau{/a} ile biten tekil sözcükler çoğulda {a}-eaux{/a} olur."],
-                ps: ["هغه کلمې چې په مفرد کې په {a}-eau{/a} پای ته رسېږي، په جمع کې {a}-eaux{/a} ته بدلېږي."],
-                uk: ["Слова на {a}-eau{/a} в однині змінюються на {a}-eaux{/a} у множині."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-eau{/a} au singulier changent en {a}-eaux{/a} au pluriel.",
+      transText: {
+        en: "Words ending in {a}-eau{/a} in the singular change to {a}-eaux{/a} in the plural.",
+        ar: "الكلمات المنتهية بـ {a}-eau{/a} في المفرد تصبح {a}-eaux{/a} في الجمع.",
+        fa: "کلماتی که در مفرد به {a}-eau{/a} ختم می‌شوند در جمع به {a}-eaux{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-eau{/a} no singular passam a {a}-eaux{/a} no plural.",
+        so: "Erayada ku dhammaada {a}-eau{/a} marka ay keli yihiin waxay jamaca isu beddelaan {a}-eaux{/a}.",
+        ti: "ብንጽል ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ባዙሕ ናብ {a}-eaux{/a} ይቕየሩ።",
+        tr: "{a}-eau{/a} ile biten tekil sözcükler çoğulda {a}-eaux{/a} olur.",
+        ps: "هغه کلمې چې په مفرد کې په {a}-eau{/a} پای ته رسېږي، په جمع کې {a}-eaux{/a} ته بدلېږي.",
+        uk: "Слова на {a}-eau{/a} в однині змінюються на {a}-eaux{/a} у множині.",
+      },
+    },
             {
               type: "grid",
               headers: ["Singulier", "Pluriel"],

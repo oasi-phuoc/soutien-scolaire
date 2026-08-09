@@ -13,10 +13,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "La phrase exclamative exprime différents sentiments : la surprise, l'admiration, la joie, le découragement, le regret…",
-      ],
-      noBulletItems: [0],
+      text: "La phrase exclamative exprime différents sentiments : la surprise, l'admiration, la joie, le découragement, le regret…",
     },
     {
       type: "heading",

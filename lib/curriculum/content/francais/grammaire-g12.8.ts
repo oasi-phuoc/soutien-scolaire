@@ -25,10 +25,7 @@ export const A1_GR_PRONOMS_POSSESSIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "La forme dépend du possesseur et du nom remplacé (genre et nombre).",
-      ],
-      noBulletItems: [0],
+      text: "La forme dépend du possesseur et du nom remplacé (genre et nombre).",
     },
     {
       type: "grid",
@@ -54,10 +51,7 @@ export const A1_GR_PRONOMS_POSSESSIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Différence entre adjectifs {a}notre / votre{/a} et pronoms {a}nôtre / vôtre{/a}. → C'est bien votre voiture ? — Oui, c'est la nôtre.",
-      ],
-      noBulletItems: [0],
+      text: "Différence entre adjectifs {a}notre / votre{/a} et pronoms {a}nôtre / vôtre{/a}. → C'est bien votre voiture ? — Oui, c'est la nôtre.",
     },
   ],
   exercises: [

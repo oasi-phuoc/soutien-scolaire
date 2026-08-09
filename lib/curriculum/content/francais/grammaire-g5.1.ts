@@ -9,16 +9,13 @@ export const A1_GR_PHRASES: GrammarLesson = {
     { type: "heading", text: "La structure de la phrase", trans: { en: "The structure of the sentence", ar: "بنية الجملة", fa: "ساختار جمله", ti: "ቅርጺ ሓሳብ", uk: "Структура речення" } },
     {
       type: "text",
-      items: [
-        "En français, une phrase suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["In French, a sentence follows the order: {su}Subject{/su} + {ve}Verb{/ve} + {co}Complement{/co}."],
-        ar: ["في الفرنسية، تتبع الجملة الترتيب: {su}الفاعل{/su} + {ve}الفعل{/ve} + {co}المتمم{/co}."],
-        fa: ["در فرانسه، جمله از ترتیب زیر پیروی می‌کند: {su}فاعل{/su} + {ve}فعل{/ve} + {co}متمم{/co}."],
-        ti: ["ብፈረንሳይ፣ ሓሳብ ነዚ ስርዓት ይኸተል: {su}ሓካይ{/su} + {ve}ግሲ{/ve} + {co}መወከስ{/co}."],
-        uk: ["У французькій, речення слідує порядку: {su}Підмет{/su} + {ve}Присудок{/ve} + {co}Додаток{/co}."],
+      text: "En français, une phrase suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
+      transText: {
+        en: "In French, a sentence follows the order: {su}Subject{/su} + {ve}Verb{/ve} + {co}Complement{/co}.",
+        ar: "في الفرنسية، تتبع الجملة الترتيب: {su}الفاعل{/su} + {ve}الفعل{/ve} + {co}المتمم{/co}.",
+        fa: "در فرانسه، جمله از ترتیب زیر پیروی می‌کند: {su}فاعل{/su} + {ve}فعل{/ve} + {co}متمم{/co}.",
+        ti: "ብፈረንሳይ፣ ሓሳብ ነዚ ስርዓት ይኸተል: {su}ሓካይ{/su} + {ve}ግሲ{/ve} + {co}መወከስ{/co}.",
+        uk: "У французькій, речення слідує порядку: {su}Підмет{/su} + {ve}Присудок{/ve} + {co}Додаток{/co}.",
       },
     },
     {
@@ -49,31 +46,51 @@ export const A1_GR_PHRASES: GrammarLesson = {
     { type: "heading", text: "Le sujet (S)", sub: true, trans: { en: "The subject (S)", ar: "الفاعل (S)", fa: "فاعل (S)", ti: "ሓካይ (S)", uk: "Підмет (S)" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "Le sujet répond à la question : {a}Qui fait l'action ?{/a}",
+      transText: {
+        en: "The subject answers the question: {a}Who performs the action?{/a}",
+        ar: "الفاعل يجيب على السؤال: {a}من يقوم بالفعل؟{/a}",
+        fa: "فاعل به سؤال پاسخ می‌دهد: {a}چه کسی عمل را انجام می‌دهد؟{/a}",
+        ti: "ሓካይ ነዚ ሕቶ ይምልስ: {a}መን ስራሕ ይሰርሕ?{/a}",
+        uk: "Підмет відповідає на запитання: {a}Хто виконує дію?{/a}",
+      },
       items: [
-        "Le sujet répond à la question : {a}Qui fait l'action ?{/a}",
         "C'est souvent un pronom ({a}je, tu, il, elle…{/a}) ou un nom ({a}Marie, le chat…{/a}).",
         "Le verbe s'accorde toujours avec le sujet.",
       ],
       transItems: {
-        en: ["The subject answers the question: {a}Who performs the action?{/a}", "It is often a pronoun ({a}I, you, he, she…{/a}) or a noun ({a}Marie, the cat…{/a}).", "The verb always agrees with the subject."],
-        ar: ["الفاعل يجيب على السؤال: {a}من يقوم بالفعل؟{/a}", "غالبًا ضمير ({a}أنا، أنت، هو، هي…{/a}) أو اسم ({a}ماري، القط…{/a}).", "يتوافق الفعل دائمًا مع الفاعل."],
-        fa: ["فاعل به سؤال پاسخ می‌دهد: {a}چه کسی عمل را انجام می‌دهد؟{/a}", "اغلب یک ضمیر ({a}من، تو، او…{/a}) یا یک اسم ({a}ماری، گربه…{/a}) است.", "فعل همیشه با فاعل مطابقت دارد."],
-        ti: ["ሓካይ ነዚ ሕቶ ይምልስ: {a}መን ስራሕ ይሰርሕ?{/a}", "ብብዝሒ ተዛረብቲ ({a}ኣነ፣ ንስኻ፣ ንሱ/ንሳ…{/a}) ወይ ሽም ({a}ማሪ፣ ድሙ…{/a}) እዩ.", "ግሲ ምስ ሓካይ ኩሉ ጊዜ ይሰማማዕ."],
-        uk: ["Підмет відповідає на запитання: {a}Хто виконує дію?{/a}", "Це часто займенник ({a}я, ти, він, вона…{/a}) або іменник ({a}Марі, кіт…{/a}).", "Дієслово завжди узгоджується з підметом."],
+        en: [
+          "It is often a pronoun ({a}I, you, he, she…{/a}) or a noun ({a}Marie, the cat…{/a}).",
+          "The verb always agrees with the subject.",
+        ],
+        ar: [
+          "غالبًا ضمير ({a}أنا، أنت، هو، هي…{/a}) أو اسم ({a}ماري، القط…{/a}).",
+          "يتوافق الفعل دائمًا مع الفاعل.",
+        ],
+        fa: [
+          "اغلب یک ضمیر ({a}من، تو، او…{/a}) یا یک اسم ({a}ماری، گربه…{/a}) است.",
+          "فعل همیشه با فاعل مطابقت دارد.",
+        ],
+        ti: [
+          "ብብዝሒ ተዛረብቲ ({a}ኣነ፣ ንስኻ፣ ንሱ/ንሳ…{/a}) ወይ ሽም ({a}ማሪ፣ ድሙ…{/a}) እዩ.",
+          "ግሲ ምስ ሓካይ ኩሉ ጊዜ ይሰማማዕ.",
+        ],
+        uk: [
+          "Це часто займенник ({a}я, ти, він, вона…{/a}) або іменник ({a}Марі, кіт…{/a}).",
+          "Дієслово завжди узгоджується з підметом.",
+        ],
       },
     },
     { type: "heading", text: "Le verbe (V)", sub: true, trans: { en: "The verb (V)", ar: "الفعل (V)", fa: "فعل (V)", ti: "ግሲ (V)", uk: "Присудок (V)" } },
     {
       type: "text",
-      noBulletItems: [0],
-      items: ["Le verbe exprime {a}l'action{/a} ou {a}l'état{/a} du sujet."],
-      transItems: {
-        en: ["The verb expresses {a}the action{/a} or {a}the state{/a} of the subject."],
-        ar: ["الفعل يعبر عن {a}الحدث{/a} أو {a}الحالة{/a} للفاعل."],
-        fa: ["فعل {a}عمل{/a} یا {a}حالت{/a} فاعل را بیان می‌کند."],
-        ti: ["ግሲ {a}ስራሕ{/a} ወይ {a}ሃለዋት{/a} ናይ ሓካይ ይገልጽ."],
-        uk: ["Дієслово виражає {a}дію{/a} або {a}стан{/a} підмета."],
+      text: "Le verbe exprime {a}l'action{/a} ou {a}l'état{/a} du sujet.",
+      transText: {
+        en: "The verb expresses {a}the action{/a} or {a}the state{/a} of the subject.",
+        ar: "الفعل يعبر عن {a}الحدث{/a} أو {a}الحالة{/a} للفاعل.",
+        fa: "فعل {a}عمل{/a} یا {a}حالت{/a} فاعل را بیان می‌کند.",
+        ti: "ግሲ {a}ስራሕ{/a} ወይ {a}ሃለዋት{/a} ናይ ሓካይ ይገልጽ.",
+        uk: "Дієслово виражає {a}дію{/a} або {a}стан{/a} підмета.",
       },
     },
     {
@@ -105,14 +122,13 @@ export const A1_GR_PHRASES: GrammarLesson = {
     { type: "heading", text: "Le complément (C)", sub: true, trans: { en: "The complement (C)", ar: "المتمم (C)", fa: "متمم (C)", ti: "መወከስ (C)", uk: "Додаток (C)" } },
     {
       type: "text",
-      items: ["Le complément complète le verbe. Le complément n'est pas toujours obligatoire. Il y a trois types :"],
-      noBulletItems: [0],
-      transItems: {
-        en: ["The complement completes the verb. The complement is not always required. There are three types:"],
-        ar: ["المتمم يكمل الفعل. المتمم ليس دائمًا إلزاميًا. هناك ثلاثة أنواع:"],
-        fa: ["متمم فعل را تکمیل می‌کند. متمم همیشه اجباری نیست. سه نوع وجود دارد:"],
-        ti: ["መወከስ ግሲ ይምልእ. ኩሉ ጊዜ ግዴታ ኣይኮነን. ሰለስተ ዓይነታት ኣለዉ:"],
-        uk: ["Додаток доповнює дієслово. Він не завжди обов'язковий. Є три типи:"],
+      text: "Le complément complète le verbe. Le complément n'est pas toujours obligatoire. Il y a trois types :",
+      transText: {
+        en: "The complement completes the verb. The complement is not always required. There are three types:",
+        ar: "المتمم يكمل الفعل. المتمم ليس دائمًا إلزاميًا. هناك ثلاثة أنواع:",
+        fa: "متمم فعل را تکمیل می‌کند. متمم همیشه اجباری نیست. سه نوع وجود دارد:",
+        ti: "መወከስ ግሲ ይምልእ. ኩሉ ጊዜ ግዴታ ኣይኮነን. ሰለስተ ዓይነታት ኣለዉ:",
+        uk: "Додаток доповнює дієслово. Він не завжди обов'язковий. Є три типи:",
       },
     },
     {

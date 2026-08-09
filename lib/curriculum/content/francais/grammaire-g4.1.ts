@@ -13,10 +13,7 @@ export const A1_GR_L04: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Les articles accompagnent un nom. Ils indiquent son genre ({a}masculin{/a} ou {a}féminin{/a}) et son nombre ({a}singulier{/a} ou {a}pluriel{/a}).",
-      ],
-      noBulletItems: [0],
+      text: "Les articles accompagnent un nom. Ils indiquent son genre ({a}masculin{/a} ou {a}féminin{/a}) et son nombre ({a}singulier{/a} ou {a}pluriel{/a}).",
     },
     {
       type: "heading",
@@ -24,10 +21,7 @@ export const A1_GR_L04: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Les articles définis sont {a}le{/a}, {a}la{/a}, {a}l'{/a} et {a}les{/a}. On utilise ces articles pour parler de :",
-      ],
-      noBulletItems: [0],
+      text: "Les articles définis sont {a}le{/a}, {a}la{/a}, {a}l'{/a} et {a}les{/a}. On utilise ces articles pour parler de :",
     },
     {
       type: "text",
@@ -54,10 +48,7 @@ export const A1_GR_L04: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Les articles indéfinis sont {a}un{/a}, {a}une{/a} et {a}des{/a}. On utilise ces articles pour parler de :",
-      ],
-      noBulletItems: [0],
+      text: "Les articles indéfinis sont {a}un{/a}, {a}une{/a} et {a}des{/a}. On utilise ces articles pour parler de :",
     },
     {
       type: "text",
@@ -70,10 +61,7 @@ export const A1_GR_L04: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "{a}2. Quantité{/a}",
-      ],
-      noBulletItems: [0],
+      text: "{a}2. Quantité{/a}",
     },
     {
       type: "text",
@@ -99,10 +87,7 @@ export const A1_GR_L04: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "L'article se place devant un nom ou un groupe nominal et s'accorde en genre et en nombre.",
-      ],
-      noBulletItems: [0],
+      text: "L'article se place devant un nom ou un groupe nominal et s'accorde en genre et en nombre.",
     },
     {
       type: "grid",

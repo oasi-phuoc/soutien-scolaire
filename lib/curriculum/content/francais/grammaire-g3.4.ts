@@ -14,30 +14,22 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "En général, l'adjectif qualificatif se place {a}après{/a} le nom.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["In general, a descriptive adjective is placed {a}after{/a} the noun."],
-        ar: ["عمومًا، تأتي الصفة الوصفية {a}بعد{/a} الاسم."],
-        fa: ["به طور کلی، صفت توصیفی {a}بعد{/a} از اسم می‌آید."],
-        pt: ["Em geral, o adjetivo qualificativo coloca-se {a}depois{/a} do nome."],
-        so: ["Guud ahaan, sifada tilmaanta waxaa la dhigaa {a}ka dib{/a} magaca."],
-        ti: ["ብሓፈሻ፣ ገላጺ ቅጽል {a}ድሕሪ{/a} ስም ይመጽእ።"],
-        tr: ["Genel olarak niteleme sıfatı isimden {a}sonra{/a} gelir."],
-        ps: ["په عمومي ډول، توصیفي صفت د اسم {a}وروسته{/a} راځي."],
-        uk: ["Зазвичай описовий прикметник стоїть {a}після{/a} іменника."],
+      text: "En général, l'adjectif qualificatif se place {a}après{/a} le nom.",
+      transText: {
+        en: "In general, a descriptive adjective is placed {a}after{/a} the noun.",
+        ar: "عمومًا، تأتي الصفة الوصفية {a}بعد{/a} الاسم.",
+        fa: "به طور کلی، صفت توصیفی {a}بعد{/a} از اسم می‌آید.",
+        pt: "Em geral, o adjetivo qualificativo coloca-se {a}depois{/a} do nome.",
+        so: "Guud ahaan, sifada tilmaanta waxaa la dhigaa {a}ka dib{/a} magaca.",
+        ti: "ብሓፈሻ፣ ገላጺ ቅጽል {a}ድሕሪ{/a} ስም ይመጽእ።",
+        tr: "Genel olarak niteleme sıfatı isimden {a}sonra{/a} gelir.",
+        ps: "په عمومي ډول، توصیفي صفت د اسم {a}وروسته{/a} راځي.",
+        uk: "Зазвичай описовий прикметник стоїть {a}після{/a} іменника.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "J'habite dans une maison {a}moderne{/a}.",
-        "Elle porte une robe {a}rouge{/a}.",
-      ],
-      noBulletItems: [0, 1],
+      text: "J'habite dans une maison {a}moderne{/a}.\nElle porte une robe {a}rouge{/a}.",
     },
     {
       type: "heading",
@@ -46,38 +38,17 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Certains adjectifs courts et très fréquents se placent généralement {a}avant{/a} le nom. Ils appartiennent souvent à la catégorie {a}BAGS{/a}.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: [
-          "Some short and very common adjectives are usually placed {a}before{/a} the noun. They often belong to the {a}BAGS{/a} category."
-        ],
-        ar: [
-          "بعض الصفات القصيرة والشائعة جدًا تأتي عادةً {a}قبل{/a} الاسم. وغالبًا ما تنتمي إلى فئة {a}BAGS{/a}."
-        ],
-        fa: [
-          "برخی صفت‌های کوتاه و بسیار رایج معمولاً {a}پیش از{/a} اسم می‌آیند. آن‌ها اغلب به دستهٔ {a}BAGS{/a} تعلق دارند."
-        ],
-        pt: [
-          "Alguns adjetivos curtos e muito frequentes colocam-se geralmente {a}antes{/a} do nome. Pertencem muitas vezes à categoria {a}BAGS{/a}."
-        ],
-        so: [
-          "Qaar ka mid ah sifooyinka gaagaaban oo aad loo isticmaalo badanaa waxaa la dhigaa {a}ka hor{/a} magaca. Waxay inta badan ka tirsan yihiin qaybta {a}BAGS{/a}."
-        ],
-        ti: [
-          "ገለ ሓጸርቲን ኣዝዮም ተደጋጋሚ ቅጽላትን ብሓፈሻ {a}ቅድሚ{/a} ስም ይመጹ። ብዙሕ ግዜ ናብ ምድብ {a}BAGS{/a} ይኣትዉ።"
-        ],
-        tr: [
-          "Bazı kısa ve çok yaygın sıfatlar genellikle isimden {a}önce{/a} gelir. Çoğu zaman {a}BAGS{/a} kategorisine girerler."
-        ],
-        ps: [
-          "ځینې لنډ او ډېر کارېدونکي صفتونه عموماً د اسم {a}مخکې{/a} راځي. دوی ډېری وخت د {a}BAGS{/a} کټګورۍ پورې اړه لري."
-        ],
-        uk: [
-          "Деякі короткі й дуже вживані прикметники зазвичай стоять {a}перед{/a} іменником. Вони часто належать до категорії {a}BAGS{/a}."
-        ],
+      text: "Certains adjectifs courts et très fréquents se placent généralement {a}avant{/a} le nom. Ils appartiennent souvent à la catégorie {a}BAGS{/a}.",
+      transText: {
+        en: "Some short and very common adjectives are usually placed {a}before{/a} the noun. They often belong to the {a}BAGS{/a} category.",
+        ar: "بعض الصفات القصيرة والشائعة جدًا تأتي عادةً {a}قبل{/a} الاسم. وغالبًا ما تنتمي إلى فئة {a}BAGS{/a}.",
+        fa: "برخی صفت‌های کوتاه و بسیار رایج معمولاً {a}پیش از{/a} اسم می‌آیند. آن‌ها اغلب به دستهٔ {a}BAGS{/a} تعلق دارند.",
+        pt: "Alguns adjetivos curtos e muito frequentes colocam-se geralmente {a}antes{/a} do nome. Pertencem muitas vezes à categoria {a}BAGS{/a}.",
+        so: "Qaar ka mid ah sifooyinka gaagaaban oo aad loo isticmaalo badanaa waxaa la dhigaa {a}ka hor{/a} magaca. Waxay inta badan ka tirsan yihiin qaybta {a}BAGS{/a}.",
+        ti: "ገለ ሓጸርቲን ኣዝዮም ተደጋጋሚ ቅጽላትን ብሓፈሻ {a}ቅድሚ{/a} ስም ይመጹ። ብዙሕ ግዜ ናብ ምድብ {a}BAGS{/a} ይኣትዉ።",
+        tr: "Bazı kısa ve çok yaygın sıfatlar genellikle isimden {a}önce{/a} gelir. Çoğu zaman {a}BAGS{/a} kategorisine girerler.",
+        ps: "ځینې لنډ او ډېر کارېدونکي صفتونه عموماً د اسم {a}مخکې{/a} راځي. دوی ډېری وخت د {a}BAGS{/a} کټګورۍ پورې اړه لري.",
+        uk: "Деякі короткі й дуже вживані прикметники зазвичай стоять {a}перед{/a} іменником. Вони часто належать до категорії {a}BAGS{/a}.",
       },
     },
     {
@@ -110,20 +81,17 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Les adjectifs se placent toujours après le nom lorsqu'ils indiquent :",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Adjectives are always placed after the noun when they indicate:"],
-        ar: ["تأتي الصفات دائمًا بعد الاسم عندما تدل على:"],
-        fa: ["صفت‌ها همیشه پس از اسم می‌آیند وقتی نشان‌دهندهٔ موارد زیر باشند:"],
-        pt: ["Os adjetivos colocam-se sempre depois do nome quando indicam:"],
-        so: ["Sifooyinka had iyo jeer waxaa la dhigaa ka dib magaca marka ay tilmaamayaan:"],
-        ti: ["ቅጽላት ነዚ እንተመልከቱ ወትሩ ድሕሪ ስም ይመጹ፦"],
-        tr: ["Sıfatlar şunları belirttiğinde her zaman isimden sonra gelir:"],
-        ps: ["صفتونه تل د اسم وروسته راځي کله چې دا شیان ښيي:"],
-        uk: ["Прикметники завжди стоять після іменника, коли вказують на:"],
+      text: "Les adjectifs se placent toujours après le nom lorsqu'ils indiquent :",
+      transText: {
+        en: "Adjectives are always placed after the noun when they indicate:",
+        ar: "تأتي الصفات دائمًا بعد الاسم عندما تدل على:",
+        fa: "صفت‌ها همیشه پس از اسم می‌آیند وقتی نشان‌دهندهٔ موارد زیر باشند:",
+        pt: "Os adjetivos colocam-se sempre depois do nome quando indicam:",
+        so: "Sifooyinka had iyo jeer waxaa la dhigaa ka dib magaca marka ay tilmaamayaan:",
+        ti: "ቅጽላት ነዚ እንተመልከቱ ወትሩ ድሕሪ ስም ይመጹ፦",
+        tr: "Sıfatlar şunları belirttiğinde her zaman isimden sonra gelir:",
+        ps: "صفتونه تل د اسم وروسته راځي کله چې دا شیان ښيي:",
+        uk: "Прикметники завжди стоять після іменника, коли вказують на:",
       },
     },
     {
@@ -158,20 +126,17 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Certains adjectifs changent de place selon le sens recherché.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Some adjectives change position depending on the intended meaning."],
-        ar: ["بعض الصفات تغيّر مكانها بحسب المعنى المقصود."],
-        fa: ["بعضی صفت‌ها بسته به معنای مورد نظر جای خود را تغییر می‌دهند."],
-        pt: ["Alguns adjetivos mudam de posição conforme o sentido pretendido."],
-        so: ["Qaar ka mid ah sifooyinka waxay beddelaan booskooda iyadoo ku xiran macnaha la rabo."],
-        ti: ["ገለ ቅጽላት ከከም ዝድለ ትርጉም ቦታኦም ይቕይሩ።"],
-        tr: ["Bazı sıfatlar amaçlanan anlama göre yer değiştirir."],
-        ps: ["ځینې صفتونه د غوښتل شوي معنا له مخې خپل ځای بدلوي."],
-        uk: ["Деякі прикметники змінюють місце залежно від потрібного значення."],
+      text: "Certains adjectifs changent de place selon le sens recherché.",
+      transText: {
+        en: "Some adjectives change position depending on the intended meaning.",
+        ar: "بعض الصفات تغيّر مكانها بحسب المعنى المقصود.",
+        fa: "بعضی صفت‌ها بسته به معنای مورد نظر جای خود را تغییر می‌دهند.",
+        pt: "Alguns adjetivos mudam de posição conforme o sentido pretendido.",
+        so: "Qaar ka mid ah sifooyinka waxay beddelaan booskooda iyadoo ku xiran macnaha la rabo.",
+        ti: "ገለ ቅጽላት ከከም ዝድለ ትርጉም ቦታኦም ይቕይሩ።",
+        tr: "Bazı sıfatlar amaçlanan anlama göre yer değiştirir.",
+        ps: "ځینې صفتونه د غوښتل شوي معنا له مخې خپل ځای بدلوي.",
+        uk: "Деякі прикметники змінюють місце залежно від потрібного значення.",
       },
     },
     {
@@ -365,86 +330,32 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Lorsqu'un nom est accompagné de plusieurs adjectifs, ils suivent généralement cet ordre :",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["When a noun is accompanied by several adjectives, they generally follow this order:"],
-        ar: ["عندما يرافق الاسم عدة صفات، فإنها تتبع عادةً هذا الترتيب:"],
-        fa: ["وقتی یک اسم با چند صفت همراه است، آن‌ها معمولاً این ترتیب را دنبال می‌کنند:"],
-        pt: ["Quando um nome é acompanhado por vários adjetivos, estes seguem geralmente esta ordem:"],
-        so: ["Marka magac ay la socdaan dhowr sifo, badanaa waxay raacaan kala horreyntan:"],
-        ti: ["ሓደ ስም ብብዙሓት ቅጽላት ምስ ዝስነ፣ ብሓፈሻ ነዚ ቅደም ሰዓብ ይኽተሉ፦"],
-        tr: ["Bir isme birden fazla sıfat eşlik ettiğinde, genellikle şu sırayı izlerler:"],
-        ps: ["کله چې یو اسم له څو صفتونو سره وي، عموماً دا ترتیب تعقیبوي:"],
-        uk: ["Коли іменник має кілька прикметників, вони зазвичай дотримуються такого порядку:"],
+      text: "Lorsqu'un nom est accompagné de plusieurs adjectifs, ils suivent généralement cet ordre :",
+      transText: {
+        en: "When a noun is accompanied by several adjectives, they generally follow this order:",
+        ar: "عندما يرافق الاسم عدة صفات، فإنها تتبع عادةً هذا الترتيب:",
+        fa: "وقتی یک اسم با چند صفت همراه است، آن‌ها معمولاً این ترتیب را دنبال می‌کنند:",
+        pt: "Quando um nome é acompanhado por vários adjetivos, estes seguem geralmente esta ordem:",
+        so: "Marka magac ay la socdaan dhowr sifo, badanaa waxay raacaan kala horreyntan:",
+        ti: "ሓደ ስም ብብዙሓት ቅጽላት ምስ ዝስነ፣ ብሓፈሻ ነዚ ቅደም ሰዓብ ይኽተሉ፦",
+        tr: "Bir isme birden fazla sıfat eşlik ettiğinde, genellikle şu sırayı izlerler:",
+        ps: "کله چې یو اسم له څو صفتونو سره وي، عموماً دا ترتیب تعقیبوي:",
+        uk: "Коли іменник має кілька прикметників, вони зазвичай дотримуються такого порядку:",
       },
     },
     {
       type: "text",
-      items: [
-        "{a}1.{/a} adjectif numéral",
-        "{a}2.{/a} adjectif BAGS",
-        "{a}3.{/a} nom",
-        "{a}4.{/a} adjectifs descriptifs",
-      ],
-      noBulletItems: [0, 1, 2, 3],
-      transItems: {
-        en: [
-          "{a}1.{/a} numeral adjective",
-          "{a}2.{/a} BAGS adjective",
-          "{a}3.{/a} noun",
-          "{a}4.{/a} descriptive adjectives",
-        ],
-        ar: [
-          "{a}1.{/a} صفة عددية",
-          "{a}2.{/a} صفة BAGS",
-          "{a}3.{/a} اسم",
-          "{a}4.{/a} صفات وصفية",
-        ],
-        fa: [
-          "{a}1.{/a} صفت عددی",
-          "{a}2.{/a} صفت BAGS",
-          "{a}3.{/a} اسم",
-          "{a}4.{/a} صفت‌های توصیفی",
-        ],
-        pt: [
-          "{a}1.{/a} adjetivo numeral",
-          "{a}2.{/a} adjetivo BAGS",
-          "{a}3.{/a} nome",
-          "{a}4.{/a} adjetivos qualificativos",
-        ],
-        so: [
-          "{a}1.{/a} sifo tiro",
-          "{a}2.{/a} sifo BAGS",
-          "{a}3.{/a} magac",
-          "{a}4.{/a} sifooyin tilmaameed",
-        ],
-        ti: [
-          "{a}1.{/a} ቁጽራዊ ቅጽል",
-          "{a}2.{/a} ቅጽል BAGS",
-          "{a}3.{/a} ስም",
-          "{a}4.{/a} ገላጺ ቅጽላት",
-        ],
-        tr: [
-          "{a}1.{/a} sayı sıfatı",
-          "{a}2.{/a} BAGS sıfatı",
-          "{a}3.{/a} isim",
-          "{a}4.{/a} niteleme sıfatları",
-        ],
-        ps: [
-          "{a}1.{/a} شمېري صفت",
-          "{a}2.{/a} د BAGS صفت",
-          "{a}3.{/a} اسم",
-          "{a}4.{/a} توصیفي صفتونه",
-        ],
-        uk: [
-          "{a}1.{/a} числівниковий прикметник",
-          "{a}2.{/a} прикметник BAGS",
-          "{a}3.{/a} іменник",
-          "{a}4.{/a} описові прикметники",
-        ],
+      text: "{a}1.{/a} adjectif numéral\n{a}2.{/a} adjectif BAGS\n{a}3.{/a} nom\n{a}4.{/a} adjectifs descriptifs",
+      transText: {
+        en: "{a}1.{/a} numeral adjective\n{a}2.{/a} BAGS adjective\n{a}3.{/a} noun\n{a}4.{/a} descriptive adjectives",
+        ar: "{a}1.{/a} صفة عددية\n{a}2.{/a} صفة BAGS\n{a}3.{/a} اسم\n{a}4.{/a} صفات وصفية",
+        fa: "{a}1.{/a} صفت عددی\n{a}2.{/a} صفت BAGS\n{a}3.{/a} اسم\n{a}4.{/a} صفت‌های توصیفی",
+        pt: "{a}1.{/a} adjetivo numeral\n{a}2.{/a} adjetivo BAGS\n{a}3.{/a} nome\n{a}4.{/a} adjetivos qualificativos",
+        so: "{a}1.{/a} sifo tiro\n{a}2.{/a} sifo BAGS\n{a}3.{/a} magac\n{a}4.{/a} sifooyin tilmaameed",
+        ti: "{a}1.{/a} ቁጽራዊ ቅጽል\n{a}2.{/a} ቅጽል BAGS\n{a}3.{/a} ስም\n{a}4.{/a} ገላጺ ቅጽላት",
+        tr: "{a}1.{/a} sayı sıfatı\n{a}2.{/a} BAGS sıfatı\n{a}3.{/a} isim\n{a}4.{/a} niteleme sıfatları",
+        ps: "{a}1.{/a} شمېري صفت\n{a}2.{/a} د BAGS صفت\n{a}3.{/a} اسم\n{a}4.{/a} توصیفي صفتونه",
+        uk: "{a}1.{/a} числівниковий прикметник\n{a}2.{/a} прикметник BAGS\n{a}3.{/a} іменник\n{a}4.{/a} описові прикметники",
       },
     },
     {

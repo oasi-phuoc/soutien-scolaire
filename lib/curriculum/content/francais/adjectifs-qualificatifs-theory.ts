@@ -4,16 +4,13 @@ export const ADJECTIFS_QUALIFICATIFS_GENERALITES: TheoryBlock[] = [
     { type: "heading", text: "L'accord des adjectifs qualificatifs", trans: { en: "Agreement of qualifying adjectives", ar: "مطابقة الصفات النعتية", fa: "مطابقت صفت‌های وصفی", ti: "ስምምዕ ቅጽላት", uk: "Узгодження якісних прикметників" } },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "L'adjectif s'accorde toujours en {a}genre{/a} (masculin / féminin) et en {a}nombre{/a} (singulier / pluriel) avec le nom qu'il qualifie.",
-      ],
-      transItems: {
-        en: ["The adjective always agrees in {a}gender{/a} (masculine / feminine) and in {a}number{/a} (singular / plural) with the noun it qualifies."],
-        ar: ["تطابق الصفة دائماً في {a}الجنس{/a} (مذكر / مؤنث) وفي {a}العدد{/a} (مفرد / جمع) مع الاسم الذي تصفه."],
-        fa: ["صفت همیشه در {a}جنس{/a} (مذکر / مؤنث) و در {a}شمار{/a} (مفرد / جمع) با اسمی که توصیف می‌کند مطابقت می‌کند."],
-        ti: ["ቅጽል ኩሉ ግዜ ምስቲ ዝገልጾ ስም ብ{a}ጾታ{/a} (ተባዕታይ / ኣንስታይ) ከምኡውን ብ{a}ቊጽሪ{/a} (ሓደ / ብዙሕ) ይሰማማዕ።"],
-        uk: ["Прикметник завжди узгоджується в {a}роді{/a} (чоловічий / жіночий) та в {a}числі{/a} (однина / множина) з іменником, який він означає."],
+      text: "L'adjectif s'accorde toujours en {a}genre{/a} (masculin / féminin) et en {a}nombre{/a} (singulier / pluriel) avec le nom qu'il qualifie.",
+      transText: {
+        en: "The adjective always agrees in {a}gender{/a} (masculine / feminine) and in {a}number{/a} (singular / plural) with the noun it qualifies.",
+        ar: "تطابق الصفة دائماً في {a}الجنس{/a} (مذكر / مؤنث) وفي {a}العدد{/a} (مفرد / جمع) مع الاسم الذي تصفه.",
+        fa: "صفت همیشه در {a}جنس{/a} (مذکر / مؤنث) و در {a}شمار{/a} (مفرد / جمع) با اسمی که توصیف می‌کند مطابقت می‌کند.",
+        ti: "ቅጽል ኩሉ ግዜ ምስቲ ዝገልጾ ስም ብ{a}ጾታ{/a} (ተባዕታይ / ኣንስታይ) ከምኡውን ብ{a}ቊጽሪ{/a} (ሓደ / ብዙሕ) ይሰማማዕ።",
+        uk: "Прикметник завжди узгоджується в {a}роді{/a} (чоловічий / жіночий) та в {a}числі{/a} (однина / множина) з іменником, який він означає.",
       },
     },
     {
@@ -122,16 +119,13 @@ export const ADJECTIFS_QUALIFICATIFS_PLACE: TheoryBlock[] = [
     { type: "heading", text: "Adjectifs à trois formes masculines", trans: { en: "Adjectives with three masculine forms", ar: "صفات بثلاث صيغ مذكرة", fa: "صفت‌هایی با سه شکل مذکر", ti: "ቅጽላት ብሰለስተ ተባዕታይ ቅርጺ", uk: "Прикметники з трьома формами чоловічого роду" } },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Certains adjectifs ont une forme masculine spéciale devant une {a}voyelle ou h muet{/a}.",
-      ],
-      transItems: {
-        en: ["Some adjectives have a special masculine form before a {a}vowel or silent h{/a}."],
-        ar: ["بعض الصفات لها صيغة مذكرة خاصة قبل {a}حرف علة أو h صامت{/a}."],
-        fa: ["برخی صفت‌ها پیش از یک {a}حرف صدادار یا h خاموش{/a} شکل مذکر ویژه‌ای دارند."],
-        ti: ["ገለ ቅጽላት ቅድሚ {a}ድምጻዊ ፊደል ወይ ስቕ h{/a} ፍሉይ ተባዕታይ ቅርጺ ኣለዎም።"],
-        uk: ["Деякі прикметники мають особливу форму чоловічого роду перед {a}голосною або німим h{/a}."],
+      text: "Certains adjectifs ont une forme masculine spéciale devant une {a}voyelle ou h muet{/a}.",
+      transText: {
+        en: "Some adjectives have a special masculine form before a {a}vowel or silent h{/a}.",
+        ar: "بعض الصفات لها صيغة مذكرة خاصة قبل {a}حرف علة أو h صامت{/a}.",
+        fa: "برخی صفت‌ها پیش از یک {a}حرف صدادار یا h خاموش{/a} شکل مذکر ویژه‌ای دارند.",
+        ti: "ገለ ቅጽላት ቅድሚ {a}ድምጻዊ ፊደል ወይ ስቕ h{/a} ፍሉይ ተባዕታይ ቅርጺ ኣለዎም።",
+        uk: "Деякі прикметники мають особливу форму чоловічого роду перед {a}голосною або німим h{/a}.",
       },
     },
     {
@@ -185,17 +179,33 @@ export const ADJECTIFS_QUALIFICATIFS_PLACE: TheoryBlock[] = [
     { type: "heading", text: "La place des adjectifs", sub: true, accent: true, trans: { en: "The position of adjectives", ar: "موضع الصفات", fa: "جایگاه صفت‌ها", ti: "ቦታ ቅጽላት", uk: "Місце прикметників" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "En français, la majorité des adjectifs se placent {a}après{/a} le nom.",
+      transText: {
+        en: "In French, most adjectives are placed {a}after{/a} the noun.",
+        ar: "في الفرنسية، توضع معظم الصفات {a}بعد{/a} الاسم.",
+        fa: "در فرانسوی، بیشتر صفت‌ها {a}بعد از{/a} اسم قرار می‌گیرند.",
+        ti: "ብፈረንሳ ቋንቋ፣ መብዛሕትኦም ቅጽላት {a}ድሕሪ{/a} ስም ይቕመጡ።",
+        uk: "У французькій мові більшість прикметників ставляться {a}після{/a} іменника.",
+      },
       items: [
-        "En français, la majorité des adjectifs se placent {a}après{/a} le nom.",
         "Mais un groupe d'adjectifs courants se placent {a}avant{/a} le nom.",
       ],
       transItems: {
-        en: ["In French, most adjectives are placed {a}after{/a} the noun.", "But a group of common adjectives are placed {a}before{/a} the noun."],
-        ar: ["في الفرنسية، توضع معظم الصفات {a}بعد{/a} الاسم.", "لكن مجموعة من الصفات الشائعة توضع {a}قبل{/a} الاسم."],
-        fa: ["در فرانسوی، بیشتر صفت‌ها {a}بعد از{/a} اسم قرار می‌گیرند.", "اما گروهی از صفت‌های رایج {a}پیش از{/a} اسم قرار می‌گیرند."],
-        ti: ["ብፈረንሳ ቋንቋ፣ መብዛሕትኦም ቅጽላት {a}ድሕሪ{/a} ስም ይቕመጡ።", "ግን ጉጅለ ልሙዳት ቅጽላት {a}ቅድሚ{/a} ስም ይቕመጡ።"],
-        uk: ["У французькій мові більшість прикметників ставляться {a}після{/a} іменника.", "Але група поширених прикметників ставляться {a}перед{/a} іменником."],
+        en: [
+          "But a group of common adjectives are placed {a}before{/a} the noun.",
+        ],
+        ar: [
+          "لكن مجموعة من الصفات الشائعة توضع {a}قبل{/a} الاسم.",
+        ],
+        fa: [
+          "اما گروهی از صفت‌های رایج {a}پیش از{/a} اسم قرار می‌گیرند.",
+        ],
+        ti: [
+          "ግን ጉጅለ ልሙዳት ቅጽላት {a}ቅድሚ{/a} ስም ይቕመጡ።",
+        ],
+        uk: [
+          "Але група поширених прикметників ставляться {a}перед{/a} іменником.",
+        ],
       },
     },
     {

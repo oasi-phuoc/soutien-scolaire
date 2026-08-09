@@ -34,10 +34,7 @@ export const A1_GR_ADVERBES_INTENSITE: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Combinaisons fréquentes : très bien, très mal, assez bien, assez mal, beaucoup trop, un peu trop, presque trop.",
-      ],
-      noBulletItems: [0],
+      text: "Combinaisons fréquentes : très bien, très mal, assez bien, assez mal, beaucoup trop, un peu trop, presque trop.",
     },
     {
       type: "heading",

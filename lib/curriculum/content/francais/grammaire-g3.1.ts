@@ -14,36 +14,32 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "L'adjectif donne une information sur le nom. Les adjectifs changent aussi selon le genre.",
-      ],
-      transItems: {
-        en: ["The adjective gives information about the noun. Adjectives also change according to gender."],
-        ar: ["الصفة تعطي معلومة عن الاسم. تتغير الصفات أيضًا حسب الجنس."],
-        fa: ["صفت دربارهٔ اسم اطلاعات می‌دهد. صفت‌ها همچنین بر اساس جنس تغییر می‌کنند."],
-        pt: ["O adjetivo dá informação sobre o nome. Os adjetivos também mudam conforme o género."],
-        so: ["Sifadu waxay bixisaa macluumaad ku saabsan magaca. Sifooyinku sidoo kale way isbeddelaan iyadoo loo eegayo jinsiga."],
-        ti: ["ቅጽል ብዛዕባ ስም ሓበሬታ ይህብ። ቅጽላት ከኣ ከም ጾታ ይቕየሩ።"],
-        tr: ["Sıfat, isim hakkında bilgi verir. Sıfatlar cinsiyete göre de değişir."],
-        ps: ["صفت د اسم په اړه معلومات ورکوي. صفتونه هم د جنس له مخې بدلېږي."],
-        uk: ["Прикметник дає інформацію про іменник. Прикметники також змінюються за родом."],
+      text: "L'adjectif donne une information sur le nom. Les adjectifs changent aussi selon le genre.",
+      transText: {
+        en: "The adjective gives information about the noun. Adjectives also change according to gender.",
+        ar: "الصفة تعطي معلومة عن الاسم. تتغير الصفات أيضًا حسب الجنس.",
+        fa: "صفت دربارهٔ اسم اطلاعات می‌دهد. صفت‌ها همچنین بر اساس جنس تغییر می‌کنند.",
+        pt: "O adjetivo dá informação sobre o nome. Os adjetivos também mudam conforme o género.",
+        so: "Sifadu waxay bixisaa macluumaad ku saabsan magaca. Sifooyinku sidoo kale way isbeddelaan iyadoo loo eegayo jinsiga.",
+        ti: "ቅጽል ብዛዕባ ስም ሓበሬታ ይህብ። ቅጽላት ከኣ ከም ጾታ ይቕየሩ።",
+        tr: "Sıfat, isim hakkında bilgi verir. Sıfatlar cinsiyete göre de değişir.",
+        ps: "صفت د اسم په اړه معلومات ورکوي. صفتونه هم د جنس له مخې بدلېږي.",
+        uk: "Прикметник дає інформацію про іменник. Прикметники також змінюються за родом.",
       },
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: ["On ajoute souvent {a}-e{/a} au féminin."],
-      transItems: {
-        en: ["We often add {a}-e{/a} in the feminine."],
-        ar: ["غالبًا نضيف {a}-e{/a} في المؤنث."],
-        fa: ["اغلب برای مؤنث {a}-e{/a} اضافه می‌کنیم."],
-        pt: ["Muitas vezes acrescentamos {a}-e{/a} no feminino."],
-        so: ["Badanaa waxaan ku darnaa {a}-e{/a} qaabka dheddigga."],
-        ti: ["ኣብ ኣንስታይ መብዛሕትኡ ግዜ {a}-e{/a} ንውስኽ።"],
-        tr: ["Dişilde genellikle {a}-e{/a} ekleriz."],
-        ps: ["په مؤنث کې ډېری وخت {a}-e{/a} ورزیاتوو."],
-        uk: ["Часто додаємо {a}-e{/a} у жіночому роді."],
+      text: "On ajoute souvent {a}-e{/a} au féminin.",
+      transText: {
+        en: "We often add {a}-e{/a} in the feminine.",
+        ar: "غالبًا نضيف {a}-e{/a} في المؤنث.",
+        fa: "اغلب برای مؤنث {a}-e{/a} اضافه می‌کنیم.",
+        pt: "Muitas vezes acrescentamos {a}-e{/a} no feminino.",
+        so: "Badanaa waxaan ku darnaa {a}-e{/a} qaabka dheddigga.",
+        ti: "ኣብ ኣንስታይ መብዛሕትኡ ግዜ {a}-e{/a} ንውስኽ።",
+        tr: "Dişilde genellikle {a}-e{/a} ekleriz.",
+        ps: "په مؤنث کې ډېری وخت {a}-e{/a} ورزیاتوو.",
+        uk: "Часто додаємо {a}-e{/a} у жіночому роді.",
       },
     },
     {
@@ -68,21 +64,18 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Si l'adjectif masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
-      ],
-      transItems: {
-        en: ["If the masculine adjective already ends in {a}e{/a}, the feminine does not change."],
-        ar: ["إذا كانت الصفة المذكرة تنتهي أصلًا بـ {a}e{/a}، فإن المؤنث لا يتغير."],
-        fa: ["اگر صفت مذکر از قبل به {a}e{/a} ختم شود، صورت مؤنث تغییر نمی‌کند."],
-        pt: ["Se o adjetivo masculino já terminar em {a}e{/a}, o feminino não muda."],
-        so: ["Haddii sifada lab ay hore ugu dhammaato {a}e{/a}, qaabka dheddiggu ma isbeddelo."],
-        ti: ["እቲ ተባዕታይ ቅጽል ኣቐዲሙ ብ {a}e{/a} እንተወዲኡ፣ እቲ ኣንስታይ ኣይቕየርን።"],
-        tr: ["Eril sıfat zaten {a}e{/a} ile bitiyorsa, dişil biçim değişmez."],
-        ps: ["که مذکر صفت له مخکې په {a}e{/a} پای ته رسېږي، مؤنث یې نه بدلېږي."],
-        uk: ["Якщо прикметник чоловічого роду вже закінчується на {a}e{/a}, жіноча форма не змінюється."],
+      text: "Si l'adjectif masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
+      transText: {
+        en: "If the masculine adjective already ends in {a}e{/a}, the feminine does not change.",
+        ar: "إذا كانت الصفة المذكرة تنتهي أصلًا بـ {a}e{/a}، فإن المؤنث لا يتغير.",
+        fa: "اگر صفت مذکر از قبل به {a}e{/a} ختم شود، صورت مؤنث تغییر نمی‌کند.",
+        pt: "Se o adjetivo masculino já terminar em {a}e{/a}, o feminino não muda.",
+        so: "Haddii sifada lab ay hore ugu dhammaato {a}e{/a}, qaabka dheddiggu ma isbeddelo.",
+        ti: "እቲ ተባዕታይ ቅጽል ኣቐዲሙ ብ {a}e{/a} እንተወዲኡ፣ እቲ ኣንስታይ ኣይቕየርን።",
+        tr: "Eril sıfat zaten {a}e{/a} ile bitiyorsa, dişil biçim değişmez.",
+        ps: "که مذکر صفت له مخکې په {a}e{/a} پای ته رسېږي، مؤنث یې نه بدلېږي.",
+        uk: "Якщо прикметник чоловічого роду вже закінчується на {a}e{/a}, жіноча форма не змінюється.",
       },
-      noBulletItems: [0],
     },
     {
       type: "grid",
@@ -111,21 +104,18 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Certains adjectifs ont des terminaisons différentes au masculin et au féminin.",
-      ],
-      transItems: {
-        en: ["Some adjectives have different endings in the masculine and feminine."],
-        ar: ["بعض الصفات لها نهايات مختلفة في المذكر والمؤنث."],
-        fa: ["برخی صفت‌ها در مذکر و مؤنث پایان‌های متفاوتی دارند."],
-        pt: ["Alguns adjetivos têm terminações diferentes no masculino e no feminino."],
-        so: ["Qaar ka mid ah sifooyinku waxay leeyihiin dhammaadyo kala duwan labka iyo dheddigga."],
-        ti: ["ገለ ቅጽላት ኣብ ተባዕታይን ኣንስታይን ዝተፈላለዩ መወዳእታታት ኣለዎም።"],
-        tr: ["Bazı sıfatların eril ve dişil biçimlerinde farklı son ekleri vardır."],
-        ps: ["ځینې صفتونه په مذکر او مؤنث کې بېلابېلې پایې لري."],
-        uk: ["Деякі прикметники мають різні закінчення в чоловічому та жіночому роді."],
+      text: "Certains adjectifs ont des terminaisons différentes au masculin et au féminin.",
+      transText: {
+        en: "Some adjectives have different endings in the masculine and feminine.",
+        ar: "بعض الصفات لها نهايات مختلفة في المذكر والمؤنث.",
+        fa: "برخی صفت‌ها در مذکر و مؤنث پایان‌های متفاوتی دارند.",
+        pt: "Alguns adjetivos têm terminações diferentes no masculino e no feminino.",
+        so: "Qaar ka mid ah sifooyinku waxay leeyihiin dhammaadyo kala duwan labka iyo dheddigga.",
+        ti: "ገለ ቅጽላት ኣብ ተባዕታይን ኣንስታይን ዝተፈላለዩ መወዳእታታት ኣለዎም።",
+        tr: "Bazı sıfatların eril ve dişil biçimlerinde farklı son ekleri vardır.",
+        ps: "ځینې صفتونه په مذکر او مؤنث کې بېلابېلې پایې لري.",
+        uk: "Деякі прикметники мають різні закінчення в чоловічому та жіночому роді.",
       },
-      noBulletItems: [0],
     },
     {
       type: "selector",
@@ -134,24 +124,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-en",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-en{/a} in the masculine change to {a}-enne{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-en{/a} في المذكر تصبح {a}-enne{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-en{/a} ختم می‌شوند در مؤنث به {a}-enne{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-en{/a} no masculino passam a {a}-enne{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-en{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-enne{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-en{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-enne{/a} ይቕየሩ።"],
-                tr: ["{a}-en{/a} ile biten eril sözcükler dişilde {a}-enne{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-en{/a} پای ته رسېږي، په مؤنث کې {a}-enne{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-en{/a}, у жіночому роді змінюються на {a}-enne{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-en{/a} in the masculine change to {a}-enne{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-en{/a} في المذكر تصبح {a}-enne{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-en{/a} ختم می‌شوند در مؤنث به {a}-enne{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-en{/a} no masculino passam a {a}-enne{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-en{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-enne{/a}.",
+        ti: "ብተባዕታይ ብ {a}-en{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-enne{/a} ይቕየሩ።",
+        tr: "{a}-en{/a} ile biten eril sözcükler dişilde {a}-enne{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-en{/a} پای ته رسېږي، په مؤنث کې {a}-enne{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-en{/a}, у жіночому роді змінюються на {a}-enne{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -178,24 +165,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-on",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-on{/a} in the masculine change to {a}-onne{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-on{/a} في المذكر تصبح {a}-onne{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-on{/a} ختم می‌شوند در مؤنث به {a}-onne{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-on{/a} no masculino passam a {a}-onne{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-on{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-onne{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-on{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-onne{/a} ይቕየሩ።"],
-                tr: ["{a}-on{/a} ile biten eril sözcükler dişilde {a}-onne{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-on{/a} پای ته رسېږي، په مؤنث کې {a}-onne{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-on{/a}, у жіночому роді змінюються на {a}-onne{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-on{/a} in the masculine change to {a}-onne{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-on{/a} في المذكر تصبح {a}-onne{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-on{/a} ختم می‌شوند در مؤنث به {a}-onne{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-on{/a} no masculino passam a {a}-onne{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-on{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-onne{/a}.",
+        ti: "ብተባዕታይ ብ {a}-on{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-onne{/a} ይቕየሩ።",
+        tr: "{a}-on{/a} ile biten eril sözcükler dişilde {a}-onne{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-on{/a} پای ته رسېږي، په مؤنث کې {a}-onne{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-on{/a}, у жіночому роді змінюються на {a}-onne{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -222,24 +206,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-el",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-el{/a} au masculin changent en {a}-elle{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-el{/a} in the masculine change to {a}-elle{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-el{/a} في المذكر تصبح {a}-elle{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-el{/a} ختم می‌شوند در مؤنث به {a}-elle{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-el{/a} no masculino passam a {a}-elle{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-el{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-elle{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-el{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-elle{/a} ይቕየሩ።"],
-                tr: ["{a}-el{/a} ile biten eril sözcükler dişilde {a}-elle{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-el{/a} پای ته رسېږي، په مؤنث کې {a}-elle{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-el{/a}, у жіночому роді змінюються на {a}-elle{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-el{/a} au masculin changent en {a}-elle{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-el{/a} in the masculine change to {a}-elle{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-el{/a} في المذكر تصبح {a}-elle{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-el{/a} ختم می‌شوند در مؤنث به {a}-elle{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-el{/a} no masculino passam a {a}-elle{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-el{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-elle{/a}.",
+        ti: "ብተባዕታይ ብ {a}-el{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-elle{/a} ይቕየሩ።",
+        tr: "{a}-el{/a} ile biten eril sözcükler dişilde {a}-elle{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-el{/a} پای ته رسېږي، په مؤنث کې {a}-elle{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-el{/a}, у жіночому роді змінюються на {a}-elle{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -266,24 +247,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-er",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-er{/a} in the masculine change to {a}-ère{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-er{/a} في المذكر تصبح {a}-ère{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-er{/a} ختم می‌شوند در مؤنث به {a}-ère{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-er{/a} no masculino passam a {a}-ère{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-er{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-ère{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-er{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ère{/a} ይቕየሩ።"],
-                tr: ["{a}-er{/a} ile biten eril sözcükler dişilde {a}-ère{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-er{/a} پای ته رسېږي، په مؤنث کې {a}-ère{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-er{/a}, у жіночому роді змінюються на {a}-ère{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-er{/a} in the masculine change to {a}-ère{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-er{/a} في المذكر تصبح {a}-ère{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-er{/a} ختم می‌شوند در مؤنث به {a}-ère{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-er{/a} no masculino passam a {a}-ère{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-er{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-ère{/a}.",
+        ti: "ብተባዕታይ ብ {a}-er{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ère{/a} ይቕየሩ።",
+        tr: "{a}-er{/a} ile biten eril sözcükler dişilde {a}-ère{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-er{/a} پای ته رسېږي، په مؤنث کې {a}-ère{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-er{/a}, у жіночому роді змінюються на {a}-ère{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -310,24 +288,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-et",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-et{/a} au masculin changent en {a}-ète{/a} ou {a}-ette{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-et{/a} in the masculine change to {a}-ète{/a} or {a}-ette{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-et{/a} في المذكر تصبح {a}-ète{/a} أو {a}-ette{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-et{/a} ختم می‌شوند در مؤنث به {a}-ète{/a} یا {a}-ette{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-et{/a} no masculino passam a {a}-ète{/a} ou {a}-ette{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-et{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-ète{/a} ama {a}-ette{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-et{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ète{/a} ወይ {a}-ette{/a} ይቕየሩ።"],
-                tr: ["{a}-et{/a} ile biten eril sözcükler dişilde {a}-ète{/a} veya {a}-ette{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-et{/a} پای ته رسېږي، په مؤنث کې {a}-ète{/a} یا {a}-ette{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-et{/a}, у жіночому роді змінюються на {a}-ète{/a} або {a}-ette{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-et{/a} au masculin changent en {a}-ète{/a} ou {a}-ette{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-et{/a} in the masculine change to {a}-ète{/a} or {a}-ette{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-et{/a} في المذكر تصبح {a}-ète{/a} أو {a}-ette{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-et{/a} ختم می‌شوند در مؤنث به {a}-ète{/a} یا {a}-ette{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-et{/a} no masculino passam a {a}-ète{/a} ou {a}-ette{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-et{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-ète{/a} ama {a}-ette{/a}.",
+        ti: "ብተባዕታይ ብ {a}-et{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ète{/a} ወይ {a}-ette{/a} ይቕየሩ።",
+        tr: "{a}-et{/a} ile biten eril sözcükler dişilde {a}-ète{/a} veya {a}-ette{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-et{/a} پای ته رسېږي، په مؤنث کې {a}-ète{/a} یا {a}-ette{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-et{/a}, у жіночому роді змінюються на {a}-ète{/a} або {a}-ette{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -354,24 +329,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-eux",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-eux{/a} au masculin changent en {a}-euse{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-eux{/a} in the masculine change to {a}-euse{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-eux{/a} في المذكر تصبح {a}-euse{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-eux{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-eux{/a} no masculino passam a {a}-euse{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-eux{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-euse{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-eux{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-euse{/a} ይቕየሩ።"],
-                tr: ["{a}-eux{/a} ile biten eril sözcükler dişilde {a}-euse{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-eux{/a} پای ته رسېږي، په مؤنث کې {a}-euse{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-eux{/a}, у жіночому роді змінюються на {a}-euse{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-eux{/a} au masculin changent en {a}-euse{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-eux{/a} in the masculine change to {a}-euse{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-eux{/a} في المذكر تصبح {a}-euse{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-eux{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-eux{/a} no masculino passam a {a}-euse{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-eux{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-euse{/a}.",
+        ti: "ብተባዕታይ ብ {a}-eux{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-euse{/a} ይቕየሩ።",
+        tr: "{a}-eux{/a} ile biten eril sözcükler dişilde {a}-euse{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-eux{/a} پای ته رسېږي، په مؤنث کې {a}-euse{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-eux{/a}, у жіночому роді змінюються на {a}-euse{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -398,24 +370,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-eur",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-eur{/a} in the masculine change to {a}-euse{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-eur{/a} في المذكر تصبح {a}-euse{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-eur{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-eur{/a} no masculino passam a {a}-euse{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-eur{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-euse{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-eur{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-euse{/a} ይቕየሩ።"],
-                tr: ["{a}-eur{/a} ile biten eril sözcükler dişilde {a}-euse{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-eur{/a} پای ته رسېږي، په مؤنث کې {a}-euse{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-eur{/a}, у жіночому роді змінюються на {a}-euse{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-eur{/a} in the masculine change to {a}-euse{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-eur{/a} في المذكر تصبح {a}-euse{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-eur{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-eur{/a} no masculino passam a {a}-euse{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-eur{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-euse{/a}.",
+        ti: "ብተባዕታይ ብ {a}-eur{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-euse{/a} ይቕየሩ።",
+        tr: "{a}-eur{/a} ile biten eril sözcükler dişilde {a}-euse{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-eur{/a} پای ته رسېږي، په مؤنث کې {a}-euse{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-eur{/a}, у жіночому роді змінюються на {a}-euse{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -442,24 +411,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-f",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-f{/a} in the masculine change to {a}-ve{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-f{/a} في المذكر تصبح {a}-ve{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-f{/a} ختم می‌شوند در مؤنث به {a}-ve{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-f{/a} no masculino passam a {a}-ve{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-f{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-ve{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-f{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ve{/a} ይቕየሩ።"],
-                tr: ["{a}-f{/a} ile biten eril sözcükler dişilde {a}-ve{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-f{/a} پای ته رسېږي، په مؤنث کې {a}-ve{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-f{/a}, у жіночому роді змінюються на {a}-ve{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-f{/a} in the masculine change to {a}-ve{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-f{/a} في المذكر تصبح {a}-ve{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-f{/a} ختم می‌شوند در مؤنث به {a}-ve{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-f{/a} no masculino passam a {a}-ve{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-f{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-ve{/a}.",
+        ti: "ብተባዕታይ ብ {a}-f{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-ve{/a} ይቕየሩ።",
+        tr: "{a}-f{/a} ile biten eril sözcükler dişilde {a}-ve{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-f{/a} پای ته رسېږي، په مؤنث کې {a}-ve{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-f{/a}, у жіночому роді змінюються на {a}-ve{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -486,24 +452,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "-eau",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-eau{/a} au masculin changent en {a}-elle{/a} au féminin.",
-              ],
-              transItems: {
-                en: ["Words ending in {a}-eau{/a} in the masculine change to {a}-elle{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-eau{/a} في المذكر تصبح {a}-elle{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-eau{/a} ختم می‌شوند در مؤنث به {a}-elle{/a} تغییر می‌کنند."],
-                pt: ["As palavras terminadas em {a}-eau{/a} no masculino passam a {a}-elle{/a} no feminino."],
-                so: ["Erayada ku dhammaada {a}-eau{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-elle{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-elle{/a} ይቕየሩ።"],
-                tr: ["{a}-eau{/a} ile biten eril sözcükler dişilde {a}-elle{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-eau{/a} پای ته رسېږي، په مؤنث کې {a}-elle{/a} ته بدلېږي."],
-                uk: ["Слова, що в чоловічому роді закінчуються на {a}-eau{/a}, у жіночому роді змінюються на {a}-elle{/a}."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-eau{/a} au masculin changent en {a}-elle{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-eau{/a} in the masculine change to {a}-elle{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-eau{/a} في المذكر تصبح {a}-elle{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-eau{/a} ختم می‌شوند در مؤنث به {a}-elle{/a} تغییر می‌کنند.",
+        pt: "As palavras terminadas em {a}-eau{/a} no masculino passam a {a}-elle{/a} no feminino.",
+        so: "Erayada ku dhammaada {a}-eau{/a} marka ay lab yihiin waxay dheddigga isu beddelaan {a}-elle{/a}.",
+        ti: "ብተባዕታይ ብ {a}-eau{/a} ዝውድኡ ቃላት ኣብ ኣንስታይ ናብ {a}-elle{/a} ይቕየሩ።",
+        tr: "{a}-eau{/a} ile biten eril sözcükler dişilde {a}-elle{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-eau{/a} پای ته رسېږي، په مؤنث کې {a}-elle{/a} ته بدلېږي.",
+        uk: "Слова, що в чоловічому роді закінчуються на {a}-eau{/a}, у жіночому роді змінюються на {a}-elle{/a}.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -530,24 +493,21 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
         {
           label: "Autres",
           content: [
-            {
-              type: "text",
-              items: [
-                "Certains adjectifs sont très irréguliers pour la formation du féminin.",
-              ],
-              transItems: {
-                en: ["Some adjectives are very irregular when forming the feminine."],
-                ar: ["بعض الصفات شديدة الشذوذ عند تكوين المؤنث."],
-                fa: ["برخی صفت‌ها در ساختن صورت مؤنث بسیار بی‌قاعده‌اند."],
-                pt: ["Alguns adjetivos são muito irregulares na formação do feminino."],
-                so: ["Qaar ka mid ah sifooyinku aad bay u yihiin aan caadi ahayn marka la samaynayo qaabka dheddigga."],
-                ti: ["ገለ ቅጽላት ኣብ ምፍጣር ኣንስታይ ቅርጺ ኣዝዮም ዘይስሩዓት እዮም።"],
-                tr: ["Bazı sıfatlar dişil biçim oluştururken çok düzensizdir."],
-                ps: ["ځینې صفتونه د مؤنث بڼې په جوړولو کې ډېر بې‌قاعده دي."],
-                uk: ["Деякі прикметники дуже нерегулярні під час утворення жіночого роду."],
-              },
-              noBulletItems: [0],
-            },
+                {
+      type: "text",
+      text: "Certains adjectifs sont très irréguliers pour la formation du féminin.",
+      transText: {
+        en: "Some adjectives are very irregular when forming the feminine.",
+        ar: "بعض الصفات شديدة الشذوذ عند تكوين المؤنث.",
+        fa: "برخی صفت‌ها در ساختن صورت مؤنث بسیار بی‌قاعده‌اند.",
+        pt: "Alguns adjetivos são muito irregulares na formação do feminino.",
+        so: "Qaar ka mid ah sifooyinku aad bay u yihiin aan caadi ahayn marka la samaynayo qaabka dheddigga.",
+        ti: "ገለ ቅጽላት ኣብ ምፍጣር ኣንስታይ ቅርጺ ኣዝዮም ዘይስሩዓት እዮም።",
+        tr: "Bazı sıfatlar dişil biçim oluştururken çok düzensizdir.",
+        ps: "ځینې صفتونه د مؤنث بڼې په جوړولو کې ډېر بې‌قاعده دي.",
+        uk: "Деякі прикметники дуже нерегулярні під час утворення жіночого роду.",
+      },
+    },
             {
               type: "grid",
               headers: ["Masculin", "Féminin"],
@@ -605,21 +565,18 @@ export const A1_GR_GENRE_ADJECTIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Certains adjectifs ont une forme masculine spéciale devant une voyelle ou h muet.",
-      ],
-      transItems: {
-        en: ["Some adjectives have a special masculine form before a vowel or silent h."],
-        ar: ["بعض الصفات لها صيغة مذكرة خاصة قبل حرف متحرك أو h صامت."],
-        fa: ["برخی صفت‌ها پیش از یک واکه یا h بی‌صدا صورت مذکر ویژه‌ای دارند."],
-        pt: ["Alguns adjetivos têm uma forma masculina especial antes de uma vogal ou de h mudo."],
-        so: ["Qaar ka mid ah sifooyinku waxay leeyihiin qaab lab oo gaar ah ka hor shaqal ama h aan la dhawaaqin."],
-        ti: ["ገለ ቅጽላት ቅድሚ ናይ ድምጺ ፊደል ወይ h ዝሕባእ ፍሉይ ተባዕታይ ቅርጺ ኣለዎም።"],
-        tr: ["Bazı sıfatların ünlüden veya sessiz h’den önce özel bir eril biçimi vardır."],
-        ps: ["ځینې صفتونه د واکې یا بې‌غږه h مخکې ځانګړې مذکره بڼه لري."],
-        uk: ["Деякі прикметники мають особливу форму чоловічого роду перед голосною або німим h."],
+      text: "Certains adjectifs ont une forme masculine spéciale devant une voyelle ou h muet.",
+      transText: {
+        en: "Some adjectives have a special masculine form before a vowel or silent h.",
+        ar: "بعض الصفات لها صيغة مذكرة خاصة قبل حرف متحرك أو h صامت.",
+        fa: "برخی صفت‌ها پیش از یک واکه یا h بی‌صدا صورت مذکر ویژه‌ای دارند.",
+        pt: "Alguns adjetivos têm uma forma masculina especial antes de uma vogal ou de h mudo.",
+        so: "Qaar ka mid ah sifooyinku waxay leeyihiin qaab lab oo gaar ah ka hor shaqal ama h aan la dhawaaqin.",
+        ti: "ገለ ቅጽላት ቅድሚ ናይ ድምጺ ፊደል ወይ h ዝሕባእ ፍሉይ ተባዕታይ ቅርጺ ኣለዎም።",
+        tr: "Bazı sıfatların ünlüden veya sessiz h’den önce özel bir eril biçimi vardır.",
+        ps: "ځینې صفتونه د واکې یا بې‌غږه h مخکې ځانګړې مذکره بڼه لري.",
+        uk: "Деякі прикметники мають особливу форму чоловічого роду перед голосною або німим h.",
       },
-      noBulletItems: [0],
     },
     {
       type: "grid",

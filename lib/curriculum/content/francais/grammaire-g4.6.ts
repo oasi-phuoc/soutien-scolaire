@@ -60,10 +60,7 @@ export const A1_GR_L19: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Liaison devant une voyelle ou un h muet. → mes enfants ; ton école ; vos histoires ; leurs affaires.",
-      ],
-      noBulletItems: [0],
+      text: "Liaison devant une voyelle ou un h muet. → mes enfants ; ton école ; vos histoires ; leurs affaires.",
     },
   ],
   exercises: [

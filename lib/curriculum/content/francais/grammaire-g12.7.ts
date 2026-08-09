@@ -64,10 +64,7 @@ export const A1_GR_PRONOMS_DEMONSTRATIFS: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Ne pas confondre {a}ce{/a} et {a}ceux{/a}. → Ce que tu as dit… ≠ Ceux qui ont parlé…",
-      ],
-      noBulletItems: [0],
+      text: "Ne pas confondre {a}ce{/a} et {a}ceux{/a}. → Ce que tu as dit… ≠ Ceux qui ont parlé…",
     },
   ],
   exercises: [

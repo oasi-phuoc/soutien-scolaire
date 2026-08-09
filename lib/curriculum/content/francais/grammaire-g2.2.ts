@@ -9,110 +9,47 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
   theory: [
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "En français, les noms de choses ont également un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
-      ],
-      transItems: {
-        en: [
-          "In French, {a}nouns referring to things{/a} also have a gender. A noun can be {a}masculine{/a} or {a}feminine{/a}."
-        ],
-        ar: [
-          "في الفرنسية، {a}أسماء الأشياء{/a} لها أيضاً جنس. يمكن أن يكون الاسم {a}مذكراً{/a} أو {a}مؤنثاً{/a}."
-        ],
-        fa: [
-          "در زبان فرانسوی، {a}اسم‌های مربوط به اشیا{/a} نیز جنس دارند. یک اسم می‌تواند {a}مذکر{/a} یا {a}مؤنث{/a} باشد."
-        ],
-        pt: [
-          "Em francês, os {a}nomes de coisas{/a} também têm género. Um nome pode ser {a}masculino{/a} ou {a}feminino{/a}."
-        ],
-        so: [
-          "Af Faransiiska, {a}magacyada waxyaabaha{/a} sidoo kale waxay leeyihiin jinsi. Magac wuxuu noqon karaa {a}lab{/a} ama {a}dheddig{/a}."
-        ],
-        ti: [
-          "ብፈረንሳይኛ፣ {a}ስማት ነገራት{/a} እውን ጾታ ኣለዎም። ሓደ ስም {a}ተባዕታይ{/a} ወይ {a}ኣንስተይቲ{/a} ክኸውን ይኽእል።"
-        ],
-        tr: [
-          "Fransızcada {a}nesneleri ifade eden isimlerin{/a} de cinsiyeti vardır. Bir isim {a}eril{/a} ya da {a}dişil{/a} olabilir."
-        ],
-        ps: [
-          "په فرانسوي کې {a}د شيانو نومونه{/a} هم جنس لري. یو نوم {a}مذکر{/a} یا {a}مونث{/a} کېدای شي."
-        ],
-        uk: [
-          "У французькій мові {a}іменники, що називають предмети{/a}, також мають рід. Іменник може бути {a}чоловічого роду{/a} або {a}жіночого роду{/a}."
-        ],
+      text: "En français, les noms de choses ont également un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
+      transText: {
+        en: "In French, {a}nouns referring to things{/a} also have a gender. A noun can be {a}masculine{/a} or {a}feminine{/a}.",
+        ar: "في الفرنسية، {a}أسماء الأشياء{/a} لها أيضاً جنس. يمكن أن يكون الاسم {a}مذكراً{/a} أو {a}مؤنثاً{/a}.",
+        fa: "در زبان فرانسوی، {a}اسم‌های مربوط به اشیا{/a} نیز جنس دارند. یک اسم می‌تواند {a}مذکر{/a} یا {a}مؤنث{/a} باشد.",
+        pt: "Em francês, os {a}nomes de coisas{/a} também têm género. Um nome pode ser {a}masculino{/a} ou {a}feminino{/a}.",
+        so: "Af Faransiiska, {a}magacyada waxyaabaha{/a} sidoo kale waxay leeyihiin jinsi. Magac wuxuu noqon karaa {a}lab{/a} ama {a}dheddig{/a}.",
+        ti: "ብፈረንሳይኛ፣ {a}ስማት ነገራት{/a} እውን ጾታ ኣለዎም። ሓደ ስም {a}ተባዕታይ{/a} ወይ {a}ኣንስተይቲ{/a} ክኸውን ይኽእል።",
+        tr: "Fransızcada {a}nesneleri ifade eden isimlerin{/a} de cinsiyeti vardır. Bir isim {a}eril{/a} ya da {a}dişil{/a} olabilir.",
+        ps: "په فرانسوي کې {a}د شيانو نومونه{/a} هم جنس لري. یو نوم {a}مذکر{/a} یا {a}مونث{/a} کېدای شي.",
+        uk: "У французькій мові {a}іменники, що називають предмети{/a}, також мають рід. Іменник може бути {a}чоловічого роду{/a} або {a}жіночого роду{/a}.",
       },
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Pour les choses, les noms indiquent souvent un {a}objet{/a}, un {a}lieu{/a} ou une {a}idée{/a}.",
-      ],
-      transItems: {
-        en: [
-          "For things, nouns often name an {a}object{/a}, a {a}place{/a} or an {a}idea{/a}."
-        ],
-        ar: [
-          "بالنسبة إلى الأشياء، تشير الأسماء غالباً إلى {a}غرض{/a} أو {a}مكان{/a} أو {a}فكرة{/a}."
-        ],
-        fa: [
-          "برای چیزها، اسم‌ها اغلب یک {a}شیء{/a}، یک {a}مکان{/a} یا یک {a}ایده{/a} را نشان می‌دهند."
-        ],
-        pt: [
-          "Para coisas, os nomes indicam muitas vezes um {a}objeto{/a}, um {a}lugar{/a} ou uma {a}ideia{/a}."
-        ],
-        so: [
-          "Waxyaabaha marka laga hadlayo, magacyadu badanaa waxay sheegaan {a}shay{/a}, {a}meel{/a} ama {a}fikrad{/a}."
-        ],
-        ti: [
-          "ንነገራት፣ ስማት መብዛሕትኡ ግዜ {a}ነገር{/a}፣ {a}ቦታ{/a} ወይ {a}ሓሳብ{/a} የመልክቱ።"
-        ],
-        tr: [
-          "Nesneler için isimler çoğu zaman bir {a}nesneyi{/a}, {a}yeri{/a} veya {a}fikri{/a} belirtir."
-        ],
-        ps: [
-          "د شیانو لپاره، نومونه ډېری وخت یو {a}څیز{/a}، {a}ځای{/a} یا {a}مفکوره{/a} ښيي."
-        ],
-        uk: [
-          "Для речей іменники часто позначають {a}предмет{/a}, {a}місце{/a} або {a}ідею{/a}."
-        ],
+      text: "Pour les choses, les noms indiquent souvent un {a}objet{/a}, un {a}lieu{/a} ou une {a}idée{/a}.",
+      transText: {
+        en: "For things, nouns often name an {a}object{/a}, a {a}place{/a} or an {a}idea{/a}.",
+        ar: "بالنسبة إلى الأشياء، تشير الأسماء غالباً إلى {a}غرض{/a} أو {a}مكان{/a} أو {a}فكرة{/a}.",
+        fa: "برای چیزها، اسم‌ها اغلب یک {a}شیء{/a}، یک {a}مکان{/a} یا یک {a}ایده{/a} را نشان می‌دهند.",
+        pt: "Para coisas, os nomes indicam muitas vezes um {a}objeto{/a}, um {a}lugar{/a} ou uma {a}ideia{/a}.",
+        so: "Waxyaabaha marka laga hadlayo, magacyadu badanaa waxay sheegaan {a}shay{/a}, {a}meel{/a} ama {a}fikrad{/a}.",
+        ti: "ንነገራት፣ ስማት መብዛሕትኡ ግዜ {a}ነገር{/a}፣ {a}ቦታ{/a} ወይ {a}ሓሳብ{/a} የመልክቱ።",
+        tr: "Nesneler için isimler çoğu zaman bir {a}nesneyi{/a}, {a}yeri{/a} veya {a}fikri{/a} belirtir.",
+        ps: "د شیانو لپاره، نومونه ډېری وخت یو {a}څیز{/a}، {a}ځای{/a} یا {a}مفکوره{/a} ښيي.",
+        uk: "Для речей іменники часто позначають {a}предмет{/a}, {a}місце{/a} або {a}ідею{/a}.",
       },
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Un nom s'emploie toujours avec un déterminant ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Le déterminant indique le genre : {a}un{/a} livre, {a}une{/a} ville.",
-      ],
-      transItems: {
-        en: [
-          "A noun is always used with a determiner ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). The determiner shows the gender: {a}un{/a} livre, {a}une{/a} ville."
-        ],
-        ar: [
-          "يُستعمل الاسم دائماً مع محدد ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…). المحدد يدل على الجنس: {a}un{/a} livre، {a}une{/a} ville."
-        ],
-        fa: [
-          "اسم همیشه با یک حرف تعریف ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} livre، {a}une{/a} ville."
-        ],
-        pt: [
-          "Um nome usa-se sempre com um determinante ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). O determinante mostra o género: {a}un{/a} livre, {a}une{/a} ville."
-        ],
-        so: [
-          "Magac mar walba waxaa lala adeegsadaa go'aamiye ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Go'aamiyuhu wuxuu muujiyaa jinsiga: {a}un{/a} livre, {a}une{/a} ville."
-        ],
-        ti: [
-          "ስም ኩሉ ግዜ ምስ መወሰኒ ({a}un{/a}፣ {a}la{/a}፣ {a}des{/a}፣ {a}ce{/a}፣ {a}mon{/a}…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት፦ {a}un{/a} livre, {a}une{/a} ville."
-        ],
-        tr: [
-          "Bir isim her zaman bir belirleyiciyle ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…) kullanılır. Belirleyici cinsiyeti gösterir: {a}un{/a} livre, {a}une{/a} ville."
-        ],
-        ps: [
-          "نوم تل له ټاکونکي سره کارېږي ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…). ټاکونکی جنس ښيي: {a}un{/a} livre، {a}une{/a} ville."
-        ],
-        uk: [
-          "Іменник завжди вживається з означенням ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Означення показує рід: {a}un{/a} livre, {a}une{/a} ville."
-        ],
+      text: "Un nom s'emploie toujours avec un déterminant ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Le déterminant indique le genre : {a}un{/a} livre, {a}une{/a} ville.",
+      transText: {
+        en: "A noun is always used with a determiner ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). The determiner shows the gender: {a}un{/a} livre, {a}une{/a} ville.",
+        ar: "يُستعمل الاسم دائماً مع محدد ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…). المحدد يدل على الجنس: {a}un{/a} livre، {a}une{/a} ville.",
+        fa: "اسم همیشه با یک حرف تعریف ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} livre، {a}une{/a} ville.",
+        pt: "Um nome usa-se sempre com um determinante ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). O determinante mostra o género: {a}un{/a} livre, {a}une{/a} ville.",
+        so: "Magac mar walba waxaa lala adeegsadaa go'aamiye ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Go'aamiyuhu wuxuu muujiyaa jinsiga: {a}un{/a} livre, {a}une{/a} ville.",
+        ti: "ስም ኩሉ ግዜ ምስ መወሰኒ ({a}un{/a}፣ {a}la{/a}፣ {a}des{/a}፣ {a}ce{/a}፣ {a}mon{/a}…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት፦ {a}un{/a} livre, {a}une{/a} ville.",
+        tr: "Bir isim her zaman bir belirleyiciyle ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…) kullanılır. Belirleyici cinsiyeti gösterir: {a}un{/a} livre, {a}une{/a} ville.",
+        ps: "نوم تل له ټاکونکي سره کارېږي ({a}un{/a}، {a}la{/a}، {a}des{/a}، {a}ce{/a}، {a}mon{/a}…). ټاکونکی جنس ښيي: {a}un{/a} livre، {a}une{/a} ville.",
+        uk: "Іменник завжди вживається з означенням ({a}un{/a}, {a}la{/a}, {a}des{/a}, {a}ce{/a}, {a}mon{/a}…). Означення показує рід: {a}un{/a} livre, {a}une{/a} ville.",
       },
     },
     {
@@ -126,66 +63,32 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Il n'existe pas de règle absolue. Pour connaître le genre d'un nom, on peut :",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["There is no absolute rule. To know the gender of a noun, you can:"],
-        ar: ["لا توجد قاعدة مطلقة. لمعرفة جنس الاسم، يمكن:"],
-        fa: ["قاعدهٔ مطلقی وجود ندارد. برای دانستن جنس یک اسم می‌توان:"],
-        pt: ["Não existe uma regra absoluta. Para saber o género de um nome, pode:"],
-        so: ["Ma jiro xeer gebi ahaan sax ah. Si aad u ogaato jinsiga magac, waad kari kartaa:"],
-        ti: ["ፍጹም ሕጊ የለን። ጾታ ስም ንምፍላጥ ክትገብር ትኽእል:"],
-        tr: ["Kesin bir kural yoktur. Bir ismin cinsiyetini bilmek için şunları yapabilirsiniz:"],
-        ps: ["مطلقه قاعده نشته. د نوم د جنس پېژندلو لپاره، کولای شئ:"],
-        uk: ["Абсолютного правила немає. Щоб дізнатися рід іменника, можна:"],
+      text: "Il n'existe pas de règle absolue. Pour connaître le genre d'un nom, on peut :",
+      transText: {
+        en: "There is no absolute rule. To know the gender of a noun, you can:",
+        ar: "لا توجد قاعدة مطلقة. لمعرفة جنس الاسم، يمكن:",
+        fa: "قاعدهٔ مطلقی وجود ندارد. برای دانستن جنس یک اسم می‌توان:",
+        pt: "Não existe uma regra absoluta. Para saber o género de um nome, pode:",
+        so: "Ma jiro xeer gebi ahaan sax ah. Si aad u ogaato jinsiga magac, waad kari kartaa:",
+        ti: "ፍጹም ሕጊ የለን። ጾታ ስም ንምፍላጥ ክትገብር ትኽእል:",
+        tr: "Kesin bir kural yoktur. Bir ismin cinsiyetini bilmek için şunları yapabilirsiniz:",
+        ps: "مطلقه قاعده نشته. د نوم د جنس پېژندلو لپاره، کولای شئ:",
+        uk: "Абсолютного правила немає. Щоб дізнатися рід іменника, можна:",
       },
     },
     {
       type: "text",
-      items: [
-        "{a}1.{/a} Regarder le déterminant (un, une, le, la).",
-        "{a}2.{/a} Observer la terminaison du mot.",
-        "{a}3.{/a} Vérifier dans un dictionnaire.",
-        "{a}4.{/a} Apprendre le nom avec son article.",
-      ],
-      noBulletItems: [0, 1, 2, 3],
-      transItems: {
-        en: [
-          "{a}1.{/a} Look at the determiner (un, une, le, la).",
-          "{a}2.{/a} Observe the ending of the word.",
-          "{a}3.{/a} Check in a dictionary.",
-          "{a}4.{/a} Learn the noun with its article.",
-        ],
-        ar: [
-          "{a}1.{/a} انظر إلى المحدد (un, une, le, la).",
-          "{a}2.{/a} راقب نهاية الكلمة.",
-          "{a}3.{/a} تحقق في القاموس.",
-          "{a}4.{/a} تعلّم الاسم مع أداته.",
-        ],
-        fa: [
-          "{a}1.{/a} به حرف تعریف نگاه کنید (un, une, le, la).",
-          "{a}2.{/a} پایان واژه را مشاهده کنید.",
-          "{a}3.{/a} در فرهنگ لغت بررسی کنید.",
-          "{a}4.{/a} اسم را همراه حرف تعریفش یاد بگیرید.",
-        ],
-        pt: ["{a}1.{/a} Observe o determinante (un, une, le, la).","{a}2.{/a} Observe a terminação da palavra.","{a}3.{/a} Verifique num dicionário.","{a}4.{/a} Aprenda o nome com o seu artigo."],
-        so: ["{a}1.{/a} Eeg go'aamiyaha (un, une, le, la).","{a}2.{/a} U fiirso dhammaadka ereyga.","{a}3.{/a} Ka hubi qaamuus.","{a}4.{/a} Magaca la baro qodobkiisa."],
-        ti: [
-          "{a}1.{/a} ነቲ መወሰኒ ርአ (un, une, le, la).",
-          "{a}2.{/a} ናይቲ ቃል መወዳእታ ተዓዘብ።",
-          "{a}3.{/a} ኣብ መዝገበ-ቃላት ኣረጋግጽ።",
-          "{a}4.{/a} እቲ ስም ምስ ዓንቀጹ ተማሃር።",
-        ],
-        tr: ["{a}1.{/a} Belirleyiciye bakın (un, une, le, la).","{a}2.{/a} Kelimenin sonunu inceleyin.","{a}3.{/a} Bir sözlükten kontrol edin.","{a}4.{/a} İsmi artikeliyle birlikte öğrenin."],
-        ps: ["{a}1.{/a} ټاکونکي ته وګورئ (un, une, le, la).","{a}2.{/a} د کلمې پای وګورئ.","{a}3.{/a} په قاموس کې یې وګورئ.","{a}4.{/a} نوم له خپلې ادات سره زده کړئ."],
-        uk: [
-          "{a}1.{/a} Подивитися на означення (un, une, le, la).",
-          "{a}2.{/a} Спостерігати закінчення слова.",
-          "{a}3.{/a} Перевірити в словнику.",
-          "{a}4.{/a} Вивчити іменник разом з артиклем.",
-        ],
+      text: "{a}1.{/a} Regarder le déterminant (un, une, le, la).\n{a}2.{/a} Observer la terminaison du mot.\n{a}3.{/a} Vérifier dans un dictionnaire.\n{a}4.{/a} Apprendre le nom avec son article.",
+      transText: {
+        en: "{a}1.{/a} Look at the determiner (un, une, le, la).\n{a}2.{/a} Observe the ending of the word.\n{a}3.{/a} Check in a dictionary.\n{a}4.{/a} Learn the noun with its article.",
+        ar: "{a}1.{/a} انظر إلى المحدد (un, une, le, la).\n{a}2.{/a} راقب نهاية الكلمة.\n{a}3.{/a} تحقق في القاموس.\n{a}4.{/a} تعلّم الاسم مع أداته.",
+        fa: "{a}1.{/a} به حرف تعریف نگاه کنید (un, une, le, la).\n{a}2.{/a} پایان واژه را مشاهده کنید.\n{a}3.{/a} در فرهنگ لغت بررسی کنید.\n{a}4.{/a} اسم را همراه حرف تعریفش یاد بگیرید.",
+        pt: "{a}1.{/a} Observe o determinante (un, une, le, la).\n{a}2.{/a} Observe a terminação da palavra.\n{a}3.{/a} Verifique num dicionário.\n{a}4.{/a} Aprenda o nome com o seu artigo.",
+        so: "{a}1.{/a} Eeg go'aamiyaha (un, une, le, la).\n{a}2.{/a} U fiirso dhammaadka ereyga.\n{a}3.{/a} Ka hubi qaamuus.\n{a}4.{/a} Magaca la baro qodobkiisa.",
+        ti: "{a}1.{/a} ነቲ መወሰኒ ርአ (un, une, le, la).\n{a}2.{/a} ናይቲ ቃል መወዳእታ ተዓዘብ።\n{a}3.{/a} ኣብ መዝገበ-ቃላት ኣረጋግጽ።\n{a}4.{/a} እቲ ስም ምስ ዓንቀጹ ተማሃር።",
+        tr: "{a}1.{/a} Belirleyiciye bakın (un, une, le, la).\n{a}2.{/a} Kelimenin sonunu inceleyin.\n{a}3.{/a} Bir sözlükten kontrol edin.\n{a}4.{/a} İsmi artikeliyle birlikte öğrenin.",
+        ps: "{a}1.{/a} ټاکونکي ته وګورئ (un, une, le, la).\n{a}2.{/a} د کلمې پای وګورئ.\n{a}3.{/a} په قاموس کې یې وګورئ.\n{a}4.{/a} نوم له خپلې ادات سره زده کړئ.",
+        uk: "{a}1.{/a} Подивитися на означення (un, une, le, la).\n{a}2.{/a} Спостерігати закінчення слова.\n{a}3.{/a} Перевірити в словнику.\n{a}4.{/a} Вивчити іменник разом з артиклем.",
       },
     },
     {
@@ -195,24 +98,21 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         {
           label: "Masculin",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les noms qui se terminent par ces lettres sont souvent masculins.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Nouns ending with these letters are often masculine."],
-                ar: ["الأسماء المنتهية بهذه الحروف غالباً مذكرة."],
-                fa: ["اسم‌هایی که به این حروف ختم می‌شوند اغلب مذکرند."],
-                pt: ["Os nomes que terminam com estas letras são muitas vezes masculinos."],
-                so: ["Magacyada ku dhammaada xarafadan badanaa waa lab."],
-                ti: ["ብዚኦም ፊደላት ዝውድኡ ስማት መብዛሕትኡ ግዜ ተባዕታይ እዮም።"],
-                tr: ["Bu harflerle biten isimler çoğu zaman erildir."],
-                ps: ["هغه نومونه چې په دې تورو پای ته رسېږي، ډېری وخت مذکر وي."],
-                uk: ["Іменники з цими закінченнями часто чоловічого роду."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les noms qui se terminent par ces lettres sont souvent masculins.",
+      transText: {
+        en: "Nouns ending with these letters are often masculine.",
+        ar: "الأسماء المنتهية بهذه الحروف غالباً مذكرة.",
+        fa: "اسم‌هایی که به این حروف ختم می‌شوند اغلب مذکرند.",
+        pt: "Os nomes que terminam com estas letras são muitas vezes masculinos.",
+        so: "Magacyada ku dhammaada xarafadan badanaa waa lab.",
+        ti: "ብዚኦም ፊደላት ዝውድኡ ስማት መብዛሕትኡ ግዜ ተባዕታይ እዮም።",
+        tr: "Bu harflerle biten isimler çoğu zaman erildir.",
+        ps: "هغه نومونه چې په دې تورو پای ته رسېږي، ډېری وخت مذکر وي.",
+        uk: "Іменники з цими закінченнями часто чоловічого роду.",
+      },
+    },
             {
               type: "grid",
               headers: ["Terminaison", "Exemple", ""],
@@ -244,24 +144,21 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         {
           label: "Féminin",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les noms qui se terminent par ces lettres sont souvent féminins.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Nouns ending with these letters are often feminine."],
-                ar: ["الأسماء المنتهية بهذه الحروف غالباً مؤنثة."],
-                fa: ["اسم‌هایی که به این حروف ختم می‌شوند اغلب مؤنث‌اند."],
-                pt: ["Os nomes que terminam com estas letras são muitas vezes femininos."],
-                so: ["Magacyada ku dhammaada xarafadan badanaa waa dheddig."],
-                ti: ["ብዚኦም ፊደላት ዝውድኡ ስማት መብዛሕትኡ ግዜ ኣንስተይቲ እዮም።"],
-                tr: ["Bu harflerle biten isimler çoğu zaman dişildir."],
-                ps: ["هغه نومونه چې په دې تورو پای ته رسېږي، ډېری وخت مونث وي."],
-                uk: ["Іменники з цими закінченнями часто жіночого роду."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les noms qui se terminent par ces lettres sont souvent féminins.",
+      transText: {
+        en: "Nouns ending with these letters are often feminine.",
+        ar: "الأسماء المنتهية بهذه الحروف غالباً مؤنثة.",
+        fa: "اسم‌هایی که به این حروف ختم می‌شوند اغلب مؤنث‌اند.",
+        pt: "Os nomes que terminam com estas letras são muitas vezes femininos.",
+        so: "Magacyada ku dhammaada xarafadan badanaa waa dheddig.",
+        ti: "ብዚኦም ፊደላት ዝውድኡ ስማት መብዛሕትኡ ግዜ ኣንስተይቲ እዮም።",
+        tr: "Bu harflerle biten isimler çoğu zaman dişildir.",
+        ps: "هغه نومونه چې په دې تورو پای ته رسېږي، ډېری وخت مونث وي.",
+        uk: "Іменники з цими закінченнями часто жіночого роду.",
+      },
+    },
             {
               type: "grid",
               headers: ["Terminaison", "Exemple", ""],
@@ -294,56 +191,41 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "La majorité des noms qui se terminent par {a}-e{/a} sont féminins.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Most nouns ending in {a}-e{/a} are feminine."],
-        ar: ["غالبية الأسماء المنتهية بـ {a}-e{/a} مؤنثة."],
-        fa: ["بیشتر اسم‌هایی که به {a}-e{/a} ختم می‌شوند مؤنث‌اند."],
-        pt: ["A maioria dos nomes que terminam em {a}-e{/a} são femininos."],
-        so: ["Magacyada intooda badan ee ku dhammaada {a}-e{/a} waa dheddig."],
-        ti: ["መብዛሕትኦም ብ {a}-e{/a} ዝውድኡ ስማት ኣንስተይቲ እዮም።"],
-        tr: ["{a}-e{/a} ile biten isimlerin çoğu dişildir."],
-        ps: ["هغه نومونه چې په {a}-e{/a} پای ته رسېږي، ډېری یې مونث دي."],
-        uk: ["Більшість іменників на {a}-e{/a} — жіночого роду."],
+      text: "La majorité des noms qui se terminent par {a}-e{/a} sont féminins.",
+      transText: {
+        en: "Most nouns ending in {a}-e{/a} are feminine.",
+        ar: "غالبية الأسماء المنتهية بـ {a}-e{/a} مؤنثة.",
+        fa: "بیشتر اسم‌هایی که به {a}-e{/a} ختم می‌شوند مؤنث‌اند.",
+        pt: "A maioria dos nomes que terminam em {a}-e{/a} são femininos.",
+        so: "Magacyada intooda badan ee ku dhammaada {a}-e{/a} waa dheddig.",
+        ti: "መብዛሕትኦም ብ {a}-e{/a} ዝውድኡ ስማት ኣንስተይቲ እዮም።",
+        tr: "{a}-e{/a} ile biten isimlerin çoğu dişildir.",
+        ps: "هغه نومونه چې په {a}-e{/a} پای ته رسېږي، ډېری یې مونث دي.",
+        uk: "Більшість іменників на {a}-e{/a} — жіночого роду.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "la tabl{a}e{/a}, la vill{a}e{/a}, la voitur{a}e{/a}, etc.",
-      ],
-      noBulletItems: [0],
+      text: "la tabl{a}e{/a}, la vill{a}e{/a}, la voitur{a}e{/a}, etc.",
     },
     {
       type: "text",
-      items: [
-        "Les noms qui se terminent par une consonne ou une voyelle ({a}a{/a}, {a}i{/a}, {a}o{/a} ou {a}u{/a}) sont souvent masculins.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Nouns ending in a consonant or a vowel ({a}a{/a}, {a}i{/a}, {a}o{/a} or {a}u{/a}) are often masculine."],
-        ar: ["الأسماء المنتهية بحرف صامت أو بحرف علة ({a}a{/a}، {a}i{/a}، {a}o{/a} أو {a}u{/a}) غالباً مذكرة."],
-        fa: ["اسم‌هایی که به صامت یا مصوت ({a}a{/a}، {a}i{/a}، {a}o{/a} یا {a}u{/a}) ختم می‌شوند اغلب مذکرند."],
-        pt: ["Os nomes que terminam numa consoante ou numa vogal ({a}a{/a}, {a}i{/a}, {a}o{/a} ou {a}u{/a}) são muitas vezes masculinos."],
-        so: ["Magacyada ku dhammaada shibbane ama shaqal ({a}a{/a}, {a}i{/a}, {a}o{/a} ama {a}u{/a}) badanaa waa lab."],
-        ti: ["ብተነባብ ወይ ብድምጺ ({a}a{/a}፣ {a}i{/a}፣ {a}o{/a} ወይ {a}u{/a}) ዝውድኡ ስማት መብዛሕትኡ ግዜ ተባዕታይ እዮም።"],
-        tr: ["Bir ünsüzle veya bir ünlüyle ({a}a{/a}, {a}i{/a}, {a}o{/a} ya da {a}u{/a}) biten isimler çoğu zaman erildir."],
-        ps: ["هغه نومونه چې په بې غږه توري یا غږلرونکي توري ({a}a{/a}, {a}i{/a}, {a}o{/a} یا {a}u{/a}) پای ته رسېږي، ډېری وخت مذکر وي."],
-        uk: ["Іменники, що закінчуються на приголосну або голосну ({a}a{/a}, {a}i{/a}, {a}o{/a} чи {a}u{/a}), часто чоловічого роду."],
+      text: "Les noms qui se terminent par une consonne ou une voyelle ({a}a{/a}, {a}i{/a}, {a}o{/a} ou {a}u{/a}) sont souvent masculins.",
+      transText: {
+        en: "Nouns ending in a consonant or a vowel ({a}a{/a}, {a}i{/a}, {a}o{/a} or {a}u{/a}) are often masculine.",
+        ar: "الأسماء المنتهية بحرف صامت أو بحرف علة ({a}a{/a}، {a}i{/a}، {a}o{/a} أو {a}u{/a}) غالباً مذكرة.",
+        fa: "اسم‌هایی که به صامت یا مصوت ({a}a{/a}، {a}i{/a}، {a}o{/a} یا {a}u{/a}) ختم می‌شوند اغلب مذکرند.",
+        pt: "Os nomes que terminam numa consoante ou numa vogal ({a}a{/a}, {a}i{/a}, {a}o{/a} ou {a}u{/a}) são muitas vezes masculinos.",
+        so: "Magacyada ku dhammaada shibbane ama shaqal ({a}a{/a}, {a}i{/a}, {a}o{/a} ama {a}u{/a}) badanaa waa lab.",
+        ti: "ብተነባብ ወይ ብድምጺ ({a}a{/a}፣ {a}i{/a}፣ {a}o{/a} ወይ {a}u{/a}) ዝውድኡ ስማት መብዛሕትኡ ግዜ ተባዕታይ እዮም።",
+        tr: "Bir ünsüzle veya bir ünlüyle ({a}a{/a}, {a}i{/a}, {a}o{/a} ya da {a}u{/a}) biten isimler çoğu zaman erildir.",
+        ps: "هغه نومونه چې په بې غږه توري یا غږلرونکي توري ({a}a{/a}, {a}i{/a}, {a}o{/a} یا {a}u{/a}) پای ته رسېږي، ډېری وخت مذکر وي.",
+        uk: "Іменники, що закінчуються на приголосну або голосну ({a}a{/a}, {a}i{/a}, {a}o{/a} чи {a}u{/a}), часто чоловічого роду.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "le pay{a}s{/a}, le magasi{a}n{/a}, le monumen{a}t{/a}, etc.",
-        "un agend{a}a{/a}, un tax{a}i{/a}, un vél{a}o{/a}, etc.",
-      ],
-      noBulletItems: [0, 1],
+      text: "le pay{a}s{/a}, le magasi{a}n{/a}, le monumen{a}t{/a}, etc.\nun agend{a}a{/a}, un tax{a}i{/a}, un vél{a}o{/a}, etc.",
     },
   ],
   exercises: [

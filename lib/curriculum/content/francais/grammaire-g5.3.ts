@@ -58,17 +58,33 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     { type: "heading", text: "Les 3 formes de questions fermées", trans: { en: "The 3 forms of closed (yes/no) questions", ar: "الأشكال الثلاثة للأسئلة المغلقة (نعم/لا)", fa: "سه شکل پرسش‌های بسته (بله/خیر)", ti: "ሰለስተ ቅርጽታት ናይ ዕጹዋት ሕቶታት (እወ/ኣይፋል)", uk: "3 форми закритих питань (так/ні)" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "Une question {a}fermée{/a} a pour réponse {a}oui{/a} ou {a}non{/a}.",
+      transText: {
+        en: "A {a}closed{/a} question is answered with oui (yes) / non (no) / si (yes, to a negative question).",
+        ar: "السؤال {a}المغلق{/a} يُجاب عليه بـ oui (نعم) / non (لا) / si (بلى).",
+        fa: "پاسخ پرسش {a}بسته{/a} oui (بله) / non (خیر) / si (چرا، در پاسخ منفی) است.",
+        ti: "ዕጹው ሕቶ መልሱ oui (እወ) / non (ኣይፋል) / si (እወ፣ ንኣሉታዊ ሕቶ) እዩ።",
+        uk: "На {a}закрите{/a} питання відповідають oui (так) / non (ні) / si (так, на заперечне питання).",
+      },
       items: [
-        "Une question {a}fermée{/a} a pour réponse {a}oui{/a} ou {a}non{/a}.",
         "Il existe 3 structures, du plus familier au plus formel.",
       ],
       transItems: {
-        en: ["A {a}closed{/a} question is answered with oui (yes) / non (no) / si (yes, to a negative question).", "There are 3 structures, from the most informal to the most formal."],
-        ar: ["السؤال {a}المغلق{/a} يُجاب عليه بـ oui (نعم) / non (لا) / si (بلى).", "هناك 3 بِنى، من الأكثر عامّية إلى الأكثر رسمية."],
-        fa: ["پاسخ پرسش {a}بسته{/a} oui (بله) / non (خیر) / si (چرا، در پاسخ منفی) است.", "سه ساختار وجود دارد، از غیررسمی‌ترین تا رسمی‌ترین."],
-        ti: ["ዕጹው ሕቶ መልሱ oui (እወ) / non (ኣይፋል) / si (እወ፣ ንኣሉታዊ ሕቶ) እዩ።", "ሰለስተ ቅርጽታት ኣለዋ፣ ካብ ዝያዳ ህዝባዊ ክሳብ ዝያዳ ወግዓዊ።"],
-        uk: ["На {a}закрите{/a} питання відповідають oui (так) / non (ні) / si (так, на заперечне питання).", "Існує 3 структури — від найнеформальнішої до найформальнішої."],
+        en: [
+          "There are 3 structures, from the most informal to the most formal.",
+        ],
+        ar: [
+          "هناك 3 بِنى، من الأكثر عامّية إلى الأكثر رسمية.",
+        ],
+        fa: [
+          "سه ساختار وجود دارد، از غیررسمی‌ترین تا رسمی‌ترین.",
+        ],
+        ti: [
+          "ሰለስተ ቅርጽታት ኣለዋ፣ ካብ ዝያዳ ህዝባዊ ክሳብ ዝያዳ ወግዓዊ።",
+        ],
+        uk: [
+          "Існує 3 структури — від найнеформальнішої до найформальнішої.",
+        ],
       },
     },
     {
@@ -96,8 +112,10 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     { type: "heading", text: 'Questions avec "Est-ce que"', sub: true, trans: { en: 'Questions with "Est-ce que"', ar: 'الأسئلة بـ "Est-ce que"', fa: 'سوالات با "Est-ce que"', ti: 'ሕቶታት ብ "Est-ce que"', uk: 'Питання з "Est-ce que"' } },
-    { type: "text",
-      noBulletItems: [0], items: ["C'est la forme la plus courante qui est utilisée."] },
+    {
+      type: "text",
+      text: "C'est la forme la plus courante qui est utilisée.",
+    },
     {
       type: "grid",
       headers: ["Affirmatif", "Question avec est-ce que"],
@@ -123,8 +141,10 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
     },
     { type: "heading", text: "L'inversion verbe-sujet", sub: true, trans: { en: "Verb-subject inversion", ar: "القلب فعل-فاعل", fa: "وارونگی فعل-فاعل", ti: "ምግልባጥ ግሲ-ርእሲ", uk: "Інверсія дієслово-підмет" } },
-    { type: "text",
-      noBulletItems: [0], items: ["C'est la forme formelle, utilisée principalement à l'écrit et dans les situations officielles."] },
+    {
+      type: "text",
+      text: "C'est la forme formelle, utilisée principalement à l'écrit et dans les situations officielles.",
+    },
     {
       type: "grid",
       headers: ["Affirmatif", "Inversion"],
@@ -152,35 +172,28 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     { type: "heading", text: "Le -t- euphonique", sub: true, trans: { en: "The euphonic -t-", ar: "الـ -t- للتسهيل", fa: "حرف میانجی -t-", ti: "ናይ ምልስላስ -t-", uk: "Евфонічне -t-" } },
     {
       type: "text",
-      noBulletItems: [0],
-      items: ["Quand le verbe se termine par une {a}voyelle{/a} + il / elle / on, on insère {a}-t-{/a}."],
-      transItems: {
-        en: ["When the verb ends in a {a}vowel{/a} + il / elle / on, we insert {a}-t-{/a}."],
-        ar: ["عندما ينتهي الفعل بـ {a}حرف علة{/a} + il / elle / on، نُدخل {a}-t-{/a}."],
-        fa: ["وقتی فعل به {a}حرف صدادار{/a} + il / elle / on ختم می‌شود، {a}-t-{/a} اضافه می‌کنیم."],
-        ti: ["እቲ ግሲ ብ{a}ድምጺ ፊደል{/a} + il / elle / on ምስ ዝውዳእ፣ {a}-t-{/a} ነእቱ።"],
-        uk: ["Коли дієслово закінчується на {a}голосну{/a} + il / elle / on, вставляють {a}-t-{/a}."],
+      text: "Quand le verbe se termine par une {a}voyelle{/a} + il / elle / on, on insère {a}-t-{/a}.",
+      transText: {
+        en: "When the verb ends in a {a}vowel{/a} + il / elle / on, we insert {a}-t-{/a}.",
+        ar: "عندما ينتهي الفعل بـ {a}حرف علة{/a} + il / elle / on، نُدخل {a}-t-{/a}.",
+        fa: "وقتی فعل به {a}حرف صدادار{/a} + il / elle / on ختم می‌شود، {a}-t-{/a} اضافه می‌کنیم.",
+        ti: "እቲ ግሲ ብ{a}ድምጺ ፊደል{/a} + il / elle / on ምስ ዝውዳእ፣ {a}-t-{/a} ነእቱ።",
+        uk: "Коли дієслово закінчується на {a}голосну{/a} + il / elle / on, вставляють {a}-t-{/a}.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "va → va-{a}t{/a}-il / va-{a}t{/a}-elle / va-{a}t{/a}-on",
-        "a → a-{a}t{/a}-il (avoir) / aime-{a}t{/a}-il (aimer)",
-      ],
-      noBulletItems: [0, 1],
+      text: "va → va-{a}t{/a}-il / va-{a}t{/a}-elle / va-{a}t{/a}-on\na → a-{a}t{/a}-il (avoir) / aime-{a}t{/a}-il (aimer)",
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: ["Cette règle s'applique uniquement à l'inversion."],
-      transItems: {
-        en: ["This rule applies only to inversion."],
-        ar: ["تنطبق هذه القاعدة على القلب فقط."],
-        fa: ["این قاعده فقط برای وارونگی به کار می‌رود."],
-        ti: ["እዚ ሕጊ ኣብ ምግልባጥ ጥራይ እዩ ዝውዕል።"],
-        uk: ["Це правило застосовується лише до інверсії."],
+      text: "Cette règle s'applique uniquement à l'inversion.",
+      transText: {
+        en: "This rule applies only to inversion.",
+        ar: "تنطبق هذه القاعدة على القلب فقط.",
+        fa: "این قاعده فقط برای وارونگی به کار می‌رود.",
+        ti: "እዚ ሕጊ ኣብ ምግልባጥ ጥራይ እዩ ዝውዕል።",
+        uk: "Це правило застосовується лише до інверсії.",
       },
     },
     { type: "heading", text: "Oui, Non, Si", trans: { en: "Oui (yes), Non (no), Si (yes, to a negative)", ar: "Oui (نعم)، Non (لا)، Si (بلى)", fa: "Oui (بله)، Non (خیر)، Si (چرا)", ti: "Oui (እወ)፣ Non (ኣይፋል)፣ Si (እወ ንኣሉታ)", uk: "Oui (так), Non (ні), Si (так, на заперечне)" } },
@@ -229,14 +242,13 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     { type: "heading", text: "Les réponses en écho avec « moi »", sub: true, trans: { en: "Echo responses with \"moi\"", ar: "الردود الصدى مع «moi»", fa: "پاسخ‌های بازتابی با «moi»", ti: "ናይ ምስምማዕ ምላሽ ብ«moi»", uk: "Ехо-відповіді з «moi»" } },
     {
       type: "text",
-      noBulletItems: [0],
-      items: ["On utilise {a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} ou {a}Moi pas{/a} pour dire rapidement si on est pareil ou différent."],
-      transItems: {
-        en: ["We use {a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} or {a}Moi pas{/a} to quickly say whether we feel the same or different."],
-        ar: ["نستخدم {a}Moi aussi{/a} و{a}Moi non plus{/a} و{a}Moi si{/a} أو {a}Moi pas{/a} لنقول بسرعة إن كنا متفقين أم لا."],
-        fa: ["از {a}Moi aussi{/a}، {a}Moi non plus{/a}، {a}Moi si{/a} یا {a}Moi pas{/a} استفاده می‌کنیم تا سریع بگوییم آیا همانند هستیم یا متفاوت."],
-        ti: ["{a}Moi aussi{/a}፣ {a}Moi non plus{/a}፣ {a}Moi si{/a} ወይ {a}Moi pas{/a} ብቕልጡፍ ምስ ሰምዕናዮ ወይ ዘይሰምዕናዮ ንምምሳል ንጥቀም።"],
-        uk: ["{a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} або {a}Moi pas{/a} використовуємо, щоб швидко сказати, чи відчуваємо те саме, чи ні."],
+      text: "On utilise {a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} ou {a}Moi pas{/a} pour dire rapidement si on est pareil ou différent.",
+      transText: {
+        en: "We use {a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} or {a}Moi pas{/a} to quickly say whether we feel the same or different.",
+        ar: "نستخدم {a}Moi aussi{/a} و{a}Moi non plus{/a} و{a}Moi si{/a} أو {a}Moi pas{/a} لنقول بسرعة إن كنا متفقين أم لا.",
+        fa: "از {a}Moi aussi{/a}، {a}Moi non plus{/a}، {a}Moi si{/a} یا {a}Moi pas{/a} استفاده می‌کنیم تا سریع بگوییم آیا همانند هستیم یا متفاوت.",
+        ti: "{a}Moi aussi{/a}፣ {a}Moi non plus{/a}፣ {a}Moi si{/a} ወይ {a}Moi pas{/a} ብቕልጡፍ ምስ ሰምዕናዮ ወይ ዘይሰምዕናዮ ንምምሳል ንጥቀም።",
+        uk: "{a}Moi aussi{/a}, {a}Moi non plus{/a}, {a}Moi si{/a} або {a}Moi pas{/a} використовуємо, щоб швидко сказати, чи відчуваємо те саме, чи ні.",
       },
     },
     {

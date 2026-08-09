@@ -9,92 +9,47 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
   theory: [
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "En français, les noms de personnes ont un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
-      ],
-      transItems: {
-        en: [
-          "In French, {a}nouns referring to people{/a} have a gender. A noun can be {a}masculine{/a} or {a}feminine{/a}."
-        ],
-        ar: [
-          "في الفرنسية، {a}أسماء الأشخاص{/a} لها جنس. يمكن أن يكون الاسم {a}مذكراً{/a} أو {a}مؤنثاً{/a}."
-        ],
-        fa: [
-          "در زبان فرانسوی، {a}اسم‌های مربوط به افراد{/a} جنس دارند. یک اسم می‌تواند {a}مذکر{/a} یا {a}مؤنث{/a} باشد."
-        ],
-        pt: [
-          "Em francês, os {a}nomes de pessoas{/a} têm género. Um nome pode ser {a}masculino{/a} ou {a}feminino{/a}."
-        ],
-        so: [
-          "Af Faransiiska, {a}magacyada dadka{/a} waxay leeyihiin jinsi. Magac wuxuu noqon karaa {a}lab{/a} ama {a}dheddig{/a}."
-        ],
-        ti: [
-          "ብፈረንሳይኛ፣ {a}ስማት ሰባት{/a} ጾታ ኣለዎም። ሓደ ስም {a}ተባዕታይ{/a} ወይ {a}ኣንስተይቲ{/a} ክኸውን ይኽእል።"
-        ],
-        tr: [
-          "Fransızcada {a}kişileri ifade eden isimlerin{/a} cinsiyeti vardır. Bir isim {a}eril{/a} ya da {a}dişil{/a} olabilir."
-        ],
-        ps: [
-          "په فرانسوي کې {a}د خلکو نومونه{/a} جنس لري. یو نوم {a}مذکر{/a} یا {a}مونث{/a} کېدای شي."
-        ],
-        uk: [
-          "У французькій мові {a}іменники, що називають людей{/a}, мають рід. Іменник може бути {a}чоловічого роду{/a} або {a}жіночого роду{/a}."
-        ],
+      text: "En français, les noms de personnes ont un genre. Un nom peut être {a}masculin{/a} ou {a}féminin{/a}.",
+      transText: {
+        en: "In French, {a}nouns referring to people{/a} have a gender. A noun can be {a}masculine{/a} or {a}feminine{/a}.",
+        ar: "في الفرنسية، {a}أسماء الأشخاص{/a} لها جنس. يمكن أن يكون الاسم {a}مذكراً{/a} أو {a}مؤنثاً{/a}.",
+        fa: "در زبان فرانسوی، {a}اسم‌های مربوط به افراد{/a} جنس دارند. یک اسم می‌تواند {a}مذکر{/a} یا {a}مؤنث{/a} باشد.",
+        pt: "Em francês, os {a}nomes de pessoas{/a} têm género. Um nome pode ser {a}masculino{/a} ou {a}feminino{/a}.",
+        so: "Af Faransiiska, {a}magacyada dadka{/a} waxay leeyihiin jinsi. Magac wuxuu noqon karaa {a}lab{/a} ama {a}dheddig{/a}.",
+        ti: "ብፈረንሳይኛ፣ {a}ስማት ሰባት{/a} ጾታ ኣለዎም። ሓደ ስም {a}ተባዕታይ{/a} ወይ {a}ኣንስተይቲ{/a} ክኸውን ይኽእል።",
+        tr: "Fransızcada {a}kişileri ifade eden isimlerin{/a} cinsiyeti vardır. Bir isim {a}eril{/a} ya da {a}dişil{/a} olabilir.",
+        ps: "په فرانسوي کې {a}د خلکو نومونه{/a} جنس لري. یو نوم {a}مذکر{/a} یا {a}مونث{/a} کېدای شي.",
+        uk: "У французькій мові {a}іменники, що називають людей{/a}, мають рід. Іменник може бути {a}чоловічого роду{/a} або {a}жіночого роду{/a}.",
       },
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Pour les personnes, les noms indiquent souvent une {a}profession{/a}, un {a}lien de famille{/a} ou une {a}nationalité{/a}.",
-      ],
-      transItems: {
-        en: [
-          "For people, nouns often name a {a}profession{/a}, a {a}family relationship{/a} or a {a}nationality{/a}."
-        ],
-        ar: [
-          "بالنسبة إلى الأشخاص، تشير الأسماء غالباً إلى {a}مهنة{/a} أو {a}رابطة عائلية{/a} أو {a}جنسية{/a}."
-        ],
-        fa: [
-          "برای اشخاص، اسم‌ها اغلب یک {a}شغل{/a}، {a}رابطهٔ خانوادگی{/a} یا {a}ملیت{/a} را نشان می‌دهند."
-        ],
-        pt: [
-          "Para pessoas, os nomes indicam muitas vezes uma {a}profissão{/a}, uma {a}relação familiar{/a} ou uma {a}nacionalidade{/a}."
-        ],
-        so: [
-          "Dadka marka laga hadlayo, magacyadu badanaa waxay sheegaan {a}xirfad{/a}, {a}xiriir qoys{/a} ama {a}dhalasho{/a}."
-        ],
-        ti: [
-          "ንሰባት፣ ስማት መብዛሕትኡ ግዜ {a}ሞያ{/a}፣ {a}ስድራቤታዊ ምትእስሳር{/a} ወይ {a}ዜግነት{/a} የመልክቱ።"
-        ],
-        tr: [
-          "İnsanlar için isimler çoğu zaman bir {a}mesleği{/a}, {a}aile bağını{/a} veya {a}milliyeti{/a} belirtir."
-        ],
-        ps: [
-          "د خلکو لپاره، نومونه ډېری وخت یو {a}مسلک{/a}، {a}کورنۍ اړیکه{/a} یا {a}تابعیت{/a} ښيي."
-        ],
-        uk: [
-          "Для осіб іменники часто позначають {a}професію{/a}, {a}родинний зв’язок{/a} або {a}національність{/a}."
-        ],
+      text: "Pour les personnes, les noms indiquent souvent une {a}profession{/a}, un {a}lien de famille{/a} ou une {a}nationalité{/a}.",
+      transText: {
+        en: "For people, nouns often name a {a}profession{/a}, a {a}family relationship{/a} or a {a}nationality{/a}.",
+        ar: "بالنسبة إلى الأشخاص، تشير الأسماء غالباً إلى {a}مهنة{/a} أو {a}رابطة عائلية{/a} أو {a}جنسية{/a}.",
+        fa: "برای اشخاص، اسم‌ها اغلب یک {a}شغل{/a}، {a}رابطهٔ خانوادگی{/a} یا {a}ملیت{/a} را نشان می‌دهند.",
+        pt: "Para pessoas, os nomes indicam muitas vezes uma {a}profissão{/a}, uma {a}relação familiar{/a} ou uma {a}nacionalidade{/a}.",
+        so: "Dadka marka laga hadlayo, magacyadu badanaa waxay sheegaan {a}xirfad{/a}, {a}xiriir qoys{/a} ama {a}dhalasho{/a}.",
+        ti: "ንሰባት፣ ስማት መብዛሕትኡ ግዜ {a}ሞያ{/a}፣ {a}ስድራቤታዊ ምትእስሳር{/a} ወይ {a}ዜግነት{/a} የመልክቱ።",
+        tr: "İnsanlar için isimler çoğu zaman bir {a}mesleği{/a}, {a}aile bağını{/a} veya {a}milliyeti{/a} belirtir.",
+        ps: "د خلکو لپاره، نومونه ډېری وخت یو {a}مسلک{/a}، {a}کورنۍ اړیکه{/a} یا {a}تابعیت{/a} ښيي.",
+        uk: "Для осіб іменники часто позначають {a}професію{/a}, {a}родинний зв’язок{/a} або {a}національність{/a}.",
       },
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} homme, {a}une{/a} femme.",
-      ],
-      transItems: {
-        en: ["A noun is always used with a determiner (un, la, des, ce, mon…). The determiner shows the gender: {a}un{/a} homme, {a}une{/a} femme."],
-        ar: ["يُستعمل الاسم دائماً مع محدد (un, la, des, ce, mon…). المحدد يدل على الجنس: {a}un{/a} homme, {a}une{/a} femme."],
-        fa: ["اسم همیشه با یک حرف تعریف (un, la, des, ce, mon…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} homme, {a}une{/a} femme."],
-        pt: ["Um nome usa-se sempre com um determinante (un, la, des, ce, mon…). O determinante mostra o género: {a}un{/a} homme, {a}une{/a} femme."],
-        so: ["Magac mar walba waxaa lala adeegsadaa go'aamiye (un, la, des, ce, mon…). Go'aamiyuhu wuxuu muujiyaa jinsiga: {a}un{/a} homme, {a}une{/a} femme."],
-        ti: ["ስም ኩሉ ግዜ ምስ መወሰኒ (un, la, des, ce, mon…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት: {a}un{/a} homme, {a}une{/a} femme."],
-        tr: ["Bir isim her zaman bir belirleyiciyle (un, la, des, ce, mon…) kullanılır. Belirleyici cinsiyeti gösterir: {a}un{/a} homme, {a}une{/a} femme."],
-        ps: ["نوم تل له ټاکونکي سره کارېږي (un, la, des, ce, mon…). ټاکونکی جنس ښيي: {a}un{/a} homme, {a}une{/a} femme."],
-        uk: ["Іменник завжди вживається з означенням (un, la, des, ce, mon…). Означення показує рід: {a}un{/a} homme, {a}une{/a} femme."],
+      text: "Un nom s'emploie toujours avec un déterminant (un, la, des, ce, mon…). Le déterminant indique le genre : {a}un{/a} homme, {a}une{/a} femme.",
+      transText: {
+        en: "A noun is always used with a determiner (un, la, des, ce, mon…). The determiner shows the gender: {a}un{/a} homme, {a}une{/a} femme.",
+        ar: "يُستعمل الاسم دائماً مع محدد (un, la, des, ce, mon…). المحدد يدل على الجنس: {a}un{/a} homme, {a}une{/a} femme.",
+        fa: "اسم همیشه با یک حرف تعریف (un, la, des, ce, mon…) به کار می‌رود. حرف تعریف جنس را نشان می‌دهد: {a}un{/a} homme, {a}une{/a} femme.",
+        pt: "Um nome usa-se sempre com um determinante (un, la, des, ce, mon…). O determinante mostra o género: {a}un{/a} homme, {a}une{/a} femme.",
+        so: "Magac mar walba waxaa lala adeegsadaa go'aamiye (un, la, des, ce, mon…). Go'aamiyuhu wuxuu muujiyaa jinsiga: {a}un{/a} homme, {a}une{/a} femme.",
+        ti: "ስም ኩሉ ግዜ ምስ መወሰኒ (un, la, des, ce, mon…) ይጥቀም። እቲ መወሰኒ ጾታ የመልክት: {a}un{/a} homme, {a}une{/a} femme.",
+        tr: "Bir isim her zaman bir belirleyiciyle (un, la, des, ce, mon…) kullanılır. Belirleyici cinsiyeti gösterir: {a}un{/a} homme, {a}une{/a} femme.",
+        ps: "نوم تل له ټاکونکي سره کارېږي (un, la, des, ce, mon…). ټاکونکی جنس ښيي: {a}un{/a} homme, {a}une{/a} femme.",
+        uk: "Іменник завжди вживається з означенням (un, la, des, ce, mon…). Означення показує рід: {a}un{/a} homme, {a}une{/a} femme.",
       },
     },
 
@@ -109,92 +64,72 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Au masculin, les noms ont des terminaisons très variées.",
-      ],
-      transItems: {
-        en: ["In the masculine, nouns have very varied endings."],
-        ar: ["في المذكر، للأسماء نهايات متنوعة جداً."],
-        fa: ["در مذکر، اسم‌ها پایان‌های بسیار متنوعی دارند."],
-        pt: ["No masculino, os nomes têm terminações muito variadas."],
-        so: ["Qaabka labka, magacyadu waxay leeyihiin dhammaadyo aad u kala duwan."],
-        ti: ["ብተባዕታይ፣ ስማት ኣዝዮም ዝተፈላለዩ መወዳእታታት ኣለዎም።"],
-        tr: ["Erilde isimlerin çok çeşitli sonları vardır."],
-        ps: ["په مذکر کې، نومونه ډېر بېلابېل پایونه لري."],
-        uk: ["У чоловічому роді іменники мають дуже різні закінчення."],
+      text: "Au masculin, les noms ont des terminaisons très variées.",
+      transText: {
+        en: "In the masculine, nouns have very varied endings.",
+        ar: "في المذكر، للأسماء نهايات متنوعة جداً.",
+        fa: "در مذکر، اسم‌ها پایان‌های بسیار متنوعی دارند.",
+        pt: "No masculino, os nomes têm terminações muito variadas.",
+        so: "Qaabka labka, magacyadu waxay leeyihiin dhammaadyo aad u kala duwan.",
+        ti: "ብተባዕታይ፣ ስማት ኣዝዮም ዝተፈላለዩ መወዳእታታት ኣለዎም።",
+        tr: "Erilde isimlerin çok çeşitli sonları vardır.",
+        ps: "په مذکر کې، نومونه ډېر بېلابېل پایونه لري.",
+        uk: "У чоловічому роді іменники мають дуже різні закінчення.",
       },
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: ["En général, nom féminin = nom masculin + {a}e{/a}."],
-      transItems: {
-        en: ["In general, feminine noun = masculine noun + {a}e{/a}."],
-        ar: ["عموماً، الاسم المؤنث = الاسم المذكر + {a}e{/a}."],
-        fa: ["به‌طور کلی، اسم مؤنث = اسم مذکر + {a}e{/a}."],
-        pt: ["Em geral, nome feminino = nome masculino + {a}e{/a}."],
-        so: ["Guud ahaan, magac dheddig = magac lab + {a}e{/a}."],
-        ti: ["ብሓፈሻ፣ ኣንስተይቲ ስም = ተባዕታይ ስም + {a}e{/a}."],
-        tr: ["Genel olarak, dişil isim = eril isim + {a}e{/a}."],
-        ps: ["په عمومي ډول، مونث نوم = مذکر نوم + {a}e{/a}."],
-        uk: ["Зазвичай жіночий іменник = чоловічий іменник + {a}e{/a}."],
+      text: "En général, nom féminin = nom masculin + {a}e{/a}.",
+      transText: {
+        en: "In general, feminine noun = masculine noun + {a}e{/a}.",
+        ar: "عموماً، الاسم المؤنث = الاسم المذكر + {a}e{/a}.",
+        fa: "به‌طور کلی، اسم مؤنث = اسم مذکر + {a}e{/a}.",
+        pt: "Em geral, nome feminino = nome masculino + {a}e{/a}.",
+        so: "Guud ahaan, magac dheddig = magac lab + {a}e{/a}.",
+        ti: "ብሓፈሻ፣ ኣንስተይቲ ስም = ተባዕታይ ስም + {a}e{/a}.",
+        tr: "Genel olarak, dişil isim = eril isim + {a}e{/a}.",
+        ps: "په عمومي ډول، مونث نوم = مذکر نوم + {a}e{/a}.",
+        uk: "Зазвичай жіночий іменник = чоловічий іменник + {a}e{/a}.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "un employé → une employé{a}e{/a}",
-        "un ami → une ami{a}e{/a}",
-      ],
-      noBulletItems: [0, 1],
+      text: "un employé → une employé{a}e{/a}\nun ami → une ami{a}e{/a}",
       inlineArrows: true,
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Quand le nom masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
-      ],
-      transItems: {
-        en: ["When the masculine noun already ends in {a}e{/a}, the feminine does not change."],
-        ar: ["عندما ينتهي الاسم المذكر أصلاً بـ {a}e{/a}، لا يتغيّر المؤنث."],
-        fa: ["وقتی اسم مذکر از قبل به {a}e{/a} ختم شود، مؤنث تغییر نمی‌کند."],
-        pt: ["Quando o nome masculino já termina em {a}e{/a}, o feminino não muda."],
-        so: ["Marka magaca labku hore ugu dhammaado {a}e{/a}, dheddiggu isma beddelo."],
-        ti: ["እቲ ተባዕታይ ስም ድሮ ብ {a}e{/a} እንተወዲኡ፣ እቲ ኣንስተይቲ ኣይቕየርን።"],
-        tr: ["Eril isim zaten {a}e{/a} ile bitiyorsa, dişil değişmez."],
-        ps: ["کله چې مذکر نوم مخکې له مخکې په {a}e{/a} پای ته رسېږي، مونث نه بدلېږي."],
-        uk: ["Коли чоловічий іменник уже закінчується на {a}e{/a}, жіночий рід не змінюється."],
+      text: "Quand le nom masculin se termine déjà par {a}e{/a}, le féminin ne change pas.",
+      transText: {
+        en: "When the masculine noun already ends in {a}e{/a}, the feminine does not change.",
+        ar: "عندما ينتهي الاسم المذكر أصلاً بـ {a}e{/a}، لا يتغيّر المؤنث.",
+        fa: "وقتی اسم مذکر از قبل به {a}e{/a} ختم شود، مؤنث تغییر نمی‌کند.",
+        pt: "Quando o nome masculino já termina em {a}e{/a}, o feminino não muda.",
+        so: "Marka magaca labku hore ugu dhammaado {a}e{/a}, dheddiggu isma beddelo.",
+        ti: "እቲ ተባዕታይ ስም ድሮ ብ {a}e{/a} እንተወዲኡ፣ እቲ ኣንስተይቲ ኣይቕየርን።",
+        tr: "Eril isim zaten {a}e{/a} ile bitiyorsa, dişil değişmez.",
+        ps: "کله چې مذکر نوم مخکې له مخکې په {a}e{/a} پای ته رسېږي، مونث نه بدلېږي.",
+        uk: "Коли чоловічий іменник уже закінчується на {a}e{/a}, жіночий рід не змінюється.",
       },
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "un journalist{a}e{/a} → une journalist{a}e{/a}",
-        "un fonctionnair{a}e{/a} → une fonctionnair{a}e{/a}",
-      ],
-      noBulletItems: [0, 1],
+      text: "un journalist{a}e{/a} → une journalist{a}e{/a}\nun fonctionnair{a}e{/a} → une fonctionnair{a}e{/a}",
       inlineArrows: true,
     },
     {
       type: "text",
-      items: [
-        "Certains noms ont des terminaisons très différentes au masculin et au féminin.",
-      ],
-      noBulletItems: [0],
-      transItems: {
-        en: ["Some nouns have very different endings in the masculine and the feminine."],
-        ar: ["لبعض الأسماء نهايات مختلفة جداً في المذكر والمؤنث."],
-        fa: ["برخی اسم‌ها در مذکر و مؤنث پایان‌های بسیار متفاوتی دارند."],
-        pt: ["Alguns nomes têm terminações muito diferentes no masculino e no feminino."],
-        so: ["Magacyada qaar waxay labka iyo dheddigga ku leeyihiin dhammaadyo aad u kala duwan."],
-        ti: ["ገለ ስማት ኣብ ተባዕታይን ኣንስተይትን ኣዝዮም ዝተፈላለዩ መወዳእታታት ኣለዎም።"],
-        tr: ["Bazı isimlerin eril ve dişil biçimlerinde çok farklı sonları vardır."],
-        ps: ["ځینې نومونه په مذکر او مونث کې ډېر بېلابېل پایونه لري."],
-        uk: ["Деякі іменники мають дуже різні закінчення в чоловічому та жіночому роді."],
+      text: "Certains noms ont des terminaisons très différentes au masculin et au féminin.",
+      transText: {
+        en: "Some nouns have very different endings in the masculine and the feminine.",
+        ar: "لبعض الأسماء نهايات مختلفة جداً في المذكر والمؤنث.",
+        fa: "برخی اسم‌ها در مذکر و مؤنث پایان‌های بسیار متفاوتی دارند.",
+        pt: "Alguns nomes têm terminações muito diferentes no masculino e no feminino.",
+        so: "Magacyada qaar waxay labka iyo dheddigga ku leeyihiin dhammaadyo aad u kala duwan.",
+        ti: "ገለ ስማት ኣብ ተባዕታይን ኣንስተይትን ኣዝዮም ዝተፈላለዩ መወዳእታታት ኣለዎም።",
+        tr: "Bazı isimlerin eril ve dişil biçimlerinde çok farklı sonları vardır.",
+        ps: "ځینې نومونه په مذکر او مونث کې ډېر بېلابېل پایونه لري.",
+        uk: "Деякі іменники мають дуже різні закінчення в чоловічому та жіночому роді.",
       },
     },
     {
@@ -204,24 +139,21 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         {
           label: "-en",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-en{/a} in the masculine change to {a}-enne{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-en{/a} في المذكر تصبح {a}-enne{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-en{/a} ختم می‌شوند در مؤنث به {a}-enne{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-en{/a} no masculino mudam para {a}-enne{/a} no feminino."],
-                so: ["Ereyada labka ku dhammaada {a}-en{/a} waxay dheddigga isku beddelaan {a}-enne{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-en{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-enne{/a} ይቕየሩ።"],
-                tr: ["Erilde {a}-en{/a} ile biten kelimeler dişilde {a}-enne{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-en{/a} پای ته رسېږي، په مونث کې {a}-enne{/a} کېږي."],
-                uk: ["Слова на {a}-en{/a} у чоловічому роді змінюються на {a}-enne{/a} у жіночому."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-en{/a} au masculin changent en {a}-enne{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-en{/a} in the masculine change to {a}-enne{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-en{/a} في المذكر تصبح {a}-enne{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-en{/a} ختم می‌شوند در مؤنث به {a}-enne{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-en{/a} no masculino mudam para {a}-enne{/a} no feminino.",
+        so: "Ereyada labka ku dhammaada {a}-en{/a} waxay dheddigga isku beddelaan {a}-enne{/a}.",
+        ti: "ብተባዕታይ ብ {a}-en{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-enne{/a} ይቕየሩ።",
+        tr: "Erilde {a}-en{/a} ile biten kelimeler dişilde {a}-enne{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-en{/a} پای ته رسېږي، په مونث کې {a}-enne{/a} کېږي.",
+        uk: "Слова на {a}-en{/a} у чоловічому роді змінюються на {a}-enne{/a} у жіночому.",
+      },
+    },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
@@ -248,24 +180,21 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         {
           label: "-on",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-on{/a} in the masculine change to {a}-onne{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-on{/a} في المذكر تصبح {a}-onne{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-on{/a} ختم می‌شوند در مؤنث به {a}-onne{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-on{/a} no masculino mudam para {a}-onne{/a} no feminino."],
-                so: ["Ereyada labka ku dhammaada {a}-on{/a} waxay dheddigga isku beddelaan {a}-onne{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-on{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-onne{/a} ይቕየሩ።"],
-                tr: ["Erilde {a}-on{/a} ile biten kelimeler dişilde {a}-onne{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-on{/a} پای ته رسېږي، په مونث کې {a}-onne{/a} کېږي."],
-                uk: ["Слова на {a}-on{/a} у чоловічому роді змінюються на {a}-onne{/a} у жіночому."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-on{/a} au masculin changent en {a}-onne{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-on{/a} in the masculine change to {a}-onne{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-on{/a} في المذكر تصبح {a}-onne{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-on{/a} ختم می‌شوند در مؤنث به {a}-onne{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-on{/a} no masculino mudam para {a}-onne{/a} no feminino.",
+        so: "Ereyada labka ku dhammaada {a}-on{/a} waxay dheddigga isku beddelaan {a}-onne{/a}.",
+        ti: "ብተባዕታይ ብ {a}-on{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-onne{/a} ይቕየሩ።",
+        tr: "Erilde {a}-on{/a} ile biten kelimeler dişilde {a}-onne{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-on{/a} پای ته رسېږي، په مونث کې {a}-onne{/a} کېږي.",
+        uk: "Слова на {a}-on{/a} у чоловічому роді змінюються на {a}-onne{/a} у жіночому.",
+      },
+    },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
@@ -292,24 +221,21 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         {
           label: "-er",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-er{/a} in the masculine change to {a}-ère{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-er{/a} في المذكر تصبح {a}-ère{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-er{/a} ختم می‌شوند در مؤنث به {a}-ère{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-er{/a} no masculino mudam para {a}-ère{/a} no feminino."],
-                so: ["Ereyada labka ku dhammaada {a}-er{/a} waxay dheddigga isku beddelaan {a}-ère{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-er{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-ère{/a} ይቕየሩ።"],
-                tr: ["Erilde {a}-er{/a} ile biten kelimeler dişilde {a}-ère{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-er{/a} پای ته رسېږي، په مونث کې {a}-ère{/a} کېږي."],
-                uk: ["Слова на {a}-er{/a} у чоловічому роді змінюються на {a}-ère{/a} у жіночому."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-er{/a} au masculin changent en {a}-ère{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-er{/a} in the masculine change to {a}-ère{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-er{/a} في المذكر تصبح {a}-ère{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-er{/a} ختم می‌شوند در مؤنث به {a}-ère{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-er{/a} no masculino mudam para {a}-ère{/a} no feminino.",
+        so: "Ereyada labka ku dhammaada {a}-er{/a} waxay dheddigga isku beddelaan {a}-ère{/a}.",
+        ti: "ብተባዕታይ ብ {a}-er{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-ère{/a} ይቕየሩ።",
+        tr: "Erilde {a}-er{/a} ile biten kelimeler dişilde {a}-ère{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-er{/a} پای ته رسېږي، په مونث کې {a}-ère{/a} کېږي.",
+        uk: "Слова на {a}-er{/a} у чоловічому роді змінюються на {a}-ère{/a} у жіночому.",
+      },
+    },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
@@ -336,24 +262,21 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         {
           label: "-eur",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-eur{/a} in the masculine change to {a}-euse{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-eur{/a} في المذكر تصبح {a}-euse{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-eur{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-eur{/a} no masculino mudam para {a}-euse{/a} no feminino."],
-                so: ["Ereyada labka ku dhammaada {a}-eur{/a} waxay dheddigga isku beddelaan {a}-euse{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-eur{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-euse{/a} ይቕየሩ።"],
-                tr: ["Erilde {a}-eur{/a} ile biten kelimeler dişilde {a}-euse{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-eur{/a} پای ته رسېږي، په مونث کې {a}-euse{/a} کېږي."],
-                uk: ["Слова на {a}-eur{/a} у чоловічому роді змінюються на {a}-euse{/a} у жіночому."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-eur{/a} au masculin changent en {a}-euse{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-eur{/a} in the masculine change to {a}-euse{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-eur{/a} في المذكر تصبح {a}-euse{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-eur{/a} ختم می‌شوند در مؤنث به {a}-euse{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-eur{/a} no masculino mudam para {a}-euse{/a} no feminino.",
+        so: "Ereyada labka ku dhammaada {a}-eur{/a} waxay dheddigga isku beddelaan {a}-euse{/a}.",
+        ti: "ብተባዕታይ ብ {a}-eur{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-euse{/a} ይቕየሩ።",
+        tr: "Erilde {a}-eur{/a} ile biten kelimeler dişilde {a}-euse{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-eur{/a} پای ته رسېږي، په مونث کې {a}-euse{/a} کېږي.",
+        uk: "Слова на {a}-eur{/a} у чоловічому роді змінюються на {a}-euse{/a} у жіночому.",
+      },
+    },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
@@ -380,24 +303,21 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         {
           label: "-teur",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-teur{/a} au masculin changent en {a}-trice{/a} ou {a}-teuse{/a} au féminin.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-teur{/a} in the masculine change to {a}-trice{/a} or {a}-teuse{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-teur{/a} في المذكر تصبح {a}-trice{/a} أو {a}-teuse{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-teur{/a} ختم می‌شوند در مؤنث به {a}-trice{/a} یا {a}-teuse{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-teur{/a} no masculino mudam para {a}-trice{/a} ou {a}-teuse{/a} no feminino."],
-                so: ["Ereyada labka ku dhammaada {a}-teur{/a} waxay dheddigga isku beddelaan {a}-trice{/a} ama {a}-teuse{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-teur{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-trice{/a} ወይ {a}-teuse{/a} ይቕየሩ።"],
-                tr: ["Erilde {a}-teur{/a} ile biten kelimeler dişilde {a}-trice{/a} veya {a}-teuse{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-teur{/a} پای ته رسېږي، په مونث کې {a}-trice{/a} یا {a}-teuse{/a} کېږي."],
-                uk: ["Слова на {a}-teur{/a} у чоловічому роді змінюються на {a}-trice{/a} або {a}-teuse{/a} у жіночому."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-teur{/a} au masculin changent en {a}-trice{/a} ou {a}-teuse{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-teur{/a} in the masculine change to {a}-trice{/a} or {a}-teuse{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-teur{/a} في المذكر تصبح {a}-trice{/a} أو {a}-teuse{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-teur{/a} ختم می‌شوند در مؤنث به {a}-trice{/a} یا {a}-teuse{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-teur{/a} no masculino mudam para {a}-trice{/a} ou {a}-teuse{/a} no feminino.",
+        so: "Ereyada labka ku dhammaada {a}-teur{/a} waxay dheddigga isku beddelaan {a}-trice{/a} ama {a}-teuse{/a}.",
+        ti: "ብተባዕታይ ብ {a}-teur{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-trice{/a} ወይ {a}-teuse{/a} ይቕየሩ።",
+        tr: "Erilde {a}-teur{/a} ile biten kelimeler dişilde {a}-trice{/a} veya {a}-teuse{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-teur{/a} پای ته رسېږي، په مونث کې {a}-trice{/a} یا {a}-teuse{/a} کېږي.",
+        uk: "Слова на {a}-teur{/a} у чоловічому роді змінюються на {a}-trice{/a} або {a}-teuse{/a} у жіночому.",
+      },
+    },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
@@ -424,24 +344,21 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         {
           label: "-f",
           content: [
-            {
-              type: "text",
-              items: [
-                "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
-              ],
-              noBulletItems: [0],
-              transItems: {
-                en: ["Words ending in {a}-f{/a} in the masculine change to {a}-ve{/a} in the feminine."],
-                ar: ["الكلمات المنتهية بـ {a}-f{/a} في المذكر تصبح {a}-ve{/a} في المؤنث."],
-                fa: ["کلماتی که در مذکر به {a}-f{/a} ختم می‌شوند در مؤنث به {a}-ve{/a} تغییر می‌کنند."],
-                pt: ["As palavras que terminam em {a}-f{/a} no masculino mudam para {a}-ve{/a} no feminino."],
-                so: ["Ereyada labka ku dhammaada {a}-f{/a} waxay dheddigga isku beddelaan {a}-ve{/a}."],
-                ti: ["ብተባዕታይ ብ {a}-f{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-ve{/a} ይቕየሩ።"],
-                tr: ["Erilde {a}-f{/a} ile biten kelimeler dişilde {a}-ve{/a} olur."],
-                ps: ["هغه کلمې چې په مذکر کې په {a}-f{/a} پای ته رسېږي، په مونث کې {a}-ve{/a} کېږي."],
-                uk: ["Слова на {a}-f{/a} у чоловічому роді змінюються на {a}-ve{/a} у жіночому."],
-              },
-            },
+                {
+      type: "text",
+      text: "Les mots terminant par {a}-f{/a} au masculin changent en {a}-ve{/a} au féminin.",
+      transText: {
+        en: "Words ending in {a}-f{/a} in the masculine change to {a}-ve{/a} in the feminine.",
+        ar: "الكلمات المنتهية بـ {a}-f{/a} في المذكر تصبح {a}-ve{/a} في المؤنث.",
+        fa: "کلماتی که در مذکر به {a}-f{/a} ختم می‌شوند در مؤنث به {a}-ve{/a} تغییر می‌کنند.",
+        pt: "As palavras que terminam em {a}-f{/a} no masculino mudam para {a}-ve{/a} no feminino.",
+        so: "Ereyada labka ku dhammaada {a}-f{/a} waxay dheddigga isku beddelaan {a}-ve{/a}.",
+        ti: "ብተባዕታይ ብ {a}-f{/a} ዝውድኡ ቃላት ኣብ ኣንስተይቲ ናብ {a}-ve{/a} ይቕየሩ።",
+        tr: "Erilde {a}-f{/a} ile biten kelimeler dişilde {a}-ve{/a} olur.",
+        ps: "هغه کلمې چې په مذکر کې په {a}-f{/a} پای ته رسېږي، په مونث کې {a}-ve{/a} کېږي.",
+        uk: "Слова на {a}-f{/a} у чоловічому роді змінюються на {a}-ve{/a} у жіночому.",
+      },
+    },
             {
               type: "grid",
               headers: ["Noms masculins", "Noms féminins"],
@@ -518,35 +435,19 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "{a}1.{/a} Même prononciation quand le masculin se termine par une voyelle, ou par {a}l{/a} / {a}eur{/a}.",
-      ],
+      text: "{a}1.{/a} Même prononciation quand le masculin se termine par une voyelle, ou par {a}l{/a} / {a}eur{/a}.",
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "un Espagnol / une Espagno{li}l|e{/li}",
-        "un ingénieur / une ingénieu{li}r|e{/li}",
-      ],
-      noBulletItems: [0, 1],
+      text: "un Espagnol / une Espagno{li}l|e{/li}\nun ingénieur / une ingénieu{li}r|e{/li}",
     },
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "{a}2.{/a} Prononciation différente quand le masculin se termine par une consonne (le {a}e{/a} final fait entendre la consonne).",
-      ],
+      text: "{a}2.{/a} Prononciation différente quand le masculin se termine par une consonne (le {a}e{/a} final fait entendre la consonne).",
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "un Anglais → une Anglai{li}s|e{/li}",
-        "un assistant → une assistan{li}t|e{/li}",
-      ],
-      noBulletItems: [0, 1],
+      text: "un Anglais → une Anglai{li}s|e{/li}\nun assistant → une assistan{li}t|e{/li}",
       inlineArrows: true,
     },
   ],

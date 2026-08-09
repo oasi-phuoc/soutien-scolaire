@@ -13,70 +13,39 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Les articles définis ({a}le{/a}, {a}la{/a}, {a}l'{/a}, {a}les{/a}) sont souvent utilisés après les prépositions {a}à{/a} et {a}de{/a}.",
-      ],
-      noBulletItems: [0],
+      text: "Les articles définis ({a}le{/a}, {a}la{/a}, {a}l'{/a}, {a}les{/a}) sont souvent utilisés après les prépositions {a}à{/a} et {a}de{/a}.",
     },
     {
       type: "text",
-      items: [
-        "{a}Lieu{/a}",
-      ],
-      noBulletItems: [0],
+      text: "{a}Lieu{/a}",
     },
     {
       type: "text",
-      items: [
-        "Pour indiquer un lieu, on utilise la préposition {a}à{/a} ou {a}de{/a}.",
-      ],
-      noBulletItems: [0],
+      text: "Pour indiquer un lieu, on utilise la préposition {a}à{/a} ou {a}de{/a}.",
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "Je suis à la gare.",
-        "Il habite à côté de la Poste.",
-      ],
-      noBulletItems: [0, 1],
+      text: "Je suis à la gare.\nIl habite à côté de la Poste.",
     },
     {
       type: "text",
-      items: [
-        "{a}Noms{/a}",
-      ],
-      noBulletItems: [0],
+      text: "{a}Noms{/a}",
     },
     {
       type: "text",
-      items: [
-        "Pour relier deux noms ensemble, on utilise la préposition {a}de{/a}.",
-      ],
-      noBulletItems: [0],
+      text: "Pour relier deux noms ensemble, on utilise la préposition {a}de{/a}.",
     },
     {
       type: "text",
-      label: "",
-      items: [
-        "Le bureau de la maîtresse",
-        "La salle de sport",
-      ],
-      noBulletItems: [0, 1],
+      text: "Le bureau de la maîtresse\nLa salle de sport",
     },
     {
       type: "text",
-      items: [
-        "{a}Verbes{/a}",
-      ],
-      noBulletItems: [0],
+      text: "{a}Verbes{/a}",
     },
     {
       type: "text",
-      items: [
-        "Certains verbes ont besoin de ces prépositions.",
-      ],
-      noBulletItems: [0],
+      text: "Certains verbes ont besoin de ces prépositions.",
     },
     {
       type: "grid",
@@ -95,10 +64,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement. {a}La{/a} et {a}l'{/a} ne se contractent jamais.",
-      ],
-      noBulletItems: [0],
+      text: "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement. {a}La{/a} et {a}l'{/a} ne se contractent jamais.",
     },
     {
       type: "grid",
@@ -114,10 +80,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
-      ],
-      noBulletItems: [0],
+      text: "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
     },
   ],
   exercises: [

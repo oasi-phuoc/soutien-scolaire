@@ -40,10 +40,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Quantités précises : {a}un kilo de{/a}, {a}une bouteille de{/a}, {a}un morceau de{/a}, {a}un litre de{/a}, etc.",
-      ],
-      noBulletItems: [0],
+      text: "Quantités précises : {a}un kilo de{/a}, {a}une bouteille de{/a}, {a}un morceau de{/a}, {a}un litre de{/a}, etc.",
     },
     {
       type: "heading",

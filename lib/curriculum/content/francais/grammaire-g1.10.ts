@@ -232,20 +232,17 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
   theory: [
     {
       type: "text",
-      noBulletItems: [0],
-      items: [
-        "Les verbes avec un infinitif en {a}-re{/a} ou en {a}-oir{/a} ont des conjugaisons très irrégulières. Ils ont un, deux ou trois radicaux. Il y a plusieurs modèles de conjugaison. Les terminaisons sont généralement : {a}s, s, t/d, ons, ez, ent{/a}.",
-      ],
-      transItems: {
-        en: ["Verbs with an infinitive ending in {a}-re{/a} or {a}-oir{/a} have very irregular conjugations. They have one, two or three stems. There are several conjugation patterns. The endings are generally: {a}s, s, t/d, ons, ez, ent{/a}."],
-        ar: ["الأفعال التي ينتهي مصدرها بـ {a}-re{/a} أو {a}-oir{/a} لها تصريفات شاذة جداً. ولها جذر واحد أو جذران أو ثلاثة جذور. توجد عدة نماذج للتصريف. والنهايات عموماً هي: {a}s, s, t/d, ons, ez, ent{/a}."],
-        fa: ["فعل‌هایی که مصدرشان به {a}-re{/a} یا {a}-oir{/a} ختم می‌شود، صرف‌های بسیار بی‌قاعده‌ای دارند. آن‌ها یک، دو یا سه بن دارند. چندین الگوی صرف وجود دارد. شناسه‌ها معمولاً عبارت‌اند از: {a}s, s, t/d, ons, ez, ent{/a}."],
-        pt: ["Os verbos com infinitivo terminado em {a}-re{/a} ou {a}-oir{/a} têm conjugações muito irregulares. Têm um, dois ou três radicais. Há vários modelos de conjugação. As terminações são geralmente: {a}s, s, t/d, ons, ez, ent{/a}."],
-        so: ["Falalka uu falka aan la rogin ku dhammaado {a}-re{/a} ama {a}-oir{/a} waxay leeyihiin qorid aad u aan caadi ahayn. Waxay leeyihiin hal, laba ama saddex jirridood. Waxaa jira dhowr qaab oo qorid fal ah. Dhammaadyadu guud ahaan waa: {a}s, s, t/d, ons, ez, ent{/a}."],
-        ti: ["መሰረታዊ ቅርጾም ብ {a}-re{/a} ወይ {a}-oir{/a} ዝውዳእ ግሲታት ኣዝዮም ዘይስሩዕ ምጽራይ ኣለዎም። ሓደ፣ ክልተ ወይ ሰለስተ ሱራት ኣለዎም። ብዙሓት ሞዴላት ምጽራይ ኣለዉ። መወዳእታታቱ ብሓፈሻ፦ {a}s, s, t/d, ons, ez, ent{/a}።"],
-        tr: ["Mastarı {a}-re{/a} veya {a}-oir{/a} ile biten fiillerin çekimleri çok düzensizdir. Bir, iki veya üç kökleri vardır. Birkaç çekim modeli bulunur. Ekler genellikle şunlardır: {a}s, s, t/d, ons, ez, ent{/a}."],
-        ps: ["هغه فعلونه چې مصدر يې په {a}-re{/a} يا {a}-oir{/a} پای ته رسېږي، ډېر بې قاعده ګردانونه لري. دوی يو، دوه يا درې بنونه لري. د ګردان څو بېلګې شته. پایونه عموماً دا دي: {a}s, s, t/d, ons, ez, ent{/a}."],
-        uk: ["Дієслова з інфінітивом на {a}-re{/a} або {a}-oir{/a} мають дуже неправильні дієвідміни. Вони мають одну, дві або три основи. Існує кілька моделей дієвідміни. Закінчення зазвичай такі: {a}s, s, t/d, ons, ez, ent{/a}."],
+      text: "Les verbes avec un infinitif en {a}-re{/a} ou en {a}-oir{/a} ont des conjugaisons très irrégulières. Ils ont un, deux ou trois radicaux. Il y a plusieurs modèles de conjugaison. Les terminaisons sont généralement : {a}s, s, t/d, ons, ez, ent{/a}.",
+      transText: {
+        en: "Verbs with an infinitive ending in {a}-re{/a} or {a}-oir{/a} have very irregular conjugations. They have one, two or three stems. There are several conjugation patterns. The endings are generally: {a}s, s, t/d, ons, ez, ent{/a}.",
+        ar: "الأفعال التي ينتهي مصدرها بـ {a}-re{/a} أو {a}-oir{/a} لها تصريفات شاذة جداً. ولها جذر واحد أو جذران أو ثلاثة جذور. توجد عدة نماذج للتصريف. والنهايات عموماً هي: {a}s, s, t/d, ons, ez, ent{/a}.",
+        fa: "فعل‌هایی که مصدرشان به {a}-re{/a} یا {a}-oir{/a} ختم می‌شود، صرف‌های بسیار بی‌قاعده‌ای دارند. آن‌ها یک، دو یا سه بن دارند. چندین الگوی صرف وجود دارد. شناسه‌ها معمولاً عبارت‌اند از: {a}s, s, t/d, ons, ez, ent{/a}.",
+        pt: "Os verbos com infinitivo terminado em {a}-re{/a} ou {a}-oir{/a} têm conjugações muito irregulares. Têm um, dois ou três radicais. Há vários modelos de conjugação. As terminações são geralmente: {a}s, s, t/d, ons, ez, ent{/a}.",
+        so: "Falalka uu falka aan la rogin ku dhammaado {a}-re{/a} ama {a}-oir{/a} waxay leeyihiin qorid aad u aan caadi ahayn. Waxay leeyihiin hal, laba ama saddex jirridood. Waxaa jira dhowr qaab oo qorid fal ah. Dhammaadyadu guud ahaan waa: {a}s, s, t/d, ons, ez, ent{/a}.",
+        ti: "መሰረታዊ ቅርጾም ብ {a}-re{/a} ወይ {a}-oir{/a} ዝውዳእ ግሲታት ኣዝዮም ዘይስሩዕ ምጽራይ ኣለዎም። ሓደ፣ ክልተ ወይ ሰለስተ ሱራት ኣለዎም። ብዙሓት ሞዴላት ምጽራይ ኣለዉ። መወዳእታታቱ ብሓፈሻ፦ {a}s, s, t/d, ons, ez, ent{/a}።",
+        tr: "Mastarı {a}-re{/a} veya {a}-oir{/a} ile biten fiillerin çekimleri çok düzensizdir. Bir, iki veya üç kökleri vardır. Birkaç çekim modeli bulunur. Ekler genellikle şunlardır: {a}s, s, t/d, ons, ez, ent{/a}.",
+        ps: "هغه فعلونه چې مصدر يې په {a}-re{/a} يا {a}-oir{/a} پای ته رسېږي، ډېر بې قاعده ګردانونه لري. دوی يو، دوه يا درې بنونه لري. د ګردان څو بېلګې شته. پایونه عموماً دا دي: {a}s, s, t/d, ons, ez, ent{/a}.",
+        uk: "Дієслова з інфінітивом на {a}-re{/a} або {a}-oir{/a} мають дуже неправильні дієвідміни. Вони мають одну, дві або три основи. Існує кілька моделей дієвідміни. Закінчення зазвичай такі: {a}s, s, t/d, ons, ez, ent{/a}.",
       },
     },
 

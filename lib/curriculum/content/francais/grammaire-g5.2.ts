@@ -9,33 +9,70 @@ export const A1_GR_INTERRO: GrammarLesson = {
     { type: "heading", text: "Poser une question", trans: { en: "Asking a question", ar: "طرح سؤال", fa: "پرسیدن سوال", ti: "ሕቶ ምሓታት", uk: "Постановка питання" } },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "Il y a plusieurs façons de poser une question en français.",
+      transText: {
+        en: "There are several ways to ask a question in French.",
+        ar: "هناك عدة طرق لطرح سؤال بالفرنسية.",
+        fa: "روش‌های مختلفی برای پرسیدن سوال در فرانسه وجود دارد.",
+        ti: "ኣብ ፈረንሳዊ ሕቶ ንምሓታት ብዙሕ መንገድታት ኣሎ.",
+        uk: "Є кілька способів поставити питання французькою.",
+      },
       items: [
-        "Il y a plusieurs façons de poser une question en français.",
         "La plus simple : monter la voix à la fin.",
         "La plus courante : utiliser {a}est-ce que{/a}.",
       ],
       transItems: {
-        en: ["There are several ways to ask a question in French.", "The simplest: raise your voice at the end.", "The most common: use {a}est-ce que{/a}."],
-        ar: ["هناك عدة طرق لطرح سؤال بالفرنسية.", "الأبسط: رفع الصوت في النهاية.", "الأكثر شيوعاً: استخدام {a}est-ce que{/a}."],
-        fa: ["روش‌های مختلفی برای پرسیدن سوال در فرانسه وجود دارد.", "ساده‌ترین: بالا بردن صدا در پایان.", "رایج‌ترین: استفاده از {a}est-ce que{/a}."],
-        ti: ["ኣብ ፈረንሳዊ ሕቶ ንምሓታት ብዙሕ መንገድታት ኣሎ.", "ዝቐለለ: ድምጺ ኣብ መወዳእታ ምድራዕ.", "ዝበዝሐ: {a}est-ce que{/a} ምጥቃም."],
-        uk: ["Є кілька способів поставити питання французькою.", "Найпростіший: підвищити голос наприкінці.", "Найпоширеніший: використовувати {a}est-ce que{/a}."],
+        en: [
+          "The simplest: raise your voice at the end.",
+          "The most common: use {a}est-ce que{/a}.",
+        ],
+        ar: [
+          "الأبسط: رفع الصوت في النهاية.",
+          "الأكثر شيوعاً: استخدام {a}est-ce que{/a}.",
+        ],
+        fa: [
+          "ساده‌ترین: بالا بردن صدا در پایان.",
+          "رایج‌ترین: استفاده از {a}est-ce que{/a}.",
+        ],
+        ti: [
+          "ዝቐለለ: ድምጺ ኣብ መወዳእታ ምድራዕ.",
+          "ዝበዝሐ: {a}est-ce que{/a} ምጥቃም.",
+        ],
+        uk: [
+          "Найпростіший: підвищити голос наприкінці.",
+          "Найпоширеніший: використовувати {a}est-ce que{/a}.",
+        ],
       },
     },
     {
       type: "text",
-      noBulletItems: [0],
+      text: "{a}Est-ce que{/a} + sujet + verbe ?",
+      transText: {
+        en: "{a}Est-ce que{/a} + subject + verb ?",
+        ar: "{a}Est-ce que{/a} + الفاعل + الفعل ?",
+        fa: "{a}Est-ce que{/a} + فاعل + فعل ?",
+        ti: "{a}Est-ce que{/a} + ሓካይ + ግሲ ?",
+        uk: "{a}Est-ce que{/a} + підмет + дієслово ?",
+      },
       items: [
-        "{a}Est-ce que{/a} + sujet + verbe ?",
         "Devant une voyelle : {a}est-ce qu'{/a}",
       ],
       transItems: {
-        en: ["{a}Est-ce que{/a} + subject + verb ?", "Before a vowel: {a}est-ce qu'{/a}"],
-        ar: ["{a}Est-ce que{/a} + الفاعل + الفعل ?", "قبل حرف علة: {a}est-ce qu'{/a}"],
-        fa: ["{a}Est-ce que{/a} + فاعل + فعل ?", "قبل از حرف صدادار: {a}est-ce qu'{/a}"],
-        ti: ["{a}Est-ce que{/a} + ሓካይ + ግሲ ?", "ቅድሚ ሞዓዝ: {a}est-ce qu'{/a}"],
-        uk: ["{a}Est-ce que{/a} + підмет + дієслово ?", "Перед голосною: {a}est-ce qu'{/a}"],
+        en: [
+          "Before a vowel: {a}est-ce qu'{/a}",
+        ],
+        ar: [
+          "قبل حرف علة: {a}est-ce qu'{/a}",
+        ],
+        fa: [
+          "قبل از حرف صدادار: {a}est-ce qu'{/a}",
+        ],
+        ti: [
+          "ቅድሚ ሞዓዝ: {a}est-ce qu'{/a}",
+        ],
+        uk: [
+          "Перед голосною: {a}est-ce qu'{/a}",
+        ],
       },
     },
     {
