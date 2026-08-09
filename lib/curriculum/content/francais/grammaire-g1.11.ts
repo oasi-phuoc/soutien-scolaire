@@ -15,7 +15,7 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
     },
     {
       type: "text",
-      text: "{a}1.{/a} On utilise le présent progressif à la place du présent simple pour parler d'une action qui se passe au moment exact où l'on parle.",
+      text: "On utilise le présent progressif à la place du présent simple pour parler d'une {a}action qui se passe au moment exact où l'on parle{/a}.",
       transText: {
         en: "{a}1.{/a} The present progressive is used instead of the simple present to talk about an action happening at the exact moment of speaking.",
         ar: "{a}1.{/a} يُستخدم الحاضر المستمر بدلاً من الحاضر البسيط للتحدث عن فعل يحدث في اللحظة نفسها التي نتكلم فيها.",
@@ -27,38 +27,6 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         ps: "{a}1.{/a} اوسنی جاري حالت د ساده اوسني پر ځای د داسې عمل لپاره کارول کېږي چې د خبرو په هماغه شېبه کې روان وي.",
         uk: "{a}1.{/a} Теперішній тривалий час уживають замість простого теперішнього, щоб говорити про дію, яка відбувається саме в момент мовлення.",
       },
-      items: [
-        "{a}3.{/a} On ne peut pas l'utiliser pour une action habituelle ou une description générale.",
-      ],
-      transItems: {
-        en: [
-          "{a}3.{/a} It cannot be used for a habitual action or a general description.",
-        ],
-        ar: [
-          "{a}3.{/a} لا يمكن استخدامه لفعل معتاد أو لوصف عام.",
-        ],
-        fa: [
-          "{a}3.{/a} نمی‌توان از آن برای یک کار همیشگی یا یک توصیف کلی استفاده کرد.",
-        ],
-        pt: [
-          "{a}3.{/a} Não se pode usá-lo para uma ação habitual ou uma descrição geral.",
-        ],
-        so: [
-          "{a}3.{/a} Looma isticmaali karo fal caadi ah ama sharaxaad guud.",
-        ],
-        ti: [
-          "{a}3.{/a} ንልሙድ ተግባር ወይ ንሓፈሻዊ መግለጺ ክንጥቀመሉ ኣይንኽእልን።",
-        ],
-        tr: [
-          "{a}3.{/a} Alışkanlık bildiren bir eylem veya genel bir açıklama için kullanılamaz.",
-        ],
-        ps: [
-          "{a}3.{/a} دا د عادت عمل يا عمومي تشريح لپاره نه شي کارېدای.",
-        ],
-        uk: [
-          "{a}3.{/a} Його не можна вживати для звичної дії або загального опису.",
-        ],
-      },
     },
     {
       type: "grid",
@@ -66,8 +34,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
-        ["Présent simple", "Non, je {a}prends{/a} ma douche. (information)"],
-        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"],
+        ["Présent simple", "Non, je {a}prends{/a} ma douche.\n Je donne une information."],
+        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\nJ'insiste sur le déroulement de mon action."],
       ],
       transHeaders: {
         en: ["Aspect", "Example"],
@@ -81,15 +49,42 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         uk: ["Аспект", "Приклад"],
       },
       transRows: {
-        en: [["Simple\npresent", "Non, je {a}prends{/a} ma douche. (information)"], ["Present\nprogressive", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        ar: [["الحاضر\nالبسيط", "Non, je {a}prends{/a} ma douche. (information)"], ["الحاضر\nالمستمر", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        fa: [["حال\nساده", "Non, je {a}prends{/a} ma douche. (information)"], ["حال\nاستمراری", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        pt: [["Presente\nsimples", "Non, je {a}prends{/a} ma douche. (information)"], ["Presente\nprogressivo", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        so: [["Joogto\nfudud", "Non, je {a}prends{/a} ma douche. (information)"], ["Joogto\nsocota", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        ti: [["ቀሊል\nህሉው", "Non, je {a}prends{/a} ma douche. (information)"], ["ቀጻሊ\nህሉው", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        tr: [["Basit\nşimdiki", "Non, je {a}prends{/a} ma douche. (information)"], ["Şimdiki\nsüreklilik", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        ps: [["ساده\nاوسنی", "Non, je {a}prends{/a} ma douche. (information)"], ["جاري\nاوسنی", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
-        uk: [["Простий\nтеперішній", "Non, je {a}prends{/a} ma douche. (information)"], ["Теперішній\nтривалий", "Non, je {a}suis en train de prendre{/a} ma douche. (insiste sur le déroulement)"]],
+        en: [
+          ["Simple present", "No, I am {a}taking{/a} a shower.\nI am giving information."],
+          ["Present progressive", "No, I {a}am taking{/a} a shower.\nI am emphasizing that the action is in progress."],
+        ],
+        ar: [
+          ["الحاضر البسيط", "لا، أنا {a}أستحم{/a}.\nأنا أقدّم معلومة."],
+          ["الحاضر المستمر", "لا، أنا {a}أستحم الآن{/a}.\nأنا أؤكد على أن الفعل جارٍ."],
+        ],
+        fa: [
+          ["حال ساده", "نه، دارم {a}دوش می‌گیرم{/a}.\nمن فقط یک اطلاعات می‌دهم."],
+          ["حال استمراری", "نه، {a}دارم دوش می‌گیرم{/a}.\nتأکید می‌کنم که عمل در حال انجام است."],
+        ],
+        pt: [
+          ["Presente simples", "Não, {a}tomo{/a} banho.\nEstou a dar uma informação."],
+          ["Presente progressivo", "Não, {a}estou a tomar{/a} banho.\nEstou a insistir no decorrer da ação."],
+        ],
+        so: [
+          ["Joogto fudud", "Maya, {a}qubays ayaan qaadanayaa{/a}.\nWaxaan bixinayaa xog."],
+          ["Joogto socota", "Maya, {a}waan ku jiraa qaadashada qubayska{/a}.\nWaxaan xoogga saarayaa in ficilku socdo."],
+        ],
+        ti: [
+          ["ቀሊል ህሉው", "ኣይፋል፣ {a}ሻወር እወስድ{/a} ኣለኹ።\nሓበሬታ እህብ ኣለኹ።"],
+          ["ቀጻሊ ህሉው", "ኣይፋል፣ {a}ሻወር እወስድ ኣለኹ{/a}።\nእቲ ተግባር ኣብ ምክያድ ከም ዘሎ እጉልሕ።"],
+        ],
+        tr: [
+          ["Basit şimdiki", "Hayır, {a}duş alıyorum{/a}.\nBilgi veriyorum."],
+          ["Şimdiki süreklilik", "Hayır, {a}duş alıyorum{/a}.\nEylemin devam etmekte olduğunu vurguluyorum."],
+        ],
+        ps: [
+          ["ساده اوسنی", "نه، زه {a}دوش اخلم{/a}.\nزه یو معلومات وړاندې کوم."],
+          ["جاري اوسنی", "نه، زه {a}دوش اخلم{/a}.\nزه ټینګار کوم چې عمل د ترسره کېدو په حال کې دی."],
+        ],
+        uk: [
+          ["Простий теперішній", "Ні, я {a}приймаю душ{/a}.\nЯ повідомляю інформацію."],
+          ["Теперішній тривалий", "Ні, я {a}зараз приймаю душ{/a}.\nЯ наголошую на перебігу дії."],
+        ],
       },
     },
     {
@@ -111,10 +106,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         ps: "د {a}être{/a} فعل (اوسنی) + {a}en train de{/a} + مصدر.",
         uk: "Дієслово {a}être{/a} (теперішній час) + {a}en train de{/a} + інфінітив.",
       },
-    },
-    {
-      type: "text",
-      text: "Il {a}est en train de{/a} dormir.",
+      items: ["Il {a}est en train de{/a} dormir."],
+      noBulletItems: [0],
     },
     {
       type: "text",
@@ -130,10 +123,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         ps: "له ضميري فعل سره، {a}ضمير{/a} د مصدر مخکې راځي.",
         uk: "Із займенниковим дієсловом {a}займенник{/a} ставиться перед інфінітивом.",
       },
-    },
-    {
-      type: "text",
-      text: "Elles sont en train de {a}se{/a} préparer.",
+      items: ["Elles sont en train de {a}se{/a} préparer."],
+      noBulletItems: [0],
     },
     {
       type: "text",
@@ -149,10 +140,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         ps: "په منفي بڼه کې، {a}ne… pas{/a} د être فعل چاپېروي.",
         uk: "У заперечній формі {a}ne… pas{/a} оточує дієслово être.",
       },
-    },
-    {
-      type: "text",
-      text: "Ils {a}ne{/a} sont {a}pas{/a} en train de travailler.",
+      items: ["Ils {a}ne{/a} sont {a}pas{/a} en train de travailler."],
+      noBulletItems: [0],
     },
     {
       type: "heading",
@@ -173,11 +162,8 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         ps: "{a}De{/a} د داسې فعل مخکې چې په غږن توري يا بې غږه h پيلېږي، په {a}d'{/a} بدلېږي.",
         uk: "{a}De{/a} змінюється на {a}d'{/a} перед дієсловом, що починається з голосної або німого h.",
       },
-    },
-    {
-      type: "text",
-      text: "Nous sommes en train {s}de{/s} apprendre le français.\nNous sommes en train {a}d'{/a}apprendre le français.",
-      inlineArrows: true,
+      items: ["Nous sommes en train {s}de{/s} apprendre le français.\nNous sommes en train {a}d'{/a}apprendre le français."],
+      noBulletItems: [0],
     },
   ],
   exercises: G1_EXERCISES["G1.11"](),
