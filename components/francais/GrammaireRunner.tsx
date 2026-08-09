@@ -684,13 +684,17 @@ function shuffle<T>(arr: T[]): T[] {
  * Si `ensureKeys` est fourni, garantit au moins un item par clé (via keyFn),
  * puis complète au hasard et mélange le résultat.
  */
-function sampleFromPool<T extends { gabaritId?: string; difficulty?: "A1" | "A2" | "B1" }>(
+function sampleFromPool<T extends { gabaritId?: string; poolKey?: string; difficulty?: "A1" | "A2" | "B1" }>(
   pool: T[],
   size: number,
   ensureKeys?: string[],
   keyFn?: (item: T) => string,
 ): T[] {
   const norm = (s: string) => s.trim().toLowerCase();
+  const resolveKey = (item: T) => {
+    if (item.poolKey) return item.poolKey;
+    return keyFn?.(item) ?? "";
+  };
 
   const baseSample = (): T[] => {
     const hasGabarits = pool.some((item) => item.gabaritId);
@@ -710,12 +714,12 @@ function sampleFromPool<T extends { gabaritId?: string; difficulty?: "A1" | "A2"
     });
   };
 
-  if (!ensureKeys?.length || !keyFn) return baseSample();
+  if (!ensureKeys?.length) return baseSample();
 
   const remaining = shuffle([...pool]);
   const picked: T[] = [];
   for (const key of ensureKeys.map(norm)) {
-    const idx = remaining.findIndex((item) => norm(keyFn(item)) === key);
+    const idx = remaining.findIndex((item) => norm(resolveKey(item)) === key);
     if (idx >= 0) picked.push(remaining.splice(idx, 1)[0]!);
   }
   while (picked.length < size && remaining.length > 0) {
@@ -1839,14 +1843,30 @@ function hasErVerbForm(text: string, verb: string): boolean {
 }
 
 /**
- * Tire `size` prompts. Si des items ont `side: "cest" | "ilest"`,
- * équilibre ~2–3 de chaque famille (pour size=5 → 2+3 ou 3+2).
+ * Tire `size` prompts.
+ * - `ensureGroups` : 1× chaque groupe, puis complète au hasard.
+ * - Sinon si `side` c'est/il est : équilibre ~2–3 de chaque (size=5 → 2+3 ou 3+2).
  */
 function sampleWritePrompts(
-  pool: Array<string | { prompt: string; side?: "cest" | "ilest" }>,
+  pool: Array<string | { prompt: string; side?: "cest" | "ilest"; group?: string }>,
   size: number,
+  ensureGroups?: string[],
 ): string[] {
   const normalized = pool.map((p) => (typeof p === "string" ? { prompt: p } : p));
+
+  if (ensureGroups?.length) {
+    const remaining = shuffle([...normalized]);
+    const picked: typeof normalized = [];
+    for (const key of ensureGroups.map((k) => k.trim().toLowerCase())) {
+      const idx = remaining.findIndex((p) => (p.group ?? "").trim().toLowerCase() === key);
+      if (idx >= 0) picked.push(remaining.splice(idx, 1)[0]!);
+    }
+    while (picked.length < size && remaining.length > 0) {
+      picked.push(remaining.shift()!);
+    }
+    return shuffle(picked).slice(0, size).map((p) => p.prompt);
+  }
+
   const cest = shuffle(normalized.filter((p) => p.side === "cest").map((p) => p.prompt));
   const ilest = shuffle(normalized.filter((p) => p.side === "ilest").map((p) => p.prompt));
   const plain = shuffle(normalized.filter((p) => p.side !== "cest" && p.side !== "ilest").map((p) => p.prompt));
@@ -1898,7 +1918,7 @@ function WriteExercise({
       return [group.image, shuffle([...group.promptPool]).slice(0, questionCount)];
     }
     if (exercise.promptPool?.length) {
-      return [null, sampleWritePrompts(exercise.promptPool, questionCount)];
+      return [null, sampleWritePrompts(exercise.promptPool, questionCount, exercise.promptPoolEnsure)];
     }
     if (exercise.levelPromptPools) {
       const levelled = (Object.entries(exercise.levelPromptPools) as Array<["A1" | "A2" | "B1", string[]]>)

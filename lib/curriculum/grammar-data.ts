@@ -39,18 +39,18 @@ export type TheoryBlock =
   | { type: "selector"; labelPrefix?: string; buttonCols?: number; tabs: Array<{ label: string; content: TheoryBlock[] }> };
 
 export type ExerciseDifficulty = "A1" | "A2" | "B1";
-export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string };
-export type FillItem = { sentence: string; hint: string; answer: string; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string };
+export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string; /** Clé pour poolEnsure (ex. infinitif). */ poolKey?: string };
+export type FillItem = { sentence: string; hint: string; answer: string; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string; /** Clé pour poolEnsure (ex. infinitif). */ poolKey?: string };
 export type MatchPair = { left: string; right: string };
-/** Prompt d'écriture libre ; `side` sert au tirage équilibré c'est / il est. */
-export type WritePrompt = string | { prompt: string; side?: "cest" | "ilest" };
+/** Prompt d'écriture libre ; `side` = c'est/il est ; `group` = ensure (ex. verbe modal). */
+export type WritePrompt = string | { prompt: string; side?: "cest" | "ilest"; group?: string };
 
 export type Exercise =
   | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean; svgChoiceLayout?: "stacked"; /** Garantit au moins un item par valeur de choix correct (ex. le / la / l'), puis complète au hasard. */ poolEnsure?: string[] }
   | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number; inputWidth?: string; /** Garantit au moins un item par réponse (ex. le / la / l'), puis complète au hasard. */ poolEnsure?: string[] }
   | { type: "fill_select"; title: string; instruction: string; transInstruction?: Trans; wordBank: string[]; items: FillItem[]; pool?: FillItem[]; poolSize?: number; letterSelect?: boolean; hideWordBank?: boolean; /** Garantit au moins un item par réponse (ex. le / la / l'), puis complète au hasard. */ poolEnsure?: string[] }
   | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number; leftLabel?: string; rightLabel?: string }
-  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; /** Pool de prompts ; `side` permet un tirage équilibré c'est / il est (2–3 de chaque). */ promptPool?: WritePrompt[]; levelPromptPools?: Record<ExerciseDifficulty, string[]>; promptPoolSize?: number; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked"; imagePool?: { image: string; promptPool: string[] }[] }
+  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; /** Pool de prompts ; `side` = c'est/il est ; `group` + promptPoolEnsure = 1× chaque groupe. */ promptPool?: WritePrompt[]; levelPromptPools?: Record<ExerciseDifficulty, string[]>; promptPoolSize?: number; promptPoolEnsure?: string[]; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked"; imagePool?: { image: string; promptPool: string[] }[] }
   | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: { statement: string; answer: boolean }[]; imagePool?: { image: string; items: { statement: string; answer: boolean }[] }[]; poolSize?: number }
   | { type: "order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; hint?: string }[] }
   | { type: "classify"; title: string; instruction: string; transInstruction?: Trans; categories: string[]; items: { word: string; categoryIdx: number }[]; pool?: { word: string; categoryIdx: number }[]; poolSize?: number; allowPartialValidation?: boolean }

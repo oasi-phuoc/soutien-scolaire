@@ -18,11 +18,13 @@ const SING_PLUR_PAIRS = [
 
 export type G1Style = "ending" | "form";
 
-/** Gabarit = verbe + complément ; le pronom est variable (× 8). */
+/** Gabarit = verbe + complément ; le pronom est variable (× 8, ou `persons`). */
 export type G1Gabarit = {
   verb: VerbConj;
   /** Complément après le verbe, ex. « une pomme. » ou « à Genève. » */
   tail: string;
+  /** Indices de pronoms (0–7). Défaut : les 8. Ex. falloir → [2] (il). */
+  persons?: number[];
 };
 
 /** Gabarit exercice 6 : un verbe correct + distracteurs sémantiques. */
@@ -30,21 +32,27 @@ export type G1VerbChoiceGabarit = {
   verb: VerbConj;
   tail: string;
   distractors: VerbConj[];
+  persons?: number[];
 };
 
 export type G1LessonProfile = {
   /** ending = radical + __ ; form = blanc pour forme entière. */
   style: G1Style;
-  /** 25 gabarits (verbe + complément) pour les ex. 1–5. */
+  /** Gabarits (verbe + complément) pour les ex. 1–5. */
   gabarits: G1Gabarit[];
   /** Prompts « Infinitif / complément : » pour l'exercice 7. */
-  writePrompts: string[];
-  /** 25 gabarits sémantiques pour l'exercice 6 (sinon dérivés des gabarits). */
+  writePrompts: Array<string | { prompt: string; group?: string }>;
+  /** Gabarits sémantiques pour l'exercice 6 (sinon dérivés des gabarits). */
   verbChoiceGabarits?: G1VerbChoiceGabarit[];
   /** Présent progressif (être en train de). */
   progressif?: boolean;
   /** Masque les exercices 1–2 (terminaisons) et renumérote la suite. */
   skipEndingExercises?: boolean;
+  /**
+   * Garantit 1 item par verbe dans chaque session de 5 questions
+   * (le reste au hasard). Ex. modaux : pouvoir, devoir, falloir, vouloir.
+   */
+  sessionEnsureVerbs?: string[];
 };
 
 function startsWithVowel(s: string): boolean {
@@ -142,11 +150,13 @@ function conjugatedAnswer(v: VerbConj, idx: number): string {
 
 function ensureGabarits(gabarits: G1Gabarit[]): G1Gabarit[] {
   if (gabarits.length === 0) return gabarits;
+  // Ne jamais tronquer : une leçon peut fournir > 25 gabarits (ex. 15 × 4 modaux).
+  if (gabarits.length >= G1_GABARIT_COUNT) return gabarits;
   const out = [...gabarits];
   while (out.length < G1_GABARIT_COUNT) {
     out.push(gabarits[out.length % gabarits.length]!);
   }
-  return out.slice(0, G1_GABARIT_COUNT);
+  return out;
 }
 
 function normalizeTail(tail: string): string {
@@ -155,10 +165,14 @@ function normalizeTail(tail: string): string {
   return t.startsWith(" ") ? t : ` ${t}`;
 }
 
-/** Développe un gabarit sur les 8 pronoms. */
+function personIndices(persons?: number[]): number[] {
+  return persons?.length ? persons : [0, 1, 2, 3, 4, 5, 6, 7];
+}
+
+/** Développe un gabarit sur les pronoms autorisés (défaut : 8). */
 function forEachPronoun(gabarit: G1Gabarit, fn: (idx: number, v: VerbConj, tail: string) => void) {
   const tail = normalizeTail(gabarit.tail);
-  for (let idx = 0; idx < 8; idx++) {
+  for (const idx of personIndices(gabarit.persons)) {
     fn(idx, gabarit.verb, tail);
   }
 }
@@ -202,12 +216,14 @@ function buildItemsFromGabarit(
       choices: endingChoices,
       correctIdx: 0,
       gabaritId,
+      poolKey: v.infinitive,
     };
     endingFill = {
       sentence: `${subj.display}${subj.sep}${reflChunk}${blank.stem}___ (${v.infinitive})${tail}`,
       hint: v.hint,
       answer: blank.ending,
       gabaritId,
+      poolKey: v.infinitive,
     };
   } else {
     const subj = subjectOf(idx, full);
@@ -221,12 +237,14 @@ function buildItemsFromGabarit(
       ]),
       correctIdx: 0,
       gabaritId,
+      poolKey: v.infinitive,
     };
     endingFill = {
       sentence: `${subj.display}${subj.sep}___ (${v.infinitive})${tail}`,
       hint: v.hint,
       answer: full,
       gabaritId,
+      poolKey: v.infinitive,
     };
   }
 
@@ -242,12 +260,14 @@ function buildItemsFromGabarit(
     ]),
     correctIdx: 0,
     gabaritId,
+    poolKey: v.infinitive,
   };
   const conjFill: FillItem = {
     sentence: `${conjSubj.display}${conjSubj.sep}___ (${v.infinitive})${tail}`,
     hint: v.infinitive,
     answer: full,
     gabaritId,
+    poolKey: v.infinitive,
   };
 
   return { endingQcm, endingFill, conjQcm, conjFill };
@@ -255,8 +275,11 @@ function buildItemsFromGabarit(
 
 function buildPluralFromGabarit(gabarit: G1Gabarit, gabaritId: string): FillItem[] {
   const v = gabarit.verb;
+  const allowed = new Set(personIndices(gabarit.persons));
+  // Pas de pluriel pour les verbes à une seule personne (ex. falloir → il faut).
+  if (allowed.size < 2) return [];
   const tail = normalizeTail(gabarit.tail);
-  return SING_PLUR_PAIRS.map(({ s, p }) => {
+  return SING_PLUR_PAIRS.filter(({ s, p }) => allowed.has(s) && allowed.has(p)).map(({ s, p }) => {
     const singForm = conjugatedAnswer(v, s);
     const plurForm = conjugatedAnswer(v, p);
     const sp = subjectOf(s, singForm);
@@ -266,6 +289,7 @@ function buildPluralFromGabarit(gabarit: G1Gabarit, gabaritId: string): FillItem
       hint: "mettre au pluriel",
       answer: plurForm,
       gabaritId,
+      poolKey: v.infinitive,
     };
   });
 }
@@ -380,13 +404,19 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
           const others = profile.gabarits
             .map((x) => x.verb)
             .filter((v) => v.infinitive !== g.verb.infinitive);
-          return { verb: g.verb, tail: g.tail, distractors: others.slice(0, 3) };
+          return { verb: g.verb, tail: g.tail, distractors: others.slice(0, 3), persons: g.persons };
         });
-    const list = [...source];
-    while (list.length < G1_GABARIT_COUNT) {
-      list.push(source[list.length % source.length]!);
-    }
-    for (let gi = 0; gi < G1_GABARIT_COUNT; gi++) {
+    const list =
+      source.length >= G1_GABARIT_COUNT
+        ? [...source]
+        : (() => {
+            const padded = [...source];
+            while (padded.length < G1_GABARIT_COUNT) {
+              padded.push(source[padded.length % source.length]!);
+            }
+            return padded;
+          })();
+    for (let gi = 0; gi < list.length; gi++) {
       const g = list[gi]!;
       const gid = `vc${gi}`;
       const tail = normalizeTail(g.tail);
@@ -397,7 +427,7 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
           ? g.distractors
           : profile.gabarits.map((x) => x.verb).filter((v) => v.infinitive !== inf)
       ).map((v) => v.infinitive);
-      for (let idx = 0; idx < 8; idx++) {
+      for (const idx of personIndices(g.persons)) {
         const form = etreForms[idx]!;
         const subj = subjectOf(idx, form);
         items.push({
@@ -405,6 +435,7 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
           choices: pickChoices(inf, distractorInfs),
           correctIdx: 0,
           gabaritId: gid,
+          poolKey: inf,
         });
       }
     }
@@ -412,13 +443,21 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
   }
 
   if (profile.verbChoiceGabarits?.length) {
-    const list = [...profile.verbChoiceGabarits];
-    while (list.length < G1_GABARIT_COUNT) list.push(profile.verbChoiceGabarits[list.length % profile.verbChoiceGabarits.length]!);
-    for (let gi = 0; gi < G1_GABARIT_COUNT; gi++) {
+    const list =
+      profile.verbChoiceGabarits.length >= G1_GABARIT_COUNT
+        ? [...profile.verbChoiceGabarits]
+        : (() => {
+            const padded = [...profile.verbChoiceGabarits];
+            while (padded.length < G1_GABARIT_COUNT) {
+              padded.push(profile.verbChoiceGabarits[padded.length % profile.verbChoiceGabarits.length]!);
+            }
+            return padded;
+          })();
+    for (let gi = 0; gi < list.length; gi++) {
       const g = list[gi]!;
       const gid = `vc${gi}`;
       const tail = normalizeTail(g.tail);
-      for (let idx = 0; idx < 8; idx++) {
+      for (const idx of personIndices(g.persons)) {
         const form = conjugatedAnswer(g.verb, idx);
         const subj = subjectOf(idx, form);
         const distractors = g.distractors.map((d) => conjugatedAnswer(d, idx));
@@ -427,13 +466,14 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
           choices: pickChoices(form, distractors),
           correctIdx: 0,
           gabaritId: gid,
+          poolKey: g.verb.infinitive,
         });
       }
     }
     return items;
   }
 
-  // Dérivé auto : chaque gabarit × 8 pronoms, distracteurs = autres verbes des gabarits.
+  // Dérivé auto : chaque gabarit × pronoms, distracteurs = autres verbes des gabarits.
   const gabarits = ensureGabarits(profile.gabarits);
   const allVerbs = [...new Map(gabarits.map((g) => [g.verb.infinitive, g.verb])).values()];
   for (let gi = 0; gi < gabarits.length; gi++) {
@@ -441,7 +481,7 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
     const gid = `vc${gi}`;
     const tail = normalizeTail(g.tail);
     const distractors = allVerbs.filter((x) => x.infinitive !== g.verb.infinitive);
-    for (let idx = 0; idx < 8; idx++) {
+    for (const idx of personIndices(g.persons)) {
       const form = conjugatedAnswer(g.verb, idx);
       const subj = subjectOf(idx, form);
       items.push({
@@ -452,6 +492,7 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
         ),
         correctIdx: 0,
         gabaritId: gid,
+        poolKey: g.verb.infinitive,
       });
     }
   }
@@ -460,7 +501,8 @@ function buildVerbChoicePool(profile: G1LessonProfile): QcmItem[] {
 
 /**
  * Pack harmonisé G1 — 7 exercices (ou 5 si skipEndingExercises).
- * Banque = 25 gabarits × 8 pronoms (tirage aléatoire via shuffle du pool).
+ * Banque = gabarits × pronoms (tirage aléatoire via shuffle du pool).
+ * Si `sessionEnsureVerbs` : 1× chaque verbe + complément au hasard.
  */
 export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
   const pools = buildCorePools(profile);
@@ -469,6 +511,8 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
   while (writePrompts.length < G1_WRITE_SIZE && profile.writePrompts.length > 0) {
     writePrompts.push(profile.writePrompts[writePrompts.length % profile.writePrompts.length]!);
   }
+  const ensure = profile.sessionEnsureVerbs;
+  const pluralEnsure = ensure?.filter((v) => pools.plural.some((item) => item.poolKey === v));
 
   const all: Exercise[] = [
     {
@@ -478,6 +522,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: pools.endingQcm,
       poolSize: G1_SESSION_SIZE,
+      ...(ensure ? { poolEnsure: ensure } : {}),
     },
     {
       type: "fill",
@@ -488,6 +533,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       poolSize: G1_SESSION_SIZE,
       /* Assez large pour -issent / -iennent / -ssons. */
       inputWidth: "w-28",
+      ...(ensure ? { poolEnsure: ensure } : {}),
     },
     {
       type: "qcm",
@@ -498,6 +544,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: pools.conjQcm,
       poolSize: G1_SESSION_SIZE,
+      ...(ensure ? { poolEnsure: ensure } : {}),
     },
     {
       type: "fill",
@@ -509,6 +556,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       pool: pools.conjFill,
       poolSize: G1_SESSION_SIZE,
       inputWidth: profile.progressif ? "w-28" : "w-[10.5rem]",
+      ...(ensure ? { poolEnsure: ensure } : {}),
     },
     {
       type: "fill",
@@ -519,6 +567,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       poolSize: G1_SESSION_SIZE,
       /* Progressif : « sommes en train de manger » — trait très large. */
       inputWidth: profile.progressif ? "w-[32rem]" : "w-[10.5rem]",
+      ...(pluralEnsure?.length ? { poolEnsure: pluralEnsure } : {}),
     },
     {
       type: "qcm",
@@ -529,6 +578,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       items: [],
       pool: verbChoice,
       poolSize: G1_SESSION_SIZE,
+      ...(ensure ? { poolEnsure: ensure } : {}),
     },
     {
       type: "write",
@@ -538,6 +588,7 @@ export function buildG1VerbExercises(profile: G1LessonProfile): Exercise[] {
       promptLayout: "stacked",
       promptPool: writePrompts,
       promptPoolSize: G1_WRITE_SIZE,
+      ...(ensure ? { promptPoolEnsure: ensure } : {}),
     },
   ];
 
