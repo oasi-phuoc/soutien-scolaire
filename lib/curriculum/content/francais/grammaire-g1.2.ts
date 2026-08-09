@@ -134,10 +134,8 @@ export const A1_GR_ETRE: GrammarLesson = {
         ps: "{a}2.{/a} liaison ترسره کېږي.",
         uk: "{a}2.{/a} Робимо зв'язування звуків (liaison).",
       },
-    },
-    {
-      type: "text",
-      text: "O{li}n|e{/li}st, vou{li}s|ê{/li}tes.",
+      items: ["O{li}n|e{/li}st, vou{li}s|ê{/li}tes."],
+      noBulletItems:[0]
     },
   ],
   exercises: G1_EXERCISES["G1.2"](),

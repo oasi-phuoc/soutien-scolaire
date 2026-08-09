@@ -591,7 +591,6 @@ export function AdminTable({
           <thead className="sticky top-0 z-20">
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
               <th
-                <th
                 className="admin-users-table__loupe bg-[var(--color-theme)]"
                 aria-label="Détail"
               />

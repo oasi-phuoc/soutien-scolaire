@@ -25,11 +25,24 @@ export const A1_GR_CEST: GrammarLesson = {
         tr: "{a}Il y a{/a} bir yerde bir kişi veya şeyin varlığını belirtmek için kullanılır.",
         ps: "{a}Il y a{/a} په یو ځای کې د کس یا شي د شتون ښودلو لپاره کارېږي.",
         uk: "{a}Il y a{/a} вживається, щоб указати на наявність людини або речі в певному місці.",
-      },
+      },    
     },
     {
       type: "text",
-      text: "{a}Il y a{/a} beaucoup de photos.",
+      label: "Exemples",
+      items: ["{a}Il y a{/a} beaucoup de photos."],
+      transLabel: {
+        en: "Examples",
+        ar: "أمثلة",
+        fa: "مثال‌ها",
+        pt: "Exemplos",
+        so: "Tusaalooyin",
+        ti: "ኣብነታት",
+        tr: "Örnekler",
+        ps: "بېلګې",
+        uk: "Приклади",
+      },
+      noBulletItems: [0],
     },
     {
       type: "text",
@@ -48,9 +61,24 @@ export const A1_GR_CEST: GrammarLesson = {
     },
     {
       type: "text",
-      text: "{a}C'est{/a} mon cousin.",
+      label: "Exemples",
+      items: [
+        "{a}C'est{/a} mon cousin.",
+        "{a}C'est{/a} un stylo.",
+      ],
+      transLabel: {
+        en: "Examples",
+        ar: "أمثلة",
+        fa: "مثال‌ها",
+        pt: "Exemplos",
+        so: "Tusaalooyin",
+        ti: "ኣብነታት",
+        tr: "Örnekler",
+        ps: "بېلګې",
+        uk: "Приклади",
+      },
+      noBulletItems: [0, 1],
     },
-
     // ── Intro + tableau ───────────────────────────────────────────────────────
     {
       type: "text",
@@ -66,6 +94,27 @@ export const A1_GR_CEST: GrammarLesson = {
         ps: "عبارتونه {a}c'est{/a} او {a}il est{/a} دواړه د چا یا شي د معرفي کولو یا تشریح لپاره کارېږي، خو په یوه ډول نه کارول کېږي.",
         uk: "Вирази {a}c'est{/a} та {a}il est{/a} обидва служать для представлення або опису когось чи чогось, але вживаються по-різному.",
       },
+    },
+
+    {
+      type: "text",
+      label: "Exemples",
+      items: [
+        "{a}C'est{/a} petit.",
+        "{a}Il est{/a} grand.",
+      ],
+      transLabel: {
+        en: "Examples",
+        ar: "أمثلة",
+        fa: "مثال‌ها",
+        pt: "Exemplos",
+        so: "Tusaalooyin",
+        ti: "ኣብነታት",
+        tr: "Örnekler",
+        ps: "بېلګې",
+        uk: "Приклади",
+      },
+      noBulletItems: [0, 1],
     },
     {
       type: "grid",
@@ -86,7 +135,6 @@ export const A1_GR_CEST: GrammarLesson = {
         ["Il y a", "Il y a", "Indiquer la présence"],
         ["C'est", "Ce sont", "Identifier ou présenter"],
         ["Il est", "Ils sont", "Décrire au masculin"],
-        ["Elle est", "Elles sont", "Décrire au féminin"],
       ],
       transRows: {
         en: [["Il y a", "Il y a", "Indicate presence"], ["C'est", "Ce sont", "Identify or introduce"], ["Il est", "Ils sont", "Describe in the masculine"], ["Elle est", "Elles sont", "Describe in the feminine"]],
@@ -127,46 +175,105 @@ export const A1_GR_CEST: GrammarLesson = {
 
     {
       type: "text",
-      label: "Devant un nom avec article",
+      text: "{a}1.{/a} On utilise « c'est » devant un {a}nom accompagné d'un article{/a}.",
       items: [
-        "C'est {a}un{/a} professeur.",
-        "C'est {a}la{/a} pharmacie.",
+        "C'est {a}un professeur{/a}.",
+        "C'est {a}la pharmacie{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a noun with an article", ar: "قبل اسم مع مقال", fa: "قبل از اسم با حرف تعریف", pt: "Antes de um nome com artigo", so: "Ka hor magac leh article", ti: "ቅድሚ ስም ምስ ናይ ዓንቀጽ", tr: "Artikelli bir isimden önce", ps: "د article لرونکي نوم مخکې", uk: "Перед іменником з артиклем" },
+      transText: {
+        en: "{a}1.{/a} We use « c'est » before a {a}noun accompanied by an article{/a}.",
+        ar: "{a}1.{/a} نستخدم «c'est» قبل {a}اسم مسبوق بأداة تعريف أو تنكير{/a}.",
+        fa: "{a}1.{/a} از «c'est» قبل از {a}اسمی همراه با حرف تعریف{/a} استفاده می‌کنیم.",
+        pt: "{a}1.{/a} Usamos «c'est» antes de um {a}nome acompanhado de um artigo{/a}.",
+        so: "{a}1.{/a} Waxaan isticmaalnaa «c'est» ka hor {a}magac leh article{/a}.",
+        ti: "{a}1.{/a} «c'est» ቅድሚ {a}ስም ምስ ናይ ዓንቀጽ{/a} ንጥቀመሉ።",
+        tr: "{a}1.{/a} “c'est” {a}artikelli bir isimden{/a} önce kullanılır.",
+        ps: "{a}1.{/a} موږ «c'est» د {a}article لرونکي نوم{/a} څخه مخکې کاروو.",
+        uk: "{a}1.{/a} Ми використовуємо «c'est» перед {a}іменником з артиклем{/a}.",
+      },
     },
 
     {
       type: "text",
-      label: "Devant un prénom ou un nom propre",
+      text: "{a}2.{/a} On utilise « c'est » devant un {a}prénom ou un nom propre{/a}.",
       items: [
         "C'est {a}Alona{/a}.",
         "C'est {a}M. Mohammed Safi{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a first name or proper noun", ar: "قبل اسم شخص أو اسم علم", fa: "قبل از اسم کوچک یا اسم خاص", pt: "Antes de um nome próprio", so: "Ka hor magac qof ama magac gaar ah", ti: "ቅድሚ ስም ሰብ ወይ ናይ ኣቦ ስም", tr: "Bir ad veya özel addan önce", ps: "د شخصي نوم یا خاص نوم مخکې", uk: "Перед іменем або власною назвою" },
+      transText: {
+        en: "{a}2.{/a} We use « c'est » before a {a}first name or proper noun{/a}.",
+        ar: "{a}2.{/a} نستخدم «c'est» قبل {a}اسم شخص أو اسم علم{/a}.",
+        fa: "{a}2.{/a} از «c'est» قبل از {a}اسم کوچک یا اسم خاص{/a} استفاده می‌کنیم.",
+        pt: "{a}2.{/a} Usamos «c'est» antes de um {a}nome próprio{/a}.",
+        so: "{a}2.{/a} Waxaan isticmaalnaa «c'est» ka hor {a}magac qof ama magac gaar ah{/a}.",
+        ti: "{a}2.{/a} «c'est» ቅድሚ {a}ስም ሰብ ወይ ናይ ኣቦ ስም{/a} ንጥቀመሉ።",
+        tr: "{a}2.{/a} “c'est” {a}bir addan veya özel addan{/a} önce kullanılır.",
+        ps: "{a}2.{/a} موږ «c'est» د {a}شخصي نوم یا خاص نوم{/a} څخه مخکې کاروو.",
+        uk: "{a}2.{/a} Ми використовуємо «c'est» перед {a}ім'ям або власною назвою{/a}.",
+      },
     },
 
     {
       type: "text",
-      label: "Devant un pronom",
+      text: "{a}3.{/a} On utilise « c'est » devant un {a}pronom{/a}.",
       items: [
         "C'est {a}moi{/a}.",
         "C'est {a}elle{/a}.",
       ],
       noBulletItems: [0, 1],
-      transLabel: { en: "Before a pronoun", ar: "قبل ضمير", fa: "قبل از ضمیر", pt: "Antes de um pronome", so: "Ka hor magac-u-yaal", ti: "ቅድሚ ተካኢ ስም", tr: "Bir zamirden önce", ps: "د ضمیر مخکې", uk: "Перед займенником" },
+      transText: {
+        en: "{a}3.{/a} We use « c'est » before a {a}pronoun{/a}.",
+        ar: "{a}3.{/a} نستخدم «c'est» قبل {a}ضمير{/a}.",
+        fa: "{a}3.{/a} از «c'est» قبل از {a}ضمیر{/a} استفاده می‌کنیم.",
+        pt: "{a}3.{/a} Usamos «c'est» antes de um {a}pronome{/a}.",
+        so: "{a}3.{/a} Waxaan isticmaalnaa «c'est» ka hor {a}magac-u-yaal{/a}.",
+        ti: "{a}3.{/a} «c'est» ቅድሚ {a}ተካኢ ስም{/a} ንጥቀመሉ።",
+        tr: "{a}3.{/a} “c'est” {a}bir zamirden{/a} önce kullanılır.",
+        ps: "{a}3.{/a} موږ «c'est» د {a}ضمیر{/a} څخه مخکې کاروو.",
+        uk: "{a}3.{/a} Ми використовуємо «c'est» перед {a}займенником{/a}.",
+      },
     },
 
     {
       type: "text",
-      label: "Pour donner une date ou une heure",
+      text: "{a}4.{/a} On utilise « c'est » pour donner une {a}date{/a}.",
       items: [
         "C'est {a}le 15 mars{/a}.",
+      ],
+      noBulletItems: [0],
+      transText: {
+        en: "{a}4.{/a} We use « c'est » to give a {a}date{/a}.",
+        ar: "{a}4.{/a} نستخدم «c'est» لإعطاء {a}تاريخ{/a}.",
+        fa: "{a}4.{/a} از «c'est» برای بیان {a}تاریخ{/a} استفاده می‌کنیم.",
+        pt: "{a}4.{/a} Usamos «c'est» para indicar uma {a}data{/a}.",
+        so: "{a}4.{/a} Waxaan isticmaalnaa «c'est» si loo sheego {a}taariikh{/a}.",
+        ti: "{a}4.{/a} «c'est» {a}ዕለት{/a} ንምሃብ ንጥቀመሉ።",
+        tr: "{a}4.{/a} “c'est” bir {a}tarih{/a} vermek için kullanılır.",
+        ps: "{a}4.{/a} موږ «c'est» د {a}نېټې{/a} ورکولو لپاره کاروو.",
+        uk: "{a}4.{/a} Ми використовуємо «c'est», щоб назвати {a}дату{/a}.",
+      },
+    },
+
+    {
+      type: "text",
+      text: "{a}5.{/a} On utilise « c'est » pour indiquer une {a}heure{/a}.",
+      items: [
         "C'est {a}trois heures{/a}.",
       ],
-      noBulletItems: [0, 1],
-      transLabel: { en: "To give a date or time", ar: "لإعطاء تاريخ أو وقت", fa: "برای دادن تاریخ یا ساعت", pt: "Para indicar uma data ou uma hora", so: "Si loo sheego taariikh ama waqti", ti: "ዕለት ወይ ሰዓት ንምሃብ", tr: "Tarih veya saat vermek için", ps: "د نېټې یا وخت ورکولو لپاره", uk: "Для зазначення дати або часу" },
+      noBulletItems: [0],
+      transText: {
+        en: "{a}5.{/a} We use « c'est » to indicate the {a}time{/a}.",
+        ar: "{a}5.{/a} نستخدم «c'est» للإشارة إلى {a}الوقت{/a}.",
+        fa: "{a}5.{/a} از «c'est» برای گفتن {a}ساعت{/a} استفاده می‌کنیم.",
+        pt: "{a}5.{/a} Usamos «c'est» para indicar a {a}hora{/a}.",
+        so: "{a}5.{/a} Waxaan isticmaalnaa «c'est» si loo sheego {a}waqtiga{/a}.",
+        ti: "{a}5.{/a} «c'est» {a}ሰዓት{/a} ንምግላጽ ንጥቀመሉ።",
+        tr: "{a}5.{/a} “c'est” {a}saati{/a} belirtmek için kullanılır.",
+        ps: "{a}5.{/a} موږ «c'est» د {a}وخت{/a} ښودلو لپاره کاروو.",
+        uk: "{a}5.{/a} Ми використовуємо «c'est», щоб вказати {a}час{/a}.",
+      },
     },
 
     // ── IL EST ────────────────────────────────────────────────────────────────
@@ -291,11 +398,11 @@ export const A1_GR_CEST: GrammarLesson = {
         ps: "کله چې یو کس د نوم + صفت په وسیله یادوئ، {a}c'est{/a} وکاروئ.",
         uk: "Коли позначаєте особу іменником + прикметником, використовуйте {a}c'est{/a}.",
       },
-    },
-
-    {
-      type: "text",
-      text: "C'est un homme {a}gentil{/a}.\nC'est une {a}grande{/a} voiture.",
+      items:[
+        "C'est un homme {a}gentil{/a}.",
+        "C'est une {a}grande{/a} voiture."
+      ],
+      noBulletItems:[0, 1],
     },
   ],
   exercises: [

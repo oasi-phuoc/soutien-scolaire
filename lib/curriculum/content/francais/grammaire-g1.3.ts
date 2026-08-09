@@ -177,10 +177,8 @@ export const A1_GR_AVOIR: GrammarLesson = {
         ps: "{a}2.{/a} liaison ترسره کېږي.",
         uk: "{a}2.{/a} Робимо зв'язування звуків (liaison).",
       },
-    },
-    {
-      type: "text",
-      text: "O{li}n|a{/li}, nou{li}s|a{/li}vons, vou{li}s|a{/li}vez, il{li}s|o{/li}nt, elle{li}s|o{/li}nt.",
+      items: ["O{li}n|a{/li}, nou{li}s|a{/li}vons, vou{li}s|a{/li}vez, il{li}s|o{/li}nt, elle{li}s|o{/li}nt."],
+      noBulletItems:[0],
     },
     {
       type: "text",
@@ -196,11 +194,9 @@ export const A1_GR_AVOIR: GrammarLesson = {
         ps: "{a}3.{/a} ضمیر {a}je{/a} د واول مخکې {a}j'{/a} کېږي.",
         uk: "{a}3.{/a} Перед голосною займенник {a}je{/a} перетворюється на {a}j'{/a}.",
       },
-    },
-    {
-      type: "text",
-      text: "{s}Je ai{/s} → {a}J'ai{/a} 20 ans.",
+      items: ["{s}Je ai{/s} → {a}J'ai{/a} 20 ans."],
       inlineArrows: true,
+      noBulletItems:[0],
     },
   ],
   exercises: G1_EXERCISES["G1.3"](),
