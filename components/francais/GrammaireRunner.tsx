@@ -1838,6 +1838,38 @@ function hasErVerbForm(text: string, verb: string): boolean {
   return re.test(text) || new RegExp(`\\b${escVerb}\\b`, "i").test(text);
 }
 
+/**
+ * Tire `size` prompts. Si des items ont `side: "cest" | "ilest"`,
+ * équilibre ~2–3 de chaque famille (pour size=5 → 2+3 ou 3+2).
+ */
+function sampleWritePrompts(
+  pool: Array<string | { prompt: string; side?: "cest" | "ilest" }>,
+  size: number,
+): string[] {
+  const normalized = pool.map((p) => (typeof p === "string" ? { prompt: p } : p));
+  const cest = shuffle(normalized.filter((p) => p.side === "cest").map((p) => p.prompt));
+  const ilest = shuffle(normalized.filter((p) => p.side === "ilest").map((p) => p.prompt));
+  const plain = shuffle(normalized.filter((p) => p.side !== "cest" && p.side !== "ilest").map((p) => p.prompt));
+
+  if (cest.length === 0 || ilest.length === 0) {
+    return shuffle([...cest, ...ilest, ...plain]).slice(0, size);
+  }
+
+  // size=5 → 2 ou 3 de chaque côté
+  const minSide = Math.min(2, Math.floor(size / 2));
+  const maxSide = Math.min(3, size - minSide);
+  let nCest = minSide + Math.floor(Math.random() * (maxSide - minSide + 1));
+  nCest = Math.min(nCest, cest.length, size);
+  let nIlest = Math.min(size - nCest, ilest.length);
+  nCest = Math.min(size - nIlest, cest.length);
+
+  const picked = [...cest.slice(0, nCest), ...ilest.slice(0, nIlest)];
+  if (picked.length < size && plain.length > 0) {
+    picked.push(...plain.slice(0, size - picked.length));
+  }
+  return shuffle(picked).slice(0, size);
+}
+
 function WriteExercise({
   exercise,
   onValidated,
@@ -1866,7 +1898,7 @@ function WriteExercise({
       return [group.image, shuffle([...group.promptPool]).slice(0, questionCount)];
     }
     if (exercise.promptPool?.length) {
-      return [null, shuffle([...exercise.promptPool]).slice(0, questionCount)];
+      return [null, sampleWritePrompts(exercise.promptPool, questionCount)];
     }
     if (exercise.levelPromptPools) {
       const levelled = (Object.entries(exercise.levelPromptPools) as Array<["A1" | "A2" | "B1", string[]]>)
