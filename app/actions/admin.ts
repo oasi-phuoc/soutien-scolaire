@@ -247,8 +247,8 @@ export async function getUserForAdminAction(userId: string): Promise<{
       ...data,
       can_print: Boolean(data.can_print),
       can_free_access: Boolean(row.can_free_access),
-      can_partial_french: Boolean(row.can_partial_french || row.can_free_access),
-      can_partial_math: Boolean(row.can_partial_math || row.can_free_access),
+      can_partial_french: Boolean(row.can_partial_french),
+      can_partial_math: Boolean(row.can_partial_math),
       email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
       placement_combined: combined?.total !== undefined ? {
@@ -383,6 +383,32 @@ export async function setUserPartialMathAction(
   revalidatePath(`/admin/eleves/${userId}`);
   revalidatePath("/mathematiques");
   return { ok: true };
+}
+
+/** Met can_partial_* à false pour tous les profils (une seule fois via app_settings). */
+export async function ensurePartialAccessDefaultsAppliedAction(): Promise<void> {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return;
+  const svc = createServiceClient();
+  if (!svc) return;
+
+  const flagKey = "partial_access_default_false_v1";
+  const { data: flag } = await svc
+    .from("app_settings")
+    .select("value")
+    .eq("key", flagKey)
+    .maybeSingle();
+  if (flag?.value === true) return;
+
+  await svc
+    .from("profiles")
+    .update({ can_partial_french: false, can_partial_math: false })
+    .or("can_partial_french.eq.true,can_partial_math.eq.true");
+
+  await svc.from("app_settings").upsert(
+    { key: flagKey, value: true, updated_at: new Date().toISOString() },
+    { onConflict: "key" },
+  );
 }
 
 export async function updateUserProfileAction(

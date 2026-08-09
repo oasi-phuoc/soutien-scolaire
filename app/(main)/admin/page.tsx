@@ -3,6 +3,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { AdminTable, type UserRow } from "@/components/admin/AdminTable";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
+import { ensurePartialAccessDefaultsAppliedAction } from "@/app/actions/admin";
 
 export default async function AdminPage() {
   const supabase = await createSupabaseServerClient();
@@ -13,6 +14,8 @@ export default async function AdminPage() {
 
   const { data: myRole } = await supabase.rpc("get_my_role");
   if (myRole !== "admin") redirect(myRole === "prof" ? "/suivi" : "/");
+
+  await ensurePartialAccessDefaultsAppliedAction();
 
   const { data: users } = await supabase.rpc("get_users_for_admin") as {
     data: (Omit<UserRow, "progress_data" | "login_id" | "placement_test_best" | "placement_combined"> & {
@@ -31,8 +34,8 @@ export default async function AdminPage() {
       ...u,
       can_print: Boolean((u as { can_print?: boolean }).can_print),
       can_free_access: free,
-      can_partial_french: Boolean((u as { can_partial_french?: boolean }).can_partial_french || free),
-      can_partial_math: Boolean((u as { can_partial_math?: boolean }).can_partial_math || free),
+      can_partial_french: Boolean((u as { can_partial_french?: boolean }).can_partial_french),
+      can_partial_math: Boolean((u as { can_partial_math?: boolean }).can_partial_math),
     };
   }).sort((a, b) => {
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();

@@ -543,20 +543,20 @@ export function EleveDetailPage({
                     </p>
                     <div className="space-y-3">
                       <AccessSwitch
-                        checked={user.can_free_access || user.can_partial_french}
+                        checked={user.can_partial_french}
                         disabled={user.can_free_access}
                         label="Français"
                         description={`Grammaire jusqu'à ${PARTIAL_FRENCH_GRAMMAR_MAX} · Communication jusqu'à ${PARTIAL_FRENCH_COMM_MAX}`}
                         ariaLabel="Accès partiel français"
-                        onToggle={() => handleTogglePartialFrench(!(user.can_free_access || user.can_partial_french))}
+                        onToggle={() => handleTogglePartialFrench(!user.can_partial_french)}
                       />
                       <AccessSwitch
-                        checked={user.can_free_access || user.can_partial_math}
+                        checked={user.can_partial_math}
                         disabled={user.can_free_access}
                         label="Mathématiques"
                         description={`Modules jusqu'à ${PARTIAL_MATH_MAX_MODULE}`}
                         ariaLabel="Accès partiel mathématiques"
-                        onToggle={() => handleTogglePartialMath(!(user.can_free_access || user.can_partial_math))}
+                        onToggle={() => handleTogglePartialMath(!user.can_partial_math)}
                       />
                     </div>
                   </div>
