@@ -28,13 +28,7 @@ export const A1_GR_ETRE: GrammarLesson = {
         uk: "Дієслово ÊTRE вживається, щоб повідомити інформацію про людину, наприклад її особу, або описати когось.",
       },
     },
-    {
-      type: "heading",
-      text: "Exemple",
-      sub: true,
-      accent: true,
-      trans: { en: "Example", ar: "مثال", fa: "مثال", pt: "Exemplo", so: "Tusaale", ti: "ኣብነት", tr: "Örnek", ps: "بېلګه", uk: "Приклад" },
-    },
+    
     {
       type: "grid",
       headers: ["", "Exemple"],

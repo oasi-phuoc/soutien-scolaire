@@ -67,7 +67,7 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["مفرد", "جمع"],
         uk: ["Однина", "Множина"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       rows: [
         ["je → moi", "nous → plusieurs personnes et moi"],
         ["tu → un ami", "vous → plusieurs personnes"],
@@ -211,7 +211,7 @@ export const A1_GR_L01: GrammarLesson = {
         ps: ["نوم", "ضمیر"],
         uk: ["Іменник", "Займенник"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       rows: [
         ["Ali {a}♂{/a}", "il"],
         ["Alona {a}♀{/a}", "elle"],
