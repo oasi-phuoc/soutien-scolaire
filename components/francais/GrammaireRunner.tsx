@@ -1880,7 +1880,7 @@ function sampleWritePrompts(
   const maxSide = Math.min(3, size - minSide);
   let nCest = minSide + Math.floor(Math.random() * (maxSide - minSide + 1));
   nCest = Math.min(nCest, cest.length, size);
-  let nIlest = Math.min(size - nCest, ilest.length);
+  const nIlest = Math.min(size - nCest, ilest.length);
   nCest = Math.min(size - nIlest, cest.length);
 
   const picked = [...cest.slice(0, nCest), ...ilest.slice(0, nIlest)];
