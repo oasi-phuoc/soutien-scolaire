@@ -34,6 +34,17 @@ export const A1_GR_L01: GrammarLesson = {
         "Ali parle français.",
         "{a}Il{/a} habite en Suisse.",
       ],
+      transLabel: {
+        en: "Examples",
+        ar: "أمثلة",
+        fa: "مثال‌ها",
+        pt: "Exemplos",
+        so: "Tusaalooyin",
+        ti: "ኣብነታት",
+        tr: "Örnekler",
+        ps: "بېلګې",
+        uk: "Приклади",
+      },
       noBulletItems: [0, 1],
     },
     {
@@ -108,12 +119,12 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "text",
       label: "ON",
-      items: [],
-      transLabel: { en: "ON", ar: "ON", fa: "ON", pt: "ON", so: "ON", ti: "ON", tr: "ON", ps: "ON", uk: "ON" },
-    },
-    {
-      type: "text",
       text: "On utilise « {a}on{/a} » pour représenter plusieurs personnes (= nous). Il est très utilisé à l'oral familier. Le verbe est toujours au singulier.",
+      items: [
+        "{a}On{/a} (= {a}Nous{/a}) va au magasin.",
+        "En Suisse, {a}on{/a} (= {a}Les gens{/a}) parle français.",
+      ],
+      transLabel: { en: "ON", ar: "ON", fa: "ON", pt: "ON", so: "ON", ti: "ON", tr: "ON", ps: "ON", uk: "ON" },
       transText: {
         en: "We use {a}on{/a} to represent several people (= nous). It is very common in informal spoken French. The verb is always singular.",
         ar: "نستخدم {a}on{/a} لتمثيل عدة أشخاص (= nous). ويُستخدم كثيرًا في الفرنسية المحكية غير الرسمية. ويكون الفعل دائمًا في صيغة المفرد.",
@@ -128,18 +139,10 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "text",
-      text: "{a}On{/a} (= {a}Nous{/a}) va au magasin.\nEn Suisse, {a}on{/a} (= {a}Les gens{/a}) parle français.",
-      inlineArrows: true,
-    },
-    {
-      type: "text",
       label: "TU",
-      items: [],
-      transLabel: { en: "TU", ar: "TU", fa: "TU", pt: "TU", so: "TU", ti: "TU", tr: "TU", ps: "TU", uk: "TU" },
-    },
-    {
-      type: "text",
       text: "On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",
+      items: ["{a}Tu{/a} (= un {a}ami{/a}) es fatigué ?"],
+      transLabel: { en: "TU", ar: "TU", fa: "TU", pt: "TU", so: "TU", ti: "TU", tr: "TU", ps: "TU", uk: "TU" },
       transText: {
         en: "We use {a}tu{/a} to speak to someone we know in an informal situation.",
         ar: "نستخدم {a}tu{/a} لمخاطبة شخص نعرفه في موقف غير رسمي.",
@@ -154,17 +157,10 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "text",
-      text: "{a}Tu{/a} (= un {a}ami{/a}) es fatigué ?",
-    },
-    {
-      type: "text",
       label: "VOUS",
       noBulletItems: [0],
-      items: [],
+      items: ["Madame, {a}vous{/a} (= {a}La professeur{/a}) allez bien ?"],
       transLabel: { en: "VOUS", ar: "VOUS", fa: "VOUS", pt: "VOUS", so: "VOUS", ti: "VOUS", tr: "VOUS", ps: "VOUS", uk: "VOUS" },
-    },
-    {
-      type: "text",
       text: "On utilise « {a}vous{/a} » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur). On appelle cela la forme de politesse.",
       transText: {
         en: "We use {a}vous{/a} when we do not know the person or when the social roles are different (student–teacher). This is called the polite form.",
@@ -180,16 +176,9 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "text",
-      text: "Madame, {a}vous{/a} (= {a}La professeur{/a}) allez bien ?",
-    },
-    {
-      type: "text",
       label: "ILS",
-      items: [],
+      items: ["{a}Ils{/a} (= {a}Ali ♂ et Alona ♀{/a}) vont au cinéma."],
       transLabel: { en: "ILS", ar: "ILS", fa: "ILS", pt: "ILS", so: "ILS", ti: "ILS", tr: "ILS", ps: "ILS", uk: "ILS" },
-    },
-    {
-      type: "text",
       text: "On utilise « {a}ils{/a} » quand il y a un groupe mixte de femmes et d'hommes. Même s'il y a beaucoup de femmes et un seul homme.",
       transText: {
         en: "We use {a}ils{/a} for a mixed group of women and men, even if there are many women and only one man.",
@@ -202,11 +191,6 @@ export const A1_GR_L01: GrammarLesson = {
         ps: "موږ {a}ils{/a} د ښځو او سړو د ګډې ډلې لپاره کاروو، حتی که ډېرې ښځې او یوازې یو سړی وي.",
         uk: "{a}Ils{/a} вживаємо для змішаної групи жінок і чоловіків, навіть якщо в ній багато жінок і лише один чоловік.",
       },
-    },
-    {
-      type: "text",
-      text: "{a}Ils{/a} (= {a}Ali ♂ et Alona ♀{/a}) vont au cinéma.",
-      inlineArrows: true,
     },
     {
       type: "heading",
@@ -243,19 +227,47 @@ export const A1_GR_L01: GrammarLesson = {
       label: "Astuce",
       noFirstBullet: true,
       items: [
-        "Posez la question « Qui fait l'action ? », c'est le sujet de la phrase.",
+          "Posez la question « {a}Qui fait l'action{/a} ? », c'est le {a}sujet{/a} de la phrase.",
       ],
-      transLabel: { en: "Tip", ar: "نصيحة", fa: "نکته", pt: "Dica", so: "Talo", ti: "ምኽሪ", tr: "İpucu", ps: "لارښوونه", uk: "Порада" },
+      transLabel: {
+        en: "Tip",
+        ar: "نصيحة",
+        fa: "نکته",
+        pt: "Dica",
+        so: "Talo",
+        ti: "ምኽሪ",
+        tr: "İpucu",
+        ps: "لارښوونه",
+        uk: "Порада",
+      },
       transItems: {
-        en: ["Ask the question “Who is doing the action?” The answer is the subject of the sentence."],
-        ar: ["اطرح السؤال «من يقوم بالفعل؟»، فالجواب هو فاعل الجملة."],
-        fa: ["پرسش «چه کسی کار را انجام می‌دهد؟» را مطرح کنید؛ پاسخ، فاعل جمله است."],
-        pt: ["Faça a pergunta “Quem faz a ação?” A resposta é o sujeito da frase."],
-        so: ["Weydii su'aasha “Yaa ficilka samaynaya?” Jawaabtu waa falaha jumladda."],
-        ti: ["«መን እዩ ነቲ ተግባር ዝገብር?» ኢልኩም ሕተቱ፤ መልሱ ተግባሪ ናይቲ ሓሳብ እዩ።"],
-        tr: ["“Eylemi kim yapıyor?” sorusunu sorun. Cevap cümlenin öznesidir."],
-        ps: ["پوښتنه وکړئ: «عمل څوک کوي؟» ځواب د جملې فاعل دی."],
-        uk: ["Поставте запитання «Хто виконує дію?». Відповідь — це підмет речення."],
+        en: [
+          "Ask the question “{a}Who is doing the action{/a}?” The answer is the {a}subject{/a} of the sentence.",
+        ],
+        ar: [
+          "اطرح السؤال «{a}من يقوم بالفعل؟{/a}»، فالجواب هو {a}فاعل الجملة{/a}.",
+        ],
+        fa: [
+          "پرسش «{a}چه کسی کار را انجام می‌دهد؟{/a}» را مطرح کنید؛ پاسخ، {a}فاعل جمله{/a} است.",
+        ],
+        pt: [
+          "Faça a pergunta “{a}Quem faz a ação?{/a}” A resposta é o {a}sujeito{/a} da frase.",
+        ],
+        so: [
+          "Weydii su'aasha “{a}Yaa ficilka samaynaya?{/a}” Jawaabtu waa {a}falaha jumladda{/a}.",
+        ],
+        ti: [
+          "«{a}መን እዩ ነቲ ተግባር ዝገብር?{/a}» ኢልኩም ሕተቱ፤ መልሱ {a}ተግባሪ ናይቲ ሓሳብ{/a} እዩ።",
+        ],
+        tr: [
+          "“{a}Eylemi kim yapıyor?{/a}” sorusunu sorun. Cevap cümlenin {a}öznesidir{/a}.",
+        ],
+        ps: [
+          "پوښتنه وکړئ: «{a}عمل څوک کوي؟{/a}» ځواب د جملې {a}فاعل{/a} دی.",
+        ],
+        uk: [
+          "Поставте запитання «{a}Хто виконує дію?{/a}». Відповідь — це {a}підмет речення{/a}.",
+        ],
       },
     },
     {

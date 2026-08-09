@@ -834,10 +834,11 @@ input[type=number] {
 .tasks-apercu-table th.tasks-apercu-table__loupe,
 .tasks-apercu-table td.tasks-apercu-table__loupe {
   box-sizing: border-box;
-  width: 22px;
-  min-width: 22px;
-  max-width: 22px;
-  padding: 0;
+  width: 2.75rem;
+  min-width: 2.75rem;
+  max-width: 2.75rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   overflow: hidden;
 }
 

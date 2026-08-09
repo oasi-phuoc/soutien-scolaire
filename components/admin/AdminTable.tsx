@@ -591,6 +591,7 @@ export function AdminTable({
           <thead className="sticky top-0 z-20">
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
               <th
+                <th
                 className="admin-users-table__loupe bg-[var(--color-theme)]"
                 aria-label="Détail"
               />
@@ -629,8 +630,15 @@ export function AdminTable({
                   <td
                     className="admin-users-table__loupe sticky left-0 z-10 bg-white shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
                   >
-                    <Link href={`/admin/eleves/${row.id}`} className="inline-flex h-full w-full items-center justify-center py-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" aria-label="Voir détails">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
+                    <Link
+                      href={`/admin/eleves/${row.id}`}
+                      className="inline-flex rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                      aria-label="Voir détails"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                      </svg>
                     </Link>
                   </td>
                   <td className="admin-users-table__name min-w-0 px-1.5 py-2 sm:px-3 sm:py-3">
