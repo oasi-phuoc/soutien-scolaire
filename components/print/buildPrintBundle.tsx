@@ -204,13 +204,14 @@ function vocabExPreview(
   stepKey: string,
   theme: VocabTheme,
   validateCommand = 0,
+  exerciseNumber = 1,
 ): ReactNode | undefined {
   const common = {
     theme,
     validateCommand,
     onValidated: noop,
     onCanValidateChange: noop,
-    exerciseNumber: 1,
+    exerciseNumber,
   };
   switch (stepKey) {
     case "ex1-image-match":
@@ -255,7 +256,7 @@ function buildVocabBundle(slug: string): PrintBundle | null {
       const seed = 6_000_000 + index;
       return {
         id: step.key,
-        label: step.label || `Exercice ${index + 1}`,
+        label: `Exercice ${index + 1}`,
         supportsPrintLayout: true,
         defaultQuestionCount: step.defaultQuestionCount,
         defaultColumns: 1 as const,
@@ -263,12 +264,12 @@ function buildVocabBundle(slug: string): PrintBundle | null {
         printLengthMode: step.printLengthMode,
         preview: (
           <PlacementPrintSeedRoot seed={seed}>
-            {vocabExPreview(step.key, theme, 0)}
+            {vocabExPreview(step.key, theme, 0, index + 1)}
           </PlacementPrintSeedRoot>
         ),
         correctionPreview: (
           <PlacementPrintSeedRoot seed={seed}>
-            {vocabExPreview(step.key, theme, 1)}
+            {vocabExPreview(step.key, theme, 1, index + 1)}
           </PlacementPrintSeedRoot>
         ),
       };
@@ -296,7 +297,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
         const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
         return {
           id: String(i),
-          label: ex.title ?? `Exercice ${i + 1}`,
+          label: `Exercice ${i + 1}`,
           supportsPrintLayout: true,
           defaultQuestionCount: grammarDefaultQuestionCount(ex),
           defaultColumns: 1 as const,
@@ -349,7 +350,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
       const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
       return {
         id: String(i),
-        label: ex.title ?? `Exercice ${i + 1}`,
+        label: `Exercice ${i + 1}`,
         supportsPrintLayout: true,
         defaultQuestionCount: grammarDefaultQuestionCount(ex),
         defaultColumns: 1 as const,
@@ -383,11 +384,12 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
 function mathExercisePrintItem(
   ex: (typeof PLACEMENT_MATH_EXERCISES)[number],
   sessionSeed: number,
+  index: number,
 ): PrintExercise {
   const Comp = ex.component;
   return {
     id: String(ex.id),
-    label: `${ex.id}. ${ex.label}`,
+    label: `Exercice ${index + 1}`,
     defaultPoints: ex.maxPoints,
     supportsPrintLayout: ex.printQuestions != null,
     defaultQuestionCount: ex.printQuestions,
@@ -401,7 +403,7 @@ function mathExercisePrintItem(
 
 function buildPlacementMathPartBundle(levelId: string, seed: number): PrintBundle | null {
   if (levelId === "complet") {
-    const exercises = PLACEMENT_MATH_EXERCISES.map((ex) => mathExercisePrintItem(ex, seed));
+    const exercises = PLACEMENT_MATH_EXERCISES.map((ex, i) => mathExercisePrintItem(ex, seed, i));
     return {
       lessonTitle: "Test de placement — Mathématiques",
       course: "Mathématiques",
@@ -432,7 +434,7 @@ function buildPlacementMathPartBundle(levelId: string, seed: number): PrintBundl
         maxPoints={maxPoints}
       />
     ),
-    exercises: levelExercises.map((ex) => mathExercisePrintItem(ex, seed)),
+    exercises: levelExercises.map((ex, i) => mathExercisePrintItem(ex, seed, i)),
   };
 }
 

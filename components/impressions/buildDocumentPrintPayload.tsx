@@ -130,11 +130,11 @@ function placementPayload(doc: ImpressionDocument): DocumentPrintPayload {
     title: doc.title,
     course: doc.course,
     accentColor: doc.accentColor,
-    exercises: list.map((ex) => {
+    exercises: list.map((ex, i) => {
       const ExComp = ex.component;
       return {
         id: String(ex.id),
-        label: `${ex.id}. ${ex.label}`,
+        label: `Exercice ${i + 1}`,
         preview: (
           <ExComp
             exerciseKey={1}
@@ -181,7 +181,7 @@ function grammarPayload(doc: ImpressionDocument): DocumentPrintPayload | null {
       ),
       exercises: lesson.exercises.map((ex, i) => ({
         id: String(i),
-        label: ex.title ?? `Exercice ${i + 1}`,
+        label: `Exercice ${i + 1}`,
         preview: <GrammarExercisePrintView exercise={ex} />,
       })),
     };
@@ -200,7 +200,7 @@ function grammarPayload(doc: ImpressionDocument): DocumentPrintPayload | null {
     ),
     exercises: lesson.exercises.map((ex, i) => ({
       id: String(i),
-      label: ex.title ?? `Exercice ${i + 1}`,
+      label: `Exercice ${i + 1}`,
       preview: <GrammarExercisePrintView exercise={ex} />,
     })),
   };

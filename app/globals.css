@@ -405,6 +405,7 @@ input[type=number] {
 }
 
 .print-ex-content h2,
+.print-ex-content .eval-exercise-title,
 .print-ex-content p.font-bold {
   display: none !important;
 }

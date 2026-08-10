@@ -43,7 +43,7 @@ import {
   CORRECTION_INLINE_STRIKE,
   CORRECTION_MATCH_WRONG,
 } from "@/components/correction-styles";
-import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
+import { usePrintQuestionLayout, useIsPrintLayout } from "@/components/print/PrintExerciseLayoutContext";
 import { PrintAnswerLines } from "@/components/print/PrintAnswerLines";
 import { scaleCssLength } from "@/components/print/printLength";
 
@@ -2926,11 +2926,14 @@ export function GrammarExerciseView({
   isEval?: boolean;
   onWriteAnswers?: (payload: { prompts: string[]; texts: string[]; instruction: string }) => void;
 }) {
+  const isPrint = useIsPrintLayout();
   return (
     <div className="space-y-4">
-      <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">
-        {exercise.title}
-      </h2>
+      {!isPrint ? (
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">
+          {exercise.title}
+        </h2>
+      ) : null}
       {exercise.type === "qcm" && (
         <QcmExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
