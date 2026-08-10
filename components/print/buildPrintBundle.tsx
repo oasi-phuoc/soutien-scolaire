@@ -7,7 +7,7 @@ import {
   getModuleIdForSubmodule,
 } from "@/lib/curriculum/lessons-registry";
 import { getVocabTheme, type VocabTheme } from "@/lib/curriculum/vocabulary-data";
-import { getGrammarLesson, getConjLesson, type Exercise } from "@/lib/curriculum/grammar-data";
+import { getGrammarLesson, getConjLesson, type Exercise, type TheoryBlock } from "@/lib/curriculum/grammar-data";
 import { MathTheoryPrintView } from "@/components/print/MathTheoryPrintView";
 import { buildA1PrintExercises } from "@/components/math/A1ModuleContent";
 import {
@@ -51,6 +51,10 @@ import {
 } from "@/components/print/PlacementPrintAnnounce";
 import { PLACEMENT_FRENCH_PRINT_PARTS } from "@/lib/print/catalog";
 import type { PlacementLevel, PlacementSkill } from "@/lib/placement/types";
+import type { MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
+import type { TheoryPrintMeta } from "@/lib/print/theory-print-options";
+import { extractGrammarTheoryMeta } from "@/lib/print/grammar-theory-print";
+import { extractMathTheoryMeta } from "@/lib/print/math-theory-print";
 import {
   EXPRESS_ORAL_BY_ID,
 } from "@/lib/curriculum/content/communication/express-index";
@@ -68,6 +72,11 @@ export type PrintBundle = {
   theoryPreview?: ReactNode;
   /** Page d'annonce placement (incluse seulement si l'option théorie/annonce est cochée). */
   announcementPreview?: ReactNode;
+  /** Blocs grammaire bruts pour le panneau params + rendu print configurable. */
+  grammarTheoryBlocks?: TheoryBlock[];
+  /** Leçon maths pour le panneau params + rendu print configurable. */
+  mathTheoryLesson?: MathSubmoduleLesson;
+  theoryMeta?: TheoryPrintMeta;
   exercises: PrintExercise[];
   /** Mode évaluation + barème du test (placement = 100 pts). */
   defaultEvalMode?: boolean;
@@ -113,6 +122,8 @@ function buildMathBundle(submoduleId: string): PrintBundle | null {
     course: "Mathématiques",
     accentColor: isGeo ? "var(--color-accent-geo)" : "var(--color-accent-alg)",
     theoryPreview: <MathTheoryPrintView lesson={lesson} />,
+    mathTheoryLesson: lesson,
+    theoryMeta: extractMathTheoryMeta(lesson),
     exercises,
   };
 }
@@ -278,6 +289,8 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
           <GrammarTheoryView blocks={lesson.theory} pivot="fr" showTrans={false} />
         </div>
       ),
+      grammarTheoryBlocks: lesson.theory,
+      theoryMeta: extractGrammarTheoryMeta(lesson.theory),
       exercises: lesson.exercises.map((ex, i) => {
         const seed = 4_000_000 + i;
         const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
@@ -316,6 +329,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
 
   const lesson = getConjLesson(slug);
   if (!lesson) return null;
+  const conjBlocks = [...lesson.theory, ...(lesson.theory2 ?? [])];
   return {
     lessonTitle: lesson.title,
     course: "Français",
@@ -328,6 +342,8 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
         ) : null}
       </div>
     ),
+    grammarTheoryBlocks: conjBlocks,
+    theoryMeta: extractGrammarTheoryMeta(conjBlocks),
     exercises: lesson.exercises.map((ex, i) => {
       const seed = 5_000_000 + i;
       const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";

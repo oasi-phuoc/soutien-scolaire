@@ -29,6 +29,20 @@ import { AppSelect } from "@/components/ui/AppSelect";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import type { PlacementLevel } from "@/lib/placement/types";
+import {
+  GrammarTheoryPrintSegment,
+} from "@/components/print/GrammarTheoryPrintView";
+import { MathTheoryPrintSegment } from "@/components/print/MathTheoryPrintView";
+import { indexGrammarTheoryBlocks } from "@/lib/print/grammar-theory-print";
+import { flattenMathTheoryBlocks } from "@/lib/print/math-theory-print";
+import {
+  equalColWidths,
+  emptyTheoryPrintOptions,
+  initTheoryPrintOptions,
+  splitBlocksAtBreaks,
+  type TheoryPrintOptions,
+  type TheoryTablePrintConfig,
+} from "@/lib/print/theory-print-options";
 
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
 const CLASS_NUMBERS = Array.from({ length: 20 }, (_, index) => String(index + 1).padStart(2, "0"));
@@ -187,6 +201,7 @@ export function ImpressionHubClient() {
   const [docId, setDocId] = useState("");
   const [evalMode, setEvalMode] = useState(false);
   const [theory, setTheory] = useState(false);
+  const [theoryOpts, setTheoryOpts] = useState<TheoryPrintOptions>(emptyTheoryPrintOptions);
   const [includeCorrections, setIncludeCorrections] = useState(true);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
@@ -297,6 +312,7 @@ export function ImpressionHubClient() {
     setEvalMode(nextEval);
     setTitle(nextEval ? "Évaluation" : bundle.lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
     setTheory(false);
+    setTheoryOpts(initTheoryPrintOptions(bundle.theoryMeta));
     setSelection(
       bundle.exercises.map((ex) => ({
         id: ex.id,
@@ -383,21 +399,77 @@ export function ImpressionHubClient() {
   const patchSelection = (id: string, patch: Partial<ExercisePrintSelection>) =>
     setSelection((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
 
+  const patchTheoryTable = (id: string, patch: Partial<TheoryTablePrintConfig>) =>
+    setTheoryOpts((prev) => {
+      const cur = prev.tables[id];
+      if (!cur) return prev;
+      const next = { ...cur, ...patch };
+      if (patch.columnCount != null && patch.colWidths == null) {
+        next.colWidths = equalColWidths(patch.columnCount);
+        if (cur.verbsPerTable) next.verbsPerTable = Math.max(1, patch.columnCount - 1);
+      }
+      if (patch.verbsPerTable != null && patch.columnCount == null) {
+        next.columnCount = patch.verbsPerTable + 1;
+        if (patch.colWidths == null) next.colWidths = equalColWidths(next.columnCount);
+      }
+      if (patch.colWidths) {
+        next.colWidths = patch.colWidths;
+      }
+      return { ...prev, tables: { ...prev.tables, [id]: next } };
+    });
+
   const accent = bundle?.accentColor ?? "var(--color-theme)";
   const course = bundle?.course ?? "Mathématiques";
   const printDate = formatPrintDate();
   const header: PrintHeaderConfig = { classLevel, classNumber, course, title };
   const hasAnnouncement = Boolean(bundle?.announcementPreview);
 
-  const theoryNode: ReactNode | null =
-    theory && (bundle?.announcementPreview || bundle?.theoryPreview) ? (
-      <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]">
-        {bundle?.announcementPreview ?? bundle?.theoryPreview}
-      </div>
-    ) : null;
+  const theorySegments = useMemo(() => {
+    if (!theory || !bundle) return [];
+    const wrap = (node: ReactNode, key: string, forceNewPage?: boolean) => ({
+      key,
+      forceNewPage,
+      render: () => (
+        <div className="print-theory-content text-[1.6em] leading-normal text-zinc-900 [&_button]:hidden [&_[data-no-print]]:hidden">
+          {node}
+        </div>
+      ),
+    });
+
+    if (bundle.grammarTheoryBlocks?.length) {
+      const indexed = indexGrammarTheoryBlocks(bundle.grammarTheoryBlocks);
+      const segments = splitBlocksAtBreaks(indexed, theoryOpts.pageBreakAfter);
+      return segments.map((seg, i) =>
+        wrap(
+          <GrammarTheoryPrintSegment blocks={seg} options={theoryOpts} />,
+          `__theory-${i}`,
+          i > 0,
+        ),
+      );
+    }
+
+    if (bundle.mathTheoryLesson) {
+      const indexed = flattenMathTheoryBlocks(bundle.mathTheoryLesson);
+      const segments = splitBlocksAtBreaks(indexed, theoryOpts.pageBreakAfter);
+      return segments.map((seg, i) =>
+        wrap(
+          <MathTheoryPrintSegment blocks={seg} options={theoryOpts} />,
+          `__theory-${i}`,
+          i > 0,
+        ),
+      );
+    }
+
+    if (bundle.announcementPreview || bundle.theoryPreview) {
+      return [
+        wrap(bundle.announcementPreview ?? bundle.theoryPreview, "__theory__", false),
+      ];
+    }
+    return [];
+  }, [theory, bundle, theoryOpts]);
 
   const hasPrintableContent =
-    Boolean(theoryNode) || selection.some((item) => item.included && item.occurrences > 0);
+    theorySegments.length > 0 || selection.some((item) => item.included && item.occurrences > 0);
   const totalPoints = selection
     .filter((s) => s.included && s.occurrences > 0)
     .reduce((sum, s) => sum + s.points * s.occurrences, 0);
@@ -612,6 +684,150 @@ export function ImpressionHubClient() {
                 </div>
               </div>
 
+              {theory && (bundle?.theoryMeta || bundle?.grammarTheoryBlocks || bundle?.mathTheoryLesson) && (
+                <div>
+                  <FieldLabel>Théorie</FieldLabel>
+                  <div className="space-y-3 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5">
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                        Sauts de page (après un titre / texte)
+                      </p>
+                      {[0, 1, 2].map((slot) => (
+                        <div key={slot} className="flex items-center gap-2">
+                          <span className="w-14 shrink-0 text-[11px] text-[var(--color-text-secondary)]">
+                            Saut {slot + 1}
+                          </span>
+                          <AppSelect
+                            value={theoryOpts.pageBreakAfter[slot] ?? ""}
+                            onChange={(v) =>
+                              setTheoryOpts((prev) => {
+                                const pageBreakAfter = [...prev.pageBreakAfter] as TheoryPrintOptions["pageBreakAfter"];
+                                pageBreakAfter[slot] = v || null;
+                                return { ...prev, pageBreakAfter };
+                              })
+                            }
+                            options={[
+                              { value: "", label: "Aucun" },
+                              ...(bundle?.theoryMeta?.breakTargets ?? []).map((t) => ({
+                                value: t.id,
+                                label: t.label,
+                              })),
+                            ]}
+                            className="min-w-0 flex-1"
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    {(bundle?.theoryMeta?.tables.length ?? 0) > 0 && (
+                      <div className="space-y-3 border-t border-[var(--color-border-default)] pt-3">
+                        <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                          Tableaux
+                        </p>
+                        {(bundle?.theoryMeta?.tables ?? []).map((meta) => {
+                          const cfg = theoryOpts.tables[meta.id];
+                          if (!cfg) return null;
+                          const isVerbish = meta.kind === "verb_toggle" || meta.kind === "conjug";
+                          return (
+                            <div
+                              key={meta.id}
+                              className="space-y-2 rounded-lg bg-[var(--color-bg-secondary)]/60 px-2.5 py-2"
+                            >
+                              <p className="truncate text-xs font-medium text-[var(--color-text-primary)]">
+                                {meta.label}
+                              </p>
+                              {isVerbish ? (
+                                <>
+                                  <div className="flex items-center justify-between gap-3">
+                                    <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                      Verbes / tableau
+                                    </span>
+                                    <Counter
+                                      value={cfg.verbsPerTable}
+                                      accent={accent}
+                                      min={1}
+                                      max={Math.max(1, meta.verbCount ?? 8)}
+                                      onChange={(verbsPerTable) =>
+                                        patchTheoryTable(meta.id, { verbsPerTable })
+                                      }
+                                    />
+                                  </div>
+                                  <div className="flex items-center justify-between gap-3">
+                                    <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                      Colonnes (pronoms + verbes)
+                                    </span>
+                                    <span className="text-xs font-semibold tabular-nums text-[var(--color-text-primary)]">
+                                      {cfg.verbsPerTable + 1}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center justify-between gap-3">
+                                    <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                      2ᵉ tableau (suite)
+                                    </span>
+                                    <CheckBox
+                                      checked={cfg.secondTable}
+                                      onChange={(secondTable) =>
+                                        patchTheoryTable(meta.id, { secondTable })
+                                      }
+                                      accent={accent}
+                                    />
+                                  </div>
+                                </>
+                              ) : (
+                                <div className="flex items-center justify-between gap-3">
+                                  <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                    Colonnes
+                                  </span>
+                                  <Counter
+                                    value={cfg.columnCount}
+                                    accent={accent}
+                                    min={1}
+                                    max={Math.max(1, meta.columnCount)}
+                                    onChange={(columnCount) =>
+                                      patchTheoryTable(meta.id, { columnCount })
+                                    }
+                                  />
+                                </div>
+                              )}
+                              <div className="space-y-1">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                  Largeurs (%)
+                                </span>
+                                <div className="flex flex-wrap gap-1.5">
+                                  {cfg.colWidths.map((w, ci) => (
+                                    <label
+                                      key={ci}
+                                      className="flex items-center gap-1 rounded-md border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1.5 py-1"
+                                    >
+                                      <span className="text-[10px] text-[var(--color-text-secondary)]">
+                                        C{ci + 1}
+                                      </span>
+                                      <input
+                                        type="number"
+                                        min={5}
+                                        max={90}
+                                        value={parseInt(w, 10) || 0}
+                                        onChange={(e) => {
+                                          const n = Math.max(5, Math.min(90, Number(e.target.value) || 0));
+                                          const next = [...cfg.colWidths];
+                                          next[ci] = `${n}%`;
+                                          patchTheoryTable(meta.id, { colWidths: next });
+                                        }}
+                                        className="w-10 bg-transparent text-center text-xs outline-none"
+                                      />
+                                    </label>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               <div>
                 <FieldLabel>Exercices</FieldLabel>
                 <div className="space-y-2">
@@ -770,7 +986,7 @@ export function ImpressionHubClient() {
             </p>
           ) : (
             <PaginatedPreview
-              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}`}
+              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}-${JSON.stringify(theoryOpts)}`}
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}
@@ -781,7 +997,7 @@ export function ImpressionHubClient() {
                   totalPoints={totalPoints}
                 />
               }
-              theoryNode={theoryNode}
+              theorySegments={theorySegments}
               exerciseNodes={previewBlocks.flatMap((item) => {
                 const ex = item.exercise;
                 const layoutKey = `q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}-l${item.selection.length}-pb${item.selection.pageBreak ? 1 : 0}-corr${item.correction ? 1 : 0}`;

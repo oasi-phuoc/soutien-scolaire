@@ -390,13 +390,21 @@ export type PreviewBlock = {
 export function PaginatedPreview({
   header,
   theoryNode,
+  theorySegments,
   exerciseNodes,
   printDate,
   printedBy,
   pagesContainerRef,
 }: {
   header: ReactNode;
-  theoryNode: ReactNode | null;
+  theoryNode?: ReactNode | null;
+  /** Segments théorie avec sauts de page (prioritaire sur theoryNode). */
+  theorySegments?: {
+    key: string;
+    forceNewPage?: boolean;
+    render?: () => ReactNode;
+    node?: ReactNode;
+  }[];
   exerciseNodes: {
     key: string;
     forceNewPage?: boolean;
@@ -421,7 +429,15 @@ export function PaginatedPreview({
 
   const blocks = useMemo((): PreviewBlock[] => {
     const arr: PreviewBlock[] = [];
-    if (theoryNode) {
+    if (theorySegments && theorySegments.length > 0) {
+      for (const seg of theorySegments) {
+        arr.push({
+          key: seg.key,
+          forceNewPage: seg.forceNewPage,
+          render: seg.render ?? (() => seg.node ?? null),
+        });
+      }
+    } else if (theoryNode) {
       arr.push({ key: "__theory__", render: () => theoryNode });
     }
     for (const e of exerciseNodes) {
@@ -432,7 +448,7 @@ export function PaginatedPreview({
       });
     }
     return arr;
-  }, [theoryNode, exerciseNodes]);
+  }, [theoryNode, theorySegments, exerciseNodes]);
 
   const blockKeys = blocks.map((b) => b.key).join("|");
 
