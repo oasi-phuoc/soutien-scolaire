@@ -26,23 +26,11 @@ export const A1_GR_CEST: GrammarLesson = {
         ps: "{a}Il y a{/a} په یو ځای کې د کس یا شي د شتون ښودلو لپاره کارېږي.",
         uk: "{a}Il y a{/a} вживається, щоб указати на наявність людини або речі в певному місці.",
       },    
-    },
-    {
-      type: "text",
-      label: "Exemples",
-      items: ["{a}Il y a{/a} beaucoup de photos."],
-      transLabel: {
-        en: "Examples",
-        ar: "أمثلة",
-        fa: "مثال‌ها",
-        pt: "Exemplos",
-        so: "Tusaalooyin",
-        ti: "ኣብነታት",
-        tr: "Örnekler",
-        ps: "بېلګې",
-        uk: "Приклади",
-      },
-      noBulletItems: [0],
+      items: [
+        "{a}Il y a{/a} beaucoup de photos.",
+        "{a}Il y a{/a} le professeur dans la salle.",
+      ],
+      noBulletItems: [0,1],
     },
     {
       type: "text",
@@ -58,27 +46,13 @@ export const A1_GR_CEST: GrammarLesson = {
         ps: "{a}C'est{/a} د یو کس یا شي د پېژندلو لپاره کارېږي.",
         uk: "{a}C'est{/a} вживається, щоб ідентифікувати людину або річ.",
       },
-    },
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "{a}C'est{/a} mon cousin.",
         "{a}C'est{/a} un stylo.",
       ],
-      transLabel: {
-        en: "Examples",
-        ar: "أمثلة",
-        fa: "مثال‌ها",
-        pt: "Exemplos",
-        so: "Tusaalooyin",
-        ti: "ኣብነታት",
-        tr: "Örnekler",
-        ps: "بېلګې",
-        uk: "Приклади",
-      },
       noBulletItems: [0, 1],
     },
+
     // ── Intro + tableau ───────────────────────────────────────────────────────
     {
       type: "text",

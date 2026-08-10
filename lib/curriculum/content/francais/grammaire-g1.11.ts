@@ -35,7 +35,7 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       boldFirstCol: true,
       rows: [
         ["Présent simple", "Non, je {a}prends{/a} ma douche.\n Je donne une information."],
-        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\nJ'insiste sur le déroulement de mon action."],
+        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\nJ'insiste sur le déroulement."],
       ],
       transHeaders: {
         en: ["Aspect", "Example"],
@@ -162,8 +162,9 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         ps: "{a}De{/a} د داسې فعل مخکې چې په غږن توري يا بې غږه h پيلېږي، په {a}d'{/a} بدلېږي.",
         uk: "{a}De{/a} змінюється на {a}d'{/a} перед дієсловом, що починається з голосної або німого h.",
       },
-      items: ["Nous sommes en train {s}de{/s} apprendre le français.\nNous sommes en train {a}d'{/a}apprendre le français."],
-      noBulletItems: [0],
+      items: ["Nous sommes en train {s}de{/s} apprendre le français.",
+        "Nous sommes en train {a}d'{/a}apprendre le français."],
+      noBulletItems: [0,1],
     },
   ],
   exercises: G1_EXERCISES["G1.11"](),

@@ -65,17 +65,17 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
     },
     {
       type: "text",
-      text: "Les verbes pronominaux se conjuguent avec deux pronoms : le pronom sujet + un second pronom de la même personne. À l'infinitif, on utilise le pronom {a}se{/a} : se lever, se doucher.",
+      text: "Les verbes pronominaux se conjuguent avec deux pronoms : le pronom {a}sujet{/a} + un pronom {a}réfléchi{/a} de la même personne.\nÀ l'infinitif, on utilise le pronom {a}se{/a} : se lever, se doucher.",
       transText: {
-        en: "Reflexive verbs are conjugated with two pronouns: the subject pronoun + a second pronoun for the same person. In the infinitive, the pronoun {a}se{/a} is used: se lever, se doucher.",
-        ar: "تُصرَّف الأفعال الانعكاسية مع ضميرين: ضمير الفاعل + ضمير ثانٍ للشخص نفسه. في المصدر نستخدم الضمير {a}se{/a}: se lever, se doucher.",
-        fa: "فعل‌های انعکاسی با دو ضمیر صرف می‌شوند: ضمیر فاعلی + ضمیر دومی برای همان شخص. در مصدر از ضمیر {a}se{/a} استفاده می‌شود: se lever, se doucher.",
-        pt: "Os verbos reflexos conjugam-se com dois pronomes: o pronome sujeito + um segundo pronome para a mesma pessoa. No infinitivo, usa-se o pronome {a}se{/a}: se lever, se doucher.",
-        so: "Falalka iscelinta waxaa lagu sarraysiiyaa laba magac-u-yaal: magac-u-yaalka falaha + magac-u-yaal labaad oo isla qofka ah. Qaabka infinitif-ka, magac-u-yaalka {a}se{/a} ayaa la isticmaalaa: se lever, se doucher.",
-        ti: "ርእሰ-ግሲታት ብኽልተ ተካኢ ስማት ይጻረዩ፦ ተካኢ ስም ርእሲ + ናይቲ ተመሳሳሊ ሰብ ካልኣይ ተካኢ ስም። ኣብ መሰረታዊ ግሲ {a}se{/a} ንጥቀም፦ se lever, se doucher።",
-        tr: "Dönüşlü fiiller iki zamirle çekilir: özne zamiri + aynı kişi için ikinci bir zamir. Mastarda {a}se{/a} zamiri kullanılır: se lever, se doucher.",
-        ps: "انعکاسي فعلونه له دوو ضمیرونو سره ګردانېږي: فاعلي ضمیر + د هماغه شخص لپاره دوهم ضمیر. په مصدر کې {a}se{/a} ضمیر کارول کېږي: se lever, se doucher.",
-        uk: "Зворотні дієслова відмінюються з двома займенниками: займенником-підметом + другим займенником тієї самої особи. В інфінітиві вживається займенник {a}se{/a}: se lever, se doucher.",
+        en: "Reflexive verbs are conjugated with two pronouns: the {a}subject{/a} pronoun + a {a}reflexive{/a} pronoun for the same person.\nIn the infinitive, the pronoun {a}se{/a} is used: se lever, se doucher.",
+        ar: "تُصرَّف الأفعال الانعكاسية مع ضميرين: ضمير {a}الفاعل{/a} + ضمير {a}انعكاسي{/a} للشخص نفسه.\nفي المصدر، نستخدم الضمير {a}se{/a}: se lever, se doucher.",
+        fa: "فعل‌های انعکاسی با دو ضمیر صرف می‌شوند: ضمیر {a}فاعل{/a} + یک ضمیر {a}انعکاسی{/a} برای همان شخص.\nدر مصدر، از ضمیر {a}se{/a} استفاده می‌شود: se lever, se doucher.",
+        pt: "Os verbos reflexos conjugam-se com dois pronomes: o pronome {a}sujeito{/a} + um pronome {a}reflexivo{/a} da mesma pessoa.\nNo infinitivo, usa-se o pronome {a}se{/a}: se lever, se doucher.",
+        so: "Falalka iscelinta waxaa lagu sarraysiiyaa laba magac-u-yaal: magac-u-yaalka {a}sujiect{/a} + magac-u-yaal {a}iscelin{/a} oo isla qofka ah.\nQaabka infinitif-ka, magac-u-yaalka {a}se{/a} ayaa la isticmaalaa: se lever, se doucher.",
+        ti: "ርእሰ-ግሲታት ብኽልተ ተካእቲ ስማት ይጽረዩ፦ ተካኢ ስም {a}ተግባሪ{/a} + ናይቲ ተመሳሳሊ ሰብ {a}ተንጸባራቒ{/a} ተካኢ ስም።\nኣብ መሰረታዊ ግሲ፣ ተካኢ ስም {a}se{/a} ንጥቀም፦ se lever, se doucher።",
+        tr: "Dönüşlü fiiller iki zamirle çekilir: {a}özne{/a} zamiri + aynı kişi için bir {a}dönüşlülük{/a} zamiri.\nMastarda {a}se{/a} zamiri kullanılır: se lever, se doucher.",
+        ps: "انعکاسي فعلونه له دوو ضمیرونو سره ګردانېږي: د {a}فاعل{/a} ضمیر + د هماغه شخص لپاره یو {a}انعکاسي{/a} ضمیر.\nپه مصدر کې د {a}se{/a} ضمیر کارول کېږي: se lever, se doucher.",
+        uk: "Зворотні дієслова відмінюються з двома займенниками: {a}займенником-підметом{/a} + {a}зворотним{/a} займенником тієї самої особи.\nВ інфінітиві вживається займенник {a}se{/a}: se lever, se doucher.",
       },
     },
     {
@@ -1069,7 +1069,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         [
           "Réciproque",
           "Les sujets agissent l'un sur l'autre.",
-          "Nous {a}nous{/a} regardons. (each other)",
+          "Nous {a}nous{/a} regardons.",
         ],
       ],
       transRows: {
@@ -1082,7 +1082,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "Reciprocal",
             "The subjects act on each other.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         ar: [
@@ -1094,7 +1094,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "متبادل",
             "يقوم الفاعلون بالفعل بعضهم على بعض.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         fa: [
@@ -1106,7 +1106,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "متقابل",
             "فاعل‌ها عمل را روی یکدیگر انجام می‌دهند.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         pt: [
@@ -1118,7 +1118,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "Recíproco",
             "Os sujeitos agem uns sobre os outros.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         so: [
@@ -1130,7 +1130,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "Isdhaafsi",
             "Falayaashu midba midka kale ayuu ficilka ku sameeyaa.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         ti: [
@@ -1142,7 +1142,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "ምልውዋጥ",
             "እቶም ርእስታት ኣብ ነንሓድሕዶም ይፍጽሙ።",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         tr: [
@@ -1154,7 +1154,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "Karşılıklı",
             "Özneler birbirleri üzerinde eylem yapar.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         ps: [
@@ -1166,7 +1166,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "متقابل",
             "فاعلونه پر یو بل عمل کوي.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
         uk: [
@@ -1178,7 +1178,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           [
             "Взаємний",
             "Підмети діють один на одного.",
-            "Nous {a}nous{/a} regardons. (each other)",
+            "Nous {a}nous{/a} regardons.",
           ],
         ],
       },

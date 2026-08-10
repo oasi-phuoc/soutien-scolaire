@@ -319,6 +319,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         "Les verbes comme {a}jeter{/a} doublent le {a}t{/a} devant une terminaison muette.",
         "Les verbes comme {a}appeler{/a} doublent le {a}l{/a} devant une terminaison muette.",
       ],
+      noBulletItems:[0, 1],
       transItems: {
         en: [
           "Verbs like {a}jeter{/a} double the {a}t{/a} before a silent ending.",

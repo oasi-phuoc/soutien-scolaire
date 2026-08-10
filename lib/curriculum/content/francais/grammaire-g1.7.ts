@@ -261,7 +261,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
       colWidths: ["33%", "67%"],
       boldFirstCol: true,
       rows: [
-        ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager. / Il {a}faut{/a} arriver à l'heure."],
+        ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager.\nIl {a}faut{/a} arriver à l'heure."],
         ["Interdiction", "Il ne {a}faut{/a} pas parler pendant l'examen."],
       ],
       transRows: {

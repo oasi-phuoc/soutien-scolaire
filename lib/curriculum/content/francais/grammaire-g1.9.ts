@@ -83,22 +83,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         },
       ],
     },
-    {
-      type: "text",
-      text: "{a}2.{/a} Au pluriel, on prononce le {a}ss{/a} pour distinguer : il finit / ils fini{a}ss{/a}ent.",
-      transText: {
-        en: "{a}2.{/a} In the plural, {a}ss{/a} is pronounced to distinguish: il finit / ils fini{a}ss{/a}ent.",
-        ar: "{a}2.{/a} في الجمع، يُنطق {a}ss{/a} للتمييز بين: il finit / ils fini{a}ss{/a}ent.",
-        fa: "{a}2.{/a} در جمع، {a}ss{/a} تلفظ می‌شود تا این دو شکل متمایز شوند: il finit / ils fini{a}ss{/a}ent.",
-        pt: "{a}2.{/a} No plural, pronuncia-se {a}ss{/a} para distinguir: il finit / ils fini{a}ss{/a}ent.",
-        so: "{a}2.{/a} Jamaca, {a}ss{/a} waa la dhawaaqaa si loo kala saaro: il finit / ils fini{a}ss{/a}ent.",
-        ti: "{a}2.{/a} ኣብ ብዙሕ፣ ንምፍላይ {a}ss{/a} ይድመጽ፦ il finit / ils fini{a}ss{/a}ent።",
-        tr: "{a}2.{/a} Çoğulda ayırt etmek için {a}ss{/a} okunur: il finit / ils fini{a}ss{/a}ent.",
-        ps: "{a}2.{/a} په جمع کې {a}ss{/a} تلفظ کېږي څو توپير وشي: il finit / ils fini{a}ss{/a}ent.",
-        uk: "{a}2.{/a} У множині {a}ss{/a} вимовляється, щоб розрізнити: il finit / ils fini{a}ss{/a}ent.",
-      },
-    },
-
+    
     {
       type: "heading",
       text: "Modèle ouvrir",
@@ -218,22 +203,6 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         },
       ],
     },
-    {
-      type: "text",
-      text: "{a}2.{/a} On prononce la consonne du 2e radical au pluriel (il part / ils par{a}tent{/a}).",
-      transText: {
-        en: "{a}2.{/a} The consonant of the second stem is pronounced in the plural (il part / ils par{a}tent{/a}).",
-        ar: "{a}2.{/a} يُنطق الحرف الساكن من الجذر الثاني في الجمع (il part / ils par{a}tent{/a}).",
-        fa: "{a}2.{/a} همخوانِ بن دوم در جمع تلفظ می‌شود (il part / ils par{a}tent{/a}).",
-        pt: "{a}2.{/a} A consoante do segundo radical pronuncia-se no plural (il part / ils par{a}tent{/a}).",
-        so: "{a}2.{/a} Shibbanaha jirridda labaad waa la dhawaaqaa jamaca (il part / ils par{a}tent{/a}).",
-        ti: "{a}2.{/a} ኣብ ብዙሕ እቲ ናይ ካልኣይ ሱር ተነባቢ ፊደል ይድመጽ (il part / ils par{a}tent{/a})።",
-        tr: "{a}2.{/a} İkinci kökün ünsüzü çoğulda okunur (il part / ils par{a}tent{/a}).",
-        ps: "{a}2.{/a} د دوهم بن همغږی په جمع کې تلفظ کېږي (il part / ils par{a}tent{/a}).",
-        uk: "{a}2.{/a} У множині вимовляється приголосний другої основи (il part / ils par{a}tent{/a}).",
-      },
-    },
-
     {
       type: "heading",
       text: "Modèle venir et tenir",
