@@ -205,7 +205,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
                   </div>
                 ) : (
                   <input type="text" inputMode="decimal" value={vals[ai] ?? ""} disabled={validated}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVals((p: string[]) => p.map((c: string, ci: number) => ci === ai ? e.target.value.replace(/[^0-9,.\-]/g, "") : c))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVals((p: string[]) => p.map((c: string, ci: number) => ci === ai ? e.target.value.replace(/[−–—]/g, "-").replace(/[^0-9,.\-+]/g, "") : c))}
 
                     className={`${inputCls} ${validated ? "border-[var(--color-accent-alg)]/60" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`} />
                 )}

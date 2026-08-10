@@ -15,7 +15,7 @@ import {
 
 
 function parseNum(input: string): number {
-  return parseFloat(input.replace(/\s/g, "").replace(",", "."));
+  return parseFloat(input.replace(/\s/g, "").replace(",", ".").replace(/[−–—]/g, "-"));
 }
 function matchNum(input: string, expected: number, tol = 0.001): boolean {
   const v = parseNum(input.trim());
@@ -38,20 +38,27 @@ function randDecimalValue(): number {
   return randInt(10 * scale, 100 * scale - 1) / scale;
 }
 
+function sanitizeDecimalInput(raw: string, allowSigned = false): string {
+  const normalized = raw.replace(/[−–—]/g, "-");
+  return normalized.replace(allowSigned ? /[^0-9,.\-+]/g : /[^0-9,.]/g, "");
+}
+
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
 function CorrectionInput({
-  value, onChange, correct, validated, width = "w-16", variant = "line",
+  value, onChange, correct, validated, width = "w-16", variant = "line", allowSigned = false,
 }: {
   value: string; onChange: (v: string) => void; correct: string;
   validated: boolean; width?: string; placeholder?: string; variant?: "line" | "box";
+  /** Autorise − / + (nombres relatifs, équations). */
+  allowSigned?: boolean;
 }) {
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   const frameCls = variant === "box"
     ? `rounded-md border-2 ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/45"} bg-transparent`
     : `rounded-none border-0 border-b-2 ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60"} bg-transparent`;
   return (
-    <div className={`${width} min-h-9 flex flex-col items-center justify-center ${frameCls} px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+    <div className={`${width} min-h-10 flex flex-col items-center justify-center ${frameCls} px-1 py-1 text-center font-mono text-base text-[var(--color-text-primary)]`}>
       {validated ? (
         wrong ? (
           <div className="flex flex-col items-center leading-tight">
@@ -65,9 +72,13 @@ function CorrectionInput({
         <input
           type="text"
           inputMode="decimal"
+          enterKeyHint="done"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
           value={value}
-          onChange={(e) => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
-          className="h-6 w-full bg-transparent text-center outline-none"
+          onChange={(e) => onChange(sanitizeDecimalInput(e.target.value, allowSigned))}
+          className="h-8 min-h-8 w-full touch-manipulation bg-transparent text-center text-base outline-none"
         />
       )}
     </div>
@@ -218,7 +229,7 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
   };
   const correctFor = (q: Ex28Q) => (q.kind === "cube" || q.kind === "sqrt" ? String(q.ans) : fmtAns(q.ans));
 
-  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3";
 
   return (
     <div className="space-y-3">
@@ -293,24 +304,26 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+  const listCls = forPrint
+    ? printQuestionsListClass(columns)
+    : "grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3";
 
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
       <div className={`${listCls} text-sm`}>
         {data.map((q, i) => (
-          <div key={i} className="flex items-center gap-2">
+          <div key={i} className="flex min-w-0 items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {/* Largeur fixe → tous les « = » alignés verticalement */}
-            <span className="inline-block w-[18ch] shrink-0 text-right font-mono">{q.expr}</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
+            <span className="min-w-0 flex-1 text-right font-mono sm:w-[18ch] sm:flex-none sm:shrink-0">{q.expr}</span>
+            <span className="shrink-0 text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
               onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
               correct={Number.isInteger(q.ans) ? String(q.ans) : fmtDec(q.ans, 2)}
               validated={validated}
               width="w-20"
+              allowSigned
             />
           </div>
         ))}
@@ -360,26 +373,28 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+  const listCls = forPrint
+    ? printQuestionsListClass(columns)
+    : "grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3";
 
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
       <div className={`${listCls} text-sm`}>
         {data.map((q, i) => (
-          <div key={i} className="flex items-center gap-2">
+          <div key={i} className="flex min-w-0 items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {/* Largeurs fixes → tous les « = » alignés verticalement */}
             <span className="inline-block w-12 shrink-0 text-center font-mono">{q.left}</span>
             <span className="inline-block w-4 shrink-0 text-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
             <span className="inline-block w-12 shrink-0 text-center font-mono">{q.right}</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
+            <span className="shrink-0 text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
               onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
               correct={Number.isInteger(q.ans) ? String(q.ans) : fmtDec(q.ans, 2)}
               validated={validated}
               width="w-20"
+              allowSigned
             />
           </div>
         ))}
@@ -502,7 +517,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
   const negFrac = (neg: boolean, n: number, d: number) =>
     neg ? <Frac n={<>−{n}</>} d={d} /> : <Frac n={n} d={d} />;
 
-  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3";
   const THEME_BAR = "bg-[var(--color-theme)]";
 
   return (
@@ -601,7 +616,7 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3";
 
   return (
     <div className="space-y-3">
@@ -896,6 +911,10 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
   [exerciseKey, questionCount]);
 
   const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
+  // Brouillon « ___ = ___ » (non noté) — 3 lignes × 2 côtés par question
+  const [drafts, setDrafts] = useState<string[][]>(() =>
+    Array.from({ length: questions.length }, () => Array(6).fill("")),
+  );
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -905,30 +924,59 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  // Lignes de développement « ___ = ___ » en couleur thème
-  const workLine = (key: string) => (
-    <div key={key} className="flex w-full items-center gap-2">
-      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-[var(--color-theme)]" />
-      <span className="text-[var(--color-text-secondary)]">=</span>
-      <span className="inline-block min-w-[6rem] flex-1 border-b-2 border-[var(--color-theme)]" />
-    </div>
-  );
+  const setDraft = (qi: number, di: number, v: string) => {
+    setDrafts((prev) => prev.map((row, i) => (i === qi ? row.map((c, j) => (j === di ? v : c)) : row)));
+  };
 
-  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-6 gap-y-4";
+  const workLine = (qi: number, wi: number) => {
+    const leftIdx = wi * 2;
+    const rightIdx = wi * 2 + 1;
+    return (
+      <div key={`q${qi}-w${wi}`} className="flex w-full min-w-0 items-center gap-2">
+        <input
+          type="text"
+          inputMode="text"
+          enterKeyHint="next"
+          autoComplete="off"
+          disabled={validated}
+          value={drafts[qi]?.[leftIdx] ?? ""}
+          onChange={(e) => setDraft(qi, leftIdx, e.target.value)}
+          className="min-h-10 min-w-0 flex-1 touch-manipulation rounded-none border-0 border-b-2 border-[var(--color-theme)] bg-transparent px-1 text-center font-mono text-base text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-80"
+          aria-label={`Brouillon gauche ligne ${wi + 1}`}
+        />
+        <span className="shrink-0 text-[var(--color-text-secondary)]">=</span>
+        <input
+          type="text"
+          inputMode="text"
+          enterKeyHint="next"
+          autoComplete="off"
+          disabled={validated}
+          value={drafts[qi]?.[rightIdx] ?? ""}
+          onChange={(e) => setDraft(qi, rightIdx, e.target.value)}
+          className="min-h-10 min-w-0 flex-1 touch-manipulation rounded-none border-0 border-b-2 border-[var(--color-theme)] bg-transparent px-1 text-center font-mono text-base text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-80"
+          aria-label={`Brouillon droit ligne ${wi + 1}`}
+        />
+      </div>
+    );
+  };
+
+  const listCls = forPrint
+    ? printQuestionsListClass(columns)
+    : "grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4";
 
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Trouver la valeur de x.</p>
       <div className={`${listCls} text-sm`}>
         {questions.map((q, i) => (
-          <div key={i} className="flex flex-col items-stretch gap-2">
-            <div className="flex items-center gap-2">
+          <div key={i} className="flex min-w-0 flex-col items-stretch gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="font-mono">{q.left}</span>
               <span className="text-[var(--color-text-secondary)]">=</span>
               <span className="font-mono">{q.right}</span>
             </div>
-            {[0, 1, 2].map(w => workLine(`q${i}-w${w}`))}
+            {[0, 1, 2].map((w) => workLine(i, w))}
             <div className="flex items-center gap-2">
               <span className="font-mono text-[var(--color-text-primary)]">x</span>
               <span className="text-[var(--color-text-secondary)]">=</span>
@@ -938,6 +986,7 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
                 correct={String(q.x)}
                 validated={validated}
                 width="w-20"
+                allowSigned
               />
             </div>
           </div>
@@ -1010,18 +1059,19 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
     return fmtDec(n, Math.min(dp, 10)).replace(/,?0+$/, "");
   };
 
-  const listCls = forPrint ? printQuestionsListClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3";
+  const listCls = forPrint
+    ? printQuestionsListClass(columns)
+    : "grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3";
 
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
       <div className={`${listCls} text-sm`}>
         {questions.map((q, i) => (
-          <div key={i} className="flex items-center gap-2">
+          <div key={i} className="flex min-w-0 items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {/* Largeur fixe → tous les « = » alignés verticalement */}
-            <span className="inline-block w-[11ch] shrink-0 text-right font-mono">{fmtV(q.value)} {q.from}</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
+            <span className="min-w-0 flex-1 text-right font-mono sm:w-[11ch] sm:flex-none sm:shrink-0">{fmtV(q.value)} {q.from}</span>
+            <span className="shrink-0 text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
               onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}

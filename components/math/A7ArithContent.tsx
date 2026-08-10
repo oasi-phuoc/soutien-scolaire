@@ -241,7 +241,7 @@ function RelArithExercise({
   const formatTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
-  const inputBase = "w-20 h-9 rounded-none border-0 border-b-2 px-1 text-center font-mono text-sm outline-none transition-colors";
+  const inputBase = "w-20 h-10 min-h-10 rounded-none border-0 border-b-2 px-1 text-center font-mono text-base outline-none transition-colors touch-manipulation";
 
   const columns = usePrintColumns();
   return (
@@ -280,8 +280,8 @@ function RelArithExercise({
                   inputMode="decimal"
                   value={val}
                   disabled={validated}
-                  onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.\-]/g, ""); return n; })}
-                  className={`${inputBase} py-1.5 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]`}
+                  onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[−–—]/g, "-").replace(/[^0-9,.\-+]/g, ""); return n; })}
+                  className={`${inputBase} py-1.5 text-base border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)] touch-manipulation`}
                 />
               );
 

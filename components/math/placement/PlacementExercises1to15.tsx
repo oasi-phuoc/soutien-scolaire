@@ -28,12 +28,19 @@ export interface PlacementExerciseProps {
  * Classes de la liste de questions : à l'impression elles dérivent du réglage
  * « colonnes » ; à l'écran on garde la mise en page actuelle (fallback).
  */
+/** Sur mobile : 1 colonne pour que les grilles de calcul restent saisissables. */
+function screenGridClass(fallback: string): string {
+  return fallback
+    .replace(/\bgrid-cols-2\b/g, "grid-cols-1 sm:grid-cols-2")
+    .replace(/\bgrid-cols-3\b/g, "grid-cols-1 sm:grid-cols-2 md:grid-cols-3");
+}
+
 function placementListClass(
   columns: 1 | 2 | 3,
   fallback: string,
   forPrint: boolean | undefined,
 ): string {
-  if (!forPrint) return fallback;
+  if (!forPrint) return screenGridClass(fallback);
   if (columns === 2) return "grid grid-cols-2 items-start gap-x-4 gap-y-3";
   if (columns === 3) return "grid grid-cols-3 items-start gap-x-3 gap-y-3";
   return "space-y-3";
@@ -69,10 +76,14 @@ function CorrectionInput({
       <input
         type="text"
         inputMode="decimal"
+        enterKeyHint="done"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck={false}
         value={value}
         onChange={(e) => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
         disabled={validated}
-        className={`${width} h-9 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-80`}
+        className={`${width} h-10 min-h-10 touch-manipulation rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-center font-mono text-base text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-80`}
       />
     </span>
   );
@@ -733,7 +744,7 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
       <input type="text" inputMode="numeric" maxLength={1} value={val}
         disabled={validated}
         onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-        className="h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
+        className="h-5 w-8 touch-manipulation rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
       />
     );
   };
@@ -803,7 +814,7 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
         </tbody>
       </table>
   );
-  return noCard ? inner : <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">{inner}</div>;
+  return noCard ? inner : <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">{inner}</div>;
 }
 
 export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger, forPrint }: PlacementExerciseProps) {
@@ -1439,7 +1450,7 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
       <input type="text" inputMode="numeric" maxLength={1} value={val}
         disabled={validated}
         onChange={e => onCarryChange(idx, e.target.value.replace(/[^0-9]/g,"").slice(-1))}
-        className="h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
+        className="h-5 w-8 touch-manipulation rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
       />
     );
   };

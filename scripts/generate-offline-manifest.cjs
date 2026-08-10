@@ -485,10 +485,20 @@ function imageUrlsFromFilteredUsage() {
     }
   }
 
-  // 4) Mots lecture
+  // 4) Mots lecture — image lecture du pool (pas la scène CE/CO)
   for (const word of collectLectureWords()) {
-    const url = resolveLectureWord(word);
-    if (url && isFilteredImage(url)) used.add(url);
+    const lectureUrl = resolveLectureWord(word);
+    if (lectureUrl && isFilteredImage(lectureUrl)) used.add(lectureUrl);
+
+    // Garantit l'illustration lecture même si un alias CE/CO pointe vers une scène
+    const slug = labelToAssetSlug(word);
+    const lower = String(word).toLowerCase();
+    for (const key of [slug, lower, word]) {
+      const lec = LECTURE_IMAGE_INDEX[key];
+      if (lec && fileExists(lec)) used.add(lec);
+    }
+    const fallback = `/assets/words/lecture/${lower}.webp`;
+    if (fileExists(fallback)) used.add(fallback);
   }
 
   // 5) Objet-pick → convention lecture/${slug}.webp (+ alias baskets)

@@ -18,11 +18,27 @@ import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutCo
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
+/** Sur mobile : 1 colonne pour que les grilles restent saisissables. */
+function screenGridClass(fallback: string): string {
+  return fallback
+    .replace(/\bgrid-cols-2\b/g, "grid-cols-1 sm:grid-cols-2")
+    .replace(/\bgrid-cols-3\b/g, "grid-cols-1 sm:grid-cols-2 md:grid-cols-3");
+}
+
 /** Classes de liste selon les colonnes d'impression (1 = pile). */
 function printColsClass(columns: 1 | 2 | 3, stacked = "space-y-3"): string {
   if (columns === 2) return "grid grid-cols-2 items-start gap-x-4 gap-y-3";
   if (columns === 3) return "grid grid-cols-3 items-start gap-x-3 gap-y-3";
   return stacked;
+}
+
+function screenOrPrintCols(
+  forPrint: boolean | undefined,
+  columns: 1 | 2 | 3,
+  screenFallback: string,
+): string {
+  if (forPrint) return printColsClass(columns);
+  return screenGridClass(screenFallback);
 }
 
 function parseNum(input: string): number {
@@ -87,10 +103,14 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16", 
       <input
         type="text"
         inputMode="decimal"
+        enterKeyHint="done"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck={false}
         value={value}
         onChange={e => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
         maxLength={maxLength}
-        className={`${inputHeightCls} w-full bg-transparent text-center outline-none`}
+        className={`${inputHeightCls} min-h-10 w-full touch-manipulation bg-transparent text-center text-base outline-none`}
       />
     </div>
   );
@@ -730,7 +750,7 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les calculs en colonnes." />
-      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-start gap-x-4 gap-y-3"}>
+      <div className={screenOrPrintCols(forPrint, columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3")}>
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
@@ -997,7 +1017,7 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les multiplications en colonnes." />
-      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-start gap-x-4 gap-y-3"}>
+      <div className={screenOrPrintCols(forPrint, columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3")}>
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
@@ -1338,7 +1358,7 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <PlacementInstruction text="Posez et effectuez les divisions en colonnes." />
-      <div className={forPrint ? printColsClass(columns) : "grid grid-cols-2 items-start gap-x-4 gap-y-3"}>
+      <div className={screenOrPrintCols(forPrint, columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3")}>
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">

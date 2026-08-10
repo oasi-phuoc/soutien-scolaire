@@ -280,7 +280,7 @@ export function A7RelEncadrementExercise({
               </div>
             ) : (
               <input type="text" inputMode="decimal" value={a[key]} disabled={validated}
-                onChange={e => setAnswers(prev => prev.map((v, j) => j === i ? { ...v, [key]: e.target.value.replace(/[^0-9,.\-]/g, "") } : v))}
+                onChange={e => setAnswers(prev => prev.map((v, j) => j === i ? { ...v, [key]: e.target.value.replace(/[−–—]/g, "-").replace(/[^0-9,.\-+]/g, "") } : v))}
                 className={inpIdle} />
             );
           return (
@@ -482,7 +482,7 @@ export function A7RelSeqCompleteExercise({
                       onChange={e => setAnswers(prev => {
                         const next = prev.map(r => [...r]);
                         if (!next[qi]) next[qi] = [];
-                        next[qi]![bIdx] = e.target.value.replace(/[^0-9,.\-]/g, "");
+                        next[qi]![bIdx] = e.target.value.replace(/[−–—]/g, "-").replace(/[^0-9,.\-+]/g, "");
                         return next;
                       })}
                       className={inpCls} />
