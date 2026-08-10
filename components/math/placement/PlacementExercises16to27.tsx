@@ -125,12 +125,16 @@ function GeoRow({ label, unit, value, answer, onChange, validated }: {
   const correct = fmtMeasure(value);
   return (
     <div className="flex items-center gap-2">
-      <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">{label} =</span>
+      <span className="inline-flex w-[5.75rem] shrink-0 justify-end text-sm text-[var(--color-text-secondary)]">{label}</span>
+      <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">=</span>
       <CorrectionInput value={answer} onChange={onChange} correct={correct} validated={validated} width="w-20" />
       <span className="text-sm text-[var(--color-text-secondary)]">{unit}</span>
     </div>
   );
 }
+
+/** Réponses géométrie : 1 colonne (2 lignes) sur mobile, 2 colonnes dès sm. */
+const GEO_ANSWERS_GRID = "grid grid-cols-1 gap-y-3 sm:grid-cols-2 sm:gap-x-4 sm:gap-y-3";
 
 // ── Exercise 16 — Rectangle ───────────────────────────────────────────────────
 
@@ -167,7 +171,7 @@ export function Exercise16({ exerciseKey, validated, onValidated, validateTrigge
         <text x={rx + rW / 2} y={ry - 8} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{w} cm</text>
         <text x={rx + rW + 10} y={ry + rH / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{h} cm</text>
       </svg>
-      <div className="grid grid-cols-2 gap-4">
+      <div className={GEO_ANSWERS_GRID}>
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>
@@ -219,11 +223,11 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
 }) {
   let blankIdx = 0;
   return (
-    <div className="flex flex-nowrap items-center gap-3 overflow-x-auto pb-1">
+    <div className="flex flex-nowrap items-center gap-1.5 overflow-x-auto pb-1">
       {vals.map((v, i) => {
         const isVisible = i === visPos[0] || i === visPos[1];
         const display = isInt ? fmtInt(v) : fmtDec(v, 2);
-        const pillCls = "h-8 w-[3.7rem] inline-flex items-center justify-center rounded-full px-1 font-mono text-[13px] font-semibold";
+        const pillCls = "inline-flex h-9 w-[4.5rem] items-center justify-center rounded-full px-1 font-mono text-sm font-semibold";
         if (isVisible) {
           return (
             <div key={i} className={`${pillCls} border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]`}>{display}</div>
@@ -234,7 +238,7 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
         const ans = answers[bi] ?? "";
         return (
           <CorrectionInput key={i} value={ans} onChange={v2 => onChange(bi, v2)} correct={correct}
-            validated={validated} width="w-[3.7rem]" compact padX="px-3" maxLength={isInt ? 5 : 5} />
+            validated={validated} width="h-9 w-[4.5rem] px-1 rounded-full" padX="px-1" maxLength={isInt ? 5 : 5} />
         );
       })}
     </div>
@@ -265,9 +269,9 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
-      <div className={forPrint ? printColsClass(columns, "space-y-5") : "space-y-5"}>
+    <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
+      <div className={forPrint ? printColsClass(columns, "space-y-3") : "space-y-3"}>
         {rows.map((row, r) => (
           <div key={r} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{r + 1}.</span>
@@ -1652,16 +1656,15 @@ export function Exercise23({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className={`${forPrint ? printColsClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3"} text-sm`}>
+      <div className={`${screenOrPrintCols(forPrint, columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3")} text-base`}>
         {questions.map((q, i) => {
           const displayVal = q.decPlaces > 0 ? fmtDec(q.value, 1) : String(q.value);
           const correct = q.result % 1 === 0 ? String(q.result) : fmtDec(q.result, q.result.toString().split(".")[1]?.length ?? 1);
           return (
             <div key={i} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              {/* Largeur fixe pour aligner verticalement les « = » entre questions */}
-              <span className="inline-flex w-20 shrink-0 justify-end font-mono text-[var(--color-text-primary)]">{displayVal} {q.from}</span>
-              <span className="text-[var(--color-text-secondary)]">=</span>
+              <span className="inline-flex w-[7.5rem] shrink-0 justify-start font-mono text-[var(--color-text-primary)]">{displayVal} {q.from}</span>
+              <span className="inline-flex w-4 shrink-0 justify-center text-[var(--color-text-secondary)]">=</span>
               <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
                 correct={correct} validated={validated} width="w-20" />
               <span className="font-mono text-[var(--color-text-secondary)]">{q.to}</span>
@@ -1745,15 +1748,14 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <PlacementInstruction text="Effectuez les calculs." />
-      <div className={`${forPrint ? printColsClass(columns) : "grid grid-cols-2 gap-x-4 gap-y-3"} text-sm`}>
+      <div className={`${screenOrPrintCols(forPrint, columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3")} text-base`}>
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {/* Largeurs fixes pour aligner verticalement les « = » entre questions */}
             <span className="inline-flex w-12 shrink-0 justify-end font-mono text-[var(--color-text-primary)]">{q.left}</span>
             <span className="inline-flex w-4 shrink-0 justify-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
             <span className="inline-flex w-12 shrink-0 justify-start font-mono text-[var(--color-text-primary)]">{q.right}</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
+            <span className="inline-flex w-4 shrink-0 justify-center text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
               correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />
           </div>
@@ -1816,7 +1818,7 @@ export function Exercise25({ exerciseKey, validated, onValidated, validateTrigge
         {/* Height label */}
         <text x={bkX + tickLen + 4} y={(TRy + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {h} cm</text>
       </svg>
-      <div className="grid grid-cols-2 gap-4">
+      <div className={GEO_ANSWERS_GRID}>
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>
@@ -1873,7 +1875,7 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
         <line x1={bkX - tickLen} y1={BRy} x2={bkX + tickLen} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <text x={bkX + tickLen + 4} y={(Ty + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {data.h} cm</text>
       </svg>
-      <div className="grid grid-cols-2 gap-4">
+      <div className={GEO_ANSWERS_GRID}>
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>
@@ -1938,7 +1940,7 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
         <line x1={Tright[0]!} y1={bkY - tickLen} x2={Tright[0]!} y2={bkY + tickLen} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <text x={cx} y={bkY + tickLen + 12} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">d₁ = {data.d1} cm</text>
       </svg>
-      <div className="grid grid-cols-2 gap-4">
+      <div className={GEO_ANSWERS_GRID}>
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
         <GeoRow label="Aire" unit="cm²" value={data.area} answer={ansA} onChange={setAnsA} validated={validated} />
       </div>

@@ -315,8 +315,8 @@ function CompareQuestion({
   const ops: CompOp[] = ["<", "=", ">"];
   return (
     <div className="flex items-center gap-2">
-      <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{qNum}.</span>
-      <span className="font-mono text-base text-[var(--color-text-primary)] w-10 text-right">{a}</span>
+      <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qNum}.</span>
+      <span className="w-12 shrink-0 text-right font-mono text-base text-[var(--color-text-primary)]">{a}</span>
       <div className="flex gap-1">
         {ops.map((op) => {
           const isSelected = selected === op;
@@ -337,7 +337,7 @@ function CompareQuestion({
           );
         })}
       </div>
-      <span className="font-mono text-base text-[var(--color-text-primary)] w-10">{b}</span>
+      <span className="w-12 shrink-0 font-mono text-base text-[var(--color-text-primary)]">{b}</span>
     </div>
   );
 }
@@ -406,8 +406,8 @@ function SeqQuestion({
 }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="w-4 shrink-0 text-sm font-semibold text-[var(--color-accent-alg)]">{qNum}.</span>
-      <div className="flex items-center gap-1.5 flex-wrap">
+      <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qNum}.</span>
+      <div className="flex flex-wrap items-center gap-1.5">
         {values.map((v, i) => {
           const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
           if (blankIdx === 0 || blankIdx === 1) {
@@ -460,7 +460,7 @@ export function Exercise3({ exerciseKey, validated, onValidated, validateTrigger
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
       <div className={placementListClass(columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3", forPrint)}>
         {questions.map((q, i) => (
@@ -533,11 +533,11 @@ export function Exercise4({ exerciseKey, validated, onValidated, validateTrigger
       <div className={`${placementListClass(columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3", forPrint)} text-base`}>
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
-            <span className="w-4 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="font-mono text-[var(--color-text-primary)]">{q.a}</span>
-            <span className="font-mono text-[var(--color-text-secondary)]">{q.op}</span>
-            <span className="font-mono text-[var(--color-text-primary)]">{q.b}</span>
-            <span className="text-[var(--color-text-secondary)]">=</span>
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="inline-flex w-10 shrink-0 justify-end font-mono text-[var(--color-text-primary)]">{q.a}</span>
+            <span className="inline-flex w-4 shrink-0 justify-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="inline-flex w-10 shrink-0 justify-start font-mono text-[var(--color-text-primary)]">{q.b}</span>
+            <span className="inline-flex w-4 shrink-0 justify-center text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
               onChange={(v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; })}
@@ -567,9 +567,9 @@ function renderMissingOpRow(q: MissingOpQuestion, ans: string, onChange: (v: str
   const inp = (
     <CorrectionInput value={ans} onChange={onChange} correct={String(q.missing)} validated={validated} width="w-14" />
   );
-  const num = (n: number) => <span className="inline-flex h-9 w-14 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{n}</span>;
-  const op = (s: string) => <span className="w-5 text-center font-mono text-base text-[var(--color-text-secondary)]">{s}</span>;
-  const eq = <span className="w-5 text-center font-mono text-base text-[var(--color-text-secondary)]">=</span>;
+  const num = (n: number) => <span className="inline-flex h-9 w-14 shrink-0 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{n}</span>;
+  const op = (s: string) => <span className="inline-flex w-5 shrink-0 items-center justify-center font-mono text-base text-[var(--color-text-secondary)]">{s}</span>;
+  const eq = <span className="inline-flex w-5 shrink-0 items-center justify-center font-mono text-base text-[var(--color-text-secondary)]">=</span>;
 
   if (q.format === "x_plus_blank_eq_y") return <>{num(q.x)}{op("+")}{inp}{eq}{num(q.y)}</>;
   if (q.format === "x_minus_blank_eq_y") return <>{num(q.x)}{op("−")}{inp}{eq}{num(q.y)}</>;
@@ -621,7 +621,7 @@ export function Exercise5({ exerciseKey, validated, onValidated, validateTrigger
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le nombre manquant.</p>
       <div className={placementListClass(columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3", forPrint)}>
         {questions.map((q, i) => (
@@ -886,10 +886,10 @@ function PlaceValueCard({ n, cols, answers, onChange, validated }: {
   return (
     <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
       <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
-        <span className="mt-[7px] shrink-0 text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">
+        <span className="mt-[7px] shrink-0 text-base font-bold tabular-nums text-[var(--color-text-primary)]">
           {n.toLocaleString("fr-CH")}
         </span>
-        <span className="mt-[7px] shrink-0">=</span>
+        <span className="mt-[7px] shrink-0 text-base text-[var(--color-text-secondary)]">=</span>
         {cols.map((col, ci) => (
           <React.Fragment key={ci}>
             {ci > 0 && <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>}
@@ -939,9 +939,9 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre en dizaines et unités.</p>
-      <div className={placementListClass(columns, "grid grid-cols-2 gap-4", forPrint)}>
+      <div className={placementListClass(columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3", forPrint)}>
         {questions.map((q, i) => (
           <PlaceValueCard key={i} n={q.n}
             cols={[
@@ -1097,8 +1097,8 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
   function renderSeq(values: number[], blanks: [number, number], ans: [string, string], setAns: (a: [string, string]) => void, qNum: number) {
     return (
       <div className="flex items-center gap-2">
-        <span className="w-4 shrink-0 text-sm font-semibold text-[var(--color-accent-alg)]">{qNum}.</span>
-        <div className="flex items-center gap-1">
+        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qNum}.</span>
+        <div className="flex flex-wrap items-center gap-1.5">
           {values.map((v, i) => {
             const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
             if (blankIdx === 0 || blankIdx === 1) {
@@ -1113,12 +1113,12 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
                   }}
                   correct={String(v)}
                   validated={validated}
-                  width="h-9 w-[60px] px-1 rounded-full"
+                  width="h-9 w-16 px-1 rounded-full"
                 />
               );
             }
             return (
-              <div key={i} className="inline-flex h-9 w-[60px] items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
+              <div key={i} className="inline-flex h-9 w-16 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
             );
           })}
         </div>
@@ -1127,7 +1127,7 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
       <div className={placementListClass(columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3", forPrint)}>
         {questions.map((seq, i) => (
@@ -1216,12 +1216,12 @@ export function Exercise11({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const num = (n: number) => (
-    <span className="inline-flex h-9 w-16 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{n}</span>
+    <span className="inline-flex h-9 w-16 shrink-0 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{n}</span>
   );
   const opSpan = (s: string) => (
-    <span className="w-6 text-center font-mono text-base text-[var(--color-text-secondary)]">{s}</span>
+    <span className="inline-flex w-5 shrink-0 items-center justify-center font-mono text-base text-[var(--color-text-secondary)]">{s}</span>
   );
-  const eqSpan = <span className="w-6 text-center font-mono text-base text-[var(--color-text-secondary)]">=</span>;
+  const eqSpan = <span className="inline-flex w-5 shrink-0 items-center justify-center font-mono text-base text-[var(--color-text-secondary)]">=</span>;
 
   function renderQ(q: MixedQuestion, i: number) {
     const ans = answers[i] ?? "";
@@ -1242,7 +1242,7 @@ export function Exercise11({ exerciseKey, validated, onValidated, validateTrigge
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
       <div className={placementListClass(columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3", forPrint)}>
         {questions.map((q, i) => (
-          <div key={i} className="flex items-center gap-1">
+          <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             {renderQ(q, i)}
           </div>
@@ -1302,9 +1302,9 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre.</p>
-      <div className={placementListClass(columns, "grid grid-cols-2 gap-4", forPrint)}>
+      <div className={placementListClass(columns, "grid grid-cols-2 items-start gap-x-4 gap-y-3", forPrint)}>
         {questions.map((q, i) => (
           <PlaceValueCard key={i} n={q.n}
             cols={decomposeCols(q.n, q.digits).map(col => ({
