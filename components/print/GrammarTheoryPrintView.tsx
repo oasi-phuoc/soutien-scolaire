@@ -9,7 +9,7 @@ import {
   type IndexedTheoryBlock,
 } from "@/lib/print/grammar-theory-print";
 import type { TheoryPrintOptions, TheoryTablePrintConfig } from "@/lib/print/theory-print-options";
-import { equalColWidths } from "@/lib/print/theory-print-options";
+import { chunkByCounts, equalColWidths } from "@/lib/print/theory-print-options";
 
 /** Markup léger {a}…{/a} pour l’impression. */
 function printMarkup(text: string): ReactNode {
@@ -34,58 +34,64 @@ function tableConfig(
 ): TheoryTablePrintConfig {
   const existing = options?.tables[id];
   if (existing) return existing;
+  const verbs = Math.max(1, fallbackCols - 1);
   return {
     id,
     columnCount: fallbackCols,
     colWidths: equalColWidths(fallbackCols),
-    verbsPerTable: Math.max(1, fallbackCols - 1),
-    secondTable: false,
+    verbsPerTables: [verbs],
+    paddingTopEm: 0.8,
   };
 }
 
-function MultiVerbTable({
+/** Mise en forme type exercice : titre souligné, pas de fond coloré. */
+function ExerciseLikeTable({
+  title,
   pronouns,
   verbHeaders,
   cells,
   colWidths,
+  paddingTopEm,
 }: {
+  title?: string;
   pronouns: string[];
   verbHeaders: string[];
-  cells: string[][]; // [row][verb]
+  cells: string[][];
   colWidths: string[];
+  paddingTopEm: number;
 }) {
   const cols = 1 + verbHeaders.length;
-  const widths =
-    colWidths.length === cols ? colWidths : equalColWidths(cols);
+  const widths = colWidths.length === cols ? colWidths : equalColWidths(cols);
+  const headerLabel = title ?? (verbHeaders.join(" · ") || "—");
   return (
-    <div className="overflow-hidden rounded border border-zinc-300">
+    <div className="print-exercise" style={{ paddingTop: `${paddingTopEm}em` }}>
+      <div className="mb-1 border-b border-black pb-0.5 text-[1em] font-bold text-teal-700">
+        {headerLabel}
+      </div>
       <table className="w-full" style={{ tableLayout: "fixed" }}>
         <colgroup>
           {widths.map((w, i) => (
             <col key={i} style={{ width: w }} />
           ))}
         </colgroup>
-        <thead>
-          <tr className="bg-teal-50">
-            <th className="px-2 py-1.5 text-left text-[1em] font-bold uppercase tracking-wide text-teal-700">
-              —
-            </th>
-            {verbHeaders.map((h) => (
-              <th
-                key={h}
-                className="px-2 py-1.5 text-left text-[1em] font-bold text-teal-700"
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
+        {verbHeaders.length > 1 ? (
+          <thead>
+            <tr>
+              <th className="px-1 py-1 text-left text-[1em] font-bold text-zinc-700"> </th>
+              {verbHeaders.map((h) => (
+                <th key={h} className="px-1 py-1 text-left text-[1em] font-bold text-zinc-900">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+        ) : null}
         <tbody>
           {pronouns.map((pronoun, ri) => (
-            <tr key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-zinc-50"}>
-              <td className="px-2 py-1.5 text-[1em] font-medium text-zinc-600">{pronoun}</td>
+            <tr key={ri}>
+              <td className="px-1 py-1 text-[1em] font-medium text-zinc-600">{pronoun}</td>
               {verbHeaders.map((_, vi) => (
-                <td key={vi} className="px-2 py-1.5 text-[1em] font-semibold text-zinc-900">
+                <td key={vi} className="px-1 py-1 text-[1em] font-semibold text-zinc-900">
                   {cells[ri]?.[vi] ?? ""}
                 </td>
               ))}
@@ -101,22 +107,10 @@ function renderVerbTogglePrint(
   block: Extract<IndexedTheoryBlock, { type: "verb_toggle" }>,
   cfg: TheoryTablePrintConfig,
 ) {
-  const verbs = block.verbs;
-  const per = Math.max(1, cfg.verbsPerTable || 4);
-  const chunks =
-    cfg.secondTable && verbs.length > per
-      ? [verbs.slice(0, per), verbs.slice(per)]
-      : [verbs.slice(0, cfg.secondTable ? per : verbs.length)];
-
-  // Si un seul tableau demandé : limiter à `per` verbes (ou tous si secondTable off et on élargit)
-  const tablesToRender =
-    cfg.secondTable
-      ? chunks.filter((c) => c.length > 0)
-      : [verbs.slice(0, Math.min(verbs.length, Math.max(per, cfg.columnCount - 1)))];
-
+  const chunks = chunkByCounts(block.verbs, cfg.verbsPerTables);
   return (
     <div className="space-y-3">
-      {tablesToRender.map((chunk, ti) => {
+      {chunks.map((chunk, ti) => {
         const pronouns = chunk[0]?.rows.map((r) => r.pronoun) ?? [];
         const headers = chunk.map((v) => v.infinitive);
         const cells = pronouns.map((_, ri) =>
@@ -127,12 +121,13 @@ function renderVerbTogglePrint(
             ? cfg.colWidths
             : equalColWidths(headers.length + 1);
         return (
-          <MultiVerbTable
+          <ExerciseLikeTable
             key={ti}
             pronouns={pronouns}
             verbHeaders={headers}
             cells={cells}
             colWidths={widths}
+            paddingTopEm={cfg.paddingTopEm}
           />
         );
       })}
@@ -149,40 +144,21 @@ function renderConjugPrint(
     const tbl = tables[0];
     if (!tbl) return null;
     return (
-      <div className="overflow-hidden rounded border border-zinc-300">
-        <div className="border-b border-zinc-200 bg-teal-50 px-2 py-1.5 text-[1em] font-bold uppercase tracking-wide text-teal-700">
-          {tbl.verb}
-        </div>
-        <table className="w-full">
-          <tbody>
-            {tbl.rows.map((row, ri) => (
-              <tr key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-zinc-50"}>
-                <td className="w-[30%] px-2 py-1.5 text-[1em] font-medium text-zinc-600">
-                  {row.pronoun}
-                </td>
-                <td className="px-2 py-1.5 text-[1em] font-semibold text-zinc-900">{row.form}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <ExerciseLikeTable
+        title={tbl.verb}
+        pronouns={tbl.rows.map((r) => r.pronoun)}
+        verbHeaders={[tbl.verb]}
+        cells={tbl.rows.map((r) => [r.form])}
+        colWidths={cfg.colWidths.length === 2 ? cfg.colWidths : ["30%", "70%"]}
+        paddingTopEm={cfg.paddingTopEm}
+      />
     );
   }
 
-  const per = Math.max(1, cfg.verbsPerTable || 4);
-  const chunks =
-    cfg.secondTable && tables.length > per
-      ? [tables.slice(0, per), tables.slice(per)]
-      : [tables.slice(0, cfg.secondTable ? per : tables.length)];
-
-  const tablesToRender =
-    cfg.secondTable
-      ? chunks.filter((c) => c.length > 0)
-      : [tables.slice(0, Math.min(tables.length, Math.max(per, cfg.columnCount - 1)))];
-
+  const chunks = chunkByCounts(tables, cfg.verbsPerTables);
   return (
     <div className="space-y-3">
-      {tablesToRender.map((chunk, ti) => {
+      {chunks.map((chunk, ti) => {
         const pronouns = chunk[0]?.rows.map((r) => r.pronoun) ?? [];
         const headers = chunk.map((t) => t.verb);
         const cells = pronouns.map((_, ri) => chunk.map((t) => conjugFormCell(t, ri)));
@@ -191,12 +167,13 @@ function renderConjugPrint(
             ? cfg.colWidths
             : equalColWidths(headers.length + 1);
         return (
-          <MultiVerbTable
+          <ExerciseLikeTable
             key={ti}
             pronouns={pronouns}
             verbHeaders={headers}
             cells={cells}
             colWidths={widths}
+            paddingTopEm={cfg.paddingTopEm}
           />
         );
       })}
@@ -214,9 +191,13 @@ function renderGridPrint(
   const widths =
     cfg.colWidths.length === colCount ? cfg.colWidths : equalColWidths(colCount);
   const showHeader = headers.some((h) => h.trim().length > 0);
+  const title = showHeader ? headers.filter(Boolean).join(" · ") : "Tableau";
 
   return (
-    <div className="overflow-hidden rounded border border-zinc-300">
+    <div className="print-exercise" style={{ paddingTop: `${cfg.paddingTopEm}em` }}>
+      <div className="mb-1 border-b border-black pb-0.5 text-[1em] font-bold text-teal-700">
+        {title}
+      </div>
       <table className="w-full" style={{ tableLayout: "fixed" }}>
         <colgroup>
           {widths.map((w, i) => (
@@ -225,11 +206,11 @@ function renderGridPrint(
         </colgroup>
         {showHeader ? (
           <thead>
-            <tr className="bg-teal-50">
+            <tr>
               {headers.map((h, hi) => (
                 <th
                   key={hi}
-                  className="px-2 py-1.5 text-left text-[1em] font-bold uppercase tracking-wide text-teal-700"
+                  className="px-1 py-1 text-left text-[1em] font-bold uppercase tracking-wide text-zinc-800"
                 >
                   {h}
                 </th>
@@ -239,11 +220,11 @@ function renderGridPrint(
         ) : null}
         <tbody>
           {block.rows.map((row, ri) => (
-            <tr key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-zinc-50"}>
+            <tr key={ri}>
               {Array.from({ length: colCount }, (_, ci) => (
                 <td
                   key={ci}
-                  className={`px-2 py-1.5 text-[1em] text-zinc-900 ${
+                  className={`px-1 py-1 text-[1em] text-zinc-900 ${
                     block.boldFirstCol && ci === 0 ? "font-semibold" : ""
                   }`}
                 >
@@ -261,10 +242,13 @@ function renderGridPrint(
 function BlockView({
   block,
   options,
+  isFirst,
 }: {
   block: IndexedTheoryBlock;
   options?: TheoryPrintOptions;
+  isFirst?: boolean;
 }) {
+  const headingPad = options?.headingPaddingEm ?? 1.4;
   switch (block.type) {
     case "heading":
       return (
@@ -272,6 +256,7 @@ function BlockView({
           className={`font-bold text-zinc-900 ${
             block.sub ? "text-[1.15em]" : "text-[1.35em]"
           } ${block.accent ? "text-teal-700" : ""}`}
+          style={{ marginTop: isFirst ? 0 : `${headingPad}em` }}
         >
           {block.text}
         </h2>
@@ -335,7 +320,6 @@ function BlockView({
         </div>
       );
     default:
-      // Autres blocs : rendu minimal / masqué (boutons interactifs inutiles à l’impression)
       return null;
   }
 }
@@ -350,9 +334,9 @@ export function GrammarTheoryPrintView({
   const indexed = indexGrammarTheoryBlocks(blocks);
   return (
     <div className="space-y-3 text-[1em] leading-normal text-zinc-900">
-      {indexed.map((block) => (
+      {indexed.map((block, i) => (
         <div key={block.id}>
-          <BlockView block={block} options={options} />
+          <BlockView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
     </div>
@@ -368,9 +352,9 @@ export function GrammarTheoryPrintSegment({
 }) {
   return (
     <div className="space-y-3 text-[1em] leading-normal text-zinc-900">
-      {blocks.map((block) => (
+      {blocks.map((block, i) => (
         <div key={block.id}>
-          <BlockView block={block} options={options} />
+          <BlockView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
     </div>

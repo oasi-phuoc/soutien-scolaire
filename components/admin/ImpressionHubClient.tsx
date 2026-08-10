@@ -403,18 +403,17 @@ export function ImpressionHubClient() {
     setTheoryOpts((prev) => {
       const cur = prev.tables[id];
       if (!cur) return prev;
-      const next = { ...cur, ...patch };
-      if (patch.columnCount != null && patch.colWidths == null) {
+      const next: TheoryTablePrintConfig = { ...cur, ...patch };
+      if (patch.verbsPerTables) {
+        next.verbsPerTables = patch.verbsPerTables.slice(0, 3).map((n) => Math.max(1, n));
+        const cols = (next.verbsPerTables[0] ?? 1) + 1;
+        next.columnCount = cols;
+        if (patch.colWidths == null) next.colWidths = equalColWidths(cols);
+      }
+      if (patch.columnCount != null && patch.colWidths == null && !patch.verbsPerTables) {
         next.colWidths = equalColWidths(patch.columnCount);
-        if (cur.verbsPerTable) next.verbsPerTable = Math.max(1, patch.columnCount - 1);
       }
-      if (patch.verbsPerTable != null && patch.columnCount == null) {
-        next.columnCount = patch.verbsPerTable + 1;
-        if (patch.colWidths == null) next.colWidths = equalColWidths(next.columnCount);
-      }
-      if (patch.colWidths) {
-        next.colWidths = patch.colWidths;
-      }
+      if (patch.colWidths) next.colWidths = patch.colWidths;
       return { ...prev, tables: { ...prev.tables, [id]: next } };
     });
 
@@ -438,7 +437,7 @@ export function ImpressionHubClient() {
 
     if (bundle.grammarTheoryBlocks?.length) {
       const indexed = indexGrammarTheoryBlocks(bundle.grammarTheoryBlocks);
-      const segments = splitBlocksAtBreaks(indexed, theoryOpts.pageBreakAfter);
+      const segments = splitBlocksAtBreaks(indexed, theoryOpts.pageBreakBefore);
       return segments.map((seg, i) =>
         wrap(
           <GrammarTheoryPrintSegment blocks={seg} options={theoryOpts} />,
@@ -450,7 +449,7 @@ export function ImpressionHubClient() {
 
     if (bundle.mathTheoryLesson) {
       const indexed = flattenMathTheoryBlocks(bundle.mathTheoryLesson);
-      const segments = splitBlocksAtBreaks(indexed, theoryOpts.pageBreakAfter);
+      const segments = splitBlocksAtBreaks(indexed, theoryOpts.pageBreakBefore);
       return segments.map((seg, i) =>
         wrap(
           <MathTheoryPrintSegment blocks={seg} options={theoryOpts} />,
@@ -688,9 +687,27 @@ export function ImpressionHubClient() {
                 <div>
                   <FieldLabel>Théorie</FieldLabel>
                   <div className="space-y-3 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5">
-                    <div className="space-y-2">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-[var(--color-text-secondary)]">
+                        Espacement avant titres
+                      </span>
+                      <Counter
+                        value={Math.round(theoryOpts.headingPaddingEm * 10)}
+                        accent={accent}
+                        min={4}
+                        max={40}
+                        onChange={(v) =>
+                          setTheoryOpts((prev) => ({ ...prev, headingPaddingEm: v / 10 }))
+                        }
+                      />
+                    </div>
+                    <p className="-mt-1 text-[10px] text-[var(--color-text-secondary)]">
+                      Valeur ×0,1 em (ex. 14 → 1,4 em)
+                    </p>
+
+                    <div className="space-y-2 border-t border-[var(--color-border-default)] pt-3">
                       <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
-                        Sauts de page (après un titre / texte)
+                        Sauts de page (avant un titre / texte)
                       </p>
                       {[0, 1, 2].map((slot) => (
                         <div key={slot} className="flex items-center gap-2">
@@ -698,12 +715,12 @@ export function ImpressionHubClient() {
                             Saut {slot + 1}
                           </span>
                           <AppSelect
-                            value={theoryOpts.pageBreakAfter[slot] ?? ""}
+                            value={theoryOpts.pageBreakBefore[slot] ?? ""}
                             onChange={(v) =>
                               setTheoryOpts((prev) => {
-                                const pageBreakAfter = [...prev.pageBreakAfter] as TheoryPrintOptions["pageBreakAfter"];
-                                pageBreakAfter[slot] = v || null;
-                                return { ...prev, pageBreakAfter };
+                                const pageBreakBefore = [...prev.pageBreakBefore] as TheoryPrintOptions["pageBreakBefore"];
+                                pageBreakBefore[slot] = v || null;
+                                return { ...prev, pageBreakBefore };
                               })
                             }
                             options={[
@@ -728,50 +745,94 @@ export function ImpressionHubClient() {
                           const cfg = theoryOpts.tables[meta.id];
                           if (!cfg) return null;
                           const isVerbish = meta.kind === "verb_toggle" || meta.kind === "conjug";
+                          const totalVerbs = Math.max(1, meta.verbCount ?? meta.columnCount);
+                          const counts = cfg.verbsPerTables.length > 0 ? cfg.verbsPerTables : [4];
+                          const used = counts.reduce((a, b) => a + b, 0);
+                          const remaining = Math.max(0, totalVerbs - used);
                           return (
                             <div
                               key={meta.id}
-                              className="space-y-2 rounded-lg bg-[var(--color-bg-secondary)]/60 px-2.5 py-2"
+                              className="space-y-2 rounded-xl border border-[var(--color-border-default)] px-3 py-2.5"
                             >
-                              <p className="truncate text-xs font-medium text-[var(--color-text-primary)]">
+                              <p className="line-clamp-2 text-xs font-medium text-[var(--color-text-primary)]">
                                 {meta.label}
                               </p>
+
+                              <div className="flex items-center justify-between gap-3">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                  Padding avant tableau
+                                </span>
+                                <Counter
+                                  value={Math.round(cfg.paddingTopEm * 10)}
+                                  accent={accent}
+                                  min={0}
+                                  max={40}
+                                  onChange={(v) =>
+                                    patchTheoryTable(meta.id, { paddingTopEm: v / 10 })
+                                  }
+                                />
+                              </div>
+
                               {isVerbish ? (
                                 <>
-                                  <div className="flex items-center justify-between gap-3">
-                                    <span className="text-[11px] text-[var(--color-text-secondary)]">
-                                      Verbes / tableau
-                                    </span>
-                                    <Counter
-                                      value={cfg.verbsPerTable}
-                                      accent={accent}
-                                      min={1}
-                                      max={Math.max(1, meta.verbCount ?? 8)}
-                                      onChange={(verbsPerTable) =>
-                                        patchTheoryTable(meta.id, { verbsPerTable })
+                                  {counts.map((count, ti) => (
+                                    <div key={ti} className="space-y-2">
+                                      {ti > 0 ? (
+                                        <p className="text-[11px] font-semibold text-[var(--color-text-secondary)]">
+                                          Tableau {ti + 1}
+                                        </p>
+                                      ) : null}
+                                      <div className="flex items-center justify-between gap-3">
+                                        <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                          Nombre de verbes
+                                        </span>
+                                        <Counter
+                                          value={count}
+                                          accent={accent}
+                                          min={1}
+                                          max={Math.max(
+                                            1,
+                                            totalVerbs -
+                                              counts.reduce((a, b, i) => (i === ti ? a : a + b), 0),
+                                          )}
+                                          onChange={(n) => {
+                                            const next = [...counts];
+                                            next[ti] = n;
+                                            patchTheoryTable(meta.id, { verbsPerTables: next });
+                                          }}
+                                        />
+                                      </div>
+                                    </div>
+                                  ))}
+
+                                  {counts.length < 3 && remaining > 0 ? (
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        const nextCount = Math.min(4, remaining);
+                                        patchTheoryTable(meta.id, {
+                                          verbsPerTables: [...counts, nextCount],
+                                        });
+                                      }}
+                                      className="w-full rounded-lg border border-dashed border-[var(--color-border-default)] px-3 py-2 text-xs font-semibold text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-theme)] hover:text-[var(--color-theme)]"
+                                    >
+                                      Rajouter un tableau
+                                    </button>
+                                  ) : null}
+
+                                  {counts.length > 1 ? (
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        patchTheoryTable(meta.id, {
+                                          verbsPerTables: counts.slice(0, -1),
+                                        })
                                       }
-                                    />
-                                  </div>
-                                  <div className="flex items-center justify-between gap-3">
-                                    <span className="text-[11px] text-[var(--color-text-secondary)]">
-                                      Colonnes (pronoms + verbes)
-                                    </span>
-                                    <span className="text-xs font-semibold tabular-nums text-[var(--color-text-primary)]">
-                                      {cfg.verbsPerTable + 1}
-                                    </span>
-                                  </div>
-                                  <div className="flex items-center justify-between gap-3">
-                                    <span className="text-[11px] text-[var(--color-text-secondary)]">
-                                      2ᵉ tableau (suite)
-                                    </span>
-                                    <CheckBox
-                                      checked={cfg.secondTable}
-                                      onChange={(secondTable) =>
-                                        patchTheoryTable(meta.id, { secondTable })
-                                      }
-                                      accent={accent}
-                                    />
-                                  </div>
+                                      className="w-full text-xs text-[var(--color-text-secondary)] underline-offset-2 hover:underline"
+                                    >
+                                      Retirer le dernier tableau
+                                    </button>
+                                  ) : null}
                                 </>
                               ) : (
                                 <div className="flex items-center justify-between gap-3">
@@ -789,34 +850,50 @@ export function ImpressionHubClient() {
                                   />
                                 </div>
                               )}
+
                               <div className="space-y-1">
                                 <span className="text-[11px] text-[var(--color-text-secondary)]">
                                   Largeurs (%)
                                 </span>
                                 <div className="flex flex-wrap gap-1.5">
-                                  {cfg.colWidths.map((w, ci) => (
-                                    <label
-                                      key={ci}
-                                      className="flex items-center gap-1 rounded-md border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1.5 py-1"
-                                    >
-                                      <span className="text-[10px] text-[var(--color-text-secondary)]">
-                                        C{ci + 1}
-                                      </span>
-                                      <input
-                                        type="number"
-                                        min={5}
-                                        max={90}
-                                        value={parseInt(w, 10) || 0}
-                                        onChange={(e) => {
-                                          const n = Math.max(5, Math.min(90, Number(e.target.value) || 0));
-                                          const next = [...cfg.colWidths];
-                                          next[ci] = `${n}%`;
-                                          patchTheoryTable(meta.id, { colWidths: next });
-                                        }}
-                                        className="w-10 bg-transparent text-center text-xs outline-none"
-                                      />
-                                    </label>
-                                  ))}
+                                  {(() => {
+                                    const widthCount = isVerbish
+                                      ? (counts[0] ?? 1) + 1
+                                      : cfg.columnCount;
+                                    const widths =
+                                      cfg.colWidths.length === widthCount
+                                        ? cfg.colWidths
+                                        : equalColWidths(widthCount);
+                                    return widths.map((w, ci) => (
+                                      <label
+                                        key={ci}
+                                        className="flex items-center gap-1 rounded-md border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1.5 py-1"
+                                      >
+                                        <span className="text-[10px] text-[var(--color-text-secondary)]">
+                                          C{ci + 1}
+                                        </span>
+                                        <input
+                                          type="number"
+                                          min={5}
+                                          max={90}
+                                          value={parseInt(w, 10) || 0}
+                                          onChange={(e) => {
+                                            const n = Math.max(
+                                              5,
+                                              Math.min(90, Number(e.target.value) || 0),
+                                            );
+                                            const next = [...widths];
+                                            next[ci] = `${n}%`;
+                                            patchTheoryTable(meta.id, {
+                                              colWidths: next,
+                                              columnCount: next.length,
+                                            });
+                                          }}
+                                          className="w-10 bg-transparent text-center text-xs outline-none"
+                                        />
+                                      </label>
+                                    ));
+                                  })()}
                                 </div>
                               </div>
                             </div>

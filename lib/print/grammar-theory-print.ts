@@ -1,6 +1,6 @@
 import type { TheoryBlock, VerbToggleVerb, ConjugTable } from "@/lib/curriculum/grammar-data";
 import type { TheoryPrintMeta, TheoryTableMeta } from "@/lib/print/theory-print-options";
-import { equalColWidths } from "@/lib/print/theory-print-options";
+import { equalColWidths, truncateDropdownLabel } from "@/lib/print/theory-print-options";
 
 export type IndexedTheoryBlock = TheoryBlock & { id: string };
 
@@ -11,12 +11,12 @@ export function indexGrammarTheoryBlocks(blocks: TheoryBlock[]): IndexedTheoryBl
 function blockLabel(block: TheoryBlock, index: number): string {
   if (block.type === "heading") {
     const t = block.text.trim();
-    return t.length > 48 ? `${t.slice(0, 45)}…` : t || `Titre ${index + 1}`;
+    return t || `Titre ${index + 1}`;
   }
   if (block.type === "text") {
     const raw = (block.label ?? block.text ?? block.items?.[0] ?? `Texte ${index + 1}`).trim();
     const plain = raw.replace(/\{\/?[a-z]\}/gi, "").replace(/\s+/g, " ").trim();
-    return plain.length > 48 ? `${plain.slice(0, 45)}…` : plain || `Texte ${index + 1}`;
+    return plain || `Texte ${index + 1}`;
   }
   return `Bloc ${index + 1}`;
 }
@@ -27,7 +27,7 @@ export function extractGrammarTheoryMeta(blocks: TheoryBlock[]): TheoryPrintMeta
     .filter((b) => b.type === "heading" || b.type === "text")
     .map((b, i) => ({
       id: b.id,
-      label: `${b.type === "heading" ? "Titre" : "Texte"} — ${blockLabel(b, i)}`,
+      label: truncateDropdownLabel(blockLabel(b, i)),
     }));
 
   const tables: TheoryTableMeta[] = [];

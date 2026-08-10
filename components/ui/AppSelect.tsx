@@ -107,7 +107,7 @@ export function AppSelect({
   const sizeCls =
     size === "sm"
       ? "h-8 min-h-8 rounded-lg px-2 text-sm"
-      : "h-10 rounded-[22px] px-4 text-sm";
+      : "min-h-10 rounded-[22px] px-4 py-2 text-sm";
 
   const menuRounded =
     placement === "top"
@@ -142,8 +142,10 @@ export function AppSelect({
         aria-label={ariaLabel}
       >
         <span
-          className={`min-w-0 truncate ${
-            size === "sm" ? `flex-1 text-center font-semibold ${isNumericSelection ? "" : "uppercase"}` : ""
+          className={`min-w-0 ${
+            size === "sm"
+              ? `flex-1 truncate text-center font-semibold ${isNumericSelection ? "" : "uppercase"}`
+              : "line-clamp-2 whitespace-normal"
           } ${
             selected
               ? error
@@ -190,7 +192,7 @@ export function AppSelect({
                 role="option"
                 aria-selected={value === emptyOption.value}
               >
-                {emptyOption.label}
+                <span className="line-clamp-2 whitespace-normal">{emptyOption.label}</span>
               </button>
             ) : null}
             {normalized.map((opt) => (
@@ -207,7 +209,7 @@ export function AppSelect({
                 role="option"
                 aria-selected={value === opt.value}
               >
-                {opt.label}
+                <span className="line-clamp-2 whitespace-normal">{opt.label}</span>
               </button>
             ))}
           </div>

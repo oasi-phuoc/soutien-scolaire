@@ -63,24 +63,37 @@ function tableConfig(
     id,
     columnCount: fallbackCols,
     colWidths: equalColWidths(fallbackCols),
-    verbsPerTable: fallbackCols,
-    secondTable: false,
+    verbsPerTables: [fallbackCols],
+    paddingTopEm: 0.8,
   };
 }
 
 function BlockPrintView({
   block,
   options,
+  isFirst = false,
 }: {
   block: MathRichBlock & { id?: string };
   options?: TheoryPrintOptions;
+  isFirst?: boolean;
 }) {
+  const headingPad = options?.headingPaddingEm ?? 1.4;
   switch (block.type) {
     case "heading":
       return block.black ? (
-        <h3 className="text-[1.35em] font-bold text-black">{block.fr}</h3>
+        <h3
+          className="text-[1.35em] font-bold text-black"
+          style={{ marginTop: isFirst ? 0 : `${headingPad}em` }}
+        >
+          {block.fr}
+        </h3>
       ) : (
-        <h3 className="text-[1.25em] font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
+        <h3
+          className="text-[1.25em] font-bold text-[var(--color-accent-alg)]"
+          style={{ marginTop: isFirst ? 0 : `${headingPad}em` }}
+        >
+          {block.fr}
+        </h3>
       );
     case "plain":
       if (!block.fr) return <div className="h-2" />;
@@ -123,8 +136,12 @@ function BlockPrintView({
       const headers = block.headersFr.slice(0, colCount);
       const widths =
         cfg.colWidths.length === colCount ? cfg.colWidths : equalColWidths(colCount);
+      const title = headers.filter(Boolean).join(" · ") || "Tableau";
       return (
-        <div className="overflow-hidden rounded-lg border border-zinc-200">
+        <div className="print-exercise" style={{ paddingTop: `${cfg.paddingTopEm}em` }}>
+          <div className="mb-1 border-b border-black pb-0.5 text-[1em] font-bold text-[var(--color-accent-alg)]">
+            {title}
+          </div>
           <table className="w-full" style={{ tableLayout: "fixed" }}>
             <colgroup>
               {widths.map((w, i) => (
@@ -132,15 +149,11 @@ function BlockPrintView({
               ))}
             </colgroup>
             <thead>
-              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-zinc-100"}>
+              <tr>
                 {headers.map((h, i) => (
                   <th
                     key={i}
-                    className={`px-2 py-1.5 text-center text-[1em] font-bold ${
-                      block.accentHeader
-                        ? "uppercase tracking-wide text-[var(--color-accent-alg)]"
-                        : "text-black"
-                    }`}
+                    className="px-1 py-1 text-center text-[1em] font-bold text-black"
                   >
                     {h}
                   </th>
@@ -149,9 +162,9 @@ function BlockPrintView({
             </thead>
             <tbody>
               {block.rows.map((row, ri) => (
-                <tr key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-zinc-50"}>
+                <tr key={ri}>
                   {Array.from({ length: colCount }, (_, ci) => (
-                    <td key={ci} className="px-2 py-1.5 text-center text-[1em] text-black">
+                    <td key={ci} className="px-1 py-1 text-center text-[1em] text-black">
                       {(row[ci] ?? "").split(/\n/).map((line, li) => (
                         <span key={li}>
                           {li > 0 && <br />}
@@ -165,7 +178,7 @@ function BlockPrintView({
             </tbody>
           </table>
           {block.captionFr ? (
-            <p className="px-2 py-1 text-[1em] text-zinc-500">{block.captionFr}</p>
+            <p className="px-1 py-1 text-[1em] text-zinc-500">{block.captionFr}</p>
           ) : null}
         </div>
       );
@@ -285,9 +298,9 @@ export function MathTheoryPrintView({
   const blocks = flattenMathTheoryBlocks(lesson);
   return (
     <div className="space-y-3 text-[1em] leading-normal text-black">
-      {blocks.map((block) => (
+      {blocks.map((block, i) => (
         <div key={block.id}>
-          <BlockPrintView block={block} options={options} />
+          <BlockPrintView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
     </div>
@@ -303,9 +316,9 @@ export function MathTheoryPrintSegment({
 }) {
   return (
     <div className="space-y-3 text-[1em] leading-normal text-black">
-      {blocks.map((block) => (
+      {blocks.map((block, i) => (
         <div key={block.id}>
-          <BlockPrintView block={block} options={options} />
+          <BlockPrintView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
     </div>

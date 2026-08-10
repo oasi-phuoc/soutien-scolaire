@@ -1,6 +1,6 @@
 import type { MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import type { TheoryPrintMeta, TheoryTableMeta } from "@/lib/print/theory-print-options";
-import { equalColWidths } from "@/lib/print/theory-print-options";
+import { equalColWidths, truncateDropdownLabel } from "@/lib/print/theory-print-options";
 
 export type IndexedMathBlock = MathRichBlock & { id: string };
 
@@ -22,8 +22,7 @@ function mathLabel(block: MathRichBlock, index: number): string {
       : "titleFr" in block && typeof block.titleFr === "string"
         ? block.titleFr
         : `Bloc ${index + 1}`;
-  const t = raw.replace(/\*\*/g, "").trim();
-  return t.length > 48 ? `${t.slice(0, 45)}…` : t || `Bloc ${index + 1}`;
+  return raw.replace(/\*\*/g, "").trim() || `Bloc ${index + 1}`;
 }
 
 export function extractMathTheoryMeta(lesson: MathSubmoduleLesson): TheoryPrintMeta {
@@ -32,7 +31,7 @@ export function extractMathTheoryMeta(lesson: MathSubmoduleLesson): TheoryPrintM
     .filter((b) => b.type === "heading" || b.type === "plain")
     .map((b, i) => ({
       id: b.id,
-      label: `${b.type === "heading" ? "Titre" : "Texte"} — ${mathLabel(b, i)}`,
+      label: truncateDropdownLabel(mathLabel(b, i)),
     }));
 
   const tables: TheoryTableMeta[] = [];
