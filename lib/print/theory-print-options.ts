@@ -33,13 +33,19 @@ export type TheoryTablePrintConfig = {
   verbsPerTables: number[];
   /** Padding haut avant le(s) tableau(x), en em. */
   paddingTopEm: number;
+  /** Bordures lignes / colonnes. */
+  showBorders: boolean;
+  /** En-tête thème foncé + lignes alternées thème clair. */
+  showFill: boolean;
 };
 
 export type TheoryPrintOptions = {
-  /** Jusqu’à 3 ids : saut de page AVANT ce bloc titre/texte. */
+  /** Jusqu’à 3 ids : saut de page AVANT ce bloc (titre, texte ou tableau). */
   pageBreakBefore: [string | null, string | null, string | null];
   /** Espacement avant chaque titre (em). */
   headingPaddingEm: number;
+  /** Alignement justifié pour les blocs `type: "text"`. */
+  textJustify: boolean;
   tables: Record<string, TheoryTablePrintConfig>;
 };
 
@@ -47,6 +53,7 @@ export function emptyTheoryPrintOptions(): TheoryPrintOptions {
   return {
     pageBreakBefore: [null, null, null],
     headingPaddingEm: 1.4,
+    textJustify: false,
     tables: {},
   };
 }
@@ -84,6 +91,8 @@ export function defaultTableConfig(meta: TheoryTableMeta): TheoryTablePrintConfi
     colWidths,
     verbsPerTables: isVerbish ? [first] : [columnCount],
     paddingTopEm: 0.8,
+    showBorders: false,
+    showFill: false,
   };
 }
 
@@ -95,6 +104,7 @@ export function initTheoryPrintOptions(meta: TheoryPrintMeta | undefined): Theor
   return {
     pageBreakBefore: [null, null, null],
     headingPaddingEm: 1.4,
+    textJustify: false,
     tables,
   };
 }

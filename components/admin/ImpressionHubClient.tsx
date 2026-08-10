@@ -429,7 +429,10 @@ export function ImpressionHubClient() {
       key,
       forceNewPage,
       render: () => (
-        <div className="print-theory-content text-[1.6em] leading-normal text-zinc-900 [&_button]:hidden [&_[data-no-print]]:hidden">
+        <div
+          className="print-theory-content text-[1.6em] leading-normal text-zinc-900 [&_button]:hidden [&_[data-no-print]]:hidden"
+          style={{ ["--color-theme" as string]: accent }}
+        >
           {node}
         </div>
       ),
@@ -705,9 +708,22 @@ export function ImpressionHubClient() {
                       Valeur ×0,1 em (ex. 14 → 1,4 em)
                     </p>
 
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-[var(--color-text-secondary)]">
+                        Texte justifié
+                      </span>
+                      <CheckBox
+                        checked={theoryOpts.textJustify}
+                        onChange={(textJustify) =>
+                          setTheoryOpts((prev) => ({ ...prev, textJustify }))
+                        }
+                        accent={accent}
+                      />
+                    </div>
+
                     <div className="space-y-2 border-t border-[var(--color-border-default)] pt-3">
                       <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
-                        Sauts de page (avant un titre / texte)
+                        Sauts de page (avant titre / texte / tableau)
                       </p>
                       {[0, 1, 2].map((slot) => (
                         <div key={slot} className="flex items-center gap-2">
@@ -770,6 +786,32 @@ export function ImpressionHubClient() {
                                   onChange={(v) =>
                                     patchTheoryTable(meta.id, { paddingTopEm: v / 10 })
                                   }
+                                />
+                              </div>
+
+                              <div className="flex items-center justify-between gap-3">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                  Bordures
+                                </span>
+                                <CheckBox
+                                  checked={cfg.showBorders}
+                                  onChange={(showBorders) =>
+                                    patchTheoryTable(meta.id, { showBorders })
+                                  }
+                                  accent={accent}
+                                />
+                              </div>
+
+                              <div className="flex items-center justify-between gap-3">
+                                <span className="text-[11px] text-[var(--color-text-secondary)]">
+                                  Remplissage
+                                </span>
+                                <CheckBox
+                                  checked={cfg.showFill}
+                                  onChange={(showFill) =>
+                                    patchTheoryTable(meta.id, { showFill })
+                                  }
+                                  accent={accent}
                                 />
                               </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { TheoryBlock } from "@/lib/curriculum/grammar-data";
 import {
   conjugFormCell,
@@ -41,58 +41,94 @@ function tableConfig(
     colWidths: equalColWidths(fallbackCols),
     verbsPerTables: [verbs],
     paddingTopEm: 0.8,
+    showBorders: false,
+    showFill: false,
   };
 }
 
-/** Mise en forme type exercice : titre souligné, pas de fond coloré. */
-function ExerciseLikeTable({
-  title,
-  pronouns,
-  verbHeaders,
-  cells,
+const FILL_HEADER = "var(--color-theme)";
+const FILL_ROW_ALT = "color-mix(in oklch, var(--color-theme) 14%, white)";
+const BORDER_COLOR = "#111";
+
+function cellBorderStyle(showBorders: boolean): CSSProperties | undefined {
+  if (!showBorders) return undefined;
+  return { border: `1px solid ${BORDER_COLOR}` };
+}
+
+/** Tableau d’impression sans titre au-dessus — options bordure / remplissage. */
+function PrintDataTable({
+  headers,
+  rows,
   colWidths,
   paddingTopEm,
+  showBorders,
+  showFill,
+  boldFirstCol,
+  renderCell,
 }: {
-  title?: string;
-  pronouns: string[];
-  verbHeaders: string[];
-  cells: string[][];
+  headers: string[];
+  rows: string[][];
   colWidths: string[];
   paddingTopEm: number;
+  showBorders: boolean;
+  showFill: boolean;
+  boldFirstCol?: boolean;
+  renderCell?: (text: string, row: number, col: number) => ReactNode;
 }) {
-  const cols = 1 + verbHeaders.length;
+  const cols = Math.max(headers.length, rows[0]?.length ?? 0, 1);
   const widths = colWidths.length === cols ? colWidths : equalColWidths(cols);
-  const headerLabel = title ?? (verbHeaders.join(" · ") || "—");
+  const showHeader = headers.some((h) => h.trim().length > 0);
+
   return (
-    <div className="print-exercise" style={{ paddingTop: `${paddingTopEm}em` }}>
-      <div className="mb-1 border-b border-black pb-0.5 text-[1em] font-bold text-teal-700">
-        {headerLabel}
-      </div>
-      <table className="w-full" style={{ tableLayout: "fixed" }}>
+    <div style={{ paddingTop: `${paddingTopEm}em` }}>
+      <table
+        className="w-full"
+        style={{
+          tableLayout: "fixed",
+          borderCollapse: showBorders ? "collapse" : undefined,
+        }}
+      >
         <colgroup>
-          {widths.map((w, i) => (
-            <col key={i} style={{ width: w }} />
+          {Array.from({ length: cols }, (_, i) => (
+            <col key={i} style={{ width: widths[i] }} />
           ))}
         </colgroup>
-        {verbHeaders.length > 1 ? (
+        {showHeader ? (
           <thead>
-            <tr>
-              <th className="px-1 py-1 text-left text-[1em] font-bold text-zinc-700"> </th>
-              {verbHeaders.map((h) => (
-                <th key={h} className="px-1 py-1 text-left text-[1em] font-bold text-zinc-900">
-                  {h}
+            <tr style={showFill ? { background: FILL_HEADER } : undefined}>
+              {Array.from({ length: cols }, (_, hi) => (
+                <th
+                  key={hi}
+                  className={`px-1.5 py-1 text-left text-[1em] font-bold uppercase tracking-wide ${
+                    showFill ? "text-white" : "text-zinc-800"
+                  }`}
+                  style={cellBorderStyle(showBorders)}
+                >
+                  {headers[hi] ?? ""}
                 </th>
               ))}
             </tr>
           </thead>
         ) : null}
         <tbody>
-          {pronouns.map((pronoun, ri) => (
-            <tr key={ri}>
-              <td className="px-1 py-1 text-[1em] font-medium text-zinc-600">{pronoun}</td>
-              {verbHeaders.map((_, vi) => (
-                <td key={vi} className="px-1 py-1 text-[1em] font-semibold text-zinc-900">
-                  {cells[ri]?.[vi] ?? ""}
+          {rows.map((row, ri) => (
+            <tr
+              key={ri}
+              style={
+                showFill && ri % 2 === 1 ? { background: FILL_ROW_ALT } : undefined
+              }
+            >
+              {Array.from({ length: cols }, (_, ci) => (
+                <td
+                  key={ci}
+                  className={`px-1.5 py-1 text-[1em] text-zinc-900 ${
+                    boldFirstCol && ci === 0 ? "font-semibold" : ""
+                  }`}
+                  style={cellBorderStyle(showBorders)}
+                >
+                  {renderCell
+                    ? renderCell(row[ci] ?? "", ri, ci)
+                    : (row[ci] ?? "")}
                 </td>
               ))}
             </tr>
@@ -112,22 +148,24 @@ function renderVerbTogglePrint(
     <div className="space-y-3">
       {chunks.map((chunk, ti) => {
         const pronouns = chunk[0]?.rows.map((r) => r.pronoun) ?? [];
-        const headers = chunk.map((v) => v.infinitive);
-        const cells = pronouns.map((_, ri) =>
-          chunk.map((v) => verbToggleForm(v, ri, block.negation)),
-        );
+        const headers = ["", ...chunk.map((v) => v.infinitive)];
+        const rows = pronouns.map((pronoun, ri) => [
+          pronoun,
+          ...chunk.map((v) => verbToggleForm(v, ri, block.negation)),
+        ]);
         const widths =
-          ti === 0 && cfg.colWidths.length === headers.length + 1
+          ti === 0 && cfg.colWidths.length === headers.length
             ? cfg.colWidths
-            : equalColWidths(headers.length + 1);
+            : equalColWidths(headers.length);
         return (
-          <ExerciseLikeTable
+          <PrintDataTable
             key={ti}
-            pronouns={pronouns}
-            verbHeaders={headers}
-            cells={cells}
+            headers={headers}
+            rows={rows}
             colWidths={widths}
             paddingTopEm={cfg.paddingTopEm}
+            showBorders={cfg.showBorders}
+            showFill={cfg.showFill}
           />
         );
       })}
@@ -144,13 +182,13 @@ function renderConjugPrint(
     const tbl = tables[0];
     if (!tbl) return null;
     return (
-      <ExerciseLikeTable
-        title={tbl.verb}
-        pronouns={tbl.rows.map((r) => r.pronoun)}
-        verbHeaders={[tbl.verb]}
-        cells={tbl.rows.map((r) => [r.form])}
+      <PrintDataTable
+        headers={["", tbl.verb]}
+        rows={tbl.rows.map((r) => [r.pronoun, r.form])}
         colWidths={cfg.colWidths.length === 2 ? cfg.colWidths : ["30%", "70%"]}
         paddingTopEm={cfg.paddingTopEm}
+        showBorders={cfg.showBorders}
+        showFill={cfg.showFill}
       />
     );
   }
@@ -160,20 +198,24 @@ function renderConjugPrint(
     <div className="space-y-3">
       {chunks.map((chunk, ti) => {
         const pronouns = chunk[0]?.rows.map((r) => r.pronoun) ?? [];
-        const headers = chunk.map((t) => t.verb);
-        const cells = pronouns.map((_, ri) => chunk.map((t) => conjugFormCell(t, ri)));
+        const headers = ["", ...chunk.map((t) => t.verb)];
+        const rows = pronouns.map((pronoun, ri) => [
+          pronoun,
+          ...chunk.map((t) => conjugFormCell(t, ri)),
+        ]);
         const widths =
-          ti === 0 && cfg.colWidths.length === headers.length + 1
+          ti === 0 && cfg.colWidths.length === headers.length
             ? cfg.colWidths
-            : equalColWidths(headers.length + 1);
+            : equalColWidths(headers.length);
         return (
-          <ExerciseLikeTable
+          <PrintDataTable
             key={ti}
-            pronouns={pronouns}
-            verbHeaders={headers}
-            cells={cells}
+            headers={headers}
+            rows={rows}
             colWidths={widths}
             paddingTopEm={cfg.paddingTopEm}
+            showBorders={cfg.showBorders}
+            showFill={cfg.showFill}
           />
         );
       })}
@@ -190,52 +232,21 @@ function renderGridPrint(
   while (headers.length < colCount) headers.push("");
   const widths =
     cfg.colWidths.length === colCount ? cfg.colWidths : equalColWidths(colCount);
-  const showHeader = headers.some((h) => h.trim().length > 0);
-  const title = showHeader ? headers.filter(Boolean).join(" · ") : "Tableau";
+  const rows = block.rows.map((row) =>
+    Array.from({ length: colCount }, (_, ci) => row[ci] ?? ""),
+  );
 
   return (
-    <div className="print-exercise" style={{ paddingTop: `${cfg.paddingTopEm}em` }}>
-      <div className="mb-1 border-b border-black pb-0.5 text-[1em] font-bold text-teal-700">
-        {title}
-      </div>
-      <table className="w-full" style={{ tableLayout: "fixed" }}>
-        <colgroup>
-          {widths.map((w, i) => (
-            <col key={i} style={{ width: w }} />
-          ))}
-        </colgroup>
-        {showHeader ? (
-          <thead>
-            <tr>
-              {headers.map((h, hi) => (
-                <th
-                  key={hi}
-                  className="px-1 py-1 text-left text-[1em] font-bold uppercase tracking-wide text-zinc-800"
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-        ) : null}
-        <tbody>
-          {block.rows.map((row, ri) => (
-            <tr key={ri}>
-              {Array.from({ length: colCount }, (_, ci) => (
-                <td
-                  key={ci}
-                  className={`px-1 py-1 text-[1em] text-zinc-900 ${
-                    block.boldFirstCol && ci === 0 ? "font-semibold" : ""
-                  }`}
-                >
-                  {printMarkup(row[ci] ?? "")}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <PrintDataTable
+      headers={headers}
+      rows={rows}
+      colWidths={widths}
+      paddingTopEm={cfg.paddingTopEm}
+      showBorders={cfg.showBorders}
+      showFill={cfg.showFill}
+      boldFirstCol={block.boldFirstCol}
+      renderCell={(text) => printMarkup(text)}
+    />
   );
 }
 
@@ -249,6 +260,7 @@ function BlockView({
   isFirst?: boolean;
 }) {
   const headingPad = options?.headingPaddingEm ?? 1.4;
+  const justify = options?.textJustify ? ("justify" as const) : undefined;
   switch (block.type) {
     case "heading":
       return (
@@ -268,12 +280,21 @@ function BlockView({
             <p className="text-[1em] font-bold text-teal-700">{block.label}</p>
           ) : null}
           {block.text ? (
-            <p className="text-[1em] leading-relaxed text-zinc-900">{printMarkup(block.text)}</p>
+            <p
+              className="text-[1em] leading-relaxed text-zinc-900"
+              style={{ textAlign: justify }}
+            >
+              {printMarkup(block.text)}
+            </p>
           ) : null}
           {block.items && block.items.length > 0 ? (
             <div className="space-y-1 border-l-2 border-teal-600/40 pl-3">
               {block.items.map((item, ii) => (
-                <p key={ii} className="text-[1em] text-zinc-900">
+                <p
+                  key={ii}
+                  className="text-[1em] text-zinc-900"
+                  style={{ textAlign: justify }}
+                >
                   {printMarkup(item)}
                 </p>
               ))}

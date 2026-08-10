@@ -27,13 +27,6 @@ function mathLabel(block: MathRichBlock, index: number): string {
 
 export function extractMathTheoryMeta(lesson: MathSubmoduleLesson): TheoryPrintMeta {
   const blocks = flattenMathTheoryBlocks(lesson);
-  const breakTargets = blocks
-    .filter((b) => b.type === "heading" || b.type === "plain")
-    .map((b, i) => ({
-      id: b.id,
-      label: truncateDropdownLabel(mathLabel(b, i)),
-    }));
-
   const tables: TheoryTableMeta[] = [];
   for (const block of blocks) {
     if (block.type === "table") {
@@ -41,11 +34,23 @@ export function extractMathTheoryMeta(lesson: MathSubmoduleLesson): TheoryPrintM
       tables.push({
         id: block.id,
         kind: "math_table",
-        label: `Tableau — ${block.headersFr[0] ?? "math"}`,
+        label: truncateDropdownLabel(block.headersFr.filter(Boolean).join(" · ") || "Tableau"),
         columnCount,
         defaultColWidths: equalColWidths(columnCount),
       });
     }
   }
+  const breakTargets = [
+    ...blocks
+      .filter((b) => b.type === "heading" || b.type === "plain")
+      .map((b, i) => ({
+        id: b.id,
+        label: truncateDropdownLabel(mathLabel(b, i)),
+      })),
+    ...tables.map((t) => ({
+      id: t.id,
+      label: truncateDropdownLabel(`Tableau : ${t.label}`),
+    })),
+  ];
   return { breakTargets, tables };
 }

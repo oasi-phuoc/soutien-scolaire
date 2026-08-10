@@ -23,13 +23,6 @@ function blockLabel(block: TheoryBlock, index: number): string {
 
 export function extractGrammarTheoryMeta(blocks: TheoryBlock[]): TheoryPrintMeta {
   const indexed = indexGrammarTheoryBlocks(blocks);
-  const breakTargets = indexed
-    .filter((b) => b.type === "heading" || b.type === "text")
-    .map((b, i) => ({
-      id: b.id,
-      label: truncateDropdownLabel(blockLabel(b, i)),
-    }));
-
   const tables: TheoryTableMeta[] = [];
   for (const block of indexed) {
     if (block.type === "grid") {
@@ -37,14 +30,14 @@ export function extractGrammarTheoryMeta(blocks: TheoryBlock[]): TheoryPrintMeta
       tables.push({
         id: block.id,
         kind: "grid",
-        label: `Tableau — ${(block.headers[0] ?? "grille").toString().slice(0, 40)}`,
+        label: truncateDropdownLabel(
+          (block.headers.filter((h) => h.trim()).join(" · ") || "Tableau").toString(),
+        ),
         columnCount,
         defaultColWidths:
           block.colWidths?.length === columnCount
             ? [...block.colWidths]
-            : block.equalCols
-              ? equalColWidths(columnCount)
-              : equalColWidths(columnCount),
+            : equalColWidths(columnCount),
       });
     } else if (block.type === "verb_toggle") {
       const verbCount = block.verbs.length;
@@ -53,7 +46,9 @@ export function extractGrammarTheoryMeta(blocks: TheoryBlock[]): TheoryPrintMeta
       tables.push({
         id: block.id,
         kind: "verb_toggle",
-        label: `Conjugaison — ${block.verbs.map((v) => v.infinitive).slice(0, 3).join(", ")}${verbCount > 3 ? "…" : ""}`,
+        label: truncateDropdownLabel(
+          block.verbs.map((v) => v.infinitive).slice(0, 4).join(", ") + (verbCount > 4 ? "…" : ""),
+        ),
         columnCount,
         defaultColWidths: equalColWidths(columnCount),
         verbCount,
@@ -65,13 +60,28 @@ export function extractGrammarTheoryMeta(blocks: TheoryBlock[]): TheoryPrintMeta
       tables.push({
         id: block.id,
         kind: "conjug",
-        label: `Conjugaison — ${block.tables.map((t) => t.verb).slice(0, 3).join(", ")}${verbCount > 3 ? "…" : ""}`,
+        label: truncateDropdownLabel(
+          block.tables.map((t) => t.verb).slice(0, 4).join(", ") + (verbCount > 4 ? "…" : ""),
+        ),
         columnCount,
         defaultColWidths: equalColWidths(columnCount),
         verbCount,
       });
     }
   }
+
+  const breakTargets = [
+    ...indexed
+      .filter((b) => b.type === "heading" || b.type === "text")
+      .map((b, i) => ({
+        id: b.id,
+        label: truncateDropdownLabel(blockLabel(b, i)),
+      })),
+    ...tables.map((t) => ({
+      id: t.id,
+      label: truncateDropdownLabel(`Tableau : ${t.label}`),
+    })),
+  ];
 
   return { breakTargets, tables };
 }

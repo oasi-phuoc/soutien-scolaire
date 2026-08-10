@@ -65,6 +65,8 @@ function tableConfig(
     colWidths: equalColWidths(fallbackCols),
     verbsPerTables: [fallbackCols],
     paddingTopEm: 0.8,
+    showBorders: false,
+    showFill: false,
   };
 }
 
@@ -97,7 +99,14 @@ function BlockPrintView({
       );
     case "plain":
       if (!block.fr) return <div className="h-2" />;
-      return <p className="text-[1em] leading-relaxed text-black">{renderText(block.fr)}</p>;
+      return (
+        <p
+          className="text-[1em] leading-relaxed text-black"
+          style={{ textAlign: options?.textJustify ? "justify" : undefined }}
+        >
+          {renderText(block.fr)}
+        </p>
+      );
     case "note":
       return (
         <div className="rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-[1em] text-blue-800">
@@ -136,24 +145,32 @@ function BlockPrintView({
       const headers = block.headersFr.slice(0, colCount);
       const widths =
         cfg.colWidths.length === colCount ? cfg.colWidths : equalColWidths(colCount);
-      const title = headers.filter(Boolean).join(" · ") || "Tableau";
+      const borderStyle = cfg.showBorders ? { border: "1px solid #111" } : undefined;
+      const fillHeader = "var(--color-theme)";
+      const fillAlt = "color-mix(in oklch, var(--color-theme) 14%, white)";
       return (
-        <div className="print-exercise" style={{ paddingTop: `${cfg.paddingTopEm}em` }}>
-          <div className="mb-1 border-b border-black pb-0.5 text-[1em] font-bold text-[var(--color-accent-alg)]">
-            {title}
-          </div>
-          <table className="w-full" style={{ tableLayout: "fixed" }}>
+        <div style={{ paddingTop: `${cfg.paddingTopEm}em` }}>
+          <table
+            className="w-full"
+            style={{
+              tableLayout: "fixed",
+              borderCollapse: cfg.showBorders ? "collapse" : undefined,
+            }}
+          >
             <colgroup>
               {widths.map((w, i) => (
                 <col key={i} style={{ width: w }} />
               ))}
             </colgroup>
             <thead>
-              <tr>
+              <tr style={cfg.showFill ? { background: fillHeader } : undefined}>
                 {headers.map((h, i) => (
                   <th
                     key={i}
-                    className="px-1 py-1 text-center text-[1em] font-bold text-black"
+                    className={`px-1.5 py-1 text-center text-[1em] font-bold ${
+                      cfg.showFill ? "text-white" : "text-black"
+                    }`}
+                    style={borderStyle}
                   >
                     {h}
                   </th>
@@ -162,9 +179,18 @@ function BlockPrintView({
             </thead>
             <tbody>
               {block.rows.map((row, ri) => (
-                <tr key={ri}>
+                <tr
+                  key={ri}
+                  style={
+                    cfg.showFill && ri % 2 === 1 ? { background: fillAlt } : undefined
+                  }
+                >
                   {Array.from({ length: colCount }, (_, ci) => (
-                    <td key={ci} className="px-1 py-1 text-center text-[1em] text-black">
+                    <td
+                      key={ci}
+                      className="px-1.5 py-1 text-center text-[1em] text-black"
+                      style={borderStyle}
+                    >
                       {(row[ci] ?? "").split(/\n/).map((line, li) => (
                         <span key={li}>
                           {li > 0 && <br />}
