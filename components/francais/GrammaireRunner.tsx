@@ -13,7 +13,22 @@ import type {
 } from "@/lib/curriculum/conjugation-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { AppSelect } from "@/components/ui/AppSelect";
-import { markFrenchLessonComplete, setFrenchEvalPending, clearFrenchEvalPending } from "@/lib/progress/french-progress";
+import {
+  getCompletedFrenchLessons,
+  markFrenchLessonComplete,
+  setFrenchEvalPending,
+  clearFrenchEvalPending,
+} from "@/lib/progress/french-progress";
+import {
+  grammarCodeAllowed,
+  hasFrenchLessonAccess,
+  type LessonAccessFlags,
+} from "@/lib/auth/lesson-access";
+import {
+  buildGrammarModuleLessonSlugs,
+  isGrammarLessonUnlocked,
+} from "@/lib/progress/french-grammar-gates";
+import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
 import {
@@ -65,6 +80,12 @@ export interface LessonLike {
 interface Props {
   lesson: LessonLike;
   subject?: string;
+  /** Admin / prof — bypass des gates bilans. */
+  isAdmin?: boolean;
+  /** Accès libre élève — bypass des gates bilans. */
+  freeAccess?: boolean;
+  /** Accès partiel français (plafond G7.1). */
+  canPartialFrench?: boolean;
 }
 
 // ── Theory view ───────────────────────────────────────────────────────────────
@@ -3024,7 +3045,13 @@ function GramHintPopup({ hint, onClose }: { hint: string; onClose: () => void })
   );
 }
 
-export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }: Props) {
+export function GrammaireRunner({
+  lesson: baseLesson,
+  subject = "Conjugaison",
+  isAdmin = false,
+  freeAccess = false,
+  canPartialFrench = false,
+}: Props) {
   const router = useRouter();
   const evalGuard = useEvalNavGuard();
   const returnUrl = `/francais?tab=${subjectToTab(subject)}`;
@@ -3049,6 +3076,49 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
 
   // Grammar and vocabulary lessons skip the timed start screen
   const hasTimer = subject === "Conjugaison";
+
+  // Garde deep-link : bilans + séquentiel (grammaire seulement ; admin / accès libre bypass)
+  useEffect(() => {
+    if (subject !== "Grammaire") return;
+    const unlockAll = isAdmin || freeAccess;
+    if (unlockAll) return;
+
+    const lessonAccess: LessonAccessFlags = {
+      canFreeAccess: false,
+      canPartialFrench: Boolean(canPartialFrench),
+      canPartialMath: false,
+    };
+    if (!hasFrenchLessonAccess(lessonAccess)) {
+      router.replace("/francais?tab=grammaire");
+      return;
+    }
+    if (!grammarCodeAllowed(lesson.code, lessonAccess)) {
+      router.replace("/francais?tab=grammaire");
+      return;
+    }
+
+    const completed = getCompletedFrenchLessons();
+    const moduleLessonSlugs = buildGrammarModuleLessonSlugs(
+      FRENCH_THEMES.filter((th) => th.tab === "grammaire"),
+    );
+    if (
+      !isGrammarLessonUnlocked(
+        { code: lesson.code, slug: lesson.slug },
+        completed,
+        moduleLessonSlugs,
+      )
+    ) {
+      router.replace("/francais?tab=grammaire");
+    }
+  }, [
+    subject,
+    isAdmin,
+    freeAccess,
+    canPartialFrench,
+    lesson.code,
+    lesson.slug,
+    router,
+  ]);
 
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);

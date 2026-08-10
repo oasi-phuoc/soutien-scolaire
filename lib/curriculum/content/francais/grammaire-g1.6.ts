@@ -37,16 +37,10 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         ps: "د فعل فاعل عمل پر خپل ځان ترسره کوي. انعکاسي فعل تل له انعکاسي ضمیر سره راځي.",
         uk: "Підмет виконує дію над самим собою. Зворотне дієслово завжди супроводжується зворотним займенником.",
       },
-    },
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "Elle {a}se{/a} regarde dans le miroir.",
       ],
-      noBulletItems: [
-        0,
-      ],
+      noBulletItems: [0],
     },
     {
       type: "heading",

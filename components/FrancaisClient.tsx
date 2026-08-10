@@ -14,6 +14,10 @@ import {
   hasFrenchLessonAccess,
   type LessonAccessFlags,
 } from "@/lib/auth/lesson-access";
+import {
+  buildGrammarModuleLessonSlugs,
+  isGrammarModuleUnlocked,
+} from "@/lib/progress/french-grammar-gates";
 
 type SectionDef  = { id: string; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
@@ -444,6 +448,9 @@ export function FrancaisClient({
   function renderGrammarGroups(groups: SectionDef[]) {
     const unlockAll = isAdmin || freeAccess;
     const themesByGroup = new Map<string, FrenchTheme[]>();
+    const moduleLessonSlugs = buildGrammarModuleLessonSlugs(
+      frenchThemes.filter((th) => th.tab === "grammaire"),
+    );
 
     for (const grp of groups) {
       const themes = frenchThemes
@@ -457,12 +464,18 @@ export function FrancaisClient({
       themesByGroup.set(grp.id, themes);
     }
 
-    // Premier module non terminé → seul déplié automatiquement
+    // Premier module débloqué non terminé → seul déplié automatiquement
     let primaryInProgressId: string | null = null;
     if (hydrated && frenchOk) {
       for (const grp of groups) {
         const themes = themesByGroup.get(grp.id) ?? [];
         if (themes.length === 0) continue;
+        if (
+          !unlockAll &&
+          !isGrammarModuleUnlocked(grp.id, completedSlugs, moduleLessonSlugs)
+        ) {
+          continue;
+        }
         if (!themes.every((th) => completedSlugs.has(th.slug))) {
           primaryInProgressId = grp.id;
           break;
@@ -484,8 +497,12 @@ export function FrancaisClient({
           let state: SectionState;
           if (!hydrated || !frenchOk) {
             state = "locked";
+          } else if (
+            !unlockAll &&
+            !isGrammarModuleUnlocked(grp.id, completedSlugs, moduleLessonSlugs)
+          ) {
+            state = "locked";
           } else {
-            // Gx.1 de chaque module accessible : plus de verrouillage inter-modules
             const allDone = themes.every((th) => completedSlugs.has(th.slug));
             state = allDone ? "completed" : "in_progress";
           }

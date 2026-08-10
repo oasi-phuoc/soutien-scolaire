@@ -26,25 +26,10 @@ export const A1_GR_L01: GrammarLesson = {
         ps: "ضمیر د تکرار د مخنیوي لپاره د یو کس یا نوم ځای نیسي.",
         uk: "Займенник замінює особу або іменник, щоб уникнути повторення.",
       },
-    },
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "Ali parle français.",
         "{a}Il{/a} habite en Suisse.",
       ],
-      transLabel: {
-        en: "Examples",
-        ar: "أمثلة",
-        fa: "مثال‌ها",
-        pt: "Exemplos",
-        so: "Tusaalooyin",
-        ti: "ኣብነታት",
-        tr: "Örnekler",
-        ps: "بېلګې",
-        uk: "Приклади",
-      },
       noBulletItems: [0, 1],
     },
     {

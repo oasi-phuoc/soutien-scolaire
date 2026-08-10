@@ -1,0 +1,158 @@
+[
+  {
+    "word": "peintre",
+    "phonemes": [
+      "/p/",
+      "/ɛ̃/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "word": "plombier",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/ɔ̃/",
+      "/b/",
+      "/j/",
+      "/e/"
+    ]
+  },
+  {
+    "word": "plombière",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/ɔ̃/",
+      "/b/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "word": "électricien",
+    "phonemes": [
+      "/e/",
+      "/l/",
+      "/ɛ/",
+      "/k/",
+      "/t/",
+      "/ʁ/",
+      "/i/",
+      "/s/",
+      "/jɛ̃/"
+    ]
+  },
+  {
+    "word": "électricienne",
+    "phonemes": [
+      "/e/",
+      "/l/",
+      "/ɛ/",
+      "/k/",
+      "/t/",
+      "/ʁ/",
+      "/i/",
+      "/s/",
+      "/jɛn/"
+    ]
+  },
+  {
+    "word": "acteur",
+    "phonemes": [
+      "/a/",
+      "/k/",
+      "/t/",
+      "/œʁ/"
+    ]
+  },
+  {
+    "word": "actrice",
+    "phonemes": [
+      "/a/",
+      "/k/",
+      "/t/",
+      "/ʁ/",
+      "/i/",
+      "/s/"
+    ]
+  },
+  {
+    "word": "pompier",
+    "phonemes": [
+      "/p/",
+      "/ɔ̃/",
+      "/p/",
+      "/j/",
+      "/e/"
+    ]
+  },
+  {
+    "word": "pompière",
+    "phonemes": [
+      "/p/",
+      "/ɔ̃/",
+      "/p/",
+      "/j/",
+      "/ɛʁ/"
+    ]
+  },
+  {
+    "word": "danseur",
+    "phonemes": [
+      "/d/",
+      "/ɑ̃/",
+      "/s/",
+      "/œʁ/"
+    ]
+  },
+  {
+    "word": "danseuse",
+    "phonemes": [
+      "/d/",
+      "/ɑ̃/",
+      "/s/",
+      "/ø/",
+      "/z/"
+    ]
+  },
+  {
+    "word": "chanteur",
+    "phonemes": [
+      "/ʃ/",
+      "/ɑ̃/",
+      "/t/",
+      "/œʁ/"
+    ]
+  },
+  {
+    "word": "chanteuse",
+    "phonemes": [
+      "/ʃ/",
+      "/ɑ̃/",
+      "/t/",
+      "/ø/",
+      "/z/"
+    ]
+  },
+  {
+    "word": "boucher",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/ʃ/",
+      "/e/"
+    ]
+  },
+  {
+    "word": "bouchère",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/ʃ/",
+      "/ɛʁ/"
+    ]
+  }
+]

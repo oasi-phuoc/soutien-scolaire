@@ -34,9 +34,47 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
-        ["Présent simple", "Non, je {a}prends{/a} ma douche.\n Je donne une information."],
-        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\nJ'insiste sur le déroulement."],
+        ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ Je donne une {a}information{/a}."],
+        ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ J'insiste sur le {a}déroulement{/a}."],
       ],
+      transRows: {
+        en: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ I give {a}information{/a}."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ I emphasize the {a}process{/a}."],
+        ],
+        ar: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ أقدّم {a}معلومة{/a}."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ أؤكد على {a}سير العملية{/a}."],
+        ],
+        fa: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ یک {a}اطلاعات{/a} ارائه می‌دهم."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ بر {a}روند انجام کار{/a} تأکید می‌کنم."],
+        ],
+        pt: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ Dou uma {a}informação{/a}."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ Dou ênfase ao {a}desenrolar da ação{/a}."],
+        ],
+        so: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ Waxaan bixiyaa {a}macluumaad{/a}."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ Waxaan xoogga saaraa {a}socodka ficilka{/a}."],
+        ],
+        ti: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ {a}ሓበሬታ{/a} እህብ።"],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ ኣብ {a}ምዕባለ እቲ ተግባር{/a} ኣጽንዖ እገብር።"],
+        ],
+        tr: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ Bir {a}bilgi{/a} veriyorum."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ {a}Eylemin devamına{/a} vurgu yapıyorum."],
+        ],
+        ps: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ زه یو {a}معلومات{/a} وړاندې کوم."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ زه پر {a}د عمل پر بهیر{/a} ټینګار کوم."],
+        ],
+        uk: [
+          ["Présent simple", "Non, je {a}prends{/a} ma douche.\n→ Я надаю {a}інформацію{/a}."],
+          ["Présent progressif", "Non, je {a}suis en train de prendre{/a} ma douche.\n→ Я наголошую на {a}перебігу дії{/a}."],
+        ],
+      },
       transHeaders: {
         en: ["Aspect", "Example"],
         ar: ["الجانب", "مثال"],
@@ -47,44 +85,6 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         tr: ["Görünüş", "Örnek"],
         ps: ["اړخ", "بېلګه"],
         uk: ["Аспект", "Приклад"],
-      },
-      transRows: {
-        en: [
-          ["Simple present", "No, I am {a}taking{/a} a shower.\nI am giving information."],
-          ["Present progressive", "No, I {a}am taking{/a} a shower.\nI am emphasizing that the action is in progress."],
-        ],
-        ar: [
-          ["الحاضر البسيط", "لا، أنا {a}أستحم{/a}.\nأنا أقدّم معلومة."],
-          ["الحاضر المستمر", "لا، أنا {a}أستحم الآن{/a}.\nأنا أؤكد على أن الفعل جارٍ."],
-        ],
-        fa: [
-          ["حال ساده", "نه، دارم {a}دوش می‌گیرم{/a}.\nمن فقط یک اطلاعات می‌دهم."],
-          ["حال استمراری", "نه، {a}دارم دوش می‌گیرم{/a}.\nتأکید می‌کنم که عمل در حال انجام است."],
-        ],
-        pt: [
-          ["Presente simples", "Não, {a}tomo{/a} banho.\nEstou a dar uma informação."],
-          ["Presente progressivo", "Não, {a}estou a tomar{/a} banho.\nEstou a insistir no decorrer da ação."],
-        ],
-        so: [
-          ["Joogto fudud", "Maya, {a}qubays ayaan qaadanayaa{/a}.\nWaxaan bixinayaa xog."],
-          ["Joogto socota", "Maya, {a}waan ku jiraa qaadashada qubayska{/a}.\nWaxaan xoogga saarayaa in ficilku socdo."],
-        ],
-        ti: [
-          ["ቀሊል ህሉው", "ኣይፋል፣ {a}ሻወር እወስድ{/a} ኣለኹ።\nሓበሬታ እህብ ኣለኹ።"],
-          ["ቀጻሊ ህሉው", "ኣይፋል፣ {a}ሻወር እወስድ ኣለኹ{/a}።\nእቲ ተግባር ኣብ ምክያድ ከም ዘሎ እጉልሕ።"],
-        ],
-        tr: [
-          ["Basit şimdiki", "Hayır, {a}duş alıyorum{/a}.\nBilgi veriyorum."],
-          ["Şimdiki süreklilik", "Hayır, {a}duş alıyorum{/a}.\nEylemin devam etmekte olduğunu vurguluyorum."],
-        ],
-        ps: [
-          ["ساده اوسنی", "نه، زه {a}دوش اخلم{/a}.\nزه یو معلومات وړاندې کوم."],
-          ["جاري اوسنی", "نه، زه {a}دوش اخلم{/a}.\nزه ټینګار کوم چې عمل د ترسره کېدو په حال کې دی."],
-        ],
-        uk: [
-          ["Простий теперішній", "Ні, я {a}приймаю душ{/a}.\nЯ повідомляю інформацію."],
-          ["Теперішній тривалий", "Ні, я {a}зараз приймаю душ{/a}.\nЯ наголошую на перебігу дії."],
-        ],
       },
     },
     {

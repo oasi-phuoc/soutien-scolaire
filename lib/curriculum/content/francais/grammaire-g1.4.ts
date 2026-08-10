@@ -4,7 +4,7 @@ export const A1_GR_CEST: GrammarLesson = {
   slug: "a1-gr-cest-il-est",
   code: "G1.4",
   level: "A1",
-  title: "Il y a… C'est… Il/Elle est…",
+  title: "Il y a… C'est… Il est…",
   theory: [
     // ── Unité 3 — Il y a / C'est / Il est ─────────────────────────────────────
     {
@@ -68,26 +68,10 @@ export const A1_GR_CEST: GrammarLesson = {
         ps: "عبارتونه {a}c'est{/a} او {a}il est{/a} دواړه د چا یا شي د معرفي کولو یا تشریح لپاره کارېږي، خو په یوه ډول نه کارول کېږي.",
         uk: "Вирази {a}c'est{/a} та {a}il est{/a} обидва служать для представлення або опису когось чи чогось, але вживаються по-різному.",
       },
-    },
-
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "{a}C'est{/a} petit.",
         "{a}Il est{/a} grand.",
       ],
-      transLabel: {
-        en: "Examples",
-        ar: "أمثلة",
-        fa: "مثال‌ها",
-        pt: "Exemplos",
-        so: "Tusaalooyin",
-        ti: "ኣብነታት",
-        tr: "Örnekler",
-        ps: "بېلګې",
-        uk: "Приклади",
-      },
       noBulletItems: [0, 1],
     },
     {
