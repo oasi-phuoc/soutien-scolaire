@@ -91,8 +91,8 @@ export function defaultTableConfig(meta: TheoryTableMeta): TheoryTablePrintConfi
     colWidths,
     verbsPerTables: isVerbish ? [first] : [columnCount],
     paddingTopEm: 0.8,
-    showBorders: false,
-    showFill: false,
+    showBorders: true,
+    showFill: true,
   };
 }
 

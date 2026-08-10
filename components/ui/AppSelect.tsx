@@ -10,6 +10,7 @@ import {
   type CSSProperties,
   type KeyboardEvent,
 } from "react";
+import { useIsPrintLayout } from "@/components/print/PrintExerciseLayoutContext";
 
 export type AppSelectOption = {
   value: string;
@@ -58,6 +59,7 @@ export function AppSelect({
   name,
   "aria-label": ariaLabel,
 }: AppSelectProps) {
+  const isPrint = useIsPrintLayout();
   const autoId = useId();
   const selectId = id ?? autoId;
   const rootRef = useRef<HTMLDivElement>(null);
@@ -120,6 +122,31 @@ export function AppSelect({
       : "top-full mt-1";
 
   const isNumericSelection = /^\d+$/.test(triggerLabel);
+
+  /** Impression : trait bas (comme FR) — pas de liste déroulante ni placeholder. */
+  if (isPrint) {
+    return (
+      <div className={`relative ${className}`} style={style}>
+        {name ? <input type="hidden" name={name} value={value} /> : null}
+        <input
+          id={selectId}
+          type="text"
+          value={value}
+          disabled={disabled}
+          data-print-answer=""
+          aria-label={ariaLabel}
+          onChange={(e) => onChange(e.target.value)}
+          className={`w-full rounded-none border-0 border-b-2 bg-transparent px-1 text-center outline-none transition-colors disabled:opacity-70 ${
+            size === "sm" ? "h-8 pb-1 text-sm font-semibold" : "min-h-10 pb-1.5 text-sm"
+          } ${
+            error
+              ? "border-amber-500"
+              : "border-[var(--color-theme)]/60 focus:border-[var(--color-theme)]"
+          }`}
+        />
+      </div>
+    );
+  }
 
   return (
     <div ref={rootRef} className={`relative ${className}`} style={style}>

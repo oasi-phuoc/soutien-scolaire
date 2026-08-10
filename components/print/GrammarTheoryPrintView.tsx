@@ -41,8 +41,8 @@ function tableConfig(
     colWidths: equalColWidths(fallbackCols),
     verbsPerTables: [verbs],
     paddingTopEm: 0.8,
-    showBorders: false,
-    showFill: false,
+    showBorders: true,
+    showFill: true,
   };
 }
 

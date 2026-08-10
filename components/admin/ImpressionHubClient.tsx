@@ -10,6 +10,7 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
+import Link from "next/link";
 import {
   listPrintableLessons,
   type PrintCatalogEntry,
@@ -47,6 +48,16 @@ import {
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
 const CLASS_NUMBERS = Array.from({ length: 20 }, (_, index) => String(index + 1).padStart(2, "0"));
 
+/** Couleurs pastel pour le thème d’impression (correction ambre inchangée). */
+const PRINT_THEME_COLORS = [
+  { id: "vert", label: "Vert", value: "#6fafa0" },
+  { id: "bleu", label: "Bleu", value: "#7ba3c9" },
+  { id: "violet", label: "Violet", value: "#a89bc8" },
+  { id: "rouge", label: "Rouge", value: "#c98b8b" },
+] as const;
+
+type PrintThemeColorId = (typeof PRINT_THEME_COLORS)[number]["id"];
+
 const DOMAINS: { id: PrintDomain; label: string }[] = [
   { id: "math", label: "Mathématiques" },
   { id: "francais", label: "Français" },
@@ -56,7 +67,7 @@ const DOMAINS: { id: PrintDomain; label: string }[] = [
 function preferredGroups(domain: PrintDomain, groups: string[]): string[] {
   const preferred =
     domain === "francais"
-      ? ["Vocabulaire", "Conjugaison", "Grammaire", "Communication"]
+      ? ["Vocabulaire", "Grammaire", "Communication"]
       : domain === "placement"
         ? ["Mathématiques", "Français"]
         : domain === "math"
@@ -206,6 +217,7 @@ export function ImpressionHubClient() {
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [title, setTitle] = useState("");
+  const [themeColorId, setThemeColorId] = useState<PrintThemeColorId>("vert");
   const [selection, setSelection] = useState<ExercisePrintSelection[]>([]);
   const [printedBy, setPrintedBy] = useState("");
   const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
@@ -417,7 +429,18 @@ export function ImpressionHubClient() {
       return { ...prev, tables: { ...prev.tables, [id]: next } };
     });
 
-  const accent = bundle?.accentColor ?? "var(--color-theme)";
+  const themeColor =
+    PRINT_THEME_COLORS.find((c) => c.id === themeColorId)?.value ?? PRINT_THEME_COLORS[0].value;
+  const accent = themeColor;
+  const themeStyle = {
+    ["--color-theme" as string]: themeColor,
+    ["--color-accent-fr" as string]: themeColor,
+    ["--color-accent-alg" as string]: themeColor,
+    ["--color-accent-geo" as string]: themeColor,
+    ["--color-accent-quiz" as string]: themeColor,
+    ["--color-accent-comm" as string]: themeColor,
+    ["--color-accent-lecture" as string]: themeColor,
+  };
   const course = bundle?.course ?? "Mathématiques";
   const printDate = formatPrintDate();
   const header: PrintHeaderConfig = { classLevel, classNumber, course, title };
@@ -431,7 +454,7 @@ export function ImpressionHubClient() {
       render: () => (
         <div
           className="print-theory-content text-[1.6em] leading-normal text-zinc-900 [&_button]:hidden [&_[data-no-print]]:hidden"
-          style={{ ["--color-theme" as string]: accent }}
+          style={themeStyle}
         >
           {node}
         </div>
@@ -468,7 +491,7 @@ export function ImpressionHubClient() {
       ];
     }
     return [];
-  }, [theory, bundle, theoryOpts]);
+  }, [theory, bundle, theoryOpts, themeColor]);
 
   const hasPrintableContent =
     theorySegments.length > 0 || selection.some((item) => item.included && item.occurrences > 0);
@@ -516,21 +539,34 @@ export function ImpressionHubClient() {
       image.loading = "eager";
       image.decoding = "sync";
     });
-    const printCss = `@page{size:A4 portrait;margin:0!important;}html,body{width:210mm!important;margin:0!important;padding:0!important;background:white!important;}body *{visibility:hidden!important;}*{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container,.preview-pages-container *{visibility:visible!important;}.preview-pages-container{position:absolute!important;left:0!important;top:0!important;width:210mm!important;max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;margin:0!important;display:block!important;background:white!important;}.preview-page-sheet{box-sizing:border-box!important;width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;overflow:hidden!important;padding:18mm 12mm 12mm!important;font-size:9px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}img{visibility:visible!important;opacity:1!important;}`;
-    const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}${printCss}</style></head><body>${printNode.outerHTML}</body></html>`;
+    const themeVars = `:root{--color-theme:${themeColor};--color-accent-fr:${themeColor};--color-accent-alg:${themeColor};--color-accent-geo:${themeColor};--color-accent-quiz:${themeColor};--color-accent-comm:${themeColor};--color-accent-lecture:${themeColor};}`;
+    const printCss = `@page{size:A4 portrait;margin:0!important;}html,body{width:210mm!important;margin:0!important;padding:0!important;background:white!important;}body *{visibility:hidden!important;}*{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container,.preview-pages-container *{visibility:visible!important;}.preview-pages-container{position:absolute!important;left:0!important;top:0!important;width:210mm!important;max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;margin:0!important;display:block!important;background:white!important;}.preview-page-sheet{box-sizing:border-box!important;width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;overflow:hidden!important;padding:18mm 12mm 12mm!important;font-size:9px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold,.print-ex-content .eval-exercise-title{display:none!important;}img{visibility:visible!important;opacity:1!important;}`;
+    const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${themeVars}${css}${printCss}</style></head><body>${printNode.outerHTML}</body></html>`;
     openPrintPopup(html, { title: title || "Feuille d'exercice", width: 1000, height: 800 });
   };
 
   return (
     <div className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]">
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border-default)] px-4 py-3">
-        <div className="min-w-0">
-          <h1 className="truncate text-lg font-bold text-[var(--color-text-primary)]">
-            Impression documents
-          </h1>
-          <p className="truncate text-xs text-[var(--color-text-secondary)]">
-            Aperçu A4 identique au PDF — en-tête page 1, pied de page sur toutes les pages
-          </p>
+        <div className="flex min-w-0 items-center gap-2">
+          <Link
+            href="/"
+            aria-label="Retour à l'accueil"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white transition-opacity hover:opacity-80"
+            style={{ background: accent }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </Link>
+          <div className="min-w-0">
+            <h1 className="truncate text-lg font-bold text-[var(--color-text-primary)]">
+              Impression documents
+            </h1>
+            <p className="truncate text-xs text-[var(--color-text-secondary)]">
+              Aperçu A4 identique au PDF — en-tête page 1, pied de page sur toutes les pages
+            </p>
+          </div>
         </div>
         <button
           type="button"
@@ -613,6 +649,30 @@ export function ImpressionHubClient() {
                     placeholder="Titre…"
                     className="min-h-10 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
                   />
+                </div>
+              </div>
+              <div>
+                <FieldLabel>Couleur</FieldLabel>
+                <div className="flex flex-wrap gap-2">
+                  {PRINT_THEME_COLORS.map((c) => {
+                    const active = themeColorId === c.id;
+                    return (
+                      <button
+                        key={c.id}
+                        type="button"
+                        title={c.label}
+                        aria-label={c.label}
+                        aria-pressed={active}
+                        onClick={() => setThemeColorId(c.id)}
+                        className="flex h-9 w-9 items-center justify-center rounded-full border-2 transition-transform hover:scale-105"
+                        style={{
+                          background: c.value,
+                          borderColor: active ? "var(--color-text-primary)" : "transparent",
+                          boxShadow: active ? `0 0 0 2px ${c.value}` : undefined,
+                        }}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -791,12 +851,12 @@ export function ImpressionHubClient() {
 
                               <div className="flex items-center justify-between gap-3">
                                 <span className="text-[11px] text-[var(--color-text-secondary)]">
-                                  Bordures
+                                  Sans bordures
                                 </span>
                                 <CheckBox
-                                  checked={cfg.showBorders}
-                                  onChange={(showBorders) =>
-                                    patchTheoryTable(meta.id, { showBorders })
+                                  checked={!cfg.showBorders}
+                                  onChange={(off) =>
+                                    patchTheoryTable(meta.id, { showBorders: !off })
                                   }
                                   accent={accent}
                                 />
@@ -804,12 +864,12 @@ export function ImpressionHubClient() {
 
                               <div className="flex items-center justify-between gap-3">
                                 <span className="text-[11px] text-[var(--color-text-secondary)]">
-                                  Remplissage
+                                  Sans remplissage
                                 </span>
                                 <CheckBox
-                                  checked={cfg.showFill}
-                                  onChange={(showFill) =>
-                                    patchTheoryTable(meta.id, { showFill })
+                                  checked={!cfg.showFill}
+                                  onChange={(off) =>
+                                    patchTheoryTable(meta.id, { showFill: !off })
                                   }
                                   accent={accent}
                                 />
@@ -1091,7 +1151,10 @@ export function ImpressionHubClient() {
           </div>
         </aside>
 
-        <section className="impression-scroll min-h-0 flex-1 overflow-y-auto bg-[color-mix(in_oklch,var(--color-bg-secondary)_70%,white)] px-3 py-4 sm:px-6">
+        <section
+          className="impression-scroll min-h-0 flex-1 overflow-y-auto bg-[color-mix(in_oklch,var(--color-bg-secondary)_70%,white)] px-3 py-4 sm:px-6"
+          style={themeStyle}
+        >
           {bundleError && (
             <p className="mx-auto mb-4 max-w-md rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm text-amber-700">
               {bundleError}
@@ -1105,7 +1168,7 @@ export function ImpressionHubClient() {
             </p>
           ) : (
             <PaginatedPreview
-              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}-${JSON.stringify(theoryOpts)}`}
+              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}-${themeColorId}-${JSON.stringify(theoryOpts)}`}
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}

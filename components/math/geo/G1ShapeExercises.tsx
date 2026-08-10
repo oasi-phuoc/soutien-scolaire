@@ -2,11 +2,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   printQuestionsListClass,
+  useIsPrintLayout,
   usePrintColumns,
   usePrintQuestionCount,
 } from "@/components/print/PrintExerciseLayoutContext";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+
+const PRINT_LINE_INPUT =
+  "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1.5 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
 
 // ── Shape data ─────────────────────────────────────────────────────────────────
 
@@ -191,6 +195,7 @@ type MatchState = { answer: string; checked: boolean; correct: boolean };
 export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExProps) {
   const questionCount = usePrintQuestionCount(4);
   const columns = usePrintColumns();
+  const isPrint = useIsPrintLayout();
   const [{ allShapes, cards }] = useState(() => {
     const nameCount = Math.min(SHAPES.length, Math.max(6, questionCount + 2));
     const allShapes = pickN(SHAPES, nameCount);
@@ -262,10 +267,20 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-[var(--color-accent-alg)]">{cardIdx + 1}.</span>
                 {s.checked && !s.correct && revealCorrection ? (
-                  <div className="flex h-8 w-16 flex-col items-center justify-center rounded border-b-2 border-amber-500">
-                    <span className="text-[9px] leading-none text-amber-600 line-through">{s.answer || "—"}</span>
-                    <span className="text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{LETTERS[correctIdx]}</span>
+                  <div className="flex h-8 w-16 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                    <span className="text-[9px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                    <span className="text-[10px] font-bold leading-none text-amber-600">{LETTERS[correctIdx]}</span>
                   </div>
+                ) : isPrint ? (
+                  <input
+                    type="text"
+                    value={s.answer}
+                    disabled={s.checked}
+                    maxLength={1}
+                    data-print-answer=""
+                    onChange={(e) => handleSelect(shape.id, e.target.value.replace(/[^a-zA-Z]/g, "").slice(-1).toLowerCase())}
+                    className={`h-8 w-16 ${PRINT_LINE_INPUT}`}
+                  />
                 ) : (
                   <AppSelect
                     value={s.answer}
@@ -294,6 +309,7 @@ type DefinitionMatchState = { answer: string; checked: boolean; correct: boolean
 export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated }: ExProps) {
   const questionCount = usePrintQuestionCount(5);
   const columns = usePrintColumns();
+  const isPrint = useIsPrintLayout();
   const [{ allShapes, definitions }] = useState(() => {
     const allShapes = pickN(SHAPES, Math.min(SHAPES.length, Math.max(8, questionCount)));
     const definitions = shuffle([...allShapes]).slice(0, Math.min(questionCount, allShapes.length));
@@ -361,10 +377,20 @@ export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated 
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="text-sm text-[var(--color-text-primary)]">{shape.definition}</span>
               {state.checked && !state.correct && revealCorrection ? (
-                <div className="flex h-9 flex-col items-center justify-center rounded border-b-2 border-amber-500">
-                  <span className="text-[9px] leading-none text-amber-600 line-through">{state.answer || "—"}</span>
-                  <span className="text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{LETTERS[correctIdx]}</span>
+                <div className="flex h-9 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                  <span className="text-[9px] leading-none text-[var(--color-text-secondary)]">{state.answer || "—"}</span>
+                  <span className="text-[10px] font-bold leading-none text-amber-600">{LETTERS[correctIdx]}</span>
                 </div>
+              ) : isPrint ? (
+                <input
+                  type="text"
+                  value={state.answer}
+                  disabled={state.checked}
+                  maxLength={1}
+                  data-print-answer=""
+                  onChange={(e) => handleSelect(shape.id, e.target.value.replace(/[^a-zA-Z]/g, "").slice(-1).toLowerCase())}
+                  className={`h-9 w-full ${PRINT_LINE_INPUT}`}
+                />
               ) : (
                 <AppSelect
                   value={state.answer}
@@ -403,6 +429,7 @@ type MLState = { blanks: Record<number, string>; blankOk: Record<number, boolean
 export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }: ExProps) {
   const questionCount = usePrintQuestionCount(7);
   const columns = usePrintColumns();
+  const isPrint = useIsPrintLayout();
   const [shapes] = useState<ShapeData[]>(() => pickN(SHAPES, Math.min(questionCount, SHAPES.length)));
   const [patterns] = useState<Record<string, string[]>>(() =>
     Object.fromEntries(shapes.map(s => [s.id, makePattern(s.name)]))
@@ -465,10 +492,21 @@ export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }
                 {pattern.map((char, pos) =>
                   char === "_" ? (
                     state.checked && revealCorrection && state.blankOk[pos] === false ? (
-                      <div key={pos} className="flex h-8 w-7 flex-col items-center justify-center rounded-none border-b-2 border-amber-500">
-                        <span className="text-[9px] leading-none text-amber-600 line-through">{state.blanks[pos] || "—"}</span>
-                        <span className="text-[9px] leading-none font-bold text-[var(--color-text-primary)]">{s.name[pos]}</span>
+                      <div key={pos} className="flex h-8 w-7 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                        <span className="text-[9px] leading-none text-[var(--color-text-secondary)]">{state.blanks[pos] || "—"}</span>
+                        <span className="text-[9px] font-bold leading-none text-amber-600">{s.name[pos]}</span>
                       </div>
+                    ) : isPrint ? (
+                      <input
+                        key={pos}
+                        type="text"
+                        value={state.blanks[pos] ?? ""}
+                        disabled={state.checked}
+                        maxLength={1}
+                        data-print-answer=""
+                        onChange={(e) => setBlank(s.id, pos, e.target.value.replace(/[^a-zA-Zàâäéèêëïîôùûüç]/gi, "").slice(-1).toLowerCase())}
+                        className={`h-8 w-7 ${PRINT_LINE_INPUT}`}
+                      />
                     ) : (
                       <AppSelect
                         key={pos}
@@ -663,7 +701,6 @@ export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: Ex
                   value={state.answer}
                   disabled={state.checked}
                   onChange={e => setStates(prev => ({ ...prev, [s.id]: { ...prev[s.id]!, answer: e.target.value, checked: false, correct: false } }))}
-                  placeholder="Nom de la forme…"
                   className="flex-1 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1.5 text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70"
                 />
               )}

@@ -438,7 +438,7 @@ input[type=number] {
 /* Contours des boutons de choix visibles à l'impression. */
 .print-layout-context .print-ex-content button.print-choice-btn {
   border-style: solid !important;
-  border-color: var(--color-accent-fr) !important;
+  border-color: var(--color-theme) !important;
   background-color: transparent !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -449,10 +449,25 @@ input[type=number] {
 }
 .print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--selected {
   border-width: 2px !important;
-  background-color: color-mix(in oklch, var(--color-accent-fr) 10%, transparent) !important;
+  background-color: color-mix(in oklch, var(--color-theme) 10%, transparent) !important;
 }
 .print-layout-context .print-ex-content button.print-choice-btn:not(.print-choice-btn--selected) {
   border-width: 2px !important;
+}
+
+/* Corrigé QCM : texte centré dans le bouton. */
+.print-layout-context .print-ex-content.print-answer-key button.print-choice-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* Masquer les placeholders à l'impression. */
+.print-layout-context .print-ex-content input::placeholder,
+.print-layout-context .print-ex-content textarea::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
 }
 
 /* Masquer les indices « Calcul » / détails écran sur la feuille d'impression. */
@@ -758,7 +773,9 @@ input[type=number] {
 }
 
 .print-layout-context .print-answer-key [class*="text-amber-"],
-.print-layout-context .print-answer-key [class*="text-orange-"] {
+.print-layout-context .print-answer-key [class*="text-orange-"],
+.print-layout-context .print-answer-key [class*="border-amber"] > :last-child:not(button),
+.print-layout-context .print-answer-key [class*="border-orange"] > :last-child:not(button) {
   color: #d97706 !important;
   font-weight: 700 !important;
 }

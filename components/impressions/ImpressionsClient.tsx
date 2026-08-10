@@ -32,7 +32,7 @@ const DOMAINS: { id: PrintDomain; label: string }[] = [
 function preferredGroups(domain: PrintDomain, groups: string[]): string[] {
   const preferred =
     domain === "francais"
-      ? ["Vocabulaire", "Conjugaison", "Grammaire", "Communication"]
+      ? ["Vocabulaire", "Grammaire", "Communication"]
       : domain === "placement"
         ? ["Mathématiques", "Français"]
         : domain === "math"

@@ -268,7 +268,6 @@ export function PrintDocumentHeader({
             <p>Département de la santé, des affaires sociales et de la culture</p>
             <p>Service de l&apos;action sociale</p>
             <p>Office de l&apos;asile</p>
-            <p>Centre de formation « Le Botza »</p>
           </div>
         </div>
       </div>
@@ -346,12 +345,10 @@ export function PrintDocumentFooter({
         <LearnUpMark size={22} className="print-footer-mark" />
         <div>
           <p>LearnUp - Thanh Phuoc VAN</p>
-          <p>Centre de formation « Le Botza »</p>
           <p>Imprimé le {date}{printedBy ? ` par ${printedBy}` : ""}</p>
         </div>
       </div>
       <div className="text-right">
-        <p>Centre de formation « Le Botza »</p>
         <p>{preview ? `Page ${page} sur ${totalPages}` : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
       </div>
     </div>
