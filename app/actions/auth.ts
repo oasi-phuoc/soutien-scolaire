@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { buildLoginId, loginIdToEmail } from "@/lib/auth/identifier";
+import { buildEleveClasse } from "@/lib/eleve-classe-types";
 
 function createServiceClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -50,10 +51,10 @@ export async function signUpAction(
   const nom = String(formData.get("nom") ?? "").trim();
   const prenom = String(formData.get("prenom") ?? "").trim();
   const classeType = String(formData.get("classe_type") ?? "").trim();
-  const classeNum = String(formData.get("classe_num") ?? "").trim();
+  const classeSuffix = String(formData.get("classe_num") ?? "").trim();
   const classe = classeType === "ancien"
     ? "Ancien élève"
-    : classeType && classeNum ? `${classeType} ${classeNum}` : "";
+    : buildEleveClasse(classeType, classeSuffix) ?? "";
   const adresse = String(formData.get("adresse") ?? "").trim();
   const npa = String(formData.get("npa") ?? "").trim();
   const localite = String(formData.get("localite") ?? "").trim();

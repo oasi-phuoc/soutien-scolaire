@@ -21,7 +21,12 @@ import {
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
 import { AppSelect } from "@/components/ui/AppSelect";
-import { ELEVE_CLASSE_TYPES } from "@/lib/eleve-classe-types";
+import {
+  ELEVE_CLASSE_TYPES,
+  buildEleveClasse,
+  parseEleveClasse,
+  usesClasseReferenceField,
+} from "@/lib/eleve-classe-types";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import type { UserRow } from "./AdminTable";
 
@@ -113,11 +118,11 @@ function PasswordSection({ userId }: { userId: string }) {
 function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => void; onSaved: (data: Partial<UserRow>) => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
-  const parsedClasse = user.classe?.split(" ") ?? [];
+  const parsedClasse = parseEleveClasse(user.classe);
   const LANGUES_OPTIONS = [...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })), { code: "other", label: "Autre" }];
   const [form, setForm] = useState({
     prenom: user.prenom ?? "", nom: user.nom ?? "",
-    classeType: parsedClasse[0] ?? "", classeNum: parsedClasse[1] ?? "",
+    classeType: parsedClasse.classeType, classeNum: parsedClasse.classeSuffix,
     adresse: user.adresse ?? "", npa: user.npa ?? "", localite: user.localite ?? "",
     telephone: user.telephone ?? "", langue: user.langue ?? "en",
   });
@@ -127,7 +132,7 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
   function submit() {
     setErr(null);
     startTransition(async () => {
-      const classe = form.classeType && form.classeNum ? `${form.classeType} ${form.classeNum}` : undefined;
+      const classe = buildEleveClasse(form.classeType, form.classeNum) ?? undefined;
       const r = await updateUserProfileAction(user.id, {
         prenom: form.prenom || undefined, nom: form.nom || undefined, classe,
         adresse: form.adresse || undefined, npa: form.npa || undefined,
@@ -161,20 +166,33 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
             <div className="grid grid-cols-2 gap-2">
               <AppSelect
                 value={form.classeType}
-                onChange={(v) => setForm((f) => ({ ...f, classeType: v }))}
-                options={ELEVE_CLASSE_TYPES}
+                onChange={(v) => setForm((f) => ({ ...f, classeType: v, classeNum: "" }))}
+                options={ELEVE_CLASSE_TYPES.map((c) => ({
+                  value: c,
+                  label: c === "HSS" ? "HSS (Hors du système scolaire)" : c,
+                }))}
                 placeholder="Filière"
                 emptyOption={{ value: "", label: "Filière" }}
                 className="w-full"
               />
-              <AppSelect
-                value={form.classeNum}
-                onChange={(v) => setForm((f) => ({ ...f, classeNum: v }))}
-                options={CLASSE_NUM_OPTIONS}
-                placeholder="N°"
-                emptyOption={{ value: "", label: "N°" }}
-                className="w-full"
-              />
+              {usesClasseReferenceField(form.classeType) ? (
+                <input
+                  type="text"
+                  placeholder="Référence"
+                  value={form.classeNum}
+                  onChange={(e) => setForm((f) => ({ ...f, classeNum: e.target.value }))}
+                  className={inputCls}
+                />
+              ) : (
+                <AppSelect
+                  value={form.classeNum}
+                  onChange={(v) => setForm((f) => ({ ...f, classeNum: v }))}
+                  options={CLASSE_NUM_OPTIONS}
+                  placeholder="N°"
+                  emptyOption={{ value: "", label: "N°" }}
+                  className="w-full"
+                />
+              )}
             </div>
           </div>
           <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Adresse</label><input type="text" value={form.adresse} onChange={e => setForm(f => ({ ...f, adresse: e.target.value }))} className={inputCls} /></div>

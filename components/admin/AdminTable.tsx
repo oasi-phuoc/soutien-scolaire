@@ -10,6 +10,13 @@ import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { resetAllElevesAction, setPlacementModuleEnabledAction, purgePreviousSchoolYearMessagesAction } from "@/app/actions/admin";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
+  ELEVE_CLASSE_TYPES,
+  ELEVE_CLASSE_TYPE_OPTIONS,
+  matchesEleveClasseType,
+  type EleveClasseDeleteFilter,
+  type EleveClasseType,
+} from "@/lib/eleve-classe-types";
+import {
   currentSchoolYearLabel,
   currentSchoolYearStart,
   previousSchoolYearLabel,
@@ -179,16 +186,43 @@ function Spinner() {
 
 const ROLE_LABELS: Record<UserRow["role"], string> = { eleve: "Élève", prof: "Prof", admin: "Admin" };
 
-function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleveCount: number; onClose: () => void; onReset: () => void; onArchive: () => void }) {
+function IconHelp() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  );
+}
+
+function ResetElevesConfirm({
+  rows,
+  onClose,
+  onReset,
+}: {
+  rows: UserRow[];
+  onClose: () => void;
+  onReset: (deletedIds: Set<string>) => void;
+}) {
+  const eleveRows = rows.filter((r) => r.role === "eleve");
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
   const [okMsg, setOkMsg] = useState<string | null>(null);
   const [deleteChecked, setDeleteChecked] = useState(false);
-  const [archiveChecked, setArchiveChecked] = useState(false);
   const [purgeMessagesChecked, setPurgeMessagesChecked] = useState(false);
   const [deletePhrase, setDeletePhrase] = useState("");
   const [finalDeleteConfirm, setFinalDeleteConfirm] = useState(false);
+  const [deleteScope, setDeleteScope] = useState<"all" | "select">("all");
+  const [selectedTypes, setSelectedTypes] = useState<Set<EleveClasseDeleteFilter>>(new Set());
+  const [helpOpen, setHelpOpen] = useState(false);
   const requiredPhrase = "Supprimé tous les élèves";
+
+  const deleteFilter: EleveClasseDeleteFilter[] | "all" =
+    deleteScope === "all" ? "all" : [...selectedTypes];
+  const deleteTargetCount = eleveRows.filter((r) =>
+    matchesEleveClasseType(r.classe, deleteFilter),
+  ).length;
 
   const schoolStart = currentSchoolYearStart();
   const schoolStartLabel = schoolStart.toLocaleDateString("fr-CH", {
@@ -199,6 +233,15 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
   });
   const prevYearLabel = previousSchoolYearLabel();
   const currYearLabel = currentSchoolYearLabel();
+
+  function toggleClassType(type: EleveClasseDeleteFilter, checked: boolean) {
+    setSelectedTypes((prev) => {
+      const next = new Set(prev);
+      if (checked) next.add(type);
+      else next.delete(type);
+      return next;
+    });
+  }
 
   async function runPurgeMessages(): Promise<boolean> {
     const r = await purgePreviousSchoolYearMessagesAction();
@@ -217,28 +260,23 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
   function confirmDelete() {
     setErr(null);
     setOkMsg(null);
+    if (deleteScope === "select" && selectedTypes.size === 0) {
+      setErr("Sélectionnez au moins une filière à supprimer.");
+      return;
+    }
     startTransition(async () => {
       if (purgeMessagesChecked) {
         const ok = await runPurgeMessages();
         if (!ok) return;
       }
-      const r = await resetAllElevesAction("delete");
+      const r = await resetAllElevesAction(deleteFilter);
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
-      onReset();
-    });
-  }
-
-  function confirmArchive() {
-    setErr(null);
-    setOkMsg(null);
-    startTransition(async () => {
-      if (purgeMessagesChecked) {
-        const ok = await runPurgeMessages();
-        if (!ok) return;
-      }
-      const r = await resetAllElevesAction("archive");
-      if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
-      onArchive();
+      const deletedIds = new Set(
+        eleveRows
+          .filter((row) => matchesEleveClasseType(row.classe, deleteFilter))
+          .map((row) => row.id),
+      );
+      onReset(deletedIds);
     });
   }
 
@@ -251,8 +289,12 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
     });
   }
 
-  const canDelete = deleteChecked && deletePhrase === requiredPhrase && finalDeleteConfirm;
-  const currentYear = new Date().getFullYear();
+  const canDelete =
+    deleteChecked &&
+    deletePhrase === requiredPhrase &&
+    finalDeleteConfirm &&
+    (deleteScope === "all" || selectedTypes.size > 0) &&
+    deleteTargetCount > 0;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -260,13 +302,26 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
         <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Réinitialiser les élèves</h2>
         <p className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">
-          Cette action concerne <strong>{eleveCount} compte{eleveCount !== 1 ? "s" : ""} élève{eleveCount !== 1 ? "s" : ""}</strong>.
+          {deleteChecked ? (
+            <>
+              Cette action concerne{" "}
+              <strong>
+                {deleteTargetCount} compte{deleteTargetCount !== 1 ? "s" : ""} élève
+                {deleteTargetCount !== 1 ? "s" : ""}
+              </strong>
+              {deleteScope === "select" && selectedTypes.size > 0 && (
+                <> ({[...selectedTypes].join(", ")})</>
+              )}
+              .
+            </>
+          ) : (
+            <>
+              <strong>{eleveRows.length} compte{eleveRows.length !== 1 ? "s" : ""} élève{eleveRows.length !== 1 ? "s" : ""}</strong>{" "}
+              au total. Les comptes professeur ne sont pas concernés.
+            </>
+          )}
         </p>
         <div className="my-4 space-y-3 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
-          <label className="flex items-start gap-2 text-sm text-zinc-700 dark:text-zinc-300">
-            <input type="checkbox" checked={archiveChecked} onChange={e => { setArchiveChecked(e.target.checked); if (e.target.checked) setDeleteChecked(false); }} className="mt-1" />
-            <span>Changer tous les élèves en classe <strong>ancien {currentYear}</strong>.</span>
-          </label>
           <label className="flex items-start gap-2 text-sm text-teal-800 dark:text-teal-300">
             <input
               type="checkbox"
@@ -274,18 +329,81 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
               onChange={e => setPurgeMessagesChecked(e.target.checked)}
               className="mt-1"
             />
-            <span>
-              Supprimer tous les messages de messagerie (PE, PO, devoirs) de <strong>tous les comptes</strong>{" "}
-              antérieurs au début de l&apos;année scolaire <strong>{currYearLabel}</strong>{" "}
-              (avant le <strong>{schoolStartLabel}</strong>) — année précédente {prevYearLabel} et plus anciennes.
-            </span>
+            <span>Supprimer tous les messages de messagerie</span>
           </label>
           <label className="flex items-start gap-2 text-sm text-red-700 dark:text-red-300">
-            <input type="checkbox" checked={deleteChecked} onChange={e => { setDeleteChecked(e.target.checked); if (e.target.checked) setArchiveChecked(false); }} className="mt-1" />
-            <span>Supprimer définitivement tous les comptes élèves et leurs données.</span>
+            <input
+              type="checkbox"
+              checked={deleteChecked}
+              onChange={e => {
+                setDeleteChecked(e.target.checked);
+                if (!e.target.checked) {
+                  setDeleteScope("all");
+                  setSelectedTypes(new Set());
+                }
+              }}
+              className="mt-1"
+            />
+            <span className="flex flex-1 items-start gap-1.5">
+              <span>Supprimer définitivement tous les comptes élèves</span>
+              <span className="relative shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setHelpOpen((v) => !v)}
+                  className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-zinc-300 text-zinc-500 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:bg-zinc-800"
+                  aria-label="Aide sur les actions"
+                  aria-expanded={helpOpen}
+                >
+                  <IconHelp />
+                </button>
+                {helpOpen && (
+                  <div className="absolute right-0 top-6 z-20 w-64 rounded-lg border border-zinc-200 bg-white p-3 text-xs font-normal text-zinc-600 shadow-lg dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                    <p className="mb-2"><strong className="text-zinc-800 dark:text-zinc-100">Purger messages</strong> — supprime les messages PE, PO et devoirs antérieurs au début de l&apos;année scolaire {currYearLabel} (avant le {schoolStartLabel}, année {prevYearLabel} et plus anciennes).</p>
+                    <p><strong className="text-zinc-800 dark:text-zinc-100">Tout supprimer</strong> — supprime définitivement les comptes élèves sélectionnés et toutes leurs données. Les comptes professeur et admin sont conservés.</p>
+                  </div>
+                )}
+              </span>
+            </span>
           </label>
           {deleteChecked && (
-            <div className="space-y-2 border-t border-red-100 pt-3 dark:border-red-900/50">
+            <div className="space-y-3 border-t border-red-100 pt-3 dark:border-red-900/50">
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300">
+                  <input
+                    type="radio"
+                    name="delete-scope"
+                    checked={deleteScope === "all"}
+                    onChange={() => setDeleteScope("all")}
+                  />
+                  <span>Toutes les filières ({eleveRows.length} élève{eleveRows.length !== 1 ? "s" : ""})</span>
+                </label>
+                <label className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300">
+                  <input
+                    type="radio"
+                    name="delete-scope"
+                    checked={deleteScope === "select"}
+                    onChange={() => setDeleteScope("select")}
+                  />
+                  <span>Sélectionner des filières uniquement</span>
+                </label>
+                {deleteScope === "select" && (
+                  <div className="ml-6 flex flex-wrap gap-2">
+                    {ELEVE_CLASSE_TYPE_OPTIONS.map((opt) => (
+                      <label
+                        key={opt.value}
+                        className="flex items-center gap-1.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs dark:border-zinc-700"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedTypes.has(opt.value)}
+                          onChange={(e) => toggleClassType(opt.value, e.target.checked)}
+                        />
+                        <span>{opt.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
               <label className="block text-xs font-semibold text-red-700 dark:text-red-300">
                 Écrivez exactement : <span className="font-mono">{requiredPhrase}</span>
               </label>
@@ -304,17 +422,14 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
           <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
           <button
             onClick={confirmPurgeMessages}
-            disabled={pending || !purgeMessagesChecked || archiveChecked || deleteChecked}
+            disabled={pending || !purgeMessagesChecked || deleteChecked}
             className="rounded-2xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-40"
           >
-            {pending && purgeMessagesChecked && !archiveChecked && !deleteChecked ? "Purge…" : "Purger messages"}
-          </button>
-          <button onClick={confirmArchive} disabled={pending || !archiveChecked} className="rounded-2xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-600 disabled:opacity-40">
-            Valider archivage
+            {pending && purgeMessagesChecked && !deleteChecked ? "Purge…" : "Purger messages"}
           </button>
           <button onClick={confirmDelete} disabled={pending || !canDelete} className="flex items-center gap-2 rounded-2xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-40">
-            {pending ? <Spinner /> : <IconTrash />}
-            {pending ? "Suppression…" : "Tout supprimer"}
+            {pending && deleteChecked ? <Spinner /> : <IconTrash />}
+            {pending && deleteChecked ? "Suppression…" : "Tout supprimer"}
           </button>
         </div>
       </div>
@@ -723,15 +838,10 @@ export function AdminTable({
       )}
       {resetConfirming && (
         <ResetElevesConfirm
-          eleveCount={rows.filter(r => r.role === "eleve").length}
+          rows={rows}
           onClose={() => setResetConfirming(false)}
-          onReset={() => {
-            setRows(rs => rs.filter(r => r.role !== "eleve"));
-            setResetConfirming(false);
-          }}
-          onArchive={() => {
-            const year = new Date().getFullYear();
-            setRows(rs => rs.map(r => r.role === "eleve" ? { ...r, classe: `ancien ${year}` } : r));
+          onReset={(deletedIds) => {
+            setRows((rs) => rs.filter((r) => !deletedIds.has(r.id)));
             setResetConfirming(false);
           }}
         />

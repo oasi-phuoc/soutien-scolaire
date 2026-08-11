@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { currentSchoolYearStartIso } from "@/lib/school-year";
+import { ELEVE_CLASSE_TYPES, matchesEleveClasseType, type EleveClasseDeleteFilter } from "@/lib/eleve-classe-types";
 
 type CallerRole = "admin" | "prof" | null;
 
@@ -51,35 +52,38 @@ export async function deleteUserAction(userId: string) {
   return { ok: true };
 }
 
-export async function resetAllElevesAction(mode: "delete" | "archive" = "delete") {
+export async function resetAllElevesAction(
+  classTypes: EleveClasseDeleteFilter[] | "all" = "all",
+): Promise<{ ok: boolean; reason?: string; count?: number }> {
   const caller = await getCallerRole();
   if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
   const svc = createServiceClient();
   if (!svc) return { ok: false, reason: "Service role non configuré" };
 
-  if (mode === "archive") {
-    const year = new Date().getFullYear();
-    const { error, count } = await svc
-      .from("profiles")
-      .update({ classe: `ancien ${year}`, updated_at: new Date().toISOString() }, { count: "exact" })
-      .eq("role", "eleve");
-    if (error) return { ok: false, reason: error.message };
-    revalidatePath("/admin");
-    return { ok: true, count: count ?? 0 };
+  if (classTypes !== "all") {
+    const validTypes = new Set<string>([...ELEVE_CLASSE_TYPES, "ancien"]);
+    const valid = classTypes.filter((t) => validTypes.has(t));
+    if (valid.length === 0) {
+      return { ok: false, reason: "Sélectionnez au moins une filière." };
+    }
   }
 
   const { data: eleves, error } = await svc
     .from("profiles")
-    .select("id")
+    .select("id, classe")
     .eq("role", "eleve");
   if (error) return { ok: false, reason: error.message };
 
-  for (const e of eleves ?? []) {
+  const targets = (eleves ?? []).filter((e) =>
+    matchesEleveClasseType(e.classe as string | null, classTypes),
+  );
+
+  for (const e of targets) {
     await svc.auth.admin.deleteUser(e.id);
   }
 
   revalidatePath("/admin");
-  return { ok: true, count: (eleves ?? []).length };
+  return { ok: true, count: targets.length };
 }
 
 /**

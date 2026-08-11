@@ -8,7 +8,12 @@ import {
   type MyProfile,
 } from "@/app/actions/account";
 import { AppSelect } from "@/components/ui/AppSelect";
-import { ELEVE_CLASSE_TYPE_OPTIONS } from "@/lib/eleve-classe-types";
+import {
+  ELEVE_CLASSE_TYPE_OPTIONS,
+  buildEleveClasse,
+  parseEleveClasse,
+  usesClasseReferenceField,
+} from "@/lib/eleve-classe-types";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
@@ -59,12 +64,8 @@ function Spinner() {
 }
 
 function parseClasse(classe: string | null) {
-  if (!classe) return { classeType: "", classeNum: "" };
-  if (classe.startsWith("ancien")) {
-    return { classeType: "ancien", classeNum: classe.slice("ancien".length).trim() };
-  }
-  const parts = classe.split(" ");
-  return { classeType: parts[0] ?? "", classeNum: parts[1] ?? "" };
+  const parsed = parseEleveClasse(classe);
+  return { classeType: parsed.classeType, classeNum: parsed.classeSuffix };
 }
 
 export function MonCompteForm({ profile }: { profile: MyProfile }) {
@@ -96,9 +97,7 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
         profile.role === "eleve"
           ? form.classeType === "ancien"
             ? (form.classeNum ? `ancien ${form.classeNum}` : "ancien")
-            : form.classeType && form.classeNum
-              ? `${form.classeType} ${form.classeNum}`
-              : undefined
+            : buildEleveClasse(form.classeType, form.classeNum) ?? undefined
           : undefined;
       const result = await updateMyProfileAction({
         prenom: form.prenom,
@@ -197,6 +196,14 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
                   <input
                     type="text"
                     placeholder="Année"
+                    value={form.classeNum}
+                    onChange={(e) => setForm((f) => ({ ...f, classeNum: e.target.value }))}
+                    className={inputCls}
+                  />
+                ) : usesClasseReferenceField(form.classeType) ? (
+                  <input
+                    type="text"
+                    placeholder="Référence"
                     value={form.classeNum}
                     onChange={(e) => setForm((f) => ({ ...f, classeNum: e.target.value }))}
                     className={inputCls}

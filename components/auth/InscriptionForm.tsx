@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { signUpAction } from "@/app/actions/auth";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { buildLoginId } from "@/lib/auth/identifier";
-import { ELEVE_CLASSE_TYPE_OPTIONS } from "@/lib/eleve-classe-types";
+import { ELEVE_CLASSE_TYPE_OPTIONS, usesClasseReferenceField } from "@/lib/eleve-classe-types";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const LANGUES = [
@@ -112,6 +112,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
 
   const loginId = buildLoginId(prenom, nom);
   const isAncien = classeType === "ancien";
+  const usesReference = usesClasseReferenceField(classeType);
 
   const passwordMismatch = confirmPassword.length > 0 && password !== confirmPassword;
 
@@ -126,7 +127,11 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
       return;
     }
     if (!isAncien && !classeNum) {
-      setFormError("Veuillez sélectionner un numéro de classe.");
+      setFormError(
+        usesReference
+          ? "Veuillez saisir une référence."
+          : "Veuillez sélectionner un numéro de classe.",
+      );
       return;
     }
     if (!langue) {
@@ -221,16 +226,38 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
               emptyOption={{ value: "", label: "Filière" }}
               className="w-full"
             />
-            <AppSelect
-              name="classe_num"
-              value={isAncien ? "" : classeNum}
-              onChange={setClasseNum}
-              options={CLASSE_NUM_OPTIONS}
-              placeholder={isAncien ? "—" : "N° de la classe"}
-              emptyOption={{ value: "", label: isAncien ? "—" : "N° de la classe" }}
-              disabled={isAncien}
-              className={`w-full ${isAncien ? "opacity-40" : ""}`}
-            />
+            {isAncien ? (
+              <AppSelect
+                name="classe_num"
+                value=""
+                onChange={() => {}}
+                options={CLASSE_NUM_OPTIONS}
+                placeholder="—"
+                emptyOption={{ value: "", label: "—" }}
+                disabled
+                className="w-full opacity-40"
+              />
+            ) : usesReference ? (
+              <input
+                name="classe_num"
+                type="text"
+                required
+                value={classeNum}
+                onChange={(e) => setClasseNum(e.target.value)}
+                placeholder="Référence"
+                className={inputCls}
+              />
+            ) : (
+              <AppSelect
+                name="classe_num"
+                value={classeNum}
+                onChange={setClasseNum}
+                options={CLASSE_NUM_OPTIONS}
+                placeholder="N° de la classe"
+                emptyOption={{ value: "", label: "N° de la classe" }}
+                className="w-full"
+              />
+            )}
           </div>
         </div>
 
