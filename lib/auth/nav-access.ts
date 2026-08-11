@@ -207,21 +207,29 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
       lessonFlags = flagsFromRow(row as LessonAccessRow, false);
     } else {
       // Fallback si RPC absente : colonnes profil (+ ancienne RPC free access)
-      const [{ data: freeRes }, { data: profile }] = await Promise.all([
-        supabase.rpc("can_access_free_lessons"),
-        supabase
+      const { data: freeRes } = await supabase.rpc("can_access_free_lessons");
+      const granular = await supabase
+        .from("profiles")
+        .select(
+          "can_free_access, can_partial_french, can_partial_french_grammar, can_partial_french_comm, can_partial_math, can_partial_math_a3, can_partial_math_a8, can_partial_math_g3",
+        )
+        .eq("id", user.id)
+        .maybeSingle();
+
+      let profileRow = granular.data as LessonAccessRow | null;
+      if (granular.error) {
+        const legacy = await supabase
           .from("profiles")
-          .select(
-            "can_free_access, can_partial_french, can_partial_french_grammar, can_partial_french_comm, can_partial_math, can_partial_math_a3, can_partial_math_a8, can_partial_math_g3",
-          )
+          .select("can_free_access, can_partial_french, can_partial_math")
           .eq("id", user.id)
-          .maybeSingle(),
-      ]);
-      const p = (profile ?? {}) as LessonAccessRow;
+          .maybeSingle();
+        profileRow = (legacy.data ?? {}) as LessonAccessRow;
+      }
+
       lessonFlags = flagsFromRow(
         {
-          ...p,
-          can_free_access: Boolean(freeRes ?? p.can_free_access),
+          ...(profileRow ?? {}),
+          can_free_access: Boolean(freeRes ?? profileRow?.can_free_access),
         },
         false,
       );

@@ -218,14 +218,38 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const svc = createServiceClient();
   if (!svc) return { ok: false, error: "Service role non configuré" };
 
-  const [{ data, error }, { data: authData }] = await Promise.all([
+  const {
+    PROFILE_LESSON_ACCESS_COLS,
+    PROFILE_LESSON_ACCESS_LEGACY_COLS,
+    isMissingColumnError,
+    mapProfileLessonAccess,
+  } = await import("@/lib/auth/profile-lesson-access");
+
+  const baseCols =
+    "id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, placement_test_history, placement_combined_profile";
+
+  const [{ data: authData }, first] = await Promise.all([
+    svc.auth.admin.getUserById(userId),
     svc
       .from("profiles")
-      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, can_free_access, can_partial_french, can_partial_french_grammar, can_partial_french_comm, can_partial_math, can_partial_math_a3, can_partial_math_a8, can_partial_math_g3, placement_test_history, placement_combined_profile")
+      .select(`${baseCols}, ${PROFILE_LESSON_ACCESS_COLS}`)
       .eq("id", userId)
       .single(),
-    svc.auth.admin.getUserById(userId),
   ]);
+
+  let data: Record<string, unknown> | null = first.data as Record<string, unknown> | null;
+  let error = first.error;
+
+  // Migration granulaire pas encore appliquée → retombe sur les colonnes legacy.
+  if (error && isMissingColumnError(error)) {
+    const retry = await svc
+      .from("profiles")
+      .select(`${baseCols}, ${PROFILE_LESSON_ACCESS_LEGACY_COLS}`)
+      .eq("id", userId)
+      .single();
+    data = retry.data as Record<string, unknown> | null;
+    error = retry.error;
+  }
 
   if (error || !data) return { ok: false, error: error?.message ?? "Utilisateur non trouvé" };
 
@@ -240,32 +264,14 @@ export async function getUserForAdminAction(userId: string): Promise<{
     frenchCounted?: number;
     pendingFrench?: number;
   } | null;
-  const row = data as {
-    can_free_access?: boolean;
-    can_partial_french?: boolean;
-    can_partial_french_grammar?: boolean;
-    can_partial_french_comm?: boolean;
-    can_partial_math?: boolean;
-    can_partial_math_a3?: boolean;
-    can_partial_math_a8?: boolean;
-    can_partial_math_g3?: boolean;
-  };
+  const access = mapProfileLessonAccess(data);
 
   return {
     ok: true,
     user: {
       ...data,
       can_print: Boolean(data.can_print),
-      can_free_access: Boolean(row.can_free_access),
-      can_partial_french_grammar: Boolean(
-        row.can_partial_french_grammar ?? row.can_partial_french,
-      ),
-      can_partial_french_comm: Boolean(
-        row.can_partial_french_comm ?? row.can_partial_french,
-      ),
-      can_partial_math_a3: Boolean(row.can_partial_math_a3 ?? row.can_partial_math),
-      can_partial_math_a8: Boolean(row.can_partial_math_a8),
-      can_partial_math_g3: Boolean(row.can_partial_math_g3),
+      ...access,
       email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
       placement_combined: combined?.total !== undefined ? {
@@ -374,11 +380,25 @@ export async function setUserPartialFlagAction(
   if (error) {
     const svc = createServiceClient();
     if (!svc) return { ok: false, reason: error.message };
+    const { isMissingColumnError } = await import("@/lib/auth/profile-lesson-access");
     const { error: svcErr } = await svc
       .from("profiles")
       .update({ [columnByFlag[flag]]: enabled })
       .eq("id", userId);
-    if (svcErr) return { ok: false, reason: svcErr.message };
+    if (svcErr && isMissingColumnError(svcErr)) {
+      // Migration absente : approxime via les flags binaires legacy.
+      const legacyCol =
+        flag === "french_grammar" || flag === "french_comm"
+          ? "can_partial_french"
+          : "can_partial_math";
+      const { error: legacyErr } = await svc
+        .from("profiles")
+        .update({ [legacyCol]: enabled })
+        .eq("id", userId);
+      if (legacyErr) return { ok: false, reason: legacyErr.message };
+    } else if (svcErr) {
+      return { ok: false, reason: svcErr.message };
+    }
   }
 
   revalidatePath("/admin");

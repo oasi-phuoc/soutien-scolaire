@@ -382,16 +382,39 @@ export async function getClassStudentsSuiviAction(
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, students: [], error: "Erreur serveur." };
 
+  const {
+    PROFILE_LESSON_ACCESS_COLS,
+    PROFILE_LESSON_ACCESS_LEGACY_COLS,
+    isMissingColumnError,
+    mapProfileLessonAccess,
+  } = await import("@/lib/auth/profile-lesson-access");
+
+  const baseCols =
+    "id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile, placement_test_history, placement_french_history";
+
   let query = supabase
     .from("profiles")
-    .select("id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile, placement_test_history, placement_french_history, can_free_access, can_partial_french, can_partial_french_grammar, can_partial_french_comm, can_partial_math, can_partial_math_a3, can_partial_math_a8, can_partial_math_g3")
+    .select(`${baseCols}, ${PROFILE_LESSON_ACCESS_COLS}`)
     .eq("role", "eleve")
     .eq("classe", classLabel)
     .order("nom");
 
   if (limit != null) query = query.limit(limit);
 
-  const { data: profiles, error: pErr } = await query;
+  let { data: profiles, error: pErr } = await query;
+
+  if (pErr && isMissingColumnError(pErr)) {
+    let legacyQuery = supabase
+      .from("profiles")
+      .select(`${baseCols}, ${PROFILE_LESSON_ACCESS_LEGACY_COLS}`)
+      .eq("role", "eleve")
+      .eq("classe", classLabel)
+      .order("nom");
+    if (limit != null) legacyQuery = legacyQuery.limit(limit);
+    const retry = await legacyQuery;
+    profiles = retry.data as typeof profiles;
+    pErr = retry.error;
+  }
 
   if (pErr) return { ok: false, students: [], error: pErr.message };
 
@@ -466,20 +489,7 @@ export async function getClassStudentsSuiviAction(
       telephone: (p.telephone as string | null) ?? null,
       langue: (p.langue as string | null) ?? null,
       progress_updated_at: (p.progress_updated_at as string | null) ?? null,
-      can_free_access: Boolean(p.can_free_access),
-      can_partial_french_grammar: Boolean(
-        (p as { can_partial_french_grammar?: boolean }).can_partial_french_grammar ??
-          p.can_partial_french,
-      ),
-      can_partial_french_comm: Boolean(
-        (p as { can_partial_french_comm?: boolean }).can_partial_french_comm ??
-          p.can_partial_french,
-      ),
-      can_partial_math_a3: Boolean(
-        (p as { can_partial_math_a3?: boolean }).can_partial_math_a3 ?? p.can_partial_math,
-      ),
-      can_partial_math_a8: Boolean((p as { can_partial_math_a8?: boolean }).can_partial_math_a8),
-      can_partial_math_g3: Boolean((p as { can_partial_math_g3?: boolean }).can_partial_math_g3),
+      ...mapProfileLessonAccess(p),
       math_done: math.done,
       math_total: math.total,
       math_pct: math.pct,
@@ -574,7 +584,39 @@ export async function setStudentLessonAccessAction(
   const svc = createServiceClient();
   if (!svc) return { ok: false, reason: "Service role non configuré." };
 
-  const { error } = await svc.from("profiles").update(payload).eq("id", studentId);
+  const { isMissingColumnError } = await import("@/lib/auth/profile-lesson-access");
+
+  let { error } = await svc.from("profiles").update(payload).eq("id", studentId);
+
+  // Sans migration granulaire : mapper vers can_partial_french / can_partial_math.
+  if (error && isMissingColumnError(error)) {
+    const legacy: Record<string, boolean> = {};
+    if (typeof payload.can_free_access === "boolean") {
+      legacy.can_free_access = payload.can_free_access;
+    }
+    const frKeys = ["can_partial_french_grammar", "can_partial_french_comm"] as const;
+    const mathKeys = ["can_partial_math_a3", "can_partial_math_a8", "can_partial_math_g3"] as const;
+    const touchedFr = frKeys.some((k) => typeof payload[k] === "boolean");
+    const touchedMath = mathKeys.some((k) => typeof payload[k] === "boolean");
+    if (payload.can_free_access === true) {
+      legacy.can_partial_french = false;
+      legacy.can_partial_math = false;
+    } else {
+      if (touchedFr) {
+        legacy.can_partial_french = Boolean(
+          payload.can_partial_french_grammar || payload.can_partial_french_comm,
+        );
+      }
+      if (touchedMath) {
+        legacy.can_partial_math = Boolean(
+          payload.can_partial_math_a3 || payload.can_partial_math_a8 || payload.can_partial_math_g3,
+        );
+      }
+    }
+    const retry = await svc.from("profiles").update(legacy).eq("id", studentId);
+    error = retry.error;
+  }
+
   if (error) return { ok: false, reason: error.message };
 
   revalidatePath("/suivi");
