@@ -1,14 +1,25 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { frenchProgress, lectureProgress, mathProgress } from "@/lib/suivi/progress-metrics";
 import {
   bestFrenchPlacementFromLast5,
   bestMathPlacementFromLast5,
 } from "@/lib/suivi/placement-best";
+import { syncSchoolClassesFromProfiles } from "@/lib/suivi/ensure-school-class";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { PlacementFrenchSession, PlacementMathAttempt } from "@/lib/placement/types";
+
+function createServiceClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
 
 export type TeacherClassRow = {
   class_id: string;
@@ -184,6 +195,11 @@ export async function getAttributionClassesAction(): Promise<{
   const ctx = await getSuiviContextAction();
   if (!ctx) return { ok: false, classes: [], error: "Non autorisé." };
   if (!ctx.hasAccess) return { ok: false, classes: [], error: "Aucune classe affectée." };
+
+  // HSS (et toute nouvelle filière) : crée school_classes + class_members
+  // à partir de profiles.classe pour qu’elles soient attribuables comme CSC/CFR.
+  const svc = createServiceClient();
+  if (svc) await syncSchoolClassesFromProfiles(svc);
 
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, classes: [], error: "Erreur serveur." };
@@ -909,6 +925,9 @@ export async function getProfessorAttributionsAction(): Promise<{
   if (role !== "admin") {
     return { ok: false, professors: [], classes: [], error: "Réservé aux administrateurs." };
   }
+
+  const svc = createServiceClient();
+  if (svc) await syncSchoolClassesFromProfiles(svc);
 
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, professors: [], classes: [], error: "Erreur serveur." };

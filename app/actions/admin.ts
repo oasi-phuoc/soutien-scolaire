@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { currentSchoolYearStartIso } from "@/lib/school-year";
 import { ELEVE_CLASSE_TYPES, matchesEleveClasseType, type EleveClasseDeleteFilter } from "@/lib/eleve-classe-types";
+import { ensureSchoolClassForLabel } from "@/lib/suivi/ensure-school-class";
 
 type CallerRole = "admin" | "prof" | null;
 
@@ -425,7 +426,11 @@ export async function updateUserProfileAction(
   if (!svc) return { ok: false, reason: "Service role non configuré" };
   const { error } = await svc.from("profiles").update(data).eq("id", userId);
   if (error) return { ok: false, reason: error.message };
+  if (data.classe?.trim()) {
+    await ensureSchoolClassForLabel(svc, data.classe, userId);
+  }
   revalidatePath("/admin");
+  revalidatePath("/suivi");
   return { ok: true };
 }
 

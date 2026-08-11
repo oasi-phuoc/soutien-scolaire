@@ -1,8 +1,19 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { createClient } from "@supabase/supabase-js";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { isPivotCode } from "@/lib/pivot-langs";
+import { ensureSchoolClassForLabel } from "@/lib/suivi/ensure-school-class";
+
+function createServiceClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
 
 export type MyProfile = {
   id: string;
@@ -99,8 +110,14 @@ export async function updateMyProfileAction(
 
   if (error) return { ok: false, reason: error.message };
 
+  if (payload.classe) {
+    const svc = createServiceClient();
+    if (svc) await ensureSchoolClassForLabel(svc, payload.classe, user.id);
+  }
+
   revalidatePath("/compte");
   revalidatePath("/compte/mon-compte");
+  revalidatePath("/suivi");
   return { ok: true };
 }
 

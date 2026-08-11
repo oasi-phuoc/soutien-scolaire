@@ -6,6 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { buildLoginId, loginIdToEmail } from "@/lib/auth/identifier";
 import { buildEleveClasse } from "@/lib/eleve-classe-types";
+import { ensureSchoolClassForLabel } from "@/lib/suivi/ensure-school-class";
 
 function createServiceClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -88,9 +89,10 @@ export async function signUpAction(
   let loginId = baseId;
   let email = loginIdToEmail(loginId);
   let created = false;
+  let createdUserId: string | null = null;
 
   for (let attempt = 0; attempt < 20; attempt++) {
-    const { error } = await svc.auth.admin.createUser({
+    const { data, error } = await svc.auth.admin.createUser({
       email,
       password,
       email_confirm: true,
@@ -109,6 +111,7 @@ export async function signUpAction(
 
     if (!error) {
       created = true;
+      createdUserId = data.user?.id ?? null;
       break;
     }
 
@@ -123,6 +126,13 @@ export async function signUpAction(
   }
 
   if (!created) return { ok: false, reason: "Cet identifiant est déjà utilisé, veuillez contacter l'administrateur." };
+
+  // Enregistre la classe dans school_classes (HSS inclus) pour le suivi pédagogique.
+  if (createdUserId) {
+    await ensureSchoolClassForLabel(svc, classe, createdUserId);
+  } else {
+    await ensureSchoolClassForLabel(svc, classe);
+  }
 
   return { ok: true, loginId };
 }

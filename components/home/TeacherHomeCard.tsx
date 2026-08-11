@@ -103,7 +103,6 @@ export function TeacherHomeCard() {
             label: c.label,
             student_count: c.student_count,
           }))}
-          levels={["CSC", "CFR", "EPL", "CPR"]}
         />
       </div>
     </section>
