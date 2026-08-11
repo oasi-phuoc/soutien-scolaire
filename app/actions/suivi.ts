@@ -587,6 +587,23 @@ export async function setStudentLessonAccessAction(
   return { ok: true };
 }
 
+/** Admin ou prof de la classe : change la classe (filière) d'un élève. */
+export async function setStudentClasseAction(
+  studentId: string,
+  classe: string,
+): Promise<{ ok: boolean; reason?: string; classe?: string }> {
+  const gate = await assertCanManageStudentLessonAccess(studentId);
+  if (!gate.ok) return gate;
+
+  const trimmed = classe.trim();
+  if (!trimmed) return { ok: false, reason: "Indiquez une classe." };
+
+  const { updateUserProfileAction } = await import("@/app/actions/admin");
+  const r = await updateUserProfileAction(studentId, { classe: trimmed });
+  if (!r.ok) return { ok: false, reason: r.reason };
+  return { ok: true, classe: trimmed };
+}
+
 export async function setPrimaryClassAction(classId: string): Promise<{ ok: boolean; reason?: string }> {
   const role = await getCallerRole();
   if (!role) return { ok: false, reason: "Non autorisé." };

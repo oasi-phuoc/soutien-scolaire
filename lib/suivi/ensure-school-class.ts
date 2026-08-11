@@ -54,6 +54,12 @@ export async function ensureSchoolClassForLabel(
       { class_id: classId, student_id: studentId },
       { onConflict: "class_id,student_id" },
     );
+    // Un élève n'appartient qu'à une classe (profiles.classe) : retire les autres memberships.
+    await svc
+      .from("class_members")
+      .delete()
+      .eq("student_id", studentId)
+      .neq("class_id", classId);
   }
 
   return { ok: true, classId };

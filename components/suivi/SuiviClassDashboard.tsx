@@ -155,6 +155,15 @@ export function SuiviClassDashboard({
     );
   }
 
+  function handleClasseChange(studentId: string, newClasse: string) {
+    setStudents((prev) =>
+      prev
+        .map((s) => (s.id === studentId ? { ...s, classe: newClasse } : s))
+        .filter((s) => s.id !== studentId || s.classe === classLabel),
+    );
+    setExpandedInfoId((id) => (id === studentId ? null : id));
+  }
+
   if (loading) {
     return (
       <div className="space-y-2 py-2 animate-pulse">
@@ -271,7 +280,11 @@ export function SuiviClassDashboard({
                     {infoOpen && (
                       <tr className="bg-zinc-50 dark:bg-zinc-900/50">
                         <td colSpan={9} className="px-4 py-4">
-                          <StudentPersonalInfoCard student={s} onAccessChange={handleAccessChange} />
+                          <StudentPersonalInfoCard
+                            student={s}
+                            onAccessChange={handleAccessChange}
+                            onClasseChange={handleClasseChange}
+                          />
                         </td>
                       </tr>
                     )}

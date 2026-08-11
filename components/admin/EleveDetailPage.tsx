@@ -294,7 +294,10 @@ export function EleveDetailPage({
   const isSelf = user.id === currentUserId;
   const canDelete = !isSuivi && currentUserRole === "admin" && !isSelf && user.role !== "admin";
   const canChangeRole = !isSuivi && currentUserRole === "admin" && !isSelf;
-  const canEditAccount = !isSuivi && currentUserRole === "admin";
+  // Admin : tous les comptes (admin + suivi). Prof : élèves de ses classes.
+  const canEditAccount =
+    currentUserRole === "admin" ||
+    (currentUserRole === "prof" && user.role === "eleve");
   const canTogglePrint = !isSuivi && currentUserRole === "admin" && user.role !== "admin";
   const showTeacherAssignment = !isSuivi && currentUserRole === "admin" && user.role === "prof";
 
@@ -462,6 +465,12 @@ export function EleveDetailPage({
           <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
             <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Informations</h2>
             <dl className="space-y-2 text-sm">
+              <div className="flex gap-2">
+                <dt className="w-28 shrink-0 text-zinc-400">Classe</dt>
+                <dd className="font-medium text-zinc-700 dark:text-zinc-300">
+                  {user.classe || "—"}
+                </dd>
+              </div>
               {user.langue && (
                 <div className="flex gap-2">
                   <dt className="w-28 shrink-0 text-zinc-400">Langue</dt>
@@ -682,7 +691,18 @@ export function EleveDetailPage({
         <EditModal
           user={user}
           onClose={() => setEditing(false)}
-          onSaved={data => { setUser(u => ({ ...u, ...data })); setEditing(false); }}
+          onSaved={(data) => {
+            const prevClasse = user.classe;
+            setUser((u) => ({ ...u, ...data }));
+            setEditing(false);
+            if (
+              isSuivi &&
+              data.classe &&
+              data.classe !== prevClasse
+            ) {
+              router.replace(`/suivi/classes/${encodeURIComponent(data.classe)}`);
+            }
+          }}
         />
       )}
       {confirming && (
