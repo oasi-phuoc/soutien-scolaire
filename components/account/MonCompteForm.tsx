@@ -10,6 +10,7 @@ import {
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
   ELEVE_CLASSE_TYPE_OPTIONS,
+  HSS_CLASSE_HINT,
   buildEleveClasse,
   parseEleveClasse,
   usesClasseReferenceField,
@@ -95,9 +96,7 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
     startProfileTransition(async () => {
       const classe =
         profile.role === "eleve"
-          ? form.classeType === "ancien"
-            ? (form.classeNum ? `ancien ${form.classeNum}` : "ancien")
-            : buildEleveClasse(form.classeType, form.classeNum) ?? undefined
+          ? buildEleveClasse(form.classeType, form.classeNum) ?? undefined
           : undefined;
       const result = await updateMyProfileAction({
         prenom: form.prenom,
@@ -183,24 +182,13 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
               <div className="grid grid-cols-2 gap-2">
                 <AppSelect
                   value={form.classeType}
-                  onChange={(v) => setForm((f) => ({ ...f, classeType: v, classeNum: v === "ancien" ? f.classeNum : f.classeNum }))}
-                  options={[
-                    ...ELEVE_CLASSE_TYPE_OPTIONS,
-                    { value: "ancien", label: "Ancien élève" },
-                  ]}
+                  onChange={(v) => setForm((f) => ({ ...f, classeType: v, classeNum: "" }))}
+                  options={ELEVE_CLASSE_TYPE_OPTIONS}
                   placeholder="Filière"
                   emptyOption={{ value: "", label: "Filière" }}
                   className="w-full"
                 />
-                {form.classeType === "ancien" ? (
-                  <input
-                    type="text"
-                    placeholder="Année"
-                    value={form.classeNum}
-                    onChange={(e) => setForm((f) => ({ ...f, classeNum: e.target.value }))}
-                    className={inputCls}
-                  />
-                ) : usesClasseReferenceField(form.classeType) ? (
+                {usesClasseReferenceField(form.classeType) ? (
                   <input
                     type="text"
                     placeholder="Référence"
@@ -219,6 +207,9 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
                   />
                 )}
               </div>
+              {usesClasseReferenceField(form.classeType) && (
+                <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">{HSS_CLASSE_HINT}</p>
+              )}
             </div>
           )}
 

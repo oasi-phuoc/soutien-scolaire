@@ -23,6 +23,7 @@ import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignmen
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
   ELEVE_CLASSE_TYPE_OPTIONS,
+  HSS_CLASSE_HINT,
   buildEleveClasse,
   parseEleveClasse,
   usesClasseReferenceField,
@@ -191,6 +192,9 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
                 />
               )}
             </div>
+            {usesClasseReferenceField(form.classeType) && (
+              <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">{HSS_CLASSE_HINT}</p>
+            )}
           </div>
           <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Adresse</label><input type="text" value={form.adresse} onChange={e => setForm(f => ({ ...f, adresse: e.target.value }))} className={inputCls} /></div>
           <div className="grid grid-cols-2 gap-3">

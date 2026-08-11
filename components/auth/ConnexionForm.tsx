@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { signInAction } from "@/app/actions/auth";
 
@@ -369,9 +368,10 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
 
       <p className="mt-5 text-center text-sm text-zinc-600 dark:text-zinc-400">
         Pas encore de compte ?{" "}
-        <Link href="/inscription" className="font-semibold text-green-800 underline dark:text-green-400">
+        {/* <a> (pas Link) : navigation pleine page — évite un éventuel SW/cache qui renvoyait vers connexion?next=/inscription */}
+        <a href="/inscription" className="font-semibold text-green-800 underline dark:text-green-400">
           Créer un compte
-        </Link>
+        </a>
       </p>
 
       <div className="mt-6 border-t border-zinc-100 pt-5 dark:border-zinc-800">

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { signUpAction } from "@/app/actions/auth";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { buildLoginId } from "@/lib/auth/identifier";
-import { ELEVE_CLASSE_TYPE_OPTIONS, usesClasseReferenceField } from "@/lib/eleve-classe-types";
+import { ELEVE_CLASSE_TYPE_OPTIONS, HSS_CLASSE_HINT, usesClasseReferenceField } from "@/lib/eleve-classe-types";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const LANGUES = [
@@ -111,7 +111,6 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
   const [pending, startTransition] = useTransition();
 
   const loginId = buildLoginId(prenom, nom);
-  const isAncien = classeType === "ancien";
   const usesReference = usesClasseReferenceField(classeType);
 
   const passwordMismatch = confirmPassword.length > 0 && password !== confirmPassword;
@@ -126,7 +125,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
       setFormError("Veuillez sélectionner une filière.");
       return;
     }
-    if (!isAncien && !classeNum) {
+    if (!classeNum) {
       setFormError(
         usesReference
           ? "Veuillez saisir une référence."
@@ -217,27 +216,13 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
             <AppSelect
               name="classe_type"
               value={classeType}
-              onChange={(v) => { setClasseType(v); if (v === "ancien") setClasseNum(""); }}
-              options={[
-                ...ELEVE_CLASSE_TYPE_OPTIONS,
-                { value: "ancien", label: "Ancien élève" },
-              ]}
+              onChange={(v) => { setClasseType(v); setClasseNum(""); }}
+              options={ELEVE_CLASSE_TYPE_OPTIONS}
               placeholder="Filière"
               emptyOption={{ value: "", label: "Filière" }}
               className="w-full"
             />
-            {isAncien ? (
-              <AppSelect
-                name="classe_num"
-                value=""
-                onChange={() => {}}
-                options={CLASSE_NUM_OPTIONS}
-                placeholder="—"
-                emptyOption={{ value: "", label: "—" }}
-                disabled
-                className="w-full opacity-40"
-              />
-            ) : usesReference ? (
+            {usesReference ? (
               <input
                 name="classe_num"
                 type="text"
@@ -259,6 +244,11 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
               />
             )}
           </div>
+          {usesReference && (
+            <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">
+              {HSS_CLASSE_HINT}
+            </p>
+          )}
         </div>
 
         {/* Langue */}

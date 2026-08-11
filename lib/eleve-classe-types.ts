@@ -5,9 +5,12 @@ export type EleveClasseType = (typeof ELEVE_CLASSE_TYPES)[number];
 
 export const HSS_CLASSE_TYPE = "HSS" as const;
 
+/** Libellé affiché sous le select quand HSS est choisi. */
+export const HSS_CLASSE_HINT = "Hors du système scolaire";
+
 export const ELEVE_CLASSE_TYPE_OPTIONS = ELEVE_CLASSE_TYPES.map((c) => ({
   value: c,
-  label: c === HSS_CLASSE_TYPE ? "HSS (Hors du système scolaire)" : c,
+  label: c,
 }));
 
 export function isHssClasseType(type: string): boolean {

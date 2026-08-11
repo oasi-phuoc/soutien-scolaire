@@ -16,6 +16,17 @@ function shouldRegisterServiceWorker(): boolean {
   if (host.endsWith(".vercel.app") && !PRODUCTION_VERCEL_HOSTS.has(host)) {
     return false;
   }
+  // Pages auth : ne pas enregistrer (évite les erreurs console au clic « Créer un compte »).
+  const path = window.location.pathname.replace(/\/$/, "") || "/";
+  if (
+    path === "/connexion"
+    || path === "/inscription"
+    || path === "/mot-de-passe-oublie"
+    || path === "/reinitialiser-mot-de-passe"
+    || path === "/verification-otp"
+  ) {
+    return false;
+  }
   return true;
 }
 
