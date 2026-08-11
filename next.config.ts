@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  env: {
+    // Expose l’environnement Vercel au client (skip SW / manifest sur preview SSO).
+    NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV ?? "",
+  },
   experimental: {
     // Réduit la taille des chunks partagés (imports lucide non utilisés).
     optimizePackageImports: ["lucide-react"],

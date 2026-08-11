@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const isVercelPreview = process.env.VERCEL_ENV === "preview"
+  || process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
+
 export const metadata: Metadata = {
   title: {
     default: "LearnUp",
@@ -29,6 +32,9 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "default",
   },
+  // Sur preview Vercel (SSO), le navigateur fetch le manifest sans cookies → redirect CORS.
+  // On ne l’expose qu’hors preview ; le fichier reste servi en prod via /manifest.webmanifest.
+  ...(isVercelPreview ? {} : { manifest: "/manifest.webmanifest" }),
 };
 
 export const viewport: Viewport = {

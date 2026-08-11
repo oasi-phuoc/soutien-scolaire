@@ -2,26 +2,49 @@
 
 import { useEffect, useState } from "react";
 
+/** Prod Vercel connue — les previews `*-….vercel.app` ont souvent le SSO Deployment Protection. */
+const PRODUCTION_VERCEL_HOSTS = new Set([
+  "soutien-van.vercel.app",
+]);
+
+function shouldRegisterServiceWorker(): boolean {
+  if (process.env.NODE_ENV !== "production") return false;
+  // Build preview Vercel : /sw.js est redirigé vers vercel.com/sso-api → SecurityError.
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") return false;
+
+  const host = window.location.hostname;
+  if (host.endsWith(".vercel.app") && !PRODUCTION_VERCEL_HOSTS.has(host)) {
+    return false;
+  }
+  return true;
+}
+
 export function OfflineProvider() {
   const [online, setOnline] = useState(true);
 
   useEffect(() => {
     setOnline(navigator.onLine);
 
-    if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-      // updateViaCache: "none" évite un SW obsolète ; le fetch SW ne doit jamais
-      // être redirigé (middleware / SSO), sinon SecurityError.
-      navigator.serviceWorker
-        .register("/sw.js", { scope: "/", updateViaCache: "none" })
-        .catch((error: unknown) => {
-          const message = error instanceof Error ? error.message : String(error);
-          // Redirection (auth middleware ou Vercel SSO) : non bloquant pour l’app.
-          if (/redirect|SecurityError/i.test(message)) {
-            console.warn("[Offline] service worker unavailable (redirect blocked)", message);
-            return;
-          }
-          console.error("[Offline] service worker registration failed", error);
+    if ("serviceWorker" in navigator) {
+      if (shouldRegisterServiceWorker()) {
+        navigator.serviceWorker
+          .register("/sw.js", { scope: "/", updateViaCache: "none" })
+          .catch((error: unknown) => {
+            const message = error instanceof Error ? error.message : String(error);
+            if (/redirect|SecurityError/i.test(message)) {
+              console.warn("[Offline] service worker unavailable (redirect blocked)", message);
+              return;
+            }
+            console.error("[Offline] service worker registration failed", error);
+          });
+      } else {
+        // Évite qu’un ancien SW de preview continue à intercepter / échouer en silence.
+        void navigator.serviceWorker.getRegistrations().then((regs) => {
+          regs.forEach((reg) => {
+            void reg.unregister();
+          });
         });
+      }
     }
 
     const handleOnline = () => {
