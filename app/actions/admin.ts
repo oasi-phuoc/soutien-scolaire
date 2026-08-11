@@ -422,15 +422,43 @@ export async function updateUserProfileAction(
 ) {
   const caller = await getCallerRole();
   if (!caller) return { ok: false, reason: "Non autorisé" };
+
   const svc = createServiceClient();
   if (!svc) return { ok: false, reason: "Service role non configuré" };
+
+  const { data: target, error: targetErr } = await svc
+    .from("profiles")
+    .select("id, role, classe")
+    .eq("id", userId)
+    .maybeSingle();
+  if (targetErr) return { ok: false, reason: targetErr.message };
+  if (!target) return { ok: false, reason: "Utilisateur introuvable" };
+
+  if (caller === "prof") {
+    // Les profs peuvent uniquement modifier les élèves de leurs classes.
+    if (target.role !== "eleve") {
+      return { ok: false, reason: "Les professeurs ne peuvent modifier que les élèves." };
+    }
+    const { canAccessStudentAction } = await import("@/app/actions/suivi");
+    const canAccess = await canAccessStudentAction(userId);
+    if (!canAccess) return { ok: false, reason: "Accès refusé à cet élève." };
+  }
+
   const { error } = await svc.from("profiles").update(data).eq("id", userId);
   if (error) return { ok: false, reason: error.message };
   if (data.classe?.trim()) {
     await ensureSchoolClassForLabel(svc, data.classe, userId);
   }
   revalidatePath("/admin");
+  revalidatePath(`/admin/eleves/${userId}`);
   revalidatePath("/suivi");
+  if (data.classe?.trim()) {
+    revalidatePath(`/suivi/classes/${encodeURIComponent(data.classe.trim())}`);
+  }
+  const prevClasse = String(target.classe ?? "").trim();
+  if (prevClasse && prevClasse !== data.classe?.trim()) {
+    revalidatePath(`/suivi/classes/${encodeURIComponent(prevClasse)}`);
+  }
   return { ok: true };
 }
 
