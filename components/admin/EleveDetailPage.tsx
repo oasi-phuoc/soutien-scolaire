@@ -600,8 +600,7 @@ export function EleveDetailPage({
                       <AccessSwitch
                         checked={user.can_partial_french_grammar}
                         disabled={user.can_free_access}
-                        label={`Grammaire ${PARTIAL_FRENCH_GRAMMAR_MAX}`}
-                        description="Déblocage progressif jusqu'à cette leçon"
+                        label={`Grammaire - ${PARTIAL_FRENCH_GRAMMAR_MAX}`}
                         ariaLabel="Accès partiel grammaire G7.1"
                         onToggle={() =>
                           handleTogglePartialFlag(
@@ -614,8 +613,7 @@ export function EleveDetailPage({
                       <AccessSwitch
                         checked={user.can_partial_french_comm}
                         disabled={user.can_free_access}
-                        label={`Communication ${PARTIAL_FRENCH_COMM_MAX}`}
-                        description="Déblocage progressif jusqu'à cette leçon"
+                        label={`Communication - ${PARTIAL_FRENCH_COMM_MAX}`}
                         ariaLabel="Accès partiel communication E9.1"
                         onToggle={() =>
                           handleTogglePartialFlag(
@@ -635,8 +633,7 @@ export function EleveDetailPage({
                       <AccessSwitch
                         checked={user.can_partial_math_a3}
                         disabled={user.can_free_access}
-                        label={PARTIAL_MATH_A3_MAX}
-                        description="Algèbre jusqu'à cette leçon"
+                        label={`Algèbre ${PARTIAL_MATH_A3_MAX}`}
                         ariaLabel="Accès partiel maths A3.1"
                         onToggle={() =>
                           handleTogglePartialFlag(
@@ -649,8 +646,7 @@ export function EleveDetailPage({
                       <AccessSwitch
                         checked={user.can_partial_math_a8}
                         disabled={user.can_free_access}
-                        label={PARTIAL_MATH_A8_MAX}
-                        description="Algèbre jusqu'à cette leçon"
+                        label={`Algèbre ${PARTIAL_MATH_A8_MAX}`}
                         ariaLabel="Accès partiel maths A8.1"
                         onToggle={() =>
                           handleTogglePartialFlag(
@@ -663,8 +659,7 @@ export function EleveDetailPage({
                       <AccessSwitch
                         checked={user.can_partial_math_g3}
                         disabled={user.can_free_access}
-                        label={PARTIAL_MATH_G3_MAX}
-                        description="Géométrie jusqu'à cette leçon"
+                        label={`Géométrie ${PARTIAL_MATH_G3_MAX}`}
                         ariaLabel="Accès partiel maths G3.1"
                         onToggle={() =>
                           handleTogglePartialFlag(
