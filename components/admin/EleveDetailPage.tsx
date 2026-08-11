@@ -7,7 +7,6 @@ import {
   changeRoleAction,
   deleteUserAction,
   updateUserProfileAction,
-  changePasswordAction,
   setUserPrintAccessAction,
   setUserFreeAccessAction,
   setUserPartialFlagAction,
@@ -21,6 +20,7 @@ import {
 } from "@/lib/auth/lesson-access";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { StudentClasseEditor } from "@/components/suivi/StudentClasseEditor";
+import { StudentPasswordEditor } from "@/components/suivi/StudentPasswordEditor";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
@@ -76,44 +76,6 @@ function IconSave() {
 }
 function Spinner() {
   return <svg className="animate-spin" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" /></svg>;
-}
-
-// ── Password section ────────────────────────────────────────────────────────
-
-function PasswordSection({ userId }: { userId: string }) {
-  const [pwd, setPwd] = useState("");
-  const [pending, startTransition] = useTransition();
-  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
-
-  function submit() {
-    if (!pwd) return;
-    setMsg(null);
-    startTransition(async () => {
-      const r = await changePasswordAction(userId, pwd);
-      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); }
-      else setMsg({ ok: false, text: r.reason ?? "Erreur" });
-    });
-  }
-
-  return (
-    <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
-      <p className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">Changer le mot de passe</p>
-      <div className="flex gap-2">
-        <input
-          type="password" value={pwd}
-          onChange={e => { setPwd(e.target.value); setMsg(null); }}
-          placeholder="Nouveau mot de passe (min. 8 caractères)"
-          autoComplete="new-password"
-          className="min-h-9 flex-1 rounded-lg border border-zinc-300 bg-white px-3 text-sm outline-none focus:border-[var(--color-theme)] dark:border-zinc-600 dark:bg-zinc-950"
-        />
-        <button type="button" onClick={submit} disabled={pending || pwd.length < 8}
-          className="min-h-9 rounded-lg bg-[var(--color-theme)] px-4 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50">
-          {pending ? "…" : "OK"}
-        </button>
-      </div>
-      {msg && <p className={`mt-1.5 text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>{msg.text}</p>}
-    </div>
-  );
 }
 
 // ── Edit Modal ──────────────────────────────────────────────────────────────
@@ -521,12 +483,8 @@ export function EleveDetailPage({
             />
           )}
 
-          {/* Password */}
           {user.role !== "admin" && canEditAccount && (
-            <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Sécurité</h2>
-              <PasswordSection userId={user.id} />
-            </div>
+            <StudentPasswordEditor studentId={user.id} />
           )}
 
           {/* Role change */}

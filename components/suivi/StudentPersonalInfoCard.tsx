@@ -14,6 +14,7 @@ import {
   PARTIAL_MATH_G3_MAX,
 } from "@/lib/auth/lesson-access";
 import { StudentClasseEditor } from "@/components/suivi/StudentClasseEditor";
+import { StudentPasswordEditor } from "@/components/suivi/StudentPasswordEditor";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const LANGUE_LABELS: Record<string, string> = {
@@ -170,6 +171,8 @@ export function StudentPersonalInfoCard({
         compact
         onSaved={(newClasse) => onClasseChange?.(student.id, newClasse)}
       />
+
+      <StudentPasswordEditor studentId={student.id} compact />
 
       <div className={`rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-950 ${pending ? "opacity-80" : ""}`}>
         <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Accès aux leçons</p>

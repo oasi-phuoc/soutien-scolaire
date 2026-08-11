@@ -10,6 +10,8 @@ import {
   usesClasseReferenceField,
 } from "@/lib/eleve-classe-types";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { IconSaveDisk, SaveIconButton } from "@/components/ui/SaveIconButton";
+import { useStatusToast } from "@/components/ui/StatusToast";
 
 const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
   value: String(i + 1),
@@ -40,7 +42,7 @@ export function StudentClasseEditor({
   const [classeNum, setClasseNum] = useState(parsed.classeSuffix);
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [okMsg, setOkMsg] = useState<string | null>(null);
+  const { showToast, toastEl } = useStatusToast();
 
   useEffect(() => {
     const next = parseEleveClasse(classe);
@@ -50,24 +52,25 @@ export function StudentClasseEditor({
 
   function save() {
     setError(null);
-    setOkMsg(null);
     const next = buildEleveClasse(classeType, classeNum);
     if (!next) {
       setError("Indiquez la filière et le numéro / la référence.");
       return;
     }
     if (next === (classe ?? "").trim()) {
-      setOkMsg("Aucune modification.");
+      showToast("Aucune modification.");
       return;
     }
+    showToast("Enregistrement en cours...");
     startTransition(async () => {
       const res = await setStudentClasseAction(studentId, next);
       if (!res.ok) {
         setError(res.reason ?? "Impossible de changer la classe.");
+        showToast(res.reason ?? "Impossible de changer la classe.");
         return;
       }
       const saved = res.classe ?? next;
-      setOkMsg(`Classe mise à jour : ${saved}`);
+      showToast("Classe mise à jour...");
       onSaved?.(saved);
     });
   }
@@ -77,68 +80,64 @@ export function StudentClasseEditor({
     : "rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950";
 
   return (
-    <div className={`${shell} ${pending ? "opacity-80" : ""}`}>
-      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">
-        Classe
-      </p>
-      <div className="grid grid-cols-2 gap-2">
-        <AppSelect
-          value={classeType}
-          onChange={(v) => {
-            setClasseType(v);
-            setClasseNum("");
-            setOkMsg(null);
-          }}
-          options={ELEVE_CLASSE_TYPE_OPTIONS}
-          placeholder="Filière"
-          emptyOption={{ value: "", label: "Filière" }}
-          className="w-full"
-          aria-label="Filière"
-        />
-        {usesClasseReferenceField(classeType) ? (
-          <input
-            type="text"
-            placeholder="Référence"
-            value={classeNum}
-            onChange={(e) => {
-              setClasseNum(e.target.value);
-              setOkMsg(null);
-            }}
-            className={inputCls}
-            aria-label="Référence de classe"
-          />
-        ) : (
-          <AppSelect
-            value={classeNum}
-            onChange={(v) => {
-              setClasseNum(v);
-              setOkMsg(null);
-            }}
-            options={CLASSE_NUM_OPTIONS}
-            placeholder="N°"
-            emptyOption={{ value: "", label: "N°" }}
-            className="w-full"
-            aria-label="Numéro de classe"
-          />
+    <>
+      <div className={`${shell} ${pending ? "opacity-80" : ""}`}>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">
+          Classe
+        </p>
+        <div className="flex items-end gap-2">
+          <div className="min-w-0 flex-1 space-y-2">
+            <div className="grid grid-cols-2 gap-2">
+              <AppSelect
+                value={classeType}
+                onChange={(v) => {
+                  setClasseType(v);
+                  setClasseNum("");
+                }}
+                options={ELEVE_CLASSE_TYPE_OPTIONS}
+                placeholder="Filière"
+                emptyOption={{ value: "", label: "Filière" }}
+                className="w-full"
+                aria-label="Filière"
+              />
+              {usesClasseReferenceField(classeType) ? (
+                <input
+                  type="text"
+                  placeholder="Référence"
+                  value={classeNum}
+                  onChange={(e) => setClasseNum(e.target.value)}
+                  className={inputCls}
+                  aria-label="Référence de classe"
+                />
+              ) : (
+                <AppSelect
+                  value={classeNum}
+                  onChange={setClasseNum}
+                  options={CLASSE_NUM_OPTIONS}
+                  placeholder="N°"
+                  emptyOption={{ value: "", label: "N°" }}
+                  className="w-full"
+                  aria-label="Numéro de classe"
+                />
+              )}
+            </div>
+            {usesClasseReferenceField(classeType) && (
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">{HSS_CLASSE_HINT}</p>
+            )}
+          </div>
+          <SaveIconButton
+            label="Enregistrer la classe"
+            pending={pending}
+            onClick={save}
+          >
+            <IconSaveDisk />
+          </SaveIconButton>
+        </div>
+        {error && (
+          <p className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</p>
         )}
       </div>
-      {usesClasseReferenceField(classeType) && (
-        <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">{HSS_CLASSE_HINT}</p>
-      )}
-      <button
-        type="button"
-        disabled={pending}
-        onClick={save}
-        className="mt-3 rounded-xl bg-[var(--color-theme-light)] px-3 py-2 text-sm font-semibold text-[var(--color-theme)] hover:opacity-90 disabled:opacity-60 dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]"
-      >
-        {pending ? "Enregistrement…" : "Enregistrer la classe"}
-      </button>
-      {error && (
-        <p className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</p>
-      )}
-      {okMsg && !error && (
-        <p className="mt-2 text-xs text-emerald-600 dark:text-emerald-400">{okMsg}</p>
-      )}
-    </div>
+      {toastEl}
+    </>
   );
 }

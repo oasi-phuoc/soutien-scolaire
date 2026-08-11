@@ -154,8 +154,27 @@ export async function changePasswordAction(userId: string, newPassword: string) 
   const caller = await getCallerRole();
   if (!caller) return { ok: false, reason: "Non autorisé" };
   if (newPassword.length < 8) return { ok: false, reason: "Au moins 8 caractères requis." };
+
   const svc = createServiceClient();
   if (!svc) return { ok: false, reason: "Service role non configuré" };
+
+  const { data: target, error: targetErr } = await svc
+    .from("profiles")
+    .select("id, role")
+    .eq("id", userId)
+    .maybeSingle();
+  if (targetErr) return { ok: false, reason: targetErr.message };
+  if (!target) return { ok: false, reason: "Utilisateur introuvable" };
+
+  if (caller === "prof") {
+    if (target.role !== "eleve") {
+      return { ok: false, reason: "Les professeurs ne peuvent modifier que les élèves." };
+    }
+    const { canAccessStudentAction } = await import("@/app/actions/suivi");
+    const canAccess = await canAccessStudentAction(userId);
+    if (!canAccess) return { ok: false, reason: "Accès refusé à cet élève." };
+  }
+
   const { error } = await svc.auth.admin.updateUserById(userId, { password: newPassword });
   if (error) return { ok: false, reason: error.message };
   return { ok: true };
