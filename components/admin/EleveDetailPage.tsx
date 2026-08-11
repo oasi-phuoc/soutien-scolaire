@@ -20,6 +20,7 @@ import {
   PARTIAL_MATH_G3_MAX,
 } from "@/lib/auth/lesson-access";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
+import { StudentClasseEditor } from "@/components/suivi/StudentClasseEditor";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
@@ -505,6 +506,20 @@ export function EleveDetailPage({
               </div>
             </dl>
           </div>
+
+          {canEditAccount && user.role === "eleve" && (
+            <StudentClasseEditor
+              studentId={user.id}
+              classe={user.classe}
+              onSaved={(newClasse) => {
+                const prevClasse = user.classe;
+                setUser((u) => ({ ...u, classe: newClasse }));
+                if (isSuivi && newClasse !== prevClasse) {
+                  router.replace(`/suivi/classes/${encodeURIComponent(newClasse)}`);
+                }
+              }}
+            />
+          )}
 
           {/* Password */}
           {user.role !== "admin" && canEditAccount && (
