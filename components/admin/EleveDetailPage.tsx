@@ -22,7 +22,7 @@ import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail"
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
-  ELEVE_CLASSE_TYPES,
+  ELEVE_CLASSE_TYPE_OPTIONS,
   buildEleveClasse,
   parseEleveClasse,
   usesClasseReferenceField,
@@ -167,10 +167,7 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
               <AppSelect
                 value={form.classeType}
                 onChange={(v) => setForm((f) => ({ ...f, classeType: v, classeNum: "" }))}
-                options={ELEVE_CLASSE_TYPES.map((c) => ({
-                  value: c,
-                  label: c === "HSS" ? "HSS (Hors du système scolaire)" : c,
-                }))}
+                options={ELEVE_CLASSE_TYPE_OPTIONS}
                 placeholder="Filière"
                 emptyOption={{ value: "", label: "Filière" }}
                 className="w-full"

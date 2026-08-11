@@ -10,11 +10,9 @@ import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { resetAllElevesAction, setPlacementModuleEnabledAction, purgePreviousSchoolYearMessagesAction } from "@/app/actions/admin";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
-  ELEVE_CLASSE_TYPES,
   ELEVE_CLASSE_TYPE_OPTIONS,
   matchesEleveClasseType,
   type EleveClasseDeleteFilter,
-  type EleveClasseType,
 } from "@/lib/eleve-classe-types";
 import {
   currentSchoolYearLabel,
