@@ -63,6 +63,9 @@ export type ClassStudentSuiviRow = {
   telephone: string | null;
   langue: string | null;
   progress_updated_at: string | null;
+  can_free_access: boolean;
+  can_partial_french: boolean;
+  can_partial_math: boolean;
   math_done: number;
   math_total: number;
   math_pct: number;
@@ -378,7 +381,7 @@ export async function getClassStudentsSuiviAction(
 
   let query = supabase
     .from("profiles")
-    .select("id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile, placement_test_history, placement_french_history")
+    .select("id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile, placement_test_history, placement_french_history, can_free_access, can_partial_french, can_partial_math")
     .eq("role", "eleve")
     .eq("classe", classLabel)
     .order("nom");
@@ -460,6 +463,9 @@ export async function getClassStudentsSuiviAction(
       telephone: (p.telephone as string | null) ?? null,
       langue: (p.langue as string | null) ?? null,
       progress_updated_at: (p.progress_updated_at as string | null) ?? null,
+      can_free_access: Boolean(p.can_free_access),
+      can_partial_french: Boolean(p.can_partial_french),
+      can_partial_math: Boolean(p.can_partial_math),
       math_done: math.done,
       math_total: math.total,
       math_pct: math.pct,
@@ -482,6 +488,76 @@ export async function getClassStudentsSuiviAction(
   });
 
   return { ok: true, students };
+}
+
+/** Admin ou prof de la classe : peut modifier l'accès aux leçons d'un élève. */
+async function assertCanManageStudentLessonAccess(
+  studentId: string,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  const role = await getCallerRole();
+  if (!role) return { ok: false, reason: "Non autorisé." };
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Erreur serveur." };
+
+  const { data: profile, error } = await supabase
+    .from("profiles")
+    .select("classe, role")
+    .eq("id", studentId)
+    .maybeSingle();
+
+  if (error) return { ok: false, reason: error.message };
+  if (!profile || profile.role !== "eleve") return { ok: false, reason: "Élève introuvable." };
+
+  if (role === "admin") return { ok: true };
+
+  const classLabel = String(profile.classe ?? "").trim();
+  if (!classLabel) return { ok: false, reason: "Élève sans classe." };
+  const canAccess = await canAccessClassAction(classLabel);
+  if (!canAccess) return { ok: false, reason: "Accès refusé à cette classe." };
+  return { ok: true };
+}
+
+export type StudentLessonAccessPatch = {
+  can_free_access?: boolean;
+  can_partial_french?: boolean;
+  can_partial_math?: boolean;
+};
+
+/** Accès complet / partiel FR / partiel maths — disponible depuis le suivi classe. */
+export async function setStudentLessonAccessAction(
+  studentId: string,
+  patch: StudentLessonAccessPatch,
+): Promise<{ ok: boolean; reason?: string }> {
+  const gate = await assertCanManageStudentLessonAccess(studentId);
+  if (!gate.ok) return gate;
+
+  const payload: Record<string, boolean> = {};
+  if (typeof patch.can_free_access === "boolean") payload.can_free_access = patch.can_free_access;
+  if (typeof patch.can_partial_french === "boolean") payload.can_partial_french = patch.can_partial_french;
+  if (typeof patch.can_partial_math === "boolean") payload.can_partial_math = patch.can_partial_math;
+  if (Object.keys(payload).length === 0) return { ok: true };
+
+  // Accès complet désactive le besoin d'accès partiel (cohérent avec l'UI admin).
+  if (payload.can_free_access === true) {
+    payload.can_partial_french = false;
+    payload.can_partial_math = false;
+  }
+
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, reason: "Service role non configuré." };
+
+  const { error } = await svc.from("profiles").update(payload).eq("id", studentId);
+  if (error) return { ok: false, reason: error.message };
+
+  revalidatePath("/suivi");
+  revalidatePath("/admin");
+  revalidatePath(`/admin/eleves/${studentId}`);
+  revalidatePath("/");
+  revalidatePath("/francais");
+  revalidatePath("/mathematiques");
+  revalidatePath("/communication");
+  return { ok: true };
 }
 
 export async function setPrimaryClassAction(classId: string): Promise<{ ok: boolean; reason?: string }> {

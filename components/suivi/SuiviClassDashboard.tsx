@@ -4,6 +4,7 @@ import { Fragment, useEffect, useMemo, useState } from "react";
 import {
   getClassStudentsSuiviAction,
   type ClassStudentSuiviRow,
+  type StudentLessonAccessPatch,
 } from "@/app/actions/suivi";
 import { StudentPersonalInfoCard, StudentInfoButton } from "@/components/suivi/StudentPersonalInfoCard";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
@@ -134,6 +135,21 @@ export function SuiviClassDashboard({
     return students.filter((s) => matchesStudent(s, q));
   }, [students, studentSearch]);
 
+  function handleAccessChange(studentId: string, patch: StudentLessonAccessPatch) {
+    setStudents((prev) =>
+      prev.map((s) =>
+        s.id === studentId
+          ? {
+              ...s,
+              can_free_access: patch.can_free_access ?? s.can_free_access,
+              can_partial_french: patch.can_partial_french ?? s.can_partial_french,
+              can_partial_math: patch.can_partial_math ?? s.can_partial_math,
+            }
+          : s,
+      ),
+    );
+  }
+
   if (loading) {
     return (
       <div className="space-y-2 py-2 animate-pulse">
@@ -250,7 +266,7 @@ export function SuiviClassDashboard({
                     {infoOpen && (
                       <tr className="bg-zinc-50 dark:bg-zinc-900/50">
                         <td colSpan={9} className="px-4 py-4">
-                          <StudentPersonalInfoCard student={s} />
+                          <StudentPersonalInfoCard student={s} onAccessChange={handleAccessChange} />
                         </td>
                       </tr>
                     )}
