@@ -59,7 +59,7 @@ function AccessSwitch({
   checked: boolean;
   disabled?: boolean;
   label: string;
-  description: string;
+  description?: string;
   ariaLabel: string;
   onToggle: () => void;
 }) {
@@ -67,7 +67,9 @@ function AccessSwitch({
     <label className={`flex items-center justify-between gap-4 select-none ${disabled ? "opacity-50" : "cursor-pointer"}`}>
       <span className="text-sm text-zinc-700 dark:text-zinc-300">
         {label}
-        <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">{description}</span>
+        {description ? (
+          <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">{description}</span>
+        ) : null}
       </span>
       <button
         type="button"
