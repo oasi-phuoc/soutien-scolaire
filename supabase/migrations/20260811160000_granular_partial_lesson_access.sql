@@ -113,7 +113,10 @@ CREATE TRIGGER trg_protect_profiles_partial_access
   FOR EACH ROW
   EXECUTE FUNCTION public.protect_profiles_partial_access();
 
-CREATE OR REPLACE FUNCTION public.get_my_lesson_access()
+-- Le type de retour change : DROP obligatoire avant CREATE.
+DROP FUNCTION IF EXISTS public.get_my_lesson_access();
+
+CREATE FUNCTION public.get_my_lesson_access()
 RETURNS TABLE (
   can_free_access boolean,
   can_partial_french boolean,
