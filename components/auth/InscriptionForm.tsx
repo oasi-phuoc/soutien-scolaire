@@ -250,8 +250,8 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
                     value={classeNum}
                     onChange={setClasseNum}
                     options={CLASSE_NUM_OPTIONS}
-                    placeholder="N° de la classe"
-                    emptyOption={{ value: "", label: "N° de la classe" }}
+                    placeholder="N°"
+                    emptyOption={{ value: "", label: "N°" }}
                     className="w-full"
                   />
                 )}

@@ -109,7 +109,7 @@ export function AppSelect({
   const sizeCls =
     size === "sm"
       ? "h-8 min-h-8 rounded-lg px-2 text-sm"
-      : "min-h-10 rounded-[22px] px-4 py-2 text-sm";
+      : "h-10 min-h-10 rounded-[22px] px-4 text-sm";
 
   const menuRounded =
     placement === "top"
@@ -169,10 +169,10 @@ export function AppSelect({
         aria-label={ariaLabel}
       >
         <span
-          className={`min-w-0 ${
+          className={`min-w-0 flex-1 truncate ${
             size === "sm"
-              ? `flex-1 truncate text-center font-semibold ${isNumericSelection ? "" : "uppercase"}`
-              : "line-clamp-2 whitespace-normal"
+              ? `text-center font-semibold ${isNumericSelection ? "" : "uppercase"}`
+              : ""
           } ${
             selected
               ? error
