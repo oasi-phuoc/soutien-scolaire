@@ -12,22 +12,36 @@ const PUBLIC_PATHS = new Set([
   "/ecoute",
 ]);
 
+/** Assets PWA / offline : jamais redirigés (sinon SW = « script behind a redirect »). */
+const PUBLIC_FILE_PATHS = new Set([
+  "/sw.js",
+  "/manifest.webmanifest",
+  "/manifest.json",
+  "/offline-manifest.json",
+  "/offline.html",
+]);
+
 const ADMIN_PREFIX = "/admin";
 const IMPRESSIONS_PREFIX = "/impressions";
 const SUIVI_PREFIX = "/suivi";
 const TEACHER_PATHS = ["/messagerie"];
+
+function normalizePath(path: string): string {
+  if (path.length > 1 && path.endsWith("/")) return path.slice(0, -1);
+  return path;
+}
 
 function isPublicAsset(path: string): boolean {
   return /\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|ico|apk)$/i.test(path);
 }
 
 export async function middleware(request: NextRequest) {
-  const path = request.nextUrl.pathname;
+  const path = normalizePath(request.nextUrl.pathname);
 
   if (path.startsWith("/_next") || path.startsWith("/api/") && path !== "/api/download-app") {
     return NextResponse.next({ request });
   }
-  if (isPublicAsset(path)) {
+  if (isPublicAsset(path) || PUBLIC_FILE_PATHS.has(path)) {
     return NextResponse.next({ request });
   }
 
@@ -128,6 +142,10 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|apk)$).*)",
+    /*
+     * Exclure assets statiques + PWA (sw.js, manifest) pour éviter toute
+     * redirection auth avant le fetch navigateur / Service Worker.
+     */
+    "/((?!_next/static|_next/image|favicon.ico|sw\\.js|manifest\\.webmanifest|offline-manifest\\.json|offline\\.html|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|apk)$).*)",
   ],
 };

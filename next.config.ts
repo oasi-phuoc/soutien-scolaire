@@ -24,6 +24,29 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Service worker : pas de cache agressif, jamais de redirect auth.
+      {
+        source: "/sw.js",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
+          },
+          {
+            key: "Service-Worker-Allowed",
+            value: "/",
+          },
+        ],
+      },
+      {
+        source: "/manifest.webmanifest",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
+          },
+        ],
+      },
       // Assets Next / médias curriculum : cache navigateur plus long
       {
         source: "/_next/static/:path*",

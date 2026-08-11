@@ -9,9 +9,19 @@ export function OfflineProvider() {
     setOnline(navigator.onLine);
 
     if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-      navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch((error) => {
-        console.error("[Offline] service worker registration failed", error);
-      });
+      // updateViaCache: "none" évite un SW obsolète ; le fetch SW ne doit jamais
+      // être redirigé (middleware / SSO), sinon SecurityError.
+      navigator.serviceWorker
+        .register("/sw.js", { scope: "/", updateViaCache: "none" })
+        .catch((error: unknown) => {
+          const message = error instanceof Error ? error.message : String(error);
+          // Redirection (auth middleware ou Vercel SSO) : non bloquant pour l’app.
+          if (/redirect|SecurityError/i.test(message)) {
+            console.warn("[Offline] service worker unavailable (redirect blocked)", message);
+            return;
+          }
+          console.error("[Offline] service worker registration failed", error);
+        });
     }
 
     const handleOnline = () => {
