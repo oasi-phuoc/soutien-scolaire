@@ -26,54 +26,41 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         ps: "په عمومي ډول، د رنګ صفتونه له هغه اسم سره چې یې توصیفوي د جنس او شمېر له مخې سمون خوري.",
         uk: "Загалом прикметники кольору узгоджуються в роді й числі з іменником, який вони описують.",
       },
+      items: [
+        "un pantalon noir → une jupe noir{a}e{/a}",
+        "une voiture rouge → des voitures roug{a}es{/a}",
+      ],
+      noBulletItems: [0,1],
     },
     {
       type: "text",
-      text: "un pantalon noir → une jupe noir{a}e{/a}\nune voiture rouge → des voitures roug{a}es{/a}",
-      inlineArrows: true,
-    },
-
-    {
-      type: "text",
-      label: "Invariable",
-      items: [],
-      transLabel: { en: "Invariable", ar: "", fa: "", pt: "", so: "", ti: "", tr: "", ps: "", uk: "" },
-    },
-
-    {
-      type: "text",
-      text: "Les adjectifs de couleur sont invariables dans trois cas.",
+      text: "Les adjectifs de couleur sont {a}invariables{/a} dans {a}trois cas{/a}.",
       transText: {
-        en: "Color adjectives are invariable in three cases.",
-        ar: "صفات اللون لا تتغير في ثلاث حالات.",
-        fa: "صفت‌های رنگ در سه حالت تغییر نمی‌کنند.",
-        pt: "Os adjetivos de cor são invariáveis em três casos.",
-        so: "Sifooyinka midabku isma beddelaan saddex xaaladood.",
-        ti: "ቅጽላት ሕብሪ ኣብ ሰለስተ ኩነታት ኣይቕየሩን።",
-        tr: "Renk sıfatları üç durumda değişmez.",
-        ps: "د رنګ صفتونه په درې حالتونو کې نه بدلېږي.",
-        uk: "Прикметники кольору незмінні у трьох випадках.",
+        en: "Color adjectives are {a}invariable{/a} in {a}three cases{/a}.",
+        ar: "صفات اللون {a}لا تتغير{/a} في {a}ثلاث حالات{/a}.",
+        fa: "صفت‌های رنگ در {a}سه حالت{/a} {a}تغییر نمی‌کنند{/a}.",
+        pt: "Os adjetivos de cor são {a}invariáveis{/a} em {a}três casos{/a}.",
+        so: "Sifooyinka midabku {a}isma beddelaan{/a} {a}saddex xaaladood{/a}.",
+        ti: "ቅጽላት ሕብሪ {a}ኣይቕየሩን{/a} ኣብ {a}ሰለስተ ኩነታት{/a}።",
+        tr: "Renk sıfatları {a}üç durumda{/a} {a}değişmez{/a}.",
+        ps: "د رنګ صفتونه په {a}درې حالتونو{/a} کې {a}نه بدلېږي{/a}.",
+        uk: "Прикметники кольору {a}незмінні{/a} у {a}трьох випадках{/a}.",
       },
     },
     {
       type: "text",
-      text: "{a}1.{/a} Quand la couleur est un nom de matière, de fruit, de fleur ou d'objet",
+      text: "{a}1.{/a} Quand la couleur est un nom de {a}matière{/a}, de {a}fruit{/a}, de {a}fleur{/a} ou d'{a}objet{/a}",
       transText: {
-        en: "{a}1.{/a} When the color is a noun for a material, fruit, flower, or object",
-        ar: "{a}1.{/a} عندما يكون اللون اسماً لمادة أو فاكهة أو زهرة أو شيء",
-        fa: "{a}1.{/a} وقتی رنگ، اسم یک ماده، میوه، گل یا شیء باشد",
-        pt: "{a}1.{/a} Quando a cor é um nome de matéria, fruto, flor ou objeto",
-        so: "{a}1.{/a} Marka midabku yahay magac walax, miro, ubax ama shay",
-        ti: "{a}1.{/a} እቲ ሕብሪ ስም ናይ ንጥረ ነገር፣ ፍረ፣ ዕምባባ ወይ ነገር ክኸውን ከሎ",
-        tr: "{a}1.{/a} Renk bir madde, meyve, çiçek veya nesne adı olduğunda",
-        ps: "{a}1.{/a} کله چې رنګ د مادې، مېوې، ګل یا شي نوم وي",
-        uk: "{a}1.{/a} Коли колір є назвою матеріалу, фрукта, квітки або предмета",
+        en: "{a}1.{/a} When the color is a noun for a {a}material{/a}, {a}fruit{/a}, {a}flower{/a}, or {a}object{/a}",
+        ar: "{a}1.{/a} عندما يكون اللون اسماً لـ{a}مادة{/a} أو {a}فاكهة{/a} أو {a}زهرة{/a} أو {a}شيء{/a}",
+        fa: "{a}1.{/a} وقتی رنگ، اسم یک {a}ماده{/a}، {a}میوه{/a}، {a}گل{/a} یا {a}شیء{/a} باشد",
+        pt: "{a}1.{/a} Quando a cor é o nome de um {a}material{/a}, {a}fruto{/a}, {a}flor{/a} ou {a}objeto{/a}",
+        so: "{a}1.{/a} Marka midabku yahay magac {a}walax{/a}, {a}miro{/a}, {a}ubax{/a} ama {a}shay{/a}",
+        ti: "{a}1.{/a} እቲ ሕብሪ ስም ናይ {a}ንጥረ ነገር{/a}፣ {a}ፍረ{/a}፣ {a}ዕምባባ{/a} ወይ {a}ነገር{/a} ክኸውን ከሎ",
+        tr: "{a}1.{/a} Renk bir {a}madde{/a}, {a}meyve{/a}, {a}çiçek{/a} veya {a}nesne{/a} adı olduğunda",
+        ps: "{a}1.{/a} کله چې رنګ د {a}مادې{/a}، {a}مېوې{/a}، {a}ګل{/a} یا {a}شي{/a} نوم وي",
+        uk: "{a}1.{/a} Коли колір є назвою {a}матеріалу{/a}, {a}фрукта{/a}, {a}квітки{/a} або {a}предмета{/a}",
       },
-    },
-
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "des yeux {a}marron{/a}",
         "des chaises {a}orange{/a}",
@@ -83,23 +70,30 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
     {
       type: "text",
-      text: "Par contre, certains noms sont devenus de véritables adjectifs et s'accordent.",
-      transText: {
-        en: "However, some nouns have become true adjectives and agree.",
-        ar: "لكن بعض الأسماء أصبحت صفات حقيقية وتتوافق.",
-        fa: "با این حال، برخی اسم‌ها به صفت‌های واقعی تبدیل شده‌اند و مطابقت می‌کنند.",
-        pt: "No entanto, alguns nomes tornaram-se verdadeiros adjetivos e concordam.",
-        so: "Si kastaba ha ahaatee, magacyo qaar ayaa noqday sifooyin dhab ah wayna la jaanqaadaan.",
-        ti: "ግን ገለ ስማት ናይ ብሓቂ ቅጽላት ኮይኖም ይሰማምዑ።",
-        tr: "Ancak bazı isimler gerçek sıfatlara dönüşmüştür ve uyum sağlar.",
-        ps: "خو ځینې اسمونه رښتيني صفتونه شوي دي او سمون خوري.",
-        uk: "Однак деякі іменники стали справжніми прикметниками й узгоджуються.",
+      label: "Exception",
+      transLabel: {
+        en: "Exception",
+        ar: "استثناء",
+        fa: "استثنا",
+        pt: "Exceção",
+        so: "Ka-reeb",
+        ti: "ፍሉይ ኩነታት",
+        tr: "İstisna",
+        ps: "استثنا",
+        uk: "Виняток",
       },
-    },
-
-    {
-      type: "text",
-      label: "Exemples",
+      text: "Par contre, {a}certains noms{/a} sont devenus de véritables adjectifs et {a}s'accordent{/a}.",
+      transText: {
+        en: "However, {a}some nouns{/a} have become true adjectives and {a}agree{/a}.",
+        ar: "لكن {a}بعض الأسماء{/a} أصبحت صفات حقيقية و{a}تتوافق{/a}.",
+        fa: "با این حال، {a}برخی اسم‌ها{/a} به صفت‌های واقعی تبدیل شده‌اند و {a}مطابقت می‌کنند{/a}.",
+        pt: "No entanto, {a}alguns nomes{/a} tornaram-se verdadeiros adjetivos e {a}concordam{/a}.",
+        so: "Si kastaba ha ahaatee, {a}magacyo qaar{/a} ayaa noqday sifooyin dhab ah oo {a}la jaanqaada{/a}.",
+        ti: "ግን {a}ገለ ስማት{/a} ናይ ብሓቂ ቅጽላት ኮይኖም {a}ይሰማምዑ{/a}።",
+        tr: "Ancak {a}bazı isimler{/a} gerçek sıfatlara dönüşmüştür ve {a}uyum sağlar{/a}.",
+        ps: "خو {a}ځینې اسمونه{/a} رښتیني صفتونه شوي دي او {a}سمون خوري{/a}.",
+        uk: "Однак {a}деякі іменники{/a} стали справжніми прикметниками й {a}узгоджуються{/a}.",
+      },
       items: [
         "des fleurs rose{a}s{/a}",
         "des tissus mauve{a}s{/a}",
@@ -108,26 +102,20 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       ],
       noBulletItems: [0, 1, 2, 3],
     },
-
     {
       type: "text",
-      text: "{a}2.{/a} Quand la couleur est précisée par un autre adjectif ou un nom",
+      text: "{a}2.{/a} Quand la couleur est précisée par un {a}autre adjectif{/a} ou un {a}nom{/a}",
       transText: {
-        en: "{a}2.{/a} When the color is specified by another adjective or a noun",
-        ar: "{a}2.{/a} عندما يحدَّد اللون بصفة أخرى أو باسم",
-        fa: "{a}2.{/a} وقتی رنگ با صفتی دیگر یا با یک اسم مشخص شود",
-        pt: "{a}2.{/a} Quando a cor é especificada por outro adjetivo ou por um nome",
-        so: "{a}2.{/a} Marka midabka lagu sii qeexo sifo kale ama magac",
-        ti: "{a}2.{/a} እቲ ሕብሪ ብኻልእ ቅጽል ወይ ብስም ክተንጸር ከሎ",
-        tr: "{a}2.{/a} Renk başka bir sıfat veya isimle belirtildiğinde",
-        ps: "{a}2.{/a} کله چې رنګ د بل صفت یا اسم له خوا مشخص شي",
-        uk: "{a}2.{/a} Коли колір уточнюється іншим прикметником або іменником",
+        en: "{a}2.{/a} When the color is specified by {a}another adjective{/a} or {a}a noun{/a}",
+        ar: "{a}2.{/a} عندما يحدَّد اللون بـ{a}صفة أخرى{/a} أو بـ{a}اسم{/a}",
+        fa: "{a}2.{/a} وقتی رنگ با {a}صفتی دیگر{/a} یا با {a}یک اسم{/a} مشخص شود",
+        pt: "{a}2.{/a} Quando a cor é especificada por {a}outro adjetivo{/a} ou por {a}um nome{/a}",
+        so: "{a}2.{/a} Marka midabka lagu sii qeexo {a}sifo kale{/a} ama {a}magac{/a}",
+        ti: "{a}2.{/a} እቲ ሕብሪ ብ{a}ኻልእ ቅጽል{/a} ወይ ብ{a}ስም{/a} ክተንጸር ከሎ",
+        tr: "{a}2.{/a} Renk {a}başka bir sıfat{/a} veya {a}bir isimle{/a} belirtildiğinde",
+        ps: "{a}2.{/a} کله چې رنګ د {a}بل صفت{/a} یا {a}اسم{/a} له خوا مشخص شي",
+        uk: "{a}2.{/a} Коли колір уточнюється {a}іншим прикметником{/a} або {a}іменником{/a}",
       },
-    },
-
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "des chaussures {a}vert{/a} foncé",
         "une robe {a}bleu{/a} ciel",
@@ -136,30 +124,25 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
     {
       type: "text",
-      text: "{a}3.{/a} Quand la couleur est exprimée par deux adjectifs",
+      text: "{a}3.{/a} Quand la couleur est exprimée par {a}deux adjectifs{/a}",
       transText: {
-        en: "{a}3.{/a} When the color is expressed by two adjectives",
-        ar: "{a}3.{/a} عندما يعبَّر عن اللون بصفتين",
-        fa: "{a}3.{/a} وقتی رنگ با دو صفت بیان شود",
-        pt: "{a}3.{/a} Quando a cor é expressa por dois adjetivos",
-        so: "{a}3.{/a} Marka midabka lagu muujiyo laba sifo",
-        ti: "{a}3.{/a} እቲ ሕብሪ ብኽልተ ቅጽላት ክግለጽ ከሎ",
-        tr: "{a}3.{/a} Renk iki sıfatla ifade edildiğinde",
-        ps: "{a}3.{/a} کله چې رنګ د دوو صفتونو په وسیله څرګند شي",
-        uk: "{a}3.{/a} Коли колір виражений двома прикметниками",
+        en: "{a}3.{/a} When the color is expressed by {a}two adjectives{/a}",
+        ar: "{a}3.{/a} عندما يعبَّر عن اللون بـ{a}صفتين{/a}",
+        fa: "{a}3.{/a} وقتی رنگ با {a}دو صفت{/a} بیان شود",
+        pt: "{a}3.{/a} Quando a cor é expressa por {a}dois adjetivos{/a}",
+        so: "{a}3.{/a} Marka midabka lagu muujiyo {a}laba sifo{/a}",
+        ti: "{a}3.{/a} እቲ ሕብሪ ብ{a}ኽልተ ቅጽላት{/a} ክግለጽ ከሎ",
+        tr: "{a}3.{/a} Renk {a}iki sıfatla{/a} ifade edildiğinde",
+        ps: "{a}3.{/a} کله چې رنګ د {a}دوو صفتونو{/a} په وسیله څرګند شي",
+        uk: "{a}3.{/a} Коли колір виражений {a}двома прикметниками{/a}",
       },
-    },
-
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "une veste {a}noir{/a} et {a}blanc{/a}",
         "une pull {a}jaune{/a} et {a}rouge{/a}",
       ],
       noBulletItems: [0, 1],
     },
-    
+   
     {
       type: "heading",
       text: "L'adjectif demi",
@@ -167,14 +150,14 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
     {
       type: "text",
-      label: "Demi est {a}invariable{/a} devant le nom",
+      text: "Demi est {a}invariable{/a} devant le nom",
       items: [
         "une demi-heure",
         "une demi-journée",
         "des demi-portions",
       ],
       noBulletItems: [0, 1, 2],
-      transLabel: {
+      transText: {
         en: "Demi is {a}invariable{/a} before the noun",
         ar: "تبقى كلمة Demi {a}ثابتة{/a} قبل الاسم",
         fa: "Demi پیش از اسم {a}تغییرناپذیر{/a} است",
@@ -188,21 +171,22 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
     },
     {
       type: "text",
-      label: "Demi s'accorde seulement en genre après le nom",
+      text: "Demi {a}s'accorde seulement en genre{/a} après le nom",
       items: [
         "une heure et demi{a}e{/a}",
         "trois jours et demi",
       ],
-      transLabel: {
-        en: "Demi agrees only in gender after the noun",
-        ar: "تتوافق كلمة Demi فقط في الجنس بعد الاسم",
-        fa: "Demi بعد از اسم فقط از نظر جنس مطابقت می‌کند",
-        pt: "Demi concorda apenas em género depois do nome",
-        so: "Demi waxay la jaanqaaddaa jinsiga oo keliya marka ay ka dambayso magaca",
-        ti: "Demi ድሕሪ ስም ብጾታ ጥራይ ይሰማማዕ",
-        tr: "Demi isimden sonra yalnızca cinsiyete göre uyum sağlar",
-        ps: "Demi د اسم وروسته یوازې د جنس له مخې بدلېږي",
-        uk: "Demi після іменника узгоджується лише за родом",
+      noBulletItems: [0, 1],
+      transText: {
+        en: "Demi {a}agrees only in gender{/a} after the noun",
+        ar: "كلمة Demi {a}تتوافق فقط في الجنس{/a} بعد الاسم",
+        fa: "Demi بعد از اسم {a}فقط از نظر جنس مطابقت می‌کند{/a}",
+        pt: "Demi {a}concorda apenas em género{/a} depois do nome",
+        so: "Demi {a}waxay la jaanqaaddaa jinsiga oo keliya{/a} marka ay ka dambayso magaca",
+        ti: "Demi ድሕሪ ስም {a}ብጾታ ጥራይ ይሰማማዕ{/a}",
+        tr: "Demi isimden sonra {a}yalnızca cinsiyete göre uyum sağlar{/a}",
+        ps: "Demi د اسم وروسته {a}یوازې د جنس له مخې بدلېږي{/a}",
+        uk: "Demi після іменника {a}узгоджується лише за родом{/a}",
       },
     },
 
@@ -211,22 +195,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       text: "Les adjectifs numéraux",
       trans: { en: "Numeral adjectives", ar: "الصفات العددية", fa: "صفت‌های عددی", pt: "Adjetivos numerais", so: "Sifooyinka tirada", ti: "ቅጽላት ቍጽሪ", tr: "Sayı sıfatları", ps: "شمېري صفتونه", uk: "Числівникові прикметники" },
     },
-    {
-      type: "text",
-      text: "Les adjectifs numéraux indiquent une quantité ou un rang.",
-      transText: {
-        en: "Numeral adjectives indicate a quantity or an order.",
-        ar: "الصفات العددية تدل على كمية أو ترتيب.",
-        fa: "صفت‌های عددی مقدار یا رتبه را نشان می‌دهند.",
-        pt: "Os adjetivos numerais indicam uma quantidade ou uma ordem.",
-        so: "Sifooyinka tiradu waxay tilmaamaan tiro ama kala horreyn.",
-        ti: "ቅጽላት ቍጽሪ መጠን ወይ ቦታ የመልክቱ።",
-        tr: "Sayı sıfatları bir miktarı veya sırayı belirtir.",
-        ps: "شمېري صفتونه اندازه یا ترتیب ښيي.",
-        uk: "Числівникові прикметники вказують кількість або порядок.",
-      },
-    },
-
     {
       type: "text",
       text: "{a}1.{/a} Les {a}nombres cardinaux{/a} sont toujours {a}invariables{/a}.",
@@ -241,12 +209,12 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         ps: "{a}1.{/a} {a}اصلي شمېرې{/a} تل {a}نه بدلېدونکې{/a} دي.",
         uk: "{a}1.{/a} {a}Кількісні числівники{/a} завжди є {a}незмінними{/a}.",
       },
+      items: [
+        "{a}dix{/a} élèves",
+        "{a}quatre{/a} semaines",
+      ],
+      noBulletItems: [0, 1],
     },
-    {
-      type: "text",
-      text: "{a}dix{/a} élèves\n{a}quatre{/a} semaines",
-    },
-
     {
       type: "text",
       text: "{a}2.{/a} {a}Mille{/a} est toujours {a}invariable{/a}.",
@@ -261,12 +229,11 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         ps: "{a}2.{/a} {a}Mille{/a} تل {a}نه بدلېدونکی{/a} دی.",
         uk: "{a}2.{/a} {a}Mille{/a} завжди є {a}незмінним{/a}.",
       },
+      items: [
+        "deux {a}mille{/a} francs",
+      ],
+      noBulletItems: [0],
     },
-    {
-      type: "text",
-      text: "deux {a}mille{/a} francs",
-    },
-
     {
       type: "text",
       text: "{a}3.{/a} {a}Vingt{/a} et {a}Cent{/a} sont {a}invariables{/a} lorsqu'ils sont seuls ou suivis d'un autre nombre.",
@@ -281,12 +248,13 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         ps: "{a}3.{/a} {a}Vingt{/a} او {a}Cent{/a} کله چې یوازې وي یا ورپسې بله شمېره راشي، {a}نه بدلېږي{/a}.",
         uk: "{a}3.{/a} {a}Vingt{/a} і {a}Cent{/a} є {a}незмінними{/a}, коли стоять окремо або після них іде інше число.",
       },
+      items: [
+        "{a}vingt{/a} personnes",
+        "{a}cent{/a} jours",
+        "quatre-{a}vingt{/a}-huit francs",
+      ],
+      noBulletItems: [0, 1, 2],
     },
-    {
-      type: "text",
-      text: "{a}vingt{/a} personnes\n{a}cent{/a} jours\nquatre-{a}vingt{/a}-huit francs",
-    },
-
     {
       type: "text",
       text: "Ils prennent un {a}s{/a} lorsqu'ils sont multipliés et ne sont suivis d'aucun autre nombre.",
@@ -301,12 +269,12 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         ps: "کله چې ضرب شوي وي او ورپسې بله شمېره نه وي، {a}s{/a} اخلي.",
         uk: "Вони отримують {a}s{/a}, коли помножені й після них немає іншого числа.",
       },
+      items: [
+        "cinq cent{a}s{/a} mètres",
+        "quatre-vingt{a}s{/a} voitures",
+      ],
+      noBulletItems: [0, 1],
     },
-    {
-      type: "text",
-      text: "cinq cent{a}s{/a} mètres\nquatre-vingt{a}s{/a} voitures",
-    },
-
     {
       type: "text",
       text: "{a}4.{/a} {a}Million{/a} et {a}milliard{/a} sont des noms et ils {a}s'accordent{/a}.",
@@ -321,10 +289,11 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         ps: "{a}4.{/a} {a}Million{/a} او {a}milliard{/a} اسمونه دي او {a}سمون خوري{/a}.",
         uk: "{a}4.{/a} {a}Million{/a} і {a}milliard{/a} — це іменники, і вони {a}узгоджуються{/a}.",
       },
-    },
-    {
-      type: "text",
-      text: "deux million{a}s{/a} de livres\nsix milliard{a}s{/a} d'habitants",
+      items: [
+        "deux million{a}s{/a} de livres",
+        "six milliard{a}s{/a} d'habitants",
+      ],
+      noBulletItems: [0, 1],
     },
   ],
   exercises: [
