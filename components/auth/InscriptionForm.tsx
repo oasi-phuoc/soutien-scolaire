@@ -171,169 +171,183 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
         </p>
       )}
 
-      <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-5 lg:gap-6">
 
-        {/* Prénom + Nom */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label htmlFor="prenom" className={labelCls}>Prénom{reqTag}</label>
-            <input
-              id="prenom" name="prenom" type="text" required autoComplete="given-name"
-              value={prenom} onChange={e => setPrenom(e.target.value)}
-              className={inputCls}
-            />
-          </div>
-          <div>
-            <label htmlFor="nom" className={labelCls}>Nom{reqTag}</label>
-            <input
-              id="nom" name="nom" type="text" required autoComplete="family-name"
-              value={nom} onChange={e => setNom(e.target.value)}
-              className={inputCls}
-            />
-          </div>
-        </div>
-
-        {/* Identifiant généré */}
-        <div>
-          <label className={labelCls}>Identifiant de connexion</label>
-          <input
-            name="login_id"
-            type="text"
-            readOnly
-            value={loginId}
-            placeholder="Saisissez le prénom et le nom"
-            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3 text-base font-mono text-green-700 outline-none cursor-default dark:border-zinc-700 dark:bg-zinc-800 dark:text-green-400"
-          />
-          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-            Cet identifiant sera utilisé pour se connecter. Il est généré automatiquement.
+        {/* Identité */}
+        <section className="space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            Identité
           </p>
-        </div>
-
-        {/* Classe */}
-        <div>
-          <label className={labelCls}>Classe{reqTag}</label>
-          <div className="mt-1 grid grid-cols-2 gap-2">
-            <AppSelect
-              name="classe_type"
-              value={classeType}
-              onChange={(v) => { setClasseType(v); setClasseNum(""); }}
-              options={ELEVE_CLASSE_TYPE_OPTIONS}
-              placeholder="Filière"
-              emptyOption={{ value: "", label: "Filière" }}
-              className="w-full"
-            />
-            {usesReference ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="prenom" className={labelCls}>Prénom{reqTag}</label>
               <input
-                name="classe_num"
-                type="text"
-                required
-                value={classeNum}
-                onChange={(e) => setClasseNum(e.target.value)}
-                placeholder="Référence"
+                id="prenom" name="prenom" type="text" required autoComplete="given-name"
+                value={prenom} onChange={e => setPrenom(e.target.value)}
                 className={inputCls}
               />
-            ) : (
-              <AppSelect
-                name="classe_num"
-                value={classeNum}
-                onChange={setClasseNum}
-                options={CLASSE_NUM_OPTIONS}
-                placeholder="N° de la classe"
-                emptyOption={{ value: "", label: "N° de la classe" }}
-                className="w-full"
+            </div>
+            <div>
+              <label htmlFor="nom" className={labelCls}>Nom{reqTag}</label>
+              <input
+                id="nom" name="nom" type="text" required autoComplete="family-name"
+                value={nom} onChange={e => setNom(e.target.value)}
+                className={inputCls}
               />
-            )}
+            </div>
           </div>
-          {usesReference && (
-            <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">
-              {HSS_CLASSE_HINT}
-            </p>
-          )}
-        </div>
 
-        {/* Langue */}
-        <div>
-          <label htmlFor="langue" className={labelCls}>Langue parlée{reqTag}</label>
-          <AppSelect
-            id="langue"
-            name="langue"
-            value={langue}
-            onChange={setLangue}
-            options={LANGUES.map((l) => ({ value: l.code, label: l.label }))}
-            placeholder="Sélectionner une langue"
-            emptyOption={{ value: "", label: "Sélectionner une langue" }}
-            className="mt-1 w-full"
-          />
-        </div>
+          <div>
+            <label className={labelCls}>Identifiant de connexion</label>
+            <input
+              name="login_id"
+              type="text"
+              readOnly
+              value={loginId}
+              placeholder="Saisissez le prénom et le nom"
+              className="mt-1 min-h-12 w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3 text-base font-mono text-green-700 outline-none cursor-default dark:border-zinc-700 dark:bg-zinc-800 dark:text-green-400"
+            />
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+              Cet identifiant sera utilisé pour se connecter. Il est généré automatiquement.
+            </p>
+          </div>
+        </section>
+
+        {/* Classe & langue */}
+        <section className="space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            Classe &amp; langue
+          </p>
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div>
+              <label className={labelCls}>Classe{reqTag}</label>
+              <div className="mt-1 grid grid-cols-2 gap-2">
+                <AppSelect
+                  name="classe_type"
+                  value={classeType}
+                  onChange={(v) => { setClasseType(v); setClasseNum(""); }}
+                  options={ELEVE_CLASSE_TYPE_OPTIONS}
+                  placeholder="Filière"
+                  emptyOption={{ value: "", label: "Filière" }}
+                  className="w-full"
+                />
+                {usesReference ? (
+                  <input
+                    name="classe_num"
+                    type="text"
+                    required
+                    value={classeNum}
+                    onChange={(e) => setClasseNum(e.target.value)}
+                    placeholder="Référence"
+                    className={inputCls}
+                  />
+                ) : (
+                  <AppSelect
+                    name="classe_num"
+                    value={classeNum}
+                    onChange={setClasseNum}
+                    options={CLASSE_NUM_OPTIONS}
+                    placeholder="N° de la classe"
+                    emptyOption={{ value: "", label: "N° de la classe" }}
+                    className="w-full"
+                  />
+                )}
+              </div>
+              {usesReference && (
+                <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">
+                  {HSS_CLASSE_HINT}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="langue" className={labelCls}>Langue parlée{reqTag}</label>
+              <AppSelect
+                id="langue"
+                name="langue"
+                value={langue}
+                onChange={setLangue}
+                options={LANGUES.map((l) => ({ value: l.code, label: l.label }))}
+                placeholder="Sélectionner une langue"
+                emptyOption={{ value: "", label: "Sélectionner une langue" }}
+                className="mt-1 w-full"
+              />
+            </div>
+          </div>
+        </section>
 
         {/* Mot de passe */}
-        <div>
-          <label htmlFor="password" className={labelCls}>Mot de passe{reqTag}</label>
-          <input
-            id="password" name="password" type="password" required minLength={8}
-            autoComplete="new-password" value={password}
-            onChange={e => setPassword(e.target.value)}
-            className={inputCls}
-          />
-          <p className="mt-1 text-xs text-zinc-500">Au moins 8 caractères.</p>
-        </div>
-
-        {/* Confirmation mot de passe */}
-        <div>
-          <label htmlFor="confirm_password" className={labelCls}>Confirmer le mot de passe{reqTag}</label>
-          <input
-            id="confirm_password" name="confirm_password" type="password" required
-            autoComplete="new-password" value={confirmPassword}
-            onChange={e => setConfirmPassword(e.target.value)}
-            className={`${inputCls} ${passwordMismatch ? "border-red-400 focus:border-red-500" : ""}`}
-          />
-          {passwordMismatch && (
-            <p className="mt-1 text-xs text-red-600 dark:text-red-400">Les mots de passe ne correspondent pas.</p>
-          )}
-        </div>
+        <section className="space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            Mot de passe
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="password" className={labelCls}>Mot de passe{reqTag}</label>
+              <input
+                id="password" name="password" type="password" required minLength={8}
+                autoComplete="new-password" value={password}
+                onChange={e => setPassword(e.target.value)}
+                className={inputCls}
+              />
+              <p className="mt-1 text-xs text-zinc-500">Au moins 8 caractères.</p>
+            </div>
+            <div>
+              <label htmlFor="confirm_password" className={labelCls}>Confirmer le mot de passe{reqTag}</label>
+              <input
+                id="confirm_password" name="confirm_password" type="password" required
+                autoComplete="new-password" value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+                className={`${inputCls} ${passwordMismatch ? "border-red-400 focus:border-red-500" : ""}`}
+              />
+              {passwordMismatch && (
+                <p className="mt-1 text-xs text-red-600 dark:text-red-400">Les mots de passe ne correspondent pas.</p>
+              )}
+            </div>
+          </div>
+        </section>
 
         {/* Coordonnées */}
-        <div className="pt-1">
+        <section className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             Coordonnées{optTag}
           </p>
-          <div className="mt-3 flex flex-col gap-4">
-            <div>
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div className="lg:col-span-2">
               <label htmlFor="adresse" className={labelCls}>Adresse</label>
               <input id="adresse" name="adresse" type="text" autoComplete="street-address" className={inputCls} />
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label htmlFor="npa" className={labelCls}>NPA</label>
-                <input id="npa" name="npa" type="text" inputMode="numeric" autoComplete="postal-code" placeholder="1234" className={inputCls} />
-              </div>
-              <div>
-                <label htmlFor="localite" className={labelCls}>Localité</label>
-                <input id="localite" name="localite" type="text" autoComplete="address-level2" className={inputCls} />
-              </div>
+            <div>
+              <label htmlFor="npa" className={labelCls}>NPA</label>
+              <input id="npa" name="npa" type="text" inputMode="numeric" autoComplete="postal-code" placeholder="1234" className={inputCls} />
             </div>
             <div>
+              <label htmlFor="localite" className={labelCls}>Localité</label>
+              <input id="localite" name="localite" type="text" autoComplete="address-level2" className={inputCls} />
+            </div>
+            <div className="lg:col-span-2">
               <label htmlFor="telephone" className={labelCls}>Téléphone</label>
               <input id="telephone" name="telephone" type="tel" autoComplete="tel" placeholder="+41 79 123 45 67" className={inputCls} />
             </div>
           </div>
+        </section>
+
+        <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
+          <button
+            type="submit"
+            disabled={pending || !loginId || passwordMismatch}
+            className="min-h-12 rounded-xl bg-green-700 px-8 text-base font-semibold text-white disabled:opacity-60 dark:bg-green-600 sm:min-w-[12rem]"
+          >
+            {pending ? "Inscription en cours…" : "M'inscrire"}
+          </button>
+          <p className="text-center text-sm text-zinc-600 sm:text-right dark:text-zinc-400">
+            Déjà un compte ?{" "}
+            <Link href="/connexion" className="font-semibold text-green-800 underline dark:text-green-400">
+              Connexion
+            </Link>
+          </p>
         </div>
-
-        <button
-          type="submit"
-          disabled={pending || !loginId || passwordMismatch}
-          className="mt-2 min-h-12 rounded-xl bg-green-700 text-base font-semibold text-white disabled:opacity-60 dark:bg-green-600"
-        >
-          {pending ? "Inscription en cours…" : "M'inscrire"}
-        </button>
       </form>
-
-      <p className="mt-6 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        Déjà un compte ?{" "}
-        <Link href="/connexion" className="font-semibold text-green-800 underline dark:text-green-400">
-          Connexion
-        </Link>
-      </p>
     </>
   );
 }

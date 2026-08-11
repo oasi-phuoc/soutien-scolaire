@@ -32,6 +32,7 @@ export default async function ReinitialiserMotDePassePage({
   }
 
   return (
+    <div className="mx-auto w-full max-w-md px-4">
     <main className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
       <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
         Nouveau mot de passe
@@ -89,5 +90,6 @@ export default async function ReinitialiserMotDePassePage({
         </Link>
       </p>
     </main>
+    </div>
   );
 }
