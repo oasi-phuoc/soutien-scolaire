@@ -149,6 +149,13 @@ export async function getSuiviContextAction(): Promise<SuiviContext | null> {
   const role = await getCallerRole();
   if (!role) return null;
 
+  // Admin : synchronise les labels profiles → school_classes (HSS inclus)
+  // pour que le suivi affiche les nouvelles classes comme CSC/CFR.
+  if (role === "admin") {
+    const svc = createServiceClient();
+    if (svc) await syncSchoolClassesFromProfiles(svc);
+  }
+
   const { data: hasAccess } = await supabase.rpc("has_suivi_access");
   const { data: classesRaw } = await supabase.rpc("get_my_teacher_classes");
   const { data: assignedRows } = await supabase
