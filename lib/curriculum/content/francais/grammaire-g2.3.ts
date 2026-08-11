@@ -30,10 +30,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         ps: "موږ د جمع بڼه هغه وخت کاروو چې نوم څو توکي وښيي.",
         uk: "Форму множини вживаємо, коли іменник позначає кілька елементів.",
       },
-    },
-    {
-      type: "text",
-      label: "Exemples",
       items: [
         "une pomme — {a}des{/a} pomme{a}s{/a}",
       ],
@@ -50,17 +46,17 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
     },
     {
       type: "text",
-      text: "Un nom s'emploie toujours avec un déterminant, qui indique le nombre. Dans les dictionnaires, les noms sont au singulier.",
+      text: "Un nom s'emploie toujours avec un déterminant, qui indique le genre et le nombre. Dans les dictionnaires, les noms sont au singulier.",
       transText: {
-        en: "A noun is always used with a determiner, which shows the number. In dictionaries, nouns are in the singular.",
-        ar: "يُستعمل الاسم دائماً مع محدد يدل على العدد. في القواميس، الأسماء في المفرد.",
-        fa: "اسم همیشه با یک حرف تعریف به کار می‌رود که شمار را نشان می‌دهد. در فرهنگ لغت، اسم‌ها مفردند.",
-        pt: "Um nome usa-se sempre com um determinante, que indica o número. Nos dicionários, os nomes estão no singular.",
-        so: "Magac mar walba waxaa lala adeegsadaa go'aamiye, kaas oo muujiya tirada. Qaamuusyada, magacyadu waxay ku jiraan keli.",
-        ti: "ስም ኩሉ ግዜ ምስ መወሰኒ ይጥቀም፣ ቁጽሪ የመልክት። ኣብ መዝገበ-ቃላት፣ ስማት ብንጽል እዮም።",
-        tr: "Bir isim her zaman sayıyı gösteren bir belirleyiciyle kullanılır. Sözlüklerde isimler tekil hâlde bulunur.",
-        ps: "نوم تل له ټاکونکي سره کارېږي، چې شمېر ښيي. په قاموسونو کې نومونه په مفرد کې وي.",
-        uk: "Іменник завжди вживається з означенням, яке показує число. У словниках іменники стоять в однині.",
+        en: "A noun is always used with a determiner, which indicates its gender and number. In dictionaries, nouns are listed in the singular.",
+        ar: "يُستعمل الاسم دائمًا مع أداة تحديد، تُبيّن جنسه وعدده. في القواميس، تُدرج الأسماء بصيغة المفرد.",
+        fa: "اسم همیشه با یک تعیین‌کننده به کار می‌رود که جنس و شمار آن را نشان می‌دهد. در فرهنگ‌های لغت، اسم‌ها به صورت مفرد ثبت می‌شوند.",
+        pt: "Um nome é sempre usado com um determinante, que indica o género e o número. Nos dicionários, os nomes são apresentados no singular.",
+        so: "Magac mar walba waxaa lala adeegsadaa go'aamiye, kaas oo muujinaya jinsiga iyo tirada. Qaamuusyada, magacyada waxaa lagu qoraa qaabka keliya.",
+        ti: "ስም ኩሉ ግዜ ምስ መወሰኒ ይጥቀም፣ እዚ ድማ ጾታን ቁጽርን የመልክት። ኣብ መዝገበ-ቃላት፣ ስማት ብንጽል ይቐርቡ።",
+        tr: "Bir isim her zaman, ismin cinsiyetini ve sayısını gösteren bir belirleyiciyle kullanılır. Sözlüklerde isimler tekil biçimde verilir.",
+        ps: "نوم تل له داسې ټاکونکي سره کارېږي چې د نوم جنس او شمېر ښيي. په قاموسونو کې نومونه په مفرد بڼه لیکل کېږي.",
+        uk: "Іменник завжди вживається з детермінативом, який указує на його рід і число. У словниках іменники подаються в однині.",
       },
     },
     {
