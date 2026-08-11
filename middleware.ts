@@ -3,6 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const PUBLIC_PATHS = new Set([
   "/connexion",
+  "/inscription",
   "/mot-de-passe-oublie",
   "/reinitialiser-mot-de-passe",
   "/verification-otp",
@@ -68,7 +69,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(login);
   }
 
-  if (path === "/connexion" && user) {
+  if ((path === "/connexion" || path === "/inscription") && user) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
