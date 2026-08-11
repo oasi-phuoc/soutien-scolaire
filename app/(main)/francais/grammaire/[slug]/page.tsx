@@ -23,7 +23,7 @@ export default async function GrammairePage({ params }: Props) {
         subject="Grammaire"
         isAdmin={isAdmin}
         freeAccess={access.canFreeAccess}
-        canPartialFrench={access.canPartialFrench}
+        canPartialFrenchGrammar={access.canPartialFrenchGrammar}
       />
     </main>
   );

@@ -25,7 +25,9 @@ export default async function MathematiquesPage() {
         isLoggedIn={isLoggedIn}
         isAdmin={isAdmin}
         freeAccess={access.canFreeAccess}
-        canPartialMath={access.canPartialMath}
+        canPartialMathA3={access.canPartialMathA3}
+        canPartialMathA8={access.canPartialMathA8}
+        canPartialMathG3={access.canPartialMathG3}
       />
     </Suspense>
   );

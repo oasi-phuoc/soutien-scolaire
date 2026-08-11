@@ -22,7 +22,7 @@ export default async function CommunicationPage() {
     <CommunicationHome
       isAdmin={isAdmin}
       freeAccess={access.canFreeAccess}
-      canPartialFrench={access.canPartialFrench}
+      canPartialFrenchComm={access.canPartialFrenchComm}
     />
   );
 }

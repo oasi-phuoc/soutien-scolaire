@@ -142,8 +142,13 @@ export function SuiviClassDashboard({
           ? {
               ...s,
               can_free_access: patch.can_free_access ?? s.can_free_access,
-              can_partial_french: patch.can_partial_french ?? s.can_partial_french,
-              can_partial_math: patch.can_partial_math ?? s.can_partial_math,
+              can_partial_french_grammar:
+                patch.can_partial_french_grammar ?? s.can_partial_french_grammar,
+              can_partial_french_comm:
+                patch.can_partial_french_comm ?? s.can_partial_french_comm,
+              can_partial_math_a3: patch.can_partial_math_a3 ?? s.can_partial_math_a3,
+              can_partial_math_a8: patch.can_partial_math_a8 ?? s.can_partial_math_a8,
+              can_partial_math_g3: patch.can_partial_math_g3 ?? s.can_partial_math_g3,
             }
           : s,
       ),

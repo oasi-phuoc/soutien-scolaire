@@ -27,6 +27,7 @@ import { PASSING_GRADE } from "@/lib/scoring";
 import {
   hasMathLessonAccess,
   mathModuleAllowed,
+  mathSubmoduleAllowed,
   type LessonAccessFlags,
 } from "@/lib/auth/lesson-access";
 
@@ -106,12 +107,16 @@ export function MathematiquesClient({
   isLoggedIn = false,
   isAdmin = false,
   freeAccess = false,
-  canPartialMath = false,
+  canPartialMathA3 = false,
+  canPartialMathA8 = false,
+  canPartialMathG3 = false,
 }: {
   isLoggedIn?: boolean;
   isAdmin?: boolean;
   freeAccess?: boolean;
-  canPartialMath?: boolean;
+  canPartialMathA3?: boolean;
+  canPartialMathA8?: boolean;
+  canPartialMathG3?: boolean;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -127,8 +132,11 @@ export function MathematiquesClient({
 
   const lessonAccess: LessonAccessFlags = {
     canFreeAccess: Boolean(isAdmin || freeAccess),
-    canPartialFrench: false,
-    canPartialMath: Boolean(isAdmin || freeAccess || canPartialMath),
+    canPartialFrenchGrammar: false,
+    canPartialFrenchComm: false,
+    canPartialMathA3: Boolean(isAdmin || freeAccess || canPartialMathA3),
+    canPartialMathA8: Boolean(isAdmin || freeAccess || canPartialMathA8),
+    canPartialMathG3: Boolean(isAdmin || freeAccess || canPartialMathG3),
   };
   const mathOk = isAdmin || hasMathLessonAccess(lessonAccess);
   const unlockAll = Boolean(isAdmin || freeAccess);
@@ -194,7 +202,7 @@ export function MathematiquesClient({
     }
     return null;
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modules, hydrated, mathOk, unlockAll, progress, done, isAdmin, canPartialMath, freeAccess]);
+  }, [modules, hydrated, mathOk, unlockAll, progress, done, isAdmin, canPartialMathA3, canPartialMathA8, canPartialMathG3, freeAccess]);
 
   return (
     <div className="app-shell flex-1 space-y-6 pt-8 pb-32 lg:pb-28">
@@ -321,10 +329,13 @@ export function MathematiquesClient({
                     .map((sub) => sub.id)
                 : [],
             );
-            const firstAvailableSubIdx = m.submodules.findIndex((sub) => !passedSubIds.has(sub.id));
-
             const isRevisionSub = (sub: { code: string }) =>
               sub.code.startsWith("RA.") || sub.code.startsWith("RG.");
+            const firstAvailableSubIdx = m.submodules.findIndex((sub) => {
+              if (passedSubIds.has(sub.id)) return false;
+              if (isRevisionSub(sub)) return false;
+              return unlockAll || mathSubmoduleAllowed(sub.code, lessonAccess);
+            });
             const nonRevisionSubs = m.submodules.filter((sub) => !isRevisionSub(sub));
             const allNonRevisionCompleted =
               nonRevisionSubs.length > 0 &&
@@ -428,11 +439,12 @@ export function MathematiquesClient({
                   {expanded && m.submodules.length > 0 && (
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
                       {m.submodules.map((sub, idx) => {
+                        const accessSubOk = unlockAll || mathSubmoduleAllowed(sub.code, lessonAccess);
                         const subDone = completedSubIds.has(sub.id);
                         const isRev = isRevisionSub(sub);
                         const subAvailable = isAdmin
                           ? !subDone
-                          : !isLocked && !subDone && (
+                          : accessSubOk && !isLocked && !subDone && (
                               isRev
                                 ? allNonRevisionCompleted
                                 : idx === firstAvailableSubIdx

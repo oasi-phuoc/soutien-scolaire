@@ -65,11 +65,11 @@ function ModuleProgressBar({ total, completed }: { total: number; completed: num
 export function CommunicationModuleList({
   isAdmin = false,
   freeAccess = false,
-  canPartialFrench = false,
+  canPartialFrenchComm = false,
 }: {
   isAdmin?: boolean;
   freeAccess?: boolean;
-  canPartialFrench?: boolean;
+  canPartialFrenchComm?: boolean;
 }) {
   const router = useRouter();
   const { overrides } = useContentEditor();
@@ -80,8 +80,11 @@ export function CommunicationModuleList({
 
   const lessonAccess: LessonAccessFlags = {
     canFreeAccess: Boolean(isAdmin || freeAccess),
-    canPartialFrench: Boolean(isAdmin || freeAccess || canPartialFrench),
-    canPartialMath: false,
+    canPartialFrenchGrammar: false,
+    canPartialFrenchComm: Boolean(isAdmin || freeAccess || canPartialFrenchComm),
+    canPartialMathA3: false,
+    canPartialMathA8: false,
+    canPartialMathG3: false,
   };
   const frenchOk = isAdmin || hasFrenchLessonAccess(lessonAccess);
   const unlockAll = Boolean(isAdmin || freeAccess);
@@ -110,9 +113,9 @@ export function CommunicationModuleList({
           : "in_progress";
       return { m, visibleSubs, completedCount, allDone, moduleState, moduleAccessible };
     });
-  // lessonAccess dérivé de unlockAll / canPartialFrench
+  // lessonAccess dérivé de unlockAll / canPartialFrenchComm
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [commModules, completed, frenchOk, unlockAll, isAdmin, canPartialFrench, freeAccess]);
+  }, [commModules, completed, frenchOk, unlockAll, isAdmin, canPartialFrenchComm, freeAccess]);
 
   const primaryInProgressId = useMemo(() => {
     if (!hydrated || !frenchOk) return null;
@@ -271,11 +274,11 @@ export function CommunicationModuleList({
 export function CommunicationHome({
   isAdmin = false,
   freeAccess = false,
-  canPartialFrench = false,
+  canPartialFrenchComm = false,
 }: {
   isAdmin?: boolean;
   freeAccess?: boolean;
-  canPartialFrench?: boolean;
+  canPartialFrenchComm?: boolean;
 }) {
   return (
     <div className="app-shell flex-1 space-y-6 py-8 pb-32 lg:pb-28">
@@ -298,7 +301,7 @@ export function CommunicationHome({
         <CommunicationModuleList
           isAdmin={isAdmin}
           freeAccess={freeAccess}
-          canPartialFrench={canPartialFrench}
+          canPartialFrenchComm={canPartialFrenchComm}
         />
       </section>
 

@@ -84,8 +84,8 @@ interface Props {
   isAdmin?: boolean;
   /** Accès libre élève — bypass des gates bilans. */
   freeAccess?: boolean;
-  /** Accès partiel français (plafond G7.1). */
-  canPartialFrench?: boolean;
+  /** Accès partiel grammaire (plafond G7.1). */
+  canPartialFrenchGrammar?: boolean;
 }
 
 // ── Theory view ───────────────────────────────────────────────────────────────
@@ -3050,7 +3050,7 @@ export function GrammaireRunner({
   subject = "Conjugaison",
   isAdmin = false,
   freeAccess = false,
-  canPartialFrench = false,
+  canPartialFrenchGrammar = false,
 }: Props) {
   const router = useRouter();
   const evalGuard = useEvalNavGuard();
@@ -3085,8 +3085,11 @@ export function GrammaireRunner({
 
     const lessonAccess: LessonAccessFlags = {
       canFreeAccess: false,
-      canPartialFrench: Boolean(canPartialFrench),
-      canPartialMath: false,
+      canPartialFrenchGrammar: Boolean(canPartialFrenchGrammar),
+      canPartialFrenchComm: false,
+      canPartialMathA3: false,
+      canPartialMathA8: false,
+      canPartialMathG3: false,
     };
     if (!hasFrenchLessonAccess(lessonAccess)) {
       router.replace("/francais?tab=grammaire");
@@ -3114,7 +3117,7 @@ export function GrammaireRunner({
     subject,
     isAdmin,
     freeAccess,
-    canPartialFrench,
+    canPartialFrenchGrammar,
     lesson.code,
     lesson.slug,
     router,

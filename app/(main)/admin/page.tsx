@@ -30,12 +30,23 @@ export default async function AdminPage() {
 
   const rows: UserRow[] = (users ?? []).map((u) => {
     const free = Boolean((u as { can_free_access?: boolean }).can_free_access);
+    const legacyFr = Boolean((u as { can_partial_french?: boolean }).can_partial_french);
+    const legacyMath = Boolean((u as { can_partial_math?: boolean }).can_partial_math);
     return {
       ...u,
       can_print: Boolean((u as { can_print?: boolean }).can_print),
       can_free_access: free,
-      can_partial_french: Boolean((u as { can_partial_french?: boolean }).can_partial_french),
-      can_partial_math: Boolean((u as { can_partial_math?: boolean }).can_partial_math),
+      can_partial_french_grammar: Boolean(
+        (u as { can_partial_french_grammar?: boolean }).can_partial_french_grammar ?? legacyFr,
+      ),
+      can_partial_french_comm: Boolean(
+        (u as { can_partial_french_comm?: boolean }).can_partial_french_comm ?? legacyFr,
+      ),
+      can_partial_math_a3: Boolean(
+        (u as { can_partial_math_a3?: boolean }).can_partial_math_a3 ?? legacyMath,
+      ),
+      can_partial_math_a8: Boolean((u as { can_partial_math_a8?: boolean }).can_partial_math_a8),
+      can_partial_math_g3: Boolean((u as { can_partial_math_g3?: boolean }).can_partial_math_g3),
     };
   }).sort((a, b) => {
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();

@@ -2,22 +2,47 @@
  * Plafonds et helpers pour l'accès complet / partiel aux leçons.
  *
  * - Accès complet (`canFreeAccess`) : toutes les leçons, sans verrouillage séquentiel.
- * - Accès partiel français : grammaire ≤ G7.1, communication ≤ E9.1, vocabulaire ouvert.
- * - Accès partiel maths : modules algèbre ≤ A3.
+ * - Accès partiel français : grammaire ≤ G7.1 et/ou communication ≤ E9.1 (flags séparés).
+ * - Accès partiel maths : plafonds indépendants A3.1, A8.1 (algèbre) et G3.1 (géométrie).
  */
 
 export const PARTIAL_FRENCH_GRAMMAR_MAX = "G7.1";
 export const PARTIAL_FRENCH_COMM_MAX = "E9.1";
+export const PARTIAL_MATH_A3_MAX = "A3.1";
+export const PARTIAL_MATH_A8_MAX = "A8.1";
+export const PARTIAL_MATH_G3_MAX = "G3.1";
+
+/** @deprecated Preférer PARTIAL_MATH_A3_MAX — conservé pour libellés legacy. */
 export const PARTIAL_MATH_MAX_MODULE = "A3";
 
 export type LessonAccessFlags = {
   /** Accès complet (libre) — bypass séquentiel + tout le catalogue. */
   canFreeAccess: boolean;
-  /** Accès partiel français (ou complet). */
-  canPartialFrench: boolean;
-  /** Accès partiel maths (ou complet). */
-  canPartialMath: boolean;
+  /** Accès partiel grammaire jusqu'à G7.1 (ou complet). */
+  canPartialFrenchGrammar: boolean;
+  /** Accès partiel communication jusqu'à E9.1 (ou complet). */
+  canPartialFrenchComm: boolean;
+  /** Accès partiel algèbre jusqu'à A3.1 (ou complet). */
+  canPartialMathA3: boolean;
+  /** Accès partiel algèbre jusqu'à A8.1 (ou complet). */
+  canPartialMathA8: boolean;
+  /** Accès partiel géométrie jusqu'à G3.1 (ou complet). */
+  canPartialMathG3: boolean;
 };
+
+export function emptyLessonAccessFlags(
+  overrides: Partial<LessonAccessFlags> = {},
+): LessonAccessFlags {
+  return {
+    canFreeAccess: false,
+    canPartialFrenchGrammar: false,
+    canPartialFrenchComm: false,
+    canPartialMathA3: false,
+    canPartialMathA8: false,
+    canPartialMathG3: false,
+    ...overrides,
+  };
+}
 
 /** Compare des codes type G7.1 / E9.1 / A3.2 (lettre + numéros). */
 export function compareLessonCodes(a: string, b: string): number {
@@ -51,22 +76,31 @@ export function moduleAtOrBefore(moduleId: string, maxCode: string): boolean {
 }
 
 export function hasFrenchLessonAccess(flags: LessonAccessFlags): boolean {
-  return flags.canFreeAccess || flags.canPartialFrench;
+  return (
+    flags.canFreeAccess ||
+    flags.canPartialFrenchGrammar ||
+    flags.canPartialFrenchComm
+  );
 }
 
 export function hasMathLessonAccess(flags: LessonAccessFlags): boolean {
-  return flags.canFreeAccess || flags.canPartialMath;
+  return (
+    flags.canFreeAccess ||
+    flags.canPartialMathA3 ||
+    flags.canPartialMathA8 ||
+    flags.canPartialMathG3
+  );
 }
 
 export function grammarCodeAllowed(code: string, flags: LessonAccessFlags): boolean {
   if (flags.canFreeAccess) return true;
-  if (!flags.canPartialFrench) return false;
+  if (!flags.canPartialFrenchGrammar) return false;
   return codeAtOrBefore(code, PARTIAL_FRENCH_GRAMMAR_MAX);
 }
 
 export function commCodeAllowed(code: string, flags: LessonAccessFlags): boolean {
   if (flags.canFreeAccess) return true;
-  if (!flags.canPartialFrench) return false;
+  if (!flags.canPartialFrenchComm) return false;
   return codeAtOrBefore(code, PARTIAL_FRENCH_COMM_MAX);
 }
 
@@ -79,8 +113,70 @@ export function commIdAllowed(id: string, flags: LessonAccessFlags): boolean {
   return commCodeAllowed(commIdToCode(id), flags);
 }
 
+/** Plafond algèbre actif (A8.1 prioritaire sur A3.1). */
+export function mathAlgebraMaxCode(flags: LessonAccessFlags): string | null {
+  if (flags.canFreeAccess) return null;
+  if (flags.canPartialMathA8) return PARTIAL_MATH_A8_MAX;
+  if (flags.canPartialMathA3) return PARTIAL_MATH_A3_MAX;
+  return null;
+}
+
+/** Plafond géométrie actif. */
+export function mathGeometryMaxCode(flags: LessonAccessFlags): string | null {
+  if (flags.canFreeAccess) return null;
+  if (flags.canPartialMathG3) return PARTIAL_MATH_G3_MAX;
+  return null;
+}
+
+/**
+ * Sous-module maths autorisé par l'accès partiel.
+ * Codes type A3.1 / G3.1 ; ids type A3-1 acceptés aussi.
+ */
+export function mathSubmoduleAllowed(
+  codeOrId: string,
+  flags: LessonAccessFlags,
+): boolean {
+  if (flags.canFreeAccess) return true;
+  const code = codeOrId.includes("-") ? codeOrId.replace("-", ".") : codeOrId;
+  const m = /^([A-Za-z]+)(\d+)(?:\.(\d+))?$/.exec(code.trim());
+  if (!m) return false;
+  const prefix = m[1].toUpperCase();
+
+  if (prefix === "A") {
+    const max = mathAlgebraMaxCode(flags);
+    if (!max) return false;
+    return codeAtOrBefore(code, max);
+  }
+
+  if (prefix === "G") {
+    const max = mathGeometryMaxCode(flags);
+    if (!max) return false;
+    return codeAtOrBefore(code, max);
+  }
+
+  // RA / RG / autres : seulement en accès complet
+  return false;
+}
+
+/** Module visible s'il contient au moins un sous-module autorisé (ou le plafond couvre le module). */
 export function mathModuleAllowed(moduleId: string, flags: LessonAccessFlags): boolean {
   if (flags.canFreeAccess) return true;
-  if (!flags.canPartialMath) return false;
-  return moduleAtOrBefore(moduleId, PARTIAL_MATH_MAX_MODULE);
+  const m = /^([A-Za-z]+)(\d+)$/.exec(moduleId.trim());
+  if (!m) return false;
+  const prefix = m[1].toUpperCase();
+  const major = Number(m[2]);
+
+  if (prefix === "A") {
+    const max = mathAlgebraMaxCode(flags);
+    if (!max) return false;
+    return moduleAtOrBefore(moduleId, max);
+  }
+
+  if (prefix === "G") {
+    const max = mathGeometryMaxCode(flags);
+    if (!max) return false;
+    return moduleAtOrBefore(`G${major}`, max);
+  }
+
+  return false;
 }

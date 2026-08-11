@@ -21,7 +21,8 @@ export default async function FrancaisPage() {
       <FrancaisClient
         isAdmin={isAdmin}
         freeAccess={access.canFreeAccess}
-        canPartialFrench={access.canPartialFrench}
+        canPartialFrenchGrammar={access.canPartialFrenchGrammar}
+        canPartialFrenchComm={access.canPartialFrenchComm}
       />
     </Suspense>
   );

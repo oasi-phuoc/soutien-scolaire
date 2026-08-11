@@ -391,16 +391,21 @@ function SectionCard({
 export function FrancaisClient({
   isAdmin = false,
   freeAccess = false,
-  canPartialFrench = false,
+  canPartialFrenchGrammar = false,
+  canPartialFrenchComm = false,
 }: {
   isAdmin?: boolean;
   freeAccess?: boolean;
-  canPartialFrench?: boolean;
+  canPartialFrenchGrammar?: boolean;
+  canPartialFrenchComm?: boolean;
 }) {
   const lessonAccess: LessonAccessFlags = {
     canFreeAccess: Boolean(isAdmin || freeAccess),
-    canPartialFrench: Boolean(isAdmin || freeAccess || canPartialFrench),
-    canPartialMath: false,
+    canPartialFrenchGrammar: Boolean(isAdmin || freeAccess || canPartialFrenchGrammar),
+    canPartialFrenchComm: Boolean(isAdmin || freeAccess || canPartialFrenchComm),
+    canPartialMathA3: false,
+    canPartialMathA8: false,
+    canPartialMathG3: false,
   };
   const frenchOk = isAdmin || hasFrenchLessonAccess(lessonAccess);
   const searchParams = useSearchParams();
@@ -584,7 +589,7 @@ export function FrancaisClient({
           <CommunicationModuleList
             isAdmin={isAdmin}
             freeAccess={freeAccess}
-            canPartialFrench={canPartialFrench}
+            canPartialFrenchComm={canPartialFrenchComm}
           />
         </section>
       ) : null}

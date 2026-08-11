@@ -9,7 +9,9 @@ import {
 import {
   PARTIAL_FRENCH_COMM_MAX,
   PARTIAL_FRENCH_GRAMMAR_MAX,
-  PARTIAL_MATH_MAX_MODULE,
+  PARTIAL_MATH_A3_MAX,
+  PARTIAL_MATH_A8_MAX,
+  PARTIAL_MATH_G3_MAX,
 } from "@/lib/auth/lesson-access";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
@@ -74,6 +76,16 @@ function AccessSwitch({
   );
 }
 
+function clearPartials(): StudentLessonAccessPatch {
+  return {
+    can_partial_french_grammar: false,
+    can_partial_french_comm: false,
+    can_partial_math_a3: false,
+    can_partial_math_a8: false,
+    can_partial_math_g3: false,
+  };
+}
+
 export function StudentPersonalInfoCard({
   student,
   onAccessChange,
@@ -89,23 +101,27 @@ export function StudentPersonalInfoCard({
     setError(null);
     const previous: StudentLessonAccessPatch = {
       can_free_access: student.can_free_access,
-      can_partial_french: student.can_partial_french,
-      can_partial_math: student.can_partial_math,
+      can_partial_french_grammar: student.can_partial_french_grammar,
+      can_partial_french_comm: student.can_partial_french_comm,
+      can_partial_math_a3: student.can_partial_math_a3,
+      can_partial_math_a8: student.can_partial_math_a8,
+      can_partial_math_g3: student.can_partial_math_g3,
     };
     const next: StudentLessonAccessPatch = { ...previous, ...patch };
     if (next.can_free_access) {
-      next.can_partial_french = false;
-      next.can_partial_math = false;
+      Object.assign(next, clearPartials());
     }
     onAccessChange?.(student.id, next);
     startTransition(async () => {
-      const res = await setStudentLessonAccessAction(student.id, patch);
+      const res = await setStudentLessonAccessAction(student.id, patch.can_free_access ? { ...patch, ...clearPartials() } : patch);
       if (!res.ok) {
         onAccessChange?.(student.id, previous);
         setError(res.reason ?? "Impossible de modifier l'accès.");
       }
     });
   }
+
+  const partialDisabled = student.can_free_access;
 
   return (
     <div className="space-y-4">
@@ -120,22 +136,18 @@ export function StudentPersonalInfoCard({
               </dd>
             </div>
           )}
-          {student.adresse && (
-            <div className="flex gap-2">
-              <dt className="w-28 shrink-0 text-zinc-400">Adresse</dt>
-              <dd className="text-zinc-700 dark:text-zinc-300">{student.adresse}</dd>
-            </div>
-          )}
-          {location && (
-            <div className="flex gap-2">
-              <dt className="w-28 shrink-0 text-zinc-400">NPA / Localité</dt>
-              <dd className="text-zinc-700 dark:text-zinc-300">{location}</dd>
-            </div>
-          )}
           {student.telephone && (
             <div className="flex gap-2">
               <dt className="w-28 shrink-0 text-zinc-400">Téléphone</dt>
-              <dd className="text-zinc-700 dark:text-zinc-300">{student.telephone}</dd>
+              <dd className="font-medium text-zinc-700 dark:text-zinc-300">{student.telephone}</dd>
+            </div>
+          )}
+          {(student.adresse || location) && (
+            <div className="flex gap-2">
+              <dt className="w-28 shrink-0 text-zinc-400">Adresse</dt>
+              <dd className="font-medium text-zinc-700 dark:text-zinc-300">
+                {[student.adresse, location].filter(Boolean).join(", ")}
+              </dd>
             </div>
           )}
           <div className="flex gap-2">
@@ -159,24 +171,59 @@ export function StudentPersonalInfoCard({
           />
           <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
-              Accès partiel
+              Accès partiel — Français
             </p>
             <div className="space-y-3">
               <AccessSwitch
-                checked={student.can_partial_french}
-                disabled={student.can_free_access}
-                label="Français"
-                description={`Grammaire jusqu'à ${PARTIAL_FRENCH_GRAMMAR_MAX} · Communication jusqu'à ${PARTIAL_FRENCH_COMM_MAX}`}
-                ariaLabel="Accès partiel français"
-                onToggle={() => toggle({ can_partial_french: !student.can_partial_french })}
+                checked={student.can_partial_french_grammar}
+                disabled={partialDisabled}
+                label={`Grammaire ${PARTIAL_FRENCH_GRAMMAR_MAX}`}
+                description="Déblocage progressif jusqu'à cette leçon"
+                ariaLabel="Accès partiel grammaire G7.1"
+                onToggle={() =>
+                  toggle({ can_partial_french_grammar: !student.can_partial_french_grammar })
+                }
               />
               <AccessSwitch
-                checked={student.can_partial_math}
-                disabled={student.can_free_access}
-                label="Mathématiques"
-                description={`Modules jusqu'à ${PARTIAL_MATH_MAX_MODULE}`}
-                ariaLabel="Accès partiel mathématiques"
-                onToggle={() => toggle({ can_partial_math: !student.can_partial_math })}
+                checked={student.can_partial_french_comm}
+                disabled={partialDisabled}
+                label={`Communication ${PARTIAL_FRENCH_COMM_MAX}`}
+                description="Déblocage progressif jusqu'à cette leçon"
+                ariaLabel="Accès partiel communication E9.1"
+                onToggle={() =>
+                  toggle({ can_partial_french_comm: !student.can_partial_french_comm })
+                }
+              />
+            </div>
+          </div>
+          <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
+              Accès partiel — Mathématiques
+            </p>
+            <div className="space-y-3">
+              <AccessSwitch
+                checked={student.can_partial_math_a3}
+                disabled={partialDisabled}
+                label={PARTIAL_MATH_A3_MAX}
+                description="Algèbre jusqu'à cette leçon"
+                ariaLabel="Accès partiel maths A3.1"
+                onToggle={() => toggle({ can_partial_math_a3: !student.can_partial_math_a3 })}
+              />
+              <AccessSwitch
+                checked={student.can_partial_math_a8}
+                disabled={partialDisabled}
+                label={PARTIAL_MATH_A8_MAX}
+                description="Algèbre jusqu'à cette leçon"
+                ariaLabel="Accès partiel maths A8.1"
+                onToggle={() => toggle({ can_partial_math_a8: !student.can_partial_math_a8 })}
+              />
+              <AccessSwitch
+                checked={student.can_partial_math_g3}
+                disabled={partialDisabled}
+                label={PARTIAL_MATH_G3_MAX}
+                description="Géométrie jusqu'à cette leçon"
+                ariaLabel="Accès partiel maths G3.1"
+                onToggle={() => toggle({ can_partial_math_g3: !student.can_partial_math_g3 })}
               />
             </div>
           </div>

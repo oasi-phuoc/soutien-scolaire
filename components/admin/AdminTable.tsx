@@ -43,10 +43,16 @@ export type UserRow = {
   can_print: boolean;
   /** Accès complet aux leçons (sans verrouillage séquentiel). */
   can_free_access: boolean;
-  /** Accès partiel français (jusqu'à G7.1 / E9.1). */
-  can_partial_french: boolean;
-  /** Accès partiel maths (jusqu'à A3). */
-  can_partial_math: boolean;
+  /** Accès partiel grammaire jusqu'à G7.1. */
+  can_partial_french_grammar: boolean;
+  /** Accès partiel communication jusqu'à E9.1. */
+  can_partial_french_comm: boolean;
+  /** Accès partiel maths jusqu'à A3.1. */
+  can_partial_math_a3: boolean;
+  /** Accès partiel maths jusqu'à A8.1. */
+  can_partial_math_a8: boolean;
+  /** Accès partiel maths géométrie jusqu'à G3.1. */
+  can_partial_math_g3: boolean;
   placement_test_best: { points: number; maxPoints: number; percent: number } | null;
   placement_combined: { total: number; zone: string; mathCounted: number; frenchCounted: number; pendingFrench?: number } | null;
 };

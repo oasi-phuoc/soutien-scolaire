@@ -221,7 +221,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const [{ data, error }, { data: authData }] = await Promise.all([
     svc
       .from("profiles")
-      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, can_free_access, can_partial_french, can_partial_math, placement_test_history, placement_combined_profile")
+      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, can_free_access, can_partial_french, can_partial_french_grammar, can_partial_french_comm, can_partial_math, can_partial_math_a3, can_partial_math_a8, can_partial_math_g3, placement_test_history, placement_combined_profile")
       .eq("id", userId)
       .single(),
     svc.auth.admin.getUserById(userId),
@@ -243,7 +243,12 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const row = data as {
     can_free_access?: boolean;
     can_partial_french?: boolean;
+    can_partial_french_grammar?: boolean;
+    can_partial_french_comm?: boolean;
     can_partial_math?: boolean;
+    can_partial_math_a3?: boolean;
+    can_partial_math_a8?: boolean;
+    can_partial_math_g3?: boolean;
   };
 
   return {
@@ -252,8 +257,15 @@ export async function getUserForAdminAction(userId: string): Promise<{
       ...data,
       can_print: Boolean(data.can_print),
       can_free_access: Boolean(row.can_free_access),
-      can_partial_french: Boolean(row.can_partial_french),
-      can_partial_math: Boolean(row.can_partial_math),
+      can_partial_french_grammar: Boolean(
+        row.can_partial_french_grammar ?? row.can_partial_french,
+      ),
+      can_partial_french_comm: Boolean(
+        row.can_partial_french_comm ?? row.can_partial_french,
+      ),
+      can_partial_math_a3: Boolean(row.can_partial_math_a3 ?? row.can_partial_math),
+      can_partial_math_a8: Boolean(row.can_partial_math_a8),
+      can_partial_math_g3: Boolean(row.can_partial_math_g3),
       email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
       placement_combined: combined?.total !== undefined ? {
@@ -331,8 +343,14 @@ export async function setUserFreeAccessAction(
   return { ok: true };
 }
 
-export async function setUserPartialFrenchAction(
+export async function setUserPartialFlagAction(
   userId: string,
+  flag:
+    | "french_grammar"
+    | "french_comm"
+    | "math_a3"
+    | "math_a8"
+    | "math_g3",
   enabled: boolean,
 ): Promise<{ ok: boolean; reason?: string }> {
   const caller = await getCallerRole();
@@ -340,8 +358,17 @@ export async function setUserPartialFrenchAction(
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, reason: "Supabase non configuré" };
 
-  const { error } = await supabase.rpc("set_user_partial_french", {
+  const columnByFlag: Record<typeof flag, string> = {
+    french_grammar: "can_partial_french_grammar",
+    french_comm: "can_partial_french_comm",
+    math_a3: "can_partial_math_a3",
+    math_a8: "can_partial_math_a8",
+    math_g3: "can_partial_math_g3",
+  };
+
+  const { error } = await supabase.rpc("set_user_partial_flag", {
     p_user_id: userId,
+    p_flag: flag,
     p_enabled: enabled,
   });
   if (error) {
@@ -349,7 +376,7 @@ export async function setUserPartialFrenchAction(
     if (!svc) return { ok: false, reason: error.message };
     const { error: svcErr } = await svc
       .from("profiles")
-      .update({ can_partial_french: enabled })
+      .update({ [columnByFlag[flag]]: enabled })
       .eq("id", userId);
     if (svcErr) return { ok: false, reason: svcErr.message };
   }
@@ -358,36 +385,32 @@ export async function setUserPartialFrenchAction(
   revalidatePath(`/admin/eleves/${userId}`);
   revalidatePath("/francais");
   revalidatePath("/communication");
+  revalidatePath("/mathematiques");
   return { ok: true };
 }
 
+/** @deprecated Préférer setUserPartialFlagAction */
+export async function setUserPartialFrenchAction(
+  userId: string,
+  enabled: boolean,
+): Promise<{ ok: boolean; reason?: string }> {
+  const a = await setUserPartialFlagAction(userId, "french_grammar", enabled);
+  if (!a.ok) return a;
+  return setUserPartialFlagAction(userId, "french_comm", enabled);
+}
+
+/** @deprecated Préférer setUserPartialFlagAction */
 export async function setUserPartialMathAction(
   userId: string,
   enabled: boolean,
 ): Promise<{ ok: boolean; reason?: string }> {
-  const caller = await getCallerRole();
-  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, reason: "Supabase non configuré" };
-
-  const { error } = await supabase.rpc("set_user_partial_math", {
-    p_user_id: userId,
-    p_enabled: enabled,
-  });
-  if (error) {
-    const svc = createServiceClient();
-    if (!svc) return { ok: false, reason: error.message };
-    const { error: svcErr } = await svc
-      .from("profiles")
-      .update({ can_partial_math: enabled })
-      .eq("id", userId);
-    if (svcErr) return { ok: false, reason: svcErr.message };
+  const a = await setUserPartialFlagAction(userId, "math_a3", enabled);
+  if (!a.ok) return a;
+  if (!enabled) {
+    await setUserPartialFlagAction(userId, "math_a8", false);
+    await setUserPartialFlagAction(userId, "math_g3", false);
   }
-
-  revalidatePath("/admin");
-  revalidatePath(`/admin/eleves/${userId}`);
-  revalidatePath("/mathematiques");
-  return { ok: true };
+  return a;
 }
 
 /** Met can_partial_* à false pour tous les profils (une seule fois via app_settings). */
@@ -407,8 +430,18 @@ export async function ensurePartialAccessDefaultsAppliedAction(): Promise<void> 
 
   await svc
     .from("profiles")
-    .update({ can_partial_french: false, can_partial_math: false })
-    .or("can_partial_french.eq.true,can_partial_math.eq.true");
+    .update({
+      can_partial_french: false,
+      can_partial_math: false,
+      can_partial_french_grammar: false,
+      can_partial_french_comm: false,
+      can_partial_math_a3: false,
+      can_partial_math_a8: false,
+      can_partial_math_g3: false,
+    })
+    .or(
+      "can_partial_french.eq.true,can_partial_math.eq.true,can_partial_french_grammar.eq.true,can_partial_french_comm.eq.true,can_partial_math_a3.eq.true,can_partial_math_a8.eq.true,can_partial_math_g3.eq.true",
+    );
 
   await svc.from("app_settings").upsert(
     { key: flagKey, value: true, updated_at: new Date().toISOString() },

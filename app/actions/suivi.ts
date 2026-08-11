@@ -64,8 +64,11 @@ export type ClassStudentSuiviRow = {
   langue: string | null;
   progress_updated_at: string | null;
   can_free_access: boolean;
-  can_partial_french: boolean;
-  can_partial_math: boolean;
+  can_partial_french_grammar: boolean;
+  can_partial_french_comm: boolean;
+  can_partial_math_a3: boolean;
+  can_partial_math_a8: boolean;
+  can_partial_math_g3: boolean;
   math_done: number;
   math_total: number;
   math_pct: number;
@@ -381,7 +384,7 @@ export async function getClassStudentsSuiviAction(
 
   let query = supabase
     .from("profiles")
-    .select("id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile, placement_test_history, placement_french_history, can_free_access, can_partial_french, can_partial_math")
+    .select("id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile, placement_test_history, placement_french_history, can_free_access, can_partial_french, can_partial_french_grammar, can_partial_french_comm, can_partial_math, can_partial_math_a3, can_partial_math_a8, can_partial_math_g3")
     .eq("role", "eleve")
     .eq("classe", classLabel)
     .order("nom");
@@ -464,8 +467,19 @@ export async function getClassStudentsSuiviAction(
       langue: (p.langue as string | null) ?? null,
       progress_updated_at: (p.progress_updated_at as string | null) ?? null,
       can_free_access: Boolean(p.can_free_access),
-      can_partial_french: Boolean(p.can_partial_french),
-      can_partial_math: Boolean(p.can_partial_math),
+      can_partial_french_grammar: Boolean(
+        (p as { can_partial_french_grammar?: boolean }).can_partial_french_grammar ??
+          p.can_partial_french,
+      ),
+      can_partial_french_comm: Boolean(
+        (p as { can_partial_french_comm?: boolean }).can_partial_french_comm ??
+          p.can_partial_french,
+      ),
+      can_partial_math_a3: Boolean(
+        (p as { can_partial_math_a3?: boolean }).can_partial_math_a3 ?? p.can_partial_math,
+      ),
+      can_partial_math_a8: Boolean((p as { can_partial_math_a8?: boolean }).can_partial_math_a8),
+      can_partial_math_g3: Boolean((p as { can_partial_math_g3?: boolean }).can_partial_math_g3),
       math_done: math.done,
       math_total: math.total,
       math_pct: math.pct,
@@ -520,11 +534,14 @@ async function assertCanManageStudentLessonAccess(
 
 export type StudentLessonAccessPatch = {
   can_free_access?: boolean;
-  can_partial_french?: boolean;
-  can_partial_math?: boolean;
+  can_partial_french_grammar?: boolean;
+  can_partial_french_comm?: boolean;
+  can_partial_math_a3?: boolean;
+  can_partial_math_a8?: boolean;
+  can_partial_math_g3?: boolean;
 };
 
-/** Accès complet / partiel FR / partiel maths — disponible depuis le suivi classe. */
+/** Accès complet / partiel granulaire — disponible depuis le suivi classe. */
 export async function setStudentLessonAccessAction(
   studentId: string,
   patch: StudentLessonAccessPatch,
@@ -534,14 +551,24 @@ export async function setStudentLessonAccessAction(
 
   const payload: Record<string, boolean> = {};
   if (typeof patch.can_free_access === "boolean") payload.can_free_access = patch.can_free_access;
-  if (typeof patch.can_partial_french === "boolean") payload.can_partial_french = patch.can_partial_french;
-  if (typeof patch.can_partial_math === "boolean") payload.can_partial_math = patch.can_partial_math;
+  if (typeof patch.can_partial_french_grammar === "boolean") {
+    payload.can_partial_french_grammar = patch.can_partial_french_grammar;
+  }
+  if (typeof patch.can_partial_french_comm === "boolean") {
+    payload.can_partial_french_comm = patch.can_partial_french_comm;
+  }
+  if (typeof patch.can_partial_math_a3 === "boolean") payload.can_partial_math_a3 = patch.can_partial_math_a3;
+  if (typeof patch.can_partial_math_a8 === "boolean") payload.can_partial_math_a8 = patch.can_partial_math_a8;
+  if (typeof patch.can_partial_math_g3 === "boolean") payload.can_partial_math_g3 = patch.can_partial_math_g3;
   if (Object.keys(payload).length === 0) return { ok: true };
 
   // Accès complet désactive le besoin d'accès partiel (cohérent avec l'UI admin).
   if (payload.can_free_access === true) {
-    payload.can_partial_french = false;
-    payload.can_partial_math = false;
+    payload.can_partial_french_grammar = false;
+    payload.can_partial_french_comm = false;
+    payload.can_partial_math_a3 = false;
+    payload.can_partial_math_a8 = false;
+    payload.can_partial_math_g3 = false;
   }
 
   const svc = createServiceClient();
