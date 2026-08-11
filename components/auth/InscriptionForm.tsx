@@ -24,6 +24,9 @@ const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
 }));
 
 const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950";
+/** Même hauteur / rayon que AppSelect (md) — pour le champ Référence à côté de Filière. */
+const selectMatchInputCls =
+  "min-h-10 w-full rounded-[22px] border border-zinc-300 bg-white px-4 py-2 text-sm outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950";
 const labelCls = "text-sm font-medium text-zinc-800 dark:text-zinc-200";
 const reqTag = <span className="text-red-500"> *</span>;
 const optTag = <span className="font-normal text-zinc-400 dark:text-zinc-500"> (optionnel)</span>;
@@ -239,7 +242,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
                     value={classeNum}
                     onChange={(e) => setClasseNum(e.target.value)}
                     placeholder="Référence"
-                    className={inputCls}
+                    className={selectMatchInputCls}
                   />
                 ) : (
                   <AppSelect
