@@ -136,184 +136,324 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 5,
-      verbs: [
+      tabs: [
         {
-          infinitive: "aller",
-          radical: "",
-          rows: [
-            { pronoun: "je", ending: "vais" },
-            { pronoun: "tu", ending: "vas" },
-            { pronoun: "il / elle / on", ending: "va" },
-            { pronoun: "nous", ending: "allons" },
-            { pronoun: "vous", ending: "allez" },
-            { pronoun: "ils / elles", ending: "vont" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
-            "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
-            "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
-            "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
-            "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
+          label: "aller",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "aller",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "vais" },
+                    { pronoun: "tu", form: "vas" },
+                    { pronoun: "il / elle / on", form: "va" },
+                    { pronoun: "nous", form: "allons" },
+                    { pronoun: "vous", form: "allez" },
+                    { pronoun: "ils / elles", form: "vont" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
+                "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
+                "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
+                "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
+                "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
+              ],
+              noBulletItems: [0, 1, 2, 3, 4],
+            },
           ],
         },
         {
-          infinitive: "venir",
-          radical: "",
-          rows: [
-            { pronoun: "je", ending: "viens" },
-            { pronoun: "tu", ending: "viens" },
-            { pronoun: "il / elle / on", ending: "vient" },
-            { pronoun: "nous", ending: "venons" },
-            { pronoun: "vous", ending: "venez" },
-            { pronoun: "ils / elles", ending: "viennent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
-            "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
-            "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
-            "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
-            "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
-          ],
-        },
-        {
-          infinitive: "partir",
-          radical: "par",
-          rows: [
-            { pronoun: "je", ending: "s" },
-            { pronoun: "tu", ending: "s" },
-            { pronoun: "il / elle / on", ending: "t" },
-            { pronoun: "nous", ending: "tons" },
-            { pronoun: "vous", ending: "tez" },
-            { pronoun: "ils / elles", ending: "tent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
-            "{a}pour{/a} (destination) → Il part {a}pour{/a} Rome.",
+          label: "venir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "venir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "viens" },
+                    { pronoun: "tu", form: "viens" },
+                    { pronoun: "il / elle / on", form: "vient" },
+                    { pronoun: "nous", form: "venons" },
+                    { pronoun: "vous", form: "venez" },
+                    { pronoun: "ils / elles", form: "viennent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
+                "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
+                "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
+                "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
+                "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
+              ],
+              noBulletItems: [0, 1, 2, 3, 4],
+            },
           ],
         },
         {
-          infinitive: "arriver",
-          radical: "arriv",
-          rows: [
-            { pronoun: "j'", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
-            "{a}de / du / des{/a} (origine) → Il arrive {a}du{/a} travail.",
-          ],
-        },
-        {
-          infinitive: "entrer",
-          radical: "entr",
-          rows: [
-            { pronoun: "j'", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}dans{/a} → Il entre {a}dans{/a} la salle.",
+          label: "partir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "partir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "pars" },
+                    { pronoun: "tu", form: "pars" },
+                    { pronoun: "il / elle / on", form: "part" },
+                    { pronoun: "nous", form: "partons" },
+                    { pronoun: "vous", form: "partez" },
+                    { pronoun: "ils / elles", form: "partent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
+                "{a}pour{/a} (destination) → Il part {a}pour{/a} Rome.",
+              ],
+              noBulletItems: [0, 1],
+            },
           ],
         },
         {
-          infinitive: "sortir",
-          radical: "sor",
-          rows: [
-            { pronoun: "je", ending: "s" },
-            { pronoun: "tu", ending: "s" },
-            { pronoun: "il / elle / on", ending: "t" },
-            { pronoun: "nous", ending: "tons" },
-            { pronoun: "vous", ending: "tez" },
-            { pronoun: "ils / elles", ending: "tent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}de / du / de la{/a} → Elle sort {a}de{/a} l'école.",
-            "{a}du{/a} → Il sort {a}du{/a} bureau.",
-          ],
-        },
-        {
-          infinitive: "monter",
-          radical: "mont",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}dans{/a} → Je monte {a}dans{/a} le bus.",
-            "{a}sur{/a} → Elle monte {a}sur{/a} le vélo.",
+          label: "arriver",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "arriver",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "arrive" },
+                    { pronoun: "tu", form: "arrives" },
+                    { pronoun: "il / elle / on", form: "arrive" },
+                    { pronoun: "nous", form: "arrivons" },
+                    { pronoun: "vous", form: "arrivez" },
+                    { pronoun: "ils / elles", form: "arrivent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
+                "{a}de / du / des{/a} (origine) → Il arrive {a}du{/a} travail.",
+              ],
+              noBulletItems: [0, 1],
+            },
           ],
         },
         {
-          infinitive: "descendre",
-          radical: "descend",
-          rows: [
-            { pronoun: "je", ending: "s" },
-            { pronoun: "tu", ending: "s" },
-            { pronoun: "il / elle / on", ending: "" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}du{/a} → Il descend {a}du{/a} train.",
-            "{a}de{/a} → Elle descend {a}de{/a} la voiture.",
-          ],
-        },
-        {
-          infinitive: "marcher",
-          radical: "march",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
-          ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}dans{/a} → Il marche {a}dans{/a} la rue.",
-            "{a}vers{/a} → Nous marchons {a}vers{/a} l'école.",
-            "{a}jusqu'à{/a} → Il marche {a}jusqu'à{/a} la gare.",
+          label: "entrer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "entrer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "entre" },
+                    { pronoun: "tu", form: "entres" },
+                    { pronoun: "il / elle / on", form: "entre" },
+                    { pronoun: "nous", form: "entrons" },
+                    { pronoun: "vous", form: "entrez" },
+                    { pronoun: "ils / elles", form: "entrent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}dans{/a} → Il entre {a}dans{/a} la salle.",
+              ],
+              noBulletItems: [0],
+            },
           ],
         },
         {
-          infinitive: "courir",
-          radical: "cour",
-          rows: [
-            { pronoun: "je", ending: "s" },
-            { pronoun: "tu", ending: "s" },
-            { pronoun: "il / elle / on", ending: "t" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "sortir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "sortir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "sors" },
+                    { pronoun: "tu", form: "sors" },
+                    { pronoun: "il / elle / on", form: "sort" },
+                    { pronoun: "nous", form: "sortons" },
+                    { pronoun: "vous", form: "sortez" },
+                    { pronoun: "ils / elles", form: "sortent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}de / du / de la{/a} → Elle sort {a}de{/a} l'école.",
+                "{a}du{/a} → Il sort {a}du{/a} bureau.",
+              ],
+              noBulletItems: [0, 1],
+            },
           ],
-          examplesLabel: "Exemples",
-          examples: [
-            "{a}dans{/a} → Il court {a}dans{/a} le parc.",
-            "{a}vers{/a} → Elle court {a}vers{/a} la sortie.",
-            "{a}jusqu'à{/a} → Il court {a}jusqu'à{/a} l'arrivée.",
+        },
+        {
+          label: "monter",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "monter",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "monte" },
+                    { pronoun: "tu", form: "montes" },
+                    { pronoun: "il / elle / on", form: "monte" },
+                    { pronoun: "nous", form: "montons" },
+                    { pronoun: "vous", form: "montez" },
+                    { pronoun: "ils / elles", form: "montent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}dans{/a} → Je monte {a}dans{/a} le bus.",
+                "{a}sur{/a} → Elle monte {a}sur{/a} le vélo.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "descendre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "descendre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "descends" },
+                    { pronoun: "tu", form: "descends" },
+                    { pronoun: "il / elle / on", form: "descend" },
+                    { pronoun: "nous", form: "descendons" },
+                    { pronoun: "vous", form: "descendez" },
+                    { pronoun: "ils / elles", form: "descendent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}du{/a} → Il descend {a}du{/a} train.",
+                "{a}de{/a} → Elle descend {a}de{/a} la voiture.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "marcher",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "marcher",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "marche" },
+                    { pronoun: "tu", form: "marches" },
+                    { pronoun: "il / elle / on", form: "marche" },
+                    { pronoun: "nous", form: "marchons" },
+                    { pronoun: "vous", form: "marchez" },
+                    { pronoun: "ils / elles", form: "marchent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}dans{/a} → Il marche {a}dans{/a} la rue.",
+                "{a}vers{/a} → Nous marchons {a}vers{/a} l'école.",
+                "{a}jusqu'à{/a} → Il marche {a}jusqu'à{/a} la gare.",
+              ],
+              noBulletItems: [0, 1, 2],
+            },
+          ],
+        },
+        {
+          label: "courir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "courir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "cours" },
+                    { pronoun: "tu", form: "cours" },
+                    { pronoun: "il / elle / on", form: "court" },
+                    { pronoun: "nous", form: "courons" },
+                    { pronoun: "vous", form: "courez" },
+                    { pronoun: "ils / elles", form: "courent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              items: [
+                "{a}dans{/a} → Il court {a}dans{/a} le parc.",
+                "{a}vers{/a} → Elle court {a}vers{/a} la sortie.",
+                "{a}jusqu'à{/a} → Il court {a}jusqu'à{/a} l'arrivée.",
+              ],
+              noBulletItems: [0, 1, 2],
+            },
           ],
         },
       ],

@@ -17,11 +17,6 @@ export type VerbToggleVerb = {
   reflexivePronouns?: string[];
   meaning?: string;
   example?: string;
-  /** Exemples d'usage (prépositions, etc.) affichés sous la conjugaison. */
-  examples?: string[];
-  examplesLabel?: string;
-  examplesLabelTrans?: Trans;
-  examplesTrans?: TransList;
   note?: string;
   noteTrans?: Partial<Record<GrammarPivotLang, string>>;
   rows: Array<{ pronoun: string; ending: string; radical?: string }>;

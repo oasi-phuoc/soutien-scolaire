@@ -302,63 +302,6 @@ function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { ver
           </div>
         );
       })()}
-      {verb.examples && verb.examples.length > 0 && (() => {
-        const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
-        const useTrans = showTrans && pivot && pivot !== "fr";
-        const labelTrans = useTrans && pivot
-          ? verb.examplesLabelTrans?.[pivot as "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk"]
-          : undefined;
-        const itemsTrans = useTrans && pivot
-          ? verb.examplesTrans?.[pivot as "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk"]
-          : undefined;
-        const label = labelTrans ?? verb.examplesLabel ?? "Exemples";
-        const items = itemsTrans ?? verb.examples;
-        const alignArrows = items.length > 0 && items.every((item) => item.includes(" → "));
-        return (
-          <div className="space-y-1.5">
-            <p
-              className="text-sm font-bold text-[var(--color-accent-fr)]"
-              lang={labelTrans ? pivot : undefined}
-              dir={labelTrans && isRtl ? "rtl" : "ltr"}
-            >
-              {label}
-            </p>
-            <ul className="space-y-1 border-l-2 border-[var(--color-accent-fr)]/30 pl-3">
-              {items.map((item, ii) => {
-                if (alignArrows) {
-                  const arrowIdx = item.indexOf(" → ");
-                  const left = item.slice(0, arrowIdx);
-                  const right = item.slice(arrowIdx + 3);
-                  return (
-                    <li key={ii} className="space-y-0.5">
-                      <div
-                        className="grid grid-cols-[minmax(7.5rem,max-content)_1.25rem_minmax(0,1fr)] items-baseline gap-x-2 text-sm leading-relaxed text-[var(--color-text-primary)]"
-                        lang={itemsTrans?.[ii] ? pivot : undefined}
-                        dir={itemsTrans?.[ii] && isRtl ? "rtl" : "ltr"}
-                      >
-                        <span>{renderInlineMarkup(left, false)}</span>
-                        <span className="text-center text-[var(--color-text-secondary)]">→</span>
-                        <span>{renderInlineMarkup(right, false)}</span>
-                      </div>
-                    </li>
-                  );
-                }
-                return (
-                  <li key={ii} className="space-y-0.5">
-                    <div
-                      className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]"
-                      lang={itemsTrans?.[ii] ? pivot : undefined}
-                      dir={itemsTrans?.[ii] && isRtl ? "rtl" : "ltr"}
-                    >
-                      <span>{renderInlineMarkup(item)}</span>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        );
-      })()}
     </div>
   );
 }
