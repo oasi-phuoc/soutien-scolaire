@@ -122,308 +122,198 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     {
       type: "text",
       label: "Verbes de mouvement",
-      text: "Certains verbes de mouvement sont suivis d'une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, etc.) qui indique la {a}destination{/a} ou l'{a}origine{/a}.\nClique sur chaque verbe pour voir sa conjugaison.",
+      text: "Certains verbes de mouvement sont suivis d'une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, etc.) qui indique la {a}destination{/a} ou l'{a}origine{/a}.\nClique sur chaque verbe pour voir sa conjugaison et des exemples.",
       transText: {
-        en: "Some verbs of movement are followed by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, etc.) that indicates the {a}destination{/a} or the {a}origin{/a}.\nClick on each verb to see its conjugation.",
-        ar: "تتبع بعض أفعال الحركة {a}بحرف جر{/a} ({a}à{/a}، {a}de{/a}، إلخ) يحدد {a}الوجهة{/a} أو {a}الأصل{/a}.\nانقر على كل فعل لرؤية تصريفه.",
-        fa: "برخی از افعال حرکتی با یک {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a} و غیره) می‌آیند که {a}مقصد{/a} یا {a}مبدأ{/a} را نشان می‌دهد.\nروی هر فعل کلیک کنید تا صرف آن را ببینید.",
-        pt: "Alguns verbos de movimento são seguidos de uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, etc.) que indica o {a}destino{/a} ou a {a}origem{/a}.\nClique em cada verbo para ver a sua conjugação.",
-        so: "Qaar ka mid ah falalka dhaqdhaqaaqa waxaa raaca {a}xaraf-hore{/a} ({a}à{/a}, {a}de{/a}, iwm.) oo tilmaamaya {a}meesha loo socdo{/a} ama {a}meesha laga yimid{/a}.\nGuji fal kasta si aad u aragto isku-xirkiisa.",
-        ti: "ገለ ግሲታት ምንቅስቓስ ብ{a}ቅድመ ቃል{/a} ({a}à{/a}፣ {a}de{/a}፣ ወዘተ) ይስዕቡ፣ እዚ ድማ {a}መዕረፊ ቦታ{/a} ወይ {a}መበገሲ ቦታ{/a} የመልክት።\nንነፍሲ ወከፍ ግሲ ንምስትውዓል ክሊክ ግበር።",
-        tr: "Bazı hareket fiillerinden sonra, {a}hedefi{/a} veya {a}kaynağı{/a} belirten bir {a}edat{/a} ({a}à{/a}, {a}de{/a} vb.) kullanılır.\nÇekimini görmek için her fiile tıklayın.",
-        ps: "د حرکت ځینې فعلونه د {a}حرف اضافې{/a} ({a}à{/a}، {a}de{/a} او نور) سره راځي چې {a}موخه{/a} یا {a}اصل{/a} ښيي.\nد هر فعل د صرف د لیدلو لپاره پرې کلیک وکړئ.",
-        uk: "Після деяких дієслів руху вживається {a}прийменник{/a} ({a}à{/a}, {a}de{/a} тощо), який указує на {a}напрямок{/a} або {a}походження{/a}.\nНатисніть на кожне дієслово, щоб переглянути його відмінювання.",
+        en: "Some verbs of movement are followed by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, etc.) that indicates the {a}destination{/a} or the {a}origin{/a}.\nClick on each verb to see its conjugation and examples.",
+        ar: "تتبع بعض أفعال الحركة {a}بحرف جر{/a} ({a}à{/a}، {a}de{/a}، إلخ) يحدد {a}الوجهة{/a} أو {a}الأصل{/a}.\nانقر على كل فعل لرؤية تصريفه وأمثلة.",
+        fa: "برخی از افعال حرکتی با یک {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a} و غیره) می‌آیند که {a}مقصد{/a} یا {a}مبدأ{/a} را نشان می‌دهد.\nروی هر فعل کلیک کنید تا صرف و مثال‌های آن را ببینید.",
+        pt: "Alguns verbos de movimento são seguidos de uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, etc.) que indica o {a}destino{/a} ou a {a}origem{/a}.\nClique em cada verbo para ver a sua conjugação e exemplos.",
+        so: "Qaar ka mid ah falalka dhaqdhaqaaqa waxaa raaca {a}xaraf-hore{/a} ({a}à{/a}, {a}de{/a}, iwm.) oo tilmaamaya {a}meesha loo socdo{/a} ama {a}meesha laga yimid{/a}.\nGuji fal kasta si aad u aragto isku-xirkiisa iyo tusaalooyin.",
+        ti: "ገለ ግሲታት ምንቅስቓስ ብ{a}ቅድመ ቃል{/a} ({a}à{/a}፣ {a}de{/a}፣ ወዘተ) ይስዕቡ፣ እዚ ድማ {a}መዕረፊ ቦታ{/a} ወይ {a}መበገሲ ቦታ{/a} የመልክት።\nንነፍሲ ወከፍ ግሲ ንምስትውዓልን ኣብነታትን ክሊክ ግበር።",
+        tr: "Bazı hareket fiillerinden sonra, {a}hedefi{/a} veya {a}kaynağı{/a} belirten bir {a}edat{/a} ({a}à{/a}, {a}de{/a} vb.) kullanılır.\nÇekimini ve örneklerini görmek için her fiile tıklayın.",
+        ps: "د حرکت ځینې فعلونه د {a}حرف اضافې{/a} ({a}à{/a}، {a}de{/a} او نور) سره راځي چې {a}موخه{/a} یا {a}اصل{/a} ښيي.\nد هر فعل د صرف او مثالونو د لیدلو لپاره پرې کلیک وکړئ.",
+        uk: "Після деяких дієслів руху вживається {a}прийменник{/a} ({a}à{/a}, {a}de{/a} тощо), який указує на {a}напрямок{/a} або {a}походження{/a}.\nНатисніть на кожне дієслово, щоб переглянути його відмінювання та приклади.",
       },
     },
     {
       type: "verb_toggle",
       buttonCols: 5,
       verbs: [
-        { infinitive: "aller", radical: "", rows: [{ pronoun: "je", ending: "vais" }, { pronoun: "tu", ending: "vas" }, { pronoun: "il / elle / on", ending: "va" }, { pronoun: "nous", ending: "allons" }, { pronoun: "vous", ending: "allez" }, { pronoun: "ils / elles", ending: "vont" }] },
-        { infinitive: "venir", radical: "", rows: [{ pronoun: "je", ending: "viens" }, { pronoun: "tu", ending: "viens" }, { pronoun: "il / elle / on", ending: "vient" }, { pronoun: "nous", ending: "venons" }, { pronoun: "vous", ending: "venez" }, { pronoun: "ils / elles", ending: "viennent" }] },
-        { infinitive: "partir", radical: "par", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "tons" }, { pronoun: "vous", ending: "tez" }, { pronoun: "ils / elles", ending: "tent" }] },
-        { infinitive: "arriver", radical: "arriv", rows: [{ pronoun: "j'", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "entrer", radical: "entr", rows: [{ pronoun: "j'", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "sortir", radical: "sor", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "tons" }, { pronoun: "vous", ending: "tez" }, { pronoun: "ils / elles", ending: "tent" }] },
-        { infinitive: "monter", radical: "mont", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "descendre", radical: "descend", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "marcher", radical: "march", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "courir", radical: "cour", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-      ],
-    },
-    {
-      type: "heading",
-      text: "Les prépositions avec les verbes de mouvement",
-      trans: {
-        en: "Prepositions with movement verbs",
-        ar: "حروف الجر مع أفعال الحركة",
-        fa: "حروف اضافه با افعال حرکتی",
-        ti: "ናይ ምቅስቃስ ግሲያት ምስ ቅድሚ ስም ዝኸዱ ቃላት",
-        uk: "Прийменники з дієсловами руху",
-      },
-      sub: true,
-    },
-    {
-      type: "text",
-      items: [
-        "Certains verbes de mouvement sont suivis d'une préposition qui indique la destination ou l'origine.",
-      ],
-      noBulletItems: [
-        0,
-      ],
-      transItems: {
-        en: [
-          "Some movement verbs are followed by a preposition indicating destination or origin.",
-        ],
-        ar: [
-          "بعض أفعال الحركة تتبعها حروف جر تدل على الوجهة أو الأصل.",
-        ],
-        fa: [
-          "برخی افعال حرکتی با حرف اضافه‌ای همراه می‌شوند که مقصد یا مبدأ را نشان می‌دهد.",
-        ],
-        ti: [
-          "ገሊኦም ግሲያት ምቅስቃስ ምስ ቅድሚ ስም ይስዓቡ ዝዕላምኡ ወይ ምንጪ ዘርኢ።",
-        ],
-        uk: [
-          "Деякі дієслова руху супроводжуються прийменником, що вказує на напрямок або походження.",
-        ],
-      },
-    },
-    {
-      type: "text",
-      label: "aller + destination",
-      items: [
-        "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
-        "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
-        "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
-        "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
-        "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
-      ],
-      noBulletItems: [
-        0,
-        1,
-        2,
-        3,
-        4,
-      ],
-      transLabel: {
-        en: "aller + destination",
-        ar: "aller + الوجهة",
-        fa: "aller + مقصد",
-        ti: "aller + ናበይ",
-        uk: "aller + напрямок",
-      },
-    },
-    {
-      type: "text",
-      label: "venir + origine",
-      items: [
-        "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
-        "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
-        "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
-        "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
-        "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
-      ],
-      noBulletItems: [
-        0,
-        1,
-        2,
-        3,
-        4,
-      ],
-      transLabel: {
-        en: "venir + origin",
-        ar: "venir + الأصل",
-        fa: "venir + مبدأ",
-        ti: "venir + ካበይ",
-        uk: "venir + походження",
-      },
-    },
-    {
-      type: "selector",
-      tabs: [
         {
-          label: "aller",
-          content: [
-            {
-              type: "text",
-              label: "Destination",
-              items: [
-                "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
-                "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
-                "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
-                "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
-                "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-                2,
-                3,
-                4,
-              ],
-            },
+          infinitive: "aller",
+          radical: "",
+          rows: [
+            { pronoun: "je", ending: "vais" },
+            { pronoun: "tu", ending: "vas" },
+            { pronoun: "il / elle / on", ending: "va" },
+            { pronoun: "nous", ending: "allons" },
+            { pronoun: "vous", ending: "allez" },
+            { pronoun: "ils / elles", ending: "vont" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
+            "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
+            "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
+            "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
+            "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
           ],
         },
         {
-          label: "venir",
-          content: [
-            {
-              type: "text",
-              label: "Origine",
-              items: [
-                "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
-                "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
-                "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
-                "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
-                "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-                2,
-                3,
-                4,
-              ],
-            },
+          infinitive: "venir",
+          radical: "",
+          rows: [
+            { pronoun: "je", ending: "viens" },
+            { pronoun: "tu", ending: "viens" },
+            { pronoun: "il / elle / on", ending: "vient" },
+            { pronoun: "nous", ending: "venons" },
+            { pronoun: "vous", ending: "venez" },
+            { pronoun: "ils / elles", ending: "viennent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
+            "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
+            "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
+            "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
+            "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
           ],
         },
         {
-          label: "partir",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
-                "{a}pour{/a} (destination) → Il part {a}pour{/a} Rome.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-              ],
-            },
+          infinitive: "partir",
+          radical: "par",
+          rows: [
+            { pronoun: "je", ending: "s" },
+            { pronoun: "tu", ending: "s" },
+            { pronoun: "il / elle / on", ending: "t" },
+            { pronoun: "nous", ending: "tons" },
+            { pronoun: "vous", ending: "tez" },
+            { pronoun: "ils / elles", ending: "tent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
+            "{a}pour{/a} (destination) → Il part {a}pour{/a} Rome.",
           ],
         },
         {
-          label: "arriver",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
-                "{a}de / du / des{/a} (origine) → Il arrive {a}du{/a} travail.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-              ],
-            },
+          infinitive: "arriver",
+          radical: "arriv",
+          rows: [
+            { pronoun: "j'", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
+            "{a}de / du / des{/a} (origine) → Il arrive {a}du{/a} travail.",
           ],
         },
         {
-          label: "entrer",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}dans{/a} → Il entre {a}dans{/a} la salle.",
-              ],
-              noBulletItems: [
-                0,
-              ],
-            },
+          infinitive: "entrer",
+          radical: "entr",
+          rows: [
+            { pronoun: "j'", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}dans{/a} → Il entre {a}dans{/a} la salle.",
           ],
         },
         {
-          label: "sortir",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}de / du / de la{/a} → Elle sort {a}de{/a} l'école.",
-                "Il sort {a}du{/a} bureau.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-              ],
-            },
+          infinitive: "sortir",
+          radical: "sor",
+          rows: [
+            { pronoun: "je", ending: "s" },
+            { pronoun: "tu", ending: "s" },
+            { pronoun: "il / elle / on", ending: "t" },
+            { pronoun: "nous", ending: "tons" },
+            { pronoun: "vous", ending: "tez" },
+            { pronoun: "ils / elles", ending: "tent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}de / du / de la{/a} → Elle sort {a}de{/a} l'école.",
+            "{a}du{/a} → Il sort {a}du{/a} bureau.",
           ],
         },
         {
-          label: "monter",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}dans{/a} → Je monte {a}dans{/a} le bus.",
-                "{a}sur{/a} → Elle monte {a}sur{/a} le vélo.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-              ],
-            },
+          infinitive: "monter",
+          radical: "mont",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}dans{/a} → Je monte {a}dans{/a} le bus.",
+            "{a}sur{/a} → Elle monte {a}sur{/a} le vélo.",
           ],
         },
         {
-          label: "descendre",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}du{/a} → Il descend {a}du{/a} train.",
-                "{a}de{/a} → Elle descend {a}de{/a} la voiture.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-              ],
-            },
+          infinitive: "descendre",
+          radical: "descend",
+          rows: [
+            { pronoun: "je", ending: "s" },
+            { pronoun: "tu", ending: "s" },
+            { pronoun: "il / elle / on", ending: "" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}du{/a} → Il descend {a}du{/a} train.",
+            "{a}de{/a} → Elle descend {a}de{/a} la voiture.",
           ],
         },
         {
-          label: "marcher",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}dans{/a} → Il marche {a}dans{/a} la rue.",
-                "{a}vers{/a} → Nous marchons {a}vers{/a} l'école.",
-                "{a}jusqu'à{/a} → Il marche {a}jusqu'à{/a} la gare.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-                2,
-              ],
-            },
+          infinitive: "marcher",
+          radical: "march",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}dans{/a} → Il marche {a}dans{/a} la rue.",
+            "{a}vers{/a} → Nous marchons {a}vers{/a} l'école.",
+            "{a}jusqu'à{/a} → Il marche {a}jusqu'à{/a} la gare.",
           ],
         },
         {
-          label: "courir",
-          content: [
-            {
-              type: "text",
-              label: "",
-              items: [
-                "{a}dans{/a} → Il court {a}dans{/a} le parc.",
-                "{a}vers{/a} → Elle court {a}vers{/a} la sortie.",
-                "{a}jusqu'à{/a} → Il court {a}jusqu'à{/a} l'arrivée.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-                2,
-              ],
-            },
+          infinitive: "courir",
+          radical: "cour",
+          rows: [
+            { pronoun: "je", ending: "s" },
+            { pronoun: "tu", ending: "s" },
+            { pronoun: "il / elle / on", ending: "t" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+          examplesLabel: "Exemples",
+          examples: [
+            "{a}dans{/a} → Il court {a}dans{/a} le parc.",
+            "{a}vers{/a} → Elle court {a}vers{/a} la sortie.",
+            "{a}jusqu'à{/a} → Il court {a}jusqu'à{/a} l'arrivée.",
           ],
         },
       ],
@@ -467,10 +357,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         "Je vais {a}à l'{/a}école",
       ],
       noBulletItems: [0,1],
-    },
-    {
-      type: "heading",
-      text: "Les verbes de mouvement",
     },
   ],
   exercises: [
