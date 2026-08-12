@@ -96,6 +96,10 @@ export function StudentPasswordEditor({
         {error && (
           <p className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</p>
         )}
+        <p className="mt-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+          La clé réinitialise le mot de passe à <span className="font-semibold">{STUDENT_RESET_PASSWORD}</span>.
+          La disquette enregistre le nouveau mot de passe saisi dans le champ.
+        </p>
       </div>
       {toastEl}
     </>

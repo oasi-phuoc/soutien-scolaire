@@ -11,7 +11,15 @@ export async function canAccessPlacementModule(): Promise<boolean> {
   const { data: role } = await supabase.rpc("get_my_role");
   if (role === "admin" || role === "prof") return true;
 
-  const { data: enabled, error } = await supabase.rpc("get_placement_module_enabled");
-  if (error) return true;
-  return enabled !== false;
+  // RPC : module global OU override individuel (can_placement).
+  const { data: access, error } = await supabase.rpc("can_access_placement");
+  if (!error) return Boolean(access);
+
+  // Fallback avant migration / si RPC absente.
+  const [{ data: enabled }, { data: profile }] = await Promise.all([
+    supabase.rpc("get_placement_module_enabled"),
+    supabase.from("profiles").select("can_placement").eq("id", user.id).maybeSingle(),
+  ]);
+  if (enabled !== false) return true;
+  return Boolean((profile as { can_placement?: boolean } | null)?.can_placement);
 }

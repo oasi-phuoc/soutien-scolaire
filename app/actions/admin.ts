@@ -245,6 +245,9 @@ export async function getUserForAdminAction(userId: string): Promise<{
   } = await import("@/lib/auth/profile-lesson-access");
 
   const baseCols =
+    "id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, can_placement, placement_test_history, placement_combined_profile";
+
+  const baseColsWithoutPlacement =
     "id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, placement_test_history, placement_combined_profile";
 
   const [{ data: authData }, first] = await Promise.all([
@@ -259,15 +262,25 @@ export async function getUserForAdminAction(userId: string): Promise<{
   let data: Record<string, unknown> | null = first.data as Record<string, unknown> | null;
   let error = first.error;
 
-  // Migration granulaire pas encore appliquée → retombe sur les colonnes legacy.
+  // Migration granulaire / can_placement pas encore appliquée.
   if (error && isMissingColumnError(error)) {
-    const retry = await svc
+    const retryPlacement = await svc
       .from("profiles")
-      .select(`${baseCols}, ${PROFILE_LESSON_ACCESS_LEGACY_COLS}`)
+      .select(`${baseColsWithoutPlacement}, ${PROFILE_LESSON_ACCESS_COLS}`)
       .eq("id", userId)
       .single();
-    data = retry.data as Record<string, unknown> | null;
-    error = retry.error;
+    if (!retryPlacement.error) {
+      data = retryPlacement.data as Record<string, unknown> | null;
+      error = retryPlacement.error;
+    } else {
+      const retry = await svc
+        .from("profiles")
+        .select(`${baseColsWithoutPlacement}, ${PROFILE_LESSON_ACCESS_LEGACY_COLS}`)
+        .eq("id", userId)
+        .single();
+      data = retry.data as Record<string, unknown> | null;
+      error = retry.error;
+    }
   }
 
   if (error || !data) return { ok: false, error: error?.message ?? "Utilisateur non trouvé" };
@@ -290,6 +303,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
     user: {
       ...data,
       can_print: Boolean(data.can_print),
+      can_placement: Boolean(data.can_placement),
       ...access,
       email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
@@ -333,6 +347,36 @@ export async function setUserPrintAccessAction(
   revalidatePath("/");
   revalidatePath("/impressions");
   revalidatePath("/admin/impression");
+  return { ok: true };
+}
+
+export async function setUserPlacementAccessAction(
+  userId: string,
+  enabled: boolean,
+): Promise<{ ok: boolean; reason?: string }> {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Supabase non configuré" };
+
+  const { error } = await supabase.rpc("set_user_placement_access", {
+    p_user_id: userId,
+    p_enabled: enabled,
+  });
+  if (error) {
+    const svc = createServiceClient();
+    if (!svc) return { ok: false, reason: error.message };
+    const { error: svcErr } = await svc
+      .from("profiles")
+      .update({ can_placement: enabled })
+      .eq("id", userId);
+    if (svcErr) return { ok: false, reason: svcErr.message };
+  }
+
+  revalidatePath("/admin");
+  revalidatePath(`/admin/eleves/${userId}`);
+  revalidatePath("/");
+  revalidatePath("/placement");
   return { ok: true };
 }
 

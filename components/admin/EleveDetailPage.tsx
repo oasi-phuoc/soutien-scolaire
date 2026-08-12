@@ -8,6 +8,7 @@ import {
   deleteUserAction,
   updateUserProfileAction,
   setUserPrintAccessAction,
+  setUserPlacementAccessAction,
   setUserFreeAccessAction,
   setUserPartialFlagAction,
 } from "@/app/actions/admin";
@@ -23,20 +24,8 @@ import { StudentClasseEditor } from "@/components/suivi/StudentClasseEditor";
 import { StudentPasswordEditor } from "@/components/suivi/StudentPasswordEditor";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
 import { AppSelect } from "@/components/ui/AppSelect";
-import {
-  ELEVE_CLASSE_TYPE_OPTIONS,
-  HSS_CLASSE_HINT,
-  buildEleveClasse,
-  parseEleveClasse,
-  usesClasseReferenceField,
-} from "@/lib/eleve-classe-types";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import type { UserRow } from "./AdminTable";
-
-const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
-  value: String(i + 1),
-  label: String(i + 1).padStart(2, "0"),
-}));
 
 const LANGUE_LABELS: Record<string, string> = {
   fr: "Français",
@@ -83,82 +72,67 @@ function Spinner() {
 function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => void; onSaved: (data: Partial<UserRow>) => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
-  const parsedClasse = parseEleveClasse(user.classe);
   const LANGUES_OPTIONS = [...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })), { code: "other", label: "Autre" }];
   const [form, setForm] = useState({
     prenom: user.prenom ?? "", nom: user.nom ?? "",
-    classeType: parsedClasse.classeType, classeNum: parsedClasse.classeSuffix,
     adresse: user.adresse ?? "", npa: user.npa ?? "", localite: user.localite ?? "",
     telephone: user.telephone ?? "", langue: user.langue ?? "en",
   });
 
   const inputCls = "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-theme)] dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50";
 
-  function submit() {
+  function submit(e?: React.MouseEvent) {
+    e?.stopPropagation();
+    e?.preventDefault();
     setErr(null);
     startTransition(async () => {
-      const classe = buildEleveClasse(form.classeType, form.classeNum) ?? undefined;
       const r = await updateUserProfileAction(user.id, {
-        prenom: form.prenom || undefined, nom: form.nom || undefined, classe,
-        adresse: form.adresse || undefined, npa: form.npa || undefined,
-        localite: form.localite || undefined, telephone: form.telephone || undefined,
+        prenom: form.prenom || undefined,
+        nom: form.nom || undefined,
+        adresse: form.adresse || undefined,
+        npa: form.npa || undefined,
+        localite: form.localite || undefined,
+        telephone: form.telephone || undefined,
         langue: form.langue || undefined,
       });
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
-      onSaved({ ...form, classe: classe ?? null, langue: form.langue || null });
+      onSaved({ ...form, langue: form.langue || null });
     });
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
-      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
-        <div className="mb-4 flex items-center gap-2">
-          <button onClick={onClose} aria-label="Fermer" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80">
+    <div
+      className="fixed inset-0 z-[70] flex items-center justify-center p-4"
+      role="presentation"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60" aria-hidden />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="edit-eleve-title"
+        className="relative z-10 flex max-h-[min(90vh,720px)] w-full max-w-md flex-col overflow-hidden rounded-2xl bg-white shadow-xl dark:bg-zinc-900"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center gap-2 border-b border-zinc-100 px-6 py-4 dark:border-zinc-800">
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            aria-label="Fermer"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80"
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-50">Modifier les données</h2>
+          <h2 id="edit-eleve-title" className="text-base font-bold text-zinc-900 dark:text-zinc-50">Modifier les données</h2>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-3 overflow-y-auto px-6 py-4">
           <div className="grid grid-cols-2 gap-3">
             <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Prénom</label><input type="text" value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))} className={inputCls} /></div>
             <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Nom</label><input type="text" value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))} className={inputCls} /></div>
-          </div>
-          <div>
-            <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Classe</label>
-            <div className="grid grid-cols-2 gap-2">
-              <AppSelect
-                value={form.classeType}
-                onChange={(v) => setForm((f) => ({ ...f, classeType: v, classeNum: "" }))}
-                options={ELEVE_CLASSE_TYPE_OPTIONS}
-                placeholder="Filière"
-                emptyOption={{ value: "", label: "Filière" }}
-                className="w-full"
-              />
-              {usesClasseReferenceField(form.classeType) ? (
-                <input
-                  type="text"
-                  placeholder="Référence"
-                  value={form.classeNum}
-                  onChange={(e) => setForm((f) => ({ ...f, classeNum: e.target.value }))}
-                  className={inputCls}
-                />
-              ) : (
-                <AppSelect
-                  value={form.classeNum}
-                  onChange={(v) => setForm((f) => ({ ...f, classeNum: v }))}
-                  options={CLASSE_NUM_OPTIONS}
-                  placeholder="N°"
-                  emptyOption={{ value: "", label: "N°" }}
-                  className="w-full"
-                />
-              )}
-            </div>
-            {usesClasseReferenceField(form.classeType) && (
-              <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">{HSS_CLASSE_HINT}</p>
-            )}
           </div>
           <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Adresse</label><input type="text" value={form.adresse} onChange={e => setForm(f => ({ ...f, adresse: e.target.value }))} className={inputCls} /></div>
           <div className="grid grid-cols-2 gap-3">
@@ -173,13 +147,27 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
               onChange={(v) => setForm((f) => ({ ...f, langue: v }))}
               options={LANGUES_OPTIONS.map((l) => ({ value: l.code, label: l.label }))}
               className="w-full"
+              placement="top"
             />
           </div>
+          {err && <p className="text-sm text-red-600">{err}</p>}
         </div>
-        {err && <p className="mt-3 text-sm text-red-600">{err}</p>}
-        <div className="mt-5 flex justify-end gap-2">
-          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300"><IconCancel /></button>
-          <button onClick={submit} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-theme)] text-white hover:opacity-90 disabled:opacity-60">
+        <div className="flex justify-end gap-2 border-t border-zinc-100 px-6 py-4 dark:border-zinc-800">
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            aria-label="Annuler"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300"
+          >
+            <IconCancel />
+          </button>
+          <button
+            type="button"
+            onClick={submit}
+            disabled={pending}
+            aria-label="Enregistrer"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-theme)] text-white hover:opacity-90 disabled:opacity-60"
+          >
             {pending ? <Spinner /> : <IconSave />}
           </button>
         </div>
@@ -262,6 +250,7 @@ export function EleveDetailPage({
     currentUserRole === "admin" ||
     (currentUserRole === "prof" && user.role === "eleve");
   const canTogglePrint = !isSuivi && currentUserRole === "admin" && user.role !== "admin";
+  const canTogglePlacement = !isSuivi && currentUserRole === "admin" && user.role === "eleve";
   const showTeacherAssignment = !isSuivi && currentUserRole === "admin" && user.role === "prof";
 
   function handleChangeRole(newRole: "eleve" | "prof" | "admin") {
@@ -277,6 +266,15 @@ export function EleveDetailPage({
       setUser(u => ({ ...u, can_print: next }));
       const r = await setUserPrintAccessAction(user.id, next);
       if (!r.ok) setUser(u => ({ ...u, can_print: prev }));
+    });
+  }
+
+  function handleTogglePlacement(next: boolean) {
+    startTransition(async () => {
+      const prev = user.can_placement;
+      setUser((u) => ({ ...u, can_placement: next }));
+      const r = await setUserPlacementAccessAction(user.id, next);
+      if (!r.ok) setUser((u) => ({ ...u, can_placement: prev }));
     });
   }
 
@@ -525,7 +523,7 @@ export function EleveDetailPage({
                   <span className="text-sm text-zinc-700 dark:text-zinc-300">
                     Autoriser l&apos;accès à l&apos;impression
                     <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">
-                      Menu Impression + documents d&apos;exercice
+                      Active ce bouton pour autoriser l&apos;ouverture du menu Impression et l&apos;impression des documents d&apos;exercice.
                     </span>
                   </span>
                   <button
@@ -549,6 +547,36 @@ export function EleveDetailPage({
             </div>
           )}
 
+          {canTogglePlacement && (
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Test de placement</h2>
+              <label className="flex cursor-pointer items-center justify-between gap-4 select-none">
+                <span className="text-sm text-zinc-700 dark:text-zinc-300">
+                  Autoriser l&apos;accès au test de placement
+                  <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">
+                    Active ce bouton pour laisser cet élève ouvrir le test de placement même si le module est désactivé pour tous.
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={user.can_placement}
+                  aria-label="Accès test de placement"
+                  onClick={() => handleTogglePlacement(!user.can_placement)}
+                  className={`flex h-7 w-11 shrink-0 items-center rounded-full p-0.5 transition-colors ${
+                    user.can_placement ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
+                  }`}
+                >
+                  <span
+                    className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
+                      user.can_placement ? "translate-x-4" : "translate-x-0"
+                    }`}
+                  />
+                </button>
+              </label>
+            </div>
+          )}
+
           {(canTogglePrint || user.role === "admin" || user.role === "prof") && canEditAccount && (
             <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
               <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Accès aux leçons</h2>
@@ -561,7 +589,7 @@ export function EleveDetailPage({
                   <AccessSwitch
                     checked={user.can_free_access}
                     label="Accès complet"
-                    description="Toutes les leçons, sans réussite de l'évaluation précédente"
+                    description="Active ce bouton pour débloquer toutes les leçons sans devoir réussir l'évaluation précédente."
                     ariaLabel="Accès complet"
                     onToggle={() => handleToggleFreeAccess(!user.can_free_access)}
                   />

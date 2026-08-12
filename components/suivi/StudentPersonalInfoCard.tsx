@@ -180,7 +180,7 @@ export function StudentPersonalInfoCard({
           <AccessSwitch
             checked={student.can_free_access}
             label="Accès complet"
-            description="Toutes les leçons, sans réussite de l'évaluation précédente"
+            description="Active ce bouton pour débloquer toutes les leçons sans devoir réussir l'évaluation précédente."
             ariaLabel="Accès complet"
             onToggle={() => toggle({ can_free_access: !student.can_free_access })}
           />

@@ -41,6 +41,11 @@ export type UserRow = {
   role: "eleve" | "prof" | "admin";
   /** Accès hub Impression (élèves / profs). Les admins y ont toujours accès. */
   can_print: boolean;
+  /**
+   * Accès individuel au test de placement (élève), même si le module global est off.
+   * Réservé à l'admin — défaut false.
+   */
+  can_placement: boolean;
   /** Accès complet aux leçons (sans verrouillage séquentiel). */
   can_free_access: boolean;
   /** Accès partiel grammaire jusqu'à G7.1. */

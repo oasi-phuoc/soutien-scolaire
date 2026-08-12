@@ -35,6 +35,7 @@ export default async function AdminPage() {
     return {
       ...u,
       can_print: Boolean((u as { can_print?: boolean }).can_print),
+      can_placement: Boolean((u as { can_placement?: boolean }).can_placement),
       can_free_access: free,
       can_partial_french_grammar: Boolean(
         (u as { can_partial_french_grammar?: boolean }).can_partial_french_grammar ?? legacyFr,

@@ -178,7 +178,7 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
       ? supabase.rpc("get_my_lesson_access")
       : Promise.resolve({ data: null, error: null }),
     needsPlacementGate
-      ? supabase.rpc("get_placement_module_enabled")
+      ? supabase.rpc("can_access_placement")
       : Promise.resolve({ data: true, error: null }),
   ]);
 
@@ -236,12 +236,24 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
     }
   }
 
-  const placementVisible =
+  let placementVisible =
     role === "admin" || role === "prof"
       ? true
       : placementRes.error
         ? true
         : placementRes.data !== false;
+
+  // Fallback si can_access_placement n'existe pas encore : module global OU can_placement.
+  if (needsPlacementGate && placementRes.error) {
+    const [{ data: enabled }, profileRes] = await Promise.all([
+      supabase.rpc("get_placement_module_enabled"),
+      supabase.from("profiles").select("can_placement").eq("id", user.id).maybeSingle(),
+    ]);
+    const canPlacement = profileRes.error
+      ? false
+      : Boolean((profileRes.data as { can_placement?: boolean } | null)?.can_placement);
+    placementVisible = enabled !== false || canPlacement;
+  }
 
   return {
     authenticated: true,
