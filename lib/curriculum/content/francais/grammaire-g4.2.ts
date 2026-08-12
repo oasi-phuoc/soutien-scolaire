@@ -17,27 +17,67 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "text",
-      text: "{a}Lieu{/a}",
-    },
-    {
-      type: "text",
+      label: "Lieu",
+      transLabel: {
+        en: "Place",
+        ar: "المكان",
+        fa: "مکان",
+        pt: "Lugar",
+        so: "Goob",
+        ti: "ቦታ",
+        tr: "Yer",
+        ps: "ځای",
+        uk: "Місце",
+      },
       text: "Pour indiquer un lieu, on utilise la préposition {a}à{/a} ou {a}de{/a}.",
+      transText: {
+        en: "To indicate a place, we use the preposition {a}à{/a} or {a}de{/a}.",
+        ar: "للدلالة على مكان، نستخدم حرف الجر {a}à{/a} أو {a}de{/a}.",
+        fa: "برای نشان دادن مکان، از حرف اضافه {a}à{/a} یا {a}de{/a} استفاده می‌کنیم.",
+        pt: "Para indicar um lugar, usamos a preposição {a}à{/a} ou {a}de{/a}.",
+        so: "Si loo muujiyo meel, waxaan isticmaalnaa xarafka hore ee {a}à{/a} ama {a}de{/a}.",
+        ti: "ቦታ ንምምልካት፣ እቲ {a}à{/a} ወይ {a}de{/a} ዝብል ቅድመ ቃል ንጥቀም።",
+        tr: "Bir yeri belirtmek için {a}à{/a} veya {a}de{/a} edatını kullanırız.",
+        ps: "د ځای د ښودلو لپاره، موږ د {a}à{/a} یا {a}de{/a} حرف اضافه کاروو.",
+        uk: "Щоб указати місце, ми використовуємо прийменник {a}à{/a} або {a}de{/a}.",
+      },
+      items: [
+        "Je suis {a}à la{/a} gare.",
+        "Il habite à côté {a}de la{/a} Poste.",
+      ],
+      noBulletItems: [0,1],
     },
     {
       type: "text",
-      text: "Je suis à la gare.\nIl habite à côté de la Poste.",
-    },
-    {
-      type: "text",
-      text: "{a}Noms{/a}",
-    },
-    {
-      type: "text",
-      text: "Pour relier deux noms ensemble, on utilise la préposition {a}de{/a}.",
-    },
-    {
-      type: "text",
-      text: "Le bureau de la maîtresse\nLa salle de sport",
+      label: "Noms",
+      transLabel: {
+        en: "Nouns",
+        ar: "الأسماء",
+        fa: "اسم‌ها",
+        pt: "Nomes",
+        so: "Magacyada",
+        ti: "ስማት",
+        tr: "İsimler",
+        ps: "نومونه",
+        uk: "Іменники",
+      },
+      text: "Pour relier deux noms ensemble, on utilise aussi la préposition {a}de{/a}.",
+      transText: {
+        en: "To link two nouns together, we also use the preposition {a}de{/a}.",
+        ar: "لربط اسمين معًا، نستخدم أيضًا حرف الجر {a}de{/a}.",
+        fa: "برای مرتبط کردن دو اسم با یکدیگر، از حرف اضافه {a}de{/a} نیز استفاده می‌کنیم.",
+        pt: "Para ligar dois nomes, também usamos a preposição {a}de{/a}.",
+        so: "Si loo isku xiro laba magac, waxaan sidoo kale isticmaalnaa xarafka hore ee {a}de{/a}.",
+        ti: "ክልተ ስማት ንምትእስሳር፣ እቲ {a}de{/a} ዝብል ቅድመ ቃል እውን ንጥቀም።",
+        tr: "İki ismi birbirine bağlamak için {a}de{/a} edatını da kullanırız.",
+        ps: "د دوو نومونو د یوځای کولو لپاره، موږ د {a}de{/a} حرف اضافه هم کاروو.",
+        uk: "Щоб поєднати два іменники, ми також використовуємо прийменник {a}de{/a}.",
+      },
+      items: [
+        "Le bureau de la maîtresse",
+        "La salle de sport",
+      ],
+      noBulletItems: [0,1],
     },
     {
       type: "text",
@@ -49,85 +89,28 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "grid",
-      headers: [
-        "",
-        "Exemple",
-      ],
+      headers: ["","Exemple",],
       boldFirstCol: true,
-      colWidths: [
-        "42%",
-        "58%",
+      colWidths: ["35%","65%",
       ],
       rows: [
         [
-          "Jouer {a}à{/a} + sport",
+          "Jouer {a}à{/a}\n+ sport",
           "Marie joue à la balle.",
         ],
         [
-          "Jouer {a}de{/a} + instrument",
+          "Jouer {a}de{/a}\n+ instrument",
           "Julie joue de la flûte.",
         ],
         [
-          "Avoir mal {a}à{/a} + partie du corps",
+          "Avoir mal {a}à{/a}\n+ partie du corps",
           "Nous avons mal à la tête.",
         ],
       ],
     },
     {
       type: "heading",
-      text: "Formes",
-    },
-    {
-      type: "text",
-      text: "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement. {a}La{/a} et {a}l'{/a} ne se contractent jamais.",
-    },
-    {
-      type: "grid",
-      headers: [
-        "",
-        "Contraction",
-        "Exemple",
-      ],
-      boldFirstCol: true,
-      colWidths: [
-        "28%",
-        "24%",
-        "48%",
-      ],
-      rows: [
-        [
-          "à + le",
-          "{a}au{/a}",
-          "Elle est au supermarché.",
-        ],
-        [
-          "à + les",
-          "{a}aux{/a}",
-          "Elle est aux toilettes.",
-        ],
-        [
-          "de + le",
-          "{a}du{/a}",
-          "Le couloir du métro.",
-        ],
-        [
-          "de + les",
-          "{a}des{/a}",
-          "La salle des professeurs.",
-        ],
-      ],
-    },
-    {
-      type: "text",
-      text: "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
-    },
-    {
-      type: "heading",
       text: "Les verbes de mouvement",
-    },
-    {
-      type: "heading",
-      text: "Les verbes de mouvement au présent",
       trans: {
         en: "Movement verbs in the present",
         ar: "أفعال الحركة في المضارع",
@@ -138,334 +121,34 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "text",
-      items: [
-        "Ces verbes expriment un déplacement ou un mouvement. Clique sur chaque verbe pour voir sa conjugaison.",
-      ],
-      noBulletItems: [
-        0,
-      ],
-      transItems: {
-        en: [
-          "These verbs express movement or displacement. Click each verb to see its conjugation.",
-        ],
-        ar: [
-          "تعبّر هذه الأفعال عن الحركة أو التنقل. انقر على كل فعل لرؤية تصريفه.",
-        ],
-        fa: [
-          "این افعال حرکت یا جابجایی را بیان می‌کنند. روی هر فعل کلیک کنید تا صرف آن را ببینید.",
-        ],
-        ti: [
-          "ነዚ ግሲያት ምቅስቃስ ወይ ምንቅስቓስ ይገልጹ. ንኹሉ ግሲ ጠውቕ ናይ ምቕያር ንምርካብ.",
-        ],
-        uk: [
-          "Ці дієслова виражають рух або переміщення. Клацніть на кожне дієслово, щоб побачити відмінювання.",
-        ],
+      label: "Verbes de mouvement",
+      text: "Certains verbes de mouvement sont suivis d'une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, etc.) qui indique la {a}destination{/a} ou l'{a}origine{/a}.\nClique sur chaque verbe pour voir sa conjugaison.",
+      transText: {
+        en: "Some verbs of movement are followed by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, etc.) that indicates the {a}destination{/a} or the {a}origin{/a}.\nClick on each verb to see its conjugation.",
+        ar: "تتبع بعض أفعال الحركة {a}بحرف جر{/a} ({a}à{/a}، {a}de{/a}، إلخ) يحدد {a}الوجهة{/a} أو {a}الأصل{/a}.\nانقر على كل فعل لرؤية تصريفه.",
+        fa: "برخی از افعال حرکتی با یک {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a} و غیره) می‌آیند که {a}مقصد{/a} یا {a}مبدأ{/a} را نشان می‌دهد.\nروی هر فعل کلیک کنید تا صرف آن را ببینید.",
+        pt: "Alguns verbos de movimento são seguidos de uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, etc.) que indica o {a}destino{/a} ou a {a}origem{/a}.\nClique em cada verbo para ver a sua conjugação.",
+        so: "Qaar ka mid ah falalka dhaqdhaqaaqa waxaa raaca {a}xaraf-hore{/a} ({a}à{/a}, {a}de{/a}, iwm.) oo tilmaamaya {a}meesha loo socdo{/a} ama {a}meesha laga yimid{/a}.\nGuji fal kasta si aad u aragto isku-xirkiisa.",
+        ti: "ገለ ግሲታት ምንቅስቓስ ብ{a}ቅድመ ቃል{/a} ({a}à{/a}፣ {a}de{/a}፣ ወዘተ) ይስዕቡ፣ እዚ ድማ {a}መዕረፊ ቦታ{/a} ወይ {a}መበገሲ ቦታ{/a} የመልክት።\nንነፍሲ ወከፍ ግሲ ንምስትውዓል ክሊክ ግበር።",
+        tr: "Bazı hareket fiillerinden sonra, {a}hedefi{/a} veya {a}kaynağı{/a} belirten bir {a}edat{/a} ({a}à{/a}, {a}de{/a} vb.) kullanılır.\nÇekimini görmek için her fiile tıklayın.",
+        ps: "د حرکت ځینې فعلونه د {a}حرف اضافې{/a} ({a}à{/a}، {a}de{/a} او نور) سره راځي چې {a}موخه{/a} یا {a}اصل{/a} ښيي.\nد هر فعل د صرف د لیدلو لپاره پرې کلیک وکړئ.",
+        uk: "Після деяких дієслів руху вживається {a}прийменник{/a} ({a}à{/a}, {a}de{/a} тощо), який указує на {a}напрямок{/a} або {a}походження{/a}.\nНатисніть на кожне дієслово, щоб переглянути його відмінювання.",
       },
     },
     {
       type: "verb_toggle",
       buttonCols: 5,
       verbs: [
-        {
-          infinitive: "aller",
-          radical: "",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "vais",
-            },
-            {
-              pronoun: "tu",
-              ending: "vas",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "va",
-            },
-            {
-              pronoun: "nous",
-              ending: "allons",
-            },
-            {
-              pronoun: "vous",
-              ending: "allez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "vont",
-            },
-          ],
-        },
-        {
-          infinitive: "venir",
-          radical: "",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "viens",
-            },
-            {
-              pronoun: "tu",
-              ending: "viens",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "vient",
-            },
-            {
-              pronoun: "nous",
-              ending: "venons",
-            },
-            {
-              pronoun: "vous",
-              ending: "venez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "viennent",
-            },
-          ],
-        },
-        {
-          infinitive: "partir",
-          radical: "par",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "s",
-            },
-            {
-              pronoun: "tu",
-              ending: "s",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "t",
-            },
-            {
-              pronoun: "nous",
-              ending: "tons",
-            },
-            {
-              pronoun: "vous",
-              ending: "tez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "tent",
-            },
-          ],
-        },
-        {
-          infinitive: "arriver",
-          radical: "arriv",
-          rows: [
-            {
-              pronoun: "j'",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "entrer",
-          radical: "entr",
-          rows: [
-            {
-              pronoun: "j'",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "sortir",
-          radical: "sor",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "s",
-            },
-            {
-              pronoun: "tu",
-              ending: "s",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "t",
-            },
-            {
-              pronoun: "nous",
-              ending: "tons",
-            },
-            {
-              pronoun: "vous",
-              ending: "tez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "tent",
-            },
-          ],
-        },
-        {
-          infinitive: "monter",
-          radical: "mont",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "descendre",
-          radical: "descend",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "s",
-            },
-            {
-              pronoun: "tu",
-              ending: "s",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "marcher",
-          radical: "march",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "courir",
-          radical: "cour",
-          rows: [
-            {
-              pronoun: "je",
-              ending: "s",
-            },
-            {
-              pronoun: "tu",
-              ending: "s",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "t",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
+        { infinitive: "aller", radical: "", rows: [{ pronoun: "je", ending: "vais" }, { pronoun: "tu", ending: "vas" }, { pronoun: "il / elle / on", ending: "va" }, { pronoun: "nous", ending: "allons" }, { pronoun: "vous", ending: "allez" }, { pronoun: "ils / elles", ending: "vont" }] },
+        { infinitive: "venir", radical: "", rows: [{ pronoun: "je", ending: "viens" }, { pronoun: "tu", ending: "viens" }, { pronoun: "il / elle / on", ending: "vient" }, { pronoun: "nous", ending: "venons" }, { pronoun: "vous", ending: "venez" }, { pronoun: "ils / elles", ending: "viennent" }] },
+        { infinitive: "partir", radical: "par", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "tons" }, { pronoun: "vous", ending: "tez" }, { pronoun: "ils / elles", ending: "tent" }] },
+        { infinitive: "arriver", radical: "arriv", rows: [{ pronoun: "j'", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "entrer", radical: "entr", rows: [{ pronoun: "j'", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "sortir", radical: "sor", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "tons" }, { pronoun: "vous", ending: "tez" }, { pronoun: "ils / elles", ending: "tent" }] },
+        { infinitive: "monter", radical: "mont", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "descendre", radical: "descend", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "marcher", radical: "march", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "courir", radical: "cour", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
       ],
     },
     {
@@ -747,141 +430,47 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "heading",
-      text: "Les articles contractés",
-      trans: {
-        en: "Contracted articles",
-        ar: "المقاطع المدمجة",
-        fa: "حروف تعریف ادغام‌شده",
-        ti: "ዝተሓጸሩ ናይ ዓንቀጽ",
-        uk: "Злиті артиклі",
-      },
-      sub: true,
+      text: "Formes",
     },
     {
       type: "text",
-      items: [
-        "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement.",
-      ],
-      noBulletItems: [
-        0,
-      ],
-      transItems: {
-        en: [
-          "When the prepositions {a}à{/a} and {a}de{/a} are followed by the article {a}le{/a} or {a}les{/a}, they must be contracted.",
-        ],
-        ar: [
-          "عندما تتبع حروف الجر {a}à{/a} و{a}de{/a} المقال {a}le{/a} أو {a}les{/a}، تُدمج وجوبًا.",
-        ],
-        fa: [
-          "وقتی حروف اضافه {a}à{/a} و {a}de{/a} قبل از حرف تعریف {a}le{/a} یا {a}les{/a} قرار می‌گیرند، باید ادغام شوند.",
-        ],
-        ti: [
-          "ምስ {a}à{/a} ከምኡ'ውን {a}de{/a} ቅድሚ ናይ ዓንቀጽ {a}le{/a} ወይ {a}les{/a}, ምድምሳስ ግዴታ እዩ።",
-        ],
-        uk: [
-          "Коли прийменники {a}à{/a} та {a}de{/a} стоять перед артиклем {a}le{/a} або {a}les{/a}, вони обов'язково зливаються.",
-        ],
+      text: "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement.",
+      transText: {
+        en: "When the prepositions {a}à{/a} and {a}de{/a} are followed by the article {a}le{/a} or {a}les{/a}, they must contract.",
+        ar: "عندما تأتي حروف الجر {a}à{/a} و{a}de{/a} قبل أداتي التعريف {a}le{/a} أو {a}les{/a}، فإنها تُدمج وجوبًا.",
+        fa: "وقتی حروف اضافه {a}à{/a} و {a}de{/a} قبل حروف تعریف {a}le{/a} یا {a}les{/a} قرار می‌گیرند، باید به‌صورت اجباری ادغام شوند.",
+        pt: "Quando as preposições {a}à{/a} e {a}de{/a} são seguidas dos artigos {a}le{/a} ou {a}les{/a}, contraem-se obrigatoriamente.",
+        so: "Marka xarafyada hore ee {a}à{/a} iyo {a}de{/a} ay ka horreeyaan maqaalka {a}le{/a} ama {a}les{/a}, waa in si khasab ah loo isku daraa.",
+        ti: "እቶም ቅድመ ቃላት {a}à{/a}ን {a}de{/a}ን ብኣንቀጽ {a}le{/a} ወይ {a}les{/a} ምስ ዝስዕቡ፣ ብግዴታ ይጠቓለሉ።",
+        tr: "{a}à{/a} ve {a}de{/a} edatlarından sonra {a}le{/a} veya {a}les{/a} artikeli geldiğinde, bunlar zorunlu olarak birleşir.",
+        ps: "کله چې د {a}à{/a} او {a}de{/a} حرف اضافه د {a}le{/a} یا {a}les{/a} له ټاکلي توري وروسته راشي، نو په اجباري ډول سره یوځای کېږي.",
+        uk: "Коли після прийменників {a}à{/a} і {a}de{/a} стоять артиклі {a}le{/a} або {a}les{/a}, вони обов'язково зливаються.",
       },
     },
     {
       type: "grid",
-      headers: [
-        "Préposition + article",
-        "Contraction",
-        "Exemple",
-      ],
+      headers: ["", "Contraction", "Exemple"],
       boldFirstCol: true,
+      colWidths: ["28%", "24%", "48%"],
       rows: [
-        [
-          "{a}à + le{/a}",
-          "→ {a}au{/a}",
-          "Je vais {a}au{/a} marché. (à + le marché)",
-        ],
-        [
-          "{a}à + les{/a}",
-          "→ {a}aux{/a}",
-          "Je vais {a}aux{/a} États-Unis. (à + les États-Unis)",
-        ],
-        [
-          "{a}de + le{/a}",
-          "→ {a}du{/a}",
-          "Je viens {a}du{/a} marché. (de + le marché)",
-        ],
-        [
-          "{a}de + les{/a}",
-          "→ {a}des{/a}",
-          "Il arrive {a}des{/a} États-Unis. (de + les États-Unis)",
-        ],
-      ],
-      transHeaders: {
-        en: [
-          "Preposition + article",
-          "Contraction",
-          "Example",
-        ],
-        ar: [
-          "حرف الجر + المقال",
-          "الإدماج",
-          "مثال",
-        ],
-        fa: [
-          "حرف اضافه + حرف تعریف",
-          "ادغام",
-          "مثال",
-        ],
-        ti: [
-          "ቅድሚ ስም + ናይ ዓንቀጽ",
-          "ምድምሳስ",
-          "ኣብነት",
-        ],
-        uk: [
-          "Прийменник + артикль",
-          "Злиття",
-          "Приклад",
-        ],
-      },
-    },
-    {
-      type: "text",
-      items: [
-        "à + la et de + la ne se contractent PAS.",
-      ],
-      noBulletItems: [
-        0,
+        ["à + le", "{a}au{/a}", "Elle est au supermarché."],
+        ["à + les", "{a}aux{/a}", "Elle est aux toilettes."],
+        ["de + le", "{a}du{/a}", "Le couloir du métro."],
+        ["de + les", "{a}des{/a}", "La salle des professeurs."],
       ],
     },
     {
       type: "text",
-      label: "",
+      text: "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
       items: [
-        "Je vais {a}à la{/a} pharmacie ✅",
-        "Je viens {a}de la{/a} gare ✅",
+        "Je vais {a}à la{/a} pharmacie",
+        "Je vais {a}à l'{/a}école",
       ],
-      noBulletItems: [
-        0,
-        1,
-      ],
+      noBulletItems: [0,1],
     },
     {
-      type: "text",
-      items: [
-        "à + l' et de + l' ne se contractent PAS.",
-      ],
-      noBulletItems: [
-        0,
-      ],
-    },
-    {
-      type: "text",
-      label: "",
-      items: [
-        "Je vais {a}à l'{/a}école ✅",
-        "Je viens {a}de l'{/a}hôpital ✅",
-      ],
-      noBulletItems: [
-        0,
-        1,
-      ],
+      type: "heading",
+      text: "Les verbes de mouvement",
     },
   ],
   exercises: [
