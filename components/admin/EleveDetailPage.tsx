@@ -420,11 +420,9 @@ export function EleveDetailPage({
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        {/* Left column — Info */}
+      <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+        {/* Colonne gauche — infos + mdp + progression */}
         <div className="space-y-5">
-
-          {/* Info card */}
           <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
             <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Informations</h2>
             <dl className="space-y-2 text-sm">
@@ -485,7 +483,14 @@ export function EleveDetailPage({
             <StudentPasswordEditor studentId={user.id} />
           )}
 
-          {/* Role change */}
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">Progression</h2>
+            <StudentProgressDetail userId={user.id} progressData={user.progress_data} />
+          </div>
+        </div>
+
+        {/* Colonne droite — rôle / impression / placement / accès leçons */}
+        <div className="space-y-5">
           {showTeacherAssignment && (
             <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
               <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Classes affectées</h2>
@@ -676,12 +681,6 @@ export function EleveDetailPage({
               )}
             </div>
           )}
-        </div>
-
-        {/* Right column — Progress */}
-        <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
-          <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">Progression</h2>
-          <StudentProgressDetail userId={user.id} progressData={user.progress_data} />
         </div>
       </div>
 
