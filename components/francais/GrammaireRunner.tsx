@@ -211,19 +211,19 @@ function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { ver
   const nePrefix = vowelRe.test(verb.radical[0] ?? "") ? "n'" : "ne ";
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <div
-        className={buttonCols ? "grid gap-2" : "grid grid-cols-2 gap-2 sm:grid-cols-4"}
+        className={buttonCols ? "grid gap-2" : "flex flex-wrap gap-2"}
         style={buttonCols ? { gridTemplateColumns: `repeat(${buttonCols}, 1fr)` } : undefined}
       >
         {verbs.map((v, i) => (
           <button
             key={i}
             onClick={() => setSelectedIdx(i)}
-            className={`min-h-10 w-full rounded-full px-3 py-1.5 text-center font-medium transition-colors ${buttonCols ? "text-xs" : "text-sm"} ${
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${buttonCols ? "w-full" : ""} ${
               i === selectedIdx
-                ? "bg-[var(--color-accent-fr)] text-white"
-                : "border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)]"
+                ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
+                : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:bg-[color-mix(in_oklch,var(--color-accent-fr)_15%,white)] hover:text-[var(--color-accent-fr)]"
             }`}
           >
             {v.infinitive}
