@@ -184,57 +184,59 @@ export function StudentPersonalInfoCard({
             ariaLabel="Accès complet"
             onToggle={() => toggle({ can_free_access: !student.can_free_access })}
           />
-          <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
-              Accès partiel — Français
-            </p>
-            <div className="space-y-3">
-              <AccessSwitch
-                checked={student.can_partial_french_grammar}
-                disabled={partialDisabled}
-                label={`Grammaire - ${PARTIAL_FRENCH_GRAMMAR_MAX}`}
-                ariaLabel="Accès partiel grammaire G7.1"
-                onToggle={() =>
-                  toggle({ can_partial_french_grammar: !student.can_partial_french_grammar })
-                }
-              />
-              <AccessSwitch
-                checked={student.can_partial_french_comm}
-                disabled={partialDisabled}
-                label={`Communication - ${PARTIAL_FRENCH_COMM_MAX}`}
-                ariaLabel="Accès partiel communication E9.1"
-                onToggle={() =>
-                  toggle({ can_partial_french_comm: !student.can_partial_french_comm })
-                }
-              />
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
+                Accès partiel — Français
+              </p>
+              <div className="space-y-3">
+                <AccessSwitch
+                  checked={student.can_partial_french_grammar}
+                  disabled={partialDisabled}
+                  label={`Grammaire - ${PARTIAL_FRENCH_GRAMMAR_MAX}`}
+                  ariaLabel="Accès partiel grammaire G7.1"
+                  onToggle={() =>
+                    toggle({ can_partial_french_grammar: !student.can_partial_french_grammar })
+                  }
+                />
+                <AccessSwitch
+                  checked={student.can_partial_french_comm}
+                  disabled={partialDisabled}
+                  label={`Communication - ${PARTIAL_FRENCH_COMM_MAX}`}
+                  ariaLabel="Accès partiel communication E9.1"
+                  onToggle={() =>
+                    toggle({ can_partial_french_comm: !student.can_partial_french_comm })
+                  }
+                />
+              </div>
             </div>
-          </div>
-          <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
-              Accès partiel — Mathématiques
-            </p>
-            <div className="space-y-3">
-              <AccessSwitch
-                checked={student.can_partial_math_a3}
-                disabled={partialDisabled}
-                label={`Algèbre ${PARTIAL_MATH_A3_MAX}`}
-                ariaLabel="Accès partiel maths A3.1"
-                onToggle={() => toggle({ can_partial_math_a3: !student.can_partial_math_a3 })}
-              />
-              <AccessSwitch
-                checked={student.can_partial_math_a8}
-                disabled={partialDisabled}
-                label={`Algèbre ${PARTIAL_MATH_A8_MAX}`}
-                ariaLabel="Accès partiel maths A8.1"
-                onToggle={() => toggle({ can_partial_math_a8: !student.can_partial_math_a8 })}
-              />
-              <AccessSwitch
-                checked={student.can_partial_math_g3}
-                disabled={partialDisabled}
-                label={`Géométrie ${PARTIAL_MATH_G3_MAX}`}
-                ariaLabel="Accès partiel maths G3.1"
-                onToggle={() => toggle({ can_partial_math_g3: !student.can_partial_math_g3 })}
-              />
+            <div className="rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
+                Accès partiel — Mathématiques
+              </p>
+              <div className="space-y-3">
+                <AccessSwitch
+                  checked={student.can_partial_math_a3}
+                  disabled={partialDisabled}
+                  label={`Algèbre ${PARTIAL_MATH_A3_MAX}`}
+                  ariaLabel="Accès partiel maths A3.1"
+                  onToggle={() => toggle({ can_partial_math_a3: !student.can_partial_math_a3 })}
+                />
+                <AccessSwitch
+                  checked={student.can_partial_math_a8}
+                  disabled={partialDisabled}
+                  label={`Algèbre ${PARTIAL_MATH_A8_MAX}`}
+                  ariaLabel="Accès partiel maths A8.1"
+                  onToggle={() => toggle({ can_partial_math_a8: !student.can_partial_math_a8 })}
+                />
+                <AccessSwitch
+                  checked={student.can_partial_math_g3}
+                  disabled={partialDisabled}
+                  label={`Géométrie ${PARTIAL_MATH_G3_MAX}`}
+                  ariaLabel="Accès partiel maths G3.1"
+                  onToggle={() => toggle({ can_partial_math_g3: !student.can_partial_math_g3 })}
+                />
+              </div>
             </div>
           </div>
         </div>
