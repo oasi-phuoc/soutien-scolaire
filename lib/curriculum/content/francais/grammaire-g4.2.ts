@@ -137,7 +137,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "selector",
-      buttonCols: 4,
+      buttonCols: 2,
       tabs: [
         {
           label: "aller",
