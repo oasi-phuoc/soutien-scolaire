@@ -80,32 +80,24 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       ],
     },
     {
-      type: "heading",
-      text: "Cas général",
-      trans: { en: "General case", ar: "الحالة العامة", fa: "مورد کلی",
-      pt: "Caso geral",
-      so: "Xaaladda guud", ti: "ሓፈሻዊ ኩነት",
-      tr: "Genel durum",
-      ps: "عمومي حالت", uk: "Загальний випадок" },
-    },
-    {
       type: "text",
-      text: "Nom pluriel = nom singulier + {a}-s{/a}.",
+      text: "Pour la majorité des noms, on rajoute un {a}s{/a} au nom singulier pour former le pluriel.",
       transText: {
-        en: "Plural noun = singular noun + {a}-s{/a}.",
-        ar: "الاسم الجمع = الاسم المفرد + {a}-s{/a}.",
-        fa: "اسم جمع = اسم مفرد + {a}-s{/a}.",
-        pt: "Nome plural = nome singular + {a}-s{/a}.",
-        so: "Magac jamac = magac keli + {a}-s{/a}.",
-        ti: "ባዙሕ ስም = ንጽል ስም + {a}-s{/a}.",
-        tr: "Çoğul isim = tekil isim + {a}-s{/a}.",
-        ps: "جمع نوم = مفرد نوم + {a}-s{/a}.",
-        uk: "Іменник у множині = іменник в однині + {a}-s{/a}.",
+        en: "For most nouns, we add {a}-s{/a} to the singular noun to form the plural.",
+        ar: "بالنسبة إلى معظم الأسماء، نضيف {a}-s{/a} إلى الاسم المفرد لتكوين الجمع.",
+        fa: "برای بیشتر اسم‌ها، برای ساختن حالت جمع، {a}-s{/a} را به اسم مفرد اضافه می‌کنیم.",
+        pt: "Para a maioria dos nomes, acrescentamos {a}-s{/a} ao nome no singular para formar o plural.",
+        so: "Inta badan magacyada, waxaan ku darnaa {a}-s{/a} magaca keliga ah si aan u samayno jamaca.",
+        ti: "ንመብዛሕትኦም ስማት፣ ብዙሕ ቁጽሪ ንምስራሕ ኣብ ንጽል ስም {a}-s{/a} ንውስኽ።",
+        tr: "Çoğu isimde, çoğulu oluşturmak için tekil isme {a}-s{/a} eklenir.",
+        ps: "د ډېرو نومونو لپاره، د جمع جوړولو لپاره مفرد نوم ته {a}-s{/a} ورزیاتوو.",
+        uk: "Для більшості іменників ми додаємо {a}-s{/a} до іменника в однині, щоб утворити множину.",
       },
-    },
-    {
-      type: "text",
-      text: "un fruit → des fruit{a}s{/a}\nune banane → des banane{a}s{/a}",
+      items:[
+        "un fruit → des fruit{a}s{/a}",
+        "une banane → des banane{a}s{/a}",
+      ],
+      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -121,10 +113,12 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         ps: "که مفرد نوم په {a}s{/a}، {a}x{/a} یا {a}z{/a} پای ته رسېږي، جمع نه بدلېږي.",
         uk: "Якщо іменник в однині закінчується на {a}s{/a}, {a}x{/a} або {a}z{/a}, множина не змінюється.",
       },
-    },
-    {
-      type: "text",
-      text: "le bra{a}s{/a} → les bra{a}s{/a}\nune noi{a}x{/a} → des noi{a}x{/a}\nun ne{a}z{/a} → des ne{a}z{/a}",
+      items: [
+        "le bra{a}s{/a} → les bra{a}s{/a}",
+        "une noi{a}x{/a} → des noi{a}x{/a}",
+        "un ne{a}z{/a} → des ne{a}z{/a}"
+      ],
+      noBulletItems: [0, 1, 2]
     },
     {
       type: "heading",
