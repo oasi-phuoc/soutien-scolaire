@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect, useMemo, useTransition } from "react";
+import React, { useState, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type {
@@ -210,17 +210,53 @@ function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { ver
 
   const nePrefix = vowelRe.test(verb.radical[0] ?? "") ? "n'" : "ne ";
 
+  // Grille auto selon le nombre de verbes : multiple de 3 → 3 colonnes ;
+  // nombre pair → 2 colonnes, promues à 4 par ligne si tous les libellés
+  // tiennent dans le bouton sans troncature ni réduction de taille.
+  const n = verbs.length;
+  const isMult3 = n % 3 === 0;
+  const isEven = n % 2 === 0;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [fitsFour, setFitsFour] = useState(false);
+
+  useLayoutEffect(() => {
+    if (!isEven || isMult3 || n < 4) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const ctx = document.createElement("canvas").getContext("2d");
+    if (!ctx) return;
+    const measure = () => {
+      const btn = el.querySelector("button");
+      if (btn) {
+        const cs = getComputedStyle(btn);
+        ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      }
+      const widest = Math.max(...verbs.map((v) => ctx.measureText(v.infinitive).width));
+      const gap = 8; // gap-2
+      const padX = 24; // px-3 de chaque côté
+      const colWidth = (el.clientWidth - 3 * gap) / 4;
+      setFitsFour(widest + padX + 1 <= colWidth);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [verbs, n, isEven, isMult3]);
+
+  const cols = isMult3 ? 3 : isEven ? (n >= 4 && fitsFour ? 4 : 2) : buttonCols;
+
   return (
     <div className="space-y-3">
       <div
-        className={buttonCols ? "grid gap-2" : "flex flex-wrap gap-2"}
-        style={buttonCols ? { gridTemplateColumns: `repeat(${buttonCols}, 1fr)` } : undefined}
+        ref={containerRef}
+        className={cols ? "grid gap-2" : "flex flex-wrap gap-2"}
+        style={cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined}
       >
         {verbs.map((v, i) => (
           <button
             key={i}
             onClick={() => setSelectedIdx(i)}
-            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${buttonCols ? "w-full" : ""} ${
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${cols ? "w-full" : ""} ${
               i === selectedIdx
                 ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
                 : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:bg-[color-mix(in_oklch,var(--color-accent-fr)_15%,white)] hover:text-[var(--color-accent-fr)]"
