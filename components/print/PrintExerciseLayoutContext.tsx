@@ -9,12 +9,19 @@ import {
   printLengthWidthScale,
 } from "@/components/print/printLength";
 
-export type PrintExerciseColumns = 1 | 2 | 3;
+export type PrintExerciseColumns = 1 | 2 | 3 | 4 | 5;
+
+export function clampPrintColumns(value: number): PrintExerciseColumns {
+  const n = Math.round(value);
+  if (n >= 5) return 5;
+  if (n >= 2) return n as PrintExerciseColumns;
+  return 1;
+}
 
 export type PrintExerciseLayoutValue = {
   /** Nombre de questions (pool size) pour cet exercice. */
   questionCount: number;
-  /** Répartition des questions en colonnes (1–3). */
+  /** Répartition des questions en colonnes (1–5). */
   columns: PrintExerciseColumns;
   /** Longueurs des traits / boutons (−10…+10, défaut 0). */
   length: number;
@@ -45,10 +52,9 @@ export function usePrintQuestionCount(fallback: number): number {
   return Math.max(1, Math.min(30, ctx.questionCount));
 }
 
-export function usePrintColumns(): PrintExerciseColumns {
+export function usePrintColumns(fallback: PrintExerciseColumns = 1): PrintExerciseColumns {
   const ctx = useContext(PrintExerciseLayoutContext);
-  const cols = ctx?.columns ?? 1;
-  return cols === 2 || cols === 3 ? cols : 1;
+  return clampPrintColumns(ctx?.columns ?? fallback);
 }
 
 /** True lorsque le composant est rendu dans un aperçu / document d'impression. */
@@ -62,9 +68,7 @@ export function usePrintQuestionLayout(fallbackCount: number) {
   const questionCount = ctx
     ? Math.max(1, Math.min(30, ctx.questionCount))
     : fallbackCount;
-  const rawCols = ctx?.columns ?? 1;
-  const columns: PrintExerciseColumns =
-    rawCols === 2 || rawCols === 3 ? rawCols : 1;
+  const columns = clampPrintColumns(ctx?.columns ?? 1);
   const lengthMode: PrintLengthMode = ctx?.lengthMode ?? "width";
   const length = ctx
     ? clampPrintLength(ctx.length, lengthMode)
@@ -90,5 +94,7 @@ export function usePrintQuestionLayout(fallbackCount: number) {
 export function printQuestionsListClass(columns: PrintExerciseColumns, stacked = "space-y-4"): string {
   if (columns === 2) return "grid grid-cols-2 items-start gap-x-6 gap-y-4";
   if (columns === 3) return "grid grid-cols-3 items-start gap-x-4 gap-y-4";
+  if (columns === 4) return "grid grid-cols-4 items-start gap-x-3 gap-y-3";
+  if (columns === 5) return "grid grid-cols-5 items-start gap-x-2 gap-y-3";
   return stacked;
 }

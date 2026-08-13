@@ -966,10 +966,10 @@ export function wordsPoolForLessonGrid(
   return multisyllablePool(2, null);
 }
 
-function shuffle<T>(arr: T[]): T[] {
+function shuffle<T>(arr: T[], rng: () => number = Math.random): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [a[i], a[j]] = [a[j]!, a[i]!];
   }
   return a;
@@ -1005,14 +1005,15 @@ export function randomMultisyllableWords(minSyl: number, maxSyl: number | null, 
  * Random items for SoundPicker image grid.
  * Aims for ~40 % "has phoneme" / ~60 % "doesn't have phoneme".
  */
-export function randomSoundItems(phoneme: string, n = 16, forImages = false): WordItem[] {
+export function randomSoundItems(phoneme: string, n = 16, forImages = false, rng?: () => number): WordItem[] {
   let pool = allWordItems().filter((w) => isLectureSoundPoolWord(w.label));
   if (forImages) pool = pool.filter((w) => hasLectureWordImage(w.label));
-  const yes = shuffle(pool.filter((w) => wordHasPhoneme(w, phoneme)));
-  const no = shuffle(pool.filter((w) => !wordHasPhoneme(w, phoneme)));
+  const pick = rng ?? Math.random;
+  const yes = shuffle(pool.filter((w) => wordHasPhoneme(w, phoneme)), pick);
+  const no = shuffle(pool.filter((w) => !wordHasPhoneme(w, phoneme)), pick);
   const yCount = Math.min(Math.round(n * 0.4) + 1, yes.length);
   const nCount = Math.min(n - yCount, no.length);
-  return shuffle([...yes.slice(0, yCount), ...no.slice(0, nCount)]);
+  return shuffle([...yes.slice(0, yCount), ...no.slice(0, nCount)], pick);
 }
 
 export type SoundSyllableItem = {
@@ -1072,6 +1073,7 @@ export function randomSoundSyllableItems(
   phonemes: string[],
   n = 9,
   forImages = false,
+  rng?: () => number,
 ): SoundSyllableItem[] {
   const labels = new Set<string>();
   for (const item of allWordItems()) {
@@ -1096,7 +1098,7 @@ export function randomSoundSyllableItems(
     pool.push({ label, targets });
   }
 
-  return shuffle(pool).slice(0, Math.min(n, pool.length));
+  return shuffle(pool, rng).slice(0, Math.min(n, pool.length));
 }
 
 function lectureRevisionSoundItems(

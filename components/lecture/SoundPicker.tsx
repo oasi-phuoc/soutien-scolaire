@@ -71,35 +71,27 @@ function useSoundPickerItemCount(defaultCount = 16): number {
   return count;
 }
 
-function ouiNonLabel(state: CellState): "Oui" | "Non" {
-  return state === "selected" || state === "correct" || state === "wrong" ? "Oui" : "Non";
-}
+type OuiNonChoice = "oui" | "non" | null;
 
-function ouiNonButtonClass(state: CellState, validated: boolean, hasPhoneme: boolean): string {
+function ouiNonCircleClass(picked: boolean, isAnswer: boolean, validated: boolean): string {
   const base =
-    "rounded-full border px-3 py-1 text-xs font-semibold transition-colors disabled:opacity-70";
+    "flex h-8 min-w-[2.6rem] items-center justify-center rounded-full border px-2 text-[11px] font-semibold leading-none transition-colors disabled:opacity-90";
   if (!validated) {
-    return state === "selected"
+    return picked
       ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`
-      : `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
+      : `${base} border-[var(--color-border-default)] bg-white text-[var(--color-text-secondary)]`;
   }
-  if (state === "correct") {
+  if (isAnswer && picked) {
     return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`;
   }
-  if (state === "wrong") {
+  if (isAnswer && !picked) {
+    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
+  }
+  if (!isAnswer && picked) {
     return `${base} ${LECTURE_CORRECTION_BUTTON}`;
   }
-  if (state === "missed") {
-    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
-  }
-  if (hasPhoneme) {
-    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
-  }
-  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
+  return `${base} border-[var(--color-border-default)] bg-white text-[var(--color-text-secondary)]`;
 }
-
-const OUI_NON_NEUTRAL_CLASS =
-  "rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)] transition-colors disabled:opacity-70";
 
 function imageCardClass(state: CellState, validated: boolean, hasPhoneme: boolean): string {
   const base =
@@ -159,29 +151,38 @@ function audioCardClass(state: CellState, validated: boolean, hasPhoneme: boolea
   return `${base} border-[var(--color-border-default)]`;
 }
 
-function OuiNonButton({
-  state,
+function OuiNonPair({
+  choice,
   validated,
   hasPhoneme,
-  onClick,
-  neutral = false,
+  onPick,
 }: {
-  state: CellState;
+  choice: OuiNonChoice;
   validated: boolean;
   hasPhoneme: boolean;
-  onClick: () => void;
-  neutral?: boolean;
+  onPick: (value: "oui" | "non") => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={validated}
-      className={neutral ? OUI_NON_NEUTRAL_CLASS : ouiNonButtonClass(state, validated, hasPhoneme)}
-      aria-pressed={ouiNonLabel(state) === "Oui"}
-    >
-      {ouiNonLabel(state)}
-    </button>
+    <div className="flex items-center justify-center gap-1.5">
+      {(["oui", "non"] as const).map((value) => {
+        const label = value === "oui" ? "Oui" : "Non";
+        const isAnswer = value === "oui" ? hasPhoneme : !hasPhoneme;
+        const isPicked = choice === value;
+        return (
+          <button
+            key={value}
+            type="button"
+            onClick={() => onPick(value)}
+            disabled={validated}
+            aria-pressed={isPicked}
+            aria-label={label}
+            className={ouiNonCircleClass(isPicked, isAnswer, validated)}
+          >
+            {label}
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
@@ -199,20 +200,23 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
     const responsiveCount = useSoundPickerItemCount(16);
     const itemCount = fixedItemCount ?? responsiveCount;
     const [items, setItems] = useState(() => randomSoundItems(phoneme, itemCount, true));
+    const [choices, setChoices] = useState<OuiNonChoice[]>(() => Array(itemCount).fill(null));
     const [states, setStates] = useState<CellState[]>(() => Array(itemCount).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
       setItems(randomSoundItems(phoneme, itemCount, true));
+      setChoices(Array(itemCount).fill(null));
       setStates(Array(itemCount).fill("idle"));
       setValidated(false);
     }, [itemCount, phoneme]);
 
     const validate = useCallback(() => {
       if (validated) return;
-      const newStates = states.map((s, i) => {
-        const isCorrect = wordHasPhoneme(items[i]!, phoneme);
-        if (s === "selected") return isCorrect ? "correct" : "wrong";
+      const newStates = items.map((word, i) => {
+        const isCorrect = wordHasPhoneme(word, phoneme);
+        const choice = choices[i];
+        if (choice === "oui") return isCorrect ? "correct" : "wrong";
         if (isCorrect) return "missed";
         return "idle";
       }) as CellState[];
@@ -223,7 +227,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
         const targets = items.map((w) => wordHasPhoneme(w, phoneme));
         onEvalValidated(labels, targets, newStates);
       }
-    }, [validated, items, phoneme, states, onEvalValidated]);
+    }, [validated, items, phoneme, choices, onEvalValidated]);
 
     const validateRef = useRef(validate);
     validateRef.current = validate;
@@ -233,13 +237,9 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 
-    function toggle(i: number) {
+    function pick(i: number, value: "oui" | "non") {
       if (validated) return;
-      setStates((prev) => {
-        const next = [...prev] as CellState[];
-        next[i] = prev[i] === "selected" ? "idle" : "selected";
-        return next;
-      });
+      setChoices((prev) => prev.map((c, j) => (j === i ? (c === value ? null : value) : c)));
     }
 
     return (
@@ -288,14 +288,12 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
                     </span>
                   )}
                 </button>
-                <div className="flex w-full justify-center">
-                  <OuiNonButton
-                    state={s}
-                    validated={validated}
-                    hasPhoneme={hasPhoneme}
-                    onClick={() => toggle(i)}
-                  />
-                </div>
+                <OuiNonPair
+                  choice={choices[i] ?? null}
+                  validated={validated}
+                  hasPhoneme={hasPhoneme}
+                  onPick={(value) => pick(i, value)}
+                />
               </div>
             );
           })}
@@ -319,20 +317,23 @@ const AudioPicker = forwardRef<SoundPickerHandle, {
     const responsiveCount = useSoundPickerItemCount(16);
     const itemCount = fixedItemCount ?? responsiveCount;
     const [items, setItems] = useState(() => randomSoundItems(phoneme, itemCount));
+    const [choices, setChoices] = useState<OuiNonChoice[]>(() => Array(itemCount).fill(null));
     const [states, setStates] = useState<CellState[]>(() => Array(itemCount).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
       setItems(randomSoundItems(phoneme, itemCount));
+      setChoices(Array(itemCount).fill(null));
       setStates(Array(itemCount).fill("idle"));
       setValidated(false);
     }, [itemCount, phoneme]);
 
     const validate = useCallback(() => {
       if (validated) return;
-      const newStates = states.map((s, i) => {
-        const isCorrect = wordHasPhoneme(items[i]!, phoneme);
-        if (s === "selected") return isCorrect ? "correct" : "wrong";
+      const newStates = items.map((word, i) => {
+        const isCorrect = wordHasPhoneme(word, phoneme);
+        const choice = choices[i];
+        if (choice === "oui") return isCorrect ? "correct" : "wrong";
         if (isCorrect) return "missed";
         return "idle";
       }) as CellState[];
@@ -343,7 +344,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, {
         const targets = items.map((w) => wordHasPhoneme(w, phoneme));
         onEvalValidated(labels, targets, newStates);
       }
-    }, [validated, items, phoneme, states, onEvalValidated]);
+    }, [validated, items, phoneme, choices, onEvalValidated]);
 
     const validateRef = useRef(validate);
     validateRef.current = validate;
@@ -353,13 +354,9 @@ const AudioPicker = forwardRef<SoundPickerHandle, {
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 
-    function toggle(i: number) {
+    function pick(i: number, value: "oui" | "non") {
       if (validated) return;
-      setStates((prev) => {
-        const next = [...prev] as CellState[];
-        next[i] = prev[i] === "selected" ? "idle" : "selected";
-        return next;
-      });
+      setChoices((prev) => prev.map((c, j) => (j === i ? (c === value ? null : value) : c)));
     }
 
     return (
@@ -399,11 +396,11 @@ const AudioPicker = forwardRef<SoundPickerHandle, {
                     <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
                   </svg>
                 </button>
-                <OuiNonButton
-                  state={s}
+                <OuiNonPair
+                  choice={choices[i] ?? null}
                   validated={validated}
                   hasPhoneme={hasPhoneme}
-                  onClick={() => toggle(i)}
+                  onPick={(value) => pick(i, value)}
                 />
               </div>
             );

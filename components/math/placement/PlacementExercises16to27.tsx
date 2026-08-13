@@ -15,6 +15,7 @@ import {
   placementRandom,
 } from "@/components/math/placement/placement-print-rng";
 import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
+import type { PrintExerciseColumns } from "@/components/print/PrintExerciseLayoutContext";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -26,15 +27,17 @@ function screenGridClass(fallback: string): string {
 }
 
 /** Classes de liste selon les colonnes d'impression (1 = pile). */
-function printColsClass(columns: 1 | 2 | 3, stacked = "space-y-3"): string {
+function printColsClass(columns: PrintExerciseColumns, stacked = "space-y-3"): string {
   if (columns === 2) return "grid grid-cols-2 items-start gap-x-4 gap-y-3";
   if (columns === 3) return "grid grid-cols-3 items-start gap-x-3 gap-y-3";
+  if (columns === 4) return "grid grid-cols-4 items-start gap-x-3 gap-y-3";
+  if (columns === 5) return "grid grid-cols-5 items-start gap-x-2 gap-y-3";
   return stacked;
 }
 
 function screenOrPrintCols(
   forPrint: boolean | undefined,
-  columns: 1 | 2 | 3,
+  columns: PrintExerciseColumns,
   screenFallback: string,
 ): string {
   if (forPrint) return printColsClass(columns);

@@ -72,22 +72,19 @@ function mediaButtonClass(validated: boolean, cardOk: boolean): string {
 
 function syllableCellClass(state: CellState, validated: boolean): string {
   const base =
-    "flex h-8 w-full items-center justify-center text-xs font-semibold tabular-nums transition-colors disabled:opacity-90";
+    "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-xs font-semibold tabular-nums leading-none transition-colors disabled:opacity-90";
   if (!validated) {
     return state === "selected"
-      ? `${base} bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`
-      : `${base} bg-white text-[var(--color-text-secondary)]`;
+      ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`
+      : `${base} border-[var(--color-border-default)] bg-white text-[var(--color-text-secondary)]`;
   }
   if (state === "correct") {
-    return `${base} bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`;
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`;
   }
-  if (state === "wrong") {
-    return `${base} bg-amber-50 text-amber-700`;
+  if (state === "wrong" || state === "missed") {
+    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
   }
-  if (state === "missed") {
-    return `${base} bg-amber-50 text-amber-700`;
-  }
-  return `${base} bg-white text-[var(--color-text-secondary)]`;
+  return `${base} border-[var(--color-border-default)] bg-white text-[var(--color-text-secondary)]`;
 }
 
 function SpeakerIcon() {
@@ -216,36 +213,24 @@ export const SoundSyllablePicker = forwardRef<SoundSyllablePickerHandle, Props>(
                     <SpeakerIcon />
                   )}
                 </button>
-                <table className="w-full table-fixed border-collapse">
-                  <tbody>
-                    <tr>
-                      {item.targets.map((_, j) => {
-                        const s = row[j] ?? "idle";
-                        return (
-                          <td
-                            key={j}
-                            className={`border p-0 ${
-                              validated && (s === "wrong" || s === "missed")
-                                ? "border-amber-400"
-                                : "border-[var(--color-border-default)]"
-                            }`}
-                          >
-                            <button
-                              type="button"
-                              onClick={() => toggle(i, j)}
-                              disabled={validated}
-                              aria-pressed={s === "selected" || s === "correct"}
-                              aria-label={`Syllabe ${j + 1}`}
-                              className={syllableCellClass(s, validated)}
-                            >
-                              {j + 1}
-                            </button>
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  </tbody>
-                </table>
+                <div className="flex w-full flex-wrap items-center justify-center gap-1">
+                  {item.targets.map((_, j) => {
+                    const s = row[j] ?? "idle";
+                    return (
+                      <button
+                        key={j}
+                        type="button"
+                        onClick={() => toggle(i, j)}
+                        disabled={validated}
+                        aria-pressed={s === "selected" || s === "correct"}
+                        aria-label={`Syllabe ${j + 1}`}
+                        className={syllableCellClass(s, validated)}
+                      >
+                        {j + 1}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}

@@ -5,6 +5,11 @@ import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import type { PrintBundle } from "@/components/print/buildPrintBundle";
 import { AudioQrImage } from "@/components/print/PrintAudioQrRow";
 import {
+  usePrintColumns,
+  usePrintQuestionCount,
+  type PrintExerciseColumns,
+} from "@/components/print/PrintExerciseLayoutContext";
+import {
   getLectureModule,
   lessonPhonemeLabel,
   type ConsonantData,
@@ -27,8 +32,12 @@ import { complexTargets, normalizeGraph } from "@/lib/utils/complex-grapheme";
 import {
   complexGraphemePronouncePool,
   letterPronouncePool,
+  randomSoundItems,
+  randomSoundSyllableItems,
+  wordHasPhoneme,
   wordsForComplexGrapheme,
   wordsPoolForLessonGrid,
+  type SoundSyllableItem,
 } from "@/lib/curriculum/word-pool";
 import { pedagogicSyllable } from "@/lib/curriculum/syllabify";
 import { lectureLessonTitle } from "@/lib/print/catalog";
@@ -57,12 +66,12 @@ function sample<T>(arr: T[], n: number, rng: () => number): T[] {
 
 // ── Briques QR ─────────────────────────────────────────────────────────────────
 
-/** QR audio d'un mot (fallback voix de synthèse sur la page /ecoute). */
-function WordQr({ word, label, size = 64 }: { word: string; label?: string; size?: number }) {
+/** QR audio d'un mot — le libellé du QR ne révèle pas le mot (page /ecoute). */
+function WordQr({ word, label = "Audio", size = 64 }: { word: string; label?: string; size?: number }) {
   return (
     <AudioQrImage
       audio={getWordAudioPath(word)}
-      label={label ?? word}
+      label={label}
       tts={word}
       size={size}
     />
@@ -73,10 +82,75 @@ function SyllableQr({ syllable, size = 56 }: { syllable: string; size?: number }
   return (
     <AudioQrImage
       audio={getSyllableAudioPath(syllable)}
-      label={syllable}
+      label="Audio"
       tts={syllable}
       size={size}
     />
+  );
+}
+
+function takeN<T>(items: T[], n: number, rng: () => number): T[] {
+  if (items.length === 0 || n <= 0) return [];
+  if (n <= items.length) return sample(items, n, rng);
+  const out = [...items];
+  let i = 0;
+  while (out.length < n) {
+    out.push(items[i % items.length]!);
+    i += 1;
+  }
+  return out;
+}
+
+function shownOf<T>(items: T[], n: number): T[] {
+  if (items.length === 0 || n <= 0) return [];
+  if (n <= items.length) return items.slice(0, n);
+  const out: T[] = [];
+  while (out.length < n) out.push(items[out.length % items.length]!);
+  return out;
+}
+
+function PrintItemGrid({ children }: { children: ReactNode }) {
+  const columns = usePrintColumns(5);
+  return (
+    <div
+      className="grid w-full items-start gap-2"
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** Bouton cercle (Oui / Non / 1 2 3) — texte centré à l’intérieur. */
+function PrintCircleBtn({
+  label,
+  marked,
+}: {
+  label: string;
+  marked?: boolean;
+}) {
+  const wide = label.length > 1;
+  return (
+    <button
+      type="button"
+      className={`print-choice-btn print-choice-btn--circle inline-flex items-center justify-center rounded-full border-2 font-bold leading-none ${
+        wide ? "print-choice-btn--circle-wide" : ""
+      } ${
+        marked
+          ? "print-choice-btn--selected border-amber-500 bg-amber-50 text-amber-700"
+          : "border-zinc-400 bg-white text-black"
+      }`}
+    >
+      {label}
+    </button>
+  );
+}
+
+function PrintCard({ children }: { children: ReactNode }) {
+  return (
+    <div className="print-item-card flex flex-col items-center gap-1.5 rounded-lg border-2 border-zinc-400 bg-white p-2">
+      {children}
+    </div>
   );
 }
 
@@ -143,27 +217,39 @@ function LetterGridPrint({
   cells,
   isTarget,
   correction,
-  cols = 5,
+  defaultCount,
 }: {
   cells: string[];
   isTarget: (cell: string) => boolean;
   correction?: boolean;
-  cols?: number;
+  defaultCount?: number;
 }) {
+  const questionCount = usePrintQuestionCount(defaultCount ?? cells.length);
+  const columns = usePrintColumns(5);
+  const shown = cells.slice(0, Math.min(questionCount, cells.length));
+  const extras: string[] = [];
+  if (questionCount > shown.length && cells.length > 0) {
+    let i = 0;
+    while (shown.length + extras.length < questionCount) {
+      extras.push(cells[i % cells.length]!);
+      i += 1;
+    }
+  }
+  const all = [...shown, ...extras].slice(0, questionCount);
   return (
     <div
-      className="grid w-full max-w-[480px] gap-1.5"
-      style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+      className="grid w-full gap-1.5"
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
     >
-      {cells.map((cell, i) => {
+      {all.map((cell, i) => {
         const hit = correction && isTarget(cell);
         return (
           <div
-            key={i}
-            className={`flex h-10 items-center justify-center rounded-md border text-lg font-bold ${
+            key={`${cell}-${i}`}
+            className={`print-item-card flex h-10 items-center justify-center rounded-md border-2 text-lg font-bold ${
               hit
-                ? "border-2 border-amber-500 bg-amber-50 text-amber-700"
-                : "border-zinc-300 text-black"
+                ? "border-amber-500 bg-amber-50 text-amber-700"
+                : "border-zinc-400 text-black"
             }`}
           >
             {cell}
@@ -210,36 +296,36 @@ function WordCirclePrint({
   segmentsOf: (word: string) => Segment[];
   correction?: boolean;
 }) {
+  const questionCount = usePrintQuestionCount(words.length);
+  const shown = shownOf(words, questionCount);
   return (
-    <div className="flex flex-wrap items-start gap-3">
-      {words.map((word) => {
+    <PrintItemGrid>
+      {shown.map((word, i) => {
         const segments = segmentsOf(word);
         const contains = segments.some((s) => s.hit);
         return (
-          <div
-            key={word}
-            className={`flex w-[126px] flex-col items-center gap-1.5 rounded-lg border p-2 ${
-              correction && !contains ? "border-zinc-200 opacity-50" : "border-zinc-300"
-            }`}
-          >
-            <span className="text-lg font-bold tracking-wide text-black">
+          <PrintCard key={`${word}-${i}`}>
+            <span className="text-center text-lg font-bold tracking-wide text-black">
               {correction
-                ? segments.map((seg, i) =>
+                ? segments.map((seg, j) =>
                     seg.hit ? (
-                      <span key={i} className="rounded bg-amber-100 px-0.5 text-amber-700">
+                      <span key={j} className="rounded bg-amber-100 px-0.5 text-amber-700">
                         {seg.text}
                       </span>
                     ) : (
-                      <span key={i}>{seg.text}</span>
+                      <span key={j}>{seg.text}</span>
                     ),
                   )
                 : word}
             </span>
-            <WordQr word={word} size={56} />
-          </div>
+            <WordQr word={word} label={`Audio ${i + 1}`} size={56} />
+            {correction && contains ? (
+              <span className="text-[10px] font-bold text-amber-700">lettre présente</span>
+            ) : null}
+          </PrintCard>
         );
       })}
-    </div>
+    </PrintItemGrid>
   );
 }
 
@@ -247,82 +333,95 @@ function WordCirclePrint({
 
 function SoundCheckPrint({
   items,
+  withImages,
   correction,
 }: {
   items: SoundItem[];
+  withImages?: boolean;
   correction?: boolean;
 }) {
+  const questionCount = usePrintQuestionCount(items.length);
+  const shown = shownOf(items, questionCount);
   return (
-    <div className="flex flex-wrap items-start gap-3">
-      {items.map((item, i) => {
-        const hasImage = hasLectureWordImage(item.label);
+    <PrintItemGrid>
+      {shown.map((item, i) => {
+        const showImage = Boolean(withImages && hasLectureWordImage(item.label));
         return (
-          <div
-            key={`${item.label}-${i}`}
-            className="flex w-[104px] flex-col items-center gap-1.5 rounded-lg border border-zinc-300 p-2"
-          >
-            {hasImage ? (
+          <PrintCard key={`${item.label}-${i}`}>
+            {showImage ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={getLectureWordImagePath(item.label)}
                 alt=""
                 className="h-14 w-14 object-contain"
               />
-            ) : (
-              <div className="flex h-14 w-14 items-center justify-center rounded bg-zinc-100">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-zinc-500" aria-hidden>
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none" />
-                  <path d="M15.5 8.5a5 5 0 0 1 0 7" />
-                </svg>
-              </div>
-            )}
-            <WordQr word={item.label.toLowerCase()} label={`Mot ${i + 1}`} size={56} />
-            {correction ? (
-              <div className="flex flex-col items-center gap-0.5">
-                <span className="text-[11px] font-bold text-amber-700">
-                  {item.hasSound ? "OUI" : "NON"}
-                </span>
-                <span className="text-[10px] text-zinc-600">{item.label.toLowerCase()}</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2 text-[11px] font-semibold text-black">
-                <span className="flex items-center gap-1">
-                  <span className="inline-block h-3.5 w-3.5 rounded-sm border border-zinc-400" /> OUI
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="inline-block h-3.5 w-3.5 rounded-sm border border-zinc-400" /> NON
-                </span>
-              </div>
-            )}
-          </div>
+            ) : null}
+            <WordQr word={item.label.toLowerCase()} label={`Audio ${i + 1}`} size={56} />
+            <div className="flex items-center justify-center gap-1.5">
+              <PrintCircleBtn label="Oui" marked={correction && item.hasSound} />
+              <PrintCircleBtn label="Non" marked={correction && !item.hasSound} />
+            </div>
+          </PrintCard>
         );
       })}
-    </div>
+    </PrintItemGrid>
+  );
+}
+
+function SoundSyllablePrint({
+  items,
+  withImages,
+  correction,
+}: {
+  items: SoundSyllableItem[];
+  withImages?: boolean;
+  correction?: boolean;
+}) {
+  const questionCount = usePrintQuestionCount(items.length);
+  const shown = shownOf(items, questionCount);
+  return (
+    <PrintItemGrid>
+      {shown.map((item, i) => {
+        const showImage = Boolean(withImages && hasLectureWordImage(item.label));
+        return (
+          <PrintCard key={`${item.label}-${i}`}>
+            {showImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={getLectureWordImagePath(item.label)}
+                alt=""
+                className="h-14 w-14 object-contain"
+              />
+            ) : null}
+            <WordQr word={item.label} label={`Audio ${i + 1}`} size={56} />
+            <div className="flex flex-wrap items-center justify-center gap-1">
+              {item.targets.map((want, j) => (
+                <PrintCircleBtn key={j} label={String(j + 1)} marked={Boolean(correction && want)} />
+              ))}
+            </div>
+          </PrintCard>
+        );
+      })}
+    </PrintItemGrid>
   );
 }
 
 // ── Syllabes à lire + QR ───────────────────────────────────────────────────────
 
 function SyllableReadPrint({ items, correction }: { items: string[]; correction?: boolean }) {
-  if (correction) {
-    return (
-      <p className="text-sm leading-relaxed text-black">
-        {items.join(" · ")}
-      </p>
-    );
-  }
+  const questionCount = usePrintQuestionCount(items.length);
+  const shown = shownOf(items, questionCount);
   return (
-    <div className="flex flex-wrap items-start gap-2">
-      {items.map((syll, i) => (
-        <div
-          key={`${syll}-${i}`}
-          className="flex w-[100px] flex-col items-center gap-1 rounded-lg border border-zinc-300 p-2"
-        >
-          <span className="text-xl font-bold tracking-wide text-black">{syll}</span>
+    <PrintItemGrid>
+      {shown.map((syll, i) => (
+        <PrintCard key={`${syll}-${i}`}>
+          <span className={`text-center text-xl font-bold tracking-wide ${correction ? "text-amber-700" : "text-black"}`}>
+            {syll}
+          </span>
           <SyllableQr syllable={syll} size={56} />
-        </div>
+        </PrintCard>
       ))}
-    </div>
+    </PrintItemGrid>
   );
 }
 
@@ -336,28 +435,18 @@ function WordReadCardsPrint({
 }: {
   words: string[];
   withImages?: boolean;
-  /** Corrigé : montre le découpage syllabique (L8). */
   showSyllables?: boolean;
   correction?: boolean;
 }) {
-  if (correction) {
-    return (
-      <p className="text-sm leading-relaxed text-black">
-        {words
-          .map((w) => (showSyllables ? pedagogicSyllable(w) : w))
-          .join(" · ")}
-      </p>
-    );
-  }
+  const questionCount = usePrintQuestionCount(words.length);
+  const shown = shownOf(words, questionCount);
   return (
-    <div className="flex flex-wrap items-start gap-3">
-      {words.map((word) => {
+    <PrintItemGrid>
+      {shown.map((word, i) => {
         const image = withImages && hasLectureWordImage(word);
+        const display = correction && showSyllables ? pedagogicSyllable(word) : word;
         return (
-          <div
-            key={word}
-            className="flex w-[126px] flex-col items-center gap-1.5 rounded-lg border border-zinc-300 p-2"
-          >
+          <PrintCard key={`${word}-${i}`}>
             {image ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -366,36 +455,33 @@ function WordReadCardsPrint({
                 className="h-14 w-14 object-contain"
               />
             ) : null}
-            <span className="text-center text-lg font-bold leading-tight text-black">{word}</span>
-            <WordQr word={word} size={56} />
-          </div>
+            <span className={`text-center text-lg font-bold leading-tight ${correction ? "text-amber-700" : "text-black"}`}>
+              {display}
+            </span>
+            <WordQr word={word} label={`Audio ${i + 1}`} size={56} />
+          </PrintCard>
         );
       })}
-    </div>
+    </PrintItemGrid>
   );
 }
 
 // ── Prononcer (phonème → syllabe → mot + QR) ──────────────────────────────────
 
 function PronouncePrint({ steps, correction }: { steps: PronStep[]; correction?: boolean }) {
-  if (correction) {
-    return (
-      <p className="text-sm leading-relaxed text-black">
-        {steps.map((s) => `${s.phoneme} → ${s.syllable} → ${s.word}`).join(" · ")}
-      </p>
-    );
-  }
+  const questionCount = usePrintQuestionCount(steps.length);
+  const shown = shownOf(steps, questionCount);
   return (
     <div className="space-y-2">
-      {steps.map((step, i) => (
-        <div key={`${step.word}-${i}`} className="flex items-center gap-3 rounded-lg border border-zinc-300 px-3 py-1.5">
+      {shown.map((step, i) => (
+        <div key={`${step.word}-${i}`} className="print-item-card flex items-center gap-3 rounded-lg border-2 border-zinc-400 px-3 py-1.5">
           <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-theme)]">{i + 1}.</span>
           <span className="min-w-10 text-lg font-bold text-[var(--color-theme)]">{step.phoneme}</span>
           <span className="text-zinc-400">→</span>
-          <span className="min-w-16 text-lg font-semibold text-black">{step.syllable}</span>
+          <span className={`min-w-16 text-lg font-semibold ${correction ? "text-amber-700" : "text-black"}`}>{step.syllable}</span>
           <span className="text-zinc-400">→</span>
-          <span className="flex-1 text-lg font-bold text-black">{step.word}</span>
-          <WordQr word={step.word} size={52} />
+          <span className={`flex-1 text-lg font-bold ${correction ? "text-amber-700" : "text-black"}`}>{step.word}</span>
+          <WordQr word={step.word} label={`Audio ${i + 1}`} size={52} />
         </div>
       ))}
     </div>
@@ -408,15 +494,21 @@ function consigne(text: string): ReactNode {
   return <p className="mb-2 text-sm font-semibold text-black">{text}</p>;
 }
 
+const LECTURE_PRINT_COLS: PrintExerciseColumns = 5;
+
 function makeExercise(
   id: string,
   label: string,
   instruction: string,
   body: (correction: boolean) => ReactNode,
+  layout?: { questionCount?: number; columns?: PrintExerciseColumns },
 ): PrintExercise {
   return {
     id,
     label,
+    supportsPrintLayout: true,
+    defaultQuestionCount: layout?.questionCount ?? 5,
+    defaultColumns: layout?.columns ?? LECTURE_PRINT_COLS,
     preview: (
       <div className="text-black">
         {consigne(instruction)}
@@ -432,25 +524,54 @@ function makeExercise(
   };
 }
 
+function expandSoundItems(
+  phoneme: string,
+  base: SoundItem[],
+  n: number,
+  rng: () => number,
+  forImages: boolean,
+): SoundItem[] {
+  const extra = randomSoundItems(phoneme, n, forImages, rng).map((w) => ({
+    label: w.label,
+    hasSound: wordHasPhoneme(w, phoneme),
+  }));
+  const seen = new Set(base.map((item) => item.label.toLowerCase()));
+  const out = [...base];
+  for (const item of extra) {
+    if (out.length >= n) break;
+    const key = item.label.toLowerCase();
+    if (!seen.has(key)) {
+      seen.add(key);
+      out.push(item);
+    }
+  }
+  return takeN(out, n, rng);
+}
+
 function letterExercises(
   data: VowelData | ConsonantData,
   rng: () => number,
 ): PrintExercise[] {
   const phoneme = lessonPhonemeLabel(data.letterLower, data.phoneme);
+  const cols = { columns: LECTURE_PRINT_COLS };
   const upperWords =
     data.type === "consonant"
       ? [...data.upperWordsSet1, ...data.upperWordsSet2]
       : data.upperWords;
   const pool = letterPronouncePool(data.letterLower);
   const pronSteps = pool.length >= 4 ? sample(pool, 6, rng) : data.pronunciationChain;
+  const soundAudio = expandSoundItems(data.phoneme, data.soundItems, 30, rng, false);
+  const soundImages = expandSoundItems(data.phoneme, data.soundItems, 30, rng, true);
+  const syllAudio = randomSoundSyllableItems([data.phoneme], 30, false, rng);
+  const syllImages = randomSoundSyllableItems([data.phoneme], 30, true, rng);
 
   const exercises: PrintExercise[] = [
     makeExercise("grid-upper", "Majuscules", `Entoure toutes les lettres ${data.letter}.`, (c) => (
       <LetterGridPrint cells={data.upperGrid} isTarget={(cell) => cell === data.letter} correction={c} />
-    )),
+    ), { questionCount: data.upperGrid.length, ...cols }),
     makeExercise("grid-lower", "Minuscules", `Entoure toutes les lettres ${data.letterLower}.`, (c) => (
       <LetterGridPrint cells={data.lowerGrid} isTarget={(cell) => cell === data.letterLower} correction={c} />
-    )),
+    ), { questionCount: data.lowerGrid.length, ...cols }),
     makeExercise(
       "word-upper",
       "Mots (majuscules)",
@@ -462,6 +583,7 @@ function letterExercises(
           correction={c}
         />
       ),
+      { questionCount: Math.max(5, upperWords.length), ...cols },
     ),
     makeExercise(
       "word-lower",
@@ -474,12 +596,35 @@ function letterExercises(
           correction={c}
         />
       ),
+      { questionCount: Math.max(5, data.lowerWords.length), ...cols },
     ),
     makeExercise(
       "sound-check",
       "J'entends le son",
-      `Scanne le QR code, écoute le mot et coche OUI si tu entends le son ${phoneme}.`,
-      (c) => <SoundCheckPrint items={data.soundItems} correction={c} />,
+      `Scanne le QR code, écoute le mot et coche Oui ou Non si tu entends le son ${phoneme}.`,
+      (c) => <SoundCheckPrint items={soundAudio} correction={c} />,
+      { questionCount: 5, ...cols },
+    ),
+    makeExercise(
+      "sound-check-images",
+      "J'entends le son (images)",
+      `Regarde l'image, scanne le QR code et coche Oui ou Non si tu entends le son ${phoneme}.`,
+      (c) => <SoundCheckPrint items={soundImages} withImages correction={c} />,
+      { questionCount: 5, ...cols },
+    ),
+    makeExercise(
+      "sound-syllable",
+      "Syllabe du son",
+      `Scanne le QR code et coche la partie de la syllabe où tu entends le son ${phoneme}.`,
+      (c) => <SoundSyllablePrint items={syllAudio} correction={c} />,
+      { questionCount: 5, ...cols },
+    ),
+    makeExercise(
+      "sound-syllable-images",
+      "Syllabe du son (images)",
+      `Regarde l'image et coche la partie de la syllabe où tu entends le son ${phoneme}.`,
+      (c) => <SoundSyllablePrint items={syllImages} withImages correction={c} />,
+      { questionCount: 5, ...cols },
     ),
   ];
 
@@ -490,6 +635,7 @@ function letterExercises(
         "Syllabes",
         "Lis chaque syllabe à voix haute. Scanne le QR code pour vérifier.",
         (c) => <SyllableReadPrint items={data.syllableGrid} correction={c} />,
+        { questionCount: Math.max(5, data.syllableGrid.length), ...cols },
       ),
     );
   }
@@ -501,6 +647,7 @@ function letterExercises(
         "Prononcer",
         "Lis le son, puis la syllabe, puis le mot. Scanne le QR code pour vérifier.",
         (c) => <PronouncePrint steps={pronSteps} correction={c} />,
+        { questionCount: pronSteps.length, columns: 1 },
       ),
     );
   }
@@ -515,6 +662,7 @@ function syllableExercises(data: SyllableLessonData): PrintExercise[] {
       grid.label,
       "Lis chaque syllabe à voix haute. Scanne le QR code pour vérifier.",
       (c) => <SyllableReadPrint items={grid.items} correction={c} />,
+      { questionCount: Math.max(5, grid.items.length), columns: LECTURE_PRINT_COLS },
     ),
   );
 }
@@ -528,12 +676,13 @@ function monosyllableExercises(
     const pool = grid.items.length
       ? grid.items
       : wordsPoolForLessonGrid("monosyllable", data.letterLower, grid.key);
-    const words = isToolWords ? pool : sample(pool, 10, rng);
+    const words = isToolWords ? pool : sample(pool, 30, rng);
     return makeExercise(
       grid.key,
       grid.label,
       "Lis chaque mot à voix haute. Scanne le QR code pour vérifier.",
       (c) => <WordReadCardsPrint words={words} withImages={!isToolWords} correction={c} />,
+      { questionCount: 5, columns: LECTURE_PRINT_COLS },
     );
   });
 }
@@ -546,12 +695,13 @@ function multisyllableExercises(
     const pool = grid.items.length
       ? grid.items
       : wordsPoolForLessonGrid("multisyllable", data.letterLower, grid.key);
-    const words = sample(pool, 10, rng);
+    const words = sample(pool, 30, rng);
     return makeExercise(
       grid.key,
       grid.label,
       "Lis chaque mot à voix haute. Scanne le QR code pour vérifier.",
       (c) => <WordReadCardsPrint words={words} withImages showSyllables correction={c} />,
+      { questionCount: 5, columns: LECTURE_PRINT_COLS },
     );
   });
 }
@@ -562,17 +712,23 @@ function complexSoundExercises(
 ): PrintExercise[] {
   const targets = complexTargets(data.letter);
   const isTarget = (cell: string) => targets.includes(normalizeGraph(cell));
-  const words = sample(wordsForComplexGrapheme(data.letter, 12), 8, rng);
+  const words = sample(wordsForComplexGrapheme(data.letter, 12), 30, rng);
   const pool = complexGraphemePronouncePool(data.letter);
   const pronSteps = sample(pool, 6, rng);
+  const cols = { columns: LECTURE_PRINT_COLS };
+  const soundAudio = expandSoundItems(data.phoneme, [], 30, rng, false);
+  const soundImages = expandSoundItems(data.phoneme, [], 30, rng, true);
+  const syllAudio = randomSoundSyllableItems([data.phoneme], 30, false, rng);
+  const syllImages = randomSoundSyllableItems([data.phoneme], 30, true, rng);
+  const phoneme = data.phoneme;
 
   const exercises: PrintExercise[] = [
     makeExercise("grid-upper", "Majuscules", `Entoure le son ${data.title}.`, (c) => (
       <LetterGridPrint cells={data.upperGrid} isTarget={isTarget} correction={c} />
-    )),
+    ), { questionCount: data.upperGrid.length, ...cols }),
     makeExercise("grid-lower", "Minuscules", `Entoure le son ${data.title.toLowerCase()}.`, (c) => (
       <LetterGridPrint cells={data.lowerGrid} isTarget={isTarget} correction={c} />
-    )),
+    ), { questionCount: data.lowerGrid.length, ...cols }),
   ];
 
   if (words.length > 0) {
@@ -588,6 +744,49 @@ function complexSoundExercises(
             correction={c}
           />
         ),
+        { questionCount: 5, ...cols },
+      ),
+    );
+  }
+
+  if (soundAudio.length > 0) {
+    exercises.push(
+      makeExercise(
+        "sound-check",
+        "J'entends le son",
+        `Scanne le QR code, écoute le mot et coche Oui ou Non si tu entends le son ${phoneme}.`,
+        (c) => <SoundCheckPrint items={soundAudio} correction={c} />,
+        { questionCount: 5, ...cols },
+      ),
+      makeExercise(
+        "sound-check-images",
+        "J'entends le son (images)",
+        `Regarde l'image, scanne le QR code et coche Oui ou Non si tu entends le son ${phoneme}.`,
+        (c) => <SoundCheckPrint items={soundImages} withImages correction={c} />,
+        { questionCount: 5, ...cols },
+      ),
+    );
+  }
+
+  if (syllAudio.length > 0) {
+    exercises.push(
+      makeExercise(
+        "sound-syllable",
+        "Syllabe du son",
+        `Scanne le QR code et coche la partie de la syllabe où tu entends le son ${phoneme}.`,
+        (c) => <SoundSyllablePrint items={syllAudio} correction={c} />,
+        { questionCount: 5, ...cols },
+      ),
+    );
+  }
+  if (syllImages.length > 0) {
+    exercises.push(
+      makeExercise(
+        "sound-syllable-images",
+        "Syllabe du son (images)",
+        `Regarde l'image et coche la partie de la syllabe où tu entends le son ${phoneme}.`,
+        (c) => <SoundSyllablePrint items={syllImages} withImages correction={c} />,
+        { questionCount: 5, ...cols },
       ),
     );
   }
@@ -599,6 +798,7 @@ function complexSoundExercises(
         "Prononcer",
         "Lis le son, puis la syllabe, puis le mot. Scanne le QR code pour vérifier.",
         (c) => <PronouncePrint steps={pronSteps} correction={c} />,
+        { questionCount: pronSteps.length, columns: 1 },
       ),
     );
   }

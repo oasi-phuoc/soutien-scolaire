@@ -425,13 +425,21 @@ input[type=number] {
 }
 
 /* Autres cartes décoratives (énoncés / blocs d'exercice) : sans bordure à l'impression.
- * Les boutons de choix (QCM etc.) conservent leur contour thème. */
-.print-layout-context .print-ex-content .rounded-xl:not(button):not(.print-choice-btn),
-.print-layout-context .print-ex-content .rounded-lg:not(button):not(.print-choice-btn),
-.print-layout-context .print-ex-content .rounded-md:not(button):not(.print-choice-btn),
-.print-layout-context .print-ex-content [class*="rounded-[var(--radius"]:not(button):not(.print-choice-btn) {
+ * Les boutons de choix (QCM etc.) et les cartes d'item (QR / Oui-Non / 1-2-3) conservent leur contour. */
+.print-layout-context .print-ex-content .rounded-xl:not(button):not(.print-choice-btn):not(.print-item-card),
+.print-layout-context .print-ex-content .rounded-lg:not(button):not(.print-choice-btn):not(.print-item-card),
+.print-layout-context .print-ex-content .rounded-md:not(button):not(.print-choice-btn):not(.print-item-card),
+.print-layout-context .print-ex-content [class*="rounded-[var(--radius"]:not(button):not(.print-choice-btn):not(.print-item-card) {
   border: none !important;
   background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.print-layout-context .print-ex-content .print-item-card {
+  border-style: solid !important;
+  border-width: 2px !important;
+  border-color: #a1a1aa !important;
+  background-color: #fff !important;
   box-shadow: none !important;
 }
 
@@ -444,8 +452,30 @@ input[type=number] {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
+  font-size: 0.7em !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  padding: 0.18em 0.4em !important;
+  min-height: 1.55em !important;
+  height: auto !important;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
+}
+.print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--circle {
+  width: 1.7em !important;
+  height: 1.7em !important;
+  min-width: 1.7em !important;
+  min-height: 1.7em !important;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  font-size: 0.72em !important;
+}
+.print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--circle-wide {
+  width: auto !important;
+  min-width: 2.55em !important;
+  padding: 0 0.35em !important;
 }
 .print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--selected {
   border-width: 2px !important;
@@ -461,6 +491,15 @@ input[type=number] {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
+}
+
+/* Boutons maths (< = >) : texte cadré dans la case à l'impression. */
+.print-layout-context .print-ex-content button:not(.print-choice-btn) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  line-height: 1 !important;
 }
 
 /* Masquer les placeholders à l'impression. */

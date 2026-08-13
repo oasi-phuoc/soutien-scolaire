@@ -1707,14 +1707,17 @@ function ComparisonExercise({
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
   revealCorrection?: boolean;
 }) {
-  const maxA = Math.max(...config.questions.map(q => q.a));
+  const questionCount = usePrintQuestionCount(config.questions.length);
+  const columns = usePrintColumns();
+  const questions = config.questions.slice(0, questionCount);
+  const maxA = Math.max(0, ...questions.map(q => q.a));
   const numW = maxA >= 10000 ? "6ch" : maxA >= 1000 ? "5ch" : maxA >= 100 ? "3ch" : "2ch";
   return (
     <div className="space-y-4">
       <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
-      <div className="space-y-3">
-          {config.questions.map((q, i) => (
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+          {questions.map((q, i) => (
             <div key={i} className="flex items-center gap-3">
               <div className="flex items-center shrink-0">
                 <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -1724,13 +1727,13 @@ function ComparisonExercise({
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
                   const isCorrect = sym === q.answer;
-                  let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
+                  let cls = "print-choice-btn h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                   if (!(validated && revealCorrection)) {
-                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                    cls += sel ? "print-choice-btn--selected border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                   } else if (sel) {
-                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                    cls += "print-choice-btn--selected border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                   } else if (isCorrect) {
-                    cls += CLS_WRONG;
+                    cls += `print-choice-btn--selected ${CLS_WRONG}`;
                   } else {
                     cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                   }
@@ -1816,13 +1819,13 @@ function ExprCompExercise({
               {(["<", "=", ">"] as const).map(sym => {
                 const sel = answers[i] === sym;
                 const isCorrect = sym === q.answer;
-                let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
+                let cls = "print-choice-btn h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                 if (!(validated && revealCorrection)) {
-                  cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                  cls += sel ? "print-choice-btn--selected border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                 } else if (sel) {
-                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                  cls += "print-choice-btn--selected border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                 } else if (!sel && isCorrect) {
-                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
+                  cls += "print-choice-btn--selected border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                 } else {
                   cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                 }
@@ -2221,8 +2224,8 @@ function genEncadrement(unit: 10|100, exNum: number, count = 5): EncadrementConf
   return { questions, exNum, unit };
 }
 
-function genOddEven(exNum: number): OddEvenConfig {
-  const questions: OddEvenQ[] = Array.from({ length: 5 }, () => {
+function genOddEven(exNum: number, count = 5): OddEvenConfig {
+  const questions: OddEvenQ[] = Array.from({ length: count }, () => {
     const n = rnd(1, 9999);
     return { n, answer: n % 2 === 0 ? "pair" : "impair" };
   });
@@ -6699,12 +6702,22 @@ function buildRevisionFlatSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
 function GenericExercisePrintPreview({
   prompt,
   showWorkGrid = false,
+  answer,
 }: {
   prompt: string;
   showWorkGrid?: boolean;
+  answer?: string;
 }) {
   const questionCount = usePrintQuestionCount(1);
   const columns = usePrintColumns();
+  const answerField = (i: number) =>
+    answer ? (
+      <div className="flex h-8 min-w-28 flex-1 items-center border-b-2 border-amber-500 px-1">
+        <span className="text-sm font-bold text-amber-600">{answer}</span>
+      </div>
+    ) : (
+      <div key={i} className="h-8 flex-1 border-b-2 border-black/40" />
+    );
   if (showWorkGrid) {
     return (
       <div className="space-y-3">
@@ -6714,7 +6727,13 @@ function GenericExercisePrintPreview({
         <PrintWorkGrid rows={5} />
         <div className="flex items-center gap-3 pl-2">
           <span className="shrink-0 text-sm text-black">Réponse :</span>
-          <div className="h-8 w-28 border-b-2 border-black/40" />
+          {answer ? (
+            <div className="flex h-8 w-28 items-center border-b-2 border-amber-500">
+              <span className="text-sm font-bold text-amber-600">{answer}</span>
+            </div>
+          ) : (
+            <div className="h-8 w-28 border-b-2 border-black/40" />
+          )}
         </div>
       </div>
     );
@@ -6730,7 +6749,7 @@ function GenericExercisePrintPreview({
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
               {i + 1}.
             </span>
-            <div className="h-8 flex-1 border-b-2 border-black/40" />
+            {answerField(i)}
           </div>
         ))}
       </div>
@@ -6794,6 +6813,46 @@ function genericStepPrompt(step: FlatStep): string | null {
   return null;
 }
 
+function OddEvenPrint({
+  config,
+  correction,
+}: {
+  config: OddEvenConfig;
+  correction?: boolean;
+}) {
+  const questionCount = usePrintQuestionCount(config.questions.length);
+  const columns = usePrintColumns();
+  const questions = config.questions.slice(0, questionCount);
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-black">Indiquez si chaque nombre est pair ou impair.</p>
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
+        {questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-3">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="w-16 font-mono text-sm text-black">{q.n.toLocaleString("fr-CH")}</span>
+            <div className="flex gap-1">
+              {(["pair", "impair"] as const).map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  className={`print-choice-btn rounded border px-2 py-1 text-sm font-bold ${
+                    correction && q.answer === opt
+                      ? "print-choice-btn--selected border-amber-500 text-amber-700"
+                      : "border-zinc-400 text-black"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /** Aperçus d'impression pour leçons GenericModuleContent (prompts + cases à remplir). */
 export function buildGenericMathPrintExercises(
   lesson: MathSubmoduleLesson,
@@ -6816,6 +6875,8 @@ export function buildGenericMathPrintExercises(
     const n = out.length + 1;
     if (step.kind === "word_problems") {
       const expanded = expandWordProblemsConfig(step.config, PRINT_POOL_SIZE);
+      const answers = expanded.questions.map((q) => String(q.answer));
+      const results = expanded.questions.map(() => true);
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
@@ -6827,6 +6888,17 @@ export function buildGenericMathPrintExercises(
             answers={Array(expanded.questions.length).fill("")}
             validated={false}
             results={[]}
+            onChange={noop}
+            noFrame
+            showWorkGrid={showWorkGrid}
+          />
+        ),
+        correctionPreview: (
+          <WordProblemsExercise
+            config={expanded}
+            answers={answers}
+            validated
+            results={results}
             onChange={noop}
             noFrame
             showWorkGrid={showWorkGrid}
@@ -6844,6 +6916,8 @@ export function buildGenericMathPrintExercises(
         step.config.timer,
         PRINT_POOL_SIZE,
       );
+      const answers = cfg.questions.map((q) => q.answer);
+      const results = cfg.questions.map(() => true);
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
@@ -6859,11 +6933,23 @@ export function buildGenericMathPrintExercises(
             hideTimerDisplay
           />
         ),
+        correctionPreview: (
+          <ArithmeticGroupExercise
+            config={cfg}
+            answers={answers}
+            validated
+            results={results}
+            onChange={noop}
+            hideTimerDisplay
+          />
+        ),
       });
       continue;
     }
     if (step.kind === "rounding_group") {
       const cfg = genRounding(step.config.kind as RoundingKind, step.config.exNum, PRINT_POOL_SIZE);
+      const answers = cfg.questions.map((q) => q.answer);
+      const results = cfg.questions.map(() => true);
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
@@ -6875,6 +6961,16 @@ export function buildGenericMathPrintExercises(
             answers={Array(cfg.questions.length).fill("")}
             validated={false}
             results={[]}
+            onChange={noop}
+            noFrame
+          />
+        ),
+        correctionPreview: (
+          <RoundingExercise
+            config={cfg}
+            answers={answers}
+            validated
+            results={results}
             onChange={noop}
             noFrame
           />
@@ -6900,11 +6996,65 @@ export function buildGenericMathPrintExercises(
             onAnswer={noop}
           />
         ),
+        correctionPreview: (
+          <ExprCompExercise
+            config={cfg}
+            answers={cfg.questions.map((q) => q.answer)}
+            validated
+            onAnswer={noop}
+          />
+        ),
+      });
+      continue;
+    }
+    if (step.kind === "comparison_ex") {
+      const questions = [...step.config.questions];
+      let guard = 0;
+      while (questions.length < PRINT_POOL_SIZE && guard < 20) {
+        questions.push(...genComparisonConfig(step.config.level).questions);
+        guard += 1;
+      }
+      const cfg = { ...step.config, questions: questions.slice(0, PRINT_POOL_SIZE) };
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: configQuestionCount(step.config, 5),
+        preview: (
+          <ComparisonExercise
+            config={cfg}
+            answers={Array(cfg.questions.length).fill(null)}
+            validated={false}
+            onAnswer={noop}
+          />
+        ),
+        correctionPreview: (
+          <ComparisonExercise
+            config={cfg}
+            answers={cfg.questions.map((q) => q.answer)}
+            validated
+            onAnswer={noop}
+          />
+        ),
+      });
+      continue;
+    }
+    if (step.kind === "odd_even") {
+      const cfg = genOddEven(step.config.exNum, PRINT_POOL_SIZE);
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        supportsPrintLayout: true,
+        defaultQuestionCount: configQuestionCount(step.config, 5),
+        preview: <OddEvenPrint config={cfg} />,
+        correctionPreview: <OddEvenPrint config={cfg} correction />,
       });
       continue;
     }
     if (step.kind === "unit_conversion") {
       const cfg = genUnitConversion(step.config.domain, step.config.decimals, step.config.exNum, PRINT_POOL_SIZE);
+      const answers = cfg.questions.map((q) => q.answer);
+      const results = cfg.questions.map(() => true);
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
@@ -6919,17 +7069,35 @@ export function buildGenericMathPrintExercises(
             onChange={noop}
           />
         ),
+        correctionPreview: (
+          <UnitConversionExercise
+            config={cfg}
+            answers={answers}
+            validated
+            results={results}
+            onChange={noop}
+          />
+        ),
       });
       continue;
     }
     const prompt = genericStepPrompt(step);
     if (prompt) {
+      const answer =
+        step.kind === "exercise" ? step.item.acceptable[0] : undefined;
       out.push({
         id: `${step.kind}-${n}`,
         label: `Exercice ${n}`,
         supportsPrintLayout: true,
         defaultQuestionCount: showWorkGrid ? 1 : 5,
         preview: <GenericExercisePrintPreview prompt={prompt} showWorkGrid={showWorkGrid} />,
+        correctionPreview: (
+          <GenericExercisePrintPreview
+            prompt={prompt}
+            showWorkGrid={showWorkGrid}
+            answer={answer}
+          />
+        ),
       });
       continue;
     }
@@ -6937,12 +7105,25 @@ export function buildGenericMathPrintExercises(
       "config" in step && step.config && typeof step.config === "object" && "questions" in step.config
         ? (step.config as { questions: unknown[] }).questions.length
         : 5;
+    const cfgAnswers =
+      "config" in step && step.config && typeof step.config === "object" && "questions" in step.config
+        ? (step.config as { questions: Array<{ answer?: string | number }> }).questions
+            .map((q) => (q.answer === undefined ? "" : String(q.answer)))
+        : [];
     out.push({
       id: `${step.kind}-${n}`,
       label: `Exercice ${n}`,
       supportsPrintLayout: true,
       defaultQuestionCount: cfgQs || 5,
       preview: <GenericBlanksPrintPreview exerciseNum={n} defaultCount={cfgQs || 5} />,
+      correctionPreview: cfgAnswers.some(Boolean) ? (
+        <GenericExercisePrintPreview
+          prompt={`Complète les questions de l'exercice ${n}.`}
+          answer={cfgAnswers.filter(Boolean).join(" · ")}
+        />
+      ) : (
+        <GenericBlanksPrintPreview exerciseNum={n} defaultCount={cfgQs || 5} />
+      ),
     });
   }
 
@@ -6956,6 +7137,13 @@ export function buildGenericMathPrintExercises(
         supportsPrintLayout: true,
         defaultQuestionCount: showWorkGrid ? 1 : 5,
         preview: <GenericExercisePrintPreview prompt={item.promptFr} showWorkGrid={showWorkGrid} />,
+        correctionPreview: (
+          <GenericExercisePrintPreview
+            prompt={item.promptFr}
+            showWorkGrid={showWorkGrid}
+            answer={item.acceptable[0]}
+          />
+        ),
       });
     });
   }
@@ -10656,11 +10844,11 @@ export function GenericModuleContent({
                     {(["pair","impair"] as const).map((opt, oi) => {
                       const isSelected = sel === opt;
                       const isCorrect = opt === q.answer;
-                      let cls = "w-[4.5rem] py-1.5 text-sm font-bold text-center transition-colors focus:outline-none ";
+                      let cls = "print-choice-btn w-[4.5rem] py-1.5 text-sm font-bold text-center transition-colors focus:outline-none ";
                       if (oi === 1) cls += "border-l border-[var(--color-border-default)] ";
                       if (!(oddEvenValidated && revealCorrection)) {
                         cls += isSelected
-                          ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                          ? "print-choice-btn--selected bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                       } else if (isSelected && isCorrect) {
                         cls += "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";

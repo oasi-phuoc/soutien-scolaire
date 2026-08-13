@@ -56,7 +56,7 @@ export interface PlacementMathExerciseMeta {
    */
   printQuestions?: number;
   /** Impression : colonnes par défaut (= mise en page actuelle). */
-  printColumns?: 1 | 2 | 3;
+  printColumns?: 1 | 2 | 3 | 4 | 5;
 }
 
 export const PLACEMENT_MATH_EXERCISES: PlacementMathExerciseMeta[] = [

@@ -15,6 +15,7 @@ import {
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
+import { clampPrintColumns } from "@/components/print/PrintExerciseLayoutContext";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -276,7 +277,7 @@ export function ImpressionsClient() {
         included: true,
         occurrences: 1,
         questionCount: Math.max(1, ex.defaultQuestionCount ?? 8),
-        columns: ex.defaultColumns ?? 1,
+        columns: clampPrintColumns(ex.defaultColumns ?? 1),
         spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? 3)),
         length: ex.defaultLength ?? 0,
         printLengthMode: ex.printLengthMode ?? "width",
@@ -693,12 +694,12 @@ export function ImpressionsClient() {
                                       value={sel.columns}
                                       accent={accent}
                                       min={1}
-                                      max={3}
+                                      max={5}
                                       onChange={(v) =>
                                         setSelection((prev) =>
                                           prev.map((s) =>
                                             s.id === ex.id
-                                              ? { ...s, columns: (v === 2 || v === 3 ? v : 1) as typeof s.columns }
+                                              ? { ...s, columns: clampPrintColumns(v) }
                                               : s,
                                           ),
                                         )

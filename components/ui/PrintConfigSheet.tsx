@@ -7,6 +7,7 @@ import { ELEVE_CLASSE_TYPES, type EleveClasseType } from "@/lib/eleve-classe-typ
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import {
   PrintExerciseLayoutProvider,
+  clampPrintColumns,
   type PrintExerciseColumns,
 } from "@/components/print/PrintExerciseLayoutContext";
 import {
@@ -113,7 +114,7 @@ export interface ExercisePrintSelection {
   occurrences: number;
   /** Questions dans un bloc (pool size). */
   questionCount: number;
-  /** Colonnes pour répartir les questions (1–3). */
+  /** Colonnes pour répartir les questions (1–5). */
   columns: PrintExerciseColumns;
   /** Espacement vertical entre les questions (1 = serré … 5 = aéré, 3 = défaut). */
   spacing: number;
@@ -775,7 +776,7 @@ export function PrintConfigSheet({
       included: true,
       occurrences: 1,
       questionCount: Math.max(1, ex.defaultQuestionCount ?? 5),
-      columns: (ex.defaultColumns ?? 1) as PrintExerciseColumns,
+      columns: clampPrintColumns(ex.defaultColumns ?? 1),
       spacing: Math.max(1, Math.min(5, ex.defaultSpacing ?? PRINT_SPACING_DEFAULT)),
       length: clampPrintLength(ex.defaultLength ?? PRINT_LENGTH_DEFAULT, ex.printLengthMode ?? "width"),
       printLengthMode: ex.printLengthMode ?? "width",
@@ -1224,9 +1225,9 @@ export function PrintConfigSheet({
                               </span>
                               <Counter
                                 value={sel.columns}
-                                onChange={(v) => setColumns(ex.id, (v === 2 || v === 3 ? v : 1) as PrintExerciseColumns)}
+                                onChange={(v) => setColumns(ex.id, clampPrintColumns(v))}
                                 min={1}
-                                max={3}
+                                max={5}
                                 accent={accentColor}
                               />
                             </div>
