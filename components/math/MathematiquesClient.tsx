@@ -4,6 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   MATH_ALGEBRA_ORDER,
+  MATH_GEOMETRY_PARALLEL_OPEN_IDS,
+  MATH_GEOMETRY_SEQUENTIAL_IDS,
   MATH_GEOMETRY_TAB_ORDER,
   MATH_MODULES,
   getMathModule,
@@ -33,11 +35,17 @@ import {
 
 type ModuleDisplayState = "locked" | "available" | "in_progress" | "completed";
 
-/** Sans accès libre : G2 après G1, G3 après G2, etc. (1ʳᵉ leçon géométrie = G1.1). */
+/**
+ * Sans accès libre : G2 après G1, …, G5 après G4.
+ * G6 et G7 sont ouverts dès le départ (G6.1, G7.1), hors de cette chaîne.
+ */
 function geometrySequenceMissing(moduleId: string, done: Set<string>): string[] {
-  const idx = MATH_GEOMETRY_TAB_ORDER.indexOf(moduleId);
+  if ((MATH_GEOMETRY_PARALLEL_OPEN_IDS as readonly string[]).includes(moduleId)) {
+    return [];
+  }
+  const idx = (MATH_GEOMETRY_SEQUENTIAL_IDS as readonly string[]).indexOf(moduleId);
   if (idx <= 0) return [];
-  const prev = MATH_GEOMETRY_TAB_ORDER[idx - 1];
+  const prev = MATH_GEOMETRY_SEQUENTIAL_IDS[idx - 1];
   if (!prev || done.has(prev)) return [];
   return [prev];
 }
