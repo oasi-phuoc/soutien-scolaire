@@ -26,6 +26,7 @@ import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignmen
 import { AppSelect } from "@/components/ui/AppSelect";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import type { UserRow } from "./AdminTable";
+import { formatPersonDisplayName, namePartsFromLoginId } from "@/lib/auth/identifier";
 
 const LANGUE_LABELS: Record<string, string> = {
   fr: "Français",
@@ -73,8 +74,10 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
   const LANGUES_OPTIONS = [...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })), { code: "other", label: "Autre" }];
+  const parsedName = namePartsFromLoginId(user.login_id, user.email);
   const [form, setForm] = useState({
-    prenom: user.prenom ?? "", nom: user.nom ?? "",
+    prenom: user.prenom || parsedName?.prenom || "",
+    nom: user.nom || parsedName?.nom || "",
     adresse: user.adresse ?? "", npa: user.npa ?? "", localite: user.localite ?? "",
     telephone: user.telephone ?? "", langue: user.langue ?? "en",
   });
@@ -182,7 +185,7 @@ function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: (
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
-  const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || user.email;
+  const fullName = formatPersonDisplayName(user.prenom, user.nom, user.login_id, user.email) || user.email;
 
   function confirm() {
     startTransition(async () => {
@@ -237,7 +240,8 @@ export function EleveDetailPage({
   const [confirming, setConfirming] = useState(false);
   const [, startTransition] = useTransition();
 
-  const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || "—";
+  const parsedName = namePartsFromLoginId(user.login_id, user.email);
+  const fullName = formatPersonDisplayName(user.prenom, user.nom, user.login_id, user.email) || "—";
   const location = [user.npa, user.localite].filter(Boolean).join(" ") || null;
   const activity = user.progress_updated_at ?? user.progress_data?.lastActivityAt ?? null;
 
@@ -426,6 +430,18 @@ export function EleveDetailPage({
           <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
             <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Informations</h2>
             <dl className="space-y-2 text-sm">
+              <div className="flex gap-2">
+                <dt className="w-28 shrink-0 text-zinc-400">Prénom</dt>
+                <dd className="font-medium text-zinc-700 dark:text-zinc-300">
+                  {user.prenom || parsedName?.prenom || "—"}
+                </dd>
+              </div>
+              <div className="flex gap-2">
+                <dt className="w-28 shrink-0 text-zinc-400">Nom</dt>
+                <dd className="font-medium text-zinc-700 dark:text-zinc-300">
+                  {user.nom || parsedName?.nom || "—"}
+                </dd>
+              </div>
               <div className="flex gap-2">
                 <dt className="w-28 shrink-0 text-zinc-400">Classe</dt>
                 <dd className="font-medium text-zinc-700 dark:text-zinc-300">

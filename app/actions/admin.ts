@@ -6,6 +6,7 @@ import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { currentSchoolYearStartIso } from "@/lib/school-year";
 import { ELEVE_CLASSE_TYPES, matchesEleveClasseType, type EleveClasseDeleteFilter } from "@/lib/eleve-classe-types";
 import { ensureSchoolClassForLabel } from "@/lib/suivi/ensure-school-class";
+import { loginIdFromEmail } from "@/lib/auth/identifier";
 
 type CallerRole = "admin" | "prof" | null;
 
@@ -285,6 +286,40 @@ export async function getUserForAdminAction(userId: string): Promise<{
 
   if (error || !data) return { ok: false, error: error?.message ?? "Utilisateur non trouvé" };
 
+  const meta = (authData?.user?.user_metadata ?? {}) as {
+    prenom?: string;
+    nom?: string;
+    classe?: string;
+    login_id?: string;
+    langue?: string;
+    adresse?: string;
+    npa?: string;
+    localite?: string;
+    telephone?: string;
+  };
+  const metaStr = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : null);
+  const filled = {
+    prenom: metaStr(data.prenom) ?? metaStr(meta.prenom),
+    nom: metaStr(data.nom) ?? metaStr(meta.nom),
+    classe: metaStr(data.classe) ?? metaStr(meta.classe),
+    login_id: metaStr(data.login_id) ?? metaStr(meta.login_id) ?? loginIdFromEmail(authData?.user?.email),
+    langue: metaStr(data.langue) ?? metaStr(meta.langue),
+    adresse: metaStr(data.adresse) ?? metaStr(meta.adresse),
+    npa: metaStr(data.npa) ?? metaStr(meta.npa),
+    localite: metaStr(data.localite) ?? metaStr(meta.localite),
+    telephone: metaStr(data.telephone) ?? metaStr(meta.telephone),
+  };
+  const patch: Record<string, string> = {};
+  (Object.keys(filled) as (keyof typeof filled)[]).forEach((key) => {
+    const next = filled[key];
+    if (next && !metaStr(data[key])) patch[key] = next;
+  });
+  if (Object.keys(patch).length > 0) {
+    await svc.from("profiles").update(patch).eq("id", userId);
+    revalidatePath("/admin");
+    revalidatePath(`/admin/eleves/${userId}`);
+  }
+
   const history = Array.isArray(data.placement_test_history) ? data.placement_test_history as Array<{ date: string; points: number; maxPoints: number; percent: number }> : [];
   const placement_test_best = history.length > 0
     ? history.reduce((best, a) => a.percent > best.percent ? a : best)
@@ -302,6 +337,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
     ok: true,
     user: {
       ...data,
+      ...filled,
       can_print: Boolean(data.can_print),
       can_placement: Boolean(data.can_placement),
       ...access,

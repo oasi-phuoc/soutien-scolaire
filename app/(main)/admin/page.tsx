@@ -4,6 +4,7 @@ import { AdminTable, type UserRow } from "@/components/admin/AdminTable";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import { ensurePartialAccessDefaultsAppliedAction } from "@/app/actions/admin";
+import { formatPersonDisplayName } from "@/lib/auth/identifier";
 
 export default async function AdminPage() {
   const supabase = await createSupabaseServerClient();
@@ -50,8 +51,8 @@ export default async function AdminPage() {
       can_partial_math_g3: Boolean((u as { can_partial_math_g3?: boolean }).can_partial_math_g3),
     };
   }).sort((a, b) => {
-    const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
-    const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
+    const na = formatPersonDisplayName(a.prenom, a.nom, a.login_id, a.email).toLowerCase();
+    const nb = formatPersonDisplayName(b.prenom, b.nom, b.login_id, b.email).toLowerCase();
     return na.localeCompare(nb, "fr");
   });
 
