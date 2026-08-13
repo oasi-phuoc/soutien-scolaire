@@ -477,6 +477,20 @@ input[type=number] {
   min-width: 2.55em !important;
   padding: 0 0.35em !important;
 }
+.print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--square {
+  width: 1.7em !important;
+  height: 1.7em !important;
+  min-width: 1.7em !important;
+  min-height: 1.7em !important;
+  padding: 0 !important;
+  border-radius: 0.35em !important;
+  font-size: 0.72em !important;
+}
+.print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--square-wide {
+  width: auto !important;
+  min-width: 2.55em !important;
+  padding: 0 0.35em !important;
+}
 .print-layout-context .print-ex-content button.print-choice-btn.print-choice-btn--selected {
   border-width: 2px !important;
   background-color: color-mix(in oklch, var(--color-theme) 10%, transparent) !important;
@@ -787,6 +801,13 @@ input[type=number] {
 .print-layout-context .print-ex-title {
   margin-bottom: 1em !important;
   padding-bottom: 0.4em !important;
+}
+.print-layout-context .print-ex-title.print-ex-title--with-consigne {
+  margin-bottom: 0.3em !important;
+}
+.print-layout-context .print-ex-icon {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 /*

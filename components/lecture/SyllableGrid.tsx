@@ -218,7 +218,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
     ? `Prononcez chaque syllabe à voix haute. Exemples : ${
         graphemeLabel.toLowerCase().includes("ph") ? "phi, phu, phe" : "cha, chu, cho"
       }.`
-    : "Prononcez chaque syllabe a voix haute.";
+    : "Écoutez et répétez les syllabes.";
 
   return (
     <section className="space-y-3">

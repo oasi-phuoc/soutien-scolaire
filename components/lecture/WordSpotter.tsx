@@ -133,9 +133,8 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
           </p>
         )}
         <p className="text-sm text-[var(--color-text-secondary)]">
-          Touchez la lettre{" "}
-          <strong className="text-[var(--color-accent-lecture)]">{target}</strong>{" "}
-          dans chaque mot
+          Soulignez les lettres{" "}
+          <strong className="text-[var(--color-accent-lecture)]">{target}</strong>
         </p>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
