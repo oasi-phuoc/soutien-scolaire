@@ -1,4 +1,5 @@
-import { verbsToSelector, type GrammarLesson, type VerbToggleVerb } from "../../grammar-data";
+import { type GrammarLesson, type VerbToggleVerb } from "../../grammar-data";
+import { verbsToSelector } from "../../verb-selector";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 const MODAL_VERBS: VerbToggleVerb[] = [

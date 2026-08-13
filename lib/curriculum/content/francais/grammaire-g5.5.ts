@@ -1,4 +1,5 @@
-import { verbsToSelector, type GrammarLesson, type VerbToggleVerb } from "../../grammar-data";
+import { type GrammarLesson, type VerbToggleVerb } from "../../grammar-data";
+import { verbsToSelector } from "../../verb-selector";
 
 /** G5.5 — La négation */
 export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {

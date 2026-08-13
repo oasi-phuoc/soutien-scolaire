@@ -1,4 +1,5 @@
-import { verbsToSelector, type GrammarLesson } from "../../grammar-data";
+import { type GrammarLesson } from "../../grammar-data";
+import { verbsToSelector } from "../../verb-selector";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 7 — Les verbes en -er : cas particuliers (G1.8) */
