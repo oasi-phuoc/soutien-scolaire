@@ -6,7 +6,6 @@ import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
-import { LectureConsigne } from "./LectureConsigne";
 
 export interface RevisionWordSpotterHandle {
   reset: () => void;
@@ -129,13 +128,13 @@ export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
             {lectureUi(lang, "spotInWords")}
           </p>
         )}
-        <LectureConsigne>
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez les lettres{" "}
           <strong className="text-[var(--color-accent-lecture)]">{a}</strong>
           {" "}et{" "}
           <strong className="text-[var(--color-accent-lecture)]">{b}</strong>
           {" "}dans chaque mot
-        </LectureConsigne>
+        </p>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {lectureUi(lang, "tapLettersAandBInWords", { a, b })}

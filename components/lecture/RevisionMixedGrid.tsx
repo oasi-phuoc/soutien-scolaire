@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { speak } from "@/lib/utils/speech";
-import { LectureConsigne } from "./LectureConsigne";
 
 interface Props {
   letterA: string;
@@ -32,7 +31,7 @@ export function RevisionMixedGrid({ letterA, letterB, phonemeA: _phonemeA, phone
 
   return (
     <section className="space-y-3">
-      <LectureConsigne>
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez les lettres :{" "}
         <strong className="text-[var(--color-accent-lecture)]">
           {letterA}/{letterA.toLowerCase()}
@@ -41,7 +40,7 @@ export function RevisionMixedGrid({ letterA, letterB, phonemeA: _phonemeA, phone
         <strong className="text-[var(--color-accent-alg)]">
           {letterB}/{letterB.toLowerCase()}
         </strong>
-      </LectureConsigne>
+      </p>
       <div className="grid grid-cols-5 gap-2">
         {grid.map((letter, i) => {
           const s = states[i];

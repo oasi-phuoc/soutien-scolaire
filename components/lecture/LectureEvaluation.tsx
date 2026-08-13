@@ -12,7 +12,6 @@ import { getLectureWordImagePath } from "@/lib/utils/audio";
 import { SoundPicker } from "./SoundPicker";
 import { SyllableGrid } from "./SyllableGrid";
 import { PronounceWordList } from "./PronounceWordList";
-import { LectureConsigne } from "./LectureConsigne";
 import {
   complexTargets,
   makeComplexGrid,
@@ -212,11 +211,11 @@ function GridExercise({
           {lectureUi(lang, "recognizeLetter")}
         </p>
       )}
-      <LectureConsigne>
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez toutes les{" "}
         <strong className="text-[var(--color-accent-lecture)]">{upper}</strong> et{" "}
         <strong className="text-[var(--color-accent-lecture)]">{lower}</strong>
-      </LectureConsigne>
+      </p>
       <div className="grid grid-cols-5 gap-2 md:grid-cols-8 md:gap-1.5">
         {grid.map((cell, i) => {
           const s = states[i]!;
@@ -303,11 +302,11 @@ function WordsExercise({
           {lectureUi(lang, "spotInWords")}
         </p>
       )}
-      <LectureConsigne>
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez la lettre{" "}
         <strong className="text-[var(--color-accent-lecture)]">{letter}</strong> ou{" "}
         <strong className="text-[var(--color-accent-lecture)]">{letterLower}</strong> dans chaque mot
-      </LectureConsigne>
+      </p>
       <ul className="space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
         {words.map((word, wi) => (
           <li key={wi} className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3 md:px-2 md:py-2">
@@ -494,10 +493,10 @@ function ComplexGridExercise({
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Reconnaître le graphème</h2>
-      <LectureConsigne>
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez toutes les cases{" "}
         <strong className="text-[var(--color-accent-lecture)]">{isUpper ? label.toUpperCase() : label.toLowerCase()}</strong>
-      </LectureConsigne>
+      </p>
       <div className="grid grid-cols-5 gap-2">
         {grid.map((cell, i) => {
           const s = states[i]!;
@@ -583,10 +582,10 @@ function ComplexWordsExercise({
           {lectureUi(lang, "spotInWords")}
         </p>
       )}
-      <LectureConsigne>
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Touchez le graphème{" "}
         <strong className="text-[var(--color-accent-lecture)]">{label}</strong> dans chaque mot
-      </LectureConsigne>
+      </p>
       <ul className="space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
         {words.map((word, wi) => (
           <li key={wi} className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-3 md:px-2 md:py-2">

@@ -4,7 +4,6 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useSta
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
-import { LectureConsigne } from "./LectureConsigne";
 
 export interface RevisionLetterGridHandle {
   reset: () => void;
@@ -154,12 +153,12 @@ export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
             {lectureUi(lang, "recognizeLetters")}
           </p>
         )}
-        <LectureConsigne>
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez toutes les{" "}
           <strong className="text-[var(--color-accent-lecture)]">{a}</strong>
           {" "}et toutes les{" "}
           <strong className="text-[var(--color-accent-lecture)]">{b}</strong>
-        </LectureConsigne>
+        </p>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {lectureUi(lang, "tapAllAandB", { a, b })}
