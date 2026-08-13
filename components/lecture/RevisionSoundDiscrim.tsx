@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { speak } from "@/lib/utils/speech";
+import { LectureConsigne } from "./LectureConsigne";
 
 interface Props {
   phonemeA: string;
@@ -23,9 +24,9 @@ export function RevisionSoundDiscrim({ phonemeA, phonemeB, words }: Props) {
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Révision</h2>
-      <p className="text-sm text-center text-[var(--color-text-secondary)]">
+      <LectureConsigne className="justify-center text-center">
         Écoutez le mot. Quel son entendez-vous ?
-      </p>
+      </LectureConsigne>
       <ul className="space-y-2">
         {words.map(({ word, answer }, i) => {
           const chosen = answers[i];

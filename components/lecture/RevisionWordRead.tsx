@@ -1,6 +1,7 @@
 "use client";
 
 import { speak } from "@/lib/utils/speech";
+import { LectureConsigne } from "./LectureConsigne";
 
 interface Props {
   words: { letter: string; word: string }[];
@@ -9,9 +10,9 @@ interface Props {
 export function RevisionWordRead({ words }: Props) {
   return (
     <section className="space-y-3">
-      <p className="text-sm text-center text-[var(--color-text-secondary)]">
+      <LectureConsigne className="justify-center text-center">
         Lisez chaque mot à voix haute, puis écoutez
-      </p>
+      </LectureConsigne>
       <ul className="space-y-2">
         {words.map(({ letter, word }, i) => (
           <li

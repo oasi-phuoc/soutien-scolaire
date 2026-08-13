@@ -8,6 +8,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { LECTURE_CORRECTION_BORDER } from "./lecture-correction";
 import { matchesSpokenWord } from "@/lib/utils/french-speech-match";
+import { LectureConsigne } from "./LectureConsigne";
 
 export interface PronounceWordListHandle {
   reset: () => void;
@@ -120,9 +121,7 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
           {title ?? "Prononcer les mots"}
         </h2>
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          {consigne ?? "Prononcez chaque mot à voix haute."}
-        </p>
+        <LectureConsigne>{consigne ?? "Prononcez chaque mot à voix haute."}</LectureConsigne>
         {showPivot && (
           <p
             className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]"

@@ -4,6 +4,7 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useSta
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
+import { LectureConsigne } from "./LectureConsigne";
 
 export interface LetterGridHandle {
   reset: () => void;
@@ -121,12 +122,12 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
             {lectureUi(lang, "recognizeLetter")}
           </p>
         )}
-        <p className="text-sm text-[var(--color-text-secondary)]">
+        <LectureConsigne>
           Touchez chaque{" "}
           <strong className="text-[var(--color-accent-lecture)]">
             {isUppercase ? target.toUpperCase() : target.toLowerCase()}
           </strong>
-        </p>
+        </LectureConsigne>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {lectureUi(lang, "tapEachLetter", { x: isUppercase ? target.toUpperCase() : target.toLowerCase() })}

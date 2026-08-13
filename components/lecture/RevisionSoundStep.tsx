@@ -6,6 +6,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { LECTURE_CORRECTION_BORDER, LECTURE_CORRECTION_BUTTON, LECTURE_CORRECTION_CARD } from "./lecture-correction";
+import { LectureConsigne } from "./LectureConsigne";
 
 export interface RevisionSoundStepHandle {
   reset: () => void;
@@ -168,9 +169,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
             {lectureUi(lang, "hearTheSounds")}
           </p>
         )}
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          Touchez le ou les sons que vous entendez
-        </p>
+        <LectureConsigne>Touchez le ou les sons que vous entendez</LectureConsigne>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {lectureUi(lang, "tapSoundsYouHear")}

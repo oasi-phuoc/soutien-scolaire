@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import type { PrintBundle } from "@/components/print/buildPrintBundle";
 import { AudioQrImage } from "@/components/print/PrintAudioQrRow";
+import { LectureConsigne } from "@/components/lecture/LectureConsigne";
 import {
   usePrintColumns,
   usePrintQuestionCount,
@@ -491,7 +492,11 @@ function PronouncePrint({ steps, correction }: { steps: PronStep[]; correction?:
 // ── Assemblage des exercices ───────────────────────────────────────────────────
 
 function consigne(text: string): ReactNode {
-  return <p className="mb-2 text-sm font-semibold text-black">{text}</p>;
+  return (
+    <LectureConsigne className="mb-2 font-semibold text-black" iconSize={22}>
+      {text}
+    </LectureConsigne>
+  );
 }
 
 const LECTURE_PRINT_COLS: PrintExerciseColumns = 5;
