@@ -29,7 +29,6 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
         "Devant le verbe ou l'auxiliaire. → Oui, je l'ai. ; Elle m'a téléphoné.",
         "Avec deux verbes : devant l'infinitif. → Le directeur va nous recevoir et nous expliquer le problème.",
       ],
-      allBullets: true,
     },
     {
       type: "note",
@@ -84,11 +83,11 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
         "Liaison / enchaînement avec {a}les, nous, vous, leur{/a} devant voyelle ou {a}h{/a} muet. → Je les imprime. ; Elle nous attend.",
         "{a}me, te, le, la → m', t', l'{/a} devant voyelle ou {a}h{/a} muet. → Il m'a téléphoné. ; Je l'imprime.",
       ],
-      allBullets: true,
     },
     { type: "heading", text: "Les pronoms COD et COI", trans: { en: "Direct (COD) and indirect (COI) object pronouns", ar: "ضمائر المفعول المباشر (COD) وغير المباشر (COI)", fa: "ضمایر مفعول مستقیم (COD) و غیرمستقیم (COI)", ti: "ናይ ቀጥታዊ (COD) ከምኡ'ውን ዘይቀጥታዊ (COI) ዕላማ ተውላጠ-ስም", uk: "Прямі (COD) та непрямі (COI) додаткові займенники" } },
     {
       type: "text",
+      allBullets: true,
       text: "Les pronoms personnels remplacent un {a}nom déjà mentionné{/a} pour éviter les répétitions.",
       transText: {
         en: "Personal pronouns replace a {a}noun already mentioned{/a} to avoid repetition.",
@@ -205,6 +204,7 @@ export const A1_GR_PRONOMS_COD_COI: GrammarLesson = {
     { type: "heading", text: "Place du pronom", sub: true, accent: true, trans: { en: "Position of the pronoun", ar: "موضع الضمير", fa: "جایگاه ضمیر", ti: "ናይ ተውላጠ-ስም ቦታ", uk: "Місце займенника" } },
     {
       type: "text",
+      allBullets: true,
       text: "Le pronom se place {a}avant{/a} le verbe conjugué.",
       transText: {
         en: "The pronoun goes {a}before{/a} the conjugated verb.",

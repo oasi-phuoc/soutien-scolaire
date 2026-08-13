@@ -36,6 +36,7 @@ export const A1_GR_SUBJONCTIF_PASSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Exemples",
       items: [
         "Je trouve incroyable qu'il {a}ait gagné{/a} trois fois. (avoir)",

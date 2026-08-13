@@ -53,7 +53,6 @@ export const A1_GR_PRONOMS_TONIQUES: GrammarLesson = {
         "Liaison avec {a}chez{/a}. → J'habite chez elle.",
         "Enchaînement avec {a}avec{/a} et {a}pour{/a}. → Je voyage avec eux. ; Il travaille pour elle.",
       ],
-      allBullets: true,
     },
   ],
   exercises: [

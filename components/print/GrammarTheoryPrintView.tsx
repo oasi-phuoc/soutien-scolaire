@@ -289,15 +289,19 @@ function BlockView({
           ) : null}
           {block.items && block.items.length > 0 ? (
             <div className="space-y-1 border-l-2 border-teal-600/40 pl-3">
-              {block.items.map((item, ii) => (
-                <p
-                  key={ii}
-                  className="text-[1em] text-zinc-900"
-                  style={{ textAlign: justify }}
-                >
-                  {printMarkup(item)}
-                </p>
-              ))}
+              {block.items.map((item, ii) => {
+                const numIdx = block.numberText ? block.numberText.indexOf(ii) : -1;
+                return (
+                  <p
+                    key={ii}
+                    className="text-[1em] text-zinc-900"
+                    style={{ textAlign: justify }}
+                  >
+                    {numIdx >= 0 ? <span className="font-bold text-teal-700">{numIdx + 1}. </span> : null}
+                    {printMarkup(item)}
+                  </p>
+                );
+              })}
             </div>
           ) : null}
         </div>

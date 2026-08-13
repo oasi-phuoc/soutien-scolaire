@@ -52,7 +52,6 @@ export const A1_GR_PLUS_QUE_PARFAIT: GrammarLesson = {
         "Quand je suis arrivé, le train partait. → le train était {a}en train de{/a} partir.",
         "Quand je suis arrivé, le train est parti. → le train est parti {a}après{/a} mon arrivée.",
       ],
-      allBullets: true,
     },
   ],
   exercises: [

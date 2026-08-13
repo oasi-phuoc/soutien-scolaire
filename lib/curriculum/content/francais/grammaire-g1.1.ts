@@ -30,7 +30,6 @@ export const A1_GR_L01: GrammarLesson = {
         "Ali parle français.",
         "{a}Il{/a} habite en Suisse.",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "heading",
@@ -103,6 +102,7 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "ON",
       text: "On utilise « {a}on{/a} » pour représenter plusieurs personnes (= nous). Il est très utilisé à l'oral familier. Le verbe est toujours au singulier.",
       items: [
@@ -124,6 +124,7 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "TU",
       text: "On utilise « {a}tu{/a} » pour parler à une personne qu'on connaît, dans une situation familière.",
       items: ["{a}Tu{/a} (= un {a}ami{/a}) es fatigué ?"],
@@ -143,7 +144,6 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "text",
       label: "VOUS",
-      noBulletItems: [0],
       items: ["Madame, {a}vous{/a} (= {a}La professeur{/a}) allez bien ?"],
       transLabel: { en: "VOUS", ar: "VOUS", fa: "VOUS", pt: "VOUS", so: "VOUS", ti: "VOUS", tr: "VOUS", ps: "VOUS", uk: "VOUS" },
       text: "On utilise « {a}vous{/a} » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur). On appelle cela la forme de politesse.",
@@ -161,6 +161,7 @@ export const A1_GR_L01: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "ILS",
       items: ["{a}Ils{/a} (= {a}Ali ♂ et Alona ♀{/a}) vont au cinéma."],
       transLabel: { en: "ILS", ar: "ILS", fa: "ILS", pt: "ILS", so: "ILS", ti: "ILS", tr: "ILS", ps: "ILS", uk: "ILS" },
@@ -210,7 +211,6 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "text",
       label: "Astuce",
-      noFirstBullet: true,
       items: [
           "Posez la question « {a}Qui fait l'action{/a} ? », c'est le {a}sujet{/a} de la phrase.",
       ],

@@ -34,6 +34,7 @@ export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Demander si / ce que / où… (questions)",
       items: [
         "Oui/non : « Est-ce que l'avion a du retard ? » → Elle demande {a}si{/a} l'avion a du retard.",
@@ -45,6 +46,7 @@ export const A1_GR_DISCOURS_INDIRECT_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Dire / demander de (ordre)",
       items: [
         "Verbe introducteur + {a}de{/a} + infinitif.",

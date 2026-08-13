@@ -310,7 +310,6 @@ export const A1_GR_MODAUX: GrammarLesson = {
         uk: "Щоб ввічливо попросити щось, часто вживають {a}Je voudrais{/a} замість {a}Je veux{/a}.",
       },
       items:["{a}Je voudrais{/a} un ticket de métro, s'il vous plaît."],
-      noBulletItems:[0]
     },
   ],
   exercises: G1_EXERCISES["G1.7"](),

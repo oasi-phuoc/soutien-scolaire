@@ -9,6 +9,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
     { type: "heading", text: "Poser une question", trans: { en: "Asking a question", ar: "طرح سؤال", fa: "پرسیدن سوال", ti: "ሕቶ ምሓታት", uk: "Постановка питання" } },
     {
       type: "text",
+      allBullets: true,
       text: "Il y a plusieurs façons de poser une question en français.",
       transText: {
         en: "There are several ways to ask a question in French.",
@@ -46,6 +47,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "{a}Est-ce que{/a} + sujet + verbe ?",
       transText: {
         en: "{a}Est-ce que{/a} + subject + verb ?",
@@ -115,7 +117,6 @@ export const A1_GR_INTERRO: GrammarLesson = {
         ti: ["ንሓደ ቀሊል ሕቶ ድምጺ ኣብ መወዳእታ ኣልዕሎ.", "ፈረንሳዊ ትዛረብ?", "ናጻ እዩ?"],
         uk: ["Для дуже простого питання підвищте голос наприкінці.", "Ти говориш французькою?", "Він вільний?"],
       },
-      noBulletItems: [0, 1, 2],
     },
     { type: "heading", text: "Les trois formes d'interrogation", sub: true, accent: true, trans: { en: "The three question forms", ar: "الأشكال الثلاثة للاستفهام", fa: "سه شکل پرسشی", ti: "ሰለስተ ቅርጽታት ሕቶ", uk: "Три форми питання" } },
     {
@@ -142,6 +143,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Attention — épreuve orale DELF A1",
       items: [
         "Variez vos formulations : inversion verbe-sujet, {a}est-ce que{/a} et forme orale.",
@@ -158,7 +160,6 @@ export const A1_GR_INTERRO: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
       label: "Répondre à une question",
       items: [
         "Question {a}fermée{/a} → réponse par {a}oui{/a} ou {a}non{/a} : Oui, j'ai faim.",

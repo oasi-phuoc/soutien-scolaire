@@ -31,9 +31,6 @@ export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
       items: [
         "Infinitif (radical) + terminaisons {a}-ai, -as, -a, -ons, -ez, -ont{/a}. → je commencerai ; je partirai.",
       ],
-      noBulletItems: [
-        0,
-      ],
     },
     {
       type: "grid",
@@ -334,6 +331,7 @@ export const A1_GR_FUTUR_SIMPLE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Formation régulière : {a}infinitif{/a} + terminaisons du futur.",
       transText: {
         en: "Regular formation: {a}infinitive{/a} + the future endings.",

@@ -69,6 +69,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Nécessité / obligation",
       items: [
         "Il faut que nous prenions contact… ; Il est nécessaire que les objets soient bien protégés.",
@@ -76,6 +77,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Sentiment",
       items: [
         "Je suis heureux que nous déménagions. ; C'est dommage que vous ne puissiez pas venir. ; Nous avons peur qu'elle se sente seule.",
@@ -83,6 +85,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Jugement / appréciation",
       items: [
         "C'est bien qu'il ait une promotion. ; Je trouve incroyable qu'il prenne sa décision si rapidement.",
@@ -90,6 +93,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Volonté / souhait",
       items: [
         "Je veux que tout soit prêt. ; J'aimerais que vous soyez présents.",
@@ -97,6 +101,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Possibilité",
       items: [
         "Il est possible que nous ayons une augmentation. ; Il se peut qu'elle ne veuille pas.",
@@ -296,6 +301,7 @@ export const A1_GR_SUBJONCTIF_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Indicatif ou subjonctif ?",
       items: [
         "{a}Indicatif{/a} → certitude, réalité : Je sais qu'il {a}vient{/a}. / Je pense qu'il {a}a{/a} raison.",

@@ -140,7 +140,6 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
       items: [
         "Les adjectifs de couleur {a}rose{/a}, {a}mauve{/a}, {a}écarlate{/a} et {a}pourpre{/a} s'accordent en nombre comme les adjectifs réguliers.",
       ],
-      noBulletItems: [0],
       transItems: {
         en: ["The color adjectives {a}rose{/a}, {a}mauve{/a}, {a}écarlate{/a}, and {a}pourpre{/a} agree in number like regular adjectives."],
         ar: ["صفات اللون {a}rose{/a} و{a}mauve{/a} و{a}écarlate{/a} و{a}pourpre{/a} تتوافق في العدد مثل الصفات العادية."],
@@ -256,7 +255,6 @@ export const A1_GR_PLURIEL_ADJECTIFS: GrammarLesson = {
                 "fat{a}al{/a} → fatal{a}s{/a}",
                 "ban{a}al{/a} → banal{a}s{/a}",
               ],
-              noBulletItems: [0, 1],
             },
           ],
         },

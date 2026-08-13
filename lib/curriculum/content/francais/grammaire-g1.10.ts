@@ -332,7 +332,6 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
           "Ми використовуємо {a}connaître{/a}, щоб говорити про людину або річ, з якою ми знайомі.",
         ],
       },
-      noBulletItems: [0,1],
       text: "Savoir et connaître ont tous les deux le {a}même sens{/a}, mais ils ne {a}s'utilisent pas de la même manière{/a}.",
       transText: {
         en: "We use savoir to talk about what we are {a}able to do{/a} or about {a}information{/a}. We use connaître to talk about a {a}person{/a} or a {a}thing{/a} that we are {a}familiar with{/a}. Savoir and connaître both have the {a}same meaning{/a}, but they are not {a}used in the same way{/a}.",

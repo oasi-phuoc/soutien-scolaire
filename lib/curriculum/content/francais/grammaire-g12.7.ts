@@ -56,7 +56,6 @@ export const A1_GR_PRONOMS_DEMONSTRATIFS: GrammarLesson = {
         "{a}Ce + relatif{/a} : la chose / les choses. → J'adore ce que tu as acheté.",
         "{a}Cela{/a} (soutenu) / {a}ça{/a} (familier). → Cela est intéressant ! ; Le chocolat, j'aime ça.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",

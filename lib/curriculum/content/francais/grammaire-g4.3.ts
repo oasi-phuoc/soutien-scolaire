@@ -47,7 +47,7 @@ export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {
         "Elle a de la chance. → Elle n'a pas de chance.",
         "Ils ont de l'expérience. → Ils n'ont pas d'expérience.",
       ],
-      noBulletItems: [1, 2, 3],
+      bulletItems: [0],
     },
     {
       type: "note",
@@ -152,6 +152,7 @@ export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Exemples",
       items: [
         "un kilo {a}de{/a} pommes",

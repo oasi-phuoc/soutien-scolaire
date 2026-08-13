@@ -41,7 +41,6 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
          "{a}une{/a} ville.",
          "{a}des{/a} tables",
       ],
-      noBulletItems:[0,1,2]
     },
     {
       type: "heading",
@@ -199,7 +198,6 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         "la vill{a}e{/a}", 
         "la voitur{a}e{/a}, etc.",
       ],
-      noBulletItems: [0,1,2]
     },
     {
       type: "text",
@@ -219,7 +217,6 @@ export const A1_GR_GENRE_CHOSES: GrammarLesson = {
         "{a}Consonne{/a} : le pay{a}s{/a} le magasi{a}n{/a}, le monumen{a}t{/a}, etc.",
         "{a}Voyelle{/a} : l'agend{a}a{/a}, le tax{a}i{/a}, le vél{a}o{/a}, etc.",
       ],
-      noBulletItems: [0,1]
     },
 
   ],

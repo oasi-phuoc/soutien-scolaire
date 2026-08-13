@@ -30,7 +30,6 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
         "{a}Qu'est-ce que{/a} / {a}quoi{/a} : complément. → Qu'est-ce que tu cherches ? ; Tu cherches quoi ?",
         "Avec une préposition, {a}qui{/a} et {a}quoi{/a} peuvent être au début ou à la fin. → Avec quoi vous écrivez ? / Vous écrivez avec quoi ? ; Avec qui tu travailles ? / Tu travailles avec qui ?",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -132,11 +131,11 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
         "Élision : {a}que{/a} → {a}qu'{/a} devant une voyelle ou un h muet. → Où est-ce qu'il travaille ?",
         "Avec {a}quand{/a}, on fait la liaison : on prononce [t]. → Quand est-ce qu'il commence ?",
       ],
-      allBullets: true,
     },
     { type: "heading", text: "Les questions ouvertes", trans: { en: "Open questions", ar: "الأسئلة المفتوحة", fa: "سؤالات باز", ti: "ክፉት ሕቶታት", uk: "Відкриті запитання" } },
     {
       type: "text",
+      allBullets: true,
       text: "Une question ouverte est une question qui demande une réponse avec une information. On ne peut pas répondre seulement par oui ou non.",
       transText: {
         en: "An open question is a question that requires an answer with information. You cannot answer only yes or no.",
@@ -179,66 +178,66 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
         {
           label: "Qui",
           content: [
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Qui est-ce que tu appelles ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Qui appelles-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu appelles qui ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Qui est-ce que tu appelles ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Qui appelles-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu appelles qui ?"],  },
           ],
         },
         {
           label: "Quoi",
           content: [
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Qu'est-ce que tu manges ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Que manges-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu manges quoi ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Qu'est-ce que tu manges ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Que manges-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu manges quoi ?"],  },
           ],
         },
         {
           label: "Où",
           content: [
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Où est-ce que tu habites ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Où habites-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu habites où ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Où est-ce que tu habites ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Où habites-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu habites où ?"],  },
           ],
         },
         {
           label: "Quand",
           content: [
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Quand est-ce qu'il arrive ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Quand arrive-t-il ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Il arrive quand ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Quand est-ce qu'il arrive ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Quand arrive-t-il ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Il arrive quand ?"],  },
           ],
         },
         {
           label: "Comment",
           content: [
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Comment est-ce que tu t'appelles ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Comment t'appelles-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu t'appelles comment ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Comment est-ce que tu t'appelles ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Comment t'appelles-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu t'appelles comment ?"],  },
           ],
         },
         {
           label: "Pourquoi",
           content: [
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Pourquoi est-ce que tu étudies le français ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Pourquoi étudies-tu le français ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu étudies le français pourquoi ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Pourquoi est-ce que tu étudies le français ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Pourquoi étudies-tu le français ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu étudies le français pourquoi ?"],  },
           ],
         },
         {
           label: "Combien",
           content: [
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Combien est-ce que ça coûte ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Combien cela coûte-t-il ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Ça coûte combien ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Combien est-ce que ça coûte ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Combien cela coûte-t-il ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Ça coûte combien ?"],  },
           ],
         },
         {
           label: "Quel",
           content: [
-            { type: "text", label: "Quel / Quelle — accord", items: ["{a}Quel{/a} + nom masculin singulier : Quel jour ?", "{a}Quelle{/a} + nom féminin singulier : Quelle heure ?", "{a}Quels{/a} + nom masculin pluriel : Quels films ?", "{a}Quelles{/a} + nom féminin pluriel : Quelles langues ?"], noBulletItems: [0, 1, 2, 3] },
-            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Quel bus est-ce que tu prends ?"], noBulletItems: [0, 1] },
-            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Quel bus prends-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
-            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu prends quel bus ?"], noBulletItems: [0, 1] },
+            { type: "text", label: "Quel / Quelle — accord", items: ["{a}Quel{/a} + nom masculin singulier : Quel jour ?", "{a}Quelle{/a} + nom féminin singulier : Quelle heure ?", "{a}Quels{/a} + nom masculin pluriel : Quels films ?", "{a}Quelles{/a} + nom féminin pluriel : Quelles langues ?"],  },
+            { type: "text", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Quel bus est-ce que tu prends ?"],  },
+            { type: "text", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Quel bus prends-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"],  },
+            { type: "text", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu prends quel bus ?"],  },
           ],
         },
       ],

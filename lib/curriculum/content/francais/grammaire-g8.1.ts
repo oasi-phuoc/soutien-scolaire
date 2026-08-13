@@ -41,9 +41,6 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
       items: [
         "Verbes en {a}-er{/a} : le participe passé se forme en remplaçant {a}-er{/a} par {a}-é{/a}.",
       ],
-      noBulletItems: [
-        0,
-      ],
     },
     {
       type: "grid",
@@ -176,6 +173,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Le passé composé exprime une action {a}terminée dans le passé{/a}.",
       transText: {
         en: "The passé composé expresses an action {a}completed in the past{/a}.",
@@ -241,10 +239,6 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
           "Приклади: J'{a}ai vu{/a} mon père hier. · Il {a}a adoré{/a} ce film.",
         ],
       },
-      noBulletItems: [
-        0,
-        1,
-      ],
     },
     {
       type: "heading",
@@ -261,6 +255,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Raconter un événement {a}ponctuel{/a} dans le passé.",
       transText: {
         en: "Tell a {a}one-off{/a} event in the past.",
@@ -292,6 +287,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Accord avec avoir",
       items: [
         "Avec {a}avoir{/a}, le participe passé {a}ne s'accorde pas{/a} en genre ni en nombre.",
@@ -735,9 +731,7 @@ export const A1_GR_PASSE_COMPOSE_AVOIR: GrammarLesson = {
         "Exception : si le COD est placé AVANT le verbe → accord obligatoire.",
         "Exemple : La lettre qu'il a écrite. (que = COD féminin → écrite)",
       ],
-      noBulletItems: [
-        0,
-      ],
+      bulletItems: [1, 2],
       transLabel: {
         en: "Agreement of the past participle with «avoir»",
         ar: "مطابقة اسم المفعول مع «avoir»",

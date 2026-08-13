@@ -17,7 +17,6 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
         "Quantités indéterminées : articles partitifs ({a}du{/a}, {a}de la{/a}, {a}de l'{/a}) ou indéfini ({a}des{/a}). → Je veux du beurre et de la confiture. ; Tu bois de l'eau. ; Je veux des frites.",
         "Quantités précises (ou relatives) : autres expressions. → Je voudrais un peu de café. ; Je mange beaucoup de chocolat.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -25,6 +24,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Quantités globales",
       items: [
         "{a}trop de{/a} = quantité excessive",
@@ -52,7 +52,6 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
         "Devant une voyelle ou un h muet, {a}de{/a} devient {a}d'{/a}. → un kilo d'oranges ; une bouteille d'huile.",
         "À l'oral, le {a}e{/a} de {a}de{/a} est souvent muet. → Il mange beaucoup de pommes.",
       ],
-      allBullets: true,
     },
   ],
   exercises: [

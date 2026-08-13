@@ -41,7 +41,6 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         "{a}une{/a} femme",
         "{a}des{/a} enfants",
       ],
-      noBulletItems:[0,1,2]
     },
 
     {
@@ -82,7 +81,6 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         ps: "مؤنث نوم = مذکر نوم + {a}e{/a}",
         uk: "іменник жіночого роду = іменник чоловічого роду + {a}e{/a}",
       },
-      noBulletItems:[0],
       items: [
         "un employé → une employé{a}e{/a}",
         "un ami → une ami{a}e{/a}",
@@ -102,7 +100,6 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         ps: "کله چې مذکر نوم مخکې له مخکې په {a}e{/a} پای ته رسېږي، مونث نه بدلېږي.",
         uk: "Коли чоловічий іменник уже закінчується на {a}e{/a}, жіночий рід не змінюється.",
       },
-      noBulletItems:[0],
       items: [
         "un journalist{a}e{/a} → une journalist{a}e{/a}",
         "un fonctionnair{a}e{/a} → une fonctionnair{a}e{/a}",
@@ -431,7 +428,6 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         "un Espagnol / une Espagno{li}l|e{/li}",
         "un ingénieur / une ingénieu{li}r|e{/li}",
       ],
-      noBulletItems: [0,1],
     },
     {
       type: "text",
@@ -440,7 +436,6 @@ export const A1_GR_GENRE_PERSONNES: GrammarLesson = {
         "un Anglais → une Anglai{li}s|e{/li}",
         "un assistant → une assistan{li}t|e{/li}",
       ],
-      noBulletItems: [0,1],
     },
   ],
   exercises: [

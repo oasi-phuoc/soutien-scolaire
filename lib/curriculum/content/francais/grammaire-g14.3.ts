@@ -9,6 +9,7 @@ export const A1_GR_L22: GrammarLesson = {
     { type: "heading", text: "Les adverbes de fréquence", trans: { en: "Adverbs of frequency", ar: "ظروف التكرار", fa: "قیدهای تکرار", ti: "ናይ ድግግሞሽ ተወሳኺ ቃላት", uk: "Прислівники частоти" } },
     {
       type: "text",
+      allBullets: true,
       text: "Les adverbes de fréquence indiquent {a}combien de fois{/a} une action se produit.",
       transText: {
         en: "Adverbs of frequency tell {a}how often{/a} an action happens.",
@@ -96,7 +97,7 @@ export const A1_GR_L22: GrammarLesson = {
         "Je {a}ne{/a} fais {a}jamais{/a} de sport.",
         "Elle {a}n'{/a}est {a}jamais{/a} en retard.",
       ],
-      noBulletItems: [0],
+      bulletItems: [1, 2],
       transLabel: { en: "Ne … jamais (never)", ar: "Ne … jamais (أبداً)", fa: "Ne … jamais (هرگز)", ti: "Ne … jamais (ፈጺሙ)", uk: "Ne … jamais (ніколи)" },
       transItems: {
         en: ["{a}jamais{/a} is used with {a}ne{/a} for total negation.", "Je {a}ne{/a} fais {a}jamais{/a} de sport. (I never do sport.)", "Elle {a}n'{/a}est {a}jamais{/a} en retard. (She is never late.)"],

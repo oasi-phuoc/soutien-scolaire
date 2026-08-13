@@ -79,6 +79,7 @@ export const A1_GR_COMPARAISON_ADJ_ADV: GrammarLesson = {
     { type: "heading", text: "Le comparatif", trans: { en: "The comparative", ar: "صيغة المقارنة", fa: "صفت تفضیلی (مقایسه‌ای)", ti: "ናይ ምውድዳር", uk: "Порівняльний ступінь" } },
     {
       type: "text",
+      allBullets: true,
       text: "Le comparatif sert à {a}comparer{/a} deux éléments.",
       transText: {
         en: "The comparative is used to {a}compare{/a} two elements.",

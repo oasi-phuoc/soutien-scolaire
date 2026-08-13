@@ -35,6 +35,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
     { type: "heading", text: "Les emplois du futur proche", sub: true, accent: true, trans: { en: "Uses of the near future", ar: "استخدامات المستقبل القريب", fa: "کاربردهای آیندهٔ نزدیک", ti: "ጥቕሚታት ቀረባ መጻኢ", uk: "Вживання найближчого майбутнього" } },
     {
       type: "text",
+      allBullets: true,
       label: "Futur proche",
       items: [
         "Une action qui va se passer dans un {a}avenir proche{/a} : Ne t'inquiète pas, je {a}vais t'apporter{/a} ces documents.",
@@ -52,6 +53,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
     { type: "heading", text: "Les emplois du futur simple", sub: true, accent: true, trans: { en: "Uses of the simple future", ar: "استخدامات المستقبل البسيط", fa: "کاربردهای آیندهٔ ساده", ti: "ጥቕሚታት ቀሊል መጻኢ", uk: "Вживання простого майбутнього" } },
     {
       type: "text",
+      allBullets: true,
       label: "Futur simple",
       items: [
         "Une action à venir, un projet ou une {a}prévision{/a} : On {a}ira{/a} rendre visite à David le mois prochain.",
@@ -67,7 +69,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
         uk: ["Майбутня дія, план або {a}передбачення{/a}.", "{a}Наказ{/a} або правило.", "Дія за {a}умови{/a}."],
       },
     },
-    { type: "text", label: "Le contexte décide", items: ["Les deux futurs peuvent parfois être possibles ; le choix dépend de la proximité et de l'intention du locuteur."],
+    { type: "text", allBullets: true, label: "Le contexte décide", items: ["Les deux futurs peuvent parfois être possibles ; le choix dépend de la proximité et de l'intention du locuteur."],
       transLabel: { en: "Context decides", ar: "السياق هو الفاصل", fa: "بافت تعیین‌کننده است", ti: "ኩነት ይውስን", uk: "Контекст вирішує" },
       transItems: {
         en: ["Both futures can sometimes be possible; the choice depends on how near the action is and on the speaker's intention."],

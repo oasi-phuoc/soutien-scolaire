@@ -31,7 +31,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
         "Il regarde les papiers. → Il regarde les papiers ?",
         "Je conduis bien. → Je conduis bien ?",
       ],
-      noBulletItems: [1, 2],
+      bulletItems: [0],
     },
     {
       type: "text",
@@ -41,7 +41,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
         "Est-ce que le policier regarde les papiers ?",
         "Est-ce que je conduis bien ?",
       ],
-      noBulletItems: [1, 2],
+      bulletItems: [0],
     },
     {
       type: "heading",
@@ -58,6 +58,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
     { type: "heading", text: "Les 3 formes de questions fermées", trans: { en: "The 3 forms of closed (yes/no) questions", ar: "الأشكال الثلاثة للأسئلة المغلقة (نعم/لا)", fa: "سه شکل پرسش‌های بسته (بله/خیر)", ti: "ሰለስተ ቅርጽታት ናይ ዕጹዋት ሕቶታት (እወ/ኣይፋል)", uk: "3 форми закритих питань (так/ні)" } },
     {
       type: "text",
+      allBullets: true,
       text: "Une question {a}fermée{/a} a pour réponse {a}oui{/a} ou {a}non{/a}.",
       transText: {
         en: "A {a}closed{/a} question is answered with oui (yes) / non (no) / si (yes, to a negative question).",
@@ -229,7 +230,7 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
         "Tu ne viens pas ? — {a}Si{/a}, je viens ! (pas Oui !)",
         "Il ne travaille pas ? — {a}Si{/a}, il travaille !",
       ],
-      noBulletItems: [0],
+      bulletItems: [1, 2],
       transLabel: { en: "SI: the key word", ar: "SI: الكلمة المفتاحية", fa: "SI: کلمه‌ی کلیدی", ti: "SI: እታ ቁልፊ ቃል", uk: "SI: ключове слово" },
       transItems: {
         en: ["{a}Si{/a} is used only to contradict a negative question.", "Tu ne viens pas ? — {a}Si{/a}, je viens ! (Aren't you coming? — Yes, I am!) (not Oui!)", "Il ne travaille pas ? — {a}Si{/a}, il travaille ! (Doesn't he work? — Yes, he does!)"],

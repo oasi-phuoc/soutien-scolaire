@@ -39,6 +39,7 @@ export const A1_GR_MARQUEURS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Depuis",
       items: [
         "Action non terminée : point de départ ou durée jusqu'au présent. → Je travaille depuis le 1er avril. ; Je n'ai pas travaillé depuis trois mois.",
@@ -65,7 +66,6 @@ export const A1_GR_MARQUEURS_TEMPS: GrammarLesson = {
         "{a}Jusqu'à{/a} : fin d'une action. → Hier soir, j'ai travaillé jusqu'à minuit.",
         "Avec un mois, une saison ou une année : {a}jusqu'en{/a}. → Il va partir jusqu'en mai.",
       ],
-      allBullets: true,
     },
     {
       type: "note",

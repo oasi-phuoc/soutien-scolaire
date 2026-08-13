@@ -25,6 +25,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "parce que",
       items: [
         "Répond à la question {a}pourquoi{/a}.",
@@ -35,6 +36,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "comme",
       items: [
         "Relie cause et conséquence ; toujours en tête de phrase.",
@@ -43,6 +45,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "puisque",
       items: [
         "Insiste sur une cause évidente / connue ; deux places possibles.",
@@ -73,6 +76,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
     { type: "heading", text: "Exprimer la cause", trans: { en: "Expressing cause", ar: "التعبير عن السبب", fa: "بیان علت", ti: "ምኽንያት ምግላጽ", uk: "Вираження причини" } },
     {
       type: "text",
+      allBullets: true,
       text: "La cause explique {a}pourquoi{/a} quelque chose se passe.",
       transText: {
         en: "The cause explains {a}why{/a} something happens.",
@@ -185,7 +189,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
         ti: ["{a}À cause de{/a} → {a}ኣሉታዊ{/a} ትርጉም: Il a échoué {a}à cause de{/a} sa paresse. (ብሰንኪ ህኩይነቱ ወዲቑ።)", "{a}Grâce à{/a} → {a}ኣወንታዊ{/a} ትርጉም: Il a réussi {a}grâce à{/a} ses efforts. (ብሳላ ጻዕሩ ተዓዊቱ።)", "ክልቲኦም ብስም ወይ ብጽዑቕ ተውላጠ-ስም ይስዕቡ።"],
         uk: ["{a}À cause de{/a} → {a}негативна{/a} конотація: Il a échoué {a}à cause de{/a} sa paresse. (Він провалився через свої лінощі.)", "{a}Grâce à{/a} → {a}позитивна{/a} конотація: Il a réussi {a}grâce à{/a} ses efforts. (Він досяг успіху завдяки своїм зусиллям.)", "Обидва йдуть із іменником або наголошеним займенником."],
       },
-      noBulletItems: [0],
+      bulletItems: [1, 2],
     },
     { type: "heading", text: "Construire un raisonnement", sub: true, accent: true, trans: { en: "Building an argument", ar: "بناء استدلال", fa: "ساختن یک استدلال", ti: "ምስ ምኽንያት ምህናጽ", uk: "Побудова міркування" } },
     {
@@ -214,7 +218,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
     { type: "heading", text: "Autres connecteurs utiles", sub: true, accent: true, trans: { en: "Other useful connectors", ar: "أدوات ربط أخرى مفيدة", fa: "رابط‌های مفید دیگر", ti: "ካልኦት ጠቐሚ መራኸቢታት", uk: "Інші корисні сполучники" } },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Énumération",
       items: [
         "{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}",
@@ -230,7 +234,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Opposition",
       items: [
         "{a}mais{/a}",
@@ -246,7 +250,7 @@ export const A1_GR_EXPRESSION_CAUSE: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Addition",
       items: [
         "{a}et{/a}, {a}alors{/a}",

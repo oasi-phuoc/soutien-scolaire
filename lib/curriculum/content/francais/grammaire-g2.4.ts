@@ -40,7 +40,6 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
         "le sous{a}-{/a}sol",
         "une grand{a}-{/a}mère",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -60,7 +59,6 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
         "une salle {a}de{/a} bains",
         "une chambre {a}à{/a} coucher",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -80,7 +78,6 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
         "un porte-document{a}s{/a}",
         "une boîte aux lettre{a}s{/a}",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "heading",
@@ -203,7 +200,6 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
         "{a}des{/a} porte-monnaie",
         "{a}des{/a} porte-bonheur",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -223,7 +219,6 @@ export const A1_GR_NOMS_COMPOSES: GrammarLesson = {
         "un week-end → {a}des{/a} week-ends",
         "un night-club → {a}des{/a} night-clubs",
       ],
-      noBulletItems: [0, 1],
     },
   ],
   exercises: [

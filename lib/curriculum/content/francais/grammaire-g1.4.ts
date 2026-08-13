@@ -30,7 +30,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "{a}Il y a{/a} beaucoup de photos.",
         "{a}Il y a{/a} le professeur dans la salle.",
       ],
-      noBulletItems: [0,1],
     },
     {
       type: "text",
@@ -50,7 +49,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "{a}C'est{/a} mon cousin.",
         "{a}C'est{/a} un stylo.",
       ],
-      noBulletItems: [0, 1],
     },
 
     // ── Intro + tableau ───────────────────────────────────────────────────────
@@ -72,7 +70,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "{a}C'est{/a} petit.",
         "{a}Il est{/a} grand.",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "grid",
@@ -138,7 +135,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est {a}un professeur{/a}.",
         "C'est {a}la pharmacie{/a}.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}1.{/a} We use « c'est » before a {a}noun accompanied by an article{/a}.",
         ar: "{a}1.{/a} نستخدم «c'est» قبل {a}اسم مسبوق بأداة تعريف أو تنكير{/a}.",
@@ -159,7 +155,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est {a}Alona{/a}.",
         "C'est {a}M. Mohammed Safi{/a}.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}2.{/a} We use « c'est » before a {a}first name or proper noun{/a}.",
         ar: "{a}2.{/a} نستخدم «c'est» قبل {a}اسم شخص أو اسم علم{/a}.",
@@ -180,7 +175,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est {a}moi{/a}.",
         "C'est {a}elle{/a}.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}3.{/a} We use « c'est » before a {a}pronoun{/a}.",
         ar: "{a}3.{/a} نستخدم «c'est» قبل {a}ضمير{/a}.",
@@ -200,7 +194,6 @@ export const A1_GR_CEST: GrammarLesson = {
       items: [
         "C'est {a}le 15 mars{/a}.",
       ],
-      noBulletItems: [0],
       transText: {
         en: "{a}4.{/a} We use « c'est » to give a {a}date{/a}.",
         ar: "{a}4.{/a} نستخدم «c'est» لإعطاء {a}تاريخ{/a}.",
@@ -220,7 +213,6 @@ export const A1_GR_CEST: GrammarLesson = {
       items: [
         "C'est {a}trois heures{/a}.",
       ],
-      noBulletItems: [0],
       transText: {
         en: "{a}5.{/a} We use « c'est » to indicate the {a}time{/a}.",
         ar: "{a}5.{/a} نستخدم «c'est» للإشارة إلى {a}الوقت{/a}.",
@@ -265,7 +257,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "Il est {a}grand{/a}.",
         "Il est {a}malade{/a}.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}1.{/a} We use « il est » before an {a}adjective{/a}.",
         ar: "{a}1.{/a} نستخدم «il est» قبل {a}صفة{/a}.",
@@ -286,7 +277,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "Il est {a}professeur{/a}.",
         "Elle est {a}infirmière{/a}.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}2.{/a} We use « il est » before a {a}profession without an article{/a}.",
         ar: "{a}2.{/a} نستخدم «il est» قبل {a}مهنة بدون أداة تعريف أو تنكير{/a}.",
@@ -307,7 +297,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "Il est {a}suisse{/a}.",
         "Elle est {a}ukrainienne{/a}.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}3.{/a} We use « il est » before a {a}nationality{/a}.",
         ar: "{a}3.{/a} نستخدم «il est» قبل {a}جنسية{/a}.",
@@ -328,7 +317,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "Il est {a}musulman{/a}.",
         "Il est {a}bouddhiste{/a}.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}4.{/a} We use « il est » before a {a}religion{/a}.",
         ar: "{a}4.{/a} نستخدم «il est» قبل {a}دين{/a}.",
@@ -383,7 +371,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est un homme {a}gentil{/a}.",
         "Il est {a}gentil{/a}.",
       ],
-      noBulletItems: [0, 1],
       transLabel: {
         en: "Warning!",
         ar: "انتباه!",
@@ -427,7 +414,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est un homme {a}gentil{/a}.",
         "C'est une {a}grande{/a} voiture."
       ],
-      noBulletItems:[0, 1],
     },
   ],
   exercises: [

@@ -32,7 +32,6 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       type: "text",
       text: "{a}1.{/a} Parler d'une action qui se passe {a}au moment où l'on parle{/a}.",
       items: ["Vous {a}regardez{/a} la télévision ?"],
-      noBulletItems: [0],
       transText: {
         en: "{a}1.{/a} Talk about an action happening {a}at the moment of speaking{/a}.",
         ar: "{a}1.{/a} التحدث عن فعل يحدث {a}في لحظة الكلام{/a}.",
@@ -50,7 +49,6 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       type: "text",
       text: "{a}2.{/a} Parler d'une {a}action habituelle{/a}.",
       items: ["Tous les matins, je {a}regarde{/a} mes mails."],
-      noBulletItems: [0],
       transText: {
         en: "{a}2.{/a} Talk about a {a}habitual action{/a}.",
         ar: "{a}2.{/a} التحدث عن {a}فعل معتاد{/a}.",
@@ -68,7 +66,6 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       type: "text",
       text: "{a}3.{/a} Faire une {a}description générale{/a}, ou exprimer des {a}goûts{/a} et des {a}idées{/a}.",
       items: ["Vous {a}habitez{/a} à Paris ?"],
-      noBulletItems: [0],
       transText: {
         en: "{a}3.{/a} Give a {a}general description{/a}, or express {a}likes{/a} and {a}ideas{/a}.",
         ar: "{a}3.{/a} تقديم {a}وصف عام{/a}، أو التعبير عن {a}الأذواق{/a} و{a}الأفكار{/a}.",
@@ -255,7 +252,6 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
         uk: "{a}2.{/a} Робимо лієзон.",
       },
       items: ["O{li}n|a{/li}ime, nou{li}s|é{/li}coutons, vou{li}s|é{/li}tudiez, il{li}s|h{/li}abitent, elle{li}s|o{/li}ublient."],
-      noBulletItems: [0],
     },
     {
       type: "text",
@@ -275,7 +271,6 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
         "{s}Je aime{/s} ma ville. → {a}J'aime{/a} ma ville.",
         "{s}Je habite{/s} à Martigny. → {a}J'habite{/a} à Martigny."
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",

@@ -13,6 +13,7 @@ export const A1_GR_PRONOMS_Y_EN_LIEU: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Le pronom y",
       items: [
         "Remplace le nom du lieu où l'on va ou où l'on est. → Tu vas souvent au cinéma ? — J'y vais une fois par semaine. ; Vous habitez en Suisse ? — Non, je n'y habite plus.",
@@ -37,7 +38,6 @@ export const A1_GR_PRONOMS_Y_EN_LIEU: GrammarLesson = {
         "Devant le verbe ou l'auxiliaire. → On y va. ; Nous en sortons.",
         "Avec deux verbes : devant l'infinitif. → Je vais y aller avec Jérôme. ; Il va bientôt en sortir.",
       ],
-      allBullets: true,
     },
     {
       type: "note",
@@ -53,7 +53,6 @@ export const A1_GR_PRONOMS_Y_EN_LIEU: GrammarLesson = {
         "Liaison entre pronom en {a}-s{/a} et {a}y{/a} / {a}en{/a}. → Ils y habitent. ; Vous y travaillez. ; Nous en arrivons.",
         "À l'oral, le {a}ne{/a} tombe souvent. → J'y vais pas.",
       ],
-      allBullets: true,
     },
     {
       type: "note",

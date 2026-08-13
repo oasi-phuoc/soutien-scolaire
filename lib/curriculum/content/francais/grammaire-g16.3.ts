@@ -69,6 +69,7 @@ export const A1_GR_GERONDIF: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Formation : {a}en{/a} + participe présent",
       transText: {
         en: "Formation: {a}en{/a} + present participle",
@@ -185,6 +186,7 @@ export const A1_GR_GERONDIF: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "À retenir",
       items: [
         "Le sujet du gérondif et de la phrase principale doit être {a}le même{/a}.",

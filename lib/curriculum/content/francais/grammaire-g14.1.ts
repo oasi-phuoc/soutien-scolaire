@@ -46,7 +46,6 @@ export const A1_GR_ADVERBES_INTENSITE: GrammarLesson = {
         "Devant l'adjectif ou l'adverbe modifié. → très longue ; très vite.",
         "Avec un verbe : après le verbe (temps simple) ; entre auxiliaire et participe (temps composé) ; devant l'infinitif (semi-auxiliaire). → Il s'entraîne beaucoup. ; Il s'est beaucoup entraîné. ; Il va beaucoup s'entraîner.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",

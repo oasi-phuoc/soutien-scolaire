@@ -32,7 +32,6 @@ export const A1_GR_ACCORD_PARTICIPE_PASSE: GrammarLesson = {
         "COD pronominal : {a}m', t', l', les, nous, vous{/a}. → Pierre a invité Marie. → Pierre l'a invitée.",
         "Pronom relatif {a}que{/a}. → Voici les places que j'ai prises.",
       ],
-      allBullets: true,
     },
     {
       type: "note",

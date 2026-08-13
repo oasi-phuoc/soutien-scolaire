@@ -76,7 +76,6 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
         "Avec {a}être{/a}, le participe s'accorde en genre et en nombre avec le sujet. → Paul est arrivé. ; Marie est arrivée.",
         "Avec {a}on{/a} (= nous), le participe est généralement au pluriel. → Anne et moi, on est venues ensemble.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -176,7 +175,6 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
         "En général, le participe s'accorde avec le sujet. → Marie s'est amusée. ; Léo et Izia se sont ennuyés.",
         "Avec {a}on{/a} (= nous), le participe est généralement au pluriel. → Anne et moi, on s'est perdues.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -195,6 +193,7 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Certains verbes utilisent {a}être{/a} (et non avoir) comme auxiliaire.",
       transText: {
         en: "Some verbs use {a}être{/a} (not avoir) as the auxiliary.",
@@ -572,6 +571,7 @@ export const A1_GR_PASSE_COMPOSE_ETRE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Tous les verbes pronominaux utilisent aussi être",
       items: [
         "Elle {a}s'est levée{/a}. (se lever → participe accordé avec elle)",

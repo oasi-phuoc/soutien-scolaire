@@ -103,7 +103,7 @@ export const ADJECTIFS_QUALIFICATIFS_GENERALITES: TheoryBlock[] = [
         "une robe {a}orange{/a} / des chaussures {a}marron{/a} / des yeux {a}noisette{/a}",
         "Exception : rose, mauve, écarlate, pourpre → accordés.",
       ],
-      noBulletItems: [0],
+      bulletItems: [1, 2],
       transLabel: { en: "Invariable adjectives", ar: "صفات لا تتغير", fa: "صفت‌های بدون تغییر", ti: "ዘይቅየሩ ቅጽላት", uk: "Незмінні прикметники" },
       transItems: {
         en: ["Colour adjectives derived from a noun are {a}invariable{/a}.", "une robe {a}orange{/a} / des chaussures {a}marron{/a} / des yeux {a}noisette{/a}", "Exception: rose, mauve, écarlate, pourpre → they agree."],
@@ -179,6 +179,7 @@ export const ADJECTIFS_QUALIFICATIFS_PLACE: TheoryBlock[] = [
     { type: "heading", text: "La place des adjectifs", sub: true, accent: true, trans: { en: "The position of adjectives", ar: "موضع الصفات", fa: "جایگاه صفت‌ها", ti: "ቦታ ቅጽላት", uk: "Місце прикметників" } },
     {
       type: "text",
+      allBullets: true,
       text: "En français, la majorité des adjectifs se placent {a}après{/a} le nom.",
       transText: {
         en: "In French, most adjectives are placed {a}after{/a} the noun.",
@@ -234,6 +235,7 @@ export const ADJECTIFS_QUALIFICATIFS_PLACE: TheoryBlock[] = [
     },
     {
       type: "text",
+      allBullets: true,
       label: "Adjectifs qui changent de sens selon la place",
       items: [
         "{a}ancien{/a} : un {a}ancien{/a} collègue (= ex-) / un bâtiment {a}ancien{/a} (= vieux)",

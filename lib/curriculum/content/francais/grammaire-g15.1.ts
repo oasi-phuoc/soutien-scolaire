@@ -25,6 +25,7 @@ export const A1_GR_MOTS_LIAISON: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Étapes du discours",
       items: [
         "Début : d'abord, tout d'abord, premièrement, pour commencer.",
@@ -34,6 +35,7 @@ export const A1_GR_MOTS_LIAISON: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Expliquer ou ajouter",
       items: [
         "Par ailleurs, mais, de plus, d'autre part, d'un autre côté, en effet, en fait, en réalité.",
@@ -42,16 +44,19 @@ export const A1_GR_MOTS_LIAISON: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Illustrer",
       items: ["Par exemple, ainsi."],
     },
     {
       type: "text",
+      allBullets: true,
       label: "Reformuler",
       items: ["Autrement dit, en d'autres termes, c'est-à-dire."],
     },
     {
       type: "text",
+      allBullets: true,
       label: "Conclure",
       items: ["C'est pourquoi, donc, en résumé, en conclusion, pour finir, par conséquent, pour toutes ces raisons."],
     },

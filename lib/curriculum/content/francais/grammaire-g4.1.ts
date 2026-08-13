@@ -74,7 +74,6 @@ export const A1_GR_L04: GrammarLesson = {
         "{a}La{/a} monnaie est importante.",
         "{a}Les{/a} animaux ont besoin d'eau.",
       ],
-      noBulletItems: [0, 1],
       transLabel: {
         en: "General concept",
         ar: "مفهوم عام",
@@ -95,7 +94,6 @@ export const A1_GR_L04: GrammarLesson = {
         "{a}Le{/a} directeur est dans son bureau.",
         "J'ouvre {a}la{/a} fenêtre.",
       ],
-      noBulletItems: [0, 1, 2],
       transLabel: {
         en: "Person, object, or place already known",
         ar: "شخص أو شيء أو مكان معروف مسبقاً",
@@ -145,7 +143,6 @@ export const A1_GR_L04: GrammarLesson = {
         "{a}Un{/a} client entre dans le magasin.",
         "Ce sont {a}des{/a} billets de banque.",
       ],
-      noBulletItems: [0, 1],
       transLabel: {
         en: "Non-specific person or thing",
         ar: "شخص أو شيء غير محدد",
@@ -165,7 +162,6 @@ export const A1_GR_L04: GrammarLesson = {
         "Vous avez des pièces de 5 francs ?",
         "J'ai un billet de 10 francs.",
       ],
-      noBulletItems: [0, 1],
       transLabel: {
         en: "Quantity",
         ar: "الكمية",
@@ -185,7 +181,6 @@ export const A1_GR_L04: GrammarLesson = {
         "J'aime les fruits.",
         "Elle préfère le thé.",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "{a}Verbs of preference{/a} (to like, to love, to prefer, or to hate)",
         ar: "{a}أفعال التفضيل{/a} (يحبّ، يعشق، يفضّل أو يكره)",
@@ -248,7 +243,6 @@ export const A1_GR_L04: GrammarLesson = {
         "{s}Le{/s} argent → {a}l'{/a}argent",
         "{s}La{/s} histoire → {a}l'{/a}histoire",
       ],
-      noBulletItems: [0, 1],
     },
   ],
   exercises: [

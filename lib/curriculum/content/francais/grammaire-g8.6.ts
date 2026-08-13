@@ -29,9 +29,6 @@ export const A1_GR_PASSE_RECENT: GrammarLesson = {
       items: [
         "Formation : {a}venir{/a} (présent) + {a}de{/a} / {a}d'{/a} + infinitif.",
       ],
-      noBulletItems: [
-        0,
-      ],
     },
     {
       type: "grid",
@@ -91,7 +88,6 @@ export const A1_GR_PASSE_RECENT: GrammarLesson = {
         "On n'emploie pas le passé récent avec une indication de temps précise → passé composé. ✗ Le film vient de commencer il y a 3 minutes. → ✓ Le film a commencé il y a 3 minutes.",
         "Ne pas confondre {a}venir de{/a} (passé récent) et {a}venir{/a} seul. → Je viens de la gare. (= provenance) ≠ Je viens de rentrer de la gare. (= passé récent)",
       ],
-      allBullets: true,
     },
     {
       type: "heading",

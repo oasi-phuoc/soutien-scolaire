@@ -45,7 +45,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         "Je suis {a}à la{/a} gare.",
         "Il habite à côté {a}de la{/a} Poste.",
       ],
-      noBulletItems: [0,1],
     },
     {
       type: "text",
@@ -77,7 +76,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         "Le bureau de la maîtresse",
         "La salle de sport",
       ],
-      noBulletItems: [0,1],
     },
     {
       type: "text",
@@ -168,9 +166,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       items: [
         "Certains verbes de mouvement sont suivis d'une préposition qui indique la destination ou l'origine.",
       ],
-      noBulletItems: [
-        0,
-      ],
       transItems: {
         en: [
           "Some movement verbs are followed by a preposition indicating destination or origin.",
@@ -199,13 +194,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
         "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
       ],
-      noBulletItems: [
-        0,
-        1,
-        2,
-        3,
-        4,
-      ],
       transLabel: {
         en: "aller + destination",
         ar: "aller + الوجهة",
@@ -223,13 +211,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
         "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
         "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
-      ],
-      noBulletItems: [
-        0,
-        1,
-        2,
-        3,
-        4,
       ],
       transLabel: {
         en: "venir + origin",
@@ -255,13 +236,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
                 "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
                 "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
               ],
-              noBulletItems: [
-                0,
-                1,
-                2,
-                3,
-                4,
-              ],
             },
           ],
         },
@@ -278,13 +252,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
                 "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
                 "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
               ],
-              noBulletItems: [
-                0,
-                1,
-                2,
-                3,
-                4,
-              ],
             },
           ],
         },
@@ -297,10 +264,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
               items: [
                 "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
                 "{a}pour{/a} (destination) → Il part {a}pour{/a} Rome.",
-              ],
-              noBulletItems: [
-                0,
-                1,
               ],
             },
           ],
@@ -315,10 +278,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
                 "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
                 "{a}de / du / des{/a} (origine) → Il arrive {a}du{/a} travail.",
               ],
-              noBulletItems: [
-                0,
-                1,
-              ],
             },
           ],
         },
@@ -330,9 +289,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
               label: "",
               items: [
                 "{a}dans{/a} → Il entre {a}dans{/a} la salle.",
-              ],
-              noBulletItems: [
-                0,
               ],
             },
           ],
@@ -347,10 +303,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
                 "{a}de / du / de la{/a} → Elle sort {a}de{/a} l'école.",
                 "Il sort {a}du{/a} bureau.",
               ],
-              noBulletItems: [
-                0,
-                1,
-              ],
             },
           ],
         },
@@ -364,10 +316,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
                 "{a}dans{/a} → Je monte {a}dans{/a} le bus.",
                 "{a}sur{/a} → Elle monte {a}sur{/a} le vélo.",
               ],
-              noBulletItems: [
-                0,
-                1,
-              ],
             },
           ],
         },
@@ -380,10 +328,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
               items: [
                 "{a}du{/a} → Il descend {a}du{/a} train.",
                 "{a}de{/a} → Elle descend {a}de{/a} la voiture.",
-              ],
-              noBulletItems: [
-                0,
-                1,
               ],
             },
           ],
@@ -399,11 +343,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
                 "{a}vers{/a} → Nous marchons {a}vers{/a} l'école.",
                 "{a}jusqu'à{/a} → Il marche {a}jusqu'à{/a} la gare.",
               ],
-              noBulletItems: [
-                0,
-                1,
-                2,
-              ],
             },
           ],
         },
@@ -417,11 +356,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
                 "{a}dans{/a} → Il court {a}dans{/a} le parc.",
                 "{a}vers{/a} → Elle court {a}vers{/a} la sortie.",
                 "{a}jusqu'à{/a} → Il court {a}jusqu'à{/a} l'arrivée.",
-              ],
-              noBulletItems: [
-                0,
-                1,
-                2,
               ],
             },
           ],
@@ -466,7 +400,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         "Je vais {a}à la{/a} pharmacie",
         "Je vais {a}à l'{/a}école",
       ],
-      noBulletItems: [0,1],
     },
     {
       type: "heading",

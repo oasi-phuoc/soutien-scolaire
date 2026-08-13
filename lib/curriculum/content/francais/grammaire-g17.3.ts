@@ -25,6 +25,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "quand / lorsque (formel) + indicatif",
       items: [
         "Deux actions en même temps, ou une action pendant une autre.",
@@ -34,6 +35,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "au moment où + indicatif",
       items: [
         "Insiste sur un moment précis.",
@@ -42,6 +44,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "pendant que + indicatif",
       items: [
         "Insiste sur la durée ou le déroulement.",
@@ -54,6 +57,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "après que + indicatif",
       items: [
         "Introduit l'action 1 (la première).",
@@ -62,6 +66,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "avant que + subjonctif",
       items: [
         "Introduit l'action 2 (la seconde).",
@@ -74,6 +79,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "dès que / aussitôt que + indicatif",
       items: [
         "Actions qui se suivent immédiatement ; introduit l'action 1.",
@@ -82,6 +88,7 @@ export const A1_GR_CONJONCTIONS_TEMPS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "jusqu'à ce que + subjonctif",
       items: [
         "L'action 1 dure jusqu'au début de l'action 2.",

@@ -32,7 +32,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
         "Il n'envoie jamais de cartes postales.",
         "— Tu prends souvent le métro ? — Non, je ne le prends jamais !",
       ],
-      noBulletItems: [1, 2],
+      bulletItems: [0],
     },
     {
       type: "text",
@@ -42,7 +42,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
         "— Tu habites encore à Paris ? — Non, je n'habite plus en France.",
         "À l'oral, le {a}s{/a} de {a}plus{/a} est muet dans ce sens. → Je ne fume plus.",
       ],
-      noBulletItems: [1, 2],
+      bulletItems: [0],
     },
     {
       type: "text",
@@ -52,7 +52,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
         "Le musée n'est pas encore ouvert. (= il va ouvrir plus tard)",
         "— Tu as déjà visité ce quartier ? — Non, pas encore.",
       ],
-      noBulletItems: [1, 2],
+      bulletItems: [0],
     },
     {
       type: "heading",
@@ -64,7 +64,6 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
         "{a}Personne{/a} : pas une seule personne (≠ quelqu'un, tout le monde). Sujet ou complément. → Je ne connais personne. ; Personne ne me connaît.",
         "{a}Rien{/a} : pas une seule chose (≠ quelque chose, tout). → Je n'ai rien compris. ; Rien ne m'intéresse !",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -76,7 +75,6 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
         "{a}Ne… que{/a} = seulement. → Je ne parle que français !",
         "{a}Ne… ni… ni{/a} : négation de et / ou. → Je n'aime ni le rock ni le rap.",
       ],
-      allBullets: true,
     },
     { type: "heading", text: "Négation totale : jamais, rien, personne", trans: { en: "Total negation: jamais, rien, personne", ar: "النفي التام: jamais، rien، personne", fa: "نفی کامل: jamais، rien، personne", ti: "ምሉእ ኣሉታ፦ jamais፣ rien፣ personne", uk: "Повне заперечення: jamais, rien, personne" } },
     {
@@ -130,6 +128,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     { type: "heading", text: "Au passé composé", sub: true, accent: true, trans: { en: "In the passé composé", ar: "في الماضي المركّب", fa: "در ماضی نقلی", ti: "ኣብ passé composé", uk: "У passé composé" } },
     {
       type: "text",
+      allBullets: true,
       text: "{a}jamais et rien{/a} se placent entre l'auxiliaire et le participe.",
       transText: {
         en: "{a}jamais and rien{/a} are placed between the auxiliary and the participle.",
@@ -220,6 +219,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Cumul de négations",
       items: [
         "On peut combiner {a}ne…jamais…rien{/a} ou {a}ne…jamais…personne{/a}.",

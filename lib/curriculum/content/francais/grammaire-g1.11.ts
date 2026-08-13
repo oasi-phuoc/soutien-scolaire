@@ -107,7 +107,6 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         uk: "Дієслово {a}être{/a} (теперішній час) + {a}en train de{/a} + інфінітив.",
       },
       items: ["Il {a}est en train de{/a} dormir."],
-      noBulletItems: [0],
     },
     {
       type: "text",
@@ -124,7 +123,6 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         uk: "Із займенниковим дієсловом {a}займенник{/a} ставиться перед інфінітивом.",
       },
       items: ["Elles sont en train de {a}se{/a} préparer."],
-      noBulletItems: [0],
     },
     {
       type: "text",
@@ -141,7 +139,6 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
         uk: "У заперечній формі {a}ne… pas{/a} оточує дієслово être.",
       },
       items: ["Ils {a}ne{/a} sont {a}pas{/a} en train de travailler."],
-      noBulletItems: [0],
     },
     {
       type: "heading",
@@ -164,7 +161,6 @@ export const A1_GR_PRESENT_PROGRESSIF: GrammarLesson = {
       },
       items: ["Nous sommes en train {s}de{/s} apprendre le français.",
         "Nous sommes en train {a}d'{/a}apprendre le français."],
-      noBulletItems: [0,1],
     },
   ],
   exercises: G1_EXERCISES["G1.11"](),

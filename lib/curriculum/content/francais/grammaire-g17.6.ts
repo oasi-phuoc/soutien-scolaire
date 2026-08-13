@@ -17,7 +17,6 @@ export const A1_GR_HYPOTHESE_CONDITION: GrammarLesson = {
         "Hypothèse : imaginer des possibilités ou une réalité différente. → Si j'avais le temps, je ferais plus de choses.",
         "Condition : un événement doit se produire pour qu'un autre ait lieu. → Je viendrai {a}à condition que{/a} tu m'appelles.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -56,7 +55,6 @@ export const A1_GR_HYPOTHESE_CONDITION: GrammarLesson = {
         "{a}À condition que{/a} + subjonctif. → … à condition que mon train n'ait pas de retard.",
         "Même sujet : {a}à condition de{/a} + infinitif {a}ou{/a} à condition que + subjonctif. → … à condition de partir plus tôt / à condition que je parte plus tôt.",
       ],
-      allBullets: true,
     },
   ],
   exercises: [

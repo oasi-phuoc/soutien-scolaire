@@ -13,6 +13,7 @@ export const A1_GR_CONDITIONNEL_PASSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Regret",
       items: [
         "Souvent avec {a}aimer{/a}, {a}préférer{/a}, {a}souhaiter{/a}, {a}vouloir{/a}.",
@@ -21,6 +22,7 @@ export const A1_GR_CONDITIONNEL_PASSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Reproche",
       items: [
         "Souvent avec {a}devoir{/a}, {a}pouvoir{/a}, {a}falloir{/a}.",
@@ -46,6 +48,7 @@ export const A1_GR_CONDITIONNEL_PASSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Exemples",
       items: [
         "Tu {a}aurais dû{/a} me prévenir.",

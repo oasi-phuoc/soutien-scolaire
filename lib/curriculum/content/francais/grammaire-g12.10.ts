@@ -58,6 +58,7 @@ export const A1_GR_PRONOMS_RELATIFS_QUI_QUE_OU: GrammarLesson = {
     { type: "heading", text: "Les pronoms relatifs : relier deux phrases", trans: { en: "Relative pronouns: linking two sentences", ar: "الضمائر الموصولة: ربط جملتين", fa: "ضمایر موصولی: پیوند دو جمله", ti: "ኣዛመድቲ ቃላት፦ ምትእስሳር ክልተ ሓረግ", uk: "Відносні займенники: з'єднання двох речень" } },
     {
       type: "text",
+      allBullets: true,
       text: "Un pronom relatif permet de {a}relier deux phrases{/a} en évitant une répétition.",
       transText: {
         en: "A relative pronoun allows you to {a}link two sentences{/a} while avoiding a repetition.",

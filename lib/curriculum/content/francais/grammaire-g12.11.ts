@@ -22,6 +22,7 @@ export const A1_GR_PRONOM_RELATIF_DONT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Complément d'un verbe + de",
       items: [
         "C'est le film dont je parle. ; Voici l'enfant dont je m'occupe.",
@@ -30,6 +31,7 @@ export const A1_GR_PRONOM_RELATIF_DONT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Complément d'un adjectif + de",
       items: [
         "C'est un collègue dont je suis proche. ; C'est le dossier dont je suis responsable.",
@@ -38,6 +40,7 @@ export const A1_GR_PRONOM_RELATIF_DONT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Complément d'un nom + de",
       items: [
         "J'ai un collègue dont la femme est actrice.",

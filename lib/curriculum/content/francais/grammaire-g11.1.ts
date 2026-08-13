@@ -95,6 +95,7 @@ export const A1_GR_EXPRESSION_TEMPS_MOMENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Exemples",
       items: [
         "{a}Aujourd'hui{/a}, je travaille.",

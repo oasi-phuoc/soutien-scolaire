@@ -9,7 +9,14 @@ export type ConjugTable = { verb: string; rows: ConjugRow[]; accentForms?: boole
 /** Langues pivot (hors français) — alignées sur `lib/pivot-langs.ts`. */
 export type GrammarPivotLang = "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk";
 export type Trans = Partial<Record<GrammarPivotLang, string>>;
-type TransList = Partial<Record<GrammarPivotLang, string[]>>;
+/** Liste traduite : chaîne unique avec `\n` entre les lignes (forme préférée), ou tableau legacy. */
+type TransList = Partial<Record<GrammarPivotLang, string | string[]>>;
+
+/** Normalise une valeur TransList en tableau de lignes. */
+export function transListLines(value: string | string[] | undefined): string[] | undefined {
+  if (value === undefined) return undefined;
+  return typeof value === "string" ? value.split("\n") : value;
+}
 
 export type VerbToggleVerb = {
   infinitive: string;
@@ -29,8 +36,14 @@ export type TheoryBlock =
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<GrammarPivotLang, string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean; colWidths?: string[] }
-  /** Label accent + texte plain optionnel + liste (remplace plain_list / highlight / highlight_text). */
-  | { type: "text"; label?: string; text?: string; items?: string[]; transLabel?: Trans; transText?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[]; allBullets?: boolean }
+  /**
+   * Label accent + texte plain optionnel + liste (remplace plain_list / highlight / highlight_text).
+   * - Par défaut : items sans puces ; les « → » sont alignés verticalement quand toutes les lignes en contiennent.
+   * - `inlineArrows: true` → désactive l'alignement vertical des « → » (rendu inline).
+   * - `allBullets: true` → puces sur toutes les lignes ; `bulletItems: [indices]` → puces sur ces lignes seulement.
+   * - `numberText: [indices]` → numérotation 1. 2. 3. en gras couleur accent sur ces lignes (dans l'ordre du tableau).
+   */
+  | { type: "text"; label?: string; text?: string; items?: string[]; transLabel?: Trans; transText?: Trans; transItems?: TransList; inlineArrows?: boolean; bulletItems?: number[]; allBullets?: boolean; numberText?: number[] }
   | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; noArrow?: boolean }
   | { type: "clock_display"; clocks: { h: number; m: number; label?: string }[]; cols?: number }
   | { type: "word_cards"; items: string[]; cols?: 2 | 3 | 4 }

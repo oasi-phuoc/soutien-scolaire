@@ -18,7 +18,6 @@ export const A1_GR_L19: GrammarLesson = {
         "Pour indiquer une relation entre personnes. → Je te présente mon frère.",
         "Pour indiquer une relation entre des choses/lieux et des personnes. → Mon appartement est à Lyon.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",

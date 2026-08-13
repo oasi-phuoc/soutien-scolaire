@@ -46,6 +46,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
     { type: "heading", text: "Le sujet (S)", sub: true, trans: { en: "The subject (S)", ar: "الفاعل (S)", fa: "فاعل (S)", ti: "ሓካይ (S)", uk: "Підмет (S)" } },
     {
       type: "text",
+      allBullets: true,
       text: "Le sujet répond à la question : {a}Qui fait l'action ?{/a}",
       transText: {
         en: "The subject answers the question: {a}Who performs the action?{/a}",
@@ -95,6 +96,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Exemples d'actions",
       items: ["manger", "partir", "travailler"],
       transLabel: { en: "Examples of actions", ar: "أمثلة على الأفعال", fa: "نمونه‌های عمل", ti: "ኣብነታት ስራሕ", uk: "Приклади дій" },
@@ -108,6 +110,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Exemples d'états",
       items: ["être", "avoir", "sembler"],
       transLabel: { en: "Examples of states", ar: "أمثلة على الحالات", fa: "نمونه‌های حالت", ti: "ኣብነታት ሃለዋት", uk: "Приклади станів" },
@@ -138,7 +141,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
         "Le complément répond à la question {a}quoi ? / qui ?{/a}",
         "Je mange {a}une pomme{/a}.",
       ],
-      noBulletItems: [0],
+      bulletItems: [1],
       transLabel: { en: "COD — Direct Object", ar: "COD — المفعول به المباشر", fa: "COD — مفعول مستقیم", ti: "COD — ቀጥታዊ ተወሳኺ", uk: "COD — Прямий додаток" },
       transItems: {
         en: ["The complement answers the question {a}what? / who?{/a}", "I eat {a}an apple{/a}."],
@@ -155,7 +158,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
         "Le complément répond à la question {a}à qui ? / à quoi ?{/a}",
         "Je parle {a}à Marie{/a}.",
       ],
-      noBulletItems: [0],
+      bulletItems: [1],
       transLabel: { en: "COI — Indirect Object", ar: "COI — المفعول به غير المباشر", fa: "COI — مفعول غیرمستقیم", ti: "COI — ዘይቀጥታዊ ተወሳኺ", uk: "COI — Непрямий додаток" },
       transItems: {
         en: ["The complement answers the question {a}to whom? / to what?{/a}", "I speak {a}to Marie{/a}."],
@@ -172,7 +175,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
         "Le complément répond à la question {a}où ? / quand ? / comment ?{/a}",
         "J'habite {a}à Paris{/a}.",
       ],
-      noBulletItems: [0],
+      bulletItems: [1],
       transLabel: { en: "CC — Adverbial Complement", ar: "CC — المتمم الظرفي", fa: "CC — متمم قیدی", ti: "CC — ናይ ሁኔታ ተወሳኺ", uk: "CC — Обставинний додаток" },
       transItems: {
         en: ["The complement answers the question {a}where? / when? / how?{/a}", "I live {a}in Paris{/a}."],

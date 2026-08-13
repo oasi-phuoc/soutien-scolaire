@@ -26,6 +26,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Totalité : tout / toute / tous / toutes",
       items: [
         "{a}Tout{/a} = toutes les choses (jamais des personnes). → Tout va bien ! ; J'ai tout ?",
@@ -42,6 +43,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Pluralité : quelques-un(e)s, plusieurs, certain(e)s",
       items: [
         "{a}Quelques-uns/unes{/a} : petit nombre. ; {a}Plusieurs{/a} : plus de deux, sans précision. ; {a}Certains/certaines{/a} : une partie.",
@@ -86,6 +88,7 @@ export const A1_GR_PRONOMS_INDEFINIS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Indifférence : n'importe quoi / qui / où / quand / comment / lequel…",
       items: [
         "Le choix n'importe pas. → Donne-moi n'importe quoi. ; N'importe qui peut m'aider. ; Va n'importe où !",

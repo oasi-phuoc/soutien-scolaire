@@ -33,7 +33,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
       items: [
         "une pomme — {a}des{/a} pomme{a}s{/a}",
       ],
-      noBulletItems: [0],
     },
     {
       type: "heading",
@@ -97,7 +96,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         "un fruit → des fruit{a}s{/a}",
         "une banane → des banane{a}s{/a}",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -118,7 +116,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
         "une noi{a}x{/a} → des noi{a}x{/a}",
         "un ne{a}z{/a} → des ne{a}z{/a}"
       ],
-      noBulletItems: [0, 1, 2]
     },
     {
       type: "heading",
@@ -206,7 +203,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "un festiv{a}al{/a} → des festival{a}s{/a}",
                 "un récit{a}al{/a} → des récital{a}s{/a}",
               ],
-              noBulletItems: [0, 1, 2, 3],
             },
           ],
         },
@@ -268,7 +264,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "un cor{a}ail{/a} → des cor{a}aux{/a}",
                 "un b{a}ail{/a} → des b{a}aux{/a}",
               ],
-              noBulletItems: [0, 1, 2, 3],
             },
           ],
         },
@@ -368,7 +363,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "un land{a}au{/a} → des landau{a}s{/a}",
                 "un sarr{a}au{/a} → des sarrau{a}s{/a}",
               ],
-              noBulletItems: [0, 1],
             },
           ],
         },
@@ -428,7 +422,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "un pn{a}eu{/a} → des pneu{a}s{/a}",
                 "un bl{a}eu{/a} → des bleu{a}s{/a}",
               ],
-              noBulletItems: [0, 1],
             },
           ],
         },
@@ -493,7 +486,6 @@ export const A1_GR_PLURIEL_NOMS: GrammarLesson = {
                 "un jouj{a}ou{/a} → des jouj{a}oux{/a}",
                 "un p{a}ou{/a} → des p{a}oux{/a}",
               ],
-              noBulletItems: [0, 1, 2, 3, 4, 5, 6],
             },
           ],
         },

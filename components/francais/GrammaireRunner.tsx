@@ -11,6 +11,7 @@ import type {
   FillItem,
   MatchPair,
 } from "@/lib/curriculum/conjugation-data";
+import { transListLines } from "@/lib/curriculum/grammar-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
@@ -463,7 +464,7 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
             );
 
           case "grid": {
-            const transH = useTrans ? block.transHeaders?.[pivot as keyof typeof block.transHeaders] : undefined;
+            const transH = transListLines(useTrans ? block.transHeaders?.[pivot as keyof typeof block.transHeaders] : undefined);
             const transR = useTrans ? block.transRows?.[pivot as keyof typeof block.transRows] : undefined;
             const useFixed = Boolean(block.equalCols || block.colWidths?.length);
             const showHeader = block.headers.some((h) => h.trim().length > 0);
@@ -521,11 +522,23 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
           case "text": {
             const transLabel = useTrans ? block.transLabel?.[pivot as keyof typeof block.transLabel] : undefined;
             const transText = useTrans ? block.transText?.[pivot as keyof typeof block.transText] : undefined;
-            const transItems = useTrans ? block.transItems?.[pivot as keyof typeof block.transItems] : undefined;
+            const transItems = transListLines(useTrans ? block.transItems?.[pivot as keyof typeof block.transItems] : undefined);
             const label = transLabel ?? block.label;
             const plainText = (transText ?? block.text)?.trim() ? (transText ?? block.text) : undefined;
             const items = transItems ?? block.items ?? [];
-            const alignArrows = items.length > 0 && items.every((item) => item.includes(" → "));
+            // Alignement vertical des « → » par défaut ; inlineArrows le désactive.
+            const alignArrows = !block.inlineArrows && items.length > 0 && items.every((item) => item.includes(" → "));
+            // Préfixe de ligne : numérotation (numberText) prioritaire sur la puce (allBullets / bulletItems).
+            const itemPrefix = (ii: number) => {
+              const numIdx = block.numberText ? block.numberText.indexOf(ii) : -1;
+              if (numIdx >= 0) {
+                return <span className="mt-0.5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{numIdx + 1}.</span>;
+              }
+              if (block.allBullets || block.bulletItems?.includes(ii)) {
+                return <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>;
+              }
+              return null;
+            };
             return (
               <div key={i} className="space-y-1.5">
                 {label ? (
@@ -543,32 +556,32 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                 {items.length > 0 ? (
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {items.map((item, ii) => {
-                    const skipBullet = block.allBullets
-                      ? (block.noBulletItems?.includes(ii) ?? false)
-                      : (block.noBulletItems?.includes(ii) ?? false) ||
-                        (!!block.noFirstBullet && !item.includes(" → "));
+                    const prefix = itemPrefix(ii);
                     if (alignArrows) {
                       const arrowIdx = item.indexOf(" → ");
                       const left = item.slice(0, arrowIdx);
                       const right = item.slice(arrowIdx + 3);
+                      const arrowGrid = (
+                        <div
+                          className="grid min-w-0 flex-1 grid-cols-[minmax(7.5rem,max-content)_1.25rem_minmax(0,1fr)] items-baseline gap-x-2 text-sm leading-relaxed text-[var(--color-text-primary)]"
+                          lang={transItems?.[ii] ? pivot : undefined}
+                          dir={transItems?.[ii] && isRtl ? "rtl" : "ltr"}
+                        >
+                          <span>{renderInlineMarkup(left, false)}</span>
+                          <span className="text-center text-[var(--color-text-secondary)]">→</span>
+                          <span>{renderInlineMarkup(right, false)}</span>
+                        </div>
+                      );
                       return (
                         <li key={ii} className="space-y-0.5">
-                          <div
-                            className="grid grid-cols-[minmax(7.5rem,max-content)_1.25rem_minmax(0,1fr)] items-baseline gap-x-2 text-sm leading-relaxed text-[var(--color-text-primary)]"
-                            lang={transItems?.[ii] ? pivot : undefined}
-                            dir={transItems?.[ii] && isRtl ? "rtl" : "ltr"}
-                          >
-                            <span>{renderInlineMarkup(left, false)}</span>
-                            <span className="text-center text-[var(--color-text-secondary)]">→</span>
-                            <span>{renderInlineMarkup(right, false)}</span>
-                          </div>
+                          {prefix ? <div className="flex gap-2">{prefix}{arrowGrid}</div> : arrowGrid}
                         </li>
                       );
                     }
                     return (
                       <li key={ii} className="space-y-0.5">
                         <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]" lang={transItems?.[ii] ? pivot : undefined} dir={transItems?.[ii] && isRtl ? "rtl" : "ltr"}>
-                          {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
+                          {prefix}
                           <span>{renderInlineMarkup(item, !block.inlineArrows)}</span>
                         </div>
                       </li>

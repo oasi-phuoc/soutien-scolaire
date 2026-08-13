@@ -65,9 +65,6 @@ export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {
       items: [
         "Exemple : Je suis née au Kenya mais j'habite en Angleterre, à Londres.",
       ],
-      noBulletItems: [
-        0,
-      ],
     },
     {
       type: "heading",
@@ -80,7 +77,6 @@ export const A1_GR_A_EN_DE_LIEUX: GrammarLesson = {
         "Pas de liaison avec {a}en{/a} devant un pays en {a}h{/a}. → Je vais en Hongrie.",
         "{a}De{/a} → {a}d'{/a} devant une voyelle. → Je rentre d'Allemagne.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",

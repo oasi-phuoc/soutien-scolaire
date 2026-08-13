@@ -46,7 +46,6 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
         "Souvent avec l'imparfait : {a}pendant que{/a}. → Elle est tombée sur moi pendant que je lisais.",
         "Souvent avec le passé composé : {a}quand, tout à coup, soudain, brusquement, à ce moment-là, un jour…{/a} → Soudain, le chauffeur a freiné.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -96,6 +95,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
     { type: "heading", text: "Les emplois du passé composé", sub: true, accent: true, trans: { en: "Uses of the passé composé", ar: "استخدامات الماضي المركّب", fa: "کاربردهای گذشتهٔ نقلی", ti: "ጥቕሚታት passé composé", uk: "Вживання passé composé" } },
     {
       type: "text",
+      allBullets: true,
       text: "Raconter un {a}événement ponctuel{/a} : Hier, j'{a}ai vu{/a} Lola dans la rue.",
       transText: {
         en: "Tell a {a}one-off event{/a}: Hier, j'{a}ai vu{/a} Lola dans la rue. (Yesterday I saw Lola in the street.)",
@@ -128,6 +128,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
     { type: "heading", text: "Les emplois de l'imparfait", sub: true, accent: true, trans: { en: "Uses of the imparfait", ar: "استخدامات الماضي الناقص", fa: "کاربردهای ماضی استمراری", ti: "ጥቕሚታት imparfait", uk: "Вживання imparfait" } },
     {
       type: "text",
+      allBullets: true,
       text: "Exprimer une {a}habitude dans le passé{/a} : Tous les matins, je {a}mangeais{/a} un pain au chocolat avec un verre de jus de fruits.",
       transText: {
         en: "Express a {a}past habit{/a}: Tous les matins, je {a}mangeais{/a} un pain au chocolat…",
@@ -171,10 +172,10 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
         ti: ["Quand j'{a}ai vu{/a} Lola (= ሓደ ግዜ ፍጻመ)፣ la rue {a}était{/a} déserte (= መግለጺ)።"],
         uk: ["Quand j'{a}ai vu{/a} Lola (= разова подія), la rue {a}était{/a} déserte (= опис)."],
       },
-      noBulletItems: [0],
     },
     {
       type: "text",
+      allBullets: true,
       label: "Simultanéité",
       items: [
         "Deux actions longues et simultanées se mettent souvent à l'imparfait.",
@@ -191,6 +192,7 @@ export const A1_GR_IMPARFAIT_PASSE_COMPOSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Être en train de à l'imparfait",
       items: [
         "Pour insister sur une action en cours : être à l'imparfait + en train de + infinitif.",

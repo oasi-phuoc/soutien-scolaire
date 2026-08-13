@@ -31,7 +31,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
         "Je ne suis pas célibataire.",
         "Tu ne travailles pas dans une banque.",
       ],
-      noBulletItems: [1, 2],
+      bulletItems: [0],
     },
     {
       type: "text",
@@ -42,7 +42,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
         "Tu as une sœur ? → Non, je n'ai pas de sœur.",
         "Vous avez des petits-enfants ? → Non, nous n'avons pas de petits-enfants.",
       ],
-      noBulletItems: [1, 2, 3],
+      bulletItems: [0],
     },
     {
       type: "heading",
@@ -55,7 +55,6 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
         "{a}Pas de{/a} → {a}pas d'{/a} devant une voyelle ou un h muet. → Il n'a pas d'enfants.",
         "À l'oral, on ne prononce pas toujours le {a}e{/a} de {a}ne{/a}, ni parfois le {a}ne{/a} entier. → On (ne) joue pas au foot.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -64,6 +63,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
       transText: {
         en: "The negation structure uses {a}ne{/a} + {a}pas{/a}.",
@@ -141,7 +141,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       label: "Attention",
       transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
       inlineArrows: true,
-      noBulletItems: [0],
+      bulletItems: [1, 2],
       items: [
         "Quand le verbe commence par une voyelle ou un h, {a}ne{/a} devient {a}n'{/a}.",
         "il n{s}e{/s} est pas là → il n'est pas là",
@@ -183,6 +183,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     { type: "heading", text: "Ne … plus", sub: true, accent: true, trans: { en: "Ne … plus", ar: "Ne … plus", fa: "Ne … plus", ti: "Ne … plus", uk: "Ne … plus" } },
     {
       type: "text",
+      allBullets: true,
       text: "{a}ne … plus{/a} signifie que l'action s'est arrêtée.",
       transText: {
         en: "{a}ne … plus{/a} means that the action has stopped.",
@@ -238,6 +239,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     { type: "heading", text: "Ne … que (restriction)", sub: true, accent: true, trans: { en: "Ne … que (restriction)", ar: "Ne … que (تقييد)", fa: "Ne … que (محدودیت)", ti: "Ne … que (ድረታ)", uk: "Ne … que (обмеження)" } },
     {
       type: "text",
+      allBullets: true,
       text: "{a}ne … que{/a} = seulement. Ce n'est {a}pas une vraie négation{/a} — le sens est positif mais limité.",
       transText: {
         en: "{a}ne … que{/a} = only. It is {a}not a real negation{/a} — the meaning is positive but limited.",
@@ -299,7 +301,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
         "Avec {a}ne…que{/a} : l'article ne change pas.",
         "Je mange {a}que du{/a} pain. (que garde l'article)",
       ],
-      noBulletItems: [0],
+      bulletItems: [1, 2, 3],
       transLabel: { en: "Articles after the negation", ar: "أدوات التعريف بعد النفي", fa: "حروف تعریف پس از نفی", ti: "ኣንቀጽ ድሕሪ ኣሉታ", uk: "Артиклі після заперечення" },
       transItems: {
         en: ["With {a}ne…pas / ne…plus{/a}: un/une/des/du/de la → {a}de{/a} (or d' before a vowel).", "Je mange du pain → Je {a}ne{/a} mange {a}pas de{/a} pain.", "With {a}ne…que{/a}: the article does not change.", "Je mange {a}que du{/a} pain. (que keeps the article)"],

@@ -13,6 +13,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Demander un service poliment",
       items: [
         "Je {a}voudrais{/a} deux baguettes… ; Vous {a}pourriez{/a} m'apporter de l'eau…",
@@ -21,6 +22,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Exprimer un souhait, un désir",
       items: [
         "On {a}voudrait{/a} déménager. ; Tu {a}aimerais{/a} aller où ?",
@@ -29,6 +31,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Suggestion / conseil",
       items: [
         "Ce soir, si tu veux, on {a}pourrait{/a} aller au cinéma.",
@@ -111,6 +114,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Formation : {a}infinitif (ou base du futur){/a} + terminaisons de l'imparfait",
       transText: {
         en: "Formation: {a}infinitive (or future stem){/a} + imperfect endings",
@@ -284,6 +288,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Formation : {a}avoir ou être au conditionnel présent{/a} + participe passé",
       transText: {
         en: "Formation: {a}avoir or être in the present conditional{/a} + past participle",
@@ -544,6 +549,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Règle clé",
       items: [
         "Jamais de conditionnel dans la proposition avec {a}si{/a}.",
@@ -596,6 +602,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Le conditionnel exprime une action {a}hypothétique, souhaitée ou polie{/a}.",
       transText: {
         en: "The conditional expresses a {a}hypothetical, wished-for or polite{/a} action.",
@@ -941,6 +948,7 @@ export const A1_GR_CONDITIONNEL_PRESENT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Politesse : impératif vs conditionnel",
       items: [
         "{a}Impératif{/a} (direct) : Donnez-moi un café !",

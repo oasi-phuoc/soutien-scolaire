@@ -17,7 +17,6 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
         "Décrire une situation passée, souvent en contraste avec le présent. → Avant, les trains étaient à vapeur. Maintenant, les trains sont électriques.",
         "Décrire une habitude passée. → Quand j'étais enfant, tous les dimanches, nous allions chez mes grands-parents.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -116,6 +115,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "La plupart des verbes utilisent la base de {a}nous{/a} au présent, même quand leur infinitif est irrégulier.",
       transText: {
         en: "Most verbs use the {a}nous{/a} stem of the present, even when their infinitive is irregular.",
@@ -215,6 +215,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Orthographe",
       items: [
         "Les verbes en -ger gardent le e devant a : je mangeais, ils voyageaient.",
@@ -267,6 +268,7 @@ export const A1_GR_IMPARFAIT: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Formation : {a}base « nous »{/a} au présent + terminaisons de l'imparfait.",
       transText: {
         en: "Formation: the {a}\"nous\" stem{/a} in the present + the imparfait endings.",

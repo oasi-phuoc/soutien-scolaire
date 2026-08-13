@@ -40,6 +40,7 @@ export const A1_GR_PRONOMS_RELATIFS_COMPOSES: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Contractions avec à et de",
       items: [
         "{a}à + lequel → auquel{/a} ; {a}à + laquelle{/a} ; {a}à + lesquels → auxquels{/a} ; {a}à + lesquelles → auxquelles{/a}.",

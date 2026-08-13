@@ -32,7 +32,6 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
         "Devant le verbe ou l'auxiliaire. → Oui, j'en ai trois. ; Il en a invité sept.",
         "Avec deux verbes : devant l'infinitif. → Il va en inviter trois.",
       ],
-      allBullets: true,
     },
     {
       type: "note",
@@ -48,11 +47,11 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
         "Liaison devant voyelle ou {a}h{/a} muet. → J'en ai beaucoup. ; J'en organise souvent.",
         "À l'oral, le {a}ne{/a} de la négation tombe souvent. → J'en ai pas. ; Il y en a pas.",
       ],
-      allBullets: true,
     },
     { type: "heading", text: "Le pronom Y", trans: { en: "The pronoun Y", ar: "الضمير Y", fa: "ضمیر Y", ti: "ተውላጠ-ስም Y", uk: "Займенник Y" } },
     {
       type: "text",
+      allBullets: true,
       text: "{a}Y{/a} remplace un lieu ou un groupe {a}à + chose{/a} (verbes construits avec à).",
       transText: {
         en: "{a}Y{/a} replaces a place or a group {a}à + thing{/a} (verbs built with à).",
@@ -123,11 +122,12 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
         ti: ["Je pense à Paul → Je pense {a}à lui{/a}. (ብዛዕባ ጳውሎስ እሓስብ → ብዛዕባኡ እሓስብ።) (ኣይኮነን: J'y pense)", "ንሰባት {a}à lui / à elle / à eux{/a} ንጥቀም።", "ንነገራትን ቦታታትን: {a}y{/a}።"],
         uk: ["Je pense à Paul → Je pense {a}à lui{/a}. (Я думаю про Поля → Я думаю про нього.) (не: J'y pense)", "Для людей вживаємо {a}à lui / à elle / à eux{/a}.", "Для речей і місць: {a}y{/a}."],
       },
-      noBulletItems: [0],
+      bulletItems: [1, 2],
     },
     { type: "heading", text: "Le pronom EN", sub: true, accent: true, trans: { en: "The pronoun EN", ar: "الضمير EN", fa: "ضمیر EN", ti: "ተውላጠ-ስም EN", uk: "Займенник EN" } },
     {
       type: "text",
+      allBullets: true,
       text: "{a}EN{/a} remplace un groupe {a}de + nom{/a} ou un nom avec article partitif / indéfini.",
       transText: {
         en: "{a}EN{/a} replaces a group {a}de + noun{/a} or a noun with a partitive / indefinite article.",
@@ -187,6 +187,7 @@ export const A1_GR_PRONOM_EN: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Avec un / une : affirmatif vs négatif",
       items: [
         "À la forme affirmative ou interrogative, on peut répéter {a}un{/a} ou {a}une{/a} : Oui, j'en ai {a}un{/a}.",

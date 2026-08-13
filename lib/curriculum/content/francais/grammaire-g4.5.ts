@@ -18,7 +18,6 @@ export const A1_GR_L18: GrammarLesson = {
         "Pour désigner une personne ou une chose déjà mentionnée. → Le tableau est de Manet. Cet artiste a vécu au XIXe siècle.",
         "Pour désigner une période en cours ou très proche. → Cette semaine, je vais au musée du Louvre ; ils arrivent ce soir.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -53,7 +52,6 @@ export const A1_GR_L18: GrammarLesson = {
         "Liaison avec {a}ces{/a}. → ces objets ; ces horaires.",
         "{a}Cet{/a} et {a}cette{/a} ont la même prononciation. → cet ami = cette amie.",
       ],
-      allBullets: true,
     },
   ],
   exercises: [

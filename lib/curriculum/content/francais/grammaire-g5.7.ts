@@ -48,7 +48,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
         "Avec un nom pour exprimer une grande quantité. → Qu'est-ce qu'il y a comme monde ! ; Que de monde il y a ! (= Il y a beaucoup de monde !)",
         "{a}Que de{/a} est formel. {a}Qu'est-ce que… comme{/a} est familier.",
       ],
-      noBulletItems: [1],
+      bulletItems: [0],
     },
     {
       type: "heading",
@@ -60,7 +60,6 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
         "Ne pas confondre affirmation et exclamation. → C'est beau. / C'est beau !",
         "Ne pas confondre question et exclamation. → Quels beaux tableaux ? / Quels beaux tableaux !",
       ],
-      allBullets: true,
     },
   ],
   exercises: [

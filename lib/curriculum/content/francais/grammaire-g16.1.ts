@@ -30,7 +30,6 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
         "Trois personnes seulement : {a}tu, nous, vous{/a} ; pas de pronom sujet. → Entre ! Entrons ! Entrez !",
         "Verbes en {a}-er{/a} : pas de {a}-s{/a} à la 2e personne du singulier, sauf devant {a}en{/a} ou {a}y{/a}. → Réserve des places ! ; Réserves-en trois ! ; Va à l'opéra ! ; Vas-y !",
       ],
-      allBullets: true,
     },
     {
       type: "grid",
@@ -80,7 +79,6 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
         "Affirmatif : pronoms après le verbe, avec trait d'union ; {a}moi / toi{/a} (pas me / te). → Regarde-moi ! ; Assieds-toi ! ; Appelez-les !",
         "Négatif : pronoms devant le verbe. → Ne me regarde pas ! ; Ne t'assieds pas ! ; Ne les appelez pas !",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -90,9 +88,6 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
       type: "text",
       items: [
         "L'intonation varie selon l'ordre, la consigne, le conseil ou le souhait.",
-      ],
-      noBulletItems: [
-        0,
       ],
     },
     {
@@ -112,6 +107,7 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "L'impératif exprime un {a}ordre, un conseil, une interdiction ou une invitation{/a}.",
       transText: {
         en: "The imperative expresses an {a}order, advice, a prohibition or an invitation{/a}.",
@@ -319,9 +315,7 @@ export const A1_GR_IMPERATIF: GrammarLesson = {
         "Mange ! (pas Manges !)",
         "Exception : va-s-y, manges-en (devant -y et -en, on garde le -s pour la liaison).",
       ],
-      noBulletItems: [
-        0,
-      ],
+      bulletItems: [1, 2],
       transLabel: {
         en: "Warning: -er verbs → no -s in the 2nd person singular",
         ar: "انتباه: أفعال -er ← بدون -s في المفرد المخاطب",

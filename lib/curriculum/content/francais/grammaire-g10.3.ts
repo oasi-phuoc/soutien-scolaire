@@ -48,7 +48,6 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
         "✗ le plus bien → ✓ {a}le mieux{/a}. → C'est lui qui cuisine le mieux.",
         "Pour un aspect négatif : {a}le / la / les pire(s){/a}. → C'est la pire émission de la semaine.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -83,7 +82,7 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
         uk: [["bon, bonne, bons, bonnes", "прикметник: супроводжує іменник", "meilleur(e)(s)", "le/la/les meilleur(e)(s)"], ["bien", "прислівник: супроводжує дієслово", "mieux", "le mieux"], ["mauvais", "прикметник", "pire або plus mauvais", "le pire або le plus mauvais"]],
       },
     },
-    { type: "text", label: "Exemples", items: ["C'est un {a}bon{/a} livre, mais celui-ci est {a}meilleur{/a}.", "Elle chante {a}bien{/a}, mais sa sœur chante {a}mieux{/a}.", "C'est la {a}pire{/a} erreur."],
+    { type: "text", allBullets: true, label: "Exemples", items: ["C'est un {a}bon{/a} livre, mais celui-ci est {a}meilleur{/a}.", "Elle chante {a}bien{/a}, mais sa sœur chante {a}mieux{/a}.", "C'est la {a}pire{/a} erreur."],
       transLabel: { en: "Examples", ar: "أمثلة", fa: "مثال‌ها", ti: "ኣብነታት", uk: "Приклади" },
       transItems: {
         en: ["C'est un {a}bon{/a} livre, mais celui-ci est {a}meilleur{/a}. (It's a good book, but this one is better.)", "Elle chante {a}bien{/a}, mais sa sœur chante {a}mieux{/a}. (She sings well, but her sister sings better.)", "C'est la {a}pire{/a} erreur. (It's the worst mistake.)"],
@@ -105,7 +104,7 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
         uk: "Найвищий ступінь виражає найвищу або найнижчу межу.",
       },
     },
-    { type: "text", label: "Structure", items: ["le / la / les + plus / moins + adjectif"],
+    { type: "text", allBullets: true, label: "Structure", items: ["le / la / les + plus / moins + adjectif"],
       transLabel: { en: "Structure", ar: "البنية", fa: "ساختار", ti: "ቅርጺ", uk: "Структура" },
       transItems: {
         en: ["le / la / les + plus / moins + adjective"],
@@ -145,7 +144,6 @@ export const A1_GR_SUPERLATIF: GrammarLesson = {
         "bien → comparatif : mieux (pas : plus bien)",
         "mauvais → comparatif : pire ou plus mauvais",
       ],
-      allBullets: true,
       transItems: {
         en: ["bon (good) → comparative: meilleur (better) (not: plus bon)", "bien (well) → comparative: mieux (better) (not: plus bien)", "mauvais (bad) → comparative: pire or plus mauvais (worse)"],
         ar: ["bon (جيد) ← المقارنة: meilleur (أفضل) (وليس: plus bon)", "bien (جيداً) ← المقارنة: mieux (أفضل) (وليس: plus bien)", "mauvais (سيئ) ← المقارنة: pire أو plus mauvais (أسوأ)"],

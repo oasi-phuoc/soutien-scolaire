@@ -18,7 +18,6 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
         "Peut modifier un adjectif ou une expression. → Ils sont généralement prudents. ; Elle est fréquemment en retard.",
         "Peut être précédé d'un adverbe d'intensité. → Il roule très prudemment.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -49,7 +48,6 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
         "Devant l'adjectif ou l'expression. → généralement prudents ; complètement d'accord.",
         "Après le verbe en général. → Il parle rapidement. ; Il a parlé rapidement.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -62,6 +60,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
     { type: "heading", text: "Les adverbes", trans: { en: "Adverbs", ar: "الظروف", fa: "قیدها", ti: "ተወሳኺታት", uk: "Прислівники" } },
     {
       type: "text",
+      allBullets: true,
       text: "Les adverbes servent à raconter et exprimer vos impressions sur un événement ou une expérience.",
       transText: {
         en: "Adverbs help you tell a story and express your impressions about an event or experience.",
@@ -99,7 +98,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Adverbes de lieu",
       items: [
         "Pour se situer dans l'espace : {a}devant, derrière, dehors, ici, là, avant…{/a}",
@@ -115,7 +114,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Adverbes de temps",
       items: [
         "Pour situer dans le temps : {a}avant, après, hier, aujourd'hui, demain, ensuite, souvent, jamais, tôt, tard…{/a}",
@@ -131,7 +130,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Adverbes de manière",
       items: [
         "Pour exprimer une impression ou comparer : {a}bien, mal, vite, lentement, très, mieux, pire, comme…{/a}",
@@ -147,7 +146,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Adverbes de quantité",
       items: [
         "Pour parler d'une quantité ou d'une intensité : {a}trop, peu, assez, beaucoup, plus, moins, autant, très…{/a}",
@@ -163,7 +162,7 @@ export const A1_GR_ADVERBES_MENT: GrammarLesson = {
     },
     {
       type: "text",
-      noBulletItems: [0],
+      bulletItems: [1],
       label: "Adverbes d'affirmation et de négation",
       items: [
         "Pour exprimer l'accord ou le désaccord : {a}oui, non, peut-être, si, vraiment…{/a}",

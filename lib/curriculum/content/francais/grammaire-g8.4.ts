@@ -9,6 +9,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
     { type: "heading", text: "Les verbes pronominaux au passé composé", trans: { en: "Reflexive verbs in the passé composé", ar: "الأفعال الانعكاسية في الماضي المركب", fa: "افعال انعکاسی در گذشته مرکب", ti: "ናይ ሕሉፍ ጊዜ ርእሰ-ጠቓሚ ግሳት", uk: "Займенникові дієслова в passé composé" } },
     {
       type: "text",
+      allBullets: true,
       label: "Formation",
       transLabel: { en: "Formation", ar: "التكوين", fa: "ساختار", ti: "ቅርጺ", uk: "Утворення" },
       items: [
@@ -26,6 +27,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Le participe passé s'accorde avec le sujet réel lorsque le pronom réfléchi est complément direct.",
       transText: {
         en: "The past participle agrees with the real subject when the reflexive pronoun is a direct object.",
@@ -63,6 +65,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Négation",
       transLabel: { en: "Negation", ar: "النفي", fa: "نفی", ti: "ምኽፋል", uk: "Заперечення" },
       items: [

@@ -30,7 +30,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "un pantalon noir → une jupe noir{a}e{/a}",
         "une voiture rouge → des voitures roug{a}es{/a}",
       ],
-      noBulletItems: [0,1],
     },
     {
       type: "text",
@@ -66,7 +65,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "des chaises {a}orange{/a}",
         "des cafés {a}noisette{/a}",
       ],
-      noBulletItems: [0, 1, 2],
     },
     {
       type: "text",
@@ -100,7 +98,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "des robes violette{a}s{/a}",
         "des cheveux châtain{a}s{/a}",
       ],
-      noBulletItems: [0, 1, 2, 3],
     },
     {
       type: "text",
@@ -120,7 +117,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "des chaussures {a}vert{/a} foncé",
         "une robe {a}bleu{/a} ciel",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -140,7 +136,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "une veste {a}noir{/a} et {a}blanc{/a}",
         "une pull {a}jaune{/a} et {a}rouge{/a}",
       ],
-      noBulletItems: [0, 1],
     },
    
     {
@@ -156,7 +151,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "une demi-journée",
         "des demi-portions",
       ],
-      noBulletItems: [0, 1, 2],
       transText: {
         en: "Demi is {a}invariable{/a} before the noun",
         ar: "تبقى كلمة Demi {a}ثابتة{/a} قبل الاسم",
@@ -176,7 +170,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "une heure et demi{a}e{/a}",
         "trois jours et demi",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "Demi {a}agrees only in gender{/a} after the noun",
         ar: "كلمة Demi {a}تتوافق فقط في الجنس{/a} بعد الاسم",
@@ -213,7 +206,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "{a}dix{/a} élèves",
         "{a}quatre{/a} semaines",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -232,7 +224,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
       items: [
         "deux {a}mille{/a} francs",
       ],
-      noBulletItems: [0],
     },
     {
       type: "text",
@@ -253,7 +244,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "{a}cent{/a} jours",
         "quatre-{a}vingt{/a}-huit francs",
       ],
-      noBulletItems: [0, 1, 2],
     },
     {
       type: "text",
@@ -273,7 +263,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "cinq cent{a}s{/a} mètres",
         "quatre-vingt{a}s{/a} voitures",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -293,7 +282,6 @@ export const A1_GR_ADJ_ACCORDS_PART: GrammarLesson = {
         "deux million{a}s{/a} de livres",
         "six milliard{a}s{/a} d'habitants",
       ],
-      noBulletItems: [0, 1],
     },
   ],
   exercises: [

@@ -9,6 +9,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
     { type: "heading", text: "Si + présent → futur simple", trans: { en: "Si + present → simple future", ar: "Si + المضارع ← المستقبل البسيط", fa: "Si + حال ← آینده‌ی ساده", ti: "Si + ህሉው → ቀሊል መጻኢ", uk: "Si + теперішній → простий майбутній" } },
     {
       type: "text",
+      allBullets: true,
       label: "Structure",
       items: ["Condition : {a}si + présent{/a}.", "Conséquence : {a}futur simple{/a}.", "Si tu viens demain, nous mangerons ensemble."],
       transLabel: { en: "Structure", ar: "البنية", fa: "ساختار", ti: "ቅርጺ", uk: "Структура" },
@@ -22,6 +23,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "L'ordre des deux propositions peut changer : nous mangerons ensemble si tu viens demain.",
       transText: {
         en: "The order of the two clauses can change: nous mangerons ensemble si tu viens demain. (we will eat together if you come tomorrow).",
@@ -51,7 +53,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
         ],
       },
     },
-    { type: "text", label: "Élision avec il", items: ["si + il → {a}s'il{/a} : s'il pleut, nous resterons à la maison.", "On écrit si elle, si on ; « si ils » n'existe pas."],
+    { type: "text", allBullets: true, label: "Élision avec il", items: ["si + il → {a}s'il{/a} : s'il pleut, nous resterons à la maison.", "On écrit si elle, si on ; « si ils » n'existe pas."],
       transLabel: { en: "Elision with «il»", ar: "الحذف مع «il»", fa: "حذف با «il»", ti: "ምሕጻር ምስ «il»", uk: "Елізія з «il»" },
       transItems: {
         en: ["si + il becomes {a}s'il{/a}: s'il pleut, nous resterons à la maison. (if it rains, we will stay at home).", "We write «si elle», «si on»; «si ils» does not exist."],
@@ -121,6 +123,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
     { type: "heading", text: "Quand + futur", sub: true, accent: true, trans: { en: "Quand + future", ar: "quand + المستقبل", fa: "quand + آینده", ti: "quand + መጻኢ", uk: "Quand + майбутній" } },
     {
       type: "text",
+      allBullets: true,
       text: "En français, {a}quand{/a} suivi d'un futur exprime une action future certaine.",
       transText: {
         en: "In French, {a}quand{/a} followed by a future tense expresses a certain future action.",

@@ -17,7 +17,6 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
         "Exprimer un projet. → L'été prochain, je vais travailler dans un restaurant.",
         "Exprimer un événement immédiat. → Vite, on va rater le train ! ; Il va pleuvoir.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -27,9 +26,6 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
       type: "text",
       items: [
         "Formation : {a}aller{/a} au présent + infinitif.",
-      ],
-      noBulletItems: [
-        0,
       ],
     },
     {
@@ -83,7 +79,6 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
         "Verbe pronominal : le pronom se place devant l'infinitif. → Nous allons nous inscrire à la visite guidée.",
         "Négation : {a}ne… pas{/a} encadre {a}aller{/a}. → Je ne vais pas rester ici. ; On ne va pas s'installer en banlieue.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -102,6 +97,7 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       text: "Le futur proche exprime une action {a}prévue ou imminente{/a}.",
       transText: {
         en: "The near future expresses a {a}planned or imminent{/a} action.",
@@ -537,6 +533,7 @@ export const A1_GR_FUTUR_PROCHE: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "Quand utiliser le futur proche ?",
       items: [
         "Action prévue dans un futur proche : Je vais appeler demain.",

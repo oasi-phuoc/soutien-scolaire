@@ -17,7 +17,6 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
         "Opposition : souligner la différence entre deux faits. → On travaille le samedi {a}mais{/a} pas le dimanche.",
         "Concession : une cause n'a pas eu le résultat attendu. → Les salaires n'ont pas augmenté, {a}pourtant{/a}, l'entreprise a fait des bénéfices !",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -25,6 +24,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "mais",
       items: [
         "Oppose deux mots ou deux propositions.",
@@ -33,6 +33,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "par contre (courant) / en revanche (formel)",
       items: [
         "Opposition plus forte.",
@@ -41,6 +42,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "alors que + indicatif",
       items: [
         "Ajoute une idée de comparaison.",
@@ -49,6 +51,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "au lieu de + infinitif",
       items: [
         "Faire une chose à la place d'une autre.",
@@ -57,6 +60,7 @@ export const A1_GR_OPPOSITION_CONCESSION: GrammarLesson = {
     },
     {
       type: "text",
+      allBullets: true,
       label: "en fait",
       items: [
         "Oppose une idée à la réalité.",

@@ -30,7 +30,6 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "J'habite dans une maison {a}moderne{/a}.",
         "six milliard{a}s{/a} d'habitants",
       ],
-      noBulletItems: [0, 1],
     },
     {
       type: "text",
@@ -446,7 +445,6 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "les quatre nouveaux élèves français",
         "une grande maison blanche",
       ],
-      noBulletItems: [0, 1, 2],
     },
     {
       type: "text",
@@ -455,7 +453,6 @@ export const A1_GR_PLACE_ADJECTIF: GrammarLesson = {
         "une élection {a}présidentielle{/a} espagnole",
         "une voiture {a}électrique{/a} allemande",
       ],
-      noBulletItems: [0, 1],
       transText: {
         en: "The adjective placed closest to the noun generally specifies its main characteristic.",
         ar: "الصفة الأقرب إلى الاسم تحدد عادةً صفته الرئيسية.",

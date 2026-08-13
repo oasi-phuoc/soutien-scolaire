@@ -172,7 +172,6 @@ export const A1_GR_AVOIR: GrammarLesson = {
         uk: "{a}2.{/a} Робимо зв'язування звуків (liaison).",
       },
       items: ["O{li}n|a{/li}, nou{li}s|a{/li}vons, vou{li}s|a{/li}vez, il{li}s|o{/li}nt, elle{li}s|o{/li}nt."],
-      noBulletItems:[0],
     },
     {
       type: "text",
@@ -190,7 +189,6 @@ export const A1_GR_AVOIR: GrammarLesson = {
       },
       items: ["{s}Je ai{/s} 20 ans → {a}J'ai{/a} 20 ans."],
       inlineArrows: true,
-      noBulletItems:[0],
     },
   ],
   exercises: G1_EXERCISES["G1.3"](),

@@ -40,7 +40,6 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       items: [
         "Elle {a}se{/a} regarde dans le miroir.",
       ],
-      noBulletItems: [0],
     },
     {
       type: "heading",
@@ -183,7 +182,6 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         "Elle {s}se{/s} arrête → Elle {a}s'{/a}arrête.",
         "Ils {s}se{/s} embrassent → Ils {a}s'{/a}embrassent.",
       ],
-      noBulletItems: [0, 1, 2, 3],
     },
     {
       type: "text",
@@ -620,7 +618,6 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
           "Підмет + {a}ne{/a} + зворотний займенник + дієслово + {a}pas{/a}",
         ],
       },
-      noBulletItems: [0],
     },
     {
       type: "text",

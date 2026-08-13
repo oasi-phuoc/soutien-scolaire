@@ -17,7 +17,6 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
         "Les adjectifs indéfinis expriment en général une quantité : la totalité ou la pluralité. → J'ai vu tous les films de Jean-Luc Godard. ; J'ai vu plusieurs films de Jean-Luc Godard.",
         "Ils peuvent aussi exprimer la ressemblance ou la différence. → Ton ami et moi, nous avons les mêmes goûts.",
       ],
-      allBullets: true,
     },
     {
       type: "heading",
@@ -31,7 +30,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
         "tout le spectacle ; tous les spectacles ; toute la journée ; toutes ces chansons.",
         "{a}Tout le monde{/a} est suivi d'un verbe au singulier. → Tout le monde chante.",
       ],
-      noBulletItems: [1, 2],
+      bulletItems: [0],
     },
     {
       type: "text",
@@ -40,7 +39,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
         "{a}Chaque{/a} présente les éléments un par un. Il est invariable et suivi d'un nom singulier.",
         "Le chanteur a présenté chaque musicien de son groupe.",
       ],
-      noBulletItems: [1],
+      bulletItems: [0],
     },
     {
       type: "text",
@@ -49,7 +48,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
         "{a}Aucun{/a} / {a}aucune{/a} : nom singulier sans article, quantité zéro, toujours avec {a}ne{/a}.",
         "Il n'y a aucune fille dans le groupe de musiciens.",
       ],
-      noBulletItems: [1],
+      bulletItems: [0],
     },
     {
       type: "note",
@@ -92,7 +91,6 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
         "On ne prononce pas le {a}s{/a} final de {a}tous{/a} devant un nom. → Vous connaissez tous les artistes ?",
         "Liaison avec {a}quelques{/a} et {a}plusieurs{/a} devant une voyelle ou un h muet. → quelques artistes ; plusieurs artistes.",
       ],
-      allBullets: true,
     },
   ],
   exercises: [
