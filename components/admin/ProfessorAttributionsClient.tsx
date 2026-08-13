@@ -8,6 +8,7 @@ import {
   type ProfessorClassOption,
 } from "@/app/actions/suivi";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
 
 type DraftRow = {
   primaryClassId: string | null;
@@ -162,6 +163,7 @@ export function ProfessorAttributionsClient() {
   const [savedDrafts, setSavedDrafts] = useState<Record<string, DraftRow>>({});
   const [error, setError] = useState<string | null>(null);
   const [saveMsg, setSaveMsg] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const [isPending, startTransition] = useTransition();
 
   const classOptions = useMemo(
@@ -198,12 +200,14 @@ export function ProfessorAttributionsClient() {
     const res = await getProfessorAttributionsAction();
     if (!res.ok) {
       setError(res.error ?? "Erreur");
+      setLoading(false);
       return;
     }
     setProfessors(res.professors);
     setClasses(res.classes);
     applyServerRows(res.professors);
     setError(null);
+    setLoading(false);
   }, [applyServerRows]);
 
   useEffect(() => {
@@ -281,6 +285,8 @@ export function ProfessorAttributionsClient() {
       await reload();
     });
   }
+
+  if (loading) return <ChargementEnCours />;
 
   if (error) {
     return (

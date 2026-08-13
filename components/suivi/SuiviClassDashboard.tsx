@@ -10,6 +10,7 @@ import { StudentPersonalInfoCard, StudentInfoButton } from "@/components/suivi/S
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { PROGRESS_FILL } from "@/lib/suivi/progress-colors";
 import { formatPlacementScore, PLACEMENT_SUBJECT_MAX } from "@/lib/suivi/placement-best";
+import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
 
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
@@ -164,15 +165,7 @@ export function SuiviClassDashboard({
     setExpandedInfoId((id) => (id === studentId ? null : id));
   }
 
-  if (loading) {
-    return (
-      <div className="space-y-2 py-2 animate-pulse">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="h-10 rounded-lg bg-zinc-200/80 dark:bg-zinc-700/80" />
-        ))}
-      </div>
-    );
-  }
+  if (loading) return <ChargementEnCours />;
 
   if (error) return <p className="text-sm text-red-500">{error}</p>;
 
