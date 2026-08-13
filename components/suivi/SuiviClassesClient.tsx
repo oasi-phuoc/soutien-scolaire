@@ -11,12 +11,14 @@ import {
   type TeacherClassRow,
 } from "@/app/actions/suivi";
 import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
+import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
 
 export function SuiviClassesClient() {
   const router = useRouter();
   const [classes, setClasses] = useState<TeacherClassRow[]>([]);
   const [extraClasses, setExtraClasses] = useState<TeacherClassRow[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [searchStudents, setSearchStudents] = useState<SuiviSearchStudent[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -25,14 +27,17 @@ export function SuiviClassesClient() {
     const ctx = await getSuiviContextAction();
     if (!ctx) {
       setError("Non autorisé");
+      setLoading(false);
       return;
     }
     if (!ctx.hasAccess) {
       setError("Aucune classe affectée.");
+      setLoading(false);
       return;
     }
     setClasses(ctx.classes);
     setError(null);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -113,6 +118,8 @@ export function SuiviClassesClient() {
   function openClass(label: string) {
     router.push(`/suivi/classes/${encodeURIComponent(label)}`);
   }
+
+  if (loading) return <ChargementEnCours />;
 
   if (error) {
     return <p className="rounded-xl border border-dashed border-zinc-300 p-6 text-center text-sm text-zinc-500">{error}</p>;

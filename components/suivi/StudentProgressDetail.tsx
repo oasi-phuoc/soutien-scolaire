@@ -16,6 +16,7 @@ import {
 } from "@/lib/suivi/lesson-progress-views";
 import { PROGRESS_ACCENT, PROGRESS_FILL } from "@/lib/suivi/progress-colors";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
+import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
 
 function formatDuration(sec: number): string {
   const m = Math.floor(sec / 60);
@@ -281,15 +282,7 @@ export function StudentProgressDetail({
     ]).then(() => setLoading(false));
   }, [userId, hasInitialProgress]);
 
-  if (loading) {
-    return (
-      <div className="space-y-2 py-2 animate-pulse">
-        {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-12 rounded-lg bg-zinc-200/80 dark:bg-zinc-700/80" />
-        ))}
-      </div>
-    );
-  }
+  if (loading) return <ChargementEnCours compact />;
 
   const math = mathProgress(progress);
   const french = frenchProgress(progress);

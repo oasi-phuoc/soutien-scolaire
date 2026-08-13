@@ -7,6 +7,7 @@ import {
   type TeacherClassRow,
 } from "@/app/actions/suivi";
 import { CLASS_LEVELS, groupClassesByLevel } from "@/lib/suivi/class-levels";
+import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
 
 function isRealClassId(classId: string) {
   return !classId.startsWith("label:");
@@ -30,6 +31,7 @@ function setsEqual(a: Set<string>, b: Set<string>) {
 
 export function SuiviClassAssignmentsClient() {
   const [classes, setClasses] = useState<TeacherClassRow[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [saveMsg, setSaveMsg] = useState<string | null>(null);
   const [draftPrimaryId, setDraftPrimaryId] = useState<string | null>(null);
@@ -51,11 +53,13 @@ export function SuiviClassAssignmentsClient() {
     const res = await getAttributionClassesAction();
     if (!res.ok) {
       setError(res.error ?? "Erreur");
+      setLoading(false);
       return;
     }
     setClasses(res.classes);
     applyServerState(res.classes);
     setError(null);
+    setLoading(false);
   }, [applyServerState]);
 
   useEffect(() => {
@@ -100,6 +104,8 @@ export function SuiviClassAssignmentsClient() {
       await reload();
     });
   }
+
+  if (loading) return <ChargementEnCours />;
 
   if (error) {
     return (

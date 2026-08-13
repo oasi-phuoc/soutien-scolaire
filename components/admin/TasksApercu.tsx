@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { TaskRow, TaskStudentStatus } from "@/app/actions/tasks";
 import { deleteTaskAction, getTaskStudentsAction, updateTaskAction } from "@/app/actions/tasks";
 import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
+import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
 
 const TASKS_TABLE_PAGE_SIZE = 30;
 
@@ -169,7 +170,7 @@ function TaskDetailPanel({ task, onClose, onDeleted }: { task: TaskRow; onClose:
         <p className="mb-3 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
           Avancement — {task.done_count}/{task.total_students} élève{task.total_students !== 1 ? "s" : ""} terminé{task.done_count !== 1 ? "s" : ""}
         </p>
-        {loading && <p className="text-xs text-zinc-400">Chargement…</p>}
+        {loading && <ChargementEnCours compact />}
         {loadError && <p className="text-xs text-red-500">{loadError}</p>}
         {students !== null && students.length === 0 && (
           <p className="text-xs italic text-zinc-400">Aucun élève assigné.</p>
