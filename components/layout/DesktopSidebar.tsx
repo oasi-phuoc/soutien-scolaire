@@ -253,6 +253,33 @@ export function DesktopSidebar({
     },
   ];
 
+  const adminMenuOpen =
+    adminOpen &&
+    !pathname.startsWith("/admin/impression") &&
+    !pathname.startsWith("/impressions");
+
+  const adminSubs: SubLink[] = [
+    {
+      href: "/admin",
+      label: "Gestion des comptes",
+      active: pathname === "/admin" || pathname.startsWith("/admin/eleves"),
+    },
+    {
+      href: "/admin/attribution-professeurs",
+      label: "Professeurs",
+      active: pathname.startsWith("/admin/attribution-professeurs"),
+    },
+    ...(pedagogicNav.canEditContent
+      ? [
+          {
+            href: "/admin/contenu",
+            label: "Édition de contenu",
+            active: pathname.startsWith("/admin/contenu"),
+          },
+        ]
+      : []),
+  ];
+
   const suiviSubs: SubLink[] = [
     ...(inSuiviClass
       ? suiviClasses.map((c) => ({
@@ -397,32 +424,14 @@ export function DesktopSidebar({
                 type="button"
                 onClick={() => go("/admin")}
                 className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-                  adminOpen && !pathname.startsWith("/admin/impression") && !pathname.startsWith("/impressions")
+                  adminMenuOpen
                     ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
                     : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
                 }`}
               >
                 Admin
               </button>
-              {adminOpen &&
-                !pathname.startsWith("/admin/impression") &&
-                !pathname.startsWith("/impressions") &&
-                renderSubs([
-                  {
-                    href: "/admin/attribution-professeurs",
-                    label: "Professeurs",
-                    active: pathname.startsWith("/admin/attribution-professeurs"),
-                  },
-                  ...(pedagogicNav.canEditContent
-                    ? [
-                        {
-                          href: "/admin/contenu",
-                          label: "Édition de contenu",
-                          active: pathname.startsWith("/admin/contenu"),
-                        },
-                      ]
-                    : []),
-                ])}
+              {adminMenuOpen && renderSubs(adminSubs)}
             </div>
           </>
         )}
