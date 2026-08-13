@@ -127,8 +127,27 @@ export async function signUpAction(
 
   if (!created) return { ok: false, reason: "Cet identifiant est déjà utilisé, veuillez contacter l'administrateur." };
 
-  // Enregistre la classe dans school_classes (HSS inclus) pour le suivi pédagogique.
+  // Le trigger handle_new_user peut être absent / ancien en prod : on écrit
+  // prénom, nom, classe et login_id explicitement dans profiles.
   if (createdUserId) {
+    const profileFields = {
+      nom,
+      prenom,
+      classe,
+      langue,
+      login_id: loginId,
+      ...(adresse ? { adresse } : {}),
+      ...(npa ? { npa } : {}),
+      ...(localite ? { localite } : {}),
+      ...(telephone ? { telephone } : {}),
+    };
+    const { error: upsertErr } = await svc.from("profiles").upsert(
+      { id: createdUserId, ...profileFields },
+      { onConflict: "id" },
+    );
+    if (upsertErr) {
+      await svc.from("profiles").update(profileFields).eq("id", createdUserId);
+    }
     await ensureSchoolClassForLabel(svc, classe, createdUserId);
   } else {
     await ensureSchoolClassForLabel(svc, classe);

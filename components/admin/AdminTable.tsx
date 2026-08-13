@@ -19,6 +19,7 @@ import {
   currentSchoolYearStart,
   previousSchoolYearLabel,
 } from "@/lib/school-year";
+import { formatPersonDisplayName } from "@/lib/auth/identifier";
 
 /** Première page du tableau comptes — le reste via « Afficher plus ». */
 const ADMIN_TABLE_PAGE_SIZE = 40;
@@ -510,8 +511,13 @@ export function AdminTable({
   const filtered = rows.filter(r => {
     if (filterClasse && r.classe !== filterClasse) return false;
     if (!searchLc) return true;
-    const name = [r.prenom, r.nom].filter(Boolean).join(" ").toLowerCase();
-    return name.includes(searchLc) || (r.email ?? "").toLowerCase().includes(searchLc) || (r.classe ?? "").toLowerCase().includes(searchLc);
+    const name = formatPersonDisplayName(r.prenom, r.nom, r.login_id, r.email).toLowerCase();
+    return (
+      name.includes(searchLc) ||
+      (r.email ?? "").toLowerCase().includes(searchLc) ||
+      (r.login_id ?? "").toLowerCase().includes(searchLc) ||
+      (r.classe ?? "").toLowerCase().includes(searchLc)
+    );
   });
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "math") return mathPct(b.progress_data).pct - mathPct(a.progress_data).pct;
@@ -527,8 +533,8 @@ export function AdminTable({
       const pb = b.placement_combined?.total ?? b.placement_test_best?.points ?? -1;
       return pb - pa;
     }
-    const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
-    const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
+    const na = formatPersonDisplayName(a.prenom, a.nom, a.login_id, a.email).toLowerCase();
+    const nb = formatPersonDisplayName(b.prenom, b.nom, b.login_id, b.email).toLowerCase();
     return na.localeCompare(nb, "fr");
   });
 
@@ -736,7 +742,7 @@ export function AdminTable({
             {sorted.length === 0 ? (
               <tr><td colSpan={10} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
             ) : visibleRows.map(row => {
-              const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
+              const fullName = formatPersonDisplayName(row.prenom, row.nom, row.login_id, row.email) || "—";
               const math = mathPct(row.progress_data);
               const french = frenchPct(row.progress_data);
               const lecture = lecturePct(row.progress_data);
