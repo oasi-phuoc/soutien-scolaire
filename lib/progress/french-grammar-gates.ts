@@ -1,9 +1,9 @@
 /**
  * Portails de progression grammaire (phases A1 / A2 / B1 + bilans).
  *
- * - G1 → G5 : déblocage séquentiel des modules (G2 après G1 terminé, etc.) ;
+ * - G1 → G5 : modules ouverts dès le départ (G1.1 … G5.1) ;
  *   dans chaque module, leçons à la suite (Gx.1 puis Gx.2…).
- * - G6 et G7 : 1ʳᵉ leçon débloquée par défaut ; suite séquentielle dans le module.
+ * - G6 (bilan A1) : après G1–G5 terminés. G7 : après G6 terminé.
  * - G8+ : phase A2 après G7 terminé ; bilans G13 / G18 comme avant.
  */
 
@@ -11,11 +11,8 @@ export const GRAMMAR_BILAN_MODULES = ["G6", "G13", "G18"] as const;
 
 export type GrammarBilanModule = (typeof GRAMMAR_BILAN_MODULES)[number];
 
-/** Modules G1–G5 : progression linéaire module par module. */
-export const GRAMMAR_SEQUENTIAL_MODULES = ["G1", "G2", "G3", "G4", "G5"] as const;
-
-/** Modules dont la 1ʳᵉ leçon est ouverte sans prérequis de bilan. */
-export const GRAMMAR_ALWAYS_OPEN_FIRST = ["G6", "G7"] as const;
+/** Modules dont la 1ʳᵉ leçon est ouverte à la création du compte. */
+export const GRAMMAR_OPEN_AT_START = ["G1", "G2", "G3", "G4", "G5"] as const;
 
 /** Modules de contenu avant chaque bilan (hors le bilan lui-même). */
 export const GRAMMAR_PHASES: ReadonlyArray<{
@@ -91,23 +88,25 @@ export function isGrammarModuleUnlocked(
 ): boolean {
   if (!moduleId.startsWith("G")) return true;
 
-  // G1–G5 : séquentiel (G1 ouvert ; G2 après G1 terminé ; …)
-  const seqIdx = (GRAMMAR_SEQUENTIAL_MODULES as readonly string[]).indexOf(moduleId);
-  if (seqIdx >= 0) {
-    for (let i = 0; i < seqIdx; i++) {
-      if (!moduleDone(GRAMMAR_SEQUENTIAL_MODULES[i]!, completedSlugs, moduleLessonSlugs)) {
-        return false;
-      }
-    }
+  // G1–G5 : ouverts dès le départ (Gx.1) ; suite séquentielle dans le module
+  if ((GRAMMAR_OPEN_AT_START as readonly string[]).includes(moduleId)) {
     return true;
   }
 
-  // G6 / G7 : première leçon ouverte par défaut
-  if ((GRAMMAR_ALWAYS_OPEN_FIRST as readonly string[]).includes(moduleId)) {
-    return true;
+  // G6 (bilan A1) : après G1–G5 terminés
+  const phase1 = GRAMMAR_PHASES[0]!;
+  if (phase1.bilanModule === moduleId) {
+    return phase1.contentModules.every((id) =>
+      moduleDone(id, completedSlugs, moduleLessonSlugs),
+    );
   }
 
-  // Phase A2 (G8–G12) : après G7 terminé (G6 n'est plus un portail bloquant)
+  // G7 : début de la phase A2, après le bilan G6
+  if (moduleId === "G7") {
+    return moduleDone("G6", completedSlugs, moduleLessonSlugs);
+  }
+
+  // Phase A2 (G8–G12) : après G7 terminé
   const phase2 = GRAMMAR_PHASES[1]!;
   if (phase2.contentModules.includes(moduleId) && moduleId !== "G7") {
     return moduleDone("G7", completedSlugs, moduleLessonSlugs);

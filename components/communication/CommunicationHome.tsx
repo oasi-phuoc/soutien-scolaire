@@ -2,7 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
+import {
+  COMM_MODULES,
+  isCommModuleUnlocked,
+  normalizeCommunicationProgress,
+} from "@/lib/curriculum/communication-data";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { resolveCommModules } from "@/lib/content-editor/catalog";
 import {
@@ -98,7 +102,7 @@ export function CommunicationModuleList({
   }, []);
 
   const modulesView = useMemo(() => {
-    let openedInProgress = false;
+    let previousAllDone = true;
     return commModules.map((m) => {
       const visibleSubs = m.submodules.filter((s) => {
         if (!s.available && !isAdmin) return false;
@@ -106,8 +110,8 @@ export function CommunicationModuleList({
       });
       const completedCount = visibleSubs.filter((s) => completed[s.id]).length;
       const allDone = completedCount === visibleSubs.length && visibleSubs.length > 0;
-      const sequentialOk = unlockAll || allDone || !openedInProgress;
-      if (visibleSubs.length > 0 && !allDone) openedInProgress = true;
+      const sequentialOk = isCommModuleUnlocked(m.id, previousAllDone, unlockAll);
+      if (visibleSubs.length > 0) previousAllDone = allDone;
       const moduleAccessible = frenchOk && visibleSubs.length > 0 && sequentialOk;
       const moduleState: "completed" | "in_progress" | "locked" = !moduleAccessible
         ? "locked"

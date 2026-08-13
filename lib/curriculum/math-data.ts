@@ -265,6 +265,10 @@ export const MATH_GEOMETRY_TAB_ORDER = [
   ...MATH_MODULES.filter((m) => m.branch === "geometry").map((m) => m.id),
 ];
 
+/** Chaîne séquentielle G1→G5. G6 et G7 s’ouvrent en parallèle (G6.1, G7.1). */
+export const MATH_GEOMETRY_SEQUENTIAL_IDS = ["G1", "G2", "G3", "G4", "G5"] as const;
+export const MATH_GEOMETRY_PARALLEL_OPEN_IDS = ["G6", "G7"] as const;
+
 /** Ancienne numérotation A2–A12 → nouvelle A3–A13 (après insertion du nouvel A2). */
 /** Ancienne numérotation G6 → G7 (après insertion du G6 « Se repérer »). */
 export const GEOMETRY_LEGACY_ID_MAP: Record<string, string> = {

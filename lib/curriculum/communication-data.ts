@@ -362,3 +362,23 @@ export function normalizeCommunicationProgress(progress: Record<string, boolean>
 export function getCommModule(id: string): CommunicationModule | undefined {
   return COMM_MODULES.find((m) => m.id === id);
 }
+
+/** Modules dont la 1ʳᵉ leçon (Ex.1) est ouverte à la création du compte. */
+export const COMM_OPEN_AT_START = ["E1", "E2", "E3", "E4", "E5", "E6", "E7"] as const;
+
+export function isCommModuleOpenAtStart(moduleId: string): boolean {
+  return (COMM_OPEN_AT_START as readonly string[]).includes(moduleId);
+}
+
+/**
+ * E1–E7 ouverts d’emblée ; E8+ si le module précédent du catalogue est terminé.
+ */
+export function isCommModuleUnlocked(
+  moduleId: string,
+  previousModuleAllDone: boolean,
+  unlockAll = false,
+): boolean {
+  if (unlockAll) return true;
+  if (isCommModuleOpenAtStart(moduleId)) return true;
+  return previousModuleAllDone;
+}
