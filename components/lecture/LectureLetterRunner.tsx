@@ -18,6 +18,7 @@ import {
   DESKTOP_WORD_SPOTTER_COUNT,
 } from "./WordSpotter";
 import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
+import { SoundSyllablePicker, type SoundSyllablePickerHandle } from "./SoundSyllablePicker";
 import { SyllableGrid } from "./SyllableGrid";
 import { LetterPronounce, type LetterPronounceHandle } from "./LetterPronounce";
 import { ComplexGraphemePronounce, type ComplexGraphemePronounceHandle } from "./ComplexGraphemePronounce";
@@ -84,6 +85,8 @@ function getSteps(data: LetterData): Step[] {
       { key: "complex-word-lower", label: "Mots (min)" },
       { key: "sound-audio", label: "Audio" },
       { key: "sound-image", label: "Images" },
+      { key: "sound-syllable-audio", label: "Syllabes audio" },
+      { key: "sound-syllable-image", label: "Syllabes images" },
       {
         key: "complex-syllables-cv",
         label: usesGraphemeVowelSyllables(data.letterLower) ? "Son complexe + voyelle" : "Syllabes",
@@ -128,6 +131,8 @@ function getSteps(data: LetterData): Step[] {
       { key: "word-lower", label: "Mots (min)" },
       { key: "sound-audio", label: "Audio" },
       { key: "sound-image", label: "Images" },
+      { key: "sound-syllable-audio", label: "Syllabes audio" },
+      { key: "sound-syllable-image", label: "Syllabes images" },
       { key: "pronounce", label: "Prononcer" },
       { key: "eval", label: "Évaluation" },
     ];
@@ -147,6 +152,8 @@ function getSteps(data: LetterData): Step[] {
       { key: "sound-audio-s", label: "Audio /s/" },
       { key: "sound-image-s", label: "Images /s/" },
     ] : []),
+    { key: "sound-syllable-audio", label: "Syllabes audio" },
+    { key: "sound-syllable-image", label: "Syllabes images" },
     { key: "syllables-cv", label: "Syllabes" },
     { key: "syllables-vc", label: "Syllabes inverses" },
     { key: "syll-2", label: "2 syllabes" },
@@ -785,6 +792,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
+  const soundSyllableRef = useRef<SoundSyllablePickerHandle>(null);
   const pronounceRef = useRef<LetterPronounceHandle | ComplexGraphemePronounceHandle>(null);
   const pronounceGridRef = useRef<{ reset: () => void; validate?: () => void }>(null);
 
@@ -806,6 +814,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const isComplexWordStep = step.key === "complex-word-upper" || step.key === "complex-word-lower";
   const isSoundImageStep = step.key === "sound-image" || step.key === "sound-image-s";
   const isSoundAudioStep = step.key === "sound-audio" || step.key === "sound-audio-s";
+  const isSoundSyllableStep = step.key === "sound-syllable-audio" || step.key === "sound-syllable-image";
   const isPronounceStep = step.key === "pronounce" || step.key === "pronounce-complex";
   const isEvalStep = step.key === "eval";
   const isWordEvalL6L8 = isWordEvalStep && (data.type === "monosyllable" || data.type === "multisyllable");
@@ -821,7 +830,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
     data.type === "syllable" ||
     (data.type === "multisyllable" && !isWordEvalL6L8) ||
     (data.type === "monosyllable" && !isWordEvalL6L8);
-  const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
+  const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep || isSoundSyllableStep;
   const showRefreshButton =
     showExerciseButtons || isPronounceStep || isPronounceGridStep;
 
@@ -829,6 +838,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
     if (isGridStep || isComplexGridStep) gridRef.current?.reset();
     else if (isWordStep || isComplexWordStep) wordRef.current?.reset();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
+    else if (isSoundSyllableStep) soundSyllableRef.current?.reset();
     else if (isPronounceStep) pronounceRef.current?.reset();
     else if (isPronounceGridStep) pronounceGridRef.current?.reset();
   }
@@ -836,6 +846,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
     if (isGridStep || isComplexGridStep) gridRef.current?.validate();
     else if (isWordStep || isComplexWordStep) wordRef.current?.validate();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.validate();
+    else if (isSoundSyllableStep) soundSyllableRef.current?.validate();
     else if (isWordEvalL6L8) pronounceGridRef.current?.validate?.();
   }
 
@@ -1085,6 +1096,10 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
         case "sound-audio":
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
+        case "sound-syllable-audio":
+          return <SoundSyllablePicker key={k} ref={soundSyllableRef} phonemes={[data.phoneme]} mode="audio" />;
+        case "sound-syllable-image":
+          return <SoundSyllablePicker key={k} ref={soundSyllableRef} phonemes={[data.phoneme]} mode="image" />;
         case "complex-syllables-cv":
           return (
             <SyllableGrid
@@ -1148,6 +1163,10 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
         return <SoundPicker key={k} ref={soundImageRef} phoneme="/s/" mode="image" />;
       case "sound-audio-s":
         return <SoundPicker key={k} ref={soundImageRef} phoneme="/s/" mode="audio" />;
+      case "sound-syllable-audio":
+        return <SoundSyllablePicker key={k} ref={soundSyllableRef} phonemes={[data.phoneme]} mode="audio" />;
+      case "sound-syllable-image":
+        return <SoundSyllablePicker key={k} ref={soundSyllableRef} phonemes={[data.phoneme]} mode="image" />;
       case "syllables-cv":
         if (data.type !== "consonant") return null;
         return (

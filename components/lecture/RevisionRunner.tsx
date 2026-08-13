@@ -7,6 +7,7 @@ import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { RevisionLetterGrid, type RevisionLetterGridHandle } from "./RevisionLetterGrid";
 import { RevisionWordSpotter, type RevisionWordSpotterHandle } from "./RevisionWordSpotter";
 import { RevisionSoundStep, type RevisionSoundStepHandle } from "./RevisionSoundStep";
+import { SoundSyllablePicker, type SoundSyllablePickerHandle } from "./SoundSyllablePicker";
 import { RevisionPronounce, type RevisionPronounceHandle } from "./RevisionPronounce";
 import { RevisionEvaluation } from "./RevisionEvaluation";
 import {
@@ -34,6 +35,8 @@ const TRAINING_STEPS: Step[] = [
   { key: "word-lower", label: "Mots min" },
   { key: "sound-audio", label: "Audio" },
   { key: "sound-image", label: "Images" },
+  { key: "sound-syllable-audio", label: "Syllabes audio" },
+  { key: "sound-syllable-image", label: "Syllabes images" },
   { key: "pronounce", label: "Prononcer" },
   { key: "pronounce-long", label: "Prononcer 3-4" },
 ];
@@ -62,6 +65,7 @@ export function RevisionRunner({ data }: Props) {
   const gridRef = useRef<RevisionLetterGridHandle>(null);
   const wordRef = useRef<RevisionWordSpotterHandle>(null);
   const soundRef = useRef<RevisionSoundStepHandle>(null);
+  const soundSyllableRef = useRef<SoundSyllablePickerHandle>(null);
   const pronounceRef = useRef<RevisionPronounceHandle>(null);
 
   const step = STEPS[stepIdx]!;
@@ -71,8 +75,9 @@ export function RevisionRunner({ data }: Props) {
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = step.key === "word-upper" || step.key === "word-lower";
   const isSoundStep = step.key === "sound-image" || step.key === "sound-audio";
+  const isSoundSyllableStep = step.key === "sound-syllable-audio" || step.key === "sound-syllable-image";
   const isPronounceStep = step.key === "pronounce" || step.key === "pronounce-long";
-  const showExerciseButtons = isGridStep || isWordStep || isSoundStep || isPronounceStep;
+  const showExerciseButtons = isGridStep || isWordStep || isSoundStep || isSoundSyllableStep || isPronounceStep;
 
   const soundAudioWords = useMemo(() => {
     void soundRefreshSeed;
@@ -105,6 +110,8 @@ export function RevisionRunner({ data }: Props) {
     else if (isSoundStep) {
       setSoundRefreshSeed((s) => s + 1);
       setResetKey((k) => k + 1);
+    } else if (isSoundSyllableStep) {
+      soundSyllableRef.current?.reset();
     } else if (isPronounceStep) {
       setPronounceRefreshSeed((s) => s + 1);
       setResetKey((k) => k + 1);
@@ -115,6 +122,7 @@ export function RevisionRunner({ data }: Props) {
     if (isGridStep) gridRef.current?.validate();
     else if (isWordStep) wordRef.current?.validate();
     else if (isSoundStep) soundRef.current?.validate();
+    else if (isSoundSyllableStep) soundSyllableRef.current?.validate();
   }
 
   function goBack() {
@@ -208,6 +216,24 @@ export function RevisionRunner({ data }: Props) {
             phonemeA={data.phonemeA}
             phonemeB={data.phonemeB}
             words={soundImageWords}
+            mode="image"
+          />
+        );
+      case "sound-syllable-audio":
+        return (
+          <SoundSyllablePicker
+            key={k}
+            ref={soundSyllableRef}
+            phonemes={[data.phonemeA, data.phonemeB]}
+            mode="audio"
+          />
+        );
+      case "sound-syllable-image":
+        return (
+          <SoundSyllablePicker
+            key={k}
+            ref={soundSyllableRef}
+            phonemes={[data.phonemeA, data.phonemeB]}
             mode="image"
           />
         );

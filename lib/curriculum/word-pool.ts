@@ -5,7 +5,7 @@ import graphemePoolsData from "./grapheme-word-pools-data.json";
 import lectureImageWordItemsData from "./lecture-image-word-items.json";
 import revisionBisyllablePoolsData from "./lecture-revision-bisyllable-pools.json";
 import pronouncePoolsData from "./lecture-pronounce-pools.json";
-import { isPedagogicBisyllable, wordToComplexPronStep } from "./syllabify";
+import { isPedagogicBisyllable, splitWordSyllables, wordToComplexPronStep } from "./syllabify";
 import { TRISYLLABLE_WORDS, QUADRISYLLABLE_WORDS, type LongPronounceWord } from "./lecture-long-pronounce";
 import type { PronStep } from "./lecture-data";
 
@@ -1013,6 +1013,90 @@ export function randomSoundItems(phoneme: string, n = 16, forImages = false): Wo
   const yCount = Math.min(Math.round(n * 0.4) + 1, yes.length);
   const nCount = Math.min(n - yCount, no.length);
   return shuffle([...yes.slice(0, yCount), ...no.slice(0, nCount)]);
+}
+
+export type SoundSyllableItem = {
+  label: string;
+  /** True for each syllable that contains at least one of the target phonemes. */
+  targets: boolean[];
+};
+
+function normalizePhonemeKey(phoneme: string): string {
+  const trimmed = phoneme.trim();
+  if (!trimmed) return trimmed;
+  return trimmed.startsWith("/") ? trimmed : `/${trimmed}/`;
+}
+
+let knownSyllableMap: Map<string, string[]> | null = null;
+
+function knownSyllableSplits(): Map<string, string[]> {
+  if (knownSyllableMap) return knownSyllableMap;
+  const map = new Map<string, string[]>();
+  const add = (word: string, syllable: string) => {
+    const parts = syllable.split("-").filter(Boolean);
+    if (parts.length >= 2) map.set(word.toLowerCase(), parts);
+  };
+  for (const steps of Object.values(LETTER_PRONOUNCE_POOLS)) {
+    for (const step of steps) add(step.word, step.syllable);
+  }
+  for (const entry of [...TRISYLLABLE_WORDS, ...QUADRISYLLABLE_WORDS]) {
+    add(entry.word, entry.syllable);
+  }
+  knownSyllableMap = map;
+  return map;
+}
+
+/** Syllabes pédagogiques d'un mot (découpage connu, sinon heuristique CP). */
+export function syllablesOf(word: string): string[] {
+  return knownSyllableSplits().get(word.toLowerCase()) ?? splitWordSyllables(word);
+}
+
+function syllableHasPhoneme(syllable: string, phoneme: string): boolean {
+  return phonemesFromFrenchGraphemes(syllable).has(normalizePhonemeKey(phoneme));
+}
+
+function soundSyllableTargets(word: string, phonemes: string[]): boolean[] | null {
+  const syllables = syllablesOf(word);
+  if (syllables.length < 2 || syllables.length > 4) return null;
+  const keys = phonemes.map(normalizePhonemeKey);
+  const targets = syllables.map((syl) => keys.some((p) => syllableHasPhoneme(syl, p)));
+  if (!targets.some(Boolean)) return null;
+  return targets;
+}
+
+/**
+ * Mots de 2–4 syllabes contenant le(s) phonème(s) : l'élève coche la/les
+ * case(s) correspondant à la syllabe où le son s'entend.
+ */
+export function randomSoundSyllableItems(
+  phonemes: string[],
+  n = 9,
+  forImages = false,
+): SoundSyllableItem[] {
+  const labels = new Set<string>();
+  for (const item of allWordItems()) {
+    if (!isLectureSoundPoolWord(item.label)) continue;
+    if (forImages && !hasLectureWordImage(item.label)) continue;
+    const has = phonemes.some((p) => wordHasPhoneme(item, normalizePhonemeKey(p)));
+    if (has) labels.add(item.label);
+  }
+  for (const [word] of knownSyllableSplits()) {
+    if (forImages && !hasLectureWordImage(word)) continue;
+    if (!isLectureSoundPoolWord(word)) continue;
+    const item: WordItem = { label: word, phonemes: teachingPhonemes(word) };
+    if (phonemes.some((p) => wordHasPhoneme(item, normalizePhonemeKey(p)))) {
+      labels.add(word);
+    }
+  }
+
+  const pool: SoundSyllableItem[] = [];
+  for (const label of labels) {
+    const targets = soundSyllableTargets(label, phonemes);
+    if (!targets) continue;
+    pool.push({ label, targets });
+  }
+
+  return shuffle(pool).slice(0, Math.min(n, pool.length));
 }
 
 function lectureRevisionSoundItems(
