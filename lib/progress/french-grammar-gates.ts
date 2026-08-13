@@ -1,28 +1,36 @@
 /**
  * Portails de progression grammaire (phases A1 / A2 / B1 + bilans).
  *
- * - G1 → G5 : modules ouverts dès le départ (G1.1 … G5.1) ;
- *   dans chaque module, leçons à la suite (Gx.1 puis Gx.2…).
- * - G6 (bilan A1) : après G1–G5 terminés. G7 : après G6 terminé.
- * - G8+ : phase A2 après G7 terminé ; bilans G13 / G18 comme avant.
+ * - G1 → G5 : ouverts dès le départ (G1.1 … G5.1) ; leçons suivantes dans le module.
+ * - G6 (bilan A1) : après G1–G5 entièrement validés.
+ * - Après G6.1 validé : G8.1 … G12.1 (G7.1 aussi, hors barème du bilan suivant).
+ * - G13 (bilan A2) : après G8–G12 entièrement validés.
+ * - Après G13.1 validé : G14.1 … G17.1.
+ * - G18 (bilan B1) : après G14–G17 entièrement validés.
  */
 
 export const GRAMMAR_BILAN_MODULES = ["G6", "G13", "G18"] as const;
 
 export type GrammarBilanModule = (typeof GRAMMAR_BILAN_MODULES)[number];
 
-/** Modules dont la 1ʳᵉ leçon est ouverte à la création du compte. */
-export const GRAMMAR_OPEN_AT_START = ["G1", "G2", "G3", "G4", "G5"] as const;
-
 /** Modules de contenu avant chaque bilan (hors le bilan lui-même). */
 export const GRAMMAR_PHASES: ReadonlyArray<{
   contentModules: readonly string[];
   bilanModule: GrammarBilanModule;
+  /** Ouverts avec la vague, sans conditionner le bilan. */
+  extraOpenModules?: readonly string[];
 }> = [
   { contentModules: ["G1", "G2", "G3", "G4", "G5"], bilanModule: "G6" },
-  { contentModules: ["G7", "G8", "G9", "G10", "G11", "G12"], bilanModule: "G13" },
+  {
+    contentModules: ["G8", "G9", "G10", "G11", "G12"],
+    bilanModule: "G13",
+    extraOpenModules: ["G7"],
+  },
   { contentModules: ["G14", "G15", "G16", "G17"], bilanModule: "G18" },
 ];
+
+/** Modules dont la 1ʳᵉ leçon est ouverte à la création du compte. */
+export const GRAMMAR_OPEN_AT_START = GRAMMAR_PHASES[0]!.contentModules;
 
 export function grammarModuleIdFromCode(code: string): string {
   const m = /^(G\d+)/.exec(code.trim());
@@ -77,8 +85,17 @@ function moduleDone(
   return areGrammarLessonsComplete(moduleLessonSlugs.get(id) ?? [], completedSlugs);
 }
 
+function firstLessonDone(
+  id: string,
+  completedSlugs: ReadonlySet<string>,
+  moduleLessonSlugs: ReadonlyMap<string, readonly string[]>,
+): boolean {
+  const first = (moduleLessonSlugs.get(id) ?? [])[0];
+  return Boolean(first && completedSlugs.has(first));
+}
+
 /**
- * Un module est accessible (affiche Gx.1) selon les règles de phase / séquence.
+ * Un module est accessible (affiche Gx.1) selon les règles de phase / bilan.
  * `moduleLessonSlugs` : slugs de chaque module Gx → leçons de ce module.
  */
 export function isGrammarModuleUnlocked(
@@ -88,48 +105,29 @@ export function isGrammarModuleUnlocked(
 ): boolean {
   if (!moduleId.startsWith("G")) return true;
 
-  // G1–G5 : ouverts dès le départ (Gx.1) ; suite séquentielle dans le module
-  if ((GRAMMAR_OPEN_AT_START as readonly string[]).includes(moduleId)) {
-    return true;
+  for (let i = 0; i < GRAMMAR_PHASES.length; i++) {
+    const phase = GRAMMAR_PHASES[i]!;
+    const extras = phase.extraOpenModules ?? [];
+    const inWave =
+      phase.contentModules.includes(moduleId) || extras.includes(moduleId);
+
+    if (inWave) {
+      if (i === 0) return true;
+      return firstLessonDone(
+        GRAMMAR_PHASES[i - 1]!.bilanModule,
+        completedSlugs,
+        moduleLessonSlugs,
+      );
+    }
+
+    if (phase.bilanModule === moduleId) {
+      return phase.contentModules.every((id) =>
+        moduleDone(id, completedSlugs, moduleLessonSlugs),
+      );
+    }
   }
 
-  // G6 (bilan A1) : après G1–G5 terminés
-  const phase1 = GRAMMAR_PHASES[0]!;
-  if (phase1.bilanModule === moduleId) {
-    return phase1.contentModules.every((id) =>
-      moduleDone(id, completedSlugs, moduleLessonSlugs),
-    );
-  }
-
-  // G7 : début de la phase A2, après le bilan G6
-  if (moduleId === "G7") {
-    return moduleDone("G6", completedSlugs, moduleLessonSlugs);
-  }
-
-  // Phase A2 (G8–G12) : après G7 terminé
-  const phase2 = GRAMMAR_PHASES[1]!;
-  if (phase2.contentModules.includes(moduleId) && moduleId !== "G7") {
-    return moduleDone("G7", completedSlugs, moduleLessonSlugs);
-  }
-  if (phase2.bilanModule === moduleId) {
-    return phase2.contentModules.every((id) =>
-      moduleDone(id, completedSlugs, moduleLessonSlugs),
-    );
-  }
-
-  // Phase B1 (G14–G17) : après bilan G13
-  const phase3 = GRAMMAR_PHASES[2]!;
-  if (phase3.contentModules.includes(moduleId)) {
-    return moduleDone("G13", completedSlugs, moduleLessonSlugs);
-  }
-  if (phase3.bilanModule === moduleId) {
-    return phase3.contentModules.every((id) =>
-      moduleDone(id, completedSlugs, moduleLessonSlugs),
-    );
-  }
-
-  // Module inconnu : ne pas bloquer
-  return true;
+  return false;
 }
 
 /**

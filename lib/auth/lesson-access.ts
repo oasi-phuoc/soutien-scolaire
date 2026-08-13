@@ -2,8 +2,9 @@
  * Plafonds et helpers pour l'accès complet / partiel aux leçons.
  *
  * Parcours élève par défaut (aucun flag enseignant) :
- *   géométrie G1.1 + G6.1 + G7.1 ; grammaire G1.1–G5.1 (pas G6.1 / G7.1) ;
- *   communication E1.1–E7.1 ; puis déblocage séquentiel dans chaque filière.
+ *   géométrie G1.1 + G6.1 + G7.1 ;
+ *   grammaire G1.1–G5.1, puis G6 après G1–G5, G8–G12 après G6.1, etc. ;
+ *   communication E1.1–E7.1, puis E8 après E1–E7, E9–E13 après E8.1, etc.
  * - Accès complet (`canFreeAccess`) : toutes les leçons, sans verrouillage séquentiel.
  * - Accès partiel français : grammaire ≤ G7.1 et/ou communication ≤ E9.1 (flags séparés).
  * - Accès partiel maths : plafonds indépendants A3.1, A8.1 (algèbre) et G3.1 (géométrie).
