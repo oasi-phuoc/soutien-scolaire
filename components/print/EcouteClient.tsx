@@ -8,7 +8,6 @@ const ALLOWED_PREFIXES = [
   "/assets/expression/co/",
   "/assets/expression/communication/",
   "/assets/words/son_f/",
-  "/assets/words/son_m/",
   "/assets/letters/son/",
 ];
 

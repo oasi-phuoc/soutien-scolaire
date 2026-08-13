@@ -63,7 +63,7 @@ import {
   type CommunicationTheoryBlock,
 } from "@/lib/curriculum/content/communication/express-types";
 import { buildExpressListeningTasks } from "@/lib/curriculum/content/communication/express-listening-helpers";
-import { PrintAudioQrRow } from "@/components/print/PrintAudioQrRow";
+import { PrintAudioQrFloat, PrintAudioQrRow } from "@/components/print/PrintAudioQrRow";
 import { buildLectureBundle } from "@/components/print/LecturePrintView";
 
 export type PrintBundle = {
@@ -623,8 +623,8 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
         id: ex.id || String(i),
         label: `Exercice ${i + 1}`,
         preview: (
-          <div className="space-y-2 text-sm text-black">
-            {qrItems.length > 0 ? <PrintAudioQrRow items={qrItems} /> : null}
+          <div className="flow-root space-y-2 text-sm text-black">
+            {qrItems.length > 0 ? <PrintAudioQrFloat items={qrItems} /> : null}
             <p className="font-semibold">{ex.instruction}</p>
             {poolPreview ? (
               <div className="space-y-3">{poolPreview}</div>

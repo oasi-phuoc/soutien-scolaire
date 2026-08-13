@@ -81,6 +81,31 @@ function QrCell({ item, size = 72 }: { item: PrintAudioQrItem; size?: number }) 
   );
 }
 
+/**
+ * QR audio flottant à droite, aligné sur la ligne du titre « Exercice N »
+ * (style image flottante Word) : le texte de l'exercice passe à gauche,
+ * le libellé s'affiche sous le QR.
+ */
+export function PrintAudioQrFloat({
+  items,
+  size = 72,
+}: {
+  items: PrintAudioQrItem[];
+  size?: number;
+}) {
+  if (!items.length) return null;
+  return (
+    <div
+      className="relative z-10 float-right mb-1 ml-3 flex flex-col items-center gap-1.5"
+      style={{ marginTop: "-30px" }}
+    >
+      {items.map((item) => (
+        <QrCell key={item.id} item={item} size={size} />
+      ))}
+    </div>
+  );
+}
+
 /** Rangée de QR codes (un par audio) pour l'impression CO. */
 export function PrintAudioQrRow({
   items,
