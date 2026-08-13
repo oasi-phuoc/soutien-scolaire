@@ -4,6 +4,7 @@ import { getLetterInModule, type LetterData } from "@/lib/curriculum/lecture-dat
 import { LectureLetterRunner } from "@/components/lecture/LectureLetterRunner";
 import { getContentOverridesMapAction } from "@/app/actions/content-editor";
 import { lectureLetterKey } from "@/lib/content-editor/keys";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 type Props = { params: Promise<{ moduleId: string; letterLower: string }> };
 
@@ -17,7 +18,7 @@ export default async function LectureLetterPage({ params }: Props) {
 
   return (
     <main>
-      <Suspense fallback={null}>
+      <Suspense fallback={<ChargementEnCoursCard title="Lecture" />}>
         <LectureLetterRunner data={data} moduleId={moduleId} />
       </Suspense>
     </main>

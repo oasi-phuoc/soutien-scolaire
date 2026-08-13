@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { ChargementEnCoursPage } from "@/components/ui/ChargementEnCours";
 
 const PlacementHubClient = dynamic(
   () =>
@@ -6,11 +7,7 @@ const PlacementHubClient = dynamic(
       (m) => m.PlacementHubClient,
     ),
   {
-    loading: () => (
-      <p className="px-4 py-16 text-center text-sm text-[var(--color-text-secondary)]">
-        Chargement du placement…
-      </p>
-    ),
+    loading: () => <ChargementEnCoursPage title="Placement" />,
   },
 );
 

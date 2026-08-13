@@ -8,7 +8,7 @@ import {
   type ProfessorClassOption,
 } from "@/app/actions/suivi";
 import { AppSelect } from "@/components/ui/AppSelect";
-import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 type DraftRow = {
   primaryClassId: string | null;
@@ -286,7 +286,7 @@ export function ProfessorAttributionsClient() {
     });
   }
 
-  if (loading) return <ChargementEnCours />;
+  if (loading) return <ChargementEnCoursCard title="Attribution des professeurs" />;
 
   if (error) {
     return (

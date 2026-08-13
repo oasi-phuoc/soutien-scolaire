@@ -11,7 +11,7 @@ import {
   type TeacherClassRow,
 } from "@/app/actions/suivi";
 import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
-import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 export function SuiviClassesClient() {
   const router = useRouter();
@@ -119,7 +119,7 @@ export function SuiviClassesClient() {
     router.push(`/suivi/classes/${encodeURIComponent(label)}`);
   }
 
-  if (loading) return <ChargementEnCours />;
+  if (loading) return <ChargementEnCoursCard title="Suivi pédagogique" />;
 
   if (error) {
     return <p className="rounded-xl border border-dashed border-zinc-300 p-6 text-center text-sm text-zinc-500">{error}</p>;

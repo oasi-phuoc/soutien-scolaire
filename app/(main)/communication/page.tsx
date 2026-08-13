@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { getNavAccess } from "@/lib/auth/nav-access";
+import { ChargementEnCoursPage } from "@/components/ui/ChargementEnCours";
 
 const CommunicationHome = dynamic(
   () =>
@@ -7,11 +8,7 @@ const CommunicationHome = dynamic(
       (m) => m.CommunicationHome,
     ),
   {
-    loading: () => (
-      <p className="px-4 py-16 text-center text-sm text-[var(--color-text-secondary)]">
-        Chargement de la communication…
-      </p>
-    ),
+    loading: () => <ChargementEnCoursPage title="Communication" />,
   },
 );
 

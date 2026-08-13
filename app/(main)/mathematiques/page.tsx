@@ -1,16 +1,13 @@
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { getNavAccess } from "@/lib/auth/nav-access";
+import { ChargementEnCoursPage } from "@/components/ui/ChargementEnCours";
 
 const MathematiquesClient = dynamic(
   () =>
     import("@/components/math/MathematiquesClient").then((m) => m.MathematiquesClient),
   {
-    loading: () => (
-      <p className="px-4 py-16 text-center text-sm text-[var(--color-text-secondary)]">
-        Chargement des mathématiques…
-      </p>
-    ),
+    loading: () => <ChargementEnCoursPage title="Mathématiques" />,
   },
 );
 
@@ -20,7 +17,7 @@ export default async function MathematiquesPage() {
   const isAdmin = access.role === "admin" || access.role === "prof";
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<ChargementEnCoursPage title="Mathématiques" />}>
       <MathematiquesClient
         isLoggedIn={isLoggedIn}
         isAdmin={isAdmin}

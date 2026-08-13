@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getSuiviContextAction, type SuiviContext } from "@/app/actions/suivi";
 import { SuiviLevelBlocks } from "@/components/suivi/SuiviLevelBlocks";
-import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 const ACCENT = "var(--color-theme)";
 
@@ -31,14 +31,7 @@ export function TeacherHomeCard() {
   }, []);
 
   if (loading) {
-    return (
-      <section className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
-        <div className="px-4 py-4" style={{ background: `color-mix(in oklch, ${ACCENT} 10%, transparent)` }}>
-          <p className="text-xl font-bold uppercase tracking-wide" style={{ color: ACCENT }}>Suivi pédagogique</p>
-        </div>
-        <ChargementEnCours compact />
-      </section>
-    );
+    return <ChargementEnCoursCard title="Suivi pédagogique" />;
   }
 
   if (!ctx) {

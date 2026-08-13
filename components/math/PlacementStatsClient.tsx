@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PageBackButton } from "@/components/ui/PageBackButton";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 import { loadPlacementTestHistoryAction } from "@/app/actions/progress";
 
 const TP_HISTORY_KEY = "tp-math-history";
@@ -207,7 +208,9 @@ export function PlacementStatsClient() {
         </div>
       </div>
 
-      {!ready ? null : history.length === 0 ? (
+      {!ready ? (
+        <ChargementEnCoursCard title="Placement" />
+      ) : history.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-accent-alg)]/15">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.8">

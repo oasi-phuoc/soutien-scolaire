@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 const MathSubmoduleWorkspace = dynamic(
   () =>
@@ -8,11 +9,7 @@ const MathSubmoduleWorkspace = dynamic(
       (m) => m.MathSubmoduleWorkspace,
     ),
   {
-    loading: () => (
-      <p className="py-12 text-center text-sm text-[var(--color-text-secondary)]">
-        Chargement de la leçon…
-      </p>
-    ),
+    loading: () => <ChargementEnCoursCard title="Mathématiques" />,
   },
 );
 

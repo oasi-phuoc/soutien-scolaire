@@ -1,5 +1,5 @@
 import { ChargementEnCoursPage } from "@/components/ui/ChargementEnCours";
 
 export default function Loading() {
-  return <ChargementEnCoursPage title="Attribution des classes" shell="full" />;
+  return <ChargementEnCoursPage title="Mon compte" />;
 }

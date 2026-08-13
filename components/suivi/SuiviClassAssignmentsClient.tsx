@@ -7,7 +7,7 @@ import {
   type TeacherClassRow,
 } from "@/app/actions/suivi";
 import { CLASS_LEVELS, groupClassesByLevel } from "@/lib/suivi/class-levels";
-import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 function isRealClassId(classId: string) {
   return !classId.startsWith("label:");
@@ -105,7 +105,7 @@ export function SuiviClassAssignmentsClient() {
     });
   }
 
-  if (loading) return <ChargementEnCours />;
+  if (loading) return <ChargementEnCoursCard title="Attribution des classes" />;
 
   if (error) {
     return (

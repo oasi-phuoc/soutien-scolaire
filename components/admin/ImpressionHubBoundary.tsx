@@ -2,17 +2,14 @@
 
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import dynamic from "next/dynamic";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 const ImpressionHubClient = dynamic(
   () =>
     import("@/components/admin/ImpressionHubClient").then((m) => m.ImpressionHubClient),
   {
     ssr: false,
-    loading: () => (
-      <div className="flex min-h-[24rem] items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-16 text-sm text-[var(--color-text-secondary)]">
-        Chargement de l&apos;impression…
-      </div>
-    ),
+    loading: () => <ChargementEnCoursCard title="Impression" />,
   },
 );
 

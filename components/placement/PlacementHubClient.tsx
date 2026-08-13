@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { savePlacementToCloudAction } from "@/app/actions/placement";
 import { FrenchSkillCardsProgress, FrenchSkillCardsSelect, type FrenchSkill } from "@/components/placement/FrenchSkillCards";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 import { PlacementUnifiedChart } from "@/components/placement/PlacementUnifiedChart";
 import { PlacementEvolutionChart } from "@/components/placement/PlacementEvolutionChart";
 import type { MathTrainingLevel, PlacementFrenchDraft, PlacementLevel } from "@/lib/placement/types";
@@ -332,7 +333,7 @@ export function PlacementHubClient() {
   if (!ready) {
     return (
       <main className="app-shell flex-1 py-8 pb-32 lg:pb-28">
-        <p className="text-center text-sm text-[var(--color-text-secondary)]">Chargement…</p>
+        <ChargementEnCoursCard title="Placement" />
       </main>
     );
   }

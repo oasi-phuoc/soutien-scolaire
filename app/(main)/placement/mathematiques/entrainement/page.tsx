@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { MathTrainingPageClient } from "@/components/placement/MathTrainingPageClient";
+import { ChargementEnCoursPage } from "@/components/ui/ChargementEnCours";
 
 export default function PlacementMathTrainingPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-center text-sm text-[var(--color-text-secondary)]">Chargement…</div>}>
+    <Suspense fallback={<ChargementEnCoursPage title="Placement" />}>
       <MathTrainingPageClient />
     </Suspense>
   );

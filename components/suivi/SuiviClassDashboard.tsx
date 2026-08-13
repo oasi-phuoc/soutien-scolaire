@@ -10,7 +10,7 @@ import { StudentPersonalInfoCard, StudentInfoButton } from "@/components/suivi/S
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { PROGRESS_FILL } from "@/lib/suivi/progress-colors";
 import { formatPlacementScore, PLACEMENT_SUBJECT_MAX } from "@/lib/suivi/placement-best";
-import { ChargementEnCours } from "@/components/ui/ChargementEnCours";
+import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
@@ -165,7 +165,7 @@ export function SuiviClassDashboard({
     setExpandedInfoId((id) => (id === studentId ? null : id));
   }
 
-  if (loading) return <ChargementEnCours />;
+  if (loading) return <ChargementEnCoursCard title="Suivi pédagogique" />;
 
   if (error) return <p className="text-sm text-red-500">{error}</p>;
 
