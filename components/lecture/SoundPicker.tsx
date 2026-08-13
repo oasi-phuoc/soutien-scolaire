@@ -7,7 +7,6 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { LECTURE_CORRECTION_BUTTON, LECTURE_CORRECTION_BORDER, LECTURE_CORRECTION_CARD } from "./lecture-correction";
-import { LectureConsigne } from "./LectureConsigne";
 
 export interface SoundPickerHandle {
   reset: () => void;
@@ -251,10 +250,10 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
             {lectureUi(lang, "hearTheSound")}
           </p>
         )}
-        <LectureConsigne>
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez les images où vous entendez{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
-        </LectureConsigne>
+        </p>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {lectureUi(lang, "tapImagesWithSound", { x: phoneme })}
@@ -368,10 +367,10 @@ const AudioPicker = forwardRef<SoundPickerHandle, {
             {lectureUi(lang, "hearTheSound")}
           </p>
         )}
-        <LectureConsigne>
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Écoutez et touchez ceux où vous entendez{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
-        </LectureConsigne>
+        </p>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {lectureUi(lang, "listenTapWithSound", { x: phoneme })}

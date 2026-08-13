@@ -8,7 +8,6 @@ import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { useWordSpotterItemCount } from "./WordSpotter";
 import { complexTargets, makeComplexSyllables } from "@/lib/utils/complex-grapheme";
 import { matchesSyllable } from "@/lib/utils/french-speech-match";
-import { LectureConsigne } from "./LectureConsigne";
 
 export interface SyllableGridHandle {
   reset: () => void;
@@ -229,7 +228,9 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
           {lectureUi(lang, "readSyllables")}
         </p>
       )}
-      <LectureConsigne>{consigne}</LectureConsigne>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        {consigne}
+      </p>
       {showPivot && (
         <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
           {lectureUi(lang, "tapSyllableAloud")}

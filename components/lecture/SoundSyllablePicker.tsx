@@ -7,7 +7,6 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { LECTURE_CORRECTION_BORDER, LECTURE_CORRECTION_CARD } from "./lecture-correction";
-import { LectureConsigne } from "./LectureConsigne";
 
 export interface SoundSyllablePickerHandle {
   reset: () => void;
@@ -166,7 +165,7 @@ export const SoundSyllablePicker = forwardRef<SoundSyllablePickerHandle, Props>(
             {lectureUi(lang, phonemes.length > 1 ? "hearTheSounds" : "hearTheSound")}
           </p>
         )}
-        <LectureConsigne>
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Cochez la partie de la syllabe où vous entendez le son{" "}
           {phonemes.length > 1 ? (
             <>
@@ -177,7 +176,7 @@ export const SoundSyllablePicker = forwardRef<SoundSyllablePickerHandle, Props>(
           ) : (
             <strong className="text-[var(--color-accent-lecture)]">{phonemes[0]}</strong>
           )}
-        </LectureConsigne>
+        </p>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {phonemes.length > 1

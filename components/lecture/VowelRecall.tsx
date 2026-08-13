@@ -4,7 +4,6 @@ import { speak } from "@/lib/utils/speech";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
-import { LectureConsigne } from "./LectureConsigne";
 
 const VOWELS = [
   { letter: "A", phoneme: "/a/" },
@@ -26,7 +25,7 @@ export function VowelRecall() {
           {lectureUi(lang, "reviewSounds")}
         </p>
       )}
-      <LectureConsigne>Touchez chaque lettre pour entendre son son.</LectureConsigne>
+      <p className="text-sm text-[var(--color-text-secondary)]">Touchez chaque lettre pour entendre son son.</p>
       {showPivot && (
         <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
           {lectureUi(lang, "tapLetterToHear")}
