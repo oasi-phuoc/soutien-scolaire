@@ -363,22 +363,69 @@ export function getCommModule(id: string): CommunicationModule | undefined {
   return COMM_MODULES.find((m) => m.id === id);
 }
 
+/**
+ * Portails communication (même logique que la grammaire) :
+ * - E1–E7 ouverts dès le départ (E1.1 … E7.1).
+ * - E8 (bilan A1) : après E1–E7 entièrement validés.
+ * - Après E8.1 validé : E9.1 … E13.1.
+ * - E14 (bilan A2) : après E9–E13 entièrement validés.
+ */
+export const COMM_PHASES: ReadonlyArray<{
+  contentModules: readonly string[];
+  bilanModule: string;
+}> = [
+  { contentModules: ["E1", "E2", "E3", "E4", "E5", "E6", "E7"], bilanModule: "E8" },
+  { contentModules: ["E9", "E10", "E11", "E12", "E13"], bilanModule: "E14" },
+];
+
 /** Modules dont la 1ʳᵉ leçon (Ex.1) est ouverte à la création du compte. */
-export const COMM_OPEN_AT_START = ["E1", "E2", "E3", "E4", "E5", "E6", "E7"] as const;
+export const COMM_OPEN_AT_START = COMM_PHASES[0]!.contentModules;
 
 export function isCommModuleOpenAtStart(moduleId: string): boolean {
   return (COMM_OPEN_AT_START as readonly string[]).includes(moduleId);
 }
 
-/**
- * E1–E7 ouverts d’emblée ; E8+ si le module précédent du catalogue est terminé.
- */
+function visibleCommSubs(mod: CommunicationModule): CommunicationSubmodule[] {
+  return mod.submodules.filter((s) => s.available);
+}
+
+function commModuleDone(
+  mod: CommunicationModule | undefined,
+  completedIds: ReadonlySet<string>,
+): boolean {
+  if (!mod) return false;
+  const vis = visibleCommSubs(mod);
+  if (vis.length === 0) return false;
+  return vis.every((s) => completedIds.has(s.id));
+}
+
+function commFirstLessonDone(
+  mod: CommunicationModule | undefined,
+  completedIds: ReadonlySet<string>,
+): boolean {
+  if (!mod) return false;
+  const first = visibleCommSubs(mod)[0];
+  return Boolean(first && completedIds.has(first.id));
+}
+
 export function isCommModuleUnlocked(
   moduleId: string,
-  previousModuleAllDone: boolean,
+  completedIds: ReadonlySet<string>,
+  modules: ReadonlyArray<CommunicationModule> = COMM_MODULES,
   unlockAll = false,
 ): boolean {
   if (unlockAll) return true;
-  if (isCommModuleOpenAtStart(moduleId)) return true;
-  return previousModuleAllDone;
+  const byId = new Map(modules.map((m) => [m.id, m]));
+
+  for (let i = 0; i < COMM_PHASES.length; i++) {
+    const phase = COMM_PHASES[i]!;
+    if ((phase.contentModules as readonly string[]).includes(moduleId)) {
+      if (i === 0) return true;
+      return commFirstLessonDone(byId.get(COMM_PHASES[i - 1]!.bilanModule), completedIds);
+    }
+    if (phase.bilanModule === moduleId) {
+      return phase.contentModules.every((id) => commModuleDone(byId.get(id), completedIds));
+    }
+  }
+  return false;
 }

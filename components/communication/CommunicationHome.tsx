@@ -101,8 +101,15 @@ export function CommunicationModuleList({
     setHydrated(true);
   }, []);
 
+  const completedIds = useMemo(() => {
+    const set = new Set<string>();
+    for (const [id, done] of Object.entries(completed)) {
+      if (done) set.add(id);
+    }
+    return set;
+  }, [completed]);
+
   const modulesView = useMemo(() => {
-    let previousAllDone = true;
     return commModules.map((m) => {
       const visibleSubs = m.submodules.filter((s) => {
         if (!s.available && !isAdmin) return false;
@@ -110,8 +117,7 @@ export function CommunicationModuleList({
       });
       const completedCount = visibleSubs.filter((s) => completed[s.id]).length;
       const allDone = completedCount === visibleSubs.length && visibleSubs.length > 0;
-      const sequentialOk = isCommModuleUnlocked(m.id, previousAllDone, unlockAll);
-      if (visibleSubs.length > 0) previousAllDone = allDone;
+      const sequentialOk = isCommModuleUnlocked(m.id, completedIds, commModules, unlockAll);
       const moduleAccessible = frenchOk && visibleSubs.length > 0 && sequentialOk;
       const moduleState: "completed" | "in_progress" | "locked" = !moduleAccessible
         ? "locked"
@@ -122,7 +128,7 @@ export function CommunicationModuleList({
     });
   // lessonAccess dérivé de unlockAll / canPartialFrenchComm
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [commModules, completed, frenchOk, unlockAll, isAdmin, canPartialFrenchComm, freeAccess]);
+  }, [commModules, completed, completedIds, frenchOk, unlockAll, isAdmin, canPartialFrenchComm, freeAccess]);
 
   const primaryInProgressId = useMemo(() => {
     if (!hydrated || !frenchOk) return null;
