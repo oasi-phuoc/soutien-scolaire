@@ -45,40 +45,73 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "finir", radical: "fini",
-          rows: [
-            { pronoun: "je", ending: "s" },
-            { pronoun: "tu", ending: "s" },
-            { pronoun: "il / elle / on", ending: "t" },
-            { pronoun: "nous", ending: "ons", radical: "finiss" },
-            { pronoun: "vous", ending: "ez", radical: "finiss" },
-            { pronoun: "ils / elles", ending: "ent", radical: "finiss" },
+          label: "finir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "finir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "finis" },
+                    { pronoun: "tu", form: "finis" },
+                    { pronoun: "il / elle / on", form: "finit" },
+                    { pronoun: "nous", form: "finissons" },
+                    { pronoun: "vous", form: "finissez" },
+                    { pronoun: "ils / elles", form: "finissent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "choisir", radical: "choisi",
-          rows: [
-            { pronoun: "je", ending: "s" },
-            { pronoun: "tu", ending: "s" },
-            { pronoun: "il / elle / on", ending: "t" },
-            { pronoun: "nous", ending: "ons", radical: "choisiss" },
-            { pronoun: "vous", ending: "ez", radical: "choisiss" },
-            { pronoun: "ils / elles", ending: "ent", radical: "choisiss" },
+          label: "choisir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "choisir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "choisis" },
+                    { pronoun: "tu", form: "choisis" },
+                    { pronoun: "il / elle / on", form: "choisit" },
+                    { pronoun: "nous", form: "choisissons" },
+                    { pronoun: "vous", form: "choisissez" },
+                    { pronoun: "ils / elles", form: "choisissent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "réfléchir", radical: "réfléchi",
-          rows: [
-            { pronoun: "je", ending: "s" },
-            { pronoun: "tu", ending: "s" },
-            { pronoun: "il / elle / on", ending: "t" },
-            { pronoun: "nous", ending: "ons", radical: "réfléchiss" },
-            { pronoun: "vous", ending: "ez", radical: "réfléchiss" },
-            { pronoun: "ils / elles", ending: "ent", radical: "réfléchiss" },
+          label: "réfléchir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "réfléchir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "réfléchis" },
+                    { pronoun: "tu", form: "réfléchis" },
+                    { pronoun: "il / elle / on", form: "réfléchit" },
+                    { pronoun: "nous", form: "réfléchissons" },
+                    { pronoun: "vous", form: "réfléchissez" },
+                    { pronoun: "ils / elles", form: "réfléchissent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -105,40 +138,73 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "ouvrir", radical: "ouvr",
-          rows: [
-            { pronoun: "j'", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "ouvrir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "ouvrir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "ouvre" },
+                    { pronoun: "tu", form: "ouvres" },
+                    { pronoun: "il / elle / on", form: "ouvre" },
+                    { pronoun: "nous", form: "ouvrons" },
+                    { pronoun: "vous", form: "ouvrez" },
+                    { pronoun: "ils / elles", form: "ouvrent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "offrir", radical: "offr",
-          rows: [
-            { pronoun: "j'", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "offrir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "offrir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "offre" },
+                    { pronoun: "tu", form: "offres" },
+                    { pronoun: "il / elle / on", form: "offre" },
+                    { pronoun: "nous", form: "offrons" },
+                    { pronoun: "vous", form: "offrez" },
+                    { pronoun: "ils / elles", form: "offrent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "découvrir", radical: "découvr",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "découvrir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "découvrir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "découvre" },
+                    { pronoun: "tu", form: "découvres" },
+                    { pronoun: "il / elle / on", form: "découvre" },
+                    { pronoun: "nous", form: "découvrons" },
+                    { pronoun: "vous", form: "découvrez" },
+                    { pronoun: "ils / elles", form: "découvrent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -165,40 +231,73 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "partir", radical: "part",
-          rows: [
-            { pronoun: "je", ending: "s", radical: "par" },
-            { pronoun: "tu", ending: "s", radical: "par" },
-            { pronoun: "il / elle / on", ending: "t", radical: "par" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "partir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "partir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "pars" },
+                    { pronoun: "tu", form: "pars" },
+                    { pronoun: "il / elle / on", form: "part" },
+                    { pronoun: "nous", form: "partons" },
+                    { pronoun: "vous", form: "partez" },
+                    { pronoun: "ils / elles", form: "partent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "dormir", radical: "dorm",
-          rows: [
-            { pronoun: "je", ending: "s", radical: "dor" },
-            { pronoun: "tu", ending: "s", radical: "dor" },
-            { pronoun: "il / elle / on", ending: "t", radical: "dor" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "dormir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "dormir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "dors" },
+                    { pronoun: "tu", form: "dors" },
+                    { pronoun: "il / elle / on", form: "dort" },
+                    { pronoun: "nous", form: "dormons" },
+                    { pronoun: "vous", form: "dormez" },
+                    { pronoun: "ils / elles", form: "dorment" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "servir", radical: "serv",
-          rows: [
-            { pronoun: "je", ending: "s", radical: "ser" },
-            { pronoun: "tu", ending: "s", radical: "ser" },
-            { pronoun: "il / elle / on", ending: "t", radical: "ser" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "servir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "servir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "sers" },
+                    { pronoun: "tu", form: "sers" },
+                    { pronoun: "il / elle / on", form: "sert" },
+                    { pronoun: "nous", form: "servons" },
+                    { pronoun: "vous", form: "servez" },
+                    { pronoun: "ils / elles", form: "servent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -224,40 +323,73 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "venir", radical: "v",
-          rows: [
-            { pronoun: "je", ending: "iens" },
-            { pronoun: "tu", ending: "iens" },
-            { pronoun: "il / elle / on", ending: "ient" },
-            { pronoun: "nous", ending: "enons" },
-            { pronoun: "vous", ending: "enez" },
-            { pronoun: "ils / elles", ending: "iennent" },
+          label: "venir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "venir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "viens" },
+                    { pronoun: "tu", form: "viens" },
+                    { pronoun: "il / elle / on", form: "vient" },
+                    { pronoun: "nous", form: "venons" },
+                    { pronoun: "vous", form: "venez" },
+                    { pronoun: "ils / elles", form: "viennent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "tenir", radical: "t",
-          rows: [
-            { pronoun: "je", ending: "iens" },
-            { pronoun: "tu", ending: "iens" },
-            { pronoun: "il / elle / on", ending: "ient" },
-            { pronoun: "nous", ending: "enons" },
-            { pronoun: "vous", ending: "enez" },
-            { pronoun: "ils / elles", ending: "iennent" },
+          label: "tenir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "tenir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "tiens" },
+                    { pronoun: "tu", form: "tiens" },
+                    { pronoun: "il / elle / on", form: "tient" },
+                    { pronoun: "nous", form: "tenons" },
+                    { pronoun: "vous", form: "tenez" },
+                    { pronoun: "ils / elles", form: "tiennent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "obtenir", radical: "obt",
-          rows: [
-            { pronoun: "j'", ending: "iens" },
-            { pronoun: "tu", ending: "iens" },
-            { pronoun: "il / elle / on", ending: "ient" },
-            { pronoun: "nous", ending: "enons" },
-            { pronoun: "vous", ending: "enez" },
-            { pronoun: "ils / elles", ending: "iennent" },
+          label: "obtenir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "obtenir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "obtiens" },
+                    { pronoun: "tu", form: "obtiens" },
+                    { pronoun: "il / elle / on", form: "obtient" },
+                    { pronoun: "nous", form: "obtenons" },
+                    { pronoun: "vous", form: "obtenez" },
+                    { pronoun: "ils / elles", form: "obtiennent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],

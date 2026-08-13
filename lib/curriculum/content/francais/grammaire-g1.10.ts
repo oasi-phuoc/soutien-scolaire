@@ -1,227 +1,5 @@
-import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import type { GrammarLesson } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
-
-const VT_DRE: VerbToggleVerb[] = [
-  {
-    infinitive: "prendre",
-    radical: "pren",
-    rows: [
-      { pronoun: "je", ending: "ds" },
-      { pronoun: "tu", ending: "ds" },
-      { pronoun: "il / elle / on", ending: "d" },
-      { pronoun: "nous", ending: "ons" },
-      { pronoun: "vous", ending: "ez" },
-      { pronoun: "ils / elles", ending: "nent" },
-    ],
-  },
-  {
-    infinitive: "attendre",
-    radical: "attend",
-    rows: [
-      { pronoun: "j'", ending: "s" },
-      { pronoun: "tu", ending: "s" },
-      { pronoun: "il / elle / on", ending: "" },
-      { pronoun: "nous", ending: "ons" },
-      { pronoun: "vous", ending: "ez" },
-      { pronoun: "ils / elles", ending: "ent" },
-    ],
-  },
-  {
-    infinitive: "vendre",
-    radical: "vend",
-    rows: [
-      { pronoun: "je", ending: "s" },
-      { pronoun: "tu", ending: "s" },
-      { pronoun: "il / elle / on", ending: "" },
-      { pronoun: "nous", ending: "ons" },
-      { pronoun: "vous", ending: "ez" },
-      { pronoun: "ils / elles", ending: "ent" },
-    ],
-  },
-];
-
-const VT_IRE: VerbToggleVerb[] = [
-  {
-    infinitive: "lire",
-    radical: "li",
-    rows: [
-      { pronoun: "je", ending: "s" },
-      { pronoun: "tu", ending: "s" },
-      { pronoun: "il / elle / on", ending: "t" },
-      { pronoun: "nous", ending: "sons" },
-      { pronoun: "vous", ending: "sez" },
-      { pronoun: "ils / elles", ending: "sent" },
-    ],
-  },
-  {
-    infinitive: "écrire",
-    radical: "écri",
-    rows: [
-      { pronoun: "j'", ending: "s" },
-      { pronoun: "tu", ending: "s" },
-      { pronoun: "il / elle / on", ending: "t" },
-      { pronoun: "nous", ending: "vons" },
-      { pronoun: "vous", ending: "vez" },
-      { pronoun: "ils / elles", ending: "vent" },
-    ],
-  },
-  {
-    infinitive: "rire",
-    radical: "ri",
-    rows: [
-      { pronoun: "je", ending: "s" },
-      { pronoun: "tu", ending: "s" },
-      { pronoun: "il / elle / on", ending: "t" },
-      { pronoun: "nous", ending: "ons" },
-      { pronoun: "vous", ending: "ez" },
-      { pronoun: "ils / elles", ending: "ent" },
-    ],
-  },
-];
-
-const VT_IRREGULIER: VerbToggleVerb[] = [
-  {
-    infinitive: "faire",
-    radical: "f",
-    rows: [
-      { pronoun: "je", ending: "ais" },
-      { pronoun: "tu", ending: "ais" },
-      { pronoun: "il / elle / on", ending: "ait" },
-      { pronoun: "nous", ending: "aisons" },
-      { pronoun: "vous", ending: "aites" },
-      { pronoun: "ils / elles", ending: "ont" },
-    ],
-  },
-  {
-    infinitive: "dire",
-    radical: "di",
-    rows: [
-      { pronoun: "je", ending: "s" },
-      { pronoun: "tu", ending: "s" },
-      { pronoun: "il / elle / on", ending: "t" },
-      { pronoun: "nous", ending: "sons" },
-      { pronoun: "vous", ending: "tes" },
-      { pronoun: "ils / elles", ending: "sent" },
-    ],
-  },
-  {
-    infinitive: "mettre",
-    radical: "mett",
-    rows: [
-      { pronoun: "je", ending: "s", radical: "met" },
-      { pronoun: "tu", ending: "s", radical: "met" },
-      { pronoun: "il / elle / on", ending: "", radical: "met" },
-      { pronoun: "nous", ending: "ons" },
-      { pronoun: "vous", ending: "ez" },
-      { pronoun: "ils / elles", ending: "ent" },
-    ],
-  },
-];
-
-const VT_OIR: VerbToggleVerb[] = [
-  {
-    infinitive: "voir",
-    radical: "vo",
-    rows: [
-      { pronoun: "je", ending: "is" },
-      { pronoun: "tu", ending: "is" },
-      { pronoun: "il / elle / on", ending: "it" },
-      { pronoun: "nous", ending: "yons" },
-      { pronoun: "vous", ending: "yez" },
-      { pronoun: "ils / elles", ending: "ient" },
-    ],
-  },
-  {
-    infinitive: "recevoir",
-    radical: "re",
-    rows: [
-      { pronoun: "je", ending: "çois" },
-      { pronoun: "tu", ending: "çois" },
-      { pronoun: "il / elle / on", ending: "çoit" },
-      { pronoun: "nous", ending: "cevons" },
-      { pronoun: "vous", ending: "cevez" },
-      { pronoun: "ils / elles", ending: "çoivent" },
-    ],
-  },
-  {
-    infinitive: "boire",
-    radical: "b",
-    rows: [
-      { pronoun: "je", ending: "ois" },
-      { pronoun: "tu", ending: "ois" },
-      { pronoun: "il / elle / on", ending: "oit" },
-      { pronoun: "nous", ending: "uvons" },
-      { pronoun: "vous", ending: "uvez" },
-      { pronoun: "ils / elles", ending: "oivent" },
-    ],
-  },
-];
-
-const VT_INDRE: VerbToggleVerb[] = [
-  {
-    infinitive: "peindre",
-    radical: "pei",
-    rows: [
-      { pronoun: "je", ending: "ns" },
-      { pronoun: "tu", ending: "ns" },
-      { pronoun: "il / elle / on", ending: "nt" },
-      { pronoun: "nous", ending: "gnons" },
-      { pronoun: "vous", ending: "gnez" },
-      { pronoun: "ils / elles", ending: "gnent" },
-    ],
-  },
-  {
-    infinitive: "éteindre",
-    radical: "étei",
-    rows: [
-      { pronoun: "j'", ending: "ns" },
-      { pronoun: "tu", ending: "ns" },
-      { pronoun: "il / elle / on", ending: "nt" },
-      { pronoun: "nous", ending: "gnons" },
-      { pronoun: "vous", ending: "gnez" },
-      { pronoun: "ils / elles", ending: "gnent" },
-    ],
-  },
-  {
-    infinitive: "rejoindre",
-    radical: "rejoi",
-    rows: [
-      { pronoun: "je", ending: "ns" },
-      { pronoun: "tu", ending: "ns" },
-      { pronoun: "il / elle / on", ending: "nt" },
-      { pronoun: "nous", ending: "gnons" },
-      { pronoun: "vous", ending: "gnez" },
-      { pronoun: "ils / elles", ending: "gnent" },
-    ],
-  },
-];
-
-const VT_SAVOIR_CONNAITRE: VerbToggleVerb[] = [
-  {
-    infinitive: "savoir",
-    radical: "sa",
-    rows: [
-      { pronoun: "je", ending: "is" },
-      { pronoun: "tu", ending: "is" },
-      { pronoun: "il / elle / on", ending: "it" },
-      { pronoun: "nous", ending: "vons" },
-      { pronoun: "vous", ending: "vez" },
-      { pronoun: "ils / elles", ending: "vent" },
-    ],
-  },
-  {
-    infinitive: "connaître",
-    radical: "conna",
-    rows: [
-      { pronoun: "je", ending: "is" },
-      { pronoun: "tu", ending: "is" },
-      { pronoun: "il / elle / on", ending: "ît" },
-      { pronoun: "nous", ending: "issons" },
-      { pronoun: "vous", ending: "issez" },
-      { pronoun: "ils / elles", ending: "issent" },
-    ],
-  },
-];
 
 /** Unité 9 — Les verbes en -re et en -oir (G1.10) */
 export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
@@ -251,42 +29,446 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       text: "Verbe irrégulier",
       trans: { en: "Irregular verb", ar: "الفعل الشاذ", fa: "فعل بی‌قاعده", pt: "Verbo irregular", so: "Fal aan caadi ahayn", ti: "ዘይስሩዕ ግሲ", tr: "Düzensiz fiil", ps: "بې قاعده فعل", uk: "Неправильне дієслово" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRREGULIER },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "faire",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "faire",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "fais" },
+                    { pronoun: "tu", form: "fais" },
+                    { pronoun: "il / elle / on", form: "fait" },
+                    { pronoun: "nous", form: "faisons" },
+                    { pronoun: "vous", form: "faites" },
+                    { pronoun: "ils / elles", form: "font" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "dire",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "dire",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "dis" },
+                    { pronoun: "tu", form: "dis" },
+                    { pronoun: "il / elle / on", form: "dit" },
+                    { pronoun: "nous", form: "disons" },
+                    { pronoun: "vous", form: "dites" },
+                    { pronoun: "ils / elles", form: "disent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "mettre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "mettre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "mets" },
+                    { pronoun: "tu", form: "mets" },
+                    { pronoun: "il / elle / on", form: "met" },
+                    { pronoun: "nous", form: "mettons" },
+                    { pronoun: "vous", form: "mettez" },
+                    { pronoun: "ils / elles", form: "mettent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     {
       type: "heading",
       text: "Verbes en -dre",
       trans: { en: "Verbs ending in -dre", ar: "الأفعال المنتهية بـ -dre", fa: "فعل‌های پایان‌یافته به -dre", pt: "Verbos terminados em -dre", so: "Falalka ku dhammaada -dre", ti: "ብ -dre ዝውድኡ ግሲታት", tr: "-dre ile biten fiiller", ps: "په -dre پای ته رسېدونکي فعلونه", uk: "Дієслова на -dre" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_DRE },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "prendre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "prendre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "prends" },
+                    { pronoun: "tu", form: "prends" },
+                    { pronoun: "il / elle / on", form: "prend" },
+                    { pronoun: "nous", form: "prenons" },
+                    { pronoun: "vous", form: "prenez" },
+                    { pronoun: "ils / elles", form: "prennent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "attendre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "attendre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "attends" },
+                    { pronoun: "tu", form: "attends" },
+                    { pronoun: "il / elle / on", form: "attend" },
+                    { pronoun: "nous", form: "attendons" },
+                    { pronoun: "vous", form: "attendez" },
+                    { pronoun: "ils / elles", form: "attendent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "vendre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "vendre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "vends" },
+                    { pronoun: "tu", form: "vends" },
+                    { pronoun: "il / elle / on", form: "vend" },
+                    { pronoun: "nous", form: "vendons" },
+                    { pronoun: "vous", form: "vendez" },
+                    { pronoun: "ils / elles", form: "vendent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     {
       type: "heading",
       text: "Verbes en -ire",
       trans: { en: "Verbs ending in -ire", ar: "الأفعال المنتهية بـ -ire", fa: "فعل‌های پایان‌یافته به -ire", pt: "Verbos terminados em -ire", so: "Falalka ku dhammaada -ire", ti: "ብ -ire ዝውድኡ ግሲታት", tr: "-ire ile biten fiiller", ps: "په -ire پای ته رسېدونکي فعلونه", uk: "Дієслова на -ire" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRE },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "lire",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "lire",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "lis" },
+                    { pronoun: "tu", form: "lis" },
+                    { pronoun: "il / elle / on", form: "lit" },
+                    { pronoun: "nous", form: "lisons" },
+                    { pronoun: "vous", form: "lisez" },
+                    { pronoun: "ils / elles", form: "lisent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "écrire",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "écrire",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "écris" },
+                    { pronoun: "tu", form: "écris" },
+                    { pronoun: "il / elle / on", form: "écrit" },
+                    { pronoun: "nous", form: "écrivons" },
+                    { pronoun: "vous", form: "écrivez" },
+                    { pronoun: "ils / elles", form: "écrivent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "rire",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "rire",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ris" },
+                    { pronoun: "tu", form: "ris" },
+                    { pronoun: "il / elle / on", form: "rit" },
+                    { pronoun: "nous", form: "rions" },
+                    { pronoun: "vous", form: "riez" },
+                    { pronoun: "ils / elles", form: "rient" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     {
       type: "heading",
       text: "Verbes en -oir",
       trans: { en: "Verbs ending in -oir", ar: "الأفعال المنتهية بـ -oir", fa: "فعل‌های پایان‌یافته به -oir", pt: "Verbos terminados em -oir", so: "Falalka ku dhammaada -oir", ti: "ብ -oir ዝውድኡ ግሲታት", tr: "-oir ile biten fiiller", ps: "په -oir پای ته رسېدونکي فعلونه", uk: "Дієслова на -oir" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_OIR },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "voir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "voir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "vois" },
+                    { pronoun: "tu", form: "vois" },
+                    { pronoun: "il / elle / on", form: "voit" },
+                    { pronoun: "nous", form: "voyons" },
+                    { pronoun: "vous", form: "voyez" },
+                    { pronoun: "ils / elles", form: "voient" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "recevoir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "recevoir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "reçois" },
+                    { pronoun: "tu", form: "reçois" },
+                    { pronoun: "il / elle / on", form: "reçoit" },
+                    { pronoun: "nous", form: "recevons" },
+                    { pronoun: "vous", form: "recevez" },
+                    { pronoun: "ils / elles", form: "reçoivent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "boire",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "boire",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "bois" },
+                    { pronoun: "tu", form: "bois" },
+                    { pronoun: "il / elle / on", form: "boit" },
+                    { pronoun: "nous", form: "buvons" },
+                    { pronoun: "vous", form: "buvez" },
+                    { pronoun: "ils / elles", form: "boivent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     {
       type: "heading",
       text: "Verbes en -indre",
       trans: { en: "Verbs ending in -indre", ar: "الأفعال المنتهية بـ -indre", fa: "فعل‌های پایان‌یافته به -indre", pt: "Verbos terminados em -indre", so: "Falalka ku dhammaada -indre", ti: "ብ -indre ዝውድኡ ግሲታት", tr: "-indre ile biten fiiller", ps: "په -indre پای ته رسېدونکي فعلونه", uk: "Дієслова на -indre" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_INDRE },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "peindre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "peindre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "peins" },
+                    { pronoun: "tu", form: "peins" },
+                    { pronoun: "il / elle / on", form: "peint" },
+                    { pronoun: "nous", form: "peignons" },
+                    { pronoun: "vous", form: "peignez" },
+                    { pronoun: "ils / elles", form: "peignent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "éteindre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "éteindre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "éteins" },
+                    { pronoun: "tu", form: "éteins" },
+                    { pronoun: "il / elle / on", form: "éteint" },
+                    { pronoun: "nous", form: "éteignons" },
+                    { pronoun: "vous", form: "éteignez" },
+                    { pronoun: "ils / elles", form: "éteignent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "rejoindre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "rejoindre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "rejoins" },
+                    { pronoun: "tu", form: "rejoins" },
+                    { pronoun: "il / elle / on", form: "rejoint" },
+                    { pronoun: "nous", form: "rejoignons" },
+                    { pronoun: "vous", form: "rejoignez" },
+                    { pronoun: "ils / elles", form: "rejoignent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     {
       type: "heading",
       text: "Savoir et connaître",
       trans: { en: "Savoir and connaître", ar: "Savoir وconnaître", fa: "Savoir و connaître", pt: "Savoir e connaître", so: "Savoir iyo connaître", ti: "Savoirን connaîtreን", tr: "Savoir ve connaître", ps: "Savoir او connaître", uk: "Savoir і connaître" },
     },
-    { type: "verb_toggle", buttonCols: 2, verbs: VT_SAVOIR_CONNAITRE },
+    {
+      type: "selector",
+      buttonCols: 2,
+      tabs: [
+        {
+          label: "savoir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "savoir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "sais" },
+                    { pronoun: "tu", form: "sais" },
+                    { pronoun: "il / elle / on", form: "sait" },
+                    { pronoun: "nous", form: "savons" },
+                    { pronoun: "vous", form: "savez" },
+                    { pronoun: "ils / elles", form: "savent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "connaître",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "connaître",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "connais" },
+                    { pronoun: "tu", form: "connais" },
+                    { pronoun: "il / elle / on", form: "connaît" },
+                    { pronoun: "nous", form: "connaissons" },
+                    { pronoun: "vous", form: "connaissez" },
+                    { pronoun: "ils / elles", form: "connaissent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     {
       type: "text",
       label: "Savoir ou connaître ?",

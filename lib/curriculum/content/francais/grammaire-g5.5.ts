@@ -1,4 +1,4 @@
-import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import type { GrammarLesson } from "../../grammar-data";
 
 /** G5.5 — La négation */
 export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
@@ -94,47 +94,76 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
-      negation: true,
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "être",
-          radical: "",
-          rows: [
-            { pronoun: "je", ending: "suis", radical: "" },
-            { pronoun: "tu", ending: "es", radical: "" },
-            { pronoun: "il / elle / on", ending: "est", radical: "" },
-            { pronoun: "nous", ending: "sommes", radical: "" },
-            { pronoun: "vous", ending: "êtes", radical: "" },
-            { pronoun: "ils / elles", ending: "sont", radical: "" },
+          label: "être",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "être",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne suis pas" },
+                    { pronoun: "tu", form: "n'es pas" },
+                    { pronoun: "il / elle / on", form: "n'est pas" },
+                    { pronoun: "nous", form: "ne sommes pas" },
+                    { pronoun: "vous", form: "n'êtes pas" },
+                    { pronoun: "ils / elles", form: "ne sont pas" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "avoir",
-          radical: "a",
-          rows: [
-            { pronoun: "je", ending: "ai", radical: "" },
-            { pronoun: "tu", ending: "as", radical: "" },
-            { pronoun: "il / elle / on", ending: "a", radical: "" },
-            { pronoun: "nous", ending: "avons", radical: "" },
-            { pronoun: "vous", ending: "avez", radical: "" },
-            { pronoun: "ils / elles", ending: "ont", radical: "" },
+          label: "avoir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "avoir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "n'ai pas" },
+                    { pronoun: "tu", form: "n'as pas" },
+                    { pronoun: "il / elle / on", form: "n'a pas" },
+                    { pronoun: "nous", form: "n'avons pas" },
+                    { pronoun: "vous", form: "n'avez pas" },
+                    { pronoun: "ils / elles", form: "n'ont pas" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "parler",
-          radical: "parl",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "parler",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "parler",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne parle pas" },
+                    { pronoun: "tu", form: "ne parles pas" },
+                    { pronoun: "il / elle / on", form: "ne parle pas" },
+                    { pronoun: "nous", form: "ne parlons pas" },
+                    { pronoun: "vous", form: "ne parlez pas" },
+                    { pronoun: "ils / elles", form: "ne parlent pas" },
+                  ],
+                },
+              ],
+            },
           ],
         },
-      ] as VerbToggleVerb[],
+      ],
     },
     {
       type: "text",

@@ -142,79 +142,139 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "parler",
-          radical: "parl",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "parler",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "parler",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "parle" },
+                    { pronoun: "tu", form: "parles" },
+                    { pronoun: "il / elle / on", form: "parle" },
+                    { pronoun: "nous", form: "parlons" },
+                    { pronoun: "vous", form: "parlez" },
+                    { pronoun: "ils / elles", form: "parlent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "aimer",
-          radical: "aim",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "aimer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "aimer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "aime" },
+                    { pronoun: "tu", form: "aimes" },
+                    { pronoun: "il / elle / on", form: "aime" },
+                    { pronoun: "nous", form: "aimons" },
+                    { pronoun: "vous", form: "aimez" },
+                    { pronoun: "ils / elles", form: "aiment" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "écouter",
-          radical: "écout",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "écouter",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "écouter",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "écoute" },
+                    { pronoun: "tu", form: "écoutes" },
+                    { pronoun: "il / elle / on", form: "écoute" },
+                    { pronoun: "nous", form: "écoutons" },
+                    { pronoun: "vous", form: "écoutez" },
+                    { pronoun: "ils / elles", form: "écoutent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "habiter",
-          radical: "habit",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "habiter",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "habiter",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "habite" },
+                    { pronoun: "tu", form: "habites" },
+                    { pronoun: "il / elle / on", form: "habite" },
+                    { pronoun: "nous", form: "habitons" },
+                    { pronoun: "vous", form: "habitez" },
+                    { pronoun: "ils / elles", form: "habitent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "regarder",
-          radical: "regard",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "regarder",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "regarder",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "regarde" },
+                    { pronoun: "tu", form: "regardes" },
+                    { pronoun: "il / elle / on", form: "regarde" },
+                    { pronoun: "nous", form: "regardons" },
+                    { pronoun: "vous", form: "regardez" },
+                    { pronoun: "ils / elles", form: "regardent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "étudier",
-          radical: "étudi",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "étudier",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "étudier",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "étudie" },
+                    { pronoun: "tu", form: "étudies" },
+                    { pronoun: "il / elle / on", form: "étudie" },
+                    { pronoun: "nous", form: "étudions" },
+                    { pronoun: "vous", form: "étudiez" },
+                    { pronoun: "ils / elles", form: "étudient" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],

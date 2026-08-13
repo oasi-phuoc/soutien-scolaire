@@ -1,51 +1,5 @@
-import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import type { GrammarLesson } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
-
-const MODAL_VERBS: VerbToggleVerb[] = [
-  {
-    infinitive: "vouloir",
-    radical: "",
-    rows: [
-      { pronoun: "je", ending: "veux" },
-      { pronoun: "tu", ending: "veux" },
-      { pronoun: "il / elle / on", ending: "veut" },
-      { pronoun: "nous", ending: "voulons" },
-      { pronoun: "vous", ending: "voulez" },
-      { pronoun: "ils / elles", ending: "veulent" },
-    ],
-  },
-  {
-    infinitive: "pouvoir",
-    radical: "",
-    rows: [
-      { pronoun: "je", ending: "peux" },
-      { pronoun: "tu", ending: "peux" },
-      { pronoun: "il / elle / on", ending: "peut" },
-      { pronoun: "nous", ending: "pouvons" },
-      { pronoun: "vous", ending: "pouvez" },
-      { pronoun: "ils / elles", ending: "peuvent" },
-    ],
-  },
-  {
-    infinitive: "devoir",
-    radical: "",
-    rows: [
-      { pronoun: "je", ending: "dois" },
-      { pronoun: "tu", ending: "dois" },
-      { pronoun: "il / elle / on", ending: "doit" },
-      { pronoun: "nous", ending: "devons" },
-      { pronoun: "vous", ending: "devez" },
-      { pronoun: "ils / elles", ending: "doivent" },
-    ],
-  },
-  {
-    infinitive: "falloir",
-    radical: "",
-    rows: [
-      { pronoun: "il", ending: "faut" },
-    ],
-  },
-];
 
 /** Unité 6 — Pouvoir, vouloir, devoir, savoir et falloir (G1.7) */
 export const A1_GR_MODAUX: GrammarLesson = {
@@ -106,7 +60,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Désir", "Je {a}veux{/a} manger une pizza."],
@@ -156,7 +110,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Capacité", "Je {a}peux{/a} nager."],
@@ -207,7 +161,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Obligation", "Je {a}dois{/a} faire mes devoirs."],
@@ -258,7 +212,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager.\nIl {a}faut{/a} arriver à l'heure."],
@@ -281,14 +235,190 @@ export const A1_GR_MODAUX: GrammarLesson = {
       text: "La forme affirmative",
       trans: { en: "The affirmative form", ar: "صيغة الإثبات", fa: "صورت مثبت", pt: "A forma afirmativa", so: "Qaabka oggolaanshaha", ti: "ኣረጋጋጺ ቅርጺ", tr: "Olumlu biçim", ps: "مثبته بڼه", uk: "Стверджувальна форма" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: MODAL_VERBS },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "vouloir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "vouloir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "veux" },
+                    { pronoun: "tu", form: "veux" },
+                    { pronoun: "il / elle / on", form: "veut" },
+                    { pronoun: "nous", form: "voulons" },
+                    { pronoun: "vous", form: "voulez" },
+                    { pronoun: "ils / elles", form: "veulent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "pouvoir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "pouvoir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "peux" },
+                    { pronoun: "tu", form: "peux" },
+                    { pronoun: "il / elle / on", form: "peut" },
+                    { pronoun: "nous", form: "pouvons" },
+                    { pronoun: "vous", form: "pouvez" },
+                    { pronoun: "ils / elles", form: "peuvent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "devoir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "devoir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "dois" },
+                    { pronoun: "tu", form: "dois" },
+                    { pronoun: "il / elle / on", form: "doit" },
+                    { pronoun: "nous", form: "devons" },
+                    { pronoun: "vous", form: "devez" },
+                    { pronoun: "ils / elles", form: "doivent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "falloir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "falloir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "il", form: "faut" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     {
       type: "heading",
       text: "La forme négative",
       trans: { en: "The negative form", ar: "صيغة النفي", fa: "صورت منفی", pt: "A forma negativa", so: "Qaabka diidmada", ti: "ኣሉታዊ ቅርጺ", tr: "Olumsuz biçim", ps: "منفي بڼه", uk: "Заперечна форма" },
     },
-    { type: "verb_toggle", buttonCols: 3, negation: true, verbs: MODAL_VERBS },
+    {
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
+        {
+          label: "vouloir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "vouloir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne veux pas" },
+                    { pronoun: "tu", form: "ne veux pas" },
+                    { pronoun: "il / elle / on", form: "ne veut pas" },
+                    { pronoun: "nous", form: "ne voulons pas" },
+                    { pronoun: "vous", form: "ne voulez pas" },
+                    { pronoun: "ils / elles", form: "ne veulent pas" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "pouvoir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "pouvoir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne peux pas" },
+                    { pronoun: "tu", form: "ne peux pas" },
+                    { pronoun: "il / elle / on", form: "ne peut pas" },
+                    { pronoun: "nous", form: "ne pouvons pas" },
+                    { pronoun: "vous", form: "ne pouvez pas" },
+                    { pronoun: "ils / elles", form: "ne peuvent pas" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "devoir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "devoir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne dois pas" },
+                    { pronoun: "tu", form: "ne dois pas" },
+                    { pronoun: "il / elle / on", form: "ne doit pas" },
+                    { pronoun: "nous", form: "ne devons pas" },
+                    { pronoun: "vous", form: "ne devez pas" },
+                    { pronoun: "ils / elles", form: "ne doivent pas" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "falloir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "falloir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "il", form: "ne faut pas" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
     {
       type: "heading",

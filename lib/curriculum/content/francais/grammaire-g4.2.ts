@@ -136,19 +136,229 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 5,
-      verbs: [
-        { infinitive: "aller", radical: "", rows: [{ pronoun: "je", ending: "vais" }, { pronoun: "tu", ending: "vas" }, { pronoun: "il / elle / on", ending: "va" }, { pronoun: "nous", ending: "allons" }, { pronoun: "vous", ending: "allez" }, { pronoun: "ils / elles", ending: "vont" }] },
-        { infinitive: "venir", radical: "", rows: [{ pronoun: "je", ending: "viens" }, { pronoun: "tu", ending: "viens" }, { pronoun: "il / elle / on", ending: "vient" }, { pronoun: "nous", ending: "venons" }, { pronoun: "vous", ending: "venez" }, { pronoun: "ils / elles", ending: "viennent" }] },
-        { infinitive: "partir", radical: "par", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "tons" }, { pronoun: "vous", ending: "tez" }, { pronoun: "ils / elles", ending: "tent" }] },
-        { infinitive: "arriver", radical: "arriv", rows: [{ pronoun: "j'", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "entrer", radical: "entr", rows: [{ pronoun: "j'", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "sortir", radical: "sor", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "tons" }, { pronoun: "vous", ending: "tez" }, { pronoun: "ils / elles", ending: "tent" }] },
-        { infinitive: "monter", radical: "mont", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "descendre", radical: "descend", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "marcher", radical: "march", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-        { infinitive: "courir", radical: "cour", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+      tabs: [
+        {
+          label: "aller",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "aller",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "vais" },
+                    { pronoun: "tu", form: "vas" },
+                    { pronoun: "il / elle / on", form: "va" },
+                    { pronoun: "nous", form: "allons" },
+                    { pronoun: "vous", form: "allez" },
+                    { pronoun: "ils / elles", form: "vont" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "venir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "venir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "viens" },
+                    { pronoun: "tu", form: "viens" },
+                    { pronoun: "il / elle / on", form: "vient" },
+                    { pronoun: "nous", form: "venons" },
+                    { pronoun: "vous", form: "venez" },
+                    { pronoun: "ils / elles", form: "viennent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "partir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "partir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "pars" },
+                    { pronoun: "tu", form: "pars" },
+                    { pronoun: "il / elle / on", form: "part" },
+                    { pronoun: "nous", form: "partons" },
+                    { pronoun: "vous", form: "partez" },
+                    { pronoun: "ils / elles", form: "partent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "arriver",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "arriver",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "arrive" },
+                    { pronoun: "tu", form: "arrives" },
+                    { pronoun: "il / elle / on", form: "arrive" },
+                    { pronoun: "nous", form: "arrivons" },
+                    { pronoun: "vous", form: "arrivez" },
+                    { pronoun: "ils / elles", form: "arrivent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "entrer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "entrer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "entre" },
+                    { pronoun: "tu", form: "entres" },
+                    { pronoun: "il / elle / on", form: "entre" },
+                    { pronoun: "nous", form: "entrons" },
+                    { pronoun: "vous", form: "entrez" },
+                    { pronoun: "ils / elles", form: "entrent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "sortir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "sortir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "sors" },
+                    { pronoun: "tu", form: "sors" },
+                    { pronoun: "il / elle / on", form: "sort" },
+                    { pronoun: "nous", form: "sortons" },
+                    { pronoun: "vous", form: "sortez" },
+                    { pronoun: "ils / elles", form: "sortent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "monter",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "monter",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "monte" },
+                    { pronoun: "tu", form: "montes" },
+                    { pronoun: "il / elle / on", form: "monte" },
+                    { pronoun: "nous", form: "montons" },
+                    { pronoun: "vous", form: "montez" },
+                    { pronoun: "ils / elles", form: "montent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "descendre",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "descendre",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "descends" },
+                    { pronoun: "tu", form: "descends" },
+                    { pronoun: "il / elle / on", form: "descend" },
+                    { pronoun: "nous", form: "descendons" },
+                    { pronoun: "vous", form: "descendez" },
+                    { pronoun: "ils / elles", form: "descendent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "marcher",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "marcher",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "marche" },
+                    { pronoun: "tu", form: "marches" },
+                    { pronoun: "il / elle / on", form: "marche" },
+                    { pronoun: "nous", form: "marchons" },
+                    { pronoun: "vous", form: "marchez" },
+                    { pronoun: "ils / elles", form: "marchent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "courir",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "courir",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "cours" },
+                    { pronoun: "tu", form: "cours" },
+                    { pronoun: "il / elle / on", form: "court" },
+                    { pronoun: "nous", form: "courons" },
+                    { pronoun: "vous", form: "courez" },
+                    { pronoun: "ils / elles", form: "courent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     {

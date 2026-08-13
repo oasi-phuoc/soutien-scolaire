@@ -206,358 +206,208 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
-      verbs: [
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
         {
-          infinitive: "se lever",
-          radical: "",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se lever",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-              radical: "lèv",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-              radical: "lev",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-              radical: "lev",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-              radical: "lèv",
+              type: "table",
+              tables: [
+                {
+                  verb: "se lever",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me lève" },
+                    { pronoun: "tu", form: "te lèves" },
+                    { pronoun: "il / elle / on", form: "se lève" },
+                    { pronoun: "nous", form: "nous levons" },
+                    { pronoun: "vous", form: "vous levez" },
+                    { pronoun: "ils / elles", form: "se lèvent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se coucher",
-          radical: "couch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se coucher",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se coucher",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me couche" },
+                    { pronoun: "tu", form: "te couches" },
+                    { pronoun: "il / elle / on", form: "se couche" },
+                    { pronoun: "nous", form: "nous couchons" },
+                    { pronoun: "vous", form: "vous couchez" },
+                    { pronoun: "ils / elles", form: "se couchent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se laver",
-          radical: "lav",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se laver",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se laver",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me lave" },
+                    { pronoun: "tu", form: "te laves" },
+                    { pronoun: "il / elle / on", form: "se lave" },
+                    { pronoun: "nous", form: "nous lavons" },
+                    { pronoun: "vous", form: "vous lavez" },
+                    { pronoun: "ils / elles", form: "se lavent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se doucher",
-          radical: "douch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se doucher",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se doucher",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me douche" },
+                    { pronoun: "tu", form: "te douches" },
+                    { pronoun: "il / elle / on", form: "se douche" },
+                    { pronoun: "nous", form: "nous douchons" },
+                    { pronoun: "vous", form: "vous douchez" },
+                    { pronoun: "ils / elles", form: "se douchent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se brosser",
-          radical: "bross",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se brosser",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se brosser",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me brosse" },
+                    { pronoun: "tu", form: "te brosses" },
+                    { pronoun: "il / elle / on", form: "se brosse" },
+                    { pronoun: "nous", form: "nous brossons" },
+                    { pronoun: "vous", form: "vous brossez" },
+                    { pronoun: "ils / elles", form: "se brossent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se raser",
-          radical: "ras",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se raser",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se raser",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me rase" },
+                    { pronoun: "tu", form: "te rases" },
+                    { pronoun: "il / elle / on", form: "se rase" },
+                    { pronoun: "nous", form: "nous rasons" },
+                    { pronoun: "vous", form: "vous rasez" },
+                    { pronoun: "ils / elles", form: "se rasent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se coiffer",
-          radical: "coiff",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se coiffer",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se coiffer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me coiffe" },
+                    { pronoun: "tu", form: "te coiffes" },
+                    { pronoun: "il / elle / on", form: "se coiffe" },
+                    { pronoun: "nous", form: "nous coiffons" },
+                    { pronoun: "vous", form: "vous coiffez" },
+                    { pronoun: "ils / elles", form: "se coiffent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "s'habiller",
-          radical: "habill",
-          reflexivePronouns: [
-            "m'",
-            "t'",
-            "s'",
-            "nous",
-            "vous",
-            "s'",
-          ],
-          rows: [
+          label: "s'habiller",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "s'habiller",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "m'habille" },
+                    { pronoun: "tu", form: "t'habilles" },
+                    { pronoun: "il / elle / on", form: "s'habille" },
+                    { pronoun: "nous", form: "nous habillons" },
+                    { pronoun: "vous", form: "vous habillez" },
+                    { pronoun: "ils / elles", form: "s'habillent" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se reposer",
-          radical: "repos",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se reposer",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se reposer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "me repose" },
+                    { pronoun: "tu", form: "te reposes" },
+                    { pronoun: "il / elle / on", form: "se repose" },
+                    { pronoun: "nous", form: "nous reposons" },
+                    { pronoun: "vous", form: "vous reposez" },
+                    { pronoun: "ils / elles", form: "se reposent" },
+                  ],
+                },
+              ],
             },
           ],
         },
       ],
-      buttonCols: 3,
     },
     {
       type: "heading",
@@ -628,359 +478,208 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       
     },
     {
-      type: "verb_toggle",
-      negation: true,
-      verbs: [
+      type: "selector",
+      buttonCols: 3,
+      tabs: [
         {
-          infinitive: "se lever",
-          radical: "",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se lever",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-              radical: "lèv",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-              radical: "lev",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-              radical: "lev",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-              radical: "lèv",
+              type: "table",
+              tables: [
+                {
+                  verb: "se lever",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me lève pas" },
+                    { pronoun: "tu", form: "ne te lèves pas" },
+                    { pronoun: "il / elle / on", form: "ne se lève pas" },
+                    { pronoun: "nous", form: "ne nous levons pas" },
+                    { pronoun: "vous", form: "ne vous levez pas" },
+                    { pronoun: "ils / elles", form: "ne se lèvent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se coucher",
-          radical: "couch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se coucher",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se coucher",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me couche pas" },
+                    { pronoun: "tu", form: "ne te couches pas" },
+                    { pronoun: "il / elle / on", form: "ne se couche pas" },
+                    { pronoun: "nous", form: "ne nous couchons pas" },
+                    { pronoun: "vous", form: "ne vous couchez pas" },
+                    { pronoun: "ils / elles", form: "ne se couchent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se laver",
-          radical: "lav",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se laver",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se laver",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me lave pas" },
+                    { pronoun: "tu", form: "ne te laves pas" },
+                    { pronoun: "il / elle / on", form: "ne se lave pas" },
+                    { pronoun: "nous", form: "ne nous lavons pas" },
+                    { pronoun: "vous", form: "ne vous lavez pas" },
+                    { pronoun: "ils / elles", form: "ne se lavent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se doucher",
-          radical: "douch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se doucher",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se doucher",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me douche pas" },
+                    { pronoun: "tu", form: "ne te douches pas" },
+                    { pronoun: "il / elle / on", form: "ne se douche pas" },
+                    { pronoun: "nous", form: "ne nous douchons pas" },
+                    { pronoun: "vous", form: "ne vous douchez pas" },
+                    { pronoun: "ils / elles", form: "ne se douchent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se brosser",
-          radical: "bross",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se brosser",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se brosser",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me brosse pas" },
+                    { pronoun: "tu", form: "ne te brosses pas" },
+                    { pronoun: "il / elle / on", form: "ne se brosse pas" },
+                    { pronoun: "nous", form: "ne nous brossons pas" },
+                    { pronoun: "vous", form: "ne vous brossez pas" },
+                    { pronoun: "ils / elles", form: "ne se brossent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se raser",
-          radical: "ras",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se raser",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se raser",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me rase pas" },
+                    { pronoun: "tu", form: "ne te rases pas" },
+                    { pronoun: "il / elle / on", form: "ne se rase pas" },
+                    { pronoun: "nous", form: "ne nous rasons pas" },
+                    { pronoun: "vous", form: "ne vous rasez pas" },
+                    { pronoun: "ils / elles", form: "ne se rasent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se coiffer",
-          radical: "coiff",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se coiffer",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se coiffer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me coiffe pas" },
+                    { pronoun: "tu", form: "ne te coiffes pas" },
+                    { pronoun: "il / elle / on", form: "ne se coiffe pas" },
+                    { pronoun: "nous", form: "ne nous coiffons pas" },
+                    { pronoun: "vous", form: "ne vous coiffez pas" },
+                    { pronoun: "ils / elles", form: "ne se coiffent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "s'habiller",
-          radical: "habill",
-          reflexivePronouns: [
-            "m'",
-            "t'",
-            "s'",
-            "nous",
-            "vous",
-            "s'",
-          ],
-          rows: [
+          label: "s'habiller",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "s'habiller",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne m'habille pas" },
+                    { pronoun: "tu", form: "ne t'habilles pas" },
+                    { pronoun: "il / elle / on", form: "ne s'habille pas" },
+                    { pronoun: "nous", form: "ne nous habillons pas" },
+                    { pronoun: "vous", form: "ne vous habillez pas" },
+                    { pronoun: "ils / elles", form: "ne s'habillent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
         {
-          infinitive: "se reposer",
-          radical: "repos",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
+          label: "se reposer",
+          content: [
             {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
+              type: "table",
+              tables: [
+                {
+                  verb: "se reposer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ne me repose pas" },
+                    { pronoun: "tu", form: "ne te reposes pas" },
+                    { pronoun: "il / elle / on", form: "ne se repose pas" },
+                    { pronoun: "nous", form: "ne nous reposons pas" },
+                    { pronoun: "vous", form: "ne vous reposez pas" },
+                    { pronoun: "ils / elles", form: "ne se reposent pas" },
+                  ],
+                },
+              ],
             },
           ],
         },
       ],
-      buttonCols: 3,
     },
     {
       type: "heading",

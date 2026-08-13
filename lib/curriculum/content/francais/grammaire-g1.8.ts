@@ -42,7 +42,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Déplacement", "Tu {a}vas{/a} où ?\nNous {a}allons{/a} en Espagne."],
@@ -142,41 +142,73 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "payer", radical: "pay",
-          rows: [
-            { pronoun: "je", ending: "e", radical: "pai" },
-            { pronoun: "tu", ending: "es", radical: "pai" },
-            { pronoun: "il / elle / on", ending: "e", radical: "pai" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent", radical: "pai" },
+          label: "payer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "payer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "paie" },
+                    { pronoun: "tu", form: "paies" },
+                    { pronoun: "il / elle / on", form: "paie" },
+                    { pronoun: "nous", form: "payons" },
+                    { pronoun: "vous", form: "payez" },
+                    { pronoun: "ils / elles", form: "paient" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "nettoyer", radical: "nettoy",
-          rows: [
-            { pronoun: "je", ending: "e", radical: "nettoi" },
-            { pronoun: "tu", ending: "es", radical: "nettoi" },
-            { pronoun: "il / elle / on", ending: "e", radical: "nettoi" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent", radical: "nettoi" },
+          label: "nettoyer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "nettoyer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "nettoie" },
+                    { pronoun: "tu", form: "nettoies" },
+                    { pronoun: "il / elle / on", form: "nettoie" },
+                    { pronoun: "nous", form: "nettoyons" },
+                    { pronoun: "vous", form: "nettoyez" },
+                    { pronoun: "ils / elles", form: "nettoient" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "s'ennuyer", radical: "ennuy",
-          reflexivePronouns: ["m'", "t'", "s'", "nous", "vous", "s'"],
-          rows: [
-            { pronoun: "je", ending: "e", radical: "ennui" },
-            { pronoun: "tu", ending: "es", radical: "ennui" },
-            { pronoun: "il / elle / on", ending: "e", radical: "ennui" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent", radical: "ennui" },
+          label: "s'ennuyer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "s'ennuyer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "m'ennuie" },
+                    { pronoun: "tu", form: "t'ennuies" },
+                    { pronoun: "il / elle / on", form: "s'ennuie" },
+                    { pronoun: "nous", form: "nous ennuyons" },
+                    { pronoun: "vous", form: "vous ennuyez" },
+                    { pronoun: "ils / elles", form: "s'ennuient" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -203,40 +235,73 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "manger", radical: "mang",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons", radical: "mange" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "manger",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "manger",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "mange" },
+                    { pronoun: "tu", form: "manges" },
+                    { pronoun: "il / elle / on", form: "mange" },
+                    { pronoun: "nous", form: "mangeons" },
+                    { pronoun: "vous", form: "mangez" },
+                    { pronoun: "ils / elles", form: "mangent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "voyager", radical: "voyag",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons", radical: "voyage" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "voyager",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "voyager",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "voyage" },
+                    { pronoun: "tu", form: "voyages" },
+                    { pronoun: "il / elle / on", form: "voyage" },
+                    { pronoun: "nous", form: "voyageons" },
+                    { pronoun: "vous", form: "voyagez" },
+                    { pronoun: "ils / elles", form: "voyagent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "changer", radical: "chang",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons", radical: "change" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "changer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "changer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "change" },
+                    { pronoun: "tu", form: "changes" },
+                    { pronoun: "il / elle / on", form: "change" },
+                    { pronoun: "nous", form: "changeons" },
+                    { pronoun: "vous", form: "changez" },
+                    { pronoun: "ils / elles", form: "changent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -257,40 +322,73 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "commencer", radical: "commenc",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons", radical: "commenç" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "commencer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "commencer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "commence" },
+                    { pronoun: "tu", form: "commences" },
+                    { pronoun: "il / elle / on", form: "commence" },
+                    { pronoun: "nous", form: "commençons" },
+                    { pronoun: "vous", form: "commencez" },
+                    { pronoun: "ils / elles", form: "commencent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "avancer", radical: "avanc",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons", radical: "avanç" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "avancer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "avancer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "avance" },
+                    { pronoun: "tu", form: "avances" },
+                    { pronoun: "il / elle / on", form: "avance" },
+                    { pronoun: "nous", form: "avançons" },
+                    { pronoun: "vous", form: "avancez" },
+                    { pronoun: "ils / elles", form: "avancent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "lancer", radical: "lanc",
-          rows: [
-            { pronoun: "je", ending: "e" },
-            { pronoun: "tu", ending: "es" },
-            { pronoun: "il / elle / on", ending: "e" },
-            { pronoun: "nous", ending: "ons", radical: "lanç" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent" },
+          label: "lancer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "lancer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "lance" },
+                    { pronoun: "tu", form: "lances" },
+                    { pronoun: "il / elle / on", form: "lance" },
+                    { pronoun: "nous", form: "lançons" },
+                    { pronoun: "vous", form: "lancez" },
+                    { pronoun: "ils / elles", form: "lancent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -360,40 +458,73 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
       },
     },
     {
-      type: "verb_toggle",
+      type: "selector",
       buttonCols: 3,
-      verbs: [
+      tabs: [
         {
-          infinitive: "jeter", radical: "jet",
-          rows: [
-            { pronoun: "je", ending: "e", radical: "jett" },
-            { pronoun: "tu", ending: "es", radical: "jett" },
-            { pronoun: "il / elle / on", ending: "e", radical: "jett" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent", radical: "jett" },
+          label: "jeter",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "jeter",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "jette" },
+                    { pronoun: "tu", form: "jettes" },
+                    { pronoun: "il / elle / on", form: "jette" },
+                    { pronoun: "nous", form: "jetons" },
+                    { pronoun: "vous", form: "jetez" },
+                    { pronoun: "ils / elles", form: "jettent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "appeler", radical: "appel",
-          rows: [
-            { pronoun: "j'", ending: "e", radical: "appell" },
-            { pronoun: "tu", ending: "es", radical: "appell" },
-            { pronoun: "il / elle / on", ending: "e", radical: "appell" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent", radical: "appell" },
+          label: "appeler",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "appeler",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "j'", form: "appelle" },
+                    { pronoun: "tu", form: "appelles" },
+                    { pronoun: "il / elle / on", form: "appelle" },
+                    { pronoun: "nous", form: "appelons" },
+                    { pronoun: "vous", form: "appelez" },
+                    { pronoun: "ils / elles", form: "appellent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          infinitive: "préférer", radical: "préfér",
-          rows: [
-            { pronoun: "je", ending: "e", radical: "préfèr" },
-            { pronoun: "tu", ending: "es", radical: "préfèr" },
-            { pronoun: "il / elle / on", ending: "e", radical: "préfèr" },
-            { pronoun: "nous", ending: "ons" },
-            { pronoun: "vous", ending: "ez" },
-            { pronoun: "ils / elles", ending: "ent", radical: "préfèr" },
+          label: "préférer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "préférer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "préfère" },
+                    { pronoun: "tu", form: "préfères" },
+                    { pronoun: "il / elle / on", form: "préfère" },
+                    { pronoun: "nous", form: "préférons" },
+                    { pronoun: "vous", form: "préférez" },
+                    { pronoun: "ils / elles", form: "préfèrent" },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
