@@ -1,21 +1,20 @@
 import { LECTURE_IMAGE_INDEX } from "@/lib/curriculum/content/communication/word-image-index";
-import { labelToAssetSlug, resolveCeCoWordImage } from "@/lib/curriculum/word-image-resolver";
+import { labelToAssetSlug } from "@/lib/curriculum/word-image-resolver";
 import { speak, primeSpeechVoices, type VoiceGender } from "@/lib/utils/speech";
 
 export function getWordAssetSlug(word: string): string {
   return word.toLowerCase();
 }
 
+// Lecture : uniquement les images dédiées /assets/words/lecture/ —
+// jamais les scènes d'expression (CE/CO), réservées à la communication.
 export function getLectureWordImagePath(word: string): string {
-  const resolved = resolveCeCoWordImage(word);
-  if (resolved) return resolved;
   const slug = labelToAssetSlug(word);
   if (LECTURE_IMAGE_INDEX[slug]) return LECTURE_IMAGE_INDEX[slug]!;
   return `/assets/words/lecture/${getWordAssetSlug(word)}.webp`;
 }
 
 export function hasLectureWordImage(word: string): boolean {
-  if (resolveCeCoWordImage(word)) return true;
   const slug = labelToAssetSlug(word);
   return !!(LECTURE_IMAGE_INDEX[getWordAssetSlug(word)] || LECTURE_IMAGE_INDEX[slug]);
 }
