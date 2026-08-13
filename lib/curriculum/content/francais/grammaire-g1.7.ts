@@ -1,4 +1,4 @@
-import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson, type VerbToggleVerb } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 const MODAL_VERBS: VerbToggleVerb[] = [
@@ -106,7 +106,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Désir", "Je {a}veux{/a} manger une pizza."],
@@ -156,7 +156,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Capacité", "Je {a}peux{/a} nager."],
@@ -207,7 +207,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Obligation", "Je {a}dois{/a} faire mes devoirs."],
@@ -258,7 +258,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager.\nIl {a}faut{/a} arriver à l'heure."],
@@ -281,14 +281,14 @@ export const A1_GR_MODAUX: GrammarLesson = {
       text: "La forme affirmative",
       trans: { en: "The affirmative form", ar: "صيغة الإثبات", fa: "صورت مثبت", pt: "A forma afirmativa", so: "Qaabka oggolaanshaha", ti: "ኣረጋጋጺ ቅርጺ", tr: "Olumlu biçim", ps: "مثبته بڼه", uk: "Стверджувальна форма" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: MODAL_VERBS },
+    verbsToSelector(MODAL_VERBS, { buttonCols: 3 }),
 
     {
       type: "heading",
       text: "La forme négative",
       trans: { en: "The negative form", ar: "صيغة النفي", fa: "صورت منفی", pt: "A forma negativa", so: "Qaabka diidmada", ti: "ኣሉታዊ ቅርጺ", tr: "Olumsuz biçim", ps: "منفي بڼه", uk: "Заперечна форма" },
     },
-    { type: "verb_toggle", buttonCols: 3, negation: true, verbs: MODAL_VERBS },
+    verbsToSelector(MODAL_VERBS, { buttonCols: 3, negation: true }),
 
     {
       type: "heading",

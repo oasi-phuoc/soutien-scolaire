@@ -1,4 +1,4 @@
-import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson, type VerbToggleVerb } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 const VT_DRE: VerbToggleVerb[] = [
@@ -251,42 +251,42 @@ export const A1_GR_VERBES_RE_OIR: GrammarLesson = {
       text: "Verbe irrégulier",
       trans: { en: "Irregular verb", ar: "الفعل الشاذ", fa: "فعل بی‌قاعده", pt: "Verbo irregular", so: "Fal aan caadi ahayn", ti: "ዘይስሩዕ ግሲ", tr: "Düzensiz fiil", ps: "بې قاعده فعل", uk: "Неправильне дієслово" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRREGULIER },
+    verbsToSelector(VT_IRREGULIER, { buttonCols: 3 }),
 
     {
       type: "heading",
       text: "Verbes en -dre",
       trans: { en: "Verbs ending in -dre", ar: "الأفعال المنتهية بـ -dre", fa: "فعل‌های پایان‌یافته به -dre", pt: "Verbos terminados em -dre", so: "Falalka ku dhammaada -dre", ti: "ብ -dre ዝውድኡ ግሲታት", tr: "-dre ile biten fiiller", ps: "په -dre پای ته رسېدونکي فعلونه", uk: "Дієслова на -dre" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_DRE },
+    verbsToSelector(VT_DRE, { buttonCols: 3 }),
 
     {
       type: "heading",
       text: "Verbes en -ire",
       trans: { en: "Verbs ending in -ire", ar: "الأفعال المنتهية بـ -ire", fa: "فعل‌های پایان‌یافته به -ire", pt: "Verbos terminados em -ire", so: "Falalka ku dhammaada -ire", ti: "ብ -ire ዝውድኡ ግሲታት", tr: "-ire ile biten fiiller", ps: "په -ire پای ته رسېدونکي فعلونه", uk: "Дієслова на -ire" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_IRE },
+    verbsToSelector(VT_IRE, { buttonCols: 3 }),
 
     {
       type: "heading",
       text: "Verbes en -oir",
       trans: { en: "Verbs ending in -oir", ar: "الأفعال المنتهية بـ -oir", fa: "فعل‌های پایان‌یافته به -oir", pt: "Verbos terminados em -oir", so: "Falalka ku dhammaada -oir", ti: "ብ -oir ዝውድኡ ግሲታት", tr: "-oir ile biten fiiller", ps: "په -oir پای ته رسېدونکي فعلونه", uk: "Дієслова на -oir" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_OIR },
+    verbsToSelector(VT_OIR, { buttonCols: 3 }),
 
     {
       type: "heading",
       text: "Verbes en -indre",
       trans: { en: "Verbs ending in -indre", ar: "الأفعال المنتهية بـ -indre", fa: "فعل‌های پایان‌یافته به -indre", pt: "Verbos terminados em -indre", so: "Falalka ku dhammaada -indre", ti: "ብ -indre ዝውድኡ ግሲታት", tr: "-indre ile biten fiiller", ps: "په -indre پای ته رسېدونکي فعلونه", uk: "Дієслова на -indre" },
     },
-    { type: "verb_toggle", buttonCols: 3, verbs: VT_INDRE },
+    verbsToSelector(VT_INDRE, { buttonCols: 3 }),
 
     {
       type: "heading",
       text: "Savoir et connaître",
       trans: { en: "Savoir and connaître", ar: "Savoir وconnaître", fa: "Savoir و connaître", pt: "Savoir e connaître", so: "Savoir iyo connaître", ti: "Savoirን connaîtreን", tr: "Savoir ve connaître", ps: "Savoir او connaître", uk: "Savoir і connaître" },
     },
-    { type: "verb_toggle", buttonCols: 2, verbs: VT_SAVOIR_CONNAITRE },
+    verbsToSelector(VT_SAVOIR_CONNAITRE, { buttonCols: 2 }),
     {
       type: "text",
       label: "Savoir ou connaître ?",

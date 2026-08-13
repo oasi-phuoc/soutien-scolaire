@@ -1,4 +1,4 @@
-import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson, type VerbToggleVerb } from "../../grammar-data";
 
 /** G5.5 — La négation */
 export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
@@ -93,11 +93,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
         ],
       },
     },
-    {
-      type: "verb_toggle",
-      negation: true,
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "être",
           radical: "",
@@ -134,8 +130,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
-      ] as VerbToggleVerb[],
-    },
+      ] as VerbToggleVerb[], { buttonCols: 3, negation: true }),
     {
       type: "text",
       label: "Attention",
