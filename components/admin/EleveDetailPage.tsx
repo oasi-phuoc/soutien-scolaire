@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 import {
   changeRoleAction,
@@ -120,16 +121,10 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-2 border-b border-zinc-100 px-6 py-4 dark:border-zinc-800">
-          <button
-            type="button"
+          <PageBackButton
+            ariaLabel="Fermer"
             onClick={(e) => { e.stopPropagation(); onClose(); }}
-            aria-label="Fermer"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
+          />
           <h2 id="edit-eleve-title" className="text-base font-bold text-zinc-900 dark:text-zinc-50">Modifier les données</h2>
         </div>
         <div className="space-y-3 overflow-y-auto px-6 py-4">
@@ -381,16 +376,14 @@ export function EleveDetailPage({
     <main className={`${APP_SHELL_FULL} flex-1 py-8 pb-28`}>
 
       {/* Back button + Header */}
-      <div className="mb-6">
-        <button
+      <div className="mb-6 flex items-start gap-3">
+        <PageBackButton
+          className="mt-0.5"
+          ariaLabel={isSuivi ? "Retour à la classe" : "Retour à la liste"}
           onClick={() => (backHref ? router.push(backHref) : router.back())}
-          className="mb-4 flex items-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M15 18l-6-6 6-6" /></svg>
-          {isSuivi ? "Retour à la classe" : "Retour à la liste"}
-        </button>
-
-        <div className="flex flex-wrap items-start justify-between gap-4">
+        />
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">{fullName}</h1>
@@ -420,6 +413,7 @@ export function EleveDetailPage({
                 <IconTrash /> Supprimer
               </button>
             )}
+          </div>
           </div>
         </div>
       </div>

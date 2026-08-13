@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { ELEVE_CLASSE_TYPES, type EleveClasseType } from "@/lib/eleve-classe-types";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -973,17 +974,7 @@ export function PrintConfigSheet({
       {/* Header */}
       <header className="shrink-0 border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)]/95 backdrop-blur-xl">
         <div className="app-shell flex min-h-20 w-full items-center gap-4 py-4">
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Quitter l'impression"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
-            style={{ background: accentColor }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-          </button>
+          <PageBackButton ariaLabel="Quitter l'impression" onClick={onClose} />
           <div>
             <h1 className="text-lg font-bold text-[var(--color-text-primary)]">
               Imprimer / Enregistrer en PDF

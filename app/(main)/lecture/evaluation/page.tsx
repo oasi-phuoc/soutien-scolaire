@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { VOWEL_EVALUATION } from "@/lib/curriculum/lecture-data";
 import { RevisionMixedGrid } from "@/components/lecture/RevisionMixedGrid";
 import { RevisionSoundDiscrim } from "@/components/lecture/RevisionSoundDiscrim";
@@ -11,15 +11,7 @@ export default function EvaluationPage() {
   return (
     <main className="app-shell flex-1 space-y-8 py-8 pb-32 lg:pb-28">
       <div className="flex items-center gap-3">
-        <Link
-          href="/lecture"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-          aria-label="Retour"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </Link>
+        <PageBackButton href="/lecture" ariaLabel="Retour" />
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-lecture)]">
             Évaluation

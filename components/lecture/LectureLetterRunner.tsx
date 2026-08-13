@@ -2,6 +2,7 @@
 
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -1299,16 +1300,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
           Lecture · {lessonCategory}{lessonNumber ? ` · ${lessonNumber}` : ""}
         </p>
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={goExit}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)] text-white transition-opacity hover:opacity-80"
-            aria-label="Quitter la leçon"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
+          <PageBackButton ariaLabel="Quitter la leçon" onClick={goExit} />
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
             {data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable" || data.type === "complex-sound" ? data.title : `${data.letter} - ${data.letterLower} — ${lessonPhonemeLabel(data.letterLower, data.phoneme)}`}
           </h1>

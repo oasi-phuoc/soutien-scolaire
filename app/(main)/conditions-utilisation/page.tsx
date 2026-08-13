@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 
 export default function ConditionsUtilisationPage() {
   return (
@@ -6,16 +6,7 @@ export default function ConditionsUtilisationPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3">
-          <Link
-            href="/compte"
-            aria-label="Retour aux réglages"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-colors hover:brightness-95"
-            style={{ background: "var(--color-theme-light)" }}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M15 18l-6-6 6-6" stroke="var(--color-theme)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+          <PageBackButton href="/compte" ariaLabel="Retour aux réglages" />
           <div>
             <h1 className="text-xl font-bold text-[var(--color-text-primary)]">Conditions d&apos;utilisation</h1>
             <p className="text-xs text-[var(--color-text-secondary)]">Dernière mise à jour : juin 2026</p>

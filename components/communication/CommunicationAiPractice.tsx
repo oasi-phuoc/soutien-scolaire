@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { cancelSpeech, speak } from "@/lib/utils/speech";
 
@@ -204,17 +205,7 @@ export function CommunicationAiPractice() {
   return (
     <div className="app-shell flex min-h-screen flex-col pt-4 pb-32 lg:pb-28">
       <header className="mb-4 flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => router.push("/communication")}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white"
-          style={{ background: ACCENT }}
-          aria-label="Retour"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden>
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
+        <PageBackButton ariaLabel="Retour" onClick={() => router.push("/communication")} />
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: ACCENT }}>Expression orale</p>
           <h1 className="truncate text-2xl font-bold text-[var(--color-text-primary)]">Conversation IA</h1>

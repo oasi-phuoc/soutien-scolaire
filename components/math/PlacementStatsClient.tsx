@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { loadPlacementTestHistoryAction } from "@/app/actions/progress";
 
 const TP_HISTORY_KEY = "tp-math-history";
@@ -197,16 +198,7 @@ export function PlacementStatsClient() {
     <div className="app-shell flex-1 py-8 pb-32 lg:pb-28">
       {/* Header */}
       <div className="mb-6 flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-          aria-label="Retour"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
+        <PageBackButton ariaLabel="Retour" onClick={() => router.back()} />
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
             Test de placement

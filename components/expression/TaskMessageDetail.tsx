@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import type { TaskMessage } from "@/app/actions/expression";
 import { formatMailboxFullDate } from "@/lib/messagerie/inbox";
 
@@ -6,13 +7,7 @@ export function TaskMessageDetail({ item }: { item: TaskMessage }) {
   return (
     <main className="app-shell app-shell--wide flex flex-1 flex-col pb-28 pt-4 sm:pt-6">
       <header className="mb-4 flex items-center gap-3 border-b border-[var(--color-border-default)] pb-4">
-        <Link
-          href="/messagerie"
-          aria-label="Retour à la boîte de réception"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-lg text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-theme-light)] hover:text-[var(--color-theme)]"
-        >
-          ‹
-        </Link>
+        <PageBackButton href="/messagerie" ariaLabel="Retour à la boîte de réception" />
         <div className="min-w-0 flex-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-theme)]">Devoir</p>
           <h1 className="truncate text-lg font-bold text-[var(--color-text-primary)] sm:text-xl">{item.title}</h1>

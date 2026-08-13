@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState, useTransition, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import {
   getExpressionTeachersAction,
   submitExpressionAction,
@@ -189,17 +190,11 @@ function Header({ level, title, placement = false }: { level: WritingLevel; titl
   const leaveHref = placement ? "/placement" : "/communication";
   return (
     <div className="flex items-start gap-3">
-      <button
-        type="button"
+      <PageBackButton
+        className="mt-0.5"
+        ariaLabel="Quitter la leçon"
         onClick={() => guardedNavigate(() => router.push(leaveHref))}
-        aria-label="Quitter la leçon"
-        className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
-        style={{ background: accent }}
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
+      />
       <div className="space-y-1">
         <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: accent }}>
           {placement ? "Test de placement · PE" : "Français · Production écrite"} · {levelLabel(level)}
