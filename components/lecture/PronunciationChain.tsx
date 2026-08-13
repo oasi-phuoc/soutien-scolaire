@@ -7,6 +7,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { matchesSpokenWord } from "@/lib/utils/french-speech-match";
+import { LectureConsigne } from "./LectureConsigne";
 
 export interface PronunciationChainHandle {
   reset: () => void;
@@ -97,9 +98,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
             {lectureUi(lang, "pronounceWord")}
           </p>
         )}
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          Prononcez le mot à voix haute
-        </p>
+        <LectureConsigne>Prononcez le mot à voix haute</LectureConsigne>
         {showPivot && (
           <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
             {lectureUi(lang, "sayWordAloud")}

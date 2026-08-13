@@ -30,6 +30,7 @@ import {
   saveEvaluationResult,
 } from "@/lib/progress/lecture-progress";
 import { LectureEvaluation } from "./LectureEvaluation";
+import { LectureConsigne } from "./LectureConsigne";
 import { playWord, playSyllable } from "@/lib/utils/audio";
 import {
   normalizeGraph,
@@ -213,12 +214,12 @@ const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Reconnaître le graphème</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">
+      <LectureConsigne>
         Touchez chaque{" "}
         <strong className="text-[var(--color-accent-lecture)]">
           {isUppercase ? target.toUpperCase() : target.toLowerCase()}
         </strong>
-      </p>
+      </LectureConsigne>
       <div className="grid grid-cols-5 gap-2">
         {grid.map((cell, index) => {
           const state = states[index]!;
@@ -311,11 +312,11 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
             {lectureUi(lang, "spotInWords")}
           </p>
         )}
-        <p className="text-sm text-[var(--color-text-secondary)]">
+        <LectureConsigne>
         Touchez le graphème{" "}
         <strong className="text-[var(--color-accent-lecture)]">{target}</strong>{" "}
         dans chaque mot.
-      </p>
+      </LectureConsigne>
       <ul className="space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
         {displayedWords.map((word, wordIndex) => (
           <li
@@ -604,7 +605,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
       {/* Title + consigne */}
       <div>
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{title ?? "Lire les mots"}</h2>
-        <p className="text-sm text-[var(--color-text-secondary)]">{consigne ?? "Prononcez chaque mot à voix haute."}</p>
+        <LectureConsigne>{consigne ?? "Prononcez chaque mot à voix haute."}</LectureConsigne>
       </div>
 
       {/* Timed steps: word-progress bar. The eval has no main bar, so it shows
@@ -729,7 +730,7 @@ function CSoundsExplain() {
     <section className="space-y-4">
       <div>
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">La lettre C se prononce de 2 façons</h2>
-        <p className="text-sm text-[var(--color-text-secondary)]">Touchez un mot pour l&apos;entendre.</p>
+        <LectureConsigne>Touchez un mot pour l&apos;entendre.</LectureConsigne>
       </div>
       {groups.map((g) => (
         <div key={g.sound} className="space-y-2">
