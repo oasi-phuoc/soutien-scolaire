@@ -14,6 +14,8 @@ Prérequis :
 Usage :
   python3 scripts/generate-missing-word-audio.py
   python3 scripts/generate-missing-word-audio.py --dry-run
+  # Régénérer une liste précise (chemins relatifs à son_f, ex. mots/ami.mp3) :
+  python3 scripts/generate-missing-word-audio.py --files /tmp/liste.txt
 """
 from __future__ import annotations
 
@@ -38,6 +40,20 @@ CONCURRENCY = 4
 RETRIES = 4
 
 
+def listed_pairs(list_file: Path) -> list[tuple[str, Path]]:
+    """Fichier texte : un chemin par ligne, relatif à son_f (ex. mots/ami.mp3)."""
+    pairs: list[tuple[str, Path]] = []
+    for line in list_file.read_text(encoding="utf-8").splitlines():
+        rel = line.strip()
+        if not rel or rel.startswith("#"):
+            continue
+        dest = SON_F / rel
+        text = dest.stem
+        if text:
+            pairs.append((text, dest))
+    return pairs
+
+
 def missing_pairs() -> list[tuple[str, Path]]:
     data = json.loads(LECTURE_LABELS.read_text(encoding="utf-8"))
     pairs: list[tuple[str, Path]] = []
@@ -60,7 +76,7 @@ async def generate_one(
 ) -> bool:
     async with sem:
         for attempt in range(RETRIES):
-            tmp = tmp_dir / f"{dest.stem}.raw.mp3"
+            tmp = tmp_dir / f"{dest.parent.name}-{dest.stem}.raw.mp3"
             try:
                 communicate = edge_tts.Communicate(text, VOICE, rate=RATE)
                 await communicate.save(str(tmp))
@@ -106,14 +122,17 @@ async def run(pairs: list[tuple[str, Path]]) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--files", type=Path, help="liste de chemins à régénérer (relatifs à son_f)")
     args = parser.parse_args()
 
-    if not LECTURE_LABELS.exists():
-        print(f"Manquant : {LECTURE_LABELS}", file=sys.stderr)
-        print("Lancer : npx --yes tsx scripts/generate-word-audio-list.ts", file=sys.stderr)
-        return 1
-
-    pairs = missing_pairs()
+    if args.files:
+        pairs = listed_pairs(args.files)
+    else:
+        if not LECTURE_LABELS.exists():
+            print(f"Manquant : {LECTURE_LABELS}", file=sys.stderr)
+            print("Lancer : npx --yes tsx scripts/generate-word-audio-list.ts", file=sys.stderr)
+            return 1
+        pairs = missing_pairs()
     print(f"{len(pairs)} clips manquants (voix {VOICE}, débit {RATE})")
     if args.dry_run:
         for text, dest in pairs[:30]:
