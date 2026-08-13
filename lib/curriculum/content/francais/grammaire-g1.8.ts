@@ -42,7 +42,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Déplacement", "Tu {a}vas{/a} où ?\nNous {a}allons{/a} en Espagne."],

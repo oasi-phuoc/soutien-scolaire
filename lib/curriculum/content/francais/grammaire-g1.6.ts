@@ -117,8 +117,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         ],
       },
       colWidths: [
-        "33%",
-        "67%",
+        "35%",
+        "65%",
       ],
       boldFirstCol: true,
       rows: [

@@ -106,7 +106,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Désir", "Je {a}veux{/a} manger une pizza."],
@@ -156,7 +156,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Capacité", "Je {a}peux{/a} nager."],
@@ -207,7 +207,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Obligation", "Je {a}dois{/a} faire mes devoirs."],
@@ -258,7 +258,7 @@ export const A1_GR_MODAUX: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Nécessité générale", "Il {a}faut{/a} un passeport pour voyager.\nIl {a}faut{/a} arriver à l'heure."],

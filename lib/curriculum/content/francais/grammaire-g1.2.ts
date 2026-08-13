@@ -44,7 +44,7 @@ export const A1_GR_ETRE: GrammarLesson = {
         uk: ["", "Приклад"],
       },
       boldFirstCol: true,
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       rows: [
         ["Identité", "Je {a}suis{/a} Ali."],
         ["Nationalité", "Elle {a}est{/a} française."],
@@ -84,7 +84,7 @@ export const A1_GR_ETRE: GrammarLesson = {
         uk: ["Займенник-підмет", "Дієслово"],
       },
       boldFirstCol: true,
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       rows: [
         ["Je", "{a}suis{/a}"],
         ["Tu", "{a}es{/a}"],

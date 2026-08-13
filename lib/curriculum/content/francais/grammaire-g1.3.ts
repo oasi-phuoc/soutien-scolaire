@@ -44,7 +44,7 @@ export const A1_GR_AVOIR: GrammarLesson = {
         uk: ["", "Приклад"],
       },
       boldFirstCol: true,
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       rows: [
         ["Possession", "J'{a}ai{/a} un téléphone."],
         ["Âge", "Elle {a}a{/a} 25 ans."],
@@ -83,7 +83,7 @@ export const A1_GR_AVOIR: GrammarLesson = {
         uk: ["Займенник-підмет", "Дієслово"],
       },
       boldFirstCol: true,
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       rows: [
         ["J'", "{a}ai{/a}"],
         ["Tu", "{a}as{/a}"],
@@ -113,7 +113,7 @@ export const A1_GR_AVOIR: GrammarLesson = {
         ps: ["عبارت", "معنا"],
         uk: ["Вираз", "Значення"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Avoir faim", "vouloir manger"],
