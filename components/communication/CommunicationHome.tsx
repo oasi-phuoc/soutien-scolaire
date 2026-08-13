@@ -98,6 +98,7 @@ export function CommunicationModuleList({
   }, []);
 
   const modulesView = useMemo(() => {
+    let openedInProgress = false;
     return commModules.map((m) => {
       const visibleSubs = m.submodules.filter((s) => {
         if (!s.available && !isAdmin) return false;
@@ -105,7 +106,9 @@ export function CommunicationModuleList({
       });
       const completedCount = visibleSubs.filter((s) => completed[s.id]).length;
       const allDone = completedCount === visibleSubs.length && visibleSubs.length > 0;
-      const moduleAccessible = frenchOk && visibleSubs.length > 0;
+      const sequentialOk = unlockAll || allDone || !openedInProgress;
+      if (visibleSubs.length > 0 && !allDone) openedInProgress = true;
+      const moduleAccessible = frenchOk && visibleSubs.length > 0 && sequentialOk;
       const moduleState: "completed" | "in_progress" | "locked" = !moduleAccessible
         ? "locked"
         : allDone
@@ -138,13 +141,6 @@ export function CommunicationModuleList({
 
   return (
     <ul className="space-y-4">
-      {!frenchOk && hydrated ? (
-        <li>
-          <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
-            Accès français non accordé. Demandez à votre enseignant un accès partiel ou complet.
-          </p>
-        </li>
-      ) : null}
       {modulesView.map(({ m, visibleSubs, completedCount, moduleState, moduleAccessible }) => {
         if (visibleSubs.length === 0 && !isAdmin) return null;
         const expanded = isExpanded(m.id, moduleState);
