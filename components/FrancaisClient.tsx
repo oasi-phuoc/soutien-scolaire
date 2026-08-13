@@ -11,7 +11,6 @@ import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 import { CommunicationModuleList } from "@/components/communication/CommunicationHome";
 import {
   grammarCodeAllowed,
-  hasFrenchLessonAccess,
   type LessonAccessFlags,
 } from "@/lib/auth/lesson-access";
 import {
@@ -231,16 +230,12 @@ function SectionCard({
       : null;
 
   function lessonState(th: FrenchTheme): LessonState {
-    // Vocabulary lessons are always accessible — no sequential locking
-    if (th.tab === "vocabulaire") {
-      if (!hydrated) return "locked";
-      return completedSlugs.has(th.slug) ? "completed" : "available";
-    }
-    if (locked) return "locked";
+    if (!hydrated) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
+    if (locked) return "locked";
     // Accès libre / admin : toutes les leçons du module
     if (unlockAll) return "available";
-    // Parcours normal : seule la première leçon non complétée (Gx.1 puis Gx.2 après éval…)
+    // Parcours normal : seule la première leçon non complétée
     if (th.slug === firstAvailableSlug) return "available";
     return "locked";
   }
@@ -407,7 +402,7 @@ export function FrancaisClient({
     canPartialMathA8: false,
     canPartialMathG3: false,
   };
-  const frenchOk = isAdmin || hasFrenchLessonAccess(lessonAccess);
+  const unlockAll = Boolean(isAdmin || freeAccess);
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab") as FrenchTab | null;
   const { overrides } = useContentEditor();
@@ -471,7 +466,7 @@ export function FrancaisClient({
 
     // Premier module débloqué non terminé → seul déplié automatiquement
     let primaryInProgressId: string | null = null;
-    if (hydrated && frenchOk) {
+    if (hydrated) {
       for (const grp of groups) {
         const themes = themesByGroup.get(grp.id) ?? [];
         if (themes.length === 0) continue;
@@ -490,17 +485,12 @@ export function FrancaisClient({
 
     return (
       <>
-        {!frenchOk && hydrated ? (
-          <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
-            Accès français non accordé. Demandez à votre enseignant un accès partiel ou complet.
-          </p>
-        ) : null}
         {groups.map((grp) => {
           const themes = themesByGroup.get(grp.id) ?? [];
           if (themes.length === 0) return null;
 
           let state: SectionState;
-          if (!hydrated || !frenchOk) {
+          if (!hydrated) {
             state = "locked";
           } else if (
             !unlockAll &&
@@ -597,27 +587,27 @@ export function FrancaisClient({
       <section className="space-y-4" aria-label={`Leçons — ${tab}`} hidden={tab === "communication"}>
         {tab === "vocabulaire" ? (
           <>
-            {!frenchOk && hydrated ? (
-              <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
-                Accès français non accordé. Demandez à votre enseignant un accès partiel ou complet.
-              </p>
-            ) : null}
             {VOCAB_MODULES.map((mod, idx) => {
               const themes = frenchThemes.filter((th) => th.section === mod.id && th.tab === "vocabulaire");
               if (themes.length === 0) return null;
-              const allDone = hydrated && frenchOk && themes.every((th) => completedSlugs.has(th.slug));
-              const state: SectionState = !hydrated || !frenchOk
+              const prevLocked = !unlockAll && VOCAB_MODULES.slice(0, idx).some((prev) => {
+                const prevThemes = frenchThemes.filter((th) => th.section === prev.id && th.tab === "vocabulaire");
+                return prevThemes.length > 0 && !prevThemes.every((th) => completedSlugs.has(th.slug));
+              });
+              const allDone = hydrated && themes.every((th) => completedSlugs.has(th.slug));
+              const state: SectionState = !hydrated || prevLocked
                 ? "locked"
                 : allDone
                   ? "completed"
                   : "in_progress";
               const isPrimaryVocab =
-                frenchOk &&
                 hydrated &&
+                !prevLocked &&
                 !allDone &&
                 VOCAB_MODULES.findIndex((m) => {
                   const t = frenchThemes.filter((th) => th.section === m.id && th.tab === "vocabulaire");
-                  return t.length > 0 && !t.every((th) => completedSlugs.has(th.slug));
+                  if (t.length === 0) return false;
+                  return !t.every((th) => completedSlugs.has(th.slug));
                 }) === idx;
               return (
                 <SectionCard
@@ -630,7 +620,7 @@ export function FrancaisClient({
                   returnTab={tab}
                   vocabGrades={vocabGrades}
                   isAdmin={isAdmin}
-                  freeAccess={freeAccess || frenchOk}
+                  freeAccess={freeAccess}
                   autoExpand={isPrimaryVocab}
                 />
               );

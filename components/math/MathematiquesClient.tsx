@@ -33,6 +33,27 @@ import {
 
 type ModuleDisplayState = "locked" | "available" | "in_progress" | "completed";
 
+/** Sans accès libre : G2 après G1, G3 après G2, etc. (1ʳᵉ leçon géométrie = G1.1). */
+function geometrySequenceMissing(moduleId: string, done: Set<string>): string[] {
+  const idx = MATH_GEOMETRY_TAB_ORDER.indexOf(moduleId);
+  if (idx <= 0) return [];
+  const prev = MATH_GEOMETRY_TAB_ORDER[idx - 1];
+  if (!prev || done.has(prev)) return [];
+  return [prev];
+}
+
+function studentPrerequisites(
+  module: MathModule,
+  done: Set<string>,
+  unlockAll: boolean,
+): { ok: true; missing: string[] } | { ok: false; missing: string[] } {
+  if (unlockAll) return { ok: true, missing: [] };
+  const base = prerequisitesMet(module, done);
+  const extra = module.branch === "geometry" ? geometrySequenceMissing(module.id, done) : [];
+  const missing = [...(base.ok ? [] : base.missing), ...extra];
+  return missing.length === 0 ? { ok: true, missing: [] } : { ok: false, missing };
+}
+
 function getModuleDisplayState(
   prog: StoredProgressV1["math"][string] | undefined,
   prereqOk: boolean,
@@ -196,7 +217,7 @@ export function MathematiquesClient({
       if (!m || m.comingSoon) continue;
       if (!unlockAll && !mathModuleAllowed(m.id, lessonAccess)) continue;
       const prog = progress.math[m.id];
-      const pre = isAdmin ? { ok: true as const, missing: [] as string[] } : prerequisitesMet(m, done);
+      const pre = isAdmin ? { ok: true as const, missing: [] as string[] } : studentPrerequisites(m, done, unlockAll);
       const displayState = getModuleDisplayState(prog, pre.ok);
       if (displayState === "in_progress" || displayState === "available") return m.id;
     }
@@ -265,11 +286,6 @@ export function MathematiquesClient({
 
 {/* Module cards */}
       <section aria-label="Liste des modules" className="space-y-4">
-        {!mathOk && hydrated ? (
-          <p className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-sm text-[var(--color-text-secondary)]">
-            Accès mathématiques non accordé. Demandez à votre enseignant un accès partiel ou complet.
-          </p>
-        ) : null}
         <ul className="space-y-4">
           {modules.map((m) => {
             if (!m) return null;
@@ -302,7 +318,7 @@ export function MathematiquesClient({
 
             const prog = hydrated ? progress.math[m.id] : undefined;
             const pre = hydrated
-              ? (isAdmin || unlockAll ? { ok: true as const, missing: [] as string[] } : prerequisitesMet(m, done))
+              ? (isAdmin || unlockAll ? { ok: true as const, missing: [] as string[] } : studentPrerequisites(m, done, unlockAll))
               : { ok: false as const, missing: [] as string[] };
             const displayState = hydrated ? getModuleDisplayState(prog, pre.ok) : "locked";
             const isLocked = !isAdmin && !unlockAll && displayState === "locked";

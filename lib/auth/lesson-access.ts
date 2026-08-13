@@ -1,6 +1,8 @@
 /**
  * Plafonds et helpers pour l'accès complet / partiel aux leçons.
  *
+ * Parcours élève par défaut (aucun flag enseignant) :
+ *   première leçon de chaque filière ouverte, puis déblocage séquentiel.
  * - Accès complet (`canFreeAccess`) : toutes les leçons, sans verrouillage séquentiel.
  * - Accès partiel français : grammaire ≤ G7.1 et/ou communication ≤ E9.1 (flags séparés).
  * - Accès partiel maths : plafonds indépendants A3.1, A8.1 (algèbre) et G3.1 (géométrie).
@@ -75,33 +77,27 @@ export function moduleAtOrBefore(moduleId: string, maxCode: string): boolean {
   return Number(m[2]) <= Number(max[2]);
 }
 
-export function hasFrenchLessonAccess(flags: LessonAccessFlags): boolean {
-  return (
-    flags.canFreeAccess ||
-    flags.canPartialFrenchGrammar ||
-    flags.canPartialFrenchComm
-  );
+export function hasFrenchLessonAccess(_flags: LessonAccessFlags): boolean {
+  // Les nouveaux comptes commencent sans flag enseignant : le parcours
+  // séquentiel (1ʳᵉ leçon, puis la suivante) reste ouvert.
+  return true;
 }
 
-export function hasMathLessonAccess(flags: LessonAccessFlags): boolean {
-  return (
-    flags.canFreeAccess ||
-    flags.canPartialMathA3 ||
-    flags.canPartialMathA8 ||
-    flags.canPartialMathG3
-  );
+export function hasMathLessonAccess(_flags: LessonAccessFlags): boolean {
+  return true;
 }
 
 export function grammarCodeAllowed(code: string, flags: LessonAccessFlags): boolean {
   if (flags.canFreeAccess) return true;
-  if (!flags.canPartialFrenchGrammar) return false;
-  return codeAtOrBefore(code, PARTIAL_FRENCH_GRAMMAR_MAX);
+  if (flags.canPartialFrenchGrammar) return codeAtOrBefore(code, PARTIAL_FRENCH_GRAMMAR_MAX);
+  // Pas de plafond enseignant : le séquentiel UI (G1.1 puis G1.2…) décide.
+  return true;
 }
 
 export function commCodeAllowed(code: string, flags: LessonAccessFlags): boolean {
   if (flags.canFreeAccess) return true;
-  if (!flags.canPartialFrenchComm) return false;
-  return codeAtOrBefore(code, PARTIAL_FRENCH_COMM_MAX);
+  if (flags.canPartialFrenchComm) return codeAtOrBefore(code, PARTIAL_FRENCH_COMM_MAX);
+  return true;
 }
 
 /** ids communication type E9-1 → code E9.1 */
@@ -144,13 +140,13 @@ export function mathSubmoduleAllowed(
 
   if (prefix === "A") {
     const max = mathAlgebraMaxCode(flags);
-    if (!max) return false;
+    if (!max) return true;
     return codeAtOrBefore(code, max);
   }
 
   if (prefix === "G") {
     const max = mathGeometryMaxCode(flags);
-    if (!max) return false;
+    if (!max) return true;
     return codeAtOrBefore(code, max);
   }
 
@@ -168,13 +164,13 @@ export function mathModuleAllowed(moduleId: string, flags: LessonAccessFlags): b
 
   if (prefix === "A") {
     const max = mathAlgebraMaxCode(flags);
-    if (!max) return false;
+    if (!max) return true;
     return moduleAtOrBefore(moduleId, max);
   }
 
   if (prefix === "G") {
     const max = mathGeometryMaxCode(flags);
-    if (!max) return false;
+    if (!max) return true;
     return moduleAtOrBefore(`G${major}`, max);
   }
 
