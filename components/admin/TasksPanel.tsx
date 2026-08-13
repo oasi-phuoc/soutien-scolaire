@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { createTaskAction, uploadTaskAttachmentAction, type StudentOption } from "@/app/actions/tasks";
 import { subjectFromMatiere } from "@/lib/curriculum/lesson-routes";
 import { AppSelect } from "@/components/ui/AppSelect";
@@ -310,6 +311,7 @@ const CURRICULUM: MatiereOpt[] = RAW_CURRICULUM.map((subject) => {
 });
 
 export function TasksPanel({ students }: { students: StudentOption[] }) {
+  const router = useRouter();
   // Form state
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -322,7 +324,6 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
   const [viewMode, setViewMode] = useState<"classes" | "eleves">("classes");
   const [expandedClasses, setExpandedClasses] = useState<Set<string>>(new Set());
   const [formError, setFormError] = useState<string | null>(null);
-  const [formSuccess, setFormSuccess] = useState(false);
   const [attachmentFiles, setAttachmentFiles] = useState<File[]>([]);
   const [isPending, startTransition] = useTransition();
 
@@ -394,7 +395,6 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setFormError(null);
-    setFormSuccess(false);
     startTransition(async () => {
       const subject = subjectFromMatiere(matiere);
       const res = await createTaskAction(
@@ -413,12 +413,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
           await uploadTaskAttachmentAction(res.taskId, fd);
         }
       }
-      setTitle(""); setDescription(""); setDueDate("");
-      setMatiere(""); setModuleId(""); setLessonId("");
-      setSelectedIds(new Set());
-      setAttachmentFiles([]);
-      setFormSuccess(true);
-      setTimeout(() => setFormSuccess(false), 3000);
+      router.push("/suivi/devoirs/apercu");
     });
   }
 
@@ -635,7 +630,6 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
       </div>
 
       {formError && <p className="text-sm text-red-600 dark:text-red-400">{formError}</p>}
-      {formSuccess && <p className="text-sm text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]">Tâche créée et assignée !</p>}
 
       <button
         type="submit"
