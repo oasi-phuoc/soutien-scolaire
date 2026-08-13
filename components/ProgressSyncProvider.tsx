@@ -1,23 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { loadProgress, saveProgress, MATH_PROGRESS_KEY } from "@/lib/progress/math-progress";
+import {
+  loadProgress,
+  MATH_PROGRESS_KEY,
+  createInitialProgress,
+} from "@/lib/progress/math-progress";
 import { mergeProgress } from "@/lib/progress/mergeProgress";
 import { loadProgressFromCloud, syncProgressToCloud, touchActivityAction } from "@/app/actions/progress";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { backupProgress, ensureProgressBackup } from "@/lib/offline/progress-backup";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
-
-const PENDING_SYNC_KEY = "soutien-pending-cloud-sync-v1";
-
-function restoreSubKeys(p: StoredProgressV1) {
-  if (p.commProgress) {
-    localStorage.setItem("soutien-comm-progress-v1", JSON.stringify(p.commProgress));
-  }
-  if (p.lectureProgress) {
-    localStorage.setItem("soutien-lecture-v2", JSON.stringify(p.lectureProgress));
-  }
-}
+import {
+  applyCloudProgress,
+  applyFreshProgress,
+  applySnapshot,
+  applySnapshotExtras,
+  getActiveProgressUser,
+  loadUserSnapshot,
+  PENDING_SYNC_KEY,
+  progressFromSnapshot,
+  setActiveProgressUser,
+  snapshotWorkingCopy,
+} from "@/lib/progress/device-isolation";
 
 function debounce<T extends unknown[]>(fn: (...args: T) => void, ms: number) {
   let timer: ReturnType<typeof setTimeout> | null = null;
@@ -29,7 +34,7 @@ function debounce<T extends unknown[]>(fn: (...args: T) => void, ms: number) {
 
 function queueSync(progress: StoredProgressV1) {
   localStorage.setItem(PENDING_SYNC_KEY, JSON.stringify(progress));
-  void backupProgress(progress).catch(() => {});
+  void backupProgress(progress, getActiveProgressUser()).catch(() => {});
   window.dispatchEvent(new CustomEvent("progress-sync-state", { detail: "pending" }));
 }
 
@@ -42,11 +47,13 @@ function pendingProgress(): StoredProgressV1 | null {
   }
 }
 
-async function doSync(progress: StoredProgressV1) {
+async function doSync(progress: StoredProgressV1, expectedUserId: string | null) {
+  if (expectedUserId && getActiveProgressUser() !== expectedUserId) return false;
   queueSync(progress);
   if (!navigator.onLine) return false;
   try {
     const result = await syncProgressToCloud(progress);
+    if (expectedUserId && getActiveProgressUser() !== expectedUserId) return false;
     if (!result.ok) {
       console.error("[ProgressSync] sync failed:", result.error);
       return false;
@@ -64,20 +71,101 @@ async function mergeWithCloudBeforeSync(localProgress: StoredProgressV1) {
   const cloudProgress = await loadProgressFromCloud();
   if (!cloudProgress) return localProgress;
   const merged = mergeProgress(localProgress, cloudProgress);
-  localStorage.setItem(MATH_PROGRESS_KEY, JSON.stringify(merged));
-  restoreSubKeys(merged);
+  applyCloudProgress(merged);
   return merged;
 }
 
+/**
+ * Charge la progression de `userId` sans jamais fusionner celle d'un autre compte.
+ * @returns true si la working copy a changé et qu'un reload est nécessaire.
+ */
+let hydrateChain: Promise<unknown> = Promise.resolve();
+
+function withHydrateLock<T>(fn: () => Promise<T>): Promise<T> {
+  const run = hydrateChain.then(fn, fn);
+  hydrateChain = run.then(() => undefined, () => undefined);
+  return run;
+}
+
+async function hydrateAccount(
+  userId: string,
+  source: "session" | "signin",
+): Promise<boolean> {
+  const previous = getActiveProgressUser();
+
+  if (previous && previous !== userId) {
+    snapshotWorkingCopy(previous);
+  }
+
+  if (previous === userId) {
+    return false;
+  }
+
+  const scoped = loadUserSnapshot(userId);
+  const cloudProgress = await loadProgressFromCloud();
+
+  if (cloudProgress) {
+    const localForUser = scoped ? progressFromSnapshot(scoped) : createInitialProgress();
+    const merged = mergeProgress(localForUser, cloudProgress);
+    applyCloudProgress(merged);
+    applySnapshotExtras(scoped);
+    setActiveProgressUser(userId);
+    snapshotWorkingCopy(userId);
+    return previous !== null || source === "signin";
+  }
+
+  if (scoped) {
+    applySnapshot(scoped);
+    setActiveProgressUser(userId);
+    snapshotWorkingCopy(userId);
+    return true;
+  }
+
+  // Première exécution de ce code alors que le compte est déjà connecté :
+  // la working copy actuelle lui appartient — on la lie, on ne l'écrase pas.
+  if (source === "session" && !previous) {
+    setActiveProgressUser(userId);
+    snapshotWorkingCopy(userId);
+    return false;
+  }
+
+  applyFreshProgress();
+  setActiveProgressUser(userId);
+  snapshotWorkingCopy(userId);
+  return true;
+}
+
+async function syncLocalWithCloud(userId: string) {
+  if (!navigator.onLine) return;
+  const cloudProgress = await loadProgressFromCloud();
+  const localProgress = loadProgress();
+  if (getActiveProgressUser() !== userId) return;
+  if (cloudProgress) {
+    const merged = mergeProgress(localProgress, cloudProgress);
+    applyCloudProgress(merged);
+    snapshotWorkingCopy(userId);
+    await doSync(merged, userId);
+  } else {
+    await doSync(localProgress, userId);
+  }
+}
+
+function handleSignedOut() {
+  const previous = getActiveProgressUser();
+  if (previous) snapshotWorkingCopy(previous);
+  applyFreshProgress();
+  setActiveProgressUser(null);
+}
+
 export function ProgressSyncProvider() {
-  const syncedRef = useRef(false);
+  const switchingRef = useRef(false);
   const [storageReady, setStorageReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     const mirrorProgress = (event: Event) => {
       const progress = (event as CustomEvent<StoredProgressV1>).detail ?? loadProgress();
-      void backupProgress(progress).catch(() => {});
+      void backupProgress(progress, getActiveProgressUser()).catch(() => {});
     };
     window.addEventListener("progress-saved", mirrorProgress);
     ensureProgressBackup().then((restored) => {
@@ -99,69 +187,67 @@ export function ProgressSyncProvider() {
     const supabase = createSupabaseBrowserClient();
     if (!supabase) return;
 
-    const initialSync = async () => {
-      if (!navigator.onLine) return;
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-      touchActivityAction().catch(() => {}); // update last seen immediately
-      if (syncedRef.current) return;
-      syncedRef.current = true;
-
-      const cloudProgress = await loadProgressFromCloud();
-      const localProgress = loadProgress();
-
-      if (cloudProgress) {
-        const merged = mergeProgress(localProgress, cloudProgress);
-        saveProgress(merged);
-        restoreSubKeys(merged);
-        doSync(merged);
-      } else {
-        // First login or no cloud data yet — push local progress to cloud
-        doSync(localProgress);
+    const runHydrate = async (userId: string, source: "session" | "signin") => {
+      switchingRef.current = true;
+      const changed = await withHydrateLock(() => hydrateAccount(userId, source));
+      switchingRef.current = false;
+      if (changed) {
+        window.location.reload();
+        return;
       }
+      await syncLocalWithCloud(userId);
     };
-    initialSync().catch(() => {});
 
-    // Listen for auth state changes (login/logout)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "SIGNED_IN" && session) {
-        syncedRef.current = false; // allow re-sync on next effect
-        const cloudProgress = await loadProgressFromCloud();
-        const localProgress = loadProgress();
-        if (cloudProgress) {
-          const merged = mergeProgress(localProgress, cloudProgress);
-          saveProgress(merged);
-          restoreSubKeys(merged);
-          doSync(merged);
-        } else {
-          doSync(localProgress);
+    const persistActiveSnapshot = () => {
+      const id = getActiveProgressUser();
+      if (id) snapshotWorkingCopy(id);
+    };
+    window.addEventListener("pagehide", persistActiveSnapshot);
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      // setTimeout : éviter un deadlock GoTrue si on rappelle Supabase dans le callback.
+      window.setTimeout(() => {
+        if (event === "INITIAL_SESSION" && session?.user) {
+          touchActivityAction().catch(() => {});
+          void runHydrate(session.user.id, "session");
+        } else if (event === "SIGNED_IN" && session?.user) {
+          touchActivityAction().catch(() => {});
+          void runHydrate(session.user.id, "signin");
+        } else if (event === "SIGNED_OUT") {
+          switchingRef.current = true;
+          handleSignedOut();
+          switchingRef.current = false;
+          window.location.reload();
         }
-      }
+      }, 0);
     });
 
-    // Debounced sync when progress is saved locally (custom event from saveProgress)
     const debouncedSync = debounce(async (e: Event) => {
+      if (switchingRef.current) return;
       const progress = (e as CustomEvent).detail ?? loadProgress();
       queueSync(progress);
       if (!navigator.onLine) return;
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
+      if (getActiveProgressUser() !== user.id) return;
       const merged = await mergeWithCloudBeforeSync(progress);
-      doSync(merged);
+      if (getActiveProgressUser() !== user.id) return;
+      doSync(merged, user.id);
     }, 3000);
 
     window.addEventListener("progress-saved", debouncedSync);
 
-    // Sync when tab regains focus or visibility (handles multi-tab + mobile background tabs)
     const handleVisible = debounce(async () => {
+      if (switchingRef.current) return;
       if (!navigator.onLine) return;
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
+      if (getActiveProgressUser() !== user.id) return;
       touchActivityAction().catch(() => {});
       const localRaw = localStorage.getItem(MATH_PROGRESS_KEY);
       if (localRaw) {
         try {
-          doSync(JSON.parse(localRaw) as StoredProgressV1);
+          doSync(JSON.parse(localRaw) as StoredProgressV1, user.id);
         } catch { /* ignore */ }
       }
     }, 5000);
@@ -171,11 +257,14 @@ export function ProgressSyncProvider() {
     };
 
     const handleOnline = async () => {
+      if (switchingRef.current) return;
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
+      if (getActiveProgressUser() !== user.id) return;
       const queued = pendingProgress();
       const merged = await mergeWithCloudBeforeSync(queued ?? loadProgress());
-      await doSync(merged);
+      if (getActiveProgressUser() !== user.id) return;
+      await doSync(merged, user.id);
       touchActivityAction().catch(() => {});
     };
 
@@ -185,6 +274,7 @@ export function ProgressSyncProvider() {
 
     return () => {
       subscription.unsubscribe();
+      window.removeEventListener("pagehide", persistActiveSnapshot);
       window.removeEventListener("progress-saved", debouncedSync);
       window.removeEventListener("focus", handleVisible);
       window.removeEventListener("app-online", handleOnline);
