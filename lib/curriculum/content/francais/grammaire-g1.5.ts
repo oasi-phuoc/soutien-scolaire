@@ -1,4 +1,4 @@
-import type { GrammarLesson } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 4 — Les verbes en -er : cas général (G1.5) */
@@ -141,10 +141,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
         uk: "Беремо дієслово й відкидаємо {a}-er{/a}.",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "parler",
           radical: "parl",
@@ -217,8 +214,7 @@ export const A1_GR_VERBES_ER: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
 
     {
       type: "heading",

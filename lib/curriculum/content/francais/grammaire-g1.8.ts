@@ -1,4 +1,4 @@
-import type { GrammarLesson } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 7 — Les verbes en -er : cas particuliers (G1.8) */
@@ -42,7 +42,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         ps: ["کارونه", "بېلګه"],
         uk: ["Вживання", "Приклад"],
       },
-      colWidths: ["33%", "67%"],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
         ["Déplacement", "Tu {a}vas{/a} où ?\nNous {a}allons{/a} en Espagne."],
@@ -141,10 +141,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         uk: "{a}3.{/a} Дієслова на {a}-ayer{/a} мають два можливі варіанти написання (paie / paye).",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "payer", radical: "pay",
           rows: [
@@ -179,8 +176,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent", radical: "ennui" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
 
     {
       type: "heading",
@@ -202,10 +198,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         uk: "У формі {a}nous{/a} після {a}g{/a} додається {a}e{/a}, щоб зберегти звук [ʒ].",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "manger", radical: "mang",
           rows: [
@@ -239,8 +232,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
     {
       type: "text",
       text: "Le {a}c{/a} devient {a}ç{/a} devant {a}o{/a} à la forme {a}nous{/a} pour garder le son [s].",
@@ -256,10 +248,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         uk: "У формі {a}nous{/a} {a}c{/a} перетворюється на {a}ç{/a} перед {a}o{/a}, щоб зберегти звук [s].",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "commencer", radical: "commenc",
           rows: [
@@ -293,8 +282,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
 
     {
       type: "heading",
@@ -359,10 +347,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
         ],
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "jeter", radical: "jet",
           rows: [
@@ -396,8 +381,7 @@ export const A1_GR_VERBES_ER_PART: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent", radical: "préfèr" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
   ],
   exercises: G1_EXERCISES["G1.8"](),
 };

@@ -1,11 +1,25 @@
-import type { TheoryBlock, VerbToggleVerb, ConjugTable } from "@/lib/curriculum/grammar-data";
+import type { TheoryBlock, ConjugTable } from "@/lib/curriculum/grammar-data";
 import type { TheoryPrintMeta, TheoryTableMeta } from "@/lib/print/theory-print-options";
 import { equalColWidths, truncateDropdownLabel } from "@/lib/print/theory-print-options";
 
 export type IndexedTheoryBlock = TheoryBlock & { id: string };
 
+function flattenTheoryBlocks(blocks: TheoryBlock[]): TheoryBlock[] {
+  const out: TheoryBlock[] = [];
+  for (const block of blocks) {
+    if (block.type === "selector") {
+      for (const tab of block.tabs) {
+        out.push(...flattenTheoryBlocks(tab.content));
+      }
+    } else {
+      out.push(block);
+    }
+  }
+  return out;
+}
+
 export function indexGrammarTheoryBlocks(blocks: TheoryBlock[]): IndexedTheoryBlock[] {
-  return blocks.map((block, i) => ({ ...block, id: `b${i}` }));
+  return flattenTheoryBlocks(blocks).map((block, i) => ({ ...block, id: `b${i}` }));
 }
 
 function blockLabel(block: TheoryBlock, index: number): string {
@@ -38,20 +52,6 @@ export function extractGrammarTheoryMeta(blocks: TheoryBlock[]): TheoryPrintMeta
           block.colWidths?.length === columnCount
             ? [...block.colWidths]
             : equalColWidths(columnCount),
-      });
-    } else if (block.type === "verb_toggle") {
-      const verbCount = block.verbs.length;
-      const verbsPerTable = Math.min(4, Math.max(1, verbCount));
-      const columnCount = verbsPerTable + 1;
-      tables.push({
-        id: block.id,
-        kind: "verb_toggle",
-        label: truncateDropdownLabel(
-          block.verbs.map((v) => v.infinitive).slice(0, 4).join(", ") + (verbCount > 4 ? "…" : ""),
-        ),
-        columnCount,
-        defaultColWidths: equalColWidths(columnCount),
-        verbCount,
       });
     } else if (block.type === "table" && block.tables.length > 0) {
       const verbCount = block.tables.length;
@@ -88,19 +88,4 @@ export function extractGrammarTheoryMeta(blocks: TheoryBlock[]): TheoryPrintMeta
 
 export function conjugFormCell(tbl: ConjugTable, rowIndex: number): string {
   return tbl.rows[rowIndex]?.form ?? "";
-}
-
-export function verbToggleForm(verb: VerbToggleVerb, rowIndex: number, negation?: boolean): string {
-  const row = verb.rows[rowIndex];
-  if (!row) return "";
-  const vowelRe = /[aeiouàâæéèêëîïôœùûüÿh]/i;
-  const nePrefix = vowelRe.test((row.radical ?? verb.radical)[0] ?? verb.radical[0] ?? "")
-    ? "n'"
-    : "ne ";
-  const refl = verb.reflexivePronouns?.[rowIndex];
-  const reflPart = refl ? (refl.endsWith("'") ? refl : `${refl} `) : "";
-  const radical = row.radical !== undefined ? row.radical : verb.radical;
-  const body = `${reflPart}${radical ?? ""}${row.ending}`;
-  if (!negation) return body.trim();
-  return `${nePrefix}${body} pas`.replace(/\s+/g, " ").trim();
 }

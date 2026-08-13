@@ -1,4 +1,4 @@
-import type { GrammarLesson } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson } from "../../grammar-data";
 
 /** G4.2 — Les articles contractés + les verbes de mouvement (ex-R2.1) */
 export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
@@ -135,10 +135,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         uk: "Після деяких дієслів руху вживається {a}прийменник{/a} ({a}à{/a}, {a}de{/a} тощо), який указує на {a}напрямок{/a} або {a}походження{/a}.\nНатисніть на кожне дієслово, щоб переглянути його відмінювання.",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 5,
-      verbs: [
+    verbsToSelector([
         { infinitive: "aller", radical: "", rows: [{ pronoun: "je", ending: "vais" }, { pronoun: "tu", ending: "vas" }, { pronoun: "il / elle / on", ending: "va" }, { pronoun: "nous", ending: "allons" }, { pronoun: "vous", ending: "allez" }, { pronoun: "ils / elles", ending: "vont" }] },
         { infinitive: "venir", radical: "", rows: [{ pronoun: "je", ending: "viens" }, { pronoun: "tu", ending: "viens" }, { pronoun: "il / elle / on", ending: "vient" }, { pronoun: "nous", ending: "venons" }, { pronoun: "vous", ending: "venez" }, { pronoun: "ils / elles", ending: "viennent" }] },
         { infinitive: "partir", radical: "par", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "tons" }, { pronoun: "vous", ending: "tez" }, { pronoun: "ils / elles", ending: "tent" }] },
@@ -149,8 +146,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         { infinitive: "descendre", radical: "descend", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
         { infinitive: "marcher", radical: "march", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
         { infinitive: "courir", radical: "cour", rows: [{ pronoun: "je", ending: "s" }, { pronoun: "tu", ending: "s" }, { pronoun: "il / elle / on", ending: "t" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
-      ],
-    },
+      ], { buttonCols: 5 }),
     {
       type: "heading",
       text: "Les prépositions avec les verbes de mouvement",

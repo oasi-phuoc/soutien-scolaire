@@ -5,7 +5,6 @@ import type { TheoryBlock } from "@/lib/curriculum/grammar-data";
 import {
   conjugFormCell,
   indexGrammarTheoryBlocks,
-  verbToggleForm,
   type IndexedTheoryBlock,
 } from "@/lib/print/grammar-theory-print";
 import type { TheoryPrintOptions, TheoryTablePrintConfig } from "@/lib/print/theory-print-options";
@@ -139,40 +138,6 @@ function PrintDataTable({
   );
 }
 
-function renderVerbTogglePrint(
-  block: Extract<IndexedTheoryBlock, { type: "verb_toggle" }>,
-  cfg: TheoryTablePrintConfig,
-) {
-  const chunks = chunkByCounts(block.verbs, cfg.verbsPerTables);
-  return (
-    <div className="space-y-3">
-      {chunks.map((chunk, ti) => {
-        const pronouns = chunk[0]?.rows.map((r) => r.pronoun) ?? [];
-        const headers = ["", ...chunk.map((v) => v.infinitive)];
-        const rows = pronouns.map((pronoun, ri) => [
-          pronoun,
-          ...chunk.map((v) => verbToggleForm(v, ri, block.negation)),
-        ]);
-        const widths =
-          ti === 0 && cfg.colWidths.length === headers.length
-            ? cfg.colWidths
-            : equalColWidths(headers.length);
-        return (
-          <PrintDataTable
-            key={ti}
-            headers={headers}
-            rows={rows}
-            colWidths={widths}
-            paddingTopEm={cfg.paddingTopEm}
-            showBorders={cfg.showBorders}
-            showFill={cfg.showFill}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
 function renderConjugPrint(
   block: Extract<IndexedTheoryBlock, { type: "table" }>,
   cfg: TheoryTablePrintConfig,
@@ -189,6 +154,7 @@ function renderConjugPrint(
         paddingTopEm={cfg.paddingTopEm}
         showBorders={cfg.showBorders}
         showFill={cfg.showFill}
+        renderCell={(text) => printMarkup(text)}
       />
     );
   }
@@ -216,6 +182,7 @@ function renderConjugPrint(
             paddingTopEm={cfg.paddingTopEm}
             showBorders={cfg.showBorders}
             showFill={cfg.showFill}
+            renderCell={(text) => printMarkup(text)}
           />
         );
       })}
@@ -304,11 +271,6 @@ function BlockView({
       );
     case "grid":
       return renderGridPrint(block, tableConfig(options, block.id, block.headers.length));
-    case "verb_toggle":
-      return renderVerbTogglePrint(
-        block,
-        tableConfig(options, block.id, Math.min(4, block.verbs.length) + 1),
-      );
     case "table":
       return renderConjugPrint(
         block,

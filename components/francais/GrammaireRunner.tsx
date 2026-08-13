@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type {
   TheoryBlock,
-  VerbToggleVerb,
   Exercise,
   QcmItem,
   FillItem,
@@ -201,111 +200,6 @@ function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number 
   );
 }
 
-// ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
-
-function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; pivot?: string; showTrans?: boolean }) {
-  const [selectedIdx, setSelectedIdx] = useState(0);
-  const verb = verbs[selectedIdx]!;
-  const vowelRe = /[aeiouàâæéèêëîïôœùûüÿh]/i;
-
-  const nePrefix = vowelRe.test(verb.radical[0] ?? "") ? "n'" : "ne ";
-
-  return (
-    <div className="space-y-3">
-      <div
-        className={buttonCols ? "grid gap-2" : "grid grid-cols-2 gap-2 sm:grid-cols-4"}
-        style={buttonCols ? { gridTemplateColumns: `repeat(${buttonCols}, 1fr)` } : undefined}
-      >
-        {verbs.map((v, i) => (
-          <button
-            key={i}
-            onClick={() => setSelectedIdx(i)}
-            className={`min-h-10 w-full rounded-full px-3 py-1.5 text-center font-medium transition-colors ${buttonCols ? "text-xs" : "text-sm"} ${
-              i === selectedIdx
-                ? "bg-[var(--color-accent-fr)] text-white"
-                : "border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)]"
-            }`}
-          >
-            {v.infinitive}
-          </button>
-        ))}
-      </div>
-      {(verb.meaning || verb.example) && (
-        <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-3 py-2 text-xs space-y-1">
-          {verb.meaning && (
-            <p>
-              <span className="font-bold text-[var(--color-accent-fr)]">Signification </span>
-              <span className="text-[var(--color-text-primary)]">{verb.meaning}</span>
-            </p>
-          )}
-          {verb.example && (
-            <p className="text-[var(--color-text-secondary)]">• {verb.example}</p>
-          )}
-        </div>
-      )}
-      <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-[var(--color-accent-fr)]/15">
-              <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
-                {verb.infinitive}
-              </th>
-              <th className="px-3 py-2 text-left text-xs font-bold text-[var(--color-accent-fr)]">
-                {negation ? <><span className="font-bold">{nePrefix}</span>… <span className="font-bold">pas</span></> : ""}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {verb.rows.map((row, ri) => (
-              <tr
-                key={ri}
-                className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]"}
-              >
-                <td className="w-36 px-3 py-2">
-                  <span className="text-[var(--color-text-secondary)]">{row.pronoun}</span>
-                </td>
-                <td className="px-3 py-2">
-                  {negation && (
-                    <span className="font-bold text-[var(--color-accent-fr)]">{nePrefix}</span>
-                  )}
-                  {verb.reflexivePronouns?.[ri] !== undefined && (
-                    negation
-                      ? <span className="text-[var(--color-text-primary)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
-                      : <span className="font-bold text-[var(--color-accent-fr)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
-                  )}
-                  {(() => {
-                    const rowRadical = row.radical !== undefined ? row.radical : verb.radical;
-                    return rowRadical ? <span className="text-[var(--color-text-primary)]">{rowRadical}</span> : null;
-                  })()}
-                  {negation
-                    ? <span className="text-[var(--color-text-primary)]">{row.ending}</span>
-                    : <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
-                  }
-                  {negation && (
-                    <span className="font-bold text-[var(--color-accent-fr)]"> pas</span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {verb.note && (() => {
-        const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
-        const useTrans = showTrans && pivot && pivot !== "fr";
-        const noteText = useTrans && pivot && verb.noteTrans?.[pivot as "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk"]
-          ? verb.noteTrans[pivot as "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk"]!
-          : verb.note;
-        return (
-          <div className="rounded-[var(--radius-md)] bg-[var(--color-accent-fr)]/8 px-3 py-2 text-sm text-[var(--color-text-primary)]" lang={useTrans ? pivot : undefined} dir={useTrans && isRtl ? "rtl" : "ltr"}>
-            {renderInlineMarkup(noteText)}
-          </div>
-        );
-      })()}
-    </div>
-  );
-}
-
 export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot: string; showTrans: boolean }) {
   const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
   const useTrans = showTrans && pivot !== "fr";
@@ -353,8 +247,8 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                             <td className="w-32 px-3 py-2 font-medium text-[var(--color-text-secondary)]">
                               {row.pronoun}
                             </td>
-                            <td className={`px-3 py-2 font-semibold ${tbl.accentForms ? "text-[var(--color-accent-fr)]" : "text-[var(--color-text-primary)]"}`}>
-                              {row.form}
+                            <td className={`px-3 py-2 ${tbl.accentForms ? "font-semibold text-[var(--color-accent-fr)]" : "text-[var(--color-text-primary)]"}`}>
+                              {renderInlineMarkup(row.form, false)}
                             </td>
                             {row.phonetic && (
                               <td className="px-3 py-2 text-xs text-[var(--color-text-secondary)]">
@@ -543,13 +437,6 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
               </div>
             );
           }
-
-          case "verb_toggle":
-            return (
-              <div key={i}>
-                <VerbToggleView verbs={block.verbs} negation={block.negation} buttonCols={block.buttonCols} pivot={pivot} showTrans={showTrans} />
-              </div>
-            );
 
           case "clock_display": {
             const cols = block.cols ?? 4;

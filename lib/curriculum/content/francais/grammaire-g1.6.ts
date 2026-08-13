@@ -1,4 +1,4 @@
-import type { GrammarLesson } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** G1.6 — Les verbes pronominaux */
@@ -117,8 +117,8 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         ],
       },
       colWidths: [
-        "33%",
-        "67%",
+        "35%",
+        "65%",
       ],
       boldFirstCol: true,
       rows: [
@@ -205,9 +205,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         uk: "Поширені зворотні дієслова",
       },
     },
-    {
-      type: "verb_toggle",
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "se lever",
           radical: "",
@@ -556,9 +554,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
             },
           ],
         },
-      ],
-      buttonCols: 3,
-    },
+      ], { buttonCols: 3 }),
     {
       type: "heading",
       text: "La négation",
@@ -627,10 +623,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       label: "",
       
     },
-    {
-      type: "verb_toggle",
-      negation: true,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "se lever",
           radical: "",
@@ -979,9 +972,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
             },
           ],
         },
-      ],
-      buttonCols: 3,
-    },
+      ], { buttonCols: 3, negation: true }),
     {
       type: "heading",
       text: "Réfléchis vs réciproques",

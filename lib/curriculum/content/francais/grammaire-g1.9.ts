@@ -1,4 +1,4 @@
-import type { GrammarLesson } from "../../grammar-data";
+import { verbsToSelector, type GrammarLesson } from "../../grammar-data";
 import { G1_EXERCISES } from "./g1-lesson-profiles";
 
 /** Unité 8 — Les verbes en -ir (G1.9) */
@@ -44,10 +44,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         uk: "Це дієслово має дві основи: {a}fini-{/a} в однині та {a}finiss-{/a} у множині.",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "finir", radical: "fini",
           rows: [
@@ -81,8 +78,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent", radical: "réfléchiss" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
     
     {
       type: "heading",
@@ -104,10 +100,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         uk: "Основа така сама, як в інфінітиві : {a}ouvr-{/a}. Закінчення такі самі, як у дієслів на {a}-er{/a}.",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "ouvrir", radical: "ouvr",
           rows: [
@@ -141,8 +134,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
 
     {
       type: "heading",
@@ -164,10 +156,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         uk: "Ці дієслова мають дві основи: в однині {a}par- / dor- / ser-{/a}; у множині — як в інфінітиві: {a}part- / dorm- / serv-{/a}.",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "partir", radical: "part",
           rows: [
@@ -201,8 +190,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
     {
       type: "heading",
       text: "Modèle venir et tenir",
@@ -223,10 +211,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
         uk: "Ці дієслова мають три основи з різною вимовою.",
       },
     },
-    {
-      type: "verb_toggle",
-      buttonCols: 3,
-      verbs: [
+    verbsToSelector([
         {
           infinitive: "venir", radical: "v",
           rows: [
@@ -260,8 +245,7 @@ export const A1_GR_VERBES_IR: GrammarLesson = {
             { pronoun: "ils / elles", ending: "iennent" },
           ],
         },
-      ],
-    },
+      ], { buttonCols: 3 }),
   ],
   exercises: G1_EXERCISES["G1.9"](),
 };

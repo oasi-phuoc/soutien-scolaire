@@ -32,7 +32,6 @@ const TYPE_LABELS: Record<string, string> = {
   grid: "Tableau",
   word_cards: "Cartes mots",
   table: "Tableaux de conjugaison",
-  verb_toggle: "Basculer verbes",
   clock_display: "Horloges",
   illus_cards: "Cartes illustrées",
   grammar_link: "Lien grammaire",
