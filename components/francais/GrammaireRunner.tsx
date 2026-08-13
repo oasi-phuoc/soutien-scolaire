@@ -204,6 +204,17 @@ function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number 
 
 // ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
 
+function verbsFitFourColumns(grid: HTMLElement): boolean {
+  const buttons = Array.from(grid.querySelectorAll("button"));
+  if (buttons.length === 0 || grid.clientWidth === 0) return false;
+  const prevCols = grid.style.gridTemplateColumns;
+  grid.style.gridTemplateColumns = "repeat(4, minmax(0, 1fr))";
+  void grid.offsetWidth;
+  const fits = buttons.every((btn) => btn.scrollWidth <= btn.clientWidth + 1);
+  grid.style.gridTemplateColumns = prevCols;
+  return fits;
+}
+
 function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; pivot?: string; showTrans?: boolean }) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const verb = verbs[selectedIdx]!;
@@ -211,53 +222,45 @@ function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { ver
 
   const nePrefix = vowelRe.test(verb.radical[0] ?? "") ? "n'" : "ne ";
 
-  // Grille auto selon le nombre de verbes : multiple de 3 → 3 colonnes ;
-  // nombre pair → 2 colonnes, promues à 4 par ligne si tous les libellés
-  // tiennent dans le bouton sans troncature ni réduction de taille.
+  // Grille auto : multiple de 3 → 3 colonnes ; nombre pair → 2 colonnes,
+  // promues à 4 par ligne seulement si tous les libellés tiennent sans
+  // troncature ni retour à la ligne (mesure DOM réelle).
   const n = verbs.length;
   const isMult3 = n % 3 === 0;
   const isEven = n % 2 === 0;
+  const canTryFour = isEven && !isMult3 && n >= 4;
   const containerRef = useRef<HTMLDivElement>(null);
   const [fitsFour, setFitsFour] = useState(false);
 
   useLayoutEffect(() => {
-    if (!isEven || isMult3 || n < 4) return;
+    if (!canTryFour) return;
     const el = containerRef.current;
     if (!el) return;
-    const ctx = document.createElement("canvas").getContext("2d");
-    if (!ctx) return;
     const measure = () => {
-      const btn = el.querySelector("button");
-      if (btn) {
-        const cs = getComputedStyle(btn);
-        ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-      }
-      const widest = Math.max(...verbs.map((v) => ctx.measureText(v.infinitive).width));
-      const gap = 8; // gap-2
-      const padX = 24; // px-3 de chaque côté
-      const colWidth = (el.clientWidth - 3 * gap) / 4;
-      setFitsFour(widest + padX + 1 <= colWidth);
+      const fits = verbsFitFourColumns(el);
+      setFitsFour((prev) => (prev === fits ? prev : fits));
     };
     measure();
     const ro = new ResizeObserver(measure);
-    ro.observe(el);
+    const target = el.parentElement ?? el;
+    ro.observe(target);
     return () => ro.disconnect();
-  }, [verbs, n, isEven, isMult3]);
+  }, [canTryFour, verbs]);
 
-  const cols = isMult3 ? 3 : isEven ? (n >= 4 && fitsFour ? 4 : 2) : buttonCols;
+  const cols = isMult3 ? 3 : isEven ? (canTryFour && fitsFour ? 4 : 2) : buttonCols;
 
   return (
     <div className="space-y-3">
       <div
         ref={containerRef}
         className={cols ? "grid gap-2" : "flex flex-wrap gap-2"}
-        style={cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined}
+        style={cols ? { gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` } : undefined}
       >
         {verbs.map((v, i) => (
           <button
             key={i}
             onClick={() => setSelectedIdx(i)}
-            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${cols ? "w-full" : ""} ${
+            className={`min-w-0 whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${cols ? "w-full" : ""} ${
               i === selectedIdx
                 ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
                 : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:bg-[color-mix(in_oklch,var(--color-accent-fr)_15%,white)] hover:text-[var(--color-accent-fr)]"
