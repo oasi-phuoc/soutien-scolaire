@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition, type ReactNode } from "react";
@@ -872,19 +872,12 @@ export function OralProductionRunner({
         </p>
         <div className="flex items-center gap-2">
           {mode === "placement" ? (
-            <button
-              type="button"
+            <PageBackButton
+              ariaLabel="Retour au placement"
               onClick={() => guardedNavigate(() => router.push(leaveHref))}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
-              style={{ background: headerAccent }}
-              aria-label="Retour au placement"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
+            />
           ) : (
-            <Link
+            <PageBackButton
               href={leaveHref}
               onClick={(event) => {
                 if (evalGuard?.active) {
@@ -892,14 +885,8 @@ export function OralProductionRunner({
                   evalGuard.requestNavigate(() => router.push(leaveHref));
                 }
               }}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
-              style={{ background: headerAccent }}
-              aria-label="Retour au français"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </Link>
+              ariaLabel="Retour au français"
+            />
           )}
           <h1 className="flex-1 text-xl font-bold text-[var(--color-text-primary)]">
             {phase === "review" ? (sent ? "En attente de correction" : "Envoi au professeur") : `${lessonCode} — Production orale`}

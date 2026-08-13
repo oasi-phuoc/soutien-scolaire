@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useEffect, useMemo, useTransition } from "react";
-import Link from "next/link";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { useRouter } from "next/navigation";
 import type {
   TheoryBlock,
@@ -3366,7 +3366,7 @@ export function GrammaireRunner({
           Français · {subject} · {lesson.level}
         </p>
         <div className="flex items-center gap-2">
-          <Link
+          <PageBackButton
             href={returnUrl}
             onClick={(e) => {
               if (evalGuard?.active) {
@@ -3374,13 +3374,8 @@ export function GrammaireRunner({
                 evalGuard.requestNavigate(() => router.push(returnUrl));
               }
             }}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-fr)] text-white transition-opacity hover:opacity-80"
-            aria-label="Retour au français"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Link>
+            ariaLabel="Retour au français"
+          />
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
             {lesson.code} — {lesson.title}
           </h1>

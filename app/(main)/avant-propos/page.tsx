@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { useEffect, useState, type ReactNode } from "react";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { LearnUpMark } from "@/components/brand/LearnUpLogo";
@@ -283,19 +283,7 @@ export default function AvantProposPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3">
-          <Link
-            href="/compte"
-            aria-label="Retour aux réglages"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-colors hover:brightness-95"
-            style={{ background: "var(--color-theme-light)" }}
-          >
-            <svg
-              width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"
-              style={isRtl ? { transform: "scaleX(-1)" } : undefined}
-            >
-              <path d="M15 18l-6-6 6-6" stroke="var(--color-theme)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+          <PageBackButton href="/compte" ariaLabel="Retour aux réglages" flip={isRtl} />
           <div className="flex min-w-0 items-start gap-2.5">
             <LearnUpMark size={36} className="mt-0.5" />
             <div className="min-w-0">

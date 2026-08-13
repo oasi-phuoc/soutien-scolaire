@@ -7,6 +7,7 @@ import {
   updateMyProfileAction,
   type MyProfile,
 } from "@/app/actions/account";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
   ELEVE_CLASSE_TYPE_OPTIONS,
@@ -141,15 +142,7 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
     <main className="app-shell flex-1 space-y-4 pt-8 pb-32 lg:pb-28">
       <div className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-4" style={{ background: "color-mix(in oklch, var(--color-theme) 11%, white)" }}>
         <div className="relative z-10 flex items-center gap-3">
-          <Link
-            href="/compte"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80"
-            aria-label="Retour aux réglages"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Link>
+          <PageBackButton href="/compte" ariaLabel="Retour aux réglages" />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-theme)]">Compte</p>
             <h1 className="text-xl font-bold text-[var(--color-text-primary)]">Mon compte</h1>

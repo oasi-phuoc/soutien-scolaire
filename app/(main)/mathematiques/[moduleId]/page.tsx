@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import Link from "next/link";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import type { CSSProperties } from "react";
 import { MathSubmoduleWorkspaceLazy } from "@/components/math/MathSubmoduleWorkspaceLazy";
 import { MathModuleComingSoon } from "@/components/math/MathModuleComingSoon";
@@ -93,15 +93,7 @@ export default async function MathModulePage({ params, searchParams }: Props) {
           Mathématiques · {tabLabel} · {parentMod?.code ?? parentModuleId}
         </p>
         <div className="flex items-center gap-2">
-          <Link
-            href={backHref}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-80"
-            aria-label="Retour aux mathématiques"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Link>
+          <PageBackButton href={backHref} ariaLabel="Retour aux mathématiques" />
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
             {lesson.submoduleCode} — {lesson.theory?.title?.fr ?? lesson.submoduleId}
           </h1>

@@ -8,6 +8,7 @@ import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { resetAllElevesAction, setPlacementModuleEnabledAction, purgePreviousSchoolYearMessagesAction } from "@/app/actions/admin";
+import { PageBackButton } from "@/components/ui/PageBackButton";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
   ELEVE_CLASSE_TYPE_OPTIONS,
@@ -596,15 +597,7 @@ export function AdminTable({
       {/* Titre + retour à gauche ; actions admin à droite (desktop) */}
       <div className="mb-6 flex items-start justify-between gap-4">
         <div className="flex min-w-0 items-start gap-3">
-          <Link
-            href="/compte"
-            className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80"
-            aria-label="Retour aux réglages"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Link>
+          <PageBackButton href="/compte" className="mt-0.5" ariaLabel="Retour aux réglages" />
           <div className="min-w-0">
             <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
               Gestion des comptes
