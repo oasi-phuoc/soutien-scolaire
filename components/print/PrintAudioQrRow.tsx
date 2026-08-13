@@ -8,9 +8,11 @@ export type PrintAudioQrItem = {
   /** Chemin public absolu, ex. `/assets/expression/co/base/public/message-1.mp3` */
   audio: string;
   label: string;
+  /** Texte lu en voix de synthèse si le mp3 n'existe pas (mots lecture). */
+  tts?: string;
 };
 
-function listenUrl(audioPath: string, label: string): string {
+function listenUrl(audioPath: string, label: string, tts?: string): string {
   const origin =
     typeof window !== "undefined" && window.location?.origin
       ? window.location.origin
@@ -19,15 +21,27 @@ function listenUrl(audioPath: string, label: string): string {
     src: audioPath,
     label,
   });
+  if (tts) params.set("tts", tts);
   return `${origin}/ecoute?${params.toString()}`;
 }
 
-function QrCell({ item, size = 72 }: { item: PrintAudioQrItem; size?: number }) {
+/** QR seul (sans libellé) pointant vers la page /ecoute d'un audio. */
+export function AudioQrImage({
+  audio,
+  label,
+  tts,
+  size = 72,
+}: {
+  audio: string;
+  label: string;
+  tts?: string;
+  size?: number;
+}) {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    const url = listenUrl(item.audio, item.label);
+    const url = listenUrl(audio, label, tts);
     void QRCode.toDataURL(url, {
       margin: 1,
       width: 160,
@@ -39,21 +53,27 @@ function QrCell({ item, size = 72 }: { item: PrintAudioQrItem; size?: number }) 
     return () => {
       cancelled = true;
     };
-  }, [item.audio, item.label]);
+  }, [audio, label, tts]);
 
   return (
+    <div
+      className="flex shrink-0 items-center justify-center rounded border border-zinc-300 bg-white p-0.5"
+      style={{ width: size, height: size }}
+    >
+      {dataUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={dataUrl} alt={`QR ${label}`} className="h-full w-full" />
+      ) : (
+        <span className="text-[9px] text-zinc-400">QR…</span>
+      )}
+    </div>
+  );
+}
+
+function QrCell({ item, size = 72 }: { item: PrintAudioQrItem; size?: number }) {
+  return (
     <div className="flex shrink-0 flex-col items-center gap-0.5">
-      <div
-        className="flex items-center justify-center rounded border border-zinc-300 bg-white p-0.5"
-        style={{ width: size, height: size }}
-      >
-        {dataUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={dataUrl} alt={`QR ${item.label}`} className="h-full w-full" />
-        ) : (
-          <span className="text-[9px] text-zinc-400">QR…</span>
-        )}
-      </div>
+      <AudioQrImage audio={item.audio} label={item.label} tts={item.tts} size={size} />
       <span className="max-w-[4.5rem] text-center text-[9px] font-semibold leading-tight text-zinc-800">
         {item.label}
       </span>

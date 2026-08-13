@@ -5,12 +5,17 @@ import { getAllGrammarLessons } from "@/lib/curriculum/grammar-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import { EXPRESS_ORAL_LESSONS } from "@/lib/curriculum/content/communication/express-index";
 import {
+  LECTURE_MODULES,
+  lessonPhonemeLabel,
+  type LetterData,
+} from "@/lib/curriculum/lecture-data";
+import {
   MATH_TRAINING_LEVEL_LABELS,
   MATH_TRAINING_LEVEL_TOGGLE,
 } from "@/lib/placement/math-training-levels";
 import type { PlacementSkill } from "@/lib/placement/types";
 
-export type PrintDomain = "math" | "francais" | "placement";
+export type PrintDomain = "math" | "francais" | "lecture" | "placement";
 
 export type PrintCatalogEntry = {
   id: string;
@@ -73,6 +78,23 @@ const GRAMMAR_MODULE_TITLES: Record<string, string> = {
 function grammarModuleCode(code: string): string {
   const match = code.match(/^(G\d+)/);
   return match?.[1] ?? code.split(".")[0] ?? code;
+}
+
+export function lectureLessonCode(letter: LetterData): string {
+  if (letter.type === "vowel" || letter.type === "consonant") return letter.letter;
+  if (letter.type === "complex-sound") return letter.title;
+  if (letter.type === "syllable") return letter.letter;
+  if (letter.letterLower === "outils") return "Outils";
+  if (letter.letterLower === "courants") return "Courants";
+  return "Multi";
+}
+
+export function lectureLessonTitle(letter: LetterData): string {
+  if (letter.type === "vowel" || letter.type === "consonant") {
+    return `La lettre ${letter.letter} ${lessonPhonemeLabel(letter.letterLower, letter.phoneme)}`;
+  }
+  if (letter.type === "complex-sound") return `Le son ${letter.title}`;
+  return letter.title;
 }
 
 /** Catalogue plat des leçons imprimables (une entrée = une feuille). */
@@ -138,6 +160,21 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
         moduleTitle: mod.title,
         code: sub.code,
         title: sub.title,
+      });
+    }
+  }
+
+  for (const mod of LECTURE_MODULES) {
+    for (const letter of mod.letters) {
+      entries.push({
+        id: `lecture:${mod.id}:${letter.letterLower}`,
+        domain: "lecture",
+        group: "Lecture",
+        moduleId: `lecture-${mod.id}`,
+        moduleCode: mod.code,
+        moduleTitle: mod.title,
+        code: lectureLessonCode(letter),
+        title: lectureLessonTitle(letter),
       });
     }
   }

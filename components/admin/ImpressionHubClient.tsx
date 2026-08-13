@@ -61,6 +61,7 @@ type PrintThemeColorId = (typeof PRINT_THEME_COLORS)[number]["id"];
 const DOMAINS: { id: PrintDomain; label: string }[] = [
   { id: "math", label: "Mathématiques" },
   { id: "francais", label: "Français" },
+  { id: "lecture", label: "Lecture" },
   { id: "placement", label: "Placement" },
 ];
 

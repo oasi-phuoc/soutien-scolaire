@@ -64,6 +64,7 @@ import {
 } from "@/lib/curriculum/content/communication/express-types";
 import { buildExpressListeningTasks } from "@/lib/curriculum/content/communication/express-listening-helpers";
 import { PrintAudioQrRow } from "@/components/print/PrintAudioQrRow";
+import { buildLectureBundle } from "@/components/print/LecturePrintView";
 
 export type PrintBundle = {
   lessonTitle: string;
@@ -756,6 +757,9 @@ export function buildPrintBundle(
   }
   if (catalogId.startsWith("express:")) {
     return buildExpressBundle(catalogId.slice("express:".length));
+  }
+  if (catalogId.startsWith("lecture:")) {
+    return buildLectureBundle(catalogId.slice("lecture:".length), seed);
   }
   return null;
 }

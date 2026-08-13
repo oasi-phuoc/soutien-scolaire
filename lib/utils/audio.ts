@@ -46,6 +46,14 @@ export function getWordAudioPath(word: string): string {
   return `/assets/words/son_f/mots/${slug}.mp3`;
 }
 
+/**
+ * Preferred syllable recording path (son_f).
+ */
+export function getSyllableAudioPath(syllable: string): string {
+  const slug = audioSlugCandidates(syllable)[0] ?? getWordAssetSlug(syllable);
+  return `/assets/words/son_f/syllable/${slug}.mp3`;
+}
+
 const PLAY_TIMEOUT_MS = 8000;
 
 /**
