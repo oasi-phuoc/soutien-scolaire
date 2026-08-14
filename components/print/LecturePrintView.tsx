@@ -312,7 +312,7 @@ function graphemeSegments(word: string, targets: string[]): Segment[] {
   return [...word].map((ch, i) => ({ text: ch, hit: hits[i] ?? false }));
 }
 
-function WordCirclePrint({
+function WordUnderlinePrint({
   words,
   segmentsOf,
   correction,
@@ -324,17 +324,19 @@ function WordCirclePrint({
   const questionCount = usePrintQuestionCount(words.length);
   const shown = shownOf(words, questionCount);
   return (
-    <PrintItemGrid>
+    <PrintItemGrid fallbackColumns={4}>
       {shown.map((word, i) => {
         const segments = segmentsOf(word);
-        const contains = segments.some((s) => s.hit);
         return (
-          <PrintCard key={`${word}-${i}`}>
-            <span className="text-center text-lg font-bold tracking-wide text-black">
+          <div
+            key={`${word}-${i}`}
+            className="print-item-card flex min-h-12 items-center justify-center rounded-lg border-2 border-zinc-400 bg-white px-2 py-3"
+          >
+            <span className="text-center text-xl font-bold tracking-[0.22em] text-black">
               {correction
                 ? segments.map((seg, j) =>
                     seg.hit ? (
-                      <span key={j} className="rounded bg-amber-100 px-0.5 text-amber-700">
+                      <span key={j} className="underline decoration-2 decoration-amber-600 underline-offset-2 text-amber-700">
                         {seg.text}
                       </span>
                     ) : (
@@ -343,11 +345,7 @@ function WordCirclePrint({
                   )
                 : word}
             </span>
-            <WordQr word={word} label={`Audio ${i + 1}`} size={56} />
-            {correction && contains ? (
-              <span className="text-[10px] font-bold text-amber-700">lettre présente</span>
-            ) : null}
-          </PrintCard>
+          </div>
         );
       })}
     </PrintItemGrid>
@@ -498,14 +496,15 @@ function MatchLinkPrint({
 function SyllableReadPrint({ items, correction }: { items: string[]; correction?: boolean }) {
   const questionCount = usePrintQuestionCount(items.length);
   const shown = shownOf(items, questionCount);
+  const qrSize = useLectureQrSize();
   return (
-    <PrintItemGrid>
+    <PrintItemGrid fallbackColumns={4}>
       {shown.map((syll, i) => (
         <PrintCard key={`${syll}-${i}`}>
           <span className={`text-center text-xl font-bold tracking-wide ${correction ? "text-amber-700" : "text-black"}`}>
             {syll}
           </span>
-          <SyllableQr syllable={syll} size={56} />
+          <SyllableQr syllable={syll} size={qrSize} />
         </PrintCard>
       ))}
     </PrintItemGrid>
@@ -528,7 +527,7 @@ function WordReadCardsPrint({
   const questionCount = usePrintQuestionCount(words.length);
   const shown = shownOf(words, questionCount);
   return (
-    <PrintItemGrid>
+    <PrintItemGrid fallbackColumns={4}>
       {shown.map((word, i) => {
         const image = withImages && hasLectureWordImage(word);
         const display = correction && showSyllables ? pedagogicSyllable(word) : word;
@@ -686,13 +685,13 @@ function letterExercises(
       "Mots (majuscules)",
       `Soulignez les lettres ${data.letter}.`,
       (c) => (
-        <WordCirclePrint
+        <WordUnderlinePrint
           words={upperWords}
           segmentsOf={(w) => letterSegments(w, data.letterLower)}
           correction={c}
         />
       ),
-      { questionCount: Math.max(5, upperWords.length), ...cols },
+      { questionCount: 4, columns: SOUND_PRINT_COLS },
       LECTURE_PRINT_ICONS.souligner,
     ),
     makeExercise(
@@ -700,13 +699,13 @@ function letterExercises(
       "Mots (minuscules)",
       `Soulignez les lettres ${data.letterLower}.`,
       (c) => (
-        <WordCirclePrint
+        <WordUnderlinePrint
           words={data.lowerWords}
           segmentsOf={(w) => letterSegments(w, data.letterLower)}
           correction={c}
         />
       ),
-      { questionCount: Math.max(5, data.lowerWords.length), ...cols },
+      { questionCount: 4, columns: SOUND_PRINT_COLS },
       LECTURE_PRINT_ICONS.souligner,
     ),
     makeExercise(
@@ -714,7 +713,7 @@ function letterExercises(
       "J'entends le son",
       `Cochez si vous entendez le son ${phoneme}.`,
       (c) => <SoundCheckPrint items={soundAudio} correction={c} />,
-      { questionCount: 5, ...soundCols },
+      { questionCount: 4, ...soundCols },
       LECTURE_PRINT_ICONS.cocher,
     ),
     makeExercise(
@@ -722,7 +721,7 @@ function letterExercises(
       "J'entends le son (images)",
       `Cochez si vous entendez le son ${phoneme}.`,
       (c) => <SoundCheckPrint items={soundImages} withImages correction={c} />,
-      { questionCount: 5, ...soundCols },
+      { questionCount: 4, ...soundCols },
       LECTURE_PRINT_ICONS.cocher,
     ),
   ];
@@ -736,7 +735,7 @@ function letterExercises(
         `J'entends ${extraPhoneme}`,
         `Cochez si vous entendez le son ${extraPhoneme}.`,
         (c) => <SoundCheckPrint items={extraAudio} correction={c} />,
-        { questionCount: 5, ...soundCols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.cocher,
       ),
       makeExercise(
@@ -744,7 +743,7 @@ function letterExercises(
         `J'entends ${extraPhoneme} (images)`,
         `Cochez si vous entendez le son ${extraPhoneme}.`,
         (c) => <SoundCheckPrint items={extraImages} withImages correction={c} />,
-        { questionCount: 5, ...soundCols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.cocher,
       ),
     );
@@ -756,7 +755,7 @@ function letterExercises(
       "Syllabe du son",
       `Cochez la partie de la syllabe où vous entendez le son ${phoneme}.`,
       (c) => <SoundSyllablePrint items={syllAudio} correction={c} />,
-      { questionCount: 5, ...soundCols },
+      { questionCount: 4, ...soundCols },
       LECTURE_PRINT_ICONS.cocher,
     ),
     makeExercise(
@@ -764,7 +763,7 @@ function letterExercises(
       "Syllabe du son (images)",
       `Cochez la partie de la syllabe où vous entendez le son ${phoneme}.`,
       (c) => <SoundSyllablePrint items={syllImages} withImages correction={c} />,
-      { questionCount: 5, ...soundCols },
+      { questionCount: 4, ...soundCols },
       LECTURE_PRINT_ICONS.cocher,
     ),
   );
@@ -776,7 +775,7 @@ function letterExercises(
         "Syllabes",
         "Écoutez et répétez les syllabes.",
         (c) => <SyllableReadPrint items={cv} correction={c} />,
-        { questionCount: Math.max(5, cv.length), ...cols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.prononcer,
       ),
       makeExercise(
@@ -784,7 +783,7 @@ function letterExercises(
         "Syllabes inverses",
         "Écoutez et répétez les syllabes.",
         (c) => <SyllableReadPrint items={vc} correction={c} />,
-        { questionCount: Math.max(5, vc.length), ...cols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.prononcer,
       ),
       makeExercise(
@@ -792,7 +791,7 @@ function letterExercises(
         "2 syllabes",
         "Écoutez et répétez les syllabes.",
         (c) => <SyllableReadPrint items={sample(syll2, 12, rng)} correction={c} />,
-        { questionCount: 8, ...cols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.prononcer,
       ),
     );
@@ -820,7 +819,7 @@ function letterExercises(
         "Prononcer",
         "Écoutez et répétez les mots.",
         (c) => <PronouncePrint steps={pronSteps} correction={c} />,
-        { questionCount: pronSteps.length, columns: 1 },
+        { questionCount: 4, columns: 1 },
         LECTURE_PRINT_ICONS.prononcer,
       ),
     );
@@ -851,7 +850,7 @@ function syllableExercises(data: SyllableLessonData): PrintExercise[] {
       grid.label,
       "Lis chaque syllabe à voix haute. Scanne le QR code pour vérifier.",
       (c) => <SyllableReadPrint items={grid.items} correction={c} />,
-      { questionCount: Math.max(5, grid.items.length), columns: LECTURE_PRINT_COLS },
+      { questionCount: 4, columns: SOUND_PRINT_COLS },
     ),
   );
 }
@@ -871,7 +870,7 @@ function monosyllableExercises(
       grid.label,
       "Lis chaque mot à voix haute. Scanne le QR code pour vérifier.",
       (c) => <WordReadCardsPrint words={words} withImages={!isToolWords} correction={c} />,
-      { questionCount: 5, columns: LECTURE_PRINT_COLS },
+      { questionCount: 4, columns: SOUND_PRINT_COLS },
     );
   });
 }
@@ -890,7 +889,7 @@ function multisyllableExercises(
       grid.label,
       "Lis chaque mot à voix haute. Scanne le QR code pour vérifier.",
       (c) => <WordReadCardsPrint words={words} withImages showSyllables correction={c} />,
-      { questionCount: 5, columns: LECTURE_PRINT_COLS },
+      { questionCount: 4, columns: SOUND_PRINT_COLS },
     );
   });
 }
@@ -926,15 +925,16 @@ function complexSoundExercises(
       makeExercise(
         "words",
         "Mots",
-        `Entoure le son ${data.title} dans chaque mot. Scanne le QR code pour écouter le mot.`,
+        `Soulignez le son ${data.title} dans chaque mot.`,
         (c) => (
-          <WordCirclePrint
+          <WordUnderlinePrint
             words={words}
             segmentsOf={(w) => graphemeSegments(w, targets)}
             correction={c}
           />
         ),
-        { questionCount: 5, ...cols },
+        { questionCount: 4, columns: SOUND_PRINT_COLS },
+        LECTURE_PRINT_ICONS.souligner,
       ),
     );
   }
@@ -946,7 +946,7 @@ function complexSoundExercises(
         "J'entends le son",
         `Cochez si vous entendez le son ${phoneme}.`,
         (c) => <SoundCheckPrint items={soundAudio} correction={c} />,
-        { questionCount: 5, ...soundCols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.cocher,
       ),
       makeExercise(
@@ -954,7 +954,7 @@ function complexSoundExercises(
         "J'entends le son (images)",
         `Cochez si vous entendez le son ${phoneme}.`,
         (c) => <SoundCheckPrint items={soundImages} withImages correction={c} />,
-        { questionCount: 5, ...soundCols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.cocher,
       ),
     );
@@ -967,7 +967,7 @@ function complexSoundExercises(
         "Syllabe du son",
         `Cochez la partie de la syllabe où vous entendez le son ${phoneme}.`,
         (c) => <SoundSyllablePrint items={syllAudio} correction={c} />,
-        { questionCount: 5, ...soundCols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.cocher,
       ),
     );
@@ -979,7 +979,7 @@ function complexSoundExercises(
         "Syllabe du son (images)",
         `Cochez la partie de la syllabe où vous entendez le son ${phoneme}.`,
         (c) => <SoundSyllablePrint items={syllImages} withImages correction={c} />,
-        { questionCount: 5, ...soundCols },
+        { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.cocher,
       ),
     );
@@ -990,9 +990,9 @@ function complexSoundExercises(
       makeExercise(
         "pronounce",
         "Prononcer",
-        "Lis le son, puis la syllabe, puis le mot. Scanne le QR code pour vérifier.",
+        "Écoutez et répétez les mots.",
         (c) => <PronouncePrint steps={pronSteps} correction={c} />,
-        { questionCount: pronSteps.length, columns: 1 },
+        { questionCount: 4, columns: 1 },
       ),
     );
   }

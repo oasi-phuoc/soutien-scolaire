@@ -25,7 +25,7 @@ import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-1.5 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
 
-function PrintExerciseHeader({
+export function PrintExerciseHeader({
   exercise,
   index,
   suffix,
@@ -59,7 +59,7 @@ function PrintExerciseHeader({
           ) : null}
         </div>
         {instruction ? (
-          <p className="print-ex-consigne mb-1 text-[0.72em] font-semibold leading-snug text-black">
+          <p className="print-ex-consigne mb-1 text-[1.35em] font-semibold leading-snug text-black">
             {instruction}
           </p>
         ) : null}

@@ -805,6 +805,10 @@ input[type=number] {
 .print-layout-context .print-ex-title.print-ex-title--with-consigne {
   margin-bottom: 0.3em !important;
 }
+.print-layout-context .print-ex-consigne {
+  display: block !important;
+  color: #000 !important;
+}
 .print-layout-context .print-ex-icon {
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;

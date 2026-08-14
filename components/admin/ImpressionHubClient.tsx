@@ -22,6 +22,7 @@ import {
   PrintDocumentFooter,
   PrintDocumentHeader,
   PrintExerciseBody,
+  PrintExerciseHeader,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -1181,21 +1182,16 @@ export function ImpressionHubClient() {
                     : (theory && hasAnnouncement && item.displayIndex === 0)
                       || Boolean(item.selection.pageBreak);
 
-                const titleRow = (suffix?: string) => (
-                  <div
-                    className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"
-                    style={{ color: accent }}
-                  >
-                    <span className="flex-1">
-                      Exercice {item.displayIndex + 1}
-                      {suffix ? ` — ${suffix}` : item.correction ? " — Corrigé" : ""}
-                    </span>
-                    {evalMode && (
-                      <span style={{ color: "black" }}>
-                        {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                      </span>
-                    )}
-                  </div>
+                const titleRow = (suffix?: string, showInstruction = true) => (
+                  <PrintExerciseHeader
+                    exercise={ex}
+                    index={item.displayIndex}
+                    suffix={suffix ?? (item.correction ? "Corrigé" : undefined)}
+                    accentColor={accent}
+                    points={item.selection.points}
+                    showPoints={evalMode}
+                    showInstruction={showInstruction}
+                  />
                 );
 
                 const bodyPreview = item.correction
@@ -1232,7 +1228,7 @@ export function ImpressionHubClient() {
                   forceNewPage,
                   render: () => (
                     <div className="print-exercise">
-                      {titleRow(titleSuffix)}
+                      {titleRow(titleSuffix, false)}
                       <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
                         {clonePreview(preview, `${key}-plain-${item.occurrence}`)}
                       </div>

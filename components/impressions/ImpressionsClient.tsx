@@ -12,6 +12,7 @@ import {
   PrintDocumentFooter,
   PrintDocumentHeader,
   PrintExerciseBody,
+  PrintExerciseHeader,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -789,19 +790,14 @@ export function ImpressionsClient() {
                       || item.exercise?.forceNewPage === true,
                   render: () => (
                     <div className="print-exercise">
-                      <div
-                        className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"
-                        style={{ color: accent }}
-                      >
-                        <span className="flex-1">
-                          Exercice {item.displayIndex + 1}{item.correction ? " — Corrigé" : ""}
-                        </span>
-                        {evalMode && (
-                          <span style={{ color: "black" }}>
-                            {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                          </span>
-                        )}
-                      </div>
+                      <PrintExerciseHeader
+                        exercise={item.exercise}
+                        index={item.displayIndex}
+                        suffix={item.correction ? "Corrigé" : undefined}
+                        accentColor={accent}
+                        points={item.selection.points}
+                        showPoints={evalMode}
+                      />
                       <PrintExerciseBody
                         selection={item.selection}
                         answerKey={item.correction}
