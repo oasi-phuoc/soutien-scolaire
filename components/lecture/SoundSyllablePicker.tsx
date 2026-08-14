@@ -184,7 +184,7 @@ export const SoundSyllablePicker = forwardRef<SoundSyllablePickerHandle, Props>(
               : lectureUi(lang, "checkSyllableWithSound", { x: phonemes[0] ?? "" })}
           </p>
         )}
-        <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-4">
+        <div className={`grid gap-3 ${mode === "image" ? "grid-cols-2 md:grid-cols-3" : "grid-cols-3 md:grid-cols-4"}`}>
           {items.map((item, i) => {
             const row = states[i] ?? [];
             const cardOk = validated && isCardCorrect(row, item.targets);

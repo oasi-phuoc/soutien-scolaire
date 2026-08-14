@@ -75,7 +75,7 @@ type OuiNonChoice = "oui" | "non" | null;
 
 function ouiNonCircleClass(picked: boolean, isAnswer: boolean, validated: boolean): string {
   const base =
-    "flex h-8 min-w-[2.6rem] items-center justify-center rounded-full border px-2 text-[11px] font-semibold leading-none transition-colors disabled:opacity-90";
+    "flex h-8 min-w-[2.6rem] items-center justify-center rounded-md border px-2 text-[11px] font-semibold leading-none transition-colors disabled:opacity-90";
   if (!validated) {
     return picked
       ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`
@@ -251,7 +251,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
           </p>
         )}
         <p className="text-sm text-[var(--color-text-secondary)]">
-          Touchez les images où vous entendez{" "}
+          Cochez si vous entendez le son{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
         </p>
         {showPivot && (
@@ -259,7 +259,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, {
             {lectureUi(lang, "tapImagesWithSound", { x: phoneme })}
           </p>
         )}
-        <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
           {items.map((word, i) => {
             const s = states[i]!;
             const hasPhoneme = wordHasPhoneme(word, phoneme);
@@ -368,7 +368,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, {
           </p>
         )}
         <p className="text-sm text-[var(--color-text-secondary)]">
-          Écoutez et touchez ceux où vous entendez{" "}
+          Cochez si vous entendez le son{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
         </p>
         {showPivot && (

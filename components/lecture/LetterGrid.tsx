@@ -122,7 +122,7 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
           </p>
         )}
         <p className="text-sm text-[var(--color-text-secondary)]">
-          Touchez chaque{" "}
+          Coloriez les cases avec la lettre{" "}
           <strong className="text-[var(--color-accent-lecture)]">
             {isUppercase ? target.toUpperCase() : target.toLowerCase()}
           </strong>

@@ -35,7 +35,7 @@ export const LetterPronounce = forwardRef<LetterPronounceHandle, Props>(
         ref={listRef}
         steps={steps}
         title="Prononcer les mots"
-        consigne="Prononcez chaque mot à voix haute."
+        consigne="Écoutez et répétez les mots."
       />
     );
   },

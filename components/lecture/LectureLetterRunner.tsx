@@ -8,7 +8,8 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
-import { getLectureModule, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
+import { DUAL_SOUND_LETTERS, getLectureModule, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
+import { matchSyllablePool } from "@/lib/curriculum/lecture-print-icons";
 import { DiscoverSound } from "./DiscoverSound";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
 import {
@@ -20,6 +21,7 @@ import {
 } from "./WordSpotter";
 import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
 import { SoundSyllablePicker, type SoundSyllablePickerHandle } from "./SoundSyllablePicker";
+import { AudioMatchLinker, type AudioMatchLinkerHandle } from "./AudioMatchLinker";
 import { SyllableGrid } from "./SyllableGrid";
 import { LetterPronounce, type LetterPronounceHandle } from "./LetterPronounce";
 import { ComplexGraphemePronounce, type ComplexGraphemePronounceHandle } from "./ComplexGraphemePronounce";
@@ -47,6 +49,7 @@ import {
   monosyllablePool,
   multisyllablePool,
   randomWordsWithGrapheme,
+  randomWordsWithLetter,
   wordsPoolForLessonGrid,
 } from "@/lib/curriculum/word-pool";
 import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
@@ -134,11 +137,14 @@ function getSteps(data: LetterData): Step[] {
       { key: "sound-image", label: "Images" },
       { key: "sound-syllable-audio", label: "Syllabes audio" },
       { key: "sound-syllable-image", label: "Syllabes images" },
+      { key: "match-syllables", label: "Repérer les syllabes" },
       { key: "pronounce", label: "Prononcer" },
+      { key: "match-words", label: "Repérer les mots" },
       { key: "eval", label: "Évaluation" },
     ];
   }
   const isC = data.letterLower === "c";
+  const extraPhoneme = DUAL_SOUND_LETTERS[data.letterLower]?.[1];
   return [
     { key: "discover", label: "Découverte" },
     // La lettre C a deux sons (/k/ et /s/) : explication + son /s/ supplémentaire.
@@ -149,9 +155,9 @@ function getSteps(data: LetterData): Step[] {
     { key: "word-lower", label: "Mots (min)" },
     { key: "sound-audio", label: "Audio" },
     { key: "sound-image", label: "Images" },
-    ...(isC ? [
-      { key: "sound-audio-s", label: "Audio /s/" },
-      { key: "sound-image-s", label: "Images /s/" },
+    ...(extraPhoneme ? [
+      { key: "sound-audio-2", label: `Audio ${extraPhoneme}` },
+      { key: "sound-image-2", label: `Images ${extraPhoneme}` },
     ] : []),
     { key: "sound-syllable-audio", label: "Syllabes audio" },
     { key: "sound-syllable-image", label: "Syllabes images" },
@@ -159,7 +165,9 @@ function getSteps(data: LetterData): Step[] {
     { key: "syllables-vc", label: "Syllabes inverses" },
     { key: "syll-2", label: "2 syllabes" },
     { key: "syll-timed", label: "Lecture rapide" },
+    { key: "match-syllables", label: "Repérer les syllabes" },
     { key: "pronounce", label: "Prononcer" },
+    { key: "match-words", label: "Repérer les mots" },
     { key: "eval", label: "Évaluation" },
   ];
 }
@@ -769,6 +777,15 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const contentKey = lectureLetterKey(baseData.letterLower);
   const data = resolve(contentKey, baseData);
   const steps = getSteps(data);
+  const letterMatchKind = data.type === "vowel" || data.type === "consonant" ? data.type : null;
+  const matchSyllablePoolItems = useMemo(
+    () => (letterMatchKind ? matchSyllablePool(data.letterLower, letterMatchKind) : []),
+    [data.letterLower, letterMatchKind],
+  );
+  const matchWordPoolItems = useMemo(
+    () => (letterMatchKind ? randomWordsWithLetter(data.letterLower, 20).map((w) => w.toLowerCase()) : []),
+    [data.letterLower, letterMatchKind],
+  );
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);
   const [wordTimerLeft, setWordTimerLeft] = useState<number | null>(null);
@@ -794,6 +811,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
   const soundSyllableRef = useRef<SoundSyllablePickerHandle>(null);
+  const matchLinkerRef = useRef<AudioMatchLinkerHandle>(null);
   const pronounceRef = useRef<LetterPronounceHandle | ComplexGraphemePronounceHandle>(null);
   const pronounceGridRef = useRef<{ reset: () => void; validate?: () => void }>(null);
 
@@ -813,9 +831,10 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
   const isComplexWordStep = step.key === "complex-word-upper" || step.key === "complex-word-lower";
-  const isSoundImageStep = step.key === "sound-image" || step.key === "sound-image-s";
-  const isSoundAudioStep = step.key === "sound-audio" || step.key === "sound-audio-s";
+  const isSoundImageStep = step.key === "sound-image" || step.key === "sound-image-s" || step.key === "sound-image-2";
+  const isSoundAudioStep = step.key === "sound-audio" || step.key === "sound-audio-s" || step.key === "sound-audio-2";
   const isSoundSyllableStep = step.key === "sound-syllable-audio" || step.key === "sound-syllable-image";
+  const isMatchStep = step.key === "match-syllables" || step.key === "match-words";
   const isPronounceStep = step.key === "pronounce" || step.key === "pronounce-complex";
   const isEvalStep = step.key === "eval";
   const isWordEvalL6L8 = isWordEvalStep && (data.type === "monosyllable" || data.type === "multisyllable");
@@ -831,7 +850,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
     data.type === "syllable" ||
     (data.type === "multisyllable" && !isWordEvalL6L8) ||
     (data.type === "monosyllable" && !isWordEvalL6L8);
-  const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep || isSoundSyllableStep;
+  const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep || isSoundSyllableStep || isMatchStep;
   const showRefreshButton =
     showExerciseButtons || isPronounceStep || isPronounceGridStep;
 
@@ -840,6 +859,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
     else if (isWordStep || isComplexWordStep) wordRef.current?.reset();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
     else if (isSoundSyllableStep) soundSyllableRef.current?.reset();
+    else if (isMatchStep) matchLinkerRef.current?.reset();
     else if (isPronounceStep) pronounceRef.current?.reset();
     else if (isPronounceGridStep) pronounceGridRef.current?.reset();
   }
@@ -848,6 +868,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
     else if (isWordStep || isComplexWordStep) wordRef.current?.validate();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.validate();
     else if (isSoundSyllableStep) soundSyllableRef.current?.validate();
+    else if (isMatchStep) matchLinkerRef.current?.validate();
     else if (isWordEvalL6L8) pronounceGridRef.current?.validate?.();
   }
 
@@ -1161,13 +1182,51 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
       case "sound-audio":
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
       case "sound-image-s":
-        return <SoundPicker key={k} ref={soundImageRef} phoneme="/s/" mode="image" />;
+      case "sound-image-2":
+        return (
+          <SoundPicker
+            key={k}
+            ref={soundImageRef}
+            phoneme={DUAL_SOUND_LETTERS[data.letterLower]?.[1] ?? "/s/"}
+            mode="image"
+          />
+        );
       case "sound-audio-s":
-        return <SoundPicker key={k} ref={soundImageRef} phoneme="/s/" mode="audio" />;
+      case "sound-audio-2":
+        return (
+          <SoundPicker
+            key={k}
+            ref={soundImageRef}
+            phoneme={DUAL_SOUND_LETTERS[data.letterLower]?.[1] ?? "/s/"}
+            mode="audio"
+          />
+        );
       case "sound-syllable-audio":
         return <SoundSyllablePicker key={k} ref={soundSyllableRef} phonemes={[data.phoneme]} mode="audio" />;
       case "sound-syllable-image":
         return <SoundSyllablePicker key={k} ref={soundSyllableRef} phonemes={[data.phoneme]} mode="image" />;
+      case "match-syllables":
+        return (
+          <AudioMatchLinker
+            key={k}
+            ref={matchLinkerRef}
+            items={matchSyllablePoolItems}
+            kind="syllable"
+            title="Repérer les syllabes"
+            consigne="Écoutez et reliez les syllabes au son que vous entendez."
+          />
+        );
+      case "match-words":
+        return (
+          <AudioMatchLinker
+            key={k}
+            ref={matchLinkerRef}
+            items={matchWordPoolItems}
+            kind="word"
+            title="Repérer les mots"
+            consigne="Écoutez et reliez les mots au son que vous entendez."
+          />
+        );
       case "syllables-cv":
         if (data.type !== "consonant") return null;
         return (
@@ -1219,7 +1278,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
               { pool: poolLower, n: Math.min(6, poolLower.length) },
             ]}
             title="Lecture de 2 syllabes"
-            consigne="Lisez chaque suite de 2 syllabes à voix haute."
+            consigne="Écoutez et répétez les syllabes."
           />
         );
       }

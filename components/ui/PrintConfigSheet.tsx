@@ -23,7 +23,56 @@ import {
 import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 
 const PRINT_EX_TITLE_CLASS =
-  "print-ex-title mb-4 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
+  "print-ex-title mb-1.5 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
+
+function PrintExerciseHeader({
+  exercise,
+  index,
+  suffix,
+  accentColor,
+  points,
+  showPoints,
+  showInstruction = true,
+}: {
+  exercise: PrintExercise | undefined;
+  index: number;
+  suffix?: string;
+  accentColor: string;
+  points?: number;
+  showPoints?: boolean;
+  showInstruction?: boolean;
+}) {
+  const icon = exercise?.printIcon;
+  const instruction = showInstruction ? exercise?.instruction : undefined;
+  return (
+    <div className="mb-3 flex items-stretch gap-3">
+      <div className="min-w-0 flex-1">
+        <div
+          className={`${PRINT_EX_TITLE_CLASS}${instruction ? " print-ex-title--with-consigne" : ""}`}
+          style={{ color: accentColor }}
+        >
+          <span className="flex-1">{printExerciseHeading(exercise, index, suffix)}</span>
+          {showPoints && points != null ? (
+            <span style={{ color: "black" }}>
+              {points} pt{points > 1 ? "s" : ""}
+            </span>
+          ) : null}
+        </div>
+        {instruction ? (
+          <p className="print-ex-consigne mb-1 text-[0.72em] font-semibold leading-snug text-black">
+            {instruction}
+          </p>
+        ) : null}
+      </div>
+      {icon ? (
+        <div className="print-ex-icon aspect-square shrink-0 self-stretch overflow-hidden rounded-[0.2em] border border-zinc-400 bg-white p-[0.12em]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={icon} alt="" className="h-full w-full object-contain" />
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 const PRINT_EX_CONTENT_CLASS =
   "print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none";
@@ -106,6 +155,10 @@ export interface PrintExercise {
   printLengthMode?: PrintLengthMode;
   /** Active les options de mise en page (questions / colonnes) pour cet exercice. */
   supportsPrintLayout?: boolean;
+  /** Consigne sous le titre (impression) — hauteur partagée avec l’icône. */
+  instruction?: string;
+  /** Icône flottante à droite du titre + consigne (impression lecture). */
+  printIcon?: string;
 }
 
 export interface ExercisePrintSelection {
@@ -1413,20 +1466,15 @@ export function PrintConfigSheet({
                         forceNewPage: true,
                         node: (
                           <div className="print-exercise">
-                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                              <span className="flex-1">
-                                {printExerciseHeading(
-                                  exercise,
-                                  index,
-                                  exercise.correctionLeadTitle ?? "Audios & transcriptions",
-                                )}
-                              </span>
-                              {evalMode && (
-                                <span style={{ color: "black" }}>
-                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                                </span>
-                              )}
-                            </div>
+                            <PrintExerciseHeader
+                              exercise={exercise}
+                              index={index}
+                              suffix={exercise.correctionLeadTitle ?? "Audios & transcriptions"}
+                              accentColor={accentColor}
+                              points={item.selection.points}
+                              showPoints={evalMode}
+                              showInstruction={false}
+                            />
                             <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
                               {exercise.correctionLeadPreview}
                             </div>
@@ -1438,16 +1486,14 @@ export function PrintConfigSheet({
                         forceNewPage: true,
                         node: (
                           <div className="print-exercise">
-                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                              <span className="flex-1">
-                                {printExerciseHeading(exercise, index, "Corrigé")}
-                              </span>
-                              {evalMode && (
-                                <span style={{ color: "black" }}>
-                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                                </span>
-                              )}
-                            </div>
+                            <PrintExerciseHeader
+                              exercise={exercise}
+                              index={index}
+                              suffix="Corrigé"
+                              accentColor={accentColor}
+                              points={item.selection.points}
+                              showPoints={evalMode}
+                            />
                             <PrintExerciseBody
                               key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}`}
                               selection={item.selection}
@@ -1466,16 +1512,15 @@ export function PrintConfigSheet({
                           forceNewPage: true,
                           node: (
                             <div className="print-exercise">
-                              <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                                <span className="flex-1">
-                                  {printExerciseHeading(exercise, index, follow.title ?? "Suite")}
-                                </span>
-                                {evalMode && (
-                                  <span style={{ color: "black" }}>
-                                    {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                                  </span>
-                                )}
-                              </div>
+                              <PrintExerciseHeader
+                                exercise={exercise}
+                                index={index}
+                                suffix={follow.title ?? "Suite"}
+                                accentColor={accentColor}
+                                points={item.selection.points}
+                                showPoints={evalMode}
+                                showInstruction={false}
+                              />
                               <div className={printExContentClass(true)}>
                                 {follow.preview}
                               </div>
@@ -1500,14 +1545,14 @@ export function PrintConfigSheet({
                         forceNewPage: true,
                         node: (
                           <div className="print-exercise">
-                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                              <span className="flex-1">{printExerciseHeading(exercise, index)}</span>
-                              {evalMode && (
-                                <span style={{ color: "black" }}>
-                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                                </span>
-                              )}
-                            </div>
+                            <PrintExerciseHeader
+                              exercise={exercise}
+                              index={index}
+                              accentColor={accentColor}
+                              points={item.selection.points}
+                              showPoints={evalMode}
+                              showInstruction={false}
+                            />
                             <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
                               {lead}
                             </div>
@@ -1519,20 +1564,14 @@ export function PrintConfigSheet({
                         forceNewPage: true,
                         node: (
                           <div className="print-exercise">
-                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                              <span className="flex-1">
-                                {printExerciseHeading(
-                                  exercise,
-                                  index,
-                                  exercise?.leadFollowTitle ?? "Grille",
-                                )}
-                              </span>
-                              {evalMode && (
-                                <span style={{ color: "black" }}>
-                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                                </span>
-                              )}
-                            </div>
+                            <PrintExerciseHeader
+                              exercise={exercise}
+                              index={index}
+                              suffix={exercise?.leadFollowTitle ?? "Grille"}
+                              accentColor={accentColor}
+                              points={item.selection.points}
+                              showPoints={evalMode}
+                            />
                             <PrintExerciseBody
                               key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}`}
                               selection={item.selection}
@@ -1549,16 +1588,15 @@ export function PrintConfigSheet({
                           forceNewPage: true,
                           node: (
                             <div className="print-exercise">
-                              <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                                <span className="flex-1">
-                                  {printExerciseHeading(exercise, index, follow.title ?? "Suite")}
-                                </span>
-                                {evalMode && (
-                                  <span style={{ color: "black" }}>
-                                    {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                                  </span>
-                                )}
-                              </div>
+                              <PrintExerciseHeader
+                                exercise={exercise}
+                                index={index}
+                                suffix={follow.title ?? "Suite"}
+                                accentColor={accentColor}
+                                points={item.selection.points}
+                                showPoints={evalMode}
+                                showInstruction={false}
+                              />
                               <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
                                 {follow.preview}
                               </div>
@@ -1574,16 +1612,14 @@ export function PrintConfigSheet({
                       forceNewPage: exerciseBreak(exercise, index, item.selection),
                       node: (
                         <div className="print-exercise">
-                          <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                            <span className="flex-1">
-                              {printExerciseHeading(
-                                exercise,
-                                index,
-                                item.correction ? "Corrigé" : undefined,
-                              )}
-                            </span>
-                            {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
-                          </div>
+                          <PrintExerciseHeader
+                            exercise={exercise}
+                            index={index}
+                            suffix={item.correction ? "Corrigé" : undefined}
+                            accentColor={accentColor}
+                            points={item.selection.points}
+                            showPoints={evalMode}
+                          />
                           <PrintExerciseBody
                             key={`${item.key}-q${item.selection.questionCount}-c${item.selection.columns}-s${item.selection.spacing}`}
                             selection={item.selection}
@@ -1600,16 +1636,15 @@ export function PrintConfigSheet({
                         forceNewPage: true,
                         node: (
                           <div className="print-exercise">
-                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                              <span className="flex-1">
-                                {printExerciseHeading(exercise, index, follow.title ?? "Suite")}
-                              </span>
-                              {evalMode && (
-                                <span style={{ color: "black" }}>
-                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
-                                </span>
-                              )}
-                            </div>
+                            <PrintExerciseHeader
+                              exercise={exercise}
+                              index={index}
+                              suffix={follow.title ?? "Suite"}
+                              accentColor={accentColor}
+                              points={item.selection.points}
+                              showPoints={evalMode}
+                              showInstruction={false}
+                            />
                             <div className={printExContentClass(Boolean(item.correction))}>
                               {follow.preview}
                             </div>
