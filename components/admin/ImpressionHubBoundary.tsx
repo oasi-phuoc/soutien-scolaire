@@ -7,7 +7,7 @@ import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 /** Dynamic import — hub impression (refresh par exercice). */
 const ImpressionHubClient = dynamic(
   () =>
-    import("@/components/admin/ImpressionDocumentsClient").then((m) => m.ImpressionHubClient),
+    import("@/components/admin/ImpressionHubClient").then((m) => m.ImpressionHubClient),
   {
     ssr: false,
     loading: () => <ChargementEnCoursCard title="Impression" />,
