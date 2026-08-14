@@ -144,7 +144,11 @@ export const AudioMatchLinker = forwardRef<
     <section className="space-y-3 pb-8">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{title}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
-      <div ref={rootRef} className="relative grid grid-cols-2 items-stretch gap-4 sm:gap-8">
+      <div
+        ref={rootRef}
+        className="relative grid items-stretch gap-x-4 gap-y-2 sm:gap-x-8"
+        style={{ gridTemplateColumns: "max-content minmax(1.5rem, 1fr) max-content" }}
+      >
         <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
           {lines.map(
             (line) =>
@@ -166,76 +170,74 @@ export const AudioMatchLinker = forwardRef<
               ),
           )}
         </svg>
-        <ul className="space-y-2">
-          {left.map((label, i) => {
-            const ok = pairResult(i);
-            return (
-              <li
-                key={`L-${label}-${i}`}
-                className={`flex items-center gap-2 rounded-[var(--radius-lg)] border px-2 py-1.5 ${
-                  ok === false ? LECTURE_CORRECTION_CARD : "border-[var(--color-border-default)] bg-white"
+        {left.map((label, i) => {
+          const ok = pairResult(i);
+          return (
+            <div
+              key={`L-${label}-${i}`}
+              className={`flex h-full items-center gap-2 rounded-[var(--radius-lg)] border px-2 py-1.5 ${
+                ok === false ? LECTURE_CORRECTION_CARD : "border-[var(--color-border-default)] bg-white"
+              }`}
+              style={{ gridColumn: 1, gridRow: i + 1 }}
+            >
+              <button
+                type="button"
+                onClick={() => play(label)}
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[var(--color-accent-lecture)] bg-white text-[var(--color-accent-lecture)]"
+                aria-label="Écouter"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+              </button>
+              <button
+                ref={(el) => {
+                  leftRefs.current[i] = el;
+                }}
+                type="button"
+                onClick={() => onLeftCircle(i)}
+                disabled={validated}
+                className={circleClass(selectedLeft === i, pairs[i] != null, ok)}
+                aria-label={`Relier l'audio ${i + 1}`}
+              />
+            </div>
+          );
+        })}
+        {right.map((label, j) => {
+          const leftIdx = Number(
+            Object.entries(pairs).find(([, v]) => v === j)?.[0] ?? NaN,
+          );
+          const paired = Number.isFinite(leftIdx);
+          const ok = paired ? pairResult(leftIdx) : null;
+          return (
+            <div
+              key={`R-${label}-${j}`}
+              className={`flex h-full items-center justify-start gap-2 rounded-[var(--radius-lg)] border px-2 py-1.5 ${
+                ok === false ? LECTURE_CORRECTION_CARD : "border-[var(--color-border-default)] bg-white"
+              }`}
+              style={{ gridColumn: 3, gridRow: j + 1 }}
+            >
+              <button
+                ref={(el) => {
+                  rightRefs.current[j] = el;
+                }}
+                type="button"
+                onClick={() => onRightCircle(j)}
+                disabled={validated}
+                className={circleClass(false, paired, ok)}
+                aria-label={`Syllabe ${label}`}
+              />
+              <span
+                className={`flex h-full min-h-11 w-full items-center whitespace-nowrap rounded-full border-2 px-3 py-1 text-left text-base font-bold tracking-wide ${
+                  ok === false ? LECTURE_CORRECTION_BUTTON : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
                 }`}
               >
-                <button
-                  type="button"
-                  onClick={() => play(label)}
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[var(--color-accent-lecture)] bg-white text-[var(--color-accent-lecture)]"
-                  aria-label="Écouter"
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  </svg>
-                </button>
-                <button
-                  ref={(el) => {
-                    leftRefs.current[i] = el;
-                  }}
-                  type="button"
-                  onClick={() => onLeftCircle(i)}
-                  disabled={validated}
-                  className={circleClass(selectedLeft === i, pairs[i] != null, ok)}
-                  aria-label={`Relier l'audio ${i + 1}`}
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <ul className="space-y-2">
-          {right.map((label, j) => {
-            const leftIdx = Number(
-              Object.entries(pairs).find(([, v]) => v === j)?.[0] ?? NaN,
-            );
-            const paired = Number.isFinite(leftIdx);
-            const ok = paired ? pairResult(leftIdx) : null;
-            return (
-              <li
-                key={`R-${label}-${j}`}
-                className={`flex items-center gap-2 rounded-[var(--radius-lg)] border px-2 py-1.5 ${
-                  ok === false ? LECTURE_CORRECTION_CARD : "border-[var(--color-border-default)] bg-white"
-                }`}
-              >
-                <button
-                  ref={(el) => {
-                    rightRefs.current[j] = el;
-                  }}
-                  type="button"
-                  onClick={() => onRightCircle(j)}
-                  disabled={validated}
-                  className={circleClass(false, paired, ok)}
-                  aria-label={`Syllabe ${label}`}
-                />
-                <span
-                  className={`flex-1 rounded-full border-2 px-3 py-1 text-center text-base font-bold tracking-wide ${
-                    ok === false ? LECTURE_CORRECTION_BUTTON : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
-                  }`}
-                >
-                  {label}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
+                {label}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

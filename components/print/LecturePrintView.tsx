@@ -452,36 +452,43 @@ function MatchLinkPrint({
   const left = items.slice(0, questionCount);
   const right = shuffled.filter((s) => left.some((x) => x.toLowerCase() === s.toLowerCase()));
   return (
-    <div className="grid grid-cols-2 items-start gap-x-8 gap-y-2">
-      <div className="space-y-2">
-        {left.map((label, i) => (
-          <div key={`L-${label}-${i}`} className="flex items-center justify-start gap-2">
-            {kind === "syllable" ? (
-              <SyllableQr syllable={label} size={52} />
-            ) : (
-              <WordQr word={label} label={`Audio ${i + 1}`} size={52} />
-            )}
+    <div
+      className="grid items-stretch gap-x-8 gap-y-2"
+      style={{ gridTemplateColumns: "max-content minmax(1.5rem, 1fr) max-content" }}
+    >
+      {left.map((label, i) => (
+        <div
+          key={`L-${label}-${i}`}
+          className="flex h-full items-center justify-start gap-2"
+          style={{ gridColumn: 1, gridRow: i + 1 }}
+        >
+          {kind === "syllable" ? (
+            <SyllableQr syllable={label} size={52} />
+          ) : (
+            <WordQr word={label} label={`Audio ${i + 1}`} size={52} />
+          )}
+          <span className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-zinc-500 bg-white" />
+        </div>
+      ))}
+      {right.map((label, i) => {
+        const matchIdx = left.findIndex((x) => x.toLowerCase() === label.toLowerCase());
+        return (
+          <div
+            key={`R-${label}-${i}`}
+            className="flex h-full items-center justify-start gap-2"
+            style={{ gridColumn: 3, gridRow: i + 1 }}
+          >
             <span className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-zinc-500 bg-white" />
+            <span
+              className={`inline-flex h-full min-h-8 w-full items-center whitespace-nowrap rounded-full border-2 px-2.5 py-0.5 text-left text-base font-bold tracking-wide ${
+                correction ? "border-amber-500 bg-amber-50 text-amber-700" : "border-zinc-500 text-black"
+              }`}
+            >
+              {correction && matchIdx >= 0 ? `${matchIdx + 1}. ${label}` : label}
+            </span>
           </div>
-        ))}
-      </div>
-      <div className="space-y-2">
-        {right.map((label, i) => {
-          const matchIdx = left.findIndex((x) => x.toLowerCase() === label.toLowerCase());
-          return (
-            <div key={`R-${label}-${i}`} className="flex items-center justify-end gap-2">
-              <span className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-zinc-500 bg-white" />
-              <span
-                className={`inline-flex min-w-[4.5rem] items-center justify-center rounded-full border-2 px-2.5 py-0.5 text-center text-base font-bold tracking-wide ${
-                  correction ? "border-amber-500 bg-amber-50 text-amber-700" : "border-zinc-500 text-black"
-                }`}
-              >
-                {correction && matchIdx >= 0 ? `${matchIdx + 1}. ${label}` : label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
+        );
+      })}
     </div>
   );
 }
