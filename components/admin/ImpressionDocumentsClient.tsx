@@ -23,12 +23,12 @@ import {
   PrintDocumentHeader,
   PrintExerciseBody,
   PrintExerciseHeader,
-  PrintExerciseRefreshButton,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
 import { clampPrintColumns } from "@/components/print/PrintExerciseLayoutContext";
 import { printExerciseNoncesKey } from "@/components/math/placement/placement-print-rng";
+import { PRINT_EXERCISE_REFRESH } from "@/components/admin/print-exercise-refresh";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -1022,13 +1022,14 @@ export function ImpressionHubClient() {
 
               <div>
                 <FieldLabel>Exercices</FieldLabel>
-                <div className="space-y-2">
+                <div className="space-y-2" data-print-ex-list={PRINT_EXERCISE_REFRESH}>
                   {(bundle?.exercises ?? []).map((ex) => {
                     const sel = selection.find((s) => s.id === ex.id);
                     if (!sel) return null;
                     return (
                       <div
                         key={ex.id}
+                        data-print-ex-card={ex.id}
                         className="rounded-xl border border-[var(--color-border-default)] px-3 py-2.5"
                       >
                         <div className="flex items-center gap-3">
@@ -1045,10 +1046,21 @@ export function ImpressionHubClient() {
                           <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
                             {ex.label}
                           </span>
-                          <PrintExerciseRefreshButton
-                            accent={accent}
+                          <button
+                            type="button"
+                            data-print-refresh={ex.id}
+                            aria-label="Retirer au hasard"
+                            title="Retirer au hasard"
                             onClick={() => bumpExerciseNonce(ex.id)}
-                          />
+                            className="ml-auto flex h-8 shrink-0 items-center gap-1 rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 text-xs font-bold transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+                            style={{ color: accent }}
+                          >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                              <path d="M20 11a8 8 0 10-2.34 5.66" />
+                              <path d="M20 4v7h-7" />
+                            </svg>
+                            Rafraîchir
+                          </button>
                         </div>
                         {sel.included && (
                           <div className="mt-3 space-y-2 pl-9">

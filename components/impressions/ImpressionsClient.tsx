@@ -13,7 +13,6 @@ import {
   PrintDocumentHeader,
   PrintExerciseBody,
   PrintExerciseHeader,
-  PrintExerciseRefreshButton,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -641,10 +640,20 @@ export function ImpressionsClient() {
                             <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
                               {ex.label}
                             </span>
-                            <PrintExerciseRefreshButton
-                              accent={accent}
+                            <button
+                              type="button"
+                              data-print-refresh={ex.id}
+                              aria-label="Retirer au hasard"
+                              title="Retirer au hasard"
                               onClick={() => bumpExerciseNonce(ex.id)}
-                            />
+                              className="ml-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+                              style={{ color: accent }}
+                            >
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                                <path d="M20 11a8 8 0 10-2.34 5.66" />
+                                <path d="M20 4v7h-7" />
+                              </svg>
+                            </button>
                           </div>
                           {sel.included && (
                             <div className="mt-2 space-y-2 pl-9">

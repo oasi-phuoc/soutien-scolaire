@@ -86,14 +86,15 @@ export function PrintExerciseRefreshButton({
     <button
       type="button"
       onClick={onClick}
+      data-print-refresh=""
       aria-label="Retirer au hasard"
       title="Retirer au hasard"
-      className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+      className="ml-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-current transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
       style={{ color: accent }}
     >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-        <path d="M1 4v6h6" />
-        <path d="M3.51 15a9 9 0 1 0 .49-4" />
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M20 11a8 8 0 10-2.34 5.66" />
+        <path d="M20 4v7h-7" />
       </svg>
     </button>
   );
