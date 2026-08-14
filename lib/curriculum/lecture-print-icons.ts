@@ -1,3 +1,5 @@
+import { complexTargets, usesGraphemeVowelSyllables } from "@/lib/utils/complex-grapheme";
+
 /** Icônes de consigne — impression lecture uniquement. */
 export const LECTURE_PRINT_ICONS = {
   colorier: "/assets/lecture/icones/icon-colorier.svg",
@@ -37,4 +39,21 @@ export function matchSyllablePool(
     }
   }
   return [...out].filter((s) => s.length >= 2 && s.length <= 3);
+}
+
+const GRAPH_SYLLABLE_CONS = ["b", "d", "f", "l", "m", "n", "p", "r", "s", "t", "v"];
+
+/** Syllabes autour d’un graphème L7 (cha, bou, lan…) pour l’exercice relier. */
+export function matchComplexSyllablePool(graphemeLabel: string): string[] {
+  const targets = complexTargets(graphemeLabel);
+  const out = new Set<string>();
+  if (usesGraphemeVowelSyllables(graphemeLabel)) {
+    const g = targets[0] ?? "";
+    for (const v of VOWELS) out.add(`${g}${v}`);
+  } else {
+    for (const t of targets) {
+      for (const c of GRAPH_SYLLABLE_CONS) out.add(`${c}${t}`);
+    }
+  }
+  return [...out].filter((s) => s.length >= 2);
 }

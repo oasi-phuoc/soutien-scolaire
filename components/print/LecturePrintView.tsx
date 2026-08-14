@@ -31,8 +31,11 @@ import {
 } from "@/lib/utils/audio";
 import { complexTargets, normalizeGraph } from "@/lib/utils/complex-grapheme";
 import {
+  ALL_TOOL_WORDS,
   complexGraphemePronouncePool,
   letterPronouncePool,
+  monosyllablePool,
+  multisyllablePool,
   randomSoundItems,
   randomSoundSyllableItems,
   randomWordsWithLetter,
@@ -43,7 +46,7 @@ import {
 } from "@/lib/curriculum/word-pool";
 import { pedagogicSyllable } from "@/lib/curriculum/syllabify";
 import { lectureLessonTitle } from "@/lib/print/catalog";
-import { LECTURE_PRINT_ICONS, matchSyllablePool } from "@/lib/curriculum/lecture-print-icons";
+import { LECTURE_PRINT_ICONS, matchComplexSyllablePool, matchSyllablePool } from "@/lib/curriculum/lecture-print-icons";
 
 // ── RNG déterministe (aperçu = corrigé = impression) ──────────────────────────
 
@@ -604,6 +607,27 @@ function numberLectureExercises(exercises: PrintExercise[]): PrintExercise[] {
   return exercises.map((ex, i) => ({ ...ex, label: `Exercice ${i + 1}` }));
 }
 
+function matchLinkExercise(
+  id: "match-syllables" | "match-words",
+  items: string[],
+  rng: () => number,
+): PrintExercise | null {
+  if (items.length === 0) return null;
+  const kind = id === "match-syllables" ? "syllable" : "word";
+  const left = sample(items, Math.min(10, items.length), rng);
+  const right = sample(left, left.length, rng);
+  return makeExercise(
+    id,
+    id === "match-syllables" ? "Repérer les syllabes" : "Repérer les mots",
+    id === "match-syllables"
+      ? "Écoutez et reliez les syllabes au son que vous entendez."
+      : "Écoutez et reliez les mots au son que vous entendez.",
+    (c) => <MatchLinkPrint items={left} shuffled={right} kind={kind} correction={c} />,
+    { questionCount: 5, columns: 2 },
+    LECTURE_PRINT_ICONS.relier,
+  );
+}
+
 function expandSoundItems(
   phoneme: string,
   base: SoundItem[],
@@ -843,8 +867,8 @@ function letterExercises(
   return numberLectureExercises(exercises);
 }
 
-function syllableExercises(data: SyllableLessonData): PrintExercise[] {
-  return data.grids.map((grid) =>
+function syllableExercises(data: SyllableLessonData, rng: () => number): PrintExercise[] {
+  const exercises = data.grids.map((grid) =>
     makeExercise(
       grid.key,
       grid.label,
@@ -853,6 +877,10 @@ function syllableExercises(data: SyllableLessonData): PrintExercise[] {
       { questionCount: 4, columns: SOUND_PRINT_COLS },
     ),
   );
+  const matchSylls = [...new Set(data.grids.flatMap((g) => g.items.map((s) => s.toLowerCase())))];
+  const matchEx = matchLinkExercise("match-syllables", matchSylls, rng);
+  if (matchEx) exercises.push(matchEx);
+  return exercises;
 }
 
 function monosyllableExercises(
@@ -860,7 +888,7 @@ function monosyllableExercises(
   rng: () => number,
 ): PrintExercise[] {
   const isToolWords = data.letterLower === "outils";
-  return data.grids.map((grid) => {
+  const exercises = data.grids.map((grid) => {
     const pool = grid.items.length
       ? grid.items
       : wordsPoolForLessonGrid("monosyllable", data.letterLower, grid.key);
@@ -873,13 +901,17 @@ function monosyllableExercises(
       { questionCount: 4, columns: SOUND_PRINT_COLS },
     );
   });
+  const matchPool = isToolWords ? ALL_TOOL_WORDS : monosyllablePool();
+  const matchEx = matchLinkExercise("match-words", matchPool.map((w) => w.toLowerCase()), rng);
+  if (matchEx) exercises.push(matchEx);
+  return exercises;
 }
 
 function multisyllableExercises(
   data: MultisyllableLessonData,
   rng: () => number,
 ): PrintExercise[] {
-  return data.grids.map((grid) => {
+  const exercises = data.grids.map((grid) => {
     const pool = grid.items.length
       ? grid.items
       : wordsPoolForLessonGrid("multisyllable", data.letterLower, grid.key);
@@ -892,6 +924,13 @@ function multisyllableExercises(
       { questionCount: 4, columns: SOUND_PRINT_COLS },
     );
   });
+  const matchEx = matchLinkExercise(
+    "match-words",
+    multisyllablePool(2, null).map((w) => w.toLowerCase()),
+    rng,
+  );
+  if (matchEx) exercises.push(matchEx);
+  return exercises;
 }
 
 function complexSoundExercises(
@@ -985,6 +1024,10 @@ function complexSoundExercises(
     );
   }
 
+  const matchSylls = matchComplexSyllablePool(data.letter);
+  const matchSyllEx = matchLinkExercise("match-syllables", matchSylls, rng);
+  if (matchSyllEx) exercises.push(matchSyllEx);
+
   if (pronSteps.length > 0) {
     exercises.push(
       makeExercise(
@@ -996,6 +1039,10 @@ function complexSoundExercises(
       ),
     );
   }
+
+  const matchWordPool = wordsForComplexGrapheme(data.letter).map((w) => w.toLowerCase());
+  const matchWordEx = matchLinkExercise("match-words", matchWordPool, rng);
+  if (matchWordEx) exercises.push(matchWordEx);
 
   return exercises;
 }
@@ -1045,7 +1092,7 @@ export function buildLectureBundle(lessonId: string, seed: number): PrintBundle 
       exercises = letterExercises(data, rng);
       break;
     case "syllable":
-      exercises = syllableExercises(data);
+      exercises = syllableExercises(data, rng);
       break;
     case "monosyllable":
       exercises = monosyllableExercises(data, rng);

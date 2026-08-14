@@ -9,7 +9,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { DUAL_SOUND_LETTERS, getLectureModule, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
-import { matchSyllablePool } from "@/lib/curriculum/lecture-print-icons";
+import { matchSyllablePool, matchComplexSyllablePool } from "@/lib/curriculum/lecture-print-icons";
 import { DiscoverSound } from "./DiscoverSound";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
 import {
@@ -95,7 +95,9 @@ function getSteps(data: LetterData): Step[] {
         key: "complex-syllables-cv",
         label: usesGraphemeVowelSyllables(data.letterLower) ? "Son complexe + voyelle" : "Syllabes",
       },
+      { key: "match-syllables", label: "Repérer les syllabes" },
       { key: "pronounce-complex", label: "Prononcer" },
+      { key: "match-words", label: "Repérer les mots" },
       { key: "eval", label: "Évaluation" },
     ];
   }
@@ -112,16 +114,20 @@ function getSteps(data: LetterData): Step[] {
       { key: "vc-lower", label: labelOf("vc-lower") },
       { key: "vc2", label: "2 syllabes" },
       { key: "vc-timed", label: "Lecture rapide" },
+      { key: "match-syllables", label: "Repérer les syllabes" },
       { key: "word-eval", label: "Évaluation" },
     ];
   }
   if (data.type === "monosyllable" || data.type === "multisyllable") {
     const gridSteps = data.grids.map((grid) => ({ key: grid.key, label: grid.label }));
     // L8 ends with a timed word evaluation (25 words in 5 minutes).
-    if (data.type === "multisyllable") gridSteps.push({ key: "word-eval", label: "Évaluation" });
-    // L6 (mots-outils / mots courants): add a timed reading step then an evaluation.
+    if (data.type === "multisyllable") {
+      gridSteps.push({ key: "match-words", label: "Repérer les mots" });
+      gridSteps.push({ key: "word-eval", label: "Évaluation" });
+    }
     if (data.type === "monosyllable") {
       gridSteps.push({ key: "ms-review", label: "Lecture rapide" });
+      gridSteps.push({ key: "match-words", label: "Repérer les mots" });
       gridSteps.push({ key: "word-eval", label: "Évaluation" });
     }
     return gridSteps;
@@ -777,15 +783,34 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const contentKey = lectureLetterKey(baseData.letterLower);
   const data = resolve(contentKey, baseData);
   const steps = getSteps(data);
-  const letterMatchKind = data.type === "vowel" || data.type === "consonant" ? data.type : null;
-  const matchSyllablePoolItems = useMemo(
-    () => (letterMatchKind ? matchSyllablePool(data.letterLower, letterMatchKind) : []),
-    [data.letterLower, letterMatchKind],
-  );
-  const matchWordPoolItems = useMemo(
-    () => (letterMatchKind ? randomWordsWithLetter(data.letterLower, 20).map((w) => w.toLowerCase()) : []),
-    [data.letterLower, letterMatchKind],
-  );
+  const matchSyllablePoolItems = useMemo(() => {
+    if (data.type === "vowel" || data.type === "consonant") {
+      return matchSyllablePool(data.letterLower, data.type);
+    }
+    if (data.type === "syllable") {
+      return [...new Set(data.grids.flatMap((g) => g.items.map((s) => s.toLowerCase())))];
+    }
+    if (data.type === "complex-sound") {
+      return matchComplexSyllablePool(data.letter);
+    }
+    return [];
+  }, [data]);
+  const matchWordPoolItems = useMemo(() => {
+    if (data.type === "vowel" || data.type === "consonant") {
+      return randomWordsWithLetter(data.letterLower, 20).map((w) => w.toLowerCase());
+    }
+    if (data.type === "complex-sound") {
+      return randomWordsWithGrapheme(data.letter, 20).map((w) => w.toLowerCase());
+    }
+    if (data.type === "monosyllable") {
+      const pool = data.letterLower === "outils" ? ALL_TOOL_WORDS : monosyllablePool();
+      return [...new Set(pool.map((w) => w.toLowerCase()))];
+    }
+    if (data.type === "multisyllable") {
+      return [...new Set(multisyllablePool(2, null).map((w) => w.toLowerCase()))];
+    }
+    return [];
+  }, [data]);
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);
   const [wordTimerLeft, setWordTimerLeft] = useState<number | null>(null);
@@ -841,15 +866,17 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   // Steps rendered with the mic/word/audio grids (SyllableGrid / WordPronounceGrid):
   // these auto-validate on correct speech, so they only need a refresh action.
   const isPronounceGridStep =
-    step.key === "complex-syllables-cv" ||
-    step.key === "syllables-cv" ||
-    step.key === "syllables-vc" ||
-    step.key === "syll-2" ||
-    step.key === "syll-timed" ||
-    (isWordEvalStep && !isWordEvalL6L8) ||
-    data.type === "syllable" ||
-    (data.type === "multisyllable" && !isWordEvalL6L8) ||
-    (data.type === "monosyllable" && !isWordEvalL6L8);
+    !isMatchStep && (
+      step.key === "complex-syllables-cv" ||
+      step.key === "syllables-cv" ||
+      step.key === "syllables-vc" ||
+      step.key === "syll-2" ||
+      step.key === "syll-timed" ||
+      (isWordEvalStep && !isWordEvalL6L8) ||
+      data.type === "syllable" ||
+      (data.type === "multisyllable" && !isWordEvalL6L8) ||
+      (data.type === "monosyllable" && !isWordEvalL6L8)
+    );
   const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep || isSoundSyllableStep || isMatchStep;
   const showRefreshButton =
     showExerciseButtons || isPronounceStep || isPronounceGridStep;
@@ -920,6 +947,30 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
 
   function renderStep() {
     const k = `${step.key}-${resetKey}`;
+    if (step.key === "match-syllables") {
+      return (
+        <AudioMatchLinker
+          key={k}
+          ref={matchLinkerRef}
+          items={matchSyllablePoolItems}
+          kind="syllable"
+          title="Repérer les syllabes"
+          consigne="Écoutez et reliez les syllabes au son que vous entendez."
+        />
+      );
+    }
+    if (step.key === "match-words") {
+      return (
+        <AudioMatchLinker
+          key={k}
+          ref={matchLinkerRef}
+          items={matchWordPoolItems}
+          kind="word"
+          title="Repérer les mots"
+          consigne="Écoutez et reliez les mots au son que vous entendez."
+        />
+      );
+    }
     if (data.type === "syllable") {
       // L5 syllable lesson: CV / VC reading, two timed steps and an evaluation,
       // all using the mic/word/audio rows (same style as L8).
