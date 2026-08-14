@@ -23,7 +23,7 @@ import {
 import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 
 const PRINT_EX_TITLE_CLASS =
-  "print-ex-title mb-1.5 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
+  "print-ex-title mb-1.5 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold leading-[1.15]";
 
 export function PrintExerciseHeader({
   exercise,
