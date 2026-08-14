@@ -8,6 +8,12 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { LECTURE_CORRECTION_BORDER } from "./lecture-correction";
 import { matchesSpokenWord } from "@/lib/utils/french-speech-match";
+import {
+  abortLectureSpeech,
+  getLectureSpeechRecognition,
+  patchLectureRecCell,
+  startLecturePronounceListen,
+} from "@/lib/utils/lecture-speech-recognition";
 
 export interface PronounceWordListHandle {
   reset: () => void;
@@ -54,16 +60,14 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
     }, [steps]);
 
     const reset = useCallback(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (recRef.current as any)?.abort?.();
+      abortLectureSpeech(recRef.current);
       setRecStates(steps.map(() => "idle"));
       setValidated(false);
     }, [steps]);
 
     const validate = useCallback(() => {
       if (validated) return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (recRef.current as any)?.abort?.();
+      abortLectureSpeech(recRef.current);
       setValidated(true);
       const score = recStates.filter((s) => s === "correct").length;
       onValidated?.(score, steps.length, recStates);
@@ -79,41 +83,22 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
 
     function startListening(index: number) {
       if (validated || recStates[index] === "listening" || recStates[index] === "correct") return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-      if (!SR) return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (recRef.current as any)?.abort?.();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const rec: any = new SR();
-      rec.lang = "fr-CH";
-      rec.continuous = false;
-      rec.interimResults = false;
-      rec.maxAlternatives = 3;
-      rec.onstart = () => {
-        setRecStates((prev) => prev.map((s, i) => (i === index ? "listening" : s)));
-      };
-      const target = steps[index]!.word;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      rec.onresult = (e: any) => {
-        let matched = false;
-        for (let a = 0; a < e.results[0].length; a++) {
-          const transcript: string = e.results[0][a].transcript.trim();
-          if (matchesSpokenWord(transcript, target)) {
-            matched = true;
-            break;
-          }
-        }
-        setRecStates((prev) => prev.map((s, i) => (i === index ? (matched ? "correct" : "wrong") : s)));
-      };
-      rec.onerror = () => setRecStates((prev) => prev.map((s, i) => (i === index ? "idle" : s)));
-      rec.onend = () => setRecStates((prev) => prev.map((s, i) => (i === index && s === "listening" ? "idle" : s)));
-      recRef.current = rec;
-      rec.start();
+      startLecturePronounceListen({
+        recRef,
+        match: (transcript) => matchesSpokenWord(transcript, steps[index]!.word),
+        onListening: () => {
+          setRecStates((prev) => patchLectureRecCell(prev, index, "listening"));
+        },
+        onOutcome: (matched) => {
+          setRecStates((prev) => patchLectureRecCell(prev, index, matched ? "correct" : "wrong"));
+        },
+        onCancel: () => {
+          setRecStates((prev) => prev.map((s, i) => (i === index && s === "listening" ? "idle" : s)));
+        },
+      });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+    const srAvailable = !!getLectureSpeechRecognition();
 
     return (
       <section className="space-y-3 pb-8">

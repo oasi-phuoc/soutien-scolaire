@@ -7,6 +7,12 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { matchesSpokenWord } from "@/lib/utils/french-speech-match";
+import {
+  abortLectureSpeech,
+  getLectureSpeechRecognition,
+  keepLectureRecDecision,
+  startLecturePronounceListen,
+} from "@/lib/utils/lecture-speech-recognition";
 
 export interface PronunciationChainHandle {
   reset: () => void;
@@ -35,8 +41,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
     const step = chain[idx]!;
 
     const reset = useCallback(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (recRef.current as any)?.abort();
+      abortLectureSpeech(recRef.current);
       setIdx(randomIdx(chain.length));
       setRecState("idle");
       setHeard("");
@@ -47,47 +52,21 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
     function startListening() {
       // Une fois juste : verrouillé — pas de refaire (comme PronounceWordList).
       if (recState === "listening" || recState === "correct") return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-      if (!SR) return;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const rec: any = new SR();
-      rec.lang = "fr-CH";
-      rec.continuous = false;
-      rec.interimResults = false;
-      rec.maxAlternatives = 3;
-
-      rec.onstart = () => setRecState("listening");
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      rec.onresult = (e: any) => {
-        let matched = false;
-        for (let a = 0; a < e.results[0].length; a++) {
-          const transcript: string = e.results[0][a].transcript.trim();
-          if (matchesSpokenWord(transcript, step.word)) {
-            matched = true;
-            setHeard(transcript);
-            break;
-          }
-        }
-        if (!matched) {
-          setHeard(e.results[0][0].transcript.trim());
-        }
-        setRecState(matched ? "correct" : "wrong");
-      };
-
-      rec.onerror = () => setRecState("idle");
-      rec.onend = () => {
-        setRecState((s) => (s === "listening" ? "idle" : s));
-      };
-
-      recRef.current = rec;
-      rec.start();
+      startLecturePronounceListen({
+        recRef,
+        match: (transcript) => matchesSpokenWord(transcript, step.word),
+        onListening: () => setRecState((s) => keepLectureRecDecision(s, "listening")),
+        onOutcome: (matched, transcript) => {
+          setHeard(transcript);
+          setRecState((s) => keepLectureRecDecision(s, matched ? "correct" : "wrong"));
+        },
+        onCancel: () => {
+          setRecState((s) => (s === "listening" ? "idle" : s));
+        },
+      });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+    const srAvailable = !!getLectureSpeechRecognition();
 
     return (
       <section className="space-y-5">
