@@ -41,6 +41,11 @@ import {
   usesGraphemeVowelSyllables,
 } from "@/lib/utils/complex-grapheme";
 import { matchesSpokenWord, matchesSyllable } from "@/lib/utils/french-speech-match";
+import {
+  abortLectureSpeech,
+  patchLectureRecCell,
+  startLecturePronounceListen,
+} from "@/lib/utils/lecture-speech-recognition";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
@@ -467,8 +472,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
 
   function doValidate() {
     if (!evalWithResults || finished) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
+    abortLectureSpeech(recRef.current);
     recRef.current = null;
     const correct = states.filter((s) => s === "correct").length;
     setEvalCorrect(correct);
@@ -477,8 +481,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   }
 
   function reset() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
+    abortLectureSpeech(recRef.current);
     recRef.current = null;
     setItems(buildItems());
     setStates(Array(count).fill("idle"));
@@ -515,42 +518,23 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   function startListening(index: number) {
     // Une fois juste : verrouillé (comme l'étape Prononcer) — pas de refaire.
     if (typeof window === "undefined" || (timeUp && !evalWithResults) || finished || states[index] === "listening" || states[index] === "correct") return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-    if (!SR) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rec: any = new SR();
-    rec.lang = "fr-CH";
-    rec.continuous = false;
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-    rec.onstart = () => {
-      setStates((prev) => prev.map((s, i) => (i === index ? "listening" : s)));
-      setHeard((prev) => prev.map((v, i) => (i === index ? "" : v)));
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    rec.onresult = (event: any) => {
-      let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
-      let matched = false;
-      const want = items[index]!;
-      const matchFn = kind === "syllable" ? matchesSyllable : matchesSpokenWord;
-      for (let alt = 0; alt < event.results[0].length; alt++) {
-        const transcript = event.results[0][alt].transcript.trim();
-        if (matchFn(transcript, want)) {
-          best = transcript;
-          matched = true;
-          break;
-        }
-      }
-      setHeard((prev) => prev.map((v, i) => (i === index ? best : v)));
-      setStates((prev) => prev.map((s, i) => (i === index ? (matched ? "correct" : "wrong") : s)));
-    };
-    rec.onerror = () => setStates((prev) => prev.map((s, i) => (i === index ? "idle" : s)));
-    rec.onend = () => setStates((prev) => prev.map((s, i) => (i === index && s === "listening" ? "idle" : s)));
-    recRef.current = rec;
-    rec.start();
+    const want = items[index]!;
+    const matchFn = kind === "syllable" ? matchesSyllable : matchesSpokenWord;
+    startLecturePronounceListen({
+      recRef,
+      match: (transcript) => matchFn(transcript, want),
+      onListening: () => {
+        setStates((prev) => patchLectureRecCell(prev, index, "listening"));
+        setHeard((prev) => prev.map((v, i) => (i === index ? "" : v)));
+      },
+      onOutcome: (matched, best) => {
+        setHeard((prev) => prev.map((v, i) => (i === index ? best : v)));
+        setStates((prev) => patchLectureRecCell(prev, index, matched ? "correct" : "wrong"));
+      },
+      onCancel: () => {
+        setStates((prev) => prev.map((s, i) => (i === index && s === "listening" ? "idle" : s)));
+      },
+    });
   }
 
   const passGrade = getPassGrade();

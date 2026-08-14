@@ -8,6 +8,11 @@ import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { useWordSpotterItemCount } from "./WordSpotter";
 import { complexTargets, makeComplexSyllables } from "@/lib/utils/complex-grapheme";
 import { matchesSyllable } from "@/lib/utils/french-speech-match";
+import {
+  abortLectureSpeech,
+  patchLectureRecCell,
+  startLecturePronounceListen,
+} from "@/lib/utils/lecture-speech-recognition";
 
 export interface SyllableGridHandle {
   reset: () => void;
@@ -138,8 +143,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
 
   // Refresh: regenerate a fresh sequence of syllables and clear the state.
   function reset() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
+    abortLectureSpeech(recRef.current);
     recRef.current = null;
     const next = resolveSyllables(syllableCount);
     setSyllables(next);
@@ -150,8 +154,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
   useImperativeHandle(ref, () => ({ reset }));
 
   const validateEval = useCallback(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
+    abortLectureSpeech(recRef.current);
     const correctCount = Math.min(3, states.filter((state) => state === "correct").length);
     onEvalValidated?.(syllables, states, heard, correctCount);
   }, [syllables, states, heard, onEvalValidated]);
@@ -165,49 +168,21 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
   function startListening(index: number) {
     // Une fois juste : verrouillé (comme l'étape Prononcer) — pas de refaire.
     if (typeof window === "undefined" || states[index] === "listening" || states[index] === "correct") return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-    if (!SR) return;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rec: any = new SR();
-    rec.lang = "fr-CH";
-    rec.continuous = false;
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-
-    rec.onstart = () => {
-      setStates((prev) => prev.map((state, i) => (i === index ? "listening" : state)));
-      setHeard((prev) => prev.map((value, i) => (i === index ? "" : value)));
-    };
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    rec.onresult = (event: any) => {
-      let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
-      let matched = false;
-      for (let alt = 0; alt < event.results[0].length; alt++) {
-        const transcript = event.results[0][alt].transcript.trim();
-        if (matchesSyllable(transcript, syllables[index]!)) {
-          best = transcript;
-          matched = true;
-          break;
-        }
-      }
-      setHeard((prev) => prev.map((value, i) => (i === index ? best : value)));
-      setStates((prev) => prev.map((state, i) => (i === index ? (matched ? "correct" : "wrong") : state)));
-    };
-
-    rec.onerror = () => {
-      setStates((prev) => prev.map((state, i) => (i === index ? "idle" : state)));
-    };
-    rec.onend = () => {
-      setStates((prev) => prev.map((state, i) => (i === index && state === "listening" ? "idle" : state)));
-    };
-
-    recRef.current = rec;
-    rec.start();
+    startLecturePronounceListen({
+      recRef,
+      match: (transcript) => matchesSyllable(transcript, syllables[index]!),
+      onListening: () => {
+        setStates((prev) => patchLectureRecCell(prev, index, "listening"));
+        setHeard((prev) => prev.map((value, i) => (i === index ? "" : value)));
+      },
+      onOutcome: (matched, best) => {
+        setHeard((prev) => prev.map((value, i) => (i === index ? best : value)));
+        setStates((prev) => patchLectureRecCell(prev, index, matched ? "correct" : "wrong"));
+      },
+      onCancel: () => {
+        setStates((prev) => prev.map((state, i) => (i === index && state === "listening" ? "idle" : state)));
+      },
+    });
   }
 
   const isGraphVowel = mode === "graph-vowel";
