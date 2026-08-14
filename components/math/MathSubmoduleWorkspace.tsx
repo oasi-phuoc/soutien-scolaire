@@ -39,6 +39,7 @@ import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
+import { currentPrintExerciseSeed } from "@/components/math/placement/placement-print-rng";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import {
   printQuestionsListClass,
@@ -1956,7 +1957,7 @@ export function buildWorkspacePrintExercises(
     );
   const noop = () => {};
   return training.map((step, index) => {
-    const seed = 2_000_000 + index;
+    const seed = currentPrintExerciseSeed(`${step.kind}-${index}`);
     const defaultQuestionCount = stepExpectedTotal(step, undefined);
     return {
       id: `${step.kind}-${index}`,

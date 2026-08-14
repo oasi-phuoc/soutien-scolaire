@@ -46,6 +46,7 @@ import { placementLessonCode } from "@/lib/placement/types";
 import { isRetryablePlacementSubmitError, queuePlacementSubmission } from "@/lib/placement/pending-submissions";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
+import { currentPrintExerciseSeed } from "@/components/math/placement/placement-print-rng";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -1950,14 +1951,14 @@ export function buildPlacementPoPrintExercises(
   level: OralLevel = "avance",
   seed = Date.now(),
 ): PrintExercise[] {
-  const seedKey = String(seed);
-  const prompt = seededOralPrompt(level, `${seedKey}-po-themes`);
-  const situation = seededOralSituation(level, `${seedKey}-po-situation`);
-  const argumentationTopic = seededArgumentationTopic(level, `${seedKey}-po-arg`);
-  const group = pickFromPool(DIRECTED_INTERVIEW_GROUPS, `${seedKey}-po-interview`);
+  const seedKey = (id: string) => String(currentPrintExerciseSeed(id, seed));
+  const prompt = seededOralPrompt(level, `${seedKey("po-themes")}-po-themes`);
+  const situation = seededOralSituation(level, `${seedKey("po-situation")}-po-situation`);
+  const argumentationTopic = seededArgumentationTopic(level, `${seedKey("po-arg")}-po-arg`);
+  const group = pickFromPool(DIRECTED_INTERVIEW_GROUPS, `${seedKey("po-interview")}-po-interview`);
   const interviewQuestions = [...DIRECTED_INTERVIEW_BASE, ...group];
   const script = getPoDialogue(situation.id);
-  const studentRole = pickStudentRoleSeeded(`${seedKey}-po-role`);
+  const studentRole = pickStudentRoleSeeded(`${seedKey("po-role")}-po-role`);
   const roleText = roleAssignmentText(script, studentRole);
   const studentTurns = studentLineIndices(script, studentRole);
   const imageModel = getImageDescriptionModel(situation.id);

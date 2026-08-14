@@ -74,6 +74,31 @@ export function PrintExerciseHeader({
   );
 }
 
+/** Refresh à droite du titre d’exercice (paramètres d’impression). */
+export function PrintExerciseRefreshButton({
+  accent,
+  onClick,
+}: {
+  accent: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label="Retirer au hasard"
+      title="Retirer au hasard"
+      className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+      style={{ color: accent }}
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M1 4v6h6" />
+        <path d="M3.51 15a9 9 0 1 0 .49-4" />
+      </svg>
+    </button>
+  );
+}
+
 const PRINT_EX_CONTENT_CLASS =
   "print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none";
 
@@ -240,6 +265,7 @@ interface PrintConfigSheetProps {
   frenchLevelSelectable?: boolean;
   frenchLevel?: "base" | "moyen" | "avance";
   onFrenchLevelChange?: (level: "base" | "moyen" | "avance") => void;
+  onRefreshExercise?: (id: string) => void;
 }
 
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = [...ELEVE_CLASSE_TYPES];
@@ -810,6 +836,7 @@ export function PrintConfigSheet({
   frenchLevelSelectable = false,
   frenchLevel = "base",
   onFrenchLevelChange,
+  onRefreshExercise,
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(defaultEvalMode);
@@ -1235,6 +1262,12 @@ export function PrintConfigSheet({
                             {ex.label}
                           </p>
                         </button>
+                        {onRefreshExercise ? (
+                          <PrintExerciseRefreshButton
+                            accent={accentColor}
+                            onClick={() => onRefreshExercise(ex.id)}
+                          />
+                        ) : null}
                       </div>
                       <div className="mt-3 space-y-2 pl-[52px]">
                         <div className="flex items-center justify-between gap-3">

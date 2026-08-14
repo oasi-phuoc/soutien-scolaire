@@ -21,6 +21,7 @@ import { CO_SCOLAIRE_AVANCE_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
+import { currentPrintBundleBaseSeed, currentPrintExerciseSeed } from "@/components/math/placement/placement-print-rng";
 import {
   PrintAudioQrRow,
   coAudioQrItems,
@@ -221,34 +222,32 @@ function makeProgressiveCoParts(seed: number): COPart[] {
  */
 const PRINT_CO_TARGET_POINTS = [6, 6, 6, 7] as const;
 
-function makeProgressiveCoPartsForPrint(seed: number): COPart[] {
-  return PROGRESSIVE_SKILL_LEVELS.map((lvl, i) => {
-    const target = PRINT_CO_TARGET_POINTS[i] ?? 6;
-    for (let attempt = 0; attempt < 10; attempt++) {
-      const pool = makeParts(lvl, seed + i * 997 + attempt * 131_071);
-      const start = pickIndex(pool.length, `${seed}-co-pick-${i}-${attempt}`);
-      for (let k = 0; k < pool.length; k++) {
-        const cand = pool[(start + k) % pool.length]!;
-        const questions = getCoPartQuestions(
-          cand.audioGroup,
-          target,
-          `${seed}-co-print-${i}-${attempt}`,
-        );
-        const simple =
-          questions.length === target &&
-          questions.every((q) => q.kind === "choice" || q.kind === "fill");
-        if (simple) return { ...cand, points: target, questions };
-      }
+function makeProgressiveCoPartForPrint(slotSeed: number, i: number): COPart {
+  const lvl = PROGRESSIVE_SKILL_LEVELS[i]!;
+  const target = PRINT_CO_TARGET_POINTS[i] ?? 6;
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const pool = makeParts(lvl, slotSeed + attempt * 131_071);
+    const start = pickIndex(pool.length, `${slotSeed}-co-pick-${i}-${attempt}`);
+    for (let k = 0; k < pool.length; k++) {
+      const cand = pool[(start + k) % pool.length]!;
+      const questions = getCoPartQuestions(
+        cand.audioGroup,
+        target,
+        `${slotSeed}-co-print-${i}-${attempt}`,
+      );
+      const simple =
+        questions.length === target &&
+        questions.every((q) => q.kind === "choice" || q.kind === "fill");
+      if (simple) return { ...cand, points: target, questions };
     }
-    // Repli : tronque les questions individuelles de la partie tirée.
-    const pool = makeParts(lvl, seed + i * 997);
-    const cand = pool[pickIndex(pool.length, `${seed}-co-pick-${i}`)]!;
-    const qs = cand.questions
-      .filter((q) => q.kind === "choice" || q.kind === "fill")
-      .slice(0, target);
-    if (qs.length > 0) return { ...cand, points: qs.length, questions: qs };
-    return cand;
-  });
+  }
+  const pool = makeParts(lvl, slotSeed);
+  const cand = pool[pickIndex(pool.length, `${slotSeed}-co-pick-${i}`)]!;
+  const qs = cand.questions
+    .filter((q) => q.kind === "choice" || q.kind === "fill")
+    .slice(0, target);
+  if (qs.length > 0) return { ...cand, points: qs.length, questions: qs };
+  return cand;
 }
 
 function levelFromId(id: string): COLevel {
@@ -1781,7 +1780,21 @@ export function buildPlacementCoPrintExercises(
   seed = 1,
   level?: "base" | "moyen" | "avance",
 ): PrintExercise[] {
-  const parts = level ? makeParts(level, seed) : makeProgressiveCoPartsForPrint(seed);
+  const parts = level
+    ? makeParts(level, seed).map((part, index) => {
+        const itemSeed = currentPrintExerciseSeed(`co-${index}-${part.id}`, seed);
+        return makeParts(level, itemSeed).find((p) => p.id === part.id) ?? part;
+      })
+    : PROGRESSIVE_SKILL_LEVELS.map((_, i) => {
+        const structure = makeProgressiveCoPartForPrint(
+          (currentPrintBundleBaseSeed() || seed) + i * 997,
+          i,
+        );
+        return makeProgressiveCoPartForPrint(
+          currentPrintExerciseSeed(`co-${i}-${structure.id}`, seed),
+          i,
+        );
+      });
   return parts.map((part, index) => {
     const correctAnswers = buildCoCorrectAnswers(part);
     const qrItems = coAudioQrItems(part.audioGroup.items);

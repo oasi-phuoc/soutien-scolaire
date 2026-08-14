@@ -23,10 +23,12 @@ import {
   PrintDocumentHeader,
   PrintExerciseBody,
   PrintExerciseHeader,
+  PrintExerciseRefreshButton,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
 import { clampPrintColumns } from "@/components/print/PrintExerciseLayoutContext";
+import { printExerciseNoncesKey } from "@/components/math/placement/placement-print-rng";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -225,6 +227,7 @@ export function ImpressionHubClient() {
   const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
   /** Seed uniquement après mount — évite mismatch SSR/hydratation (random). */
   const [printSeed, setPrintSeed] = useState<number | null>(null);
+  const [exerciseNonces, setExerciseNonces] = useState<Record<string, number>>({});
   const [bundleError, setBundleError] = useState<string | null>(null);
   const previewPagesRef = useRef<HTMLDivElement>(null);
 
@@ -283,12 +286,16 @@ export function ImpressionHubClient() {
   const bundle = useMemo(() => {
     if (!selectedEntry || printSeed == null) return null;
     try {
-      return buildPrintBundle(selectedEntry.id, { frenchLevel, seed: printSeed });
+      return buildPrintBundle(selectedEntry.id, {
+        frenchLevel,
+        seed: printSeed,
+        exerciseNonces,
+      });
     } catch (err) {
       console.error("[impression] buildPrintBundle failed", selectedEntry.id, err);
       return null;
     }
-  }, [selectedEntry, frenchLevel, printSeed]);
+  }, [selectedEntry, frenchLevel, printSeed, exerciseNonces]);
 
   useEffect(() => {
     if (!selectedEntry) {
@@ -314,6 +321,8 @@ export function ImpressionHubClient() {
     const lessons = modules.find((m) => m.id === moduleId)?.lessons ?? [];
     if (!lessons.some((e) => e.id === docId)) setDocId(lessons[0]?.id ?? "");
   }, [flatPlacement, groupEntries, modules, moduleId, docId]);
+
+  const exerciseIdsKey = (bundle?.exercises ?? []).map((ex) => ex.id).join("|");
 
   useEffect(() => {
     if (!bundle) {
@@ -341,7 +350,10 @@ export function ImpressionHubClient() {
         points: Math.max(1, ex.defaultPoints ?? 1),
       })),
     );
-  }, [bundle]);
+    // Réinitialiser la sélection seulement quand le document / les ids d'exercices changent,
+    // pas au refresh d'un exercice (nonce).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedEntry?.id, frenchLevel, exerciseIdsKey]);
 
   useEffect(() => {
     if (!bundle) return;
@@ -383,6 +395,7 @@ export function ImpressionHubClient() {
     setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeGroup(next: string) {
@@ -392,6 +405,7 @@ export function ImpressionHubClient() {
     setSelection([]);
     setTheory(false);
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeModule(next: string) {
@@ -400,6 +414,7 @@ export function ImpressionHubClient() {
     setSelection([]);
     setTheory(false);
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeDocument(next: string) {
@@ -408,7 +423,11 @@ export function ImpressionHubClient() {
     setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
+
+  const bumpExerciseNonce = (id: string) =>
+    setExerciseNonces((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
 
   const patchSelection = (id: string, patch: Partial<ExercisePrintSelection>) =>
     setSelection((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
@@ -707,6 +726,7 @@ export function ImpressionHubClient() {
                     onChange={(v) => {
                       setFrenchLevel(v as PlacementLevel);
                       setPrintSeed(freshSeed());
+                      setExerciseNonces({});
                     }}
                     options={[
                       { value: "base", label: "A1" },
@@ -1025,6 +1045,10 @@ export function ImpressionHubClient() {
                           <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
                             {ex.label}
                           </span>
+                          <PrintExerciseRefreshButton
+                            accent={accent}
+                            onClick={() => bumpExerciseNonce(ex.id)}
+                          />
                         </div>
                         {sel.included && (
                           <div className="mt-3 space-y-2 pl-9">
@@ -1161,7 +1185,7 @@ export function ImpressionHubClient() {
             </p>
           ) : (
             <PaginatedPreview
-              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}-${themeColorId}-${JSON.stringify(theoryOpts)}`}
+              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${printExerciseNoncesKey(exerciseNonces)}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}-${themeColorId}-${JSON.stringify(theoryOpts)}`}
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}
