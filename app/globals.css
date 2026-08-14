@@ -810,6 +810,8 @@ input[type=number] {
   color: #000 !important;
 }
 .print-layout-context .print-ex-icon {
+  width: calc(1.6em * 1.15 + 1.35em * 1.25) !important;
+  height: calc(1.6em * 1.15 + 1.35em * 1.25) !important;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }

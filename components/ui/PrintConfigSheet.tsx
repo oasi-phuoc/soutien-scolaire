@@ -45,7 +45,7 @@ export function PrintExerciseHeader({
   const icon = exercise?.printIcon;
   const instruction = showInstruction ? exercise?.instruction : undefined;
   return (
-    <div className="mb-3 flex items-stretch gap-3">
+    <div className="mb-3 flex items-start gap-2">
       <div className="min-w-0 flex-1">
         <div
           className={`${PRINT_EX_TITLE_CLASS}${instruction ? " print-ex-title--with-consigne" : ""}`}
@@ -65,7 +65,7 @@ export function PrintExerciseHeader({
         ) : null}
       </div>
       {icon ? (
-        <div className="print-ex-icon aspect-square shrink-0 self-stretch overflow-hidden rounded-[0.2em] border border-zinc-400 bg-white p-[0.12em]">
+        <div className="print-ex-icon shrink-0 overflow-hidden rounded-[0.15em] border border-zinc-400 bg-white p-[0.08em]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={icon} alt="" className="h-full w-full object-contain" />
         </div>
