@@ -59,7 +59,7 @@ export function PrintExerciseHeader({
           ) : null}
         </div>
         {instruction ? (
-          <p className="print-ex-consigne mb-1 text-[1.35em] font-semibold leading-snug text-black">
+          <p className="print-ex-consigne mb-1 text-[1.35em] font-semibold leading-[1.375] text-black">
             {instruction}
           </p>
         ) : null}

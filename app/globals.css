@@ -810,8 +810,10 @@ input[type=number] {
   color: #000 !important;
 }
 .print-layout-context .print-ex-icon {
-  width: calc(1.6em * 1.15 + 1.35em * 1.25) !important;
-  height: calc(1.6em * 1.15 + 1.35em * 1.25) !important;
+  /* Haut du titre « Exercice » → bas de la 1re ligne de consigne
+     (titre 1.6em × 1.15 + soulignement 0.4em + écart 0.3em + 1px + consigne 1.35em × 1.375). */
+  width: calc(1.6em * 1.15 + 1.6em * 0.4 + 1.6em * 0.3 + 1px + 1.35em * 1.375) !important;
+  height: calc(1.6em * 1.15 + 1.6em * 0.4 + 1.6em * 0.3 + 1px + 1.35em * 1.375) !important;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
