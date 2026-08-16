@@ -8,12 +8,52 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
   title: "Les articles contractés",
   theory: [
     {
+      type: "text",
+      text: "Les articles définis ({a}le{/a}, {a}la{/a}, {a}l'{/a}, {a}les{/a}) sont souvent utilisés après les prépositions {a}à{/a} et {a}de{/a}.",
+    },
+    {
       type: "heading",
-      text: "Utilisation",
+      text: "Formes",
     },
     {
       type: "text",
-      text: "Les articles définis ({a}le{/a}, {a}la{/a}, {a}l'{/a}, {a}les{/a}) sont souvent utilisés après les prépositions {a}à{/a} et {a}de{/a}.",
+      text: "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement.",
+      transText: {
+        en: "When the prepositions {a}à{/a} and {a}de{/a} are followed by the article {a}le{/a} or {a}les{/a}, they must contract.",
+        ar: "عندما تأتي حروف الجر {a}à{/a} و{a}de{/a} قبل أداتي التعريف {a}le{/a} أو {a}les{/a}، فإنها تُدمج وجوبًا.",
+        fa: "وقتی حروف اضافه {a}à{/a} و {a}de{/a} قبل حروف تعریف {a}le{/a} یا {a}les{/a} قرار می‌گیرند، باید به‌صورت اجباری ادغام شوند.",
+        pt: "Quando as preposições {a}à{/a} e {a}de{/a} são seguidas dos artigos {a}le{/a} ou {a}les{/a}, contraem-se obrigatoriamente.",
+        so: "Marka xarafyada hore ee {a}à{/a} iyo {a}de{/a} ay ka horreeyaan maqaalka {a}le{/a} ama {a}les{/a}, waa in si khasab ah loo isku daraa.",
+        ti: "እቶም ቅድመ ቃላት {a}à{/a}ን {a}de{/a}ን ብኣንቀጽ {a}le{/a} ወይ {a}les{/a} ምስ ዝስዕቡ፣ ብግዴታ ይጠቓለሉ።",
+        tr: "{a}à{/a} ve {a}de{/a} edatlarından sonra {a}le{/a} veya {a}les{/a} artikeli geldiğinde, bunlar zorunlu olarak birleşir.",
+        ps: "کله چې د {a}à{/a} او {a}de{/a} حرف اضافه د {a}le{/a} یا {a}les{/a} له ټاکلي توري وروسته راشي، نو په اجباري ډول سره یوځای کېږي.",
+        uk: "Коли після прийменників {a}à{/a} і {a}de{/a} стоять артиклі {a}le{/a} або {a}les{/a}, вони обов'язково зливаються.",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["", "Contraction", "Exemple"],
+      boldFirstCol: true,
+      colWidths: ["28%", "24%", "48%"],
+      rows: [
+        ["à + le", "{a}au{/a}", "Elle est au supermarché."],
+        ["à + les", "{a}aux{/a}", "Elle est aux toilettes."],
+        ["de + le", "{a}du{/a}", "Le couloir du métro."],
+        ["de + les", "{a}des{/a}", "La salle des professeurs."],
+      ],
+    },
+    {
+      type: "text",
+      text: "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
+      items: [
+        "Je vais {a}à la{/a} pharmacie",
+        "Je vais {a}à l'{/a}école",
+      ],
+      noBulletItems: [0,1],
+    },
+    {
+      type: "heading",
+      text: "Utilisation",
     },
     {
       type: "text",
@@ -74,18 +114,90 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         uk: "Щоб поєднати два іменники, ми також використовуємо прийменник {a}de{/a}.",
       },
       items: [
-        "Le bureau de la maîtresse",
-        "La salle de sport",
+        "Le bureau {a}de la{/a} maîtresse",
+        "La salle {a}de{/a} sport",
       ],
       noBulletItems: [0,1],
     },
     {
-      type: "text",
-      text: "{a}Verbes{/a}",
+      type: "heading",
+      text: "Les verbes",
+      trans: {
+      },
     },
     {
       type: "text",
-      text: "Certains verbes ont besoin de ces prépositions.",
+      text: "Certains verbes ont besoin de ces prépositions également.",
+    },
+    {
+      type: "selector",
+      buttonCols: 2,
+      tabs: [
+        {
+          label: "jouer",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "jouer",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "joue" },
+                    { pronoun: "tu", form: "joues" },
+                    { pronoun: "il / elle / on", form: "joue" },
+                    { pronoun: "nous", form: "jouons" },
+                    { pronoun: "vous", form: "jouez" },
+                    { pronoun: "ils / elles", form: "jouent" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              text: "On utilise {a}jouer à{/a}} pour parler d'un sportet {a}jouer de{/a} pour parler d'un instrument de musique",
+              items: [
+                "{a}à{/a} + sport → Je joue {a}à{/a} la balle.",
+                "{a}de{/a} + instrument → Nous jouons {a}de{/a} la flûte.",  
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "avoir mal",
+          content: [
+            {
+              type: "table",
+              tables: [
+                {
+                  verb: "avoir mal",
+                  accentForms: true,
+                  rows: [
+                    { pronoun: "je", form: "ai mal" },
+                    { pronoun: "tu", form: "as mal" },
+                    { pronoun: "il / elle / on", form: "a mal" },
+                    { pronoun: "nous", form: "avons mal" },
+                    { pronoun: "vous", form: "avez mal" },
+                    { pronoun: "ils / elles", form: "ont mal" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              label: "Exemples",
+              text: "On utilise {a}avoir mal à{/a} pour parler d’une douleur dans une partie du corps. ",
+              items: [
+                "J'ai mal {a}à{/a} la tête.",
+                "Vous avez mal {a}au{/a} ventre ?.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+      ],
     },
     {
       type: "grid",
@@ -270,46 +382,6 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
           ],
         },
       ],
-    },
-    {
-      type: "heading",
-      text: "Formes",
-    },
-    {
-      type: "text",
-      text: "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement.",
-      transText: {
-        en: "When the prepositions {a}à{/a} and {a}de{/a} are followed by the article {a}le{/a} or {a}les{/a}, they must contract.",
-        ar: "عندما تأتي حروف الجر {a}à{/a} و{a}de{/a} قبل أداتي التعريف {a}le{/a} أو {a}les{/a}، فإنها تُدمج وجوبًا.",
-        fa: "وقتی حروف اضافه {a}à{/a} و {a}de{/a} قبل حروف تعریف {a}le{/a} یا {a}les{/a} قرار می‌گیرند، باید به‌صورت اجباری ادغام شوند.",
-        pt: "Quando as preposições {a}à{/a} e {a}de{/a} são seguidas dos artigos {a}le{/a} ou {a}les{/a}, contraem-se obrigatoriamente.",
-        so: "Marka xarafyada hore ee {a}à{/a} iyo {a}de{/a} ay ka horreeyaan maqaalka {a}le{/a} ama {a}les{/a}, waa in si khasab ah loo isku daraa.",
-        ti: "እቶም ቅድመ ቃላት {a}à{/a}ን {a}de{/a}ን ብኣንቀጽ {a}le{/a} ወይ {a}les{/a} ምስ ዝስዕቡ፣ ብግዴታ ይጠቓለሉ።",
-        tr: "{a}à{/a} ve {a}de{/a} edatlarından sonra {a}le{/a} veya {a}les{/a} artikeli geldiğinde, bunlar zorunlu olarak birleşir.",
-        ps: "کله چې د {a}à{/a} او {a}de{/a} حرف اضافه د {a}le{/a} یا {a}les{/a} له ټاکلي توري وروسته راشي، نو په اجباري ډول سره یوځای کېږي.",
-        uk: "Коли після прийменників {a}à{/a} і {a}de{/a} стоять артиклі {a}le{/a} або {a}les{/a}, вони обов'язково зливаються.",
-      },
-    },
-    {
-      type: "grid",
-      headers: ["", "Contraction", "Exemple"],
-      boldFirstCol: true,
-      colWidths: ["28%", "24%", "48%"],
-      rows: [
-        ["à + le", "{a}au{/a}", "Elle est au supermarché."],
-        ["à + les", "{a}aux{/a}", "Elle est aux toilettes."],
-        ["de + le", "{a}du{/a}", "Le couloir du métro."],
-        ["de + les", "{a}des{/a}", "La salle des professeurs."],
-      ],
-    },
-    {
-      type: "text",
-      text: "{a}La{/a} et {a}l'{/a} ne se contractent jamais.",
-      items: [
-        "Je vais {a}à la{/a} pharmacie",
-        "Je vais {a}à l'{/a}école",
-      ],
-      noBulletItems: [0,1],
     },
   ],
   exercises: [
