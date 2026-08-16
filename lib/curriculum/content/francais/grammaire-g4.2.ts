@@ -156,7 +156,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
             {
               type: "text",
               label: "Exemples",
-              text: "On utilise {a}jouer à{/a}} pour parler d'un sportet {a}jouer de{/a} pour parler d'un instrument de musique",
+              text: "On utilise {a}jouer à{/a} pour parler d'un sportet {a}jouer de{/a} pour parler d'un instrument de musique",
               items: [
                 "{a}à{/a} + sport → Je joue {a}à{/a} la balle.",
                 "{a}de{/a} + instrument → Nous jouons {a}de{/a} la flûte.",  
@@ -199,52 +199,20 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
         },
       ],
     },
-    {
-      type: "grid",
-      headers: ["","Exemple",],
-      boldFirstCol: true,
-      colWidths: ["35%","65%",
-      ],
-      rows: [
-        [
-          "Jouer {a}à{/a}\n+ sport",
-          "Marie joue à la balle.",
-        ],
-        [
-          "Jouer {a}de{/a}\n+ instrument",
-          "Julie joue de la flûte.",
-        ],
-        [
-          "Avoir mal {a}à{/a}\n+ partie du corps",
-          "Nous avons mal à la tête.",
-        ],
-      ],
-    },
-    {
-      type: "heading",
-      text: "Les verbes de mouvement",
-      trans: {
-        en: "Movement verbs in the present",
-        ar: "أفعال الحركة في المضارع",
-        fa: "افعال حرکتی در زمان حال",
-        ti: "ግሲያት ምቅስቃስ ኣብ ሕጂ ጊዜ",
-        uk: "Дієслова руху у теперішньому часі",
-      },
-    },
+    
     {
       type: "text",
-      label: "Verbes de mouvement",
-      text: "Certains verbes de mouvement sont suivis d'une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, etc.) qui indique la {a}destination{/a} ou l'{a}origine{/a}.\nClique sur chaque verbe pour voir sa conjugaison et des exemples.",
+      text: "Certains verbes de mouvement sont suivis d'une {a}préposition{/a} ({a}à{/a}, {a}de{/a}, etc.) qui indique la {a}destination{/a} ou l'{a}origine{/a}.",
       transText: {
-        en: "Some verbs of movement are followed by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, etc.) that indicates the {a}destination{/a} or the {a}origin{/a}.\nClick on each verb to see its conjugation and examples.",
-        ar: "تتبع بعض أفعال الحركة {a}بحرف جر{/a} ({a}à{/a}، {a}de{/a}، إلخ) يحدد {a}الوجهة{/a} أو {a}الأصل{/a}.\nانقر على كل فعل لرؤية تصريفه وأمثلة.",
-        fa: "برخی از افعال حرکتی با یک {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a} و غیره) می‌آیند که {a}مقصد{/a} یا {a}مبدأ{/a} را نشان می‌دهد.\nروی هر فعل کلیک کنید تا صرف و مثال‌های آن را ببینید.",
-        pt: "Alguns verbos de movimento são seguidos de uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, etc.) que indica o {a}destino{/a} ou a {a}origem{/a}.\nClique em cada verbo para ver a sua conjugação e exemplos.",
-        so: "Qaar ka mid ah falalka dhaqdhaqaaqa waxaa raaca {a}xaraf-hore{/a} ({a}à{/a}, {a}de{/a}, iwm.) oo tilmaamaya {a}meesha loo socdo{/a} ama {a}meesha laga yimid{/a}.\nGuji fal kasta si aad u aragto isku-xirkiisa iyo tusaalooyin.",
-        ti: "ገለ ግሲታት ምንቅስቓስ ብ{a}ቅድመ ቃል{/a} ({a}à{/a}፣ {a}de{/a}፣ ወዘተ) ይስዕቡ፣ እዚ ድማ {a}መዕረፊ ቦታ{/a} ወይ {a}መበገሲ ቦታ{/a} የመልክት።\nንነፍሲ ወከፍ ግሲ ንምስትውዓልን ኣብነታትን ክሊክ ግበር።",
-        tr: "Bazı hareket fiillerinden sonra, {a}hedefi{/a} veya {a}kaynağı{/a} belirten bir {a}edat{/a} ({a}à{/a}, {a}de{/a} vb.) kullanılır.\nÇekimini ve örneklerini görmek için her fiile tıklayın.",
-        ps: "د حرکت ځینې فعلونه د {a}حرف اضافې{/a} ({a}à{/a}، {a}de{/a} او نور) سره راځي چې {a}موخه{/a} یا {a}اصل{/a} ښيي.\nد هر فعل د صرف او مثالونو د لیدلو لپاره پرې کلیک وکړئ.",
-        uk: "Після деяких дієслів руху вживається {a}прийменник{/a} ({a}à{/a}, {a}de{/a} тощо), який указує на {a}напрямок{/a} або {a}походження{/a}.\nНатисніть на кожне дієслово, щоб переглянути його відмінювання та приклади.",
+        en: "Some verbs of movement are followed by a {a}preposition{/a} ({a}à{/a}, {a}de{/a}, etc.) that indicates the {a}destination{/a} or the {a}origin{/a}.",
+        ar: "تتبع بعض أفعال الحركة {a}بحرف جر{/a} ({a}à{/a}، {a}de{/a}، إلخ) يحدد {a}الوجهة{/a} أو {a}الأصل{/a}.",
+        fa: "برخی از افعال حرکتی با یک {a}حرف اضافه{/a} ({a}à{/a}، {a}de{/a} و غیره) می‌آیند که {a}مقصد{/a} یا {a}مبدأ{/a} را نشان می‌دهد.",
+        pt: "Alguns verbos de movimento são seguidos de uma {a}preposição{/a} ({a}à{/a}, {a}de{/a}, etc.) que indica o {a}destino{/a} ou a {a}origem{/a}.",
+        so: "Qaar ka mid ah falalka dhaqdhaqaaqa waxaa raaca {a}xaraf-hore{/a} ({a}à{/a}, {a}de{/a}, iwm.) oo tilmaamaya {a}meesha loo socdo{/a} ama {a}meesha laga yimid{/a}.",
+        ti: "ገለ ግሲታት ምንቅስቓስ ብ{a}ቅድመ ቃል{/a} ({a}à{/a}፣ {a}de{/a}፣ ወዘተ) ይስዕቡ፣ እዚ ድማ {a}መዕረፊ ቦታ{/a} ወይ {a}መበገሲ ቦታ{/a} የመልክት።",
+        tr: "Bazı hareket fiillerinden sonra, {a}hedefi{/a} veya {a}kaynağı{/a} belirten bir {a}edat{/a} ({a}à{/a}, {a}de{/a} vb.) kullanılır.",
+        ps: "د حرکت ځینې فعلونه د {a}حرف اضافې{/a} ({a}à{/a}، {a}de{/a} او نور) سره راځي چې {a}موخه{/a} یا {a}اصل{/a} ښيي.",
+        uk: "Після деяких дієслів руху вживається {a}прийменник{/a} ({a}à{/a}, {a}de{/a} тощо), який указує на {a}напрямок{/a} або {a}походження{/a}.",
       },
     },
     {
@@ -274,14 +242,14 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
             {
               type: "text",
               label: "Exemples",
+              text: "On utilise {a}aller{/a} pour indiquer un déplacement vers un lieu ou une personne. La préposition change selon le lieu ou le pays.",
               items: [
                 "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
                 "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
                 "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
-                "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
                 "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
               ],
-              noBulletItems: [0, 1, 2, 3, 4],
+              noBulletItems: [0, 1, 2, 3],
             },
           ],
         },
@@ -308,14 +276,14 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
             {
               type: "text",
               label: "Exemples",
+              text: "On utilise {a}venir{/a} pour indiquer le lieu d'où une personne arrive ou revient. La préposition change selon le lieu ou le pays.",
               items: [
                 "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
                 "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
                 "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
-                "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
                 "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
               ],
-              noBulletItems: [0, 1, 2, 3, 4],
+              noBulletItems: [0, 1, 2, 3],
             },
           ],
         },
@@ -342,9 +310,10 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
             {
               type: "text",
               label: "Exemples",
+              text: "On utilise {a}partir{/a} pour indiquer le moment où une personne quitte un lieu. On utilise {a}de{/a} pour indiquer le lieu de départ et {a}pour{/a} pour indiquer la destination.",
               items: [
-                "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
-                "{a}pour{/a} (destination) → Il part {a}pour{/a} Rome.",
+                "{a}de{/a} → Je pars {a}de{/a} Lyon.",
+                "{a}pour{/a} → Il part {a}pour{/a} Rome.",
               ],
               noBulletItems: [0, 1],
             },
@@ -373,11 +342,14 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
             {
               type: "text",
               label: "Exemples",
+              text: "On utilise {a}arriver{/a} pour indiquer le lieu où une personne arrive ou le lieu d'où elle arrive. On utilise {a}à, en, au, aux{/a} pour la destination et {a}de{/a} pour l'origine.",
               items: [
-                "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
-                "{a}de / du / des{/a} (origine) → Il arrive {a}du{/a} travail.",
+                "{a}à{/a} → Elle arrive {a}à{/a} la gare.",
+                "{a}en{/a} + pays féminin → J'arrive {a}en{/a} France.",
+                "{a}au{/a} + pays masculin → Nous arrivons {a}au{/a} Maroc.",
+                "{a}de{/a} → Il arrive {a}du{/a} travail.",
               ],
-              noBulletItems: [0, 1],
+              noBulletItems: [0, 1, 2, 3],
             },
           ],
         },
