@@ -57,19 +57,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "text",
-      label: "Lieu",
-      transLabel: {
-        en: "Place",
-        ar: "المكان",
-        fa: "مکان",
-        pt: "Lugar",
-        so: "Goob",
-        ti: "ቦታ",
-        tr: "Yer",
-        ps: "ځای",
-        uk: "Місце",
-      },
-      text: "Pour indiquer un lieu, on utilise la préposition {a}à{/a} ou {a}de{/a}.",
+      text: "Pour indiquer un {a}lieu{/a}, on utilise la préposition {a}à{/a} ou {a}de{/a}.",
       transText: {
         en: "To indicate a place, we use the preposition {a}à{/a} or {a}de{/a}.",
         ar: "للدلالة على مكان، نستخدم حرف الجر {a}à{/a} أو {a}de{/a}.",
@@ -89,19 +77,7 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
     },
     {
       type: "text",
-      label: "Noms",
-      transLabel: {
-        en: "Nouns",
-        ar: "الأسماء",
-        fa: "اسم‌ها",
-        pt: "Nomes",
-        so: "Magacyada",
-        ti: "ስማት",
-        tr: "İsimler",
-        ps: "نومونه",
-        uk: "Іменники",
-      },
-      text: "Pour relier deux noms ensemble, on utilise aussi la préposition {a}de{/a}.",
+      text: "Pour relier {a}deux noms ensemble{/a}, on utilise aussi la préposition {a}de{/a}.",
       transText: {
         en: "To link two nouns together, we also use the preposition {a}de{/a}.",
         ar: "لربط اسمين معًا، نستخدم أيضًا حرف الجر {a}de{/a}.",

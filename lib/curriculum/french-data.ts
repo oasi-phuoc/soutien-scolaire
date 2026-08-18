@@ -39,7 +39,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-l04", "G4.1", "Les articles définis et indéfinis", "Le, la, l', les / un, une, des : choisir le bon article selon le contexte.", "grammaire"),
   lesson("A1", "a1-gr-articles-contractes", "G4.2", "Les articles contractés", "À/de + le/les → au, aux, du, des ; la et l' ne se contractent pas.", "grammaire"),
   lesson("A1", "a1-gr-article-partitif", "G4.3", "L'article partitif", "Du, de la, de l' : quantité indéterminée ; négation et exception avec être.", "grammaire"),
-  lesson("A1", "a1-gr-expression-quantite", "G4.4", "L'expression de la quantité : un peu, beaucoup, assez, trop", "Quantités globales et précises ; de/d' sans article après.", "grammaire"),
+  lesson("A1", "a1-gr-expression-quantite", "G4.4", "L'expression de la quantité", "Quantités globales et précises ; de/d' sans article après.", "grammaire"),
   lesson("A1", "a1-gr-l18", "G4.5", "Les adjectifs démonstratifs", "Ce, cet, cette, ces : désigner et montrer quelque chose.", "grammaire"),
   lesson("A1", "a1-gr-l19", "G4.6", "Les adjectifs possessifs", "Mon/ma/mes, ton/ta/tes, son/sa/ses… : exprimer l'appartenance.", "grammaire"),
   lesson("A1", "a1-gr-adjectifs-indefinis", "G4.7", "Les adjectifs indéfinis", "Tout, chaque, aucun, plusieurs, quelques, même, autre.", "grammaire"),

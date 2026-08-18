@@ -13,10 +13,25 @@ export const A1_GR_L18: GrammarLesson = {
     },
     {
       type: "text",
+      text: "Pour désigner une personne ou une chose {a}que l'on montre{/a}.",
       items: [
-        "Pour désigner une personne ou une chose que l'on montre. → Regarde, ces tableaux sont vraiment intéressants.",
-        "Pour désigner une personne ou une chose déjà mentionnée. → Le tableau est de Manet. Cet artiste a vécu au XIXe siècle.",
-        "Pour désigner une période en cours ou très proche. → Cette semaine, je vais au musée du Louvre ; ils arrivent ce soir.",
+        "Regarde, {a}ces{/a} tableaux sont vraiment intéressants.",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "text",
+      text: "Pour désigner une personne ou une chose {a}déjà mentionnée{/a}.",
+      items: [
+        "Le tableau est de Vincent van Gogh. {a}Cet{/a} artiste a vécu au XIXe siècle.",
+      ],
+      allBullets: true,
+    },
+    {
+      type: "text",
+      text: "Pour désigner une {a}période en cours ou très proche{/a}.",
+      items: [
+        "Cette semaine, je vais au musée du Louvre",
       ],
       allBullets: true,
     },
@@ -30,30 +45,21 @@ export const A1_GR_L18: GrammarLesson = {
     },
     {
       type: "grid",
-      headers: ["Genre / Nombre", "Forme", "Exemple"],
+      headers: ["", "Forme", "Exemple"],
       boldFirstCol: true,
       rows: [
-        ["Masculin singulier", "ce", "Ce tableau est de Manet."],
-        ["Féminin singulier", "cette", "Cette femme est appelée « l'Arlésienne »."],
-        ["Pluriel (m. et f.)", "ces", "Ces tableaux sont au musée d'Orsay. / Ces statues sont au musée Rodin."],
+        ["Masculin", "{a}ce{/a}", "{a}Ce{/a} tableau est de Manet."],
+        ["Féminin", "{a}cette{/a}", "{/a}Cette{/a} femme est appelée « l'Arlésienne »."],
+        ["Pluriel", "{a}ces{/a}", "{a}Ces{/a} tableaux sont au musée d'Orsay."],
       ],
-    },
-    {
-      type: "note",
-      text: "Quand le nom masculin commence par une voyelle ou un h muet : {a}ce{/a} → {a}cet{/a}. → Cet artiste est très connu.",
-    },
-    {
-      type: "heading",
-      text: "Prononciation",
     },
     {
       type: "text",
+      label: "Attention",
+      text: "Quand le nom masculin commence par une voyelle ou un h muet : {a}ce{/a} devient {a}cet{/a}.",
       items: [
-        "Enchaînement avec {a}cet{/a} et {a}cette{/a} devant une voyelle ou un h muet. → cet artiste ; cette artiste ; cette histoire.",
-        "Liaison avec {a}ces{/a}. → ces objets ; ces horaires.",
-        "{a}Cet{/a} et {a}cette{/a} ont la même prononciation. → cet ami = cette amie.",
+        "{s}Ce{/s} artiste est très connu. → {a}Cet{/a} artiste est très connu.",
       ],
-      allBullets: true,
     },
   ],
   exercises: [
