@@ -89,8 +89,10 @@ interface Props {
 
 // ── Theory view ───────────────────────────────────────────────────────────────
 
+const ARROW_SEP = " → ";
+
 function renderArrow(text: string) {
-  const parts = text.split(" → ");
+  const parts = text.split(ARROW_SEP);
   if (parts.length <= 1) return <>{text}</>;
   return (
     <>
@@ -105,6 +107,61 @@ function renderArrow(text: string) {
         ),
       )}
     </>
+  );
+}
+
+/** 1 flèche : 150 → 1fr ; 2 flèches : 150 → 150 → 1fr. Gaps 20 px. */
+function arrowAlignCols(items: string[]): 1 | 2 {
+  let maxArrows = 0;
+  for (const item of items) {
+    const n = item.split(ARROW_SEP).length - 1;
+    if (n > maxArrows) maxArrows = n;
+  }
+  return maxArrows >= 2 ? 2 : 1;
+}
+
+function ArrowAlignedRow({
+  item,
+  cols,
+  lang,
+  dir,
+}: {
+  item: string;
+  cols: 1 | 2;
+  lang?: string;
+  dir?: "rtl" | "ltr";
+}) {
+  const parts = item.split(ARROW_SEP);
+  const left = parts[0] ?? "";
+  const mid = parts[1] ?? "";
+  const rest = parts.slice(2).join(ARROW_SEP);
+  const twoCols = cols === 2;
+  const hasSecondArrow = parts.length >= 3;
+
+  return (
+    <div
+      className={`grid items-baseline gap-x-5 text-sm leading-relaxed text-[var(--color-text-primary)] ${
+        twoCols
+          ? "grid-cols-[150px_auto_150px_auto_minmax(0,1fr)]"
+          : "grid-cols-[150px_auto_minmax(0,1fr)]"
+      }`}
+      lang={lang}
+      dir={dir}
+    >
+      <span className="min-w-0 break-words">{renderInlineMarkup(left, false)}</span>
+      <span className="text-center text-[var(--color-text-secondary)]">→</span>
+      {twoCols && hasSecondArrow ? (
+        <>
+          <span className="min-w-0 break-words">{renderInlineMarkup(mid, false)}</span>
+          <span className="text-center text-[var(--color-text-secondary)]">→</span>
+          <span className="min-w-0">{renderInlineMarkup(rest, false)}</span>
+        </>
+      ) : (
+        <span className={`min-w-0 ${twoCols ? "col-span-3" : ""}`}>
+          {renderInlineMarkup(parts.slice(1).join(ARROW_SEP), false)}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -383,7 +440,8 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
             const label = transLabel ?? block.label;
             const plainText = (transText ?? block.text)?.trim() ? (transText ?? block.text) : undefined;
             const items = transItems ?? block.items ?? [];
-            const alignArrows = items.length > 0 && items.every((item) => item.includes(" → "));
+            const alignArrows = items.length > 0 && items.every((item) => item.includes(ARROW_SEP));
+            const arrowCols = alignArrows ? arrowAlignCols(items) : 1;
             return (
               <div key={i} className="space-y-1.5">
                 {label ? (
@@ -404,22 +462,16 @@ export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: Theory
                     const skipBullet = block.allBullets
                       ? (block.noBulletItems?.includes(ii) ?? false)
                       : (block.noBulletItems?.includes(ii) ?? false) ||
-                        (!!block.noFirstBullet && !item.includes(" → "));
+                        (!!block.noFirstBullet && !item.includes(ARROW_SEP));
                     if (alignArrows) {
-                      const arrowIdx = item.indexOf(" → ");
-                      const left = item.slice(0, arrowIdx);
-                      const right = item.slice(arrowIdx + 3);
                       return (
                         <li key={ii} className="space-y-0.5">
-                          <div
-                            className="grid grid-cols-[minmax(7.5rem,max-content)_1.25rem_minmax(0,1fr)] items-baseline gap-x-2 text-sm leading-relaxed text-[var(--color-text-primary)]"
+                          <ArrowAlignedRow
+                            item={item}
+                            cols={arrowCols}
                             lang={transItems?.[ii] ? pivot : undefined}
                             dir={transItems?.[ii] && isRtl ? "rtl" : "ltr"}
-                          >
-                            <span>{renderInlineMarkup(left, false)}</span>
-                            <span className="text-center text-[var(--color-text-secondary)]">→</span>
-                            <span>{renderInlineMarkup(right, false)}</span>
-                          </div>
+                          />
                         </li>
                       );
                     }
