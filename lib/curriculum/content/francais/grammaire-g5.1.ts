@@ -11,7 +11,15 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "text",
       text: "En français, une phrase simple suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
       transText: {
-
+        en: "In French, a simple sentence follows this order: {su}Subject{/su} + {ve}Verb{/ve} + {co}Complement{/co}.",
+        ar: "في الفرنسية، تتبع الجملة البسيطة الترتيب التالي: {su}الفاعل{/su} + {ve}الفعل{/ve} + {co}المتمم{/co}.",
+        fa: "در زبان فرانسوی، یک جملهٔ ساده از این ترتیب پیروی می‌کند: {su}فاعل{/su} + {ve}فعل{/ve} + {co}متمم{/co}.",
+        pt: "Em francês, uma frase simples segue a seguinte ordem: {su}Sujeito{/su} + {ve}Verbo{/ve} + {co}Complemento{/co}.",
+        so: "Faransiiska, jumlad fudud waxay raacdaa nidaamkan: {su}Falka{/su} + {ve}Falka{/ve} + {co}Dhammaystirka{/co}.",
+        ti: "ኣብ ቋንቋ ፈረንሳይ፣ ሓንቲ ቀላል ሓረግ ነዚ ቅደም ተኸተል ትኽተል፦ {su}ተገባሪ{/su} + {ve}ግሲ{/ve} + {co}መላእታ{/co}.",
+        tr: "Fransızcada basit bir cümle şu sırayı izler: {su}Özne{/su} + {ve}Fiil{/ve} + {co}Tümleç{/co}.",
+        ps: "په فرانسوي ژبه کې ساده جمله دا ترتیب تعقیبوي: {su}فاعل{/su} + {ve}فعل{/ve} + {co}متمم{/co}.",
+        uk: "У французькій мові просте речення має такий порядок: {su}Підмет{/su} + {ve}Дієслово{/ve} + {co}Додаток{/co}.",
       },
     },
     {
@@ -24,6 +32,15 @@ export const A1_GR_PHRASES: GrammarLesson = {
         ["Les enfants", "jouent", "dans le parc."],
       ],
       transHeaders: {
+        en: ["Subject", "Verb", "Complement"],
+        ar: ["الفاعل", "الفعل", "المتمم"],
+        fa: ["فاعل", "فعل", "متمم"],
+        pt: ["Sujeito", "Verbo", "Complemento"],
+        so: ["Falka", "Fal", "Dhammaystir"],
+        ti: ["ተገባሪ", "ግሲ", "መላእታ"],
+        tr: ["Özne", "Fiil", "Tümleç"],
+        ps: ["فاعل", "فعل", "متمم"],
+        uk: ["Підмет", "Дієслово", "Додаток"],
       },
     },
     { 
@@ -45,6 +62,15 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "text",
       text: "Le {a}sujet{/a} indique la personne ou la chose qui {a}fait l'action{/a} ou qui {a}est dans un état{/a}.\n On peut poser la question : {a}Qui ?{/a} ou {a}Qu'est-ce qui ?{/a}",
       transText: {
+        en: "The {a}subject{/a} indicates the person or thing that {a}performs the action{/a} or {a}is in a state{/a}.\nWe can ask the question: {a}Who?{/a} or {a}What?{/a}",
+        ar: "يشير {a}الفاعل{/a} إلى الشخص أو الشيء الذي {a}يقوم بالفعل{/a} أو الذي {a}يكون في حالة{/a}.\nيمكننا طرح السؤال: {a}مَن؟{/a} أو {a}ما الذي؟{/a}",
+        fa: "{a}فاعل{/a} شخص یا چیزی را نشان می‌دهد که {a}عمل را انجام می‌دهد{/a} یا {a}در حالتی قرار دارد{/a}.\nمی‌توان این پرسش را مطرح کرد: {a}چه کسی؟{/a} یا {a}چه چیزی؟{/a}",
+        pt: "O {a}sujeito{/a} indica a pessoa ou a coisa que {a}faz a ação{/a} ou que {a}está num estado{/a}.\nPodemos fazer a pergunta: {a}Quem?{/a} ou {a}O que?{/a}",
+        so: "{a}Falka{/a} wuxuu tilmaamaa qofka ama shayga {a}sameeya falka{/a} ama {a}ku jira xaalad{/a}.\nWaxaan weydiin karnaa: {a}Yaa?{/a} ama {a}Maxaa?{/a}",
+        ti: "{a}ተገባሪ{/a} ነቲ {a}ተግባር ዝፍጽም{/a} ወይ {a}ኣብ ሓደ ኩነታት ዝርከብ{/a} ሰብ ወይ ነገር የመልክት።\nነዚ ሕቶ ክንሓትት ንኽእል፦ {a}መን?{/a} ወይ {a}እንታይ እዩ?{/a}",
+        tr: "{a}Özne{/a}, {a}eylemi yapan{/a} veya {a}bir durumda bulunan{/a} kişiyi ya da şeyi belirtir.\nŞu soruları sorabiliriz: {a}Kim?{/a} veya {a}Ne?{/a}",
+        ps: "{a}فاعل{/a} هغه کس یا شی ښيي چې {a}عمل ترسره کوي{/a} یا {a}په یوه حالت کې وي{/a}.\nموږ دا پوښتنه کولی شو: {a}څوک؟{/a} یا {a}څه شی؟{/a}",
+        uk: "{a}Підмет{/a} позначає особу або предмет, який {a}виконує дію{/a} або {a}перебуває в певному стані{/a}.\nМожна поставити запитання: {a}Хто?{/a} або {a}Що?{/a}",
       },
       items: [
         "Paul mange une pomme. → Qui mange ? → {a}Paul{/a}.",

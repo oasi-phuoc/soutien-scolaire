@@ -19,7 +19,8 @@ export const A1_GR_INTERRO: GrammarLesson = {
       },
     },
     {
-            A l'orale, on peut simplement {a}monter la voix{/a} à la fin de la phrase.",
+      type: "text",
+      text: "A l'orale, on peut simplement {a}monter la voix{/a} à la fin de la phrase.",
     },
       items: [
         "La plus simple : monter la voix à la fin.",
