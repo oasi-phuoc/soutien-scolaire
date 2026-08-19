@@ -295,6 +295,23 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
         uk: [["J'aime le café. (Я люблю каву.)", "Moi {a}aussi{/a} ! (Я теж!)", "Moi {a}pas{/a}. (Я ні.)"], ["Je ne fume pas. (Я не палю.)", "Moi {a}non plus{/a} ! (Я теж ні!)", "Moi {a}si{/a} ! (А я палю!)"]],
       },
     },
+    
+    {
+      type: "text",
+      noBulletItems: [0],
+      label: "Répondre à une question",
+      items: [
+        "Question {a}fermée{/a} → réponse par {a}oui{/a} ou {a}non{/a} : Oui, j'ai faim.",
+        "Question {a}ouverte{/a} → réponse variable selon le mot interrogatif ({a}pourquoi ? quand ? où ? comment ? qui ?{/a}) : Je viens demain. · Je viens dîner à 20 h.",
+      ],
+      transItems: {
+        en: ["{a}Closed{/a} question → answer with {a}oui{/a} or {a}non{/a}: Oui, j'ai faim. (Yes, I am hungry.)", "{a}Open{/a} question → answer varies with the question word ({a}pourquoi ? quand ? où ? comment ? qui ?{/a}): Je viens demain. (I am coming tomorrow.) · Je viens dîner à 20 h. (I am coming for dinner at 8 p.m.)"],
+        ar: ["سؤال {a}مغلق{/a} ← الإجابة بـ {a}oui{/a} أو {a}non{/a}: Oui, j'ai faim.", "سؤال {a}مفتوح{/a} ← إجابة متنوعة حسب أداة الاستفهام: Je viens demain. · Je viens dîner à 20 h."],
+        fa: ["سوال {a}بسته{/a} ← پاسخ با {a}oui{/a} یا {a}non{/a}: Oui, j'ai faim.", "سوال {a}باز{/a} ← پاسخ بسته به کلمه‌ی پرسشی: Je viens demain. · Je viens dîner à 20 h."],
+        ti: ["{a}ዕጹው{/a} ሕቶ → መልሲ ብ{a}oui{/a} ወይ {a}non{/a}: Oui, j'ai faim.", "{a}ክፉት{/a} ሕቶ → መልሲ ከም ናይ ሕቶ ቃል ይተለዋወጥ: Je viens demain. · Je viens dîner à 20 h."],
+        uk: ["{a}Закрите{/a} питання → відповідь {a}oui{/a} або {a}non{/a}: Oui, j'ai faim.", "{a}Відкрите{/a} питання → відповідь залежить від питального слова: Je viens demain. · Je viens dîner à 20 h."],
+      },
+    },
   ],
   // Former a2-gr-l07 and a2-gr-l09 exercise arrays are empty; generatedGrammarExercises supplies their combined pools.
   exercises: [],

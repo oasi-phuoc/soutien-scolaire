@@ -73,7 +73,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
         uk: "{a}Підмет{/a} позначає особу або предмет, який {a}виконує дію{/a} або {a}перебуває в певному стані{/a}.\nМожна поставити запитання: {a}Хто?{/a} або {a}Що?{/a}",
       },
       items: [
-        "Paul mange une pomme. → Qui mange ? → {a}Paul{/a}.",
+        "Paul mange. → Qui mange ? → {a}Paul{/a}.",
         "Le chat dort. → Qui dort ? → {a}Le chat{/a}.",
         "Elle travaille. → Qui travaille ? → {a}Elle{/a}."
       ],
