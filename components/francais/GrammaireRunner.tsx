@@ -137,23 +137,27 @@ function ArrowAlignedRow({
   const rest = parts.slice(2).join(ARROW_SEP);
   const twoCols = cols === 2;
   const hasSecondArrow = parts.length >= 3;
+  const arrowCls = "text-center text-[var(--color-text-secondary)]";
+  const cellCls = "min-w-0 break-words";
 
   return (
     <div
-      className={`grid items-baseline gap-x-5 text-sm leading-relaxed text-[var(--color-text-primary)] ${
-        twoCols
-          ? "grid-cols-[150px_auto_150px_auto_minmax(0,1fr)]"
-          : "grid-cols-[150px_auto_minmax(0,1fr)]"
-      }`}
+      className="grid items-baseline text-sm leading-relaxed text-[var(--color-text-primary)]"
+      style={{
+        gridTemplateColumns: twoCols
+          ? "150px auto 150px auto minmax(0, 1fr)"
+          : "150px auto minmax(0, 1fr)",
+        columnGap: 20,
+      }}
       lang={lang}
       dir={dir}
     >
-      <span className="min-w-0 break-words">{renderInlineMarkup(left, false)}</span>
-      <span className="text-center text-[var(--color-text-secondary)]">→</span>
+      <span className={cellCls}>{renderInlineMarkup(left, false)}</span>
+      <span className={arrowCls}>→</span>
       {twoCols && hasSecondArrow ? (
         <>
-          <span className="min-w-0 break-words">{renderInlineMarkup(mid, false)}</span>
-          <span className="text-center text-[var(--color-text-secondary)]">→</span>
+          <span className={cellCls}>{renderInlineMarkup(mid, false)}</span>
+          <span className={arrowCls}>→</span>
           <span className="min-w-0">{renderInlineMarkup(rest, false)}</span>
         </>
       ) : (
