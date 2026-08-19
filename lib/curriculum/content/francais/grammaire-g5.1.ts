@@ -51,7 +51,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
         "Le chat dort. → Qui dort ? → {a}Le chat{/a}.",
         "Elle travaille. → Qui travaille ? → {a}Elle{/a}."
       ],
-      noBulletItems:[0,1,2]
+      noBulletItems:[0,1,2],
     },
     {
       type: "text"

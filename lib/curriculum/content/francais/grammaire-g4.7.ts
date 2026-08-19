@@ -38,8 +38,11 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       },
     },
     {
+      type: "heading",
+      text: "Tout",
+    },
+    {
       type: "text",
-      label: "Tout",
       text: "{a}Tout{/a} exprime la totalité d'un ensemble. Il est suivi d'un {a}nom avec déterminant{/a} et {a}s'accorde{/a} en genre et en nombre.",
       transText: {
         en: "{a}Tout{/a} expresses the totality of a group. It is followed by a {a}noun with a determiner{/a} and {a}agrees{/a} in gender and number.",
@@ -95,8 +98,11 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [0]
     },
     {
+      type: "heading",
+      text: "Chaque",
+    },
+    {
       type: "text",
-      label: "Chaque",
       text : "{a}Chaque{/a} présente les éléments un par un. Il est {a}invariable{/a} et suivi d'un {a}nom singulier{/a}.",
       transText: {
         en: "{a}Chaque{/a} presents the elements one by one. It is {a}invariable{/a} and is followed by a {a}singular noun{/a}.",
@@ -115,8 +121,11 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [0],
     },
     {
+      type: "heading",
+      text: "Aucun",
+    },
+    {
       type: "text",
-      label: "Aucun",
       text: "{a}Aucun{/a} indique l'absence d'une personne ou d'une chose. Il est suivi d'un {a}nom singulier{/a} et s'utilise toujours avec {a}ne{/a}.",
       transText: {
         en: "{a}Aucun{/a} indicates the absence of a person or thing. It is followed by a {a}singular noun{/a} and is always used with {a}ne{/a}.",
@@ -136,8 +145,11 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
+      type: "heading",
+      text: "Plusieurs",
+    },
+    {
       type: "text",
-      label: "Plusieurs",
       text: "{a}Plusieurs{/a} indique une quantité supérieure à deux, sans préciser le nombre. Il est {a}invariable{/a}, toujours au {a}pluriel{/a} et suivi d'un {a}nom sans article{/a}.",
       transText: {
         en: "{a}Plusieurs{/a} indicates a quantity greater than two without specifying the exact number. It is {a}invariable{/a}, always {a}plural{/a}, and is followed by a {a}noun without an article{/a}.",
@@ -157,8 +169,11 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
+      type: "heading",
+      text: "Quelques",
+    },
+    {
       type: "text",
-      label: "Quelques",
       text: "{a}Quelques{/a} indique un petit nombre de personnes ou de choses. Il est {a}invariable{/a}, toujours au {a}pluriel{/a} et suivi d'un {a}nom sans article{/a}.",
       transText: {
         en: "{a}Quelques{/a} indicates a small number of people or things. It is {a}invariable{/a}, always {a}plural{/a}, and is followed by a {a}noun without an article{/a}.",
@@ -178,8 +193,11 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
+      type: "heading",
+      text: "Même",
+    },    
+    {
       type: "text",
-      label: "Même(s)",
       text: "{a}Même{/a} indique une ressemblance. Il peut être au {a}singulier{/a} ou au {a}pluriel{/a} et est suivi d'un {a}nom avec déterminant{/a}.",
       transText: {
         en: "{a}Même{/a} indicates similarity. It can be {a}singular{/a} or {a}plural{/a} and is followed by a {a}noun with a determiner{/a}.",
@@ -199,8 +217,11 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
       noBulletItems: [0, 1],
     },
     {
+      type: "heading",
+      text: "Autre",
+    },
+    {
       type: "text",
-      label: "Autre(s)",
       text: "{a}Autre{/a} indique une différence. Il peut être au {a}singulier{/a} ou au {a}pluriel{/a} et est suivi d'un {a}nom avec déterminant{/a}. Au pluriel, on utilise {a}d'autres{/a}.",
       transText: {
         en: "{a}Autre{/a} indicates a difference. It can be {a}singular{/a} or {a}plural{/a} and is followed by a {a}noun with a determiner{/a}. In the plural, we use {a}d'autres{/a}.",
