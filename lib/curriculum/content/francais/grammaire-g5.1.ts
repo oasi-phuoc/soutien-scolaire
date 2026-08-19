@@ -54,7 +54,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       noBulletItems:[0,1,2],
     },
     {
-      type: "text"
+      type: "text",
       text : "Le {a}sujet{/a} peut avoir plusieurs formes.",
       transText : {
 

@@ -6,17 +6,21 @@ export const A1_GR_INTERRO: GrammarLesson = {
   level: "A1",
   title: "L'interrogation de base",
   theory: [
-    { type: "heading", text: "Poser une question", trans: { en: "Asking a question", ar: "طرح سؤال", fa: "پرسیدن سوال", ti: "ሕቶ ምሓታት", uk: "Постановка питання" } },
+    { 
+      type: "heading", 
+      text: "Poser une question", 
+      trans: { 
+      } 
+    },
     {
       type: "text",
       text: "Il y a plusieurs façons de poser une question en français.",
       transText: {
-        en: "There are several ways to ask a question in French.",
-        ar: "هناك عدة طرق لطرح سؤال بالفرنسية.",
-        fa: "روش‌های مختلفی برای پرسیدن سوال در فرانسه وجود دارد.",
-        ti: "ኣብ ፈረንሳዊ ሕቶ ንምሓታት ብዙሕ መንገድታት ኣሎ.",
-        uk: "Є кілька способів поставити питання французькою.",
       },
+    },
+    {
+            A l'orale, on peut simplement {a}monter la voix{/a} à la fin de la phrase.",
+    },
       items: [
         "La plus simple : monter la voix à la fin.",
         "La plus courante : utiliser {a}est-ce que{/a}.",
