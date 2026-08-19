@@ -36,6 +36,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
         uk: "У французькій мові є кілька способів поставити запитання.",
       },
     },
+    {
       type: "heading",
       text : "Intonation montante",
       trans: {
@@ -49,6 +50,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
         ps: "لوړېدونکې آهنګ",
         uk: "Висхідна інтонація",
       },
+    },
     {
       type: "text",
       text: "A l'orale, on peut simplement {a}monter la voix ↗{/a} à la fin de la phrase.",
