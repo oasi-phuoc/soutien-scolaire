@@ -9,7 +9,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
     { type: "heading", text: "La structure de la phrase", trans: { en: "The structure of the sentence", ar: "بنية الجملة", fa: "ساختار جمله", ti: "ቅርጺ ሓሳብ", uk: "Структура речення" } },
     {
       type: "text",
-      text: "En français, une phrase suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
+      text: "En français, une phrase simple suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
       transText: {
         en: "In French, a sentence follows the order: {su}Subject{/su} + {ve}Verb{/ve} + {co}Complement{/co}.",
         ar: "في الفرنسية، تتبع الجملة الترتيب: {su}الفاعل{/su} + {ve}الفعل{/ve} + {co}المتمم{/co}.",
@@ -20,7 +20,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
     },
     {
       type: "grid",
-      headers: ["Sujet (S)", "Verbe (V)", "Complément (C)"],
+      headers: ["Sujet", "Verbe", "Complément"],
       equalCols: true,
       rows: [
         ["Paul", "mange", "une pomme."],

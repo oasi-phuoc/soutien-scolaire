@@ -93,7 +93,7 @@ export const A1_GR_ADJECTIFS_INDEFINIS: GrammarLesson = {
         "{a}Tout le monde{/a} chante.",
       ],
       noBulletItems: [0]
-    }
+    },
     {
       type: "text",
       label: "Chaque",
