@@ -82,8 +82,16 @@ export const A1_GR_PHRASES: GrammarLesson = {
     {
       type: "text",
       text : "Le {a}sujet{/a} peut avoir plusieurs formes.",
-      transText : {
-
+      transText: {
+        en: "The {a}subject{/a} can take several forms.",
+        ar: "يمكن أن يأتي {a}الفاعل{/a} في عدة أشكال.",
+        fa: "{a}فاعل{/a} می‌تواند شکل‌های مختلفی داشته باشد.",
+        pt: "O {a}sujeito{/a} pode ter várias formas.",
+        so: "{a}Falka{/a} wuxuu yeelan karaa qaabab kala duwan.",
+        ti: "{a}ተገባሪ{/a} ብዙሕ ቅርጽታት ክህልዎ ይኽእል።",
+        tr: "{a}Özne{/a} farklı biçimlerde olabilir.",
+        ps: "{a}فاعل{/a} بېلابېل ډولونه لرلی شي.",
+        uk: "{a}Підмет{/a} може мати кілька форм.",
       },
     },
     {
@@ -97,17 +105,44 @@ export const A1_GR_PHRASES: GrammarLesson = {
         ["Groupe de mots", "{a}Les enfants{/a} courent dans la maison."],
       ],
       transHeaders: {
+        en: ["Form", "Example"],
+        ar: ["الشكل", "مثال"],
+        fa: ["شکل", "مثال"],
+        pt: ["Forma", "Exemplo"],
+        so: ["Qaabka", "Tusaale"],
+        ti: ["ቅርጺ", "ኣብነት"],
+        tr: ["Biçim", "Örnek"],
+        ps: ["بڼه", "بېلګه"],
+        uk: ["Форма", "Приклад"],
       },
     },
     { type: "heading", 
       text: "Le verbe",
-      trans: { 
-      }
+      trans: {
+        en: "The verb",
+        ar: "الفعل",
+        fa: "فعل",
+        pt: "O verbo",
+        so: "Falka",
+        ti: "ግሲ",
+        tr: "Fiil",
+        ps: "فعل",
+        uk: "Дієслово",
+      },
     },
     {
       type: "text",
       text: "Le {a}verbe{/a} est essentiel dans la phrase. Le verbe indique {a}ce que fait le sujet{/a} ou {a}dans quel état{/a} il se trouve. Il {a}s'accorde{/a} toujours avec le sujet.",
       transText: {
+        en: "The {a}verb{/a} is essential in the sentence. The verb indicates {a}what the subject does{/a} or {a}what state{/a} the subject is in. It always {a}agrees{/a} with the subject.",
+        ar: "يُعدّ {a}الفعل{/a} أساسيًا في الجملة. ويشير الفعل إلى {a}ما يفعله الفاعل{/a} أو {a}الحالة التي يكون فيها{/a}. ويتوافق دائمًا {a}مع الفاعل{/a}.",
+        fa: "{a}فعل{/a} در جمله ضروری است. فعل نشان می‌دهد که {a}فاعل چه کاری انجام می‌دهد{/a} یا {a}در چه حالتی قرار دارد{/a}. فعل همیشه با فاعل {a}مطابقت{/a} دارد.",
+        pt: "O {a}verbo{/a} é essencial na frase. O verbo indica {a}o que o sujeito faz{/a} ou {a}em que estado se encontra{/a}. Ele {a}concorda{/a} sempre com o sujeito.",
+        so: "{a}Falku{/a} waa qayb muhiim ah oo jumladda ka mid ah. Falku wuxuu tilmaamaa {a}waxa uu faluhu sameeyo{/a} ama {a>xaaladda uu ku jiro{/a}. Had iyo jeer wuxuu {a}la jaanqaadaa{/a} falka.",
+        ti: "{a}ግሲ{/a} ኣብ ሓረግ ኣገዳሲ እዩ። ግሲ እቲ {a}ተገባሪ ዝገብሮ{/a} ወይ {a}ኣብ እንታይ ኩነታት ከም ዝርከብ{/a} የመልክት። ኩሉ ግዜ {a}ምስ ተገባሪ ይሰማማዕ{/a}.",
+        tr: "{a}Fiil{/a} cümlede temel bir unsurdur. Fiil, {a}öznenin ne yaptığını{/a} veya {a>hangi durumda olduğunu{/a} belirtir. Fiil her zaman özneyle {a}uyum sağlar{/a}.",
+        ps: "{a}فعل{/a} په جمله کې اړین دی. فعل ښيي چې {a}فاعل څه کوي{/a} یا {a}په کوم حالت کې دی{/a}. فعل تل له فاعل سره {a}سمون لري{/a}.",
+        uk: "{a}Дієслово{/a} є важливою частиною речення. Воно вказує, {a}що робить підмет{/a} або {a}у якому стані він перебуває{/a}. Дієслово завжди {a}узгоджується{/a} з підметом.",
       },
       items: [
         "Melina {a}boit{/a} du café.",
@@ -119,12 +154,30 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "heading", 
       text: "Le complément",
       trans: {
-      }
+        en: "The complement",
+        ar: "المتمم",
+        fa: "متمم",
+        pt: "O complemento",
+        so: "Dhammaystirka",
+        ti: "መላእታ",
+        tr: "Tümleç",
+        ps: "متمم",
+        uk: "Додаток",
+      },
     },
     {
       type: "text",
       text: "Le {a}complément{/a} donne des informations supplémentaires sur l'action ou l'état. Le complément n'est {a}pas toujours obligatoire{/a}.\n On peut poser différentes questions :",
       transText: {
+        en: "The {a}complement{/a} gives additional information about the action or state. The complement is {a}not always necessary{/a}.\nWe can ask different questions:",
+        ar: "يقدّم {a}المتمم{/a} معلومات إضافية عن الفعل أو الحالة. والمتمم {a}ليس ضروريًا دائمًا{/a}.\nيمكننا طرح أسئلة مختلفة:",
+        fa: "{a}متمم{/a} اطلاعات بیشتری درباره عمل یا حالت می‌دهد. متمم {a}همیشه ضروری نیست{/a}.\nمی‌توانیم پرسش‌های مختلفی مطرح کنیم:",
+        pt: "O {a>complemento{/a} dá informações adicionais sobre a ação ou o estado. O complemento {a}nem sempre é obrigatório{/a}.\nPodemos fazer perguntas diferentes:",
+        so: "{a}Dhammaystirku{/a} wuxuu bixiyaa macluumaad dheeraad ah oo ku saabsan falka ama xaaladda. Dhammaystirku {a}mar walba khasab ma aha{/a}.\nWaxaan weydiin karnaa su'aalo kala duwan:",
+        ti: "{a}መላእታ{/a} ብዛዕባ እቲ ተግባር ወይ ኩነታት ተወሳኺ ሓበሬታ ይህብ። መላእታ {a>ኩሉ ግዜ ግዴታ ኣይኮነን{/a}።\nእዞም ዝተፈላለዩ ሕቶታት ክንሓትት ንኽእል፦",
+        tr: "{a}Tümleç{/a} eylem veya durum hakkında ek bilgiler verir. Tümleç {a}her zaman gerekli değildir{/a}.\nFarklı sorular sorabiliriz:",
+        ps: "{a}متمم{/a} د عمل یا حالت په اړه اضافي معلومات ورکوي. متمم {a}تل اړین نه وي{/a}.\nموږ بېلابېلې پوښتنې کولی شو:",
+        uk: "{a}Додаток{/a} дає додаткову інформацію про дію або стан. Додаток {a}не завжди є обов'язковим{/a}.\nМожна поставити різні запитання:",
       },
     },
     {
@@ -132,54 +185,94 @@ export const A1_GR_PHRASES: GrammarLesson = {
       label: "COD — Complément d'Objet Direct",
       text: "Le complément répond à la question {a}quoi ?{/a} ou  {a}qui ?{/a}",
       transText: {
-
+        en: "The complement answers the question {a}what?{/a} or {a}who?{/a}.",
+        ar: "يجيب المتمم عن السؤال {a}ماذا؟{/a} أو {a}مَن؟{/a}.",
+        fa: "متمم به پرسش {a}چه چیزی؟{/a} یا {a}چه کسی؟{/a} پاسخ می‌دهد.",
+        pt: "O complemento responde à pergunta {a)o quê?{/a} ou {a}quem?{/a}.",
+        so: "Dhammaystirku wuxuu ka jawaabaa su'aasha {a}maxaa?{/a} ama {a}yaa?{/a}.",
+        ti: "መላእታ ነቲ {a}እንታይ?{/a} ወይ {a}መን?{/a} ዝብል ሕቶ ይምልስ።",
+        tr: "Tümleç {a}ne?{/a} veya {a}kimi?{/a} sorusuna cevap verir.",
+        ps: "متمم د {a}څه شي؟{/a} یا {a}څوک؟{/a} پوښتنې ته ځواب ورکوي.",
+        uk: "Додаток відповідає на запитання {a}що?{/a} або {a>кого?{/a}.",
       },
       items: [
         "Je mange une pomme. → Je mange quoi ? →  {a}une pomme{/a}.",
       ],
       noBulletItems: [0],
       transLabel: {
-      
-      },
-      transItems: {
+        en: "COD — Direct Object",
+        ar: "المفعول به المباشر",
+        fa: "مفعول مستقیم",
+        pt: "COD — Complemento Direto",
+        so: "COD — Shayga Tooska ah",
+        ti: "COD — ቀጥታ ተማላእታ",
+        tr: "COD — Belirtili Nesne",
+        ps: "COD — مستقیم متمم",
+        uk: "COD — Прямий додаток",
       },
     },
     {
       type: "text",
       label: "COI — Complément d'Objet Indirect",
-      text: "Le complément répond à la question {a}à qui ?{/a} ou  {a}à quoi ?{/a}",
-      transText : {
-
+      text: "Le complément répond à la question {a}à qui ?{/a} ou {a}à quoi ?{/a}",
+      transText: {
+        en: "The complement answers the question {a}to whom?{/a} or {a}to what?{/a}.",
+        ar: "يجيب المتمم عن السؤال {a}إلى مَن؟{/a} أو {a}إلى ماذا؟{/a}.",
+        fa: "متمم به پرسش {a}به چه کسی؟{/a} یا {a}به چه چیزی؟{/a} پاسخ می‌دهد.",
+        pt: "O complemento responde à pergunta {a}a quem?{/a} ou {a}a quê?{/a}.",
+        so: "Dhammaystirku wuxuu ka jawaabaa su'aasha {a}yaa?{/a} ama {a}maxaa?{/a} oo leh {a}à{/a}.",
+        ti: "መላእታ ነቲ {a}ንመን?{/a} ወይ {a}ንምንታይ?{/a} ዝብል ሕቶ ይምልስ።",
+        tr: "Tümleç {a}kime?{/a} veya {a}neye?{/a} sorusuna cevap verir.",
+        ps: "متمم د {a}چا ته؟{/a} یا {a}څه ته؟{/a} پوښتنې ته ځواب ورکوي.",
+        uk: "Додаток відповідає на запитання {a}кому?{/a} або {a}чому?{/a}.",
       },
       items: [
         "Je parle à Marie → Je parle à qui ? → {a}à Marie{/a}.",
       ],
       noBulletItems: [0],
       transLabel: {
-       
-      },
-      transItems: {
+        en: "COI — Indirect Object",
+        ar: "المفعول به غير المباشر",
+        fa: "مفعول غیرمستقیم",
+        pt: "COI — Complemento Indireto",
+        so: "COI — Shayga Dadban",
+        ti: "COI — ቀጥታ ዘይኮነ ተማላእታ",
+        tr: "COI — Dolaylı Tümleç",
+        ps: "COI — غیر مستقیم متمم",
+        uk: "COI — Непрямий додаток",
       },
     },
     {
       type: "text",
       label: "CC — Complément Circonstanciel",
-      text : "Le complément répond à la question {a}où ?{/a}, {a}quand ?{/a} ou {a}comment ?{/a}",
-      transText : {
-
+      text: "Le complément répond à la question {a}où ?{/a}, {a}quand ?{/a} ou {a}comment ?{/a}",
+      transText: {
+        en: "The complement answers the question {a}where?{/a}, {a}when?{/a}, or {a}how?{/a}.",
+        ar: "يجيب المتمم عن السؤال {a}أين؟{/a} أو {a}متى؟{/a} أو {a}كيف؟{/a}.",
+        fa: "متمم به پرسش {a}کجا؟{/a}، {a}چه زمانی؟{/a} یا {a}چگونه؟{/a} پاسخ می‌دهد.",
+        pt: "O complemento responde à pergunta {a}onde?{/a}, {a}quando?{/a} ou {a}como?{/a}.",
+        so: "Dhammaystirku wuxuu ka jawaabaa su'aasha {a}xaggee?{/a}, {a}goorma?{/a} ama {a}sida loo sameeyo?{/a}.",
+        ti: "መላእታ ነቲ {a}ኣበይ?{/a}፣ {a}መዓስ?{/a} ወይ {a}ከመይ?{/a} ዝብል ሕቶ ይምልስ።",
+        tr: "Tümleç {a}nerede?{/a}, {a}ne zaman?{/a} veya {a}nasıl?{/a} sorularına cevap verir.",
+        ps: "متمم د {a}چېرته؟{/a}، {a}کله؟{/a} یا {a}څنګه؟{/a} پوښتنو ته ځواب ورکوي.",
+        uk: "Додаток відповідає на запитання {a}де?{/a}, {a}коли?{/a} або {a}як?{/a}.",
       },
       items: [
         "Je vais à l'école. → Je vais où ? → {a}à l'école{/a}",
         "Je travaille le matin. → Je travaille quand ? → {a}le matin{/a}",
-        "Il marche lentement → Il marche comment ? → {a}lentement{/(a)} ",
-
+        "Il marche lentement → Il marche comment ? → {a}lentement{/a}",
       ],
-      noBulletItems: [0],
+      noBulletItems: [0, 1, 2],
       transLabel: {
-
-      },
-      transItems: {
-      
+        en: "CC — Circumstantial Complement",
+        ar: "المتمم الظرفي",
+        fa: "متمم قیدی",
+        pt: "CC — Complemento Circunstancial",
+        so: "CC — Dhammaystirka Xaaladda",
+        ti: "CC — መላእታ ኩነታት",
+        tr: "CC — Zarf Tümleci",
+        ps: "CC — حالتي متمم",
+        uk: "CC — Обставина",
       },
     },
   ],

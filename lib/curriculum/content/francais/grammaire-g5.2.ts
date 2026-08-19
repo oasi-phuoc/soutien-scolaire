@@ -21,32 +21,11 @@ export const A1_GR_INTERRO: GrammarLesson = {
     {
       type: "text",
       text: "A l'orale, on peut simplement {a}monter la voix{/a} à la fin de la phrase.",
-    },
       items: [
         "La plus simple : monter la voix à la fin.",
         "La plus courante : utiliser {a}est-ce que{/a}.",
       ],
       transItems: {
-        en: [
-          "The simplest: raise your voice at the end.",
-          "The most common: use {a}est-ce que{/a}.",
-        ],
-        ar: [
-          "الأبسط: رفع الصوت في النهاية.",
-          "الأكثر شيوعاً: استخدام {a}est-ce que{/a}.",
-        ],
-        fa: [
-          "ساده‌ترین: بالا بردن صدا در پایان.",
-          "رایج‌ترین: استفاده از {a}est-ce que{/a}.",
-        ],
-        ti: [
-          "ዝቐለለ: ድምጺ ኣብ መወዳእታ ምድራዕ.",
-          "ዝበዝሐ: {a}est-ce que{/a} ምጥቃም.",
-        ],
-        uk: [
-          "Найпростіший: підвищити голос наприкінці.",
-          "Найпоширеніший: використовувати {a}est-ce que{/a}.",
-        ],
       },
     },
     {
