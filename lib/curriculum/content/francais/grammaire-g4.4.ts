@@ -104,6 +104,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
     {
       type: "grid",
       headers: ["Expression", "Signification"],
+      colWidths: ["40%", "60"],
       rows: [
         ["{a}un kilo de{/a} pommes", "mesure de poids"],
         ["{a}une bouteille de{/a} lait", "quantité contenue dans une bouteille", ],
@@ -175,6 +176,7 @@ export const A1_GR_EXPRESSION_QUANTITE: GrammarLesson = {
     {
       type: "grid",
       headers: ["Expression", "Signification"],
+      colWidths: ["40%", "60"],
       rows: [
         ["Il mange {a}trop de{/a} chocolat.", "quantité excessive, plus que nécessaire"],
         ["Nous avons {a}beaucoup de{/a} travail.", "grande quantité", ],

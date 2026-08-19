@@ -24,14 +24,12 @@ export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {
     },
     {
       type: "text",
-      text: "L'article partitif est utilisé pour parler d'une quantité indéterminée  — une partie de quelque chose que l'on ne peut pas compter.",
+      text: "L'article partitif est utilisé pour parler d'une {a}quantité indéterminée{/a}  — une partie de quelque chose que l'on {a}ne peut pas compter{/a}.",
       transText: {},
     },
     {
       type: "text",
       label: "Choses concrètes",
-      text: "On utilise un poulet pour représenter le poulet entier. Tandis qu'on utilise {a}du{/a} poulet pour représenter une {a}part du poulet{/a}.",
-      transText: {},  
       items: [
         "{a}du{/a} poulet",
         "{a}de la{/a} pizza",
@@ -42,8 +40,6 @@ export const A1_GR_ARTICLE_PARTITIF: GrammarLesson = {
     {
       type: "text",
       label: "Choses abstraites",
-      text : "",
-      transText: {},  
       items: [
         "{a}du{/a} courage",
         "{a}de la{/a} chance",

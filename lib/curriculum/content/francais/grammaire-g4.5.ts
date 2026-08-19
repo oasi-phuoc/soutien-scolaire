@@ -17,7 +17,6 @@ export const A1_GR_L18: GrammarLesson = {
       items: [
         "Regarde, {a}ces{/a} tableaux sont vraiment intéressants.",
       ],
-      allBullets: true,
     },
     {
       type: "text",
@@ -25,7 +24,6 @@ export const A1_GR_L18: GrammarLesson = {
       items: [
         "Le tableau est de Vincent van Gogh. {a}Cet{/a} artiste a vécu au XIXe siècle.",
       ],
-      allBullets: true,
     },
     {
       type: "text",
@@ -33,7 +31,6 @@ export const A1_GR_L18: GrammarLesson = {
       items: [
         "Cette semaine, je vais au musée du Louvre",
       ],
-      allBullets: true,
     },
     {
       type: "heading",

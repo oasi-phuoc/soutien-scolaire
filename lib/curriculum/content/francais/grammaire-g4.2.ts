@@ -36,10 +36,10 @@ export const A1_GR_ARTICLES_CONTRACTES: GrammarLesson = {
       boldFirstCol: true,
       colWidths: ["28%", "24%", "48%"],
       rows: [
-        ["à + le", "{a}au{/a}", "Elle est au supermarché."],
-        ["à + les", "{a}aux{/a}", "Elle est aux toilettes."],
-        ["de + le", "{a}du{/a}", "Le couloir du métro."],
-        ["de + les", "{a}des{/a}", "La salle des professeurs."],
+        ["à + le", "{a}au{/a}", "Elle est {a}au{/a} supermarché."],
+        ["à + les", "{a}aux{/a}", "Elle est {a}aux{/a} toilettes."],
+        ["de + le", "{a}du{/a}", "Le couloir {a}du{/a} métro."],
+        ["de + les", "{a}des{/a}", "La salle {a}des{/a} professeurs."],
       ],
     },
     {
