@@ -66,28 +66,56 @@ export const A1_GR_L01: GrammarLesson = {
           ["il → a man", "ils → several men"],
           ["elle → a woman", "elles → several women"],
         ],
+
         ar: [
           ["je → أنا", "nous → عدة أشخاص وأنا"],
           ["tu → صديق", "vous → عدة أشخاص"],
           ["il → رجل", "ils → عدة رجال"],
           ["elle → امرأة", "elles → عدة نساء"],
         ],
+
         fa: [
           ["je → من", "nous → چند نفر و من"],
           ["tu → یک دوست", "vous → چند نفر"],
           ["il → یک مرد", "ils → چند مرد"],
           ["elle → یک زن", "elles → چند زن"],
         ],
-        pt: [["je → eu", "nous → várias pessoas e eu"], ["tu → um amigo", "vous → várias pessoas"], ["il → um homem", "ils → vários homens"], ["elle → uma mulher", "elles → várias mulheres"]],
-        so: [["je → aniga", "nous → dhowr qof iyo aniga"], ["tu → saaxiib", "vous → dhowr qof"], ["il → nin", "ils → dhowr nin"], ["elle → haweeney", "elles → dhowr haween ah"]],
+
+        pt: [
+          ["je → eu", "nous → várias pessoas e eu"],
+          ["tu → um amigo", "vous → várias pessoas"],
+          ["il → um homem", "ils → vários homens"],
+          ["elle → uma mulher", "elles → várias mulheres"],
+        ],
+
+        so: [
+          ["je → aniga", "nous → dhowr qof iyo aniga"],
+          ["tu → saaxiib", "vous → dhowr qof"],
+          ["il → nin", "ils → dhowr nin"],
+          ["elle → haweeney", "elles → dhowr haween ah"],
+        ],
+
         ti: [
           ["je → ኣነ", "nous → ብዙሓት ሰባትን ኣነን"],
           ["tu → ሓደ ዓርኪ", "vous → ብዙሓት ሰባት"],
           ["il → ሓደ ሰብኣይ", "ils → ብዙሓት ሰብኡት"],
           ["elle → ሓንቲ ሰበይቲ", "elles → ብዙሓት ኣንስቲ"],
         ],
-        tr: [["je → ben", "nous → birkaç kişi ve ben"], ["tu → bir arkadaş", "vous → birkaç kişi"], ["il → bir erkek", "ils → birkaç erkek"], ["elle → bir kadın", "elles → birkaç kadın"]],
-        ps: [["je → زه", "nous → څو کسان او زه"], ["tu → یو ملګری", "vous → څو کسان"], ["il → یو سړی", "ils → څو سړي"], ["elle → یوه ښځه", "elles → څو ښځې"]],
+
+        tr: [
+          ["je → ben", "nous → birkaç kişi ve ben"],
+          ["tu → bir arkadaş", "vous → birkaç kişi"],
+          ["il → bir erkek", "ils → birkaç erkek"],
+          ["elle → bir kadın", "elles → birkaç kadın"],
+        ],
+
+        ps: [
+          ["je → زه", "nous → څو کسان او زه"],
+          ["tu → یو ملګری", "vous → څو کسان"],
+          ["il → یو سړی", "ils → څو سړي"],
+          ["elle → یوه ښځه", "elles → څو ښځې"],
+        ],
+
         uk: [
           ["je → я", "nous → кілька осіб і я"],
           ["tu → друг", "vous → кілька осіб"],

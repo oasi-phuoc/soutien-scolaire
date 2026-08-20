@@ -6,7 +6,12 @@ export const A1_GR_PHRASES: GrammarLesson = {
   level: "A1",
   title: "Les phrases",
   theory: [
-    { type: "heading", text: "La structure de la phrase", trans: { en: "The structure of the sentence", ar: "بنية الجملة", fa: "ساختار جمله", ti: "ቅርጺ ሓሳብ", uk: "Структура речення" } },
+    { 
+      type: "heading", 
+      text: "La structure de la phrase", 
+      trans: {
+      },
+    },
     {
       type: "text",
       text: "En français, une phrase simple suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
@@ -104,6 +109,61 @@ export const A1_GR_PHRASES: GrammarLesson = {
         ["Pronom", "{a}Nous{/a} jouons au football."],
         ["Groupe de mots", "{a}Les enfants{/a} courent dans la maison."],
       ],
+      transRows: {
+        en: [
+          ["Noun", "{a}Isabelle{/a} travaille tous les jours."],
+          ["Pronoun", "{a}Nous{/a} jouons au football."],
+          ["Group of words", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        ar: [
+          ["اسم", "{a}Isabelle{/a} travaille tous les jours."],
+          ["ضمير", "{a}Nous{/a} jouons au football."],
+          ["مجموعة كلمات", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        fa: [
+          ["اسم", "{a}Isabelle{/a} travaille tous les jours."],
+          ["ضمیر", "{a}Nous{/a} jouons au football."],
+          ["گروه کلمات", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        pt: [
+          ["Nome", "{a}Isabelle{/a} travaille tous les jours."],
+          ["Pronome", "{a}Nous{/a} jouons au football."],
+          ["Grupo de palavras", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        so: [
+          ["Magac", "{a}Isabelle{/a} travaille tous les jours."],
+          ["Magac-u-yaal", "{a}Nous{/a} jouons au football."],
+          ["Koox erayo ah", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        ti: [
+          ["ስም", "{a}Isabelle{/a} travaille tous les jours."],
+          ["ተውላጠ ስም", "{a}Nous{/a} jouons au football."],
+          ["ጉጅለ ቃላት", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        tr: [
+          ["İsim", "{a}Isabelle{/a} travaille tous les jours."],
+          ["Zamir", "{a}Nous{/a} jouons au football."],
+          ["Kelime grubu", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        ps: [
+          ["نوم", "{a}Isabelle{/a} travaille tous les jours."],
+          ["ضمیر", "{a}Nous{/a} jouons au football."],
+          ["د کلمو ډله", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+
+        uk: [
+          ["Іменник", "{a}Isabelle{/a} travaille tous les jours."],
+          ["Займенник", "{a}Nous{/a} jouons au football."],
+          ["Група слів", "{a}Les enfants{/a} courent dans la maison."],
+        ],
+      },
       transHeaders: {
         en: ["Form", "Example"],
         ar: ["الشكل", "مثال"],
@@ -148,6 +208,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
         "Melina {a}boit{/a} du café.",
         "Elle {a}est{/a} heureuse.",
       ],
+      noBulletItems: [0, 1],
     },
     
     { 
@@ -196,7 +257,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
         uk: "Додаток відповідає на запитання {a}що?{/a} або {a>кого?{/a}.",
       },
       items: [
-        "Je mange une pomme. → Je mange quoi ? →  {a}une pomme{/a}.",
+        "Je mange un fruit. → Je mange quoi ? →  {a}un fruit{/a}.",
       ],
       noBulletItems: [0],
       transLabel: {
