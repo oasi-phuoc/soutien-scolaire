@@ -6,21 +6,6 @@ export const A1_GR_INTERRO: GrammarLesson = {
   level: "A1",
   title: "L'interrogation de base",
   theory: [
-    { 
-      type: "heading", 
-      text: "Comment poser une question", 
-      trans: {
-        en: "How to ask a question",
-        ar: "كيفية طرح سؤال",
-        fa: "چگونه سؤال بپرسیم",
-        pt: "Como fazer uma pergunta",
-        so: "Sida loo weydiiyo su'aal",
-        ti: "ሕቶ ከመይ ጌርና ንሓትት",
-        tr: "Nasıl soru sorulur",
-        ps: "څنګه پوښتنه وکړو",
-        uk: "Як поставити запитання",
-      },
-    },
     {
       type: "text",
       text: "Il y a plusieurs façons de poser une question en français.",
@@ -89,11 +74,28 @@ export const A1_GR_INTERRO: GrammarLesson = {
         ps: "په خبرو او لیکلو دواړو کې، موږ کولی شو د جملې په پیل کې {a}est-ce que{/a} وکاروو. د کلمو ترتیب د مثبتې جملې په څېر هماغسې پاتې کېږي.\n{a}Est-ce que{/a} + {su}فاعل{/su} + {ve}فعل{/ve}؟",
         uk: "І в усному, і в писемному мовленні можна використовувати {a}est-ce que{/a} на початку речення. Порядок слів залишається таким самим, як у стверджувальному реченні.\n{a}Est-ce que{/a} + {su}підмет{/su} + {ve}дієслово{/ve}?",
       },
-      items: [
-        "Tu parle français. → {a}Est-ce que{/a} tu parles français ?",
-        "Cécile vient chez moi. → {a}Est-ce que{/a} Cécile viens chez moi ?",
+    },
+    {
+      type: "grid",
+      headers: ["Affirmative", "Question"],
+      transHeaders: {
+        en: ["Affirmative", "Question"],
+        ar: ["إثبات", "سؤال"],
+        fa: ["مثبت", "سؤال"],
+        pt: ["Afirmativa", "Pergunta"],
+        so: ["Xaqiijin", "Su'aal"],
+        ti: ["ኣወንታዊ", "ሕቶ"],
+        tr: ["Olumlu", "Soru"],
+        ps: ["مثبت", "پوښتنه"],
+        uk: ["Ствердження", "Запитання"],
+      },
+      equalCols: true,
+      rows: [
+        ["Tu parle français.", "{a}Est-ce que{/a} tu parles français ?"],
+        ["Cécile vient chez moi.", "{a}Est-ce que{/a} Cécile vient chez moi ?"],
+        ["Les enfants jouent au ballon", "{a}Est-ce que{/a} les enfants jouent au ballon ?"],
       ],
-      noBulletItems: [0, 1],
+
     },
     {
       type: "text",
@@ -101,7 +103,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       transText: {
       },
       items: [
-        "Est-ce {s}que{/s} il vient demain ? → Est-ce {a}qu'{/a} il vient demain ?",
+        "Est-ce {s}que{/s} il vient ? → Est-ce {a}qu'{/a} il vient ?",
       ],
     },
     {
@@ -133,11 +135,27 @@ export const A1_GR_INTERRO: GrammarLesson = {
         ps: "په رسمي ژبه او لیکلې بڼه کې، د پوښتنې کولو لپاره د {a}فعل{/a} او {a}فاعل{/a} ځایونه بدلوو.",
         uk: "У більш офіційному мовленні та в писемній формі ми міняємо місцями {a}дієслово{/a} і {a}підмет{/a}, щоб поставити запитання.",
       },
-      items: [
-        "Tu parles français. → {a}Parles-tu{/a} français ?",
-        "Vous aimez le cinéma. → {a}Aimez-vous{/a} le cinéma ?",
+    },
+    {
+      type: "grid",
+      headers: ["Affirmative", "Question"],
+      transHeaders: {
+        en: ["Affirmative", "Question"],
+        ar: ["إثبات", "سؤال"],
+        fa: ["مثبت", "سؤال"],
+        pt: ["Afirmativa", "Pergunta"],
+        so: ["Xaqiijin", "Su'aal"],
+        ti: ["ኣወንታዊ", "ሕቶ"],
+        tr: ["Olumlu", "Soru"],
+        ps: ["مثبت", "پوښتنه"],
+        uk: ["Ствердження", "Запитання"],
+      },
+      equalCols: true,
+      rows: [
+        ["Tu parle français.", "{a}Parles-tu{/a} français ?"],
+        ["Cécile vient chez moi.", "Cécile {a}vient-elle{/a}  chez moi ?"],
+        ["Les enfants jouent au ballon", "Les enfants {a}jouent-ils{/a} au ballon ?"],
       ],
-      noBulletItems: [0, 1],
     },
   ],
   exercises: [

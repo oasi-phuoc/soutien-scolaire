@@ -8,21 +8,6 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
   title: "Les questions fermées",
   theory: [
     {
-      type: "heading",
-      text: "Utilisation",
-      trans: {
-        en: "Uses",
-        ar: "الاستخدام",
-        fa: "کاربرد",
-        pt: "Utilização",
-        so: "Isticmaalka",
-        ti: "ኣጠቓቕማ",
-        tr: "Kullanım",
-        ps: "کارونه",
-        uk: "Вживання",
-      },
-    },
-    {
       type: "text",
       text: "La {a}question fermée{/a} demande simplement de répondre par {a}oui{/a} ou {a}non{/a}.",
       transText: {
@@ -74,7 +59,6 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       rows: [
         ["{a}Oui{/a}", "Réponse {a}affirmative{/a}", "Tu aimes le café ?\n— {a}Oui{/a}, j'aime le café."],
         ["{a}Non{/a}", "Réponse {a}négative{/a}", "Tu aimes le café ?\n— {a}Non{/a}, je {a}n'{/a}aime {a}pas{/a} le café."],
-        ["{a}Si{/a}", "Réponse {a}affirmative{/a} à une question {a}négative{/a}", "Tu {a}ne{/a} parles {a}pas{/a} français ?\n— {a}Si{/a}, je parle français !"],
       ],
       transHeaders: {
         en: ["Answer", "When to use it", "Example"],
@@ -161,11 +145,26 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
         ps: "{a}Si{/a} د یوې {a}منفي{/a} پوښتنې لپاره د {a}مثبت{/a} ځواب ورکولو او د منفي کولو د ردولو لپاره کارېږي.",
         uk: "{a}Si{/a} вживається, щоб дати {a}ствердну{/a} відповідь на {a}заперечне{/a} запитання та спростувати заперечення.",
       },
-      items: [
-        "Tu ne viens pas ?\nAffirmative → {a}Si{/a}, je viens !\nNégative → Non, je ne viens pas.",
-        "Il ne parle pas francais ?\nAffirmative → {a}Si{/a}, il parle français !\nNégative → Non, il ne parle pas français.",
+    },
+    {
+      type: "grid",
+      headers: ["Question", "Affirmative", "Négative"],
+      transHeaders: {
+        en: ["Question", "Affirmative", "Negative"],
+        ar: ["سؤال", "إثبات", "نفي"],
+        fa: ["سؤال", "مثبت", "منفی"],
+        pt: ["Pergunta", "Afirmativa", "Negativa"],
+        so: ["Su'aal", "Xaqiijin", "Diidmo"],
+        ti: ["ሕቶ", "ኣወንታዊ", "ኣሉታዊ"],
+        tr: ["Soru", "Olumlu", "Olumsuz"],
+        ps: ["پوښتنه", "مثبت", "منفي"],
+        uk: ["Запитання", "Ствердження", "Заперечення"],
+      },
+      equalCols: true,
+      rows: [
+        ["Tu ne viens pas ?", "{a}Si{/a}, je viens !", "Non, je ne viens pas."],
+        ["Lisa ne parle pas francais ?", "{a}Si{/a}, elle parle français !", "Non, elle ne parle pas français."],
       ],
-      noBulletItems: [0,1],
     },
     { 
       type: "heading", 
