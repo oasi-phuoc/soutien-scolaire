@@ -1019,9 +1019,9 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
     },
   
     {
-      type: "text",
-      label: "Les prépositions",
-      transLabel: {
+      type: "heading",
+      text: "Les prépositions",
+      trans: {
         en: "Prepositions",
         ar: "حروف الجر",
         fa: "حروف اضافه",
