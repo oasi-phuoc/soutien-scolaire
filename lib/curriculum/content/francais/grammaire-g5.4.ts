@@ -1032,6 +1032,9 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
         ps: "حروف اضافه",
         uk: "Прийменники",
       },
+    },
+    {
+      type: "text",
       text: "Avec une préposition ({a}à{/a}, {a}de{/a}, {a}avec{/a}, {a}pour{/a}, {a}chez{/a}, {a}dans{/a}, etc.), {a}qui{/a} et {a}quoi{/a} peuvent être placés au début ou à la fin de la question.",
       transText: {
       en: "With a preposition ({a}à{/a}, {a}de{/a}, {a}avec{/a}, {a}pour{/a}, {a}chez{/a}, {a}dans{/a}, etc.), {a}qui{/a} and {a}quoi{/a} can be placed at the beginning or at the end of the question.",
@@ -1061,12 +1064,12 @@ export const A1_GR_QUESTION_OUVERTE_QUI: GrammarLesson = {
       },
       colWidths: ["20%", "40%", "40%"],
       rows: [
-        ["{a}à{/a}", "À qui tu parles ?", "Tu parles à qui ?"],
-        ["{a}de{/a}", "De quoi tu parles ?", "Tu parles de quoi ?"],
-        ["{a}avec{/a}", "Avec qui tu travailles ?", "Tu travailles avec qui ?"],
-        ["{a}pour{/a}", "Pour qui tu achètes ce cadeau ?", "Tu achètes ce cadeau pour qui ?"],
-        ["{a}chez{/a}", "Chez qui tu vas ?", "Tu vas chez qui ?"],
-        ["{a}dans{/a}", "Dans quoi tu mets les clés ?", "Tu mets les clés dans quoi ?"],
+        ["{a}à{/a}", "{a}À qui{/a} tu parles ?", "Tu parles {a}à qui{/a} ?"],
+        ["{a}de{/a}", "{a}De quoi{/a} tu parles ?", "Tu parles {a}de quoi{/a} ?"],
+        ["{a}avec{/a}", "{a}Avec qui{/a} tu travailles ?", "Tu travailles {a}avec qui{/a} ?"],
+        ["{a}pour{/a}", "{a}Pour qui{/a} tu achètes ce cadeau ?", "Tu achètes ce cadeau {a}pour qui{/a} ?"],
+        ["{a}chez{/a}", "{a}Chez qui{/a} tu vas ?", "Tu vas {a}chez qui{/a} ?"],
+        ["{a}dans{/a}", "{a}Dans quoi{/a} tu mets les clés ?", "Tu mets les clés {a}dans quoi{/a} ?"],
       ],
     },
   ],

@@ -9,16 +9,8 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
   title: "La négation",
   theory: [
     {
-      type: "heading",
-      text: "Utilisation",
-    },
-    {
       type: "text",
-      items: [
-        "La phrase négative exprime le contraire d'une phrase affirmative.",
-        "Je suis marié. ≠ Je ne suis pas marié.",
-      ],
-      allBullets: true,
+      text: "La phrase négative exprime le {a}contraire{/a} d'une phrase affirmative.",
     },
     {
       type: "heading",
@@ -26,37 +18,24 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     },
     {
       type: "text",
-      label: "ne… pas",
+      label: "ne … pas",
+      text: "La négation est composée de deux mots placés de part et d'autre du verbe conjugué : {a}ne{/a} + verbe + {a}pas{/a}.", 
       items: [
-        "La négation est composée de deux mots placés de part et d'autre du verbe conjugué : {a}ne{/a} + verbe + {a}pas{/a}.",
-        "Je ne suis pas célibataire.",
-        "Tu ne travailles pas dans une banque.",
+        "Je suis célibataire. → Je {a}ne{/a} suis {a}pas{/a} célibataire.",
+        "Tu travailles dans une banque. → Tu {a}ne{/a} travailles {a}pas{/a} dans une banque.",
       ],
-      noBulletItems: [1, 2],
+      noBulletItems: [0, 1],
     },
     {
       type: "text",
-      label: "ne… pas de",
+      label: "ne … pas de",
+      text: "L'article indéfini {a}un{/a}, {a}une{/a}, {a}des{/a} est remplacé par {a}de{/a} / {a}d'{/a}.", 
       items: [
-        "L'article indéfini {a}un{/a}, {a}une{/a}, {a}des{/a} est remplacé par {a}de{/a} / {a}d'{/a}.",
-        "Il a un frère ? → Non, il n'a pas de frère.",
-        "Tu as une sœur ? → Non, je n'ai pas de sœur.",
-        "Vous avez des petits-enfants ? → Non, nous n'avons pas de petits-enfants.",
+        "Il a un frère ? → Non, il {a}n'{/a}a {a}pas de{/a} frère.",
+        "Tu as une sœur ? → Non, je {a}n'{/a}ai {a}pas de{/a} sœur.",
+        "Vous avez des petits-enfants ? → Non, nous {a}n'{/a}avons {a}pas de{/a} petits-enfants.",
       ],
-      noBulletItems: [1, 2, 3],
-    },
-    {
-      type: "heading",
-      text: "Prononciation et orthographe",
-    },
-    {
-      type: "text",
-      items: [
-        "{a}Ne{/a} → {a}n'{/a} devant une voyelle ou un h muet. → Il n'est pas marié. ; Il n'habite pas à Lyon.",
-        "{a}Pas de{/a} → {a}pas d'{/a} devant une voyelle ou un h muet. → Il n'a pas d'enfants.",
-        "À l'oral, on ne prononce pas toujours le {a}e{/a} de {a}ne{/a}, ni parfois le {a}ne{/a} entier. → On (ne) joue pas au foot.",
-      ],
-      allBullets: true,
+      noBulletItems: [0, 1, 2],
     },
     {
       type: "heading",
