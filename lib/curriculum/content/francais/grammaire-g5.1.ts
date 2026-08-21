@@ -7,6 +7,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
   title: "Les phrases",
   theory: [
     { 
+      type: "heading",
       text: "La structure de la phrase",
       trans: {
         en: "Sentence structure",
