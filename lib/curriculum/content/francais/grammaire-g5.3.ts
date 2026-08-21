@@ -162,8 +162,8 @@ export const A1_GR_QUESTION_TOTALE: GrammarLesson = {
       },
       equalCols: true,
       rows: [
-        ["Tu ne viens pas ?", "{a}Si{/a}, je viens !", "Non, je ne viens pas."],
-        ["Lisa ne parle pas francais ?", "{a}Si{/a}, elle parle français !", "Non, elle ne parle pas français."],
+        ["Tu ne viens pas ?", "{a}Si{/a}, je viens !", "{a}Non{/a}, je {a}ne{/a} viens {a}pas{/a}."],
+        ["Lisa ne parle pas francais ?", "{a}Si{/a}, elle parle français !", "{a}Non{/a}, elle {a}ne{/a} parle {a}pas{/a} français."],
       ],
     },
     { 
