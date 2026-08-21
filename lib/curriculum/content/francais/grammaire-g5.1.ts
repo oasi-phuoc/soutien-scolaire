@@ -7,9 +7,17 @@ export const A1_GR_PHRASES: GrammarLesson = {
   title: "Les phrases",
   theory: [
     { 
-      type: "heading", 
-      text: "La structure de la phrase", 
+      text: "La structure de la phrase",
       trans: {
+        en: "Sentence structure",
+        ar: "بنية الجملة",
+        fa: "ساختار جمله",
+        pt: "Estrutura da frase",
+        so: "Qaab-dhismeedka jumladda",
+        ti: "ኣቀማምጣ ሓረግ",
+        tr: "Cümle yapısı",
+        ps: "د جملې جوړښت",
+        uk: "Структура речення",
       },
     },
     {
