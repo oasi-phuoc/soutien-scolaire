@@ -10,7 +10,7 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "heading",
       text: "Pourquoi utiliser un pronom ?",
-       trans: {
+      trans: {
         en: "Why use a pronoun?",
         ar: "لماذا نستخدم ضميرًا؟",
         fa: "چرا از ضمیر استفاده می‌کنیم؟",
@@ -57,7 +57,23 @@ export const A1_GR_L01: GrammarLesson = {
     {
       type: "heading",
       text: "Les pronoms personnels sujets",
-      trans: { en: "Subject personal pronouns", ar: "ضمائر الفاعل الشخصية", fa: "ضمیرهای شخصی فاعلی", pt: "Pronomes pessoais sujeitos", so: "Magac-u-yaallada shakhsiga ee falaha", ti: "ናይ ተግባሪ ውልቃዊ ተካእቲ ስማት", tr: "Kişi özne zamirleri", ps: "شخصي فاعلي ضمیرونه", uk: "Особові займенники-підмети" },
+      trans: {
+        en: "Subject personal pronouns",
+        ar: "ضمائر الفاعل الشخصية",
+        fa: "ضمیرهای شخصی فاعلی",
+        pt: "Pronomes pessoais sujeitos",
+        so: "Magac-u-yaallada shakhsiga ee falaha",
+        ti: "ናይ ተግባሪ ውልቃዊ ተካእቲ ስማት",
+        tr: "Kişi özne zamirleri",
+        ps: "شخصي فاعلي ضمیرونه",
+        uk: "Особові займенники-підмети",
+        it: "Pronomi personali soggetto",
+        es: "Pronombres personales sujetos",
+        prs: "ضمیرهای شخصی فاعلی",
+        sq: "Përemrat vetorë kryefjalë",
+        am: "የተገዢ ተውላጠ ስሞች",
+        ru: "Личные местоимения-подлежащие",
+      },
     },
     {
       type: "grid",
@@ -73,6 +89,12 @@ export const A1_GR_L01: GrammarLesson = {
         tr: ["Tekil", "Çoğul"],
         ps: ["مفرد", "جمع"],
         uk: ["Однина", "Множина"],
+        it: ["Singolare", "Plurale"],
+        es: ["Singular", "Plural"],
+        prs: ["مفرد", "جمع"],
+        sq: ["Njëjës", "Shumës"],
+        am: ["ነጠላ", "ብዙ"],
+        ru: ["Единственное число", "Множественное число"],
       },
       colWidths: ["35%", "65%"],
       rows: [
@@ -88,68 +110,112 @@ export const A1_GR_L01: GrammarLesson = {
           ["il → a man", "ils → several men"],
           ["elle → a woman", "elles → several women"],
         ],
-
         ar: [
           ["je → أنا", "nous → عدة أشخاص وأنا"],
           ["tu → صديق", "vous → عدة أشخاص"],
           ["il → رجل", "ils → عدة رجال"],
           ["elle → امرأة", "elles → عدة نساء"],
         ],
-
         fa: [
           ["je → من", "nous → چند نفر و من"],
           ["tu → یک دوست", "vous → چند نفر"],
           ["il → یک مرد", "ils → چند مرد"],
           ["elle → یک زن", "elles → چند زن"],
         ],
-
         pt: [
           ["je → eu", "nous → várias pessoas e eu"],
           ["tu → um amigo", "vous → várias pessoas"],
           ["il → um homem", "ils → vários homens"],
           ["elle → uma mulher", "elles → várias mulheres"],
         ],
-
         so: [
           ["je → aniga", "nous → dhowr qof iyo aniga"],
           ["tu → saaxiib", "vous → dhowr qof"],
           ["il → nin", "ils → dhowr nin"],
           ["elle → haweeney", "elles → dhowr haween ah"],
         ],
-
         ti: [
           ["je → ኣነ", "nous → ብዙሓት ሰባትን ኣነን"],
           ["tu → ሓደ ዓርኪ", "vous → ብዙሓት ሰባት"],
           ["il → ሓደ ሰብኣይ", "ils → ብዙሓት ሰብኡት"],
           ["elle → ሓንቲ ሰበይቲ", "elles → ብዙሓት ኣንስቲ"],
         ],
-
         tr: [
           ["je → ben", "nous → birkaç kişi ve ben"],
           ["tu → bir arkadaş", "vous → birkaç kişi"],
           ["il → bir erkek", "ils → birkaç erkek"],
           ["elle → bir kadın", "elles → birkaç kadın"],
         ],
-
         ps: [
           ["je → زه", "nous → څو کسان او زه"],
           ["tu → یو ملګری", "vous → څو کسان"],
           ["il → یو سړی", "ils → څو سړي"],
           ["elle → یوه ښځه", "elles → څو ښځې"],
         ],
-
         uk: [
           ["je → я", "nous → кілька осіб і я"],
           ["tu → друг", "vous → кілька осіб"],
           ["il → чоловік", "ils → кілька чоловіків"],
           ["elle → жінка", "elles → кілька жінок"],
         ],
+        it: [
+          ["je → io", "nous → diverse persone e io"],
+          ["tu → un amico", "vous → diverse persone"],
+          ["il → un uomo", "ils → diversi uomini"],
+          ["elle → una donna", "elles → diverse donne"],
+        ],
+        es: [
+          ["je → yo", "nous → varias personas y yo"],
+          ["tu → un amigo", "vous → varias personas"],
+          ["il → un hombre", "ils → varios hombres"],
+          ["elle → una mujer", "elles → varias mujeres"],
+        ],
+        prs: [
+          ["je → من", "nous → چند نفر و من"],
+          ["tu → یک دوست", "vous → چند نفر"],
+          ["il → یک مرد", "ils → چند مرد"],
+          ["elle → یک زن", "elles → چند زن"],
+        ],
+        sq: [
+          ["je → unë", "nous → disa persona dhe unë"],
+          ["tu → një mik", "vous → disa persona"],
+          ["il → një burrë", "ils → disa burra"],
+          ["elle → një grua", "elles → disa gra"],
+        ],
+        am: [
+          ["je → እኔ", "nous → በርካታ ሰዎች እና እኔ"],
+          ["tu → አንድ ጓደኛ", "vous → በርካታ ሰዎች"],
+          ["il → አንድ ወንድ", "ils → በርካታ ወንዶች"],
+          ["elle → አንዲት ሴት", "elles → በርካታ ሴቶች"],
+        ],
+        ru: [
+          ["je → я", "nous → несколько человек и я"],
+          ["tu → друг", "vous → несколько человек"],
+          ["il → мужчина", "ils → несколько мужчин"],
+          ["elle → женщина", "elles → несколько женщин"],
+        ],
       },
     },
     {
       type: "heading",
       text: "Cas spéciaux",
-      trans: { en: "Special cases", ar: "حالات خاصة", fa: "حالت‌های خاص", pt: "Casos especiais", so: "Xaalado gaar ah", ti: "ፍሉያት ኩነታት", tr: "Özel durumlar", ps: "ځانګړي حالتونه", uk: "Особливі випадки" },
+      trans: {
+        en: "Special cases",
+        ar: "حالات خاصة",
+        fa: "حالت‌های خاص",
+        pt: "Casos especiais",
+        so: "Xaalado gaar ah",
+        ti: "ፍሉያት ኩነታት",
+        tr: "Özel durumlar",
+        ps: "ځانګړي حالتونه",
+        uk: "Особливі випадки",
+        it: "Casi speciali",
+        es: "Casos especiales",
+        prs: "حالت‌های خاص",
+        sq: "Raste të veçanta",
+        am: "ልዩ ሁኔታዎች",
+        ru: "Особые случаи",
+      },
     },
     {
       type: "text",
@@ -169,6 +235,12 @@ export const A1_GR_L01: GrammarLesson = {
         tr: "Birkaç kişiyi (= nous) temsil etmek için {a}on{/a} kullanılır. Gayriresmî konuşma Fransızcasında çok yaygındır. Fiil her zaman tekildir.",
         ps: "موږ {a}on{/a} د څو کسانو (= nous) د ښودلو لپاره کاروو. دا په غیررسمي ویلې فرانسوي کې ډېر عام دی. فعل تل مفرد وي.",
         uk: "{a}On{/a} вживаємо на позначення кількох осіб (= nous). Цей займенник дуже поширений у неформальному усному мовленні. Дієслово завжди стоїть в однині.",
+        it: "Usiamo {a}on{/a} per rappresentare più persone (= nous). È molto usato nel francese parlato informale. Il verbo è sempre al singolare.",
+        es: "Usamos {a}on{/a} para representar a varias personas (= nous). Se usa mucho en el francés oral informal. El verbo siempre está en singular.",
+        prs: "از {a}on{/a} برای نشان دادن چند نفر (= nous) استفاده می‌کنیم. این ضمیر در گفتار غیررسمی بسیار رایج است. فعل همیشه مفرد است.",
+        sq: "Përdorim {a}on{/a} për të përfaqësuar disa persona (= nous). Përdoret shumë në frëngjishten e folur joformale. Folja është gjithmonë në njëjës.",
+        am: "{a}on{/a}ን ብዙ ሰዎችን (= nous) ለመወከል እንጠቀማለን። በኢመደበኛ የንግግር ፈረንሳይኛ በጣም የተለመደ ነው። ግሱ ሁልጊዜ በነጠላ ነው።",
+        ru: "«{a}On{/a}» используется для обозначения нескольких людей (= nous). Часто употребляется в неформальной устной речи. Глагол всегда стоит в единственном числе.",
       },
     },
     {
@@ -186,6 +258,12 @@ export const A1_GR_L01: GrammarLesson = {
         tr: "Tanıdığımız biriyle gayriresmî bir durumda konuşmak için {a}tu{/a} kullanılır.",
         ps: "موږ {a}tu{/a} له هغه چا سره د خبرو لپاره کاروو چې پېژنو یې، په غیررسمي حالت کې.",
         uk: "{a}Tu{/a} вживаємо, коли звертаємося до знайомої людини в неформальній ситуації.",
+        it: "Usiamo {a}tu{/a} per parlare a una persona che conosciamo, in una situazione informale.",
+        es: "Usamos {a}tu{/a} para hablar con una persona que conocemos, en una situación informal.",
+        prs: "ما از {a}tu{/a} برای صحبت با کسی که می‌شناسیم، در یک وضعیت غیررسمی، استفاده می‌کنیم.",
+        sq: "Përdorim {a}tu{/a} për t'i folur një personi që e njohim, në një situatë joformale.",
+        am: "{a}tu{/a}ን የምንጠቀመው ከምናውቀው ሰው ጋር በኢመደበኛ ሁኔታ ውስጥ ለመነጋገር ነው።",
+        ru: "«{a}Tu{/a}» используется, чтобы обратиться к знакомому человеку в неформальной ситуации.",
       },
     },
     {
@@ -204,6 +282,12 @@ export const A1_GR_L01: GrammarLesson = {
         tr: "Kişiyi tanımadığımızda veya toplumsal roller farklı olduğunda (öğrenci–öğretmen) {a}vous{/a} kullanılır. Buna kibar biçim denir.",
         ps: "موږ {a}vous{/a} هغه وخت کاروو چې کس نه پېژنو یا ټولنیز رولونه توپیر لري (زده کوونکی–ښوونکی). دې ته د ادب بڼه ویل کېږي.",
         uk: "{a}Vous{/a} вживаємо, коли не знаємо людину або коли співрозмовники мають різний статус (учень–викладач). Це називається ввічливою формою.",
+        it: "Usiamo {a}vous{/a} quando non conosciamo la persona o quando lo status è diverso (studente–insegnante). Questa si chiama forma di cortesia.",
+        es: "Usamos {a}vous{/a} cuando no conocemos a la persona o cuando el estatus es diferente (alumno-profesor). Esto se llama la forma de cortesía.",
+        prs: "{a}vous{/a} را زمانی به کار می‌بریم که شخص را نمی‌شناسیم یا جایگاه‌ها متفاوت است (شاگرد–معلم). به این حالت، صورت مؤدبانه گفته می‌شود.",
+        sq: "Përdorim {a}vous{/a} kur nuk e njohim personin ose kur statuset janë të ndryshme (nxënës–mësues). Kjo quhet forma e mirësjelljes.",
+        am: "{a}vous{/a}ን የምንጠቀመው ሰውየውን የማናውቅ ስንሆን ወይም ደረጃው የተለያየ ሲሆን ነው (ተማሪ–መምህር)። ይህ የአክብሮት አገላለጽ ይባላል።",
+        ru: "«{a}Vous{/a}» используется, когда мы не знакомы с человеком или когда статус разный (ученик–учитель). Это называется вежливой формой.",
       },
     },
     {
@@ -221,12 +305,34 @@ export const A1_GR_L01: GrammarLesson = {
         tr: "Çok sayıda kadın ve yalnızca bir erkek olsa bile kadın ve erkeklerden oluşan karışık bir grup için {a}ils{/a} kullanılır.",
         ps: "موږ {a}ils{/a} د ښځو او سړو د ګډې ډلې لپاره کاروو، حتی که ډېرې ښځې او یوازې یو سړی وي.",
         uk: "{a}Ils{/a} вживаємо для змішаної групи жінок і чоловіків, навіть якщо в ній багато жінок і лише один чоловік.",
+        it: "Usiamo {a}ils{/a} quando c'è un gruppo misto di donne e uomini. Anche se ci sono molte donne e un solo uomo.",
+        es: "Usamos {a}ils{/a} cuando hay un grupo mixto de mujeres y hombres. Incluso si hay muchas mujeres y un solo hombre.",
+        prs: "{a}ils{/a} را زمانی استفاده می‌کنیم که گروهی مختلط از زنان و مردان وجود دارد. حتی اگر زنان زیاد و تنها یک مرد باشد.",
+        sq: "Përdorim {a}ils{/a} kur ka një grup të përzier grash dhe burrash. Edhe nëse ka shumë gra dhe vetëm një burrë.",
+        am: "{a}ils{/a}ን የምንጠቀመው የሴቶችና የወንዶች ቅይጥ ቡድን ሲኖር ነው። ብዙ ሴቶች እና አንድ ወንድ ብቻ ቢኖሩም እንኳ።",
+        ru: "«{a}Ils{/a}» используется, когда есть смешанная группа женщин и мужчин. Даже если в ней много женщин и только один мужчина.",
       },
     },
     {
       type: "heading",
       text: "Comment choisir ?",
-      trans: { en: "How to choose?", ar: "كيف نختار؟", fa: "چگونه انتخاب کنیم؟", pt: "Como escolher?", so: "Sidee loo doortaa?", ti: "ብኸመይ ንመርጽ?", tr: "Nasıl seçilir?", ps: "څنګه انتخاب وکړو؟", uk: "Як вибрати?" },
+      trans: {
+        en: "How to choose?",
+        ar: "كيف نختار؟",
+        fa: "چگونه انتخاب کنیم؟",
+        pt: "Como escolher?",
+        so: "Sidee loo doortaa?",
+        ti: "ብኸመይ ንመርጽ?",
+        tr: "Nasıl seçilir?",
+        ps: "څنګه انتخاب وکړو؟",
+        uk: "Як вибрати?",
+        it: "Come scegliere?",
+        es: "¿Cómo elegir?",
+        prs: "چگونه انتخاب کنیم؟",
+        sq: "Si të zgjedhim?",
+        am: "እንዴት መምረጥ ይቻላል?",
+        ru: "Как выбрать?",
+      },
     },
     {
       type: "grid",
@@ -241,6 +347,12 @@ export const A1_GR_L01: GrammarLesson = {
         tr: ["İsim", "Zamir"],
         ps: ["نوم", "ضمیر"],
         uk: ["Іменник", "Займенник"],
+        it: ["Nome", "Pronome"],
+        es: ["Nombre", "Pronombre"],
+        prs: ["اسم", "ضمیر"],
+        sq: ["Emri", "Përemri"],
+        am: ["ስም", "ተውላጠ ስም"],
+        ru: ["Существительное", "Местоимение"],
       },
       colWidths: ["35%", "65%"],
       rows: [
@@ -270,6 +382,12 @@ export const A1_GR_L01: GrammarLesson = {
         tr: "İpucu",
         ps: "لارښوونه",
         uk: "Порада",
+        it: "Consiglio",
+        es: "Consejo",
+        prs: "نکته",
+        sq: "Këshillë",
+        am: "ጠቃሚ ምክር",
+        ru: "Совет",
       },
       transItems: {
         en: [
@@ -299,6 +417,24 @@ export const A1_GR_L01: GrammarLesson = {
         uk: [
           "Поставте запитання «{a}Хто виконує дію?{/a}». Відповідь — це {a}підмет речення{/a}.",
         ],
+        it: [
+          "Fate la domanda “{a}Chi fa l'azione{/a}?” La risposta è il {a}soggetto{/a} della frase.",
+        ],
+        es: [
+          "Haga la pregunta “{a}Quién hace la acción{/a}?” La respuesta es el {a}sujeto{/a} de la frase.",
+        ],
+        prs: [
+          "این پرسش را مطرح کنید «{a}چه کسی این کار را انجام می‌دهد؟{/a}» پاسخ، {a}فاعل جمله{/a} است.",
+        ],
+        sq: [
+          "Bëni pyetjen “{a}Kush e bën veprimin{/a}?” Përgjigja është {a}kryefjala{/a} e fjalisë.",
+        ],
+        am: [
+          "«{a}ድርጊቱን የሚፈጽመው ማን ነው?{/a}» የሚለውን ጥያቄ ይጠይቁ፤ መልሱ የሓሳቡ {a}ተገዢ{/a} ነው።",
+        ],
+        ru: [
+          "Задайте вопрос «{a}Кто выполняет действие{/a}?» Ответ — это {a}подлежащее{/a} предложения.",
+        ],
       },
     },
     {
@@ -314,6 +450,12 @@ export const A1_GR_L01: GrammarLesson = {
         tr: ["Cümle", "Soru", "Özne", "Sonuç"],
         ps: ["جمله", "پوښتنه", "فاعل", "پایله"],
         uk: ["Речення", "Запитання", "Підмет", "Результат"],
+        it: ["Frase", "Domanda", "Soggetto", "Risultato"],
+        es: ["Frase", "Pregunta", "Sujeto", "Resultado"],
+        prs: ["جمله", "پرسش", "فاعل", "نتیجه"],
+        sq: ["Fjalia", "Pyetja", "Kryefjala", "Rezultati"],
+        am: ["ዓረፍተ ነገር", "ጥያቄ", "ተገዢ", "ውጤት"],
+        ru: ["Предложение", "Вопрос", "Подлежащее", "Результат"],
       },
       equalCols: true,
       rows: [
