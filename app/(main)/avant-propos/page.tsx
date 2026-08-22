@@ -234,6 +234,209 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsImages: "Усі зображення згенеровані штучним інтелектом.",
     creditsAudios: "Аудіозаписи взято з книг ABC DELF та 100% FLE Communication essentielle.",
   },
+    sq: {
+    dir: "ltr",
+
+    intro: "Ky aplikacion është krijuar për t'ju ndihmuar të mësoni frëngjishten dhe matematikën. Ai ofron mësime të strukturuara, ushtrime interaktive dhe ndjekje automatike të përparimit tuaj.",
+
+    sectionsTitle: "Seksionet e aplikacionit",
+
+    lecture: "Ju ndihmon të mësoni të lexoni më rrjedhshëm: të dalloni shkronjat, tingujt dhe rrokjet, pastaj të deshifroni dhe të kuptoni tekstet.",
+
+    maths: "Ju ndihmon të përforconi bazat tuaja në matematikë, në algjebër dhe gjeometri, deri në përfundim të arsimit të detyrueshëm.",
+
+    francais: "Ju ndihmon të mësoni bazat e gjuhës frënge, nga niveli A0 deri në nivelin B1: fjalor, gramatikë dhe shprehje me shkrim.",
+
+    howTitle: "Si ta përdorni aplikacionin",
+
+    steps: [
+      "Shtypni butonin \"+\" në fund për të zgjedhur një lëndë.",
+      "Zgjidhni një modul. Modulet e kyçura zhbllokohen ndërsa përparoni.",
+      "Lexoni mësimin dhe më pas bëni ushtrimet. Shtypni \"Vlerëso\" për të parë korrigjimet.",
+      "Kur të jeni gati, filloni vlerësimin. Një notë nga 6 llogaritet automatikisht.",
+      "Pasi të përfundoni me sukses një modul (notë ≥ 4.0), moduli tjetër zhbllokohet.",
+    ],
+
+    creditsTitle: "Kreditet",
+
+    creditsPhuoc: "Konceptimi dhe zhvillimi i aplikacionit",
+
+    creditsMelina: "Kontribut — Lexim dhe Alfabetizim",
+
+    creditsImages: "Të gjitha imazhet janë krijuar me inteligjencë artificiale.",
+
+    creditsAudios: "Audiot janë marrë nga librat ABC DELF dhe 100% FLE Communication essentielle.",
+  },
+
+  am: {
+    dir: "ltr",
+
+    intro: "ይህ መተግበሪያ ፈረንሳይኛ ቋንቋ እና ሂሳብ እንዲማሩ ለመርዳት የተዘጋጀ ነው። የተደራጁ ትምህርቶችን፣ በይነተገናኝ ልምምዶችን እና የእድገትዎን አውቶማቲክ ክትትል ያቀርባል።",
+
+    sectionsTitle: "የመተግበሪያው ክፍሎች",
+
+    lecture: "በበለጠ አቀላጥፎ ማንበብ እንዲማሩ ይረዳዎታል፦ ፊደላትን፣ ድምፆችን እና የቃላት ክፍሎችን መለየት፣ ከዚያም ጽሑፎችን መፍታትና መረዳት።",
+
+    maths: "እስከ የግዴታ ትምህርት መጨረሻ ድረስ በአልጀብራ እና በጂኦሜትሪ ያሉ የሂሳብ መሠረቶችዎን እንዲያጠናክሩ ይረዳዎታል።",
+
+    francais: "ከA0 እስከ B1 ደረጃ ድረስ የፈረንሳይኛ ቋንቋን መሠረታዊ እውቀት እንዲማሩ ይረዳዎታል፦ የቃላት እውቀት፣ ሰዋሰው እና የጽሑፍ አገላለጽ።",
+
+    howTitle: "መተግበሪያውን እንዴት መጠቀም ይቻላል",
+
+    steps: [
+      "ትምህርት ለመምረጥ ከታች ያለውን \"+\" ቁልፍ ይጫኑ።",
+      "ሞጁል ይምረጡ። የተቆለፉ ሞጁሎች በእድገትዎ መሠረት ይከፈታሉ።",
+      "ትምህርቱን ያንብቡ፣ ከዚያም ልምምዶቹን ያድርጉ። ማስተካከያዎቹን ለማየት \"አረጋግጥ\" የሚለውን ይጫኑ።",
+      "ዝግጁ ሲሆኑ ግምገማውን ይጀምሩ። ከ6 የሚሆን ውጤት በራስ-ሰር ይሰላል።",
+      "አንድ ሞጁል በተሳካ ሁኔታ ካለፉ (ውጤት ≥ 4.0)፣ ቀጣዩ ሞጁል ይከፈታል።",
+    ],
+
+    creditsTitle: "ምስጋና",
+
+    creditsPhuoc: "የመተግበሪያው ዲዛይንና ልማት",
+
+    creditsMelina: "አስተዋጽኦ — ንባብ እና መሠረታዊ የንባብ ችሎታ",
+
+    creditsImages: "ሁሉም ምስሎች በሰው ሰራሽ እውቀት የተፈጠሩ ናቸው።",
+
+    creditsAudios: "የድምፅ ቅጂዎቹ ከABC DELF እና 100% FLE Communication essentielle መጻሕፍት የተወሰዱ ናቸው።",
+  },
+
+  prs: {
+    dir: "rtl",
+
+    intro: "این برنامه برای کمک به یادگیری زبان فرانسوی و ریاضیات طراحی شده است. این برنامه درس‌های منظم، تمرین‌های تعاملی و پیگیری خودکار پیشرفت شما را ارائه می‌دهد.",
+
+    sectionsTitle: "بخش‌های برنامه",
+
+    lecture: "به شما کمک می‌کند روان‌تر خواندن را یاد بگیرید: شناخت حروف، صداها و هجاها، سپس رمزگشایی و درک متن‌ها.",
+
+    maths: "به شما کمک می‌کند پایه‌های ریاضی خود را در جبر و هندسه تا پایان آموزش اجباری تقویت کنید.",
+
+    francais: "به شما کمک می‌کند مبانی زبان فرانسوی را از سطح A0 تا سطح B1 یاد بگیرید: واژگان، دستور زبان و بیان نوشتاری.",
+
+    howTitle: "چگونه از برنامه استفاده کنیم",
+
+    steps: [
+      "برای انتخاب یک مضمون، دکمه \"+\" را در پایین صفحه فشار دهید.",
+      "یک ماژول را انتخاب کنید. ماژول‌های قفل‌شده با پیشرفت شما باز می‌شوند.",
+      "درس را بخوانید و سپس تمرین‌ها را انجام دهید. برای دیدن اصلاحات، روی \"تأیید\" فشار دهید.",
+      "وقتی آماده شدید، ارزیابی را شروع کنید. نمره‌ای از ۶ به‌صورت خودکار محاسبه می‌شود.",
+      "پس از موفقیت در یک ماژول (نمره ≥ 4.0)، ماژول بعدی باز می‌شود.",
+    ],
+
+    creditsTitle: "درباره برنامه",
+
+    creditsPhuoc: "طراحی و توسعه برنامه",
+
+    creditsMelina: "همکاری — خواندن و سوادآموزی",
+
+    creditsImages: "تمام تصاویر با استفاده از هوش مصنوعی تولید شده‌اند.",
+
+    creditsAudios: "فایل‌های صوتی از کتاب‌های ABC DELF و 100% FLE Communication essentielle گرفته شده‌اند.",
+  },
+
+  es: {
+    dir: "ltr",
+
+    intro: "Esta aplicación ha sido diseñada para ayudarte a aprender francés y matemáticas. Ofrece lecciones estructuradas, ejercicios interactivos y un seguimiento automático de tu progreso.",
+
+    sectionsTitle: "Secciones de la aplicación",
+
+    lecture: "Te ayuda a aprender a leer con mayor fluidez: reconocer letras, sonidos y sílabas, y después descifrar y comprender textos.",
+
+    maths: "Te ayuda a consolidar tus bases de matemáticas en álgebra y geometría, hasta el final de la escolaridad obligatoria.",
+
+    francais: "Te ayuda a aprender las bases del francés, desde el nivel A0 hasta el nivel B1: vocabulario, gramática y expresión escrita.",
+
+    howTitle: "Cómo utilizar la aplicación",
+
+    steps: [
+      "Pulsa el botón \"+\" de la parte inferior para elegir una materia.",
+      "Selecciona un módulo. Los módulos bloqueados se desbloquean a medida que avanzas.",
+      "Lee la lección y después haz los ejercicios. Pulsa \"Validar\" para ver las correcciones.",
+      "Cuando estés preparado(a), inicia la evaluación. La nota sobre 6 se calcula automáticamente.",
+      "Una vez superado un módulo (nota ≥ 4,0), se desbloquea el siguiente.",
+    ],
+
+    creditsTitle: "Créditos",
+
+    creditsPhuoc: "Diseño y desarrollo de la aplicación",
+
+    creditsMelina: "Colaboración — Lectura y Alfabetización",
+
+    creditsImages: "Todas las imágenes han sido generadas mediante inteligencia artificial.",
+
+    creditsAudios: "Los audios proceden de los libros ABC DELF y 100% FLE Communication essentielle.",
+  },
+
+  it: {
+    dir: "ltr",
+
+    intro: "Questa applicazione è stata progettata per aiutarti a imparare il francese e la matematica. Offre lezioni strutturate, esercizi interattivi e un monitoraggio automatico dei tuoi progressi.",
+
+    sectionsTitle: "Sezioni dell'applicazione",
+
+    lecture: "Ti aiuta a imparare a leggere in modo più fluido: riconoscere lettere, suoni e sillabe, poi decifrare e comprendere i testi.",
+
+    maths: "Ti aiuta a consolidare le basi della matematica in algebra e geometria, fino alla fine della scuola dell'obbligo.",
+
+    francais: "Ti aiuta a imparare le basi del francese, dal livello A0 al livello B1: vocabolario, grammatica ed espressione scritta.",
+
+    howTitle: "Come utilizzare l'applicazione",
+
+    steps: [
+      "Premi il pulsante \"+\" in basso per scegliere una materia.",
+      "Seleziona un modulo. I moduli bloccati si sbloccano man mano che fai progressi.",
+      "Leggi la lezione e poi svolgi gli esercizi. Premi \"Convalida\" per vedere le correzioni.",
+      "Quando sei pronto/a, avvia la valutazione. Un voto su 6 viene calcolato automaticamente.",
+      "Una volta superato un modulo (voto ≥ 4,0), si sblocca quello successivo.",
+    ],
+
+    creditsTitle: "Crediti",
+
+    creditsPhuoc: "Progettazione e sviluppo dell'applicazione",
+
+    creditsMelina: "Collaborazione — Lettura e Alfabetizzazione",
+
+    creditsImages: "Tutte le immagini sono generate mediante intelligenza artificiale.",
+
+    creditsAudios: "Gli audio provengono dai libri ABC DELF e 100% FLE Communication essentielle.",
+  },
+
+  ru: {
+    dir: "ltr",
+
+    intro: "Это приложение создано, чтобы помочь вам изучать французский язык и математику. Оно предлагает структурированные уроки, интерактивные упражнения и автоматическое отслеживание прогресса.",
+
+    sectionsTitle: "Разделы приложения",
+
+    lecture: "Помогает научиться читать более бегло: распознавать буквы, звуки и слоги, а затем расшифровывать и понимать тексты.",
+
+    maths: "Помогает укрепить основы математики в области алгебры и геометрии до окончания обязательного образования.",
+
+    francais: "Помогает изучить основы французского языка от уровня A0 до уровня B1: словарный запас, грамматика и письменная речь.",
+
+    howTitle: "Как пользоваться приложением",
+
+    steps: [
+      "Нажмите кнопку \"+\" внизу, чтобы выбрать предмет.",
+      "Выберите модуль. Заблокированные модули открываются по мере вашего прогресса.",
+      "Прочитайте урок, затем выполните упражнения. Нажмите \"Проверить\", чтобы увидеть исправления.",
+      "Когда будете готовы, начните оценивание. Оценка по шкале от 1 до 6 рассчитывается автоматически.",
+      "После успешного прохождения модуля (оценка ≥ 4,0) следующий модуль разблокируется.",
+    ],
+
+    creditsTitle: "Авторы",
+
+    creditsPhuoc: "Концепция и разработка приложения",
+
+    creditsMelina: "Участие — Чтение и грамотность",
+
+    creditsImages: "Все изображения созданы с помощью искусственного интеллекта.",
+
+    creditsAudios: "Аудиоматериалы взяты из книг ABC DELF и 100% FLE Communication essentielle.",
+  },
 };
 
 const FALLBACK: LangContent = CONTENT.fr;
