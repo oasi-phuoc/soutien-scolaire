@@ -7,7 +7,8 @@ export type ConjugRow = { pronoun: string; form: string; phonetic?: string };
 export type ConjugTable = { verb: string; rows: ConjugRow[]; accentForms?: boolean; verbBold?: boolean };
 
 /** Langues pivot (hors français) — alignées sur `lib/pivot-langs.ts`. */
-export type GrammarPivotLang = "en" | "ar" | "fa" | "pt" | "so" | "ti" | "tr" | "ps" | "uk";
+import type { PivotCode } from "../pivot-langs";
+export type GrammarPivotLang = Exclude<PivotCode, "fr">;
 export type Trans = Partial<Record<GrammarPivotLang, string>>;
 type TransList = Partial<Record<GrammarPivotLang, string[]>>;
 
