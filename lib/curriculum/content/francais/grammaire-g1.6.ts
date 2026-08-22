@@ -10,21 +10,6 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
   title: "Les verbes pronominaux",
   theory: [
     {
-      type: "heading",
-      text: "Utilisation",
-      trans: {
-        en: "Usage",
-        ar: "الاستخدام",
-        fa: "کاربرد",
-        pt: "Utilização",
-        so: "Isticmaal",
-        ti: "ኣጠቓቕማ",
-        tr: "Kullanım",
-        ps: "کارونه",
-        uk: "Вживання",
-      },
-    },
-    {
       type: "text",
       text: "Le sujet du verbe fait l'action sur lui-même. Un verbe pronominal est toujours accompagné d'un {a}pronom réfléchi{/a}.",
       transText: {
@@ -37,25 +22,22 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         tr: "Fiilin öznesi eylemi kendi üzerinde gerçekleştirir. Dönüşlü fiil her zaman dönüşlü zamirle birlikte kullanılır.",
         ps: "د فعل فاعل عمل پر خپل ځان ترسره کوي. انعکاسي فعل تل له انعکاسي ضمیر سره راځي.",
         uk: "Підмет виконує дію над самим собою. Зворотне дієслово завжди супроводжується зворотним займенником.",
+        it: "Il soggetto del verbo compie l'azione su se stesso. Un verbo pronominale è sempre accompagnato da un pronome riflessivo.",
+        es: "El sujeto del verbo realiza la acción sobre sí mismo. Un verbo pronominal siempre va acompañado de un pronombre reflexivo.",
+        prs: "فاعل فعل، عمل را روی خودش انجام می‌دهد. فعل ضمیری همیشه با یک ضمیر انعکاسی همراه است.",
+        sq: "Kryefjala e foljes e kryen veprimin mbi vetveten. Një folje vetvetore shoqërohet gjithmonë me një përemër vetvetor.",
+        am: "የግሱ ተገዢ ተግባሩን በራሱ ላይ ይፈጽማል። ርእሰ-ግስ ሁልጊዜ በርእሰ-ተውላጠ ስም ይታጀባል።",
+        ru: "Подлежащее глагола выполняет действие над самим собой. Возвратный глагол всегда сопровождается возвратным местоимением.",
       },
-      items: [
-        "Elle {a}se{/a} regarde dans le miroir.",
-      ],
+      items: ["Elle {a}se{/a} regarde dans le miroir."],
       noBulletItems: [0],
     },
     {
       type: "heading",
       text: "Conjugaison",
       trans: {
-        en: "Conjugation",
-        ar: "التصريف",
-        fa: "صرف",
-        pt: "Conjugação",
-        so: "Sarrifka falka",
-        ti: "ምጽራይ",
-        tr: "Fiil çekimi",
-        ps: "ګردان",
-        uk: "Дієвідміна",
+        en: "Conjugation", ar: "التصريف", fa: "صرف", pt: "Conjugação", so: "Sarrifka falka", ti: "ምጽራይ", tr: "Fiil çekimi", ps: "ګردان", uk: "Дієвідміна",
+        it: "Coniugazione", es: "Conjugación", prs: "صرف", sq: "Zgjedhimi", am: "የግስ ቅርጽ ለውጥ", ru: "Спряжение",
       },
     },
     {
@@ -63,7 +45,7 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
       text: "Les verbes pronominaux se conjuguent avec deux pronoms : le pronom {a}sujet{/a} + un pronom {a}réfléchi{/a} de la même personne.\nÀ l'infinitif, on utilise le pronom {a}se{/a} : se lever, se doucher.",
       transText: {
         en: "Reflexive verbs are conjugated with two pronouns: the {a}subject{/a} pronoun + a {a}reflexive{/a} pronoun for the same person.\nIn the infinitive, the pronoun {a}se{/a} is used: se lever, se doucher.",
-        ar: "تُصرَّف الأفعال الانعكاسية مع ضميرين: ضمير {a}الفاعل{/a} + ضمير {a}انعكاسي{/a} للشخص نفسه.\nفي المصدر، نستخدم الضمير {a}se{/a}: se lever, se doucher.",
+        ar: "تُصرَّف الأفعال الانعكاسية مع ضميرين: ضمير {a}الفاعل{/a} + ضمير {a}انعكاسي{/a} للشخص نفسه.\nفي المصدر، نستخدم الضمير {a}se{/a}: se lever, se doucher.",
         fa: "فعل‌های انعکاسی با دو ضمیر صرف می‌شوند: ضمیر {a}فاعل{/a} + یک ضمیر {a}انعکاسی{/a} برای همان شخص.\nدر مصدر، از ضمیر {a}se{/a} استفاده می‌شود: se lever, se doucher.",
         pt: "Os verbos reflexos conjugam-se com dois pronomes: o pronome {a}sujeito{/a} + um pronome {a}reflexivo{/a} da mesma pessoa.\nNo infinitivo, usa-se o pronome {a}se{/a}: se lever, se doucher.",
         so: "Falalka iscelinta waxaa lagu sarraysiiyaa laba magac-u-yaal: magac-u-yaalka {a}sujiect{/a} + magac-u-yaal {a}iscelin{/a} oo isla qofka ah.\nQaabka infinitif-ka, magac-u-yaalka {a}se{/a} ayaa la isticmaalaa: se lever, se doucher.",
@@ -71,97 +53,51 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         tr: "Dönüşlü fiiller iki zamirle çekilir: {a}özne{/a} zamiri + aynı kişi için bir {a}dönüşlülük{/a} zamiri.\nMastarda {a}se{/a} zamiri kullanılır: se lever, se doucher.",
         ps: "انعکاسي فعلونه له دوو ضمیرونو سره ګردانېږي: د {a}فاعل{/a} ضمیر + د هماغه شخص لپاره یو {a}انعکاسي{/a} ضمیر.\nپه مصدر کې د {a}se{/a} ضمیر کارول کېږي: se lever, se doucher.",
         uk: "Зворотні дієслова відмінюються з двома займенниками: {a}займенником-підметом{/a} + {a}зворотним{/a} займенником тієї самої особи.\nВ інфінітиві вживається займенник {a}se{/a}: se lever, se doucher.",
+        it: "I verbi pronominali si coniugano con due pronomi: il pronome {a}soggetto{/a} + un pronome {a}riflessivo{/a} della stessa persona.\nAll'infinito, si usa il pronome {a}se{/a}: se lever, se doucher.",
+        es: "Los verbos pronominales se conjugan con dos pronombres: el pronombre {a}sujeto{/a} + un pronombre {a}reflexivo{/a} de la misma persona.\nEn infinitivo, se usa el pronombre {a}se{/a}: se lever, se doucher.",
+        prs: "فعل‌های ضمیری با دو ضمیر صرف می‌شوند: ضمیر {a}فاعل{/a} + یک ضمیر {a}انعکاسی{/a} برای همان شخص.\nدر مصدر، از ضمیر {a}se{/a} استفاده می‌شود: se lever, se doucher.",
+        sq: "Foljet vetvetore zgjedhohen me dy përemra: përemri {a}kryefjalë{/a} + një përemër {a}vetvetor{/a} i të njëjtit vetë.\nNë paskajore, përdoret përemri {a}se{/a}: se lever, se doucher.",
+        am: "ርእሰ-ግሶች በሁለት ተውላጠ ስሞች ይዋቀራሉ፦ የ{a}ተገዢ{/a} ተውላጠ ስም + ለተመሳሳዩ ሰው የሚሆን {a}ርእሰ-{/a}ተውላጠ ስም።\nበመደበኛ (ኢንፊኒቲቭ) ቅርጽ፣ ተውላጠ ስም {a}se{/a} ይጠቀማል፦ se lever, se doucher።",
+        ru: "Возвратные глаголы спрягаются с двумя местоимениями: местоимение-{a}подлежащее{/a} + {a}возвратное{/a} местоимение того же лица.\nВ инфинитиве используется местоимение {a}se{/a}: se lever, se doucher.",
       },
     },
     {
       type: "grid",
-      headers: [
-        "Sujet",
-        "Pronom réfléchi",
-      ],
+      headers: ["Sujet", "Pronom réfléchi"],
       transHeaders: {
-        en: [
-          "Subject",
-          "Reflexive pronoun",
-        ],
-        ar: [
-          "الفاعل",
-          "الضمير الانعكاسي",
-        ],
-        fa: [
-          "فاعل",
-          "ضمیر انعکاسی",
-        ],
-        pt: [
-          "Sujeito",
-          "Pronome reflexo",
-        ],
-        so: [
-          "Fale",
-          "Magac-u-yaal iscelin",
-        ],
-        ti: [
-          "ርእሲ",
-          "ርእሰ-ተካኢ ስም",
-        ],
-        tr: [
-          "Özne",
-          "Dönüşlü zamir",
-        ],
-        ps: [
-          "فاعل",
-          "انعکاسي ضمیر",
-        ],
-        uk: [
-          "Підмет",
-          "Зворотний займенник",
-        ],
+        en: ["Subject", "Reflexive pronoun"],
+        ar: ["الفاعل", "الضمير الانعكاسي"],
+        fa: ["فاعل", "ضمیر انعکاسی"],
+        pt: ["Sujeito", "Pronome reflexo"],
+        so: ["Fale", "Magac-u-yaal iscelin"],
+        ti: ["ርእሲ", "ርእሰ-ተካኢ ስም"],
+        tr: ["Özne", "Dönüşlü zamir"],
+        ps: ["فاعل", "انعکاسي ضمیر"],
+        uk: ["Підмет", "Зворотний займенник"],
+        it: ["Soggetto", "Pronome riflessivo"],
+        es: ["Sujeto", "Pronombre reflexivo"],
+        prs: ["فاعل", "ضمیر انعکاسی"],
+        sq: ["Kryefjala", "Përemri vetvetor"],
+        am: ["ተገዢ", "ርእሰ-ተውላጠ ስም"],
+        ru: ["Подлежащее", "Возвратное местоимение"],
       },
-      colWidths: [
-        "35%",
-        "65%",
-      ],
+      colWidths: ["35%", "65%"],
       boldFirstCol: true,
       rows: [
-        [
-          "je",
-          "{a}me{/a} (m')",
-        ],
-        [
-          "tu",
-          "{a}te{/a} (t')",
-        ],
-        [
-          "il / elle / on",
-          "{a}se{/a} (s')",
-        ],
-        [
-          "nous",
-          "nous",
-        ],
-        [
-          "vous",
-          "vous",
-        ],
-        [
-          "ils / elles",
-          "{a}se{/a} (s')",
-        ],
+        ["je", "{a}me{/a} (m')"],
+        ["tu", "{a}te{/a} (t')"],
+        ["il / elle / on", "{a}se{/a} (s')"],
+        ["nous", "nous"],
+        ["vous", "vous"],
+        ["ils / elles", "{a}se{/a} (s')"],
       ],
     },
     {
       type: "heading",
       text: "Prononciation et orthographe",
       trans: {
-        en: "Pronunciation and spelling",
-        ar: "النطق والإملاء",
-        fa: "تلفظ و املا",
-        pt: "Pronúncia e ortografia",
-        so: "Ku dhawaaqid iyo higaad",
-        ti: "ኣደማምጻን ኣጸሓሕፋን",
-        tr: "Telaffuz ve yazım",
-        ps: "تلفظ او املا",
-        uk: "Вимова та правопис",
+        en: "Pronunciation and spelling", ar: "النطق والإملاء", fa: "تلفظ و املا", pt: "Pronúncia e ortografia", so: "Ku dhawaaqid iyo higaad", ti: "ኣደማምጻን ኣጸሓሕፋን", tr: "Telaffuz ve yazım", ps: "تلفظ او املا", uk: "Вимова та правопис",
+        it: "Pronuncia e ortografia", es: "Pronunciación y ortografía", prs: "تلفظ و املا", sq: "Shqiptimi dhe drejtshkrimi", am: "አነጋገር እና የፊደል አጻጻፍ", ru: "Произношение и орфография",
       },
     },
     {
@@ -177,6 +113,12 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         tr: "{a}me, te, se{/a} zamirleri bir ünlüden veya sessiz h'den önce {a}m', t', s'{/a} olur.",
         ps: "ضمیرونه {a}me, te, se{/a} د واول یا چوپ h مخکې {a}m', t', s'{/a} کېږي.",
         uk: "Займенники {a}me, te, se{/a} перетворюються на {a}m', t', s'{/a} перед голосною або німою h.",
+        it: "I pronomi {a}me, te, se{/a} diventano {a}m', t', s'{/a} davanti a una vocale o a una h muta.",
+        es: "Los pronombres {a}me, te, se{/a} se convierten en {a}m', t', s'{/a} delante de una vocal o de una h muda.",
+        prs: "ضمیرهای {a}me, te, se{/a} پیش از واکه یا h خاموش به {a}m', t', s'{/a} تبدیل می‌شوند.",
+        sq: "Përemrat {a}me, te, se{/a} bëhen {a}m', t', s'{/a} para një zanoreje ose një h të heshtur.",
+        am: "ተውላጠ ስሞቹ {a}me, te, se{/a} ከድምጸ ሕዋስ ወይም ዝም ካለ h በፊት {a}m', t', s'{/a} ይሆናሉ።",
+        ru: "Местоимения {a}me, te, se{/a} превращаются в {a}m', t', s'{/a} перед гласной или немой h.",
       },
       items: [
         "Je {s}me{/s} habille → Je {a}m'{/a}habille.",
@@ -189,386 +131,98 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
     {
       type: "text",
       label: "",
-      
     },
     {
       type: "heading",
       text: "Verbes pronominaux courants",
       trans: {
-        en: "Common reflexive verbs",
-        ar: "أفعال انعكاسية شائعة",
-        fa: "افعال انعکاسی پرکاربرد",
-        pt: "Verbos reflexos comuns",
-        so: "Falal iscelin oo caadi ah",
-        ti: "ልሙዳት ናይ ርእሰ-ግሲታት",
-        tr: "Yaygın dönüşlü fiiller",
-        ps: "عام انعکاسي فعلونه",
-        uk: "Поширені зворотні дієслова",
+        en: "Common reflexive verbs", ar: "أفعال انعكاسية شائعة", fa: "افعال انعکاسی پرکاربرد", pt: "Verbos reflexos comuns", so: "Falal iscelin oo caadi ah", ti: "ልሙዳት ናይ ርእሰ-ግሲታት", tr: "Yaygın dönüşlü fiiller", ps: "عام انعکاسي فعلونه", uk: "Поширені зворотні дієслова",
+        it: "Verbi pronominali comuni", es: "Verbos pronominales comunes", prs: "عام ضمیری افعال", sq: "Folje vetvetore të zakonshme", am: "የተለመዱ ርእሰ-ግሶች", ru: "Распространённые возвратные глаголы",
       },
     },
-    verbsToSelector([
-        {
-          infinitive: "se lever",
-          radical: "",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-              radical: "lèv",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-              radical: "lev",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-              radical: "lev",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-              radical: "lèv",
-            },
-          ],
-        },
-        {
-          infinitive: "se coucher",
-          radical: "couch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se laver",
-          radical: "lav",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se doucher",
-          radical: "douch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se brosser",
-          radical: "bross",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se raser",
-          radical: "ras",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se coiffer",
-          radical: "coiff",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "s'habiller",
-          radical: "habill",
-          reflexivePronouns: [
-            "m'",
-            "t'",
-            "s'",
-            "nous",
-            "vous",
-            "s'",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se reposer",
-          radical: "repos",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-      ], { buttonCols: 3 }),
+    verbsToSelector(
+      [
+        { infinitive: "se lever", radical: "", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e", radical: "lèv" },
+          { pronoun: "tu", ending: "es", radical: "lèv" },
+          { pronoun: "il / elle / on", ending: "e", radical: "lèv" },
+          { pronoun: "nous", ending: "ons", radical: "lev" },
+          { pronoun: "vous", ending: "ez", radical: "lev" },
+          { pronoun: "ils / elles", ending: "ent", radical: "lèv" },
+        ] },
+        { infinitive: "se coucher", radical: "couch", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se laver", radical: "lav", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se doucher", radical: "douch", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se brosser", radical: "bross", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se raser", radical: "ras", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se coiffer", radical: "coiff", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "s'habiller", radical: "habill", reflexivePronouns: ["m'", "t'", "s'", "nous", "vous", "s'"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se reposer", radical: "repos", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+      ],
+      { buttonCols: 3 }
+    ),
     {
       type: "heading",
       text: "La négation",
       trans: {
-        en: "The negation",
-        ar: "النفي",
-        fa: "نفی",
-        pt: "A negação",
-        so: "Diidmada",
-        ti: "ኣሉታ",
-        tr: "Olumsuzluk",
-        ps: "نفي",
-        uk: "Заперечення",
+        en: "The negation", ar: "النفي", fa: "نفی", pt: "A negação", so: "Diidmada", ti: "ኣሉታ", tr: "Olumsuzluk", ps: "نفي", uk: "Заперечення",
+        it: "La negazione", es: "La negación", prs: "نفی", sq: "Mohimi", am: "አሉታ", ru: "Отрицание",
       },
     },
     {
@@ -584,588 +238,209 @@ export const A1_GR_PRONOMINAUX: GrammarLesson = {
         tr: "{a}ne … pas{/a} olumsuzluğu hem dönüşlü zamiri HEM de fiili çevreler.",
         ps: "نفي {a}ne … pas{/a} هم انعکاسي ضمیر او هم فعل راچاپېروي.",
         uk: "Заперечення {a}ne … pas{/a} охоплює і зворотний займенник, І дієслово.",
+        it: "La negazione {a}ne … pas{/a} racchiude sia il pronome riflessivo SIA il verbo.",
+        es: "La negación {a}ne … pas{/a} rodea tanto el pronombre reflexivo COMO el verbo.",
+        prs: "ساخت منفی {a}ne … pas{/a} هم ضمیر انعکاسی و هم فعل را در بر می‌گیرد.",
+        sq: "Mohimi {a}ne … pas{/a} rrethon si përemrin vetvetor ASHTU EDHE foljen.",
+        am: "የ {a}ne … pas{/a} አሉታ ግንባታ ሁለቱንም ርእሰ-ተውላጠ ስም እና ግስ ይከብባል።",
+        ru: "Отрицание {a}ne … pas{/a} охватывает и возвратное местоимение, И глагол.",
       },
-      items: [
-        "Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}",
-      ],
+      items: ["Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}"],
       transItems: {
-        en: [
-          "Subject + {a}ne{/a} + reflexive pronoun + verb + {a}pas{/a}",
-        ],
-        ar: [
-          "الفاعل + {a}ne{/a} + الضمير الانعكاسي + الفعل + {a}pas{/a}",
-        ],
-        fa: [
-          "فاعل + {a}ne{/a} + ضمیر انعکاسی + فعل + {a}pas{/a}",
-        ],
-        pt: [
-          "Sujeito + {a}ne{/a} + pronome reflexo + verbo + {a}pas{/a}",
-        ],
-        so: [
-          "Fale + {a}ne{/a} + magac-u-yaal iscelin + fal + {a}pas{/a}",
-        ],
-        ti: [
-          "ርእሲ + {a}ne{/a} + ርእሰ-ተካኢ ስም + ግሲ + {a}pas{/a}",
-        ],
-        tr: [
-          "Özne + {a}ne{/a} + dönüşlü zamir + fiil + {a}pas{/a}",
-        ],
-        ps: [
-          "فاعل + {a}ne{/a} + انعکاسي ضمیر + فعل + {a}pas{/a}",
-        ],
-        uk: [
-          "Підмет + {a}ne{/a} + зворотний займенник + дієслово + {a}pas{/a}",
-        ],
+        en: ["Subject + {a}ne{/a} + reflexive pronoun + verb + {a}pas{/a}"],
+        ar: ["الفاعل + {a}ne{/a} + الضمير الانعكاسي + الفعل + {a}pas{/a}"],
+        fa: ["فاعل + {a}ne{/a} + ضمیر انعکاسی + فعل + {a}pas{/a}"],
+        pt: ["Sujeito + {a}ne{/a} + pronome reflexo + verbo + {a}pas{/a}"],
+        so: ["Fale + {a}ne{/a} + magac-u-yaal iscelin + fal + {a}pas{/a}"],
+        ti: ["ርእሲ + {a}ne{/a} + ርእሰ-ተካኢ ስም + ግሲ + {a}pas{/a}"],
+        tr: ["Özne + {a}ne{/a} + dönüşlü zamir + fiil + {a}pas{/a}"],
+        ps: ["فاعل + {a}ne{/a} + انعکاسي ضمیر + فعل + {a}pas{/a}"],
+        uk: ["Підмет + {a}ne{/a} + зворотний займенник + дієслово + {a}pas{/a}"],
+        it: ["Soggetto + {a}ne{/a} + pronome riflessivo + verbo + {a}pas{/a}"],
+        es: ["Sujeto + {a}ne{/a} + pronombre reflexivo + verbo + {a}pas{/a}"],
+        prs: ["فاعل + {a}ne{/a} + ضمیر انعکاسی + فعل + {a}pas{/a}"],
+        sq: ["Kryefjala + {a}ne{/a} + përemri vetvetor + folja + {a}pas{/a}"],
+        am: ["ተገዢ + {a}ne{/a} + ርእሰ-ተውላጠ ስም + ግስ + {a}pas{/a}"],
+        ru: ["Подлежащее + {a}ne{/a} + возвратное местоимение + глагол + {a}pas{/a}"],
       },
       noBulletItems: [0],
     },
     {
       type: "text",
       label: "",
-      
     },
-    verbsToSelector([
-        {
-          infinitive: "se lever",
-          radical: "",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-              radical: "lèv",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-              radical: "lèv",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-              radical: "lev",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-              radical: "lev",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-              radical: "lèv",
-            },
-          ],
-        },
-        {
-          infinitive: "se coucher",
-          radical: "couch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se laver",
-          radical: "lav",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se doucher",
-          radical: "douch",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se brosser",
-          radical: "bross",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se raser",
-          radical: "ras",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se coiffer",
-          radical: "coiff",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "s'habiller",
-          radical: "habill",
-          reflexivePronouns: [
-            "m'",
-            "t'",
-            "s'",
-            "nous",
-            "vous",
-            "s'",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-        {
-          infinitive: "se reposer",
-          radical: "repos",
-          reflexivePronouns: [
-            "me",
-            "te",
-            "se",
-            "nous",
-            "vous",
-            "se",
-          ],
-          rows: [
-            {
-              pronoun: "je",
-              ending: "e",
-            },
-            {
-              pronoun: "tu",
-              ending: "es",
-            },
-            {
-              pronoun: "il / elle / on",
-              ending: "e",
-            },
-            {
-              pronoun: "nous",
-              ending: "ons",
-            },
-            {
-              pronoun: "vous",
-              ending: "ez",
-            },
-            {
-              pronoun: "ils / elles",
-              ending: "ent",
-            },
-          ],
-        },
-      ], { buttonCols: 3, negation: true }),
+    verbsToSelector(
+      [
+        { infinitive: "se lever", radical: "", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e", radical: "lèv" },
+          { pronoun: "tu", ending: "es", radical: "lèv" },
+          { pronoun: "il / elle / on", ending: "e", radical: "lèv" },
+          { pronoun: "nous", ending: "ons", radical: "lev" },
+          { pronoun: "vous", ending: "ez", radical: "lev" },
+          { pronoun: "ils / elles", ending: "ent", radical: "lèv" },
+        ] },
+        { infinitive: "se coucher", radical: "couch", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se laver", radical: "lav", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se doucher", radical: "douch", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se brosser", radical: "bross", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se raser", radical: "ras", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se coiffer", radical: "coiff", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "s'habiller", radical: "habill", reflexivePronouns: ["m'", "t'", "s'", "nous", "vous", "s'"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+        { infinitive: "se reposer", radical: "repos", reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"], rows: [
+          { pronoun: "je", ending: "e" },
+          { pronoun: "tu", ending: "es" },
+          { pronoun: "il / elle / on", ending: "e" },
+          { pronoun: "nous", ending: "ons" },
+          { pronoun: "vous", ending: "ez" },
+          { pronoun: "ils / elles", ending: "ent" },
+        ] },
+      ],
+      { buttonCols: 3, negation: true }
+    ),
     {
       type: "heading",
       text: "Réfléchis vs réciproques",
       sub: true,
       accent: true,
       trans: {
-        en: "Reflexive vs reciprocal",
-        ar: "انعكاسي مقابل متبادل",
-        fa: "انعکاسی در برابر متقابل",
-        pt: "Reflexo vs recíproco",
-        so: "Iscelin iyo isdhaafsi",
-        ti: "ርእሰ-ግሲ ኣንጻር ምልውዋጥ",
-        tr: "Dönüşlü ve karşılıklı",
-        ps: "انعکاسي او متقابل",
-        uk: "Зворотні проти взаємних",
+        en: "Reflexive vs reciprocal", ar: "انعكاسي مقابل متبادل", fa: "انعکاسی در برابر متقابل", pt: "Reflexo vs recíproco", so: "Iscelin iyo isdhaafsi", ti: "ርእሰ-ግሲ ኣንጻር ምልውዋጥ", tr: "Dönüşlü ve karşılıklı", ps: "انعکاسي او متقابل", uk: "Зворотні проти взаємних",
+        it: "Riflessivi vs reciproci", es: "Reflexivos vs recíprocos", prs: "انعکاسی در برابر متقابل", sq: "Vetvetorë kundrejt të ndërsjelltë", am: "ርእሰ-ግስ በተቃራኒ የሁለትዮሽ", ru: "Возвратные против взаимных",
       },
     },
     {
       type: "grid",
-      headers: [
-        "Type",
-        "Sens",
-        "Exemple",
-      ],
+      headers: ["Type", "Sens", "Exemple"],
       transHeaders: {
-        en: [
-          "Type",
-          "Meaning",
-          "Example",
-        ],
-        ar: [
-          "النوع",
-          "المعنى",
-          "مثال",
-        ],
-        fa: [
-          "نوع",
-          "معنی",
-          "مثال",
-        ],
-        pt: [
-          "Tipo",
-          "Significado",
-          "Exemplo",
-        ],
-        so: [
-          "Nooc",
-          "Macne",
-          "Tusaale",
-        ],
-        ti: [
-          "ዓይነት",
-          "ትርጉም",
-          "ኣብነት",
-        ],
-        tr: [
-          "Tür",
-          "Anlam",
-          "Örnek",
-        ],
-        ps: [
-          "ډول",
-          "معنا",
-          "بېلګه",
-        ],
-        uk: [
-          "Тип",
-          "Значення",
-          "Приклад",
-        ],
+        en: ["Type", "Meaning", "Example"],
+        ar: ["النوع", "المعنى", "مثال"],
+        fa: ["نوع", "معنی", "مثال"],
+        pt: ["Tipo", "Significado", "Exemplo"],
+        so: ["Nooc", "Macne", "Tusaale"],
+        ti: ["ዓይነት", "ትርጉም", "ኣብነት"],
+        tr: ["Tür", "Anlam", "Örnek"],
+        ps: ["ډول", "معنا", "بېلګه"],
+        uk: ["Тип", "Значення", "Приклад"],
+        it: ["Tipo", "Significato", "Esempio"],
+        es: ["Tipo", "Sentido", "Ejemplo"],
+        prs: ["نوع", "معنی", "مثال"],
+        sq: ["Lloji", "Kuptimi", "Shembulli"],
+        am: ["ዓይነት", "ትርጉም", "ምሳሌ"],
+        ru: ["Тип", "Значение", "Пример"],
       },
       boldFirstCol: true,
       rows: [
-        [
-          "Réfléchi",
-          "Le sujet agit sur lui-même.",
-          "Je {a}me{/a} regarde dans le miroir.",
-        ],
-        [
-          "Réciproque",
-          "Les sujets agissent l'un sur l'autre.",
-          "Nous {a}nous{/a} regardons.",
-        ],
+        ["Réfléchi", "Le sujet agit sur lui-même.", "Je {a}me{/a} regarde dans le miroir."],
+        ["Réciproque", "Les sujets agissent l'un sur l'autre.", "Nous {a}nous{/a} regardons."],
       ],
       transRows: {
         en: [
-          [
-            "Reflexive",
-            "The subject acts on itself.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "Reciprocal",
-            "The subjects act on each other.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["Reflexive", "The subject acts on itself.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Reciprocal", "The subjects act on each other.", "Nous {a}nous{/a} regardons."],
         ],
         ar: [
-          [
-            "انعكاسي",
-            "يقوم الفاعل بالفعل على نفسه.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "متبادل",
-            "يقوم الفاعلون بالفعل بعضهم على بعض.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["انعكاسي", "يقوم الفاعل بالفعل على نفسه.", "Je {a}me{/a} regarde dans le miroir."],
+          ["متبادل", "يقوم الفاعلون بالفعل بعضهم على بعض.", "Nous {a}nous{/a} regardons."],
         ],
         fa: [
-          [
-            "انعکاسی",
-            "فاعل عمل را روی خودش انجام می‌دهد.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "متقابل",
-            "فاعل‌ها عمل را روی یکدیگر انجام می‌دهند.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["انعکاسی", "فاعل عمل را روی خودش انجام می‌دهد.", "Je {a}me{/a} regarde dans le miroir."],
+          ["متقابل", "فاعل‌ها عمل را روی یکدیگر انجام می‌دهند.", "Nous {a}nous{/a} regardons."],
         ],
         pt: [
-          [
-            "Reflexo",
-            "O sujeito age sobre si próprio.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "Recíproco",
-            "Os sujeitos agem uns sobre os outros.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["Reflexo", "O sujeito age sobre si próprio.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Recíproco", "Os sujeitos agem uns sobre os outros.", "Nous {a}nous{/a} regardons."],
         ],
         so: [
-          [
-            "Iscelin",
-            "Faluhu ficilka isaga ayuu ku sameeyaa.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "Isdhaafsi",
-            "Falayaashu midba midka kale ayuu ficilka ku sameeyaa.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["Iscelin", "Faluhu ficilka isaga ayuu ku sameeyaa.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Isdhaafsi", "Falayaashu midba midka kale ayuu ficilka ku sameeyaa.", "Nous {a}nous{/a} regardons."],
         ],
         ti: [
-          [
-            "ርእሰ-ግሲ",
-            "እቲ ርእሲ ኣብ ገዛእ ርእሱ ይፍጽም።",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "ምልውዋጥ",
-            "እቶም ርእስታት ኣብ ነንሓድሕዶም ይፍጽሙ።",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["ርእሰ-ግሲ", "እቲ ርእሲ ኣብ ገዛእ ርእሱ ይፍጽም።", "Je {a}me{/a} regarde dans le miroir."],
+          ["ምልውዋጥ", "እቶም ርእስታት ኣብ ነንሓድሕዶም ይፍጽሙ።", "Nous {a}nous{/a} regardons."],
         ],
         tr: [
-          [
-            "Dönüşlü",
-            "Özne eylemi kendisi üzerinde yapar.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "Karşılıklı",
-            "Özneler birbirleri üzerinde eylem yapar.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["Dönüşlü", "Özne eylemi kendisi üzerinde yapar.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Karşılıklı", "Özneler birbirleri üzerinde eylem yapar.", "Nous {a}nous{/a} regardons."],
         ],
         ps: [
-          [
-            "انعکاسي",
-            "فاعل عمل پر خپل ځان کوي.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "متقابل",
-            "فاعلونه پر یو بل عمل کوي.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["انعکاسي", "فاعل عمل پر خپل ځان کوي.", "Je {a}me{/a} regarde dans le miroir."],
+          ["متقابل", "فاعلونه پر یو بل عمل کوي.", "Nous {a}nous{/a} regardons."],
         ],
         uk: [
-          [
-            "Зворотний",
-            "Підмет діє на самого себе.",
-            "Je {a}me{/a} regarde dans le miroir.",
-          ],
-          [
-            "Взаємний",
-            "Підмети діють один на одного.",
-            "Nous {a}nous{/a} regardons.",
-          ],
+          ["Зворотний", "Підмет діє на самого себе.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Взаємний", "Підмети діють один на одного.", "Nous {a}nous{/a} regardons."],
+        ],
+        it: [
+          ["Riflessivo", "Il soggetto agisce su se stesso.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Reciproco", "I soggetti agiscono l'uno sull'altro.", "Nous {a}nous{/a} regardons."],
+        ],
+        es: [
+          ["Reflexivo", "El sujeto actúa sobre sí mismo.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Recíproco", "Los sujetos actúan el uno sobre el otro.", "Nous {a}nous{/a} regardons."],
+        ],
+        prs: [
+          ["انعکاسی", "فاعل عمل را روی خودش انجام می‌دهد.", "Je {a}me{/a} regarde dans le miroir."],
+          ["متقابل", "فاعل‌ها عمل را روی یکدیگر انجام می‌دهند.", "Nous {a}nous{/a} regardons."],
+        ],
+        sq: [
+          ["Vetvetor", "Kryefjala vepron mbi vetveten.", "Je {a}me{/a} regarde dans le miroir."],
+          ["I ndërsjellë", "Kryefjalët veprojnë njëra mbi tjetrën.", "Nous {a}nous{/a} regardons."],
+        ],
+        am: [
+          ["ርእሰ-ግስ", "ተገዢው በራሱ ላይ ይሠራል።", "Je {a}me{/a} regarde dans le miroir."],
+          ["የሁለትዮሽ", "ተገዢዎቹ እርስ በርስ ይሠራሉ።", "Nous {a}nous{/a} regardons."],
+        ],
+        ru: [
+          ["Возвратный", "Подлежащее действует само на себя.", "Je {a}me{/a} regarde dans le miroir."],
+          ["Взаимный", "Подлежащие действуют друг на друга.", "Nous {a}nous{/a} regardons."],
         ],
       },
     },

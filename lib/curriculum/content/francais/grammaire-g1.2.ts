@@ -8,27 +8,6 @@ export const A1_GR_ETRE: GrammarLesson = {
   level: "A1",
   title: "Le verbe être",
   theory: [
-{
-      type: "heading",
-      text: "Utilisation",
-      trans: {
-        en: "Usage",
-        ar: "الاستخدام",
-        fa: "کاربرد",
-        pt: "Utilização",
-        so: "Isticmaal",
-        ti: "ኣጠቓቕማ",
-        tr: "Kullanım",
-        ps: "کارونه",
-        uk: "Вживання",
-        it: "Uso",
-        es: "Uso",
-        prs: "کاربرد",
-        sq: "Përdorimi",
-        am: "አጠቃቀም",
-        ru: "Использование",
-      },
-    },
     {
       type: "text",
       text: "Le verbe {a}ÊTRE{/a} sert à donner des informations sur une personne, comme son identité ou décrire quelqu'un.",
