@@ -6,27 +6,39 @@ type DefinitionValue = string | string[] | undefined;
 
 const LABELS: Record<PivotCode, string> = {
   fr: "Définition",
+  sq: "Përkufizim",
   en: "Definition",
   ar: "التعريف",
+  am: "ትርጉም",
+  prs: "تعریف",
+  es: "Definición",
+  it: "Definizione",
   fa: "تعریف",
+  ps: "تعریف",
   pt: "Definição",
+  ru: "Определение",
   so: "Qeexid",
   ti: "ትርጉም",
   tr: "Tanım",
-  ps: "تعریف",
   uk: "Визначення",
 };
 
 const FALLBACK_PREFIX: Record<PivotCode, string> = {
   fr: "",
+  sq: "Kuptim i thjeshtë:",
   en: "Simple meaning:",
   ar: "المعنى البسيط:",
+  am: "ቀላል ትርጉም:",
+  prs: "معنای ساده:",
+  es: "Significado sencillo:",
+  it: "Significato semplice:",
   fa: "معنای ساده:",
+  ps: "ساده مانا:",
   pt: "Significado simples:",
+  ru: "Простое значение:",
   so: "Macne fudud:",
   ti: "ቀላል ትርጉም:",
   tr: "Basit anlam:",
-  ps: "ساده مانا:",
   uk: "Просте значення:",
 };
 
