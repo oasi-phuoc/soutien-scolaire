@@ -11,68 +11,58 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     {
       type: "text",
       text: "La phrase négative exprime le {a}contraire{/a} d'une phrase affirmative.",
+      transText: {},
     },
     {
       type: "heading",
-      text: "Formes",
+      text: "Ne ... pas",
     },
     {
       type: "text",
-      label: "ne … pas",
-      text: "La négation est composée de deux mots placés de part et d'autre du verbe conjugué : {a}ne{/a} + verbe + {a}pas{/a}.", 
-      items: [
-        "Je suis célibataire. → Je {a}ne{/a} suis {a}pas{/a} célibataire.",
-        "Tu travailles dans une banque. → Tu {a}ne{/a} travailles {a}pas{/a} dans une banque.",
-      ],
-      noBulletItems: [0, 1],
-    },
-    {
-      type: "text",
-      label: "ne … pas de",
-      text: "L'article indéfini {a}un{/a}, {a}une{/a}, {a}des{/a} est remplacé par {a}de{/a} / {a}d'{/a}.", 
-      items: [
-        "Il a un frère ? → Non, il {a}n'{/a}a {a}pas de{/a} frère.",
-        "Tu as une sœur ? → Non, je {a}n'{/a}ai {a}pas de{/a} sœur.",
-        "Vous avez des petits-enfants ? → Non, nous {a}n'{/a}avons {a}pas de{/a} petits-enfants.",
-      ],
-      noBulletItems: [0, 1, 2],
-    },
-    {
-      type: "heading",
-      text: "La forme négative",
-      trans: { en: "The negative form", ar: "الصيغة المنفية", fa: "شکل منفی", ti: "ቅጺ ምኽሓድ", uk: "Заперечна форма" },
-    },
-    {
-      type: "text",
-      text: "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
+      text: "La négation est composée de deux mots placés de part et d'autre du verbe conjugué. La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
       transText: {
-        en: "The negation structure uses {a}ne{/a} + {a}pas{/a}.",
-        ar: "بنية النفي تستخدم {a}ne{/a} + {a}pas{/a}.",
-        fa: "ساختار نفی از {a}ne{/a} + {a}pas{/a} استفاده می‌کند.",
-        ti: "ዝምድና ምኽሓድ {a}ne{/a} + {a}pas{/a} ይጥቀም.",
-        uk: "Структура заперечення використовує {a}ne{/a} + {a}pas{/a}.",
+
       },
       items: [
         "Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
       ],
       transItems: {
-        en: [
-          "Subject + {a}ne{/a} + verb + {a}pas{/a}",
-        ],
-        ar: [
-          "الفاعل + {a}ne{/a} + الفعل + {a}pas{/a}",
-        ],
-        fa: [
-          "فاعل + {a}ne{/a} + فعل + {a}pas{/a}",
-        ],
-        ti: [
-          "ሓካይ + {a}ne{/a} + ግሲ + {a}pas{/a}",
-        ],
-        uk: [
-          "Підмет + {a}ne{/a} + дієслово + {a}pas{/a}",
-        ],
+      },
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Negatif"],
+      transHeaders: {
+      },
+      rows: [
+        ["Je suis célibataire.", "Je {a}ne{/a} suis {a}pas{/a} célibataire."],
+        ["Tu travailles dans une banque.", "Tu {a}ne{/a} travailles {a}pas{/a} dans une banque."],
+      ],
+    },
+    {
+      type: "heading",
+      text: "Ne ... pas pas",
+    },
+    {
+      type: "text",
+      text: "A la forme négative, les articles indéfinis {a}un{/a}, {a}une{/a}, {a}des{/a} sont remplacés par {a}de{/a} / {a}d'{/a}.", 
+      transText: {
+
       },
     },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Negatif"],
+      transHeaders: {
+      },
+      rows: [
+        ["Il a un frère", "Il {a}n'{/a}a {a}pas de{/a} frère."],
+        ["Daryna a une soeur ?", "Non, Daryna {a}n'{/a}a {a}pas de{/a} soeur."],
+        ["Les professeurs ont des enfants.", "Les professeurs {a}n'{/a}ont {a}pas d'{/a}enfants."],
+      ],
+    },
+
     verbsToSelector([
         {
           infinitive: "être",
@@ -110,179 +100,31 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
             { pronoun: "ils / elles", ending: "ent" },
           ],
         },
-      ] as VerbToggleVerb[], { buttonCols: 3, negation: true }),
+        {
+          infinitive: "manger",
+          radical: "mang",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "eons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+      ] as VerbToggleVerb[], { buttonCols: 2, negation: true }),
     {
       type: "text",
       label: "Attention",
-      transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
-      inlineArrows: true,
-      noBulletItems: [0],
+      transLabel: {
+
+      },
       items: [
         "Quand le verbe commence par une voyelle ou un h, {a}ne{/a} devient {a}n'{/a}.",
-        "il n{s}e{/s} est pas là → il n'est pas là",
-        "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans",
+        "il {s}ne{/s} est pas là → il {a}n'{/a}est pas là",
+        "je {s}ne{/s} ai pas 5 ans → je {a}n'{/a}ai pas 5 ans",
       ],
-      transItems: {
-        en: ["When the verb begins with a vowel or h, {a}ne{/a} becomes {a}n'{/a}.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
-        ar: ["عندما يبدأ الفعل بحرف علة أو h، يصبح {a}ne{/a} {a}n'{/a}.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
-        fa: ["وقتی فعل با یک حرف صدادار یا h شروع می‌شود، {a}ne{/a} به {a}n'{/a} تبدیل می‌شود.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
-        ti: ["ግሲ ብሞዓዝ ወይ h ምስ ዝጅምር፣ {a}ne{/a} {a}n'{/a} ይኸውን.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
-        uk: ["Коли дієслово починається з голосної або h, {a}ne{/a} стає {a}n'{/a}.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
-      },
-    },
-    { type: "heading", text: "Aller plus loin : ne…plus, ne…que", trans: { en: "Going further: ne…plus, ne…que", ar: "لمزيد من التعمق: ne…plus, ne…que", fa: "بیشتر بدانیم: ne…plus, ne…que", ti: "ብዝያዳ፦ ne…plus, ne…que", uk: "Поглиблення: ne…plus, ne…que" } },
-    {
-      type: "grid",
-      headers: ["Négation", "Sens", "Exemple"],
-      transHeaders: {
-        en: ["Negation", "Meaning", "Example"],
-        ar: ["النفي", "المعنى", "مثال"],
-        fa: ["نفی", "معنا", "مثال"],
-        ti: ["ኣሉታ", "ትርጉም", "ኣብነት"],
-        uk: ["Заперечення", "Значення", "Приклад"],
-      },
-      boldFirstCol: true,
-      rows: [
-        ["{a}ne … pas{/a}", "action inexistante / absente", "Je {a}ne{/a} parle {a}pas{/a} espagnol."],
-        ["{a}ne … plus{/a}", "action qui a cessé", "Il {a}ne{/a} travaille {a}plus{/a} ici."],
-        ["{a}ne … que{/a}", "restriction (= seulement)", "Je {a}ne{/a} mange {a}que{/a} des légumes."],
-      ],
-      transRows: {
-        en: [["{a}ne … pas{/a}", "non-existent / absent action", "Je {a}ne{/a} parle {a}pas{/a} espagnol. (I don't speak Spanish.)"], ["{a}ne … plus{/a}", "action that has stopped", "Il {a}ne{/a} travaille {a}plus{/a} ici. (He no longer works here.)"], ["{a}ne … que{/a}", "restriction (= only)", "Je {a}ne{/a} mange {a}que{/a} des légumes. (I only eat vegetables.)"]],
-        ar: [["{a}ne … pas{/a}", "فعل غير موجود / غائب", "Je {a}ne{/a} parle {a}pas{/a} espagnol. (لا أتكلم الإسبانية.)"], ["{a}ne … plus{/a}", "فعل توقف", "Il {a}ne{/a} travaille {a}plus{/a} ici. (لم يعد يعمل هنا.)"], ["{a}ne … que{/a}", "تقييد (= فقط)", "Je {a}ne{/a} mange {a}que{/a} des légumes. (لا آكل إلا الخضار.)"]],
-        fa: [["{a}ne … pas{/a}", "کنش ناموجود / غایب", "Je {a}ne{/a} parle {a}pas{/a} espagnol. (اسپانیایی صحبت نمی‌کنم.)"], ["{a}ne … plus{/a}", "کنشی که متوقف شده", "Il {a}ne{/a} travaille {a}plus{/a} ici. (دیگر اینجا کار نمی‌کند.)"], ["{a}ne … que{/a}", "محدودیت (= فقط)", "Je {a}ne{/a} mange {a}que{/a} des légumes. (فقط سبزیجات می‌خورم.)"]],
-        ti: [["{a}ne … pas{/a}", "ዘይህሉ / ዘየለ ተግባር", "Je {a}ne{/a} parle {a}pas{/a} espagnol. (ስጳኛ ኣይዛረብን።)"], ["{a}ne … plus{/a}", "ደው ዝበለ ተግባር", "Il {a}ne{/a} travaille {a}plus{/a} ici. (ኣብዚ ደጊም ኣይሰርሕን።)"], ["{a}ne … que{/a}", "ድረታ (= ጥራይ)", "Je {a}ne{/a} mange {a}que{/a} des légumes. (ኣሕምልቲ ጥራይ እበልዕ።)"]],
-        uk: [["{a}ne … pas{/a}", "неіснуюча / відсутня дія", "Je {a}ne{/a} parle {a}pas{/a} espagnol. (Я не розмовляю іспанською.)"], ["{a}ne … plus{/a}", "дія, що припинилася", "Il {a}ne{/a} travaille {a}plus{/a} ici. (Він більше тут не працює.)"], ["{a}ne … que{/a}", "обмеження (= лише)", "Je {a}ne{/a} mange {a}que{/a} des légumes. (Я їм лише овочі.)"]],
-      },
-    },
-    { type: "heading", text: "Ne … plus", sub: true, accent: true, trans: { en: "Ne … plus", ar: "Ne … plus", fa: "Ne … plus", ti: "Ne … plus", uk: "Ne … plus" } },
-    {
-      type: "text",
-      text: "{a}ne … plus{/a} signifie que l'action s'est arrêtée.",
-      transText: {
-        en: "{a}ne … plus{/a} means that the action has stopped.",
-        ar: "{a}ne … plus{/a} تعني أن الفعل توقف.",
-        fa: "{a}ne … plus{/a} یعنی کنش متوقف شده است.",
-        ti: "{a}ne … plus{/a} እቲ ተግባር ደው ከም ዝበለ የመልክት።",
-        uk: "{a}ne … plus{/a} означає, що дія припинилася.",
-      },
-      items: [
-        "Implique qu'avant c'était le cas, maintenant non.",
-      ],
-      transItems: {
-        en: [
-          "It implies that before it was the case, now it isn't.",
-        ],
-        ar: [
-          "تشير إلى أنه كان كذلك من قبل، أما الآن فلا.",
-        ],
-        fa: [
-          "اشاره دارد که قبلاً چنین بود، اکنون نه.",
-        ],
-        ti: [
-          "ቀደም ከምኡ ከም ዝነበረ፣ ሕጂ ግን ከም ዘይኮነ የመልክት።",
-        ],
-        uk: [
-          "Це означає, що раніше так було, а тепер ні.",
-        ],
-      },
-    },
-    {
-      type: "grid",
-      headers: ["Affirmatif (avant)", "Négatif (maintenant)"],
-      transHeaders: {
-        en: ["Affirmative (before)", "Negative (now)"],
-        ar: ["إثبات (قبل)", "نفي (الآن)"],
-        fa: ["مثبت (قبلاً)", "منفی (اکنون)"],
-        ti: ["ኣወንታዊ (ቀደም)", "ኣሉታዊ (ሕጂ)"],
-        uk: ["Стверджувальна (раніше)", "Заперечна (тепер)"],
-      },
-      rows: [
-        ["Je fume.", "Je {a}ne{/a} fume {a}plus{/a}."],
-        ["Il habite ici.", "Il {a}n'{/a}habite {a}plus{/a} ici."],
-        ["Elle boit du café.", "Elle {a}ne{/a} boit {a}plus{/a} de café."],
-      ],
-      transRows: {
-        en: [["Je fume. (I smoke.)", "Je {a}ne{/a} fume {a}plus{/a}. (I no longer smoke.)"], ["Il habite ici. (He lives here.)", "Il {a}n'{/a}habite {a}plus{/a} ici. (He no longer lives here.)"], ["Elle boit du café. (She drinks coffee.)", "Elle {a}ne{/a} boit {a}plus{/a} de café. (She no longer drinks coffee.)"]],
-        ar: [["Je fume. (أدخّن.)", "Je {a}ne{/a} fume {a}plus{/a}. (لم أعد أدخّن.)"], ["Il habite ici. (يسكن هنا.)", "Il {a}n'{/a}habite {a}plus{/a} ici. (لم يعد يسكن هنا.)"], ["Elle boit du café. (تشرب القهوة.)", "Elle {a}ne{/a} boit {a}plus{/a} de café. (لم تعد تشرب القهوة.)"]],
-        fa: [["Je fume. (سیگار می‌کشم.)", "Je {a}ne{/a} fume {a}plus{/a}. (دیگر سیگار نمی‌کشم.)"], ["Il habite ici. (اینجا زندگی می‌کند.)", "Il {a}n'{/a}habite {a}plus{/a} ici. (دیگر اینجا زندگی نمی‌کند.)"], ["Elle boit du café. (قهوه می‌نوشد.)", "Elle {a}ne{/a} boit {a}plus{/a} de café. (دیگر قهوه نمی‌نوشد.)"]],
-        ti: [["Je fume. (ሽጋራ እትክኽ።)", "Je {a}ne{/a} fume {a}plus{/a}. (ደጊም ሽጋራ ኣይትክኽን።)"], ["Il habite ici. (ኣብዚ ይነብር።)", "Il {a}n'{/a}habite {a}plus{/a} ici. (ደጊም ኣብዚ ኣይነብርን።)"], ["Elle boit du café. (ቡን ትሰቲ።)", "Elle {a}ne{/a} boit {a}plus{/a} de café. (ደጊም ቡን ኣይትሰትን።)"]],
-        uk: [["Je fume. (Я палю.)", "Je {a}ne{/a} fume {a}plus{/a}. (Я більше не палю.)"], ["Il habite ici. (Він живе тут.)", "Il {a}n'{/a}habite {a}plus{/a} ici. (Він більше тут не живе.)"], ["Elle boit du café. (Вона п'є каву.)", "Elle {a}ne{/a} boit {a}plus{/a} de café. (Вона більше не п'є каву.)"]],
-      },
-    },
-    { type: "heading", text: "Ne … que (restriction)", sub: true, accent: true, trans: { en: "Ne … que (restriction)", ar: "Ne … que (تقييد)", fa: "Ne … que (محدودیت)", ti: "Ne … que (ድረታ)", uk: "Ne … que (обмеження)" } },
-    {
-      type: "text",
-      text: "{a}ne … que{/a} = seulement. Ce n'est {a}pas une vraie négation{/a} — le sens est positif mais limité.",
-      transText: {
-        en: "{a}ne … que{/a} = only. It is {a}not a real negation{/a} — the meaning is positive but limited.",
-        ar: "{a}ne … que{/a} = فقط. إنه {a}ليس نفياً حقيقياً{/a} — المعنى إيجابي لكنه محدود.",
-        fa: "{a}ne … que{/a} = فقط. این {a}یک نفی واقعی نیست{/a} — معنا مثبت اما محدود است.",
-        ti: "{a}ne … que{/a} = ጥራይ። እዚ {a}ናይ ሓቂ ኣሉታ ኣይኮነን{/a} — ትርጉሙ ኣወንታዊ ግን ድሩት እዩ።",
-        uk: "{a}ne … que{/a} = лише. Це {a}не справжнє заперечення{/a} — значення позитивне, але обмежене.",
-      },
-      items: [
-        "que se place juste avant l'élément restreint.",
-      ],
-      transItems: {
-        en: [
-          "que is placed just before the restricted element.",
-        ],
-        ar: [
-          "que يوضع مباشرة قبل العنصر المقيَّد.",
-        ],
-        fa: [
-          "que درست پیش از عنصر محدودشده قرار می‌گیرد.",
-        ],
-        ti: [
-          "que ልክዕ ቅድሚ እቲ ድሩት ነገር ይቕመጥ።",
-        ],
-        uk: [
-          "que ставиться безпосередньо перед обмеженим елементом.",
-        ],
-      },
-    },
-    {
-      type: "grid",
-      headers: ["Avec seulement", "Avec ne … que"],
-      transHeaders: {
-        en: ["With seulement", "With ne … que"],
-        ar: ["مع seulement", "مع ne … que"],
-        fa: ["با seulement", "با ne … que"],
-        ti: ["ምስ seulement", "ምስ ne … que"],
-        uk: ["З seulement", "З ne … que"],
-      },
-      rows: [
-        ["Je mange seulement des légumes.", "Je {a}ne{/a} mange {a}que{/a} des légumes."],
-        ["Il reste seulement 5 minutes.", "Il {a}ne{/a} reste {a}que{/a} 5 minutes."],
-        ["Elle a seulement 20 ans.", "Elle {a}n'{/a}a {a}que{/a} 20 ans."],
-      ],
-      transRows: {
-        en: [["Je mange seulement des légumes. (I only eat vegetables.)", "Je {a}ne{/a} mange {a}que{/a} des légumes."], ["Il reste seulement 5 minutes. (There are only 5 minutes left.)", "Il {a}ne{/a} reste {a}que{/a} 5 minutes."], ["Elle a seulement 20 ans. (She is only 20 years old.)", "Elle {a}n'{/a}a {a}que{/a} 20 ans."]],
-        ar: [["Je mange seulement des légumes. (آكل الخضار فقط.)", "Je {a}ne{/a} mange {a}que{/a} des légumes."], ["Il reste seulement 5 minutes. (بقيت 5 دقائق فقط.)", "Je {a}ne{/a} reste {a}que{/a} 5 minutes."], ["Elle a seulement 20 ans. (عمرها 20 سنة فقط.)", "Elle {a}n'{/a}a {a}que{/a} 20 ans."]],
-        fa: [["Je mange seulement des légumes. (فقط سبزیجات می‌خورم.)", "Je {a}ne{/a} mange {a}que{/a} des légumes."], ["Il reste seulement 5 minutes. (فقط ۵ دقیقه مانده است.)", "Il {a}ne{/a} reste {a}que{/a} 5 minutes."], ["Elle a seulement 20 ans. (او فقط ۲۰ سال دارد.)", "Elle {a}n'{/a}a {a}que{/a} 20 ans."]],
-        ti: [["Je mange seulement des légumes. (ኣሕምልቲ ጥራይ እበልዕ።)", "Je {a}ne{/a} mange {a}que{/a} des légumes."], ["Il reste seulement 5 minutes. (5 ደቒቕ ጥራይ ተሪፉ።)", "Il {a}ne{/a} reste {a}que{/a} 5 minutes."], ["Elle a seulement 20 ans. (20 ዓመት ጥራይ እዩ ዕድሚኣ።)", "Elle {a}n'{/a}a {a}que{/a} 20 ans."]],
-        uk: [["Je mange seulement des légumes. (Я їм лише овочі.)", "Je {a}ne{/a} mange {a}que{/a} des légumes."], ["Il reste seulement 5 minutes. (Залишилося лише 5 хвилин.)", "Il {a}ne{/a} reste {a}que{/a} 5 minutes."], ["Elle a seulement 20 ans. (Їй лише 20 років.)", "Elle {a}n'{/a}a {a}que{/a} 20 ans."]],
-      },
-    },
-    {
-      type: "text",
-      label: "Articles après la négation",
-      items: [
-        "Avec {a}ne…pas / ne…plus{/a} : un/une/des/du/de la → {a}de{/a} (ou d' devant voyelle).",
-        "Je mange du pain → Je {a}ne{/a} mange {a}pas de{/a} pain.",
-        "Avec {a}ne…que{/a} : l'article ne change pas.",
-        "Je mange {a}que du{/a} pain. (que garde l'article)",
-      ],
-      noBulletItems: [0],
-      transLabel: { en: "Articles after the negation", ar: "أدوات التعريف بعد النفي", fa: "حروف تعریف پس از نفی", ti: "ኣንቀጽ ድሕሪ ኣሉታ", uk: "Артиклі після заперечення" },
-      transItems: {
-        en: ["With {a}ne…pas / ne…plus{/a}: un/une/des/du/de la → {a}de{/a} (or d' before a vowel).", "Je mange du pain → Je {a}ne{/a} mange {a}pas de{/a} pain.", "With {a}ne…que{/a}: the article does not change.", "Je mange {a}que du{/a} pain. (que keeps the article)"],
-        ar: ["مع {a}ne…pas / ne…plus{/a}: un/une/des/du/de la ← {a}de{/a} (أو d' قبل حرف علة).", "Je mange du pain ← Je {a}ne{/a} mange {a}pas de{/a} pain.", "مع {a}ne…que{/a}: أداة التعريف لا تتغير.", "Je mange {a}que du{/a} pain. (que يحتفظ بأداة التعريف)"],
-        fa: ["با {a}ne…pas / ne…plus{/a}: un/une/des/du/de la ← {a}de{/a} (یا d' پیش از صدادار).", "Je mange du pain ← Je {a}ne{/a} mange {a}pas de{/a} pain.", "با {a}ne…que{/a}: حرف تعریف تغییر نمی‌کند.", "Je mange {a}que du{/a} pain. (que حرف تعریف را نگه می‌دارد)"],
-        ti: ["ምስ {a}ne…pas / ne…plus{/a}፦ un/une/des/du/de la → {a}de{/a} (ወይ d' ቅድሚ ድምጻዊ ፊደል)።", "Je mange du pain → Je {a}ne{/a} mange {a}pas de{/a} pain.", "ምስ {a}ne…que{/a}፦ እቲ ኣንቀጽ ኣይቅየርን።", "Je mange {a}que du{/a} pain. (que ነቲ ኣንቀጽ ይዕቅቦ)"],
-        uk: ["З {a}ne…pas / ne…plus{/a}: un/une/des/du/de la → {a}de{/a} (або d' перед голосною).", "Je mange du pain → Je {a}ne{/a} mange {a}pas de{/a} pain.", "З {a}ne…que{/a}: артикль не змінюється.", "Je mange {a}que du{/a} pain. (que зберігає артикль)"],
-      },
+      noBulletItems: [0,1],
     },
   ],
   exercises: [

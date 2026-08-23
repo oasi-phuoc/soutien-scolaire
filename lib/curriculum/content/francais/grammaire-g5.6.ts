@@ -8,235 +8,438 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
   title: "Les autres négations",
   theory: [
     {
-      type: "heading",
-      text: "Utilisation",
-    },
-    {
       type: "text",
-      items: [
-        "D'autres négations que {a}ne… pas{/a} précisent le temps, les personnes ou les choses.",
-        "Temps : Je ne joue jamais aux échecs. ; Nous ne sommes pas encore prêts.",
-        "Personnes / choses : Il n'y a personne. ; Je ne vois rien.",
-      ],
-      allBullets: true,
-    },
-    {
-      type: "heading",
-      text: "Ne… jamais, ne… plus, ne… pas encore",
-    },
-    {
-      type: "text",
-      label: "Ne… jamais",
-      items: [
-        "Pas une seule fois. Négation de toujours, souvent, quelquefois, déjà.",
-        "Il n'envoie jamais de cartes postales.",
-        "— Tu prends souvent le métro ? — Non, je ne le prends jamais !",
-      ],
-      noBulletItems: [1, 2],
-    },
-    {
-      type: "text",
-      label: "Ne… plus",
-      items: [
-        "Avant oui, maintenant c'est fini. Négation de encore / toujours (= encore).",
-        "— Tu habites encore à Paris ? — Non, je n'habite plus en France.",
-        "À l'oral, le {a}s{/a} de {a}plus{/a} est muet dans ce sens. → Je ne fume plus.",
-      ],
-      noBulletItems: [1, 2],
-    },
-    {
-      type: "text",
-      label: "Ne… pas encore",
-      items: [
-        "L'action n'a pas encore eu lieu. Négation de déjà.",
-        "Le musée n'est pas encore ouvert. (= il va ouvrir plus tard)",
-        "— Tu as déjà visité ce quartier ? — Non, pas encore.",
-      ],
-      noBulletItems: [1, 2],
-    },
-    {
-      type: "heading",
-      text: "Ne… personne / personne ne…, ne… rien / rien ne…",
-    },
-    {
-      type: "text",
-      items: [
-        "{a}Personne{/a} : pas une seule personne (≠ quelqu'un, tout le monde). Sujet ou complément. → Je ne connais personne. ; Personne ne me connaît.",
-        "{a}Rien{/a} : pas une seule chose (≠ quelque chose, tout). → Je n'ai rien compris. ; Rien ne m'intéresse !",
-      ],
-      allBullets: true,
-    },
-    {
-      type: "heading",
-      text: "Ne… que, ne… ni… ni",
-    },
-    {
-      type: "text",
-      items: [
-        "{a}Ne… que{/a} = seulement. → Je ne parle que français !",
-        "{a}Ne… ni… ni{/a} : négation de et / ou. → Je n'aime ni le rock ni le rap.",
-      ],
-      allBullets: true,
-    },
-    { type: "heading", text: "Négation totale : jamais, rien, personne", trans: { en: "Total negation: jamais, rien, personne", ar: "النفي التام: jamais، rien، personne", fa: "نفی کامل: jamais، rien، personne", ti: "ምሉእ ኣሉታ፦ jamais፣ rien፣ personne", uk: "Повне заперечення: jamais, rien, personne" } },
-    {
-      type: "grid",
-      headers: ["Négation", "Sens", "Contraire affirmatif"],
-      transHeaders: {
-        en: ["Negation", "Meaning", "Affirmative opposite"],
-        ar: ["النفي", "المعنى", "النقيض الإثباتي"],
-        fa: ["نفی", "معنا", "متضاد مثبت"],
-        ti: ["ኣሉታ", "ትርጉም", "ኣወንታዊ ተጻይ"],
-        uk: ["Заперечення", "Значення", "Стверджувальний відповідник"],
-      },
-      boldFirstCol: true,
-      rows: [
-        ["{a}ne … jamais{/a}", "à aucun moment", "toujours / souvent / parfois"],
-        ["{a}ne … rien{/a}", "aucune chose", "quelque chose / tout"],
-        ["{a}ne … personne{/a}", "aucune personne", "quelqu'un / tout le monde"],
-      ],
-      transRows: {
-        en: [["{a}ne … jamais{/a}", "at no time", "toujours / souvent / parfois (always / often / sometimes)"], ["{a}ne … rien{/a}", "nothing", "quelque chose / tout (something / everything)"], ["{a}ne … personne{/a}", "nobody", "quelqu'un / tout le monde (someone / everyone)"]],
-        ar: [["{a}ne … jamais{/a}", "في أي وقت", "toujours / souvent / parfois (دائماً / غالباً / أحياناً)"], ["{a}ne … rien{/a}", "لا شيء", "quelque chose / tout (شيء ما / كل شيء)"], ["{a}ne … personne{/a}", "لا أحد", "quelqu'un / tout le monde (شخص ما / الجميع)"]],
-        fa: [["{a}ne … jamais{/a}", "هرگز", "toujours / souvent / parfois (همیشه / اغلب / گاهی)"], ["{a}ne … rien{/a}", "هیچ‌چیز", "quelque chose / tout (چیزی / همه‌چیز)"], ["{a}ne … personne{/a}", "هیچ‌کس", "quelqu'un / tout le monde (کسی / همه)"]],
-        ti: [["{a}ne … jamais{/a}", "ኣብ ዝኾነ ግዜ", "toujours / souvent / parfois (ኩሉ ግዜ / ብተደጋጋሚ / ሓሓሊፉ)"], ["{a}ne … rien{/a}", "ዋላ ሓንቲ ነገር", "quelque chose / tout (ገለ ነገር / ኩሉ)"], ["{a}ne … personne{/a}", "ዋላ ሓደ ሰብ", "quelqu'un / tout le monde (ገለ ሰብ / ኩሉ ሰብ)"]],
-        uk: [["{a}ne … jamais{/a}", "ніколи", "toujours / souvent / parfois (завжди / часто / іноді)"], ["{a}ne … rien{/a}", "нічого", "quelque chose / tout (щось / усе)"], ["{a}ne … personne{/a}", "нікого", "quelqu'un / tout le monde (хтось / усі)"]],
+      text: "D'autres négations que {a}ne… pas{/a} précisent le temps, les personnes ou les choses.",
+      transText: {
+
       },
     },
-    { type: "heading", text: "Au présent", sub: true, accent: true, trans: { en: "In the present", ar: "في المضارع", fa: "در زمان حال", ti: "ኣብ ሕጂ", uk: "У теперішньому часі" } },
+    {
+      type: "heading",
+      text: "Négation - temps",
+    },
+    {
+      type: "text",
+      label: "Ne ... jamais",
+      text: "{a}Ne ... jamais{/a} signifie « pas une seule fois ». C’est la négation de {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} et {a}déjà{/a}.",
+      transText: {
+        en: "{a}Ne ... jamais{/a} means « not even once ». It is the opposite of {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} and {a}déjà{/a}.",
+        ar: "{a}Ne ... jamais{/a} تعني «ولا مرة واحدة». وهي نفي {a}toujours{/a} و{a}souvent{/a} و{a}quelquefois{/a} و{a}déjà{/a}.",
+        fa: "{a}Ne ... jamais{/a} یعنی «حتی یک بار هم نه». این ساختار مخالف {a}toujours{/a}، {a}souvent{/a}، {a}quelquefois{/a} و {a}déjà{/a} است.",
+        pt: "{a}Ne ... jamais{/a} significa «nem uma única vez». É a negação de {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} e {a}déjà{/a}.",
+        so: "{a}Ne ... jamais{/a} waxay ka dhigan tahay «hal marna ma aha». Waa diidmada {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} iyo {a}déjà{/a}.",
+        ti: "{a}Ne ... jamais{/a} ማለት «ሓንቲ ግዜ እውን ኣይኮነን» ማለት እዩ። ናይ {a}toujours{/a}፣ {a}souvent{/a}፣ {a}quelquefois{/a} እና {a}déjà{/a} ኣሉታዊ ቅርጺ እዩ።",
+        tr: "{a}Ne ... jamais{/a}, «tek bir kez bile değil» anlamına gelir. {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} ve {a}déjà{/a} ifadelerinin olumsuzudur.",
+        ps: "{a}Ne ... jamais{/a} یعنې «حتی یو ځل هم نه». دا د {a}toujours{/a}، {a}souvent{/a}، {a}quelquefois{/a} او {a}déjà{/a} منفي بڼه ده.",
+        uk: "{a}Ne ... jamais{/a} означає «жодного разу». Це заперечення {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} і {a}déjà{/a}.",
+        it: "{a}Ne ... jamais{/a} significa «nemmeno una volta». È la negazione di {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} e {a}déjà{/a}.",
+        es: "{a}Ne ... jamais{/a} significa «ni una sola vez». Es la negación de {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} y {a}déjà{/a}.",
+        prs: "{a}Ne ... jamais{/a} یعنی «حتی یک بار هم نه». این ساختار منفی {a}toujours{/a}، {a}souvent{/a}، {a}quelquefois{/a} و {a}déjà{/a} است.",
+        am: "{a}Ne ... jamais{/a} ማለት «ሓንቲ ግዜ እውን ኣይኮነን» ማለት እዩ። ናይ {a}toujours{/a}፣ {a}souvent{/a}፣ {a}quelquefois{/a} እና {a}déjà{/a} ኣሉታዊ ቅርጺ እዩ።",
+        ru: "{a}Ne ... jamais{/a} означает «ни разу». Это отрицание {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} и {a}déjà{/a}.",
+        sq: "{a}Ne ... jamais{/a} do të thotë «as edhe një herë». Është mohimi i {a}toujours{/a}, {a}souvent{/a}, {a}quelquefois{/a} dhe {a}déjà{/a}.",
+      },
+    },
     {
       type: "grid",
       headers: ["Affirmatif", "Négatif"],
       transHeaders: {
         en: ["Affirmative", "Negative"],
-        ar: ["إثبات", "نفي"],
+        ar: ["الإثبات", "النفي"],
         fa: ["مثبت", "منفی"],
+        pt: ["Afirmativo", "Negativo"],
+        so: ["Togan", "Diidmo"],
         ti: ["ኣወንታዊ", "ኣሉታዊ"],
-        uk: ["Стверджувальна", "Заперечна"],
+        tr: ["Olumlu", "Olumsuz"],
+        ps: ["مثبت", "منفي"],
+        uk: ["Ствердження", "Заперечення"],
+        it: ["Affermativo", "Negativo"],
+        es: ["Afirmativo", "Negativo"],
+        prs: ["مثبت", "منفی"],
+        am: ["አዎንታዊ", "አሉታዊ"],
+        ru: ["Утвердительное", "Отрицательное"],
+        sq: ["Pohore", "Mohore"],
       },
       rows: [
-        ["Je mange toujours de la viande.", "Je {a}ne{/a} mange {a}jamais{/a} de viande."],
-        ["Je fais quelque chose ce soir.", "Je {a}ne{/a} fais {a}rien{/a} ce soir."],
-        ["Je connais quelqu'un ici.", "Je {a}ne{/a} connais {a}personne{/a} ici."],
+        [
+          "Je travaille {a}toujours{/a} le lundi.",
+          "Je {a}ne{/a} travaille {a}jamais{/a} le lundi."
+        ],
+        [
+          "Il mange {a}souvent{/a} au restaurant.",
+          "Il {a}ne{/a} mange {a}jamais{/a} au restaurant."
+        ],
+        [
+          "Nous regardons {a}quelquefois{/a} la télévision.",
+          "Nous {a}ne{/a} regardons {a}jamais{/a} la télévision."
+        ],
+        [
+          "Elle a {a}déjà{/a} visité Lucerne.",
+          "Elle {n'a}{/a} {a}jamais{/a} visité Lucerne."
+        ],
       ],
-      transRows: {
-        en: [["Je mange toujours de la viande. (I always eat meat.)", "Je {a}ne{/a} mange {a}jamais{/a} de viande."], ["Je fais quelque chose ce soir. (I'm doing something tonight.)", "Je {a}ne{/a} fais {a}rien{/a} ce soir."], ["Je connais quelqu'un ici. (I know someone here.)", "Je {a}ne{/a} connais {a}personne{/a} ici."]],
-        ar: [["Je mange toujours de la viande. (آكل اللحم دائماً.)", "Je {a}ne{/a} mange {a}jamais{/a} de viande."], ["Je fais quelque chose ce soir. (سأفعل شيئاً الليلة.)", "Je {a}ne{/a} fais {a}rien{/a} ce soir."], ["Je connais quelqu'un ici. (أعرف شخصاً هنا.)", "Je {a}ne{/a} connais {a}personne{/a} ici."]],
-        fa: [["Je mange toujours de la viande. (همیشه گوشت می‌خورم.)", "Je {a}ne{/a} mange {a}jamais{/a} de viande."], ["Je fais quelque chose ce soir. (امشب کاری انجام می‌دهم.)", "Je {a}ne{/a} fais {a}rien{/a} ce soir."], ["Je connais quelqu'un ici. (کسی را اینجا می‌شناسم.)", "Je {a}ne{/a} connais {a}personne{/a} ici."]],
-        ti: [["Je mange toujours de la viande. (ኩሉ ግዜ ስጋ እበልዕ።)", "Je {a}ne{/a} mange {a}jamais{/a} de viande."], ["Je fais quelque chose ce soir. (ሎሚ ምሸት ገለ ክገብር እየ።)", "Je {a}ne{/a} fais {a}rien{/a} ce soir."], ["Je connais quelqu'un ici. (ኣብዚ ገለ ሰብ እፈልጥ።)", "Je {a}ne{/a} connais {a}personne{/a} ici."]],
-        uk: [["Je mange toujours de la viande. (Я завжди їм м'ясо.)", "Je {a}ne{/a} mange {a}jamais{/a} de viande."], ["Je fais quelque chose ce soir. (Я щось роблю сьогодні ввечері.)", "Je {a}ne{/a} fais {a}rien{/a} ce soir."], ["Je connais quelqu'un ici. (Я знаю когось тут.)", "Je {a}ne{/a} connais {a}personne{/a} ici."]],
-      },
     },
-    { type: "heading", text: "Au passé composé", sub: true, accent: true, trans: { en: "In the passé composé", ar: "في الماضي المركّب", fa: "در ماضی نقلی", ti: "ኣብ passé composé", uk: "У passé composé" } },
     {
       type: "text",
-      text: "{a}jamais et rien{/a} se placent entre l'auxiliaire et le participe.",
+      label: "Ne ... plus",
+      text: "{a}Ne ... plus{/a} signifie « maintenant, ce n’est plus le cas ». C’est la négation de {a}encore{/a}, ou d’une action qui se répétait auparavant.",
       transText: {
-        en: "{a}jamais and rien{/a} are placed between the auxiliary and the participle.",
-        ar: "{a}jamais و rien{/a} يوضعان بين الفعل المساعد واسم المفعول.",
-        fa: "{a}jamais و rien{/a} میان فعل کمکی و وجه وصفی قرار می‌گیرند.",
-        ti: "{a}jamais ከምኡውን rien{/a} ኣብ መንጎ ሓጋዚን ኣካፋዊን ይቕመጡ።",
-        uk: "{a}jamais та rien{/a} ставляться між допоміжним дієсловом і дієприкметником.",
-      },
-      items: [
-        "{a}personne{/a} se place après le participe.",
-      ],
-      transItems: {
-        en: [
-          "{a}personne{/a} is placed after the participle.",
-        ],
-        ar: [
-          "{a}personne{/a} يوضع بعد اسم المفعول.",
-        ],
-        fa: [
-          "{a}personne{/a} پس از وجه وصفی قرار می‌گیرد.",
-        ],
-        ti: [
-          "{a}personne{/a} ድሕሪ ኣካፋዊ ይቕመጥ።",
-        ],
-        uk: [
-          "{a}personne{/a} ставиться після дієприкметника.",
-        ],
+        en: "{a}Ne ... plus{/a} means « now, this is no longer the case ». It is the opposite of {a}encore{/a}, or of an action that used to happen repeatedly.",
+        ar: "{a}Ne ... plus{/a} تعني «الآن، لم يعد الأمر كذلك». وهي نفي {a}encore{/a} أو لفعل كان يتكرر في السابق.",
+        fa: "{a}Ne ... plus{/a} یعنی «حالا دیگر این‌طور نیست». این ساختار مخالف {a}encore{/a} است یا برای فعلی به کار می‌رود که قبلاً تکرار می‌شد.",
+        pt: "{a}Ne ... plus{/a} significa «agora, já não é assim». É a negação de {a}encore{/a} ou de uma ação que se repetia anteriormente.",
+        so: "{a}Ne ... plus{/a} waxay ka dhigan tahay «hadda mar dambe sidaas ma aha». Waa diidmada {a}encore{/a} ama fal hore si joogto ah u soo noqnoqday.",
+        ti: "{a}Ne ... plus{/a} ማለት «ሕጂ ደጊም ከምኡ ኣይኮነን» ማለት እዩ። ናይ {a}encore{/a} ኣሉታ ወይ ቀደም ተደጋጋሚ ዝነበረ ተግባር እዩ።",
+        tr: "{a}Ne ... plus{/a}, «artık böyle değil» anlamına gelir. {a}encore{/a} kelimesinin veya daha önce tekrarlanan bir eylemin olumsuzudur.",
+        ps: "{a}Ne ... plus{/a} یعنې «اوس نور داسې نه دي». دا د {a}encore{/a} منفي بڼه ده، یا د هغه عمل نفي ده چې مخکې به تکرارېده.",
+        uk: "{a}Ne ... plus{/a} означає «тепер це більше не так». Це заперечення {a}encore{/a} або дії, яка раніше повторювалася.",
+        it: "{a}Ne ... plus{/a} significa «ora non è più così». È la negazione di {a}encore{/a} o di un’azione che si ripeteva in passato.",
+        es: "{a}Ne ... plus{/a} significa «ahora ya no es así». Es la negación de {a}encore{/a} o de una acción que se repetía anteriormente.",
+        prs: "{a}Ne ... plus{/a} یعنی «حالا دیگر چنین نیست». این ساختار منفی {a}encore{/a} یا یک عملی است که قبلاً تکرار می‌شد.",
+        am: "{a}Ne ... plus{/a} ማለት «ሕጂ ደጊም ከምኡ ኣይኮነን» ማለት እዩ። ናይ {a}encore{/a} ኣሉታ ወይ ቀደም ዝድገም ዝነበረ ተግባር ኣሉታዊ ቅርጺ እዩ።",
+        ru: "{a}Ne ... plus{/a} означает «теперь это больше не так». Это отрицание {a}encore{/a} или действия, которое раньше повторялось.",
+        sq: "{a}Ne ... plus{/a} do të thotë «tani nuk është më kështu». Është mohimi i {a}encore{/a} ose i një veprimi që përsëritej më parë.",
       },
     },
     {
       type: "grid",
-      headers: ["Négation", "Exemple au passé composé"],
+      headers: ["Affirmatif", "Négatif"],
       transHeaders: {
-        en: ["Negation", "Example in the passé composé"],
-        ar: ["النفي", "مثال في الماضي المركّب"],
-        fa: ["نفی", "مثال در ماضی نقلی"],
-        ti: ["ኣሉታ", "ኣብነት ኣብ passé composé"],
-        uk: ["Заперечення", "Приклад у passé composé"],
+        en: ["Affirmative", "Negative"],
+        ar: ["الإثبات", "النفي"],
+        fa: ["مثبت", "منفی"],
+        pt: ["Afirmativo", "Negativo"],
+        so: ["Togan", "Diidmo"],
+        ti: ["ኣወንታዊ", "ኣሉታዊ"],
+        tr: ["Olumlu", "Olumsuz"],
+        ps: ["مثبت", "منفي"],
+        uk: ["Ствердження", "Заперечення"],
+        it: ["Affermativo", "Negativo"],
+        es: ["Afirmativo", "Negativo"],
+        prs: ["مثبت", "منفی"],
+        am: ["አዎንታዊ", "ኣሉታዊ"],
+        ru: ["Утвердительное", "Отрицательное"],
+        sq: ["Pohore", "Mohore"],
       },
-      boldFirstCol: true,
       rows: [
-        ["{a}jamais{/a}", "Je {a}n'{/a}ai {a}jamais{/a} voyagé."],
-        ["{a}rien{/a}", "Il {a}n'{/a}a {a}rien{/a} dit."],
-        ["{a}personne{/a}", "Nous {a}n'{/a}avons vu {a}personne{/a}."],
+        [
+          "Il prend {a}encore{/a} le bus pour aller au travail.",
+          "Il {a}ne{/a} prend {a}plus{/a} le bus pour aller au travail."
+        ],
+        [
+          "Nous habitons {a}encore{/a} dans cet appartement.",
+          "Nous {a}n'{/a}habitons {a}plus{/a} dans cet appartement."
+        ],
+        [
+          "Elle boit du café le matin.",
+          "Elle {a}ne{/a} boit {a}plus{/a} de café le matin."
+        ],
       ],
-      transRows: {
-        en: [["{a}jamais{/a}", "Je {a}n'{/a}ai {a}jamais{/a} voyagé. (I have never travelled.)"], ["{a}rien{/a}", "Il {a}n'{/a}a {a}rien{/a} dit. (He said nothing.)"], ["{a}personne{/a}", "Nous {a}n'{/a}avons vu {a}personne{/a}. (We saw nobody.)"]],
-        ar: [["{a}jamais{/a}", "Je {a}n'{/a}ai {a}jamais{/a} voyagé. (لم أسافر قط.)"], ["{a}rien{/a}", "Il {a}n'{/a}a {a}rien{/a} dit. (لم يقل شيئاً.)"], ["{a}personne{/a}", "Nous {a}n'{/a}avons vu {a}personne{/a}. (لم نرَ أحداً.)"]],
-        fa: [["{a}jamais{/a}", "Je {a}n'{/a}ai {a}jamais{/a} voyagé. (هرگز سفر نکرده‌ام.)"], ["{a}rien{/a}", "Il {a}n'{/a}a {a}rien{/a} dit. (هیچ نگفت.)"], ["{a}personne{/a}", "Nous {a}n'{/a}avons vu {a}personne{/a}. (هیچ‌کس را ندیدیم.)"]],
-        ti: [["{a}jamais{/a}", "Je {a}n'{/a}ai {a}jamais{/a} voyagé. (ፈጺመ ተጓዒዘ ኣይፈልጥን።)"], ["{a}rien{/a}", "Il {a}n'{/a}a {a}rien{/a} dit. (ዋላ ሓንቲ ኣይበለን።)"], ["{a}personne{/a}", "Nous {a}n'{/a}avons vu {a}personne{/a}. (ዋላ ሓደ ሰብ ኣይረኣናን።)"]],
-        uk: [["{a}jamais{/a}", "Je {a}n'{/a}ai {a}jamais{/a} voyagé. (Я ніколи не подорожував.)"], ["{a}rien{/a}", "Il {a}n'{/a}a {a}rien{/a} dit. (Він нічого не сказав.)"], ["{a}personne{/a}", "Nous {a}n'{/a}avons vu {a}personne{/a}. (Ми нікого не бачили.)"]],
-      },
     },
-    { type: "heading", text: "Rien et Personne comme sujets", sub: true, accent: true, trans: { en: "Rien and Personne as subjects", ar: "Rien وPersonne كفاعلين", fa: "Rien و Personne به‌عنوان فاعل", ti: "Rien ከምኡውን Personne ከም ባዕልታት", uk: "Rien і Personne як підмети" } },
     {
       type: "text",
-      text: "Quand {a}rien{/a} ou {a}personne{/a} est sujet, il se place en tête de phrase, et le verbe garde {a}ne{/a}.",
+      label: "Ne ... pas encore",
+      text: "{a}Ne ... pas encore{/a} signifie « jusqu’à maintenant, ce n’est pas fait ». L’action est attendue ou prévue, mais elle n’a pas encore eu lieu.",
       transText: {
-        en: "When {a}rien{/a} or {a}personne{/a} is the subject, it is placed at the start of the sentence, and the verb keeps {a}ne{/a}.",
-        ar: "عندما يكون {a}rien{/a} أو {a}personne{/a} فاعلاً، يوضع في بداية الجملة، ويحتفظ الفعل بـ{a}ne{/a}.",
-        fa: "وقتی {a}rien{/a} یا {a}personne{/a} فاعل باشد، در ابتدای جمله قرار می‌گیرد و فعل {a}ne{/a} را نگه می‌دارد.",
-        ti: "{a}rien{/a} ወይ {a}personne{/a} ባዕሉ ኮይኑ እንተሎ፣ ኣብ መጀመርታ ሓረግ ይቕመጥ፣ እቲ ግሲ ድማ {a}ne{/a} ይዕቅብ።",
-        uk: "Коли {a}rien{/a} або {a}personne{/a} є підметом, він ставиться на початку речення, а дієслово зберігає {a}ne{/a}.",
+        en: "Ne ... pas encore means « until now, it has not happened ». The action is expected or planned, but it has not happened yet.",
+        ar: "تعني {a}ne ... pas encore{/a} «حتى الآن، لم يحدث ذلك». الفعل متوقع أو مخطط له، لكنه لم يحدث بعد.",
+        fa: "{a}Ne ... pas encore{/a} یعنی «تا الآن انجام نشده است». انجام این کار انتظار می‌رود یا برنامه‌ریزی شده است، اما هنوز اتفاق نیفتاده است.",
+        pt: "{a}Ne ... pas encore{/a} significa «até agora, ainda não aconteceu». A ação é esperada ou prevista, mas ainda não aconteceu.",
+        so: "{a}Ne ... pas encore{/a} waxay ka dhigan tahay «illaa hadda weli ma dhicin». Ficilka waa la filayaa ama waa qorshaysan yahay, laakiin weli ma dhicin.",
+        ti: "{a}Ne ... pas encore{/a} ማለት «ክሳብ ሕጂ ኣይተፈጸመን» ማለት እዩ። እቲ ተግባር ይጽበየሉ ወይ ተመዲቡ እዩ፣ ግን ገና ኣይተፈጸመን።",
+        tr: "{a}Ne ... pas encore{/a}, «henüz ... değil» veya «daha ... değil» anlamına gelir. Eylem bekleniyor veya planlanıyor, ancak henüz gerçekleşmedi.",
+        ps: "{a}Ne ... pas encore{/a} یعنې «تر اوسه نه دی شوی». د کار تمه کېږي یا پلان شوی وي، خو لا تر اوسه نه دی شوی.",
+        uk: "{a}Ne ... pas encore{/a} означає «ще не». Дія очікується або запланована, але ще не відбулася.",
+        it: "{a}Ne ... pas encore{/a} significa «non ancora». L'azione è prevista o attesa, ma non è ancora avvenuta.",
+        es: "{a}Ne ... pas encore{/a} significa «todavía no». La acción está prevista o se espera, pero aún no ha ocurrido.",
+        prs: "{a}Ne ... pas encore{/a} یعنی «تا هنوز انجام نشده است». انتظار می‌رود یا برنامه‌ریزی شده، اما هنوز اتفاق نیفتاده است.",
+        am: "{a}Ne ... pas encore{/a} ማለት «ክሳብ ሕጂ ኣይተፈጸመን» ማለት እዩ። እቲ ተግባር ይጽበየሉ ወይ ተመዲቡ እዩ፣ ግን ገና ኣይተፈጸመን።",
+        ru: "{a}Ne ... pas encore{/a} означает «ещё не». Действие ожидается или запланировано, но пока не произошло.",
+        sq: "{a}Ne ... pas encore{/a} do të thotë «ende jo». Veprimi pritet ose është planifikuar, por ende nuk ka ndodhur.",
       },
     },
     {
       type: "grid",
-      headers: ["Structure", "Exemple"],
+      headers: ["Affirmatif", "Négatif"],
       transHeaders: {
-        en: ["Structure", "Example"],
-        ar: ["البنية", "مثال"],
-        fa: ["ساختار", "مثال"],
-        ti: ["ቅርጺ", "ኣብነት"],
-        uk: ["Структура", "Приклад"],
+        en: ["Affirmative", "Negative"],
+        ar: ["الإثبات", "النفي"],
+        fa: ["مثبت", "منفی"],
+        pt: ["Afirmativo", "Negativo"],
+        so: ["Togan", "Diidmo"],
+        ti: ["ኣወንታዊ", "ኣሉታዊ"],
+        tr: ["Olumlu", "Olumsuz"],
+        ps: ["مثبت", "منفي"],
+        uk: ["Ствердження", "Заперечення"],
+        it: ["Affermativo", "Negativo"],
+        es: ["Afirmativo", "Negativo"],
+        prs: ["مثبت", "منفی"],
+        am: ["ኣወንታዊ", "ኣሉታዊ"],
+        ru: ["Утвердительное", "Отрицательное"],
+        sq: ["Pohore", "Mohore"],
       },
       rows: [
-        ["{a}Rien{/a} + ne + verbe", "{a}Rien{/a} n'est impossible."],
-        ["{a}Personne{/a} + ne + verbe", "{a}Personne{/a} ne parle."],
-        ["{a}Rien{/a} + n'a + participe", "{a}Rien{/a} n'a changé."],
+        [
+          "Je suis {a}déjà{/a} arrivé.",
+          "Je {a}ne{/a} suis {a}pas encore{/a} arrivé."
+        ],
+        [
+          "Il a {a}déjà{/a} terminé son travail.",
+          "Il {a}n'{/a} {a}pas encore{/a} terminé son travail."
+        ],
+        [
+          "Elle est partie.",
+          "Elle {a}n'{/a} {a}pas encore{/a} partie."
+        ],
       ],
-      transRows: {
-        en: [["{a}Rien{/a} + ne + verb", "{a}Rien{/a} n'est impossible. (Nothing is impossible.)"], ["{a}Personne{/a} + ne + verb", "{a}Personne{/a} ne parle. (Nobody is speaking.)"], ["{a}Rien{/a} + n'a + participle", "{a}Rien{/a} n'a changé. (Nothing has changed.)"]],
-        ar: [["{a}Rien{/a} + ne + الفعل", "{a}Rien{/a} n'est impossible. (لا شيء مستحيل.)"], ["{a}Personne{/a} + ne + الفعل", "{a}Personne{/a} ne parle. (لا أحد يتكلم.)"], ["{a}Rien{/a} + n'a + اسم المفعول", "{a}Rien{/a} n'a changé. (لم يتغير شيء.)"]],
-        fa: [["{a}Rien{/a} + ne + فعل", "{a}Rien{/a} n'est impossible. (هیچ‌چیز ناممکن نیست.)"], ["{a}Personne{/a} + ne + فعل", "{a}Personne{/a} ne parle. (هیچ‌کس صحبت نمی‌کند.)"], ["{a}Rien{/a} + n'a + وجه وصفی", "{a}Rien{/a} n'a changé. (هیچ‌چیز تغییر نکرده است.)"]],
-        ti: [["{a}Rien{/a} + ne + ግሲ", "{a}Rien{/a} n'est impossible. (ዋላ ሓንቲ ዘይከኣል የለን።)"], ["{a}Personne{/a} + ne + ግሲ", "{a}Personne{/a} ne parle. (ዋላ ሓደ ኣይዛረብን።)"], ["{a}Rien{/a} + n'a + ኣካፋዊ", "{a}Rien{/a} n'a changé. (ዋላ ሓንቲ ኣይተቐየረን።)"]],
-        uk: [["{a}Rien{/a} + ne + дієслово", "{a}Rien{/a} n'est impossible. (Немає нічого неможливого.)"], ["{a}Personne{/a} + ne + дієслово", "{a}Personne{/a} ne parle. (Ніхто не говорить.)"], ["{a}Rien{/a} + n'a + дієприкметник", "{a}Rien{/a} n'a changé. (Нічого не змінилося.)"]],
-      },
     },
     {
       type: "text",
-      label: "Cumul de négations",
+      label: "Ne ... personne / Personne ne ...",
+      text: "{a}Ne ... personne{/a} signifie « pas une seule personne ». {a}Personne ne ...{/a} s’utilise lorsque {a}personne{/a} est le sujet de la phrase.",
+      transText: {
+        en: "{a}Ne ... personne{/a} means « not a single person ». {a}Personne ne ...{/a} is used when {a}personne{/a} is the subject of the sentence.",
+        ar: "{a}Ne ... personne{/a} تعني «لا شخص واحد». وتُستخدم {a}Personne ne ...{/a} عندما تكون {a}personne{/a} فاعل الجملة.",
+        fa: "{a}Ne ... personne{/a} یعنی «حتی یک نفر هم نه». از {a}Personne ne ...{/a} زمانی استفاده می‌کنیم که {a}personne{/a} فاعل جمله باشد.",
+        pt: "{a}Ne ... personne{/a} significa «nem uma única pessoa». Usa-se {a}Personne ne ...{/a} quando {a}personne{/a} é o sujeito da frase.",
+        so: "{a}Ne ... personne{/a} waxay ka dhigan tahay «hal qofna ma aha». {a}Personne ne ...{/a} waxaa la isticmaalaa marka {a}personne{/a} uu yahay fal-sameeyaha jumladda.",
+        ti: "{a}Ne ... personne{/a} ማለት «ሓደ ሰብ እውን የለን» ማለት እዩ። {a}Personne ne ...{/a} ድማ {a}personne{/a} ኣርእስቲ ናይ ሓረግ እንተኾይኑ ይጥቀም።",
+        tr: "{a}Ne ... personne{/a}, «tek bir kişi bile değil» anlamına gelir. {a}Personne ne ...{/a}, {a}personne{/a} cümlenin öznesi olduğunda kullanılır.",
+        ps: "{a}Ne ... personne{/a} یعنې «حتی یو کس هم نه». {a}Personne ne ...{/a} هغه وخت کارېږي چې {a}personne{/a} د جملې فاعل وي.",
+        uk: "{a}Ne ... personne{/a} означає «жодної людини». {a}Personne ne ...{/a} вживається, коли {a}personne{/a} є підметом речення.",
+        it: "{a}Ne ... personne{/a} significa «nessuna persona». {a}Personne ne ...{/a} si usa quando {a}personne{/a} è il soggetto della frase.",
+        es: "{a}Ne ... personne{/a} significa «ni una sola persona». {a}Personne ne ...{/a} se usa cuando {a}personne{/a} es el sujeto de la oración.",
+        prs: "{a}Ne ... personne{/a} یعنی «حتی یک نفر هم نه». {a}Personne ne ...{/a} زمانی استفاده می‌شود که {a}personne{/a} فاعل جمله باشد.",
+        am: "{a}Ne ... personne{/a} ማለት «ሓደ ሰብ እውን የለን» ማለት እዩ። {a}Personne ne ...{/a} እቲ {a}personne{/a} ተገባሪ ናይ ሓረግ እንተኾይኑ ይጥቀም።",
+        ru: "{a}Ne ... personne{/a} означает «ни одного человека». {a}Personne ne ...{/a} используется, когда {a}personne{/a} является подлежащим предложения.",
+        sq: "{a}Ne ... personne{/a} do të thotë «as edhe një person». {a}Personne ne ...{/a} përdoret kur {a}personne{/a} është kryefjala e fjalisë.",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["الإثبات", "النفي"],
+        fa: ["مثبت", "منفی"],
+        pt: ["Afirmativo", "Negativo"],
+        so: ["Togan", "Diidmo"],
+        ti: ["ኣወንታዊ", "ኣሉታዊ"],
+        tr: ["Olumlu", "Olumsuz"],
+        ps: ["مثبت", "منفي"],
+        uk: ["Ствердження", "Заперечення"],
+        it: ["Affermativo", "Negativo"],
+        es: ["Afirmativo", "Negativo"],
+        prs: ["مثبت", "منفی"],
+        am: ["ኣወንታዊ", "ኣሉታዊ"],
+        ru: ["Утвердительное", "Отрицательное"],
+        sq: ["Pohore", "Mohore"],
+      },
+      rows: [
+        [
+          "Je connais {a}quelqu'un{/a}.",
+          "Je {a}ne{/a} connais {a}personne{/a}."
+        ],
+        [
+          "Elle invite {a}quelqu'un{/a}.",
+          "Elle {a}n'invite{/a} {a}personne{/a}."
+        ],
+        [
+          "{a}Quelqu'un{/a} me téléphone.",
+          "{a}Personne ne{/a} me téléphone."
+        ],
+        [
+          "{a}Tout le monde{/a} comprend.",
+          "{a}Personne ne{/a} comprend."
+        ],
+      ],
+    },
+    {
+      type: "text",
+      label: "Ne ... rien / Rien ne ...",
+      text: "{a}Ne ... rien{/a} signifie « pas une seule chose ». {a}Rien ne ...{/a} s’utilise lorsque {a}rien{/a} est le sujet de la phrase.",
+      transText: {
+        en: "{a}Ne ... rien{/a} means « not a single thing ». {a}Rien ne ...{/a} is used when {a}rien{/a} is the subject of the sentence.",
+        ar: "{a}Ne ... rien{/a} تعني «لا شيء واحد». وتُستخدم {a}Rien ne ...{/a} عندما تكون {a}rien{/a} فاعل الجملة.",
+        fa: "{a}Ne ... rien{/a} یعنی «حتی یک چیز هم نه». از {a}Rien ne ...{/a} زمانی استفاده می‌کنیم که {a}rien{/a} فاعل جمله باشد.",
+        pt: "{a}Ne ... rien{/a} significa «nem uma única coisa». Usa-se {a}Rien ne ...{/a} quando {a}rien{/a} é o sujeito da frase.",
+        so: "{a}Ne ... rien{/a} waxay ka dhigan tahay «hal shayna ma aha». {a}Rien ne ...{/a} waxaa la isticmaalaa marka {a}rien{/a} uu yahay mawduuca jumladda.",
+        ti: "{a}Ne ... rien{/a} ማለት «ሓንቲ ነገር እውን የለን» ማለት እዩ። {a}Rien ne ...{/a} ድማ {a}rien{/a} ኣርእስቲ ናይ ሓረግ እንተኾይኑ ይጥቀም።",
+        tr: "{a}Ne ... rien{/a}, «tek bir şey bile değil» anlamına gelir. {a}Rien ne ...{/a}, {a}rien{/a} cümlenin öznesi olduğunda kullanılır.",
+        ps: "{a}Ne ... rien{/a} یعنې «حتی یو شی هم نه». {a}Rien ne ...{/a} هغه وخت کارېږي چې {a}rien{/a} د جملې فاعل وي.",
+        uk: "{a}Ne ... rien{/a} означає «нічого». {a}Rien ne ...{/a} вживається, коли {a}rien{/a} є підметом речення.",
+        it: "{a}Ne ... rien{/a} significa «niente». {a}Rien ne ...{/a} si usa quando {a}rien{/a} è il soggetto della frase.",
+        es: "{a}Ne ... rien{/a} significa «ni una sola cosa». {a}Rien ne ...{/a} se usa cuando {a}rien{/a} es el sujeto de la oración.",
+        prs: "{a}Ne ... rien{/a} یعنی «حتی یک چیز هم نه». {a}Rien ne ...{/a} زمانی استفاده می‌شود که {a}rien{/a} فاعل جمله باشد.",
+        am: "{a}Ne ... rien{/a} ማለት «ሓንቲ ነገር እውን የለን» ማለት እዩ። {a}Rien ne ...{/a} እቲ {a}rien{/a} ተገባሪ ናይ ሓረግ እንተኾይኑ ይጥቀም።",
+        ru: "{a}Ne ... rien{/a} означает «ни одной вещи». {a}Rien ne ...{/a} используется, когда {a}rien{/a} является подлежащим предложения.",
+        sq: "{a}Ne ... rien{/a} do të thotë «as edhe një gjë». {a}Rien ne ...{/a} përdoret kur {a}rien{/a} është kryefjala e fjalisë.",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["الإثبات", "النفي"],
+        fa: ["مثبت", "منفی"],
+        pt: ["Afirmativo", "Negativo"],
+        so: ["Togan", "Diidmo"],
+        ti: ["ኣወንታዊ", "ኣሉታዊ"],
+        tr: ["Olumlu", "Olumsuz"],
+        ps: ["مثبت", "منفي"],
+        uk: ["Ствердження", "Заперечення"],
+        it: ["Affermativo", "Negativo"],
+        es: ["Afirmativo", "Negativo"],
+        prs: ["مثبت", "منفی"],
+        am: ["ኣወንታዊ", "ኣሉታዊ"],
+        ru: ["Утвердительное", "Отрицательное"],
+        sq: ["Pohore", "Mohore"],
+      },
+      rows: [
+        [
+          "Je comprends {a}quelque chose{/a}.",
+          "Je {a}ne{/a} comprends {a}rien{/a}."
+        ],
+        [
+          "Il achète {a}quelque chose{/a}.",
+          "Il {n'achète}{/a} {a}rien{/a}."
+        ],
+        [
+          "{a}Quelque chose{/a} m'intéresse.",
+          "{a}Rien ne{/a} m'intéresse."
+        ],
+        [
+          "{a}Tout{/a} est possible.",
+          "{a}Rien n'{/a}est impossible."
+        ],
+      ],
+    },
+    {
+      type: "text",
+      label: "Ne ... ni ... ni",
+      text: "{a}Ne ... ni ... ni{/a} permet de nier deux éléments ou deux possibilités. Il correspond à la négation de {a}et{/a} ou de {a}ou{/a}.",
+      transText: {
+        en: "{a}Ne ... ni ... ni{/a} is used to negate two elements or two possibilities. It corresponds to the negative form of {a}et{/a} or {a}ou{/a}.",
+        ar: "{a}Ne ... ni ... ni{/a} تُستخدم لنفي عنصرين أو احتمالين. وهي تقابل نفي {a}et{/a} أو {a}ou{/a}.",
+        fa: "{a}Ne ... ni ... ni{/a} برای منفی کردن دو عنصر یا دو امکان به کار می‌رود. این ساختار شکل منفی {a}et{/a} یا {a}ou{/a} است.",
+        pt: "{a}Ne ... ni ... ni{/a} é usado para negar dois elementos ou duas possibilidades. Corresponde à forma negativa de {a}et{/a} ou {a}ou{/a}.",
+        so: "{a}Ne ... ni ... ni{/a} waxaa loo isticmaalaa in lagu diido laba shay ama laba suurtagal. Waxay u dhigantaa diidmada {a}et{/a} ama {a}ou{/a}.",
+        ti: "{a}Ne ... ni ... ni{/a} ክልተ ነገራት ወይ ክልተ ኣማራጺታት ንምኽላኽ ይጥቀም። ናይ {a}et{/a} ወይ {a}ou{/a} ኣሉታዊ ቅርጺ እዩ።",
+        tr: "{a}Ne ... ni ... ni{/a}, iki unsuru veya iki olasılığı olumsuzlamak için kullanılır. {a}et{/a} veya {a}ou{/a} bağlaçlarının olumsuz biçimidir.",
+        ps: "{a}Ne ... ni ... ni{/a} د دوو شیانو یا دوو امکاناتو د ردولو لپاره کارېږي. دا د {a}et{/a} یا {a}ou{/a} منفي بڼه ده.",
+        uk: "{a}Ne ... ni ... ni{/a} використовується для заперечення двох елементів або двох можливостей. Це заперечна форма {a}et{/a} або {a}ou{/a}.",
+        it: "{a}Ne ... ni ... ni{/a} si usa per negare due elementi o due possibilità. Corrisponde alla forma negativa di {a}et{/a} o {a}ou{/a}.",
+        es: "{a}Ne ... ni ... ni{/a} se usa para negar dos elementos o dos posibilidades. Corresponde a la forma negativa de {a}et{/a} u {a}ou{/a}.",
+        prs: "{a}Ne ... ni ... ni{/a} برای منفی کردن دو عنصر یا دو امکان استفاده می‌شود. این ساختار شکل منفی {a}et{/a} یا {a}ou{/a} است.",
+        am: "{a}Ne ... ni ... ni{/a} ክልተ ነገራት ወይ ክልተ ኣማራጺታት ንምኽላኽ ይጥቀም። ናይ {a}et{/a} ወይ {a}ou{/a} ኣሉታዊ ቅርጺ እዩ።",
+        ru: "{a}Ne ... ni ... ni{/a} используется для отрицания двух элементов или двух возможностей. Это отрицательная форма {a}et{/a} или {a}ou{/a}.",
+        sq: "{a}Ne ... ni ... ni{/a} përdoret për të mohuar dy elemente ose dy mundësi. Është forma mohuese e {a}et{/a} ose {a}ou{/a}.",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["الإثبات", "النفي"],
+        fa: ["مثبت", "منفی"],
+        pt: ["Afirmativo", "Negativo"],
+        so: ["Togan", "Diidmo"],
+        ti: ["ኣወንታዊ", "ኣሉታዊ"],
+        tr: ["Olumlu", "Olumsuz"],
+        ps: ["مثبت", "منفي"],
+        uk: ["Ствердження", "Заперечення"],
+        it: ["Affermativo", "Negativo"],
+        es: ["Afirmativo", "Negativo"],
+        prs: ["مثبت", "منفی"],
+        am: ["ኣወንታዊ", "ኣሉታዊ"],
+        ru: ["Утвердительное", "Отрицательное"],
+        sq: ["Pohore", "Mohore"],
+      },
+      rows: [
+        [
+          "J'aime le café {a}et{/a} le thé.",
+          "Je {a}n'aime{/a} {a}ni{/a} le café {a}ni{/a} le thé."
+        ],
+        [
+          "Il mange de la viande {a}ou{/a} du poisson.",
+          "Il {a}ne mange{/a} {a}ni{/a} viande {a}ni{/a} poisson."
+        ],
+        [
+          "Nous avons un chat {a}et{/a} un chien.",
+          "Nous {n'avons}{/a} {a}ni{/a} chat {a}ni{/a} chien."
+        ],
+        [
+          "Elle parle français {a}ou{/a} anglais.",
+          "Elle {a}ne parle{/a} {a}ni{/a} français {a}ni{/a} anglais."
+        ],
+      ],
+    },
+    {
+      type: "text",
+      label: "Ne ... que",
+      text: "{a}Ne ... que{/a} signifie « seulement ». Cette structure ne sert pas à nier complètement une action : elle permet de limiter ce qui est dit.",
+      transText: {
+        en: "{a}Ne ... que{/a} means « only ». This structure does not completely negate an action: it limits what is being said.",
+        ar: "{a}Ne ... que{/a} تعني «فقط». هذه البنية لا تنفي الفعل بشكل كامل، بل تحدد ما نتحدث عنه.",
+        fa: "{a}Ne ... que{/a} یعنی «فقط». این ساختار عمل را کاملاً منفی نمی‌کند، بلکه آنچه گفته می‌شود را محدود می‌کند.",
+        pt: "{a}Ne ... que{/a} significa «apenas». Esta estrutura não nega completamente a ação, mas limita o que é dito.",
+        so: "{a}Ne ... que{/a} waxay ka dhigan tahay «kaliya». Qaabkani ficilka si buuxda uma diido, balse wuxuu xaddidayaa waxa la sheegayo.",
+        ti: "{a}Ne ... que{/a} ማለት «ጥራይ» ማለት እዩ። እዚ ቅርጺ ነቲ ተግባር ሙሉእ ብሙሉእ ኣይክልክልን፣ እንታይ ከም ዝበሃል ይድርብ እዩ።",
+        tr: "{a}Ne ... que{/a}, «sadece» anlamına gelir. Bu yapı eylemi tamamen olumsuzlamaz; söylenen şeyi sınırlar.",
+        ps: "{a}Ne ... que{/a} یعنې «یوازې». دا جوړښت عمل په بشپړه توګه نه ردوي، بلکې د ویلو مطلب محدودوي.",
+        uk: "{a}Ne ... que{/a} означає «лише». Ця конструкція не заперечує дію повністю, а обмежує те, про що йдеться.",
+        it: "{a}Ne ... que{/a} significa «solo». Questa struttura non nega completamente l'azione, ma limita ciò che viene detto.",
+        es: "{a}Ne ... que{/a} significa «solo». Esta estructura no niega completamente la acción, sino que limita lo que se dice.",
+        prs: "{a}Ne ... que{/a} یعنی «فقط». این ساختار عمل را کاملاً منفی نمی‌کند، بلکه آنچه گفته می‌شود را محدود می‌کند.",
+        am: "{a}Ne ... que{/a} ማለት «ጥራይ» ማለት እዩ። እዚ ቅርጺ ነቲ ተግባር ሙሉእ ብሙሉእ ኣይክልክልን፣ እቲ ዝበሃል ነገር ይድርብ።",
+        ru: "{a}Ne ... que{/a} означает «только». Эта конструкция не отрицает действие полностью, а ограничивает сказанное.",
+        sq: "{a}Ne ... que{/a} do të thotë «vetëm». Kjo strukturë nuk e mohon plotësisht veprimin, por kufizon atë që thuhet.",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Seulement", "Avec ne ... que"],
+      transHeaders: {
+      },
+      rows: [
+        [
+          "Je parle seulement français.",
+          "Je {a}ne{/a} parle {a}que{/a} français."
+        ],
+        [
+          "Elle mange seulement des légumes.",
+          "Elle {a}ne{/a} mange {a}que{/a} des légumes."
+        ],
+        [
+          "Nous travaillons seulement les lundis.",
+          "Nous {a}ne{/a} travaillons {a}que{/a} le lundi."
+        ],
+        [
+          "Il boit seulement du thé.",
+          "Il {a}ne{/a} boit {a}que{/a} du café."
+        ],
+      ],
+    },
+    {
+      type: "heading",
+      text: "Cumul de négations",
+    },
+    {
+      type: "text",
+      text: "En français, le double négatif {a}renforce{/a} la négation. On peut donc combiner {a}ne…jamais…rien{/a} ou {a}ne…jamais…personne{/a}.",
+      transText : {
+
+      },
       items: [
-        "On peut combiner {a}ne…jamais…rien{/a} ou {a}ne…jamais…personne{/a}.",
         "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici.",
         "Il {a}ne{/a} fait {a}jamais{/a} {a}rien{/a}.",
-        "En français, le double négatif {a}renforce{/a} la négation (contrairement à l'anglais).",
       ],
-      transLabel: { en: "Combining negations", ar: "تراكم النفي", fa: "ترکیب نفی‌ها", ti: "ምድርራብ ኣሉታታት", uk: "Поєднання заперечень" },
-      transItems: {
-        en: ["You can combine {a}ne…jamais…rien{/a} or {a}ne…jamais…personne{/a}.", "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici. (I never see anyone here.)", "Il {a}ne{/a} fait {a}jamais{/a} {a}rien{/a}. (He never does anything.)", "In French, the double negative {a}reinforces{/a} the negation (unlike in English)."],
-        ar: ["يمكنك الجمع بين {a}ne…jamais…rien{/a} أو {a}ne…jamais…personne{/a}.", "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici. (لا أرى أحداً هنا أبداً.)", "Il {a}ne{/a} fait {a}jamais{/a} {a}rien{/a}. (لا يفعل شيئاً أبداً.)", "في الفرنسية، النفي المزدوج {a}يقوّي{/a} النفي (عكس الإنجليزية)."],
-        fa: ["می‌توانید {a}ne…jamais…rien{/a} یا {a}ne…jamais…personne{/a} را ترکیب کنید.", "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici. (هرگز کسی را اینجا نمی‌بینم.)", "Il {a}ne{/a} fait {a}jamais{/a} {a}rien{/a}. (هرگز کاری انجام نمی‌دهد.)", "در فرانسوی، نفی دوگانه نفی را {a}تقویت{/a} می‌کند (برخلاف انگلیسی)."],
-        ti: ["{a}ne…jamais…rien{/a} ወይ {a}ne…jamais…personne{/a} ከተደራርብ ትኽእል።", "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici. (ኣብዚ ፈጺመ ዋላ ሓደ ሰብ ኣይርኢን።)", "Il {a}ne{/a} fait {a}jamais{/a} {a}rien{/a}. (ፈጺሙ ዋላ ሓንቲ ኣይገብርን።)", "ብፈረንሳ ቋንቋ፣ ድርብ ኣሉታ ነቲ ኣሉታ {a}የደልድል{/a} (ብኣንጻር እንግሊዝኛ)።"],
-        uk: ["Можна поєднувати {a}ne…jamais…rien{/a} або {a}ne…jamais…personne{/a}.", "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici. (Я ніколи нікого тут не бачу.)", "Il {a}ne{/a} fait {a}jamais{/a} {a}rien{/a}. (Він ніколи нічого не робить.)", "У французькій мові подвійне заперечення {a}посилює{/a} заперечення (на відміну від англійської)."],
-      },
+      noBulletItems: [0,1]
     },
   ],
+  
   // Former a2-gr-l42 exercise array is empty; generatedGrammarExercises supplies its migrated pool.
   exercises: [],
 };
