@@ -11,12 +11,41 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
       type: "text",
       text: "D'autres négations que {a}ne… pas{/a} précisent le temps, les personnes ou les choses.",
       transText: {
-
+        en: "Other negations than {a}ne… pas{/a} specify time, people or things.",
+        ar: "تحدد أنواع أخرى من النفي غير {a}ne… pas{/a} الزمن أو الأشخاص أو الأشياء.",
+        fa: "نفی‌های دیگری غیر از {a}ne… pas{/a} زمان، افراد یا چیزها را مشخص می‌کنند.",
+        pt: "Outras formas de negação além de {a}ne… pas{/a} especificam o tempo, as pessoas ou as coisas.",
+        so: "Diidmo kale oo diidmo ah oo aan ahayn {a}ne… pas{/a} waxay qeexaan waqtiga, dadka ama waxyaabaha.",
+        ti: "ካብ {a}ne… pas{/a} ዝተፈልዩ ካልኦት ኣሉታዊ ቅርጽታት ግዜ፣ ሰባት ወይ ነገራት ይገልጹ።",
+        tr: "{a}ne… pas{/a} dışındaki diğer olumsuzluklar zamanı, kişileri veya şeyleri belirtir.",
+        ps: "د {a}ne… pas{/a} پرته نورې منفي بڼې وخت، کسان یا شیان مشخصوي.",
+        uk: "Інші заперечні конструкції, крім {a}ne… pas{/a}, уточнюють час, людей або речі.",
+        sq: "Forma të tjera mohimi përveç {a}ne… pas{/a} përcaktojnë kohën, njerëzit ose gjërat.",
+        prs: "ساختارهای منفی دیگری به‌جز {a}ne… pas{/a} زمان، افراد یا چیزها را مشخص می‌کنند.",
+        es: "Otras formas de negación además de {a}ne… pas{/a} especifican el tiempo, las personas o las cosas.",
+        it: "Altre forme di negazione oltre a {a}ne… pas{/a} precisano il tempo, le persone o le cose.",
+        ru: "Другие отрицательные конструкции, кроме {a}ne… pas{/a}, уточняют время, людей или предметы.",
       },
     },
     {
       type: "heading",
       text: "Négation - temps",
+      trans: {
+        en: "Negation - time",
+        ar: "النفي - الزمن",
+        fa: "نفی - زمان",
+        pt: "Negação - tempo",
+        so: "Diidmo - waqti",
+        ti: "ኣሉታ - ግዜ",
+        tr: "Olumsuzluk - zaman",
+        ps: "نفي - وخت",
+        uk: "Заперечення — час",
+        sq: "Mohimi - koha",
+        prs: "نفی - زمان",
+        es: "Negación - tiempo",
+        it: "Negazione - tempo",
+        ru: "Отрицание — время",
+      },
     },
     {
       type: "text",
@@ -401,8 +430,6 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     {
       type: "grid",
       headers: ["Seulement", "Avec ne ... que"],
-      transHeaders: {
-      },
       rows: [
         [
           "Je parle seulement français.",
@@ -425,12 +452,41 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     {
       type: "heading",
       text: "Cumul de négations",
+      trans: {
+        en: "Combination of negations",
+        ar: "تراكم أدوات النفي",
+        fa: "ترکیب نفی‌ها",
+        pt: "Acumulação de negações",
+        so: "Isku darka diidmooyinka",
+        ti: "ምድማር ኣሉታት",
+        tr: "Olumsuzlukların birleşimi",
+        ps: "د منفي بڼو یوځای کېدل",
+        uk: "Поєднання заперечень",
+        sq: "Grumbullimi i mohimeve",
+        prs: "ترکیب نفی‌ها",
+        es: "Acumulación de negaciones",
+        it: "Accumulo di negazioni",
+        ru: "Сочетание отрицаний",
+      },
     },
     {
       type: "text",
       text: "En français, le double négatif {a}renforce{/a} la négation. On peut donc combiner {a}ne…jamais…rien{/a} ou {a}ne…jamais…personne{/a}.",
-      transText : {
-
+      transText: {
+        en: "In French, the double negative {a}strengthens{/a} the negation. We can therefore combine {a}ne…jamais…rien{/a} or {a}ne…jamais…personne{/a}.",
+        ar: "في الفرنسية، {a}النفي المزدوج يقوّي{/a} النفي. لذلك يمكن الجمع بين {a}ne…jamais…rien{/a} أو {a}ne…jamais…personne{/a}.",
+        fa: "در زبان فرانسه، نفی دوگانه {a}نفی را تقویت می‌کند{/a}. بنابراین می‌توان {a}ne…jamais…rien{/a} یا {a}ne…jamais…personne{/a} را با هم ترکیب کرد.",
+        pt: "Em francês, a dupla negação {a}reforça{/a} a negação. Podemos, portanto, combinar {a}ne…jamais…rien{/a} ou {a}ne…jamais…personne{/a}.",
+        so: "Faransiiska, diidmada laba-geesoodka ahi {a}waxay xoojisaa{/a} diidmada. Sidaas awgeed, waxaa la isku dari karaa {a}ne…jamais…rien{/a} ama {a}ne…jamais…personne{/a}.",
+        ti: "ብፈረንሳይኛ፣ እቲ ክልተ ግዜ ኣሉታ {a}ነቲ ኣሉታ የደልድሎ{/a}። ስለዚ {a}ne…jamais…rien{/a} ወይ {a}ne…jamais…personne{/a} ክንውህዶም ንኽእል።",
+        tr: "Fransızcada çift olumsuzluk, olumsuzluğu {a}güçlendirir{/a}. Bu nedenle {a}ne…jamais…rien{/a} veya {a}ne…jamais…personne{/a} birlikte kullanılabilir.",
+        ps: "په فرانسوي کې دوه ګونی منفي {a}منفي پیاوړی کوي{/a}. له همدې امله {a}ne…jamais…rien{/a} یا {a}ne…jamais…personne{/a} یوځای کارول کېدای شي.",
+        uk: "У французькій мові подвійне заперечення {a}посилює{/a} заперечення. Тому можна поєднувати {a}ne…jamais…rien{/a} або {a}ne…jamais…personne{/a}.",
+        sq: "Në frëngjisht, mohimi i dyfishtë {a}e përforcon{/a} mohimin. Prandaj mund të kombinojmë {a}ne…jamais…rien{/a} ose {a}ne…jamais…personne{/a}.",
+        prs: "در زبان فرانسوی، نفی دوگانه {a}نفی را تقویت می‌کند{/a}. بنابراین می‌توان {a}ne…jamais…rien{/a} یا {a}ne…jamais…personne{/a} را با هم ترکیب کرد.",
+        es: "En francés, la doble negación {a}refuerza{/a} la negación. Por lo tanto, se pueden combinar {a}ne…jamais…rien{/a} o {a}ne…jamais…personne{/a}.",
+        it: "In francese, la doppia negazione {a}rafforza{/a} la negazione. Si possono quindi combinare {a}ne…jamais…rien{/a} o {a}ne…jamais…personne{/a}.",
+        ru: "Во французском языке двойное отрицание {a}усиливает{/a} отрицание. Поэтому можно сочетать {a}ne…jamais…rien{/a} или {a}ne…jamais…personne{/a}.",
       },
       items: [
         "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici.",

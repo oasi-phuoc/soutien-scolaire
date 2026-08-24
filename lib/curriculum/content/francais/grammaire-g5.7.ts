@@ -8,12 +8,11 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
   title: "La phrase exclamative",
   theory: [
     {
-      type: "heading",
-      text: "Utilisation",
-    },
-    {
       type: "text",
       text: "La phrase exclamative exprime différents sentiments : la surprise, l'admiration, la joie, le découragement, le regret…",
+      transText: {
+
+      },
     },
     {
       type: "heading",
@@ -21,17 +20,26 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
     },
     {
       type: "text",
+      text: "Toute phrase affirmative peut devenir exclamative avec une {a}intonation différente{/a} et un {a}point d'exclamation{/a}.",
+      transText: {
+
+      },
       items: [
-        "Toute phrase affirmative peut devenir exclamative avec une intonation différente et un point d'exclamation. → C'est beau ! ; Il y a trop de monde !",
-        "On peut aussi employer des mots particuliers en début de phrase.",
+        "C'est beau {a}!{/a}",
+        "Il y a trop de monde {a}!{/a}",
       ],
       allBullets: true,
     },
     {
       type: "text",
+      text: "On peut aussi utiliser des mots particuliers en début de phrase pour exprimer ses sentiments sous forme d’exclamation.",
+      transText: {
+        
+      },
       label: "Quel(s) / Quelle(s)",
       items: [
         "Suivi d'un groupe nominal ; s'accorde avec le nom. → Quel beau tableau !",
+                
       ],
     },
     {
