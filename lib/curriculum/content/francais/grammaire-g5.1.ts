@@ -7,18 +7,9 @@ export const A1_GR_PHRASES: GrammarLesson = {
   title: "Les phrases",
   theory: [
     { 
-      type: "heading",
-      text: "La structure de la phrase",
+      type: "heading", 
+      text: "La structure de la phrase", 
       trans: {
-        en: "Sentence structure",
-        ar: "بنية الجملة",
-        fa: "ساختار جمله",
-        pt: "Estrutura da frase",
-        so: "Qaab-dhismeedka jumladda",
-        ti: "ኣቀማምጣ ሓረግ",
-        tr: "Cümle yapısı",
-        ps: "د جملې جوړښت",
-        uk: "Структура речення",
       },
     },
     {
@@ -86,12 +77,30 @@ export const A1_GR_PHRASES: GrammarLesson = {
         ps: "{a}فاعل{/a} هغه کس یا شی ښيي چې {a}عمل ترسره کوي{/a} یا {a}په یوه حالت کې وي{/a}.\nموږ دا پوښتنه کولی شو: {a}Qui ?{/a} یا {a}Qu'est-ce qui ?{/a}",
         uk: "{a}Підмет{/a} позначає особу або предмет, який {a}виконує дію{/a} або {a}перебуває в певному стані{/a}.\nМожна поставити запитання: {a}Qui ?{/a} або {a}Qu'est-ce qui ?{/a}",
       },
-      items: [
-        "Paul mange. → Qui mange ? → {a}Paul{/a}.",
-        "Le chat dort. → Qui dort ? → {a}Le chat{/a}.",
-        "Elle travaille. → Qui travaille ? → {a}Elle{/a}."
+    },
+    {
+      type: "grid",
+      headers: ["Phase", "Question", "Sujet"],
+      equalCols: true,
+      rows: [
+        ["Elisa court.", "{a}Qui{/a} court ?", "Elisa"],
+        ["Le professeur parle", "{a}Qui{/a} parle ?", "Le professeur"],
+        ["Nous jouons", "{a}Qui{/a} joue ?", "Nous"],
       ],
-      noBulletItems:[0,1,2],
+      transHeaders: {
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Phase", "Question", "Sujet"],
+      equalCols: true,
+      rows: [
+        ["Elisa court.", "{a}Qui{/a} court ?", "Elisa"],
+        ["Le professeur parle", "{a}Qui{/a} parle ?", "Le professeur"],
+        ["Nous jouons", "{a}Qui{/a} joue ?", "Nous"],
+      ],
+      transHeaders: {
+      },
     },
     {
       type: "text",
@@ -280,10 +289,6 @@ export const A1_GR_PHRASES: GrammarLesson = {
         ps: "متمم د {a}quoi ?{/a} یا {a}qui ?{/a} پوښتنې ته ځواب ورکوي.",
         uk: "Додаток відповідає на запитання {a}quoi ?{/a} або {a}qui ?{/a}.",
       },
-      items: [
-        "Je mange un fruit. → Je mange quoi ? →  {a}un fruit{/a}.",
-      ],
-      noBulletItems: [0],
       transLabel: {
         en: "COD — Direct Object",
         ar: "المفعول به المباشر",
@@ -294,6 +299,17 @@ export const A1_GR_PHRASES: GrammarLesson = {
         tr: "COD — Belirtili Nesne",
         ps: "COD — مستقیم متمم",
         uk: "COD — Прямий додаток",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Phase", "Question", "COD"],
+      equalCols: true,
+      rows: [
+        ["Fanny invite ses amis.", "Fanny invite {a}qui{/a} ?", "{a}ses amis{/a}"],
+        ["Je mange un fruit.", "Je mange {a}quoi{/a} ?", "{a}un fruit{/a}"],
+      ],
+      transHeaders: {
       },
     },
     {
@@ -311,10 +327,6 @@ export const A1_GR_PHRASES: GrammarLesson = {
         ps: "متمم د {a}à qui ?{/a} یا {a}à quoi ?{/a} پوښتنې ته ځواب ورکوي.",
         uk: "Додаток відповідає на запитання {a}à qui ?{/a} або {a}à quoi ?{/a}.",
       },
-      items: [
-        "Je parle à Marie → Je parle à qui ? → {a}à Marie{/a}.",
-      ],
-      noBulletItems: [0],
       transLabel: {
         en: "COI — Indirect Object",
         ar: "المفعول به غير المباشر",
@@ -325,6 +337,17 @@ export const A1_GR_PHRASES: GrammarLesson = {
         tr: "COI — Dolaylı Tümleç",
         ps: "COI — غیر مستقیم متمم",
         uk: "COI — Непрямий додаток",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Phase", "Question", "COI"],
+      equalCols: true,
+      rows: [
+        ["Il parle à Marie.", "Il parle {a}à qui{/a} ?", "{a}à Marie{/a}"],
+        ["Mon père pense à son travail.", "Mon père pense {a}à quoi{/a} ?", "{a}à son travail{/a}"],
+      ],
+      transHeaders: {
       },
     },
     {
@@ -342,12 +365,6 @@ export const A1_GR_PHRASES: GrammarLesson = {
         ps: "متمم د {a}où ?{/a}، {a}quand ?{/a} یا {a}comment ?{/a} پوښتنو ته ځواب ورکوي.",
         uk: "Додаток відповідає на запитання {a}où ?{/a}, {a}quand ?{/a} або {a}comment ?{/a}.",
       },
-      items: [
-        "Je vais à l'école. → Je vais où ? → {a}à l'école{/a}",
-        "Je travaille le matin. → Je travaille quand ? → {a}le matin{/a}",
-        "Il marche lentement → Il marche comment ? → {a}lentement{/a}",
-      ],
-      noBulletItems: [0, 1, 2],
       transLabel: {
         en: "CC — Circumstantial Complement",
         ar: "المتمم الظرفي",
@@ -358,6 +375,18 @@ export const A1_GR_PHRASES: GrammarLesson = {
         tr: "CC — Zarf Tümleci",
         ps: "CC — حالتي متمم",
         uk: "CC — Обставина",
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Phase", "Question", "CC"],
+      equalCols: true,
+      rows: [
+        ["Je vais à l'école.", "Je vais {a}où{/a} ?", "{a}à l'école{/a}"],
+        ["Julie travaille le matin.", "Julie travaille {a}quand{/a} ?", "{a}le matin{/a}"],
+        ["Le chien marche lentement.", "Le chien marche {a}comment{/a} ? → {a}lentement{/a}"],
+      ],
+      transHeaders: {
       },
     },
   ],
