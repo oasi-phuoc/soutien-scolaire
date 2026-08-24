@@ -54,7 +54,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   // ── G6 — Bilan A1 ──
   lesson("A1", "a1-gr-bilan-a1", "G6.1", "Bilan A1", "Révision des points essentiels du niveau A1.", "grammaire"),
   // ── G7 — Les prépositions de lieu ──
-  lesson("A1", "a1-gr-a-en-de-lieux", "G7.1", "À, en, de avec les noms de villes, pays et continents", "Prépositions de lieu avec les toponymes.", "grammaire"),
+  lesson("A1", "a1-gr-a-en-de-lieux", "G7.1", "Les prépositions de lieu", "Prépositions de lieu avec les toponymes.", "grammaire"),
   lesson("A1", "a1-gr-autres-prepositions", "G7.2", "Autres prépositions et adverbes", "À/chez/de, sur/dans/sous, devant/derrière, ici/là/là-bas…", "grammaire"),
   // ── G8 — Le passé ──
   lesson("A1", "a1-gr-passe-compose-avoir", "G8.1", "Le passé composé avec avoir", "Auxiliaire avoir + participe passé ; verbes en -er et formes fréquentes.", "grammaire"),
