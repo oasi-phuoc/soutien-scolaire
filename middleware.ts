@@ -1,4 +1,3 @@
-```ts
 import {
   createServerClient,
   type CookieOptions,
@@ -365,4 +364,3 @@ export const config = {
     "/((?!_next/static|_next/image|favicon\\.ico|sw\\.js|manifest\\.webmanifest|manifest\\.json|offline-manifest\\.json|offline\\.html|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|ico|apk)$).*)",
   ],
 };
-```
