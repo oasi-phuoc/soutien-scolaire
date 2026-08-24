@@ -29,7 +29,7 @@ export const A1_GR_AUTRES_NEGATIONS: GrammarLesson = {
     },
     {
       type: "selector",
-      buttonCols: 3,
+      buttonCols: 2,
       tabs: [
         {
           label: "Ne ... jamais",

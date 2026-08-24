@@ -101,7 +101,7 @@ export const A1_GR_NEGATION_NE_PAS: GrammarLesson = {
     },
     {
       type: "heading",
-      text: "Ne ... pas pas",
+      text: "Ne ... pas de",
     },
     {
       type: "text",

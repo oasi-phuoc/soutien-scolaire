@@ -83,21 +83,9 @@ export const A1_GR_PHRASES: GrammarLesson = {
       headers: ["Phase", "Question", "Sujet"],
       equalCols: true,
       rows: [
-        ["Elisa court.", "{a}Qui{/a} court ?", "Elisa"],
-        ["Le professeur parle", "{a}Qui{/a} parle ?", "Le professeur"],
-        ["Nous jouons", "{a}Qui{/a} joue ?", "Nous"],
-      ],
-      transHeaders: {
-      },
-    },
-    {
-      type: "grid",
-      headers: ["Phase", "Question", "Sujet"],
-      equalCols: true,
-      rows: [
-        ["Elisa court.", "{a}Qui{/a} court ?", "Elisa"],
-        ["Le professeur parle", "{a}Qui{/a} parle ?", "Le professeur"],
-        ["Nous jouons", "{a}Qui{/a} joue ?", "Nous"],
+        ["Elisa court.", "{a}Qui{/a} court ?", "{a}Elisa{/a}"],
+        ["Le professeur parle", "{a}Qui{/a} parle ?", "{a}Le professeur{/a}"],
+        ["Nous jouons", "{a}Qui{/a} joue ?", "{a}Nous{/a}"],
       ],
       transHeaders: {
       },
@@ -384,7 +372,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       rows: [
         ["Je vais à l'école.", "Je vais {a}où{/a} ?", "{a}à l'école{/a}"],
         ["Julie travaille le matin.", "Julie travaille {a}quand{/a} ?", "{a}le matin{/a}"],
-        ["Le chien marche lentement.", "Le chien marche {a}comment{/a} ? → {a}lentement{/a}"],
+        ["Le chien marche lentement.", "Le chien marche {a}comment{/a} ?", "{a}lentement{/a}"],
       ],
       transHeaders: {
       },

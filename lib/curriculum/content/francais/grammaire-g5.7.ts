@@ -113,7 +113,8 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
         ru: "Мы используем {a}quel(s){/a} или {a}quelle(s){/a} перед существительным, чтобы выразить сильное чувство или восхищение.",
       },
       items: [
-        "Quel beau tableau !",
+        "{a}Quel{/a} beau tableau !",
+        "{a}Qelle{/a} jolie voiture !",
       ],
       noBulletItems: [0]
     },
@@ -138,9 +139,9 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
         ru: "Мы используем {a}que{/a}, {a}comme{/a} или {a}qu'est-ce que{/a} в начале предложения, чтобы выразить сильное чувство.",
       },
       items: [
-        "Que ce musée est intéressant !",
-        "Comme ce musée est intéressant !",
-        "Qu'est-ce que c'est intéressant !",
+        "{a}Que{/a} ce musée est intéressant !",
+        "{a}Comme{/a} ce musée est intéressant !",
+        "{a}Qu'est-ce que{/a} c'est intéressant !",
       ],
       noBulletItems: [0,1,2],
     },
@@ -166,7 +167,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
     },
     {
       type: "text",
-      text: "Il ne faut pas confondre une affirmation et une exclamation.",
+      text: "Il ne faut pas confondre une {a}affirmation{/a} et une {a}exclamation{/a}.",
       transText: {
         en: "An affirmative sentence and an exclamation should not be confused.",
         ar: "يجب عدم الخلط بين الجملة المثبتة والجملة التعجبية.",
@@ -184,13 +185,13 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
         ru: "Не следует путать утвердительное предложение с восклицательным.",
       },
       items: [
-        "C'est beau. ≠ C'est beau !",
+        "C'est beau{a}.{/a} {a}≠{/a} C'est beau {a}!{/a}",
       ],
       noBulletItems:[0],
     },
     {
       type: "text",
-      text: "Il ne fait pas confondre une question et une exclamation.",
+      text: "Il ne fait pas confondre une {a}question{/a} et une {a}exclamation{/a}.",
       transText: {
         en: "A question and an exclamation should not be confused.",
         ar: "يجب عدم الخلط بين السؤال والجملة التعجبية.",
@@ -208,7 +209,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
         ru: "Не следует путать вопрос с восклицательным предложением.",
       },
       items: [
-        "Quels beaux tableaux ? ≠ Quels beaux tableaux !"
+        "Quels beaux tableaux {a}?{/a} {a}≠{/a} Quels beaux tableaux {a}!{/a}"
       ],
     },
     {
