@@ -31,6 +31,7 @@ import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
+import { currentPrintExerciseSeed } from "@/components/math/placement/placement-print-rng";
 import {
   printQuestionsListClass,
   usePrintColumns,
@@ -1032,7 +1033,7 @@ export function buildA1PrintExercises(submoduleId: string): PrintExercise[] {
         : [];
   return steps.map((step, index) => {
     const hint = typeof getA1StepHint === "function" ? getA1StepHint(step) : undefined;
-    const seed = 3_000_000 + index;
+    const seed = currentPrintExerciseSeed(step);
     return {
       id: step,
       label: `Exercice ${index + 1}`,

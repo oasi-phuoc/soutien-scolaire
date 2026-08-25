@@ -32,6 +32,10 @@ import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-ques
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
+import {
+  currentPrintBundleBaseSeed,
+  currentPrintExerciseSeed,
+} from "@/components/math/placement/placement-print-rng";
 
 const TOTAL_SECONDS = 45 * 60;
 const CE_BODY_TEXT = "text-sm leading-relaxed text-justify text-[var(--color-text-primary)]";
@@ -1465,12 +1469,33 @@ function buildCeCorrectAnswers(part: CEPart): CEAnswers {
   return answers;
 }
 
+const CE_LEVEL_PART_IDS = ["orientation", "email", "instructions", "information"] as const;
+
+function cePartsForPrint(
+  seed: number,
+  level?: "base" | "moyen" | "avance",
+): CEPart[] {
+  if (level) {
+    return CE_LEVEL_PART_IDS.map((partId, index) => {
+      const stamp = currentPrintExerciseSeed(`ce-${index}-${partId}`, seed);
+      return buildParts(level, stamp).find((p) => p.id === partId)!;
+    });
+  }
+  const structureStamp = currentPrintBundleBaseSeed() || seed;
+  return PROGRESSIVE_SKILL_LEVELS.map((lvl, i) => {
+    const pool = buildParts(lvl, structureStamp + i * 997);
+    const picked = pool[pickIndex(pool.length, `${structureStamp}-pick-${i}`)]!;
+    const stamp = currentPrintExerciseSeed(`ce-${i}-${picked.id}`, seed);
+    return buildParts(lvl, stamp).find((p) => p.id === picked.id) ?? picked;
+  });
+}
+
 /** Aperçu imprimable du CE — progressif (défaut) ou un niveau fixe. */
 export function buildPlacementCePrintExercises(
   seed = 1,
   level?: "base" | "moyen" | "avance",
 ): PrintExercise[] {
-  const parts = level ? buildParts(level, seed) : buildProgressiveCEParts(seed);
+  const parts = cePartsForPrint(seed, level);
   const noopSetAnswer = (_key: string, _value: number | string | null) => {};
   return parts.map((part, index) => {
     if (part.layout === "orientation") {

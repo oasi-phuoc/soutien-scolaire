@@ -44,6 +44,11 @@ import {
 import { PLACEMENT_MATH_EXERCISES, PLACEMENT_MATH_TOTAL_POINTS } from "@/lib/placement/math-exercises";
 import { PlacementMathPrintPreview, PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
 import {
+  currentPrintBundleBaseSeed,
+  currentPrintExerciseSeed,
+  runWithPrintBundleSeed,
+} from "@/components/math/placement/placement-print-rng";
+import {
   FrenchPlacementCompleteAnnounce,
   FrenchPlacementSkillAnnounce,
   MathPlacementCompleteAnnounce,
@@ -89,6 +94,8 @@ export type BuildPrintBundleOptions = {
   frenchLevel?: PlacementLevel;
   /** Seed de tirage (refresh à chaque ouverture d'impression). */
   seed?: number;
+  /** Nonce par id d’exercice : incrémenté pour re-tirer uniquement cet exercice. */
+  exerciseNonces?: Record<string, number>;
 };
 
 function resolvePrintSeed(seed?: number): number {
@@ -254,7 +261,7 @@ function buildVocabBundle(slug: string): PrintBundle | null {
     accentColor: "var(--color-accent-fr)",
     theoryPreview: <VocabCards theme={theme} onCanValidateChange={noop} />,
     exercises: steps.map((step, index) => {
-      const seed = 6_000_000 + index;
+      const seed = currentPrintExerciseSeed(step.key);
       return {
         id: step.key,
         label: `Exercice ${index + 1}`,
@@ -294,7 +301,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
       grammarTheoryBlocks: lesson.theory,
       theoryMeta: extractGrammarTheoryMeta(lesson.theory),
       exercises: lesson.exercises.map((ex, i) => {
-        const seed = 4_000_000 + i;
+        const seed = currentPrintExerciseSeed(String(i));
         const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
         return {
           id: String(i),
@@ -347,7 +354,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
     grammarTheoryBlocks: conjBlocks,
     theoryMeta: extractGrammarTheoryMeta(conjBlocks),
     exercises: lesson.exercises.map((ex, i) => {
-      const seed = 5_000_000 + i;
+      const seed = currentPrintExerciseSeed(String(i));
       const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
       return {
         id: String(i),
@@ -384,10 +391,11 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
 
 function mathExercisePrintItem(
   ex: (typeof PLACEMENT_MATH_EXERCISES)[number],
-  sessionSeed: number,
+  _sessionSeed: number,
   index: number,
 ): PrintExercise {
   const Comp = ex.component;
+  const itemSeed = currentPrintExerciseSeed(String(ex.id));
   return {
     id: String(ex.id),
     label: `Exercice ${index + 1}`,
@@ -395,9 +403,9 @@ function mathExercisePrintItem(
     supportsPrintLayout: ex.printQuestions != null,
     defaultQuestionCount: ex.printQuestions,
     defaultColumns: ex.printColumns,
-    preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} />,
+    preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={itemSeed} />,
     correctionPreview: (
-      <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} correction />
+      <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={itemSeed} correction />
     ),
   };
 }
@@ -540,7 +548,7 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
   const pool = lesson.exercisePool ?? [];
   const training =
     pool.length > 0
-      ? pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, 1)
+      ? pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, currentPrintBundleBaseSeed())
       : (lesson.exercises ?? []);
   const picked = [...training, ...(lesson.evalExercises ?? [])];
 
@@ -587,7 +595,7 @@ function buildExpressBundle(lessonId: string): PrintBundle | null {
           ? buildExpressListeningTasks(
               ex.questionPool,
               ex.questionCount ?? 5,
-              `${ex.id}-print`,
+              String(currentPrintExerciseSeed(ex.id || String(i))),
             )
           : [];
       const poolPreview =
@@ -732,34 +740,36 @@ export function buildPrintBundle(
   options?: BuildPrintBundleOptions,
 ): PrintBundle | null {
   const seed = resolvePrintSeed(options?.seed);
-  if (catalogId.startsWith("placement:math:")) {
-    return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length), seed);
-  }
-  if (catalogId.startsWith("placement:francais:")) {
-    return buildPlacementFrenchPartBundle(
-      catalogId.slice("placement:francais:".length),
-      options?.frenchLevel ?? "base",
-      seed,
-    );
-  }
+  return runWithPrintBundleSeed(seed, options?.exerciseNonces ?? {}, () => {
+    if (catalogId.startsWith("placement:math:")) {
+      return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length), seed);
+    }
+    if (catalogId.startsWith("placement:francais:")) {
+      return buildPlacementFrenchPartBundle(
+        catalogId.slice("placement:francais:".length),
+        options?.frenchLevel ?? "base",
+        seed,
+      );
+    }
 
-  if (catalogId.startsWith("math:")) {
-    return buildMathBundle(catalogId.slice("math:".length));
-  }
-  if (catalogId.startsWith("vocab:")) {
-    return buildVocabBundle(catalogId.slice("vocab:".length));
-  }
-  if (catalogId.startsWith("grammar:")) {
-    return buildGrammarBundle(catalogId.slice("grammar:".length), "grammar");
-  }
-  if (catalogId.startsWith("conj:")) {
-    return buildGrammarBundle(catalogId.slice("conj:".length), "conj");
-  }
-  if (catalogId.startsWith("express:")) {
-    return buildExpressBundle(catalogId.slice("express:".length));
-  }
-  if (catalogId.startsWith("lecture:")) {
-    return buildLectureBundle(catalogId.slice("lecture:".length), seed);
-  }
-  return null;
+    if (catalogId.startsWith("math:")) {
+      return buildMathBundle(catalogId.slice("math:".length));
+    }
+    if (catalogId.startsWith("vocab:")) {
+      return buildVocabBundle(catalogId.slice("vocab:".length));
+    }
+    if (catalogId.startsWith("grammar:")) {
+      return buildGrammarBundle(catalogId.slice("grammar:".length), "grammar");
+    }
+    if (catalogId.startsWith("conj:")) {
+      return buildGrammarBundle(catalogId.slice("conj:".length), "conj");
+    }
+    if (catalogId.startsWith("express:")) {
+      return buildExpressBundle(catalogId.slice("express:".length));
+    }
+    if (catalogId.startsWith("lecture:")) {
+      return buildLectureBundle(catalogId.slice("lecture:".length), seed);
+    }
+    return null;
+  });
 }

@@ -82,6 +82,11 @@ import {
   usePrintColumns,
   usePrintQuestionCount,
 } from "@/components/print/PrintExerciseLayoutContext";
+import {
+  beginPlacementPrintSeed,
+  currentPrintExerciseSeed,
+  endPlacementPrintSeed,
+} from "@/components/math/placement/placement-print-rng";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const ALG_FIELD_H = "min-h-9";
@@ -6873,6 +6878,8 @@ export function buildGenericMathPrintExercises(
       continue;
     }
     const n = out.length + 1;
+    beginPlacementPrintSeed(currentPrintExerciseSeed(`${step.kind}-${n}`));
+    try {
     if (step.kind === "word_problems") {
       const expanded = expandWordProblemsConfig(step.config, PRINT_POOL_SIZE);
       const answers = expanded.questions.map((q) => String(q.answer));
@@ -7125,6 +7132,9 @@ export function buildGenericMathPrintExercises(
         <GenericBlanksPrintPreview exerciseNum={n} defaultCount={cfgQs || 5} />
       ),
     });
+    } finally {
+      endPlacementPrintSeed();
+    }
   }
 
   if (out.length === 0) {

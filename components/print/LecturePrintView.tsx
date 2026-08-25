@@ -47,6 +47,7 @@ import {
 import { pedagogicSyllable } from "@/lib/curriculum/syllabify";
 import { lectureLessonTitle } from "@/lib/print/catalog";
 import { LECTURE_PRINT_ICONS, matchComplexSyllablePool, matchSyllablePool } from "@/lib/curriculum/lecture-print-icons";
+import { currentPrintExerciseSeed, withPrintSeed } from "@/components/math/placement/placement-print-rng";
 
 // ── RNG déterministe (aperçu = corrigé = impression) ──────────────────────────
 
@@ -59,6 +60,10 @@ function mulberry32(seed: number): () => number {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
+}
+
+function lectureRng(exerciseId: string): () => number {
+  return mulberry32(currentPrintExerciseSeed(exerciseId) >>> 0 || 1);
 }
 
 function sample<T>(arr: T[], n: number, rng: () => number): T[] {
@@ -654,7 +659,6 @@ function expandSoundItems(
 
 function letterExercises(
   data: VowelData | ConsonantData,
-  rng: () => number,
 ): PrintExercise[] {
   const phoneme = data.phoneme;
   const cols = { columns: LECTURE_PRINT_COLS };
@@ -664,11 +668,11 @@ function letterExercises(
       ? [...data.upperWordsSet1, ...data.upperWordsSet2]
       : data.upperWords;
   const pool = letterPronouncePool(data.letterLower);
-  const pronSteps = pool.length >= 4 ? sample(pool, 6, rng) : data.pronunciationChain;
-  const soundAudio = expandSoundItems(data.phoneme, data.soundItems, 30, rng, false);
-  const soundImages = expandSoundItems(data.phoneme, data.soundItems, 30, rng, true);
-  const syllAudio = randomSoundSyllableItems([data.phoneme], 30, false, rng);
-  const syllImages = randomSoundSyllableItems([data.phoneme], 30, true, rng);
+  const pronSteps = pool.length >= 4 ? sample(pool, 6, lectureRng("pronounce")) : data.pronunciationChain;
+  const soundAudio = expandSoundItems(data.phoneme, data.soundItems, 30, lectureRng("sound-check"), false);
+  const soundImages = expandSoundItems(data.phoneme, data.soundItems, 30, lectureRng("sound-check-images"), true);
+  const syllAudio = randomSoundSyllableItems([data.phoneme], 30, false, lectureRng("sound-syllable"));
+  const syllImages = randomSoundSyllableItems([data.phoneme], 30, true, lectureRng("sound-syllable-images"));
   const dual = DUAL_SOUND_LETTERS[data.letterLower];
   const extraPhoneme = dual?.[1];
   const vowels = ["a", "e", "i", "o", "u", "y"];
@@ -677,11 +681,15 @@ function letterExercises(
   const syll2: string[] = [];
   for (const a of cv) for (const b of cv) if (a !== b) syll2.push(a + b);
   const matchSyllPool = matchSyllablePool(data.letterLower, data.type);
-  const matchSylls = sample(matchSyllPool, Math.min(10, matchSyllPool.length), rng);
-  const matchSyllsRight = sample(matchSylls, matchSylls.length, rng);
-  const matchWordPool = randomWordsWithLetter(data.letterLower, 20).map((w) => w.toLowerCase());
-  const matchWords = sample(matchWordPool, Math.min(10, matchWordPool.length), rng);
-  const matchWordsRight = sample(matchWords, matchWords.length, rng);
+  const matchSyllRng = lectureRng("match-syllables");
+  const matchSylls = sample(matchSyllPool, Math.min(10, matchSyllPool.length), matchSyllRng);
+  const matchSyllsRight = sample(matchSylls, matchSylls.length, matchSyllRng);
+  const matchWordRng = lectureRng("match-words");
+  const matchWordPool = withPrintSeed(currentPrintExerciseSeed("match-words"), () =>
+    randomWordsWithLetter(data.letterLower, 20).map((w) => w.toLowerCase()),
+  );
+  const matchWords = sample(matchWordPool, Math.min(10, matchWordPool.length), matchWordRng);
+  const matchWordsRight = sample(matchWords, matchWords.length, matchWordRng);
 
   const exercises: PrintExercise[] = [
     makeExercise(
@@ -751,8 +759,8 @@ function letterExercises(
   ];
 
   if (extraPhoneme) {
-    const extraAudio = expandSoundItems(extraPhoneme, [], 30, rng, false);
-    const extraImages = expandSoundItems(extraPhoneme, [], 30, rng, true);
+    const extraAudio = expandSoundItems(extraPhoneme, [], 30, lectureRng("sound-check-2"), false);
+    const extraImages = expandSoundItems(extraPhoneme, [], 30, lectureRng("sound-check-images-2"), true);
     exercises.push(
       makeExercise(
         "sound-check-2",
@@ -814,7 +822,7 @@ function letterExercises(
         "syllables-2",
         "2 syllabes",
         "Écoutez et répétez les syllabes.",
-        (c) => <SyllableReadPrint items={sample(syll2, 12, rng)} correction={c} />,
+        (c) => <SyllableReadPrint items={sample(syll2, 12, lectureRng("syllables-2"))} correction={c} />,
         { questionCount: 4, ...soundCols },
         LECTURE_PRINT_ICONS.prononcer,
       ),
@@ -867,7 +875,7 @@ function letterExercises(
   return numberLectureExercises(exercises);
 }
 
-function syllableExercises(data: SyllableLessonData, rng: () => number): PrintExercise[] {
+function syllableExercises(data: SyllableLessonData): PrintExercise[] {
   const exercises = data.grids.map((grid) =>
     makeExercise(
       grid.key,
@@ -878,21 +886,20 @@ function syllableExercises(data: SyllableLessonData, rng: () => number): PrintEx
     ),
   );
   const matchSylls = [...new Set(data.grids.flatMap((g) => g.items.map((s) => s.toLowerCase())))];
-  const matchEx = matchLinkExercise("match-syllables", matchSylls, rng);
+  const matchEx = matchLinkExercise("match-syllables", matchSylls, lectureRng("match-syllables"));
   if (matchEx) exercises.push(matchEx);
   return exercises;
 }
 
 function monosyllableExercises(
   data: MonosyllableLessonData,
-  rng: () => number,
 ): PrintExercise[] {
   const isToolWords = data.letterLower === "outils";
   const exercises = data.grids.map((grid) => {
     const pool = grid.items.length
       ? grid.items
       : wordsPoolForLessonGrid("monosyllable", data.letterLower, grid.key);
-    const words = isToolWords ? pool : sample(pool, 30, rng);
+    const words = isToolWords ? pool : sample(pool, 30, lectureRng(grid.key));
     return makeExercise(
       grid.key,
       grid.label,
@@ -902,20 +909,23 @@ function monosyllableExercises(
     );
   });
   const matchPool = isToolWords ? ALL_TOOL_WORDS : monosyllablePool();
-  const matchEx = matchLinkExercise("match-words", matchPool.map((w) => w.toLowerCase()), rng);
+  const matchEx = matchLinkExercise(
+    "match-words",
+    matchPool.map((w) => w.toLowerCase()),
+    lectureRng("match-words"),
+  );
   if (matchEx) exercises.push(matchEx);
   return exercises;
 }
 
 function multisyllableExercises(
   data: MultisyllableLessonData,
-  rng: () => number,
 ): PrintExercise[] {
   const exercises = data.grids.map((grid) => {
     const pool = grid.items.length
       ? grid.items
       : wordsPoolForLessonGrid("multisyllable", data.letterLower, grid.key);
-    const words = sample(pool, 30, rng);
+    const words = sample(pool, 30, lectureRng(grid.key));
     return makeExercise(
       grid.key,
       grid.label,
@@ -927,7 +937,7 @@ function multisyllableExercises(
   const matchEx = matchLinkExercise(
     "match-words",
     multisyllablePool(2, null).map((w) => w.toLowerCase()),
-    rng,
+    lectureRng("match-words"),
   );
   if (matchEx) exercises.push(matchEx);
   return exercises;
@@ -935,19 +945,18 @@ function multisyllableExercises(
 
 function complexSoundExercises(
   data: ComplexSoundLessonData,
-  rng: () => number,
 ): PrintExercise[] {
   const targets = complexTargets(data.letter);
   const isTarget = (cell: string) => targets.includes(normalizeGraph(cell));
-  const words = sample(wordsForComplexGrapheme(data.letter, 12), 30, rng);
+  const words = sample(wordsForComplexGrapheme(data.letter, 12), 30, lectureRng("words"));
   const pool = complexGraphemePronouncePool(data.letter);
-  const pronSteps = sample(pool, 6, rng);
+  const pronSteps = sample(pool, 6, lectureRng("pronounce"));
   const cols = { columns: LECTURE_PRINT_COLS };
   const soundCols = { columns: SOUND_PRINT_COLS };
-  const soundAudio = expandSoundItems(data.phoneme, [], 30, rng, false);
-  const soundImages = expandSoundItems(data.phoneme, [], 30, rng, true);
-  const syllAudio = randomSoundSyllableItems([data.phoneme], 30, false, rng);
-  const syllImages = randomSoundSyllableItems([data.phoneme], 30, true, rng);
+  const soundAudio = expandSoundItems(data.phoneme, [], 30, lectureRng("sound-check"), false);
+  const soundImages = expandSoundItems(data.phoneme, [], 30, lectureRng("sound-check-images"), true);
+  const syllAudio = randomSoundSyllableItems([data.phoneme], 30, false, lectureRng("sound-syllable"));
+  const syllImages = randomSoundSyllableItems([data.phoneme], 30, true, lectureRng("sound-syllable-images"));
   const phoneme = data.phoneme;
 
   const exercises: PrintExercise[] = [
@@ -1025,7 +1034,7 @@ function complexSoundExercises(
   }
 
   const matchSylls = matchComplexSyllablePool(data.letter);
-  const matchSyllEx = matchLinkExercise("match-syllables", matchSylls, rng);
+  const matchSyllEx = matchLinkExercise("match-syllables", matchSylls, lectureRng("match-syllables"));
   if (matchSyllEx) exercises.push(matchSyllEx);
 
   if (pronSteps.length > 0) {
@@ -1041,7 +1050,7 @@ function complexSoundExercises(
   }
 
   const matchWordPool = wordsForComplexGrapheme(data.letter).map((w) => w.toLowerCase());
-  const matchWordEx = matchLinkExercise("match-words", matchWordPool, rng);
+  const matchWordEx = matchLinkExercise("match-words", matchWordPool, lectureRng("match-words"));
   if (matchWordEx) exercises.push(matchWordEx);
 
   return exercises;
@@ -1074,7 +1083,7 @@ function lectureTheoryPreview(data: LetterData): ReactNode | undefined {
 }
 
 /** Bundle d'impression lecture — `lessonId` au format `{moduleId}:{letterLower}` (ex. `l1:a`). */
-export function buildLectureBundle(lessonId: string, seed: number): PrintBundle | null {
+export function buildLectureBundle(lessonId: string, _seed: number): PrintBundle | null {
   const sep = lessonId.indexOf(":");
   if (sep === -1) return null;
   const moduleId = lessonId.slice(0, sep);
@@ -1083,25 +1092,23 @@ export function buildLectureBundle(lessonId: string, seed: number): PrintBundle 
   const data = mod?.letters.find((l) => l.letterLower === letterLower);
   if (!mod || !data) return null;
 
-  const rng = mulberry32(seed >>> 0 || 1);
-
   let exercises: PrintExercise[];
   switch (data.type) {
     case "vowel":
     case "consonant":
-      exercises = letterExercises(data, rng);
+      exercises = letterExercises(data);
       break;
     case "syllable":
-      exercises = syllableExercises(data, rng);
+      exercises = syllableExercises(data);
       break;
     case "monosyllable":
-      exercises = monosyllableExercises(data, rng);
+      exercises = monosyllableExercises(data);
       break;
     case "multisyllable":
-      exercises = multisyllableExercises(data, rng);
+      exercises = multisyllableExercises(data);
       break;
     case "complex-sound":
-      exercises = complexSoundExercises(data, rng);
+      exercises = complexSoundExercises(data);
       break;
   }
 
