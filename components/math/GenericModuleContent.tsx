@@ -78,6 +78,7 @@ import {
 } from "@/components/print/PrintWorkGrid";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import {
+  MAX_PRINT_QUESTIONS,
   printQuestionsListClass,
   usePrintColumns,
   usePrintQuestionCount,
@@ -6785,12 +6786,12 @@ function GenericBlanksPrintPreview({
   );
 }
 
-const PRINT_POOL_SIZE = 15;
+const PRINT_POOL_SIZE = MAX_PRINT_QUESTIONS;
 
 function expandWordProblemsConfig(config: WordProblemsConfig, poolSize = PRINT_POOL_SIZE): WordProblemsConfig {
   const qs = [...config.questions];
   let guard = 0;
-  while (qs.length < poolSize && guard < 40) {
+  while (qs.length < poolSize && guard < poolSize * 4) {
     qs.push(...genWP(config.level, config.exNum).questions);
     guard++;
   }
@@ -7010,7 +7011,7 @@ export function buildGenericMathPrintExercises(
     if (step.kind === "comparison_ex") {
       const questions = [...step.config.questions];
       let guard = 0;
-      while (questions.length < PRINT_POOL_SIZE && guard < 20) {
+      while (questions.length < PRINT_POOL_SIZE && guard < PRINT_POOL_SIZE * 2) {
         questions.push(...genComparisonConfig(step.config.level).questions);
         guard += 1;
       }

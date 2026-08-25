@@ -7,6 +7,7 @@ import { AppSelect } from "@/components/ui/AppSelect";
 import { ELEVE_CLASSE_TYPES, type EleveClasseType } from "@/lib/eleve-classe-types";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import {
+  MAX_PRINT_QUESTIONS,
   PrintExerciseLayoutProvider,
   clampPrintColumns,
   type PrintExerciseColumns,
@@ -1259,7 +1260,7 @@ export function PrintConfigSheet({
                                 value={sel.questionCount}
                                 onChange={(v) => setQuestionCount(ex.id, v)}
                                 min={1}
-                                max={30}
+                                max={MAX_PRINT_QUESTIONS}
                                 accent={accentColor}
                               />
                             </div>

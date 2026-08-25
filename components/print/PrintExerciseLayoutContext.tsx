@@ -11,6 +11,13 @@ import {
 
 export type PrintExerciseColumns = 1 | 2 | 3 | 4 | 5;
 
+/** Maximum du sélecteur « Questions » et taille du pool généré à l’impression. */
+export const MAX_PRINT_QUESTIONS = 30;
+
+export function clampPrintQuestionCount(value: number): number {
+  return Math.max(1, Math.min(MAX_PRINT_QUESTIONS, Math.round(value)));
+}
+
 export function clampPrintColumns(value: number): PrintExerciseColumns {
   const n = Math.round(value);
   if (n >= 5) return 5;
@@ -49,7 +56,7 @@ export function PrintExerciseLayoutProvider({
 export function usePrintQuestionCount(fallback: number): number {
   const ctx = useContext(PrintExerciseLayoutContext);
   if (!ctx) return fallback;
-  return Math.max(1, Math.min(30, ctx.questionCount));
+  return clampPrintQuestionCount(ctx.questionCount);
 }
 
 export function usePrintColumns(fallback: PrintExerciseColumns = 1): PrintExerciseColumns {
@@ -66,7 +73,7 @@ export function useIsPrintLayout(): boolean {
 export function usePrintQuestionLayout(fallbackCount: number) {
   const ctx = useContext(PrintExerciseLayoutContext);
   const questionCount = ctx
-    ? Math.max(1, Math.min(30, ctx.questionCount))
+    ? clampPrintQuestionCount(ctx.questionCount)
     : fallbackCount;
   const columns = clampPrintColumns(ctx?.columns ?? 1);
   const lengthMode: PrintLengthMode = ctx?.lengthMode ?? "width";

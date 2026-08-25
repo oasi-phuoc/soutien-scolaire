@@ -26,7 +26,7 @@ import {
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
-import { clampPrintColumns } from "@/components/print/PrintExerciseLayoutContext";
+import { MAX_PRINT_QUESTIONS, clampPrintColumns } from "@/components/print/PrintExerciseLayoutContext";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -1053,7 +1053,7 @@ export function ImpressionHubClient() {
                                     value={sel.questionCount}
                                     accent={accent}
                                     min={1}
-                                    max={30}
+                                    max={MAX_PRINT_QUESTIONS}
                                     onChange={(questionCount) =>
                                       patchSelection(ex.id, { questionCount })
                                     }
