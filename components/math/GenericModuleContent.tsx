@@ -2953,13 +2953,17 @@ function ArithmeticGroupExercise({
 
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = useMemo(
-    () =>
-      questionsForPrintCount(config.questions, questionCount, (n) =>
-        genArithGroup(config.op, config.range, config.exNum, config.missingOperand, config.timer, n).questions,
-      ),
-    [config.questions, config.op, config.range, config.exNum, config.missingOperand, config.timer, questionCount],
-  );
+  const questions = useMemo(() => {
+    if (config.questions.length >= questionCount) return config.questions.slice(0, questionCount);
+    return genArithGroup(
+      config.op,
+      config.range,
+      config.exNum,
+      config.missingOperand,
+      config.timer,
+      questionCount,
+    ).questions;
+  }, [config.questions, config.op, config.range, config.exNum, config.missingOperand, config.timer, questionCount]);
 
   return (
     <div className="space-y-4">
