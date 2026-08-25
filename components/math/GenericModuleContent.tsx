@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { useRouter } from "next/navigation";
-import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { GENERATED_ALGEBRA_LESSONS, generateAlgebraQuestions } from "@/lib/curriculum/content/math/generated-algebra-exercises";
@@ -1710,7 +1710,19 @@ function ComparisonExercise({
 }) {
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = config.questions.slice(0, questionCount);
+  const questions = useMemo(
+    () =>
+      questionsForPrintCount(config.questions, questionCount, (n) => {
+        const qs: ComparisonQ[] = [];
+        let guard = 0;
+        while (qs.length < n && guard < n * 2) {
+          qs.push(...genComparisonConfig(config.level).questions);
+          guard++;
+        }
+        return qs.slice(0, n);
+      }),
+    [config.questions, config.level, questionCount],
+  );
   const maxA = Math.max(0, ...questions.map(q => q.a));
   const numW = maxA >= 10000 ? "6ch" : maxA >= 1000 ? "5ch" : maxA >= 100 ? "3ch" : "2ch";
   return (
@@ -1800,7 +1812,13 @@ function ExprCompExercise({
 }) {
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = config.questions.slice(0, questionCount);
+  const questions = useMemo(() => {
+    if (config.questions.length >= questionCount) return config.questions.slice(0, questionCount);
+    const vals = config.questions.flatMap((q) => [q.la, q.lb, q.ra, q.rb]);
+    const maxV = vals.length ? Math.max(...vals.map(Math.abs)) : 99;
+    const range: [number, number] = maxV >= 100 ? [100, 999] : [1, 99];
+    return genExprComp(config.op, range, config.exNum, questionCount).questions;
+  }, [config.questions, config.op, config.exNum, questionCount]);
   const maxVal = Math.max(0, ...questions.flatMap(q => [Math.abs(q.la), Math.abs(q.lb), Math.abs(q.ra), Math.abs(q.rb)]));
   const numW = maxVal >= 1000 ? "4ch" : maxVal >= 100 ? "3ch" : "2ch";
   const num = (n: number) => (
@@ -2758,7 +2776,13 @@ function WordProblemsExercise({
 }) {
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = config.questions.slice(0, questionCount);
+  const questions = useMemo(
+    () =>
+      questionsForPrintCount(config.questions, questionCount, (n) =>
+        expandWordProblemsConfig(config, n).questions,
+      ),
+    [config, questionCount],
+  );
   const inputCls = `w-28 ${ALG_FIELD_H} px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   void noFrame; // toujours sans cadre (écran + impression)
   return (
@@ -2825,7 +2849,13 @@ function UnitConversionExercise({
 }) {
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = config.questions.slice(0, questionCount);
+  const questions = useMemo(
+    () =>
+      questionsForPrintCount(config.questions, questionCount, (n) =>
+        genUnitConversion(config.domain, config.decimals, config.exNum, n).questions,
+      ),
+    [config.questions, config.domain, config.decimals, config.exNum, questionCount],
+  );
   const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
     <div className="space-y-5">
@@ -2923,7 +2953,13 @@ function ArithmeticGroupExercise({
 
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = config.questions.slice(0, questionCount);
+  const questions = useMemo(
+    () =>
+      questionsForPrintCount(config.questions, questionCount, (n) =>
+        genArithGroup(config.op, config.range, config.exNum, config.missingOperand, config.timer, n).questions,
+      ),
+    [config.questions, config.op, config.range, config.exNum, config.missingOperand, config.timer, questionCount],
+  );
 
   return (
     <div className="space-y-4">
@@ -3706,7 +3742,13 @@ function RoundingExercise({
 }) {
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = config.questions.slice(0, questionCount);
+  const questions = useMemo(
+    () =>
+      questionsForPrintCount(config.questions, questionCount, (n) =>
+        genRounding(config.kind, config.exNum, n).questions,
+      ),
+    [config.questions, config.kind, config.exNum, questionCount],
+  );
   const inputBase = `w-[4.5rem] h-8 shrink-0 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   const isNew = config.consigne !== "";
   const isDecKind = config.kind.startsWith("dec_");
@@ -6788,6 +6830,12 @@ function GenericBlanksPrintPreview({
 
 const PRINT_POOL_SIZE = MAX_PRINT_QUESTIONS;
 
+/** À l’impression, complète le pool si le sélecteur demande plus de questions que celles déjà générées. */
+function questionsForPrintCount<T>(pool: T[], count: number, generate: (n: number) => T[]): T[] {
+  if (count <= pool.length) return pool.slice(0, count);
+  return generate(count);
+}
+
 function expandWordProblemsConfig(config: WordProblemsConfig, poolSize = PRINT_POOL_SIZE): WordProblemsConfig {
   const qs = [...config.questions];
   let guard = 0;
@@ -6823,7 +6871,13 @@ function OddEvenPrint({
 }) {
   const questionCount = usePrintQuestionCount(config.questions.length);
   const columns = usePrintColumns();
-  const questions = config.questions.slice(0, questionCount);
+  const questions = useMemo(
+    () =>
+      questionsForPrintCount(config.questions, questionCount, (n) =>
+        genOddEven(config.exNum, n).questions,
+      ),
+    [config.questions, config.exNum, questionCount],
+  );
   return (
     <div className="space-y-3">
       <p className="text-sm text-black">Indiquez si chaque nombre est pair ou impair.</p>
