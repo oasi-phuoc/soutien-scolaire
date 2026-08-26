@@ -16,14 +16,15 @@ export function PlacementPrintSeedRoot({
   children,
 }: {
   seed: number;
-  children: ReactNode;
+  children: ReactNode | (() => ReactNode);
 }) {
   beginPlacementPrintSeed(seed);
+  const node = typeof children === "function" ? children() : children;
   useLayoutEffect(() => {
     beginPlacementPrintSeed(seed);
     return () => endPlacementPrintSeed();
   }, [seed]);
-  return <>{children}</>;
+  return <>{node}</>;
 }
 
 export function PlacementMathPrintPreview({

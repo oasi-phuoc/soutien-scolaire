@@ -558,7 +558,10 @@ export function ImpressionHubClient() {
   };
 
   return (
-    <div className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]">
+    <div
+      className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]"
+      data-print-nonces={JSON.stringify(exerciseNonces)}
+    >
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border-default)] px-4 py-3">
         <div className="flex min-w-0 items-center gap-2">
           <PageBackButton href="/" ariaLabel="Retour à l'accueil" />

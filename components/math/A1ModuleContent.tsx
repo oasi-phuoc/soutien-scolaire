@@ -1015,13 +1015,16 @@ function A1PrintPreviewLive({
 }) {
   const questionCount = usePrintQuestionCount(5);
   const columns = usePrintColumns();
+  const liveSeed = seed + questionCount * 97 + columns * 13;
   return (
     <div className="space-y-2">
       {hint ? <p className="text-xs italic text-zinc-600">{hint}</p> : null}
-      <PlacementPrintSeedRoot key={seed + questionCount * 97 + columns * 13} seed={seed + questionCount * 97 + columns * 13}>
-        {a1PrintPreview(step, correction, questionCount, columns) ?? (
-          <div className="h-7 border-b border-black/40" />
-        )}
+      <PlacementPrintSeedRoot key={liveSeed} seed={liveSeed}>
+        {() =>
+          a1PrintPreview(step, correction, questionCount, columns) ?? (
+            <div className="h-7 border-b border-black/40" />
+          )
+        }
       </PlacementPrintSeedRoot>
     </div>
   );
