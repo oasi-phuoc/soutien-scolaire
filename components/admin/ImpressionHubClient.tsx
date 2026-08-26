@@ -776,7 +776,7 @@ export function ImpressionHubClient() {
 
                     <div className="space-y-2 border-t border-[var(--color-border-default)] pt-3">
                       <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
-                        Sauts de page (avant titre / texte / tableau)
+                        Sauts de page (avant titre, texte, tableau ou sélecteur)
                       </p>
                       {[0, 1, 2].map((slot) => (
                         <div key={slot} className="flex items-center gap-2">

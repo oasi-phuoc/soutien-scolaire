@@ -40,7 +40,7 @@ export type TheoryTablePrintConfig = {
 };
 
 export type TheoryPrintOptions = {
-  /** Jusqu’à 3 ids : saut de page AVANT ce bloc (titre, texte ou tableau). */
+  /** Jusqu’à 3 ids : saut de page AVANT ce bloc (titre, texte, tableau, grille ou sélecteur). */
   pageBreakBefore: [string | null, string | null, string | null];
   /** Espacement avant chaque titre (em). */
   headingPaddingEm: number;

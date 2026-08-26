@@ -287,6 +287,19 @@ function BlockView({
           ))}
         </div>
       );
+    case "selector": {
+      const tabs = block.tabs.map((t) => t.label.trim()).filter(Boolean);
+      const title = [block.labelPrefix?.trim(), tabs.join(" · ")].filter(Boolean).join(" : ");
+      if (!title) return null;
+      return (
+        <p
+          className="text-[1.05em] font-bold text-teal-700"
+          style={{ marginTop: isFirst ? 0 : `${headingPad}em` }}
+        >
+          {title}
+        </p>
+      );
+    }
     case "note":
       return <p className="text-[1em] text-zinc-700">{printMarkup(block.text)}</p>;
     case "vocab":
@@ -318,7 +331,7 @@ export function GrammarTheoryPrintView({
   return (
     <div className="space-y-3 text-[1em] leading-normal text-zinc-900">
       {indexed.map((block, i) => (
-        <div key={block.id}>
+        <div key={block.id} data-theory-block={block.id} data-theory-type={block.type}>
           <BlockView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
@@ -336,7 +349,7 @@ export function GrammarTheoryPrintSegment({
   return (
     <div className="space-y-3 text-[1em] leading-normal text-zinc-900">
       {blocks.map((block, i) => (
-        <div key={block.id}>
+        <div key={block.id} data-theory-block={block.id} data-theory-type={block.type}>
           <BlockView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
