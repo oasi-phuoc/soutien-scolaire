@@ -178,9 +178,12 @@ function PrintCircleBtn({
   );
 }
 
-function PrintCard({ children }: { children: ReactNode }) {
+function PrintCard({ children, word }: { children: ReactNode; word?: string }) {
   return (
-    <div className="print-item-card flex flex-col items-center gap-1.5 rounded-lg border-2 border-zinc-400 bg-white p-2">
+    <div
+      className="print-item-card flex flex-col items-center gap-1.5 rounded-lg border-2 border-zinc-400 bg-white p-2"
+      data-print-word={word}
+    >
       {children}
     </div>
   );
@@ -379,7 +382,7 @@ function SoundCheckPrint({
       {shown.map((item, i) => {
         const showImage = Boolean(withImages && hasLectureWordImage(item.label));
         return (
-          <PrintCard key={`${item.label}-${i}`}>
+          <PrintCard key={`${item.label}-${i}`} word={item.label}>
             {showImage ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -419,7 +422,7 @@ function SoundSyllablePrint({
       {shown.map((item, i) => {
         const showImage = Boolean(withImages && hasLectureWordImage(item.label));
         return (
-          <PrintCard key={`${item.label}-${i}`}>
+          <PrintCard key={`${item.label}-${i}`} word={item.label}>
             {showImage ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img

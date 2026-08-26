@@ -807,7 +807,7 @@ export function ImpressionsClient() {
                       || Boolean(item.selection.pageBreak)
                       || item.exercise?.forceNewPage === true,
                   render: () => (
-                    <div className="print-exercise">
+                    <div className="print-exercise" data-print-exercise={item.exercise?.id}>
                       <PrintExerciseHeader
                         exercise={item.exercise}
                         index={item.displayIndex}

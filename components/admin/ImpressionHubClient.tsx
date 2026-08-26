@@ -1221,7 +1221,7 @@ export function ImpressionHubClient() {
                   key: `${key}-${layoutKey}`,
                   forceNewPage,
                   render: () => (
-                    <div className="print-exercise">
+                    <div className="print-exercise" data-print-exercise={ex?.id}>
                       {titleRow(titleSuffix)}
                       <PrintExerciseBody
                         key={`${key}-body-${layoutKey}-o${item.occurrence}`}
@@ -1246,9 +1246,9 @@ export function ImpressionHubClient() {
                   key: `${key}-${layoutKey}`,
                   forceNewPage,
                   render: () => (
-                    <div className="print-exercise">
+                    <div className="print-exercise" data-print-exercise={ex?.id}>
                       {titleRow(titleSuffix, false)}
-                      <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                      <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none">
                         {clonePreview(preview, `${key}-plain-${item.occurrence}`)}
                       </div>
                     </div>

@@ -67,7 +67,7 @@ export function PrintExerciseRefreshButton({
       aria-label="Nouveau tirage"
       data-no-print
       data-print-refresh
-      className={`relative z-10 cursor-pointer inline-flex shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white text-zinc-600 opacity-100 transition hover:bg-zinc-100 hover:text-zinc-900 ${className}`}
+      className={`relative z-10 pointer-events-auto cursor-pointer inline-flex shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white text-zinc-600 opacity-100 transition hover:bg-zinc-100 hover:text-zinc-900 ${className}`}
     >
       <PrintRefreshIcon size={iconSize} />
       <span className="sr-only">Nouveau tirage</span>
@@ -97,7 +97,7 @@ export function PrintExerciseHeader({
   const icon = exercise?.printIcon;
   const instruction = showInstruction ? exercise?.instruction : undefined;
   return (
-    <div className="mb-3 flex items-start gap-2">
+    <div className="mb-3 flex items-start gap-2" data-print-exercise={exercise?.id}>
       <div className="min-w-0 flex-1">
         <div
           className={`${PRINT_EX_TITLE_CLASS}${instruction ? " print-ex-title--with-consigne" : ""}`}
@@ -136,7 +136,7 @@ export function PrintExerciseHeader({
 }
 
 const PRINT_EX_CONTENT_CLASS =
-  "print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none";
+  "print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none";
 
 function printExContentClass(answerKey: boolean): string {
   return answerKey ? `${PRINT_EX_CONTENT_CLASS} print-answer-key` : PRINT_EX_CONTENT_CLASS;
@@ -1536,7 +1536,7 @@ export function PrintConfigSheet({
                               showPoints={evalMode}
                               showInstruction={false}
                             />
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none">
                               {exercise.correctionLeadPreview}
                             </div>
                           </div>
@@ -1614,7 +1614,7 @@ export function PrintConfigSheet({
                               showPoints={evalMode}
                               showInstruction={false}
                             />
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none">
                               {lead}
                             </div>
                           </div>
@@ -1658,7 +1658,7 @@ export function PrintConfigSheet({
                                 showPoints={evalMode}
                                 showInstruction={false}
                               />
-                              <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none">
                                 {follow.preview}
                               </div>
                             </div>
