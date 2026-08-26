@@ -14,7 +14,6 @@ import {
   PrintExerciseBody,
   PrintExerciseHeader,
   PrintExerciseRefreshButton,
-  PrintExerciseRefreshProvider,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -438,7 +437,6 @@ export function ImpressionsClient() {
   };
 
   return (
-    <PrintExerciseRefreshProvider onRefresh={refreshExercise}>
     <div className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]">
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border-default)] px-4 py-3">
         <div className="min-w-0">
@@ -637,7 +635,7 @@ export function ImpressionsClient() {
                               {ex.label}
                             </span>
                             <PrintExerciseRefreshButton
-                              exerciseId={ex.id}
+                              onClick={() => refreshExercise(ex.id)}
                               className="h-7 w-7 text-[var(--color-text-secondary)]"
                             />
                           </div>
@@ -814,6 +812,11 @@ export function ImpressionsClient() {
                         accentColor={accent}
                         points={item.selection.points}
                         showPoints={evalMode}
+                        onRefresh={
+                          item.exercise?.id
+                            ? () => refreshExercise(item.exercise.id)
+                            : undefined
+                        }
                       />
                       <PrintExerciseBody
                         selection={item.selection}
@@ -840,6 +843,5 @@ export function ImpressionsClient() {
         </section>
       </div>
     </div>
-    </PrintExerciseRefreshProvider>
   );
 }

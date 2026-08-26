@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
 import { PageBackButton } from "@/components/ui/PageBackButton";
 import { AppSelect } from "@/components/ui/AppSelect";
@@ -26,22 +26,6 @@ import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-1.5 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold leading-[1.15]";
 
-const PrintExerciseRefreshContext = createContext<((exerciseId: string) => void) | null>(null);
-
-export function PrintExerciseRefreshProvider({
-  onRefresh,
-  children,
-}: {
-  onRefresh: (exerciseId: string) => void;
-  children: ReactNode;
-}) {
-  return (
-    <PrintExerciseRefreshContext.Provider value={onRefresh}>
-      {children}
-    </PrintExerciseRefreshContext.Provider>
-  );
-}
-
 function PrintRefreshIcon({ size = 16 }: { size?: number }) {
   return (
     <svg
@@ -63,28 +47,26 @@ function PrintRefreshIcon({ size = 16 }: { size?: number }) {
 
 /** Bouton de re-tirage (écran seulement, masqué à l'impression). */
 export function PrintExerciseRefreshButton({
-  exerciseId,
+  onClick,
   className = "",
   iconSize = 15,
 }: {
-  exerciseId: string;
+  onClick: () => void;
   className?: string;
   iconSize?: number;
 }) {
-  const onRefresh = useContext(PrintExerciseRefreshContext);
-  if (!onRefresh) return null;
   return (
     <button
       type="button"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        onRefresh(exerciseId);
+        onClick();
       }}
       title="Nouveau tirage"
       aria-label="Nouveau tirage"
       data-no-print
-      className={`inline-flex shrink-0 items-center justify-center rounded-md border border-current/25 opacity-70 transition hover:bg-black/5 hover:opacity-100 ${className}`}
+      className={`relative z-10 cursor-pointer inline-flex shrink-0 items-center justify-center rounded-md border border-current/25 opacity-70 transition hover:bg-black/5 hover:opacity-100 ${className}`}
     >
       <PrintRefreshIcon size={iconSize} />
     </button>
@@ -99,6 +81,7 @@ export function PrintExerciseHeader({
   points,
   showPoints,
   showInstruction = true,
+  onRefresh,
 }: {
   exercise: PrintExercise | undefined;
   index: number;
@@ -107,6 +90,7 @@ export function PrintExerciseHeader({
   points?: number;
   showPoints?: boolean;
   showInstruction?: boolean;
+  onRefresh?: () => void;
 }) {
   const icon = exercise?.printIcon;
   const instruction = showInstruction ? exercise?.instruction : undefined;
@@ -119,9 +103,9 @@ export function PrintExerciseHeader({
         >
           <span className="flex min-w-0 flex-1 items-center gap-[0.4em]">
             <span className="min-w-0">{printExerciseHeading(exercise, index, suffix)}</span>
-            {exercise?.id ? (
+            {onRefresh ? (
               <PrintExerciseRefreshButton
-                exerciseId={exercise.id}
+                onClick={onRefresh}
                 className="mt-[0.08em] h-[1.15em] w-[1.15em] text-current"
                 iconSize={14}
               />
