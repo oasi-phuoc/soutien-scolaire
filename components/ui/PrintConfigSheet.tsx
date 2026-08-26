@@ -66,9 +66,11 @@ export function PrintExerciseRefreshButton({
       title="Nouveau tirage"
       aria-label="Nouveau tirage"
       data-no-print
-      className={`relative z-10 cursor-pointer inline-flex shrink-0 items-center justify-center rounded-md border border-current/25 opacity-70 transition hover:bg-black/5 hover:opacity-100 ${className}`}
+      data-print-refresh
+      className={`relative z-10 cursor-pointer inline-flex shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white text-zinc-600 opacity-100 transition hover:bg-zinc-100 hover:text-zinc-900 ${className}`}
     >
       <PrintRefreshIcon size={iconSize} />
+      <span className="sr-only">Nouveau tirage</span>
     </button>
   );
 }
