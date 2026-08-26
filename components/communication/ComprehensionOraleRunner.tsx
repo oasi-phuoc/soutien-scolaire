@@ -22,6 +22,10 @@ import { markCommunicationLessonComplete } from "@/lib/progress/communication-pr
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 import {
+  mixPrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
+import {
   PrintAudioQrRow,
   coAudioQrItems,
   type PrintAudioQrItem,
@@ -1780,13 +1784,23 @@ function buildCoCorrectAnswers(part: COPart): Answers {
 export function buildPlacementCoPrintExercises(
   seed = 1,
   level?: "base" | "moyen" | "avance",
+  nonces?: PrintExerciseNonces,
 ): PrintExercise[] {
-  const parts = level ? makeParts(level, seed) : makeProgressiveCoPartsForPrint(seed);
+  const baseParts = level ? makeParts(level, seed) : makeProgressiveCoPartsForPrint(seed);
+  const parts = baseParts.map((part, index) => {
+    const slotId = `co-${index}`;
+    const nonce = nonces?.[slotId] ?? nonces?.[`${slotId}-${part.id}`] ?? 0;
+    if (!nonce) return part;
+    const stamp = mixPrintSeed(seed, slotId, nonce);
+    if (level) return makeParts(level, stamp)[index] ?? part;
+    const reprinted = makeProgressiveCoPartsForPrint(stamp);
+    return reprinted[index] ?? part;
+  });
   return parts.map((part, index) => {
     const correctAnswers = buildCoCorrectAnswers(part);
     const qrItems = coAudioQrItems(part.audioGroup.items);
     return {
-      id: `co-${index}-${part.id}`,
+      id: `co-${index}`,
       label: `CO ${index + 1}. ${part.title}`,
       defaultPoints: part.points,
       preview: (

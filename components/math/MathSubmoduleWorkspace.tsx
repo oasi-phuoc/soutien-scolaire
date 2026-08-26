@@ -39,6 +39,10 @@ import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
+import {
+  exercisePrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import {
   printQuestionsListClass,
@@ -1942,6 +1946,8 @@ function renderWorkspaceEvalStep(
 
 export function buildWorkspacePrintExercises(
   lesson: MathSubmoduleLesson,
+  seed = 1,
+  nonces?: PrintExerciseNonces,
 ): PrintExercise[] {
   const steps = buildSteps(lesson);
   const evalStart = steps.findIndex((s) => s.kind === "eval_start");
@@ -1956,23 +1962,24 @@ export function buildWorkspacePrintExercises(
     );
   const noop = () => {};
   return training.map((step, index) => {
-    const seed = 2_000_000 + index;
+    const id = `${step.kind}-${index}`;
+    const exSeed = exercisePrintSeed(seed, id, nonces);
     const defaultQuestionCount = stepExpectedTotal(step, undefined);
     return {
-      id: `${step.kind}-${index}`,
+      id,
       label: `Exercice ${index + 1}`,
       supportsPrintLayout: true,
       defaultQuestionCount,
       preview: (
         <div className="print-ex-content [&_button]:pointer-events-none">
-          <PlacementPrintSeedRoot seed={seed}>
+          <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
             {renderWorkspaceEvalStep(step, 0, noop)}
           </PlacementPrintSeedRoot>
         </div>
       ),
       correctionPreview: (
         <div className="print-ex-content [&_button]:pointer-events-none">
-          <PlacementPrintSeedRoot seed={seed}>
+          <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
             {renderWorkspaceEvalStep(step, 1, noop)}
           </PlacementPrintSeedRoot>
         </div>

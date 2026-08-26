@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
 import { PageBackButton } from "@/components/ui/PageBackButton";
 import { AppSelect } from "@/components/ui/AppSelect";
@@ -25,6 +25,71 @@ import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-1.5 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold leading-[1.15]";
+
+const PrintExerciseRefreshContext = createContext<((exerciseId: string) => void) | null>(null);
+
+export function PrintExerciseRefreshProvider({
+  onRefresh,
+  children,
+}: {
+  onRefresh: (exerciseId: string) => void;
+  children: ReactNode;
+}) {
+  return (
+    <PrintExerciseRefreshContext.Provider value={onRefresh}>
+      {children}
+    </PrintExerciseRefreshContext.Provider>
+  );
+}
+
+function PrintRefreshIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+    </svg>
+  );
+}
+
+/** Bouton de re-tirage (écran seulement, masqué à l'impression). */
+export function PrintExerciseRefreshButton({
+  exerciseId,
+  className = "",
+  iconSize = 15,
+}: {
+  exerciseId: string;
+  className?: string;
+  iconSize?: number;
+}) {
+  const onRefresh = useContext(PrintExerciseRefreshContext);
+  if (!onRefresh) return null;
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onRefresh(exerciseId);
+      }}
+      title="Nouveau tirage"
+      aria-label="Nouveau tirage"
+      data-no-print
+      className={`inline-flex shrink-0 items-center justify-center rounded-md border border-current/25 opacity-70 transition hover:bg-black/5 hover:opacity-100 ${className}`}
+    >
+      <PrintRefreshIcon size={iconSize} />
+    </button>
+  );
+}
 
 export function PrintExerciseHeader({
   exercise,
@@ -52,7 +117,16 @@ export function PrintExerciseHeader({
           className={`${PRINT_EX_TITLE_CLASS}${instruction ? " print-ex-title--with-consigne" : ""}`}
           style={{ color: accentColor }}
         >
-          <span className="flex-1">{printExerciseHeading(exercise, index, suffix)}</span>
+          <span className="flex min-w-0 flex-1 items-center gap-[0.4em]">
+            <span className="min-w-0">{printExerciseHeading(exercise, index, suffix)}</span>
+            {exercise?.id ? (
+              <PrintExerciseRefreshButton
+                exerciseId={exercise.id}
+                className="mt-[0.08em] h-[1.15em] w-[1.15em] text-current"
+                iconSize={14}
+              />
+            ) : null}
+          </span>
           {showPoints && points != null ? (
             <span style={{ color: "black" }}>
               {points} pt{points > 1 ? "s" : ""}

@@ -44,6 +44,10 @@ import {
 import { PLACEMENT_MATH_EXERCISES, PLACEMENT_MATH_TOTAL_POINTS } from "@/lib/placement/math-exercises";
 import { PlacementMathPrintPreview, PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
 import {
+  exercisePrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
+import {
   FrenchPlacementCompleteAnnounce,
   FrenchPlacementSkillAnnounce,
   MathPlacementCompleteAnnounce,
@@ -89,6 +93,8 @@ export type BuildPrintBundleOptions = {
   frenchLevel?: PlacementLevel;
   /** Seed de tirage (refresh à chaque ouverture d'impression). */
   seed?: number;
+  /** Nonces de re-tirage par exercice (bouton refresh à côté du titre). */
+  exerciseNonces?: PrintExerciseNonces;
 };
 
 function resolvePrintSeed(seed?: number): number {
@@ -98,23 +104,27 @@ function resolvePrintSeed(seed?: number): number {
 
 const noop = () => {};
 
-function buildMathBundle(submoduleId: string): PrintBundle | null {
+function buildMathBundle(
+  submoduleId: string,
+  seed: number,
+  nonces?: PrintExerciseNonces,
+): PrintBundle | null {
   const lesson = getLessonBySubmoduleId(submoduleId);
   if (!lesson) return null;
   const moduleId = getModuleIdForSubmodule(submoduleId) ?? submoduleId.split("-")[0] ?? "";
 
   let exercises: PrintExercise[];
   if (submoduleId === "A1-1" || submoduleId === "A1-2") {
-    exercises = buildA1PrintExercises(submoduleId);
+    exercises = buildA1PrintExercises(submoduleId, seed, nonces);
   } else if (isWorkspaceCustomSubmodule(moduleId, submoduleId)) {
-    exercises = buildWorkspacePrintExercises(lesson);
+    exercises = buildWorkspacePrintExercises(lesson, seed, nonces);
   } else {
-    exercises = buildGenericMathPrintExercises(lesson);
+    exercises = buildGenericMathPrintExercises(lesson, seed, nonces);
   }
 
   // Fallback si aucun exercice n'a pu être construit
   if (exercises.length === 0) {
-    exercises = buildGenericMathPrintExercises(lesson);
+    exercises = buildGenericMathPrintExercises(lesson, seed, nonces);
   }
 
   const isGeo = moduleId.startsWith("G");
@@ -244,7 +254,7 @@ function vocabExPreview(
   }
 }
 
-function buildVocabBundle(slug: string): PrintBundle | null {
+function buildVocabBundle(slug: string, seed: number, nonces?: PrintExerciseNonces): PrintBundle | null {
   const theme = getVocabTheme(slug);
   if (!theme) return null;
   const steps = vocabTrainingSteps(theme);
@@ -254,7 +264,7 @@ function buildVocabBundle(slug: string): PrintBundle | null {
     accentColor: "var(--color-accent-fr)",
     theoryPreview: <VocabCards theme={theme} onCanValidateChange={noop} />,
     exercises: steps.map((step, index) => {
-      const seed = 6_000_000 + index;
+      const exSeed = exercisePrintSeed(seed, step.key, nonces);
       return {
         id: step.key,
         label: `Exercice ${index + 1}`,
@@ -264,12 +274,12 @@ function buildVocabBundle(slug: string): PrintBundle | null {
         defaultSpacing: step.defaultSpacing,
         printLengthMode: step.printLengthMode,
         preview: (
-          <PlacementPrintSeedRoot seed={seed}>
+          <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
             {vocabExPreview(step.key, theme, 0, index + 1)}
           </PlacementPrintSeedRoot>
         ),
         correctionPreview: (
-          <PlacementPrintSeedRoot seed={seed}>
+          <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
             {vocabExPreview(step.key, theme, 1, index + 1)}
           </PlacementPrintSeedRoot>
         ),
@@ -278,7 +288,12 @@ function buildVocabBundle(slug: string): PrintBundle | null {
   };
 }
 
-function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle | null {
+function buildGrammarBundle(
+  slug: string,
+  kind: "grammar" | "conj",
+  seed: number,
+  nonces?: PrintExerciseNonces,
+): PrintBundle | null {
   if (kind === "grammar") {
     const lesson = getGrammarLesson(slug);
     if (!lesson) return null;
@@ -294,10 +309,11 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
       grammarTheoryBlocks: lesson.theory,
       theoryMeta: extractGrammarTheoryMeta(lesson.theory),
       exercises: lesson.exercises.map((ex, i) => {
-        const seed = 4_000_000 + i;
+        const id = String(i);
+        const exSeed = exercisePrintSeed(seed, id, nonces);
         const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
         return {
-          id: String(i),
+          id,
           label: `Exercice ${i + 1}`,
           supportsPrintLayout: true,
           defaultQuestionCount: grammarDefaultQuestionCount(ex),
@@ -305,7 +321,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
           defaultSpacing: isWriteStacked ? 5 : undefined,
           printLengthMode: isWriteStacked ? ("lines" as const) : ("width" as const),
           preview: (
-            <PlacementPrintSeedRoot seed={seed}>
+            <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
               <GrammarExerciseView
                 exercise={ex}
                 onValidated={noop}
@@ -315,7 +331,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
             </PlacementPrintSeedRoot>
           ),
           correctionPreview: (
-            <PlacementPrintSeedRoot seed={seed}>
+            <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
               <GrammarExerciseView
                 exercise={ex}
                 onValidated={noop}
@@ -347,10 +363,11 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
     grammarTheoryBlocks: conjBlocks,
     theoryMeta: extractGrammarTheoryMeta(conjBlocks),
     exercises: lesson.exercises.map((ex, i) => {
-      const seed = 5_000_000 + i;
+      const id = String(i);
+      const exSeed = exercisePrintSeed(seed, id, nonces);
       const isWriteStacked = ex.type === "write" && ex.promptLayout === "stacked";
       return {
-        id: String(i),
+        id,
         label: `Exercice ${i + 1}`,
         supportsPrintLayout: true,
         defaultQuestionCount: grammarDefaultQuestionCount(ex),
@@ -358,7 +375,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
         defaultSpacing: isWriteStacked ? 5 : undefined,
         printLengthMode: isWriteStacked ? ("lines" as const) : ("width" as const),
         preview: (
-          <PlacementPrintSeedRoot seed={seed}>
+          <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
             <GrammarExerciseView
               exercise={ex}
               onValidated={noop}
@@ -368,7 +385,7 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
           </PlacementPrintSeedRoot>
         ),
         correctionPreview: (
-          <PlacementPrintSeedRoot seed={seed}>
+          <PlacementPrintSeedRoot key={exSeed} seed={exSeed}>
             <GrammarExerciseView
               exercise={ex}
               onValidated={noop}
@@ -386,25 +403,32 @@ function mathExercisePrintItem(
   ex: (typeof PLACEMENT_MATH_EXERCISES)[number],
   sessionSeed: number,
   index: number,
+  nonces?: PrintExerciseNonces,
 ): PrintExercise {
   const Comp = ex.component;
+  const id = String(ex.id);
+  const exSeed = exercisePrintSeed(sessionSeed, id, nonces);
   return {
-    id: String(ex.id),
+    id,
     label: `Exercice ${index + 1}`,
     defaultPoints: ex.maxPoints,
     supportsPrintLayout: ex.printQuestions != null,
     defaultQuestionCount: ex.printQuestions,
     defaultColumns: ex.printColumns,
-    preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} />,
+    preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={exSeed} />,
     correctionPreview: (
-      <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} correction />
+      <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={exSeed} correction />
     ),
   };
 }
 
-function buildPlacementMathPartBundle(levelId: string, seed: number): PrintBundle | null {
+function buildPlacementMathPartBundle(
+  levelId: string,
+  seed: number,
+  nonces?: PrintExerciseNonces,
+): PrintBundle | null {
   if (levelId === "complet") {
-    const exercises = PLACEMENT_MATH_EXERCISES.map((ex, i) => mathExercisePrintItem(ex, seed, i));
+    const exercises = PLACEMENT_MATH_EXERCISES.map((ex, i) => mathExercisePrintItem(ex, seed, i, nonces));
     return {
       lessonTitle: "Test de placement — Mathématiques",
       course: "Mathématiques",
@@ -435,7 +459,7 @@ function buildPlacementMathPartBundle(levelId: string, seed: number): PrintBundl
         maxPoints={maxPoints}
       />
     ),
-    exercises: levelExercises.map((ex, i) => mathExercisePrintItem(ex, seed, i)),
+    exercises: levelExercises.map((ex, i) => mathExercisePrintItem(ex, seed, i, nonces)),
   };
 }
 
@@ -443,16 +467,17 @@ function frenchSkillPrintExercises(
   skill: PlacementSkill,
   seed: number,
   level?: PlacementLevel,
+  nonces?: PrintExerciseNonces,
 ): PrintExercise[] {
   switch (skill) {
     case "ce":
-      return buildPlacementCePrintExercises(seed, level);
+      return buildPlacementCePrintExercises(seed, level, nonces);
     case "co":
-      return buildPlacementCoPrintExercises(seed, level);
+      return buildPlacementCoPrintExercises(seed, level, nonces);
     case "pe":
-      return buildPlacementPePrintExercises(level, seed);
+      return buildPlacementPePrintExercises(level, seed, nonces);
     case "po":
-      return buildPlacementPoPrintExercises(level ?? "avance", seed);
+      return buildPlacementPoPrintExercises(level ?? "avance", seed, nonces);
   }
 }
 
@@ -460,6 +485,7 @@ function buildPlacementFrenchPartBundle(
   partId: string,
   frenchLevel: PlacementLevel = "base",
   seed = Date.now(),
+  nonces?: PrintExerciseNonces,
 ): PrintBundle | null {
   if (partId === "complet") {
     return {
@@ -469,13 +495,13 @@ function buildPlacementFrenchPartBundle(
       defaultEvalMode: true,
       announcementPreview: <FrenchPlacementCompleteAnnounce />,
       exercises: PLACEMENT_FRENCH_PRINT_PARTS.flatMap((part, i) =>
-        frenchSkillPrintExercises(part.id, seed + i * 10_007),
+        frenchSkillPrintExercises(part.id, seed + i * 10_007, undefined, nonces),
       ),
     };
   }
   const part = PLACEMENT_FRENCH_PRINT_PARTS.find((p) => p.id === partId);
   if (!part) return null;
-  const exercises = frenchSkillPrintExercises(part.id, seed, frenchLevel);
+  const exercises = frenchSkillPrintExercises(part.id, seed, frenchLevel, nonces);
   const maxPoints = exercises.reduce((sum, ex) => sum + (ex.defaultPoints ?? 0), 0);
   return {
     lessonTitle: `Test de placement — ${part.title}`,
@@ -732,34 +758,36 @@ export function buildPrintBundle(
   options?: BuildPrintBundleOptions,
 ): PrintBundle | null {
   const seed = resolvePrintSeed(options?.seed);
+  const nonces = options?.exerciseNonces;
   if (catalogId.startsWith("placement:math:")) {
-    return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length), seed);
+    return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length), seed, nonces);
   }
   if (catalogId.startsWith("placement:francais:")) {
     return buildPlacementFrenchPartBundle(
       catalogId.slice("placement:francais:".length),
       options?.frenchLevel ?? "base",
       seed,
+      nonces,
     );
   }
 
   if (catalogId.startsWith("math:")) {
-    return buildMathBundle(catalogId.slice("math:".length));
+    return buildMathBundle(catalogId.slice("math:".length), seed, nonces);
   }
   if (catalogId.startsWith("vocab:")) {
-    return buildVocabBundle(catalogId.slice("vocab:".length));
+    return buildVocabBundle(catalogId.slice("vocab:".length), seed, nonces);
   }
   if (catalogId.startsWith("grammar:")) {
-    return buildGrammarBundle(catalogId.slice("grammar:".length), "grammar");
+    return buildGrammarBundle(catalogId.slice("grammar:".length), "grammar", seed, nonces);
   }
   if (catalogId.startsWith("conj:")) {
-    return buildGrammarBundle(catalogId.slice("conj:".length), "conj");
+    return buildGrammarBundle(catalogId.slice("conj:".length), "conj", seed, nonces);
   }
   if (catalogId.startsWith("express:")) {
     return buildExpressBundle(catalogId.slice("express:".length));
   }
   if (catalogId.startsWith("lecture:")) {
-    return buildLectureBundle(catalogId.slice("lecture:".length), seed);
+    return buildLectureBundle(catalogId.slice("lecture:".length), seed, nonces);
   }
   return null;
 }

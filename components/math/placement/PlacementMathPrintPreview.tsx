@@ -40,7 +40,7 @@ export function PlacementMathPrintPreview({
 }) {
   const seed = sessionSeed * 1_000_003 + exerciseId * 97 + 1_000_000;
   return (
-    <PlacementPrintSeedRoot seed={seed}>
+    <PlacementPrintSeedRoot key={seed} seed={seed}>
       <Comp
         exerciseKey={seed}
         validated={correction}

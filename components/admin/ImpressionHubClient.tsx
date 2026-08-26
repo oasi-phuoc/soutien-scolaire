@@ -23,6 +23,8 @@ import {
   PrintDocumentHeader,
   PrintExerciseBody,
   PrintExerciseHeader,
+  PrintExerciseRefreshButton,
+  PrintExerciseRefreshProvider,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -225,6 +227,7 @@ export function ImpressionHubClient() {
   const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
   /** Seed uniquement après mount — évite mismatch SSR/hydratation (random). */
   const [printSeed, setPrintSeed] = useState<number | null>(null);
+  const [exerciseNonces, setExerciseNonces] = useState<Record<string, number>>({});
   const [bundleError, setBundleError] = useState<string | null>(null);
   const previewPagesRef = useRef<HTMLDivElement>(null);
 
@@ -283,12 +286,12 @@ export function ImpressionHubClient() {
   const bundle = useMemo(() => {
     if (!selectedEntry || printSeed == null) return null;
     try {
-      return buildPrintBundle(selectedEntry.id, { frenchLevel, seed: printSeed });
+      return buildPrintBundle(selectedEntry.id, { frenchLevel, seed: printSeed, exerciseNonces });
     } catch (err) {
       console.error("[impression] buildPrintBundle failed", selectedEntry.id, err);
       return null;
     }
-  }, [selectedEntry, frenchLevel, printSeed]);
+  }, [selectedEntry, frenchLevel, printSeed, exerciseNonces]);
 
   useEffect(() => {
     if (!selectedEntry) {
@@ -383,6 +386,7 @@ export function ImpressionHubClient() {
     setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeGroup(next: string) {
@@ -392,6 +396,7 @@ export function ImpressionHubClient() {
     setSelection([]);
     setTheory(false);
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeModule(next: string) {
@@ -400,6 +405,7 @@ export function ImpressionHubClient() {
     setSelection([]);
     setTheory(false);
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeDocument(next: string) {
@@ -408,10 +414,14 @@ export function ImpressionHubClient() {
     setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   const patchSelection = (id: string, patch: Partial<ExercisePrintSelection>) =>
     setSelection((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
+
+  const refreshExercise = (id: string) =>
+    setExerciseNonces((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
 
   const patchTheoryTable = (id: string, patch: Partial<TheoryTablePrintConfig>) =>
     setTheoryOpts((prev) => {
@@ -530,6 +540,7 @@ export function ImpressionHubClient() {
     const css = capturePageCss();
     const base = window.location.origin;
     const printNode = node.cloneNode(true) as HTMLDivElement;
+    printNode.querySelectorAll("[data-no-print]").forEach((el) => el.remove());
     const sourceImages = Array.from(node.querySelectorAll("img"));
     const clonedImages = Array.from(printNode.querySelectorAll("img"));
     clonedImages.forEach((image, index) => {
@@ -548,6 +559,7 @@ export function ImpressionHubClient() {
   };
 
   return (
+    <PrintExerciseRefreshProvider onRefresh={refreshExercise}>
     <div className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]">
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border-default)] px-4 py-3">
         <div className="flex min-w-0 items-center gap-2">
@@ -707,6 +719,7 @@ export function ImpressionHubClient() {
                     onChange={(v) => {
                       setFrenchLevel(v as PlacementLevel);
                       setPrintSeed(freshSeed());
+                      setExerciseNonces({});
                     }}
                     options={[
                       { value: "base", label: "A1" },
@@ -1025,6 +1038,10 @@ export function ImpressionHubClient() {
                           <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
                             {ex.label}
                           </span>
+                          <PrintExerciseRefreshButton
+                            exerciseId={ex.id}
+                            className="h-7 w-7 text-[var(--color-text-secondary)]"
+                          />
                         </div>
                         {sel.included && (
                           <div className="mt-3 space-y-2 pl-9">
@@ -1161,7 +1178,7 @@ export function ImpressionHubClient() {
             </p>
           ) : (
             <PaginatedPreview
-              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}-${themeColorId}-${JSON.stringify(theoryOpts)}`}
+              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${JSON.stringify(exerciseNonces)}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}-${themeColorId}-${JSON.stringify(theoryOpts)}`}
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}
@@ -1323,5 +1340,6 @@ export function ImpressionHubClient() {
         </section>
       </div>
     </div>
+    </PrintExerciseRefreshProvider>
   );
 }
