@@ -28,29 +28,37 @@ function mathLabel(block: MathRichBlock, index: number): string {
 export function extractMathTheoryMeta(lesson: MathSubmoduleLesson): TheoryPrintMeta {
   const blocks = flattenMathTheoryBlocks(lesson);
   const tables: TheoryTableMeta[] = [];
-  for (const block of blocks) {
+  const breakTargets: TheoryPrintMeta["breakTargets"] = [];
+  blocks.forEach((block, i) => {
     if (block.type === "table") {
       const columnCount = Math.max(1, block.headersFr.length);
+      const tableLabel = truncateDropdownLabel(block.headersFr.filter(Boolean).join(" · ") || "Tableau");
       tables.push({
         id: block.id,
         kind: "math_table",
-        label: truncateDropdownLabel(block.headersFr.filter(Boolean).join(" · ") || "Tableau"),
+        label: tableLabel,
         columnCount,
         defaultColWidths: equalColWidths(columnCount),
       });
+      breakTargets.push({
+        id: block.id,
+        label: truncateDropdownLabel(`Tableau : ${tableLabel}`),
+      });
+      return;
     }
-  }
-  const breakTargets = [
-    ...blocks
-      .filter((b) => b.type === "heading" || b.type === "plain")
-      .map((b, i) => ({
-        id: b.id,
-        label: truncateDropdownLabel(mathLabel(b, i)),
-      })),
-    ...tables.map((t) => ({
-      id: t.id,
-      label: truncateDropdownLabel(`Tableau : ${t.label}`),
-    })),
-  ];
+    if (block.type === "heading") {
+      breakTargets.push({
+        id: block.id,
+        label: truncateDropdownLabel(mathLabel(block, i)),
+      });
+      return;
+    }
+    if (block.type === "plain" && block.fr.trim()) {
+      breakTargets.push({
+        id: block.id,
+        label: truncateDropdownLabel(mathLabel(block, i)),
+      });
+    }
+  });
   return { breakTargets, tables };
 }

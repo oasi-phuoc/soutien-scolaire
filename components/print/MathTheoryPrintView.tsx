@@ -325,7 +325,7 @@ export function MathTheoryPrintView({
   return (
     <div className="space-y-3 text-[1em] leading-normal text-black">
       {blocks.map((block, i) => (
-        <div key={block.id}>
+        <div key={block.id} data-theory-block={block.id} data-theory-type={block.type}>
           <BlockPrintView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
@@ -343,7 +343,7 @@ export function MathTheoryPrintSegment({
   return (
     <div className="space-y-3 text-[1em] leading-normal text-black">
       {blocks.map((block, i) => (
-        <div key={block.id}>
+        <div key={block.id} data-theory-block={block.id} data-theory-type={block.type}>
           <BlockPrintView block={block} options={options} isFirst={i === 0} />
         </div>
       ))}
