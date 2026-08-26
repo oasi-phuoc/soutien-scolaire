@@ -46,6 +46,10 @@ import { placementLessonCode } from "@/lib/placement/types";
 import { isRetryablePlacementSubmitError, queuePlacementSubmission } from "@/lib/placement/pending-submissions";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
+import {
+  mixPrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -1949,15 +1953,20 @@ function buildPoDialoguePrintParts(
 export function buildPlacementPoPrintExercises(
   level: OralLevel = "avance",
   seed = Date.now(),
+  nonces?: PrintExerciseNonces,
 ): PrintExercise[] {
-  const seedKey = String(seed);
-  const prompt = seededOralPrompt(level, `${seedKey}-po-themes`);
-  const situation = seededOralSituation(level, `${seedKey}-po-situation`);
-  const argumentationTopic = seededArgumentationTopic(level, `${seedKey}-po-arg`);
-  const group = pickFromPool(DIRECTED_INTERVIEW_GROUPS, `${seedKey}-po-interview`);
+  const keyed = (id: string) => {
+    const nonce = nonces?.[id] ?? 0;
+    return String(nonce ? mixPrintSeed(seed, id, nonce) : seed);
+  };
+  const prompt = seededOralPrompt(level, `${keyed("po-themes")}-po-themes`);
+  const situation = seededOralSituation(level, `${keyed("po-image")}-po-situation`);
+  const dialogueSituation = seededOralSituation(level, `${keyed("po-dialogue")}-po-situation`);
+  const argumentationTopic = seededArgumentationTopic(level, `${keyed("po-argumentation")}-po-arg`);
+  const group = pickFromPool(DIRECTED_INTERVIEW_GROUPS, `${keyed("po-interview")}-po-interview`);
   const interviewQuestions = [...DIRECTED_INTERVIEW_BASE, ...group];
-  const script = getPoDialogue(situation.id);
-  const studentRole = pickStudentRoleSeeded(`${seedKey}-po-role`);
+  const script = getPoDialogue(dialogueSituation.id);
+  const studentRole = pickStudentRoleSeeded(`${keyed("po-dialogue")}-po-role`);
   const roleText = roleAssignmentText(script, studentRole);
   const studentTurns = studentLineIndices(script, studentRole);
   const imageModel = getImageDescriptionModel(situation.id);

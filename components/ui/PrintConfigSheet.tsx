@@ -26,6 +26,55 @@ import { LearnUpMark } from "@/components/brand/LearnUpLogo";
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-1.5 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold leading-[1.15]";
 
+function PrintRefreshIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+    </svg>
+  );
+}
+
+/** Bouton de re-tirage (écran seulement, masqué à l'impression). */
+export function PrintExerciseRefreshButton({
+  onClick,
+  className = "",
+  iconSize = 15,
+}: {
+  onClick: () => void;
+  className?: string;
+  iconSize?: number;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onClick();
+      }}
+      title="Nouveau tirage"
+      aria-label="Nouveau tirage"
+      data-no-print
+      data-print-refresh
+      className={`relative z-10 pointer-events-auto cursor-pointer inline-flex shrink-0 items-center justify-center rounded-md border border-zinc-300 bg-white text-zinc-600 opacity-100 transition hover:bg-zinc-100 hover:text-zinc-900 ${className}`}
+    >
+      <PrintRefreshIcon size={iconSize} />
+      <span className="sr-only">Nouveau tirage</span>
+    </button>
+  );
+}
+
 export function PrintExerciseHeader({
   exercise,
   index,
@@ -34,6 +83,7 @@ export function PrintExerciseHeader({
   points,
   showPoints,
   showInstruction = true,
+  onRefresh,
 }: {
   exercise: PrintExercise | undefined;
   index: number;
@@ -42,17 +92,27 @@ export function PrintExerciseHeader({
   points?: number;
   showPoints?: boolean;
   showInstruction?: boolean;
+  onRefresh?: () => void;
 }) {
   const icon = exercise?.printIcon;
   const instruction = showInstruction ? exercise?.instruction : undefined;
   return (
-    <div className="mb-3 flex items-start gap-2">
+    <div className="mb-3 flex items-start gap-2" data-print-exercise={exercise?.id}>
       <div className="min-w-0 flex-1">
         <div
           className={`${PRINT_EX_TITLE_CLASS}${instruction ? " print-ex-title--with-consigne" : ""}`}
           style={{ color: accentColor }}
         >
-          <span className="flex-1">{printExerciseHeading(exercise, index, suffix)}</span>
+          <span className="flex min-w-0 flex-1 items-center gap-[0.4em]">
+            <span className="min-w-0">{printExerciseHeading(exercise, index, suffix)}</span>
+            {onRefresh ? (
+              <PrintExerciseRefreshButton
+                onClick={onRefresh}
+                className="mt-[0.08em] h-[1.15em] w-[1.15em] text-current"
+                iconSize={14}
+              />
+            ) : null}
+          </span>
           {showPoints && points != null ? (
             <span style={{ color: "black" }}>
               {points} pt{points > 1 ? "s" : ""}
@@ -76,7 +136,7 @@ export function PrintExerciseHeader({
 }
 
 const PRINT_EX_CONTENT_CLASS =
-  "print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none";
+  "print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none";
 
 function printExContentClass(answerKey: boolean): string {
   return answerKey ? `${PRINT_EX_CONTENT_CLASS} print-answer-key` : PRINT_EX_CONTENT_CLASS;
@@ -1476,7 +1536,7 @@ export function PrintConfigSheet({
                               showPoints={evalMode}
                               showInstruction={false}
                             />
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none">
                               {exercise.correctionLeadPreview}
                             </div>
                           </div>
@@ -1554,7 +1614,7 @@ export function PrintConfigSheet({
                               showPoints={evalMode}
                               showInstruction={false}
                             />
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none">
                               {lead}
                             </div>
                           </div>
@@ -1598,7 +1658,7 @@ export function PrintConfigSheet({
                                 showPoints={evalMode}
                                 showInstruction={false}
                               />
-                              <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button:not([data-print-refresh])]:pointer-events-none">
                                 {follow.preview}
                               </div>
                             </div>

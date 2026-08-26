@@ -16,14 +16,15 @@ export function PlacementPrintSeedRoot({
   children,
 }: {
   seed: number;
-  children: ReactNode;
+  children: ReactNode | (() => ReactNode);
 }) {
   beginPlacementPrintSeed(seed);
+  const node = typeof children === "function" ? children() : children;
   useLayoutEffect(() => {
     beginPlacementPrintSeed(seed);
     return () => endPlacementPrintSeed();
   }, [seed]);
-  return <>{children}</>;
+  return <>{node}</>;
 }
 
 export function PlacementMathPrintPreview({
@@ -40,7 +41,7 @@ export function PlacementMathPrintPreview({
 }) {
   const seed = sessionSeed * 1_000_003 + exerciseId * 97 + 1_000_000;
   return (
-    <PlacementPrintSeedRoot seed={seed}>
+    <PlacementPrintSeedRoot key={seed} seed={seed}>
       <Comp
         exerciseKey={seed}
         validated={correction}

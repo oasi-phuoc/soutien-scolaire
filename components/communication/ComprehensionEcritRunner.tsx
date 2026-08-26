@@ -32,6 +32,10 @@ import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-ques
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
+import {
+  mixPrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
 
 const TOTAL_SECONDS = 45 * 60;
 const CE_BODY_TEXT = "text-sm leading-relaxed text-justify text-[var(--color-text-primary)]";
@@ -1469,8 +1473,20 @@ function buildCeCorrectAnswers(part: CEPart): CEAnswers {
 export function buildPlacementCePrintExercises(
   seed = 1,
   level?: "base" | "moyen" | "avance",
+  nonces?: PrintExerciseNonces,
 ): PrintExercise[] {
-  const parts = level ? buildParts(level, seed) : buildProgressiveCEParts(seed);
+  const baseParts = level ? buildParts(level, seed) : buildProgressiveCEParts(seed);
+  const parts = baseParts.map((part, index) => {
+    const slotId = `ce-${index}`;
+    const nonce = nonces?.[slotId] ?? nonces?.[`${slotId}-${part.id}`] ?? 0;
+    if (!nonce) return part;
+    const stamp = mixPrintSeed(seed, slotId, nonce);
+    if (level) return buildParts(level, stamp)[index] ?? part;
+    const lvl = PROGRESSIVE_SKILL_LEVELS[index];
+    if (!lvl) return part;
+    const pool = buildParts(lvl, stamp + index * 997);
+    return pool[pickIndex(pool.length, `${stamp}-pick-${index}`)] ?? part;
+  });
   const noopSetAnswer = (_key: string, _value: number | string | null) => {};
   return parts.map((part, index) => {
     if (part.layout === "orientation") {
@@ -1492,7 +1508,7 @@ export function buildPlacementCePrintExercises(
         />
       );
       return {
-        id: `ce-${index}-${part.id}`,
+        id: `ce-${index}`,
         label: `CE ${index + 1}. ${part.title}`,
         defaultPoints: part.points,
         leadPreview: (
@@ -1528,7 +1544,7 @@ export function buildPlacementCePrintExercises(
         </div>
       );
       return {
-        id: `ce-${index}-${part.id}`,
+        id: `ce-${index}`,
         label: `CE ${index + 1}. ${part.title}`,
         defaultPoints: part.points,
         leadPreview: messageLead,
@@ -1568,7 +1584,7 @@ export function buildPlacementCePrintExercises(
         </div>
       );
       return {
-        id: `ce-${index}-${part.id}`,
+        id: `ce-${index}`,
         label: `CE ${index + 1}. ${part.title}`,
         defaultPoints: part.points,
         leadPreview: (
@@ -1627,7 +1643,7 @@ export function buildPlacementCePrintExercises(
     }
 
     return {
-      id: `ce-${index}-${part.id}`,
+      id: `ce-${index}`,
       label: `CE ${index + 1}. ${part.title}`,
       defaultPoints: part.points,
       preview: (

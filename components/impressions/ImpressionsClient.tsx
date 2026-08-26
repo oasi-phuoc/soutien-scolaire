@@ -13,6 +13,7 @@ import {
   PrintDocumentHeader,
   PrintExerciseBody,
   PrintExerciseHeader,
+  PrintExerciseRefreshButton,
   type ExercisePrintSelection,
   type PrintHeaderConfig,
 } from "@/components/ui/PrintConfigSheet";
@@ -165,6 +166,7 @@ export function ImpressionsClient() {
   const [printedBy, setPrintedBy] = useState("");
   const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
   const [printSeed, setPrintSeed] = useState(() => freshSeed());
+  const [exerciseNonces, setExerciseNonces] = useState<Record<string, number>>({});
   const [bundleError, setBundleError] = useState<string | null>(null);
   const previewPagesRef = useRef<HTMLDivElement>(null);
 
@@ -219,12 +221,12 @@ export function ImpressionsClient() {
   const bundle = useMemo(() => {
     if (!selectedEntry) return null;
     try {
-      return buildPrintBundle(selectedEntry.id, { frenchLevel, seed: printSeed });
+      return buildPrintBundle(selectedEntry.id, { frenchLevel, seed: printSeed, exerciseNonces });
     } catch (err) {
       console.error("[impressions] buildPrintBundle failed", selectedEntry.id, err);
       return null;
     }
-  }, [selectedEntry, frenchLevel, printSeed]);
+  }, [selectedEntry, frenchLevel, printSeed, exerciseNonces]);
 
   useEffect(() => {
     if (!selectedEntry) {
@@ -330,6 +332,7 @@ export function ImpressionsClient() {
     setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeGroup(next: string) {
@@ -339,6 +342,7 @@ export function ImpressionsClient() {
     setSelection([]);
     setTheory(false);
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeModule(next: string) {
@@ -347,6 +351,7 @@ export function ImpressionsClient() {
     setSelection([]);
     setTheory(false);
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   function changeDocument(next: string) {
@@ -355,12 +360,16 @@ export function ImpressionsClient() {
     setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
+    setExerciseNonces({});
   }
 
   const accent = bundle?.accentColor ?? "var(--color-theme)";
   const course = bundle?.course ?? "Mathématiques";
   const printDate = formatPrintDate();
   const header: PrintHeaderConfig = { classLevel, classNumber, course, title };
+
+  const refreshExercise = (id: string) =>
+    setExerciseNonces((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
 
   const hasAnnouncement = Boolean(bundle?.announcementPreview);
   const theoryNode: ReactNode | null =
@@ -410,6 +419,7 @@ export function ImpressionsClient() {
     const css = capturePageCss();
     const base = window.location.origin;
     const printNode = node.cloneNode(true) as HTMLDivElement;
+    printNode.querySelectorAll("[data-no-print]").forEach((el) => el.remove());
     const sourceImages = Array.from(node.querySelectorAll("img"));
     const clonedImages = Array.from(printNode.querySelectorAll("img"));
     clonedImages.forEach((image, index) => {
@@ -427,7 +437,10 @@ export function ImpressionsClient() {
   };
 
   return (
-    <div className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]">
+    <div
+      className="flex h-[calc(100dvh-1rem)] min-h-[36rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] lg:h-[calc(100dvh-3rem)]"
+      data-print-nonces={JSON.stringify(exerciseNonces)}
+    >
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--color-border-default)] px-4 py-3">
         <div className="min-w-0">
           <h1 className="truncate text-lg font-bold text-[var(--color-text-primary)]">
@@ -559,6 +572,7 @@ export function ImpressionsClient() {
                       onChange={(v) => {
                         setFrenchLevel(v as PlacementLevel);
                         setPrintSeed(freshSeed());
+                        setExerciseNonces({});
                       }}
                       options={[
                         { value: "base", label: "A1" },
@@ -623,6 +637,10 @@ export function ImpressionsClient() {
                             <span className="min-w-0 flex-1 truncate text-sm font-medium text-[var(--color-text-primary)]">
                               {ex.label}
                             </span>
+                            <PrintExerciseRefreshButton
+                              onClick={() => refreshExercise(ex.id)}
+                              className="h-7 w-7 text-[var(--color-text-secondary)]"
+                            />
                           </div>
                           {sel.included && (
                             <div className="mt-2 space-y-2 pl-9">
@@ -767,7 +785,7 @@ export function ImpressionsClient() {
             </p>
           ) : (
             <PaginatedPreview
-              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}`}
+              key={`${selectedEntry?.id ?? "none"}-${printSeed}-${JSON.stringify(exerciseNonces)}-${theory ? 1 : 0}-${includeCorrections ? 1 : 0}`}
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}
@@ -789,7 +807,7 @@ export function ImpressionsClient() {
                       || Boolean(item.selection.pageBreak)
                       || item.exercise?.forceNewPage === true,
                   render: () => (
-                    <div className="print-exercise">
+                    <div className="print-exercise" data-print-exercise={item.exercise?.id}>
                       <PrintExerciseHeader
                         exercise={item.exercise}
                         index={item.displayIndex}
@@ -797,6 +815,11 @@ export function ImpressionsClient() {
                         accentColor={accent}
                         points={item.selection.points}
                         showPoints={evalMode}
+                        onRefresh={
+                          item.exercise?.id
+                            ? () => refreshExercise(item.exercise.id)
+                            : undefined
+                        }
                       />
                       <PrintExerciseBody
                         selection={item.selection}

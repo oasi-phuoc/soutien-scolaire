@@ -48,3 +48,34 @@ export function placementShuffle<T>(arr: T[]): T[] {
   }
   return a;
 }
+
+/** Nonces de re-tirage par id d'exercice (bouton refresh à l'impression). */
+export type PrintExerciseNonces = Record<string, number>;
+
+/** Combine seed de session + id d'exercice + nonce de refresh en une seed stable. */
+export function mixPrintSeed(baseSeed: number, exerciseId: string, nonce = 0): number {
+  let h = (baseSeed >>> 0) ^ 0x811c9dc5;
+  for (let i = 0; i < exerciseId.length; i++) {
+    h = Math.imul(h ^ exerciseId.charCodeAt(i), 0x01000193);
+  }
+  h = Math.imul(h ^ (nonce >>> 0), 0x85ebca6b);
+  h = (h ^ (h >>> 13)) >>> 0;
+  return h || 1;
+}
+
+export function exercisePrintSeed(
+  baseSeed: number,
+  exerciseId: string,
+  nonces?: PrintExerciseNonces,
+): number {
+  return mixPrintSeed(baseSeed, exerciseId, nonces?.[exerciseId] ?? 0);
+}
+
+export function withPrintSeed<T>(seed: number, fn: () => T): T {
+  beginPlacementPrintSeed(seed);
+  try {
+    return fn();
+  } finally {
+    endPlacementPrintSeed();
+  }
+}

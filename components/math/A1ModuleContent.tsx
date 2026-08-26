@@ -32,6 +32,10 @@ import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
 import {
+  exercisePrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
+import {
   printQuestionsListClass,
   usePrintColumns,
   usePrintQuestionCount,
@@ -1011,19 +1015,26 @@ function A1PrintPreviewLive({
 }) {
   const questionCount = usePrintQuestionCount(5);
   const columns = usePrintColumns();
+  const liveSeed = seed + questionCount * 97 + columns * 13;
   return (
     <div className="space-y-2">
       {hint ? <p className="text-xs italic text-zinc-600">{hint}</p> : null}
-      <PlacementPrintSeedRoot seed={seed + questionCount * 97 + columns * 13}>
-        {a1PrintPreview(step, correction, questionCount, columns) ?? (
-          <div className="h-7 border-b border-black/40" />
-        )}
+      <PlacementPrintSeedRoot key={liveSeed} seed={liveSeed}>
+        {() =>
+          a1PrintPreview(step, correction, questionCount, columns) ?? (
+            <div className="h-7 border-b border-black/40" />
+          )
+        }
       </PlacementPrintSeedRoot>
     </div>
   );
 }
 
-export function buildA1PrintExercises(submoduleId: string): PrintExercise[] {
+export function buildA1PrintExercises(
+  submoduleId: string,
+  seed = 1,
+  nonces?: PrintExerciseNonces,
+): PrintExercise[] {
   const steps: Step[] =
     submoduleId === "A1-1"
       ? ["ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"]
@@ -1032,17 +1043,17 @@ export function buildA1PrintExercises(submoduleId: string): PrintExercise[] {
         : [];
   return steps.map((step, index) => {
     const hint = typeof getA1StepHint === "function" ? getA1StepHint(step) : undefined;
-    const seed = 3_000_000 + index;
+    const exSeed = exercisePrintSeed(seed, step, nonces);
     return {
       id: step,
       label: `Exercice ${index + 1}`,
       supportsPrintLayout: true,
       defaultQuestionCount: 5,
       preview: (
-        <A1PrintPreviewLive step={step} correction={false} hint={hint} seed={seed} />
+        <A1PrintPreviewLive step={step} correction={false} hint={hint} seed={exSeed} />
       ),
       correctionPreview: (
-        <A1PrintPreviewLive step={step} correction={true} hint={hint} seed={seed} />
+        <A1PrintPreviewLive step={step} correction={true} hint={hint} seed={exSeed} />
       ),
     };
   });

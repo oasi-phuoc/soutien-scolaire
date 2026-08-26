@@ -83,6 +83,12 @@ import {
   usePrintColumns,
   usePrintQuestionCount,
 } from "@/components/print/PrintExerciseLayoutContext";
+import {
+  beginPlacementPrintSeed,
+  endPlacementPrintSeed,
+  exercisePrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const ALG_FIELD_H = "min-h-9";
@@ -6915,6 +6921,8 @@ function OddEvenPrint({
 /** Aperçus d'impression pour leçons GenericModuleContent (prompts + cases à remplir). */
 export function buildGenericMathPrintExercises(
   lesson: MathSubmoduleLesson,
+  seed = 1,
+  nonces?: PrintExerciseNonces,
 ): PrintExercise[] {
   const steps = buildSteps([lesson], true);
   const evalStart = steps.findIndex((s) => s.kind === "eval_start");
@@ -6932,6 +6940,9 @@ export function buildGenericMathPrintExercises(
       continue;
     }
     const n = out.length + 1;
+    const id = `${step.kind}-${n}`;
+    beginPlacementPrintSeed(exercisePrintSeed(seed, id, nonces));
+    try {
     if (step.kind === "word_problems") {
       const expanded = expandWordProblemsConfig(step.config, PRINT_POOL_SIZE);
       const answers = expanded.questions.map((q) => String(q.answer));
@@ -7184,6 +7195,9 @@ export function buildGenericMathPrintExercises(
         <GenericBlanksPrintPreview exerciseNum={n} defaultCount={cfgQs || 5} />
       ),
     });
+    } finally {
+      endPlacementPrintSeed();
+    }
   }
 
   if (out.length === 0) {

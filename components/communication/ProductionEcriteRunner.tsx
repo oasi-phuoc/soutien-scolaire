@@ -44,6 +44,10 @@ import { FrenchTrainingElementsBlock } from "@/components/placement/FrenchTraini
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 import {
+  exercisePrintSeed,
+  type PrintExerciseNonces,
+} from "@/components/math/placement/placement-print-rng";
+import {
   PePrintRubricGrid,
   PeWritingPrintExercise,
 } from "@/components/communication/PeWritingPrintPreview";
@@ -953,12 +957,13 @@ export function ProductionEcriteRunner({
 export function buildPlacementPePrintExercises(
   level?: "base" | "moyen" | "avance",
   seed = Date.now(),
+  nonces?: PrintExerciseNonces,
 ): PrintExercise[] {
   const isHybrid = !level;
   const writingLevel = level ?? "base";
-  const seedKey = String(seed);
+  const keyFor = (id: string) => String(exercisePrintSeed(seed, id, nonces));
   const formTemplate = (isHybrid || writingLevel === "base")
-    ? pickFormTemplate(`${seedKey}-pe-form`)
+    ? pickFormTemplate(`${keyFor("pe-form")}-pe-form`)
     : null;
   const emptyForm: Record<string, string> = {};
   const formSample = formTemplate ? getFormSampleAnswer(formTemplate.id) : undefined;
@@ -1026,10 +1031,11 @@ export function buildPlacementPePrintExercises(
     const promptLevel = isHybrid
       ? (step.id === "short" ? "moyen" : "avance")
       : writingLevel;
+    const id = `pe-${step.id}-${n}`;
     const prompt = buildPrompt(
       promptLevel,
       step.id === "long" ? "long" : "short",
-      `${seedKey}-pe-${step.id}`,
+      `${keyFor(id)}-pe-${step.id}`,
     );
     const sample = getWritingSampleAnswer(prompt.id) ?? "";
     const kind = pePrintKind(writingLevel, step.id, isHybrid);
