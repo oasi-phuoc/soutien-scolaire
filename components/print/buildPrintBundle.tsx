@@ -205,7 +205,13 @@ function grammarDefaultQuestionCount(ex: Exercise): number {
     case "qcm":
     case "fill":
     case "fill_select":
-      return ex.poolSize ?? (ex.pool?.length ? 5 : ex.items.length || 5);
+    case "odd_one_out":
+    case "letter_spot":
+    case "syllable_join":
+    case "audio_discrim":
+    case "anagram":
+    case "drag_label":
+      return ex.poolSize ?? (ex.pool?.length ? 5 : "items" in ex ? ex.items.length || 5 : 5);
     default:
       return 5;
   }

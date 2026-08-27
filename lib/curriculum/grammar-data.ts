@@ -39,25 +39,94 @@ export type TheoryBlock =
   | { type: "selector"; labelPrefix?: string; buttonCols?: number; tabs: Array<{ label: string; content: TheoryBlock[] }> };
 
 export type ExerciseDifficulty = "A1" | "A2" | "B1";
-export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string; /** Clé pour poolEnsure (ex. infinitif). */ poolKey?: string };
-export type FillItem = { sentence: string; hint: string; answer: string; difficulty?: ExerciseDifficulty; /** Même id = même gabarit (ne pas tirer 2× dans une session). */ gabaritId?: string; /** Clé pour poolEnsure (ex. infinitif). */ poolKey?: string };
-export type MatchPair = { left: string; right: string };
+export type QcmItem = {
+  sentence: string;
+  svg?: string;
+  /** Image lecture (mot → /assets/words/lecture/…). */
+  imageWord?: string;
+  image?: string;
+  /** Texte lu (mp3 mot si un seul mot, sinon TTS). */
+  audioText?: string;
+  choices: string[];
+  /** Images des choix (parallèle à `choices`) — QCM à images. */
+  choiceImageWords?: string[];
+  choiceSvgs?: string[];
+  choiceImages?: string[];
+  correctIdx: number;
+  /** Plusieurs bonnes réponses (QCM à coches). Prioritaire sur `correctIdx`. */
+  correctIdxs?: number[];
+  difficulty?: ExerciseDifficulty;
+  /** Même id = même gabarit (ne pas tirer 2× dans une session). */
+  gabaritId?: string;
+  /** Clé pour poolEnsure (ex. infinitif). */
+  poolKey?: string;
+};
+export type FillItem = {
+  sentence: string;
+  hint: string;
+  answer: string;
+  /** Choix locaux (QCM intégré) — sinon la banque partagée `wordBank`. */
+  choices?: string[];
+  svg?: string;
+  imageWord?: string;
+  image?: string;
+  audioText?: string;
+  difficulty?: ExerciseDifficulty;
+  /** Même id = même gabarit (ne pas tirer 2× dans une session). */
+  gabaritId?: string;
+  /** Clé pour poolEnsure (ex. infinitif). */
+  poolKey?: string;
+};
+export type MatchPair = {
+  left: string;
+  right: string;
+  leftSvg?: string;
+  rightSvg?: string;
+  leftImageWord?: string;
+  rightImageWord?: string;
+  leftImage?: string;
+  rightImage?: string;
+};
+export type TrueFalseItem = {
+  statement: string;
+  answer: boolean;
+  /** Si faux : texte que l'élève doit écrire (ex. « c'est un fruit »). */
+  correction?: string;
+  svg?: string;
+  imageWord?: string;
+  image?: string;
+};
+export type OrderItem = {
+  sentence: string;
+  hint?: string;
+  /** Remise en ordre de phrases / répliques (dialogue). */
+  parts?: string[];
+  /** Remise en ordre d'images (chronologie) — mots → images lecture. */
+  imageWords?: string[];
+  imageSvgs?: string[];
+};
 /** Prompt d'écriture libre ; `side` = c'est/il est ; `group` = ensure (ex. verbe modal). */
 export type WritePrompt = string | { prompt: string; side?: "cest" | "ilest"; group?: string };
 
 export type Exercise =
-  | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean; svgChoiceLayout?: "stacked"; /** Garantit au moins un item par valeur de choix correct (ex. le / la / l'), puis complète au hasard. */ poolEnsure?: string[] }
+  | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean; svgChoiceLayout?: "stacked"; /** Plusieurs bonnes réponses par item (`correctIdxs`). */ multiple?: boolean; /** Garantit au moins un item par valeur de choix correct (ex. le / la / l'), puis complète au hasard. */ poolEnsure?: string[] }
   | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number; inputWidth?: string; /** Garantit au moins un item par réponse (ex. le / la / l'), puis complète au hasard. */ poolEnsure?: string[] }
   | { type: "fill_select"; title: string; instruction: string; transInstruction?: Trans; wordBank: string[]; items: FillItem[]; pool?: FillItem[]; poolSize?: number; letterSelect?: boolean; hideWordBank?: boolean; /** Garantit au moins un item par réponse (ex. le / la / l'), puis complète au hasard. */ poolEnsure?: string[] }
   | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number; leftLabel?: string; rightLabel?: string }
-  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; /** Pool de prompts ; `side` = c'est/il est ; `group` + promptPoolEnsure = 1× chaque groupe. */ promptPool?: WritePrompt[]; levelPromptPools?: Record<ExerciseDifficulty, string[]>; promptPoolSize?: number; promptPoolEnsure?: string[]; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked"; imagePool?: { image: string; promptPool: string[] }[] }
-  | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: { statement: string; answer: boolean }[]; imagePool?: { image: string; items: { statement: string; answer: boolean }[] }[]; poolSize?: number }
-  | { type: "order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; hint?: string }[] }
+  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; /** Pool de prompts ; `side` = c'est/il est ; `group` + promptPoolEnsure = 1× chaque groupe. */ promptPool?: WritePrompt[]; levelPromptPools?: Record<ExerciseDifficulty, string[]>; promptPoolSize?: number; promptPoolEnsure?: string[]; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked"; imagePool?: { image: string; promptPool: string[] }[]; /** Mots que la phrase produite doit contenir. */ requiredWords?: string[] }
+  | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: TrueFalseItem[]; imagePool?: { image: string; items: TrueFalseItem[] }[]; poolSize?: number }
+  | { type: "order"; title: string; instruction: string; transInstruction?: Trans; items: OrderItem[] }
   | { type: "classify"; title: string; instruction: string; transInstruction?: Trans; categories: string[]; items: { word: string; categoryIdx: number }[]; pool?: { word: string; categoryIdx: number }[]; poolSize?: number; allowPartialValidation?: boolean }
   | { type: "word_order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; words: string[]; difficulty?: ExerciseDifficulty; gabaritId?: string }[]; pool?: { sentence: string; words: string[]; difficulty?: ExerciseDifficulty; gabaritId?: string }[]; poolSize?: number; /** Tirage par catégorie (ex. 1×1adj + 2×2adj + 2×3adj). */ poolMix?: { gabaritId: string; count: number }[]; allowPartialValidation?: boolean }
   | { type: "color_highlight"; title: string; instruction: string; transInstruction?: Trans; colors: string[]; items: { words: string[]; answers: (number | null)[] }[] }
   | { type: "clock_read"; title: string; instruction: string; transInstruction?: Trans; clocks: { h: number; m: number; label: string; answer: string }[] }
-  | { type: "tag2"; title: string; instruction: string; transInstruction?: Trans; pool: { word: string; companion?: string; gender: "M" | "F" | null; number: "S" | "P" }[]; poolSize?: number; /** Affiche uniquement M/F (pas S/P). À l'impression : trait à remplir. */ genderOnly?: boolean };
+  | { type: "tag2"; title: string; instruction: string; transInstruction?: Trans; pool: { word: string; companion?: string; gender: "M" | "F" | null; number: "S" | "P" }[]; poolSize?: number; /** Affiche uniquement M/F (pas S/P). À l'impression : trait à remplir. */ genderOnly?: boolean }
+  | { type: "odd_one_out"; title: string; instruction: string; transInstruction?: Trans; items: { words: string[]; oddIdx: number; imageWords?: string[]; svgs?: string[] }[]; pool?: { words: string[]; oddIdx: number; imageWords?: string[]; svgs?: string[] }[]; poolSize?: number }
+  | { type: "letter_spot"; title: string; instruction: string; transInstruction?: Trans; items: { text: string; target: string }[]; pool?: { text: string; target: string }[]; poolSize?: number }
+  | { type: "syllable_join"; title: string; instruction: string; transInstruction?: Trans; items: { parts: string[]; answer: string }[]; pool?: { parts: string[]; answer: string }[]; poolSize?: number }
+  | { type: "audio_discrim"; title: string; instruction: string; transInstruction?: Trans; items: { audioA: string; audioB: string; same: boolean }[]; pool?: { audioA: string; audioB: string; same: boolean }[]; poolSize?: number }
+  | { type: "anagram"; title: string; instruction: string; transInstruction?: Trans; items: { answer: string; letters?: string[] }[]; pool?: { answer: string; letters?: string[] }[]; poolSize?: number }
+  | { type: "drag_label"; title: string; instruction: string; transInstruction?: Trans; items: { labels: string[]; targets: { label: string; imageWord?: string; svg?: string; image?: string }[] }[]; pool?: { labels: string[]; targets: { label: string; imageWord?: string; svg?: string; image?: string }[] }[]; poolSize?: number };
 
 export type GrammarLesson = {
   slug: string;
@@ -177,6 +246,7 @@ import { A1_GR_L22 } from "./content/francais/grammaire-g14.3";
 import { generatedGrammarExercises } from "./content/francais/generated-grammar-exercises";
 import { applyConjProfile } from "./content/francais/conj-exercise-builders";
 import { getProfileForLesson, TENSE_LESSON_SLUGS } from "./content/francais/conj-lesson-profiles";
+import { GRAMMAR_TEMPLATE_LESSON } from "./content/francais/grammaire-templates";
 
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
@@ -465,6 +535,7 @@ function hasUnlockedEval(code: string): boolean {
 }
 
 export function getGrammarLesson(slug: string): GrammarLesson | undefined {
+  if (slug === GRAMMAR_TEMPLATE_LESSON.slug) return GRAMMAR_TEMPLATE_LESSON;
   const lesson = GRAMMAR_LESSONS.find((l) => l.slug === slug);
   if (!lesson) return undefined;
   if (hasUnlockedEval(lesson.code)) {

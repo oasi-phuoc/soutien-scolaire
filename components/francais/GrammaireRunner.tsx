@@ -9,7 +9,19 @@ import type {
   QcmItem,
   FillItem,
   MatchPair,
+  OrderItem,
+  TrueFalseItem,
 } from "@/lib/curriculum/conjugation-data";
+import { GrammarAudioButton, GrammarWordImage } from "@/components/francais/grammar-media";
+import {
+  AnagramExercise,
+  AudioDiscrimExercise,
+  DragLabelExercise,
+  LetterSpotExercise,
+  OddOneOutExercise,
+  QcmMultiExercise,
+  SyllableJoinExercise,
+} from "@/components/francais/grammar-extra-exercises";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
@@ -716,9 +728,22 @@ function QcmExercise({
       : exercise.items.slice(0, questionCount);
     if (exercise.toggleChoices) return raw;
     return raw.map(item => {
-      const indexed = item.choices.map((c, i) => ({ c, isCorrect: i === item.correctIdx }));
+      const indexed = item.choices.map((c, i) => ({
+        c,
+        isCorrect: i === item.correctIdx,
+        imgW: item.choiceImageWords?.[i],
+        svg: item.choiceSvgs?.[i],
+        img: item.choiceImages?.[i],
+      }));
       const sh = shuffle(indexed);
-      return { ...item, choices: sh.map(x => x.c), correctIdx: sh.findIndex(x => x.isCorrect) };
+      return {
+        ...item,
+        choices: sh.map(x => x.c),
+        correctIdx: sh.findIndex(x => x.isCorrect),
+        choiceImageWords: item.choiceImageWords ? sh.map(x => x.imgW ?? "") : undefined,
+        choiceSvgs: item.choiceSvgs ? sh.map(x => x.svg ?? "") : undefined,
+        choiceImages: item.choiceImages ? sh.map(x => x.img ?? "") : undefined,
+      };
     });
   });
   const [selected, setSelected] = useState<(number | null)[]>(
@@ -812,6 +837,45 @@ function QcmExercise({
         };
 
         const choiceStyle = { width: `${choiceWidthCh}ch`, minWidth: `${choiceWidthCh}ch` } as const;
+        const hasChoiceImages = Boolean(
+          item.choiceSvgs?.length || item.choiceImageWords?.length || item.choiceImages?.length,
+        );
+
+        const audioBtn = item.audioText ? <GrammarAudioButton text={item.audioText} /> : null;
+
+        if (hasChoiceImages) {
+          return (
+            <div key={i} className="space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                  <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
+                  {item.sentence ? renderFillSentence(item.sentence) : null}
+                </p>
+                {audioBtn}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {item.choices.map((choice, ci) => (
+                  <button
+                    key={ci}
+                    type="button"
+                    onClick={() => select(i, ci)}
+                    disabled={validated}
+                    className={`${choiceBtnClass(ci, { compact: true })} flex-col gap-1 p-2`}
+                  >
+                    <GrammarWordImage
+                      svg={item.choiceSvgs?.[ci]}
+                      word={item.choiceImageWords?.[ci]}
+                      src={item.choiceImages?.[ci]}
+                      alt={choice}
+                      size="sm"
+                    />
+                    {choice ? <span className="text-xs">{choice}</span> : null}
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        }
 
         if (hasInlineToggle) {
           const inlineGroup = (
@@ -858,6 +922,7 @@ function QcmExercise({
                 className="w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-[var(--color-bg-secondary)] p-1"
                 dangerouslySetInnerHTML={{ __html: item.svg }}
               />
+              {audioBtn}
               <div className="flex flex-1 flex-col gap-1">
                 {item.choices.map((choice, ci) => (
                   <button key={ci} type="button" style={choiceStyle} className={choiceBtnClass(ci, { compact: true })} onClick={() => select(i, ci)} disabled={validated}>
@@ -871,21 +936,29 @@ function QcmExercise({
 
         return (
           <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
-            {item.svg ? (
+            {item.svg || item.imageWord || item.image ? (
               <div className="flex items-start gap-3">
                 <span className="shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
-                <div
-                  className="w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-[var(--color-bg-secondary)] p-1.5"
-                  dangerouslySetInnerHTML={{ __html: item.svg }}
-                />
+                {item.svg ? (
+                  <div
+                    className="w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-[var(--color-bg-secondary)] p-1.5"
+                    dangerouslySetInnerHTML={{ __html: item.svg }}
+                  />
+                ) : (
+                  <GrammarWordImage word={item.imageWord} src={item.image} alt={item.sentence} />
+                )}
                 {item.sentence && (
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">{renderFillSentence(item.sentence)}</p>
                 )}
+                {audioBtn}
               </div>
             ) : (
-              <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
-                <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
-              </p>
+              <div className={`flex flex-wrap items-center gap-2${exercise.inlineChoices ? " flex-1" : ""}`}>
+                <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                  <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
+                </p>
+                {audioBtn}
+              </div>
             )}
             <div className="flex flex-wrap gap-2">
               {item.choices.map((choice, ci) => (
@@ -1239,10 +1312,20 @@ function FillExercise({
             </React.Fragment>
           ));
 
+        const media = item.svg || item.imageWord || item.image ? (
+          <GrammarWordImage svg={item.svg} word={item.imageWord} src={item.image} alt={item.answer} size="sm" />
+        ) : null;
+
         return (
           <div key={i} className="space-y-0.5">
+            {item.audioText ? (
+              <div className="mb-1">
+                <GrammarAudioButton text={item.audioText} />
+              </div>
+            ) : null}
             <p className="text-sm font-medium leading-loose text-[var(--color-text-primary)]">
               <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
+              {media ? <span className="mr-1 inline-flex align-middle">{media}</span> : null}
               {renderParts(sentLine1)}
               {parenHint && (
                 <>
@@ -1419,6 +1502,7 @@ function FillSelectExercise({
             const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
             const wrongField = validated && revealCorrection && !correct;
             const [before, after] = item.sentence.split("___");
+            const optionWords = item.choices?.length ? item.choices : exercise.wordBank;
 
             const selectEl = wrongField ? (
               <WrongFillCorrection
@@ -1445,7 +1529,7 @@ function FillSelectExercise({
                   if (validated) return;
                   setSelected((prev) => prev.map((s, j) => (j === i ? v : s)));
                 }}
-                options={exercise.wordBank.map((w) => ({ value: w, label: w }))}
+                options={optionWords.map((w) => ({ value: w, label: w }))}
                 placeholder=""
                 emptyOption={{ value: "", label: "" }}
                 disabled={validated}
@@ -1699,7 +1783,10 @@ function MatchExercise({
               {/* Left item */}
               <button type="button" className={leftCls} onClick={() => clickLeft(li)} disabled={validated}>
                 <span className="shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{li + 1}.</span>
-                <span className="flex-1">{pair.left}</span>
+                {(pair.leftSvg || pair.leftImageWord || pair.leftImage) && (
+                  <GrammarWordImage svg={pair.leftSvg} word={pair.leftImageWord} src={pair.leftImage} alt={pair.left} size="sm" />
+                )}
+                {pair.left ? <span className="flex-1">{pair.left}</span> : null}
               </button>
 
               {/* Connector dot */}
@@ -1745,7 +1832,10 @@ function MatchExercise({
           return (
             <button key={ri} type="button" className={cls} onClick={() => clickRight(ri)} disabled={validated}>
               <span className="shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{LETTERS[origIdx]}.</span>
-              <span className="flex-1 text-left">{pair.right}</span>
+              {(pair.rightSvg || pair.rightImageWord || pair.rightImage) && (
+                <GrammarWordImage svg={pair.rightSvg} word={pair.rightImageWord} src={pair.rightImage} alt={pair.right} size="sm" />
+              )}
+              {pair.right ? <span className="flex-1 text-left">{pair.right}</span> : null}
               {validated && revealCorrection && isConnected && !isCorrect && (
                 <span className="shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-amber-600" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -1926,7 +2016,14 @@ function WriteExercise({
           );
           onWriteAnswers?.({ prompts, texts: [...snapshot], instruction: exercise.instruction });
         }
-        onValidated(0, promptCount);
+        onValidated(
+          exercise.requiredWords?.length
+            ? snapshot.filter((t) =>
+                exercise.requiredWords!.every((w) => normalizeAnswer(t).includes(normalizeAnswer(w))),
+              ).length
+            : 0,
+          promptCount,
+        );
         return;
       }
 
@@ -1964,7 +2061,14 @@ function WriteExercise({
             );
             onWriteAnswers?.({ prompts, texts: [...snapshot], instruction: exercise.instruction });
           }
-          onValidated(0, promptCount);
+          onValidated(
+          exercise.requiredWords?.length
+            ? snapshot.filter((t) =>
+                exercise.requiredWords!.every((w) => normalizeAnswer(t).includes(normalizeAnswer(w))),
+              ).length
+            : 0,
+          promptCount,
+        );
         });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -2002,6 +2106,16 @@ function WriteExercise({
       )}
 
       <p className="whitespace-pre-line text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      {exercise.requiredWords?.length ? (
+        <p className="flex flex-wrap gap-1.5 text-xs">
+          <span className="text-[var(--color-text-secondary)]">Mots imposés :</span>
+          {exercise.requiredWords.map((w) => (
+            <span key={w} className="rounded-md bg-[var(--color-accent-fr)]/10 px-2 py-0.5 font-semibold text-[var(--color-accent-fr)]">
+              {w}
+            </span>
+          ))}
+        </p>
+      ) : null}
 
       {resolvedWriteImage && (
         <div className="overflow-hidden rounded-xl border border-[var(--color-border)]">
@@ -2158,7 +2272,7 @@ function TrueFalseExercise({
 }) {
   const fallback = exercise.poolSize ?? (exercise.items.length || 5);
   const { questionCount } = usePrintQuestionLayout(fallback);
-  const [resolved] = useState<{ image: string | null; items: { statement: string; answer: boolean }[] }>(() => {
+  const [resolved] = useState<{ image: string | null; items: TrueFalseItem[] }>(() => {
     const total = questionCount;
     const trueCount = Math.min(Math.max(1, Math.floor(total / 2) + (Math.random() < 0.5 ? 0 : 1)), total - 1);
     const falseCount = total - trueCount;
@@ -2175,6 +2289,7 @@ function TrueFalseExercise({
 
   const items = resolved.items;
   const [answers, setAnswers] = useState<(boolean | null)[]>(() => new Array(items.length).fill(null));
+  const [corrections, setCorrections] = useState<string[]>(() => new Array(items.length).fill(""));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -2186,7 +2301,17 @@ function TrueFalseExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(answers.filter((a, i) => a === items[i]!.answer).length, answers.length);
+      onValidated(
+        answers.filter((a, i) => {
+          const item = items[i]!;
+          if (a !== item.answer) return false;
+          if (item.answer === false && item.correction) {
+            return normalizeAnswer(corrections[i] ?? "") === normalizeAnswer(item.correction);
+          }
+          return true;
+        }).length,
+        answers.length,
+      );
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -2233,6 +2358,9 @@ function TrueFalseExercise({
             <React.Fragment key={i}>
               <div className="flex min-w-0 items-center gap-2">
                 <span className="w-5 shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
+                {(item.svg || item.imageWord || item.image) && (
+                  <GrammarWordImage svg={item.svg} word={item.imageWord} src={item.image} alt="" size="sm" />
+                )}
                 <p className="text-sm text-[var(--color-text-primary)]">{item.statement}</p>
               </div>
               <div className="flex shrink-0 gap-1.5">
@@ -2243,6 +2371,30 @@ function TrueFalseExercise({
                   Faux
                 </button>
               </div>
+              {item.correction && (chosen === false || (validated && item.answer === false)) ? (
+                <div className="col-span-2 mb-2 ml-7">
+                  {validated && revealCorrection && item.answer === false &&
+                  normalizeAnswer(corrections[i] ?? "") !== normalizeAnswer(item.correction) ? (
+                    <WrongFillCorrection
+                      user={corrections[i] ?? ""}
+                      expected={item.correction}
+                      className="!mx-0 w-64"
+                      longAnswer
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      value={corrections[i] ?? ""}
+                      disabled={validated}
+                      placeholder="Corrige : c'est un…"
+                      onChange={(e) =>
+                        setCorrections((prev) => prev.map((v, idx) => (idx === i ? e.target.value : v)))
+                      }
+                      className="w-full max-w-sm rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 py-1 text-sm outline-none focus:border-[var(--color-accent-fr)]"
+                    />
+                  )}
+                </div>
+              ) : null}
             </React.Fragment>
           );
         })}
@@ -2252,6 +2404,17 @@ function TrueFalseExercise({
 }
 
 // ── Order exercise ────────────────────────────────────────────────────────────
+
+function orderUnits(item: OrderItem): string[] {
+  if (item.imageWords?.length) return item.imageWords;
+  if (item.imageSvgs?.length) return item.imageSvgs.map((_, i) => item.imageWords?.[i] ?? `fig-${i + 1}`);
+  if (item.parts?.length) return item.parts;
+  return item.sentence.split(" ");
+}
+
+function orderExpectedJoin(item: OrderItem): string {
+  return orderUnits(item).join("\n");
+}
 
 function OrderExercise({
   exercise,
@@ -2267,7 +2430,7 @@ function OrderExercise({
   const { questionCount, listClass } = usePrintQuestionLayout(exercise.items.length);
   const [items] = useState(() => exercise.items.slice(0, questionCount));
   const [pools, setPools] = useState<string[][]>(() =>
-    items.map((item) => shuffle(item.sentence.split(" "))),
+    items.map((item) => shuffle(orderUnits(item))),
   );
   const [builts, setBuilts] = useState<string[][]>(() => items.map(() => []));
   const [validated, setValidated] = useState(false);
@@ -2281,7 +2444,7 @@ function OrderExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(builts.filter((b, i) => b.join(" ") === items[i]!.sentence).length, builts.length);
+      onValidated(builts.filter((b, i) => b.join("\n") === orderExpectedJoin(items[i]!)).length, builts.length);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -2307,50 +2470,50 @@ function OrderExercise({
       {items.map((item, i) => {
         const built = builts[i]!;
         const pool = pools[i]!;
-        const correct = built.join(" ") === item.sentence;
+        const isImages = Boolean(item.imageWords?.length || item.imageSvgs?.length);
+        const correct = built.join("\n") === orderExpectedJoin(item);
+        const expectedLabel = orderUnits(item).join(isImages ? " → " : item.parts?.length ? " / " : " ");
+        const renderUnit = (w: string, onClick: () => void, filled: boolean) => {
+          const imgIdx = item.imageWords?.indexOf(w) ?? -1;
+          const svg = imgIdx >= 0 ? item.imageSvgs?.[imgIdx] : undefined;
+          return (
+            <button
+              type="button"
+              onClick={onClick}
+              disabled={validated}
+              className={
+                filled
+                  ? "rounded bg-[var(--color-accent-fr)]/10 px-2 py-0.5 text-xs font-medium text-[var(--color-accent-fr)] disabled:opacity-100"
+                  : "rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-xs text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)] disabled:opacity-70"
+              }
+            >
+              {isImages ? <GrammarWordImage word={w} svg={svg} alt={w} size="sm" /> : w}
+            </button>
+          );
+        };
         return (
           <div key={i} className="space-y-2 rounded-lg border border-[var(--color-border)] p-3">
             {item.hint && (
               <p className="text-xs text-[var(--color-text-secondary)] italic">{item.hint}</p>
             )}
-            {/* answer area — correction style vocab ExWordOrder */}
             {validated && revealCorrection && !correct ? (
               <div className="flex min-h-9 flex-col justify-center border-b-2 border-amber-500 pb-0.5">
                 <span className="text-sm text-[var(--color-text-secondary)] line-through">
-                  {built.join(" ") || "—"}
+                  {built.join(isImages || item.parts?.length ? " / " : " ") || "—"}
                 </span>
-                <span className="text-sm font-bold text-amber-600">{item.sentence}</span>
+                <span className="text-sm font-bold text-amber-600">{expectedLabel}</span>
               </div>
             ) : (
             <div className="min-h-9 flex flex-wrap gap-1.5 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent p-2 transition-colors">
               {built.length === 0 && (
-                <span className="text-xs text-[var(--color-text-secondary)] italic">Clique les mots ci-dessous…</span>
+                <span className="text-xs text-[var(--color-text-secondary)] italic">Clique les éléments ci-dessous…</span>
               )}
-              {built.map((w, j) => (
-                <button
-                  key={j}
-                  onClick={() => removeWord(i, j)}
-                  disabled={validated}
-                  className="rounded bg-[var(--color-accent-fr)]/10 px-2 py-0.5 text-xs font-medium text-[var(--color-accent-fr)] disabled:opacity-100"
-                >
-                  {w}
-                </button>
-              ))}
+              {built.map((w, j) => renderUnit(w, () => removeWord(i, j), true))}
             </div>
             )}
-            {/* word pool */}
             {!validated && (
             <div className="flex flex-wrap gap-1.5">
-              {pool.map((w, j) => (
-                <button
-                  key={j}
-                  onClick={() => addWord(i, j)}
-                  disabled={validated}
-                  className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-xs text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)] disabled:opacity-70"
-                >
-                  {w}
-                </button>
-              ))}
+              {pool.map((w, j) => renderUnit(w, () => addWord(i, j), false))}
             </div>
             )}
           </div>
@@ -2898,7 +3061,10 @@ export function GrammarExerciseView({
           {exercise.title}
         </h2>
       ) : null}
-      {exercise.type === "qcm" && (
+      {exercise.type === "qcm" && exercise.multiple && (
+        <QcmMultiExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "qcm" && !exercise.multiple && (
         <QcmExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
       {exercise.type === "fill" && (
@@ -2941,6 +3107,24 @@ export function GrammarExerciseView({
       {exercise.type === "tag2" && (
         <Tag2Exercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
+      {exercise.type === "odd_one_out" && (
+        <OddOneOutExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "letter_spot" && (
+        <LetterSpotExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "syllable_join" && (
+        <SyllableJoinExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "audio_discrim" && (
+        <AudioDiscrimExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "anagram" && (
+        <AnagramExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "drag_label" && (
+        <DragLabelExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
     </div>
   );
 }
@@ -2969,6 +3153,12 @@ function getGrammaireStepHint(exType: string | undefined): string | undefined {
     case "color_highlight": return "Surligne ou identifie l'élément demandé dans le texte.";
     case "clock_read":   return "Lis l'horloge : les petites aiguilles pour les heures, les grandes pour les minutes.";
     case "tag2":         return "Identifie et classe chaque élément dans la bonne catégorie grammaticale.";
+    case "odd_one_out":  return "Trouve l'intrus : le mot qui n'appartient pas à la même catégorie.";
+    case "letter_spot":  return "Entoure toutes les lettres demandées dans le mot ou le texte.";
+    case "syllable_join": return "Assemble les syllabes dans le bon ordre pour former le mot.";
+    case "audio_discrim": return "Écoute les deux extraits : sont-ils pareils ou différents ?";
+    case "anagram":      return "Remets les lettres dans l'ordre pour former le mot.";
+    case "drag_label":   return "Place chaque étiquette sur la bonne image.";
     default:             return "Lis attentivement la consigne avant de répondre.";
   }
 }

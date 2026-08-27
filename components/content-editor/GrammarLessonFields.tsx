@@ -23,6 +23,12 @@ const EXERCISE_TYPE_LABELS: Record<string, string> = {
   color_highlight: "Surlignage",
   clock_read: "Lecture d’horloge",
   tag2: "Genre / nombre",
+  odd_one_out: "Intrus",
+  letter_spot: "Lettres à entourer",
+  syllable_join: "Syllabes",
+  audio_discrim: "Discrimination auditive",
+  anagram: "Anagramme",
+  drag_label: "Étiquette → image",
 };
 
 function exerciseTypeLabel(type: string) {

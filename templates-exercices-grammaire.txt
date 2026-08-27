@@ -1,0 +1,698 @@
+Templates d'exercices — grammaire
+=================================
+Saisis ici tes phrases / items, puis recopie-les dans les fichiers
+lib/curriculum/content/francais/grammaire-g*.ts (champ exercises[]).
+
+Blanc dans une phrase : exactement  ___  (trois underscores).
+Aperçu interactif (hors menu élève) : /francais/grammaire/a1-gr-templates
+
+Légende
+-------
+EXISTANT  = type déjà utilisé dans la grammaire, ne pas recréer.
+NOUVEAU   = type ou champ ajouté pour ce catalogue.
+
+
+================================================================================
+1. TEXTES À TROUS (cloze)
+================================================================================
+
+----- 1.1 Libre — réponse ouverte                          EXISTANT  type: fill -----
+Je ___ une pomme.  →  mange
+
+{
+  type: "fill",
+  title: "Exercice 1",
+  instruction: "Complète avec le mot qui convient.",
+  items: [
+    { sentence: "Je ___ une pomme.", hint: "", answer: "mange" },
+    { sentence: "Tu ___ de l'eau.", hint: "", answer: "bois" },
+  ],
+}
+
+À saisir :
+# phrase | réponse
+Je ___ une pomme. | mange
+Tu ___ de l'eau. | bois
+
+
+----- 1.2 QCM intégré — liste dans la phrase               EXISTANT  type: fill_select
+                                                          + hideWordBank + choices[] -----
+Je ___ une pomme.  [mange / bois / téléphone]
+
+{
+  type: "fill_select",
+  title: "Exercice 2",
+  instruction: "Choisis le mot manquant.",
+  hideWordBank: true,
+  wordBank: [],
+  items: [
+    { sentence: "Je ___ une pomme.", hint: "", answer: "mange", choices: ["mange", "bois", "téléphone"] },
+  ],
+}
+
+À saisir :
+# phrase | réponse | choix séparés par /
+Je ___ une pomme. | mange | mange / bois / téléphone
+
+
+----- 1.3 Banque de mots                                   EXISTANT  type: fill_select -----
+Banque : mange – bois – dors
+Je ___ une pomme. / Je ___ de l'eau.
+
+{
+  type: "fill_select",
+  title: "Exercice 3",
+  instruction: "Replace chaque mot de la banque dans la bonne phrase.",
+  wordBank: ["mange", "bois", "dors"],
+  items: [
+    { sentence: "Je ___ une pomme.", hint: "", answer: "mange" },
+    { sentence: "Je ___ de l'eau.", hint: "", answer: "bois" },
+  ],
+}
+
+À saisir :
+BANQUE : mange | bois | dors
+# phrase | réponse
+Je ___ une pomme. | mange
+Je ___ de l'eau. | bois
+
+
+----- 1.4 Terminaison à compléter                          EXISTANT  type: fill -----
+Je mang___ une pomme.  →  e
+(Le radical reste visible ; seule la terminaison est tapée.)
+
+{
+  type: "fill",
+  title: "Exercice 4",
+  instruction: "Complète la terminaison.",
+  inputWidth: "w-16",
+  items: [
+    { sentence: "Je mang___ une pomme.", hint: "", answer: "e" },
+  ],
+}
+
+À saisir :
+# phrase (radical + ___) | terminaison
+Je mang___ une pomme. | e
+Tu mang___ une pomme. | es
+
+
+----- 1.5 Avec image                                       EXISTANT+  fill + imageWord/svg -----
+Je mange une [image pomme]  →  pomme
+
+{
+  type: "fill",
+  title: "Exercice 5",
+  instruction: "Écris le mot illustré.",
+  items: [
+    { sentence: "Je mange une ___.", hint: "", answer: "pomme", imageWord: "pomme" },
+  ],
+}
+
+À saisir :
+# phrase | réponse | imageWord (mot → image lecture)
+Je mange une ___. | pomme | pomme
+
+
+----- 1.6 Dictée à trous (audio)                           EXISTANT+  fill + audioText -----
+(Audio : « Je mange une pomme. »)  Je ___ une pomme.
+
+{
+  type: "fill",
+  title: "Exercice 6",
+  instruction: "Écoute et complète.",
+  items: [
+    { sentence: "Je ___ une pomme.", hint: "", answer: "mange", audioText: "Je mange une pomme." },
+  ],
+}
+
+À saisir :
+# phrase | réponse | audioText
+Je ___ une pomme. | mange | Je mange une pomme.
+
+
+================================================================================
+2. QCM
+================================================================================
+
+----- 2.1 Simple                                           EXISTANT  type: qcm -----
+Que fait-on avec une pomme ?  ○ On la mange  ○ On la porte  ○ On la conduit
+
+{
+  type: "qcm",
+  title: "Exercice 7",
+  instruction: "Choisis la bonne réponse.",
+  items: [
+    { sentence: "Que fait-on avec une pomme ?", choices: ["On la mange", "On la porte", "On la conduit"], correctIdx: 0 },
+  ],
+}
+
+À saisir :
+# question | choix / | index de la bonne (0 = premier)
+Que fait-on avec une pomme ? | On la mange / On la porte / On la conduit | 0
+
+
+----- 2.2 Avec images (réponses)                           EXISTANT+  qcm + choiceImageWords -----
+Montre le fruit : [pomme] [voiture] [chaise]
+
+{
+  type: "qcm",
+  title: "Exercice 8",
+  instruction: "Montre le fruit qu'on mange.",
+  items: [
+    {
+      sentence: "Montre le fruit qu'on mange.",
+      choices: ["pomme", "voiture", "chaise"],
+      correctIdx: 0,
+      choiceImageWords: ["pomme", "voiture", "chaise"],
+    },
+  ],
+}
+
+À saisir :
+# question | images-mots / | index bon
+Montre le fruit qu'on mange. | pomme / voiture / chaise | 0
+
+
+----- 2.3 Audio puis choix                                 EXISTANT+  qcm + audioText -----
+(Audio : « pomme »)  →  [image pomme] [image poire]
+
+{
+  type: "qcm",
+  title: "Exercice 9",
+  instruction: "Écoute puis choisis la bonne image.",
+  items: [
+    {
+      sentence: "",
+      audioText: "pomme",
+      choices: ["pomme", "poire"],
+      correctIdx: 0,
+      choiceImageWords: ["pomme", "poire"],
+    },
+  ],
+}
+
+À saisir :
+# audioText | images-mots / | index bon
+pomme | pomme / poire | 0
+
+
+----- 2.4 Réponses multiples                               EXISTANT+  qcm + multiple + correctIdxs -----
+Coche les fruits : ☐ pomme ☐ voiture ☐ banane ☐ chaise
+
+{
+  type: "qcm",
+  title: "Exercice 10",
+  instruction: "Coche tous les fruits.",
+  multiple: true,
+  items: [
+    { sentence: "Coche les fruits.", choices: ["pomme", "voiture", "banane", "chaise"], correctIdx: 0, correctIdxs: [0, 2] },
+  ],
+}
+
+À saisir :
+# question | choix / | index des bonnes (virgules)
+Coche les fruits. | pomme / voiture / banane / chaise | 0,2
+
+
+================================================================================
+3. VRAI / FAUX
+================================================================================
+
+----- 3.1 Simple                                           EXISTANT  type: trueFalse -----
+La pomme est un légume.  →  Faux
+
+{
+  type: "trueFalse",
+  title: "Exercice 11",
+  instruction: "Réponds par vrai ou faux.",
+  items: [
+    { statement: "La pomme est un légume.", answer: false },
+    { statement: "La pomme est un fruit.", answer: true },
+  ],
+}
+
+À saisir :
+# affirmation | vrai/faux
+La pomme est un légume. | faux
+La pomme est un fruit. | vrai
+
+
+----- 3.2 Avec correction                                  EXISTANT+  trueFalse + correction -----
+Faux → l'élève écrit : « c'est un fruit »
+
+{
+  type: "trueFalse",
+  title: "Exercice 12",
+  instruction: "Si c'est faux, écris la correction.",
+  items: [
+    { statement: "La pomme est un légume.", answer: false, correction: "c'est un fruit" },
+  ],
+}
+
+À saisir :
+# affirmation | vrai/faux | correction si faux
+La pomme est un légume. | faux | c'est un fruit
+
+
+----- 3.3 Avec image                                       EXISTANT+  trueFalse + imageWord -----
+[image pomme]  C'est une orange.  →  Faux
+
+{
+  type: "trueFalse",
+  title: "Exercice 13",
+  instruction: "Regarde l'image et réponds.",
+  items: [
+    { statement: "C'est une orange.", answer: false, imageWord: "pomme", correction: "c'est une pomme" },
+  ],
+}
+
+À saisir :
+# affirmation | vrai/faux | imageWord | correction
+C'est une orange. | faux | pomme | c'est une pomme
+
+
+================================================================================
+4. ASSOCIATION (à relier)                                  EXISTANT  type: match
+================================================================================
+
+----- 4.1 Mot ↔ image                                      EXISTANT+  match + rightImageWord -----
+{
+  type: "match",
+  title: "Exercice 14",
+  instruction: "Relie chaque mot à son image.",
+  leftLabel: "Mot",
+  rightLabel: "Image",
+  pairs: [
+    { left: "pomme", right: "", rightImageWord: "pomme" },
+    { left: "voiture", right: "", rightImageWord: "voiture" },
+  ],
+}
+
+À saisir :
+# mot | imageWord
+pomme | pomme
+voiture | voiture
+
+
+----- 4.2 Mot ↔ définition                                 EXISTANT -----
+À saisir :
+# mot | définition
+pomme | fruit rond qui pousse sur un arbre
+voiture | véhicule à quatre roues
+
+
+----- 4.3 Mot ↔ traduction                                 EXISTANT -----
+À saisir :
+# fr | en
+pomme | apple
+voiture | car
+
+
+----- 4.4 Début ↔ fin de phrase                            EXISTANT -----
+À saisir :
+# début | fin
+Je mange | une pomme.
+Je bois | de l'eau.
+
+
+----- 4.5 Colonnes grammaticales                           EXISTANT -----
+À saisir :
+# gauche | droite
+Je | mange
+Tu | manges
+Il | mange
+
+
+================================================================================
+5. CLASSEMENT ET REMISE EN ORDRE
+================================================================================
+
+----- 5.1 Tri par catégorie                                EXISTANT  type: classify -----
+pomme, voiture, banane, vélo  →  Fruits / Véhicules
+
+{
+  type: "classify",
+  title: "Exercice 19",
+  instruction: "Classe chaque mot.",
+  categories: ["Fruits", "Véhicules"],
+  items: [
+    { word: "pomme", categoryIdx: 0 },
+    { word: "voiture", categoryIdx: 1 },
+    { word: "banane", categoryIdx: 0 },
+    { word: "vélo", categoryIdx: 1 },
+  ],
+}
+
+À saisir :
+CATÉGORIES : Fruits | Véhicules
+# mot | index catégorie (0, 1, …)
+pomme | 0
+voiture | 1
+banane | 0
+vélo | 1
+
+
+----- 5.2 Remise en ordre de mots                          EXISTANT  type: word_order -----
+mange / une / Je / pomme  →  « Je mange une pomme. »
+Les mots doivent correspondre EXACTEMENT à la phrase (casse comprise).
+Le point final est ajouté tout seul s'il est à la fin de sentence.
+
+{
+  type: "word_order",
+  title: "Exercice 20",
+  instruction: "Remets les mots dans l'ordre.",
+  items: [
+    { sentence: "Je mange une pomme.", words: ["Je", "mange", "une", "pomme"] },
+  ],
+}
+
+À saisir :
+# phrase cible | mots séparés par /
+Je mange une pomme. | Je / mange / une / pomme
+
+
+----- 5.3 Remise en ordre de phrases (dialogue)            EXISTANT+  order + parts[] -----
+Numéroter un dialogue.
+
+{
+  type: "order",
+  title: "Exercice 21",
+  instruction: "Remets les répliques dans l'ordre.",
+  items: [
+    {
+      sentence: "",
+      hint: "Au marché",
+      parts: [
+        "Bonjour, je voudrais une pomme.",
+        "Oui, la voilà. Ça fait un euro.",
+        "Merci, au revoir.",
+      ],
+    },
+  ],
+}
+
+À saisir :
+# une réplique par ligne, dans l'ordre attendu
+Bonjour, je voudrais une pomme.
+Oui, la voilà. Ça fait un euro.
+Merci, au revoir.
+
+
+----- 5.4 Remise en ordre d'images                         EXISTANT+  order + imageWords[] -----
+[laver] [couper] [manger] la pomme
+
+{
+  type: "order",
+  title: "Exercice 22",
+  instruction: "Remets les images dans l'ordre chronologique.",
+  items: [
+    { sentence: "", hint: "Préparer une pomme", imageWords: ["laver", "couper", "manger"] },
+  ],
+}
+
+À saisir :
+# imageWords dans l'ordre attendu, séparés par /
+laver / couper / manger
+
+
+----- 5.5 Intrus                                           NOUVEAU  type: odd_one_out -----
+pomme – banane – voiture – poire  →  voiture (index 2)
+
+{
+  type: "odd_one_out",
+  title: "Exercice 23",
+  instruction: "Clique sur l'intrus.",
+  items: [
+    { words: ["pomme", "banane", "voiture", "poire"], oddIdx: 2 },
+  ],
+}
+
+À saisir :
+# mots / | index de l'intrus (0 = premier)
+pomme / banane / voiture / poire | 2
+
+
+================================================================================
+6. REPÉRAGE DANS UN TEXTE
+================================================================================
+
+----- 6.1 Souligner / entourer le bon mot                  EXISTANT  qcm + inlineChoices -----
+Je (mange / bois) une pomme.
+
+{
+  type: "qcm",
+  title: "Exercice 24",
+  instruction: "Choisis le verbe qui convient.",
+  inlineChoices: true,
+  items: [
+    { sentence: "Je ___ une pomme.", choices: ["mange", "bois"], correctIdx: 0 },
+  ],
+}
+
+À saisir :
+# phrase avec ___ | choix / | index bon
+Je ___ une pomme. | mange / bois | 0
+
+
+----- 6.2 Cocher une catégorie dans un texte               EXISTANT  type: color_highlight -----
+Cocher tous les fruits dans : « J'ai acheté une pomme, du pain et une banane. »
+
+{
+  type: "color_highlight",
+  title: "Exercice 25",
+  instruction: "Surligne tous les fruits.",
+  colors: ["fruit"],
+  items: [
+    {
+      words: ["J'ai", "acheté", "une", "pomme", ",", "du", "pain", "et", "une", "banane", "."],
+      answers: [null, null, null, 0, null, null, null, null, null, 0, null],
+    },
+  ],
+}
+
+À saisir :
+# mots séparés par espaces (ponctuation = mot à part)
+# puis index à surligner (couleur 0), séparés par virgules
+J'ai acheté une pomme , du pain et une banane .
+cibles : pomme, banane
+
+
+================================================================================
+7. PRODUCTION ÉCRITE                                       EXISTANT  type: write
+================================================================================
+
+----- 7.1 Réponse courte -----
+Qu'est-ce que tu manges ?  →  réponse libre
+
+{
+  type: "write",
+  title: "Exercice 26",
+  instruction: "Réponds par une phrase complète.",
+  prompts: ["Qu'est-ce que tu manges ?"],
+}
+
+À saisir :
+# une consigne par ligne
+Qu'est-ce que tu manges ?
+
+
+----- 7.2 Amorce à compléter -----
+Le matin, je...
+
+{
+  type: "write",
+  title: "Exercice 27",
+  instruction: "Continue la phrase.",
+  promptLayout: "stacked",
+  prompts: ["Le matin, je..."],
+}
+
+À saisir :
+Le matin, je...
+Le week-end, je...
+
+
+----- 7.3 Description d'une image -----
+{
+  type: "write",
+  title: "Exercice 28",
+  instruction: "Décris ce que tu vois.",
+  imagePool: [
+    { image: "/assets/words/lecture/pomme.webp", promptPool: ["Décris ce que tu vois."] },
+  ],
+}
+
+À saisir :
+# chemin image | consigne
+/assets/words/lecture/pomme.webp | Décris ce que tu vois.
+
+
+----- 7.4 Mots imposés                                     EXISTANT+  write + requiredWords -----
+Écrire une phrase avec : pomme – manger – matin
+
+{
+  type: "write",
+  title: "Exercice 29",
+  instruction: "Écris une phrase avec les mots imposés.",
+  requiredWords: ["pomme", "manger", "matin"],
+  prompts: ["Écris une phrase."],
+}
+
+À saisir :
+MOTS : pomme | manger | matin
+# consigne
+Écris une phrase.
+
+
+================================================================================
+8. COMPRÉHENSION / EXPRESSION ORALE
+================================================================================
+
+----- 8.1 Écouter et cocher l'image                        EXISTANT+  qcm + audioText + choiceImageWords -----
+(Audio : « une pomme »)  →  3 images
+
+À saisir :
+# audioText | images-mots / | index bon
+une pomme | pomme / poire / voiture | 0
+
+
+----- 8.2 Dictée de mots                                   EXISTANT+  fill + audioText -----
+(Audio : « pomme »)  →  écrire « pomme »
+
+À saisir :
+# audioText | réponse
+pomme | pomme
+
+
+----- 8.3 Discrimination auditive                          NOUVEAU  type: audio_discrim -----
+(Audio A : « pomme » / Audio B : « paume »)  →  différent
+
+{
+  type: "audio_discrim",
+  title: "Exercice 32",
+  instruction: "Écoute A et B. Pareil ou différent ?",
+  items: [
+    { audioA: "pomme", audioB: "paume", same: false },
+    { audioA: "pomme", audioB: "pomme", same: true },
+  ],
+}
+
+À saisir :
+# audioA | audioB | pareil/différent
+pomme | paume | différent
+pomme | pomme | pareil
+
+
+================================================================================
+9. LITTÉRATIE / PRÉ-ALPHA
+================================================================================
+
+----- 9.1 Reconnaissance de lettres                        NOUVEAU  type: letter_spot -----
+Entourer tous les « p » dans : p a p i e r
+
+{
+  type: "letter_spot",
+  title: "Exercice 33",
+  instruction: "Entoure toutes les lettres demandées.",
+  items: [
+    { text: "papier", target: "p" },
+  ],
+}
+
+À saisir :
+# texte | lettre cible
+papier | p
+papa | p
+
+
+----- 9.2 Assemblage de syllabes                           NOUVEAU  type: syllable_join -----
+« POM » + « ME »  →  pomme
+
+{
+  type: "syllable_join",
+  title: "Exercice 34",
+  instruction: "Assemble les syllabes.",
+  items: [
+    { parts: ["POM", "ME"], answer: "pomme" },
+  ],
+}
+
+À saisir :
+# syllabes / | mot
+POM / ME | pomme
+
+
+----- 9.3 Repérer un son                                   EXISTANT  type: qcm + audioText -----
+« pomme » commence par quel son ?  [p] [b] [t]
+
+À saisir :
+# question | audioText | choix / | index bon
+« pomme » commence par quel son ? | pomme | p / b / t | 0
+
+
+================================================================================
+10. FORMATS INTERACTIFS
+================================================================================
+
+----- 10.1 Étiquette → image                               NOUVEAU  type: drag_label -----
+Glisser « pomme » sur la bonne image (clic : même logique que match).
+
+{
+  type: "drag_label",
+  title: "Exercice 36",
+  instruction: "Place chaque mot sur la bonne image.",
+  items: [
+    {
+      labels: ["pomme", "voiture"],
+      targets: [
+        { label: "pomme", imageWord: "pomme" },
+        { label: "voiture", imageWord: "voiture" },
+      ],
+    },
+  ],
+}
+
+À saisir :
+# étiquette | imageWord
+pomme | pomme
+voiture | voiture
+
+
+----- 10.2 Lettres → mot (anagramme)                       NOUVEAU  type: anagram -----
+M-O-P-M-E  →  pomme
+
+{
+  type: "anagram",
+  title: "Exercice 37",
+  instruction: "Remets les lettres dans l'ordre.",
+  items: [
+    { answer: "pomme", letters: ["M", "O", "P", "M", "E"] },
+  ],
+}
+
+À saisir :
+# mot | lettres (si omis : lettres du mot mélangées)
+pomme | M O P M E
+
+
+----- 10.3 Mots → phrase                                   EXISTANT  type: word_order -----
+[je] [mange] [une] [pomme]
+
+À saisir : identique à 5.2
+
+
+================================================================================
+CHAMPS MÉDIA (optionnels, tous templates)
+================================================================================
+audioText        texte lu (mp3 mot si un seul mot, sinon TTS)
+imageWord        mot → /assets/words/lecture/<mot>.webp
+image            chemin d'image explicite
+svg              SVG inline
+choiceImageWords tableau parallèle aux choices (QCM)
+correctIdxs      index des bonnes réponses (QCM multiple)
+correction       texte à écrire si l'affirmation est fausse (V/F)
+requiredWords    mots que la phrase produite doit contenir (write)
+parts            répliques d'un dialogue à ordonner (order)
+imageWords       images à ordonner (order)
+choices          liste locale d'un trou (fill_select, QCM intégré)
