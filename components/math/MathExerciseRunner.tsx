@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppInput } from "@/components/ui/AppInput";
-import type { PivotCode } from "@/lib/pivot-langs";
-import { PIVOT_LANGS } from "@/lib/pivot-langs";
+import { extraPivotText } from "@/lib/curriculum/content/math/trad/extra-pivots";
+import { isRtlPivotLang, PIVOT_LANGS, type PivotCode } from "@/lib/pivot-langs";
 import {
   answerMatches,
   type MathExerciseItem,
@@ -43,7 +43,7 @@ export function MathExerciseRunner({
     <div className="space-y-5">
       {exercises.map((ex) => {
         const ok = showCorrections ? answerMatches(values[ex.id] ?? "", ex.acceptable) : null;
-        const pivotPrompt = ex.promptPivot?.[pivot];
+        const pivotPrompt = ex.promptPivot?.[pivot] ?? extraPivotText(ex.promptFr, pivot);
         return (
           <div
             key={ex.id}
@@ -62,7 +62,7 @@ export function MathExerciseRunner({
               <p
                 className="mb-3 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
                 lang={pivot}
-                dir={pivot === "ar" || pivot === "fa" ? "rtl" : "ltr"}
+                dir={isRtlPivotLang(pivot) ? "rtl" : "ltr"}
               >
                 {pivotPrompt}
               </p>

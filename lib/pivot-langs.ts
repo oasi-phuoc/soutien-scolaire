@@ -25,3 +25,10 @@ export function isPivotCode(
   if (value == null || value === "") return false;
   return PIVOT_LANGS.some((l) => l.code === value);
 }
+
+/** Langues pivot à affichage de droite à gauche (arabe, persan, pachto, dari). */
+const RTL_PIVOT_CODES = new Set<PivotCode>(["ar", "fa", "ps", "prs"]);
+
+export function isRtlPivotLang(code: string | null | undefined): boolean {
+  return code != null && RTL_PIVOT_CODES.has(code as PivotCode);
+}

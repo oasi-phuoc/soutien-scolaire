@@ -33,7 +33,7 @@ import { PageBackButton } from "@/components/ui/PageBackButton";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
-import type { PivotCode } from "@/lib/pivot-langs";
+import { isRtlPivotLang, type PivotCode } from "@/lib/pivot-langs";
 
 type ExerciseMeta = PlacementMathExerciseMeta;
 
@@ -328,7 +328,7 @@ export function PlacementTestClient({
   const { showPivot } = useTranslation();
   const introText = (showPivot ? PLACEMENT_INTRO_TEXTS[pivot] : undefined) ?? PLACEMENT_INTRO_TEXTS.fr;
   const introLang = showPivot ? pivot : "fr";
-  const introDir = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr";
+  const introDir = showPivot && isRtlPivotLang(pivot) ? "rtl" : "ltr";
   const [phase, setPhase] = useState<TestPhase>("idle");
   const [currentIdx, setCurrentIdx] = useState(0);
   const [timeLeft, setTimeLeft] = useState(timerSeconds);

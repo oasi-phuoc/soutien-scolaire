@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
+import { extraPivotText } from "@/lib/curriculum/content/math/trad/extra-pivots";
+import { isRtlPivotLang } from "@/lib/pivot-langs";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePrintQuestionLayout } from "@/components/print/PrintExerciseLayoutContext";
@@ -175,9 +177,11 @@ const INSTRUCTION_TRANSLATIONS: Record<string, Partial<Record<string, string>>> 
 export function PlacementInstruction({ text, className = "text-sm text-[var(--color-text-secondary)]" }: { text: string; className?: string }) {
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
-  const translated = showPivot ? INSTRUCTION_TRANSLATIONS[text]?.[pivot] : undefined;
+  const translated = showPivot
+    ? (INSTRUCTION_TRANSLATIONS[text]?.[pivot] ?? extraPivotText(text, pivot))
+    : undefined;
   const displayLang = translated ? pivot : "fr";
-  const isRtl = Boolean(translated) && (pivot === "ar" || pivot === "fa" || pivot === "ps");
+  const isRtl = Boolean(translated) && isRtlPivotLang(pivot);
   return (
     <p className={className} lang={displayLang} dir={isRtl ? "rtl" : "ltr"}>
       {translated ?? text}

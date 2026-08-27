@@ -1,4 +1,5 @@
 import type { SubmoduleTrad } from "./trad-types";
+import { enrichSubmoduleTrad } from "./extra-pivots";
 import { TRAD_A1_1 } from "./trad-a1-1";
 import { TRAD_A1_2 } from "./trad-a1-2";
 import { TRAD_A1_3 } from "./trad-a1-3";
@@ -125,8 +126,16 @@ const TRAD_MAP = new Map<string, SubmoduleTrad>(
   ALL_TRADS.map((t) => [t.submoduleId, t]),
 );
 
+const ENRICHED = new Map<string, SubmoduleTrad>();
+
 export function getTrad(submoduleId: string): SubmoduleTrad | undefined {
-  return TRAD_MAP.get(submoduleId);
+  const cached = ENRICHED.get(submoduleId);
+  if (cached) return cached;
+  const raw = TRAD_MAP.get(submoduleId);
+  if (!raw) return undefined;
+  const enriched = enrichSubmoduleTrad(raw);
+  ENRICHED.set(submoduleId, enriched);
+  return enriched;
 }
 
 export type { SubmoduleTrad, BlockTrad, TradString, LangCode } from "./trad-types";

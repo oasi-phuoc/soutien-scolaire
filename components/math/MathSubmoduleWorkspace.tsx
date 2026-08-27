@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
+import { extraPivotText } from "@/lib/curriculum/content/math/trad/extra-pivots";
 import { getTrad } from "@/lib/curriculum/content/math/trad";
 import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getMathModule } from "@/lib/curriculum/math-data";
@@ -22,7 +23,7 @@ import {
   EvalResultsHint,
   EvalResultsSummary,
 } from "@/components/ui/EvalResultsUI";
-import type { PivotCode } from "@/lib/pivot-langs";
+import { isRtlPivotLang, type PivotCode } from "@/lib/pivot-langs";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise, DecColArithExercise, DecColArithFullExercise, DecExprCompExercise, DecMul2ColExercise } from "@/components/math/A5DecimalContent";
@@ -1320,7 +1321,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot = "en", showPivot = fals
   showPivot?: boolean;
 }) {
   const bt = blockIdx !== undefined ? tradBlocks?.[blockIdx] : undefined;
-  const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
+  const isRtl = isRtlPivotLang(pivot);
   const usePivot = showPivot;
   const textDir = usePivot && isRtl ? "rtl" : "ltr";
   const textLang = usePivot ? pivot : undefined;
@@ -1796,7 +1797,7 @@ function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson;
   const trad = getTrad(lesson.submoduleId);
   const translatedParagraphs = showPivot ? trad?.paragraphs?.[pivot] : undefined;
   const paragraphs = translatedParagraphs?.length ? translatedParagraphs : theory.paragraphs.fr;
-  const isRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
+  const isRtl = showPivot && (isRtlPivotLang(pivot));
   return (
     <div className="space-y-4">
       {theory.blocks && theory.blocks.length > 0 ? (
@@ -2005,7 +2006,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const lessonTrad = lesson ? getTrad(lesson.submoduleId) : undefined;
   const promptFor = useCallback((promptFr: string) => {
     if (!showPivotTranslation) return promptFr;
-    return lessonTrad?.consignes?.[promptFr]?.[pivot] ?? promptFr;
+    return lessonTrad?.consignes?.[promptFr]?.[pivot] ?? extraPivotText(promptFr, pivot) ?? promptFr;
   }, [lessonTrad, pivot, showPivotTranslation]);
 
   const [steps, setSteps] = useState<WorkspaceStep[]>(() => {

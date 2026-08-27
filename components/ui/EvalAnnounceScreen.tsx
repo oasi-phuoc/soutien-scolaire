@@ -2,7 +2,7 @@
 
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
-import type { PivotCode } from "@/lib/pivot-langs";
+import { isRtlPivotLang, type PivotCode } from "@/lib/pivot-langs";
 
 type Tr = { title: string; timed: string; untimed: string };
 
@@ -17,6 +17,12 @@ const PIVOT: Partial<Record<PivotCode, Tr>> = {
   tr: { title: "Değerlendirmeye hazır mısın?", timed: "Tamamlamak için {m} dakikan var.", untimed: "Bu modülü geçmek için ustalığını göster." },
   ti: { title: "ንግምገማ ድሉው ኢኻ?", timed: "ንምዝዛም {m} ደቓይቕ ኣለካ።", untimed: "ነዚ ሞዱል ንምሕላፍ ክእለትካ ኣርእይ።" },
   ps: { title: "د ارزونې لپاره چمتو يې؟", timed: "د بشپړولو لپاره {m} دقیقې لرئ.", untimed: "د دې ماډل د بریالیتوب لپاره خپله مهارت وښایاست." },
+  sq: { title: "Gati për vlerësimin?", timed: "Ke {m} minuta për ta përfunduar.", untimed: "Trego zotërimin tënd për të kaluar këtë modul." },
+  am: { title: "ለግምገማ ዝግጁ ነህ?", timed: "ለመጨረስ {m} ደቂቃዎች አሉህ።", untimed: "ይህን ሞጁል ለማለፍ ችሎታህን አሳይ።" },
+  prs: { title: "برای ارزیابی آماده‌ای؟", timed: "برای تکمیل آن {m} دقیقه وقت داری.", untimed: "برای گذراندن این بخش مهارت خود را نشان بده." },
+  es: { title: "¿Listo para la evaluación?", timed: "Tienes {m} minutos para completarla.", untimed: "Demuestra tu dominio para validar este módulo." },
+  it: { title: "Pronto per la valutazione?", timed: "Hai {m} minuti per completarla.", untimed: "Mostra la tua padronanza per superare questo modulo." },
+  ru: { title: "Готов к оценке?", timed: "У тебя {m} минут, чтобы её пройти.", untimed: "Покажи свои знания, чтобы пройти этот модуль." },
 };
 
 /**
@@ -43,7 +49,7 @@ export function EvalAnnounceScreen({
   const { showPivot } = useTranslation();
   const tr = PIVOT[lang];
   const showTr = showPivot && !!tr;
-  const isRtl = lang === "ar" || lang === "fa" || lang === "ps";
+  const isRtl = isRtlPivotLang(lang);
 
   return (
     <div className="flex flex-col items-center py-6 text-center">

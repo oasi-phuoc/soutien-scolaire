@@ -5,6 +5,7 @@ import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } fr
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { GENERATED_ALGEBRA_LESSONS, generateAlgebraQuestions } from "@/lib/curriculum/content/math/generated-algebra-exercises";
+import { extraPivotText } from "@/lib/curriculum/content/math/trad/extra-pivots";
 import { getTrad } from "@/lib/curriculum/content/math/trad";
 import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import {
@@ -31,7 +32,7 @@ import {
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
-import type { PivotCode } from "@/lib/pivot-langs";
+import { isRtlPivotLang, type PivotCode } from "@/lib/pivot-langs";
 
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import {
@@ -6168,7 +6169,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
 }) {
   const bt = blockIdx !== undefined ? tradBlocks?.[blockIdx] : undefined;
   const pivotText = bt?.text?.[pivot];
-  const isRtl = pivot === "ar" || pivot === "fa";
+  const isRtl = isRtlPivotLang(pivot);
   const usePivot = showPivot;
   const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? preserveEvidence(fr, pv) : (fr ?? "");
   const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv.map((item, i) => preserveEvidence(fr[i], item)) : fr;
@@ -6650,7 +6651,7 @@ function TheoryView({ lesson, pivot, showPivot }: {
 }) {
   const { theory } = lesson;
   const trad = getTrad(lesson.submoduleId);
-  const isRtl = pivot === "ar" || pivot === "fa";
+  const isRtl = isRtlPivotLang(pivot);
   const pivotParas = showPivot ? trad?.paragraphs?.[pivot] ?? theory.paragraphs[pivot] : undefined;
   const paragraphs = pivotParas?.length ? pivotParas : theory.paragraphs.fr;
   return (
@@ -10146,19 +10147,25 @@ export function GenericModuleContent({
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
   const currentStepTrad = currentStep ? getTrad(currentStep.lesson.submoduleId) : undefined;
   const g6Cons = (key: string) => {
-    const t = showPivotTranslation ? currentStepTrad?.consignes?.[key]?.[pivot] : undefined;
+    const t = showPivotTranslation
+      ? (currentStepTrad?.consignes?.[key]?.[pivot]
+        ?? extraPivotText(currentStepTrad?.consignes?.[key]?.fr, pivot)
+        ?? extraPivotText(key, pivot))
+      : undefined;
     return {
       consigne: t,
       consigneLang: t ? pivot : undefined,
-      consigneDir: (t && (pivot === "ar" || pivot === "fa" || pivot === "ps")) ? "rtl" as const : "ltr" as const,
+      consigneDir: (t && isRtlPivotLang(pivot)) ? "rtl" as const : "ltr" as const,
     };
   };
   const stepCons = (key: string, fallback: string) =>
-    (showPivotTranslation ? currentStepTrad?.consignes?.[key]?.[pivot] : undefined) ?? fallback;
+    (showPivotTranslation
+      ? (currentStepTrad?.consignes?.[key]?.[pivot] ?? extraPivotText(fallback, pivot))
+      : undefined) ?? fallback;
   const stepConsLang = (key: string) =>
-    showPivotTranslation && currentStepTrad?.consignes?.[key]?.[pivot] ? pivot : undefined;
+    showPivotTranslation && (currentStepTrad?.consignes?.[key]?.[pivot] || extraPivotText(currentStepTrad?.consignes?.[key]?.fr, pivot)) ? pivot : undefined;
   const stepConsDir = (key: string) =>
-    stepConsLang(key) && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" as const : "ltr" as const;
+    stepConsLang(key) && isRtlPivotLang(pivot) ? "rtl" as const : "ltr" as const;
   const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
   const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
   const currentStepTitle = currentStepHasPivotTitle
@@ -10255,11 +10262,14 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <p
             className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]"
-            lang={showPivotTranslation && (currentStep.item.promptPivot?.[pivot] || currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot]) ? pivot : undefined}
-            dir={showPivotTranslation && (currentStep.item.promptPivot?.[pivot] || currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot]) && (pivot === "ar" || pivot === "fa") ? "rtl" : "ltr"}
+            lang={showPivotTranslation && (currentStep.item.promptPivot?.[pivot] || currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot] || extraPivotText(currentStep.item.promptFr, pivot)) ? pivot : undefined}
+            dir={showPivotTranslation && (currentStep.item.promptPivot?.[pivot] || currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot] || extraPivotText(currentStep.item.promptFr, pivot)) && isRtlPivotLang(pivot) ? "rtl" : "ltr"}
           >
             {showPivotTranslation
-              ? currentStep.item.promptPivot?.[pivot] ?? currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot] ?? currentStep.item.promptFr
+              ? currentStep.item.promptPivot?.[pivot]
+                ?? currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot]
+                ?? extraPivotText(currentStep.item.promptFr, pivot)
+                ?? currentStep.item.promptFr
               : currentStep.item.promptFr}
           </p>
           <input
@@ -11412,7 +11422,7 @@ export function GenericModuleContent({
             <G6FindVertexExercise key={`g6fv-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
               onValidated={handleG6Validated}
               consigneLang={showPivotTranslation ? pivot : undefined}
-              consigneDir={showPivotTranslation && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr"} />
+              consigneDir={showPivotTranslation && isRtlPivotLang(pivot) ? "rtl" : "ltr"} />
           )}
           {currentStep.variant === 13 && (
             <G6PerpParallelPlaceExercise key={`g6pp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
@@ -11736,7 +11746,7 @@ export function GenericModuleContent({
           validated={divGridValidated}
           consigne={showPivotTranslation ? currentStepTrad?.consignes?.divColumnGrid?.[pivot] : undefined}
           consigneLang={showPivotTranslation && currentStepTrad?.consignes?.divColumnGrid?.[pivot] ? pivot : undefined}
-          consigneDir={showPivotTranslation && currentStepTrad?.consignes?.divColumnGrid?.[pivot] && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr"}
+          consigneDir={showPivotTranslation && currentStepTrad?.consignes?.divColumnGrid?.[pivot] && isRtlPivotLang(pivot) ? "rtl" : "ltr"}
           onQuotientChange={(ci, idx, val) =>
             setDivGridQuotientInputs(prev => prev.map((card, ci2) =>
               ci2 === ci ? card.map((v, vi) => vi === idx ? val : v) : card
