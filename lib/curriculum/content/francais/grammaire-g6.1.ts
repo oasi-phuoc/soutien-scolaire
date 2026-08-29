@@ -52,6 +52,7 @@ export const A1_GR_BILAN_A1: GrammarLesson = {
         "{a}3.{/a} L'accord en genre et en nombre des noms et des adjectifs.",
         "{a}4.{/a} La structure de la phrase simple.",
       ],
+      noBulletItems:[0,1,2,3],
       transItems: {
         en: [
           "{a}1.{/a} Conjugating verbs in the present indicative.",

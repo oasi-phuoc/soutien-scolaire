@@ -116,7 +116,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
         "{a}Quel{/a} beau tableau !",
         "{a}Qelle{/a} jolie voiture !",
       ],
-      noBulletItems: [0]
+      noBulletItems: [0,1]
     },
     {
       type: "text",
@@ -211,6 +211,7 @@ export const A1_GR_PHRASE_EXCLAMATIVE: GrammarLesson = {
       items: [
         "Quels beaux tableaux {a}?{/a} {a}≠{/a} Quels beaux tableaux {a}!{/a}"
       ],
+      noBulletItems:[0],
     },
     {
       type: "text",
