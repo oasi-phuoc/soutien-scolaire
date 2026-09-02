@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getSuiviContextAction } from "@/app/actions/suivi";
+import { getNavAccess } from "@/lib/auth/nav-access";
 import { SuiviClassesClient } from "@/components/suivi/SuiviClassesClient";
 import { SuiviPageHeader } from "@/components/suivi/SuiviPageHeader";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
@@ -16,19 +17,20 @@ function AttributionsIcon() {
 }
 
 export default async function SuiviPage() {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) redirect("/");
+  const access = await getNavAccess();
+  if (!access.authenticated) redirect("/connexion");
+  if (access.role !== "admin" && access.role !== "prof") redirect("/");
+  if (!access.isAdmin && !access.hasSuiviAccess) redirect("/");
 
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/connexion");
+  const ctx = await getSuiviContextAction();
+  const initialClasses = ctx?.hasAccess ? ctx.classes : [];
+  const initialError = !ctx
+    ? "Non autorisé"
+    : !ctx.hasAccess
+      ? "Aucune classe affectée."
+      : null;
 
-  const { data: role } = await supabase.rpc("get_my_role");
-  if (role !== "admin" && role !== "prof") redirect("/");
-
-  const { data: hasAccess } = await supabase.rpc("has_suivi_access");
-  if (!hasAccess && role !== "admin") redirect("/");
-
-  const subtitle = role === "admin"
+  const subtitle = access.isAdmin
     ? "Toutes les classes de l'établissement"
     : "Classes, progression et devoirs";
 
@@ -50,7 +52,7 @@ export default async function SuiviPage() {
           </Link>
         }
       />
-      <SuiviClassesClient />
+      <SuiviClassesClient initialClasses={initialClasses} initialError={initialError} />
     </main>
   );
 }

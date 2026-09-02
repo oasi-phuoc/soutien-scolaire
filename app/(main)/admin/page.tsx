@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getNavAccess } from "@/lib/auth/nav-access";
 import { AdminTable, type UserRow } from "@/components/admin/AdminTable";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
@@ -7,14 +8,12 @@ import { ensurePartialAccessDefaultsAppliedAction } from "@/app/actions/admin";
 import { formatPersonDisplayName } from "@/lib/auth/identifier";
 
 export default async function AdminPage() {
+  const access = await getNavAccess();
+  if (!access.authenticated || !access.userId) redirect("/connexion");
+  if (!access.isAdmin) redirect(access.role === "prof" ? "/suivi" : "/");
+
   const supabase = await createSupabaseServerClient();
   if (!supabase) redirect("/");
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/connexion");
-
-  const { data: myRole } = await supabase.rpc("get_my_role");
-  if (myRole !== "admin") redirect(myRole === "prof" ? "/suivi" : "/");
 
   await ensurePartialAccessDefaultsAppliedAction();
 
@@ -60,7 +59,7 @@ export default async function AdminPage() {
     <main className={`${APP_SHELL_FULL} flex-1 py-10 pb-28`}>
       <AdminTable
         initialRows={rows}
-        currentUserId={user.id}
+        currentUserId={access.userId}
         currentUserRole="admin"
         initialPlacementEnabled={placementEnabled !== false}
         accountCount={rows.length}

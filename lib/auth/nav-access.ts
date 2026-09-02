@@ -30,6 +30,8 @@ export type NavAccess = PedagogicNavAccess & {
   placementVisible: boolean;
   /** Utilisateur connecté (false si anonyme / sans Supabase). */
   authenticated: boolean;
+  /** Id auth Supabase, null si anonyme. */
+  userId: string | null;
 };
 
 const OPEN_LOCALLY =
@@ -40,6 +42,7 @@ const OPEN_LOCALLY =
 function openLocalAccess(): NavAccess {
   return {
     authenticated: false,
+    userId: null,
     role: "other",
     showSection: true,
     isAdmin: false,
@@ -257,6 +260,7 @@ export const getNavAccess = cache(async (): Promise<NavAccess> => {
 
   return {
     authenticated: true,
+    userId: user.id,
     role,
     showSection: isAdmin || hasSuiviAccess,
     isAdmin,

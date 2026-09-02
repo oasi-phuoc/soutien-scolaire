@@ -13,12 +13,21 @@ import {
 import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
 import { ChargementEnCoursCard } from "@/components/ui/ChargementEnCours";
 
-export function SuiviClassesClient() {
+type Props = {
+  initialClasses?: TeacherClassRow[];
+  initialError?: string | null;
+};
+
+export function SuiviClassesClient({
+  initialClasses,
+  initialError = null,
+}: Props = {}) {
   const router = useRouter();
-  const [classes, setClasses] = useState<TeacherClassRow[]>([]);
+  const hasInitial = initialClasses !== undefined;
+  const [classes, setClasses] = useState<TeacherClassRow[]>(initialClasses ?? []);
   const [extraClasses, setExtraClasses] = useState<TeacherClassRow[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(initialError);
+  const [loading, setLoading] = useState(!hasInitial);
   const [search, setSearch] = useState("");
   const [searchStudents, setSearchStudents] = useState<SuiviSearchStudent[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -41,8 +50,9 @@ export function SuiviClassesClient() {
   }, []);
 
   useEffect(() => {
+    if (hasInitial) return;
     void reload();
-  }, [reload]);
+  }, [hasInitial, reload]);
 
   useEffect(() => {
     const q = search.trim();

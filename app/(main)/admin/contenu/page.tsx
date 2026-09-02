@@ -1,18 +1,15 @@
 import { PageBackButton } from "@/components/ui/PageBackButton";
 import { redirect } from "next/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getNavAccess } from "@/lib/auth/nav-access";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import { ContenuAdminClient } from "@/components/content-editor/ContenuAdminClient";
 
 export default async function AdminContenuPage() {
-  const supabase = await createSupabaseServerClient();
-  if (supabase) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) redirect("/connexion");
-    const { data: myRole } = await supabase.rpc("get_my_role");
-    if (myRole !== "admin") redirect(myRole === "prof" ? "/suivi" : "/");
+  const access = await getNavAccess();
+  if (access.authenticated) {
+    if (!access.isAdmin) redirect(access.role === "prof" ? "/suivi" : "/");
+  } else if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    redirect("/connexion");
   }
   // Sans Supabase : page accessible en local pour l'édition de contenu
 

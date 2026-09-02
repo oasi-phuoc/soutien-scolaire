@@ -1,19 +1,14 @@
 import { redirect, notFound } from "next/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getUserForAdminAction } from "@/app/actions/admin";
+import { getNavAccess } from "@/lib/auth/nav-access";
 import { EleveDetailPage } from "@/components/admin/EleveDetailPage";
 
 export default async function EleveDetailRoute({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) redirect("/");
-
-  const { data: { user: caller } } = await supabase.auth.getUser();
-  if (!caller) redirect("/connexion");
-
-  const { data: myRole } = await supabase.rpc("get_my_role");
-  if (myRole !== "admin") redirect(myRole === "prof" ? "/suivi" : "/");
+  const access = await getNavAccess();
+  if (!access.authenticated || !access.userId) redirect("/connexion");
+  if (!access.isAdmin) redirect(access.role === "prof" ? "/suivi" : "/");
 
   const res = await getUserForAdminAction(id);
   if (!res.ok || !res.user) notFound();
@@ -21,7 +16,7 @@ export default async function EleveDetailRoute({ params }: { params: Promise<{ i
   return (
     <EleveDetailPage
       user={res.user}
-      currentUserId={caller.id}
+      currentUserId={access.userId}
       currentUserRole="admin"
     />
   );

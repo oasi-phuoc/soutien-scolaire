@@ -89,14 +89,28 @@ export type ClassStudentSuiviRow = {
   time_7d_sec: number;
 };
 
-async function getCallerRole(): Promise<"admin" | "prof" | null> {
+type StaffCaller = {
+  supabase: NonNullable<Awaited<ReturnType<typeof createSupabaseActionClient>>>;
+  user: { id: string };
+  role: "admin" | "prof";
+};
+
+/** Un seul getUser + get_my_role par action serveur. */
+async function requireStaffCaller(): Promise<StaffCaller | null> {
   const supabase = await createSupabaseActionClient();
   if (!supabase) return null;
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) return null;
   const { data: role } = await supabase.rpc("get_my_role");
-  if (role === "admin" || role === "prof") return role;
-  return null;
+  if (role !== "admin" && role !== "prof") return null;
+  return { supabase, user, role };
+}
+
+async function getCallerRole(): Promise<"admin" | "prof" | null> {
+  const caller = await requireStaffCaller();
+  return caller?.role ?? null;
 }
 
 function formatPersonName(prenom: string | null | undefined, nom: string | null | undefined): string | null {
@@ -146,14 +160,9 @@ function attachTitulaires(
 }
 
 export async function getSuiviContextAction(): Promise<SuiviContext | null> {
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return null;
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-
-  const role = await getCallerRole();
-  if (!role) return null;
+  const caller = await requireStaffCaller();
+  if (!caller) return null;
+  const { supabase, user, role } = caller;
 
   // Admin : synchronise les labels profiles → school_classes (HSS inclus)
   // pour que le suivi affiche les nouvelles classes comme CSC/CFR.
@@ -214,11 +223,9 @@ export async function getAttributionClassesAction(): Promise<{
   const svc = createServiceClient();
   if (svc) await syncSchoolClassesFromProfiles(svc);
 
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, classes: [], error: "Erreur serveur." };
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { ok: false, classes: [], error: "Non authentifié." };
+  const caller = await requireStaffCaller();
+  if (!caller) return { ok: false, classes: [], error: "Non authentifié." };
+  const { supabase, user } = caller;
 
   const { data: pupilRows, error: pupilErr } = await supabase
     .from("profiles")
@@ -647,14 +654,9 @@ export async function setStudentClasseAction(
 }
 
 export async function setPrimaryClassAction(classId: string): Promise<{ ok: boolean; reason?: string }> {
-  const role = await getCallerRole();
-  if (!role) return { ok: false, reason: "Non autorisé." };
-
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, reason: "Erreur serveur." };
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { ok: false, reason: "Non authentifié." };
+  const caller = await requireStaffCaller();
+  if (!caller) return { ok: false, reason: "Non autorisé." };
+  const { supabase, user, role } = caller;
 
   if (role === "prof") {
     const { data: assigned } = await supabase
@@ -686,14 +688,9 @@ export async function toggleSecondaryClassAction(
   classId: string,
   enabled: boolean,
 ): Promise<{ ok: boolean; reason?: string }> {
-  const role = await getCallerRole();
-  if (!role) return { ok: false, reason: "Non autorisé." };
-
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, reason: "Erreur serveur." };
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { ok: false, reason: "Non authentifié." };
+  const caller = await requireStaffCaller();
+  if (!caller) return { ok: false, reason: "Non autorisé." };
+  const { supabase, user } = caller;
 
   if (enabled) {
     const { error } = await supabase
@@ -894,11 +891,9 @@ export async function getClassRowByLabelAction(classLabel: string): Promise<{
   const existing = ctx.classes.find((c) => c.label === classLabel);
   if (existing) return { ok: true, row: existing };
 
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, row: null };
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { ok: false, row: null };
+  const caller = await requireStaffCaller();
+  if (!caller) return { ok: false, row: null };
+  const { supabase, user } = caller;
 
   const { data: sc } = await supabase
     .from("school_classes")
@@ -979,16 +974,13 @@ export async function getTeacherClassAssignmentsAction(teacherId: string): Promi
   classIds: string[];
   primaryClassId: string | null;
 }> {
-  const role = await getCallerRole();
-  if (role !== "admin" && role !== "prof") {
+  const caller = await requireStaffCaller();
+  if (!caller) {
     return { ok: false, classIds: [], primaryClassId: null };
   }
+  const { supabase, user, role } = caller;
 
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, classIds: [], primaryClassId: null };
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (role === "prof" && user?.id !== teacherId) {
+  if (role === "prof" && user.id !== teacherId) {
     return { ok: false, classIds: [], primaryClassId: null };
   }
 
@@ -1036,17 +1028,11 @@ export async function getStudentProgressDetailAction(userId: string): Promise<{
 }
 
 export async function canAccessStudentAction(studentId: string): Promise<boolean> {
-  const role = await getCallerRole();
-  if (!role) return false;
-  if (role === "admin") return true;
+  const caller = await requireStaffCaller();
+  if (!caller) return false;
+  if (caller.role === "admin") return true;
 
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) return false;
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return false;
-
-  const { data: student } = await supabase
+  const { data: student } = await caller.supabase
     .from("profiles")
     .select("classe")
     .eq("id", studentId)

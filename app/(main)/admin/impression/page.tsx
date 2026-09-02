@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getNavAccess } from "@/lib/auth/nav-access";
 import { ImpressionHubBoundary } from "@/components/admin/ImpressionHubBoundary";
 import { APP_SHELL_BLEED } from "@/lib/layout/page-shell";
 
@@ -9,32 +9,13 @@ import { APP_SHELL_BLEED } from "@/lib/layout/page-shell";
  * l’accès reste admin **ou** `can_print`.
  */
 export default async function AdminImpressionPage() {
-  const supabase = await createSupabaseServerClient();
-  if (supabase) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) redirect("/connexion");
-
-    const { data: myRole } = await supabase.rpc("get_my_role");
-    const isAdmin = myRole === "admin";
-
-    let canPrint = isAdmin;
-    if (!canPrint) {
-      const { data: printAccess, error } = await supabase.rpc("can_access_print");
-      if (!error) {
-        canPrint = Boolean(printAccess);
-      } else {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("can_print")
-          .eq("id", user.id)
-          .maybeSingle();
-        canPrint = Boolean(profile?.can_print);
-      }
+  const access = await getNavAccess();
+  if (access.authenticated) {
+    if (!access.isAdmin && !access.canPrint) {
+      redirect(access.role === "prof" ? "/suivi" : "/");
     }
-
-    if (!canPrint) redirect(myRole === "prof" ? "/suivi" : "/");
+  } else if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    redirect("/connexion");
   }
 
   return (

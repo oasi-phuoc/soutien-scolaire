@@ -101,13 +101,18 @@ function matchesStudent(s: ClassStudentSuiviRow, q: string) {
 export function SuiviClassDashboard({
   classLabel,
   initialStudentQuery = "",
+  initialStudents,
+  initialError = null,
 }: {
   classLabel: string;
   initialStudentQuery?: string;
+  initialStudents?: ClassStudentSuiviRow[];
+  initialError?: string | null;
 }) {
-  const [students, setStudents] = useState<ClassStudentSuiviRow[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const hasInitial = initialStudents !== undefined;
+  const [students, setStudents] = useState<ClassStudentSuiviRow[]>(initialStudents ?? []);
+  const [loading, setLoading] = useState(!hasInitial);
+  const [error, setError] = useState<string | null>(initialError);
   const [studentSearch, setStudentSearch] = useState(initialStudentQuery);
   const [expandedProgressId, setExpandedProgressId] = useState<string | null>(null);
   const [expandedInfoId, setExpandedInfoId] = useState<string | null>(null);
@@ -117,6 +122,14 @@ export function SuiviClassDashboard({
   }, [initialStudentQuery, classLabel]);
 
   useEffect(() => {
+    if (hasInitial) {
+      setStudents(initialStudents ?? []);
+      setError(initialError);
+      setLoading(false);
+      setExpandedProgressId(null);
+      setExpandedInfoId(null);
+      return;
+    }
     setLoading(true);
     setExpandedProgressId(null);
     setExpandedInfoId(null);
@@ -128,7 +141,7 @@ export function SuiviClassDashboard({
       }
       setLoading(false);
     });
-  }, [classLabel]);
+  }, [classLabel, hasInitial, initialStudents, initialError]);
 
   const filteredStudents = useMemo(() => {
     const q = studentSearch.trim().toLowerCase();

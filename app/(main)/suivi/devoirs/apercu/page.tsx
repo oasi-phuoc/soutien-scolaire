@@ -1,23 +1,16 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getTeacherTasksAction } from "@/app/actions/tasks";
+import { getNavAccess } from "@/lib/auth/nav-access";
 import { TasksApercu } from "@/components/admin/TasksApercu";
 import { SuiviPageHeader } from "@/components/suivi/SuiviPageHeader";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 
 export default async function SuiviDevoirsApercuPage() {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) redirect("/");
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/connexion");
-
-  const { data: myRole } = await supabase.rpc("get_my_role");
-  if (myRole !== "admin" && myRole !== "prof") redirect("/");
-
-  const { data: hasAccess } = await supabase.rpc("has_suivi_access");
-  if (!hasAccess) redirect("/");
+  const access = await getNavAccess();
+  if (!access.authenticated) redirect("/connexion");
+  if (access.role !== "admin" && access.role !== "prof") redirect("/");
+  if (!access.hasSuiviAccess && !access.isAdmin) redirect("/");
 
   const { tasks } = await getTeacherTasksAction();
 
