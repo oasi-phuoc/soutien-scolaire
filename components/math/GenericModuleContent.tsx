@@ -248,7 +248,8 @@ type ArithOp = "+" | "-" | "×" | "÷";
 type ArithQuestion = { a: number; b: number; result: number; op: ArithOp; missingPos: "result" | "a" | "b"; answer: string };
 type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp; range: [number, number]; missingOperand: boolean; timer?: number };
 type RoundingQ = { prompt: string; answer: string };
-type RoundingConfig = { questions: RoundingQ[]; exNum: number; count: number; consigne: string; kind: string };
+type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_2" | "est_diz_three" | "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed" | "mixed" | "dec_dix" | "dec_cent" | "dec_unit" | "dec_mixed";
+type RoundingConfig = { questions: RoundingQ[]; exNum: number; count: number; consigne: string; kind: RoundingKind };
 type RoundingStep = { kind: "rounding_group"; lesson: MathSubmoduleLesson; config: RoundingConfig };
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
@@ -1982,8 +1983,6 @@ function roundDecToCent(x: number, d1: number, d2: number, d3: number): string {
   return `${rW},${String(rF).padStart(2, "0")}`;
 }
 function roundDecToUnit(x: number, d1: number): string { return String(d1 >= 5 ? x + 1 : x); }
-
-type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_2" | "est_diz_three" | "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed" | "mixed" | "dec_dix" | "dec_cent" | "dec_unit" | "dec_mixed";
 
 function genRounding(kind: RoundingKind, exNum: number, count: number): RoundingConfig {
   const consigneMap: Record<RoundingKind, string> = {

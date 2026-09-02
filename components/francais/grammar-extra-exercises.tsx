@@ -67,8 +67,9 @@ export function QcmMultiExercise({
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
-  const expected = (item: (typeof items)[number]) =>
-    item.correctIdxs && item.correctIdxs.length > 0 ? [...item.correctIdxs].sort() : [item.correctIdx];
+  const expected = useCallback((item: (typeof items)[number]) =>
+    item.correctIdxs && item.correctIdxs.length > 0 ? [...item.correctIdxs].sort() : [item.correctIdx],
+  []);
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -79,7 +80,7 @@ export function QcmMultiExercise({
       return got.length === exp.length && got.every((v, j) => v === exp[j]);
     }).length;
     onValidated(ok, items.length);
-  }, [validated, items, selected, onValidated]);
+  }, [validated, items, selected, onValidated, expected]);
 
   useValidateGate(validateCommand, validated, doValidate, onCanValidateChange);
 
