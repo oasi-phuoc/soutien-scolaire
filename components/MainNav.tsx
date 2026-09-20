@@ -46,6 +46,7 @@ const links: NavItem[] = [
   { href: "/lecture", label: "Lecture", icon: LectureIcon, x: -100, y: -134 },
   { href: "/francais", label: "Français", icon: FrIcon, x: 100, y: -134 },
   { href: "/mathematiques", label: "Maths", icon: MathIcon, x: -112, y: -48 },
+  { href: "/orientation", label: "Orientation", icon: OrientationIcon, x: 112, y: -48 },
   { href: "/compte", label: "Réglages", icon: GearIcon, x: 0, y: -78 },
 ];
 
@@ -474,6 +475,15 @@ function LectureIcon({ active: _active }: { active: boolean }) {
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
       <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
       <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+    </svg>
+  );
+}
+
+function OrientationIcon({ active: _active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="12" cy="12" r="8" />
+      <path d="M12 8v4l3 2" />
     </svg>
   );
 }
