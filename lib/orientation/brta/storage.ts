@@ -44,7 +44,8 @@ export function loadBrtaSessions(): BrtaSession[] {
   try {
     const raw = localStorage.getItem(BRTA_SESSIONS_KEY);
     if (!raw) return [];
-    return JSON.parse(raw) as BrtaSession[];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as BrtaSession[]) : [];
   } catch {
     return [];
   }

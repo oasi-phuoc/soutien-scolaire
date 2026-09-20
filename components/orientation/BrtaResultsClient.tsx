@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BRTA_DOMAINS } from "@/lib/orientation/brta/types";
 import { getLatestBrtaSession, loadBrtaSessions } from "@/lib/orientation/brta/storage";
 import { generateResult, computeProgressionStats } from "@/lib/orientation/brta/scoring";
@@ -10,12 +10,21 @@ import { generateResult, computeProgressionStats } from "@/lib/orientation/brta/
 export function BrtaResultsClient() {
   const params = useSearchParams();
   const sessionId = params.get("session");
-  const sessions = loadBrtaSessions();
-  const session = sessions.find((item) => item.id === sessionId) ?? getLatestBrtaSession();
+  const [mounted, setMounted] = useState(false);
+  const [sessions, setSessions] = useState<ReturnType<typeof loadBrtaSessions>>([]);
+
+  useEffect(() => {
+    setSessions(loadBrtaSessions());
+    setMounted(true);
+  }, []);
+
+  const session = sessions.find((item) => item.id === sessionId) ?? (mounted ? getLatestBrtaSession() : null);
   const result = session ? generateResult(session) : null;
   const progression = computeProgressionStats(sessions);
 
   const labels = useMemo(() => Object.fromEntries(Object.entries(BRTA_DOMAINS).map(([key, value]) => [key, value.label])), []);
+
+  if (!mounted) return <main className="app-shell flex-1 py-8" aria-busy="true"><div className="rounded-lg border p-6 text-sm text-[var(--color-text-secondary)]">Chargement de vos résultats…</div></main>;
 
   if (!session || !result) return <main className="app-shell flex-1 py-8"><div className="rounded-lg border p-6">Aucun résultat disponible. <Link className="font-bold text-[var(--color-theme)]" href="/orientation">Retour à l&apos;orientation</Link></div></main>;
 

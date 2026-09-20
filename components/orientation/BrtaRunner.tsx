@@ -10,7 +10,12 @@ import { computeOverallScore, computeScores } from "@/lib/orientation/brta/scori
 export function BrtaRunner() {
   const router = useRouter();
   const questions = useMemo(() => getAllQuestions(), []);
-  const [draft, setDraft] = useState(() => loadBrtaDraft() ?? createInitialDraft());
+  const [draft, setDraft] = useState(() => createInitialDraft());
+
+  useEffect(() => {
+    const savedDraft = loadBrtaDraft();
+    if (savedDraft) setDraft(savedDraft);
+  }, []);
   const [selected, setSelected] = useState<string | null>(null);
   const [started, setStarted] = useState(false);
   const [questionStartedAt, setQuestionStartedAt] = useState(() => Date.now());
